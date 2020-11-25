@@ -1,0 +1,41 @@
+# Testing
+
+Please beware all features or bug fixes must be tested by one or more specs (unit-tests, visual regression).
+
+## Unit tests
+
+For unit testing we are using Jest along with [React Testing Library](https://testing-library.com/docs/intro) and [jest-dom](https://github.com/testing-library/jest-dom/blob/master/README.md).
+
+### Scripts
+
+`yarn test` - one time unit tests run
+`yarn test:watch` - run with watcher
+
+### Useful sources
+
+- https://testing-library.com/docs/intro
+- https://github.com/testing-library/jest-dom/blob/master/README.md
+- https://kentcdodds.com/blog/common-mistakes-with-react-testing-library
+
+## Visual regression
+
+For visual regression we are using Chromatic. These test are typically run only during CI/CD pipeline
+and are evaluated in Chromatic application by one of the repository maintainers and/or member of UX team.
+
+## Linting
+
+Linting (eslint and stylelint) is runned in a pre-commit hook as well as in CI.
+
+### Scripts
+
+`yarn lint` - check all files
+`yarn lint:fix` - check and try to fix errors in all files
+`yarn lint:css` - check styled-components syntax in all files
+
+## Typings
+
+Typings check is automatically runned in CI.
+
+### Scripts
+
+`yarn types` - check all files
