@@ -1,0 +1,223 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: CD
+
+on:
+  push:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['10', '12', '14']
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      id: cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-${{ env.cache-name }}-
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
+
+    - name: Install Pacakges
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
+
+    - name: Run Unit Tests
+      run: yarn test
+
+  # TODO: enable this after we have public repository
+  # chromatic-ui:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0 # Required to retrieve git history
+
+  #     - uses: dorny/paths-filter@v2
+  #       id: changes
+  #       with:
+  #         filters: |
+  #           src:
+  #             - 'src/**'
+  #           dependencies:
+  #             - 'package.json'
+  #             - 'yarn.lock'
+
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v1
+  #       if: steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true'
+  #       with:
+  #         node-version: '12'
+
+  #     - name: Cache node modules
+  #       uses: actions/cache@v1
+  #       if: steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true'
+  #       id: cache
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+  #         restore-keys: |
+  #           ${{ runner.OS }}-node-${{ env.cache-name }}-
+  #           ${{ runner.OS }}-node-
+  #           ${{ runner.OS }}-
+
+  #     - name: Install Pacakges
+  #       if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true')
+  #       run: yarn install --frozen-lockfile
+
+  #     - uses: chromaui/action@v1
+  #       if: steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true'
+  #       env:
+  #         STORYBOOK_PROXIMA_NOVA_LINK: ${{secrets.PROXIMA_NOVA_LINK}}
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+  #         buildScriptName: storybook:build
+  #         exitZeroOnChanges: true
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-${{ env.cache-name }}-
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install Pacakges
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run Types Check
+        run: yarn types
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-${{ env.cache-name }}-
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install Pacakges
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run Lint
+        run: yarn lint
+
+  lint-css:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-${{ env.cache-name }}-
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install Pacakges
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run Lint
+        run: yarn lint:css
+
+  # TODO: enable after we are sure we want to publish
+  # build-and-publish:
+  #   if: "github.event_name == 'push' && github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'chore(release):')"
+  #   needs: [unit-tests, chromatic-ui, types, lint, lint-css]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v2
+
+  #   - name: Use Node.js
+  #     uses: actions/setup-node@v1
+  #     with:
+  #       node-version: '12'
+  #       registry-url: 'https://npm.pkg.github.com'
+  #       scope: '@rce-ssc'
+
+  #   - name: Cache node modules
+  #     uses: actions/cache@v1
+  #     id: cache
+  #     with:
+  #       path: node_modules
+  #       key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+  #       restore-keys: |
+  #         ${{ runner.OS }}-node-${{ env.cache-name }}-
+  #         ${{ runner.OS }}-node-
+  #         ${{ runner.OS }}-
+
+  #   - name: Install Pacakges
+  #     if: steps.cache.outputs.cache-hit != 'true'
+  #     run: yarn install --frozen-lockfile
+
+  #   - name: Build Step
+  #     run: yarn build
+
+  #   - uses: actions/upload-artifact@v2
+  #     with:
+  #       name: bundle-stats
+  #       path: stats
+
+  #   - name: Run Semantic Release
+  #     run: yarn semantic-release
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+  #       NODE_AUTH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+  #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
