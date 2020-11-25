@@ -1,0 +1,74 @@
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
+
+import { DSProvider } from '../../theme'
+import {
+  FormFieldWrapper,
+  Label,
+  Note,
+  Error,
+  Input,
+  Select,
+  Radio,
+  Checkbox,
+  RadioListItem,
+  Switch,
+  TextArea,
+} from './index';
+
+
+export const options = [
+  { value: 'HR', label: 'Croatia' },
+  { value: 'CU', label: 'Cuba' },
+  { value: 'CW', label: 'Cura\u00e7ao' },
+  { value: 'CY', label: 'Cyprus' },
+  { value: 'CZ', label: 'Czech Republic' },
+  { value: 'DK', label: 'Denmark' },
+];
+
+<Meta title="components/forms/Example" />
+
+# Form Usage Example
+
+<Canvas>
+<DSProvider>
+  <form>
+    <FormFieldWrapper>
+      <Label>Your Name</Label>
+      <Input type="text" isInvalid />
+      <Error>This field is required</Error>
+    </FormFieldWrapper>
+    <FormFieldWrapper>
+      <Label>Your Country</Label>
+      <Select options={options} />
+      <Note>Where you currently live</Note>
+    </FormFieldWrapper>
+    <FormFieldWrapper>
+      <Label>I am</Label>
+      <Radio name="species" radioId="human" label="Human" value="human" />
+      <Radio name="species" radioId="animal" label="Animal" value="animal" />
+    </FormFieldWrapper>
+    <FormFieldWrapper>
+      <Label>My hobbies</Label>
+      <Checkbox name="hobbies" checkboxId="reading" label="Reading" value="reading" />
+      <Checkbox name="hobbies" checkboxId="sleeping" label="Sleeping" value="sleeping" />
+      <Checkbox name="hobbies" checkboxId="programming" label="Programming" value="programming" />
+      <Checkbox name="hobbies" checkboxId="testing" label="Testing" value="testing" />
+    </FormFieldWrapper>
+    <FormFieldWrapper>
+      <Label>Where did you learn about us?</Label>
+      <RadioListItem group="knowledge" itemId="collegue">Collegue</RadioListItem>
+      <RadioListItem group="knowledge" itemId="internet">Internet</RadioListItem>
+      <RadioListItem group="knowledge" itemId="youtube">YouTube</RadioListItem>
+      <RadioListItem group="knowledge" itemId="television">Television</RadioListItem>
+    </FormFieldWrapper>
+    <FormFieldWrapper>
+      <Label>Do you want to make your profile public?</Label>
+      <Switch switchId="public" label="public" />
+    </FormFieldWrapper>
+    <FormFieldWrapper>
+      <Label>Your message to us</Label>
+      <TextArea maxLength="140" />
+    </FormFieldWrapper>
+  </form>
+</DSProvider>
+</Canvas>

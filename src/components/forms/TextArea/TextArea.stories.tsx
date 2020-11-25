@@ -1,0 +1,58 @@
+import React from 'react';
+import { Meta, Story } from '@storybook/react/types-6-0';
+
+import TextArea from './TextArea';
+import { TextAreaProps } from './TextArea.types';
+
+export default {
+  title: 'components/forms/TextArea',
+  component: TextArea,
+} as Meta;
+
+export const playground: Story<TextAreaProps> = (args) => (
+  <TextArea {...args} aria-label="Text" />
+);
+playground.parameters = {
+  chromatic: { disable: true },
+};
+playground.argTypes = {
+  maxLength: {
+    control: 'number',
+    table: { type: { summary: 'number' } },
+    description: 'Sets maximal length of text and enables characters counter',
+  },
+  placeholder: { control: 'text' },
+  defaultValue: { control: 'text' },
+  isInvalid: { control: 'boolean', defaultValue: false },
+  isDisabled: { control: 'boolean', defaultValue: false },
+};
+
+export const Default: Story = () => <TextArea aria-label="Text" />;
+
+export const Filled: Story = () => (
+  <TextArea aria-label="Text" defaultValue="DefaultValue text" />
+);
+
+export const WithMaxLength: Story = () => (
+  <TextArea aria-label="Text" maxLength={100} />
+);
+
+export const WithPlaceholder: Story = () => (
+  <TextArea aria-label="Text" placeholder="Your comment..." />
+);
+
+export const Invalid: Story = () => (
+  <TextArea
+    aria-label="Text"
+    defaultValue="Text over 10 characters limit"
+    maxLength={10}
+    isInvalid
+  />
+);
+
+export const Disabled: Story = () => <TextArea aria-label="Text" isDisabled />;
+
+const lipsum = `Donec sed nunc sed leo vestibulum pretium. Aenean sollicitudin velit neque. Curabitur placerat, velit sit amet lobortis condimentum, libero tortor ullamcorper quam, nec porttitor massa sem quis tellus. Sed feugiat nec libero a fermentum. Vivamus laoreet sapien convallis, interdum sapien vitae, lobortis eros. Ut interdum dui ut mauris malesuada, vitae pellentesque est fermentum. Cras quis erat est. Proin tempus a leo ut pulvinar. Nulla scelerisque tempor mollis. Etiam quis dolor non diam sollicitudin mollis eu vitae nisl. Vestibulum bibendum augue vel justo fringilla, sed ultrices libero congue. Maecenas nec erat ac ante mollis eleifend. Sed ut mattis metus. Nullam molestie, diam blandit aliquam tincidunt, magna leo auctor diam, vel eleifend risus ex vel tortor. Donec ornare pellentesque urna quis volutpat. Donec dictum, arcu id luctus tincidunt, arcu purus venenatis lorem, at imperdiet orci lacus a metus.`;
+export const Autosize: Story = () => (
+  <TextArea aria-label="Text" defaultValue={lipsum} />
+);

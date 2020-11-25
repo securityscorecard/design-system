@@ -1,0 +1,228 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Helpers/Methods" />
+
+# Helper methods
+
+### pxToRem
+
+Converts px values to rem units based on value of `BASE_FONT_SIZE`
+constant (currently set to `16`).
+
+This function takes any number of arguments and returns converted
+values in given order.
+
+```js
+import { pxToRem } from '@securityscorecard/design-system';
+
+// pxToRem :: (number | string)... -> string
+pxToRem(16, auto, 0); // -> '1rem auto 0'
+```
+
+### createSpacing
+
+Generates spacing values of given kind (`margin` or `padding`)
+for given value based on `BASE_LINE_HEIGHT` constant (currently set to `20`).
+
+```js
+import { createSpacing } from '@securityscorecard/design-system';
+
+// createSpacing :: Kind -> Value -> string | string[]
+// Kind - 'margin' or 'padding'
+// Value - number or 'none' or object
+createSpacing('margin', 1); // -> margin: 1.25rem;
+createSpacing('margin', 'none'); // -> margin: 0;
+createSpacing('margin', { horizontal: 2, vertical: 1 });
+/*
+  -> margin-top: 1.25rem;
+  -> margin-bottom: 1.25rem;
+  -> margin-left: 2.5rem;
+  -> margin-right: 2.5rem;
+*/
+createSpacing('margin', { top: 1, bottom: 2, left: 3, right: 4 });
+/*
+  -> margin-top: 1.25rem;
+  -> margin-bottom: 2.5rem;
+  -> margin-left: 3.75rem;
+  -> margin-right: 5rem;
+*/
+```
+
+#### createMarginSpacing, createPaddingSpacing
+Generates spacing values for given kind.
+
+```js
+import { createMarginSpacing, createPaddingSpacing } from '@securityscorecard/design-system';
+
+createMarginSpacing({ horizontal: 2, vertical: 1 });
+/*
+  -> margin-top: 1.25rem;
+  -> margin-bottom: 1.25rem;
+  -> margin-left: 2.5rem;
+  -> margin-right: 2.5rem;
+*/
+
+createPaddingSpacing({ horizontal: 2, vertical: 1 });
+/*
+  -> padding-top: 1.25rem;
+  -> padding-bottom: 1.25rem;
+  -> padding-left: 2.5rem;
+  -> padding-right: 2.5rem;
+*/
+```
+
+#### createSpacings
+Generates spacing values for both kinds.
+
+```js
+import { createSpacings } from '@securityscorecard/design-system';
+
+createSpacings({ margin: { horizontal: 2, vertical: 1 }, padding: 4 });
+/*
+  -> margin-top: 1.25rem;
+  -> margin-bottom: 1.25rem;
+  -> margin-left: 2.5rem;
+  -> margin-right: 2.5rem;
+  -> padding-top: 5rem;
+  -> padding-bottom: 5rem;
+  -> padding-left: 5rem;
+  -> padding-right: 5rem;
+*/
+```
+
+## Theme getters
+These methods retrieving values from the [theme object](/docs/theme-theme-object--page)
+and can be used only in `styled-components` template literals.
+
+### getColor
+
+Returns color from theme for given key.
+
+```js
+import { getColor } from '@securityscorecard/design-system';
+
+// getColor :: Color -> Props -> string
+// Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
+// Props - styled-components props object
+const Component = styled.div`
+  color: ${getColor('graphite5B')};
+`; // -> color: #000;
+```
+
+### getFontFamily
+
+Returns font-family chain from theme for given key.
+
+```js
+import { getFontFamily } from '@securityscorecard/design-system';
+
+// getFontFamily :: Family -> Props -> string
+// Family - any key of 'family' (src/theme/typography.ts)
+// Props - styled-components props object
+const Component = styled.div`
+  font-family: ${getFontFamily('base')};
+`; // -> font-family: 'proxima-nova', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+```
+
+### getFontWeight
+
+Returns font-weight from theme for given key.
+
+```js
+import { getFontWeight } from '@securityscorecard/design-system';
+
+// getFontWeight :: Weight -> Props -> number
+// Weight - any key of 'weight' (src/theme/typography.ts)
+// Props - styled-components props object
+const Component = styled.div`
+  font-weight: ${getFontWeight('medium')};
+`; // -> font-weight: 500;
+```
+
+### getFontSize
+
+Returns font-size from theme for given key.
+
+```js
+import { getFontSize } from '@securityscorecard/design-system';
+
+// getFontSize :: Size -> Props -> string
+// Size - any key of 'size' (src/theme/typography.ts)
+// Props - styled-components props object
+const Component = styled.div`
+  font-size: ${getFontSize('lg')};
+`; // -> font-size: 15px;
+```
+
+### getLineHeight
+
+Returns line-height from theme for given key.
+
+```js
+import { getLineHeight } from '@securityscorecard/design-system';
+
+// getLineHeight :: Size -> Props -> string
+// Size - any key of 'lineHeight' (src/theme/typography.ts)
+// Props - styled-components props object
+const Component = styled.div`
+  line-height: ${getLineHeight('lg')};
+`; // -> line-height: 20px;
+```
+
+### getBorderRadius
+
+Returns border-radius from theme.
+
+```js
+import { getBorderRadius } from '@securityscorecard/design-system';
+
+// getBorderRadius :: Props -> string
+// Props - styled-components props object
+const Component = styled.div`
+  border-radius: ${getBorderRadius};
+`; // -> border-radius: 4px;
+```
+
+### getFormStyle
+
+Returns form style from theme for given key.
+
+```js
+import { getFormStyle } from '@securityscorecard/design-system';
+
+// getFormStyle :: Property -> Props -> string
+// Property - any key of 'forms' (src/theme/forms.ts)
+// Props - styled-components props object
+const Component = styled.input`
+  background: ${getFormStyle('bgColor')}; // -> #fff
+  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')}; // -> 1px solid #b4b4b4
+  color: ${getFormStyle('color')}; // -> #2a2a2a
+`;
+```
+
+### getButtonColor
+
+Returns color for given key in combination of button variant and color prop.
+
+
+```js
+import { getButtonColor } from '@securityscorecard/design-system';
+
+// getButtonColor :: Type -> Props -> string
+// Type - type of color (src/theme/buttons.ts)
+// Props - styled-components props object (variant and color props are required)
+const Button = styled.button.attrs(() => ({
+  variant: 'solid', // <- required
+  color: 'primary', // <- required
+}))`
+  background-color: ${getButtonColor('bgColor')}; // -> #eee
+
+  &:hover {
+    background-color: ${getButtonColor('hoverBgColor')}; // -> #1e88e5
+  }
+
+  &:active {
+    background-color: ${getButtonColor('activeBgColor')}; // -> #80baeb
+  }
+`;
+```
