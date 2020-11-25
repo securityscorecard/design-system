@@ -1,0 +1,11 @@
+.DS_Store
+.idea/*
+# Dependency directory
+node_modules
+
+build
+yarn-error.log
+stats
+
+# Storybook static build
+storybook-static
