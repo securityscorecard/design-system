@@ -20,7 +20,7 @@
     "storybook:build": "build-storybook --quiet",
     "test:storybook:visual": "./visual-regressions/bin/take-and-check-in-docker.sh",
     "test:storybook:visual:update": "./visual-regressions/bin/take-and-update-in-docker.sh",
-    "test:storybook:visual:ci": "build-storybook --quiet && ./visual-regressions/bin/take-and-check-in-docker-ci.sh",
+    "test:storybook:visual:ci": "./visual-regressions/bin/take-and-check-in-docker-ci.sh",
     "test": "jest",
     "test:watch": "jest --watch",
     "types": "tsc --noEmit",

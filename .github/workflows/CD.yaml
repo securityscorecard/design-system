@@ -143,6 +143,17 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
+      - name: Cache storybook build
+        id: storybook-build-cache
+        uses: actions/cache@v2
+        with:
+          path: storybook-static
+          key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**' ) }}
+
+      - name: Build Storybook
+        if: steps.storybook-build-cache.outputs.cache-hit != 'true'
+        run: yarn storybook:build
+
       - name: Run Visual Regressions
         run: yarn test:storybook:visual:ci
 
