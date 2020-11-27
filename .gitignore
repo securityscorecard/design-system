@@ -1,5 +1,9 @@
 .DS_Store
 .idea/*
+.storybook/image-snapshots/actual
+.storybook/image-snapshots/diff
+.storybook/image-snapshots/report.html
+.storybook/image-snapshots/report.json
 # Dependency directory
 node_modules
 

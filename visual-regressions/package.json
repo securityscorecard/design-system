@@ -1,0 +1,16 @@
+{
+  "name": "visual-regressions",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "take-and-check": "./bin/take.sh && ./bin/check.sh",
+    "take-and-update": "./bin/take.sh && ./bin/update.sh",
+    "serve-take-and-check": "start-server-and-test 'serve storybook' http-get://localhost:5000 'STORYBOOK_URL=http://localhost:5000 ./bin/take.sh && ./bin/check.sh'"
+  },
+  "devDependencies": {
+    "reg-cli": "^0.16.2",
+    "serve": "^11.3.2",
+    "start-server-and-test": "^1.11.6",
+    "storycap": "^3.0.1"
+  }
+}
