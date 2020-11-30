@@ -122,7 +122,7 @@
     "url": "https://github.com/securityscorecard/design-system"
   },
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "registry": "https://npm.pkg.github.com/securityscorecard",
     "pkgRoot": "build"
   },
