@@ -226,49 +226,48 @@ jobs:
       - name: Run Lint
         run: yarn lint:css
 
-  # TODO: enable after we are sure we want to publish
-  # build-and-publish:
-  #   if: "github.event_name == 'push' && github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'chore(release):')"
-  #   needs: [unit-tests, chromatic-ui, types, lint, lint-css]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2
+  build-and-publish:
+    if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
+    needs: [unit-tests, visual-tests, types, lint, lint-css]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
 
-  #   - name: Use Node.js
-  #     uses: actions/setup-node@v1
-  #     with:
-  #       node-version: '12'
-  #       registry-url: 'https://npm.pkg.github.com'
-  #       scope: '@rce-ssc'
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@securityscorecard'
 
-  #   - name: Cache node modules
-  #     uses: actions/cache@v1
-  #     id: cache
-  #     with:
-  #       path: node_modules
-  #       key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-  #       restore-keys: |
-  #         ${{ runner.OS }}-node-${{ env.cache-name }}-
-  #         ${{ runner.OS }}-node-
-  #         ${{ runner.OS }}-
+    - name: Cache node modules
+      uses: actions/cache@v1
+      id: cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-${{ env.cache-name }}-
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
 
-  #   - name: Install Packages
-  #     if: steps.cache.outputs.cache-hit != 'true'
-  #     run: yarn install --frozen-lockfile
+    - name: Install Packages
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
 
-  #   - name: Build Step
-  #     run: yarn build
+    - name: Build Step
+      run: yarn build
 
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: bundle-stats
-  #       path: stats
+    - uses: actions/upload-artifact@v2
+      with:
+        name: bundle-stats
+        path: stats
 
-  #   - name: Run Semantic Release
-  #     run: yarn semantic-release
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-  #       NODE_AUTH_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
-  #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - name: Run Semantic Release
+      run: yarn semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
