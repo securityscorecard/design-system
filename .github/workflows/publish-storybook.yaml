@@ -2,11 +2,11 @@
 # of package is released.
 
 # TODO: enable this after we have set up Github Pages
-# name: publish-storybook
+ name: publish-storybook
 
-# on:
-#   release:
-#     types: [created]
+ on:
+   release:
+     types: [created]
 
 # jobs:
 #   storybook-publish:

@@ -32,7 +32,7 @@ jobs:
           ${{ runner.OS }}-node-
           ${{ runner.OS }}-
 
-    - name: Install Pacakges
+    - name: Install Packages
       if: steps.cache.outputs.cache-hit != 'true'
       run: yarn install --frozen-lockfile
 
@@ -75,7 +75,7 @@ jobs:
   #           ${{ runner.OS }}-node-
   #           ${{ runner.OS }}-
 
-  #     - name: Install Pacakges
+  #     - name: Install Packages
   #       if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true')
   #       run: yarn install --frozen-lockfile
 
@@ -110,12 +110,63 @@ jobs:
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
 
-      - name: Install Pacakges
+      - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Run Types Check
         run: yarn types
+
+  visual-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-${{ env.cache-name }}-
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Cache storybook build
+        id: storybook-build-cache
+        uses: actions/cache@v2
+        with:
+          path: storybook-static
+          key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**' ) }}
+
+      - name: Build Storybook
+        if: steps.storybook-build-cache.outputs.cache-hit != 'true'
+        run: yarn storybook:build
+
+      - name: Run Visual Regressions
+        run: yarn test:storybook:visual:ci
+
+      - name: Archive visual artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: visual-test-reports
+          path: |
+            .storybook/image-snapshots/actual/*
+            .storybook/image-snapshots/diff/*
+            .storybook/image-snapshots/expected/*
+            .storybook/image-snapshots/report.html
+            .storybook/image-snapshots/report.json
 
   lint:
     runs-on: ubuntu-latest
@@ -139,7 +190,7 @@ jobs:
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
 
-      - name: Install Pacakges
+      - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
@@ -168,7 +219,7 @@ jobs:
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
 
-      - name: Install Pacakges
+      - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
@@ -202,7 +253,7 @@ jobs:
   #         ${{ runner.OS }}-node-
   #         ${{ runner.OS }}-
 
-  #   - name: Install Pacakges
+  #   - name: Install Packages
   #     if: steps.cache.outputs.cache-hit != 'true'
   #     run: yarn install --frozen-lockfile
 

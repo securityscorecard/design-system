@@ -19,8 +19,9 @@ For unit testing we are using Jest along with [React Testing Library](https://te
 
 ## Visual regression
 
-For visual regression we are using Chromatic. These test are typically run only during CI/CD pipeline
-and are evaluated in Chromatic application by one of the repository maintainers and/or member of UX team.
+For visual regression we are using reg-cli and storycap. These test are typically run during CI/CD pipeline.
+If this `visual-tests` step fails due to intended changes, you have to update snapshots manually, by
+running `yarn test:storybook:visual:update` and commit updated snapshots.    
 
 ## Linting
 
