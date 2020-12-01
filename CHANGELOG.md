@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-12-01)
+
+
+### Bug Fixes
+
+* **provider:** fix prop name typo ([2c29f89](https://github.com/securityscorecard/design-system/commit/2c29f89eea84ca505a81954da670ddf02e3f8691))
+
 # [1.0.0-alpha.2](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-11-30)
 
 
