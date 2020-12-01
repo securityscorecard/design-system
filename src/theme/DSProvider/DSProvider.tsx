@@ -10,13 +10,13 @@ import { DSProviderProps } from './DSProvider.types';
 const DSProvider: React.FC<DSProviderProps> = ({
   children,
   theme = {},
-  hasInlcudedGlobalStyles = true,
+  hasIncludedGlobalStyles = true,
 }) => {
   const dsTheme = mergeDeepRight(defaultTheme, theme);
 
   return (
     <ThemeProvider theme={dsTheme}>
-      {hasInlcudedGlobalStyles && <GlobalStyles />}
+      {hasIncludedGlobalStyles && <GlobalStyles />}
       {children}
     </ThemeProvider>
   );
@@ -24,7 +24,7 @@ const DSProvider: React.FC<DSProviderProps> = ({
 
 DSProvider.propTypes = {
   theme: PropTypes.shape({}),
-  hasInlcudedGlobalStyles: PropTypes.bool,
+  hasIncludedGlobalStyles: PropTypes.bool,
 };
 
 export default DSProvider;
