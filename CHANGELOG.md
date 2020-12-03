@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-12-03)
+
+
+### Bug Fixes
+
+* **Icon:** fix proptypes warning when 3rd party icon is used ([7a33459](https://github.com/securityscorecard/design-system/commit/7a33459aff50959bc827398633b9b6c5f386e2ca))
+
 # [1.0.0-alpha.3](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-12-01)
 
 
