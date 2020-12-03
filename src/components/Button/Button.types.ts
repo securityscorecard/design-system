@@ -21,6 +21,6 @@ export interface ButtonProps {
   href?: string;
   to?: To;
   className?: string;
-  iconName?: SSCIcons;
-  iconType?: IconTypes;
+  iconName?: SSCIcons | string;
+  iconType?: IconTypes | string;
 }

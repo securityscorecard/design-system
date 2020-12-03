@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  IconName,
   IconPrefix,
   findIconDefinition,
 } from '@fortawesome/fontawesome-svg-core';
@@ -11,7 +12,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 import { getColor } from '../../utils/helpers';
 import { ColorTypes } from '../../theme/colors.enums';
 import { Colors } from '../../theme/colors.types';
-import { IconProps } from './Icon.types';
+import { IconProps, SSCIcons, Types } from './Icon.types';
 import { IconTypes, SSCIconNames } from './Icon.enums';
 
 const StyledIcon = styled(FontAwesomeIcon)<{ color: keyof Colors }>`
@@ -31,14 +32,23 @@ const Icon: React.FC<IconProps> = ({
     className={className}
     color={color}
     fixedWidth={hasFixedWidth}
-    icon={findIconDefinition({ iconName: name, prefix: type as IconPrefix })}
+    icon={findIconDefinition({
+      iconName: name as IconName,
+      prefix: type as IconPrefix,
+    })}
     {...props}
   />
 );
 
 Icon.propTypes = {
-  name: PropTypes.oneOf(Object.values(SSCIconNames)).isRequired,
-  type: PropTypes.oneOf(Object.values(IconTypes)),
+  name: PropTypes.oneOfType([
+    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
+    PropTypes.string,
+  ]).isRequired,
+  type: PropTypes.oneOfType([
+    PropTypes.oneOf<Types>(Object.values(IconTypes)),
+    PropTypes.string,
+  ]),
   color: PropTypes.oneOf(Object.values(ColorTypes)),
   className: PropTypes.string,
   hasFixedWidth: PropTypes.bool,

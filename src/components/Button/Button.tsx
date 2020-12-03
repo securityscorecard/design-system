@@ -8,6 +8,7 @@ import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { pxToRem } from '../../utils/helpers';
 import { Spinner } from '../Spinner';
 import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
+import { SSCIcons, Types } from '../Icon/Icon.types';
 import StyledButton from './StyledButton';
 import StyledIcon from './StyledIcon';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';
@@ -111,8 +112,14 @@ Button.propTypes = {
     }),
   ]),
   className: PropTypes.string,
-  iconName: PropTypes.oneOf(Object.values(SSCIconNames)),
-  iconType: PropTypes.oneOf(Object.values(IconTypes)),
+  iconName: PropTypes.oneOfType([
+    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
+    PropTypes.string,
+  ]),
+  iconType: PropTypes.oneOfType([
+    PropTypes.oneOf<Types>(Object.values(IconTypes)),
+    PropTypes.string,
+  ]),
   onClick: PropTypes.func,
 };
 

@@ -7,6 +7,7 @@ import { pxToRem } from '../../utils/helpers';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Icon } from '../Icon';
+import { SSCIcons, Types } from '../Icon/Icon.types';
 import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import { IconButtonProps } from './IconButton.types';
 
@@ -51,8 +52,14 @@ IconButton.propTypes = {
       hash: PropTypes.string,
     }).isRequired,
   ]),
-  iconName: PropTypes.oneOf(Object.values(SSCIconNames)),
-  iconType: PropTypes.oneOf(Object.values(IconTypes)),
+  iconName: PropTypes.oneOfType([
+    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
+    PropTypes.string,
+  ]),
+  iconType: PropTypes.oneOfType([
+    PropTypes.oneOf<Types>(Object.values(IconTypes)),
+    PropTypes.string,
+  ]),
   onClick: PropTypes.func,
 };
 
