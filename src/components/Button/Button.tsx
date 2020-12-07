@@ -29,7 +29,9 @@ const spinnerSizes = {
   [ButtonSizes.sm]: 10,
 };
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<
+  Omit<React.HTMLProps<HTMLButtonElement>, 'size'> & ButtonProps
+> = ({
   children,
   variant = ButtonVariants.solid,
   color = ButtonColors.primary,
