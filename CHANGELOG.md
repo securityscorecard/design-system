@@ -1,3 +1,10 @@
+# [1.0.0-alpha.8](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-12-07)
+
+
+### Bug Fixes
+
+* **Collapsible:** allow to pass React.node as title ([091048a](https://github.com/securityscorecard/design-system/commit/091048a67930e537927040dd7cf48b4f4dd71328))
+
 # [1.0.0-alpha.7](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-12-07)
 
 
