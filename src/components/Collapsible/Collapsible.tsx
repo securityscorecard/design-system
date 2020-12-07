@@ -88,7 +88,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
 
 Collapsible.propTypes = {
   subject: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   className: PropTypes.string,
   defaultIsOpened: PropTypes.bool,
   onOpen: PropTypes.func,
