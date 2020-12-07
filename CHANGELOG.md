@@ -1,3 +1,10 @@
+# [1.0.0-alpha.6](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-12-07)
+
+
+### Features
+
+* **button:** use html props type ([ba8133b](https://github.com/securityscorecard/design-system/commit/ba8133b03b67f496e531eb894dcf873757f6a04f))
+
 # [1.0.0-alpha.5](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-12-07)
 
 
