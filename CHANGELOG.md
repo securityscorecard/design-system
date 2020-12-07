@@ -1,3 +1,10 @@
+# [1.0.0-alpha.7](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-12-07)
+
+
+### Features
+
+* **Card:** simplify component API ([0cc92d0](https://github.com/securityscorecard/design-system/commit/0cc92d0ea40829bef2c93597a8df799c192923b2))
+
 # [1.0.0-alpha.6](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-12-07)
 
 
