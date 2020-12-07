@@ -8,15 +8,15 @@ import { H3, Paragraph } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { FlexContainer } from '../FlexContainer';
 import { Spinner } from '../Spinner';
-import { getColor, pxToRem } from '../../utils/helpers';
+import { getBorderRadius, getColor, pxToRem } from '../../utils/helpers';
 import { CardProps } from './Card.types';
 
 const CardWrapper = styled(FlexContainer)`
   width: ${pxToRem(370)};
   height: ${pxToRem(400)};
   padding: ${pxToRem(40, 14, 0, 14)};
-  border-radius: 10px;
-  border: 2px solid ${getColor('graphite2H')};
+  border-radius: ${getBorderRadius};
+  border: 1px solid ${getColor('graphiteHB')};
 `;
 
 const CardTitle = styled(H3).attrs(() => ({

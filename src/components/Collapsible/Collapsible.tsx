@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 
-import { getColor, pxToRem } from '../../utils/helpers';
+import { getBorderRadius, getColor, pxToRem } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
 import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
@@ -20,11 +20,12 @@ const Header = styled(FlexContainer)`
 
 const Content = styled(Text)`
   padding: ${pxToRem(26)};
-  border-top: 1px solid ${getColor('graphiteH')};
+  border-top: 1px solid ${getColor('graphiteHB')};
 `;
 
 const Container = styled.div<{ withBackground: boolean }>`
-  border: 1px solid ${getColor('graphiteH')};
+  border: 1px solid ${getColor('graphiteHB')};
+  border-radius: ${getBorderRadius};
   ${({ withBackground }) =>
     withBackground &&
     css`
