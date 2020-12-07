@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { Button } from '../Button';
 import Card from './Card';
 import { CardProps } from './Card.types';
+import { Paragraph } from '../typography';
 
 export default {
   title: 'components/Card',
@@ -28,22 +29,28 @@ playground.argTypes = {
 };
 
 export const DefaultCard: Story = () => (
-  <Card subtitle="Card subtitle" title="Main title">
-    <div>Lorem ipsum dolor sit amet, consectetur adipiscing.</div>
+  <Card title="Main title">
     <div
       style={{
-        width: '100px',
-        height: '115px',
+        width: '90px',
+        height: '90px',
         backgroundColor: 'grey',
-        margin: '30px auto',
+        margin: '0 auto 20px',
       }}
     />
-    <Button>Make action</Button>
+    <Paragraph margin={{ bottom: 1 }} style={{ textAlign: 'center' }}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+      pharetra magna lectus, a congue ex blandit vel. Donec id mi commodo eros
+      porta tempus.
+    </Paragraph>
+    <Button size="lg" variant="outline">
+      Make action
+    </Button>
   </Card>
 );
 
 export const LoadingCard: Story = () => (
-  <Card subtitle="Card subtitle" title="Main title" isLoading>
+  <Card title="Main title" isLoading>
     Content
   </Card>
 );
