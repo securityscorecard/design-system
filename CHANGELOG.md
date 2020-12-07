@@ -1,3 +1,11 @@
+# [1.0.0-alpha.5](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-12-07)
+
+
+### Bug Fixes
+
+* **Card:** make border styles consistent ([34e74fc](https://github.com/securityscorecard/design-system/commit/34e74fc9c17028afdfeccdbc97161dba1ba848d2))
+* **Collapsible:** make border styles consistent ([2194ef1](https://github.com/securityscorecard/design-system/commit/2194ef197fa481159f7dabc3f83b40dc22fa679c))
+
 # [1.0.0-alpha.4](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-12-03)
 
 
