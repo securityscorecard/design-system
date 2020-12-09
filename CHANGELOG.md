@@ -1,3 +1,10 @@
+# [1.0.0-alpha.9](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-12-09)
+
+
+### Features
+
+* **hexgrade:** add margin ([770ec84](https://github.com/securityscorecard/design-system/commit/770ec843901fd4bd8c334c0bfabcc00459a3f9e5))
+
 # [1.0.0-alpha.8](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-12-07)
 
 
