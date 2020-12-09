@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultTo, path, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
+import styled from 'styled-components';
 
 import colors from '../../theme/colors';
+import { SpacingSizeValuePropType } from '../../types/spacing.types';
+import { createMarginSpacing } from '../../utils/helpers';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import { HexGradeProps } from './HexGrade.types';
 
@@ -40,11 +43,16 @@ const grades = {
   },
 };
 
+const StyledSVG = styled.svg<HexGradeProps>`
+  ${({ margin }) => createMarginSpacing(margin)};
+`;
+
 const HexGrade: React.FC<HexGradeProps> = ({
   variant = HexGradeVariants.solid,
   grade,
   size = 64,
   isInversed = false,
+  margin,
   ...props
 }) => {
   const gradeColor = pipe(
@@ -65,8 +73,9 @@ const HexGrade: React.FC<HexGradeProps> = ({
       : colors.graphite5H;
 
   return (
-    <svg
+    <StyledSVG
       height={size}
+      margin={margin}
       viewBox="0 0 64 64"
       width={size}
       xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +88,7 @@ const HexGrade: React.FC<HexGradeProps> = ({
         strokeWidth="5"
       />
       {isNotUndefined(grade) && <path d={grades[grade].path} fill={charFill} />}
-    </svg>
+    </StyledSVG>
   );
 };
 
@@ -88,6 +97,7 @@ HexGrade.propTypes = {
   grade: PropTypes.oneOf(Object.values(HexGradeGrades)),
   size: PropTypes.number,
   isInversed: PropTypes.bool,
+  margin: SpacingSizeValuePropType,
 };
 
 export default HexGrade;
