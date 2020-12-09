@@ -33,6 +33,9 @@ playground.argTypes = {
   isInversed: {
     control: 'boolean',
   },
+  margin: {
+    control: 'object',
+  },
 };
 
 export const SolidHexGrades: Story = () => (
