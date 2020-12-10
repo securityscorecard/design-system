@@ -9,7 +9,8 @@ export type Variants = typeof ButtonVariants[keyof typeof ButtonVariants];
 export type Sizes = typeof ButtonSizes[keyof typeof ButtonSizes];
 export type Colors = typeof ButtonColors[keyof typeof ButtonColors];
 
-export interface ButtonProps {
+export interface ButtonProps
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'as'> {
   variant?: Variants;
   size?: Sizes;
   color?: Colors;

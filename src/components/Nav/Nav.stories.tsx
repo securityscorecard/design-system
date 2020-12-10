@@ -27,30 +27,22 @@ export const NavigationWithRelativeLinksDefault: Story = () => (
 
 export const NavigationWithAbsoluteLinks: Story = () => (
   <Nav>
-    <NavItem as="a" href="#" isActive>
+    <NavItem href="#" isActive>
       Open
     </NavItem>
-    <NavItem as="a" href="#">
-      Under Review
-    </NavItem>
-    <NavItem as="a" href="#">
-      Resolved
-    </NavItem>
-    <NavItem as="a" href="#">
-      Declined
-    </NavItem>
-    <NavItem as="a" href="#">
-      Decayed
-    </NavItem>
+    <NavItem href="#">Under Review</NavItem>
+    <NavItem href="#">Resolved</NavItem>
+    <NavItem href="#">Declined</NavItem>
+    <NavItem href="#">Decayed</NavItem>
   </Nav>
 );
 
 export const NavigationWithOnClickHandlers: Story = () => (
   <Nav>
-    <NavItem as="a" tabIndex={0} isActive onClick={action('NavItem-click')}>
+    <NavItem tabIndex={0} isActive onClick={action('NavItem-click')}>
       Overview
     </NavItem>
-    <NavItem as="a" tabIndex={-1} onClick={action('NavItem-click')}>
+    <NavItem tabIndex={-1} onClick={action('NavItem-click')}>
       Activity
     </NavItem>
   </Nav>
