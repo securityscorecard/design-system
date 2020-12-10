@@ -226,3 +226,32 @@ const Button = styled.button.attrs(() => ({
   }
 `;
 ```
+
+### getLinkStyle
+
+Returns style value of link for a given color prop.
+
+
+```js
+import { getLinkStyle } from '@securityscorecard/design-system';
+
+// getLinkStyle :: Type -> Props -> string
+// Type - type of color / decoration
+// Props - styled-components props object (color prop is required)
+const Link = styled.a.attrs(() => ({
+  color: 'danger', // <- required
+})`
+  text-decoration: ${getLinkStyle('decoration')};
+  & {
+    color: ${getLinkStyle('color')};
+  }
+
+  &:hover {
+    color: ${getLinkStyle('hoverColor')};
+  }
+
+  &:active {
+    color: ${getLinkStyle('activeColor')};
+  }
+`;
+```

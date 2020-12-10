@@ -3,37 +3,35 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 
-import { getButtonColor } from '../../../utils/helpers';
 import { requireRouterLink } from '../../../utils/require-router-link';
+import { getLinkStyle } from '../../../utils/helpers';
 import { LinkProps } from './Link.types';
 import { LinkColors } from './Link.enums';
 
-const StyledLink = styled.a.attrs(() => ({
-  variant: 'text',
-}))`
+const StyledLink = styled.a`
   margin: 0;
   border: none;
   font-family: inherit;
   font-weight: normal;
-  text-decoration: none;
+  text-decoration: ${getLinkStyle('decoration')};
   background-color: transparent;
   white-space: nowrap;
   cursor: pointer;
 
   &,
   &:not([href]):not([tabindex]) {
-    color: ${getButtonColor('color')};
+    color: ${getLinkStyle('color')};
   }
 
   &:hover,
   &:not([href]):not([tabindex]):hover {
-    color: ${getButtonColor('hoverColor')};
+    color: ${getLinkStyle('hoverColor')};
     text-decoration: none;
   }
 
   &:active,
   &:not([href]):not([tabindex]):active {
-    color: ${getButtonColor('activeColor')};
+    color: ${getLinkStyle('activeColor')};
     text-decoration: none;
   }
 
