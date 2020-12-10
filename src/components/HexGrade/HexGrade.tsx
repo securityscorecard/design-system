@@ -68,7 +68,8 @@ const HexGrade: React.FC<HexGradeProps> = ({
       ? colors.graphite5H
       : gradeColor;
   const charFill =
-    isInversed || variant === HexGradeVariants.outline
+    (isInversed && variant === HexGradeVariants.solid) ||
+    (!isInversed && variant === HexGradeVariants.outline)
       ? gradeColor
       : colors.graphite5H;
 
