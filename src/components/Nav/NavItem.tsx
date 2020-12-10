@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import {
   getColor,
@@ -9,18 +8,28 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../utils/helpers';
+import { Button } from '../Button';
+import { ButtonVariants } from '../Button/Button.enums';
 import { NavItemProps } from './NavItem.types';
 
-const NavItem = styled(Link).withConfig<NavItemProps>({
-  shouldForwardProp: (prop) => prop !== 'isActive',
-})`
+const NavItem = styled(Button)
+  .attrs(() => ({
+    variant: ButtonVariants.text,
+  }))
+  .withConfig<NavItemProps>({
+    shouldForwardProp: (prop) => prop !== 'isActive',
+  })`
   display: block;
   font-size: ${getFontSize('lg')};
-  font-weight: ${({ isActive }) => isActive && getFontWeight('bold')};
+  font-weight: ${({ isActive }) =>
+    isActive ? getFontWeight('bold') : getFontWeight('regular')};
   line-height: ${getLineHeight('lg')};
   cursor: pointer;
   color: ${({ isActive }) =>
     getColor(isActive ? 'graphite4B' : 'blueberryClassic')};
+  padding: 0;
+  height: auto;
+
   &:not(:first-of-type) {
     padding-left: ${pxToRem(8)};
   }

@@ -13,7 +13,7 @@
     "allowJs": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
   "include": ["src/**/*", "jest.setup.ts"],
   "exclude": [

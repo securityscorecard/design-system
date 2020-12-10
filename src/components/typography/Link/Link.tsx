@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
-import { Link as RouterLink } from 'react-router-dom';
 
 import { getButtonColor } from '../../../utils/helpers';
+import { requireRouterLink } from '../../../utils/require-router-link';
 import { LinkProps } from './Link.types';
 import { LinkColors } from './Link.enums';
 
@@ -51,6 +51,11 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof StyledLink>> = ({
   onClick,
   ...props
 }) => {
+  let RouterLink = null;
+  if (isNull(as) && isNotNull(to)) {
+    RouterLink = requireRouterLink();
+  }
+
   const domTag =
     as ||
     (isNotNull(to)
@@ -58,6 +63,10 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof StyledLink>> = ({
       : isNull(to) && isNull(href)
       ? 'button' // render 'button' if 'to' and 'href' is not present
       : undefined); // use default
+
+  if (isNull(RouterLink) && isNull(domTag)) {
+    return null;
+  }
 
   return (
     <StyledLink

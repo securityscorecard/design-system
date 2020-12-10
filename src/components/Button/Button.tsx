@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isNotNull, isNotUndefined, noop } from 'ramda-adjunct';
-import { Link } from 'react-router-dom';
+import { isNotNull, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
@@ -13,6 +12,7 @@ import StyledButton from './StyledButton';
 import StyledIcon from './StyledIcon';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';
 import { ButtonProps } from './Button.types';
+import { requireRouterLink } from '../../utils/require-router-link';
 
 const LoadingText = styled.span<Pick<ButtonProps, 'size' | 'variant'>>`
   padding-right: ${({ variant, size }) =>
@@ -30,7 +30,7 @@ const spinnerSizes = {
 };
 
 const Button: React.FC<
-  Omit<React.HTMLProps<HTMLButtonElement>, 'size'> & ButtonProps
+  ButtonProps & React.ComponentProps<typeof StyledButton>
 > = ({
   children,
   variant = ButtonVariants.solid,
@@ -38,6 +38,7 @@ const Button: React.FC<
   size = ButtonSizes.md,
   iconName,
   iconType = IconTypes.ssc,
+  as = null,
   href = null,
   to = null,
   margin = 'none',
@@ -47,11 +48,20 @@ const Button: React.FC<
   isExpanded = false,
   ...props
 }) => {
+  let RouterLink = null;
+  if (isNull(as) && isNotNull(to)) {
+    RouterLink = requireRouterLink();
+  }
+
   const domTag = isNotNull(href)
     ? 'a' // render 'a' tag if 'href' is present
     : isNotNull(to)
-    ? Link // render 'Link' if 'to' is present
+    ? RouterLink // render 'Link' if 'to' is present
     : undefined; // use default
+
+  if (isNull(RouterLink) && isNull(domTag)) {
+    return null;
+  }
 
   const content = isLoading ? (
     <>
