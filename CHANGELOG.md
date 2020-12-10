@@ -1,3 +1,10 @@
+# [1.0.0-alpha.10](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-12-10)
+
+
+### Bug Fixes
+
+* **router:** make react-router-dom optional ([0155be2](https://github.com/securityscorecard/design-system/commit/0155be234d45cac3196ae7930d074751b6396c87))
+
 # [1.0.0-alpha.9](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-12-09)
 
 
