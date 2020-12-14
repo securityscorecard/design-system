@@ -1,4 +1,5 @@
 import React from 'react';
+import { withScreenshot } from 'storycap'
 
 import { DSProvider, createIconLibrary } from '../src/theme';
 import colors from '../src/theme/colors';
@@ -37,6 +38,10 @@ export const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
   docs: { source: { type: 'dynamic' } },
   actions: { argTypesRegex: '^on.*' },
+  // storycap settings
+  screenshot: {
+    fullPage: true,
+  },
 };
 
 createIconLibrary();
@@ -47,4 +52,4 @@ const wrapper = (storyFn) => (
   </>
 );
 
-export const decorators = [wrapper]
+export const decorators = [ withScreenshot, wrapper ];

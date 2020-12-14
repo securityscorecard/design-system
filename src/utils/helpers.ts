@@ -33,6 +33,8 @@ import {
 import { Colors } from '../theme/colors.types';
 import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
+import { Depths } from '../theme/depths.types';
+import { FullscreenModalProps } from '../components/FullscreenModal/FullscreenModal.types';
 
 type Theme = {
   theme?: DefaultTheme;
@@ -127,6 +129,21 @@ export const getLinkStyle = curry((type, { color, theme }) => {
   );
   return path(['typography', 'links', 'primary', type], theme);
 });
+
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+export const getDepth = curry(
+  (element: keyof Depths, { theme }: Theme): string =>
+    path(['depths', element], theme),
+);
+
+// getModalSize :: Props -> string
+// Props - styled-components props object
+export const getModalSize = curry(
+  ({ size, theme }: Theme & FullscreenModalProps): string =>
+    pipe(path(['modals', 'size', size]), pxToRem)(theme),
+);
 
 type SpacingKind = 'padding' | 'margin';
 

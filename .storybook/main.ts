@@ -8,6 +8,7 @@ module.exports = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-docs',
     '@storybook/addon-controls',
+    'storycap'
   ],
   typescript: {
     check: false,

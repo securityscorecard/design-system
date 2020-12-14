@@ -255,3 +255,31 @@ const Link = styled.a.attrs(() => ({
   }
 `;
 ```
+### getDepth
+
+Returns z-index from theme for given element.
+
+```js
+import { getDepth } from '@securityscorecard/design-system';
+
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+const Component = styled.input`
+  z-index: ${getDepth('modal')};
+`; // -> z-index: 1250;
+```
+
+### getModalSize
+
+Returns modal width from theme for size given in `size` property.
+
+```js
+import { getModalSize } from '@securityscorecard/design-system';
+
+// getModalSize :: Props -> string
+// Props - styled-components props object
+const Component = styled.div.attrs(() => ({size: 'lg'}))`
+  width: ${getModalSize};
+`; // -> width: 60.625rem;
+```
