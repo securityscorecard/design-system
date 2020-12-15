@@ -1,3 +1,10 @@
+# [1.0.0-alpha.11](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-12-15)
+
+
+### Features
+
+* **Link:** add secondary link color ([f33e24e](https://github.com/securityscorecard/design-system/commit/f33e24ef20e81a819508980e904ab6d8999e7846))
+
 # [1.0.0-alpha.10](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-12-10)
 
 
