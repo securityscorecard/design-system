@@ -48,10 +48,23 @@ export interface Margin {
   paragraph: MarginValue;
 }
 
+export interface LinkColors {
+  color: string;
+  hoverColor: string;
+  activeColor: string;
+  decoration: string;
+}
+export interface Links {
+  primary: LinkColors;
+  secondary: LinkColors;
+  danger: LinkColors;
+}
+
 export interface Typography {
   family: Family;
   size: Size;
   weight: Weight;
   lineHeight: LineHeight;
   margin: Margin;
+  links: Links;
 }

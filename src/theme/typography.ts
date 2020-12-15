@@ -1,7 +1,9 @@
+import colors from './colors';
 import { pxToRem } from '../utils/helpers';
 import {
   Family,
   LineHeight,
+  Links,
   Margin,
   Size,
   Typography,
@@ -72,12 +74,34 @@ const margin: Margin = {
   },
 };
 
+const links: Links = {
+  primary: {
+    color: colors.blueberryClassic,
+    hoverColor: colors.radiantBlueberry,
+    activeColor: colors.dietBlueberry,
+    decoration: 'none',
+  },
+  danger: {
+    color: colors.cherry,
+    hoverColor: colors.strawberry,
+    activeColor: colors.pumpkin,
+    decoration: 'none',
+  },
+  secondary: {
+    color: colors.graphite2B,
+    hoverColor: colors.radiantBlueberry,
+    activeColor: colors.dietBlueberry,
+    decoration: 'underline',
+  },
+};
+
 const typography: Typography = {
   family,
   size,
   weight,
   lineHeight,
   margin,
+  links,
 };
 
 export default typography;

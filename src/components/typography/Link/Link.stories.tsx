@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import { TextSizes } from '../Text/Text.enums';
+import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { Paragraph } from '../index';
 import { LinkProps } from './Link.types';
 import { LinkColors } from './Link.enums';
@@ -33,6 +33,11 @@ playground.argTypes = {
 };
 
 export const PrimaryLink: Story = () => <Link href="#">Absolute Link</Link>;
+export const SecondaryLink: Story = () => (
+  <Link color={LinkColors.secondary} href="#">
+    Absolute Link
+  </Link>
+);
 export const DangerLink: Story = () => (
   <Link color={LinkColors.danger} href="#">
     Absolute Link
@@ -85,6 +90,14 @@ export const LinkInText: Story = () => (
       viverra. Aenean rutrum et mi quis dapibus.{' '}
       <Link onClick={action('button-click')}>OnClick handler</Link>. Donec erat
       est, posuere at fringilla ultricies, porta et diam.
+    </Paragraph>
+    <Paragraph variant={TextVariants.secondary}>
+      Lorem ipsum dolor sit amet,{' '}
+      <Link color={LinkColors.secondary} href="#">
+        secondary link
+      </Link>
+      . Donec eget nisi bibendum, condimentum tortor eget, maximus eros. V
+      Nullam pellentesque nisl nec odio euismod semper.{' '}
     </Paragraph>
   </>
 );
