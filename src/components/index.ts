@@ -13,5 +13,6 @@ export * from './Tabs';
 export * from './Toast';
 export * from './Tooltip';
 
+export * from './layout';
 export * from './forms';
 export * from './typography';

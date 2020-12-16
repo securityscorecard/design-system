@@ -47,6 +47,7 @@
     "ramda": "^0.27.0",
     "ramda-adjunct": "^2.16.1",
     "react-select": "^3.1.0",
+    "reflexbox": "^4.0.6",
     "styled-reset-advanced": "^1.0.3"
   },
   "devDependencies": {
