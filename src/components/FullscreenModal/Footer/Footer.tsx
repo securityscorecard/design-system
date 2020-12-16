@@ -45,7 +45,7 @@ const Footer: React.FC = ({ children }) => {
   return (
     <>
       {isFixed && (
-        <BaseStickyFooter>
+        <BaseStickyFooter as="div">
           <FooterInnerContainer size={size}>{children}</FooterInnerContainer>
         </BaseStickyFooter>
       )}

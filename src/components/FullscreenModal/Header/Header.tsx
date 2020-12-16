@@ -45,7 +45,7 @@ const Header: React.FC = ({ children }) => {
   return (
     <>
       {isFixed && (
-        <BaseStickyHeader>
+        <BaseStickyHeader as="div">
           <HeaderInnerContainer
             alignItems="center"
             justifyContent="space-between"
