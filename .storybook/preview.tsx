@@ -25,7 +25,12 @@ export const parameters = {
             'Typography'
           ],
         'Helpers',
-        'Components'
+        'components',
+          [
+            'layout',
+            'typography',
+            'forms'
+          ]
       ]
     },
   },
