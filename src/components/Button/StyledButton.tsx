@@ -88,7 +88,7 @@ const ButtonSmall = css<BaseStyledButtonProps>`
   height: ${pxToRem(30)};
   padding: ${pxToRem(7, 12)};
   line-height: ${getLineHeight('md')};
-  font-size: ${getFontSize('sm')};
+  font-size: ${getFontSize('md')};
 
   ${({ isLoading }) =>
     isLoading &&
