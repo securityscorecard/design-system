@@ -14,7 +14,7 @@ import { SSCIconNames } from '../../Icon/Icon.enums';
 import { H2, H3 } from '../../typography';
 import ModalContext from '../Context/Context';
 import { FullscreenModalProps } from '../FullscreenModal.types';
-import { useStickyHeader } from './useStickyHeader';
+import { useStickyHeader } from '../hooks/useStickyHeader';
 
 const BaseStickyHeader = styled.header`
   position: fixed;

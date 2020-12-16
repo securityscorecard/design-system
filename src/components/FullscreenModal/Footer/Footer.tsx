@@ -6,7 +6,7 @@ import { FlexContainer } from '../../FlexContainer';
 import { ScrollToTop } from '../ScrollToTop';
 import { FullscreenModalProps } from '../FullscreenModal.types';
 import ModalContext from '../Context/Context';
-import { useStickyFooter } from './useStickyFooter';
+import { useStickyFooter } from '../hooks/useStickyFooter';
 
 const BaseStickyFooter = styled.footer`
   position: fixed;
