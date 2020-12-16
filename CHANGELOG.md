@@ -1,3 +1,11 @@
+# [1.0.0-alpha.13](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2020-12-16)
+
+
+### Features
+
+* **fep-1506:** replace label style in small buttons ([2b26580](https://github.com/securityscorecard/design-system/commit/2b265807fcd449265d65725b0561545fac062a35))
+* **fep-1506:** updating the storybook image snapshots for buttons ([dc4803a](https://github.com/securityscorecard/design-system/commit/dc4803afee177999652249539f7691e2d83f942b))
+
 # [1.0.0-alpha.12](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2020-12-16)
 
 
