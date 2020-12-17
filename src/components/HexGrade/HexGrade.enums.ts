@@ -1,6 +1,7 @@
 export const HexGradeVariants = {
   solid: 'solid',
   outline: 'outline',
+  cs: 'cs',
 } as const;
 
 export const HexGradeGrades = {
@@ -10,4 +11,5 @@ export const HexGradeGrades = {
   C: 'C',
   D: 'D',
   F: 'F',
+  nonApplicable: 'n/a',
 } as const;

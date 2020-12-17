@@ -47,6 +47,10 @@ export const SolidHexGrades: Story = () => (
     <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.solid} />
     <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.solid} />
     <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.solid} />
+    <HexGrade
+      grade={HexGradeGrades.nonApplicable}
+      variant={HexGradeVariants.solid}
+    />
   </>
 );
 SolidHexGrades.storyName = 'Solid HexGrades';
@@ -63,9 +67,30 @@ export const OutlineHexGrades: Story = () => (
     <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.outline} />
     <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.outline} />
     <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.outline} />
+    <HexGrade
+      grade={HexGradeGrades.nonApplicable}
+      variant={HexGradeVariants.outline}
+    />
   </>
 );
 OutlineHexGrades.storyName = 'Outline HexGrades';
+
+export const CustomScorecardHexGrades: Story = () => (
+  <>
+    <HexGrade variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.unknown} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.A} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.B} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.cs} />
+    <HexGrade
+      grade={HexGradeGrades.nonApplicable}
+      variant={HexGradeVariants.cs}
+    />
+  </>
+);
+CustomScorecardHexGrades.storyName = 'CustomScorecard HexGrades';
 
 export const SizedHexGrades: Story = () => (
   <>
@@ -131,6 +156,11 @@ export const InversedHexGrades: Story = () => (
         variant={HexGradeVariants.solid}
         isInversed
       />
+      <HexGrade
+        grade={HexGradeGrades.nonApplicable}
+        variant={HexGradeVariants.solid}
+        isInversed
+      />
     </div>
     <div>
       <HexGrade
@@ -160,6 +190,11 @@ export const InversedHexGrades: Story = () => (
       />
       <HexGrade
         grade={HexGradeGrades.F}
+        variant={HexGradeVariants.outline}
+        isInversed
+      />
+      <HexGrade
+        grade={HexGradeGrades.nonApplicable}
         variant={HexGradeVariants.outline}
         isInversed
       />
