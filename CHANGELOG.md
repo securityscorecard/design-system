@@ -1,3 +1,11 @@
+# [1.0.0-alpha.14](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2020-12-17)
+
+
+### Features
+
+* **HexGrade:** add custom scorecard variant ([bdf518e](https://github.com/securityscorecard/design-system/commit/bdf518eb6f0e4f869d10ec00dfc685738975f16c))
+* **HexGrade:** add non-applicable grade ([e1775ca](https://github.com/securityscorecard/design-system/commit/e1775ca49370aa23fbfb2e307cb53df9cc0c3c27))
+
 # [1.0.0-alpha.13](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2020-12-16)
 
 
