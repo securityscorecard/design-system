@@ -1,12 +1,13 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
 import { ScrollToTop } from '../ScrollToTop';
-import { FullscreenModalProps } from '../FullscreenModal.types';
-import ModalContext from '../Context/Context';
 import { useStickyFooter } from '../hooks/useStickyFooter';
+import { Col, Container, Row } from '../../layout';
+import { FooterProps } from './Footer.types';
 
 const BaseStickyFooter = styled.footer`
   position: fixed;
@@ -18,21 +19,18 @@ const BaseStickyFooter = styled.footer`
   border-top: 1px solid ${getColor('graphiteHB')};
 `;
 const BaseFooter = styled.footer`
-  background-color: ${getColor('graphite5H')};
   border-top: 1px solid ${getColor('graphiteHB')};
   padding-top: ${pxToRem(24)};
   margin-top: ${pxToRem(40)};
 `;
 
-const FooterInnerContainer = styled.div<Pick<FullscreenModalProps, 'size'>>`
-  width: ${({ size, theme }) => pxToRem(theme.modals.size[size])};
-  margin: 0 auto;
-`;
-
-const Footer: React.FC = ({ children }) => {
-  const { size, modalRef } = useContext(ModalContext);
+const Footer: React.FC<FooterProps> = ({
+  children,
+  width,
+  offset,
+  modalRef,
+}) => {
   const modalFooterRef = useRef(null);
-
   const { isFixed, shouldShowScrollToTopButton } = useStickyFooter(
     modalRef,
     modalFooterRef,
@@ -46,7 +44,13 @@ const Footer: React.FC = ({ children }) => {
     <>
       {isFixed && (
         <BaseStickyFooter as="div">
-          <FooterInnerContainer size={size}>{children}</FooterInnerContainer>
+          <Container>
+            <Row>
+              <Col cols={width} offset={offset}>
+                {children}
+              </Col>
+            </Row>
+          </Container>
         </BaseStickyFooter>
       )}
       <BaseFooter ref={modalFooterRef}>
@@ -63,6 +67,14 @@ const Footer: React.FC = ({ children }) => {
       </BaseFooter>
     </>
   );
+};
+
+Footer.propTypes = {
+  width: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
+  modalRef: PropTypes.exact({
+    current: PropTypes.instanceOf(HTMLElement),
+  }).isRequired,
 };
 
 export default Footer;

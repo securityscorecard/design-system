@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils/helpers';
@@ -11,10 +12,10 @@ import {
 import { FlexContainer } from '../../FlexContainer';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../Icon/Icon.enums';
+import { Col, Container, Row } from '../../layout';
 import { H2, H3 } from '../../typography';
-import ModalContext from '../Context/Context';
-import { FullscreenModalProps } from '../FullscreenModal.types';
 import { useStickyHeader } from '../hooks/useStickyHeader';
+import { HeaderProps } from './Header.types';
 
 const BaseStickyHeader = styled.header`
   position: fixed;
@@ -29,40 +30,50 @@ const BaseHeader = styled.header`
   padding: ${pxToRem(56, 0, 24)};
 `;
 
-const HeaderInnerContainer = styled(FlexContainer)<
-  Pick<FullscreenModalProps, 'size'>
->`
-  width: ${({ size, theme }) => pxToRem(theme.modals.size[size])};
-  margin: 0 auto;
-`;
-
-const Header: React.FC = ({ children }) => {
-  const { handleClose, modalRef, size } = useContext(ModalContext);
+const Header: React.FC<HeaderProps> = ({
+  children,
+  width,
+  offset,
+  modalRef,
+  handleClose,
+}) => {
   const modalHeaderRef = useRef(null);
-
   const { isFixed } = useStickyHeader(modalRef, modalHeaderRef);
 
   return (
     <>
       {isFixed && (
         <BaseStickyHeader as="div">
-          <HeaderInnerContainer
-            alignItems="center"
-            justifyContent="space-between"
-            size={size}
-          >
-            <H3 as="h2" margin="none" padding={{ vertical: 0.75 }}>
-              {children}
-            </H3>
-            <Button
-              color={ButtonColors.secondary}
-              size={ButtonSizes.lg}
-              variant={ButtonVariants.text}
-              onClick={handleClose}
-            >
-              <Icon aria-label="Close modal window" name={SSCIconNames.times} />
-            </Button>
-          </HeaderInnerContainer>
+          <Container>
+            <Row>
+              <Col cols={width} offset={offset}>
+                <FlexContainer
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <H3
+                    as="h2"
+                    margin="none"
+                    padding={{ vertical: 0.75, right: 0.75 }}
+                  >
+                    {children}
+                  </H3>
+
+                  <Button
+                    color={ButtonColors.secondary}
+                    size={ButtonSizes.lg}
+                    variant={ButtonVariants.text}
+                    onClick={handleClose}
+                  >
+                    <Icon
+                      aria-label="Close modal window"
+                      name={SSCIconNames.times}
+                    />
+                  </Button>
+                </FlexContainer>
+              </Col>
+            </Row>
+          </Container>
         </BaseStickyHeader>
       )}
       <BaseHeader ref={modalHeaderRef}>
@@ -70,6 +81,16 @@ const Header: React.FC = ({ children }) => {
       </BaseHeader>
     </>
   );
+};
+
+Header.propTypes = {
+  width: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
+  modalRef: PropTypes.exact({
+    // eslint-disable-next-line react/no-unused-prop-types
+    current: PropTypes.instanceOf(HTMLElement),
+  }).isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default Header;

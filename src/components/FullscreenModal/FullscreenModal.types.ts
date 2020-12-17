@@ -1,8 +1,20 @@
-import { FullscreenModalSizes } from './FullscreenModal.enums';
+import {
+  FullscreenModalLayouts,
+  FullscreenModalSizes,
+} from './FullscreenModal.enums';
 
 export type Sizes = typeof FullscreenModalSizes[keyof typeof FullscreenModalSizes];
-
+export type Layouts = typeof FullscreenModalLayouts[keyof typeof FullscreenModalLayouts];
+export type ColumnConfig = Record<
+  'header' | 'sidebar' | 'content',
+  [number, number]
+>;
+export type ColumnConfigMap = Record<Layouts, ColumnConfig>;
 export interface FullscreenModalProps {
-  size?: Sizes;
+  layout: Layouts;
+  header: React.ReactNode;
+  content: React.ReactNode;
+  footer: React.ReactNode;
+  sidebar?: React.ReactNode;
   onClose?: () => void;
 }
