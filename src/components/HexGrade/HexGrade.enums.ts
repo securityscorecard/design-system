@@ -11,4 +11,5 @@ export const HexGradeGrades = {
   C: 'C',
   D: 'D',
   F: 'F',
+  nonApplicable: 'n/a',
 } as const;
