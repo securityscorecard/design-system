@@ -67,6 +67,19 @@ export const OutlineHexGrades: Story = () => (
 );
 OutlineHexGrades.storyName = 'Outline HexGrades';
 
+export const CustomScorecardHexGrades: Story = () => (
+  <>
+    <HexGrade variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.unknown} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.A} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.B} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.cs} />
+  </>
+);
+CustomScorecardHexGrades.storyName = 'CustomScorecard HexGrades';
+
 export const SizedHexGrades: Story = () => (
   <>
     <HexGrade
