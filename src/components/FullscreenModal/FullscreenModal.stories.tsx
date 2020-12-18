@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { action } from '@storybook/addon-actions';
 
 import { FlexContainer } from '../FlexContainer';
 import { Button } from '../Button';
@@ -89,6 +90,7 @@ export const SingleColumn6: Story = () => (
     footer={Footer()}
     header={header}
     layout={FullscreenModalLayouts.single6}
+    onClose={action('close modal')}
   />
 );
 SingleColumn6.storyName = 'Single Column (layout: single-6)';
@@ -113,6 +115,15 @@ SingleColumn6.argTypes = {
     description: 'Content of the sidebar wrapper',
     table: { type: { summary: 'React.node' } },
   },
+  scrollToTopButtonLabel: {
+    control: { disable: true },
+    description: 'Label of the scroll to top button',
+    table: { defaultValue: { summary: '"Scroll to top"' } },
+  },
+  onClose: {
+    control: { disable: true },
+    description: 'Modal window close handler',
+  },
 };
 
 export const SingleColumn8: Story = () => (
@@ -121,6 +132,7 @@ export const SingleColumn8: Story = () => (
     footer={Footer()}
     header={header}
     layout={FullscreenModalLayouts.single8}
+    onClose={action('close modal')}
   />
 );
 
@@ -133,6 +145,7 @@ export const Sidebar4Column6: Story = () => (
     header={header}
     layout={FullscreenModalLayouts.sidebar46}
     sidebar={Sidebar()}
+    onClose={action('close modal')}
   />
 );
 Sidebar4Column6.storyName = 'Two Columns with sidebar (layout: sidebar-4-6)';
@@ -143,7 +156,8 @@ export const Sidebar4Column8: Story = () => (
     footer={Footer()}
     header={header}
     layout={FullscreenModalLayouts.sidebar48}
-    // sidebar={Sidebar()}
+    sidebar={Sidebar()}
+    onClose={action('close modal')}
   />
 );
 Sidebar4Column8.storyName = 'Two Columns with sidebar (layout: sidebar-4-8)';
@@ -154,5 +168,6 @@ export const WithLongContent: Story = () => (
     footer={Footer()}
     header={header}
     layout={FullscreenModalLayouts.single6}
+    onClose={action('close modal')}
   />
 );

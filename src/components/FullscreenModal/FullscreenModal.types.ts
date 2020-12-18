@@ -16,5 +16,6 @@ export interface FullscreenModalProps {
   content: React.ReactNode;
   footer: React.ReactNode;
   sidebar?: React.ReactNode;
-  onClose?: () => void;
+  scrollToTopButtonLabel?: string;
+  onClose: () => void;
 }

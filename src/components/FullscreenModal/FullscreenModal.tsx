@@ -11,8 +11,8 @@ import { ColumnConfigMap, FullscreenModalProps } from './FullscreenModal.types';
 import { Col, Container, Row } from '../layout';
 
 const BaseModal = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -50,22 +50,22 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   content,
   sidebar,
   footer,
+  scrollToTopButtonLabel,
   onClose = noop,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const {
-    header: headerConfig,
-    sidebar: sidebarConfig,
-    content: contentConfig,
+    header: [headerCols, headerOffset],
+    sidebar: [sidebarCols, sidebarOffset],
+    content: [contentCols, contentOffset],
   } = columnConfigMap[layout];
 
-  const hasLayoutSidebar = sidebarConfig[0] > 0;
-  const totalContentWidth = contentConfig[0] + sidebarConfig[0];
+  const hasLayoutSidebar = sidebarCols > 0;
+  const totalContentWidth = contentCols + sidebarCols;
 
   if (hasLayoutSidebar && isUndefined(sidebar)) {
-    // eslint-disable-next-line no-console
-    console.error(
+    throw new Error(
       `You chose to use modal layout with sidebar (current: ${layout}) but you didn't provide sidebar content.
 You should either provide content in "sidebar" property or switch layout to "${FullscreenModalLayouts.single6}" or "${FullscreenModalLayouts.single8}"
 `,
@@ -76,11 +76,11 @@ You should either provide content in "sidebar" property or switch layout to "${F
     <BaseModal ref={modalRef}>
       <Container>
         <Row>
-          <Col cols={headerConfig[0]} offset={headerConfig[1]}>
+          <Col cols={headerCols} offset={headerOffset}>
             <ModalHeader
               handleClose={onClose}
               modalRef={modalRef}
-              offset={headerConfig[1]}
+              offset={headerOffset}
               width={totalContentWidth}
             >
               {header}
@@ -89,15 +89,16 @@ You should either provide content in "sidebar" property or switch layout to "${F
         </Row>
         <Row>
           {hasLayoutSidebar && (
-            <Col cols={sidebarConfig[0]} offset={sidebarConfig[1]}>
+            <Col cols={sidebarCols} offset={sidebarOffset}>
               {sidebar}
             </Col>
           )}
-          <Col cols={contentConfig[0]} offset={contentConfig[1]}>
+          <Col cols={contentCols} offset={contentOffset}>
             {content}
             <ModalFooter
               modalRef={modalRef}
-              offset={headerConfig[1]}
+              offset={headerOffset}
+              scrollToTopButtonLabel={scrollToTopButtonLabel}
               width={totalContentWidth}
             >
               {footer}
@@ -113,9 +114,10 @@ FullscreenModal.propTypes = {
   header: PropTypes.node.isRequired,
   content: PropTypes.node.isRequired,
   footer: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
   sidebar: PropTypes.node,
   layout: PropTypes.oneOf(Object.values(FullscreenModalLayouts)),
-  onClose: PropTypes.func,
+  scrollToTopButtonLabel: PropTypes.string,
 };
 
 export default FullscreenModal;

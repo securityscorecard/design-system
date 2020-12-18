@@ -8,9 +8,9 @@ import { Button } from '../../Button';
 import { ButtonColors, ButtonVariants } from '../../Button/Button.enums';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../Icon/Icon.enums';
-import { ScrollToTopProps } from './ScrollToTop.types';
+import { ScrollToTopButtonProps } from './ScrollToTopButton.types';
 
-const ScrollToTopButton = styled(Button)`
+const StyledButton = styled(Button)`
   flex-direction: column;
   justify-content: center;
   height: ${pxToRem(48)};
@@ -23,7 +23,10 @@ const ButtonText = styled.span`
   margin-top: ${pxToRem(4)};
 `;
 
-const ScrollToTop: React.FC<ScrollToTopProps> = ({ onClick = undefined }) => {
+const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
+  onClick,
+  label = 'Scroll to top',
+}) => {
   const handleClick = () => {
     if (isNotUndefined(onClick)) {
       onClick();
@@ -33,19 +36,20 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ onClick = undefined }) => {
   };
 
   return (
-    <ScrollToTopButton
+    <StyledButton
       color={ButtonColors.secondary}
       variant={ButtonVariants.text}
       onClick={handleClick}
     >
       <Icon name={SSCIconNames.arrowUp} />
-      <ButtonText>Scroll to top</ButtonText>
-    </ScrollToTopButton>
+      <ButtonText>{label}</ButtonText>
+    </StyledButton>
   );
 };
 
-ScrollToTop.propTypes = {
+ScrollToTopButton.propTypes = {
+  label: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ScrollToTop;
+export default ScrollToTopButton;

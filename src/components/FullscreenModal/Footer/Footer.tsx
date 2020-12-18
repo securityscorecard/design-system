@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
-import { ScrollToTop } from '../ScrollToTop';
+import { ScrollToTopButton } from '../ScrollToTopButton';
 import { useStickyFooter } from '../hooks/useStickyFooter';
 import { Col, Container, Row } from '../../layout';
 import { FooterProps } from './Footer.types';
@@ -29,6 +29,7 @@ const Footer: React.FC<FooterProps> = ({
   width,
   offset,
   modalRef,
+  scrollToTopButtonLabel,
 }) => {
   const modalFooterRef = useRef(null);
   const { isFixed, shouldShowScrollToTopButton } = useStickyFooter(
@@ -61,7 +62,10 @@ const Footer: React.FC<FooterProps> = ({
             justifyContent="center"
             margin={{ vertical: 1.2 }}
           >
-            <ScrollToTop onClick={scrollToTop} />
+            <ScrollToTopButton
+              label={scrollToTopButtonLabel}
+              onClick={scrollToTop}
+            />
           </FlexContainer>
         )}
       </BaseFooter>
@@ -75,6 +79,7 @@ Footer.propTypes = {
   modalRef: PropTypes.exact({
     current: PropTypes.instanceOf(HTMLElement),
   }).isRequired,
+  scrollToTopButtonLabel: PropTypes.string,
 };
 
 export default Footer;

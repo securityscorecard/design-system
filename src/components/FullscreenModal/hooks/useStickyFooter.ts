@@ -40,13 +40,11 @@ export const useStickyFooter = (
       modalRef.current.scrollTop + modalRef.current.offsetHeight;
     const contentHeight =
       modalRef.current.scrollHeight - modalFooterRef.current.scrollHeight;
+    const fixedAtThreshold = contentHeight * 0.001;
 
     if (isFixed && scrollOffset >= contentHeight) {
       setIsFixed(false);
-    } else if (
-      !isFixed &&
-      scrollOffset < contentHeight - contentHeight * 0.001
-    ) {
+    } else if (!isFixed && scrollOffset < contentHeight - fixedAtThreshold) {
       setIsFixed(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
