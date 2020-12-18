@@ -255,3 +255,17 @@ const Link = styled.a.attrs(() => ({
   }
 `;
 ```
+### getDepth
+
+Returns z-index from theme for given element.
+
+```js
+import { getDepth } from '@securityscorecard/design-system';
+
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+const Component = styled.input`
+  z-index: ${getDepth('modal')};
+`; // -> z-index: 1250;
+```

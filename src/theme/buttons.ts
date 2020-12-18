@@ -31,6 +31,11 @@ const buttons: Buttons = {
       hoverColor: colors.radiantBlueberry,
       activeColor: colors.dietBlueberry,
     },
+    secondary: {
+      color: colors.graphite2B,
+      hoverColor: colors.graphite4B,
+      activeColor: colors.graphite5B,
+    },
     danger: {
       color: colors.cherry,
       hoverColor: colors.strawberry,

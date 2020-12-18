@@ -7,6 +7,7 @@ import {
   createPaddingSpacing,
   getBorderRadius,
   getColor,
+  getDepth,
   pxToRem,
 } from '../../utils/helpers';
 import { Placements, TooltipProps } from './Tooltip.types';
@@ -77,7 +78,7 @@ const tooltipPlacements = {
 
 const Popup = styled.div<{ placement: Placements }>`
   position: absolute;
-  z-index: 10;
+  z-index: ${getDepth('tooltip')};
   width: ${pxToRem(270)};
   background: ${getColor('graphite5H')};
   ${createPaddingSpacing(0.75)};

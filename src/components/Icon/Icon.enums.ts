@@ -6,6 +6,7 @@ export const SSCIconNames = {
   check: 'check',
   times: 'times',
   chevronDown: 'chevron-down',
+  arrowUp: 'arrow-up',
 } as const;
 
 export const IconTypes = {
