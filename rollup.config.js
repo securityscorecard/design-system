@@ -1,4 +1,4 @@
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import autoExternal from 'rollup-plugin-auto-external';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from '@rollup/plugin-commonjs';
@@ -24,7 +24,7 @@ export default {
     },
   ],
   plugins: [
-    peerDepsExternal(),
+    autoExternal(),
     resolve(),
     url({
       limit: 10 * 1024, // inline files < 10k, copy files > 10k
