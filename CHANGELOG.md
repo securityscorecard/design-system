@@ -1,3 +1,10 @@
+# [1.0.0-alpha.16](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2021-01-05)
+
+
+### Bug Fixes
+
+* externalize dependencies from bundle ([529156b](https://github.com/securityscorecard/design-system/commit/529156b0807aff5140c0d6fa3326bb23894aaf0d))
+
 # [1.0.0-alpha.15](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2020-12-18)
 
 
