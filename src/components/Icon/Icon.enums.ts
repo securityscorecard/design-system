@@ -7,6 +7,7 @@ export const SSCIconNames = {
   times: 'times',
   chevronDown: 'chevron-down',
   arrowUp: 'arrow-up',
+  quoteSquare: 'quote-square',
 } as const;
 
 export const IconTypes = {
