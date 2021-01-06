@@ -1,3 +1,10 @@
+# [1.0.0-alpha.17](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2021-01-06)
+
+
+### Features
+
+* **icons:** add quoteSquare icon ([306fdf2](https://github.com/securityscorecard/design-system/commit/306fdf22066a96d77ed0d0d770c3454e89bfa430))
+
 # [1.0.0-alpha.16](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2021-01-05)
 
 
