@@ -10,4 +10,4 @@ export interface TextProps {
 }
 
 export type CodeProps = Omit<TextProps, 'variant'>;
-export type StrongProps = Omit<TextProps, 'isBold'>;
+export type StrongProps = Omit<TextProps, 'isBold' | 'size'>;
