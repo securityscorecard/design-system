@@ -20,6 +20,6 @@
     "node_modules",
     "build",
     "src/**/*.mdx",
-    "src/**/_*",
+    "src/**/_*"
   ]
 }
