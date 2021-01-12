@@ -3,8 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
-import Tabs from './Tabs';
-import Tab from './Tab';
+import { Tab, Tabs } from '.';
 import { ColorTypes } from '../../theme/colors.enums';
 
 export default {

@@ -5,7 +5,7 @@ export interface LabelProps {
   color: string;
 }
 export interface TabProps {
-  children: string | React.ReactNode;
+  children: React.ReactNode;
   color?: typeof ColorTypes[keyof typeof ColorTypes];
   isSelected: boolean;
   onClick?: (selectedValue: string | number) => void;
@@ -14,6 +14,6 @@ export interface TabProps {
 
 export interface TabsProps {
   selectedValue: string | number;
-  onSelectTab?: (title: string) => void;
+  onSelectTab?: (selectedValue: string | number) => void;
   children: React.ReactNode[];
 }

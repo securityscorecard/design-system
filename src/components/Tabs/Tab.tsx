@@ -18,7 +18,7 @@ const Label = styled.a<LabelProps>`
       $isSelected ? getColor(color) : getColor('graphiteHB')};
 
   &:hover {
-    border-bottom: 2px solid ${({ color }) => color};
+    border-bottom: 2px solid ${({ color }) => getColor(color)};
   }
   &:not(:last-of-type) {
     margin-right: ${pxToRem(30)};
@@ -48,7 +48,7 @@ const Tab: React.FC<TabProps> = ({
 };
 
 Tab.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
   color: PropTypes.oneOf(Object.values(ColorTypes)),
