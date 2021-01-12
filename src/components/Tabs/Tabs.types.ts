@@ -1,4 +1,4 @@
-import { Colors } from '../../theme/colors.types';
+import { ColorTypes } from '../../theme/colors.enums';
 
 export interface LabelProps {
   $isSelected: boolean;
@@ -6,7 +6,7 @@ export interface LabelProps {
 }
 export interface TabProps {
   children: string | React.ReactNode;
-  color?: keyof typeof Colors;
+  color?: typeof ColorTypes[keyof typeof ColorTypes];
   isSelected: boolean;
   onClick?: (selectedValue: string | number) => void;
   value: number | string;
