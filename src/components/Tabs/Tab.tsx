@@ -10,6 +10,8 @@ import { ColorTypes } from '../../theme/colors.enums';
 const Label = styled.a<LabelProps>`
   font-weight: 500;
   font-size: ${pxToRem(18)};
+  color: ${getColor('graphite4B')};
+  text-decoration: none;
   line-height: ${pxToRem(20)};
   padding-bottom: ${pxToRem(3)};
   cursor: pointer;
@@ -17,8 +19,14 @@ const Label = styled.a<LabelProps>`
     ${({ $isSelected, color }) =>
       $isSelected ? getColor(color) : getColor('graphiteHB')};
 
-  &:hover {
+  &:hover,
+  &:focus {
+    color: ${getColor('graphite4B')};
+    text-decoration: none;
     border-bottom: 2px solid ${({ color }) => getColor(color)};
+  }
+  &:visited {
+    color: ${getColor('graphite4B')};
   }
   &:not(:last-of-type) {
     margin-right: ${pxToRem(30)};
