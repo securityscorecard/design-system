@@ -1,3 +1,10 @@
+# [1.0.0-alpha.19](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2021-01-12)
+
+
+### Bug Fixes
+
+* **tabs:** default styles ([54ec35c](https://github.com/securityscorecard/design-system/commit/54ec35cd84d3a181b696898510a2e01377874272))
+
 # [1.0.0-alpha.18](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2021-01-12)
 
 
