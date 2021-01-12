@@ -1,19 +1,19 @@
+import { ColorTypes } from '../../theme/colors.enums';
+
 export interface LabelProps {
-  selected: boolean;
+  $isSelected: boolean;
   color: string;
 }
-
-export interface Tab {
-  title: string;
-  color: string;
-  Component: React.ReactNode;
+export interface TabProps {
+  children: React.ReactNode;
+  color?: typeof ColorTypes[keyof typeof ColorTypes];
+  isSelected: boolean;
+  onClick?: (selectedValue: string | number) => void;
+  value: number | string;
 }
 
 export interface TabsProps {
-  tabs: Tab[];
-  activeTabTitle: string;
-  onSelectTab: (title: string) => void;
-  componentProps: {
-    [key: string]: unknown;
-  };
+  selectedValue: string | number;
+  onSelectTab?: (selectedValue: string | number) => void;
+  children: React.ReactNode[];
 }
