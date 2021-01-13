@@ -1,3 +1,10 @@
+# [1.0.0-alpha.20](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2021-01-13)
+
+
+### Bug Fixes
+
+* **Tabs:** make Link component optional ([ecad7f2](https://github.com/securityscorecard/design-system/commit/ecad7f2db9aa4bb7bbdbbf7c4c60ab1ed2339c6b))
+
 # [1.0.0-alpha.19](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2021-01-12)
 
 
