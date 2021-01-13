@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { createPaddingSpacing } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
 import { Button } from '../../Button';
 import { ButtonVariants } from '../../Button/Button.enums';
@@ -23,7 +23,8 @@ const BatchActionButton = styled(Button).attrs((props) => ({
   variant: ButtonVariants.text,
   ...props,
 }))`
-  ${createPaddingSpacing({ horizontal: 0.8 })}
+  padding-left: ${pxToRem(16)};
+  padding-right: ${pxToRem(16)};
 `;
 
 const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => (
