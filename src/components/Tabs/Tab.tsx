@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { getColor, pxToRem } from '../../utils/helpers';
 import { LabelProps, TabProps } from './Tabs.types';
 import { ColorTypes } from '../../theme/colors.enums';
+import { requireRouterLink } from '../../utils/require-router-link';
 
 const Label = styled.a<LabelProps>`
   font-weight: 500;
@@ -42,11 +42,16 @@ const Tab: React.FC<TabProps> = ({
 }) => {
   const isLink = value?.toString()?.startsWith('/');
   const handler = isLink ? { to: value } : { onClick: () => onClick(value) };
+  let RouterLink = null;
+
+  if (isLink) {
+    RouterLink = requireRouterLink();
+  }
 
   return (
     <Label
       $isSelected={isSelected}
-      as={isLink ? Link : 'a'}
+      as={isLink ? RouterLink : 'a'}
       color={color}
       {...handler}
     >
