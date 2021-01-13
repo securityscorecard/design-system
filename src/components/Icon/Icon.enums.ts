@@ -8,6 +8,7 @@ export const SSCIconNames = {
   chevronDown: 'chevron-down',
   arrowUp: 'arrow-up',
   quoteSquare: 'quote-square',
+  caretDown: 'caret-down',
 } as const;
 
 export const IconTypes = {
