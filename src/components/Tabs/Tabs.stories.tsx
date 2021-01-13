@@ -44,7 +44,7 @@ export const OnlyTabs: Story = () => (
 );
 
 export const StatefulTabs: Story = () => {
-  const [selected, setSelected] = useState('inventory');
+  const [selected, setSelected] = useState<string | number>('inventory');
   return (
     <>
       <Tabs selectedValue={selected} onSelectTab={setSelected}>
