@@ -21,10 +21,6 @@
     "node_modules",
     "build",
     "src/**/*.mdx",
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/**/*.stories.tsx",
-    "src/**/_*",
-    "jest.setup.ts",
+    "src/**/_*"
   ]
 }

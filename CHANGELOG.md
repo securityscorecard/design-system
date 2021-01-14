@@ -1,3 +1,30 @@
+# [1.0.0-alpha.20](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2021-01-13)
+
+
+### Bug Fixes
+
+* **Tabs:** make Link component optional ([ecad7f2](https://github.com/securityscorecard/design-system/commit/ecad7f2db9aa4bb7bbdbbf7c4c60ab1ed2339c6b))
+
+# [1.0.0-alpha.19](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2021-01-12)
+
+
+### Bug Fixes
+
+* **tabs:** default styles ([54ec35c](https://github.com/securityscorecard/design-system/commit/54ec35cd84d3a181b696898510a2e01377874272))
+
+# [1.0.0-alpha.18](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2021-01-12)
+
+
+### Bug Fixes
+
+* **tabs:** cr fixes ([9dc5d52](https://github.com/securityscorecard/design-system/commit/9dc5d52253025154b545d7013b32b757d5b9ac31))
+* **tabs:** types ([4814251](https://github.com/securityscorecard/design-system/commit/4814251fb9d3f7d9b4a100385b2b9103dd877091))
+
+
+### Features
+
+* **tabs:** refactor ([355f581](https://github.com/securityscorecard/design-system/commit/355f5815840a19f582c16e4f25ffac2305dd18e8))
+
 # [1.0.0-alpha.17](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2021-01-06)
 
 

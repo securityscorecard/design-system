@@ -23,6 +23,10 @@ const smallSize = css`
   font-size: ${getFontSize('sm')};
   line-height: ${getLineHeight('md')};
 `;
+const inheritSize = css`
+  font-size: inherit;
+  line-height: inherit;
+`;
 
 const primaryVariant = css`
   color: ${getColor('graphite4B')};
@@ -41,24 +45,24 @@ const dangerVariant = css`
 `;
 
 const sizes = {
-  lg: largeSize,
-  md: mediumSize,
-  sm: smallSize,
+  [TextSizes.lg]: largeSize,
+  [TextSizes.md]: mediumSize,
+  [TextSizes.sm]: smallSize,
+  [TextSizes.inherit]: inheritSize,
 };
 
 const variants = {
-  primary: primaryVariant,
-  secondary: secondaryVariant,
-  context: contextVariant,
-  monospace: monospaceVariant,
-  danger: dangerVariant,
+  [TextVariants.primary]: primaryVariant,
+  [TextVariants.secondary]: secondaryVariant,
+  [TextVariants.context]: contextVariant,
+  [TextVariants.monospace]: monospaceVariant,
+  [TextVariants.danger]: dangerVariant,
 };
 
 const Text = styled.span<TextProps>`
   font-family: inherit;
   font-weight: ${({ isBold, theme }) =>
     isBold ? getFontWeight('bold', { theme }) : 'inherit'};
-  font-size: inherit;
   color: inherit;
   ${({ size }) => sizes[size]};
   ${({ variant }) => variants[variant]};
@@ -81,22 +85,19 @@ export default Text;
 export const Strong = styled(Text).attrs<StrongProps>(() => ({
   as: 'strong',
   isBold: true,
-}))`
-  font-size: inherit;
-`;
+  size: TextSizes.inherit,
+}))``;
 
 Strong.propTypes = {
-  size: PropTypes.oneOf(Object.values(TextSizes)),
   variant: PropTypes.oneOf(Object.values(TextVariants)),
 };
 
 export const Code = styled(Text).attrs<CodeProps>(() => ({
   variant: TextVariants.monospace,
   as: 'code',
-}))`
-  font-size: inherit;
-`;
+}))``;
 
 Code.propTypes = {
   size: PropTypes.oneOf(Object.values(TextSizes)),
+  isBold: PropTypes.bool,
 };

@@ -1,8 +1,8 @@
-// eslint-disable-next-line import/prefer-default-export
 export const TextSizes = {
   lg: 'lg',
   md: 'md',
   sm: 'sm',
+  inherit: 'inherit',
 } as const;
 
 export const TextVariants = {
