@@ -12,3 +12,4 @@ export { times } from './times';
 export { chevronDown } from './chevronDown';
 export { arrowUp } from './arrowUp';
 export { quoteSquare } from './quoteSquare';
+export { caretDown } from './caretDown';
