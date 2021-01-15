@@ -31,7 +31,10 @@ const Popup = styled(FlexContainer)`
   transform: translateY(-50%);
 `;
 
-const RemoveButton = styled(FlexContainer)`
+const RemoveButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   padding: ${pxToRem(8, 5.5)};
   cursor: pointer;
@@ -65,9 +68,6 @@ const StateButton: React.FC<StateButtonProps> = ({
   } = useStateButtonIcon(isFilterApplied);
   return (
     <RemoveButton
-      alignItems="center"
-      as="button"
-      justifyContent="center"
       onClick={() => onClick(id)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
