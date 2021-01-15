@@ -21,7 +21,8 @@ const Popup = styled(FlexContainer)`
   z-index: ${getDepth('tooltip')};
   padding: ${pxToRem(8.5, 0, 8.5, 10)};
   background: ${getColor('strawberry')};
-  border-radius: ${getBorderRadius} 0 0 ${getBorderRadius};
+  border-top-left-radius: ${getBorderRadius};
+  border-bottom-left-radius: ${getBorderRadius};
   opacity: 0;
   right: calc(100%);
   top: 50%;
@@ -34,7 +35,8 @@ const RemoveButton = styled(FlexContainer)`
   cursor: pointer;
   &:hover {
     background-color: ${getColor('strawberry')};
-    border-radius: 0 ${getBorderRadius} ${getBorderRadius} 0;
+    border-top-right-radius: ${getBorderRadius};
+    border-bottom-right-radius: ${getBorderRadius};
   }
   &:hover ${Popup} {
     visibility: visible;
