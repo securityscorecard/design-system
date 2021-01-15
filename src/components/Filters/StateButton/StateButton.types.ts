@@ -1,5 +1,5 @@
 export interface StateButtonProps {
-  uuid: string;
-  onClick: (uuid: string) => void;
+  id: string;
+  onClick: (id: string) => void;
   isFilterApplied?: boolean;
 }

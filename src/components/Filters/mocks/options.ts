@@ -4,7 +4,7 @@ import { FilterRow } from '../Filters.types';
 
 export const optionsMock: FilterRow[] = [
   {
-    uuid: 'PtpHvE',
+    id: 'PtpHvE',
     conditionOptions: [
       { value: 'equal to', label: 'is' },
       { value: 'not equal to', label: 'is not' },
@@ -33,7 +33,7 @@ export const optionsMock: FilterRow[] = [
     onRemove: action('OnRemove'),
   },
   {
-    uuid: 'au4By4',
+    id: 'au4By4',
     conditionOptions: [
       { value: 'equal to', label: 'is' },
       { value: 'not equal to', label: 'is not' },

@@ -31,7 +31,7 @@ const SplitField = styled.div`
 `;
 
 const FilterRow: React.FC<FilterRowProps> = ({
-  uuid,
+  id,
   conditionOptions,
   dataOptions,
   isFilterApplied,
@@ -39,11 +39,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   onRemove,
 }) => (
   <Container>
-    <StateButton
-      isFilterApplied={isFilterApplied}
-      uuid={uuid}
-      onClick={onRemove}
-    />
+    <StateButton id={id} isFilterApplied={isFilterApplied} onClick={onRemove} />
     <SplitField width={72}>
       {isFirstRow ? (
         <WhereOption />
@@ -66,7 +62,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
 export default FilterRow;
 
 FilterRow.propTypes = {
-  uuid: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   conditionOptions: PropTypes.arrayOf(OptionPropType).isRequired,
   dataOptions: PropTypes.arrayOf(OptionPropType).isRequired,
   onRemove: PropTypes.func.isRequired,

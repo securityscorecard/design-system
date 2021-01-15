@@ -1,7 +1,7 @@
 import { Option } from './Select/Select.types';
 
 export interface FilterRow {
-  uuid: string;
+  id: string;
   conditionOptions: Option[];
   dataOptions: Option[];
   onRemove: () => void;
