@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 
 import BatchActions from './BatchActions';
-import { actionsMock } from '../mocks/actions';
+import { actionsMock } from '../../mocks/actions';
 import { BatchActionsProps } from './BatchActions.types';
 
 export default {
