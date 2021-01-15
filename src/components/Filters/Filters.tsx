@@ -16,14 +16,14 @@ const Filters: React.FC<FilterProps> = ({ options }) => (
 
 export default Filters;
 
-const RowPropType = PropTypes.exact({
-  uuid: PropTypes.string.isRequired,
-  conditionOptions: PropTypes.arrayOf(OptionPropType).isRequired,
-  dataOptions: PropTypes.arrayOf(OptionPropType).isRequired,
-  onRemove: PropTypes.func.isRequired,
-  isFilterApplied: PropTypes.bool,
-});
-
 Filters.propTypes = {
-  options: PropTypes.arrayOf(RowPropType).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.exact({
+      uuid: PropTypes.string.isRequired,
+      conditionOptions: PropTypes.arrayOf(OptionPropType).isRequired,
+      dataOptions: PropTypes.arrayOf(OptionPropType).isRequired,
+      onRemove: PropTypes.func.isRequired,
+      isFilterApplied: PropTypes.bool,
+    }),
+  ).isRequired,
 };
