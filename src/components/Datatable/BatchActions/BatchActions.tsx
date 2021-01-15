@@ -23,8 +23,9 @@ const BatchActionButton = styled(Button).attrs((props) => ({
   variant: ButtonVariants.text,
   ...props,
 }))`
-  padding-left: ${pxToRem(16)};
-  padding-right: ${pxToRem(16)};
+  padding: ${pxToRem(9.5, 16)};
+  line-height: ${pxToRem(13)};
+  height: ${pxToRem(32)};
 `;
 
 const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => (
