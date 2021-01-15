@@ -49,7 +49,7 @@ const LightText = styled(Text)`
 `;
 
 const StateButton: React.FC<StateButtonProps> = ({
-  uuid,
+  id,
   onClick,
   isFilterApplied = false,
 }) => {
@@ -64,7 +64,7 @@ const StateButton: React.FC<StateButtonProps> = ({
       alignItems="center"
       as="button"
       justifyContent="center"
-      onClick={() => onClick(uuid)}
+      onClick={() => onClick(id)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
     >
@@ -84,7 +84,7 @@ const StateButton: React.FC<StateButtonProps> = ({
 export default StateButton;
 
 StateButton.propTypes = {
-  uuid: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   isFilterApplied: PropTypes.bool,
 };
