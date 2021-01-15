@@ -10,6 +10,8 @@ import {
   getBorderRadius,
   getColor,
   getDepth,
+  getFontWeight,
+  getLineHeight,
   pxToRem,
 } from '../../../utils/helpers';
 import { StateButtonProps } from './StateButton.types';
@@ -46,8 +48,8 @@ const RemoveButton = styled(FlexContainer)`
 
 const LightText = styled(Text)`
   color: ${getColor('graphite5H')};
-  line-height: ${pxToRem(15)};
-  font-weight: 500;
+  line-height: ${getLineHeight('md')};
+  font-weight: ${getFontWeight('medium')};
 `;
 
 const StateButton: React.FC<StateButtonProps> = ({
