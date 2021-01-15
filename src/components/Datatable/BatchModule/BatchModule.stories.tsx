@@ -3,6 +3,8 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 
 import { actionsMock } from '../mocks/actions';
+import { ElementCounter } from './ElementCounter';
+import { BatchActions } from './BatchActions';
 import BatchModule from './BatchModule';
 import { BatchModuleProps } from './BatchModule.types';
 
@@ -10,6 +12,7 @@ export default {
   title: 'components/Datatable/components/BatchModule',
   component: BatchModule,
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
+  subcomponents: { ElementCounter, BatchActions },
 } as Meta;
 
 export const playground: Story<BatchModuleProps> = (args) => (

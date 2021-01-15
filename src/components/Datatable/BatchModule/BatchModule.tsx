@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { FlexContainer } from '../../FlexContainer';
-import { BatchActions } from '../BatchActions';
-import { ElementCounter } from '../ElementCounter';
+import { BatchActions } from './BatchActions';
+import { ElementCounter } from './ElementCounter';
 import { BatchModuleProps } from './BatchModule.types';
 
 const BatchModule: React.FC<BatchModuleProps> = ({
