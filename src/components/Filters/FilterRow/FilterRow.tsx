@@ -19,8 +19,8 @@ const Container = styled(FlexContainer)`
   }
 `;
 
-const SplitField = styled.div`
-  width: ${({ width }: SplitFieldProps) => pxToRem(width)};
+const SplitField = styled.div<SplitFieldProps>`
+  width: ${({ width }) => pxToRem(width)};
   margin-right: ${pxToRem(6)};
   &:first-of-type {
     margin-left: ${pxToRem(6)};
