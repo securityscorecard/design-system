@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import numeral from 'numeral';
 
-import { H3, Text } from '../../typography';
+import { H3, Text } from '../../../typography';
+import { HeadingVariants } from '../../../typography/Heading/Heading.enums';
+import { TextSizes, TextVariants } from '../../../typography/Text/Text.enums';
 import { ElementCounterProps } from './ElementCounter.types';
-import { HeadingVariants } from '../../typography/Heading/Heading.enums';
-import { TextSizes, TextVariants } from '../../typography/Text/Text.enums';
 
 const LightText: React.FC = ({ children }) => (
   <Text size={TextSizes.inherit} variant={TextVariants.context}>
