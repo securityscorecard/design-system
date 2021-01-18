@@ -13,8 +13,8 @@ export default {
 } as Meta;
 
 const toolActions = {
-  activateTool: action('ToolBarItem-Activiate-Tool'),
-  deactivateTool: action('ToolBarItem-Deactiviate-Tool'),
+  onToolActivate: action('ToolsTabItem-Activate'),
+  onToolDeactivate: action('ToolsTabItem-Deactivate'),
 };
 
 export const ToolsTabBar: Story = () => (
