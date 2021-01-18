@@ -1,8 +1,16 @@
 import { action } from '@storybook/addon-actions';
 
 import { FilterRow } from '../Filters.types';
+import { Option } from '../Select/Select.types';
+import { InputTypes } from '../Filters.enums';
 
-export const optionsMock: FilterRow[] = [
+export const dataOptionsMock: Option[] = [
+  { value: 'pistachio', label: 'Pistachio' },
+  { value: 'lemon', label: 'Lemon' },
+  { value: 'smurf', label: 'Smurf' },
+];
+
+export const rowsMock: FilterRow[] = [
   {
     id: 'PtpHvE',
     conditionOptions: [
@@ -25,12 +33,10 @@ export const optionsMock: FilterRow[] = [
       { value: 'not within next', label: 'not within next' },
       { value: 'between', label: 'between' },
     ],
-    dataOptions: [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' },
-    ],
+    defaultCondition: { value: 'contains', label: 'contains' },
     onRemove: action('OnRemove'),
+    inputType: InputTypes.string,
+    onAdd: action('OnAdd'),
   },
   {
     id: 'au4By4',
@@ -40,12 +46,13 @@ export const optionsMock: FilterRow[] = [
       { value: 'contains', label: 'contains' },
       { value: 'does not contain', label: 'does not contain' },
     ],
-    dataOptions: [
-      { value: 'pistachio', label: 'Pistachio' },
-      { value: 'lemon', label: 'Lemon' },
-      { value: 'smurf', label: 'Smurf' },
+    onRemove: action('OnRemove'),
+    inputType: InputTypes.enum,
+    enumOptions: [
+      { value: 'ice', label: 'Ice' },
+      { value: 'cream', label: 'Cream' },
     ],
     isFilterApplied: true,
-    onRemove: action('OnRemove'),
+    onAdd: action('OnAdd'),
   },
 ];

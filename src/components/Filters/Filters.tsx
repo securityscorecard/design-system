@@ -5,11 +5,18 @@ import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { FilterProps } from './Filters.types';
 import { OptionPropType } from './Select/Select.types';
+import { InputTypes } from './Filters.enums';
 
-const Filters: React.FC<FilterProps> = ({ options }) => (
+const Filters: React.FC<FilterProps> = ({ dataOptions, rows }) => (
   <FlexContainer flexDirection="column">
-    {options.map(({ id, ...rest }, index) => (
-      <FilterRow key={id} id={id} isFirstRow={index === 0} {...rest} />
+    {rows.map(({ id, ...rest }, index) => (
+      <FilterRow
+        key={id}
+        dataOptions={dataOptions}
+        id={id}
+        isFirstRow={index === 0}
+        {...rest}
+      />
     ))}
   </FlexContainer>
 );
@@ -17,13 +24,17 @@ const Filters: React.FC<FilterProps> = ({ options }) => (
 export default Filters;
 
 Filters.propTypes = {
-  options: PropTypes.arrayOf(
+  dataOptions: PropTypes.arrayOf(OptionPropType).isRequired,
+  rows: PropTypes.arrayOf(
     PropTypes.exact({
       id: PropTypes.string.isRequired,
       conditionOptions: PropTypes.arrayOf(OptionPropType).isRequired,
-      dataOptions: PropTypes.arrayOf(OptionPropType).isRequired,
       onRemove: PropTypes.func.isRequired,
+      inputType: PropTypes.oneOf(Object.values(InputTypes)).isRequired,
+      defaultCondition: OptionPropType,
+      enumOptions: PropTypes.arrayOf(OptionPropType),
       isFilterApplied: PropTypes.bool,
+      onAdd: PropTypes.func,
     }),
   ).isRequired,
 };

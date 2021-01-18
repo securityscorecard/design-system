@@ -1,3 +1,4 @@
+import { Option } from '../Select/Select.types';
 import { FilterRow } from '../Filters.types';
 
 export interface SplitFieldProps {
@@ -5,6 +6,6 @@ export interface SplitFieldProps {
 }
 
 export interface FilterRowProps extends FilterRow {
-  isFilterApplied?: boolean;
+  dataOptions: Option[];
   isFirstRow?: boolean;
 }

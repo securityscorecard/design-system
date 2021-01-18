@@ -9,6 +9,7 @@ import { Input } from '../Input';
 import { WhereOption } from '../WhereOption';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { OptionPropType } from '../Select/Select.types';
+import { InputTypes } from '../Filters.enums';
 import { pxToRem } from '../../../utils/helpers';
 import operatorOptions from '../data/operator-options.json';
 
@@ -33,10 +34,17 @@ const SplitField = styled.div<SplitFieldProps>`
 const FilterRow: React.FC<FilterRowProps> = ({
   id,
   conditionOptions,
+  defaultCondition,
   dataOptions,
   isFilterApplied,
   isFirstRow,
   onRemove,
+  // FIXME use vars
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  inputType,
+  enumOptions,
+  onAdd,
+  /* eslint-enable */
 }) => (
   <Container>
     <StateButton id={id} isFilterApplied={isFilterApplied} onClick={onRemove} />
@@ -51,7 +59,10 @@ const FilterRow: React.FC<FilterRowProps> = ({
       <Select defaultValue={dataOptions[0]} options={dataOptions} />
     </SplitField>
     <SplitField width={144}>
-      <Select defaultValue={conditionOptions[0]} options={conditionOptions} />
+      <Select
+        defaultValue={defaultCondition || conditionOptions[0]}
+        options={conditionOptions}
+      />
     </SplitField>
     <SplitField width={266}>
       <Input />
@@ -63,9 +74,13 @@ export default FilterRow;
 
 FilterRow.propTypes = {
   id: PropTypes.string.isRequired,
-  conditionOptions: PropTypes.arrayOf(OptionPropType).isRequired,
   dataOptions: PropTypes.arrayOf(OptionPropType).isRequired,
+  conditionOptions: PropTypes.arrayOf(OptionPropType).isRequired,
+  inputType: PropTypes.oneOf(Object.values(InputTypes)).isRequired,
   onRemove: PropTypes.func.isRequired,
+  defaultCondition: OptionPropType,
+  enumOptions: PropTypes.arrayOf(OptionPropType),
   isFilterApplied: PropTypes.bool,
   isFirstRow: PropTypes.bool,
+  onAdd: PropTypes.func,
 };
