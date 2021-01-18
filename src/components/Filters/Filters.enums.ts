@@ -1,10 +1,10 @@
 export const InputTypes = {
   string: 'string',
   multipleString: 'multipleString',
-  uint: 'uint',
-  int: 'int',
+  count: 'count',
+  number: 'number',
   enum: 'enum',
   multipleEnum: 'multipleEnum',
   date: 'date',
-  timeInterval: 'timeInterval',
+  dateInterval: 'dateInterval',
 } as const;
