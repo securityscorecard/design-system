@@ -4,83 +4,87 @@ import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 
 import { SpacingSizeValuePropType } from '../../../types/spacing.types';
-import { getColor, pxToRem } from '../../../utils/helpers';
+import {
+  createMarginSpacing,
+  getColor,
+  getFontSize,
+  getFontWeight,
+  getLineHeight,
+  pxToRem,
+} from '../../../utils/helpers';
 import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
 import { SSCIcons, Types } from '../../Icon/Icon.types';
-import Button from '../../Button/Button';
 import StyledIcon from '../../Button/StyledIcon';
 import { ButtonSizes } from '../../Button/Button.enums';
 import { ToolsTabItemProps } from './ToolsTabItem.types';
 import { ToolsTabItemStates } from './ToolsTabItem.enum';
 
-const DefaultToolsTabItem = styled(Button)`
-  &&& {
-    padding: ${pxToRem(9, 12)};
-    color: ${getColor('graphite2B')};
-    &:focus:not(:disabled),
-    &:hover:not(:disabled),
-    &:not([href]):not([tabindex]):not(:disabled):hover,
-    &.hover,
-    &.focus {
-      color: ${getColor('graphite4B')};
-      svg {
-        color: ${getColor('graphite2B')};
-      }
-    }
-  }
-`;
+const DefaultToolsTabItem = styled.button`
+  height: ${pxToRem(32)};
+  line-height: ${getLineHeight('md')};
+  font-size: ${getFontSize('md')};
+  font-weight: ${getFontWeight('medium')};
 
-const ActiveToolsTabItem = styled(Button)`
-  &&& {
-    padding: ${pxToRem(6, 12)};
-    background-color: ${getColor('graphite5H')};
-    color: ${getColor('blueberryClassic')};
-    border-radius: ${pxToRem(20)};
-    border-color: ${getColor('blueberryClassic')};
-    border-width: 2px;
-    border-style: solid;
-
-    &:focus:not(:disabled),
-    &:hover:not(:disabled),
-    &:not([href]):not([tabindex]):not(:disabled):hover,
-    &.hover,
-    &.focus {
-      background-color: ${getColor('graphite5H')};
-      color: ${getColor('radiantBlueberry')};
-      border-color: ${getColor('radiantBlueberry')};
-    }
-  }
-`;
-
-const AppliedToolsTabItem = styled(Button)`
-  &&& {
-    padding: ${pxToRem(9, 12)};
-    color: ${getColor('graphite2B')};
-
+  padding: ${pxToRem(6, 12)};
+  ${({ margin }) => createMarginSpacing(margin)};
+  color: ${getColor('graphite2B')};
+  border: 2px solid transparent;
+  &:focus:not(:disabled),
+  &:hover:not(:disabled),
+  &:not([href]):not([tabindex]):not(:disabled):hover,
+  &.hover,
+  &.focus {
+    color: ${getColor('graphite4B')};
     svg {
-      color: ${getColor('blueberryClassic')};
-    }
-
-    &:focus:not(:disabled),
-    &:hover:not(:disabled),
-    &:not([href]):not([tabindex]):not(:disabled):hover,
-    &.hover,
-    &.focus {
-      color: ${getColor('graphite4B')};
-      svg {
-        color: ${getColor('radiantBlueberry')};
-      }
+      color: ${getColor('graphite2B')};
     }
   }
 `;
 
-const ToolsTabItem: React.FC<
-  ToolsTabItemProps & React.ComponentProps<typeof Button>
-> = ({
+const ActiveToolsTabItem = styled(DefaultToolsTabItem)`
+  background-color: ${getColor('graphite5H')};
+  color: ${getColor('blueberryClassic')};
+  border-radius: ${pxToRem(20)};
+  border-color: ${getColor('blueberryClassic')};
+
+  &:focus:not(:disabled),
+  &:hover:not(:disabled),
+  &:not([href]):not([tabindex]):not(:disabled):hover,
+  &.hover,
+  &.focus {
+    background-color: ${getColor('graphite5H')};
+    color: ${getColor('radiantBlueberry')};
+    border-color: ${getColor('radiantBlueberry')};
+    svg {
+      color: ${getColor('radiantBlueberry')};
+    }
+  }
+`;
+
+const AppliedToolsTabItem = styled(DefaultToolsTabItem)`
+  color: ${getColor('graphite2B')};
+
+  svg {
+    color: ${getColor('blueberryClassic')};
+  }
+
+  &:focus:not(:disabled),
+  &:hover:not(:disabled),
+  &:not([href]):not([tabindex]):not(:disabled):hover,
+  &.hover,
+  &.focus {
+    color: ${getColor('graphite4B')};
+    svg {
+      color: ${getColor('radiantBlueberry')};
+    }
+  }
+`;
+
+const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   children,
   itemState = ToolsTabItemStates.default,
-  activateTool = noop,
-  deactivateTool = noop,
+  onToolActivate = noop,
+  onToolDeactivate = noop,
   iconName,
   iconType = IconTypes.ssc,
   margin = 'none',
@@ -89,26 +93,14 @@ const ToolsTabItem: React.FC<
 }) => {
   const [currentItemState, setCurrentItemState] = useState(itemState);
 
-  const commonProps = {
-    size: ButtonSizes.sm,
-    variant: 'text',
-    margin,
-    ...props,
-  };
-
-  const onClickDefault = () => {
-    activateTool();
+  const onClickNotActive = () => {
+    onToolActivate();
     setCurrentItemState(ToolsTabItemStates.active);
   };
 
   const onClickActive = () => {
-    deactivateTool();
+    onToolDeactivate();
     setCurrentItemState(ToolsTabItemStates.applied);
-  };
-
-  const onClickApplied = () => {
-    activateTool();
-    setCurrentItemState(ToolsTabItemStates.active);
   };
 
   const content = isNotUndefined(iconName) ? (
@@ -120,11 +112,16 @@ const ToolsTabItem: React.FC<
     children
   );
 
+  const commonProps = {
+    margin,
+    ...props,
+  };
+
   return (
     <>
       {!isDisabled &&
         (currentItemState === ToolsTabItemStates.applied ? (
-          <AppliedToolsTabItem onClick={onClickApplied} {...commonProps}>
+          <AppliedToolsTabItem onClick={onClickNotActive} {...commonProps}>
             {content}
           </AppliedToolsTabItem>
         ) : currentItemState === ToolsTabItemStates.active ? (
@@ -132,7 +129,7 @@ const ToolsTabItem: React.FC<
             {content}
           </ActiveToolsTabItem>
         ) : (
-          <DefaultToolsTabItem onClick={onClickDefault} {...commonProps}>
+          <DefaultToolsTabItem onClick={onClickNotActive} {...commonProps}>
             {content}
           </DefaultToolsTabItem>
         ))}
@@ -142,8 +139,6 @@ const ToolsTabItem: React.FC<
 
 ToolsTabItem.propTypes = {
   itemState: PropTypes.oneOf(Object.values(ToolsTabItemStates)),
-  activateTool: PropTypes.func,
-  deactivateTool: PropTypes.func,
   iconName: PropTypes.oneOfType([
     PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
     PropTypes.string,
@@ -155,6 +150,8 @@ ToolsTabItem.propTypes = {
   margin: SpacingSizeValuePropType,
   isDisabled: PropTypes.bool,
   className: PropTypes.string,
+  onToolActivate: PropTypes.func,
+  onToolDeactivate: PropTypes.func,
 };
 
 export default ToolsTabItem;

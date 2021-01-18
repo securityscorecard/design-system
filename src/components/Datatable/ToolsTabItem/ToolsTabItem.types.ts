@@ -1,12 +1,16 @@
-import { ButtonProps } from '../../Button/Button.types';
+import { Types as IconTypes, SSCIcons } from '../../Icon/Icon.types';
+import { SpacingSizeValue } from '../../../types/spacing.types';
 import { ToolsTabItemStates } from './ToolsTabItem.enum';
 
 export type ItemStates = typeof ToolsTabItemStates[keyof typeof ToolsTabItemStates];
 
-export interface ToolsTabItemProps extends ButtonProps {
+export interface ToolsTabItemProps {
   itemState?: ItemStates;
-  activateTool: React.MouseEventHandler;
-  deactivateTool: React.MouseEventHandler;
+  onToolActivate: React.MouseEventHandler;
+  onToolDeactivate: React.MouseEventHandler;
+  iconName?: SSCIcons | string;
+  iconType?: IconTypes | string;
+  margin?: SpacingSizeValue;
   isDisabled: never;
   disabled?: boolean;
 }
