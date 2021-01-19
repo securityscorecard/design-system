@@ -3,18 +3,26 @@ import { InputTypes } from './Filters.enums';
 
 type InputValueTypes = typeof InputTypes[keyof typeof InputTypes];
 
-export interface FilterRow {
-  id: string;
-  conditionOptions: Option[];
-  defaultCondition?: Option;
-  onRemove: () => void;
+type Condition = {
+  option: Option;
   inputType: InputValueTypes;
   enumOptions?: Option[];
-  isFilterApplied?: boolean;
+};
+
+export interface FilterRow {
+  id: string;
+  conditions: Condition[];
+  onRemove: () => void;
   onAdd?: () => void;
+  isFilterApplied?: boolean;
+}
+
+export interface DataPoint {
+  option: Option;
+  defaultCondition: Option;
 }
 
 export interface FilterProps {
-  dataOptions: Option[];
+  dataPoints: DataPoint[];
   rows: FilterRow[];
 }
