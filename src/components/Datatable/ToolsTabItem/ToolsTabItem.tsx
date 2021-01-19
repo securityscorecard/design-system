@@ -82,7 +82,7 @@ const AppliedToolsTabItem = styled(DefaultToolsTabItem)`
 
 const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   children,
-  itemState = ToolsTabItemStates.default,
+  toolState = ToolsTabItemStates.default,
   onToolActivate = noop,
   onToolDeactivate = noop,
   iconName,
@@ -91,16 +91,16 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   isDisabled = false,
   ...props
 }) => {
-  const [currentItemState, setCurrentItemState] = useState(itemState);
+  const [currentToolState, setCurrentToolState] = useState(toolState);
 
   const onClickNotActive = (event) => {
     onToolActivate(event);
-    setCurrentItemState(ToolsTabItemStates.active);
+    setCurrentToolState(ToolsTabItemStates.active);
   };
 
   const onClickActive = (event) => {
     onToolDeactivate(event);
-    setCurrentItemState(ToolsTabItemStates.applied);
+    setCurrentToolState(ToolsTabItemStates.applied);
   };
 
   const content = isNotUndefined(iconName) ? (
@@ -120,11 +120,11 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   return (
     <>
       {!isDisabled &&
-        (currentItemState === ToolsTabItemStates.applied ? (
+        (currentToolState === ToolsTabItemStates.applied ? (
           <AppliedToolsTabItem onClick={onClickNotActive} {...commonProps}>
             {content}
           </AppliedToolsTabItem>
-        ) : currentItemState === ToolsTabItemStates.active ? (
+        ) : currentToolState === ToolsTabItemStates.active ? (
           <ActiveToolsTabItem onClick={onClickActive} {...commonProps}>
             {content}
           </ActiveToolsTabItem>
@@ -138,7 +138,7 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
 };
 
 ToolsTabItem.propTypes = {
-  itemState: PropTypes.oneOf(Object.values(ToolsTabItemStates)),
+  toolState: PropTypes.oneOf(Object.values(ToolsTabItemStates)),
   iconName: PropTypes.oneOfType([
     PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
     PropTypes.string,
