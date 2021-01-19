@@ -22,21 +22,21 @@ export const ToolsTabBar: Story = () => (
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.default}
+        toolState={ToolsTabItemStates.default}
         {...toolActions}
       >
         Default
       </ToolsTabItem>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.active}
+        toolState={ToolsTabItemStates.active}
         {...toolActions}
       >
         Active
       </ToolsTabItem>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.applied}
+        toolState={ToolsTabItemStates.applied}
         {...toolActions}
       >
         Applied
@@ -67,7 +67,7 @@ export const ToolsTabItemsActive: Story = () => (
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.active}
+        toolState={ToolsTabItemStates.active}
         {...toolActions}
         margin={{ right: 0.25 }}
       >
@@ -75,7 +75,7 @@ export const ToolsTabItemsActive: Story = () => (
       </ToolsTabItem>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.active}
+        toolState={ToolsTabItemStates.active}
         {...toolActions}
         className="hover"
       >
@@ -90,14 +90,14 @@ export const ToolsTabItemsApplied: Story = () => (
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.applied}
+        toolState={ToolsTabItemStates.applied}
         {...toolActions}
       >
         Filter
       </ToolsTabItem>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
-        itemState={ToolsTabItemStates.applied}
+        toolState={ToolsTabItemStates.applied}
         {...toolActions}
         className="hover"
       >
