@@ -16,10 +16,10 @@ import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
 import { SSCIcons, Types } from '../../Icon/Icon.types';
 import StyledIcon from '../../Button/StyledIcon';
 import { ButtonSizes } from '../../Button/Button.enums';
-import { ToolsTabItemProps } from './ToolsTabItem.types';
+import { ToolsTabButtonProps, ToolsTabItemProps } from './ToolsTabItem.types';
 import { ToolsTabItemStates } from './ToolsTabItem.enum';
 
-const DefaultToolsTabItem = styled.button`
+const DefaultToolsTabItem = styled.button<ToolsTabButtonProps>`
   height: ${pxToRem(32)};
   line-height: ${getLineHeight('md')};
   font-size: ${getFontSize('md')};
@@ -93,13 +93,13 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
 }) => {
   const [currentItemState, setCurrentItemState] = useState(itemState);
 
-  const onClickNotActive = () => {
-    onToolActivate();
+  const onClickNotActive = (event) => {
+    onToolActivate(event);
     setCurrentItemState(ToolsTabItemStates.active);
   };
 
-  const onClickActive = () => {
-    onToolDeactivate();
+  const onClickActive = (event) => {
+    onToolDeactivate(event);
     setCurrentItemState(ToolsTabItemStates.applied);
   };
 

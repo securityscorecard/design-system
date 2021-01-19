@@ -11,6 +11,11 @@ export interface ToolsTabItemProps {
   iconName?: SSCIcons | string;
   iconType?: IconTypes | string;
   margin?: SpacingSizeValue;
-  isDisabled: never;
-  disabled?: boolean;
+  isDisabled?: boolean;
+  className?: string;
+}
+
+export interface ToolsTabButtonProps
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size'> {
+  margin?: SpacingSizeValue;
 }
