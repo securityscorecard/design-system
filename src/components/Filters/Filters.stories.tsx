@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { FlexContainer } from '../FlexContainer';
 import Filters from './Filters';
-import { dataOptionsMock, rowsMock } from './mocks/options';
+import { dataPointsMock, rowsMock } from './mocks/options';
 
 export default {
   component: Filters,
@@ -12,6 +12,6 @@ export default {
 
 export const DefaultFilters: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
-    <Filters dataOptions={dataOptionsMock} rows={rowsMock} />
+    <Filters dataPoints={dataPointsMock} rows={rowsMock} />
   </FlexContainer>
 );

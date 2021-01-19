@@ -1,11 +1,10 @@
-import { Option } from '../Select/Select.types';
-import { FilterRow } from '../Filters.types';
+import { DataPoint, FilterRow } from '../Filters.types';
 
 export interface SplitFieldProps {
   width?: number;
 }
 
 export interface FilterRowProps extends FilterRow {
-  dataOptions: Option[];
+  dataPoints: DataPoint[];
   isFirstRow?: boolean;
 }
