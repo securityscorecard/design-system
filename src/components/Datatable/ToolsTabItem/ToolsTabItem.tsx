@@ -117,23 +117,30 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
     ...props,
   };
 
+  if (isDisabled) {
+    return null;
+  }
+
+  if (currentToolState === ToolsTabItemStates.applied) {
+    return (
+      <AppliedToolsTabItem onClick={onClickNotActive} {...commonProps}>
+        {content}
+      </AppliedToolsTabItem>
+    );
+  }
+
+  if (currentToolState === ToolsTabItemStates.active) {
+    return (
+      <ActiveToolsTabItem onClick={onClickActive} {...commonProps}>
+        {content}
+      </ActiveToolsTabItem>
+    );
+  }
+
   return (
-    <>
-      {!isDisabled &&
-        (currentToolState === ToolsTabItemStates.applied ? (
-          <AppliedToolsTabItem onClick={onClickNotActive} {...commonProps}>
-            {content}
-          </AppliedToolsTabItem>
-        ) : currentToolState === ToolsTabItemStates.active ? (
-          <ActiveToolsTabItem onClick={onClickActive} {...commonProps}>
-            {content}
-          </ActiveToolsTabItem>
-        ) : (
-          <DefaultToolsTabItem onClick={onClickNotActive} {...commonProps}>
-            {content}
-          </DefaultToolsTabItem>
-        ))}
-    </>
+    <DefaultToolsTabItem onClick={onClickNotActive} {...commonProps}>
+      {content}
+    </DefaultToolsTabItem>
   );
 };
 
