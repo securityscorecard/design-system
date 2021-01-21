@@ -7,5 +7,4 @@ export interface SplitFieldProps {
 export interface FilterRowProps extends Filter {
   id: string;
   dataPoints: DataPoint[];
-  isFirstRow?: boolean;
 }
