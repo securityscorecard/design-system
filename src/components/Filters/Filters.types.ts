@@ -40,7 +40,7 @@ export interface Filter {
 
 export interface FiltersProps {
   dataPoints: DataPoint[];
-  value: Filter[];
+  data: Filter[];
   onApply: (filters: Filter[]) => void;
   onChange?: (filters: Filter[]) => void;
 }

@@ -37,7 +37,7 @@ export const dataPointsMock: DataPoint[] = [
   },
 ];
 
-export const valueMock: Filter[] = [
+export const dataMock: Filter[] = [
   {
     operator: Operators.where,
     dataPoint: 'pistachio',
