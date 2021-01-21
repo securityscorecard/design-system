@@ -48,7 +48,7 @@ export interface FiltersProps {
 export const DataPointPropTypes = PropTypes.exact({
   conditions: PropTypes.arrayOf(
     PropTypes.exact({
-      input: PropTypes.oneOf([
+      input: PropTypes.oneOfType([
         PropTypes.node,
         PropTypes.exact({
           type: PropTypes.node,
