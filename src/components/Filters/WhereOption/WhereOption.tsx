@@ -9,7 +9,6 @@ import { getBorderRadius, getColor, pxToRem } from '../../../utils/helpers';
 const Container = styled(FlexContainer)`
   background: ${getColor('graphite3H')};
   border-radius: ${getBorderRadius};
-  width: '100%';
   height: ${pxToRem(32)};
   padding: ${pxToRem(8, 16)};
 `;
