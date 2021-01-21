@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { pluck } from 'ramda';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
@@ -9,10 +8,9 @@ import { Select } from '../Select';
 import { Input } from '../Input';
 import { WhereOption } from '../WhereOption';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
-import { OptionPropType } from '../Select/Select.types';
-import { InputTypes } from '../Filters.enums';
+import { DataPointPropTypes } from '../Filters.types';
+import { Operators } from '../Filters.enums';
 import { pxToRem } from '../../../utils/helpers';
-import operatorOptions from '../data/operator-options.json';
 
 const Container = styled(FlexContainer)`
   margin-bottom: ${pxToRem(8)};
@@ -32,47 +30,39 @@ const SplitField = styled.div<SplitFieldProps>`
   }
 `;
 
-const getOptions = pluck('option');
-
 const FilterRow: React.FC<FilterRowProps> = ({
   id,
+  operator,
+  // TODO implement logic
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   dataPoints,
-  conditions,
-  isFilterApplied,
-  isFirstRow,
-  onRemove,
-  // FIXME use vars
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onAdd,
+  dataPoint,
+  condition,
+  input,
+  /* eslint-enable */
 }) => {
-  const dataPointsOptions = getOptions(dataPoints);
-  const conditionsOptions = getOptions(conditions);
-
   return (
     <Container>
       <StateButton
         id={id}
-        isFilterApplied={isFilterApplied}
-        onClick={onRemove}
+        // eslint-disable-next-line no-console
+        onClick={(filterId) => console.log(`Remove ${filterId}`)}
       />
       <SplitField width={72}>
-        {isFirstRow ? (
+        {operator === Operators.where ? (
           <WhereOption />
         ) : (
-          <Select defaultValue={operatorOptions[0]} options={operatorOptions} />
+          <Select
+            defaultValue={[{ value: 'and', label: 'And' }]}
+            options={[{ value: 'and', label: 'And' }]}
+          />
         )}
       </SplitField>
       <SplitField width={200}>
-        <Select
-          defaultValue={dataPointsOptions[0]}
-          options={dataPointsOptions}
-        />
+        <Select options={[{ value: 'test', label: 'Test' }]} />
       </SplitField>
       <SplitField width={144}>
-        <Select
-          defaultValue={conditionsOptions[0]}
-          options={conditionsOptions}
-        />
+        <Select options={[{ value: 'test', label: 'Test' }]} />
       </SplitField>
       <SplitField width={266}>
         <Input />
@@ -85,26 +75,9 @@ export default FilterRow;
 
 FilterRow.propTypes = {
   id: PropTypes.string.isRequired,
-  dataPoints: PropTypes.arrayOf(
-    PropTypes.exact({
-      // eslint-disable-next-line react/no-unused-prop-types
-      option: OptionPropType.isRequired,
-      // eslint-disable-next-line react/no-unused-prop-types
-      defaultCondition: OptionPropType,
-    }),
-  ).isRequired,
-  conditions: PropTypes.arrayOf(
-    PropTypes.exact({
-      // eslint-disable-next-line react/no-unused-prop-types
-      option: OptionPropType.isRequired,
-      // eslint-disable-next-line react/no-unused-prop-types
-      inputType: PropTypes.oneOf(Object.values(InputTypes)).isRequired,
-      // eslint-disable-next-line react/no-unused-prop-types
-      enumOptions: PropTypes.arrayOf(OptionPropType),
-    }),
-  ).isRequired,
-  onRemove: PropTypes.func.isRequired,
-  isFilterApplied: PropTypes.bool,
-  isFirstRow: PropTypes.bool,
-  onAdd: PropTypes.func,
+  dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
+  operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
+  dataPoint: PropTypes.string.isRequired,
+  condition: PropTypes.string.isRequired,
+  input: PropTypes.string.isRequired,
 };

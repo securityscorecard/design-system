@@ -1,10 +1,11 @@
-import { DataPoint, FilterRow } from '../Filters.types';
+import { DataPoint, Filter } from '../Filters.types';
 
 export interface SplitFieldProps {
   width?: number;
 }
 
-export interface FilterRowProps extends FilterRow {
+export interface FilterRowProps extends Filter {
+  id: string;
   dataPoints: DataPoint[];
   isFirstRow?: boolean;
 }

@@ -1,69 +1,53 @@
-import { action } from '@storybook/addon-actions';
-
-import { DataPoint, FilterRow } from '../Filters.types';
-import { InputTypes } from '../Filters.enums';
+import { Input } from '../Input';
+import { DataPoint, Filter } from '../Filters.types';
+import { Operators } from '../Filters.enums';
 
 export const dataPointsMock: DataPoint[] = [
   {
-    option: { value: 'pistachio', label: 'Pistachio' },
-    defaultCondition: { value: 'equal to', label: 'is' },
+    conditions: [
+      { input: Input, value: 'chocolate', label: 'Chocolate' },
+      {
+        input: Input,
+        value: 'strawberry',
+        label: 'Strawberry',
+        isDefault: true,
+      },
+      { input: Input, value: 'vanilla', label: 'Vanilla' },
+    ],
+    value: 'pistachio',
+    label: 'Pistachio',
   },
   {
-    option: { value: 'lemon', label: 'Lemon' },
-    defaultCondition: { value: 'not equal to', label: 'is not' },
+    conditions: [
+      { input: Input, value: 'chocolate', label: 'Chocolate' },
+      { input: Input, value: 'strawberry', label: 'Strawberry' },
+      { input: Input, value: 'vanilla', label: 'Vanilla', isDefault: true },
+    ],
+    value: 'lemon',
+    label: 'Lemon',
   },
   {
-    option: { value: 'smurf', label: 'Smurf' },
-    defaultCondition: { value: 'is less than', label: 'is less than' },
+    conditions: [
+      { input: Input, value: 'chocolate', label: 'Chocolate', isDefault: true },
+      { input: Input, value: 'strawberry', label: 'Strawberry' },
+      { input: Input, value: 'vanilla', label: 'Vanilla' },
+    ],
+    value: 'smurf',
+    label: 'Smurf',
   },
 ];
 
-export const rowsMock: FilterRow[] = [
+export const valueMock: Filter[] = [
   {
-    id: 'PtpHvE',
-    conditions: [
-      {
-        option: { value: 'equal to', label: 'is' },
-        inputType: InputTypes.string,
-      },
-      {
-        option: { value: 'not equal to', label: 'is not' },
-        inputType: InputTypes.string,
-      },
-      {
-        option: { value: 'is less than', label: 'is less than' },
-        inputType: InputTypes.string,
-      },
-    ],
-    onRemove: action('OnRemove'),
-    onAdd: action('OnAdd'),
+    operator: Operators.where,
+    dataPoint: 'pistachio',
+    condition: 'chocolate',
+    input: 'tasty',
   },
   {
-    id: 'au4By4',
-    conditions: [
-      {
-        option: { value: 'equal to', label: 'is' },
-        inputType: InputTypes.string,
-      },
-      {
-        option: { value: 'not equal to', label: 'is not' },
-        inputType: InputTypes.string,
-      },
-      {
-        option: { value: 'is less than', label: 'is less than' },
-        inputType: InputTypes.string,
-      },
-      {
-        option: { value: 'contains', label: 'contains' },
-        inputType: InputTypes.string,
-      },
-      {
-        option: { value: 'does not contain', label: 'does not contain' },
-        inputType: InputTypes.string,
-      },
-    ],
-    onRemove: action('OnRemove'),
-    isFilterApplied: true,
-    onAdd: action('OnAdd'),
+    operator: Operators.and,
+    dataPoint: 'lemon',
+    condition: 'strawberry',
+    input: 'fruity',
   },
 ];

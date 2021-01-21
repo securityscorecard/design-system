@@ -3,46 +3,41 @@ import PropTypes from 'prop-types';
 
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
-import { FilterProps } from './Filters.types';
-import { OptionPropType } from './Select/Select.types';
-import { InputTypes } from './Filters.enums';
+import { DataPointPropTypes, FiltersProps } from './Filters.types';
+import { Operators } from './Filters.enums';
 
-const Filters: React.FC<FilterProps> = ({ dataPoints, rows }) => (
+const generateId = ({ operator, dataPoint, condition, input }, index) =>
+  `${operator}-${dataPoint}-${condition}-${input}-${index}`;
+
+const Filters: React.FC<FiltersProps> = ({
+  dataPoints,
+  value,
+  // TODO implement logic
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  onApply,
+  onChange,
+  /* eslint-enable */
+}) => (
   <FlexContainer flexDirection="column">
-    {rows.map(({ id, ...rest }, index) => (
-      <FilterRow
-        key={id}
-        dataPoints={dataPoints}
-        id={id}
-        isFirstRow={index === 0}
-        {...rest}
-      />
-    ))}
+    {value.map((props, index) => {
+      const id = generateId(props, index);
+      return <FilterRow key={id} dataPoints={dataPoints} id={id} {...props} />;
+    })}
   </FlexContainer>
 );
 
 export default Filters;
 
 Filters.propTypes = {
-  dataPoints: PropTypes.arrayOf(
+  dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
+  value: PropTypes.arrayOf(
     PropTypes.exact({
-      option: OptionPropType.isRequired,
-      defaultCondition: OptionPropType,
+      operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
+      dataPoint: PropTypes.string.isRequired,
+      condition: PropTypes.string.isRequired,
+      input: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  rows: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      conditions: PropTypes.arrayOf(
-        PropTypes.exact({
-          option: OptionPropType.isRequired,
-          inputType: PropTypes.oneOf(Object.values(InputTypes)).isRequired,
-          enumOptions: PropTypes.arrayOf(OptionPropType),
-        }),
-      ).isRequired,
-      onRemove: PropTypes.func.isRequired,
-      onAdd: PropTypes.func,
-      isFilterApplied: PropTypes.bool,
-    }),
-  ).isRequired,
+  onApply: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 };
