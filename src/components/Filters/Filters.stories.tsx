@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import { FlexContainer } from '../FlexContainer';
 import Filters from './Filters';
-import { dataPointsMock, valueMock } from './mocks/options';
+import { dataMock, dataPointsMock } from './mocks/options';
 
 export default {
   component: Filters,
@@ -14,8 +14,8 @@ export default {
 export const DefaultFilters: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
+      data={dataMock}
       dataPoints={dataPointsMock}
-      value={valueMock}
       onApply={action('onApply')}
     />
   </FlexContainer>

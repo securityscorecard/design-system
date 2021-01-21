@@ -11,7 +11,7 @@ const generateId = ({ operator, dataPoint, condition, input }, index) =>
 
 const Filters: React.FC<FiltersProps> = ({
   dataPoints,
-  value,
+  data,
   // TODO implement logic
   /* eslint-disable @typescript-eslint/no-unused-vars */
   onApply,
@@ -19,7 +19,7 @@ const Filters: React.FC<FiltersProps> = ({
   /* eslint-enable */
 }) => (
   <FlexContainer flexDirection="column">
-    {value.map((props, index) => {
+    {data.map((props, index) => {
       const id = generateId(props, index);
       return <FilterRow key={id} dataPoints={dataPoints} id={id} {...props} />;
     })}
@@ -30,7 +30,7 @@ export default Filters;
 
 Filters.propTypes = {
   dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
-  value: PropTypes.arrayOf(
+  data: PropTypes.arrayOf(
     PropTypes.exact({
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
       dataPoint: PropTypes.string.isRequired,
