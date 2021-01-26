@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
@@ -52,6 +52,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   footer,
   scrollToTopButtonLabel,
   onClose = noop,
+  getModalRef,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -71,6 +72,12 @@ You should either provide content in "sidebar" property or switch layout to "${F
 `,
     );
   }
+
+  useEffect(() => {
+    if (getModalRef !== undefined) {
+      getModalRef(modalRef);
+    }
+  }, [getModalRef]);
 
   return (
     <BaseModal ref={modalRef}>
@@ -118,6 +125,7 @@ FullscreenModal.propTypes = {
   sidebar: PropTypes.node,
   layout: PropTypes.oneOf(Object.values(FullscreenModalLayouts)),
   scrollToTopButtonLabel: PropTypes.string,
+  getModalRef: PropTypes.func,
 };
 
 export default FullscreenModal;
