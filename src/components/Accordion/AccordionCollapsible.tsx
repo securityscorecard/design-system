@@ -49,11 +49,11 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   className,
   handleHeaderClick,
   isOpen = false,
-  index,
+  id,
   title,
 }) => (
   <Container className={className} isOpen={isOpen}>
-    <Header alignItems="center" onClick={() => handleHeaderClick(index)}>
+    <Header alignItems="center" onClick={() => handleHeaderClick(id)}>
       <StyledIcon
         isRotated={isOpen}
         name={SSCIconNames.chevronRight}
@@ -72,9 +72,9 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
 AccordionCollapsible.propTypes = {
   title: PropTypes.string.isRequired,
   handleHeaderClick: PropTypes.func.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   className: PropTypes.string,
   isOpen: PropTypes.bool,
-  index: PropTypes.number,
 };
 
 export default AccordionCollapsible;

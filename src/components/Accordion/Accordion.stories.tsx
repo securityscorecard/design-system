@@ -9,8 +9,8 @@ export default {
 } as Meta;
 
 const items = [
-  { title: 'Item 1', content: 'Content', isOpen: true },
-  { title: 'Item 2', content: 'Content' },
+  { id: 1, title: 'Item 1', content: 'Content', isOpen: true },
+  { id: 2, title: 'Item 2', content: 'Content' },
 ];
 
 export const DefaultAccordion: Story = () => (
@@ -18,9 +18,9 @@ export const DefaultAccordion: Story = () => (
 );
 DefaultAccordion.storyName = 'DefaultAccordion';
 
-export const CollapsesOnOpen: Story = () => (
-  <Accordion items={items} isCollapsedOnOpen>
+export const DoesNotCollapsOnOpen: Story = () => (
+  <Accordion isCollapsedOnOpen={false} items={items}>
     Accordion
   </Accordion>
 );
-CollapsesOnOpen.storyName = 'Collapses on open';
+DoesNotCollapsOnOpen.storyName = 'Does not collapse on open';

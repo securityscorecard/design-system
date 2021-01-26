@@ -10,21 +10,21 @@ const Accordion: React.FC<AccordionProps> = ({
   items,
   ...props
 }) => {
-  const [openIndexes, setOpenIndexes] = useState(
-    items.filter((item) => item.isOpen).map((item, index) => index),
+  const [openIds, setOpenIds] = useState(
+    items.filter((item) => item.isOpen).map((item) => item.id),
   );
 
   const handleClick = useCallback(
-    (index: number) => {
-      setOpenIndexes(
-        openIndexes.includes(index)
-          ? openIndexes.filter((i) => i !== index)
+    (id: string | number) => {
+      setOpenIds(
+        openIds.includes(id)
+          ? openIds.filter((i) => i !== id)
           : isCollapsedOnOpen
-          ? [index]
-          : [...openIndexes, index],
+          ? [id]
+          : [...openIds, id],
       );
     },
-    [setOpenIndexes, openIndexes, isCollapsedOnOpen],
+    [setOpenIds, openIds, isCollapsedOnOpen],
   );
 
   return (
@@ -35,12 +35,12 @@ const Accordion: React.FC<AccordionProps> = ({
       padding="none"
       {...props}
     >
-      {items.map((item, index) => (
+      {items.map((item) => (
         <AccordionCollapsible
           key={`accordion-item-${item.title}`}
           handleHeaderClick={handleClick}
-          index={index}
-          isOpen={openIndexes.includes(index)}
+          id={item.id}
+          isOpen={openIds.includes(item.id)}
           title={item.title}
         >
           {item.content}
@@ -54,6 +54,7 @@ const AccordionItemPropType = PropTypes.exact({
   title: PropTypes.string.isRequired,
   content: PropTypes.node.isRequired,
   isOpen: PropTypes.bool,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 });
 
 Accordion.propTypes = {
