@@ -43,7 +43,7 @@ const Accordion: React.FC<AccordionProps> = ({
           isOpen={openIndexes.includes(index)}
           title={item.title}
         >
-          {item.content} {isCollapsedOnOpen}
+          {item.content}
         </AccordionCollapsible>
       ))}
     </FlexContainer>
