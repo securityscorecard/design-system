@@ -37,7 +37,7 @@ const Accordion: React.FC<AccordionProps> = ({
     >
       {items.map((item, index) => (
         <AccordionCollapsible
-          key={`accordion-wrapper-item-${item.title}`}
+          key={`accordion-item-${item.title}`}
           handleHeaderClick={handleClick}
           index={index}
           isOpen={openIndexes.includes(index)}
