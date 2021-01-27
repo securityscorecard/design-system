@@ -2,7 +2,11 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FlexContainer } from '../FlexContainer';
-import { AccordionProps } from './Accordion.types';
+import {
+  AccordionItemId,
+  AccordionItemPropType,
+  AccordionProps,
+} from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
 
 const Accordion: React.FC<AccordionProps> = ({
@@ -15,7 +19,7 @@ const Accordion: React.FC<AccordionProps> = ({
   );
 
   const handleClick = useCallback(
-    (id: string | number) => {
+    (id: AccordionItemId) => {
       setOpenIds(
         openIds.includes(id)
           ? openIds.filter((i) => i !== id)
@@ -49,13 +53,6 @@ const Accordion: React.FC<AccordionProps> = ({
     </FlexContainer>
   );
 };
-
-const AccordionItemPropType = PropTypes.exact({
-  title: PropTypes.string.isRequired,
-  content: PropTypes.node.isRequired,
-  isOpen: PropTypes.bool,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-});
 
 Accordion.propTypes = {
   items: PropTypes.arrayOf(AccordionItemPropType).isRequired,

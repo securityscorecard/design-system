@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { includes } from 'ramda';
 import { transparentize } from 'polished';
 
 import { getColor, pxToRem } from '../../utils/helpers';
@@ -34,12 +33,10 @@ const Container = styled.div<{ isOpen: boolean }>`
     `}
 `;
 
-const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
-  shouldForwardProp: (property) => !includes(property, ['isRotated']),
-})`
+const StyledIcon = styled(Icon)<{ $isRotated: boolean }>`
   margin-right: ${pxToRem(13)};
   transition: transform 200ms;
-  ${({ isRotated }) => isRotated && 'transform: rotate(90deg);'}
+  ${({ $isRotated }) => $isRotated && 'transform: rotate(90deg);'}
   height: ${pxToRem(11)};
   width: ${pxToRem(11)};
 `;
@@ -55,7 +52,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   <Container className={className} isOpen={isOpen}>
     <Header alignItems="center" onClick={() => handleHeaderClick(id)}>
       <StyledIcon
-        isRotated={isOpen}
+        $isRotated={isOpen}
         name={SSCIconNames.chevronRight}
         type={IconTypes.ssc}
       />
