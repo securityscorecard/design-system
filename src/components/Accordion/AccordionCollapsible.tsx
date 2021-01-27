@@ -9,7 +9,7 @@ import { Icon } from '../Icon';
 import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import { Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
-import { AccordionCollapsibleProps } from './Accordion.types';
+import { AccordionCollapsibleProps, AccordionItemId } from './Accordion.types';
 
 const Header = styled(FlexContainer)`
   width: 100%;
@@ -48,23 +48,39 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   isOpen = false,
   id,
   title,
-}) => (
-  <Container className={className} isOpen={isOpen}>
-    <Header alignItems="center" onClick={() => handleHeaderClick(id)}>
-      <StyledIcon
-        $isRotated={isOpen}
-        name={SSCIconNames.chevronRight}
-        type={IconTypes.ssc}
-      />
-      <Text size={TextSizes.lg}>{title}</Text>
-    </Header>
-    {isOpen && (
-      <Content as="div" size={TextSizes.md}>
-        {children}
-      </Content>
-    )}
-  </Container>
-);
+}) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    itemId?: AccordionItemId,
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleHeaderClick(itemId);
+    }
+  };
+  return (
+    <Container className={className} isOpen={isOpen}>
+      <Header
+        alignItems="center"
+        role="button"
+        tabIndex={0}
+        onClick={() => handleHeaderClick(id)}
+        onKeyDown={(e) => handleKeyDown(e, id)}
+      >
+        <StyledIcon
+          $isRotated={isOpen}
+          name={SSCIconNames.chevronRight}
+          type={IconTypes.ssc}
+        />
+        <Text size={TextSizes.lg}>{title}</Text>
+      </Header>
+      {isOpen && (
+        <Content as="div" size={TextSizes.md}>
+          {children}
+        </Content>
+      )}
+    </Container>
+  );
+};
 
 AccordionCollapsible.propTypes = {
   title: PropTypes.string.isRequired,

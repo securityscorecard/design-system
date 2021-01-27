@@ -23,9 +23,14 @@ export interface AccordionProps {
   items: AccordionItem[];
 }
 
+export const AccordionItemIdPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+]);
+
 export const AccordionItemPropType = PropTypes.exact({
   title: PropTypes.string.isRequired,
   content: PropTypes.node.isRequired,
   isOpen: PropTypes.bool,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: AccordionItemIdPropType.isRequired,
 });
