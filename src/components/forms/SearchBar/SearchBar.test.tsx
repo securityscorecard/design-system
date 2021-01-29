@@ -40,7 +40,9 @@ const setup = () => {
       onSearch={onSearch}
     />,
   );
-  const searchInput = utils.getByPlaceholderText('Search for X');
+  const searchInput = utils.getByPlaceholderText(
+    'Search for X',
+  ) as HTMLInputElement;
   return {
     searchInput,
     ...utils,
