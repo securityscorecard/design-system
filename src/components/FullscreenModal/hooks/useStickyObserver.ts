@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import debounce from 'lodash.debounce';
 import { isNotNull } from 'ramda-adjunct';
 
 export const useStickyObserver = (
@@ -14,8 +13,8 @@ export const useStickyObserver = (
   useEffect(() => {
     const currentModalRef = modalRef.current;
     listeners.current = {
-      resizeListener: debounce(isInView, 200),
-      scrollListener: debounce(isInView, 100),
+      resizeListener: isInView,
+      scrollListener: isInView,
     };
 
     if (areListenersAdded.current && isNotNull(listeners.current)) {

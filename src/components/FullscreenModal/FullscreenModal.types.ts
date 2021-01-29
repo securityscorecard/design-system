@@ -17,5 +17,6 @@ export interface FullscreenModalProps {
   footer: React.ReactNode;
   sidebar?: React.ReactNode;
   scrollToTopButtonLabel?: string;
+  getModalRef?: (ref: React.MutableRefObject<HTMLDivElement>) => void;
   onClose: () => void;
 }

@@ -1,3 +1,15 @@
+# [1.0.0-alpha.21](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2021-01-26)
+
+
+### Features
+
+* **FullscreenModal:** add getModalRef and expose modalRef to users ([5785e06](https://github.com/securityscorecard/design-system/commit/5785e06dfab5271088f713acf25e3e65e0497e8f))
+
+
+### Performance Improvements
+
+* **FullscreenModal:** improve responsivness of sticky elements ([de675d8](https://github.com/securityscorecard/design-system/commit/de675d8621896b4e87e7c3f0e45c3c61e1753056))
+
 # [1.0.0-alpha.20](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2021-01-13)
 
 
