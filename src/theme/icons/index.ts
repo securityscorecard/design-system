@@ -17,3 +17,4 @@ export { plus } from './plus';
 export { sort } from './sort';
 export { sortUp } from './sortUp';
 export { sortDown } from './sortDown';
+export { search } from './search';

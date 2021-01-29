@@ -13,6 +13,7 @@ export const SSCIconNames = {
   sort: 'sort',
   sortUp: 'sort-up',
   sortDown: 'sort-down',
+  search: 'search',
 } as const;
 
 export const IconTypes = {

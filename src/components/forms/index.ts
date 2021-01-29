@@ -9,3 +9,4 @@ export * from './RadioListItem';
 export * from './Select';
 export * from './Switch';
 export * from './TextArea';
+export * from './SearchBar';
