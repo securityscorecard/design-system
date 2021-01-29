@@ -7,7 +7,9 @@ import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
 import { Spinner } from '../../Spinner';
 import { Input } from '../Input';
+import SearchSuggestions from './SearchSuggestions';
 import { SearchBarProps } from './SearchBar.types';
+import { SearchSuggestionFormatsLabels } from './Search.enums';
 import useControlledInput from './useControlledInput';
 
 const SearchBarWrapper = styled.div`
@@ -15,6 +17,7 @@ const SearchBarWrapper = styled.div`
 `;
 
 const StyledInput = styled(Input)`
+  text-overflow: ellipsis;
   ${createPaddingSpacing({ horizontal: 2.5 })};
   &:focus,
   &.focus {
@@ -22,16 +25,24 @@ const StyledInput = styled(Input)`
   }
 `;
 
-const SearchIcon = styled.div`
+const SearchBarIcon = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
   height: ${getFormStyle('fieldHeight')};
   width: ${getFormStyle('fieldHeight')};
-  ${createPaddingSpacing({ left: 12 / 20 })};
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const SearchIcon = styled(SearchBarIcon)`
+  left: 0;
+  ${createPaddingSpacing({ left: 12 / 20 })};
+`;
+
+const LoadingIcon = styled(SearchBarIcon)`
+  right: 0;
+  ${createPaddingSpacing({ right: 12 / 20 })};
 `;
 
 const ClearSearchButton = styled.button`
@@ -46,39 +57,33 @@ const ClearSearchButton = styled.button`
   justify-content: center;
 `;
 
-const LoadingIcon = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: ${getFormStyle('fieldHeight')};
-  width: ${getFormStyle('fieldHeight')};
-  ${createPaddingSpacing({ right: 12 / 20 })};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  placeholder,
   isInvalid = false,
   isDisabled = false,
-  isSearchInProgress = false,
+  searchSuggestionFormat = 'default',
   ...props
 }) => {
   const { defaultValue = '' } = props as {
     defaultValue: string;
   };
-  const [isSearching, setIsSearching] = useState(isSearchInProgress);
+  const [isSearching, setIsSearching] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const onChangeQuery = () => {
+  const onChangeQuery = async () => {
     const queryValue = searchInputRef.current.value;
-    // console.log('Performing search for ' + queryValue);
+    setSearchPerformed(false);
+
     if (queryValue.length > 2) {
+      setIsSearching(true);
+      const suggestions = await onSearch(queryValue);
+      setSearchResults(suggestions);
+      setIsSearching(false);
       setSearchPerformed(true);
-    } else {
-      setSearchPerformed(false);
     }
   };
 
@@ -123,7 +128,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         ref={searchInputRef}
         isDisabled={isDisabled}
         isInvalid={isFieldInvalid}
-        placeholder="Search for domains or IPs"
+        placeholder={placeholder}
         type="text"
         value={query}
         onChange={onChangeInput}
@@ -139,14 +144,26 @@ const SearchBar: React.FC<SearchBarProps> = ({
           />
         </LoadingIcon>
       )}
+
+      {searchPerformed && (
+        <SearchSuggestions
+          searchSuggestionFormat={searchSuggestionFormat}
+          suggestions={searchResults}
+          onClickOut={() => setSearchPerformed(false)}
+        />
+      )}
     </SearchBarWrapper>
   );
 };
 
 SearchBar.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  searchSuggestionFormat: PropTypes.oneOf(
+    Object.values(SearchSuggestionFormatsLabels),
+  ),
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,
-  isSearchInProgress: PropTypes.bool,
   defaultValue: PropTypes.string,
 };
 

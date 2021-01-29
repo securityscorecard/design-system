@@ -12,6 +12,7 @@ export default {
 export const playground: Story<SwitchProps> = (args) => <Switch {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
+  layout: 'padded',
 };
 playground.args = { label: 'Public', switchId: 'playground' };
 playground.argTypes = {
