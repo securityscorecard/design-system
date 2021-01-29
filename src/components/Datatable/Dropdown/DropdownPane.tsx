@@ -6,6 +6,7 @@ import { isNotUndefined, isNull } from 'ramda-adjunct';
 import {
   getBorderRadius,
   getColor,
+  getDepth,
   getFontSize,
   pxToRem,
 } from '../../../utils/helpers';
@@ -28,6 +29,7 @@ const StyledDropdownPane = styled.div`
   border-radius: ${getBorderRadius};
   background-color: ${getColor('graphite5H')};
   padding: ${pxToRem(8, 0)};
+  z-index: ${getDepth('dropdown')};
 `;
 
 const List = styled.ul`
@@ -101,3 +103,5 @@ DropdownPane.propTypes = {
 };
 
 export default DropdownPane;
+
+export { StyledDropdownPane, List, DropdownLink };
