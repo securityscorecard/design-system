@@ -1,5 +1,6 @@
 export interface StateButtonProps {
-  id: string;
-  onClick: (id: string) => void;
-  isFilterApplied?: boolean;
+  index: number;
+  onClick: (index: number) => React.MouseEventHandler;
+  isApplied?: boolean;
+  isDisabled?: boolean;
 }

@@ -1,40 +1,62 @@
 import { useEffect, useState } from 'react';
 
-import { StateButtonIconHook } from './useStateButton.types';
+import { IconProps, StateButtonIconHook } from './useStateButton.types';
 import { SSCIconNames } from '../../Icon/Icon.enums';
-import { Color } from '../../../theme/colors.types';
 import { ColorTypes } from '../../../theme/colors.enums';
 
 const timesIconColor = ColorTypes.graphite2B;
 const checkIconColor = ColorTypes.graphiteB;
 const hoverIconColor = ColorTypes.graphite5H;
+const disabledIconColor = ColorTypes.graphiteHB;
+
+const stateMap = {
+  default: {
+    iconName: SSCIconNames.times,
+    iconColor: timesIconColor,
+  },
+  applied: {
+    iconName: SSCIconNames.check,
+    iconColor: checkIconColor,
+  },
+  disabled: {
+    iconName: SSCIconNames.times,
+    iconColor: disabledIconColor,
+  },
+  hover: {
+    iconName: SSCIconNames.times,
+    iconColor: hoverIconColor,
+  },
+};
+
+const setIconState = (isDisabled, isApplied, setIconProps) => {
+  if (isDisabled) {
+    setIconProps(stateMap.disabled);
+  } else if (isApplied) {
+    setIconProps(stateMap.applied);
+  } else {
+    setIconProps(stateMap.default);
+  }
+};
 
 export const useStateButtonIcon = (
-  isFilterApplied: boolean,
+  isApplied: boolean,
+  isDisabled: boolean,
 ): StateButtonIconHook => {
-  const [iconName, setIconName] = useState<string>(SSCIconNames.times);
-  const [iconColor, setIconColor] = useState<Color>(timesIconColor);
+  const [iconProps, setIconProps] = useState<IconProps>(stateMap.default);
 
   useEffect(() => {
-    if (isFilterApplied) {
-      setIconName(SSCIconNames.check);
-      setIconColor(checkIconColor);
-    }
-  }, [isFilterApplied]);
+    setIconState(isDisabled, isApplied, setIconProps);
+  }, [isApplied, isDisabled]);
 
   const handleMouseOut = () => {
-    if (isFilterApplied) {
-      setIconName(SSCIconNames.check);
-      setIconColor(checkIconColor);
-    } else {
-      setIconColor(timesIconColor);
-    }
+    setIconState(isDisabled, isApplied, setIconProps);
   };
 
   const handleMouseOver = () => {
-    setIconName(SSCIconNames.times);
-    setIconColor(hoverIconColor);
+    if (!isDisabled) {
+      setIconProps(stateMap.hover);
+    }
   };
 
-  return { iconName, iconColor, handleMouseOut, handleMouseOver };
+  return { handleMouseOut, handleMouseOver, ...iconProps };
 };
