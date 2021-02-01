@@ -36,22 +36,26 @@ export interface Filter {
   dataPoint: string;
   condition: string;
   input: string;
+  isApplied: boolean;
 }
 
 export interface FiltersProps {
   dataPoints: DataPoint[];
   data: Filter[];
   onApply: (filters: Filter[]) => void;
+  onClose: () => void;
+  onCancel: () => void;
   onChange?: (filters: Filter[]) => void;
+  isLoading?: boolean;
 }
 
 export const DataPointPropTypes = PropTypes.exact({
   conditions: PropTypes.arrayOf(
     PropTypes.exact({
       input: PropTypes.oneOfType([
-        PropTypes.node,
+        PropTypes.elementType,
         PropTypes.exact({
-          type: PropTypes.node,
+          type: PropTypes.elementType,
           props: PropTypes.exact({
             options: PropTypes.arrayOf(OptionPropType),
             min: PropTypes.number,
