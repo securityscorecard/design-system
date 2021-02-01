@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { isNull } from 'ramda-adjunct';
 
 import { useStickyObserver } from './useStickyObserver';
+import { useDebouncedHandler } from './useDebouncedHandler';
 
 export const useStickyHeader = (
   modalRef: React.MutableRefObject<HTMLElement>,
@@ -21,8 +22,9 @@ export const useStickyHeader = (
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFixed]);
+  const debouncedIsInView = useDebouncedHandler(isInView);
 
-  useStickyObserver(modalRef, modalHeaderRef, isInView);
+  useStickyObserver(modalRef, modalHeaderRef, debouncedIsInView);
 
   return {
     isFixed,

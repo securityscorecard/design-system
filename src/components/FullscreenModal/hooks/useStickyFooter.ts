@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import debounce from 'lodash.debounce';
 import { isNull } from 'ramda-adjunct';
 
 import { useStickyObserver } from './useStickyObserver';
+import { useDebouncedHandler } from './useDebouncedHandler';
 
 export const useStickyFooter = (
   modalRef: React.MutableRefObject<HTMLElement>,
@@ -23,7 +23,7 @@ export const useStickyFooter = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const resizeListener = debounce(showScrollToTopButton, 200);
+  const resizeListener = useDebouncedHandler(showScrollToTopButton);
   useEffect(() => {
     showScrollToTopButton();
     window.addEventListener('resize', resizeListener);

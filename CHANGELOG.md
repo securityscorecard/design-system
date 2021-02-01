@@ -1,3 +1,24 @@
+# [1.0.0-alpha.22](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2021-01-27)
+
+
+### Features
+
+* **accordion:** added accordion with state management ([3cf329d](https://github.com/securityscorecard/design-system/commit/3cf329d177d30426cfd2256c3d4fb8fb371b7311))
+* **accordion:** added basic accessibility ([a4324ac](https://github.com/securityscorecard/design-system/commit/a4324aca8103b929f1f1c15cf7cf7406ba38e9ba))
+* **accordion:** move proptypes and types into types file ([1f7e4b7](https://github.com/securityscorecard/design-system/commit/1f7e4b7f96fb157d7689e3025883b85483524f4b))
+
+# [1.0.0-alpha.21](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2021-01-26)
+
+
+### Features
+
+* **FullscreenModal:** add getModalRef and expose modalRef to users ([5785e06](https://github.com/securityscorecard/design-system/commit/5785e06dfab5271088f713acf25e3e65e0497e8f))
+
+
+### Performance Improvements
+
+* **FullscreenModal:** improve responsivness of sticky elements ([de675d8](https://github.com/securityscorecard/design-system/commit/de675d8621896b4e87e7c3f0e45c3c61e1753056))
+
 # [1.0.0-alpha.20](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2021-01-13)
 
 

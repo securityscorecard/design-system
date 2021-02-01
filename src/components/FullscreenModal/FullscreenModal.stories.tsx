@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
@@ -65,29 +66,42 @@ const Footer = () => (
     </FlexContainer>
   </FlexContainer>
 );
-const Sidebar = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="#">Sidebar link 1</Link>
-      </li>
-      <li>
-        <Link href="#">Sidebar link 2</Link>
-      </li>
-      <li>
-        <Link href="#">Sidebar link 3</Link>
-      </li>
-      <li>
-        <Link href="#">Sidebar link 4</Link>
-      </li>
-    </ul>
-  </nav>
-);
+const Sidebar: React.FC<{
+  modalRef?: HTMLElement;
+}> = ({ modalRef }) => {
+  useEffect(() => {
+    if (modalRef === null) return;
+
+    // eslint-disable-next-line no-console
+    console.log('Modal reference in sidebar', modalRef);
+  }, [modalRef]);
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link href="#">Sidebar link 1</Link>
+        </li>
+        <li>
+          <Link href="#">Sidebar link 2</Link>
+        </li>
+        <li>
+          <Link href="#">Sidebar link 3</Link>
+        </li>
+        <li>
+          <Link href="#">Sidebar link 4</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+Sidebar.propTypes = {
+  modalRef: PropTypes.instanceOf(HTMLElement),
+};
 
 export const SingleColumn6: Story = () => (
   <FullscreenModal
-    content={Content()}
-    footer={Footer()}
+    content={<Content />}
+    footer={<Footer />}
     header={header}
     layout={FullscreenModalLayouts.single6}
     onClose={action('close modal')}
@@ -128,8 +142,8 @@ SingleColumn6.argTypes = {
 
 export const SingleColumn8: Story = () => (
   <FullscreenModal
-    content={Content()}
-    footer={Footer()}
+    content={<Content />}
+    footer={<Footer />}
     header={header}
     layout={FullscreenModalLayouts.single8}
     onClose={action('close modal')}
@@ -140,32 +154,60 @@ SingleColumn8.storyName = 'Single Column (layout: single-8)';
 
 export const Sidebar4Column6: Story = () => (
   <FullscreenModal
-    content={Content()}
-    footer={Footer()}
+    content={<Content />}
+    footer={<Footer />}
     header={header}
     layout={FullscreenModalLayouts.sidebar46}
-    sidebar={Sidebar()}
+    sidebar={<Sidebar />}
     onClose={action('close modal')}
   />
 );
 Sidebar4Column6.storyName = 'Two Columns with sidebar (layout: sidebar-4-6)';
 
-export const Sidebar4Column8: Story = () => (
-  <FullscreenModal
-    content={Content()}
-    footer={Footer()}
-    header={header}
-    layout={FullscreenModalLayouts.sidebar48}
-    sidebar={Sidebar()}
-    onClose={action('close modal')}
-  />
-);
+export const Sidebar4Column8: Story = () => {
+  const [modalRef, setModalRef] = useState(null);
+  const getModalRef = (ref) => setModalRef(ref.current);
+  const timeout = useRef(null);
+
+  const logEvent = useCallback((event) => {
+    if (timeout.current) {
+      window.cancelAnimationFrame(timeout.current);
+    }
+    timeout.current = window.requestAnimationFrame(() => {
+      // eslint-disable-next-line no-console
+      console.log('debounced scroll', event);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (modalRef !== null) {
+      modalRef.addEventListener('scroll', logEvent);
+    }
+    return () => {
+      if (modalRef !== null) {
+        modalRef.removeEventListener('scroll', logEvent);
+      }
+    };
+  }, [modalRef, logEvent]);
+
+  return (
+    <FullscreenModal
+      content={<LongContent />}
+      footer={<Footer />}
+      getModalRef={getModalRef}
+      header={header}
+      layout={FullscreenModalLayouts.sidebar48}
+      sidebar={<Sidebar modalRef={modalRef} />}
+      onClose={action('close modal')}
+    />
+  );
+};
 Sidebar4Column8.storyName = 'Two Columns with sidebar (layout: sidebar-4-8)';
 
 export const WithLongContent: Story = () => (
   <FullscreenModal
-    content={LongContent()}
-    footer={Footer()}
+    content={<LongContent />}
+    footer={<Footer />}
     header={header}
     layout={FullscreenModalLayouts.single6}
     onClose={action('close modal')}
