@@ -7,6 +7,7 @@ import { ElementCounter } from './ElementCounter';
 import { BatchActions } from './BatchActions';
 import BatchModule from './BatchModule';
 import { BatchModuleProps } from './BatchModule.types';
+import DatatableContext from '../DatatableContext';
 
 export default {
   title: 'components/Datatable/components/BatchModule',
@@ -16,11 +17,12 @@ export default {
 } as Meta;
 
 export const playground: Story<BatchModuleProps> = (args) => (
-  <BatchModule {...args} />
+  <DatatableContext.Provider value={{ totalLength: 1070000 }}>
+    <BatchModule {...args} />
+  </DatatableContext.Provider>
 );
 playground.args = {
   actions: actionsMock,
-  totalLength: 1070000,
 };
 playground.argTypes = {
   actions: {
@@ -64,22 +66,21 @@ playground.argTypes = {
 };
 
 export const Default: Story = () => (
-  <BatchModule actions={actionsMock} totalLength={1070000} />
+  <DatatableContext.Provider value={{ totalLength: 1070000 }}>
+    <BatchModule actions={actionsMock} />
+  </DatatableContext.Provider>
 );
 
 export const Filtered: Story = () => (
-  <BatchModule
-    actions={actionsMock}
-    filteredLength={52813}
-    totalLength={1070000}
-  />
+  <DatatableContext.Provider value={{ totalLength: 1070000 }}>
+    <BatchModule actions={actionsMock} filteredLength={52813} />
+  </DatatableContext.Provider>
 );
 
 export const Selected: Story = () => (
-  <BatchModule
-    actions={actionsMock}
-    filteredLength={52813}
-    selectedLength={31}
-    totalLength={1070000}
-  />
+  <DatatableContext.Provider
+    value={{ totalLength: 1070000, selectedLength: 31 }}
+  >
+    <BatchModule actions={actionsMock} filteredLength={52813} />
+  </DatatableContext.Provider>
 );

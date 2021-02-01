@@ -1,21 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
-import numeral from 'numeral';
 
 import { H3, Text } from '../../../typography';
 import { HeadingVariants } from '../../../typography/Heading/Heading.enums';
 import { TextSizes, TextVariants } from '../../../typography/Text/Text.enums';
 import { ElementCounterProps } from './ElementCounter.types';
+import { abbreviateNumber } from '../../../../utils/helpers';
 
 const LightText: React.FC = ({ children }) => (
   <Text size={TextSizes.inherit} variant={TextVariants.context}>
     {children}
   </Text>
 );
-
-const formatNumber = (value: number): string =>
-  numeral(value).format('0.[00]a').toUpperCase();
 
 const getCounterContent = (
   totalLength,
@@ -25,8 +22,8 @@ const getCounterContent = (
   if (isPositive(selectedLength)) {
     return (
       <>
-        {formatNumber(selectedLength)} <LightText>of</LightText>{' '}
-        {formatNumber(
+        {abbreviateNumber(selectedLength)} <LightText>of</LightText>{' '}
+        {abbreviateNumber(
           isPositive(filteredLength) ? filteredLength : totalLength,
         )}{' '}
         <LightText>selected</LightText>
@@ -36,15 +33,15 @@ const getCounterContent = (
   if (isPositive(filteredLength)) {
     return (
       <>
-        {formatNumber(filteredLength)} <LightText>of</LightText>{' '}
-        {formatNumber(totalLength)} <LightText>total</LightText>
+        {abbreviateNumber(filteredLength)} <LightText>of</LightText>{' '}
+        {abbreviateNumber(totalLength)} <LightText>total</LightText>
       </>
     );
   }
 
   return (
     <>
-      {formatNumber(totalLength)} <LightText>total</LightText>
+      {abbreviateNumber(totalLength)} <LightText>total</LightText>
     </>
   );
 };
