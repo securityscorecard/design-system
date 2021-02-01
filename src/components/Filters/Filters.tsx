@@ -107,9 +107,8 @@ const Filters: React.FC<FiltersProps> = ({
       input: '',
       isApplied: false,
     };
-    newFilters.push(newRow);
 
-    setFiltersValues(newFilters);
+    setFiltersValues([...newFilters, newRow]);
 
     callOnChange();
   };
