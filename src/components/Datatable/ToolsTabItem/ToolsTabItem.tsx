@@ -12,7 +12,7 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../../utils/helpers';
-import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
+import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { SSCIcons, Types } from '../../Icon/Icon.types';
 import StyledIcon from '../../Button/StyledIcon';
 import { ButtonSizes } from '../../Button/Button.enums';

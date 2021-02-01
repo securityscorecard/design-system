@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import { FlexContainer } from '../../FlexContainer';
-import { SSCIconNames } from '../../Icon/Icon.enums';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import ToolsTabItem from './ToolsTabItem';
 import { ToolsTabItemStates } from './ToolsTabItem.enum';
 

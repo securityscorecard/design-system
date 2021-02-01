@@ -14,3 +14,6 @@ export { arrowUp } from './arrowUp';
 export { quoteSquare } from './quoteSquare';
 export { caretDown } from './caretDown';
 export { plus } from './plus';
+export { sort } from './sort';
+export { sortUp } from './sortUp';
+export { sortDown } from './sortDown';

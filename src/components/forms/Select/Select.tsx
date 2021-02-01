@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
 
 import { Icon } from '../../Icon';
-import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
+import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { reactSelectTheme, selectStyles } from './styles';
 import { SelectProps } from './Select.types';
 

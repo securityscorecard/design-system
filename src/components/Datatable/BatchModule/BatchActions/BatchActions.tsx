@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { ColorTypes } from '../../../../theme/colors.enums';
+import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils/helpers';
 import { FlexContainer } from '../../../FlexContainer';
 import { Button } from '../../../Button';
 import { ButtonVariants } from '../../../Button/Button.enums';
 import { Icon } from '../../../Icon';
-import { SSCIconNames } from '../../../Icon/Icon.enums';
 import {
   AbsoluteLinkActionKind,
   ActionPropType,

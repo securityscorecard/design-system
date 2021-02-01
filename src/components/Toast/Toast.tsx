@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
+import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { createPaddingSpacing, getColor, pxToRem } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
-import { SSCIconNames } from '../Icon/Icon.enums';
 import { Paragraph } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { ToastProps } from './Toast.types';

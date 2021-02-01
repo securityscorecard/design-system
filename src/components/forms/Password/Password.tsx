@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
 import { Icon } from '../../Icon';
-import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
+import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Input } from '../Input';
 import { PasswordProps } from './Password.types';
 
