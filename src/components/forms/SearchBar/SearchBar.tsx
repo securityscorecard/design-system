@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { isNotEmpty } from 'ramda-adjunct';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
 import { Icon } from '../../Icon';
@@ -9,7 +10,7 @@ import { Spinner } from '../../Spinner';
 import { Input } from '../Input';
 import SearchSuggestions from './SearchSuggestions';
 import { SearchBarProps } from './SearchBar.types';
-import { SearchSuggestionFormatsLabels } from './Search.enums';
+import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import useControlledInput from '../hooks/useControlledInput';
 
 const SearchBarWrapper = styled.div`
@@ -59,10 +60,10 @@ const ClearSearchButton = styled.button`
 
 const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
+  renderSearchSuggestion = renderSuggestionDefault,
   placeholder,
   isInvalid = false,
   isDisabled = false,
-  searchSuggestionFormat = 'default',
   ...props
 }) => {
   const { defaultValue = '' } = props as {
@@ -99,6 +100,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const clearSearch = () => {
     resetValue();
     setIsSearching(false);
+    setSearchResults([]);
     setSearchPerformed(false);
   };
 
@@ -145,9 +147,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </LoadingIcon>
       )}
 
-      {searchPerformed && (
+      {searchPerformed && isNotEmpty(searchResults) && (
         <SearchSuggestions
-          searchSuggestionFormat={searchSuggestionFormat}
+          renderSearchSuggestion={renderSearchSuggestion}
           suggestions={searchResults}
           onClickOut={() => setSearchPerformed(false)}
         />
@@ -159,9 +161,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 SearchBar.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,
-  searchSuggestionFormat: PropTypes.oneOf(
-    Object.values(SearchSuggestionFormatsLabels),
-  ),
+  renderSearchSuggestion: PropTypes.func,
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,
   defaultValue: PropTypes.string,

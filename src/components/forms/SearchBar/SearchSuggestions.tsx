@@ -14,7 +14,6 @@ import {
   SearchSuggestionPropType,
   SearchSuggestionsPaneProps,
 } from './SearchSuggestions.types';
-import { SearchSuggestionFormats } from './Search.enums';
 
 const SearchSuggestionsPane = styled(StyledDropdownPane)`
   min-width: 100%;
@@ -27,11 +26,10 @@ const SearchSuggestionsLink = styled(DropdownLink)`
 
 const SearchSuggestions: React.FC<SearchSuggestionsPaneProps> = ({
   suggestions,
-  searchSuggestionFormat = 'default',
   onClickOut,
+  renderSearchSuggestion,
 }) => {
   const searchSuggestionsPaneRef = useOuterClick(onClickOut);
-  const searchSuggestion = SearchSuggestionFormats[searchSuggestionFormat];
 
   return (
     <SearchSuggestionsPane ref={searchSuggestionsPaneRef}>
@@ -44,7 +42,7 @@ const SearchSuggestions: React.FC<SearchSuggestionsPaneProps> = ({
                   name={suggestion.name}
                   onClick={suggestion.onClick}
                 >
-                  {searchSuggestion({ suggestion })}
+                  {renderSearchSuggestion(suggestion)}
                 </SearchSuggestionsLink>
               </li>
             )
@@ -57,8 +55,8 @@ const SearchSuggestions: React.FC<SearchSuggestionsPaneProps> = ({
 
 SearchSuggestions.propTypes = {
   suggestions: PropTypes.arrayOf(SearchSuggestionPropType).isRequired,
+  renderSearchSuggestion: PropTypes.func.isRequired,
   onClickOut: PropTypes.func.isRequired,
-  searchSuggestionFormat: PropTypes.string,
 };
 
 export default SearchSuggestions;

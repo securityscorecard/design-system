@@ -3,32 +3,25 @@ import React from 'react';
 import { Col, Row } from '../../layout';
 import { Strong } from '../../typography';
 import {
-  SearchSuggestionDefaultPropType,
-  SearchSuggestionFilterPropType,
-} from './SearchSuggestions.types';
+  renderSuggestionFunc,
+  renderSuggestionWithFilterFunc,
+} from './SearchBar.types';
 
-const SearchSuggestionDefault = ({ suggestion }) => {
-  return suggestion.value;
+export const renderSuggestionDefault: renderSuggestionFunc = ({ value }) => {
+  return <>{value}</>;
 };
 
-const SearchSuggestionFilter = ({ suggestion }) => {
+export const renderSuggestionFilter: renderSuggestionWithFilterFunc = ({
+  value,
+  filter,
+}) => {
   return (
     <Row>
-      <Col cols={3}>{suggestion.filter.field} </Col>
-      <Col cols={3}>{suggestion.filter.condition}</Col>
+      <Col cols={3}>{filter.field} </Col>
+      <Col cols={3}>{filter.condition}</Col>
       <Col cols={6}>
-        <Strong>{suggestion.value}</Strong>
+        <Strong>{value}</Strong>
       </Col>
     </Row>
   );
 };
-
-SearchSuggestionDefault.propTypes = {
-  suggestion: SearchSuggestionDefaultPropType.isRequired,
-};
-
-SearchSuggestionFilter.propTypes = {
-  suggestion: SearchSuggestionFilterPropType.isRequired,
-};
-
-export { SearchSuggestionDefault, SearchSuggestionFilter };

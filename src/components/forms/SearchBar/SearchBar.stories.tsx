@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import SearchBar from './SearchBar';
 import { SearchBarProps } from './SearchBar.types';
+import { renderSuggestionFilter } from './SearchSuggestionFormats';
 
 export default {
   title: 'components/forms/SearchBar',
@@ -42,7 +43,7 @@ const commonArgs = {
 };
 
 export const playground: Story<SearchBarProps> = (args) => (
-  <SearchBar aria-label="SearchBar" {...args} {...commonArgs} />
+  <SearchBar aria-label="SearchBar" {...args} />
 );
 playground.parameters = {
   chromatic: { disable: true },
@@ -50,7 +51,6 @@ playground.parameters = {
 playground.argTypes = {
   isDisabled: { control: 'boolean' },
   isInvalid: { control: 'boolean' },
-  searchSuggestionFormat: { control: 'select', defaultValue: 'default' },
 };
 
 export const DefaultSearchBar: Story = () => (
@@ -60,7 +60,7 @@ export const DefaultSearchBar: Story = () => (
 export const QuickFilterSearchBar: Story = () => (
   <SearchBar
     aria-label="SearchBar"
-    searchSuggestionFormat="filter"
+    renderSearchSuggestion={renderSuggestionFilter}
     {...commonArgs}
   />
 );
@@ -69,6 +69,7 @@ export const SearchBarActive: Story = () => (
   <SearchBar
     aria-label="SearchBar"
     defaultValue="search text"
+    renderSearchSuggestion={renderSuggestionFilter}
     {...commonArgs}
   />
 );
