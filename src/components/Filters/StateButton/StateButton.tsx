@@ -37,9 +37,9 @@ const RemoveButton = styled.button`
   justify-content: center;
   position: relative;
   padding: ${pxToRem(8, 5.5)};
-  cursor: pointer;
+  cursor: ${({ disabled }) => !disabled && 'pointer'};
   &:hover {
-    background-color: ${getColor('strawberry')};
+    background-color: ${({ disabled }) => !disabled && getColor('strawberry')};
     border-top-right-radius: ${getBorderRadius};
     border-bottom-right-radius: ${getBorderRadius};
   }
@@ -56,19 +56,21 @@ const LightText = styled(Text)`
 `;
 
 const StateButton: React.FC<StateButtonProps> = ({
-  id,
+  index,
   onClick,
-  isFilterApplied = false,
+  isApplied = false,
+  isDisabled,
 }) => {
   const {
     iconColor,
     iconName,
     handleMouseOut,
     handleMouseOver,
-  } = useStateButtonIcon(isFilterApplied);
+  } = useStateButtonIcon(isApplied, isDisabled);
   return (
     <RemoveButton
-      onClick={() => onClick(id)}
+      disabled={isDisabled}
+      onClick={onClick(index)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
     >
@@ -78,9 +80,11 @@ const StateButton: React.FC<StateButtonProps> = ({
         type={IconTypes.ssc}
         hasFixedWidth
       />
-      <Popup alignItems="center" justifyContent="center">
-        <LightText>Remove</LightText>
-      </Popup>
+      {!isDisabled && (
+        <Popup alignItems="center" justifyContent="center">
+          <LightText>Remove</LightText>
+        </Popup>
+      )}
     </RemoveButton>
   );
 };
@@ -88,7 +92,8 @@ const StateButton: React.FC<StateButtonProps> = ({
 export default StateButton;
 
 StateButton.propTypes = {
-  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  isFilterApplied: PropTypes.bool,
+  isApplied: PropTypes.bool,
 };
