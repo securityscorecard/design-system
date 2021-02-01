@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { equals } from 'ramda';
+import {
+  equals,
+  find,
+  identity,
+  map,
+  memoizeWith,
+  pipe,
+  prop,
+  propEq,
+} from 'ramda';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
@@ -32,24 +41,33 @@ const SplitField = styled.div<SplitFieldProps>`
   }
 `;
 
-const getDefaultCondition = (dataPoints, dataPointValue) =>
-  dataPoints
-    .find(({ value }) => value === dataPointValue)
-    .conditions.find(({ isDefault }) => isDefault).value;
+const getDataPointConditions = memoizeWith(
+  identity,
+  (dataPointValue, dataPoints) =>
+    pipe(find(propEq('value', dataPointValue)), prop('conditions'))(dataPoints),
+);
+
+const getDefaultCondition = pipe(
+  getDataPointConditions,
+  find(propEq('isDefault', true)),
+  prop('value'),
+);
 
 const getConditionInput = (
-  selectedConditionValue,
   dataPoints,
   dataPointValue,
+  selectedConditionValue,
 ) =>
-  dataPoints
-    .find(({ value }) => value === dataPointValue)
-    .conditions.find(({ value }) => value === selectedConditionValue).input;
+  pipe(
+    getDataPointConditions,
+    find(propEq('value', selectedConditionValue)),
+    prop('input'),
+  )(dataPointValue, dataPoints);
 
 const getOperatorOptions = (operatorValue) =>
-  operatorOptions.find(({ value }) => value === operatorValue);
+  find(propEq('value', operatorValue))(operatorOptions);
 
-const getDataPointOptions = (dataPoints) => dataPoints.map(normalizeOptions);
+const getDataPointOptions = map(normalizeOptions);
 
 const FilterRow: React.FC<FilterRowProps> = ({
   dataPoints,
@@ -78,8 +96,8 @@ const FilterRow: React.FC<FilterRowProps> = ({
 
   const handleDataPointChange = ({ value: selectedDataPointValue }) => {
     const defaultConditionValue = getDefaultCondition(
-      dataPoints,
       selectedDataPointValue,
+      dataPoints,
     );
 
     onDataPointChange(selectedDataPointValue, defaultConditionValue, index);
@@ -87,9 +105,9 @@ const FilterRow: React.FC<FilterRowProps> = ({
 
   const handleConditionChange = ({ value: selectedConditionValue }) => {
     const NewInputComponent = getConditionInput(
-      selectedConditionValue,
-      dataPoints,
       dataPoint.value,
+      dataPoints,
+      selectedConditionValue,
     );
     const areComponentsEqual = equals(InputComponent, NewInputComponent);
 
