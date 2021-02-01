@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { DataPoint } from '../Filters.types';
+import { Condition, DataPoint } from '../Filters.types';
 import { useFilterRowType } from './useFilterRow.types';
 import { Option } from '../Select/Select.types';
 
-export const normalizeOptions = ({ value, label }: Option): Option => ({
+export const normalizeOptions = <O extends Option>({
+  value,
+  label,
+}: O): Option => ({
   value,
   label,
 });
@@ -19,9 +22,9 @@ const getValuesOnChange = (dataPoints, dataPointValue, conditionValue) => {
   );
 
   return {
-    dataPoint: normalizeOptions(dataPoint),
+    dataPoint: normalizeOptions<DataPoint>(dataPoint),
     conditions,
-    condition: normalizeOptions(condition),
+    condition: normalizeOptions<Condition>(condition),
     Input: condition.input,
   };
 };
