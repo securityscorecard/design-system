@@ -54,9 +54,9 @@ const getDefaultCondition = pipe(
 );
 
 const getConditionInput = (
-  dataPoints,
-  dataPointValue,
   selectedConditionValue,
+  dataPointValue,
+  dataPoints,
 ) =>
   pipe(
     getDataPointConditions,
@@ -105,9 +105,9 @@ const FilterRow: React.FC<FilterRowProps> = ({
 
   const handleConditionChange = ({ value: selectedConditionValue }) => {
     const NewInputComponent = getConditionInput(
+      selectedConditionValue,
       dataPoint.value,
       dataPoints,
-      selectedConditionValue,
     );
     const areComponentsEqual = equals(InputComponent, NewInputComponent);
 
