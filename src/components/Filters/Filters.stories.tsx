@@ -11,12 +11,16 @@ export default {
   title: 'components/Filters',
 } as Meta;
 
+// TODO cover other stories
 export const DefaultFilters: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       data={dataMock}
       dataPoints={dataPointsMock}
       onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
     />
   </FlexContainer>
 );

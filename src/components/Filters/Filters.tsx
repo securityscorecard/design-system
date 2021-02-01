@@ -1,30 +1,181 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { equals } from 'ramda';
 
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
-import { DataPointPropTypes, FiltersProps } from './Filters.types';
+import { BottomBar } from './BottomBar';
+import { DataPointPropTypes, Filter, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
 
-const generateId = ({ operator, dataPoint, condition, input }, index) =>
-  `${operator}-${dataPoint}-${condition}-${input}-${index}`;
+const generateId = ({ operator, dataPoint, condition }, index) =>
+  `${operator}-${dataPoint}-${condition}-${index}`;
+
+const getDefaultCondition = (dataPoints) =>
+  dataPoints[0].conditions.find(({ isDefault }) => isDefault).value;
+
+const getDefaultData = (dataPoints) => [
+  {
+    operator: Operators.and,
+    dataPoint: dataPoints[0].value,
+    condition: getDefaultCondition(dataPoints),
+    input: '',
+    isApplied: false,
+  },
+];
 
 const Filters: React.FC<FiltersProps> = ({
   dataPoints,
-  data,
-  // TODO implement logic
-  /* eslint-disable @typescript-eslint/no-unused-vars */
+  data = getDefaultData(dataPoints),
   onApply,
   onChange,
-  /* eslint-enable */
-}) => (
-  <FlexContainer flexDirection="column">
-    {data.map((props, index) => {
-      const id = generateId(props, index);
-      return <FilterRow key={id} dataPoints={dataPoints} id={id} {...props} />;
-    })}
-  </FlexContainer>
-);
+  onClose,
+  onCancel,
+  isLoading = false,
+}) => {
+  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(data);
+  const [isRemoveDisabled, setRemoveDisabled] = useState(false);
+
+  useEffect(() => {
+    const defaultData = getDefaultData(dataPoints);
+    if (equals(filtersValues, defaultData)) {
+      setRemoveDisabled(true);
+    } else {
+      setRemoveDisabled(false);
+    }
+  }, [filtersValues, dataPoints]);
+
+  const callOnChange = () => {
+    if (typeof onChange === 'function') {
+      onChange(filtersValues);
+    }
+  };
+
+  const handleOperatorChange = ({ value }) => {
+    const newFilters = filtersValues.map((row) => ({
+      ...row,
+      operator: value,
+      isApplied: false,
+    }));
+
+    setFiltersValues(newFilters);
+
+    callOnChange();
+  };
+
+  const handleDataPointChange = (dataPoint, condition, index) => {
+    const newFilters = [...filtersValues];
+    newFilters[index].dataPoint = dataPoint;
+    newFilters[index].condition = condition;
+    newFilters[index].input = '';
+    newFilters[index].isApplied = false;
+
+    setFiltersValues(newFilters);
+
+    callOnChange();
+  };
+
+  const handleConditionChange = (condition, index, areComponentsEqual) => {
+    const newFilters = [...filtersValues];
+    newFilters[index].condition = condition;
+    if (!areComponentsEqual) {
+      newFilters[index].input = '';
+    }
+    newFilters[index].isApplied = false;
+
+    setFiltersValues(newFilters);
+
+    callOnChange();
+  };
+
+  const handleInputChange = (input, index) => {
+    const newFilters = [...filtersValues];
+    newFilters[index].input = input;
+    newFilters[index].isApplied = false;
+
+    setFiltersValues(newFilters);
+
+    callOnChange();
+  };
+
+  const handleAddRow = () => {
+    const newFilters = [...filtersValues];
+    const newRow = {
+      operator: newFilters[0].operator,
+      dataPoint: dataPoints[0].value,
+      condition: getDefaultCondition(dataPoints),
+      input: '',
+      isApplied: false,
+    };
+    newFilters.push(newRow);
+
+    setFiltersValues(newFilters);
+
+    callOnChange();
+  };
+
+  const handleClearAll = () => {
+    const newRow = getDefaultData(dataPoints);
+
+    setFiltersValues(newRow);
+
+    callOnChange();
+  };
+
+  const handleApply = () => {
+    const newFilters = filtersValues.map((fields) => ({
+      ...fields,
+      isApplied: true,
+    }));
+    setFiltersValues(newFilters);
+
+    onApply(filtersValues);
+  };
+
+  const handleRemoveFilter = (index) => () => {
+    let newFilters;
+    if (filtersValues.length > 1) {
+      newFilters = [...filtersValues];
+      newFilters.splice(index, 1);
+    } else {
+      newFilters = getDefaultData(dataPoints);
+    }
+
+    setFiltersValues(newFilters);
+
+    callOnChange();
+  };
+
+  return (
+    <FlexContainer flexDirection="column">
+      {filtersValues.map((props, index) => {
+        const id = generateId(props, index);
+        return (
+          <FilterRow
+            key={id}
+            dataPoints={dataPoints}
+            index={index}
+            isRemoveDisabled={isRemoveDisabled}
+            onConditionChange={handleConditionChange}
+            onDataPointChange={handleDataPointChange}
+            onInputChange={handleInputChange}
+            onOperatorChange={handleOperatorChange}
+            onRemove={handleRemoveFilter}
+            {...filtersValues[index]}
+          />
+        );
+      })}
+      <BottomBar
+        isLoading={isLoading}
+        onAdd={handleAddRow}
+        onApply={handleApply}
+        onCancel={onCancel}
+        onClearAll={handleClearAll}
+        onClose={onClose}
+      />
+    </FlexContainer>
+  );
+};
 
 export default Filters;
 
@@ -36,8 +187,12 @@ Filters.propTypes = {
       dataPoint: PropTypes.string.isRequired,
       condition: PropTypes.string.isRequired,
       input: PropTypes.string.isRequired,
+      isApplied: PropTypes.bool.isRequired,
     }),
   ).isRequired,
   onApply: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
   onChange: PropTypes.func,
 };
