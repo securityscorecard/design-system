@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Text } from '../../typography';
@@ -11,12 +12,17 @@ const Container = styled(FlexContainer)`
   border-radius: ${getBorderRadius};
   height: ${pxToRem(32)};
   padding: ${pxToRem(8, 16)};
+  text-transform: capitalize;
 `;
 
-const WhereOption: React.FC = () => (
+const DisabledOperator: React.FC = ({ children }) => (
   <Container alignItems="center">
-    <Text size={TextSizes.md}>Where</Text>
+    <Text size={TextSizes.md}>{children}</Text>
   </Container>
 );
 
-export default WhereOption;
+export default DisabledOperator;
+
+DisabledOperator.propTypes = {
+  children: PropTypes.node.isRequired,
+};
