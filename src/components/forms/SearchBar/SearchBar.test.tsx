@@ -2,42 +2,18 @@ import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import SearchBar from './SearchBar';
-
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+import { createMockOnSearch } from './mocks';
 
 const onClickSuggestion = jest.fn();
 
-export const mockOnSearch = async (query) => {
-  await delay(20);
-  return [
-    {
-      name: `${query} suggestion 1`,
-      value: `${query} suggestion 1`,
-      filter: { field: 'Domain', condition: 'is' },
-      onClick: onClickSuggestion,
-    },
-    {
-      name: `${query} suggestion 2`,
-      value: `${query} suggestion 2`,
-      filter: { field: 'Domain', condition: 'is' },
-      onClick: onClickSuggestion,
-    },
-    {
-      name: `${query} suggestion 3`,
-      value: `${query} suggestion 3`,
-      filter: { field: 'Domain', condition: 'contains' },
-      onClick: onClickSuggestion,
-    },
-  ];
-};
+const mockOnSearch = createMockOnSearch(onClickSuggestion);
 
-const onSearch = jest.fn(mockOnSearch);
 const setup = () => {
   const utils = render(
     <SearchBar
       defaultValue="Searching for Default"
       placeholder="Search for X"
-      onSearch={onSearch}
+      onSearch={mockOnSearch}
     />,
   );
   const searchInput = utils.getByPlaceholderText(
