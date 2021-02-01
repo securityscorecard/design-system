@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
+  curry,
   equals,
   find,
   identity,
@@ -53,19 +54,18 @@ const getDefaultCondition = pipe(
   prop('value'),
 );
 
-const getConditionInput = (
-  selectedConditionValue,
-  dataPointValue,
-  dataPoints,
-) =>
-  pipe(
-    getDataPointConditions,
-    find(propEq('value', selectedConditionValue)),
-    prop('input'),
-  )(dataPointValue, dataPoints);
+const getConditionInput = curry(
+  (selectedConditionValue, dataPointValue, dataPoints) =>
+    pipe(
+      getDataPointConditions,
+      find(propEq('value', selectedConditionValue)),
+      prop('input'),
+    )(dataPointValue, dataPoints),
+);
 
-const getOperatorOptions = (operatorValue) =>
-  find(propEq('value', operatorValue))(operatorOptions);
+const getOperatorOptions = curry((operatorValue) =>
+  find(propEq('value', operatorValue))(operatorOptions),
+);
 
 const getDataPointOptions = map(normalizeOptions);
 
