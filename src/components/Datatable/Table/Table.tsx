@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
   useFlexLayout,
   usePagination,
   useRowSelect,
+  useSortBy,
   useTable,
 } from 'react-table';
 import { useSticky } from 'react-table-sticky';
+import { prop } from 'ramda';
 
 import { useDatatable } from '../hooks/useDatatable';
 import { TableCell } from './TableCell';
 import { TableHeadCell } from './TableHeadCell';
 import { TableRow } from './TableRow';
-import { Data } from './temp/config';
 import { TableProps } from './Table.types';
 import { actionsColumn, selectionColumn } from './temp/columns';
 import { ActionKindsPropType } from '../types/Action.types';
@@ -49,7 +50,7 @@ const StyledTableBody = styled.thead<{ isTableSticky: boolean }>`
     `};
 `;
 
-const Table: React.FC<TableProps<Data>> = ({
+const Table = <D extends Record<string, unknown>>({
   columns,
   data,
   fetchData,
@@ -57,7 +58,7 @@ const Table: React.FC<TableProps<Data>> = ({
   primaryKey,
   rowActions,
   pageCount: controlledPageCount,
-}) => {
+}: TableProps<D>): React.ReactElement => {
   const { setSelectedIds } = useDatatable();
   const {
     getTableProps,
@@ -74,17 +75,19 @@ const Table: React.FC<TableProps<Data>> = ({
     previousPage,
     setPageSize,
     // Get the state from the instance
-    state: { pageIndex, pageSize, selectedRowIds },
-  } = useTable<Data>(
+    state: { pageIndex, pageSize, selectedRowIds, sortBy },
+  } = useTable<D>(
     {
       columns,
       data,
-      initialState: { pageIndex: 0 }, // We want to start at page 1
+      initialState: { pageIndex: 0, sortBy: [] }, // We want to start at page 1
       manualPagination: true, // We will handle pagination by ourselves
+      manualSortBy: true, // sorting is handled backend
       pageCount: controlledPageCount, // Since we handling pagination we need to pass page count
       autoResetSelectedRows: false, // Do not reset selection when moving to different page
-      getRowId: (row) => row[primaryKey], // Set row id for selection
+      getRowId: prop(primaryKey), // Set row id for selection
     },
+    useSortBy,
     usePagination,
     useRowSelect,
     useFlexLayout,
@@ -103,14 +106,14 @@ const Table: React.FC<TableProps<Data>> = ({
   );
 
   // Listen for changes in selection and propage to parent component
-  React.useEffect(() => {
+  useEffect(() => {
     setSelectedIds(Object.keys(selectedRowIds));
   }, [setSelectedIds, selectedRowIds]);
 
   // Listen for changes in pagination and use the state to fetch our new data
-  React.useEffect(() => {
-    fetchData({ pageIndex, pageSize });
-  }, [fetchData, pageIndex, pageSize]);
+  useEffect(() => {
+    fetchData({ pageIndex, pageSize, sortBy });
+  }, [fetchData, pageIndex, pageSize, sortBy]);
 
   const isTableSticky = true; // TODO: dynamicaly handle if we need stickyness
 
@@ -125,16 +128,10 @@ const Table: React.FC<TableProps<Data>> = ({
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <TableHeadCell {...column.getHeaderProps()}>
-                  {column.render('Header')}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? ' 🔽'
-                        : ' 🔼'
-                      : ''}
-                  </span>
-                </TableHeadCell>
+                <TableHeadCell<D>
+                  column={column}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                />
               ))}
             </TableRow>
           ))}

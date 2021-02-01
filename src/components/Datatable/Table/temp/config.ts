@@ -18,7 +18,7 @@ export type Data = {
 const data: Data[] = ipAssetsMock;
 const primaryKey = 'ipAddress';
 const columns: Column<Data>[] = [
-  { Header: 'IP Adress', accessor: 'ipAddress', width: 200 },
+  { Header: 'IP Address', accessor: 'ipAddress', width: 200 },
   { Header: 'Status', accessor: 'status', width: 96 },
   { Header: 'Domains', accessor: 'domainsCount', width: 96 },
   {
