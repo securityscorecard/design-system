@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-export default (
-  ref: React.MutableRefObject<HTMLInputElement>,
+export const useControlledInput = (
   value: string,
   onChangeAdditionalAction: () => void,
 ): {

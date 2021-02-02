@@ -5,13 +5,13 @@ import { isNotEmpty } from 'ramda-adjunct';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
 import { Icon } from '../../Icon';
-import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
+import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
 import { Input } from '../Input';
 import SearchSuggestions from './SearchSuggestions';
 import { SearchBarProps } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
-import useControlledInput from '../hooks/useControlledInput';
+import { useControlledInput } from '../hooks/useControlledInput';
 
 const SearchBarWrapper = styled.div`
   position: relative;
@@ -69,11 +69,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const { defaultValue = '' } = props as {
     defaultValue: string;
   };
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const onChangeQuery = async () => {
     const queryValue = searchInputRef.current.value;
@@ -89,7 +89,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const { inputValue: query, onChangeInput, resetValue } = useControlledInput(
-    searchInputRef,
     defaultValue,
     onChangeQuery,
   );
