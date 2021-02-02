@@ -18,7 +18,7 @@ const commonArgs = {
 };
 
 export const playground: Story<SearchBarProps> = (args) => (
-  <SearchBar aria-label="SearchBar" {...args} />
+  <SearchBar aria-label="SearchBar" {...args} {...commonArgs} />
 );
 playground.parameters = {
   chromatic: { disable: true },
