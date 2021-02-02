@@ -1,5 +1,5 @@
-import { IconTypes, SSCIconNames } from './Icon.enums';
 import { Colors } from '../../theme/colors.types';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingProps } from '../../types/spacing.types';
 
 export type SSCIcons = typeof SSCIconNames[keyof typeof SSCIconNames];

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { isNotNull, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { pxToRem } from '../../utils/helpers';
 import { Spinner } from '../Spinner';
-import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import { SSCIcons, Types } from '../Icon/Icon.types';
 import StyledButton from './StyledButton';
 import StyledIcon from './StyledIcon';

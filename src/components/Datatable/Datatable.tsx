@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { props } from './Table/temp/config';
+import { Data, props } from './Table/temp/config';
 import Table from './Table/Table';
 import { FlexContainer } from '../FlexContainer';
 import { actionsMock } from './mocks/actions';
@@ -15,7 +15,7 @@ const Datatable: React.FC = () => {
   const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
   const fetchIdRef = React.useRef(0);
 
-  const fetchData = React.useCallback(({ pageSize, pageIndex }) => {
+  const fetchData = useCallback(({ pageSize, pageIndex }) => {
     // This will get called when the table needs new data
     // You could fetch your data from literally anywhere,
     // even a server. But for this example, we'll just fake it.
@@ -58,7 +58,7 @@ const Datatable: React.FC = () => {
         <FlexContainer>ToolbarModule</FlexContainer>
         <FlexContainer>Filters</FlexContainer>
         <BatchModule actions={actionsMock} />
-        <Table
+        <Table<Data>
           columns={columns}
           data={data}
           fetchData={fetchData}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { IconProps, StateButtonIconHook } from './useStateButton.types';
-import { SSCIconNames } from '../../Icon/Icon.enums';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColorTypes } from '../../../theme/colors.enums';
+import { IconProps, StateButtonIconHook } from './useStateButton.types';
 
 const timesIconColor = ColorTypes.graphite2B;
 const checkIconColor = ColorTypes.graphiteB;

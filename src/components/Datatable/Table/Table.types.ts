@@ -1,4 +1,4 @@
-import { Column } from 'react-table';
+import { Column, SortingRule } from 'react-table';
 
 import { RowAction } from './temp/config';
 
@@ -8,9 +8,11 @@ export interface TableProps<D extends Record<string, unknown>> {
   fetchData: ({
     pageSize,
     pageIndex,
+    sortBy,
   }: {
     pageIndex: number;
     pageSize: number;
+    sortBy?: SortingRule<D>[];
   }) => void;
   isLoading: boolean;
   primaryKey: string;

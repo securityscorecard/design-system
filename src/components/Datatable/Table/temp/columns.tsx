@@ -13,6 +13,7 @@ export const selectionColumn = {
   id: 'selection',
   sticky: 'left',
   width: 48,
+  disableSortBy: true,
   Header: ({
     getToggleAllRowsSelectedProps,
   }: HeaderProps<Data>): JSX.Element => (
@@ -35,11 +36,13 @@ export const actionsColumn = (
   id: string;
   sticky: string;
   width: number;
+  disableSortBy: boolean;
   Cell: ({ row }: CellProps<Data>) => JSX.Element;
 } => ({
   id: 'actions',
   sticky: 'right',
   width: 48,
+  disableSortBy: true,
   Cell: ({ row }: CellProps<Data>): JSX.Element => {
     const actions = map((action) => ({
       ...action,

@@ -10,6 +10,9 @@ export const SSCIconNames = {
   quoteSquare: 'quote-square',
   caretDown: 'caret-down',
   plus: 'plus',
+  sort: 'sort',
+  sortUp: 'sort-up',
+  sortDown: 'sort-down',
 } as const;
 
 export const IconTypes = {

@@ -7,7 +7,7 @@ import { pxToRem } from '../../../utils/helpers';
 import { Button } from '../../Button';
 import { ButtonColors, ButtonVariants } from '../../Button/Button.enums';
 import { Icon } from '../../Icon';
-import { SSCIconNames } from '../../Icon/Icon.enums';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ScrollToTopButtonProps } from './ScrollToTopButton.types';
 
 const StyledButton = styled(Button)`

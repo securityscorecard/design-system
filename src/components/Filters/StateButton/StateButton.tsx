@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { IconTypes } from '../../../theme/icons/icons.enums';
 import { Icon } from '../../Icon';
-import { IconTypes } from '../../Icon/Icon.enums';
 import { Text } from '../../typography/Text';
 import { FlexContainer } from '../../FlexContainer';
 import {

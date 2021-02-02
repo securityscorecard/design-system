@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, pxToRem } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
-import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import { Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { AccordionCollapsibleProps, AccordionItemId } from './Accordion.types';

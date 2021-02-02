@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { pxToRem } from '../../utils/helpers';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Icon } from '../Icon';
 import { SSCIcons, Types } from '../Icon/Icon.types';
-import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import { IconButtonProps } from './IconButton.types';
 
 const StyledIconButton = styled(Button)`

@@ -10,7 +10,7 @@ import {
 } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
 import { Icon } from '../../Icon';
-import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
+import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';

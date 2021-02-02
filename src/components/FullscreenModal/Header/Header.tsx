@@ -11,7 +11,7 @@ import {
 } from '../../Button/Button.enums';
 import { FlexContainer } from '../../FlexContainer';
 import { Icon } from '../../Icon';
-import { SSCIconNames } from '../../Icon/Icon.enums';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Col, Container, Row } from '../../layout';
 import { H2, H3 } from '../../typography';
 import { useStickyHeader } from '../hooks/useStickyHeader';

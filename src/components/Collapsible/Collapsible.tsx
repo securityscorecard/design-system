@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getBorderRadius, getColor, pxToRem } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
-import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import { Strong, Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { CollapsibleProps } from './Collapsible.types';
