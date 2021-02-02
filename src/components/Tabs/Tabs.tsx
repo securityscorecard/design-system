@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { pxToRem } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
-import { TabsProps } from './Tabs.types';
+import { TabSizes, TabsProps } from './Tabs.types';
 
 const LabelList = styled(FlexContainer)`
   list-style-type: none;
@@ -16,6 +16,7 @@ const Tabs: React.FC<TabsProps> = ({
   selectedValue,
   children,
   onSelectTab,
+  size = TabSizes.h3,
 }) => {
   return (
     <LabelList>
@@ -25,6 +26,7 @@ const Tabs: React.FC<TabsProps> = ({
         }
 
         return React.cloneElement(tab, {
+          size,
           key: tab.props.value,
           isSelected: tab.props.value === selectedValue,
           onClick: onSelectTab,
@@ -38,6 +40,7 @@ Tabs.propTypes = {
   selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
+  size: PropTypes.oneOf(Object.values(TabSizes)),
   onSelectTab: PropTypes.func,
 };
 

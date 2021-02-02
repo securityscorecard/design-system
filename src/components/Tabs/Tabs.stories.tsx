@@ -82,3 +82,33 @@ export const RoutableTabs: Story = () => {
     </MemoryRouter>
   );
 };
+
+export const TabSizes: Story = () => (
+  <>
+    <Tabs selectedValue="one" size="h2" onSelectTab={action('Select Tab')}>
+      <Tab value="one">One</Tab>
+      <Tab value="two">Two</Tab>
+      <Tab value="three">Three</Tab>
+    </Tabs>
+    <Tabs selectedValue="one" size="h3" onSelectTab={action('Select Tab')}>
+      <Tab value="one">One</Tab>
+      <Tab value="two">Two</Tab>
+      <Tab value="three">Three</Tab>
+    </Tabs>
+    <Tabs selectedValue="one" size="h4" onSelectTab={action('Select Tab')}>
+      <Tab value="one">One</Tab>
+      <Tab value="two">Two</Tab>
+      <Tab value="three">Three</Tab>
+    </Tabs>
+    <Tabs selectedValue="one" size="lg" onSelectTab={action('Select Tab')}>
+      <Tab value="one">One</Tab>
+      <Tab value="two">Two</Tab>
+      <Tab value="three">Three</Tab>
+    </Tabs>
+    <Tabs selectedValue="one" size="md" onSelectTab={action('Select Tab')}>
+      <Tab value="one">One</Tab>
+      <Tab value="two">Two</Tab>
+      <Tab value="three">Three</Tab>
+    </Tabs>
+  </>
+);
