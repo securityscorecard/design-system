@@ -22,7 +22,7 @@ const StyledInput = styled(Input)`
   ${createPaddingSpacing({ horizontal: 2.5 })};
   &:focus,
   &.focus {
-    ${createPaddingSpacing({ horizontal: 2.5 })};
+    ${createPaddingSpacing({ horizontal: 2.45 })};
   }
 `;
 
