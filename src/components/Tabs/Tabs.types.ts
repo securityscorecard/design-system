@@ -1,8 +1,9 @@
 import { ColorTypes } from '../../theme/colors.enums';
+import { SpacingProps } from '../../types/spacing.types';
 
 export interface LabelProps {
   $isSelected: boolean;
-  color: string;
+  $color: string;
 }
 
 export const TabSizes = {
@@ -24,7 +25,7 @@ export interface TabProps {
   size?: Sizes;
 }
 
-export interface TabsProps {
+export interface TabsProps extends SpacingProps {
   size?: Sizes;
   selectedValue: string | number;
   onSelectTab?: (selectedValue: string | number) => void;

@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { pxToRem } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { TabSizes, TabsProps } from './Tabs.types';
+import { SpacingSizeValuePropType } from '../../types/spacing.types';
 
 const LabelList = styled(FlexContainer)`
   list-style-type: none;
-  padding-left: 0;
-  margin-bottom: ${pxToRem(30)};
 `;
 
 const Tabs: React.FC<TabsProps> = ({
@@ -17,9 +15,11 @@ const Tabs: React.FC<TabsProps> = ({
   children,
   onSelectTab,
   size = TabSizes.h3,
+  margin = { bottom: 1.5 },
+  padding = 0,
 }) => {
   return (
-    <LabelList>
+    <LabelList margin={margin} padding={padding}>
       {React.Children.map(children, (tab) => {
         if (!React.isValidElement(tab)) {
           return null;
@@ -41,6 +41,8 @@ Tabs.propTypes = {
     .isRequired,
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
   size: PropTypes.oneOf(Object.values(TabSizes)),
+  margin: SpacingSizeValuePropType,
+  padding: SpacingSizeValuePropType,
   onSelectTab: PropTypes.func,
 };
 
