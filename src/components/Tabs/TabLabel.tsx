@@ -6,9 +6,48 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../utils/helpers';
-import { LabelProps, Sizes } from './Tabs.types';
+import { TabSizes, TabVariants } from './Tabs.enums';
+import { LabelProps, Sizes, Variants } from './Tabs.types';
 
-const headingTab = css<LabelProps>`
+const largeTextSize = css`
+  font-size: ${getFontSize('lg')};
+  line-height: ${getLineHeight('lg')};
+`;
+
+const mediumTextSize = css`
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
+`;
+
+const largeUnderlineSize = css`
+  font-size: ${getFontSize('h2')};
+  line-height: ${getLineHeight('xxl')};
+`;
+
+const mediumUnderlineSize = css`
+  font-size: ${getFontSize('h3')};
+  line-height: ${getLineHeight('xl')};
+`;
+
+const smallUnderlineSize = css`
+  font-size: ${getFontSize('h4')};
+  line-height: ${getLineHeight('lg')};
+`;
+
+const underlineSizes = {
+  [TabSizes.lg]: largeUnderlineSize,
+  [TabSizes.md]: mediumUnderlineSize,
+  [TabSizes.sm]: smallUnderlineSize,
+};
+
+const textSizes = {
+  [TabSizes.lg]: largeTextSize,
+  [TabSizes.md]: mediumTextSize,
+};
+
+const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
+  ${({ size }) => underlineSizes[size] || underlineSizes.md};
+
   padding-bottom: ${pxToRem(2)};
   font-weight: 500;
   border-bottom: 2px solid
@@ -26,7 +65,9 @@ const headingTab = css<LabelProps>`
   }
 `;
 
-const textTab = css<LabelProps>`
+const textTab = css<LabelProps & { size: Sizes; variant: Variants }>`
+  ${({ size }) => textSizes[size] || textSizes.md};
+
   color: ${({ $isSelected, $color }) =>
     $isSelected ? getColor($color) : getColor('graphiteHB')};
   &:hover,
@@ -39,54 +80,16 @@ const textTab = css<LabelProps>`
   }
 `;
 
-const largeSize = css`
-  font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('lg')};
-
-  ${textTab}
-`;
-
-const mediumSize = css`
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
-
-  ${textTab}
-`;
-
-const h2Size = css`
-  font-size: ${getFontSize('h2')};
-  line-height: ${getLineHeight('xxl')};
-
-  ${headingTab}
-`;
-
-const h3Size = css`
-  font-size: ${getFontSize('h3')};
-  line-height: ${getLineHeight('xl')};
-
-  ${headingTab}
-`;
-
-const h4Size = css`
-  font-size: ${getFontSize('h4')};
-  line-height: ${getLineHeight('lg')};
-
-  ${headingTab}
-`;
-
-const sizes = {
-  lg: largeSize,
-  md: mediumSize,
-  h2: h2Size,
-  h3: h3Size,
-  h4: h4Size,
+const tabVariants = {
+  [TabVariants.text]: textTab,
+  [TabVariants.underline]: underlineTab,
 };
 
-const TabLabel = styled.a<LabelProps & { size: Sizes }>`
+const TabLabel = styled.a<LabelProps & { variant: Variants }>`
   color: ${getColor('graphite4B')};
   text-decoration: none;
   cursor: pointer;
-  ${({ size }) => sizes[size]};
+  ${({ variant }) => tabVariants[variant]};
 
   &:not(:last-of-type) {
     margin-right: ${pxToRem(30)};

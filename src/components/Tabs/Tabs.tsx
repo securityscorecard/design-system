@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { FlexContainer } from '../FlexContainer';
-import { TabSizes, TabsProps } from './Tabs.types';
+import { TabsProps } from './Tabs.types';
+import { TabSizes, TabVariants } from './Tabs.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 
 const LabelList = styled(FlexContainer)`
@@ -14,7 +15,8 @@ const Tabs: React.FC<TabsProps> = ({
   selectedValue,
   children,
   onSelectTab,
-  size = TabSizes.h3,
+  size = TabSizes.md,
+  variant = TabVariants.underline,
   margin = { bottom: 1.5 },
   padding = 0,
 }) => {
@@ -27,6 +29,7 @@ const Tabs: React.FC<TabsProps> = ({
 
         return React.cloneElement(tab, {
           size,
+          variant,
           key: tab.props.value,
           isSelected: tab.props.value === selectedValue,
           onClick: onSelectTab,
@@ -41,6 +44,7 @@ Tabs.propTypes = {
     .isRequired,
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
   size: PropTypes.oneOf(Object.values(TabSizes)),
+  variant: PropTypes.oneOf(Object.values(TabVariants)),
   margin: SpacingSizeValuePropType,
   padding: SpacingSizeValuePropType,
   onSelectTab: PropTypes.func,

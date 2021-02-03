@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Label from './TabLabel';
-import { TabProps, TabSizes } from './Tabs.types';
+import { TabProps } from './Tabs.types';
+import { TabSizes, TabVariants } from './Tabs.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 
@@ -11,7 +12,8 @@ const Tab: React.FC<TabProps> = ({
   isSelected,
   onClick,
   color = ColorTypes.blueberryClassic,
-  size = TabSizes.h3,
+  size = TabSizes.md,
+  variant = TabVariants.underline,
   value,
 }) => {
   const isLink = value?.toString()?.startsWith('/');
@@ -28,6 +30,7 @@ const Tab: React.FC<TabProps> = ({
       $isSelected={isSelected}
       as={isLink ? RouterLink : 'a'}
       size={size}
+      variant={variant}
       {...handler}
     >
       {children}
@@ -39,6 +42,7 @@ Tab.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
   size: PropTypes.oneOf(Object.values(TabSizes)),
+  variant: PropTypes.oneOf(Object.values(TabVariants)),
   isSelected: PropTypes.bool,
   color: PropTypes.oneOf(Object.values(ColorTypes)),
   onClick: PropTypes.func,
