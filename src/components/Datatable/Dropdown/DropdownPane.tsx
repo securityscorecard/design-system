@@ -6,6 +6,7 @@ import { isNotUndefined, isNull } from 'ramda-adjunct';
 import {
   getBorderRadius,
   getColor,
+  getDepth,
   getFontSize,
   pxToRem,
 } from '../../../utils/helpers';
@@ -18,7 +19,7 @@ import {
 } from '../types/Action.types';
 import { requireRouterLink } from '../../../utils/require-router-link';
 
-const StyledDropdownPane = styled.div`
+export const StyledDropdownPane = styled.div`
   position: absolute;
   top: calc(100% + 5px);
   left: 50%;
@@ -28,15 +29,16 @@ const StyledDropdownPane = styled.div`
   border-radius: ${getBorderRadius};
   background-color: ${getColor('graphite5H')};
   padding: ${pxToRem(8, 0)};
+  z-index: ${getDepth('dropdown')};
 `;
 
-const List = styled.ul`
+export const List = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
 `;
 
-const DropdownLink = styled.button<DropdownLinkProps>`
+export const DropdownLink = styled.button<DropdownLinkProps>`
   width: 100%;
   display: block;
   padding: ${pxToRem(0, 16)};
