@@ -46,7 +46,7 @@ const textSizes = {
 };
 
 const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
-  ${({ size }) => underlineSizes[size] || underlineSizes.md};
+  ${({ size }) => underlineSizes[size] || underlineSizes[TabSizes.md]};
 
   padding-bottom: ${pxToRem(2)};
   font-weight: 500;
@@ -66,7 +66,7 @@ const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
 `;
 
 const textTab = css<LabelProps & { size: Sizes; variant: Variants }>`
-  ${({ size }) => textSizes[size] || textSizes.md};
+  ${({ size }) => textSizes[size] || textSizes[TabSizes.md]};
 
   color: ${({ $isSelected, $color }) =>
     $isSelected ? getColor($color) : getColor('graphiteHB')};
