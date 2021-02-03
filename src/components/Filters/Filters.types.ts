@@ -36,8 +36,8 @@ export interface Filter {
   operator: OperatorTypes;
   dataPoint: string;
   condition: string;
-  input: string | DateRange;
   isApplied: boolean;
+  input?: string | DateRange;
 }
 
 export interface FiltersProps {
