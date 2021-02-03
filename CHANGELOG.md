@@ -1,3 +1,13 @@
+# [1.0.0-alpha.24](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2021-02-03)
+
+
+### Features
+
+* **tabs:** add size varints and new styles ([1bedfad](https://github.com/securityscorecard/design-system/commit/1bedfadf5536825847b063811630b0dd41d70124))
+* **tabs:** add variant for text and underline styles ([cff29ca](https://github.com/securityscorecard/design-system/commit/cff29cacd3b7a95f4eb1de36d620c347b559873f))
+* **tabs:** better code structuring, added better types ([a433998](https://github.com/securityscorecard/design-system/commit/a433998367ede47e7e98b023087feb6c6ef3378c))
+* **tabs:** use enums on all places ([2a52221](https://github.com/securityscorecard/design-system/commit/2a5222151096849d2afdbe3015705ccf3573e8d7))
+
 # [1.0.0-alpha.23](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2021-02-02)
 
 
