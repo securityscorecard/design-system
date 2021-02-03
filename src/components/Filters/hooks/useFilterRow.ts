@@ -25,7 +25,7 @@ const getValuesOnChange = (dataPoints, dataPointValue, conditionValue) => {
     dataPoint: normalizeOptions<DataPoint>(dataPoint),
     conditions,
     condition: normalizeOptions<Condition>(condition),
-    Input: condition.input,
+    Input: () => condition.input,
   };
 };
 

@@ -1,4 +1,5 @@
 import { Input } from '../Input';
+import { DatePicker } from '../DatePicker';
 import { DataPoint, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 
@@ -36,7 +37,7 @@ export const dataPointsMock: DataPoint[] = [
         isDefault: true,
       },
       { input: Input, value: 'strawberry', label: 'Strawberry' },
-      { input: Input, value: 'vanilla', label: 'Vanilla' },
+      { input: DatePicker, value: 'vanilla', label: 'Vanilla' },
     ],
     value: 'smurf',
     label: 'Smurf',
@@ -56,6 +57,12 @@ export const dataMock: Filter[] = [
     dataPoint: 'lemon',
     condition: 'strawberry',
     input: 'fruity',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    dataPoint: 'smurf',
+    condition: 'vanilla',
     isApplied: true,
   },
 ];
