@@ -21,22 +21,29 @@ export const ToolsTabBar: Story = () => (
   <>
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
-        iconName={SSCIconNames.wrench}
+        iconName={SSCIconNames.reorder}
         toolState={ToolsTabItemStates.default}
         {...toolActions}
       >
         Default
       </ToolsTabItem>
       <ToolsTabItem
-        iconName={SSCIconNames.wrench}
+        iconName={SSCIconNames.filter}
         toolState={ToolsTabItemStates.active}
         {...toolActions}
       >
         Active
       </ToolsTabItem>
       <ToolsTabItem
-        iconName={SSCIconNames.wrench}
+        iconName={SSCIconNames.sitemap}
         toolState={ToolsTabItemStates.applied}
+        {...toolActions}
+      >
+        Applied
+      </ToolsTabItem>
+      <ToolsTabItem
+        iconName={SSCIconNames.cog}
+        toolState={ToolsTabItemStates.default}
         {...toolActions}
       >
         Applied
