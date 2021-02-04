@@ -1,3 +1,15 @@
+# [1.0.0-alpha.25](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2021-02-04)
+
+
+### Bug Fixes
+
+* **tabs:** selected color and custom hover ([59efc4b](https://github.com/securityscorecard/design-system/commit/59efc4b1a5ea9ec022778361383494e0d4a8f064))
+
+
+### Features
+
+* **tabs:** correct spacing ([be30bdc](https://github.com/securityscorecard/design-system/commit/be30bdc2447b0a5385a52b79949ec989f1e46a57))
+
 # [1.0.0-alpha.24](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2021-02-03)
 
 
