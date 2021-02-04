@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
 
 import {
   getColor,
@@ -47,9 +48,8 @@ const textSizes = {
 
 const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
   ${({ size }) => underlineSizes[size] || underlineSizes[TabSizes.md]};
-
+  color: ${getColor('graphite4B')};
   padding-bottom: ${pxToRem(2)};
-  font-weight: 500;
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
       $isSelected ? getColor($color) : getColor('graphiteHB')};
@@ -69,10 +69,11 @@ const textTab = css<LabelProps & { size: Sizes; variant: Variants }>`
   ${({ size }) => textSizes[size] || textSizes[TabSizes.md]};
 
   color: ${({ $isSelected, $color }) =>
-    $isSelected ? getColor($color) : getColor('graphiteHB')};
+    $isSelected ? getColor('graphite4B') : getColor($color)};
   &:hover,
   &:focus {
-    color: ${getColor('blueberryClassic')};
+    color: ${({ $color, theme }) =>
+      lighten(0.1, theme.colors[$color] || $color)};
     text-decoration: none;
   }
   &:visited {
@@ -86,9 +87,10 @@ const tabVariants = {
 };
 
 const TabLabel = styled.a<LabelProps & { variant: Variants }>`
-  color: ${getColor('graphite4B')};
   text-decoration: none;
   cursor: pointer;
+  font-weight: 500;
+
   ${({ variant }) => tabVariants[variant]};
 
   &:not(:last-of-type) {
