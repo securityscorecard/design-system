@@ -28,6 +28,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         focusedInput={focusedInput}
         startDate={startDate}
         startDateId="startDate"
+        readOnly
         onDatesChange={onChange}
         onFocusChange={(newFocusInput) => {
           setFocusedInput(newFocusInput);
