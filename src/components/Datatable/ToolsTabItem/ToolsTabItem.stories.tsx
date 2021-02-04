@@ -22,32 +22,28 @@ export const ToolsTabBar: Story = () => (
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
         iconName={SSCIconNames.reorder}
+        label="Default"
         toolState={ToolsTabItemStates.default}
         {...toolActions}
-      >
-        Default
-      </ToolsTabItem>
+      />
       <ToolsTabItem
         iconName={SSCIconNames.filter}
+        label="Active"
         toolState={ToolsTabItemStates.active}
         {...toolActions}
-      >
-        Active
-      </ToolsTabItem>
+      />
       <ToolsTabItem
         iconName={SSCIconNames.sitemap}
+        label="Applied"
         toolState={ToolsTabItemStates.applied}
         {...toolActions}
-      >
-        Applied
-      </ToolsTabItem>
+      />
       <ToolsTabItem
         iconName={SSCIconNames.cog}
+        label="Applied"
         toolState={ToolsTabItemStates.default}
         {...toolActions}
-      >
-        Applied
-      </ToolsTabItem>
+      />
     </FlexContainer>
   </>
 );
@@ -55,16 +51,17 @@ export const ToolsTabBar: Story = () => (
 export const ToolsTabItemsDefault: Story = () => (
   <>
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <ToolsTabItem iconName={SSCIconNames.wrench} {...toolActions}>
-        Filter
-      </ToolsTabItem>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
+        label="Filter"
+        {...toolActions}
+      />
+      <ToolsTabItem
+        iconName={SSCIconNames.wrench}
+        label="Filter/Hover"
         {...toolActions}
         className="hover"
-      >
-        Filter/Hover
-      </ToolsTabItem>
+      />
     </FlexContainer>
   </>
 );
@@ -74,20 +71,17 @@ export const ToolsTabItemsActive: Story = () => (
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
+        label="Filter"
         toolState={ToolsTabItemStates.active}
         {...toolActions}
-        margin={{ right: 0.25 }}
-      >
-        Filter
-      </ToolsTabItem>
+      />
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
+        label="Filter/Hover"
         toolState={ToolsTabItemStates.active}
         {...toolActions}
         className="hover"
-      >
-        Filter/Hover
-      </ToolsTabItem>
+      />
     </FlexContainer>
   </>
 );
@@ -97,19 +91,17 @@ export const ToolsTabItemsApplied: Story = () => (
     <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
+        label="Filter"
         toolState={ToolsTabItemStates.applied}
         {...toolActions}
-      >
-        Filter
-      </ToolsTabItem>
+      />
       <ToolsTabItem
         iconName={SSCIconNames.wrench}
+        label="Filter/Hover"
         toolState={ToolsTabItemStates.applied}
         {...toolActions}
         className="hover"
-      >
-        Filter/Hover
-      </ToolsTabItem>
+      />
     </FlexContainer>
   </>
 );

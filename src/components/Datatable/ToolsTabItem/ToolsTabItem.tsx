@@ -26,6 +26,7 @@ const DefaultToolsTabItem = styled.button<ToolsTabButtonProps>`
   font-weight: ${getFontWeight('medium')};
 
   padding: ${pxToRem(6, 12)};
+  margin-right: ${pxToRem(4)};
   ${({ margin }) => createMarginSpacing(margin)};
   color: ${getColor('graphite2B')};
   border: 2px solid transparent;
@@ -81,13 +82,13 @@ const AppliedToolsTabItem = styled(DefaultToolsTabItem)`
 `;
 
 const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
-  children,
+  label,
   toolState = ToolsTabItemStates.default,
   onToolActivate = noop,
   onToolDeactivate = noop,
   iconName,
   iconType = IconTypes.ssc,
-  margin = 'none',
+  margin,
   isDisabled = false,
   ...props
 }) => {
@@ -106,12 +107,11 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   const content = isNotUndefined(iconName) ? (
     <>
       <StyledIcon name={iconName} size={ButtonSizes.sm} type={iconType} />
-      {children}
+      {label}
     </>
   ) : (
-    children
+    label
   );
-
   const commonProps = {
     margin,
     ...props,
@@ -145,6 +145,7 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
 };
 
 ToolsTabItem.propTypes = {
+  label: PropTypes.string.isRequired,
   toolState: PropTypes.oneOf(Object.values(ToolsTabItemStates)),
   iconName: PropTypes.oneOfType([
     PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),

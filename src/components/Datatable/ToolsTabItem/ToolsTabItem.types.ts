@@ -4,7 +4,8 @@ import { ToolsTabItemStates } from './ToolsTabItem.enum';
 
 type ToolStates = typeof ToolsTabItemStates[keyof typeof ToolsTabItemStates];
 
-export interface ToolsTabItemProps {
+export type ToolsTabItem = {
+  label: string;
   toolState?: ToolStates;
   onToolActivate: React.MouseEventHandler;
   onToolDeactivate: React.MouseEventHandler;
@@ -12,6 +13,10 @@ export interface ToolsTabItemProps {
   iconType?: IconTypes | string;
   margin?: SpacingSizeValue;
   isDisabled?: boolean;
+};
+
+export interface ToolsTabItemProps {
+  ToolsTabItem;
   className?: string;
 }
 
