@@ -12,7 +12,7 @@ const Tab: React.FC<TabProps> = ({
   isSelected,
   onClick,
   color = ColorTypes.blueberryClassic,
-  size = TabSizes.md,
+  size = TabSizes.sm,
   variant = TabVariants.underline,
   value,
 }) => {

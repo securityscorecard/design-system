@@ -15,7 +15,7 @@ const Tabs: React.FC<TabsProps> = ({
   selectedValue,
   children,
   onSelectTab,
-  size = TabSizes.md,
+  size = TabSizes.sm,
   variant = TabVariants.underline,
   margin = { bottom: 1.5 },
   padding = 0,
