@@ -4,6 +4,7 @@ import { lighten } from 'polished';
 import {
   getColor,
   getFontSize,
+  getFontWeight,
   getLineHeight,
   pxToRem,
 } from '../../utils/helpers';
@@ -49,7 +50,7 @@ const textSizes = {
 const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
   ${({ size }) => underlineSizes[size] || underlineSizes[TabSizes.md]};
   color: ${getColor('graphite4B')};
-  padding-bottom: ${pxToRem(2)};
+  padding-bottom: ${pxToRem(4)};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
       $isSelected ? getColor($color) : getColor('graphiteHB')};
@@ -89,7 +90,7 @@ const tabVariants = {
 const TabLabel = styled.a<LabelProps & { variant: Variants }>`
   text-decoration: none;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: ${getFontWeight('medium')};
 
   ${({ variant }) => tabVariants[variant]};
 
