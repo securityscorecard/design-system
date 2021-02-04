@@ -3,8 +3,8 @@ import momentPropTypes from 'react-moment-proptypes';
 import { Moment } from 'moment';
 
 export interface DateRange {
-  startDate: Moment;
-  endDate: Moment;
+  startDate: Moment | null;
+  endDate: Moment | null;
 }
 
 export interface DatePickerProps {
