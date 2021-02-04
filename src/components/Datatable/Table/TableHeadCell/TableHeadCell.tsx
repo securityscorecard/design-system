@@ -19,7 +19,8 @@ const StyledTableHeadCell = styled.th`
   border-bottom: 2px solid ${getColor('graphiteH')};
   border-right: 1px solid ${getColor('graphiteH')};
 
-  :nth-last-child(2) {
+  &:last-child,
+  &:nth-last-child(2) {
     border-right: 0;
   }
 
