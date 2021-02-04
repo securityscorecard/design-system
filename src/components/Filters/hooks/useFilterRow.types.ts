@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Condition } from '../Filters.types';
 import { Option } from '../Select/Select.types';
-import { DateRange } from '../DatePicker/DatePicker.types';
+import { DateRange } from '../DateRangePicker/DateRangePicker.types';
 
 interface InputComponentProps {
   value: string | DateRange;

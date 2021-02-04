@@ -19,7 +19,7 @@ import { Select } from '../Select';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { DataPointPropTypes } from '../Filters.types';
-import { DateRangePropTypes } from '../DatePicker/DatePicker.types';
+import { DateRangePropTypes } from '../DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import operatorOptions from '../data/operator-options.json';
 import { pxToRem } from '../../../utils/helpers';

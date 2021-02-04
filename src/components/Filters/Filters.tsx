@@ -7,7 +7,7 @@ import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
 import { DataPointPropTypes, Filter, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
-import { DateRangePropTypes } from './DatePicker/DatePicker.types';
+import { DateRangePropTypes } from './DateRangePicker/DateRangePicker.types';
 
 const generateId = ({ operator, dataPoint, condition }, index) =>
   `${operator}-${dataPoint}-${condition}-${index}`;

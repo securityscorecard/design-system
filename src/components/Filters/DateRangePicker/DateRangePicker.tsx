@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import { DateRangePicker } from 'react-dates';
+import { DateRangePicker as DateRange } from 'react-dates';
 
-import { DatePickerProps, DateRangePropTypes } from './DatePicker.types';
+import { DatePickerProps, DateRangePropTypes } from './DateRangePicker.types';
 import { datePickerStyles } from './styles';
 
 const Wrapper = styled.div`
   ${datePickerStyles}
 `;
 
-const DatePicker: React.FC<DatePickerProps> = ({
+const DateRangePicker: React.FC<DatePickerProps> = ({
   value = { startDate: null, endDate: null },
   onChange,
 }) => {
@@ -22,7 +22,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   return (
     <Wrapper>
-      <DateRangePicker
+      <DateRange
         endDate={endDate}
         endDateId="endDate"
         focusedInput={focusedInput}
@@ -38,9 +38,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
   );
 };
 
-export default DatePicker;
+export default DateRangePicker;
 
-DatePicker.propTypes = {
+DateRangePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: DateRangePropTypes,
 };
