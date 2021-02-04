@@ -32,6 +32,7 @@ export const datePickerStyles = css`
     color: ${getFormStyle('color')};
     font-size: ${pxToRem(13)};
     line-height: ${pxToRem(15)};
+    font-weight: ${getFontWeight('regular')};
   }
   .DateRangePickerInput_arrow {
     display: none;
