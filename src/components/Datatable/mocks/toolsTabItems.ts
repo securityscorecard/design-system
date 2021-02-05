@@ -32,3 +32,27 @@ export const mockToolsTabItems: ToolsTabItem[] = [
     ...toolActions,
   },
 ];
+
+export const mockToolsTabItemsFiltersActive: ToolsTabItem[] = [
+  {
+    label: 'Show/Hide',
+    iconName: SSCIconNames.reorder,
+    ...toolActions,
+  },
+  {
+    label: 'Filter',
+    iconName: SSCIconNames.filter,
+    toolState: 'active',
+    ...toolActions,
+  },
+  {
+    label: 'Group',
+    iconName: SSCIconNames.sitemap,
+    ...toolActions,
+  },
+  {
+    label: 'Views',
+    iconName: SSCIconNames.cog,
+    ...toolActions,
+  },
+];

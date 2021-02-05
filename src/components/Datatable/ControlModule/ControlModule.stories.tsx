@@ -8,7 +8,10 @@ import { tableActionsMock } from '../mocks/actions';
 import DatatableContext from '../DatatableContext';
 import ControlModule from './ControlModule';
 import { BatchModule } from '../BatchModule';
-import { mockToolsTabItems } from '../mocks/toolsTabItems';
+import {
+  mockToolsTabItems,
+  mockToolsTabItemsFiltersActive,
+} from '../mocks/toolsTabItems';
 import { SearchBar } from '../../forms/SearchBar';
 import { ToolsTabItem } from '../ToolsTabItem';
 import { ControlModuleProps } from './ControlModule.types';
@@ -23,7 +26,7 @@ export default {
 } as Meta;
 
 const mockArgs = {
-  toolsTabItems: mockToolsTabItems,
+  toolsTabItems: mockToolsTabItemsFiltersActive,
   placeholder: 'Search for domains or IPs',
   onSearch: createMockOnSearch(action(`click-suggestion`)),
   data: dataMock,
@@ -54,7 +57,7 @@ playground.argTypes = {
 export const Default: Story = () => (
   <DatatableContext.Provider value={{ totalLength: 1070000 }}>
     <Container>
-      <ControlModule {...mockArgs} />
+      <ControlModule {...mockArgs} toolsTabItems={mockToolsTabItems} />
     </Container>
   </DatatableContext.Provider>
 );
