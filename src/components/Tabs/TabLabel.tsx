@@ -88,6 +88,7 @@ const tabVariants = {
 };
 
 const TabLabel = styled.a<LabelProps & { variant: Variants }>`
+  outline: none;
   text-decoration: none;
   cursor: pointer;
   font-weight: ${getFontWeight('medium')};
