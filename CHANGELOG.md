@@ -1,3 +1,10 @@
+# [1.0.0-alpha.26](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2021-02-05)
+
+
+### Features
+
+* **Tabs:** add accessibility via tabindex and key handler ([390bb35](https://github.com/securityscorecard/design-system/commit/390bb35f5fc9b51db362222248546e4eac1c465e))
+
 # [1.0.0-alpha.25](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2021-02-04)
 
 
