@@ -15,6 +15,8 @@ import {
   DatatableProps,
   ExtendedTableConfig,
 } from './Datatable.types';
+import { ControlModule } from './ControlModule';
+import { mockControlModuleProps } from './mocks/controlModule';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -83,8 +85,7 @@ const Datatable = <D extends Record<string, unknown>>({
       }}
     >
       <StyledDatatable flexDirection="column">
-        <FlexContainer>ToolbarModule</FlexContainer>
-        <FlexContainer>Filters</FlexContainer>
+        <ControlModule {...mockControlModuleProps} />
         <BatchModule actions={batchActions} />
         <Table<D>
           columns={columns}
