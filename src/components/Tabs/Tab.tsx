@@ -17,7 +17,14 @@ const Tab: React.FC<TabProps> = ({
   value,
 }) => {
   const isLink = value?.toString()?.startsWith('/');
-  const handler = isLink ? { to: value } : { onClick: () => onClick(value) };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      onClick(value);
+    }
+  };
+  const handler = isLink
+    ? { to: value }
+    : { onClick: () => onClick(value), onKeyDown: (e) => handleKeyDown(e) };
   let RouterLink = null;
 
   if (isLink) {
@@ -30,6 +37,7 @@ const Tab: React.FC<TabProps> = ({
       $isSelected={isSelected}
       as={isLink ? RouterLink : 'a'}
       size={size}
+      tabIndex={0}
       variant={variant}
       {...handler}
     >
