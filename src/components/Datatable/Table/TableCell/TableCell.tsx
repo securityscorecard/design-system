@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledTableCell = styled.td`
-  padding: 5px;
-  background-color: #fff;
+import { getColor, pxToRem } from '../../../../utils/helpers';
+import { TableCellProps } from './TableCell.types';
+
+const StyledTableCell = styled.td<{ $isOdd: boolean }>`
+  padding: ${pxToRem(12, 8)};
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid ${getColor('graphiteH')};
   border-right: 1px solid transparent;
+  background-color: ${({ $isOdd, theme }) =>
+    $isOdd ? '#fcfcfc' : getColor('graphite5H', { theme })};
 
   &:last-child {
     border-right: 0;
@@ -18,8 +22,14 @@ const StyledTableCell = styled.td`
   }
 `;
 
-const TableCell: React.FC = ({ children, ...props }) => (
-  <StyledTableCell {...props}>{children}</StyledTableCell>
+const TableCell = <D extends Record<string, unknown>>({
+  cell,
+  isOdd,
+  ...props
+}: TableCellProps<D>): React.ReactElement => (
+  <StyledTableCell $isOdd={isOdd} {...props}>
+    {cell.render('Cell')}
+  </StyledTableCell>
 );
 
 export default TableCell;

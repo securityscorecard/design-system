@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -9,7 +9,8 @@ import {
   useTable,
 } from 'react-table';
 import { useSticky } from 'react-table-sticky';
-import { prop } from 'ramda';
+import { always, prop } from 'ramda';
+import { isOdd } from 'ramda-adjunct';
 
 import { useDatatable } from '../hooks/useDatatable';
 import { TableCell } from './TableCell';
@@ -18,6 +19,7 @@ import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
 import { actionsColumn, selectionColumn } from './temp/columns';
 import { ActionKindsPropType } from '../types/Action.types';
+import Text from './TableCell/renderers/Text';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -39,7 +41,7 @@ const StyledTableHeader = styled.thead`
   display: block;
 `;
 
-const StyledTableBody = styled.thead<{ isTableSticky: boolean }>`
+const StyledTableBody = styled.tbody<{ isTableSticky: boolean }>`
   display: block;
 
   ${({ isTableSticky }) =>
@@ -60,6 +62,17 @@ const Table = <D extends Record<string, unknown>>({
   pageCount: controlledPageCount,
 }: TableProps<D>): React.ReactElement => {
   const { setSelectedIds } = useDatatable();
+  const defaultColumn = useMemo(
+    () => ({
+      minWidth: 40,
+      width: 150,
+      maxWidth: 400,
+      Cell: Text,
+      nullCondition: always(false),
+    }),
+    [],
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -80,6 +93,7 @@ const Table = <D extends Record<string, unknown>>({
     {
       columns,
       data,
+      defaultColumn, // default column settings
       initialState: { pageIndex: 0, sortBy: [] }, // We want to start at page 1
       manualPagination: true, // We will handle pagination by ourselves
       manualSortBy: true, // sorting is handled backend
@@ -137,15 +151,17 @@ const Table = <D extends Record<string, unknown>>({
           ))}
         </StyledTableHeader>
         <StyledTableBody isTableSticky={isTableSticky} {...getTableBodyProps()}>
-          {page.map((row) => {
+          {page.map((row, index) => {
             prepareRow(row);
             return (
               <TableRow {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <TableCell {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </TableCell>
+                    <TableCell
+                      cell={cell}
+                      isOdd={isOdd(index)}
+                      {...cell.getCellProps()}
+                    />
                   );
                 })}
               </TableRow>
