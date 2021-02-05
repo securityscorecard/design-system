@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNotEmpty } from 'ramda-adjunct';
 import styled from 'styled-components';
@@ -10,11 +10,9 @@ import { BatchModule } from '../BatchModule';
 import { SearchBar } from '../../forms/SearchBar';
 import { ToolsTabItem } from '../ToolsTabItem';
 import { ControlModuleProps } from './ControlModule.types';
+import { ToolsTabItemPropType } from '../ToolsTabItem/ToolsTabItem.types';
 import { Filters } from '../../Filters';
-import { dataMock, dataPointsMock } from '../../Filters/mocks/options';
-import { actionsMock } from '../mocks/actions';
 import { renderSuggestionFilter } from '../../forms/SearchBar/SearchSuggestionFormats';
-import { ActionPropType } from '../types/Action.types';
 
 const ControlModuleContainer = styled(FlexContainer)`
   background-color: ${getColor('graphite3H')};
@@ -24,30 +22,54 @@ const FiltersContainer = styled(FlexContainer)`
   background-color: ${getColor('graphite5H')};
 `;
 
-const placeholderFunc = () => {
-  return 0;
-};
-
 const ControlModule: React.FC<ControlModuleProps> = ({
   toolsTabItems = [],
-  placeholder: searchPlaceholder,
+  placeholder: searchPlaceholder = 'Search',
   onSearch,
   renderSearchSuggestion = renderSuggestionFilter,
-  actions = { actionsMock },
-  filteredLength,
+  data: filtersData,
+  dataPoints: filtersDataPoints,
+  onApply: onApplyFilter,
+  onCancel: onCancelFilter,
+  onChange: onChangeFilter,
+  onClose,
+  actions,
+  isFilterOpen = false,
 }) => {
+  const [areFiltersOpen, setAreFiltersOpen] = useState(isFilterOpen);
+  const [tools, setTools] = useState(toolsTabItems);
+
+  const onCloseFilter = () => {
+    onClose();
+    setAreFiltersOpen(false);
+  };
+
+  useEffect(() => {
+    const updatedTools = toolsTabItems.map((tool) => {
+      return {
+        ...tool,
+        ...(tool.label === 'Filter' && {
+          onToolActivate: (event) => {
+            tool.onToolActivate(event);
+            setAreFiltersOpen(true);
+          },
+          onToolDeactivate: (event) => {
+            tool.onToolDeactivate(event);
+            setAreFiltersOpen(false);
+          },
+        }),
+      };
+    });
+    setTools(updatedTools);
+  }, [toolsTabItems]);
+
   return (
-    // <FlexContainer
-    //   alignItems="center"
-    //   justifyContent="space-between"
-    //   padding={{ vertical: 0.8, horizontal: 1.2 }}
-    // >
     <ControlModuleContainer flexDirection="column">
       <FlexContainer padding={{ vertical: 0.5 }}>
         <Col cols={5}>
           <FlexContainer margin={{ top: 0.2 }}>
-            {isNotEmpty(toolsTabItems) &&
-              toolsTabItems.map((tool) => {
+            {isNotEmpty(tools) &&
+              tools.map((tool) => {
                 return <ToolsTabItem key={tool.label} {...tool} />;
               })}
           </FlexContainer>
@@ -60,31 +82,30 @@ const ControlModule: React.FC<ControlModuleProps> = ({
           />
         </Col>
       </FlexContainer>
-      <FiltersContainer padding={0.5}>
-        <Filters
-          data={dataMock}
-          dataPoints={dataPointsMock}
-          onApply={placeholderFunc}
-          onCancel={placeholderFunc}
-          onChange={placeholderFunc}
-          onClose={placeholderFunc}
-        />
-      </FiltersContainer>
+      {areFiltersOpen && (
+        <FiltersContainer padding={{ horizontal: 0.5, vertical: 1 }}>
+          <Filters
+            data={filtersData}
+            dataPoints={filtersDataPoints}
+            onApply={onApplyFilter}
+            onCancel={onCancelFilter}
+            onChange={onChangeFilter}
+            onClose={onCloseFilter}
+          />
+        </FiltersContainer>
+      )}
 
-      <FlexContainer padding={0.5}>
-        <BatchModule actions={actions} filteredLength={filteredLength} />
-      </FlexContainer>
+      <BatchModule actions={actions} />
     </ControlModuleContainer>
   );
 };
 
 ControlModule.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  filteredLength: PropTypes.number,
-  toolsTabItems: PropTypes.shape({}),
-  actions: PropTypes.arrayOf(ActionPropType),
-  renderSearchSuggestion: PropTypes.func,
+  toolsTabItems: PropTypes.arrayOf(ToolsTabItemPropType),
+  ...SearchBar.propTypes,
+  ...Filters.propTypes,
+  ...BatchModule.propTypes,
+  isFilterOpen: PropTypes.bool,
 };
 
 export default ControlModule;
