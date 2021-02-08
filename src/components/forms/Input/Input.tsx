@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   createPaddingSpacing,
   getBorderRadius,
+  getFontFamily,
   getFontSize,
   getFormStyle,
   getLineHeight,
@@ -27,6 +28,7 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
   color: ${getFormStyle('color')};
+  font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('lg')};
   line-height: ${getLineHeight('lg')};
 
