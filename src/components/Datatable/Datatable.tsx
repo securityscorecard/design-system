@@ -1,11 +1,18 @@
 import React, { useCallback } from 'react';
+import styled from 'styled-components';
 
+import { FlexContainer } from '../FlexContainer';
 import { Data, props } from './Table/temp/config';
 import Table from './Table/Table';
-import { FlexContainer } from '../FlexContainer';
 import { actionsMock } from './mocks/actions';
 import { BatchModule } from './BatchModule';
 import DatatableContext from './DatatableContext';
+import { getColor } from '../../utils/helpers';
+
+const StyledDatatable = styled(FlexContainer)`
+  border: 1px solid ${getColor('graphiteHB')};
+  background: ${getColor('graphite3H')};
+`;
 
 const Datatable: React.FC = () => {
   // We'll start our table without any data
@@ -54,7 +61,7 @@ const Datatable: React.FC = () => {
         selectedLength: selectedIds.length,
       }}
     >
-      <FlexContainer flexDirection="column">
+      <StyledDatatable flexDirection="column">
         <FlexContainer>ToolbarModule</FlexContainer>
         <FlexContainer>Filters</FlexContainer>
         <BatchModule actions={actionsMock} />
@@ -67,7 +74,7 @@ const Datatable: React.FC = () => {
           primaryKey={primaryKey}
           rowActions={rowActions}
         />
-      </FlexContainer>
+      </StyledDatatable>
     </DatatableContext.Provider>
   );
 };
