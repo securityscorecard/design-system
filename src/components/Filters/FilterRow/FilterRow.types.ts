@@ -2,7 +2,7 @@ import { DataPoint, Filter } from '../Filters.types';
 import { Option } from '../Select/Select.types';
 
 export interface SplitFieldProps {
-  width?: number;
+  $width?: number;
 }
 
 export interface FilterRowProps extends Filter {
