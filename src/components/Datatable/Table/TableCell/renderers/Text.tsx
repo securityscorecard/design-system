@@ -8,13 +8,14 @@ import TableCellLink from './components/TableCellLink';
 import TableCellText from './components/TableCellText';
 import {
   ColumnOptionsPropType,
+  LinkCellRendererProps,
   LinkColumnOptionsPropType,
-  TextCellRendererProps,
 } from './renderers.types';
 
-const Text: React.FC<TextCellRendererProps<string | number>> = ({
+const Text: React.FC<LinkCellRendererProps<string | number>> = ({
   value,
   formater,
+  isLinkDiscrete = true,
   column: { nullCondition, nullConditionValue, onClick, ...restColumn },
 }) => {
   const isNull = nullCondition(value);
@@ -39,9 +40,9 @@ const Text: React.FC<TextCellRendererProps<string | number>> = ({
 
   return (
     <TableCellLink
+      $isDiscrete={isLinkDiscrete}
       href={href}
       to={to}
-      $isDiscrete
       onClick={() => onClick(value)}
     >
       {returnValue}
@@ -52,6 +53,7 @@ const Text: React.FC<TextCellRendererProps<string | number>> = ({
 Text.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   formater: PropTypes.func,
+  isLinkDiscrete: PropTypes.bool,
   column: PropTypes.oneOfType([
     ColumnOptionsPropType,
     LinkColumnOptionsPropType,
