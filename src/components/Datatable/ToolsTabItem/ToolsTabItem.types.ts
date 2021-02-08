@@ -33,7 +33,7 @@ export interface ToolsTabButtonProps
   margin?: SpacingSizeValue;
 }
 
-export const ToolsTabItemPropType = PropTypes.exact({
+export const ToolsTabItemPropType = {
   label: PropTypes.string.isRequired,
   toolState: PropTypes.oneOf(Object.values(ToolsTabItemStates)),
   isDisabled: PropTypes.bool,
@@ -49,4 +49,4 @@ export const ToolsTabItemPropType = PropTypes.exact({
   className: PropTypes.string,
   onToolActivate: PropTypes.func.isRequired,
   onToolDectivate: PropTypes.func.isRequired,
-});
+};

@@ -37,7 +37,7 @@ const Filters: React.FC<FiltersProps> = ({
   fields,
   state = getDefaultState(fields),
   onApply,
-  onChange,
+  onChangeFilter,
   onClose,
   onCancel,
   isLoading = false,
@@ -63,8 +63,8 @@ const Filters: React.FC<FiltersProps> = ({
   }, [filtersValues]);
 
   const callOnChange = () => {
-    if (typeof onChange === 'function') {
-      onChange(filtersValues);
+    if (typeof onChangeFilter === 'function') {
+      onChangeFilter(filtersValues);
     }
   };
 
@@ -215,5 +215,5 @@ Filters.propTypes = {
     }),
   ),
   isLoading: PropTypes.bool,
-  onChange: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };

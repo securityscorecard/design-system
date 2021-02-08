@@ -48,7 +48,7 @@ export interface FiltersProps {
   onApply: (filters: Filter[]) => void;
   onClose: () => void;
   onCancel: () => void;
-  onChange?: (filters: Filter[]) => void;
+  onChangeFilter?: (filters: Filter[]) => void;
   isLoading?: boolean;
 }
 

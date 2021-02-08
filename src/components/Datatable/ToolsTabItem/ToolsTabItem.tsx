@@ -145,6 +145,6 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   );
 };
 
-ToolsTabItem.propTypes = ToolsTabItemPropType;
+ToolsTabItem.propTypes = { ...ToolsTabItemPropType };
 
 export default ToolsTabItem;

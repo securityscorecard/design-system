@@ -57,7 +57,7 @@ export const FetchingResults: Story = () => (
       isLoading
       onApply={action('onApply')}
       onCancel={action('onCancel')}
-      onChange={action('onChange')}
+      onChangeFilter={action('onChangeFilter')}
       onClose={action('onClose')}
     />
   </FlexContainer>

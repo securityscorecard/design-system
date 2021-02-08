@@ -10,7 +10,6 @@ import { BatchModule } from '../BatchModule';
 import { SearchBar } from '../../forms/SearchBar';
 import { ToolsTabItem } from '../ToolsTabItem';
 import { ControlModuleProps } from './ControlModule.types';
-import { ToolsTabItemPropType } from '../ToolsTabItem/ToolsTabItem.types';
 import { Filters } from '../../Filters';
 import { renderSuggestionFilter } from '../../forms/SearchBar/SearchSuggestionFormats';
 
@@ -31,7 +30,7 @@ const ControlModule: React.FC<ControlModuleProps> = ({
   dataPoints: filtersDataPoints,
   onApply: onApplyFilter,
   onCancel: onCancelFilter,
-  onChange: onChangeFilter,
+  onChangeFilter,
   onClose,
   actions,
   isFilterOpen = false,
@@ -89,7 +88,7 @@ const ControlModule: React.FC<ControlModuleProps> = ({
             dataPoints={filtersDataPoints}
             onApply={onApplyFilter}
             onCancel={onCancelFilter}
-            onChange={onChangeFilter}
+            onChangeFilter={onChangeFilter}
             onClose={onCloseFilter}
           />
         </FiltersContainer>
@@ -101,7 +100,9 @@ const ControlModule: React.FC<ControlModuleProps> = ({
 };
 
 ControlModule.propTypes = {
-  toolsTabItems: PropTypes.arrayOf(ToolsTabItemPropType),
+  toolsTabItems: PropTypes.arrayOf(
+    PropTypes.exact({ ...ToolsTabItem.propTypes }),
+  ),
   ...SearchBar.propTypes,
   ...Filters.propTypes,
   ...BatchModule.propTypes,

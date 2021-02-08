@@ -13,7 +13,7 @@ export const mockControlModuleProps = {
   dataPoints: dataPointsMock,
   onApply: action('onApply'),
   onCancel: action('onCancel'),
-  onChange: action('onChange'),
+  onChangeFilter: action('onChangeFilter'),
   onClose: action('onClose'),
   actions: tableActionsMock,
   isFilterOpen: true,
