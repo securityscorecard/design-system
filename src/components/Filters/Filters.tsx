@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { equals } from 'ramda';
+import styled from 'styled-components';
 
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
@@ -23,6 +24,10 @@ const getDefaultData = (dataPoints) => [
     isApplied: false,
   },
 ];
+
+const FiltersContainer = styled(FlexContainer)`
+  width: 100%;
+`;
 
 const Filters: React.FC<FiltersProps> = ({
   dataPoints,
@@ -146,7 +151,7 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   return (
-    <FlexContainer flexDirection="column">
+    <FiltersContainer flexDirection="column">
       {filtersValues.map((props, index) => {
         const id = generateId(props, index);
         return (
@@ -172,7 +177,7 @@ const Filters: React.FC<FiltersProps> = ({
         onClearAll={handleClearAll}
         onClose={onClose}
       />
-    </FlexContainer>
+    </FiltersContainer>
   );
 };
 

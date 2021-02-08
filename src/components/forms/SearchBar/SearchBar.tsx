@@ -15,6 +15,7 @@ import { useControlledInput } from '../hooks/useControlledInput';
 
 const SearchBarWrapper = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const StyledInput = styled(Input)`
