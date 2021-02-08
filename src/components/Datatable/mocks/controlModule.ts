@@ -3,7 +3,6 @@ import { action } from '@storybook/addon-actions';
 import { mockToolsTabItemsFiltersActive } from './toolsTabItems';
 import { createMockOnSearch } from '../../forms/SearchBar/mocks';
 import { dataMock, dataPointsMock } from '../../Filters/mocks/options';
-import { tableActionsMock } from './actions';
 
 export const mockControlModuleProps = {
   toolsTabItems: mockToolsTabItemsFiltersActive,
@@ -15,6 +14,5 @@ export const mockControlModuleProps = {
   onCancel: action('onCancel'),
   onChangeFilter: action('onChangeFilter'),
   onClose: action('onClose'),
-  actions: tableActionsMock,
-  isFilterOpen: true,
+  defaultIsFilterOpen: true,
 };

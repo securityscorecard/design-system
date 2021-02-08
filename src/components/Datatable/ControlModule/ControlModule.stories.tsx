@@ -27,10 +27,10 @@ export const playground: Story<ControlModuleProps> = (args) => (
   </DatatableContext.Provider>
 );
 playground.args = {
-  isFilterOpen: true,
+  defaultIsFilterOpen: true,
 };
 playground.argTypes = {
-  isFilterOpen: {
+  defaultIsFilterOpen: {
     control: 'boolean',
   },
 };
@@ -40,7 +40,7 @@ export const Default: Story = () => (
     <Container>
       <ControlModule
         {...mockControlModuleProps}
-        isFilterOpen={false}
+        defaultIsFilterOpen={false}
         toolsTabItems={mockToolsTabItems}
       />
     </Container>

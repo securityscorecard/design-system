@@ -8,7 +8,6 @@ import { getBorderRadius, getColor } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { ActionPropType } from './types/Action.types';
 import Table from './Table/Table';
-import { BatchModule } from './BatchModule';
 import DatatableContext from './DatatableContext';
 import {
   ControlsConfig,
@@ -16,6 +15,7 @@ import {
   ExtendedTableConfig,
 } from './Datatable.types';
 import { ControlModule } from './ControlModule';
+import { BatchModule } from './BatchModule';
 import { mockControlModuleProps } from './mocks/controlModule';
 
 const StyledDatatable = styled(FlexContainer)`

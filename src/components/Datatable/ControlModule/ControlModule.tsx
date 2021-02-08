@@ -4,41 +4,33 @@ import { isNotEmpty } from 'ramda-adjunct';
 import styled from 'styled-components';
 
 import { getColor } from '../../../utils/helpers';
-import { Col } from '../../layout';
 import { FlexContainer } from '../../FlexContainer';
-import { BatchModule } from '../BatchModule';
 import { SearchBar } from '../../forms/SearchBar';
 import { ToolsTabItem } from '../ToolsTabItem';
 import { ControlModuleProps } from './ControlModule.types';
 import { Filters } from '../../Filters';
 import { renderSuggestionFilter } from '../../forms/SearchBar/SearchSuggestionFormats';
 
-const ControlModuleContainer = styled(FlexContainer)`
-  background-color: ${getColor('graphite3H')};
-`;
-
 const FiltersContainer = styled(FlexContainer)`
   background-color: ${getColor('graphite5H')};
 `;
 
 const ControlModule: React.FC<ControlModuleProps> = ({
-  toolsTabItems = [],
+  toolsTabItems,
   placeholder: searchPlaceholder = 'Search',
   onSearch,
-  renderSearchSuggestion = renderSuggestionFilter,
   data: filtersData,
   dataPoints: filtersDataPoints,
   onApply: onApplyFilter,
   onCancel: onCancelFilter,
   onChangeFilter,
   onClose,
-  actions,
-  isFilterOpen = false,
+  defaultIsFilterOpen = false,
 }) => {
-  const [areFiltersOpen, setAreFiltersOpen] = useState(isFilterOpen);
+  const [areFiltersOpen, setAreFiltersOpen] = useState(defaultIsFilterOpen);
   const [tools, setTools] = useState(toolsTabItems);
 
-  const onCloseFilter = () => {
+  const handleCloseFilter = () => {
     onClose();
     setAreFiltersOpen(false);
   };
@@ -63,50 +55,50 @@ const ControlModule: React.FC<ControlModuleProps> = ({
   }, [toolsTabItems]);
 
   return (
-    <ControlModuleContainer flexDirection="column">
-      <FlexContainer padding={{ vertical: 0.5 }}>
-        <Col cols={5}>
-          <FlexContainer margin={{ top: 0.2 }}>
-            {isNotEmpty(tools) &&
-              tools.map((tool) => {
-                return <ToolsTabItem key={tool.label} {...tool} />;
-              })}
+    <FlexContainer flexDirection="column">
+      <FlexContainer
+        alignItems="center"
+        padding={{ vertical: 0.4, horizontal: 0.8 }}
+      >
+        {isNotEmpty(tools) && (
+          <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
+            {tools.map((tool) => {
+              return <ToolsTabItem key={tool.label} {...tool} />;
+            })}
           </FlexContainer>
-        </Col>
-        <Col>
+        )}
+        <FlexContainer flexGrow={1}>
           <SearchBar
             placeholder={searchPlaceholder}
-            renderSearchSuggestion={renderSearchSuggestion}
+            renderSearchSuggestion={renderSuggestionFilter}
             onSearch={onSearch}
           />
-        </Col>
+        </FlexContainer>
       </FlexContainer>
+
       {areFiltersOpen && (
-        <FiltersContainer padding={1}>
+        <FiltersContainer padding={{ top: 1.2, bottom: 0.8, horizontal: 0.8 }}>
           <Filters
             data={filtersData}
             dataPoints={filtersDataPoints}
             onApply={onApplyFilter}
             onCancel={onCancelFilter}
             onChangeFilter={onChangeFilter}
-            onClose={onCloseFilter}
+            onClose={handleCloseFilter}
           />
         </FiltersContainer>
       )}
-
-      <BatchModule actions={actions} />
-    </ControlModuleContainer>
+    </FlexContainer>
   );
 };
 
 ControlModule.propTypes = {
   toolsTabItems: PropTypes.arrayOf(
-    PropTypes.exact({ ...ToolsTabItem.propTypes }),
+    PropTypes.exact({ ...ToolsTabItem.propTypes }).isRequired,
   ),
   ...SearchBar.propTypes,
   ...Filters.propTypes,
-  ...BatchModule.propTypes,
-  isFilterOpen: PropTypes.bool,
+  defaultIsFilterOpen: PropTypes.bool,
 };
 
 export default ControlModule;
