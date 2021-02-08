@@ -82,7 +82,7 @@ const ControlModule: React.FC<ControlModuleProps> = ({
         </Col>
       </FlexContainer>
       {areFiltersOpen && (
-        <FiltersContainer padding={{ horizontal: 0.5, vertical: 1 }}>
+        <FiltersContainer padding={1}>
           <Filters
             data={filtersData}
             dataPoints={filtersDataPoints}
