@@ -37,11 +37,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
   const content = getCounterContent(totalLength, selectedLength);
 
   return (
-    <H3
-      margin="none"
-      padding={{ horizontal: 0.4 }}
-      variant={HeadingVariants.secondary}
-    >
+    <H3 margin="none" variant={HeadingVariants.secondary}>
       {content}
     </H3>
   );

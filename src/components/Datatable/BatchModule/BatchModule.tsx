@@ -13,7 +13,7 @@ const BatchModule: React.FC<BatchModuleProps> = ({ actions }) => {
     <FlexContainer
       alignItems="center"
       justifyContent="space-between"
-      padding={{ vertical: 0.8, horizontal: 0.8 }}
+      padding={{ vertical: 0.8, left: 1.2, right: 0.8 }}
     >
       <ElementCounter
         selectedLength={selectedLength}
