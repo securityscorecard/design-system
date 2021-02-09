@@ -1,5 +1,4 @@
-import { Input } from '../Input';
-import { DateRangePicker } from '../DateRangePicker';
+import { DateRangePicker, Input } from '../inputs';
 import { DataPoint, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 

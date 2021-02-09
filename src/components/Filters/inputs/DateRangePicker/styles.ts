@@ -9,7 +9,7 @@ import {
   getFormStyle,
   getLineHeight,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../../utils/helpers';
 
 // TODO make it reusable with SingleDatePicker
 export const dateRangePickerStyles = css`
