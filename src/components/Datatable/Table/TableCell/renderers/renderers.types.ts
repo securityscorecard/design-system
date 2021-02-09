@@ -14,6 +14,7 @@ export const ColumnOptionsPropType = PropTypes.shape({
 export interface CellRendererProps<V> {
   value: V;
   column: ColumnOptions<V>;
+  formater?: (value: V) => V;
 }
 
 interface AbsoluteLinkColumnOptions<V> {
@@ -39,6 +40,7 @@ type LinkColumnOptions<V> =
 
 export interface LinkCellRendererProps<V> extends CellRendererProps<V> {
   column: ColumnOptions<V> & LinkColumnOptions<V>;
+  isLinkDiscrete?: boolean;
 }
 
 export const AbsoluteLinkColumnOptionsPropType = PropTypes.shape({
@@ -64,10 +66,6 @@ export const LinkColumnOptionsPropType = PropTypes.oneOfType([
   RelativeLinkColumnOptionsPropType,
   HandlerColumnOptionsPropType,
 ]);
-
-export interface TextCellRendererProps<V> extends LinkCellRendererProps<V> {
-  formater?: (value: V) => V;
-}
 
 export interface MultiValueCellRendererProps<V> extends CellRendererProps<V> {
   column: ColumnOptions<V> & LinkColumnOptions<V> & { displayLimit?: number };

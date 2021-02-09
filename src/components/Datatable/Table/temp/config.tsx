@@ -12,7 +12,7 @@ import Link from '../TableCell/renderers/Link';
 import MultiValue from '../TableCell/renderers/MultiValue';
 import TimeFromNow from '../TableCell/renderers/TimeFromNow';
 import Text from '../TableCell/renderers/Text';
-import { TextCellRendererProps } from '../TableCell/renderers/renderers.types';
+import { LinkCellRendererProps } from '../TableCell/renderers/renderers.types';
 import { TextSizes, TextVariants } from '../../../typography/Text/Text.enums';
 
 export type Data = {
@@ -137,7 +137,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
       row: {
         original: { lastObservationDate },
       },
-    }: TextCellRendererProps<string> & {
+    }: LinkCellRendererProps<string> & {
       row: Row<Data>;
     }): React.ReactElement => {
       dayjs.extend(relativeTime);

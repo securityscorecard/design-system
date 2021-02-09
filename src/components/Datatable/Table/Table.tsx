@@ -12,18 +12,19 @@ import { useSticky } from 'react-table-sticky';
 import { always, prop } from 'ramda';
 import { isOdd } from 'ramda-adjunct';
 
+import { getColor } from '../../../utils/helpers';
 import { useDatatable } from '../hooks/useDatatable';
+import { ActionKindsPropType } from '../types/Action.types';
 import { TableCell } from './TableCell';
 import { TableHeadCell } from './TableHeadCell';
 import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
 import { actionsColumn, selectionColumn } from './temp/columns';
-import { ActionKindsPropType } from '../types/Action.types';
 import Text from './TableCell/renderers/Text';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
-  border: 1px solid #ddd;
+  border-top: 1px solid ${getColor('graphiteH')};
 
   /* reset table defaults */
   display: block;
@@ -94,7 +95,10 @@ const Table = <D extends Record<string, unknown>>({
       columns,
       data,
       defaultColumn, // default column settings
-      initialState: { pageIndex: 0, sortBy: [] }, // We want to start at page 1
+      initialState: {
+        pageIndex: 0, // We want to start at page 1
+        sortBy: [],
+      },
       manualPagination: true, // We will handle pagination by ourselves
       manualSortBy: true, // sorting is handled backend
       pageCount: controlledPageCount, // Since we handling pagination we need to pass page count

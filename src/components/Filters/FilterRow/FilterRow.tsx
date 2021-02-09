@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   curry,
   equals,
@@ -12,6 +12,7 @@ import {
   prop,
   propEq,
 } from 'ramda';
+import { isNotUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
@@ -33,7 +34,14 @@ const Container = styled(FlexContainer)`
 `;
 
 const SplitField = styled.div<SplitFieldProps>`
-  width: ${({ width }) => pxToRem(width)};
+  ${({ $width }) =>
+    isNotUndefined($width)
+      ? css`
+          flex: 0 0 ${pxToRem($width)};
+        `
+      : css`
+          width: 100%;
+        `};
   margin-right: ${pxToRem(6)};
   &:first-of-type {
     margin-left: ${pxToRem(6)};
@@ -131,7 +139,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
         isDisabled={isRemoveDisabled}
         onClick={onRemove}
       />
-      <SplitField width={72}>
+      <SplitField $width={72}>
         {index === 1 ? (
           <Select
             defaultValue={operatorOption}
@@ -145,21 +153,21 @@ const FilterRow: React.FC<FilterRowProps> = ({
           </DisabledOperator>
         )}
       </SplitField>
-      <SplitField width={200}>
+      <SplitField $width={200}>
         <Select
           options={dataPointOptions}
           value={dataPoint}
           onChange={handleDataPointChange}
         />
       </SplitField>
-      <SplitField width={144}>
+      <SplitField $width={144}>
         <Select
           options={conditions}
           value={condition}
           onChange={handleConditionChange}
         />
       </SplitField>
-      <SplitField width={266}>
+      <SplitField>
         {InputComponent && (
           <InputComponent value={inputValue} onChange={handleInputChange} />
         )}
