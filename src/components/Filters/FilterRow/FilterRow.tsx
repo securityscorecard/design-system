@@ -123,11 +123,11 @@ const FilterRow: React.FC<FilterRowProps> = ({
     onConditionChange(selectedConditionValue, index, areComponentsEqual);
   };
 
-  const handleInputChange = (event) => {
-    if (event.target) {
-      onInputChange(event.target.value, index);
+  const handleInputChange = (value) => {
+    if (value.target) {
+      onInputChange(value.target.value, index);
     } else {
-      onInputChange(event, index);
+      onInputChange(value, index);
     }
   };
 
