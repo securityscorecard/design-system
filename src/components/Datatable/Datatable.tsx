@@ -10,7 +10,7 @@ import DatatableContext from './DatatableContext';
 import { getColor } from '../../utils/helpers';
 
 const StyledDatatable = styled(FlexContainer)`
-  border: 1px solid ${getColor('graphiteHB')};
+  border: 1px solid ${getColor('graphiteH')};
   background: ${getColor('graphite3H')};
 `;
 

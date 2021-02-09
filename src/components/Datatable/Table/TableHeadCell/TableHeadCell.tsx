@@ -19,22 +19,8 @@ const StyledTableHeadCell = styled.th`
   border-bottom: 2px solid ${getColor('graphiteH')};
   border-right: 1px solid ${getColor('graphiteH')};
 
-  &:last-child,
-  &:nth-last-child(2) {
+  &:last-child {
     border-right: 0;
-  }
-
-  &[data-sticky-td] {
-    position: sticky;
-  }
-
-  &[data-sticky-last-left-td] {
-    /* box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.05); */
-  }
-
-  &[data-sticky-first-right-td] {
-    box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
-    border-left: 1px solid #dadada;
   }
 `;
 

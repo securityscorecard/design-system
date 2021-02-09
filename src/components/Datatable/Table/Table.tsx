@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -38,15 +38,28 @@ const StyledTable = styled.table<{ isSticky: boolean }>`
     `};
 `;
 
-const StyledTableHeader = styled.thead`
+const StyledTableHeader = styled.thead<{ isSticky: boolean }>`
   display: block;
+
+  ${({ isSticky }) =>
+    isSticky &&
+    css`
+      & th:nth-last-child(2) {
+        border-right: 0;
+      }
+
+      & th[data-sticky-first-right-td] {
+        box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
+        border-left: 1px solid ${getColor('graphiteH')};
+      }
+    `}
 `;
 
-const StyledTableBody = styled.tbody<{ isTableSticky: boolean }>`
+const StyledTableBody = styled.tbody<{ isSticky: boolean }>`
   display: block;
 
-  ${({ isTableSticky }) =>
-    isTableSticky &&
+  ${({ isSticky }) =>
+    isSticky &&
     css`
       position: relative;
       z-index: 0;
@@ -63,6 +76,7 @@ const Table = <D extends Record<string, unknown>>({
   pageCount: controlledPageCount,
 }: TableProps<D>): React.ReactElement => {
   const { setSelectedIds } = useDatatable();
+  const [isSticky, setIsSticky] = useState(true);
   const defaultColumn = useMemo(
     () => ({
       minWidth: 40,
@@ -88,6 +102,7 @@ const Table = <D extends Record<string, unknown>>({
     nextPage,
     previousPage,
     setPageSize,
+    totalColumnsWidth,
     // Get the state from the instance
     state: { pageIndex, pageSize, selectedRowIds, sortBy },
   } = useTable<D>(
@@ -123,6 +138,16 @@ const Table = <D extends Record<string, unknown>>({
     },
   );
 
+  const tableRef = useRef(null);
+  useEffect(() => {
+    if (
+      tableRef.current !== null &&
+      tableRef.current.offsetWidth >= totalColumnsWidth
+    ) {
+      setIsSticky(false);
+    }
+  }, [totalColumnsWidth]);
+
   // Listen for changes in selection and propage to parent component
   useEffect(() => {
     setSelectedIds(Object.keys(selectedRowIds));
@@ -133,16 +158,15 @@ const Table = <D extends Record<string, unknown>>({
     fetchData({ pageIndex, pageSize, sortBy });
   }, [fetchData, pageIndex, pageSize, sortBy]);
 
-  const isTableSticky = true; // TODO: dynamicaly handle if we need stickyness
-
   // Render the UI for your table
   return (
     <>
       <StyledTable
-        isSticky={isTableSticky}
+        ref={tableRef}
+        isSticky={isSticky}
         {...getTableProps({ style: { minWidth: '100%' } })}
       >
-        <StyledTableHeader>
+        <StyledTableHeader isSticky={isSticky}>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -154,7 +178,7 @@ const Table = <D extends Record<string, unknown>>({
             </TableRow>
           ))}
         </StyledTableHeader>
-        <StyledTableBody isTableSticky={isTableSticky} {...getTableBodyProps()}>
+        <StyledTableBody isSticky={isSticky} {...getTableBodyProps()}>
           {page.map((row, index) => {
             prepareRow(row);
             return (
