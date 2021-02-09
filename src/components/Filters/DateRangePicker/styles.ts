@@ -21,8 +21,8 @@ export const dateRangePickerStyles = css`
     border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
     border-radius: ${getBorderRadius};
     color: ${getFormStyle('color')};
-    font-size: ${pxToRem(13)};
-    line-height: ${pxToRem(15)};
+    font-size: ${getFontSize('md')};
+    line-height: ${getLineHeight('md')};
     font-weight: ${getFontWeight('regular')};
   }
   .DateRangePicker-input:focus {
@@ -38,6 +38,9 @@ export const dateRangePickerStyles = css`
     border-radius: ${getBorderRadius};
     box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
   }
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
   .react-datepicker-wrapper:first-of-type {
     margin-right: ${pxToRem(8)};
   }
@@ -47,8 +50,8 @@ export const dateRangePickerStyles = css`
     padding-top: 0;
   }
   .react-datepicker__current-month {
-    font-size: ${pxToRem(18)};
-    line-height: ${pxToRem(20)};
+    font-size: ${getFontSize('h4')};
+    line-height: ${getLineHeight('lg')};
     font-weight: ${getFontWeight('medium')};
     margin-top: ${pxToRem(16)};
     margin-bottom: ${pxToRem(20)};
@@ -66,7 +69,7 @@ export const dateRangePickerStyles = css`
   .react-datepicker__day--keyboard-selected {
     background-color: ${getColor('radiantBlueberry')};
     border-radius: 4px;
-    font-weight: 700;
+    font-weight: ${getFontWeight('bold')};
     color: ${getColor('graphite5H')};
   }
   .react-datepicker__day:focus {
@@ -86,7 +89,7 @@ export const dateRangePickerStyles = css`
   .react-datepicker__day--range-end,
   .react-datepicker__day--selecting-range-start {
     background-color: ${getColor('radiantBlueberry')};
-    font-weight: 700;
+    font-weight: ${getFontWeight('bold')};
     color: ${getColor('graphite5H')};
   }
   .react-datepicker__day--selected,
