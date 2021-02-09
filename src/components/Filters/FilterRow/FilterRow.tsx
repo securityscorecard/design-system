@@ -19,6 +19,7 @@ import { Select } from '../Select';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { DataPointPropTypes } from '../Filters.types';
+import { DateRangePickerPropTypes } from '../DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import operatorOptions from '../data/operator-options.json';
 import { pxToRem } from '../../../utils/helpers';
@@ -115,7 +116,11 @@ const FilterRow: React.FC<FilterRowProps> = ({
   };
 
   const handleInputChange = (event) => {
-    onInputChange(event.target.value, index);
+    if (event.target) {
+      onInputChange(event.target.value, index);
+    } else {
+      onInputChange(event, index);
+    }
   };
 
   return (
@@ -135,7 +140,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
           />
         ) : (
           <DisabledOperator>
-            {/* First row always includes Where operator */}
+            {/* First row starts by Where operator */}
             {index === 0 ? 'where' : operatorValue}
           </DisabledOperator>
         )}
@@ -171,7 +176,6 @@ FilterRow.propTypes = {
   dataPoint: PropTypes.string.isRequired,
   condition: PropTypes.string.isRequired,
   operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
-  input: PropTypes.string.isRequired,
   isApplied: PropTypes.bool.isRequired,
   isRemoveDisabled: PropTypes.bool.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
@@ -179,4 +183,5 @@ FilterRow.propTypes = {
   onConditionChange: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  input: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
 };

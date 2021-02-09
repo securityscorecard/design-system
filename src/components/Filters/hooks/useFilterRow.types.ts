@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Condition } from '../Filters.types';
 import { Option } from '../Select/Select.types';
+import { DateRange } from '../DateRangePicker/DateRangePicker.types';
 
 interface InputComponentProps {
-  value: string;
+  value: string | DateRange;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

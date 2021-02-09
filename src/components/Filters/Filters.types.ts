@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { Option, OptionPropType } from './Select/Select.types';
 import { Operators } from './Filters.enums';
+import { DateRange } from './DateRangePicker/DateRangePicker.types';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
 
@@ -35,8 +36,8 @@ export interface Filter {
   operator: OperatorTypes;
   dataPoint: string;
   condition: string;
-  input: string;
   isApplied: boolean;
+  input?: string | DateRange;
 }
 
 export interface FiltersProps {

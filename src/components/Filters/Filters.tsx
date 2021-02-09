@@ -6,6 +6,7 @@ import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
 import { DataPointPropTypes, Filter, FiltersProps } from './Filters.types';
+import { DateRangePickerPropTypes } from './DateRangePicker/DateRangePicker.types';
 import { Operators } from './Filters.enums';
 
 const generateId = ({ operator, dataPoint, condition }, index) =>
@@ -19,7 +20,7 @@ const getDefaultData = (dataPoints) => [
     operator: Operators.and,
     dataPoint: dataPoints[0].value,
     condition: getDefaultCondition(dataPoints),
-    input: '',
+    input: undefined,
     isApplied: false,
   },
 ];
@@ -67,7 +68,7 @@ const Filters: React.FC<FiltersProps> = ({
     const newFilters = [...filtersValues];
     newFilters[index].dataPoint = dataPoint;
     newFilters[index].condition = condition;
-    newFilters[index].input = '';
+    newFilters[index].input = undefined;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
@@ -79,7 +80,7 @@ const Filters: React.FC<FiltersProps> = ({
     const newFilters = [...filtersValues];
     newFilters[index].condition = condition;
     if (!areComponentsEqual) {
-      newFilters[index].input = '';
+      newFilters[index].input = undefined;
     }
     newFilters[index].isApplied = false;
 
@@ -104,7 +105,7 @@ const Filters: React.FC<FiltersProps> = ({
       operator: newFilters[0].operator,
       dataPoint: dataPoints[0].value,
       condition: getDefaultCondition(dataPoints),
-      input: '',
+      input: undefined,
       isApplied: false,
     };
 
@@ -185,7 +186,7 @@ Filters.propTypes = {
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
       dataPoint: PropTypes.string.isRequired,
       condition: PropTypes.string.isRequired,
-      input: PropTypes.string.isRequired,
+      input: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
       isApplied: PropTypes.bool.isRequired,
     }),
   ).isRequired,
