@@ -1,4 +1,4 @@
-import { DateRangePicker, Input } from '../inputs';
+import { DateRangePicker, Input, SingleDatePicker } from '../inputs';
 import { DataPoint, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 
@@ -35,7 +35,7 @@ export const dataPointsMock: DataPoint[] = [
         label: 'Chocolate',
         isDefault: true,
       },
-      { input: Input, value: 'strawberry', label: 'Strawberry' },
+      { input: SingleDatePicker, value: 'strawberry', label: 'Strawberry' },
       { input: DateRangePicker, value: 'vanilla', label: 'Vanilla' },
     ],
     value: 'smurf',
@@ -62,6 +62,12 @@ export const dataMock: Filter[] = [
     operator: Operators.and,
     dataPoint: 'smurf',
     condition: 'vanilla',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    dataPoint: 'smurf',
+    condition: 'strawberry',
     isApplied: true,
   },
 ];
