@@ -29,6 +29,7 @@ export const dateRangePickerStyles = css`
     border: ${getFormStyle('statefulBorderWidth')} solid
       ${getFormStyle('focusBorderColor')};
     outline: none;
+    padding: ${pxToRem(3, 15)};
   }
   .DateRangePicker-calendar {
     font-size: ${getFontSize('md')};
