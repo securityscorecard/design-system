@@ -1,5 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
+import { InputProps } from './Input.types';
 import {
   getBorderRadius,
   getFormStyle,
@@ -12,7 +15,7 @@ const stateStyles = css`
   outline: none;
 `;
 
-const Input = styled.input`
+export const StyledInput = styled.input`
   display: block;
   width: 100%;
   height: ${pxToRem(32)};
@@ -39,4 +42,13 @@ const Input = styled.input`
   }
 `;
 
+const Input: React.FC<InputProps> = ({ value = '', onChange }) => (
+  <StyledInput placeholder="String" value={value} onChange={onChange} />
+);
+
 export default Input;
+
+Input.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+};

@@ -30,6 +30,13 @@ export const datePickerStyles = css`
     outline: none;
     padding: ${pxToRem(3, 15)};
   }
+  .DateRangePicker-input::placeholder,
+  .DateRangePicker-input::-webkit-input-placeholder {
+    color: ${getFormStyle('placeholderColor')};
+  }
+  .DateRangePicker-input:-ms-input-placeholder {
+    color: ${getFormStyle('placeholderColor')};
+  }
   .DateRangePicker-calendar {
     font-size: ${getFontSize('md')};
     line-height: ${getLineHeight('md')};
