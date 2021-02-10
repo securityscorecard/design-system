@@ -55,7 +55,6 @@ export const dataMock: Filter[] = [
     operator: Operators.and,
     dataPoint: 'lemon',
     condition: 'strawberry',
-
     isApplied: true,
   },
   {
