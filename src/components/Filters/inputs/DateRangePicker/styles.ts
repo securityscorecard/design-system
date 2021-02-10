@@ -9,10 +9,9 @@ import {
   getFormStyle,
   getLineHeight,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../../utils/helpers';
 
-// TODO make it reusable with SingleDatePicker
-export const dateRangePickerStyles = css`
+export const datePickerStyles = css`
   .DateRangePicker-input {
     height: ${pxToRem(32)};
     width: 100%;
@@ -41,9 +40,6 @@ export const dateRangePickerStyles = css`
   }
   .react-datepicker-wrapper {
     width: 100%;
-  }
-  .react-datepicker-wrapper:first-of-type {
-    margin-right: ${pxToRem(8)};
   }
   .react-datepicker__header {
     background: ${getColor('graphite5H')};
@@ -75,33 +71,6 @@ export const dateRangePickerStyles = css`
   }
   .react-datepicker__day:focus {
     outline: 0;
-  }
-  .react-datepicker__day--in-selecting-range {
-    background-color: ${getColor('graphite5H')};
-    color: ${getColor('graphite4B')};
-  }
-  .react-datepicker__day--in-range {
-    background-color: ${getColor('blueberry0')};
-    color: ${getColor('graphite4B')};
-    border-radius: 0;
-  }
-  .react-datepicker__day--selected,
-  .react-datepicker__day--range-start,
-  .react-datepicker__day--range-end,
-  .react-datepicker__day--selecting-range-start {
-    background-color: ${getColor('radiantBlueberry')};
-    font-weight: ${getFontWeight('bold')};
-    color: ${getColor('graphite5H')};
-  }
-  .react-datepicker__day--selected,
-  .react-datepicker__day--selecting-range-start {
-    border-radius: 16px;
-  }
-  .react-datepicker__day--range-start {
-    border-radius: 16px 0 0 16px;
-  }
-  .react-datepicker__day--range-end {
-    border-radius: 0 16px 16px 0;
   }
   .react-datepicker__navigation {
     top: ${pxToRem(36)};
@@ -137,5 +106,38 @@ export const dateRangePickerStyles = css`
   }
   .react-datepicker__day--outside-month {
     visibility: hidden;
+  }
+`;
+export const dateRangePickerStyles = css`
+  .react-datepicker-wrapper:first-of-type {
+    margin-right: ${pxToRem(8)};
+  }
+
+  .react-datepicker__day--in-selecting-range {
+    background-color: ${getColor('graphite5H')};
+    color: ${getColor('graphite4B')};
+  }
+  .react-datepicker__day--in-range {
+    background-color: ${getColor('blueberry0')};
+    color: ${getColor('graphite4B')};
+    border-radius: 0;
+  }
+  .react-datepicker__day--selected,
+  .react-datepicker__day--range-start,
+  .react-datepicker__day--range-end,
+  .react-datepicker__day--selecting-range-start {
+    background-color: ${getColor('radiantBlueberry')};
+    font-weight: ${getFontWeight('bold')};
+    color: ${getColor('graphite5H')};
+  }
+  .react-datepicker__day--selected,
+  .react-datepicker__day--selecting-range-start {
+    border-radius: 16px;
+  }
+  .react-datepicker__day--range-start {
+    border-radius: 16px 0 0 16px;
+  }
+  .react-datepicker__day--range-end {
+    border-radius: 0 16px 16px 0;
   }
 `;

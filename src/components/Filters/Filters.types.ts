@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import { Option, OptionPropType } from './Select/Select.types';
 import { Operators } from './Filters.enums';
-import { DateRange } from './DateRangePicker/DateRangePicker.types';
+import { DateRange } from './inputs/DateRangePicker/DateRangePicker.types';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
 

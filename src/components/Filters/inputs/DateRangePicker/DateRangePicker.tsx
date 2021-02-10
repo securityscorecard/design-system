@@ -4,14 +4,15 @@ import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { FlexContainer } from '../../FlexContainer';
-import { dateRangePickerStyles } from './styles';
+import { FlexContainer } from '../../../FlexContainer';
+import { datePickerStyles, dateRangePickerStyles } from './styles';
 import {
   DateRangePickerPropTypes,
   DateRangePickerProps,
 } from './DateRangePicker.types';
 
 const StyledDatePicker = styled(FlexContainer)`
+  ${datePickerStyles}
   ${dateRangePickerStyles}
 `;
 

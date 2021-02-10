@@ -20,7 +20,7 @@ import { Select } from '../Select';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { DataPointPropTypes } from '../Filters.types';
-import { DateRangePickerPropTypes } from '../DateRangePicker/DateRangePicker.types';
+import { DateRangePickerPropTypes } from '../inputs/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import operatorOptions from '../data/operator-options.json';
 import { pxToRem } from '../../../utils/helpers';
@@ -123,11 +123,11 @@ const FilterRow: React.FC<FilterRowProps> = ({
     onConditionChange(selectedConditionValue, index, areComponentsEqual);
   };
 
-  const handleInputChange = (event) => {
-    if (event.target) {
-      onInputChange(event.target.value, index);
+  const handleInputChange = (value) => {
+    if (value.target) {
+      onInputChange(value.target.value, index);
     } else {
-      onInputChange(event, index);
+      onInputChange(value, index);
     }
   };
 

@@ -7,7 +7,7 @@ import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
 import { DataPointPropTypes, Filter, FiltersProps } from './Filters.types';
-import { DateRangePickerPropTypes } from './DateRangePicker/DateRangePicker.types';
+import { DateRangePickerPropTypes } from './inputs/DateRangePicker/DateRangePicker.types';
 import { Operators } from './Filters.enums';
 
 const generateId = ({ operator, dataPoint, condition }, index) =>
