@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Input } from '../Input';
+import { StyledInput } from '../Input/Input';
 import { NumberProps } from './Number.types';
 
 const Number: React.FC<NumberProps> = ({ value = '', onChange }) => {
@@ -11,7 +11,7 @@ const Number: React.FC<NumberProps> = ({ value = '', onChange }) => {
   };
 
   return (
-    <Input
+    <StyledInput
       pattern="[0-9]*"
       placeholder="Integer"
       type="text"
