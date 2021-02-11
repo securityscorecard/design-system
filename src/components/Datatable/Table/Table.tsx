@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
+  CellProps,
+  HeaderProps,
   useFlexLayout,
   usePagination,
   useRowSelect,
@@ -9,8 +11,13 @@ import {
   useTable,
 } from 'react-table';
 import { useSticky } from 'react-table-sticky';
-import { always, prop } from 'ramda';
-import { isOdd } from 'ramda-adjunct';
+import { __, always, includes, map, prop, without } from 'ramda';
+import {
+  isNonEmptyArray,
+  isNotUndefined,
+  isOdd,
+  isString,
+} from 'ramda-adjunct';
 
 import { getColor } from '../../../utils/helpers';
 import { useDatatable } from '../hooks/useDatatable';
@@ -19,8 +26,10 @@ import { TableCell } from './TableCell';
 import { TableHeadCell } from './TableHeadCell';
 import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
-import { actionsColumn, selectionColumn } from './temp/columns';
 import Text from './TableCell/renderers/Text';
+import { Dropdown } from '../Dropdown';
+import { IconButton } from '../../IconButton';
+import IndeterminateCheckbox from './temp/IndeterminateCheckbox';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -38,21 +47,33 @@ const StyledTable = styled.table<{ isSticky: boolean }>`
     `};
 `;
 
-const StyledTableHeader = styled.thead<{ isSticky: boolean }>`
+const StyledTableHeader = styled.thead<{
+  isSticky: boolean;
+  hasRowActions: boolean;
+}>`
   display: block;
+  background-color: ${getColor('graphite3H')};
 
-  ${({ isSticky }) =>
-    isSticky &&
-    css`
-      & th:nth-last-child(2) {
-        border-right: 0;
-      }
-
-      & th[data-sticky-first-right-td] {
-        box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
-        border-left: 1px solid ${getColor('graphiteH')};
-      }
-    `}
+  /* TODO: add shadow when table isSticky and doesn't have actions column */
+  ${({ isSticky, hasRowActions }) =>
+    isSticky && hasRowActions
+      ? css`
+          & th:nth-last-child(2) {
+            border-right: 0;
+          }
+          & th[data-sticky-first-right-td] {
+            box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
+            border-left: 1px solid ${getColor('graphiteH')};
+          }
+        `
+      : isSticky && !hasRowActions
+      ? css`
+          & th[data-sticky-first-right-td] {
+            box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
+            border-left: 1px solid ${getColor('graphiteH')};
+          }
+        `
+      : null}
 `;
 
 const StyledTableBody = styled.tbody<{ isSticky: boolean }>`
@@ -66,6 +87,14 @@ const StyledTableBody = styled.tbody<{ isSticky: boolean }>`
     `};
 `;
 
+const SELECTION_COLUMN_ID = 'selection';
+const ACTIONS_COLUMN_ID = 'actions';
+
+const isAnyStickyColumn = includes(__, [
+  SELECTION_COLUMN_ID,
+  ACTIONS_COLUMN_ID,
+]);
+
 const Table = <D extends Record<string, unknown>>({
   columns,
   data,
@@ -74,8 +103,15 @@ const Table = <D extends Record<string, unknown>>({
   primaryKey,
   rowActions,
   pageCount: controlledPageCount,
+  config,
 }: TableProps<D>): React.ReactElement => {
-  const { setSelectedIds } = useDatatable();
+  const { onSelect, defaultPageSize, defaultSortBy, hasSelection } = config;
+  const hasRowActions = isNonEmptyArray(rowActions);
+  const {
+    setSelectedIds,
+    defaultHiddenColumns,
+    defaultColumnOrder,
+  } = useDatatable();
   const [isSticky, setIsSticky] = useState(true);
   const defaultColumn = useMemo(
     () => ({
@@ -93,7 +129,7 @@ const Table = <D extends Record<string, unknown>>({
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page,
+    rows,
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -101,7 +137,6 @@ const Table = <D extends Record<string, unknown>>({
     gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
     totalColumnsWidth,
     // Get the state from the instance
     state: { pageIndex, pageSize, selectedRowIds, sortBy },
@@ -112,13 +147,20 @@ const Table = <D extends Record<string, unknown>>({
       defaultColumn, // default column settings
       initialState: {
         pageIndex: 0, // We want to start at page 1
-        sortBy: [],
+        pageSize: defaultPageSize,
+        sortBy: defaultSortBy,
+        columnOrder: defaultColumnOrder,
+        ...(isNonEmptyArray(defaultHiddenColumns) && {
+          hiddenColumns: defaultHiddenColumns,
+        }),
       },
       manualPagination: true, // We will handle pagination by ourselves
       manualSortBy: true, // sorting is handled backend
       pageCount: controlledPageCount, // Since we handling pagination we need to pass page count
       autoResetSelectedRows: false, // Do not reset selection when moving to different page
-      getRowId: prop(primaryKey), // Set row id for selection
+      ...(isNotUndefined(primaryKey) && {
+        getRowId: isString(primaryKey) ? prop(primaryKey) : primaryKey, // Set row id for selection
+      }),
     },
     useSortBy,
     usePagination,
@@ -126,15 +168,52 @@ const Table = <D extends Record<string, unknown>>({
     useFlexLayout,
     useSticky,
     (hooks) => {
-      hooks.visibleColumns.push((visibleColumns) => [
-        // Add selection column to the beginning of the table
-        // TODO: Add condition to optionalize selection (opt-out)
-        selectionColumn,
-        ...visibleColumns,
-        // Add actions column to the end of the table
-        // TODO: Add condition to optionalize actions (based on passed actions array)
-        actionsColumn(primaryKey, rowActions),
-      ]);
+      hooks.visibleColumns.push((visibleColumns) =>
+        without(
+          [false],
+          [
+            // Add selection column to the beginning of the table
+            hasSelection && {
+              id: SELECTION_COLUMN_ID,
+              sticky: 'left',
+              width: 48,
+              disableSortBy: true,
+              Header: ({
+                getToggleAllRowsSelectedProps,
+              }: HeaderProps<D>): JSX.Element => (
+                <div>
+                  <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+                </div>
+              ),
+              Cell: ({ row }: CellProps<D>): JSX.Element => (
+                <div>
+                  <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+                </div>
+              ),
+            },
+            ...visibleColumns,
+            // Add actions column to the end of the table
+            hasRowActions && {
+              id: ACTIONS_COLUMN_ID,
+              sticky: 'right',
+              width: 48,
+              disableSortBy: true,
+              Cell: ({ row }: CellProps<D>): JSX.Element => {
+                const actions = map((action) => ({
+                  ...action,
+                  onClick: () => action.onClick(row.id),
+                }))(rowActions);
+
+                return (
+                  <Dropdown actions={actions}>
+                    <IconButton iconName="wrench" label="Actions" />
+                  </Dropdown>
+                );
+              },
+            },
+          ],
+        ),
+      );
     },
   );
 
@@ -150,12 +229,20 @@ const Table = <D extends Record<string, unknown>>({
 
   // Listen for changes in selection and propage to parent component
   useEffect(() => {
-    setSelectedIds(Object.keys(selectedRowIds));
-  }, [setSelectedIds, selectedRowIds]);
+    const selectedIds = Object.keys(selectedRowIds);
+    onSelect(selectedIds);
+    setSelectedIds(selectedIds);
+  }, [onSelect, setSelectedIds, selectedRowIds]);
 
   // Listen for changes in pagination and use the state to fetch our new data
   useEffect(() => {
-    fetchData({ pageIndex, pageSize, sortBy });
+    fetchData({
+      pageIndex,
+      pageSize,
+      sortBy,
+      filters: [], // TODO: get filters state from context
+      query: '', // TODO: get search query from context
+    });
   }, [fetchData, pageIndex, pageSize, sortBy]);
 
   // Render the UI for your table
@@ -166,20 +253,25 @@ const Table = <D extends Record<string, unknown>>({
         isSticky={isSticky}
         {...getTableProps({ style: { minWidth: '100%' } })}
       >
-        <StyledTableHeader isSticky={isSticky}>
+        <StyledTableHeader hasRowActions={hasRowActions} isSticky={isSticky}>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <TableHeadCell<D>
                   column={column}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  {...column.getHeaderProps({
+                    ...column.getSortByToggleProps(),
+                    ...(isAnyStickyColumn(column.id) && {
+                      style: { flex: '0 0 auto' },
+                    }),
+                  })}
                 />
               ))}
             </TableRow>
           ))}
         </StyledTableHeader>
         <StyledTableBody isSticky={isSticky} {...getTableBodyProps()}>
-          {page.map((row, index) => {
+          {rows.map((row, index) => {
             prepareRow(row);
             return (
               <TableRow {...row.getRowProps()}>
@@ -188,7 +280,11 @@ const Table = <D extends Record<string, unknown>>({
                     <TableCell
                       cell={cell}
                       isOdd={isOdd(index)}
-                      {...cell.getCellProps()}
+                      {...cell.getCellProps({
+                        ...(isAnyStickyColumn(cell.column.id) && {
+                          style: { flex: '0 0 auto' },
+                        }),
+                      })}
                     />
                   );
                 })}
@@ -201,7 +297,7 @@ const Table = <D extends Record<string, unknown>>({
               <td colSpan={10000}>Loading...</td>
             ) : (
               <td colSpan={10000}>
-                Showing {page.length} of ~{controlledPageCount * pageSize}{' '}
+                Showing {rows.length} of ~{controlledPageCount * pageSize}{' '}
                 results
               </td>
             )}
@@ -256,19 +352,7 @@ const Table = <D extends Record<string, unknown>>({
               gotoPage(pageNumber);
             }}
           />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((size) => (
-            <option key={size} value={size}>
-              Show {size}
-            </option>
-          ))}
-        </select>
+        </span>
       </div>
     </>
   );

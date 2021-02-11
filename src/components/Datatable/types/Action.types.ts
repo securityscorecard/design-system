@@ -6,6 +6,7 @@ import { ToPropType } from '../../../types/to.types';
 export type ActionBase = {
   label: string;
   name: string;
+  onClick?: (selectedIds: string[]) => void;
 };
 
 export const ActionBasePropType = {
@@ -13,9 +14,7 @@ export const ActionBasePropType = {
   name: PropTypes.string.isRequired,
 };
 
-export type HandlerActionKind = ActionBase & {
-  onClick: () => void;
-};
+export type HandlerActionKind = Required<ActionBase>;
 
 export const HandlerActionKindPropType = PropTypes.exact({
   ...ActionBasePropType,
@@ -24,7 +23,6 @@ export const HandlerActionKindPropType = PropTypes.exact({
 
 export type RelativeLinkActionKind = ActionBase & {
   to: To;
-  onClick?: () => void;
   href?: never;
   subActions?: never;
 };
@@ -37,7 +35,6 @@ export const RelativeLinkActionKindPropType = PropTypes.exact({
 
 export type AbsoluteLinkActionKind = ActionBase & {
   href: string;
-  onClick?: () => void;
   to?: never;
   subActions?: never;
 };
@@ -61,7 +58,6 @@ export const ActionKindsPropType = PropTypes.oneOfType([
 
 export type ActionWithSubactions = ActionBase & {
   subActions: ActionKinds[];
-  onClick?: () => void;
   href?: never;
   to?: never;
 };

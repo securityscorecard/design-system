@@ -14,7 +14,7 @@ export const ColumnOptionsPropType = PropTypes.shape({
 export interface CellRendererProps<V> {
   value: V;
   column: ColumnOptions<V>;
-  formater?: (value: V) => V;
+  formatter?: (value: V) => V;
 }
 
 interface AbsoluteLinkColumnOptions<V> {
