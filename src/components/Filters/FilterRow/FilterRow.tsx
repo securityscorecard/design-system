@@ -6,6 +6,7 @@ import {
   defaultTo,
   equals,
   find,
+  has,
   hasPath,
   identity,
   map,
@@ -14,7 +15,7 @@ import {
   prop,
   propEq,
 } from 'ramda';
-import { isNotUndefined } from 'ramda-adjunct';
+import { isNotUndefined, isObj } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
@@ -86,10 +87,7 @@ const renderComponent = (Component, value, onChange) => {
   }
 
   /* Select */
-  if (
-    typeof Component === 'object' &&
-    hasPath(['props', 'options'], Component)
-  ) {
+  if (isObj(Component) && hasPath(['props', 'options'], Component)) {
     const {
       Component: SelectComponent,
       props: { options, defaultValue },
@@ -164,9 +162,9 @@ const FilterRow: React.FC<FilterRowProps> = ({
   };
 
   const handleInputChange = (value) => {
-    if (value.target) {
+    if (has('target', value)) {
       onInputChange(value.target.value, index);
-    } else if (value.value) {
+    } else if (has('value', value)) {
       onInputChange(value.value, index);
     } else {
       onInputChange(value, index);
