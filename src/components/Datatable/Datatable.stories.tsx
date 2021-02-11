@@ -10,13 +10,13 @@ import * as Grid from '../layout';
 import Datatable from './Datatable';
 import assets from './mocks/ipAssets.json';
 import {
-  Count,
-  Date,
-  Link,
-  Text as TextCell,
-  TimeFromNow,
+  RendererCount,
+  RendererDate,
+  RendererLink,
+  RendererMultiValue,
+  RendererText,
+  RendererTimeFromNow,
 } from './Table/TableCell/renderers';
-import MultiValue from './Table/TableCell/renderers/MultiValue';
 import { TextSizes, TextVariants } from '../typography/Text/Text.enums';
 import { Text } from '../typography';
 import { LinkCellRendererProps } from './Table/TableCell/renderers/renderers.types';
@@ -49,7 +49,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
     Header: 'IP Address',
     accessor: 'ipAddress',
     width: 200,
-    Cell: Link,
+    Cell: RendererLink,
     onClick: (val: string): void => {
       console.log(`navigate to IP (${val}) details page`);
     },
@@ -88,7 +88,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
   {
     Header: 'Detection',
     accessor: 'detectionMethod',
-    Cell: MultiValue,
+    Cell: RendererMultiValue,
     width: 160,
     onClick: (val: string): void => {
       console.log(`navigate to IP details page, detection type: ${val}`);
@@ -97,7 +97,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
   {
     Header: 'Source',
     accessor: 'source',
-    Cell: MultiValue,
+    Cell: RendererMultiValue,
     width: 160,
     onClick: (val: string): void => {
       console.log(`navigate to IP details page, source type: ${val}`);
@@ -107,7 +107,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
   {
     Header: 'Issues',
     accessor: 'issuesCount',
-    Cell: Count,
+    Cell: RendererCount,
     width: 88,
     onClick: (val: string): void => {
       console.log(`navigate to IP (${val}) details page (issues tab)`);
@@ -116,7 +116,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
   {
     Header: 'Findings',
     accessor: 'findingsCount',
-    Cell: Count,
+    Cell: RendererCount,
     width: 88,
     onClick: (val: string): void => {
       console.log(`navigate to IP (${val}) details page (issues tab)`);
@@ -126,13 +126,13 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
     Header: 'First observed',
     accessor: 'observationDate',
     width: 120,
-    Cell: Date,
+    Cell: RendererDate,
   },
   {
     Header: 'Last observed',
     accessor: 'lastObservationDate',
     width: 120,
-    Cell: TimeFromNow,
+    Cell: RendererTimeFromNow,
   },
   {
     id: 'observedFor',
@@ -151,7 +151,7 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
       dayjs.extend(relativeTime);
 
       return (
-        <TextCell
+        <RendererText
           column={column}
           formatter={(val) => dayjs(val).to(dayjs(lastObservationDate), true)}
           value={value}
