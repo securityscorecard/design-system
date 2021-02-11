@@ -15,7 +15,7 @@ import {
   prop,
   propEq,
 } from 'ramda';
-import { isNotUndefined, isObj } from 'ramda-adjunct';
+import { isNotUndefined, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
@@ -82,12 +82,13 @@ const getOperatorOptions = curry((operatorValue) =>
 const getDataPointOptions = map(normalizeOptions);
 
 const renderComponent = (Component, value, onChange) => {
-  if (!Component) {
-    return null;
-  }
+  if (isUndefined(Component && !React.isValidElement(Component))) return null;
 
   /* Select */
-  if (isObj(Component) && hasPath(['props', 'options'], Component)) {
+  if (
+    typeof Component === 'object' &&
+    hasPath(['props', 'options'], Component)
+  ) {
     const {
       Component: SelectComponent,
       props: { options, defaultValue },
