@@ -1,3 +1,10 @@
+# [1.0.0-alpha.28](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2021-02-11)
+
+
+### Bug Fixes
+
+* **Datatable:** round pageCount number ([daad90c](https://github.com/securityscorecard/design-system/commit/daad90c85e9640805cacbe1a6c473538ad14bf08))
+
 # [1.0.0-alpha.27](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2021-02-11)
 
 
