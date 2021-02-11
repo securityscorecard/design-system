@@ -127,6 +127,9 @@
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5"
   },
+  "resolutions": {
+    "immer": "8.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/securityscorecard/design-system"
