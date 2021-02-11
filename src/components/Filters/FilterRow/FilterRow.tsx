@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
   curry,
+  defaultTo,
   equals,
   find,
+  hasPath,
   identity,
   map,
   memoizeWith,
@@ -16,7 +18,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
-import { Select } from '../Select';
+import { Select } from '../inputs';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { DataPointPropTypes } from '../Filters.types';
@@ -78,6 +80,44 @@ const getOperatorOptions = curry((operatorValue) =>
 
 const getDataPointOptions = map(normalizeOptions);
 
+const renderComponent = (Component, value, onChange) => {
+  if (!Component) {
+    return null;
+  }
+
+  /* Select */
+  if (
+    typeof Component === 'object' &&
+    hasPath(['props', 'options'], Component)
+  ) {
+    const {
+      Component: SelectComponent,
+      props: { options, defaultValue },
+    } = Component;
+
+    /* Update filters state by default value on initial load */
+    if (defaultValue && !value) {
+      onChange(defaultValue.value);
+    }
+
+    const valueOptions = pipe(
+      find(propEq('value', value)),
+      defaultTo(defaultValue),
+    )(options);
+
+    return (
+      <SelectComponent
+        options={options}
+        placeholder="Category"
+        value={valueOptions}
+        onChange={onChange}
+      />
+    );
+  }
+
+  return <Component value={value} onChange={onChange} />;
+};
+
 const FilterRow: React.FC<FilterRowProps> = ({
   dataPoints,
   index,
@@ -126,6 +166,8 @@ const FilterRow: React.FC<FilterRowProps> = ({
   const handleInputChange = (value) => {
     if (value.target) {
       onInputChange(value.target.value, index);
+    } else if (value.value) {
+      onInputChange(value.value, index);
     } else {
       onInputChange(value, index);
     }
@@ -168,9 +210,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
         />
       </SplitField>
       <SplitField>
-        {InputComponent && (
-          <InputComponent value={inputValue} onChange={handleInputChange} />
-        )}
+        {renderComponent(InputComponent, inputValue, handleInputChange)}
       </SplitField>
     </Container>
   );
