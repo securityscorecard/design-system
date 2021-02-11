@@ -37,7 +37,7 @@ export const useFilterRow = (
   const [dataPoint, setDataPoint] = useState(null);
   const [conditions, setConditions] = useState(null);
   const [condition, setCondition] = useState(null);
-  const [InputComponent, setInputComponent] = useState(null);
+  const [InputComponent, setInputComponent] = useState(undefined);
 
   useEffect(() => {
     const {
