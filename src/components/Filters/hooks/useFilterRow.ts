@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Condition, DataPoint } from '../Filters.types';
 import { useFilterRowType } from './useFilterRow.types';
-import { Option } from '../Select/Select.types';
+import { Option } from '../inputs/Select/Select.types';
 
 export const normalizeOptions = <O extends Option>({
   value,
