@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { FlexContainer } from '../FlexContainer';
-import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
 import Button from './Button';
 import { ButtonProps } from './Button.types';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';

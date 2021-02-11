@@ -4,7 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 
 import Icon from './Icon';
 import { IconProps } from './Icon.types';
-import { IconTypes, SSCIconNames } from './Icon.enums';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import colors from '../../theme/colors';
 
 export default {

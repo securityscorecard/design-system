@@ -8,6 +8,14 @@ export const SSCIconNames = {
   chevronDown: 'chevron-down',
   arrowUp: 'arrow-up',
   quoteSquare: 'quote-square',
+  caretDown: 'caret-down',
+  plus: 'plus',
+  sort: 'sort',
+  sortUp: 'sort-up',
+  sortDown: 'sort-down',
+  search: 'search',
+  filter: 'filter',
+  minus: 'minus',
 } as const;
 
 export const IconTypes = {

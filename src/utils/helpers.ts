@@ -22,6 +22,7 @@ import {
   isString,
   list,
 } from 'ramda-adjunct';
+import numeral from 'numeral';
 
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../theme/constants';
 import {
@@ -200,3 +201,6 @@ export const createSpacings = ({
   ${createMarginSpacing(margin)};
   ${createPaddingSpacing(padding)};
 `;
+
+export const abbreviateNumber = (value: number): string =>
+  numeral(value).format('0.[00]a').toUpperCase();

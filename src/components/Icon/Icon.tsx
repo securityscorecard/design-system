@@ -9,15 +9,17 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { getColor } from '../../utils/helpers';
+import { createSpacings, getColor } from '../../utils/helpers';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { Colors } from '../../theme/colors.types';
 import { IconProps, SSCIcons, Types } from './Icon.types';
-import { IconTypes, SSCIconNames } from './Icon.enums';
+import { SpacingSizeValuePropType } from '../../types/spacing.types';
 
 const StyledIcon = styled(FontAwesomeIcon)<{ color: keyof Colors }>`
   color: ${({ color, theme }) =>
     isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
+  ${createSpacings};
 `;
 
 const Icon: React.FC<IconProps> = ({
@@ -52,6 +54,8 @@ Icon.propTypes = {
   color: PropTypes.oneOf(Object.values(ColorTypes)),
   className: PropTypes.string,
   hasFixedWidth: PropTypes.bool,
+  margin: SpacingSizeValuePropType,
+  padding: SpacingSizeValuePropType,
 };
 
 export default Icon;
