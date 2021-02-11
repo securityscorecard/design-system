@@ -1,6 +1,6 @@
-export { default as Count } from './Count';
-export { default as Date } from './Date';
-export { default as Link } from './Link';
-export { default as Value } from './MultiValue';
-export { default as Text } from './Text';
-export { default as TimeFromNow } from './TimeFromNow';
+export { default as RendererCount } from './Count';
+export { default as RendererDate } from './Date';
+export { default as RendererLink } from './Link';
+export { default as RendererMultiValue } from './MultiValue';
+export { default as RendererText } from './Text';
+export { default as RendererTimeFromNow } from './TimeFromNow';
