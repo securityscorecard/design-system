@@ -82,9 +82,9 @@ const getOperatorOptions = curry((operatorValue) =>
 const getDataPointOptions = map(normalizeOptions);
 
 const renderComponent = (Component, value, onChange) => {
-  if (isUndefined(Component && !React.isValidElement(Component))) return null;
+  if (isUndefined(Component)) return null;
 
-  /* Select */
+  // Select
   if (
     typeof Component === 'object' &&
     hasPath(['props', 'options'], Component)
@@ -94,7 +94,7 @@ const renderComponent = (Component, value, onChange) => {
       props: { options, defaultValue },
     } = Component;
 
-    /* Update filters state by default value on initial load */
+    // Update filters state by default value on initial load
     if (defaultValue && !value) {
       onChange(defaultValue.value);
     }

@@ -25,7 +25,7 @@ const getValuesOnChange = (dataPoints, dataPointValue, conditionValue) => {
     dataPoint: normalizeOptions<DataPoint>(dataPoint),
     conditions,
     condition: normalizeOptions<Condition>(condition),
-    Input: () => condition.input,
+    Input: condition.input,
   };
 };
 
@@ -50,7 +50,8 @@ export const useFilterRow = (
     setDataPoint(dataPointOptions);
     setConditions(conditionsOptions);
     setCondition(conditionOptions);
-    setInputComponent(Input);
+    // Wrap Input into argumentless function to not be invoked immediately
+    setInputComponent(() => Input);
   }, [dataPoints, dataPointValue, conditionValue]);
 
   return {
