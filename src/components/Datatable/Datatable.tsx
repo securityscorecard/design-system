@@ -68,7 +68,7 @@ const Datatable = <D extends Record<string, unknown>>({
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   useEffect(() => {
-    setPageCount(totalDataSize / defaultPageSize);
+    setPageCount(Math.ceil(totalDataSize / defaultPageSize));
   }, [totalDataSize, defaultPageSize]);
 
   return (
