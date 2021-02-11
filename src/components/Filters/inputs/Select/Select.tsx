@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
 
-import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { Icon } from '../../Icon';
+import { IconTypes, SSCIconNames } from '../../../../theme/icons/icons.enums';
+import { Icon } from '../../../Icon';
 import { selectStyles } from './styles';
 import { OptionPropType, SelectProps } from './Select.types';
 

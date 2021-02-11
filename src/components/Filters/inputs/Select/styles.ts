@@ -1,8 +1,8 @@
 import { assoc, includes } from 'ramda';
 import { StylesConfig } from 'react-select';
 
-import { pxToRem } from '../../../utils/helpers';
-import { theme } from '../../../theme';
+import { pxToRem } from '../../../../utils/helpers';
+import { theme } from '../../../../theme';
 
 const stateStyles = {
   padding: `${pxToRem(3, 15)}`,
@@ -22,7 +22,6 @@ const indicatorStyles = {
   alignItems: 'center',
   width: pxToRem(6),
   height: pxToRem(8),
-  fontSize: pxToRem(12),
   color: theme.forms.selectIndicatorColor,
 };
 
@@ -53,11 +52,11 @@ export const selectStyles: StylesConfig = {
     lineHeight: pxToRem(15),
   }),
   indicatorSeparator: () => ({ display: 'none' }),
-  dropdownIndicator: () => ({
-    ...indicatorStyles,
-  }),
   menuList: () => ({
     fontSize: pxToRem(13),
     lineHeight: pxToRem(15),
+  }),
+  dropdownIndicator: () => ({
+    ...indicatorStyles,
   }),
 };

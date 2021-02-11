@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Option, OptionPropType } from './Select/Select.types';
+import { Option, OptionPropType } from './inputs/Select/Select.types';
 import { Operators } from './Filters.enums';
 import { DateRange } from './inputs/DateRangePicker/DateRangePicker.types';
 
