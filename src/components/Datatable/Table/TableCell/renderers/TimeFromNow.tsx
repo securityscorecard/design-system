@@ -10,7 +10,7 @@ import {
 } from './renderers.types';
 import Text from './Text';
 
-export const timeFromNowFormater = (value: string): string => {
+export const timeFromNowFormatter = (value: string): string => {
   dayjs.extend(relativeTime);
   const date = dayjs(value);
   const now = dayjs();
@@ -25,7 +25,7 @@ export const timeFromNowFormater = (value: string): string => {
 const TimeFromNow: React.FC<LinkCellRendererProps<string>> = ({
   value,
   column,
-}) => <Text column={column} formater={timeFromNowFormater} value={value} />;
+}) => <Text column={column} formatter={timeFromNowFormatter} value={value} />;
 
 TimeFromNow.propTypes = {
   value: PropTypes.string.isRequired,

@@ -10,7 +10,7 @@ import {
 import Text from './Text';
 
 const Count: React.FC<LinkCellRendererProps<number>> = ({ value, column }) => (
-  <Text column={column} formater={abbreviateNumber} value={value} />
+  <Text column={column} formatter={abbreviateNumber} value={value} />
 );
 
 Count.propTypes = {

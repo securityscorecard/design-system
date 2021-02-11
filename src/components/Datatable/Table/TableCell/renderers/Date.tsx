@@ -12,7 +12,7 @@ import Text from './Text';
 const Date: React.FC<LinkCellRendererProps<string>> = ({ value, column }) => (
   <Text
     column={column}
-    formater={(val) => dayjs(val).format('D MMMM YYYY')}
+    formatter={(val) => dayjs(val).format('D MMMM YYYY')}
     value={value}
   />
 );

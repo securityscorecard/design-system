@@ -9,13 +9,13 @@ import {
 
 const Link: React.FC<LinkCellRendererProps<string | number>> = ({
   value,
-  formater,
+  formatter,
   column,
 }) => {
   return (
     <Text
       column={column}
-      formater={formater}
+      formatter={formatter}
       isLinkDiscrete={false}
       value={value}
     />
@@ -24,7 +24,7 @@ const Link: React.FC<LinkCellRendererProps<string | number>> = ({
 
 Link.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  formater: PropTypes.func,
+  formatter: PropTypes.func,
   column: LinkColumnOptionsPropType,
 };
 

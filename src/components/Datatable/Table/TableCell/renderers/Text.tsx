@@ -14,7 +14,7 @@ import {
 
 const Text: React.FC<LinkCellRendererProps<string | number>> = ({
   value,
-  formater,
+  formatter,
   isLinkDiscrete = true,
   column: { nullCondition, nullConditionValue, onClick, ...restColumn },
 }) => {
@@ -32,7 +32,7 @@ const Text: React.FC<LinkCellRendererProps<string | number>> = ({
     'hrefComposer' in restColumn ? restColumn.hrefComposer(value) : undefined;
   const to =
     'toComposer' in restColumn ? restColumn.toComposer(value) : undefined;
-  const returnValue = isNotUndefined(formater) ? formater(value) : value;
+  const returnValue = isNotUndefined(formatter) ? formatter(value) : value;
 
   if (all(isUndefined, [href, to, onClick])) {
     return <TableCellText>{returnValue}</TableCellText>;
@@ -52,7 +52,7 @@ const Text: React.FC<LinkCellRendererProps<string | number>> = ({
 
 Text.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  formater: PropTypes.func,
+  formatter: PropTypes.func,
   isLinkDiscrete: PropTypes.bool,
   column: PropTypes.oneOfType([
     ColumnOptionsPropType,

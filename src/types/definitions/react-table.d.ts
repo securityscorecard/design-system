@@ -48,6 +48,8 @@ import {
   UseSortByState,
 } from 'react-table';
 
+import { CustomColumnProps } from '../../components/Datatable/Datatable.types';
+
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
 
@@ -105,14 +107,16 @@ declare module 'react-table' {
       UseGlobalFiltersColumnOptions<D>,
       UseGroupByColumnOptions<D>,
       UseResizeColumnsColumnOptions<D>,
-      UseSortByColumnOptions<D> {}
+      UseSortByColumnOptions<D>,
+      CustomColumnProps<D> {}
 
   export interface ColumnInstance<
     D extends Record<string, unknown> = Record<string, unknown>
   > extends UseFiltersColumnProps<D>,
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
-      UseSortByColumnProps<D> {}
+      UseSortByColumnProps<D>,
+      CustomColumnProps<D> {}
 
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>
