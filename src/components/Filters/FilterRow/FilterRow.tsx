@@ -8,6 +8,7 @@ import {
   find,
   has,
   hasPath,
+  head,
   identity,
   map,
   memoizeWith,
@@ -28,13 +29,6 @@ import { Operators } from '../Filters.enums';
 import operatorOptions from '../data/operator-options.json';
 import { pxToRem } from '../../../utils/helpers';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
-
-const Container = styled(FlexContainer)`
-  margin-bottom: ${pxToRem(8)};
-  &:last-of-type {
-    margin-bottom: ${pxToRem(16)};
-  }
-`;
 
 const SplitField = styled.div<SplitFieldProps>`
   ${({ $width }) =>
@@ -58,11 +52,14 @@ const getFieldConditions = memoizeWith(identity, (fieldValue, fields) =>
   pipe(find(propEq('value', fieldValue)), prop('conditions'))(fields),
 );
 
-const getDefaultCondition = pipe(
-  getFieldConditions,
-  find(propEq('isDefault', true)),
-  prop('value'),
-);
+const getDefaultCondition = (fieldValue, fields) => {
+  const fieldConditions = getFieldConditions(fieldValue, fields);
+  return pipe(
+    find(propEq('isDefault', true)),
+    defaultTo(head(fieldConditions)),
+    prop('value'),
+  )(fieldConditions);
+};
 
 const getConditionComponent = curry(
   (selectedConditionValue, fieldValue, fields) =>
@@ -171,7 +168,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   };
 
   return (
-    <Container>
+    <FlexContainer margin={{ bottom: 0.5 }}>
       <StateButton
         index={index}
         isApplied={isApplied}
@@ -209,7 +206,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
       <SplitField>
         {renderComponent(component, componentValue, handleValueChange)}
       </SplitField>
-    </Container>
+    </FlexContainer>
   );
 };
 

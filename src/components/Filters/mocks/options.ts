@@ -17,7 +17,6 @@ export const fieldsMock: Field[] = [
         component: Input,
         value: 'strawberry',
         label: 'Strawberry',
-        isDefault: true,
       },
       { component: Input, value: 'vanilla', label: 'Vanilla' },
     ],

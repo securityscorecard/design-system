@@ -14,7 +14,10 @@ const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
 
 const getDefaultCondition = (fields) =>
-  fields[0].conditions.find(({ isDefault }) => isDefault).value;
+  (
+    fields[0].conditions.find(({ isDefault }) => isDefault) ||
+    fields[0].conditions[0]
+  ).value;
 
 const getDefaultState = (fields) => [
   {
