@@ -21,6 +21,7 @@ playground.argTypes = {
   checkboxId: { control: { disable: true }, defaultValue: 'playground' },
   label: { control: 'text', defaultValue: 'Checkbox label' },
   defaultChecked: { control: 'boolean', defaultValue: false },
+  isIndeterminate: { control: 'boolean', defaultValue: false },
   isInvalid: { control: 'boolean', defaultValue: false },
   isDisabled: { control: 'boolean', defaultValue: false },
 };
@@ -40,6 +41,15 @@ export const CheckedCheckbox: Story = () => (
     label="Use the same details for billing & shipping on my invoice"
     name="checkedCheckbox"
     defaultChecked
+  />
+);
+
+export const IndeterminateCheckbox: Story = () => (
+  <Checkbox
+    checkboxId="indeterminateCheckbox"
+    label="Use the same details for billing & shipping on my invoice"
+    name="indeterminateCheckbox"
+    isIndeterminate
   />
 );
 

@@ -99,8 +99,9 @@ export const getBorderRadius = pipe(
 // getFormStyle :: Property -> Props -> string
 // Property - any key of 'forms' (src/theme/forms.ts)
 // Props - styled-components props object
-export const getFormStyle = (property: keyof Forms): string =>
-  path(['theme', 'forms', property]);
+export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
+  path(['forms', property], theme),
+);
 
 // getButtonColor :: Type -> Props -> string
 // Type - type of color (src/theme/buttons.ts)
