@@ -13,6 +13,7 @@ import {
 import { useSticky } from 'react-table-sticky';
 import { __, always, includes, map, prop, without } from 'ramda';
 import {
+  isEmptyArray,
   isNonEmptyArray,
   isNotUndefined,
   isOdd,
@@ -20,16 +21,17 @@ import {
 } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils/helpers';
+import { IconButton } from '../../IconButton';
+import { FlexContainer } from '../../FlexContainer';
 import { useDatatable } from '../hooks/useDatatable';
 import { ActionKindsPropType } from '../types/Action.types';
+import { RendererText } from './TableCell/renderers';
+import { Dropdown } from '../Dropdown';
 import { TableCell } from './TableCell';
 import { TableHeadCell } from './TableHeadCell';
 import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
-import Text from './TableCell/renderers/Text';
-import { Dropdown } from '../Dropdown';
-import { IconButton } from '../../IconButton';
-import IndeterminateCheckbox from './temp/IndeterminateCheckbox';
+import { SelectionCheckbox } from './SelectionCheckbox';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -118,7 +120,7 @@ const Table = <D extends Record<string, unknown>>({
       minWidth: 40,
       width: 150,
       maxWidth: 400,
-      Cell: Text,
+      Cell: RendererText,
       nullCondition: always(false),
     }),
     [],
@@ -180,15 +182,27 @@ const Table = <D extends Record<string, unknown>>({
               disableSortBy: true,
               Header: ({
                 getToggleAllRowsSelectedProps,
-              }: HeaderProps<D>): JSX.Element => (
-                <div>
-                  <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-                </div>
-              ),
+                data: tableData,
+              }: HeaderProps<D>): JSX.Element => {
+                if (isEmptyArray(tableData)) {
+                  return null;
+                }
+                return (
+                  <FlexContainer flexGrow={1} justifyContent="center">
+                    <SelectionCheckbox
+                      id="header-select-all"
+                      {...getToggleAllRowsSelectedProps()}
+                    />
+                  </FlexContainer>
+                );
+              },
               Cell: ({ row }: CellProps<D>): JSX.Element => (
-                <div>
-                  <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-                </div>
+                <FlexContainer flexGrow={1} justifyContent="center">
+                  <SelectionCheckbox
+                    id={`select-${row.id}`}
+                    {...row.getToggleRowSelectedProps()}
+                  />
+                </FlexContainer>
               ),
             },
             ...visibleColumns,
