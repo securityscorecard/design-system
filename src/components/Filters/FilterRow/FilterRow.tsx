@@ -19,11 +19,11 @@ import { isNotUndefined, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
-import { Select } from '../inputs';
+import { Select } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
-import { DataPointPropTypes } from '../Filters.types';
-import { DateRangePickerPropTypes } from '../inputs/DateRangePicker/DateRangePicker.types';
+import { FieldPropTypes } from '../Filters.types';
+import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import operatorOptions from '../data/operator-options.json';
 import { pxToRem } from '../../../utils/helpers';
@@ -54,32 +54,30 @@ const SplitField = styled.div<SplitFieldProps>`
   }
 `;
 
-const getDataPointConditions = memoizeWith(
-  identity,
-  (dataPointValue, dataPoints) =>
-    pipe(find(propEq('value', dataPointValue)), prop('conditions'))(dataPoints),
+const getFieldConditions = memoizeWith(identity, (fieldValue, fields) =>
+  pipe(find(propEq('value', fieldValue)), prop('conditions'))(fields),
 );
 
 const getDefaultCondition = pipe(
-  getDataPointConditions,
+  getFieldConditions,
   find(propEq('isDefault', true)),
   prop('value'),
 );
 
-const getConditionInput = curry(
-  (selectedConditionValue, dataPointValue, dataPoints) =>
+const getConditionComponent = curry(
+  (selectedConditionValue, fieldValue, fields) =>
     pipe(
-      getDataPointConditions,
+      getFieldConditions,
       find(propEq('value', selectedConditionValue)),
-      prop('input'),
-    )(dataPointValue, dataPoints),
+      prop('component'),
+    )(fieldValue, fields),
 );
 
 const getOperatorOptions = curry((operatorValue) =>
   find(propEq('value', operatorValue))(operatorOptions),
 );
 
-const getDataPointOptions = map(normalizeOptions);
+const getFieldOptions = map(normalizeOptions);
 
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;
@@ -90,7 +88,7 @@ const renderComponent = (Component, value, onChange) => {
     hasPath(['props', 'options'], Component)
   ) {
     const {
-      Component: SelectComponent,
+      component: SelectComponent,
       props: { options, defaultValue },
     } = Component;
 
@@ -118,57 +116,57 @@ const renderComponent = (Component, value, onChange) => {
 };
 
 const FilterRow: React.FC<FilterRowProps> = ({
-  dataPoints,
+  fields,
   index,
   onOperatorChange,
-  onDataPointChange,
+  onFieldChange,
   onConditionChange,
-  onInputChange,
+  onValueChange,
   onRemove,
   isRemoveDisabled,
   operator: operatorValue,
-  dataPoint: dataPointValue,
+  field: fieldValue,
   condition: conditionValue,
-  input: inputValue,
+  value: componentValue,
   isApplied,
 }) => {
-  const { dataPoint, conditions, condition, InputComponent } = useFilterRow(
-    dataPoints,
-    dataPointValue,
+  const { field, conditions, condition, component } = useFilterRow(
+    fields,
+    fieldValue,
     conditionValue,
   );
 
   const operatorOption = getOperatorOptions(operatorValue);
 
-  const dataPointOptions = getDataPointOptions(dataPoints);
+  const fieldOptions = getFieldOptions(fields);
 
-  const handleDataPointChange = ({ value: selectedDataPointValue }) => {
+  const handleFieldChange = ({ value: selectedFieldValue }) => {
     const defaultConditionValue = getDefaultCondition(
-      selectedDataPointValue,
-      dataPoints,
+      selectedFieldValue,
+      fields,
     );
 
-    onDataPointChange(selectedDataPointValue, defaultConditionValue, index);
+    onFieldChange(selectedFieldValue, defaultConditionValue, index);
   };
 
   const handleConditionChange = ({ value: selectedConditionValue }) => {
-    const NewInputComponent = getConditionInput(
+    const newComponent = getConditionComponent(
       selectedConditionValue,
-      dataPoint.value,
-      dataPoints,
+      field.value,
+      fields,
     );
-    const areComponentsEqual = equals(InputComponent, NewInputComponent);
+    const areComponentsEqual = equals(component, newComponent);
 
     onConditionChange(selectedConditionValue, index, areComponentsEqual);
   };
 
-  const handleInputChange = (value) => {
+  const handleValueChange = (value) => {
     if (has('target', value)) {
-      onInputChange(value.target.value, index);
+      onValueChange(value.target.value, index);
     } else if (has('value', value)) {
-      onInputChange(value.value, index);
+      onValueChange(value.value, index);
     } else {
-      onInputChange(value, index);
+      onValueChange(value, index);
     }
   };
 
@@ -196,9 +194,9 @@ const FilterRow: React.FC<FilterRowProps> = ({
       </SplitField>
       <SplitField $width={200}>
         <Select
-          options={dataPointOptions}
-          value={dataPoint}
-          onChange={handleDataPointChange}
+          options={fieldOptions}
+          value={field}
+          onChange={handleFieldChange}
         />
       </SplitField>
       <SplitField $width={144}>
@@ -209,7 +207,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
         />
       </SplitField>
       <SplitField>
-        {renderComponent(InputComponent, inputValue, handleInputChange)}
+        {renderComponent(component, componentValue, handleValueChange)}
       </SplitField>
     </Container>
   );
@@ -218,17 +216,17 @@ const FilterRow: React.FC<FilterRowProps> = ({
 export default FilterRow;
 
 FilterRow.propTypes = {
-  dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
+  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   index: PropTypes.number.isRequired,
-  dataPoint: PropTypes.string.isRequired,
+  field: PropTypes.string.isRequired,
   condition: PropTypes.string.isRequired,
   operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
   isApplied: PropTypes.bool.isRequired,
   isRemoveDisabled: PropTypes.bool.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
-  onDataPointChange: PropTypes.func.isRequired,
+  onFieldChange: PropTypes.func.isRequired,
   onConditionChange: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired,
+  onValueChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  input: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
+  value: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
 };
