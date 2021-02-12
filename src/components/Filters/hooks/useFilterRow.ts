@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { prop } from 'ramda';
+import { isNotNull } from 'ramda-adjunct';
 
 import { Condition, DataPoint } from '../Filters.types';
 import { useFilterRowType } from './useFilterRow.types';
-import { Option } from '../Select/Select.types';
+import { Option } from '../inputs/Select/Select.types';
 
 export const normalizeOptions = <O extends Option>({
   value,
@@ -22,10 +24,9 @@ const getValuesOnChange = (dataPoints, dataPointValue, conditionValue) => {
   );
 
   return {
-    dataPoint: normalizeOptions<DataPoint>(dataPoint),
+    dataPoint,
     conditions,
-    condition: normalizeOptions<Condition>(condition),
-    Input: () => condition.input,
+    condition,
   };
 };
 
@@ -37,26 +38,28 @@ export const useFilterRow = (
   const [dataPoint, setDataPoint] = useState(null);
   const [conditions, setConditions] = useState(null);
   const [condition, setCondition] = useState(null);
-  const [InputComponent, setInputComponent] = useState(null);
 
   useEffect(() => {
     const {
       dataPoint: dataPointOptions,
       conditions: conditionsOptions,
       condition: conditionOptions,
-      Input,
     } = getValuesOnChange(dataPoints, dataPointValue, conditionValue);
 
     setDataPoint(dataPointOptions);
     setConditions(conditionsOptions);
     setCondition(conditionOptions);
-    setInputComponent(Input);
   }, [dataPoints, dataPointValue, conditionValue]);
 
+  const normalizedDataPoint =
+    isNotNull(dataPoint) && normalizeOptions<DataPoint>(dataPoint);
+  const normalizedCondition =
+    isNotNull(condition) && normalizeOptions<Condition>(condition);
+
   return {
-    dataPoint,
+    dataPoint: normalizedDataPoint,
     conditions,
-    condition,
-    InputComponent,
+    condition: normalizedCondition,
+    InputComponent: prop('input', condition),
   };
 };

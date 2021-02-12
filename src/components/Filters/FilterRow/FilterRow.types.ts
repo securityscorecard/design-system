@@ -1,5 +1,5 @@
 import { DataPoint, Filter } from '../Filters.types';
-import { Option } from '../Select/Select.types';
+import { Option } from '../inputs/Select/Select.types';
 
 export interface SplitFieldProps {
   $width?: number;

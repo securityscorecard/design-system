@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Option, OptionPropType } from './Select/Select.types';
+import { Option, OptionPropType } from './inputs/Select/Select.types';
 import { Operators } from './Filters.enums';
 import { DateRange } from './inputs/DateRangePicker/DateRangePicker.types';
 
@@ -8,6 +8,7 @@ type OperatorTypes = typeof Operators[keyof typeof Operators];
 
 interface InputProps {
   options?: Option[];
+  defaultValue?: Option;
   min?: number;
   max?: number;
   length?: number;
@@ -15,7 +16,7 @@ interface InputProps {
 }
 
 interface InputWithProps {
-  type: React.ReactNode;
+  Component: React.ReactNode;
   props: InputProps;
 }
 
@@ -56,9 +57,10 @@ export const DataPointPropTypes = PropTypes.exact({
       input: PropTypes.oneOfType([
         PropTypes.elementType,
         PropTypes.exact({
-          type: PropTypes.elementType,
+          Component: PropTypes.elementType,
           props: PropTypes.exact({
             options: PropTypes.arrayOf(OptionPropType),
+            defaultValue: OptionPropType,
             min: PropTypes.number,
             max: PropTypes.number,
             length: PropTypes.number,
