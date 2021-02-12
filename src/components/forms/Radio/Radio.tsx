@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { allPass } from 'ramda';
+import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 
 import {
   createMarginSpacing,
@@ -17,12 +19,29 @@ const RadioWrapper = styled.div`
   }
 `;
 
-const RadioLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
+const RadioLabel = styled(Label)<
+  React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
+>`
   position: relative;
   display: inline-block;
-  line-height: ${pxToRem(20)};
-  padding-left: ${pxToRem(30)};
   margin-bottom: 0;
+
+  ${({ theme, hasLabel }) => {
+    const toggleSize = getFormStyle('toggleSize')({ theme });
+    const leftPadding = hasLabel ? toggleSize + 10 : toggleSize;
+
+    return css`
+      min-height: ${pxToRem(toggleSize)};
+      line-height: ${pxToRem(toggleSize)};
+      padding-left: ${pxToRem(leftPadding)};
+
+      &::before,
+      &::after {
+        height: ${pxToRem(20)};
+        width: ${pxToRem(20)};
+      }
+    `;
+  }}
 
   &::before,
   &::after {
@@ -31,8 +50,6 @@ const RadioLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
     display: inline-block;
     top: 0;
     left: 0;
-    height: ${pxToRem(20)};
-    width: ${pxToRem(20)};
     border-radius: 100%;
   }
 
@@ -77,24 +94,30 @@ const Radio: React.FC<RadioProps> = ({
   isDisabled = false,
   isInvalid = false,
   ...props
-}) => (
-  <RadioWrapper>
-    <RadioInput
-      disabled={isDisabled}
-      id={radioId}
-      isInvalid={isInvalid}
-      name={name}
-      type="radio"
-      {...props}
-    />
-    <RadioLabel htmlFor={radioId}>{label}</RadioLabel>
-  </RadioWrapper>
-);
+}) => {
+  const hasLabel = allPass([isNotUndefined, isNonEmptyString])(label);
+
+  return (
+    <RadioWrapper>
+      <RadioInput
+        disabled={isDisabled}
+        id={radioId}
+        isInvalid={isInvalid}
+        name={name}
+        type="radio"
+        {...props}
+      />
+      <RadioLabel hasLabel={hasLabel} htmlFor={radioId}>
+        {label}
+      </RadioLabel>
+    </RadioWrapper>
+  );
+};
 
 Radio.propTypes = {
   radioId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
 };

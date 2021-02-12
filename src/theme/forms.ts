@@ -6,6 +6,7 @@ import { pxToRem } from '../utils/helpers';
 
 const forms: Forms = {
   fieldHeight: pxToRem(40),
+  toggleSize: 20,
   color: colors.graphite4B,
   bgColor: colors.graphite5H,
   borderColor: colors.graphiteB,
