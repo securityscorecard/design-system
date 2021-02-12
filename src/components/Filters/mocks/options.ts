@@ -4,22 +4,22 @@ import {
   Number,
   Select,
   SingleDatePicker,
-} from '../inputs';
-import { DataPoint, Filter } from '../Filters.types';
+} from '../components';
+import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 
 // TODO use more realistic data
-export const dataPointsMock: DataPoint[] = [
+export const fieldsMock: Field[] = [
   {
     conditions: [
-      { input: Input, value: 'chocolate', label: 'Chocolate' },
+      { component: Input, value: 'chocolate', label: 'Chocolate' },
       {
-        input: Input,
+        component: Input,
         value: 'strawberry',
         label: 'Strawberry',
         isDefault: true,
       },
-      { input: Input, value: 'vanilla', label: 'Vanilla' },
+      { component: Input, value: 'vanilla', label: 'Vanilla' },
     ],
     value: 'pistachio',
     label: 'Pistachio',
@@ -27,8 +27,8 @@ export const dataPointsMock: DataPoint[] = [
   {
     conditions: [
       {
-        input: {
-          Component: Select,
+        component: {
+          component: Select,
           props: {
             options: [
               { value: 'foo', label: 'Foo' },
@@ -40,8 +40,8 @@ export const dataPointsMock: DataPoint[] = [
         value: 'chocolate',
         label: 'Chocolate',
       },
-      { input: Input, value: 'strawberry', label: 'Strawberry' },
-      { input: Input, value: 'vanilla', label: 'Vanilla', isDefault: true },
+      { component: Input, value: 'strawberry', label: 'Strawberry' },
+      { component: Input, value: 'vanilla', label: 'Vanilla', isDefault: true },
     ],
     value: 'lemon',
     label: 'Lemon',
@@ -49,56 +49,56 @@ export const dataPointsMock: DataPoint[] = [
   {
     conditions: [
       {
-        input: Number,
+        component: Number,
         value: 'chocolate',
         label: 'Chocolate',
         isDefault: true,
       },
-      { input: SingleDatePicker, value: 'strawberry', label: 'Strawberry' },
-      { input: DateRangePicker, value: 'vanilla', label: 'Vanilla' },
+      { component: SingleDatePicker, value: 'strawberry', label: 'Strawberry' },
+      { component: DateRangePicker, value: 'vanilla', label: 'Vanilla' },
     ],
     value: 'smurf',
     label: 'Smurf',
   },
 ];
 
-export const dataMock: Filter[] = [
+export const stateMock: Filter[] = [
   {
     operator: Operators.and,
-    dataPoint: 'pistachio',
+    field: 'pistachio',
     condition: 'chocolate',
-    input: 'tasty',
+    value: 'tasty',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'lemon',
+    field: 'lemon',
     condition: 'strawberry',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'smurf',
+    field: 'smurf',
     condition: 'vanilla',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'smurf',
+    field: 'smurf',
     condition: 'strawberry',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'smurf',
+    field: 'smurf',
     condition: 'chocolate',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'lemon',
+    field: 'lemon',
     condition: 'chocolate',
-    input: 'foo',
+    value: 'foo',
     isApplied: true,
   },
 ];

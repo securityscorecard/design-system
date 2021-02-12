@@ -6,22 +6,22 @@ import styled from 'styled-components';
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
-import { DataPointPropTypes, Filter, FiltersProps } from './Filters.types';
-import { DateRangePickerPropTypes } from './inputs/DateRangePicker/DateRangePicker.types';
+import { FieldPropTypes, Filter, FiltersProps } from './Filters.types';
+import { DateRangePickerPropTypes } from './components/DateRangePicker/DateRangePicker.types';
 import { Operators } from './Filters.enums';
 
-const generateId = ({ operator, dataPoint, condition }, index) =>
-  `${operator}-${dataPoint}-${condition}-${index}`;
+const generateId = ({ operator, field, condition }, index) =>
+  `${operator}-${field}-${condition}-${index}`;
 
-const getDefaultCondition = (dataPoints) =>
-  dataPoints[0].conditions.find(({ isDefault }) => isDefault).value;
+const getDefaultCondition = (fields) =>
+  fields[0].conditions.find(({ isDefault }) => isDefault).value;
 
-const getDefaultData = (dataPoints) => [
+const getDefaultState = (fields) => [
   {
     operator: Operators.and,
-    dataPoint: dataPoints[0].value,
-    condition: getDefaultCondition(dataPoints),
-    input: undefined,
+    field: fields[0].value,
+    condition: getDefaultCondition(fields),
+    value: undefined,
     isApplied: false,
   },
 ];
@@ -31,25 +31,25 @@ const FiltersContainer = styled(FlexContainer)`
 `;
 
 const Filters: React.FC<FiltersProps> = ({
-  dataPoints,
-  data = getDefaultData(dataPoints),
+  fields,
+  state = getDefaultState(fields),
   onApply,
   onChange,
   onClose,
   onCancel,
   isLoading = false,
 }) => {
-  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(data);
+  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(state);
   const [isRemoveDisabled, setRemoveDisabled] = useState(false);
 
   useEffect(() => {
-    const defaultData = getDefaultData(dataPoints);
-    if (equals(filtersValues, defaultData)) {
+    const defaultState = getDefaultState(fields);
+    if (equals(filtersValues, defaultState)) {
       setRemoveDisabled(true);
     } else {
       setRemoveDisabled(false);
     }
-  }, [filtersValues, dataPoints]);
+  }, [filtersValues, fields]);
 
   const callOnChange = () => {
     if (typeof onChange === 'function') {
@@ -69,11 +69,11 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange();
   };
 
-  const handleDataPointChange = (dataPoint, condition, index) => {
+  const handleFieldChange = (field, condition, index) => {
     const newFilters = [...filtersValues];
-    newFilters[index].dataPoint = dataPoint;
+    newFilters[index].field = field;
     newFilters[index].condition = condition;
-    newFilters[index].input = undefined;
+    newFilters[index].value = undefined;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
@@ -85,7 +85,7 @@ const Filters: React.FC<FiltersProps> = ({
     const newFilters = [...filtersValues];
     newFilters[index].condition = condition;
     if (!areComponentsEqual) {
-      newFilters[index].input = undefined;
+      newFilters[index].value = undefined;
     }
     newFilters[index].isApplied = false;
 
@@ -94,9 +94,9 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange();
   };
 
-  const handleInputChange = (input, index) => {
+  const handleValueChange = (value, index) => {
     const newFilters = [...filtersValues];
-    newFilters[index].input = input;
+    newFilters[index].value = value;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
@@ -108,9 +108,9 @@ const Filters: React.FC<FiltersProps> = ({
     const newFilters = [...filtersValues];
     const newRow = {
       operator: newFilters[0].operator,
-      dataPoint: dataPoints[0].value,
-      condition: getDefaultCondition(dataPoints),
-      input: undefined,
+      field: fields[0].value,
+      condition: getDefaultCondition(fields),
+      value: undefined,
       isApplied: false,
     };
 
@@ -120,7 +120,7 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const handleClearAll = () => {
-    const newRow = getDefaultData(dataPoints);
+    const newRow = getDefaultState(fields);
 
     setFiltersValues(newRow);
 
@@ -128,8 +128,8 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const handleApply = () => {
-    const newFilters = filtersValues.map((fields) => ({
-      ...fields,
+    const newFilters = filtersValues.map((filter) => ({
+      ...filter,
       isApplied: true,
     }));
     setFiltersValues(newFilters);
@@ -143,7 +143,7 @@ const Filters: React.FC<FiltersProps> = ({
       newFilters = [...filtersValues];
       newFilters.splice(index, 1);
     } else {
-      newFilters = getDefaultData(dataPoints);
+      newFilters = getDefaultState(fields);
     }
 
     setFiltersValues(newFilters);
@@ -158,14 +158,14 @@ const Filters: React.FC<FiltersProps> = ({
         return (
           <FilterRow
             key={id}
-            dataPoints={dataPoints}
+            fields={fields}
             index={index}
             isRemoveDisabled={isRemoveDisabled}
             onConditionChange={handleConditionChange}
-            onDataPointChange={handleDataPointChange}
-            onInputChange={handleInputChange}
+            onFieldChange={handleFieldChange}
             onOperatorChange={handleOperatorChange}
             onRemove={handleRemoveFilter}
+            onValueChange={handleValueChange}
             {...filtersValues[index]}
           />
         );
@@ -185,13 +185,17 @@ const Filters: React.FC<FiltersProps> = ({
 export default Filters;
 
 Filters.propTypes = {
-  dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
-  data: PropTypes.arrayOf(
+  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
+  state: PropTypes.arrayOf(
     PropTypes.exact({
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
-      dataPoint: PropTypes.string.isRequired,
+      field: PropTypes.string.isRequired,
       condition: PropTypes.string.isRequired,
-      input: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Date),
+        DateRangePickerPropTypes,
+      ]),
       isApplied: PropTypes.bool.isRequired,
     }),
   ).isRequired,
