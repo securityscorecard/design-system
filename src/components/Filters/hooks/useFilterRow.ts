@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { prop } from 'ramda';
+import { isNotNull } from 'ramda-adjunct';
 
 import { Condition, DataPoint } from '../Filters.types';
 import { useFilterRowType } from './useFilterRow.types';
@@ -51,9 +52,9 @@ export const useFilterRow = (
   }, [dataPoints, dataPointValue, conditionValue]);
 
   const normalizedDataPoint =
-    dataPoint && normalizeOptions<DataPoint>(dataPoint);
+    isNotNull(dataPoint) && normalizeOptions<DataPoint>(dataPoint);
   const normalizedCondition =
-    condition && normalizeOptions<Condition>(condition);
+    isNotNull(condition) && normalizeOptions<Condition>(condition);
 
   return {
     dataPoint: normalizedDataPoint,
