@@ -50,10 +50,15 @@ export const useFilterRow = (
     setCondition(conditionOptions);
   }, [dataPoints, dataPointValue, conditionValue]);
 
+  const normalizedDataPoint =
+    dataPoint && normalizeOptions<DataPoint>(dataPoint);
+  const normalizedCondition =
+    condition && normalizeOptions<Condition>(condition);
+
   return {
-    dataPoint: dataPoint && normalizeOptions<DataPoint>(dataPoint),
+    dataPoint: normalizedDataPoint,
     conditions,
-    condition: condition && normalizeOptions<Condition>(condition),
+    condition: normalizedCondition,
     InputComponent: prop('input', condition),
   };
 };
