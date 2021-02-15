@@ -1,3 +1,10 @@
+# [1.0.0-alpha.29](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2021-02-15)
+
+
+### Bug Fixes
+
+* **Cell:** add check for onClick handler ([f6072d0](https://github.com/securityscorecard/design-system/commit/f6072d090519e7bed3502727b51481a72f3a56cc))
+
 # [1.0.0-alpha.28](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2021-02-11)
 
 
