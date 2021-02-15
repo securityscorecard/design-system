@@ -25,7 +25,7 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   hasColumnOrdering: false,
   defaultColumnOrder: [],
   hasGrouping: false,
-  defautGroups: [],
+  defaultGroups: [],
   hasCustomViews: false,
   defaultCustomView: [],
   columnVisibilityActions: {

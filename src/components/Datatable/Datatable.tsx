@@ -69,6 +69,7 @@ const Datatable = <D extends Record<string, unknown>>({
   const {
     defaultHiddenColumns,
     defaultColumnOrder,
+    ...restControlsConfig
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -90,7 +91,11 @@ const Datatable = <D extends Record<string, unknown>>({
     >
       <StyledDatatable flexDirection="column">
         {controlsConfig.isControlsEnabled && (
-          <ControlModule<D> {...controlsConfig} />
+          <ControlModule<D>
+            defaultColumnOrder={defaultColumnOrder}
+            defaultHiddenColumns={defaultHiddenColumns}
+            {...restControlsConfig}
+          />
         )}
         <BatchModule actions={batchActions} />
         <Table<D>

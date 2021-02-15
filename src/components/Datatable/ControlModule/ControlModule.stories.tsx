@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Story } from '@storybook/react/types-6-0';
 import { mergeRight } from 'ramda';
 
 import { Container } from '../../layout';
@@ -10,7 +10,7 @@ import { mockControlModuleProps } from '../mocks/controlModule';
 export default {
   title: 'components/Datatable/components/ControlModule',
   component: ControlModule,
-} as Meta;
+};
 
 export const playground: Story<ControlsConfig<Record<'string', unknown>>> = (
   args,
