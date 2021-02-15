@@ -26,4 +26,20 @@ export const mockControlModuleProps = {
   hasColumnOrdering: true,
   defaultColumnOrder: [],
   toolsTabItems: mockToolsTabItemsFiltersActive,
+  columnVisibilityActions: {
+    onToolActivate: action('ActivateColumnVisibility'),
+    onToolDeactivate: action('DeactivateColumnVisibility'),
+  },
+  filteringActions: {
+    onToolActivate: action('ActivateFiltering'),
+    onToolDeactivate: action('DeactivateFiltering'),
+  },
+  columnOrderingActions: {
+    onToolActivate: action('ActivateColumnOrdering'),
+    onToolDeactivate: action('DeactivateColumnOrdering'),
+  },
+  customViewsActions: {
+    onToolActivate: action('ActivateCustomViews'),
+    onToolDeactivate: action('DeactivateCustomViews'),
+  },
 };

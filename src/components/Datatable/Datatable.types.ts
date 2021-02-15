@@ -34,11 +34,23 @@ type FilteringControls = { defaultIsFilteringOpen?: boolean } & (
   | DisabledFilteringControls
 );
 
+type ToolsActions = {
+  onToolActivate: React.MouseEventHandler;
+  onToolDeactivate: React.MouseEventHandler;
+};
+
 export type ControlsConfig<D> = {
   isControlsEnabled?: boolean;
+
   // Search section
   hasSearch?: boolean;
   searchControls?: SearchBarProps;
+
+  // Tools actions
+  columnVisibilityActions?: ToolsActions;
+  filteringActions?: ToolsActions;
+  columnOrderingActions?: ToolsActions;
+  customViewsActions?: ToolsActions;
 
   // == Currently not implemented ==
   // Column Visibility section

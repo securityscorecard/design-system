@@ -27,6 +27,10 @@ const ControlModule: React.FC<ControlModuleProps> = ({
   // defaultColumnOrder,
   hasCustomViews = true,
   // defaultCustomView,
+  columnVisibilityActions,
+  filteringActions,
+  columnOrderingActions,
+  customViewsActions,
 }) => {
   const [areFiltersOpen, setAreFiltersOpen] = useState(defaultIsFilteringOpen);
 
@@ -35,23 +39,14 @@ const ControlModule: React.FC<ControlModuleProps> = ({
     setAreFiltersOpen(false);
   };
 
-  const toolActions = {
-    onToolActivate: () => {
-      return 0;
-    },
-    onToolDeactivate: () => {
-      return 0;
-    },
-  };
-
   const filterToolActions = {
     onToolActivate: () => {
       setAreFiltersOpen(true);
-      return 0;
+      filteringActions.onToolActivate();
     },
     onToolDeactivate: () => {
       setAreFiltersOpen(false);
-      return 0;
+      filteringActions.onToolDeactivate();
     },
   };
 
@@ -66,7 +61,7 @@ const ControlModule: React.FC<ControlModuleProps> = ({
             <ToolsTabItem
               iconName={SSCIconNames.reorder}
               label="Show/Hide"
-              {...toolActions}
+              {...columnOrderingActions}
             />
           )}
           {hasFiltering && (
@@ -81,14 +76,14 @@ const ControlModule: React.FC<ControlModuleProps> = ({
             <ToolsTabItem
               iconName={SSCIconNames.sitemap}
               label="Group"
-              {...toolActions}
+              {...columnVisibilityActions}
             />
           )}
           {hasCustomViews && (
             <ToolsTabItem
               iconName={SSCIconNames.cog}
               label="Views"
-              {...toolActions}
+              {...customViewsActions}
             />
           )}
         </FlexContainer>
@@ -103,7 +98,7 @@ const ControlModule: React.FC<ControlModuleProps> = ({
         )}
       </FlexContainer>
 
-      {areFiltersOpen && (
+      {hasFiltering && areFiltersOpen && (
         <FiltersContainer padding={{ top: 1.2, bottom: 0.8, horizontal: 0.8 }}>
           <Filters {...filtersConfig} onClose={handleCloseFilter} />
         </FiltersContainer>
@@ -111,6 +106,11 @@ const ControlModule: React.FC<ControlModuleProps> = ({
     </FlexContainer>
   );
 };
+
+const toolActionPropType = PropTypes.shape({
+  onToolActivate: PropTypes.func,
+  onToolDeactivate: PropTypes.func,
+});
 
 ControlModule.propTypes = {
   hasSearch: PropTypes.bool,
@@ -124,6 +124,10 @@ ControlModule.propTypes = {
   defaultColumnOrder: PropTypes.arrayOf(PropTypes.shape({})),
   hasCustomViews: PropTypes.bool,
   defaultCustomView: PropTypes.arrayOf(PropTypes.shape({})),
+  columnVisibilityActions: toolActionPropType,
+  filteringActions: toolActionPropType,
+  columnOrderingActions: toolActionPropType,
+  customViewsActions: toolActionPropType,
 };
 
 export default ControlModule;

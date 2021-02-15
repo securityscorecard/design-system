@@ -19,15 +19,34 @@ export default {
 
 export const playground: Story<ControlModuleProps<D>> = (args) => (
   <Container>
-    <ControlModule {...args} {...mockControlModuleProps} />
+    <ControlModule {...mockControlModuleProps} {...args} />
   </Container>
 );
-playground.args = {
-  defaultIsFilteringOpen: false,
-};
+
 playground.argTypes = {
+  hasSearch: {
+    control: 'boolean',
+    defaultValue: true,
+  },
+  hasFiltering: {
+    control: 'boolean',
+    defaultValue: true,
+  },
   defaultIsFilteringOpen: {
     control: 'boolean',
+    defaultValue: false,
+  },
+  hasColumnVisibility: {
+    control: 'boolean',
+    defaultValue: true,
+  },
+  hasColumnOrdering: {
+    control: 'boolean',
+    defaultValue: true,
+  },
+  hasCustomViews: {
+    control: 'boolean',
+    defaultValue: true,
   },
 };
 
