@@ -44,7 +44,7 @@ export type ControlsConfig<D> = {
 
   // Search section
   hasSearch?: boolean;
-  searchControls?: SearchBarProps;
+  searchConfig?: SearchBarProps;
 
   // Tools actions
   columnVisibilityActions?: ToolsActions;
@@ -61,7 +61,7 @@ export type ControlsConfig<D> = {
   defaultColumnOrder?: IdType<D>[];
   // User Views section
   hasCustomViews?: boolean;
-  defaultCustomView: IdType<D>[];
+  defaultCustomView?: IdType<D>[];
 } & FilteringControls;
 
 export type ExtendedTableConfig<D> = TableConfig<D> & {
@@ -76,6 +76,6 @@ export interface DatatableProps<D extends Record<string, unknown>> {
   isDataLoading?: boolean;
   columns: Column<D>[];
   tableConfig?: ExtendedTableConfig<D>;
-  controlsConfig?: ControlsConfig<D>;
+  controlsConfig: ControlsConfig<D>;
   batchActions?: Action[];
 }

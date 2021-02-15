@@ -48,5 +48,5 @@ export const ToolsTabItemPropType = {
   margin: SpacingSizeValuePropType,
   className: PropTypes.string,
   onToolActivate: PropTypes.func.isRequired,
-  onToolDectivate: PropTypes.func.isRequired,
+  onToolDeactivate: PropTypes.func.isRequired,
 };

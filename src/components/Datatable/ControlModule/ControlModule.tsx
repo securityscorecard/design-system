@@ -7,31 +7,30 @@ import { FlexContainer } from '../../FlexContainer';
 import { SearchBar } from '../../forms/SearchBar';
 import { ToolsTabItem } from '../ToolsTabItem';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { ControlModuleProps } from './ControlModule.types';
+import { ControlsConfig } from '../Datatable.types';
 import { Filters } from '../../Filters';
 import { renderSuggestionFilter } from '../../forms/SearchBar/SearchSuggestionFormats';
 
 const FiltersContainer = styled(FlexContainer)`
   background-color: ${getColor('graphite5H')};
 `;
-
-const ControlModule: React.FC<ControlModuleProps> = ({
+const ControlModule = <D extends Record<string, unknown>>({
   hasSearch = true,
   searchConfig,
-  hasFiltering = true,
+  hasFiltering,
   filtersConfig,
   defaultIsFilteringOpen = true,
   hasColumnVisibility = true,
   // defaultHiddenColumns = [],
-  hasColumnOrdering = true,
+  hasColumnOrdering = false,
   // defaultColumnOrder,
-  hasCustomViews = true,
+  hasCustomViews = false,
   // defaultCustomView,
   columnVisibilityActions,
   filteringActions,
   columnOrderingActions,
   customViewsActions,
-}) => {
+}: ControlsConfig<D>): React.ReactElement => {
   const [areFiltersOpen, setAreFiltersOpen] = useState(defaultIsFilteringOpen);
 
   const handleCloseFilter = () => {
@@ -40,13 +39,13 @@ const ControlModule: React.FC<ControlModuleProps> = ({
   };
 
   const filterToolActions = {
-    onToolActivate: () => {
+    onToolActivate: (event) => {
       setAreFiltersOpen(true);
-      filteringActions.onToolActivate();
+      filteringActions.onToolActivate(event);
     },
-    onToolDeactivate: () => {
+    onToolDeactivate: (event) => {
       setAreFiltersOpen(false);
-      filteringActions.onToolDeactivate();
+      filteringActions.onToolDeactivate(event);
     },
   };
 

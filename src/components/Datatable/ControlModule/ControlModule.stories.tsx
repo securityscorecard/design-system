@@ -1,27 +1,33 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { MemoryRouter } from 'react-router-dom';
+import { mergeRight } from 'ramda';
 
 import { Container } from '../../layout';
 import ControlModule from './ControlModule';
-import { BatchModule } from '../BatchModule';
-import { SearchBar } from '../../forms/SearchBar';
-import { ToolsTabItem } from '../ToolsTabItem';
-import { ControlModuleProps } from './ControlModule.types';
+import { ControlsConfig } from '../Datatable.types';
 import { mockControlModuleProps } from '../mocks/controlModule';
 
 export default {
   title: 'components/Datatable/components/ControlModule',
   component: ControlModule,
-  decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
-  subcomponents: { BatchModule, ToolsTabItem, SearchBar },
 } as Meta;
 
-export const playground: Story<ControlModuleProps<D>> = (args) => (
+export const playground: Story<ControlsConfig<Record<'string', unknown>>> = (
+  args,
+) => (
   <Container>
-    <ControlModule {...mockControlModuleProps} {...args} />
+    <ControlModule {...mergeRight(mockControlModuleProps, args)} />
   </Container>
 );
+
+playground.args = {
+  hasSearch: true,
+  defaultIsFilteringOpen: false,
+  hasFiltering: true,
+  hasColumnVisibility: true,
+  hasColumnOrdering: true,
+  hasCustomViews: true,
+};
 
 playground.argTypes = {
   hasSearch: {
@@ -70,7 +76,9 @@ export const WithoutSearch: Story = () => (
 
 export const WithoutFiltering: Story = () => (
   <Container>
-    <ControlModule {...mockControlModuleProps} hasFiltering={false} />
+    <ControlModule
+      {...mergeRight(mockControlModuleProps, { hasFiltering: false })}
+    />
   </Container>
 );
 export const WithoutColumnVisibilty: Story = () => (

@@ -16,7 +16,6 @@ import {
 } from './Datatable.types';
 import { ControlModule } from './ControlModule';
 import { BatchModule } from './BatchModule';
-import { mockControlModuleProps } from './mocks/controlModule';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -46,8 +45,8 @@ const defaultControlsConfig: Partial<ControlsConfig<
   hasColumnVisibility: true,
   hasFiltering: true,
   defaultIsFilteringOpen: false,
-  hasColumnOrdering: true,
-  hasCustomViews: true,
+  hasColumnOrdering: false,
+  hasCustomViews: false,
 };
 
 const Datatable = <D extends Record<string, unknown>>({
@@ -90,10 +89,7 @@ const Datatable = <D extends Record<string, unknown>>({
     >
       <StyledDatatable flexDirection="column">
         {controlsConfig.isControlsEnabled && (
-          <ControlModule
-            {...defaultControlsConfig}
-            {...mockControlModuleProps}
-          />
+          <ControlModule<D> {...defaultControlsConfig} />
         )}
         <BatchModule actions={batchActions} />
         <Table<D>

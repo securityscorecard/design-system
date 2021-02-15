@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 
-import { mockToolsTabItemsFiltersActive } from './toolsTabItems';
+import { ControlsConfig } from '../Datatable.types';
 import { createMockOnSearch } from '../../forms/SearchBar/mocks';
 import { fieldsMock, stateMock } from '../../Filters/mocks/options';
 
-export const mockControlModuleProps = {
+export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
   searchConfig: {
@@ -23,9 +23,10 @@ export const mockControlModuleProps = {
   defaultIsFilteringOpen: false,
   hasColumnVisibility: true,
   defaultHiddenColumns: [],
-  hasColumnOrdering: true,
+  hasColumnOrdering: false,
   defaultColumnOrder: [],
-  toolsTabItems: mockToolsTabItemsFiltersActive,
+  hasCustomViews: false,
+  defaultCustomView: [],
   columnVisibilityActions: {
     onToolActivate: action('ActivateColumnVisibility'),
     onToolDeactivate: action('DeactivateColumnVisibility'),

@@ -20,6 +20,7 @@ import {
 import { TextSizes, TextVariants } from '../typography/Text/Text.enums';
 import { Text } from '../typography';
 import { LinkCellRendererProps } from './Table/TableCell/renderers/renderers.types';
+import { mockControlModuleProps } from './mocks/controlModule';
 
 export default {
   title: 'components/Datatable',
@@ -175,7 +176,6 @@ export const Default: Story = () => {
         const endRow = startRow + pageSize;
         const fetchedData = assets.slice(startRow, endRow);
         setTableData(fetchedData);
-
         setIsLoading(false);
       }, 500);
     },
@@ -188,6 +188,7 @@ export const Default: Story = () => {
         <Grid.Col>
           <Datatable<Data>
             columns={columns}
+            controlsConfig={mockControlModuleProps}
             data={tableData}
             dataPrimaryKey="ipAddress"
             isDataLoading={isLoading}
