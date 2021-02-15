@@ -1,9 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { FlexContainer } from '../../FlexContainer';
+import { Spinner } from '../../Spinner';
 import { Button } from '../../Button';
 import { BottomBarProps } from './BottomBar.types';
+import {
+  getColor,
+  getFontSize,
+  getFontWeight,
+  getLineHeight,
+  pxToRem,
+} from '../../../utils/helpers';
+
+const FiltersNotice = styled.div`
+  color: ${getColor('graphite2B')};
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
+  margin-right: ${pxToRem(16)};
+`;
+
+const LoadingText = styled.span`
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
+  margin-left: ${pxToRem(8)};
+  font-weight: ${getFontWeight('medium')};
+`;
 
 const BottomBar: React.FC<BottomBarProps> = ({
   onAdd,
@@ -12,8 +35,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
   onClose,
   onCancel,
   isLoading = false,
+  hasUnappliedFilters,
 }) => (
-  <FlexContainer justifyContent="space-between">
+  <FlexContainer justifyContent="space-between" margin={{ top: 0.5 }}>
     <FlexContainer>
       <Button
         color="primary"
@@ -29,8 +53,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
         Clear all
       </Button>
     </FlexContainer>
-    <FlexContainer>
-      {/* TODO add notice about unapplied filters and style properly */}
+    <FlexContainer alignItems="center">
+      {hasUnappliedFilters && (
+        <FiltersNotice>You have unapplied filters</FiltersNotice>
+      )}
       <Button
         color="primary"
         margin={{ right: 1 }}
@@ -39,13 +65,20 @@ const BottomBar: React.FC<BottomBarProps> = ({
       >
         {isLoading ? 'Cancel' : 'Close'}
       </Button>
-      <Button
-        color="primary"
-        isLoading={isLoading}
-        variant="solid"
-        onClick={onApply}
-      >
-        {isLoading ? 'Fetching results' : 'Apply'}
+      <Button color="primary" variant="solid" onClick={onApply}>
+        {isLoading ? (
+          <>
+            <Spinner
+              borderWidth={2}
+              height={16}
+              verticalMargin={0}
+              width={16}
+            />
+            <LoadingText>Fetching results</LoadingText>
+          </>
+        ) : (
+          'Apply'
+        )}
       </Button>
     </FlexContainer>
   </FlexContainer>
@@ -54,6 +87,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
 export default BottomBar;
 
 BottomBar.propTypes = {
+  hasUnappliedFilters: PropTypes.bool.isRequired,
   onAdd: PropTypes.func.isRequired,
   onClearAll: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
