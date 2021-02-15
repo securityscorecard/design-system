@@ -211,3 +211,21 @@ export const state: Filter[] = [
     isApplied: true,
   },
 ];
+
+export const stateWithUnappliedFilters: Filter[] = [
+  ...state,
+  {
+    operator: Operators.and,
+    field: 'domain',
+    condition: 'contains',
+    value: '.io',
+    isApplied: false,
+  },
+  {
+    operator: Operators.and,
+    field: 'domain',
+    condition: 'contains',
+    value: 'example',
+    isApplied: false,
+  },
+];
