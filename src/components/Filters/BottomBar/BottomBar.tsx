@@ -3,29 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { FlexContainer } from '../../FlexContainer';
+import { Paragraph, Text } from '../../typography';
 import { Spinner } from '../../Spinner';
 import { Button } from '../../Button';
 import { BottomBarProps } from './BottomBar.types';
-import {
-  getColor,
-  getFontSize,
-  getFontWeight,
-  getLineHeight,
-  pxToRem,
-} from '../../../utils/helpers';
+import { getColor, pxToRem } from '../../../utils/helpers';
 
-const FiltersNotice = styled.div`
-  color: ${getColor('graphite2B')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
-  margin-right: ${pxToRem(16)};
-`;
-
-const LoadingText = styled.span`
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
+const LoadingText = styled(Text)`
   margin-left: ${pxToRem(8)};
-  font-weight: ${getFontWeight('medium')};
+  color: ${getColor('graphite5H')};
 `;
 
 const BottomBar: React.FC<BottomBarProps> = ({
@@ -55,7 +41,14 @@ const BottomBar: React.FC<BottomBarProps> = ({
     </FlexContainer>
     <FlexContainer alignItems="center">
       {hasUnappliedFilters && (
-        <FiltersNotice>You have unapplied filters</FiltersNotice>
+        <Paragraph
+          as="div"
+          margin={{ right: 0.8, bottom: 0 }}
+          size="md"
+          variant="secondary"
+        >
+          You have unapplied filters
+        </Paragraph>
       )}
       <Button
         color="primary"
@@ -74,7 +67,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               verticalMargin={0}
               width={16}
             />
-            <LoadingText>Fetching results</LoadingText>
+            <LoadingText size="md">Fetching results</LoadingText>
           </>
         ) : (
           'Apply'
