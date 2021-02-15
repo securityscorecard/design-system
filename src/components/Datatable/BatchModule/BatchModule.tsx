@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { FlexContainer } from '../../FlexContainer';
 import { BatchActions } from './BatchActions';
@@ -7,10 +6,7 @@ import { ElementCounter } from './ElementCounter';
 import { BatchModuleProps } from './BatchModule.types';
 import { useDatatable } from '../hooks/useDatatable';
 
-const BatchModule: React.FC<BatchModuleProps> = ({
-  actions,
-  filteredLength,
-}) => {
+const BatchModule: React.FC<BatchModuleProps> = ({ actions }) => {
   const { totalLength = 0, selectedLength } = useDatatable();
 
   return (
@@ -20,7 +16,6 @@ const BatchModule: React.FC<BatchModuleProps> = ({
       padding={{ vertical: 0.8, horizontal: 0.8 }}
     >
       <ElementCounter
-        filteredLength={filteredLength}
         selectedLength={selectedLength}
         totalLength={totalLength}
       />
@@ -30,7 +25,6 @@ const BatchModule: React.FC<BatchModuleProps> = ({
 };
 
 BatchModule.propTypes = {
-  filteredLength: PropTypes.number,
   ...BatchActions.propTypes,
 };
 

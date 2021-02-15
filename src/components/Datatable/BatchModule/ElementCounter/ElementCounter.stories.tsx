@@ -10,13 +10,11 @@ export default {
 
 export const Default: Story = () => <ElementCounter totalLength={120} />;
 
-export const Filtered: Story = () => (
-  <ElementCounter filteredLength={80} totalLength={120} />
-);
-
 export const Selected: Story = () => (
   <ElementCounter selectedLength={80} totalLength={120} />
 );
+
+export const NoData: Story = () => <ElementCounter totalLength={0} />;
 
 export const AbbreviatedCounts: Story = () => (
   <>

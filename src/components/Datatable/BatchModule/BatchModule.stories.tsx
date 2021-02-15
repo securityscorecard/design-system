@@ -71,16 +71,10 @@ export const Default: Story = () => (
   </DatatableContext.Provider>
 );
 
-export const Filtered: Story = () => (
-  <DatatableContext.Provider value={{ totalLength: 1070000 }}>
-    <BatchModule actions={actionsMock} filteredLength={52813} />
-  </DatatableContext.Provider>
-);
-
 export const Selected: Story = () => (
   <DatatableContext.Provider
     value={{ totalLength: 1070000, selectedLength: 31 }}
   >
-    <BatchModule actions={actionsMock} filteredLength={52813} />
+    <BatchModule actions={actionsMock} />
   </DatatableContext.Provider>
 );
