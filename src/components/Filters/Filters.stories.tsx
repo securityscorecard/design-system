@@ -4,19 +4,57 @@ import { action } from '@storybook/addon-actions';
 
 import { FlexContainer } from '../FlexContainer';
 import Filters from './Filters';
-import { fieldsMock, stateMock } from './mocks/options';
+import { fields, state, stateWithUnappliedFilters } from './mocks/options';
 
 export default {
   component: Filters,
   title: 'components/Filters',
 } as Meta;
 
-// TODO cover other stories
-export const DefaultFilters: Story = () => (
+export const Default: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
-      fields={fieldsMock}
-      state={stateMock}
+      fields={fields}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const WithState: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fields}
+      state={state}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const UnappliedFilters: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fields}
+      state={stateWithUnappliedFilters}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const FetchingResults: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fields}
+      state={state}
+      isLoading
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

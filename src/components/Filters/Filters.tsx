@@ -14,7 +14,10 @@ const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
 
 const getDefaultCondition = (fields) =>
-  fields[0].conditions.find(({ isDefault }) => isDefault).value;
+  (
+    fields[0].conditions.find(({ isDefault }) => isDefault) ||
+    fields[0].conditions[0]
+  ).value;
 
 const getDefaultState = (fields) => [
   {
@@ -41,6 +44,7 @@ const Filters: React.FC<FiltersProps> = ({
 }) => {
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(state);
   const [isRemoveDisabled, setRemoveDisabled] = useState(false);
+  const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
 
   useEffect(() => {
     const defaultState = getDefaultState(fields);
@@ -50,6 +54,13 @@ const Filters: React.FC<FiltersProps> = ({
       setRemoveDisabled(false);
     }
   }, [filtersValues, fields]);
+
+  useEffect(() => {
+    const someApplied = filtersValues.some(({ isApplied }) => isApplied);
+    const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
+
+    setHasUnappliedFilters(someApplied && someUnapplied);
+  }, [filtersValues]);
 
   const callOnChange = () => {
     if (typeof onChange === 'function') {
@@ -134,7 +145,7 @@ const Filters: React.FC<FiltersProps> = ({
     }));
     setFiltersValues(newFilters);
 
-    onApply(filtersValues);
+    onApply(newFilters);
   };
 
   const handleRemoveFilter = (index) => () => {
@@ -171,6 +182,7 @@ const Filters: React.FC<FiltersProps> = ({
         );
       })}
       <BottomBar
+        hasUnappliedFilters={hasUnappliedFilters}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onApply={handleApply}
@@ -186,6 +198,9 @@ export default Filters;
 
 Filters.propTypes = {
   fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
+  onApply: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   state: PropTypes.arrayOf(
     PropTypes.exact({
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
@@ -198,10 +213,7 @@ Filters.propTypes = {
       ]),
       isApplied: PropTypes.bool.isRequired,
     }),
-  ).isRequired,
-  onApply: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  ),
   isLoading: PropTypes.bool,
   onChange: PropTypes.func,
 };
