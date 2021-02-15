@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 
 import { ControlsConfig } from '../Datatable.types';
 import { createMockOnSearch } from '../../forms/SearchBar/mocks';
-import { fieldsMock, stateMock } from '../../Filters/mocks/options';
+import { fields } from '../../Filters/mocks/options';
 
 export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
@@ -13,8 +13,7 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   },
   hasFiltering: true,
   filtersConfig: {
-    fields: fieldsMock,
-    state: stateMock,
+    fields,
     onApply: action('onApply'),
     onCancel: action('onCancel'),
     onChange: action('onChange'),
