@@ -14,48 +14,27 @@ const LightText: React.FC = ({ children }) => (
   </Text>
 );
 
-const getCounterContent = (
-  totalLength,
-  filteredLength = 0,
-  selectedLength = 0,
-) => {
+const getCounterContent = (totalLength, selectedLength = 0) => {
   if (isPositive(selectedLength)) {
     return (
       <>
         {abbreviateNumber(selectedLength)} <LightText>of</LightText>{' '}
-        {abbreviateNumber(
-          isPositive(filteredLength) ? filteredLength : totalLength,
-        )}{' '}
-        <LightText>selected</LightText>
+        {abbreviateNumber(totalLength)} <LightText>selected</LightText>
       </>
     );
   }
-  if (isPositive(filteredLength)) {
-    return (
-      <>
-        {abbreviateNumber(filteredLength)} <LightText>of</LightText>{' '}
-        {abbreviateNumber(totalLength)} <LightText>total</LightText>
-      </>
-    );
+  if (isPositive(totalLength)) {
+    return <>{abbreviateNumber(totalLength)}</>;
   }
 
-  return (
-    <>
-      {abbreviateNumber(totalLength)} <LightText>total</LightText>
-    </>
-  );
+  return <LightText>No data</LightText>;
 };
 
 const ElementCounter: React.FC<ElementCounterProps> = ({
   totalLength,
-  filteredLength = 0,
   selectedLength = 0,
 }) => {
-  const content = getCounterContent(
-    totalLength,
-    filteredLength,
-    selectedLength,
-  );
+  const content = getCounterContent(totalLength, selectedLength);
 
   return (
     <H3 margin="none" variant={HeadingVariants.secondary}>
@@ -66,7 +45,6 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
 
 ElementCounter.propTypes = {
   totalLength: PropTypes.number.isRequired,
-  filteredLength: PropTypes.number,
   selectedLength: PropTypes.number,
 };
 
