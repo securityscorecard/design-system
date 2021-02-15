@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { all } from 'ramda';
-import { isNotUndefined, isUndefined } from 'ramda-adjunct';
+import { isFunction, isNotUndefined, isUndefined } from 'ramda-adjunct';
 
 import { TextVariants } from '../../../../typography/Text/Text.enums';
 import TableCellLink from './components/TableCellLink';
@@ -19,6 +19,12 @@ const Text: React.FC<LinkCellRendererProps<string | number>> = ({
   column: { nullCondition, nullConditionValue, onClick, ...restColumn },
 }) => {
   const isNull = nullCondition(value);
+
+  const handleClick = useCallback(() => {
+    if (isNotUndefined(onClick) && isFunction(onClick)) {
+      onClick(value);
+    }
+  }, [onClick, value]);
 
   if (isNull) {
     return (
@@ -43,7 +49,7 @@ const Text: React.FC<LinkCellRendererProps<string | number>> = ({
       $isDiscrete={isLinkDiscrete}
       href={href}
       to={to}
-      onClick={() => onClick(value)}
+      onClick={handleClick}
     >
       {returnValue}
     </TableCellLink>
