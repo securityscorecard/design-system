@@ -25,7 +25,8 @@ playground.args = {
   defaultIsFilteringOpen: false,
   hasFiltering: true,
   hasColumnVisibility: true,
-  hasColumnOrdering: true,
+  hasColumnOrdering: false,
+  hasGrouping: true,
   hasCustomViews: true,
 };
 
@@ -47,6 +48,10 @@ playground.argTypes = {
     defaultValue: true,
   },
   hasColumnOrdering: {
+    control: 'boolean',
+    defaultValue: false,
+  },
+  hasGrouping: {
     control: 'boolean',
     defaultValue: true,
   },
@@ -81,20 +86,14 @@ export const WithoutFiltering: Story = () => (
     />
   </Container>
 );
-export const WithoutColumnVisibilty: Story = () => (
-  <Container>
-    <ControlModule {...mockControlModuleProps} hasColumnVisibility={false} />
-  </Container>
-);
 
-export const WithoutColumnOrdering: Story = () => (
+export const WithAllTools: Story = () => (
   <Container>
-    <ControlModule {...mockControlModuleProps} hasColumnOrdering={false} />
-  </Container>
-);
-
-export const WithoutCustomViews: Story = () => (
-  <Container>
-    <ControlModule {...mockControlModuleProps} hasCustomViews={false} />
+    <ControlModule
+      {...mockControlModuleProps}
+      hasColumnVisibility
+      hasCustomViews
+      hasGrouping
+    />
   </Container>
 );

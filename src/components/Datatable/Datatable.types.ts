@@ -49,7 +49,7 @@ export type ControlsConfig<D> = {
   // Tools actions
   columnVisibilityActions?: ToolsActions;
   filteringActions?: ToolsActions;
-  columnOrderingActions?: ToolsActions;
+  groupingActions?: ToolsActions;
   customViewsActions?: ToolsActions;
 
   // == Currently not implemented ==
@@ -59,6 +59,9 @@ export type ControlsConfig<D> = {
   // Column Ordering section
   hasColumnOrdering?: boolean;
   defaultColumnOrder?: IdType<D>[];
+  // Grouping section
+  hasGrouping?: boolean;
+  defaultGroups?: IdType<D>[];
   // User Views section
   hasCustomViews?: boolean;
   defaultCustomView?: IdType<D>[];

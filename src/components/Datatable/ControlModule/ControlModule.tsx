@@ -20,15 +20,17 @@ const ControlModule = <D extends Record<string, unknown>>({
   hasFiltering,
   filtersConfig,
   defaultIsFilteringOpen = true,
-  hasColumnVisibility = true,
+  hasColumnVisibility = false,
   // defaultHiddenColumns = [],
   hasColumnOrdering = false,
   // defaultColumnOrder,
+  hasGrouping = false,
+  // defaultGroups= [],
   hasCustomViews = false,
   // defaultCustomView,
   columnVisibilityActions,
   filteringActions,
-  columnOrderingActions,
+  groupingActions,
   customViewsActions,
 }: ControlsConfig<D>): React.ReactElement => {
   const [areFiltersOpen, setAreFiltersOpen] = useState(defaultIsFilteringOpen);
@@ -56,7 +58,7 @@ const ControlModule = <D extends Record<string, unknown>>({
         padding={{ vertical: 0.4, horizontal: 0.8 }}
       >
         <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
-          {hasColumnVisibility && (
+          {(hasColumnVisibility || hasColumnOrdering) && (
             <ToolsTabItem
               iconName={SSCIconNames.reorder}
               label="Show/Hide"
@@ -71,11 +73,11 @@ const ControlModule = <D extends Record<string, unknown>>({
               {...filterToolActions}
             />
           )}
-          {hasColumnOrdering && (
+          {hasGrouping && (
             <ToolsTabItem
               iconName={SSCIconNames.sitemap}
               label="Group"
-              {...columnOrderingActions}
+              {...groupingActions}
             />
           )}
           {hasCustomViews && (
@@ -125,7 +127,7 @@ ControlModule.propTypes = {
   defaultCustomView: PropTypes.arrayOf(PropTypes.shape({})),
   columnVisibilityActions: toolActionPropType,
   filteringActions: toolActionPropType,
-  columnOrderingActions: toolActionPropType,
+  groupingActions: toolActionPropType,
   customViewsActions: toolActionPropType,
 };
 

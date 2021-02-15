@@ -43,10 +43,11 @@ const defaultControlsConfig: Partial<ControlsConfig<
   isControlsEnabled: true,
   hasSearch: true,
   hasColumnVisibility: true,
+  hasColumnOrdering: true,
   hasFiltering: true,
   defaultIsFilteringOpen: false,
-  hasColumnOrdering: false,
-  hasCustomViews: false,
+  hasGrouping: true,
+  hasCustomViews: true,
 };
 
 const Datatable = <D extends Record<string, unknown>>({

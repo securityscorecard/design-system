@@ -25,6 +25,8 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   defaultHiddenColumns: [],
   hasColumnOrdering: false,
   defaultColumnOrder: [],
+  hasGrouping: false,
+  defautGroups: [],
   hasCustomViews: false,
   defaultCustomView: [],
   columnVisibilityActions: {
@@ -35,9 +37,9 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
     onToolActivate: action('ActivateFiltering'),
     onToolDeactivate: action('DeactivateFiltering'),
   },
-  columnOrderingActions: {
-    onToolActivate: action('ActivateColumnOrdering'),
-    onToolDeactivate: action('DeactivateColumnOrdering'),
+  groupingActions: {
+    onToolActivate: action('ActivateGrouping'),
+    onToolDeactivate: action('DeactivateGrouping'),
   },
   customViewsActions: {
     onToolActivate: action('ActivateCustomViews'),
