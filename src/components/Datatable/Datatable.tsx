@@ -8,13 +8,14 @@ import { getBorderRadius, getColor } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
 import { ActionPropType } from './types/Action.types';
 import Table from './Table/Table';
-import { BatchModule } from './BatchModule';
 import DatatableContext from './DatatableContext';
 import {
   ControlsConfig,
   DatatableProps,
   ExtendedTableConfig,
 } from './Datatable.types';
+import { ControlModule } from './ControlModule';
+import { BatchModule } from './BatchModule';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -40,8 +41,13 @@ const defaultControlsConfig: Partial<ControlsConfig<
   Record<string, unknown>
 >> = {
   isControlsEnabled: true,
+  hasSearch: true,
+  hasColumnVisibility: true,
+  hasColumnOrdering: true,
   hasFiltering: true,
   defaultIsFilteringOpen: false,
+  hasGrouping: true,
+  hasCustomViews: true,
 };
 
 const Datatable = <D extends Record<string, unknown>>({
@@ -63,6 +69,7 @@ const Datatable = <D extends Record<string, unknown>>({
   const {
     defaultHiddenColumns,
     defaultColumnOrder,
+    ...restControlsConfig
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -83,8 +90,13 @@ const Datatable = <D extends Record<string, unknown>>({
       }}
     >
       <StyledDatatable flexDirection="column">
-        <FlexContainer>ToolbarModule</FlexContainer>
-        <FlexContainer>Filters</FlexContainer>
+        {controlsConfig.isControlsEnabled && (
+          <ControlModule<D>
+            defaultColumnOrder={defaultColumnOrder}
+            defaultHiddenColumns={defaultHiddenColumns}
+            {...restControlsConfig}
+          />
+        )}
         <BatchModule actions={batchActions} />
         <Table<D>
           columns={columns}

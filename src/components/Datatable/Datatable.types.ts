@@ -1,6 +1,7 @@
 import { To } from 'history';
 import { Column, IdType } from 'react-table';
 
+import { SearchBarProps } from '../forms/SearchBar/SearchBar.types';
 import { FiltersProps } from '../Filters/Filters.types';
 import {
   OnDataFetchFn,
@@ -19,11 +20,11 @@ export type CustomColumnProps<D> = {
   displayLimit?: number;
 };
 
-type EnabledFilteringControls = {
+export type EnabledFilteringControls = {
   hasFiltering: true;
   filtersConfig: Omit<FiltersProps, 'isLoading'>;
 };
-type DisabledFilteringControls = {
+export type DisabledFilteringControls = {
   hasFiltering: false;
   filtersConfig?: never;
 };
@@ -32,10 +33,24 @@ type FilteringControls = { defaultIsFilteringOpen?: boolean } & (
   | EnabledFilteringControls
   | DisabledFilteringControls
 );
+
+type ToolsActions = {
+  onToolActivate: React.MouseEventHandler;
+  onToolDeactivate: React.MouseEventHandler;
+};
+
 export type ControlsConfig<D> = {
   isControlsEnabled?: boolean;
+
   // Search section
   hasSearch?: boolean;
+  searchConfig?: SearchBarProps;
+
+  // Tools actions
+  columnVisibilityActions?: ToolsActions;
+  filteringActions?: ToolsActions;
+  groupingActions?: ToolsActions;
+  customViewsActions?: ToolsActions;
 
   // == Currently not implemented ==
   // Column Visibility section
@@ -44,6 +59,12 @@ export type ControlsConfig<D> = {
   // Column Ordering section
   hasColumnOrdering?: boolean;
   defaultColumnOrder?: IdType<D>[];
+  // Grouping section
+  hasGrouping?: boolean;
+  defaultGroups?: IdType<D>[];
+  // User Views section
+  hasCustomViews?: boolean;
+  defaultCustomView?: IdType<D>[];
 } & FilteringControls;
 
 export type ExtendedTableConfig<D> = TableConfig<D> & {
@@ -58,6 +79,6 @@ export interface DatatableProps<D extends Record<string, unknown>> {
   isDataLoading?: boolean;
   columns: Column<D>[];
   tableConfig?: ExtendedTableConfig<D>;
-  controlsConfig?: ControlsConfig<D>;
+  controlsConfig: ControlsConfig<D>;
   batchActions?: Action[];
 }

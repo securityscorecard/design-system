@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 
-import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import {
   createMarginSpacing,
   getColor,
@@ -12,11 +10,14 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../../utils/helpers';
-import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { SSCIcons, Types } from '../../Icon/Icon.types';
+import { IconTypes } from '../../../theme/icons/icons.enums';
 import StyledIcon from '../../Button/StyledIcon';
 import { ButtonSizes } from '../../Button/Button.enums';
-import { ToolsTabButtonProps, ToolsTabItemProps } from './ToolsTabItem.types';
+import {
+  ToolsTabButtonProps,
+  ToolsTabItemPropType,
+  ToolsTabItemProps,
+} from './ToolsTabItem.types';
 import { ToolsTabItemStates } from './ToolsTabItem.enum';
 
 const DefaultToolsTabItem = styled.button<ToolsTabButtonProps>`
@@ -26,6 +27,7 @@ const DefaultToolsTabItem = styled.button<ToolsTabButtonProps>`
   font-weight: ${getFontWeight('medium')};
 
   padding: ${pxToRem(6, 12)};
+  margin-right: ${pxToRem(4)};
   ${({ margin }) => createMarginSpacing(margin)};
   color: ${getColor('graphite2B')};
   border: 2px solid transparent;
@@ -81,13 +83,13 @@ const AppliedToolsTabItem = styled(DefaultToolsTabItem)`
 `;
 
 const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
-  children,
+  label,
   toolState = ToolsTabItemStates.default,
   onToolActivate = noop,
   onToolDeactivate = noop,
   iconName,
   iconType = IconTypes.ssc,
-  margin = 'none',
+  margin,
   isDisabled = false,
   ...props
 }) => {
@@ -106,12 +108,11 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   const content = isNotUndefined(iconName) ? (
     <>
       <StyledIcon name={iconName} size={ButtonSizes.sm} type={iconType} />
-      {children}
+      {label}
     </>
   ) : (
-    children
+    label
   );
-
   const commonProps = {
     margin,
     ...props,
@@ -144,21 +145,6 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   );
 };
 
-ToolsTabItem.propTypes = {
-  toolState: PropTypes.oneOf(Object.values(ToolsTabItemStates)),
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
-  iconType: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
-  margin: SpacingSizeValuePropType,
-  isDisabled: PropTypes.bool,
-  className: PropTypes.string,
-  onToolActivate: PropTypes.func,
-  onToolDeactivate: PropTypes.func,
-};
+ToolsTabItem.propTypes = ToolsTabItemPropType;
 
 export default ToolsTabItem;
