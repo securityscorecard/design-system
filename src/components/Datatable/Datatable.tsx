@@ -89,7 +89,7 @@ const Datatable = <D extends Record<string, unknown>>({
     >
       <StyledDatatable flexDirection="column">
         {controlsConfig.isControlsEnabled && (
-          <ControlModule<D> {...defaultControlsConfig} />
+          <ControlModule<D> {...controlsConfig} />
         )}
         <BatchModule actions={batchActions} />
         <Table<D>
