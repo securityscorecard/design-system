@@ -57,11 +57,11 @@ const ControlModule: React.FC<ControlModuleProps> = ({
         padding={{ vertical: 0.4, horizontal: 0.8 }}
       >
         <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
-          {hasColumnOrdering && (
+          {hasColumnVisibility && (
             <ToolsTabItem
               iconName={SSCIconNames.reorder}
               label="Show/Hide"
-              {...columnOrderingActions}
+              {...columnVisibilityActions}
             />
           )}
           {hasFiltering && (
@@ -72,11 +72,11 @@ const ControlModule: React.FC<ControlModuleProps> = ({
               {...filterToolActions}
             />
           )}
-          {hasColumnVisibility && (
+          {hasColumnOrdering && (
             <ToolsTabItem
               iconName={SSCIconNames.sitemap}
               label="Group"
-              {...columnVisibilityActions}
+              {...columnOrderingActions}
             />
           )}
           {hasCustomViews && (
