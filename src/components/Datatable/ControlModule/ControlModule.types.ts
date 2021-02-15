@@ -1,9 +1,5 @@
-import { ToolsTabItem } from '../ToolsTabItem/ToolsTabItem.types';
-import { SearchBarProps } from '../../forms/SearchBar/SearchBar.types';
-import { FiltersProps } from '../../Filters/Filters.types';
+import { ControlsConfig } from '../Datatable.types';
 
-export interface ControlModuleProps extends SearchBarProps, FiltersProps {
-  toolsTabItems: ToolsTabItem[];
-  filteredLength?: number;
-  defaultIsFilterOpen?: boolean;
+export interface ControlModuleProps<D extends ControlsConfig<D>> {
+  someprop?: boolean;
 }

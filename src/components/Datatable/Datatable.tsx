@@ -42,8 +42,12 @@ const defaultControlsConfig: Partial<ControlsConfig<
   Record<string, unknown>
 >> = {
   isControlsEnabled: true,
+  hasSearch: true,
+  hasColumnVisibility: true,
   hasFiltering: true,
   defaultIsFilteringOpen: false,
+  hasColumnOrdering: true,
+  hasCustomViews: true,
 };
 
 const Datatable = <D extends Record<string, unknown>>({
@@ -85,7 +89,12 @@ const Datatable = <D extends Record<string, unknown>>({
       }}
     >
       <StyledDatatable flexDirection="column">
-        <ControlModule {...mockControlModuleProps} />
+        {controlsConfig.isControlsEnabled && (
+          <ControlModule
+            {...defaultControlsConfig}
+            {...mockControlModuleProps}
+          />
+        )}
         <BatchModule actions={batchActions} />
         <Table<D>
           columns={columns}

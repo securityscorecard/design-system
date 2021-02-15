@@ -1,6 +1,7 @@
 import { To } from 'history';
 import { Column, IdType } from 'react-table';
 
+import { SearchBarProps } from '../forms/SearchBar/SearchBar.types';
 import { FiltersProps } from '../Filters/Filters.types';
 import {
   OnDataFetchFn,
@@ -19,11 +20,11 @@ export type CustomColumnProps<D> = {
   displayLimit?: number;
 };
 
-type EnabledFilteringControls = {
+export type EnabledFilteringControls = {
   hasFiltering: true;
   filtersConfig: Omit<FiltersProps, 'isLoading'>;
 };
-type DisabledFilteringControls = {
+export type DisabledFilteringControls = {
   hasFiltering: false;
   filtersConfig?: never;
 };
@@ -32,10 +33,12 @@ type FilteringControls = { defaultIsFilteringOpen?: boolean } & (
   | EnabledFilteringControls
   | DisabledFilteringControls
 );
+
 export type ControlsConfig<D> = {
   isControlsEnabled?: boolean;
   // Search section
   hasSearch?: boolean;
+  searchControls?: SearchBarProps;
 
   // == Currently not implemented ==
   // Column Visibility section
@@ -44,6 +47,9 @@ export type ControlsConfig<D> = {
   // Column Ordering section
   hasColumnOrdering?: boolean;
   defaultColumnOrder?: IdType<D>[];
+  // User Views section
+  hasCustomViews?: boolean;
+  defaultCustomView: IdType<D>[];
 } & FilteringControls;
 
 export type ExtendedTableConfig<D> = TableConfig<D> & {
