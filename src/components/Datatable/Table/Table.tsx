@@ -50,6 +50,7 @@ import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
 import { SelectionCheckbox } from './SelectionCheckbox';
 import { NoData, NoMatchingData } from './NoData';
+import { Pagination } from '../Pagination';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -389,57 +390,16 @@ const Table = <D extends Record<string, unknown>>({
             : renderNoDataContent(NoDataComponent)}
         </NoDataContainer>
       )}
-
-      <div className="pagination">
-        <button
-          disabled={!canPreviousPage}
-          type="button"
-          onClick={() => gotoPage(0)}
-        >
-          {'<<'}
-        </button>{' '}
-        <button
-          disabled={!canPreviousPage}
-          type="button"
-          onClick={() => previousPage()}
-        >
-          {'<'}
-        </button>{' '}
-        <button
-          disabled={!canNextPage}
-          type="button"
-          onClick={() => nextPage()}
-        >
-          {'>'}
-        </button>{' '}
-        <button
-          disabled={!canNextPage}
-          type="button"
-          onClick={() => gotoPage(pageCount - 1)}
-        >
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            defaultValue={pageIndex + 1}
-            style={{ width: '100px' }}
-            type="number"
-            onChange={(e) => {
-              const pageNumber = e.target.value
-                ? Number(e.target.value) - 1
-                : 0;
-              gotoPage(pageNumber);
-            }}
-          />
-        </span>
-      </div>
+      <Pagination
+        canNextPage={canNextPage}
+        canPreviousPage={canPreviousPage}
+        onGoToPage={gotoPage}
+        onNextPage={nextPage}
+        pageCount={pageCount}
+        pageIndex={pageIndex}
+        pageOptions={pageOptions}
+        onPreviousPage={previousPage}
+      />
     </>
   );
 };

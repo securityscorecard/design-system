@@ -10,7 +10,7 @@ import {
 } from '../../../utils/helpers';
 import { Button } from '../../Button';
 import { ButtonVariants } from '../../Button/Button.enums';
-import { PageButtonProps } from './PageButton.types';
+import { PageButtonProps } from './Pagination.types';
 
 const PageButton = styled(Button)
   .attrs(() => ({
