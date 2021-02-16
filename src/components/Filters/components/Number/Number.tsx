@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { StyledInput } from '../Input/Input';
-import { NumberProps } from './Number.types';
+import { NumberPropTypes, NumberProps } from './Number.types';
 
-const StyledNumber = styled(StyledInput)`
+export const StyledNumber = styled(StyledInput)`
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     appearance: none;
@@ -14,7 +13,7 @@ const StyledNumber = styled(StyledInput)`
   appearance: textfield;
 `;
 
-/* TODO Safari doesn't indicate wrong input */
+// TODO Safari doesn't indicate wrong input
 const Number: React.FC<NumberProps> = ({ value = '', onChange }) => (
   <StyledNumber
     placeholder="Number"
@@ -26,7 +25,4 @@ const Number: React.FC<NumberProps> = ({ value = '', onChange }) => (
 
 export default Number;
 
-Number.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
-};
+Number.propTypes = NumberPropTypes;
