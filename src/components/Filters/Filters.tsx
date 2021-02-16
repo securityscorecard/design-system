@@ -80,11 +80,11 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange();
   };
 
-  const handleFieldChange = (field, condition, index) => {
+  const handleFieldChange = (field, condition, value, index) => {
     const newFilters = [...filtersValues];
     newFilters[index].field = field;
     newFilters[index].condition = condition;
-    newFilters[index].value = undefined;
+    newFilters[index].value = value;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
