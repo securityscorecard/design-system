@@ -9,7 +9,12 @@ export interface FilterRowProps extends Filter {
   fields: Field[];
   index: number;
   onOperatorChange: (value: Option) => void;
-  onFieldChange: (field: string, condition: string, index: number) => void;
+  onFieldChange: (
+    field: string,
+    condition: string,
+    value: string,
+    index: number,
+  ) => void;
   onConditionChange: (
     condition: string,
     index: number,
