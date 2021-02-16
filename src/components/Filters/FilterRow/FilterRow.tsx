@@ -12,6 +12,7 @@ import {
   identity,
   map,
   memoizeWith,
+  path,
   pipe,
   prop,
   propEq,
@@ -54,11 +55,18 @@ const getFieldConditions = memoizeWith(identity, (fieldValue, fields) =>
 
 const getDefaultCondition = (fieldValue, fields) => {
   const fieldConditions = getFieldConditions(fieldValue, fields);
-  return pipe(
+  const defaultCondition = pipe(
     find(propEq('isDefault', true)),
     defaultTo(head(fieldConditions)),
-    prop('value'),
   )(fieldConditions);
+
+  return {
+    defaultConditionValue: prop('value', defaultCondition),
+    defaultComponentValue: path(
+      ['component', 'props', 'value'],
+      defaultCondition,
+    ),
+  };
 };
 
 const getConditionComponent = curry(
@@ -88,11 +96,6 @@ const renderComponent = (Component, value, onChange) => {
       component: SelectComponent,
       props: { options, defaultValue },
     } = Component;
-
-    // Update filters state by default value on initial load
-    if (defaultValue && !value) {
-      onChange(defaultValue.value);
-    }
 
     const valueOptions = pipe(
       find(propEq('value', value)),
@@ -138,12 +141,17 @@ const FilterRow: React.FC<FilterRowProps> = ({
   const fieldOptions = getFieldOptions(fields);
 
   const handleFieldChange = ({ value: selectedFieldValue }) => {
-    const defaultConditionValue = getDefaultCondition(
-      selectedFieldValue,
-      fields,
-    );
+    const {
+      defaultConditionValue,
+      defaultComponentValue,
+    } = getDefaultCondition(selectedFieldValue, fields);
 
-    onFieldChange(selectedFieldValue, defaultConditionValue, index);
+    onFieldChange(
+      selectedFieldValue,
+      defaultConditionValue,
+      defaultComponentValue,
+      index,
+    );
   };
 
   const handleConditionChange = ({ value: selectedConditionValue }) => {
