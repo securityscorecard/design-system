@@ -1,6 +1,8 @@
 import {
+  Count,
   DateRangePicker,
   Input,
+  Integer,
   Number,
   Select,
   SingleDatePicker,
@@ -46,7 +48,7 @@ export const fields: Field[] = [
         label: 'is not',
       },
       {
-        component: Number,
+        component: Count,
         value: 'is less than',
         label: 'is less than',
       },
@@ -61,7 +63,7 @@ export const fields: Field[] = [
         label: 'is at least',
       },
       {
-        component: Number,
+        component: Integer,
         value: 'is at most',
         label: 'is at most',
       },
@@ -188,6 +190,18 @@ export const state: Filter[] = [
     field: 'issue count',
     condition: 'is greater than',
     value: '2',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'issue count',
+    condition: 'is less than',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'issue count',
+    condition: 'is at most',
     isApplied: true,
   },
   {
