@@ -4,18 +4,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils/helpers';
+import { FlexContainer } from '../../FlexContainer';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
+import { Spinner } from '../../Spinner';
+import { Label } from '../../forms/Label';
 import { PaginationProps } from './Pagination.types';
 import PageButton from './PageButton';
 import NavButton from './NavButton';
-import { SSCIconNames } from '../../../theme/icons/icons.enums';
+import { StyledNumber } from '../../Filters/components/Number/Number';
 
 const MAX_PAGE_BUTTONS = 8;
 
-const PaginationWrapper = styled.div`
-  display: inline-block;
-  position: relative;
+const PaginationWrapper = styled(FlexContainer)`
   background-color: ${getColor('graphite3H')};
-  padding: ${pxToRem(10)};
+  padding: ${pxToRem(16)};
 `;
 
 const Ellipsis = styled.div`
@@ -28,6 +30,15 @@ const Ellipsis = styled.div`
   background-color: ${getColor('transparent')};
 `;
 
+const PageInputLabel = styled(Label)`
+  margin: ${pxToRem(6, 16)};
+`;
+const PageInput = styled(StyledNumber)`
+  width: ${pxToRem(72)};
+  height: ${pxToRem(32)};
+  padding: ${pxToRem(8, 16)};
+`;
+
 const Pagination: React.FC<PaginationProps> = ({
   gotoPage,
   previousPage,
@@ -36,16 +47,23 @@ const Pagination: React.FC<PaginationProps> = ({
   canPreviousPage,
   canNextPage,
   pageIndex,
+  isLoading,
 }) => {
   const pages = Array.from(Array(pageCount), (_, i) => i + 1);
 
+  const [visiblePageButtons, setVisiblePageButtons] = useState(pages);
   const [isFirstEllipsisVisible, setIsFirstEllipsisVisible] = useState(false);
   const [isLastEllipsisVisible, setIsLastEllipsisVisible] = useState(false);
-  const [visiblePageButtons, setVisiblePageButtons] = useState(pages);
+  const [isInputPageInvalid, setIsInputPageInvalid] = useState(false);
 
   const onChangePageNumber = (e) => {
-    const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0;
-    gotoPage(pageNumber);
+    const pageNumber = Number(e.target.value);
+    if (pageNumber <= pageCount && pageNumber > 0) {
+      setIsInputPageInvalid(false);
+      gotoPage(pageNumber - 1);
+    } else {
+      setIsInputPageInvalid(true);
+    }
   };
 
   useEffect(() => {
@@ -78,7 +96,7 @@ const Pagination: React.FC<PaginationProps> = ({
         }
       }
 
-      if (pageIndex >= pageCount - MAX_PAGE_BUTTONS + 3) {
+      if (pageIndex >= pageCount - MAX_PAGE_BUTTONS + 2) {
         setIsLastEllipsisVisible(false);
         setVisiblePageButtons([
           pageCount - 5,
@@ -94,34 +112,27 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <PaginationWrapper>
-      <NavButton
-        iconName={SSCIconNames.longArrowLeft}
-        isDisabled={!canPreviousPage}
-        label="backOnePage"
-        onClick={() => previousPage()}
-      >
-        {' '}
-        back{' '}
-      </NavButton>
-      {pageCount <= MAX_PAGE_BUTTONS ? (
-        pages.map((page) => {
-          return (
-            <PageButton
-              key={page}
-              isActive={pageIndex + 1 === page}
-              onClick={() => gotoPage(page - 1)}
-            >
-              {page}
-            </PageButton>
-          );
-        })
-      ) : (
-        <>
-          <PageButton isActive={pageIndex === 0} onClick={() => gotoPage(0)}>
-            1
-          </PageButton>
-          {isFirstEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-          {visiblePageButtons.map((page) => {
+      {isLoading && (
+        <FlexContainer flexShrink={1}>
+          <Spinner
+            borderWidth={2}
+            height={16}
+            horizontalMargin={14}
+            verticalMargin={8}
+            width={16}
+            dark
+          />
+        </FlexContainer>
+      )}
+      <FlexContainer flexGrow={1} justifyContent="center">
+        <NavButton
+          iconName={SSCIconNames.longArrowLeft}
+          isDisabled={!canPreviousPage}
+          label="previous page"
+          onClick={() => previousPage()}
+        />
+        {pageCount <= MAX_PAGE_BUTTONS ? (
+          pages.map((page) => {
             return (
               <PageButton
                 key={page}
@@ -131,35 +142,59 @@ const Pagination: React.FC<PaginationProps> = ({
                 {page}
               </PageButton>
             );
-          })}
-          {isLastEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-          <PageButton
-            isActive={pageIndex === pageCount - 1}
-            onClick={() => gotoPage(pageCount - 1)}
-          >
-            {pageCount}
-          </PageButton>
-        </>
-      )}
-      <NavButton
-        iconName={SSCIconNames.longArrowRight}
-        isDisabled={!canNextPage}
-        label="forwardOnePage"
-        onClick={() => nextPage()}
-      />
-      <input
-        defaultValue={pageIndex + 1}
-        type="number"
-        onChange={(event) => {
-          onChangePageNumber(event);
-        }}
-      />
+          })
+        ) : (
+          <>
+            <PageButton isActive={pageIndex === 0} onClick={() => gotoPage(0)}>
+              1
+            </PageButton>
+            {isFirstEllipsisVisible && <Ellipsis> ... </Ellipsis>}
+            {visiblePageButtons.map((page) => {
+              return (
+                <PageButton
+                  key={page}
+                  isActive={pageIndex + 1 === page}
+                  onClick={() => gotoPage(page - 1)}
+                >
+                  {page}
+                </PageButton>
+              );
+            })}
+            {isLastEllipsisVisible && <Ellipsis> ... </Ellipsis>}
+            <PageButton
+              isActive={pageIndex === pageCount - 1}
+              onClick={() => gotoPage(pageCount - 1)}
+            >
+              {pageCount}
+            </PageButton>
+          </>
+        )}
+        <NavButton
+          iconName={SSCIconNames.longArrowRight}
+          isDisabled={!canNextPage}
+          label="next page"
+          onClick={() => nextPage()}
+        />
+      </FlexContainer>
+      <FlexContainer alignItems="right" flexShrink={1}>
+        <PageInputLabel> Go to page </PageInputLabel>
+        <PageInput
+          aria-label="Input"
+          isInvalid={isInputPageInvalid}
+          placeholder="#"
+          type="number"
+          onChange={(event) => {
+            onChangePageNumber(event);
+          }}
+        />
+      </FlexContainer>
     </PaginationWrapper>
   );
 };
 
 Pagination.propTypes = {
   pageCount: PropTypes.number.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   canPreviousPage: PropTypes.bool.isRequired,
   canNextPage: PropTypes.bool.isRequired,
   pageIndex: PropTypes.number.isRequired,

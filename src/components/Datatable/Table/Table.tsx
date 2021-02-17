@@ -185,7 +185,6 @@ const Table = <D extends Record<string, unknown>>({
     rows,
     canPreviousPage,
     canNextPage,
-    // pageOptions,
     pageCount,
     gotoPage,
     nextPage,
