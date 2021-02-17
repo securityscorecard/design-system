@@ -19,6 +19,8 @@ export const SSCIconNames = {
   cog: 'cog',
   reorder: 'reorder',
   sitemap: 'sitemap',
+  longArrowLeft: 'long-arrow-left',
+  longArrowRight: 'long-arrow-right',
 } as const;
 
 export const IconTypes = {

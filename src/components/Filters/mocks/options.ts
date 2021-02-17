@@ -208,7 +208,7 @@ export const state: Filter[] = [
     operator: Operators.and,
     field: 'first observed',
     condition: 'after',
-    value: new Date(),
+    value: new Date('2021-02-16T00:00:00Z'),
     isApplied: true,
   },
   {
