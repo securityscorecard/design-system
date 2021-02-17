@@ -23,3 +23,5 @@ export { minus } from './minus';
 export { cog } from './cog';
 export { reorder } from './reorder';
 export { sitemap } from './sitemap';
+export { longArrowLeft } from './longArrowLeft';
+export { longArrowRight } from './longArrowRight';
