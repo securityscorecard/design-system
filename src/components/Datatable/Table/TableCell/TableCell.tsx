@@ -29,9 +29,14 @@ const StyledTableCell = styled.td<{ $isOdd: boolean; $isSelected: boolean }>`
 const TableCell = <D extends Record<string, unknown>>({
   cell,
   isOdd,
+  hasExclusionLogic,
   ...props
 }: TableCellProps<D>): React.ReactElement => (
-  <StyledTableCell $isOdd={isOdd} $isSelected={cell.row.isSelected} {...props}>
+  <StyledTableCell
+    $isOdd={isOdd}
+    $isSelected={hasExclusionLogic ? !cell.row.isSelected : cell.row.isSelected}
+    {...props}
+  >
     {cell.render('Cell')}
   </StyledTableCell>
 );

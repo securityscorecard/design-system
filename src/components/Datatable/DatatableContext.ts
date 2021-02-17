@@ -6,9 +6,11 @@ export interface DatatableContextType<
   D extends Record<string, unknown> = Record<string, unknown>
 > {
   totalLength: number;
+  hasSelection?: boolean;
   selectedLength?: number;
   selectedIds?: string[];
-  setSelectedIds?: React.Dispatch<React.SetStateAction<string[]>>;
+  hasExclusionLogic?: boolean;
+  setHasExclusionLogic?: React.Dispatch<React.SetStateAction<boolean>>;
   defaultHiddenColumns?: IdType<D>[];
   defaultColumnOrder?: IdType<D>[];
 }

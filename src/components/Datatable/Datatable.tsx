@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { mergeRight } from 'ramda';
-import { noop } from 'ramda-adjunct';
+import { isFunction, isNotUndefined, noop } from 'ramda-adjunct';
 
 import { getBorderRadius, getColor } from '../../utils/helpers';
 import { FlexContainer } from '../FlexContainer';
@@ -64,6 +64,8 @@ const Datatable = <D extends Record<string, unknown>>({
   const {
     defaultPageSize,
     rowActions,
+    hasSelection,
+    onSelect,
     ...restTableConfig
   }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
   const {
@@ -73,20 +75,34 @@ const Datatable = <D extends Record<string, unknown>>({
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
 
   useEffect(() => {
     setPageCount(Math.ceil(totalDataSize / defaultPageSize));
   }, [totalDataSize, defaultPageSize]);
+
+  const handleOnSelect = useCallback(
+    (ids, exclude) => {
+      setSelectedIds(ids);
+
+      if (isNotUndefined(onSelect) && isFunction(onSelect)) {
+        onSelect(ids, exclude);
+      }
+    },
+    [onSelect],
+  );
 
   return (
     <DatatableContext.Provider
       value={{
         totalLength: totalDataSize,
         selectedIds,
-        setSelectedIds,
         selectedLength: selectedIds.length,
         defaultHiddenColumns,
         defaultColumnOrder,
+        hasExclusionLogic,
+        setHasExclusionLogic,
+        hasSelection,
       }}
     >
       <StyledDatatable flexDirection="column">
@@ -100,7 +116,12 @@ const Datatable = <D extends Record<string, unknown>>({
         <BatchModule actions={batchActions} />
         <Table<D>
           columns={columns}
-          config={{ defaultPageSize, ...restTableConfig }}
+          config={{
+            hasSelection,
+            onSelect: handleOnSelect,
+            defaultPageSize,
+            ...restTableConfig,
+          }}
           data={data}
           fetchData={onDataFetch}
           isLoading={isDataLoading}

@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -11,7 +17,18 @@ import {
   useTable,
 } from 'react-table';
 import { useSticky } from 'react-table-sticky';
-import { __, always, includes, map, prop, without } from 'ramda';
+import {
+  __,
+  always,
+  append,
+  includes,
+  map,
+  pipe,
+  prop,
+  reduce,
+  uniq,
+  without,
+} from 'ramda';
 import {
   isEmptyArray,
   isNonEmptyArray,
@@ -107,12 +124,20 @@ const Table = <D extends Record<string, unknown>>({
   pageCount: controlledPageCount,
   config,
 }: TableProps<D>): React.ReactElement => {
-  const { onSelect, defaultPageSize, defaultSortBy, hasSelection } = config;
+  const {
+    onSelect,
+    defaultPageSize,
+    defaultSortBy,
+    hasSelection,
+    hasServerSidePagination,
+    hasServerSideSorting,
+  } = config;
   const hasRowActions = isNonEmptyArray(rowActions);
   const {
-    setSelectedIds,
     defaultHiddenColumns,
     defaultColumnOrder,
+    hasExclusionLogic,
+    totalLength,
   } = useDatatable();
   const [isSticky, setIsSticky] = useState(true);
   const defaultColumn = useMemo(
@@ -122,10 +147,12 @@ const Table = <D extends Record<string, unknown>>({
       maxWidth: 400,
       Cell: RendererText,
       nullCondition: always(false),
+      hasExclusionLogic,
+      totalLength,
     }),
-    [],
+    [hasExclusionLogic, totalLength],
   );
-
+  const handleSelect = useCallback(onSelect, [onSelect]);
   const {
     getTableProps,
     getTableBodyProps,
@@ -140,8 +167,9 @@ const Table = <D extends Record<string, unknown>>({
     nextPage,
     previousPage,
     totalColumnsWidth,
+    toggleAllRowsSelected,
     // Get the state from the instance
-    state: { pageIndex, pageSize, selectedRowIds, sortBy },
+    state: { pageIndex, pageSize, sortBy },
   } = useTable<D>(
     {
       columns,
@@ -156,8 +184,8 @@ const Table = <D extends Record<string, unknown>>({
           hiddenColumns: defaultHiddenColumns,
         }),
       },
-      manualPagination: true, // We will handle pagination by ourselves
-      manualSortBy: true, // sorting is handled backend
+      manualPagination: hasServerSidePagination, // We will handle pagination by ourselves
+      manualSortBy: hasServerSideSorting, // sorting is handled backend
       pageCount: controlledPageCount, // Since we handling pagination we need to pass page count
       autoResetSelectedRows: false, // Do not reset selection when moving to different page
       ...(isNotUndefined(primaryKey) && {
@@ -183,23 +211,49 @@ const Table = <D extends Record<string, unknown>>({
               Header: ({
                 getToggleAllRowsSelectedProps,
                 data: tableData,
+                column,
+                rows: pageRows,
+                state,
               }: HeaderProps<D>): JSX.Element => {
                 if (isEmptyArray(tableData)) {
                   return null;
                 }
+                const selected = Object.keys(state.selectedRowIds);
+                const isIndeterminate =
+                  selected.length > 0 && selected.length < column.totalLength;
+                const pageRowsIds = reduce(
+                  (acc, row) => pipe(prop('id'), append(__, acc))(row),
+                  [],
+                  pageRows,
+                );
                 return (
                   <FlexContainer flexGrow={1} justifyContent="center">
                     <SelectionCheckbox
+                      hasExclusionLogic={column.hasExclusionLogic}
                       id="header-select-all"
+                      isIndeterminate={isIndeterminate}
+                      onSelect={() =>
+                        handleSelect(
+                          uniq([...selected, ...pageRowsIds]),
+                          column.hasExclusionLogic,
+                        )
+                      }
                       {...getToggleAllRowsSelectedProps()}
                     />
                   </FlexContainer>
                 );
               },
-              Cell: ({ row }: CellProps<D>): JSX.Element => (
+              Cell: ({ row, column, state }: CellProps<D>): JSX.Element => (
                 <FlexContainer flexGrow={1} justifyContent="center">
                   <SelectionCheckbox
+                    hasExclusionLogic={column.hasExclusionLogic}
                     id={`select-${row.id}`}
+                    onSelect={() =>
+                      handleSelect(
+                        [...Object.keys(state.selectedRowIds), row.id],
+                        hasExclusionLogic,
+                      )
+                    }
                     {...row.getToggleRowSelectedProps()}
                   />
                 </FlexContainer>
@@ -241,12 +295,9 @@ const Table = <D extends Record<string, unknown>>({
     }
   }, [totalColumnsWidth]);
 
-  // Listen for changes in selection and propage to parent component
   useEffect(() => {
-    const selectedIds = Object.keys(selectedRowIds);
-    onSelect(selectedIds);
-    setSelectedIds(selectedIds);
-  }, [onSelect, setSelectedIds, selectedRowIds]);
+    toggleAllRowsSelected(false);
+  }, [hasExclusionLogic, toggleAllRowsSelected]);
 
   // Listen for changes in pagination and use the state to fetch our new data
   useEffect(() => {
@@ -293,6 +344,7 @@ const Table = <D extends Record<string, unknown>>({
                   return (
                     <TableCell
                       cell={cell}
+                      hasExclusionLogic={hasExclusionLogic}
                       isOdd={isOdd(index)}
                       {...cell.getCellProps({
                         ...(isAnyStickyColumn(cell.column.id) && {

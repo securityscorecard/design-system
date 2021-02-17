@@ -125,6 +125,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       isDisabled = false,
       isInvalid = false,
       isIndeterminate = false,
+      className,
       ...props
     },
     ref,
@@ -132,9 +133,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const hasLabel = allPass([isNotUndefined, isNonEmptyString])(label);
 
     return (
-      <CheckboxWrapper alignItems="center">
+      <CheckboxWrapper alignItems="center" className={className}>
         <CheckboxInput
           ref={ref}
+          className="ds-checkbox-input"
           disabled={isDisabled}
           id={checkboxId}
           isIndeterminate={isIndeterminate}
@@ -143,8 +145,13 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           {...props}
         />
-        <Box alignItems="center" justifyContent="center">
+        <Box
+          alignItems="center"
+          className="ds-checkbox-box"
+          justifyContent="center"
+        >
           <Mark
+            className="ds-checkbox-mark"
             name={isIndeterminate ? SSCIconNames.minus : SSCIconNames.check}
             hasFixedWidth
           />
@@ -161,6 +168,7 @@ Checkbox.propTypes = {
   checkboxId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
+  className: PropTypes.string,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
   isIndeterminate: PropTypes.bool,
