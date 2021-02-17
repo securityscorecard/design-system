@@ -176,7 +176,7 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={() => nextPage()}
         />
       </FlexContainer>
-      <FlexContainer alignItems="right" flexShrink={1}>
+      <FlexContainer alignItems="end" flexShrink={1}>
         <PageInputLabel> Go to page </PageInputLabel>
         <PageInput
           aria-label="Input"
