@@ -12,9 +12,9 @@ export interface PaginationProps {
   pageCount: number;
   canPreviousPage: boolean;
   canNextPage: boolean;
-  pageIndex: boolean;
+  pageIndex: number;
   pageOptions: { length: number };
-  gotoPage: () => void;
+  gotoPage: (number) => void;
   previousPage: () => void;
   nextPage: () => void;
 }
