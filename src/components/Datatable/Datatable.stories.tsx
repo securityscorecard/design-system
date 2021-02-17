@@ -168,7 +168,6 @@ export const Default: Story = () => {
 
   const dispatchFetchData = useCallback(
     ({ pageSize, pageIndex }) => {
-      console.log('dispatchFetchData');
       setIsLoading(true);
       setTimeout(() => {
         // Only update the data if this is the latest fetch
@@ -181,6 +180,13 @@ export const Default: Story = () => {
     },
     [setIsLoading, setTableData],
   );
+  const logSelectedRows = (ids, exclude) => {
+    console.log(
+      `OnSelect called for ids: ${ids} to be ${
+        exclude ? 'excluded' : 'included'
+      }`,
+    );
+  };
 
   return (
     <Grid.Container>
@@ -188,11 +194,15 @@ export const Default: Story = () => {
         <Grid.Col>
           <Datatable<Data>
             columns={columns}
-            controlsConfig={mockControlModuleProps}
+            controlsConfig={{
+              ...mockControlModuleProps,
+              hasColumnVisibility: false,
+            }}
             data={tableData}
             dataPrimaryKey="ipAddress"
             isDataLoading={isLoading}
             tableConfig={{
+              onSelect: logSelectedRows,
               rowActions: [
                 {
                   label: 'Detail',

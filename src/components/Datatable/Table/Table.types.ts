@@ -3,6 +3,11 @@ import { Column, Row, SortingRule } from 'react-table';
 
 import { Filter } from '../../Filters/Filters.types';
 
+export interface InternalColumnProps {
+  totalLength: number;
+  hasExclusionLogic: boolean;
+}
+
 type BaseRowAction<D> = {
   label: string;
   name: string;
@@ -26,7 +31,7 @@ export type RowAction<D> =
 export type TableConfig<D> = {
   // Row selection section
   hasSelection?: boolean;
-  onSelect?: (selectedIds: string[]) => void;
+  onSelect?: (selectedIds: string[], hasExclusionLogic: boolean) => void;
   // Table pagination section
   hasPagination?: boolean;
   hasServerSidePagination?: boolean;
@@ -56,6 +61,7 @@ export type OnDataFetchFn<D> = ({
 export type PrimaryKey<D extends Record<string, unknown>> =
   | string
   | ((originalRow: D, relativeIndex: number, parent?: Row<D>) => string);
+
 export interface TableProps<D extends Record<string, unknown>> {
   columns: Column<D>[];
   data: D[];
