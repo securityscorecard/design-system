@@ -49,11 +49,7 @@ const Filters: React.FC<FiltersProps> = ({
   useEffect(() => {
     const defaultState = getDefaultState(fields);
 
-    if (equals(filtersValues, defaultState)) {
-      setIsDefaultState(true);
-    } else {
-      setIsDefaultState(false);
-    }
+    setIsDefaultState(equals(filtersValues, defaultState));
   }, [filtersValues, fields]);
 
   useEffect(() => {
