@@ -22,6 +22,6 @@ export interface FilterRowProps extends Filter {
   ) => void;
   onValueChange: (value: string, index: number) => void;
   onRemove: (index: number) => React.MouseEventHandler;
-  isRemoveDisabled: boolean;
+  isDefaultState: boolean;
   isApplied: boolean;
 }

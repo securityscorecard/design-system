@@ -7,7 +7,6 @@ import { IconProps, StateButtonIconHook } from './useStateButton.types';
 const timesIconColor = ColorTypes.graphite2B;
 const checkIconColor = ColorTypes.graphiteB;
 const hoverIconColor = ColorTypes.graphite5H;
-const disabledIconColor = ColorTypes.graphiteHB;
 
 const stateMap = {
   default: {
@@ -18,44 +17,25 @@ const stateMap = {
     iconName: SSCIconNames.check,
     iconColor: checkIconColor,
   },
-  disabled: {
-    iconName: SSCIconNames.times,
-    iconColor: disabledIconColor,
-  },
   hover: {
     iconName: SSCIconNames.times,
     iconColor: hoverIconColor,
   },
 };
 
-const setIconState = (isDisabled, isApplied, setIconProps) => {
-  if (isDisabled) {
-    setIconProps(stateMap.disabled);
-  } else if (isApplied) {
-    setIconProps(stateMap.applied);
-  } else {
-    setIconProps(stateMap.default);
-  }
-};
-
-export const useStateButtonIcon = (
-  isApplied: boolean,
-  isDisabled: boolean,
-): StateButtonIconHook => {
+export const useStateButtonIcon = (isApplied: boolean): StateButtonIconHook => {
   const [iconProps, setIconProps] = useState<IconProps>(stateMap.default);
 
   useEffect(() => {
-    setIconState(isDisabled, isApplied, setIconProps);
-  }, [isApplied, isDisabled]);
+    setIconProps(isApplied ? stateMap.applied : stateMap.default);
+  }, [isApplied]);
 
   const handleMouseOut = () => {
-    setIconState(isDisabled, isApplied, setIconProps);
+    setIconProps(isApplied ? stateMap.applied : stateMap.default);
   };
 
   const handleMouseOver = () => {
-    if (!isDisabled) {
-      setIconProps(stateMap.hover);
-    }
+    setIconProps(stateMap.hover);
   };
 
   return { handleMouseOut, handleMouseOver, ...iconProps };

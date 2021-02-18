@@ -43,16 +43,13 @@ const Filters: React.FC<FiltersProps> = ({
   isLoading = false,
 }) => {
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(state);
-  const [isRemoveDisabled, setRemoveDisabled] = useState(false);
+  const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
 
   useEffect(() => {
     const defaultState = getDefaultState(fields);
-    if (equals(filtersValues, defaultState)) {
-      setRemoveDisabled(true);
-    } else {
-      setRemoveDisabled(false);
-    }
+
+    setIsDefaultState(equals(filtersValues, defaultState));
   }, [filtersValues, fields]);
 
   useEffect(() => {
@@ -107,7 +104,7 @@ const Filters: React.FC<FiltersProps> = ({
 
   const handleValueChange = (value, index) => {
     const newFilters = [...filtersValues];
-    newFilters[index].value = value;
+    newFilters[index].value = value || undefined;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
@@ -171,7 +168,7 @@ const Filters: React.FC<FiltersProps> = ({
             key={id}
             fields={fields}
             index={index}
-            isRemoveDisabled={isRemoveDisabled}
+            isDefaultState={isDefaultState}
             onConditionChange={handleConditionChange}
             onFieldChange={handleFieldChange}
             onOperatorChange={handleOperatorChange}
