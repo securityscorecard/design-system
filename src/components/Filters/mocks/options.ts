@@ -6,6 +6,7 @@ import {
   Number,
   Select,
   SingleDatePicker,
+  TagsInput,
 } from '../components';
 import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
@@ -33,6 +34,29 @@ export const fields: Field[] = [
     ],
     value: 'domain',
     label: 'Domain',
+  },
+  {
+    conditions: [
+      { component: TagsInput, value: 'is', label: 'is' },
+      {
+        component: TagsInput,
+        value: 'is not',
+        label: 'is not',
+      },
+      {
+        component: TagsInput,
+        value: 'contains',
+        label: 'contains',
+        isDefault: true,
+      },
+      {
+        component: TagsInput,
+        value: 'does not contain',
+        label: 'does not contain',
+      },
+    ],
+    value: 'ip',
+    label: 'IP address',
   },
   {
     conditions: [
@@ -183,6 +207,12 @@ export const state: Filter[] = [
     field: 'domain',
     condition: 'is not',
     value: 'securityscorecard.io',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'ip',
+    condition: 'contains',
     isApplied: true,
   },
   {

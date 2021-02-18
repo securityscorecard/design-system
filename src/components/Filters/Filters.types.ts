@@ -39,7 +39,7 @@ export interface Filter {
   field: string;
   condition: string;
   isApplied: boolean;
-  value?: string | Date | DateRange;
+  value?: string | string[] | Date | DateRange;
 }
 
 export interface FiltersProps {

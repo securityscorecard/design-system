@@ -233,5 +233,10 @@ FilterRow.propTypes = {
   onConditionChange: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.instanceOf(Date),
+    DateRangePickerPropTypes,
+  ]),
 };
