@@ -59,17 +59,15 @@ const StateButton: React.FC<StateButtonProps> = ({
   index,
   onClick,
   isApplied = false,
-  isDisabled,
 }) => {
   const {
     iconColor,
     iconName,
     handleMouseOut,
     handleMouseOver,
-  } = useStateButtonIcon(isApplied, isDisabled);
+  } = useStateButtonIcon(isApplied);
   return (
     <RemoveButton
-      disabled={isDisabled}
       onClick={onClick(index)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
@@ -80,11 +78,9 @@ const StateButton: React.FC<StateButtonProps> = ({
         type={IconTypes.ssc}
         hasFixedWidth
       />
-      {!isDisabled && (
-        <Popup alignItems="center" justifyContent="center">
-          <LightText>Remove</LightText>
-        </Popup>
-      )}
+      <Popup alignItems="center" justifyContent="center">
+        <LightText>Remove</LightText>
+      </Popup>
     </RemoveButton>
   );
 };
@@ -93,7 +89,6 @@ export default StateButton;
 
 StateButton.propTypes = {
   index: PropTypes.number.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   isApplied: PropTypes.bool,
 };
