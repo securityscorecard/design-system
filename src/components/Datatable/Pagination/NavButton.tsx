@@ -16,10 +16,10 @@ const NavButton: NavButtonProps = styled(IconButton).attrs(
   height: ${pxToRem(32)};
   padding: ${pxToRem(8, 16)};
   margin: ${pxToRem(0, 4)};
-  border-radius: ${pxToRem(3)};
+  border-radius: ${pxToRem(4)};
 
-  background-color: ${({ isDisabled }) =>
-    getColor(isDisabled ? 'transparent' : 'graphite5H')};
+  color: ${({ isDisabled }) =>
+    getColor(isDisabled ? 'graphiteB' : 'graphite2B')};
   background-color: ${({ isDisabled }) =>
     getColor(isDisabled ? 'transparent' : 'graphite5H')};
 

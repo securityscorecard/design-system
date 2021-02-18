@@ -27,6 +27,7 @@ const PageButton = styled(Button)
       getFontWeight(isActive ? 'bold' : 'regular')};
     line-height: ${getLineHeight('lg')};
     cursor: pointer;
+    border-radius: ${pxToRem(4)};
 
     color: ${getColor('graphite4B')} !important;
     background-color: ${({ isActive }) =>

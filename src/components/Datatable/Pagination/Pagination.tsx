@@ -20,6 +20,10 @@ const PaginationWrapper = styled(FlexContainer)`
   padding: ${pxToRem(16)};
 `;
 
+const SpinnerContainer = styled(FlexContainer)`
+  min-width: ${pxToRem(48)};
+`;
+
 const Ellipsis = styled.div`
   display: inline-block;
   width: ${pxToRem(48)};
@@ -112,8 +116,8 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <PaginationWrapper>
-      {isLoading && (
-        <FlexContainer flexShrink={1}>
+      <SpinnerContainer flexShrink={1}>
+        {isLoading && (
           <Spinner
             borderWidth={2}
             height={16}
@@ -122,8 +126,8 @@ const Pagination: React.FC<PaginationProps> = ({
             width={16}
             dark
           />
-        </FlexContainer>
-      )}
+        )}
+      </SpinnerContainer>
       <FlexContainer flexGrow={1} justifyContent="center">
         <NavButton
           iconName={SSCIconNames.longArrowLeft}
