@@ -9,7 +9,7 @@ import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
 import { Label } from '../../forms/Label';
 import { PaginationProps } from './Pagination.types';
-import PageButton from './PageButton';
+import PageButton, { ActivePage } from './PageButton';
 import NavButton from './NavButton';
 import { StyledNumber } from '../../Filters/components/Number/Number';
 
@@ -114,6 +114,16 @@ const Pagination: React.FC<PaginationProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex, pageCount]);
 
+  const renderPageButton = (page) => {
+    return pageIndex === page - 1 ? (
+      <ActivePage>{page}</ActivePage>
+    ) : (
+      <PageButton key={page} onClick={() => gotoPage(page - 1)}>
+        {page}
+      </PageButton>
+    );
+  };
+
   return (
     <PaginationWrapper>
       <SpinnerContainer flexShrink={1}>
@@ -136,41 +146,16 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={() => previousPage()}
         />
         {pageCount <= MAX_PAGE_BUTTONS ? (
-          pages.map((page) => {
-            return (
-              <PageButton
-                key={page}
-                isActive={pageIndex + 1 === page}
-                onClick={() => gotoPage(page - 1)}
-              >
-                {page}
-              </PageButton>
-            );
-          })
+          pages.map((page) => renderPageButton(page))
         ) : (
           <>
-            <PageButton isActive={pageIndex === 0} onClick={() => gotoPage(0)}>
-              1
-            </PageButton>
+            {renderPageButton(1)}
             {isFirstEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-            {visiblePageButtons.map((page) => {
-              return (
-                <PageButton
-                  key={page}
-                  isActive={pageIndex + 1 === page}
-                  onClick={() => gotoPage(page - 1)}
-                >
-                  {page}
-                </PageButton>
-              );
-            })}
+
+            {visiblePageButtons.map((page) => renderPageButton(page))}
+
             {isLastEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-            <PageButton
-              isActive={pageIndex === pageCount - 1}
-              onClick={() => gotoPage(pageCount - 1)}
-            >
-              {pageCount}
-            </PageButton>
+            {renderPageButton(pageCount)}
           </>
         )}
         <NavButton

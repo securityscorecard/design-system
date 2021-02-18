@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import {
   getColor,
@@ -10,43 +9,47 @@ import {
 } from '../../../utils/helpers';
 import { Button } from '../../Button';
 import { ButtonVariants } from '../../Button/Button.enums';
-import { PageButtonProps } from './Pagination.types';
 
-const PageButton = styled(Button)
-  .attrs(() => ({
-    variant: ButtonVariants.text,
-  }))
-  .withConfig<PageButtonProps>({
-    shouldForwardProp: (prop) => prop !== 'isActive',
-  })`
-  & {
+const PageButton = styled(Button).attrs(() => ({
+  variant: ButtonVariants.text,
+}))`
+  &&& {
     display: inline-block;
     text-align: center;
-    font-size: ${({ isActive }) => getFontSize(isActive ? 'lg' : 'md')};
-    font-weight: ${({ isActive }) =>
-      getFontWeight(isActive ? 'bold' : 'regular')};
+    font-size: ${getFontSize('md')};
+    font-weight: ${getFontWeight('regular')};
     line-height: ${getLineHeight('lg')};
-    cursor: pointer;
     border-radius: ${pxToRem(4)};
 
-    color: ${getColor('graphite4B')} !important;
-    background-color: ${({ isActive }) =>
-      getColor(isActive ? 'graphiteH' : 'transparent')};
+    color: ${getColor('graphite4B')};
+    background-color: ${getColor('transparent')};
 
     padding: ${pxToRem(6, 16)};
     margin: ${pxToRem(0, 6)};
     height: ${pxToRem(32)};
 
+    cursor: pointer;
 
-    &:hover {
+    &&:hover {
       background-color: ${getColor('graphite5H')};
+      color: ${getColor('graphite4B')};
       text-decoration: none;
     }
   }
 `;
 
-PageButton.propTypes = {
-  isActive: PropTypes.bool,
-};
+export const ActivePage = styled.div`
+  display: inline-block;
+  text-align: center;
+  font-size: ${getFontSize('lg')};
+  font-weight: ${getFontWeight('bold')};
+  line-height: ${getLineHeight('lg')};
+  border-radius: ${pxToRem(4)};
+  color: ${getColor('graphite4B')};
+  background-color: ${getColor('graphiteH')};
+  padding: ${pxToRem(6, 16)};
+  margin: ${pxToRem(0, 6)};
+  height: ${pxToRem(32)};
+`;
 
 export default PageButton;
