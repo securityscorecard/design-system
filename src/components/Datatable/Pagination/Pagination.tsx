@@ -72,25 +72,18 @@ const Pagination: React.FC<PaginationProps> = ({
 
   useEffect(() => {
     if (pageCount > MAX_PAGE_BUTTONS) {
-      if (pageIndex > MAX_PAGE_BUTTONS - 3) {
-        setIsFirstEllipsisVisible(true);
-      }
-      if (pageIndex <= MAX_PAGE_BUTTONS - 3) {
+      if (pageIndex < MAX_PAGE_BUTTONS - 3) {
         setIsFirstEllipsisVisible(false);
-        if (!visiblePageButtons.includes(pageIndex)) {
-          setVisiblePageButtons([2, 3, 4, 5, 6]);
-        }
-      }
-
-      if (pageIndex < pageCount - MAX_PAGE_BUTTONS + 3) {
         setIsLastEllipsisVisible(true);
-      }
-      if (
-        pageIndex >= MAX_PAGE_BUTTONS - 3 &&
-        pageIndex < pageCount - MAX_PAGE_BUTTONS + 3
-      ) {
+        setVisiblePageButtons([2, 3, 4, 5, 6]);
+      } else if (pageIndex < pageCount - MAX_PAGE_BUTTONS + 3) {
+        setIsFirstEllipsisVisible(true);
         setIsLastEllipsisVisible(true);
-        if (!visiblePageButtons.includes(pageIndex + 1)) {
+        if (
+          !visiblePageButtons.includes(pageIndex + 1) ||
+          pageIndex === MAX_PAGE_BUTTONS - 3 ||
+          pageIndex === pageCount - MAX_PAGE_BUTTONS + 2
+        ) {
           setVisiblePageButtons([
             pageIndex,
             pageIndex + 1,
@@ -98,9 +91,8 @@ const Pagination: React.FC<PaginationProps> = ({
             pageIndex + 3,
           ]);
         }
-      }
-
-      if (pageIndex >= pageCount - MAX_PAGE_BUTTONS + 2) {
+      } else {
+        setIsFirstEllipsisVisible(true);
         setIsLastEllipsisVisible(false);
         setVisiblePageButtons([
           pageCount - 5,
@@ -116,7 +108,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const renderPageButton = (page) => {
     return pageIndex === page - 1 ? (
-      <ActivePage>{page}</ActivePage>
+      <ActivePage key={page}>{page}</ActivePage>
     ) : (
       <PageButton key={page} onClick={() => gotoPage(page - 1)}>
         {page}
@@ -145,15 +137,15 @@ const Pagination: React.FC<PaginationProps> = ({
           label="previous page"
           onClick={() => previousPage()}
         />
-        {pageCount <= MAX_PAGE_BUTTONS ? (
-          pages.map((page) => renderPageButton(page))
-        ) : (
+        {pageCount > MAX_PAGE_BUTTONS && (
           <>
             {renderPageButton(1)}
             {isFirstEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-
-            {visiblePageButtons.map((page) => renderPageButton(page))}
-
+          </>
+        )}
+        {visiblePageButtons.map((page) => renderPageButton(page))}
+        {pageCount > MAX_PAGE_BUTTONS && (
+          <>
             {isLastEllipsisVisible && <Ellipsis> ... </Ellipsis>}
             {renderPageButton(pageCount)}
           </>
