@@ -133,7 +133,7 @@ const Filters: React.FC<FiltersProps> = ({
     setFiltersValues(defaultState);
 
     callOnChange(defaultState);
-    onApply();
+    onApply([]);
   };
 
   const handleApply = () => {

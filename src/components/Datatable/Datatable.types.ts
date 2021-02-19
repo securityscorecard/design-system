@@ -10,6 +10,7 @@ import {
   TableConfig,
 } from './Table/Table.types';
 import { Action } from './types/Action.types';
+import { SpacingProps } from '../../types/spacing.types';
 
 export type CustomColumnProps<D> = {
   nullCondition?: (value: unknown) => boolean;
@@ -20,19 +21,7 @@ export type CustomColumnProps<D> = {
   displayLimit?: number;
 };
 
-export type EnabledFilteringControls = {
-  hasFiltering: true;
-  filtersConfig: Omit<FiltersProps, 'isLoading'>;
-};
-export type DisabledFilteringControls = {
-  hasFiltering: false;
-  filtersConfig?: never;
-};
-
-type FilteringControls = { defaultIsFilteringOpen?: boolean } & (
-  | EnabledFilteringControls
-  | DisabledFilteringControls
-);
+export type FiltersConfig = Omit<FiltersProps, 'isLoading'>;
 
 type ToolsActions = {
   onToolActivate: React.MouseEventHandler;
@@ -65,13 +54,18 @@ export type ControlsConfig<D> = {
   // User Views section
   hasCustomViews?: boolean;
   defaultCustomView?: IdType<D>[];
-} & FilteringControls;
+
+  hasFiltering: boolean;
+  filtersConfig?: FiltersConfig;
+  defaultIsFilteringOpen?: boolean;
+};
 
 export type ExtendedTableConfig<D> = TableConfig<D> & {
   rowActions?: RowAction<D>[];
 };
 
-export interface DatatableProps<D extends Record<string, unknown>> {
+export interface DatatableProps<D extends Record<string, unknown>>
+  extends SpacingProps {
   data: D[];
   totalDataSize: number;
   dataPrimaryKey?: PrimaryKey<D>;
