@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { unfold } from 'ramda';
 
 import { getColor, pxToRem } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
@@ -53,54 +54,37 @@ const Pagination: React.FC<PaginationProps> = ({
   pageIndex,
   isLoading,
 }) => {
-  const pages = Array.from(Array(pageCount), (_, i) => i + 1);
+  const generatePages = (start, end) =>
+    unfold((p) => (p > end ? false : [p, p + 1]), start);
 
-  const [visiblePageButtons, setVisiblePageButtons] = useState(pages);
-  const [isFirstEllipsisVisible, setIsFirstEllipsisVisible] = useState(false);
-  const [isLastEllipsisVisible, setIsLastEllipsisVisible] = useState(false);
+  const ellipsisThershold = MAX_PAGE_BUTTONS - 2;
+
+  const [middlePageButtons, setMiddlePageButtons] = useState(
+    generatePages(2, ellipsisThershold),
+  );
+  const [showFirstEllipsis, setShowFirstEllipsis] = useState(false);
+  const [showLastEllipsis, setShowLastEllipsis] = useState(false);
   const [isInputPageInvalid, setIsInputPageInvalid] = useState(false);
-
-  const onChangePageNumber = (e) => {
-    const pageNumber = Number(e.target.value);
-    if (pageNumber <= pageCount && pageNumber > 0) {
-      setIsInputPageInvalid(false);
-      gotoPage(pageNumber - 1);
-    } else {
-      setIsInputPageInvalid(true);
-    }
-  };
 
   useEffect(() => {
     if (pageCount > MAX_PAGE_BUTTONS) {
-      if (pageIndex < MAX_PAGE_BUTTONS - 3) {
-        setIsFirstEllipsisVisible(false);
-        setIsLastEllipsisVisible(true);
-        setVisiblePageButtons([2, 3, 4, 5, 6]);
-      } else if (pageIndex < pageCount - MAX_PAGE_BUTTONS + 3) {
-        setIsFirstEllipsisVisible(true);
-        setIsLastEllipsisVisible(true);
-        if (
-          !visiblePageButtons.includes(pageIndex + 1) ||
-          pageIndex === MAX_PAGE_BUTTONS - 3 ||
-          pageIndex === pageCount - MAX_PAGE_BUTTONS + 2
-        ) {
-          setVisiblePageButtons([
-            pageIndex,
-            pageIndex + 1,
-            pageIndex + 2,
-            pageIndex + 3,
-          ]);
-        }
-      } else {
-        setIsFirstEllipsisVisible(true);
-        setIsLastEllipsisVisible(false);
-        setVisiblePageButtons([
-          pageCount - 5,
-          pageCount - 4,
-          pageCount - 3,
-          pageCount - 2,
-          pageCount - 1,
-        ]);
+      const currentPage = pageIndex + 1;
+      setShowFirstEllipsis(currentPage > ellipsisThershold - 1);
+      setShowLastEllipsis(currentPage < pageCount - ellipsisThershold + 2);
+
+      if (currentPage < ellipsisThershold) {
+        setMiddlePageButtons(generatePages(2, ellipsisThershold));
+      } else if (currentPage >= pageCount - ellipsisThershold + 2) {
+        setMiddlePageButtons(
+          generatePages(pageCount - ellipsisThershold + 1, pageCount - 1),
+        );
+      } else if (
+        !middlePageButtons.includes(currentPage - 1) ||
+        !middlePageButtons.includes(currentPage + 1)
+      ) {
+        setMiddlePageButtons(
+          generatePages(currentPage - 1, currentPage + ellipsisThershold - 4),
+        );
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,6 +98,16 @@ const Pagination: React.FC<PaginationProps> = ({
         {page}
       </PageButton>
     );
+  };
+
+  const onChangePageNumber = (e) => {
+    const pageNumber = Number(e.target.value);
+    if (pageNumber <= pageCount && pageNumber > 0) {
+      setIsInputPageInvalid(false);
+      gotoPage(pageNumber - 1);
+    } else {
+      setIsInputPageInvalid(true);
+    }
   };
 
   return (
@@ -137,19 +131,14 @@ const Pagination: React.FC<PaginationProps> = ({
           label="previous page"
           onClick={() => previousPage()}
         />
-        {pageCount > MAX_PAGE_BUTTONS && (
-          <>
-            {renderPageButton(1)}
-            {isFirstEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-          </>
-        )}
-        {visiblePageButtons.map((page) => renderPageButton(page))}
-        {pageCount > MAX_PAGE_BUTTONS && (
-          <>
-            {isLastEllipsisVisible && <Ellipsis> ... </Ellipsis>}
-            {renderPageButton(pageCount)}
-          </>
-        )}
+        {renderPageButton(1)}
+        {showFirstEllipsis && <Ellipsis> ... </Ellipsis>}
+
+        {middlePageButtons.map((page) => renderPageButton(page))}
+
+        {showLastEllipsis && <Ellipsis> ... </Ellipsis>}
+        {renderPageButton(pageCount)}
+
         <NavButton
           iconName={SSCIconNames.longArrowRight}
           isDisabled={!canNextPage}
