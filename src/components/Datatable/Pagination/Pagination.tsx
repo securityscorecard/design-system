@@ -67,11 +67,10 @@ const Pagination: React.FC<PaginationProps> = ({
   numPageButtons = 8,
 }) => {
   const currentPage = pageIndex + 1;
+  const threshold = numPageButtons - 3;
 
   const showLeftEllipsis = currentPage > numPageButtons - 3;
   const showRightEllipsis = currentPage < pageCount - (numPageButtons - 4);
-
-  const threshold = numPageButtons - 3;
 
   const startPage =
     currentPage <= threshold
@@ -116,15 +115,21 @@ const Pagination: React.FC<PaginationProps> = ({
           label="previous page"
           onClick={() => onPreviousPage()}
         />
-        {renderPageButton(1, currentPage, onGoToPage)}
-        {showLeftEllipsis && <Ellipsis> ... </Ellipsis>}
-
-        {middlePageButtons.map((page) =>
-          renderPageButton(page, currentPage, onGoToPage),
+        {pageCount <= numPageButtons ? (
+          generatePages(1, pageCount).map((page) =>
+            renderPageButton(page, currentPage, onGoToPage),
+          )
+        ) : (
+          <>
+            {renderPageButton(1, currentPage, onGoToPage)}
+            {showLeftEllipsis && <Ellipsis> ... </Ellipsis>}
+            {middlePageButtons.map((page) =>
+              renderPageButton(page, currentPage, onGoToPage),
+            )}
+            {showRightEllipsis && <Ellipsis> ... </Ellipsis>}
+            {renderPageButton(pageCount, currentPage, onGoToPage)}
+          </>
         )}
-
-        {showRightEllipsis && <Ellipsis> ... </Ellipsis>}
-        {renderPageButton(pageCount, currentPage, onGoToPage)}
 
         <NavButton
           iconName={SSCIconNames.longArrowRight}
