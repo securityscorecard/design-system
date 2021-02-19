@@ -1,5 +1,5 @@
 /* eslint-disable react/boolean-prop-naming */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { unfold } from 'ramda';
@@ -13,8 +13,6 @@ import { PaginationProps } from './Pagination.types';
 import PageButton, { ActivePage } from './PageButton';
 import NavButton from './NavButton';
 import { StyledNumber } from '../../Filters/components/Number/Number';
-
-const MAX_PAGE_BUTTONS = 8;
 
 const PaginationWrapper = styled(FlexContainer)`
   background-color: ${getColor('graphite3H')};
@@ -53,45 +51,35 @@ const Pagination: React.FC<PaginationProps> = ({
   canNextPage,
   pageIndex,
   isLoading,
+  numPageButtons = 8,
 }) => {
   const generatePages = (start, end) =>
     unfold((p) => (p > end ? false : [p, p + 1]), start);
 
-  const ellipsisThershold = MAX_PAGE_BUTTONS - 2;
+  const currentPage = pageIndex + 1;
 
-  const [middlePageButtons, setMiddlePageButtons] = useState(
-    generatePages(2, ellipsisThershold),
-  );
-  const [showFirstEllipsis, setShowFirstEllipsis] = useState(false);
-  const [showLastEllipsis, setShowLastEllipsis] = useState(false);
-  const [isInputPageInvalid, setIsInputPageInvalid] = useState(false);
+  const showLeftEllipsis = currentPage > numPageButtons - 3;
+  const showRightEllipsis = currentPage < pageCount - (numPageButtons - 4);
 
-  useEffect(() => {
-    if (pageCount > MAX_PAGE_BUTTONS) {
-      const currentPage = pageIndex + 1;
-      setShowFirstEllipsis(currentPage > ellipsisThershold - 1);
-      setShowLastEllipsis(currentPage < pageCount - ellipsisThershold + 2);
+  const threshold = numPageButtons - 3;
 
-      if (currentPage < ellipsisThershold) {
-        setMiddlePageButtons(generatePages(2, ellipsisThershold));
-      } else if (currentPage >= pageCount - ellipsisThershold + 2) {
-        setMiddlePageButtons(
-          generatePages(pageCount - ellipsisThershold + 1, pageCount - 1),
-        );
-      } else if (
-        !middlePageButtons.includes(currentPage - 1) ||
-        !middlePageButtons.includes(currentPage + 1)
-      ) {
-        setMiddlePageButtons(
-          generatePages(currentPage - 1, currentPage + ellipsisThershold - 4),
-        );
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageIndex, pageCount]);
+  const startPage =
+    currentPage <= threshold
+      ? 2
+      : currentPage > pageCount - threshold
+      ? pageCount - threshold
+      : currentPage - Math.ceil((numPageButtons - 4 - 1) / 2);
+  const endPage =
+    currentPage <= threshold
+      ? numPageButtons - 2
+      : currentPage > pageCount - threshold
+      ? pageCount - 1
+      : currentPage + Math.floor((numPageButtons - 4 - 1) / 2);
+
+  const middlePageButtons = generatePages(startPage, endPage);
 
   const renderPageButton = (page) => {
-    return pageIndex === page - 1 ? (
+    return currentPage === page ? (
       <ActivePage key={page}>{page}</ActivePage>
     ) : (
       <PageButton key={page} onClick={() => onGoToPage(page - 1)}>
@@ -103,10 +91,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const onChangePageNumber = (e) => {
     const pageNumber = Number(e.target.value);
     if (pageNumber <= pageCount && pageNumber > 0) {
-      setIsInputPageInvalid(false);
       onGoToPage(pageNumber - 1);
-    } else {
-      setIsInputPageInvalid(true);
     }
   };
 
@@ -132,11 +117,11 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={() => onPreviousPage()}
         />
         {renderPageButton(1)}
-        {showFirstEllipsis && <Ellipsis> ... </Ellipsis>}
+        {showLeftEllipsis && <Ellipsis> ... </Ellipsis>}
 
         {middlePageButtons.map((page) => renderPageButton(page))}
 
-        {showLastEllipsis && <Ellipsis> ... </Ellipsis>}
+        {showRightEllipsis && <Ellipsis> ... </Ellipsis>}
         {renderPageButton(pageCount)}
 
         <NavButton
@@ -150,7 +135,6 @@ const Pagination: React.FC<PaginationProps> = ({
         <PageInputLabel> Go to page </PageInputLabel>
         <PageInput
           aria-label="Input"
-          isInvalid={isInputPageInvalid}
           placeholder="#"
           type="number"
           onChange={(event) => {
@@ -171,6 +155,7 @@ Pagination.propTypes = {
   onGoToPage: PropTypes.func.isRequired,
   onPreviousPage: PropTypes.func.isRequired,
   onNextPage: PropTypes.func.isRequired,
+  numPageButtons: PropTypes.number,
 };
 
 export default Pagination;

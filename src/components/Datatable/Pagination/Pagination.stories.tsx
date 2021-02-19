@@ -39,6 +39,7 @@ export const Default: Story<PaginationProps> = ({ ...args }) => {
       canNextPage={canNextPage}
       canPreviousPage={canPreviousPage}
       isLoading={isLoading}
+      numPageButtons={args.numPageButtons}
       pageCount={mockPageCount}
       pageIndex={mockPageIndex}
       onGoToPage={onGoToPage}
@@ -51,9 +52,11 @@ export const Default: Story<PaginationProps> = ({ ...args }) => {
 Default.args = {
   isLoading: false,
   pageCount: 20,
+  numPageButtons: 8,
 };
 
 Default.argTypes = {
   isLoading: { control: 'boolean' },
   pageCount: { type: 'number' },
+  numPageButtons: { type: 'number' },
 };

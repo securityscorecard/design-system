@@ -5,6 +5,7 @@ export interface NavButtonProps extends IconButtonProps {
 }
 export interface PaginationProps {
   pageCount: number;
+  numPageButtons: number;
   isLoading: boolean;
   canPreviousPage: boolean;
   canNextPage: boolean;
