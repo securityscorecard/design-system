@@ -1,11 +1,11 @@
 import { IconButtonProps } from '../../IconButton/IconButton.types';
 
 export interface NavButtonProps extends IconButtonProps {
-  isDisabled?: boolean;
+  isDisabled: boolean;
 }
 export interface PaginationProps {
   pageCount: number;
-  numPageButtons: number;
+  numPageButtons?: number;
   isLoading: boolean;
   canPreviousPage: boolean;
   canNextPage: boolean;

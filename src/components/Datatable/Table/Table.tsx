@@ -393,7 +393,6 @@ const Table = <D extends Record<string, unknown>>({
         canNextPage={canNextPage}
         canPreviousPage={canPreviousPage}
         isLoading={isLoading}
-        numPageButtons={8}
         pageCount={pageCount}
         pageIndex={pageIndex}
         onGoToPage={gotoPage}

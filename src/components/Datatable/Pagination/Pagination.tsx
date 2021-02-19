@@ -42,6 +42,19 @@ const PageInput = styled(StyledNumber)`
   padding: ${pxToRem(8, 16)};
 `;
 
+const generatePages = (start, end) =>
+  unfold((p) => (p > end ? false : [p, p + 1]), start);
+
+const renderPageButton = (page, currentPage, onGoToPage) => {
+  return currentPage === page ? (
+    <ActivePage key={page}>{page}</ActivePage>
+  ) : (
+    <PageButton key={page} onClick={() => onGoToPage(page - 1)}>
+      {page}
+    </PageButton>
+  );
+};
+
 const Pagination: React.FC<PaginationProps> = ({
   onGoToPage,
   onPreviousPage,
@@ -53,9 +66,6 @@ const Pagination: React.FC<PaginationProps> = ({
   isLoading,
   numPageButtons = 8,
 }) => {
-  const generatePages = (start, end) =>
-    unfold((p) => (p > end ? false : [p, p + 1]), start);
-
   const currentPage = pageIndex + 1;
 
   const showLeftEllipsis = currentPage > numPageButtons - 3;
@@ -77,16 +87,6 @@ const Pagination: React.FC<PaginationProps> = ({
       : currentPage + Math.floor((numPageButtons - 4 - 1) / 2);
 
   const middlePageButtons = generatePages(startPage, endPage);
-
-  const renderPageButton = (page) => {
-    return currentPage === page ? (
-      <ActivePage key={page}>{page}</ActivePage>
-    ) : (
-      <PageButton key={page} onClick={() => onGoToPage(page - 1)}>
-        {page}
-      </PageButton>
-    );
-  };
 
   const onChangePageNumber = (e) => {
     const pageNumber = Number(e.target.value);
@@ -116,13 +116,15 @@ const Pagination: React.FC<PaginationProps> = ({
           label="previous page"
           onClick={() => onPreviousPage()}
         />
-        {renderPageButton(1)}
+        {renderPageButton(1, currentPage, onGoToPage)}
         {showLeftEllipsis && <Ellipsis> ... </Ellipsis>}
 
-        {middlePageButtons.map((page) => renderPageButton(page))}
+        {middlePageButtons.map((page) =>
+          renderPageButton(page, currentPage, onGoToPage),
+        )}
 
         {showRightEllipsis && <Ellipsis> ... </Ellipsis>}
-        {renderPageButton(pageCount)}
+        {renderPageButton(pageCount, currentPage, onGoToPage)}
 
         <NavButton
           iconName={SSCIconNames.longArrowRight}
@@ -134,7 +136,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <FlexContainer alignItems="end" flexShrink={1}>
         <PageInputLabel> Go to page </PageInputLabel>
         <PageInput
-          aria-label="Input"
+          aria-label="Go to Page #"
           placeholder="#"
           type="number"
           onChange={(event) => {

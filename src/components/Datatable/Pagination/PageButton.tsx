@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import {
+  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
@@ -19,7 +20,7 @@ const PageButton = styled(Button).attrs(() => ({
     font-size: ${getFontSize('md')};
     font-weight: ${getFontWeight('regular')};
     line-height: ${getLineHeight('lg')};
-    border-radius: ${pxToRem(4)};
+    border-radius: ${getBorderRadius};
 
     color: ${getColor('graphite4B')};
     background-color: ${getColor('transparent')};
@@ -44,7 +45,7 @@ export const ActivePage = styled.div`
   font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('bold')};
   line-height: ${getLineHeight('lg')};
-  border-radius: ${pxToRem(4)};
+  border-radius: ${getBorderRadius};
   color: ${getColor('graphite4B')};
   background-color: ${getColor('graphiteH')};
   padding: ${pxToRem(6, 16)};
