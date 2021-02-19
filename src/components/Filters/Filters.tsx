@@ -59,9 +59,9 @@ const Filters: React.FC<FiltersProps> = ({
     setHasUnappliedFilters(someApplied && someUnapplied);
   }, [filtersValues]);
 
-  const callOnChange = () => {
+  const callOnChange = (newFilters) => {
     if (typeof onChange === 'function') {
-      onChange(filtersValues);
+      onChange(newFilters);
     }
   };
 
@@ -74,7 +74,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   const handleFieldChange = (field, condition, value, index) => {
@@ -86,7 +86,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   const handleConditionChange = (condition, index, areComponentsEqual) => {
@@ -99,7 +99,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   const handleValueChange = (value, index) => {
@@ -109,7 +109,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   const handleAddRow = () => {
@@ -121,18 +121,19 @@ const Filters: React.FC<FiltersProps> = ({
       value: undefined,
       isApplied: false,
     };
+    const filtersWithNewRow = [...newFilters, newRow];
+    setFiltersValues(filtersWithNewRow);
 
-    setFiltersValues([...newFilters, newRow]);
-
-    callOnChange();
+    callOnChange(filtersWithNewRow);
   };
 
   const handleClearAll = () => {
-    const newRow = getDefaultState(fields);
+    const defaultState = getDefaultState(fields);
 
-    setFiltersValues(newRow);
+    setFiltersValues(defaultState);
 
-    callOnChange();
+    callOnChange(defaultState);
+    onApply();
   };
 
   const handleApply = () => {
@@ -156,7 +157,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   return (
