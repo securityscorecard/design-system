@@ -45,7 +45,7 @@ export interface Filter {
 export interface FiltersProps {
   fields: Field[];
   state?: Filter[];
-  onApply: (filters?: Filter[]) => void;
+  onApply: (filters: Filter[]) => void;
   onClose: () => void;
   onCancel: () => void;
   onChange?: (filters: Filter[]) => void;

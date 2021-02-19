@@ -18,9 +18,10 @@ import {
   RendererTimeFromNow,
 } from './Table/TableCell/renderers';
 import { TextSizes, TextVariants } from '../typography/Text/Text.enums';
-import { Text } from '../typography';
+import { Paragraph, Text } from '../typography';
 import { LinkCellRendererProps } from './Table/TableCell/renderers/renderers.types';
 import { mockControlModuleProps } from './mocks/controlModule';
+import { state } from '../Filters/mocks/options';
 
 export default {
   title: 'components/Datatable',
@@ -219,3 +220,88 @@ export const Default: Story = () => {
     </Grid.Container>
   );
 };
+
+export const NoData: Story = () => (
+  <Grid.Container>
+    <Grid.Row>
+      <Grid.Col>
+        <Datatable<Data>
+          columns={columns}
+          controlsConfig={{
+            ...mockControlModuleProps,
+            hasColumnVisibility: false,
+          }}
+          data={[]}
+          totalDataSize={0}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  </Grid.Container>
+);
+
+export const NoMatchingData: Story = () => (
+  <Grid.Container>
+    <Grid.Row>
+      <Grid.Col>
+        <Datatable<Data>
+          columns={columns}
+          controlsConfig={{
+            ...mockControlModuleProps,
+            hasColumnVisibility: false,
+            filtersConfig: {
+              ...mockControlModuleProps.filtersConfig,
+              state: [{ ...state[0], isApplied: true }],
+            },
+            defaultIsFilteringOpen: true,
+          }}
+          data={[]}
+          totalDataSize={0}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  </Grid.Container>
+);
+
+const CustomNoData = () => <Paragraph>We don&apos;t have any data</Paragraph>;
+const CustomNoMatchingData = () => (
+  <Paragraph>We don&apos;t have any data matching filters</Paragraph>
+);
+
+export const CustomNoDataComponents: Story = () => (
+  <Grid.Container>
+    <Grid.Row>
+      <Grid.Col>
+        <Datatable<Data>
+          columns={columns}
+          controlsConfig={{
+            ...mockControlModuleProps,
+            hasColumnVisibility: false,
+          }}
+          data={[]}
+          margin={{ bottom: 1 }}
+          tableConfig={{
+            NoDataComponent: CustomNoData,
+          }}
+          totalDataSize={0}
+        />
+        <Datatable<Data>
+          columns={columns}
+          controlsConfig={{
+            ...mockControlModuleProps,
+            hasColumnVisibility: false,
+            filtersConfig: {
+              ...mockControlModuleProps.filtersConfig,
+              state: [{ ...state[0], isApplied: true }],
+            },
+            defaultIsFilteringOpen: true,
+          }}
+          data={[]}
+          tableConfig={{
+            NoMatchingDataComponent: CustomNoMatchingData,
+          }}
+          totalDataSize={0}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  </Grid.Container>
+);

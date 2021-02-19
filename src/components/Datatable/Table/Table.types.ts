@@ -40,14 +40,16 @@ export type TableConfig<D> = {
   hasSorting?: boolean;
   hasServerSideSorting?: boolean;
   defaultSortBy?: SortingRule<D>[];
+  NoDataComponent?: () => JSX.Element;
+  NoMatchingDataComponent?: () => JSX.Element;
 };
 
 type OnDataFetchArgs<D> = {
   pageIndex: number;
   pageSize: number;
-  sortBy: SortingRule<D>[];
-  filters: Omit<Filter, 'isApplied'>[];
-  query: string;
+  sortBy?: SortingRule<D>[];
+  filters?: Omit<Filter, 'isApplied'>[];
+  query?: string;
 };
 
 export type OnDataFetchFn<D> = ({
@@ -71,4 +73,5 @@ export interface TableProps<D extends Record<string, unknown>> {
   pageCount: number;
   rowActions: RowAction<D>[];
   config: TableConfig<D>;
+  hasAppliedFilters?: boolean;
 }

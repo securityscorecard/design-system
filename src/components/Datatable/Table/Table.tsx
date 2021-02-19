@@ -37,7 +37,7 @@ import {
   isString,
 } from 'ramda-adjunct';
 
-import { getColor } from '../../../utils/helpers';
+import { getColor, pxToRem } from '../../../utils/helpers';
 import { IconButton } from '../../IconButton';
 import { FlexContainer } from '../../FlexContainer';
 import { useDatatable } from '../hooks/useDatatable';
@@ -49,6 +49,7 @@ import { TableHeadCell } from './TableHeadCell';
 import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
 import { SelectionCheckbox } from './SelectionCheckbox';
+import { NoData, NoMatchingData } from './NoData';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -106,6 +107,13 @@ const StyledTableBody = styled.tbody<{ isSticky: boolean }>`
     `};
 `;
 
+const NoDataContainer = styled(FlexContainer).attrs(() => ({
+  flexDirection: 'column',
+}))`
+  background: ${getColor('graphite5H')};
+  padding: ${pxToRem(64)};
+`;
+
 const SELECTION_COLUMN_ID = 'selection';
 const ACTIONS_COLUMN_ID = 'actions';
 
@@ -114,15 +122,28 @@ const isAnyStickyColumn = includes(__, [
   ACTIONS_COLUMN_ID,
 ]);
 
+const renderNoDataContent = (NoDataComponent) => {
+  if (isNotUndefined(NoDataComponent)) return <NoDataComponent />;
+
+  return <NoData />;
+};
+const renderNoMatchingDataContent = (NoMatchingDataComponent) => {
+  if (isNotUndefined(NoMatchingDataComponent))
+    return <NoMatchingDataComponent />;
+
+  return <NoMatchingData />;
+};
+
 const Table = <D extends Record<string, unknown>>({
   columns,
   data,
   fetchData,
-  isLoading,
+  // isLoading,
   primaryKey,
   rowActions,
   pageCount: controlledPageCount,
   config,
+  hasAppliedFilters,
 }: TableProps<D>): React.ReactElement => {
   const {
     onSelect,
@@ -131,6 +152,8 @@ const Table = <D extends Record<string, unknown>>({
     hasSelection,
     hasServerSidePagination,
     hasServerSideSorting,
+    NoDataComponent,
+    NoMatchingDataComponent,
   } = config;
   const hasRowActions = isNonEmptyArray(rowActions);
   const {
@@ -357,19 +380,16 @@ const Table = <D extends Record<string, unknown>>({
               </TableRow>
             );
           })}
-          <tr>
-            {isLoading ? (
-              // TODO: replace this with nicer loading state
-              <td colSpan={10000}>Loading...</td>
-            ) : (
-              <td colSpan={10000}>
-                Showing {rows.length} of ~{controlledPageCount * pageSize}{' '}
-                results
-              </td>
-            )}
-          </tr>
         </StyledTableBody>
       </StyledTable>
+      {totalLength === 0 && (
+        <NoDataContainer>
+          {hasAppliedFilters
+            ? renderNoMatchingDataContent(NoMatchingDataComponent)
+            : renderNoDataContent(NoDataComponent)}
+        </NoDataContainer>
+      )}
+
       <div className="pagination">
         <button
           disabled={!canPreviousPage}
