@@ -139,7 +139,7 @@ const Table = <D extends Record<string, unknown>>({
   columns,
   data,
   fetchData,
-  // isLoading,
+  isLoading,
   primaryKey,
   rowActions,
   pageCount: controlledPageCount,
@@ -382,23 +382,24 @@ const Table = <D extends Record<string, unknown>>({
           })}
         </StyledTableBody>
       </StyledTable>
-      {totalLength === 0 && (
+      {totalLength === 0 ? (
         <NoDataContainer>
           {hasAppliedFilters
             ? renderNoMatchingDataContent(NoMatchingDataComponent)
             : renderNoDataContent(NoDataComponent)}
         </NoDataContainer>
+      ) : (
+        <Pagination
+          canNextPage={canNextPage}
+          canPreviousPage={canPreviousPage}
+          isLoading={isLoading}
+          pageCount={pageCount}
+          pageIndex={pageIndex}
+          onGoToPage={gotoPage}
+          onNextPage={nextPage}
+          onPreviousPage={previousPage}
+        />
       )}
-      <Pagination
-        canNextPage={canNextPage}
-        canPreviousPage={canPreviousPage}
-        isLoading={isLoading}
-        pageCount={pageCount}
-        pageIndex={pageIndex}
-        onGoToPage={gotoPage}
-        onNextPage={nextPage}
-        onPreviousPage={previousPage}
-      />
     </>
   );
 };
