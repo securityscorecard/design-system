@@ -14,13 +14,13 @@ export const Default: Story<PaginationProps> = ({ ...args }) => {
   const [mockPageCount, setMockPageCount] = useState(args.pageCount);
   const [isLoading, setIsLoading] = useState(args.isLoading);
 
-  const gotoPage = (page) => {
+  const onGoToPage = (page) => {
     setMockPageIndex(page);
   };
-  const previousPage = () => {
+  const onPreviousPage = () => {
     setMockPageIndex(mockPageIndex - 1);
   };
-  const nextPage = () => {
+  const onNextPage = () => {
     setMockPageIndex(mockPageIndex + 1);
   };
 
@@ -38,12 +38,12 @@ export const Default: Story<PaginationProps> = ({ ...args }) => {
     <Pagination
       canNextPage={canNextPage}
       canPreviousPage={canPreviousPage}
-      gotoPage={gotoPage}
       isLoading={isLoading}
-      nextPage={nextPage}
       pageCount={mockPageCount}
       pageIndex={mockPageIndex}
-      previousPage={previousPage}
+      onGoToPage={onGoToPage}
+      onNextPage={onNextPage}
+      onPreviousPage={onPreviousPage}
     />
   );
 };

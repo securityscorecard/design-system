@@ -45,9 +45,9 @@ const PageInput = styled(StyledNumber)`
 `;
 
 const Pagination: React.FC<PaginationProps> = ({
-  gotoPage,
-  previousPage,
-  nextPage,
+  onGoToPage,
+  onPreviousPage,
+  onNextPage,
   pageCount,
   canPreviousPage,
   canNextPage,
@@ -94,7 +94,7 @@ const Pagination: React.FC<PaginationProps> = ({
     return pageIndex === page - 1 ? (
       <ActivePage key={page}>{page}</ActivePage>
     ) : (
-      <PageButton key={page} onClick={() => gotoPage(page - 1)}>
+      <PageButton key={page} onClick={() => onGoToPage(page - 1)}>
         {page}
       </PageButton>
     );
@@ -104,7 +104,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const pageNumber = Number(e.target.value);
     if (pageNumber <= pageCount && pageNumber > 0) {
       setIsInputPageInvalid(false);
-      gotoPage(pageNumber - 1);
+      onGoToPage(pageNumber - 1);
     } else {
       setIsInputPageInvalid(true);
     }
@@ -129,7 +129,7 @@ const Pagination: React.FC<PaginationProps> = ({
           iconName={SSCIconNames.longArrowLeft}
           isDisabled={!canPreviousPage}
           label="previous page"
-          onClick={() => previousPage()}
+          onClick={() => onPreviousPage()}
         />
         {renderPageButton(1)}
         {showFirstEllipsis && <Ellipsis> ... </Ellipsis>}
@@ -143,7 +143,7 @@ const Pagination: React.FC<PaginationProps> = ({
           iconName={SSCIconNames.longArrowRight}
           isDisabled={!canNextPage}
           label="next page"
-          onClick={() => nextPage()}
+          onClick={() => onNextPage()}
         />
       </FlexContainer>
       <FlexContainer alignItems="end" flexShrink={1}>
@@ -168,9 +168,9 @@ Pagination.propTypes = {
   canPreviousPage: PropTypes.bool.isRequired,
   canNextPage: PropTypes.bool.isRequired,
   pageIndex: PropTypes.number.isRequired,
-  gotoPage: PropTypes.func.isRequired,
-  previousPage: PropTypes.func.isRequired,
-  nextPage: PropTypes.func.isRequired,
+  onGoToPage: PropTypes.func.isRequired,
+  onPreviousPage: PropTypes.func.isRequired,
+  onNextPage: PropTypes.func.isRequired,
 };
 
 export default Pagination;

@@ -9,7 +9,7 @@ export interface PaginationProps {
   canPreviousPage: boolean;
   canNextPage: boolean;
   pageIndex: number;
-  gotoPage: (number) => void;
-  previousPage: () => void;
-  nextPage: () => void;
+  onGoToPage: (number) => void;
+  onPreviousPage: () => void;
+  onNextPage: () => void;
 }
