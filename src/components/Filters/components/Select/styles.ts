@@ -5,7 +5,7 @@ import { pxToRem } from '../../../../utils/helpers';
 import { theme } from '../../../../theme';
 
 const stateStyles = {
-  padding: `${pxToRem(3, 15)}`,
+  padding: `${pxToRem(0, 15)}`,
   borderWidth: theme.forms.statefulBorderWidth,
   borderStyle: 'solid',
   outline: 'none',
@@ -33,14 +33,14 @@ export const selectStyles: StylesConfig = {
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
-      height: pxToRem(32),
-      padding: `${pxToRem(4, 16)}`,
+      minHeight: pxToRem(32),
+      padding: pxToRem(0, 16),
       background: theme.forms.bgColor,
       border: `${theme.forms.borderWidth} solid ${theme.forms.borderColor}`,
       borderRadius: theme.borderRadius,
       color: theme.forms.color,
-      fontSize: pxToRem(13),
-      lineHeight: pxToRem(15),
+      fontSize: theme.typography.size.md,
+      lineHeight: theme.typography.lineHeight.md,
       ...((isFocused || includes('focus', className)) && focusStyles),
     };
   },
@@ -48,13 +48,13 @@ export const selectStyles: StylesConfig = {
   singleValue: assoc('margin', 0),
   placeholder: () => ({
     color: theme.forms.placeholderColor,
-    fontSize: pxToRem(13),
-    lineHeight: pxToRem(15),
+    fontSize: theme.typography.size.md,
+    lineHeight: theme.typography.lineHeight.md,
   }),
   indicatorSeparator: () => ({ display: 'none' }),
   menuList: () => ({
-    fontSize: pxToRem(13),
-    lineHeight: pxToRem(15),
+    fontSize: theme.typography.size.md,
+    lineHeight: theme.typography.lineHeight.md,
   }),
   dropdownIndicator: () => ({
     ...indicatorStyles,

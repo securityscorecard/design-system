@@ -14,24 +14,21 @@ import {
 } from 'ramda';
 import { isNotEmpty } from 'ramda-adjunct';
 
+import Tag from './Tag';
 import { FlexContainer } from '../../../FlexContainer';
-import { Icon } from '../../../Icon';
 import {
   getBorderRadius,
-  getColor,
   getFontSize,
-  getFontWeight,
   getFormStyle,
   getLineHeight,
   pxToRem,
 } from '../../../../utils/helpers';
-import { ColorTypes } from '../../../../theme/colors.enums';
-import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { TagsInputProps } from './TagsInput.types';
 
 const Container = styled(FlexContainer)`
   width: 100%;
-  padding: ${pxToRem(4, 16, 0, 16)};
+  min-height: ${pxToRem(32)};
+  padding: ${pxToRem(0, 16)};
   background: ${getFormStyle('bgColor')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
@@ -44,7 +41,6 @@ const StyledInput = styled.input`
   border: none;
   width: 100%;
   padding: ${pxToRem(3, 0)};
-  margin-bottom: ${pxToRem(4)};
   color: ${getFormStyle('color')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
@@ -60,7 +56,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const List = styled.ul`
+const Tags = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -69,30 +65,7 @@ const List = styled.ul`
   width: 100%;
 `;
 
-const TagItem = styled.li`
-  display: flex;
-  align-items: center;
-  background: ${getColor('graphite3H')};
-  border-radius: ${getBorderRadius};
-  color: ${getColor('graphite4B')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
-  list-style: none;
-  margin: ${pxToRem(0, 4, 3, 0)};
-  padding: ${pxToRem(4, 8)};
-  font-weight: ${getFontWeight('regular')};
-`;
-
-const RemoveButton = styled.button`
-  display: flex;
-  align-items: center;
-  appearance: none;
-  border: none;
-  cursor: pointer;
-  font-size: ${pxToRem(10)};
-`;
-
-const ItemInput = styled.li`
+const InputContainer = styled.div`
   background: none;
   flex-grow: 1;
   padding: 0;
@@ -130,22 +103,13 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const placeholder = tags.length === 0 ? 'Enter value' : '';
 
   return (
-    <Container flexWrap="wrap">
-      <List>
+    <Container alignItems="center" flexWrap="wrap">
+      <Tags>
         {tags.map((tag, index) => (
-          <TagItem key={tag}>
-            {tag}{' '}
-            <RemoveButton type="button" onClick={() => handleRemoveTag(index)}>
-              <Icon
-                color={ColorTypes.graphite2B}
-                margin={{ left: 0.4 }}
-                name={SSCIconNames.times}
-              />
-            </RemoveButton>
-          </TagItem>
+          <Tag key={tag} value={tag} onClose={() => handleRemoveTag(index)} />
         ))}
 
-        <ItemInput>
+        <InputContainer>
           <StyledInput
             placeholder={placeholder}
             type="text"
@@ -153,8 +117,8 @@ const TagsInput: React.FC<TagsInputProps> = ({
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={handleKeyDown}
           />
-        </ItemInput>
-      </List>
+        </InputContainer>
+      </Tags>
     </Container>
   );
 };
