@@ -9,6 +9,7 @@ type OperatorTypes = typeof Operators[keyof typeof Operators];
 interface ComponentProps {
   options?: Option[];
   defaultValue?: Option;
+  isMulti?: boolean;
   // == Currently not implemented ==
   min?: number;
   max?: number;
@@ -62,6 +63,7 @@ export const FieldPropTypes = PropTypes.exact({
           props: PropTypes.exact({
             options: PropTypes.arrayOf(OptionPropType),
             defaultValue: OptionPropType,
+            isMulti: PropTypes.bool,
             min: PropTypes.number,
             max: PropTypes.number,
             length: PropTypes.number,

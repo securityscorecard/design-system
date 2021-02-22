@@ -2,22 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
+  __,
   curry,
   defaultTo,
   equals,
+  filter,
   find,
   has,
   hasPath,
   head,
   identity,
+  includes,
   map,
   memoizeWith,
   path,
   pipe,
+  pluck,
   prop,
   propEq,
+  when,
 } from 'ramda';
-import { isNotUndefined, isUndefined } from 'ramda-adjunct';
+import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
@@ -84,6 +89,8 @@ const getOperatorOptions = curry((operatorValue) =>
 
 const getFieldOptions = map(normalizeOptions);
 
+const isArrayOfOptionObjects = when(isArray, pipe(head, has('value')));
+
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;
 
@@ -94,16 +101,19 @@ const renderComponent = (Component, value, onChange) => {
   ) {
     const {
       component: SelectComponent,
-      props: { options, defaultValue },
+      props: { options, defaultValue, isMulti },
     } = Component;
 
-    const valueOptions = pipe(
-      find(propEq('value', value)),
-      defaultTo(defaultValue),
-    )(options);
+    const valueOptions = isArray(value)
+      ? pipe(
+          filter(pipe(prop('value'), includes(__, value))),
+          defaultTo(defaultValue),
+        )(options)
+      : pipe(find(propEq('value', value)), defaultTo(defaultValue))(options);
 
     return (
       <SelectComponent
+        isMulti={isMulti}
         options={options}
         placeholder="Category"
         value={valueOptions}
@@ -166,10 +176,21 @@ const FilterRow: React.FC<FilterRowProps> = ({
   };
 
   const handleValueChange = (value) => {
-    if (has('target', value)) {
+    // default value
+    if (isNull(value) && hasPath(['props', 'defaultValue'], component)) {
+      const defaultValue = path(['props', 'defaultValue', 'value'], component);
+      onValueChange(defaultValue, index);
+      // Input, Number, Integer, Count
+    } else if (has('target', value)) {
       onValueChange(value.target.value, index);
+      // Select
     } else if (has('value', value)) {
       onValueChange(value.value, index);
+      // MultiSelect
+    } else if (isArrayOfOptionObjects(value)) {
+      const arrayOfValues = pluck('value', value);
+      onValueChange(arrayOfValues, index);
+      // DataRangePicker, SingleDatePicker, TagsInput
     } else {
       onValueChange(value, index);
     }
