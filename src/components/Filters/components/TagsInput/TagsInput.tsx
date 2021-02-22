@@ -23,14 +23,18 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../../../utils/helpers';
-import { TagsInputProps } from './TagsInput.types';
+import { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 
-const Container = styled(FlexContainer)`
+const Container = styled(FlexContainer)<TagsContainerProps>`
   width: 100%;
   min-height: ${pxToRem(32)};
-  padding: ${pxToRem(0, 16)};
+  padding: ${({ isFocused }) => pxToRem(0, isFocused ? 15 : 16)};
   background: ${getFormStyle('bgColor')};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+  border-width: ${({ isFocused }) =>
+    getFormStyle(isFocused ? 'statefulBorderWidth' : 'borderWidth')};
+  border-style: solid;
+  border-color: ${({ isFocused }) =>
+    getFormStyle(isFocused ? 'focusBorderColor' : 'borderColor')};
   border-radius: ${getBorderRadius};
   color: ${getFormStyle('color')};
   font-size: ${getFontSize('md')};
@@ -79,6 +83,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   onChange,
 }) => {
   const [input, setInput] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleRemoveTag = (index) => {
     const newTags = remove(index, 1, tags);
@@ -103,7 +108,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const placeholder = tags.length === 0 ? 'Enter value' : '';
 
   return (
-    <Container alignItems="center" flexWrap="wrap">
+    <Container alignItems="center" flexWrap="wrap" isFocused={isFocused}>
       <Tags>
         {tags.map((tag, index) => (
           <Tag key={tag} value={tag} onClose={() => handleRemoveTag(index)} />
@@ -114,7 +119,9 @@ const TagsInput: React.FC<TagsInputProps> = ({
             placeholder={placeholder}
             type="text"
             value={input}
+            onBlur={() => setIsFocused(false)}
             onChange={(event) => setInput(event.target.value)}
+            onFocus={() => setIsFocused(true)}
             onKeyDown={handleKeyDown}
           />
         </InputContainer>
