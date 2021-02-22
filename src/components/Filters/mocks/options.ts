@@ -172,6 +172,7 @@ export const fields: Field[] = [
               { value: '3rd party', label: '3rd party' },
             ],
             defaultValue: { value: 'any', label: 'Any' },
+            isMulti: true,
           },
         },
         value: 'contains',
@@ -250,8 +251,15 @@ export const state: Filter[] = [
   {
     operator: Operators.and,
     field: 'detection method',
-    condition: 'is not',
-    value: 'ssc res',
+    condition: 'is',
+    value: 'any',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'detection method',
+    condition: 'contains',
+    value: 'any',
     isApplied: true,
   },
 ];
