@@ -20,7 +20,6 @@ import {
   pluck,
   prop,
   propEq,
-  when,
 } from 'ramda';
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
@@ -89,7 +88,8 @@ const getOperatorOptions = curry((operatorValue) =>
 
 const getFieldOptions = map(normalizeOptions);
 
-const isArrayOfOptionObjects = when(isArray, pipe(head, has('value')));
+const isArrayOfOptionObjects = (value) =>
+  isArray(value) && pipe(head, has('value'))(value);
 
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;
