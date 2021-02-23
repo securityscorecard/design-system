@@ -2,7 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { allPass, any, mergeRight, propEq } from 'ramda';
-import { isFunction, isNotUndefined, lengthGt, noop } from 'ramda-adjunct';
+import {
+  isFunction,
+  isNonEmptyArray,
+  isNotUndefined,
+  lengthGt,
+  noop,
+} from 'ramda-adjunct';
 
 import { getBorderRadius, getColor } from '../../utils/helpers';
 import { Filter } from '../Filters/Filters.types';
@@ -33,24 +39,34 @@ const defaultTableConfig: Partial<ExtendedTableConfig<
   onSelect: noop,
   hasPagination: true,
   hasServerSidePagination: true,
-  defaultPageSize: 10,
+  defaultPageSize: 50,
   hasSorting: true,
   hasServerSideSorting: true,
   defaultSortBy: [],
   rowActions: [],
 };
 
-const defaultControlsConfig: Partial<ControlsConfig<
-  Record<string, unknown>
->> = {
+const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
-  hasColumnVisibility: true,
-  hasColumnOrdering: true,
+  searchConfig: {
+    placeholder: 'Search',
+    onSearch: noop,
+  },
+  hasColumnVisibility: false,
+  hasColumnOrdering: false,
   hasFiltering: true,
+  filtersConfig: {
+    onChange: noop,
+    onApply: noop,
+    onClose: noop,
+    onCancel: noop,
+    state: [],
+    fields: [],
+  },
   defaultIsFilteringOpen: false,
-  hasGrouping: true,
-  hasCustomViews: true,
+  hasGrouping: false,
+  hasCustomViews: false,
 };
 
 const Datatable = <D extends Record<string, unknown>>({
@@ -60,8 +76,8 @@ const Datatable = <D extends Record<string, unknown>>({
   onDataFetch = noop,
   isDataLoading,
   columns,
-  tableConfig = defaultTableConfig as ExtendedTableConfig<D>,
-  controlsConfig = defaultControlsConfig as ControlsConfig<D>,
+  tableConfig = {},
+  controlsConfig = {},
   batchActions = [],
   ...props
 }: DatatableProps<D>): React.ReactElement => {
@@ -73,27 +89,47 @@ const Datatable = <D extends Record<string, unknown>>({
     ...restTableConfig
   }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
   const {
+    isControlsEnabled,
     defaultHiddenColumns,
     defaultColumnOrder,
+    hasFiltering,
     filtersConfig,
     ...restControlsConfig
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
-  const { state: filtersState = [] } = filtersConfig;
-  const { onApply: onFiltersApply } = filtersConfig;
+
+  const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
   const [hasAppliedFilters, setHasAppliedFilters] = useState<boolean>(
     any(propEq('isApplied', true), filtersState),
   );
+  const [appliedFilters, setAppliedFilters] = useState(filtersState);
+
+  const isFilteringEnabled =
+    isNonEmptyArray(filtersConfig.fields) && hasFiltering;
 
   useEffect(() => {
     setPageCount(Math.ceil(totalDataSize / defaultPageSize));
   }, [totalDataSize, defaultPageSize]);
 
+  const handleOnDataFetch = useCallback(
+    (pageIndex, pageSize, sortBy) => {
+      onDataFetch({
+        pageIndex,
+        pageSize,
+        sortBy,
+        filters: appliedFilters,
+        query: '', // TODO: get search query from local state
+      });
+    },
+    [appliedFilters, onDataFetch],
+  );
+
   const handleOnFiltersAppply = useCallback(
     (filters: Filter[]) => {
       setHasAppliedFilters(lengthGt(0, filters));
+      setAppliedFilters(filters);
 
       if (isCallbackDefined(onFiltersApply)) {
         onFiltersApply(filters);
@@ -128,7 +164,7 @@ const Datatable = <D extends Record<string, unknown>>({
       }}
     >
       <StyledDatatable flexDirection="column" {...props}>
-        {controlsConfig.isControlsEnabled && (
+        {isControlsEnabled && (
           <ControlModule<D>
             defaultColumnOrder={defaultColumnOrder}
             defaultHiddenColumns={defaultHiddenColumns}
@@ -136,6 +172,7 @@ const Datatable = <D extends Record<string, unknown>>({
               ...filtersConfig,
               onApply: handleOnFiltersAppply,
             }}
+            hasFiltering={isFilteringEnabled}
             {...restControlsConfig}
           />
         )}
@@ -149,7 +186,7 @@ const Datatable = <D extends Record<string, unknown>>({
             ...restTableConfig,
           }}
           data={data}
-          fetchData={onDataFetch}
+          fetchData={handleOnDataFetch}
           hasAppliedFilters={hasAppliedFilters}
           isLoading={isDataLoading}
           pageCount={pageCount}

@@ -324,13 +324,7 @@ const Table = <D extends Record<string, unknown>>({
 
   // Listen for changes in pagination and use the state to fetch our new data
   useEffect(() => {
-    fetchData({
-      pageIndex,
-      pageSize,
-      sortBy,
-      filters: [], // TODO: get filters state from context
-      query: '', // TODO: get search query from context
-    });
+    fetchData(pageIndex, pageSize, sortBy);
   }, [fetchData, pageIndex, pageSize, sortBy]);
 
   // Render the UI for your table
@@ -393,7 +387,7 @@ const Table = <D extends Record<string, unknown>>({
           canNextPage={canNextPage}
           canPreviousPage={canPreviousPage}
           isLoading={isLoading}
-          pageCount={pageCount}
+          pageCount={pageCount || 0}
           pageIndex={pageIndex}
           onGoToPage={gotoPage}
           onNextPage={nextPage}

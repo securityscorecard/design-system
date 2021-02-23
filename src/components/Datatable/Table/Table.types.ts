@@ -1,8 +1,6 @@
 import { To } from 'history';
 import { Column, Row, SortingRule } from 'react-table';
 
-import { Filter } from '../../Filters/Filters.types';
-
 export interface InternalColumnProps {
   totalLength: number;
   hasExclusionLogic: boolean;
@@ -44,21 +42,12 @@ export type TableConfig<D> = {
   NoMatchingDataComponent?: () => JSX.Element;
 };
 
-type OnDataFetchArgs<D> = {
-  pageIndex: number;
-  pageSize: number;
-  sortBy?: SortingRule<D>[];
-  filters?: Omit<Filter, 'isApplied'>[];
-  query?: string;
-};
-
-export type OnDataFetchFn<D> = ({
-  pageSize,
-  pageIndex,
-  sortBy,
-  filters,
-  query,
-}: OnDataFetchArgs<D>) => void;
+type FetchDataFn<D> = (
+  pageIndex: number,
+  pageSize: number,
+  sortBy?: SortingRule<D>[],
+  query?: string,
+) => void;
 
 export type PrimaryKey<D extends Record<string, unknown>> =
   | string
@@ -67,7 +56,7 @@ export type PrimaryKey<D extends Record<string, unknown>> =
 export interface TableProps<D extends Record<string, unknown>> {
   columns: Column<D>[];
   data: D[];
-  fetchData: OnDataFetchFn<D>;
+  fetchData: FetchDataFn<D>;
   isLoading: boolean;
   primaryKey: PrimaryKey<D>;
   pageCount: number;

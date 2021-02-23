@@ -1,14 +1,9 @@
 import { To } from 'history';
-import { Column, IdType } from 'react-table';
+import { Column, IdType, SortingRule } from 'react-table';
 
 import { SearchBarProps } from '../forms/SearchBar/SearchBar.types';
-import { FiltersProps } from '../Filters/Filters.types';
-import {
-  OnDataFetchFn,
-  PrimaryKey,
-  RowAction,
-  TableConfig,
-} from './Table/Table.types';
+import { Filter, FiltersProps } from '../Filters/Filters.types';
+import { PrimaryKey, RowAction, TableConfig } from './Table/Table.types';
 import { Action } from './types/Action.types';
 import { SpacingProps } from '../../types/spacing.types';
 
@@ -55,7 +50,7 @@ export type ControlsConfig<D> = {
   hasCustomViews?: boolean;
   defaultCustomView?: IdType<D>[];
 
-  hasFiltering: boolean;
+  hasFiltering?: boolean;
   filtersConfig?: FiltersConfig;
   defaultIsFilteringOpen?: boolean;
 };
@@ -63,6 +58,22 @@ export type ControlsConfig<D> = {
 export type ExtendedTableConfig<D> = TableConfig<D> & {
   rowActions?: RowAction<D>[];
 };
+
+type OnDataFetchArgs<D> = {
+  pageIndex: number;
+  pageSize: number;
+  sortBy?: SortingRule<D>[];
+  filters?: Omit<Filter, 'isApplied'>[];
+  query?: string;
+};
+
+export type OnDataFetchFn<D> = ({
+  pageSize,
+  pageIndex,
+  sortBy,
+  filters,
+  query,
+}: OnDataFetchArgs<D>) => void;
 
 export interface DatatableProps<D extends Record<string, unknown>>
   extends SpacingProps {
@@ -73,6 +84,6 @@ export interface DatatableProps<D extends Record<string, unknown>>
   isDataLoading?: boolean;
   columns: Column<D>[];
   tableConfig?: ExtendedTableConfig<D>;
-  controlsConfig: ControlsConfig<D>;
+  controlsConfig?: ControlsConfig<D>;
   batchActions?: Action[];
 }

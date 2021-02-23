@@ -22,8 +22,7 @@ const NavButton = styled(IconButton)<NavButtonProps>`
     !isDisabled &&
     css`
       &:hover {
-        color: ${getColor('graphite3B')};
-        border-color: ${getColor('graphite3B')};
+        background-color: ${getColor('graphite4H')}
         text-decoration: none;
       }
     `}
