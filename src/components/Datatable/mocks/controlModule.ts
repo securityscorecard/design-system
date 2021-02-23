@@ -8,6 +8,7 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
   searchConfig: {
+    hasSuggestions: false,
     placeholder: 'Search for domains or IPs',
     onSearch: createMockOnSearch(action(`click-suggestion`)),
   },

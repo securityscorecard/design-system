@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { noop } from 'ramda-adjunct';
 
 import { InputProps } from './Input.types';
 import {
@@ -42,8 +43,17 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input: React.FC<InputProps> = ({ value = '', onChange }) => (
-  <StyledInput placeholder="String" value={value} onChange={onChange} />
+const Input: React.FC<InputProps> = ({
+  value = '',
+  onChange,
+  onKeyDown = noop,
+}) => (
+  <StyledInput
+    placeholder="String"
+    value={value}
+    onChange={onChange}
+    onKeyDown={onKeyDown}
+  />
 );
 
 export default Input;
@@ -51,4 +61,5 @@ export default Input;
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  onKeyDown: PropTypes.func,
 };

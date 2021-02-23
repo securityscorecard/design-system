@@ -24,18 +24,24 @@ playground.parameters = {
   chromatic: { disable: true },
 };
 playground.argTypes = {
+  hasSuggestions: { control: 'boolean' },
   isDisabled: { control: 'boolean' },
   isInvalid: { control: 'boolean' },
 };
 
-export const DefaultSearchBar: Story = () => (
-  <SearchBar aria-label="SearchBar" {...commonArgs} />
+export const Default: Story = () => (
+  <SearchBar aria-label="SearchBar" hasSuggestions {...commonArgs} />
 );
 
-export const QuickFilterSearchBar: Story = () => (
+export const WithoutSuggestions: Story = () => (
+  <SearchBar aria-label="SearchBar" {...commonArgs} hasSuggestions={false} />
+);
+
+export const QuickFilters: Story = () => (
   <SearchBar
     aria-label="SearchBar"
     renderSearchSuggestion={renderSuggestionFilter}
+    hasSuggestions
     {...commonArgs}
   />
 );
@@ -45,6 +51,7 @@ export const SearchBarActive: Story = () => (
     aria-label="SearchBar"
     defaultValue="search text"
     renderSearchSuggestion={renderSuggestionFilter}
+    hasSuggestions
     {...commonArgs}
   />
 );

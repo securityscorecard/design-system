@@ -13,6 +13,7 @@ const setup = () => {
     <SearchBar
       defaultValue="Searching for Default"
       placeholder="Search for X"
+      hasSuggestions
       onSearch={mockOnSearch}
     />,
   );
