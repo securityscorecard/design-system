@@ -1,3 +1,12 @@
+# [1.0.0-alpha.31](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2021-02-23)
+
+
+### Bug Fixes
+
+* **Datatable:** don't pass query ([0586f38](https://github.com/securityscorecard/design-system/commit/0586f38816739c573ef4a2e637601e36daf4466f))
+* **Datatable:** fix various issues ([8bea997](https://github.com/securityscorecard/design-system/commit/8bea997eb74485cdb86c8dc397f2d28b97d0a4df))
+* **Datatable:** pass filters when paginating ([0a81ab4](https://github.com/securityscorecard/design-system/commit/0a81ab4a6774c1ca91dddf8dcbd8cc9aa787b7af))
+
 # [1.0.0-alpha.30](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2021-02-23)
 
 
