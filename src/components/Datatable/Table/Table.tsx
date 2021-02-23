@@ -324,13 +324,12 @@ const Table = <D extends Record<string, unknown>>({
 
   // Listen for changes in pagination and use the state to fetch our new data
   useEffect(() => {
-    fetchData({
+    fetchData(
       pageIndex,
       pageSize,
       sortBy,
-      filters: [], // TODO: get filters state from context
-      query: '', // TODO: get search query from context
-    });
+      '', // TODO: get search query from context
+    );
   }, [fetchData, pageIndex, pageSize, sortBy]);
 
   // Render the UI for your table
