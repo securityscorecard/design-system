@@ -28,13 +28,14 @@ const PageButton = styled(Button).attrs(() => ({
     padding: ${pxToRem(6, 16)};
     margin: ${pxToRem(0, 6)};
     height: ${pxToRem(32)};
-
+    border: 1px solid transparent;
     cursor: pointer;
 
     &&:hover {
       background-color: ${getColor('graphite5H')};
       color: ${getColor('graphite4B')};
       text-decoration: none;
+      border-color: ${getColor('graphiteHB')};
     }
   }
 `;

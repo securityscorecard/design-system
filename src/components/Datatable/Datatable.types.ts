@@ -50,7 +50,7 @@ export type ControlsConfig<D> = {
   hasCustomViews?: boolean;
   defaultCustomView?: IdType<D>[];
 
-  hasFiltering: boolean;
+  hasFiltering?: boolean;
   filtersConfig?: FiltersConfig;
   defaultIsFilteringOpen?: boolean;
 };
@@ -84,6 +84,6 @@ export interface DatatableProps<D extends Record<string, unknown>>
   isDataLoading?: boolean;
   columns: Column<D>[];
   tableConfig?: ExtendedTableConfig<D>;
-  controlsConfig: ControlsConfig<D>;
+  controlsConfig?: ControlsConfig<D>;
   batchActions?: Action[];
 }
