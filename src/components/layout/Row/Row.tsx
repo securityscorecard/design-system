@@ -16,8 +16,10 @@ const StyledRow = styled(Flex).attrs((props) => ({
   ...props,
 }))``;
 
-const Row: React.FC = ({ children }) => (
-  <StyledRow flexWrap="wrap">{children}</StyledRow>
+const Row: React.FC = ({ children, ...props }) => (
+  <StyledRow flexWrap="wrap" {...props}>
+    {children}
+  </StyledRow>
 );
 
 export default Row;
