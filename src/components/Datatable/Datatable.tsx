@@ -93,13 +93,13 @@ const Datatable = <D extends Record<string, unknown>>({
   }, [totalDataSize, defaultPageSize]);
 
   const handleOnDataFetch = useCallback(
-    (pageIndex, pageSize, sortBy, query) => {
+    (pageIndex, pageSize, sortBy) => {
       onDataFetch({
         pageIndex,
         pageSize,
         sortBy,
         filters: appliedFilters,
-        query,
+        query: '', // TODO: get search query from local state
       });
     },
     [appliedFilters, onDataFetch],
