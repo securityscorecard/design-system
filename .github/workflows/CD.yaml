@@ -148,7 +148,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: storybook-static
-          key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**' ) }}
+          key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
 
       - name: Build Storybook
         if: steps.storybook-build-cache.outputs.cache-hit != 'true'
@@ -226,9 +226,7 @@ jobs:
       - name: Run Lint
         run: yarn lint:css
 
-  build-and-publish:
-    if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
-    needs: [unit-tests, visual-tests, types, lint, lint-css]
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -256,7 +254,56 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: yarn install --frozen-lockfile
 
+    - name: Cache build
+      id: library-build-cache
+      uses: actions/cache@v2
+      with:
+        path: build
+        key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**') }}
+
     - name: Build Step
+      if: steps.library-build-cache.outputs.cache-hit != 'true'
+      run: yarn build
+
+  build-and-publish:
+    if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
+    needs: [unit-tests, visual-tests, types, lint, lint-css, build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@securityscorecard'
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      id: cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-${{ env.cache-name }}-
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
+
+    - name: Install Packages
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
+
+    - name: Cache build
+      id: library-build-cache
+      uses: actions/cache@v2
+      with:
+        path: build
+        key: ${{ hashFiles('build/**' ) }}
+
+    - name: Build Step
+      if: steps.library-build-cache.outputs.cache-hit != 'true'
       run: yarn build
 
     - uses: actions/upload-artifact@v2
