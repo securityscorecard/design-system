@@ -1,3 +1,10 @@
+# [1.0.0-alpha.32](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2021-02-23)
+
+
+### Bug Fixes
+
+* **layout:** pass all props to Col and Row ([beb5aa4](https://github.com/securityscorecard/design-system/commit/beb5aa4184f131b5a6907292786db67464f86f99)), closes [#88](https://github.com/securityscorecard/design-system/issues/88)
+
 # [1.0.0-alpha.31](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2021-02-23)
 
 
