@@ -50,6 +50,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
   searchConfig: {
+    hasSuggestions: false,
     placeholder: 'Search',
     onSearch: noop,
   },
