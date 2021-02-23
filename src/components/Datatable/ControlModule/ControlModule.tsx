@@ -51,43 +51,52 @@ const ControlModule = <D extends Record<string, unknown>>({
     },
   };
 
+  const isToolbarEnabled =
+    hasColumnVisibility ||
+    hasColumnOrdering ||
+    hasFiltering ||
+    hasGrouping ||
+    hasCustomViews;
+
   return (
     <FlexContainer flexDirection="column">
       <FlexContainer
         alignItems="center"
         padding={{ vertical: 0.4, horizontal: 0.8 }}
       >
-        <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
-          {(hasColumnVisibility || hasColumnOrdering) && (
-            <ToolsTabItem
-              iconName={SSCIconNames.reorder}
-              label="Show/Hide"
-              {...columnVisibilityActions}
-            />
-          )}
-          {hasFiltering && (
-            <ToolsTabItem
-              iconName={SSCIconNames.filter}
-              label="Filter"
-              toolState={defaultIsFilteringOpen ? 'active' : 'default'}
-              {...filterToolActions}
-            />
-          )}
-          {hasGrouping && (
-            <ToolsTabItem
-              iconName={SSCIconNames.sitemap}
-              label="Group"
-              {...groupingActions}
-            />
-          )}
-          {hasCustomViews && (
-            <ToolsTabItem
-              iconName={SSCIconNames.cog}
-              label="Views"
-              {...customViewsActions}
-            />
-          )}
-        </FlexContainer>
+        {isToolbarEnabled && (
+          <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
+            {(hasColumnVisibility || hasColumnOrdering) && (
+              <ToolsTabItem
+                iconName={SSCIconNames.reorder}
+                label="Show/Hide"
+                {...columnVisibilityActions}
+              />
+            )}
+            {hasFiltering && (
+              <ToolsTabItem
+                iconName={SSCIconNames.filter}
+                label="Filter"
+                toolState={defaultIsFilteringOpen ? 'active' : 'default'}
+                {...filterToolActions}
+              />
+            )}
+            {hasGrouping && (
+              <ToolsTabItem
+                iconName={SSCIconNames.sitemap}
+                label="Group"
+                {...groupingActions}
+              />
+            )}
+            {hasCustomViews && (
+              <ToolsTabItem
+                iconName={SSCIconNames.cog}
+                label="Views"
+                {...customViewsActions}
+              />
+            )}
+          </FlexContainer>
+        )}
 
         {hasSearch && (
           <FlexContainer flexGrow={1}>
@@ -115,10 +124,10 @@ const toolActionPropType = PropTypes.shape({
 
 ControlModule.propTypes = {
   hasSearch: PropTypes.bool,
-  searchConfig: SearchBar.propTypes,
+  searchConfig: PropTypes.shape(SearchBar.propTypes),
   hasFiltering: PropTypes.bool,
   defaultIsFilteringOpen: PropTypes.bool,
-  filtersConfig: Filters.propTypes,
+  filtersConfig: PropTypes.shape(Filters.propTypes),
   hasColumnVisibility: PropTypes.bool,
   defaultHiddenColumns: PropTypes.arrayOf(PropTypes.shape({})),
   hasColumnOrdering: PropTypes.bool,
