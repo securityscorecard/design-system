@@ -300,7 +300,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: build
-        key: ${{ hashFiles('build/**' ) }}
+        key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**') }}
 
     - name: Build Step
       if: steps.library-build-cache.outputs.cache-hit != 'true'
