@@ -6,22 +6,25 @@ import styled from 'styled-components';
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
-import { DataPointPropTypes, Filter, FiltersProps } from './Filters.types';
-import { DateRangePickerPropTypes } from './inputs/DateRangePicker/DateRangePicker.types';
+import { FieldPropTypes, Filter, FiltersProps } from './Filters.types';
+import { DateRangePickerPropTypes } from './components/DateRangePicker/DateRangePicker.types';
 import { Operators } from './Filters.enums';
 
-const generateId = ({ operator, dataPoint, condition }, index) =>
-  `${operator}-${dataPoint}-${condition}-${index}`;
+const generateId = ({ operator, field, condition }, index) =>
+  `${operator}-${field}-${condition}-${index}`;
 
-const getDefaultCondition = (dataPoints) =>
-  dataPoints[0].conditions.find(({ isDefault }) => isDefault).value;
+const getDefaultCondition = (fields) =>
+  (
+    fields[0].conditions.find(({ isDefault }) => isDefault) ||
+    fields[0].conditions[0]
+  ).value;
 
-const getDefaultData = (dataPoints) => [
+const getDefaultState = (fields) => [
   {
     operator: Operators.and,
-    dataPoint: dataPoints[0].value,
-    condition: getDefaultCondition(dataPoints),
-    input: undefined,
+    field: fields[0].value,
+    condition: getDefaultCondition(fields),
+    value: undefined,
     isApplied: false,
   },
 ];
@@ -31,29 +34,34 @@ const FiltersContainer = styled(FlexContainer)`
 `;
 
 const Filters: React.FC<FiltersProps> = ({
-  dataPoints,
-  data = getDefaultData(dataPoints),
+  fields,
+  state = getDefaultState(fields),
   onApply,
   onChange,
   onClose,
   onCancel,
   isLoading = false,
 }) => {
-  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(data);
-  const [isRemoveDisabled, setRemoveDisabled] = useState(false);
+  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(state);
+  const [isDefaultState, setIsDefaultState] = useState(true);
+  const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
 
   useEffect(() => {
-    const defaultData = getDefaultData(dataPoints);
-    if (equals(filtersValues, defaultData)) {
-      setRemoveDisabled(true);
-    } else {
-      setRemoveDisabled(false);
-    }
-  }, [filtersValues, dataPoints]);
+    const defaultState = getDefaultState(fields);
 
-  const callOnChange = () => {
+    setIsDefaultState(equals(filtersValues, defaultState));
+  }, [filtersValues, fields]);
+
+  useEffect(() => {
+    const someApplied = filtersValues.some(({ isApplied }) => isApplied);
+    const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
+
+    setHasUnappliedFilters(someApplied && someUnapplied);
+  }, [filtersValues]);
+
+  const callOnChange = (newFilters) => {
     if (typeof onChange === 'function') {
-      onChange(filtersValues);
+      onChange(newFilters);
     }
   };
 
@@ -66,75 +74,76 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
-  const handleDataPointChange = (dataPoint, condition, index) => {
+  const handleFieldChange = (field, condition, value, index) => {
     const newFilters = [...filtersValues];
-    newFilters[index].dataPoint = dataPoint;
+    newFilters[index].field = field;
     newFilters[index].condition = condition;
-    newFilters[index].input = undefined;
+    newFilters[index].value = value;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   const handleConditionChange = (condition, index, areComponentsEqual) => {
     const newFilters = [...filtersValues];
     newFilters[index].condition = condition;
     if (!areComponentsEqual) {
-      newFilters[index].input = undefined;
+      newFilters[index].value = undefined;
     }
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
-  const handleInputChange = (input, index) => {
+  const handleValueChange = (value, index) => {
     const newFilters = [...filtersValues];
-    newFilters[index].input = input;
+    newFilters[index].value = value || undefined;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   const handleAddRow = () => {
     const newFilters = [...filtersValues];
     const newRow = {
       operator: newFilters[0].operator,
-      dataPoint: dataPoints[0].value,
-      condition: getDefaultCondition(dataPoints),
-      input: undefined,
+      field: fields[0].value,
+      condition: getDefaultCondition(fields),
+      value: undefined,
       isApplied: false,
     };
+    const filtersWithNewRow = [...newFilters, newRow];
+    setFiltersValues(filtersWithNewRow);
 
-    setFiltersValues([...newFilters, newRow]);
-
-    callOnChange();
+    callOnChange(filtersWithNewRow);
   };
 
   const handleClearAll = () => {
-    const newRow = getDefaultData(dataPoints);
+    const defaultState = getDefaultState(fields);
 
-    setFiltersValues(newRow);
+    setFiltersValues(defaultState);
 
-    callOnChange();
+    callOnChange(defaultState);
+    onApply([]);
   };
 
   const handleApply = () => {
-    const newFilters = filtersValues.map((fields) => ({
-      ...fields,
+    const newFilters = filtersValues.map((filter) => ({
+      ...filter,
       isApplied: true,
     }));
     setFiltersValues(newFilters);
 
-    onApply(filtersValues);
+    onApply(newFilters);
   };
 
   const handleRemoveFilter = (index) => () => {
@@ -143,12 +152,12 @@ const Filters: React.FC<FiltersProps> = ({
       newFilters = [...filtersValues];
       newFilters.splice(index, 1);
     } else {
-      newFilters = getDefaultData(dataPoints);
+      newFilters = getDefaultState(fields);
     }
 
     setFiltersValues(newFilters);
 
-    callOnChange();
+    callOnChange(newFilters);
   };
 
   return (
@@ -158,19 +167,20 @@ const Filters: React.FC<FiltersProps> = ({
         return (
           <FilterRow
             key={id}
-            dataPoints={dataPoints}
+            fields={fields}
             index={index}
-            isRemoveDisabled={isRemoveDisabled}
+            isDefaultState={isDefaultState}
             onConditionChange={handleConditionChange}
-            onDataPointChange={handleDataPointChange}
-            onInputChange={handleInputChange}
+            onFieldChange={handleFieldChange}
             onOperatorChange={handleOperatorChange}
             onRemove={handleRemoveFilter}
+            onValueChange={handleValueChange}
             {...filtersValues[index]}
           />
         );
       })}
       <BottomBar
+        hasUnappliedFilters={hasUnappliedFilters}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onApply={handleApply}
@@ -185,19 +195,23 @@ const Filters: React.FC<FiltersProps> = ({
 export default Filters;
 
 Filters.propTypes = {
-  dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.exact({
-      operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
-      dataPoint: PropTypes.string.isRequired,
-      condition: PropTypes.string.isRequired,
-      input: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
-      isApplied: PropTypes.bool.isRequired,
-    }),
-  ).isRequired,
+  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   onApply: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  state: PropTypes.arrayOf(
+    PropTypes.exact({
+      operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
+      field: PropTypes.string.isRequired,
+      condition: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Date),
+        DateRangePickerPropTypes,
+      ]),
+      isApplied: PropTypes.bool.isRequired,
+    }),
+  ),
   isLoading: PropTypes.bool,
   onChange: PropTypes.func,
 };

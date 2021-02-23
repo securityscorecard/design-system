@@ -16,6 +16,11 @@ export const SSCIconNames = {
   search: 'search',
   filter: 'filter',
   minus: 'minus',
+  cog: 'cog',
+  reorder: 'reorder',
+  sitemap: 'sitemap',
+  longArrowLeft: 'long-arrow-left',
+  longArrowRight: 'long-arrow-right',
 } as const;
 
 export const IconTypes = {

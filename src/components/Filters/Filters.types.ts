@@ -1,32 +1,35 @@
 import PropTypes from 'prop-types';
 
-import { Option, OptionPropType } from './Select/Select.types';
+import { Option, OptionPropType } from './components/Select/Select.types';
 import { Operators } from './Filters.enums';
-import { DateRange } from './inputs/DateRangePicker/DateRangePicker.types';
+import { DateRange } from './components/DateRangePicker/DateRangePicker.types';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
 
-interface InputProps {
+interface ComponentProps {
   options?: Option[];
+  defaultValue?: Option;
+  isMulti?: boolean;
+  // == Currently not implemented ==
   min?: number;
   max?: number;
   length?: number;
   regexp?: string;
 }
 
-interface InputWithProps {
-  type: React.ReactNode;
-  props: InputProps;
+interface ComponentWithProps {
+  component: React.ReactNode;
+  props: ComponentProps;
 }
 
 export interface Condition {
-  input: React.ReactNode | InputWithProps;
+  component: React.ReactNode | ComponentWithProps;
   label: string;
   value: string;
   isDefault?: boolean;
 }
 
-export interface DataPoint {
+export interface Field {
   conditions: Condition[];
   label: string;
   value: string;
@@ -34,15 +37,15 @@ export interface DataPoint {
 
 export interface Filter {
   operator: OperatorTypes;
-  dataPoint: string;
+  field: string;
   condition: string;
   isApplied: boolean;
-  input?: string | DateRange;
+  value?: string | string[] | Date | DateRange;
 }
 
 export interface FiltersProps {
-  dataPoints: DataPoint[];
-  data: Filter[];
+  fields: Field[];
+  state?: Filter[];
   onApply: (filters: Filter[]) => void;
   onClose: () => void;
   onCancel: () => void;
@@ -50,15 +53,17 @@ export interface FiltersProps {
   isLoading?: boolean;
 }
 
-export const DataPointPropTypes = PropTypes.exact({
+export const FieldPropTypes = PropTypes.exact({
   conditions: PropTypes.arrayOf(
     PropTypes.exact({
-      input: PropTypes.oneOfType([
+      component: PropTypes.oneOfType([
         PropTypes.elementType,
         PropTypes.exact({
-          type: PropTypes.elementType,
+          component: PropTypes.elementType,
           props: PropTypes.exact({
             options: PropTypes.arrayOf(OptionPropType),
+            defaultValue: OptionPropType,
+            isMulti: PropTypes.bool,
             min: PropTypes.number,
             max: PropTypes.number,
             length: PropTypes.number,

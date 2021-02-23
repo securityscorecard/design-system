@@ -2,36 +2,39 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
+  __,
+  both,
   curry,
+  defaultTo,
   equals,
+  filter,
   find,
+  has,
+  hasPath,
+  head,
   identity,
+  includes,
   map,
   memoizeWith,
+  path,
   pipe,
+  pluck,
   prop,
   propEq,
 } from 'ramda';
-import { isNotUndefined } from 'ramda-adjunct';
+import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
-import { Select } from '../Select';
+import { Select } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
-import { DataPointPropTypes } from '../Filters.types';
-import { DateRangePickerPropTypes } from '../inputs/DateRangePicker/DateRangePicker.types';
+import { FieldPropTypes } from '../Filters.types';
+import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import operatorOptions from '../data/operator-options.json';
 import { pxToRem } from '../../../utils/helpers';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
-
-const Container = styled(FlexContainer)`
-  margin-bottom: ${pxToRem(8)};
-  &:last-of-type {
-    margin-bottom: ${pxToRem(16)};
-  }
-`;
 
 const SplitField = styled.div<SplitFieldProps>`
   ${({ $width }) =>
@@ -51,94 +54,153 @@ const SplitField = styled.div<SplitFieldProps>`
   }
 `;
 
-const getDataPointConditions = memoizeWith(
-  identity,
-  (dataPointValue, dataPoints) =>
-    pipe(find(propEq('value', dataPointValue)), prop('conditions'))(dataPoints),
+const getFieldConditions = memoizeWith(identity, (fieldValue, fields) =>
+  pipe(find(propEq('value', fieldValue)), prop('conditions'))(fields),
 );
 
-const getDefaultCondition = pipe(
-  getDataPointConditions,
-  find(propEq('isDefault', true)),
-  prop('value'),
-);
+const getDefaultCondition = (fieldValue, fields) => {
+  const fieldConditions = getFieldConditions(fieldValue, fields);
+  const defaultCondition = pipe(
+    find(propEq('isDefault', true)),
+    defaultTo(head(fieldConditions)),
+  )(fieldConditions);
 
-const getConditionInput = curry(
-  (selectedConditionValue, dataPointValue, dataPoints) =>
+  return {
+    defaultConditionValue: prop('value', defaultCondition),
+    defaultComponentValue: path(
+      ['component', 'props', 'value'],
+      defaultCondition,
+    ),
+  };
+};
+
+const getConditionComponent = curry(
+  (selectedConditionValue, fieldValue, fields) =>
     pipe(
-      getDataPointConditions,
+      getFieldConditions,
       find(propEq('value', selectedConditionValue)),
-      prop('input'),
-    )(dataPointValue, dataPoints),
+      prop('component'),
+    )(fieldValue, fields),
 );
 
 const getOperatorOptions = curry((operatorValue) =>
   find(propEq('value', operatorValue))(operatorOptions),
 );
 
-const getDataPointOptions = map(normalizeOptions);
+const getFieldOptions = map(normalizeOptions);
+
+const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
+
+const renderComponent = (Component, value, onChange) => {
+  if (isUndefined(Component)) return null;
+
+  // Select
+  if (
+    typeof Component === 'object' &&
+    hasPath(['props', 'options'], Component)
+  ) {
+    const {
+      component: SelectComponent,
+      props: { options, defaultValue, isMulti },
+    } = Component;
+
+    const valueOptions = isArray(value)
+      ? pipe(
+          filter(pipe(prop('value'), includes(__, value))),
+          defaultTo(defaultValue),
+        )(options)
+      : pipe(find(propEq('value', value)), defaultTo(defaultValue))(options);
+
+    return (
+      <SelectComponent
+        isMulti={isMulti}
+        options={options}
+        placeholder="Category"
+        value={valueOptions}
+        onChange={onChange}
+      />
+    );
+  }
+
+  return <Component value={value} onChange={onChange} />;
+};
 
 const FilterRow: React.FC<FilterRowProps> = ({
-  dataPoints,
+  fields,
   index,
   onOperatorChange,
-  onDataPointChange,
+  onFieldChange,
   onConditionChange,
-  onInputChange,
+  onValueChange,
   onRemove,
-  isRemoveDisabled,
+  isDefaultState,
   operator: operatorValue,
-  dataPoint: dataPointValue,
+  field: fieldValue,
   condition: conditionValue,
-  input: inputValue,
+  value: componentValue,
   isApplied,
 }) => {
-  const { dataPoint, conditions, condition, InputComponent } = useFilterRow(
-    dataPoints,
-    dataPointValue,
+  const { field, conditions, condition, component } = useFilterRow(
+    fields,
+    fieldValue,
     conditionValue,
   );
 
   const operatorOption = getOperatorOptions(operatorValue);
 
-  const dataPointOptions = getDataPointOptions(dataPoints);
+  const fieldOptions = getFieldOptions(fields);
 
-  const handleDataPointChange = ({ value: selectedDataPointValue }) => {
-    const defaultConditionValue = getDefaultCondition(
-      selectedDataPointValue,
-      dataPoints,
+  const handleFieldChange = ({ value: selectedFieldValue }) => {
+    const {
+      defaultConditionValue,
+      defaultComponentValue,
+    } = getDefaultCondition(selectedFieldValue, fields);
+
+    onFieldChange(
+      selectedFieldValue,
+      defaultConditionValue,
+      defaultComponentValue,
+      index,
     );
-
-    onDataPointChange(selectedDataPointValue, defaultConditionValue, index);
   };
 
   const handleConditionChange = ({ value: selectedConditionValue }) => {
-    const NewInputComponent = getConditionInput(
+    const newComponent = getConditionComponent(
       selectedConditionValue,
-      dataPoint.value,
-      dataPoints,
+      field.value,
+      fields,
     );
-    const areComponentsEqual = equals(InputComponent, NewInputComponent);
+    const areComponentsEqual = equals(component, newComponent);
 
     onConditionChange(selectedConditionValue, index, areComponentsEqual);
   };
 
-  const handleInputChange = (value) => {
-    if (value.target) {
-      onInputChange(value.target.value, index);
+  const handleValueChange = (value) => {
+    // default value
+    if (isNull(value) && hasPath(['props', 'defaultValue'], component)) {
+      const defaultValue = path(['props', 'defaultValue', 'value'], component);
+      onValueChange(defaultValue, index);
+      // Input, Number, Integer, Count
+    } else if (has('target', value)) {
+      onValueChange(value.target.value, index);
+      // Select
+    } else if (has('value', value)) {
+      onValueChange(value.value, index);
+      // MultiSelect
+    } else if (isArrayOfOptionObjects(value)) {
+      const arrayOfValues = pluck('value', value);
+      onValueChange(arrayOfValues, index);
+      // DataRangePicker, SingleDatePicker, TagsInput
     } else {
-      onInputChange(value, index);
+      onValueChange(value, index);
     }
   };
 
   return (
-    <Container>
-      <StateButton
-        index={index}
-        isApplied={isApplied}
-        isDisabled={isRemoveDisabled}
-        onClick={onRemove}
-      />
+    <FlexContainer margin={{ bottom: 0.5 }}>
+      {!isDefaultState && (
+        <StateButton index={index} isApplied={isApplied} onClick={onRemove} />
+      )}
       <SplitField $width={72}>
         {index === 1 ? (
           <Select
@@ -155,9 +217,9 @@ const FilterRow: React.FC<FilterRowProps> = ({
       </SplitField>
       <SplitField $width={200}>
         <Select
-          options={dataPointOptions}
-          value={dataPoint}
-          onChange={handleDataPointChange}
+          options={fieldOptions}
+          value={field}
+          onChange={handleFieldChange}
         />
       </SplitField>
       <SplitField $width={144}>
@@ -168,28 +230,31 @@ const FilterRow: React.FC<FilterRowProps> = ({
         />
       </SplitField>
       <SplitField>
-        {InputComponent && (
-          <InputComponent value={inputValue} onChange={handleInputChange} />
-        )}
+        {renderComponent(component, componentValue, handleValueChange)}
       </SplitField>
-    </Container>
+    </FlexContainer>
   );
 };
 
 export default FilterRow;
 
 FilterRow.propTypes = {
-  dataPoints: PropTypes.arrayOf(DataPointPropTypes).isRequired,
+  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   index: PropTypes.number.isRequired,
-  dataPoint: PropTypes.string.isRequired,
+  field: PropTypes.string.isRequired,
   condition: PropTypes.string.isRequired,
   operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
   isApplied: PropTypes.bool.isRequired,
-  isRemoveDisabled: PropTypes.bool.isRequired,
+  isDefaultState: PropTypes.bool.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
-  onDataPointChange: PropTypes.func.isRequired,
+  onFieldChange: PropTypes.func.isRequired,
   onConditionChange: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired,
+  onValueChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  input: PropTypes.oneOfType([PropTypes.string, DateRangePickerPropTypes]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.instanceOf(Date),
+    DateRangePickerPropTypes,
+  ]),
 };

@@ -1,5 +1,6 @@
 export interface Forms {
   fieldHeight: string;
+  toggleSize: number;
   color: string;
   bgColor: string;
   borderColor: string;

@@ -31,3 +31,26 @@ export const actionsMock: Action[] = [
     subActions: subactionsMock,
   },
 ];
+
+export const tableActionsMock: Action[] = [
+  {
+    label: 'Export',
+    name: 'Export',
+    onClick: action('OnClick Export handler'),
+  },
+  {
+    label: 'Import',
+    name: 'Import',
+    onClick: action('OnClick Import handler'),
+  },
+  {
+    label: 'Claim',
+    name: 'Claim',
+    onClick: action('OnClick Claim handler'),
+  },
+  {
+    label: 'Remove',
+    name: 'Remove',
+    onClick: action('OnClick Remove handler'),
+  },
+];

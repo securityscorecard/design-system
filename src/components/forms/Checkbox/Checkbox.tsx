@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { allPass } from 'ramda';
+import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 
 import {
   createMarginSpacing,
   getBorderRadius,
+  getColor,
   getFormStyle,
   pxToRem,
 } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
 import { Icon } from '../../Icon';
-import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
@@ -21,16 +24,25 @@ const CheckboxWrapper = styled(FlexContainer)`
   }
 `;
 
-const Box = styled.div`
-  height: ${pxToRem(20)};
-  width: ${pxToRem(20)};
+const Box = styled(FlexContainer)`
+  ${(props) => {
+    const toggleSize = getFormStyle('toggleSize')(props);
+
+    return css`
+      flex: 0 0 ${pxToRem(toggleSize)};
+      height: ${pxToRem(toggleSize)};
+      width: ${pxToRem(toggleSize)};
+    `;
+  }}
+
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
+  background: ${getColor('graphite5H')};
+  padding: ${pxToRem(3)};
 `;
 
-const Check = styled(Icon)`
+const Mark = styled(Icon)`
   display: none;
-  margin: ${pxToRem(3)};
 
   font-size: ${pxToRem(12)};
   color: ${getFormStyle('activeColor')};
@@ -43,7 +55,7 @@ const CheckboxInput = styled.input<TogglingInputProps>`
     background: ${getFormStyle('activeBorderColor')};
     border-color: ${getFormStyle('activeBorderColor')};
 
-    ${Check} {
+    ${Mark} {
       display: block;
     }
   }
@@ -54,62 +66,112 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   }
 
   &:disabled:checked + ${Box} {
-    ${Check} {
+    ${Mark} {
       color: ${getFormStyle('disabledActiveColor')};
     }
   }
 
+  ${({ isIndeterminate }) =>
+    isIndeterminate &&
+    css`
+      & + ${Box} {
+        background: ${getFormStyle('activeBorderColor')};
+        border-color: ${getFormStyle('activeBorderColor')};
+        ${Mark} {
+          display: block;
+        }
+      }
+      &:disabled + ${Box} {
+        ${Mark} {
+          color: ${getFormStyle('disabledActiveColor')};
+        }
+      }
+    `};
+
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      & + ${Box} {
+      & + ${Box}, &:checked + ${Box} {
         border: ${getFormStyle('statefulBorderWidth')} solid
           ${getFormStyle('invalidBorderColor')};
-      }
-      &:checked + ${Box} {
-        ${Check} {
-          color: ${getFormStyle('invalidBorderColor')};
-        }
       }
     `}
 `;
 
-const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
-  line-height: ${pxToRem(20)};
-  padding-left: ${pxToRem(10)};
+const CheckboxLabel = styled(Label)<
+  React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
+>`
   margin-bottom: 0;
+
+  ${({ theme, hasLabel }) => {
+    const toggleSize = getFormStyle('toggleSize')({ theme });
+    const leftPadding = hasLabel ? toggleSize + 10 : toggleSize;
+
+    return css`
+      min-height: ${pxToRem(toggleSize)};
+      line-height: ${pxToRem(toggleSize)};
+      padding-left: ${pxToRem(leftPadding)};
+      margin-left: ${pxToRem(toggleSize * -1)};
+    `;
+  }}
 `;
 
-const Checkbox: React.FC<CheckboxProps> = ({
-  name,
-  checkboxId,
-  label,
-  isDisabled = false,
-  isInvalid = false,
-  ...props
-}) => (
-  <CheckboxWrapper alignItems="center">
-    <CheckboxInput
-      disabled={isDisabled}
-      id={checkboxId}
-      isInvalid={isInvalid}
-      name={name}
-      type="checkbox"
-      {...props}
-    />
-    <Box>
-      <Check name={SSCIconNames.check} type={IconTypes.ssc} />
-    </Box>
-    <CheckboxLabel htmlFor={checkboxId}>{label}</CheckboxLabel>
-  </CheckboxWrapper>
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  (
+    {
+      name,
+      checkboxId,
+      label,
+      isDisabled = false,
+      isInvalid = false,
+      isIndeterminate = false,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const hasLabel = allPass([isNotUndefined, isNonEmptyString])(label);
+
+    return (
+      <CheckboxWrapper alignItems="center" className={className}>
+        <CheckboxInput
+          ref={ref}
+          className="ds-checkbox-input"
+          disabled={isDisabled}
+          id={checkboxId}
+          isIndeterminate={isIndeterminate}
+          isInvalid={isInvalid}
+          name={name}
+          type="checkbox"
+          {...props}
+        />
+        <Box
+          alignItems="center"
+          className="ds-checkbox-box"
+          justifyContent="center"
+        >
+          <Mark
+            className="ds-checkbox-mark"
+            name={isIndeterminate ? SSCIconNames.minus : SSCIconNames.check}
+            hasFixedWidth
+          />
+        </Box>
+        <CheckboxLabel hasLabel={hasLabel} htmlFor={checkboxId}>
+          {label}
+        </CheckboxLabel>
+      </CheckboxWrapper>
+    );
+  },
 );
 
 Checkbox.propTypes = {
   checkboxId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  className: PropTypes.string,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
+  isIndeterminate: PropTypes.bool,
 };
 
 export default Checkbox;

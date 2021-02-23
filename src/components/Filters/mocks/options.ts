@@ -1,78 +1,283 @@
-import { DateRangePicker, Input, Number, SingleDatePicker } from '../inputs';
-import { DataPoint, Filter } from '../Filters.types';
+import {
+  Count,
+  DateRangePicker,
+  Input,
+  Integer,
+  Number,
+  Select,
+  SingleDatePicker,
+  TagsInput,
+} from '../components';
+import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 
-// TODO use more realistic data
-export const dataPointsMock: DataPoint[] = [
+export const fields: Field[] = [
   {
     conditions: [
-      { input: Input, value: 'chocolate', label: 'Chocolate' },
+      { component: Input, value: 'is', label: 'is' },
       {
-        input: Input,
-        value: 'strawberry',
-        label: 'Strawberry',
+        component: Input,
+        value: 'is not',
+        label: 'is not',
+      },
+      {
+        component: Input,
+        value: 'contains',
+        label: 'contains',
         isDefault: true,
       },
-      { input: Input, value: 'vanilla', label: 'Vanilla' },
+      {
+        component: Input,
+        value: 'does not contain',
+        label: 'does not contain',
+      },
     ],
-    value: 'pistachio',
-    label: 'Pistachio',
+    value: 'domain',
+    label: 'Domain',
   },
   {
     conditions: [
-      { input: Input, value: 'chocolate', label: 'Chocolate' },
-      { input: Input, value: 'strawberry', label: 'Strawberry' },
-      { input: Input, value: 'vanilla', label: 'Vanilla', isDefault: true },
+      { component: TagsInput, value: 'is', label: 'is' },
+      {
+        component: TagsInput,
+        value: 'is not',
+        label: 'is not',
+      },
+      {
+        component: TagsInput,
+        value: 'contains',
+        label: 'contains',
+        isDefault: true,
+      },
+      {
+        component: TagsInput,
+        value: 'does not contain',
+        label: 'does not contain',
+      },
     ],
-    value: 'lemon',
-    label: 'Lemon',
+    value: 'ip',
+    label: 'IP address',
   },
   {
     conditions: [
       {
-        input: Number,
-        value: 'chocolate',
-        label: 'Chocolate',
+        component: Number,
+        value: 'is',
+        label: 'is',
         isDefault: true,
       },
-      { input: SingleDatePicker, value: 'strawberry', label: 'Strawberry' },
-      { input: DateRangePicker, value: 'vanilla', label: 'Vanilla' },
+      {
+        component: Number,
+        value: 'is not',
+        label: 'is not',
+      },
+      {
+        component: Count,
+        value: 'is less than',
+        label: 'is less than',
+      },
+      {
+        component: Number,
+        value: 'is greater than',
+        label: 'is greater than',
+      },
+      {
+        component: Number,
+        value: 'is at least',
+        label: 'is at least',
+      },
+      {
+        component: Integer,
+        value: 'is at most',
+        label: 'is at most',
+      },
     ],
-    value: 'smurf',
-    label: 'Smurf',
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+  {
+    conditions: [
+      { component: SingleDatePicker, value: 'is', label: 'is' },
+      { component: SingleDatePicker, value: 'before', label: 'before' },
+      {
+        component: SingleDatePicker,
+        value: 'after',
+        label: 'after',
+        isDefault: true,
+      },
+      {
+        component: SingleDatePicker,
+        value: 'within last',
+        label: 'within last',
+      },
+      {
+        component: SingleDatePicker,
+        value: 'not within last',
+        label: 'not within last',
+      },
+      {
+        component: DateRangePicker,
+        value: 'between',
+        label: 'between',
+      },
+    ],
+    value: 'first observed',
+    label: 'First Observed',
+  },
+  {
+    conditions: [
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+            defaultValue: { value: 'any', label: 'Any' },
+          },
+        },
+        value: 'is',
+        label: 'is',
+      },
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+            defaultValue: { value: 'any', label: 'Any' },
+          },
+        },
+        value: 'is not',
+        label: 'is not',
+      },
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+            defaultValue: { value: 'any', label: 'Any' },
+            isMulti: true,
+          },
+        },
+        value: 'contains',
+        label: 'contains',
+        isDefault: true,
+      },
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+            defaultValue: { value: 'any', label: 'Any' },
+          },
+        },
+        value: 'does not contain',
+        label: 'does not contain',
+      },
+    ],
+    value: 'detection method',
+    label: 'Detection Method',
   },
 ];
 
-export const dataMock: Filter[] = [
+export const state: Filter[] = [
   {
     operator: Operators.and,
-    dataPoint: 'pistachio',
-    condition: 'chocolate',
-    input: 'tasty',
+    field: 'domain',
+    condition: 'is not',
+    value: 'securityscorecard.io',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'lemon',
-    condition: 'strawberry',
+    field: 'ip',
+    condition: 'contains',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'smurf',
-    condition: 'vanilla',
+    field: 'issue count',
+    condition: 'is greater than',
+    value: '2',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'smurf',
-    condition: 'strawberry',
+    field: 'issue count',
+    condition: 'is less than',
     isApplied: true,
   },
   {
     operator: Operators.and,
-    dataPoint: 'smurf',
-    condition: 'chocolate',
+    field: 'issue count',
+    condition: 'is at most',
     isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'first observed',
+    condition: 'after',
+    value: new Date('2021-02-16T00:00:00Z'),
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'first observed',
+    condition: 'between',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'detection method',
+    condition: 'is',
+    value: 'any',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'detection method',
+    condition: 'contains',
+    value: 'any',
+    isApplied: true,
+  },
+];
+
+export const stateWithUnappliedFilters: Filter[] = [
+  ...state,
+  {
+    operator: Operators.and,
+    field: 'domain',
+    condition: 'contains',
+    value: '.io',
+    isApplied: false,
+  },
+  {
+    operator: Operators.and,
+    field: 'domain',
+    condition: 'contains',
+    value: 'example',
+    isApplied: false,
   },
 ];

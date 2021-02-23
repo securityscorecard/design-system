@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { prop } from 'ramda';
+import { isNotNull } from 'ramda-adjunct';
 
-import { Condition, DataPoint } from '../Filters.types';
+import { Condition, Field } from '../Filters.types';
 import { useFilterRowType } from './useFilterRow.types';
-import { Option } from '../Select/Select.types';
+import { Option } from '../components/Select/Select.types';
 
 export const normalizeOptions = <O extends Option>({
   value,
@@ -12,51 +14,51 @@ export const normalizeOptions = <O extends Option>({
   label,
 });
 
-const getValuesOnChange = (dataPoints, dataPointValue, conditionValue) => {
-  const dataPoint = dataPoints.find(({ value }) => value === dataPointValue);
+const getValuesOnChange = (fields, fieldValue, conditionValue) => {
+  const field = fields.find(({ value }) => value === fieldValue);
 
-  const conditions = dataPoint.conditions.map(normalizeOptions);
+  const conditions = field.conditions.map(normalizeOptions);
 
-  const condition = dataPoint.conditions.find(
+  const condition = field.conditions.find(
     ({ value }) => value === conditionValue,
   );
 
   return {
-    dataPoint: normalizeOptions<DataPoint>(dataPoint),
+    field,
     conditions,
-    condition: normalizeOptions<Condition>(condition),
-    Input: () => condition.input,
+    condition,
   };
 };
 
 export const useFilterRow = (
-  dataPoints: DataPoint[],
-  dataPointValue: string,
+  fields: Field[],
+  fieldValue: string,
   conditionValue: string,
 ): useFilterRowType => {
-  const [dataPoint, setDataPoint] = useState(null);
+  const [field, setField] = useState(null);
   const [conditions, setConditions] = useState(null);
   const [condition, setCondition] = useState(null);
-  const [InputComponent, setInputComponent] = useState(null);
 
   useEffect(() => {
     const {
-      dataPoint: dataPointOptions,
+      field: fieldOptions,
       conditions: conditionsOptions,
       condition: conditionOptions,
-      Input,
-    } = getValuesOnChange(dataPoints, dataPointValue, conditionValue);
+    } = getValuesOnChange(fields, fieldValue, conditionValue);
 
-    setDataPoint(dataPointOptions);
+    setField(fieldOptions);
     setConditions(conditionsOptions);
     setCondition(conditionOptions);
-    setInputComponent(Input);
-  }, [dataPoints, dataPointValue, conditionValue]);
+  }, [fields, fieldValue, conditionValue]);
+
+  const normalizedField = isNotNull(field) && normalizeOptions<Field>(field);
+  const normalizedCondition =
+    isNotNull(condition) && normalizeOptions<Condition>(condition);
 
   return {
-    dataPoint,
+    field: normalizedField,
     conditions,
-    condition,
-    InputComponent,
+    condition: normalizedCondition,
+    component: prop('component', condition),
   };
 };

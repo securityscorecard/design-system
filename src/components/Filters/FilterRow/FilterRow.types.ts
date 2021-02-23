@@ -1,17 +1,18 @@
-import { DataPoint, Filter } from '../Filters.types';
-import { Option } from '../Select/Select.types';
+import { Field, Filter } from '../Filters.types';
+import { Option } from '../components/Select/Select.types';
 
 export interface SplitFieldProps {
   $width?: number;
 }
 
 export interface FilterRowProps extends Filter {
-  dataPoints: DataPoint[];
+  fields: Field[];
   index: number;
   onOperatorChange: (value: Option) => void;
-  onDataPointChange: (
-    dataPoint: string,
+  onFieldChange: (
+    field: string,
     condition: string,
+    value: string,
     index: number,
   ) => void;
   onConditionChange: (
@@ -19,8 +20,8 @@ export interface FilterRowProps extends Filter {
     index: number,
     areComponentsEqual: boolean,
   ) => void;
-  onInputChange: (input: string, index: number) => void;
+  onValueChange: (value: string, index: number) => void;
   onRemove: (index: number) => React.MouseEventHandler;
-  isRemoveDisabled: boolean;
+  isDefaultState: boolean;
   isApplied: boolean;
 }

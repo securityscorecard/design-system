@@ -15,11 +15,12 @@ const Dropdown: React.FC<DropdownProps> = ({
   actions,
   defaultIsOpen = false,
   children,
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
 
   return (
-    <DropdownWrapper onClick={() => setIsOpen(!isOpen)}>
+    <DropdownWrapper className={className} onClick={() => setIsOpen(!isOpen)}>
       {children}
       {isOpen && (
         <DropdownPane actions={actions} onClickOut={() => setIsOpen(false)} />
@@ -31,6 +32,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 Dropdown.propTypes = {
   actions: PropTypes.arrayOf(ActionKindsPropType).isRequired,
   defaultIsOpen: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Dropdown;

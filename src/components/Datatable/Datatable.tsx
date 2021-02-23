@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { mergeRight } from 'ramda';
-import { noop } from 'ramda-adjunct';
+import { allPass, any, mergeRight, propEq } from 'ramda';
+import { isFunction, isNotUndefined, lengthGt, noop } from 'ramda-adjunct';
 
 import { getBorderRadius, getColor } from '../../utils/helpers';
+import { Filter } from '../Filters/Filters.types';
 import { FlexContainer } from '../FlexContainer';
 import { ActionPropType } from './types/Action.types';
 import Table from './Table/Table';
-import { BatchModule } from './BatchModule';
 import DatatableContext from './DatatableContext';
 import {
   ControlsConfig,
   DatatableProps,
   ExtendedTableConfig,
 } from './Datatable.types';
+import { ControlModule } from './ControlModule';
+import { BatchModule } from './BatchModule';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
   border-radius: ${getBorderRadius};
   background: ${getColor('graphite3H')};
 `;
+
+const isCallbackDefined = allPass([isNotUndefined, isFunction]);
 
 const defaultTableConfig: Partial<ExtendedTableConfig<
   Record<string, unknown>
@@ -40,8 +44,13 @@ const defaultControlsConfig: Partial<ControlsConfig<
   Record<string, unknown>
 >> = {
   isControlsEnabled: true,
+  hasSearch: true,
+  hasColumnVisibility: true,
+  hasColumnOrdering: true,
   hasFiltering: true,
   defaultIsFilteringOpen: false,
+  hasGrouping: true,
+  hasCustomViews: true,
 };
 
 const Datatable = <D extends Record<string, unknown>>({
@@ -54,43 +63,94 @@ const Datatable = <D extends Record<string, unknown>>({
   tableConfig = defaultTableConfig as ExtendedTableConfig<D>,
   controlsConfig = defaultControlsConfig as ControlsConfig<D>,
   batchActions = [],
+  ...props
 }: DatatableProps<D>): React.ReactElement => {
   const {
     defaultPageSize,
     rowActions,
+    hasSelection,
+    onSelect: onRowsSelect,
     ...restTableConfig
   }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
   const {
     defaultHiddenColumns,
     defaultColumnOrder,
+    filtersConfig,
+    ...restControlsConfig
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
+  const { state: filtersState = [] } = filtersConfig;
+  const { onApply: onFiltersApply } = filtersConfig;
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
+  const [hasAppliedFilters, setHasAppliedFilters] = useState<boolean>(
+    any(propEq('isApplied', true), filtersState),
+  );
 
   useEffect(() => {
     setPageCount(Math.ceil(totalDataSize / defaultPageSize));
   }, [totalDataSize, defaultPageSize]);
+
+  const handleOnFiltersAppply = useCallback(
+    (filters: Filter[]) => {
+      setHasAppliedFilters(lengthGt(0, filters));
+
+      if (isCallbackDefined(onFiltersApply)) {
+        onFiltersApply(filters);
+      }
+      onDataFetch({ pageSize: defaultPageSize, pageIndex: 0, filters });
+    },
+    [defaultPageSize, onDataFetch, onFiltersApply],
+  );
+
+  const handleOnRowsSelect = useCallback(
+    (ids, exclude) => {
+      setSelectedIds(ids);
+
+      if (isCallbackDefined(onRowsSelect)) {
+        onRowsSelect(ids, exclude);
+      }
+    },
+    [onRowsSelect],
+  );
 
   return (
     <DatatableContext.Provider
       value={{
         totalLength: totalDataSize,
         selectedIds,
-        setSelectedIds,
         selectedLength: selectedIds.length,
         defaultHiddenColumns,
         defaultColumnOrder,
+        hasExclusionLogic,
+        setHasExclusionLogic,
+        hasSelection,
       }}
     >
-      <StyledDatatable flexDirection="column">
-        <FlexContainer>ToolbarModule</FlexContainer>
-        <FlexContainer>Filters</FlexContainer>
+      <StyledDatatable flexDirection="column" {...props}>
+        {controlsConfig.isControlsEnabled && (
+          <ControlModule<D>
+            defaultColumnOrder={defaultColumnOrder}
+            defaultHiddenColumns={defaultHiddenColumns}
+            filtersConfig={{
+              ...filtersConfig,
+              onApply: handleOnFiltersAppply,
+            }}
+            {...restControlsConfig}
+          />
+        )}
         <BatchModule actions={batchActions} />
         <Table<D>
           columns={columns}
-          config={{ defaultPageSize, ...restTableConfig }}
+          config={{
+            hasSelection,
+            onSelect: handleOnRowsSelect,
+            defaultPageSize,
+            ...restTableConfig,
+          }}
           data={data}
           fetchData={onDataFetch}
+          hasAppliedFilters={hasAppliedFilters}
           isLoading={isDataLoading}
           pageCount={pageCount}
           primaryKey={dataPrimaryKey}

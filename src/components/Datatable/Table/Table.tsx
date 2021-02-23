@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -11,25 +17,40 @@ import {
   useTable,
 } from 'react-table';
 import { useSticky } from 'react-table-sticky';
-import { __, always, includes, map, prop, without } from 'ramda';
 import {
+  __,
+  always,
+  append,
+  includes,
+  map,
+  pipe,
+  prop,
+  reduce,
+  uniq,
+  without,
+} from 'ramda';
+import {
+  isEmptyArray,
   isNonEmptyArray,
   isNotUndefined,
   isOdd,
   isString,
 } from 'ramda-adjunct';
 
-import { getColor } from '../../../utils/helpers';
+import { getColor, pxToRem } from '../../../utils/helpers';
+import { IconButton } from '../../IconButton';
+import { FlexContainer } from '../../FlexContainer';
 import { useDatatable } from '../hooks/useDatatable';
 import { ActionKindsPropType } from '../types/Action.types';
+import { RendererText } from './TableCell/renderers';
+import { Dropdown } from '../Dropdown';
 import { TableCell } from './TableCell';
 import { TableHeadCell } from './TableHeadCell';
 import { TableRow } from './TableRow';
 import { TableProps } from './Table.types';
-import Text from './TableCell/renderers/Text';
-import { Dropdown } from '../Dropdown';
-import { IconButton } from '../../IconButton';
-import IndeterminateCheckbox from './temp/IndeterminateCheckbox';
+import { SelectionCheckbox } from './SelectionCheckbox';
+import { NoData, NoMatchingData } from './NoData';
+import { Pagination } from '../Pagination';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -87,6 +108,13 @@ const StyledTableBody = styled.tbody<{ isSticky: boolean }>`
     `};
 `;
 
+const NoDataContainer = styled(FlexContainer).attrs(() => ({
+  flexDirection: 'column',
+}))`
+  background: ${getColor('graphite5H')};
+  padding: ${pxToRem(64)};
+`;
+
 const SELECTION_COLUMN_ID = 'selection';
 const ACTIONS_COLUMN_ID = 'actions';
 
@@ -94,6 +122,18 @@ const isAnyStickyColumn = includes(__, [
   SELECTION_COLUMN_ID,
   ACTIONS_COLUMN_ID,
 ]);
+
+const renderNoDataContent = (NoDataComponent) => {
+  if (isNotUndefined(NoDataComponent)) return <NoDataComponent />;
+
+  return <NoData />;
+};
+const renderNoMatchingDataContent = (NoMatchingDataComponent) => {
+  if (isNotUndefined(NoMatchingDataComponent))
+    return <NoMatchingDataComponent />;
+
+  return <NoMatchingData />;
+};
 
 const Table = <D extends Record<string, unknown>>({
   columns,
@@ -104,13 +144,24 @@ const Table = <D extends Record<string, unknown>>({
   rowActions,
   pageCount: controlledPageCount,
   config,
+  hasAppliedFilters,
 }: TableProps<D>): React.ReactElement => {
-  const { onSelect, defaultPageSize, defaultSortBy, hasSelection } = config;
+  const {
+    onSelect,
+    defaultPageSize,
+    defaultSortBy,
+    hasSelection,
+    hasServerSidePagination,
+    hasServerSideSorting,
+    NoDataComponent,
+    NoMatchingDataComponent,
+  } = config;
   const hasRowActions = isNonEmptyArray(rowActions);
   const {
-    setSelectedIds,
     defaultHiddenColumns,
     defaultColumnOrder,
+    hasExclusionLogic,
+    totalLength,
   } = useDatatable();
   const [isSticky, setIsSticky] = useState(true);
   const defaultColumn = useMemo(
@@ -118,12 +169,14 @@ const Table = <D extends Record<string, unknown>>({
       minWidth: 40,
       width: 150,
       maxWidth: 400,
-      Cell: Text,
+      Cell: RendererText,
       nullCondition: always(false),
+      hasExclusionLogic,
+      totalLength,
     }),
-    [],
+    [hasExclusionLogic, totalLength],
   );
-
+  const handleSelect = useCallback(onSelect, [onSelect]);
   const {
     getTableProps,
     getTableBodyProps,
@@ -132,14 +185,14 @@ const Table = <D extends Record<string, unknown>>({
     rows,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
     gotoPage,
     nextPage,
     previousPage,
     totalColumnsWidth,
+    toggleAllRowsSelected,
     // Get the state from the instance
-    state: { pageIndex, pageSize, selectedRowIds, sortBy },
+    state: { pageIndex, pageSize, sortBy },
   } = useTable<D>(
     {
       columns,
@@ -154,8 +207,8 @@ const Table = <D extends Record<string, unknown>>({
           hiddenColumns: defaultHiddenColumns,
         }),
       },
-      manualPagination: true, // We will handle pagination by ourselves
-      manualSortBy: true, // sorting is handled backend
+      manualPagination: hasServerSidePagination, // We will handle pagination by ourselves
+      manualSortBy: hasServerSideSorting, // sorting is handled backend
       pageCount: controlledPageCount, // Since we handling pagination we need to pass page count
       autoResetSelectedRows: false, // Do not reset selection when moving to different page
       ...(isNotUndefined(primaryKey) && {
@@ -180,15 +233,53 @@ const Table = <D extends Record<string, unknown>>({
               disableSortBy: true,
               Header: ({
                 getToggleAllRowsSelectedProps,
-              }: HeaderProps<D>): JSX.Element => (
-                <div>
-                  <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-                </div>
-              ),
-              Cell: ({ row }: CellProps<D>): JSX.Element => (
-                <div>
-                  <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-                </div>
+                data: tableData,
+                column,
+                rows: pageRows,
+                state,
+              }: HeaderProps<D>): JSX.Element => {
+                if (isEmptyArray(tableData)) {
+                  return null;
+                }
+                const selected = Object.keys(state.selectedRowIds);
+                const isIndeterminate =
+                  selected.length > 0 && selected.length < column.totalLength;
+                const pageRowsIds = reduce(
+                  (acc, row) => pipe(prop('id'), append(__, acc))(row),
+                  [],
+                  pageRows,
+                );
+                return (
+                  <FlexContainer flexGrow={1} justifyContent="center">
+                    <SelectionCheckbox
+                      hasExclusionLogic={column.hasExclusionLogic}
+                      id="header-select-all"
+                      isIndeterminate={isIndeterminate}
+                      onSelect={() =>
+                        handleSelect(
+                          uniq([...selected, ...pageRowsIds]),
+                          column.hasExclusionLogic,
+                        )
+                      }
+                      {...getToggleAllRowsSelectedProps()}
+                    />
+                  </FlexContainer>
+                );
+              },
+              Cell: ({ row, column, state }: CellProps<D>): JSX.Element => (
+                <FlexContainer flexGrow={1} justifyContent="center">
+                  <SelectionCheckbox
+                    hasExclusionLogic={column.hasExclusionLogic}
+                    id={`select-${row.id}`}
+                    onSelect={() =>
+                      handleSelect(
+                        [...Object.keys(state.selectedRowIds), row.id],
+                        hasExclusionLogic,
+                      )
+                    }
+                    {...row.getToggleRowSelectedProps()}
+                  />
+                </FlexContainer>
               ),
             },
             ...visibleColumns,
@@ -227,12 +318,9 @@ const Table = <D extends Record<string, unknown>>({
     }
   }, [totalColumnsWidth]);
 
-  // Listen for changes in selection and propage to parent component
   useEffect(() => {
-    const selectedIds = Object.keys(selectedRowIds);
-    onSelect(selectedIds);
-    setSelectedIds(selectedIds);
-  }, [onSelect, setSelectedIds, selectedRowIds]);
+    toggleAllRowsSelected(false);
+  }, [hasExclusionLogic, toggleAllRowsSelected]);
 
   // Listen for changes in pagination and use the state to fetch our new data
   useEffect(() => {
@@ -279,6 +367,7 @@ const Table = <D extends Record<string, unknown>>({
                   return (
                     <TableCell
                       cell={cell}
+                      hasExclusionLogic={hasExclusionLogic}
                       isOdd={isOdd(index)}
                       {...cell.getCellProps({
                         ...(isAnyStickyColumn(cell.column.id) && {
@@ -291,69 +380,26 @@ const Table = <D extends Record<string, unknown>>({
               </TableRow>
             );
           })}
-          <tr>
-            {isLoading ? (
-              // TODO: replace this with nicer loading state
-              <td colSpan={10000}>Loading...</td>
-            ) : (
-              <td colSpan={10000}>
-                Showing {rows.length} of ~{controlledPageCount * pageSize}{' '}
-                results
-              </td>
-            )}
-          </tr>
         </StyledTableBody>
       </StyledTable>
-      <div className="pagination">
-        <button
-          disabled={!canPreviousPage}
-          type="button"
-          onClick={() => gotoPage(0)}
-        >
-          {'<<'}
-        </button>{' '}
-        <button
-          disabled={!canPreviousPage}
-          type="button"
-          onClick={() => previousPage()}
-        >
-          {'<'}
-        </button>{' '}
-        <button
-          disabled={!canNextPage}
-          type="button"
-          onClick={() => nextPage()}
-        >
-          {'>'}
-        </button>{' '}
-        <button
-          disabled={!canNextPage}
-          type="button"
-          onClick={() => gotoPage(pageCount - 1)}
-        >
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            defaultValue={pageIndex + 1}
-            style={{ width: '100px' }}
-            type="number"
-            onChange={(e) => {
-              const pageNumber = e.target.value
-                ? Number(e.target.value) - 1
-                : 0;
-              gotoPage(pageNumber);
-            }}
-          />
-        </span>
-      </div>
+      {totalLength === 0 ? (
+        <NoDataContainer>
+          {hasAppliedFilters
+            ? renderNoMatchingDataContent(NoMatchingDataComponent)
+            : renderNoDataContent(NoDataComponent)}
+        </NoDataContainer>
+      ) : (
+        <Pagination
+          canNextPage={canNextPage}
+          canPreviousPage={canPreviousPage}
+          isLoading={isLoading}
+          pageCount={pageCount}
+          pageIndex={pageIndex}
+          onGoToPage={gotoPage}
+          onNextPage={nextPage}
+          onPreviousPage={previousPage}
+        />
+      )}
     </>
   );
 };

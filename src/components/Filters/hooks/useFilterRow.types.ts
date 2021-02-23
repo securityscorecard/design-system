@@ -1,17 +1,11 @@
 import React from 'react';
 
 import { Condition } from '../Filters.types';
-import { Option } from '../Select/Select.types';
-import { DateRange } from '../inputs/DateRangePicker/DateRangePicker.types';
-
-interface InputComponentProps {
-  value: string | DateRange;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { Option } from '../components/Select/Select.types';
 
 export interface useFilterRowType {
-  dataPoint: Option;
+  field: Option;
   conditions: Condition[];
   condition: Option;
-  InputComponent: React.FC<InputComponentProps>;
+  component: React.ReactNode;
 }

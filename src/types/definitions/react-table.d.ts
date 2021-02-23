@@ -49,6 +49,7 @@ import {
 } from 'react-table';
 
 import { CustomColumnProps } from '../../components/Datatable/Datatable.types';
+import { InternalColumnProps } from '../../components/Datatable/Table/Table.types';
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
@@ -108,7 +109,8 @@ declare module 'react-table' {
       UseGroupByColumnOptions<D>,
       UseResizeColumnsColumnOptions<D>,
       UseSortByColumnOptions<D>,
-      CustomColumnProps<D> {}
+      CustomColumnProps<D>,
+      Partial<InternalColumnProps> {}
 
   export interface ColumnInstance<
     D extends Record<string, unknown> = Record<string, unknown>
@@ -116,7 +118,8 @@ declare module 'react-table' {
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D>,
-      CustomColumnProps<D> {}
+      CustomColumnProps<D>,
+      Partial<InternalColumnProps> {}
 
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>
