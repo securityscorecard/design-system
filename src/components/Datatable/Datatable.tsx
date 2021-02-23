@@ -86,14 +86,29 @@ const Datatable = <D extends Record<string, unknown>>({
   const [hasAppliedFilters, setHasAppliedFilters] = useState<boolean>(
     any(propEq('isApplied', true), filtersState),
   );
+  const [appliedFilters, setAppliedFilters] = useState(filtersState);
 
   useEffect(() => {
     setPageCount(Math.ceil(totalDataSize / defaultPageSize));
   }, [totalDataSize, defaultPageSize]);
 
+  const handleOnDataFetch = useCallback(
+    (pageIndex, pageSize, sortBy) => {
+      onDataFetch({
+        pageIndex,
+        pageSize,
+        sortBy,
+        filters: appliedFilters,
+        query: '', // TODO: get search query from local state
+      });
+    },
+    [appliedFilters, onDataFetch],
+  );
+
   const handleOnFiltersAppply = useCallback(
     (filters: Filter[]) => {
       setHasAppliedFilters(lengthGt(0, filters));
+      setAppliedFilters(filters);
 
       if (isCallbackDefined(onFiltersApply)) {
         onFiltersApply(filters);
@@ -149,7 +164,7 @@ const Datatable = <D extends Record<string, unknown>>({
             ...restTableConfig,
           }}
           data={data}
-          fetchData={onDataFetch}
+          fetchData={handleOnDataFetch}
           hasAppliedFilters={hasAppliedFilters}
           isLoading={isDataLoading}
           pageCount={pageCount}
