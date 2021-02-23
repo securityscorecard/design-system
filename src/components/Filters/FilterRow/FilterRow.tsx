@@ -32,7 +32,7 @@ import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { FieldPropTypes } from '../Filters.types';
 import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
-import operatorOptions from '../data/operator-options.json';
+import { operatorOptions } from '../data/operatorOptions';
 import { pxToRem } from '../../../utils/helpers';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
 
