@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
   __,
+  both,
   curry,
   defaultTo,
   equals,
@@ -20,7 +21,6 @@ import {
   pluck,
   prop,
   propEq,
-  when,
 } from 'ramda';
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
@@ -89,7 +89,7 @@ const getOperatorOptions = curry((operatorValue) =>
 
 const getFieldOptions = map(normalizeOptions);
 
-const isArrayOfOptionObjects = when(isArray, pipe(head, has('value')));
+const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;

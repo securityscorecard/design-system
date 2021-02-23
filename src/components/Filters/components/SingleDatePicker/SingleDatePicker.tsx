@@ -21,6 +21,7 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
     <DatePicker
       calendarClassName="DateRangePicker-calendar"
       className="DateRangePicker-input"
+      dateFormat="d MMM, yyyy"
       placeholderText="Date"
       selected={value}
       onChange={onChange}
