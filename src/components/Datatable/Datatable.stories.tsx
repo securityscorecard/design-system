@@ -22,6 +22,7 @@ import { Paragraph, Text } from '../typography';
 import { LinkCellRendererProps } from './Table/TableCell/renderers/renderers.types';
 import { mockControlModuleProps } from './mocks/controlModule';
 import { state } from '../Filters/mocks/options';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'components/Datatable',
@@ -153,11 +154,23 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
       dayjs.extend(relativeTime);
 
       return (
-        <RendererText
-          column={column}
-          formatter={(val) => dayjs(val).to(dayjs(lastObservationDate), true)}
-          value={value}
-        />
+        <Tooltip
+          popup={
+            <>
+              <div>Observation date: {dayjs(value).format('D MMMM YYYY')}</div>
+              <div>
+                Last observation date:{' '}
+                {dayjs(lastObservationDate).format('D MMMM YYYY')}
+              </div>
+            </>
+          }
+        >
+          <RendererText
+            column={column}
+            formatter={(val) => dayjs(val).to(dayjs(lastObservationDate), true)}
+            value={value}
+          />
+        </Tooltip>
       );
     },
   },

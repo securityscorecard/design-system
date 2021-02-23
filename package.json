@@ -48,6 +48,7 @@
     "prop-types": "^15.7.2",
     "ramda": "^0.27.0",
     "ramda-adjunct": "^2.16.1",
+    "react-cool-portal": "^1.0.26",
     "react-datepicker": "^3.4.1",
     "react-select": "^3.1.0",
     "react-table": "^7.6.3",
