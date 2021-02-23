@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
   __,
+  both,
   curry,
   defaultTo,
   equals,
@@ -88,8 +89,7 @@ const getOperatorOptions = curry((operatorValue) =>
 
 const getFieldOptions = map(normalizeOptions);
 
-const isArrayOfOptionObjects = (value) =>
-  isArray(value) && pipe(head, has('value'))(value);
+const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;
