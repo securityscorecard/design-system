@@ -67,7 +67,7 @@ describe('SearchBar', () => {
     const suggestion1 = await screen.findByText('query suggestion 1');
     const suggestion2 = await screen.findByText('query suggestion 2');
     const suggestion3 = await screen.findByText('query suggestion 3');
-    
+
     expect(suggestion1).toBeInTheDocument();
     expect(suggestion2).toBeInTheDocument();
     expect(suggestion3).toBeInTheDocument();
