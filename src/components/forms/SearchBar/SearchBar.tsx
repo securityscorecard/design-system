@@ -83,6 +83,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
     if (hasSuggestions && queryValue.length > 2) {
       setIsSearching(true);
+      // TODO: fetch suggestions directly from props
       // const suggestions = await onSearch(queryValue);
       // setSearchResults(suggestions);
       setIsSearching(false);

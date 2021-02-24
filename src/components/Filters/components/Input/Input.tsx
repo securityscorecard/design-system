@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { noop } from 'ramda-adjunct';
 
 import { InputProps } from './Input.types';
 import {
@@ -43,16 +42,12 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input: React.FC<InputProps> = ({
-  value = '',
-  onChange,
-  onKeyDown = noop,
-}) => (
+const Input: React.FC<InputProps> = ({ value = '', onChange, ...props }) => (
   <StyledInput
     placeholder="String"
     value={value}
     onChange={onChange}
-    onKeyDown={onKeyDown}
+    {...props}
   />
 );
 

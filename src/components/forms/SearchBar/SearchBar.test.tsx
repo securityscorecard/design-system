@@ -54,17 +54,20 @@ describe('SearchBar', () => {
 
     expect(searchInput.value).toBe('');
   });
+
+  // TODO: fix when suggestions implenemtation is ready
   /*
+
   it('displays suggestions on change', async () => {
     const { searchInput } = setup();
     act(() => {
       fireEvent.change(searchInput, { target: { value: 'query' } });
     });
-
+    
     const suggestion1 = await screen.findByText('query suggestion 1');
     const suggestion2 = await screen.findByText('query suggestion 2');
     const suggestion3 = await screen.findByText('query suggestion 3');
-    
+
     expect(suggestion1).toBeInTheDocument();
     expect(suggestion2).toBeInTheDocument();
     expect(suggestion3).toBeInTheDocument();

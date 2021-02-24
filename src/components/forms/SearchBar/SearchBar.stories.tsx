@@ -30,11 +30,11 @@ playground.argTypes = {
 };
 
 export const Default: Story = () => (
-  <SearchBar aria-label="SearchBar" hasSuggestions {...commonArgs} />
+  <SearchBar aria-label="SearchBar" hasSuggestions={false} {...commonArgs} />
 );
 
-export const WithoutSuggestions: Story = () => (
-  <SearchBar aria-label="SearchBar" {...commonArgs} hasSuggestions={false} />
+export const WithSuggestions: Story = () => (
+  <SearchBar aria-label="SearchBar" hasSuggestions {...commonArgs} />
 );
 
 export const QuickFilters: Story = () => (
