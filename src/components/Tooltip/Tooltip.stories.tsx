@@ -1,12 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
+import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../FlexContainer';
 import { Button } from '../Button';
 import { Paragraph } from '../typography';
 import Tooltip from './Tooltip';
 import { TooltipProps } from './Tooltip.types';
-import { TooltipPlacements } from './Tooltip.enums';
 
 export default {
   title: 'components/Tooltip',
@@ -43,25 +43,25 @@ playground.argTypes = {
     control: { disable: true },
     defaultValue: <Button size="lg">Button with tooltip</Button>,
   },
-  placement: { control: 'select', defaultValue: TooltipPlacements.bottom },
+  placement: { control: 'select', defaultValue: PortalPlacements.bottom },
 };
 
 export const Placements: Story = () => (
   <>
     <FlexContainer padding={{ vertical: 0.5 }}>
       <Tooltip
-        className="hover"
-        placement={TooltipPlacements.top}
+        placement={PortalPlacements.top}
         popup={popup}
+        defaultIsPopupDisplayed
       >
         <Button size="md">Top tooltip</Button>
       </Tooltip>
     </FlexContainer>
     <FlexContainer padding={{ vertical: 0.5 }}>
       <Tooltip
-        className="hover"
-        placement={TooltipPlacements.right}
+        placement={PortalPlacements.right}
         popup={popup}
+        defaultIsPopupDisplayed
       >
         <Button size="md">Right tooltip</Button>
       </Tooltip>
@@ -69,18 +69,18 @@ export const Placements: Story = () => (
 
     <FlexContainer padding={{ vertical: 0.5 }}>
       <Tooltip
-        className="hover"
-        placement={TooltipPlacements.left}
+        placement={PortalPlacements.left}
         popup={popup}
+        defaultIsPopupDisplayed
       >
         <Button size="md">Left tooltip</Button>
       </Tooltip>
     </FlexContainer>
     <FlexContainer padding={{ vertical: 0.5 }}>
       <Tooltip
-        className="hover"
-        placement={TooltipPlacements.bottom}
+        placement={PortalPlacements.bottom}
         popup={popup}
+        defaultIsPopupDisplayed
       >
         <Button size="md">Bottom tooltip</Button>
       </Tooltip>
