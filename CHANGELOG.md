@@ -1,3 +1,10 @@
+# [1.0.0-alpha.33](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2021-02-24)
+
+
+### Features
+
+* **Tooltip:** use portals for tooltips ([cde634f](https://github.com/securityscorecard/design-system/commit/cde634fb0e4ce96513c8846a23344b1054d964d0))
+
 # [1.0.0-alpha.32](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2021-02-23)
 
 
