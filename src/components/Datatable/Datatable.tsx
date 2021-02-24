@@ -101,8 +101,7 @@ const Datatable = <D extends Record<string, unknown>>({
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
-  // const { onSearch: onSearchApply } = searchConfig;
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
@@ -134,20 +133,17 @@ const Datatable = <D extends Record<string, unknown>>({
   const handleOnSearch = useCallback(
     (queryValue: string) => {
       setSearchQuery(queryValue);
-      console.log(`fetching data for ${queryValue} in Datatable`);
-      // if (isCallbackDefined(onSearchApply)) {
-      //   onSearchApply(queryValue);
-      // }
       onDataFetch({
         pageSize: defaultPageSize,
         pageIndex: 0,
         query: searchQuery,
+        filters: appliedFilters,
       });
     },
-    [defaultPageSize, onDataFetch, searchQuery],
+    [defaultPageSize, onDataFetch, searchQuery, appliedFilters],
   );
 
-  const handleOnFiltersAppply = useCallback(
+  const handleOnFiltersApply = useCallback(
     (filters: Filter[]) => {
       setHasAppliedFilters(lengthGt(0, filters));
       setAppliedFilters(filters);
@@ -155,9 +151,14 @@ const Datatable = <D extends Record<string, unknown>>({
       if (isCallbackDefined(onFiltersApply)) {
         onFiltersApply(filters);
       }
-      onDataFetch({ pageSize: defaultPageSize, pageIndex: 0, filters });
+      onDataFetch({
+        pageSize: defaultPageSize,
+        pageIndex: 0,
+        query: searchQuery,
+        filters,
+      });
     },
-    [defaultPageSize, onDataFetch, onFiltersApply],
+    [defaultPageSize, onDataFetch, searchQuery, onFiltersApply],
   );
 
   const handleOnRowsSelect = useCallback(
@@ -191,7 +192,7 @@ const Datatable = <D extends Record<string, unknown>>({
             defaultHiddenColumns={defaultHiddenColumns}
             filtersConfig={{
               ...filtersConfig,
-              onApply: handleOnFiltersAppply,
+              onApply: handleOnFiltersApply,
             }}
             hasFiltering={isFilteringEnabled}
             searchConfig={{

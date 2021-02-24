@@ -83,9 +83,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
     if (hasSuggestions && queryValue.length > 2) {
       setIsSearching(true);
-      const suggestions = await onSearch(queryValue);
-      setSearchResults(suggestions);
-
+      // const suggestions = await onSearch(queryValue);
+      // setSearchResults(suggestions);
       setIsSearching(false);
       setSearchPerformed(true);
     }
@@ -99,8 +98,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const maxLength = 100;
   const isFieldInvalid = isInvalid || query.length > maxLength;
 
-  const clearSearch = () => {
+  const clearSearch = async () => {
     resetValue();
+    await onSearch('');
     setIsSearching(false);
     setSearchResults([]);
     setSearchPerformed(false);
@@ -115,9 +115,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         clearSearch();
       } else {
         setIsSearching(true);
-        console.log('waiting onSearch');
         await onSearch(queryValue);
-        console.log('onSearch is done');
         setIsSearching(false);
         setSearchPerformed(true);
       }
