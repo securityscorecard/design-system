@@ -87,9 +87,9 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const middlePageButtons = generatePages(startPage, endPage);
 
-  const onChangePageNumber = (e) => {
-    const pageNumber = Number(e.target.value);
-    if (pageNumber <= pageCount && pageNumber > 0) {
+  const handlePageInput = (event) => {
+    const pageNumber = Number(event.target.value);
+    if (event.key === 'Enter' && pageNumber <= pageCount && pageNumber > 0) {
       onGoToPage(pageNumber - 1);
     }
   };
@@ -144,9 +144,7 @@ const Pagination: React.FC<PaginationProps> = ({
           aria-label="Go to Page #"
           placeholder="#"
           type="number"
-          onChange={(event) => {
-            onChangePageNumber(event);
-          }}
+          onKeyDown={(e) => handlePageInput(e)}
         />
       </FlexContainer>
     </PaginationWrapper>
