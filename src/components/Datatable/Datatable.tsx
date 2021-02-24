@@ -50,6 +50,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
   searchConfig: {
+    hasSuggestions: false,
     placeholder: 'Search',
     onSearch: noop,
   },
@@ -88,16 +89,19 @@ const Datatable = <D extends Record<string, unknown>>({
     onSelect: onRowsSelect,
     ...restTableConfig
   }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
+
   const {
     isControlsEnabled,
     defaultHiddenColumns,
     defaultColumnOrder,
     hasFiltering,
     filtersConfig,
+    searchConfig,
     ...restControlsConfig
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
@@ -120,13 +124,26 @@ const Datatable = <D extends Record<string, unknown>>({
         pageSize,
         sortBy,
         filters: appliedFilters,
-        query: '', // TODO: get search query from local state
+        query: searchQuery,
       });
     },
-    [appliedFilters, onDataFetch],
+    [appliedFilters, searchQuery, onDataFetch],
   );
 
-  const handleOnFiltersAppply = useCallback(
+  const handleOnSearch = useCallback(
+    (queryValue: string) => {
+      setSearchQuery(queryValue);
+      onDataFetch({
+        pageSize: defaultPageSize,
+        pageIndex: 0,
+        query: searchQuery,
+        filters: appliedFilters,
+      });
+    },
+    [defaultPageSize, onDataFetch, searchQuery, appliedFilters],
+  );
+
+  const handleOnFiltersApply = useCallback(
     (filters: Filter[]) => {
       setHasAppliedFilters(lengthGt(0, filters));
       setAppliedFilters(filters);
@@ -134,9 +151,14 @@ const Datatable = <D extends Record<string, unknown>>({
       if (isCallbackDefined(onFiltersApply)) {
         onFiltersApply(filters);
       }
-      onDataFetch({ pageSize: defaultPageSize, pageIndex: 0, filters });
+      onDataFetch({
+        pageSize: defaultPageSize,
+        pageIndex: 0,
+        query: searchQuery,
+        filters,
+      });
     },
-    [defaultPageSize, onDataFetch, onFiltersApply],
+    [defaultPageSize, onDataFetch, searchQuery, onFiltersApply],
   );
 
   const handleOnRowsSelect = useCallback(
@@ -170,9 +192,13 @@ const Datatable = <D extends Record<string, unknown>>({
             defaultHiddenColumns={defaultHiddenColumns}
             filtersConfig={{
               ...filtersConfig,
-              onApply: handleOnFiltersAppply,
+              onApply: handleOnFiltersApply,
             }}
             hasFiltering={isFilteringEnabled}
+            searchConfig={{
+              ...searchConfig,
+              onSearch: handleOnSearch,
+            }}
             {...restControlsConfig}
           />
         )}

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isNotEmpty } from 'ramda-adjunct';
+import { isEmptyString, isNotEmpty } from 'ramda-adjunct';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
 import { Icon } from '../../Icon';
@@ -60,6 +60,7 @@ const ClearSearchButton = styled.button`
 `;
 
 const SearchBar: React.FC<SearchBarProps> = ({
+  hasSuggestions = true,
   onSearch,
   renderSearchSuggestion = renderSuggestionDefault,
   placeholder,
@@ -80,10 +81,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
     const queryValue = searchInputRef.current.value;
     setSearchPerformed(false);
 
-    if (queryValue.length > 2) {
+    if (hasSuggestions && queryValue.length > 2) {
       setIsSearching(true);
-      const suggestions = await onSearch(queryValue);
-      setSearchResults(suggestions);
+      // TODO: fetch suggestions directly from props
+      // const suggestions = await onSearch(queryValue);
+      // setSearchResults(suggestions);
       setIsSearching(false);
       setSearchPerformed(true);
     }
@@ -97,11 +99,28 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const maxLength = 100;
   const isFieldInvalid = isInvalid || query.length > maxLength;
 
-  const clearSearch = () => {
+  const clearSearch = async () => {
     resetValue();
+    await onSearch('');
     setIsSearching(false);
     setSearchResults([]);
     setSearchPerformed(false);
+  };
+
+  const handleKeyDown = async (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      const queryValue = searchInputRef.current.value;
+      if (isEmptyString(queryValue.trim())) {
+        clearSearch();
+      } else {
+        setIsSearching(true);
+        await onSearch(queryValue);
+        setIsSearching(false);
+        setSearchPerformed(true);
+      }
+    }
   };
 
   return (
@@ -134,6 +153,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         type="text"
         value={query}
         onChange={onChangeInput}
+        {...(hasSuggestions || { onKeyDown: handleKeyDown })}
       />
       {isSearching && (
         <LoadingIcon>
@@ -147,7 +167,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </LoadingIcon>
       )}
 
-      {searchPerformed && isNotEmpty(searchResults) && (
+      {hasSuggestions && searchPerformed && isNotEmpty(searchResults) && (
         <SearchSuggestions
           renderSearchSuggestion={renderSearchSuggestion}
           suggestions={searchResults}
@@ -161,6 +181,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 SearchBar.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,
+  hasSuggestions: PropTypes.bool,
   renderSearchSuggestion: PropTypes.func,
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,

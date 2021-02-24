@@ -42,8 +42,13 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input: React.FC<InputProps> = ({ value = '', onChange }) => (
-  <StyledInput placeholder="String" value={value} onChange={onChange} />
+const Input: React.FC<InputProps> = ({ value = '', onChange, ...props }) => (
+  <StyledInput
+    placeholder="String"
+    value={value}
+    onChange={onChange}
+    {...props}
+  />
 );
 
 export default Input;
@@ -51,4 +56,5 @@ export default Input;
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  onKeyDown: PropTypes.func,
 };
