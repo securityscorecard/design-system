@@ -89,16 +89,20 @@ const Datatable = <D extends Record<string, unknown>>({
     onSelect: onRowsSelect,
     ...restTableConfig
   }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
+
   const {
     isControlsEnabled,
     defaultHiddenColumns,
     defaultColumnOrder,
     hasFiltering,
     filtersConfig,
+    searchConfig,
     ...restControlsConfig
   }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
+  // const { onSearch: onSearchApply } = searchConfig;
+  const [searchQuery, setSearchQuery] = useState('');
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
@@ -121,10 +125,26 @@ const Datatable = <D extends Record<string, unknown>>({
         pageSize,
         sortBy,
         filters: appliedFilters,
-        query: '', // TODO: get search query from local state
+        query: searchQuery,
       });
     },
-    [appliedFilters, onDataFetch],
+    [appliedFilters, searchQuery, onDataFetch],
+  );
+
+  const handleOnSearch = useCallback(
+    (queryValue: string) => {
+      setSearchQuery(queryValue);
+      console.log(`fetching data for ${queryValue} in Datatable`);
+      // if (isCallbackDefined(onSearchApply)) {
+      //   onSearchApply(queryValue);
+      // }
+      onDataFetch({
+        pageSize: defaultPageSize,
+        pageIndex: 0,
+        query: searchQuery,
+      });
+    },
+    [defaultPageSize, onDataFetch, searchQuery],
   );
 
   const handleOnFiltersAppply = useCallback(
@@ -174,6 +194,10 @@ const Datatable = <D extends Record<string, unknown>>({
               onApply: handleOnFiltersAppply,
             }}
             hasFiltering={isFilteringEnabled}
+            searchConfig={{
+              ...searchConfig,
+              onSearch: handleOnSearch,
+            }}
             {...restControlsConfig}
           />
         )}

@@ -115,11 +115,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
         clearSearch();
       } else {
         setIsSearching(true);
-        const suggestions = await onSearch(queryValue);
-        setSearchResults(suggestions);
+        console.log('waiting onSearch');
+        await onSearch(queryValue);
+        console.log('onSearch is done');
         setIsSearching(false);
         setSearchPerformed(true);
-        console.log(suggestions);
       }
     }
   };
