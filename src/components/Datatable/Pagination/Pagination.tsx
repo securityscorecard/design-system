@@ -144,7 +144,7 @@ const Pagination: React.FC<PaginationProps> = ({
           aria-label="Go to Page #"
           placeholder="#"
           type="number"
-          onKeyDown={(e) => handlePageInput(e)}
+          onKeyDown={(event) => handlePageInput(event)}
         />
       </FlexContainer>
     </PaginationWrapper>
