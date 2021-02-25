@@ -8,6 +8,7 @@ export * from './FlexContainer';
 export * from './HexGrade';
 export * from './Icon';
 export * from './IconButton';
+export * from './Filters';
 export * from './FullscreenModal';
 export * from './Nav';
 export * from './Spinner';
