@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { assoc, equals, filter, map, pipe, propSatisfies } from 'ramda';
-import { isEmptyArray, isNotUndefined, isUndefined } from 'ramda-adjunct';
+import {
+  isEmptyArray,
+  isNotNull,
+  isNotUndefined,
+  isNull,
+  isUndefined,
+} from 'ramda-adjunct';
 
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
@@ -43,7 +49,7 @@ const Filters: React.FC<FiltersProps> = ({
   onCancel,
   isLoading = false,
 }) => {
-  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(undefined);
+  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
 
@@ -66,7 +72,7 @@ const Filters: React.FC<FiltersProps> = ({
   }, [filtersValues, fields]);
 
   useEffect(() => {
-    if (isNotUndefined(filtersValues)) {
+    if (isNotNull(filtersValues)) {
       const someApplied = filtersValues.some(({ isApplied }) => isApplied);
       const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
 
@@ -177,7 +183,7 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(newFilters);
   };
 
-  if (isUndefined(fields) || isUndefined(filtersValues)) {
+  if (isUndefined(fields) || isNull(filtersValues)) {
     return null;
   }
 
