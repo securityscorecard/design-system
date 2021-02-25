@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { equals } from 'ramda';
 import styled from 'styled-components';
+import { assoc, equals, filter, map, pipe, propSatisfies } from 'ramda';
+import { isEmptyArray, isNotUndefined, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
@@ -35,28 +36,42 @@ const FiltersContainer = styled(FlexContainer)`
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
-  state = getDefaultState(fields),
+  state,
   onApply,
   onChange,
   onClose,
   onCancel,
   isLoading = false,
 }) => {
-  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(state);
+  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(undefined);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
 
   useEffect(() => {
-    const defaultState = getDefaultState(fields);
+    // Set default
+    if ((isUndefined(state) || isEmptyArray(state)) && isNotUndefined(fields)) {
+      const defaultState = getDefaultState(fields);
+      setFiltersValues(defaultState);
+    } else {
+      setFiltersValues(state);
+    }
+  }, [state, fields]);
 
-    setIsDefaultState(equals(filtersValues, defaultState));
+  useEffect(() => {
+    if (isNotUndefined(fields)) {
+      const defaultState = getDefaultState(fields);
+
+      setIsDefaultState(equals(filtersValues, defaultState));
+    }
   }, [filtersValues, fields]);
 
   useEffect(() => {
-    const someApplied = filtersValues.some(({ isApplied }) => isApplied);
-    const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
+    if (isNotUndefined(filtersValues)) {
+      const someApplied = filtersValues.some(({ isApplied }) => isApplied);
+      const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
 
-    setHasUnappliedFilters(someApplied && someUnapplied);
+      setHasUnappliedFilters(someApplied && someUnapplied);
+    }
   }, [filtersValues]);
 
   const callOnChange = (newFilters) => {
@@ -137,11 +152,13 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const handleApply = () => {
-    const newFilters = filtersValues.map((filter) => ({
-      ...filter,
-      isApplied: true,
-    }));
-    setFiltersValues(newFilters);
+    const newFilters = pipe(
+      filter(propSatisfies(isNotUndefined, 'value')),
+      map(assoc('isApplied', true)),
+    )(filtersValues);
+    const defaultState = getDefaultState(fields);
+
+    setFiltersValues(isEmptyArray(newFilters) ? defaultState : newFilters);
 
     onApply(newFilters);
   };
@@ -159,6 +176,10 @@ const Filters: React.FC<FiltersProps> = ({
 
     callOnChange(newFilters);
   };
+
+  if (isUndefined(fields) || isUndefined(filtersValues)) {
+    return null;
+  }
 
   return (
     <FiltersContainer flexDirection="column">

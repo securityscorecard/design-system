@@ -12,7 +12,7 @@ import {
   split,
   trim,
 } from 'ramda';
-import { isNotEmpty } from 'ramda-adjunct';
+import { isEmptyArray, isNotEmpty } from 'ramda-adjunct';
 
 import Tag from './Tag';
 import { FlexContainer } from '../../../FlexContainer';
@@ -87,7 +87,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
 
   const handleRemoveTag = (index) => {
     const newTags = remove(index, 1, tags);
-    onChange(newTags);
+    onChange(isEmptyArray(newTags) ? undefined : newTags);
   };
 
   const handleKeyDown = (event) => {
