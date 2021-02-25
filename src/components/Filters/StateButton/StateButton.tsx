@@ -10,6 +10,7 @@ import {
   getBorderRadius,
   getColor,
   getDepth,
+  getFontFamily,
   getFontWeight,
   getLineHeight,
   pxToRem,
@@ -37,6 +38,11 @@ const RemoveButton = styled.button`
   justify-content: center;
   position: relative;
   padding: ${pxToRem(8, 5.5)};
+  border: none;
+  font-family: ${getFontFamily('base')};
+  margin: 0;
+  background: transparent;
+
   cursor: ${({ disabled }) => !disabled && 'pointer'};
   &:hover {
     background-color: ${({ disabled }) => !disabled && getColor('strawberry')};
