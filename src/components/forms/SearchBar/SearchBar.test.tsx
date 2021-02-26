@@ -1,6 +1,7 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
+import { DSProvider, createIconLibrary } from '../../../theme';
 import SearchBar from './SearchBar';
 import { createMockOnSearch } from './mocks';
 
@@ -9,13 +10,16 @@ const onClickSuggestion = jest.fn();
 const mockOnSearch = createMockOnSearch(onClickSuggestion);
 
 const setup = () => {
+  createIconLibrary();
   const utils = render(
-    <SearchBar
-      defaultValue="Searching for Default"
-      placeholder="Search for X"
-      hasSuggestions
-      onSearch={mockOnSearch}
-    />,
+    <DSProvider>
+      <SearchBar
+        defaultValue="Searching for Default"
+        placeholder="Search for X"
+        hasSuggestions
+        onSearch={mockOnSearch}
+      />
+    </DSProvider>,
   );
   const searchInput = utils.getByPlaceholderText(
     'Search for X',
