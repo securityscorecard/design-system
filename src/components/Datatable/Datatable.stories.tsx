@@ -177,11 +177,18 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
 ];
 
 export const Default: Story = () => {
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState(assets.slice(0, 50));
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatchFetchData = useCallback(
-    ({ pageSize, pageIndex }) => {
+    ({ pageSize, pageIndex, sortBy, filters, query }) => {
+      console.log('FetchData', {
+        pageSize,
+        pageIndex,
+        sortBy,
+        filters,
+        query,
+      });
       setIsLoading(true);
       setTimeout(() => {
         // Only update the data if this is the latest fetch
