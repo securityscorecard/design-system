@@ -1,5 +1,5 @@
 import { To } from 'history';
-import { Column, Row, SortingRule } from 'react-table';
+import { Column, IdType, Row, SortingRule } from 'react-table';
 
 export interface InternalColumnProps {
   totalLength: number;
@@ -63,4 +63,10 @@ export interface TableProps<D extends Record<string, unknown>> {
   rowActions: RowAction<D>[];
   config: TableConfig<D>;
   hasAppliedFilters?: boolean;
+  defaultHiddenColumns?: IdType<D>[];
+  defaultColumnOrder?: IdType<D>[];
+  hasExclusionLogic: boolean;
+  totalLength: number;
+  shouldResetSelectedRows: boolean;
+  setShouldResetSelectedRows: React.Dispatch<React.SetStateAction<boolean>>;
 }
