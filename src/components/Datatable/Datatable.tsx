@@ -127,20 +127,20 @@ const Datatable = <D extends Record<string, unknown>>({
         query: searchQuery,
       });
     },
-    [appliedFilters, searchQuery, onDataFetch],
+    [onDataFetch, appliedFilters, searchQuery],
   );
 
   const handleOnSearch = useCallback(
-    (queryValue: string) => {
-      setSearchQuery(queryValue);
+    (query: string) => {
+      setSearchQuery(query);
       onDataFetch({
         pageSize: defaultPageSize,
         pageIndex: 0,
-        query: searchQuery,
+        query,
         filters: appliedFilters,
       });
     },
-    [defaultPageSize, onDataFetch, searchQuery, appliedFilters],
+    [defaultPageSize, onDataFetch, appliedFilters],
   );
 
   const handleOnFiltersApply = useCallback(

@@ -322,10 +322,21 @@ const Table = <D extends Record<string, unknown>>({
     toggleAllRowsSelected(false);
   }, [hasExclusionLogic, toggleAllRowsSelected]);
 
-  // Listen for changes in pagination and use the state to fetch our new data
-  useEffect(() => {
-    fetchData(pageIndex, pageSize, sortBy);
-  }, [fetchData, pageIndex, pageSize, sortBy]);
+  const handleGoToPage = useCallback(
+    (tablePageIndex) => {
+      gotoPage(tablePageIndex);
+      fetchData(tablePageIndex, pageSize, sortBy);
+    },
+    [fetchData, gotoPage, pageSize, sortBy],
+  );
+  const handleNextPage = useCallback(() => {
+    nextPage();
+    fetchData(pageIndex + 1, pageSize, sortBy);
+  }, [fetchData, pageIndex, pageSize, sortBy, nextPage]);
+  const handlePreviousPage = useCallback(() => {
+    previousPage();
+    fetchData(pageIndex - 1, pageSize, sortBy);
+  }, [fetchData, pageIndex, pageSize, sortBy, previousPage]);
 
   // Render the UI for your table
   return (
@@ -389,9 +400,9 @@ const Table = <D extends Record<string, unknown>>({
           isLoading={isLoading}
           pageCount={pageCount || 0}
           pageIndex={pageIndex}
-          onGoToPage={gotoPage}
-          onNextPage={nextPage}
-          onPreviousPage={previousPage}
+          onGoToPage={handleGoToPage}
+          onNextPage={handleNextPage}
+          onPreviousPage={handlePreviousPage}
         />
       )}
     </>
