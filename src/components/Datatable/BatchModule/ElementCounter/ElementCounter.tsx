@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
 
@@ -50,18 +50,30 @@ const ElementCounter: React.FC = () => {
     selectedLength,
     hasExclusionLogic,
     setHasExclusionLogic,
+    setShouldResetSelectedRows,
     hasSelection,
   } = useDatatable();
+
+  const [localSelectedLength, setLocalSelectedLength] = useState(
+    selectedLength,
+  );
+
+  useEffect(() => {
+    setLocalSelectedLength(selectedLength);
+  }, [selectedLength]);
+
   const computedSelectedLength = hasExclusionLogic
-    ? totalLength - selectedLength
-    : selectedLength;
+    ? totalLength - localSelectedLength
+    : localSelectedLength;
 
   const content = getCounterContent(totalLength, computedSelectedLength);
   const handleSelectClick = useCallback(
     (state) => {
+      setLocalSelectedLength(0);
+      setShouldResetSelectedRows(true);
       setHasExclusionLogic(state);
     },
-    [setHasExclusionLogic],
+    [setHasExclusionLogic, setShouldResetSelectedRows],
   );
 
   return (

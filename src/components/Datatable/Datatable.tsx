@@ -9,6 +9,7 @@ import {
   lengthGt,
   noop,
 } from 'ramda-adjunct';
+import { useDeepCompareMemo } from 'use-deep-compare';
 
 import { getBorderRadius, getColor } from '../../utils/helpers';
 import { Filter } from '../Filters/Filters.types';
@@ -105,6 +106,9 @@ const Datatable = <D extends Record<string, unknown>>({
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
+  const [shouldResetSelectedRows, setShouldResetSelectedRows] = useState<
+    boolean
+  >(false);
   const [hasAppliedFilters, setHasAppliedFilters] = useState<boolean>(
     any(propEq('isApplied', true), filtersState),
   );
@@ -172,20 +176,31 @@ const Datatable = <D extends Record<string, unknown>>({
     [onRowsSelect],
   );
 
+  const memoizedTableConfig = useDeepCompareMemo(
+    () => ({
+      hasSelection,
+      onSelect: handleOnRowsSelect,
+      defaultPageSize,
+      ...restTableConfig,
+    }),
+    [defaultPageSize, handleOnRowsSelect, hasSelection, restTableConfig],
+  );
+
   return (
-    <DatatableContext.Provider
-      value={{
-        totalLength: totalDataSize,
-        selectedIds,
-        selectedLength: selectedIds.length,
-        defaultHiddenColumns,
-        defaultColumnOrder,
-        hasExclusionLogic,
-        setHasExclusionLogic,
-        hasSelection,
-      }}
-    >
-      <StyledDatatable flexDirection="column" {...props}>
+    <StyledDatatable flexDirection="column" {...props}>
+      <DatatableContext.Provider
+        value={{
+          totalLength: totalDataSize,
+          selectedIds,
+          selectedLength: selectedIds.length,
+          defaultHiddenColumns,
+          defaultColumnOrder,
+          hasExclusionLogic,
+          setHasExclusionLogic,
+          hasSelection,
+          setShouldResetSelectedRows,
+        }}
+      >
         {isControlsEnabled && (
           <ControlModule<D>
             defaultColumnOrder={defaultColumnOrder}
@@ -203,24 +218,25 @@ const Datatable = <D extends Record<string, unknown>>({
           />
         )}
         <BatchModule actions={batchActions} />
-        <Table<D>
-          columns={columns}
-          config={{
-            hasSelection,
-            onSelect: handleOnRowsSelect,
-            defaultPageSize,
-            ...restTableConfig,
-          }}
-          data={data}
-          fetchData={handleOnDataFetch}
-          hasAppliedFilters={hasAppliedFilters}
-          isLoading={isDataLoading}
-          pageCount={pageCount}
-          primaryKey={dataPrimaryKey}
-          rowActions={rowActions}
-        />
-      </StyledDatatable>
-    </DatatableContext.Provider>
+      </DatatableContext.Provider>
+      <Table<D>
+        columns={columns}
+        config={memoizedTableConfig}
+        data={data}
+        defaultColumnOrder={defaultColumnOrder}
+        defaultHiddenColumns={defaultHiddenColumns}
+        fetchData={handleOnDataFetch}
+        hasAppliedFilters={hasAppliedFilters}
+        hasExclusionLogic={hasExclusionLogic}
+        isLoading={isDataLoading}
+        pageCount={pageCount}
+        primaryKey={dataPrimaryKey}
+        rowActions={rowActions}
+        setShouldResetSelectedRows={setShouldResetSelectedRows}
+        shouldResetSelectedRows={shouldResetSelectedRows}
+        totalLength={totalDataSize}
+      />
+    </StyledDatatable>
   );
 };
 

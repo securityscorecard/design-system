@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 import { Column, Row } from 'react-table';
@@ -209,6 +209,20 @@ export const Default: Story = () => {
     );
   };
 
+  const memoizedTableConfig = useMemo(
+    () => ({
+      onSelect: logSelectedRows,
+      rowActions: [
+        {
+          label: 'Detail',
+          name: 'detail',
+          onClick: noop,
+        },
+      ],
+    }),
+    [],
+  );
+
   return (
     <Grid.Container>
       <Grid.Row>
@@ -222,16 +236,7 @@ export const Default: Story = () => {
             data={tableData}
             dataPrimaryKey="ipAddress"
             isDataLoading={isLoading}
-            tableConfig={{
-              onSelect: logSelectedRows,
-              rowActions: [
-                {
-                  label: 'Detail',
-                  name: 'detail',
-                  onClick: noop,
-                },
-              ],
-            }}
+            tableConfig={memoizedTableConfig}
             totalDataSize={assets.length}
             onDataFetch={dispatchFetchData}
           />

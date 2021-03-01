@@ -13,6 +13,8 @@ export interface DatatableContextType<
   setHasExclusionLogic?: React.Dispatch<React.SetStateAction<boolean>>;
   defaultHiddenColumns?: IdType<D>[];
   defaultColumnOrder?: IdType<D>[];
+  shouldResetSelectedRows?: boolean;
+  setShouldResetSelectedRows?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DatatableContext = createContext<DatatableContextType | undefined>(
