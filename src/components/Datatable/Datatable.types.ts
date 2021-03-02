@@ -1,7 +1,10 @@
 import { To } from 'history';
 import { Column, IdType, SortingRule } from 'react-table';
 
-import { SearchBarProps } from '../forms/SearchBar/SearchBar.types';
+import {
+  FilterSuggestion,
+  SearchBarProps,
+} from '../forms/SearchBar/SearchBar.types';
 import { Filter, FiltersProps } from '../Filters/Filters.types';
 import { PrimaryKey, RowAction, TableConfig } from './Table/Table.types';
 import { Action } from './types/Action.types';
@@ -75,12 +78,15 @@ export type OnDataFetchFn<D> = ({
   query,
 }: OnDataFetchArgs<D>) => void;
 
+export type onSuggestionsFetch = (query: string) => Promise<FilterSuggestion[]>;
+
 export interface DatatableProps<D extends Record<string, unknown>>
   extends SpacingProps {
   data: D[];
   totalDataSize: number;
   dataPrimaryKey?: PrimaryKey<D>;
   onDataFetch?: OnDataFetchFn<D>;
+  onSuggestionsFetch?: onSuggestionsFetch;
   isDataLoading?: boolean;
   columns: Column<D>[];
   tableConfig?: ExtendedTableConfig<D>;

@@ -3,11 +3,26 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { DSProvider, createIconLibrary } from '../../../theme';
 import SearchBar from './SearchBar';
-import { createMockOnSearch } from './mocks';
+import { mockOnSearch } from './mocks';
 
 const onClickSuggestion = jest.fn();
 
-const mockOnSearch = createMockOnSearch(onClickSuggestion);
+export const mockSuggestions = [
+  {
+    name: 'suggestion1',
+    value: 'suggestion 1',
+    onClick: onClickSuggestion,
+    filter: { field: 'Field 1', condition: 'is' },
+  },
+  {
+    name: 'suggestion2',
+    value: 'suggestion 2',
+    onClick: onClickSuggestion,
+    filter: { field: 'Field 2', condition: 'contains' },
+  },
+];
+
+// const mockOnSearch = createMockOnSearch(onClickSuggestion);
 
 const setup = () => {
   createIconLibrary();

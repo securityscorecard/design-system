@@ -9,7 +9,7 @@ import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
 import { Input } from '../Input';
 import SearchSuggestions from './SearchSuggestions';
-import { SearchBarProps } from './SearchBar.types';
+import { SearchBarProps, SuggestionPropType } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import { useControlledInput } from '../hooks/useControlledInput';
 
@@ -60,9 +60,10 @@ const ClearSearchButton = styled.button`
 `;
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  hasSuggestions = true,
+  hasSuggestions = false,
   onSearch,
   renderSearchSuggestion = renderSuggestionDefault,
+  suggestions = [],
   placeholder,
   isInvalid = false,
   isDisabled = false,
@@ -75,20 +76,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(suggestions);
+
+  const performSearch = async (query) => {
+    setIsSearching(true);
+    await onSearch(query);
+    if (hasSuggestions) {
+      setSearchResults(suggestions);
+    }
+    setIsSearching(false);
+    setSearchPerformed(true);
+  };
 
   const onChangeQuery = async () => {
     const queryValue = searchInputRef.current.value;
     setSearchPerformed(false);
-
-    if (hasSuggestions && queryValue.length > 2) {
-      setIsSearching(true);
-      // TODO: fetch suggestions directly from props
-      // const suggestions = await onSearch(queryValue);
-      // setSearchResults(suggestions);
-      setIsSearching(false);
-      setSearchPerformed(true);
-    }
+    performSearch(queryValue);
   };
 
   const { inputValue: query, onChangeInput, resetValue } = useControlledInput(
@@ -115,10 +118,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       if (isEmptyString(queryValue.trim())) {
         clearSearch();
       } else {
-        setIsSearching(true);
-        await onSearch(queryValue);
-        setIsSearching(false);
-        setSearchPerformed(true);
+        performSearch(queryValue);
       }
     }
   };
@@ -182,6 +182,7 @@ SearchBar.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,
   hasSuggestions: PropTypes.bool,
+  suggestions: PropTypes.arrayOf(SuggestionPropType),
   renderSearchSuggestion: PropTypes.func,
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,

@@ -24,6 +24,7 @@ import {
 } from './Datatable.types';
 import { ControlModule } from './ControlModule';
 import { BatchModule } from './BatchModule';
+import { FilterSuggestion } from '../forms/SearchBar/SearchBar.types';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -78,6 +79,7 @@ const Datatable = <D extends Record<string, unknown>>({
   dataPrimaryKey,
   onDataFetch = noop,
   isDataLoading = false,
+  onSuggestionsFetch = noop,
   columns,
   tableConfig = {},
   controlsConfig = {},
@@ -104,6 +106,10 @@ const Datatable = <D extends Record<string, unknown>>({
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [filterSuggestions, setFilterSuggestions] = useState<
+    FilterSuggestion[]
+  >([]);
+
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
@@ -135,17 +141,28 @@ const Datatable = <D extends Record<string, unknown>>({
     [onDataFetch, appliedFilters, searchQuery],
   );
 
-  const handleOnSearch = useCallback(
-    (query: string) => {
-      setSearchQuery(query);
-      onDataFetch({
-        pageSize: defaultPageSize,
-        pageIndex: 0,
-        query,
-        filters: appliedFilters,
-      });
+  const handleOnSuggestionsFetch = useCallback(
+    async (query: string) => {
+      setFilterSuggestions(await onSuggestionsFetch(query));
     },
-    [defaultPageSize, onDataFetch, appliedFilters],
+    [onSuggestionsFetch],
+  );
+
+  const handleOnSearch = useCallback(
+    async (queryValue: string) => {
+      setSearchQuery(queryValue);
+      if (controlsConfig.searchConfig?.hasSuggestions === true) {
+        handleOnSuggestionsFetch(queryValue);
+      } else {
+        onDataFetch({
+          pageSize: defaultPageSize,
+          pageIndex: 0,
+          query: searchQuery,
+          filters: appliedFilters,
+        });
+      }
+    },
+    [onDataFetch, defaultPageSize, searchQuery, appliedFilters, controlsConfig],
   );
 
   const handleOnFiltersApply = useCallback(
@@ -214,6 +231,7 @@ const Datatable = <D extends Record<string, unknown>>({
             searchConfig={{
               ...searchConfig,
               onSearch: handleOnSearch,
+              suggestions: filterSuggestions,
             }}
             {...restControlsConfig}
           />
@@ -287,6 +305,7 @@ Datatable.propTypes = {
   }),
   batchActions: PropTypes.arrayOf(ActionPropType),
   onDataFetch: PropTypes.func,
+  onSuggestionsFetch: PropTypes.func,
 };
 
 export default Datatable;

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 
 import { ControlsConfig } from '../Datatable.types';
-import { createMockOnSearch } from '../../forms/SearchBar/mocks';
+import { mockOnSearch } from '../../forms/SearchBar/mocks';
 import { fields } from '../../Filters/mocks/options';
 
 export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
@@ -10,7 +10,7 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   searchConfig: {
     hasSuggestions: false,
     placeholder: 'Search for domains or IPs',
-    onSearch: createMockOnSearch(action(`click-suggestion`)),
+    onSearch: mockOnSearch,
   },
   hasFiltering: true,
   filtersConfig: {
