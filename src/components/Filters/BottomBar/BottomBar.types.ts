@@ -5,4 +5,5 @@ export interface BottomBarProps {
   onCancel: (event: React.MouseEvent<HTMLElement>) => void;
   hasUnappliedFilters: boolean;
   isLoading?: boolean;
+  isCancelDisabled?: boolean;
 }

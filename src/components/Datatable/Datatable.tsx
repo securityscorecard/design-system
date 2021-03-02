@@ -65,6 +65,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     onCancel: noop,
     state: [],
     fields: [],
+    isCancelDisabled: false,
   },
   defaultIsFilteringOpen: false,
   hasGrouping: false,

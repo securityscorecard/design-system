@@ -80,6 +80,7 @@ const Filters: React.FC<FiltersProps> = ({
   onClose,
   onCancel,
   isLoading = false,
+  isCancelDisabled = false, // TODO remove https://zitenote.atlassian.net/browse/FEP-1648
 }) => {
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
@@ -264,6 +265,7 @@ const Filters: React.FC<FiltersProps> = ({
       })}
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
+        isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onCancel={handleCancelFetch}
@@ -279,8 +281,8 @@ export default Filters;
 Filters.propTypes = {
   fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   onApply: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   state: PropTypes.arrayOf(
     PropTypes.exact({
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
@@ -295,5 +297,6 @@ Filters.propTypes = {
     }),
   ),
   isLoading: PropTypes.bool,
+  isCancelDisabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

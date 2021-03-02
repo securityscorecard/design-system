@@ -53,6 +53,7 @@ export interface FiltersProps {
   onCancel: () => void;
   onChange?: (filters: Filter[]) => void;
   isLoading?: boolean;
+  isCancelDisabled?: boolean;
 }
 
 export const FieldPropTypes = PropTypes.exact({
