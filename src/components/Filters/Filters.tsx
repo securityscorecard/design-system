@@ -25,14 +25,14 @@ import {
 
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
-import { FieldPropTypes, Filter, FiltersProps } from './Filters.types';
+import { Field, FieldPropTypes, Filter, FiltersProps } from './Filters.types';
 import { DateRangePickerPropTypes } from './components/DateRangePicker/DateRangePicker.types';
 import { Operators } from './Filters.enums';
 
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
 
-const getDefaultConditionAndValue = ({ conditions }) => {
+const getDefaultConditionAndValue = ({ conditions }: Field) => {
   const defaultCondition = find(propEq('isDefault', true), conditions);
 
   const {
@@ -53,7 +53,7 @@ const getDefaultConditionAndValue = ({ conditions }) => {
   return { condition: defaultConditionValue, value: defaultValue };
 };
 
-const getDefaultState = ([firstField]) => {
+const getDefaultState = ([firstField]: Field[]) => {
   const { condition, value } = getDefaultConditionAndValue(firstField);
   return [
     {
