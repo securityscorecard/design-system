@@ -246,6 +246,20 @@ export const Default: Story = () => {
   );
 };
 
+export const MinimalConfig: Story = () => (
+  <Grid.Container>
+    <Grid.Row>
+      <Grid.Col>
+        <Datatable<Data>
+          columns={columns}
+          data={assets.slice(0, 50)}
+          totalDataSize={50}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  </Grid.Container>
+);
+
 export const NoData: Story = () => (
   <Grid.Container>
     <Grid.Row>

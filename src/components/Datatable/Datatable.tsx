@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { allPass, any, mergeRight, propEq } from 'ramda';
+import { allPass, any, mergeDeepRight, propEq } from 'ramda';
 import {
   isFunction,
   isNonEmptyArray,
@@ -76,7 +76,7 @@ const Datatable = <D extends Record<string, unknown>>({
   totalDataSize,
   dataPrimaryKey,
   onDataFetch = noop,
-  isDataLoading,
+  isDataLoading = false,
   columns,
   tableConfig = {},
   controlsConfig = {},
@@ -89,7 +89,7 @@ const Datatable = <D extends Record<string, unknown>>({
     hasSelection,
     onSelect: onRowsSelect,
     ...restTableConfig
-  }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
+  }: ExtendedTableConfig<D> = mergeDeepRight(defaultTableConfig, tableConfig);
 
   const {
     isControlsEnabled,
@@ -99,7 +99,7 @@ const Datatable = <D extends Record<string, unknown>>({
     filtersConfig,
     searchConfig,
     ...restControlsConfig
-  }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
+  }: ControlsConfig<D> = mergeDeepRight(defaultControlsConfig, controlsConfig);
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
   const [searchQuery, setSearchQuery] = useState<string>('');
