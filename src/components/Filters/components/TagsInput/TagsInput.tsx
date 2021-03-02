@@ -93,6 +93,8 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const handleKeyDown = (event) => {
     const { value } = event.target;
     if (event.key === 'Enter' && value) {
+      event.preventDefault();
+
       const valueArray = pipe(split(';'), map(trim), filter(isNotEmpty))(value);
 
       if (doesValueAlreadyExist(tags, valueArray)) {

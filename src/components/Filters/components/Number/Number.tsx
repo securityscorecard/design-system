@@ -13,15 +13,26 @@ export const StyledNumber = styled(StyledInput)`
   appearance: textfield;
 `;
 
-// TODO Safari doesn't indicate wrong input
-const Number: React.FC<NumberProps> = ({ value = '', onChange }) => (
-  <StyledNumber
-    placeholder="Number"
-    type="number"
-    value={value}
-    onChange={onChange}
-  />
-);
+const Number: React.FC<NumberProps> = ({ value = '', onChange, min, max }) => {
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <StyledNumber
+      max={max}
+      min={min}
+      placeholder="Number"
+      step="any"
+      type="number"
+      value={value}
+      onChange={onChange}
+      onKeyPress={handleKeyPress}
+    />
+  );
+};
 
 export default Number;
 
