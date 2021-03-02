@@ -363,6 +363,28 @@ export const fieldsTagsInput: Field[] = [
   },
 ];
 
+export const fieldsTagsInputValidation: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: TagsInput,
+          props: {
+            maxLength: 15,
+            pattern: '[a-zA-Z;]+',
+            patternMessage: 'Use only alphabets',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
 export const fieldsNumber: Field[] = [
   {
     conditions: [
