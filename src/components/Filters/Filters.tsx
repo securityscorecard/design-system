@@ -266,7 +266,7 @@ const Filters: React.FC<FiltersProps> = ({
         hasUnappliedFilters={hasUnappliedFilters}
         isLoading={isLoading}
         onAdd={handleAddRow}
-        onCancel={handleCancelFetch}
+        onCancel={onCancel ? handleCancelFetch : undefined}
         onClearAll={handleClearAll}
         onClose={handleCloseFilters}
       />
@@ -280,7 +280,6 @@ Filters.propTypes = {
   fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   onApply: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
   state: PropTypes.arrayOf(
     PropTypes.exact({
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
@@ -296,4 +295,5 @@ Filters.propTypes = {
   ),
   isLoading: PropTypes.bool,
   onChange: PropTypes.func,
+  onCancel: PropTypes.func,
 };
