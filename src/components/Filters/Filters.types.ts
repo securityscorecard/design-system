@@ -10,11 +10,13 @@ interface ComponentProps {
   options?: Option[];
   defaultValue?: Option;
   isMulti?: boolean;
-  // == Currently not implemented ==
   min?: number;
   max?: number;
-  length?: number;
-  regexp?: string;
+  maxLength?: number;
+  pattern?: string;
+  patternMessage?: string;
+  minDate?: Date;
+  maxDate?: Date;
 }
 
 interface ComponentWithProps {
@@ -66,8 +68,11 @@ export const FieldPropTypes = PropTypes.exact({
             isMulti: PropTypes.bool,
             min: PropTypes.number,
             max: PropTypes.number,
-            length: PropTypes.number,
-            regexp: PropTypes.string,
+            maxLength: PropTypes.number,
+            pattern: PropTypes.string,
+            patternMessage: PropTypes.string,
+            minDate: PropTypes.instanceOf(Date),
+            maxDate: PropTypes.instanceOf(Date),
           }),
         }),
       ]).isRequired,

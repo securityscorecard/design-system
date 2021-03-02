@@ -1,9 +1,8 @@
 export interface BottomBarProps {
-  onAdd: () => void;
-  onClearAll: () => void;
-  onApply: () => void;
-  onClose: () => void;
-  onCancel: () => void;
+  onAdd: (event: React.MouseEvent<HTMLElement>) => void;
+  onClearAll: (event: React.MouseEvent<HTMLElement>) => void;
+  onClose: (event: React.MouseEvent<HTMLElement>) => void;
+  onCancel: (event: React.MouseEvent<HTMLElement>) => void;
   hasUnappliedFilters: boolean;
   isLoading?: boolean;
 }

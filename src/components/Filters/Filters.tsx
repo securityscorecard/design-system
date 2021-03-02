@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { assoc, equals, filter, map, pipe, propSatisfies } from 'ramda';
+import {
+  assoc,
+  equals,
+  filter,
+  map,
+  path,
+  pipe,
+  prop,
+  propSatisfies,
+} from 'ramda';
 import {
   isEmptyArray,
   isNotNull,
@@ -10,7 +19,6 @@ import {
   isUndefined,
 } from 'ramda-adjunct';
 
-import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
 import { FieldPropTypes, Filter, FiltersProps } from './Filters.types';
@@ -20,23 +28,34 @@ import { Operators } from './Filters.enums';
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
 
-const getDefaultCondition = (fields) =>
-  (
+const getDefaultConditionAndValue = (fields) => {
+  const defaultCondition =
     fields[0].conditions.find(({ isDefault }) => isDefault) ||
-    fields[0].conditions[0]
-  ).value;
+    fields[0].conditions[0];
 
-const getDefaultState = (fields) => [
-  {
-    operator: Operators.and,
-    field: fields[0].value,
-    condition: getDefaultCondition(fields),
-    value: undefined,
-    isApplied: false,
-  },
-];
+  const defaultValue =
+    path(['component', 'props', 'defaultValue', 'value'], defaultCondition) ||
+    path(['component', 'props', 'defaultValue'], defaultCondition);
 
-const FiltersContainer = styled(FlexContainer)`
+  return { condition: prop('value', defaultCondition), value: defaultValue };
+};
+
+const getDefaultState = (fields) => {
+  const { condition, value } = getDefaultConditionAndValue(fields);
+  return [
+    {
+      operator: Operators.and,
+      field: fields[0].value,
+      condition,
+      value,
+      isApplied: false,
+    },
+  ];
+};
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
@@ -133,13 +152,16 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(newFilters);
   };
 
-  const handleAddRow = () => {
+  const handleAddRow = (event) => {
+    event.preventDefault();
+
     const newFilters = [...filtersValues];
+    const { condition, value } = getDefaultConditionAndValue(fields);
     const newRow = {
       operator: newFilters[0].operator,
       field: fields[0].value,
-      condition: getDefaultCondition(fields),
-      value: undefined,
+      condition,
+      value,
       isApplied: false,
     };
     const filtersWithNewRow = [...newFilters, newRow];
@@ -148,7 +170,9 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(filtersWithNewRow);
   };
 
-  const handleClearAll = () => {
+  const handleClearAll = (event) => {
+    event.preventDefault();
+
     const defaultState = getDefaultState(fields);
 
     setFiltersValues(defaultState);
@@ -157,7 +181,11 @@ const Filters: React.FC<FiltersProps> = ({
     onApply([]);
   };
 
-  const handleApply = () => {
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    // TODO remove https://zitenote.atlassian.net/browse/FEP-1645
+    if (isLoading) return;
+
     const newFilters = pipe(
       filter(propSatisfies(isNotUndefined, 'value')),
       map(assoc('isApplied', true)),
@@ -166,7 +194,10 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(isEmptyArray(newFilters) ? defaultState : newFilters);
 
-    onApply(newFilters);
+    // Don't apply empty filters
+    if (!isEmptyArray(newFilters)) {
+      onApply(newFilters);
+    }
   };
 
   const handleRemoveFilter = (index) => () => {
@@ -187,8 +218,20 @@ const Filters: React.FC<FiltersProps> = ({
     return null;
   }
 
+  const handleCloseFilters = (event) => {
+    event.preventDefault();
+
+    onClose();
+  };
+
+  const handleCancelFetch = (event) => {
+    event.preventDefault();
+
+    onCancel();
+  };
+
   return (
-    <FiltersContainer flexDirection="column">
+    <Form onSubmit={handleSubmitForm}>
       {filtersValues.map((props, index) => {
         const id = generateId(props, index);
         return (
@@ -210,12 +253,11 @@ const Filters: React.FC<FiltersProps> = ({
         hasUnappliedFilters={hasUnappliedFilters}
         isLoading={isLoading}
         onAdd={handleAddRow}
-        onApply={handleApply}
-        onCancel={onCancel}
+        onCancel={handleCancelFetch}
         onClearAll={handleClearAll}
-        onClose={onClose}
+        onClose={handleCloseFilters}
       />
-    </FiltersContainer>
+    </Form>
   );
 };
 
