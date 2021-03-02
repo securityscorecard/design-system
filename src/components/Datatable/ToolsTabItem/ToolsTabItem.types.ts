@@ -16,8 +16,8 @@ type ToolStates = typeof ToolsTabItemStates[keyof typeof ToolsTabItemStates];
 export type ToolsTabItem = {
   label: string;
   toolState?: ToolStates;
-  onToolActivate: React.MouseEventHandler;
-  onToolDeactivate: React.MouseEventHandler;
+  onToolActivate?: React.MouseEventHandler;
+  onToolDeactivate?: React.MouseEventHandler;
   iconName?: SSCIcons | string;
   iconType?: IconTypes | string;
   isDisabled?: boolean;
@@ -47,6 +47,6 @@ export const ToolsTabItemPropType = {
   ]),
   margin: SpacingSizeValuePropType,
   className: PropTypes.string,
-  onToolActivate: PropTypes.func.isRequired,
-  onToolDeactivate: PropTypes.func.isRequired,
+  onToolActivate: PropTypes.func,
+  onToolDeactivate: PropTypes.func,
 };
