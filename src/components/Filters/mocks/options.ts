@@ -20,7 +20,7 @@ export const fields: Field[] = [
           props: {
             maxLength: 15,
             pattern: '[a-zA-Z]+',
-            patternMessage: 'Use only characters',
+            patternMessage: 'Use only alphabets',
           },
         },
 

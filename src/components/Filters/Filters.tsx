@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
   assoc,
+  defaultTo,
   equals,
   filter,
+  find,
+  head,
   map,
   path,
   pipe,
-  prop,
+  propEq,
+  propOr,
   propSatisfies,
 } from 'ramda';
 import {
@@ -28,24 +32,33 @@ import { Operators } from './Filters.enums';
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
 
-const getDefaultConditionAndValue = (fields) => {
-  const defaultCondition =
-    fields[0].conditions.find(({ isDefault }) => isDefault) ||
-    fields[0].conditions[0];
+const getDefaultConditionAndValue = ({ conditions }) => {
+  const defaultCondition = find(propEq('isDefault', true), conditions);
 
-  const defaultValue =
-    path(['component', 'props', 'defaultValue', 'value'], defaultCondition) ||
-    path(['component', 'props', 'defaultValue'], defaultCondition);
+  const {
+    value: defaultConditionValue,
+    component: defaultConditionComponent,
+  } = defaultTo(head(conditions), defaultCondition);
 
-  return { condition: prop('value', defaultCondition), value: defaultValue };
+  const componentDefaultValue = path(
+    ['props', 'defaultValue'],
+    defaultConditionComponent,
+  );
+  const defaultValue = propOr(
+    componentDefaultValue,
+    'value',
+    componentDefaultValue,
+  );
+
+  return { condition: defaultConditionValue, value: defaultValue };
 };
 
-const getDefaultState = (fields) => {
-  const { condition, value } = getDefaultConditionAndValue(fields);
+const getDefaultState = ([firstField]) => {
+  const { condition, value } = getDefaultConditionAndValue(firstField);
   return [
     {
       operator: Operators.and,
-      field: fields[0].value,
+      field: firstField.value,
       condition,
       value,
       isApplied: false,
@@ -156,7 +169,7 @@ const Filters: React.FC<FiltersProps> = ({
     event.preventDefault();
 
     const newFilters = [...filtersValues];
-    const { condition, value } = getDefaultConditionAndValue(fields);
+    const { condition, value } = getDefaultConditionAndValue(fields[0]);
     const newRow = {
       operator: newFilters[0].operator,
       field: fields[0].value,
