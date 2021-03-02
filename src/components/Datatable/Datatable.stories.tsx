@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 import { Column, Row } from 'react-table';
@@ -177,8 +177,9 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
 ];
 
 export const Default: Story = () => {
-  const [tableData, setTableData] = useState(assets.slice(0, 50));
-  const [isLoading, setIsLoading] = useState(false);
+  const [tableData, setTableData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [totalLength, setTotalLength] = useState(0);
 
   const dispatchFetchData = useCallback(
     ({ pageSize, pageIndex, sortBy, filters, query }) => {
@@ -196,6 +197,7 @@ export const Default: Story = () => {
         const endRow = startRow + pageSize;
         const fetchedData = assets.slice(startRow, endRow);
         setTableData(fetchedData);
+        setTotalLength(assets.length);
         setIsLoading(false);
       }, 500);
     },
@@ -223,6 +225,10 @@ export const Default: Story = () => {
     [],
   );
 
+  useEffect(() => {
+    dispatchFetchData({ pageSize: 50, pageIndex: 0 });
+  }, []);
+
   return (
     <Grid.Container>
       <Grid.Row>
@@ -237,7 +243,7 @@ export const Default: Story = () => {
             dataPrimaryKey="ipAddress"
             isDataLoading={isLoading}
             tableConfig={memoizedTableConfig}
-            totalDataSize={assets.length}
+            totalDataSize={totalLength}
             onDataFetch={dispatchFetchData}
           />
         </Grid.Col>

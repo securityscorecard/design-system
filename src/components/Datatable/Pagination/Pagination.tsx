@@ -96,8 +96,8 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <PaginationWrapper>
-      <SpinnerContainer flexShrink={1}>
-        {isLoading && (
+      {isLoading && (
+        <SpinnerContainer flexShrink={1}>
           <Spinner
             borderWidth={2}
             height={16}
@@ -106,47 +106,51 @@ const Pagination: React.FC<PaginationProps> = ({
             width={16}
             dark
           />
-        )}
-      </SpinnerContainer>
-      <FlexContainer flexGrow={1} justifyContent="center">
-        <NavButton
-          iconName={SSCIconNames.longArrowLeft}
-          isDisabled={!canPreviousPage}
-          label="previous page"
-          onClick={() => onPreviousPage()}
-        />
-        {pageCount <= numPageButtons ? (
-          generatePages(1, pageCount).map((page) =>
-            renderPageButton(page, currentPage, onGoToPage),
-          )
-        ) : (
-          <>
-            {renderPageButton(1, currentPage, onGoToPage)}
-            {showLeftEllipsis && <Ellipsis> ... </Ellipsis>}
-            {middlePageButtons.map((page) =>
+        </SpinnerContainer>
+      )}
+      {pageCount > 0 && (
+        <FlexContainer flexGrow={1} justifyContent="center">
+          <NavButton
+            iconName={SSCIconNames.longArrowLeft}
+            isDisabled={!canPreviousPage}
+            label="previous page"
+            onClick={() => onPreviousPage()}
+          />
+          {pageCount <= numPageButtons ? (
+            generatePages(1, pageCount).map((page) =>
               renderPageButton(page, currentPage, onGoToPage),
-            )}
-            {showRightEllipsis && <Ellipsis> ... </Ellipsis>}
-            {renderPageButton(pageCount, currentPage, onGoToPage)}
-          </>
-        )}
+            )
+          ) : (
+            <>
+              {renderPageButton(1, currentPage, onGoToPage)}
+              {showLeftEllipsis && <Ellipsis> ... </Ellipsis>}
+              {middlePageButtons.map((page) =>
+                renderPageButton(page, currentPage, onGoToPage),
+              )}
+              {showRightEllipsis && <Ellipsis> ... </Ellipsis>}
+              {renderPageButton(pageCount, currentPage, onGoToPage)}
+            </>
+          )}
 
-        <NavButton
-          iconName={SSCIconNames.longArrowRight}
-          isDisabled={!canNextPage}
-          label="next page"
-          onClick={() => onNextPage()}
-        />
-      </FlexContainer>
-      <FlexContainer alignItems="end" flexShrink={1}>
-        <PageInputLabel> Go to page </PageInputLabel>
-        <PageInput
-          aria-label="Go to Page #"
-          placeholder="#"
-          type="number"
-          onKeyDown={(event) => handlePageInput(event)}
-        />
-      </FlexContainer>
+          <NavButton
+            iconName={SSCIconNames.longArrowRight}
+            isDisabled={!canNextPage}
+            label="next page"
+            onClick={() => onNextPage()}
+          />
+        </FlexContainer>
+      )}
+      {pageCount > 1 && (
+        <FlexContainer alignItems="end" flexShrink={1}>
+          <PageInputLabel> Go to page </PageInputLabel>
+          <PageInput
+            aria-label="Go to Page #"
+            placeholder="#"
+            type="number"
+            onKeyDown={(event) => handlePageInput(event)}
+          />
+        </FlexContainer>
+      )}
     </PaginationWrapper>
   );
 };

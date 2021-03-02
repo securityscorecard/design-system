@@ -378,13 +378,16 @@ const Table = <D extends Record<string, unknown>>({
           })}
         </StyledTableBody>
       </StyledTable>
-      {totalLength === 0 ? (
-        <NoDataContainer>
-          {hasAppliedFilters
-            ? renderNoMatchingDataContent(NoMatchingDataComponent)
-            : renderNoDataContent(NoDataComponent)}
-        </NoDataContainer>
-      ) : (
+      {totalLength === 0 && !isLoading && (
+        <>
+          <NoDataContainer>
+            {hasAppliedFilters
+              ? renderNoMatchingDataContent(NoMatchingDataComponent)
+              : renderNoDataContent(NoDataComponent)}
+          </NoDataContainer>
+        </>
+      )}
+      {(totalLength > 0 || (totalLength === 0 && isLoading)) && (
         <Pagination
           canNextPage={canNextPage}
           canPreviousPage={canPreviousPage}
