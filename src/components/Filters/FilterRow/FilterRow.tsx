@@ -101,15 +101,12 @@ const renderComponent = (Component, value, onChange) => {
   ) {
     const {
       component: SelectComponent,
-      props: { options, defaultValue, isMulti },
+      props: { options, isMulti },
     } = Component;
 
     const valueOptions = isArray(value)
-      ? pipe(
-          filter(pipe(prop('value'), includes(__, value))),
-          defaultTo(defaultValue),
-        )(options)
-      : pipe(find(propEq('value', value)), defaultTo(defaultValue))(options);
+      ? filter(pipe(prop('value'), includes(__, value)))(options)
+      : find(propEq('value', value))(options);
 
     return (
       <SelectComponent
@@ -120,6 +117,12 @@ const renderComponent = (Component, value, onChange) => {
         onChange={onChange}
       />
     );
+  }
+  // Component with props
+  if (typeof Component === 'object' && has('props', Component)) {
+    const { component: ComponentWithProps, props } = Component;
+
+    return <ComponentWithProps value={value} onChange={onChange} {...props} />;
   }
 
   return <Component value={value} onChange={onChange} />;

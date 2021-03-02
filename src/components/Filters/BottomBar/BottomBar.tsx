@@ -17,7 +17,6 @@ const LoadingText = styled(Text)`
 const BottomBar: React.FC<BottomBarProps> = ({
   onAdd,
   onClearAll,
-  onApply,
   onClose,
   onCancel,
   isLoading = false,
@@ -58,7 +57,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
       >
         {isLoading ? 'Cancel' : 'Close'}
       </Button>
-      <Button color="primary" variant="solid" onClick={onApply}>
+      <Button
+        color="primary"
+        /* disabled={isLoading} TODO enable by https://zitenote.atlassian.net/browse/FEP-1645 */
+        type="submit"
+        variant="solid"
+      >
         {isLoading ? (
           <>
             <Spinner
@@ -83,7 +87,6 @@ BottomBar.propTypes = {
   hasUnappliedFilters: PropTypes.bool.isRequired,
   onAdd: PropTypes.func.isRequired,
   onClearAll: PropTypes.func.isRequired,
-  onApply: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,

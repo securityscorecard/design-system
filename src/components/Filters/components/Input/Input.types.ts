@@ -1,7 +1,7 @@
 export interface InputProps {
   value: string;
-  onChange: () => void;
-  onKeyDown?: (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => void | Promise<void>;
+  onChange: (event: React.ReactEventHandler) => void;
+  maxLength?: number;
+  pattern?: string;
+  patternMessage?: string;
 }

@@ -14,7 +14,19 @@ import { Operators } from '../Filters.enums';
 export const fields: Field[] = [
   {
     conditions: [
-      { component: Input, value: 'is', label: 'is' },
+      {
+        component: {
+          component: Input,
+          props: {
+            maxLength: 15,
+            pattern: '[a-zA-Z]+',
+            patternMessage: 'Use only alphabets',
+          },
+        },
+
+        value: 'is',
+        label: 'is',
+      },
       {
         component: Input,
         value: 'is not',
@@ -61,7 +73,14 @@ export const fields: Field[] = [
   {
     conditions: [
       {
-        component: Number,
+        component: {
+          component: Number,
+          props: {
+            max: 5,
+            min: 2,
+          },
+        },
+
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -97,7 +116,17 @@ export const fields: Field[] = [
   },
   {
     conditions: [
-      { component: SingleDatePicker, value: 'is', label: 'is' },
+      {
+        component: {
+          component: DateRangePicker,
+          props: {
+            minDate: new Date('2021-03-01T00:00:00Z'),
+            maxDate: new Date('2021-03-28T00:00:00Z'),
+          },
+        },
+        value: 'is',
+        label: 'is',
+      },
       { component: SingleDatePicker, value: 'before', label: 'before' },
       {
         component: SingleDatePicker,
@@ -279,5 +308,252 @@ export const stateWithUnappliedFilters: Filter[] = [
     condition: 'contains',
     value: 'example',
     isApplied: false,
+  },
+];
+
+export const fieldsInput: Field[] = [
+  {
+    conditions: [
+      {
+        component: Input,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
+export const fieldsInputValidation: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: Input,
+          props: {
+            maxLength: 5,
+            pattern: '[a-zA-Z]+',
+            patternMessage: 'Use only alphabets',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
+export const fieldsTagsInput: Field[] = [
+  {
+    conditions: [
+      {
+        component: TagsInput,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
+export const fieldsNumber: Field[] = [
+  {
+    conditions: [
+      {
+        component: Number,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsNumberValidation: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: Number,
+          props: {
+            max: 5,
+            min: 2,
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsCount: Field[] = [
+  {
+    conditions: [
+      {
+        component: Count,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsInteger: Field[] = [
+  {
+    conditions: [
+      {
+        component: Integer,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsDateRange: Field[] = [
+  {
+    conditions: [
+      {
+        component: DateRangePicker,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'first observed',
+    label: 'First Observed',
+  },
+];
+
+export const fieldsDateRangeValidation: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: DateRangePicker,
+          props: {
+            minDate: new Date('2021-03-07T00:00:00Z'),
+            maxDate: new Date('2021-03-27T00:00:00Z'),
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'first observed',
+    label: 'First Observed',
+  },
+];
+
+export const fieldsSingleDate: Field[] = [
+  {
+    conditions: [
+      {
+        component: SingleDatePicker,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'first observed',
+    label: 'First Observed',
+  },
+];
+
+export const fieldsSelect: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+          },
+        },
+        value: 'is',
+        label: 'is',
+      },
+    ],
+    value: 'detection method',
+    label: 'Detection Method',
+  },
+];
+
+export const fieldsSelectWithDefaultValue: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+            defaultValue: { value: 'any', label: 'Any' },
+          },
+        },
+        value: 'is',
+        label: 'is',
+      },
+    ],
+    value: 'detection method',
+    label: 'Detection Method',
+  },
+];
+
+export const fieldsSelectMultiValue: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: Select,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+            ],
+            defaultValue: { value: 'any', label: 'Any' },
+            isMulti: true,
+          },
+        },
+        value: 'is',
+        label: 'is',
+      },
+    ],
+    value: 'detection method',
+    label: 'Detection Method',
   },
 ];
