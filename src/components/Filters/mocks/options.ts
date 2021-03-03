@@ -1,12 +1,12 @@
 import {
-  Count,
-  DateRangePicker,
-  Input,
-  Integer,
-  Number,
-  Select,
-  SingleDatePicker,
-  TagsInput,
+  CountFilter,
+  DateRangePickerFilter,
+  InputFilter,
+  IntegerFilter,
+  NumberFilter,
+  SelectFilter,
+  SingleDatePickerFilter,
+  TagsInputFilter,
 } from '../components';
 import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
@@ -16,7 +16,7 @@ export const fields: Field[] = [
     conditions: [
       {
         component: {
-          component: Input,
+          component: InputFilter,
           props: {
             maxLength: 15,
             pattern: '[a-zA-Z]+',
@@ -28,18 +28,18 @@ export const fields: Field[] = [
         label: 'is',
       },
       {
-        component: Input,
+        component: InputFilter,
         value: 'is not',
         label: 'is not',
       },
       {
-        component: Input,
+        component: InputFilter,
         value: 'contains',
         label: 'contains',
         isDefault: true,
       },
       {
-        component: Input,
+        component: InputFilter,
         value: 'does not contain',
         label: 'does not contain',
       },
@@ -49,20 +49,20 @@ export const fields: Field[] = [
   },
   {
     conditions: [
-      { component: TagsInput, value: 'is', label: 'is' },
+      { component: TagsInputFilter, value: 'is', label: 'is' },
       {
-        component: TagsInput,
+        component: TagsInputFilter,
         value: 'is not',
         label: 'is not',
       },
       {
-        component: TagsInput,
+        component: TagsInputFilter,
         value: 'contains',
         label: 'contains',
         isDefault: true,
       },
       {
-        component: TagsInput,
+        component: TagsInputFilter,
         value: 'does not contain',
         label: 'does not contain',
       },
@@ -74,7 +74,7 @@ export const fields: Field[] = [
     conditions: [
       {
         component: {
-          component: Number,
+          component: NumberFilter,
           props: {
             max: 5,
             min: 2,
@@ -86,27 +86,27 @@ export const fields: Field[] = [
         isDefault: true,
       },
       {
-        component: Number,
+        component: NumberFilter,
         value: 'is not',
         label: 'is not',
       },
       {
-        component: Count,
+        component: CountFilter,
         value: 'is less than',
         label: 'is less than',
       },
       {
-        component: Number,
+        component: NumberFilter,
         value: 'is greater than',
         label: 'is greater than',
       },
       {
-        component: Number,
+        component: NumberFilter,
         value: 'is at least',
         label: 'is at least',
       },
       {
-        component: Integer,
+        component: IntegerFilter,
         value: 'is at most',
         label: 'is at most',
       },
@@ -118,7 +118,7 @@ export const fields: Field[] = [
     conditions: [
       {
         component: {
-          component: DateRangePicker,
+          component: DateRangePickerFilter,
           props: {
             minDate: new Date('2021-03-01T00:00:00Z'),
             maxDate: new Date('2021-03-28T00:00:00Z'),
@@ -127,25 +127,25 @@ export const fields: Field[] = [
         value: 'is',
         label: 'is',
       },
-      { component: SingleDatePicker, value: 'before', label: 'before' },
+      { component: SingleDatePickerFilter, value: 'before', label: 'before' },
       {
-        component: SingleDatePicker,
+        component: SingleDatePickerFilter,
         value: 'after',
         label: 'after',
         isDefault: true,
       },
       {
-        component: SingleDatePicker,
+        component: SingleDatePickerFilter,
         value: 'within last',
         label: 'within last',
       },
       {
-        component: SingleDatePicker,
+        component: SingleDatePickerFilter,
         value: 'not within last',
         label: 'not within last',
       },
       {
-        component: DateRangePicker,
+        component: DateRangePickerFilter,
         value: 'between',
         label: 'between',
       },
@@ -157,7 +157,7 @@ export const fields: Field[] = [
     conditions: [
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },
@@ -174,7 +174,7 @@ export const fields: Field[] = [
       },
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },
@@ -191,7 +191,7 @@ export const fields: Field[] = [
       },
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },
@@ -210,7 +210,7 @@ export const fields: Field[] = [
       },
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },
@@ -315,7 +315,7 @@ export const fieldsInput: Field[] = [
   {
     conditions: [
       {
-        component: Input,
+        component: InputFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -331,7 +331,7 @@ export const fieldsInputValidation: Field[] = [
     conditions: [
       {
         component: {
-          component: Input,
+          component: InputFilter,
           props: {
             maxLength: 5,
             pattern: '[a-zA-Z]+',
@@ -352,7 +352,7 @@ export const fieldsTagsInput: Field[] = [
   {
     conditions: [
       {
-        component: TagsInput,
+        component: TagsInputFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -368,7 +368,7 @@ export const fieldsTagsInputValidation: Field[] = [
     conditions: [
       {
         component: {
-          component: TagsInput,
+          component: TagsInputFilter,
           props: {
             maxLength: 15,
             pattern: '[a-zA-Z;]+',
@@ -389,7 +389,7 @@ export const fieldsNumber: Field[] = [
   {
     conditions: [
       {
-        component: Number,
+        component: NumberFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -405,7 +405,7 @@ export const fieldsNumberValidation: Field[] = [
     conditions: [
       {
         component: {
-          component: Number,
+          component: NumberFilter,
           props: {
             max: 5,
             min: 2,
@@ -425,7 +425,7 @@ export const fieldsCount: Field[] = [
   {
     conditions: [
       {
-        component: Count,
+        component: CountFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -440,7 +440,7 @@ export const fieldsInteger: Field[] = [
   {
     conditions: [
       {
-        component: Integer,
+        component: IntegerFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -455,7 +455,7 @@ export const fieldsDateRange: Field[] = [
   {
     conditions: [
       {
-        component: DateRangePicker,
+        component: DateRangePickerFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -471,7 +471,7 @@ export const fieldsDateRangeValidation: Field[] = [
     conditions: [
       {
         component: {
-          component: DateRangePicker,
+          component: DateRangePickerFilter,
           props: {
             minDate: new Date('2021-03-07T00:00:00Z'),
             maxDate: new Date('2021-03-27T00:00:00Z'),
@@ -491,7 +491,7 @@ export const fieldsSingleDate: Field[] = [
   {
     conditions: [
       {
-        component: SingleDatePicker,
+        component: SingleDatePickerFilter,
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -507,7 +507,7 @@ export const fieldsSelect: Field[] = [
     conditions: [
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },
@@ -532,7 +532,7 @@ export const fieldsSelectWithDefaultValue: Field[] = [
     conditions: [
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },
@@ -558,7 +558,7 @@ export const fieldsSelectMultiValue: Field[] = [
     conditions: [
       {
         component: {
-          component: Select,
+          component: SelectFilter,
           props: {
             options: [
               { value: 'any', label: 'Any' },

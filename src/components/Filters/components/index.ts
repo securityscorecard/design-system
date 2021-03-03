@@ -1,8 +1,8 @@
-export { Input } from './Input';
-export { TagsInput } from './TagsInput';
-export { DateRangePicker } from './DateRangePicker';
-export { SingleDatePicker } from './SingleDatePicker';
-export { Number } from './Number';
-export { Integer } from './Integer';
-export { Count } from './Count';
-export { Select } from './Select';
+export { InputFilter } from './Input';
+export { TagsInputFilter } from './TagsInput';
+export { DateRangePickerFilter } from './DateRangePicker';
+export { SingleDatePickerFilter } from './SingleDatePicker';
+export { NumberFilter } from './Number';
+export { IntegerFilter } from './Integer';
+export { CountFilter } from './Count';
+export { SelectFilter } from './Select';

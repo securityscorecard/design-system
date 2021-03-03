@@ -1,1 +1,1 @@
-export { default as Integer } from './Integer';
+export { default as IntegerFilter } from './Integer';

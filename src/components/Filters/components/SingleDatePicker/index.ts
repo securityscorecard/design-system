@@ -1,1 +1,1 @@
-export { default as SingleDatePicker } from './SingleDatePicker';
+export { default as SingleDatePickerFilter } from './SingleDatePicker';
