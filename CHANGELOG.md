@@ -1,3 +1,44 @@
+# [1.0.0-alpha.34](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2021-03-03)
+
+
+### Bug Fixes
+
+* **ControlModule:** type error ([bef0d94](https://github.com/securityscorecard/design-system/commit/bef0d94086526ab138f63b03f47eb66e33799cf9))
+* **Datatable:** fix dropdown buttons styling ([28f6852](https://github.com/securityscorecard/design-system/commit/28f685249efa43917612acbb83da30740f020914))
+* **Datatable:** fix initial load UI ([dc89545](https://github.com/securityscorecard/design-system/commit/dc89545c90b11e29b075983f4e2a53dbfca8e317))
+* **Datatable:** fix minimal configuration requirements ([c8d0f76](https://github.com/securityscorecard/design-system/commit/c8d0f76c93a67fdf7cbc4e31f1be79713dc73166))
+* **Datatable:** fix multi fetch on filter and search ([168a984](https://github.com/securityscorecard/design-system/commit/168a9841c03ccace0f566ce2976a4416e437c733))
+* **Datatable:** fix selection using old selected state ([4ff5ef2](https://github.com/securityscorecard/design-system/commit/4ff5ef2a5060ef2a68e4d504486b86eedc70cfed))
+* **Datatable:** handleOnSearch fixes ([140238d](https://github.com/securityscorecard/design-system/commit/140238da6f9d53e7aa821ba15fc149c1a4e85d8a))
+* **Datatable:** update searchConfig and default story ([19ad43f](https://github.com/securityscorecard/design-system/commit/19ad43f940027d8d74b492767b238e8d9ac36999))
+* **Filters:** export Filters ([93218cd](https://github.com/securityscorecard/design-system/commit/93218cd94b530934175b900b6baf6806fce9aeef))
+* **Filters:** introduce isCancelDisabled prop ([d5d2314](https://github.com/securityscorecard/design-system/commit/d5d2314edd3adb278886d85b27c5269dcb5593c6))
+* **Filters:** make onCancel optional ([2f12fc3](https://github.com/securityscorecard/design-system/commit/2f12fc3d7f90c0e0af026fc1e07485ff757d4033))
+* **Filters:** prevent break when passed empty props ([eb7a626](https://github.com/securityscorecard/design-system/commit/eb7a626901004151f39cb21c218dac75a0a8880d))
+* **Filters:** set null as default to filtersValues ([4a537e7](https://github.com/securityscorecard/design-system/commit/4a537e7b3107d4da47908685be99bc16873642f9))
+* **Filters:** update types ([6be9d96](https://github.com/securityscorecard/design-system/commit/6be9d965411fedecf42b79449e9382f37fe88c3d))
+* **Pagination:** go to page from input onEnter ([896b7e9](https://github.com/securityscorecard/design-system/commit/896b7e943d0bd1375a2ce52e0a5dcbd68b66928d))
+* **Pagination:** rename e to event ([bbfd4fc](https://github.com/securityscorecard/design-system/commit/bbfd4fc6bfe2b610d76d0acaf3bde5a403ce0537))
+* **SearchBar:** cleanup and suggestions errors ([9df79ae](https://github.com/securityscorecard/design-system/commit/9df79ae39706a2e9d153ce7dbd0d73c351ce0328))
+* **SearchBar:** cleanup and suggestions errors ([913ceef](https://github.com/securityscorecard/design-system/commit/913ceef15d198db69689d4b1e33d4fd5a5370b40))
+* **SearchBar:** rename stories and To Do ([652f1c7](https://github.com/securityscorecard/design-system/commit/652f1c7de70730b0274b3ebfacb6f6d2cbc3fd06))
+* **SearchBar:** rename stories and To Do ([f6be9f2](https://github.com/securityscorecard/design-system/commit/f6be9f2861b35cde4a213bcbc448be8ce55e9cfa))
+* **SearchBar:** test and type errors ([573ff4e](https://github.com/securityscorecard/design-system/commit/573ff4e5b4ccccfadc1b1dee4ea3b390d6e9baad))
+* **StateButton:** update styles ([c544f95](https://github.com/securityscorecard/design-system/commit/c544f9562122ba77d259f24adb4de0387bec5ff8))
+* **TagsInput:** support validation ([877a7f7](https://github.com/securityscorecard/design-system/commit/877a7f774d28069d8c0d034aa583699f94c3a410))
+* **ToolTabItem:** unrequire onToolActivate and Deactivate ([ae3859f](https://github.com/securityscorecard/design-system/commit/ae3859f0d092c04ff2fb4efdfb932bdcd38d6f95))
+
+
+### Features
+
+* **Datatable:** add handleOnSearch ([2e2a7a9](https://github.com/securityscorecard/design-system/commit/2e2a7a914fdb6507865dff3f45e9e4525b6f6a44))
+* **Datatable:** pass filterSuggestions to SearchBar ([87c21a7](https://github.com/securityscorecard/design-system/commit/87c21a723d889dd184aa684aeff820de5a5b4cd4))
+* **Filters:** add form validation ([83a5d6a](https://github.com/securityscorecard/design-system/commit/83a5d6ad148860177fa4293c50e27abd56e31977))
+* **Filters:** add new stories to storybook ([7bea82d](https://github.com/securityscorecard/design-system/commit/7bea82df200db89a46626c96f334fe8fe550e5d2))
+* **Filters:** support additional components validations ([28e1c98](https://github.com/securityscorecard/design-system/commit/28e1c981b00bb91e45431de51041ea56a8a27a7d))
+* **SearchBox:** make hasSuggestions optional ([d317f75](https://github.com/securityscorecard/design-system/commit/d317f75484b68d75f642c8a6fc84e79cb7709d66))
+* **SearchBox:** make hasSuggestions optional ([fd92bd1](https://github.com/securityscorecard/design-system/commit/fd92bd1d55c16e395f1d8f2274d941f8ed3b97cd))
+
 # [1.0.0-alpha.33](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2021-02-24)
 
 
