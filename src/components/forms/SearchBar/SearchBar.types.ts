@@ -15,16 +15,16 @@ export interface FilterSuggestion extends SearchSuggestion {
 }
 
 export const SuggestionPropType = PropTypes.oneOfType([
-  PropTypes.shape({
+  PropTypes.exact({
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
   }),
-  PropTypes.shape({
+  PropTypes.exact({
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
-    filter: PropTypes.shape({
+    filter: PropTypes.exact({
       field: PropTypes.string.isRequired,
       condition: PropTypes.string.isRequired,
     }).isRequired,

@@ -12,6 +12,7 @@ import SearchSuggestions from './SearchSuggestions';
 import { SearchBarProps, SuggestionPropType } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import { useControlledInput } from '../hooks/useControlledInput';
+import { useMounted } from '../../../hooks/useMounted';
 
 const SearchBarWrapper = styled.div`
   position: relative;
@@ -76,21 +77,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const [searchResults, setSearchResults] = useState(suggestions);
+  const isMounted = useMounted();
 
   const performSearch = async (query) => {
+    setSearchPerformed(false);
     setIsSearching(true);
     await onSearch(query);
-    if (hasSuggestions) {
-      setSearchResults(suggestions);
+    if (isMounted()) {
+      setIsSearching(false);
+      setSearchPerformed(true);
     }
-    setIsSearching(false);
-    setSearchPerformed(true);
   };
 
   const onChangeQuery = async () => {
     const queryValue = searchInputRef.current.value;
-    setSearchPerformed(false);
     performSearch(queryValue);
   };
 
@@ -105,9 +105,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const clearSearch = async () => {
     resetValue();
     await onSearch('');
-    setIsSearching(false);
-    setSearchResults([]);
-    setSearchPerformed(false);
+    if (isMounted()) {
+      setIsSearching(false);
+      setSearchPerformed(false);
+    }
   };
 
   const handleKeyDown = async (
@@ -167,10 +168,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </LoadingIcon>
       )}
 
-      {hasSuggestions && searchPerformed && isNotEmpty(searchResults) && (
+      {searchPerformed && hasSuggestions && isNotEmpty(suggestions) && (
         <SearchSuggestions
           renderSearchSuggestion={renderSearchSuggestion}
-          suggestions={searchResults}
+          suggestions={suggestions}
           onClickOut={() => setSearchPerformed(false)}
         />
       )}
