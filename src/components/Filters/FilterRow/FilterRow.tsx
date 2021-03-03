@@ -26,7 +26,7 @@ import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
 import { StateButton } from '../StateButton';
-import { Select } from '../components';
+import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { FieldPropTypes } from '../Filters.types';
@@ -206,7 +206,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
       )}
       <SplitField $width={72}>
         {index === 1 ? (
-          <Select
+          <SelectFilter
             defaultValue={operatorOption}
             options={operatorOptions}
             onChange={onOperatorChange}
@@ -219,14 +219,14 @@ const FilterRow: React.FC<FilterRowProps> = ({
         )}
       </SplitField>
       <SplitField $width={200}>
-        <Select
+        <SelectFilter
           options={fieldOptions}
           value={field}
           onChange={handleFieldChange}
         />
       </SplitField>
       <SplitField $width={144}>
-        <Select
+        <SelectFilter
           options={conditions}
           value={condition}
           onChange={handleConditionChange}

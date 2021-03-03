@@ -1,1 +1,1 @@
-export { default as TagsInput } from './TagsInput';
+export { default as TagsInputFilter } from './TagsInput';
