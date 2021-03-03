@@ -24,6 +24,7 @@ import {
 } from './Datatable.types';
 import { ControlModule } from './ControlModule';
 import { BatchModule } from './BatchModule';
+import { FilterSuggestion } from '../forms/SearchBar/SearchBar.types';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -54,6 +55,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     hasSuggestions: false,
     placeholder: 'Search',
     onSearch: noop,
+    onSuggestionsFetch: noop,
   },
   hasColumnVisibility: false,
   hasColumnOrdering: false,
@@ -98,12 +100,16 @@ const Datatable = <D extends Record<string, unknown>>({
     defaultColumnOrder,
     hasFiltering,
     filtersConfig,
-    searchConfig,
+    searchConfig: { hasSuggestions, onSuggestionsFetch, ...restSearchConfig },
     ...restControlsConfig
   }: ControlsConfig<D> = mergeDeepRight(defaultControlsConfig, controlsConfig);
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [filterSuggestions, setFilterSuggestions] = useState<
+    FilterSuggestion[]
+  >([]);
+
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
@@ -135,17 +141,34 @@ const Datatable = <D extends Record<string, unknown>>({
     [onDataFetch, appliedFilters, searchQuery],
   );
 
-  const handleOnSearch = useCallback(
-    (query: string) => {
-      setSearchQuery(query);
-      onDataFetch({
-        pageSize: defaultPageSize,
-        pageIndex: 0,
-        query,
-        filters: appliedFilters,
-      });
+  const handleOnSuggestionsFetch = useCallback(
+    async (query: string) => {
+      setFilterSuggestions(await onSuggestionsFetch(query));
     },
-    [defaultPageSize, onDataFetch, appliedFilters],
+    [onSuggestionsFetch],
+  );
+
+  const handleOnSearch = useCallback(
+    (queryValue: string) => {
+      setSearchQuery(queryValue);
+      if (hasSuggestions) {
+        handleOnSuggestionsFetch(queryValue);
+      } else {
+        onDataFetch({
+          pageSize: defaultPageSize,
+          pageIndex: 0,
+          query: queryValue,
+          filters: appliedFilters,
+        });
+      }
+    },
+    [
+      hasSuggestions,
+      handleOnSuggestionsFetch,
+      onDataFetch,
+      defaultPageSize,
+      appliedFilters,
+    ],
   );
 
   const handleOnFiltersApply = useCallback(
@@ -212,8 +235,10 @@ const Datatable = <D extends Record<string, unknown>>({
             }}
             hasFiltering={isFilteringEnabled}
             searchConfig={{
-              ...searchConfig,
+              ...restSearchConfig,
+              hasSuggestions,
               onSearch: handleOnSearch,
+              suggestions: filterSuggestions,
             }}
             {...restControlsConfig}
           />
@@ -280,6 +305,7 @@ Datatable.propTypes = {
   controlsConfig: PropTypes.shape({
     isControlsEnabled: PropTypes.bool,
     hasSearch: PropTypes.bool,
+    onSuggestionsFetch: PropTypes.func,
     hasColumnVisibility: PropTypes.bool,
     defaultHiddenColumns: PropTypes.arrayOf(PropTypes.string),
     hasColumnOrdering: PropTypes.bool,

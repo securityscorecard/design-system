@@ -1,7 +1,10 @@
 import { To } from 'history';
 import { Column, IdType, SortingRule } from 'react-table';
 
-import { SearchBarProps } from '../forms/SearchBar/SearchBar.types';
+import {
+  FilterSuggestion,
+  SearchBarProps,
+} from '../forms/SearchBar/SearchBar.types';
 import { Filter, FiltersProps } from '../Filters/Filters.types';
 import { PrimaryKey, RowAction, TableConfig } from './Table/Table.types';
 import { Action } from './types/Action.types';
@@ -22,13 +25,16 @@ type ToolsActions = {
   onToolActivate: React.MouseEventHandler;
   onToolDeactivate: React.MouseEventHandler;
 };
+export interface SearchConfigProps extends SearchBarProps {
+  onSuggestionsFetch?: (query: string) => Promise<FilterSuggestion[]>;
+}
 
 export type ControlsConfig<D> = {
   isControlsEnabled?: boolean;
 
   // Search section
   hasSearch?: boolean;
-  searchConfig?: SearchBarProps;
+  searchConfig?: SearchConfigProps;
 
   // Tools actions
   columnVisibilityActions?: ToolsActions;

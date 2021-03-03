@@ -1,11 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { action } from '@storybook/addon-actions';
 
 import SearchBar from './SearchBar';
 import { SearchBarProps } from './SearchBar.types';
 import { renderSuggestionFilter } from './SearchSuggestionFormats';
-import { createMockOnSearch } from './mocks';
+import { mockOnSearch, mockSuggestions } from './mocks';
 
 export default {
   title: 'components/forms/SearchBar',
@@ -14,7 +13,8 @@ export default {
 
 const commonArgs = {
   placeholder: 'Search for domains or IPs',
-  onSearch: createMockOnSearch(action(`click-suggestion`)),
+  onSearch: mockOnSearch,
+  suggestions: mockSuggestions('suggestion'),
 };
 
 export const playground: Story<SearchBarProps> = (args) => (
@@ -50,8 +50,6 @@ export const SearchBarActive: Story = () => (
   <SearchBar
     aria-label="SearchBar"
     defaultValue="search text"
-    renderSearchSuggestion={renderSuggestionFilter}
-    hasSuggestions
     {...commonArgs}
   />
 );
