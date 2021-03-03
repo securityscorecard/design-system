@@ -32,6 +32,7 @@ export type ControlsConfig<D> = {
   // Search section
   hasSearch?: boolean;
   searchConfig?: SearchBarProps;
+  onSuggestionsFetch?: (query: string) => Promise<FilterSuggestion[]>;
 
   // Tools actions
   columnVisibilityActions?: ToolsActions;
@@ -78,15 +79,12 @@ export type OnDataFetchFn<D> = ({
   query,
 }: OnDataFetchArgs<D>) => void;
 
-export type onSuggestionsFetch = (query: string) => Promise<FilterSuggestion[]>;
-
 export interface DatatableProps<D extends Record<string, unknown>>
   extends SpacingProps {
   data: D[];
   totalDataSize: number;
   dataPrimaryKey?: PrimaryKey<D>;
   onDataFetch?: OnDataFetchFn<D>;
-  onSuggestionsFetch?: onSuggestionsFetch;
   isDataLoading?: boolean;
   columns: Column<D>[];
   tableConfig?: ExtendedTableConfig<D>;

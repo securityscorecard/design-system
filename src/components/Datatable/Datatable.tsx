@@ -56,6 +56,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     placeholder: 'Search',
     onSearch: noop,
   },
+  onSuggestionsFetch: noop,
   hasColumnVisibility: false,
   hasColumnOrdering: false,
   hasFiltering: true,
@@ -79,7 +80,6 @@ const Datatable = <D extends Record<string, unknown>>({
   dataPrimaryKey,
   onDataFetch = noop,
   isDataLoading = false,
-  onSuggestionsFetch = noop,
   columns,
   tableConfig = {},
   controlsConfig = {},
@@ -101,6 +101,7 @@ const Datatable = <D extends Record<string, unknown>>({
     hasFiltering,
     filtersConfig,
     searchConfig,
+    onSuggestionsFetch,
     ...restControlsConfig
   }: ControlsConfig<D> = mergeDeepRight(defaultControlsConfig, controlsConfig);
 
@@ -151,18 +152,24 @@ const Datatable = <D extends Record<string, unknown>>({
   const handleOnSearch = useCallback(
     async (queryValue: string) => {
       setSearchQuery(queryValue);
-      if (controlsConfig.searchConfig?.hasSuggestions === true) {
+      if (searchConfig.hasSuggestions) {
         handleOnSuggestionsFetch(queryValue);
       } else {
         onDataFetch({
           pageSize: defaultPageSize,
           pageIndex: 0,
-          query: searchQuery,
+          query: queryValue,
           filters: appliedFilters,
         });
       }
     },
-    [onDataFetch, defaultPageSize, searchQuery, appliedFilters, controlsConfig],
+    [
+      searchConfig.hasSuggestions,
+      handleOnSuggestionsFetch,
+      onDataFetch,
+      defaultPageSize,
+      appliedFilters,
+    ],
   );
 
   const handleOnFiltersApply = useCallback(
@@ -298,6 +305,7 @@ Datatable.propTypes = {
   controlsConfig: PropTypes.shape({
     isControlsEnabled: PropTypes.bool,
     hasSearch: PropTypes.bool,
+    onSuggestionsFetch: PropTypes.func,
     hasColumnVisibility: PropTypes.bool,
     defaultHiddenColumns: PropTypes.arrayOf(PropTypes.string),
     hasColumnOrdering: PropTypes.bool,
@@ -305,7 +313,6 @@ Datatable.propTypes = {
   }),
   batchActions: PropTypes.arrayOf(ActionPropType),
   onDataFetch: PropTypes.func,
-  onSuggestionsFetch: PropTypes.func,
 };
 
 export default Datatable;
