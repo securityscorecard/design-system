@@ -1,14 +1,11 @@
-import { To } from 'history';
-
-import { ActionKinds } from '../types/Action.types';
-
-export interface DropdownLinkProps {
-  name: string;
-  href?: string;
-  to?: To;
-  onClick: () => void;
+export interface DropdownPaneStyles {
+  width: number;
+  space: number;
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
 }
-export interface DropdownPaneProps {
-  actions: ActionKinds[];
+export interface DropdownPaneProps extends DropdownPaneStyles {
   onClickOut: () => void;
 }

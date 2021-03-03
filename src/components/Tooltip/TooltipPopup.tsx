@@ -6,6 +6,7 @@ import {
   getBorderRadius,
   getColor,
   getDepth,
+  getFontFamily,
   getFontSize,
   getLineHeight,
   pxToRem,
@@ -96,6 +97,7 @@ const TooltipPopup = styled.div<TooltipPopupProps>`
   ${createPaddingSpacing(0.8)};
   background: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
+  font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
