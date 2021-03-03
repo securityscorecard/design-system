@@ -1,3 +1,10 @@
+# [1.0.0-alpha.35](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2021-03-03)
+
+
+### Bug Fixes
+
+* **Filters:** export components ([b99f856](https://github.com/securityscorecard/design-system/commit/b99f85628a2414caedeb074abada673b03b69d44))
+
 # [1.0.0-alpha.34](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2021-03-03)
 
 
