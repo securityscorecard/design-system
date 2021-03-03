@@ -55,8 +55,8 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     hasSuggestions: false,
     placeholder: 'Search',
     onSearch: noop,
+    onSuggestionsFetch: noop,
   },
-  onSuggestionsFetch: noop,
   hasColumnVisibility: false,
   hasColumnOrdering: false,
   hasFiltering: true,
@@ -100,8 +100,7 @@ const Datatable = <D extends Record<string, unknown>>({
     defaultColumnOrder,
     hasFiltering,
     filtersConfig,
-    searchConfig,
-    onSuggestionsFetch,
+    searchConfig: { hasSuggestions, onSuggestionsFetch, ...restSearchConfig },
     ...restControlsConfig
   }: ControlsConfig<D> = mergeDeepRight(defaultControlsConfig, controlsConfig);
 
@@ -150,9 +149,9 @@ const Datatable = <D extends Record<string, unknown>>({
   );
 
   const handleOnSearch = useCallback(
-    async (queryValue: string) => {
+    (queryValue: string) => {
       setSearchQuery(queryValue);
-      if (searchConfig.hasSuggestions) {
+      if (hasSuggestions) {
         handleOnSuggestionsFetch(queryValue);
       } else {
         onDataFetch({
@@ -164,7 +163,7 @@ const Datatable = <D extends Record<string, unknown>>({
       }
     },
     [
-      searchConfig.hasSuggestions,
+      hasSuggestions,
       handleOnSuggestionsFetch,
       onDataFetch,
       defaultPageSize,
@@ -236,7 +235,8 @@ const Datatable = <D extends Record<string, unknown>>({
             }}
             hasFiltering={isFilteringEnabled}
             searchConfig={{
-              ...searchConfig,
+              ...restSearchConfig,
+              hasSuggestions,
               onSearch: handleOnSearch,
               suggestions: filterSuggestions,
             }}

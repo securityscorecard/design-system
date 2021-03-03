@@ -25,14 +25,16 @@ type ToolsActions = {
   onToolActivate: React.MouseEventHandler;
   onToolDeactivate: React.MouseEventHandler;
 };
+export interface SearchConfigProps extends SearchBarProps {
+  onSuggestionsFetch?: (query: string) => Promise<FilterSuggestion[]>;
+}
 
 export type ControlsConfig<D> = {
   isControlsEnabled?: boolean;
 
   // Search section
   hasSearch?: boolean;
-  searchConfig?: SearchBarProps;
-  onSuggestionsFetch?: (query: string) => Promise<FilterSuggestion[]>;
+  searchConfig?: SearchConfigProps;
 
   // Tools actions
   columnVisibilityActions?: ToolsActions;

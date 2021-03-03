@@ -14,7 +14,7 @@ export default {
 const commonArgs = {
   placeholder: 'Search for domains or IPs',
   onSearch: mockOnSearch,
-  suggestions: mockSuggestions,
+  suggestions: mockSuggestions('suggestion'),
 };
 
 export const playground: Story<SearchBarProps> = (args) => (

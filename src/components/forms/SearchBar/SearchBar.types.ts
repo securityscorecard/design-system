@@ -42,7 +42,7 @@ export interface SearchBarProps
     React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   hasSuggestions?: boolean;
-  onSearch: (string) => Promise<void>;
+  onSearch: (string) => void | Promise<void>;
   suggestions?: FilterSuggestion[] | SearchSuggestion[];
   renderSearchSuggestion?: renderSuggestionFunc;
 }
