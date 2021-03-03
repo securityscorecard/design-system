@@ -1,15 +1,31 @@
 import { action } from '@storybook/addon-actions';
 
 import { ControlsConfig } from '../Datatable.types';
-import { createMockOnSearch } from '../../forms/SearchBar/mocks';
+import {
+  delay,
+  mockOnSearch,
+  mockSuggestions,
+} from '../../forms/SearchBar/mocks';
 import { fields } from '../../Filters/mocks/options';
+import { renderSuggestionFilter } from '../../forms/SearchBar/SearchSuggestionFormats';
+import { FilterSuggestion } from '../../forms/SearchBar/SearchBar.types';
+
+const mockOnSuggestionsFetch = async (
+  query: string,
+): Promise<FilterSuggestion[]> => {
+  await delay(200);
+  return mockSuggestions(query);
+};
 
 export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
   searchConfig: {
+    hasSuggestions: true,
     placeholder: 'Search for domains or IPs',
-    onSearch: createMockOnSearch(action(`click-suggestion`)),
+    onSearch: mockOnSearch,
+    onSuggestionsFetch: mockOnSuggestionsFetch,
+    renderSearchSuggestion: renderSuggestionFilter,
   },
   hasFiltering: true,
   filtersConfig: {

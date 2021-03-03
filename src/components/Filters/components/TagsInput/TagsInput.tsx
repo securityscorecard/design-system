@@ -12,7 +12,7 @@ import {
   split,
   trim,
 } from 'ramda';
-import { isNotEmpty } from 'ramda-adjunct';
+import { isEmptyArray, isNotEmpty } from 'ramda-adjunct';
 
 import Tag from './Tag';
 import { FlexContainer } from '../../../FlexContainer';
@@ -30,11 +30,19 @@ const Container = styled(FlexContainer)<TagsContainerProps>`
   min-height: ${pxToRem(32)};
   padding: ${({ isFocused }) => pxToRem(0, isFocused ? 15 : 16)};
   background: ${getFormStyle('bgColor')};
-  border-width: ${({ isFocused }) =>
-    getFormStyle(isFocused ? 'statefulBorderWidth' : 'borderWidth')};
+  border-width: ${({ isFocused, isInvalid }) =>
+    getFormStyle(
+      isFocused || isInvalid ? 'statefulBorderWidth' : 'borderWidth',
+    )};
   border-style: solid;
-  border-color: ${({ isFocused }) =>
-    getFormStyle(isFocused ? 'focusBorderColor' : 'borderColor')};
+  border-color: ${({ isFocused, isInvalid }) =>
+    getFormStyle(
+      isInvalid
+        ? 'invalidBorderColor'
+        : isFocused
+        ? 'focusBorderColor'
+        : 'borderColor',
+    )};
   border-radius: ${getBorderRadius};
   color: ${getFormStyle('color')};
   font-size: ${getFontSize('md')};
@@ -81,18 +89,26 @@ const doesValueAlreadyExist = (tags, valueArray) =>
 const TagsInput: React.FC<TagsInputProps> = ({
   value: tags = [],
   onChange,
+  maxLength,
+  pattern,
+  patternMessage,
 }) => {
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const handleRemoveTag = (index) => {
     const newTags = remove(index, 1, tags);
-    onChange(newTags);
+    onChange(isEmptyArray(newTags) ? undefined : newTags);
   };
 
   const handleKeyDown = (event) => {
-    const { value } = event.target;
-    if (event.key === 'Enter' && value) {
+    const { target, key } = event;
+    const { value, validity } = target;
+    if (key === 'Enter') {
+      event.preventDefault();
+    }
+    if (key === 'Enter' && value && !validity.patternMismatch) {
       const valueArray = pipe(split(';'), map(trim), filter(isNotEmpty))(value);
 
       if (doesValueAlreadyExist(tags, valueArray)) {
@@ -105,10 +121,25 @@ const TagsInput: React.FC<TagsInputProps> = ({
     }
   };
 
+  const handleOnChange = (event) => {
+    const { target } = event;
+    const { value, validity } = target;
+    if (patternMessage) {
+      target.setCustomValidity(validity.patternMismatch ? patternMessage : '');
+    }
+    setIsInvalid(validity.patternMismatch);
+    setInput(value);
+  };
+
   const placeholder = tags.length === 0 ? 'Enter value' : '';
 
   return (
-    <Container alignItems="center" flexWrap="wrap" isFocused={isFocused}>
+    <Container
+      alignItems="center"
+      flexWrap="wrap"
+      isFocused={isFocused}
+      isInvalid={isInvalid}
+    >
       <Tags>
         {tags.map((tag, index) => (
           <Tag key={tag} value={tag} onClose={() => handleRemoveTag(index)} />
@@ -116,11 +147,13 @@ const TagsInput: React.FC<TagsInputProps> = ({
 
         <InputContainer>
           <StyledInput
+            maxLength={maxLength}
+            pattern={pattern}
             placeholder={placeholder}
             type="text"
             value={input}
             onBlur={() => setIsFocused(false)}
-            onChange={(event) => setInput(event.target.value)}
+            onChange={handleOnChange}
             onFocus={() => setIsFocused(true)}
             onKeyDown={handleKeyDown}
           />
@@ -135,4 +168,7 @@ export default TagsInput;
 TagsInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.arrayOf(PropTypes.string),
+  maxLength: PropTypes.number,
+  pattern: PropTypes.string,
+  patternMessage: PropTypes.string,
 };

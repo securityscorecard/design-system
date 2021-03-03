@@ -1,4 +1,7 @@
 export interface InputProps {
   value: string;
-  onChange: () => void;
+  onChange: (event: React.ReactEventHandler) => void;
+  maxLength?: number;
+  pattern?: string;
+  patternMessage?: string;
 }

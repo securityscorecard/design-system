@@ -27,10 +27,14 @@ export const StyledInput = styled.input`
   font-size: ${pxToRem(13)};
   line-height: ${pxToRem(15)};
 
-  &:focus,
-  &.focus {
+  &:focus {
     ${stateStyles}
     border-color: ${getFormStyle('focusBorderColor')};
+  }
+
+  &:invalid {
+    ${stateStyles}
+    border-color: ${getFormStyle('invalidBorderColor')};
   }
 
   ::placeholder,
@@ -42,13 +46,49 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input: React.FC<InputProps> = ({ value = '', onChange }) => (
-  <StyledInput placeholder="String" value={value} onChange={onChange} />
-);
+const Input: React.FC<InputProps> = ({
+  value = '',
+  onChange,
+  maxLength,
+  pattern,
+  patternMessage,
+}) => {
+  const handleOnChange = (event) => {
+    if (patternMessage) {
+      const { target } = event;
+      target.setCustomValidity(
+        target.validity.patternMismatch ? patternMessage : '',
+      );
+    }
+
+    onChange(event);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <StyledInput
+      maxLength={maxLength}
+      pattern={pattern}
+      placeholder="String"
+      type="text"
+      value={value}
+      onChange={handleOnChange}
+      onKeyPress={handleKeyPress}
+    />
+  );
+};
 
 export default Input;
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  maxLength: PropTypes.number,
+  pattern: PropTypes.string,
+  patternMessage: PropTypes.string,
 };

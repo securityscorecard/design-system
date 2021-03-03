@@ -1,62 +1,116 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { equals } from 'ramda';
 import styled from 'styled-components';
+import {
+  assoc,
+  defaultTo,
+  equals,
+  filter,
+  find,
+  head,
+  map,
+  path,
+  pipe,
+  propEq,
+  propOr,
+  propSatisfies,
+} from 'ramda';
+import {
+  isEmptyArray,
+  isNotNull,
+  isNotUndefined,
+  isNull,
+  isUndefined,
+} from 'ramda-adjunct';
 
-import { FlexContainer } from '../FlexContainer';
 import { FilterRow } from './FilterRow';
 import { BottomBar } from './BottomBar';
-import { FieldPropTypes, Filter, FiltersProps } from './Filters.types';
+import { Field, FieldPropTypes, Filter, FiltersProps } from './Filters.types';
 import { DateRangePickerPropTypes } from './components/DateRangePicker/DateRangePicker.types';
 import { Operators } from './Filters.enums';
 
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
 
-const getDefaultCondition = (fields) =>
-  (
-    fields[0].conditions.find(({ isDefault }) => isDefault) ||
-    fields[0].conditions[0]
-  ).value;
+const getDefaultConditionAndValue = ({ conditions }: Field) => {
+  const defaultCondition = find(propEq('isDefault', true), conditions);
 
-const getDefaultState = (fields) => [
-  {
-    operator: Operators.and,
-    field: fields[0].value,
-    condition: getDefaultCondition(fields),
-    value: undefined,
-    isApplied: false,
-  },
-];
+  const {
+    value: defaultConditionValue,
+    component: defaultConditionComponent,
+  } = defaultTo(head(conditions), defaultCondition);
 
-const FiltersContainer = styled(FlexContainer)`
+  const componentDefaultValue = path(
+    ['props', 'defaultValue'],
+    defaultConditionComponent,
+  );
+  const defaultValue = propOr(
+    componentDefaultValue,
+    'value',
+    componentDefaultValue,
+  );
+
+  return { condition: defaultConditionValue, value: defaultValue };
+};
+
+const getDefaultState = ([firstField]: Field[]) => {
+  const { condition, value } = getDefaultConditionAndValue(firstField);
+  return [
+    {
+      operator: Operators.and,
+      field: firstField.value,
+      condition,
+      value,
+      isApplied: false,
+    },
+  ];
+};
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
-  state = getDefaultState(fields),
+  state,
   onApply,
   onChange,
   onClose,
   onCancel,
   isLoading = false,
+  isCancelDisabled = false, // TODO remove https://zitenote.atlassian.net/browse/FEP-1648
 }) => {
-  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(state);
+  const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
 
   useEffect(() => {
-    const defaultState = getDefaultState(fields);
+    // Set default
+    if ((isUndefined(state) || isEmptyArray(state)) && isNotUndefined(fields)) {
+      const defaultState = getDefaultState(fields);
+      setFiltersValues(defaultState);
+    } else {
+      setFiltersValues(state);
+    }
+  }, [state, fields]);
 
-    setIsDefaultState(equals(filtersValues, defaultState));
+  useEffect(() => {
+    if (isNotUndefined(fields)) {
+      const defaultState = getDefaultState(fields);
+
+      setIsDefaultState(equals(filtersValues, defaultState));
+    }
   }, [filtersValues, fields]);
 
   useEffect(() => {
-    const someApplied = filtersValues.some(({ isApplied }) => isApplied);
-    const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
+    if (isNotNull(filtersValues)) {
+      const someApplied = filtersValues.some(({ isApplied }) => isApplied);
+      const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
 
-    setHasUnappliedFilters(someApplied && someUnapplied);
+      setHasUnappliedFilters(someApplied && someUnapplied);
+    }
   }, [filtersValues]);
 
   const callOnChange = (newFilters) => {
@@ -112,13 +166,16 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(newFilters);
   };
 
-  const handleAddRow = () => {
+  const handleAddRow = (event) => {
+    event.preventDefault();
+
     const newFilters = [...filtersValues];
+    const { condition, value } = getDefaultConditionAndValue(fields[0]);
     const newRow = {
       operator: newFilters[0].operator,
       field: fields[0].value,
-      condition: getDefaultCondition(fields),
-      value: undefined,
+      condition,
+      value,
       isApplied: false,
     };
     const filtersWithNewRow = [...newFilters, newRow];
@@ -127,7 +184,9 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(filtersWithNewRow);
   };
 
-  const handleClearAll = () => {
+  const handleClearAll = (event) => {
+    event.preventDefault();
+
     const defaultState = getDefaultState(fields);
 
     setFiltersValues(defaultState);
@@ -136,14 +195,23 @@ const Filters: React.FC<FiltersProps> = ({
     onApply([]);
   };
 
-  const handleApply = () => {
-    const newFilters = filtersValues.map((filter) => ({
-      ...filter,
-      isApplied: true,
-    }));
-    setFiltersValues(newFilters);
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    // TODO remove https://zitenote.atlassian.net/browse/FEP-1645
+    if (isLoading) return;
 
-    onApply(newFilters);
+    const newFilters = pipe(
+      filter(propSatisfies(isNotUndefined, 'value')),
+      map(assoc('isApplied', true)),
+    )(filtersValues);
+    const defaultState = getDefaultState(fields);
+
+    setFiltersValues(isEmptyArray(newFilters) ? defaultState : newFilters);
+
+    // Don't apply empty filters
+    if (!isEmptyArray(newFilters)) {
+      onApply(newFilters);
+    }
   };
 
   const handleRemoveFilter = (index) => () => {
@@ -160,8 +228,24 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(newFilters);
   };
 
+  if (isUndefined(fields) || isNull(filtersValues)) {
+    return null;
+  }
+
+  const handleCloseFilters = (event) => {
+    event.preventDefault();
+
+    onClose();
+  };
+
+  const handleCancelFetch = (event) => {
+    event.preventDefault();
+
+    onCancel();
+  };
+
   return (
-    <FiltersContainer flexDirection="column">
+    <Form onSubmit={handleSubmitForm}>
       {filtersValues.map((props, index) => {
         const id = generateId(props, index);
         return (
@@ -181,14 +265,14 @@ const Filters: React.FC<FiltersProps> = ({
       })}
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
+        isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
-        onApply={handleApply}
-        onCancel={onCancel}
+        onCancel={handleCancelFetch}
         onClearAll={handleClearAll}
-        onClose={onClose}
+        onClose={handleCloseFilters}
       />
-    </FiltersContainer>
+    </Form>
   );
 };
 
@@ -197,8 +281,8 @@ export default Filters;
 Filters.propTypes = {
   fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   onApply: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   state: PropTypes.arrayOf(
     PropTypes.exact({
       operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
@@ -213,5 +297,6 @@ Filters.propTypes = {
     }),
   ),
   isLoading: PropTypes.bool,
+  isCancelDisabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

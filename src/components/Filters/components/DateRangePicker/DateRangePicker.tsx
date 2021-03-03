@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { any } from 'ramda';
+import { isNotNull } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../../FlexContainer';
 import { datePickerStyles, dateRangePickerStyles } from './styles';
@@ -16,18 +18,30 @@ const StyledDatePicker = styled(FlexContainer)`
   ${dateRangePickerStyles}
 `;
 
+const isRangeDefined = any(isNotNull);
+
 const DateRangePicker: React.FC<DateRangePickerProps> = ({
   value = { startDate: null, endDate: null },
   onChange,
+  minDate,
+  maxDate,
 }) => {
   const { startDate, endDate } = value;
 
   const handleStartDateChange = (newStartDate) => {
-    onChange({ startDate: newStartDate, endDate });
+    onChange(
+      isRangeDefined([newStartDate, endDate])
+        ? { startDate: newStartDate, endDate }
+        : undefined,
+    );
   };
 
   const handleEndDateChange = (newEndDate) => {
-    onChange({ startDate, endDate: newEndDate });
+    onChange(
+      isRangeDefined([startDate, newEndDate])
+        ? { startDate, endDate: newEndDate }
+        : undefined,
+    );
   };
 
   return (
@@ -37,6 +51,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         className="DateRangePicker-input"
         dateFormat="d MMM, yyyy"
         endDate={endDate}
+        maxDate={maxDate}
+        minDate={minDate}
         placeholderText="Start date"
         selected={startDate}
         startDate={startDate}
@@ -48,7 +64,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         className="DateRangePicker-input"
         dateFormat="d MMM, yyyy"
         endDate={endDate}
-        minDate={startDate}
+        maxDate={maxDate}
+        minDate={startDate || minDate}
         placeholderText="End date"
         selected={endDate}
         startDate={startDate}
@@ -64,4 +81,6 @@ export default DateRangePicker;
 DateRangePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: DateRangePickerPropTypes,
+  minDate: PropTypes.instanceOf(Date),
+  maxDate: PropTypes.instanceOf(Date),
 };

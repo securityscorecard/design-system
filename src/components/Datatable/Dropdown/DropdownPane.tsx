@@ -41,12 +41,15 @@ export const List = styled.ul`
 export const DropdownLink = styled.button<DropdownLinkProps>`
   width: 100%;
   display: block;
-  padding: ${pxToRem(0, 16)};
+  padding: ${pxToRem(4, 16)};
   height: ${pxToRem(24)};
   font-size: ${getFontSize('md')};
-  line-height: ${pxToRem(24)};
+  line-height: ${pxToRem(16)};
   color: ${getColor('graphite4B')};
   cursor: pointer;
+  background: transparent;
+  border: 0 none;
+  text-align: left;
 
   &:hover {
     background: ${getColor('graphite3H')};

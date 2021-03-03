@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { allPass, any, mergeRight, propEq } from 'ramda';
+import { allPass, any, mergeDeepRight, propEq } from 'ramda';
 import {
   isFunction,
   isNonEmptyArray,
@@ -9,6 +9,7 @@ import {
   lengthGt,
   noop,
 } from 'ramda-adjunct';
+import { useDeepCompareMemo } from 'use-deep-compare';
 
 import { getBorderRadius, getColor } from '../../utils/helpers';
 import { Filter } from '../Filters/Filters.types';
@@ -23,6 +24,7 @@ import {
 } from './Datatable.types';
 import { ControlModule } from './ControlModule';
 import { BatchModule } from './BatchModule';
+import { FilterSuggestion } from '../forms/SearchBar/SearchBar.types';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -50,8 +52,10 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
   isControlsEnabled: true,
   hasSearch: true,
   searchConfig: {
+    hasSuggestions: false,
     placeholder: 'Search',
     onSearch: noop,
+    onSuggestionsFetch: noop,
   },
   hasColumnVisibility: false,
   hasColumnOrdering: false,
@@ -63,6 +67,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     onCancel: noop,
     state: [],
     fields: [],
+    isCancelDisabled: false,
   },
   defaultIsFilteringOpen: false,
   hasGrouping: false,
@@ -74,7 +79,7 @@ const Datatable = <D extends Record<string, unknown>>({
   totalDataSize,
   dataPrimaryKey,
   onDataFetch = noop,
-  isDataLoading,
+  isDataLoading = false,
   columns,
   tableConfig = {},
   controlsConfig = {},
@@ -87,20 +92,30 @@ const Datatable = <D extends Record<string, unknown>>({
     hasSelection,
     onSelect: onRowsSelect,
     ...restTableConfig
-  }: ExtendedTableConfig<D> = mergeRight(defaultTableConfig, tableConfig);
+  }: ExtendedTableConfig<D> = mergeDeepRight(defaultTableConfig, tableConfig);
+
   const {
     isControlsEnabled,
     defaultHiddenColumns,
     defaultColumnOrder,
     hasFiltering,
     filtersConfig,
+    searchConfig: { hasSuggestions, onSuggestionsFetch, ...restSearchConfig },
     ...restControlsConfig
-  }: ControlsConfig<D> = mergeRight(defaultControlsConfig, controlsConfig);
+  }: ControlsConfig<D> = mergeDeepRight(defaultControlsConfig, controlsConfig);
 
   const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [filterSuggestions, setFilterSuggestions] = useState<
+    FilterSuggestion[]
+  >([]);
+
   const [pageCount, setPageCount] = useState<number>();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
+  const [shouldResetSelectedRows, setShouldResetSelectedRows] = useState<
+    boolean
+  >(false);
   const [hasAppliedFilters, setHasAppliedFilters] = useState<boolean>(
     any(propEq('isApplied', true), filtersState),
   );
@@ -120,13 +135,43 @@ const Datatable = <D extends Record<string, unknown>>({
         pageSize,
         sortBy,
         filters: appliedFilters,
-        query: '', // TODO: get search query from local state
+        query: searchQuery,
       });
     },
-    [appliedFilters, onDataFetch],
+    [onDataFetch, appliedFilters, searchQuery],
   );
 
-  const handleOnFiltersAppply = useCallback(
+  const handleOnSuggestionsFetch = useCallback(
+    async (query: string) => {
+      setFilterSuggestions(await onSuggestionsFetch(query));
+    },
+    [onSuggestionsFetch],
+  );
+
+  const handleOnSearch = useCallback(
+    (queryValue: string) => {
+      setSearchQuery(queryValue);
+      if (hasSuggestions) {
+        handleOnSuggestionsFetch(queryValue);
+      } else {
+        onDataFetch({
+          pageSize: defaultPageSize,
+          pageIndex: 0,
+          query: queryValue,
+          filters: appliedFilters,
+        });
+      }
+    },
+    [
+      hasSuggestions,
+      handleOnSuggestionsFetch,
+      onDataFetch,
+      defaultPageSize,
+      appliedFilters,
+    ],
+  );
+
+  const handleOnFiltersApply = useCallback(
     (filters: Filter[]) => {
       setHasAppliedFilters(lengthGt(0, filters));
       setAppliedFilters(filters);
@@ -134,9 +179,14 @@ const Datatable = <D extends Record<string, unknown>>({
       if (isCallbackDefined(onFiltersApply)) {
         onFiltersApply(filters);
       }
-      onDataFetch({ pageSize: defaultPageSize, pageIndex: 0, filters });
+      onDataFetch({
+        pageSize: defaultPageSize,
+        pageIndex: 0,
+        query: searchQuery,
+        filters,
+      });
     },
-    [defaultPageSize, onDataFetch, onFiltersApply],
+    [defaultPageSize, onDataFetch, searchQuery, onFiltersApply],
   );
 
   const handleOnRowsSelect = useCallback(
@@ -150,51 +200,69 @@ const Datatable = <D extends Record<string, unknown>>({
     [onRowsSelect],
   );
 
+  const memoizedTableConfig = useDeepCompareMemo(
+    () => ({
+      hasSelection,
+      onSelect: handleOnRowsSelect,
+      defaultPageSize,
+      ...restTableConfig,
+    }),
+    [defaultPageSize, handleOnRowsSelect, hasSelection, restTableConfig],
+  );
+
   return (
-    <DatatableContext.Provider
-      value={{
-        totalLength: totalDataSize,
-        selectedIds,
-        selectedLength: selectedIds.length,
-        defaultHiddenColumns,
-        defaultColumnOrder,
-        hasExclusionLogic,
-        setHasExclusionLogic,
-        hasSelection,
-      }}
-    >
-      <StyledDatatable flexDirection="column" {...props}>
+    <StyledDatatable flexDirection="column" {...props}>
+      <DatatableContext.Provider
+        value={{
+          totalLength: totalDataSize,
+          selectedIds,
+          selectedLength: selectedIds.length,
+          defaultHiddenColumns,
+          defaultColumnOrder,
+          hasExclusionLogic,
+          setHasExclusionLogic,
+          hasSelection,
+          setShouldResetSelectedRows,
+        }}
+      >
         {isControlsEnabled && (
           <ControlModule<D>
             defaultColumnOrder={defaultColumnOrder}
             defaultHiddenColumns={defaultHiddenColumns}
             filtersConfig={{
               ...filtersConfig,
-              onApply: handleOnFiltersAppply,
+              onApply: handleOnFiltersApply,
             }}
             hasFiltering={isFilteringEnabled}
+            searchConfig={{
+              ...restSearchConfig,
+              hasSuggestions,
+              onSearch: handleOnSearch,
+              suggestions: filterSuggestions,
+            }}
             {...restControlsConfig}
           />
         )}
         <BatchModule actions={batchActions} />
-        <Table<D>
-          columns={columns}
-          config={{
-            hasSelection,
-            onSelect: handleOnRowsSelect,
-            defaultPageSize,
-            ...restTableConfig,
-          }}
-          data={data}
-          fetchData={handleOnDataFetch}
-          hasAppliedFilters={hasAppliedFilters}
-          isLoading={isDataLoading}
-          pageCount={pageCount}
-          primaryKey={dataPrimaryKey}
-          rowActions={rowActions}
-        />
-      </StyledDatatable>
-    </DatatableContext.Provider>
+      </DatatableContext.Provider>
+      <Table<D>
+        columns={columns}
+        config={memoizedTableConfig}
+        data={data}
+        defaultColumnOrder={defaultColumnOrder}
+        defaultHiddenColumns={defaultHiddenColumns}
+        fetchData={handleOnDataFetch}
+        hasAppliedFilters={hasAppliedFilters}
+        hasExclusionLogic={hasExclusionLogic}
+        isLoading={isDataLoading}
+        pageCount={pageCount}
+        primaryKey={dataPrimaryKey}
+        rowActions={rowActions}
+        setShouldResetSelectedRows={setShouldResetSelectedRows}
+        shouldResetSelectedRows={shouldResetSelectedRows}
+        totalLength={totalDataSize}
+      />
+    </StyledDatatable>
   );
 };
 
@@ -237,6 +305,7 @@ Datatable.propTypes = {
   controlsConfig: PropTypes.shape({
     isControlsEnabled: PropTypes.bool,
     hasSearch: PropTypes.bool,
+    onSuggestionsFetch: PropTypes.func,
     hasColumnVisibility: PropTypes.bool,
     defaultHiddenColumns: PropTypes.arrayOf(PropTypes.string),
     hasColumnOrdering: PropTypes.bool,

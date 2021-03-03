@@ -24,8 +24,8 @@ const StyledCol = styled(Box)`
   padding-right: ${getColPadding};
 `;
 
-const Col: React.FC<ColProps> = ({ children, cols, offset, ...props }) => (
-  <StyledCol ml={`${(100 / 12) * offset}%`} {...getColWidth(cols)} {...props}>
+const Col: React.FC<ColProps> = ({ children, cols, offset }) => (
+  <StyledCol ml={`${(100 / 12) * offset}%`} {...getColWidth(cols)}>
     {children}
   </StyledCol>
 );

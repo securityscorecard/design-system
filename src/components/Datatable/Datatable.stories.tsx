@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 import { Column, Row } from 'react-table';
@@ -178,10 +178,18 @@ const columns: (Column<Data> & { onClick?: (value: unknown) => void })[] = [
 
 export const Default: Story = () => {
   const [tableData, setTableData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [totalLength, setTotalLength] = useState(0);
 
   const dispatchFetchData = useCallback(
-    ({ pageSize, pageIndex }) => {
+    ({ pageSize, pageIndex, sortBy, filters, query }) => {
+      console.log('FetchData', {
+        pageSize,
+        pageIndex,
+        sortBy,
+        filters,
+        query,
+      });
       setIsLoading(true);
       setTimeout(() => {
         // Only update the data if this is the latest fetch
@@ -189,6 +197,7 @@ export const Default: Story = () => {
         const endRow = startRow + pageSize;
         const fetchedData = assets.slice(startRow, endRow);
         setTableData(fetchedData);
+        setTotalLength(assets.length);
         setIsLoading(false);
       }, 500);
     },
@@ -201,6 +210,24 @@ export const Default: Story = () => {
       }`,
     );
   };
+
+  const memoizedTableConfig = useMemo(
+    () => ({
+      onSelect: logSelectedRows,
+      rowActions: [
+        {
+          label: 'Detail',
+          name: 'detail',
+          onClick: noop,
+        },
+      ],
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    dispatchFetchData({ pageSize: 50, pageIndex: 0 });
+  }, []);
 
   return (
     <Grid.Container>
@@ -215,17 +242,8 @@ export const Default: Story = () => {
             data={tableData}
             dataPrimaryKey="ipAddress"
             isDataLoading={isLoading}
-            tableConfig={{
-              onSelect: logSelectedRows,
-              rowActions: [
-                {
-                  label: 'Detail',
-                  name: 'detail',
-                  onClick: noop,
-                },
-              ],
-            }}
-            totalDataSize={assets.length}
+            tableConfig={memoizedTableConfig}
+            totalDataSize={totalLength}
             onDataFetch={dispatchFetchData}
           />
         </Grid.Col>
@@ -233,6 +251,20 @@ export const Default: Story = () => {
     </Grid.Container>
   );
 };
+
+export const MinimalConfig: Story = () => (
+  <Grid.Container>
+    <Grid.Row>
+      <Grid.Col>
+        <Datatable<Data>
+          columns={columns}
+          data={assets.slice(0, 50)}
+          totalDataSize={50}
+        />
+      </Grid.Col>
+    </Grid.Row>
+  </Grid.Container>
+);
 
 export const NoData: Story = () => (
   <Grid.Container>

@@ -8,8 +8,9 @@ import { getColor, getFormStyle } from '../../../../utils/helpers';
 
 const StyledSelectionCheckbox = styled(Checkbox)<{
   hasExclusionLogic: boolean;
+  isIndeterminate: boolean;
 }>`
-  ${({ hasExclusionLogic }) =>
+  ${({ hasExclusionLogic, isIndeterminate, theme }) =>
     hasExclusionLogic &&
     css`
       .ds-checkbox-box {
@@ -21,13 +22,17 @@ const StyledSelectionCheckbox = styled(Checkbox)<{
       }
       .ds-checkbox-input {
         &:checked + .ds-checkbox-box {
-          border: ${getFormStyle('borderWidth')} solid
-            ${getFormStyle('borderColor')};
-          background: ${getColor('graphite5H')};
+          ${!isIndeterminate &&
+          `
+              border: ${getFormStyle('borderWidth', {
+                theme,
+              })} solid ${getFormStyle('borderColor', { theme })};
+              background: ${getColor('graphite5H', { theme })};
 
-          .ds-checkbox-mark {
-            display: none;
-          }
+              .ds-checkbox-mark {
+                display: none;
+              }
+          `}
         }
       }
     `}
@@ -55,15 +60,7 @@ const useCombinedRefs = (...refs): React.MutableRefObject<HTMLInputElement> => {
 
 const SelectionCheckbox = forwardRef<HTMLInputElement, SelectionCheckboxProps>(
   (
-    {
-      isIndeterminate,
-      title,
-      id,
-      hasExclusionLogic = false,
-      onSelect,
-      onChange,
-      ...rest
-    },
+    { isIndeterminate = false, title, id, hasExclusionLogic = false, ...rest },
     ref,
   ) => {
     const defaultRef = useRef(null);
@@ -75,10 +72,6 @@ const SelectionCheckbox = forwardRef<HTMLInputElement, SelectionCheckboxProps>(
       }
     }, [combinedRef, isIndeterminate]);
 
-    const handleOnChange = (e) => {
-      onChange(e);
-      onSelect();
-    };
     return (
       <StyledSelectionCheckbox
         ref={combinedRef}
@@ -87,7 +80,6 @@ const SelectionCheckbox = forwardRef<HTMLInputElement, SelectionCheckboxProps>(
         hasExclusionLogic={hasExclusionLogic}
         isIndeterminate={isIndeterminate}
         name={id}
-        onChange={handleOnChange}
         {...rest}
       />
     );
@@ -98,8 +90,6 @@ SelectionCheckbox.propTypes = {
   title: PropTypes.string,
   id: PropTypes.string,
   hasExclusionLogic: PropTypes.bool,
-  onSelect: PropTypes.func,
-  onChange: PropTypes.func,
 };
 
-export default SelectionCheckbox;
+export default React.memo(SelectionCheckbox);

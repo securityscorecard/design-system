@@ -17,74 +17,82 @@ const LoadingText = styled(Text)`
 const BottomBar: React.FC<BottomBarProps> = ({
   onAdd,
   onClearAll,
-  onApply,
   onClose,
   onCancel,
   isLoading = false,
   hasUnappliedFilters,
-}) => (
-  <FlexContainer justifyContent="space-between" margin={{ top: 0.5 }}>
-    <FlexContainer>
-      <Button
-        color="primary"
-        iconName="plus"
-        margin={{ left: 0.5, right: 2 }}
-        size="md"
-        variant="text"
-        onClick={onAdd}
-      >
-        Add
-      </Button>
-      <Button color="primary" size="md" variant="text" onClick={onClearAll}>
-        Clear all
-      </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center">
-      {hasUnappliedFilters && (
-        <Paragraph
-          as="div"
-          margin={{ right: 0.8, bottom: 0 }}
+  isCancelDisabled = false,
+}) => {
+  const canCancel = isLoading && !isCancelDisabled;
+  return (
+    <FlexContainer justifyContent="space-between" margin={{ top: 0.5 }}>
+      <FlexContainer>
+        <Button
+          color="primary"
+          iconName="plus"
+          margin={{ left: 0.5, right: 2 }}
           size="md"
-          variant="secondary"
+          variant="text"
+          onClick={onAdd}
         >
-          You have unapplied filters
-        </Paragraph>
-      )}
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        variant="outline"
-        onClick={isLoading ? onCancel : onClose}
-      >
-        {isLoading ? 'Cancel' : 'Close'}
-      </Button>
-      <Button color="primary" variant="solid" onClick={onApply}>
-        {isLoading ? (
-          <>
-            <Spinner
-              borderWidth={2}
-              height={16}
-              verticalMargin={0}
-              width={16}
-            />
-            <LoadingText size="md">Fetching results</LoadingText>
-          </>
-        ) : (
-          'Apply'
+          Add
+        </Button>
+        <Button color="primary" size="md" variant="text" onClick={onClearAll}>
+          Clear all
+        </Button>
+      </FlexContainer>
+      <FlexContainer alignItems="center">
+        {hasUnappliedFilters && (
+          <Paragraph
+            as="div"
+            margin={{ right: 0.8, bottom: 0 }}
+            size="md"
+            variant="secondary"
+          >
+            You have unapplied filters
+          </Paragraph>
         )}
-      </Button>
+        <Button
+          color="primary"
+          margin={{ right: 1 }}
+          variant="outline"
+          onClick={canCancel ? onCancel : onClose}
+        >
+          {canCancel ? 'Cancel' : 'Close'}
+        </Button>
+        <Button
+          color="primary"
+          /* disabled={isLoading} TODO enable by https://zitenote.atlassian.net/browse/FEP-1645 */
+          type="submit"
+          variant="solid"
+        >
+          {isLoading ? (
+            <>
+              <Spinner
+                borderWidth={2}
+                height={16}
+                verticalMargin={0}
+                width={16}
+              />
+              <LoadingText size="md">Fetching results</LoadingText>
+            </>
+          ) : (
+            'Apply'
+          )}
+        </Button>
+      </FlexContainer>
     </FlexContainer>
-  </FlexContainer>
-);
+  );
+};
 
 export default BottomBar;
 
 BottomBar.propTypes = {
   hasUnappliedFilters: PropTypes.bool.isRequired,
   onAdd: PropTypes.func.isRequired,
-  onClearAll: PropTypes.func.isRequired,
-  onApply: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onClearAll: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  isCancelDisabled: PropTypes.bool,
 };

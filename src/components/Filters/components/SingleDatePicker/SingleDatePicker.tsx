@@ -16,12 +16,16 @@ const StyledDatePicker = styled.div`
 const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
   value = null,
   onChange,
+  minDate,
+  maxDate,
 }) => (
   <StyledDatePicker>
     <DatePicker
       calendarClassName="DateRangePicker-calendar"
       className="DateRangePicker-input"
       dateFormat="d MMM, yyyy"
+      maxDate={maxDate}
+      minDate={minDate}
       placeholderText="Date"
       selected={value}
       onChange={onChange}
@@ -34,4 +38,6 @@ export default SingleDatePicker;
 SingleDatePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.instanceOf(Date),
+  minDate: PropTypes.instanceOf(Date),
+  maxDate: PropTypes.instanceOf(Date),
 };

@@ -1,20 +1,39 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
+import { DSProvider, createIconLibrary } from '../../../theme';
 import SearchBar from './SearchBar';
-import { createMockOnSearch } from './mocks';
+import { mockOnSearch } from './mocks';
 
 const onClickSuggestion = jest.fn();
 
-const mockOnSearch = createMockOnSearch(onClickSuggestion);
+export const mockSuggestions = [
+  {
+    name: 'suggestion1',
+    value: 'suggestion 1',
+    onClick: onClickSuggestion,
+    filter: { field: 'Field 1', condition: 'is' },
+  },
+  {
+    name: 'suggestion2',
+    value: 'suggestion 2',
+    onClick: onClickSuggestion,
+    filter: { field: 'Field 2', condition: 'contains' },
+  },
+];
 
 const setup = () => {
+  createIconLibrary();
   const utils = render(
-    <SearchBar
-      defaultValue="Searching for Default"
-      placeholder="Search for X"
-      onSearch={mockOnSearch}
-    />,
+    <DSProvider>
+      <SearchBar
+        defaultValue="Searching for Default"
+        placeholder="Search for X"
+        suggestions={mockSuggestions}
+        hasSuggestions
+        onSearch={mockOnSearch}
+      />
+    </DSProvider>,
   );
   const searchInput = utils.getByPlaceholderText(
     'Search for X',
@@ -60,12 +79,10 @@ describe('SearchBar', () => {
       fireEvent.change(searchInput, { target: { value: 'query' } });
     });
 
-    const suggestion1 = await screen.findByText('query suggestion 1');
-    const suggestion2 = await screen.findByText('query suggestion 2');
-    const suggestion3 = await screen.findByText('query suggestion 3');
+    const suggestion1 = await screen.findByText('suggestion 1');
+    const suggestion2 = await screen.findByText('suggestion 2');
 
     expect(suggestion1).toBeInTheDocument();
     expect(suggestion2).toBeInTheDocument();
-    expect(suggestion3).toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { isNotUndefined, noop } from 'ramda-adjunct';
+import { isNotUndefined } from 'ramda-adjunct';
 import styled from 'styled-components';
 
 import {
@@ -85,8 +85,8 @@ const AppliedToolsTabItem = styled(DefaultToolsTabItem)`
 const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   label,
   toolState = ToolsTabItemStates.default,
-  onToolActivate = noop,
-  onToolDeactivate = noop,
+  onToolActivate,
+  onToolDeactivate,
   iconName,
   iconType = IconTypes.ssc,
   margin,
@@ -96,12 +96,16 @@ const ToolsTabItem: React.FC<ToolsTabItemProps> = ({
   const [currentToolState, setCurrentToolState] = useState(toolState);
 
   const onClickNotActive = (event) => {
-    onToolActivate(event);
+    if (isNotUndefined(onToolActivate)) {
+      onToolActivate(event);
+    }
     setCurrentToolState(ToolsTabItemStates.active);
   };
 
   const onClickActive = (event) => {
-    onToolDeactivate(event);
+    if (isNotUndefined(onToolDeactivate)) {
+      onToolDeactivate(event);
+    }
     setCurrentToolState(ToolsTabItemStates.applied);
   };
 
