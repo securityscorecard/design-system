@@ -21,6 +21,7 @@ export const SSCIconNames = {
   sitemap: 'sitemap',
   longArrowLeft: 'long-arrow-left',
   longArrowRight: 'long-arrow-right',
+  ellipsisH: 'ellipsis-h',
 } as const;
 
 export const IconTypes = {

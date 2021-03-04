@@ -27,8 +27,12 @@ import {
 } from 'ramda-adjunct';
 import { useDeepCompareEffect } from 'use-deep-compare';
 
-import { getColor, pxToRem } from '../../../utils/helpers';
-import { IconButton } from '../../IconButton';
+import {
+  getBorderRadius,
+  getColor,
+  getFontSize,
+  pxToRem,
+} from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
 import { ActionKindsPropType } from '../types/Action.types';
 import { RendererText } from './TableCell/renderers';
@@ -40,6 +44,8 @@ import { TableProps } from './Table.types';
 import { SelectionCheckbox } from './SelectionCheckbox';
 import { NoData, NoMatchingData } from './NoData';
 import { Pagination } from '../Pagination';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
+import { Icon } from '../../Icon';
 
 const StyledTable = styled.table<{ isSticky: boolean }>`
   width: 100%;
@@ -102,6 +108,34 @@ const NoDataContainer = styled(FlexContainer).attrs(() => ({
 }))`
   background: ${getColor('graphite5H')};
   padding: ${pxToRem(64)};
+`;
+
+const RowActionsButton = styled.button<{ isActive: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${pxToRem(24)};
+  height: ${pxToRem(24)};
+  border: 0 none;
+  color: ${getColor('graphiteB')};
+  font-size: ${getFontSize('lg')};
+  border-radius: ${getBorderRadius};
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background: ${getColor('graphite3H')};
+  }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      &,
+      &:hover {
+        background: ${getColor('radiantBlueberry')};
+        color: ${getColor('graphite5H')};
+      }
+    `};
 `;
 
 const SELECTION_COLUMN_ID = 'selection';
@@ -269,9 +303,18 @@ const Table = <D extends Record<string, unknown>>({
                 }))(rowActions);
 
                 return (
-                  <Dropdown actions={actions}>
-                    <IconButton iconName="wrench" label="Actions" />
-                  </Dropdown>
+                  <FlexContainer flexGrow={1} justifyContent="center">
+                    <Dropdown actions={actions}>
+                      {(isActive) => (
+                        <RowActionsButton
+                          aria-label="Row Actions"
+                          isActive={isActive}
+                        >
+                          <Icon name={SSCIconNames.ellipsisH} />
+                        </RowActionsButton>
+                      )}
+                    </Dropdown>
+                  </FlexContainer>
                 );
               },
             },
