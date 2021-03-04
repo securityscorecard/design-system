@@ -199,11 +199,18 @@ const Table = <D extends Record<string, unknown>>({
       },
       manualPagination: hasServerSidePagination, // We will handle pagination by ourselves
       manualSortBy: hasServerSideSorting, // sorting is handled backend
+      autoResetSortBy: hasServerSideSorting,
       pageCount: controlledPageCount, // Since we handling pagination we need to pass page count
       autoResetSelectedRows: false, // Do not reset selection when moving to different page
       ...(isNotUndefined(primaryKey) && {
         getRowId: isString(primaryKey) ? prop(primaryKey) : primaryKey, // Set row id for selection
       }),
+      stateReducer(newState, action) {
+        if (action.type === 'toggleSortBy') {
+          fetchData(newState.pageIndex, newState.pageSize, newState.sortBy);
+        }
+        return newState;
+      },
     },
     useSortBy,
     usePagination,
