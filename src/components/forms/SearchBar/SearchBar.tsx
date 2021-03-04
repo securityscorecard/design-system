@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isEmptyString, isNotEmpty } from 'ramda-adjunct';
@@ -13,6 +13,7 @@ import { SearchBarProps, SuggestionPropType } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import { useControlledInput } from '../hooks/useControlledInput';
 import { useMounted } from '../../../hooks/useMounted';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 const SearchBarWrapper = styled.div`
   position: relative;
@@ -75,32 +76,31 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [query, setQuery] = useState(defaultValue);
   const [isSearching, setIsSearching] = useState(false);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const isMounted = useMounted();
 
-  const performSearch = async (query) => {
+  const debouncedQuery = useDebounce(query, 500);
+
+  const { inputValue, onChangeInput, resetValue } = useControlledInput(
+    defaultValue,
+    () => {
+      if (hasSuggestions) {
+        setQuery(inputValue);
+      }
+    },
+  );
+
+  const performSearch = async () => {
     setSearchPerformed(false);
     setIsSearching(true);
-    await onSearch(query);
+    await onSearch(debouncedQuery);
     if (isMounted()) {
       setIsSearching(false);
       setSearchPerformed(true);
     }
   };
-
-  const onChangeQuery = async () => {
-    const queryValue = searchInputRef.current.value;
-    performSearch(queryValue);
-  };
-
-  const { inputValue: query, onChangeInput, resetValue } = useControlledInput(
-    defaultValue,
-    onChangeQuery,
-  );
-
-  const maxLength = 100;
-  const isFieldInvalid = isInvalid || query.length > maxLength;
 
   const clearSearch = async () => {
     resetValue();
@@ -111,18 +111,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleKeyDown = async (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const queryValue = searchInputRef.current.value;
-      if (isEmptyString(queryValue.trim())) {
-        clearSearch();
-      } else {
-        performSearch(queryValue);
-      }
+      setQuery(inputValue);
     }
   };
+
+  useEffect(() => {
+    if (isEmptyString(debouncedQuery)) {
+      clearSearch();
+    } else {
+      performSearch();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedQuery]);
 
   return (
     <SearchBarWrapper>
@@ -149,10 +151,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <StyledInput
         ref={searchInputRef}
         isDisabled={isDisabled}
-        isInvalid={isFieldInvalid}
+        isInvalid={isInvalid}
         placeholder={placeholder}
         type="text"
-        value={query}
+        value={inputValue}
         onChange={onChangeInput}
         {...(hasSuggestions || { onKeyDown: handleKeyDown })}
       />
