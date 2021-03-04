@@ -120,6 +120,7 @@ const Datatable = <D extends Record<string, unknown>>({
     any(propEq('isApplied', true), filtersState),
   );
   const [appliedFilters, setAppliedFilters] = useState(filtersState);
+  const [appliedSortBy, setAppliedSortBy] = useState([]);
 
   const isFilteringEnabled =
     isNonEmptyArray(filtersConfig.fields) && hasFiltering;
@@ -130,6 +131,7 @@ const Datatable = <D extends Record<string, unknown>>({
 
   const handleOnDataFetch = useCallback(
     (pageIndex, pageSize, sortBy) => {
+      setAppliedSortBy(sortBy);
       onDataFetch({
         pageIndex,
         pageSize,
@@ -157,6 +159,7 @@ const Datatable = <D extends Record<string, unknown>>({
         onDataFetch({
           pageSize: defaultPageSize,
           pageIndex: 0,
+          sortBy: appliedSortBy,
           query: queryValue,
           filters: appliedFilters,
         });
@@ -168,6 +171,7 @@ const Datatable = <D extends Record<string, unknown>>({
       onDataFetch,
       defaultPageSize,
       appliedFilters,
+      appliedSortBy,
     ],
   );
 
@@ -182,11 +186,12 @@ const Datatable = <D extends Record<string, unknown>>({
       onDataFetch({
         pageSize: defaultPageSize,
         pageIndex: 0,
+        sortBy: appliedSortBy,
         query: searchQuery,
         filters,
       });
     },
-    [defaultPageSize, onDataFetch, searchQuery, onFiltersApply],
+    [defaultPageSize, onDataFetch, searchQuery, onFiltersApply, appliedSortBy],
   );
 
   const handleOnRowsSelect = useCallback(
