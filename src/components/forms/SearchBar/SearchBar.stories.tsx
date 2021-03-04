@@ -45,11 +45,3 @@ export const QuickFilters: Story = () => (
     {...commonArgs}
   />
 );
-
-export const SearchBarActive: Story = () => (
-  <SearchBar
-    aria-label="SearchBar"
-    defaultValue="search text"
-    {...commonArgs}
-  />
-);
