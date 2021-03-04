@@ -83,9 +83,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const debouncedQuery = useDebounce(query, 500);
 
-  const maxLength = 100;
-  const isFieldInvalid = isInvalid || query.length > maxLength;
-
   const { inputValue, onChangeInput, resetValue } = useControlledInput(
     defaultValue,
     () => {
@@ -154,7 +151,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <StyledInput
         ref={searchInputRef}
         isDisabled={isDisabled}
-        isInvalid={isFieldInvalid}
+        isInvalid={isInvalid}
         placeholder={placeholder}
         type="text"
         value={inputValue}
