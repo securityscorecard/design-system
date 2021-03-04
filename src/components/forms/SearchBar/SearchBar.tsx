@@ -86,11 +86,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const maxLength = 100;
   const isFieldInvalid = isInvalid || query.length > maxLength;
 
-  const {
-    inputValue,
-    onChangeInput,
-    resetValue,
-  } = useControlledInput(defaultValue, () => setQuery(inputValue));
+  const { inputValue, onChangeInput, resetValue } = useControlledInput(
+    defaultValue,
+    () => {
+      if (hasSuggestions) {
+        setQuery(inputValue);
+      }
+    },
+  );
 
   const performSearch = async () => {
     setSearchPerformed(false);
@@ -110,21 +113,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
       setSearchPerformed(false);
     }
   };
-
   const handleKeyDown = async (
     event: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     if (event.key === 'Enter') {
-      if (isEmptyString(inputValue.trim())) {
-        clearSearch();
-      } else {
-        setQuery(inputValue);
-      }
+      setQuery(inputValue);
     }
   };
 
   useEffect(() => {
-    performSearch();
+    if (isEmptyString(debouncedQuery)) {
+      clearSearch();
+    } else {
+      performSearch();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedQuery]);
 
