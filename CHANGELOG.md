@@ -1,3 +1,12 @@
+# [1.0.0-alpha.37](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2021-03-04)
+
+
+### Bug Fixes
+
+* **SearchBar:** debounce search query 500 ms ([6ab8ceb](https://github.com/securityscorecard/design-system/commit/6ab8ceba996fc36584d9245a3f764a7160e2d4bb))
+* **SearchBar:** remove init suggestions ([1e60478](https://github.com/securityscorecard/design-system/commit/1e60478e30fdd257f6eb92d990b7f0485aa34367))
+* **SearchBar:** remove query length limit ([df50ec7](https://github.com/securityscorecard/design-system/commit/df50ec77c9e9136315fa71ef547c86dcdbf615d5))
+
 # [1.0.0-alpha.36](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2021-03-04)
 
 
