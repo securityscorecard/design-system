@@ -1,3 +1,10 @@
+# [1.0.0-alpha.36](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2021-03-04)
+
+
+### Bug Fixes
+
+* **Datatable:** fetch data on sortBy event ([3d00c1c](https://github.com/securityscorecard/design-system/commit/3d00c1c9a5efaae2473b8aab9cfe9a17ba7614e6))
+
 # [1.0.0-alpha.35](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2021-03-03)
 
 
