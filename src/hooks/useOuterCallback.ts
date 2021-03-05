@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { isNotNull } from 'ramda-adjunct';
 
 export const useOuterClick = (
   callback: (e: React.MouseEvent) => void,
 ): React.MutableRefObject<HTMLDivElement> => {
   const innerRef = useRef(null);
   const callbackRef = useRef(null);
+  const isListenersAdded = useRef(false);
 
   // read most recent callback and innerRef dom node from refs
   function handleClick(e) {
@@ -24,8 +26,18 @@ export const useOuterClick = (
   });
 
   useEffect(() => {
+    if (isListenersAdded.current && isNotNull(callbackRef.current)) {
+      window.removeEventListener('scroll', handleClick);
+      isListenersAdded.current = false;
+    }
+
     document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
+    isListenersAdded.current = true;
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+      isListenersAdded.current = false;
+    };
   }, []); // no need for callback + innerRef dep
 
   return innerRef; // return ref; client can omit `useRef`
