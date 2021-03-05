@@ -1,3 +1,10 @@
+# [1.0.0-alpha.39](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2021-03-05)
+
+
+### Bug Fixes
+
+* **SearchBar:** clear icon styles ([42423f9](https://github.com/securityscorecard/design-system/commit/42423f969df178d9c22e83bdd28e7379347d9199))
+
 # [1.0.0-alpha.38](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2021-03-05)
 
 
