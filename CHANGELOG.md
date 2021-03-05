@@ -1,3 +1,11 @@
+# [1.0.0-alpha.38](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2021-03-05)
+
+
+### Features
+
+* **Dropdown:** use portals for dropdown pane ([399ae35](https://github.com/securityscorecard/design-system/commit/399ae359d71294a9aab3ede28baa411330787c7b))
+* **Table:** style row action button ([f97fc9e](https://github.com/securityscorecard/design-system/commit/f97fc9e91b109992c447c3a6ee3e542485408169))
+
 # [1.0.0-alpha.37](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2021-03-04)
 
 
