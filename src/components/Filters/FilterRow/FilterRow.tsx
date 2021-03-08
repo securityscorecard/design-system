@@ -21,6 +21,7 @@ import {
   pluck,
   prop,
   propEq,
+  propOr,
 } from 'ramda';
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
@@ -29,7 +30,10 @@ import { StateButton } from '../StateButton';
 import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
-import { FieldPropTypes } from '../Filters.types';
+import {
+  ComponentWithProps as ComponentWithPropsTypes,
+  FieldPropTypes,
+} from '../Filters.types';
 import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import { operatorOptions } from '../data/operatorOptions';
@@ -54,23 +58,39 @@ const SplitField = styled.div<SplitFieldProps>`
   }
 `;
 
+export const getDefaultComponentValue = (
+  defaultConditionComponent: React.ReactNode | ComponentWithPropsTypes,
+): string | undefined => {
+  const componentDefaultValue = path(
+    ['props', 'defaultValue'],
+    defaultConditionComponent,
+  );
+
+  return propOr(componentDefaultValue, 'value', componentDefaultValue);
+};
+
 const getFieldConditions = memoizeWith(identity, (fieldValue, fields) =>
   pipe(find(propEq('value', fieldValue)), prop('conditions'))(fields),
 );
 
 const getDefaultCondition = (fieldValue, fields) => {
   const fieldConditions = getFieldConditions(fieldValue, fields);
-  const defaultCondition = pipe(
+
+  const {
+    value: defaultConditionValue,
+    component: defaultConditionComponent,
+  } = pipe(
     find(propEq('isDefault', true)),
     defaultTo(head(fieldConditions)),
   )(fieldConditions);
 
+  const defaultComponentValue = getDefaultComponentValue(
+    defaultConditionComponent,
+  );
+
   return {
-    defaultConditionValue: prop('value', defaultCondition),
-    defaultComponentValue: path(
-      ['component', 'props', 'value'],
-      defaultCondition,
-    ),
+    defaultConditionValue,
+    defaultComponentValue,
   };
 };
 
@@ -173,9 +193,19 @@ const FilterRow: React.FC<FilterRowProps> = ({
       field.value,
       fields,
     );
+
+    const defaultNewComponentValue = path(
+      ['props', 'defaultValue', 'value'],
+      newComponent,
+    );
+
     const areComponentsEqual = equals(component, newComponent);
 
-    onConditionChange(selectedConditionValue, index, areComponentsEqual);
+    const newComponentValue =
+      defaultNewComponentValue ||
+      (areComponentsEqual ? componentValue : undefined);
+
+    onConditionChange(selectedConditionValue, newComponentValue, index);
   };
 
   const handleValueChange = (value) => {

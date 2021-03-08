@@ -26,7 +26,9 @@ export default {
   ],
   plugins: [
     autoExternal(),
-    postcss(),
+    postcss({
+      extract: 'node_modules/react-datepicker/dist/react-datepicker.css',
+    }),
     resolve(),
     url({
       limit: 10 * 1024, // inline files < 10k, copy files > 10k
