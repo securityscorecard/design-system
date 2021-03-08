@@ -1,3 +1,10 @@
+# [1.0.0-alpha.40](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2021-03-08)
+
+
+### Bug Fixes
+
+* **Filters:** fix styles and default values ([f6fbeaf](https://github.com/securityscorecard/design-system/commit/f6fbeaf413ba63cd97139eb2a440da3b1f05cbdc))
+
 # [1.0.0-alpha.39](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2021-03-05)
 
 
