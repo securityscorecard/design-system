@@ -34,6 +34,7 @@ const Select: React.FC<SelectProps> = (props) => {
     <ReactSelect
       components={{ DropdownIndicator, MultiValue }}
       isClearable={false}
+      maxMenuHeight={163} // 5 menu options
       styles={selectStyles}
       onKeyDown={handleKeyPress}
       {...props}

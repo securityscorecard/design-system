@@ -52,9 +52,10 @@ export const selectStyles: StylesConfig = {
     lineHeight: theme.typography.lineHeight.md,
   }),
   indicatorSeparator: () => ({ display: 'none' }),
-  menuList: () => ({
+  menuList: (props) => ({
     fontSize: theme.typography.size.md,
     lineHeight: theme.typography.lineHeight.md,
+    ...props,
   }),
   dropdownIndicator: () => ({
     ...indicatorStyles,

@@ -44,9 +44,13 @@ export const datePickerStyles = css`
     padding: ${pxToRem(16)};
     border-radius: ${getBorderRadius};
     box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
+    background: ${getColor('graphite5H')};
   }
   .react-datepicker-wrapper {
     width: 100%;
+  }
+  .react-datepicker-popper {
+    z-index: 10;
   }
   .react-datepicker__header {
     background: ${getColor('graphite5H')};

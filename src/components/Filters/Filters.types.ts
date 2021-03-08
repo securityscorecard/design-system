@@ -19,7 +19,7 @@ interface ComponentProps {
   maxDate?: Date;
 }
 
-interface ComponentWithProps {
+export interface ComponentWithProps {
   component: React.ReactNode;
   props: ComponentProps;
 }

@@ -9,10 +9,8 @@ import {
   find,
   head,
   map,
-  path,
   pipe,
   propEq,
-  propOr,
   propSatisfies,
 } from 'ramda';
 import {
@@ -24,6 +22,7 @@ import {
 } from 'ramda-adjunct';
 
 import { FilterRow } from './FilterRow';
+import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
 import { Field, FieldPropTypes, Filter, FiltersProps } from './Filters.types';
 import { DateRangePickerPropTypes } from './components/DateRangePicker/DateRangePicker.types';
@@ -40,17 +39,11 @@ const getDefaultConditionAndValue = ({ conditions }: Field) => {
     component: defaultConditionComponent,
   } = defaultTo(head(conditions), defaultCondition);
 
-  const componentDefaultValue = path(
-    ['props', 'defaultValue'],
+  const defaultComponentValue = getDefaultComponentValue(
     defaultConditionComponent,
   );
-  const defaultValue = propOr(
-    componentDefaultValue,
-    'value',
-    componentDefaultValue,
-  );
 
-  return { condition: defaultConditionValue, value: defaultValue };
+  return { condition: defaultConditionValue, value: defaultComponentValue };
 };
 
 const getDefaultState = ([firstField]: Field[]) => {
@@ -143,12 +136,10 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(newFilters);
   };
 
-  const handleConditionChange = (condition, index, areComponentsEqual) => {
+  const handleConditionChange = (condition, value, index) => {
     const newFilters = [...filtersValues];
     newFilters[index].condition = condition;
-    if (!areComponentsEqual) {
-      newFilters[index].value = undefined;
-    }
+    newFilters[index].value = value;
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
@@ -228,10 +219,6 @@ const Filters: React.FC<FiltersProps> = ({
     callOnChange(newFilters);
   };
 
-  if (isUndefined(fields) || isNull(filtersValues)) {
-    return null;
-  }
-
   const handleCloseFilters = (event) => {
     event.preventDefault();
 
@@ -243,6 +230,10 @@ const Filters: React.FC<FiltersProps> = ({
 
     onCancel();
   };
+
+  if (isUndefined(fields) || isNull(filtersValues)) {
+    return null;
+  }
 
   return (
     <Form onSubmit={handleSubmitForm}>

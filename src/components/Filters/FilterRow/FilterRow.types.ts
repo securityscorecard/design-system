@@ -15,11 +15,7 @@ export interface FilterRowProps extends Filter {
     value: string,
     index: number,
   ) => void;
-  onConditionChange: (
-    condition: string,
-    index: number,
-    areComponentsEqual: boolean,
-  ) => void;
+  onConditionChange: (condition: string, value: string, index: number) => void;
   onValueChange: (value: string, index: number) => void;
   onRemove: (index: number) => React.MouseEventHandler;
   isDefaultState: boolean;
