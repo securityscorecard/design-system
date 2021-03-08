@@ -1,3 +1,10 @@
+# [1.0.0-alpha.41](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2021-03-08)
+
+
+### Features
+
+* **FullscreenModal:** add 10-cols single layout ([80d6eab](https://github.com/securityscorecard/design-system/commit/80d6eab338fa8ffe800f53dd3d78773596b3e00c))
+
 # [1.0.0-alpha.40](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2021-03-08)
 
 
