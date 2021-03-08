@@ -152,6 +152,18 @@ export const SingleColumn8: Story = () => (
 
 SingleColumn8.storyName = 'Single Column (layout: single-8)';
 
+export const SingleColumn10: Story = () => (
+  <FullscreenModal
+    content={<Content />}
+    footer={<Footer />}
+    header={header}
+    layout={FullscreenModalLayouts.single10}
+    onClose={action('close modal')}
+  />
+);
+
+SingleColumn10.storyName = 'Single Column (layout: single-10)';
+
 export const Sidebar4Column6: Story = () => (
   <FullscreenModal
     content={<Content />}
