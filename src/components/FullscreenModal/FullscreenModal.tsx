@@ -32,6 +32,11 @@ const columnConfigMap: ColumnConfigMap = {
     sidebar: [0, 0],
     content: [8, 2],
   },
+  [FullscreenModalLayouts.single10]: {
+    header: [10, 1],
+    sidebar: [0, 0],
+    content: [10, 1],
+  },
   [FullscreenModalLayouts.sidebar46]: {
     header: [10, 1],
     sidebar: [4, 1],
