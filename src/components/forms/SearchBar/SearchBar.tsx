@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isEmptyString, isNotEmpty } from 'ramda-adjunct';
@@ -11,9 +11,8 @@ import { Input } from '../Input';
 import SearchSuggestions from './SearchSuggestions';
 import { SearchBarProps, SuggestionPropType } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
-import { useControlledInput } from '../hooks/useControlledInput';
-import { useMounted } from '../../../hooks/useMounted';
-import { useDebounce } from '../../../hooks/useDebounce';
+
+const SEARCH_DEBOUNCE_TIME = 500;
 
 const SearchBarWrapper = styled.div`
   position: relative;
@@ -77,56 +76,55 @@ const SearchBar: React.FC<SearchBarProps> = ({
     defaultValue: string;
   };
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const [query, setQuery] = useState(defaultValue);
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchPerformed, setSearchPerformed] = useState(false);
-  const isMounted = useMounted();
+  const [query, setQuery] = useState<string>(defaultValue);
+  const [typingTimeout, setTypingTimeout] = useState<number>(0);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [searchPerformed, setSearchPerformed] = useState<boolean>(false);
 
-  const debouncedQuery = useDebounce(query, 500);
-
-  const { inputValue, onChangeInput, resetValue } = useControlledInput(
-    defaultValue,
-    () => {
-      if (hasSuggestions) {
-        setQuery(inputValue);
-      }
-    },
-  );
-
-  const performSearch = async () => {
+  const clearSearch = async () => {
+    setQuery('');
+    await onSearch('');
+    setIsSearching(false);
     setSearchPerformed(false);
-    setIsSearching(true);
-    await onSearch(debouncedQuery);
-    if (isMounted()) {
+  };
+
+  const goToSearch = async (value) => {
+    if (isEmptyString(value)) {
+      clearSearch();
+    } else {
+      setSearchPerformed(false);
+      setIsSearching(true);
+
+      await onSearch(value);
       setIsSearching(false);
       setSearchPerformed(true);
     }
   };
 
-  const clearSearch = async () => {
-    resetValue();
-    await onSearch('');
-    if (isMounted()) {
-      setIsSearching(false);
-      setSearchPerformed(false);
+  const search = async (value) => {
+    if (typingTimeout) {
+      window.clearTimeout(typingTimeout);
+    }
+    setTypingTimeout(
+      window.setTimeout(() => {
+        goToSearch(value);
+        setQuery(value);
+      }, SEARCH_DEBOUNCE_TIME),
+    );
+  };
+
+  const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+    if (hasSuggestions) {
+      search(event.target.value);
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      setQuery(inputValue);
+      search(query);
     }
   };
-
-  useEffect(() => {
-    if (isEmptyString(debouncedQuery)) {
-      clearSearch();
-    } else {
-      performSearch();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedQuery]);
 
   return (
     <SearchBarWrapper>
@@ -151,15 +149,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
       )}
 
       <StyledInput
-        ref={searchInputRef}
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         placeholder={placeholder}
         type="text"
-        value={inputValue}
-        onChange={onChangeInput}
+        value={query}
+        onChange={handleChangeQuery}
         {...(hasSuggestions || { onKeyDown: handleKeyDown })}
       />
+
       {isSearching && (
         <LoadingIcon>
           <Spinner
@@ -182,7 +180,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     </SearchBarWrapper>
   );
 };
-
 SearchBar.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,

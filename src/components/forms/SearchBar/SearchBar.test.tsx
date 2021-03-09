@@ -1,9 +1,9 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { DSProvider, createIconLibrary } from '../../../theme';
 import SearchBar from './SearchBar';
-import { mockOnSearch } from './mocks';
+import { delay, mockOnSearch } from './mocks';
 
 const onClickSuggestion = jest.fn();
 
@@ -24,7 +24,8 @@ export const mockSuggestions = [
 
 const setup = () => {
   createIconLibrary();
-  const utils = render(
+
+  render(
     <DSProvider>
       <SearchBar
         defaultValue="Searching for Default"
@@ -35,12 +36,12 @@ const setup = () => {
       />
     </DSProvider>,
   );
-  const searchInput = utils.getByPlaceholderText(
+
+  const searchInput = screen.getByPlaceholderText(
     'Search for X',
   ) as HTMLInputElement;
   return {
     searchInput,
-    ...utils,
   };
 };
 
@@ -52,33 +53,31 @@ describe('SearchBar', () => {
 
   it('updates on change', async () => {
     const { searchInput } = setup();
-    act(() => {
-      fireEvent.change(searchInput, { target: { value: 'query' } });
-    });
-
+    fireEvent.change(searchInput, { target: { value: 'query' } });
     expect(searchInput.value).toBe('query');
   });
 
   it('clears on X', async () => {
     const { searchInput } = setup();
-    act(() => {
-      fireEvent.change(searchInput, { target: { value: 'query' } });
-    });
 
+    fireEvent.change(searchInput, { target: { value: 'query' } });
+
+    await delay(500);
     const closeButton = await screen.findByLabelText('Clear Search');
-    act(() => {
-      fireEvent.click(closeButton);
-    });
 
-    expect(searchInput.value).toBe('');
+    fireEvent.click(closeButton);
+
+    await waitFor(() => {
+      expect(searchInput.value).toBe('');
+    });
   });
 
   it('displays suggestions on change', async () => {
     const { searchInput } = setup();
-    act(() => {
-      fireEvent.change(searchInput, { target: { value: 'query' } });
-    });
 
+    fireEvent.change(searchInput, { target: { value: 'query' } });
+
+    await delay(500);
     const suggestion1 = await screen.findByText('suggestion 1');
     const suggestion2 = await screen.findByText('suggestion 2');
 
