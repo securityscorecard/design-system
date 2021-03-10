@@ -1,22 +1,24 @@
+/* eslint-disable testing-library/await-async-query */
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { DSProvider, createIconLibrary } from '../../../theme';
 import SearchBar from './SearchBar';
-import { delay, mockOnSearch } from './mocks';
+import { renderSuggestionFilter } from './SearchSuggestionFormats';
 
 const onClickSuggestion = jest.fn();
+const onSearch = jest.fn();
 
 export const mockSuggestions = [
   {
-    name: 'suggestion1',
-    value: 'suggestion 1',
+    name: 'suggestion 1',
+    value: 'Suggestion One',
     onClick: onClickSuggestion,
     filter: { field: 'Field 1', condition: 'is' },
   },
   {
-    name: 'suggestion2',
-    value: 'suggestion 2',
+    name: 'suggestion 2',
+    value: 'Suggestion Two',
     onClick: onClickSuggestion,
     filter: { field: 'Field 2', condition: 'contains' },
   },
@@ -30,9 +32,10 @@ const setup = () => {
       <SearchBar
         defaultValue="Searching for Default"
         placeholder="Search for X"
+        renderSearchSuggestion={renderSuggestionFilter}
         suggestions={mockSuggestions}
         hasSuggestions
-        onSearch={mockOnSearch}
+        onSearch={onSearch}
       />
     </DSProvider>,
   );
@@ -42,6 +45,7 @@ const setup = () => {
   ) as HTMLInputElement;
   return {
     searchInput,
+    // waitForOptions,
   };
 };
 
@@ -62,26 +66,26 @@ describe('SearchBar', () => {
 
     fireEvent.change(searchInput, { target: { value: 'query' } });
 
-    await delay(500);
     const closeButton = await screen.findByLabelText('Clear Search');
-
     fireEvent.click(closeButton);
 
-    await waitFor(() => {
-      expect(searchInput.value).toBe('');
-    });
+    await waitFor(() => expect(searchInput.value).toBe(''));
   });
 
   it('displays suggestions on change', async () => {
     const { searchInput } = setup();
+    jest.useFakeTimers();
 
     fireEvent.change(searchInput, { target: { value: 'query' } });
 
-    await delay(500);
-    const suggestion1 = await screen.findByText('suggestion 1');
-    const suggestion2 = await screen.findByText('suggestion 2');
+    await waitFor(() => screen.findByText('Suggestion One'));
+    await waitFor(() =>
+      expect(screen.findByText('Suggestion One')).toBeTruthy(),
+    );
 
-    expect(suggestion1).toBeInTheDocument();
-    expect(suggestion2).toBeInTheDocument();
+    await waitFor(() => screen.findByText('Suggestion Two'));
+    await waitFor(() =>
+      expect(screen.findByText('Suggestion Two')).toBeTruthy(),
+    );
   });
 });
