@@ -81,6 +81,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [searchPerformed, setSearchPerformed] = useState<boolean>(false);
 
+  const isQueryClearable = searchPerformed || !isEmptyString(query);
+
   const clearSearch = async () => {
     setQuery('');
     await onSearch('');
@@ -128,7 +130,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <SearchBarWrapper>
-      {searchPerformed ? (
+      {isQueryClearable ? (
         <ClearSearchButton aria-label="Clear Search" onClick={clearSearch}>
           <Icon
             color="graphite2B"
