@@ -55,6 +55,7 @@ const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     hasSuggestions: false,
     placeholder: 'Search',
     onSearch: noop,
+    onClear: noop,
     onSuggestionsFetch: noop,
   },
   hasColumnVisibility: false,

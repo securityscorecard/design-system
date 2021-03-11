@@ -1,4 +1,5 @@
 import { action } from '@storybook/addon-actions';
+import { noop } from 'ramda-adjunct';
 
 import { ControlsConfig } from '../Datatable.types';
 import {
@@ -24,6 +25,7 @@ export const mockControlModuleProps: ControlsConfig<Record<string, unknown>> = {
     hasSuggestions: true,
     placeholder: 'Search for domains or IPs',
     onSearch: mockOnSearch,
+    onClear: noop,
     onSuggestionsFetch: mockOnSuggestionsFetch,
     renderSearchSuggestion: renderSuggestionFilter,
   },
