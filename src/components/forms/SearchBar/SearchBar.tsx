@@ -79,27 +79,29 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [query, setQuery] = useState<string>(defaultValue);
   const [typingTimeout, setTypingTimeout] = useState<number>(0);
   const [isSearching, setIsSearching] = useState<boolean>(false);
-  const [searchPerformed, setSearchPerformed] = useState<boolean>(false);
-
-  const isQueryClearable = searchPerformed || !isEmptyString(query);
+  const [isSuggestionDisplayed, setIsSuggestionsDisplayed] = useState<boolean>(
+    false,
+  );
 
   const clearSearch = async () => {
     setQuery('');
     await onSearch('');
     setIsSearching(false);
-    setSearchPerformed(false);
   };
 
   const goToSearch = async (value) => {
     if (isEmptyString(value)) {
       clearSearch();
     } else {
-      setSearchPerformed(false);
       setIsSearching(true);
-
       await onSearch(value);
       setIsSearching(false);
-      setSearchPerformed(true);
+    }
+
+    if (hasSuggestions && isNotEmpty(suggestions) && !isEmptyString(value)) {
+      setIsSuggestionsDisplayed(true);
+    } else {
+      setIsSuggestionsDisplayed(false);
     }
   };
 
@@ -115,7 +117,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     );
   };
 
-  const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
     if (hasSuggestions) {
       search(event.target.value);
@@ -128,18 +130,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
+  const handleBlur = () => {
+    setIsSuggestionsDisplayed(false);
+  };
+
+  const handleFocus = () => {
+    if (hasSuggestions && isNotEmpty(suggestions) && !isEmptyString(query)) {
+      setIsSuggestionsDisplayed(true);
+    }
+  };
+
   return (
     <SearchBarWrapper>
-      {isQueryClearable ? (
-        <ClearSearchButton aria-label="Clear Search" onClick={clearSearch}>
-          <Icon
-            color="graphite2B"
-            name={SSCIconNames.times}
-            type={IconTypes.ssc}
-            hasFixedWidth
-          />
-        </ClearSearchButton>
-      ) : (
+      {isEmptyString(query) ? (
         <SearchIcon aria-label="Search">
           <Icon
             color="graphite2B"
@@ -148,6 +151,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
             hasFixedWidth
           />
         </SearchIcon>
+      ) : (
+        <ClearSearchButton aria-label="Clear Search" onClick={clearSearch}>
+          <Icon
+            color="graphite2B"
+            name={SSCIconNames.times}
+            type={IconTypes.ssc}
+            hasFixedWidth
+          />
+        </ClearSearchButton>
       )}
 
       <StyledInput
@@ -156,7 +168,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
         placeholder={placeholder}
         type="text"
         value={query}
-        onChange={handleChangeQuery}
+        onBlur={handleBlur}
+        onChange={handleChangeInput}
+        onFocus={handleFocus}
         {...(hasSuggestions || { onKeyDown: handleKeyDown })}
       />
 
@@ -172,16 +186,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </LoadingIcon>
       )}
 
-      {searchPerformed && hasSuggestions && isNotEmpty(suggestions) && (
+      {isSuggestionDisplayed && (
         <SearchSuggestions
           renderSearchSuggestion={renderSearchSuggestion}
           suggestions={suggestions}
-          onClickOut={() => setSearchPerformed(false)}
+          onClickOut={() => setIsSuggestionsDisplayed(false)}
         />
       )}
     </SearchBarWrapper>
   );
 };
+
 SearchBar.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,
