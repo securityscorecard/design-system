@@ -68,7 +68,7 @@ const SearchSuggestions: React.FC<SearchSuggestionsPaneProps> = ({
             isNotNull(suggestion) && (
               <li key={suggestion.name}>
                 <SearchSuggestionsLink
-                  name={suggestion.name}
+                  aria-label={suggestion.name}
                   onClick={suggestion.onClick}
                 >
                   {renderSearchSuggestion(suggestion)}

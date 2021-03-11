@@ -1,22 +1,25 @@
+/* eslint-disable testing-library/await-async-query */
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { DSProvider, createIconLibrary } from '../../../theme';
 import SearchBar from './SearchBar';
-import { mockOnSearch } from './mocks';
+import { renderSuggestionFilter } from './SearchSuggestionFormats';
 
 const onClickSuggestion = jest.fn();
+const onSearch = jest.fn();
+const onClear = jest.fn();
 
 export const mockSuggestions = [
   {
-    name: 'suggestion1',
-    value: 'suggestion 1',
+    name: 'suggestion 1',
+    value: 'Suggestion One',
     onClick: onClickSuggestion,
     filter: { field: 'Field 1', condition: 'is' },
   },
   {
-    name: 'suggestion2',
-    value: 'suggestion 2',
+    name: 'suggestion 2',
+    value: 'Suggestion Two',
     onClick: onClickSuggestion,
     filter: { field: 'Field 2', condition: 'contains' },
   },
@@ -24,23 +27,27 @@ export const mockSuggestions = [
 
 const setup = () => {
   createIconLibrary();
-  const utils = render(
+
+  render(
     <DSProvider>
       <SearchBar
         defaultValue="Searching for Default"
         placeholder="Search for X"
+        renderSearchSuggestion={renderSuggestionFilter}
         suggestions={mockSuggestions}
         hasSuggestions
-        onSearch={mockOnSearch}
+        onClear={onClear}
+        onSearch={onSearch}
       />
     </DSProvider>,
   );
-  const searchInput = utils.getByPlaceholderText(
+
+  const searchInput = screen.getByPlaceholderText(
     'Search for X',
   ) as HTMLInputElement;
   return {
     searchInput,
-    ...utils,
+    // waitForOptions,
   };
 };
 
@@ -50,39 +57,42 @@ describe('SearchBar', () => {
     expect(searchInput.value).toBe('Searching for Default');
   });
 
-  it('updates on change', async () => {
-    const { searchInput } = setup();
-    act(() => {
-      fireEvent.change(searchInput, { target: { value: 'query' } });
-    });
-
-    expect(searchInput.value).toBe('query');
-  });
-
   it('clears on X', async () => {
     const { searchInput } = setup();
-    act(() => {
-      fireEvent.change(searchInput, { target: { value: 'query' } });
-    });
+
+    fireEvent.change(searchInput, { target: { value: 'query' } });
 
     const closeButton = await screen.findByLabelText('Clear Search');
-    act(() => {
-      fireEvent.click(closeButton);
-    });
+    fireEvent.click(closeButton);
 
-    expect(searchInput.value).toBe('');
+    await waitFor(() => expect(searchInput.value).toBe(''));
+    expect(onClear).toHaveBeenCalled();
   });
 
-  it('displays suggestions on change', async () => {
+  it('searches on change', async () => {
     const { searchInput } = setup();
-    act(() => {
-      fireEvent.change(searchInput, { target: { value: 'query' } });
-    });
+    jest.useFakeTimers();
 
-    const suggestion1 = await screen.findByText('suggestion 1');
-    const suggestion2 = await screen.findByText('suggestion 2');
+    fireEvent.change(searchInput, { target: { value: 'query' } });
+    expect(searchInput.value).toBe('query');
 
-    expect(suggestion1).toBeInTheDocument();
-    expect(suggestion2).toBeInTheDocument();
+    await waitFor(() => expect(onSearch).toHaveBeenCalled());
+  });
+
+  it('displays suggestions', async () => {
+    const { searchInput } = setup();
+    jest.useFakeTimers();
+
+    fireEvent.change(searchInput, { target: { value: 'query' } });
+
+    await waitFor(() => screen.findByText('Suggestion One'));
+    await waitFor(() =>
+      expect(screen.findByText('Suggestion One')).toBeTruthy(),
+    );
+
+    await waitFor(() => screen.findByText('Suggestion Two'));
+    await waitFor(() =>
+      expect(screen.findByText('Suggestion Two')).toBeTruthy(),
+    );
   });
 });

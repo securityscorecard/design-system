@@ -43,6 +43,7 @@ export interface SearchBarProps
   placeholder: string;
   hasSuggestions?: boolean;
   onSearch: (string) => void | Promise<void>;
+  onClear: () => void;
   suggestions?: FilterSuggestion[] | SearchSuggestion[];
   renderSearchSuggestion?: renderSuggestionFunc;
 }
