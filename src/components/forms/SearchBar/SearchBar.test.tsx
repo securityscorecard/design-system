@@ -8,6 +8,7 @@ import { renderSuggestionFilter } from './SearchSuggestionFormats';
 
 const onClickSuggestion = jest.fn();
 const onSearch = jest.fn();
+const onClear = jest.fn();
 
 export const mockSuggestions = [
   {
@@ -35,6 +36,7 @@ const setup = () => {
         renderSearchSuggestion={renderSuggestionFilter}
         suggestions={mockSuggestions}
         hasSuggestions
+        onClear={onClear}
         onSearch={onSearch}
       />
     </DSProvider>,
@@ -55,12 +57,6 @@ describe('SearchBar', () => {
     expect(searchInput.value).toBe('Searching for Default');
   });
 
-  it('updates on change', async () => {
-    const { searchInput } = setup();
-    fireEvent.change(searchInput, { target: { value: 'query' } });
-    expect(searchInput.value).toBe('query');
-  });
-
   it('clears on X', async () => {
     const { searchInput } = setup();
 
@@ -70,9 +66,20 @@ describe('SearchBar', () => {
     fireEvent.click(closeButton);
 
     await waitFor(() => expect(searchInput.value).toBe(''));
+    expect(onClear).toHaveBeenCalled();
   });
 
-  it('displays suggestions on change', async () => {
+  it('searches on change', async () => {
+    const { searchInput } = setup();
+    jest.useFakeTimers();
+
+    fireEvent.change(searchInput, { target: { value: 'query' } });
+    expect(searchInput.value).toBe('query');
+
+    await waitFor(() => expect(onSearch).toHaveBeenCalled());
+  });
+
+  it('displays suggestions', async () => {
     const { searchInput } = setup();
     jest.useFakeTimers();
 

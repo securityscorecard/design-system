@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isEmptyString, isNotEmpty } from 'ramda-adjunct';
+import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
 import { Icon } from '../../Icon';
@@ -65,6 +65,7 @@ const ClearSearchButton = styled.button`
 const SearchBar: React.FC<SearchBarProps> = ({
   hasSuggestions = false,
   onSearch,
+  onClear,
   renderSearchSuggestion = renderSuggestionDefault,
   suggestions = [],
   placeholder,
@@ -85,42 +86,35 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const clearSearch = async () => {
     setQuery('');
-    await onSearch('');
     setIsSearching(false);
+    setIsSuggestionsDisplayed(false);
+    onClear();
   };
 
-  const goToSearch = async (value) => {
-    if (isEmptyString(value)) {
-      clearSearch();
-    } else {
-      setIsSearching(true);
-      await onSearch(value);
-      setIsSearching(false);
-    }
-
-    if (hasSuggestions && isNotEmpty(suggestions) && !isEmptyString(value)) {
-      setIsSuggestionsDisplayed(true);
-    } else {
+  const search = async (value) => {
+    setIsSearching(true);
+    await onSearch(value);
+    setIsSearching(false);
+    if (!isNonEmptyString(value)) {
       setIsSuggestionsDisplayed(false);
     }
   };
 
-  const search = async (value) => {
+  const debouncedSearch = async (value) => {
     if (typingTimeout) {
       window.clearTimeout(typingTimeout);
     }
     setTypingTimeout(
       window.setTimeout(() => {
-        goToSearch(value);
-        setQuery(value);
+        search(value);
       }, SEARCH_DEBOUNCE_TIME),
     );
   };
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
     if (hasSuggestions) {
-      search(event.target.value);
+      debouncedSearch(event.target.value);
     }
   };
 
@@ -135,23 +129,25 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleFocus = () => {
-    if (hasSuggestions && isNotEmpty(suggestions) && !isEmptyString(query)) {
+    if (
+      hasSuggestions &&
+      isNonEmptyArray(suggestions) &&
+      isNonEmptyString(query)
+    ) {
       setIsSuggestionsDisplayed(true);
     }
   };
 
+  useEffect(() => {
+    if (isNonEmptyArray(suggestions) && hasSuggestions) {
+      setIsSuggestionsDisplayed(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [suggestions]);
+
   return (
     <SearchBarWrapper>
-      {isEmptyString(query) ? (
-        <SearchIcon aria-label="Search">
-          <Icon
-            color="graphite2B"
-            name={SSCIconNames.search}
-            type={IconTypes.ssc}
-            hasFixedWidth
-          />
-        </SearchIcon>
-      ) : (
+      {isNonEmptyString(query) ? (
         <ClearSearchButton aria-label="Clear Search" onClick={clearSearch}>
           <Icon
             color="graphite2B"
@@ -160,6 +156,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
             hasFixedWidth
           />
         </ClearSearchButton>
+      ) : (
+        <SearchIcon aria-label="Search">
+          <Icon
+            color="graphite2B"
+            name={SSCIconNames.search}
+            type={IconTypes.ssc}
+            hasFixedWidth
+          />
+        </SearchIcon>
       )}
 
       <StyledInput
@@ -169,7 +174,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         type="text"
         value={query}
         onBlur={handleBlur}
-        onChange={handleChangeInput}
+        onChange={handleChangeQuery}
         onFocus={handleFocus}
         {...(hasSuggestions || { onKeyDown: handleKeyDown })}
       />
@@ -200,6 +205,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 SearchBar.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onSearch: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
   hasSuggestions: PropTypes.bool,
   suggestions: PropTypes.arrayOf(SuggestionPropType),
   renderSearchSuggestion: PropTypes.func,

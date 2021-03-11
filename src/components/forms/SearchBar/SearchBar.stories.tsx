@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { noop } from 'ramda-adjunct';
 
 import SearchBar from './SearchBar';
-import { SearchBarProps } from './SearchBar.types';
 import { renderSuggestionFilter } from './SearchSuggestionFormats';
 import { mockOnSearch, mockSuggestions } from './mocks';
 
@@ -11,37 +11,61 @@ export default {
   component: SearchBar,
 } as Meta;
 
+const randomResults = ['Banana', 'Apple', 'Orange', 'Pear', 'Melon'];
+
 const commonArgs = {
   placeholder: 'Search for domains or IPs',
   onSearch: mockOnSearch,
-  suggestions: mockSuggestions('suggestion'),
-};
-
-export const playground: Story<SearchBarProps> = (args) => (
-  <SearchBar aria-label="SearchBar" {...args} {...commonArgs} />
-);
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.argTypes = {
-  hasSuggestions: { control: 'boolean' },
-  isDisabled: { control: 'boolean' },
-  isInvalid: { control: 'boolean' },
+  onClear: noop,
 };
 
 export const Default: Story = () => (
   <SearchBar aria-label="SearchBar" hasSuggestions={false} {...commonArgs} />
 );
 
-export const WithSuggestions: Story = () => (
-  <SearchBar aria-label="SearchBar" hasSuggestions {...commonArgs} />
-);
+export const WithSuggestions: Story = () => {
+  const [suggestions, setSuggestions] = useState([]);
 
-export const QuickFilters: Story = () => (
-  <SearchBar
-    aria-label="SearchBar"
-    renderSearchSuggestion={renderSuggestionFilter}
-    hasSuggestions
-    {...commonArgs}
-  />
-);
+  const onSearch = () => {
+    mockOnSearch('query');
+    setSuggestions(
+      mockSuggestions(
+        randomResults[Math.floor(Math.random() * randomResults.length)],
+      ),
+    );
+  };
+
+  return (
+    <SearchBar
+      {...commonArgs}
+      suggestions={suggestions}
+      hasSuggestions
+      onClear={() => setSuggestions([])}
+      onSearch={onSearch}
+    />
+  );
+};
+
+export const QuickFilters: Story = () => {
+  const [suggestions, setSuggestions] = useState([]);
+
+  const onSearch = () => {
+    mockOnSearch('query');
+    setSuggestions(
+      mockSuggestions(
+        randomResults[Math.floor(Math.random() * randomResults.length)],
+      ),
+    );
+  };
+
+  return (
+    <SearchBar
+      {...commonArgs}
+      renderSearchSuggestion={renderSuggestionFilter}
+      suggestions={suggestions}
+      hasSuggestions
+      onClear={() => setSuggestions([])}
+      onSearch={onSearch}
+    />
+  );
+};
