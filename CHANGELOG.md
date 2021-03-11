@@ -1,3 +1,18 @@
+# [1.0.0-alpha.42](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2021-03-11)
+
+
+### Bug Fixes
+
+* **ControlModule:** add missing onClear prop ([9de6b86](https://github.com/securityscorecard/design-system/commit/9de6b867d8045df99adc7f551e79ecd27e1f92b0))
+* **SearchBar:** able to clear search after suggestions clickout ([c0ec72e](https://github.com/securityscorecard/design-system/commit/c0ec72e35d3d9e30e376ef38a1c9e1d1aa7b18fc))
+* **SearchBar:** better simpler debounce ([1806424](https://github.com/securityscorecard/design-system/commit/1806424aea8676c91a4944991d1e1990729bc05b))
+* **SearchBar:** remove console errors ([6963417](https://github.com/securityscorecard/design-system/commit/6963417f2548329c516db9689d9f485d0c54aad5))
+
+
+### Features
+
+* **SearchBar:** add input onBlur and onFocus ([c89928e](https://github.com/securityscorecard/design-system/commit/c89928e1d2b2a20650b73416e134d64709db1c3d))
+
 # [1.0.0-alpha.41](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2021-03-08)
 
 
