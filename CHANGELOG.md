@@ -1,3 +1,11 @@
+# [1.0.0-alpha.43](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2021-03-16)
+
+
+### Bug Fixes
+
+* decrease z-index of sticky table header cell ([100256a](https://github.com/securityscorecard/design-system/commit/100256ac52c3d1fbe517dde9937e356da2a14b87))
+* include external css files into bundle ([c461e5f](https://github.com/securityscorecard/design-system/commit/c461e5f1e86d6e5d56597b11a6a3da5994476d3c))
+
 # [1.0.0-alpha.42](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2021-03-11)
 
 
