@@ -27,7 +27,7 @@ export default {
   plugins: [
     autoExternal(),
     postcss({
-      extract: 'node_modules/react-datepicker/dist/react-datepicker.css',
+      extract: true,
     }),
     resolve(),
     url({
