@@ -396,7 +396,7 @@ const Table = <D extends Record<string, unknown>>({
                   {...column.getHeaderProps({
                     ...column.getSortByToggleProps(),
                     ...(isAnyStickyColumn(column.id) && {
-                      style: { flex: '0 0 auto' },
+                      style: { flex: '0 0 auto', zIndex: 0 },
                     }),
                   })}
                 />
