@@ -29,8 +29,12 @@ const DefaultToolsTabItem = styled.button<ToolsTabButtonProps>`
   padding: ${pxToRem(6, 12)};
   margin-right: ${pxToRem(4)};
   ${({ margin }) => createMarginSpacing(margin)};
+
+  background-color: transparent;
   color: ${getColor('graphite2B')};
   border: 2px solid transparent;
+  border-radius: ${pxToRem(20)};
+
   &:focus:not(:disabled),
   &:hover:not(:disabled),
   &:not([href]):not([tabindex]):not(:disabled):hover,
@@ -46,7 +50,6 @@ const DefaultToolsTabItem = styled.button<ToolsTabButtonProps>`
 const ActiveToolsTabItem = styled(DefaultToolsTabItem)`
   background-color: ${getColor('graphite5H')};
   color: ${getColor('blueberryClassic')};
-  border-radius: ${pxToRem(20)};
   border-color: ${getColor('blueberryClassic')};
 
   &:focus:not(:disabled),
