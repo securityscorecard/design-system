@@ -1,3 +1,10 @@
+# [1.0.0-alpha.44](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2021-03-17)
+
+
+### Bug Fixes
+
+* **ToolTabItem:** styles and undefined func ([04323d2](https://github.com/securityscorecard/design-system/commit/04323d27fec948d16d1a8d7a9fab0f3de8413de7))
+
 # [1.0.0-alpha.43](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2021-03-16)
 
 
