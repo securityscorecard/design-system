@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { isNotUndefined } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
@@ -43,11 +44,15 @@ const ControlModule = <D extends Record<string, unknown>>({
   const filterToolActions = {
     onToolActivate: (event) => {
       setAreFiltersOpen(true);
-      filteringActions.onToolActivate(event);
+      if (isNotUndefined(filteringActions.onToolActivate)) {
+        filteringActions.onToolActivate(event);
+      }
     },
     onToolDeactivate: (event) => {
       setAreFiltersOpen(false);
-      filteringActions.onToolDeactivate(event);
+      if (isNotUndefined(filteringActions.onToolDeactivate)) {
+        filteringActions.onToolDeactivate(event);
+      }
     },
   };
 
