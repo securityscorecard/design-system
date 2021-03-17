@@ -35,17 +35,19 @@ export const Default: Story<PaginationProps> = ({ ...args }) => {
   }, [args]);
 
   return (
-    <Pagination
-      canNextPage={canNextPage}
-      canPreviousPage={canPreviousPage}
-      isLoading={isLoading}
-      numPageButtons={args.numPageButtons}
-      pageCount={mockPageCount}
-      pageIndex={mockPageIndex}
-      onGoToPage={onGoToPage}
-      onNextPage={onNextPage}
-      onPreviousPage={onPreviousPage}
-    />
+    <div style={{ margin: '0 auto', width: '1000px' }}>
+      <Pagination
+        canNextPage={canNextPage}
+        canPreviousPage={canPreviousPage}
+        isLoading={isLoading}
+        numPageButtons={args.numPageButtons}
+        pageCount={mockPageCount}
+        pageIndex={mockPageIndex}
+        onGoToPage={onGoToPage}
+        onNextPage={onNextPage}
+        onPreviousPage={onPreviousPage}
+      />
+    </div>
   );
 };
 
