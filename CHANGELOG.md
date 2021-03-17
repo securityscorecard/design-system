@@ -1,3 +1,10 @@
+# [1.0.0-alpha.45](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2021-03-17)
+
+
+### Bug Fixes
+
+* **Pagination:** fixed width spinner placeholder ([8c08f1a](https://github.com/securityscorecard/design-system/commit/8c08f1a47fd48c3324235df61eac3cf2b81fd9b0))
+
 # [1.0.0-alpha.44](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2021-03-17)
 
 
