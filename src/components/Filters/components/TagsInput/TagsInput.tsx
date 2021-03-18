@@ -97,6 +97,16 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [isInvalid, setIsInvalid] = useState(false);
 
+  const addNewTag = (value) => {
+    const valueArray = pipe(split(';'), map(trim), filter(isNotEmpty))(value);
+
+    if (doesValueAlreadyExist(tags, valueArray)) {
+      return;
+    }
+    onChange([...tags, ...valueArray]);
+    setInput('');
+  };
+
   const handleRemoveTag = (index) => {
     const newTags = remove(index, 1, tags);
     onChange(isEmptyArray(newTags) ? undefined : newTags);
@@ -105,17 +115,12 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const handleKeyDown = (event) => {
     const { target, key } = event;
     const { value, validity } = target;
+
     if (key === 'Enter') {
       event.preventDefault();
     }
     if (key === 'Enter' && value && !validity.patternMismatch) {
-      const valueArray = pipe(split(';'), map(trim), filter(isNotEmpty))(value);
-
-      if (doesValueAlreadyExist(tags, valueArray)) {
-        return;
-      }
-      onChange([...tags, ...valueArray]);
-      setInput('');
+      addNewTag(value);
     } else if (event.key === 'Backspace' && !value) {
       handleRemoveTag(tags.length - 1);
     }
@@ -124,6 +129,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const handleOnChange = (event) => {
     const { target } = event;
     const { value, validity } = target;
+
     if (patternMessage) {
       target.setCustomValidity(validity.patternMismatch ? patternMessage : '');
     }
@@ -132,6 +138,16 @@ const TagsInput: React.FC<TagsInputProps> = ({
   };
 
   const placeholder = tags.length === 0 ? 'Enter value' : '';
+
+  const handleOnBlur = (event) => {
+    const { target } = event;
+    const { value, validity } = target;
+
+    if (value && !validity.patternMismatch) {
+      addNewTag(value);
+    }
+    setIsFocused(false);
+  };
 
   return (
     <Container
@@ -152,7 +168,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
             placeholder={placeholder}
             type="text"
             value={input}
-            onBlur={() => setIsFocused(false)}
+            onBlur={handleOnBlur}
             onChange={handleOnChange}
             onFocus={() => setIsFocused(true)}
             onKeyDown={handleKeyDown}
