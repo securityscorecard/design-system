@@ -1,3 +1,15 @@
+# [1.0.0-alpha.46](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2021-03-18)
+
+
+### Bug Fixes
+
+* **DatePicker:** define own styles and drop imported css ([fbe8568](https://github.com/securityscorecard/design-system/commit/fbe8568d6e5616d82bbfbb0103066f3e7eb83e00))
+
+
+### Features
+
+* **TagsInput:** add new tag on blur ([0290405](https://github.com/securityscorecard/design-system/commit/02904058159d5bea592bd350c9d1e030786ab335))
+
 # [1.0.0-alpha.45](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2021-03-17)
 
 
