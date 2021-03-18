@@ -14,7 +14,6 @@ import {
 export const datePickerStyles = css`
   .DateRangePicker-input {
     height: ${pxToRem(32)};
-    width: 100%;
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
     border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
@@ -43,16 +42,25 @@ export const datePickerStyles = css`
     font-weight: ${getFontWeight('regular')};
     padding: ${pxToRem(16)};
     border-radius: ${getBorderRadius};
-    box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
+    box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')};
     background: ${getColor('graphite5H')};
   }
-  .react-datepicker-wrapper {
+  .react-datepicker {
+    background-color: ${getColor('graphite5H')};
+    border: 1px solid ${getColor('graphiteH')};
+    border-radius: 0.3rem;
+    display: inline-block;
+    position: relative;
+  }
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container,
+  .react-datepicker__input-container .DateRangePicker-input {
+    display: block;
     width: 100%;
   }
-  .react-datepicker-popper {
-    z-index: 10;
-  }
   .react-datepicker__header {
+    text-align: center;
+    position: relative;
     background: ${getColor('graphite5H')};
     border-bottom: 0;
     padding-top: 0;
@@ -85,6 +93,18 @@ export const datePickerStyles = css`
   }
   .react-datepicker__navigation {
     top: ${pxToRem(36)};
+    background: none;
+    line-height: 1.7rem;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    padding: 0;
+    border: 0.45rem solid transparent;
+    z-index: 1;
+    height: ${pxToRem(10)};
+    width: ${pxToRem(10)};
+    text-indent: -999em;
+    overflow: hidden;
   }
   .react-datepicker__navigation--previous {
     border-right-color: ${getColor('graphiteB')};
@@ -101,6 +121,8 @@ export const datePickerStyles = css`
     border-left-color: ${getColor('graphite2B')};
   }
   .react-datepicker__triangle {
+    position: absolute;
+    left: ${pxToRem(50)} !important; /* Needed for input with 100% width */
     border-bottom-color: ${getColor('graphite5H')};
   }
   .react-datepicker__triangle::before {
@@ -118,12 +140,87 @@ export const datePickerStyles = css`
   .react-datepicker__day--outside-month {
     visibility: hidden;
   }
+  .react-datepicker__day--disabled {
+    cursor: default;
+    color: ${getColor('graphiteH')};
+  }
+  .react-datepicker-popper {
+    z-index: 10;
+  }
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle,
+  .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before,
+  .react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
+    box-sizing: content-box;
+    position: absolute;
+    border: 8px solid transparent;
+    height: 0;
+    width: ${pxToRem(1)};
+  }
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before,
+  .react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
+    content: '';
+    z-index: -1;
+    border-width: 8px;
+    left: ${pxToRem(-8)};
+    border-bottom-color: ${getColor('graphite5H')};
+  }
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle {
+    top: 0;
+    margin-top: ${pxToRem(-8)};
+  }
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle,
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before {
+    border-top: none;
+    border-bottom-color: ${getColor('graphite5H')};
+  }
+  .react-datepicker-popper[data-placement^='bottom']
+    .react-datepicker__triangle::before {
+    top: ${pxToRem(-1)};
+    border-bottom-color: ${getColor('graphiteH')};
+  }
+  .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle {
+    bottom: 0;
+    margin-bottom: ${pxToRem(-8)};
+  }
+  .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
+  .react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
+    border-bottom: none;
+    border-top-color: ${getColor('graphite5H')};
+  }
+  .react-datepicker-popper[data-placement^='top']
+    .react-datepicker__triangle::before {
+    bottom: ${pxToRem(-1)};
+    border-top-color: ${getColor('graphiteH')};
+  }
+  .react-datepicker-popper[data-placement^='bottom'] {
+    margin-top: ${pxToRem(10)};
+  }
+  .react-datepicker-popper[data-placement='bottom-end']
+    .react-datepicker__triangle,
+  .react-datepicker-popper[data-placement='top-end']
+    .react-datepicker__triangle {
+    left: auto;
+    right: ${pxToRem(50)};
+  }
+  .react-datepicker-popper[data-placement^='top'] {
+    margin-bottom: ${pxToRem(10)};
+  }
 `;
+
 export const dateRangePickerStyles = css`
   .react-datepicker-wrapper:first-of-type {
     margin-right: ${pxToRem(8)};
   }
-
   .react-datepicker__day--in-selecting-range {
     background-color: ${getColor('graphite5H')};
     color: ${getColor('graphite4B')};
