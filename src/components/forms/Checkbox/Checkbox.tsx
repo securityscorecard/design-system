@@ -1,9 +1,11 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { allPass } from 'ramda';
+import { add, allPass, identity, memoizeWith, pipe } from 'ramda';
 import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 
+import * as checked from '../../../theme/icons/check';
+import * as indeterminate from '../../../theme/icons/minus';
 import {
   createMarginSpacing,
   getBorderRadius,
@@ -12,8 +14,6 @@ import {
   pxToRem,
 } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
-import { Icon } from '../../Icon';
-import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
@@ -24,27 +24,26 @@ const CheckboxWrapper = styled(FlexContainer)`
   }
 `;
 
+const getRemToggleSize = memoizeWith(
+  identity,
+  pipe(getFormStyle('toggleSize'), pxToRem),
+);
+
 const Box = styled(FlexContainer)`
-  ${(props) => {
-    const toggleSize = getFormStyle('toggleSize')(props);
-
-    return css`
-      flex: 0 0 ${pxToRem(toggleSize)};
-      height: ${pxToRem(toggleSize)};
-      width: ${pxToRem(toggleSize)};
-    `;
-  }}
-
+  flex: 0 0 ${getRemToggleSize};
+  height: ${getRemToggleSize};
+  width: ${getRemToggleSize};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
   background: ${getColor('graphite5H')};
   padding: ${pxToRem(3)};
 `;
 
-const Mark = styled(Icon)`
+const Mark = styled.svg`
   display: none;
 
   font-size: ${pxToRem(12)};
+  width: 1.25em;
   color: ${getFormStyle('activeColor')};
 `;
 
@@ -98,23 +97,27 @@ const CheckboxInput = styled.input<TogglingInputProps>`
     `}
 `;
 
-const CheckboxLabel = styled(Label)<
-  React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
->`
+const getLabelStyles = css`
   margin-bottom: 0;
-
-  ${({ theme, hasLabel }) => {
-    const toggleSize = getFormStyle('toggleSize')({ theme });
-    const leftPadding = hasLabel ? toggleSize + 10 : toggleSize;
-
-    return css`
-      min-height: ${pxToRem(toggleSize)};
-      line-height: ${pxToRem(toggleSize)};
-      padding-left: ${pxToRem(leftPadding)};
-      margin-left: ${pxToRem(toggleSize * -1)};
-    `;
-  }}
+  min-height: ${getRemToggleSize};
+  line-height: ${getRemToggleSize};
+  margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
 `;
+
+const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
+  padding-left: ${pipe(getFormStyle('toggleSize'), add(10), pxToRem)};
+  ${getLabelStyles};
+`;
+
+const EmptyLabel = styled.label`
+  padding-left: ${getRemToggleSize};
+  ${getLabelStyles};
+`;
+
+const generateIconProps = ({ width, height, svgPathData }) => ({
+  viewBox: `0 0 ${width} ${height}`,
+  children: <path d={svgPathData} fill="currentColor" />,
+});
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
@@ -136,7 +139,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <CheckboxWrapper alignItems="center" className={className}>
         <CheckboxInput
           ref={ref}
-          className="ds-checkbox-input"
           disabled={isDisabled}
           id={checkboxId}
           isIndeterminate={isIndeterminate}
@@ -145,20 +147,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           {...props}
         />
-        <Box
-          alignItems="center"
-          className="ds-checkbox-box"
-          justifyContent="center"
-        >
+        <Box alignItems="center" justifyContent="center">
           <Mark
-            className="ds-checkbox-mark"
-            name={isIndeterminate ? SSCIconNames.minus : SSCIconNames.check}
-            hasFixedWidth
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            {...generateIconProps(isIndeterminate ? indeterminate : checked)}
           />
         </Box>
-        <CheckboxLabel hasLabel={hasLabel} htmlFor={checkboxId}>
-          {label}
-        </CheckboxLabel>
+        {hasLabel ? (
+          <CheckboxLabel htmlFor={checkboxId}>{label}</CheckboxLabel>
+        ) : (
+          <EmptyLabel htmlFor={checkboxId} />
+        )}
       </CheckboxWrapper>
     );
   },
