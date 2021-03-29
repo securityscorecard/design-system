@@ -8,9 +8,11 @@ import {
   anyPass,
   curry,
   equals,
+  identity,
   isEmpty,
   join,
   map,
+  memoizeWith,
   path,
   pipe,
   unless,
@@ -42,13 +44,13 @@ type Theme = {
   padding?: SpacingSizeValue;
 };
 
-const converValueToRem = unless(
-  anyPass([equals(0), isString]),
-  (px) => `${px / BASE_FONT_SIZE}rem`,
+const convertValueToRem = memoizeWith(
+  identity,
+  unless(anyPass([equals(0), isString]), (px) => `${px / BASE_FONT_SIZE}rem`),
 );
 
 // pxToRem :: (number | string)... -> string
-export const pxToRem = pipe(list, map(converValueToRem), join(' '));
+export const pxToRem = pipe(list, map(convertValueToRem), join(' '));
 
 // getColor :: Color -> Props -> string
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
