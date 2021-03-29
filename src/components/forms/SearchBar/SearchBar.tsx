@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
 
@@ -9,7 +8,7 @@ import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
 import { Input } from '../Input';
 import SearchSuggestions from './SearchSuggestions';
-import { SearchBarProps, SuggestionPropType } from './SearchBar.types';
+import { SearchBarPropType, SearchBarProps } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
 
 const SEARCH_DEBOUNCE_TIME = 500;
@@ -68,7 +67,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onClear,
   renderSearchSuggestion = renderSuggestionDefault,
   suggestions = [],
-  placeholder,
+  placeholder = 'Search',
   isInvalid = false,
   isDisabled = false,
   ...props
@@ -202,16 +201,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
   );
 };
 
-SearchBar.propTypes = {
-  placeholder: PropTypes.string.isRequired,
-  onSearch: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired,
-  hasSuggestions: PropTypes.bool,
-  suggestions: PropTypes.arrayOf(SuggestionPropType),
-  renderSearchSuggestion: PropTypes.func,
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  defaultValue: PropTypes.string,
-};
+SearchBar.propTypes = SearchBarPropType;
 
 export default SearchBar;
