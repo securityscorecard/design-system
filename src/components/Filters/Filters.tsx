@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
   assoc,
@@ -19,13 +18,13 @@ import {
   isNotUndefined,
   isNull,
   isUndefined,
+  noop,
 } from 'ramda-adjunct';
 
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
-import { Field, FieldPropTypes, Filter, FiltersProps } from './Filters.types';
-import { DateRangePickerPropTypes } from './components/DateRangePicker/DateRangePicker.types';
+import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
 
 const generateId = ({ operator, field, condition }, index) =>
@@ -69,9 +68,9 @@ const Filters: React.FC<FiltersProps> = ({
   fields,
   state,
   onApply,
-  onChange,
-  onClose,
-  onCancel,
+  onChange = noop,
+  onClose = noop,
+  onCancel = noop,
   isLoading = false,
   isCancelDisabled = false, // TODO remove https://zitenote.atlassian.net/browse/FEP-1648
 }) => {
@@ -269,25 +268,4 @@ const Filters: React.FC<FiltersProps> = ({
 
 export default Filters;
 
-Filters.propTypes = {
-  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
-  onApply: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  state: PropTypes.arrayOf(
-    PropTypes.exact({
-      operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
-      field: PropTypes.string.isRequired,
-      condition: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.instanceOf(Date),
-        DateRangePickerPropTypes,
-      ]),
-      isApplied: PropTypes.bool.isRequired,
-    }),
-  ),
-  isLoading: PropTypes.bool,
-  isCancelDisabled: PropTypes.bool,
-  onChange: PropTypes.func,
-};
+Filters.propTypes = FiltersPropType;
