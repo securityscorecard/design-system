@@ -50,6 +50,8 @@ import {
 
 import { CustomColumnProps } from '../../components/Datatable/Datatable.types';
 import { InternalColumnProps } from '../../components/Datatable/Table/Table.types';
+import { CustomColumnOptions } from '../../components/DatatableV2/Table/Body/renderers/renderers.types';
+import { RowAction } from '../../components/DatatableV2/Table/Table.types';
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
@@ -87,7 +89,9 @@ declare module 'react-table' {
       UsePaginationInstanceProps<D>,
       UseRowSelectInstanceProps<D>,
       UseRowStateInstanceProps<D>,
-      UseSortByInstanceProps<D> {}
+      UseSortByInstanceProps<D> {
+    rowActions: RowAction<D>[];
+  }
 
   export interface TableState<
     D extends Record<string, unknown> = Record<string, unknown>
@@ -110,7 +114,11 @@ declare module 'react-table' {
       UseResizeColumnsColumnOptions<D>,
       UseSortByColumnOptions<D>,
       CustomColumnProps<D>,
-      Partial<InternalColumnProps> {}
+      CustomColumnOptions<D>,
+      Partial<InternalColumnProps> {
+    sticky?: string;
+    headerTooltip?: JSX.Element;
+  }
 
   export interface ColumnInstance<
     D extends Record<string, unknown> = Record<string, unknown>
@@ -119,7 +127,11 @@ declare module 'react-table' {
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D>,
       CustomColumnProps<D>,
-      Partial<InternalColumnProps> {}
+      CustomColumnOptions<D>,
+      Partial<InternalColumnProps> {
+    sticky?: string;
+    headerTooltip?: JSX.Element;
+  }
 
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>
