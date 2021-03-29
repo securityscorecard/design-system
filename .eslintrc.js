@@ -111,11 +111,18 @@ module.exports = {
     'fp/no-class': 'error',
     'fp/no-valueof-field': 'error',
     'filenames/match-exported': 'error',
-    'jsx-a11y/label-has-for': 'warn',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
         components: [],
+      },
+    ],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
       },
     ],
     'no-nested-ternary': 'off',
@@ -128,6 +135,7 @@ module.exports = {
       },
       rules: {
         'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+        'react/jsx-sort-props': 'off',
       },
     },
   ],

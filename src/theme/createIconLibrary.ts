@@ -16,3 +16,7 @@ export const createIconLibrary = (icons?: IconDefinitionOrPack[]): void => {
     library.add(...icons);
   }
 };
+
+export const resetIconLibrary = (): void => {
+  library.reset();
+};
