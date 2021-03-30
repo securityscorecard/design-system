@@ -68,7 +68,9 @@ export const TableConfigPropType = {
   NoDataComponent: PropTypes.elementType,
   NoMatchingDataComponent: PropTypes.elementType,
   hasSelection: PropTypes.bool,
-  defaultSelectedRowIds: PropTypes.arrayOf(PropTypes.string),
+  defaultSelectedRowIds: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ),
   hasPagination: PropTypes.bool,
   hasServerSidePagination: PropTypes.bool,
   defaultPageSize: PropTypes.number,
