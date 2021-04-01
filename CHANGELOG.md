@@ -1,3 +1,14 @@
+# [1.0.0-alpha.48](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.47...v1.0.0-alpha.48) (2021-04-01)
+
+
+### Bug Fixes
+
+* **Datatable:** expose onSelect in TableConfig proptype ([d0eeebb](https://github.com/securityscorecard/design-system/commit/d0eeebbe1c6bb3381d0df307b57ae1bc192cc1ea))
+* **Datatable:** hide filtering when no fields config is provided ([2965517](https://github.com/securityscorecard/design-system/commit/296551750752487ab2223c28e557e200100c4aad))
+* **Datatable:** make link cell background transparent ([bc167ac](https://github.com/securityscorecard/design-system/commit/bc167acf2a1dadf219e2df6079134343bcf34fd6))
+* **Datatable:** make table head cell right border 0 width ([65ca43e](https://github.com/securityscorecard/design-system/commit/65ca43e10815eeb2e8bb7d2e7e4e1f2daa37bfd2))
+* **Datatable:** tweak focus state on ContolButton ([d1202bc](https://github.com/securityscorecard/design-system/commit/d1202bc2eaf5d3f8e0106d9ce583cd5bc46e024b))
+
 # [1.0.0-alpha.47](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.46...v1.0.0-alpha.47) (2021-04-01)
 
 
