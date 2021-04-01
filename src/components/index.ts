@@ -4,6 +4,7 @@ export * from './Button';
 export * from './Card';
 export * from './Collapsible';
 export * from './Datatable';
+export * from './DatatableV2';
 export * from './FlexContainer';
 export * from './HexGrade';
 export * from './Icon';
