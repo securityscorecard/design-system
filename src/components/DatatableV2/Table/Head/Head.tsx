@@ -26,6 +26,7 @@ const StyledTh = styled.th`
   background-color: ${getColor('graphite3H')};
   border-color: ${getColor('graphiteH')};
   border-style: solid;
+  border-right-width: 0;
   border-top-width: 1px;
   border-bottom-width: 2px;
   border-left-width: 1px;
