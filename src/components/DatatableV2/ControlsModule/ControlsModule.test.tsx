@@ -22,37 +22,28 @@ describe('Datatable/ControlsModule', () => {
   });
 
   describe('given filtering is enabled', () => {
-    it('should throw if no fields definition is provided', () => {
-      /* eslint-disable no-console */
-      // prevent thrown error to propagate to logs
-      const stdErr = console.error;
-      console.error = jest.fn();
+    it('should not display filters if no fields definition is provided', () => {
+      renderWithProviders(
+        <ControlsModule
+          defaultIsFilteringApplied={
+            defaultControlsConfig.defaultIsFilteringApplied
+          }
+          defaultIsFilteringOpen={defaultControlsConfig.defaultIsFilteringOpen}
+          hasSearch={defaultControlsConfig.hasSearch}
+          searchConfig={defaultControlsConfig.searchConfig}
+          onControlToggle={defaultControlsConfig.onControlToggle}
+          // Test related properties
+          hasFiltering
+          filteringConfig={{
+            ...defaultControlsConfig.filteringConfig,
+            fields: [],
+          }}
+        />,
+      );
 
-      expect(() =>
-        renderWithProviders(
-          <ControlsModule
-            defaultIsFilteringApplied={
-              defaultControlsConfig.defaultIsFilteringApplied
-            }
-            defaultIsFilteringOpen={
-              defaultControlsConfig.defaultIsFilteringOpen
-            }
-            hasSearch={defaultControlsConfig.hasSearch}
-            searchConfig={defaultControlsConfig.searchConfig}
-            onControlToggle={defaultControlsConfig.onControlToggle}
-            // Test related properties
-            hasFiltering
-            filteringConfig={{
-              ...defaultControlsConfig.filteringConfig,
-              fields: [],
-            }}
-          />,
-        ),
-      ).toThrowError();
-
-      // restore original console.error
-      console.error = stdErr;
-      /* eslint-enable */
+      expect(
+        screen.queryByRole('button', { name: /Filters/i }),
+      ).not.toBeInTheDocument();
     });
     it('should open Filters component on Filters button click', () => {
       renderWithProviders(

@@ -65,6 +65,7 @@ export interface TableConfig<D> {
 }
 
 export const TableConfigPropType = {
+  onSelect: PropTypes.func,
   NoDataComponent: PropTypes.elementType,
   NoMatchingDataComponent: PropTypes.elementType,
   hasSelection: PropTypes.bool,

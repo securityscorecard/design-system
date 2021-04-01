@@ -36,12 +36,17 @@ const Button = styled.button<StyledControlButtonProps>`
   font-weight: ${getFontWeight('medium')};
   font-size: ${getFontSize('md')};
 
+  &:focus {
+    outline: none;
+  }
+
   &,
   &:not([href]):not([tabindex]) {
     color: ${getColor('graphite3B')};
 
     &:hover,
-    &.hover {
+    &.hover,
+    &:focus {
       color: ${getColor('graphite4B')};
     }
 
@@ -53,7 +58,8 @@ const Button = styled.button<StyledControlButtonProps>`
         border-color: ${getColor('blueberryClassic')};
 
         &:hover,
-        &.hover {
+        &.hover,
+        &:focus {
           color: ${getColor('radiantBlueberry')};
           border-color: ${getColor('radiantBlueberry')};
         }
@@ -67,7 +73,8 @@ const Button = styled.button<StyledControlButtonProps>`
         }
 
         &:hover,
-        &.hover {
+        &.hover,
+        &:focus {
           ${ButtonIcon} {
             color: ${getColor('radiantBlueberry')};
           }
