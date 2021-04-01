@@ -60,6 +60,7 @@ const StyledTable = styled.table`
     .ds-table-cell-link {
       margin: 0;
       border: none;
+      background: transparent;
       text-decoration: ${({ theme }) =>
         getLinkStyle('decoration', { color: 'primary', theme })};
       white-space: nowrap;
