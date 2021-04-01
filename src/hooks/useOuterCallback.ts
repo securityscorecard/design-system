@@ -9,7 +9,7 @@ export const useOuterClick = (
   const isListenersAdded = useRef(false);
 
   // read most recent callback and innerRef dom node from refs
-  function handleClick(e) {
+  const handleClick = (e) => {
     if (
       innerRef.current &&
       callbackRef.current &&
@@ -17,7 +17,7 @@ export const useOuterClick = (
     ) {
       callbackRef.current(e);
     }
-  }
+  };
 
   // set current callback in ref, before second useEffect uses it
   useEffect(() => {

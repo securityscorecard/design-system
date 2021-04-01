@@ -35,22 +35,24 @@ const NoDataContainer = styled(FlexContainer).attrs(() => ({
   padding: ${pxToRem(64)};
 `;
 
-function collectFetchParams<D>(
+const collectFetchParams = <D,>(
   pageIndex: number,
   pageSize: number,
   sortBy: SortingRule<D>[],
-): void {
+): void => {
   DatatableStore.update((s) => {
     s.pageIndex = pageIndex;
     s.pageSize = pageSize;
     s.sortBy = sortBy;
   });
-}
-function collectSelectedIds<D>(selectedRows: Record<IdType<D>, boolean>): void {
+};
+const collectSelectedIds = <D,>(
+  selectedRows: Record<IdType<D>, boolean>,
+): void => {
   DatatableStore.update((s) => {
     s.selectedIds = keys(selectedRows);
   });
-}
+};
 
 const Table = <D extends Record<string, unknown>>({
   columns,

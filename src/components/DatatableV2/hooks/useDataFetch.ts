@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { DatatableStore } from '../Datatable.store';
 import { OnDataFetchFn } from '../Datatable.types';
 
-export function useDataFetch<D>(onDataFetch: OnDataFetchFn<D>): void {
+export const useDataFetch = <D>(onDataFetch: OnDataFetchFn<D>): void => {
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
       (s) => ({
@@ -22,4 +22,4 @@ export function useDataFetch<D>(onDataFetch: OnDataFetchFn<D>): void {
       unsubscribe();
     };
   }, [onDataFetch]);
-}
+};
