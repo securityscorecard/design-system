@@ -4,10 +4,10 @@ import { IdType } from 'react-table';
 import { DatatableStore } from '../Datatable.store';
 import { OnSelectFn } from '../Table/Table.types';
 
-export function useTableRowSelect<D>(
+export const useTableRowSelect = <D>(
   onSelect: OnSelectFn<D>,
   defaultSelectedRowIds: IdType<D>[],
-): void {
+): void => {
   useEffect(
     () =>
       DatatableStore.update((s) => {
@@ -30,4 +30,4 @@ export function useTableRowSelect<D>(
       unsubscribe();
     };
   }, [onSelect]);
-}
+};
