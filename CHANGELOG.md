@@ -1,3 +1,32 @@
+# [1.0.0-alpha.47](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.46...v1.0.0-alpha.47) (2021-04-01)
+
+
+### Features
+
+* **createIconLibrary:** add reset function ([2f1e3c0](https://github.com/securityscorecard/design-system/commit/2f1e3c0b36d3461d559a963086edb7bad5467fa5))
+* **Datatable:** add additional components ([544fd6b](https://github.com/securityscorecard/design-system/commit/544fd6b136d013d17c929f697317278bc2580bca))
+* **Datatable:** add BatchActions ([038b672](https://github.com/securityscorecard/design-system/commit/038b672fba97fdeb4174ceefd61e1fc8f6be49a7))
+* **Datatable:** add BatchModule ([b0e150f](https://github.com/securityscorecard/design-system/commit/b0e150f16544f569dc8c0b6f5e44e56262c2bcc8))
+* **Datatable:** add ControlsModule ([b38ab83](https://github.com/securityscorecard/design-system/commit/b38ab83d91b526323c9ba62e991c414a76f1ea9c))
+* **Datatable:** add Datatable component ([e78fe9e](https://github.com/securityscorecard/design-system/commit/e78fe9e8a89065c63c1942c3b9db3db93e6ce770))
+* **Datatable:** add dropdown component ([9f868ae](https://github.com/securityscorecard/design-system/commit/9f868ae4c3a502ccf83230a3bb298e5f4e1f693a))
+* **Datatable:** add ElementCounter ([ad30b00](https://github.com/securityscorecard/design-system/commit/ad30b0096511fd6966e5aea14fceca1108fe4333))
+* **Datatable:** add hooks ([158c24f](https://github.com/securityscorecard/design-system/commit/158c24fa27f203aecd7b40359102f28493eea040))
+* **Datatable:** add static columns ([2e78921](https://github.com/securityscorecard/design-system/commit/2e789210f8987af242e6c187258cc2cc1c48c9bf))
+* **Datatable:** add table cell renderers ([8e874a1](https://github.com/securityscorecard/design-system/commit/8e874a12d213381b95e6fe440dc34e1c94a18570))
+* **Datatable:** add Table component ([3c4c613](https://github.com/securityscorecard/design-system/commit/3c4c613856df1b825bba7c53d3cce85759c14fe1))
+* **Datatable:** add table footer ([4e89542](https://github.com/securityscorecard/design-system/commit/4e89542ea73436ef6381e48e6740b79c74f50ef4))
+* **Datatable:** add table Head and Body ([a848784](https://github.com/securityscorecard/design-system/commit/a848784f853f29179e75400667514008191c4c67))
+* **Datatable:** add table styles ([15b3c49](https://github.com/securityscorecard/design-system/commit/15b3c49510434a8dc920b462268da90453b12b32))
+* **Datatable:** add types ([e702f46](https://github.com/securityscorecard/design-system/commit/e702f46b21cc25dbdbef3429537dd09154edaac8))
+* **DatatableStore:** add global datatable store ([af7b96a](https://github.com/securityscorecard/design-system/commit/af7b96a5cc02f276754b442c39d4a7e6bdd580ab))
+
+
+### Performance Improvements
+
+* **Checkbox:** simplify checkbox logic ([fbf1891](https://github.com/securityscorecard/design-system/commit/fbf18913bc3b28a5b9542c716968ea98e263af9e))
+* **pxToRem:** memoize conversion px to rem value ([cbf5966](https://github.com/securityscorecard/design-system/commit/cbf596604ba8789167465e652109b9f327afba56))
+
 # [1.0.0-alpha.46](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2021-03-18)
 
 
