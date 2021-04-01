@@ -40,10 +40,22 @@ export interface renderSuggestionWithFilterFunc {
 export interface SearchBarProps
   extends InputProps,
     React.InputHTMLAttributes<HTMLInputElement> {
-  placeholder: string;
   hasSuggestions?: boolean;
-  onSearch: (string) => void | Promise<void>;
+  onSearch: (query: string) => void | Promise<void>;
   onClear: () => void;
+  placeholder?: string;
   suggestions?: FilterSuggestion[] | SearchSuggestion[];
   renderSearchSuggestion?: renderSuggestionFunc;
 }
+
+export const SearchBarPropType = {
+  onSearch: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  hasSuggestions: PropTypes.bool,
+  suggestions: PropTypes.arrayOf(SuggestionPropType),
+  renderSearchSuggestion: PropTypes.func,
+  isInvalid: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  defaultValue: PropTypes.string,
+};

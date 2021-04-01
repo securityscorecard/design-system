@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 
 import { Option, OptionPropType } from './components/Select/Select.types';
 import { Operators } from './Filters.enums';
-import { DateRange } from './components/DateRangePicker/DateRangePicker.types';
+import {
+  DateRange,
+  DateRangePickerPropTypes,
+} from './components/DateRangePicker/DateRangePicker.types';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
 
@@ -49,8 +52,8 @@ export interface FiltersProps {
   fields: Field[];
   state?: Filter[];
   onApply: (filters: Filter[]) => void;
-  onClose: () => void;
-  onCancel: () => void;
+  onClose?: () => void;
+  onCancel?: () => void;
   onChange?: (filters: Filter[]) => void;
   isLoading?: boolean;
   isCancelDisabled?: boolean;
@@ -85,3 +88,26 @@ export const FieldPropTypes = PropTypes.exact({
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 });
+
+export const FilterStatePropType = PropTypes.exact({
+  operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
+  field: PropTypes.string.isRequired,
+  condition: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date),
+    DateRangePickerPropTypes,
+  ]),
+  isApplied: PropTypes.bool.isRequired,
+});
+
+export const FiltersPropType = {
+  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
+  onApply: PropTypes.func.isRequired,
+  state: PropTypes.arrayOf(FilterStatePropType),
+  isLoading: PropTypes.bool,
+  isCancelDisabled: PropTypes.bool,
+  onClose: PropTypes.func,
+  onCancel: PropTypes.func,
+  onChange: PropTypes.func,
+};
