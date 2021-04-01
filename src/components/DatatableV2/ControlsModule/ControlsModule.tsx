@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
-import { isEmptyArray, isNonEmptyArray } from 'ramda-adjunct';
+import { isNonEmptyArray } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils/helpers';
 import { FlexContainer } from '../../FlexContainer';
@@ -117,17 +117,14 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (hasFiltering && isEmptyArray(filteringFields)) {
-    throw new Error(`You forgot to provide 'fields' property in 'filteringConfig' while you have
-'hasFiltering' property set to true. Either set 'hasFiltering' to false or provide 'fields' property.`);
-  }
-
   const isToolbarEnabled = hasFiltering;
   // hasColumnVisibility ||
   // hasColumnOrdering ||
   // hasFiltering ||
   // hasGrouping ||
   // hasViews;
+
+  const shouldShowFiltering = hasFiltering && isNonEmptyArray(filteringFields);
 
   const applyControlStateChange = (
     control: Controls,
@@ -206,7 +203,7 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
                 }
               />
             )} */}
-            {hasFiltering && (
+            {shouldShowFiltering && (
               <ControlButton
                 iconName={SSCIconNames.filter}
                 isActive={controlsState[ControlTypes.filters].isActive}
@@ -254,7 +251,7 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
         )}
       </FlexContainer>
 
-      {hasFiltering && controlsState[ControlTypes.filters].isActive && (
+      {shouldShowFiltering && controlsState[ControlTypes.filters].isActive && (
         <FiltersContainer padding={{ top: 1.2, bottom: 0.8, horizontal: 0.8 }}>
           <Filters
             fields={filteringFields}
