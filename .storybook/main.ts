@@ -10,6 +10,9 @@ module.exports = {
     '@storybook/addon-controls',
     'storycap'
   ],
+  features: {
+    postcss: false,
+  },
   typescript: {
     check: false,
     checkOptions: {},

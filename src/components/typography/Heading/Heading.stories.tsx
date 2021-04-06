@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Heading, { H0, H1, H2, H3, H4 } from './Heading';
 import { HeadingProps } from './Heading.types';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
+import { generateControl } from '../../../utils/tests/storybook';
 
 export default {
   title: 'components/typography/Heading',
@@ -23,17 +24,11 @@ playground.argTypes = {
     defaultValue: 'Playground Heading',
   },
   size: {
-    control: {
-      type: 'select',
-      options: HeadingSizes,
-    },
+    ...generateControl('select', HeadingSizes),
     defaultValue: HeadingSizes.h1,
   },
   variant: {
-    control: {
-      type: 'select',
-      options: HeadingVariants,
-    },
+    ...generateControl('select', HeadingVariants),
     defaultValue: HeadingVariants.primary,
   },
   margin: { control: { disable: true } },

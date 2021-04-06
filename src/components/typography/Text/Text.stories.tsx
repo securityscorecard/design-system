@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Text, { Code, Strong } from './Text';
 import { TextProps } from './Text.types';
 import { TextSizes, TextVariants } from './Text.enums';
+import { generateControl } from '../../../utils/tests/storybook';
 
 export default {
   title: 'components/typography/Text',
@@ -25,17 +26,11 @@ playground.argTypes = {
     defaultValue: 'Playground Text',
   },
   size: {
-    control: {
-      type: 'select',
-      options: TextSizes,
-    },
+    ...generateControl('select', TextSizes),
     defaultValue: TextSizes.lg,
   },
   variant: {
-    control: {
-      type: 'select',
-      options: TextVariants,
-    },
+    ...generateControl('select', TextVariants),
     defaultValue: TextVariants.primary,
   },
   isBold: { control: { type: 'boolean' } },

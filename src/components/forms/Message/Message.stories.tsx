@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Message, { Error, Note } from './Message';
 import { MessageProps } from './Message.types';
 import { MessageVariants } from './Message.enums';
+import { generateControl } from '../../../utils/tests/storybook';
 
 export default {
   title: 'components/forms/Message',
@@ -23,10 +24,7 @@ playground.argTypes = {
     defaultValue: 'Form field message',
   },
   variant: {
-    control: {
-      type: 'select',
-      options: MessageVariants,
-    },
+    ...generateControl('select', MessageVariants),
     defaultValue: MessageVariants.note,
   },
 };

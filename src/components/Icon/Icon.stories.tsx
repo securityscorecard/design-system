@@ -6,6 +6,7 @@ import Icon from './Icon';
 import { IconProps } from './Icon.types';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import colors from '../../theme/colors';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/Icon',
@@ -16,12 +17,13 @@ export const sscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
 sscIcon.args = { type: IconTypes.ssc, name: SSCIconNames.wrench };
 sscIcon.argTypes = {
   color: {
-    control: { type: 'select', options: Object.keys(colors) },
+    options: Object.keys(colors),
+    control: { type: 'select' },
     defaultValue: 'graphite4B',
   },
   hasFixedWidth: { control: 'boolean' },
   name: {
-    control: { type: 'select', options: SSCIconNames },
+    ...generateControl('select', SSCIconNames),
   },
 };
 

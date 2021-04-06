@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { path } from 'ramda';
@@ -19,8 +18,6 @@ const Paragraph = styled(Text)<ParagraphProps>`
   ])};
   ${createSpacings};
 `;
-
-export const Test: React.FC = () => <Paragraph variant="context" isBold />;
 
 Paragraph.propTypes = {
   size: PropTypes.oneOf(Object.values(TextSizes)),

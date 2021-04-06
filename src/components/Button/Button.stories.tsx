@@ -6,6 +6,7 @@ import { FlexContainer } from '../FlexContainer';
 import Button from './Button';
 import { ButtonProps } from './Button.types';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/Button',
@@ -29,31 +30,19 @@ playground.argTypes = {
     defaultValue: 'Playground Button',
   },
   variant: {
-    control: {
-      type: 'select',
-      options: ButtonVariants,
-    },
+    ...generateControl('select', ButtonVariants),
     defaultValue: ButtonVariants.solid,
   },
   size: {
-    control: {
-      type: 'select',
-      options: ButtonSizes,
-    },
+    ...generateControl('select', ButtonSizes),
     defaultValue: ButtonSizes.md,
   },
   color: {
-    control: {
-      type: 'select',
-      options: ButtonColors,
-    },
+    ...generateControl('select', ButtonColors),
     defaultValue: ButtonColors.primary,
   },
   iconType: {
-    control: {
-      type: 'select',
-      options: IconTypes,
-    },
+    ...generateControl('select', IconTypes),
     defaultValue: IconTypes.ssc,
   },
   isDisabled: { control: { type: 'boolean' } },

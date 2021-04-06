@@ -5,6 +5,7 @@ import { Text } from '../index';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { ParagraphProps } from './Paragraph.types';
 import Paragraph from './Paragraph';
+import { generateControl } from '../../../utils/tests/storybook';
 
 export default {
   title: 'components/typography/Paragraph',
@@ -30,17 +31,11 @@ playground.argTypes = {
     defaultValue: lipsum,
   },
   size: {
-    control: {
-      type: 'select',
-      options: TextSizes,
-    },
+    ...generateControl('select', TextSizes),
     defaultValue: TextSizes.lg,
   },
   variant: {
-    control: {
-      type: 'select',
-      options: TextVariants,
-    },
+    ...generateControl('select', TextVariants),
     defaultValue: TextVariants.primary,
   },
   margin: { control: { disable: true } },

@@ -17,9 +17,9 @@ playground.parameters = {
 };
 playground.argTypes = {
   type: {
+    options: ['text', 'number', 'tel', 'email', 'password', 'date', 'url'],
     control: {
       type: 'select',
-      options: ['text', 'number', 'tel', 'email', 'password', 'date', 'url'],
     },
     table: {
       type: {
