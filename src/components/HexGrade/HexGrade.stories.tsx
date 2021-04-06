@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { HexGradeProps } from './HexGrade.types';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import HexGrade from './HexGrade';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/HexGrade',
@@ -20,14 +21,11 @@ playground.parameters = {
 };
 playground.argTypes = {
   variant: {
-    control: { type: 'select', options: HexGradeVariants },
+    ...generateControl('select', HexGradeVariants),
     defaultValue: HexGradeVariants.solid,
   },
   grade: {
-    control: {
-      type: 'select',
-      options: { none: undefined, ...HexGradeGrades },
-    },
+    ...generateControl('select', { none: undefined, ...HexGradeGrades }),
     defaultValue: undefined,
   },
   isInversed: {

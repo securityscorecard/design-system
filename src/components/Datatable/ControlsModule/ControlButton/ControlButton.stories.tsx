@@ -25,9 +25,9 @@ export const Default: Story<ControlButtonProps> = (args) => (
       <ControlButton {...args} isApplied />
     </FlexContainer>
     <FlexContainer alignItems="center" flexWrap="wrap" margin={{ bottom: 1 }}>
-      <ControlButton className="hover" {...args} />
-      <ControlButton className="hover" {...args} isActive />
-      <ControlButton className="hover" {...args} isApplied />
+      <ControlButton {...args} className="hover" />
+      <ControlButton {...args} className="hover" isActive />
+      <ControlButton {...args} className="hover" isApplied />
     </FlexContainer>
   </>
 );

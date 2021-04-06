@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { SignalProps } from './Signal.types';
 import { SignalKinds } from './Signal.enums';
 import Signal from './Signal';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/Signal',
@@ -13,7 +14,7 @@ export default {
 export const playground: Story<SignalProps> = (args) => <Signal {...args} />;
 playground.args = { kind: SignalKinds.high };
 playground.argTypes = {
-  kind: { control: { type: 'select', options: SignalKinds } },
+  kind: { ...generateControl('select', SignalKinds) },
 };
 
 export const SolidHexGrades: Story = () => (

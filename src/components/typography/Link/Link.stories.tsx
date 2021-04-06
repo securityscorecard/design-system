@@ -7,6 +7,7 @@ import { Paragraph } from '../index';
 import { LinkProps } from './Link.types';
 import { LinkColors } from './Link.enums';
 import Link from './Link';
+import { generateControl } from '../../../utils/tests/storybook';
 
 export default {
   title: 'components/typography/Link',
@@ -25,9 +26,7 @@ export const playground: Story<LinkProps> = (args) => (
   <Link {...args}>Link</Link>
 );
 playground.argTypes = {
-  color: {
-    control: { type: 'select', options: LinkColors },
-  },
+  color: { ...generateControl('select', LinkColors) },
   href: { control: { disable: true } },
   to: { control: { disable: true } },
 };

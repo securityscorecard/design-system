@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Badge from './Badge';
 import { BadgeProps } from './Badge.types';
 import { BadgeSizes } from './Badge.enums';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/Badge',
@@ -20,10 +21,7 @@ playground.argTypes = {
     defaultValue: 25,
   },
   size: {
-    control: {
-      type: 'select',
-      options: BadgeSizes,
-    },
+    ...generateControl('select', BadgeSizes),
     defaultValue: BadgeSizes.md,
   },
 };
