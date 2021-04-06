@@ -1,3 +1,11 @@
+# [1.0.0-alpha.49](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.48...v1.0.0-alpha.49) (2021-04-06)
+
+
+### Bug Fixes
+
+* **deps:** update semantic-release ecosystem ([92bc494](https://github.com/securityscorecard/design-system/commit/92bc49480ed0dd96c52faef6c210cc13ce6f76ff))
+* **deps:** upgrade Storybook to v6.2 ([f3ddd48](https://github.com/securityscorecard/design-system/commit/f3ddd486fd9f543d9a89e04db86f93081465d316))
+
 # [1.0.0-alpha.48](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.47...v1.0.0-alpha.48) (2021-04-01)
 
 
