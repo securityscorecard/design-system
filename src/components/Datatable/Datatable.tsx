@@ -1,30 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { allPass, any, mergeDeepRight, propEq } from 'ramda';
-import {
-  isFunction,
-  isNonEmptyArray,
-  isNotUndefined,
-  lengthGt,
-  noop,
-} from 'ramda-adjunct';
 import { useDeepCompareMemo } from 'use-deep-compare';
+import { fromPairs, map, pipe } from 'ramda';
+import { noop } from 'ramda-adjunct';
+import { IdType } from 'react-table';
 
 import { getBorderRadius, getColor } from '../../utils/helpers';
-import { Filter } from '../Filters/Filters.types';
 import { FlexContainer } from '../FlexContainer';
+import { FieldPropTypes, FilterStatePropType } from '../Filters/Filters.types';
+import { useDataFetch } from './hooks/useDataFetch';
+import { useTableRowSelect } from './hooks/useTableRowSelect';
 import { ActionPropType } from './types/Action.types';
-import Table from './Table/Table';
-import DatatableContext from './DatatableContext';
-import {
-  ControlsConfig,
-  DatatableProps,
-  ExtendedTableConfig,
-} from './Datatable.types';
-import { ControlModule } from './ControlModule';
+import { mergeControlsConfig, mergeTableConfig } from './defaultConfigs';
+import { ControlsModule } from './ControlsModule';
 import { BatchModule } from './BatchModule';
-import { FilterSuggestion } from '../forms/SearchBar/SearchBar.types';
+import { Table } from './Table';
+import { TableConfig, TableConfigPropType } from './Table/Table.types';
+import { DatatableProps } from './Datatable.types';
+import { DatatableStore, datatableInitialState } from './Datatable.store';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -32,241 +26,62 @@ const StyledDatatable = styled(FlexContainer)`
   background: ${getColor('graphite3H')};
 `;
 
-const isCallbackDefined = allPass([isNotUndefined, isFunction]);
-
-const defaultTableConfig: Partial<ExtendedTableConfig<
-  Record<string, unknown>
->> = {
-  hasSelection: true,
-  onSelect: noop,
-  hasPagination: true,
-  hasServerSidePagination: true,
-  defaultPageSize: 50,
-  hasSorting: true,
-  hasServerSideSorting: true,
-  defaultSortBy: [],
-  rowActions: [],
-};
-
-const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
-  isControlsEnabled: true,
-  hasSearch: true,
-  searchConfig: {
-    hasSuggestions: false,
-    placeholder: 'Search',
-    onSearch: noop,
-    onClear: noop,
-    onSuggestionsFetch: noop,
-  },
-  hasColumnVisibility: false,
-  hasColumnOrdering: false,
-  hasFiltering: true,
-  filtersConfig: {
-    onChange: noop,
-    onApply: noop,
-    onClose: noop,
-    onCancel: noop,
-    state: [],
-    fields: [],
-    isCancelDisabled: false,
-  },
-  defaultIsFilteringOpen: false,
-  hasGrouping: false,
-  hasCustomViews: false,
-};
+const mapSelectedRows = <D,>(defaultSelectedRowIds: IdType<D>[]) =>
+  pipe(
+    map((id: IdType<D>): [IdType<D>, boolean] => [id, true]),
+    fromPairs,
+  )(defaultSelectedRowIds);
 
 const Datatable = <D extends Record<string, unknown>>({
   data,
-  totalDataSize,
-  dataPrimaryKey,
-  onDataFetch = noop,
-  isDataLoading = false,
+  dataSize,
   columns,
-  tableConfig = {},
-  controlsConfig = {},
+  dataPrimaryKey,
+  isDataLoading = false,
+  onDataFetch = noop,
   batchActions = [],
-  ...props
+  isControlsEnabled = true,
+  controlsConfig = {},
+  tableConfig = {},
 }: DatatableProps<D>): React.ReactElement => {
+  useEffect(
+    () => () => {
+      DatatableStore.replace(datatableInitialState);
+    },
+    [],
+  );
+
+  const memoizedControlsConfig = useDeepCompareMemo(
+    () => mergeControlsConfig(controlsConfig),
+    [controlsConfig],
+  );
   const {
-    defaultPageSize,
-    rowActions,
-    hasSelection,
-    onSelect: onRowsSelect,
+    onSelect,
+    defaultSelectedRowIds,
     ...restTableConfig
-  }: ExtendedTableConfig<D> = mergeDeepRight(defaultTableConfig, tableConfig);
+  } = useDeepCompareMemo<TableConfig<D>>(() => mergeTableConfig(tableConfig), [
+    tableConfig,
+  ]);
 
-  const {
-    isControlsEnabled,
-    defaultHiddenColumns,
-    defaultColumnOrder,
-    hasFiltering,
-    filtersConfig,
-    searchConfig: { hasSuggestions, onSuggestionsFetch, ...restSearchConfig },
-    ...restControlsConfig
-  }: ControlsConfig<D> = mergeDeepRight(defaultControlsConfig, controlsConfig);
-
-  const { state: filtersState = [], onApply: onFiltersApply } = filtersConfig;
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterSuggestions, setFilterSuggestions] = useState<
-    FilterSuggestion[]
-  >([]);
-
-  const [pageCount, setPageCount] = useState<number>();
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [hasExclusionLogic, setHasExclusionLogic] = useState<boolean>(false);
-  const [shouldResetSelectedRows, setShouldResetSelectedRows] = useState<
-    boolean
-  >(false);
-  const [hasAppliedFilters, setHasAppliedFilters] = useState<boolean>(
-    any(propEq('isApplied', true), filtersState),
-  );
-  const [appliedFilters, setAppliedFilters] = useState(filtersState);
-  const [appliedSortBy, setAppliedSortBy] = useState([]);
-
-  const isFilteringEnabled =
-    isNonEmptyArray(filtersConfig.fields) && hasFiltering;
-
-  useEffect(() => {
-    setPageCount(Math.ceil(totalDataSize / defaultPageSize));
-  }, [totalDataSize, defaultPageSize]);
-
-  const handleOnDataFetch = useCallback(
-    (pageIndex, pageSize, sortBy) => {
-      setAppliedSortBy(sortBy);
-      onDataFetch({
-        pageIndex,
-        pageSize,
-        sortBy,
-        filters: appliedFilters,
-        query: searchQuery,
-      });
-    },
-    [onDataFetch, appliedFilters, searchQuery],
-  );
-
-  const handleOnSuggestionsFetch = useCallback(
-    async (query: string) => {
-      setFilterSuggestions(await onSuggestionsFetch(query));
-    },
-    [onSuggestionsFetch],
-  );
-
-  const handleOnSearch = useCallback(
-    (queryValue: string) => {
-      setSearchQuery(queryValue);
-      if (hasSuggestions) {
-        handleOnSuggestionsFetch(queryValue);
-      } else {
-        onDataFetch({
-          pageSize: defaultPageSize,
-          pageIndex: 0,
-          sortBy: appliedSortBy,
-          query: queryValue,
-          filters: appliedFilters,
-        });
-      }
-    },
-    [
-      hasSuggestions,
-      handleOnSuggestionsFetch,
-      onDataFetch,
-      defaultPageSize,
-      appliedFilters,
-      appliedSortBy,
-    ],
-  );
-
-  const handleOnFiltersApply = useCallback(
-    (filters: Filter[]) => {
-      setHasAppliedFilters(lengthGt(0, filters));
-      setAppliedFilters(filters);
-
-      if (isCallbackDefined(onFiltersApply)) {
-        onFiltersApply(filters);
-      }
-      onDataFetch({
-        pageSize: defaultPageSize,
-        pageIndex: 0,
-        sortBy: appliedSortBy,
-        query: searchQuery,
-        filters,
-      });
-    },
-    [defaultPageSize, onDataFetch, searchQuery, onFiltersApply, appliedSortBy],
-  );
-
-  const handleOnRowsSelect = useCallback(
-    (ids, exclude) => {
-      setSelectedIds(ids);
-
-      if (isCallbackDefined(onRowsSelect)) {
-        onRowsSelect(ids, exclude);
-      }
-    },
-    [onRowsSelect],
-  );
-
-  const memoizedTableConfig = useDeepCompareMemo(
-    () => ({
-      hasSelection,
-      onSelect: handleOnRowsSelect,
-      defaultPageSize,
-      ...restTableConfig,
-    }),
-    [defaultPageSize, handleOnRowsSelect, hasSelection, restTableConfig],
-  );
+  useDataFetch<D>(onDataFetch);
+  useTableRowSelect<D>(onSelect, defaultSelectedRowIds);
 
   return (
-    <StyledDatatable flexDirection="column" {...props}>
-      <DatatableContext.Provider
-        value={{
-          totalLength: totalDataSize,
-          selectedIds,
-          selectedLength: selectedIds.length,
-          defaultHiddenColumns,
-          defaultColumnOrder,
-          hasExclusionLogic,
-          setHasExclusionLogic,
-          hasSelection,
-          setShouldResetSelectedRows,
-        }}
-      >
-        {isControlsEnabled && (
-          <ControlModule<D>
-            defaultColumnOrder={defaultColumnOrder}
-            defaultHiddenColumns={defaultHiddenColumns}
-            filtersConfig={{
-              ...filtersConfig,
-              onApply: handleOnFiltersApply,
-            }}
-            hasFiltering={isFilteringEnabled}
-            searchConfig={{
-              ...restSearchConfig,
-              hasSuggestions,
-              onSearch: handleOnSearch,
-              suggestions: filterSuggestions,
-            }}
-            {...restControlsConfig}
-          />
-        )}
-        <BatchModule actions={batchActions} />
-      </DatatableContext.Provider>
+    <StyledDatatable flexDirection="column">
+      {isControlsEnabled && <ControlsModule {...memoizedControlsConfig} />}
+      <BatchModule
+        actions={batchActions}
+        dataSize={dataSize}
+        shouldShowSelectionDropdown={restTableConfig.hasSelection}
+      />
       <Table<D>
         columns={columns}
-        config={memoizedTableConfig}
         data={data}
-        defaultColumnOrder={defaultColumnOrder}
-        defaultHiddenColumns={defaultHiddenColumns}
-        fetchData={handleOnDataFetch}
-        hasAppliedFilters={hasAppliedFilters}
-        hasExclusionLogic={hasExclusionLogic}
-        isLoading={isDataLoading}
-        pageCount={pageCount}
-        primaryKey={dataPrimaryKey}
-        rowActions={rowActions}
-        setShouldResetSelectedRows={setShouldResetSelectedRows}
-        shouldResetSelectedRows={shouldResetSelectedRows}
-        totalLength={totalDataSize}
+        dataPrimaryKey={dataPrimaryKey}
+        dataSize={dataSize}
+        defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
+        isDataLoading={isDataLoading}
+        {...restTableConfig}
       />
     </StyledDatatable>
   );
@@ -274,50 +89,33 @@ const Datatable = <D extends Record<string, unknown>>({
 
 Datatable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  totalDataSize: PropTypes.number.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      accessor: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-        .isRequired,
-      id: PropTypes.string,
-      width: PropTypes.number,
-      Header: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-      Cell: PropTypes.func,
-      nullCondition: PropTypes.func,
-      nullConditionValue: PropTypes.string,
-      onClick: PropTypes.func,
-      hrefComposer: PropTypes.func,
-      toComposer: PropTypes.func,
-      displayLimit: PropTypes.number,
-    }),
-  ).isRequired,
-  dataPrimaryKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  dataSize: PropTypes.number.isRequired,
+  columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   isDataLoading: PropTypes.bool,
-  tableColumns: PropTypes.shape({
-    hasSelection: PropTypes.bool,
-    onSelect: PropTypes.func,
-    hasPagination: PropTypes.bool,
-    hasServerSidePagination: PropTypes.bool,
-    defaultPageSize: PropTypes.number,
-    hasSorting: PropTypes.bool,
-    hasServerSideSorting: PropTypes.bool,
-    defaultSortBy: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        desc: PropTypes.bool,
-      }),
-    ),
-  }),
-  controlsConfig: PropTypes.shape({
-    isControlsEnabled: PropTypes.bool,
-    hasSearch: PropTypes.bool,
-    onSuggestionsFetch: PropTypes.func,
-    hasColumnVisibility: PropTypes.bool,
-    defaultHiddenColumns: PropTypes.arrayOf(PropTypes.string),
-    hasColumnOrdering: PropTypes.bool,
-    defaultColumnOrder: PropTypes.arrayOf(PropTypes.string),
-  }),
   batchActions: PropTypes.arrayOf(ActionPropType),
+  dataPrimaryKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  isControlsEnabled: PropTypes.bool,
+  controlsConfig: PropTypes.exact({
+    onControlToggle: PropTypes.func,
+    hasSearch: PropTypes.bool,
+    searchConfig: PropTypes.exact({
+      placeholder: PropTypes.string,
+      onSearch: PropTypes.func,
+      onClear: PropTypes.func,
+    }),
+    hasFiltering: PropTypes.bool,
+    filteringConfig: PropTypes.exact({
+      onChange: PropTypes.func,
+      onApply: PropTypes.func,
+      onClose: PropTypes.func,
+      onCancel: PropTypes.func,
+      state: PropTypes.arrayOf(FilterStatePropType),
+      fields: PropTypes.arrayOf(FieldPropTypes),
+    }),
+    defaultIsFilteringOpen: PropTypes.bool,
+    defaultIsFilteringApplied: PropTypes.bool,
+  }),
+  tableConfig: PropTypes.exact(TableConfigPropType),
   onDataFetch: PropTypes.func,
 };
 

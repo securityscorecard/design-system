@@ -1,3 +1,6 @@
 import { BatchActionsProps } from './BatchActions/BatchActions.types';
+import { ElementCounterProps } from './ElementCounter/ElementCounter.types';
 
-export type BatchModuleProps = BatchActionsProps;
+export interface BatchModuleProps
+  extends BatchActionsProps,
+    ElementCounterProps {}

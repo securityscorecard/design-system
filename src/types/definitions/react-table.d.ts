@@ -48,10 +48,8 @@ import {
   UseSortByState,
 } from 'react-table';
 
-import { CustomColumnProps } from '../../components/Datatable/Datatable.types';
-import { InternalColumnProps } from '../../components/Datatable/Table/Table.types';
-import { CustomColumnOptions } from '../../components/DatatableV2/Table/Body/renderers/renderers.types';
-import { RowAction } from '../../components/DatatableV2/Table/Table.types';
+import { CustomColumnOptions } from '../../components/Datatable/Table/Body/renderers/renderers.types';
+import { RowAction } from '../../components/Datatable/Table/Table.types';
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
@@ -113,9 +111,7 @@ declare module 'react-table' {
       UseGroupByColumnOptions<D>,
       UseResizeColumnsColumnOptions<D>,
       UseSortByColumnOptions<D>,
-      CustomColumnProps<D>,
-      CustomColumnOptions<D>,
-      Partial<InternalColumnProps> {
+      CustomColumnOptions<D> {
     sticky?: string;
     headerTooltip?: JSX.Element;
   }
@@ -126,9 +122,7 @@ declare module 'react-table' {
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D>,
-      CustomColumnProps<D>,
-      CustomColumnOptions<D>,
-      Partial<InternalColumnProps> {
+      CustomColumnOptions<D> {
     sticky?: string;
     headerTooltip?: JSX.Element;
   }

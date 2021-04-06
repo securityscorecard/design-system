@@ -1,107 +1,32 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import React, { useEffect, useMemo, useRef } from 'react';
+import styled from 'styled-components';
 import {
   CellProps,
-  HeaderProps,
+  Column,
+  IdType,
+  SortingRule,
   useFlexLayout,
   usePagination,
   useRowSelect,
   useSortBy,
   useTable,
 } from 'react-table';
-import { useSticky } from 'react-table-sticky';
-import { __, always, includes, map, prop, without } from 'ramda';
-import {
-  isEmptyArray,
-  isNonEmptyArray,
-  isNotUndefined,
-  isOdd,
-  isString,
-} from 'ramda-adjunct';
-import { useDeepCompareEffect } from 'use-deep-compare';
+import { keys, prop, F as stubFalse } from 'ramda';
+import cls from 'classnames';
+import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
 
-import {
-  getBorderRadius,
-  getColor,
-  getFontSize,
-  pxToRem,
-} from '../../../utils/helpers';
+import { DatatableStore } from '../Datatable.store';
+import { tableActionsReducer } from './Table.reducer';
+import { actionsColumn } from './columns/actionsColumn';
+import { selectionColumn } from './columns/selectionColumn';
+import { Head } from './Head';
+import { Body } from './Body';
+import { Footer } from './Footer';
+import StyledTable from './Table.styles';
+import CellRenderer from './Body/renderers/CellRenderer';
 import { FlexContainer } from '../../FlexContainer';
-import { ActionKindsPropType } from '../types/Action.types';
-import { RendererText } from './TableCell/renderers';
-import { Dropdown } from '../Dropdown';
-import { TableCell } from './TableCell';
-import { TableHeadCell } from './TableHeadCell';
-import { TableRow } from './TableRow';
+import { getColor, pxToRem } from '../../../utils/helpers';
 import { TableProps } from './Table.types';
-import { SelectionCheckbox } from './SelectionCheckbox';
-import { NoData, NoMatchingData } from './NoData';
-import { Pagination } from '../Pagination';
-import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { Icon } from '../../Icon';
-
-const StyledTable = styled.table<{ isSticky: boolean }>`
-  width: 100%;
-  border-top: 1px solid ${getColor('graphiteH')};
-
-  /* reset table defaults */
-  display: block;
-  border-spacing: 0;
-  box-sizing: border-box;
-
-  ${({ isSticky }) =>
-    isSticky &&
-    css`
-      overflow: scroll;
-    `};
-`;
-
-const StyledTableHeader = styled.thead<{
-  isSticky: boolean;
-  hasRowActions: boolean;
-}>`
-  display: block;
-  background-color: ${getColor('graphite3H')};
-
-  /* TODO: add shadow when table isSticky and doesn't have actions column */
-  ${({ isSticky, hasRowActions }) =>
-    isSticky && hasRowActions
-      ? css`
-          & th:nth-last-child(2) {
-            border-right: 0;
-          }
-          & th[data-sticky-first-right-td] {
-            box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
-            border-left: 1px solid ${getColor('graphiteH')};
-          }
-        `
-      : isSticky && !hasRowActions
-      ? css`
-          & th[data-sticky-first-right-td] {
-            box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.05);
-            border-left: 1px solid ${getColor('graphiteH')};
-          }
-        `
-      : null}
-`;
-
-const StyledTableBody = styled.tbody<{ isSticky: boolean }>`
-  display: block;
-
-  ${({ isSticky }) =>
-    isSticky &&
-    css`
-      position: relative;
-      z-index: 0;
-    `};
-`;
 
 const NoDataContainer = styled(FlexContainer).attrs(() => ({
   flexDirection: 'column',
@@ -110,358 +35,175 @@ const NoDataContainer = styled(FlexContainer).attrs(() => ({
   padding: ${pxToRem(64)};
 `;
 
-const RowActionsButton = styled.button<{ isActive: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${pxToRem(24)};
-  height: ${pxToRem(24)};
-  border: 0 none;
-  color: ${getColor('graphiteB')};
-  font-size: ${getFontSize('lg')};
-  border-radius: ${getBorderRadius};
-  background: transparent;
-  cursor: pointer;
-
-  &:hover {
-    background: ${getColor('graphite3H')};
-  }
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      &,
-      &:hover {
-        background: ${getColor('radiantBlueberry')};
-        color: ${getColor('graphite5H')};
-      }
-    `};
-`;
-
-const SELECTION_COLUMN_ID = 'selection';
-const ACTIONS_COLUMN_ID = 'actions';
-
-const isAnyStickyColumn = includes(__, [
-  SELECTION_COLUMN_ID,
-  ACTIONS_COLUMN_ID,
-]);
-
-const renderNoDataContent = (NoDataComponent) => {
-  if (isNotUndefined(NoDataComponent)) return <NoDataComponent />;
-
-  return <NoData />;
+const collectFetchParams = <D,>(
+  pageIndex: number,
+  pageSize: number,
+  sortBy: SortingRule<D>[],
+): void => {
+  DatatableStore.update((s) => {
+    s.pageIndex = pageIndex;
+    s.pageSize = pageSize;
+    s.sortBy = sortBy;
+  });
 };
-const renderNoMatchingDataContent = (NoMatchingDataComponent) => {
-  if (isNotUndefined(NoMatchingDataComponent))
-    return <NoMatchingDataComponent />;
-
-  return <NoMatchingData />;
+const collectSelectedIds = <D,>(
+  selectedRows: Record<IdType<D>, boolean>,
+): void => {
+  DatatableStore.update((s) => {
+    s.selectedIds = keys(selectedRows);
+  });
 };
 
 const Table = <D extends Record<string, unknown>>({
   columns,
   data,
-  fetchData,
-  isLoading,
-  primaryKey,
+  dataPrimaryKey,
+  dataSize,
+  isDataLoading,
   rowActions,
-  pageCount: controlledPageCount,
-  config,
-  hasAppliedFilters,
-  defaultHiddenColumns,
-  defaultColumnOrder,
-  hasExclusionLogic,
-  totalLength,
-  shouldResetSelectedRows,
-  setShouldResetSelectedRows,
+  NoMatchingDataComponent,
+  NoDataComponent,
+  hasSelection,
+  defaultSelectedRows,
+  hasPagination,
+  hasServerSidePagination,
+  defaultPageSize,
+  hasSorting,
+  hasServerSideSorting,
+  defaultSortBy,
 }: TableProps<D>): React.ReactElement => {
-  const {
-    onSelect,
-    defaultPageSize,
-    defaultSortBy,
-    hasSelection,
-    hasServerSidePagination,
-    hasServerSideSorting,
-    NoDataComponent,
-    NoMatchingDataComponent,
-  } = config;
-  const hasRowActions = isNonEmptyArray(rowActions);
-  const [isSticky, setIsSticky] = useState(true);
-  const defaultColumn = useMemo(
+  const hasExclusiveSelection = DatatableStore.useState(
+    (s) => s.hasExclusiveSelection,
+  );
+  const hasAppliedFilters = DatatableStore.useState((s) => s.hasAppliedFilters);
+
+  const tableRef = useRef(null);
+  const scrollToTableTop = () => {
+    window.scrollTo(0, tableRef.current.getBoundingClientRect().top);
+  };
+
+  const defaultColumn = useMemo<Partial<Column<D>>>(
     () => ({
       minWidth: 40,
       width: 150,
       maxWidth: 400,
-      Cell: RendererText,
-      nullCondition: always(false),
-      hasExclusionLogic,
-      totalLength,
+      nullCondition: stubFalse,
+      Cell: (props: CellProps<D>): React.ReactElement => (
+        <CellRenderer<D> {...props} />
+      ),
+      cellType: 'text',
     }),
-    [hasExclusionLogic, totalLength],
+    [],
   );
 
+  // TABLE INITIALIZATION
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    prepareRow,
     rows,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageCount,
+    prepareRow,
     gotoPage,
-    nextPage,
-    previousPage,
-    totalColumnsWidth,
+    pageCount,
     toggleAllRowsSelected,
-    // Get the state from the instance
-    state: { pageIndex, pageSize, sortBy, selectedRowIds },
+    state: { pageIndex, selectedRowIds },
   } = useTable<D>(
     {
       columns,
       data,
-      defaultColumn, // default column settings
+      defaultColumn,
       initialState: {
-        pageIndex: 0, // We want to start at page 1
+        // PAGINATION
         pageSize: defaultPageSize,
+        // SORTING
         sortBy: defaultSortBy,
-        columnOrder: defaultColumnOrder,
-        ...(isNonEmptyArray(defaultHiddenColumns) && {
-          hiddenColumns: defaultHiddenColumns,
-        }),
+        // SELECTION
+        selectedRowIds: defaultSelectedRows,
       },
-      manualPagination: hasServerSidePagination, // We will handle pagination by ourselves
-      manualSortBy: hasServerSideSorting, // sorting is handled backend
-      autoResetSortBy: hasServerSideSorting,
-      pageCount: controlledPageCount, // Since we handling pagination we need to pass page count
-      autoResetSelectedRows: false, // Do not reset selection when moving to different page
-      ...(isNotUndefined(primaryKey) && {
-        getRowId: isString(primaryKey) ? prop(primaryKey) : primaryKey, // Set row id for selection
+      // PAGINATION
+      manualPagination: hasServerSidePagination,
+      pageCount: Math.ceil(dataSize / defaultPageSize),
+      autoResetPage: false,
+      // SORTING
+      disableSortBy: !hasSorting,
+      manualSortBy: hasServerSideSorting,
+      autoResetSortBy: false,
+      // SELECTION
+      autoResetSelectedRows: false,
+      ...(isNotUndefined(dataPrimaryKey) && {
+        getRowId: isString(dataPrimaryKey)
+          ? prop(dataPrimaryKey)
+          : dataPrimaryKey, // Set row id for selection
       }),
-      stateReducer(newState, action) {
-        if (action.type === 'toggleSortBy') {
-          fetchData(newState.pageIndex, newState.pageSize, newState.sortBy);
-        }
-        return newState;
-      },
+      // ACTIONS
+      stateReducer: tableActionsReducer<D>({
+        collectFetchParams,
+        scrollToTableTop,
+      }),
+      // CUSTOM PROPS
+      rowActions,
+      dataSize,
     },
     useSortBy,
     usePagination,
     useRowSelect,
     useFlexLayout,
-    useSticky,
     (hooks) => {
-      hooks.visibleColumns.push((visibleColumns) =>
-        without(
-          [false],
-          [
-            // Add selection column to the beginning of the table
-            hasSelection && {
-              id: SELECTION_COLUMN_ID,
-              sticky: 'left',
-              width: 48,
-              disableSortBy: true,
-              Header: ({
-                getToggleAllRowsSelectedProps,
-                data: tableData,
-                column,
-                state: { selectedRowIds: tableSelectedRowIds },
-              }: HeaderProps<D>): JSX.Element => {
-                if (isEmptyArray(tableData)) {
-                  return null;
-                }
-                const selected = Object.keys(tableSelectedRowIds);
-                const isIndeterminate =
-                  selected.length > 0 && selected.length < column.totalLength;
-
-                return (
-                  <FlexContainer flexGrow={1} justifyContent="center">
-                    <SelectionCheckbox
-                      hasExclusionLogic={column.hasExclusionLogic}
-                      id="header-select-all"
-                      isIndeterminate={isIndeterminate}
-                      {...getToggleAllRowsSelectedProps()}
-                    />
-                  </FlexContainer>
-                );
-              },
-              Cell: ({ row, column }: CellProps<D>): JSX.Element => (
-                <FlexContainer flexGrow={1} justifyContent="center">
-                  <SelectionCheckbox
-                    hasExclusionLogic={column.hasExclusionLogic}
-                    id={`select-${row.id}`}
-                    {...row.getToggleRowSelectedProps()}
-                  />
-                </FlexContainer>
-              ),
-            },
-            ...visibleColumns,
-            // Add actions column to the end of the table
-            hasRowActions && {
-              id: ACTIONS_COLUMN_ID,
-              sticky: 'right',
-              width: 48,
-              disableSortBy: true,
-              Cell: ({ row }: CellProps<D>): JSX.Element => {
-                const actions = map((action) => ({
-                  ...action,
-                  onClick: () => action.onClick(row.id),
-                }))(rowActions);
-
-                return (
-                  <FlexContainer flexGrow={1} justifyContent="center">
-                    <Dropdown actions={actions}>
-                      {(isActive) => (
-                        <RowActionsButton
-                          aria-label="Row Actions"
-                          isActive={isActive}
-                        >
-                          <Icon name={SSCIconNames.ellipsisH} />
-                        </RowActionsButton>
-                      )}
-                    </Dropdown>
-                  </FlexContainer>
-                );
-              },
-            },
-          ],
-        ),
-      );
+      hooks.visibleColumns.push((visibleColumns) => [
+        ...(hasSelection ? [selectionColumn] : []),
+        ...visibleColumns,
+        ...(isNonEmptyArray(rowActions) ? [actionsColumn] : []),
+      ]);
     },
   );
 
-  useDeepCompareEffect(() => {
-    onSelect(Object.keys(selectedRowIds), hasExclusionLogic);
-  }, [onSelect, selectedRowIds, hasExclusionLogic]);
+  useEffect(() => {
+    const unsubscribe = DatatableStore.createReaction(
+      (s) => s.shouldResetSelectedRows,
+      (_, newState) => {
+        toggleAllRowsSelected(false);
+        newState.shouldResetSelectedRows = false;
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [toggleAllRowsSelected]);
 
   useEffect(() => {
-    if (shouldResetSelectedRows) {
-      toggleAllRowsSelected(false);
-      setShouldResetSelectedRows(false);
-    }
-  }, [
-    shouldResetSelectedRows,
-    setShouldResetSelectedRows,
-    toggleAllRowsSelected,
-  ]);
-  useEffect(() => {
-    toggleAllRowsSelected(false);
-  }, [hasExclusionLogic, toggleAllRowsSelected]);
+    collectSelectedIds<D>(selectedRowIds);
+  }, [selectedRowIds]);
 
-  const tableRef = useRef(null);
-  useEffect(() => {
-    if (
-      tableRef.current !== null &&
-      tableRef.current.offsetWidth >= totalColumnsWidth
-    ) {
-      setIsSticky(false);
-    }
-  }, [totalColumnsWidth]);
-
-  useEffect(() => {
-    toggleAllRowsSelected(false);
-  }, [hasExclusionLogic, toggleAllRowsSelected]);
-
-  const handleGoToPage = useCallback(
-    (tablePageIndex) => {
-      gotoPage(tablePageIndex);
-      fetchData(tablePageIndex, pageSize, sortBy);
-    },
-    [fetchData, gotoPage, pageSize, sortBy],
-  );
-  const handleNextPage = useCallback(() => {
-    nextPage();
-    fetchData(pageIndex + 1, pageSize, sortBy);
-  }, [fetchData, pageIndex, pageSize, sortBy, nextPage]);
-  const handlePreviousPage = useCallback(() => {
-    previousPage();
-    fetchData(pageIndex - 1, pageSize, sortBy);
-  }, [fetchData, pageIndex, pageSize, sortBy, previousPage]);
-
-  // Render the UI for your table
   return (
     <>
       <StyledTable
         ref={tableRef}
-        isSticky={isSticky}
-        {...getTableProps({ style: { minWidth: '100%' } })}
+        className={cls({ 'has-exclusive-selection': hasExclusiveSelection })}
+        {...getTableProps()}
       >
-        <StyledTableHeader hasRowActions={hasRowActions} isSticky={isSticky}>
-          {headerGroups.map((headerGroup) => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <TableHeadCell<D>
-                  column={column}
-                  {...column.getHeaderProps({
-                    ...column.getSortByToggleProps(),
-                    ...(isAnyStickyColumn(column.id) && {
-                      style: { flex: '0 0 auto', zIndex: 0 },
-                    }),
-                  })}
-                />
-              ))}
-            </TableRow>
-          ))}
-        </StyledTableHeader>
-        <StyledTableBody isSticky={isSticky} {...getTableBodyProps()}>
-          {(hasServerSidePagination ? rows : page).map((row, index) => {
-            prepareRow(row);
-            return (
-              <TableRow {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <TableCell
-                      cell={cell}
-                      hasExclusionLogic={hasExclusionLogic}
-                      isOdd={isOdd(index)}
-                      {...cell.getCellProps({
-                        ...(isAnyStickyColumn(cell.column.id) && {
-                          style: { flex: '0 0 auto' },
-                        }),
-                      })}
-                    />
-                  );
-                })}
-              </TableRow>
-            );
-          })}
-        </StyledTableBody>
+        <Head headerGroups={headerGroups} />
+        <Body<D> prepareRow={prepareRow} rows={rows} {...getTableBodyProps()} />
       </StyledTable>
-      {totalLength === 0 && !isLoading && (
+      {dataSize === 0 && !isDataLoading && (
         <>
           <NoDataContainer>
-            {hasAppliedFilters
-              ? renderNoMatchingDataContent(NoMatchingDataComponent)
-              : renderNoDataContent(NoDataComponent)}
+            {hasAppliedFilters ? (
+              <NoMatchingDataComponent />
+            ) : (
+              <NoDataComponent />
+            )}
           </NoDataContainer>
         </>
       )}
-      {(totalLength > 0 || (totalLength === 0 && isLoading)) && (
-        <Pagination
-          canNextPage={canNextPage}
-          canPreviousPage={canPreviousPage}
-          isLoading={isLoading}
-          pageCount={pageCount || 0}
-          pageIndex={pageIndex}
-          onGoToPage={handleGoToPage}
-          onNextPage={handleNextPage}
-          onPreviousPage={handlePreviousPage}
-        />
-      )}
+      <Footer
+        hasPagination={hasPagination && dataSize > 0}
+        isDataLoading={isDataLoading}
+        pageCount={pageCount}
+        pageIndex={pageIndex}
+        onGotoPage={gotoPage}
+      />
     </>
   );
-};
-
-// TODO: revisit required properties
-Table.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.any),
-  data: PropTypes.arrayOf(PropTypes.any),
-  fetchData: PropTypes.func,
-  isLoading: PropTypes.bool,
-  primaryKey: PropTypes.string,
-  pageCount: PropTypes.number,
-  rowActions: PropTypes.arrayOf(ActionKindsPropType), // TODO: align this to TS types
 };
 
 export default Table;

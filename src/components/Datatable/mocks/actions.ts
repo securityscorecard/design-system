@@ -6,7 +6,7 @@ export const subactionsMock: ActionKinds[] = [
   {
     label: 'OnClick',
     name: 'onClick',
-    onClick: action('OnClick handler'),
+    onClick: action('onClick handler'),
   },
   {
     label: 'Absolute link',
@@ -36,21 +36,48 @@ export const tableActionsMock: Action[] = [
   {
     label: 'Export',
     name: 'Export',
-    onClick: action('OnClick Export handler'),
+    onClick: action('onBatchActionClick (export)'),
   },
   {
     label: 'Import',
     name: 'Import',
-    onClick: action('OnClick Import handler'),
+    onClick: action('onBatchActionClick (import)'),
   },
   {
     label: 'Claim',
     name: 'Claim',
-    onClick: action('OnClick Claim handler'),
+    onClick: action('onBatchActionClick (claim)'),
   },
   {
     label: 'Remove',
     name: 'Remove',
-    onClick: action('OnClick Remove handler'),
+    onClick: action('onBatchActionClick (remove)'),
+  },
+];
+
+export const datatableRowActions = [
+  {
+    label: 'Detail',
+    name: 'detail',
+    onClick: action('onTableRowActionClick (detail)'),
+  },
+];
+
+export const datatableBatchActions = [
+  {
+    label: 'Add assets',
+    name: 'add-assets',
+    onClick: action('onBatchActionClick (add assets)'),
+  },
+  {
+    label: 'More actions',
+    name: 'more-actions',
+    subActions: [
+      {
+        label: 'Remove assets',
+        name: 'remove-assets',
+        onClick: action('onBatchActionClick (remove assets)'),
+      },
+    ],
   },
 ];

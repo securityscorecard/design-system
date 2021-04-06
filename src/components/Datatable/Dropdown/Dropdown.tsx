@@ -10,7 +10,12 @@ import {
 } from '../types/Action.types';
 import { useDropdown } from './hooks/useDropdown';
 import { DropdownLinkProps, DropdownProps } from './Dropdown.types';
-import { getColor, getFontSize, pxToRem } from '../../../utils/helpers';
+import {
+  getColor,
+  getFontSize,
+  getLineHeight,
+  pxToRem,
+} from '../../../utils/helpers';
 import { requireRouterLink } from '../../../utils/require-router-link';
 
 const DropdownWrapper = styled.div`
@@ -30,7 +35,7 @@ export const DropdownLink = styled.button<DropdownLinkProps>`
   padding: ${pxToRem(4, 16)};
   height: ${pxToRem(24)};
   font-size: ${getFontSize('md')};
-  line-height: ${pxToRem('md')};
+  line-height: ${getLineHeight('md')};
   color: ${getColor('graphite4B')};
   cursor: pointer;
   background: transparent;
@@ -66,45 +71,47 @@ const Dropdown: React.FC<DropdownProps> = ({
     >
       {isFunction(children) ? children(isPaneDisplayed) : children}
 
-      <Pane>
-        <List>
-          {actions.map((action) => {
-            let RouterLink = null;
-            if (isNotUndefined((action as RelativeLinkActionKind).to)) {
-              RouterLink = requireRouterLink();
-            }
+      {isPaneDisplayed && (
+        <Pane>
+          <List>
+            {actions.map((action) => {
+              let RouterLink = null;
+              if (isNotUndefined((action as RelativeLinkActionKind).to)) {
+                RouterLink = requireRouterLink();
+              }
 
-            const domTag = isNotUndefined(
-              (action as AbsoluteLinkActionKind).href,
-            )
-              ? 'a' // render 'a' tag if 'href' is present
-              : isNotUndefined((action as RelativeLinkActionKind).to)
-              ? RouterLink // render 'Link' if 'to' is present
-              : undefined; // use default
+              const domTag = isNotUndefined(
+                (action as AbsoluteLinkActionKind).href,
+              )
+                ? 'a' // render 'a' tag if 'href' is present
+                : isNotUndefined((action as RelativeLinkActionKind).to)
+                ? RouterLink // render 'Link' if 'to' is present
+                : undefined; // use default
 
-            if (
-              isNull(RouterLink) &&
-              isNotUndefined((action as RelativeLinkActionKind).to)
-            ) {
-              return null;
-            }
+              if (
+                isNull(RouterLink) &&
+                isNotUndefined((action as RelativeLinkActionKind).to)
+              ) {
+                return null;
+              }
 
-            return (
-              <li key={action.name}>
-                <DropdownLink
-                  as={domTag}
-                  href={(action as AbsoluteLinkActionKind).href}
-                  name={action.name}
-                  to={(action as RelativeLinkActionKind).to}
-                  onClick={action.onClick}
-                >
-                  {action.label}
-                </DropdownLink>
-              </li>
-            );
-          })}
-        </List>
-      </Pane>
+              return (
+                <li key={action.name}>
+                  <DropdownLink
+                    as={domTag}
+                    href={(action as AbsoluteLinkActionKind).href}
+                    name={action.name}
+                    to={(action as RelativeLinkActionKind).to}
+                    onClick={action.onClick}
+                  >
+                    {action.label}
+                  </DropdownLink>
+                </li>
+              );
+            })}
+          </List>
+        </Pane>
+      )}
     </DropdownWrapper>
   );
 };
@@ -117,4 +124,4 @@ Dropdown.propTypes = {
   className: PropTypes.string,
 };
 
-export default Dropdown;
+export default React.memo(Dropdown);

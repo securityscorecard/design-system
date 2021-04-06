@@ -7,8 +7,12 @@ import { subactionsMock } from '../mocks/actions';
 import { DropdownProps } from './Dropdown.types';
 
 export default {
-  title: 'components/Datatable/components/Dropdown',
+  title: 'components/Datatable/internalComponents/Dropdown',
   component: Dropdown,
+  parameters: {
+    docs: { disable: true },
+    previewTabs: { 'storybook/docs/panel': { hidden: true } },
+  },
   decorators: [
     (storyFn) => (
       <MemoryRouter>
@@ -16,28 +20,12 @@ export default {
       </MemoryRouter>
     ),
   ],
-  parameters: {
-    docs: {
-      inlineStories: false,
-      iframeHeight: 150,
-    },
-  },
-} as Meta;
-
-export const Default: Story<DropdownProps> = (args) => (
-  <Dropdown {...args}>Dropdown handler</Dropdown>
-);
-Default.args = {
-  actions: subactionsMock,
-  defaultIsOpen: true,
-};
-Default.argTypes = {
-  actions: {
-    table: {
-      type: {
-        summary: 'ActionKinds[]',
-        detail: `
-| {
+  argTypes: {
+    actions: {
+      table: {
+        type: {
+          summary: 'ActionKinds[]',
+          detail: `| {
     label: string;
     name: string;
     onClick: () => void;
@@ -57,10 +45,33 @@ Default.argTypes = {
     onClick?: () => void;
     to?: never;
     subActions?: never;
-  }
-          `,
+  }`,
+        },
       },
     },
+    defaultIsOpen: { control: 'boolean' },
   },
-  defaultIsOpen: { control: 'boolean' },
+} as Meta;
+
+export const Default: Story<DropdownProps> = (args) => (
+  <Dropdown {...args}>Dropdown handler</Dropdown>
+);
+Default.args = {
+  actions: subactionsMock,
+};
+
+export const OpenedOnInit: Story<DropdownProps> = (args) => (
+  <Dropdown {...args}>Dropdown handler</Dropdown>
+);
+OpenedOnInit.args = {
+  ...Default.args,
+  defaultIsOpen: true,
+};
+
+export const WithCustomWidth: Story<DropdownProps> = (args) => (
+  <Dropdown {...args}>Dropdown handler</Dropdown>
+);
+WithCustomWidth.args = {
+  ...OpenedOnInit.args,
+  paneWidth: 300,
 };

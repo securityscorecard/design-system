@@ -6,7 +6,7 @@ import { ToPropType } from '../../../types/to.types';
 export type ActionBase = {
   label: string;
   name: string;
-  onClick?: (selectedIds: string[]) => void;
+  onClick?: (selectedIds: string[], hasExclusionLogic: boolean) => void;
 };
 
 export const ActionBasePropType = {

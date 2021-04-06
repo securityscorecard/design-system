@@ -1,36 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 
 import { actionsMock } from '../mocks/actions';
-import { ElementCounter } from './ElementCounter';
-import { BatchActions } from './BatchActions';
 import BatchModule from './BatchModule';
 import { BatchModuleProps } from './BatchModule.types';
-import DatatableContext from '../DatatableContext';
+import { DatatableStore } from '../Datatable.store';
+import { defaultTableConfig } from '../defaultConfigs';
 
 export default {
-  title: 'components/Datatable/components/BatchModule',
+  title: 'components/Datatable/internalComponents/BatchModule',
   component: BatchModule,
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
-  subcomponents: { ElementCounter, BatchActions },
-} as Meta;
-
-export const playground: Story<BatchModuleProps> = (args) => (
-  <DatatableContext.Provider value={{ totalLength: 1070000 }}>
-    <BatchModule {...args} />
-  </DatatableContext.Provider>
-);
-playground.args = {
-  actions: actionsMock,
-};
-playground.argTypes = {
-  actions: {
-    table: {
-      type: {
-        summary: 'Action[]',
-        detail: `
-| {
+  parameters: {
+    viewMode: 'story',
+    docs: { disable: true },
+    previewTabs: { 'storybook/docs/panel': { hidden: true } },
+  },
+  argTypes: {
+    actions: {
+      table: {
+        defaultValue: { summary: '[]' },
+        type: {
+          summary: 'Action[]',
+          detail: `| {
     label: string;
     name: string;
     onClick: () => void;
@@ -58,23 +51,46 @@ playground.argTypes = {
     onClick?: () => void;
     href?: never;
     to?: never;
-  }
-        `,
+  }`,
+        },
       },
     },
+    shouldShowSelectionDropdown: {
+      control: { type: 'boolean' },
+      table: { defaultValue: { summary: defaultTableConfig.hasSelection } },
+    },
   },
+} as Meta;
+
+export const Default: Story<BatchModuleProps> = (args) => (
+  <BatchModule {...args} />
+);
+Default.args = {
+  actions: [],
+  dataSize: 1070000,
+  shouldShowSelectionDropdown: defaultTableConfig.hasSelection,
 };
 
-export const Default: Story = () => (
-  <DatatableContext.Provider value={{ totalLength: 1070000 }}>
-    <BatchModule actions={actionsMock} />
-  </DatatableContext.Provider>
-);
+export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
+  useEffect(() => {
+    DatatableStore.update((s) => {
+      s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
+    });
 
-export const Selected: Story = () => (
-  <DatatableContext.Provider
-    value={{ totalLength: 1070000, selectedLength: 31 }}
-  >
-    <BatchModule actions={actionsMock} />
-  </DatatableContext.Provider>
+    return () => {
+      DatatableStore.update((s) => {
+        s.selectedIds = [];
+      });
+    };
+  }, []);
+  return <BatchModule {...args} />;
+};
+WithSelectedRows.args = Default.args;
+
+export const WithBatchActions: Story<BatchModuleProps> = (args) => (
+  <BatchModule {...args} />
 );
+WithBatchActions.args = {
+  ...Default.args,
+  actions: actionsMock,
+};
