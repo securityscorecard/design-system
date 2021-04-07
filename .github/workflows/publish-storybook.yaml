@@ -1,47 +1,52 @@
 # This workflow build static Storybook and deploy it to Github Pages when new version
 # of package is released.
 
-# TODO: enable this after we have set up Github Pages
- name: publish-storybook
+name: publish-storybook
 
- on:
-   release:
-     types: [created]
+on:
+  release:
+    types: [created]
 
-# jobs:
-#   storybook-publish:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2
+jobs:
+  storybook-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-#     - name: Use Node.js
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: '12'
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
 
-#     - name: Cache node modules
-#       uses: actions/cache@v1
-#       with:
-#         path: node_modules
-#         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-#         restore-keys: |
-#           ${{ runner.OS }}-node-${{ env.cache-name }}-
-#           ${{ runner.OS }}-node-
-#           ${{ runner.OS }}-
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-${{ env.cache-name }}-
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
 
-#     - name: Install Pacakges
-#       if: steps.cache.outputs.cache-hit != 'true'
-#       run: yarn install --frozen-lockfile
+      - name: Install Pacakges
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
 
-#     - name: Build Storybook
-#       env:
-#         STORYBOOK_PROXIMA_NOVA_LINK: ${{secrets.PROXIMA_NOVA_LINK}}
-#       run: yarn storybook:build --docs
+      - name: Build Storybook
+        env:
+          STORYBOOK_PROXIMA_NOVA_LINK: ${{secrets.PROXIMA_NOVA_LINK}}
+        run: yarn storybook:build --docs
 
-#     - name: Publish Storybook
-#       uses: JamesIves/github-pages-deploy-action@releases/v3
-#       with:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         BRANCH: gh-pages
-#         FOLDER: storybook-static
+      - name: Get version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
+      - name: Publish Storybook
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: storybook-static
+          TARGET_FOLDER: ${{ contains(steps.get_version.outputs.VERSION, 'alpha') && 'alpha' || steps.get_version.outputs.VERSION }}
