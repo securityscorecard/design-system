@@ -1,3 +1,10 @@
+# [1.0.0-alpha.50](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.49...v1.0.0-alpha.50) (2021-04-08)
+
+
+### Features
+
+* **Datatable:** show scrollbar above table ([3327de2](https://github.com/securityscorecard/design-system/commit/3327de24d29c4862cf0799302aa383e1baf02340))
+
 # [1.0.0-alpha.49](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.48...v1.0.0-alpha.49) (2021-04-06)
 
 
