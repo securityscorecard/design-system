@@ -22,7 +22,7 @@ import { selectionColumn } from './columns/selectionColumn';
 import { Head } from './Head';
 import { Body } from './Body';
 import { Footer } from './Footer';
-import StyledTable from './Table.styles';
+import { StyledTable, TableContainer } from './Table.styles';
 import CellRenderer from './Body/renderers/CellRenderer';
 import { FlexContainer } from '../../FlexContainer';
 import { getColor, pxToRem } from '../../../utils/helpers';
@@ -176,14 +176,20 @@ const Table = <D extends Record<string, unknown>>({
 
   return (
     <>
-      <StyledTable
-        ref={tableRef}
-        className={cls({ 'has-exclusive-selection': hasExclusiveSelection })}
-        {...getTableProps()}
-      >
-        <Head headerGroups={headerGroups} />
-        <Body<D> prepareRow={prepareRow} rows={rows} {...getTableBodyProps()} />
-      </StyledTable>
+      <TableContainer>
+        <StyledTable
+          ref={tableRef}
+          className={cls({ 'has-exclusive-selection': hasExclusiveSelection })}
+          {...getTableProps()}
+        >
+          <Head headerGroups={headerGroups} />
+          <Body<D>
+            prepareRow={prepareRow}
+            rows={rows}
+            {...getTableBodyProps()}
+          />
+        </StyledTable>
+      </TableContainer>
       {dataSize === 0 && !isDataLoading && (
         <>
           <NoDataContainer>

@@ -18,11 +18,25 @@ const getRemToggleSize = memoizeWith(
   pipe(getFormStyle('toggleSize'), pxToRem),
 );
 
-const StyledTable = styled.table`
-  display: grid;
+export const TableContainer = styled.div`
   width: 100%;
-  overflow: scroll;
-  padding-top: ${pxToRem(12)};
+  transform: scale(1, -1);
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    appearance: none;
+    height: ${pxToRem(12)};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: content-box ${getColor('graphiteHB')};
+    border-radius: 50em;
+    border: 4px solid transparent;
+  }
+`;
+
+export const StyledTable = styled.table`
+  width: 100%;
+  transform: scale(1, -1);
 
   .ds-table-cell {
     display: flex;
@@ -194,5 +208,3 @@ const StyledTable = styled.table`
     }
   }
 `;
-
-export default StyledTable;
