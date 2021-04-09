@@ -26,6 +26,8 @@ import {
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
+import { Text } from '../../typography';
+import { TextSizes } from '../../typography/Text/Text.enums';
 import { StateButton } from '../StateButton';
 import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
@@ -37,7 +39,7 @@ import {
 import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import { operatorOptions } from '../data/operatorOptions';
-import { getFormStyle, pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils/helpers';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
 
 const SplitField = styled.div<SplitFieldProps>`
@@ -58,11 +60,8 @@ const SplitField = styled.div<SplitFieldProps>`
   }
 `;
 
-const Units = styled.span`
+const Units = styled(Text)`
   flex-shrink: 0;
-  color: ${getFormStyle('color')};
-  font-size: ${pxToRem(13)};
-  line-height: ${pxToRem(15)};
   margin-left: ${pxToRem(8)};
   min-width: ${pxToRem(64)};
 `;
@@ -127,7 +126,7 @@ const renderComponentWithProps = (Component, value, onChange) => {
   return units ? (
     <FlexContainer alignItems="center">
       <ComponentWithProps value={value} onChange={onChange} {...props} />
-      <Units>{units}</Units>
+      <Units size={TextSizes.md}>{units}</Units>
     </FlexContainer>
   ) : (
     <ComponentWithProps value={value} onChange={onChange} {...props} />
