@@ -52,6 +52,7 @@ const Input: React.FC<InputProps> = ({
   maxLength,
   pattern,
   patternMessage,
+  placeholder = 'String',
 }) => {
   const handleOnChange = (event) => {
     if (patternMessage) {
@@ -74,7 +75,7 @@ const Input: React.FC<InputProps> = ({
     <StyledInput
       maxLength={maxLength}
       pattern={pattern}
-      placeholder="String"
+      placeholder={placeholder}
       type="text"
       value={value}
       onChange={handleOnChange}
@@ -91,4 +92,5 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
   patternMessage: PropTypes.string,
+  placeholder: PropTypes.string,
 };

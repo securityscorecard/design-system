@@ -4,4 +4,5 @@ export interface InputProps {
   maxLength?: number;
   pattern?: string;
   patternMessage?: string;
+  placeholder?: string;
 }

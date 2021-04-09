@@ -7,6 +7,7 @@ import { FlexContainer } from '../../../FlexContainer';
 import {
   fieldsSelect,
   fieldsSelectMultiValue,
+  fieldsSelectPlaceholder,
   fieldsSelectWithDefaultValue,
 } from '../../mocks/options';
 
@@ -43,6 +44,18 @@ export const SelectMultiValue: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsSelectMultiValue}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const SelectPlaceholder: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsSelectPlaceholder}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

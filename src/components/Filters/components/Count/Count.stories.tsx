@@ -4,7 +4,11 @@ import { action } from '@storybook/addon-actions';
 
 import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
-import { fieldsCount } from '../../mocks/options';
+import {
+  fieldsCount,
+  fieldsCountPlaceholderUnits,
+  fieldsCountValidation,
+} from '../../mocks/options';
 
 export default {
   component: Filters,
@@ -15,6 +19,30 @@ export const Count: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsCount}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const CountValidation: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsCountValidation}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const CountPlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsCountPlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}
