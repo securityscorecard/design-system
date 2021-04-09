@@ -11,7 +11,7 @@ describe('TextArea', () => {
 
       fireEvent.change(textarea, { target: { value: '0123456789' } });
 
-      expect(textarea.value).toBe('0123456789');
+      expect(textarea).toHaveValue('0123456789');
     });
   });
 });
