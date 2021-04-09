@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import MockDate from 'mockdate';
 
 import * as Grid from '../layout';
 import assets from './mocks/ipAssets.json';
@@ -10,6 +11,8 @@ import { Data } from './mocks/types';
 import { simpleColumns } from './mocks/columns';
 import { controlsConfig } from './mocks/controls';
 import { datatableBatchActions, datatableRowActions } from './mocks/actions';
+
+MockDate.set('2021-03-31T00:00:00Z');
 
 export default {
   title: 'components/Datatable',

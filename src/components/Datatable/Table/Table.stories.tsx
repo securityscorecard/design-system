@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 import { omit } from 'ramda';
+import MockDate from 'mockdate';
 
 import Table from './Table';
 import { TableProps } from './Table.types';
@@ -11,6 +12,8 @@ import { defaultTableConfig } from '../defaultConfigs';
 import { simpleColumns } from '../mocks/columns';
 import { datatableRowActions } from '../mocks/actions';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
+
+MockDate.set('2021-03-31T00:00:00Z');
 
 export default {
   title: 'components/Datatable/internalComponents/Table',
