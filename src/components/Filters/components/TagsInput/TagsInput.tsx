@@ -92,6 +92,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   maxLength,
   pattern,
   patternMessage,
+  placeholder = 'Enter value',
 }) => {
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -137,7 +138,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
     setInput(value);
   };
 
-  const placeholder = tags.length === 0 ? 'Enter value' : '';
+  const placeholderText = tags.length === 0 ? placeholder : '';
 
   const handleOnBlur = (event) => {
     const { target } = event;
@@ -165,7 +166,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
           <StyledInput
             maxLength={maxLength}
             pattern={pattern}
-            placeholder={placeholder}
+            placeholder={placeholderText}
             type="text"
             value={input}
             onBlur={handleOnBlur}
@@ -187,4 +188,5 @@ TagsInput.propTypes = {
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
   patternMessage: PropTypes.string,
+  placeholder: PropTypes.string,
 };

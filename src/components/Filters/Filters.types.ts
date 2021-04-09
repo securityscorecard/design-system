@@ -20,6 +20,8 @@ interface ComponentProps {
   patternMessage?: string;
   minDate?: Date;
   maxDate?: Date;
+  units?: string;
+  placeholder?: string;
 }
 
 export interface ComponentWithProps {
@@ -77,6 +79,8 @@ export const FieldPropTypes = PropTypes.exact({
             patternMessage: PropTypes.string,
             minDate: PropTypes.instanceOf(Date),
             maxDate: PropTypes.instanceOf(Date),
+            units: PropTypes.string,
+            placeholder: PropTypes.string,
           }),
         }),
       ]).isRequired,

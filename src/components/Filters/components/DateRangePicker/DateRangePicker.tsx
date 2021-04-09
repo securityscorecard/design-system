@@ -24,6 +24,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   onChange,
   minDate,
   maxDate,
+  placeholder,
 }) => {
   const { startDate, endDate } = value;
 
@@ -52,7 +53,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         endDate={endDate}
         maxDate={maxDate}
         minDate={minDate}
-        placeholderText="Start date"
+        placeholderText={placeholder || 'Start date'}
         selected={startDate}
         startDate={startDate}
         selectsStart
@@ -65,7 +66,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         endDate={endDate}
         maxDate={maxDate}
         minDate={startDate || minDate}
-        placeholderText="End date"
+        placeholderText={placeholder || 'End date'}
         selected={endDate}
         startDate={startDate}
         selectsEnd
@@ -82,4 +83,5 @@ DateRangePicker.propTypes = {
   value: DateRangePickerPropTypes,
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),
+  placeholder: PropTypes.string,
 };

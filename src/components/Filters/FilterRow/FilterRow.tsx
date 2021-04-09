@@ -37,7 +37,7 @@ import {
 import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import { operatorOptions } from '../data/operatorOptions';
-import { pxToRem } from '../../../utils/helpers';
+import { getFormStyle, pxToRem } from '../../../utils/helpers';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
 
 const SplitField = styled.div<SplitFieldProps>`
@@ -56,6 +56,15 @@ const SplitField = styled.div<SplitFieldProps>`
   &:last-of-type {
     margin-right: ${pxToRem(0)};
   }
+`;
+
+const Units = styled.span`
+  flex-shrink: 0;
+  color: ${getFormStyle('color')};
+  font-size: ${pxToRem(13)};
+  line-height: ${pxToRem(15)};
+  margin-left: ${pxToRem(8)};
+  min-width: ${pxToRem(64)};
 `;
 
 export const getDefaultComponentValue = (
@@ -111,6 +120,41 @@ const getFieldOptions = map(normalizeOptions);
 
 const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
+const renderComponentWithProps = (Component, value, onChange) => {
+  const { component: ComponentWithProps, props } = Component;
+  const { units } = props;
+
+  return units ? (
+    <FlexContainer alignItems="center">
+      <ComponentWithProps value={value} onChange={onChange} {...props} />
+      <Units>{units}</Units>
+    </FlexContainer>
+  ) : (
+    <ComponentWithProps value={value} onChange={onChange} {...props} />
+  );
+};
+
+const renderSelectComponent = (Component, value, onChange) => {
+  const {
+    component: SelectComponent,
+    props: { options, isMulti, placeholder = 'Category' },
+  } = Component;
+
+  const valueOptions = isArray(value)
+    ? filter(pipe(prop('value'), includes(__, value)))(options)
+    : find(propEq('value', value))(options);
+
+  return (
+    <SelectComponent
+      isMulti={isMulti}
+      options={options}
+      placeholder={placeholder}
+      value={valueOptions}
+      onChange={onChange}
+    />
+  );
+};
+
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;
 
@@ -119,30 +163,11 @@ const renderComponent = (Component, value, onChange) => {
     typeof Component === 'object' &&
     hasPath(['props', 'options'], Component)
   ) {
-    const {
-      component: SelectComponent,
-      props: { options, isMulti },
-    } = Component;
-
-    const valueOptions = isArray(value)
-      ? filter(pipe(prop('value'), includes(__, value)))(options)
-      : find(propEq('value', value))(options);
-
-    return (
-      <SelectComponent
-        isMulti={isMulti}
-        options={options}
-        placeholder="Category"
-        value={valueOptions}
-        onChange={onChange}
-      />
-    );
+    return renderSelectComponent(Component, value, onChange);
   }
   // Component with props
   if (typeof Component === 'object' && has('props', Component)) {
-    const { component: ComponentWithProps, props } = Component;
-
-    return <ComponentWithProps value={value} onChange={onChange} {...props} />;
+    return renderComponentWithProps(Component, value, onChange);
   }
 
   return <Component value={value} onChange={onChange} />;

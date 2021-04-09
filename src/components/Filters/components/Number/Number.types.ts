@@ -5,6 +5,7 @@ export interface NumberProps {
   onChange: () => void;
   min?: number;
   max?: number;
+  placeholder?: string;
 }
 
 export const NumberPropTypes = {
@@ -12,4 +13,5 @@ export const NumberPropTypes = {
   value: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,
+  placeholder: PropTypes.string,
 };

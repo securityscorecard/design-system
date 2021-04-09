@@ -17,6 +17,7 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
   onChange,
   minDate,
   maxDate,
+  placeholder = 'Date',
 }) => (
   <StyledDatePicker>
     <DatePicker
@@ -25,7 +26,7 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
       dateFormat="d MMM, yyyy"
       maxDate={maxDate}
       minDate={minDate}
-      placeholderText="Date"
+      placeholderText={placeholder}
       selected={value}
       onChange={onChange}
     />
@@ -39,4 +40,5 @@ SingleDatePicker.propTypes = {
   value: PropTypes.instanceOf(Date),
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),
+  placeholder: PropTypes.string,
 };

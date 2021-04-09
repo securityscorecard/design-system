@@ -13,7 +13,13 @@ export const StyledNumber = styled(StyledInput)`
   appearance: textfield;
 `;
 
-const Number: React.FC<NumberProps> = ({ value = '', onChange, min, max }) => {
+const Number: React.FC<NumberProps> = ({
+  value = '',
+  onChange,
+  min,
+  max,
+  placeholder = 'Number',
+}) => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -24,7 +30,7 @@ const Number: React.FC<NumberProps> = ({ value = '', onChange, min, max }) => {
     <StyledNumber
       max={max}
       min={min}
-      placeholder="Number"
+      placeholder={placeholder}
       step="any"
       type="number"
       value={value}

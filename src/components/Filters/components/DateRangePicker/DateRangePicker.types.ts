@@ -10,6 +10,7 @@ export interface DateRangePickerProps {
   onChange: (value: DateRange) => void;
   minDate: Date;
   maxDate: Date;
+  placeholder?: string;
 }
 
 export const DateRangePickerPropTypes = PropTypes.exact({
