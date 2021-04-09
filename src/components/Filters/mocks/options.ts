@@ -360,6 +360,27 @@ export const fieldsInputValidation: Field[] = [
   },
 ];
 
+export const fieldsInputPlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: InputFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
 export const fieldsTagsInput: Field[] = [
   {
     conditions: [
@@ -385,6 +406,27 @@ export const fieldsTagsInputValidation: Field[] = [
             maxLength: 15,
             pattern: '[a-zA-Z;]+',
             patternMessage: 'Use only alphabets',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
+export const fieldsTagsInputPlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: TagsInputFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
           },
         },
         value: 'is',
@@ -433,6 +475,27 @@ export const fieldsNumberValidation: Field[] = [
   },
 ];
 
+export const fieldsNumberPlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: NumberFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
 export const fieldsCount: Field[] = [
   {
     conditions: [
@@ -448,11 +511,95 @@ export const fieldsCount: Field[] = [
   },
 ];
 
+export const fieldsCountPlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: CountFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsCountValidation: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: CountFilter,
+          props: {
+            max: 5,
+            min: 2,
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
 export const fieldsInteger: Field[] = [
   {
     conditions: [
       {
         component: IntegerFilter,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsIntegerValidation: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: IntegerFilter,
+          props: {
+            max: 5,
+            min: 2,
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'issue count',
+    label: 'Issue Count',
+  },
+];
+
+export const fieldsIntegerPlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: IntegerFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
+          },
+        },
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -499,11 +646,53 @@ export const fieldsDateRangeValidation: Field[] = [
   },
 ];
 
+export const fieldsDateRangePlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: DateRangePickerFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'first observed',
+    label: 'First Observed',
+  },
+];
+
 export const fieldsSingleDate: Field[] = [
   {
     conditions: [
       {
         component: SingleDatePickerFilter,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'first observed',
+    label: 'First Observed',
+  },
+];
+
+export const fieldsSingleDatePlaceholderUnits: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: SingleDatePickerFilter,
+          props: {
+            placeholder: 'Placeholder',
+            units: 'Units',
+          },
+        },
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -562,6 +751,36 @@ export const fieldsSelectWithDefaultValue: Field[] = [
               { value: 'ssl', label: 'SSL' },
             ],
             defaultValue: { value: 'any', label: 'Any' },
+          },
+        },
+        value: 'is',
+        label: 'is',
+      },
+    ],
+    value: 'detection method',
+    label: 'Detection Method',
+  },
+];
+
+export const fieldsSelectPlaceholder: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: SelectFilter,
+          props: {
+            options: [
+              { value: 'any', label: 'Any' },
+              { value: 'none', label: 'None' },
+              { value: 'cloud', label: 'Cloud' },
+              { value: 'ssc res', label: 'SSC Res.' },
+              { value: '3rd party', label: '3rd party' },
+              { value: 'pub data', label: 'Pubb Data' },
+              { value: 'whois', label: 'WHOIS' },
+              { value: 'dns', label: 'DNS' },
+              { value: 'ssl', label: 'SSL' },
+            ],
+            placeholder: 'Placeholder',
           },
         },
         value: 'is',

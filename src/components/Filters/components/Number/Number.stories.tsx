@@ -4,7 +4,11 @@ import { action } from '@storybook/addon-actions';
 
 import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
-import { fieldsNumber, fieldsNumberValidation } from '../../mocks/options';
+import {
+  fieldsNumber,
+  fieldsNumberPlaceholderUnits,
+  fieldsNumberValidation,
+} from '../../mocks/options';
 
 export default {
   component: Filters,
@@ -27,6 +31,18 @@ export const NumberValidation: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsNumberValidation}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const NumberPlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsNumberPlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

@@ -4,7 +4,11 @@ import { action } from '@storybook/addon-actions';
 
 import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
-import { fieldsInput, fieldsInputValidation } from '../../mocks/options';
+import {
+  fieldsInput,
+  fieldsInputPlaceholderUnits,
+  fieldsInputValidation,
+} from '../../mocks/options';
 
 export default {
   component: Filters,
@@ -27,6 +31,18 @@ export const InputValidation: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsInputValidation}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const InputPlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsInputPlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

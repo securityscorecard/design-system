@@ -6,6 +6,7 @@ import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
 import {
   fieldsDateRange,
+  fieldsDateRangePlaceholderUnits,
   fieldsDateRangeValidation,
 } from '../../mocks/options';
 
@@ -30,6 +31,18 @@ export const DateRangeValidation: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsDateRangeValidation}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const DateRangePlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsDateRangePlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}
