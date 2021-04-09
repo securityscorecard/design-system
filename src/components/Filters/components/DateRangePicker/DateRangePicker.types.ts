@@ -5,13 +5,23 @@ export interface DateRange {
   endDate: Date | null;
 }
 
+export interface DateRangePlaceholderProps {
+  startDate: string;
+  endDate: string;
+}
+
 export interface DateRangePickerProps {
   value: DateRange;
   onChange: (value: DateRange) => void;
   minDate: Date;
   maxDate: Date;
-  placeholder?: string;
+  placeholder?: DateRangePlaceholderProps;
 }
+
+export const DateRangePlaceholderPropTypes = PropTypes.exact({
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
+});
 
 export const DateRangePickerPropTypes = PropTypes.exact({
   startDate: PropTypes.instanceOf(Date),

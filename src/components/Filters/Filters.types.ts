@@ -5,6 +5,8 @@ import { Operators } from './Filters.enums';
 import {
   DateRange,
   DateRangePickerPropTypes,
+  DateRangePlaceholderPropTypes,
+  DateRangePlaceholderProps,
 } from './components/DateRangePicker/DateRangePicker.types';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
@@ -21,7 +23,7 @@ interface ComponentProps {
   minDate?: Date;
   maxDate?: Date;
   units?: string;
-  placeholder?: string;
+  placeholder?: string | DateRangePlaceholderProps;
 }
 
 export interface ComponentWithProps {
@@ -80,7 +82,10 @@ export const FieldPropTypes = PropTypes.exact({
             minDate: PropTypes.instanceOf(Date),
             maxDate: PropTypes.instanceOf(Date),
             units: PropTypes.string,
-            placeholder: PropTypes.string,
+            placeholder: PropTypes.oneOfType([
+              PropTypes.string,
+              DateRangePlaceholderPropTypes,
+            ]),
           }),
         }),
       ]).isRequired,

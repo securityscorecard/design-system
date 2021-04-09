@@ -653,7 +653,10 @@ export const fieldsDateRangePlaceholderUnits: Field[] = [
         component: {
           component: DateRangePickerFilter,
           props: {
-            placeholder: 'Placeholder',
+            placeholder: {
+              startDate: 'Start date placeholder',
+              endDate: 'End date placeholder',
+            },
             units: 'Units',
           },
         },
