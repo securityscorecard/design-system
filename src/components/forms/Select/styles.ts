@@ -5,6 +5,7 @@ import { assoc, includes } from 'ramda';
 
 import { theme } from '../../../theme';
 import { pxToRem } from '../../../utils/helpers';
+import { Option } from './Select.types';
 
 export const reactSelectTheme: ThemeConfig = (selectTheme) => ({
   ...selectTheme,
@@ -63,7 +64,7 @@ const indicatorStyles = {
   color: theme.forms.selectIndicatorColor,
 };
 
-export const selectStyles: StylesConfig = {
+export const selectStyles: StylesConfig<Option, false> = {
   control: (_, { selectProps, isDisabled, isFocused }) => {
     const { isInvalid, className = '' } = selectProps;
     return {

@@ -18,8 +18,8 @@ module.exports = {
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
+      // shouldExtractValuesFromUnion: true, // disable it for now as it cause issues in SBv6.2
       shouldExtractLiteralValuesFromEnum: true,
-      shouldExtractValuesFromUnion: true,
       propFilter: (prop) => {
         if (prop.parent) {
           // filter inherited props
