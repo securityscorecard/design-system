@@ -11,6 +11,16 @@ import { Data } from './mocks/types';
 import { simpleColumns } from './mocks/columns';
 import { controlsConfig } from './mocks/controls';
 import { datatableBatchActions, datatableRowActions } from './mocks/actions';
+import { defaultControlsConfig, defaultTableConfig } from './defaultConfigs';
+import {
+  BatchActionsType,
+  ColumnsType,
+  ControlsConfigType,
+  DataPrimaryKeyType,
+  OnDataFetchFnType,
+  TableConfigType,
+} from './Datatable.storiesTypes';
+import { DatatableProps } from './Datatable.types';
 
 MockDate.set('2021-03-31T00:00:00Z');
 
@@ -21,10 +31,88 @@ export default {
     screenshot: {
       delay: 1000,
     },
+    docs: { source: { type: 'code' } },
+  },
+  decorators: [
+    (storyFn) => (
+      <MemoryRouter>
+        <Grid.Container>
+          <Grid.Row>
+            <Grid.Col>{storyFn()}</Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
+      </MemoryRouter>
+    ),
+  ],
+  argTypes: {
+    data: { control: { disable: true } },
+    dataSize: { control: { disable: true } },
+    columns: {
+      control: { disable: true },
+      table: {
+        type: {
+          summary: 'Columns<D>[]',
+          detail: ColumnsType,
+        },
+      },
+    },
+    isDataLoading: { control: { disable: true } },
+    dataPrimaryKey: {
+      table: {
+        type: {
+          summary: 'PrimaryKey<D>',
+          detail: DataPrimaryKeyType,
+        },
+      },
+    },
+    batchActions: {
+      table: {
+        type: {
+          summary: 'Action[]',
+          detail: BatchActionsType,
+        },
+      },
+    },
+    controlsConfig: {
+      table: {
+        type: {
+          summary: 'Partial<ControlsConfig>',
+          detail: ControlsConfigType,
+        },
+        defaultValue: {
+          summary: 'defaultControlsConfig',
+          detail: JSON.stringify(defaultControlsConfig, null, 2),
+        },
+      },
+    },
+    tableConfig: {
+      table: {
+        type: {
+          summary: 'Partial<TableConfig<D>>',
+          detail: TableConfigType,
+        },
+        defaultValue: {
+          summary: 'defaultTableConfig',
+          detail: JSON.stringify(defaultTableConfig, null, 2),
+        },
+      },
+    },
+    onDataFetch: {
+      control: { disable: true },
+      table: {
+        type: {
+          summary: 'OnDataFetchFn<D>',
+          detail: OnDataFetchFnType,
+        },
+        defaultValue: {
+          summary: 'noop',
+        },
+      },
+    },
   },
 } as Meta;
 
-export const Playground: Story = () => {
+export const Playground: Story<DatatableProps<Data>> = (args) => {
   const [tableData, setTableData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalLength, setTotalLength] = useState(0);
@@ -55,28 +143,32 @@ export const Playground: Story = () => {
     dispatchFetchData({ pageSize: 50, pageIndex: 0 });
   }, [dispatchFetchData]);
 
+  const {
+    batchActions: argsBatchActions,
+    controlsConfig: argsControlsConfig,
+    dataPrimaryKey: argsDataPrimaryKey,
+    tableConfig: argsTableConfig,
+    ...restArgs
+  } = args;
   return (
-    <MemoryRouter>
-      <Grid.Container>
-        <Grid.Row>
-          <Grid.Col>
-            <Datatable<Data>
-              batchActions={datatableBatchActions}
-              columns={simpleColumns}
-              controlsConfig={controlsConfig}
-              data={tableData}
-              dataPrimaryKey="ipAddress"
-              dataSize={totalLength}
-              isDataLoading={isLoading}
-              tableConfig={{
-                rowActions: datatableRowActions,
-                onSelect: action('onRowSelect'),
-              }}
-              onDataFetch={dispatchFetchData}
-            />
-          </Grid.Col>
-        </Grid.Row>
-      </Grid.Container>
-    </MemoryRouter>
+    <Datatable<Data>
+      {...restArgs}
+      batchActions={{ ...argsBatchActions, ...datatableBatchActions }}
+      columns={simpleColumns}
+      controlsConfig={{ ...argsControlsConfig, ...controlsConfig }}
+      data={tableData}
+      dataPrimaryKey={argsDataPrimaryKey || 'ipAddress'}
+      dataSize={totalLength}
+      isDataLoading={isLoading}
+      tableConfig={{
+        ...argsTableConfig,
+        rowActions: [
+          ...(argsTableConfig.rowActions || []),
+          ...datatableRowActions,
+        ],
+        onSelect: action('onRowSelect'),
+      }}
+      onDataFetch={dispatchFetchData}
+    />
   );
 };
