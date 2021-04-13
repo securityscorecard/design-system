@@ -153,7 +153,7 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
   return (
     <Datatable<Data>
       {...restArgs}
-      batchActions={{ ...argsBatchActions, ...datatableBatchActions }}
+      batchActions={[...argsBatchActions, ...datatableBatchActions]}
       columns={simpleColumns}
       controlsConfig={{ ...argsControlsConfig, ...controlsConfig }}
       data={tableData}
