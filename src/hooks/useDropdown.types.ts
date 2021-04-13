@@ -5,7 +5,9 @@ export type UseDropdownOptions = {
 };
 
 export type UseDropdownReturnType = {
-  handleToggleTooltip: () => void;
+  handleToggleDropdown: () => void;
+  handleShowDropdown: () => void;
+  handleHideDropdown: () => void;
   isPaneDisplayed: boolean;
   Pane: React.FC;
 };

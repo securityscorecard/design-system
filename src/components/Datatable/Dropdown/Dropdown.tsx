@@ -8,7 +8,7 @@ import {
   ActionKindsPropType,
   RelativeLinkActionKind,
 } from '../types/Action.types';
-import { useDropdown } from './hooks/useDropdown';
+import { useDropdown } from '../../../hooks/useDropdown';
 import { DropdownLinkProps, DropdownProps } from './Dropdown.types';
 import {
   getColor,
@@ -55,7 +55,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   className,
 }) => {
   const parentRef = useRef(null);
-  const { Pane, handleToggleTooltip, isPaneDisplayed } = useDropdown(
+  const { Pane, handleToggleDropdown, isPaneDisplayed } = useDropdown(
     parentRef,
     {
       defaultIsPaneDisplayed: defaultIsOpen,
@@ -67,7 +67,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <DropdownWrapper
       ref={parentRef}
       className={className}
-      onClick={handleToggleTooltip}
+      onClick={handleToggleDropdown}
     >
       {isFunction(children) ? children(isPaneDisplayed) : children}
 

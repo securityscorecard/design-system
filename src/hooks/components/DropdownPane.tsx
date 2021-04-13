@@ -10,8 +10,8 @@ import {
   getFontFamily,
   getFontSize,
   getLineHeight,
-} from '../../../utils/helpers';
-import { useOuterClick } from '../../../hooks/useOuterCallback';
+} from '../../utils/helpers';
+import { useOuterClick } from '../useOuterCallback';
 import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
