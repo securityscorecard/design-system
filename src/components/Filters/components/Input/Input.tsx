@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { InputProps } from './Input.types';
+import { Error } from '../../../forms/Message';
 import {
   getBorderRadius,
   getFormStyle,
   pxToRem,
 } from '../../../../utils/helpers';
+import { onValidate, validateDefault } from '../../helpers';
+import { patterns } from '../../enums';
 
 const stateStyles = css`
   padding: ${pxToRem(3, 15)};
@@ -15,7 +18,9 @@ const stateStyles = css`
   outline: none;
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input.attrs<InputProps>(({ isDisabled }) => ({
+  disabled: isDisabled,
+}))<InputProps>`
   display: block;
   width: 100%;
   height: ${pxToRem(32)};
@@ -32,11 +37,6 @@ export const StyledInput = styled.input`
     border-color: ${getFormStyle('focusBorderColor')};
   }
 
-  &:invalid {
-    ${stateStyles}
-    border-color: ${getFormStyle('invalidBorderColor')};
-  }
-
   ::placeholder,
   ::-webkit-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
@@ -44,24 +44,35 @@ export const StyledInput = styled.input`
   :-ms-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
   }
+
+  ${({ isInvalid }) =>
+    isInvalid &&
+    css`
+      ${stateStyles}
+      border-color: ${getFormStyle('invalidBorderColor')};
+    `}
 `;
 
 const Input: React.FC<InputProps> = ({
   value = '',
   onChange,
   maxLength,
-  pattern,
-  patternMessage,
+  pattern = patterns.string.pattern,
+  patternMessage = patterns.string.patternMessage,
+  validate = validateDefault,
 }) => {
-  const handleOnChange = (event) => {
-    if (patternMessage) {
-      const { target } = event;
-      target.setCustomValidity(
-        target.validity.patternMismatch ? patternMessage : '',
-      );
-    }
+  const [isInvalid, setIsInvalid] = useState(false);
 
+  const handleOnValidate = (event) => {
+    const invalid = onValidate(event, validate, patternMessage);
+    setIsInvalid(invalid);
+  };
+
+  const handleOnChange = (event) => {
     onChange(event);
+    if (isInvalid) {
+      handleOnValidate(event);
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -71,15 +82,20 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <StyledInput
-      maxLength={maxLength}
-      pattern={pattern}
-      placeholder="String"
-      type="text"
-      value={value}
-      onChange={handleOnChange}
-      onKeyPress={handleKeyPress}
-    />
+    <>
+      <StyledInput
+        isInvalid={isInvalid}
+        maxLength={maxLength}
+        pattern={pattern}
+        placeholder="String"
+        type="text"
+        value={value}
+        onBlur={handleOnValidate}
+        onChange={handleOnChange}
+        onKeyPress={handleKeyPress}
+      />
+      {isInvalid && <Error>{patternMessage}</Error>}
+    </>
   );
 };
 
@@ -91,4 +107,5 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
   patternMessage: PropTypes.string,
+  validate: PropTypes.func,
 };

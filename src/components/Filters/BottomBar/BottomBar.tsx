@@ -22,6 +22,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   isLoading = false,
   hasUnappliedFilters,
   isCancelDisabled = false,
+  isApplyDisabled = false,
 }) => {
   const canCancel = isLoading && !isCancelDisabled;
   return (
@@ -62,6 +63,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
         </Button>
         <Button
           color="primary"
+          disabled={isApplyDisabled}
           /* disabled={isLoading} TODO enable by https://zitenote.atlassian.net/browse/FEP-1645 */
           type="submit"
           variant="solid"
@@ -95,4 +97,5 @@ BottomBar.propTypes = {
   onClose: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   isCancelDisabled: PropTypes.bool,
+  isApplyDisabled: PropTypes.bool,
 };

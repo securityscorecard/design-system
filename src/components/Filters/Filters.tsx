@@ -77,6 +77,7 @@ const Filters: React.FC<FiltersProps> = ({
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
+  const [hasInvalidValues, setHasInvalidValues] = useState(false);
 
   useEffect(() => {
     // Set default
@@ -96,12 +97,28 @@ const Filters: React.FC<FiltersProps> = ({
     }
   }, [filtersValues, fields]);
 
+  const validateFieldValues = () => {
+    const validationErrors = [];
+    setHasInvalidValues(!!validationErrors.length);
+
+    // fields.map((field) => {
+    //   const fieldProps = field.conditions.components.props;
+    //   const invalid = fieldProps.validate({ value: field.value });
+    //   return invalid ? fieldProps.patternMessage : null;
+    // });
+
+    // setHasInvalidValues(!!validationErrors.length);
+
+    return validationErrors;
+  };
+
   useEffect(() => {
     if (isNotNull(filtersValues)) {
       const someApplied = filtersValues.some(({ isApplied }) => isApplied);
       const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
 
       setHasUnappliedFilters(someApplied && someUnapplied);
+      validateFieldValues();
     }
   }, [filtersValues]);
 
@@ -214,19 +231,16 @@ const Filters: React.FC<FiltersProps> = ({
     }
 
     setFiltersValues(newFilters);
-
     callOnChange(newFilters);
   };
 
   const handleCloseFilters = (event) => {
     event.preventDefault();
-
     onClose();
   };
 
   const handleCancelFetch = (event) => {
     event.preventDefault();
-
     onCancel();
   };
 
@@ -255,6 +269,7 @@ const Filters: React.FC<FiltersProps> = ({
       })}
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
+        isApplyDisabled={hasInvalidValues}
         isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}

@@ -10,6 +10,8 @@ import {
 } from '../components';
 import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
+import { patterns } from '../enums';
+import { validateDomains } from './validations';
 
 export const fields: Field[] = [
   {
@@ -19,8 +21,7 @@ export const fields: Field[] = [
           component: InputFilter,
           props: {
             maxLength: 15,
-            pattern: '[a-zA-Z]+',
-            patternMessage: 'Use only alphabets',
+            ...patterns.string,
           },
         },
 
@@ -338,7 +339,7 @@ export const fieldsInput: Field[] = [
   },
 ];
 
-export const fieldsInputValidation: Field[] = [
+export const fieldsInputMaxLength: Field[] = [
   {
     conditions: [
       {
@@ -346,8 +347,7 @@ export const fieldsInputValidation: Field[] = [
           component: InputFilter,
           props: {
             maxLength: 5,
-            pattern: '[a-zA-Z]+',
-            patternMessage: 'Use only alphabets',
+            patternMessage: 'Use less than 6 letters',
           },
         },
         value: 'is',
@@ -357,6 +357,27 @@ export const fieldsInputValidation: Field[] = [
     ],
     value: 'domain',
     label: 'Domain',
+  },
+];
+
+export const fieldsValidateDomainsExternal: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.domain,
+            validate: validateDomains,
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Exact Domain',
   },
 ];
 
@@ -383,8 +404,7 @@ export const fieldsTagsInputValidation: Field[] = [
           component: TagsInputFilter,
           props: {
             maxLength: 15,
-            pattern: '[a-zA-Z;]+',
-            patternMessage: 'Use only alphabets',
+            ...patterns.tags,
           },
         },
         value: 'is',

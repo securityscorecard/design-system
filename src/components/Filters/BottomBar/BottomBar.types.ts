@@ -6,4 +6,5 @@ export interface BottomBarProps {
   hasUnappliedFilters: boolean;
   isLoading?: boolean;
   isCancelDisabled?: boolean;
+  isApplyDisabled?: boolean;
 }
