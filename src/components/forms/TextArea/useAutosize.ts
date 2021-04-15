@@ -19,15 +19,19 @@ export default (
   const [text, setText] = useState(value);
   const [textAreaHeight, setTextAreaHeight] = useState('auto');
   const [parentHeight, setParentHeight] = useState('auto');
+  const [cursorPosition, setCursorPosition] = useState(0);
 
   useEffect(() => {
+    ref.current.setSelectionRange(cursorPosition, cursorPosition);
     const height = getHeight(ref);
 
     setParentHeight(height);
     setTextAreaHeight(height);
-  }, [ref, text]);
+  }, [ref, text, cursorPosition]);
 
   const autosize = () => {
+    setCursorPosition(ref.current.selectionStart);
+
     const height = getHeight(ref);
     setTextAreaHeight('auto');
     setParentHeight(height);
