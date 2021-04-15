@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
+import MockDate from 'mockdate';
 
 import Datatable from './Datatable';
 import {
@@ -13,6 +14,8 @@ import { simpleColumns } from './mocks/columns';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { tableActionsMock } from './mocks/actions';
+
+MockDate.set('2021-03-31T00:00:00Z');
 
 export default {
   title: 'components/Datatable/internalComponents/Datatable',

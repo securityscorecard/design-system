@@ -60,6 +60,7 @@ const Input: React.FC<InputProps> = ({
   pattern = patterns.string.pattern,
   patternMessage = patterns.string.patternMessage,
   validate = validateDefault,
+  placeholder = 'String',
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
@@ -87,7 +88,7 @@ const Input: React.FC<InputProps> = ({
         isInvalid={isInvalid}
         maxLength={maxLength}
         pattern={pattern}
-        placeholder="String"
+        placeholder={placeholder}
         type="text"
         value={value}
         onBlur={handleOnValidate}
@@ -108,4 +109,5 @@ Input.propTypes = {
   pattern: PropTypes.string,
   patternMessage: PropTypes.string,
   validate: PropTypes.func,
+  placeholder: PropTypes.string,
 };

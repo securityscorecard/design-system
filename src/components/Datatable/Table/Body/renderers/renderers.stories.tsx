@@ -7,7 +7,7 @@ import { equals, F as stubFalse } from 'ramda';
 import { action } from '@storybook/addon-actions';
 
 import { composeQuery } from '../../../mocks/columns';
-import StyledTable from '../../Table.styles';
+import { StyledTable, TableContainer } from '../../Table.styles';
 import CellRenderer from './CellRenderer';
 import { CellRendererProps } from './renderers.types';
 import { CellTypes } from './renderers.enums';
@@ -20,13 +20,15 @@ export default {
     (storyFn) => (
       <MemoryRouter>
         <div style={{ width: '400px', margin: '0 auto' }}>
-          <StyledTable>
-            <tbody>
-              <tr>
-                <td className="ds-table-cell">{storyFn()}</td>
-              </tr>
-            </tbody>
-          </StyledTable>
+          <TableContainer>
+            <StyledTable>
+              <tbody>
+                <tr>
+                  <td className="ds-table-cell">{storyFn()}</td>
+                </tr>
+              </tbody>
+            </StyledTable>
+          </TableContainer>
         </div>
       </MemoryRouter>
     ),

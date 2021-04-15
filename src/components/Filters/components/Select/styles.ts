@@ -3,6 +3,7 @@ import { StylesConfig } from 'react-select';
 
 import { pxToRem } from '../../../../utils/helpers';
 import { theme } from '../../../../theme';
+import { Option } from './Select.types';
 
 const stateStyles = {
   padding: `${pxToRem(0, 15)}`,
@@ -25,7 +26,7 @@ const indicatorStyles = {
   color: theme.forms.selectIndicatorColor,
 };
 
-export const selectStyles: StylesConfig = {
+export const selectStyles: StylesConfig<Option, false> = {
   control: (_, { selectProps, isFocused }) => {
     const { className = '' } = selectProps;
     return {

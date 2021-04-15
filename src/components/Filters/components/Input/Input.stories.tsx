@@ -7,6 +7,7 @@ import { FlexContainer } from '../../../FlexContainer';
 import {
   fieldsInput,
   fieldsInputMaxLength,
+  fieldsInputPlaceholderUnits,
   fieldsValidateDomainsExternal,
 } from '../../mocks/options';
 
@@ -43,6 +44,18 @@ export const ExternalValidationDomain: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsValidateDomainsExternal}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const InputPlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsInputPlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

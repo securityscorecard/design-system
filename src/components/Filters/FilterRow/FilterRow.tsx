@@ -26,6 +26,8 @@ import {
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
 import { FlexContainer } from '../../FlexContainer';
+import { Text } from '../../typography';
+import { TextSizes } from '../../typography/Text/Text.enums';
 import { StateButton } from '../StateButton';
 import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
@@ -56,6 +58,12 @@ const SplitField = styled.div<SplitFieldProps>`
   &:last-of-type {
     margin-right: ${pxToRem(0)};
   }
+`;
+
+const Units = styled(Text)`
+  flex-shrink: 0;
+  margin-left: ${pxToRem(8)};
+  min-width: ${pxToRem(64)};
 `;
 
 export const getDefaultComponentValue = (
@@ -111,6 +119,41 @@ const getFieldOptions = map(normalizeOptions);
 
 const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
+const renderComponentWithProps = (Component, value, onChange) => {
+  const { component: ComponentWithProps, props } = Component;
+  const { units } = props;
+
+  return units ? (
+    <FlexContainer alignItems="center">
+      <ComponentWithProps value={value} onChange={onChange} {...props} />
+      <Units size={TextSizes.md}>{units}</Units>
+    </FlexContainer>
+  ) : (
+    <ComponentWithProps value={value} onChange={onChange} {...props} />
+  );
+};
+
+const renderSelectComponent = (Component, value, onChange) => {
+  const {
+    component: SelectComponent,
+    props: { options, isMulti, placeholder = 'Category' },
+  } = Component;
+
+  const valueOptions = isArray(value)
+    ? filter(pipe(prop('value'), includes(__, value)))(options)
+    : find(propEq('value', value))(options);
+
+  return (
+    <SelectComponent
+      isMulti={isMulti}
+      options={options}
+      placeholder={placeholder}
+      value={valueOptions}
+      onChange={onChange}
+    />
+  );
+};
+
 const renderComponent = (Component, value, onChange) => {
   if (isUndefined(Component)) return null;
 
@@ -119,30 +162,11 @@ const renderComponent = (Component, value, onChange) => {
     typeof Component === 'object' &&
     hasPath(['props', 'options'], Component)
   ) {
-    const {
-      component: SelectComponent,
-      props: { options, isMulti },
-    } = Component;
-
-    const valueOptions = isArray(value)
-      ? filter(pipe(prop('value'), includes(__, value)))(options)
-      : find(propEq('value', value))(options);
-
-    return (
-      <SelectComponent
-        isMulti={isMulti}
-        options={options}
-        placeholder="Category"
-        value={valueOptions}
-        onChange={onChange}
-      />
-    );
+    return renderSelectComponent(Component, value, onChange);
   }
   // Component with props
   if (typeof Component === 'object' && has('props', Component)) {
-    const { component: ComponentWithProps, props } = Component;
-
-    return <ComponentWithProps value={value} onChange={onChange} {...props} />;
+    return renderComponentWithProps(Component, value, onChange);
   }
 
   return <Component value={value} onChange={onChange} />;

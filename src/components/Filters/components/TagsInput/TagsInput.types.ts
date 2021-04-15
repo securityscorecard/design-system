@@ -6,6 +6,7 @@ export interface TagsInputProps {
   maxLength?: number;
   pattern?: string;
   patternMessage?: string;
+  placeholder?: string;
 }
 
 export interface TagsContainerProps extends FlexContainerProps {

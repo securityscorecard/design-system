@@ -62,9 +62,9 @@ describe('Datatable/Table', () => {
       })[0],
     );
 
-    expect(screen.queryAllByRole('checkbox', { checked: false })).toHaveLength(
-      0,
-    );
+    expect(
+      screen.queryByRole('checkbox', { checked: false }),
+    ).not.toBeInTheDocument();
   });
   it('should deselect all rows on Toggle All click when rows are selected', () => {
     renderWithProviders(
@@ -84,9 +84,9 @@ describe('Datatable/Table', () => {
       })[0],
     );
 
-    expect(screen.queryAllByRole('checkbox', { checked: true })).toHaveLength(
-      0,
-    );
+    expect(
+      screen.queryByRole('checkbox', { checked: true }),
+    ).not.toBeInTheDocument();
   });
   it('should show intermediate checkbox in header when not all rows are selected', () => {
     renderWithProviders(
@@ -307,9 +307,9 @@ describe('Datatable/Table', () => {
         });
       });
 
-      expect(screen.queryAllByRole('checkbox', { checked: true })).toHaveLength(
-        0,
-      );
+      expect(
+        screen.queryByRole('checkbox', { checked: true }),
+      ).not.toBeInTheDocument();
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(0);
     });
     it('should store pagination state when navigating to new page', () => {

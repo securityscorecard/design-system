@@ -6,6 +6,7 @@ import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
 import {
   fieldsTagsInput,
+  fieldsTagsInputPlaceholderUnits,
   fieldsTagsInputValidation,
 } from '../../mocks/options';
 
@@ -30,6 +31,18 @@ export const TagsInputValidation: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsTagsInputValidation}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const TagsInputPlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsTagsInputPlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

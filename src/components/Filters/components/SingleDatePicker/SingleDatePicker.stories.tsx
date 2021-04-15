@@ -4,7 +4,10 @@ import { action } from '@storybook/addon-actions';
 
 import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
-import { fieldsSingleDate } from '../../mocks/options';
+import {
+  fieldsSingleDate,
+  fieldsSingleDatePlaceholderUnits,
+} from '../../mocks/options';
 
 export default {
   component: Filters,
@@ -15,6 +18,18 @@ export const SingleDate: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
       fields={fieldsSingleDate}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const SingleDatePlaceholderUnits: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsSingleDatePlaceholderUnits}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}
