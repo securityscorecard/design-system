@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { isNotUndefined } from 'ramda-adjunct';
 import { path } from 'ramda';
 
@@ -7,7 +7,7 @@ const getHeight = (ref) => {
   return isNotUndefined(scrollHeight) ? `${scrollHeight + 2}px` : 'auto';
 };
 
-export default (
+export const useAutosize = (
   ref: React.MutableRefObject<HTMLTextAreaElement>,
   value: string,
 ): {
@@ -19,19 +19,16 @@ export default (
   const [text, setText] = useState(value);
   const [textAreaHeight, setTextAreaHeight] = useState('auto');
   const [parentHeight, setParentHeight] = useState('auto');
-  const [cursorPosition, setCursorPosition] = useState(0);
 
-  useEffect(() => {
-    ref.current.setSelectionRange(cursorPosition, cursorPosition);
+  useLayoutEffect(() => {
     const height = getHeight(ref);
 
     setParentHeight(height);
     setTextAreaHeight(height);
-  }, [ref, text, cursorPosition]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
 
   const autosize = () => {
-    setCursorPosition(ref.current.selectionStart);
-
     const height = getHeight(ref);
     setTextAreaHeight('auto');
     setParentHeight(height);
