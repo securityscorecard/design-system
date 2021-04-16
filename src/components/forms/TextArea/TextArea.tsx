@@ -15,7 +15,8 @@ import {
   pxToRem,
 } from '../../../utils/helpers';
 import { TextAreaProps } from './TextArea.types';
-import useAutosize from './useAutosize';
+import { useAutosize } from './hooks/useAutosize';
+import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
 
 const TextAreaWrapper = styled.div<{ height: string }>`
   position: relative;
@@ -96,11 +97,14 @@ const TextArea: React.FC<
     value || defaultValue,
   );
   const [currentValueLength, setCurrentValueLength] = useState(text.length);
+  const runAfterUpdate = useRunAfterUpdate();
 
   const handleOnChange = (e) => {
     onChange(e);
-    setCurrentValueLength(textAreaRef.current.value.length);
-    autosize();
+    runAfterUpdate(() => {
+      setCurrentValueLength(textAreaRef.current.value.length);
+      autosize();
+    });
   };
 
   const isFieldInvalid = isInvalid || currentValueLength > maxLength;
