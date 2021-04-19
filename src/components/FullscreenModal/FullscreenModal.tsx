@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
@@ -59,6 +59,23 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   onClose = noop,
   getModalRef,
 }) => {
+  const closeOnEsc = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        onClose();
+      }
+    },
+    [onClose],
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', closeOnEsc);
+
+    return () => {
+      document.removeEventListener('keydown', closeOnEsc);
+    };
+  }, [closeOnEsc]);
+
   const modalRef = useRef<HTMLDivElement>(null);
 
   const {
