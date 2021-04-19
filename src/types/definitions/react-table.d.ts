@@ -102,7 +102,9 @@ declare module 'react-table' {
       UseResizeColumnsState<D>,
       UseRowSelectState<D>,
       UseRowStateState<D>,
-      UseSortByState<D> {}
+      UseSortByState<D> {
+    selectedRowIds: Record<IdType<D>, boolean> | Record<string, never>;
+  }
 
   export interface ColumnInterface<
     D extends Record<string, unknown> = Record<string, unknown>

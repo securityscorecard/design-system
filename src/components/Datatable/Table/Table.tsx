@@ -16,7 +16,7 @@ import cls from 'classnames';
 import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
 
 import { DatatableStore } from '../Datatable.store';
-import { tableActionsReducer } from './Table.reducer';
+import { actions, tableActionsReducer } from './Table.reducer';
 import { actionsColumn } from './columns/actionsColumn';
 import { selectionColumn } from './columns/selectionColumn';
 import { Head } from './Head';
@@ -105,7 +105,7 @@ const Table = <D extends Record<string, unknown>>({
     prepareRow,
     gotoPage,
     pageCount,
-    toggleAllRowsSelected,
+    dispatch,
     state: { pageIndex, selectedRowIds },
   } = useTable<D>(
     {
@@ -160,15 +160,17 @@ const Table = <D extends Record<string, unknown>>({
   useEffect(() => {
     const unsubscribe = DatatableStore.createReaction(
       (s) => s.shouldResetSelectedRows,
-      (_, newState) => {
-        toggleAllRowsSelected(false);
-        newState.shouldResetSelectedRows = false;
+      (shouldResetSelectedRows, newState) => {
+        if (shouldResetSelectedRows) {
+          dispatch({ type: actions.deselectAllRows });
+          newState.shouldResetSelectedRows = false;
+        }
       },
     );
     return () => {
       unsubscribe();
     };
-  }, [toggleAllRowsSelected]);
+  }, [dispatch]);
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);
