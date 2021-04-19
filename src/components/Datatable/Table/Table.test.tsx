@@ -108,28 +108,6 @@ describe('Datatable/Table', () => {
 
     expect(screen.getAllByRole('checkbox')[0]).toBePartiallyChecked();
   });
-  it('should scroll to top of the table when navigation on new page', () => {
-    window.scrollTo = jest.fn();
-    renderWithProviders(
-      <Table<Data>
-        data={data}
-        columns={columns}
-        dataSize={3}
-        isDataLoading={false}
-        defaultSelectedRows={{}}
-        {...defaultTableConfig}
-        defaultPageSize={1}
-      />,
-    );
-
-    userEvent.click(
-      screen.getByRole('button', {
-        name: /3/i,
-      }),
-    );
-
-    expect(window.scrollTo).toBeCalled();
-  });
   it('should call onClick handler in row action dropdown with correct parameters', () => {
     const rowActionMock = jest.fn();
     const rowIndex = 0;
@@ -313,7 +291,6 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(0);
     });
     it('should store pagination state when navigating to new page', () => {
-      window.scrollTo = jest.fn();
       renderWithProviders(
         <Table<Data>
           data={data}

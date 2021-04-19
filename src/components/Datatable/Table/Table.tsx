@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import {
   CellProps,
@@ -77,11 +77,6 @@ const Table = <D extends Record<string, unknown>>({
   );
   const hasAppliedFilters = DatatableStore.useState((s) => s.hasAppliedFilters);
 
-  const tableRef = useRef(null);
-  const scrollToTableTop = () => {
-    window.scrollTo(0, tableRef.current.getBoundingClientRect().top);
-  };
-
   const defaultColumn = useMemo<Partial<Column<D>>>(
     () => ({
       minWidth: 40,
@@ -138,7 +133,6 @@ const Table = <D extends Record<string, unknown>>({
       // ACTIONS
       stateReducer: tableActionsReducer<D>({
         collectFetchParams,
-        scrollToTableTop,
       }),
       // CUSTOM PROPS
       rowActions,
@@ -178,7 +172,6 @@ const Table = <D extends Record<string, unknown>>({
     <>
       <TableContainer>
         <StyledTable
-          ref={tableRef}
           className={cls({ 'has-exclusive-selection': hasExclusiveSelection })}
           {...getTableProps()}
         >
