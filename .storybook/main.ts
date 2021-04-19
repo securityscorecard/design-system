@@ -8,7 +8,8 @@ module.exports = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-docs',
     '@storybook/addon-controls',
-    'storycap'
+    'storycap',
+    'storybook-addon-designs',
   ],
   features: {
     postcss: false,
