@@ -16,7 +16,7 @@
     "types": ["jest", "node"],
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "jest.setup.ts"],
+  "include": ["src/**/*", ".storybook/blocks/**/*", "jest.setup.ts"],
   "exclude": [
     "node_modules",
     "build",

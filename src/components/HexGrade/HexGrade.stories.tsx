@@ -52,6 +52,12 @@ export const SolidHexGrades: Story = () => (
   </>
 );
 SolidHexGrades.storyName = 'Solid HexGrades';
+SolidHexGrades.parameters = {
+  design: {
+    url:
+      'https://www.figma.com/file/vnzYfrwIISRYkr2iYE5TcD/Platform-Atoms?node-id=1891%3A0',
+  },
+};
 
 export const OutlineHexGrades: Story = () => (
   <>

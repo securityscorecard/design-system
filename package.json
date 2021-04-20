@@ -123,6 +123,7 @@
     "rollup-plugin-typescript2": "^0.27.1",
     "rollup-plugin-visualizer": "^4.2.2",
     "semantic-release": "^17.2.3",
+    "storybook-addon-designs": "^5.4.5",
     "storycap": "3.0.4",
     "styled-components": "^5.2.3",
     "stylelint": "^13.12.0",
