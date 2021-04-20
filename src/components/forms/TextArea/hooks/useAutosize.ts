@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { isNotUndefined } from 'ramda-adjunct';
 import { path } from 'ramda';
 
@@ -7,7 +7,7 @@ const getHeight = (ref) => {
   return isNotUndefined(scrollHeight) ? `${scrollHeight + 2}px` : 'auto';
 };
 
-export default (
+export const useAutosize = (
   ref: React.MutableRefObject<HTMLTextAreaElement>,
   value: string,
 ): {
@@ -20,12 +20,13 @@ export default (
   const [textAreaHeight, setTextAreaHeight] = useState('auto');
   const [parentHeight, setParentHeight] = useState('auto');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const height = getHeight(ref);
 
     setParentHeight(height);
     setTextAreaHeight(height);
-  }, [ref, text]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
 
   const autosize = () => {
     const height = getHeight(ref);

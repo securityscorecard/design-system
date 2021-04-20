@@ -1,3 +1,17 @@
+# [1.0.0-alpha.53](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2021-04-16)
+
+
+### Bug Fixes
+
+* **Textarea:** fix jumping cursor in controlled inputs ([f4b9fe7](https://github.com/securityscorecard/design-system/commit/f4b9fe739f35c57a4677ae36719d66b8092ca752))
+
+# [1.0.0-alpha.52](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.51...v1.0.0-alpha.52) (2021-04-15)
+
+
+### Bug Fixes
+
+* **TextArea:** fix cursor jumping to the end ([0b7d109](https://github.com/securityscorecard/design-system/commit/0b7d1099f61cee13ddb227238bbe6a6d5a90b797))
+
 # [1.0.0-alpha.51](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.50...v1.0.0-alpha.51) (2021-04-09)
 
 
