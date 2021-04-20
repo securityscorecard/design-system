@@ -99,15 +99,8 @@ const Filters: React.FC<FiltersProps> = ({
 
   const validateFieldValues = () => {
     const validationErrors = [];
+    // TO DO: check validation for individual fields values
     setHasInvalidValues(!!validationErrors.length);
-
-    // fields.map((field) => {
-    //   const fieldProps = field.conditions.components.props;
-    //   const invalid = fieldProps.validate({ value: field.value });
-    //   return invalid ? fieldProps.patternMessage : null;
-    // });
-
-    // setHasInvalidValues(!!validationErrors.length);
 
     return validationErrors;
   };
@@ -118,7 +111,6 @@ const Filters: React.FC<FiltersProps> = ({
       const someUnapplied = filtersValues.some(({ isApplied }) => !isApplied);
 
       setHasUnappliedFilters(someApplied && someUnapplied);
-      validateFieldValues();
     }
   }, [filtersValues]);
 
@@ -171,6 +163,7 @@ const Filters: React.FC<FiltersProps> = ({
     setFiltersValues(newFilters);
 
     callOnChange(newFilters);
+    validateFieldValues();
   };
 
   const handleAddRow = (event) => {
