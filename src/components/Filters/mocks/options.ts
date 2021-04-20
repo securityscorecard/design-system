@@ -11,7 +11,7 @@ import {
 import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 import { patterns } from '../enums';
-import { validateDomains } from './validations';
+import { validateDomains, validateIPs } from './validations';
 
 export const fields: Field[] = [
   {
@@ -29,7 +29,13 @@ export const fields: Field[] = [
         label: 'is',
       },
       {
-        component: InputFilter,
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.domain,
+            validate: validateDomains,
+          },
+        },
         value: 'is not',
         label: 'is not',
       },
@@ -390,6 +396,7 @@ export const fieldsValidateDomainsExternal: Field[] = [
           props: {
             ...patterns.domain,
             validate: validateDomains,
+            placeholder: 'exact-domain.com',
           },
         },
         value: 'is',
@@ -398,7 +405,29 @@ export const fieldsValidateDomainsExternal: Field[] = [
       },
     ],
     value: 'domain',
-    label: 'Exact Domain',
+    label: 'Domain',
+  },
+];
+
+export const fieldsValidateIPsExternal: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.ip,
+            validate: validateIPs,
+            placeholder: '255.255.255.255',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'IP Address',
   },
 ];
 

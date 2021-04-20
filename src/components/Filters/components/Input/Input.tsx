@@ -37,6 +37,11 @@ export const StyledInput = styled.input.attrs<InputProps>(({ isDisabled }) => ({
     border-color: ${getFormStyle('focusBorderColor')};
   }
 
+  &:disabled {
+    background: ${getFormStyle('disabledBgColor')};
+    border-color: ${getFormStyle('disabledBorderColor')};
+  }
+
   ::placeholder,
   ::-webkit-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
@@ -61,6 +66,7 @@ const Input: React.FC<InputProps> = ({
   patternMessage = patterns.string.patternMessage,
   validate = validateDefault,
   placeholder = 'String',
+  isDisabled = false,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
@@ -85,6 +91,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <>
       <StyledInput
+        isDisabled={isDisabled}
         isInvalid={isInvalid}
         maxLength={maxLength}
         pattern={pattern}
@@ -110,4 +117,5 @@ Input.propTypes = {
   patternMessage: PropTypes.string,
   validate: PropTypes.func,
   placeholder: PropTypes.string,
+  isDisabled: PropTypes.bool,
 };
