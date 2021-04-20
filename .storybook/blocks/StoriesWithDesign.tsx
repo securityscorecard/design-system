@@ -6,6 +6,11 @@ import {
   DocsStoryProps,
   DocsContextProps,
   StoryData,
+  Anchor,
+  Subheading,
+  Description,
+  Canvas,
+  Story,
 } from '@storybook/addon-docs/blocks';
 import { TabsState } from '@storybook/components'
 import { Design } from 'storybook-addon-designs/blocks';
@@ -30,7 +35,7 @@ const getDocsStories = (context: DocsContextProps): StoryData[] => {
 
   return storyStore
     .getStoriesForKind(kind)
-    .filter((s: any) => !(s.parameters && s.parameters.docs && s.parameters.docs.disable));
+    .filter((s: any) => !(s.parameters?.docs?.disable));
 };
 
 export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimary = false }) => {
@@ -48,17 +53,24 @@ export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimar
       <Heading>{title}</Heading>
       {stories.map((story) => {
         if (story)  {
-          return isNonEmptyString(story.parameters.design.url) ? (
-            <TabsState key={story.id} initial="implementation">
-              <div id="implementation" title="Implementation">
-                <ImplementationBlock>
-                  <DocsStory {...story} expanded />
-                </ImplementationBlock>
-              </div>
-              <div id="design" title="Design">
-                <Design storyId={story.id} />
-              </div>
-            </TabsState>
+          const { id, name, withToolbar, parameters: { docs, design } } = story;
+          const description = docs.description?.story;
+
+          return isNonEmptyString(design?.url) ? (
+            <Anchor storyId={id} key={id}>
+              {name && <Subheading>{name}</Subheading>}
+              {description && <Description markdown={description} />}
+              <TabsState initial="implementation">
+                <div id="implementation" title="Implementation">
+                    <Canvas withToolbar={withToolbar}>
+                      <Story id={id} />
+                    </Canvas>
+                </div>
+                <div id="design" title="Design">
+                  <Design storyId={id} />
+                </div>
+              </TabsState>
+            </Anchor>
           ) : <DocsStory key={story.id} {...story} expanded />;
         }
 
