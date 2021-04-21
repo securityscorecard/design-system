@@ -1,3 +1,17 @@
+# [1.0.0-alpha.54](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.53...v1.0.0-alpha.54) (2021-04-21)
+
+
+### Bug Fixes
+
+* **Datatable:** deselect all rows on Select None ([42060ba](https://github.com/securityscorecard/design-system/commit/42060ba120847f1f5f1dcf3ad32e17db321ffb6b))
+
+
+### Features
+
+* **Datatable:** add per page selection option ([72759c2](https://github.com/securityscorecard/design-system/commit/72759c21dc94b31423cfe49570b525a8bdce6224))
+* **Datatable:** remove scroll to top after navigation ([96e5d65](https://github.com/securityscorecard/design-system/commit/96e5d65615694b813333068978ab03a5318fa163))
+* **FullscreenModal:** close modal on Escape key ([beea64f](https://github.com/securityscorecard/design-system/commit/beea64f263e28011a62588a0884155905ab9f9e8))
+
 # [1.0.0-alpha.53](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2021-04-16)
 
 
