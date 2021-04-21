@@ -25,14 +25,18 @@ export default {
 export const Default: Story<ElementCounterProps> = (args) => (
   <ElementCounter {...args} />
 );
-Default.args = { dataSize: 120, shouldShowSelectionDropdown: true };
+Default.args = {
+  dataSize: 120,
+  hasSelection: true,
+  hasOnlyPerPageSelection: true,
+};
 
-export const WithoutSelectionDropdown: Story<ElementCounterProps> = (args) => (
+export const WithoutSelection: Story<ElementCounterProps> = (args) => (
   <ElementCounter {...args} />
 );
-WithoutSelectionDropdown.args = {
+WithoutSelection.args = {
   ...Default.args,
-  shouldShowSelectionDropdown: false,
+  hasSelection: false,
 };
 
 export const WithSelectedRows: Story<ElementCounterProps> = (args) => {
@@ -51,17 +55,41 @@ export const WithSelectedRows: Story<ElementCounterProps> = (args) => {
 };
 WithSelectedRows.args = Default.args;
 
+export const WithSelectedRowsAndExclusionLogic: Story<ElementCounterProps> = (
+  args,
+) => {
+  useEffect(() => {
+    DatatableStore.update((s) => {
+      s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
+    });
+
+    return () => {
+      DatatableStore.update((s) => {
+        s.selectedIds = [];
+      });
+    };
+  }, []);
+  return <ElementCounter {...args} />;
+};
+WithSelectedRowsAndExclusionLogic.args = {
+  ...Default.args,
+  hasOnlyPerPageSelection: false,
+};
+
 export const NoDataAvailable: Story<ElementCounterProps> = (args) => (
   <ElementCounter {...args} />
 );
-NoDataAvailable.args = { ...Default.args, dataSize: 0 };
+NoDataAvailable.args = {
+  ...Default.args,
+  dataSize: 0,
+};
 
 export const AbbreviatedCounts: Story<ElementCounterProps> = (args) => (
   <>
-    <ElementCounter dataSize={1000} {...args} />
-    <ElementCounter dataSize={1050000} {...args} />
-    <ElementCounter dataSize={1500000000} {...args} />
+    <ElementCounter {...args} dataSize={1000} />
+    <ElementCounter {...args} dataSize={1050000} />
+    <ElementCounter {...args} dataSize={1500000000} />
   </>
 );
 
-AbbreviatedCounts.args = { shouldShowSelectionDropdown: false };
+AbbreviatedCounts.args = Default.args;

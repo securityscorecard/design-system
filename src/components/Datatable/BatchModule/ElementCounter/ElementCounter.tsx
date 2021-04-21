@@ -18,13 +18,19 @@ const LightText = styled(Text).attrs(() => ({
   variant: TextVariants.context,
 }))``;
 
-const SelectDropdownArrow = styled(Icon)`
+const SelectionButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  padding: ${pxToRem(6, 8)};
   font-size: ${pxToRem(16)};
-  margin: ${pxToRem(3, 8)};
-`;
+  color: ${getColor('graphite3B')};
 
-const SelectDropdown = styled(Dropdown)`
-  &:hover ${SelectDropdownArrow} {
+  &:hover {
     color: ${getColor('blueberryClassic')};
   }
 `;
@@ -50,9 +56,16 @@ export const getCounterContent = (
   return <LightText data-testid="counter-content">No data</LightText>;
 };
 
+const ElementCounterWrapper = ({ children, ...props }) => (
+  <H3 margin="none" variant={HeadingVariants.secondary} {...props}>
+    {children}
+  </H3>
+);
+
 const ElementCounter: React.FC<ElementCounterProps> = ({
   dataSize,
-  shouldShowSelectionDropdown,
+  hasSelection,
+  hasOnlyPerPageSelection,
 }) => {
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
@@ -91,11 +104,33 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
     });
   };
 
+  if (!hasSelection) {
+    return <ElementCounterWrapper>{content}</ElementCounterWrapper>;
+  }
+
+  if (hasOnlyPerPageSelection) {
+    return (
+      <ElementCounterWrapper>
+        {content}
+        {localSelectedLength > 0 && (
+          <SelectionButton
+            aria-label="Select None"
+            title="Select None"
+            type="button"
+            onClick={handleSelectNoneClick}
+          >
+            <Icon name={SSCIconNames.timesSolid} />
+          </SelectionButton>
+        )}
+      </ElementCounterWrapper>
+    );
+  }
+
   return (
-    <H3 margin="none" variant={HeadingVariants.secondary}>
+    <ElementCounterWrapper>
       {content}
-      {shouldShowSelectionDropdown && dataSize > 0 && (
-        <SelectDropdown
+      {dataSize > 0 && (
+        <Dropdown
           actions={[
             {
               name: 'select-all',
@@ -109,20 +144,27 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
             },
           ]}
         >
-          <SelectDropdownArrow
+          <SelectionButton
             aria-label="Selection options"
-            data-testid="selection-dropdown"
-            name={SSCIconNames.caretDown}
-          />
-        </SelectDropdown>
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <Icon
+              data-testid="selection-dropdown"
+              name={SSCIconNames.caretDown}
+            />
+          </SelectionButton>
+        </Dropdown>
       )}
-    </H3>
+    </ElementCounterWrapper>
   );
 };
 
 ElementCounter.propTypes = {
   dataSize: PropTypes.number.isRequired,
-  shouldShowSelectionDropdown: PropTypes.bool.isRequired,
+  hasSelection: PropTypes.bool.isRequired,
+  hasOnlyPerPageSelection: PropTypes.bool.isRequired,
 };
 
 export default ElementCounter;

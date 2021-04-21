@@ -8,7 +8,8 @@ import { BatchModuleProps } from './BatchModule.types';
 
 const BatchModule: React.FC<BatchModuleProps> = ({
   actions,
-  shouldShowSelectionDropdown,
+  hasSelection,
+  hasOnlyPerPageSelection,
   dataSize,
 }) => {
   return (
@@ -19,7 +20,8 @@ const BatchModule: React.FC<BatchModuleProps> = ({
     >
       <ElementCounter
         dataSize={dataSize}
-        shouldShowSelectionDropdown={shouldShowSelectionDropdown}
+        hasOnlyPerPageSelection={hasOnlyPerPageSelection}
+        hasSelection={hasSelection}
       />
       {isNonEmptyArray(actions) && <BatchActions actions={actions} />}
     </FlexContainer>

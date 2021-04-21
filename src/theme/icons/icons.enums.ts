@@ -22,6 +22,7 @@ export const SSCIconNames = {
   longArrowLeft: 'long-arrow-left',
   longArrowRight: 'long-arrow-right',
   ellipsisH: 'ellipsis-h',
+  timesSolid: 'times-solid',
 } as const;
 
 export const IconTypes = {
