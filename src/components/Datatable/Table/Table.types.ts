@@ -52,6 +52,7 @@ export type OnSelectFn<D> = (
 export interface TableConfig<D> {
   hasSelection: boolean;
   onSelect: OnSelectFn<D>;
+  hasOnlyPerPageSelection: boolean;
   defaultSelectedRowIds: IdType<D>[];
   hasPagination: boolean;
   hasServerSidePagination: boolean;
@@ -69,6 +70,7 @@ export const TableConfigPropType = {
   NoDataComponent: PropTypes.elementType,
   NoMatchingDataComponent: PropTypes.elementType,
   hasSelection: PropTypes.bool,
+  hasOnlyPerPageSelection: PropTypes.bool,
   defaultSelectedRowIds: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ),
@@ -91,7 +93,10 @@ export type PrimaryKey<D extends Record<string, unknown>> =
   | ((originalRow: D, relativeIndex: number, parent?: Row<D>) => string);
 
 export interface TableProps<D extends Record<string, unknown>>
-  extends Omit<TableConfig<D>, 'onSelect' | 'defaultSelectedRowIds'> {
+  extends Omit<
+    TableConfig<D>,
+    'onSelect' | 'defaultSelectedRowIds' | 'hasOnlyPerPageSelection'
+  > {
   data: D[];
   columns: Column<D>[];
   dataSize: number;
