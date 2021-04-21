@@ -26,3 +26,4 @@ export { sitemap } from './sitemap';
 export { longArrowLeft } from './longArrowLeft';
 export { longArrowRight } from './longArrowRight';
 export { ellipsisH } from './ellipsisH';
+export { timesSolid } from './timesSolid';

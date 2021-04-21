@@ -8,6 +8,7 @@ import { NoData, NoMatchingData } from './Table/NoData';
 export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
   hasSelection: true,
   onSelect: noop,
+  hasOnlyPerPageSelection: true,
   defaultSelectedRowIds: [],
   hasPagination: true,
   hasServerSidePagination: true,

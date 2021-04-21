@@ -1,4 +1,5 @@
 export interface ElementCounterProps {
   dataSize: number;
-  shouldShowSelectionDropdown: boolean;
+  hasSelection: boolean;
+  hasOnlyPerPageSelection: boolean;
 }

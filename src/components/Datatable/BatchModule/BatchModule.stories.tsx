@@ -68,7 +68,8 @@ export const Default: Story<BatchModuleProps> = (args) => (
 Default.args = {
   actions: [],
   dataSize: 1070000,
-  shouldShowSelectionDropdown: defaultTableConfig.hasSelection,
+  hasSelection: defaultTableConfig.hasSelection,
+  hasOnlyPerPageSelection: defaultTableConfig.hasOnlyPerPageSelection,
 };
 
 export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
@@ -86,6 +87,27 @@ export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
   return <BatchModule {...args} />;
 };
 WithSelectedRows.args = Default.args;
+
+export const WithSelectedRowsAndExclusionLogic: Story<BatchModuleProps> = (
+  args,
+) => {
+  useEffect(() => {
+    DatatableStore.update((s) => {
+      s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
+    });
+
+    return () => {
+      DatatableStore.update((s) => {
+        s.selectedIds = [];
+      });
+    };
+  }, []);
+  return <BatchModule {...args} />;
+};
+WithSelectedRowsAndExclusionLogic.args = {
+  ...Default.args,
+  hasOnlyPerPageSelection: false,
+};
 
 export const WithBatchActions: Story<BatchModuleProps> = (args) => (
   <BatchModule {...args} />

@@ -58,6 +58,7 @@ const Datatable = <D extends Record<string, unknown>>({
   const {
     onSelect,
     defaultSelectedRowIds,
+    hasOnlyPerPageSelection,
     ...restTableConfig
   } = useDeepCompareMemo<TableConfig<D>>(() => mergeTableConfig(tableConfig), [
     tableConfig,
@@ -72,7 +73,8 @@ const Datatable = <D extends Record<string, unknown>>({
       <BatchModule
         actions={batchActions}
         dataSize={dataSize}
-        shouldShowSelectionDropdown={restTableConfig.hasSelection}
+        hasOnlyPerPageSelection={hasOnlyPerPageSelection}
+        hasSelection={restTableConfig.hasSelection}
       />
       <Table<D>
         columns={columns}

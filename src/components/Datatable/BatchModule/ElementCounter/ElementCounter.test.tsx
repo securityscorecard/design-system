@@ -32,83 +32,151 @@ describe('Datatable/ElementCounter', () => {
   beforeEach(() => {
     DatatableStore.replace(datatableInitialState);
   });
+
+  it('should show Select None button when there are selected rows', () => {
+    renderWithProviders(
+      <ElementCounter dataSize={1000} hasOnlyPerPageSelection hasSelection />,
+    );
+
+    expect(
+      screen.queryByRole('button', { name: /Select None/i }),
+    ).not.toBeInTheDocument();
+
+    act(() =>
+      DatatableStore.update((s) => {
+        s.selectedIds = ['a', 'b', 'c'];
+      }),
+    );
+
+    expect(
+      screen.getByRole('button', { name: /Select None/i }),
+    ).toBeInTheDocument();
+  });
+
   describe('DatatableStore actions', () => {
-    it('should set "hasExclusiveSelection" to "true" on Select All click', () => {
-      renderWithProviders(
-        <ElementCounter dataSize={1000} shouldShowSelectionDropdown />,
-      );
+    describe('given selection dropdown is visible', () => {
+      it('should set "hasExclusiveSelection" to "true" on Select All click', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection={false}
+          />,
+        );
 
-      fireEvent.click(screen.getByTestId('selection-dropdown'));
-      fireEvent.click(screen.getByRole('button', { name: /Select All/i }));
+        fireEvent.click(screen.getByTestId('selection-dropdown'));
+        fireEvent.click(screen.getByRole('button', { name: /Select All/i }));
 
-      expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(true);
+        expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(true);
+      });
+      it('should set "hasExclusiveSelection" to "false" on Select None click', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection={false}
+          />,
+        );
+
+        act(() =>
+          DatatableStore.update((s) => {
+            s.hasExclusiveSelection = true;
+          }),
+        );
+
+        fireEvent.click(screen.getByTestId('selection-dropdown'));
+        fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
+
+        expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(false);
+      });
+      it('should set "shouldResetSelectedRows" to "true" on Select All click', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection={false}
+          />,
+        );
+
+        fireEvent.click(screen.getByTestId('selection-dropdown'));
+        fireEvent.click(screen.getByRole('button', { name: /Select All/i }));
+
+        expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
+      });
+      it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection={false}
+          />,
+        );
+
+        fireEvent.click(screen.getByTestId('selection-dropdown'));
+        fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
+
+        expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
+      });
+      it('should react on "selectedIds" change', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection={false}
+          />,
+        );
+        const counter = screen.getByRole('heading');
+
+        expect(counter).toHaveTextContent('1K');
+
+        act(() =>
+          DatatableStore.update((s) => {
+            s.selectedIds = ['a', 'b', 'c'];
+          }),
+        );
+        expect(counter).toHaveTextContent('3 of 1K selected');
+      });
+      it('should react on "hasExclusiveSelection" change', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection={false}
+          />,
+        );
+        const counter = screen.getByRole('heading');
+
+        expect(counter).toHaveTextContent('1K');
+
+        act(() =>
+          DatatableStore.update((s) => {
+            s.hasExclusiveSelection = true;
+          }),
+        );
+
+        expect(counter).toHaveTextContent('1K of 1K selected');
+      });
     });
-    it('should set "hasExclusiveSelection" to "false" on Select None click', () => {
-      renderWithProviders(
-        <ElementCounter dataSize={1000} shouldShowSelectionDropdown />,
-      );
+    describe('given selection dropdown is hidden', () => {
+      it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
+        renderWithProviders(
+          <ElementCounter
+            dataSize={1000}
+            hasSelection
+            hasOnlyPerPageSelection
+          />,
+        );
 
-      act(() =>
-        DatatableStore.update((s) => {
-          s.hasExclusiveSelection = true;
-        }),
-      );
+        act(() =>
+          DatatableStore.update((s) => {
+            s.selectedIds = ['a', 'b', 'c'];
+          }),
+        );
 
-      fireEvent.click(screen.getByTestId('selection-dropdown'));
-      fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
+        fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
 
-      expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(false);
-    });
-    it('should set "shouldResetSelectedRows" to "true" on Select All click', () => {
-      renderWithProviders(
-        <ElementCounter dataSize={1000} shouldShowSelectionDropdown />,
-      );
-
-      fireEvent.click(screen.getByTestId('selection-dropdown'));
-      fireEvent.click(screen.getByRole('button', { name: /Select All/i }));
-
-      expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
-    });
-    it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
-      renderWithProviders(
-        <ElementCounter dataSize={1000} shouldShowSelectionDropdown />,
-      );
-
-      fireEvent.click(screen.getByTestId('selection-dropdown'));
-      fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
-
-      expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
-    });
-    it('should react on "selectedIds" change', () => {
-      renderWithProviders(
-        <ElementCounter dataSize={1000} shouldShowSelectionDropdown />,
-      );
-      const counter = screen.getByRole('heading');
-
-      expect(counter).toHaveTextContent('1K');
-
-      act(() =>
-        DatatableStore.update((s) => {
-          s.selectedIds = ['a', 'b', 'c'];
-        }),
-      );
-      expect(counter).toHaveTextContent('3 of 1K selected');
-    });
-    it('should react on "hasExclusiveSelection" change', () => {
-      renderWithProviders(
-        <ElementCounter dataSize={1000} shouldShowSelectionDropdown />,
-      );
-      const counter = screen.getByRole('heading');
-
-      expect(counter).toHaveTextContent('1K');
-
-      act(() =>
-        DatatableStore.update((s) => {
-          s.hasExclusiveSelection = true;
-        }),
-      );
-
-      expect(counter).toHaveTextContent('1K of 1K selected');
+        expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
+      });
     });
   });
 });
