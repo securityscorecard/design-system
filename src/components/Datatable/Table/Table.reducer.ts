@@ -5,6 +5,10 @@ type StateReducerFn<D extends Record<string, unknown>> = (
   action: ActionType,
 ) => TableState<D>;
 
+export const actions = {
+  deselectAllRows: 'deselectAllRows',
+};
+
 export const tableActionsReducer = <D extends Record<string, unknown>>({
   collectFetchParams,
 }: {
@@ -21,6 +25,8 @@ export const tableActionsReducer = <D extends Record<string, unknown>>({
     case 'toggleSortBy':
       collectFetchParams(pageIndex, pageSize, sortBy);
       break;
+    case actions.deselectAllRows:
+      return { ...newState, selectedRowIds: {} };
     default:
       break;
   }
