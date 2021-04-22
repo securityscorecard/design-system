@@ -7,5 +7,5 @@ export interface InputProps {
   maxLength?: number;
   pattern?: string;
   patternMessage?: string;
-  validate?: (target: HTMLInputElement) => string | boolean;
+  onValidate?: (target: HTMLInputElement) => string | boolean;
 }

@@ -10,8 +10,7 @@ import {
 } from '../components';
 import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
-import { patterns } from '../enums';
-import { validateDomains, validateIPs } from './validations';
+import { patterns, validateDomains, validateIPs } from './validations';
 
 export const fields: Field[] = [
   {
@@ -33,7 +32,7 @@ export const fields: Field[] = [
           component: InputFilter,
           props: {
             ...patterns.domain,
-            validate: validateDomains,
+            onValidate: validateDomains,
           },
         },
         value: 'is not',
@@ -334,7 +333,12 @@ export const fieldsInput: Field[] = [
   {
     conditions: [
       {
-        component: InputFilter,
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.string,
+          },
+        },
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -395,7 +399,7 @@ export const fieldsValidateDomainsExternal: Field[] = [
           component: InputFilter,
           props: {
             ...patterns.domain,
-            validate: validateDomains,
+            onValidate: validateDomains,
             placeholder: 'exact-domain.com',
           },
         },
@@ -417,7 +421,7 @@ export const fieldsValidateIPsExternal: Field[] = [
           component: InputFilter,
           props: {
             ...patterns.ip,
-            validate: validateIPs,
+            onValidate: validateIPs,
             placeholder: '255.255.255.255',
           },
         },

@@ -1,14 +1,14 @@
-export const validateDefault = (target: HTMLInputElement): boolean | string => {
+export const validatePattern = (target: HTMLInputElement): boolean | string => {
   return !!target.validity.patternMismatch;
 };
 
-export const onValidate = (
+export const validate = (
   event: React.ChangeEvent<HTMLInputElement>,
-  validate: (target: HTMLInputElement) => boolean | string,
+  onValidate: (target: HTMLInputElement) => boolean | string,
   patternMessage: string,
 ): boolean => {
   const { target } = event;
-  const error = validate(target);
+  const error = onValidate(target);
   target.setCustomValidity(
     target.validity.patternMismatch ? patternMessage : '',
   );

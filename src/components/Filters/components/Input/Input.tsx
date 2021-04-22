@@ -9,8 +9,7 @@ import {
   getFormStyle,
   pxToRem,
 } from '../../../../utils/helpers';
-import { onValidate, validateDefault } from '../../helpers';
-import { patterns } from '../../enums';
+import { validate, validatePattern } from '../../helpers';
 
 const stateStyles = css`
   padding: ${pxToRem(3, 15)};
@@ -62,16 +61,16 @@ const Input: React.FC<InputProps> = ({
   value = '',
   onChange,
   maxLength,
-  pattern = patterns.string.pattern,
-  patternMessage = patterns.string.patternMessage,
-  validate = validateDefault,
+  pattern,
+  patternMessage,
+  onValidate = validatePattern,
   placeholder = 'String',
   isDisabled = false,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleOnValidate = (event) => {
-    const invalid = onValidate(event, validate, patternMessage);
+    const invalid = validate(event, onValidate, patternMessage);
     setIsInvalid(invalid);
   };
 
@@ -115,7 +114,7 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
   patternMessage: PropTypes.string,
-  validate: PropTypes.func,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
+  onValidate: PropTypes.func,
 };
