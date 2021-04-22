@@ -33,15 +33,16 @@ const Popup = styled(FlexContainer)`
 `;
 
 const RemoveButton = styled.button`
+  background: transparent;
+  font-family: ${getFontFamily('base')};
+  height: ${pxToRem(32)};
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: ${pxToRem(8, 5.5)};
   border: none;
-  font-family: ${getFontFamily('base')};
   margin: 0;
-  background: transparent;
 
   cursor: ${({ disabled }) => !disabled && 'pointer'};
   &:hover {
