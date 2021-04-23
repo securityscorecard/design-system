@@ -9,7 +9,7 @@ import {
   getFormStyle,
   pxToRem,
 } from '../../../../utils/helpers';
-import { validate, validatePattern } from '../../helpers';
+import { validatePattern } from '../../helpers';
 
 const stateStyles = css`
   padding: ${pxToRem(3, 15)};
@@ -70,8 +70,12 @@ const Input: React.FC<InputProps> = ({
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleOnValidate = (event) => {
-    const invalid = validate(event, onValidate, patternMessage);
-    setIsInvalid(invalid);
+    const { target } = event;
+    const error = onValidate(target);
+    target.setCustomValidity(
+      target.validity.patternMismatch ? patternMessage : '',
+    );
+    setIsInvalid(!!error);
   };
 
   const handleOnChange = (event) => {

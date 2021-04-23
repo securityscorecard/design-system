@@ -24,7 +24,7 @@ interface ComponentProps {
   maxDate?: Date;
   units?: string;
   placeholder?: string | DateRangePlaceholderProps;
-  onValidate?: (target: HTMLInputElement) => string | boolean;
+  onValidate?: (target: HTMLInputElement) => boolean;
 }
 
 export interface ComponentWithProps {
