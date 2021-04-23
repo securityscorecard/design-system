@@ -8,7 +8,7 @@ export const patterns = {
     patternMessage: 'Use only alphabets',
   },
   number: {
-    pattern: '[0-9]',
+    pattern: '[0-9]+',
     patternMessage: 'Use only numbers',
   },
   ip: {

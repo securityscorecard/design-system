@@ -458,7 +458,8 @@ export const fieldsTagsInputValidation: Field[] = [
           component: TagsInputFilter,
           props: {
             maxLength: 15,
-            ...patterns.tags,
+            ...patterns.number,
+            placeholder: 'Enter only numbers',
           },
         },
         value: 'is',

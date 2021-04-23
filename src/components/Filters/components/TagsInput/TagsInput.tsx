@@ -15,6 +15,7 @@ import {
 import { isEmptyArray, isNotEmpty } from 'ramda-adjunct';
 
 import Tag from './Tag';
+import { Error } from '../../../forms/Message';
 import { FlexContainer } from '../../../FlexContainer';
 import {
   getBorderRadius,
@@ -23,6 +24,7 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../../../utils/helpers';
+import { validatePattern } from '../../helpers';
 import { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 
 const Container = styled(FlexContainer)<TagsContainerProps>`
@@ -93,6 +95,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   pattern,
   patternMessage,
   placeholder = 'Enter value',
+  onValidate = validatePattern,
 }) => {
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -127,56 +130,65 @@ const TagsInput: React.FC<TagsInputProps> = ({
     }
   };
 
-  const handleOnChange = (event) => {
+  const handleOnValidate = (event) => {
     const { target } = event;
-    const { value, validity } = target;
+    const error = onValidate(target);
+    target.setCustomValidity(
+      target.validity.patternMismatch ? patternMessage : '',
+    );
+    setIsInvalid(!!error);
+  };
 
-    if (patternMessage) {
-      target.setCustomValidity(validity.patternMismatch ? patternMessage : '');
-    }
-    setIsInvalid(validity.patternMismatch);
+  const handleOnChange = (event) => {
+    const {
+      target: { value },
+    } = event;
     setInput(value);
+    handleOnValidate(event);
   };
 
   const placeholderText = tags.length === 0 ? placeholder : '';
 
   const handleOnBlur = (event) => {
-    const { target } = event;
-    const { value, validity } = target;
+    const {
+      target: { value },
+    } = event;
 
-    if (value && !validity.patternMismatch) {
+    if (value && !isInvalid) {
       addNewTag(value);
     }
     setIsFocused(false);
   };
 
   return (
-    <Container
-      alignItems="center"
-      flexWrap="wrap"
-      isFocused={isFocused}
-      isInvalid={isInvalid}
-    >
-      <Tags>
-        {tags.map((tag, index) => (
-          <Tag key={tag} value={tag} onClose={() => handleRemoveTag(index)} />
-        ))}
-
-        <InputContainer>
-          <StyledInput
-            maxLength={maxLength}
-            pattern={pattern}
-            placeholder={placeholderText}
-            type="text"
-            value={input}
-            onBlur={handleOnBlur}
-            onChange={handleOnChange}
-            onFocus={() => setIsFocused(true)}
-            onKeyDown={handleKeyDown}
-          />
-        </InputContainer>
-      </Tags>
-    </Container>
+    <>
+      <Container
+        alignItems="center"
+        flexWrap="wrap"
+        isFocused={isFocused}
+        isInvalid={isInvalid}
+      >
+        <Tags>
+          {tags.map((tag, index) => (
+            <Tag key={tag} value={tag} onClose={() => handleRemoveTag(index)} />
+          ))}
+          <InputContainer>
+            <StyledInput
+              maxLength={maxLength}
+              pattern={pattern}
+              placeholder={placeholderText}
+              type="text"
+              value={input}
+              onBlur={handleOnBlur}
+              onChange={handleOnChange}
+              onFocus={() => setIsFocused(true)}
+              onKeyDown={handleKeyDown}
+            />
+          </InputContainer>
+        </Tags>
+      </Container>
+      {isInvalid && <Error>{patternMessage}</Error>}
+    </>
   );
 };
 
@@ -189,4 +201,5 @@ TagsInput.propTypes = {
   pattern: PropTypes.string,
   patternMessage: PropTypes.string,
   placeholder: PropTypes.string,
+  onValidate: PropTypes.func,
 };
