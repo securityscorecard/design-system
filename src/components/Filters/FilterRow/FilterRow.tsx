@@ -119,17 +119,26 @@ const getFieldOptions = map(normalizeOptions);
 
 const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
-const renderComponentWithProps = (Component, value, onChange) => {
+const renderComponentWithProps = (Component, value, onChange, onError) => {
   const { component: ComponentWithProps, props } = Component;
   const { units } = props;
-
   return units ? (
     <FlexContainer alignItems="center">
-      <ComponentWithProps value={value} onChange={onChange} {...props} />
+      <ComponentWithProps
+        value={value}
+        onChange={onChange}
+        onError={onError}
+        {...props}
+      />
       <Units size={TextSizes.md}>{units}</Units>
     </FlexContainer>
   ) : (
-    <ComponentWithProps value={value} onChange={onChange} {...props} />
+    <ComponentWithProps
+      value={value}
+      onChange={onChange}
+      onError={onError}
+      {...props}
+    />
   );
 };
 
@@ -154,9 +163,8 @@ const renderSelectComponent = (Component, value, onChange) => {
   );
 };
 
-const renderComponent = (Component, value, onChange) => {
+const renderComponent = (Component, value, onChange, onError) => {
   if (isUndefined(Component)) return null;
-
   // Select
   if (
     typeof Component === 'object' &&
@@ -166,9 +174,8 @@ const renderComponent = (Component, value, onChange) => {
   }
   // Component with props
   if (typeof Component === 'object' && has('props', Component)) {
-    return renderComponentWithProps(Component, value, onChange);
+    return renderComponentWithProps(Component, value, onChange, onError);
   }
-
   return <Component value={value} onChange={onChange} />;
 };
 
@@ -186,6 +193,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   condition: conditionValue,
   value: componentValue,
   isApplied,
+  onError,
 }) => {
   const { field, conditions, condition, component } = useFilterRow(
     fields,
@@ -287,7 +295,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
         />
       </SplitField>
       <SplitField>
-        {renderComponent(component, componentValue, handleValueChange)}
+        {renderComponent(component, componentValue, handleValueChange, onError)}
       </SplitField>
     </FlexContainer>
   );
@@ -314,4 +322,5 @@ FilterRow.propTypes = {
     PropTypes.instanceOf(Date),
     DateRangePickerPropTypes,
   ]),
+  onError: PropTypes.func,
 };

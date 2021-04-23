@@ -15,6 +15,7 @@ const LoadingText = styled(Text)`
 `;
 
 const BottomBar: React.FC<BottomBarProps> = ({
+  onSubmit,
   onAdd,
   onClearAll,
   onClose,
@@ -65,8 +66,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
           color="primary"
           disabled={isApplyDisabled}
           /* disabled={isLoading} TODO enable by https://zitenote.atlassian.net/browse/FEP-1645 */
-          type="submit"
           variant="solid"
+          onClick={onSubmit}
         >
           {isLoading ? (
             <>
@@ -91,6 +92,7 @@ export default BottomBar;
 
 BottomBar.propTypes = {
   hasUnappliedFilters: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onClearAll: PropTypes.func.isRequired,

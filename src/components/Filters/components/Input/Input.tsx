@@ -66,23 +66,20 @@ const Input: React.FC<InputProps> = ({
   onValidate = validatePattern,
   placeholder = 'String',
   isDisabled = false,
+  onError,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleOnValidate = (event) => {
     const { target } = event;
     const error = onValidate(target);
-    target.setCustomValidity(
-      target.validity.patternMismatch ? patternMessage : '',
-    );
     setIsInvalid(!!error);
+    onError(!!error);
   };
 
   const handleOnChange = (event) => {
     onChange(event);
-    if (isInvalid) {
-      handleOnValidate(event);
-    }
+    handleOnValidate(event);
   };
 
   const handleKeyPress = (event) => {
@@ -109,9 +106,6 @@ const Input: React.FC<InputProps> = ({
     </>
   );
 };
-
-export default Input;
-
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
@@ -121,4 +115,6 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
   onValidate: PropTypes.func,
+  onError: PropTypes.func,
 };
+export default Input;

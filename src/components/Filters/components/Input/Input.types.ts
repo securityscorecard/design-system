@@ -8,4 +8,5 @@ export interface InputProps {
   pattern?: string;
   patternMessage?: string;
   onValidate?: (target: HTMLInputElement) => boolean;
+  onError?: (boolean) => void;
 }

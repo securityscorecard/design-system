@@ -133,9 +133,6 @@ const TagsInput: React.FC<TagsInputProps> = ({
   const handleOnValidate = (event) => {
     const { target } = event;
     const error = onValidate(target);
-    target.setCustomValidity(
-      target.validity.patternMismatch ? patternMessage : '',
-    );
     setIsInvalid(!!error);
   };
 

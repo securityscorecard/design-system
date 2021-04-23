@@ -58,7 +58,7 @@ const getDefaultState = ([firstField]: Field[]) => {
   ];
 };
 
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -97,12 +97,8 @@ const Filters: React.FC<FiltersProps> = ({
     }
   }, [filtersValues, fields]);
 
-  const validateFieldValues = () => {
-    const validationErrors = [];
-    // TO DO: check validation for individual fields values
-    setHasInvalidValues(!!validationErrors.length);
-
-    return validationErrors;
+  const handleError = (value) => {
+    setHasInvalidValues(value);
   };
 
   useEffect(() => {
@@ -163,7 +159,6 @@ const Filters: React.FC<FiltersProps> = ({
     setFiltersValues(newFilters);
 
     callOnChange(newFilters);
-    validateFieldValues();
   };
 
   const handleAddRow = (event) => {
@@ -242,7 +237,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <Form onSubmit={handleSubmitForm}>
+    <Form>
       {filtersValues.map((props, index) => {
         const id = generateId(props, index);
         return (
@@ -252,6 +247,7 @@ const Filters: React.FC<FiltersProps> = ({
             index={index}
             isDefaultState={isDefaultState}
             onConditionChange={handleConditionChange}
+            onError={handleError}
             onFieldChange={handleFieldChange}
             onOperatorChange={handleOperatorChange}
             onRemove={handleRemoveFilter}
@@ -269,6 +265,7 @@ const Filters: React.FC<FiltersProps> = ({
         onCancel={handleCancelFetch}
         onClearAll={handleClearAll}
         onClose={handleCloseFilters}
+        onSubmit={handleSubmitForm}
       />
     </Form>
   );
