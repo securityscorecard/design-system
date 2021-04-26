@@ -19,7 +19,7 @@ interface ComponentProps {
   max?: number;
   maxLength?: number;
   pattern?: string;
-  patternMessage?: string;
+  errorMessage?: string;
   minDate?: Date;
   maxDate?: Date;
   units?: string;
@@ -79,7 +79,7 @@ export const FieldPropTypes = PropTypes.exact({
             max: PropTypes.number,
             maxLength: PropTypes.number,
             pattern: PropTypes.string,
-            patternMessage: PropTypes.string,
+            errorMessage: PropTypes.string,
             minDate: PropTypes.instanceOf(Date),
             maxDate: PropTypes.instanceOf(Date),
             units: PropTypes.string,

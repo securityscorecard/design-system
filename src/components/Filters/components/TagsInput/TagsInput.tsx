@@ -93,7 +93,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   onChange,
   maxLength,
   pattern,
-  patternMessage,
+  errorMessage,
   placeholder = 'Enter value',
   onValidate = validatePattern,
   onError,
@@ -186,7 +186,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
           </InputContainer>
         </Tags>
       </Container>
-      {isInvalid && <Error>{patternMessage}</Error>}
+      {isInvalid && <Error>{errorMessage}</Error>}
     </>
   );
 };
@@ -198,7 +198,7 @@ TagsInput.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string),
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
-  patternMessage: PropTypes.string,
+  errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
   onValidate: PropTypes.func,
   onError: PropTypes.func,

@@ -62,7 +62,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   maxLength,
   pattern,
-  patternMessage,
+  errorMessage,
   onValidate = validatePattern,
   placeholder = 'String',
   isDisabled = false,
@@ -102,7 +102,7 @@ const Input: React.FC<InputProps> = ({
         onChange={handleOnChange}
         onKeyPress={handleKeyPress}
       />
-      {isInvalid && <Error>{patternMessage}</Error>}
+      {isInvalid && <Error>{errorMessage}</Error>}
     </>
   );
 };
@@ -111,7 +111,7 @@ Input.propTypes = {
   value: PropTypes.string,
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
-  patternMessage: PropTypes.string,
+  errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
   onValidate: PropTypes.func,

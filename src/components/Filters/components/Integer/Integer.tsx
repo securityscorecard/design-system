@@ -11,7 +11,7 @@ const Integer: React.FC<NumberProps> = ({
   min,
   max,
   placeholder = 'Integer',
-  patternMessage = 'Use only integers',
+  errorMessage = 'Use only integers',
   onError,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
@@ -38,7 +38,7 @@ const Integer: React.FC<NumberProps> = ({
         onChange={handleOnChange}
         onKeyPress={handleKeyPress}
       />
-      {isInvalid && <Error>{patternMessage}</Error>}
+      {isInvalid && <Error>{errorMessage}</Error>}
     </>
   );
 };

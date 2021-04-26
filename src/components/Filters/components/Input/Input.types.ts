@@ -6,7 +6,7 @@ export interface InputProps {
   isInvalid?: boolean;
   maxLength?: number;
   pattern?: string;
-  patternMessage?: string;
+  errorMessage?: string;
   onValidate?: (target: HTMLInputElement) => boolean;
   onError?: (boolean) => void;
 }

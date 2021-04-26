@@ -11,7 +11,7 @@ const Count: React.FC<NumberProps> = ({
   min,
   max,
   placeholder = 'Count',
-  patternMessage = 'Use only integers',
+  errorMessage = 'Use only integers',
   onError,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
@@ -37,7 +37,7 @@ const Count: React.FC<NumberProps> = ({
         onChange={handleOnChange}
         onKeyPress={handleKeyPress}
       />
-      {isInvalid && <Error>{patternMessage}</Error>}
+      {isInvalid && <Error>{errorMessage}</Error>}
     </>
   );
 };

@@ -357,7 +357,7 @@ export const fieldsInputMaxLength: Field[] = [
           component: InputFilter,
           props: {
             maxLength: 5,
-            patternMessage: 'Use less than 6 letters',
+            errorMessage: 'Use less than 6 letters',
           },
         },
         value: 'is',
@@ -517,7 +517,7 @@ export const fieldsNumberValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
-            patternMessage: 'Use numbers between 2 and 5',
+            errorMessage: 'Use numbers between 2 and 5',
           },
         },
         value: 'is',
@@ -596,7 +596,7 @@ export const fieldsCountValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
-            patternMessage: 'Use integers between 2 and 5',
+            errorMessage: 'Use integers between 2 and 5',
           },
         },
         value: 'is',
@@ -633,7 +633,7 @@ export const fieldsIntegerValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
-            patternMessage: 'Use integers between 2 and 5',
+            errorMessage: 'Use integers between 2 and 5',
           },
         },
         value: 'is',
