@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import {
   assoc,
   defaultTo,
@@ -24,6 +23,7 @@ import {
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
+import { FlexContainer } from '../FlexContainer';
 import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
 
@@ -57,12 +57,6 @@ const getDefaultState = ([firstField]: Field[]) => {
     },
   ];
 };
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
@@ -237,7 +231,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <Form>
+    <FlexContainer flexDirection="column" flexGrow={1}>
       {filtersValues.map((props, index) => {
         const id = generateId(props, index);
         return (
@@ -267,7 +261,7 @@ const Filters: React.FC<FiltersProps> = ({
         onClose={handleCloseFilters}
         onSubmit={handleSubmitForm}
       />
-    </Form>
+    </FlexContainer>
   );
 };
 

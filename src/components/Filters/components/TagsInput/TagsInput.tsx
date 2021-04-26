@@ -133,9 +133,9 @@ const TagsInput: React.FC<TagsInputProps> = ({
 
   const handleOnValidate = (event) => {
     const { target } = event;
-    const error = onValidate(target);
-    setIsInvalid(!!error);
-    onError(!!error);
+    const hasError = onValidate(target);
+    setIsInvalid(hasError);
+    onError(hasError);
   };
 
   const handleOnChange = (event) => {

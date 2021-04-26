@@ -23,9 +23,9 @@ const Count: React.FC<NumberProps> = ({
   };
   const handleOnChange = (event) => {
     onChange(event);
-    const error = !validateNumber(event.target.value, min, max);
-    setIsInvalid(error);
-    onError(error);
+    const hasError = !validateNumber(event.target.value, min, max);
+    setIsInvalid(hasError);
+    onError(hasError);
   };
 
   return (
