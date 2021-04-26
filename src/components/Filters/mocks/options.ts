@@ -517,6 +517,7 @@ export const fieldsNumberValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
+            patternMessage: 'Use numbers between 2 and 5',
           },
         },
         value: 'is',
@@ -595,6 +596,7 @@ export const fieldsCountValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
+            patternMessage: 'Use integers between 2 and 5',
           },
         },
         value: 'is',
@@ -631,6 +633,7 @@ export const fieldsIntegerValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
+            patternMessage: 'Use integers between 2 and 5',
           },
         },
         value: 'is',

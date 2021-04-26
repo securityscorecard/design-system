@@ -2,10 +2,12 @@ import PropTypes from 'prop-types';
 
 export interface NumberProps {
   value: string;
-  onChange: () => void;
+  onChange: (event: React.ReactEventHandler) => void;
   min?: number;
   max?: number;
   placeholder?: string;
+  patternMessage?: string;
+  onError?: (boolean) => void;
 }
 
 export const NumberPropTypes = {
@@ -14,4 +16,6 @@ export const NumberPropTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   placeholder: PropTypes.string,
+  patternMessage: PropTypes.string,
+  onError: PropTypes.func,
 };

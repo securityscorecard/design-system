@@ -176,7 +176,7 @@ const renderComponent = (Component, value, onChange, onError) => {
   if (typeof Component === 'object' && has('props', Component)) {
     return renderComponentWithProps(Component, value, onChange, onError);
   }
-  return <Component value={value} onChange={onChange} />;
+  return <Component value={value} onChange={onChange} onError={onError} />;
 };
 
 const FilterRow: React.FC<FilterRowProps> = ({
