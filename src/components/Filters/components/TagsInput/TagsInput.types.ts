@@ -8,6 +8,7 @@ export interface TagsInputProps {
   patternMessage?: string;
   placeholder?: string;
   onValidate?: (target: HTMLInputElement) => boolean;
+  onError?: (boolean) => void;
 }
 
 export interface TagsContainerProps extends FlexContainerProps {

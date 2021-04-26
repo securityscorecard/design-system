@@ -96,6 +96,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   patternMessage,
   placeholder = 'Enter value',
   onValidate = validatePattern,
+  onError,
 }) => {
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -134,6 +135,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
     const { target } = event;
     const error = onValidate(target);
     setIsInvalid(!!error);
+    onError(!!error);
   };
 
   const handleOnChange = (event) => {
@@ -199,4 +201,5 @@ TagsInput.propTypes = {
   patternMessage: PropTypes.string,
   placeholder: PropTypes.string,
   onValidate: PropTypes.func,
+  onError: PropTypes.func,
 };
