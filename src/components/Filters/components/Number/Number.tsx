@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { isNonEmptyString } from 'ramda-adjunct';
 
 import { StyledInput } from '../Input/Input';
 import { Error } from '../../../forms/Message';
@@ -34,7 +35,9 @@ const Number: React.FC<NumberProps> = ({
 
   const handleOnChange = (event) => {
     onChange(event);
-    const hasError = !validateNumber(event.target.value, min, max);
+    const hasError =
+      !validateNumber(event.target.value, min, max) &&
+      isNonEmptyString(event.target.value);
     setIsInvalid(hasError);
     onError(hasError);
   };

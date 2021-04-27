@@ -12,7 +12,7 @@ import {
   split,
   trim,
 } from 'ramda';
-import { isEmptyArray, isNotEmpty } from 'ramda-adjunct';
+import { isEmptyArray, isNonEmptyString, isNotEmpty } from 'ramda-adjunct';
 
 import Tag from './Tag';
 import { Error } from '../../../forms/Message';
@@ -133,7 +133,8 @@ const TagsInput: React.FC<TagsInputProps> = ({
 
   const handleOnValidate = (event) => {
     const { target } = event;
-    const hasError = onValidate(target);
+
+    const hasError = onValidate(target) && isNonEmptyString(target.value);
     setIsInvalid(hasError);
     onError(hasError);
   };

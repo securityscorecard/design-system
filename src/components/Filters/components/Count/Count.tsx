@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isNonEmptyString } from 'ramda-adjunct';
 
 import { StyledNumber } from '../Number/Number';
 import { Error } from '../../../forms/Message';
@@ -23,7 +24,9 @@ const Count: React.FC<NumberProps> = ({
   };
   const handleOnChange = (event) => {
     onChange(event);
-    const hasError = !validateNumber(event.target.value, min, max);
+    const hasError =
+      !validateNumber(event.target.value, min, max) &&
+      isNonEmptyString(event.target.value);
     setIsInvalid(hasError);
     onError(hasError);
   };

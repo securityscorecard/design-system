@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { isNonEmptyString } from 'ramda-adjunct';
 
 import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
@@ -72,7 +73,7 @@ const Input: React.FC<InputProps> = ({
 
   const handleOnValidate = (event) => {
     const { target } = event;
-    const hasError = onValidate(target);
+    const hasError = onValidate(target) && isNonEmptyString(target.value);
     setIsInvalid(hasError);
     onError(hasError);
   };

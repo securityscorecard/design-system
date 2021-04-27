@@ -71,7 +71,8 @@ const Filters: React.FC<FiltersProps> = ({
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
-  const [hasInvalidValues, setHasInvalidValues] = useState(false);
+  const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
+  const [validsValues, setValidsValues] = useState<boolean[]>([true]);
 
   useEffect(() => {
     // Set default
@@ -80,6 +81,7 @@ const Filters: React.FC<FiltersProps> = ({
       setFiltersValues(defaultState);
     } else {
       setFiltersValues(state);
+      setValidsValues(state.map((field) => Boolean(field)));
     }
   }, [state, fields]);
 
@@ -92,8 +94,12 @@ const Filters: React.FC<FiltersProps> = ({
   }, [filtersValues, fields]);
 
   const handleError = (value) => {
-    setHasInvalidValues(value);
+    const newValidsValues = validsValues;
+    newValidsValues[currentFieldIndex] = !value;
+    setValidsValues(newValidsValues);
   };
+
+  const hasInvalidValues = validsValues.some((valid) => valid === false);
 
   useEffect(() => {
     if (isNotNull(filtersValues)) {
@@ -151,6 +157,7 @@ const Filters: React.FC<FiltersProps> = ({
     newFilters[index].isApplied = false;
 
     setFiltersValues(newFilters);
+    setCurrentFieldIndex(index);
 
     callOnChange(newFilters);
   };
