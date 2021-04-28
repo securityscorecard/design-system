@@ -1,3 +1,12 @@
+# [1.0.0-alpha.55](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.54...v1.0.0-alpha.55) (2021-04-28)
+
+
+### Bug Fixes
+
+* don't mutate filters state ([27a1264](https://github.com/securityscorecard/design-system/commit/27a126432c9c2e6e9aaf2100c6286c21da36ddee))
+* filters state prop types ([3737bea](https://github.com/securityscorecard/design-system/commit/3737beaa004ff1610144a961b77fd58921ae23e9))
+* remove reference of filters state to DT store ([e6e71cb](https://github.com/securityscorecard/design-system/commit/e6e71cbdc35d89edb4fd4bdf7058de719127f58a))
+
 # [1.0.0-alpha.54](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.53...v1.0.0-alpha.54) (2021-04-21)
 
 
