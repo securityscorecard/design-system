@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { clone, map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
+import { map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils/helpers';
@@ -81,8 +81,8 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
     onClear: onSearchClear,
     ...restSearchConfig
   } = searchConfig;
-  // Use clone to remove Store reference
-  const filteringStoreState = clone(DatatableStore.useState((s) => s.filters));
+
+  const filteringStoreState = DatatableStore.useState((s) => s.filters);
   const [controlsState, setControlsState] = useState<ControlsLocalState>({
     [ControlTypes.filters]: mergeControlState(
       prepareControlState([
