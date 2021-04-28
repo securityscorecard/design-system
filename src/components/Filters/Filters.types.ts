@@ -104,6 +104,7 @@ export const FilterStatePropType = PropTypes.exact({
   condition: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
     PropTypes.instanceOf(Date),
     DateRangePickerPropTypes,
   ]),
