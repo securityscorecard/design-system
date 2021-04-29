@@ -1,3 +1,30 @@
+# [1.0.0-alpha.56](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.55...v1.0.0-alpha.56) (2021-04-29)
+
+
+### Bug Fixes
+
+* **Fields:** pass isInvalid from Filters to inputs ([471f08c](https://github.com/securityscorecard/design-system/commit/471f08c57b0f0670ce76be8061b98b8164f3a884))
+* **Filter:** remove disabled for Input ([6a5ce67](https://github.com/securityscorecard/design-system/commit/6a5ce67c455d7181fb4ab3e26761e770003cc504))
+* **Filter:** update validValues on add remove filters ([b624a67](https://github.com/securityscorecard/design-system/commit/b624a67efb7a1eb4b4f5e481f2b927fef17f21e7))
+* **FilterRow:** missing proptype ([cef2470](https://github.com/securityscorecard/design-system/commit/cef24703cc96a44a1b74a7b4ca3c648bcb5b06b6))
+* **Filters:** custom form level validation ([9224e1d](https://github.com/securityscorecard/design-system/commit/9224e1de6384f5ef5e23686cf0b2b7a0ce5f1cf1))
+* **Filters:** empty as valid + validValues array ([49b4c21](https://github.com/securityscorecard/design-system/commit/49b4c21b7c8dc3b309c0c397ae3cb7323c750e6d))
+* **Filters:** placeholder for form wide validation ([007a821](https://github.com/securityscorecard/design-system/commit/007a821c6d32cbb377ea41e3a39a40349c40294f))
+* **Filters:** re-update storyshots ([dce9a89](https://github.com/securityscorecard/design-system/commit/dce9a89f584810835a69e066dddf774cb5fcb541))
+* **Filters:** remove button height ([c646869](https://github.com/securityscorecard/design-system/commit/c646869d735b68d6ca58cc7bf3904c3e5275d5a5))
+* **Filters:** remove disabled Input styles ([3760d9d](https://github.com/securityscorecard/design-system/commit/3760d9da2de4940067539a4fbd509a13baa4b151))
+* **Lint:** lint fixes ([ddd4e3a](https://github.com/securityscorecard/design-system/commit/ddd4e3a2c7fff548b104870cfaa0ef57c11eb590))
+* **TagsInput:** remove extra isInvalid prop ([b74468f](https://github.com/securityscorecard/design-system/commit/b74468f711883abc6b91ebd4ec284fba53cd55ab))
+
+
+### Features
+
+* **Filters:** add Numbers validations ([6f69f5c](https://github.com/securityscorecard/design-system/commit/6f69f5c0bd399c86b156496761a29fb4ac3b691b))
+* **Filters:** add TagsInput error ([4ef3c38](https://github.com/securityscorecard/design-system/commit/4ef3c3879d944ce160f0e4499575a79f81ebeb1a))
+* **Filters:** add validateIPs story ([bd0abcb](https://github.com/securityscorecard/design-system/commit/bd0abcbda6dbbcb995b4f42ee68363e978949b39))
+* **Filters:** add validation for TagsInput ([017cfeb](https://github.com/securityscorecard/design-system/commit/017cfeb61fc39df0b8515f701625b3ed78000d87))
+* **Filters:** display error and external validates ([3b64243](https://github.com/securityscorecard/design-system/commit/3b6424371eb5a54980c2f74ee2f133aabc8aceaf))
+
 # [1.0.0-alpha.55](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.54...v1.0.0-alpha.55) (2021-04-28)
 
 
