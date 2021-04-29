@@ -173,7 +173,6 @@ const TagsInput: React.FC<TagsInputProps> = ({
           ))}
           <InputContainer>
             <StyledInput
-              isInvalid={isInvalid}
               maxLength={maxLength}
               pattern={pattern}
               placeholder={placeholderText}
