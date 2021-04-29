@@ -183,6 +183,7 @@ const Filters: React.FC<FiltersProps> = ({
     };
     const filtersWithNewRow = [...newFilters, newRow];
     setFiltersValues(filtersWithNewRow);
+    setValidsValues([...validsValues, true]);
 
     callOnChange(filtersWithNewRow);
   };
@@ -193,6 +194,7 @@ const Filters: React.FC<FiltersProps> = ({
     const defaultState = getDefaultState(fields);
 
     setFiltersValues(defaultState);
+    setValidsValues([true]);
 
     callOnChange(defaultState);
     onApply([]);
@@ -219,14 +221,19 @@ const Filters: React.FC<FiltersProps> = ({
 
   const handleRemoveFilter = (index) => () => {
     let newFilters;
+    let newValidsValues = validsValues;
     if (filtersValues.length > 1) {
       newFilters = [...filtersValues];
       newFilters.splice(index, 1);
+      newValidsValues.splice(index, 1);
     } else {
       newFilters = getDefaultState(fields);
+      newValidsValues = [true];
     }
 
     setFiltersValues(newFilters);
+    setValidsValues(newValidsValues);
+
     callOnChange(newFilters);
   };
 
