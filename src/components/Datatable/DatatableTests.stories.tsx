@@ -60,6 +60,15 @@ WithSelectedRows.args = {
   },
 };
 
+export const WithSelectedRowsAndExclusionLogic = DatatableTemplate.bind({});
+WithSelectedRowsAndExclusionLogic.args = {
+  ...MinimalConfig.args,
+  tableConfig: {
+    defaultSelectedRowIds: [1, 6, 24],
+    hasOnlyPerPageSelection: false,
+  },
+};
+
 export const WithNoData = DatatableTemplate.bind({});
 WithNoData.args = {
   ...MinimalConfig.args,

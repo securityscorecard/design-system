@@ -10,6 +10,7 @@ import {
   pipe,
   propEq,
   propSatisfies,
+  update,
 } from 'ramda';
 import {
   isEmptyArray,
@@ -132,38 +133,44 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const handleFieldChange = (field, condition, value, index) => {
-    const newFilters = [...filtersValues];
-    newFilters[index].field = field;
-    newFilters[index].condition = condition;
-    newFilters[index].value = value;
-    newFilters[index].isApplied = false;
+    setFiltersValues((filters) => {
+      const newFilters = update(
+        index,
+        { ...filters[index], field, condition, value, isApplied: false },
+        filters,
+      );
+      callOnChange(newFilters);
 
-    setFiltersValues(newFilters);
-
-    callOnChange(newFilters);
+      return newFilters;
+    });
   };
 
   const handleConditionChange = (condition, value, index) => {
-    const newFilters = [...filtersValues];
-    newFilters[index].condition = condition;
-    newFilters[index].value = value;
-    newFilters[index].isApplied = false;
+    setFiltersValues((filters) => {
+      const newFilters = update(
+        index,
+        { ...filters[index], condition, value, isApplied: false },
+        filters,
+      );
+      callOnChange(newFilters);
 
-    setFiltersValues(newFilters);
-
-    callOnChange(newFilters);
+      return newFilters;
+    });
   };
 
   const handleValueChange = (value, index) => {
-    const newFilters = [...filtersValues];
-    newFilters[index].value = value || undefined;
-    newFilters[index].isApplied = false;
+    setFiltersValues((filters) => {
+      const newFilters = update(
+        index,
+        { ...filters[index], value: value || undefined, isApplied: false },
+        filters,
+      );
+      callOnChange(newFilters);
+      // To Do : Remove
+      setCurrentFieldIndex(index);
 
-    setFiltersValues(newFilters);
-    // To Do : Remove
-    setCurrentFieldIndex(index);
-
-    callOnChange(newFilters);
+      return newFilters;
+    });
   };
 
   const handleAddRow = (event) => {

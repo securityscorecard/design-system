@@ -1,6 +1,6 @@
 {
   "name": "@securityscorecard/design-system",
-  "version": "1.0.0-alpha.53",
+  "version": "1.0.0-alpha.55",
   "description": "Security Scorecard Design System",
   "author": "Radek Podrazky <rpodrazky@securityscorecard.io>",
   "license": "Apache-2.0",
@@ -123,6 +123,7 @@
     "rollup-plugin-typescript2": "^0.27.1",
     "rollup-plugin-visualizer": "^4.2.2",
     "semantic-release": "^17.2.3",
+    "storybook-addon-designs": "^5.4.5",
     "storycap": "3.0.4",
     "styled-components": "^5.2.3",
     "stylelint": "^13.12.0",
