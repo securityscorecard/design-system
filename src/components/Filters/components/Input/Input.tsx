@@ -18,9 +18,7 @@ const stateStyles = css`
   outline: none;
 `;
 
-export const StyledInput = styled.input.attrs<InputProps>(({ isDisabled }) => ({
-  disabled: isDisabled,
-}))<InputProps>`
+export const StyledInput = styled.input<InputProps>`
   display: block;
   width: 100%;
   height: ${pxToRem(32)};
@@ -66,7 +64,6 @@ const Input: React.FC<InputProps> = ({
   errorMessage,
   onValidate = validatePattern,
   placeholder = 'String',
-  isDisabled = false,
   isInvalid = false,
   onError,
 }) => {
@@ -90,7 +87,6 @@ const Input: React.FC<InputProps> = ({
   return (
     <>
       <StyledInput
-        isDisabled={isDisabled}
         isInvalid={isInvalid}
         maxLength={maxLength}
         pattern={pattern}
@@ -112,7 +108,6 @@ Input.propTypes = {
   pattern: PropTypes.string,
   errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
-  isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
   onValidate: PropTypes.func,
   onError: PropTypes.func,
