@@ -72,7 +72,7 @@ const Filters: React.FC<FiltersProps> = ({
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
-  const [validsValues, setValidsValues] = useState<boolean[]>([true]);
+  const [validValues, setValidValues] = useState<boolean[]>([true]);
 
   useEffect(() => {
     // Set default
@@ -81,7 +81,7 @@ const Filters: React.FC<FiltersProps> = ({
       setFiltersValues(defaultState);
     } else {
       setFiltersValues(state);
-      setValidsValues(state.map((field) => Boolean(field)));
+      setValidValues(state.map((field) => Boolean(field)));
     }
   }, [state, fields]);
 
@@ -94,14 +94,13 @@ const Filters: React.FC<FiltersProps> = ({
   }, [filtersValues, fields]);
 
   const handleError = (hasError, index) => {
-    // TO DO: handle all validations in FilterRow in handleValueChange
-    const newValidsValues = validsValues;
-    newValidsValues[index] = !hasError;
+    const newValidValues = [...validValues];
+    newValidValues[index] = !hasError;
 
-    setValidsValues(newValidsValues);
+    setValidValues(newValidValues);
   };
 
-  const hasInvalidValues = validsValues.some((valid) => valid === false);
+  const hasInvalidValues = validValues.some((valid) => valid === false);
 
   useEffect(() => {
     if (isNotNull(filtersValues)) {
@@ -183,7 +182,7 @@ const Filters: React.FC<FiltersProps> = ({
     };
     const filtersWithNewRow = [...newFilters, newRow];
     setFiltersValues(filtersWithNewRow);
-    setValidsValues([...validsValues, true]);
+    setValidValues([...validValues, true]);
 
     callOnChange(filtersWithNewRow);
   };
@@ -194,7 +193,7 @@ const Filters: React.FC<FiltersProps> = ({
     const defaultState = getDefaultState(fields);
 
     setFiltersValues(defaultState);
-    setValidsValues([true]);
+    setValidValues([true]);
 
     callOnChange(defaultState);
     onApply([]);
@@ -221,18 +220,18 @@ const Filters: React.FC<FiltersProps> = ({
 
   const handleRemoveFilter = (index) => () => {
     let newFilters;
-    let newValidsValues = validsValues;
+    let newValidValues = [...validValues];
     if (filtersValues.length > 1) {
       newFilters = [...filtersValues];
       newFilters.splice(index, 1);
-      newValidsValues.splice(index, 1);
+      newValidValues.splice(index, 1);
     } else {
       newFilters = getDefaultState(fields);
-      newValidsValues = [true];
+      newValidValues = [true];
     }
 
     setFiltersValues(newFilters);
-    setValidsValues(newValidsValues);
+    setValidValues(newValidValues);
 
     callOnChange(newFilters);
   };
@@ -261,7 +260,7 @@ const Filters: React.FC<FiltersProps> = ({
             fields={fields}
             index={index}
             isDefaultState={isDefaultState}
-            isInvalid={validsValues[index] === false}
+            isInvalid={validValues[index] === false}
             onConditionChange={handleConditionChange}
             onError={(hasError) => handleError(hasError, index)}
             onFieldChange={handleFieldChange}
