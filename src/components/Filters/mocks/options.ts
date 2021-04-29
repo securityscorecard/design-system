@@ -102,7 +102,14 @@ export const fields: Field[] = [
         label: 'is less than',
       },
       {
-        component: NumberFilter,
+        component: {
+          component: NumberFilter,
+          props: {
+            max: 50,
+            min: 1,
+            errorMessage: 'Use numbers between 1 and 50',
+          },
+        },
         value: 'is greater than',
         label: 'is greater than',
       },

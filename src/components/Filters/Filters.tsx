@@ -73,8 +73,6 @@ const Filters: React.FC<FiltersProps> = ({
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
   const [validsValues, setValidsValues] = useState<boolean[]>([true]);
-  // To Do : Remove
-  const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
 
   useEffect(() => {
     // Set default
@@ -95,10 +93,10 @@ const Filters: React.FC<FiltersProps> = ({
     }
   }, [filtersValues, fields]);
 
-  const handleError = (value) => {
-    // To Do : handle all validations in FilterRow in handleValueChange
+  const handleError = (hasError, index) => {
+    // TO DO: handle all validations in FilterRow in handleValueChange
     const newValidsValues = validsValues;
-    newValidsValues[currentFieldIndex] = !value;
+    newValidsValues[index] = !hasError;
 
     setValidsValues(newValidsValues);
   };
@@ -166,8 +164,6 @@ const Filters: React.FC<FiltersProps> = ({
         filters,
       );
       callOnChange(newFilters);
-      // To Do : Remove
-      setCurrentFieldIndex(index);
 
       return newFilters;
     });
@@ -260,7 +256,7 @@ const Filters: React.FC<FiltersProps> = ({
             isDefaultState={isDefaultState}
             isInvalid={validsValues[index] === false}
             onConditionChange={handleConditionChange}
-            onError={handleError}
+            onError={(hasError) => handleError(hasError, index)}
             onFieldChange={handleFieldChange}
             onOperatorChange={handleOperatorChange}
             onRemove={handleRemoveFilter}
