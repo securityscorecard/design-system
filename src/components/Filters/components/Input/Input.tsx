@@ -35,11 +35,6 @@ export const StyledInput = styled.input<InputProps>`
     border-color: ${getFormStyle('focusBorderColor')};
   }
 
-  &:disabled {
-    background: ${getFormStyle('disabledBgColor')};
-    border-color: ${getFormStyle('disabledBorderColor')};
-  }
-
   ::placeholder,
   ::-webkit-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
