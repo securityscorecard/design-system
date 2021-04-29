@@ -87,6 +87,7 @@ export const FieldPropTypes = PropTypes.exact({
               PropTypes.string,
               DateRangePlaceholderPropTypes,
             ]),
+            onValidate: PropTypes.func,
           }),
         }),
       ]).isRequired,
