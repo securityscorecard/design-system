@@ -119,12 +119,19 @@ const getFieldOptions = map(normalizeOptions);
 
 const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
-const renderComponentWithProps = (Component, value, onChange, onError) => {
+const renderComponentWithProps = (
+  Component,
+  value,
+  onChange,
+  onError,
+  isInvalid,
+) => {
   const { component: ComponentWithProps, props } = Component;
   const { units } = props;
   return units ? (
     <FlexContainer alignItems="center">
       <ComponentWithProps
+        isInvalid={isInvalid}
         value={value}
         onChange={onChange}
         onError={onError}
@@ -134,6 +141,7 @@ const renderComponentWithProps = (Component, value, onChange, onError) => {
     </FlexContainer>
   ) : (
     <ComponentWithProps
+      isInvalid={isInvalid}
       value={value}
       onChange={onChange}
       onError={onError}
@@ -163,7 +171,7 @@ const renderSelectComponent = (Component, value, onChange) => {
   );
 };
 
-const renderComponent = (Component, value, onChange, onError) => {
+const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   if (isUndefined(Component)) return null;
   // Select
   if (
@@ -174,9 +182,22 @@ const renderComponent = (Component, value, onChange, onError) => {
   }
   // Component with props
   if (typeof Component === 'object' && has('props', Component)) {
-    return renderComponentWithProps(Component, value, onChange, onError);
+    return renderComponentWithProps(
+      Component,
+      value,
+      onChange,
+      onError,
+      isInvalid,
+    );
   }
-  return <Component value={value} onChange={onChange} onError={onError} />;
+  return (
+    <Component
+      isInvalid={isInvalid}
+      value={value}
+      onChange={onChange}
+      onError={onError}
+    />
+  );
 };
 
 const FilterRow: React.FC<FilterRowProps> = ({
@@ -193,6 +214,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   condition: conditionValue,
   value: componentValue,
   isApplied,
+  isInvalid,
   onError,
 }) => {
   const { field, conditions, condition, component } = useFilterRow(
@@ -295,7 +317,13 @@ const FilterRow: React.FC<FilterRowProps> = ({
         />
       </SplitField>
       <SplitField>
-        {renderComponent(component, componentValue, handleValueChange, onError)}
+        {renderComponent(
+          component,
+          componentValue,
+          handleValueChange,
+          onError,
+          isInvalid,
+        )}
       </SplitField>
     </FlexContainer>
   );
@@ -311,6 +339,7 @@ FilterRow.propTypes = {
   operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
   isApplied: PropTypes.bool.isRequired,
   isDefaultState: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
   onFieldChange: PropTypes.func.isRequired,
   onConditionChange: PropTypes.func.isRequired,

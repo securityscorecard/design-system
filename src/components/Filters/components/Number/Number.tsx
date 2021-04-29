@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
 
@@ -23,10 +23,9 @@ const Number: React.FC<NumberProps> = ({
   max,
   placeholder = 'Number',
   errorMessage = 'Use only numbers',
+  isInvalid = false,
   onError,
 }) => {
-  const [isInvalid, setIsInvalid] = useState(false);
-
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -38,13 +37,13 @@ const Number: React.FC<NumberProps> = ({
     const hasError =
       !validateNumber(event.target.value, min, max) &&
       isNonEmptyString(event.target.value);
-    setIsInvalid(hasError);
     onError(hasError);
   };
 
   return (
     <>
       <StyledNumber
+        isInvalid={isInvalid}
         placeholder={placeholder}
         step="any"
         type="number"

@@ -7,6 +7,7 @@ export interface NumberProps {
   max?: number;
   placeholder?: string;
   errorMessage?: string;
+  isInvalid?: boolean;
   onError?: (boolean) => void;
 }
 
@@ -17,5 +18,6 @@ export const NumberPropTypes = {
   max: PropTypes.number,
   placeholder: PropTypes.string,
   errorMessage: PropTypes.string,
+  isInvalid: PropTypes.bool,
   onError: PropTypes.func,
 };

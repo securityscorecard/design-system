@@ -95,12 +95,12 @@ const TagsInput: React.FC<TagsInputProps> = ({
   pattern,
   errorMessage,
   placeholder = 'Enter value',
+  isInvalid = false,
   onValidate = validatePattern,
   onError,
 }) => {
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(false);
 
   const addNewTag = (value) => {
     const valueArray = pipe(split(';'), map(trim), filter(isNotEmpty))(value);
@@ -135,7 +135,6 @@ const TagsInput: React.FC<TagsInputProps> = ({
     const { target } = event;
 
     const hasError = onValidate(target) && isNonEmptyString(target.value);
-    setIsInvalid(hasError);
     onError(hasError);
   };
 
@@ -174,6 +173,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
           ))}
           <InputContainer>
             <StyledInput
+              isInvalid={isInvalid}
               maxLength={maxLength}
               pattern={pattern}
               placeholder={placeholderText}
@@ -201,6 +201,7 @@ TagsInput.propTypes = {
   pattern: PropTypes.string,
   errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
+  isInvalid: PropTypes.bool,
   onValidate: PropTypes.func,
   onError: PropTypes.func,
 };

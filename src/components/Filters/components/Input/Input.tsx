@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
@@ -67,14 +67,12 @@ const Input: React.FC<InputProps> = ({
   onValidate = validatePattern,
   placeholder = 'String',
   isDisabled = false,
+  isInvalid = false,
   onError,
 }) => {
-  const [isInvalid, setIsInvalid] = useState(false);
-
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);
-    setIsInvalid(hasError);
     onError(hasError);
   };
 
@@ -115,6 +113,7 @@ Input.propTypes = {
   errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
+  isInvalid: PropTypes.bool,
   onValidate: PropTypes.func,
   onError: PropTypes.func,
 };
