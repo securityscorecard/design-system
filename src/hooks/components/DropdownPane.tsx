@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { transparentize } from 'polished';
 
 import {
-  createPaddingSpacing,
   getBorderRadius,
   getColor,
   getDepth,
@@ -16,7 +16,6 @@ import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: fixed;
-  ${createPaddingSpacing({ vertical: 0.4 })};
   background: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
   font-family: ${getFontFamily('base')};
@@ -26,6 +25,8 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   border: 1px solid ${getColor('graphiteB')};
   border-radius: ${getBorderRadius};
 
+  ${({ isElevated }) =>
+    isElevated && `box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')}`};
   ${({ width }) => width && `width: ${width}px`};
   ${({ left }) => left && `left: ${left}px`};
   ${({ right }) => right && `right: ${right}px`};

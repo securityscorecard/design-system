@@ -5,6 +5,8 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Dropdown from './Dropdown';
 import { subactionsMock } from '../mocks/actions';
 import { DropdownProps } from './Dropdown.types';
+import { PortalPlacements } from '../../../hooks/useCalculatePortalPlacements.enums';
+import { FlexContainer } from '../../FlexContainer';
 
 export default {
   title: 'components/Datatable/internalComponents/Dropdown',
@@ -13,13 +15,7 @@ export default {
     docs: { disable: true },
     previewTabs: { 'storybook/docs/panel': { hidden: true } },
   },
-  decorators: [
-    (storyFn) => (
-      <MemoryRouter>
-        <div style={{ margin: '0 auto', width: '200px' }}>{storyFn()}</div>
-      </MemoryRouter>
-    ),
-  ],
+  decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
   argTypes: {
     actions: {
       table: {
@@ -50,18 +46,26 @@ export default {
       },
     },
     defaultIsOpen: { control: 'boolean' },
+    placement: {
+      options: ['bottom', 'bottom-left', 'bottom-right'],
+      control: { type: 'select' },
+    },
   },
 } as Meta;
 
 export const Default: Story<DropdownProps> = (args) => (
-  <Dropdown {...args}>Dropdown handler</Dropdown>
+  <FlexContainer justifyContent="center">
+    <Dropdown {...args}>Dropdown handler</Dropdown>
+  </FlexContainer>
 );
 Default.args = {
   actions: subactionsMock,
 };
 
 export const OpenedOnInit: Story<DropdownProps> = (args) => (
-  <Dropdown {...args}>Dropdown handler</Dropdown>
+  <FlexContainer justifyContent="center">
+    <Dropdown {...args}>Dropdown handler</Dropdown>
+  </FlexContainer>
 );
 OpenedOnInit.args = {
   ...Default.args,
@@ -69,9 +73,35 @@ OpenedOnInit.args = {
 };
 
 export const WithCustomWidth: Story<DropdownProps> = (args) => (
-  <Dropdown {...args}>Dropdown handler</Dropdown>
+  <FlexContainer justifyContent="center">
+    <Dropdown {...args}>Dropdown handler</Dropdown>
+  </FlexContainer>
 );
 WithCustomWidth.args = {
+  ...OpenedOnInit.args,
+  paneWidth: 300,
+};
+
+export const Placements: Story<DropdownProps> = (args) => (
+  <>
+    <FlexContainer justifyContent="center" margin={{ bottom: 5 }}>
+      <Dropdown {...args} placement={PortalPlacements.bottom}>
+        Bottom
+      </Dropdown>
+    </FlexContainer>
+    <FlexContainer justifyContent="flex-start" margin={{ bottom: 5 }}>
+      <Dropdown {...args} placement={PortalPlacements.bottomLeft}>
+        Left
+      </Dropdown>
+    </FlexContainer>
+    <FlexContainer justifyContent="flex-end" margin={{ bottom: 5 }}>
+      <Dropdown {...args} placement={PortalPlacements.bottomRight}>
+        Right
+      </Dropdown>
+    </FlexContainer>
+  </>
+);
+Placements.args = {
   ...OpenedOnInit.args,
   paneWidth: 300,
 };

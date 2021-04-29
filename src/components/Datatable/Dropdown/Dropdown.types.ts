@@ -1,5 +1,6 @@
 import { To } from 'history';
 
+import { UseDropdownOptions } from '../../../hooks/useDropdown.types';
 import { ActionKinds } from '../types/Action.types';
 
 export interface DropdownLinkProps {
@@ -11,7 +12,8 @@ export interface DropdownLinkProps {
 export interface DropdownProps {
   actions: ActionKinds[];
   children: React.ReactNode | ((isActive: boolean) => JSX.Element);
-  defaultIsOpen?: boolean;
-  paneWidth?: number;
+  defaultIsOpen?: UseDropdownOptions['defaultIsPaneDisplayed'];
+  paneWidth?: UseDropdownOptions['paneWidth'];
   className?: string;
+  placement?: UseDropdownOptions['placement'];
 }

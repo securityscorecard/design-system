@@ -1,7 +1,8 @@
 import { Placements } from '../../../hooks/useCalculatePortalPlacement.types';
+import { Extends } from '../../../types/utils.types';
 
 export type UseTooltipOptions = {
-  placement: Placements;
+  placement: Extends<Placements, 'top' | 'bottom' | 'left' | 'right'>;
   defaultIsPopupDisplayed?: boolean;
 };
 
