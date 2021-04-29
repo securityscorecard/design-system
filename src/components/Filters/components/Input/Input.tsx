@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { isNonEmptyString } from 'ramda-adjunct';
 
 import { InputProps } from './Input.types';
+import { Error } from '../../../forms/Message';
 import {
   getBorderRadius,
   getFormStyle,
   pxToRem,
 } from '../../../../utils/helpers';
+import { validatePattern } from '../../helpers';
 
 const stateStyles = css`
   padding: ${pxToRem(3, 15)};
@@ -15,7 +18,7 @@ const stateStyles = css`
   outline: none;
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<InputProps>`
   display: block;
   width: 100%;
   height: ${pxToRem(32)};
@@ -32,11 +35,6 @@ export const StyledInput = styled.input`
     border-color: ${getFormStyle('focusBorderColor')};
   }
 
-  &:invalid {
-    ${stateStyles}
-    border-color: ${getFormStyle('invalidBorderColor')};
-  }
-
   ::placeholder,
   ::-webkit-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
@@ -44,6 +42,13 @@ export const StyledInput = styled.input`
   :-ms-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
   }
+
+  ${({ isInvalid }) =>
+    isInvalid &&
+    css`
+      ${stateStyles}
+      border-color: ${getFormStyle('invalidBorderColor')};
+    `}
 `;
 
 const Input: React.FC<InputProps> = ({
@@ -51,18 +56,21 @@ const Input: React.FC<InputProps> = ({
   onChange,
   maxLength,
   pattern,
-  patternMessage,
+  errorMessage,
+  onValidate = validatePattern,
   placeholder = 'String',
+  isInvalid = false,
+  onError,
 }) => {
-  const handleOnChange = (event) => {
-    if (patternMessage) {
-      const { target } = event;
-      target.setCustomValidity(
-        target.validity.patternMismatch ? patternMessage : '',
-      );
-    }
+  const handleOnValidate = (event) => {
+    const { target } = event;
+    const hasError = onValidate(target) && isNonEmptyString(target.value);
+    onError(hasError);
+  };
 
+  const handleOnChange = (event) => {
     onChange(event);
+    handleOnValidate(event);
   };
 
   const handleKeyPress = (event) => {
@@ -72,25 +80,31 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <StyledInput
-      maxLength={maxLength}
-      pattern={pattern}
-      placeholder={placeholder}
-      type="text"
-      value={value}
-      onChange={handleOnChange}
-      onKeyPress={handleKeyPress}
-    />
+    <>
+      <StyledInput
+        isInvalid={isInvalid}
+        maxLength={maxLength}
+        pattern={pattern}
+        placeholder={placeholder}
+        type="text"
+        value={value}
+        onBlur={handleOnValidate}
+        onChange={handleOnChange}
+        onKeyPress={handleKeyPress}
+      />
+      {isInvalid && <Error>{errorMessage}</Error>}
+    </>
   );
 };
-
-export default Input;
-
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
   maxLength: PropTypes.number,
   pattern: PropTypes.string,
-  patternMessage: PropTypes.string,
+  errorMessage: PropTypes.string,
   placeholder: PropTypes.string,
+  isInvalid: PropTypes.bool,
+  onValidate: PropTypes.func,
+  onError: PropTypes.func,
 };
+export default Input;

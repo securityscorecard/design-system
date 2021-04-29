@@ -6,8 +6,10 @@ import Filters from '../../Filters';
 import { FlexContainer } from '../../../FlexContainer';
 import {
   fieldsInput,
+  fieldsInputMaxLength,
   fieldsInputPlaceholderUnits,
-  fieldsInputValidation,
+  fieldsValidateDomainsExternal,
+  fieldsValidateIPsExternal,
 } from '../../mocks/options';
 
 export default {
@@ -27,10 +29,34 @@ export const Input: Story = () => (
   </FlexContainer>
 );
 
-export const InputValidation: Story = () => (
+export const InputValidationMaxLength: Story = () => (
   <FlexContainer margin={{ left: 3 }}>
     <Filters
-      fields={fieldsInputValidation}
+      fields={fieldsInputMaxLength}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const ExternalValidationDomain: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsValidateDomainsExternal}
+      onApply={action('onApply')}
+      onCancel={action('onCancel')}
+      onChange={action('onChange')}
+      onClose={action('onClose')}
+    />
+  </FlexContainer>
+);
+
+export const ExternalValidationIps: Story = () => (
+  <FlexContainer margin={{ left: 3 }}>
+    <Filters
+      fields={fieldsValidateIPsExternal}
       onApply={action('onApply')}
       onCancel={action('onCancel')}
       onChange={action('onChange')}

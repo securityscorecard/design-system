@@ -119,17 +119,34 @@ const getFieldOptions = map(normalizeOptions);
 
 const isArrayOfOptionObjects = both(isArray, pipe(head, has('value')));
 
-const renderComponentWithProps = (Component, value, onChange) => {
+const renderComponentWithProps = (
+  Component,
+  value,
+  onChange,
+  onError,
+  isInvalid,
+) => {
   const { component: ComponentWithProps, props } = Component;
   const { units } = props;
-
   return units ? (
     <FlexContainer alignItems="center">
-      <ComponentWithProps value={value} onChange={onChange} {...props} />
+      <ComponentWithProps
+        isInvalid={isInvalid}
+        value={value}
+        onChange={onChange}
+        onError={onError}
+        {...props}
+      />
       <Units size={TextSizes.md}>{units}</Units>
     </FlexContainer>
   ) : (
-    <ComponentWithProps value={value} onChange={onChange} {...props} />
+    <ComponentWithProps
+      isInvalid={isInvalid}
+      value={value}
+      onChange={onChange}
+      onError={onError}
+      {...props}
+    />
   );
 };
 
@@ -154,9 +171,8 @@ const renderSelectComponent = (Component, value, onChange) => {
   );
 };
 
-const renderComponent = (Component, value, onChange) => {
+const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   if (isUndefined(Component)) return null;
-
   // Select
   if (
     typeof Component === 'object' &&
@@ -166,10 +182,22 @@ const renderComponent = (Component, value, onChange) => {
   }
   // Component with props
   if (typeof Component === 'object' && has('props', Component)) {
-    return renderComponentWithProps(Component, value, onChange);
+    return renderComponentWithProps(
+      Component,
+      value,
+      onChange,
+      onError,
+      isInvalid,
+    );
   }
-
-  return <Component value={value} onChange={onChange} />;
+  return (
+    <Component
+      isInvalid={isInvalid}
+      value={value}
+      onChange={onChange}
+      onError={onError}
+    />
+  );
 };
 
 const FilterRow: React.FC<FilterRowProps> = ({
@@ -186,6 +214,8 @@ const FilterRow: React.FC<FilterRowProps> = ({
   condition: conditionValue,
   value: componentValue,
   isApplied,
+  isInvalid,
+  onError,
 }) => {
   const { field, conditions, condition, component } = useFilterRow(
     fields,
@@ -287,7 +317,13 @@ const FilterRow: React.FC<FilterRowProps> = ({
         />
       </SplitField>
       <SplitField>
-        {renderComponent(component, componentValue, handleValueChange)}
+        {renderComponent(
+          component,
+          componentValue,
+          handleValueChange,
+          onError,
+          isInvalid,
+        )}
       </SplitField>
     </FlexContainer>
   );
@@ -303,6 +339,7 @@ FilterRow.propTypes = {
   operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
   isApplied: PropTypes.bool.isRequired,
   isDefaultState: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool.isRequired,
   onOperatorChange: PropTypes.func.isRequired,
   onFieldChange: PropTypes.func.isRequired,
   onConditionChange: PropTypes.func.isRequired,
@@ -314,4 +351,5 @@ FilterRow.propTypes = {
     PropTypes.instanceOf(Date),
     DateRangePickerPropTypes,
   ]),
+  onError: PropTypes.func,
 };

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import {
   assoc,
   defaultTo,
@@ -25,6 +24,7 @@ import {
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
+import { FlexContainer } from '../FlexContainer';
 import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
 
@@ -59,12 +59,6 @@ const getDefaultState = ([firstField]: Field[]) => {
   ];
 };
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
 const Filters: React.FC<FiltersProps> = ({
   fields,
   state,
@@ -78,6 +72,7 @@ const Filters: React.FC<FiltersProps> = ({
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
+  const [validValues, setValidValues] = useState<boolean[]>([true]);
 
   useEffect(() => {
     // Set default
@@ -86,6 +81,7 @@ const Filters: React.FC<FiltersProps> = ({
       setFiltersValues(defaultState);
     } else {
       setFiltersValues(state);
+      setValidValues(state.map((field) => Boolean(field)));
     }
   }, [state, fields]);
 
@@ -96,6 +92,15 @@ const Filters: React.FC<FiltersProps> = ({
       setIsDefaultState(equals(filtersValues, defaultState));
     }
   }, [filtersValues, fields]);
+
+  const handleError = (hasError, index) => {
+    const newValidValues = [...validValues];
+    newValidValues[index] = !hasError;
+
+    setValidValues(newValidValues);
+  };
+
+  const hasInvalidValues = validValues.some((valid) => valid === false);
 
   useEffect(() => {
     if (isNotNull(filtersValues)) {
@@ -177,6 +182,7 @@ const Filters: React.FC<FiltersProps> = ({
     };
     const filtersWithNewRow = [...newFilters, newRow];
     setFiltersValues(filtersWithNewRow);
+    setValidValues([...validValues, true]);
 
     callOnChange(filtersWithNewRow);
   };
@@ -187,6 +193,7 @@ const Filters: React.FC<FiltersProps> = ({
     const defaultState = getDefaultState(fields);
 
     setFiltersValues(defaultState);
+    setValidValues([true]);
 
     callOnChange(defaultState);
     onApply([]);
@@ -213,27 +220,29 @@ const Filters: React.FC<FiltersProps> = ({
 
   const handleRemoveFilter = (index) => () => {
     let newFilters;
+    let newValidValues = [...validValues];
     if (filtersValues.length > 1) {
       newFilters = [...filtersValues];
       newFilters.splice(index, 1);
+      newValidValues.splice(index, 1);
     } else {
       newFilters = getDefaultState(fields);
+      newValidValues = [true];
     }
 
     setFiltersValues(newFilters);
+    setValidValues(newValidValues);
 
     callOnChange(newFilters);
   };
 
   const handleCloseFilters = (event) => {
     event.preventDefault();
-
     onClose();
   };
 
   const handleCancelFetch = (event) => {
     event.preventDefault();
-
     onCancel();
   };
 
@@ -242,7 +251,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <Form onSubmit={handleSubmitForm}>
+    <FlexContainer flexDirection="column" flexGrow={1}>
       {filtersValues.map((props, index) => {
         const id = generateId(props, index);
         return (
@@ -251,7 +260,9 @@ const Filters: React.FC<FiltersProps> = ({
             fields={fields}
             index={index}
             isDefaultState={isDefaultState}
+            isInvalid={validValues[index] === false}
             onConditionChange={handleConditionChange}
+            onError={(hasError) => handleError(hasError, index)}
             onFieldChange={handleFieldChange}
             onOperatorChange={handleOperatorChange}
             onRemove={handleRemoveFilter}
@@ -262,14 +273,16 @@ const Filters: React.FC<FiltersProps> = ({
       })}
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
+        isApplyDisabled={hasInvalidValues}
         isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onCancel={handleCancelFetch}
         onClearAll={handleClearAll}
         onClose={handleCloseFilters}
+        onSubmit={handleSubmitForm}
       />
-    </Form>
+    </FlexContainer>
   );
 };
 

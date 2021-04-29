@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { isNonEmptyString } from 'ramda-adjunct';
 
 import { StyledInput } from '../Input/Input';
+import { Error } from '../../../forms/Message';
+import { validateNumber } from '../../helpers';
 import { NumberPropTypes, NumberProps } from './Number.types';
 
 export const StyledNumber = styled(StyledInput)`
@@ -19,6 +22,9 @@ const Number: React.FC<NumberProps> = ({
   min,
   max,
   placeholder = 'Number',
+  errorMessage = 'Use only numbers',
+  isInvalid = false,
+  onError,
 }) => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -26,17 +32,27 @@ const Number: React.FC<NumberProps> = ({
     }
   };
 
+  const handleOnChange = (event) => {
+    onChange(event);
+    const hasError =
+      !validateNumber(event.target.value, min, max) &&
+      isNonEmptyString(event.target.value);
+    onError(hasError);
+  };
+
   return (
-    <StyledNumber
-      max={max}
-      min={min}
-      placeholder={placeholder}
-      step="any"
-      type="number"
-      value={value}
-      onChange={onChange}
-      onKeyPress={handleKeyPress}
-    />
+    <>
+      <StyledNumber
+        isInvalid={isInvalid}
+        placeholder={placeholder}
+        step="any"
+        type="number"
+        value={value}
+        onChange={handleOnChange}
+        onKeyPress={handleKeyPress}
+      />
+      {isInvalid && <Error>{errorMessage}</Error>}
+    </>
   );
 };
 

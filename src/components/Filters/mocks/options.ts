@@ -10,6 +10,7 @@ import {
 } from '../components';
 import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
+import { patterns, validateDomains, validateIPs } from './validations';
 
 export const fields: Field[] = [
   {
@@ -19,8 +20,7 @@ export const fields: Field[] = [
           component: InputFilter,
           props: {
             maxLength: 15,
-            pattern: '[a-zA-Z]+',
-            patternMessage: 'Use only alphabets',
+            ...patterns.string,
           },
         },
 
@@ -28,7 +28,13 @@ export const fields: Field[] = [
         label: 'is',
       },
       {
-        component: InputFilter,
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.domain,
+            onValidate: validateDomains,
+          },
+        },
         value: 'is not',
         label: 'is not',
       },
@@ -96,7 +102,14 @@ export const fields: Field[] = [
         label: 'is less than',
       },
       {
-        component: NumberFilter,
+        component: {
+          component: NumberFilter,
+          props: {
+            max: 50,
+            min: 1,
+            errorMessage: 'Use numbers between 1 and 50',
+          },
+        },
         value: 'is greater than',
         label: 'is greater than',
       },
@@ -327,7 +340,12 @@ export const fieldsInput: Field[] = [
   {
     conditions: [
       {
-        component: InputFilter,
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.string,
+          },
+        },
         value: 'is',
         label: 'is',
         isDefault: true,
@@ -338,7 +356,7 @@ export const fieldsInput: Field[] = [
   },
 ];
 
-export const fieldsInputValidation: Field[] = [
+export const fieldsInputMaxLength: Field[] = [
   {
     conditions: [
       {
@@ -346,8 +364,7 @@ export const fieldsInputValidation: Field[] = [
           component: InputFilter,
           props: {
             maxLength: 5,
-            pattern: '[a-zA-Z]+',
-            patternMessage: 'Use only alphabets',
+            errorMessage: 'Use less than 6 letters',
           },
         },
         value: 'is',
@@ -381,6 +398,50 @@ export const fieldsInputPlaceholderUnits: Field[] = [
   },
 ];
 
+export const fieldsValidateDomainsExternal: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.domain,
+            onValidate: validateDomains,
+            placeholder: 'exact-domain.com',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'Domain',
+  },
+];
+
+export const fieldsValidateIPsExternal: Field[] = [
+  {
+    conditions: [
+      {
+        component: {
+          component: InputFilter,
+          props: {
+            ...patterns.ip,
+            onValidate: validateIPs,
+            placeholder: '255.255.255.255',
+          },
+        },
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+    ],
+    value: 'domain',
+    label: 'IP Address',
+  },
+];
+
 export const fieldsTagsInput: Field[] = [
   {
     conditions: [
@@ -404,8 +465,8 @@ export const fieldsTagsInputValidation: Field[] = [
           component: TagsInputFilter,
           props: {
             maxLength: 15,
-            pattern: '[a-zA-Z;]+',
-            patternMessage: 'Use only alphabets',
+            ...patterns.number,
+            placeholder: 'Enter only numbers',
           },
         },
         value: 'is',
@@ -463,6 +524,7 @@ export const fieldsNumberValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
+            errorMessage: 'Use numbers between 2 and 5',
           },
         },
         value: 'is',
@@ -541,6 +603,7 @@ export const fieldsCountValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
+            errorMessage: 'Use integers between 2 and 5',
           },
         },
         value: 'is',
@@ -577,6 +640,7 @@ export const fieldsIntegerValidation: Field[] = [
           props: {
             max: 5,
             min: 2,
+            errorMessage: 'Use integers between 2 and 5',
           },
         },
         value: 'is',
