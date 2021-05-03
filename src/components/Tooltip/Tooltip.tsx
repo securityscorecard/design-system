@@ -41,7 +41,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 Tooltip.propTypes = {
   popup: PropTypes.node,
   className: PropTypes.string,
-  placement: PropTypes.oneOf(Object.values(PortalPlacements)),
+  placement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   defaultIsPopupDisplayed: PropTypes.bool,
 };
 

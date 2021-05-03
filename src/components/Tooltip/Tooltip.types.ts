@@ -1,7 +1,7 @@
-import { Placements } from '../../hooks/useCalculatePortalPlacement.types';
+import { UseTooltipOptions } from './hooks/useTooltip.types';
 
 export interface TooltipPopupProps {
-  placement: Placements;
+  placement: UseTooltipOptions['placement'];
   width: number;
   space: number;
   top?: number;
@@ -12,6 +12,6 @@ export interface TooltipPopupProps {
 export interface TooltipProps {
   popup?: React.ReactNode;
   className?: string;
-  placement?: Placements;
+  placement?: TooltipPopupProps['placement'];
   defaultIsPopupDisplayed?: boolean;
 }
