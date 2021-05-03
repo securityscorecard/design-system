@@ -1253,6 +1253,47 @@
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-9.1.2.tgz#d05f66db03e3a3638a654e8badf2deb489eb220d"
   integrity sha512-r3fwVbVH+M8W0qYlBBZFsUwKe6NT5qvz+EmU7sr8VeN1cQ63z+3cfXyTo7WGGEMEgKiT0jboNAK3b1FZp8k9LQ==
 
+"@dnd-kit/accessibility@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/accessibility/-/accessibility-2.0.0.tgz#d1f265ebedde6a66b71bb69fd8bc900b5138a8e2"
+  integrity sha512-L0KOQnqFR0MJ/IwJIS1A0tvgr47LrWzclJy7wW5i8/3rkdixUzkiD78rYnX7TrFnFNtuEgVxiGSsX2oIlulmUg==
+  dependencies:
+    tslib "^2.0.0"
+
+"@dnd-kit/core@^2.0.0", "@dnd-kit/core@^2.1.0", "@dnd-kit/core@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/core/-/core-2.1.2.tgz#08d1fede9dd4c5a0f084cc2b95a434813ee9fda7"
+  integrity sha512-mJFKQUWOWq/yuD3jfPON4DuwWVGN/eS8s7GX9I5GbjG3i7Udt8I6ij1ZFinISSTTZxNVdBBcRKO4ctRecDkNKA==
+  dependencies:
+    "@dnd-kit/accessibility" "^2.0.0"
+    "@dnd-kit/utilities" "^1.0.2"
+    tslib "^2.0.0"
+
+"@dnd-kit/modifiers@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/modifiers/-/modifiers-1.0.5.tgz#207d071ba1715ab5a04aa0a7ba9197cd1d160961"
+  integrity sha512-MEy2a6rwCuQs0I7HYYgYGNwoI2F9QeIKdOWwnnDpsnJ+/d+W8MynTCdjrIYAc3yqwXg5dPpQJkSJMSpaHpt0Jw==
+  dependencies:
+    "@dnd-kit/core" "^2.0.0"
+    "@dnd-kit/utilities" "^1.0.3"
+    tslib "^2.0.0"
+
+"@dnd-kit/sortable@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/sortable/-/sortable-2.0.1.tgz#27da1a4b8f4e248d794964c5fd8734b000be5791"
+  integrity sha512-HfrIKkIXu+lZge8rRALeELJJA7zhWHubU1bCBAnVgKRhPmPYomN4X6szG81uquSD9Fvq04qBbwyw+uuBp1aJJg==
+  dependencies:
+    "@dnd-kit/core" "^2.1.0"
+    "@dnd-kit/utilities" "^1.0.2"
+    tslib "^2.0.0"
+
+"@dnd-kit/utilities@^1.0.2", "@dnd-kit/utilities@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@dnd-kit/utilities/-/utilities-1.0.3.tgz#9742d229a095bfd08d120b28657c936fb911237f"
+  integrity sha512-TlbsZ3pSiJ6jTDVuGDLY7yoHAjaiFyBWctxDslxAocUeCQVDlcpkGXcPtUKYyGczruUoYapsKlZS5rhLDR+RUg==
+  dependencies:
+    tslib "^2.0.0"
+
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
