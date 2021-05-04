@@ -64,7 +64,7 @@ export interface DatatableProps<D extends Record<string, unknown>> {
    *
    * See: [ControlsModule.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/components/Datatable/ControlsModule/ControlsModule.types.ts)
    */
-  controlsConfig?: Partial<ControlsConfig>;
+  controlsConfig?: Partial<ControlsConfig<D>>;
   /**
    * Config object for table
    *

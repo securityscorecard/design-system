@@ -16,6 +16,8 @@ export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
   hasSorting: true,
   hasServerSideSorting: true,
   defaultSortBy: [],
+  defaultColumnOrder: [],
+  // defaultHiddenColumns: [],
   rowActions: [],
   NoMatchingDataComponent: NoMatchingData,
   NoDataComponent: NoData,
@@ -23,7 +25,7 @@ export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
 export const mergeTableConfig = mergeDeepRight(defaultTableConfig);
 
 // TODO: commented part will be enabled when functionality is implemented
-export const defaultControlsConfig: ControlsConfig = {
+export const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
   onControlToggle: noop,
   hasSearch: true,
   searchConfig: {
@@ -48,9 +50,10 @@ export const defaultControlsConfig: ControlsConfig = {
   // hasColumnVisibility: true,
   // defaultIsColumnVisibilityOpen: false,
   // defaultIsColumnVisibilityApplied: false,
-  // hasColumnOrdering: true,
-  // defaultIsColumnOrderingOpen: false,
-  // defaultIsColumnOrderingApplied: false,
+  hasColumnOrdering: true,
+  defaultIsColumnOrderingOpen: false,
+  defaultIsColumnOrderingApplied: false,
+  onColumnOrderChange: noop,
   // hasGrouping: true,
   // defaultIsGroupingOpen: false,
   // defaultIsGroupingApplied: false,

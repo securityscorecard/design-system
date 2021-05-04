@@ -147,6 +147,43 @@ WithDisabledFiltering.args = {
   },
 };
 
+export const WithOpenColumns = DatatableTemplate.bind({});
+WithOpenColumns.args = {
+  ...MinimalConfig.args,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    defaultIsColumnOrderingOpen: true,
+  },
+};
+
+export const WithAppliedColumns = DatatableTemplate.bind({});
+WithAppliedColumns.args = {
+  ...MinimalConfig.args,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    defaultIsColumnOrderingApplied: true,
+  },
+};
+
+export const WithOpenAndAppliedColumns = DatatableTemplate.bind({});
+WithOpenAndAppliedColumns.args = {
+  ...MinimalConfig.args,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    defaultIsColumnOrderingOpen: true,
+    defaultIsColumnOrderingApplied: true,
+  },
+};
+
+export const WithDisabledColumns = DatatableTemplate.bind({});
+WithDisabledColumns.args = {
+  ...MinimalConfig.args,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    hasColumnOrdering: false,
+  },
+};
+
 export const WithCustomPlaceholderForSearch = DatatableTemplate.bind({});
 WithCustomPlaceholderForSearch.args = {
   ...MinimalConfig.args,
