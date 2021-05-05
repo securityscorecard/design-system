@@ -1,3 +1,10 @@
+# [1.0.0-alpha.58](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.57...v1.0.0-alpha.58) (2021-05-05)
+
+
+### Features
+
+* **Datatable:** add support for select single row ([b776e0a](https://github.com/securityscorecard/design-system/commit/b776e0a50b370173db9801b65e69c4f7b01fe163))
+
 # [1.0.0-alpha.57](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.56...v1.0.0-alpha.57) (2021-05-05)
 
 
