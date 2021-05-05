@@ -1,3 +1,12 @@
+# [1.0.0-alpha.57](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.56...v1.0.0-alpha.57) (2021-05-05)
+
+
+### Features
+
+* **ColumnsControls:** add dropdown pane for control columns order ([6193efe](https://github.com/securityscorecard/design-system/commit/6193efeac0f38316bc421e2706205ceb40bfa7a6))
+* **Datatable:** add column ordering control ([963b8d6](https://github.com/securityscorecard/design-system/commit/963b8d6bee0fcf9dca539629864c5bdbab294ed0))
+* **useDropdown:** add more possible placements for dropdown ([c5a8bef](https://github.com/securityscorecard/design-system/commit/c5a8beff1fd97ab4b24f7ddf5493ce2b18bc6035))
+
 # [1.0.0-alpha.56](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.55...v1.0.0-alpha.56) (2021-04-29)
 
 
