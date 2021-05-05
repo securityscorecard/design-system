@@ -6,6 +6,8 @@ import {
   SELECTION_COLUMN_ID,
 } from '../Body/renderers/renderers.enums';
 import TableCheckbox from '../components/TableCheckbox';
+import TableRadio from '../components/TableRadio';
+import { actions } from '../Table.reducer';
 
 interface IndeterminateCheckbox extends TableToggleCommonProps {
   id: string;
@@ -42,9 +44,10 @@ export const selectionColumn = {
   Header: ({
     getToggleAllRowsSelectedProps,
     dataSize,
+    isMultiSelect,
     state: { selectedRowIds: tableSelectedRowIds },
   }: HeaderProps<Record<string, unknown>>): React.ReactElement => {
-    if (dataSize === 0) return null;
+    if (dataSize === 0 || !isMultiSelect) return null;
 
     const selectedLength = Object.keys(tableSelectedRowIds).length;
     const indeterminate = selectedLength > 0 && selectedLength < dataSize;
@@ -58,10 +61,33 @@ export const selectionColumn = {
     );
   },
   cellType: CellTypes.selection,
-  Cell: ({ row }: CellProps<Record<string, unknown>>): React.ReactElement => (
-    <IndeterminateCheckbox
-      id={`row-${row.id}`}
-      {...row.getToggleRowSelectedProps()}
-    />
-  ),
+  Cell: ({
+    isMultiSelect,
+    row,
+    dispatch,
+  }: CellProps<Record<string, unknown>>): React.ReactElement => {
+    const id = `row-${row.id}`;
+    if (isMultiSelect) {
+      return (
+        <IndeterminateCheckbox id={id} {...row.getToggleRowSelectedProps()} />
+      );
+    }
+
+    return (
+      <TableRadio
+        name="dt-single-select"
+        radioId={id}
+        {...row.getToggleRowSelectedProps({
+          indeterminate: undefined,
+          onChange(e: React.ChangeEvent<HTMLInputElement>) {
+            dispatch({
+              type: actions.toggleSingleRowSelected,
+              id: row.id,
+              value: e.target.checked,
+            });
+          },
+        })}
+      />
+    );
+  },
 };

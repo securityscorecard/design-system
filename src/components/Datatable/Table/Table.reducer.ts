@@ -1,12 +1,13 @@
-import { ActionType, SortingRule, TableState } from 'react-table';
+import { ActionType, IdType, SortingRule, TableState } from 'react-table';
 
 type StateReducerFn<D extends Record<string, unknown>> = (
   newState: TableState<D>,
-  action: ActionType,
+  action: ActionType & { id?: IdType<D> },
 ) => TableState<D>;
 
 export const actions = {
   deselectAllRows: 'deselectAllRows',
+  toggleSingleRowSelected: 'toggleSingleRowSelected',
 };
 
 export const tableActionsReducer = <D extends Record<string, unknown>>({
@@ -17,7 +18,7 @@ export const tableActionsReducer = <D extends Record<string, unknown>>({
     pageSize: number,
     sortBy: SortingRule<D>[],
   ) => void;
-}): StateReducerFn<D> => (newState, action) => {
+}): StateReducerFn<D> => (newState, action): TableState<D> => {
   const { pageIndex, pageSize, sortBy } = newState;
 
   switch (action.type) {
@@ -27,6 +28,13 @@ export const tableActionsReducer = <D extends Record<string, unknown>>({
       break;
     case actions.deselectAllRows:
       return { ...newState, selectedRowIds: {} };
+    case actions.toggleSingleRowSelected:
+      return {
+        ...newState,
+        selectedRowIds: {
+          [action.id]: true,
+        } as TableState<D>['selectedRowIds'],
+      };
     default:
       break;
   }

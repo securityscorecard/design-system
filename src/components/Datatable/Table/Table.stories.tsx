@@ -78,6 +78,19 @@ export const WithExclusiveSelection: Story<TableProps<Data>> = (args) => {
 };
 WithExclusiveSelection.args = MinimalConfig.args;
 
+export const WithSingleSelection = TableTemplate.bind({});
+WithSingleSelection.args = {
+  ...MinimalConfig.args,
+  isMultiSelect: false,
+};
+
+export const WithSingleSelectionAndSelectedRow = TableTemplate.bind({});
+WithSingleSelectionAndSelectedRow.args = {
+  ...MinimalConfig.args,
+  isMultiSelect: false,
+  defaultSelectedRows: { 1: true },
+};
+
 export const WithoutSorting = TableTemplate.bind({});
 WithoutSorting.args = {
   ...MinimalConfig.args,

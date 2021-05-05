@@ -69,6 +69,23 @@ WithSelectedRowsAndExclusionLogic.args = {
   },
 };
 
+export const WithSingleSelection = DatatableTemplate.bind({});
+WithSingleSelection.args = {
+  ...MinimalConfig.args,
+  tableConfig: {
+    isMultiSelect: false,
+  },
+};
+
+export const WithSingleSelectionAndSelectedRow = DatatableTemplate.bind({});
+WithSingleSelectionAndSelectedRow.args = {
+  ...MinimalConfig.args,
+  tableConfig: {
+    isMultiSelect: false,
+    defaultSelectedRowIds: [1],
+  },
+};
+
 export const WithNoData = DatatableTemplate.bind({});
 WithNoData.args = {
   ...MinimalConfig.args,

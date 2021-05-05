@@ -52,6 +52,7 @@ export type OnSelectFn<D> = (
 
 export interface TableConfig<D> {
   hasSelection: boolean;
+  isMultiSelect: boolean;
   onSelect: OnSelectFn<D>;
   hasOnlyPerPageSelection: boolean;
   defaultSelectedRowIds: IdType<D>[];
@@ -73,6 +74,7 @@ export const TableConfigPropType = {
   NoDataComponent: PropTypes.elementType,
   NoMatchingDataComponent: PropTypes.elementType,
   hasSelection: PropTypes.bool,
+  isMultiSelect: PropTypes.bool,
   hasOnlyPerPageSelection: PropTypes.bool,
   defaultSelectedRowIds: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
