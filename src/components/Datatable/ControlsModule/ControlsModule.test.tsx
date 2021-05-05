@@ -25,6 +25,7 @@ describe('Datatable/ControlsModule', () => {
     it('should not display filters if no fields definition is provided', () => {
       renderWithProviders(
         <ControlsModule
+          {...defaultControlsConfig}
           defaultIsFilteringApplied={
             defaultControlsConfig.defaultIsFilteringApplied
           }
@@ -75,6 +76,32 @@ describe('Datatable/ControlsModule', () => {
       );
 
       fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
+
+      expect(
+        screen.queryByRole('button', { name: /Apply/i }),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('given column ordering is enabled', () => {
+    it('should open ColumnsControls component on Columns button click', () => {
+      renderWithProviders(<ControlsModule {...defaultControlsConfig} />);
+
+      fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
+
+      expect(
+        screen.getByRole('button', { name: /Apply/i }),
+      ).toBeInTheDocument();
+    });
+    it('should close ColumnsControls component on Columns button click when ColumnsControls are open', () => {
+      renderWithProviders(
+        <ControlsModule
+          {...defaultControlsConfig}
+          defaultIsColumnOrderingOpen
+        />,
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
 
       expect(
         screen.queryByRole('button', { name: /Apply/i }),

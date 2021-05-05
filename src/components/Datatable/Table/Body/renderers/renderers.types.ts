@@ -36,7 +36,7 @@ export interface MultiValueRendererProps<D>
 
 export type CellTypes = typeof CellTypesEnum[keyof typeof CellTypesEnum];
 
-export type CustomColumnOptions<D> = {
+export type RendererColumnOptions<D> = {
   cellType?: CellTypes;
   cellLinkComponent?: ReactComponentLike;
   cellOnClick?: OnClickFn<D>;
@@ -51,6 +51,6 @@ export type CustomColumnOptions<D> = {
 
 export interface CellRendererProps<D extends Record<string, unknown>> {
   value: CellValue;
-  column: CustomColumnOptions<D>;
+  column: RendererColumnOptions<D>;
   row: Row<D>;
 }

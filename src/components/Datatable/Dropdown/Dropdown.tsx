@@ -8,15 +8,17 @@ import {
   ActionKindsPropType,
   RelativeLinkActionKind,
 } from '../types/Action.types';
-import { useDropdown } from './hooks/useDropdown';
 import { DropdownLinkProps, DropdownProps } from './Dropdown.types';
 import {
+  createPaddingSpacing,
   getColor,
   getFontSize,
   getLineHeight,
   pxToRem,
 } from '../../../utils/helpers';
 import { requireRouterLink } from '../../../utils/require-router-link';
+import { PortalPlacements } from '../../../hooks/useCalculatePortalPlacements.enums';
+import { useDropdown } from '../../../hooks/useDropdown';
 
 const DropdownWrapper = styled.div`
   display: inline-block;
@@ -25,8 +27,8 @@ const DropdownWrapper = styled.div`
 
 export const List = styled.ul`
   list-style: none;
-  padding: 0;
   margin: 0;
+  ${createPaddingSpacing({ vertical: 0.4, horizontal: 0 })};
 `;
 
 export const DropdownLink = styled.button<DropdownLinkProps>`
@@ -53,13 +55,15 @@ const Dropdown: React.FC<DropdownProps> = ({
   paneWidth = 140,
   children,
   className,
+  placement = PortalPlacements.bottom,
 }) => {
   const parentRef = useRef(null);
-  const { Pane, handleToggleTooltip, isPaneDisplayed } = useDropdown(
+  const { Pane, handleToggleDropdown, isPaneDisplayed } = useDropdown(
     parentRef,
     {
       defaultIsPaneDisplayed: defaultIsOpen,
       paneWidth,
+      placement,
     },
   );
 
@@ -67,7 +71,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <DropdownWrapper
       ref={parentRef}
       className={className}
-      onClick={handleToggleTooltip}
+      onClick={handleToggleDropdown}
     >
       {isFunction(children) ? children(isPaneDisplayed) : children}
 
@@ -122,6 +126,7 @@ Dropdown.propTypes = {
   defaultIsOpen: PropTypes.bool,
   paneWidth: PropTypes.number,
   className: PropTypes.string,
+  placement: PropTypes.oneOf(['bottom', 'bottom-left', 'bottom-right']),
 };
 
 export default React.memo(Dropdown);

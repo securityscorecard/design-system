@@ -3,6 +3,7 @@ import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Column, IdType, Row, SortingRule } from 'react-table';
 
 import { ActionBasePropType } from '../types/Action.types';
+import { RendererColumnOptions } from './Body/renderers/renderers.types';
 
 type BaseRowAction<D> = {
   label: string;
@@ -60,6 +61,8 @@ export interface TableConfig<D> {
   hasSorting: boolean;
   hasServerSideSorting: boolean;
   defaultSortBy: SortingRule<D>[];
+  defaultColumnOrder: IdType<D>[];
+  // defaultHiddenColumns: IdType<D>[];
   rowActions: RowAction<D>[];
   NoMatchingDataComponent: ReactComponentLike;
   NoDataComponent: ReactComponentLike;
@@ -85,6 +88,12 @@ export const TableConfigPropType = {
       desc: PropTypes.bool,
     }),
   ),
+  defaultHiddenColumns: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ),
+  defaultColumnOrder: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ),
   rowActions: PropTypes.arrayOf(RowActionKindsPropType),
 };
 
@@ -103,4 +112,10 @@ export interface TableProps<D extends Record<string, unknown>>
   isDataLoading: boolean;
   dataPrimaryKey?: PrimaryKey<D>;
   defaultSelectedRows?: Record<IdType<D>, boolean>;
+}
+
+export interface CustomColumnOptions<D> extends RendererColumnOptions<D> {
+  sticky?: string;
+  headerTooltip?: JSX.Element;
+  Header: string;
 }

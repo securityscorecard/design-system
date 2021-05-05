@@ -5,6 +5,7 @@ import {
   Column,
   IdType,
   SortingRule,
+  useColumnOrder,
   useFlexLayout,
   usePagination,
   useRowSelect,
@@ -71,7 +72,9 @@ const Table = <D extends Record<string, unknown>>({
   hasSorting,
   hasServerSideSorting,
   defaultSortBy,
-}: TableProps<D>): React.ReactElement => {
+  defaultColumnOrder,
+}: // defaultHiddenColumns,
+TableProps<D>): React.ReactElement => {
   const hasExclusiveSelection = DatatableStore.useState(
     (s) => s.hasExclusiveSelection,
   );
@@ -101,6 +104,7 @@ const Table = <D extends Record<string, unknown>>({
     gotoPage,
     pageCount,
     dispatch,
+    setColumnOrder,
     state: { pageIndex, selectedRowIds },
   } = useTable<D>(
     {
@@ -114,6 +118,10 @@ const Table = <D extends Record<string, unknown>>({
         sortBy: defaultSortBy,
         // SELECTION
         selectedRowIds: defaultSelectedRows,
+        // ORDERING
+        columnOrder: defaultColumnOrder,
+        // VISIBILITY
+        // hiddenColumns: defaultHiddenColumns,
       },
       // PAGINATION
       manualPagination: hasServerSidePagination,
@@ -138,6 +146,7 @@ const Table = <D extends Record<string, unknown>>({
       rowActions,
       dataSize,
     },
+    useColumnOrder,
     useSortBy,
     usePagination,
     useRowSelect,
@@ -165,6 +174,18 @@ const Table = <D extends Record<string, unknown>>({
       unsubscribe();
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => s.columnOrder,
+      (columnOrder) => {
+        setColumnOrder(columnOrder);
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [setColumnOrder]);
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);

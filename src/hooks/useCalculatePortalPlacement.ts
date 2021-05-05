@@ -27,6 +27,14 @@ export const useCalculatePortaPlacement = (
     }
 
     switch (placement) {
+      case 'bottom-left':
+        style.left = dimensions.left;
+        style.top = dimensions.top + dimensions.height + space;
+        break;
+      case 'bottom-right':
+        style.left = dimensions.right - width;
+        style.top = dimensions.top + dimensions.height + space;
+        break;
       case 'left':
         style.right = window.innerWidth - dimensions.left + space;
         break;

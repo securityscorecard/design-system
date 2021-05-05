@@ -5,6 +5,7 @@ export interface DropdownPaneStyles {
   bottom?: number;
   left?: number;
   right?: number;
+  isElevated?: boolean;
 }
 export interface DropdownPaneProps extends DropdownPaneStyles {
   onClickOut: () => void;

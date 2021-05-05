@@ -19,6 +19,7 @@ import { Table } from './Table';
 import { TableConfig, TableConfigPropType } from './Table/Table.types';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
+import { useColumnsControls } from './hooks/useColumnsControls';
 
 const StyledDatatable = styled(FlexContainer)`
   border: 1px solid ${getColor('graphiteH')};
@@ -51,10 +52,12 @@ const Datatable = <D extends Record<string, unknown>>({
     [],
   );
 
-  const memoizedControlsConfig = useDeepCompareMemo(
-    () => mergeControlsConfig(controlsConfig),
-    [controlsConfig],
-  );
+  const {
+    onColumnOrderChange,
+    ...restControlsConfig
+  } = useDeepCompareMemo(() => mergeControlsConfig(controlsConfig), [
+    controlsConfig,
+  ]);
   const {
     onSelect,
     defaultSelectedRowIds,
@@ -66,10 +69,15 @@ const Datatable = <D extends Record<string, unknown>>({
 
   useDataFetch<D>(onDataFetch);
   useTableRowSelect<D>(onSelect, defaultSelectedRowIds);
+  useColumnsControls(
+    onColumnOrderChange,
+    columns,
+    restTableConfig.defaultColumnOrder,
+  );
 
   return (
     <StyledDatatable flexDirection="column">
-      {isControlsEnabled && <ControlsModule {...memoizedControlsConfig} />}
+      {isControlsEnabled && <ControlsModule<D> {...restControlsConfig} />}
       <BatchModule
         actions={batchActions}
         dataSize={dataSize}
