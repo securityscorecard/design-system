@@ -24,6 +24,9 @@ import { DatatableStore } from '../../../Datatable.store';
 import { ColumnsListProps } from './components.types';
 
 const StyledColumnsList = styled(FlexContainer)`
+  margin: 0;
+  padding: 0;
+
   > li + li {
     margin-top: ${pxToRem(4)};
   }
