@@ -1,3 +1,11 @@
+# [1.0.0-alpha.59](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.58...v1.0.0-alpha.59) (2021-05-05)
+
+
+### Bug Fixes
+
+* **ColumnsList:** reset ul spacing ([501548c](https://github.com/securityscorecard/design-system/commit/501548ce0dc23dbddd781b4de0aee1dc222b6f9d))
+* **useDropdown:** prevent attaching listener when is not visible ([a435f60](https://github.com/securityscorecard/design-system/commit/a435f60c489c9f834bc488599fb61e13264372d4))
+
 # [1.0.0-alpha.58](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.57...v1.0.0-alpha.58) (2021-05-05)
 
 
