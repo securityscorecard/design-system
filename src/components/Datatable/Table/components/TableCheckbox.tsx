@@ -19,7 +19,7 @@ const Mark = ({ children, ...props }) => (
 
 const TableCheckbox = forwardRef(
   (
-    { name, checkboxId, isIndeterminate, ...props }: TableCheckboxProps,
+    { name, checkboxId, isIndeterminate, style, ...props }: TableCheckboxProps,
     ref: React.MutableRefObject<HTMLInputElement>,
   ): React.ReactElement => (
     <div className="ds-table-checkbox">
@@ -43,6 +43,7 @@ const TableCheckbox = forwardRef(
         aria-label="Toggle select"
         className="ds-table-checkbox-label"
         htmlFor={checkboxId}
+        style={style}
       />
     </div>
   ),

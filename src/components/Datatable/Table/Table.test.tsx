@@ -108,6 +108,34 @@ describe('Datatable/Table', () => {
 
     expect(screen.getAllByRole('checkbox')[0]).toBePartiallyChecked();
   });
+  describe('given isMultiSelect prop is disabled', () => {
+    it('should select only one row at time', () => {
+      renderWithProviders(
+        <Table<Data>
+          data={data}
+          columns={columns}
+          dataSize={3}
+          isDataLoading={false}
+          defaultSelectedRows={{}}
+          {...defaultTableConfig}
+          isMultiSelect={false}
+        />,
+      );
+
+      userEvent.click(
+        screen.getAllByRole('radio', {
+          name: /Toggle select/i,
+        })[0],
+      );
+      userEvent.click(
+        screen.getAllByRole('radio', {
+          name: /Toggle select/i,
+        })[1],
+      );
+
+      expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
+    });
+  });
   it('should call onClick handler in row action dropdown with correct parameters', () => {
     const rowActionMock = jest.fn();
     const rowIndex = 0;
@@ -266,6 +294,34 @@ describe('Datatable/Table', () => {
         })[0],
       );
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(0);
+    });
+    describe('given isMultiSelect prop is disabled', () => {
+      it('should store only one selected row ids when row is selected', () => {
+        renderWithProviders(
+          <Table<Data>
+            data={data}
+            columns={columns}
+            dataSize={3}
+            isDataLoading={false}
+            defaultSelectedRows={{}}
+            {...defaultTableConfig}
+            isMultiSelect={false}
+          />,
+        );
+
+        userEvent.click(
+          screen.getAllByRole('radio', {
+            name: /Toggle select/i,
+          })[0],
+        );
+        userEvent.click(
+          screen.getAllByRole('radio', {
+            name: /Toggle select/i,
+          })[1],
+        );
+
+        expect(DatatableStore.getRawState().selectedIds).toHaveLength(1);
+      });
     });
     it('should react on "shouldResetSelectedRows" change', () => {
       renderWithProviders(

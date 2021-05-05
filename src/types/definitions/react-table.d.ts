@@ -91,6 +91,8 @@ declare module 'react-table' {
       UseRowStateInstanceProps<D>,
       UseSortByInstanceProps<D> {
     rowActions: RowAction<D>[];
+    dataSize: number;
+    isMultiSelect: boolean;
   }
 
   export interface TableState<

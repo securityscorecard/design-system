@@ -65,6 +65,7 @@ const Table = <D extends Record<string, unknown>>({
   NoMatchingDataComponent,
   NoDataComponent,
   hasSelection,
+  isMultiSelect,
   defaultSelectedRows,
   hasPagination,
   hasServerSidePagination,
@@ -145,6 +146,7 @@ TableProps<D>): React.ReactElement => {
       // CUSTOM PROPS
       rowActions,
       dataSize,
+      isMultiSelect,
     },
     useColumnOrder,
     useSortBy,
