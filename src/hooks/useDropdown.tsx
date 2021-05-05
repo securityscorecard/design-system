@@ -58,12 +58,17 @@ export const useDropdown = (
       isListenerAdded.current = false;
     }
 
-    window.addEventListener('scroll', scrollListener.current);
-    isListenerAdded.current = true;
+    if (isShow) {
+      window.addEventListener('scroll', scrollListener.current);
+      isListenerAdded.current = true;
+    }
+
     return () => {
-      window.removeEventListener('scroll', scrollListener.current);
+      if (isListenerAdded.current) {
+        window.removeEventListener('scroll', scrollListener.current);
+      }
     };
-  }, [handleOnClickOut]);
+  }, [handleOnClickOut, isShow]);
 
   return {
     handleToggleDropdown: toggle,
