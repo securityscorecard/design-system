@@ -11,11 +11,11 @@ As a contributor, here are the guidelines we would like you to follow:
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-* Use `main` branch as a base for new changes
+* Use `alpha` branch as a base for new changes
 * Make your changes in a new git branch:
 
      ```shell
-     git checkout -b githubUserId@my-fix-branch main
+     git checkout -b githubUserId@my-fix-branch alpha
      ```
 
 * Create your patch, **including appropriate test cases**.
@@ -37,14 +37,14 @@ Before you submit your Pull Request (PR) consider the following guidelines:
     git push origin githubUserId@my-fix-branch
     ```
 
-* In GitHub, send a pull request to `main`.
+* In GitHub, send a pull request to `alpha`.
 * If we suggest changes then:
   * Make the required updates.
   * Re-run the test suites to ensure tests are still passing.
   * Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
 
     ```shell
-    git rebase main -i
+    git rebase alpha -i
     git push -f
     ```
 
@@ -53,7 +53,7 @@ That's it!
 #### After your pull request is merged
 
 After your pull request is merged, you can safely delete your branch and pull the changes
-from the `main` (upstream) repository:
+from the `alpha` (upstream) repository:
 
 * Delete the remote branch on GitHub either through the GitHub web UI or your local shell as follows:
 
@@ -61,10 +61,10 @@ from the `main` (upstream) repository:
     git push origin --delete githubUserId@my-fix-branch
     ```
 
-* Check out the `main` branch:
+* Check out the `alpha` branch:
 
     ```shell
-    git checkout main -f
+    git checkout alpha -f
     ```
 
 * Delete the local branch:
@@ -73,7 +73,7 @@ from the `main` (upstream) repository:
     git branch -D githubUserId@my-fix-branch
     ```
 
-* Update your `main` with the latest upstream version:
+* Update your `alpha` with the latest upstream version:
 
     ```shell
     git pull
