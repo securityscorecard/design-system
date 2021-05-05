@@ -128,12 +128,10 @@ export const simpleColumns: Column<Data>[] = [
   {
     id: 'observedFor',
     Header: 'Observed for',
-    accessor: 'observationDate',
     width: 120,
     Cell: ({
-      value,
       row: {
-        original: { lastObservationDate },
+        original: { observationDate, lastObservationDate },
       },
     }: CellProps<Data>): React.ReactElement => {
       dayjs.extend(relativeTime);
@@ -142,7 +140,9 @@ export const simpleColumns: Column<Data>[] = [
         <Tooltip
           popup={
             <>
-              <div>Observation date: {dayjs(value).format('D MMMM YYYY')}</div>
+              <div>
+                Observation date: {dayjs(observationDate).format('D MMMM YYYY')}
+              </div>
               <div>
                 Last observation date:{' '}
                 {dayjs(lastObservationDate).format('D MMMM YYYY')}
@@ -150,7 +150,7 @@ export const simpleColumns: Column<Data>[] = [
             </>
           }
         >
-          {dayjs(value).to(dayjs(lastObservationDate), true)}
+          {dayjs(observationDate).to(dayjs(lastObservationDate), true)}
         </Tooltip>
       );
     },

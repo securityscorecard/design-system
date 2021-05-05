@@ -19,6 +19,7 @@ import {
 } from './ControlsModule.types';
 import { Filter } from '../../Filters/Filters.types';
 import { ControlTypes } from './ControlsModule.enums';
+import { ColumnsControls } from './ColumnsControls';
 
 const FiltersContainer = styled(FlexContainer)`
   background-color: ${getColor('graphite5H')};
@@ -44,7 +45,7 @@ const defaultControlState: ControlState = {
 const mergeControlState = mergeDeepRight(defaultControlState);
 
 // TODO: commented part will be enabled when functionality is implemented
-const ControlsModule: React.FC<ControlsModuleProps> = ({
+const ControlsModule = <D extends Record<string, unknown>>({
   hasSearch,
   searchConfig,
   hasFiltering,
@@ -55,10 +56,9 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
   // defaultIsColumnVisibilityOpen,
   // defaultIsColumnVisibilityApplied,
   // defaultHiddenColumns,
-  // hasColumnOrdering,
-  // defaultIsColumnOrderingOpen,
-  // defaultIsColumnOrderingApplied,
-  // defaultColumnOrder,
+  hasColumnOrdering,
+  defaultIsColumnOrderingOpen,
+  defaultIsColumnOrderingApplied,
   // hasGrouping,
   // defaultIsGroupingOpen,
   // defaultIsGroupingApplied,
@@ -68,7 +68,7 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
   // defaultIsViewsApplied,
   // defaultViews,
   onControlToggle,
-}) => {
+}: ControlsModuleProps<D>): React.ReactElement => {
   const {
     onClose: onFilteringClose,
     onApply: onFilteringApply,
@@ -90,14 +90,12 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
         defaultIsFilteringApplied || isNonEmptyArray(filteringState),
       ]),
     ),
-    // [ControlTypes.columns]: mergeControlState(
-    //   prepareControlState([
-    //     defaultIsColumnVisibilityOpen ||
-    //     defaultIsColumnOrderingOpen,
-    //     defaultIsColumnVisibilityApplied ||
-    //     defaultIsColumnOrderingApplied,
-    //   ]),
-    // ),
+    [ControlTypes.columns]: mergeControlState(
+      prepareControlState([
+        /* defaultIsColumnVisibilityOpen || */ defaultIsColumnOrderingOpen,
+        /* defaultIsColumnVisibilityApplied || */ defaultIsColumnOrderingApplied,
+      ]),
+    ),
     // [ControlTypes.groups]: mergeControlState(
     //   prepareControlState([defaultIsGroupingOpen, defaultIsGroupingApplied]),
     // ),
@@ -117,9 +115,8 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isToolbarEnabled = hasFiltering;
+  const isToolbarEnabled = hasFiltering || hasColumnOrdering;
   // hasColumnVisibility ||
-  // hasColumnOrdering ||
   // hasFiltering ||
   // hasGrouping ||
   // hasViews;
@@ -192,17 +189,51 @@ const ControlsModule: React.FC<ControlsModuleProps> = ({
       >
         {isToolbarEnabled && (
           <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
-            {/* {(hasColumnVisibility || hasColumnOrdering) && (
-              <ControlButton
-                iconName={SSCIconNames.reorder}
-                isActive={controlsState[ControlTypes.columns].isActive}
-                isApplied={controlsState[ControlTypes.columns].isApplied}
-                label="Columns"
-                onClick={() =>
-                  handleControlOnClick(ControlTypes.columns, controlsState[ControlTypes.columns].isActive)
-                }
-              />
-            )} */}
+            {
+              /* hasColumnVisibility || */ hasColumnOrdering && (
+                <ColumnsControls
+                  defaultIsOpen={defaultIsColumnOrderingOpen}
+                  onApply={(shouldApply) => {
+                    if (shouldApply) {
+                      applyControlStateChange(ControlTypes.columns, {
+                        isApplied: true,
+                      });
+                    }
+                    handleControlOnClick(
+                      ControlTypes.columns,
+                      controlsState[ControlTypes.columns].isActive,
+                    );
+                  }}
+                  onClose={() =>
+                    handleControlOnClick(
+                      ControlTypes.columns,
+                      controlsState[ControlTypes.columns].isActive,
+                    )
+                  }
+                  onOpen={() =>
+                    handleControlOnClick(
+                      ControlTypes.columns,
+                      controlsState[ControlTypes.columns].isActive,
+                    )
+                  }
+                  onReset={() =>
+                    applyControlStateChange(ControlTypes.columns, {
+                      isApplied: false,
+                    })
+                  }
+                >
+                  {(onClick) => (
+                    <ControlButton
+                      iconName={SSCIconNames.reorder}
+                      isActive={controlsState[ControlTypes.columns].isActive}
+                      isApplied={controlsState[ControlTypes.columns].isApplied}
+                      label="Columns"
+                      onClick={onClick}
+                    />
+                  )}
+                </ColumnsControls>
+              )
+            }
             {shouldShowFiltering && (
               <ControlButton
                 iconName={SSCIconNames.filter}

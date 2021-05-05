@@ -1,4 +1,5 @@
 export const ColumnsType = `{
+  Header: string;
   cellType?: CellTypes;
   cellLinkComponent?: ReactComponentLike;
   cellOnClick?: (value: CellValue, rowData: D) => void;
@@ -11,7 +12,7 @@ export const ColumnsType = `{
   multiValueDisplayLimit?: number;
   headerTooltip?: JSX.Element;
 
-  ... rest of Column options from 'react-table'
+  ...rest of Column options from 'react-table'
 }`;
 
 export const DataPrimaryKeyType = `| string
