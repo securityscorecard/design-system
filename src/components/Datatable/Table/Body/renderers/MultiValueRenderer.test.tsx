@@ -5,6 +5,7 @@ import { join, pipe, slice } from 'ramda';
 import { renderWithProviders } from '../../../../../utils/tests/renderWithProviders';
 import MultiValueRenderer from './MultiValueRenderer';
 import { abbreviateNumber } from '../../../../../utils/helpers';
+import { defaultDSContext } from '../../../../../theme/DSProvider/DSProvider';
 
 const values = ['a', 'b', 'c', 'd', 'e'];
 const numberOfVisibleItems = 2;
@@ -30,9 +31,9 @@ describe('Datatable/MultiValueRenderer', () => {
 
     fireEvent.mouseEnter(screen.getByText(`+ ${restValuesCount}`));
 
-    expect(document.getElementById('react-cool-portal')).toHaveTextContent(
-      restValuesText,
-    );
+    expect(
+      document.getElementById(defaultDSContext.portalsContainerId),
+    ).toHaveTextContent(restValuesText);
   });
   it('should open tooltip when hover on value pill', () => {
     renderWithProviders(
@@ -46,9 +47,9 @@ describe('Datatable/MultiValueRenderer', () => {
 
     fireEvent.mouseEnter(screen.getByText(values[0]));
 
-    expect(document.getElementById('react-cool-portal')).toHaveTextContent(
-      values[0],
-    );
+    expect(
+      document.getElementById(defaultDSContext.portalsContainerId),
+    ).toHaveTextContent(values[0]);
   });
   it('should call "tooltipComposer" with correct arguments for each visible value', () => {
     const tooltipComposerMock = jest.fn();
@@ -147,8 +148,8 @@ describe('Datatable/MultiValueRenderer', () => {
       document.getElementsByClassName('ds-table-cell-multivalue')[0],
     ).toHaveTextContent('1K2K+ 1');
     fireEvent.mouseEnter(screen.getByText('+ 1'));
-    expect(document.getElementById('react-cool-portal')).toHaveTextContent(
-      '3K',
-    );
+    expect(
+      document.getElementById(defaultDSContext.portalsContainerId),
+    ).toHaveTextContent('3K');
   });
 });

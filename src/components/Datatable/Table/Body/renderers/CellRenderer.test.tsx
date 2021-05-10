@@ -7,6 +7,7 @@ import { renderWithProviders } from '../../../../../utils/tests/renderWithProvid
 import CellRenderer from './CellRenderer';
 import { CellTypes } from './renderers.enums';
 import { abbreviateNumber } from '../../../../../utils/helpers';
+import { defaultDSContext } from '../../../../../theme/DSProvider/DSProvider';
 
 const row = ({ original: { col: 'val' } } as unknown) as Row<
   Record<string, unknown>
@@ -265,9 +266,9 @@ describe('Datatable/CellRenderer', () => {
       const value = screen.getByText(singleValue);
       fireEvent.mouseEnter(value);
 
-      expect(document.getElementById('react-cool-portal')).toHaveTextContent(
-        singleValue,
-      );
+      expect(
+        document.getElementById(defaultDSContext.portalsContainerId),
+      ).toHaveTextContent(singleValue);
     });
     it('should call "tooltipComposer" with correct arguments for each visible value', () => {
       const tooltipComposerMock = jest.fn();

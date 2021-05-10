@@ -5,26 +5,39 @@ import { mergeDeepRight } from 'ramda';
 
 import { theme as defaultTheme } from '../theme';
 import { GlobalStyles } from '../GlobalStyles';
-import { DSProviderProps } from './DSProvider.types';
+import { DSContextValue, DSProviderProps } from './DSProvider.types';
+
+export const defaultDSContext = {
+  portalsContainerId: 'portals',
+  hasIncludedGlobalStyles: true,
+};
+export const DSContext = React.createContext<DSContextValue>(defaultDSContext);
 
 const DSProvider: React.FC<DSProviderProps> = ({
   children,
   theme = {},
-  hasIncludedGlobalStyles = true,
+  config = {},
 }) => {
   const dsTheme = mergeDeepRight(defaultTheme, theme);
+  const { hasIncludedGlobalStyles, ...dsConfig } = mergeDeepRight(
+    defaultDSContext,
+    config,
+  );
 
   return (
     <ThemeProvider theme={dsTheme}>
       {hasIncludedGlobalStyles && <GlobalStyles />}
-      {children}
+      <DSContext.Provider value={dsConfig}>{children}</DSContext.Provider>
     </ThemeProvider>
   );
 };
 
 DSProvider.propTypes = {
   theme: PropTypes.shape({}),
-  hasIncludedGlobalStyles: PropTypes.bool,
+  config: PropTypes.shape({
+    portalsContainer: PropTypes.string,
+    hasIncludedGlobalStyles: PropTypes.bool,
+  }),
 };
 
 export default DSProvider;
