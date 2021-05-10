@@ -1,3 +1,10 @@
+# [1.0.0-alpha.60](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2021-05-10)
+
+
+### Features
+
+* **DsProvider:** allow DS context configuration ([7177cdd](https://github.com/securityscorecard/design-system/commit/7177cdda3b8e6065fe539ccaf370c6d7b8f7ce9a))
+
 # [1.0.0-alpha.59](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.58...v1.0.0-alpha.59) (2021-05-05)
 
 
