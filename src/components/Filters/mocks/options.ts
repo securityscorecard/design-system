@@ -12,6 +12,72 @@ import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 import { patterns, validateDomains, validateIPs } from './validations';
 
+export const mockTestFields: Field[] = [
+  {
+    conditions: [
+      {
+        component: InputFilter,
+        value: 'is',
+        label: 'is',
+        isDefault: true,
+      },
+      {
+        component: InputFilter,
+        value: 'is not',
+        label: 'is not',
+      },
+    ],
+    value: 'option a',
+    label: 'Option A',
+  },
+  {
+    conditions: [
+      { component: NumberFilter, value: 'is', label: 'is' },
+      {
+        component: NumberFilter,
+        value: 'is not',
+        label: 'is not',
+        isDefault: true,
+      },
+    ],
+    value: 'option b',
+    label: 'Option B',
+  },
+  {
+    conditions: [
+      {
+        component: InputFilter,
+        value: 'contains',
+        label: 'contains',
+      },
+      {
+        component: InputFilter,
+        value: 'not contains',
+        label: 'not contains',
+      },
+    ],
+    value: 'option c',
+    label: 'Option C',
+  },
+];
+
+export const mockTestState: Filter[] = [
+  {
+    operator: Operators.and,
+    field: 'option b',
+    condition: 'is',
+    value: '2',
+    isApplied: true,
+  },
+  {
+    operator: Operators.and,
+    field: 'option c',
+    condition: 'contains',
+    value: 'Value Option C',
+    isApplied: true,
+  },
+];
+
 export const fields: Field[] = [
   {
     conditions: [
