@@ -77,7 +77,7 @@ const StateButton: React.FC<StateButtonProps> = ({
   } = useStateButtonIcon(isApplied);
   return (
     <RemoveButton
-      data-testid="remove-button"
+      aria-label="remove"
       onClick={onClick(index)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}

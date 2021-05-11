@@ -10,6 +10,10 @@ const onApplyFnMock = jest.fn();
 const onCloseFnMock = jest.fn();
 
 describe('Filters', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('should display remove button when value exists', () => {
     renderWithProviders(
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
@@ -19,7 +23,7 @@ describe('Filters', () => {
       target: { value: 'a' },
     });
 
-    expect(screen.getByTestId('remove-button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /remove/i })).toBeInTheDocument();
   });
   it('should call onApply when value exists and clicked on Apply button', () => {
     renderWithProviders(
@@ -135,7 +139,7 @@ describe('Filters', () => {
     );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.click(screen.queryAllByTestId('remove-button')[0]);
+    fireEvent.click(screen.getAllByRole('button', { name: /remove/i })[0]);
 
     expect(screen.queryByText('Option A')).toBeInTheDocument();
     expect(screen.queryByText('is')).toBeInTheDocument();
