@@ -153,12 +153,12 @@ describe('Filters', () => {
     );
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
-      target: { value: 'New value' },
+      target: { value: 'a' },
     });
 
     await selectEvent.select(getByText('is'), 'is not');
 
-    expect(screen.getByDisplayValue('New value')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('a')).toBeInTheDocument();
   });
 
   it('should keep same operators when operator select changed', async () => {
