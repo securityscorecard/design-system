@@ -45,11 +45,13 @@ const RemoveButton = styled.button`
   margin: 0;
 
   cursor: ${({ disabled }) => !disabled && 'pointer'};
+
   &:hover {
     background-color: ${({ disabled }) => !disabled && getColor('strawberry')};
     border-top-right-radius: ${getBorderRadius};
     border-bottom-right-radius: ${getBorderRadius};
   }
+
   &:hover ${Popup} {
     visibility: visible;
     opacity: 1;
@@ -75,6 +77,7 @@ const StateButton: React.FC<StateButtonProps> = ({
   } = useStateButtonIcon(isApplied);
   return (
     <RemoveButton
+      aria-label="remove"
       onClick={onClick(index)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
