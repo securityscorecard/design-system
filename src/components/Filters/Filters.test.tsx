@@ -1,7 +1,8 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 
+import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Filters from './Filters';
 import { mockTestFields, mockTestState } from './mocks/options';
 
@@ -10,7 +11,9 @@ const onCloseFnMock = jest.fn();
 
 describe('Filters', () => {
   it('should display remove button when value exists', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -19,7 +22,9 @@ describe('Filters', () => {
     expect(screen.getByTestId('remove-button')).toBeInTheDocument();
   });
   it('should call onApply when value exists and clicked on Apply button', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -30,7 +35,9 @@ describe('Filters', () => {
   });
 
   it('should add filter when clicked on Add button', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
 
@@ -40,7 +47,9 @@ describe('Filters', () => {
   });
 
   it('should set default filter when clicked on Clear all button', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
@@ -52,7 +61,7 @@ describe('Filters', () => {
   });
 
   it('should call onClose when clicked on Close button', () => {
-    render(
+    renderWithProviders(
       <Filters
         fields={mockTestFields}
         onApply={onApplyFnMock}
@@ -65,7 +74,9 @@ describe('Filters', () => {
   });
 
   it('should remain only filter with value when clicked on Apply button', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
@@ -81,7 +92,9 @@ describe('Filters', () => {
   });
 
   it('should display message when new filter is added to applied filters', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -95,7 +108,9 @@ describe('Filters', () => {
   });
 
   it('should display message when applied filter is changed', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.change(screen.queryAllByPlaceholderText('String')[0], {
@@ -115,7 +130,9 @@ describe('Filters', () => {
   });
 
   it('should remove filter when clicked on Remove button', () => {
-    render(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    renderWithProviders(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.queryAllByTestId('remove-button')[0]);
@@ -126,29 +143,29 @@ describe('Filters', () => {
   });
 
   it('should select default condition and component when field changed', async () => {
-    const { getByText } = render(
+    renderWithProviders(
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
     );
 
-    await selectEvent.select(getByText('Option A'), 'Option B');
+    await selectEvent.select(screen.getByText('Option A'), 'Option B');
 
     expect(screen.queryByText('is not')).toBeInTheDocument();
     expect(screen.queryByPlaceholderText('Number')).toBeInTheDocument();
   });
 
   it("should select first condition and component when field changed and hasn't set default", async () => {
-    const { getByText } = render(
+    renderWithProviders(
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
     );
 
-    await selectEvent.select(getByText('Option A'), 'Option C');
+    await selectEvent.select(screen.getByText('Option A'), 'Option C');
 
     expect(screen.queryByText('contains')).toBeInTheDocument();
     expect(screen.queryByPlaceholderText('String')).toBeInTheDocument();
   });
 
   it('should persist value when condition changed and components are the same', async () => {
-    const { getByText } = render(
+    renderWithProviders(
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
     );
 
@@ -156,26 +173,26 @@ describe('Filters', () => {
       target: { value: 'a' },
     });
 
-    await selectEvent.select(getByText('is'), 'is not');
+    await selectEvent.select(screen.getByText('is'), 'is not');
 
     expect(screen.getByDisplayValue('a')).toBeInTheDocument();
   });
 
   it('should keep same operators when operator select changed', async () => {
-    const { getByText } = render(
+    renderWithProviders(
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
     );
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
 
-    await selectEvent.select(getByText('And'), 'Or');
+    await selectEvent.select(screen.getByText('And'), 'Or');
 
     expect(screen.queryAllByText(/Or/i)).toHaveLength(2);
   });
 
   it('should preselect filters when state was applied', () => {
-    render(
+    renderWithProviders(
       <Filters
         fields={mockTestFields}
         state={mockTestState}
