@@ -1,3 +1,10 @@
+# [1.0.0-alpha.61](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.60...v1.0.0-alpha.61) (2021-05-17)
+
+
+### Bug Fixes
+
+* increase modal header z-index ([4c63b63](https://github.com/securityscorecard/design-system/commit/4c63b63807d216d87af6a0fef0c43a505763d512))
+
 # [1.0.0-alpha.60](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2021-05-10)
 
 
