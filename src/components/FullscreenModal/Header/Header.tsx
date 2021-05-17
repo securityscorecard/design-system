@@ -24,6 +24,7 @@ const BaseStickyHeader = styled.header`
   width: 100%;
   background-color: ${getColor('graphite5H')};
   border-bottom: 1px solid ${getColor('graphiteHB')};
+  z-index: 1;
 `;
 
 const BaseHeader = styled.header`
