@@ -11,7 +11,7 @@ const LoadingOverlayContainer = styled.div`
   right: 0;
   left: 0;
   opacity: 0.75;
-  background-color: ${getColor('graphiteH')};
+  background-color: ${getColor('graphite5H')};
 
   ${Spinner} {
     display: inline-block;
@@ -25,7 +25,7 @@ const LoadingOverlayContainer = styled.div`
 
 const LoadingOverlay: React.FC = () => (
   <LoadingOverlayContainer>
-    <Spinner height={48} width={48} />
+    <Spinner height={48} width={48} dark />
   </LoadingOverlayContainer>
 );
 
