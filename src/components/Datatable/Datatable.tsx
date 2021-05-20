@@ -22,6 +22,7 @@ import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
 
 const StyledDatatable = styled(FlexContainer)`
+  position: relative;
   border: 1px solid ${getColor('graphiteH')};
   border-radius: ${getBorderRadius};
   background: ${getColor('graphite3H')};

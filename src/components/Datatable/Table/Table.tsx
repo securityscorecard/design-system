@@ -23,6 +23,7 @@ import { selectionColumn } from './columns/selectionColumn';
 import { Head } from './Head';
 import { Body } from './Body';
 import { Footer } from './Footer';
+import { LoadingOverlay } from './LoadingOverlay';
 import { StyledTable, TableContainer } from './Table.styles';
 import CellRenderer from './Body/renderers/CellRenderer';
 import { FlexContainer } from '../../FlexContainer';
@@ -208,16 +209,20 @@ TableProps<D>): React.ReactElement => {
           />
         </StyledTable>
       </TableContainer>
-      {dataSize === 0 && !isDataLoading && (
-        <>
-          <NoDataContainer>
-            {hasAppliedFilters ? (
-              <NoMatchingDataComponent />
-            ) : (
-              <NoDataComponent />
-            )}
-          </NoDataContainer>
-        </>
+      {isDataLoading ? (
+        <LoadingOverlay />
+      ) : (
+        dataSize === 0 && (
+          <>
+            <NoDataContainer>
+              {hasAppliedFilters ? (
+                <NoMatchingDataComponent />
+              ) : (
+                <NoDataComponent />
+              )}
+            </NoDataContainer>
+          </>
+        )
       )}
       <Footer
         hasPagination={hasPagination && dataSize > 0}
