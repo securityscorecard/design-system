@@ -17,36 +17,40 @@ export const useCalculatePortaPlacement = (
 
     const dimensions = current.getBoundingClientRect();
 
+    const scrollTop = dimensions.top + window.pageYOffset;
+    const scrollBottom = dimensions.bottom + window.pageYOffset;
+    const scrollLeft = dimensions.left + window.pageXOffset;
+    const scrollRight = dimensions.right + window.pageXOffset;
+
     if (placement === 'bottom' || placement === 'top') {
-      style.left = dimensions.left + dimensions.width / 2 - style.width / 2;
+      style.left = scrollLeft + dimensions.width / 2 - style.width / 2;
     }
 
     if (placement === 'left' || placement === 'right') {
-      style.bottom =
-        window.innerHeight - dimensions.top - dimensions.height / 2;
+      style.bottom = window.innerHeight - scrollTop - dimensions.height / 2;
     }
 
     switch (placement) {
       case 'bottom-left':
-        style.left = dimensions.left;
-        style.top = dimensions.top + dimensions.height + space;
+        style.left = scrollLeft;
+        style.top = scrollBottom + space;
         break;
       case 'bottom-right':
-        style.left = dimensions.right - width;
-        style.top = dimensions.top + dimensions.height + space;
+        style.left = scrollRight - width;
+        style.top = scrollBottom + space;
         break;
       case 'left':
-        style.right = window.innerWidth - dimensions.left + space;
+        style.right = window.innerWidth - scrollLeft + space;
         break;
       case 'right':
-        style.left = dimensions.left + dimensions.width + space;
+        style.left = scrollRight + space;
         break;
       case 'top':
-        style.bottom = window.innerHeight - dimensions.top + space;
+        style.bottom = window.innerHeight - scrollTop + space;
         break;
       case 'bottom':
       default:
-        style.top = dimensions.top + dimensions.height + space;
+        style.top = scrollBottom + space;
         break;
     }
 
