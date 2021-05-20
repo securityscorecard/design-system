@@ -1,10 +1,10 @@
-import { isNotNull } from 'ramda-adjunct';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import usePortal from 'react-cool-portal';
 
 import { useCalculatePortaPlacement } from '../../../hooks/useCalculatePortalPlacement';
 import { StyleProps } from '../../../hooks/useCalculatePortalPlacement.types';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
+import { pxToRem } from '../../../utils/helpers';
 import TooltipPopup from '../TooltipPopup';
 import { UseTooltipOptions, UseTooltipReturnType } from './useTooltip.types';
 
@@ -25,38 +25,34 @@ export const useTooltip = (
     placement,
     ...defaultTooltipPopupDimensions,
   });
-  const scrollListener = useRef(null);
-  const isListenersAdded = useRef(false);
 
   useEffect(() => {
     setStyle(getPlacementStyles());
   }, [getPlacementStyles, isShow]);
 
-  useEffect(() => {
-    scrollListener.current = () => {
-      hide();
-    };
-    if (isListenersAdded.current && isNotNull(scrollListener.current)) {
-      window.removeEventListener('scroll', scrollListener.current);
-      isListenersAdded.current = false;
-    }
-
-    window.addEventListener('scroll', scrollListener.current);
-    isListenersAdded.current = true;
-    return () => {
-      window.removeEventListener('scroll', scrollListener.current);
-    };
-  }, [hide]);
-
   return {
     handleShowTooltip: show,
     handleHideTooltip: hide,
-    Popup: ({ children }) => (
-      <Portal>
-        <TooltipPopup placement={placement} {...style}>
-          {children}
-        </TooltipPopup>
-      </Portal>
-    ),
+    Popup: ({ children }) => {
+      const { space, width, left, top, right, bottom } = style;
+      return (
+        <Portal>
+          <TooltipPopup
+            $placement={placement}
+            $space={space}
+            $width={width}
+            style={{
+              width: pxToRem(width),
+              left: pxToRem(left),
+              right: pxToRem(right),
+              top: pxToRem(top),
+              bottom: pxToRem(bottom),
+            }}
+          >
+            {children}
+          </TooltipPopup>
+        </Portal>
+      );
+    },
   };
 };
