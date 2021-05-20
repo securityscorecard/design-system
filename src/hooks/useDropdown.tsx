@@ -1,11 +1,5 @@
-import { isNotNull, isNotUndefined } from 'ramda-adjunct';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { isNotUndefined } from 'ramda-adjunct';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import usePortal from 'react-cool-portal';
 
 import { useCalculatePortaPlacement } from './useCalculatePortalPlacement';
@@ -14,6 +8,7 @@ import { PortalPlacements } from './useCalculatePortalPlacements.enums';
 import DropdownPane from './components/DropdownPane';
 import { UseDropdownOptions, UseDropdownReturnType } from './useDropdown.types';
 import { DSContext } from '../theme/DSProvider/DSProvider';
+import { pxToRem } from '../utils/helpers';
 
 const defaultTooltipPopupDimensions = { space: 8 };
 
@@ -42,11 +37,11 @@ export const useDropdown = (
     width: paneWidth,
     ...defaultTooltipPopupDimensions,
   });
-  const scrollListener = useRef(null);
-  const isListenerAdded = useRef(false);
 
   useEffect(() => {
-    setStyle(getPlacementStyles());
+    if (isShow) {
+      setStyle(getPlacementStyles());
+    }
   }, [getPlacementStyles, isShow]);
 
   const handleOnClickOut = useCallback(() => {
@@ -56,45 +51,30 @@ export const useDropdown = (
     hide();
   }, [hide, onClickOut]);
 
-  useEffect(() => {
-    scrollListener.current = () => {
-      handleOnClickOut();
-      window.removeEventListener('scroll', scrollListener.current);
-      isListenerAdded.current = false;
-    };
-
-    if (isListenerAdded.current && isNotNull(scrollListener.current)) {
-      window.removeEventListener('scroll', scrollListener.current);
-      isListenerAdded.current = false;
-    }
-
-    if (isShow) {
-      window.addEventListener('scroll', scrollListener.current);
-      isListenerAdded.current = true;
-    }
-
-    return () => {
-      if (isListenerAdded.current) {
-        window.removeEventListener('scroll', scrollListener.current);
-      }
-    };
-  }, [handleOnClickOut, isShow]);
-
   return {
     handleToggleDropdown: toggle,
     handleShowDropdown: show,
     handleHideDropdown: hide,
     isPaneDisplayed: isShow,
-    Pane: ({ children }) => (
-      <Portal>
-        <DropdownPane
-          isElevated={isElevated}
-          onClickOut={handleOnClickOut}
-          {...style}
-        >
-          {children}
-        </DropdownPane>
-      </Portal>
-    ),
+    Pane: ({ children }) => {
+      const { width, left, top, right, bottom } = style;
+      return (
+        <Portal>
+          <DropdownPane
+            isElevated={isElevated}
+            style={{
+              width: pxToRem(width),
+              left: pxToRem(left),
+              right: pxToRem(right),
+              top: pxToRem(top),
+              bottom: pxToRem(bottom),
+            }}
+            onClickOut={handleOnClickOut}
+          >
+            {children}
+          </DropdownPane>
+        </Portal>
+      );
+    },
   };
 };

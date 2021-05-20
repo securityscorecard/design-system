@@ -7,6 +7,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 import { ColorTypes } from '../../../../theme/colors.enums';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils/helpers';
+import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../../../FlexContainer';
 import { Button } from '../../../Button';
 import { ButtonVariants } from '../../../Button/Button.enums';
@@ -55,7 +56,11 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
           }))((action as ActionWithSubactions).subActions);
 
           return (
-            <Dropdown key={action.name} actions={subActions}>
+            <Dropdown
+              key={action.name}
+              actions={subActions}
+              placement={PortalPlacements.bottomRight}
+            >
               <BatchActionButton name={action.name} onClick={action.onClick}>
                 {action.label}{' '}
                 <Icon

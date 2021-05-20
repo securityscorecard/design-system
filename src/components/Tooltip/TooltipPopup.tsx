@@ -13,12 +13,12 @@ import {
 } from '../../utils/helpers';
 import { TooltipPopupProps } from './Tooltip.types';
 
-const bottomPlacement = ({ space, width }) => css`
+const bottomPlacement = ({ $space, $width }) => css`
   &::before {
     left: 0;
-    top: ${pxToRem(space * -1)};
-    width: ${pxToRem(width)};
-    height: ${pxToRem(space)};
+    top: ${pxToRem($space * -1)};
+    width: ${pxToRem($width)};
+    height: ${pxToRem($space)};
   }
 
   &::after {
@@ -30,12 +30,12 @@ const bottomPlacement = ({ space, width }) => css`
   }
 `;
 
-const topPlacement = ({ space, width }) => css`
+const topPlacement = ({ $space, $width }) => css`
   &::before {
     left: 0;
-    bottom: ${pxToRem(space * -1)};
-    width: ${pxToRem(width)};
-    height: ${pxToRem(space)};
+    bottom: ${pxToRem($space * -1)};
+    width: ${pxToRem($width)};
+    height: ${pxToRem($space)};
   }
 
   &::after {
@@ -47,13 +47,13 @@ const topPlacement = ({ space, width }) => css`
   }
 `;
 
-const leftPlacement = ({ space }) => css`
+const leftPlacement = ({ $space }) => css`
   transform: translateY(50%);
 
   &::before {
     top: 0;
-    right: ${pxToRem(space * -1)};
-    width: ${pxToRem(space)};
+    right: ${pxToRem($space * -1)};
+    width: ${pxToRem($space)};
     height: 100%;
   }
 
@@ -66,13 +66,13 @@ const leftPlacement = ({ space }) => css`
   }
 `;
 
-const rightPlacement = ({ space }) => css`
+const rightPlacement = ({ $space }) => css`
   transform: translateY(50%);
 
   &::before {
     top: 0;
-    left: ${pxToRem(space * -1)};
-    width: ${pxToRem(space)};
+    left: ${pxToRem($space * -1)};
+    width: ${pxToRem($space)};
     height: 100%;
   }
 
@@ -93,7 +93,7 @@ const tooltipPlacements = {
 };
 
 const TooltipPopup = styled.div<TooltipPopupProps>`
-  position: fixed;
+  position: absolute;
   ${createPaddingSpacing(0.8)};
   background: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
@@ -104,17 +104,11 @@ const TooltipPopup = styled.div<TooltipPopupProps>`
   z-index: ${getDepth('tooltip')};
   border-radius: ${getBorderRadius};
 
-  ${({ width }) => width && `width: ${width}px`};
-  ${({ left }) => left && `left: ${left}px`};
-  ${({ right }) => right && `right: ${right}px`};
-  ${({ top }) => top && `top: ${top}px`};
-  ${({ bottom }) => bottom && `bottom: ${bottom}px`};
-
   &::before {
     content: '';
     position: absolute;
-    ${({ width }) => width && `width: ${width}px`};
-    ${({ space }) => space && `height: ${space}px`};
+    ${({ $width }) => $width && `width: ${pxToRem($width)}`};
+    ${({ $space }) => $space && `height: ${pxToRem($space)}`};
   }
 
   &::after {
@@ -126,8 +120,8 @@ const TooltipPopup = styled.div<TooltipPopupProps>`
     transform: translate(-50%);
   }
 
-  ${({ placement, space, width }) =>
-    tooltipPlacements[placement]({ space, width })};
+  ${({ $placement, $space, $width }) =>
+    tooltipPlacements[$placement]({ $space, $width })};
 `;
 
 export default TooltipPopup;

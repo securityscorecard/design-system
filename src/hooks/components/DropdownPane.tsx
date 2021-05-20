@@ -15,7 +15,7 @@ import { useOuterClick } from '../useOuterCallback';
 import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
-  position: fixed;
+  position: absolute;
   background: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
   font-family: ${getFontFamily('base')};
@@ -25,24 +25,24 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   border: 1px solid ${getColor('graphiteB')};
   border-radius: ${getBorderRadius};
 
-  ${({ isElevated }) =>
-    isElevated && `box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')}`};
-  ${({ width }) => width && `width: ${width}px`};
-  ${({ left }) => left && `left: ${left}px`};
-  ${({ right }) => right && `right: ${right}px`};
-  ${({ top }) => top && `top: ${top}px`};
-  ${({ bottom }) => bottom && `bottom: ${bottom}px`};
+  ${({ $isElevated }) =>
+    $isElevated && `box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')}`};
 `;
 
 const DropdownPane: React.FC<DropdownPaneProps> = ({
   children,
   onClickOut,
-  ...style
+  isElevated = false,
+  ...props
 }) => {
   const dropdownPaneRef = useOuterClick(onClickOut);
 
   return (
-    <StyledDropdownPane ref={dropdownPaneRef} {...style}>
+    <StyledDropdownPane
+      ref={dropdownPaneRef}
+      $isElevated={isElevated}
+      {...props}
+    >
       {children}
     </StyledDropdownPane>
   );
@@ -50,6 +50,7 @@ const DropdownPane: React.FC<DropdownPaneProps> = ({
 
 DropdownPane.propTypes = {
   onClickOut: PropTypes.func.isRequired,
+  isElevated: PropTypes.bool,
 };
 
 export default DropdownPane;
