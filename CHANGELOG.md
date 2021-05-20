@@ -1,3 +1,10 @@
+# [1.0.0-alpha.62](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.61...v1.0.0-alpha.62) (2021-05-20)
+
+
+### Bug Fixes
+
+* **dropdowns:** remove scroll listener for hiding ([90278ca](https://github.com/securityscorecard/design-system/commit/90278ca15670f36bdb0dc97010637c6b5b68e012))
+
 # [1.0.0-alpha.61](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.60...v1.0.0-alpha.61) (2021-05-17)
 
 
