@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
 
-import { getColor, getDepth } from '../../utils/helpers';
+import { getColor } from '../../utils/helpers';
 import ModalHeader from './Header/Header';
 import ModalFooter from './Footer/Footer';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
 import { ColumnConfigMap, FullscreenModalProps } from './FullscreenModal.types';
 import { Col, Container, Row } from '../layout';
+import { useModal } from './hooks/useModal';
 
 const BaseModal = styled.div`
   width: 100%;
@@ -18,7 +19,6 @@ const BaseModal = styled.div`
   left: 0;
   overflow-y: auto;
   background-color: ${getColor('graphite5H')};
-  z-index: ${getDepth('modal')};
 `;
 
 const columnConfigMap: ColumnConfigMap = {
@@ -59,6 +59,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({
   onClose = noop,
   getModalRef,
 }) => {
+  const PortalModal = useModal();
   const closeOnEsc = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
@@ -102,40 +103,42 @@ You should either provide content in "sidebar" property or switch layout to "${F
   }, [getModalRef]);
 
   return (
-    <BaseModal ref={modalRef}>
-      <Container>
-        <Row>
-          <Col cols={headerCols} offset={headerOffset}>
-            <ModalHeader
-              handleClose={onClose}
-              modalRef={modalRef}
-              offset={headerOffset}
-              width={totalContentWidth}
-            >
-              {header}
-            </ModalHeader>
-          </Col>
-        </Row>
-        <Row>
-          {hasLayoutSidebar && (
-            <Col cols={sidebarCols} offset={sidebarOffset}>
-              {sidebar}
+    <PortalModal>
+      <BaseModal ref={modalRef}>
+        <Container>
+          <Row>
+            <Col cols={headerCols} offset={headerOffset}>
+              <ModalHeader
+                handleClose={onClose}
+                modalRef={modalRef}
+                offset={headerOffset}
+                width={totalContentWidth}
+              >
+                {header}
+              </ModalHeader>
             </Col>
-          )}
-          <Col cols={contentCols} offset={contentOffset}>
-            {content}
-            <ModalFooter
-              modalRef={modalRef}
-              offset={headerOffset}
-              scrollToTopButtonLabel={scrollToTopButtonLabel}
-              width={totalContentWidth}
-            >
-              {footer}
-            </ModalFooter>
-          </Col>
-        </Row>
-      </Container>
-    </BaseModal>
+          </Row>
+          <Row>
+            {hasLayoutSidebar && (
+              <Col cols={sidebarCols} offset={sidebarOffset}>
+                {sidebar}
+              </Col>
+            )}
+            <Col cols={contentCols} offset={contentOffset}>
+              {content}
+              <ModalFooter
+                modalRef={modalRef}
+                offset={headerOffset}
+                scrollToTopButtonLabel={scrollToTopButtonLabel}
+                width={totalContentWidth}
+              >
+                {footer}
+              </ModalFooter>
+            </Col>
+          </Row>
+        </Container>
+      </BaseModal>
+    </PortalModal>
   );
 };
 

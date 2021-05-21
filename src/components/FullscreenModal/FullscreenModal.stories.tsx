@@ -9,6 +9,7 @@ import { ButtonVariants } from '../Button/Button.enums';
 import { Link, Paragraph } from '../typography';
 import FullscreenModal from './FullscreenModal';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'components/FullscreenModal',
@@ -31,18 +32,19 @@ export default {
 const header = 'Invite vendor to SecurityScorecard';
 const Content = () => (
   <Paragraph>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam volutpat velit
-    vel urna molestie, vitae sodales sem hendrerit. Nunc risus nibh, rhoncus ut
-    massa id, eleifend lacinia orci. Morbi porta, urna ut tincidunt efficitur,
-    lorem nulla facilisis orci, sit amet rutrum augue elit ut elit. Interdum et
-    malesuada fames ac ante ipsum primis in faucibus. Suspendisse consectetur
-    lectus finibus diam posuere, elementum vehicula sapien placerat. In sed
-    ornare ex, quis lacinia lorem. Nunc rhoncus lorem a laoreet posuere. Nam
-    cursus lorem vestibulum semper pulvinar. Nunc tempus ornare urna, sit amet
-    varius nisl fringilla et. Fusce volutpat urna et aliquet dictum. In nec
-    cursus elit. Vivamus congue ac elit placerat suscipit. Nulla facilisi.
-    Praesent fringilla, quam sit amet blandit tempor, risus leo bibendum leo, ut
-    aliquet metus leo non neque. Etiam in ante arcu.
+    <Tooltip popup="testing content">Lorem ipsum dolor sit amet</Tooltip>,
+    consectetur adipiscing elit. Nam volutpat velit vel urna molestie, vitae
+    sodales sem hendrerit. Nunc risus nibh, rhoncus ut massa id, eleifend
+    lacinia orci. Morbi porta, urna ut tincidunt efficitur, lorem nulla
+    facilisis orci, sit amet rutrum augue elit ut elit. Interdum et malesuada
+    fames ac ante ipsum primis in faucibus. Suspendisse consectetur lectus
+    finibus diam posuere, elementum vehicula sapien placerat. In sed ornare ex,
+    quis lacinia lorem. Nunc rhoncus lorem a laoreet posuere. Nam cursus lorem
+    vestibulum semper pulvinar. Nunc tempus ornare urna, sit amet varius nisl
+    fringilla et. Fusce volutpat urna et aliquet dictum. In nec cursus elit.
+    Vivamus congue ac elit placerat suscipit. Nulla facilisi. Praesent
+    fringilla, quam sit amet blandit tempor, risus leo bibendum leo, ut aliquet
+    metus leo non neque. Etiam in ante arcu.
   </Paragraph>
 );
 const LongContent = () => (
@@ -99,13 +101,28 @@ Sidebar.propTypes = {
 };
 
 export const SingleColumn6: Story = () => (
-  <FullscreenModal
-    content={<Content />}
-    footer={<Footer />}
-    header={header}
-    layout={FullscreenModalLayouts.single6}
-    onClose={action('close modal')}
-  />
+  <>
+    <header
+      style={{
+        position: 'fixed',
+        zIndex: 500,
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100px',
+        backgroundColor: 'black',
+      }}
+    >
+      SSC
+    </header>
+    <FullscreenModal
+      content={<Content />}
+      footer={<Footer />}
+      header={header}
+      layout={FullscreenModalLayouts.single6}
+      onClose={action('close modal')}
+    />
+  </>
 );
 SingleColumn6.storyName = 'Single Column (layout: single-6)';
 SingleColumn6.argTypes = {

@@ -6,7 +6,6 @@ import { transparentize } from 'polished';
 import {
   getBorderRadius,
   getColor,
-  getDepth,
   getFontFamily,
   getFontSize,
   getLineHeight,
@@ -21,7 +20,6 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  z-index: ${getDepth('dropdown')};
   border: 1px solid ${getColor('graphiteB')};
   border-radius: ${getBorderRadius};
 
