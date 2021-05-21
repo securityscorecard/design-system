@@ -22,9 +22,13 @@ import { actionsColumn } from './columns/actionsColumn';
 import { selectionColumn } from './columns/selectionColumn';
 import { Head } from './Head';
 import { Body } from './Body';
+import { LoadingNoData, LoadingOverlay } from './Loading';
 import { Footer } from './Footer';
-import { LoadingOverlay } from './LoadingOverlay';
-import { StyledTable, TableContainer } from './Table.styles';
+import {
+  StyledTable,
+  TableAndLoadingOverlayContainer,
+  TableContainer,
+} from './Table.styles';
 import CellRenderer from './Body/renderers/CellRenderer';
 import { FlexContainer } from '../../FlexContainer';
 import { getColor, pxToRem } from '../../../utils/helpers';
@@ -196,33 +200,38 @@ TableProps<D>): React.ReactElement => {
 
   return (
     <>
-      <TableContainer>
-        <StyledTable
-          className={cls({ 'has-exclusive-selection': hasExclusiveSelection })}
-          {...getTableProps()}
-        >
-          <Head headerGroups={headerGroups} />
-          <Body<D>
-            prepareRow={prepareRow}
-            rows={rows}
-            {...getTableBodyProps()}
-          />
-        </StyledTable>
-      </TableContainer>
-      {isDataLoading ? (
-        <LoadingOverlay />
-      ) : (
-        dataSize === 0 && (
-          <>
-            <NoDataContainer>
+      <TableAndLoadingOverlayContainer>
+        <TableContainer>
+          <StyledTable
+            className={cls({
+              'has-exclusive-selection': hasExclusiveSelection,
+            })}
+            {...getTableProps()}
+          >
+            <Head headerGroups={headerGroups} />
+            <Body<D>
+              prepareRow={prepareRow}
+              rows={rows}
+              {...getTableBodyProps()}
+            />
+          </StyledTable>
+        </TableContainer>
+        {dataSize > 0 && isDataLoading && <LoadingOverlay />}
+      </TableAndLoadingOverlayContainer>
+      {dataSize === 0 && (
+        <NoDataContainer>
+          {isDataLoading ? (
+            <LoadingNoData />
+          ) : (
+            <>
               {hasAppliedFilters ? (
                 <NoMatchingDataComponent />
               ) : (
                 <NoDataComponent />
               )}
-            </NoDataContainer>
-          </>
-        )
+            </>
+          )}
+        </NoDataContainer>
       )}
       <Footer
         hasPagination={hasPagination && dataSize > 0}
