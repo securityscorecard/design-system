@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
@@ -194,8 +194,7 @@ export const Sidebar4Column6: Story = () => (
 Sidebar4Column6.storyName = 'Two Columns with sidebar (layout: sidebar-4-6)';
 
 export const Sidebar4Column8: Story = () => {
-  const [modalRef, setModalRef] = useState(null);
-  const getModalRef = (ref) => setModalRef(ref.current);
+  const modalRef = useRef(null);
   const timeout = useRef(null);
 
   const logEvent = useCallback((event) => {
@@ -209,24 +208,25 @@ export const Sidebar4Column8: Story = () => {
   }, []);
 
   useEffect(() => {
-    if (modalRef !== null) {
-      modalRef.addEventListener('scroll', logEvent);
+    const currentRef = modalRef.current;
+    if (currentRef !== null) {
+      currentRef.addEventListener('scroll', logEvent);
     }
     return () => {
-      if (modalRef !== null) {
-        modalRef.removeEventListener('scroll', logEvent);
+      if (currentRef !== null) {
+        currentRef.removeEventListener('scroll', logEvent);
       }
     };
-  }, [modalRef, logEvent]);
+  }, [logEvent]);
 
   return (
     <FullscreenModal
+      ref={modalRef}
       content={<LongContent />}
       footer={<Footer />}
-      getModalRef={getModalRef}
       header={header}
       layout={FullscreenModalLayouts.sidebar48}
-      sidebar={<Sidebar modalRef={modalRef} />}
+      sidebar={<Sidebar modalRef={modalRef.current} />}
       onClose={action('close modal')}
     />
   );
