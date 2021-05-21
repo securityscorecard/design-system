@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  any,
   assoc,
   defaultTo,
   equals,
@@ -10,6 +11,7 @@ import {
   pipe,
   propEq,
   propSatisfies,
+  unless,
   update,
 } from 'ramda';
 import {
@@ -55,6 +57,7 @@ const getDefaultState = ([firstField]: Field[]) => {
       condition,
       value,
       isApplied: false,
+      isLoading: false,
     },
   ];
 };
@@ -93,6 +96,22 @@ const Filters: React.FC<FiltersProps> = ({
     }
   }, [filtersValues, fields]);
 
+  useEffect(() => {
+    if (
+      filtersValues &&
+      !isLoading &&
+      any(propEq('isLoading', true))(filtersValues)
+    ) {
+      setFiltersValues(
+        pipe(
+          filter(propSatisfies(isNotUndefined, 'value')),
+          map(assoc('isLoading', false)),
+          map(assoc('isApplied', true)),
+        )(filtersValues),
+      );
+    }
+  }, [filtersValues, isLoading]);
+
   const handleError = (hasError, index) => {
     const newValidValues = [...validValues];
     newValidValues[index] = !hasError;
@@ -122,6 +141,7 @@ const Filters: React.FC<FiltersProps> = ({
       ...row,
       operator: value,
       isApplied: false,
+      isLoading: false,
     }));
 
     setFiltersValues(newFilters);
@@ -133,7 +153,14 @@ const Filters: React.FC<FiltersProps> = ({
     setFiltersValues((filters) => {
       const newFilters = update(
         index,
-        { ...filters[index], field, condition, value, isApplied: false },
+        {
+          ...filters[index],
+          field,
+          condition,
+          value,
+          isApplied: false,
+          isLoading: false,
+        },
         filters,
       );
       callOnChange(newFilters);
@@ -146,7 +173,13 @@ const Filters: React.FC<FiltersProps> = ({
     setFiltersValues((filters) => {
       const newFilters = update(
         index,
-        { ...filters[index], condition, value, isApplied: false },
+        {
+          ...filters[index],
+          condition,
+          value,
+          isApplied: false,
+          isLoading: false,
+        },
         filters,
       );
       callOnChange(newFilters);
@@ -159,7 +192,12 @@ const Filters: React.FC<FiltersProps> = ({
     setFiltersValues((filters) => {
       const newFilters = update(
         index,
-        { ...filters[index], value: value || undefined, isApplied: false },
+        {
+          ...filters[index],
+          value: value || undefined,
+          isApplied: false,
+          isLoading: false,
+        },
         filters,
       );
       callOnChange(newFilters);
@@ -179,6 +217,7 @@ const Filters: React.FC<FiltersProps> = ({
       condition,
       value,
       isApplied: false,
+      isLoading: false,
     };
     const filtersWithNewRow = [...newFilters, newRow];
     setFiltersValues(filtersWithNewRow);
@@ -206,7 +245,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     const newFilters = pipe(
       filter(propSatisfies(isNotUndefined, 'value')),
-      map(assoc('isApplied', true)),
+      map(unless(propEq('isApplied', true), assoc('isLoading', true))),
     )(filtersValues);
     const defaultState = getDefaultState(fields);
 
@@ -252,25 +291,22 @@ const Filters: React.FC<FiltersProps> = ({
 
   return (
     <FlexContainer flexDirection="column" flexGrow={1}>
-      {filtersValues.map((props, index) => {
-        const id = generateId(props, index);
-        return (
-          <FilterRow
-            key={id}
-            fields={fields}
-            index={index}
-            isDefaultState={isDefaultState}
-            isInvalid={validValues[index] === false}
-            onConditionChange={handleConditionChange}
-            onError={(hasError) => handleError(hasError, index)}
-            onFieldChange={handleFieldChange}
-            onOperatorChange={handleOperatorChange}
-            onRemove={handleRemoveFilter}
-            onValueChange={handleValueChange}
-            {...filtersValues[index]}
-          />
-        );
-      })}
+      {filtersValues.map((props, index) => (
+        <FilterRow
+          key={generateId(props, index)}
+          fields={fields}
+          index={index}
+          isDefaultState={isDefaultState}
+          isInvalid={validValues[index] === false}
+          onConditionChange={handleConditionChange}
+          onError={(hasError) => handleError(hasError, index)}
+          onFieldChange={handleFieldChange}
+          onOperatorChange={handleOperatorChange}
+          onRemove={handleRemoveFilter}
+          onValueChange={handleValueChange}
+          {...filtersValues[index]}
+        />
+      ))}
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
         isApplyDisabled={hasInvalidValues}

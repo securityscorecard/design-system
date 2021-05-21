@@ -218,7 +218,7 @@ TableProps<D>): React.ReactElement => {
         </TableContainer>
         {dataSize > 0 && isDataLoading && <LoadingOverlay />}
       </TableAndLoadingOverlayContainer>
-      {dataSize === 0 && (
+      {dataSize === 0 ? (
         <NoDataContainer>
           {isDataLoading ? (
             <LoadingNoData />
@@ -232,14 +232,15 @@ TableProps<D>): React.ReactElement => {
             </>
           )}
         </NoDataContainer>
+      ) : (
+        <Footer
+          hasPagination={hasPagination && dataSize > 0}
+          isDataLoading={isDataLoading}
+          pageCount={pageCount}
+          pageIndex={pageIndex}
+          onGotoPage={gotoPage}
+        />
       )}
-      <Footer
-        hasPagination={hasPagination && dataSize > 0}
-        isDataLoading={isDataLoading}
-        pageCount={pageCount}
-        pageIndex={pageIndex}
-        onGotoPage={gotoPage}
-      />
     </>
   );
 };

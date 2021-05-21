@@ -56,6 +56,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   // defaultIsColumnVisibilityOpen,
   // defaultIsColumnVisibilityApplied,
   // defaultHiddenColumns,
+  isDataLoading,
   hasColumnOrdering,
   defaultIsColumnOrderingOpen,
   defaultIsColumnOrderingApplied,
@@ -286,6 +287,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
         <FiltersContainer padding={{ top: 1.2, bottom: 0.8, horizontal: 0.8 }}>
           <Filters
             fields={filteringFields}
+            isLoading={isDataLoading}
             state={filteringStoreState}
             onApply={handleApplyFilter}
             onClose={handleCloseFilter}

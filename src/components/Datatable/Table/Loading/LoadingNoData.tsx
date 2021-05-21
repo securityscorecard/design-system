@@ -1,13 +1,25 @@
 import React from 'react';
 
 import { H4, Paragraph } from '../../../typography';
+import { FlexContainer } from '../../../FlexContainer';
+import { Spinner } from '../../../Spinner';
 import { TextSizes } from '../../../typography/Text/Text.enums';
 
 const LoadingNoData: React.FC = () => (
   <>
-    <H4 margin={{ top: 0, bottom: 0.8 }}>Loading...</H4>
-    <Paragraph margin={{ bottom: 0.8 }} size={TextSizes.md}>
-      Please wait, this may take a few moments
+    <FlexContainer alignItems="center">
+      <Spinner
+        borderWidth={2}
+        height={16}
+        horizontalMargin={0}
+        verticalMargin={0}
+        width={16}
+        dark
+      />
+      <H4 margin={{ top: 0, bottom: 0, left: 0.5 }}>Loading</H4>
+    </FlexContainer>
+    <Paragraph margin={{ top: 0.8, bottom: 0.8 }} size={TextSizes.md}>
+      This may take a few moments.
     </Paragraph>
   </>
 );

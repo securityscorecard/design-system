@@ -78,7 +78,12 @@ const Datatable = <D extends Record<string, unknown>>({
 
   return (
     <StyledDatatable flexDirection="column">
-      {isControlsEnabled && <ControlsModule<D> {...restControlsConfig} />}
+      {isControlsEnabled && (
+        <ControlsModule<D>
+          {...restControlsConfig}
+          isDataLoading={isDataLoading}
+        />
+      )}
       <BatchModule
         actions={batchActions}
         dataSize={dataSize}

@@ -68,6 +68,7 @@ export const mockTestState: Filter[] = [
     condition: 'is',
     value: '2',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
@@ -75,6 +76,7 @@ export const mockTestState: Filter[] = [
     condition: 'contains',
     value: 'Value Option C',
     isApplied: true,
+    isLoading: false,
   },
 ];
 
@@ -329,12 +331,14 @@ export const state: Filter[] = [
     condition: 'is not',
     value: 'securityscorecard.io',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
     field: 'ip',
     condition: 'contains',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
@@ -342,18 +346,21 @@ export const state: Filter[] = [
     condition: 'is greater than',
     value: '2',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
     field: 'issue count',
     condition: 'is less than',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
     field: 'issue count',
     condition: 'is at most',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
@@ -361,12 +368,14 @@ export const state: Filter[] = [
     condition: 'after',
     value: new Date('2021-02-16T00:00:00Z'),
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
     field: 'first observed',
     condition: 'between',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
@@ -374,6 +383,7 @@ export const state: Filter[] = [
     condition: 'is',
     value: 'any',
     isApplied: true,
+    isLoading: false,
   },
   {
     operator: Operators.and,
@@ -381,6 +391,7 @@ export const state: Filter[] = [
     condition: 'contains',
     value: 'any',
     isApplied: true,
+    isLoading: false,
   },
 ];
 
@@ -392,6 +403,7 @@ export const stateWithUnappliedFilters: Filter[] = [
     condition: 'contains',
     value: '.io',
     isApplied: false,
+    isLoading: false,
   },
   {
     operator: Operators.and,
@@ -399,6 +411,7 @@ export const stateWithUnappliedFilters: Filter[] = [
     condition: 'contains',
     value: 'example',
     isApplied: false,
+    isLoading: false,
   },
 ];
 
