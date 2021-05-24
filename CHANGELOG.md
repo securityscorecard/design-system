@@ -1,3 +1,11 @@
+# [1.0.0-alpha.63](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.62...v1.0.0-alpha.63) (2021-05-24)
+
+
+### Bug Fixes
+
+* **Button:** stop forwarding margin prop to DOM ([4c1fc6a](https://github.com/securityscorecard/design-system/commit/4c1fc6ae88eb89eaed6638f623460cddb4ac0865))
+* **Button:** stop forwarding margin prop to DOM ([7fd8476](https://github.com/securityscorecard/design-system/commit/7fd8476618fba6ce812366ca08d2143584597d7e))
+
 # [1.0.0-alpha.62](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.61...v1.0.0-alpha.62) (2021-05-20)
 
 
