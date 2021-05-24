@@ -1,18 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import { FlexContainer } from '../../FlexContainer';
-import { Paragraph, Text } from '../../typography';
-import { Spinner } from '../../Spinner';
+import { Paragraph } from '../../typography';
 import { Button } from '../../Button';
 import { BottomBarProps } from './BottomBar.types';
-import { getColor, pxToRem } from '../../../utils/helpers';
-
-const LoadingText = styled(Text)`
-  margin-left: ${pxToRem(8)};
-  color: ${getColor('graphite5H')};
-`;
 
 const BottomBar: React.FC<BottomBarProps> = ({
   onSubmit,
@@ -44,14 +36,14 @@ const BottomBar: React.FC<BottomBarProps> = ({
         </Button>
       </FlexContainer>
       <FlexContainer alignItems="center">
-        {hasUnappliedFilters && (
+        {(hasUnappliedFilters || isLoading) && (
           <Paragraph
             as="div"
             margin={{ right: 0.8, bottom: 0 }}
             size="md"
             variant="secondary"
           >
-            You have unapplied filters
+            {isLoading ? 'Processing...' : 'You have unapplied filters'}
           </Paragraph>
         )}
         <Button
@@ -69,19 +61,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
           variant="solid"
           onClick={onSubmit}
         >
-          {isLoading ? (
-            <>
-              <Spinner
-                borderWidth={2}
-                height={16}
-                verticalMargin={0}
-                width={16}
-              />
-              <LoadingText size="md">Fetching results</LoadingText>
-            </>
-          ) : (
-            'Apply'
-          )}
+          Apply
         </Button>
       </FlexContainer>
     </FlexContainer>

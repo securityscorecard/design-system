@@ -118,6 +118,7 @@ describe('Datatable/ControlsModule', () => {
           condition: 'is',
           value: 'text',
           isApplied: true,
+          isLoading: false,
         },
       ];
       renderWithProviders(
@@ -155,7 +156,8 @@ describe('Datatable/ControlsModule', () => {
           field: 'ip',
           condition: 'is',
           value: 'text',
-          isApplied: true,
+          isLoading: true,
+          isApplied: false,
         },
       ]);
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(true);
