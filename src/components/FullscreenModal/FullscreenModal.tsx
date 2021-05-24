@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
 
-import { getColor, getDepth } from '../../utils/helpers';
+import { getColor } from '../../utils/helpers';
 import ModalHeader from './Header/Header';
 import ModalFooter from './Footer/Footer';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
 import { ColumnConfigMap, FullscreenModalProps } from './FullscreenModal.types';
 import { Col, Container, Row } from '../layout';
+import { useModal } from './hooks/useModal';
 
 const BaseModal = styled.div`
   width: 100%;
@@ -18,7 +19,6 @@ const BaseModal = styled.div`
   left: 0;
   overflow-y: auto;
   background-color: ${getColor('graphite5H')};
-  z-index: ${getDepth('modal')};
 `;
 
 const columnConfigMap: ColumnConfigMap = {
@@ -49,95 +49,96 @@ const columnConfigMap: ColumnConfigMap = {
   },
 };
 
-const FullscreenModal: React.FC<FullscreenModalProps> = ({
-  layout = FullscreenModalLayouts.single6,
-  header,
-  content,
-  sidebar,
-  footer,
-  scrollToTopButtonLabel,
-  onClose = noop,
-  getModalRef,
-}) => {
-  const closeOnEsc = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape' || e.key === 'Esc') {
-        onClose();
-      }
-    },
-    [onClose],
-  );
+const FullscreenModal = forwardRef(
+  (
+    {
+      layout = FullscreenModalLayouts.single6,
+      header,
+      content,
+      sidebar,
+      footer,
+      scrollToTopButtonLabel,
+      onClose = noop,
+    }: FullscreenModalProps,
+    ref: React.MutableRefObject<HTMLDivElement>,
+  ): React.ReactElement => {
+    const PortalModal = useModal();
+    const defaultModalRef = useRef<HTMLDivElement>();
+    const resolvedModalRef = ref || defaultModalRef;
+    const closeOnEsc = useCallback(
+      (e: KeyboardEvent) => {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+          onClose();
+        }
+      },
+      [onClose],
+    );
 
-  useEffect(() => {
-    document.addEventListener('keydown', closeOnEsc);
+    useEffect(() => {
+      document.addEventListener('keydown', closeOnEsc);
 
-    return () => {
-      document.removeEventListener('keydown', closeOnEsc);
-    };
-  }, [closeOnEsc]);
+      return () => {
+        document.removeEventListener('keydown', closeOnEsc);
+      };
+    }, [closeOnEsc]);
 
-  const modalRef = useRef<HTMLDivElement>(null);
+    const {
+      header: [headerCols, headerOffset],
+      sidebar: [sidebarCols, sidebarOffset],
+      content: [contentCols, contentOffset],
+    } = columnConfigMap[layout];
 
-  const {
-    header: [headerCols, headerOffset],
-    sidebar: [sidebarCols, sidebarOffset],
-    content: [contentCols, contentOffset],
-  } = columnConfigMap[layout];
+    const hasLayoutSidebar = sidebarCols > 0;
+    const totalContentWidth = contentCols + sidebarCols;
 
-  const hasLayoutSidebar = sidebarCols > 0;
-  const totalContentWidth = contentCols + sidebarCols;
-
-  if (hasLayoutSidebar && isUndefined(sidebar)) {
-    throw new Error(
-      `You chose to use modal layout with sidebar (current: ${layout}) but you didn't provide sidebar content.
+    if (hasLayoutSidebar && isUndefined(sidebar)) {
+      throw new Error(
+        `You chose to use modal layout with sidebar (current: ${layout}) but you didn't provide sidebar content.
 You should either provide content in "sidebar" property or switch layout to "${FullscreenModalLayouts.single6}" or "${FullscreenModalLayouts.single8}"
 `,
-    );
-  }
-
-  useEffect(() => {
-    if (getModalRef !== undefined) {
-      getModalRef(modalRef);
+      );
     }
-  }, [getModalRef]);
 
-  return (
-    <BaseModal ref={modalRef}>
-      <Container>
-        <Row>
-          <Col cols={headerCols} offset={headerOffset}>
-            <ModalHeader
-              handleClose={onClose}
-              modalRef={modalRef}
-              offset={headerOffset}
-              width={totalContentWidth}
-            >
-              {header}
-            </ModalHeader>
-          </Col>
-        </Row>
-        <Row>
-          {hasLayoutSidebar && (
-            <Col cols={sidebarCols} offset={sidebarOffset}>
-              {sidebar}
-            </Col>
-          )}
-          <Col cols={contentCols} offset={contentOffset}>
-            {content}
-            <ModalFooter
-              modalRef={modalRef}
-              offset={headerOffset}
-              scrollToTopButtonLabel={scrollToTopButtonLabel}
-              width={totalContentWidth}
-            >
-              {footer}
-            </ModalFooter>
-          </Col>
-        </Row>
-      </Container>
-    </BaseModal>
-  );
-};
+    return (
+      <PortalModal>
+        <BaseModal ref={resolvedModalRef}>
+          <Container>
+            <Row>
+              <Col cols={headerCols} offset={headerOffset}>
+                <ModalHeader
+                  handleClose={onClose}
+                  modalRef={resolvedModalRef}
+                  offset={headerOffset}
+                  width={totalContentWidth}
+                >
+                  {header}
+                </ModalHeader>
+              </Col>
+            </Row>
+            <Row>
+              {hasLayoutSidebar && (
+                <Col cols={sidebarCols} offset={sidebarOffset}>
+                  {sidebar}
+                </Col>
+              )}
+              <Col cols={contentCols} offset={contentOffset}>
+                {content}
+                <ModalFooter
+                  modalRef={resolvedModalRef}
+                  offset={headerOffset}
+                  scrollToTopButtonLabel={scrollToTopButtonLabel}
+                  width={totalContentWidth}
+                >
+                  {footer}
+                </ModalFooter>
+              </Col>
+            </Row>
+          </Container>
+        </BaseModal>
+      </PortalModal>
+    );
+  },
+);
 
 FullscreenModal.propTypes = {
   header: PropTypes.node.isRequired,
@@ -147,7 +148,6 @@ FullscreenModal.propTypes = {
   sidebar: PropTypes.node,
   layout: PropTypes.oneOf(Object.values(FullscreenModalLayouts)),
   scrollToTopButtonLabel: PropTypes.string,
-  getModalRef: PropTypes.func,
 };
 
 export default FullscreenModal;
