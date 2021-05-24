@@ -1,3 +1,21 @@
+# [1.0.0-alpha.64](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.63...v1.0.0-alpha.64) (2021-05-24)
+
+
+### Bug Fixes
+
+* **DataTable:** cleanup dom ([92f3d63](https://github.com/securityscorecard/design-system/commit/92f3d638dce58ab26a2c5fd7d83bad3a7558cd22))
+* **dropdowns:** remove scroll listener for hiding ([26590b6](https://github.com/securityscorecard/design-system/commit/26590b6b1edc9a98b36584f6a2de47b01a345706))
+* **FullscreenModal:** fix ref forwarding ([43f10df](https://github.com/securityscorecard/design-system/commit/43f10df5360745863a35abe22016ee4e3f639110))
+* **portals:** fix portals stacking ([a1aa3c4](https://github.com/securityscorecard/design-system/commit/a1aa3c48989c5fab367a69d49e6980b6d41efceb))
+
+
+### Features
+
+* **DataTable:** add loading overlay ([983100c](https://github.com/securityscorecard/design-system/commit/983100c32e4179fe2d904f163afba88bb39d597e))
+* **DataTable:** add no data loading indicator ([14fcd1f](https://github.com/securityscorecard/design-system/commit/14fcd1fdae54c40ab4be40fa2227ecb3cb273c21))
+* **DataTable:** change loading overlay colors ([d226c28](https://github.com/securityscorecard/design-system/commit/d226c281d196584921362ee06ff2b2a39db91818))
+* **Filters:** add loading state to unapplied filters ([e80eac5](https://github.com/securityscorecard/design-system/commit/e80eac513d2ac19b26e8ca3fef93d2bd4230b6d0))
+
 # [1.0.0-alpha.63](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.62...v1.0.0-alpha.63) (2021-05-24)
 
 
