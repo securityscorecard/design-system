@@ -220,6 +220,7 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
       'variant',
       'color',
       'icon',
+      'margin',
       'isLoading',
       'isDisabled',
       'isExpanded',
