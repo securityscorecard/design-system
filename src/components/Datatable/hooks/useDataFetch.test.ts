@@ -14,6 +14,7 @@ const filters = [
     field: 'colId',
     condition: '=',
     isApplied: true,
+    isLoading: false,
     value: 'value',
   },
 ];

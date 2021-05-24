@@ -37,6 +37,7 @@ export const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     // onSuggestionsFetch: noop,
   },
   hasFiltering: true,
+  isDataLoading: false,
   filteringConfig: {
     onChange: noop,
     onApply: noop,

@@ -248,3 +248,7 @@ export const StyledTable = styled.table`
     }
   }
 `;
+
+export const TableAndLoadingOverlayContainer = styled.div`
+  position: relative;
+`;

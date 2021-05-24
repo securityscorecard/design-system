@@ -214,6 +214,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   condition: conditionValue,
   value: componentValue,
   isApplied,
+  isLoading,
   isInvalid,
   onError,
 }) => {
@@ -286,7 +287,12 @@ const FilterRow: React.FC<FilterRowProps> = ({
   return (
     <FlexContainer margin={{ bottom: 0.5 }}>
       {!isDefaultState && (
-        <StateButton index={index} isApplied={isApplied} onClick={onRemove} />
+        <StateButton
+          index={index}
+          isApplied={isApplied}
+          isLoading={isLoading}
+          onClick={onRemove}
+        />
       )}
       <SplitField $width={72}>
         {index === 1 ? (
@@ -338,6 +344,7 @@ FilterRow.propTypes = {
   condition: PropTypes.string.isRequired,
   operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
   isApplied: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   isDefaultState: PropTypes.bool.isRequired,
   isInvalid: PropTypes.bool.isRequired,
   onOperatorChange: PropTypes.func.isRequired,

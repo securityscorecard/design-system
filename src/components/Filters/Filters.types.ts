@@ -50,6 +50,7 @@ export interface Filter {
   field: string;
   condition: string;
   isApplied: boolean;
+  isLoading: boolean;
   value?: string | string[] | Date | DateRange;
 }
 
@@ -111,6 +112,7 @@ export const FilterStatePropType = PropTypes.exact({
     DateRangePickerPropTypes,
   ]),
   isApplied: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 });
 
 export const FiltersPropType = {

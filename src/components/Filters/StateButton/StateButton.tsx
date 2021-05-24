@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { IconTypes } from '../../../theme/icons/icons.enums';
 import { Icon } from '../../Icon';
 import { Text } from '../../typography/Text';
+import { Spinner } from '../../Spinner';
 import { FlexContainer } from '../../FlexContainer';
 import {
   getBorderRadius,
@@ -68,6 +69,7 @@ const StateButton: React.FC<StateButtonProps> = ({
   index,
   onClick,
   isApplied = false,
+  isLoading = false,
 }) => {
   const {
     iconColor,
@@ -82,12 +84,16 @@ const StateButton: React.FC<StateButtonProps> = ({
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
     >
-      <Icon
-        color={iconColor}
-        name={iconName}
-        type={IconTypes.ssc}
-        hasFixedWidth
-      />
+      {isLoading ? (
+        <Spinner borderWidth={2} height={20} width={20} dark />
+      ) : (
+        <Icon
+          color={iconColor}
+          name={iconName}
+          type={IconTypes.ssc}
+          hasFixedWidth
+        />
+      )}
       <Popup alignItems="center" justifyContent="center">
         <LightText>Remove</LightText>
       </Popup>
@@ -101,4 +107,5 @@ StateButton.propTypes = {
   index: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   isApplied: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };

@@ -22,6 +22,7 @@ import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
 
 const StyledDatatable = styled(FlexContainer)`
+  position: relative;
   border: 1px solid ${getColor('graphiteH')};
   border-radius: ${getBorderRadius};
   background: ${getColor('graphite3H')};
@@ -77,7 +78,12 @@ const Datatable = <D extends Record<string, unknown>>({
 
   return (
     <StyledDatatable flexDirection="column">
-      {isControlsEnabled && <ControlsModule<D> {...restControlsConfig} />}
+      {isControlsEnabled && (
+        <ControlsModule<D>
+          {...restControlsConfig}
+          isDataLoading={isDataLoading}
+        />
+      )}
       <BatchModule
         actions={batchActions}
         dataSize={dataSize}
