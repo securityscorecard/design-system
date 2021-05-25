@@ -1,3 +1,10 @@
+# [1.0.0-alpha.66](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.65...v1.0.0-alpha.66) (2021-05-25)
+
+
+### Bug Fixes
+
+* **Filters:** remove preventing default in components ([159e358](https://github.com/securityscorecard/design-system/commit/159e3589e39037ab05e5f6561c87214d129e8e15))
+
 # [1.0.0-alpha.65](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.64...v1.0.0-alpha.65) (2021-05-25)
 
 
