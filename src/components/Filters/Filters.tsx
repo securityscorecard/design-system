@@ -212,10 +212,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(isEmptyArray(newFilters) ? defaultState : newFilters);
 
-    // Don't apply empty filters
-    if (!isEmptyArray(newFilters)) {
-      onApply(newFilters);
-    }
+    onApply(newFilters);
   };
 
   const handleRemoveFilter = (index) => () => {
