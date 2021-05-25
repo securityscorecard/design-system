@@ -153,7 +153,7 @@ const renderComponentWithProps = (
 const renderSelectComponent = (Component, value, onChange) => {
   const {
     component: SelectComponent,
-    props: { options, isMulti, placeholder = 'Category' },
+    props: { options, isMulti, placeholder = 'Please select…' },
   } = Component;
 
   const valueOptions = isArray(value)

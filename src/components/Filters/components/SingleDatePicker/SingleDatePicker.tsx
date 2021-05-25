@@ -17,7 +17,7 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
   onChange,
   minDate,
   maxDate,
-  placeholder = 'Date',
+  placeholder = 'Enter date…',
 }) => (
   <StyledDatePicker>
     <DatePicker
