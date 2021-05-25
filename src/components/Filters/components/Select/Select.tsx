@@ -23,24 +23,15 @@ const MultiValue: React.FC<MultiValueProps<OptionTypeBase>> = (props) => {
   return <Tag value={data.label} onClose={removeProps.onClick} />;
 };
 
-const Select: React.FC<SelectProps> = (props) => {
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-    }
-  };
-
-  return (
-    <ReactSelect
-      components={{ DropdownIndicator, MultiValue }}
-      isClearable={false}
-      maxMenuHeight={163} // 5 menu options
-      styles={selectStyles}
-      onKeyDown={handleKeyPress}
-      {...props}
-    />
-  );
-};
+const Select: React.FC<SelectProps> = (props) => (
+  <ReactSelect
+    components={{ DropdownIndicator, MultiValue }}
+    isClearable={false}
+    maxMenuHeight={163} // 5 menu options
+    styles={selectStyles}
+    {...props}
+  />
+);
 
 export default Select;
 
