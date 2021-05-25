@@ -26,12 +26,6 @@ const Number: React.FC<NumberProps> = ({
   isInvalid = false,
   onError,
 }) => {
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-    }
-  };
-
   const handleOnChange = (event) => {
     onChange(event);
     const hasError =
@@ -49,7 +43,6 @@ const Number: React.FC<NumberProps> = ({
         type="number"
         value={value}
         onChange={handleOnChange}
-        onKeyPress={handleKeyPress}
       />
       {isInvalid && <Error>{errorMessage}</Error>}
     </>

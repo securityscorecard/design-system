@@ -73,12 +73,6 @@ const Input: React.FC<InputProps> = ({
     handleOnValidate(event);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-    }
-  };
-
   return (
     <>
       <StyledInput
@@ -90,7 +84,6 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onBlur={handleOnValidate}
         onChange={handleOnChange}
-        onKeyPress={handleKeyPress}
       />
       {isInvalid && <Error>{errorMessage}</Error>}
     </>
