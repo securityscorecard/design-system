@@ -1,3 +1,10 @@
+# [1.0.0-alpha.65](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.64...v1.0.0-alpha.65) (2021-05-25)
+
+
+### Bug Fixes
+
+* apply empty filters ([60b3a99](https://github.com/securityscorecard/design-system/commit/60b3a99100ac6b77107494c2bd83a2e1f177ab64))
+
 # [1.0.0-alpha.64](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.63...v1.0.0-alpha.64) (2021-05-24)
 
 
