@@ -1,3 +1,10 @@
+# [1.0.0-alpha.67](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.66...v1.0.0-alpha.67) (2021-05-25)
+
+
+### Bug Fixes
+
+* **Filters:** update components placeholder ([3000a9f](https://github.com/securityscorecard/design-system/commit/3000a9fa5871058c448bb5ea409b1e86345e33d9))
+
 # [1.0.0-alpha.66](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.65...v1.0.0-alpha.66) (2021-05-25)
 
 
