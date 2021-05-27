@@ -1,3 +1,10 @@
+# [1.0.0-alpha.69](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.68...v1.0.0-alpha.69) (2021-05-27)
+
+
+### Bug Fixes
+
+* **FullscreenModal:** render portal content only once ([db74737](https://github.com/securityscorecard/design-system/commit/db7473726a6948276cf71d18724b76141dca41ed))
+
 # [1.0.0-alpha.68](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.67...v1.0.0-alpha.68) (2021-05-27)
 
 
