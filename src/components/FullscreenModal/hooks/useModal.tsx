@@ -15,7 +15,7 @@ const createEl = (id: string): HTMLElement => {
 const getContainer = (id: string): HTMLElement =>
   document.getElementById(id) || createEl(id);
 
-export const useModal = (): React.FC | null => {
+export const useModal = (el: React.ReactElement): (() => React.ReactPortal) => {
   const { portalsContainerId } = useContext(DSContext);
   const containerRef = useRef(getContainer(portalsContainerId));
 
@@ -36,8 +36,8 @@ export const useModal = (): React.FC | null => {
     };
   }, [portalsContainerId]);
 
-  return ({ children }) => {
+  return () => {
     if (isNull(containerRef.current)) return null;
-    return createPortal(children, containerRef.current);
+    return createPortal(el, containerRef.current);
   };
 };
