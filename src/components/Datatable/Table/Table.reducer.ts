@@ -8,7 +8,6 @@ type StateReducerFn<D extends Record<string, unknown>> = (
 export const actions = {
   deselectAllRows: 'deselectAllRows',
   toggleSingleRowSelected: 'toggleSingleRowSelected',
-  reloadData: 'reloadData',
 };
 
 export const tableActionsReducer = <D extends Record<string, unknown>>({
