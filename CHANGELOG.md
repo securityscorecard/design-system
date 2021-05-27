@@ -1,3 +1,16 @@
+# [1.0.0-alpha.68](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.67...v1.0.0-alpha.68) (2021-05-27)
+
+
+### Bug Fixes
+
+* **Table:** remove unused action ([02aaa63](https://github.com/securityscorecard/design-system/commit/02aaa63b22e4040901efe382c1e3b79981afc25a))
+
+
+### Features
+
+* **Table:** reset page index after sort ([cfa6ca3](https://github.com/securityscorecard/design-system/commit/cfa6ca3331854f4204e55252830baa687b97ff9e))
+* **Table:** reset pagination after applying new filters ([f29cc21](https://github.com/securityscorecard/design-system/commit/f29cc21d8a44adaeb5e9207dfe368c8c2bb4d81c))
+
 # [1.0.0-alpha.67](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.66...v1.0.0-alpha.67) (2021-05-25)
 
 
