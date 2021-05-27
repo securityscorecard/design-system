@@ -12,7 +12,7 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { keys, prop, F as stubFalse } from 'ramda';
+import { any, keys, prop, propEq, F as stubFalse } from 'ramda';
 import cls from 'classnames';
 import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
 
@@ -111,7 +111,7 @@ TableProps<D>): React.ReactElement => {
     pageCount,
     dispatch,
     setColumnOrder,
-    state: { pageIndex, selectedRowIds },
+    state: { pageIndex, selectedRowIds, pageSize, sortBy },
   } = useTable<D>(
     {
       columns,
@@ -167,6 +167,11 @@ TableProps<D>): React.ReactElement => {
     },
   );
 
+  const gotoPageAndLoadData = (newPageIndex) => {
+    gotoPage(newPageIndex);
+    collectFetchParams(newPageIndex, pageSize, sortBy);
+  };
+
   useEffect(() => {
     const unsubscribe = DatatableStore.createReaction(
       (s) => s.shouldResetSelectedRows,
@@ -193,6 +198,18 @@ TableProps<D>): React.ReactElement => {
       unsubscribe();
     };
   }, [setColumnOrder]);
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => s.filters,
+      (filters) => {
+        if (any(propEq('isLoading', true))(filters)) gotoPage(0);
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [setColumnOrder, gotoPage]);
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);
@@ -238,7 +255,7 @@ TableProps<D>): React.ReactElement => {
           isDataLoading={isDataLoading}
           pageCount={pageCount}
           pageIndex={pageIndex}
-          onGotoPage={gotoPage}
+          onGotoPage={gotoPageAndLoadData}
         />
       )}
     </>

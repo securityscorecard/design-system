@@ -161,6 +161,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
     });
 
     DatatableStore.update((s) => {
+      s.pageIndex = 0;
       s.filters = appliedfilters;
       s.hasAppliedFilters = hasAppliedFilters;
     });
