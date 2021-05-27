@@ -20,11 +20,11 @@ export const tableActionsReducer = <D extends Record<string, unknown>>({
     sortBy: SortingRule<D>[],
   ) => void;
 }): StateReducerFn<D> => (newState, action): TableState<D> => {
-  const { pageIndex, pageSize, sortBy } = newState;
+  const { pageSize, sortBy } = newState;
 
   switch (action.type) {
     case 'toggleSortBy':
-      collectFetchParams(pageIndex, pageSize, sortBy);
+      collectFetchParams(0, pageSize, sortBy);
       break;
     case actions.deselectAllRows:
       return { ...newState, selectedRowIds: {} };
