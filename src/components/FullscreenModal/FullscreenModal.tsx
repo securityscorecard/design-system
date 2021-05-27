@@ -49,7 +49,7 @@ const columnConfigMap: ColumnConfigMap = {
   },
 };
 
-const FullscreenModal = forwardRef(
+const FullscreenModalContent = forwardRef(
   (
     {
       layout = FullscreenModalLayouts.single6,
@@ -62,9 +62,6 @@ const FullscreenModal = forwardRef(
     }: FullscreenModalProps,
     ref: React.MutableRefObject<HTMLDivElement>,
   ): React.ReactElement => {
-    const PortalModal = useModal();
-    const defaultModalRef = useRef<HTMLDivElement>();
-    const resolvedModalRef = ref || defaultModalRef;
     const closeOnEsc = useCallback(
       (e: KeyboardEvent) => {
         if (e.key === 'Escape' || e.key === 'Esc') {
@@ -100,46 +97,58 @@ You should either provide content in "sidebar" property or switch layout to "${F
     }
 
     return (
-      <PortalModal>
-        <BaseModal ref={resolvedModalRef}>
-          <Container>
-            <Row>
-              <Col cols={headerCols} offset={headerOffset}>
-                <ModalHeader
-                  handleClose={onClose}
-                  modalRef={resolvedModalRef}
-                  offset={headerOffset}
-                  width={totalContentWidth}
-                >
-                  {header}
-                </ModalHeader>
+      <BaseModal ref={ref}>
+        <Container>
+          <Row>
+            <Col cols={headerCols} offset={headerOffset}>
+              <ModalHeader
+                handleClose={onClose}
+                modalRef={ref}
+                offset={headerOffset}
+                width={totalContentWidth}
+              >
+                {header}
+              </ModalHeader>
+            </Col>
+          </Row>
+          <Row>
+            {hasLayoutSidebar && (
+              <Col cols={sidebarCols} offset={sidebarOffset}>
+                {sidebar}
               </Col>
-            </Row>
-            <Row>
-              {hasLayoutSidebar && (
-                <Col cols={sidebarCols} offset={sidebarOffset}>
-                  {sidebar}
-                </Col>
-              )}
-              <Col cols={contentCols} offset={contentOffset}>
-                {content}
-                <ModalFooter
-                  modalRef={resolvedModalRef}
-                  offset={headerOffset}
-                  scrollToTopButtonLabel={scrollToTopButtonLabel}
-                  width={totalContentWidth}
-                >
-                  {footer}
-                </ModalFooter>
-              </Col>
-            </Row>
-          </Container>
-        </BaseModal>
-      </PortalModal>
+            )}
+            <Col cols={contentCols} offset={contentOffset}>
+              {content}
+              <ModalFooter
+                modalRef={ref}
+                offset={headerOffset}
+                scrollToTopButtonLabel={scrollToTopButtonLabel}
+                width={totalContentWidth}
+              >
+                {footer}
+              </ModalFooter>
+            </Col>
+          </Row>
+        </Container>
+      </BaseModal>
     );
   },
 );
 
+const FullscreenModal = forwardRef(
+  (
+    props: FullscreenModalProps,
+    ref: React.MutableRefObject<HTMLDivElement>,
+  ): React.ReactElement => {
+    const defaultModalRef = useRef<HTMLDivElement>();
+    const resolvedModalRef = ref || defaultModalRef;
+    const renderModal = useModal(
+      <FullscreenModalContent ref={resolvedModalRef} {...props} />,
+    );
+
+    return renderModal();
+  },
+);
 FullscreenModal.propTypes = {
   header: PropTypes.node.isRequired,
   content: PropTypes.node.isRequired,
