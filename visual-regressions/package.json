@@ -12,5 +12,8 @@
     "serve": "^11.3.2",
     "start-server-and-test": "^1.11.7",
     "storycap": "3.0.4"
+  },
+  "resolutions": {
+    "lodash": "4.17.21"
   }
 }
