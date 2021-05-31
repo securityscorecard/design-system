@@ -220,3 +220,9 @@ WithDisabledSearch.args = {
     hasSearch: false,
   },
 };
+
+export const WithSinglePage = DatatableTemplate.bind({});
+WithSinglePage.args = {
+  ...MinimalConfig.args,
+  dataSize: 50,
+};
