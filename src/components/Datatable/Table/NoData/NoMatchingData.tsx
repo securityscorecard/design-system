@@ -5,7 +5,7 @@ import { pxToRem } from '../../../../utils/helpers';
 import { H4, Paragraph } from '../../../typography';
 import { TextSizes } from '../../../typography/Text/Text.enums';
 
-const ListItem = styled.ul`
+const ListItem = styled.li`
   margin-left: ${pxToRem(16)};
 
   &::before {
