@@ -19,7 +19,14 @@ const Mark = ({ children, ...props }) => (
 
 const TableCheckbox = forwardRef(
   (
-    { name, checkboxId, isIndeterminate, style, ...props }: TableCheckboxProps,
+    {
+      name,
+      checkboxId,
+      isIndeterminate,
+      isDisabled,
+      style,
+      ...props
+    }: TableCheckboxProps,
     ref: React.MutableRefObject<HTMLInputElement>,
   ): React.ReactElement => (
     <div className="ds-table-checkbox">
@@ -28,6 +35,7 @@ const TableCheckbox = forwardRef(
         className={cls('ds-table-checkbox-input', {
           'is-indeterminate': isIndeterminate,
         })}
+        disabled={isDisabled}
         id={checkboxId}
         name={name}
         type="checkbox"

@@ -31,7 +31,9 @@ export const tableActionsReducer = <D extends Record<string, unknown>>({
       return {
         ...newState,
         selectedRowIds: {
-          [action.id]: true,
+          ...(!(action.id in newState.selectedRowIds)
+            ? { [action.id]: true }
+            : {}),
         } as TableState<D>['selectedRowIds'],
       };
     default:

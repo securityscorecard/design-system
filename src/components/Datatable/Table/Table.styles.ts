@@ -145,6 +145,7 @@ export const StyledTable = styled.table`
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 0;
 
       &:checked + .ds-table-checkbox-mark {
         background: ${getFormStyle('activeBorderColor')};
@@ -153,6 +154,10 @@ export const StyledTable = styled.table`
         .ds-table-checkbox-icon {
           display: block;
         }
+      }
+      &:disabled + .ds-table-checkbox-mark {
+        border-color: ${getFormStyle('disabledBorderColor')};
+        background: ${getFormStyle('disabledBgColor')};
       }
 
       &.is-indeterminate + .ds-table-checkbox-mark {
@@ -184,51 +189,13 @@ export const StyledTable = styled.table`
     }
 
     .ds-table-checkbox-label {
+      position: relative;
+      z-index: 1;
       margin-bottom: 0;
       min-height: ${getRemToggleSize};
       line-height: ${getRemToggleSize};
       padding-left: ${getRemToggleSize};
       margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
-    }
-  }
-
-  .ds-table-radio {
-    .ds-table-radio-input {
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      &:checked + .ds-table-radio-label::after {
-        border: 6px solid ${getFormStyle('activeBorderColor')};
-      }
-    }
-
-    .ds-table-radio-label {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 0;
-
-      min-height: ${getRemToggleSize};
-      line-height: ${getRemToggleSize};
-      padding-left: ${getRemToggleSize};
-
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        display: inline-block;
-        top: 0;
-        left: 0;
-        height: ${getRemToggleSize};
-        width: ${getRemToggleSize};
-        border-radius: 100%;
-      }
-
-      &::before {
-        border: ${getFormStyle('borderWidth')} solid
-          ${getFormStyle('borderColor')};
-      }
     }
   }
 
