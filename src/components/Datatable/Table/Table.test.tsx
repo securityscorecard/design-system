@@ -123,17 +123,19 @@ describe('Datatable/Table', () => {
       );
 
       userEvent.click(
-        screen.getAllByRole('radio', {
+        screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[0],
       );
       userEvent.click(
-        screen.getAllByRole('radio', {
+        screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[1],
       );
 
-      expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
+      expect(screen.queryAllByRole('checkbox', { checked: true }).length).toBe(
+        1,
+      );
     });
   });
   it('should call onClick handler in row action dropdown with correct parameters', () => {
@@ -310,12 +312,12 @@ describe('Datatable/Table', () => {
         );
 
         userEvent.click(
-          screen.getAllByRole('radio', {
+          screen.getAllByRole('checkbox', {
             name: /Toggle select/i,
           })[0],
         );
         userEvent.click(
-          screen.getAllByRole('radio', {
+          screen.getAllByRole('checkbox', {
             name: /Toggle select/i,
           })[1],
         );

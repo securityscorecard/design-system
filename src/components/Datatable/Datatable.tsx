@@ -43,6 +43,7 @@ const Datatable = <D extends Record<string, unknown>>({
   onDataFetch = noop,
   batchActions = [],
   isControlsEnabled = true,
+  isBatchModuleEnabled = true,
   controlsConfig = {},
   tableConfig = {},
 }: DatatableProps<D>): React.ReactElement => {
@@ -84,12 +85,14 @@ const Datatable = <D extends Record<string, unknown>>({
           isDataLoading={isDataLoading}
         />
       )}
-      <BatchModule
-        actions={batchActions}
-        dataSize={dataSize}
-        hasOnlyPerPageSelection={hasOnlyPerPageSelection}
-        hasSelection={restTableConfig.hasSelection}
-      />
+      {isBatchModuleEnabled && (
+        <BatchModule
+          actions={batchActions}
+          dataSize={dataSize}
+          hasOnlyPerPageSelection={hasOnlyPerPageSelection}
+          hasSelection={restTableConfig.hasSelection}
+        />
+      )}
       <Table<D>
         columns={columns}
         data={data}

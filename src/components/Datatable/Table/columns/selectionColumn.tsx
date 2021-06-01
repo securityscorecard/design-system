@@ -6,15 +6,15 @@ import {
   SELECTION_COLUMN_ID,
 } from '../Body/renderers/renderers.enums';
 import TableCheckbox from '../components/TableCheckbox';
-import TableRadio from '../components/TableRadio';
 import { actions } from '../Table.reducer';
 
 interface IndeterminateCheckbox extends TableToggleCommonProps {
   id: string;
+  isDisabled?: boolean;
 }
 const IndeterminateCheckbox = React.forwardRef(
   (
-    { id, indeterminate, ...rest }: IndeterminateCheckbox,
+    { id, indeterminate, isDisabled = false, ...rest }: IndeterminateCheckbox,
     ref: React.MutableRefObject<HTMLInputElement>,
   ): React.ReactElement => {
     const defaultRef = useRef<HTMLInputElement>();
@@ -27,6 +27,7 @@ const IndeterminateCheckbox = React.forwardRef(
       <TableCheckbox
         ref={resolvedRef}
         checkboxId={id}
+        isDisabled={isDisabled}
         isIndeterminate={indeterminate}
         name={rest.title}
         type="checkbox"
@@ -45,9 +46,10 @@ export const selectionColumn = {
     getToggleAllRowsSelectedProps,
     dataSize,
     isMultiSelect,
+    dispatch,
     state: { selectedRowIds: tableSelectedRowIds },
   }: HeaderProps<Record<string, unknown>>): React.ReactElement => {
-    if (dataSize === 0 || !isMultiSelect) return null;
+    if (dataSize === 0) return null;
 
     const selectedLength = Object.keys(tableSelectedRowIds).length;
     const indeterminate = selectedLength > 0 && selectedLength < dataSize;
@@ -55,8 +57,19 @@ export const selectionColumn = {
     return (
       <IndeterminateCheckbox
         id="header-select-all"
-        {...getToggleAllRowsSelectedProps()}
+        {...getToggleAllRowsSelectedProps({
+          ...(!isMultiSelect
+            ? {
+                onChange() {
+                  dispatch({
+                    type: actions.deselectAllRows,
+                  });
+                },
+              }
+            : {}),
+        })}
         indeterminate={indeterminate}
+        isDisabled={!isMultiSelect && selectedLength === 0}
       />
     );
   },
@@ -67,25 +80,22 @@ export const selectionColumn = {
     dispatch,
   }: CellProps<Record<string, unknown>>): React.ReactElement => {
     const id = `row-${row.id}`;
-    if (isMultiSelect) {
-      return (
-        <IndeterminateCheckbox id={id} {...row.getToggleRowSelectedProps()} />
-      );
-    }
 
     return (
-      <TableRadio
-        name="dt-single-select"
-        radioId={id}
+      <IndeterminateCheckbox
+        id={id}
         {...row.getToggleRowSelectedProps({
-          indeterminate: undefined,
-          onChange(e: React.ChangeEvent<HTMLInputElement>) {
-            dispatch({
-              type: actions.toggleSingleRowSelected,
-              id: row.id,
-              value: e.target.checked,
-            });
-          },
+          ...(!isMultiSelect
+            ? {
+                onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                  dispatch({
+                    type: actions.toggleSingleRowSelected,
+                    id: row.id,
+                    value: e.target.checked,
+                  });
+                },
+              }
+            : {}),
         })}
       />
     );

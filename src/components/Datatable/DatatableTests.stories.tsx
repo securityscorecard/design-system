@@ -120,6 +120,12 @@ WithBatchActions.args = {
   batchActions: tableActionsMock,
 };
 
+export const WithDisabledBatchModule = DatatableTemplate.bind({});
+WithDisabledBatchModule.args = {
+  ...MinimalConfig.args,
+  isBatchModuleEnabled: false,
+};
+
 export const WithDisabledControls = DatatableTemplate.bind({});
 WithDisabledControls.args = {
   ...MinimalConfig.args,
