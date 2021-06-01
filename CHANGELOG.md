@@ -1,3 +1,12 @@
+# [1.0.0-alpha.71](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.70...v1.0.0-alpha.71) (2021-06-01)
+
+
+### Features
+
+* **Datatable:** allow hiding batch module ([7dcc9a5](https://github.com/securityscorecard/design-system/commit/7dcc9a550ee667c02bb09f001374712524ed1cf4))
+* **Datatable:** highlight background for selected rows ([1ba6288](https://github.com/securityscorecard/design-system/commit/1ba628832c2ac3d70d8e7b9b9e6ec2d06373265c))
+* **Datatable:** use checkboxes for single selection ([13daeb0](https://github.com/securityscorecard/design-system/commit/13daeb0eca07218cdeed90f561d899a44a7443e7))
+
 # [1.0.0-alpha.70](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.69...v1.0.0-alpha.70) (2021-06-01)
 
 
