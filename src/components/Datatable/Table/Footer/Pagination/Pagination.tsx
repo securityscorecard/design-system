@@ -31,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({
     />
     <PaginationItem
       aria-label="Next page"
-      isDisabled={currentPage + 1 === pageCount}
+      isDisabled={currentPage + 1 > pageCount}
       isShrinked
       onClick={() => onPageChange(currentPage + 1)}
     >

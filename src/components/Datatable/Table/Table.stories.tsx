@@ -167,3 +167,9 @@ DataIsLoading.args = {
   ...WithNoData.args,
   isDataLoading: true,
 };
+
+export const WithSinglePage = TableTemplate.bind({});
+WithSinglePage.args = {
+  ...MinimalConfig.args,
+  dataSize: 50,
+};

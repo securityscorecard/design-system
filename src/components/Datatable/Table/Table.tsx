@@ -249,7 +249,7 @@ TableProps<D>): React.ReactElement => {
             </>
           )}
         </NoDataContainer>
-      ) : (
+      ) : pageCount !== 1 ? (
         <Footer
           hasPagination={hasPagination && dataSize > 0}
           isDataLoading={isDataLoading}
@@ -257,7 +257,7 @@ TableProps<D>): React.ReactElement => {
           pageIndex={pageIndex}
           onGotoPage={gotoPageAndLoadData}
         />
-      )}
+      ) : null}
     </>
   );
 };
