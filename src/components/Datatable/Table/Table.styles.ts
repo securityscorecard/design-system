@@ -38,6 +38,12 @@ export const StyledTable = styled.table`
   width: 100%;
   transform: scale(1, -1);
 
+  .ds-table-row.is-selected {
+    .ds-table-cell {
+      background: ${getColor('blueberry0')};
+    }
+  }
+
   .ds-table-cell {
     display: flex;
     align-items: center;
