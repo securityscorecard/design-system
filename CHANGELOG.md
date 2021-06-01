@@ -1,3 +1,12 @@
+# [1.0.0-alpha.70](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.69...v1.0.0-alpha.70) (2021-06-01)
+
+
+### Bug Fixes
+
+* **Datatable:** change element for no data list ([375511a](https://github.com/securityscorecard/design-system/commit/375511aeebef67489eaae65cce6bc5a413301540))
+* **Datatable:** disable next page button when on last page ([35ed84e](https://github.com/securityscorecard/design-system/commit/35ed84edb243f3ae3338f464e8112d4309643aec))
+* **Datatable:** hide footer when only only one page of data ([0446d34](https://github.com/securityscorecard/design-system/commit/0446d349970e00e64c58a6b268ba2cb5e2f99f79))
+
 # [1.0.0-alpha.69](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.68...v1.0.0-alpha.69) (2021-05-27)
 
 
