@@ -60,6 +60,10 @@ export interface DatatableProps<D extends Record<string, unknown>> {
    */
   isControlsEnabled?: boolean;
   /**
+   * Flag to enable/disable batch actions module with element counter
+   */
+  isBatchModuleEnabled?: boolean;
+  /**
    * Config object for controls module
    *
    * See: [ControlsModule.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/components/Datatable/ControlsModule/ControlsModule.types.ts)
