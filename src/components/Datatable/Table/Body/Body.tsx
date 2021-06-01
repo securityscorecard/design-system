@@ -14,7 +14,10 @@ const Body = <D extends Record<string, unknown>>({
     {rows.map((row, index) => {
       prepareRow(row);
       return (
-        <tr {...row.getRowProps()}>
+        <tr
+          {...row.getRowProps()}
+          className={cls('ds-table-row', { 'is-selected': row.isSelected })}
+        >
           {row.cells.map((cell) => {
             return (
               <td
