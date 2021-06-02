@@ -6,6 +6,7 @@ import { Buttons } from '../../theme/buttons.types';
 import { Forms } from '../../theme/forms.types';
 import { Layout } from '../../theme/layout.types';
 import { Depths } from '../../theme/depths.types';
+import space from '../../theme/space';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -16,5 +17,6 @@ declare module 'styled-components' {
     layout: Layout;
     depths: Depths;
     borderRadius: number;
+    space: typeof space;
   }
 }

@@ -90,6 +90,33 @@ createSpacings({ margin: { horizontal: 2, vertical: 1 }, padding: 4 });
 */
 ```
 
+### createPadding
+Generates padding of given type with given [standard size](/docs/theme-space--page).
+
+```tsx
+import { createPadding } from '@securityscorecard/design-system';
+
+const Box = styled.div<{paddingType: PaddingType; paddingSize: SpaceSize}>`
+  ${createPadding};
+`
+
+<Box paddingType="square" paddingSize="lg" />
+/*
+  -> padding: 2rem;
+*/
+
+<Box paddingType="squish" paddingSize="lg" />
+/*
+  -> padding: 2rem 1rem;
+*/
+
+<Box paddingType="stretch" paddingSize="lg" />
+/*
+  -> padding: 1rem 2rem;
+*/
+
+```
+
 ## Theme getters
 These methods retrieving values from the [theme object](/docs/theme-theme-object--page)
 and can be used only in `styled-components` template literals.
@@ -255,6 +282,7 @@ const Link = styled.a.attrs(() => ({
   }
 `;
 ```
+
 ### getDepth
 
 Returns z-index from theme for given element.
@@ -269,3 +297,19 @@ const Component = styled.input`
   z-index: ${getDepth('modal')};
 `; // -> z-index: 1250;
 ```
+
+### getSpace
+
+Returns space value from theme for given size.
+
+```js
+import { getSpace } from '@securityscorecard/design-system';
+
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+const Component = styled.input`
+  margin-bottom: ${space('m')};
+`; // -> margin-bottom: 1rem;
+```
+

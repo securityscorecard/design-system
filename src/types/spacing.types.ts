@@ -29,3 +29,11 @@ export interface SpacingProps {
   margin?: SpacingSizeValue;
   padding?: SpacingSizeValue;
 }
+
+export const PaddingTypes = {
+  squish: 'squish',
+  stretch: 'stretch',
+  square: 'square',
+} as const;
+
+export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];

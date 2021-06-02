@@ -6,9 +6,12 @@ import {
 import {
   any,
   anyPass,
+  apply,
+  concat,
   curry,
   equals,
   identity,
+  includes,
   isEmpty,
   join,
   map,
@@ -35,10 +38,12 @@ import {
 } from '../theme/typography.types';
 import { Colors } from '../theme/colors.types';
 import { Forms } from '../theme/forms.types';
-import { SpacingSizeValue } from '../types/spacing.types';
+import { PaddingTypes, SpacingSizeValue } from '../types/spacing.types';
 import { Depths } from '../theme/depths.types';
+import space from '../theme/space';
+import { SpaceSizes } from '../theme/space.enums';
 
-type Theme = {
+export type Theme = {
   theme?: DefaultTheme;
   margin?: SpacingSizeValue;
   padding?: SpacingSizeValue;
@@ -141,6 +146,92 @@ export const getDepth = curry(
     path(['depths', element], theme),
 );
 
+// getSpace:: Size -> Props -> string
+// Size - any key of 'space' (src/theme/space.ts)
+// Props - styled-components props object
+export const getSpace = curry(
+  (size: keyof typeof space, { theme }: Theme): string =>
+    pipe(path(['space', size]), pxToRem)(theme),
+);
+
+export const abbreviateNumber = (value: number): string =>
+  numeral(value).format('0.[00]a').toUpperCase();
+
+const allowedPaddingSizes = {
+  [PaddingTypes.square]: [
+    SpaceSizes.none,
+    SpaceSizes.xs,
+    SpaceSizes.sm,
+    SpaceSizes.md,
+    SpaceSizes.mdPlus,
+    SpaceSizes.lg,
+    SpaceSizes.lgPlus,
+    SpaceSizes.xl,
+  ],
+  [PaddingTypes.squish]: [
+    SpaceSizes.none,
+    SpaceSizes.sm,
+    SpaceSizes.md,
+    SpaceSizes.mdPlus,
+    SpaceSizes.lg,
+  ],
+  [PaddingTypes.stretch]: [
+    SpaceSizes.none,
+    SpaceSizes.sm,
+    SpaceSizes.md,
+    SpaceSizes.mdPlus,
+    SpaceSizes.lg,
+  ],
+};
+
+interface InsetSquare {
+  paddingType: 'square';
+  paddingSize: typeof allowedPaddingSizes['square'][number];
+}
+interface InsetAsymetric {
+  paddingType: 'squish' | 'stretch';
+  paddingSize: typeof allowedPaddingSizes['squish'][number];
+}
+
+type PaddingSpaceProps = InsetSquare | InsetAsymetric;
+type GetPaddingSpaceArgs = PaddingSpaceProps & { theme: DefaultTheme };
+
+export const getPaddingSpace = ({
+  paddingSize = SpaceSizes.none,
+  paddingType = PaddingTypes.square,
+  theme,
+}: GetPaddingSpaceArgs): [number, number] | [number] => {
+  if (!includes(paddingSize, allowedPaddingSizes[paddingType])) {
+    // eslint-disable-next-line no-console
+    console.warn(`
+    Invalid type-size pair: ${paddingType} - ${paddingSize}
+    For '${paddingType}' padding type available sizes are: 'none', ${allowedPaddingSizes[paddingType]}.
+      `);
+
+    return [0];
+  }
+
+  const sizeValue = path(['space', paddingSize], theme);
+
+  switch (paddingType) {
+    case PaddingTypes.squish:
+      return [sizeValue, sizeValue / 2];
+    case PaddingTypes.stretch:
+      return [sizeValue / 2, sizeValue];
+    case PaddingTypes.square:
+    default:
+      return [sizeValue];
+  }
+};
+
+// createPadding :: Object -> string
+// Object - { paddingSize: keyof typeof space; paddingType: keyof typeof paddingTypes; theme: DefaultTheme; }
+export const createPadding = pipe(
+  getPaddingSpace,
+  apply(pxToRem),
+  concat('padding: '),
+);
+
 type SpacingKind = 'padding' | 'margin';
 
 const calculateSpacingValue = (direction: number, generic: number) =>
@@ -204,6 +295,3 @@ export const createSpacings = ({
   ${createMarginSpacing(margin)};
   ${createPaddingSpacing(padding)};
 `;
-
-export const abbreviateNumber = (value: number): string =>
-  numeral(value).format('0.[00]a').toUpperCase();
