@@ -50,7 +50,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{}}
         {...defaultTableConfig}
       />,
@@ -72,7 +71,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{ 0: true, 1: true, 2: true }}
         {...defaultTableConfig}
       />,
@@ -94,7 +92,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{}}
         {...defaultTableConfig}
       />,
@@ -115,7 +112,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
           isMultiSelect={false}
@@ -146,7 +142,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{}}
         {...defaultTableConfig}
         rowActions={[
@@ -173,7 +168,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -196,7 +190,6 @@ describe('Datatable/Table', () => {
           data={[]}
           columns={columns}
           dataSize={0}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -224,7 +217,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -244,7 +236,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -264,7 +255,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{ 0: true }}
           {...defaultTableConfig}
         />,
@@ -284,7 +274,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{ 0: true, 1: true, 2: true }}
           {...defaultTableConfig}
         />,
@@ -304,7 +293,6 @@ describe('Datatable/Table', () => {
             data={data}
             columns={columns}
             dataSize={3}
-            isDataLoading={false}
             defaultSelectedRows={{}}
             {...defaultTableConfig}
             isMultiSelect={false}
@@ -331,7 +319,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{ 0: true, 1: true, 2: true }}
           {...defaultTableConfig}
         />,
@@ -354,7 +341,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
           defaultPageSize={1}
@@ -376,7 +362,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,

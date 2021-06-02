@@ -32,6 +32,7 @@ export interface ControlsConfig<D> {
   defaultIsColumnOrderingApplied: boolean;
   onColumnOrderChange: (columnOrder: IdType<D>[]) => void;
   onControlToggle: (control: Controls, isActive: boolean) => void;
+  onCancelLoading: () => void;
   isDataLoading: boolean;
 }
 
@@ -44,6 +45,7 @@ export const ControlsConfigPropType = {
   defaultIsFilteringApplied: PropTypes.bool,
   filteringConfig: PropTypes.exact(FiltersPropType).isRequired,
   isDataLoading: PropTypes.bool,
+  onCancelLoading: PropTypes.func,
   onControlToggle: PropTypes.func,
   // hasColumnVisibility: PropTypes.bool.isRequired,
   // defaultIsColumnVisibilityOpen: PropTypes.bool.isRequired,

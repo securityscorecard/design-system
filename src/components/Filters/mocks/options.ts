@@ -69,6 +69,7 @@ export const mockTestState: Filter[] = [
     value: '2',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -77,6 +78,7 @@ export const mockTestState: Filter[] = [
     value: 'Value Option C',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
 ];
 
@@ -332,6 +334,7 @@ export const state: Filter[] = [
     value: 'securityscorecard.io',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -339,6 +342,7 @@ export const state: Filter[] = [
     condition: 'contains',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -347,6 +351,7 @@ export const state: Filter[] = [
     value: '2',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -354,6 +359,7 @@ export const state: Filter[] = [
     condition: 'is less than',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -361,6 +367,7 @@ export const state: Filter[] = [
     condition: 'is at most',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -369,6 +376,7 @@ export const state: Filter[] = [
     value: new Date('2021-02-16T00:00:00Z'),
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -376,6 +384,7 @@ export const state: Filter[] = [
     condition: 'between',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -384,6 +393,7 @@ export const state: Filter[] = [
     value: 'any',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -392,6 +402,7 @@ export const state: Filter[] = [
     value: 'any',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
   },
 ];
 
@@ -404,6 +415,7 @@ export const stateWithUnappliedFilters: Filter[] = [
     value: '.io',
     isApplied: false,
     isLoading: false,
+    isCanceled: false,
   },
   {
     operator: Operators.and,
@@ -412,6 +424,7 @@ export const stateWithUnappliedFilters: Filter[] = [
     value: 'example',
     isApplied: false,
     isLoading: false,
+    isCanceled: false,
   },
 ];
 

@@ -50,6 +50,7 @@ const collectFetchParams = <D,>(
     s.pageIndex = pageIndex;
     s.pageSize = pageSize;
     s.sortBy = sortBy;
+    s.isCanceled = false;
   });
 };
 const collectSelectedIds = <D,>(
@@ -74,6 +75,7 @@ const Table = <D extends Record<string, unknown>>({
   defaultSelectedRows,
   hasPagination,
   hasServerSidePagination,
+  onCancelLoading,
   defaultPageSize,
   hasSorting,
   hasServerSideSorting,
@@ -173,6 +175,24 @@ TableProps<D>): React.ReactElement => {
   };
 
   useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => s.isCanceled,
+      (isCanceled) => {
+        if (isCanceled) {
+          dispatch({ type: actions.cancelLoading });
+        }
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch, onCancelLoading]);
+
+  useEffect(() => {
+    if (!isDataLoading) dispatch({ type: actions.preserveState });
+  }, [dispatch, isDataLoading]);
+
+  useEffect(() => {
     const unsubscribe = DatatableStore.createReaction(
       (s) => s.shouldResetSelectedRows,
       (shouldResetSelectedRows, newState) => {
@@ -233,7 +253,9 @@ TableProps<D>): React.ReactElement => {
             />
           </StyledTable>
         </TableContainer>
-        {dataSize > 0 && isDataLoading && <LoadingOverlay />}
+        {dataSize > 0 && isDataLoading && (
+          <LoadingOverlay onCancel={onCancelLoading} />
+        )}
       </TableAndLoadingOverlayContainer>
       {dataSize === 0 ? (
         <NoDataContainer>

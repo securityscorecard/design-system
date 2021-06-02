@@ -5,7 +5,6 @@ import { fields } from '../../Filters/mocks/options';
 const filteringConfig = {
   fields,
   onApply: action('onFiltersApply'),
-  onCancel: action('onFiltersCancel'),
   onChange: action('onFiltersChange'),
   onClose: action('onFiltersClose'),
 };

@@ -12,9 +12,10 @@ export const useDataFetch = <D>(onDataFetch: OnDataFetchFn<D>): void => {
         sortBy: s.sortBy,
         filters: s.filters,
         query: s.query,
+        isCanceled: s.isCanceled,
       }),
-      (params) => {
-        onDataFetch(params);
+      ({ isCanceled, ...params }) => {
+        if (!isCanceled) onDataFetch(params);
       },
     );
 

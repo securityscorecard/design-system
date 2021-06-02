@@ -7,6 +7,7 @@ import {
   filter,
   find,
   head,
+  ifElse,
   map,
   pipe,
   propEq,
@@ -58,6 +59,7 @@ const getDefaultState = ([firstField]: Field[]) => {
       value,
       isApplied: false,
       isLoading: false,
+      isCanceled: false,
     },
   ];
 };
@@ -106,7 +108,13 @@ const Filters: React.FC<FiltersProps> = ({
         pipe(
           filter(propSatisfies(isNotUndefined, 'value')),
           map(assoc('isLoading', false)),
-          map(assoc('isApplied', true)),
+          map(
+            ifElse(
+              propEq('isCanceled', true),
+              assoc('isCanceled', false),
+              assoc('isApplied', true),
+            ),
+          ),
         )(filtersValues),
       );
     }
@@ -142,6 +150,7 @@ const Filters: React.FC<FiltersProps> = ({
       operator: value,
       isApplied: false,
       isLoading: false,
+      isCanceled: false,
     }));
 
     setFiltersValues(newFilters);
@@ -160,6 +169,7 @@ const Filters: React.FC<FiltersProps> = ({
           value,
           isApplied: false,
           isLoading: false,
+          isCanceled: false,
         },
         filters,
       );
@@ -179,6 +189,7 @@ const Filters: React.FC<FiltersProps> = ({
           value,
           isApplied: false,
           isLoading: false,
+          isCanceled: false,
         },
         filters,
       );
@@ -197,6 +208,7 @@ const Filters: React.FC<FiltersProps> = ({
           value: value || undefined,
           isApplied: false,
           isLoading: false,
+          isCanceled: false,
         },
         filters,
       );
@@ -218,6 +230,7 @@ const Filters: React.FC<FiltersProps> = ({
       value,
       isApplied: false,
       isLoading: false,
+      isCanceled: false,
     };
     const filtersWithNewRow = [...newFilters, newRow];
     setFiltersValues(filtersWithNewRow);
@@ -277,9 +290,15 @@ const Filters: React.FC<FiltersProps> = ({
     onClose();
   };
 
-  const handleCancelFetch = (event) => {
+  const handleCancelLoading = (event) => {
     event.preventDefault();
     onCancel();
+    setFiltersValues(
+      pipe(
+        filter(propEq('isLoading', true)),
+        map(assoc('isCanceled', true)),
+      )(filtersValues),
+    );
   };
 
   if (isUndefined(fields) || isNull(filtersValues)) {
@@ -310,7 +329,7 @@ const Filters: React.FC<FiltersProps> = ({
         isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
-        onCancel={handleCancelFetch}
+        onCancel={handleCancelLoading}
         onClearAll={handleClearAll}
         onClose={handleCloseFilters}
         onSubmit={handleSubmitForm}

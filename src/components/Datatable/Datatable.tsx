@@ -41,6 +41,7 @@ const Datatable = <D extends Record<string, unknown>>({
   dataPrimaryKey,
   isDataLoading = false,
   onDataFetch = noop,
+  onCancelLoading = noop,
   batchActions = [],
   isControlsEnabled = true,
   isBatchModuleEnabled = true,
@@ -77,12 +78,20 @@ const Datatable = <D extends Record<string, unknown>>({
     restTableConfig.defaultColumnOrder,
   );
 
+  const handleCancelLoading = () => {
+    DatatableStore.update((s) => {
+      s.isCanceled = true;
+      onCancelLoading();
+    });
+  };
+
   return (
     <StyledDatatable flexDirection="column">
       {isControlsEnabled && (
         <ControlsModule<D>
           {...restControlsConfig}
           isDataLoading={isDataLoading}
+          onCancelLoading={handleCancelLoading}
         />
       )}
       {isBatchModuleEnabled && (
@@ -100,6 +109,7 @@ const Datatable = <D extends Record<string, unknown>>({
         dataSize={dataSize}
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
         isDataLoading={isDataLoading}
+        onCancelLoading={handleCancelLoading}
         {...restTableConfig}
       />
     </StyledDatatable>
@@ -127,7 +137,6 @@ Datatable.propTypes = {
       onChange: PropTypes.func,
       onApply: PropTypes.func,
       onClose: PropTypes.func,
-      onCancel: PropTypes.func,
       state: PropTypes.arrayOf(FilterStatePropType),
       fields: PropTypes.arrayOf(FieldPropTypes),
     }),
@@ -136,6 +145,7 @@ Datatable.propTypes = {
   }),
   tableConfig: PropTypes.exact(TableConfigPropType),
   onDataFetch: PropTypes.func,
+  onCancelLoading: PropTypes.func,
 };
 
 export default Datatable;

@@ -51,6 +51,7 @@ export interface Filter {
   condition: string;
   isApplied: boolean;
   isLoading: boolean;
+  isCanceled: boolean;
   value?: string | string[] | Date | DateRange;
 }
 
@@ -113,6 +114,7 @@ export const FilterStatePropType = PropTypes.exact({
   ]),
   isApplied: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  isCanceled: PropTypes.bool.isRequired,
 });
 
 export const FiltersPropType = {

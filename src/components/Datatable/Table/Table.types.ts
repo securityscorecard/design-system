@@ -52,8 +52,10 @@ export type OnSelectFn<D> = (
 
 export interface TableConfig<D> {
   hasSelection: boolean;
+  isDataLoading: boolean;
   isMultiSelect: boolean;
   onSelect: OnSelectFn<D>;
+  onCancelLoading: () => void;
   hasOnlyPerPageSelection: boolean;
   defaultSelectedRowIds: IdType<D>[];
   hasPagination: boolean;
@@ -112,6 +114,7 @@ export interface TableProps<D extends Record<string, unknown>>
   columns: Column<D>[];
   dataSize: number;
   isDataLoading: boolean;
+  onCancelLoading: () => void;
   dataPrimaryKey?: PrimaryKey<D>;
   defaultSelectedRows?: Record<IdType<D>, boolean>;
 }

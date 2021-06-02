@@ -40,6 +40,10 @@ export interface DatatableProps<D extends Record<string, unknown>> {
    */
   isDataLoading?: boolean;
   /**
+   * Cancel function called upon request cancellation.
+   */
+  onCancelLoading?: () => void;
+  /**
    * Data fetch function called upon pagination, sorting, filtering and searching
    */
   onDataFetch?: OnDataFetchFn<D>;

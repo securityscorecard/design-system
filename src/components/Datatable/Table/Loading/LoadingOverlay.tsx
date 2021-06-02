@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { getColor } from '../../../../utils';
@@ -32,11 +33,20 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay: React.FC = () => (
+const LoadingOverlay = ({ onCancel }) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
+    {onCancel && (
+      <button style={{ position: 'absolute' }} type="button" onClick={onCancel}>
+        Cancel
+      </button>
+    )}
     <Spinner height={48} width={48} dark />
   </LoadingOverlayContainer>
 );
+
+LoadingOverlay.propTypes = {
+  onCancel: PropTypes.func,
+};
 
 export default LoadingOverlay;
