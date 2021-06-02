@@ -1,3 +1,10 @@
+# [1.0.0-alpha.72](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.71...v1.0.0-alpha.72) (2021-06-02)
+
+
+### Bug Fixes
+
+* **FullscreenModal:** freeze body when modal is open ([c4c3b68](https://github.com/securityscorecard/design-system/commit/c4c3b68a10e122833fc1160b27020cc6a17b276c))
+
 # [1.0.0-alpha.71](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.70...v1.0.0-alpha.71) (2021-06-01)
 
 
