@@ -238,7 +238,6 @@ TableProps<D>): React.ReactElement => {
         when(
           allPass([
             propEq('isCanceled', false),
-
             compose(any(propEq('isLoading', true)), prop('filters')),
           ]),
           gotoFirstPage,
@@ -246,20 +245,6 @@ TableProps<D>): React.ReactElement => {
       ),
     [gotoFirstPage],
   );
-
-  /*
-  useEffect(() => {
-    const unsubscribe = DatatableStore.subscribe(
-      (s) => ({ filters: s.filters, isCanceled: s.isCanceled }),
-      ({ filters, isCanceled }) => {
-        if (!isCanceled && any(propEq('isLoading', true))(filters)) gotoPage(0);
-      },
-    );
-    return () => {
-      unsubscribe();
-    };
-      }, [gotoPage]);
-      */
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);
