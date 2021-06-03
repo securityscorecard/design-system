@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { noop } from 'ramda-adjunct';
 
 import { getColor } from '../../../../utils';
+import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
 import { FlexContainer } from '../../../FlexContainer';
 import { Button } from '../../../Button';
@@ -44,11 +44,14 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay = ({ onCancel }) => (
+const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+  isCancelable,
+  onCancel,
+}) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
     <FlexContainer alignItems="center">
-      {onCancel !== noop ? (
+      {isCancelable ? (
         <>
           <Spinner height={24} width={24} dark />
           <span>Loading</span>
@@ -64,6 +67,7 @@ const LoadingOverlay = ({ onCancel }) => (
 );
 
 LoadingOverlay.propTypes = {
+  isCancelable: PropTypes.bool,
   onCancel: PropTypes.func,
 };
 

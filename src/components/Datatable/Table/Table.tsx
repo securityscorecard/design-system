@@ -24,7 +24,7 @@ import {
   when,
 } from 'ramda';
 import cls from 'classnames';
-import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
+import { isNonEmptyArray, isNotUndefined, isString, noop } from 'ramda-adjunct';
 
 import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
@@ -269,7 +269,10 @@ TableProps<D>): React.ReactElement => {
           </StyledTable>
         </TableContainer>
         {dataSize > 0 && isDataLoading && (
-          <LoadingOverlay onCancel={onCancelLoading} />
+          <LoadingOverlay
+            isCancelable={onCancelLoading !== noop}
+            onCancel={onCancelLoading}
+          />
         )}
       </TableAndLoadingOverlayContainer>
       {dataSize === 0 ? (

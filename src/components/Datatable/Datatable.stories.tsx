@@ -175,7 +175,7 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
         ],
         onSelect: action('onRowSelect'),
       }}
-      onCancelLoading={undefined && onCancelLoading}
+      onCancelLoading={onCancelLoading}
       onDataFetch={dispatchFetchData}
     />
   );

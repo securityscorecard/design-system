@@ -289,19 +289,16 @@ const Filters: React.FC<FiltersProps> = ({
     onClose();
   };
 
-  const handleCancelLoading =
-    onCancel !== noop
-      ? (event) => {
-          event.preventDefault();
-          onCancel();
-          setFiltersValues(
-            pipe(
-              filter(propEq('isLoading', true)),
-              map(assoc('isCanceled', true)),
-            )(filtersValues),
-          );
-        }
-      : noop;
+  const handleCancelLoading = (event) => {
+    event.preventDefault();
+    onCancel();
+    setFiltersValues(
+      pipe(
+        filter(propEq('isLoading', true)),
+        map(assoc('isCanceled', true)),
+      )(filtersValues),
+    );
+  };
 
   if (isUndefined(fields) || isNull(filtersValues)) {
     return null;
@@ -328,6 +325,7 @@ const Filters: React.FC<FiltersProps> = ({
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
         isApplyDisabled={hasInvalidValues}
+        isCancelable={onCancel !== noop}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onCancel={handleCancelLoading}
