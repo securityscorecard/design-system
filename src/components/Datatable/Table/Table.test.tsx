@@ -378,4 +378,43 @@ describe('Datatable/Table', () => {
       ]);
     });
   });
+  describe('given isDataLoading', () => {
+    it('should display empty loading page when no data is present', () => {
+      renderWithProviders(
+        <Table<Data>
+          data={[]}
+          columns={columns}
+          dataSize={0}
+          defaultSelectedRows={{}}
+          {...defaultTableConfig}
+          isDataLoading
+        />,
+      );
+
+      expect(
+        screen.getByRole('heading', {
+          name: /Loading/i,
+        }),
+      ).toBeInTheDocument();
+    });
+    it('should display loading overlay with Cancel button when data is present', () => {
+      renderWithProviders(
+        <Table<Data>
+          data={data}
+          columns={columns}
+          dataSize={data.length}
+          defaultSelectedRows={{}}
+          {...defaultTableConfig}
+          isDataLoading
+          onCancelLoading={jest.fn}
+        />,
+      );
+
+      expect(
+        screen.getByRole('button', {
+          name: /Cancel/i,
+        }),
+      ).toBeInTheDocument();
+    });
+  });
 });

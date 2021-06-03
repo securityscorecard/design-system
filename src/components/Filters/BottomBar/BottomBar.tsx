@@ -1,4 +1,5 @@
 import React from 'react';
+import { noop } from 'ramda-adjunct';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -22,10 +23,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
   onCancel,
   isLoading = false,
   hasUnappliedFilters,
-  isCancelDisabled = false,
   isApplyDisabled = false,
 }) => {
-  const canCancel = isLoading && !isCancelDisabled;
+  const canCancel = onCancel !== noop && isLoading;
   return (
     <FlexContainer justifyContent="space-between" margin={{ top: 0.5 }}>
       <FlexContainer>
@@ -64,11 +64,11 @@ const BottomBar: React.FC<BottomBarProps> = ({
         </Button>
         <Button
           color="primary"
-          disabled={isApplyDisabled || isLoading}
+          disabled={isApplyDisabled || canCancel}
           variant="solid"
           onClick={onSubmit}
         >
-          {isLoading ? (
+          {canCancel ? (
             <>
               <Spinner
                 borderWidth={2}
@@ -97,6 +97,5 @@ BottomBar.propTypes = {
   onClearAll: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  isCancelDisabled: PropTypes.bool,
   isApplyDisabled: PropTypes.bool,
 };

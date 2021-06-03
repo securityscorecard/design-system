@@ -39,9 +39,9 @@ const Datatable = <D extends Record<string, unknown>>({
   dataSize,
   columns,
   dataPrimaryKey,
+  onCancelLoading,
   isDataLoading = false,
   onDataFetch = noop,
-  onCancelLoading = noop,
   batchActions = [],
   isControlsEnabled = true,
   isBatchModuleEnabled = true,
@@ -78,12 +78,14 @@ const Datatable = <D extends Record<string, unknown>>({
     restTableConfig.defaultColumnOrder,
   );
 
-  const handleCancelLoading = () => {
-    DatatableStore.update((s) => {
-      s.isCanceled = true;
-      onCancelLoading();
-    });
-  };
+  const handleCancelLoading = onCancelLoading
+    ? () => {
+        DatatableStore.update((s) => {
+          s.isCanceled = true;
+          onCancelLoading();
+        });
+      }
+    : noop;
 
   return (
     <StyledDatatable flexDirection="column">

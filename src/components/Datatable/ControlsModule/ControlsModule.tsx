@@ -154,10 +154,6 @@ const ControlsModule = <D extends Record<string, unknown>>({
     applyControlStateChange(ControlTypes.filters, { isActive: false });
   };
 
-  const handleCancelFilter = () => {
-    onCancelLoading();
-  };
-
   const handleApplyFilter = (appliedfilters: Filter[]): void => {
     const hasAppliedFilters = isNonEmptyArray(appliedfilters);
     onFilteringApply(appliedfilters);
@@ -300,7 +296,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
             isLoading={isDataLoading}
             state={filteringStoreState}
             onApply={handleApplyFilter}
-            onCancel={handleCancelFilter}
+            onCancel={onCancelLoading}
             onClose={handleCloseFilter}
             {...restFilteringConfig}
           />

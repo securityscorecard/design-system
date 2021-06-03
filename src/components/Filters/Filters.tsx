@@ -72,7 +72,6 @@ const Filters: React.FC<FiltersProps> = ({
   onClose = noop,
   onCancel = noop,
   isLoading = false,
-  isCancelDisabled = false, // TODO remove https://zitenote.atlassian.net/browse/FEP-1648
 }) => {
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
@@ -290,16 +289,19 @@ const Filters: React.FC<FiltersProps> = ({
     onClose();
   };
 
-  const handleCancelLoading = (event) => {
-    event.preventDefault();
-    onCancel();
-    setFiltersValues(
-      pipe(
-        filter(propEq('isLoading', true)),
-        map(assoc('isCanceled', true)),
-      )(filtersValues),
-    );
-  };
+  const handleCancelLoading =
+    onCancel !== noop
+      ? (event) => {
+          event.preventDefault();
+          onCancel();
+          setFiltersValues(
+            pipe(
+              filter(propEq('isLoading', true)),
+              map(assoc('isCanceled', true)),
+            )(filtersValues),
+          );
+        }
+      : noop;
 
   if (isUndefined(fields) || isNull(filtersValues)) {
     return null;
@@ -326,7 +328,6 @@ const Filters: React.FC<FiltersProps> = ({
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
         isApplyDisabled={hasInvalidValues}
-        isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onCancel={handleCancelLoading}

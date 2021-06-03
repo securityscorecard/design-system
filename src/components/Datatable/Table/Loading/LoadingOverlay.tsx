@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { noop } from 'ramda-adjunct';
 
 import { getColor } from '../../../../utils';
 import { Spinner } from '../../../Spinner';
@@ -47,7 +48,7 @@ const LoadingOverlay = ({ onCancel }) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
     <FlexContainer alignItems="center">
-      {onCancel ? (
+      {onCancel !== noop ? (
         <>
           <Spinner height={24} width={24} dark />
           <span>Loading</span>
