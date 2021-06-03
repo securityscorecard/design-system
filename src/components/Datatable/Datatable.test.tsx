@@ -1,4 +1,6 @@
 import React from 'react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Column } from 'react-table';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
@@ -55,5 +57,32 @@ describe('Datatable', () => {
     );
 
     expect(onDataFetchMock).not.toHaveBeenCalled();
+  });
+  describe('on request cancelation', () => {
+    it('should call "onCancelLoading"', () => {
+      const onCancelLoading = jest.fn();
+      renderWithProviders(
+        <Datatable<Data>
+          onDataFetch={jest.fn()}
+          onCancelLoading={onCancelLoading}
+          data={data}
+          columns={columns}
+          dataSize={3}
+          controlsConfig={{ filteringConfig: { fields } }}
+          isDataLoading
+        />,
+      );
+
+      expect(DatatableStore.getRawState().isCanceled).toBe(false);
+
+      userEvent.click(
+        screen.getAllByRole('button', {
+          name: /Cancel/i,
+        })[0],
+      );
+
+      expect(DatatableStore.getRawState().isCanceled).toBe(true);
+      expect(onCancelLoading).toHaveBeenCalled();
+    });
   });
 });

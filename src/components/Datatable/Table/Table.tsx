@@ -188,7 +188,7 @@ TableProps<D>): React.ReactElement => {
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
-      (s) => s.isCanceled,
+      prop('isCanceled'),
       (isCanceled) => {
         if (isCanceled) {
           dispatch({ type: actions.cancelLoading });
@@ -198,7 +198,7 @@ TableProps<D>): React.ReactElement => {
     return () => {
       unsubscribe();
     };
-  }, [dispatch, onCancelLoading]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!isDataLoading) dispatch({ type: actions.preserveState });
