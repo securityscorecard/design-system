@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import {
   CellProps,
@@ -12,7 +12,17 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { any, keys, prop, propEq, F as stubFalse } from 'ramda';
+import {
+  allPass,
+  any,
+  compose,
+  keys,
+  pick,
+  prop,
+  propEq,
+  F as stubFalse,
+  when,
+} from 'ramda';
 import cls from 'classnames';
 import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
 
@@ -169,6 +179,8 @@ TableProps<D>): React.ReactElement => {
     },
   );
 
+  const gotoFirstPage = useCallback(() => gotoPage(0), [gotoPage]);
+
   const gotoPageAndLoadData = (newPageIndex) => {
     gotoPage(newPageIndex);
     collectFetchParams(newPageIndex, pageSize, sortBy);
@@ -219,17 +231,35 @@ TableProps<D>): React.ReactElement => {
     };
   }, [setColumnOrder]);
 
+  useEffect(
+    () =>
+      DatatableStore.subscribe(
+        pick(['filters', 'isCanceled']),
+        when(
+          allPass([
+            propEq('isCanceled', false),
+
+            compose(any(propEq('isLoading', true)), prop('filters')),
+          ]),
+          gotoFirstPage,
+        ),
+      ),
+    [gotoFirstPage],
+  );
+
+  /*
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
-      (s) => s.filters,
-      (filters) => {
-        if (any(propEq('isLoading', true))(filters)) gotoPage(0);
+      (s) => ({ filters: s.filters, isCanceled: s.isCanceled }),
+      ({ filters, isCanceled }) => {
+        if (!isCanceled && any(propEq('isLoading', true))(filters)) gotoPage(0);
       },
     );
     return () => {
       unsubscribe();
     };
-  }, [setColumnOrder, gotoPage]);
+      }, [gotoPage]);
+      */
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);

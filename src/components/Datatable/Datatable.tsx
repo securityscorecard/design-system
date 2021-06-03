@@ -108,9 +108,9 @@ const Datatable = <D extends Record<string, unknown>>({
         dataPrimaryKey={dataPrimaryKey}
         dataSize={dataSize}
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
+        {...restTableConfig}
         isDataLoading={isDataLoading}
         onCancelLoading={handleCancelLoading}
-        {...restTableConfig}
       />
     </StyledDatatable>
   );

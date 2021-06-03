@@ -76,7 +76,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 verticalMargin={0}
                 width={16}
               />
-              <LoadingText size="md">Fetching results</LoadingText>
+              <LoadingText size="md">Loading</LoadingText>
             </>
           ) : (
             'Apply'

@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components';
 
 import { getColor } from '../../../../utils';
 import { Spinner } from '../../../Spinner';
+import { FlexContainer } from '../../../FlexContainer';
+import { Button } from '../../../Button';
 
 const overlayStyles = css`
   position: absolute;
@@ -16,14 +18,22 @@ const overlayStyles = css`
 const LoadingOverlayContainer = styled.div`
   ${overlayStyles}
 
-  ${Spinner} {
-    display: inline-block;
+  ${FlexContainer} {
+    display: inline-flex;
     position: sticky;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     margin: 4rem;
     background: ${getColor('graphite5H')};
+    padding: 0 0.5rem;
+    height: 2.5rem;
+    border-radius: 4px;
+
+    > span {
+      padding-left: 0.5rem;
+      padding-right: 1rem;
+    }
   }
 `;
 
@@ -36,12 +46,19 @@ const LoadingBackground = styled.div`
 const LoadingOverlay = ({ onCancel }) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
-    {onCancel && (
-      <button style={{ position: 'absolute' }} type="button" onClick={onCancel}>
-        Cancel
-      </button>
-    )}
-    <Spinner height={48} width={48} dark />
+    <FlexContainer alignItems="center">
+      {onCancel ? (
+        <>
+          <Spinner height={24} width={24} dark />
+          <span>Loading</span>
+          <Button size="sm" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+        </>
+      ) : (
+        <Spinner height={48} width={48} dark />
+      )}
+    </FlexContainer>
   </LoadingOverlayContainer>
 );
 
