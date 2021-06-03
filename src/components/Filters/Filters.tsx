@@ -293,10 +293,9 @@ const Filters: React.FC<FiltersProps> = ({
     event.preventDefault();
     onCancel();
     setFiltersValues(
-      pipe(
-        filter(propEq('isLoading', true)),
-        map(assoc('isCanceled', true)),
-      )(filtersValues),
+      pipe(map(unless(propEq('isLoading', false), assoc('isCanceled', true))))(
+        filtersValues,
+      ),
     );
   };
 

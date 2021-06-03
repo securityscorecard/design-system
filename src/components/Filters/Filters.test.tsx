@@ -212,4 +212,20 @@ describe('Filters', () => {
     expect(screen.queryByText('contains')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Value Option C')).toBeInTheDocument();
   });
+
+  it('should call "onCancel" when cancel button was clicked', () => {
+    const onCancel = jest.fn();
+    renderWithProviders(
+      <Filters
+        fields={mockTestFields}
+        onApply={onApplyFnMock}
+        onCancel={onCancel}
+        isLoading
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Cancel/i }));
+
+    expect(onCancel).toHaveBeenCalled();
+  });
 });
