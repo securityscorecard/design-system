@@ -162,10 +162,25 @@ WithNoMatchingDataCustom.args = {
   NoMatchingDataComponent: () => <div>No data match your current filters</div>,
 };
 
-export const DataIsLoading = TableTemplate.bind({});
-DataIsLoading.args = {
+export const DataIsLoadingWithoutPreviousData = TableTemplate.bind({});
+DataIsLoadingWithoutPreviousData.args = {
   ...WithNoData.args,
   isDataLoading: true,
+};
+
+export const DataIsLoadingWithPreviousData = TableTemplate.bind({});
+DataIsLoadingWithPreviousData.args = {
+  ...MinimalConfig.args,
+  isDataLoading: true,
+};
+
+export const DataIsLoadingWithPreviousDataAndIsCancelable = TableTemplate.bind(
+  {},
+);
+DataIsLoadingWithPreviousDataAndIsCancelable.args = {
+  ...MinimalConfig.args,
+  isDataLoading: true,
+  onCancelLoading: () => null,
 };
 
 export const WithSinglePage = TableTemplate.bind({});
