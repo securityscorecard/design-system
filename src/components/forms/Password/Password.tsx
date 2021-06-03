@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
+import { createPaddingSpacing, getFormStyle } from '../../../utils';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Input } from '../Input';

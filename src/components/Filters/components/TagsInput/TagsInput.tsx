@@ -23,7 +23,7 @@ import {
   getFormStyle,
   getLineHeight,
   pxToRem,
-} from '../../../../utils/helpers';
+} from '../../../../utils';
 import { validatePattern } from '../../helpers';
 import { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 

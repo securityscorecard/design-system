@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
+import { createPaddingSpacing, getFormStyle } from '../../../utils';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';

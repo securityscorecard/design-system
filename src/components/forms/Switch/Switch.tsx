@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getFormStyle, pxToRem } from '../../../utils/helpers';
+import { getFormStyle, pxToRem } from '../../../utils';
 import { SwitchProps } from './Switch.types';
 
 const Label = styled.label`

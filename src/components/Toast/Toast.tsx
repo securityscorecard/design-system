@@ -4,7 +4,7 @@ import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { createPaddingSpacing, getColor, pxToRem } from '../../utils/helpers';
+import { createPaddingSpacing, getColor, pxToRem } from '../../utils';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
 import { Paragraph } from '../typography';

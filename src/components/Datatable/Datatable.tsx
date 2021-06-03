@@ -6,7 +6,7 @@ import { fromPairs, map, pipe } from 'ramda';
 import { noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
-import { getBorderRadius, getColor } from '../../utils/helpers';
+import { getBorderRadius, getColor } from '../../utils';
 import { FlexContainer } from '../FlexContainer';
 import { FieldPropTypes, FilterStatePropType } from '../Filters/Filters.types';
 import { useDataFetch } from './hooks/useDataFetch';

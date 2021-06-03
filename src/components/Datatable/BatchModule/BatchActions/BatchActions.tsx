@@ -6,7 +6,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import { ColorTypes } from '../../../../theme/colors.enums';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
-import { pxToRem } from '../../../../utils/helpers';
+import { pxToRem } from '../../../../utils';
 import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../../../FlexContainer';
 import { Button } from '../../../Button';

@@ -1,7 +1,7 @@
 import { assoc, includes } from 'ramda';
 import { StylesConfig } from 'react-select';
 
-import { pxToRem } from '../../../../utils/helpers';
+import { pxToRem } from '../../../../utils';
 import { theme } from '../../../../theme';
 import { Option } from './Select.types';
 

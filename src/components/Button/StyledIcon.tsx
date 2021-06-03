@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 
-import { createMarginSpacing, getFontSize } from '../../utils/helpers';
+import { createMarginSpacing, getFontSize } from '../../utils';
 import { Icon } from '../Icon';
 import { StyledIconProps } from './StyledIcon.types';
 import { ButtonSizes } from './Button.enums';

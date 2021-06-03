@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
 
-import { getColor } from '../../utils/helpers';
+import { getColor } from '../../utils';
 import ModalHeader from './Header/Header';
 import ModalFooter from './Footer/Footer';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';

@@ -5,11 +5,7 @@ import { isNonEmptyString } from 'ramda-adjunct';
 
 import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
-import {
-  getBorderRadius,
-  getFormStyle,
-  pxToRem,
-} from '../../../../utils/helpers';
+import { getBorderRadius, getFormStyle, pxToRem } from '../../../../utils';
 import { validatePattern } from '../../helpers';
 
 const stateStyles = css`

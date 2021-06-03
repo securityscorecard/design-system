@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { pxToRem } from '../../../../utils/helpers';
+import { pxToRem } from '../../../../utils';
 import { H4, Paragraph } from '../../../typography';
 import { TextSizes } from '../../../typography/Text/Text.enums';
 

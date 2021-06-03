@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Text } from '../../typography';
 import { TextSizes } from '../../typography/Text/Text.enums';
 import { FlexContainer } from '../../FlexContainer';
-import { getBorderRadius, getColor, pxToRem } from '../../../utils/helpers';
+import { getBorderRadius, getColor, pxToRem } from '../../../utils';
 
 const Container = styled(FlexContainer)`
   background: ${getColor('graphite3H')};

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
 import { isString } from 'ramda-adjunct';
 
-import { pxToRem } from '../../utils/helpers';
+import { pxToRem } from '../../utils';
 import { SpinnerProps } from './Spinner.types';
 
 const spin = keyframes`

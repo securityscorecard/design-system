@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { pxToRem } from '../../../../utils/helpers';
+import { pxToRem } from '../../../../utils';
 import { FlexContainer } from '../../../FlexContainer';
 import { Spinner } from '../../../Spinner';
 import { FooterProps } from './Footer.types';

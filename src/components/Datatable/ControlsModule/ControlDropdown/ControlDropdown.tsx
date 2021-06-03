@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useDropdown } from '../../../../hooks/useDropdown';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
-import { pxToRem } from '../../../../utils/helpers';
+import { pxToRem } from '../../../../utils';
 import { Button } from '../../../Button';
 import {
   ButtonColors,

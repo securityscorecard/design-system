@@ -2,7 +2,7 @@ import { transparentize } from 'polished';
 
 import { Forms } from './forms.types';
 import colors from './colors';
-import { pxToRem } from '../utils/helpers';
+import { pxToRem } from '../utils';
 
 const forms: Forms = {
   fieldHeight: pxToRem(40),

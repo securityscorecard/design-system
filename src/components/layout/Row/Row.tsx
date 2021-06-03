@@ -3,7 +3,7 @@ import { Flex } from 'reflexbox';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
 
-import { pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils';
 
 const getRowMargin = pipe(
   path(['theme', 'layout', 'columnGutter']),

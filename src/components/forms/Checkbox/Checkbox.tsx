@@ -12,7 +12,7 @@ import {
   getColor,
   getFormStyle,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { FlexContainer } from '../../FlexContainer';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';

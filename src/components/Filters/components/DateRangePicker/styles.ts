@@ -9,7 +9,7 @@ import {
   getFormStyle,
   getLineHeight,
   pxToRem,
-} from '../../../../utils/helpers';
+} from '../../../../utils';
 
 export const datePickerStyles = css`
   .DateRangePicker-input {

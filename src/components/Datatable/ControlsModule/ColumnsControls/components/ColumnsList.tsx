@@ -17,7 +17,7 @@ import {
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 
-import { pxToRem } from '../../../../../utils/helpers';
+import { pxToRem } from '../../../../../utils';
 import { FlexContainer } from '../../../../FlexContainer';
 import ColumnsItem from './ColumnsItem';
 import { DatatableStore } from '../../../Datatable.store';

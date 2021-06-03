@@ -11,7 +11,7 @@ import { StyledTable, TableContainer } from '../../Table.styles';
 import CellRenderer from './CellRenderer';
 import { CellRendererProps } from './renderers.types';
 import { CellTypes } from './renderers.enums';
-import { abbreviateNumber } from '../../../../../utils/helpers';
+import { abbreviateNumber } from '../../../../../utils';
 
 export default {
   title: 'components/Datatable/internalComponents/Table/renderers',

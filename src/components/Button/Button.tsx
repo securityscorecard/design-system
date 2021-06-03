@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { pxToRem } from '../../utils/helpers';
+import { pxToRem } from '../../utils';
 import { Spinner } from '../Spinner';
 import { SSCIcons, Types } from '../Icon/Icon.types';
 import StyledButton from './StyledButton';

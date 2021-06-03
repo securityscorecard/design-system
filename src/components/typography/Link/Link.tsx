@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { getLinkStyle } from '../../../utils/helpers';
+import { getLinkStyle } from '../../../utils';
 import { LinkProps } from './Link.types';
 import { LinkColors } from './Link.enums';
 

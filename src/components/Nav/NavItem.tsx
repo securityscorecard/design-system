@@ -7,7 +7,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../utils/helpers';
+} from '../../utils';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { NavItemProps } from './NavItem.types';

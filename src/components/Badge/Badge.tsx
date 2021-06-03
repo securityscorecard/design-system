@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
 import { BadgeSizes } from './Badge.enums';
-import { getColor, pxToRem } from '../../utils/helpers';
+import { getColor, pxToRem } from '../../utils';
 
 const badgeFontSizeMedium = css`
   font-size: ${pxToRem(11)};

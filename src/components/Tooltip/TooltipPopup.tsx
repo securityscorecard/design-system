@@ -9,7 +9,7 @@ import {
   getFontSize,
   getLineHeight,
   pxToRem,
-} from '../../utils/helpers';
+} from '../../utils';
 import { TooltipPopupProps } from './Tooltip.types';
 
 const bottomPlacement = ({ $space, $width }) => css`

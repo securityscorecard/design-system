@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { pxToRem } from '../../utils/helpers';
+import { pxToRem } from '../../utils';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Icon } from '../Icon';

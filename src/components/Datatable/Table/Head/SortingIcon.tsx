@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { ColorTypes } from '../../../../theme/colors.enums';
-import { pxToRem } from '../../../../utils/helpers';
+import { pxToRem } from '../../../../utils';
 import { Icon } from '../../../Icon';
 import { SortingIconProps } from './Head.types';
 

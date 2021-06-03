@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
+import { createPaddingSpacing, getFormStyle } from '../../../utils';
 import { Label } from '../Label';
 import { RadioListItemProps } from './RadioListItem.types';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { getColor } from '../../../../utils/helpers';
+import { getColor } from '../../../../utils';
 import { Spinner } from '../../../Spinner';
 
 const overlayStyles = css`
