@@ -15,9 +15,9 @@ import {
 import {
   allPass,
   any,
-  compose,
   keys,
   pick,
+  pipe,
   prop,
   propEq,
   F as stubFalse,
@@ -238,14 +238,14 @@ TableProps<D>): React.ReactElement => {
         when(
           allPass([
             propEq('isCanceled', false),
-            compose(
+            pipe(
+              prop('filters'),
               any(
                 allPass([
                   propEq('isLoading', true),
                   propEq('isCanceled', false),
                 ]),
               ),
-              prop('filters'),
             ),
           ]),
           gotoFirstPage,
