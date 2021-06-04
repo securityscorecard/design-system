@@ -55,7 +55,7 @@ const Datatable = <D extends Record<string, unknown>>({
     [],
   );
 
-  const isCancelDisabled = onCancelLoading === noop;
+  const isCancelDisabled = !onCancelLoading;
 
   const {
     onColumnOrderChange,
@@ -121,7 +121,7 @@ const Datatable = <D extends Record<string, unknown>>({
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
         {...restTableConfig}
         isDataLoading={isDataLoading}
-        onCancelLoading={isControlsEnabled ? noop : handleCancelLoading}
+        onCancelLoading={handleCancelLoading}
       />
     </StyledDatatable>
   );
