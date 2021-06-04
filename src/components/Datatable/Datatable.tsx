@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
-import { fromPairs, map, pipe } from 'ramda';
+import { assocPath, fromPairs, map, pipe } from 'ramda';
 import { noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
@@ -55,12 +55,21 @@ const Datatable = <D extends Record<string, unknown>>({
     [],
   );
 
+  const isCancelDisabled = onCancelLoading === noop;
+
   const {
     onColumnOrderChange,
     ...restControlsConfig
-  } = useDeepCompareMemo(() => mergeControlsConfig(controlsConfig), [
-    controlsConfig,
-  ]);
+  } = useDeepCompareMemo(
+    () =>
+      mergeControlsConfig(
+        assocPath(
+          ['filteringConfig', 'isCancelDisabled'],
+          isCancelDisabled,
+        )(controlsConfig),
+      ),
+    [controlsConfig],
+  );
   const {
     onSelect,
     defaultSelectedRowIds,
@@ -78,14 +87,14 @@ const Datatable = <D extends Record<string, unknown>>({
     restTableConfig.defaultColumnOrder,
   );
 
-  const handleCancelLoading = onCancelLoading
-    ? () => {
+  const handleCancelLoading = isCancelDisabled
+    ? noop
+    : () => {
         DatatableStore.update((s) => {
           s.isCanceled = true;
           onCancelLoading();
         });
-      }
-    : noop;
+      };
 
   return (
     <StyledDatatable flexDirection="column">
@@ -112,7 +121,7 @@ const Datatable = <D extends Record<string, unknown>>({
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
         {...restTableConfig}
         isDataLoading={isDataLoading}
-        onCancelLoading={handleCancelLoading}
+        onCancelLoading={isControlsEnabled ? noop : handleCancelLoading}
       />
     </StyledDatatable>
   );

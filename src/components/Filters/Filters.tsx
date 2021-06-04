@@ -7,7 +7,6 @@ import {
   filter,
   find,
   head,
-  ifElse,
   map,
   pipe,
   propEq,
@@ -72,6 +71,7 @@ const Filters: React.FC<FiltersProps> = ({
   onClose = noop,
   onCancel = noop,
   isLoading = false,
+  isCancelDisabled = false,
 }) => {
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
@@ -107,13 +107,7 @@ const Filters: React.FC<FiltersProps> = ({
         pipe(
           filter(propSatisfies(isNotUndefined, 'value')),
           map(assoc('isLoading', false)),
-          map(
-            ifElse(
-              propEq('isCanceled', true),
-              assoc('isCanceled', false),
-              assoc('isApplied', true),
-            ),
-          ),
+          map(unless(propEq('isCanceled', true), assoc('isApplied', true))),
         )(filtersValues),
       );
     }
@@ -257,6 +251,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     const newFilters = pipe(
       filter(propSatisfies(isNotUndefined, 'value')),
+      map(assoc('isCanceled', false)),
       map(unless(propEq('isApplied', true), assoc('isLoading', true))),
     )(filtersValues);
     const defaultState = getDefaultState(fields);
@@ -291,12 +286,13 @@ const Filters: React.FC<FiltersProps> = ({
 
   const handleCancelLoading = (event) => {
     event.preventDefault();
-    onCancel();
-    setFiltersValues(
-      pipe(map(unless(propEq('isLoading', false), assoc('isCanceled', true))))(
-        filtersValues,
-      ),
-    );
+    const newFilters = pipe(
+      map(unless(propEq('isLoading', false), assoc('isCanceled', true))),
+    )(filtersValues);
+
+    onCancel(newFilters);
+
+    setFiltersValues(newFilters);
   };
 
   if (isUndefined(fields) || isNull(filtersValues)) {
@@ -324,7 +320,7 @@ const Filters: React.FC<FiltersProps> = ({
       <BottomBar
         hasUnappliedFilters={hasUnappliedFilters}
         isApplyDisabled={hasInvalidValues}
-        isCancelable={onCancel !== noop}
+        isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
         onCancel={handleCancelLoading}

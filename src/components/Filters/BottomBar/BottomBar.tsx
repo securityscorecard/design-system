@@ -20,12 +20,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
   onClearAll,
   onClose,
   onCancel,
-  isCancelable = false,
+  isCancelDisabled = false,
   isLoading = false,
   hasUnappliedFilters,
   isApplyDisabled = false,
 }) => {
-  const canCancel = isCancelable && isLoading;
+  const canCancel = !isCancelDisabled && isLoading;
   return (
     <FlexContainer justifyContent="space-between" margin={{ top: 0.5 }}>
       <FlexContainer>
@@ -96,7 +96,7 @@ BottomBar.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onClearAll: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  isCancelable: PropTypes.bool,
+  isCancelDisabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   isApplyDisabled: PropTypes.bool,
 };

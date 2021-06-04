@@ -135,7 +135,7 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
         setTableData(fetchedData);
         setTotalLength(assets.length);
         setIsLoading(false);
-      }, 500);
+      }, 5000);
     },
     [setIsLoading, setTableData],
   );

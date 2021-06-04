@@ -238,7 +238,15 @@ TableProps<D>): React.ReactElement => {
         when(
           allPass([
             propEq('isCanceled', false),
-            compose(any(propEq('isLoading', true)), prop('filters')),
+            compose(
+              any(
+                allPass([
+                  propEq('isLoading', true),
+                  propEq('isCanceled', false),
+                ]),
+              ),
+              prop('filters'),
+            ),
           ]),
           gotoFirstPage,
         ),
