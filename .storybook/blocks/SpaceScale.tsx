@@ -17,7 +17,7 @@ export const SpaceScale = ({scale}) => {
       </TableHead>
       <TableBody>
       {sizes.map(size => (
-        <tr key="size">
+        <tr key={size}>
           <td><Token>theme.space.{size}</Token></td>
           <td>{scale[size] / 16}</td>
           <td>{scale[size]}</td>
