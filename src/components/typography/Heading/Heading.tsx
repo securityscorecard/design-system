@@ -10,7 +10,7 @@ import {
   getFontSize,
   getFontWeight,
   getLineHeight,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
 

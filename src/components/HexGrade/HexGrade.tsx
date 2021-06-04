@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import colors from '../../theme/colors';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { createMarginSpacing } from '../../utils/helpers';
+import { createMarginSpacing } from '../../utils';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import { HexGradeProps } from './HexGrade.types';
 

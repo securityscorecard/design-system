@@ -15,7 +15,7 @@ import {
   getFontSize,
   getLineHeight,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { PortalPlacements } from '../../../hooks/useCalculatePortalPlacements.enums';
 import { useDropdown } from '../../../hooks/useDropdown';

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { H3, Text } from '../../../typography';
 import { HeadingVariants } from '../../../typography/Heading/Heading.enums';
 import { TextSizes, TextVariants } from '../../../typography/Text/Text.enums';
-import { abbreviateNumber, getColor, pxToRem } from '../../../../utils/helpers';
+import { abbreviateNumber, getColor, pxToRem } from '../../../../utils';
 import { Dropdown } from '../../Dropdown';
 import { Icon } from '../../../Icon';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';

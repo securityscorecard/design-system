@@ -34,6 +34,7 @@ export const parameters = {
             'createIconLibrary()',
             'DSProvider',
             'Colors',
+            'Space',
             'Typography'
           ],
         'Helpers',

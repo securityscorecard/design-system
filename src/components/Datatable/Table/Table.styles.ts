@@ -11,7 +11,7 @@ import {
   getFormStyle,
   getLinkStyle,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 
 const getRemToggleSize = memoizeWith(
   identity,

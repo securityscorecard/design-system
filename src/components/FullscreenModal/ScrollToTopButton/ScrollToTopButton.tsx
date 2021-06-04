@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils';
 import { Button } from '../../Button';
 import { ButtonColors, ButtonVariants } from '../../Button/Button.enums';
 import { Icon } from '../../Icon';

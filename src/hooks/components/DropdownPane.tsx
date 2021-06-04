@@ -9,7 +9,7 @@ import {
   getFontFamily,
   getFontSize,
   getLineHeight,
-} from '../../utils/helpers';
+} from '../../utils';
 import { useOuterClick } from '../useOuterCallback';
 import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 

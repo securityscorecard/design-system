@@ -8,7 +8,7 @@ import { PortalPlacements } from './useCalculatePortalPlacements.enums';
 import DropdownPane from './components/DropdownPane';
 import { UseDropdownOptions, UseDropdownReturnType } from './useDropdown.types';
 import { DSContext } from '../theme/DSProvider/DSProvider';
-import { pxToRem } from '../utils/helpers';
+import { pxToRem } from '../utils';
 
 const defaultTooltipPopupDimensions = { space: 8 };
 

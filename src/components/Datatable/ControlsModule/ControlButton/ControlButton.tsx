@@ -8,7 +8,7 @@ import {
   getFontSize,
   getFontWeight,
   pxToRem,
-} from '../../../../utils/helpers';
+} from '../../../../utils';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { Icon } from '../../../Icon';
 import { SSCIcons } from '../../../Icon/Icon.types';

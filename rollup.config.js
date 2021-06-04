@@ -9,7 +9,7 @@ export default {
   input: {
     index: 'src/index.ts',
     theme: 'src/theme/index.ts',
-    helpers: 'src/utils/helpers.ts',
+    helpers: 'src/utils/index.ts',
   },
   output: [
     {

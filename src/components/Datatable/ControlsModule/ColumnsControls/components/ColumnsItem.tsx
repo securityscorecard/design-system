@@ -4,11 +4,7 @@ import styled from 'styled-components';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import {
-  getBorderRadius,
-  getColor,
-  pxToRem,
-} from '../../../../../utils/helpers';
+import { getBorderRadius, getColor, pxToRem } from '../../../../../utils';
 import { FlexContainer } from '../../../../FlexContainer';
 import { Text } from '../../../../typography';
 import { TextSizes } from '../../../../typography/Text/Text.enums';

@@ -31,7 +31,7 @@ import {
 } from './Table.styles';
 import CellRenderer from './Body/renderers/CellRenderer';
 import { FlexContainer } from '../../FlexContainer';
-import { getColor, pxToRem } from '../../../utils/helpers';
+import { getColor, pxToRem } from '../../../utils';
 import { TableProps } from './Table.types';
 
 const NoDataContainer = styled(FlexContainer).attrs(() => ({

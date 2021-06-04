@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { path } from 'ramda';
 
 import { SpacingSizeValuePropType } from '../../../types/spacing.types';
-import { createSpacings } from '../../../utils/helpers';
+import { createSpacings } from '../../../utils';
 import { Text } from '../Text';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { ParagraphProps } from './Paragraph.types';

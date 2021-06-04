@@ -8,7 +8,7 @@ import {
   getFontSize,
   getFormStyle,
   getLineHeight,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { InputProps } from './Input.types';
 
 const stateStyles = css`

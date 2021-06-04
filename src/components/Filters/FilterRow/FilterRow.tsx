@@ -39,7 +39,7 @@ import {
 import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import { operatorOptions } from '../data/operatorOptions';
-import { pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
 
 const SplitField = styled.div<SplitFieldProps>`

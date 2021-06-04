@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getFontWeight, pxToRem } from '../../../../utils/helpers';
+import { getFontWeight, pxToRem } from '../../../../utils';
 import { FlexContainer } from '../../../FlexContainer';
 import { Input, Label } from '../../../forms';
 import { GoToPageProps } from './GoToPage.types';

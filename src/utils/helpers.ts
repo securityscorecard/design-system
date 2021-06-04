@@ -1,15 +1,9 @@
+import { DefaultTheme } from 'styled-components';
 import {
-  DefaultTheme,
-  FlattenSimpleInterpolation,
-  css,
-} from 'styled-components';
-import {
-  any,
   anyPass,
   curry,
   equals,
   identity,
-  isEmpty,
   join,
   map,
   memoizeWith,
@@ -17,16 +11,10 @@ import {
   pipe,
   unless,
 } from 'ramda';
-import {
-  hasPath,
-  isNotUndefined,
-  isNumber,
-  isString,
-  list,
-} from 'ramda-adjunct';
+import { hasPath, isString, list } from 'ramda-adjunct';
 import numeral from 'numeral';
 
-import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../theme/constants';
+import { BASE_FONT_SIZE } from '../theme/constants';
 import {
   Family as FontFamily,
   Size as FontSize,
@@ -37,8 +25,9 @@ import { Colors } from '../theme/colors.types';
 import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
 import { Depths } from '../theme/depths.types';
+import space from '../theme/space';
 
-type Theme = {
+export type Theme = {
   theme?: DefaultTheme;
   margin?: SpacingSizeValue;
   padding?: SpacingSizeValue;
@@ -141,69 +130,13 @@ export const getDepth = curry(
     path(['depths', element], theme),
 );
 
-type SpacingKind = 'padding' | 'margin';
-
-const calculateSpacingValue = (direction: number, generic: number) =>
-  pxToRem(BASE_LINE_HEIGHT * (isNumber(direction) ? direction : generic));
-
-// createSpacing :: Kind -> Value -> string | string[]
-// Kind - 'margin' or 'padding'
-// Value - number or 'none' or object
-export const createSpacing = curry(
-  (kind: SpacingKind, value: SpacingSizeValue): string | string[] => {
-    if (value === undefined || isEmpty(value)) {
-      return undefined;
-    }
-
-    if (value === 'none') {
-      return `${kind}: 0;`;
-    }
-
-    if (isNumber(value)) {
-      return `${kind}: ${pxToRem(BASE_LINE_HEIGHT * value)};`;
-    }
-
-    const { vertical, horizontal, top, right, bottom, left } = value;
-    const result = [];
-
-    if (any(isNotUndefined, [vertical, top])) {
-      result.push(`${kind}-top: ${calculateSpacingValue(top, vertical)};`);
-    }
-    if (any(isNotUndefined, [vertical, bottom])) {
-      result.push(
-        `${kind}-bottom: ${calculateSpacingValue(bottom, vertical)};`,
-      );
-    }
-    if (any(isNotUndefined, [horizontal, left])) {
-      result.push(`${kind}-left: ${calculateSpacingValue(left, horizontal)};`);
-    }
-    if (any(isNotUndefined, [horizontal, right])) {
-      result.push(
-        `${kind}-right: ${calculateSpacingValue(right, horizontal)};`,
-      );
-    }
-
-    return result;
-  },
+// getSpace:: Size -> Props -> string
+// Size - any key of 'space' (src/theme/space.ts)
+// Props - styled-components props object
+export const getSpace = curry(
+  (size: keyof typeof space, { theme }: Theme): string =>
+    pipe(path(['space', size]), pxToRem)(theme),
 );
-
-// createMarginSpacing :: Value -> string | string[]
-// Value - number or 'none' or object
-export const createMarginSpacing = createSpacing('margin');
-
-// createPaddingSpacing :: Value -> string | string[]
-// Value - number or 'none' or object
-export const createPaddingSpacing = createSpacing('padding');
-
-// createSpacings :: Object -> string
-// Object - {margin: number or 'none' or object, padding: number or 'none' or object }
-export const createSpacings = ({
-  margin,
-  padding,
-}: Theme): FlattenSimpleInterpolation => css`
-  ${createMarginSpacing(margin)};
-  ${createPaddingSpacing(padding)};
-`;
 
 export const abbreviateNumber = (value: number): string =>
   numeral(value).format('0.[00]a').toUpperCase();

@@ -15,7 +15,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { StateButtonProps } from './StateButton.types';
 import { useStateButtonIcon } from '../hooks/useStateButton';
 

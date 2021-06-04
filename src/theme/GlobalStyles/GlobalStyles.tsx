@@ -2,12 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import resetStyles from 'styled-reset-advanced';
 
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../constants';
-import {
-  getColor,
-  getFontFamily,
-  getFontWeight,
-  pxToRem,
-} from '../../utils/helpers';
+import { getColor, getFontFamily, getFontWeight, pxToRem } from '../../utils';
 import SpaceMonoRegularWoff2 from '../fonts/SpaceMono-Regular.woff2';
 import SpaceMonoRegularWoff from '../fonts/SpaceMono-Regular.woff';
 

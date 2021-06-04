@@ -9,7 +9,7 @@ import {
   getDepth,
   getFontSize,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { useOuterClick } from '../../../hooks/useOuterCallback';
 import {
   SearchSuggestionPropType,

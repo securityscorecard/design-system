@@ -98,6 +98,7 @@ export const FontItem: FunctionComponent<FontProps> = ({
   );
 };
 
+/* TODO: migrate to `./components` */
 export const FontPalette: FunctionComponent = ({children, ...props}) => (
   <List {...props}>
     <ListHeading>

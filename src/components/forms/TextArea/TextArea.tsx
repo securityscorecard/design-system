@@ -13,7 +13,7 @@ import {
   getFormStyle,
   getLineHeight,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { TextAreaProps } from './TextArea.types';
 import { useAutosize } from './hooks/useAutosize';
 import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';

@@ -4,7 +4,7 @@ import { StylesConfig } from 'react-select';
 import { assoc, includes } from 'ramda';
 
 import { theme } from '../../../theme';
-import { pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils';
 import { Option } from './Select.types';
 
 export const reactSelectTheme: ThemeConfig = (selectTheme) => ({

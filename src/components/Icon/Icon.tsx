@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { createSpacings, getColor } from '../../utils/helpers';
+import { createSpacings, getColor } from '../../utils';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { Colors } from '../../theme/colors.types';

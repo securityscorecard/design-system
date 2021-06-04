@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getColor, pxToRem } from '../../../utils/helpers';
+import { getColor, pxToRem } from '../../../utils';
 import { Button } from '../../Button';
 import {
   ButtonColors,

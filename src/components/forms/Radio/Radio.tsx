@@ -4,11 +4,7 @@ import styled, { css } from 'styled-components';
 import { allPass } from 'ramda';
 import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 
-import {
-  createMarginSpacing,
-  getFormStyle,
-  pxToRem,
-} from '../../../utils/helpers';
+import { createMarginSpacing, getFormStyle, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';

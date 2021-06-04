@@ -10,7 +10,7 @@ import {
   getColor,
   getFontSize,
   pxToRem,
-} from '../../../../utils/helpers';
+} from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
 import {
   ACTIONS_COLUMN_ID,

@@ -9,7 +9,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../../../../utils/helpers';
+} from '../../../../../utils';
 import { FlexContainer } from '../../../../FlexContainer';
 import { PaginationItemProps } from './Pagination.types';
 

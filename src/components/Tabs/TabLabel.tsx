@@ -7,7 +7,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../utils/helpers';
+} from '../../utils';
 import { TabSizes, TabVariants } from './Tabs.enums';
 import { LabelProps, Sizes, Variants } from './Tabs.types';
 

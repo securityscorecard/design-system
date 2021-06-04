@@ -10,7 +10,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../utils/helpers';
+} from '../../utils';
 import { BaseStyledButtonProps } from './StyledButton.types';
 import { ButtonSizes, ButtonVariants } from './Button.enums';
 

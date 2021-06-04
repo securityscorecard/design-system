@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { getColor, getFontWeight } from '../../../../utils/helpers';
+import { getColor, getFontWeight } from '../../../../utils';
 
 export const singleDatePickerStyles = css`
   .react-datepicker__day--selected {

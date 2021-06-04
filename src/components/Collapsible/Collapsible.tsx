@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getBorderRadius, getColor, pxToRem } from '../../utils/helpers';
+import { getBorderRadius, getColor, pxToRem } from '../../utils';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
 import { Strong, Text } from '../typography';

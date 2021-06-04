@@ -4,7 +4,7 @@ import usePortal from 'react-cool-portal';
 import { useCalculatePortaPlacement } from '../../../hooks/useCalculatePortalPlacement';
 import { StyleProps } from '../../../hooks/useCalculatePortalPlacement.types';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
-import { pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils';
 import TooltipPopup from '../TooltipPopup';
 import { UseTooltipOptions, UseTooltipReturnType } from './useTooltip.types';
 

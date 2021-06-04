@@ -8,7 +8,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../../../utils/helpers';
+} from '../../../../utils';
 import TooltipWrapper from '../components/TooltipWrapper';
 import { makeStickyColumn, shrinkIfSticky } from '../utils';
 import SortingIcon from './SortingIcon';

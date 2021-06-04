@@ -7,7 +7,7 @@ import {
   getFontSize,
   getFontWeight,
   getLineHeight,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { TextSizes, TextVariants } from './Text.enums';
 import { CodeProps, StrongProps, TextProps } from './Text.types';
 

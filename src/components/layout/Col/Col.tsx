@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
 
-import { pxToRem } from '../../../utils/helpers';
+import { pxToRem } from '../../../utils';
 import { ColProps, Cols } from './Col.types';
 
 const getColWidth = (cols: Cols): { flex: string } | { width: number } => {

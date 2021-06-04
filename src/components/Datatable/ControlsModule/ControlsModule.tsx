@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 
-import { getColor } from '../../../utils/helpers';
+import { getColor } from '../../../utils';
 import { FlexContainer } from '../../FlexContainer';
 import { SearchBar } from '../../forms/SearchBar';
 import { Filters } from '../../Filters';

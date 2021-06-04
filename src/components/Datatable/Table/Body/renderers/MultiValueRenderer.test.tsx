@@ -4,7 +4,7 @@ import { join, pipe, slice } from 'ramda';
 
 import { renderWithProviders } from '../../../../../utils/tests/renderWithProviders';
 import MultiValueRenderer from './MultiValueRenderer';
-import { abbreviateNumber } from '../../../../../utils/helpers';
+import { abbreviateNumber } from '../../../../../utils';
 import { defaultDSContext } from '../../../../../theme/DSProvider/DSProvider';
 
 const values = ['a', 'b', 'c', 'd', 'e'];

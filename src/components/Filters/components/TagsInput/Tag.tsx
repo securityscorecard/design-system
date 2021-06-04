@@ -13,7 +13,7 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../../../utils/helpers';
+} from '../../../../utils';
 import { TagsProps } from './Tag.types';
 
 const Container = styled(FlexContainer)`

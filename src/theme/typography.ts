@@ -1,5 +1,5 @@
 import colors from './colors';
-import { pxToRem } from '../utils/helpers';
+import { pxToRem } from '../utils';
 import {
   Family,
   LineHeight,
