@@ -7,3 +7,4 @@ export * from './Col';
 export * from './Padbox';
 export * from './Stack';
 export * from './Inline';
+export * from './Cluster';
