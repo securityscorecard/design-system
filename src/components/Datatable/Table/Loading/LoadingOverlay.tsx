@@ -30,12 +30,12 @@ const LoadingOverlayContainer = styled.div`
     padding: 0 0.5rem;
     height: 2.5rem;
     border-radius: 4px;
-
-    > span {
-      padding-left: 0.5rem;
-      padding-right: 1rem;
-    }
   }
+`;
+
+const LoadingText = styled.span`
+  padding-left: 0.5rem;
+  padding-right: 1rem;
 `;
 
 const LoadingBackground = styled.div`
@@ -54,7 +54,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
       {isCancelable ? (
         <>
           <Spinner height={24} width={24} dark />
-          <span>Loading</span>
+          <LoadingText>Loading</LoadingText>
           <Button size="sm" variant="outline" onClick={onCancel}>
             Cancel
           </Button>
