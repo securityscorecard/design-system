@@ -231,28 +231,27 @@ TableProps<D>): React.ReactElement => {
     };
   }, [setColumnOrder]);
 
-  useEffect(
-    () =>
-      DatatableStore.subscribe(
-        pick(['filters', 'isCanceled']),
-        when(
-          allPass([
-            propEq('isCanceled', false),
-            pipe(
-              prop('filters'),
-              any(
-                allPass([
-                  propEq('isLoading', true),
-                  propEq('isCanceled', false),
-                ]),
-              ),
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      pick(['filters', 'isCanceled']),
+      when(
+        allPass([
+          propEq('isCanceled', false),
+          pipe(
+            prop('filters'),
+            any(
+              allPass([propEq('isLoading', true), propEq('isCanceled', false)]),
             ),
-          ]),
-          gotoFirstPage,
-        ),
+          ),
+        ]),
+        gotoFirstPage,
       ),
-    [gotoFirstPage],
-  );
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [gotoFirstPage]);
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);
