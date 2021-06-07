@@ -2,7 +2,7 @@ import { abbreviateNumber, pxToRem } from './helpers';
 
 describe('pxToRem', () => {
   it('should not convert 0 value', () => {
-    expect(pxToRem(0)).toBe('0');
+    expect(pxToRem(0)).toBe('0rem');
   });
 
   it('should not convert string value', () => {
@@ -17,7 +17,7 @@ describe('pxToRem', () => {
   });
 
   it('should return correct value is arguments are mixed', () => {
-    expect(pxToRem(16, 0, 8, 'auto')).toBe('1rem 0 0.5rem auto');
+    expect(pxToRem(16, 0, 8, 'auto')).toBe('1rem 0rem 0.5rem auto');
   });
 });
 

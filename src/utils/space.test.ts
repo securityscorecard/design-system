@@ -99,10 +99,10 @@ describe('createSpacing', () => {
         });
 
         expect(result).toHaveLength(4);
-        expect(result[0]).toBe('margin-top: 0;');
-        expect(result[1]).toBe('margin-bottom: 0;');
-        expect(result[2]).toBe('margin-left: 0;');
-        expect(result[3]).toBe('margin-right: 0;');
+        expect(result[0]).toBe('margin-top: 0rem;');
+        expect(result[1]).toBe('margin-bottom: 0rem;');
+        expect(result[2]).toBe('margin-left: 0rem;');
+        expect(result[3]).toBe('margin-right: 0rem;');
       });
 
       it('should return correct values', () => {
@@ -208,10 +208,10 @@ describe('createSpacing', () => {
         });
 
         expect(result).toHaveLength(4);
-        expect(result[0]).toBe('padding-top: 0;');
-        expect(result[1]).toBe('padding-bottom: 0;');
-        expect(result[2]).toBe('padding-left: 0;');
-        expect(result[3]).toBe('padding-right: 0;');
+        expect(result[0]).toBe('padding-top: 0rem;');
+        expect(result[1]).toBe('padding-bottom: 0rem;');
+        expect(result[2]).toBe('padding-left: 0rem;');
+        expect(result[3]).toBe('padding-right: 0rem;');
       });
 
       it('should return correct values', () => {
