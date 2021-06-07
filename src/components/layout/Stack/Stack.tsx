@@ -7,6 +7,7 @@ import { Property } from 'csstype';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
+import { AlignItemsPropType } from '../../../types/flex.types';
 
 export interface StackProps {
   /**
@@ -58,23 +59,7 @@ const Stack = styled.div<StackProps>`
 
 Stack.propTypes = {
   gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  justify: PropTypes.oneOf([
-    'inherit',
-    '-moz-initial',
-    'initial',
-    'revert',
-    'unset',
-    'center',
-    'end',
-    'flex-end',
-    'flex-start',
-    'self-end',
-    'self-start',
-    'start',
-    'baseline',
-    'normal',
-    'stretch',
-  ]),
+  justify: AlignItemsPropType,
   splitAt: PropTypes.number,
   isRecursive: PropTypes.bool,
 };

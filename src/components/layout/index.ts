@@ -6,3 +6,4 @@ export * from './Col';
 // Layout primitives
 export * from './Padbox';
 export * from './Stack';
+export * from './Inline';
