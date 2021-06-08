@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   any,
+  anyPass,
   assoc,
   defaultTo,
   equals,
@@ -8,6 +9,7 @@ import {
   find,
   head,
   map,
+  none,
   pipe,
   propEq,
   propSatisfies,
@@ -83,22 +85,12 @@ const Filters: React.FC<FiltersProps> = ({
     if ((isUndefined(state) || isEmptyArray(state)) && isNotUndefined(fields)) {
       const defaultState = getDefaultState(fields);
       setFiltersValues(defaultState);
-    } else if (!equals(state, filtersValues)) {
-      if (state && !isLoading && any(propEq('isLoading', true))(state)) {
-        setFiltersValues(
-          pipe(
-            filter(propSatisfies(isNotUndefined, 'value')),
-            map(assoc('isLoading', false)),
-            map(unless(propEq('isCanceled', true), assoc('isApplied', true))),
-          )(state),
-        );
-      } else {
-        setFiltersValues(state);
-      }
+    } else {
+      setFiltersValues(state);
       setValidValues(state.map((field) => Boolean(field)));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, fields, isLoading]);
+  }, [state, fields]);
 
   useEffect(() => {
     if (isNotUndefined(fields)) {
@@ -107,6 +99,28 @@ const Filters: React.FC<FiltersProps> = ({
       setIsDefaultState(equals(filtersValues, defaultState));
     }
   }, [filtersValues, fields]);
+
+  useEffect(() => {
+    if (
+      filtersValues &&
+      !isLoading &&
+      any(propEq('isLoading', true))(filtersValues) &&
+      none(propEq('isCanceled', true))(state)
+    ) {
+      setFiltersValues(
+        pipe(
+          filter(propSatisfies(isNotUndefined, 'value')),
+          map(
+            unless(
+              anyPass([propEq('isCanceled', true), propEq('isLoading', false)]),
+              assoc('isApplied', true),
+            ),
+          ),
+          map(assoc('isLoading', false)),
+        )(filtersValues),
+      );
+    }
+  }, [state, filtersValues, isLoading]);
 
   const handleError = (hasError, index) => {
     const newValidValues = [...validValues];
