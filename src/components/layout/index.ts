@@ -9,3 +9,4 @@ export * from './Stack';
 export * from './Inline';
 export * from './Cluster';
 export * from './Grid';
+export * from './Center';
