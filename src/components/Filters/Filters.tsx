@@ -101,11 +101,12 @@ const Filters: React.FC<FiltersProps> = ({
   }, [filtersValues, fields]);
 
   useEffect(() => {
+    // checks whether loading has stopped, or has been canceled and applies flags accordingly
     if (
       filtersValues &&
       !isLoading &&
       any(propEq('isLoading', true))(filtersValues) &&
-      none(propEq('isCanceled', true))(state)
+      (!state || none(propEq('isCanceled', true))(state))
     ) {
       setFiltersValues(
         pipe(
