@@ -83,11 +83,22 @@ const Filters: React.FC<FiltersProps> = ({
     if ((isUndefined(state) || isEmptyArray(state)) && isNotUndefined(fields)) {
       const defaultState = getDefaultState(fields);
       setFiltersValues(defaultState);
-    } else {
-      setFiltersValues(state);
+    } else if (!equals(state, filtersValues)) {
+      if (state && !isLoading && any(propEq('isLoading', true))(state)) {
+        setFiltersValues(
+          pipe(
+            filter(propSatisfies(isNotUndefined, 'value')),
+            map(assoc('isLoading', false)),
+            map(unless(propEq('isCanceled', true), assoc('isApplied', true))),
+          )(state),
+        );
+      } else {
+        setFiltersValues(state);
+      }
       setValidValues(state.map((field) => Boolean(field)));
     }
-  }, [state, fields]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, fields, isLoading]);
 
   useEffect(() => {
     if (isNotUndefined(fields)) {
@@ -96,22 +107,6 @@ const Filters: React.FC<FiltersProps> = ({
       setIsDefaultState(equals(filtersValues, defaultState));
     }
   }, [filtersValues, fields]);
-
-  useEffect(() => {
-    if (
-      filtersValues &&
-      !isLoading &&
-      any(propEq('isLoading', true))(filtersValues)
-    ) {
-      setFiltersValues(
-        pipe(
-          filter(propSatisfies(isNotUndefined, 'value')),
-          map(assoc('isLoading', false)),
-          map(unless(propEq('isCanceled', true), assoc('isApplied', true))),
-        )(filtersValues),
-      );
-    }
-  }, [filtersValues, isLoading]);
 
   const handleError = (hasError, index) => {
     const newValidValues = [...validValues];
@@ -284,17 +279,6 @@ const Filters: React.FC<FiltersProps> = ({
     onClose();
   };
 
-  const handleCancelLoading = (event) => {
-    event.preventDefault();
-    const newFilters = pipe(
-      map(unless(propEq('isLoading', false), assoc('isCanceled', true))),
-    )(filtersValues);
-
-    onCancel(newFilters);
-
-    setFiltersValues(newFilters);
-  };
-
   if (isUndefined(fields) || isNull(filtersValues)) {
     return null;
   }
@@ -323,7 +307,7 @@ const Filters: React.FC<FiltersProps> = ({
         isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
-        onCancel={handleCancelLoading}
+        onCancel={onCancel}
         onClearAll={handleClearAll}
         onClose={handleCloseFilters}
         onSubmit={handleSubmitForm}

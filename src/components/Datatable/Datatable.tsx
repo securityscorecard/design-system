@@ -92,6 +92,14 @@ const Datatable = <D extends Record<string, unknown>>({
     : () => {
         DatatableStore.update((s) => {
           s.isCanceled = true;
+          s.filters = s.filters.map((filter) => ({
+            ...filter,
+
+            // mark loading filters as canceled
+            isCanceled: filter.isLoading,
+            isLoading: false,
+          }));
+
           onCancelLoading();
         });
       };

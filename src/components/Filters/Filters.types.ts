@@ -60,7 +60,7 @@ export interface FiltersProps {
   state?: Filter[];
   onApply: (filters: Filter[]) => void;
   onClose?: () => void;
-  onCancel?: (filters: Filter[]) => void;
+  onCancel?: () => void;
   onChange?: (filters: Filter[]) => void;
   isLoading?: boolean;
   isCancelDisabled?: boolean;

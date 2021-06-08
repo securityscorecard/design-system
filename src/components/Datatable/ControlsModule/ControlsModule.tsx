@@ -169,14 +169,6 @@ const ControlsModule = <D extends Record<string, unknown>>({
     });
   };
 
-  const handleCancelLoading = (appliedfilters: Filter[]): void => {
-    onCancelLoading();
-
-    DatatableStore.update((s) => {
-      s.filters = appliedfilters;
-    });
-  };
-
   const handleOnSearch = (query: string): void => {
     onSearch(query);
 
@@ -304,7 +296,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
             isLoading={isDataLoading}
             state={filteringStoreState}
             onApply={handleApplyFilter}
-            onCancel={handleCancelLoading}
+            onCancel={onCancelLoading}
             onClose={handleCloseFilter}
             {...restFilteringConfig}
           />
