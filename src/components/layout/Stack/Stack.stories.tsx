@@ -1,12 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import styled from 'styled-components';
 
-import Stack, { StackProps } from './Stack';
-import { Padbox } from '../Padbox';
-import { getColor } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Button } from '../../Button';
+import { Box } from '../mocks/Box';
+import Stack, { StackProps } from './Stack';
 
 export default {
   title: 'layout/primitives/Stack',
@@ -18,15 +16,6 @@ export default {
     },
   },
 } as Meta;
-
-const Box = styled(Padbox).attrs((props) => ({
-  paddingSize: SpaceSizes.sm,
-  children:
-    props.children ||
-    'Sed id nulla ac est dignissim pharetra. Donec sit amet nulla vitae orci auctor posuere in ac massa. Quisque blandit enim diam, eget interdum ante pretium eget.',
-}))`
-  background-color: ${getColor('blueberry0')};
-`;
 
 export const playground: Story<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>

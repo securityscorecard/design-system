@@ -1,10 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import styled from 'styled-components';
 
-import { Padbox } from '../Padbox';
-import { getColor } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
+import { Box as MockBox } from '../mocks/Box';
 import Inline, { InlineProps } from './Inline';
 import { StretchEnum } from './Inline.enums';
 
@@ -30,16 +28,9 @@ export default {
   },
 } as Meta;
 
-const Box = styled(Padbox).attrs((props) => ({
-  paddingSize: SpaceSizes.sm,
-  children:
-    props.children ||
-    'Sed id nulla ac est dignissim pharetra. Donec sit amet nulla vitae orci auctor posuere in ac massa. Quisque blandit enim diam, eget interdum ante pretium eget.',
-}))`
-  background-color: ${getColor('blueberry0')};
-  width: 150px;
-  min-height: 150px;
-`;
+const Box = ({ style = {} }: { style?: React.CSSProperties }) => (
+  <MockBox style={{ width: '150px', minHeight: '150px', ...style }} />
+);
 
 const InlineTemplate: Story<InlineProps> = (args) => (
   <Inline style={{ backgroundColor: '#0275d8' }} {...args}>

@@ -1,10 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import styled from 'styled-components';
 
-import { Padbox } from '../Padbox';
-import { getColor } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
+import { Box } from '../mocks/Box';
 import Cluster, { ClusterProps } from './Cluster';
 
 export default {
@@ -46,12 +44,6 @@ export default {
     },
   },
 } as Meta;
-
-const Box = styled(Padbox).attrs(() => ({
-  paddingSize: SpaceSizes.sm,
-}))`
-  background-color: ${getColor('blueberry0')};
-`;
 
 const ClusterTemplate: Story<ClusterProps> = (args) => (
   <Cluster style={{ backgroundColor: '#0275d8' }} {...args}>
