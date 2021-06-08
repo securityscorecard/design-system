@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
+  allPass,
   any,
-  anyPass,
   assoc,
   defaultTo,
   equals,
@@ -15,6 +15,7 @@ import {
   propSatisfies,
   unless,
   update,
+  when,
 } from 'ramda';
 import {
   isEmptyArray,
@@ -112,8 +113,8 @@ const Filters: React.FC<FiltersProps> = ({
         pipe(
           filter(propSatisfies(isNotUndefined, 'value')),
           map(
-            unless(
-              anyPass([propEq('isCanceled', true), propEq('isLoading', false)]),
+            when(
+              allPass([propEq('isCanceled', false), propEq('isLoading', true)]),
               assoc('isApplied', true),
             ),
           ),
