@@ -55,8 +55,7 @@ const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
     ${({ $isSelected, $color }) =>
       $isSelected ? getColor($color) : getColor('graphiteHB')};
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: ${getColor('graphite4B')};
     text-decoration: none;
     border-bottom: 2px solid ${({ $color }) => getColor($color)};
@@ -71,8 +70,7 @@ const textTab = css<LabelProps & { size: Sizes; variant: Variants }>`
 
   color: ${({ $isSelected, $color }) =>
     $isSelected ? getColor('graphite4B') : getColor($color)};
-  &:hover,
-  &:focus {
+  &:hover {
     color: ${({ $color, theme }) =>
       lighten(0.1, theme.colors[$color] || $color)};
     text-decoration: none;
