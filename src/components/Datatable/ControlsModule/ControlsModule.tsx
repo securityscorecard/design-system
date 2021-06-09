@@ -194,7 +194,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
             {
               /* hasColumnVisibility || */ hasColumnOrdering && (
                 <ColumnsControls
-                  defaultIsOpen={defaultIsColumnOrderingOpen}
+                  isOpen={controlsState[ControlTypes.columns].isActive}
                   onApply={(shouldApply) => {
                     if (shouldApply) {
                       applyControlStateChange(ControlTypes.columns, {
@@ -224,15 +224,18 @@ const ControlsModule = <D extends Record<string, unknown>>({
                     })
                   }
                 >
-                  {(onClick) => (
-                    <ControlButton
-                      iconName={SSCIconNames.reorder}
-                      isActive={controlsState[ControlTypes.columns].isActive}
-                      isApplied={controlsState[ControlTypes.columns].isApplied}
-                      label="Columns"
-                      onClick={onClick}
-                    />
-                  )}
+                  <ControlButton
+                    iconName={SSCIconNames.reorder}
+                    isActive={controlsState[ControlTypes.columns].isActive}
+                    isApplied={controlsState[ControlTypes.columns].isApplied}
+                    label="Columns"
+                    onClick={() =>
+                      handleControlOnClick(
+                        ControlTypes.columns,
+                        controlsState[ControlTypes.columns].isActive,
+                      )
+                    }
+                  />
                 </ColumnsControls>
               )
             }

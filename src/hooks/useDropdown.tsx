@@ -18,8 +18,11 @@ export const useDropdown = (
     defaultIsPaneDisplayed = false,
     paneWidth = 140,
     onClickOut,
+    onShow,
+    onHide,
     placement = PortalPlacements.bottom,
     isElevated = false,
+    hasInternalShowHide = true,
   }: UseDropdownOptions,
 ): UseDropdownReturnType => {
   const { portalsContainerId } = useContext(DSContext);
@@ -27,6 +30,9 @@ export const useDropdown = (
     defaultShow: defaultIsPaneDisplayed,
     containerId: portalsContainerId,
     autoRemoveContainer: false,
+    internalShowHide: hasInternalShowHide,
+    onShow,
+    onHide,
   });
   const [style, setStyle] = useState<StyleProps>({
     width: paneWidth,
@@ -39,10 +45,10 @@ export const useDropdown = (
   });
 
   useEffect(() => {
-    if (isShow) {
+    if (isShow || defaultIsPaneDisplayed) {
       setStyle(getPlacementStyles());
     }
-  }, [getPlacementStyles, isShow]);
+  }, [getPlacementStyles, isShow, defaultIsPaneDisplayed]);
 
   const handleOnClickOut = useCallback(() => {
     if (isNotUndefined(onClickOut)) {

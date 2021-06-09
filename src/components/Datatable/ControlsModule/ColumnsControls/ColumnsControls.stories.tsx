@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
@@ -18,28 +18,31 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ColumnsControlsProps> = (args) => {
+export const Default: Story<ColumnsControlsProps> = ({ isOpen, ...args }) => {
+  const [isDefaultOpen, setIsDefaultOpen] = useState(isOpen);
   useColumnsControls(action('onColumnOrderChange'), simpleColumns);
 
   return (
-    <ColumnsControls {...args}>
-      {(onClick) => (
-        <button type="button" onClick={onClick}>
-          Open Columns
-        </button>
-      )}
+    <ColumnsControls isOpen={isDefaultOpen} {...args}>
+      <button type="button" onClick={() => setIsDefaultOpen((state) => !state)}>
+        Open Columns
+      </button>
     </ColumnsControls>
   );
 };
 Default.args = {
-  defaultIsOpen: true,
+  isOpen: true,
   onApply: action('ColumnsOnApply'),
   onClose: action('ColumnsOnClose'),
   onOpen: action('ColumnsOnOpen'),
   onReset: action('ColumnsOnReset'),
 };
 
-export const WithCustomOrder: Story<ColumnsControlsProps> = (args) => {
+export const WithCustomOrder: Story<ColumnsControlsProps> = ({
+  isOpen,
+  ...args
+}) => {
+  const [isDefaultOpen, setIsDefaultOpen] = useState(isOpen);
   useColumnsControls(action('onColumnOrderChange'), simpleColumns, [
     'country',
     'source',
@@ -47,12 +50,10 @@ export const WithCustomOrder: Story<ColumnsControlsProps> = (args) => {
   ]);
 
   return (
-    <ColumnsControls {...args}>
-      {(onClick) => (
-        <button type="button" onClick={onClick}>
-          Open Columns
-        </button>
-      )}
+    <ColumnsControls isOpen={isDefaultOpen} {...args}>
+      <button type="button" onClick={() => setIsDefaultOpen((state) => !state)}>
+        Open Columns
+      </button>
     </ColumnsControls>
   );
 };
