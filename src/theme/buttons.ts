@@ -15,7 +15,7 @@ const buttons: Buttons = {
       bgColor: colors.cherry,
       hoverBgColor: colors.strawberry,
       activeBgColor: colors.pumpkin,
-      disabledBgColor: colors.strawberry,
+      disabledBgColor: colors.graphiteB,
     },
   },
   outline: {
@@ -40,11 +40,13 @@ const buttons: Buttons = {
       color: colors.graphite2B,
       hoverColor: colors.graphite4B,
       activeColor: colors.graphite5B,
+      disabledColor: colors.graphiteB,
     },
     danger: {
       color: colors.cherry,
       hoverColor: colors.strawberry,
       activeColor: colors.pumpkin,
+      disabledColor: colors.graphiteB,
     },
   },
 };

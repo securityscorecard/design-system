@@ -3,7 +3,7 @@ export interface SolidButtonColors {
   bgColor: string;
   hoverBgColor: string;
   activeBgColor: string;
-  disabledBgColor?: string;
+  disabledBgColor: string;
 }
 
 export interface OutlineButtonColors {
@@ -12,15 +12,15 @@ export interface OutlineButtonColors {
   hoverBgColor: string;
   activeBgColor: string;
   borderColor: string;
-  disabledColor?: string;
-  disabledBgColor?: string;
+  disabledColor: string;
+  disabledBgColor: string;
 }
 
 export interface TextButtonColors {
   color: string;
   hoverColor: string;
   activeColor: string;
-  disabledColor?: string;
+  disabledColor: string;
 }
 
 export interface ButtonColors<T> {
