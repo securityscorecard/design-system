@@ -3,5 +3,5 @@ export interface ColumnsControlsProps {
   onOpen: () => void;
   onClose: () => void;
   onApply: (shouldApply: boolean) => void;
-  onReset: () => void;
+  onReset?: () => void;
 }

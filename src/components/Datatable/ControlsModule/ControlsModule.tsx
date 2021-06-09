@@ -196,11 +196,9 @@ const ControlsModule = <D extends Record<string, unknown>>({
                 <ColumnsControls
                   isOpen={controlsState[ControlTypes.columns].isActive}
                   onApply={(shouldApply) => {
-                    if (shouldApply) {
-                      applyControlStateChange(ControlTypes.columns, {
-                        isApplied: true,
-                      });
-                    }
+                    applyControlStateChange(ControlTypes.columns, {
+                      isApplied: shouldApply,
+                    });
                     handleControlOnClick(
                       ControlTypes.columns,
                       controlsState[ControlTypes.columns].isActive,
@@ -217,11 +215,6 @@ const ControlsModule = <D extends Record<string, unknown>>({
                       ControlTypes.columns,
                       controlsState[ControlTypes.columns].isActive,
                     )
-                  }
-                  onReset={() =>
-                    applyControlStateChange(ControlTypes.columns, {
-                      isApplied: false,
-                    })
                   }
                 >
                   <ControlButton
