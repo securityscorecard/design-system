@@ -1,3 +1,10 @@
+# [1.0.0-alpha.75](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.74...v1.0.0-alpha.75) (2021-06-09)
+
+
+### Bug Fixes
+
+* **TabLabel:** remove focus state css ([2cf4d46](https://github.com/securityscorecard/design-system/commit/2cf4d4664197b7dd0f2161bf792c1e75d1ef7510)), closes [#198](https://github.com/securityscorecard/design-system/issues/198)
+
 # [1.0.0-alpha.74](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.73...v1.0.0-alpha.74) (2021-06-09)
 
 
