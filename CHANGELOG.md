@@ -1,3 +1,26 @@
+# [1.0.0-alpha.74](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.73...v1.0.0-alpha.74) (2021-06-09)
+
+
+### Bug Fixes
+
+* **Datatable:** reset story loading timeout ([65c1668](https://github.com/securityscorecard/design-system/commit/65c16689f8cb86d18c486408085d5eb85527e6d4))
+* **Filters:** remove dependency on state ([9684856](https://github.com/securityscorecard/design-system/commit/9684856142750c06d636a411129bd9e0e6f6432a))
+* use DT store without extra state ([b9f5cb0](https://github.com/securityscorecard/design-system/commit/b9f5cb09a825b8805b73d3fc6fa26aebddead0a9))
+* **Datatable:** readd loading overlay cancel ([f3c6c9d](https://github.com/securityscorecard/design-system/commit/f3c6c9d77817007f985f3fda4ddaff205b8d69a2))
+* **Datatable:** reset story timeout ([b9e1ecf](https://github.com/securityscorecard/design-system/commit/b9e1ecfc99b563c68cb43b7bf9233c764ffb5e50))
+* **Datatable:** use functional methods ([969a150](https://github.com/securityscorecard/design-system/commit/969a150724593351c27a543a6775f3929be88922))
+* **Table:** formatting ([b27db08](https://github.com/securityscorecard/design-system/commit/b27db083028f81e069c61e87bbb5ad259ad8b9c7))
+* **Table:** use pipe instead of compose ([94fcbd2](https://github.com/securityscorecard/design-system/commit/94fcbd2f2d464a4deb2c3a0fd0672664bb48ad9f))
+* typings ([1f02159](https://github.com/securityscorecard/design-system/commit/1f02159c9584cdba5dd91a2c9bdcf0b4b3cb7efe))
+
+
+### Features
+
+* connect DT store to Filters via ControlsModule ([21bb363](https://github.com/securityscorecard/design-system/commit/21bb36348c231be71dfaea113b28ed988244b830))
+* **Datatable:** add canceled filters update ([e34df7f](https://github.com/securityscorecard/design-system/commit/e34df7f78c21254c1b42b2eefca87fa425f5680c))
+* **Datatable:** add common cancelation feature ([183bd68](https://github.com/securityscorecard/design-system/commit/183bd68204a1045426e60c04803203ab7b95a5f5))
+* **Datatable:** make onCancel optional ([c3334f6](https://github.com/securityscorecard/design-system/commit/c3334f6bdcdb30f0098a6f7bd218ca8f1687333a))
+
 # [1.0.0-alpha.73](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.72...v1.0.0-alpha.73) (2021-06-04)
 
 
