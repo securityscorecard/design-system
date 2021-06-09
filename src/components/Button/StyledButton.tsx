@@ -107,10 +107,6 @@ const buttonSizes = {
 /*
  * BUTTON VARIANTS
  */
-const DisabledStyle = css`
-  opacity: 0.35;
-`;
-
 const ButtonSolid = css<BaseStyledButtonProps>`
   background-color: ${getButtonColor('bgColor')};
   border: 1px solid ${getButtonColor('bgColor')};
@@ -120,6 +116,11 @@ const ButtonSolid = css<BaseStyledButtonProps>`
   &,
   &:not([href]):not([tabindex]) {
     color: ${getButtonColor('color')};
+  }
+
+  &:disabled {
+    background-color: ${getButtonColor('disabledBgColor')};
+    border-color: ${getButtonColor('disabledBgColor')};
   }
 
   &:focus:not(:disabled),
@@ -141,8 +142,6 @@ const ButtonSolid = css<BaseStyledButtonProps>`
     color: ${getButtonColor('color')};
     text-decoration: none;
   }
-
-  ${({ isLoading, disabled }) => disabled && !isLoading && DisabledStyle};
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
@@ -152,8 +151,13 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   text-decoration: none;
 
   &,
-  &:not([href]):not([tabindex]) {
+  &:not([href]):not([tabindex]):not(:disabled) {
     color: ${getButtonColor('color')};
+  }
+
+  &:disabled {
+    color: ${getButtonColor('disabledColor')};
+    background-color: ${getButtonColor('disabledBgColor')};
   }
 
   &:focus:not(:disabled),
@@ -173,8 +177,6 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     color: ${getButtonColor('color')};
     text-decoration: none;
   }
-
-  ${({ isLoading, disabled }) => disabled && !isLoading && DisabledStyle};
 `;
 
 const ButtonText = css<BaseStyledButtonProps>`
@@ -184,8 +186,12 @@ const ButtonText = css<BaseStyledButtonProps>`
   text-decoration: none;
 
   &,
-  &:not([href]):not([tabindex]) {
+  &:not([href]):not([tabindex]):not(:disabled) {
     color: ${getButtonColor('color')};
+  }
+
+  &:disabled {
+    color: ${getButtonColor('disabledColor')};
   }
 
   &:focus:not(:disabled),
@@ -203,8 +209,6 @@ const ButtonText = css<BaseStyledButtonProps>`
     color: ${getButtonColor('activeColor')};
     text-decoration: none;
   }
-
-  ${({ isLoading, disabled }) => disabled && !isLoading && DisabledStyle};
 `;
 
 const buttonVariants = {

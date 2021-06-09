@@ -15,12 +15,8 @@ import { ButtonProps } from './Button.types';
 import { requireRouterLink } from '../../utils/require-router-link';
 
 const LoadingText = styled.span<Pick<ButtonProps, 'size' | 'variant'>>`
-  padding-right: ${({ variant, size }) =>
-    variant !== ButtonVariants.solid
-      ? 0
-      : size === ButtonSizes.sm
-      ? pxToRem(5)
-      : pxToRem(10)};
+  padding-left: ${({ size }) =>
+    size === ButtonSizes.sm ? pxToRem(5) : pxToRem(10)};
 `;
 
 const spinnerSizes = {
@@ -46,6 +42,7 @@ const Button: React.FC<
   isDisabled = false,
   isLoading = false,
   isExpanded = false,
+  loadingText = 'Loading',
   ...props
 }) => {
   let RouterLink = null;
@@ -65,17 +62,16 @@ const Button: React.FC<
 
   const content = isLoading ? (
     <>
+      <Spinner
+        borderWidth={2}
+        dark={variant !== ButtonVariants.solid}
+        height={spinnerSizes[size]}
+        verticalMargin={0}
+        width={spinnerSizes[size]}
+      />
       <LoadingText size={size} variant={variant}>
-        Processing...
+        {loadingText}
       </LoadingText>
-      {variant === ButtonVariants.solid && (
-        <Spinner
-          borderWidth={2}
-          height={spinnerSizes[size]}
-          verticalMargin={0}
-          width={spinnerSizes[size]}
-        />
-      )}
     </>
   ) : isNotUndefined(iconName) ? (
     <>
@@ -132,6 +128,7 @@ Button.propTypes = {
     PropTypes.oneOf<Types>(Object.values(IconTypes)),
     PropTypes.string,
   ]),
+  loadingText: PropTypes.string,
   onClick: PropTypes.func,
 };
 
