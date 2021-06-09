@@ -1,3 +1,11 @@
+# [1.0.0-alpha.78](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.77...v1.0.0-alpha.78) (2021-06-09)
+
+
+### Bug Fixes
+
+* **Columns:** fix isApplied when order is reseted and not applied ([5d027fb](https://github.com/securityscorecard/design-system/commit/5d027fb2a983dce3b1fe447c778a34700c1e192a))
+* **ControlsModule:** hide dropdown when other control is activated ([ccb5ef4](https://github.com/securityscorecard/design-system/commit/ccb5ef4e70c78d4a572b2b08e9ac55adc53a6625))
+
 # [1.0.0-alpha.77](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.76...v1.0.0-alpha.77) (2021-06-09)
 
 
