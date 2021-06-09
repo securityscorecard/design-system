@@ -1,3 +1,10 @@
+# [1.0.0-alpha.77](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.76...v1.0.0-alpha.77) (2021-06-09)
+
+
+### Bug Fixes
+
+* **PaginationItem:** remove hover state on current item ([4d98fd5](https://github.com/securityscorecard/design-system/commit/4d98fd5fd4885f74c1e0da2d69932c861f7f023d))
+
 # [1.0.0-alpha.76](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.75...v1.0.0-alpha.76) (2021-06-09)
 
 
