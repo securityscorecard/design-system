@@ -1,3 +1,11 @@
+# [1.0.0-alpha.76](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.75...v1.0.0-alpha.76) (2021-06-09)
+
+
+### Features
+
+* **Button:** add disabled styles to all subtypes ([0adf01e](https://github.com/securityscorecard/design-system/commit/0adf01e355dbeddf740e78357f628061b79c6fa9))
+* **Button:** add more sophisticated disabled colors ([c3b90f9](https://github.com/securityscorecard/design-system/commit/c3b90f93567f2b92e4e996a3da14232182063904))
+
 # [1.0.0-alpha.75](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.74...v1.0.0-alpha.75) (2021-06-09)
 
 
