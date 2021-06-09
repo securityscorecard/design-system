@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import {
   CellProps,
@@ -12,9 +12,19 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { any, keys, prop, propEq, F as stubFalse } from 'ramda';
+import {
+  allPass,
+  any,
+  keys,
+  pick,
+  pipe,
+  prop,
+  propEq,
+  F as stubFalse,
+  when,
+} from 'ramda';
 import cls from 'classnames';
-import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
+import { isNonEmptyArray, isNotUndefined, isString, noop } from 'ramda-adjunct';
 
 import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
@@ -50,6 +60,7 @@ const collectFetchParams = <D,>(
     s.pageIndex = pageIndex;
     s.pageSize = pageSize;
     s.sortBy = sortBy;
+    s.isCanceled = false;
   });
 };
 const collectSelectedIds = <D,>(
@@ -74,6 +85,7 @@ const Table = <D extends Record<string, unknown>>({
   defaultSelectedRows,
   hasPagination,
   hasServerSidePagination,
+  onCancelLoading,
   defaultPageSize,
   hasSorting,
   hasServerSideSorting,
@@ -167,10 +179,30 @@ TableProps<D>): React.ReactElement => {
     },
   );
 
+  const gotoFirstPage = useCallback(() => gotoPage(0), [gotoPage]);
+
   const gotoPageAndLoadData = (newPageIndex) => {
     gotoPage(newPageIndex);
     collectFetchParams(newPageIndex, pageSize, sortBy);
   };
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      prop('isCanceled'),
+      (isCanceled) => {
+        if (isCanceled) {
+          dispatch({ type: actions.cancelLoading });
+        }
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isDataLoading) dispatch({ type: actions.preserveState });
+  }, [dispatch, isDataLoading]);
 
   useEffect(() => {
     const unsubscribe = DatatableStore.createReaction(
@@ -201,15 +233,25 @@ TableProps<D>): React.ReactElement => {
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
-      (s) => s.filters,
-      (filters) => {
-        if (any(propEq('isLoading', true))(filters)) gotoPage(0);
-      },
+      pick(['filters', 'isCanceled']),
+      when(
+        allPass([
+          propEq('isCanceled', false),
+          pipe(
+            prop('filters'),
+            any(
+              allPass([propEq('isLoading', true), propEq('isCanceled', false)]),
+            ),
+          ),
+        ]),
+        gotoFirstPage,
+      ),
     );
+
     return () => {
       unsubscribe();
     };
-  }, [setColumnOrder, gotoPage]);
+  }, [gotoFirstPage]);
 
   useEffect(() => {
     collectSelectedIds<D>(selectedRowIds);
@@ -233,7 +275,12 @@ TableProps<D>): React.ReactElement => {
             />
           </StyledTable>
         </TableContainer>
-        {dataSize > 0 && isDataLoading && <LoadingOverlay />}
+        {dataSize > 0 && isDataLoading && (
+          <LoadingOverlay
+            isCancelable={onCancelLoading !== noop}
+            onCancel={onCancelLoading}
+          />
+        )}
       </TableAndLoadingOverlayContainer>
       {dataSize === 0 ? (
         <NoDataContainer>

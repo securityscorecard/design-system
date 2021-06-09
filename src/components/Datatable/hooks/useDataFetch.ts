@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { pick, propEq, when } from 'ramda';
 
 import { DatatableStore } from '../Datatable.store';
 import { OnDataFetchFn } from '../Datatable.types';
@@ -6,16 +7,15 @@ import { OnDataFetchFn } from '../Datatable.types';
 export const useDataFetch = <D>(onDataFetch: OnDataFetchFn<D>): void => {
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
-      (s) => ({
-        pageIndex: s.pageIndex,
-        pageSize: s.pageSize,
-        sortBy: s.sortBy,
-        filters: s.filters,
-        query: s.query,
-      }),
-      (params) => {
-        onDataFetch(params);
-      },
+      pick([
+        'pageIndex',
+        'pageSize',
+        'sortBy',
+        'filters',
+        'query',
+        'isCanceled',
+      ]),
+      when(propEq('isCanceled', false), onDataFetch),
     );
 
     return () => {

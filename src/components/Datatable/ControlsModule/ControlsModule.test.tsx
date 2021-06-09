@@ -119,6 +119,7 @@ describe('Datatable/ControlsModule', () => {
           value: 'text',
           isApplied: true,
           isLoading: false,
+          isCanceled: false,
         },
       ];
       renderWithProviders(

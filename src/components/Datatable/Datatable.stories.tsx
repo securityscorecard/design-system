@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
@@ -116,6 +116,7 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
   const [tableData, setTableData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalLength, setTotalLength] = useState(0);
+  const timeoutRef = useRef(null);
 
   const dispatchFetchData = useCallback(
     ({ pageSize, pageIndex, sortBy, filters, query }) => {
@@ -127,7 +128,7 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
         query,
       });
       setIsLoading(true);
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         const startRow = pageSize * pageIndex;
         const endRow = startRow + pageSize;
         const fetchedData: Data[] = assets.slice(startRow, endRow);
@@ -150,6 +151,12 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
     tableConfig: argsTableConfig,
     ...restArgs
   } = args;
+
+  const onCancelLoading = () => {
+    clearTimeout(timeoutRef.current);
+    setIsLoading(false);
+  };
+
   return (
     <Datatable<Data>
       {...restArgs}
@@ -168,6 +175,7 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
         ],
         onSelect: action('onRowSelect'),
       }}
+      onCancelLoading={onCancelLoading}
       onDataFetch={dispatchFetchData}
     />
   );

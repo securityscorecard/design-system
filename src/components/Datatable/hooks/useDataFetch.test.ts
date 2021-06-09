@@ -15,6 +15,7 @@ const filters = [
     condition: '=',
     isApplied: true,
     isLoading: false,
+    isCanceled: false,
     value: 'value',
   },
 ];

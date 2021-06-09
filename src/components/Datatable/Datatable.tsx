@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
-import { fromPairs, map, pipe } from 'ramda';
+import { assocPath, fromPairs, map, pipe } from 'ramda';
 import { noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
@@ -39,6 +39,7 @@ const Datatable = <D extends Record<string, unknown>>({
   dataSize,
   columns,
   dataPrimaryKey,
+  onCancelLoading,
   isDataLoading = false,
   onDataFetch = noop,
   batchActions = [],
@@ -54,12 +55,21 @@ const Datatable = <D extends Record<string, unknown>>({
     [],
   );
 
+  const isCancelDisabled = !onCancelLoading;
+
   const {
     onColumnOrderChange,
     ...restControlsConfig
-  } = useDeepCompareMemo(() => mergeControlsConfig(controlsConfig), [
-    controlsConfig,
-  ]);
+  } = useDeepCompareMemo(
+    () =>
+      mergeControlsConfig(
+        assocPath(
+          ['filteringConfig', 'isCancelDisabled'],
+          isCancelDisabled,
+        )(controlsConfig),
+      ),
+    [controlsConfig],
+  );
   const {
     onSelect,
     defaultSelectedRowIds,
@@ -77,12 +87,30 @@ const Datatable = <D extends Record<string, unknown>>({
     restTableConfig.defaultColumnOrder,
   );
 
+  const handleCancelLoading = isCancelDisabled
+    ? noop
+    : () => {
+        DatatableStore.update((s) => {
+          s.isCanceled = true;
+          s.filters = s.filters.map((filter) => ({
+            ...filter,
+
+            // mark loading filters as canceled
+            isCanceled: filter.isLoading,
+            isLoading: false,
+          }));
+
+          onCancelLoading();
+        });
+      };
+
   return (
     <StyledDatatable flexDirection="column">
       {isControlsEnabled && (
         <ControlsModule<D>
           {...restControlsConfig}
           isDataLoading={isDataLoading}
+          onCancelLoading={handleCancelLoading}
         />
       )}
       {isBatchModuleEnabled && (
@@ -99,8 +127,9 @@ const Datatable = <D extends Record<string, unknown>>({
         dataPrimaryKey={dataPrimaryKey}
         dataSize={dataSize}
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
-        isDataLoading={isDataLoading}
         {...restTableConfig}
+        isDataLoading={isDataLoading}
+        onCancelLoading={handleCancelLoading}
       />
     </StyledDatatable>
   );
@@ -127,7 +156,6 @@ Datatable.propTypes = {
       onChange: PropTypes.func,
       onApply: PropTypes.func,
       onClose: PropTypes.func,
-      onCancel: PropTypes.func,
       state: PropTypes.arrayOf(FilterStatePropType),
       fields: PropTypes.arrayOf(FieldPropTypes),
     }),
@@ -136,6 +164,7 @@ Datatable.propTypes = {
   }),
   tableConfig: PropTypes.exact(TableConfigPropType),
   onDataFetch: PropTypes.func,
+  onCancelLoading: PropTypes.func,
 };
 
 export default Datatable;

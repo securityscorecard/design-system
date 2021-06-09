@@ -68,6 +68,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   // defaultIsViewsOpen,
   // defaultIsViewsApplied,
   // defaultViews,
+  onCancelLoading,
   onControlToggle,
 }: ControlsModuleProps<D>): React.ReactElement => {
   const {
@@ -148,7 +149,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
     }));
   };
 
-  const handleCloseFilter = (): void => {
+  const handleCloseFilter = () => {
     onFilteringClose();
     applyControlStateChange(ControlTypes.filters, { isActive: false });
   };
@@ -164,6 +165,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
       s.pageIndex = 0;
       s.filters = appliedfilters;
       s.hasAppliedFilters = hasAppliedFilters;
+      s.isCanceled = false;
     });
   };
 
@@ -171,7 +173,9 @@ const ControlsModule = <D extends Record<string, unknown>>({
     onSearch(query);
 
     DatatableStore.update((s) => {
+      s.pageIndex = 0;
       s.query = query;
+      s.isCanceled = false;
     });
   };
 
@@ -179,6 +183,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
     onSearchClear();
 
     DatatableStore.update((s) => {
+      s.pageIndex = 0;
       s.query = '';
     });
   };
@@ -291,6 +296,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
             isLoading={isDataLoading}
             state={filteringStoreState}
             onApply={handleApplyFilter}
+            onCancel={onCancelLoading}
             onClose={handleCloseFilter}
             {...restFilteringConfig}
           />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  allPass,
   any,
   assoc,
   defaultTo,
@@ -8,11 +9,13 @@ import {
   find,
   head,
   map,
+  none,
   pipe,
   propEq,
   propSatisfies,
   unless,
   update,
+  when,
 } from 'ramda';
 import {
   isEmptyArray,
@@ -58,6 +61,7 @@ const getDefaultState = ([firstField]: Field[]) => {
       value,
       isApplied: false,
       isLoading: false,
+      isCanceled: false,
     },
   ];
 };
@@ -70,7 +74,7 @@ const Filters: React.FC<FiltersProps> = ({
   onClose = noop,
   onCancel = noop,
   isLoading = false,
-  isCancelDisabled = false, // TODO remove https://zitenote.atlassian.net/browse/FEP-1648
+  isCancelDisabled = false,
 }) => {
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
@@ -86,6 +90,7 @@ const Filters: React.FC<FiltersProps> = ({
       setFiltersValues(state);
       setValidValues(state.map((field) => Boolean(field)));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, fields]);
 
   useEffect(() => {
@@ -97,20 +102,27 @@ const Filters: React.FC<FiltersProps> = ({
   }, [filtersValues, fields]);
 
   useEffect(() => {
+    // checks whether loading has stopped, or has been canceled and applies flags accordingly
     if (
       filtersValues &&
       !isLoading &&
-      any(propEq('isLoading', true))(filtersValues)
+      any(propEq('isLoading', true))(filtersValues) &&
+      (!state || none(propEq('isCanceled', true))(state))
     ) {
       setFiltersValues(
         pipe(
           filter(propSatisfies(isNotUndefined, 'value')),
+          map(
+            when(
+              allPass([propEq('isCanceled', false), propEq('isLoading', true)]),
+              assoc('isApplied', true),
+            ),
+          ),
           map(assoc('isLoading', false)),
-          map(assoc('isApplied', true)),
         )(filtersValues),
       );
     }
-  }, [filtersValues, isLoading]);
+  }, [state, filtersValues, isLoading]);
 
   const handleError = (hasError, index) => {
     const newValidValues = [...validValues];
@@ -142,6 +154,7 @@ const Filters: React.FC<FiltersProps> = ({
       operator: value,
       isApplied: false,
       isLoading: false,
+      isCanceled: false,
     }));
 
     setFiltersValues(newFilters);
@@ -160,6 +173,7 @@ const Filters: React.FC<FiltersProps> = ({
           value,
           isApplied: false,
           isLoading: false,
+          isCanceled: false,
         },
         filters,
       );
@@ -179,6 +193,7 @@ const Filters: React.FC<FiltersProps> = ({
           value,
           isApplied: false,
           isLoading: false,
+          isCanceled: false,
         },
         filters,
       );
@@ -197,6 +212,7 @@ const Filters: React.FC<FiltersProps> = ({
           value: value || undefined,
           isApplied: false,
           isLoading: false,
+          isCanceled: false,
         },
         filters,
       );
@@ -218,6 +234,7 @@ const Filters: React.FC<FiltersProps> = ({
       value,
       isApplied: false,
       isLoading: false,
+      isCanceled: false,
     };
     const filtersWithNewRow = [...newFilters, newRow];
     setFiltersValues(filtersWithNewRow);
@@ -245,6 +262,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     const newFilters = pipe(
       filter(propSatisfies(isNotUndefined, 'value')),
+      map(assoc('isCanceled', false)),
       map(unless(propEq('isApplied', true), assoc('isLoading', true))),
     )(filtersValues);
     const defaultState = getDefaultState(fields);
@@ -277,11 +295,6 @@ const Filters: React.FC<FiltersProps> = ({
     onClose();
   };
 
-  const handleCancelFetch = (event) => {
-    event.preventDefault();
-    onCancel();
-  };
-
   if (isUndefined(fields) || isNull(filtersValues)) {
     return null;
   }
@@ -310,7 +323,7 @@ const Filters: React.FC<FiltersProps> = ({
         isCancelDisabled={isCancelDisabled}
         isLoading={isLoading}
         onAdd={handleAddRow}
-        onCancel={handleCancelFetch}
+        onCancel={onCancel}
         onClearAll={handleClearAll}
         onClose={handleCloseFilters}
         onSubmit={handleSubmitForm}

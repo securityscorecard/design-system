@@ -1,16 +1,24 @@
 import { ActionType, IdType, SortingRule, TableState } from 'react-table';
 
-type StateReducerFn<D extends Record<string, unknown>> = (
-  newState: TableState<D>,
+type TableRecord = Record<string, unknown>;
+
+type CancelableTableState<D extends TableRecord> = TableState<D> & {
+  previousState: TableState<D> | null;
+};
+
+type StateReducerFn<D extends TableRecord> = (
+  newState: CancelableTableState<D>,
   action: ActionType & { id?: IdType<D> },
 ) => TableState<D>;
 
 export const actions = {
   deselectAllRows: 'deselectAllRows',
   toggleSingleRowSelected: 'toggleSingleRowSelected',
+  cancelLoading: 'cancelLoading',
+  preserveState: 'preserveState',
 };
 
-export const tableActionsReducer = <D extends Record<string, unknown>>({
+export const tableActionsReducer = <D extends TableRecord>({
   collectFetchParams,
 }: {
   collectFetchParams: (
@@ -18,12 +26,17 @@ export const tableActionsReducer = <D extends Record<string, unknown>>({
     pageSize: number,
     sortBy: SortingRule<D>[],
   ) => void;
-}): StateReducerFn<D> => (newState, action): TableState<D> => {
-  const { pageSize, sortBy } = newState;
+}): StateReducerFn<D> => (newState, action): CancelableTableState<D> => {
+  const { pageSize, sortBy, previousState } = newState;
 
   switch (action.type) {
+    case actions.preserveState:
+      return { ...newState, previousState: newState };
+    case actions.cancelLoading:
+      return previousState ? { previousState, ...previousState } : newState;
     case 'toggleSortBy':
       collectFetchParams(0, pageSize, sortBy);
+      return { ...newState, pageIndex: 0 };
       break;
     case actions.deselectAllRows:
       return { ...newState, selectedRowIds: {} };

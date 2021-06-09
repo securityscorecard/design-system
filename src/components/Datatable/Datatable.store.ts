@@ -18,6 +18,7 @@ export type DatatableStoreShape<
   shouldResetSelectedRows: boolean;
   columnOrder: IdType<D>[];
   columns: Record<string, { label: string }>;
+  isCanceled: boolean;
 };
 
 export const datatableInitialState = {
@@ -28,6 +29,7 @@ export const datatableInitialState = {
   hasAppliedFilters: false,
   query: '',
   isDataLoading: false,
+  isCanceled: false,
   selectedIds: [],
   hasExclusiveSelection: false,
   shouldResetSelectedRows: false,

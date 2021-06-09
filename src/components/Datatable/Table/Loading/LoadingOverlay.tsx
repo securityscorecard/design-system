@@ -1,8 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { getColor } from '../../../../utils';
+import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
+import { FlexContainer } from '../../../FlexContainer';
+import { Button } from '../../../Button';
 
 const overlayStyles = css`
   position: absolute;
@@ -15,15 +19,23 @@ const overlayStyles = css`
 const LoadingOverlayContainer = styled.div`
   ${overlayStyles}
 
-  ${Spinner} {
-    display: inline-block;
+  ${FlexContainer} {
+    display: inline-flex;
     position: sticky;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     margin: 4rem;
     background: ${getColor('graphite5H')};
+    padding: 0 0.5rem;
+    height: 2.5rem;
+    border-radius: 4px;
   }
+`;
+
+const LoadingText = styled.span`
+  padding-left: 0.5rem;
+  padding-right: 1rem;
 `;
 
 const LoadingBackground = styled.div`
@@ -32,11 +44,31 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay: React.FC = () => (
+const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+  isCancelable,
+  onCancel,
+}) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
-    <Spinner height={48} width={48} dark />
+    <FlexContainer alignItems="center">
+      {isCancelable ? (
+        <>
+          <Spinner height={24} width={24} dark />
+          <LoadingText>Loading</LoadingText>
+          <Button size="sm" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+        </>
+      ) : (
+        <Spinner height={48} width={48} dark />
+      )}
+    </FlexContainer>
   </LoadingOverlayContainer>
 );
+
+LoadingOverlay.propTypes = {
+  isCancelable: PropTypes.bool,
+  onCancel: PropTypes.func,
+};
 
 export default LoadingOverlay;

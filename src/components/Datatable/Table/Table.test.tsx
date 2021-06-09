@@ -50,7 +50,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{}}
         {...defaultTableConfig}
       />,
@@ -72,7 +71,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{ 0: true, 1: true, 2: true }}
         {...defaultTableConfig}
       />,
@@ -94,7 +92,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{}}
         {...defaultTableConfig}
       />,
@@ -115,7 +112,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
           isMultiSelect={false}
@@ -146,7 +142,6 @@ describe('Datatable/Table', () => {
         data={data}
         columns={columns}
         dataSize={3}
-        isDataLoading={false}
         defaultSelectedRows={{}}
         {...defaultTableConfig}
         rowActions={[
@@ -173,7 +168,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -196,7 +190,6 @@ describe('Datatable/Table', () => {
           data={[]}
           columns={columns}
           dataSize={0}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -224,7 +217,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -244,7 +236,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -264,7 +255,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{ 0: true }}
           {...defaultTableConfig}
         />,
@@ -284,7 +274,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{ 0: true, 1: true, 2: true }}
           {...defaultTableConfig}
         />,
@@ -304,7 +293,6 @@ describe('Datatable/Table', () => {
             data={data}
             columns={columns}
             dataSize={3}
-            isDataLoading={false}
             defaultSelectedRows={{}}
             {...defaultTableConfig}
             isMultiSelect={false}
@@ -331,7 +319,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{ 0: true, 1: true, 2: true }}
           {...defaultTableConfig}
         />,
@@ -354,7 +341,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
           defaultPageSize={1}
@@ -376,7 +362,6 @@ describe('Datatable/Table', () => {
           data={data}
           columns={columns}
           dataSize={3}
-          isDataLoading={false}
           defaultSelectedRows={{}}
           {...defaultTableConfig}
         />,
@@ -391,6 +376,45 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().sortBy).toMatchObject([
         { desc: false, id: 'col2' },
       ]);
+    });
+  });
+  describe('given isDataLoading', () => {
+    it('should display empty loading page when no data is present', () => {
+      renderWithProviders(
+        <Table<Data>
+          data={[]}
+          columns={columns}
+          dataSize={0}
+          defaultSelectedRows={{}}
+          {...defaultTableConfig}
+          isDataLoading
+        />,
+      );
+
+      expect(
+        screen.getByRole('heading', {
+          name: /Loading/i,
+        }),
+      ).toBeInTheDocument();
+    });
+    it('should display loading overlay with Cancel button when data is present', () => {
+      renderWithProviders(
+        <Table<Data>
+          data={data}
+          columns={columns}
+          dataSize={data.length}
+          defaultSelectedRows={{}}
+          {...defaultTableConfig}
+          isDataLoading
+          onCancelLoading={jest.fn}
+        />,
+      );
+
+      expect(
+        screen.getByRole('button', {
+          name: /Cancel/i,
+        }),
+      ).toBeInTheDocument();
     });
   });
 });
