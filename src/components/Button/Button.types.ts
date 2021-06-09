@@ -23,5 +23,6 @@ export interface ButtonProps
   to?: To;
   className?: string;
   iconName?: SSCIcons | string;
+  loadingText?: string;
   iconType?: IconTypes | string;
 }

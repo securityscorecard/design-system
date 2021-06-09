@@ -8,12 +8,14 @@ const buttons: Buttons = {
       bgColor: colors.blueberryClassic,
       hoverBgColor: colors.radiantBlueberry,
       activeBgColor: colors.dietBlueberry,
+      disabledBgColor: colors.dietBlueberry,
     },
     danger: {
       color: colors.graphite5H,
       bgColor: colors.cherry,
       hoverBgColor: colors.strawberry,
       activeBgColor: colors.pumpkin,
+      disabledBgColor: colors.strawberry,
     },
   },
   outline: {
@@ -22,6 +24,8 @@ const buttons: Buttons = {
       bgColor: colors.graphite5H,
       hoverBgColor: colors.graphite4H,
       activeBgColor: colors.graphite3H,
+      disabledBgColor: colors.graphite2H,
+      disabledColor: colors.graphiteB,
       borderColor: colors.graphiteHB,
     },
   },
@@ -30,6 +34,7 @@ const buttons: Buttons = {
       color: colors.blueberryClassic,
       hoverColor: colors.radiantBlueberry,
       activeColor: colors.dietBlueberry,
+      disabledColor: colors.graphiteB,
     },
     secondary: {
       color: colors.graphite2B,
