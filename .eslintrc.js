@@ -138,5 +138,11 @@ module.exports = {
         'react/jsx-sort-props': 'off',
       },
     },
+    {
+      files: ['**/*.stories.tsx'],
+      rules: {
+        'react/prop-types': 'off',
+      },
+    },
   ],
 };

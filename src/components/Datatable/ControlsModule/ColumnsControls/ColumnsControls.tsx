@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { ControlDropdown } from '../ControlDropdown';
@@ -8,12 +8,13 @@ import { useColumnOrder } from './hooks/useColumnOrder';
 
 const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   children,
-  defaultIsOpen = false,
+  isOpen = false,
   onOpen,
   onClose,
   onApply,
   onReset,
 }) => {
+  const parentRef = useRef(null);
   const {
     orderedColumns,
     setLocalColumnOrder,
@@ -41,17 +42,23 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   };
 
   return (
-    <ControlDropdown
-      defaultIsControlPaneOpen={defaultIsOpen}
-      renderHandler={children}
-      title="Columns"
-      onApply={handleApplyColumnsControl}
-      onClose={handleCloseColumnsControl}
-      onOpen={handleOpenColumnsControl}
-      onReset={handleResetColumnsControl}
-    >
-      <ColumnsList columns={orderedColumns} setColumns={setLocalColumnOrder} />
-    </ControlDropdown>
+    <span ref={parentRef}>
+      {children}
+      <ControlDropdown
+        isControlPaneOpen={isOpen}
+        parentRef={parentRef}
+        title="Columns"
+        onApply={handleApplyColumnsControl}
+        onClose={handleCloseColumnsControl}
+        onOpen={handleOpenColumnsControl}
+        onReset={handleResetColumnsControl}
+      >
+        <ColumnsList
+          columns={orderedColumns}
+          setColumns={setLocalColumnOrder}
+        />
+      </ControlDropdown>
+    </span>
   );
 };
 
@@ -60,7 +67,7 @@ ColumnsControls.propTypes = {
   onClose: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
-  defaultIsOpen: PropTypes.bool,
+  isOpen: PropTypes.bool,
 };
 
 export default ColumnsControls;

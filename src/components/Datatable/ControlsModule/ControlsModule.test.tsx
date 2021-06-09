@@ -59,9 +59,7 @@ describe('Datatable/ControlsModule', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
 
-      expect(
-        screen.getByRole('button', { name: /Apply/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
     });
     it('should close Filters component on Filters button click when Filters are open', () => {
       renderWithProviders(
@@ -77,9 +75,23 @@ describe('Datatable/ControlsModule', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
 
-      expect(
-        screen.queryByRole('button', { name: /Apply/i }),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByPlaceholderText('String')).not.toBeInTheDocument();
+    });
+    it('should close Filters component on Column button click when Filters are open', () => {
+      renderWithProviders(
+        <ControlsModule
+          {...defaultControlsConfig}
+          filteringConfig={{
+            ...defaultControlsConfig.filteringConfig,
+            fields: filterFields,
+          }}
+          defaultIsFilteringOpen
+        />,
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
+
+      expect(screen.queryByPlaceholderText('String')).not.toBeInTheDocument();
     });
   });
 
@@ -90,7 +102,7 @@ describe('Datatable/ControlsModule', () => {
       fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
 
       expect(
-        screen.getByRole('button', { name: /Apply/i }),
+        screen.getByRole('heading', { name: /Columns/i }),
       ).toBeInTheDocument();
     });
     it('should close ColumnsControls component on Columns button click when ColumnsControls are open', () => {
@@ -104,7 +116,25 @@ describe('Datatable/ControlsModule', () => {
       fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
 
       expect(
-        screen.queryByRole('button', { name: /Apply/i }),
+        screen.queryByRole('heading', { name: /Columns/i }),
+      ).not.toBeInTheDocument();
+    });
+    it('should close ColumnsControls component on Filters button click when ColumnsControls are open', () => {
+      renderWithProviders(
+        <ControlsModule
+          {...defaultControlsConfig}
+          filteringConfig={{
+            ...defaultControlsConfig.filteringConfig,
+            fields: filterFields,
+          }}
+          defaultIsColumnOrderingOpen
+        />,
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
+
+      expect(
+        screen.queryByRole('heading', { name: /Columns/i }),
       ).not.toBeInTheDocument();
     });
   });

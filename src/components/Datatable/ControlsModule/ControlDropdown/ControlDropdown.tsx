@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { useDropdown } from '../../../../hooks/useDropdown';
@@ -22,9 +22,9 @@ const CloseButton = styled(Button)`
 `;
 
 export interface ControlDropdownProps {
-  renderHandler: (onClick: () => void) => React.ReactElement;
+  parentRef: React.MutableRefObject<HTMLSpanElement>;
   title: string;
-  defaultIsControlPaneOpen: boolean;
+  isControlPaneOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
   onReset: () => void;
@@ -33,96 +33,79 @@ export interface ControlDropdownProps {
 
 const ControlDropdown: React.FC<ControlDropdownProps> = ({
   children,
-  renderHandler,
   title,
-  defaultIsControlPaneOpen,
+  parentRef,
+  isControlPaneOpen,
   onOpen,
   onClose,
   onReset,
   onApply,
 }) => {
-  const parentRef = useRef(null);
-  const {
-    handleShowDropdown,
-    handleHideDropdown,
-    isPaneDisplayed,
-    Pane,
-  } = useDropdown(parentRef, {
-    defaultIsPaneDisplayed: defaultIsControlPaneOpen,
+  const { isPaneDisplayed, Pane } = useDropdown(parentRef, {
+    defaultIsPaneDisplayed: isControlPaneOpen,
     paneWidth: 370,
     onClickOut: onClose,
+    onShow: () => {
+      if (isPaneDisplayed) {
+        onClose();
+      } else {
+        onOpen();
+      }
+    },
+    onHide: onClose,
     placement: 'bottom-left',
     isElevated: true,
+    hasInternalShowHide: false,
   });
 
-  const handleOpen = () => {
-    if (isPaneDisplayed) {
-      onClose();
-      handleHideDropdown();
-    } else {
-      onOpen();
-      handleShowDropdown();
-    }
-  };
-  const handleClose = () => {
-    onClose();
-    handleHideDropdown();
-  };
   const handleApply = () => {
     onApply();
-    handleHideDropdown();
-  };
-  const handleReset = () => {
-    onReset();
   };
 
   return (
-    <span ref={parentRef}>
-      {renderHandler(handleOpen)}
-      {isPaneDisplayed && (
-        <Pane>
-          <FlexContainer flexDirection="column" padding={1}>
-            <FlexContainer
-              as="header"
-              justifyContent="space-between"
-              margin={{ bottom: 0.8 }}
+    isControlPaneOpen && (
+      <Pane>
+        <FlexContainer flexDirection="column" padding={1}>
+          <FlexContainer
+            as="header"
+            justifyContent="space-between"
+            margin={{ bottom: 0.8 }}
+          >
+            <H4 margin="none">{title}</H4>
+            <CloseButton
+              color={ButtonColors.secondary}
+              size={ButtonSizes.lg}
+              variant={ButtonVariants.text}
+              onClick={onClose}
             >
-              <H4 margin="none">{title}</H4>
-              <CloseButton
-                color={ButtonColors.secondary}
-                size={ButtonSizes.lg}
-                variant={ButtonVariants.text}
-                onClick={handleClose}
+              <Icon aria-label="Close dropdown" name={SSCIconNames.times} />
+            </CloseButton>
+          </FlexContainer>
+
+          <FlexContainer flexDirection="column" margin={{ bottom: 0.8 }}>
+            {children}
+          </FlexContainer>
+
+          <FlexContainer as="footer" justifyContent="space-between">
+            <Button variant={ButtonVariants.text} onClick={onReset}>
+              Reset to defaults
+            </Button>
+            <FlexContainer>
+              <Button
+                margin={{ right: 0.4 }}
+                variant={ButtonVariants.outline}
+                onClick={onClose}
               >
-                <Icon aria-label="Close dropdown" name={SSCIconNames.times} />
-              </CloseButton>
-            </FlexContainer>
-
-            <FlexContainer flexDirection="column" margin={{ bottom: 0.8 }}>
-              {children}
-            </FlexContainer>
-
-            <FlexContainer as="footer" justifyContent="space-between">
-              <Button variant={ButtonVariants.text} onClick={handleReset}>
-                Reset to defaults
+                Close
               </Button>
-              <FlexContainer>
-                <Button
-                  margin={{ right: 0.4 }}
-                  variant={ButtonVariants.outline}
-                  onClick={handleClose}
-                >
-                  Close
-                </Button>
-                <Button variant={ButtonVariants.solid} onClick={handleApply}>
-                  Apply
-                </Button>
-              </FlexContainer>
+              <Button variant={ButtonVariants.solid} onClick={handleApply}>
+                Apply
+              </Button>
             </FlexContainer>
           </FlexContainer>
-        </Pane>
-      )}
-    </span>
+        </FlexContainer>
+      </Pane>
+    )
   );
 };
 
