@@ -38,11 +38,9 @@ const StyledPaginationComponent = styled.button<{
   &:last-of-type {
     margin-right: 0;
   }
-  &:hover {
-    border-color: ${getColor('graphiteHB')};
-    background-color: ${getColor('graphite5H')};
+  &:focus {
+    outline: none;
   }
-
   &:disabled {
     color: ${getColor('graphiteB')};
     cursor: default;
@@ -55,14 +53,20 @@ const StyledPaginationComponent = styled.button<{
     `};
 
   ${({ $isCurrent }) =>
-    $isCurrent &&
-    css`
-      border-color: ${getColor('graphiteHB')};
-      background-color: ${getColor('graphite2H')};
-      font-size: ${getFontSize('lg')};
-      font-weight: ${getFontWeight('bold')};
-      cursor: default;
-    `};
+    $isCurrent
+      ? css`
+          border-color: ${getColor('graphiteHB')};
+          background-color: ${getColor('graphite2H')};
+          font-size: ${getFontSize('lg')};
+          font-weight: ${getFontWeight('bold')};
+          cursor: default;
+        `
+      : css`
+          &:hover {
+            border-color: ${getColor('graphiteHB')};
+            background-color: ${getColor('graphite5H')};
+          }
+        `};
 `;
 
 export const PaginationItem: React.FC<PaginationItemProps> = ({
