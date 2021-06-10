@@ -1,3 +1,10 @@
+# [1.0.0-alpha.79](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.78...v1.0.0-alpha.79) (2021-06-10)
+
+
+### Bug Fixes
+
+* **fep-1808:** tags are not removed after click on clearall ([22e214a](https://github.com/securityscorecard/design-system/commit/22e214a1dc46d3e6e1eed66212a89e295d356df4))
+
 # [1.0.0-alpha.78](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.77...v1.0.0-alpha.78) (2021-06-09)
 
 
