@@ -5,6 +5,7 @@ import ReactSelect, {
   OptionTypeBase,
   components,
 } from 'react-select';
+import { toString } from 'ramda';
 
 import Tag from '../TagsInput/Tag';
 import { IconTypes, SSCIconNames } from '../../../../theme/icons/icons.enums';
@@ -23,20 +24,26 @@ const MultiValue: React.FC<MultiValueProps<OptionTypeBase>> = (props) => {
   return <Tag value={data.label} onClose={removeProps.onClick} />;
 };
 
-const Select: React.FC<SelectProps> = (props) => (
-  <ReactSelect
-    components={{ DropdownIndicator, MultiValue }}
-    isClearable={false}
-    maxMenuHeight={163} // 5 menu options
-    styles={selectStyles}
-    {...props}
-  />
-);
+const Select: React.FC<SelectProps> = (props) => {
+  const { value } = props;
+
+  return (
+    <ReactSelect
+      key={toString(value)}
+      components={{ DropdownIndicator, MultiValue }}
+      isClearable={false}
+      maxMenuHeight={163} // 5 menu options
+      styles={selectStyles}
+      {...props}
+    />
+  );
+};
 
 export default Select;
 
 Select.propTypes = {
   options: PropTypes.arrayOf(OptionPropType),
+  value: OptionPropType,
   defaultValue: PropTypes.oneOfType([
     OptionPropType,
     PropTypes.arrayOf(OptionPropType),
