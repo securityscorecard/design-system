@@ -1,12 +1,19 @@
 # Design System
 
 ## Usage
-This package is published in GitHub Package Registry. The easiest way how to consume this package is to create `.npmrc` file in the root of your application and add the line:
+This package is published in GitHub Package Registry. Detailed instructruction about consuming Github Packages
+you can find in [Installing a package](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package).
+
+The easiest way how to consume this package is to create `.npmrc` file in the root of your application and add the line:
 ```
 @securityscorecard:registry=https://npm.pkg.github.com
 ```
 
-After `.npmrc` file is created you can install this package as:
+After `.npmrc` file is created you have to authenticate by logging in to npm or by adding PAT (Personal Access Token)
+into `.npmrc` file. For more information please see [Authenticating to GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages).
+
+
+Then you can install this package as:
 ```sh
 yarn add @securityscorecard/design-system
 # OR
