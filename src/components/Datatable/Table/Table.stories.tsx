@@ -180,6 +180,7 @@ export const DataIsLoadingWithPreviousDataAndIsCancelable = TableTemplate.bind(
 DataIsLoadingWithPreviousDataAndIsCancelable.args = {
   ...MinimalConfig.args,
   isDataLoading: true,
+  isCancelDisabled: false,
   onCancelLoading: () => null,
 };
 

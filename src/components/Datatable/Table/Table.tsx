@@ -24,7 +24,7 @@ import {
   when,
 } from 'ramda';
 import cls from 'classnames';
-import { isNonEmptyArray, isNotUndefined, isString, noop } from 'ramda-adjunct';
+import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
 
 import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
@@ -85,6 +85,7 @@ const Table = <D extends Record<string, unknown>>({
   defaultSelectedRows,
   hasPagination,
   hasServerSidePagination,
+  isCancelDisabled,
   onCancelLoading,
   defaultPageSize,
   hasSorting,
@@ -277,7 +278,7 @@ TableProps<D>): React.ReactElement => {
         </TableContainer>
         {dataSize > 0 && isDataLoading && (
           <LoadingOverlay
-            isCancelable={onCancelLoading !== noop}
+            isCancelable={!isCancelDisabled}
             onCancel={onCancelLoading}
           />
         )}

@@ -397,7 +397,7 @@ describe('Datatable/Table', () => {
         }),
       ).toBeInTheDocument();
     });
-    it('should display loading overlay with Cancel button when data is present', () => {
+    it('should display loading overlay with Cancel button when data is present and canceling is enabled', () => {
       renderWithProviders(
         <Table<Data>
           data={data}
@@ -406,6 +406,7 @@ describe('Datatable/Table', () => {
           defaultSelectedRows={{}}
           {...defaultTableConfig}
           isDataLoading
+          isCancelDisabled={false}
           onCancelLoading={jest.fn}
         />,
       );
@@ -415,6 +416,26 @@ describe('Datatable/Table', () => {
           name: /Cancel/i,
         }),
       ).toBeInTheDocument();
+    });
+    it('should display loading overlay without Cancel button when data is present and canceling is disabled', () => {
+      renderWithProviders(
+        <Table<Data>
+          data={data}
+          columns={columns}
+          dataSize={data.length}
+          defaultSelectedRows={{}}
+          {...defaultTableConfig}
+          isDataLoading
+          isCancelDisabled
+          onCancelLoading={jest.fn}
+        />,
+      );
+
+      expect(
+        screen.queryByRole('button', {
+          name: /Cancel/i,
+        }),
+      ).not.toBeInTheDocument();
     });
   });
 });

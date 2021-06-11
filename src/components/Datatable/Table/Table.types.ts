@@ -55,6 +55,7 @@ export interface TableConfig<D> {
   isDataLoading: boolean;
   isMultiSelect: boolean;
   onSelect: OnSelectFn<D>;
+  isCancelDisabled: boolean;
   onCancelLoading: () => void;
   hasOnlyPerPageSelection: boolean;
   defaultSelectedRowIds: IdType<D>[];
