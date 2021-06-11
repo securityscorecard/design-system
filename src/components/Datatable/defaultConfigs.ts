@@ -9,6 +9,7 @@ export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
   hasSelection: true,
   isMultiSelect: true,
   onSelect: noop,
+  isCancelDisabled: true,
   onCancelLoading: noop,
   isDataLoading: false,
   hasOnlyPerPageSelection: true,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { assocPath, fromPairs, map, pipe } from 'ramda';
-import { noop } from 'ramda-adjunct';
+import { isUndefined, noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
 import { getBorderRadius, getColor } from '../../utils';
@@ -55,7 +55,7 @@ const Datatable = <D extends Record<string, unknown>>({
     [],
   );
 
-  const isCancelDisabled = !onCancelLoading;
+  const isCancelDisabled = isUndefined(onCancelLoading);
 
   const {
     onColumnOrderChange,
@@ -128,6 +128,7 @@ const Datatable = <D extends Record<string, unknown>>({
         dataSize={dataSize}
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
         {...restTableConfig}
+        isCancelDisabled={isCancelDisabled}
         isDataLoading={isDataLoading}
         onCancelLoading={handleCancelLoading}
       />
