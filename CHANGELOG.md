@@ -1,3 +1,10 @@
+# [1.0.0-alpha.80](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.79...v1.0.0-alpha.80) (2021-06-11)
+
+
+### Bug Fixes
+
+* **Table:** fix isCancelable condition ([114cdd2](https://github.com/securityscorecard/design-system/commit/114cdd21bd91ee3107d554684a3ea39875a9be4c))
+
 # [1.0.0-alpha.79](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.78...v1.0.0-alpha.79) (2021-06-10)
 
 
