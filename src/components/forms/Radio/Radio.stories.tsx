@@ -8,19 +8,22 @@ import { RadioProps } from './Radio.types';
 export default {
   title: 'components/forms/Radio',
   component: Radio,
+  argTypes: {
+    name: { control: { disable: true } },
+    radioId: { control: { disable: true } },
+    defaultChecked: { control: 'boolean' },
+  },
 } as Meta;
 
 export const playground: Story<RadioProps> = (args) => <Radio {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  name: { control: { disable: true }, defaultValue: 'playground' },
-  radioId: { control: { disable: true }, defaultValue: 'playground' },
-  label: { control: 'text', defaultValue: 'Radio label' },
-  defaultChecked: { control: 'boolean', defaultValue: false },
-  isInvalid: { control: 'boolean', defaultValue: false },
-  isDisabled: { control: 'boolean', defaultValue: false },
+playground.args = {
+  name: 'playground',
+  radioId: 'playground',
+  label: 'Radio label',
+  defaultChecked: false,
 };
 
 export const DefaultRadio: Story = () => (

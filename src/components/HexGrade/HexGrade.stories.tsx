@@ -9,6 +9,11 @@ import { generateControl } from '../../utils/tests/storybook';
 export default {
   title: 'components/HexGrade',
   component: HexGrade,
+  argTypes: {
+    variant: {
+      ...generateControl('select', HexGradeVariants),
+    },
+  },
 } as Meta;
 
 export const playground: Story<HexGradeProps> = (args) => (
@@ -19,21 +24,8 @@ export const playground: Story<HexGradeProps> = (args) => (
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  variant: {
-    ...generateControl('select', HexGradeVariants),
-    defaultValue: HexGradeVariants.solid,
-  },
-  grade: {
-    ...generateControl('select', { none: undefined, ...HexGradeGrades }),
-    defaultValue: undefined,
-  },
-  isInversed: {
-    control: 'boolean',
-  },
-  margin: {
-    control: 'object',
-  },
+playground.args = {
+  variant: HexGradeVariants.solid,
 };
 
 export const SolidHexGrades: Story = () => (

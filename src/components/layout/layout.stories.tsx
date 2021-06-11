@@ -18,6 +18,17 @@ import { Container, Row, Grid } from '@securityscorecard/design-system';
       },
     },
   },
+  argTypes: {
+    cols: {
+      control: { disable: true },
+      table: {
+        type: { summary: 'number | "auto"' },
+      },
+    },
+    offset: {
+      control: { disable: true },
+    },
+  },
 } as Meta;
 
 const Content = styled.div`
@@ -127,25 +138,6 @@ export const SetWidthColumns: Story = () => (
     </Row>
   </Container>
 );
-
-SetWidthColumns.argTypes = {
-  cols: {
-    control: { disable: true },
-    description: 'Number of columns to span',
-    table: {
-      type: { summary: 'number | "auto"' },
-      defaultValue: { summary: '"auto"' },
-    },
-  },
-  offset: {
-    control: { disable: true },
-    description: 'Offset from left',
-    table: {
-      type: { summary: 'number' },
-      defaultValue: { summary: 0 },
-    },
-  },
-};
 
 export const AutoWidthColumns: Story = () => (
   <Container>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { FlexContainer } from '../FlexContainer';
 import Button from './Button';
 import { ButtonProps } from './Button.types';
@@ -11,43 +11,41 @@ import { generateControl } from '../../utils/tests/storybook';
 export default {
   title: 'components/Button',
   component: Button,
+  argTypes: {
+    to: { control: { disable: true } },
+    href: { control: { disable: true } },
+    as: { control: { disable: true } },
+    margin: { control: { disable: true } },
+    children: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    variant: {
+      ...generateControl('select', ButtonVariants),
+    },
+    size: {
+      ...generateControl('select', ButtonSizes),
+    },
+    color: {
+      ...generateControl('select', ButtonColors),
+    },
+    iconName: {
+      ...generateControl('select', SSCIconNames),
+    },
+  },
 } as Meta;
 
 export const playground: Story<ButtonProps> = (args) => <Button {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  to: { control: { disable: true } },
-  href: { control: { disable: true } },
-  as: { control: { disable: true } },
-  margin: { control: { disable: true } },
-  children: {
-    control: { type: 'text' },
-    table: {
-      type: { summary: 'string' },
-    },
-    defaultValue: 'Playground Button',
-  },
-  variant: {
-    ...generateControl('select', ButtonVariants),
-    defaultValue: ButtonVariants.solid,
-  },
-  size: {
-    ...generateControl('select', ButtonSizes),
-    defaultValue: ButtonSizes.md,
-  },
-  color: {
-    ...generateControl('select', ButtonColors),
-    defaultValue: ButtonColors.primary,
-  },
-  iconType: {
-    ...generateControl('select', IconTypes),
-    defaultValue: IconTypes.ssc,
-  },
-  isDisabled: { control: { type: 'boolean' } },
-  isLoading: { control: { type: 'boolean' } },
-  isExpanded: { control: { type: 'boolean' } },
+playground.args = {
+  children: 'Playground Button',
+  variant: ButtonVariants.solid,
+  size: ButtonSizes.md,
+  color: ButtonColors.primary,
 };
 
 export const SolidButtons: Story = () => (

@@ -7,6 +7,13 @@ import { TextAreaProps } from './TextArea.types';
 export default {
   title: 'components/forms/TextArea',
   component: TextArea,
+  argTypes: {
+    maxLength: {
+      description: 'Sets maximal length of text and enables characters counter',
+    },
+    placeholder: { control: 'text', table: { type: { summary: 'string' } } },
+    defaultValue: { control: 'text', table: { type: { summary: 'string' } } },
+  },
 } as Meta;
 
 export const playground: Story<TextAreaProps> = (args) => (
@@ -14,17 +21,6 @@ export const playground: Story<TextAreaProps> = (args) => (
 );
 playground.parameters = {
   chromatic: { disable: true },
-};
-playground.argTypes = {
-  maxLength: {
-    control: 'number',
-    table: { type: { summary: 'number' } },
-    description: 'Sets maximal length of text and enables characters counter',
-  },
-  placeholder: { control: 'text' },
-  defaultValue: { control: 'text' },
-  isInvalid: { control: 'boolean', defaultValue: false },
-  isDisabled: { control: 'boolean', defaultValue: false },
 };
 
 export const Default: Story = () => <TextArea aria-label="Text" />;

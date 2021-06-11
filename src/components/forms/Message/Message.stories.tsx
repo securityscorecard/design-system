@@ -9,24 +9,28 @@ import { generateControl } from '../../../utils/tests/storybook';
 export default {
   title: 'components/forms/Message',
   component: Message,
+  argTypes: {
+    children: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    variant: {
+      ...generateControl('select', MessageVariants),
+    },
+  },
 } as Meta;
 
-export const playground: Story<MessageProps> = (args) => <Message {...args} />;
+export const playground: Story<
+  MessageProps & { children: React.ReactChild }
+> = (args) => <Message {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  children: {
-    control: { type: 'text' },
-    table: {
-      type: { summary: 'string' },
-    },
-    defaultValue: 'Form field message',
-  },
-  variant: {
-    ...generateControl('select', MessageVariants),
-    defaultValue: MessageVariants.note,
-  },
+playground.args = {
+  children: 'Form field message',
+  variant: MessageVariants.note,
 };
 
 export const NoteMessage: Story = () => <Note>Select your home country</Note>;

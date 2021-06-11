@@ -145,10 +145,10 @@ export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
   }, [dispatchFetchData]);
 
   const {
-    batchActions: argsBatchActions,
-    controlsConfig: argsControlsConfig,
+    batchActions: argsBatchActions = [],
+    controlsConfig: argsControlsConfig = {},
     dataPrimaryKey: argsDataPrimaryKey,
-    tableConfig: argsTableConfig,
+    tableConfig: argsTableConfig = {},
     ...restArgs
   } = args;
 
@@ -170,7 +170,7 @@ export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
       tableConfig={{
         ...argsTableConfig,
         rowActions: [
-          ...(argsTableConfig.rowActions || []),
+          ...(argsTableConfig?.rowActions || []),
           ...datatableRowActions,
         ],
         onSelect: action('onRowSelect'),
@@ -197,10 +197,10 @@ export const InBrowserPlayground: Story<DatatableProps<Data>> = (args) => {
   };
 
   const {
-    batchActions: argsBatchActions,
-    controlsConfig: argsControlsConfig,
+    batchActions: argsBatchActions = [],
+    controlsConfig: argsControlsConfig = {},
     dataPrimaryKey: argsDataPrimaryKey,
-    tableConfig: argsTableConfig,
+    tableConfig: argsTableConfig = {},
     ...restArgs
   } = args;
 

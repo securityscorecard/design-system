@@ -17,15 +17,6 @@ export const playground: Story<SpinnerProps> = (args) => (
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  dark: {
-    control: { type: 'boolean' },
-    defaultValue: false,
-  },
-  horizontalMargin: {
-    control: { type: 'number' },
-  },
-};
 
 export const darkSpinner: Story = () => <Spinner dark />;
 
