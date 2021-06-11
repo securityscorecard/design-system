@@ -8,7 +8,7 @@ import {
   Primary,
   ArgsTable,
   PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 
 
 import { DSProvider, createIconLibrary } from '../src/theme';
