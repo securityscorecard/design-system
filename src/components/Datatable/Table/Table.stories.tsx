@@ -109,8 +109,9 @@ WithSortedColumn.args = {
 export const WithCustomPageSize = TableTemplate.bind({});
 WithCustomPageSize.args = {
   ...MinimalConfig.args,
-  data: assets.slice(0, 5),
+  data: assets.slice(0, 20),
   defaultPageSize: 5,
+  hasServerSidePagination: false,
 };
 
 export const WithNoData = TableTemplate.bind({});

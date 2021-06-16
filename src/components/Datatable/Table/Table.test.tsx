@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import { Column } from 'react-table';
 import userEvent from '@testing-library/user-event';
 
@@ -356,7 +356,7 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().pageIndex).toBe(2);
       expect(DatatableStore.getRawState().pageSize).toBe(1);
     });
-    it('should store sorting when change it in the header', () => {
+    it('should store sorting when change it in the header', async () => {
       renderWithProviders(
         <Table<Data>
           data={data}
@@ -373,9 +373,11 @@ describe('Datatable/Table', () => {
         }),
       );
 
-      expect(DatatableStore.getRawState().sortBy).toMatchObject([
-        { desc: false, id: 'col2' },
-      ]);
+      await waitFor(() =>
+        expect(DatatableStore.getRawState().sortBy).toMatchObject([
+          { desc: false, id: 'col2' },
+        ]),
+      );
     });
   });
   describe('given isDataLoading', () => {

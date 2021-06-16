@@ -15,6 +15,7 @@ import {
 import {
   allPass,
   any,
+  equals,
   keys,
   pick,
   pipe,
@@ -94,6 +95,10 @@ const Table = <D extends Record<string, unknown>>({
   defaultColumnOrder,
 }: // defaultHiddenColumns,
 TableProps<D>): React.ReactElement => {
+  const tableDataSize = useMemo(
+    () => (hasServerSidePagination ? dataSize : data.length),
+    [hasServerSidePagination, dataSize, data],
+  );
   const hasExclusiveSelection = DatatableStore.useState(
     (s) => s.hasExclusiveSelection,
   );
@@ -118,6 +123,7 @@ TableProps<D>): React.ReactElement => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    page,
     rows,
     prepareRow,
     gotoPage,
@@ -144,7 +150,7 @@ TableProps<D>): React.ReactElement => {
       },
       // PAGINATION
       manualPagination: hasServerSidePagination,
-      pageCount: Math.ceil(dataSize / defaultPageSize),
+      pageCount: Math.ceil(tableDataSize / defaultPageSize),
       autoResetPage: false,
       // SORTING
       disableSortBy: !hasSorting,
@@ -163,7 +169,7 @@ TableProps<D>): React.ReactElement => {
       }),
       // CUSTOM PROPS
       rowActions,
-      dataSize,
+      dataSize: tableDataSize,
       isMultiSelect,
     },
     useColumnOrder,
@@ -234,6 +240,17 @@ TableProps<D>): React.ReactElement => {
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
+      prop('pageIndex'),
+      when(equals(0), gotoFirstPage),
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [gotoFirstPage, pageIndex]);
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
       pick(['filters', 'isCanceled']),
       when(
         allPass([
@@ -271,19 +288,19 @@ TableProps<D>): React.ReactElement => {
             <Head headerGroups={headerGroups} />
             <Body<D>
               prepareRow={prepareRow}
-              rows={rows}
+              rows={hasServerSidePagination ? rows : page}
               {...getTableBodyProps()}
             />
           </StyledTable>
         </TableContainer>
-        {dataSize > 0 && isDataLoading && (
+        {tableDataSize > 0 && isDataLoading && (
           <LoadingOverlay
             isCancelable={!isCancelDisabled}
             onCancel={onCancelLoading}
           />
         )}
       </TableAndLoadingOverlayContainer>
-      {dataSize === 0 ? (
+      {tableDataSize === 0 ? (
         <NoDataContainer>
           {isDataLoading ? (
             <LoadingNoData />
@@ -299,7 +316,7 @@ TableProps<D>): React.ReactElement => {
         </NoDataContainer>
       ) : pageCount !== 1 ? (
         <Footer
-          hasPagination={hasPagination && dataSize > 0}
+          hasPagination={hasPagination && tableDataSize > 0}
           isDataLoading={isDataLoading}
           pageCount={pageCount}
           pageIndex={pageIndex}
