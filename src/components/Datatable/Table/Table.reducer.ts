@@ -35,7 +35,9 @@ export const tableActionsReducer = <D extends TableRecord>({
     case actions.cancelLoading:
       return previousState ? { previousState, ...previousState } : newState;
     case 'toggleSortBy':
-      collectFetchParams(0, pageSize, sortBy);
+      setTimeout(() => {
+        collectFetchParams(0, pageSize, sortBy);
+      }, 0);
       return { ...newState, pageIndex: 0 };
       break;
     case actions.deselectAllRows:

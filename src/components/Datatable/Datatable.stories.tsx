@@ -112,7 +112,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<DatatableProps<Data>> = (args) => {
+export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
   const [tableData, setTableData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalLength, setTotalLength] = useState(0);
@@ -180,3 +180,60 @@ export const Playground: Story<DatatableProps<Data>> = (args) => {
     />
   );
 };
+ServerSidePlayground.storyName = 'Playground (Server-Side implementation)';
+
+export const InBrowserPlayground: Story<DatatableProps<Data>> = (args) => {
+  const [data, setData] = useState(assets);
+
+  const handleOnSearch = (query) => {
+    action('onSearch')(query);
+    const result = assets.filter((asset) => asset.ipAddress.includes(query));
+
+    setData(result);
+  };
+  const handleOnClearSearch = () => {
+    action('onClear')();
+    setData(assets);
+  };
+
+  const {
+    batchActions: argsBatchActions,
+    controlsConfig: argsControlsConfig,
+    dataPrimaryKey: argsDataPrimaryKey,
+    tableConfig: argsTableConfig,
+    ...restArgs
+  } = args;
+
+  return (
+    <Datatable<Data>
+      {...restArgs}
+      batchActions={[...argsBatchActions, ...datatableBatchActions]}
+      columns={simpleColumns}
+      controlsConfig={{
+        ...controlsConfig,
+        ...argsControlsConfig,
+        searchConfig: {
+          ...controlsConfig.searchConfig,
+          ...argsControlsConfig.searchConfig,
+          onSearch: handleOnSearch,
+          onClear: handleOnClearSearch,
+        },
+      }}
+      data={data}
+      dataPrimaryKey={argsDataPrimaryKey || 'ipAddress'}
+      dataSize={data.length}
+      tableConfig={{
+        ...argsTableConfig,
+        rowActions: [
+          ...(argsTableConfig.rowActions || []),
+          ...datatableRowActions,
+        ],
+        onSelect: action('onRowSelect'),
+        hasServerSidePagination: false,
+        hasServerSideSorting: false,
+      }}
+    />
+  );
+};
+
+InBrowserPlayground.storyName = 'Playground (In-Browser implementation)';

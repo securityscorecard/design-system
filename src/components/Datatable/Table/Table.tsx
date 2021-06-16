@@ -15,6 +15,7 @@ import {
 import {
   allPass,
   any,
+  equals,
   keys,
   pick,
   pipe,
@@ -236,6 +237,17 @@ TableProps<D>): React.ReactElement => {
       unsubscribe();
     };
   }, [setColumnOrder]);
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      prop('pageIndex'),
+      when(equals(0), gotoFirstPage),
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [gotoFirstPage, pageIndex]);
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
