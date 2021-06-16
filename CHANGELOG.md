@@ -1,3 +1,21 @@
+# [1.0.0-alpha.81](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.80...v1.0.0-alpha.81) (2021-06-16)
+
+
+### Bug Fixes
+
+* **Datatable:** fix in-browser pagination ([5aa77aa](https://github.com/securityscorecard/design-system/commit/5aa77aa9c97c6e5ae2e1a2be09d0368bd63126be))
+* **Datatable:** reset pagination on search ([0447ccd](https://github.com/securityscorecard/design-system/commit/0447ccd3e615d110ebf94e45b00d4c9a99d08bb6))
+
+
+### Features
+
+* **Center:** add Center component ([97de6f2](https://github.com/securityscorecard/design-system/commit/97de6f2d930db5c9e75e7881273fc2025ffad6a5))
+* **Cluster:** add Cluster primitive ([1ff86cf](https://github.com/securityscorecard/design-system/commit/1ff86cfc451bc30f9b41c14cf0ca1d5197113e4a))
+* **Grid:** add Grid primitive ([8fd460d](https://github.com/securityscorecard/design-system/commit/8fd460db26efc5114921d6cf27d9068147fc37dd))
+* **Inline:** add Inline primitive ([cb54288](https://github.com/securityscorecard/design-system/commit/cb54288354521271970495e069a8a3216f9fc4e0))
+* **Padbox:** add Padbox primitive ([14af4a2](https://github.com/securityscorecard/design-system/commit/14af4a2270e063f14b14006c5c14d441ba2d38f7))
+* **Stack:** add Stack primitive ([d7e180c](https://github.com/securityscorecard/design-system/commit/d7e180c8e18276051a2f3c5238df117b719cfa07))
+
 # [1.0.0-alpha.80](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.79...v1.0.0-alpha.80) (2021-06-11)
 
 
