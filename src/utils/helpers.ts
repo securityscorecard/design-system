@@ -1,8 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 import {
-  anyPass,
   curry,
-  equals,
   identity,
   join,
   map,
@@ -35,7 +33,7 @@ export type Theme = {
 
 const convertValueToRem = memoizeWith(
   identity,
-  unless(anyPass([equals(0), isString]), (px) => `${px / BASE_FONT_SIZE}rem`),
+  unless(isString, (px) => `${px / BASE_FONT_SIZE}rem`),
 );
 
 // pxToRem :: (number | string)... -> string

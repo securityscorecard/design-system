@@ -38,9 +38,9 @@ export const parameters = {
             'Typography'
           ],
         'Helpers',
+        'layout',
         'components',
           [
-            'layout',
             'typography',
             'forms'
           ]

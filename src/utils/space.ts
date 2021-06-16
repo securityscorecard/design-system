@@ -66,10 +66,8 @@ export const getPaddingSpace = ({
 }: GetPaddingSpaceArgs): [number, number] | [number] => {
   if (!includes(paddingSize, allowedPaddingSizes[paddingType])) {
     // eslint-disable-next-line no-console
-    console.warn(`
-  Invalid type-size pair: ${paddingType} - ${paddingSize}
-  For '${paddingType}' padding type available sizes are: 'none', ${allowedPaddingSizes[paddingType]}.
-    `);
+    console.warn(`Invalid type-size pair: ${paddingType} - ${paddingSize}
+For '${paddingType}' padding type available sizes are: ${allowedPaddingSizes[paddingType]}.`);
 
     return [0];
   }

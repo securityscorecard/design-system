@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Col, Container, Row } from './index';
 
 export default {
-  title: 'components/layout/Grid',
+  title: 'layout/LayoutGrid',
   component: Col,
   parameters: {
     docs: {
