@@ -11,7 +11,7 @@ import {
   Description,
   Canvas,
   Story,
-} from '@storybook/addon-docs/blocks';
+} from '@storybook/addon-docs';
 import { TabsState } from '@storybook/components'
 import { Design } from 'storybook-addon-designs/blocks';
 import { isNonEmptyString } from 'ramda-adjunct'

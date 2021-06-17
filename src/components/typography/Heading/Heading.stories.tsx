@@ -9,30 +9,32 @@ import { generateControl } from '../../../utils/tests/storybook';
 export default {
   title: 'components/typography/Heading',
   component: Heading,
+  argTypes: {
+    children: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    size: {
+      ...generateControl('select', HeadingSizes),
+    },
+    variant: {
+      ...generateControl('select', HeadingVariants),
+    },
+    margin: { control: { disable: true } },
+    padding: { control: { disable: true } },
+  },
 } as Meta;
 
-export const playground: Story<HeadingProps> = (args) => <Heading {...args} />;
+export const playground: Story<
+  HeadingProps & { children: React.ReactChild }
+> = (args) => <Heading {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  children: {
-    control: { type: 'text' },
-    table: {
-      type: { summary: 'string' },
-    },
-    defaultValue: 'Playground Heading',
-  },
-  size: {
-    ...generateControl('select', HeadingSizes),
-    defaultValue: HeadingSizes.h1,
-  },
-  variant: {
-    ...generateControl('select', HeadingVariants),
-    defaultValue: HeadingVariants.primary,
-  },
-  margin: { control: { disable: true } },
-  padding: { control: { disable: true } },
+playground.args = {
+  children: 'Playground Heading',
 };
 
 export const h0: Story = () => (

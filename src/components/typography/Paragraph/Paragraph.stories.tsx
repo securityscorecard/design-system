@@ -10,6 +10,42 @@ import { generateControl } from '../../../utils/tests/storybook';
 export default {
   title: 'components/typography/Paragraph',
   component: Paragraph,
+  argTypes: {
+    children: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    size: {
+      ...generateControl('select', TextSizes),
+      table: {
+        type: {
+          summary: Object.keys(TextSizes)
+            .map((size) => `"${size}"`)
+            .join('|'),
+        },
+        defaultValue: {
+          summary: `"${TextSizes.lg}"`,
+        },
+      },
+    },
+    variant: {
+      ...generateControl('select', TextVariants),
+      table: {
+        type: {
+          summary: Object.keys(TextVariants)
+            .map((variant) => `"${variant}"`)
+            .join('|'),
+        },
+        defaultValue: {
+          summary: `"${TextVariants.primary}"`,
+        },
+      },
+    },
+    margin: { control: { disable: true } },
+    padding: { control: { disable: true } },
+  },
 } as Meta;
 
 const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra
@@ -22,24 +58,8 @@ export const playground: Story<ParagraphProps> = (args) => (
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  children: {
-    control: { type: 'text' },
-    table: {
-      type: { summary: 'string' },
-    },
-    defaultValue: lipsum,
-  },
-  size: {
-    ...generateControl('select', TextSizes),
-    defaultValue: TextSizes.lg,
-  },
-  variant: {
-    ...generateControl('select', TextVariants),
-    defaultValue: TextVariants.primary,
-  },
-  margin: { control: { disable: true } },
-  padding: { control: { disable: true } },
+playground.args = {
+  children: lipsum,
 };
 
 export const defaultParagraph: Story = () => (

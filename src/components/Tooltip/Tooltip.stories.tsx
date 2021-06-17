@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { omit } from 'ramda';
 
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../FlexContainer';
@@ -7,10 +8,25 @@ import { Button } from '../Button';
 import { Paragraph } from '../typography';
 import Tooltip from './Tooltip';
 import { TooltipProps } from './Tooltip.types';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/Tooltip',
   component: Tooltip,
+  argTypes: {
+    popup: {
+      control: { disable: true },
+    },
+    children: {
+      control: { disable: true },
+    },
+    placement: {
+      ...generateControl(
+        'select',
+        omit(['bottomLeft', 'bottomRight'], PortalPlacements),
+      ),
+    },
+  },
   decorators: [
     (storyFn) => (
       <FlexContainer
@@ -30,20 +46,15 @@ const popup = (
   </Paragraph>
 );
 
-export const playground: Story<TooltipProps> = (args) => <Tooltip {...args} />;
+export const playground: Story<
+  TooltipProps & { children: React.ReactChild }
+> = (args) => <Tooltip {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  popup: {
-    control: { disable: true },
-    defaultValue: popup,
-  },
-  children: {
-    control: { disable: true },
-    defaultValue: <Button size="lg">Button with tooltip</Button>,
-  },
-  placement: { control: 'select', defaultValue: PortalPlacements.bottom },
+playground.args = {
+  children: <Button size="lg">Button with tooltip</Button>,
+  popup,
 };
 
 export const Placements: Story = () => (

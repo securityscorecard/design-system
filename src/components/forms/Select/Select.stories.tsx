@@ -16,47 +16,28 @@ const options = [
 export default {
   title: 'components/forms/Select',
   component: Select,
-} as Meta;
-
-export const playground: Story<SelectProps> = (args) => {
-  return <Select {...args} aria-label="Select" />;
-};
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
-  options,
-  placeholder: 'Select country...',
-};
-playground.argTypes = {
-  options: {
-    control: 'object',
-    table: {
-      type: {
-        detail: `
+  argTypes: {
+    options: {
+      table: {
+        type: {
+          detail: `
 [
   {
     label: string,
     value: string,
   }
 ]
-        `,
+          `,
+        },
       },
     },
-  },
-  isInvalid: { control: 'boolean' },
-  isDisabled: { control: 'boolean' },
-  isClearable: { control: 'boolean' },
-  isMulti: {
-    control: 'boolean',
-    description: '⚠️ Styles for multiselect are currently not supported',
-  },
-  defaultMenuIsOpen: { control: 'boolean' },
-  defaultValue: {
-    control: 'object',
-    table: {
-      type: {
-        detail: `
+    isMulti: {
+      description: '⚠️ Styles for multiselect are currently not supported',
+    },
+    defaultValue: {
+      table: {
+        type: {
+          detail: `
 {
   label: string,
   value: string ,
@@ -70,10 +51,22 @@ OR
     value: string,
   }
 ]
-        `,
+          `,
+        },
       },
     },
   },
+} as Meta;
+
+export const playground: Story<SelectProps> = (args) => {
+  return <Select {...args} aria-label="Select" />;
+};
+playground.parameters = {
+  chromatic: { disable: true },
+};
+playground.args = {
+  options,
+  placeholder: 'Select country...',
 };
 
 export const Default: Story = () => (

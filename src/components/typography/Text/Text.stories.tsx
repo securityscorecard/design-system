@@ -9,31 +9,32 @@ import { generateControl } from '../../../utils/tests/storybook';
 export default {
   title: 'components/typography/Text',
   component: Text,
+  argTypes: {
+    children: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    size: {
+      ...generateControl('select', TextSizes),
+    },
+    variant: {
+      ...generateControl('select', TextVariants),
+    },
+  },
 } as Meta;
 
 const lipsum = `Lorem ipsum dolor sit amet`;
 
-export const playground: Story<TextProps> = (args) => <Text {...args} />;
+export const playground: Story<TextProps & { children: React.ReactChild }> = (
+  args,
+) => <Text {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  children: {
-    control: { type: 'text' },
-    table: {
-      type: { summary: 'string' },
-    },
-    defaultValue: 'Playground Text',
-  },
-  size: {
-    ...generateControl('select', TextSizes),
-    defaultValue: TextSizes.lg,
-  },
-  variant: {
-    ...generateControl('select', TextVariants),
-    defaultValue: TextVariants.primary,
-  },
-  isBold: { control: { type: 'boolean' } },
+playground.args = {
+  children: 'Playground Text',
 };
 
 export const largeText: Story = () => <Text size={TextSizes.lg}>{lipsum}</Text>;

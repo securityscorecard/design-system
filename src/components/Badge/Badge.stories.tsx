@@ -9,21 +9,20 @@ import { generateControl } from '../../utils/tests/storybook';
 export default {
   title: 'components/Badge',
   component: Badge,
+  argTypes: {
+    size: {
+      ...generateControl('select', BadgeSizes),
+    },
+  },
 } as Meta;
 
-export const playground: Story<BadgeProps> = (props) => <Badge {...props} />;
+export const playground: Story<BadgeProps> = (args) => <Badge {...args} />;
 playground.parameters = {
   chromatic: { disable: true },
 };
-playground.argTypes = {
-  count: {
-    control: { type: 'number' },
-    defaultValue: 25,
-  },
-  size: {
-    ...generateControl('select', BadgeSizes),
-    defaultValue: BadgeSizes.md,
-  },
+playground.args = {
+  count: 25,
+  size: BadgeSizes.md,
 };
 
 export const SimpleBadge: Story = () => <Badge count={25} />;
