@@ -27,10 +27,6 @@ const NoMatchingData: React.FC = () => (
           using &quot;OR&quot; instead of &quot;AND&quot; to combine your
           queries
         </ListItem>
-        <ListItem>
-          using &quot;contains&quot; instead of &quot;is&quot; to cast a wider
-          net
-        </ListItem>
         <ListItem>checking your queries for typos</ListItem>
       </ul>
     </Paragraph>
