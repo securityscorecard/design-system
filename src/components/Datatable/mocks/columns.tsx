@@ -9,7 +9,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { TextSizes, TextVariants } from '../../typography/Text/Text.enums';
 import { Strong, Text } from '../../typography';
 import { Tooltip } from '../../Tooltip';
-import { abbreviateNumber } from '../../../utils';
+import { abbreviateNumber, timeDuration } from '../../../utils';
 import { Data } from './types';
 
 export const composeQuery = pipe(
@@ -113,17 +113,7 @@ export const simpleColumns: Column<Data>[] = [
     Header: 'Last observed',
     accessor: 'lastObservationDate',
     width: 120,
-    cellFormatter: (value: string): string => {
-      dayjs.extend(relativeTime);
-      const date = dayjs(value);
-      const now = dayjs();
-
-      // value is today
-      if (date.isSame(now, 'day')) return 'Today';
-      // value is in last 7 days
-      if (date.isAfter(now.subtract(7, 'day'))) return date.format('dddd');
-      return date.from(now, true);
-    },
+    cellFormatter: (value: string): string => timeDuration(value),
   },
   {
     id: 'observedFor',
