@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { BrowserRouter } from 'react-router-dom';
 
+import { Badges } from '../../../.storybook/storybook.enums';
 import Nav from './Nav';
 import NavItem from './NavItem';
 
@@ -11,6 +12,19 @@ export default {
   component: Nav,
   subcomponents: { NavItem },
   decorators: [(storyFn) => <BrowserRouter>{storyFn()}</BrowserRouter>],
+
+  parameters: {
+    badges: [Badges.deprecated],
+    docs: {
+      description: {
+        component: `<div class="deprecated">Deprecated since v1.0.0-alpha.83}</div>
+
+This component test was deprecated in favor of the **Tabs** component (variant: \`text\`, size: \`large\`).
+
+See docs: [Tabs](https://securityscorecard.github.io/design-system/alpha/?path=/docs/components-tabs--playground#text-tabs)`,
+      },
+    },
+  },
 } as Meta;
 
 export const NavigationWithRelativeLinksDefault: Story = () => (

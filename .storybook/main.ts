@@ -10,6 +10,7 @@ module.exports = {
     '@storybook/addon-controls',
     'storycap',
     'storybook-addon-designs',
+    '@geometricpanda/storybook-addon-badges',
   ],
   features: {
     postcss: false,
