@@ -11,6 +11,8 @@ import {
 } from 'ramda';
 import { hasPath, isString, list } from 'ramda-adjunct';
 import numeral from 'numeral';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { BASE_FONT_SIZE } from '../theme/constants';
 import {
@@ -138,3 +140,15 @@ export const getSpace = curry(
 
 export const abbreviateNumber = (value: number): string =>
   numeral(value).format('0.[00]a').toUpperCase();
+
+export const timeDuration = (value: string): string => {
+  dayjs.extend(relativeTime);
+  const date = dayjs(value);
+  const now = dayjs();
+
+  // value is today
+  if (date.isSame(now, 'day')) return 'Today';
+  // value is in last 7 days
+  if (date.isAfter(now.subtract(7, 'day'))) return date.format('dddd');
+  return date.from(now, true);
+};
