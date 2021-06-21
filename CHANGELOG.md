@@ -1,3 +1,11 @@
+# [1.0.0-alpha.83](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.82...v1.0.0-alpha.83) (2021-06-21)
+
+
+### Features
+
+* update screenshots ([1944a21](https://github.com/securityscorecard/design-system/commit/1944a21f88fb08e06c55614c8b3539803d09486f))
+* **fep-1816:** change the text for the empty table ([6686c3b](https://github.com/securityscorecard/design-system/commit/6686c3b53c9cf0bf10afbfd074b58918d8673263))
+
 # [1.0.0-alpha.82](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.81...v1.0.0-alpha.82) (2021-06-21)
 
 
