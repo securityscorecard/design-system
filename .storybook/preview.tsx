@@ -14,6 +14,7 @@ import {
 import { DSProvider, createIconLibrary } from '../src/theme';
 import colors from '../src/theme/colors';
 import {StoriesWithDesign} from './blocks/StoriesWithDesign'
+import { Badges } from './storybook.enums';
 
 export const parameters = {
   backgrounds: {
@@ -68,6 +69,23 @@ export const parameters = {
   },
   design: {
     type: 'figma'
+  },
+  badgesConfig: {
+    [Badges.stable]: {
+      contrast: '#333',
+      color: '#4ABA00',
+      title: 'Stable'
+    },
+    [Badges.beta]: {
+      contrast: '#333',
+      color: '#E5BD00',
+      title: 'Beta'
+    },
+    [Badges.deprecated]: {
+      contrast: '#333',
+      color: '#F1431C',
+      title: 'Deprecated'
+    }
   }
 };
 
