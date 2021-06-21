@@ -1,3 +1,10 @@
+# [1.0.0-alpha.84](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.83...v1.0.0-alpha.84) (2021-06-21)
+
+
+### Features
+
+* **Nav:** deprecate Nav and NavItem components ([e9eb509](https://github.com/securityscorecard/design-system/commit/e9eb5093e10f2e169393dff08ef89d5c213fe6cb))
+
 # [1.0.0-alpha.83](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.82...v1.0.0-alpha.83) (2021-06-21)
 
 
