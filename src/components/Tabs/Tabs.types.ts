@@ -1,10 +1,12 @@
-import { ColorTypes } from '../../theme/colors.enums';
+import { Colors } from '../../theme/colors.types';
 import { SpacingProps } from '../../types/spacing.types';
+import { PadboxProps } from '../layout/Padbox/Padbox';
 import { TabSizes, TabVariants } from './Tabs.enums';
 
-export interface LabelProps {
+export interface LabelProps extends PadboxProps {
   $isSelected: boolean;
-  $color: string;
+  $color: keyof Colors;
+  $variant?: Variants;
 }
 
 export type Sizes = typeof TabSizes[keyof typeof TabSizes];
@@ -12,17 +14,17 @@ export type Variants = typeof TabVariants[keyof typeof TabVariants];
 
 export interface TabProps {
   children: React.ReactNode;
-  color?: typeof ColorTypes[keyof typeof ColorTypes];
-  isSelected?: boolean;
+  color?: LabelProps['$color'];
+  isSelected?: LabelProps['$isSelected'];
   onClick?: (selectedValue: string | number) => void;
   value: number | string;
   size?: Sizes;
-  variant?: Variants;
+  variant?: LabelProps['$variant'];
 }
 
 export interface TabsProps extends SpacingProps {
-  size?: Sizes;
-  variant?: Variants;
+  size?: TabProps['size'];
+  variant?: LabelProps['$variant'];
   selectedValue: string | number;
   onSelectTab?: (selectedValue: string | number) => void;
   children: React.ReactNode[];

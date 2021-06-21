@@ -6,6 +6,8 @@ import { TabProps } from './Tabs.types';
 import { TabSizes, TabVariants } from './Tabs.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
+import { SpaceSizes } from '../../theme/space.enums';
+import { PaddingTypes } from '../../types/spacing.types';
 
 const Tab: React.FC<TabProps> = ({
   children,
@@ -31,14 +33,23 @@ const Tab: React.FC<TabProps> = ({
     RouterLink = requireRouterLink();
   }
 
+  const paddingSize =
+    variant !== TabVariants.segmented
+      ? SpaceSizes.none
+      : size === TabSizes.lg
+      ? SpaceSizes.md
+      : SpaceSizes.sm;
+
   return (
     <Label
       $color={color}
       $isSelected={isSelected}
+      $variant={variant}
       as={isLink ? RouterLink : 'a'}
+      paddingSize={paddingSize}
+      paddingType={PaddingTypes.squish}
       size={size}
       tabIndex={0}
-      variant={variant}
       {...handler}
     >
       {children}

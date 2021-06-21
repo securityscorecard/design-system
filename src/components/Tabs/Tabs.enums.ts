@@ -1,6 +1,7 @@
 export const TabVariants = {
   text: 'text',
   underline: 'underline',
+  segmented: 'segmented',
 } as const;
 
 export const TabSizes = {
