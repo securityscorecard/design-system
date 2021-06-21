@@ -1,3 +1,10 @@
+# [1.0.0-alpha.82](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.81...v1.0.0-alpha.82) (2021-06-21)
+
+
+### Features
+
+* **Tabs:** add new segmented variant ([c12f9ac](https://github.com/securityscorecard/design-system/commit/c12f9aca50c81f6e57f82ac0fa8894f8d9eb0a19))
+
 # [1.0.0-alpha.81](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.80...v1.0.0-alpha.81) (2021-06-16)
 
 
