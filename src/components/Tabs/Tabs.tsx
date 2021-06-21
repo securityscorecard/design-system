@@ -1,14 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { FlexContainer } from '../FlexContainer';
-import { TabsProps } from './Tabs.types';
+import { Inline, Padbox } from '../layout';
+import { TabsProps, Variants } from './Tabs.types';
 import { TabSizes, TabVariants } from './Tabs.enums';
-import { SpacingSizeValuePropType } from '../../types/spacing.types';
+import {
+  SpacingSizeValue,
+  SpacingSizeValuePropType,
+} from '../../types/spacing.types';
+import { SpaceSizes } from '../../theme/space.enums';
+import { createMarginSpacing, getBorderRadius, getColor } from '../../utils';
 
-const LabelList = styled(FlexContainer)`
-  list-style-type: none;
+// FIXME: remove when `create*Spacing` methods are deprecated
+const Wrapper = styled.div<{ $margin: SpacingSizeValue }>`
+  ${({ $margin }) => createMarginSpacing($margin)};
+`;
+const LabelList = styled(Padbox)<{
+  $variant: Variants;
+}>`
+  display: inline-block;
+
+  ${({ $variant }) =>
+    $variant === TabVariants.segmented &&
+    css`
+      background: ${getColor('graphite5H')};
+      border: 1px solid ${getColor('graphiteB')};
+      border-radius: ${getBorderRadius};
+    `};
 `;
 
 const Tabs: React.FC<TabsProps> = ({
@@ -18,24 +37,36 @@ const Tabs: React.FC<TabsProps> = ({
   size = TabSizes.sm,
   variant = TabVariants.underline,
   margin = { bottom: 1.5 },
-  padding = 0,
 }) => {
   return (
-    <LabelList margin={margin} padding={padding}>
-      {React.Children.map(children, (tab) => {
-        if (!React.isValidElement(tab)) {
-          return null;
+    <Wrapper $margin={margin}>
+      <LabelList
+        $variant={variant}
+        paddingSize={
+          variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
         }
+      >
+        <Inline
+          gap={
+            variant === TabVariants.segmented ? SpaceSizes.sm : SpaceSizes.lg
+          }
+        >
+          {React.Children.map(children, (tab) => {
+            if (!React.isValidElement(tab)) {
+              return null;
+            }
 
-        return React.cloneElement(tab, {
-          size,
-          variant,
-          key: tab.props.value,
-          isSelected: tab.props.value === selectedValue,
-          onClick: onSelectTab,
-        });
-      })}
-    </LabelList>
+            return React.cloneElement(tab, {
+              size,
+              variant,
+              key: tab.props.value,
+              isSelected: tab.props.value === selectedValue,
+              onClick: onSelectTab,
+            });
+          })}
+        </Inline>
+      </LabelList>
+    </Wrapper>
   );
 };
 
@@ -46,7 +77,6 @@ Tabs.propTypes = {
   size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
   margin: SpacingSizeValuePropType,
-  padding: SpacingSizeValuePropType,
   onSelectTab: PropTypes.func,
 };
 

@@ -76,9 +76,9 @@ For '${paddingType}' padding type available sizes are: ${allowedPaddingSizes[pad
 
   switch (paddingType) {
     case PaddingTypes.squish:
-      return [sizeValue, sizeValue / 2];
-    case PaddingTypes.stretch:
       return [sizeValue / 2, sizeValue];
+    case PaddingTypes.stretch:
+      return [sizeValue, sizeValue / 2];
     case PaddingTypes.square:
     default:
       return [sizeValue];

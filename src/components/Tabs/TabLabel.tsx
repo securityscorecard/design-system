@@ -1,15 +1,19 @@
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
+import { includes } from 'ramda';
 
 import {
+  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
-  pxToRem,
+  getSpace,
 } from '../../utils';
 import { TabSizes, TabVariants } from './Tabs.enums';
-import { LabelProps, Sizes, Variants } from './Tabs.types';
+import { LabelProps, Sizes } from './Tabs.types';
+import { Padbox } from '../layout';
+import { SpaceSizes } from '../../theme/space.enums';
 
 const largeTextSize = css`
   font-size: ${getFontSize('lg')};
@@ -36,6 +40,22 @@ const smallUnderlineSize = css`
   line-height: ${getLineHeight('lg')};
 `;
 
+const largeSegmentedSize = css`
+  font-size: ${getFontSize('lg')};
+  /* FIXME: remove button height compensation when button size is fixes */
+  line-height: calc(
+    ${getLineHeight('lg')} + 0.125rem
+  ); /* add 2px to compensate button height */
+`;
+
+const mediumSegmentedSize = css`
+  font-size: ${getFontSize('md')};
+  /* FIXME: remove button height compensation when button size is fixes */
+  line-height: calc(
+    ${getLineHeight('md')} + 0.3125rem
+  ); /* add 5px to compensate button height */
+`;
+
 const underlineSizes = {
   [TabSizes.lg]: largeUnderlineSize,
   [TabSizes.md]: mediumUnderlineSize,
@@ -47,25 +67,31 @@ const textSizes = {
   [TabSizes.md]: mediumTextSize,
 };
 
-const underlineTab = css<LabelProps & { size: Sizes; variant: Variants }>`
+const segmentedSizes = {
+  [TabSizes.lg]: largeSegmentedSize,
+  [TabSizes.md]: mediumSegmentedSize,
+};
+
+const underlineTab = css<LabelProps & { size: Sizes }>`
   ${({ size }) => underlineSizes[size] || underlineSizes[TabSizes.md]};
-  color: ${getColor('graphite4B')};
-  padding-bottom: ${pxToRem(4)};
+  padding-bottom: ${getSpace(SpaceSizes.xxs)};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
       $isSelected ? getColor($color) : getColor('graphiteHB')};
 
   &:hover {
-    color: ${getColor('graphite4B')};
     text-decoration: none;
     border-bottom: 2px solid ${({ $color }) => getColor($color)};
   }
+
+  &,
+  &:hover,
   &:visited {
     color: ${getColor('graphite4B')};
   }
 `;
 
-const textTab = css<LabelProps & { size: Sizes; variant: Variants }>`
+const textTab = css<LabelProps & { size: Sizes }>`
   ${({ size }) => textSizes[size] || textSizes[TabSizes.md]};
 
   color: ${({ $isSelected, $color }) =>
@@ -75,27 +101,43 @@ const textTab = css<LabelProps & { size: Sizes; variant: Variants }>`
       lighten(0.1, theme.colors[$color] || $color)};
     text-decoration: none;
   }
-  &:visited {
-    color: ${getColor('graphite4B')};
+`;
+
+const segmentedTab = css<LabelProps & { size: Sizes }>`
+  ${({ size = TabSizes.md }) => segmentedSizes[size]};
+
+  background: ${({ $isSelected }) => $isSelected && getColor('blueberry0')};
+  border: 1px solid;
+  border-color: ${({ $isSelected }) =>
+    $isSelected ? getColor('dietBlueberry') : 'transparent'};
+  border-radius: calc(${getBorderRadius} / 2);
+
+  &:hover {
+    color: ${getColor('radiantBlueberry')};
+    text-decoration: none;
   }
 `;
 
 const tabVariants = {
   [TabVariants.text]: textTab,
   [TabVariants.underline]: underlineTab,
+  [TabVariants.segmented]: segmentedTab,
 };
 
-const TabLabel = styled.a<LabelProps & { variant: Variants }>`
+const TabLabel = styled(Padbox).withConfig<LabelProps>({
+  shouldForwardProp: (property) =>
+    !includes(property, ['paddingType', 'paddingSize']),
+})`
   outline: none;
   text-decoration: none;
   cursor: pointer;
   font-weight: ${getFontWeight('medium')};
 
-  ${({ variant }) => tabVariants[variant]};
-
-  &:not(:last-of-type) {
-    margin-right: ${pxToRem(30)};
+  &:visited {
+    color: ${getColor('graphite4B')};
   }
+
+  ${({ $variant }) => tabVariants[$variant]};
 `;
 
 export default TabLabel;
