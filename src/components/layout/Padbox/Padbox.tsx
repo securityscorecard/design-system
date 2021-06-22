@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
-import { PaddingType, PaddingTypes } from '../../../types/spacing.types';
 import { createPadding } from '../../../utils';
+import { PaddingTypes } from './Padbox.enums';
+
+export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];
 
 export interface PadboxProps {
   /**
