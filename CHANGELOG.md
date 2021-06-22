@@ -1,3 +1,10 @@
+# [1.0.0-alpha.85](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.84...v1.0.0-alpha.85) (2021-06-22)
+
+
+### Features
+
+* **enums:** export space related enums ([3d3e90a](https://github.com/securityscorecard/design-system/commit/3d3e90a364db0f6a58c4a6cb2a3330a5d25b76cf))
+
 # [1.0.0-alpha.84](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.83...v1.0.0-alpha.84) (2021-06-21)
 
 
