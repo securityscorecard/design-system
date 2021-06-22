@@ -7,7 +7,7 @@ import { TabSizes, TabVariants } from './Tabs.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
-import { PaddingTypes } from '../../types/spacing.types';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 
 const Tab: React.FC<TabProps> = ({
   children,

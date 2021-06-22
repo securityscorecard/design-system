@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import Padbox, { PadboxProps } from './Padbox';
 import { getColor } from '../../../utils';
-import { PaddingTypes } from '../../../types/spacing.types';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { generateControl } from '../../../utils/tests/storybook';
+import { PaddingTypes } from './Padbox.enums';
 
 export default {
   title: 'layout/primitives/Padbox',

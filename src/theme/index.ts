@@ -1,5 +1,7 @@
 export * as constants from './constants';
 export * as IconEnums from './icons/icons.enums';
+export { ColorTypes } from './colors.enums';
+export { SpaceSizes } from './space.enums';
 
 export * from './DSProvider';
 export * from './GlobalStyles';

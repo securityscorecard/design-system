@@ -16,9 +16,10 @@ import {
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 
 import { BASE_LINE_HEIGHT } from '../theme/constants';
-import { PaddingTypes, SpacingSizeValue } from '../types/spacing.types';
+import { SpacingSizeValue } from '../types/spacing.types';
 import { SpaceSizes } from '../theme/space.enums';
 import { Theme, pxToRem } from './helpers';
+import { PaddingTypes } from '../components/layout/Padbox/Padbox.enums';
 
 const allowedPaddingSizes = {
   [PaddingTypes.square]: [
