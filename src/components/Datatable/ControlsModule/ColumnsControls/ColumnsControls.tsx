@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { noop } from 'ramda-adjunct';
 
 import { ControlDropdown } from '../ControlDropdown';
 import { ColumnsControlsProps } from './ColumnsControls.types';
@@ -9,10 +10,10 @@ import { useColumnOrder } from './hooks/useColumnOrder';
 const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   children,
   isOpen = false,
-  onOpen,
-  onClose,
-  onApply,
-  onReset,
+  onOpen = noop,
+  onClose = noop,
+  onApply = noop,
+  onReset = noop,
 }) => {
   const parentRef = useRef(null);
   const {
@@ -66,8 +67,8 @@ ColumnsControls.propTypes = {
   onOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
+  onReset: PropTypes.func,
 };
 
 export default ColumnsControls;
