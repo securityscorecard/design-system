@@ -178,6 +178,11 @@ WithOpenColumns.args = {
     defaultIsColumnOrderingOpen: true,
   },
 };
+WithOpenColumns.parameters = {
+  screenshot: {
+    delay: 1000,
+  },
+};
 
 export const WithAppliedColumns = DatatableTemplate.bind({});
 WithAppliedColumns.args = {
@@ -195,6 +200,11 @@ WithOpenAndAppliedColumns.args = {
     ...MinimalConfig.args.controlsConfig,
     defaultIsColumnOrderingOpen: true,
     defaultIsColumnOrderingApplied: true,
+  },
+};
+WithOpenAndAppliedColumns.parameters = {
+  screenshot: {
+    delay: 1000,
   },
 };
 
