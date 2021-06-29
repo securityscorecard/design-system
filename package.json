@@ -1,6 +1,6 @@
 {
   "name": "@securityscorecard/design-system",
-  "version": "1.0.0-alpha.85",
+  "version": "1.0.0-alpha.86",
   "description": "Security Scorecard Design System",
   "author": "Radek Podrazky <rpodrazky@securityscorecard.io>",
   "license": "Apache-2.0",
@@ -148,7 +148,6 @@
     "react-syntax-highlighter": "15.4.3",
     "@types/react": "16.14.5",
     "glob-parent": "5.1.2"
-
   },
   "repository": {
     "type": "git",

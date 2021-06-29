@@ -1,3 +1,11 @@
+# [1.0.0-alpha.86](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.85...v1.0.0-alpha.86) (2021-06-29)
+
+
+### Bug Fixes
+
+* **ColumnsControls:** fix Reset order button ([63b9fe6](https://github.com/securityscorecard/design-system/commit/63b9fe65d42e43eab901b286ad413e8f371b73bb))
+* **useFilterRow:** fix error thrown when hook return invalid option ([6c3d252](https://github.com/securityscorecard/design-system/commit/6c3d2522a4d2445c223f31cd832056d77510dc23))
+
 # [1.0.0-alpha.85](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.84...v1.0.0-alpha.85) (2021-06-22)
 
 
