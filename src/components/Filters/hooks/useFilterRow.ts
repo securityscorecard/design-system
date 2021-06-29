@@ -1,64 +1,42 @@
-import { useEffect, useState } from 'react';
-import { prop } from 'ramda';
-import { isNotNull } from 'ramda-adjunct';
+import { find, map, pick, pipe, prop, propEq } from 'ramda';
+import { isUndefined } from 'ramda-adjunct';
 
 import { Condition, Field } from '../Filters.types';
-import { useFilterRowType } from './useFilterRow.types';
+import { PickOption, UseFilterRowType } from './useFilterRow.types';
 import { Option } from '../components/Select/Select.types';
 
-export const normalizeOptions = <O extends Option>({
-  value,
-  label,
-}: O): Option => ({
-  value,
-  label,
-});
-
-const getValuesOnChange = (fields, fieldValue, conditionValue) => {
-  const field = fields.find(({ value }) => value === fieldValue);
-
-  const conditions = field.conditions.map(normalizeOptions);
-
-  const condition = field.conditions.find(
-    ({ value }) => value === conditionValue,
-  );
-
-  return {
-    field,
-    conditions,
-    condition,
-  };
-};
+export const normalizeOptions: <O extends Option>(
+  options: O,
+) => PickOption<O> = pick(['value', 'label']);
 
 export const useFilterRow = (
   fields: Field[],
   fieldValue: string,
   conditionValue: string,
-): useFilterRowType => {
-  const [field, setField] = useState(null);
-  const [conditions, setConditions] = useState(null);
-  const [condition, setCondition] = useState(null);
+): UseFilterRowType => {
+  const field = find(propEq('value', fieldValue), fields);
+  if (isUndefined(field))
+    throw new Error(
+      `Field value "${fieldValue}" was not found in the fields array`,
+    );
 
-  useEffect(() => {
-    const {
-      field: fieldOptions,
-      conditions: conditionsOptions,
-      condition: conditionOptions,
-    } = getValuesOnChange(fields, fieldValue, conditionValue);
+  if (isUndefined(field.conditions))
+    throw new Error(`Field item does not contain any conditions`);
+  const conditions = pipe(prop('conditions'), map(normalizeOptions))(field);
 
-    setField(fieldOptions);
-    setConditions(conditionsOptions);
-    setCondition(conditionOptions);
-  }, [fields, fieldValue, conditionValue]);
-
-  const normalizedField = isNotNull(field) && normalizeOptions<Field>(field);
-  const normalizedCondition =
-    isNotNull(condition) && normalizeOptions<Condition>(condition);
+  const condition = pipe(
+    prop('conditions'),
+    find(propEq('value', conditionValue)),
+  )(field);
+  if (isUndefined(condition))
+    throw new Error(
+      `For field value "${fieldValue}" was not found condition matching condition value "${conditionValue}"`,
+    );
 
   return {
-    field: normalizedField,
+    field: normalizeOptions<Field>(field),
     conditions,
-    condition: normalizedCondition,
+    condition: normalizeOptions<Condition>(condition),
     component: prop('component', condition),
   };
 };

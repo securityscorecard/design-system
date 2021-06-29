@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Condition } from '../Filters.types';
+import { Condition, Field } from '../Filters.types';
 import { Option } from '../components/Select/Select.types';
 
-export interface useFilterRowType {
-  field: Option;
-  conditions: Condition[];
-  condition: Option;
+export type PickOption<O extends Option> = Pick<O, 'value' | 'label'>;
+
+export interface UseFilterRowType {
+  field: PickOption<Field>;
+  conditions: PickOption<Condition>[];
+  condition: PickOption<Condition>;
   component: React.ReactNode;
 }
