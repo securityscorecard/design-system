@@ -1,9 +1,6 @@
 const {includes} = require('ramda')
 
 module.exports = {
-  core: {
-    builder: "webpack5",
-  },
   stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
   addons: [
     '@storybook/addon-a11y',
