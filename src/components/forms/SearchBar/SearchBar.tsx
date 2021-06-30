@@ -100,7 +100,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const search = async (value) => {
-    if (isEmptyString(value)) {
+    if (isInvalid || isEmptyString(value)) {
       return;
     }
     setIsSearching(true);
