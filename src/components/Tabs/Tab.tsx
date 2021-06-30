@@ -45,9 +45,11 @@ const Tab: React.FC<TabProps> = ({
       $color={color}
       $isSelected={isSelected}
       $variant={variant}
+      aria-selected={isSelected}
       as={isLink ? RouterLink : 'a'}
       paddingSize={paddingSize}
       paddingType={PaddingTypes.squish}
+      role="tab"
       size={size}
       tabIndex={0}
       {...handler}
