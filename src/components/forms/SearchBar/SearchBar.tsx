@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
+import {
+  isEmptyString,
+  isNonEmptyArray,
+  isNonEmptyString,
+} from 'ramda-adjunct';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils';
 import { Icon } from '../../Icon';
@@ -10,6 +14,8 @@ import { Input } from '../Input';
 import SearchSuggestions from './SearchSuggestions';
 import { SearchBarPropType, SearchBarProps } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
+import { Error } from '../Message';
+import { validatePattern } from '../../Filters/helpers';
 
 const SEARCH_DEBOUNCE_TIME = 500;
 
@@ -68,14 +74,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
   renderSearchSuggestion = renderSuggestionDefault,
   suggestions = [],
   placeholder = 'Search',
-  isInvalid = false,
   isDisabled = false,
+  pattern,
+  errorMessage,
   ...props
 }) => {
   const { defaultValue = '' } = props as {
     defaultValue: string;
   };
 
+  const [isInvalid, setInvalid] = useState<boolean>(false);
   const [query, setQuery] = useState<string>(defaultValue);
   const [typingTimeout, setTypingTimeout] = useState<number>(0);
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -88,9 +96,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setIsSearching(false);
     setIsSuggestionsDisplayed(false);
     onClear();
+    setInvalid(false);
   };
 
   const search = async (value) => {
+    if (isInvalid || isEmptyString(value)) {
+      return;
+    }
     setIsSearching(true);
     await onSearch(value);
     setIsSearching(false);
@@ -110,8 +122,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
     );
   };
 
+  const handleOnValidate = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    const hasError = validatePattern(target) && isNonEmptyString(target.value);
+    setInvalid(hasError);
+  };
+
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
+    handleOnValidate(event);
     if (hasSuggestions) {
       debouncedSearch(event.target.value);
     }
@@ -123,7 +142,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleBlur = () => {
+  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleOnValidate(event);
     setIsSuggestionsDisplayed(false);
   };
 
@@ -169,6 +189,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <StyledInput
         isDisabled={isDisabled}
         isInvalid={isInvalid}
+        pattern={pattern}
         placeholder={placeholder}
         type="text"
         value={query}
@@ -177,6 +198,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onFocus={handleFocus}
         {...(hasSuggestions || { onKeyDown: handleKeyDown })}
       />
+      {isInvalid && <Error>{errorMessage}</Error>}
 
       {isSearching && (
         <LoadingIcon>

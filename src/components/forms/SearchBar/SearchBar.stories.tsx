@@ -23,6 +23,16 @@ export const Default: Story = () => (
   <SearchBar aria-label="SearchBar" hasSuggestions={false} {...commonArgs} />
 );
 
+export const WithValidation: Story = () => (
+  <SearchBar
+    aria-label="SearchBar"
+    errorMessage="Only a number with 1 to 5 digits is allowed"
+    hasSuggestions={false}
+    pattern="[0-9]{1,5}"
+    {...commonArgs}
+  />
+);
+
 export const WithSuggestions: Story = () => {
   const [suggestions, setSuggestions] = useState([]);
 
