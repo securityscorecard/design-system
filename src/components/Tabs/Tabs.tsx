@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { equals } from 'ramda';
 
 import { Inline, Padbox } from '../layout';
 import { TabsProps, Variants } from './Tabs.types';
@@ -32,6 +33,7 @@ const LabelList = styled(Padbox)<{
 
 const Tabs: React.FC<TabsProps> = ({
   selectedValue,
+  selectedPatternMatcher = equals,
   children,
   onSelectTab,
   size = TabSizes.sm,
@@ -50,6 +52,7 @@ const Tabs: React.FC<TabsProps> = ({
           gap={
             variant === TabVariants.segmented ? SpaceSizes.sm : SpaceSizes.lg
           }
+          role="tablist"
         >
           {React.Children.map(children, (tab) => {
             if (!React.isValidElement(tab)) {
@@ -60,7 +63,10 @@ const Tabs: React.FC<TabsProps> = ({
               size,
               variant,
               key: tab.props.value,
-              isSelected: tab.props.value === selectedValue,
+              isSelected: selectedPatternMatcher(
+                tab.props.value,
+                selectedValue,
+              ),
               onClick: onSelectTab,
             });
           })}
@@ -77,6 +83,7 @@ Tabs.propTypes = {
   size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
   margin: SpacingSizeValuePropType,
+  selectedPatternMatcher: PropTypes.func,
   onSelectTab: PropTypes.func,
 };
 
