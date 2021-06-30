@@ -1,3 +1,10 @@
+# [1.0.0-alpha.88](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.87...v1.0.0-alpha.88) (2021-06-30)
+
+
+### Features
+
+* **Tabs:** add custom pattern matching for selected tab ([542c0f2](https://github.com/securityscorecard/design-system/commit/542c0f265df6be0dfeb068c08870e4834bb31872))
+
 # [1.0.0-alpha.87](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.86...v1.0.0-alpha.87) (2021-06-30)
 
 
