@@ -191,7 +191,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   return (
     <FlexContainer flexDirection="column">
       <FlexContainer
-        alignItems="center"
+        alignItems="baseline"
         padding={{ vertical: 0.4, horizontal: 0.8 }}
       >
         {isToolbarEnabled && (
