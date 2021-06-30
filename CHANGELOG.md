@@ -1,3 +1,15 @@
+# [1.0.0-alpha.87](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.86...v1.0.0-alpha.87) (2021-06-30)
+
+
+### Bug Fixes
+
+* update condition ([ceef354](https://github.com/securityscorecard/design-system/commit/ceef354ec241fcc569b008adb29ae60744484c36))
+
+
+### Features
+
+* **Search:** add validation api ([d6fe560](https://github.com/securityscorecard/design-system/commit/d6fe5602c2f6a882c765d34a0a233f4949597a60))
+
 # [1.0.0-alpha.86](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.85...v1.0.0-alpha.86) (2021-06-29)
 
 
