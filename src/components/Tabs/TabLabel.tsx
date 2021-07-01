@@ -80,13 +80,11 @@ const underlineTab = css<LabelProps & { size: Sizes }>`
       $isSelected ? getColor($color) : getColor('graphiteHB')};
 
   &:hover {
-    text-decoration: none;
-    border-bottom: 2px solid ${({ $color }) => getColor($color)};
+    border-bottom-color: ${({ $color }) => getColor($color)};
   }
 
   &,
-  &:hover,
-  &:visited {
+  &:hover {
     color: ${getColor('graphite4B')};
   }
 `;
@@ -96,10 +94,10 @@ const textTab = css<LabelProps & { size: Sizes }>`
 
   color: ${({ $isSelected, $color }) =>
     $isSelected ? getColor('graphite4B') : getColor($color)};
+
   &:hover {
     color: ${({ $color, theme }) =>
       lighten(0.1, theme.colors[$color] || $color)};
-    text-decoration: none;
   }
 `;
 
@@ -107,14 +105,14 @@ const segmentedTab = css<LabelProps & { size: Sizes }>`
   ${({ size = TabSizes.md }) => segmentedSizes[size]};
 
   background: ${({ $isSelected }) => $isSelected && getColor('blueberry0')};
-  border: 1px solid;
-  border-color: ${({ $isSelected }) =>
-    $isSelected ? getColor('dietBlueberry') : 'transparent'};
+  border: 1px solid
+    ${({ $isSelected }) =>
+      $isSelected ? getColor('dietBlueberry') : 'transparent'};
   border-radius: calc(${getBorderRadius} / 2);
+  color: ${getColor('graphite4B')};
 
   &:hover {
     color: ${getColor('radiantBlueberry')};
-    text-decoration: none;
   }
 `;
 
@@ -135,6 +133,10 @@ const TabLabel = styled(Padbox).withConfig<LabelProps>({
 
   &:visited {
     color: ${getColor('graphite4B')};
+  }
+
+  &:hover {
+    text-decoration: none;
   }
 
   ${({ $variant }) => tabVariants[$variant]};
