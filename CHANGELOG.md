@@ -1,3 +1,10 @@
+# [1.0.0-alpha.89](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.88...v1.0.0-alpha.89) (2021-07-01)
+
+
+### Bug Fixes
+
+* **Tabs:** enforce color for segmented variant ([d34683f](https://github.com/securityscorecard/design-system/commit/d34683ff98a77a03922bfb28a77be777485ba5c2))
+
 # [1.0.0-alpha.88](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.87...v1.0.0-alpha.88) (2021-06-30)
 
 
