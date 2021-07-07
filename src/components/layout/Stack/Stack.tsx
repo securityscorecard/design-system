@@ -66,7 +66,7 @@ Stack.propTypes = {
 
 Stack.defaultProps = {
   gap: SpaceSizes.none,
-  justify: 'flex-start',
+  justify: 'stretch',
   isRecursive: false,
 };
 
