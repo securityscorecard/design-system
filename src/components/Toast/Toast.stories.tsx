@@ -33,3 +33,15 @@ export const LongToast: Story = () => (
 LongToast.parameters = {
   chromatic: { pauseAnimationAtEnd: true },
 };
+
+export const CustomWidthToast: Story = () => (
+  <Toast width={470} onClose={action('close-toast')}>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla posuere velit
+    magna, id scelerisque neque tristique sit amet. Nam mollis odio enim, sit
+    amet auctor arcu elementum ut. Ut eget iaculis tortor.
+    <Button variant="text">Action</Button>
+  </Toast>
+);
+CustomWidthToast.parameters = {
+  chromatic: { pauseAnimationAtEnd: true },
+};

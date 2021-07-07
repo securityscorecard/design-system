@@ -22,12 +22,12 @@ const ToastFromTop = keyframes`
   }
 `;
 
-const ToastContainer = styled(FlexContainer)`
+const ToastContainer = styled(FlexContainer)<{ $width?: ToastProps['width'] }>`
   position: fixed;
   z-index: 9999;
   top: ${pxToRem(70)};
   right: ${pxToRem(20)};
-  width: ${pxToRem(370)};
+  width: ${({ $width }) => pxToRem($width)};
   max-height: ${pxToRem(240)};
   background-color: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
@@ -74,8 +74,9 @@ const StyledIcon = styled(Icon)`
 
 const stopPropagation = (event) => event?.stopPropagation();
 
-const Toast: React.FC<ToastProps> = ({ onClose, children }) => (
+const Toast: React.FC<ToastProps> = ({ onClose, children, width = 370 }) => (
   <ToastContainer
+    $width={width}
     alignItems="flex-start"
     justifyContent="space-between"
     onClick={stopPropagation}
@@ -91,6 +92,7 @@ const Toast: React.FC<ToastProps> = ({ onClose, children }) => (
 
 Toast.propTypes = {
   onClose: PropTypes.func.isRequired,
+  width: PropTypes.number,
 };
 
 export default Toast;
