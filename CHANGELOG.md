@@ -1,3 +1,10 @@
+# [1.0.0-alpha.90](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.89...v1.0.0-alpha.90) (2021-07-07)
+
+
+### Features
+
+* **Stack:** change justify default prop to 'stretch' ([af8b05b](https://github.com/securityscorecard/design-system/commit/af8b05b82a7ab1b709f10dc472b821527bbf4bb7))
+
 # [1.0.0-alpha.89](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.88...v1.0.0-alpha.89) (2021-07-01)
 
 
