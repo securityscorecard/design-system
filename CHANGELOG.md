@@ -1,3 +1,10 @@
+# [1.0.0-alpha.91](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.90...v1.0.0-alpha.91) (2021-07-07)
+
+
+### Features
+
+* **Toast:** add 'width' property ([6d3d216](https://github.com/securityscorecard/design-system/commit/6d3d21689eba99fd8ffc28e3052a73efddf13389))
+
 # [1.0.0-alpha.90](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.89...v1.0.0-alpha.90) (2021-07-07)
 
 
