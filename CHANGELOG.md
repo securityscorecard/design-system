@@ -1,3 +1,10 @@
+# [1.0.0-alpha.92](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.91...v1.0.0-alpha.92) (2021-07-09)
+
+
+### Bug Fixes
+
+* **Filters:** remove memoize optimization ([f68df68](https://github.com/securityscorecard/design-system/commit/f68df683691ad96ef3f42112cada4444e70244f4))
+
 # [1.0.0-alpha.91](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.90...v1.0.0-alpha.91) (2021-07-07)
 
 
