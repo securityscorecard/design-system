@@ -12,10 +12,8 @@ import {
   has,
   hasPath,
   head,
-  identity,
   includes,
   map,
-  memoizeWith,
   path,
   pipe,
   pluck,
@@ -77,9 +75,8 @@ export const getDefaultComponentValue = (
   return propOr(componentDefaultValue, 'value', componentDefaultValue);
 };
 
-const getFieldConditions = memoizeWith(identity, (fieldValue, fields) =>
-  pipe(find(propEq('value', fieldValue)), prop('conditions'))(fields),
-);
+const getFieldConditions = (fieldValue, fields) =>
+  pipe(find(propEq('value', fieldValue)), prop('conditions'))(fields);
 
 const getDefaultCondition = (fieldValue, fields) => {
   const fieldConditions = getFieldConditions(fieldValue, fields);
