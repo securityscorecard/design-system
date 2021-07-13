@@ -1,3 +1,10 @@
+# [1.0.0-alpha.93](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.92...v1.0.0-alpha.93) (2021-07-13)
+
+
+### Bug Fixes
+
+* **Pagination:** format high page numbers ([8c9c14b](https://github.com/securityscorecard/design-system/commit/8c9c14b41d50ab018d328c23058a9d9e2d306507))
+
 # [1.0.0-alpha.92](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.91...v1.0.0-alpha.92) (2021-07-09)
 
 
