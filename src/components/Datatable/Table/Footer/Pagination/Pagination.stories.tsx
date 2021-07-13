@@ -38,6 +38,12 @@ OnLastPage.args = {
   currentPage: 15,
 };
 
+export const WithHighPageNumber = PaginationTemplate.bind({});
+WithHighPageNumber.args = {
+  pageCount: 10000,
+  currentPage: 10000,
+};
+
 export const WithCustomPageButtonsCount = PaginationTemplate.bind({});
 WithCustomPageButtonsCount.args = {
   ...InMiddle.args,

@@ -51,6 +51,9 @@ export const calculatePagePositions: (
   };
 };
 
+const formatNumber = (val: number) =>
+  new Intl.NumberFormat('en-US').format(val);
+
 const PageButtons: React.FC<PageButtonsProps> = ({
   currentPage,
   pageCount,
@@ -71,7 +74,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({
             isCurrent={page === currentPage}
             onClick={() => onChange(page)}
           >
-            {page}
+            {formatNumber(page)}
           </PaginationItem>
         ))}
       </>
@@ -90,7 +93,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({
           isCurrent={currentPage === page}
           onClick={() => onChange(page)}
         >
-          {page}
+          {formatNumber(page)}
         </PaginationItem>
       ))}
       {showRightEllipsis && <PaginationItemElipsis />}
@@ -98,7 +101,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({
         isCurrent={currentPage === pageCount}
         onClick={() => onChange(pageCount)}
       >
-        {pageCount}
+        {formatNumber(pageCount)}
       </PaginationItem>
     </>
   );
