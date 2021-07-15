@@ -1,3 +1,15 @@
+# [1.0.0-alpha.94](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.93...v1.0.0-alpha.94) (2021-07-15)
+
+
+### Bug Fixes
+
+* **primitives:** fix source of visual tests flakiness ([90b94ee](https://github.com/securityscorecard/design-system/commit/90b94eeda24e1d2ba6be560d29b7b7b9391fa39c))
+
+
+### Features
+
+* use primitives for Accordion ([b4f789c](https://github.com/securityscorecard/design-system/commit/b4f789c50d97d90f64b9e4ff6bdd75fef8f69d42))
+
 # [1.0.0-alpha.93](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.92...v1.0.0-alpha.93) (2021-07-13)
 
 
