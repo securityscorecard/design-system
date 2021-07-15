@@ -4,41 +4,54 @@ import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, pxToRem } from '../../utils';
-import { FlexContainer } from '../FlexContainer';
+import { getColor, getSpace, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
-import { AccordionCollapsibleProps, AccordionItemId } from './Accordion.types';
+import {
+  AccordionCollapsibleProps,
+  AccordionItemId,
+  AccordionItemIdPropType,
+} from './Accordion.types';
+import { Inline, Padbox } from '../layout';
+import { SpaceSizes } from '../../theme';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 
-const Header = styled(FlexContainer)`
-  width: 100%;
-  height: ${pxToRem(60)};
-  padding: ${pxToRem(0, 13)};
+const Header = styled(Padbox)`
   cursor: pointer;
+
+  &:hover ${Text} {
+    color: ${getColor('radiantBlueberry')};
+  }
 `;
 
-const Content = styled(Text)`
-  padding: ${pxToRem(24, 40)};
+const Content = styled(Padbox)`
   border-top: 1px dashed ${getColor('graphiteHB')};
 `;
 
 const Container = styled.div<{ isOpen: boolean }>`
-  width: 100%;
   ${({ isOpen }) =>
     isOpen &&
     css`
       background: ${getColor('graphite5H')};
       box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
+
+      &:not(:last-child) {
+        margin-bottom: ${getSpace(SpaceSizes.md)};
+      }
     `}
 `;
 
-const StyledIcon = styled(Icon)<{ $isRotated: boolean }>`
-  margin-right: ${pxToRem(13)};
+const IconWrapper = styled(Padbox)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${pxToRem(16)};
+  height: ${pxToRem(16)};
+`;
+const StyledIcon = styled(Icon)`
   transition: transform 200ms;
-  ${({ $isRotated }) => $isRotated && 'transform: rotate(90deg);'}
-  height: ${pxToRem(11)};
-  width: ${pxToRem(11)};
+  height: auto;
 `;
 
 const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
@@ -60,22 +73,29 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   return (
     <Container className={className} isOpen={isOpen}>
       <Header
-        alignItems="center"
+        paddingSize={SpaceSizes.md}
         role="button"
         tabIndex={0}
         onClick={() => handleHeaderClick(id)}
         onKeyDown={(e) => handleKeyDown(e, id)}
       >
-        <StyledIcon
-          $isRotated={isOpen}
-          name={SSCIconNames.chevronRight}
-          type={IconTypes.ssc}
-        />
-        <Text size={TextSizes.lg}>{title}</Text>
+        <Inline align="center" gap={SpaceSizes.md}>
+          <IconWrapper paddingSize={SpaceSizes.xxs}>
+            <StyledIcon
+              name={SSCIconNames.chevronRight}
+              rotation={isOpen ? 90 : undefined}
+              type={IconTypes.ssc}
+            />
+          </IconWrapper>
+          <Text size={TextSizes.lg}>{title}</Text>
+        </Inline>
       </Header>
       {isOpen && (
-        <Content as="div" size={TextSizes.md}>
-          {children}
+        <Content
+          paddingSize={SpaceSizes.lgPlus}
+          paddingType={PaddingTypes.squish}
+        >
+          <Text size={TextSizes.md}>{children}</Text>
         </Content>
       )}
     </Container>
@@ -85,7 +105,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
 AccordionCollapsible.propTypes = {
   title: PropTypes.string.isRequired,
   handleHeaderClick: PropTypes.func.isRequired,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: AccordionItemIdPropType.isRequired,
   className: PropTypes.string,
   isOpen: PropTypes.bool,
 };

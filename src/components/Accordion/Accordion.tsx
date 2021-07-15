@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
 
-import { FlexContainer } from '../FlexContainer';
+import { Stack } from '../layout';
 import {
   AccordionItem,
   AccordionItemId,
@@ -37,13 +37,7 @@ const Accordion: React.FC<AccordionProps> = ({
   );
 
   return (
-    <FlexContainer
-      alignItems="flex-start"
-      flexDirection="column"
-      margin="none"
-      padding="none"
-      {...props}
-    >
+    <Stack {...props}>
       {items.map(({ title, id, content }) => (
         <AccordionCollapsible
           key={`accordion-item-${title}`}
@@ -55,7 +49,7 @@ const Accordion: React.FC<AccordionProps> = ({
           {content}
         </AccordionCollapsible>
       ))}
-    </FlexContainer>
+    </Stack>
   );
 };
 
