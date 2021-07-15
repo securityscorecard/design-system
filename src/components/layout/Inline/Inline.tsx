@@ -71,12 +71,16 @@ const Inline = styled.div<InlineProps>`
 
   ${({ stretch }) => isNotUndefined(stretch) && getStretchStyle(stretch)}
 
-  > * {
+  /* FIXME: Until we remove 'margin' property from other components we need to
+    increase specificity of those nesting , since it can be overriden by inner
+    elements with the same specificity. This can lead to inconsistent output
+    of visual test if styled-components puts CSS in different order into Head. */
+  && > * {
     margin-left: 0;
     margin-right: 0;
   }
 
-  > * + * {
+  && > * + * {
     margin-left: ${({ gap, theme }) => getSpace(gap, { theme })};
   }
 `;

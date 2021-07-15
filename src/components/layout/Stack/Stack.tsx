@@ -35,12 +35,16 @@ const Stack = styled.div<StackProps>`
   align-items: ${prop('justify')};
   justify-content: flex-start;
 
-  ${({ isRecursive }) => (isRecursive ? '' : '>')} * {
+  /* FIXME: Until we remove 'margin' property from other components we need to
+    increase specificity of those nesting , since it can be overriden by inner
+    elements with the same specificity. This can lead to inconsistent output
+    of visual test if styled-components puts CSS in different order into Head. */
+  ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * {
     margin-top: 0;
     margin-bottom: 0;
   }
 
-  ${({ isRecursive }) => (isRecursive ? '' : '>')} * + * {
+  ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * + * {
     margin-top: ${({ gap, theme }) => getSpace(gap, { theme })};
   }
 
