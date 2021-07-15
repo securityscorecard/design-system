@@ -69,8 +69,6 @@ export const getPaddingSpace = ({
     // eslint-disable-next-line no-console
     console.warn(`Invalid type-size pair: ${paddingType} - ${paddingSize}
 For '${paddingType}' padding type available sizes are: ${allowedPaddingSizes[paddingType]}.`);
-
-    return [0];
   }
 
   const sizeValue = path(['space', paddingSize], theme);

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome';
 import {
   IconName,
   IconPrefix,
@@ -22,7 +25,10 @@ const StyledIcon = styled(FontAwesomeIcon)<{ color: keyof Colors }>`
   ${createSpacings};
 `;
 
-const Icon: React.FC<IconProps> = ({
+const Icon: React.FC<
+  IconProps &
+    Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>
+> = ({
   name,
   type = IconTypes.ssc,
   color,

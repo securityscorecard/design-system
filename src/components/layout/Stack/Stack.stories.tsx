@@ -2,9 +2,9 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { SpaceSizes } from '../../../theme/space.enums';
+import Stack, { StackProps } from './Stack';
 import { Button } from '../../Button';
 import { Box } from '../mocks/Box';
-import Stack, { StackProps } from './Stack';
 
 export default {
   title: 'layout/primitives/Stack',
@@ -48,10 +48,10 @@ export const RecursiveGap: Story<StackProps> = (args) => (
     <Box />
     <Box style={{ backgroundColor: '#579aa0' }}>
       <Box />
-      <Stack style={{ backgroundColor: '#b4b4b4' }}>
+      <div style={{ backgroundColor: '#b4b4b4' }}>
         <Box />
         <Box />
-      </Stack>
+      </div>
     </Box>
     <Box />
   </Stack>

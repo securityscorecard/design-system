@@ -1,56 +1,55 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
 
-import { FlexContainer } from '../FlexContainer';
+import { Stack } from '../layout';
 import {
+  AccordionItem,
   AccordionItemId,
   AccordionItemPropType,
   AccordionProps,
 } from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
 
+const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
+  filter(propEq('isOpen', true)),
+  pluck('id'),
+);
+
 const Accordion: React.FC<AccordionProps> = ({
   isCollapsedOnOpen = true,
   items,
   ...props
 }) => {
-  const [openIds, setOpenIds] = useState(
-    items.filter((item) => item.isOpen).map((item) => item.id),
-  );
+  const [openIds, setOpenIds] = useState(pickOpen(items));
 
   const handleClick = useCallback(
     (id: AccordionItemId) => {
-      setOpenIds(
-        openIds.includes(id)
-          ? openIds.filter((i) => i !== id)
+      setOpenIds((state) =>
+        includes(id, state)
+          ? reject(equals(id), state)
           : isCollapsedOnOpen
           ? [id]
-          : [...openIds, id],
+          : [...state, id],
       );
     },
-    [setOpenIds, openIds, isCollapsedOnOpen],
+    [setOpenIds, isCollapsedOnOpen],
   );
 
   return (
-    <FlexContainer
-      alignItems="flex-start"
-      flexDirection="column"
-      margin="none"
-      padding="none"
-      {...props}
-    >
-      {items.map((item) => (
+    <Stack {...props}>
+      {items.map(({ title, id, content }) => (
         <AccordionCollapsible
-          key={`accordion-item-${item.title}`}
+          key={`accordion-item-${title}`}
           handleHeaderClick={handleClick}
-          id={item.id}
-          isOpen={openIds.includes(item.id)}
-          title={item.title}
+          id={id}
+          isOpen={includes(id, openIds)}
+          title={title}
         >
-          {item.content}
+          {content}
         </AccordionCollapsible>
       ))}
-    </FlexContainer>
+    </Stack>
   );
 };
 
