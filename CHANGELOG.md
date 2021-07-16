@@ -1,3 +1,10 @@
+# [1.0.0-alpha.95](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.94...v1.0.0-alpha.95) (2021-07-16)
+
+
+### Bug Fixes
+
+* **TextArea:** pass props to correct element ([34813f5](https://github.com/securityscorecard/design-system/commit/34813f5664ee3d628c184a54bc03931366306d21))
+
 # [1.0.0-alpha.94](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.93...v1.0.0-alpha.94) (2021-07-15)
 
 
