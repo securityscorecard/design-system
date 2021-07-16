@@ -52,3 +52,7 @@ const lipsum = `Donec sed nunc sed leo vestibulum pretium. Aenean sollicitudin v
 export const Autosize: Story = () => (
   <TextArea aria-label="Text" defaultValue={lipsum} />
 );
+
+export const WithCustomWidth: Story = () => (
+  <TextArea aria-label="Text" maxLength={100} style={{ width: '60ch' }} />
+);

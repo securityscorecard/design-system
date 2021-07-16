@@ -28,6 +28,7 @@ const StyledTextArea = styled.textarea<{
   isInvalid: boolean;
   hasMaxLength: boolean;
 }>`
+  resize: none;
   width: 100%;
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('lg')};
@@ -85,7 +86,14 @@ const Counter = styled.span<{ isInvalid: boolean }>`
 
 const TextArea: React.FC<
   TextAreaProps & React.PropsWithRef<JSX.IntrinsicElements['textarea']>
-> = ({ maxLength, isInvalid = false, isDisabled = false, ...props }) => {
+> = ({
+  maxLength,
+  isInvalid = false,
+  isDisabled = false,
+  style,
+  className,
+  ...props
+}) => {
   const { value = '', defaultValue = '', onChange = noop } = props as {
     value: string;
     defaultValue: string;
@@ -110,7 +118,7 @@ const TextArea: React.FC<
   const isFieldInvalid = isInvalid || currentValueLength > maxLength;
 
   return (
-    <TextAreaWrapper height={parentHeight}>
+    <TextAreaWrapper className={className} height={parentHeight} style={style}>
       <StyledTextArea
         ref={textAreaRef}
         disabled={isDisabled}
@@ -135,6 +143,8 @@ TextArea.propTypes = {
   isDisabled: PropTypes.bool,
   value: PropTypes.string,
   defaultValue: PropTypes.string,
+  style: PropTypes.shape({}),
+  className: PropTypes.string,
   onChange: PropTypes.func,
 };
 
