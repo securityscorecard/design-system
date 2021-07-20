@@ -1,3 +1,10 @@
+# [1.0.0-alpha.96](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.95...v1.0.0-alpha.96) (2021-07-20)
+
+
+### Bug Fixes
+
+* **SearchBar:** allow search with empty string ([e810ef8](https://github.com/securityscorecard/design-system/commit/e810ef8f3a195059fd28075486ca203f8a0cd110))
+
 # [1.0.0-alpha.95](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.94...v1.0.0-alpha.95) (2021-07-16)
 
 
