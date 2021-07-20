@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {
-  isEmptyString,
-  isNonEmptyArray,
-  isNonEmptyString,
-} from 'ramda-adjunct';
+import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
 
 import { createPaddingSpacing, getFormStyle } from '../../../utils';
 import { Icon } from '../../Icon';
@@ -100,7 +96,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const search = async (value) => {
-    if (isInvalid || isEmptyString(value)) {
+    if (isInvalid) {
       return;
     }
     setIsSearching(true);
