@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
-import { assocPath, fromPairs, map, pipe } from 'ramda';
+import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
 import { isUndefined, noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
@@ -48,10 +48,10 @@ const Datatable = <D extends Record<string, unknown>>({
   controlsConfig = {},
   tableConfig = {},
 }: DatatableProps<D>): React.ReactElement => {
+  // Set canceled signal to prevent data fetch when unmounting
   useEffect(
-    () => () => {
-      DatatableStore.replace(datatableInitialState);
-    },
+    () => () =>
+      DatatableStore.replace(assoc('isCanceled', true, datatableInitialState)),
     [],
   );
 
