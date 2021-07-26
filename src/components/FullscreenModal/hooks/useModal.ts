@@ -25,6 +25,8 @@ export const useModal = (el: React.ReactElement): (() => React.ReactPortal) => {
 
     document.body.style.overflow = 'hidden';
     current.style.position = 'absolute';
+    current.style.width = '100%';
+    current.style.height = '100%';
     current.style.zIndex = '1250';
     current.style.top = '0';
     current.style.left = '0';
@@ -32,6 +34,8 @@ export const useModal = (el: React.ReactElement): (() => React.ReactPortal) => {
     return () => {
       document.body.style.removeProperty('overflow');
       current.style.removeProperty('position');
+      current.style.removeProperty('width');
+      current.style.removeProperty('height');
       current.style.removeProperty('z-index');
       current.style.removeProperty('top');
       current.style.removeProperty('left');
