@@ -1,3 +1,10 @@
+# [1.0.0-alpha.97](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.96...v1.0.0-alpha.97) (2021-07-26)
+
+
+### Bug Fixes
+
+* **Datatable:** set canceled signal when unmounting ([8840e69](https://github.com/securityscorecard/design-system/commit/8840e69a9ce0be839946c090a58728ab5ebd604a))
+
 # [1.0.0-alpha.96](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.95...v1.0.0-alpha.96) (2021-07-20)
 
 
