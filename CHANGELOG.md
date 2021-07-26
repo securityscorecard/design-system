@@ -1,3 +1,10 @@
+# [1.0.0-alpha.98](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.97...v1.0.0-alpha.98) (2021-07-26)
+
+
+### Bug Fixes
+
+* **FullscreenModal:** set fullscreen portal size ([cb0eab6](https://github.com/securityscorecard/design-system/commit/cb0eab682bd70245c19eacdc3e723b6f53dd958c))
+
 # [1.0.0-alpha.97](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.96...v1.0.0-alpha.97) (2021-07-26)
 
 
