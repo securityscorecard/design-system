@@ -1,3 +1,10 @@
+# [1.0.0-alpha.99](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.98...v1.0.0-alpha.99) (2021-07-27)
+
+
+### Bug Fixes
+
+* **FullscreenModal:** calculate STT after rendering content ([fcdfec8](https://github.com/securityscorecard/design-system/commit/fcdfec8a59a15744eef42ce4dca507aa720153a1))
+
 # [1.0.0-alpha.98](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.97...v1.0.0-alpha.98) (2021-07-26)
 
 
