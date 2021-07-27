@@ -16,21 +16,10 @@ export const useStickyFooter = (
 
   const showScrollToTopButton = useCallback(() => {
     if (isNull(modalRef.current)) return;
+
     const isScrollable =
       modalRef.current.scrollHeight > modalRef.current.offsetHeight;
     setShouldShowScrollToTopButton(isScrollable);
-    setIsFixed(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const resizeListener = useDebouncedHandler(showScrollToTopButton);
-  useEffect(() => {
-    showScrollToTopButton();
-    window.addEventListener('resize', resizeListener);
-
-    return () => {
-      window.removeEventListener('resize', resizeListener);
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,10 +36,22 @@ export const useStickyFooter = (
     } else if (!isFixed && scrollOffset < contentHeight - fixedAtThreshold) {
       setIsFixed(true);
     }
+    showScrollToTopButton();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFixed]);
 
   useStickyObserver(modalRef, modalFooterRef, isInView);
+
+  const resizeListener = useDebouncedHandler(isInView);
+  useEffect(() => {
+    showScrollToTopButton();
+    window.addEventListener('resize', resizeListener);
+
+    return () => {
+      window.removeEventListener('resize', resizeListener);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     isFixed,
