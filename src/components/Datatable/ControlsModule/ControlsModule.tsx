@@ -84,7 +84,6 @@ const ControlsModule = <D extends Record<string, unknown>>({
     ...restSearchConfig
   } = searchConfig;
 
-  const filteringStoreState = DatatableStore.useState((s) => s.filters);
   const [controlsState, setControlsState] = useState<ControlsLocalState>({
     [ControlTypes.filters]: mergeControlState(
       prepareControlState([
@@ -290,7 +289,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
           <Filters
             fields={filteringFields}
             isLoading={isDataLoading}
-            state={filteringStoreState}
+            state={filteringState}
             onApply={handleApplyFilter}
             onCancel={onCancelLoading}
             onClose={handleCloseFilter}
