@@ -1,3 +1,10 @@
+# [1.0.0-alpha.100](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.99...v1.0.0-alpha.100) (2021-07-28)
+
+
+### Features
+
+* **Datatable:** render tooltip with nullish values ([2bba037](https://github.com/securityscorecard/design-system/commit/2bba03713826b830dbe9c6b477f7dc28bca04f53))
+
 # [1.0.0-alpha.99](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.98...v1.0.0-alpha.99) (2021-07-27)
 
 
