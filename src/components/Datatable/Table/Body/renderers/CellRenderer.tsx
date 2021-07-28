@@ -24,11 +24,22 @@ const CellRenderer = <D extends Record<string, unknown>>({
   },
   row: { original: rowData },
 }: CellRendererProps<D>): React.ReactElement => {
+  const cellValue = isNotUndefined(cellFormatter)
+    ? cellFormatter(value, rowData)
+    : value;
+  const shouldRenderTooltip = isNotUndefined(cellTooltipPopupComposer);
+  const renderTooltipPopup = () => cellTooltipPopupComposer(cellValue, rowData);
+
   if (nullCondition(value)) {
     return (
-      <span className="ds-table-cell-null">
-        {isNotUndefined(nullConditionValue) ? nullConditionValue : value}
-      </span>
+      <TooltipWrapper
+        popupRenderer={renderTooltipPopup}
+        shouldRender={shouldRenderTooltip}
+      >
+        <span className="ds-table-cell-null">
+          {isNotUndefined(nullConditionValue) ? nullConditionValue : value}
+        </span>
+      </TooltipWrapper>
     );
   }
 
@@ -47,12 +58,6 @@ const CellRenderer = <D extends Record<string, unknown>>({
       />
     );
   }
-
-  const cellValue = isNotUndefined(cellFormatter)
-    ? cellFormatter(value, rowData)
-    : value;
-  const shouldRenderTooltip = isNotUndefined(cellTooltipPopupComposer);
-  const renderTooltipPopup = () => cellTooltipPopupComposer(cellValue, rowData);
 
   if (cellType === CellTypes.link || cellType === CellTypes.discreteLink) {
     return (

@@ -87,6 +87,7 @@ WithNullValue.args = {
     nullCondition: equals('unknown'),
   },
 };
+
 export const WithCustomNullValue: Story<CellRendererProps<CellRendererData>> = (
   args,
 ) => <CellRenderer<CellRendererData> {...args} />;
@@ -95,6 +96,24 @@ WithCustomNullValue.args = {
   column: {
     ...WithNullValue.args.column,
     nullConditionValue: 'NaN',
+  },
+};
+
+export const NullValueWithTooltip: Story<
+  CellRendererProps<CellRendererData>
+> = (args) => <CellRenderer<CellRendererData> {...args} />;
+NullValueWithTooltip.args = {
+  ...WithCustomNullValue.args,
+  column: {
+    ...WithCustomNullValue.args.column,
+    cellTooltipPopupComposer: (val, row) => (
+      <div>
+        Value: {val}
+        <br />
+        Row data: <br />
+        <pre>{JSON.stringify(row, null, 2)}</pre>
+      </div>
+    ),
   },
 };
 
