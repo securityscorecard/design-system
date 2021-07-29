@@ -8,10 +8,22 @@ import { SpaceSize } from '../../../theme/space.types';
 import { SpaceSizes } from '../../../theme/space.enums';
 
 export interface CenterProps {
-  maxWidth: number;
-  gutters: SpaceSize;
-  areChildrenCentered: boolean;
-  isTextCentered: boolean;
+  /**
+   * Maximal content width
+   */
+  maxWidth?: number;
+  /**
+   * Gutters arround content. Gutters are not counted in maximal content width.
+   */
+  gutters?: SpaceSize;
+  /**
+   * Centers all children inside component
+   */
+  areChildrenCentered?: boolean;
+  /**
+   * Centers text in component
+   */
+  isTextCentered?: boolean;
 }
 
 const Center = styled.div.withConfig<CenterProps>({
