@@ -120,7 +120,7 @@ export interface TableProps<D extends Record<string, unknown>>
   onCancelLoading: () => void;
   dataPrimaryKey?: PrimaryKey<D>;
   defaultSelectedRows?: Record<IdType<D>, boolean>;
-  defaultPageIndex?: number;
+  defaultPageIndex: number;
 }
 
 export interface CustomColumnOptions<D> extends RendererColumnOptions<D> {
