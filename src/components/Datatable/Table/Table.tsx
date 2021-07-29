@@ -92,6 +92,7 @@ const Table = <D extends Record<string, unknown>>({
   hasSorting,
   hasServerSideSorting,
   defaultSortBy,
+  defaultPageIndex,
   defaultColumnOrder,
 }: // defaultHiddenColumns,
 TableProps<D>): React.ReactElement => {
@@ -139,6 +140,7 @@ TableProps<D>): React.ReactElement => {
       initialState: {
         // PAGINATION
         pageSize: defaultPageSize,
+        pageIndex: defaultPageIndex,
         // SORTING
         sortBy: defaultSortBy,
         // SELECTION

@@ -87,6 +87,7 @@ export const TableConfigPropType = {
   defaultPageSize: PropTypes.number,
   hasSorting: PropTypes.bool,
   hasServerSideSorting: PropTypes.bool,
+  defaultPageIndex: PropTypes.number,
   defaultSortBy: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -118,6 +119,7 @@ export interface TableProps<D extends Record<string, unknown>>
   onCancelLoading: () => void;
   dataPrimaryKey?: PrimaryKey<D>;
   defaultSelectedRows?: Record<IdType<D>, boolean>;
+  defaultPageIndex?: number;
 }
 
 export interface CustomColumnOptions<D> extends RendererColumnOptions<D> {
