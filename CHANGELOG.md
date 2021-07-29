@@ -1,3 +1,15 @@
+# [1.0.0-alpha.102](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.101...v1.0.0-alpha.102) (2021-07-29)
+
+
+### Bug Fixes
+
+* **SearchBar:** storyshots and types ([fd427a6](https://github.com/securityscorecard/design-system/commit/fd427a66fb0e82647f6364af87b601b8518d891b))
+
+
+### Features
+
+* **SearchBar:** isValidatedOnSubmit option ([c0298ef](https://github.com/securityscorecard/design-system/commit/c0298ef09753663d8e6952a17b192309c57e7c59))
+
 # [1.0.0-alpha.101](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.100...v1.0.0-alpha.101) (2021-07-29)
 
 
