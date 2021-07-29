@@ -140,7 +140,7 @@ TableProps<D>): React.ReactElement => {
       initialState: {
         // PAGINATION
         pageSize: defaultPageSize,
-        pageIndex: defaultPageIndex,
+        pageIndex: defaultPageIndex || 0,
         // SORTING
         sortBy: defaultSortBy,
         // SELECTION
