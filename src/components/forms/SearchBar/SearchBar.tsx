@@ -71,6 +71,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   suggestions = [],
   placeholder = 'Search',
   isDisabled = false,
+  isValidatedOnSubmit = false,
   pattern,
   errorMessage,
   ...props
@@ -125,15 +126,24 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-    handleOnValidate(event);
+    const newQuery = event.target.value;
+    setQuery(newQuery);
+    if (!isNonEmptyString(newQuery)) {
+      clearSearch();
+    }
+    if (!isValidatedOnSubmit) {
+      handleOnValidate(event);
+    }
     if (hasSuggestions) {
-      debouncedSearch(event.target.value);
+      debouncedSearch(newQuery);
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
+      if (isValidatedOnSubmit) {
+        handleOnValidate(event);
+      }
       search(query);
     }
   };
