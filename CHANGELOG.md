@@ -1,3 +1,16 @@
+# [1.0.0-alpha.101](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.100...v1.0.0-alpha.101) (2021-07-29)
+
+
+### Bug Fixes
+
+* **Center:** make all props optional in TS ([117258d](https://github.com/securityscorecard/design-system/commit/117258ddc469a295103c28d226fa00ebfa1ef153))
+* **Datatable:** add default pageIndex value ([8c03e8d](https://github.com/securityscorecard/design-system/commit/8c03e8dede7e68dda926063eb500aae27a4ba675))
+
+
+### Features
+
+* **Datatable:** add support for default page index ([5f31d9a](https://github.com/securityscorecard/design-system/commit/5f31d9a4c5074bfb15a845e5c0ad095afb3a13a1))
+
 # [1.0.0-alpha.100](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.99...v1.0.0-alpha.100) (2021-07-28)
 
 
