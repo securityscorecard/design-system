@@ -33,6 +33,17 @@ export const WithValidation: Story = () => (
   />
 );
 
+export const WithValidationOnSubmit: Story = () => (
+  <SearchBar
+    aria-label="SearchBar"
+    errorMessage="Only a number with 1 to 5 digits is allowed"
+    hasSuggestions={false}
+    pattern="[0-9]{1,5}"
+    isValidatedOnSubmit
+    {...commonArgs}
+  />
+);
+
 export const WithSuggestions: Story = () => {
   const [suggestions, setSuggestions] = useState([]);
 

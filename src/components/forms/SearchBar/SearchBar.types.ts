@@ -46,6 +46,7 @@ export interface SearchBarProps
   placeholder?: string;
   suggestions?: FilterSuggestion[] | SearchSuggestion[];
   renderSearchSuggestion?: renderSuggestionFunc;
+  isValidatedOnSubmit?: boolean;
   pattern?: string;
   errorMessage?: string;
 }
@@ -57,6 +58,7 @@ export const SearchBarPropType = {
   hasSuggestions: PropTypes.bool,
   suggestions: PropTypes.arrayOf(SuggestionPropType),
   renderSearchSuggestion: PropTypes.func,
+  isValidatedOnSubmit: PropTypes.bool,
   pattern: PropTypes.string,
   errorMessage: PropTypes.string,
   isDisabled: PropTypes.bool,
