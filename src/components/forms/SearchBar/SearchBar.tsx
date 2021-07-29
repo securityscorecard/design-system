@@ -139,7 +139,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       if (isValidatedOnSubmit) {
         handleOnValidate(event);
