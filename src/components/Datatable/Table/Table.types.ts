@@ -62,6 +62,7 @@ export interface TableConfig<D> {
   hasPagination: boolean;
   hasServerSidePagination: boolean;
   defaultPageSize: number;
+  defaultPageIndex: number;
   hasSorting: boolean;
   hasServerSideSorting: boolean;
   defaultSortBy: SortingRule<D>[];

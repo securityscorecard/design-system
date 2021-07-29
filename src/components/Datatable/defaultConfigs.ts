@@ -17,6 +17,7 @@ export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
   hasPagination: true,
   hasServerSidePagination: true,
   defaultPageSize: 50,
+  defaultPageIndex: 0,
   hasSorting: true,
   hasServerSideSorting: true,
   defaultSortBy: [],
