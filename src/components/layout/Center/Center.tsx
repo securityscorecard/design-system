@@ -27,7 +27,13 @@ export interface CenterProps {
 }
 
 const Center = styled.div.withConfig<CenterProps>({
-  shouldForwardProp: (prop) => !includes(prop, ['maxWidth', 'gutters']),
+  shouldForwardProp: (prop) =>
+    !includes(prop, [
+      'maxWidth',
+      'gutters',
+      'areChildrenCentered',
+      'isTextCentered',
+    ]),
 })`
   box-sizing: content-box;
   margin-left: auto;

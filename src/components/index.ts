@@ -2,6 +2,7 @@ export * from './Accordion';
 export * from './Badge';
 export * from './Button';
 export * from './Collapsible';
+export * from './ControlDropdown';
 export * from './Datatable';
 export * from './FlexContainer';
 export * from './HexGrade';

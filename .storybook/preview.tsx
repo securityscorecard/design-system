@@ -62,7 +62,6 @@ export const parameters = {
       </>
     ),
   },
-  actions: { argTypesRegex: '^on.*' },
   // storycap settings
   screenshot: {
     fullPage: true,

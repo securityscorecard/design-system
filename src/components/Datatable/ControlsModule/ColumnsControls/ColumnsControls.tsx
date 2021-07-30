@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 
-import { ControlDropdown } from '../ControlDropdown';
+import { ControlDropdown } from '../../../ControlDropdown';
 import { ColumnsControlsProps } from './ColumnsControls.types';
 import ColumnsList from './components/ColumnsList';
 import { useColumnOrder } from './hooks/useColumnOrder';
@@ -46,13 +46,13 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
     <span ref={parentRef}>
       {children}
       <ControlDropdown
-        isControlPaneOpen={isOpen}
+        isOpen={isOpen}
         parentRef={parentRef}
         title="Columns"
-        onApply={handleApplyColumnsControl}
         onClose={handleCloseColumnsControl}
         onOpen={handleOpenColumnsControl}
         onReset={handleResetColumnsControl}
+        onSubmit={handleApplyColumnsControl}
       >
         <ColumnsList
           columns={orderedColumns}
