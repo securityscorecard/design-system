@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { pluck } from 'ramda';
 import { noop } from 'ramda-adjunct';
 
 import { ControlDropdown } from '../../../ControlDropdown';
-import { ColumnsControlsProps } from './ColumnsControls.types';
-import ColumnsList from './components/ColumnsList';
+import { SortableList } from '../../../SortableList';
+import { DatatableStore } from '../../Datatable.store';
 import { useColumnOrder } from './hooks/useColumnOrder';
+import { ColumnsControlsProps } from './ColumnsControls.types';
 
 const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   children,
@@ -24,6 +26,7 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
     resetOrderedColumns,
     isInDefaultOrder,
   } = useColumnOrder();
+  const allColumns = DatatableStore.useState((s) => s.columns);
 
   const handleOpenColumnsControl = () => {
     onOpen();
@@ -54,9 +57,10 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
         onReset={handleResetColumnsControl}
         onSubmit={handleApplyColumnsControl}
       >
-        <ColumnsList
-          columns={orderedColumns}
-          setColumns={setLocalColumnOrder}
+        <SortableList
+          items={orderedColumns}
+          labels={pluck('label')(allColumns)}
+          onOrderChange={setLocalColumnOrder}
         />
       </ControlDropdown>
     </span>

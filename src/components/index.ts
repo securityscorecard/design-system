@@ -12,6 +12,7 @@ export * from './Filters';
 export * from './FullscreenModal';
 export * from './Nav';
 export * from './Spinner';
+export * from './SortableList';
 export * from './Tabs';
 export * from './Toast';
 export * from './Tooltip';

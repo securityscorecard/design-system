@@ -57,55 +57,56 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
     hasInternalShowHide: false,
   });
 
+  if (!isOpen) {
+    return null;
+  }
   return (
-    isOpen && (
-      <Pane>
-        <Padbox paddingSize={SpaceSizes.md}>
-          <Stack gap={SpaceSizes.md}>
-            <Inline
-              align="center"
-              as="header"
-              gap={SpaceSizes.md}
-              justify="space-between"
+    <Pane>
+      <Padbox paddingSize={SpaceSizes.md}>
+        <Stack gap={SpaceSizes.md}>
+          <Inline
+            align="center"
+            as="header"
+            gap={SpaceSizes.md}
+            justify="space-between"
+          >
+            <H4 margin="none">{title}</H4>
+            <CloseButton
+              color={ButtonColors.secondary}
+              size={ButtonSizes.lg}
+              variant={ButtonVariants.text}
+              onClick={onClose}
             >
-              <H4 margin="none">{title}</H4>
-              <CloseButton
-                color={ButtonColors.secondary}
-                size={ButtonSizes.lg}
-                variant={ButtonVariants.text}
-                onClick={onClose}
-              >
-                <Icon aria-label="Close dropdown" name={SSCIconNames.times} />
-              </CloseButton>
-            </Inline>
-            {children}
-            <Inline
-              align="center"
-              as="footer"
-              gap={SpaceSizes.md}
-              justify="flex-end"
-              stretch="start"
-            >
-              {isNotUndefined(onReset) && (
-                <div>
-                  <Button variant={ButtonVariants.text} onClick={onReset}>
-                    {resetLabel}
-                  </Button>
-                </div>
-              )}
-              <Inline gap={SpaceSizes.sm} justify="flex-end">
-                <Button variant={ButtonVariants.outline} onClick={onClose}>
-                  {closeLabel}
+              <Icon aria-label="Close dropdown" name={SSCIconNames.times} />
+            </CloseButton>
+          </Inline>
+          {children}
+          <Inline
+            align="center"
+            as="footer"
+            gap={SpaceSizes.md}
+            justify="flex-end"
+            stretch="start"
+          >
+            {isNotUndefined(onReset) && (
+              <div>
+                <Button variant={ButtonVariants.text} onClick={onReset}>
+                  {resetLabel}
                 </Button>
-                <Button variant={ButtonVariants.solid} onClick={onSubmit}>
-                  {submitLabel}
-                </Button>
-              </Inline>
+              </div>
+            )}
+            <Inline gap={SpaceSizes.sm} justify="flex-end">
+              <Button variant={ButtonVariants.outline} onClick={onClose}>
+                {closeLabel}
+              </Button>
+              <Button variant={ButtonVariants.solid} onClick={onSubmit}>
+                {submitLabel}
+              </Button>
             </Inline>
-          </Stack>
-        </Padbox>
-      </Pane>
-    )
+          </Inline>
+        </Stack>
+      </Padbox>
+    </Pane>
   );
 };
 
