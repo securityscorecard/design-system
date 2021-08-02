@@ -49,6 +49,7 @@ export interface SearchBarProps
   isValidatedOnSubmit?: boolean;
   pattern?: string;
   errorMessage?: string;
+  defaultValue?: string;
 }
 
 export const SearchBarPropType = {
