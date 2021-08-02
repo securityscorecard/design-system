@@ -1,3 +1,16 @@
+# [1.0.0-alpha.103](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.102...v1.0.0-alpha.103) (2021-08-02)
+
+
+### Bug Fixes
+
+* **SearchBar:** default value pass through and typing ([2ede792](https://github.com/securityscorecard/design-system/commit/2ede79245cd164dfdad0a34c67a5578a26321c05))
+* **Table:** fix typings ([63ba166](https://github.com/securityscorecard/design-system/commit/63ba1663198d9b1f34a0d39f86a7120538f28330))
+
+
+### Features
+
+* **Table:** add default page index value ([9bfc2f7](https://github.com/securityscorecard/design-system/commit/9bfc2f772a04d613d283f08884258e190e184bcc))
+
 # [1.0.0-alpha.102](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.101...v1.0.0-alpha.102) (2021-07-29)
 
 
