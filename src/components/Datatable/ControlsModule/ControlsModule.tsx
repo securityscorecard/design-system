@@ -81,6 +81,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   const {
     onSearch,
     onClear: onSearchClear,
+    defaultValue: defaultSearchValue,
     ...restSearchConfig
   } = searchConfig;
 
@@ -111,6 +112,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
 
   useEffect(() => {
     DatatableStore.update((s) => {
+      s.query = defaultSearchValue;
       s.filters = filteringState;
       s.hasAppliedFilters = controlsState[ControlTypes.filters].isApplied;
     });
@@ -275,6 +277,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
         {hasSearch && (
           <FlexContainer flexGrow={1}>
             <SearchBar
+              defaultValue={defaultSearchValue}
               hasSuggestions={false}
               onClear={handleOnSearchClear}
               onSearch={handleOnSearch}
