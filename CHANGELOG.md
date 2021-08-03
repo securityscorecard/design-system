@@ -1,3 +1,11 @@
+# [1.0.0-alpha.105](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.104...v1.0.0-alpha.105) (2021-08-03)
+
+
+### Features
+
+* **ControlDropdown:** extract and export component ([cc243bb](https://github.com/securityscorecard/design-system/commit/cc243bb4c3c0b1657ab45f7e5f065a9e4759b8f1))
+* **SortableList:** extract and export component ([2336e69](https://github.com/securityscorecard/design-system/commit/2336e6944e72857b155ae96c4bc49a709c72eae0))
+
 # [1.0.0-alpha.104](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.103...v1.0.0-alpha.104) (2021-08-03)
 
 
