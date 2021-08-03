@@ -162,6 +162,8 @@ Datatable.propTypes = {
     }),
     defaultIsFilteringOpen: PropTypes.bool,
     defaultIsFilteringApplied: PropTypes.bool,
+    defaultIsColumnOrderingOpen: PropTypes.bool,
+    defaultIsColumnOrderingApplied: PropTypes.bool,
   }),
   tableConfig: PropTypes.exact(TableConfigPropType),
   onDataFetch: PropTypes.func,
