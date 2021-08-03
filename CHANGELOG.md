@@ -1,3 +1,10 @@
+# [1.0.0-alpha.104](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.103...v1.0.0-alpha.104) (2021-08-03)
+
+
+### Bug Fixes
+
+* **SearchBar:** run search if validated ([271c858](https://github.com/securityscorecard/design-system/commit/271c8588a10d241d6d3f51eec34a19c8c8bd5d3e))
+
 # [1.0.0-alpha.103](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.102...v1.0.0-alpha.103) (2021-08-02)
 
 
