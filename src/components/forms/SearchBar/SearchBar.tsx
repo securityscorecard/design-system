@@ -123,6 +123,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     const { target } = event;
     const hasError = validatePattern(target) && isNonEmptyString(target.value);
     setInvalid(hasError);
+    return hasError;
   };
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,7 +132,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (!isNonEmptyString(newQuery)) {
       clearSearch();
     }
-    if (!isValidatedOnSubmit) {
+    if (!isValidatedOnSubmit || isInvalid) {
       handleOnValidate(event);
     }
     if (hasSuggestions) {
@@ -141,10 +142,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      if (isValidatedOnSubmit) {
-        handleOnValidate(event);
+      const hasError = handleOnValidate(event);
+      if (!hasError) {
+        search(query);
       }
-      search(query);
     }
   };
 
