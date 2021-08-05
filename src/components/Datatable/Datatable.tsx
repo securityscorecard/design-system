@@ -151,6 +151,7 @@ Datatable.propTypes = {
       placeholder: PropTypes.string,
       onSearch: PropTypes.func,
       onClear: PropTypes.func,
+      defaultValue: PropTypes.string,
     }),
     hasFiltering: PropTypes.bool,
     filteringConfig: PropTypes.exact({
