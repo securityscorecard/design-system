@@ -1,3 +1,11 @@
+# [1.0.0-alpha.106](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.105...v1.0.0-alpha.106) (2021-08-06)
+
+
+### Bug Fixes
+
+* **Datatable:** fix prop-types for search ([0323815](https://github.com/securityscorecard/design-system/commit/0323815c95628f703a0021b3faf8db8c901f8ee8))
+* **Datatable:** fix prop-types of controlsConfig ([f1e5714](https://github.com/securityscorecard/design-system/commit/f1e57148bd1b5755d1e438004e8c32a4bfd7c46b))
+
 # [1.0.0-alpha.105](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.104...v1.0.0-alpha.105) (2021-08-03)
 
 
