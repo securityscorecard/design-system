@@ -77,7 +77,10 @@ Footer.propTypes = {
   width: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
   modalRef: PropTypes.exact({
-    current: PropTypes.instanceOf(HTMLElement),
+    current:
+      typeof Element === 'undefined'
+        ? PropTypes.any
+        : PropTypes.instanceOf(HTMLElement),
   }).isRequired,
   scrollToTopButtonLabel: PropTypes.string,
 };

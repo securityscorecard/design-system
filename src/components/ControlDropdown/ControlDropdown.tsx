@@ -113,7 +113,10 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
 ControlDropdown.propTypes = {
   title: PropTypes.string.isRequired,
   parentRef: PropTypes.exact({
-    current: PropTypes.instanceOf(HTMLElement),
+    current:
+      typeof Element === 'undefined'
+        ? PropTypes.any
+        : PropTypes.instanceOf(HTMLSpanElement),
   }).isRequired,
   onOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,

@@ -88,8 +88,10 @@ Header.propTypes = {
   width: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
   modalRef: PropTypes.exact({
-    // eslint-disable-next-line react/no-unused-prop-types
-    current: PropTypes.instanceOf(HTMLElement),
+    current:
+      typeof Element === 'undefined'
+        ? PropTypes.any
+        : PropTypes.instanceOf(HTMLElement),
   }).isRequired,
   handleClose: PropTypes.func.isRequired,
 };
