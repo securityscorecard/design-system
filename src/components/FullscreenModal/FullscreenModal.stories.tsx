@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
@@ -95,9 +94,6 @@ const Sidebar: React.FC<{
       </ul>
     </nav>
   );
-};
-Sidebar.propTypes = {
-  modalRef: PropTypes.instanceOf(HTMLElement),
 };
 
 export const SingleColumn6: Story = () => (
