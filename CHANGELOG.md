@@ -1,3 +1,10 @@
+# [1.0.0-alpha.107](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.106...v1.0.0-alpha.107) (2021-08-11)
+
+
+### Bug Fixes
+
+* **ssr:** make design-system SSR compatible ([ff83cdc](https://github.com/securityscorecard/design-system/commit/ff83cdcc60cd97fcd5ddbc70723862b127e69450))
+
 # [1.0.0-alpha.106](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.105...v1.0.0-alpha.106) (2021-08-06)
 
 
