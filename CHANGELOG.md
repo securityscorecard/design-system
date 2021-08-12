@@ -1,3 +1,10 @@
+# [1.0.0-alpha.108](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.107...v1.0.0-alpha.108) (2021-08-12)
+
+
+### Features
+
+* **padding:** remove size restriction warning ([2fcbd08](https://github.com/securityscorecard/design-system/commit/2fcbd088cceae15c71d94eb82822aec72193c67d))
+
 # [1.0.0-alpha.107](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.106...v1.0.0-alpha.107) (2021-08-11)
 
 
