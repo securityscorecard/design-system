@@ -94,7 +94,7 @@ export default createGlobalStyle`
     -webkit-appearance: none;
   }
   *, *:before, *:after {
-    box-sizing: inherit;
+    box-sizing: border-box;
     /* Fix antialiasing */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

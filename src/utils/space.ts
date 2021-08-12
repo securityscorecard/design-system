@@ -3,16 +3,7 @@ import {
   FlattenSimpleInterpolation,
   css,
 } from 'styled-components';
-import {
-  any,
-  apply,
-  concat,
-  curry,
-  includes,
-  isEmpty,
-  path,
-  pipe,
-} from 'ramda';
+import { any, apply, concat, curry, isEmpty, path, pipe } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 
 import { BASE_LINE_HEIGHT } from '../theme/constants';
@@ -20,44 +11,13 @@ import { SpacingSizeValue } from '../types/spacing.types';
 import { SpaceSizes } from '../theme/space.enums';
 import { Theme, pxToRem } from './helpers';
 import { PaddingTypes } from '../components/layout/Padbox/Padbox.enums';
+import { SpaceSize } from '../theme/space.types';
 
-const allowedPaddingSizes = {
-  [PaddingTypes.square]: [
-    SpaceSizes.none,
-    SpaceSizes.xs,
-    SpaceSizes.sm,
-    SpaceSizes.md,
-    SpaceSizes.mdPlus,
-    SpaceSizes.lg,
-    SpaceSizes.lgPlus,
-    SpaceSizes.xl,
-  ],
-  [PaddingTypes.squish]: [
-    SpaceSizes.none,
-    SpaceSizes.sm,
-    SpaceSizes.md,
-    SpaceSizes.mdPlus,
-    SpaceSizes.lg,
-  ],
-  [PaddingTypes.stretch]: [
-    SpaceSizes.none,
-    SpaceSizes.sm,
-    SpaceSizes.md,
-    SpaceSizes.mdPlus,
-    SpaceSizes.lg,
-  ],
+export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];
+type PaddingSpaceProps = {
+  paddingType: PaddingType;
+  paddingSize: SpaceSize;
 };
-
-interface InsetSquare {
-  paddingType: 'square';
-  paddingSize: typeof allowedPaddingSizes['square'][number];
-}
-interface InsetAsymetric {
-  paddingType: 'squish' | 'stretch';
-  paddingSize: typeof allowedPaddingSizes['squish'][number];
-}
-
-type PaddingSpaceProps = InsetSquare | InsetAsymetric;
 type GetPaddingSpaceArgs = PaddingSpaceProps & { theme: DefaultTheme };
 
 export const getPaddingSpace = ({
@@ -65,12 +25,6 @@ export const getPaddingSpace = ({
   paddingType = PaddingTypes.square,
   theme,
 }: GetPaddingSpaceArgs): [number, number] | [number] => {
-  if (!includes(paddingSize, allowedPaddingSizes[paddingType])) {
-    // eslint-disable-next-line no-console
-    console.warn(`Invalid type-size pair: ${paddingType} - ${paddingSize}
-For '${paddingType}' padding type available sizes are: ${allowedPaddingSizes[paddingType]}.`);
-  }
-
   const sizeValue = path(['space', paddingSize], theme);
 
   switch (paddingType) {
