@@ -5,8 +5,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { createPadding } from '../../../utils';
 import { PaddingTypes } from './Padbox.enums';
-
-export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];
+import { PaddingType } from '../../../utils/space';
 
 export interface PadboxProps {
   /**
