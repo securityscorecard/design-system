@@ -23,6 +23,9 @@ export const SSCIconNames = {
   longArrowRight: 'long-arrow-right',
   ellipsisH: 'ellipsis-h',
   timesSolid: 'times-solid',
+  ban: 'ban',
+  exclamationTriangle: 'exclamation-triangle',
+  infoCircle: 'info-circle',
 } as const;
 
 export const IconTypes = {
