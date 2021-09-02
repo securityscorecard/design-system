@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Banner from './Banner';
 import { BannerVariants } from './Banner.enums';
+import { Text } from '../typography';
 
 export default {
   title: 'components/Banner',
@@ -17,55 +18,57 @@ export default {
 
 export const InfoBanner: Story = () => (
   <Banner
-    cta1={{
-      text: 'First CTA',
-      onClick: action('click-first-cta'),
+    actionA={{
+      text: 'Action A',
+      onClick: action('click-action-a'),
     }}
-    cta2={{
-      text: 'Second CTA',
-      onClick: action('click-second-cta'),
+    actionB={{
+      text: 'Action B',
+      onClick: action('click-action-b'),
     }}
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    Info Banner
+    <Text size="md">Info Banner</Text>
   </Banner>
 );
 
 export const LongInfoBanner: Story = () => (
   <Banner
-    cta1={{
-      text: 'First CTA',
-      onClick: action('click-first-cta'),
+    actionA={{
+      text: 'Action A',
+      onClick: action('click-action-a'),
     }}
-    cta2={{
-      text: 'Second CTA',
-      onClick: action('click-second-cta'),
+    actionB={{
+      text: 'Action B',
+      onClick: action('click-action-b'),
     }}
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat.
+    <Text size="md">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </Text>
   </Banner>
 );
 
-export const InfoBannerOneCTA: Story = () => (
+export const InfoBannerOneAction: Story = () => (
   <Banner
-    cta1={{
-      text: 'CTA',
-      onClick: action('click-cta'),
+    actionA={{
+      text: 'Action',
+      onClick: action('click-action'),
     }}
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    Info Banner
+    <Text size="md">Info Banner</Text>
   </Banner>
 );
 
-export const InfoBannerNoCTA: Story = () => (
+export const InfoBannerNoAction: Story = () => (
   <Banner variant={BannerVariants.info} onClose={action('close-banner')}>
     Info Banner
   </Banner>
@@ -73,34 +76,34 @@ export const InfoBannerNoCTA: Story = () => (
 
 export const WarnBanner: Story = () => (
   <Banner
-    cta1={{
-      text: 'First CTA',
-      onClick: action('click-first-cta'),
+    actionA={{
+      text: 'Action A',
+      onClick: action('click-action-a'),
     }}
-    cta2={{
-      text: 'Second CTA',
-      onClick: action('click-second-cta'),
+    actionB={{
+      text: 'Action B',
+      onClick: action('click-action-b'),
     }}
     variant={BannerVariants.warn}
     onClose={action('close-banner')}
   >
-    Warn Banner
+    <Text size="md">Warn Banner</Text>
   </Banner>
 );
 
 export const ErrorBanner: Story = () => (
   <Banner
-    cta1={{
-      text: 'First CTA',
-      onClick: action('click-first-cta'),
+    actionA={{
+      text: 'Action A',
+      onClick: action('click-action-a'),
     }}
-    cta2={{
-      text: 'Second CTA',
-      onClick: action('click-second-cta'),
+    actionB={{
+      text: 'Action B',
+      onClick: action('click-action-b'),
     }}
     variant={BannerVariants.error}
     onClose={action('close-banner')}
   >
-    Error Banner
+    <Text size="md">Error Banner</Text>
   </Banner>
 );

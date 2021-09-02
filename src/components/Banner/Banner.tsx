@@ -27,8 +27,8 @@ const iconVariants = {
 
 const bgVariants = {
   [BannerVariants.info]: { color: colors.blueberry0, alpha: 0.5 },
-  [BannerVariants.warn]: { color: colors.pumpkin, alpha: 0.95 },
-  [BannerVariants.error]: { color: colors.strawberry, alpha: 0.95 },
+  [BannerVariants.warn]: { color: colors.pumpkin, alpha: 0.9 },
+  [BannerVariants.error]: { color: colors.strawberry, alpha: 0.9 },
 };
 
 const StyledPadbox = styled(Padbox)<Pick<BannerProps, 'variant'>>`
@@ -48,6 +48,7 @@ const IconContainer = styled.div<Pick<BannerProps, 'variant'>>`
 
 const StyledIcon = styled(Icon)`
   color: ${colors.graphite5H};
+  font-size: ${pxToRem(24)};
 `;
 
 // TODO Extract close button and unify it across DS
@@ -68,15 +69,15 @@ const TimesIcon = styled(Icon)`
 const Banner: React.FC<BannerProps> = ({
   children,
   variant = BannerVariants.info,
-  cta1,
-  cta2,
+  actionA,
+  actionB,
   onClose,
 }) => (
   <StyledPadbox variant={variant}>
     <Inline justify="space-between">
       <Inline align="center">
         <IconContainer variant={variant}>
-          <Padbox paddingSize="lg" paddingType="squish">
+          <Padbox paddingSize="mdPlus" paddingType="squish">
             <StyledIcon
               name={iconVariants[variant]}
               type={IconTypes.ssc}
@@ -84,32 +85,30 @@ const Banner: React.FC<BannerProps> = ({
             />
           </Padbox>
         </IconContainer>
-        <Padbox paddingSize="md" paddingType="stretch">
-          {children}
-        </Padbox>
+        <Padbox paddingSize="md">{children}</Padbox>
       </Inline>
       <Inline align="center">
-        <Inline align="center" gap="lg">
-          {isNotUndefined(cta1) && (
+        <Inline align="center" gap="mdPlus">
+          {isNotUndefined(actionA) && (
             <Button
               color="primary"
-              href={cta1.href}
-              to={cta1.to}
+              href={actionA.href}
+              to={actionA.to}
               variant="text"
-              onClick={cta1.onClick}
+              onClick={actionA.onClick}
             >
-              {cta1.text}
+              {actionA.text}
             </Button>
           )}
-          {isNotUndefined(cta2) && (
+          {isNotUndefined(actionB) && (
             <Button
               color="primary"
-              href={cta2.href}
-              to={cta2.to}
+              href={actionB.href}
+              to={actionB.to}
               variant="text"
-              onClick={cta2.onClick}
+              onClick={actionB.onClick}
             >
-              {cta2.text}
+              {actionB.text}
             </Button>
           )}
         </Inline>
@@ -125,7 +124,7 @@ const Banner: React.FC<BannerProps> = ({
 
 export default Banner;
 
-const CtaPropTypes = {
+const ActionPropTypes = {
   href: PropTypes.string,
   text: PropTypes.string,
   to: PropTypes.oneOfType([
@@ -142,6 +141,6 @@ const CtaPropTypes = {
 Banner.propTypes = {
   onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(Object.values(BannerVariants)),
-  cta1: PropTypes.shape(CtaPropTypes),
-  cta2: PropTypes.shape(CtaPropTypes),
+  actionA: PropTypes.shape(ActionPropTypes),
+  actionB: PropTypes.shape(ActionPropTypes),
 };

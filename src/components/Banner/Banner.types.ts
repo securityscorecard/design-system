@@ -5,7 +5,7 @@ import { BannerVariants } from './Banner.enums';
 
 export type Variants = typeof BannerVariants[keyof typeof BannerVariants];
 
-type Cta = {
+type Action = {
   text?: string;
   onClick?: React.MouseEventHandler;
   to?: To;
@@ -15,6 +15,6 @@ type Cta = {
 export interface BannerProps {
   onClose: React.MouseEventHandler;
   variant?: Variants;
-  cta1?: Cta;
-  cta2?: Cta;
+  actionA?: Action;
+  actionB?: Action;
 }
