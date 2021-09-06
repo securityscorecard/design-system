@@ -22,10 +22,11 @@ const forms: Forms = {
   disabledBgColor: colors.graphite2H,
   disabledBorderColor: colors.graphiteHB,
   disabledActiveColor: colors.graphite2B,
-  placeholderColor: colors.graphiteB,
+  placeholderColor: colors.graphite2B,
   selectIndicatorColor: colors.graphite2B,
   switchColor: colors.graphite2B,
   switchBgColor: colors.graphite3H,
+  switchKnobBgColor: colors.graphite3B,
 } as const;
 
 export default forms;

@@ -132,7 +132,7 @@ export const StyledTable = styled.table`
     }
 
     .ds-table-cell-null {
-      color: ${getColor('graphiteB')};
+      color: ${getColor('graphite2B')};
     }
   }
 
