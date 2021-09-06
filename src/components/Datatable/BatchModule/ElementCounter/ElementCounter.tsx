@@ -3,30 +3,32 @@ import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
 
-import { H3, Text } from '../../../typography';
+import { H4 } from '../../../typography';
 import { HeadingVariants } from '../../../typography/Heading/Heading.enums';
-import { TextSizes, TextVariants } from '../../../typography/Text/Text.enums';
-import { abbreviateNumber, getColor, pxToRem } from '../../../../utils';
+import {
+  abbreviateNumber,
+  getColor,
+  getSpace,
+  pxToRem,
+} from '../../../../utils';
 import { Dropdown } from '../../Dropdown';
 import { Icon } from '../../../Icon';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { DatatableStore } from '../../Datatable.store';
 import { ElementCounterProps } from './ElementCounter.types';
-
-const LightText = styled(Text).attrs(() => ({
-  size: TextSizes.inherit,
-  variant: TextVariants.context,
-}))``;
+import { Inline, Padbox } from '../../../layout';
+import { SpaceSizes } from '../../../../theme';
+import { PaddingTypes } from '../../../layout/Padbox/Padbox.enums';
 
 const SelectionButton = styled.button`
   display: inline-flex;
-  align-items: center;
+  align-self: center;
   justify-content: center;
   background: transparent;
   border: none;
   cursor: pointer;
   height: 100%;
-  padding: ${pxToRem(6, 8)};
+  padding: ${getSpace(SpaceSizes.xs)};
   font-size: ${pxToRem(16)};
   color: ${getColor('graphite3B')};
 
@@ -38,29 +40,32 @@ const SelectionButton = styled.button`
 export const getCounterContent = (
   totalLength: number,
   selectedLength = 0,
-): React.ReactElement => {
-  if (isPositive(selectedLength) && isPositive(totalLength)) {
-    return (
-      <span data-testid="counter-content">
-        {abbreviateNumber(selectedLength)} <LightText>of</LightText>{' '}
-        {abbreviateNumber(totalLength)} <LightText>selected</LightText>
-      </span>
-    );
-  }
-  if (isPositive(totalLength)) {
-    return (
-      <span data-testid="counter-content">{abbreviateNumber(totalLength)}</span>
-    );
-  }
-
-  return <LightText data-testid="counter-content">No data</LightText>;
-};
+): React.ReactElement => (
+  <span data-testid="counter-content">
+    {isPositive(selectedLength) && isPositive(totalLength)
+      ? `${abbreviateNumber(selectedLength)} of ${abbreviateNumber(
+          totalLength,
+        )} selected`
+      : isPositive(totalLength)
+      ? abbreviateNumber(totalLength)
+      : 'No data'}
+  </span>
+);
 
 const ElementCounterWrapper = ({ children, ...props }) => (
-  <H3 margin="none" variant={HeadingVariants.secondary} {...props}>
-    {children}
-  </H3>
+  <Padbox paddingSize={SpaceSizes.sm} paddingType={PaddingTypes.squish}>
+    <Inline align="center" gap={SpaceSizes.xs} {...props}>
+      {children}
+    </Inline>
+  </Padbox>
 );
+
+const CounterText = styled(H4).attrs(() => ({
+  margin: 'none',
+  variant: HeadingVariants.secondary,
+}))`
+  line-height: ${pxToRem(24)};
+`;
 
 const ElementCounter: React.FC<ElementCounterProps> = ({
   dataSize,
@@ -105,13 +110,17 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
   };
 
   if (!hasSelection) {
-    return <ElementCounterWrapper>{content}</ElementCounterWrapper>;
+    return (
+      <ElementCounterWrapper>
+        <CounterText>{content}</CounterText>
+      </ElementCounterWrapper>
+    );
   }
 
   if (hasOnlyPerPageSelection) {
     return (
       <ElementCounterWrapper>
-        {content}
+        <CounterText>{content}</CounterText>
         {localSelectedLength > 0 && (
           <SelectionButton
             aria-label="Select None"
@@ -128,7 +137,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
 
   return (
     <ElementCounterWrapper>
-      {content}
+      <CounterText>{content}</CounterText>
       {dataSize > 0 && (
         <Dropdown
           actions={[
