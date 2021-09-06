@@ -23,4 +23,6 @@ export const ColorTypes = {
   graphite3H: 'graphite3H',
   graphite4H: 'graphite4H',
   graphite5H: 'graphite5H',
+  pumpkin0: 'pumpkin0',
+  strawberry0: 'strawberry0',
 } as const;
