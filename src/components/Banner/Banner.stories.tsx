@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import Banner from './Banner';
 import { BannerVariants } from './Banner.enums';
-import { Text } from '../typography';
 
 export default {
   title: 'components/Banner',
@@ -33,7 +32,7 @@ export const InfoBanner: Story = () => (
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    <Text size="md">Info Banner</Text>
+    Info Banner
   </Banner>
 );
 
@@ -54,12 +53,10 @@ export const LongInfoBanner: Story = () => (
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    <Text size="md">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </Text>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
   </Banner>
 );
 
@@ -75,13 +72,13 @@ export const InfoBannerOneAction: Story = () => (
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    <Text size="md">Info Banner One Action</Text>
+    Info Banner One Action
   </Banner>
 );
 
 export const InfoBannerNoAction: Story = () => (
   <Banner variant={BannerVariants.info} onClose={action('close-banner')}>
-    <Text size="md">Info Banner No Action</Text>
+    Info Banner No Action
   </Banner>
 );
 
@@ -102,7 +99,7 @@ export const WarnBanner: Story = () => (
     variant={BannerVariants.warn}
     onClose={action('close-banner')}
   >
-    <Text size="md">Warn Banner</Text>
+    Warn Banner
   </Banner>
 );
 
@@ -123,6 +120,6 @@ export const ErrorBanner: Story = () => (
     variant={BannerVariants.error}
     onClose={action('close-banner')}
   >
-    <Text size="md">Error Banner</Text>
+    Error Banner
   </Banner>
 );

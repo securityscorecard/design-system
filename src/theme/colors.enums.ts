@@ -2,7 +2,9 @@ export const ColorTypes = {
   kiwi: 'kiwi',
   banana: 'banana',
   pumpkin: 'pumpkin',
+  pumpkin0: 'pumpkin0',
   strawberry: 'strawberry',
+  strawberry0: 'strawberry0',
   cherry: 'cherry',
   blueberryClassic: 'blueberryClassic',
   radiantBlueberry: 'radiantBlueberry',
@@ -23,6 +25,4 @@ export const ColorTypes = {
   graphite3H: 'graphite3H',
   graphite4H: 'graphite4H',
   graphite5H: 'graphite5H',
-  pumpkin0: 'pumpkin0',
-  strawberry0: 'strawberry0',
 } as const;

@@ -5,7 +5,7 @@ import { ActionKinds } from '../../types/action.types';
 
 export type Variants = typeof BannerVariants[keyof typeof BannerVariants];
 
-type MaxLengthArray = readonly [
+type ActionsArray = readonly [
   ActionKinds<[React.MouseEvent]>?,
   ActionKinds<[React.MouseEvent]>?,
 ];
@@ -13,5 +13,5 @@ type MaxLengthArray = readonly [
 export interface BannerProps {
   onClose: React.MouseEventHandler;
   variant?: Variants;
-  actions?: MaxLengthArray;
+  actions?: ActionsArray;
 }

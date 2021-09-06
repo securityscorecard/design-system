@@ -15,6 +15,7 @@ import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { Inline, Padbox } from '../layout';
 import { FlexContainer } from '../FlexContainer';
+import { Text } from '../typography';
 import colors from '../../theme/colors';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, pxToRem } from '../../utils';
@@ -43,15 +44,15 @@ const bgVariants = {
   [BannerVariants.error]: 'strawberry0',
 };
 
-const StyledPadbox = styled(Padbox)<Pick<BannerProps, 'variant'>>`
+const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
   border-width: 1px;
   border-style: solid;
-  border-color: ${({ variant }) => getColor(colorVariants[variant])};
-  background-color: ${({ variant }) => getColor(bgVariants[variant])};
+  border-color: ${({ $variant }) => getColor(colorVariants[$variant])};
+  background-color: ${({ $variant }) => getColor(bgVariants[$variant])};
 `;
 
-const IconPadbox = styled(Padbox)<Pick<BannerProps, 'variant'>>`
-  background-color: ${({ variant }) => getColor(colorVariants[variant])};
+const IconPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
+  background-color: ${({ $variant }) => getColor(colorVariants[$variant])};
   display: flex;
   align-items: center;
 `;
@@ -61,9 +62,9 @@ const IconWrapper = styled(FlexContainer)`
   height: ${pxToRem(24)};
 `;
 
-const StyledIcon = styled(Icon)<Pick<BannerProps, 'variant'>>`
+const StyledIcon = styled(Icon)<{ $variant?: BannerProps['variant'] }>`
   color: ${colors.graphite5H};
-  font-size: ${({ variant }) => pxToRem(iconPxSizesVariants[variant])};
+  font-size: ${({ $variant }) => pxToRem(iconPxSizesVariants[$variant])};
 `;
 
 // TODO Extract close button and unify it across DS
@@ -94,20 +95,20 @@ const Banner: React.FC<BannerProps> = ({
   actions,
   onClose,
 }) => (
-  <StyledPadbox variant={variant}>
+  <StyledPadbox $variant={variant}>
     <Inline align="stretch" stretch="end">
-      <IconPadbox paddingSize="mdPlus" paddingType="squish" variant={variant}>
+      <IconPadbox $variant={variant} paddingSize="mdPlus" paddingType="squish">
         <IconWrapper alignItems="center">
           <StyledIcon
+            $variant={variant}
             name={iconVariants[variant]}
             type={IconTypes.ssc}
-            variant={variant}
           />
         </IconWrapper>
       </IconPadbox>
       <Padbox paddingSize="md">
         <Inline align="center" gap="mdPlus" stretch="start">
-          {children}
+          <Text size="md">{children}</Text>
           {isNonEmptyArray(actions) &&
             actions.map((action) => (
               <StyledButton
