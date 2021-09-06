@@ -18,14 +18,18 @@ export default {
 
 export const InfoBanner: Story = () => (
   <Banner
-    actionA={{
-      text: 'Action A',
-      onClick: action('click-action-a'),
-    }}
-    actionB={{
-      text: 'Action B',
-      onClick: action('click-action-b'),
-    }}
+    actions={[
+      {
+        label: 'Action A',
+        name: 'Action A',
+        onClick: action('click-action-a'),
+      },
+      {
+        label: 'Action B',
+        name: 'Action B',
+        onClick: action('click-action-b'),
+      },
+    ]}
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
@@ -35,14 +39,18 @@ export const InfoBanner: Story = () => (
 
 export const LongInfoBanner: Story = () => (
   <Banner
-    actionA={{
-      text: 'Action A',
-      onClick: action('click-action-a'),
-    }}
-    actionB={{
-      text: 'Action B',
-      onClick: action('click-action-b'),
-    }}
+    actions={[
+      {
+        label: 'Action A',
+        name: 'Action A',
+        onClick: action('click-action-a'),
+      },
+      {
+        label: 'Action B',
+        name: 'Action B',
+        onClick: action('click-action-b'),
+      },
+    ]}
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
@@ -57,33 +65,40 @@ export const LongInfoBanner: Story = () => (
 
 export const InfoBannerOneAction: Story = () => (
   <Banner
-    actionA={{
-      text: 'Action',
-      onClick: action('click-action'),
-    }}
+    actions={[
+      {
+        label: 'Action',
+        name: 'Action',
+        onClick: action('click-action'),
+      },
+    ]}
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
-    <Text size="md">Info Banner</Text>
+    <Text size="md">Info Banner One Action</Text>
   </Banner>
 );
 
 export const InfoBannerNoAction: Story = () => (
   <Banner variant={BannerVariants.info} onClose={action('close-banner')}>
-    Info Banner
+    <Text size="md">Info Banner No Action</Text>
   </Banner>
 );
 
 export const WarnBanner: Story = () => (
   <Banner
-    actionA={{
-      text: 'Action A',
-      onClick: action('click-action-a'),
-    }}
-    actionB={{
-      text: 'Action B',
-      onClick: action('click-action-b'),
-    }}
+    actions={[
+      {
+        label: 'Action A',
+        name: 'Action A',
+        onClick: action('click-action-a'),
+      },
+      {
+        label: 'Action B',
+        name: 'Action B',
+        onClick: action('click-action-b'),
+      },
+    ]}
     variant={BannerVariants.warn}
     onClose={action('close-banner')}
   >
@@ -93,14 +108,18 @@ export const WarnBanner: Story = () => (
 
 export const ErrorBanner: Story = () => (
   <Banner
-    actionA={{
-      text: 'Action A',
-      onClick: action('click-action-a'),
-    }}
-    actionB={{
-      text: 'Action B',
-      onClick: action('click-action-b'),
-    }}
+    actions={[
+      {
+        label: 'Action A',
+        name: 'Action A',
+        onClick: action('click-action-a'),
+      },
+      {
+        label: 'Action B',
+        name: 'Action B',
+        onClick: action('click-action-b'),
+      },
+    ]}
     variant={BannerVariants.error}
     onClose={action('close-banner')}
   >
