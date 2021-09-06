@@ -8,7 +8,6 @@ export const TextSizes = {
 export const TextVariants = {
   primary: 'primary',
   secondary: 'secondary',
-  context: 'context',
   monospace: 'monospace',
   danger: 'danger',
 } as const;

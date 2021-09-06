@@ -63,16 +63,6 @@ export const secondaryText: Story = () => (
   </>
 );
 
-export const contextText: Story = () => (
-  <>
-    <Text variant={TextVariants.context}>{lipsum}</Text>
-    <br />
-    <Text variant={TextVariants.context} isBold>
-      {lipsum}
-    </Text>
-  </>
-);
-
 export const monospaceText: Story = () => (
   <>
     <Text variant={TextVariants.monospace}>{lipsum}</Text>

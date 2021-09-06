@@ -79,8 +79,7 @@ export const TextInParagraph: Story = () => (
     <Text variant={TextVariants.primary}>Lorem ipsum</Text> dolor sit amet,
     consectetur <Text variant={TextVariants.secondary}>adipiscing elit</Text>.
     Phasellus pharetra magna lectus, <Text isBold>a congue ex</Text> blandit
-    vel. <Text variant={TextVariants.context}>Donec id mi commodo eros</Text>{' '}
-    porta tempus. Vivamus et elit ut leo{' '}
+    vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut leo{' '}
     <Text variant={TextVariants.monospace}>tincidunt vehicula</Text> non a
     dolor. Suspendisse placerat turpis nisl, quis{' '}
     <Text variant={TextVariants.danger}>gravida sem semper et</Text>.

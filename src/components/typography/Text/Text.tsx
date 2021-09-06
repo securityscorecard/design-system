@@ -34,9 +34,6 @@ const primaryVariant = css`
 const secondaryVariant = css`
   color: ${getColor('graphite2B')};
 `;
-const contextVariant = css`
-  color: ${getColor('graphiteB')};
-`;
 const monospaceVariant = css`
   font-family: ${getFontFamily('mono')};
 `;
@@ -54,7 +51,6 @@ const sizes = {
 const variants = {
   [TextVariants.primary]: primaryVariant,
   [TextVariants.secondary]: secondaryVariant,
-  [TextVariants.context]: contextVariant,
   [TextVariants.monospace]: monospaceVariant,
   [TextVariants.danger]: dangerVariant,
 };

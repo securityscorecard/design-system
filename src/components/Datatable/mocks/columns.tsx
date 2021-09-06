@@ -37,7 +37,7 @@ export const simpleColumns: Column<Data>[] = [
           case 'Removed':
           case 'Dynamic':
             return (
-              <Text size={TextSizes.inherit} variant={TextVariants.context}>
+              <Text size={TextSizes.inherit} variant={TextVariants.secondary}>
                 {value}
               </Text>
             );
