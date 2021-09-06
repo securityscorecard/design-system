@@ -1,20 +1,17 @@
 import React from 'react';
-import { To } from 'history'; // just importing types
 
 import { BannerVariants } from './Banner.enums';
+import { ActionKinds } from '../../types/action.types';
 
 export type Variants = typeof BannerVariants[keyof typeof BannerVariants];
 
-type Action = {
-  text?: string;
-  onClick?: React.MouseEventHandler;
-  to?: To;
-  href?: string;
-};
+type MaxLengthArray = readonly [
+  ActionKinds<[React.MouseEvent]>?,
+  ActionKinds<[React.MouseEvent]>?,
+];
 
 export interface BannerProps {
   onClose: React.MouseEventHandler;
   variant?: Variants;
-  actionA?: Action;
-  actionB?: Action;
+  actions?: MaxLengthArray;
 }

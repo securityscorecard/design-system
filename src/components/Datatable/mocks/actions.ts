@@ -1,8 +1,9 @@
 import { action } from '@storybook/addon-actions';
 
-import { Action, ActionKinds } from '../types/Action.types';
+import { Action } from '../types/Action.types';
+import { ActionKinds } from '../../../types/action.types';
 
-export const subactionsMock: ActionKinds[] = [
+export const subactionsMock: ActionKinds<string[]>[] = [
   {
     label: 'OnClick',
     name: 'onClick',
@@ -22,7 +23,7 @@ export const subactionsMock: ActionKinds[] = [
   },
 ];
 
-export const actionsMock: Action[] = [
+export const actionsMock: Action<string[]>[] = [
   ...subactionsMock,
   {
     label: 'Dropdown',
@@ -32,7 +33,7 @@ export const actionsMock: Action[] = [
   },
 ];
 
-export const tableActionsMock: Action[] = [
+export const tableActionsMock: Action<string[]>[] = [
   {
     label: 'Export',
     name: 'Export',
