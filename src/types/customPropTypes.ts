@@ -1,5 +1,7 @@
-import { length } from 'ramda';
-import { isNotArray, notEqual } from 'ramda-adjunct';
+import { gt, length } from 'ramda';
+import { isNotArray } from 'ramda-adjunct';
+
+import { TupleType, TypeChecker } from './customPropTypes.types';
 
 // Taken from https://stackoverflow.com/a/51165301/2216488
 function CustomPropTypeError(message: string) {
@@ -23,19 +25,17 @@ function createChainableTypeChecker(validate) {
     const componentNameValid = componentName || 'ANONYMOUS';
     const propNameValid = propFullName || propName;
 
-    if (props[propName] == null) {
-      if (isRequired) {
-        if (props[propName] === null) {
-          return new CustomPropTypeError(
-            `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`null\`.`,
-          );
-        }
+    if (isRequired) {
+      if (props[propName] === null) {
         return new CustomPropTypeError(
-          `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`undefined\`.`,
+          `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`null\`.`,
         );
       }
-      return null;
+      return new CustomPropTypeError(
+        `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`undefined\`.`,
+      );
     }
+
     return validate(
       props,
       propName,
@@ -52,8 +52,9 @@ function createChainableTypeChecker(validate) {
   return chainedCheckType;
 }
 
-export function tuple(...types) {
+export function tuple(...types: TupleType[]): TypeChecker {
   return createChainableTypeChecker(
+    // Validate fn
     (props, propName, componentName, location, propFullName, secret) => {
       const value = props[propName];
       const locationValid = location || 'prop';
@@ -64,9 +65,9 @@ export function tuple(...types) {
           `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected ${types.length}-element array`,
         );
       }
-      if (notEqual(length(value), length(types))) {
+      if (gt(length(value), length(types))) {
         return new CustomPropTypeError(
-          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected ${types.length}-element array, got array of length ${value.length}`,
+          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected up to ${types.length}-element array, got array of length ${value.length}`,
         );
       }
       for (let i = 0; i < value.length; i += 1) {
