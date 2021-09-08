@@ -13,11 +13,16 @@ import * as CustomPropTypes from '../../types/customPropTypes';
 import { BannerVariants } from './Banner.enums';
 import { Icon } from '../Icon';
 import { Button } from '../Button';
+import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 import { Inline, Padbox } from '../layout';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { FlexContainer } from '../FlexContainer';
 import { Text } from '../typography';
+import { TextSizes } from '../typography/Text/Text.enums';
 import colors from '../../theme/colors';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { SpaceSizes } from '../../theme';
 import { getColor, pxToRem } from '../../utils';
 
 const colorVariants = {
@@ -96,8 +101,12 @@ const Banner: React.FC<BannerProps> = ({
   onClose,
 }) => (
   <StyledPadbox $variant={variant}>
-    <Inline align="stretch" stretch="end">
-      <IconPadbox $variant={variant} paddingSize="mdPlus" paddingType="squish">
+    <Inline align="stretch" stretch={StretchEnum.end}>
+      <IconPadbox
+        $variant={variant}
+        paddingSize={SpaceSizes.mdPlus}
+        paddingType={PaddingTypes.squish}
+      >
         <IconWrapper alignItems="center">
           <StyledIcon
             $variant={variant}
@@ -106,20 +115,24 @@ const Banner: React.FC<BannerProps> = ({
           />
         </IconWrapper>
       </IconPadbox>
-      <Padbox paddingSize="md">
-        <Inline align="center" gap="mdPlus" stretch="start">
-          <Text size="md">{children}</Text>
+      <Padbox paddingSize={SpaceSizes.md}>
+        <Inline
+          align="center"
+          gap={SpaceSizes.mdPlus}
+          stretch={StretchEnum.start}
+        >
+          <Text size={TextSizes.md}>{children}</Text>
           {isNonEmptyArray(actions) &&
             actions.map((action) => (
               <StyledButton
                 key={action.name}
-                color="primary"
+                color={ButtonColors.primary}
                 href={
                   (action as AbsoluteLinkActionKind<[React.MouseEvent]>).href
                 }
                 name={action.name}
                 to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
-                variant="text"
+                variant={ButtonVariants.text}
                 onClick={action.onClick}
               >
                 {action.label}
