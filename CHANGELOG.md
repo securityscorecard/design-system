@@ -1,3 +1,25 @@
+# [1.0.0-alpha.109](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.108...v1.0.0-alpha.109) (2021-09-08)
+
+
+### Bug Fixes
+
+* **Banner:** add types to custom prop types checker ([d490328](https://github.com/securityscorecard/design-system/commit/d490328f6dfe7d0d1356100e6948601ba1d60c33))
+* **Banner:** improve by pr suggestions ([4665993](https://github.com/securityscorecard/design-system/commit/4665993d392903b2d9605bfb08960a0a5454a0b3))
+* **Banner:** replace props values by respective enums ([1de0702](https://github.com/securityscorecard/design-system/commit/1de0702ec4afa860f52bf90f7c18924493eab307))
+* **Banner:** update layout and fix colors usage ([cdc6831](https://github.com/securityscorecard/design-system/commit/cdc68315e5a3b28ca290d5b2cf1029fcbb6eced2))
+* **Banner:** update spacing, colors and rename cta props ([2c79de9](https://github.com/securityscorecard/design-system/commit/2c79de94c3eff871aa82783a6f7571b8778df89a))
+* **Banner:** update tuple prop types checker ([02d06f8](https://github.com/securityscorecard/design-system/commit/02d06f837d686ef50ed837954ddab9bf40de25da))
+
+
+### Features
+
+* **Banner:** add component ([8e5b9ae](https://github.com/securityscorecard/design-system/commit/8e5b9ae0d760b4ef2aefa5a8c9ca02864f52fb0c))
+* **Banner:** add init version of custom prop types checker ([2c9c1f7](https://github.com/securityscorecard/design-system/commit/2c9c1f72828e551b8ad7e3edd7afeb0979b3466b))
+* **Banner:** add new colors ([b49fb82](https://github.com/securityscorecard/design-system/commit/b49fb8295b87152781d0305e03bd34134434dc60))
+* **Banner:** add new FA icons ([3287ef3](https://github.com/securityscorecard/design-system/commit/3287ef3e42b11f32ac01b1825eba8c2e428cca1c))
+* **Banner:** unify action types ([3871a46](https://github.com/securityscorecard/design-system/commit/3871a46eb8a6dbd62a69422eaa36a24984040fab))
+* **Banner:** update component structure and api ([64412ba](https://github.com/securityscorecard/design-system/commit/64412ba213324b8ba2a9febd5363052caaabd790))
+
 # [1.0.0-alpha.108](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.107...v1.0.0-alpha.108) (2021-08-12)
 
 
