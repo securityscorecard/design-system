@@ -50,9 +50,9 @@ export interface DatatableProps<D extends Record<string, unknown>> {
   /**
    * List of available batch actions for table
    *
-   * See: [Action.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/components/Datatable/types/Action.types.ts)
+   * See: [action.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/types/action.types.ts)
    */
-  batchActions?: Action[];
+  batchActions?: Action<string[]>[];
   /**
    * Name of column used as table primary key or function to retrieve the key
    *

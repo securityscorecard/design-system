@@ -7,7 +7,7 @@ import {
   AbsoluteLinkActionKind,
   ActionKindsPropType,
   RelativeLinkActionKind,
-} from '../types/Action.types';
+} from '../../../types/action.types';
 import { DropdownLinkProps, DropdownProps } from './Dropdown.types';
 import {
   createPaddingSpacing,
@@ -80,21 +80,29 @@ const Dropdown: React.FC<DropdownProps> = ({
           <List>
             {actions.map((action) => {
               let RouterLink = null;
-              if (isNotUndefined((action as RelativeLinkActionKind).to)) {
+              if (
+                isNotUndefined(
+                  (action as RelativeLinkActionKind<string[], boolean>).to,
+                )
+              ) {
                 RouterLink = requireRouterLink();
               }
 
               const domTag = isNotUndefined(
-                (action as AbsoluteLinkActionKind).href,
+                (action as AbsoluteLinkActionKind<string[], boolean>).href,
               )
                 ? 'a' // render 'a' tag if 'href' is present
-                : isNotUndefined((action as RelativeLinkActionKind).to)
+                : isNotUndefined(
+                    (action as RelativeLinkActionKind<string[], boolean>).to,
+                  )
                 ? RouterLink // render 'Link' if 'to' is present
                 : undefined; // use default
 
               if (
                 isNull(RouterLink) &&
-                isNotUndefined((action as RelativeLinkActionKind).to)
+                isNotUndefined(
+                  (action as RelativeLinkActionKind<string[], boolean>).to,
+                )
               ) {
                 return null;
               }
@@ -103,9 +111,13 @@ const Dropdown: React.FC<DropdownProps> = ({
                 <li key={action.name}>
                   <DropdownLink
                     as={domTag}
-                    href={(action as AbsoluteLinkActionKind).href}
+                    href={
+                      (action as AbsoluteLinkActionKind<string[], boolean>).href
+                    }
                     name={action.name}
-                    to={(action as RelativeLinkActionKind).to}
+                    to={
+                      (action as RelativeLinkActionKind<string[], boolean>).to
+                    }
                     onClick={action.onClick}
                   >
                     {action.label}

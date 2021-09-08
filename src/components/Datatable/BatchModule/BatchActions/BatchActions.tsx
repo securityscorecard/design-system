@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { map } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { ColorTypes } from '../../../../theme/colors.enums';
+import { ColorTypes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils';
 import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
@@ -12,12 +12,12 @@ import { FlexContainer } from '../../../FlexContainer';
 import { Button } from '../../../Button';
 import { ButtonVariants } from '../../../Button/Button.enums';
 import { Icon } from '../../../Icon';
+import { ActionPropType } from '../../types/Action.types';
 import {
   AbsoluteLinkActionKind,
-  ActionPropType,
   ActionWithSubactions,
   RelativeLinkActionKind,
-} from '../../types/Action.types';
+} from '../../../../types/action.types';
 import { Dropdown } from '../../Dropdown';
 import { BatchActionsProps } from './BatchActions.types';
 import { DatatableStore } from '../../Datatable.store';
@@ -49,11 +49,15 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
   return (
     <FlexContainer>
       {actions.map((action) => {
-        if (isNotUndefined((action as ActionWithSubactions).subActions)) {
+        if (
+          isNotUndefined(
+            (action as ActionWithSubactions<string[], boolean>).subActions,
+          )
+        ) {
           const subActions = map((subAction) => ({
             ...subAction,
             onClick: () => handleOnActionClick(subAction.onClick),
-          }))((action as ActionWithSubactions).subActions);
+          }))((action as ActionWithSubactions<string[], boolean>).subActions);
 
           return (
             <Dropdown
@@ -76,9 +80,9 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
         return (
           <BatchActionButton
             key={action.name}
-            href={(action as AbsoluteLinkActionKind).href}
+            href={(action as AbsoluteLinkActionKind<string[], boolean>).href}
             name={action.name}
-            to={(action as RelativeLinkActionKind).to}
+            to={(action as RelativeLinkActionKind<string[], boolean>).to}
             onClick={() => handleOnActionClick(action.onClick)}
           >
             {action.label}

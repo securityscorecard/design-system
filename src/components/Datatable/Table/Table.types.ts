@@ -2,7 +2,7 @@ import { To } from 'history';
 import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Column, IdType, Row, SortingRule } from 'react-table';
 
-import { ActionBasePropType } from '../types/Action.types';
+import { ActionBasePropType } from '../../../types/action.types';
 import { RendererColumnOptions } from './Body/renderers/renderers.types';
 
 type BaseRowAction<D> = {

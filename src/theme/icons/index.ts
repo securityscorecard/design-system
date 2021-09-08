@@ -27,3 +27,6 @@ export { longArrowLeft } from './longArrowLeft';
 export { longArrowRight } from './longArrowRight';
 export { ellipsisH } from './ellipsisH';
 export { timesSolid } from './timesSolid';
+export { ban } from './ban';
+export { exclamationTriangle } from './exclamationTriangle';
+export { infoCircle } from './infoCircle';

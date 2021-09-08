@@ -1,5 +1,6 @@
 export * from './Accordion';
 export * from './Badge';
+export * from './Banner';
 export * from './Button';
 export * from './Collapsible';
 export * from './ControlDropdown';
