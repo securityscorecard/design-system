@@ -1,5 +1,5 @@
 import { gt, length } from 'ramda';
-import { isNotArray } from 'ramda-adjunct';
+import { isNotArray, isUndefined } from 'ramda-adjunct';
 
 import { TupleType, TypeChecker } from './customPropTypes.types';
 
@@ -59,15 +59,18 @@ export function tuple(...types: TupleType[]): TypeChecker {
       const value = props[propName];
       const locationValid = location || 'prop';
       const propNameValid = propFullName || propName;
-
+      // Tuple prop is not required
+      if (isUndefined(value)) {
+        return null;
+      }
       if (isNotArray(value)) {
         return new CustomPropTypeError(
-          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected ${types.length}-element array`,
+          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected an array with a maximum of ${types.length} elements`,
         );
       }
       if (gt(length(value), length(types))) {
         return new CustomPropTypeError(
-          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected up to ${types.length}-element array, got array of length ${value.length}`,
+          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected an array with a maximum of ${types.length} elements, got array with ${value.length} elements`,
         );
       }
       for (let i = 0; i < value.length; i += 1) {
