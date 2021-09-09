@@ -1,3 +1,11 @@
+# [1.0.0-alpha.110](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.109...v1.0.0-alpha.110) (2021-09-09)
+
+
+### Features
+
+* **colors:** improve contrast for grey colors ([5d3d87e](https://github.com/securityscorecard/design-system/commit/5d3d87eb3f6e2be33a1a65318a5a5a156017f6b1))
+* **ElementCounter:** update styles to remove context text variant ([0e9fd50](https://github.com/securityscorecard/design-system/commit/0e9fd508fc2213f35158c5a379d4e06a1f3bd4f1))
+
 # [1.0.0-alpha.109](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.108...v1.0.0-alpha.109) (2021-09-08)
 
 
