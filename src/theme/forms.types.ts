@@ -20,4 +20,5 @@ export interface Forms {
   selectIndicatorColor: string;
   switchColor: string;
   switchBgColor: string;
+  switchKnobBgColor: string;
 }

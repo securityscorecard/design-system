@@ -45,6 +45,8 @@ export const mediumText: Story = () => (
 
 export const smallText: Story = () => <Text size={TextSizes.sm}>{lipsum}</Text>;
 
+smallText.storyName = 'Small Text (DEPRECATED)';
+
 export const primaryText: Story = () => (
   <>
     <Text>{lipsum}</Text>
@@ -73,6 +75,8 @@ export const contextText: Story = () => (
   </>
 );
 
+contextText.storyName = 'Context Text (DEPRECATED)';
+
 export const monospaceText: Story = () => (
   <>
     <Text variant={TextVariants.monospace}>{lipsum}</Text>
@@ -82,6 +86,8 @@ export const monospaceText: Story = () => (
     </Text>
   </>
 );
+
+monospaceText.storyName = 'Monospace Text (DEPRECATED)';
 
 export const dangerText: Story = () => (
   <>

@@ -36,11 +36,6 @@ export const simpleColumns: Column<Data>[] = [
         switch (value) {
           case 'Removed':
           case 'Dynamic':
-            return (
-              <Text size={TextSizes.inherit} variant={TextVariants.context}>
-                {value}
-              </Text>
-            );
           case 'Claimed':
           case 'Disputed':
             return (
