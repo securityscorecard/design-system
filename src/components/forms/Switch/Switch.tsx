@@ -29,7 +29,7 @@ const Label = styled.label`
     left: ${pxToRem(5)};
     width: ${pxToRem(20)};
     height: ${pxToRem(20)};
-    background: ${getFormStyle('switchColor')};
+    background: ${getFormStyle('switchKnobBgColor')};
     border-radius: 20px;
     transition: 0.3s;
   }

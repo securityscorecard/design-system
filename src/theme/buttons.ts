@@ -20,7 +20,7 @@ const buttons: Buttons = {
   },
   outline: {
     primary: {
-      color: colors.graphite2B,
+      color: colors.graphite3B,
       bgColor: colors.graphite5H,
       hoverBgColor: colors.graphite4H,
       activeBgColor: colors.graphite3H,
