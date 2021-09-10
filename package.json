@@ -52,7 +52,7 @@
     "numeral": "^2.0.6",
     "polished": "^3.7.1",
     "prop-types": "^15.7.2",
-    "pullstate": "^1.20.6",
+    "pullstate": "^1.23.0",
     "ramda": "^0.27.0",
     "ramda-adjunct": "^2.31.1",
     "react-cool-portal": "^1.1.0",
@@ -145,7 +145,8 @@
     "trim": "1.0.1",
     "react-syntax-highlighter": "15.4.3",
     "@types/react": "16.14.5",
-    "glob-parent": "5.1.2"
+    "glob-parent": "5.1.2",
+    "immer": "9.0.6"
   },
   "repository": {
     "type": "git",
