@@ -41,7 +41,6 @@ const Box = styled(FlexContainer)`
 
 const Mark = styled.svg`
   display: none;
-
   font-size: ${pxToRem(12)};
   width: 1.25em;
   color: ${getFormStyle('activeColor')};
