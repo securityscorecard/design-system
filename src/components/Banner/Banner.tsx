@@ -23,7 +23,7 @@ import { TextSizes } from '../typography/Text/Text.enums';
 import colors from '../../theme/colors';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
-import { getColor, pxToRem } from '../../utils';
+import { getColor, getFontSize, pxToRem } from '../../utils';
 
 const colorVariants = {
   [BannerVariants.info]: 'radiantBlueberry',
@@ -86,7 +86,7 @@ const CloseButton = styled.button`
 `;
 
 const TimesIcon = styled(Icon)`
-  font-size: ${pxToRem(16)};
+  font-size: ${getFontSize('lg')};
 `;
 
 const StyledButton = styled(Button)`

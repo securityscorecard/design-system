@@ -8,6 +8,7 @@ import { HeadingVariants } from '../../../typography/Heading/Heading.enums';
 import {
   abbreviateNumber,
   getColor,
+  getFontSize,
   getSpace,
   pxToRem,
 } from '../../../../utils';
@@ -29,7 +30,7 @@ const SelectionButton = styled.button`
   cursor: pointer;
   height: 100%;
   padding: ${getSpace(SpaceSizes.xs)};
-  font-size: ${pxToRem(16)};
+  font-size: ${getFontSize('lg')};
   color: ${getColor('graphite3B')};
 
   &:hover {

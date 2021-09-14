@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { pxToRem } from '../../utils';
+import { getFontSize, pxToRem } from '../../utils';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Icon } from '../Icon';
@@ -20,7 +20,7 @@ const StyledIconButton = styled(Button)`
 `;
 
 const StyledIcon = styled(Icon)`
-  font-size: 0.8rem;
+  font-size: ${getFontSize('md')};
 `;
 
 const IconButton: React.FC<IconButtonProps> = ({

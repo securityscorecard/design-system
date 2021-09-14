@@ -40,7 +40,7 @@ const HeadingBase = css<HeadingProps>`
 const HeadingH0 = styled.h1`
   ${HeadingBase};
   font-size: ${getFontSize('h0')};
-  line-height: ${getLineHeight('xxxl')};
+  line-height: normal;
 `;
 const HeadingH1 = styled.h1`
   ${HeadingBase};

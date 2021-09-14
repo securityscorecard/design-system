@@ -14,7 +14,6 @@ export interface Size {
   lg: string;
   md: string;
   sm: string;
-  xs: string;
 }
 
 export interface Weight {
@@ -26,12 +25,10 @@ export interface Weight {
 }
 
 export interface LineHeight {
-  xxxl: string;
   xxl: string;
   xl: string;
   lg: string;
   md: string;
-  sm: string;
 }
 
 type MarginValue = {

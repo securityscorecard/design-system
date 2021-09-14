@@ -17,7 +17,7 @@ const IconMedium = css`
 `;
 
 const IconSmall = css`
-  font-size: ${getFontSize('xs')};
+  font-size: ${getFontSize('sm')};
   ${createMarginSpacing({ right: 0.3 })};
 `;
 

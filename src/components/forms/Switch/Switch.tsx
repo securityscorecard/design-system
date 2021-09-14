@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getFormStyle, pxToRem } from '../../../utils';
+import { getFontSize, getFormStyle, pxToRem } from '../../../utils';
 import { SwitchProps } from './Switch.types';
 
 const Label = styled.label`
@@ -18,7 +18,7 @@ const Label = styled.label`
   padding-left: ${pxToRem(37)};
   position: relative;
   line-height: ${pxToRem(30)};
-  font-size: ${pxToRem(13)};
+  font-size: ${getFontSize('md')};
   color: ${getFormStyle('switchColor')};
   transition: 0.3s;
 

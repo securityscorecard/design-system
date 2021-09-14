@@ -77,7 +77,7 @@ export const FontItem: FunctionComponent<FontProps> = ({
   fontFamily = typography.family.base,
   fontWeight = typography.weight.regular,
   fontSize = typography.size.lg,
-  lineHeight = typography.lineHeight.lg,
+  lineHeight = 'normal',
   sampleText
 }) => {
   return (

@@ -4,7 +4,12 @@ import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { createPaddingSpacing, getColor, pxToRem } from '../../utils';
+import {
+  createPaddingSpacing,
+  getColor,
+  getFontSize,
+  pxToRem,
+} from '../../utils';
 import { FlexContainer } from '../FlexContainer';
 import { Icon } from '../Icon';
 import { Paragraph } from '../typography';
@@ -69,7 +74,7 @@ const CloseButton = styled.button`
 `;
 
 const StyledIcon = styled(Icon)`
-  font-size: ${pxToRem(16)};
+  font-size: ${getFontSize('lg')};
 `;
 
 const stopPropagation = (event) => event?.stopPropagation();
