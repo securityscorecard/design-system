@@ -1,3 +1,10 @@
+# [1.0.0-alpha.111](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.110...v1.0.0-alpha.111) (2021-09-14)
+
+
+### Features
+
+* **typography:** align typography values with Figma designs ([03f9bd5](https://github.com/securityscorecard/design-system/commit/03f9bd5e969552b071756c4beba8f63c804d134e))
+
 # [1.0.0-alpha.110](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.109...v1.0.0-alpha.110) (2021-09-09)
 
 
