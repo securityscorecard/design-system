@@ -14,6 +14,7 @@ export interface OutlineButtonColors {
   borderColor: string;
   disabledColor: string;
   disabledBgColor: string;
+  disabledBorderColor: string;
 }
 
 export interface TextButtonColors {
@@ -30,7 +31,14 @@ export interface ButtonColors<T> {
 }
 
 export interface Buttons {
-  solid: ButtonColors<SolidButtonColors>;
-  outline: ButtonColors<OutlineButtonColors>;
-  text: ButtonColors<TextButtonColors>;
+  variants: {
+    solid: ButtonColors<SolidButtonColors>;
+    outline: ButtonColors<OutlineButtonColors>;
+    text: ButtonColors<TextButtonColors>;
+  };
+  heights: {
+    md: number;
+    lg: number;
+    sm: number;
+  };
 }

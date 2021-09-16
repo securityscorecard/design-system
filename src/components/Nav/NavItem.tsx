@@ -19,7 +19,6 @@ const NavItem = styled(Button)
   .withConfig<NavItemProps>({
     shouldForwardProp: (prop) => prop !== 'isActive',
   })`
-  display: block;
   font-size: ${getFontSize('lg')};
   font-weight: ${({ isActive }) =>
     isActive ? getFontWeight('bold') : getFontWeight('regular')};

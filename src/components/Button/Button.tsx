@@ -1,29 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isNotNull, isNotUndefined, isNull, noop } from 'ramda-adjunct';
-import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { SpaceSizes } from '../../theme';
+import { requireRouterLink } from '../../utils/require-router-link';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { pxToRem } from '../../utils';
 import { Spinner } from '../Spinner';
 import { SSCIcons, Types } from '../Icon/Icon.types';
+import { Inline } from '../layout';
 import StyledButton from './StyledButton';
-import StyledIcon from './StyledIcon';
+import StyledIcon, { iconSizes } from './StyledIcon';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';
 import { ButtonProps } from './Button.types';
-import { requireRouterLink } from '../../utils/require-router-link';
-
-const LoadingText = styled.span<Pick<ButtonProps, 'size' | 'variant'>>`
-  padding-left: ${({ size }) =>
-    size === ButtonSizes.sm ? pxToRem(5) : pxToRem(10)};
-`;
-
-const spinnerSizes = {
-  [ButtonSizes.lg]: 20,
-  [ButtonSizes.md]: 16,
-  [ButtonSizes.sm]: 10,
-};
 
 const Button: React.FC<
   ButtonProps & React.ComponentProps<typeof StyledButton>
@@ -65,18 +54,16 @@ const Button: React.FC<
       <Spinner
         borderWidth={2}
         dark={variant !== ButtonVariants.solid}
-        height={spinnerSizes[size]}
+        height={iconSizes[size]}
         verticalMargin={0}
-        width={spinnerSizes[size]}
+        width={iconSizes[size]}
       />
-      <LoadingText size={size} variant={variant}>
-        {loadingText}
-      </LoadingText>
+      <span>{loadingText}</span>
     </>
   ) : isNotUndefined(iconName) ? (
     <>
       <StyledIcon name={iconName} size={size} type={iconType} />
-      {children}
+      <span>{children}</span>
     </>
   ) : (
     children
@@ -97,7 +84,9 @@ const Button: React.FC<
       onClick={onClick}
       {...props}
     >
-      {content}
+      <Inline align="center" gap={SpaceSizes.sm}>
+        {content}
+      </Inline>
     </StyledButton>
   );
 };

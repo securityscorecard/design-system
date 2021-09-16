@@ -1,19 +1,21 @@
 import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
-import { includes } from 'ramda';
+import { __, includes, pipe, subtract } from 'ramda';
 
 import {
   getBorderRadius,
+  getButtonHeight,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
   getSpace,
+  pxToRem,
 } from '../../utils';
+import { SpaceSizes } from '../../theme';
 import { TabSizes, TabVariants } from './Tabs.enums';
 import { LabelProps, Sizes } from './Tabs.types';
 import { Padbox } from '../layout';
-import { SpaceSizes } from '../../theme/space.enums';
 
 const largeTextSize = css`
   font-size: ${getFontSize('lg')};
@@ -40,20 +42,20 @@ const smallUnderlineSize = css`
   line-height: ${getLineHeight('lg')};
 `;
 
+const getSegmentedLabelHeight = ({ size, theme }) =>
+  pipe(
+    getButtonHeight(size),
+    subtract(__, 2 * theme.space.xs),
+    pxToRem,
+  )({ theme });
+
 const largeSegmentedSize = css`
   font-size: ${getFontSize('lg')};
-  /* FIXME: remove button height compensation when button size is fixes */
-  line-height: calc(
-    ${getLineHeight('lg')} + 0.125rem
-  ); /* add 2px to compensate button height */
 `;
 
 const mediumSegmentedSize = css`
   font-size: ${getFontSize('md')};
-  /* FIXME: remove button height compensation when button size is fixes */
-  line-height: calc(
-    ${getLineHeight('md')} + 0.3125rem
-  ); /* add 5px to compensate button height */
+  line-height: 1;
 `;
 
 const underlineSizes = {
@@ -104,6 +106,7 @@ const textTab = css<LabelProps & { size: Sizes }>`
 const segmentedTab = css<LabelProps & { size: Sizes }>`
   ${({ size = TabSizes.md }) => segmentedSizes[size]};
 
+  height: ${getSegmentedLabelHeight};
   background: ${({ $isSelected }) => $isSelected && getColor('blueberry0')};
   border: 1px solid
     ${({ $isSelected }) =>

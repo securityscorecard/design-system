@@ -10,6 +10,7 @@ import {
   IconPrefix,
   findIconDefinition,
 } from '@fortawesome/fontawesome-svg-core';
+import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { createSpacings, getColor } from '../../utils';
@@ -19,7 +20,9 @@ import { Colors } from '../../theme/colors.types';
 import { IconProps, SSCIcons, Types } from './Icon.types';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 
-const StyledIcon = styled(FontAwesomeIcon)<{ color: keyof Colors }>`
+const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: keyof Colors }>({
+  shouldForwardProp: (property) => !includes(property, ['margin', 'color']),
+})`
   color: ${({ color, theme }) =>
     isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
   ${createSpacings};

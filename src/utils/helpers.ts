@@ -24,6 +24,7 @@ import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
 import { Depths } from '../theme/depths.types';
 import space from '../theme/space';
+import { Buttons } from '../theme/buttons.types';
 
 export type Theme = {
   theme?: DefaultTheme;
@@ -96,8 +97,8 @@ export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
 // Type - type of color (src/theme/buttons.ts)
 // Props - styled-components props object
 export const getButtonColor = curry((type, { variant, color, theme }) => {
-  if (hasPath(['buttons', variant, color], theme)) {
-    return path(['buttons', variant, color, type], theme);
+  if (hasPath(['buttons', 'variants', variant, color], theme)) {
+    return path(['buttons', 'variants', variant, color, type], theme);
   }
   // eslint-disable-next-line no-console
   console.warn(
@@ -105,6 +106,14 @@ export const getButtonColor = curry((type, { variant, color, theme }) => {
   );
   return path(['buttons', variant, 'primary', type], theme);
 });
+
+// getButtonHeight :: Size -> Props -> string
+// Size - any key of 'heights' (src/theme/buttons.ts)
+// Props - styled-components props object
+export const getButtonHeight = curry(
+  (size: keyof Buttons['heights'], { theme }: Theme) =>
+    path(['buttons', 'heights', size], theme),
+);
 
 // getLinkStyle :: Type -> Props -> string
 // Type - type of color / decoration

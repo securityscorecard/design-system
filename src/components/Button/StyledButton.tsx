@@ -1,101 +1,49 @@
 import styled, { css } from 'styled-components';
-import { always, flip, includes, pipe, prop, when } from 'ramda';
-import { isTrue } from 'ramda-adjunct';
+import { includes, pipe } from 'ramda';
 
 import {
   createMarginSpacing,
+  createPadding,
+  getBorderRadius,
   getButtonColor,
+  getButtonHeight,
   getFontFamily,
   getFontSize,
   getFontWeight,
-  getLineHeight,
   pxToRem,
 } from '../../utils';
 import { BaseStyledButtonProps } from './StyledButton.types';
 import { ButtonSizes, ButtonVariants } from './Button.enums';
-
-const ButtonBase = css<BaseStyledButtonProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  font-family: ${getFontFamily('base')};
-  font-weight: ${getFontWeight('medium')};
-  margin: 0;
-  cursor: pointer;
-  text-align: center;
-  ${({ margin }) => createMarginSpacing(margin)};
-
-  &:focus {
-    outline: 0;
-  }
-
-  ${({ isExpanded }) =>
-    isExpanded &&
-    css`
-      width: 100%;
-    `}
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      cursor: not-allowed;
-    `};
-
-  ${({ isLoading }) =>
-    isLoading &&
-    css`
-      cursor: progress;
-    `};
-`;
+import { SpaceSizes } from '../../theme';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 
 /*
  * BUTTON SIZES
  */
 
-const setMinWidth = (width) =>
-  pipe(
-    prop('variant'),
-    flip(includes)([ButtonVariants.solid, ButtonVariants.outline]),
-    flip(when)(always(pxToRem(width)), isTrue),
-  );
-
 const ButtonLarge = css`
-  min-width: ${setMinWidth(95)};
-  height: ${pxToRem(50)};
-  padding: ${pxToRem(15, 22)};
-  line-height: ${getLineHeight('lg')};
   font-size: ${getFontSize('lg')};
+  ${({ theme }) => createPadding({ paddingSize: SpaceSizes.md, theme })};
 `;
 
 const ButtonMedium = css<BaseStyledButtonProps>`
-  min-width: ${setMinWidth(80)};
-  height: ${pxToRem(40)};
-  padding: ${pxToRem(12, 18)};
-  line-height: ${getLineHeight('md')};
   font-size: ${getFontSize('md')};
-
-  ${({ isLoading }) =>
-    isLoading &&
-    css`
-      padding-top: ${pxToRem(12)};
-      padding-bottom: ${pxToRem(12)};
-    `};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.md,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
 `;
 
 const ButtonSmall = css<BaseStyledButtonProps>`
-  min-width: ${setMinWidth(60)};
-  height: ${pxToRem(30)};
-  padding: ${pxToRem(7, 12)};
-  line-height: ${getLineHeight('md')};
   font-size: ${getFontSize('md')};
-
-  ${({ isLoading }) =>
-    isLoading &&
-    css`
-      padding-top: ${pxToRem(7)};
-      padding-bottom: ${pxToRem(7)};
-    `};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.sm,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
 `;
 
 const buttonSizes = {
@@ -110,7 +58,6 @@ const buttonSizes = {
 const ButtonSolid = css<BaseStyledButtonProps>`
   background-color: ${getButtonColor('bgColor')};
   border: 1px solid ${getButtonColor('bgColor')};
-  border-radius: 3px;
   text-decoration: none;
 
   &,
@@ -147,7 +94,6 @@ const ButtonSolid = css<BaseStyledButtonProps>`
 const ButtonOutline = css<BaseStyledButtonProps>`
   background-color: ${getButtonColor('bgColor')};
   border: 1px solid ${getButtonColor('borderColor')};
-  border-radius: 3px;
   text-decoration: none;
 
   &,
@@ -158,6 +104,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   &:disabled {
     color: ${getButtonColor('disabledColor')};
     background-color: ${getButtonColor('disabledBgColor')};
+    border-color: ${getButtonColor('disabledBorderColor')};
   }
 
   &:focus:not(:disabled),
@@ -197,15 +144,15 @@ const ButtonText = css<BaseStyledButtonProps>`
   &:focus:not(:disabled),
   &:hover:not(:disabled),
   &:not([href]):not([tabindex]):not(:disabled):hover,
-  &.hover,
-  &.focus {
+  &&&.hover,
+  &&&.focus {
     color: ${getButtonColor('hoverColor')};
     text-decoration: none;
   }
 
   &:not(:disabled):active,
   &:not([href]):not([tabindex]):not(:disabled):active,
-  &.active {
+  &&&.active {
     color: ${getButtonColor('activeColor')};
     text-decoration: none;
   }
@@ -228,9 +175,32 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
       'isLoading',
       'isDisabled',
       'isExpanded',
+      'theme',
     ]),
 })`
-  ${ButtonBase}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: ${getBorderRadius};
+  font-family: ${getFontFamily('base')};
+  font-weight: ${getFontWeight('medium')};
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+
+  ${({ margin }) => createMarginSpacing(margin)};
+
+  &:focus {
+    outline: 0;
+  }
+
+  ${({ isExpanded }) => isExpanded && 'width: 100%;'};
+  ${({ disabled }) => disabled && 'cursor: not-allowed;'};
+  ${({ isLoading }) => isLoading && 'cursor: progress;'};
+
+  height: ${({ size, theme }) =>
+    pipe(getButtonHeight(size), pxToRem)({ theme })};
   ${({ size }) => buttonSizes[size]};
   ${({ variant }) => buttonVariants[variant]};
 `;
