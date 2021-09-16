@@ -1,3 +1,10 @@
+# [1.0.0-alpha.112](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.111...v1.0.0-alpha.112) (2021-09-16)
+
+
+### Features
+
+* **Button:** align sizes with Figma designs ([7412596](https://github.com/securityscorecard/design-system/commit/7412596a7a7fbfe66f14c310ebd3b5eb3ff389f7))
+
 # [1.0.0-alpha.111](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.110...v1.0.0-alpha.111) (2021-09-14)
 
 
