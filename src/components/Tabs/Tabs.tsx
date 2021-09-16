@@ -6,17 +6,9 @@ import { equals } from 'ramda';
 import { Inline, Padbox } from '../layout';
 import { TabsProps, Variants } from './Tabs.types';
 import { TabSizes, TabVariants } from './Tabs.enums';
-import {
-  SpacingSizeValue,
-  SpacingSizeValuePropType,
-} from '../../types/spacing.types';
 import { SpaceSizes } from '../../theme/space.enums';
-import { createMarginSpacing, getBorderRadius, getColor } from '../../utils';
+import { getBorderRadius, getColor } from '../../utils';
 
-// FIXME: remove when `create*Spacing` methods are deprecated
-const Wrapper = styled.div<{ $margin: SpacingSizeValue }>`
-  ${({ $margin }) => createMarginSpacing($margin)};
-`;
 const LabelList = styled(Padbox)<{
   $variant: Variants;
 }>`
@@ -38,41 +30,33 @@ const Tabs: React.FC<TabsProps> = ({
   onSelectTab,
   size = TabSizes.sm,
   variant = TabVariants.underline,
-  margin = { bottom: 1.5 },
 }) => {
   return (
-    <Wrapper $margin={margin}>
-      <LabelList
-        $variant={variant}
-        paddingSize={
-          variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
-        }
+    <LabelList
+      $variant={variant}
+      paddingSize={
+        variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
+      }
+    >
+      <Inline
+        gap={variant === TabVariants.segmented ? SpaceSizes.sm : SpaceSizes.lg}
+        role="tablist"
       >
-        <Inline
-          gap={
-            variant === TabVariants.segmented ? SpaceSizes.sm : SpaceSizes.lg
+        {React.Children.map(children, (tab) => {
+          if (!React.isValidElement(tab)) {
+            return null;
           }
-          role="tablist"
-        >
-          {React.Children.map(children, (tab) => {
-            if (!React.isValidElement(tab)) {
-              return null;
-            }
 
-            return React.cloneElement(tab, {
-              size,
-              variant,
-              key: tab.props.value,
-              isSelected: selectedPatternMatcher(
-                tab.props.value,
-                selectedValue,
-              ),
-              onClick: onSelectTab,
-            });
-          })}
-        </Inline>
-      </LabelList>
-    </Wrapper>
+          return React.cloneElement(tab, {
+            size,
+            variant,
+            key: tab.props.value,
+            isSelected: selectedPatternMatcher(tab.props.value, selectedValue),
+            onClick: onSelectTab,
+          });
+        })}
+      </Inline>
+    </LabelList>
   );
 };
 
@@ -82,7 +66,6 @@ Tabs.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
   size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
-  margin: SpacingSizeValuePropType,
   selectedPatternMatcher: PropTypes.func,
   onSelectTab: PropTypes.func,
 };

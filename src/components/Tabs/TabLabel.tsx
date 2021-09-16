@@ -19,7 +19,7 @@ import { Padbox } from '../layout';
 
 const largeTextSize = css`
   font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('lg')};
+  line-height: ${getLineHeight('md')};
 `;
 
 const mediumTextSize = css`
