@@ -2,11 +2,12 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { FlexContainer } from '../FlexContainer';
+import { generateControl } from '../../utils/tests/storybook';
+import { Inline, Stack } from '../layout';
 import Button from './Button';
 import { ButtonProps } from './Button.types';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';
-import { generateControl } from '../../utils/tests/storybook';
+import { SpaceSizes } from '../..';
 
 export default {
   title: 'components/Button',
@@ -49,297 +50,185 @@ playground.args = {
 };
 
 export const SolidButtons: Story = () => (
-  <>
-    <FlexContainer alignItems="center" flexWrap="wrap" margin={{ bottom: 1 }}>
-      <Button color="primary" margin={{ right: 1 }} variant="solid">
+  <Stack gap={SpaceSizes.lg}>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="primary" variant="solid">
         Button
       </Button>
-      <Button
-        className="hover"
-        color="primary"
-        margin={{ right: 1 }}
-        variant="solid"
-      >
+      <Button className="hover" color="primary" variant="solid">
         Hovered Button
       </Button>
-      <Button
-        className="focus"
-        color="primary"
-        margin={{ right: 1 }}
-        variant="solid"
-      >
+      <Button className="focus" color="primary" variant="solid">
         Focused Button
       </Button>
-      <Button
-        className="active"
-        color="primary"
-        margin={{ right: 1 }}
-        variant="solid"
-      >
+      <Button className="active" color="primary" variant="solid">
         Active Button
       </Button>
       <Button color="primary" variant="solid" isDisabled>
         Disabled Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button color="danger" margin={{ right: 1 }} variant="solid">
+    </Inline>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="danger" variant="solid">
         Button
       </Button>
-      <Button
-        className="hover"
-        color="danger"
-        margin={{ right: 1 }}
-        variant="solid"
-      >
+      <Button className="hover" color="danger" variant="solid">
         Hovered Button
       </Button>
-      <Button
-        className="focus"
-        color="danger"
-        margin={{ right: 1 }}
-        variant="solid"
-      >
+      <Button className="focus" color="danger" variant="solid">
         Focused Button
       </Button>
-      <Button
-        className="active"
-        color="danger"
-        margin={{ right: 1 }}
-        variant="solid"
-      >
+      <Button className="active" color="danger" variant="solid">
         Active Button
       </Button>
       <Button color="danger" variant="solid" isDisabled>
         Disabled Button
       </Button>
-    </FlexContainer>
-  </>
+    </Inline>
+  </Stack>
 );
 
 export const OutlineButtons: Story = () => (
-  <FlexContainer alignItems="center" flexWrap="wrap" margin={{ bottom: 1 }}>
-    <Button color="primary" margin={{ right: 1 }} variant="outline">
+  <Inline gap={SpaceSizes.md}>
+    <Button color="primary" variant="outline">
       Button
     </Button>
-    <Button
-      className="hover"
-      color="primary"
-      margin={{ right: 1 }}
-      variant="outline"
-    >
+    <Button className="hover" color="primary" variant="outline">
       Hovered Button
     </Button>
-    <Button
-      className="focus"
-      color="primary"
-      margin={{ right: 1 }}
-      variant="outline"
-    >
+    <Button className="focus" color="primary" variant="outline">
       Focused Button
     </Button>
-    <Button
-      className="active"
-      color="primary"
-      margin={{ right: 1 }}
-      variant="outline"
-    >
+    <Button className="active" color="primary" variant="outline">
       Active Button
     </Button>
     <Button color="primary" variant="outline" isDisabled>
       Disabled Button
     </Button>
-  </FlexContainer>
+  </Inline>
 );
 
 export const TextButtons: Story = () => (
-  <>
-    <FlexContainer alignItems="center" flexWrap="wrap" margin={{ bottom: 1 }}>
-      <Button color="primary" margin={{ right: 1 }} variant="text">
+  <Stack gap={SpaceSizes.lg}>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="primary" variant="text">
         Button
       </Button>
-      <Button
-        className="hover"
-        color="primary"
-        margin={{ right: 1 }}
-        variant="text"
-      >
+      <Button className="hover" color="primary" variant="text">
         Hovered Button
       </Button>
-      <Button
-        className="focus"
-        color="primary"
-        margin={{ right: 1 }}
-        variant="text"
-      >
+      <Button className="focus" color="primary" variant="text">
         Focused Button
       </Button>
-      <Button
-        className="active"
-        color="primary"
-        margin={{ right: 1 }}
-        variant="text"
-      >
+      <Button className="active" color="primary" variant="text">
         Active Button
       </Button>
       <Button color="primary" variant="text" isDisabled>
         Disabled Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button color="danger" margin={{ right: 1 }} variant="text">
+    </Inline>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="danger" variant="text">
         Button
       </Button>
-      <Button
-        className="hover"
-        color="danger"
-        margin={{ right: 1 }}
-        variant="text"
-      >
+      <Button className="hover" color="danger" variant="text">
         Hovered Button
       </Button>
-      <Button
-        className="focus"
-        color="danger"
-        margin={{ right: 1 }}
-        variant="text"
-      >
+      <Button className="focus" color="danger" variant="text">
         Focused Button
       </Button>
-      <Button
-        className="active"
-        color="danger"
-        margin={{ right: 1 }}
-        variant="text"
-      >
+      <Button className="active" color="danger" variant="text">
         Active Button
       </Button>
       <Button color="danger" variant="text" isDisabled>
         Disabled Button
       </Button>
-    </FlexContainer>
-  </>
+    </Inline>
+  </Stack>
 );
 
 export const SizedButtons: Story = () => (
-  <>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button color="primary" margin={{ right: 1 }} size="lg" variant="solid">
+  <Stack gap={SpaceSizes.lg}>
+    <Inline align="center" gap={SpaceSizes.md}>
+      <Button color="primary" size="lg" variant="solid">
         Large Button
       </Button>
-      <Button color="primary" margin={{ right: 1 }} size="md" variant="solid">
+      <Button color="primary" size="md" variant="solid">
         Medium Button
       </Button>
       <Button color="primary" size="sm" variant="solid">
         Small Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button color="primary" margin={{ right: 1 }} size="lg" variant="outline">
+    </Inline>
+    <Inline align="center" gap={SpaceSizes.md}>
+      <Button color="primary" size="lg" variant="outline">
         Large Button
       </Button>
-      <Button color="primary" margin={{ right: 1 }} size="md" variant="outline">
+      <Button color="primary" size="md" variant="outline">
         Medium Button
       </Button>
       <Button color="primary" size="sm" variant="outline">
         Small Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button color="primary" margin={{ right: 1 }} size="lg" variant="text">
+    </Inline>
+    <Inline align="center" gap={SpaceSizes.md}>
+      <Button color="primary" size="lg" variant="text">
         Large Button
       </Button>
-      <Button color="primary" margin={{ right: 1 }} size="md" variant="text">
+      <Button color="primary" size="md" variant="text">
         Medium Button
       </Button>
       <Button color="primary" size="sm" variant="text">
         Small Button
       </Button>
-    </FlexContainer>
-  </>
+    </Inline>
+  </Stack>
 );
 
 export const LoadingButtons: Story = () => (
-  <>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        size="lg"
-        variant="solid"
-        isLoading
-      >
+  <Stack gap={SpaceSizes.lg}>
+    <Inline align="center" gap={SpaceSizes.md}>
+      <Button color="primary" size="lg" variant="solid" isLoading>
         Large Button
       </Button>
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        size="md"
-        variant="solid"
-        isLoading
-      >
+      <Button color="primary" size="md" variant="solid" isLoading>
         Medium Button
       </Button>
       <Button color="primary" size="sm" variant="solid" isLoading>
         Small Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        size="lg"
-        variant="outline"
-        isLoading
-      >
+    </Inline>
+    <Inline align="center" gap={SpaceSizes.md}>
+      <Button color="primary" size="lg" variant="outline" isLoading>
         Large Button
       </Button>
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        size="md"
-        variant="outline"
-        isLoading
-      >
+      <Button color="primary" size="md" variant="outline" isLoading>
         Medium Button
       </Button>
       <Button color="primary" size="sm" variant="outline" isLoading>
         Small Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        size="lg"
-        variant="text"
-        isLoading
-      >
+    </Inline>
+    <Inline align="center" gap={SpaceSizes.md}>
+      <Button color="primary" size="lg" variant="text" isLoading>
         Large Button
       </Button>
-      <Button
-        color="primary"
-        margin={{ right: 1 }}
-        size="md"
-        variant="text"
-        isLoading
-      >
+      <Button color="primary" size="md" variant="text" isLoading>
         Medium Button
       </Button>
       <Button color="primary" size="sm" variant="text" isLoading>
         Small Button
       </Button>
-    </FlexContainer>
-  </>
+    </Inline>
+  </Stack>
 );
 
 export const ButtonsWithIconOverview: Story = () => (
-  <>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
+  <Stack gap={SpaceSizes.lg}>
+    <Inline align="center" gap={SpaceSizes.md}>
       <Button
         color="primary"
         iconName={SSCIconNames.wrench}
-        margin={{ right: 1 }}
         size="lg"
         variant="solid"
       >
@@ -348,7 +237,6 @@ export const ButtonsWithIconOverview: Story = () => (
       <Button
         color="primary"
         iconName={SSCIconNames.wrench}
-        margin={{ right: 1 }}
         size="md"
         variant="solid"
       >
@@ -362,12 +250,11 @@ export const ButtonsWithIconOverview: Story = () => (
       >
         Small Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
+    </Inline>
+    <Inline align="center" gap={SpaceSizes.md}>
       <Button
         color="primary"
         iconName={SSCIconNames.wrench}
-        margin={{ right: 1 }}
         size="lg"
         variant="outline"
       >
@@ -376,7 +263,6 @@ export const ButtonsWithIconOverview: Story = () => (
       <Button
         color="primary"
         iconName={SSCIconNames.wrench}
-        margin={{ right: 1 }}
         size="md"
         variant="outline"
       >
@@ -390,12 +276,11 @@ export const ButtonsWithIconOverview: Story = () => (
       >
         Small Button
       </Button>
-    </FlexContainer>
-    <FlexContainer alignItems="center" margin={{ bottom: 1 }}>
+    </Inline>
+    <Inline align="center" gap={SpaceSizes.md}>
       <Button
         color="primary"
         iconName={SSCIconNames.wrench}
-        margin={{ right: 1 }}
         size="lg"
         variant="text"
       >
@@ -404,7 +289,6 @@ export const ButtonsWithIconOverview: Story = () => (
       <Button
         color="primary"
         iconName={SSCIconNames.wrench}
-        margin={{ right: 1 }}
         size="md"
         variant="text"
       >
@@ -418,20 +302,20 @@ export const ButtonsWithIconOverview: Story = () => (
       >
         Small Button
       </Button>
-    </FlexContainer>
-  </>
+    </Inline>
+  </Stack>
 );
 
 export const ExpandedButtons: Story = () => (
-  <FlexContainer flexDirection="column">
-    <Button margin={{ bottom: 1 }} size="md" variant="solid" isExpanded>
+  <Stack gap={SpaceSizes.lg}>
+    <Button size="md" variant="solid" isExpanded>
       Full width button
     </Button>
-    <Button margin={{ bottom: 1 }} size="md" variant="outline" isExpanded>
+    <Button size="md" variant="outline" isExpanded>
       Full width button
     </Button>
     <Button size="md" variant="text" isExpanded>
       Full width button
     </Button>
-  </FlexContainer>
+  </Stack>
 );

@@ -26,7 +26,7 @@ const LabelList = styled(Padbox)<{
     $variant === TabVariants.segmented &&
     css`
       background: ${getColor('graphite5H')};
-      border: 1px solid ${getColor('graphiteB')};
+      box-shadow: inset 0 0 0 1px ${getColor('graphiteB')};
       border-radius: ${getBorderRadius};
     `};
 `;

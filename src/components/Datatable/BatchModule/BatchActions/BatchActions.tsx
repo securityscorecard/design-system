@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import { map } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { ColorTypes } from '../../../../theme';
+import { ColorTypes, SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils';
 import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../../../FlexContainer';
+import { Inline } from '../../../layout';
 import { Button } from '../../../Button';
 import { ButtonVariants } from '../../../Button/Button.enums';
 import { Icon } from '../../../Icon';
@@ -66,12 +67,14 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
               placement={PortalPlacements.bottomRight}
             >
               <BatchActionButton name={action.name} onClick={action.onClick}>
-                {action.label}{' '}
-                <Icon
-                  color={ColorTypes.graphite2B}
-                  margin={{ left: 0.25 }}
-                  name={SSCIconNames.caretDown}
-                />
+                <Inline gap={SpaceSizes.xs}>
+                  <span>{action.label}</span>
+                  <Icon
+                    color={ColorTypes.graphite2B}
+                    margin={{ left: 0.25 }}
+                    name={SSCIconNames.caretDown}
+                  />
+                </Inline>
               </BatchActionButton>
             </Dropdown>
           );
