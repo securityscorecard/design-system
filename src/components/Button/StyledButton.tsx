@@ -10,6 +10,7 @@ import {
   getFontFamily,
   getFontSize,
   getFontWeight,
+  getLineHeight,
   pxToRem,
 } from '../../utils';
 import { BaseStyledButtonProps } from './StyledButton.types';
@@ -201,6 +202,7 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
 
   height: ${({ size, theme }) =>
     pipe(getButtonHeight(size), pxToRem)({ theme })};
+  line-height: ${getLineHeight('md')};
   ${({ size }) => buttonSizes[size]};
   ${({ variant }) => buttonVariants[variant]};
 `;
