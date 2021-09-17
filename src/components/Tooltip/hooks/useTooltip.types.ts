@@ -4,6 +4,7 @@ import { Extends } from '../../../types/utils.types';
 export type UseTooltipOptions = {
   placement: Extends<Placements, 'top' | 'bottom' | 'left' | 'right'>;
   defaultIsPopupDisplayed?: boolean;
+  popupWidth?: number;
 };
 
 export type UseTooltipReturnType = {
