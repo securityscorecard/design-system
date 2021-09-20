@@ -1,3 +1,16 @@
+# [1.0.0-alpha.113](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.112...v1.0.0-alpha.113) (2021-09-20)
+
+
+### Bug Fixes
+
+* **Button:** add line-height to buttons ([b58c3dc](https://github.com/securityscorecard/design-system/commit/b58c3dcead0fa4b74d4f2005170c91218fdc857e))
+
+
+### Features
+
+* **Tabs:** align line-height with Figma designs ([dd64464](https://github.com/securityscorecard/design-system/commit/dd6446467ffae86fbb9c896bb9efb508b8e83c48))
+* **Tooltip:** align padding with Figma designs ([76e08c4](https://github.com/securityscorecard/design-system/commit/76e08c4824bce5b7423bffcaccfd72b33ca0d955))
+
 # [1.0.0-alpha.112](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.111...v1.0.0-alpha.112) (2021-09-16)
 
 
