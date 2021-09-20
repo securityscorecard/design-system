@@ -1,8 +1,8 @@
 import { PortalPlacements } from './useCalculatePortalPlacements.enums';
 
 export type StyleProps = {
-  width: number;
   space: number;
+  width?: number;
   left?: number;
   right?: number;
   top?: number;

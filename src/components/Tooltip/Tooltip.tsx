@@ -10,13 +10,14 @@ const Tooltip: React.FC<TooltipProps> = ({
   children,
   popup,
   placement = PortalPlacements.bottom,
+  width = 270,
   defaultIsPopupDisplayed = false,
   ...props
 }) => {
   const parentRef = useRef(null);
   const { Popup, handleShowTooltip, handleHideTooltip } = useTooltip(
     parentRef,
-    { placement, defaultIsPopupDisplayed },
+    { placement, defaultIsPopupDisplayed, popupWidth: width },
   );
 
   const delayedHandleHideTooltip = () => {
@@ -42,6 +43,7 @@ Tooltip.propTypes = {
   popup: PropTypes.node,
   className: PropTypes.string,
   placement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  width: PropTypes.number,
   defaultIsPopupDisplayed: PropTypes.bool,
 };
 

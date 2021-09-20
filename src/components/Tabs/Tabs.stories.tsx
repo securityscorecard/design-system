@@ -10,6 +10,7 @@ import { ColorTypes } from '../../theme/colors.enums';
 import { TabsProps } from './Tabs.types';
 import { generateControl } from '../../utils/tests/storybook';
 import { TabSizes, TabVariants } from './Tabs.enums';
+import { SpaceSizes } from '../../theme';
 
 export default {
   title: 'components/Tabs',
@@ -50,7 +51,7 @@ const ContentB = () => (
 
 export const playground: Story<TabsProps> = (args) => {
   return (
-    <>
+    <Stack gap={SpaceSizes.lg}>
       <Tabs {...args}>
         <Tab value="inventory">Inventory</Tab>
         <Tab value="overview">Overview</Tab>
@@ -60,7 +61,7 @@ export const playground: Story<TabsProps> = (args) => {
         {args.selectedValue === 'inventory' && <ContentA />}
         {args.selectedValue === 'overview' && <ContentB />}
       </main>
-    </>
+    </Stack>
   );
 };
 playground.argTypes = {
@@ -83,7 +84,7 @@ export const OnlyTabs: Story = () => (
 export const StatefulTabs: Story = () => {
   const [selected, setSelected] = useState<string | number>('inventory');
   return (
-    <>
+    <Stack gap={SpaceSizes.lg}>
       <Tabs selectedValue={selected} onSelectTab={setSelected}>
         <Tab value="inventory">Inventory</Tab>
         <Tab value="overview">Overview</Tab>
@@ -93,7 +94,7 @@ export const StatefulTabs: Story = () => {
         {selected === 'inventory' && <ContentA />}
         {selected === 'overview' && <ContentB />}
       </main>
-    </>
+    </Stack>
   );
 };
 
@@ -121,7 +122,7 @@ export const RoutableTabs: Story = () => {
 };
 
 export const UnderlineTabs: Story = () => (
-  <>
+  <Stack gap={SpaceSizes.lg}>
     <Tabs selectedValue="one" size="lg" onSelectTab={action('Select Tab')}>
       <Tab value="one">One</Tab>
       <Tab value="two">Two</Tab>
@@ -137,11 +138,11 @@ export const UnderlineTabs: Story = () => (
       <Tab value="two">Two</Tab>
       <Tab value="three">Three</Tab>
     </Tabs>
-  </>
+  </Stack>
 );
 
 export const TextTabs: Story = () => (
-  <>
+  <Stack gap={SpaceSizes.lg}>
     <Tabs
       selectedValue="one"
       size="lg"
@@ -162,12 +163,12 @@ export const TextTabs: Story = () => (
       <Tab value="two">Two</Tab>
       <Tab value="three">Three</Tab>
     </Tabs>
-  </>
+  </Stack>
 );
 
 export const SegmentedTabs: Story = () => (
-  <Stack gap="lg">
-    <Inline gap="md">
+  <Stack gap={SpaceSizes.lg}>
+    <Inline gap={SpaceSizes.md}>
       <Tabs
         margin="none"
         selectedValue="one"

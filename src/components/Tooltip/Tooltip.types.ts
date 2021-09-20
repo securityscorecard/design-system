@@ -12,5 +12,6 @@ export interface TooltipProps {
   popup?: React.ReactNode;
   className?: string;
   placement?: UseTooltipOptions['placement'];
+  width?: UseTooltipOptions['popupWidth'];
   defaultIsPopupDisplayed?: boolean;
 }

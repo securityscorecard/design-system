@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
+import { SpaceSizes } from '../../theme';
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
 import {
-  createPaddingSpacing,
   getBorderRadius,
   getColor,
   getFontFamily,
@@ -10,6 +10,7 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../utils';
+import { Padbox } from '../layout';
 import { TooltipPopupProps } from './Tooltip.types';
 
 const bottomPlacement = ({ $space, $width }) => css`
@@ -91,9 +92,10 @@ const tooltipPlacements = {
   [PortalPlacements.right]: rightPlacement,
 };
 
-const TooltipPopup = styled.div<TooltipPopupProps>`
+const TooltipPopup = styled(Padbox).attrs(() => ({
+  paddingSize: SpaceSizes.md,
+}))<TooltipPopupProps>`
   position: absolute;
-  ${createPaddingSpacing(0.8)};
   background: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
   font-family: ${getFontFamily('base')};

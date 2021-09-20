@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import usePortal from 'react-cool-portal';
 
+import { Stack } from '../../layout';
+import { SpaceSizes } from '../../../theme';
 import { useCalculatePortaPlacement } from '../../../hooks/useCalculatePortalPlacement';
 import { StyleProps } from '../../../hooks/useCalculatePortalPlacement.types';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
@@ -8,11 +10,15 @@ import { pxToRem } from '../../../utils';
 import TooltipPopup from '../TooltipPopup';
 import { UseTooltipOptions, UseTooltipReturnType } from './useTooltip.types';
 
-const defaultTooltipPopupDimensions = { width: 270, space: 8 };
+const defaultTooltipPopupDimensions = { space: 8 };
 
 export const useTooltip = (
   parentRef: React.MutableRefObject<HTMLSpanElement>,
-  { defaultIsPopupDisplayed = false, placement }: UseTooltipOptions,
+  {
+    defaultIsPopupDisplayed = false,
+    placement,
+    popupWidth = 270,
+  }: UseTooltipOptions,
 ): UseTooltipReturnType => {
   const { portalsContainerId } = useContext(DSContext);
   const { Portal, isShow, show, hide } = usePortal({
@@ -23,6 +29,7 @@ export const useTooltip = (
   const [style, setStyle] = useState<StyleProps>(defaultTooltipPopupDimensions);
   const getPlacementStyles = useCalculatePortaPlacement(parentRef, {
     placement,
+    width: popupWidth,
     ...defaultTooltipPopupDimensions,
   });
 
@@ -49,7 +56,9 @@ export const useTooltip = (
               bottom: pxToRem(bottom),
             }}
           >
-            {children}
+            <Stack gap={SpaceSizes.md} justify="flex-start">
+              {children}
+            </Stack>
           </TooltipPopup>
         </Portal>
       );
