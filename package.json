@@ -146,7 +146,8 @@
     "react-syntax-highlighter": "15.4.3",
     "@types/react": "16.14.5",
     "glob-parent": "5.1.2",
-    "immer": "9.0.6"
+    "immer": "9.0.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.1"
   },
   "repository": {
     "type": "git",
