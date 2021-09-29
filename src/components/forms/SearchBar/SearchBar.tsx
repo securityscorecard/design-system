@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils';
+import { createPadding, getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
@@ -12,55 +12,48 @@ import { SearchBarPropType, SearchBarProps } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import { Error } from '../Message';
 import { validatePattern } from '../../Filters/helpers';
+import { SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
+import { InputProps } from '../Input/Input.types';
 
 const SEARCH_DEBOUNCE_TIME = 500;
 
 const SearchBarWrapper = styled.div`
   position: relative;
-  width: 100%;
 `;
 
-const StyledInput = styled(Input)`
-  text-overflow: ellipsis;
-  ${createPaddingSpacing({ horizontal: 2.5 })};
-  &:focus,
-  &.focus {
-    ${createPaddingSpacing({ horizontal: 2.45 })};
-  }
+const StyledInput = styled(Input)<InputProps & { $isSearching: boolean }>`
+  padding-left: ${getSpace(SpaceSizes.lgPlus)};
+
+  ${({ $isSearching, theme }) =>
+    $isSearching &&
+    `
+    padding-right: ${getSpace(SpaceSizes.lgPlus, { theme })};
+  `};
 `;
 
-const SearchBarIcon = styled.div`
+const SearchBarIcon = styled.div<{ $position: 'start' | 'end' }>`
+  box-sizing: content-box;
+  width: ${pxToRem(16)};
   position: absolute;
   top: 0;
-  height: ${getFormStyle('fieldHeight')};
-  width: ${getFormStyle('fieldHeight')};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.md,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
+  ${({ $position }) => ($position === 'start' ? 'left' : 'right')}: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const SearchIcon = styled(SearchBarIcon)`
-  left: 0;
-  ${createPaddingSpacing({ left: 12 / 20 })};
-`;
-
-const LoadingIcon = styled(SearchBarIcon)`
-  right: 0;
-  ${createPaddingSpacing({ right: 12 / 20 })};
 `;
 
 const ClearSearchButton = styled.button`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: ${getFormStyle('fieldHeight')};
-  width: ${getFormStyle('fieldHeight')};
-  ${createPaddingSpacing({ left: 12 / 20 })};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 0;
+  appearance: none;
   background: transparent;
-  border: 0 none;
+  cursor: pointer;
 `;
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -174,26 +167,30 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <SearchBarWrapper>
       {isNonEmptyString(query) ? (
-        <ClearSearchButton aria-label="Clear Search" onClick={clearSearch}>
+        <SearchBarIcon
+          $position="start"
+          aria-label="Clear Search"
+          as={ClearSearchButton}
+          onClick={clearSearch}
+        >
           <Icon
             color="graphite2B"
             name={SSCIconNames.times}
             type={IconTypes.ssc}
-            hasFixedWidth
           />
-        </ClearSearchButton>
+        </SearchBarIcon>
       ) : (
-        <SearchIcon aria-label="Search">
+        <SearchBarIcon $position="start" aria-label="Search">
           <Icon
             color="graphite2B"
             name={SSCIconNames.search}
             type={IconTypes.ssc}
-            hasFixedWidth
           />
-        </SearchIcon>
+        </SearchBarIcon>
       )}
 
       <StyledInput
+        $isSearching={isSearching}
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         pattern={pattern}
@@ -208,7 +205,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       {isInvalid && <Error>{errorMessage}</Error>}
 
       {isSearching && (
-        <LoadingIcon>
+        <SearchBarIcon $position="end">
           <Spinner
             borderWidth={2}
             height={16}
@@ -216,7 +213,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             width={16}
             dark
           />
-        </LoadingIcon>
+        </SearchBarIcon>
       )}
 
       {isSuggestionDisplayed && (
