@@ -104,6 +104,8 @@ const getLabelStyles = css`
 `;
 
 const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
+  padding-top: 0;
+  padding-bottom: 0;
   padding-left: ${pipe(getFormStyle('toggleSize'), add(10), pxToRem)};
   ${getLabelStyles};
 `;

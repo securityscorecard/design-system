@@ -2,9 +2,14 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getFontWeight, pxToRem } from '../../../../utils';
+import {
+  getColor,
+  getFontSize,
+  getFontWeight,
+  pxToRem,
+} from '../../../../utils';
 import { FlexContainer } from '../../../FlexContainer';
-import { Input, Label } from '../../../forms';
+import { Input } from '../../../forms';
 import { GoToPageProps } from './GoToPage.types';
 
 const SmallInput = styled(Input)`
@@ -23,10 +28,12 @@ const SmallInput = styled(Input)`
     padding: ${pxToRem(7, 15)};
   }
 `;
-const GoToPageLabel = styled(Label)`
+const GoToPageLabel = styled.label`
   margin-bottom: 0;
   margin-right: ${pxToRem(16)};
+  font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('medium')};
+  color: ${getColor('graphite2B')};
 `;
 
 const GoToPage: React.FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
