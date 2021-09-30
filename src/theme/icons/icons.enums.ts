@@ -26,6 +26,9 @@ export const SSCIconNames = {
   ban: 'ban',
   exclamationTriangle: 'exclamation-triangle',
   infoCircle: 'info-circle',
+  envelope: 'envelope',
+  creditCard: 'credit-card',
+  comments: 'comments',
 } as const;
 
 export const IconTypes = {

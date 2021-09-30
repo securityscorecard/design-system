@@ -30,3 +30,6 @@ export { timesSolid } from './timesSolid';
 export { ban } from './ban';
 export { exclamationTriangle } from './exclamationTriangle';
 export { infoCircle } from './infoCircle';
+export { envelope } from './envelope';
+export { creditCard } from './creditCard';
+export { comments } from './comments';
