@@ -20,6 +20,9 @@ import {
 import { Filter } from '../../Filters/Filters.types';
 import { ControlTypes } from './ControlsModule.enums';
 import { ColumnsControls } from './ColumnsControls';
+import { SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
+import { Inline, Padbox } from '../../layout';
 
 const FiltersContainer = styled(FlexContainer)`
   background-color: ${getColor('graphite5H')};
@@ -192,68 +195,66 @@ const ControlsModule = <D extends Record<string, unknown>>({
 
   return (
     <FlexContainer flexDirection="column">
-      <FlexContainer
-        alignItems="baseline"
-        padding={{ vertical: 0.4, horizontal: 0.8 }}
-      >
-        {isToolbarEnabled && (
-          <FlexContainer flexShrink={1} margin={{ right: 1.6 }}>
-            {
-              /* hasColumnVisibility || */ hasColumnOrdering && (
-                <ColumnsControls
-                  isOpen={controlsState[ControlTypes.columns].isActive}
-                  onApply={(shouldApply) => {
-                    applyControlStateChange(ControlTypes.columns, {
-                      isApplied: shouldApply,
-                    });
-                    handleControlOnClick(
-                      ControlTypes.columns,
-                      controlsState[ControlTypes.columns].isActive,
-                    );
-                  }}
-                  onClose={() =>
-                    handleControlOnClick(
-                      ControlTypes.columns,
-                      controlsState[ControlTypes.columns].isActive,
-                    )
-                  }
-                  onOpen={() =>
-                    handleControlOnClick(
-                      ControlTypes.columns,
-                      controlsState[ControlTypes.columns].isActive,
-                    )
-                  }
-                >
-                  <ControlButton
-                    iconName={SSCIconNames.reorder}
-                    isActive={controlsState[ControlTypes.columns].isActive}
-                    isApplied={controlsState[ControlTypes.columns].isApplied}
-                    label="Columns"
-                    onClick={() =>
+      <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
+        <Inline gap={SpaceSizes.lg} stretch="end">
+          {isToolbarEnabled && (
+            <Inline>
+              {
+                /* hasColumnVisibility || */ hasColumnOrdering && (
+                  <ColumnsControls
+                    isOpen={controlsState[ControlTypes.columns].isActive}
+                    onApply={(shouldApply) => {
+                      applyControlStateChange(ControlTypes.columns, {
+                        isApplied: shouldApply,
+                      });
+                      handleControlOnClick(
+                        ControlTypes.columns,
+                        controlsState[ControlTypes.columns].isActive,
+                      );
+                    }}
+                    onClose={() =>
                       handleControlOnClick(
                         ControlTypes.columns,
                         controlsState[ControlTypes.columns].isActive,
                       )
                     }
-                  />
-                </ColumnsControls>
-              )
-            }
-            {shouldShowFiltering && (
-              <ControlButton
-                iconName={SSCIconNames.filter}
-                isActive={controlsState[ControlTypes.filters].isActive}
-                isApplied={controlsState[ControlTypes.filters].isApplied}
-                label="Filters"
-                onClick={() =>
-                  handleControlOnClick(
-                    ControlTypes.filters,
-                    controlsState[ControlTypes.filters].isActive,
-                  )
-                }
-              />
-            )}
-            {/* {hasGrouping && (
+                    onOpen={() =>
+                      handleControlOnClick(
+                        ControlTypes.columns,
+                        controlsState[ControlTypes.columns].isActive,
+                      )
+                    }
+                  >
+                    <ControlButton
+                      iconName={SSCIconNames.reorder}
+                      isActive={controlsState[ControlTypes.columns].isActive}
+                      isApplied={controlsState[ControlTypes.columns].isApplied}
+                      label="Columns"
+                      onClick={() =>
+                        handleControlOnClick(
+                          ControlTypes.columns,
+                          controlsState[ControlTypes.columns].isActive,
+                        )
+                      }
+                    />
+                  </ColumnsControls>
+                )
+              }
+              {shouldShowFiltering && (
+                <ControlButton
+                  iconName={SSCIconNames.filter}
+                  isActive={controlsState[ControlTypes.filters].isActive}
+                  isApplied={controlsState[ControlTypes.filters].isApplied}
+                  label="Filters"
+                  onClick={() =>
+                    handleControlOnClick(
+                      ControlTypes.filters,
+                      controlsState[ControlTypes.filters].isActive,
+                    )
+                  }
+                />
+              )}
+              {/* {hasGrouping && (
               <ControlButton
                 iconName={SSCIconNames.sitemap}
                 isActive={controlsState[ControlTypes.groups].isActive}
@@ -271,11 +272,10 @@ const ControlsModule = <D extends Record<string, unknown>>({
                 onClick={() => handleControlOnClick(ControlTypes.views, controlsState[ControlTypes.views].isActive)}
               />
             )} */}
-          </FlexContainer>
-        )}
+            </Inline>
+          )}
 
-        {hasSearch && (
-          <FlexContainer flexGrow={1}>
+          {hasSearch && (
             <SearchBar
               defaultValue={defaultSearchValue}
               hasSuggestions={false}
@@ -284,9 +284,9 @@ const ControlsModule = <D extends Record<string, unknown>>({
               {...restSearchConfig}
               // renderSearchSuggestion={renderSuggestionFilter}
             />
-          </FlexContainer>
-        )}
-      </FlexContainer>
+          )}
+        </Inline>
+      </Padbox>
 
       {shouldShowFiltering && controlsState[ControlTypes.filters].isActive && (
         <FiltersContainer padding={{ top: 1.2, bottom: 0.8, horizontal: 0.8 }}>

@@ -5,18 +5,20 @@ import { isNotUndefined, noop } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
 
 import {
-  createPaddingSpacing,
+  createPadding,
   getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getFormStyle,
   getLineHeight,
+  getSpace,
   pxToRem,
 } from '../../../utils';
 import { TextAreaProps } from './TextArea.types';
 import { useAutosize } from './hooks/useAutosize';
 import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
+import { SpaceSizes } from '../../../theme';
 
 const TextAreaWrapper = styled.div<{ height: string }>`
   position: relative;
@@ -31,23 +33,26 @@ const StyledTextArea = styled.textarea<{
   resize: none;
   width: 100%;
   font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('lg')};
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
   height: ${prop('height')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
   box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
-  ${({ hasMaxLength }) =>
+  ${({ hasMaxLength, theme }) =>
     hasMaxLength
-      ? createPaddingSpacing({ vertical: 1, horizontal: 1, bottom: 2 })
-      : createPaddingSpacing(1)}
+      ? css`
+          ${createPadding({ paddingSize: SpaceSizes.md, theme })};
+          padding-bottom: ${getSpace(SpaceSizes.lg)};
+        `
+      : createPadding({ paddingSize: SpaceSizes.md, theme })};
   ${({ isInvalid }) =>
     isInvalid &&
     css`
       border-color: ${getFormStyle('invalidBorderColor')};
       box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
-    `}
+    `};
 
   &:disabled {
     background: ${getFormStyle('disabledBgColor')};

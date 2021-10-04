@@ -5,7 +5,8 @@ import colors from './colors';
 import { pxToRem } from '../utils';
 
 const forms: Forms = {
-  fieldHeight: pxToRem(40),
+  fieldHeight: pxToRem(32),
+  fieldLineHeight: pxToRem(14),
   toggleSize: 20,
   color: colors.graphite4B,
   bgColor: colors.graphite5H,

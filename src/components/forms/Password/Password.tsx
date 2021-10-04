@@ -2,26 +2,37 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils';
+import { createPadding, getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Input } from '../Input';
 import { PasswordProps } from './Password.types';
+import { SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 
 const PasswordWrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled(Input)`
-  ${createPaddingSpacing({ right: 2 })};
+const PasswordInput = styled(Input)`
+  padding-right: ${getSpace(SpaceSizes.lgPlus)};
 `;
 
 const ToggleButton = styled.button`
+  border: 0;
+  appearance: none;
+  background: none;
+  box-sizing: content-box;
+  width: ${pxToRem(16)};
   position: absolute;
   top: 0;
   right: 0;
-  height: ${getFormStyle('fieldHeight')};
-  width: ${getFormStyle('fieldHeight')};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.md,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +54,7 @@ const Password: React.FC<PasswordProps> = ({
 
   return (
     <PasswordWrapper>
-      <StyledInput
+      <PasswordInput
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         {...props}
@@ -57,7 +68,6 @@ const Password: React.FC<PasswordProps> = ({
           color="graphite2B"
           name={isPasswordRevealed ? SSCIconNames.eyeSlash : SSCIconNames.eye}
           type={IconTypes.ssc}
-          hasFixedWidth
         />
       </ToggleButton>
     </PasswordWrapper>

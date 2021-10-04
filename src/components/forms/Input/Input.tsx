@@ -2,20 +2,15 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import {
-  createPaddingSpacing,
+  createPadding,
   getBorderRadius,
   getFontFamily,
   getFontSize,
   getFormStyle,
-  getLineHeight,
 } from '../../../utils';
 import { InputProps } from './Input.types';
-
-const stateStyles = css`
-  ${createPaddingSpacing({ vertical: 0.4, horizontal: 0.9 })};
-  border: ${getFormStyle('statefulBorderWidth')} solid;
-  outline: none;
-`;
+import { SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 
 const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   disabled: isDisabled,
@@ -23,26 +18,32 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   display: block;
   width: 100%;
   height: ${getFormStyle('fieldHeight')};
-  ${createPaddingSpacing({ vertical: 0.45, horizontal: 0.95 })};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.md,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
   background: ${getFormStyle('bgColor')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
   color: ${getFormStyle('color')};
   font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('lg')};
+  font-size: ${getFontSize('md')};
+  line-height: ${getFormStyle('fieldLineHeight')};
+  outline: none;
 
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      ${stateStyles}
       border-color: ${getFormStyle('invalidBorderColor')};
+      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
     `}
 
   &:focus,
   &.focus {
-    ${stateStyles}
     border-color: ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
   }
 
   &:disabled {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
+import { SpaceSizes } from '../../../theme';
+import { Stack } from '../../layout';
 import RadioListItem from './RadioListItem';
 import { RadioListItemProps } from './RadioListItem.types';
 
@@ -11,7 +13,7 @@ export default {
 } as Meta;
 
 export const playground: Story<RadioListItemProps> = (args) => (
-  <>
+  <Stack gap={SpaceSizes.xs}>
     <RadioListItem group={args.group} itemId="item-1" value={1}>
       RadioListItem 1
     </RadioListItem>
@@ -21,7 +23,7 @@ export const playground: Story<RadioListItemProps> = (args) => (
     <RadioListItem group={args.group} itemId="item-3" value={3}>
       RadioListItem 3
     </RadioListItem>
-  </>
+  </Stack>
 );
 playground.parameters = {
   chromatic: { disable: true },

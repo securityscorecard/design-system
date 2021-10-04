@@ -4,27 +4,24 @@ import styled, { css } from 'styled-components';
 import { allPass } from 'ramda';
 import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 
-import { createMarginSpacing, getFormStyle, pxToRem } from '../../../utils';
+import { getFormStyle, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';
-
-const RadioWrapper = styled.div`
-  & + & {
-    ${createMarginSpacing({ top: 0.25 })};
-  }
-`;
 
 const RadioLabel = styled(Label)<
   React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
 >`
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 
   ${({ theme, hasLabel }) => {
     const toggleSize = getFormStyle('toggleSize')({ theme });
-    const leftPadding = hasLabel ? toggleSize + 10 : toggleSize;
+    const leftPadding = hasLabel ? toggleSize + theme.space.sm : toggleSize;
 
     return css`
       min-height: ${pxToRem(toggleSize)};
@@ -94,7 +91,7 @@ const Radio: React.FC<RadioProps> = ({
   const hasLabel = allPass([isNotUndefined, isNonEmptyString])(label);
 
   return (
-    <RadioWrapper>
+    <div>
       <RadioInput
         disabled={isDisabled}
         id={radioId}
@@ -106,7 +103,7 @@ const Radio: React.FC<RadioProps> = ({
       <RadioLabel hasLabel={hasLabel} htmlFor={radioId}>
         {label}
       </RadioLabel>
-    </RadioWrapper>
+    </div>
   );
 };
 

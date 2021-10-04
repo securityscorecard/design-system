@@ -7,21 +7,18 @@ import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
 import {
-  createMarginSpacing,
   getBorderRadius,
   getColor,
   getFormStyle,
   pxToRem,
 } from '../../../utils';
-import { FlexContainer } from '../../FlexContainer';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
 
-const CheckboxWrapper = styled(FlexContainer)`
-  & + & {
-    ${createMarginSpacing({ top: 0.25 })};
-  }
+const CheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const getRemToggleSize = memoizeWith(
@@ -29,7 +26,10 @@ const getRemToggleSize = memoizeWith(
   pipe(getFormStyle('toggleSize'), pxToRem),
 );
 
-const Box = styled(FlexContainer)`
+const Box = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 ${getRemToggleSize};
   height: ${getRemToggleSize};
   width: ${getRemToggleSize};
@@ -104,7 +104,12 @@ const getLabelStyles = css`
 `;
 
 const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
-  padding-left: ${pipe(getFormStyle('toggleSize'), add(10), pxToRem)};
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: ${({ theme }) =>
+    pipe(getFormStyle('toggleSize'), add(theme.space.sm), pxToRem)({ theme })};
   ${getLabelStyles};
 `;
 
@@ -135,7 +140,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const hasLabel = allPass([isNotUndefined, isNonEmptyString])(label);
 
     return (
-      <CheckboxWrapper alignItems="center" className={className}>
+      <CheckboxWrapper className={className}>
         <CheckboxInput
           ref={ref}
           disabled={isDisabled}
@@ -146,7 +151,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           {...props}
         />
-        <Box alignItems="center" justifyContent="center">
+        <Box>
           <Mark
             role="img"
             xmlns="http://www.w3.org/2000/svg"

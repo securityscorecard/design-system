@@ -2,15 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils';
-import { Label } from '../Label';
+import { createPadding, getFontSize, getFormStyle } from '../../../utils';
+import { SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { RadioListItemProps } from './RadioListItem.types';
 
-const RadioLabel = styled(Label).attrs(() => ({ variant: 'primary' }))`
-  border-radius: 15px;
+const RadioLabel = styled.label`
+  display: flex;
+  border-radius: 50em;
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   cursor: pointer;
-  ${createPaddingSpacing({ vertical: 0.2, horizontal: 0.75 })}
+  height: ${getFormStyle('fieldHeight')};
+  font-size: ${getFontSize('md')};
+  line-height: ${getFormStyle('fieldLineHeight')};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.md,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
 `;
 
 const Input = styled.input`
@@ -19,9 +29,8 @@ const Input = styled.input`
   &:checked + ${RadioLabel} {
     background: ${getFormStyle('activeBgColor')};
     color: ${getFormStyle('activeBorderColor')};
-    border: ${getFormStyle('statefulBorderWidth')} solid
-      ${getFormStyle('activeBorderColor')};
-    ${createPaddingSpacing({ vertical: 0.15, horizontal: 0.7 })}
+    border-color: ${getFormStyle('activeBorderColor')};
+    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('activeBorderColor')};
   }
 `;
 
