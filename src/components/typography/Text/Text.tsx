@@ -43,6 +43,9 @@ const monospaceVariant = css`
 const dangerVariant = css`
   color: ${getColor('strawberry')};
 `;
+const inheritVariant = `
+  color: inherit;
+`;
 
 const sizes = {
   [TextSizes.lg]: largeSize,
@@ -57,13 +60,13 @@ const variants = {
   [TextVariants.context]: contextVariant,
   [TextVariants.monospace]: monospaceVariant,
   [TextVariants.danger]: dangerVariant,
+  [TextVariants.inherit]: inheritVariant,
 };
 
 const Text = styled.span<TextProps>`
   font-family: inherit;
   font-weight: ${({ isBold, theme }) =>
     isBold ? getFontWeight('bold', { theme }) : 'inherit'};
-  color: inherit;
   ${({ size }) => sizes[size]};
   ${({ variant }) => variants[variant]};
 `;
