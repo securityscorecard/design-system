@@ -11,4 +11,5 @@ export const TextVariants = {
   context: 'context',
   monospace: 'monospace',
   danger: 'danger',
+  inherit: 'inherit',
 } as const;

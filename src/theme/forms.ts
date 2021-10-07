@@ -10,6 +10,7 @@ const forms: Forms = {
   toggleSize: 20,
   color: colors.graphite4B,
   bgColor: colors.graphite5H,
+  disabledColor: colors.graphiteB,
   borderColor: colors.graphiteB,
   borderWidth: '1px',
   statefulBorderWidth: '2px',

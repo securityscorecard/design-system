@@ -4,6 +4,7 @@ export interface Forms {
   toggleSize: number;
   color: string;
   bgColor: string;
+  disabledColor: string;
   borderColor: string;
   borderWidth: string;
   statefulBorderWidth: string;
