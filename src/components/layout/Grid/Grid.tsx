@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
 
@@ -44,7 +44,7 @@ const GridParent = styled.div<GridParentProps>(
   ({ $cols, $gap, $align, theme }) => {
     const gapSize = getSpace($gap, { theme });
 
-    return `
+    return css`
       display: flex;
       flex-wrap: wrap;
       align-items: ${$align};
