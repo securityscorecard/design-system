@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
 
@@ -47,7 +47,7 @@ const ClusterParent = styled.div<ClusterParentProps>(
   ({ $gap, $justify, $align, theme }) => {
     const gapSize = getSpace($gap, { theme });
 
-    return `
+    return css`
       display: flex;
       flex-wrap: wrap;
       justify-content: ${$justify};
