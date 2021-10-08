@@ -1,3 +1,16 @@
+# [1.0.0-alpha.115](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.114...v1.0.0-alpha.115) (2021-10-08)
+
+
+### Bug Fixes
+
+* **primitives:** prevent passing 'undefined' into CSS ([6eab16b](https://github.com/securityscorecard/design-system/commit/6eab16bd8f54e7ee152bf2163ff982f2bbda1167))
+
+
+### Features
+
+* **Select:** rework Select component ([b302423](https://github.com/securityscorecard/design-system/commit/b302423f4d4089d88fb44203ddb51f41b1cb5f76))
+* **toggles:** mute label color in disabled state ([c5684ea](https://github.com/securityscorecard/design-system/commit/c5684ea39c8d8b5f2b94c6bfc11ad438520b3c06))
+
 # [1.0.0-alpha.114](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.113...v1.0.0-alpha.114) (2021-10-04)
 
 
