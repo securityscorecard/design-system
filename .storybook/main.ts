@@ -1,4 +1,4 @@
-const {includes} = require('ramda')
+const { includes } = require('ramda');
 
 module.exports = {
   stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
@@ -25,11 +25,6 @@ module.exports = {
       // shouldExtractValuesFromUnion: true, // disable it for now as it cause issues in SBv6.2
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
-        if (prop.parent) {
-          // filter inherited props
-          return !prop.parent.fileName.includes("node_modules");
-        }
-
         // filter inherited styled-components props
         return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
       },

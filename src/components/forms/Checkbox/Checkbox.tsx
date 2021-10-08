@@ -111,6 +111,12 @@ const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
   padding-left: ${({ theme }) =>
     pipe(getFormStyle('toggleSize'), add(theme.space.sm), pxToRem)({ theme })};
   ${getLabelStyles};
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      color: ${getFormStyle('disabledColor')};
+    `}
 `;
 
 const EmptyLabel = styled.label`
@@ -159,7 +165,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           />
         </Box>
         {hasLabel ? (
-          <CheckboxLabel htmlFor={checkboxId}>{label}</CheckboxLabel>
+          <CheckboxLabel htmlFor={checkboxId} isDisabled={isDisabled}>
+            {label}
+          </CheckboxLabel>
         ) : (
           <EmptyLabel htmlFor={checkboxId} />
         )}
@@ -169,8 +177,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 );
 
 Checkbox.propTypes = {
-  checkboxId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  checkboxId: PropTypes.string,
   label: PropTypes.string,
   className: PropTypes.string,
   isDisabled: PropTypes.bool,
