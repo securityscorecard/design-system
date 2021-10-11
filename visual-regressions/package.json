@@ -9,12 +9,13 @@
   },
   "devDependencies": {
     "reg-cli": "^0.16.3",
-    "serve": "^11.3.2",
+    "serve": "^12.0.0",
     "start-server-and-test": "^1.11.7",
     "storycap": "3.0.4"
   },
   "resolutions": {
     "lodash": "4.17.21",
-    "trim-newlines": "4.0.1"
+    "trim-newlines": "4.0.1",
+    "string-width": "4.2.3"
   }
 }
