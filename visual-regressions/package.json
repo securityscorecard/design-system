@@ -15,6 +15,7 @@
   },
   "resolutions": {
     "lodash": "4.17.21",
-    "trim-newlines": "4.0.1"
+    "trim-newlines": "4.0.1",
+    "string-width": "4.2.3"
   }
 }
