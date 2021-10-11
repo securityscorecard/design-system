@@ -147,7 +147,8 @@
     "@types/react": "16.14.5",
     "glob-parent": "5.1.2",
     "immer": "9.0.6",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.1"
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.1",
+    "set-value": "4.1.0"
   },
   "repository": {
     "type": "git",
