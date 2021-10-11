@@ -148,7 +148,8 @@
     "glob-parent": "5.1.2",
     "immer": "9.0.6",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.1",
-    "set-value": "4.1.0"
+    "set-value": "4.1.0",
+    "prismjs": "1.25.0"
   },
   "repository": {
     "type": "git",
