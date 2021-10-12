@@ -186,7 +186,8 @@ export const selectStyles: (
       display: 'flex',
       alignItems: 'center',
       '> div > input': {
-        lineHeight: DSTheme.typography.lineHeight.md,
+        fontFamily: DSTheme.typography.family.base,
+        lineHeight: DSTheme.forms.fieldLineHeight,
       },
     }),
     placeholder: (_, { children }) => ({
