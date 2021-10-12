@@ -1,3 +1,10 @@
+# [1.0.0-alpha.116](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.115...v1.0.0-alpha.116) (2021-10-12)
+
+
+### Bug Fixes
+
+* **Select:** fix font styles on input ([7b9da9f](https://github.com/securityscorecard/design-system/commit/7b9da9fb1875cea7a8ff2745526284f66509bd9b))
+
 # [1.0.0-alpha.115](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.114...v1.0.0-alpha.115) (2021-10-08)
 
 
