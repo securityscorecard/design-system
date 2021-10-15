@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../../theme';
-import { getColor, getSpace } from '../../../utils';
-import { Paragraph } from '../../typography';
+import { getSpace } from '../../../utils';
+import { Text } from '../../typography';
 import { TextSizes } from '../../typography/Text/Text.enums';
 
-const LabelContainer = styled.div`
+const LabelContainer = styled(Text)`
+  display: block;
   padding-top: ${getSpace(SpaceSizes.xs)};
   padding-bottom: ${getSpace(SpaceSizes.xs)};
-  color: ${getColor('graphite4B')};
+  cursor: 'inherit';
 
   > * {
     margin: 0;
@@ -18,18 +19,10 @@ const LabelContainer = styled.div`
 `;
 
 const Label: React.FC<
-  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Paragraph>
+  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Text>
 > = ({ children, htmlFor, ...props }) => (
-  <LabelContainer {...props}>
-    <Paragraph
-      as="label"
-      htmlFor={htmlFor}
-      size={TextSizes.md}
-      style={{ cursor: 'inherit' }}
-      variant="inherit"
-    >
-      {children}
-    </Paragraph>
+  <LabelContainer as="label" htmlFor={htmlFor} size={TextSizes.md} {...props}>
+    {children}
   </LabelContainer>
 );
 
