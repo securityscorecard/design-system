@@ -1,3 +1,10 @@
+# [1.0.0-alpha.117](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.116...v1.0.0-alpha.117) (2021-10-15)
+
+
+### Bug Fixes
+
+* **Label:** fix component structure and style ([ced71fe](https://github.com/securityscorecard/design-system/commit/ced71fed876f377db4dd319bd1cd8329daa83909))
+
 # [1.0.0-alpha.116](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.115...v1.0.0-alpha.116) (2021-10-12)
 
 
