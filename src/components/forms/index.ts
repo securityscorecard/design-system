@@ -2,6 +2,7 @@ export * from './Checkbox';
 export * from './Input';
 export * from './Label';
 export * from './Message';
+export * from './MultiValueInput';
 export * from './Password';
 export * from './Radio';
 export * from './RadioListItem';
