@@ -23,7 +23,10 @@ const indicatorStyles = {
   alignItems: 'center',
   width: pxToRem(6),
   height: pxToRem(8),
-  color: theme.forms.selectIndicatorColor,
+  color: theme.forms.indicatorColor,
+  ':hover': {
+    color: theme.forms.hoverIndicatorColor,
+  },
 };
 
 export const selectStyles: StylesConfig<Option, false> = {
