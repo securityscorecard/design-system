@@ -1,3 +1,10 @@
+# [1.0.0-alpha.118](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.117...v1.0.0-alpha.118) (2021-10-19)
+
+
+### Bug Fixes
+
+* **CreatableSelect:** export CreatableSelect component ([df53fc9](https://github.com/securityscorecard/design-system/commit/df53fc9c83b3921eef001fa10b84589bdebbb901))
+
 # [1.0.0-alpha.117](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.116...v1.0.0-alpha.117) (2021-10-15)
 
 
