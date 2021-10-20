@@ -1,3 +1,15 @@
+# [1.0.0-alpha.119](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.118...v1.0.0-alpha.119) (2021-10-20)
+
+
+### Bug Fixes
+
+* **Select:** fix inconsistencies in design ([d8fb932](https://github.com/securityscorecard/design-system/commit/d8fb93267c67cbee16dcd260977fa8bc9ab0a49d))
+
+
+### Features
+
+* **MultiValueInput:** add MultiValueInput component ([fbe7beb](https://github.com/securityscorecard/design-system/commit/fbe7beb2cee53c217b5f3836fc1671d9dc1bf7d0))
+
 # [1.0.0-alpha.118](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.117...v1.0.0-alpha.118) (2021-10-19)
 
 
