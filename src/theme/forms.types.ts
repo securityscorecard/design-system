@@ -19,7 +19,8 @@ export interface Forms {
   disabledBorderColor: string;
   disabledActiveColor: string;
   placeholderColor: string;
-  selectIndicatorColor: string;
+  indicatorColor: string;
+  hoverIndicatorColor: string;
   switchColor: string;
   switchBgColor: string;
   switchKnobBgColor: string;

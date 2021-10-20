@@ -59,30 +59,34 @@ export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig = (
   spacing: { ...selectTheme.spacing },
 });
 
-const stateStyles = (color) => ({
-  boxShadow: `inset 0px 0px 0px 1px ${color}`,
+const stateStyles = (color, width) => ({
+  boxShadow: `inset 0 0 0 ${width} ${color}`,
 });
 
 const invalidStyles = (DSTheme) => ({
-  ...stateStyles(DSTheme.forms.invalidBorderColor),
-  borderColor: DSTheme.forms.invalidBorderColor,
+  ...stateStyles(
+    DSTheme.forms.invalidBorderColor,
+    DSTheme.forms.statefulBorderWidth,
+  ),
 });
 
 const focusStyles = (DSTheme) => ({
-  ...stateStyles(DSTheme.forms.focusBorderColor),
-  borderColor: DSTheme.forms.focusBorderColor,
+  ...stateStyles(
+    DSTheme.forms.focusBorderColor,
+    DSTheme.forms.statefulBorderWidth,
+  ),
 });
 
 const disabledStyles = (DSTheme) => ({
+  ...stateStyles(DSTheme.forms.disabledBorderColor, DSTheme.forms.borderWidth),
   background: DSTheme.forms.disabledBgColor,
-  borderColor: DSTheme.forms.disabledBorderColor,
 });
 
 const indicatorStyles = (DSTheme) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: DSTheme.forms.selectIndicatorColor,
+  color: DSTheme.forms.indicatorColor,
   cursor: 'pointer',
   padding: pipe(
     getPaddingSpace,
@@ -92,6 +96,11 @@ const indicatorStyles = (DSTheme) => ({
     paddingType: PaddingTypes.squish,
     theme: DSTheme,
   }),
+  height: pxToRem(30),
+  margin: pxToRem(1, 0),
+  ':hover': {
+    color: DSTheme.forms.hoverIndicatorColor,
+  },
 });
 
 export const selectStyles: (
@@ -116,7 +125,7 @@ export const selectStyles: (
         width: '100%',
         minHeight: DSTheme.forms.fieldHeight,
         background: DSTheme.forms.bgColor,
-        border: `${DSTheme.forms.borderWidth} solid ${DSTheme.forms.borderColor}`,
+        boxShadow: `inset 0 0 0 ${DSTheme.forms.borderWidth} ${DSTheme.forms.borderColor}`,
         borderRadius: DSTheme.borderRadius,
         color: DSTheme.forms.color,
         fontSize: DSTheme.typography.size.md,
@@ -154,25 +163,31 @@ export const selectStyles: (
         theme: DSTheme,
       }),
       backgroundColor: DSTheme.colors.graphite2H,
+      margin: undefined,
     }),
     multiValueLabel: () => ({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       fontSize: DSTheme.typography.size.md,
-      lineHeight: pxToRem(14),
+      lineHeight: DSTheme.typography.lineHeight.md,
       color: DSTheme.colors.graphite4B,
       padding: 0,
       marginRight: pxToRem(DSTheme.space.xs),
+      flex: '1 1 0%',
     }),
-    multiValueRemove: (styles) => ({
+    // Disable TS because types are wrong for MultiValueRemove component
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    /* @ts-ignore */
+    multiValueRemove: (styles, { isFocused }) => ({
       ...styles,
       display: 'flex',
       justifyContent: 'center',
       padding: 0,
-      color: DSTheme.colors.graphite2B,
+      color: isFocused ? DSTheme.colors.strawberry : DSTheme.colors.graphite2B,
       width: pxToRem(16),
       fontSize: pxToRem(12),
       cursor: 'pointer',
+      backgroundColor: 'transparent',
       ':hover': {
         color: DSTheme.colors.strawberry,
       },
@@ -198,6 +213,7 @@ export const selectStyles: (
     }),
     indicatorsContainer: (styles) => ({
       ...styles,
+      alignItems: 'flex-start',
     }),
     indicatorSeparator: (
       styles,
@@ -214,6 +230,13 @@ export const selectStyles: (
     clearIndicator: (_, { selectProps: { isProcessing } }) => ({
       ...indicatorStyles(DSTheme),
       display: isProcessing ? 'none' : 'block',
+      ':hover': {
+        color: DSTheme.colors.strawberry,
+        backgroundColor: 'transparent',
+      },
+      ':focus': {
+        color: DSTheme.colors.strawberry,
+      },
     }),
     menu: (styles, { selectProps: { isMenuPositionRelative } }) => ({
       ...styles,
