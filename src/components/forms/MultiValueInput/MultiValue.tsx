@@ -56,24 +56,40 @@ const MultiValue: React.FC<MultiValueProps> = ({
   isDisabled,
   onRemove,
   maxLength,
-}) => (
-  <Pill paddingSize={SpaceSizes.sm} paddingType={PaddingTypes.squish}>
-    <Inline align="center" gap={SpaceSizes.xs}>
-      <PillLabel $maxLength={maxLength} title={label}>
-        {label}
-      </PillLabel>
-      {!isDisabled && (
-        <PillRemove
-          aria-label={`Remove ${label}`}
-          type="button"
-          onClick={onRemove}
-        >
-          <Icon name={SSCIconNames.times} />
-        </PillRemove>
-      )}
-    </Inline>
-  </Pill>
-);
+}) => {
+  const handleRemoveOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
+    e,
+  ) => {
+    switch (e.key) {
+      case ' ':
+      case 'Enter':
+        e.preventDefault();
+        onRemove();
+        // inputRef.focus();
+        break;
+      default:
+    }
+  };
+  return (
+    <Pill paddingSize={SpaceSizes.sm} paddingType={PaddingTypes.squish}>
+      <Inline align="center" gap={SpaceSizes.xs}>
+        <PillLabel $maxLength={maxLength} title={label}>
+          {label}
+        </PillLabel>
+        {!isDisabled && (
+          <PillRemove
+            aria-label={`Remove ${label}`}
+            type="button"
+            onClick={onRemove}
+            onKeyDown={handleRemoveOnKeyDown}
+          >
+            <Icon name={SSCIconNames.times} />
+          </PillRemove>
+        )}
+      </Inline>
+    </Pill>
+  );
+};
 
 MultiValue.propTypes = {
   label: PropTypes.string.isRequired,

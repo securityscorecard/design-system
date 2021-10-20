@@ -228,6 +228,20 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     }
   };
 
+  const handleClearAllOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
+    e,
+  ) => {
+    switch (e.key) {
+      case ' ':
+      case 'Enter':
+        e.preventDefault();
+        setValues([]);
+        inputRef.focus();
+        break;
+      default:
+    }
+  };
+
   return (
     <ValueContainer
       $isDisabled={isDisabled}
@@ -247,6 +261,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
                 maxLength={maxPillLabelLength}
                 onRemove={() => {
                   removeValue(index);
+                  inputRef.focus();
                 }}
               />
             ))}
@@ -258,7 +273,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
                 injectStyles={false}
                 inputRef={setInputRef}
                 minWidth={15}
-                placeholder={isEmptyArray(values) && placeholder}
+                placeholder={isEmptyArray(values) ? placeholder : undefined}
                 value={inputValue}
                 onChange={(e) => handleInputOnChange(e)}
                 onKeyDown={handleInputOnKeyDown}
@@ -273,6 +288,8 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
             as="button"
             paddingSize={SpaceSizes.md}
             paddingType={PaddingTypes.squish}
+            onClick={() => setValues([])}
+            onKeyDown={handleClearAllOnKeyDown}
           >
             <Icon name={SSCIconNames.times} />
           </ClearButton>
