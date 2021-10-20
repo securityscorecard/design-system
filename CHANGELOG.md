@@ -1,3 +1,10 @@
+# [1.0.0-alpha.120](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.119...v1.0.0-alpha.120) (2021-10-20)
+
+
+### Bug Fixes
+
+* **MultiValueInput:** add keyboard handling for removing values ([f94d34a](https://github.com/securityscorecard/design-system/commit/f94d34ae3576683ba66a6452aad972bbee2b1c6a))
+
 # [1.0.0-alpha.119](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.118...v1.0.0-alpha.119) (2021-10-20)
 
 
