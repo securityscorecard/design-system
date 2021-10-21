@@ -1,3 +1,10 @@
+# [1.0.0-alpha.121](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.120...v1.0.0-alpha.121) (2021-10-21)
+
+
+### Bug Fixes
+
+* **MultiValueInput:** fix handlers calling ([74cfb43](https://github.com/securityscorecard/design-system/commit/74cfb43b002fe6010b5f9d94f5daaa43101ea721))
+
 # [1.0.0-alpha.120](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.119...v1.0.0-alpha.120) (2021-10-20)
 
 
