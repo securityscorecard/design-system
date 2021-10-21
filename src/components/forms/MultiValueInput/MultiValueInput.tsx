@@ -154,13 +154,12 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
       )(newValue);
       const newValues = [...values, ...parsedValues];
       setValues(newValues);
-      onValueAdd(parsedValues, values);
+      onValueAdd(parsedValues, newValues);
       onValuesChange(newValues);
     } else {
       const newValues = [...values, newValue];
       setValues(newValues);
-      setValues(newValues);
-      onValueAdd([newValue], values);
+      onValueAdd([newValue], newValues);
       onValuesChange(newValues);
     }
     setInputValue('');
@@ -228,6 +227,11 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     }
   };
 
+  const handleClearAllOnClick = () => {
+    setValues([]);
+    onValueRemove([]);
+    onValuesChange([]);
+  };
   const handleClearAllOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
     e,
   ) => {
@@ -236,6 +240,8 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
       case 'Enter':
         e.preventDefault();
         setValues([]);
+        onValueRemove([]);
+        onValuesChange([]);
         inputRef.focus();
         break;
       default:
@@ -247,6 +253,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
       $isDisabled={isDisabled}
       $isInvalid={isInvalid}
       className={className}
+      data-testid="multivalueinputContainer"
       id={id}
       onClick={handleContainerOnClick}
     >
@@ -288,7 +295,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
             as="button"
             paddingSize={SpaceSizes.md}
             paddingType={PaddingTypes.squish}
-            onClick={() => setValues([])}
+            onClick={handleClearAllOnClick}
             onKeyDown={handleClearAllOnKeyDown}
           >
             <Icon name={SSCIconNames.times} />
