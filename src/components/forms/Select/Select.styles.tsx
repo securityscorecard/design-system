@@ -243,6 +243,7 @@ export const selectStyles: (
       ...(isMenuPositionRelative ? { position: 'relative' } : {}),
       border: `1px solid ${DSTheme.colors.graphiteHB}`,
       boxShadow: `0px 1px 4px ${transparentize(0.85, '#000')}`,
+      marginBottom: 0,
       marginTop: pxToRem(DSTheme.space.xs),
       paddingTop: pxToRem(DSTheme.space.sm),
       paddingBottom: pxToRem(DSTheme.space.sm),
