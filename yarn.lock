@@ -1100,7 +1100,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.12.0":
+"@babel/runtime@^7.10.4", "@babel/runtime@^7.12.0":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.4.tgz#fd17d16bfdf878e6dd02d19753a39fa8a8d9c84a"
   integrity sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==
@@ -1553,6 +1553,14 @@
   integrity sha512-oi0JL8uIXgJ+PWRl4LDxJ7WWa80E3jdYmi6wsHAFDq1vT0rKuyhqimEJzCezIrHHz4fXKpNRO98TO7ccma6hjw==
   dependencies:
     "@figspec/components" "^0.1.1"
+
+"@fluentui/react-component-ref@^0.59.0":
+  version "0.59.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-component-ref/-/react-component-ref-0.59.0.tgz#d4dba85b45cf57df957f9d68168afc25f15b12e0"
+  integrity sha512-MojL/qgxMSMFYreI/TnLbFbFM+c5t78rxPcud7MqjI067dinGaLaj7zqO0lK3fpeLBJ69FJUW7C88xIdghk/tA==
+  dependencies:
+    "@babel/runtime" "^7.10.4"
+    react-is "^16.6.3"
 
 "@fortawesome/fontawesome-common-types@^0.2.35":
   version "0.2.35"
@@ -2144,6 +2152,11 @@
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
     source-map "^0.7.3"
+
+"@popperjs/core@^2.10.2":
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.10.2.tgz#0798c03351f0dea1a5a4cabddf26a55a7cbee590"
+  integrity sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ==
 
 "@popperjs/core@^2.5.4", "@popperjs/core@^2.6.0":
   version "2.9.2"
@@ -12770,7 +12783,7 @@ react-inspector@^5.1.0:
     is-dom "^1.0.0"
     prop-types "^15.0.0"
 
-react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
+react-is@^16.6.0, react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -12812,7 +12825,7 @@ react-popper@^1.3.8:
     typed-styles "^0.0.7"
     warning "^4.0.2"
 
-react-popper@^2.2.4:
+react-popper@^2.2.4, react-popper@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-2.2.5.tgz#1214ef3cec86330a171671a4fbcbeeb65ee58e96"
   integrity sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==
