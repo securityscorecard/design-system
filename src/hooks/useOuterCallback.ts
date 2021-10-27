@@ -19,6 +19,12 @@ export const useOuterClick = (
     }
   };
 
+  const handleKeypress = (e) => {
+    if (e.key === 'Escape') {
+      handleClick(e);
+    }
+  };
+
   // set current callback in ref, before second useEffect uses it
   useEffect(() => {
     // useEffect wrapper to be safe for concurrent mode
@@ -31,10 +37,12 @@ export const useOuterClick = (
       isListenersAdded.current = false;
     }
 
+    document.addEventListener('keydown', handleKeypress);
     document.addEventListener('click', handleClick);
     isListenersAdded.current = true;
 
     return () => {
+      document.removeEventListener('keydown', handleKeypress);
       document.removeEventListener('click', handleClick);
       isListenersAdded.current = false;
     };
