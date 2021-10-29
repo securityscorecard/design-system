@@ -22,10 +22,11 @@ const LoadingOverlayContainer = styled.div`
   ${FlexContainer} {
     display: inline-flex;
     position: sticky;
-    left: 50%;
+    left: 0;
     top: 50%;
-    transform: translate(-50%, -50%);
-    margin: 4rem;
+    width: 100%;
+    transform: translateY(-50%);
+    margin: 4rem 0;
     background: ${getColor('graphite5H')};
     padding: 0 0.5rem;
     height: 2.5rem;
