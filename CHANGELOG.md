@@ -1,3 +1,18 @@
+# [1.0.0-alpha.123](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.122...v1.0.0-alpha.123) (2021-10-29)
+
+
+### Bug Fixes
+
+* **Select:** remove margin bottom on select menu ([c71c35c](https://github.com/securityscorecard/design-system/commit/c71c35cf9eb063287611a075adab5ff57b337e56))
+
+
+### Features
+
+* **Dropdown:** add generic Dropdown component ([5a72f21](https://github.com/securityscorecard/design-system/commit/5a72f216067e4154db930b937ef164ee8550d805))
+* **useOuterCallback:** trigger outer callback on Esc press ([21c05ff](https://github.com/securityscorecard/design-system/commit/21c05ffeaa56e04980e8d53e87d1c4d7d22757a9))
+* **usePopup:** add hook for popup creation ([255897c](https://github.com/securityscorecard/design-system/commit/255897cb1e97572b0b6d244ca058f911ee08a264))
+* **usePortal:** add hook for portal creation ([274eb46](https://github.com/securityscorecard/design-system/commit/274eb4643eadbb6beca22cc4a248d099af455844))
+
 # [1.0.0-alpha.122](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.121...v1.0.0-alpha.122) (2021-10-29)
 
 
