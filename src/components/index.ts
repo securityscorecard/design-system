@@ -5,6 +5,7 @@ export * from './Button';
 export * from './Collapsible';
 export * from './ControlDropdown';
 export * from './Datatable';
+export * from './Dropdown';
 export * from './FlexContainer';
 export * from './HexGrade';
 export * from './Icon';
