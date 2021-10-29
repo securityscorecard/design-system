@@ -1,3 +1,10 @@
+# [1.0.0-alpha.122](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.121...v1.0.0-alpha.122) (2021-10-29)
+
+
+### Bug Fixes
+
+* **Datatable:** align Loading overlay horizontally ([54625cd](https://github.com/securityscorecard/design-system/commit/54625cd52eac92244183a8d5bf5b632fcc0131a7))
+
 # [1.0.0-alpha.121](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.120...v1.0.0-alpha.121) (2021-10-21)
 
 
