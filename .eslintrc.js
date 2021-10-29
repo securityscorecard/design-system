@@ -126,6 +126,7 @@ module.exports = {
       },
     ],
     'no-nested-ternary': 'off',
+    'no-unused-expressions': ['error', { allowTernary: true }],
   },
   overrides: [
     {
