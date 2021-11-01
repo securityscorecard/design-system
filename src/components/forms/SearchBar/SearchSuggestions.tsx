@@ -58,7 +58,7 @@ const SearchSuggestions: React.FC<SearchSuggestionsPaneProps> = ({
   onClickOut,
   renderSearchSuggestion,
 }) => {
-  const searchSuggestionsPaneRef = useOuterClick(onClickOut);
+  const searchSuggestionsPaneRef = useOuterClick<HTMLDivElement>(onClickOut);
 
   return (
     <SearchSuggestionsPane ref={searchSuggestionsPaneRef}>

@@ -1,29 +1,10 @@
-import { useEffect, useRef } from 'react';
-import { isNotNull } from 'ramda-adjunct';
+import React, { useEffect, useRef } from 'react';
 
-export const useOuterClick = (
+export const useOuterClick = <E extends HTMLElement>(
   callback: (e: React.MouseEvent) => void,
-): React.MutableRefObject<HTMLDivElement> => {
-  const innerRef = useRef(null);
+): React.MutableRefObject<E> => {
+  const innerRef = useRef<E>(null);
   const callbackRef = useRef(null);
-  const isListenersAdded = useRef(false);
-
-  // read most recent callback and innerRef dom node from refs
-  const handleClick = (e) => {
-    if (
-      innerRef.current &&
-      callbackRef.current &&
-      !innerRef.current.contains(e.target)
-    ) {
-      callbackRef.current(e);
-    }
-  };
-
-  const handleKeypress = (e) => {
-    if (e.key === 'Escape') {
-      handleClick(e);
-    }
-  };
 
   // set current callback in ref, before second useEffect uses it
   useEffect(() => {
@@ -32,21 +13,32 @@ export const useOuterClick = (
   });
 
   useEffect(() => {
-    if (isListenersAdded.current && isNotNull(callbackRef.current)) {
-      window.removeEventListener('scroll', handleClick);
-      isListenersAdded.current = false;
-    }
+    // read most recent callback and innerRef dom node from refs
+    const fireCallback = (e: MouseEvent | KeyboardEvent): void => {
+      if (
+        innerRef.current &&
+        callbackRef.current &&
+        !innerRef.current.contains(e.target as Node) &&
+        document.body.contains(e.target as Node)
+      ) {
+        callbackRef.current(e);
+      }
+    };
+
+    const handleKeypress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        fireCallback(e);
+      }
+    };
 
     document.addEventListener('keydown', handleKeypress);
-    document.addEventListener('click', handleClick);
-    isListenersAdded.current = true;
+    document.addEventListener('click', fireCallback);
 
     return () => {
       document.removeEventListener('keydown', handleKeypress);
-      document.removeEventListener('click', handleClick);
-      isListenersAdded.current = false;
+      document.removeEventListener('click', fireCallback);
     };
-  }, []); // no need for callback + innerRef dep
+  }, []);
 
   return innerRef; // return ref; client can omit `useRef`
 };

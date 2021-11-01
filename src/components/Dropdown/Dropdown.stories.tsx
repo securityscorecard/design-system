@@ -12,12 +12,17 @@ import { generateControl } from '../../utils/tests/storybook';
 import { CreatableSelect } from '../forms/Select';
 
 export default {
-  title: 'components/Dropdown',
+  title: 'components/Dropdown/Dropdown',
   component: Dropdown,
   parameters: {
     docs: {
-      // inlineStories: false,
-      // iframeHeight: 170,
+      description: {
+        component: `
+\`\`\`js
+import { Dropdown } from '@securityscorecard/design-system';
+\`\`\`
+      `,
+      },
     },
     controls: { sort: 'requiredFirst' },
   },
@@ -236,9 +241,9 @@ export const UsingWithAnotherComponent: Story<DropdownProps> = () => (
     <CreatableSelect
       createNewLabel="Buy new kitten"
       options={options}
-      defaultIsMenuOpen
       isMenuPositionRelative
       isMulti
+      menuIsOpen
     />
   </Dropdown>
 );
