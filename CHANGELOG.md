@@ -1,3 +1,10 @@
+# [1.0.0-alpha.124](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.123...v1.0.0-alpha.124) (2021-11-02)
+
+
+### Features
+
+* **Dropdown:** add ControlledDropdown component ([4e11c09](https://github.com/securityscorecard/design-system/commit/4e11c09f762020c2ae1153521690bee47e3ca698))
+
 # [1.0.0-alpha.123](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.122...v1.0.0-alpha.123) (2021-10-29)
 
 
