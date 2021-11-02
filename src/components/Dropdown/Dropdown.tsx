@@ -4,12 +4,10 @@ import { noop } from 'ramda-adjunct';
 import { Ref } from '@fluentui/react-component-ref';
 
 import { SpaceSizes } from '../../theme';
-import { usePopup } from '../../hooks/usePopup';
-import { usePortal } from '../../hooks/usePortal';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { DropdownProps } from './Dropdown.types';
-import DropdownPane from './DropdownPane';
 import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
+import ControlledDropdown from './ControlledDropdown';
 
 const Dropdown: React.FC<DropdownProps> = ({
   children,
@@ -28,17 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(defaultIsOpen);
   const [triggerEl, setTriggerEl] = useState(null);
-  const [paneEl, setPaneEl] = useState(null);
-  const [arrowEl, setArrowEl] = useState(null);
   const timeoutId = useRef(null);
-  const { styles, attributes } = usePopup({
-    triggerEl,
-    paneEl,
-    arrowEl,
-    placement,
-  });
-
-  const { Portal } = usePortal();
 
   const showPane = () => {
     onOpen();
@@ -98,27 +86,21 @@ const Dropdown: React.FC<DropdownProps> = ({
           onBlur: handleTriggerOnBlur,
         })}
       </Ref>
-      {isVisible && (
-        <Portal>
-          <DropdownPane
-            ref={setPaneEl}
-            arrowRef={setArrowEl}
-            arrowStyles={styles.arrow}
-            contentPaddingSize={innerPaddingSize}
-            contentPaddingType={innerPaddingType}
-            hasArrow={hasPaneArrow}
-            isElevated={isPaneElevated}
-            maxWidth={maxPaneWidth}
-            style={styles.popper}
-            onClickOut={hidePane}
-            onMouseEnter={handleTriggerOnMouseEnter}
-            onMouseLeave={handleTriggerOnMouseLeave}
-            {...attributes.popper}
-          >
-            {children}
-          </DropdownPane>
-        </Portal>
-      )}
+      <ControlledDropdown
+        hasPaneArrow={hasPaneArrow}
+        innerPaddingSize={innerPaddingSize}
+        innerPaddingType={innerPaddingType}
+        isOpen={isVisible}
+        isPaneElevated={isPaneElevated}
+        maxPaneWidth={maxPaneWidth}
+        placement={placement}
+        triggerEl={triggerEl}
+        onClickOut={hidePane}
+        onMouseEnter={handleTriggerOnMouseEnter}
+        onMouseLeave={handleTriggerOnMouseLeave}
+      >
+        {children}
+      </ControlledDropdown>
     </>
   );
 };

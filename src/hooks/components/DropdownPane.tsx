@@ -33,7 +33,7 @@ const DropdownPane: React.FC<DropdownPaneProps> = ({
   isElevated = false,
   ...props
 }) => {
-  const dropdownPaneRef = useOuterClick(onClickOut);
+  const dropdownPaneRef = useOuterClick<HTMLDivElement>(onClickOut);
 
   return (
     <StyledDropdownPane

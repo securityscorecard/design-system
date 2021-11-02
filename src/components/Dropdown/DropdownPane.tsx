@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { noop } from 'ramda-adjunct';
 
 import {
   getBorderRadius,
@@ -101,7 +102,7 @@ const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(
   (
     {
       children,
-      onClickOut,
+      onClickOut = noop,
       isElevated,
       hasArrow,
       arrowRef,
@@ -113,7 +114,7 @@ const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(
     },
     ref,
   ) => {
-    const dropdownPaneRef = useOuterClick(onClickOut);
+    const dropdownPaneRef = useOuterClick<HTMLDivElement>(onClickOut);
 
     return (
       <StyledDropdownPane
@@ -136,13 +137,16 @@ const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(
 
 DropdownPane.propTypes = {
   isElevated: PropTypes.bool.isRequired,
-  maxWidth: PropTypes.number.isRequired,
+  maxWidth: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf<'auto'>(['auto']),
+  ]).isRequired,
   hasArrow: PropTypes.bool.isRequired,
   arrowRef: PropTypes.func.isRequired,
-  onClickOut: PropTypes.func.isRequired,
   arrowStyles: PropTypes.shape({}),
   contentPaddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
   contentPaddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
+  onClickOut: PropTypes.func,
 };
 
 export default DropdownPane;
