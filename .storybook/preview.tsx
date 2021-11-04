@@ -1,6 +1,6 @@
 import React from 'react';
-import { withScreenshot } from 'storycap'
-import { withDesign } from 'storybook-addon-designs'
+import { withScreenshot } from 'storycap';
+import { withDesign } from 'storybook-addon-designs';
 import {
   Title,
   Subtitle,
@@ -10,10 +10,9 @@ import {
   PRIMARY_STORY,
 } from '@storybook/addon-docs';
 
-
 import { DSProvider, createIconLibrary } from '../src/theme';
 import colors from '../src/theme/colors';
-import {StoriesWithDesign} from './blocks/StoriesWithDesign'
+import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
 export const parameters = {
@@ -23,7 +22,7 @@ export const parameters = {
       { name: 'white', value: colors.graphite5H },
       { name: 'grey', value: colors.graphiteH },
       { name: 'black', value: colors.graphite5B },
-    ]
+    ],
   },
   options: {
     storySort: {
@@ -31,24 +30,19 @@ export const parameters = {
         'Getting Started',
         'Changelog',
         'Theme',
-          [
-            'createIconLibrary()',
-            'DSProvider',
-            'Colors',
-            'Space',
-            'Typography'
-          ],
+        ['createIconLibrary()', 'DSProvider', 'Colors', 'Space', 'Typography'],
         'Helpers',
         'layout',
         'components',
-          [
-            'typography',
-            'forms'
-          ]
-      ]
+        ['typography', 'forms'],
+      ],
     },
   },
-  controls: { expanded: true, hideNoControlsWarning: true },
+  controls: {
+    expanded: true,
+    hideNoControlsWarning: true,
+    sort: 'requiredFirst',
+  },
   docs: {
     source: { type: 'dynamic' },
     page: () => (
@@ -67,25 +61,25 @@ export const parameters = {
     fullPage: true,
   },
   design: {
-    type: 'figma'
+    type: 'figma',
   },
   badgesConfig: {
     [Badges.stable]: {
       contrast: '#333',
       color: '#4ABA00',
-      title: 'Stable'
+      title: 'Stable',
     },
     [Badges.beta]: {
       contrast: '#333',
       color: '#E5BD00',
-      title: 'Beta'
+      title: 'Beta',
     },
     [Badges.deprecated]: {
       contrast: '#333',
       color: '#F1431C',
-      title: 'Deprecated'
-    }
-  }
+      title: 'Deprecated',
+    },
+  },
 };
 
 createIconLibrary();
@@ -96,4 +90,4 @@ const wrapper = (storyFn) => (
   </>
 );
 
-export const decorators = [ withDesign, withScreenshot, wrapper ];
+export const decorators = [withDesign, withScreenshot, wrapper];
