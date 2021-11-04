@@ -23,6 +23,8 @@ const LoadingOverlayContainer = styled.div`
     display: inline-flex;
     position: sticky;
     left: 0;
+    right: 0;
+    justify-content: center;
     top: 50%;
     width: 100%;
     transform: translateY(-50%);
@@ -54,7 +56,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
     <FlexContainer alignItems="center">
       {isCancelable ? (
         <>
-          <Spinner height={24} width={24} dark />
+          <Spinner height={24} horizontalMargin={0} width={24} dark />
           <LoadingText>Loading</LoadingText>
           <Button size="sm" variant="outline" onClick={onCancel}>
             Cancel
