@@ -1,3 +1,10 @@
+# [1.0.0-alpha.125](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.124...v1.0.0-alpha.125) (2021-11-04)
+
+
+### Bug Fixes
+
+* **Datatable:** fix loading overlay cancelable center alignment ([14c77e2](https://github.com/securityscorecard/design-system/commit/14c77e2df66f01205dfff6e5912e318ec2bed304))
+
 # [1.0.0-alpha.124](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.123...v1.0.0-alpha.124) (2021-11-02)
 
 
