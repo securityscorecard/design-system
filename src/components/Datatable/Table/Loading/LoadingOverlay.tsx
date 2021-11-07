@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components';
 import { getColor } from '../../../../utils';
 import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
-import { FlexContainer } from '../../../FlexContainer';
 import { Button } from '../../../Button';
+import { Inline, Padbox } from '../../../layout';
 
 const overlayStyles = css`
   position: absolute;
@@ -18,22 +18,23 @@ const overlayStyles = css`
 
 const LoadingOverlayContainer = styled.div`
   ${overlayStyles}
+`;
 
-  ${FlexContainer} {
-    display: inline-flex;
-    position: sticky;
-    left: 0;
-    right: 0;
-    justify-content: center;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
-    margin: 4rem 0;
-    background: ${getColor('graphite5H')};
-    padding: 0 0.5rem;
-    height: 2.5rem;
+const LoadingIndicatorContainer = styled.div`
+  > ${Padbox} {
     border-radius: 4px;
+    background: ${getColor('graphite5H')};
   }
+
+  display: flex;
+  position: sticky;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  margin: 6rem 0;
 `;
 
 const LoadingText = styled.span`
@@ -53,19 +54,27 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
 }) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
-    <FlexContainer alignItems="center">
-      {isCancelable ? (
-        <>
-          <Spinner height={24} horizontalMargin={0} width={24} dark />
-          <LoadingText>Loading</LoadingText>
-          <Button size="sm" variant="outline" onClick={onCancel}>
-            Cancel
-          </Button>
-        </>
-      ) : (
-        <Spinner height={48} width={48} dark />
-      )}
-    </FlexContainer>
+    <LoadingIndicatorContainer>
+      <Padbox paddingSize="sm">
+        {isCancelable ? (
+          <Inline align="center" gap="sm">
+            <Spinner
+              height={24}
+              horizontalMargin={0}
+              verticalMargin={0}
+              width={24}
+              dark
+            />
+            <LoadingText>Loading</LoadingText>
+            <Button size="sm" variant="outline" onClick={onCancel}>
+              Cancel
+            </Button>
+          </Inline>
+        ) : (
+          <Spinner height={48} verticalMargin={0} width={48} dark />
+        )}
+      </Padbox>
+    </LoadingIndicatorContainer>
   </LoadingOverlayContainer>
 );
 
