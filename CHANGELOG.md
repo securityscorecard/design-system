@@ -1,3 +1,10 @@
+# [1.0.0-alpha.126](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.125...v1.0.0-alpha.126) (2021-11-08)
+
+
+### Bug Fixes
+
+* **Datatable:** fix loading indicator centering padding issue ([2211f2c](https://github.com/securityscorecard/design-system/commit/2211f2c4c59a81da70f32de7a889fd8366ecbd3a))
+
 # [1.0.0-alpha.125](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.124...v1.0.0-alpha.125) (2021-11-04)
 
 
