@@ -12,6 +12,7 @@ export * from './Icon';
 export * from './IconButton';
 export * from './Filters';
 export * from './FullscreenModal';
+export * from './Modal';
 export * from './Nav';
 export * from './Spinner';
 export * from './SortableList';
