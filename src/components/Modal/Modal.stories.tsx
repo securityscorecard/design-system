@@ -14,6 +14,13 @@ import { SpaceSizes } from '../../index';
 export default {
   title: 'components/modals/Modal',
   component: Modal,
+  parameters: {
+    docs: {
+      inlineStories: false,
+      iframeHeight: 500,
+      source: { type: 'code' },
+    },
+  },
   argTypes: {
     size: {
       ...generateControl('select', ModalSizes),
