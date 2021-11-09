@@ -1,3 +1,10 @@
+# [1.0.0-alpha.127](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.126...v1.0.0-alpha.127) (2021-11-09)
+
+
+### Features
+
+* **SimpleModal:** add SimpleModal component ([48f3ae7](https://github.com/securityscorecard/design-system/commit/48f3ae7f2f1cccb6bcffb4e6b0bf06ead839d6f1))
+
 # [1.0.0-alpha.126](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.125...v1.0.0-alpha.126) (2021-11-08)
 
 
