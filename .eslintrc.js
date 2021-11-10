@@ -78,7 +78,7 @@ module.exports = {
       'error',
       {
         rule:
-          '^(defaultIs|defaultHas|defaultShould|is|has|should)[A-Z]([A-Za-z0-9]?)+',
+          '^(defaultIs|defaultHas|defaultShould|defaultAre|is|has|should|are)[A-Z]([A-Za-z0-9]?)+',
       },
     ],
     'react/prop-types': ['error', { ignore: ['children', 'as'] }],
