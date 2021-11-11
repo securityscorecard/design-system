@@ -93,6 +93,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       containerId: portalsContainerId,
       internalShowHide: false,
     });
+    const hasFooter = isNotUndefined(footer);
 
     const modalRef = useOuterClick<HTMLDivElement>(onClose);
 
@@ -111,10 +112,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             <Padbox paddingSize={SpaceSizes.lg} paddingType="squish">
               {isNotUndefined(title) && <Title>{title}</Title>}
             </Padbox>
-            <Content paddingSize={SpaceSizes.lg} paddingType="squish">
+            <Content
+              paddingSize={SpaceSizes.lg}
+              paddingType={hasFooter ? 'squish' : 'square'}
+            >
               {children}
             </Content>
-            {isNotUndefined(footer) && (
+            {hasFooter && (
               <Footer paddingSize={SpaceSizes.lg} paddingType="squish">
                 {footer}
               </Footer>

@@ -33,8 +33,8 @@ const colorVariants = {
 
 const iconVariants = {
   [BannerVariants.info]: SSCIconNames.infoCircle,
-  [BannerVariants.warn]: SSCIconNames.exclamationTriangle,
-  [BannerVariants.error]: SSCIconNames.ban,
+  [BannerVariants.warn]: SSCIconNames.exclTriangleSolid,
+  [BannerVariants.error]: SSCIconNames.banSolid,
 };
 
 const iconPxSizesVariants = {
