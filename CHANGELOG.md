@@ -1,3 +1,11 @@
+# [1.0.0-alpha.128](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.127...v1.0.0-alpha.128) (2021-11-11)
+
+
+### Features
+
+* **SemanticModal:** add SemanticModal component ([b192d80](https://github.com/securityscorecard/design-system/commit/b192d80b65dd6909b0e34e6f47ca8e4b62c240db))
+* **Stepper:** add Stepper component ([ed2bf23](https://github.com/securityscorecard/design-system/commit/ed2bf2347b5e58c2d65b26563b50bdfcc026bff5))
+
 # [1.0.0-alpha.127](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.126...v1.0.0-alpha.127) (2021-11-09)
 
 
