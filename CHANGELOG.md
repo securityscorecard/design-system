@@ -1,3 +1,10 @@
+# [1.0.0-alpha.130](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.129...v1.0.0-alpha.130) (2021-11-12)
+
+
+### Bug Fixes
+
+* **exports:** export missing Step components ([b30df39](https://github.com/securityscorecard/design-system/commit/b30df3959f4d2ec1f903bf10ccd804fa4e63c477))
+
 # [1.0.0-alpha.129](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.128...v1.0.0-alpha.129) (2021-11-12)
 
 
