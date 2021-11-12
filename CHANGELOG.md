@@ -1,3 +1,10 @@
+# [1.0.0-alpha.129](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.128...v1.0.0-alpha.129) (2021-11-12)
+
+
+### Bug Fixes
+
+* **exports:** export missing components ([70940e2](https://github.com/securityscorecard/design-system/commit/70940e226257457107cf016bf6d1606bb46cbe8d))
+
 # [1.0.0-alpha.128](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.127...v1.0.0-alpha.128) (2021-11-11)
 
 
