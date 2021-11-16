@@ -1,3 +1,10 @@
+# [1.0.0-alpha.131](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.130...v1.0.0-alpha.131) (2021-11-16)
+
+
+### Bug Fixes
+
+* **Button:** fix Button width ([41a5802](https://github.com/securityscorecard/design-system/commit/41a580226db172097dc3dc6c2e7792eb3c5b4130))
+
 # [1.0.0-alpha.130](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.129...v1.0.0-alpha.130) (2021-11-12)
 
 
