@@ -179,7 +179,7 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
       'theme',
     ]),
 })`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
