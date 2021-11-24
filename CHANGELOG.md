@@ -1,3 +1,10 @@
+# [1.0.0-alpha.132](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.131...v1.0.0-alpha.132) (2021-11-24)
+
+
+### Bug Fixes
+
+* **Modal:** close button bg, portal removal ([5175853](https://github.com/securityscorecard/design-system/commit/51758530a45d9ec703c25bbbfa0aea70412120fa))
+
 # [1.0.0-alpha.131](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.130...v1.0.0-alpha.131) (2021-11-16)
 
 
