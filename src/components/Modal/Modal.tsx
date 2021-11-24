@@ -74,6 +74,7 @@ const CloseButton = styled.button`
   flex-shrink: 0;
   border: none;
   cursor: pointer;
+  background-color: transparent;
   color: ${getColor('graphite3B')};
 `;
 
@@ -92,6 +93,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     const { Portal } = usePortal({
       containerId: portalsContainerId,
       internalShowHide: false,
+      autoRemoveContainer: false,
     });
     const hasFooter = isNotUndefined(footer);
 
