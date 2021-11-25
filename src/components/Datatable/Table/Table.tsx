@@ -277,6 +277,14 @@ TableProps<D>): React.ReactElement => {
     collectSelectedIds<D>(selectedRowIds);
   }, [selectedRowIds]);
 
+  useEffect(() => {
+    DatatableStore.update((s) => {
+      s.pageIndex = defaultPageIndex;
+      s.sortBy = defaultSortBy;
+      s.pageSize = defaultPageSize;
+    });
+  }, [defaultPageIndex, defaultSortBy, defaultPageSize]);
+
   return (
     <>
       <TableAndLoadingOverlayContainer>
