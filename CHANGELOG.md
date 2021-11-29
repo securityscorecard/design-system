@@ -1,3 +1,10 @@
+# [1.0.0-alpha.133](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.132...v1.0.0-alpha.133) (2021-11-29)
+
+
+### Bug Fixes
+
+* **DataTable:** set default values in datatable reducer ([af56fed](https://github.com/securityscorecard/design-system/commit/af56fedc51986dfce127e8f8c882ff5b6e5dd916))
+
 # [1.0.0-alpha.132](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.131...v1.0.0-alpha.132) (2021-11-24)
 
 
