@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { allPass } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { getFormStyle, pxToRem } from '../../../utils';
@@ -92,7 +91,7 @@ const Radio: React.FC<RadioProps> = ({
   isInvalid = false,
   ...props
 }) => {
-  const hasLabel = allPass([isNotUndefined])(label);
+  const hasLabel = isNotUndefined(label);
 
   return (
     <div>
@@ -114,7 +113,7 @@ const Radio: React.FC<RadioProps> = ({
 Radio.propTypes = {
   radioId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  label: PropTypes.node || PropTypes.string,
+  label: PropTypes.node,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
 };
