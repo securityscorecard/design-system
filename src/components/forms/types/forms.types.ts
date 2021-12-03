@@ -9,6 +9,6 @@ export interface TogglingProps
   extends TogglingInputProps,
     React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  label?: React.ReactNode | string;
+  label?: React.ReactNode;
   isDisabled?: boolean;
 }
