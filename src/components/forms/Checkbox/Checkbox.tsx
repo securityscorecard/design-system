@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { add, allPass, identity, memoizeWith, pipe } from 'ramda';
-import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
+import { add, identity, memoizeWith, pipe } from 'ramda';
+import { isNotUndefined } from 'ramda-adjunct';
 
 import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
@@ -143,7 +143,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     },
     ref,
   ) => {
-    const hasLabel = allPass([isNotUndefined, isNonEmptyString])(label);
+    const hasLabel = isNotUndefined(label);
 
     return (
       <CheckboxWrapper className={className}>
@@ -179,7 +179,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
   checkboxId: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.node,
   className: PropTypes.string,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,

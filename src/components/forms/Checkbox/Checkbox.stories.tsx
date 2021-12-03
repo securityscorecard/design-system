@@ -4,6 +4,24 @@ import { action } from '@storybook/addon-actions';
 
 import Checkbox from './Checkbox';
 import { CheckboxProps } from './Checkbox.types';
+import { Icon, Inline, Text } from '../..';
+
+const textExample = 'Use the same details for billing & shipping on my invoice';
+
+const labelMappingValues = {
+  labelAsComponent: (
+    <Text size="md" variant="secondary">
+      Checkbox label inside a Text component
+    </Text>
+  ),
+  labelAsString: 'Checkbox label',
+  labelAsIconAndText: (
+    <Inline align="center" gap="sm">
+      <Icon color="graphite4B" name="wrench" />
+      <Text>{textExample}</Text>
+    </Inline>
+  ),
+};
 
 export default {
   title: 'components/forms/Checkbox',
@@ -12,6 +30,18 @@ export default {
     name: { control: { disable: true } },
     checkboxId: { control: { disable: true } },
     defaultChecked: { table: { type: { summary: 'boolean' } } },
+    label: {
+      options: Object.keys(labelMappingValues),
+      mapping: labelMappingValues,
+      control: {
+        type: 'select',
+        labels: {
+          labelAsComponent: 'Label as Text component',
+          labelAsString: 'Label as string',
+          labelAsIconAndText: 'Label as Icon and Text',
+        },
+      },
+    },
   },
 } as Meta;
 
@@ -24,14 +54,14 @@ playground.parameters = {
 playground.args = {
   name: 'playground',
   checkboxId: 'playground',
-  label: 'Checkbox label',
+  label: labelMappingValues.labelAsString,
   defaultChecked: false,
 };
 
 export const DefaultCheckbox: Story = () => (
   <Checkbox
     checkboxId="defaultCheckbox"
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="defaultCheckbox"
     onChange={action('Checkbox clicked')}
   />
@@ -40,7 +70,7 @@ export const DefaultCheckbox: Story = () => (
 export const CheckedCheckbox: Story = () => (
   <Checkbox
     checkboxId="checkedCheckbox"
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="checkedCheckbox"
     defaultChecked
   />
@@ -49,7 +79,7 @@ export const CheckedCheckbox: Story = () => (
 export const IndeterminateCheckbox: Story = () => (
   <Checkbox
     checkboxId="indeterminateCheckbox"
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="indeterminateCheckbox"
     isIndeterminate
   />
@@ -58,7 +88,7 @@ export const IndeterminateCheckbox: Story = () => (
 export const InvalidCheckbox: Story = () => (
   <Checkbox
     checkboxId="invalidCheckbox"
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="invalidCheckbox"
     isInvalid
   />
@@ -67,7 +97,30 @@ export const InvalidCheckbox: Story = () => (
 export const DisabledCheckbox: Story = () => (
   <Checkbox
     checkboxId="disabledCheckbox"
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
+    name="disabledCheckbox"
+    isDisabled
+  />
+);
+
+export const CheckboxWithLabelAsComponent: Story = () => (
+  <Checkbox
+    checkboxId="disabledCheckbox"
+    label={<Text>{textExample}</Text>}
+    name="disabledCheckbox"
+    isDisabled
+  />
+);
+
+export const CheckboxWithLabelAsComponentWithIcon: Story = () => (
+  <Checkbox
+    checkboxId="disabledCheckbox"
+    label={
+      <Inline align="center" gap="sm">
+        <Icon color="graphite4B" name="wrench" />
+        <Text>{textExample}</Text>
+      </Inline>
+    }
     name="disabledCheckbox"
     isDisabled
   />

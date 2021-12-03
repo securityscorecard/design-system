@@ -4,6 +4,24 @@ import { action } from '@storybook/addon-actions';
 
 import Radio from './Radio';
 import { RadioProps } from './Radio.types';
+import { Icon, Inline, Text } from '../..';
+
+const textExample = 'Use the same details for billing & shipping on my invoice';
+
+const labelMappingValues = {
+  labelAsComponent: (
+    <Text size="md" variant="secondary">
+      Radio label inside a Text component
+    </Text>
+  ),
+  labelAsString: 'Radio label',
+  labelAsIconAndText: (
+    <Inline align="center" gap="sm">
+      <Icon color="graphite4B" name="wrench" />
+      <Text>{textExample}</Text>
+    </Inline>
+  ),
+};
 
 export default {
   title: 'components/forms/Radio',
@@ -12,6 +30,18 @@ export default {
     name: { control: { disable: true } },
     radioId: { control: { disable: true } },
     defaultChecked: { control: 'boolean' },
+    label: {
+      options: Object.keys(labelMappingValues),
+      mapping: labelMappingValues,
+      control: {
+        type: 'select',
+        labels: {
+          labelAsComponent: 'Label as Text component',
+          labelAsString: 'Label as string',
+          labelAsIconAndText: 'Label as Icon and Text',
+        },
+      },
+    },
   },
 } as Meta;
 
@@ -22,13 +52,13 @@ playground.parameters = {
 playground.args = {
   name: 'playground',
   radioId: 'playground',
-  label: 'Radio label',
+  label: labelMappingValues.labelAsString,
   defaultChecked: false,
 };
 
 export const DefaultRadio: Story = () => (
   <Radio
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="defaultRadio"
     radioId="defaultRadio"
     onChange={action('Radio clicked')}
@@ -37,7 +67,7 @@ export const DefaultRadio: Story = () => (
 
 export const CheckedRadio: Story = () => (
   <Radio
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="checkedRadio"
     radioId="checkedRadio"
     defaultChecked
@@ -46,18 +76,30 @@ export const CheckedRadio: Story = () => (
 
 export const InvalidRadio: Story = () => (
   <Radio
-    label="Use the same details for billing & shipping on my invoice"
+    label={textExample}
     name="invalidRadio"
     radioId="invalidRadio"
     isInvalid
   />
 );
 
-export const DisabledRadio: Story = () => (
+export const RadioWithLabelAsComponent: Story = () => (
   <Radio
-    label="Use the same details for billing & shipping on my invoice"
-    name="disabledRadio"
-    radioId="disabledRadio"
-    isDisabled
+    label={<Text>{textExample}</Text>}
+    name="radioWithLabelAsComponent"
+    radioId="radioWithLabelAsComponent"
+  />
+);
+
+export const RadioWithLabelAsComponentWithIcon: Story = () => (
+  <Radio
+    label={
+      <Inline align="center" gap="sm">
+        <Icon color="graphite4B" name="wrench" />
+        <Text>{textExample}</Text>
+      </Inline>
+    }
+    name="radioWithLabelAsComponentWithIcon"
+    radioId="radioWithLabelAsComponentWithIcon"
   />
 );
