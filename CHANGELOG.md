@@ -1,3 +1,11 @@
+# [1.0.0-alpha.134](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.133...v1.0.0-alpha.134) (2021-12-03)
+
+
+### Features
+
+* **forms:** extend Checkbox and Radio label support ([98b4e64](https://github.com/securityscorecard/design-system/commit/98b4e64ef02bfac5f0e916e7a0ffc16a761c3ba3))
+* **forms:** extend Checkbox and Radio label support ([0c144a7](https://github.com/securityscorecard/design-system/commit/0c144a799983bb9583cb6cc6facb94fb098d0aa0))
+
 # [1.0.0-alpha.133](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.132...v1.0.0-alpha.133) (2021-11-29)
 
 
