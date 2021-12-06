@@ -1,3 +1,10 @@
+# [1.0.0-alpha.135](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.134...v1.0.0-alpha.135) (2021-12-06)
+
+
+### Bug Fixes
+
+* improve custom prop types check ([d1dedae](https://github.com/securityscorecard/design-system/commit/d1dedaea2c305d1636344d6aead990612b301040))
+
 # [1.0.0-alpha.134](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.133...v1.0.0-alpha.134) (2021-12-03)
 
 
