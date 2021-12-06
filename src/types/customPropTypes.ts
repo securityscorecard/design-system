@@ -1,5 +1,5 @@
 import { gt, length } from 'ramda';
-import { isNotArray, isUndefined } from 'ramda-adjunct';
+import { isEmptyArray, isNotArray, isUndefined } from 'ramda-adjunct';
 
 import { TupleType, TypeChecker } from './customPropTypes.types';
 
@@ -25,17 +25,19 @@ function createChainableTypeChecker(validate) {
     const componentNameValid = componentName || 'ANONYMOUS';
     const propNameValid = propFullName || propName;
 
-    if (isRequired) {
-      if (props[propName] === null) {
+    if (props[propName] === null) {
+      if (isRequired) {
+        if (props[propName] === null) {
+          return new CustomPropTypeError(
+            `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`null\`.`,
+          );
+        }
         return new CustomPropTypeError(
-          `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`null\`.`,
+          `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`undefined\`.`,
         );
       }
-      return new CustomPropTypeError(
-        `The ${location} \`${propNameValid}\` is marked as required in \`${componentNameValid}\` but its value is \`undefined\`.`,
-      );
+      return null;
     }
-
     return validate(
       props,
       propName,
@@ -66,6 +68,11 @@ export function tuple(...types: TupleType[]): TypeChecker {
       if (isNotArray(value)) {
         return new CustomPropTypeError(
           `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected an array with a maximum of ${types.length} elements`,
+        );
+      }
+      if (isEmptyArray(value)) {
+        return new CustomPropTypeError(
+          `Invalid ${locationValid} \`${propNameValid}\` supplied to \`${componentName}\`, expected an array with a maximum of ${types.length} elements, got empty array`,
         );
       }
       if (gt(length(value), length(types))) {
