@@ -1,3 +1,10 @@
+# [1.0.0-alpha.136](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.135...v1.0.0-alpha.136) (2021-12-10)
+
+
+### Bug Fixes
+
+* **Banner:** close button background reset ([7ba4ab2](https://github.com/securityscorecard/design-system/commit/7ba4ab26c0629e70a32edefc2bf3919fc50192fe))
+
 # [1.0.0-alpha.135](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.134...v1.0.0-alpha.135) (2021-12-06)
 
 
