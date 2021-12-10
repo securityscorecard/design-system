@@ -80,6 +80,7 @@ const CloseButton = styled.button`
   border: none;
   flex-shrink: 0;
   cursor: pointer;
+  background-color: transparent;
   color: ${getColor('graphite3B')};
   width: ${pxToRem(16)};
   height: ${pxToRem(16)};
