@@ -37,12 +37,34 @@ const Dropdown: React.FC<DropdownProps> = ({
     onClose();
     setIsVisible(false);
   };
+  const togglePane = () => {
+    isVisible === true ? hidePane() : showPane();
+  };
 
   const handleTriggerOnClick = () => {
     if (!triggerEvents.includes('click')) {
       return;
     }
-    isVisible === true ? hidePane() : showPane();
+    togglePane();
+  };
+
+  const handleTriggerOnKeyDown: React.KeyboardEventHandler = (e) => {
+    if (!triggerEvents.includes('click')) {
+      return;
+    }
+
+    switch (e.key) {
+      case ' ':
+      case 'Enter':
+        e.preventDefault();
+        togglePane();
+        break;
+      case 'Escape':
+        e.preventDefault();
+        hidePane();
+        break;
+      default:
+    }
   };
 
   const handleTriggerOnMouseEnter = () => {
@@ -80,6 +102,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         {React.cloneElement(trigger, {
           onClick: handleTriggerOnClick,
           onTouchStart: handleTriggerOnClick,
+          onKeyDown: handleTriggerOnKeyDown,
           onMouseEnter: handleTriggerOnMouseEnter,
           onMouseLeave: handleTriggerOnMouseLeave,
           onFocus: handleTriggerOnFocus,
