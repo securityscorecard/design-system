@@ -37,7 +37,7 @@ import { SpaceSizes } from '../../../theme';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import MultiValue from './MultiValue';
+import { Pill } from '../../Pill';
 import {
   MultiValueInputProps,
   ValueContainerProps,
@@ -248,6 +248,11 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     }
   };
 
+  const hadleOnRemove = (index: number) => () => {
+    removeValue(index);
+    inputRef.focus();
+  };
+
   return (
     <ValueContainer
       $isDisabled={isDisabled}
@@ -261,15 +266,11 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
         <Padbox paddingSize={SpaceSizes.xs} style={{ overflow: 'hidden' }}>
           <Cluster gap={SpaceSizes.xs}>
             {values.map((label, index) => (
-              <MultiValue
+              <Pill
                 key={label}
-                isDisabled={isDisabled}
                 label={label}
-                maxLength={maxPillLabelLength}
-                onRemove={() => {
-                  removeValue(index);
-                  inputRef.focus();
-                }}
+                maxLabelLength={maxPillLabelLength}
+                onRemove={!isDisabled ? hadleOnRemove(index) : undefined}
               />
             ))}
             <InputContainer>
