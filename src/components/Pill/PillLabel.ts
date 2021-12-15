@@ -20,6 +20,7 @@ const pillLabelSizes = {
 };
 
 const PillLabel = styled.div<PillLabelProps>`
+  flex: 1 1 0%;
   white-space: nowrap;
   color: ${getColor('graphite4B')};
   ${({ $size }) => pillLabelSizes[$size]};

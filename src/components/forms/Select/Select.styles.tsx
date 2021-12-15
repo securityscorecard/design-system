@@ -32,6 +32,10 @@ import {
 } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
 import { Spinner } from '../../Spinner';
+import PillWrapper from '../../Pill/PillWrapper';
+import PillLabel from '../../Pill/PillLabel';
+import PillRemoveButton from '../../Pill/PillRemoveButton';
+import { PillSizes, PillVariants } from '../../Pill/Pill.enums';
 
 export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig = (
   DSTheme,
@@ -150,48 +154,10 @@ export const selectStyles: (
       };
     },
     singleValue: assoc('margin', 0),
-    multiValue: (styles) => ({
-      ...styles,
-      display: 'flex',
-      alignItems: 'center',
-      padding: pipe(
-        getPaddingSpace,
-        apply(pxToRem),
-      )({
-        paddingSize: SpaceSizes.sm,
-        paddingType: PaddingTypes.squish,
-        theme: DSTheme,
-      }),
-      backgroundColor: DSTheme.colors.graphite2H,
-      margin: undefined,
-    }),
-    multiValueLabel: () => ({
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      fontSize: DSTheme.typography.size.md,
-      lineHeight: DSTheme.typography.lineHeight.md,
-      color: DSTheme.colors.graphite4B,
-      padding: 0,
-      marginRight: pxToRem(DSTheme.space.xs),
-      flex: '1 1 0%',
-    }),
-    // Disable TS because types are wrong for MultiValueRemove component
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /* @ts-ignore */
-    multiValueRemove: (styles, { isFocused }) => ({
-      ...styles,
-      display: 'flex',
-      justifyContent: 'center',
-      padding: 0,
-      color: isFocused ? DSTheme.colors.strawberry : DSTheme.colors.graphite2B,
-      width: pxToRem(16),
-      fontSize: pxToRem(12),
-      cursor: 'pointer',
-      backgroundColor: 'transparent',
-      ':hover': {
-        color: DSTheme.colors.strawberry,
-      },
-    }),
+    multiValue: () => ({}),
+    multiValueContainer: () => ({}),
+    multiValueLabel: () => ({}),
+    multiValueRemove: () => ({}),
     // Disable TS because types are wrong for Input component
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     /* @ts-ignore */
@@ -318,37 +284,52 @@ export const ClearIndicator: IndicatorComponentType<OptionType, boolean> = (
   );
 };
 
-const TruncatedLabel = styled.div<{ $maxLength: number }>`
-  /* desired length + 2 chars for ellipsis */
-  max-width: ${({ $maxLength }) => `${$maxLength + 2}ch`};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+type InnerProps = {
+  id: string;
+  key: string;
+  onClick: React.MouseEventHandler<HTMLElement>;
+  onMouseMove: React.MouseEventHandler<HTMLElement>;
+  onMouseOver: React.MouseEventHandler<HTMLElement>;
+  tabIndex: number;
+};
+export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
+  children,
+  innerProps,
+  ...props
+}) => (
+  <PillWrapper
+    isClickable={false}
+    size={PillSizes.sm}
+    variant={PillVariants.solid}
+    {...innerProps}
+    {...props}
+  >
+    {children}
+  </PillWrapper>
+);
 
 export const MultiValueLabel: (
   maxLength: number,
-) => ComponentType<{ data: OptionType }> = (maxLength) => (props) => {
-  const { data, children } = props;
+) => ComponentType<{
+  data: OptionType;
+  innerProps: InnerProps;
+}> = (maxLength) => ({ children, innerProps, ...props }) => (
+  <PillLabel
+    $maxLength={maxLength}
+    $size={PillSizes.sm}
+    title={props.data.label}
+    {...innerProps}
+  >
+    {children}
+  </PillLabel>
+);
 
-  return (
-    <components.MultiValueLabel {...props}>
-      <TruncatedLabel $maxLength={maxLength} title={data.label}>
-        {children}
-      </TruncatedLabel>
-    </components.MultiValueLabel>
-  );
-};
-
-export const MultiValueRemove: ComponentType<Record<string, unknown>> = (
-  props,
-) => {
-  return (
-    <components.MultiValueRemove {...props}>
-      <Icon name={SSCIconNames.times} type={IconTypes.ssc} />
-    </components.MultiValueRemove>
-  );
-};
+export const MultiValueRemove: ComponentType<{
+  data: OptionType;
+  innerProps: InnerProps;
+}> = ({ innerProps, ...props }) => (
+  <PillRemoveButton pillLabel={props.data.label} {...innerProps} {...props} />
+);
 
 const ActionsMenu = styled.div`
   margin-top: ${getSpace(SpaceSizes.sm)};
