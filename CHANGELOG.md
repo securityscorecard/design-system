@@ -1,3 +1,17 @@
+# [1.0.0-alpha.137](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.136...v1.0.0-alpha.137) (2021-12-16)
+
+
+### Bug Fixes
+
+* **Dropdown:** add consistent keyDown handler ([cc24cb2](https://github.com/securityscorecard/design-system/commit/cc24cb2a57aa15c3f82189bb92cae77cdd4d83ee))
+* **H4:** update heading style ([e3dda52](https://github.com/securityscorecard/design-system/commit/e3dda52cdce8c920d928398f5dd535a49fdaeaa7))
+* **icons:** make times icon square ([6fc8d4e](https://github.com/securityscorecard/design-system/commit/6fc8d4ea6f362b631d774a4d6d5a79fd28b85148))
+
+
+### Features
+
+* **Pill:** add Pill component ([a6a96ab](https://github.com/securityscorecard/design-system/commit/a6a96ab9793a00d78ac183d46f8f491d43396b13))
+
 # [1.0.0-alpha.136](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.135...v1.0.0-alpha.136) (2021-12-10)
 
 
