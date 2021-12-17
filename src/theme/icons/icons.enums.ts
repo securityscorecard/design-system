@@ -30,6 +30,7 @@ export const SSCIconNames = {
   error: 'error',
   exclTriangle: 'excl-triangle',
   ban: 'ban',
+  lock: 'lock',
 } as const;
 
 export const IconTypes = {

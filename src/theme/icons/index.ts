@@ -34,3 +34,4 @@ export { checkCircle } from './checkCircle';
 export { error } from './error';
 export { exclTriangle } from './exclTriangle';
 export { ban } from './ban';
+export { lock } from './lock';
