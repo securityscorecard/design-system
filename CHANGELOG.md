@@ -1,3 +1,10 @@
+# [1.0.0-alpha.138](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.137...v1.0.0-alpha.138) (2021-12-17)
+
+
+### Features
+
+* **icons:** add lock icon ([9d88a54](https://github.com/securityscorecard/design-system/commit/9d88a540316efc28280b2a107b6c3fd837bd35cb))
+
 # [1.0.0-alpha.137](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.136...v1.0.0-alpha.137) (2021-12-16)
 
 
