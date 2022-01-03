@@ -1,3 +1,10 @@
+# [1.0.0-alpha.139](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.138...v1.0.0-alpha.139) (2022-01-03)
+
+
+### Bug Fixes
+
+* **Pill:** update XS square padding for small pills ([7ebda1b](https://github.com/securityscorecard/design-system/commit/7ebda1bc140a27090d1ba8ad7dfebafc5d5001ce))
+
 # [1.0.0-alpha.138](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.137...v1.0.0-alpha.138) (2021-12-17)
 
 
