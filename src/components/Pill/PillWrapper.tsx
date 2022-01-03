@@ -53,10 +53,8 @@ const PillWrapper: React.FC<PillWrapperProps> = ({
     $isClickable={isClickable}
     $variant={variant}
     {...props}
-    paddingSize={SpaceSizes.sm}
-    paddingType={
-      size === PillSizes.md ? PaddingTypes.square : PaddingTypes.squish
-    }
+    paddingSize={size === PillSizes.sm ? SpaceSizes.xs : SpaceSizes.sm}
+    paddingType={PaddingTypes.square}
   >
     <Inline align="center" gap={SpaceSizes.xs}>
       {children}
