@@ -74,35 +74,29 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
 
     return (
       <Modal ref={ref} size={ModalEnums.ModalSizes.sm} onClose={onClose}>
-        <Stack gap={SpaceSizes.md}>
-          <Center>
-            <Inline>
-              <Padbox paddingSize={SpaceSizes.md}>
-                <StyledIcon $variant={variant} name={iconVariants[variant]} />
-              </Padbox>
-            </Inline>
-          </Center>
-          <Center isTextCentered>
-            <Stack gap={SpaceSizes.md}>
-              <H3>{title}</H3>
-              <Text>{message}</Text>
-              <Padbox paddingSize={SpaceSizes.md}>
-                <Inline gap={SpaceSizes.md} justify="center">
-                  {actions.map(
-                    (action: ActionKinds<[React.MouseEvent]>, index: number) =>
-                      isNotUndefined(action) &&
-                      renderButton(
-                        action,
-                        index === 0
-                          ? ButtonEnums.ButtonVariants.outline
-                          : ButtonEnums.ButtonVariants.solid,
-                      ),
-                  )}
-                </Inline>
-              </Padbox>
-            </Stack>
-          </Center>
-        </Stack>
+        <Center isTextCentered>
+          <Stack gap={SpaceSizes.md}>
+            <Padbox paddingSize={SpaceSizes.md}>
+              <StyledIcon $variant={variant} name={iconVariants[variant]} />
+            </Padbox>
+            <H3>{title}</H3>
+            <Text>{message}</Text>
+            <Padbox paddingSize={SpaceSizes.md}>
+              <Inline gap={SpaceSizes.md} justify="center">
+                {actions.map(
+                  (action: ActionKinds<[React.MouseEvent]>, index: number) =>
+                    isNotUndefined(action) &&
+                    renderButton(
+                      action,
+                      index === 0
+                        ? ButtonEnums.ButtonVariants.outline
+                        : ButtonEnums.ButtonVariants.solid,
+                    ),
+                )}
+              </Inline>
+            </Padbox>
+          </Stack>
+        </Center>
       </Modal>
     );
   },
