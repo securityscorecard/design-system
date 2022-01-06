@@ -21,6 +21,16 @@ const buttons: Buttons = {
     },
     outline: {
       primary: {
+        color: colors.blueberryClassic,
+        bgColor: 'transparent',
+        hoverBgColor: colors.blueberry0,
+        activeBgColor: colors.blueberry0,
+        disabledBgColor: colors.graphite2H,
+        disabledColor: colors.graphiteB,
+        borderColor: colors.blueberryClassic,
+        disabledBorderColor: colors.graphiteH,
+      },
+      secondary: {
         color: colors.graphite3B,
         bgColor: colors.graphite5H,
         hoverBgColor: colors.graphite3H,

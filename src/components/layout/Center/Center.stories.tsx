@@ -24,7 +24,9 @@ const CenterTemplate: Story<CenterProps> = (args) => (
   <div style={{ backgroundColor: '#dadada' }}>
     <Center style={{ backgroundColor: '#0275d8' }} {...args}>
       <Box />
-      <Button variant="outline">Click me</Button>
+      <Button color="secondary" variant="outline">
+        Click me
+      </Button>
       <Box />
     </Center>
   </div>

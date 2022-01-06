@@ -21,7 +21,9 @@ export const playground: Story<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>
     <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
       <Box />
-      <Button variant="outline">Click me gently</Button>
+      <Button color="secondary" variant="outline">
+        Click me gently
+      </Button>
       <Stack style={{ backgroundColor: '#80baeb' }}>
         <Box />
         <Box />
@@ -78,7 +80,9 @@ SplitedStack.args = {
 export const WithHorizontalAlignment: Story<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
     <Box />
-    <Button variant="outline">Click me gently</Button>
+    <Button color="secondary" variant="outline">
+      Click me gently
+    </Button>
     <Box />
   </Stack>
 );
