@@ -89,23 +89,42 @@ export const SolidButtons: Story = () => (
 );
 
 export const OutlineButtons: Story = () => (
-  <Inline gap={SpaceSizes.md}>
-    <Button color="primary" variant="outline">
-      Button
-    </Button>
-    <Button className="hover" color="primary" variant="outline">
-      Hovered Button
-    </Button>
-    <Button className="focus" color="primary" variant="outline">
-      Focused Button
-    </Button>
-    <Button className="active" color="primary" variant="outline">
-      Active Button
-    </Button>
-    <Button color="primary" variant="outline" isDisabled>
-      Disabled Button
-    </Button>
-  </Inline>
+  <Stack gap={SpaceSizes.lg}>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="primary" variant="outline">
+        Button
+      </Button>
+      <Button className="hover" color="primary" variant="outline">
+        Hovered Button
+      </Button>
+      <Button className="focus" color="primary" variant="outline">
+        Focused Button
+      </Button>
+      <Button className="active" color="primary" variant="outline">
+        Active Button
+      </Button>
+      <Button color="primary" variant="outline" isDisabled>
+        Disabled Button
+      </Button>
+    </Inline>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="secondary" variant="outline">
+        Button
+      </Button>
+      <Button className="hover" color="secondary" variant="outline">
+        Hovered Button
+      </Button>
+      <Button className="focus" color="secondary" variant="outline">
+        Focused Button
+      </Button>
+      <Button className="active" color="secondary" variant="outline">
+        Active Button
+      </Button>
+      <Button color="secondary" variant="outline" isDisabled>
+        Disabled Button
+      </Button>
+    </Inline>
+  </Stack>
 );
 
 export const TextButtons: Story = () => (
