@@ -1,3 +1,12 @@
+# [1.0.0-alpha.141](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.140...v1.0.0-alpha.141) (2022-01-11)
+
+
+### Features
+
+* **Switch:** add changes based on review ([88dbe0a](https://github.com/securityscorecard/design-system/commit/88dbe0aaac641d881430459ebb5f022866600c72))
+* **Switch:** implement Switch (toggle) component ([879e839](https://github.com/securityscorecard/design-system/commit/879e839c42e06c6a43661d1d9afe13963fd62d7f))
+* **Switch:** update visual regression images ([7ef7805](https://github.com/securityscorecard/design-system/commit/7ef7805ff20c4f92eb4dc5c0dd8e472cec6b42cf))
+
 # [1.0.0-alpha.140](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.139...v1.0.0-alpha.140) (2022-01-11)
 
 
