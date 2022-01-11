@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { __, pipe, subtract } from 'ramda';
@@ -12,7 +12,7 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../../utils';
-import { Sizes, SwitchProps } from './Switch.types';
+import { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
 import { SwitchSizes } from './Switch.enums';
 
 // Minimum width for
@@ -21,7 +21,7 @@ const SwitchMdWithoutLabel = 56;
 const SwitchSmWithLabel = 64;
 const SwitchSmWithoutLabel = 40;
 
-const SwitchLabelWrapperMedium = css<SwitchProps>`
+const SwitchLabelWrapperMedium = css<{ label: string; maxWidth: number }>`
   ${({ label }) =>
     css`
       min-width: ${pxToRem(label ? SwitchMdWithLabel : SwitchMdWithoutLabel)};
@@ -34,7 +34,7 @@ const SwitchLabelWrapperMedium = css<SwitchProps>`
     `};
 `;
 
-const SwitchLabelWrapperSmall = css<SwitchProps>`
+const SwitchLabelWrapperSmall = css<{ label: string; maxWidth: number }>`
   ${({ label }) =>
     css`
       min-width: ${pxToRem(label ? SwitchSmWithLabel : SwitchSmWithoutLabel)};
@@ -45,6 +45,11 @@ const SwitchLabelWrapperSmall = css<SwitchProps>`
     css`
       width: ${pxToRem(maxWidth)};
     `};
+`;
+
+const SwitchWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 // Paddings
@@ -93,21 +98,21 @@ const getSwitchLabelAfterElementSize = ({ size, theme }) =>
 const getSwitchHeight = ({ size, theme }) =>
   pipe(getButtonHeight(size), pxToRem)({ theme });
 
-const Label = styled.label<{
-  isDisabled?: boolean;
-  size?: Sizes;
-  maxWidth?: number;
-}>`
+const BaseLabel = styled.label`
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: ${getSwitchHeight};
-  line-height: ${getLineHeight('md')};
-  background: ${getFormStyle('switchBgColor')};
   margin: 0;
   border-radius: 16px;
   cursor: pointer;
+`;
+
+const Label = styled(BaseLabel)<SwitchLabelProps>`
+  height: ${getSwitchHeight};
+  line-height: ${getLineHeight('md')};
+  background: ${getFormStyle('switchBgColor')};
   ${({ size }) => switchLabelWrapperSizes[size]};
+
   ${({ isDisabled }) =>
     css`
       color: ${getFormStyle(isDisabled ? 'disabledColor' : 'switchColor')};
@@ -116,10 +121,7 @@ const Label = styled.label<{
     `};
 `;
 
-const LabelContent = styled.div<{
-  isDisabled?: boolean;
-  size?: Sizes;
-}>`
+const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
   font-size: ${getFontSize('md')};
   font-family: ${getFontFamily('base')};
   font-weight: ${getFontWeight('medium')};
@@ -180,35 +182,39 @@ const Input = styled.input<{
   }
 `;
 
-const Switch: React.FC<
-  SwitchProps & React.PropsWithRef<Omit<JSX.IntrinsicElements['input'], 'size'>>
-> = ({
-  switchId,
-  label,
-  isDisabled = false,
-  size = SwitchSizes.md,
-  maxWidth,
-  ...props
-}) => (
-  <>
-    <Input
-      $size={size}
-      disabled={isDisabled}
-      id={switchId}
-      {...props}
-      type="checkbox"
-    />
-    <Label
-      htmlFor={switchId}
-      isDisabled={isDisabled}
-      maxWidth={maxWidth}
-      size={size}
-    >
-      <LabelContent isDisabled={isDisabled} size={size}>
-        {label}
-      </LabelContent>
-    </Label>
-  </>
+const Switch = forwardRef<HTMLInputElement, SwitchProps>(
+  (
+    {
+      switchId,
+      label,
+      isDisabled = false,
+      size = SwitchSizes.md,
+      maxWidth,
+      ...props
+    },
+    ref,
+  ) => (
+    <SwitchWrapper>
+      <Input
+        ref={ref}
+        $size={size}
+        disabled={isDisabled}
+        id={switchId}
+        type="checkbox"
+        {...props}
+      />
+      <Label
+        htmlFor={switchId}
+        isDisabled={isDisabled}
+        maxWidth={maxWidth}
+        size={size}
+      >
+        <LabelContent isDisabled={isDisabled} size={size}>
+          {label}
+        </LabelContent>
+      </Label>
+    </SwitchWrapper>
+  ),
 );
 
 Switch.propTypes = {
