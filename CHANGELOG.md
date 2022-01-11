@@ -1,3 +1,10 @@
+# [1.0.0-alpha.140](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.139...v1.0.0-alpha.140) (2022-01-11)
+
+
+### Features
+
+* **Button:** update outline Button primary color ([8adf571](https://github.com/securityscorecard/design-system/commit/8adf5719c2460da9b3e95bdef39031f2de297661))
+
 # [1.0.0-alpha.139](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.138...v1.0.0-alpha.139) (2022-01-03)
 
 
