@@ -66,30 +66,35 @@ const ButtonSolid = css<BaseStyledButtonProps>`
     color: ${getButtonColor('color')};
   }
 
-  &:disabled {
-    background-color: ${getButtonColor('disabledBgColor')};
-    border-color: ${getButtonColor('disabledBgColor')};
-  }
+  ${({ disabled }) =>
+    disabled
+      ? css`
+           {
+            background-color: ${getButtonColor('disabledBgColor')};
+            border-color: ${getButtonColor('disabledBgColor')};
+          }
+        `
+      : css`
+          &:focus:not(:disabled),
+          &:hover:not(:disabled),
+          &:not([href]):not([tabindex]):not(:disabled):hover,
+          &.hover,
+          &.focus {
+            background-color: ${getButtonColor('hoverBgColor')};
+            border-color: ${getButtonColor('hoverBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+          }
 
-  &:focus:not(:disabled),
-  &:hover:not(:disabled),
-  &:not([href]):not([tabindex]):not(:disabled):hover,
-  &.hover,
-  &.focus {
-    background-color: ${getButtonColor('hoverBgColor')};
-    border-color: ${getButtonColor('hoverBgColor')};
-    color: ${getButtonColor('color')};
-    text-decoration: none;
-  }
-
-  &:not(:disabled):active,
-  &:not([href]):not([tabindex]):not(:disabled):active,
-  &.active {
-    background-color: ${getButtonColor('activeBgColor')};
-    border-color: ${getButtonColor('activeBgColor')};
-    color: ${getButtonColor('color')};
-    text-decoration: none;
-  }
+          &:not(:disabled):active,
+          &:not([href]):not([tabindex]):not(:disabled):active,
+          &.active {
+            background-color: ${getButtonColor('activeBgColor')};
+            border-color: ${getButtonColor('activeBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+          }
+        `}
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
@@ -102,29 +107,34 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     color: ${getButtonColor('color')};
   }
 
-  &:disabled {
-    color: ${getButtonColor('disabledColor')};
-    background-color: ${getButtonColor('disabledBgColor')};
-    border-color: ${getButtonColor('disabledBorderColor')};
-  }
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          & {
+            color: ${getButtonColor('disabledColor')};
+            background-color: ${getButtonColor('disabledBgColor')};
+            border-color: ${getButtonColor('disabledBorderColor')};
+          }
+        `
+      : css`
+          &:focus:not(:disabled),
+          &:hover:not(:disabled),
+          &:not([href]):not([tabindex]):not(:disabled):hover,
+          &.hover,
+          &.focus {
+            background-color: ${getButtonColor('hoverBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+          }
 
-  &:focus:not(:disabled),
-  &:hover:not(:disabled),
-  &:not([href]):not([tabindex]):not(:disabled):hover,
-  &.hover,
-  &.focus {
-    background-color: ${getButtonColor('hoverBgColor')};
-    color: ${getButtonColor('color')};
-    text-decoration: none;
-  }
-
-  &:not(:disabled):active,
-  &:not([href]):not([tabindex]):not(:disabled):active,
-  &.active {
-    background-color: ${getButtonColor('activeBgColor')};
-    color: ${getButtonColor('color')};
-    text-decoration: none;
-  }
+          &:not(:disabled):active,
+          &:not([href]):not([tabindex]):not(:disabled):active,
+          &.active {
+            background-color: ${getButtonColor('activeBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+          }
+        `}
 `;
 
 const ButtonText = css<BaseStyledButtonProps>`
@@ -138,25 +148,30 @@ const ButtonText = css<BaseStyledButtonProps>`
     color: ${getButtonColor('color')};
   }
 
-  &:disabled {
-    color: ${getButtonColor('disabledColor')};
-  }
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          & {
+            color: ${getButtonColor('disabledColor')};
+          }
+        `
+      : css`
+          &:focus:not(:disabled),
+          &:hover:not(:disabled),
+          &:not([href]):not([tabindex]):not(:disabled):hover,
+          &&&.hover,
+          &&&.focus {
+            color: ${getButtonColor('hoverColor')};
+            text-decoration: none;
+          }
 
-  &:focus:not(:disabled),
-  &:hover:not(:disabled),
-  &:not([href]):not([tabindex]):not(:disabled):hover,
-  &&&.hover,
-  &&&.focus {
-    color: ${getButtonColor('hoverColor')};
-    text-decoration: none;
-  }
-
-  &:not(:disabled):active,
-  &:not([href]):not([tabindex]):not(:disabled):active,
-  &&&.active {
-    color: ${getButtonColor('activeColor')};
-    text-decoration: none;
-  }
+          &:not(:disabled):active,
+          &:not([href]):not([tabindex]):not(:disabled):active,
+          &&&.active {
+            color: ${getButtonColor('activeColor')};
+            text-decoration: none;
+          }
+        `}
 `;
 
 const buttonVariants = {
