@@ -1,3 +1,10 @@
+# [1.0.0-alpha.142](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.141...v1.0.0-alpha.142) (2022-01-17)
+
+
+### Bug Fixes
+
+* **Button:** fix disabled state when used with router ([9bf0b81](https://github.com/securityscorecard/design-system/commit/9bf0b8105b111f28f5506f4e965d88ac32a8d52d))
+
 # [1.0.0-alpha.141](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.140...v1.0.0-alpha.141) (2022-01-11)
 
 
