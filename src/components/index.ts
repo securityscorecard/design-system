@@ -14,6 +14,7 @@ export * from './Icon';
 export * from './IconButton';
 export * from './Modal';
 export * from './Nav';
+export * from './Pagination';
 export * from './Pill';
 export * from './SemanticModal';
 export * from './Signal';
