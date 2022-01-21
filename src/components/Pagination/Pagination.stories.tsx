@@ -6,7 +6,7 @@ import Pagination from './Pagination';
 import { PaginationProps } from './Pagination.types';
 
 export default {
-  title: 'components/Datatable/internalComponents/Table/Pagination',
+  title: 'components/Pagination',
   component: Pagination,
   parameters: {
     viewMode: 'story',

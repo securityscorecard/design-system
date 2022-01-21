@@ -1,4 +1,4 @@
-import { OnPageChangeFn } from '../Footer.types';
+export type OnPageChangeFn = (page: number) => void;
 
 export interface PageButtonsProps {
   currentPage: number;

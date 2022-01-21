@@ -9,8 +9,8 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../../../../utils';
-import { FlexContainer } from '../../../../FlexContainer';
+} from '../../utils';
+import { FlexContainer } from '../FlexContainer';
 import { PaginationItemProps } from './Pagination.types';
 
 const StyledPaginationComponent = styled.button<{
