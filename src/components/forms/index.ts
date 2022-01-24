@@ -7,6 +7,7 @@ export * from './Password';
 export * from './Radio';
 export * from './RadioListItem';
 export * from './Select';
+export * from './Range';
 export * from './Switch';
 export * from './TextArea';
 export * from './SearchBar';
