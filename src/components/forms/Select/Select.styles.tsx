@@ -443,10 +443,6 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
     label,
     data: { __isNew__: isCreateNewOption },
   } = props;
-  if (!isMulti) {
-    return <components.Option {...props} />;
-  }
-
   if (isCreateNewOption) {
     return (
       <components.Option {...props}>
@@ -458,6 +454,9 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
         </CreateNewOption>
       </components.Option>
     );
+  }
+  if (!isMulti) {
+    return <components.Option {...props} />;
   }
 
   return (

@@ -92,7 +92,7 @@ OR
   },
 } as Meta;
 
-export const Playground: Story<CreatableSelectProps<true>> = ({
+const CreatableSelectTemplate: Story<CreatableSelectProps<true>> = ({
   options: originalOptions,
   ...args
 }) => {
@@ -134,6 +134,8 @@ export const Playground: Story<CreatableSelectProps<true>> = ({
   );
 };
 
+export const Playground = CreatableSelectTemplate.bind({});
+
 Playground.args = {
   options: [
     { value: 'HR', label: 'Croatia', isDisabled: true },
@@ -148,4 +150,11 @@ Playground.args = {
   isMulti: true,
   isMenuPositionRelative: true,
   defaultInputValue: 'd',
+};
+
+export const SingleSelect = CreatableSelectTemplate.bind({});
+
+SingleSelect.args = {
+  ...Playground.args,
+  isMulti: false,
 };
