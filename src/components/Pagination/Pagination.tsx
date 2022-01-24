@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SSCIconNames } from '../../../../../theme/icons/icons.enums';
-import { Icon } from '../../../../Icon';
+import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { Icon } from '../Icon';
 import { PaginationItem } from './PaginationItem';
 import PageButtons from './PageButtons';
-import { FlexContainer } from '../../../../FlexContainer';
+import { FlexContainer } from '../FlexContainer';
 import { PaginationProps } from './Pagination.types';
 
 const Pagination: React.FC<PaginationProps> = ({

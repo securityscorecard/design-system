@@ -1,4 +1,4 @@
-export type OnPageChangeFn = (page: number) => void;
+import { OnPageChangeFn } from '../../../Pagination/Pagination.types';
 
 export interface FooterProps {
   pageCount: number;

@@ -7,7 +7,7 @@ import { FlexContainer } from '../../../FlexContainer';
 import { Spinner } from '../../../Spinner';
 import { FooterProps } from './Footer.types';
 import GoToPage from './GoToPage';
-import { Pagination } from './Pagination';
+import { Pagination } from '../../../Pagination';
 
 const StyledFooter = styled(FlexContainer)`
   padding: ${pxToRem(16)};
