@@ -1,3 +1,15 @@
+# [1.0.0-alpha.143](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.142...v1.0.0-alpha.143) (2022-01-24)
+
+
+### Bug Fixes
+
+* **Select:** fix creatable row style for single select ([c15f2eb](https://github.com/securityscorecard/design-system/commit/c15f2eb8a6e086f2e241fe0d49d6b99586d85e6e))
+
+
+### Features
+
+* **Pagination:** extract Pagination from DataTable component ([a27ecd6](https://github.com/securityscorecard/design-system/commit/a27ecd6655e24f0869179adc45b2b5645342fecf))
+
 # [1.0.0-alpha.142](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.141...v1.0.0-alpha.142) (2022-01-17)
 
 
