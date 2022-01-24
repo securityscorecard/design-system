@@ -15,8 +15,20 @@ export interface PaginationItemProps {
 }
 
 export interface PaginationProps {
+  /**
+   * Total number of pages.
+   */
   pageCount: number;
+  /**
+   * Number of current page. Starts with 1.
+   */
   currentPage: number;
+  /**
+   * Callback called when pagination button is clicked.
+   */
   onPageChange: OnPageChangeFn;
+  /**
+   * Number of page positions. This also includes ellipsis positions if visible.
+   */
   pageButtonsCount?: number;
 }

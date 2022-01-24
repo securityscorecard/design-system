@@ -8,10 +8,10 @@ import { PaginationProps } from './Pagination.types';
 export default {
   title: 'components/Pagination',
   component: Pagination,
-  parameters: {
-    viewMode: 'story',
-    docs: { disable: true },
-    previewTabs: { 'storybook/docs/panel': { hidden: true } },
+  argTypes: {
+    onPageChange: {
+      control: { disable: true },
+    },
   },
 } as Meta;
 
