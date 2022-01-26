@@ -2,10 +2,10 @@ import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { join, pipe, slice } from 'ramda';
 
-import { renderWithProviders } from '../../../../../utils/tests/renderWithProviders';
+import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import MultiValueRenderer from './MultiValueRenderer';
-import { abbreviateNumber } from '../../../../../utils';
-import { defaultDSContext } from '../../../../../theme/DSProvider/DSProvider';
+import { abbreviateNumber } from '../../../../utils';
+import { defaultDSContext } from '../../../../theme/DSProvider/DSProvider';
 
 const values = ['a', 'b', 'c', 'd', 'e'];
 const numberOfVisibleItems = 2;

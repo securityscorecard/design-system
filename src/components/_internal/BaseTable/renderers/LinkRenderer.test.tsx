@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
 
-import { renderWithProviders } from '../../../../../utils/tests/renderWithProviders';
+import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import LinkRenderer from './LinkRenderer';
 
 const rowData = { col: 'val' };

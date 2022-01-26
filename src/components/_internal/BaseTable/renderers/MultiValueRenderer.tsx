@@ -2,9 +2,9 @@ import React from 'react';
 import { any, identity, map, pipe, slice } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { Tooltip } from '../../../../Tooltip';
+import { Tooltip } from '../../../Tooltip';
 import LinkRenderer from './LinkRenderer';
-import TooltipWrapper from '../../components/TooltipWrapper';
+import TooltipWrapper from '../components/TooltipWrapper';
 import { MultiValueRendererProps } from './renderers.types';
 
 const renderRestValue = (startIndex, formatter, values) =>

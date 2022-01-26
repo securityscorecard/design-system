@@ -3,11 +3,11 @@ import { fireEvent, screen } from '@testing-library/react';
 import { F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
 
-import { renderWithProviders } from '../../../../../utils/tests/renderWithProviders';
+import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import CellRenderer from './CellRenderer';
 import { CellTypes } from './renderers.enums';
-import { abbreviateNumber } from '../../../../../utils';
-import { defaultDSContext } from '../../../../../theme/DSProvider/DSProvider';
+import { abbreviateNumber } from '../../../../utils';
+import { defaultDSContext } from '../../../../theme/DSProvider/DSProvider';
 
 const row = ({ original: { col: 'val' } } as unknown) as Row<
   Record<string, unknown>

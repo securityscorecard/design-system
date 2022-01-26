@@ -27,20 +27,21 @@ import {
 import cls from 'classnames';
 import { isNonEmptyArray, isNotUndefined, isString } from 'ramda-adjunct';
 
+import {
+  BaseTableAndLoadingOverlayContainer,
+  BaseTableContainer,
+  Body,
+  CellRenderer,
+  Footer,
+  Head,
+  LoadingNoData,
+  StyledBaseTable,
+  actionsColumn,
+} from '../../_internal/BaseTable';
 import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
-import { actionsColumn } from './columns/actionsColumn';
 import { selectionColumn } from './columns/selectionColumn';
-import { Head } from './Head';
-import { Body } from './Body';
-import { LoadingNoData, LoadingOverlay } from './Loading';
-import { Footer } from './Footer';
-import {
-  StyledTable,
-  TableAndLoadingOverlayContainer,
-  TableContainer,
-} from './Table.styles';
-import CellRenderer from './Body/renderers/CellRenderer';
+import { LoadingOverlay } from './components';
 import { FlexContainer } from '../../FlexContainer';
 import { getColor, pxToRem } from '../../../utils';
 import { TableProps } from './Table.types';
@@ -287,9 +288,9 @@ TableProps<D>): React.ReactElement => {
 
   return (
     <>
-      <TableAndLoadingOverlayContainer>
-        <TableContainer>
-          <StyledTable
+      <BaseTableAndLoadingOverlayContainer>
+        <BaseTableContainer>
+          <StyledBaseTable
             className={cls({
               'has-exclusive-selection': hasExclusiveSelection,
             })}
@@ -301,15 +302,15 @@ TableProps<D>): React.ReactElement => {
               rows={hasServerSidePagination ? rows : page}
               {...getTableBodyProps()}
             />
-          </StyledTable>
-        </TableContainer>
+          </StyledBaseTable>
+        </BaseTableContainer>
         {tableDataSize > 0 && isDataLoading && (
           <LoadingOverlay
             isCancelable={!isCancelDisabled}
             onCancel={onCancelLoading}
           />
         )}
-      </TableAndLoadingOverlayContainer>
+      </BaseTableAndLoadingOverlayContainer>
       {tableDataSize === 0 ? (
         <NoDataContainer>
           {isDataLoading ? (

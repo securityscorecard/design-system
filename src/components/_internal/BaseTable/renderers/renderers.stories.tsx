@@ -6,12 +6,12 @@ import { MemoryRouter } from 'react-router-dom';
 import { equals, F as stubFalse } from 'ramda';
 import { action } from '@storybook/addon-actions';
 
-import { composeQuery } from '../../../mocks/columns';
-import { StyledTable, TableContainer } from '../../Table.styles';
+import { composeQuery } from '../mocks/columns';
+import { BaseTableContainer, StyledBaseTable } from '../BaseTable.styles';
 import CellRenderer from './CellRenderer';
 import { CellRendererProps } from './renderers.types';
 import { CellTypes } from './renderers.enums';
-import { abbreviateNumber } from '../../../../../utils';
+import { abbreviateNumber } from '../../../../utils';
 
 export default {
   title: 'components/Datatable/internalComponents/Table/renderers',
@@ -20,15 +20,15 @@ export default {
     (storyFn) => (
       <MemoryRouter>
         <div style={{ width: '400px', margin: '0 auto' }}>
-          <TableContainer>
-            <StyledTable>
+          <BaseTableContainer>
+            <StyledBaseTable>
               <tbody>
                 <tr>
                   <td className="ds-table-cell">{storyFn()}</td>
                 </tr>
               </tbody>
-            </StyledTable>
-          </TableContainer>
+            </StyledBaseTable>
+          </BaseTableContainer>
         </div>
       </MemoryRouter>
     ),

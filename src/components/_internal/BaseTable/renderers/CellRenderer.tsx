@@ -4,7 +4,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import LinkRenderer from './LinkRenderer';
 import MultiValueRenderer from './MultiValueRenderer';
-import TooltipWrapper from '../../components/TooltipWrapper';
+import TooltipWrapper from '../components/TooltipWrapper';
 import { CellRendererProps } from './renderers.types';
 import { CellTypes } from './renderers.enums';
 
