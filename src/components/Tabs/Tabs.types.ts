@@ -1,18 +1,13 @@
 import React from 'react';
 
-import { Colors } from '../../theme/colors.types';
 import { SpacingProps } from '../../types/spacing.types';
+import {
+  BaseLabelProps,
+  Sizes,
+} from '../_internal/BaseTabs/BaseTabLabel.types';
 import { PadboxProps } from '../layout/Padbox/Padbox';
-import { TabSizes, TabVariants } from './Tabs.enums';
 
-export interface LabelProps extends PadboxProps {
-  $isSelected: boolean;
-  $color: keyof Colors;
-  $variant?: Variants;
-}
-
-export type Sizes = typeof TabSizes[keyof typeof TabSizes];
-export type Variants = typeof TabVariants[keyof typeof TabVariants];
+export interface LabelProps extends BaseLabelProps, PadboxProps {}
 
 export interface TabProps {
   children: React.ReactNode;

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Label from './TabLabel';
 import { TabProps } from './Tabs.types';
 import { TabSizes, TabVariants } from './Tabs.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 
 const Tab: React.FC<TabProps> = ({
   children,
@@ -41,7 +41,7 @@ const Tab: React.FC<TabProps> = ({
       : SpaceSizes.sm;
 
   return (
-    <Label
+    <BaseTabLabel
       $color={color}
       $isSelected={isSelected}
       $variant={variant}
@@ -55,7 +55,7 @@ const Tab: React.FC<TabProps> = ({
       {...handler}
     >
       {children}
-    </Label>
+    </BaseTabLabel>
   );
 };
 
