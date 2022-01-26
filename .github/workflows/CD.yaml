@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['12', '14']
+        node: ['12', '14', '16']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -158,6 +158,7 @@ jobs:
         run: yarn test:storybook:visual:ci
 
       - name: Archive visual artifacts
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: visual-test-reports
