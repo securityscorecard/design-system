@@ -11,11 +11,11 @@ import {
   getLineHeight,
   getSpace,
   pxToRem,
-} from '../../utils';
-import { SpaceSizes } from '../../theme';
-import { TabSizes, TabVariants } from './Tabs.enums';
-import { LabelProps, Sizes } from './Tabs.types';
-import { Padbox } from '../layout';
+} from '../../../utils';
+import { SpaceSizes } from '../../../theme';
+import { BaseLabelProps, Sizes } from './BaseTabLabel.types';
+import { BaseTabSizes, BaseTabVariants } from './BaseTabs.enums';
+import { Padbox } from '../../layout/Padbox';
 
 const largeTextSize = css`
   font-size: ${getFontSize('lg')};
@@ -59,23 +59,23 @@ const mediumSegmentedSize = css`
 `;
 
 const underlineSizes = {
-  [TabSizes.lg]: largeUnderlineSize,
-  [TabSizes.md]: mediumUnderlineSize,
-  [TabSizes.sm]: smallUnderlineSize,
+  [BaseTabSizes.lg]: largeUnderlineSize,
+  [BaseTabSizes.md]: mediumUnderlineSize,
+  [BaseTabSizes.sm]: smallUnderlineSize,
 };
 
 const textSizes = {
-  [TabSizes.lg]: largeTextSize,
-  [TabSizes.md]: mediumTextSize,
+  [BaseTabSizes.lg]: largeTextSize,
+  [BaseTabSizes.md]: mediumTextSize,
 };
 
 const segmentedSizes = {
-  [TabSizes.lg]: largeSegmentedSize,
-  [TabSizes.md]: mediumSegmentedSize,
+  [BaseTabSizes.lg]: largeSegmentedSize,
+  [BaseTabSizes.md]: mediumSegmentedSize,
 };
 
-const underlineTab = css<LabelProps & { size: Sizes }>`
-  ${({ size }) => underlineSizes[size] || underlineSizes[TabSizes.md]};
+const underlineTab = css<BaseLabelProps & { size: Sizes }>`
+  ${({ size }) => underlineSizes[size] || underlineSizes[BaseTabSizes.md]};
   padding-bottom: ${getSpace(SpaceSizes.xxs)};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
@@ -91,8 +91,8 @@ const underlineTab = css<LabelProps & { size: Sizes }>`
   }
 `;
 
-const textTab = css<LabelProps & { size: Sizes }>`
-  ${({ size }) => textSizes[size] || textSizes[TabSizes.md]};
+const textTab = css<BaseLabelProps & { size: Sizes }>`
+  ${({ size }) => textSizes[size] || textSizes[BaseTabSizes.md]};
 
   color: ${({ $isSelected, $color }) =>
     $isSelected ? getColor('graphite4B') : getColor($color)};
@@ -103,14 +103,18 @@ const textTab = css<LabelProps & { size: Sizes }>`
   }
 `;
 
-const segmentedTab = css<LabelProps & { size: Sizes }>`
-  ${({ size = TabSizes.md }) => segmentedSizes[size]};
+export const segmentedTabSelected = css`
+  background: ${getColor('blueberry0')};
+  border: 1px solid ${getColor('dietBlueberry')};
+`;
+
+const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
+  ${({ size = BaseTabSizes.md }) => segmentedSizes[size]};
 
   height: ${getSegmentedLabelHeight};
-  background: ${({ $isSelected }) => $isSelected && getColor('blueberry0')};
-  border: 1px solid
-    ${({ $isSelected }) =>
-      $isSelected ? getColor('dietBlueberry') : 'transparent'};
+  border: 1px solid transparent;
+  ${({ $isSelected }) => $isSelected && segmentedTabSelected};
+
   border-radius: calc(${getBorderRadius} / 2);
   color: ${getColor('graphite4B')};
 
@@ -120,12 +124,14 @@ const segmentedTab = css<LabelProps & { size: Sizes }>`
 `;
 
 const tabVariants = {
-  [TabVariants.text]: textTab,
-  [TabVariants.underline]: underlineTab,
-  [TabVariants.segmented]: segmentedTab,
+  [BaseTabVariants.text]: textTab,
+  [BaseTabVariants.underline]: underlineTab,
+  [BaseTabVariants.segmented]: segmentedTab,
 };
 
-const TabLabel = styled(Padbox).withConfig<LabelProps>({
+const BaseTabLabel = styled(Padbox).withConfig<
+  BaseLabelProps & { size: Sizes }
+>({
   shouldForwardProp: (property) =>
     !includes(property, ['paddingType', 'paddingSize']),
 })`
@@ -145,4 +151,4 @@ const TabLabel = styled(Padbox).withConfig<LabelProps>({
   ${({ $variant }) => tabVariants[$variant]};
 `;
 
-export default TabLabel;
+export default BaseTabLabel;

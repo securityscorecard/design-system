@@ -1,11 +1,8 @@
-export const TabVariants = {
-  text: 'text',
-  underline: 'underline',
-  segmented: 'segmented',
-} as const;
+import {
+  BaseTabSizes,
+  BaseTabVariants,
+} from '../_internal/BaseTabs/BaseTabs.enums';
 
-export const TabSizes = {
-  sm: 'sm',
-  lg: 'lg',
-  md: 'md',
-} as const;
+export const TabVariants = BaseTabVariants;
+
+export const TabSizes = BaseTabSizes;
