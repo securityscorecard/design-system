@@ -1,3 +1,10 @@
+# [1.0.0-alpha.144](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.143...v1.0.0-alpha.144) (2022-01-26)
+
+
+### Features
+
+* **SegmentedToggle:** add component ([8f30912](https://github.com/securityscorecard/design-system/commit/8f309120872bc4a2b5650bd3c544a29fae0dcee2))
+
 # [1.0.0-alpha.143](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.142...v1.0.0-alpha.143) (2022-01-24)
 
 
