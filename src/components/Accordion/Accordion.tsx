@@ -10,6 +10,7 @@ import {
   AccordionProps,
 } from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
+import { SpaceSizes } from '../../theme';
 
 const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
   filter(propEq('isOpen', true)),
@@ -37,7 +38,7 @@ const Accordion: React.FC<AccordionProps> = ({
   );
 
   return (
-    <Stack {...props}>
+    <Stack gap={SpaceSizes.md} {...props}>
       {items.map(({ title, id, content }) => (
         <AccordionCollapsible
           key={`accordion-item-${title}`}
