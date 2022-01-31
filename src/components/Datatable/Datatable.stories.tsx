@@ -4,11 +4,10 @@ import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import MockDate from 'mockdate';
 
-import * as Grid from '../layout';
-import assets from './mocks/ipAssets.json';
-import Datatable from './Datatable';
-import { Data } from './mocks/types';
-import { simpleColumns } from './mocks/columns';
+import assets from '../_internal/BaseTable/mocks/ipAssets.json';
+import { Data } from '../_internal/BaseTable/mocks/types';
+import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
+import { comparisonTable } from '../_internal/BaseTable/docs';
 import { controlsConfig } from './mocks/controls';
 import { datatableBatchActions, datatableRowActions } from './mocks/actions';
 import { defaultControlsConfig, defaultTableConfig } from './defaultConfigs';
@@ -20,6 +19,7 @@ import {
   OnDataFetchFnType,
   TableConfigType,
 } from './Datatable.storiesTypes';
+import Datatable from './Datatable';
 import { DatatableProps } from './Datatable.types';
 
 MockDate.set('2021-03-31T00:00:00Z');
@@ -28,22 +28,23 @@ export default {
   title: 'components/Datatable',
   component: Datatable,
   parameters: {
-    screenshot: {
-      delay: 1000,
+    screenshot: { skip: true },
+    docs: {
+      source: { type: 'code' },
+      description: {
+        component: `
+\`\`\`jsx
+import { Datatable } from '@securityscorecard/design-system';
+
+const MyFancyDatatable = () => <Datatable ...props />
+\`\`\`
+
+  ${comparisonTable}
+      `,
+      },
     },
-    docs: { source: { type: 'code' } },
   },
-  decorators: [
-    (storyFn) => (
-      <MemoryRouter>
-        <Grid.Container>
-          <Grid.Row>
-            <Grid.Col>{storyFn()}</Grid.Col>
-          </Grid.Row>
-        </Grid.Container>
-      </MemoryRouter>
-    ),
-  ],
+  decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
   argTypes: {
     data: { control: { disable: true } },
     dataSize: { control: { disable: true } },

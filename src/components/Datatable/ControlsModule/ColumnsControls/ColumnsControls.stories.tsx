@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import ColumnsControls from './ColumnsControls';
-import { simpleColumns } from '../../mocks/columns';
+import { simpleColumns } from '../../../_internal/BaseTable/mocks/columns';
 import { useColumnsControls } from '../../hooks/useColumnsControls';
 import { ColumnsControlsProps } from './ColumnsControls.types';
 

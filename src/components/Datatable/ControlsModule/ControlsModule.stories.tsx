@@ -8,8 +8,8 @@ import { defaultControlsConfig } from '../defaultConfigs';
 import ControlsModule from './ControlsModule';
 import { ControlsModuleProps } from './ControlsModule.types';
 import { useColumnsControls } from '../hooks/useColumnsControls';
-import { simpleColumns } from '../mocks/columns';
-import { Data } from '../mocks/types';
+import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';
+import { Data } from '../../_internal/BaseTable/mocks/types';
 
 export default {
   title: 'components/Datatable/internalComponents/ControlsModule',

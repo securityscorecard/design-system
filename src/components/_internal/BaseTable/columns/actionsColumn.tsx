@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components';
 import { CellProps } from 'react-table';
 
 import { FlexContainer } from '../../../FlexContainer';
-import { Dropdown } from '../../Dropdown';
+/* FIXME: we need to fix this with use of DS dropdowns */
+import { Dropdown } from '../../../Datatable/Dropdown';
 import {
   getBorderRadius,
   getColor,
@@ -12,10 +13,7 @@ import {
   pxToRem,
 } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
-import {
-  ACTIONS_COLUMN_ID,
-  CellTypes,
-} from '../Body/renderers/renderers.enums';
+import { ACTIONS_COLUMN_ID, CellTypes } from '../renderers/renderers.enums';
 import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
 
 const SVGIcon = styled.svg`

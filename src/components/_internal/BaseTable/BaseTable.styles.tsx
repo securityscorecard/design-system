@@ -18,23 +18,22 @@ const getRemToggleSize = memoizeWith(
   pipe(getFormStyle('toggleSize'), pxToRem),
 );
 
-export const TableContainer = styled.div`
+export const BaseTableContainer = styled.div`
   width: 100%;
   transform: scale(1, -1);
-  overflow-x: scroll;
+  overflow-x: auto;
 
   &::-webkit-scrollbar {
+    border-bottom: 1px solid ${getColor('graphiteH')};
     appearance: none;
     height: ${pxToRem(12)};
   }
   &::-webkit-scrollbar-thumb {
     background: content-box ${getColor('graphiteHB')};
-    border-radius: 50em;
-    border: 4px solid transparent;
   }
 `;
 
-export const StyledTable = styled.table`
+export const StyledBaseTable = styled.table`
   width: 100%;
   transform: scale(1, -1);
 
@@ -222,6 +221,6 @@ export const StyledTable = styled.table`
   }
 `;
 
-export const TableAndLoadingOverlayContainer = styled.div`
+export const BaseTableAndLoadingOverlayContainer = styled.div`
   position: relative;
 `;

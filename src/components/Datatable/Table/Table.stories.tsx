@@ -6,10 +6,10 @@ import MockDate from 'mockdate';
 
 import Table from './Table';
 import { TableProps } from './Table.types';
-import { Data } from '../mocks/types';
-import assets from '../mocks/ipAssets.json';
+import { Data } from '../../_internal/BaseTable/mocks/types';
+import assets from '../../_internal/BaseTable/mocks/ipAssets.json';
 import { defaultTableConfig } from '../defaultConfigs';
-import { simpleColumns } from '../mocks/columns';
+import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';
 import { datatableRowActions } from '../mocks/actions';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 

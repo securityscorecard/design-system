@@ -1,50 +1,13 @@
-import { To } from 'history';
 import PropTypes, { ReactComponentLike } from 'prop-types';
-import { Column, IdType, Row, SortingRule } from 'react-table';
+import { Column, IdType, SortingRule } from 'react-table';
 
-import { ActionBasePropType } from '../../../types/action.types';
-import { RendererColumnOptions } from './Body/renderers/renderers.types';
+import { RendererColumnOptions } from '../../_internal/BaseTable/renderers/renderers.types';
+import {
+  PrimaryKey,
+  RowAction,
+  RowActionKindsPropType,
+} from '../../_internal/BaseTable/BaseTable.types';
 
-type BaseRowAction<D> = {
-  label: string;
-  name: string;
-  onClick?: (rowId: number | string, row: D) => void;
-};
-type HandlerRowAction<D> = Required<BaseRowAction<D>>;
-export const HandlerRowActionKindPropType = PropTypes.exact({
-  ...ActionBasePropType,
-  onClick: PropTypes.func.isRequired,
-});
-
-type AbsoluteLinkRowAction<D> = BaseRowAction<D> & {
-  hrefComposer: (rowId: number | string, row: D) => string;
-  toComposer?: never;
-};
-export const AbsoluteLinkRowActionKindPropType = PropTypes.exact({
-  ...ActionBasePropType,
-  onClick: PropTypes.func,
-  hrefComposer: PropTypes.func.isRequired,
-});
-type RelativeLinkRowAction<D> = BaseRowAction<D> & {
-  toComposer: (rowId: number | string, row: D) => To;
-  hrefComposer?: never;
-};
-export const RelativeLinkRowActionKindPropType = PropTypes.exact({
-  ...ActionBasePropType,
-  onClick: PropTypes.func,
-  toComposer: PropTypes.func.isRequired,
-});
-
-export type RowAction<D> =
-  | HandlerRowAction<D>
-  | AbsoluteLinkRowAction<D>
-  | RelativeLinkRowAction<D>;
-
-export const RowActionKindsPropType = PropTypes.oneOfType([
-  HandlerRowActionKindPropType,
-  AbsoluteLinkRowActionKindPropType,
-  RelativeLinkRowActionKindPropType,
-]);
 export type OnSelectFn<D> = (
   ids: IdType<D>[],
   hasExclusiveSelection: boolean,
@@ -103,10 +66,6 @@ export const TableConfigPropType = {
   ),
   rowActions: PropTypes.arrayOf(RowActionKindsPropType),
 };
-
-export type PrimaryKey<D extends Record<string, unknown>> =
-  | string
-  | ((originalRow: D, relativeIndex: number, parent?: Row<D>) => string);
 
 export interface TableProps<D extends Record<string, unknown>>
   extends Omit<

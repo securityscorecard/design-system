@@ -3,7 +3,8 @@ import { noop } from 'ramda-adjunct';
 
 import { ControlsConfig } from './ControlsModule/ControlsModule.types';
 import { TableConfig } from './Table/Table.types';
-import { NoData, NoMatchingData } from './Table/NoData';
+import { NoMatchingData } from './Table/components';
+import { NoData } from '../_internal/BaseTable';
 
 export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
   hasSelection: true,

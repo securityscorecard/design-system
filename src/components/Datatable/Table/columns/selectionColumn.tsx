@@ -4,8 +4,8 @@ import { CellProps, HeaderProps, TableToggleCommonProps } from 'react-table';
 import {
   CellTypes,
   SELECTION_COLUMN_ID,
-} from '../Body/renderers/renderers.enums';
-import TableCheckbox from '../components/TableCheckbox';
+} from '../../../_internal/BaseTable/renderers/renderers.enums';
+import { TableCheckbox } from '../components';
 import { actions } from '../Table.reducer';
 
 interface IndeterminateCheckbox extends TableToggleCommonProps {

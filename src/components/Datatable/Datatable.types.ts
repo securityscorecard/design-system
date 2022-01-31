@@ -1,8 +1,9 @@
 import { Column, SortingRule } from 'react-table';
 
+import { PrimaryKey } from '../_internal/BaseTable/BaseTable.types';
 import { Filter } from '../Filters/Filters.types';
 import { ControlsConfig } from './ControlsModule/ControlsModule.types';
-import { PrimaryKey, TableConfig } from './Table/Table.types';
+import { TableConfig } from './Table/Table.types';
 import { Action } from './types/Action.types';
 
 type OnDataFetchArgs<D> = {

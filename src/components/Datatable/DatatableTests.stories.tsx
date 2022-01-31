@@ -8,9 +8,9 @@ import {
   fields as filtersFields,
   state as filtersState,
 } from '../Filters/mocks/options';
-import { Data } from './mocks/types';
-import assets from './mocks/ipAssets.json';
-import { simpleColumns } from './mocks/columns';
+import { Data } from '../_internal/BaseTable/mocks/types';
+import assets from '../_internal/BaseTable/mocks/ipAssets.json';
+import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { tableActionsMock } from './mocks/actions';
