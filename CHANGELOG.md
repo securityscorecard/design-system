@@ -1,3 +1,11 @@
+# [1.0.0-alpha.145](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.144...v1.0.0-alpha.145) (2022-01-31)
+
+
+### Features
+
+* **Range:** add Range component ([5bf7bc7](https://github.com/securityscorecard/design-system/commit/5bf7bc73db8a3baca2f4c3d14840fd5cab2caae2))
+* **Table:** add simple Table component ([52d1400](https://github.com/securityscorecard/design-system/commit/52d14002e1c4b8958c96941fe2c5d7cd36a0d92c))
+
 # [1.0.0-alpha.144](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.143...v1.0.0-alpha.144) (2022-01-26)
 
 
