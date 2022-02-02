@@ -4,17 +4,15 @@ import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
-import {
-  createPaddingSpacing,
-  getColor,
-  getFontSize,
-  pxToRem,
-} from '../../utils';
-import { FlexContainer } from '../FlexContainer';
+import { getColor, getFontSize, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Paragraph } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { ToastProps } from './Toast.types';
+import { Inline } from '../layout/Inline';
+import { SpaceSizes } from '../../theme/space.enums';
+import { StretchEnum } from '../layout/Inline/Inline.enums';
+import { Padbox } from '../layout/Padbox';
 
 const ToastFromTop = keyframes`
   from {
@@ -27,7 +25,7 @@ const ToastFromTop = keyframes`
   }
 `;
 
-const ToastContainer = styled(FlexContainer)<{ $width?: ToastProps['width'] }>`
+const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   position: fixed;
   z-index: 9999;
   top: ${pxToRem(70)};
@@ -37,12 +35,6 @@ const ToastContainer = styled(FlexContainer)<{ $width?: ToastProps['width'] }>`
   background-color: ${getColor('graphite5H')};
   color: ${getColor('graphite4B')};
   text-align: left;
-  ${createPaddingSpacing({
-    top: 0.75,
-    bottom: 0.75,
-    right: 0.6,
-    left: 0.75,
-  })};
   box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
   animation: ${ToastFromTop} 0.5s;
 `;
@@ -51,7 +43,7 @@ const ToastContent = styled(Paragraph)`
   text-decoration: none;
   text-align: left;
 
-  button:last-child {
+  &&& button {
     margin-bottom: -10px;
   }
 `;
@@ -65,7 +57,6 @@ const CloseButton = styled.button`
   flex-shrink: 0;
   width: ${pxToRem(16)};
   height: ${pxToRem(16)};
-  margin-left: ${pxToRem(15)};
   color: ${getColor('graphite2B')};
 
   &:hover {
@@ -79,19 +70,20 @@ const StyledIcon = styled(Icon)`
 
 const stopPropagation = (event) => event?.stopPropagation();
 
-const Toast: React.FC<ToastProps> = ({ onClose, children, width = 370 }) => (
-  <ToastContainer
-    $width={width}
-    alignItems="flex-start"
-    justifyContent="space-between"
-    onClick={stopPropagation}
-  >
-    <ToastContent as="div" margin="none" size={TextSizes.md}>
-      {children}
-    </ToastContent>
-    <CloseButton aria-label="Close" onClick={onClose}>
-      <StyledIcon name={SSCIconNames.times} />
-    </CloseButton>
+const Toast: React.FC<ToastProps> = ({ onClose, children, width = 400 }) => (
+  <ToastContainer $width={width} onClick={stopPropagation}>
+    <Inline stretch={StretchEnum.start}>
+      <Padbox paddingSize={SpaceSizes.md}>
+        <ToastContent as="div" margin="none" size={TextSizes.md}>
+          {children}
+        </ToastContent>
+      </Padbox>
+      <Padbox paddingSize={SpaceSizes.sm}>
+        <CloseButton aria-label="Close" onClick={onClose}>
+          <StyledIcon name={SSCIconNames.times} />
+        </CloseButton>
+      </Padbox>
+    </Inline>
   </ToastContainer>
 );
 
