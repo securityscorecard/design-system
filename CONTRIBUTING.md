@@ -30,7 +30,14 @@ Before you submit your Pull Request (PR) consider the following guidelines:
      git commit -a
      ```
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
+* Squash commits if the PR is small and its content is just about one thing it doesn’t make much sense to have more than one commit. Also every commit that starts with `feat` or `fix` will appear in the Change log and it probably doesn’t make sense to have in changelog something like:
 
+    ```
+    Component: fix styling of component
+    Component: fix code review comments
+    Component: fix another code review comments
+    ```
+    But on the other hand if you have two unrelated things in PR and each of them is in its own commit it’s fine to not squash.
 * Push your branch to GitHub:
 
     ```shell
