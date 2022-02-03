@@ -41,7 +41,7 @@ export const selectStyles: StylesConfig<Option, false> = {
       padding: pxToRem(0, 16),
       background: theme.forms.bgColor,
       border: `${theme.forms.borderWidth} solid ${theme.forms.borderColor}`,
-      borderRadius: theme.borderRadius,
+      borderRadius: theme.radii.default,
       color: theme.forms.color,
       fontSize: theme.typography.size.md,
       lineHeight: theme.typography.lineHeight.md,

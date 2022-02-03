@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/addon-docs';
-import { Figma } from "storybook-addon-designs/blocks"
+import { Figma } from 'storybook-addon-designs/blocks';
 
 import { SpaceScale } from '../../.storybook/blocks/SpaceScale';
-import space from '../theme/space'
+import { theme } from '../theme';
 
 <Meta title="Theme/Space" />
 
@@ -16,7 +16,7 @@ in our components and layouts, we are limiting ourselves to standardised spacing
 Our scale is based on "power of two" rule with several custom steps to smooth the scale. Each of
 the customized steps is marked with the `Plus` suffix.
 
-<SpaceScale scale={space} />
+<SpaceScale scale={theme.space} />
 
 ## Stacking
 
@@ -29,9 +29,10 @@ In code the stacking is implemented by margins.
 ## Inseting
 
 We have three different kinds of inset:
-  1. `square` - vertical and horizontal inset are equal
-  2. `squish` - vertical inset is half of horizontal
-  3. `stretch` - horizontal inset is half of vertical
+
+1. `square` - vertical and horizontal inset are equal
+2. `squish` - vertical inset is half of horizontal
+3. `stretch` - horizontal inset is half of vertical
 
 Each inset kind has only restricted set of values from the scale (see below). In code inset is
 implemented by padding.

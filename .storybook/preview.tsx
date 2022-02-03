@@ -11,7 +11,7 @@ import {
 } from '@storybook/addon-docs';
 
 import { DSProvider, createIconLibrary } from '../src/theme';
-import colors from '../src/theme/colors';
+import { colors } from '../src/theme/colors';
 import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
@@ -19,9 +19,9 @@ export const parameters = {
   backgrounds: {
     default: 'white',
     values: [
-      { name: 'white', value: colors.graphite5H },
-      { name: 'grey', value: colors.graphiteH },
-      { name: 'black', value: colors.graphite5B },
+      { name: 'white', value: colors.neutral[0] },
+      { name: 'grey', value: colors.neutral[400] },
+      { name: 'black', value: colors.neutral[1000] },
     ],
   },
   options: {

@@ -1,33 +1,66 @@
-import { ColorTypes } from './colors.enums';
-import { Colors } from './colors.types';
-
-const colors: Colors = {
-  [ColorTypes.kiwi]: '#4aba00',
-  [ColorTypes.banana]: '#e5bd00',
-  [ColorTypes.pumpkin]: '#f08f00',
-  [ColorTypes.pumpkin0]: '#fef9f2',
-  [ColorTypes.strawberry]: '#f1431c',
-  [ColorTypes.strawberry0]: '#fef6f4',
-  [ColorTypes.cherry]: '#b40000',
-  [ColorTypes.blueberryClassic]: '#0275d8',
-  [ColorTypes.radiantBlueberry]: '#1e88e5',
-  [ColorTypes.dietBlueberry]: '#80baeb',
-  [ColorTypes.blueberry0]: '#ebf4fc',
-  [ColorTypes.eucalyptusClassic]: '#579aa0',
-  [ColorTypes.radiantEucalyptus]: '#65b6bd',
-  [ColorTypes.dietEucalyptus]: '#abcccf',
-  [ColorTypes.eucalyptus0]: '#eef5f6',
-  [ColorTypes.graphite5B]: '#000',
-  [ColorTypes.graphite4B]: '#2a2a2a',
-  [ColorTypes.graphite3B]: '#5d5d5d',
-  [ColorTypes.graphite2B]: '#727272',
-  [ColorTypes.graphiteB]: '#b4b4b4',
-  [ColorTypes.graphiteHB]: '#d1d1d1',
-  [ColorTypes.graphiteH]: '#dadada',
-  [ColorTypes.graphite2H]: '#eee',
-  [ColorTypes.graphite3H]: '#f3f3f3',
-  [ColorTypes.graphite4H]: '#f9f9f9',
-  [ColorTypes.graphite5H]: '#fff',
+export const colors = {
+  primary: {
+    50: '#ebf4fc', // blueberry0
+    200: '#80baeb', // dietBlueberry
+    400: '#1e88e5', // radiantBlueberry
+    500: '#0275d8', // blueberryClassic
+    600: '#026ac5',
+    700: '#015399',
+  },
+  neutral: {
+    0: '#fff', // graphite5H
+    100: '#f9f9f9', // graphite4H
+    200: '#f3f3f3', // graphite3H
+    300: '#eee', // graphite2H
+    400: '#dadada', // graphiteH
+    500: '#d1d1d1', // graphiteHB
+    600: '#b4b4b4', // graphiteB
+    700: '#727272', // graphite2B
+    800: '#5d5d5d', // graphite3B
+    900: '#2a2a2a', // graphite4B
+    1000: '#000', // graphite5B
+  },
+  info: {
+    50: '#f2f8fd',
+    500: '#1e88e5',
+  },
+  success: {
+    50: '#edf6ef',
+    100: '#d3e9d7',
+    500: '#49a25a',
+    600: '#3e8a4d',
+    700: '#347340',
+  },
+  warning: {
+    50: '#fcf3ec',
+    100: '#f9e2d0',
+    500: '#f9e2d0',
+  },
+  error: {
+    50: '#f7e9e9',
+    100: '#edc9ca',
+    500: '#b21f24',
+    600: '#971a1f',
+    700: '#7e161a',
+  },
+  grade: {
+    A: '#4aba00',
+    B: '#e5bd00',
+    C: '#f08f00',
+    D: '#f1431c',
+    F: '#b40000',
+  },
+  deprecated: {
+    kiwi: '#4aba00',
+    banana: '#e5bd00',
+    pumpkin: '#f08f00',
+    pumpkin0: '#fef9f2',
+    strawberry: '#f1431c',
+    strawberry0: '#fef6f4',
+    cherry: '#b40000',
+    eucalyptusClassic: '#579aa0',
+    radiantEucalyptus: '#65b6bd',
+    dietEucalyptus: '#abcccf',
+    eucalyptus0: '#eef5f6',
+  },
 };
-
-export default colors;

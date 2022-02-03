@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { SpaceSizes } from '../../../theme/space.enums';
-import layout from '../../../theme/layout';
+import { theme } from '../../../theme';
 import { Button } from '../../Button';
 import { Box } from '../mocks/Box';
 import Center, { CenterProps } from './Center';
@@ -12,9 +12,9 @@ export default {
   component: Center,
   argTypes: {
     maxWidth: {
-      defaultValue: layout.containerWidth,
+      defaultValue: theme.layout.containerWidth,
       table: {
-        defaultValue: { summary: layout.containerWidth },
+        defaultValue: { summary: theme.layout.containerWidth },
       },
     },
   },

@@ -1,4 +1,4 @@
-import { Colors } from '../../../theme/colors.types';
+import { Color } from '../../../theme/colors.types';
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 import { BaseTabSizes, BaseTabVariants } from './BaseTabs.enums';
 
@@ -7,6 +7,6 @@ export type Sizes = typeof BaseTabSizes[keyof typeof BaseTabSizes];
 
 export interface BaseLabelProps extends PadboxProps {
   $isSelected?: boolean;
-  $color: keyof Colors;
+  $color: Color;
   $variant?: Variants;
 }

@@ -1,4 +1,4 @@
-import { Colors } from '../../theme/colors.types';
+import { Color } from '../../theme/colors.types';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingProps } from '../../types/spacing.types';
 
@@ -11,7 +11,7 @@ export interface BaseIconProps {
 }
 
 export interface IconProps extends BaseIconProps, SpacingProps {
-  color?: keyof Colors;
+  color?: Color;
   className?: string;
   hasFixedWidth?: boolean;
 }
