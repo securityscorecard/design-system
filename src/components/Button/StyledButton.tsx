@@ -200,7 +200,7 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
   border: none;
   border-radius: ${getBorderRadius};
   font-family: ${getFontFamily('base')};
-  font-weight: ${getFontWeight('medium')};
+  font-weight: ${getFontWeight('semibold')};
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
