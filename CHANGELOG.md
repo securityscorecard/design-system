@@ -1,3 +1,17 @@
+# [1.0.0-alpha.146](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.145...v1.0.0-alpha.146) (2022-02-03)
+
+
+### Bug Fixes
+
+* **Collapsible:** apply spacing standards ([aa53316](https://github.com/securityscorecard/design-system/commit/aa53316791b9dd9afd5282251e1fb7ff18737d28))
+* **DataTable:** align table rows to top ([35ec970](https://github.com/securityscorecard/design-system/commit/35ec970bb8bd2c77c82a1e66e7e09319f80b2f82))
+* **Toast:** apply spacing standards ([788406c](https://github.com/securityscorecard/design-system/commit/788406c09bc9e8c766400d45afc64f20ec6e8035))
+
+
+### Features
+
+* **buttons:** change buttons font-weight to semibold ([2cc54a6](https://github.com/securityscorecard/design-system/commit/2cc54a6efc6f61e9057dfd27490098edac0420fa))
+
 # [1.0.0-alpha.145](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.144...v1.0.0-alpha.145) (2022-01-31)
 
 
