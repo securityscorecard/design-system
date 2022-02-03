@@ -45,7 +45,7 @@ export const StyledBaseTable = styled.table`
 
   .ds-table-cell {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     font-family: ${getFontFamily('base')};
     font-size: ${getFontSize('md')};
     font-weight: ${getFontWeight('normal')};
