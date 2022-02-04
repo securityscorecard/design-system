@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { UseTooltipOptions } from './hooks/useTooltip.types';
+import { Placements } from '../Dropdown/Dropdown.types';
 
 export interface TooltipPopupProps {
-  $placement: UseTooltipOptions['placement'];
+  $placement: Placements;
   $width: number;
   $space: number;
   style: React.CSSProperties;
@@ -11,7 +11,7 @@ export interface TooltipPopupProps {
 export interface TooltipProps {
   popup?: React.ReactNode;
   className?: string;
-  placement?: UseTooltipOptions['placement'];
-  width?: UseTooltipOptions['popupWidth'];
+  placement?: Placements;
+  width?: number;
   defaultIsPopupDisplayed?: boolean;
 }

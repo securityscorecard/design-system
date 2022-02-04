@@ -14,7 +14,6 @@ import {
 } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
 import { ACTIONS_COLUMN_ID, CellTypes } from '../renderers/renderers.enums';
-import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
 
 const SVGIcon = styled.svg`
   display: inline-block;
@@ -67,7 +66,7 @@ export const actionsColumn = {
 
     return (
       <FlexContainer flexGrow={1} justifyContent="center">
-        <Dropdown actions={actions} placement={PortalPlacements.bottomRight}>
+        <Dropdown actions={actions} placement="bottom-end">
           {(isActive) => (
             <RowActionsButton aria-label="Row Actions" isActive={isActive}>
               <SVGIcon

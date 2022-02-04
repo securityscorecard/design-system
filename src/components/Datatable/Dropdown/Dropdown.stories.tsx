@@ -5,7 +5,6 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Dropdown from './Dropdown';
 import { subactionsMock } from '../mocks/actions';
 import { DropdownProps } from './Dropdown.types';
-import { PortalPlacements } from '../../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../../FlexContainer';
 
 export default {
@@ -85,17 +84,17 @@ WithCustomWidth.args = {
 export const Placements: Story<DropdownProps> = (args) => (
   <>
     <FlexContainer justifyContent="center" margin={{ bottom: 5 }}>
-      <Dropdown {...args} placement={PortalPlacements.bottom}>
+      <Dropdown {...args} placement="bottom">
         Bottom
       </Dropdown>
     </FlexContainer>
     <FlexContainer justifyContent="flex-start" margin={{ bottom: 5 }}>
-      <Dropdown {...args} placement={PortalPlacements.bottomLeft}>
+      <Dropdown {...args} placement="bottom-start">
         Left
       </Dropdown>
     </FlexContainer>
     <FlexContainer justifyContent="flex-end" margin={{ bottom: 5 }}>
-      <Dropdown {...args} placement={PortalPlacements.bottomRight}>
+      <Dropdown {...args} placement="bottom-end">
         Right
       </Dropdown>
     </FlexContainer>
