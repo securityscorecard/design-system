@@ -7,6 +7,7 @@ import { SemanticModalVariants } from './SemanticModal.enums';
 import { SemanticModalProps } from './SemanticModal.types';
 import { Inline, Padbox } from '../layout';
 import { Button, ButtonEnums } from '../Button';
+import { ButtonColors } from '../Button/Button.enums';
 import { SpaceSizes } from '../../theme';
 import { generateControl } from '../../utils/tests/storybook';
 
@@ -26,6 +27,9 @@ export default {
     },
     actions: {
       control: { disable: true },
+    },
+    primaryButtonColor: {
+      ...generateControl('select', ButtonColors),
     },
   },
 } as Meta;
@@ -68,6 +72,7 @@ Playground.args = {
   message:
     'You can replace this with a local component. You can also just override the text, but keep in mind that you might lose content that way.',
   title: 'This is a placeholder',
+  primaryButtonColor: ButtonColors.primary,
 };
 
 const SemanticModalTemplate: Story<SemanticModalProps> = (args) => (
