@@ -4,7 +4,7 @@ import { isFalsy } from 'ramda-adjunct';
 
 import { TooltipProps } from './Tooltip.types';
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
-import { useTooltip } from './hooks/useTooltip';
+import { Dropdown } from '../Dropdown';
 
 const Tooltip: React.FC<TooltipProps> = ({
   children,
@@ -15,27 +15,25 @@ const Tooltip: React.FC<TooltipProps> = ({
   ...props
 }) => {
   const parentRef = useRef(null);
-  const { Popup, handleShowTooltip, handleHideTooltip } = useTooltip(
-    parentRef,
-    { placement, defaultIsPopupDisplayed, popupWidth: width },
-  );
-
-  const delayedHandleHideTooltip = () => {
-    setTimeout(handleHideTooltip, 200);
-  };
 
   if (isFalsy(popup)) return <>{children}</>;
 
   return (
-    <span
-      ref={parentRef}
-      onMouseEnter={handleShowTooltip}
-      onMouseLeave={delayedHandleHideTooltip}
-      {...props}
+    <Dropdown
+      defaultIsOpen={defaultIsPopupDisplayed}
+      maxPaneWidth={width}
+      placement={placement}
+      trigger={
+        <span ref={parentRef} {...props}>
+          {children}
+        </span>
+      }
+      triggerEvents={['hover']}
+      hasPaneArrow
+      isPaneElevated
     >
-      {children}
-      <Popup>{popup}</Popup>
-    </span>
+      {popup}
+    </Dropdown>
   );
 };
 

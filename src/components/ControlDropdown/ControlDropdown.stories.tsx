@@ -51,7 +51,7 @@ WithResetButton.args = {
 export const BottomLeftPlacement = ControlDropdownTemplate.bind({});
 BottomLeftPlacement.args = {
   ...Playground.args,
-  placement: 'bottom-left',
+  placement: 'bottom-start',
 };
 
 export const BottomPlacement = ControlDropdownTemplate.bind({});
@@ -63,7 +63,7 @@ BottomPlacement.args = {
 export const BottomRightPlacement = ControlDropdownTemplate.bind({});
 BottomRightPlacement.args = {
   ...Playground.args,
-  placement: 'bottom-right',
+  placement: 'bottom-end',
 };
 
 export const WithCustomWidth = ControlDropdownTemplate.bind({});

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull } from 'ramda-adjunct';
@@ -17,13 +17,8 @@ import {
   pxToRem,
 } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { PortalPlacements } from '../../../hooks/useCalculatePortalPlacements.enums';
-import { useDropdown } from '../../../hooks/useDropdown';
-
-const DropdownWrapper = styled.div`
-  display: inline-block;
-  position: relative;
-`;
+import { Dropdown as BaseDropdown } from '../../Dropdown';
+import { SpaceSizes } from '../../../theme/space.enums';
 
 export const List = styled.ul`
   list-style: none;
@@ -55,80 +50,72 @@ const Dropdown: React.FC<DropdownProps> = ({
   paneWidth = 140,
   children,
   className,
-  placement = PortalPlacements.bottom,
+  placement = 'bottom',
 }) => {
-  const parentRef = useRef(null);
-  const { Pane, handleToggleDropdown, isPaneDisplayed } = useDropdown(
-    parentRef,
-    {
-      defaultIsPaneDisplayed: defaultIsOpen,
-      paneWidth,
-      placement,
-    },
+  const [isActive, setIsActive] = useState(false);
+  const trigger: React.ReactElement = (
+    <span className={className}>
+      {isFunction(children) ? children(isActive) : children}
+    </span>
   );
-
   return (
-    <DropdownWrapper
-      ref={parentRef}
-      className={className}
-      onClick={handleToggleDropdown}
+    <BaseDropdown
+      defaultIsOpen={defaultIsOpen}
+      innerPaddingSize={SpaceSizes.none}
+      maxPaneWidth={paneWidth}
+      placement={placement}
+      trigger={trigger}
+      onClose={() => setIsActive(false)}
+      onOpen={() => setIsActive(true)}
     >
-      {isFunction(children) ? children(isPaneDisplayed) : children}
+      <List>
+        {actions.map((action) => {
+          let RouterLink = null;
+          if (
+            isNotUndefined(
+              (action as RelativeLinkActionKind<string[], boolean>).to,
+            )
+          ) {
+            RouterLink = requireRouterLink();
+          }
 
-      {isPaneDisplayed && (
-        <Pane>
-          <List>
-            {actions.map((action) => {
-              let RouterLink = null;
-              if (
-                isNotUndefined(
-                  (action as RelativeLinkActionKind<string[], boolean>).to,
-                )
-              ) {
-                RouterLink = requireRouterLink();
-              }
-
-              const domTag = isNotUndefined(
-                (action as AbsoluteLinkActionKind<string[], boolean>).href,
+          const domTag = isNotUndefined(
+            (action as AbsoluteLinkActionKind<string[], boolean>).href,
+          )
+            ? 'a' // render 'a' tag if 'href' is present
+            : isNotUndefined(
+                (action as RelativeLinkActionKind<string[], boolean>).to,
               )
-                ? 'a' // render 'a' tag if 'href' is present
-                : isNotUndefined(
-                    (action as RelativeLinkActionKind<string[], boolean>).to,
-                  )
-                ? RouterLink // render 'Link' if 'to' is present
-                : undefined; // use default
+            ? RouterLink // render 'Link' if 'to' is present
+            : undefined; // use default
 
-              if (
-                isNull(RouterLink) &&
-                isNotUndefined(
-                  (action as RelativeLinkActionKind<string[], boolean>).to,
-                )
-              ) {
-                return null;
-              }
+          if (
+            isNull(RouterLink) &&
+            isNotUndefined(
+              (action as RelativeLinkActionKind<string[], boolean>).to,
+            )
+          ) {
+            return null;
+          }
 
-              return (
-                <li key={action.name}>
-                  <DropdownLink
-                    as={domTag}
-                    href={
-                      (action as AbsoluteLinkActionKind<string[], boolean>).href
-                    }
-                    name={action.name}
-                    to={
-                      (action as RelativeLinkActionKind<string[], boolean>).to
-                    }
-                    onClick={action.onClick}
-                  >
-                    {action.label}
-                  </DropdownLink>
-                </li>
-              );
-            })}
-          </List>
-        </Pane>
-      )}
-    </DropdownWrapper>
+          return (
+            <li key={action.name}>
+              <DropdownLink
+                as={domTag}
+                href={
+                  (action as AbsoluteLinkActionKind<string[], boolean>).href
+                }
+                name={action.name}
+                to={(action as RelativeLinkActionKind<string[], boolean>).to}
+                onClick={action.onClick}
+              >
+                {action.label}
+              </DropdownLink>
+            </li>
+          );
+        })}
+      </List>
+    </BaseDropdown>
   );
 };
 
@@ -138,7 +125,7 @@ Dropdown.propTypes = {
   defaultIsOpen: PropTypes.bool,
   paneWidth: PropTypes.number,
   className: PropTypes.string,
-  placement: PropTypes.oneOf(['bottom', 'bottom-left', 'bottom-right']),
+  placement: PropTypes.oneOf(['bottom', 'bottom-start', 'bottom-end']),
 };
 
 export default React.memo(Dropdown);

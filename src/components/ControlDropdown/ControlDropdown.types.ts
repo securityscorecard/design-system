@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UseDropdownOptions } from '../../hooks/useDropdown.types';
+import { Placements } from '../Dropdown/Dropdown.types';
 
 export interface ControlDropdownProps {
   /**
@@ -15,10 +15,6 @@ export interface ControlDropdownProps {
    * Flag to control show/hide of the dropdown
    */
   isOpen?: boolean;
-  /**
-   * Callback when dropdown is open
-   */
-  onOpen: () => void;
   /**
    * Callback when dropdown is closed
    */
@@ -46,7 +42,7 @@ export interface ControlDropdownProps {
   /**
    * Position to which dropdown will be aligned
    */
-  placement?: UseDropdownOptions['placement'];
+  placement?: Placements;
   /**
    * Width of the dropdown
    */
