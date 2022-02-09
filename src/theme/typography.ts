@@ -1,4 +1,4 @@
-import colors from './colors';
+import { colors } from './colors';
 import { pxToRem } from '../utils';
 import {
   Family,
@@ -71,34 +71,32 @@ const margin: Margin = {
   },
 };
 
-const links: Links = {
+const createLinks = (themeColors: typeof colors): Links => ({
   primary: {
-    color: colors.blueberryClassic,
-    hoverColor: colors.radiantBlueberry,
-    activeColor: colors.dietBlueberry,
+    color: themeColors.primary[500],
+    hoverColor: themeColors.primary[400],
+    activeColor: themeColors.primary[200],
     decoration: 'none',
   },
   danger: {
-    color: colors.cherry,
-    hoverColor: colors.strawberry,
-    activeColor: colors.pumpkin,
+    color: themeColors.deprecated.cherry,
+    hoverColor: themeColors.deprecated.strawberry,
+    activeColor: themeColors.deprecated.pumpkin,
     decoration: 'none',
   },
   secondary: {
-    color: colors.graphite2B,
-    hoverColor: colors.radiantBlueberry,
-    activeColor: colors.dietBlueberry,
+    color: themeColors.neutral[700],
+    hoverColor: themeColors.primary[400],
+    activeColor: themeColors.primary[200],
     decoration: 'underline',
   },
-};
+});
 
-const typography: Typography = {
+export const createTypography = (themeColors: typeof colors): Typography => ({
   family,
   size,
   weight,
   lineHeight,
   margin,
-  links,
-};
-
-export default typography;
+  links: createLinks(themeColors),
+});

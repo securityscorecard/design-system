@@ -2,7 +2,7 @@ import { Space } from './space.types';
 
 const spacingScale = [0, 2, 4, 8, 16, 24, 32, 48, 64, 96, 128];
 
-const space: Space = {
+export const createSpace = (): Space => ({
   none: spacingScale[0],
   xxs: spacingScale[1],
   xs: spacingScale[2],
@@ -14,6 +14,4 @@ const space: Space = {
   xl: spacingScale[8],
   xlPlus: spacingScale[9],
   xxl: spacingScale[10],
-};
-
-export default space;
+});

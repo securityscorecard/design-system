@@ -20,7 +20,6 @@ import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { FlexContainer } from '../FlexContainer';
 import { Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
-import colors from '../../theme/colors';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor, getFontSize, pxToRem } from '../../utils';
@@ -68,7 +67,7 @@ const IconWrapper = styled(FlexContainer)`
 `;
 
 const StyledIcon = styled(Icon)<{ $variant?: BannerProps['variant'] }>`
-  color: ${colors.graphite5H};
+  color: ${getColor('neutral.0')};
   font-size: ${({ $variant }) => pxToRem(iconPxSizesVariants[$variant])};
 `;
 

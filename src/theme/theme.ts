@@ -1,20 +1,55 @@
+/* eslint-disable no-console */
 import { DefaultTheme } from 'styled-components';
+import { mergeDeepRight } from 'ramda';
 
-import colors from './colors';
-import forms from './forms';
-import typography from './typography';
-import buttons from './buttons';
-import layout from './layout';
-import depths from './depths';
-import space from './space';
+import { colors as themeColors } from './colors';
+import { createButtons } from './buttons';
+import { createTypography } from './typography';
+import { createForms } from './forms';
+import { createLayout } from './layout';
+import { createDepths } from './depths';
+import { createSpace } from './space';
+import { createRadii } from './radii';
+import { RecursivePartial } from '../types/utils.types';
 
-export const theme: DefaultTheme = {
-  colors,
-  typography,
-  buttons,
-  forms,
-  layout,
-  depths,
-  borderRadius: 4,
-  space,
+export const createTheme = (
+  overrides: RecursivePartial<DefaultTheme> = {},
+): DefaultTheme => {
+  const {
+    colors: colorsOverride = {},
+    buttons: buttonsOverride = {},
+    typography: typographyOverride = {},
+    forms: formsOverride = {},
+    layout: layoutOverride = {},
+    depths: depthsOverride = {},
+    space: spaceOverride = {},
+    radii: radiiOverride = {},
+    ...rest
+  } = overrides;
+
+  const colors = mergeDeepRight(themeColors, colorsOverride);
+  const buttons = mergeDeepRight(createButtons(colors), buttonsOverride);
+  const typography = mergeDeepRight(
+    createTypography(colors),
+    typographyOverride,
+  );
+  const forms = mergeDeepRight(createForms(colors), formsOverride);
+  const layout = mergeDeepRight(createLayout(), layoutOverride);
+  const depths = mergeDeepRight(createDepths(), depthsOverride);
+  const space = mergeDeepRight(createSpace(), spaceOverride);
+  const radii = mergeDeepRight(createRadii(), radiiOverride);
+
+  return {
+    colors,
+    buttons,
+    typography,
+    forms,
+    layout,
+    depths,
+    space,
+    radii,
+    ...rest,
+  };
 };
+
+export const theme = createTheme();

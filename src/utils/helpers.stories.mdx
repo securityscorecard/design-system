@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs'
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Helpers/Methods" />
 
@@ -19,7 +19,9 @@ import { pxToRem } from '@securityscorecard/design-system';
 pxToRem(16, auto, 0); // -> '1rem auto 0'
 ```
 
-### createSpacing
+### createSpacing (DEPRECATED)
+
+Use `Layout Primitives` instead.
 
 Generates spacing values of given kind (`margin` or `padding`)
 for given value based on `BASE_LINE_HEIGHT` constant (currently set to `20`).
@@ -48,11 +50,17 @@ createSpacing('margin', { top: 1, bottom: 2, left: 3, right: 4 });
 */
 ```
 
-#### createMarginSpacing, createPaddingSpacing
+#### createMarginSpacing, createPaddingSpacing (DEPRECATED)
+
+Use `Layout Primitives` instead.
+
 Generates spacing values for given kind.
 
 ```js
-import { createMarginSpacing, createPaddingSpacing } from '@securityscorecard/design-system';
+import {
+  createMarginSpacing,
+  createPaddingSpacing,
+} from '@securityscorecard/design-system';
 
 createMarginSpacing({ horizontal: 2, vertical: 1 });
 /*
@@ -71,7 +79,10 @@ createPaddingSpacing({ horizontal: 2, vertical: 1 });
 */
 ```
 
-#### createSpacings
+#### createSpacings (DEPRECATED)
+
+Use `Layout Primitives` instead.
+
 Generates spacing values for both kinds.
 
 ```js
@@ -91,6 +102,7 @@ createSpacings({ margin: { horizontal: 2, vertical: 1 }, padding: 4 });
 ```
 
 ### createPadding
+
 Generates padding of given type with given [standard size](/docs/theme-space--page#inseting).
 
 ```tsx
@@ -118,6 +130,7 @@ const Box = styled.div<{paddingType: PaddingType; paddingSize: SpaceSize}>`
 ```
 
 ## Theme getters
+
 These methods retrieving values from the [theme object](/docs/theme-theme-object--page)
 and can be used only in `styled-components` template literals.
 
@@ -196,9 +209,11 @@ const Component = styled.div`
 `; // -> line-height: 20px;
 ```
 
-### getBorderRadius
+### getBorderRadius (DEPRECATED)
 
-Returns border-radius from theme.
+Use `getRadii` function instead.
+
+Returns default border-radius from theme.
 
 ```js
 import { getBorderRadius } from '@securityscorecard/design-system';
@@ -207,6 +222,21 @@ import { getBorderRadius } from '@securityscorecard/design-system';
 // Props - styled-components props object
 const Component = styled.div`
   border-radius: ${getBorderRadius};
+`; // -> border-radius: 4px;
+```
+
+### getRadii
+
+Returns border-radius from theme for given key.
+
+```js
+import { getRadii } from '@securityscorecard/design-system';
+
+// getRadii :: Type -> Props -> string
+// Type - any key of 'radii' (src/theme/radii.ts)
+// Props - styled-components props object
+const Component = styled.div`
+  border-radius: ${getRadii('default')};
 `; // -> border-radius: 4px;
 ```
 
@@ -230,7 +260,6 @@ const Component = styled.input`
 ### getButtonColor
 
 Returns color for given key in combination of button variant and color prop.
-
 
 ```js
 import { getButtonColor } from '@securityscorecard/design-system';
@@ -272,7 +301,6 @@ const Button = styled.button`
 ### getLinkStyle
 
 Returns style value of link for a given color prop.
-
 
 ```js
 import { getLinkStyle } from '@securityscorecard/design-system';
@@ -327,4 +355,3 @@ const Component = styled.input`
   margin-bottom: ${space('m')};
 `; // -> margin-bottom: 1rem;
 ```
-

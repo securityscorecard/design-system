@@ -1,64 +1,64 @@
-import colors from './colors';
+import { colors } from './colors';
 import { Buttons } from './buttons.types';
 
-const buttons: Buttons = {
+export const createButtons = (themeColors: typeof colors): Buttons => ({
   variants: {
     solid: {
       primary: {
-        color: colors.graphite2H,
-        bgColor: colors.blueberryClassic,
-        hoverBgColor: colors.radiantBlueberry,
-        activeBgColor: colors.dietBlueberry,
-        disabledBgColor: colors.dietBlueberry,
+        color: themeColors.neutral[300],
+        bgColor: themeColors.primary[500],
+        hoverBgColor: themeColors.primary[400],
+        activeBgColor: themeColors.primary[200],
+        disabledBgColor: themeColors.primary[200],
       },
       danger: {
-        color: colors.graphite5H,
-        bgColor: colors.cherry,
-        hoverBgColor: colors.strawberry,
-        activeBgColor: colors.pumpkin,
-        disabledBgColor: colors.graphiteB,
+        color: themeColors.neutral[0],
+        bgColor: themeColors.deprecated.cherry,
+        hoverBgColor: themeColors.deprecated.strawberry,
+        activeBgColor: themeColors.deprecated.pumpkin,
+        disabledBgColor: themeColors.neutral[600],
       },
     },
     outline: {
       primary: {
-        color: colors.blueberryClassic,
+        color: themeColors.primary[500],
         bgColor: 'transparent',
-        hoverBgColor: colors.blueberry0,
-        activeBgColor: colors.blueberry0,
-        disabledBgColor: colors.graphite2H,
-        disabledColor: colors.graphiteB,
-        borderColor: colors.blueberryClassic,
-        disabledBorderColor: colors.graphiteH,
+        hoverBgColor: themeColors.primary[50],
+        activeBgColor: themeColors.primary[50],
+        disabledBgColor: themeColors.neutral[300],
+        disabledColor: themeColors.neutral[600],
+        borderColor: themeColors.primary[500],
+        disabledBorderColor: themeColors.neutral[400],
       },
       secondary: {
-        color: colors.graphite3B,
-        bgColor: colors.graphite5H,
-        hoverBgColor: colors.graphite3H,
-        activeBgColor: colors.graphite2H,
-        disabledBgColor: colors.graphite2H,
-        disabledColor: colors.graphiteB,
-        borderColor: colors.graphiteHB,
-        disabledBorderColor: colors.graphiteH,
+        color: themeColors.neutral[800],
+        bgColor: themeColors.neutral[0],
+        hoverBgColor: themeColors.neutral[200],
+        activeBgColor: themeColors.neutral[300],
+        disabledBgColor: themeColors.neutral[300],
+        disabledColor: themeColors.neutral[600],
+        borderColor: themeColors.neutral[500],
+        disabledBorderColor: themeColors.neutral[400],
       },
     },
     text: {
       primary: {
-        color: colors.blueberryClassic,
-        hoverColor: colors.radiantBlueberry,
-        activeColor: colors.dietBlueberry,
-        disabledColor: colors.graphiteB,
+        color: themeColors.primary[500],
+        hoverColor: themeColors.primary[400],
+        activeColor: themeColors.primary[200],
+        disabledColor: themeColors.neutral[600],
       },
       secondary: {
-        color: colors.graphite2B,
-        hoverColor: colors.graphite4B,
-        activeColor: colors.graphite5B,
-        disabledColor: colors.graphiteB,
+        color: themeColors.neutral[700],
+        hoverColor: themeColors.neutral[900],
+        activeColor: themeColors.neutral[1000],
+        disabledColor: themeColors.neutral[600],
       },
       danger: {
-        color: colors.cherry,
-        hoverColor: colors.strawberry,
-        activeColor: colors.pumpkin,
-        disabledColor: colors.graphiteB,
+        color: themeColors.deprecated.cherry,
+        hoverColor: themeColors.deprecated.strawberry,
+        activeColor: themeColors.deprecated.pumpkin,
+        disabledColor: themeColors.neutral[600],
       },
     },
   },
@@ -67,6 +67,4 @@ const buttons: Buttons = {
     lg: 48,
     sm: 24,
   },
-};
-
-export default buttons;
+});
