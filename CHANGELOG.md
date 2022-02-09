@@ -1,3 +1,16 @@
+# [1.0.0-alpha.147](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.146...v1.0.0-alpha.147) (2022-02-09)
+
+
+### Bug Fixes
+
+* **Dropdown:** migrate components to use Dropdown implementation ([3afcaf5](https://github.com/securityscorecard/design-system/commit/3afcaf5dd5c323206686f1aad4509475b405eda5))
+
+
+### Features
+
+* **SemanticModal:** add buttonColor option for primary button ([85a0df4](https://github.com/securityscorecard/design-system/commit/85a0df4bec92c912ff750289871ea5c0836001f5))
+* **theme:** implement scalable color taxonomy ([252ee82](https://github.com/securityscorecard/design-system/commit/252ee82b4d1736df3335349262e0f58338aeb5e4))
+
 # [1.0.0-alpha.146](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.145...v1.0.0-alpha.146) (2022-02-03)
 
 
