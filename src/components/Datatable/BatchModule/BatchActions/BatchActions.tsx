@@ -7,7 +7,6 @@ import { isNotUndefined } from 'ramda-adjunct';
 import { ColorTypes, SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils';
-import { PortalPlacements } from '../../../../hooks/useCalculatePortalPlacements.enums';
 import { FlexContainer } from '../../../FlexContainer';
 import { Inline } from '../../../layout';
 import { Button } from '../../../Button';
@@ -64,7 +63,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
             <Dropdown
               key={action.name}
               actions={subActions}
-              placement={PortalPlacements.bottomRight}
+              placement="bottom-end"
             >
               <BatchActionButton name={action.name} onClick={action.onClick}>
                 <Inline gap={SpaceSizes.xs}>

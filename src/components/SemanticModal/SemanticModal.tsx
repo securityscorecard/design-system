@@ -7,6 +7,7 @@ import { SemanticModalVariants } from './SemanticModal.enums';
 import { SemanticModalProps } from './SemanticModal.types';
 import { Modal, ModalEnums } from '../Modal';
 import { Button, ButtonEnums } from '../Button';
+import { ButtonColors } from '../Button/Button.enums';
 import { Icon } from '../Icon';
 import { H3, Text } from '../typography';
 import {
@@ -52,15 +53,18 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
       actions,
       onClose,
       variant = SemanticModalVariants.success,
+      primaryButtonColor = ButtonEnums.ButtonColors.primary,
     },
     ref,
   ) => {
     const renderButton = (
       action: ActionKinds<[React.MouseEvent]>,
       buttonVariant: typeof ButtonEnums.ButtonVariants[keyof typeof ButtonEnums.ButtonVariants],
+      color: typeof ButtonEnums.ButtonColors[keyof typeof ButtonEnums.ButtonColors],
     ) => (
       <Button
         key={action.name}
+        color={color}
         href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
         name={action.name}
         size={SpaceSizes.lg}
@@ -91,6 +95,9 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
                       index === 0
                         ? ButtonEnums.ButtonVariants.outline
                         : ButtonEnums.ButtonVariants.solid,
+                      index === 0
+                        ? ButtonEnums.ButtonColors.primary
+                        : primaryButtonColor,
                     ),
                 )}
               </Inline>
@@ -111,4 +118,5 @@ SemanticModal.propTypes = {
     .isRequired,
   onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(Object.values(SemanticModalVariants)),
+  primaryButtonColor: PropTypes.oneOf(Object.values(ButtonColors)),
 };

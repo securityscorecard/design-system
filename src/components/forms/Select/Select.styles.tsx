@@ -42,23 +42,23 @@ export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig = (
 ) => (selectTheme) => ({
   ...selectTheme,
   colors: {
-    primary: DSTheme.colors.radiantBlueberry,
-    primary75: DSTheme.colors.radiantBlueberry,
-    primary50: DSTheme.colors.dietBlueberry,
-    primary25: transparentize(0.9, DSTheme.colors.radiantBlueberry),
-    danger: DSTheme.colors.strawberry,
-    dangerLight: transparentize(0.9, DSTheme.colors.strawberry),
-    neutral0: DSTheme.colors.graphite5H,
-    neutral5: DSTheme.colors.graphite4H,
-    neutral10: DSTheme.colors.graphite3H,
-    neutral20: DSTheme.colors.graphite2H,
-    neutral30: DSTheme.colors.graphiteH,
-    neutral40: DSTheme.colors.graphiteHB,
-    neutral50: DSTheme.colors.graphiteB,
-    neutral60: DSTheme.colors.graphite2B,
-    neutral70: DSTheme.colors.graphite3B,
-    neutral80: DSTheme.colors.graphite4B,
-    neutral90: DSTheme.colors.graphite5B,
+    primary: DSTheme.colors.primary[400],
+    primary75: DSTheme.colors.primary[400],
+    primary50: DSTheme.colors.primary[200],
+    primary25: transparentize(0.9, DSTheme.colors.primary[400]),
+    danger: DSTheme.colors.deprecated.strawberry,
+    dangerLight: transparentize(0.9, DSTheme.colors.deprecated.strawberry),
+    neutral0: DSTheme.colors.neutral[0],
+    neutral5: DSTheme.colors.neutral[100],
+    neutral10: DSTheme.colors.neutral[200],
+    neutral20: DSTheme.colors.neutral[300],
+    neutral30: DSTheme.colors.neutral[400],
+    neutral40: DSTheme.colors.neutral[500],
+    neutral50: DSTheme.colors.neutral[600],
+    neutral60: DSTheme.colors.neutral[700],
+    neutral70: DSTheme.colors.neutral[800],
+    neutral80: DSTheme.colors.neutral[900],
+    neutral90: DSTheme.colors.neutral[1000],
   },
   spacing: { ...selectTheme.spacing },
 });
@@ -130,7 +130,7 @@ export const selectStyles: (
         minHeight: DSTheme.forms.fieldHeight,
         background: DSTheme.forms.bgColor,
         boxShadow: `inset 0 0 0 ${DSTheme.forms.borderWidth} ${DSTheme.forms.borderColor}`,
-        borderRadius: DSTheme.borderRadius,
+        borderRadius: DSTheme.radii.default,
         color: DSTheme.forms.color,
         fontSize: DSTheme.typography.size.md,
         lineHeight: DSTheme.forms.fieldLineHeight,
@@ -187,7 +187,7 @@ export const selectStyles: (
     ) => ({
       ...styles,
       display: (isClearable && hasValue) || isProcessing ? 'block' : 'none',
-      backgroundColor: DSTheme.colors.graphiteHB,
+      backgroundColor: DSTheme.colors.neutral[500],
       margin: pxToRem(DSTheme.space.xs, 0),
     }),
     dropdownIndicator: () => ({
@@ -197,17 +197,17 @@ export const selectStyles: (
       ...indicatorStyles(DSTheme),
       display: isProcessing ? 'none' : 'block',
       ':hover': {
-        color: DSTheme.colors.strawberry,
+        color: DSTheme.colors.deprecated.strawberry,
         backgroundColor: 'transparent',
       },
       ':focus': {
-        color: DSTheme.colors.strawberry,
+        color: DSTheme.colors.deprecated.strawberry,
       },
     }),
     menu: (styles, { selectProps: { isMenuPositionRelative } }) => ({
       ...styles,
       ...(isMenuPositionRelative ? { position: 'relative' } : {}),
-      border: `1px solid ${DSTheme.colors.graphiteHB}`,
+      border: `1px solid ${DSTheme.colors.neutral[500]}`,
       boxShadow: `0px 1px 4px ${transparentize(0.85, '#000')}`,
       marginBottom: 0,
       marginTop: pxToRem(DSTheme.space.xs),
@@ -221,17 +221,17 @@ export const selectStyles: (
     option: (styles, { isDisabled, isSelected, isFocused }) => ({
       ...styles,
       backgroundColor: isSelected
-        ? DSTheme.colors.graphite2H
+        ? DSTheme.colors.neutral[300]
         : isFocused
-        ? DSTheme.colors.blueberry0
+        ? DSTheme.colors.primary[50]
         : 'transparent',
-      color: isDisabled ? DSTheme.colors.graphiteB : DSTheme.forms.color,
+      color: isDisabled ? DSTheme.colors.neutral[600] : DSTheme.forms.color,
       fontSize: DSTheme.typography.size.md,
       lineHeight: DSTheme.typography.lineHeight.md,
       padding: menuItemPadding,
       ':active': {
         ...styles[':active'],
-        backgroundColor: DSTheme.colors.dietBlueberry,
+        backgroundColor: DSTheme.colors.primary[200],
       },
     }),
     group: (styles, { isMulti }) => ({
@@ -245,7 +245,7 @@ export const selectStyles: (
     groupHeading: (styles) => ({
       ...styles,
       fontWeight: DSTheme.typography.weight.bold,
-      color: DSTheme.colors.graphite4B,
+      color: DSTheme.colors.neutral[900],
       fontSize: DSTheme.typography.size.md,
       lineHeight: DSTheme.typography.lineHeight.md,
       textTransform: 'none',

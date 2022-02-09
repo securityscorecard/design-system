@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
 
-import { theme as defaultTheme } from '../theme';
+import { createTheme } from '../theme';
 import { GlobalStyles } from '../GlobalStyles';
 import { DSContextValue, DSProviderProps } from './DSProvider.types';
 
@@ -18,7 +18,7 @@ const DSProvider: React.FC<DSProviderProps> = ({
   theme = {},
   config = {},
 }) => {
-  const dsTheme = mergeDeepRight(defaultTheme, theme);
+  const dsTheme = createTheme(theme);
   const { hasIncludedGlobalStyles, ...dsConfig } = mergeDeepRight(
     defaultDSContext,
     config,

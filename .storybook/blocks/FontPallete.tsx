@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-import typography from '../../src/theme/typography'
+import { theme } from '../../src/theme';
 
 const List = styled.div`
-  font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
+    'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
   margin: 0;
   font-size: 14px;
   line-height: 20px;
@@ -17,7 +19,7 @@ const ListHeading = styled.div`
   align-items: center;
   padding-bottom: 20px;
   font-weight: 700;
-  color: rgba(51,51,51,0.6);
+  color: rgba(51, 51, 51, 0.6);
 `;
 
 const ListName = styled.div`
@@ -43,7 +45,7 @@ const ItemTitle = styled.div`
   word-break: break;
 `;
 const ItemSubtitle = styled.div`
-  color: rgba(51,51,51,0.8);
+  color: rgba(51, 51, 51, 0.8);
 `;
 
 interface SampleTextProps {
@@ -51,14 +53,14 @@ interface SampleTextProps {
   readonly fontWeight?: number;
   readonly fontSize?: string;
   readonly lineHeight?: string;
-};
+}
 
 const SampleText = styled.div<SampleTextProps>`
   flex: 1;
-  font-family: ${({fontFamily}) => fontFamily};
-  font-weight: ${({fontWeight}) => fontWeight};
-  font-size: ${({fontSize}) => fontSize};
-  line-height: ${({lineHeight}) => lineHeight};
+  font-family: ${({ fontFamily }) => fontFamily};
+  font-weight: ${({ fontWeight }) => fontWeight};
+  font-size: ${({ fontSize }) => fontSize};
+  line-height: ${({ lineHeight }) => lineHeight};
 `;
 
 interface FontProps {
@@ -69,16 +71,16 @@ interface FontProps {
   fontSize?: string;
   lineHeight?: string;
   sampleText: string;
-};
+}
 
 export const FontItem: FunctionComponent<FontProps> = ({
   title,
   subtitle,
-  fontFamily = typography.family.base,
-  fontWeight = typography.weight.regular,
-  fontSize = typography.size.lg,
+  fontFamily = theme.typography.family.base,
+  fontWeight = theme.typography.weight.regular,
+  fontSize = theme.typography.size.lg,
   lineHeight = 'normal',
-  sampleText
+  sampleText,
 }) => {
   return (
     <Item>
@@ -98,8 +100,7 @@ export const FontItem: FunctionComponent<FontProps> = ({
   );
 };
 
-/* TODO: migrate to `./components` */
-export const FontPalette: FunctionComponent = ({children, ...props}) => (
+export const FontPalette: FunctionComponent = ({ children, ...props }) => (
   <List {...props}>
     <ListHeading>
       <ListName>Name</ListName>
@@ -107,4 +108,4 @@ export const FontPalette: FunctionComponent = ({children, ...props}) => (
     </ListHeading>
     {children}
   </List>
-)
+);

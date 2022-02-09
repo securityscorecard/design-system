@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { useDropdown } from '../../hooks/useDropdown';
 import { SpaceSizes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { pxToRem } from '../../utils';
@@ -18,6 +17,7 @@ import { Icon } from '../Icon';
 import { H4 } from '../typography';
 import { ControlDropdownProps } from './ControlDropdown.types';
 import { ControlDropdownPlacements } from './ControlDropdown.enums';
+import ControlledDropdown from '../Dropdown/ControlledDropdown';
 
 const CloseButton = styled(Button)`
   padding: 0;
@@ -30,7 +30,6 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
   title,
   parentRef,
   isOpen = false,
-  onOpen,
   onClose,
   onReset,
   onSubmit,
@@ -40,28 +39,23 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
   placement = ControlDropdownPlacements.bottomLeft,
   width = 370,
 }) => {
-  const { isPaneDisplayed, Pane } = useDropdown(parentRef, {
-    defaultIsPaneDisplayed: isOpen,
-    paneWidth: width,
-    onClickOut: onClose,
-    onShow: () => {
-      if (isPaneDisplayed) {
-        onClose();
-      } else {
-        onOpen();
-      }
-    },
-    onHide: onClose,
-    placement,
-    isElevated: true,
-    hasInternalShowHide: false,
-  });
-
-  if (!isOpen) {
+  const [, setMounted] = useState(false);
+  useEffect(() => {
+    // Note: the popup hook used by the ControlledDropdown needs to be notified when the ref changes
+    setMounted(true);
+  }, []);
+  if (!isOpen || !parentRef?.current) {
     return null;
   }
   return (
-    <Pane>
+    <ControlledDropdown
+      innerPaddingSize={SpaceSizes.none}
+      isOpen={isOpen}
+      maxPaneWidth={width}
+      placement={placement}
+      triggerEl={parentRef.current}
+      isPaneElevated
+    >
       <Padbox paddingSize={SpaceSizes.md}>
         <Stack gap={SpaceSizes.md}>
           <Inline
@@ -106,7 +100,7 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
           </Inline>
         </Stack>
       </Padbox>
-    </Pane>
+    </ControlledDropdown>
   );
 };
 
@@ -118,7 +112,6 @@ ControlDropdown.propTypes = {
         ? PropTypes.any
         : PropTypes.instanceOf(HTMLSpanElement),
   }).isRequired,
-  onOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,

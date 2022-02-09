@@ -1,11 +1,13 @@
-FROM node:16
+FROM ubuntu:bionic
 
-RUN apt-get update -qq \
- && apt-get install -qq --no-install-recommends \
-   ca-certificates \
-   apt-transport-https \
-   chromium \
- && apt-get upgrade -qq
+RUN apt update \
+&& apt upgrade
+RUN apt install -y curl
+
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash
+RUN apt install -y nodejs
+RUN apt install -y chromium-browser
+RUN npm install -g yarn
 
 
 WORKDIR /usr/src/app

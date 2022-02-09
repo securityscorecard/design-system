@@ -1,9 +1,9 @@
 import { pick } from 'ramda';
 
-import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
+import { DropdownPlacements } from '../Dropdown/Dropdown.enums';
 
 export const ControlDropdownPlacements = pick([
   'bottom',
-  'bottomLeft',
-  'bottomRight',
-])(PortalPlacements);
+  'bottom-start',
+  'bottom-end',
+])(DropdownPlacements);

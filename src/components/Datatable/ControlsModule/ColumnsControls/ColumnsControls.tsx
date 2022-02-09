@@ -12,7 +12,6 @@ import { ColumnsControlsProps } from './ColumnsControls.types';
 const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   children,
   isOpen = false,
-  onOpen = noop,
   onClose = noop,
   onApply = noop,
   onReset = noop,
@@ -28,9 +27,6 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   } = useColumnOrder();
   const allColumns = DatatableStore.useState((s) => s.columns);
 
-  const handleOpenColumnsControl = () => {
-    onOpen();
-  };
   const handleCloseColumnsControl = () => {
     onClose();
     reinitializeOrderedColumns();
@@ -53,7 +49,6 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
         parentRef={parentRef}
         title="Columns"
         onClose={handleCloseColumnsControl}
-        onOpen={handleOpenColumnsControl}
         onReset={handleResetColumnsControl}
         onSubmit={handleApplyColumnsControl}
       >
@@ -68,7 +63,6 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
 };
 
 ColumnsControls.propTypes = {
-  onOpen: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,

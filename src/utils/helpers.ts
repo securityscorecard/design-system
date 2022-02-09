@@ -1,13 +1,16 @@
 import { DefaultTheme } from 'styled-components';
 import {
   curry,
+  either,
   identity,
   join,
   map,
   memoizeWith,
   path,
   pipe,
+  split,
   unless,
+  useWith,
 } from 'ramda';
 import { hasPath, isString, list } from 'ramda-adjunct';
 import numeral from 'numeral';
@@ -19,12 +22,14 @@ import {
   Weight as FontWeight,
   LineHeight,
 } from '../theme/typography.types';
-import { Colors } from '../theme/colors.types';
+import { Color } from '../theme/colors.types';
 import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
 import { Depths } from '../theme/depths.types';
-import space from '../theme/space';
+import { SpaceSize } from '../theme/space.types';
 import { Buttons } from '../theme/buttons.types';
+import { ColorTypes } from '../theme/colors.enums';
+import { createRadii } from '../theme/radii';
 
 export type Theme = {
   theme?: DefaultTheme;
@@ -40,12 +45,19 @@ const convertValueToRem = memoizeWith(
 // pxToRem :: (number | string)... -> string
 export const pxToRem = pipe(list, map(convertValueToRem), join(' '));
 
+// https://github.com/ramda/ramda/wiki/Cookbook#derivative-of-rprops-for-deep-fields
+// This useWith is not hook :D
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const dotPath = useWith(path, [split('.')]);
 // getColor :: Color -> Props -> string
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
 // Props - styled-components props object
-export const getColor = curry((color: keyof Colors, { theme }: Theme): string =>
-  path(['colors', color], theme),
-);
+export const getColor = curry((color: Color, { theme }: Theme): string => {
+  return either(
+    dotPath(`colors.${color}`),
+    dotPath(`colors.${ColorTypes[color]}`),
+  )(theme);
+});
 
 // getFontFamily :: Family -> Props -> string
 // Family - any key of 'family' (src/theme/typography.ts)
@@ -81,9 +93,14 @@ export const getLineHeight = curry(
 
 // getBorderRadius :: Props -> string
 // Props - styled-components props object
-export const getBorderRadius = pipe(
-  path(['theme', 'borderRadius']),
-  (radius) => `${radius}px`,
+export const getBorderRadius = path(['theme', 'radii', 'default']);
+
+// getRadii :: Type -> Props -> string
+// Type - any key of 'radii' (src/theme/radii.ts)
+// Props - styled-components props object
+export const getRadii = curry(
+  (type: keyof ReturnType<typeof createRadii>, { theme }: Theme): string =>
+    path(['radii', type], theme),
 );
 
 // getFormStyle :: Property -> Props -> string
@@ -140,9 +157,8 @@ export const getDepth = curry(
 // getSpace:: Size -> Props -> string
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
-export const getSpace = curry(
-  (size: keyof typeof space, { theme }: Theme): string =>
-    pipe(path(['space', size]), pxToRem)(theme),
+export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
+  pipe(path(['space', size]), pxToRem)(theme),
 );
 
 export const abbreviateNumber = (value: number): string =>

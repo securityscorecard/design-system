@@ -99,7 +99,7 @@ const textTab = css<BaseLabelProps & { size: Sizes }>`
 
   &:hover {
     color: ${({ $color, theme }) =>
-      lighten(0.1, theme.colors[$color] || $color)};
+      lighten(0.1, getColor($color, { theme }) || $color)};
   }
 `;
 

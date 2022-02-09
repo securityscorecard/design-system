@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { TabProps } from './Tabs.types';
 import { TabSizes, TabVariants } from './Tabs.enums';
-import { ColorTypes } from '../../theme/colors.enums';
+import { ColorTypes, DeprecatedColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
@@ -65,7 +65,10 @@ Tab.propTypes = {
   size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
   isSelected: PropTypes.bool,
-  color: PropTypes.oneOf(Object.values(ColorTypes)),
+  color: PropTypes.oneOf([
+    ...Object.values(ColorTypes),
+    ...DeprecatedColorTypes,
+  ]),
   onClick: PropTypes.func,
 };
 
