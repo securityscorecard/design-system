@@ -1,3 +1,12 @@
+# [1.0.0-alpha.148](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.147...v1.0.0-alpha.148) (2022-02-11)
+
+
+### Features
+
+* **Icons:** add new icons ([ca74e4e](https://github.com/securityscorecard/design-system/commit/ca74e4eabc6346914bb6699e33287a3950a9c536))
+* **table:** update visual regression images ([8938c6f](https://github.com/securityscorecard/design-system/commit/8938c6fc480d4adb1cbf674641a52e5bfc135f89))
+* **Table:** reduce table header bottom line weight ([9823bbf](https://github.com/securityscorecard/design-system/commit/9823bbfe4af8d6a83cd22483272a26c766fe9dff))
+
 # [1.0.0-alpha.147](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.146...v1.0.0-alpha.147) (2022-02-09)
 
 
