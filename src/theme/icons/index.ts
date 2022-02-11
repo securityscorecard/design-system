@@ -35,3 +35,5 @@ export { error } from './error';
 export { exclTriangle } from './exclTriangle';
 export { ban } from './ban';
 export { lock } from './lock';
+export { checkCircleSolid } from './checkCircleSolid';
+export { errorSolid } from './errorSolid';

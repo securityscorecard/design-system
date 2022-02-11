@@ -31,6 +31,8 @@ export const SSCIconNames = {
   exclTriangle: 'excl-triangle',
   ban: 'ban',
   lock: 'lock',
+  checkCircleSolid: 'check-circle-solid',
+  errorSolid: 'error-solid',
 } as const;
 
 export const IconTypes = {
