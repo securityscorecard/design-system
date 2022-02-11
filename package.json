@@ -14,7 +14,6 @@
     "build"
   ],
   "scripts": {
-    "develop": "STORYBOOK_PROXIMA_NOVA_LINK='https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap' yarn storybook",
     "build": "rollup -c",
     "storybook": "start-storybook -p 8008",
     "storybook:build": "build-storybook --quiet",
