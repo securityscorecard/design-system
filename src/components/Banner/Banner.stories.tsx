@@ -36,6 +36,27 @@ export const InfoBanner: Story = () => (
   </Banner>
 );
 
+export const SuccessBanner: Story = () => (
+  <Banner
+    actions={[
+      {
+        label: 'Action A',
+        name: 'Action A',
+        onClick: action('click-action-a'),
+      },
+      {
+        label: 'Action B',
+        name: 'Action B',
+        onClick: action('click-action-b'),
+      },
+    ]}
+    variant={BannerVariants.success}
+    onClose={action('close-banner')}
+  >
+    Success Banner
+  </Banner>
+);
+
 export const LongInfoBanner: Story = () => (
   <Banner
     actions={[
