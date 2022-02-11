@@ -18,7 +18,7 @@ import {
   ActionWithSubactions,
   RelativeLinkActionKind,
 } from '../../../../types/action.types';
-import { Dropdown } from '../../Dropdown';
+import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { BatchActionsProps } from './BatchActions.types';
 import { DatatableStore } from '../../Datatable.store';
 
@@ -60,9 +60,10 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
           }))((action as ActionWithSubactions<string[], boolean>).subActions);
 
           return (
-            <Dropdown
+            <DropdownMenu
               key={action.name}
               actions={subActions}
+              paneWidth={140}
               placement="bottom-end"
             >
               <BatchActionButton name={action.name} onClick={action.onClick}>
@@ -75,7 +76,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
                   />
                 </Inline>
               </BatchActionButton>
-            </Dropdown>
+            </DropdownMenu>
           );
         }
 

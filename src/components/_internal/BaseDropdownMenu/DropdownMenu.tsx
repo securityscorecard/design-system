@@ -8,46 +8,40 @@ import {
   ActionKindsPropType,
   RelativeLinkActionKind,
 } from '../../../types/action.types';
-import { DropdownLinkProps, DropdownProps } from './Dropdown.types';
-import {
-  createPaddingSpacing,
-  getColor,
-  getFontSize,
-  getLineHeight,
-  pxToRem,
-} from '../../../utils';
+import { DropdownLinkProps, DropdownMenuProps } from './DropdownMenu.types';
+import { getColor, getSpace } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { Dropdown as BaseDropdown } from '../../Dropdown';
+import { Dropdown } from '../../Dropdown';
 import { SpaceSizes } from '../../../theme/space.enums';
+import { Text, TextEnums } from '../../typography';
+import { Padbox, PadboxEnums } from '../../layout';
 
 export const List = styled.ul`
   list-style: none;
   margin: 0;
-  ${createPaddingSpacing({ vertical: 0.4, horizontal: 0 })};
+  padding-top: ${getSpace(SpaceSizes.sm)};
+  padding-bottom: ${getSpace(SpaceSizes.sm)};
 `;
 
-export const DropdownLink = styled.button<DropdownLinkProps>`
+export const DropdownLink = styled(Padbox)<DropdownLinkProps>`
   width: 100%;
   display: block;
-  padding: ${pxToRem(4, 16)};
-  height: ${pxToRem(24)};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
-  color: ${getColor('neutral.900')};
   cursor: pointer;
   background: transparent;
   border: 0 none;
   text-align: left;
 
-  &:hover {
-    background: ${getColor('neutral.200')};
+  &:hover,
+  &:focus {
+    background: ${getColor('primary.50')};
+    outline: none;
   }
 `;
 
-const Dropdown: React.FC<DropdownProps> = ({
+const DropdownMenu: React.FC<DropdownMenuProps> = ({
   actions,
   defaultIsOpen = false,
-  paneWidth = 140,
+  paneWidth = 'auto',
   children,
   className,
   placement = 'bottom',
@@ -59,7 +53,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     </span>
   );
   return (
-    <BaseDropdown
+    <Dropdown
       defaultIsOpen={defaultIsOpen}
       innerPaddingSize={SpaceSizes.none}
       maxPaneWidth={paneWidth}
@@ -73,26 +67,30 @@ const Dropdown: React.FC<DropdownProps> = ({
           let RouterLink = null;
           if (
             isNotUndefined(
-              (action as RelativeLinkActionKind<string[], boolean>).to,
+              (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
+                .to,
             )
           ) {
             RouterLink = requireRouterLink();
           }
 
           const domTag = isNotUndefined(
-            (action as AbsoluteLinkActionKind<string[], boolean>).href,
+            (action as AbsoluteLinkActionKind<React.MouseEvent[], boolean>)
+              .href,
           )
             ? 'a' // render 'a' tag if 'href' is present
             : isNotUndefined(
-                (action as RelativeLinkActionKind<string[], boolean>).to,
+                (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
+                  .to,
               )
             ? RouterLink // render 'Link' if 'to' is present
-            : undefined; // use default
+            : 'button'; // use default
 
           if (
             isNull(RouterLink) &&
             isNotUndefined(
-              (action as RelativeLinkActionKind<string[], boolean>).to,
+              (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
+                .to,
             )
           ) {
             return null;
@@ -103,29 +101,42 @@ const Dropdown: React.FC<DropdownProps> = ({
               <DropdownLink
                 as={domTag}
                 href={
-                  (action as AbsoluteLinkActionKind<string[], boolean>).href
+                  (action as AbsoluteLinkActionKind<
+                    React.MouseEvent[],
+                    boolean
+                  >).href
                 }
                 name={action.name}
-                to={(action as RelativeLinkActionKind<string[], boolean>).to}
+                paddingSize={SpaceSizes.md}
+                paddingType={PadboxEnums.PaddingTypes.squish}
+                to={
+                  (action as RelativeLinkActionKind<
+                    React.MouseEvent[],
+                    boolean
+                  >).to
+                }
                 onClick={action.onClick}
               >
-                {action.label}
+                <Text size={TextEnums.TextSizes.md}>{action.label}</Text>
               </DropdownLink>
             </li>
           );
         })}
       </List>
-    </BaseDropdown>
+    </Dropdown>
   );
 };
 
-Dropdown.propTypes = {
+DropdownMenu.propTypes = {
   actions: PropTypes.arrayOf(ActionKindsPropType).isRequired,
   children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
   defaultIsOpen: PropTypes.bool,
-  paneWidth: PropTypes.number,
+  paneWidth: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf<'auto'>(['auto']),
+  ]),
   className: PropTypes.string,
   placement: PropTypes.oneOf(['bottom', 'bottom-start', 'bottom-end']),
 };
 
-export default React.memo(Dropdown);
+export default React.memo(DropdownMenu);

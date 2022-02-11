@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
-import Dropdown from './Dropdown';
+import DropdownMenu from './DropdownMenu';
 
 const actions = [
   {
@@ -12,12 +12,12 @@ const actions = [
   },
 ];
 
-describe('Datatable/Dropdown', () => {
+describe('_internal/BaseDropdownMenu', () => {
   it('should toggle pane on click', () => {
     renderWithProviders(
-      <Dropdown actions={actions}>
+      <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
-      </Dropdown>,
+      </DropdownMenu>,
     );
 
     const dropdownButton = screen.getByRole('button', {
@@ -33,9 +33,9 @@ describe('Datatable/Dropdown', () => {
   });
   it('should close pane on click outside of Dropdown', () => {
     renderWithProviders(
-      <Dropdown actions={actions} defaultIsOpen>
+      <DropdownMenu actions={actions} defaultIsOpen>
         <button type="button">Toggle Dropdown</button>
-      </Dropdown>,
+      </DropdownMenu>,
     );
 
     fireEvent.click(document.body);
@@ -46,9 +46,9 @@ describe('Datatable/Dropdown', () => {
   });
   it('should create "button" tag when "onClick" prop is provided', () => {
     renderWithProviders(
-      <Dropdown actions={actions}>
+      <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
-      </Dropdown>,
+      </DropdownMenu>,
     );
 
     const dropdownButton = screen.getByRole('button', {
@@ -62,9 +62,9 @@ describe('Datatable/Dropdown', () => {
   it('should create "a" tag when "href" prop is provided', () => {
     const href = 'http://example.com';
     renderWithProviders(
-      <Dropdown actions={[{ ...actions[0], href }]}>
+      <DropdownMenu actions={[{ ...actions[0], href }]}>
         <button type="button">Toggle Dropdown</button>
-      </Dropdown>,
+      </DropdownMenu>,
     );
 
     const dropdownButton = screen.getByRole('button', {
@@ -83,9 +83,9 @@ describe('Datatable/Dropdown', () => {
       hash: '#the-hash',
     };
     renderWithProviders(
-      <Dropdown actions={[{ ...actions[0], to }]}>
+      <DropdownMenu actions={[{ ...actions[0], to }]}>
         <button type="button">Toggle Dropdown</button>
-      </Dropdown>,
+      </DropdownMenu>,
     );
 
     const dropdownButton = screen.getByRole('button', {
@@ -104,11 +104,11 @@ describe('Datatable/Dropdown', () => {
   describe('given children is function', () => {
     it('should pass isPaneDisplayed as a argument', () => {
       renderWithProviders(
-        <Dropdown actions={actions}>
+        <DropdownMenu actions={actions}>
           {(isPaneDisplayed) => (
             <button type="button">{isPaneDisplayed ? 'Hide' : 'Show'}</button>
           )}
-        </Dropdown>,
+        </DropdownMenu>,
       );
 
       const dropdownButton = screen.getByRole('button');

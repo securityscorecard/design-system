@@ -4,8 +4,7 @@ import styled, { css } from 'styled-components';
 import { CellProps } from 'react-table';
 
 import { FlexContainer } from '../../../FlexContainer';
-/* FIXME: we need to fix this with use of DS dropdowns */
-import { Dropdown } from '../../../Datatable/Dropdown';
+import { DropdownMenu } from '../../BaseDropdownMenu';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
 import { ACTIONS_COLUMN_ID, CellTypes } from '../renderers/renderers.enums';
@@ -61,7 +60,7 @@ export const actionsColumn = {
 
     return (
       <FlexContainer flexGrow={1} justifyContent="center">
-        <Dropdown actions={actions} placement="bottom-end">
+        <DropdownMenu actions={actions} paneWidth={140} placement="bottom-end">
           {(isActive) => (
             <RowActionsButton aria-label="Row Actions" isActive={isActive}>
               <SVGIcon
@@ -73,7 +72,7 @@ export const actionsColumn = {
               </SVGIcon>
             </RowActionsButton>
           )}
-        </Dropdown>
+        </DropdownMenu>
       </FlexContainer>
     );
   },
