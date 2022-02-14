@@ -17,7 +17,7 @@ const labelMappingValues = {
   labelAsString: 'Checkbox label',
   labelAsIconAndText: (
     <Inline align="center" gap="sm">
-      <Icon color="graphite4B" name="wrench" />
+      <Icon color="neutral.900" name="wrench" />
       <Text>{textExample}</Text>
     </Inline>
   ),
@@ -117,7 +117,7 @@ export const CheckboxWithLabelAsComponentWithIcon: Story = () => (
     checkboxId="disabledCheckbox"
     label={
       <Inline align="center" gap="sm">
-        <Icon color="graphite4B" name="wrench" />
+        <Icon color="neutral.900" name="wrench" />
         <Text>{textExample}</Text>
       </Inline>
     }

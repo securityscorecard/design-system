@@ -49,7 +49,7 @@ import { TableProps } from './Table.types';
 const NoDataContainer = styled(FlexContainer).attrs(() => ({
   flexDirection: 'column',
 }))`
-  background: ${getColor('graphite5H')};
+  background: ${getColor('neutral.0')};
   padding: ${pxToRem(64)};
 `;
 

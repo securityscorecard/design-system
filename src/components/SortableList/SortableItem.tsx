@@ -12,8 +12,8 @@ import { SpaceSizes } from '../../theme';
 import { Inline, Padbox } from '../layout';
 
 const StyledSortableItem = styled(Padbox)`
-  background: ${getColor('graphite5H')};
-  border: 1px solid ${getColor('graphiteHB')};
+  background: ${getColor('neutral.0')};
+  border: 1px solid ${getColor('neutral.500')};
   border-radius: ${getBorderRadius};
   cursor: grab;
 `;
@@ -23,7 +23,7 @@ const IconWrapper = styled(Padbox)`
   align-items: center;
   justify-content: center;
   width: ${pxToRem(24)};
-  color: ${getColor('graphiteHB')};
+  color: ${getColor('neutral.500')};
 `;
 
 const SortableItem: React.FC<SortableItemProps> = ({ label, id }) => {

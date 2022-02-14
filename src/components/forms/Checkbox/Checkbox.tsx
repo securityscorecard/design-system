@@ -35,7 +35,7 @@ const Box = styled.div`
   width: ${getRemToggleSize};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getBorderRadius};
-  background: ${getColor('graphite5H')};
+  background: ${getColor('neutral.0')};
   padding: ${pxToRem(3)};
 `;
 

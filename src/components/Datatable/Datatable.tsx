@@ -23,9 +23,9 @@ import { useColumnsControls } from './hooks/useColumnsControls';
 
 const StyledDatatable = styled(FlexContainer)`
   position: relative;
-  border: 1px solid ${getColor('graphiteH')};
+  border: 1px solid ${getColor('neutral.400')};
   border-radius: ${getBorderRadius};
-  background: ${getColor('graphite3H')};
+  background: ${getColor('neutral.200')};
 `;
 
 const mapSelectedRows = <D,>(defaultSelectedRowIds: IdType<D>[]) =>

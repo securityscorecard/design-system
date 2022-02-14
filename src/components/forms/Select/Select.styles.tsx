@@ -46,8 +46,8 @@ export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig = (
     primary75: DSTheme.colors.primary[400],
     primary50: DSTheme.colors.primary[200],
     primary25: transparentize(0.9, DSTheme.colors.primary[400]),
-    danger: DSTheme.colors.deprecated.strawberry,
-    dangerLight: transparentize(0.9, DSTheme.colors.deprecated.strawberry),
+    danger: DSTheme.colors.error[500],
+    dangerLight: transparentize(0.9, DSTheme.colors.error[500]),
     neutral0: DSTheme.colors.neutral[0],
     neutral5: DSTheme.colors.neutral[100],
     neutral10: DSTheme.colors.neutral[200],
@@ -197,11 +197,11 @@ export const selectStyles: (
       ...indicatorStyles(DSTheme),
       display: isProcessing ? 'none' : 'block',
       ':hover': {
-        color: DSTheme.colors.deprecated.strawberry,
+        color: DSTheme.colors.error[500],
         backgroundColor: 'transparent',
       },
       ':focus': {
-        color: DSTheme.colors.deprecated.strawberry,
+        color: DSTheme.colors.error[500],
       },
     }),
     menu: (styles, { selectProps: { isMenuPositionRelative } }) => ({
@@ -333,7 +333,7 @@ export const MultiValueRemove: ComponentType<{
 
 const ActionsMenu = styled.div`
   margin-top: ${getSpace(SpaceSizes.sm)};
-  border-top: 1px solid ${getColor('graphiteHB')};
+  border-top: 1px solid ${getColor('neutral.500')};
   padding-top: ${getSpace(SpaceSizes.sm)};
 `;
 
@@ -347,7 +347,7 @@ const SelectActionButton = styled(Button)`
   justify-content: flex-start;
 
   &:hover {
-    background-color: ${getColor('blueberry0')};
+    background-color: ${getColor('primary.50')};
   }
 `;
 

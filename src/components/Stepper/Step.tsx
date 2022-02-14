@@ -35,7 +35,7 @@ const StepButton = styled.button`
     ${/* sc-selector */ BulletCircle},
     &:focus
     ${/* sc-selector */ BulletCircle} {
-    fill: ${getColor('blueberry0')};
+    fill: ${getColor('primary.50')};
   }
 `;
 
@@ -44,7 +44,7 @@ const connectorIndentation = pxToRem(bulletSize / 2 - connectorSize / 2);
 const connectorStyled = css`
   content: '';
   display: block;
-  background-color: ${getColor('graphiteHB')};
+  background-color: ${getColor('neutral.500')};
 `;
 
 const StepConnector = styled.div`

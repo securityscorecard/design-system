@@ -75,7 +75,7 @@ playground.args = { selectedValue: 'inventory' };
 export const OnlyTabs: Story = () => (
   <Tabs selectedValue="overview" onSelectTab={action('Select Tab')}>
     <Tab value="inventory">Inventory</Tab>
-    <Tab color={ColorTypes.cherry} value="overview">
+    <Tab color={ColorTypes.error700} value="overview">
       Overview
     </Tab>
   </Tabs>

@@ -8,7 +8,7 @@ import { FlexContainer } from '../../FlexContainer';
 import { getBorderRadius, getColor, pxToRem } from '../../../utils';
 
 const Container = styled(FlexContainer)`
-  background: ${getColor('graphite3H')};
+  background: ${getColor('neutral.200')};
   border-radius: ${getBorderRadius};
   height: ${pxToRem(32)};
   padding: ${pxToRem(8, 16)};

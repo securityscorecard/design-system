@@ -32,8 +32,8 @@ const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   right: ${pxToRem(20)};
   width: ${({ $width }) => pxToRem($width)};
   max-height: ${pxToRem(240)};
-  background-color: ${getColor('graphite5H')};
-  color: ${getColor('graphite4B')};
+  background-color: ${getColor('neutral.0')};
+  color: ${getColor('neutral.900')};
   text-align: left;
   box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
   animation: ${ToastFromTop} 0.5s;
@@ -57,10 +57,10 @@ const CloseButton = styled.button`
   flex-shrink: 0;
   width: ${pxToRem(16)};
   height: ${pxToRem(16)};
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
 
   &:hover {
-    color: ${getColor('graphiteB')};
+    color: ${getColor('neutral.600')};
   }
 `;
 

@@ -18,7 +18,7 @@ const BaseModal = styled.div`
   top: 0;
   left: 0;
   overflow-y: auto;
-  background-color: ${getColor('graphite5H')};
+  background-color: ${getColor('neutral.0')};
 `;
 
 const columnConfigMap: ColumnConfigMap = {
