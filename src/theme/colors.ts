@@ -34,7 +34,7 @@ export const colors = {
   warning: {
     50: '#fcf3ec',
     100: '#f9e2d0',
-    500: '#f9e2d0',
+    500: '#E5883C',
   },
   error: {
     50: '#f7e9e9',
