@@ -16,7 +16,6 @@ import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { Padbox } from '../layout/Padbox';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { ToastVariants } from './Toast.enums';
-import { FlexContainer } from '../FlexContainer';
 import { ColorTypes } from '../../theme/colors.enums';
 
 const ToastFromTop = keyframes`
@@ -100,7 +99,9 @@ const ToastIconPadbox = styled(Padbox)<{ $variant?: ToastProps['variant'] }>`
   align-items: center;
 `;
 
-const ToastIconWrapper = styled(FlexContainer)`
+const ToastIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
   width: ${pxToRem(16)};
   height: ${pxToRem(16)};
 `;
@@ -126,7 +127,7 @@ const Toast: React.FC<ToastProps> = ({
           paddingSize={SpaceSizes.sm}
           paddingType={PaddingTypes.squish}
         >
-          <ToastIconWrapper alignItems="center">
+          <ToastIconWrapper>
             <ToastStyledIcon
               $variant={variant}
               name={iconVariants[variant]}
