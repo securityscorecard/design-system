@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
+import { isNotNilOrEmpty } from 'ramda-adjunct';
 
-import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, getFontSize, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Paragraph } from '../typography';
@@ -13,6 +14,9 @@ import { Inline } from '../layout/Inline';
 import { SpaceSizes } from '../../theme/space.enums';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { Padbox } from '../layout/Padbox';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { ToastVariants } from './Toast.enums';
+import { ColorTypes } from '../../theme/colors.enums';
 
 const ToastFromTop = keyframes`
   from {
@@ -68,11 +72,70 @@ const StyledIcon = styled(Icon)`
   font-size: ${getFontSize('lg')};
 `;
 
+const colorVariants = {
+  [ToastVariants.info]: ColorTypes.info500,
+  [ToastVariants.warn]: ColorTypes.warning500,
+  [ToastVariants.error]: ColorTypes.error500,
+  [ToastVariants.success]: ColorTypes.success500,
+};
+
+const iconVariants = {
+  [ToastVariants.info]: SSCIconNames.infoCircle,
+  [ToastVariants.warn]: SSCIconNames.exclTriangleSolid,
+  [ToastVariants.error]: SSCIconNames.errorSolid,
+  [ToastVariants.success]: SSCIconNames.checkCircleSolid,
+};
+
+const iconPxSizesVariants = {
+  [ToastVariants.info]: 16,
+  [ToastVariants.warn]: 14,
+  [ToastVariants.error]: 16,
+  [ToastVariants.success]: 16,
+};
+
+const ToastIconPadbox = styled(Padbox)<{ $variant?: ToastProps['variant'] }>`
+  background-color: ${({ $variant }) => getColor(colorVariants[$variant])};
+  display: flex;
+  align-items: center;
+`;
+
+const ToastIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: ${pxToRem(16)};
+  height: ${pxToRem(16)};
+`;
+
+const ToastStyledIcon = styled(Icon)<{ $variant?: ToastProps['variant'] }>`
+  color: ${getColor('neutral.0')};
+  font-size: ${({ $variant }) => pxToRem(iconPxSizesVariants[$variant])};
+`;
+
 const stopPropagation = (event) => event?.stopPropagation();
 
-const Toast: React.FC<ToastProps> = ({ onClose, children, width = 400 }) => (
+const Toast: React.FC<ToastProps> = ({
+  onClose,
+  children,
+  width = 400,
+  variant,
+}) => (
   <ToastContainer $width={width} onClick={stopPropagation}>
     <Inline stretch={StretchEnum.start}>
+      {isNotNilOrEmpty(variant) && (
+        <ToastIconPadbox
+          $variant={variant}
+          paddingSize={SpaceSizes.sm}
+          paddingType={PaddingTypes.squish}
+        >
+          <ToastIconWrapper>
+            <ToastStyledIcon
+              $variant={variant}
+              name={iconVariants[variant]}
+              type={IconTypes.ssc}
+            />
+          </ToastIconWrapper>
+        </ToastIconPadbox>
+      )}
       <Padbox paddingSize={SpaceSizes.md}>
         <ToastContent as="div" margin="none" size={TextSizes.md}>
           {children}
@@ -90,6 +153,7 @@ const Toast: React.FC<ToastProps> = ({ onClose, children, width = 400 }) => (
 Toast.propTypes = {
   onClose: PropTypes.func.isRequired,
   width: PropTypes.number,
+  variant: PropTypes.oneOf(Object.values(ToastVariants)),
 };
 
 export default Toast;
