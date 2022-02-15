@@ -1,4 +1,5 @@
-import { ColorTypes, theme } from '../theme';
+import { getRadii } from '.';
+import { ColorTypes, RadiusTypes, theme } from '../theme';
 import {
   abbreviateNumber,
   getBorderRadius,
@@ -78,5 +79,14 @@ describe('getColor', () => {
 describe('getBorderRadius', () => {
   it('should return correct value', () => {
     expect(getBorderRadius({ theme })).toBe('4px');
+  });
+});
+
+describe('getRadii', () => {
+  it('should return correct value', () => {
+    expect(getRadii(RadiusTypes.default, { theme })).toBe('4px');
+    expect(getRadii(RadiusTypes.circle, { theme })).toBe('100%');
+    expect(getRadii(RadiusTypes.half, { theme })).toBe('2px');
+    expect(getRadii(RadiusTypes.round, { theme })).toBe('50em');
   });
 });

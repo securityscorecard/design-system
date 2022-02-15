@@ -11,6 +11,7 @@ import Pill from './Pill';
 import { PillProps } from './Pill.types';
 import { PillSizes, PillVariants } from './Pill.enums';
 import { getRadii } from '../../utils';
+import { RadiusTypes } from '../../theme/radii.enums';
 
 export default {
   title: 'components/Pill',
@@ -79,7 +80,7 @@ const Bullet = styled.div`
   width: 0.75rem;
   height: 0.75rem;
   background-color: #4aba00;
-  border-radius: ${getRadii('circle')};
+  border-radius: ${getRadii(RadiusTypes.circle)};
 `;
 
 export const WithAdornment: Story<PillProps> = (args) => (
