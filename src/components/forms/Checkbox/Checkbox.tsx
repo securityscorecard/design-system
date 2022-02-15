@@ -6,12 +6,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
-import {
-  getBorderRadius,
-  getColor,
-  getFormStyle,
-  pxToRem,
-} from '../../../utils';
+import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
@@ -34,7 +29,7 @@ const Box = styled.div`
   height: ${getRemToggleSize};
   width: ${getRemToggleSize};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   background: ${getColor('graphite5H')};
   padding: ${pxToRem(3)};
 `;

@@ -7,6 +7,7 @@ import {
   getFontFamily,
   getFontSize,
   getFontWeight,
+  getRadii,
   pxToRem,
 } from '../../../../utils';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
@@ -30,7 +31,7 @@ const Button = styled.button<StyledControlButtonProps>`
   height: ${pxToRem(32)};
   padding: ${pxToRem(0, 10)};
   border: 2px solid transparent;
-  border-radius: 50em;
+  border-radius: ${getRadii('round')};
 
   font-family: ${getFontFamily('base')};
   font-weight: ${getFontWeight('medium')};

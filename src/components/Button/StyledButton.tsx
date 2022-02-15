@@ -4,13 +4,13 @@ import { includes, pipe } from 'ramda';
 import {
   createMarginSpacing,
   createPadding,
-  getBorderRadius,
   getButtonColor,
   getButtonHeight,
   getFontFamily,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../utils';
 import { BaseStyledButtonProps } from './StyledButton.types';
@@ -198,7 +198,7 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   font-family: ${getFontFamily('base')};
   font-weight: ${getFontWeight('semibold')};
   cursor: pointer;

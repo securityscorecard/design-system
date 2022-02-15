@@ -7,18 +7,18 @@ import { FlexContainer } from '../../../FlexContainer';
 import { ColorTypes } from '../../../../theme/colors.enums';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import {
-  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../../../utils';
 import { TagsProps } from './Tag.types';
 
 const Container = styled(FlexContainer)`
   background: ${getColor('graphite3H')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   color: ${getColor('graphite4B')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};

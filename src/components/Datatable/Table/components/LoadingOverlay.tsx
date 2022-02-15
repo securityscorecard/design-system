@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import { getColor } from '../../../../utils';
+import { getColor, getRadii } from '../../../../utils';
 import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
 import { Button } from '../../../Button';
@@ -22,7 +22,7 @@ const LoadingOverlayContainer = styled.div`
 
 const LoadingIndicatorContainer = styled.div`
   > ${Padbox} {
-    border-radius: 4px;
+    border-radius: ${getRadii('default')};
     background: ${getColor('graphite5H')};
   }
 

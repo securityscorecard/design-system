@@ -24,7 +24,7 @@ import {
   StyledBaseTable,
   actionsColumn,
 } from '../_internal/BaseTable';
-import { getBorderRadius, getColor } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
 import { TableProps } from './Table.types';
@@ -46,7 +46,7 @@ const TableWrapper = styled.div`
   border: 1px solid ${getColor('graphiteH')};
   border-top-width: 0;
   background: ${getColor('graphite3H')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   overflow: hidden;
 `;
 

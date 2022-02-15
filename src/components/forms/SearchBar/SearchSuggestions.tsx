@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { isNotNull } from 'ramda-adjunct';
 
 import {
-  getBorderRadius,
   getColor,
   getDepth,
   getFontSize,
+  getRadii,
   pxToRem,
 } from '../../../utils';
 import { useOuterClick } from '../../../hooks/useOuterCallback';
@@ -22,7 +22,7 @@ const SearchSuggestionsPane = styled.div`
   left: 50%;
   transform: translateX(-50%);
   border: 1px solid ${getColor('graphiteB')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   background-color: ${getColor('graphite5H')};
   padding: ${pxToRem(8, 0)};
   z-index: ${getDepth('dropdown')};

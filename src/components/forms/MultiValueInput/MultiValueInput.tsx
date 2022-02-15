@@ -25,11 +25,11 @@ import {
 import 'focus-within-polyfill';
 
 import {
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getFormStyle,
+  getRadii,
   pxToRem,
 } from '../../../utils';
 import { Cluster, Inline, Padbox } from '../../layout';
@@ -53,7 +53,7 @@ const ValueContainer = styled(Padbox)<ValueContainerProps>`
   justify-content: center;
   min-height: ${getFormStyle('fieldHeight')};
   background: ${getFormStyle('bgColor')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   ${getBorderStyle('borderWidth', 'borderColor')};
 
   &:focus-within,

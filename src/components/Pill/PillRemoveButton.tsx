@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getColor, getLineHeight, pxToRem } from '../../utils';
+import { getColor, getLineHeight, getRadii, pxToRem } from '../../utils';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { PillRemoveButtonProps } from './Pill.types';
@@ -20,7 +20,7 @@ const PillRemoveButtonWrapper = styled.button`
   line-height: ${getLineHeight('md')};
   color: ${getColor('graphite2B')};
   cursor: pointer;
-  border-radius: 100%;
+  border-radius: ${getRadii('circle')};
 
   &:hover,
   &:focus {

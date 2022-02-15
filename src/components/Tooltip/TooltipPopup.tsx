@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components';
 import { SpaceSizes } from '../../theme';
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
 import {
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../utils';
 import { Padbox } from '../layout';
@@ -102,7 +102,7 @@ const TooltipPopup = styled(Padbox).attrs(() => ({
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
 
   &::before {
     content: '';

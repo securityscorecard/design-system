@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import { getBorderRadius, getColor, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { SortableItemProps } from './SortableList.types';
@@ -14,7 +14,7 @@ import { Inline, Padbox } from '../layout';
 const StyledSortableItem = styled(Padbox)`
   background: ${getColor('graphite5H')};
   border: 1px solid ${getColor('graphiteHB')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   cursor: grab;
 `;
 
