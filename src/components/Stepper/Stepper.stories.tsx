@@ -25,6 +25,12 @@ import { Stepper, Step } from '@securityscorecard/design-system';
       `,
       },
     },
+    screenshot: {
+      viewport: {
+        width: 1820,
+        height: 720,
+      },
+    },
   },
   argTypes: {
     orientation: {
