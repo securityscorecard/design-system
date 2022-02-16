@@ -25,7 +25,7 @@ const NavItem = styled(Button)
   line-height: ${getLineHeight('lg')};
   cursor: pointer;
   color: ${({ isActive }) =>
-    getColor(isActive ? 'graphite4B' : 'blueberryClassic')};
+    getColor(isActive ? 'neutral.900' : 'primary.500')};
   padding: 0;
   height: auto;
 
@@ -35,7 +35,7 @@ const NavItem = styled(Button)
 
   &:hover {
     color: ${({ isActive }) =>
-      isActive ? 'inherit' : getColor('radiantBlueberry')};
+      isActive ? 'inherit' : getColor('primary.400')};
     text-decoration: none;
   }
 
@@ -44,7 +44,7 @@ const NavItem = styled(Button)
     display: inline-block;
     height: ${pxToRem(15)};
     width: 1px;
-    background: ${getColor('graphite2H')};
+    background: ${getColor('neutral.300')};
     margin-left: ${pxToRem(8)};
     vertical-align: text-bottom;
   }

@@ -110,7 +110,7 @@ const ClearButton = styled(Padbox)`
 
   &:hover,
   &:focus {
-    color: ${getColor('strawberry')};
+    color: ${getColor('error.500')};
   }
 `;
 

@@ -17,9 +17,9 @@ import {
 import { TagsProps } from './Tag.types';
 
 const Container = styled(FlexContainer)`
-  background: ${getColor('graphite3H')};
+  background: ${getColor('neutral.200')};
   border-radius: ${getRadii('default')};
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
   list-style: none;
@@ -42,7 +42,7 @@ const Tag: React.FC<TagsProps> = ({ value, onClose }) => (
     {value}{' '}
     <RemoveButton type="button" onClick={onClose}>
       <Icon
-        color={ColorTypes.graphite2B}
+        color={ColorTypes.neutral700}
         margin={{ left: 0.4 }}
         name={SSCIconNames.times}
       />

@@ -52,7 +52,7 @@ const BaseModal = styled.div<{ $maxWidth: number }>`
   width: 100%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
   border-radius: ${getRadii('default')};
-  background-color: ${getColor('graphite5H')};
+  background-color: ${getColor('neutral.0')};
 `;
 
 const Title = styled(H3)`
@@ -75,7 +75,7 @@ const CloseButton = styled.button`
   border: none;
   cursor: pointer;
   background-color: transparent;
-  color: ${getColor('graphite3B')};
+  color: ${getColor('neutral.800')};
 `;
 
 const Content = styled(Padbox)`
@@ -84,7 +84,7 @@ const Content = styled(Padbox)`
 `;
 
 const Footer = styled(Padbox)`
-  border-top: 1px solid ${getColor('graphiteHB')};
+  border-top: 1px solid ${getColor('neutral.500')};
 `;
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(

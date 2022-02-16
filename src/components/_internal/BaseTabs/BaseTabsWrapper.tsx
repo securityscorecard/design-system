@@ -13,8 +13,8 @@ export const BaseTabsWrapper = styled(Padbox)<{
   ${({ $variant }) =>
     $variant === BaseTabVariants.segmented &&
     css`
-      background: ${getColor('graphite5H')};
-      box-shadow: inset 0 0 0 1px ${getColor('graphiteB')};
+      background: ${getColor('neutral.0')};
+      box-shadow: inset 0 0 0 1px ${getColor('neutral.600')};
       border-radius: ${getRadii('default')};
     `};
 `;

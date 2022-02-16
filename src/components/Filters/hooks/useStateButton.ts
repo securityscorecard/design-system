@@ -4,9 +4,9 @@ import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColorTypes } from '../../../theme/colors.enums';
 import { IconProps, StateButtonIconHook } from './useStateButton.types';
 
-const timesIconColor = ColorTypes.graphite2B;
-const checkIconColor = ColorTypes.graphiteB;
-const hoverIconColor = ColorTypes.graphite5H;
+const timesIconColor = ColorTypes.neutral700;
+const checkIconColor = ColorTypes.neutral600;
+const hoverIconColor = ColorTypes.neutral0;
 
 const stateMap = {
   default: {

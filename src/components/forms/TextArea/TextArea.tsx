@@ -80,7 +80,7 @@ const Counter = styled.span<{ isInvalid: boolean }>`
   right: ${pxToRem(15)};
   bottom: ${pxToRem(10)};
   font-size: ${getFontSize('md')};
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
   background: ${getFormStyle('bgColor')};
   ${({ isInvalid }) =>
     isInvalid &&

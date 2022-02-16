@@ -18,14 +18,14 @@ const PillRemoveButtonWrapper = styled.button`
   height: ${pxToRem(16)};
   font-size: ${pxToRem(12)};
   line-height: ${getLineHeight('md')};
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
   cursor: pointer;
   border-radius: ${getRadii('circle')};
 
   &:hover,
   &:focus {
-    color: ${getColor('graphite5H')};
-    background-color: ${getColor('strawberry')};
+    color: ${getColor('neutral.0')};
+    background-color: ${getColor('error.500')};
   }
 `;
 

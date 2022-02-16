@@ -8,8 +8,8 @@ import { FlexContainer } from '../../FlexContainer';
 import { getColor, getRadii, pxToRem } from '../../../utils';
 
 const Container = styled(FlexContainer)`
-  background: ${getColor('graphite3H')};
   border-radius: ${getRadii('default')};
+  background: ${getColor('neutral.200')};
   height: ${pxToRem(32)};
   padding: ${pxToRem(8, 16)};
   text-transform: capitalize;

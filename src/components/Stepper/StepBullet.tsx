@@ -28,31 +28,31 @@ const Bullet = styled.svg`
 `;
 
 export const BulletCircle = styled.circle<BulletCircleProps>`
-  stroke: ${getColor('blueberryClassic')};
+  stroke: ${getColor('primary.500')};
   stroke-width: 2px;
-  fill: ${getColor('graphite5H')};
+  fill: ${getColor('neutral.0')};
 
   ${({ $isPending }) =>
     $isPending &&
     css`
-      stroke: ${getColor('graphiteB')};
+      stroke: ${getColor('neutral.600')};
     `}
   ${({ $isActive }) =>
     $isActive &&
     css`
-      fill: ${getColor('blueberryClassic')};
+      fill: ${getColor('primary.500')};
     `}
 `;
 
 const BulletText = styled.text`
-  fill: ${getColor('graphite5H')};
+  fill: ${getColor('neutral.0')};
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   font-weight: ${getFontWeight('bold')};
 `;
 
 const BulletCheck = styled.path`
-  fill: ${getColor('blueberryClassic')};
+  fill: ${getColor('primary.500')};
 `;
 
 const BULLET_VIEWBOX_SIZE = 20;

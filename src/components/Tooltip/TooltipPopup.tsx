@@ -62,7 +62,7 @@ const leftPlacement = ({ $space }) => css`
     top: 50%;
     right: -5px;
     border-width: 5px 0 5px 5px;
-    border-color: transparent transparent transparent ${getColor('graphite5H')};
+    border-color: transparent transparent transparent ${getColor('neutral.0')};
   }
 `;
 
@@ -96,8 +96,8 @@ const TooltipPopup = styled(Padbox).attrs(() => ({
   paddingSize: SpaceSizes.md,
 }))<TooltipPopupProps>`
   position: absolute;
-  background: ${getColor('graphite5H')};
-  color: ${getColor('graphite4B')};
+  background: ${getColor('neutral.0')};
+  color: ${getColor('neutral.900')};
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};

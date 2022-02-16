@@ -25,9 +25,9 @@ import { SpaceSizes } from '../../theme';
 import { getColor, getFontSize, pxToRem } from '../../utils';
 
 const colorVariants = {
-  [BannerVariants.info]: 'radiantBlueberry',
-  [BannerVariants.warn]: 'pumpkin',
-  [BannerVariants.error]: 'strawberry',
+  [BannerVariants.info]: 'info.500',
+  [BannerVariants.warn]: 'warning.500',
+  [BannerVariants.error]: 'error.500',
 };
 
 const iconVariants = {
@@ -43,9 +43,9 @@ const iconPxSizesVariants = {
 };
 
 const bgVariants = {
-  [BannerVariants.info]: 'blueberry0',
-  [BannerVariants.warn]: 'pumpkin0',
-  [BannerVariants.error]: 'strawberry0',
+  [BannerVariants.info]: 'info.50',
+  [BannerVariants.warn]: 'warning.50',
+  [BannerVariants.error]: 'error.50',
 };
 
 const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
@@ -80,7 +80,7 @@ const CloseButton = styled.button`
   flex-shrink: 0;
   cursor: pointer;
   background-color: transparent;
-  color: ${getColor('graphite3B')};
+  color: ${getColor('neutral.800')};
   width: ${pxToRem(16)};
   height: ${pxToRem(16)};
 `;

@@ -10,12 +10,12 @@ import { PillSizes, PillVariants } from './Pill.enums';
 import { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
 
 const PillSolid = css`
-  background-color: ${getColor('graphite2H')};
+  background-color: ${getColor('neutral.300')};
 `;
 
 const PillOutline = css`
-  background-color: ${getColor('graphite5H')};
-  box-shadow: inset 0 0 0 1px ${getColor('graphiteHB')};
+  background-color: ${getColor('neutral.0')};
+  box-shadow: inset 0 0 0 1px ${getColor('neutral.500')};
 `;
 
 const pillVariants = {
@@ -36,7 +36,7 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
 
       &:hover,
       &:focus {
-        background-color: ${getColor('blueberry0')};
+        background-color: ${getColor('primary.50')};
         outline: none;
       }
     `}

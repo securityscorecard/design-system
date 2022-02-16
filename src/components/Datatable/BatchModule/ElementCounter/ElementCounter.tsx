@@ -31,10 +31,10 @@ const SelectionButton = styled.button`
   height: 100%;
   padding: ${getSpace(SpaceSizes.xs)};
   font-size: ${getFontSize('lg')};
-  color: ${getColor('graphite3B')};
+  color: ${getColor('neutral.800')};
 
   &:hover {
-    color: ${getColor('blueberryClassic')};
+    color: ${getColor('primary.500')};
   }
 `;
 

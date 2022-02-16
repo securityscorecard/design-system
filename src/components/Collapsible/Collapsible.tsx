@@ -20,16 +20,16 @@ const Header = styled(Padbox)`
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px solid ${getColor('graphiteHB')};
+  border-top: 1px solid ${getColor('neutral.500')};
 `;
 
 const Container = styled.div<{ withBackground: boolean }>`
-  border: 1px solid ${getColor('graphiteHB')};
+  border: 1px solid ${getColor('neutral.500')};
   border-radius: ${getRadii('default')};
   ${({ withBackground }) =>
     withBackground &&
     css`
-      background: ${getColor('graphite4H')};
+      background: ${getColor('neutral.100')};
     `}
 `;
 

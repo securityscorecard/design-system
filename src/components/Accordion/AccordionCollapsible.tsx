@@ -21,19 +21,19 @@ const Header = styled(Padbox)`
   cursor: pointer;
 
   &:hover ${Text} {
-    color: ${getColor('radiantBlueberry')};
+    color: ${getColor('primary.400')};
   }
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px dashed ${getColor('graphiteHB')};
+  border-top: 1px dashed ${getColor('neutral.500')};
 `;
 
 const Container = styled.div<{ isOpen: boolean }>`
   ${({ isOpen }) =>
     isOpen &&
     css`
-      background: ${getColor('graphite5H')};
+      background: ${getColor('neutral.0')};
       box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
 
       &:not(:last-child) {

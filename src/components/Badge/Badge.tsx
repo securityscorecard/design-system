@@ -32,8 +32,8 @@ const BadgeElement = styled.span<BadgeElementProps>`
   ${({ size }) => badgeFontSizes[size]};
   font-weight: 600;
   text-align: center;
-  color: ${getColor('graphite4H')};
-  background-color: ${getColor('strawberry')};
+  color: ${getColor('neutral.0')};
+  background-color: ${getColor('grade.D')};
   box-sizing: content-box;
   line-height: 1;
   vertical-align: text-top;

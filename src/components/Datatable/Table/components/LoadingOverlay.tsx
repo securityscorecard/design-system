@@ -23,7 +23,7 @@ const LoadingOverlayContainer = styled.div`
 const LoadingIndicatorContainer = styled.div`
   > ${Padbox} {
     border-radius: ${getRadii('default')};
-    background: ${getColor('graphite5H')};
+    background: ${getColor('neutral.0')};
   }
 
   display: flex;
@@ -44,7 +44,7 @@ const LoadingText = styled.span`
 
 const LoadingBackground = styled.div`
   ${overlayStyles}
-  background-color: ${getColor('graphite5H')};
+  background-color: ${getColor('neutral.0')};
   opacity: 0.75;
 `;
 

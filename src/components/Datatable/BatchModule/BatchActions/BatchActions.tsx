@@ -69,7 +69,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
                 <Inline gap={SpaceSizes.xs}>
                   <span>{action.label}</span>
                   <Icon
-                    color={ColorTypes.graphite2B}
+                    color={ColorTypes.neutral700}
                     margin={{ left: 0.25 }}
                     name={SSCIconNames.caretDown}
                   />

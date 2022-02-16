@@ -15,12 +15,12 @@ import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
-  background: ${getColor('graphite5H')};
-  color: ${getColor('graphite4B')};
+  background: ${getColor('neutral.0')};
+  color: ${getColor('neutral.900')};
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  border: 1px solid ${getColor('graphiteB')};
+  border: 1px solid ${getColor('neutral.600')};
   border-radius: ${getRadii('default')};
 
   ${({ $isElevated }) =>

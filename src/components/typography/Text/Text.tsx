@@ -29,19 +29,19 @@ const inheritSize = css`
 `;
 
 const primaryVariant = css`
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
 `;
 const secondaryVariant = css`
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
 `;
 const contextVariant = css`
-  color: ${getColor('graphiteB')};
+  color: ${getColor('neutral.600')};
 `;
 const monospaceVariant = css`
   font-family: ${getFontFamily('mono')};
 `;
 const dangerVariant = css`
-  color: ${getColor('strawberry')};
+  color: ${getColor('error.500')};
 `;
 const inheritVariant = `
   color: inherit;

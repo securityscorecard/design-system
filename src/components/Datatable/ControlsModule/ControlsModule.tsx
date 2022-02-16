@@ -25,7 +25,7 @@ import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Inline, Padbox } from '../../layout';
 
 const FiltersContainer = styled(FlexContainer)`
-  background-color: ${getColor('graphite5H')};
+  background-color: ${getColor('neutral.0')};
 `;
 
 const resetActiveControls: (

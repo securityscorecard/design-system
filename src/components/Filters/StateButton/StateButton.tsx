@@ -24,7 +24,7 @@ const Popup = styled(FlexContainer)`
   visibility: hidden;
   z-index: ${getDepth('tooltip')};
   padding: ${pxToRem(8.5, 0, 8.5, 10)};
-  background: ${getColor('strawberry')};
+  background: ${getColor('error.500')};
   border-top-left-radius: ${getRadii('default')};
   border-bottom-left-radius: ${getRadii('default')};
   opacity: 0;
@@ -48,7 +48,7 @@ const RemoveButton = styled.button`
   cursor: ${({ disabled }) => !disabled && 'pointer'};
 
   &:hover {
-    background-color: ${({ disabled }) => !disabled && getColor('strawberry')};
+    background-color: ${({ disabled }) => !disabled && getColor('error.500')};
     border-top-right-radius: ${getRadii('default')};
     border-bottom-right-radius: ${getRadii('default')};
   }
@@ -60,7 +60,7 @@ const RemoveButton = styled.button`
 `;
 
 const LightText = styled(Text)`
-  color: ${getColor('graphite5H')};
+  color: ${getColor('neutral.0')};
   line-height: ${getLineHeight('md')};
   font-weight: ${getFontWeight('medium')};
 `;

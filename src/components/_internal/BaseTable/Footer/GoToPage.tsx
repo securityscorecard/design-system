@@ -33,7 +33,7 @@ const GoToPageLabel = styled.label`
   margin-right: ${pxToRem(16)};
   font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('medium')};
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
 `;
 
 const GoToPage: React.FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
