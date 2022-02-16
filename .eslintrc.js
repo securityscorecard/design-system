@@ -127,6 +127,18 @@ module.exports = {
     ],
     'no-nested-ternary': 'off',
     'no-unused-expressions': ['error', { allowTernary: true }],
+    'no-restricted-imports': [
+      'warn',
+      {
+        patterns: [
+          {
+            group: ['*/FlexContainer'],
+            message:
+              'FlexContainer is deprecated. Please use Layout primitives instead.',
+          },
+        ],
+      },
+    ],
   },
   overrides: [
     {
