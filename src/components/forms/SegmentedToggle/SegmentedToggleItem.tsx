@@ -55,7 +55,7 @@ const SegmentedToggleItem = forwardRef<
         {...props}
       />
       <BaseTabLabel
-        $color={ColorTypes.blueberryClassic}
+        $color={ColorTypes.primary500}
         $variant={BaseTabsEnums.BaseTabVariants.segmented}
         as="label"
         htmlFor={itemId}

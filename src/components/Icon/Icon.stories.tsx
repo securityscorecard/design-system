@@ -20,7 +20,7 @@ export default {
 export const sscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
 sscIcon.args = {
   name: SSCIconNames.wrench,
-  color: 'graphite4B',
+  color: 'neutral.900',
 };
 
 sscIcon.storyName = 'SecurityScorecard Icon';

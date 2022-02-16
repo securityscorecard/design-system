@@ -23,8 +23,8 @@ const StyledTh = styled.th`
   line-height: ${getLineHeight('md')};
   text-align: left;
   padding: ${pxToRem(12, 8)};
-  background-color: ${getColor('graphite3H')};
-  border-color: ${getColor('graphiteH')};
+  background-color: ${getColor('neutral.200')};
+  border-color: ${getColor('neutral.400')};
   border-style: solid;
   border-width: 1px 0 1px 1px;
 
@@ -33,7 +33,7 @@ const StyledTh = styled.th`
   ${({ sticky }) =>
     sticky === 'left' &&
     css`
-      border-right: 1px solid ${getColor('graphiteH')};
+      border-right: 1px solid ${getColor('neutral.400')};
 
       &:first-of-type + & {
         border-left: 0;

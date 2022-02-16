@@ -34,19 +34,19 @@ export const Arrow = styled.div`
   &::before {
     visibility: visible;
     content: '';
-    background: ${getColor('graphite5H')};
-    border-left: 1px solid ${getColor('graphiteB')};
-    border-top: 1px solid ${getColor('graphiteB')};
+    background: ${getColor('neutral.0')};
+    border-left: 1px solid ${getColor('neutral.600')};
+    border-top: 1px solid ${getColor('neutral.600')};
   }
 `;
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  border: 1px solid ${getColor('graphiteB')};
+  border: 1px solid ${getColor('neutral.600')};
   border-radius: ${getBorderRadius};
   ${({ $maxWidth }) => css`
     width: ${$maxWidth === 'auto' ? 'auto' : '100%'};
@@ -95,7 +95,7 @@ const PaneContent = styled(Padbox)`
   border-radius: ${getBorderRadius};
   position: relative;
   z-index: 1;
-  background: ${getColor('graphite5H')};
+  background: ${getColor('neutral.0')};
 `;
 
 const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(

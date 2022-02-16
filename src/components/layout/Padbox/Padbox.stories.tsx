@@ -28,7 +28,7 @@ export default {
 } as Meta;
 
 const Content = styled.div`
-  background-color: ${getColor('blueberry0')};
+  background-color: ${getColor('primary.50')};
 `;
 
 const PadboxTemplate: Story<PadboxProps> = (args) => (

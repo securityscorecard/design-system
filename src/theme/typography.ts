@@ -79,9 +79,9 @@ const createLinks = (themeColors: typeof colors): Links => ({
     decoration: 'none',
   },
   danger: {
-    color: themeColors.deprecated.cherry,
-    hoverColor: themeColors.deprecated.strawberry,
-    activeColor: themeColors.deprecated.pumpkin,
+    color: themeColors.error[500],
+    hoverColor: themeColors.error[600],
+    activeColor: themeColors.error[700],
     decoration: 'none',
   },
   secondary: {

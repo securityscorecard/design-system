@@ -27,7 +27,7 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
   align-items: center;
   width: ${pxToRem(24)};
   height: ${pxToRem(24)};
-  color: ${getColor('graphiteB')};
+  color: ${getColor('neutral.600')};
   font-size: ${getFontSize('lg')};
   border-radius: ${getBorderRadius};
   border: 0 none;
@@ -35,7 +35,7 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
   cursor: pointer;
 
   &:hover {
-    background: ${getColor('graphite3H')};
+    background: ${getColor('neutral.200')};
   }
 
   ${({ isActive }) =>
@@ -43,8 +43,8 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
     css`
       &,
       &:hover {
-        background: ${getColor('radiantBlueberry')};
-        color: ${getColor('graphite5H')};
+        background: ${getColor('primary.400')};
+        color: ${getColor('neutral.0')};
       }
     `};
 `;

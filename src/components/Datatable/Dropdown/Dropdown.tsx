@@ -33,14 +33,14 @@ export const DropdownLink = styled.button<DropdownLinkProps>`
   height: ${pxToRem(24)};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   cursor: pointer;
   background: transparent;
   border: 0 none;
   text-align: left;
 
   &:hover {
-    background: ${getColor('graphite3H')};
+    background: ${getColor('neutral.200')};
   }
 `;
 

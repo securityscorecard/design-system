@@ -9,7 +9,7 @@ import { Icon } from '../../../Icon';
 import { SortingIconProps } from './Head.types';
 
 const StyledIcon = styled(Icon).attrs((props) => ({
-  color: ColorTypes.graphite2B,
+  color: ColorTypes.neutral700,
   margin: { left: 0.3 },
   ...props,
 }))<{ $isActive?: boolean } & React.ComponentProps<typeof Icon>>`
@@ -28,7 +28,7 @@ const SortingIcon: React.FC<SortingIconProps> = React.memo(
       return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
     if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
     return (
-      <StyledIcon color={ColorTypes.graphiteHB} name={SSCIconNames.sort} />
+      <StyledIcon color={ColorTypes.neutral500} name={SSCIconNames.sort} />
     );
   },
 );

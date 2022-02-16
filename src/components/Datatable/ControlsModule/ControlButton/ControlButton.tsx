@@ -42,26 +42,26 @@ const Button = styled.button<StyledControlButtonProps>`
 
   &,
   &:not([href]):not([tabindex]) {
-    color: ${getColor('graphite3B')};
+    color: ${getColor('neutral.800')};
 
     &:hover,
     &.hover,
     &:focus {
-      color: ${getColor('graphite4B')};
+      color: ${getColor('neutral.900')};
     }
 
     ${({ $isActive }) =>
       $isActive &&
       css`
-        background-color: ${getColor('graphite5H')};
-        color: ${getColor('blueberryClassic')};
-        border-color: ${getColor('blueberryClassic')};
+        background-color: ${getColor('neutral.0')};
+        color: ${getColor('primary.500')};
+        border-color: ${getColor('primary.500')};
 
         &:hover,
         &.hover,
         &:focus {
-          color: ${getColor('radiantBlueberry')};
-          border-color: ${getColor('radiantBlueberry')};
+          color: ${getColor('primary.400')};
+          border-color: ${getColor('primary.400')};
         }
       `}
 
@@ -69,14 +69,14 @@ const Button = styled.button<StyledControlButtonProps>`
       $isApplied &&
       css`
         ${ButtonIcon} {
-          color: ${getColor('blueberryClassic')};
+          color: ${getColor('primary.500')};
         }
 
         &:hover,
         &.hover,
         &:focus {
           ${ButtonIcon} {
-            color: ${getColor('radiantBlueberry')};
+            color: ${getColor('primary.400')};
           }
         }
       `}

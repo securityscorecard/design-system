@@ -39,13 +39,13 @@ const useIsMountRender = (): boolean => {
 };
 
 const NoDataContainer = styled(Padbox)`
-  background: ${getColor('graphite5H')};
+  background: ${getColor('neutral.0')};
 `;
 
 const TableWrapper = styled.div`
-  border: 1px solid ${getColor('graphiteH')};
+  border: 1px solid ${getColor('neutral.400')};
   border-top-width: 0;
-  background: ${getColor('graphite3H')};
+  background: ${getColor('neutral.200')};
   border-radius: ${getBorderRadius};
   overflow: hidden;
 `;

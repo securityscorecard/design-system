@@ -7,7 +7,7 @@ import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Input } from '../Input';
 import { PasswordProps } from './Password.types';
-import { SpaceSizes } from '../../../theme';
+import { ColorTypes, SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 
 const PasswordWrapper = styled.div`
@@ -65,7 +65,7 @@ const Password: React.FC<PasswordProps> = ({
         onClick={toggleVisibility}
       >
         <Icon
-          color="graphite2B"
+          color={ColorTypes.neutral700}
           name={isPasswordRevealed ? SSCIconNames.eyeSlash : SSCIconNames.eye}
           type={IconTypes.ssc}
         />
