@@ -21,7 +21,7 @@ For unit testing we are using Jest along with [React Testing Library](https://te
 
 For visual regression we are using reg-cli and storycap. These test are typically run during CI/CD pipeline.
 If this `visual-tests` step fails due to intended changes, you have to update snapshots manually, by
-running `yarn test:storybook:visual:update` and commit updated snapshots.    
+running `yarn test:storybook:visual:update` and commit updated snapshots.
 
 ## Linting
 
@@ -32,6 +32,16 @@ Linting (eslint and stylelint) is runned in a pre-commit hook as well as in CI.
 `yarn lint` - check all files
 `yarn lint:fix` - check and try to fix errors in all files
 `yarn lint:css` - check styled-components syntax in all files
+
+## Betterer (long term goals)
+
+We are using project called [Betterer](https://phenomnomnominal.github.io/betterer/) for maintaining and continual improvement of code quality.
+This tool runs test to check out long term goals, like components deprecation, code migration, etc. We are running these checks in a pre-commit hook
+as well as in CI.
+
+### Scripts
+
+`yarn betterer` - check codebase
 
 ## Typings
 

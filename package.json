@@ -26,7 +26,10 @@
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "lint:fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
     "lint:css": "stylelint 'src/**/*.{js,ts,tsx}'",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "betterer": "betterer -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
+    "betterer:precommit": "betterer precommit -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
+    "betterer:ci": "betterer ci -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict"
   },
   "peerDependencies": {
     "react": "^16.8.0",
@@ -68,6 +71,8 @@
     "use-deep-compare": "^1.1.0"
   },
   "devDependencies": {
+    "@betterer/cli": "^5.1.6",
+    "@betterer/eslint": "^5.1.6",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@geometricpanda/storybook-addon-badges": "^0.0.3",
@@ -154,7 +159,9 @@
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.1",
     "set-value": "4.1.0",
     "prismjs": "1.25.0",
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "5.0.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "repository": {
     "type": "git",
@@ -168,7 +175,8 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "eslint --fix",
-      "stylelint 'src/**/*.{js,ts,tsx}"
+      "stylelint 'src/**/*.{js,ts,tsx}",
+      "yarn run betterer:precommit"
     ]
   },
   "husky": {
