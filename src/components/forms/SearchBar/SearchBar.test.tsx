@@ -85,14 +85,11 @@ describe('SearchBar', () => {
 
     fireEvent.change(searchInput, { target: { value: 'query' } });
 
-    await waitFor(() => screen.findByText('Suggestion One'));
-    await waitFor(() =>
-      expect(screen.findByText('Suggestion One')).toBeTruthy(),
-    );
-
-    await waitFor(() => screen.findByText('Suggestion Two'));
-    await waitFor(() =>
-      expect(screen.findByText('Suggestion Two')).toBeTruthy(),
-    );
+    expect(
+      screen.getByRole('button', { name: /suggestion 1/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /suggestion 2/ }),
+    ).toBeInTheDocument();
   });
 });
