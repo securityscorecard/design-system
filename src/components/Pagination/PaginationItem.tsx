@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import {
-  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../utils';
 import { FlexContainer } from '../FlexContainer';
@@ -26,7 +26,7 @@ const StyledPaginationComponent = styled.button<{
   margin: ${pxToRem(0, 4)};
   background: none;
   border: 1px solid transparent;
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('lg')};
   color: ${getColor('neutral.900')};

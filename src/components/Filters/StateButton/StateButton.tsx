@@ -8,12 +8,12 @@ import { Text } from '../../typography/Text';
 import { Spinner } from '../../Spinner';
 import { FlexContainer } from '../../FlexContainer';
 import {
-  getBorderRadius,
   getColor,
   getDepth,
   getFontFamily,
   getFontWeight,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../../utils';
 import { StateButtonProps } from './StateButton.types';
@@ -25,8 +25,8 @@ const Popup = styled(FlexContainer)`
   z-index: ${getDepth('tooltip')};
   padding: ${pxToRem(8.5, 0, 8.5, 10)};
   background: ${getColor('error.500')};
-  border-top-left-radius: ${getBorderRadius};
-  border-bottom-left-radius: ${getBorderRadius};
+  border-top-left-radius: ${getRadii('default')};
+  border-bottom-left-radius: ${getRadii('default')};
   opacity: 0;
   right: calc(100%);
   top: 50%;
@@ -49,8 +49,8 @@ const RemoveButton = styled.button`
 
   &:hover {
     background-color: ${({ disabled }) => !disabled && getColor('error.500')};
-    border-top-right-radius: ${getBorderRadius};
-    border-bottom-right-radius: ${getBorderRadius};
+    border-top-right-radius: ${getRadii('default')};
+    border-bottom-right-radius: ${getRadii('default')};
   }
 
   &:hover ${Popup} {

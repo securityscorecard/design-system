@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { Padbox } from '../../layout';
-import { getBorderRadius, getColor } from '../../../utils';
+import { getColor, getRadii } from '../../../utils';
 import { Variants } from './BaseTabLabel.types';
 import { BaseTabVariants } from './BaseTabs.enums';
 
@@ -15,6 +15,6 @@ export const BaseTabsWrapper = styled(Padbox)<{
     css`
       background: ${getColor('neutral.0')};
       box-shadow: inset 0 0 0 1px ${getColor('neutral.600')};
-      border-radius: ${getBorderRadius};
+      border-radius: ${getRadii('default')};
     `};
 `;

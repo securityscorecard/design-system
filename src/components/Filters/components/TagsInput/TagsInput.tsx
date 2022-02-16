@@ -18,10 +18,10 @@ import Tag from './Tag';
 import { Error } from '../../../forms/Message';
 import { FlexContainer } from '../../../FlexContainer';
 import {
-  getBorderRadius,
   getFontSize,
   getFormStyle,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../../../utils';
 import { validatePattern } from '../../helpers';
@@ -45,7 +45,7 @@ const Container = styled(FlexContainer)<TagsContainerProps>`
         ? 'focusBorderColor'
         : 'borderColor',
     )};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   color: ${getFormStyle('color')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};

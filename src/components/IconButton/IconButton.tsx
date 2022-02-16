@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { getFontSize, pxToRem } from '../../utils';
+import { getFontSize, getRadii, pxToRem } from '../../utils';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Icon } from '../Icon';
@@ -12,7 +12,7 @@ import { SSCIcons, Types } from '../Icon/Icon.types';
 import { IconButtonProps } from './IconButton.types';
 
 const StyledIconButton = styled(Button)`
-  border-radius: 100%;
+  border-radius: ${getRadii('circle')};
   min-width: 0;
   width: ${pxToRem(30)};
   height: ${pxToRem(30)};

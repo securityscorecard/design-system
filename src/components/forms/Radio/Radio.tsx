@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { getFormStyle, pxToRem } from '../../../utils';
+import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';
@@ -42,7 +42,7 @@ const RadioLabel = styled(Label)<
     display: inline-block;
     top: 0;
     left: 0;
-    border-radius: 100%;
+    border-radius: ${getRadii('circle')};
   }
 
   &::before {

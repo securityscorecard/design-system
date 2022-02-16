@@ -13,10 +13,10 @@ import { Padbox } from '../layout';
 import { H3 } from '../typography';
 import {
   createPadding,
-  getBorderRadius,
   getColor,
   getDepth,
   getFontSize,
+  getRadii,
   pxToRem,
 } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
@@ -51,7 +51,7 @@ const BaseModal = styled.div<{ $maxWidth: number }>`
   max-height: 66vh;
   width: 100%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   background-color: ${getColor('neutral.0')};
 `;
 

@@ -4,11 +4,11 @@ import styled, { css } from 'styled-components';
 import { noop } from 'ramda-adjunct';
 
 import {
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getLineHeight,
+  getRadii,
   getSpace,
   pxToRem,
 } from '../../utils';
@@ -46,8 +46,8 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
+  border-radius: ${getRadii('default')};
   border: 1px solid ${getColor('neutral.600')};
-  border-radius: ${getBorderRadius};
   ${({ $maxWidth }) => css`
     width: ${$maxWidth === 'auto' ? 'auto' : '100%'};
     max-width: ${$maxWidth === 'auto' ? 'auto' : pxToRem($maxWidth)};
@@ -92,7 +92,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
 `;
 
 const PaneContent = styled(Padbox)`
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   position: relative;
   z-index: 1;
   background: ${getColor('neutral.0')};

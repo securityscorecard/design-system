@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
-import { getBorderRadius, getColor } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { PillSizes, PillVariants } from './Pill.enums';
@@ -26,7 +26,7 @@ const pillVariants = {
 const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
   display: inline-block;
   min-width: 0;
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   ${({ $variant }) => pillVariants[$variant]};
 
   ${({ $isClickable }) =>

@@ -6,7 +6,7 @@ import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
 import { isUndefined, noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
-import { getBorderRadius, getColor } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { FlexContainer } from '../FlexContainer';
 import { FieldPropTypes, FilterStatePropType } from '../Filters/Filters.types';
 import { useDataFetch } from './hooks/useDataFetch';
@@ -24,7 +24,7 @@ import { useColumnsControls } from './hooks/useColumnsControls';
 const StyledDatatable = styled(FlexContainer)`
   position: relative;
   border: 1px solid ${getColor('neutral.400')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   background: ${getColor('neutral.200')};
 `;
 

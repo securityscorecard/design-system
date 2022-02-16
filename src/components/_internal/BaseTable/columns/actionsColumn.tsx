@@ -6,12 +6,7 @@ import { CellProps } from 'react-table';
 import { FlexContainer } from '../../../FlexContainer';
 /* FIXME: we need to fix this with use of DS dropdowns */
 import { Dropdown } from '../../../Datatable/Dropdown';
-import {
-  getBorderRadius,
-  getColor,
-  getFontSize,
-  pxToRem,
-} from '../../../../utils';
+import { getColor, getFontSize, getRadii, pxToRem } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
 import { ACTIONS_COLUMN_ID, CellTypes } from '../renderers/renderers.enums';
 
@@ -29,7 +24,7 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
   height: ${pxToRem(24)};
   color: ${getColor('neutral.600')};
   font-size: ${getFontSize('lg')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   border: 0 none;
   background: transparent;
   cursor: pointer;

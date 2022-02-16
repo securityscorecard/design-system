@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import {
   createPadding,
-  getBorderRadius,
   getFontFamily,
   getFontSize,
   getFormStyle,
+  getRadii,
 } from '../../../utils';
 import { InputProps } from './Input.types';
 import { SpaceSizes } from '../../../theme';
@@ -26,7 +26,7 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
     })};
   background: ${getFormStyle('bgColor')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   color: ${getFormStyle('color')};
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};

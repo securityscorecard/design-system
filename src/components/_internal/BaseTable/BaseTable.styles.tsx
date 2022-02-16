@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { identity, memoizeWith, pipe } from 'ramda';
 
 import {
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getFontWeight,
   getFormStyle,
   getLinkStyle,
+  getRadii,
   pxToRem,
 } from '../../../utils';
 
@@ -124,7 +124,7 @@ export const StyledBaseTable = styled.table`
         align-items: center;
         padding: ${pxToRem(0, 8)};
         background: ${getColor('neutral.200')};
-        border-radius: ${getBorderRadius};
+        border-radius: ${getRadii('default')};
         white-space: nowrap;
         margin: ${pxToRem(2)};
       }
@@ -175,7 +175,7 @@ export const StyledBaseTable = styled.table`
       width: ${getRemToggleSize};
       border: ${getFormStyle('borderWidth')} solid
         ${getFormStyle('borderColor')};
-      border-radius: ${getBorderRadius};
+      border-radius: ${getRadii('default')};
       background: ${getColor('neutral.0')};
       padding: ${pxToRem(3)};
 

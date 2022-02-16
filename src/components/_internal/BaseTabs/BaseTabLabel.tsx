@@ -3,12 +3,12 @@ import { lighten } from 'polished';
 import { __, includes, pipe, subtract } from 'ramda';
 
 import {
-  getBorderRadius,
   getButtonHeight,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   getSpace,
   pxToRem,
 } from '../../../utils';
@@ -115,7 +115,7 @@ const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
   border: 1px solid transparent;
   ${({ $isSelected }) => $isSelected && segmentedTabSelected};
 
-  border-radius: calc(${getBorderRadius} / 2);
+  border-radius: ${getRadii('half')};
   color: ${getColor('neutral.900')};
 
   &:hover {
