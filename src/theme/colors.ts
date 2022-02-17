@@ -50,6 +50,13 @@ export const colors = {
     D: '#f1431c',
     F: '#b40000',
   },
+  severity: {
+    informational: '#0275D8',
+    positive: '#49A25A',
+    low: '#E4BE00',
+    medium: '#E5883C',
+    high: '#B21F24',
+  },
   deprecated: {
     kiwi: '#4aba00',
     banana: '#e5bd00',

@@ -62,6 +62,11 @@ export const ColorTypes = {
   graphite3H: 'neutral.200',
   graphite4H: 'neutral.100',
   graphite5H: 'neutral.0',
+  severityInformational: 'serverity.informational',
+  severityPositive: 'serverity.positive',
+  severityLow: 'serverity.low',
+  severityMedium: 'serverity.medium',
+  severityHigh: 'serverity.high',
 } as const;
 
 export const DeprecatedColorTypes = [
