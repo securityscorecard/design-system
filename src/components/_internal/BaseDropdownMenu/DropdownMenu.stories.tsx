@@ -2,14 +2,14 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import Dropdown from './Dropdown';
-import { subactionsMock } from '../mocks/actions';
-import { DropdownProps } from './Dropdown.types';
+import DropdownMenu from './DropdownMenu';
+import { subactionsMock } from '../../Datatable/mocks/actions';
+import { DropdownMenuProps } from './DropdownMenu.types';
 import { FlexContainer } from '../../FlexContainer';
 
 export default {
-  title: 'components/Datatable/internalComponents/Dropdown',
-  component: Dropdown,
+  title: 'components/Datatable/internalComponents/DropdownMenu',
+  component: DropdownMenu,
   parameters: {
     docs: { disable: true },
     previewTabs: { 'storybook/docs/panel': { hidden: true } },
@@ -52,18 +52,18 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<DropdownProps> = (args) => (
+export const Default: Story<DropdownMenuProps> = (args) => (
   <FlexContainer justifyContent="center">
-    <Dropdown {...args}>Dropdown handler</Dropdown>
+    <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
   </FlexContainer>
 );
 Default.args = {
   actions: subactionsMock,
 };
 
-export const OpenedOnInit: Story<DropdownProps> = (args) => (
+export const OpenedOnInit: Story<DropdownMenuProps> = (args) => (
   <FlexContainer justifyContent="center">
-    <Dropdown {...args}>Dropdown handler</Dropdown>
+    <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
   </FlexContainer>
 );
 OpenedOnInit.args = {
@@ -71,9 +71,9 @@ OpenedOnInit.args = {
   defaultIsOpen: true,
 };
 
-export const WithCustomWidth: Story<DropdownProps> = (args) => (
+export const WithCustomWidth: Story<DropdownMenuProps> = (args) => (
   <FlexContainer justifyContent="center">
-    <Dropdown {...args}>Dropdown handler</Dropdown>
+    <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
   </FlexContainer>
 );
 WithCustomWidth.args = {
@@ -81,22 +81,22 @@ WithCustomWidth.args = {
   paneWidth: 300,
 };
 
-export const Placements: Story<DropdownProps> = (args) => (
+export const Placements: Story<DropdownMenuProps> = (args) => (
   <>
     <FlexContainer justifyContent="center" margin={{ bottom: 5 }}>
-      <Dropdown {...args} placement="bottom">
+      <DropdownMenu {...args} placement="bottom">
         Bottom
-      </Dropdown>
+      </DropdownMenu>
     </FlexContainer>
     <FlexContainer justifyContent="flex-start" margin={{ bottom: 5 }}>
-      <Dropdown {...args} placement="bottom-start">
+      <DropdownMenu {...args} placement="bottom-start">
         Left
-      </Dropdown>
+      </DropdownMenu>
     </FlexContainer>
     <FlexContainer justifyContent="flex-end" margin={{ bottom: 5 }}>
-      <Dropdown {...args} placement="bottom-end">
+      <DropdownMenu {...args} placement="bottom-end">
         Right
-      </Dropdown>
+      </DropdownMenu>
     </FlexContainer>
   </>
 );
