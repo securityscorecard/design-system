@@ -3,19 +3,19 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
-import { getBorderRadius, getColor } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { PillSizes, PillVariants } from './Pill.enums';
 import { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
 
 const PillSolid = css`
-  background-color: ${getColor('graphite2H')};
+  background-color: ${getColor('neutral.300')};
 `;
 
 const PillOutline = css`
-  background-color: ${getColor('graphite5H')};
-  box-shadow: inset 0 0 0 1px ${getColor('graphiteHB')};
+  background-color: ${getColor('neutral.0')};
+  box-shadow: inset 0 0 0 1px ${getColor('neutral.500')};
 `;
 
 const pillVariants = {
@@ -26,7 +26,7 @@ const pillVariants = {
 const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
   display: inline-block;
   min-width: 0;
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   ${({ $variant }) => pillVariants[$variant]};
 
   ${({ $isClickable }) =>
@@ -36,7 +36,7 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
 
       &:hover,
       &:focus {
-        background-color: ${getColor('blueberry0')};
+        background-color: ${getColor('primary.50')};
         outline: none;
       }
     `}

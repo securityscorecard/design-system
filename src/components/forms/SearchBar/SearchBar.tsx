@@ -12,7 +12,7 @@ import { SearchBarPropType, SearchBarProps } from './SearchBar.types';
 import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import { Error } from '../Message';
 import { validatePattern } from '../../Filters/helpers';
-import { SpaceSizes } from '../../../theme';
+import { ColorTypes, SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { InputProps } from '../Input/Input.types';
 
@@ -174,7 +174,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onClick={clearSearch}
         >
           <Icon
-            color="graphite2B"
+            color={ColorTypes.neutral700}
             name={SSCIconNames.times}
             type={IconTypes.ssc}
           />
@@ -182,7 +182,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       ) : (
         <SearchBarIcon $position="start" aria-label="Search">
           <Icon
-            color="graphite2B"
+            color={ColorTypes.neutral700}
             name={SSCIconNames.search}
             type={IconTypes.ssc}
           />

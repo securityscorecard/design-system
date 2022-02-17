@@ -18,6 +18,7 @@ export interface PadboxProps {
    * For more information see [Inseting section](/design-system/alpha/?path=/docs/theme-space--page#inseting)
    */
   paddingSize?: SpaceSize;
+  [key: string]: unknown;
 }
 
 const Padbox = styled.div<PadboxProps>`

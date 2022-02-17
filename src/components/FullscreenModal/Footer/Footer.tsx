@@ -15,11 +15,11 @@ const BaseStickyFooter = styled.footer`
   left: 0;
   width: 100%;
   padding: ${pxToRem(10, 0)};
-  background-color: ${getColor('graphite5H')};
-  border-top: 1px solid ${getColor('graphiteHB')};
+  background-color: ${getColor('neutral.0')};
+  border-top: 1px solid ${getColor('neutral.500')};
 `;
 const BaseFooter = styled.footer`
-  border-top: 1px solid ${getColor('graphiteHB')};
+  border-top: 1px solid ${getColor('neutral.500')};
   padding-top: ${pxToRem(24)};
   margin-top: ${pxToRem(40)};
 `;

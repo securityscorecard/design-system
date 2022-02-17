@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getBorderRadius, getColor, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Strong, Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
@@ -20,16 +20,16 @@ const Header = styled(Padbox)`
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px solid ${getColor('graphiteHB')};
+  border-top: 1px solid ${getColor('neutral.500')};
 `;
 
 const Container = styled.div<{ withBackground: boolean }>`
-  border: 1px solid ${getColor('graphiteHB')};
-  border-radius: ${getBorderRadius};
+  border: 1px solid ${getColor('neutral.500')};
+  border-radius: ${getRadii('default')};
   ${({ withBackground }) =>
     withBackground &&
     css`
-      background: ${getColor('graphite4H')};
+      background: ${getColor('neutral.100')};
     `}
 `;
 

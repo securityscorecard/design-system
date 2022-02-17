@@ -6,9 +6,9 @@ import { isNonEmptyString } from 'ramda-adjunct';
 import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
 import {
-  getBorderRadius,
   getFontSize,
   getFormStyle,
+  getRadii,
   pxToRem,
 } from '../../../../utils';
 import { validatePattern } from '../../helpers';
@@ -26,7 +26,7 @@ export const StyledInput = styled.input<InputProps>`
   padding: ${pxToRem(4, 16)};
   background: ${getFormStyle('bgColor')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   color: ${getFormStyle('color')};
   font-size: ${getFontSize('md')};
   line-height: ${getFontSize('md')};

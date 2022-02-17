@@ -7,19 +7,19 @@ import { FlexContainer } from '../../../FlexContainer';
 import { ColorTypes } from '../../../../theme/colors.enums';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import {
-  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../../../utils';
 import { TagsProps } from './Tag.types';
 
 const Container = styled(FlexContainer)`
-  background: ${getColor('graphite3H')};
-  border-radius: ${getBorderRadius};
-  color: ${getColor('graphite4B')};
+  background: ${getColor('neutral.200')};
+  border-radius: ${getRadii('default')};
+  color: ${getColor('neutral.900')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
   list-style: none;
@@ -42,7 +42,7 @@ const Tag: React.FC<TagsProps> = ({ value, onClose }) => (
     {value}{' '}
     <RemoveButton type="button" onClick={onClose}>
       <Icon
-        color={ColorTypes.graphite2B}
+        color={ColorTypes.neutral700}
         margin={{ left: 0.4 }}
         name={SSCIconNames.times}
       />

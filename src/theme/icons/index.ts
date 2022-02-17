@@ -37,3 +37,4 @@ export { ban } from './ban';
 export { lock } from './lock';
 export { checkCircleSolid } from './checkCircleSolid';
 export { errorSolid } from './errorSolid';
+export { ellipsisV } from './ellipsisV';

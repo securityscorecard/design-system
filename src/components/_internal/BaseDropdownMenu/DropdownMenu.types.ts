@@ -18,11 +18,11 @@ export const ControlDropdownPlacements = pick([
   'bottom-end',
 ])(DropdownPlacements);
 
-export interface DropdownProps {
-  actions: ActionKinds<string[]>[];
+export interface DropdownMenuProps {
+  actions: ActionKinds<React.MouseEvent[]>[];
   children: React.ReactNode | ((isActive: boolean) => JSX.Element);
   defaultIsOpen?: boolean;
-  paneWidth?: number;
+  paneWidth?: 'auto' | number;
   className?: string;
   placement?: Placements;
 }

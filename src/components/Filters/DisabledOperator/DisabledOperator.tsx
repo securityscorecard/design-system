@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { Text } from '../../typography';
 import { TextSizes } from '../../typography/Text/Text.enums';
 import { FlexContainer } from '../../FlexContainer';
-import { getBorderRadius, getColor, pxToRem } from '../../../utils';
+import { getColor, getRadii, pxToRem } from '../../../utils';
 
 const Container = styled(FlexContainer)`
-  background: ${getColor('graphite3H')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
+  background: ${getColor('neutral.200')};
   height: ${pxToRem(32)};
   padding: ${pxToRem(8, 16)};
   text-transform: capitalize;

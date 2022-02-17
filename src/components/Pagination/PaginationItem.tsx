@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import {
-  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../utils';
 import { FlexContainer } from '../FlexContainer';
@@ -26,10 +26,10 @@ const StyledPaginationComponent = styled.button<{
   margin: ${pxToRem(0, 4)};
   background: none;
   border: 1px solid transparent;
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('lg')};
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   cursor: pointer;
 
   &:first-of-type {
@@ -42,7 +42,7 @@ const StyledPaginationComponent = styled.button<{
     outline: none;
   }
   &:disabled {
-    color: ${getColor('graphiteB')};
+    color: ${getColor('neutral.600')};
     cursor: default;
   }
 
@@ -55,16 +55,16 @@ const StyledPaginationComponent = styled.button<{
   ${({ $isCurrent }) =>
     $isCurrent
       ? css`
-          border-color: ${getColor('graphiteHB')};
-          background-color: ${getColor('graphite2H')};
+          border-color: ${getColor('neutral.500')};
+          background-color: ${getColor('neutral.300')};
           font-size: ${getFontSize('lg')};
           font-weight: ${getFontWeight('bold')};
           cursor: default;
         `
       : css`
           &:hover {
-            border-color: ${getColor('graphiteHB')};
-            background-color: ${getColor('graphite5H')};
+            border-color: ${getColor('neutral.500')};
+            background-color: ${getColor('neutral.0')};
           }
         `};
 `;
@@ -114,6 +114,6 @@ export const PaginationItemElipsis = styled(FlexContainer).attrs(() => ({
   height: ${pxToRem(32)};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('lg')};
-  color: ${getColor('graphiteB')};
+  color: ${getColor('neutral.600')};
   margin: ${pxToRem(0, 4)};
 `;

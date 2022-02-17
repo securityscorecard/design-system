@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { identity, memoizeWith, pipe } from 'ramda';
 
 import {
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getFontWeight,
   getFormStyle,
   getLinkStyle,
+  getRadii,
   pxToRem,
 } from '../../../utils';
 
@@ -24,12 +24,12 @@ export const BaseTableContainer = styled.div`
   overflow-x: auto;
 
   &::-webkit-scrollbar {
-    border-bottom: 1px solid ${getColor('graphiteH')};
+    border-bottom: 1px solid ${getColor('neutral.400')};
     appearance: none;
     height: ${pxToRem(12)};
   }
   &::-webkit-scrollbar-thumb {
-    background: content-box ${getColor('graphiteHB')};
+    background: content-box ${getColor('neutral.500')};
   }
 `;
 
@@ -39,7 +39,7 @@ export const StyledBaseTable = styled.table`
 
   .ds-table-row.is-selected {
     .ds-table-cell {
-      background: ${getColor('blueberry0')};
+      background: ${getColor('primary.50')};
     }
   }
 
@@ -50,8 +50,8 @@ export const StyledBaseTable = styled.table`
     font-size: ${getFontSize('md')};
     font-weight: ${getFontWeight('normal')};
     line-height: ${pxToRem(24)};
-    color: ${getColor('graphite4B')};
-    background: ${getColor('graphite5H')};
+    color: ${getColor('neutral.900')};
+    background: ${getColor('neutral.0')};
     padding: ${pxToRem(12, 8)};
 
     &:focus {
@@ -93,7 +93,7 @@ export const StyledBaseTable = styled.table`
 
       &.is-discrete,
       &.is-discrete:not([href]):not([tabindex]) {
-        color: ${getColor('graphite4B')};
+        color: ${getColor('neutral.900')};
       }
 
       &:hover,
@@ -123,15 +123,15 @@ export const StyledBaseTable = styled.table`
       .ds-multivalue-pill {
         align-items: center;
         padding: ${pxToRem(0, 8)};
-        background: ${getColor('graphite3H')};
-        border-radius: ${getBorderRadius};
+        background: ${getColor('neutral.200')};
+        border-radius: ${getRadii('default')};
         white-space: nowrap;
         margin: ${pxToRem(2)};
       }
     }
 
     .ds-table-cell-null {
-      color: ${getColor('graphite2B')};
+      color: ${getColor('neutral.700')};
     }
   }
 
@@ -175,8 +175,8 @@ export const StyledBaseTable = styled.table`
       width: ${getRemToggleSize};
       border: ${getFormStyle('borderWidth')} solid
         ${getFormStyle('borderColor')};
-      border-radius: ${getBorderRadius};
-      background: ${getColor('graphite5H')};
+      border-radius: ${getRadii('default')};
+      background: ${getColor('neutral.0')};
       padding: ${pxToRem(3)};
 
       .ds-table-checkbox-icon {
@@ -201,7 +201,7 @@ export const StyledBaseTable = styled.table`
   &.has-exclusive-selection .ds-table-checkbox {
     .ds-table-checkbox-input {
       &:checked + .ds-table-checkbox-mark {
-        background: ${getColor('graphite5H')};
+        background: ${getColor('neutral.0')};
         border-color: ${getFormStyle('borderColor')};
 
         .ds-table-checkbox-icon {

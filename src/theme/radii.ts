@@ -1,4 +1,11 @@
-// TODO: extract other border radii used in DS (round, pill...)
-export const createRadii = (): { default: string } => ({
+export const createRadii = (): {
+  default: string;
+  half: string;
+  circle: string;
+  round: string;
+} => ({
   default: '4px',
+  half: '2px',
+  circle: '100%',
+  round: '50em',
 });

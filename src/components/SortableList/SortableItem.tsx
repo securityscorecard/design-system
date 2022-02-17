@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import { getBorderRadius, getColor, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { Text } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { SortableItemProps } from './SortableList.types';
@@ -12,9 +12,9 @@ import { SpaceSizes } from '../../theme';
 import { Inline, Padbox } from '../layout';
 
 const StyledSortableItem = styled(Padbox)`
-  background: ${getColor('graphite5H')};
-  border: 1px solid ${getColor('graphiteHB')};
-  border-radius: ${getBorderRadius};
+  background: ${getColor('neutral.0')};
+  border: 1px solid ${getColor('neutral.500')};
+  border-radius: ${getRadii('default')};
   cursor: grab;
 `;
 
@@ -23,7 +23,7 @@ const IconWrapper = styled(Padbox)`
   align-items: center;
   justify-content: center;
   width: ${pxToRem(24)};
-  color: ${getColor('graphiteHB')};
+  color: ${getColor('neutral.500')};
 `;
 
 const SortableItem: React.FC<SortableItemProps> = ({ label, id }) => {

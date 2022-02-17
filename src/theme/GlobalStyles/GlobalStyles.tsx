@@ -47,12 +47,12 @@ export default createGlobalStyle`
     display: none;
   }
   body {
-    background: ${getColor('graphite5H')};
+    background: ${getColor('neutral.0')};
     font-family: ${getFontFamily('base')};
     font-weight: ${getFontWeight('regular')};
     font-size: ${pxToRem(BASE_FONT_SIZE)};
     line-height: ${pxToRem(BASE_LINE_HEIGHT)};
-    color: ${getColor('graphite4B')};
+    color: ${getColor('neutral.900')};
   }
   ol, ul {
     list-style: none;

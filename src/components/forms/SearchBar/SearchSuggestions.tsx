@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { isNotNull } from 'ramda-adjunct';
 
 import {
-  getBorderRadius,
   getColor,
   getDepth,
   getFontSize,
+  getRadii,
   pxToRem,
 } from '../../../utils';
 import { useOuterClick } from '../../../hooks/useOuterCallback';
@@ -21,9 +21,9 @@ const SearchSuggestionsPane = styled.div`
   top: calc(100% + 5px);
   left: 50%;
   transform: translateX(-50%);
-  border: 1px solid ${getColor('graphiteB')};
-  border-radius: ${getBorderRadius};
-  background-color: ${getColor('graphite5H')};
+  border: 1px solid ${getColor('neutral.600')};
+  border-radius: ${getRadii('default')};
+  background-color: ${getColor('neutral.0')};
   padding: ${pxToRem(8, 0)};
   z-index: ${getDepth('dropdown')};
   min-width: 100%;
@@ -42,14 +42,14 @@ const SearchSuggestionsLink = styled.button`
   height: ${pxToRem(24)};
   font-size: ${getFontSize('md')};
   line-height: ${pxToRem('md')};
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   cursor: pointer;
   background: transparent;
   border: 0 none;
   text-align: left;
 
   &:hover {
-    background: ${getColor('graphite3H')};
+    background: ${getColor('neutral.200')};
   }
 `;
 

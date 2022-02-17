@@ -23,11 +23,10 @@ import { SpaceSizes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 
 const colorVariants = {
-  // FIXME replace by semantic color success 500
-  [SemanticModalVariants.success]: '#358500',
-  [SemanticModalVariants.warn]: 'pumpkin',
-  [SemanticModalVariants.error]: 'strawberry',
-  [SemanticModalVariants.ban]: 'strawberry',
+  [SemanticModalVariants.success]: 'success.500',
+  [SemanticModalVariants.warn]: 'warning.500',
+  [SemanticModalVariants.error]: 'error.500',
+  [SemanticModalVariants.ban]: 'error.500',
 };
 
 const iconVariants = {
@@ -38,10 +37,7 @@ const iconVariants = {
 };
 
 const StyledIcon = styled(Icon)<{ $variant?: SemanticModalProps['variant'] }>`
-  color: ${({ $variant }) =>
-    $variant === SemanticModalVariants.success
-      ? colorVariants[$variant]
-      : getColor(colorVariants[$variant])};
+  color: ${({ $variant }) => getColor(colorVariants[$variant])};
   font-size: ${pxToRem(48)};
 `;
 

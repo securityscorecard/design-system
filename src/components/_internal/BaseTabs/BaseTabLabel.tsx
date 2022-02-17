@@ -3,12 +3,12 @@ import { lighten } from 'polished';
 import { __, includes, pipe, subtract } from 'ramda';
 
 import {
-  getBorderRadius,
   getButtonHeight,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getRadii,
   getSpace,
   pxToRem,
 } from '../../../utils';
@@ -79,7 +79,7 @@ const underlineTab = css<BaseLabelProps & { size: Sizes }>`
   padding-bottom: ${getSpace(SpaceSizes.xxs)};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
-      $isSelected ? getColor($color) : getColor('graphiteHB')};
+      $isSelected ? getColor($color) : getColor('neutral.500')};
 
   &:hover {
     border-bottom-color: ${({ $color }) => getColor($color)};
@@ -87,7 +87,7 @@ const underlineTab = css<BaseLabelProps & { size: Sizes }>`
 
   &,
   &:hover {
-    color: ${getColor('graphite4B')};
+    color: ${getColor('neutral.900')};
   }
 `;
 
@@ -95,7 +95,7 @@ const textTab = css<BaseLabelProps & { size: Sizes }>`
   ${({ size }) => textSizes[size] || textSizes[BaseTabSizes.md]};
 
   color: ${({ $isSelected, $color }) =>
-    $isSelected ? getColor('graphite4B') : getColor($color)};
+    $isSelected ? getColor('neutral.900') : getColor($color)};
 
   &:hover {
     color: ${({ $color, theme }) =>
@@ -104,8 +104,8 @@ const textTab = css<BaseLabelProps & { size: Sizes }>`
 `;
 
 export const segmentedTabSelected = css`
-  background: ${getColor('blueberry0')};
-  border: 1px solid ${getColor('dietBlueberry')};
+  background: ${getColor('primary.50')};
+  border: 1px solid ${getColor('primary.200')};
 `;
 
 const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
@@ -115,11 +115,11 @@ const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
   border: 1px solid transparent;
   ${({ $isSelected }) => $isSelected && segmentedTabSelected};
 
-  border-radius: calc(${getBorderRadius} / 2);
-  color: ${getColor('graphite4B')};
+  border-radius: ${getRadii('half')};
+  color: ${getColor('neutral.900')};
 
   &:hover {
-    color: ${getColor('radiantBlueberry')};
+    color: ${getColor('primary.400')};
   }
 `;
 
@@ -141,7 +141,7 @@ const BaseTabLabel = styled(Padbox).withConfig<
   font-weight: ${getFontWeight('medium')};
 
   &:visited {
-    color: ${getColor('graphite4B')};
+    color: ${getColor('neutral.900')};
   }
 
   &:hover {

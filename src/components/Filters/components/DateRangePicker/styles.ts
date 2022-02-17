@@ -43,11 +43,11 @@ export const datePickerStyles = css`
     padding: ${pxToRem(16)};
     border-radius: ${getBorderRadius};
     box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')};
-    background: ${getColor('graphite5H')};
+    background: ${getColor('neutral.0')};
   }
   .react-datepicker {
-    background-color: ${getColor('graphite5H')};
-    border: 1px solid ${getColor('graphiteH')};
+    background-color: ${getColor('neutral.0')};
+    border: 1px solid ${getColor('neutral.400')};
     border-radius: 0.3rem;
     display: inline-block;
     position: relative;
@@ -61,7 +61,7 @@ export const datePickerStyles = css`
   .react-datepicker__header {
     text-align: center;
     position: relative;
-    background: ${getColor('graphite5H')};
+    background: ${getColor('neutral.0')};
     border-bottom: 0;
     padding-top: 0;
   }
@@ -71,7 +71,7 @@ export const datePickerStyles = css`
     font-weight: ${getFontWeight('medium')};
     margin-top: ${pxToRem(16)};
     margin-bottom: ${pxToRem(20)};
-    color: ${getColor('graphite4B')};
+    color: ${getColor('neutral.900')};
   }
   .react-datepicker__day {
     display: inline-flex;
@@ -83,10 +83,10 @@ export const datePickerStyles = css`
   }
   .react-datepicker__day:hover,
   .react-datepicker__day--keyboard-selected {
-    background-color: ${getColor('radiantBlueberry')};
+    background-color: ${getColor('primary.400')};
     border-radius: 4px;
     font-weight: ${getFontWeight('bold')};
-    color: ${getColor('graphite5H')};
+    color: ${getColor('neutral.0')};
   }
   .react-datepicker__day:focus {
     outline: 0;
@@ -107,26 +107,26 @@ export const datePickerStyles = css`
     overflow: hidden;
   }
   .react-datepicker__navigation--previous {
-    border-right-color: ${getColor('graphiteB')};
+    border-right-color: ${getColor('neutral.600')};
     left: ${pxToRem(28)};
   }
   .react-datepicker__navigation--previous:hover {
-    border-right-color: ${getColor('graphite2B')};
+    border-right-color: ${getColor('neutral.700')};
   }
   .react-datepicker__navigation--next {
-    border-left-color: ${getColor('graphiteB')};
+    border-left-color: ${getColor('neutral.600')};
     right: ${pxToRem(28)};
   }
   .react-datepicker__navigation--next:hover {
-    border-left-color: ${getColor('graphite2B')};
+    border-left-color: ${getColor('neutral.700')};
   }
   .react-datepicker__triangle {
     position: absolute;
     left: ${pxToRem(50)} !important; /* Needed for input with 100% width */
-    border-bottom-color: ${getColor('graphite5H')};
+    border-bottom-color: ${getColor('neutral.0')};
   }
   .react-datepicker__triangle::before {
-    border-bottom-color: ${getColor('graphiteB')};
+    border-bottom-color: ${getColor('neutral.600')};
   }
   .react-datepicker__day-name {
     display: inline-flex;
@@ -142,7 +142,7 @@ export const datePickerStyles = css`
   }
   .react-datepicker__day--disabled {
     cursor: default;
-    color: ${getColor('graphiteH')};
+    color: ${getColor('neutral.400')};
   }
   .react-datepicker-popper {
     z-index: 10;
@@ -168,7 +168,7 @@ export const datePickerStyles = css`
     z-index: -1;
     border-width: 8px;
     left: ${pxToRem(-8)};
-    border-bottom-color: ${getColor('graphite5H')};
+    border-bottom-color: ${getColor('neutral.0')};
   }
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle {
@@ -180,12 +180,12 @@ export const datePickerStyles = css`
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before {
     border-top: none;
-    border-bottom-color: ${getColor('graphite5H')};
+    border-bottom-color: ${getColor('neutral.0')};
   }
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before {
     top: ${pxToRem(-1)};
-    border-bottom-color: ${getColor('graphiteH')};
+    border-bottom-color: ${getColor('neutral.400')};
   }
   .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle {
     bottom: 0;
@@ -195,12 +195,12 @@ export const datePickerStyles = css`
   .react-datepicker-popper[data-placement^='top']
     .react-datepicker__triangle::before {
     border-bottom: none;
-    border-top-color: ${getColor('graphite5H')};
+    border-top-color: ${getColor('neutral.0')};
   }
   .react-datepicker-popper[data-placement^='top']
     .react-datepicker__triangle::before {
     bottom: ${pxToRem(-1)};
-    border-top-color: ${getColor('graphiteH')};
+    border-top-color: ${getColor('neutral.400')};
   }
   .react-datepicker-popper[data-placement^='bottom'] {
     margin-top: ${pxToRem(10)};
@@ -222,21 +222,21 @@ export const dateRangePickerStyles = css`
     margin-right: ${pxToRem(8)};
   }
   .react-datepicker__day--in-selecting-range {
-    background-color: ${getColor('graphite5H')};
-    color: ${getColor('graphite4B')};
+    background-color: ${getColor('neutral.0')};
+    color: ${getColor('neutral.900')};
   }
   .react-datepicker__day--in-range {
-    background-color: ${getColor('blueberry0')};
-    color: ${getColor('graphite4B')};
+    background-color: ${getColor('primary.50')};
+    color: ${getColor('neutral.900')};
     border-radius: 0;
   }
   .react-datepicker__day--selected,
   .react-datepicker__day--range-start,
   .react-datepicker__day--range-end,
   .react-datepicker__day--selecting-range-start {
-    background-color: ${getColor('radiantBlueberry')};
+    background-color: ${getColor('primary.400')};
     font-weight: ${getFontWeight('bold')};
-    color: ${getColor('graphite5H')};
+    color: ${getColor('neutral.0')};
   }
   .react-datepicker__day--selected,
   .react-datepicker__day--selecting-range-start {

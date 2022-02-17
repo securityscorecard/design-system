@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Radio from './Radio';
 import { RadioProps } from './Radio.types';
 import { Icon, Inline, Text } from '../..';
+import { ColorTypes } from '../../../theme';
 
 const textExample = 'Use the same details for billing & shipping on my invoice';
 
@@ -17,7 +18,7 @@ const labelMappingValues = {
   labelAsString: 'Radio label',
   labelAsIconAndText: (
     <Inline align="center" gap="sm">
-      <Icon color="graphite4B" name="wrench" />
+      <Icon color="neutral.900" name="wrench" />
       <Text>{textExample}</Text>
     </Inline>
   ),
@@ -95,7 +96,7 @@ export const RadioWithLabelAsComponentWithIcon: Story = () => (
   <Radio
     label={
       <Inline align="center" gap="sm">
-        <Icon color="graphite4B" name="wrench" />
+        <Icon color={ColorTypes.neutral900} name="wrench" />
         <Text>{textExample}</Text>
       </Inline>
     }

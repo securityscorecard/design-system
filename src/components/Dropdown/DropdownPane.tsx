@@ -4,11 +4,11 @@ import styled, { css } from 'styled-components';
 import { noop } from 'ramda-adjunct';
 
 import {
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getLineHeight,
+  getRadii,
   getSpace,
   pxToRem,
 } from '../../utils';
@@ -34,20 +34,20 @@ export const Arrow = styled.div`
   &::before {
     visibility: visible;
     content: '';
-    background: ${getColor('graphite5H')};
-    border-left: 1px solid ${getColor('graphiteB')};
-    border-top: 1px solid ${getColor('graphiteB')};
+    background: ${getColor('neutral.0')};
+    border-left: 1px solid ${getColor('neutral.600')};
+    border-top: 1px solid ${getColor('neutral.600')};
   }
 `;
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  border: 1px solid ${getColor('graphiteB')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
+  border: 1px solid ${getColor('neutral.600')};
   ${({ $maxWidth }) => css`
     width: ${$maxWidth === 'auto' ? 'auto' : '100%'};
     max-width: ${$maxWidth === 'auto' ? 'auto' : pxToRem($maxWidth)};
@@ -92,10 +92,10 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
 `;
 
 const PaneContent = styled(Padbox)`
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   position: relative;
   z-index: 1;
-  background: ${getColor('graphite5H')};
+  background: ${getColor('neutral.0')};
 `;
 
 const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(

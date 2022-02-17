@@ -2,14 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { createPadding, getFontSize, getFormStyle } from '../../../utils';
+import {
+  createPadding,
+  getFontSize,
+  getFormStyle,
+  getRadii,
+} from '../../../utils';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { RadioListItemProps } from './RadioListItem.types';
 
 const RadioLabel = styled.label`
   display: flex;
-  border-radius: 50em;
+  border-radius: ${getRadii('round')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   cursor: pointer;
   height: ${getFormStyle('fieldHeight')};

@@ -15,10 +15,10 @@ import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
 
 const primaryVariant = css`
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
 `;
 const secondaryVariant = css`
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
 `;
 
 const variants = {

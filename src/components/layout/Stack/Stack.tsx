@@ -15,9 +15,13 @@ export interface StackProps {
    */
   gap?: SpaceSize;
   /**
-   * Horizontal alignment of elements inside Inline
+   * Horizontal alignment of elements inside Stack
    */
   justify?: Property.AlignItems;
+  /**
+   * Vertical alignment of elements inside Stack
+   */
+  align?: Property.JustifyContent;
   /**
    * Index of element after which the Stack is splitted. Leave 'undefined' for no splitting.
    */
@@ -33,7 +37,7 @@ const Stack = styled.div<StackProps>`
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: ${prop('justify')};
-  justify-content: flex-start;
+  justify-content: ${prop('align')};
 
   /* FIXME: Until we remove 'margin' property from other components we need to
     increase specificity of those nesting , since it can be overriden by inner

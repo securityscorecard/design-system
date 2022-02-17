@@ -7,7 +7,7 @@ import { Padbox } from '../Padbox';
 export const Box = styled(Padbox).attrs(() => ({
   paddingSize: SpaceSizes.sm,
 }))`
-  background-color: ${getColor('blueberry0')};
+  background-color: ${getColor('primary.50')};
 `;
 
 Box.defaultProps = {

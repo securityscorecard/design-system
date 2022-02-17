@@ -22,7 +22,7 @@ const pillLabelSizes = {
 const PillLabel = styled.div<PillLabelProps>`
   flex: 1 1 0%;
   white-space: nowrap;
-  color: ${getColor('graphite4B')};
+  color: ${getColor('neutral.900')};
   ${({ $size }) => pillLabelSizes[$size]};
 
   /* desired length + 2 chars for ellipsis */

@@ -24,7 +24,7 @@ import {
   StyledBaseTable,
   actionsColumn,
 } from '../_internal/BaseTable';
-import { getBorderRadius, getColor } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
 import { TableProps } from './Table.types';
@@ -39,14 +39,14 @@ const useIsMountRender = (): boolean => {
 };
 
 const NoDataContainer = styled(Padbox)`
-  background: ${getColor('graphite5H')};
+  background: ${getColor('neutral.0')};
 `;
 
 const TableWrapper = styled.div`
-  border: 1px solid ${getColor('graphiteH')};
+  border: 1px solid ${getColor('neutral.400')};
   border-top-width: 0;
-  background: ${getColor('graphite3H')};
-  border-radius: ${getBorderRadius};
+  background: ${getColor('neutral.200')};
+  border-radius: ${getRadii('default')};
   overflow: hidden;
 `;
 

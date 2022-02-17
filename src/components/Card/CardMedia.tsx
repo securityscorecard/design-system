@@ -1,0 +1,73 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import { includes } from 'ramda';
+import { isNotUndefined } from 'ramda-adjunct';
+
+import { getSpace } from '../../utils';
+import { SpaceSizes } from '../../theme';
+import { CardMediaProps, CardMediaWrapperProps } from './Card.types';
+
+export const CardMediaWrapper = styled.div<CardMediaWrapperProps>`
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  ${({ $isMediaComponent }) =>
+    $isMediaComponent &&
+    css`
+      /* compensate for negative margins */
+      width: calc(100% + ${getSpace(SpaceSizes.mdPlus)} * 2);
+    `};
+
+  ${({ $isImageComponent }) => $isImageComponent && 'object-fit: cover'};
+`;
+
+const MEDIA_COMPONENTS = ['video', 'audio', 'picture', 'iframe', 'img'];
+const IMAGE_COMPONENTS = ['picture', 'img'];
+
+const CardMedia = <El extends HTMLElement = HTMLDivElement>({
+  children,
+  mediaSrc,
+  as,
+  style,
+  alt,
+  ...props
+}: React.PropsWithChildren<
+  CardMediaProps & React.HTMLProps<El>
+>): React.ReactElement => {
+  const isMediaComponent = includes(as, MEDIA_COMPONENTS);
+  const isImageComponent = includes(as, IMAGE_COMPONENTS);
+  const hasMediaSrc = isNotUndefined(mediaSrc);
+
+  const composedStyle =
+    !isMediaComponent && hasMediaSrc
+      ? { backgroundImage: `url("${mediaSrc}")`, ...style }
+      : style;
+
+  return (
+    <CardMediaWrapper
+      $isImageComponent={isImageComponent}
+      $isMediaComponent={isMediaComponent}
+      alt={as === 'img' && hasMediaSrc ? alt : undefined}
+      aria-label={!isMediaComponent && hasMediaSrc ? alt : undefined}
+      as={as}
+      role={!isMediaComponent && hasMediaSrc ? 'img' : undefined}
+      src={isMediaComponent ? mediaSrc : undefined}
+      style={composedStyle}
+      {...props}
+    >
+      {!isMediaComponent && !hasMediaSrc ? children : null}
+    </CardMediaWrapper>
+  );
+};
+
+CardMedia.propTypes = {
+  mediaSrc: PropTypes.string,
+  style: PropTypes.shape({}),
+  alt: PropTypes.string,
+  as: PropTypes.elementType,
+};
+
+export default CardMedia;

@@ -12,7 +12,7 @@ import {
   getSpace,
   pxToRem,
 } from '../../../../utils';
-import { Dropdown } from '../../Dropdown';
+import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { Icon } from '../../../Icon';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { DatatableStore } from '../../Datatable.store';
@@ -31,10 +31,10 @@ const SelectionButton = styled.button`
   height: 100%;
   padding: ${getSpace(SpaceSizes.xs)};
   font-size: ${getFontSize('lg')};
-  color: ${getColor('graphite3B')};
+  color: ${getColor('neutral.800')};
 
   &:hover {
-    color: ${getColor('blueberryClassic')};
+    color: ${getColor('primary.500')};
   }
 `;
 
@@ -140,7 +140,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
     <ElementCounterWrapper>
       <CounterText>{content}</CounterText>
       {dataSize > 0 && (
-        <Dropdown
+        <DropdownMenu
           actions={[
             {
               name: 'select-all',
@@ -153,6 +153,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
               onClick: handleSelectNoneClick,
             },
           ]}
+          paneWidth={140}
         >
           <SelectionButton
             aria-label="Selection options"
@@ -165,7 +166,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
               name={SSCIconNames.caretDown}
             />
           </SelectionButton>
-        </Dropdown>
+        </DropdownMenu>
       )}
     </ElementCounterWrapper>
   );

@@ -6,12 +6,12 @@ import { omit, prop } from 'ramda';
 
 import {
   createPadding,
-  getBorderRadius,
   getColor,
   getFontFamily,
   getFontSize,
   getFormStyle,
   getLineHeight,
+  getRadii,
   getSpace,
   pxToRem,
 } from '../../../utils';
@@ -37,7 +37,7 @@ const StyledTextArea = styled.textarea<{
   line-height: ${getLineHeight('md')};
   height: ${prop('height')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
   ${({ hasMaxLength, theme }) =>
@@ -80,7 +80,7 @@ const Counter = styled.span<{ isInvalid: boolean }>`
   right: ${pxToRem(15)};
   bottom: ${pxToRem(10)};
   font-size: ${getFontSize('md')};
-  color: ${getColor('graphite2B')};
+  color: ${getColor('neutral.700')};
   background: ${getFormStyle('bgColor')};
   ${({ isInvalid }) =>
     isInvalid &&
