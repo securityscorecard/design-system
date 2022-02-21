@@ -3,19 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils';
-import { Button } from '../../Button';
-import {
-  ButtonColors,
-  ButtonSizes,
-  ButtonVariants,
-} from '../../Button/Button.enums';
 import { FlexContainer } from '../../FlexContainer';
-import { Icon } from '../../Icon';
-import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Col, Container, Row } from '../../layout';
 import { H2, H3 } from '../../typography';
 import { useStickyHeader } from '../hooks/useStickyHeader';
 import { HeaderProps } from './Header.types';
+import { CloseButton } from '../../CloseButton';
 
 const BaseStickyHeader = styled.header`
   position: fixed;
@@ -60,17 +53,10 @@ const Header: React.FC<HeaderProps> = ({
                     {children}
                   </H3>
 
-                  <Button
-                    color={ButtonColors.secondary}
-                    size={ButtonSizes.lg}
-                    variant={ButtonVariants.text}
-                    onClick={handleClose}
-                  >
-                    <Icon
-                      aria-label="Close modal window"
-                      name={SSCIconNames.times}
-                    />
-                  </Button>
+                  <CloseButton
+                    ariaLabel="Close modal window"
+                    onClose={handleClose}
+                  />
                 </FlexContainer>
               </Col>
             </Row>

@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import { isNotNilOrEmpty } from 'ramda-adjunct';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getFontSize, pxToRem } from '../../utils';
+import { getColor, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Paragraph } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
@@ -17,6 +17,7 @@ import { Padbox } from '../layout/Padbox';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { ToastVariants } from './Toast.enums';
 import { ColorTypes } from '../../theme/colors.enums';
+import { CloseButton } from '../CloseButton';
 
 const ToastFromTop = keyframes`
   from {
@@ -50,26 +51,6 @@ const ToastContent = styled(Paragraph)`
   &&& button {
     margin-bottom: -10px;
   }
-`;
-
-const CloseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-  flex-shrink: 0;
-  width: ${pxToRem(16)};
-  height: ${pxToRem(16)};
-  color: ${getColor('neutral.700')};
-
-  &:hover {
-    color: ${getColor('neutral.600')};
-  }
-`;
-
-const StyledIcon = styled(Icon)`
-  font-size: ${getFontSize('lg')};
 `;
 
 const colorVariants = {
@@ -141,11 +122,7 @@ const Toast: React.FC<ToastProps> = ({
           {children}
         </ToastContent>
       </Padbox>
-      <Padbox paddingSize={SpaceSizes.sm}>
-        <CloseButton aria-label="Close" onClick={onClose}>
-          <StyledIcon name={SSCIconNames.times} />
-        </CloseButton>
-      </Padbox>
+      <CloseButton marginCompensation={SpaceSizes.none} onClose={onClose} />
     </Inline>
   </ToastContainer>
 );
