@@ -91,10 +91,6 @@ export const getLineHeight = curry(
     path(['typography', 'lineHeight', size], theme),
 );
 
-// getBorderRadius :: Props -> string
-// Props - styled-components props object
-export const getBorderRadius = path(['theme', 'radii', 'default']);
-
 // getRadii :: Type -> Props -> string
 // Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object

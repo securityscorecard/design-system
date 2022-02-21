@@ -209,22 +209,6 @@ const Component = styled.div`
 `; // -> line-height: 20px;
 ```
 
-### getBorderRadius (DEPRECATED)
-
-Use `getRadii` function instead.
-
-Returns default border-radius from theme.
-
-```js
-import { getBorderRadius } from '@securityscorecard/design-system';
-
-// getBorderRadius :: Props -> string
-// Props - styled-components props object
-const Component = styled.div`
-  border-radius: ${getBorderRadius};
-`; // -> border-radius: 4px;
-```
-
 ### getRadii
 
 Returns border-radius from theme for given key.
