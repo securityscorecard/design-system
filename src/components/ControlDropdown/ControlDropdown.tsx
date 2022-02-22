@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { SpaceSizes } from '../../theme';
-import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { pxToRem } from '../../utils';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
-import {
-  ButtonColors,
-  ButtonSizes,
-  ButtonVariants,
-} from '../Button/Button.enums';
-import { Icon } from '../Icon';
+import { ButtonVariants } from '../Button/Button.enums';
+import { CloseButton } from '../CloseButton';
 import { H4 } from '../typography';
 import { ControlDropdownProps } from './ControlDropdown.types';
 import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';
-
-const CloseButton = styled(Button)`
-  padding: 0;
-  width: ${pxToRem(16)};
-  height: ${pxToRem(16)};
-`;
 
 const ControlDropdown: React.FC<ControlDropdownProps> = ({
   children,
@@ -66,13 +53,10 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
           >
             <H4 margin="none">{title}</H4>
             <CloseButton
-              color={ButtonColors.secondary}
-              size={ButtonSizes.lg}
-              variant={ButtonVariants.text}
-              onClick={onClose}
-            >
-              <Icon aria-label="Close dropdown" name={SSCIconNames.times} />
-            </CloseButton>
+              ariaLabel="Close dropdown"
+              marginCompensation={SpaceSizes.md}
+              onClose={onClose}
+            />
           </Inline>
           {children}
           <Inline

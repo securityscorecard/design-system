@@ -8,21 +8,14 @@ import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
-import { Icon } from '../Icon';
-import { Padbox } from '../layout';
+import { Inline, Padbox } from '../layout';
 import { H3 } from '../typography';
-import {
-  createPadding,
-  getColor,
-  getDepth,
-  getFontSize,
-  getRadii,
-  pxToRem,
-} from '../../utils';
+import { getColor, getDepth, getRadii, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
 import { DSContext } from '../../theme/DSProvider/DSProvider';
-import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { CloseButton } from '../CloseButton';
+import { StretchEnum } from '../layout/Inline/Inline.enums';
 
 const widthVariants = {
   [ModalSizes.xs]: 320,
@@ -45,7 +38,6 @@ const Overlay = styled.div`
 `;
 
 const BaseModal = styled.div<{ $maxWidth: number }>`
-  position: relative;
   display: flex;
   flex-direction: column;
   max-height: 66vh;
@@ -57,25 +49,6 @@ const BaseModal = styled.div<{ $maxWidth: number }>`
 
 const Title = styled(H3)`
   margin: 0;
-`;
-
-// TODO Extract close button and unify it across DS
-const CloseButton = styled.button`
-  position: absolute;
-  top: ${pxToRem(8)};
-  right: ${pxToRem(8)};
-  width: ${pxToRem(16)};
-  height: ${pxToRem(16)};
-  ${({ theme }) => createPadding({ paddingSize: SpaceSizes.md, theme })};
-  font-size: ${getFontSize('lg')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  color: ${getColor('neutral.800')};
 `;
 
 const Content = styled(Padbox)`
@@ -108,12 +81,15 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
             $maxWidth={widthVariants[size]}
           >
-            <CloseButton aria-label="Close" onClick={onClose}>
-              <Icon name={SSCIconNames.times} />
-            </CloseButton>
-            <Padbox paddingSize={SpaceSizes.lg} paddingType="squish">
-              {isNotUndefined(title) && <Title>{title}</Title>}
-            </Padbox>
+            <Inline stretch={StretchEnum.start}>
+              <Padbox paddingSize={SpaceSizes.lg} paddingType="squish">
+                {isNotUndefined(title) && <Title>{title}</Title>}
+              </Padbox>
+              <CloseButton
+                marginCompensation={SpaceSizes.none}
+                onClose={onClose}
+              />
+            </Inline>
             <Content
               paddingSize={SpaceSizes.lg}
               paddingType={hasFooter ? 'squish' : 'square'}

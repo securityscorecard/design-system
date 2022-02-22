@@ -6,6 +6,7 @@ import {
   join,
   map,
   memoizeWith,
+  negate,
   path,
   pipe,
   split,
@@ -155,6 +156,14 @@ export const getDepth = curry(
 // Props - styled-components props object
 export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
   pipe(path(['space', size]), pxToRem)(theme),
+);
+
+// getNegativeSpace:: Size -> Props -> string
+// Size - any key of 'space' (src/theme/space.ts)
+// Props - styled-components props object
+export const getNegativeSpace = curry(
+  (size: SpaceSize, { theme }: Theme): string =>
+    pipe(path(['space', size]), negate, pxToRem)(theme),
 );
 
 export const abbreviateNumber = (value: number): string =>

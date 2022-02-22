@@ -22,8 +22,9 @@ import { Text as BaseText } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
-import { getColor, getFontSize, pxToRem } from '../../utils';
+import { getColor, pxToRem } from '../../utils';
 import { ColorTypes } from '../../theme/colors.enums';
+import { CloseButton } from '../CloseButton';
 
 const colorVariants = {
   [BannerVariants.info]: ColorTypes.info500,
@@ -74,24 +75,6 @@ const IconWrapper = styled(FlexContainer)`
 const StyledIcon = styled(Icon)<{ $variant?: BannerProps['variant'] }>`
   color: ${getColor('neutral.0')};
   font-size: ${({ $variant }) => pxToRem(iconPxSizesVariants[$variant])};
-`;
-
-// TODO Extract close button and unify it across DS
-const CloseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  flex-shrink: 0;
-  cursor: pointer;
-  background-color: transparent;
-  color: ${getColor('neutral.800')};
-  width: ${pxToRem(8)};
-  height: ${pxToRem(8)};
-`;
-
-const TimesIcon = styled(Icon)`
-  font-size: ${getFontSize('lg')};
 `;
 
 const StyledButton = styled(Button)`
@@ -157,9 +140,11 @@ const Banner: React.FC<BannerProps> = ({
               </Inline>
             )}
           </Stack>
-          <CloseButton aria-label="Close" onClick={onClose}>
-            <TimesIcon name={SSCIconNames.times} type={IconTypes.ssc} />
-          </CloseButton>
+          <CloseButton
+            aria-label="Close"
+            marginCompensation={SpaceSizes.md}
+            onClose={onClose}
+          />
         </Inline>
       </Padbox>
     </Inline>
