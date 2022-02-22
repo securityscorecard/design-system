@@ -1,11 +1,6 @@
 import { getRadii } from '.';
 import { ColorTypes, RadiusTypes, theme } from '../theme';
-import {
-  abbreviateNumber,
-  getBorderRadius,
-  getColor,
-  pxToRem,
-} from './helpers';
+import { abbreviateNumber, getColor, pxToRem } from './helpers';
 
 describe('pxToRem', () => {
   it('should not convert 0 value', () => {
@@ -73,12 +68,6 @@ describe('getColor', () => {
     expect(getColor(ColorTypes.graphite3H, { theme })).toBe('#f3f3f3');
     expect(getColor(ColorTypes.graphite4H, { theme })).toBe('#f9f9f9');
     expect(getColor(ColorTypes.graphite5H, { theme })).toBe('#fff');
-  });
-});
-
-describe('getBorderRadius', () => {
-  it('should return correct value', () => {
-    expect(getBorderRadius({ theme })).toBe('4px');
   });
 });
 
