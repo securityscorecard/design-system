@@ -1,34 +1,32 @@
-import { negate, path, pipe } from 'ramda';
-
-import { pxToRem } from '../../utils';
+import { getNegativeSpace } from '../../utils';
 import { CardWrapperPropsWithTheme } from './Card.types';
 
-export const getNegativeSpace = ({
-  theme,
+export const getCommonMargin = ({
+  $direction,
   paddingSize,
-}: Omit<CardWrapperPropsWithTheme, '$direction'>): string =>
-  pipe(path(['space', paddingSize]), negate, pxToRem)(theme);
-
-export const getCommonMargin = (props: CardWrapperPropsWithTheme): string => {
-  const value = getNegativeSpace(props);
+  theme,
+}: CardWrapperPropsWithTheme): string => {
+  const value = getNegativeSpace(paddingSize, { theme });
 
   return `
-    margin-${props.$direction === 'vertical' ? 'left' : 'top'}: ${value};
-    margin-${props.$direction === 'vertical' ? 'right' : 'bottom'}: ${value};
+    margin-${$direction === 'vertical' ? 'left' : 'top'}: ${value};
+    margin-${$direction === 'vertical' ? 'right' : 'bottom'}: ${value};
   `;
 };
 
-export const getMarginFrom = (origin: 'start' | 'end') => (
-  props: CardWrapperPropsWithTheme,
-): string => {
-  const value = getNegativeSpace(props);
+export const getMarginFrom = (origin: 'start' | 'end') => ({
+  $direction,
+  paddingSize,
+  theme,
+}: CardWrapperPropsWithTheme): string => {
+  const value = getNegativeSpace(paddingSize, { theme });
 
   if (origin === 'start') {
     return `
-      margin-${props.$direction === 'vertical' ? 'top' : 'left'}: ${value};
+      margin-${$direction === 'vertical' ? 'top' : 'left'}: ${value};
     `;
   }
   return `
-    margin-${props.$direction === 'vertical' ? 'bottom' : 'right'}: ${value};
+    margin-${$direction === 'vertical' ? 'bottom' : 'right'}: ${value};
   `;
 };

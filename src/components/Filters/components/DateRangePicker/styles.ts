@@ -2,12 +2,12 @@ import { css } from 'styled-components';
 import { transparentize } from 'polished';
 
 import {
-  getBorderRadius,
   getColor,
   getFontSize,
   getFontWeight,
   getFormStyle,
   getLineHeight,
+  getRadii,
   pxToRem,
 } from '../../../../utils';
 
@@ -17,7 +17,7 @@ export const datePickerStyles = css`
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
     border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-    border-radius: ${getBorderRadius};
+    border-radius: ${getRadii('default')};
     color: ${getFormStyle('color')};
     font-size: ${getFontSize('md')};
     line-height: ${getLineHeight('md')};
@@ -41,7 +41,7 @@ export const datePickerStyles = css`
     line-height: ${getLineHeight('md')};
     font-weight: ${getFontWeight('regular')};
     padding: ${pxToRem(16)};
-    border-radius: ${getBorderRadius};
+    border-radius: ${getRadii('default')};
     box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')};
     background: ${getColor('neutral.0')};
   }

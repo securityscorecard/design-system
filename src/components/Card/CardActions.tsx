@@ -10,14 +10,13 @@ import {
   ActionKindsPropType,
   RelativeLinkActionKind,
 } from '../../types/action.types';
-import { getNegativeSpace } from './utils';
 import { CardActionsProps } from './Card.types';
+import { getNegativeSpace } from '../../utils';
 
 const CardActionsWrapper = styled.div`
   && {
     margin-top: 0;
-    margin-bottom: ${({ theme }) =>
-      getNegativeSpace({ paddingSize: SpaceSizes.md, theme })};
+    margin-bottom: ${getNegativeSpace(SpaceSizes.md)};
   }
 `;
 

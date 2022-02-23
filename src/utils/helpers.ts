@@ -6,6 +6,7 @@ import {
   join,
   map,
   memoizeWith,
+  negate,
   path,
   pipe,
   split,
@@ -91,10 +92,6 @@ export const getLineHeight = curry(
     path(['typography', 'lineHeight', size], theme),
 );
 
-// getBorderRadius :: Props -> string
-// Props - styled-components props object
-export const getBorderRadius = path(['theme', 'radii', 'default']);
-
 // getRadii :: Type -> Props -> string
 // Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object
@@ -159,6 +156,14 @@ export const getDepth = curry(
 // Props - styled-components props object
 export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
   pipe(path(['space', size]), pxToRem)(theme),
+);
+
+// getNegativeSpace:: Size -> Props -> string
+// Size - any key of 'space' (src/theme/space.ts)
+// Props - styled-components props object
+export const getNegativeSpace = curry(
+  (size: SpaceSize, { theme }: Theme): string =>
+    pipe(path(['space', size]), negate, pxToRem)(theme),
 );
 
 export const abbreviateNumber = (value: number): string =>
