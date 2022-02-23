@@ -437,6 +437,7 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
   props,
 ) => {
   const {
+    children,
     isMulti,
     isSelected,
     isDisabled,
@@ -466,7 +467,7 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
           <Checkbox
             checked={isSelected}
             isDisabled={isDisabled}
-            label={label}
+            label={children}
             name={label}
             readOnly
           />
