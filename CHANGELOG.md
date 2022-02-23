@@ -1,3 +1,15 @@
+# [1.0.0-alpha.150](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.149...v1.0.0-alpha.150) (2022-02-23)
+
+
+### Bug Fixes
+
+* **Signal:** update icon colors ([85943f2](https://github.com/securityscorecard/design-system/commit/85943f2aac383a11457b04b4a719b8f3e20cfba6))
+
+
+### Features
+
+* **CloseButton:** add CloseButton component ([57dbef7](https://github.com/securityscorecard/design-system/commit/57dbef7432b1acd468c675b264522f214d7d2a3e))
+
 # [1.0.0-alpha.149](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.148...v1.0.0-alpha.149) (2022-02-17)
 
 
