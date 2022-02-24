@@ -1,24 +1,24 @@
 export const colors = {
   primary: {
-    50: '#ebf4fc', // blueberry0
-    200: '#80baeb', // dietBlueberry
-    400: '#1e88e5', // radiantBlueberry
-    500: '#0275d8', // blueberryClassic
+    50: '#ebf4fc',
+    200: '#80baeb',
+    400: '#1e88e5',
+    500: '#0275d8',
     600: '#026ac5',
     700: '#015399',
   },
   neutral: {
-    0: '#fff', // graphite5H
-    100: '#f9f9f9', // graphite4H
-    200: '#f3f3f3', // graphite3H
-    300: '#eee', // graphite2H
-    400: '#dadada', // graphiteH
-    500: '#d1d1d1', // graphiteHB
-    600: '#b4b4b4', // graphiteB
-    700: '#727272', // graphite2B
-    800: '#5d5d5d', // graphite3B
-    900: '#2a2a2a', // graphite4B
-    1000: '#000', // graphite5B
+    0: '#fff',
+    100: '#f9f9f9',
+    200: '#f3f3f3',
+    300: '#eee',
+    400: '#dadada',
+    500: '#d1d1d1',
+    600: '#b4b4b4',
+    700: '#727272',
+    800: '#5d5d5d',
+    900: '#2a2a2a',
+    1000: '#000',
   },
   info: {
     50: '#f2f8fd',
@@ -56,18 +56,5 @@ export const colors = {
     low: '#E4BE00',
     medium: '#E5883C',
     high: '#B21F24',
-  },
-  deprecated: {
-    kiwi: '#4aba00',
-    banana: '#e5bd00',
-    pumpkin: '#f08f00',
-    pumpkin0: '#fef9f2',
-    strawberry: '#f1431c',
-    strawberry0: '#fef6f4',
-    cherry: '#b40000',
-    eucalyptusClassic: '#579aa0',
-    radiantEucalyptus: '#65b6bd',
-    dietEucalyptus: '#abcccf',
-    eucalyptus0: '#eef5f6',
   },
 };
