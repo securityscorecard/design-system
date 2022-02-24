@@ -4,8 +4,9 @@ import { action } from '@storybook/addon-actions';
 
 import Select from './Select';
 import { SelectProps } from './Select.types';
-import { Stack } from '../../layout';
-import { Heading } from '../..';
+import { Inline, Stack } from '../../layout';
+import { Heading, Text } from '../../typography';
+import { Pill } from '../../Pill';
 
 const options = [
   { value: 'HR', label: 'Croatia', isDisabled: true },
@@ -60,6 +61,7 @@ export default {
         component: `
 \`\`\`js
 import { Select } from '@securityscorecard/design-system';
+import Pill from '../../Pill/Pill';
 \`\`\`
       `,
       },
@@ -275,4 +277,48 @@ PillWrapping.args = {
   ...MultiSelect.args,
   options: longOptions,
   defaultValue: [longOptions[2], longOptions[1]],
+};
+
+const icons = {
+  HR: 'https://flagicons.lipis.dev/flags/4x3/hr.svg',
+  CU: 'https://flagicons.lipis.dev/flags/4x3/cu.svg',
+  CW: 'https://flagicons.lipis.dev/flags/4x3/cw.svg',
+  CY: 'https://flagicons.lipis.dev/flags/4x3/cy.svg',
+  CZ: 'https://flagicons.lipis.dev/flags/4x3/cz.svg',
+  DK: 'https://flagicons.lipis.dev/flags/4x3/dk.svg',
+};
+
+export const CustomOptionLabel: Story<SelectProps<true>> = (args) => (
+  <Select
+    formatOptionLabel={(data) => (
+      <Inline align="center" gap="xs">
+        <img
+          alt=""
+          src={icons[data.value]}
+          style={{ height: '0.875rem', display: 'inline-block' }}
+        />
+        <span>{data.label}</span>
+      </Inline>
+    )}
+    {...args}
+  />
+);
+CustomOptionLabel.args = {
+  ...MultiSelect.args,
+  defaultValue: [options[1], options[2]],
+};
+
+export const CustomGroupLabel: Story<SelectProps<true>> = (args) => (
+  <Select
+    formatGroupLabel={(group) => (
+      <Inline gap="md" justify="space-between">
+        <Text isBold>{group.label}</Text>
+        <Pill label={group.options.length.toString()} />
+      </Inline>
+    )}
+    {...args}
+  />
+);
+CustomGroupLabel.args = {
+  ...MultiSelect.args,
 };
