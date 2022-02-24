@@ -1,3 +1,10 @@
+# [1.0.0-alpha.151](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.150...v1.0.0-alpha.151) (2022-02-24)
+
+
+### Bug Fixes
+
+* **Select:** apply formatOptionLabel to multiselect dropdown ([cd38d44](https://github.com/securityscorecard/design-system/commit/cd38d449a45471cc0721bfc64657e7ea185ab5b6))
+
 # [1.0.0-alpha.150](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.149...v1.0.0-alpha.150) (2022-02-23)
 
 
