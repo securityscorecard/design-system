@@ -40,7 +40,7 @@ const Accordion: React.FC<AccordionProps> = ({
     <Stack {...props}>
       {items.map(({ title, id, content }) => (
         <AccordionCollapsible
-          key={`accordion-item-${title}`}
+          key={`accordion-item-${id}`}
           handleHeaderClick={handleClick}
           id={id}
           isOpen={includes(id, openIds)}
