@@ -9,7 +9,7 @@ import {
   getLineHeight,
   getRadii,
   pxToRem,
-} from '../../../../utils';
+} from '../../../utils';
 
 export const datePickerStyles = css`
   .DateRangePicker-input {

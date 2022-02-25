@@ -1,7 +1,7 @@
 export { InputFilter } from './Input';
 export { TagsInputFilter } from './TagsInput';
-export { DateRangePickerFilter } from './DateRangePicker';
-export { SingleDatePickerFilter } from './SingleDatePicker';
+export { BaseDateRangePicker as DateRangePickerFilter } from '../../_internal/BaseDateRangePicker';
+export { BaseSingleDatePicker as SingleDatePickerFilter } from '../../_internal/BaseSingleDatePicker';
 export { NumberFilter } from './Number';
 export { IntegerFilter } from './Integer';
 export { CountFilter } from './Count';
