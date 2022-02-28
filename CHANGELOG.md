@@ -1,3 +1,10 @@
+# [1.0.0-alpha.153](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.152...v1.0.0-alpha.153) (2022-02-28)
+
+
+### Bug Fixes
+
+* **ControlledDropdown:** update proptype to support SSR ([cee1cd3](https://github.com/securityscorecard/design-system/commit/cee1cd3b7bc8d69ecc62159b7ad3de73cca67008))
+
 # [1.0.0-alpha.152](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.151...v1.0.0-alpha.152) (2022-02-28)
 
 
