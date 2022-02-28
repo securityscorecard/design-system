@@ -1,3 +1,10 @@
+# [1.0.0-alpha.152](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.151...v1.0.0-alpha.152) (2022-02-28)
+
+
+### Features
+
+* **colors:** remove legacy colors ([e27ce80](https://github.com/securityscorecard/design-system/commit/e27ce808d321ca6eb6aee019ed76d4c277da51b5))
+
 # [1.0.0-alpha.151](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.150...v1.0.0-alpha.151) (2022-02-24)
 
 
