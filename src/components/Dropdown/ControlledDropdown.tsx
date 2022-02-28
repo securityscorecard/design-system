@@ -66,7 +66,10 @@ const ControlledDropdown = forwardRef<
 
 ControlledDropdown.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  triggerEl: PropTypes.instanceOf(HTMLElement),
+  triggerEl:
+    typeof Element === 'undefined'
+      ? PropTypes.any
+      : PropTypes.instanceOf(HTMLElement),
   placement: PropTypes.oneOf(Object.values(DropdownPlacements)),
   innerPaddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
   innerPaddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
