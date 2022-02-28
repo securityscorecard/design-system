@@ -15,7 +15,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import { createSpacings, getColor } from '../../utils';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { ColorTypes, DeprecatedColorTypes } from '../../theme/colors.enums';
+import { ColorTypes } from '../../theme/colors.enums';
 import { Color } from '../../theme/colors.types';
 import { IconProps, SSCIcons, Types } from './Icon.types';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
@@ -60,10 +60,7 @@ Icon.propTypes = {
     PropTypes.oneOf<Types>(Object.values(IconTypes)),
     PropTypes.string,
   ]),
-  color: PropTypes.oneOf([
-    ...Object.values(ColorTypes),
-    ...DeprecatedColorTypes,
-  ]),
+  color: PropTypes.oneOf([...Object.values(ColorTypes)]),
   className: PropTypes.string,
   hasFixedWidth: PropTypes.bool,
   margin: SpacingSizeValuePropType,
