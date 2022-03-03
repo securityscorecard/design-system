@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
+import {
+  BaseDateRange,
+  BaseDateRangePickerPropTypes,
+  BaseDateRangePlaceholderPropTypes,
+  BaseDateRangePlaceholderProps,
+} from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
 import { Option, OptionPropType } from './components/Select/Select.types';
 import { Operators } from './Filters.enums';
-import {
-  DateRange,
-  DateRangePickerPropTypes,
-  DateRangePlaceholderPropTypes,
-  DateRangePlaceholderProps,
-} from './components/DateRangePicker/DateRangePicker.types';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
 
@@ -23,7 +23,7 @@ interface ComponentProps {
   minDate?: Date;
   maxDate?: Date;
   units?: string;
-  placeholder?: string | DateRangePlaceholderProps;
+  placeholder?: string | BaseDateRangePlaceholderProps;
   onValidate?: (target: HTMLInputElement) => boolean;
 }
 
@@ -52,7 +52,7 @@ export interface Filter {
   isApplied: boolean;
   isLoading: boolean;
   isCanceled: boolean;
-  value?: string | string[] | Date | DateRange;
+  value?: string | string[] | Date | BaseDateRange;
 }
 
 export interface FiltersProps {
@@ -87,7 +87,7 @@ export const FieldPropTypes = PropTypes.exact({
             units: PropTypes.string,
             placeholder: PropTypes.oneOfType([
               PropTypes.string,
-              DateRangePlaceholderPropTypes,
+              BaseDateRangePlaceholderPropTypes,
             ]),
             onValidate: PropTypes.func,
           }),
@@ -110,7 +110,7 @@ export const FilterStatePropType = PropTypes.exact({
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.instanceOf(Date),
-    DateRangePickerPropTypes,
+    BaseDateRangePickerPropTypes,
   ]),
   isApplied: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,

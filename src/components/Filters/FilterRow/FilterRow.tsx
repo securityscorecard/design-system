@@ -34,11 +34,11 @@ import {
   ComponentWithProps as ComponentWithPropsTypes,
   FieldPropTypes,
 } from '../Filters.types';
-import { DateRangePickerPropTypes } from '../components/DateRangePicker/DateRangePicker.types';
 import { Operators } from '../Filters.enums';
 import { operatorOptions } from '../data/operatorOptions';
 import { pxToRem } from '../../../utils';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
+import { BaseDateRangePickerPropTypes } from '../../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
 
 const SplitField = styled.div<SplitFieldProps>`
   ${({ $width }) =>
@@ -353,7 +353,7 @@ FilterRow.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.instanceOf(Date),
-    DateRangePickerPropTypes,
+    BaseDateRangePickerPropTypes,
   ]),
   onError: PropTypes.func,
 };
