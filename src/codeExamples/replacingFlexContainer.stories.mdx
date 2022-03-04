@@ -7,24 +7,29 @@ import { Meta } from '@storybook/addon-docs';
 One of the most universal tools in the design system toolbox was FlexContainer. It could turn into a row or column, and it was using the parameters the same way as CSS. It was easy to use and easy to remember.
 But it also required more definitions for each element, so we have decided to use more predefined layout primitives - Inline, Stack, Center, and Cluster. And we added some extra features.
 
-First a short review of the replacement components called layout primitives.
+First, a short review of the replacement components called layout primitives.
+
+## [Padbox](?path=/docs/layout-primitives-padbox--playground)
+Padbox is the only container that allows for styling, and its purpose is distancing content through padding. "PaddingSize" is the main argument, but any other styling arguments are accepted by this component.
 
 ## [Stack](?path=/docs/layout-primitives-stack--playground)
 
-Stack is a flex container that has predefined flex-direction to a column. Apart from the standard flexbox column, it allows you to add the same size gaps between the elements or insert wider gap (splitAt) after a defined element. 
-Property isRecursive allows you to insert another element with multiple children and apply the same rules to it
+Stack is a flex container that has predefined flex-direction to a column. Apart from the standard flexbox column, it allows you to add the same size gaps between the elements or insert a wider gap (`splitAt`) after a defined element. 
+Property `isRecursive` allows you to insert another element with multiple children and apply the same rules to it
 
 ## [Inline](?path=/docs/layout-primitives-inline--playground)
 
-Inline is a flex container that has predefined flex-direction to a row. You can adjust justify (justifyContent), align (alignItems), gap size, and stretch.
+Inline is a flex container that has predefined flex-direction to a row. You can adjust `justify` (justifyContent), `align` (alignItems), `gap size`, and `stretch`.
 
 ## [Center](?path=/docs/layout-primitives-center--playground)
 
-Center does what you think it does - it aligns its children to the center horizontally and vertically.
+Center does what you think it does - it aligns its children to the center horizontally.
 
 ## [Cluster](?path=/docs/layout-primitives-cluster--playground)
 
-Cluster component is quite like inline component, it just allows for wrapping if the width is too small. This component is a good option for navigation.
+Cluster component is quite like inline component, but in comparison to "Inline" it allows for wrapping of the content if the width is too small. This component is a good option for navigation.
+
+All layout primitives use `justify` to adjust the horizontal spacing and `align` to adjust the vertical spacing.
 
 ## Examples
 
@@ -33,20 +38,20 @@ Let's take a look at replacement examples
 1.
 
 ```jsx
-  <FlexContainer justifyContent="flex-start" alignItems="center">
-    <IhsIcon src={ihsLogo} alt="IHS Markit Logo" />
-    <IhsText src={ihsText} alt="IHS Markit" />
-  </FlexContainer>
+<FlexContainer justifyContent="flex-start" alignItems="center">
+  <IhsIcon src={ihsLogo} alt="IHS Markit Logo" />
+  <IhsText src={ihsText} alt="IHS Markit" />
+</FlexContainer>
 ```
 
-FlexContainer is by default row, so it should turn to Inline instead.
+FlexContainer is by default row and flex-start, so it should turn to Inline instead.
 Replace it with inline:
 
 ```jsx
-  <Inline justify="flex-start" align="center">
-    <IhsIcon src={ihsLogo} alt="IHS Markit Logo" />
-    <IhsText src={ihsText} alt="IHS Markit" />
-  </Inline>
+<Inline align="center">
+  <IhsIcon src={ihsLogo} alt="IHS Markit Logo" />
+  <IhsText src={ihsText} alt="IHS Markit" />
+</Inline>
 ```
 
 2.
@@ -56,14 +61,7 @@ const BrandingFlexContainer = styled(FlexContainer)`
   width: 100%;
 `;
 const WhiteLabelingLogoContainer = styled(FlexContainer)`
-  background: none;
-  width: ${pxToRem(160)};
-  height: ${pxToRem(90)};
-  border: 1px solid ${getColor('neutral.400')};
-  margin-bottom: ${pxToRem(15)};
-  padding: ${pxToRem(6)};
-  border-color: ${prop('borderColor')};
-  margin-left: ${pxToRem(35)};
+  ...
 `;
 ...
 
@@ -87,18 +85,14 @@ const WhiteLabelingLogoContainer = styled(FlexContainer)`
 </BrandingFlexContainer>
 ```
 
-replace with Stack, Inline and Center
+replace with Stack, Inline, and Center
 
 ```jsx
-const WhiteLabelingLogoContainer = styled(Center)`
-  background: none;
-  width: ${pxToRem(160)};
-  height: ${pxToRem(90)};
-  border: 1px solid ${getColor('neutral.400')};
-  margin-bottom: ${pxToRem(15)};
-  padding: ${pxToRem(6)};
-  border-color: ${prop('borderColor')};
-  margin-left: ${pxToRem(35)};
+const WhiteLabelingLogoContainer = styled(Padbox)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ...
 `;
 
 <Inline gap={SpaceSizes.lg} stretch="start">
@@ -120,23 +114,23 @@ const WhiteLabelingLogoContainer = styled(Center)`
 3. 
 
 ```jsx
-  <FlexContainer
-    className="language-select-option"
-    justifyContent="space-between"
-    alignItems="center"
-  >
-    {...someCode}
-  </FlexContainer>
+<FlexContainer
+  className="language-select-option"
+  justifyContent="space-between"
+  alignItems="center"
+>
+  {...someCode}
+</FlexContainer>
 ```
 
 replace with Inline
 
 ```jsx
-  <Inline
-    className="language-select-option"
-    justify="space-between"
-    align="center"
-  >
-    {...someCode}
-  </Inline>
+<Inline
+  className="language-select-option"
+  justify="space-between"
+  align="center"
+>
+  {...someCode}
+</Inline>
 ```
