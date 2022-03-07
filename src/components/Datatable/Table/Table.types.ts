@@ -13,7 +13,7 @@ export type OnSelectFn<D> = (
   hasExclusiveSelection: boolean,
 ) => void;
 
-export interface TableConfig<D> {
+export interface TableConfig<D extends Record<string, unknown>> {
   hasSelection: boolean;
   isDataLoading: boolean;
   isMultiSelect: boolean;

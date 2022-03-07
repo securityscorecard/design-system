@@ -4,7 +4,9 @@ import {
   CellProps,
   Column,
   IdType,
+  MetaBase,
   SortingRule,
+  TableState,
   useColumnOrder,
   useFlexLayout,
   usePagination,
@@ -95,8 +97,15 @@ const Table = <D extends Record<string, unknown>>({
   defaultSortBy,
   defaultPageIndex,
   defaultColumnOrder,
+  ...rest
 }: // defaultHiddenColumns,
 TableProps<D>): React.ReactElement => {
+  const { useControlledState } = rest as TableProps<D> & {
+    useControlledState: (
+      state: TableState<D>,
+      meta: MetaBase<D>,
+    ) => TableState<D>;
+  };
   const tableDataSize = useMemo(
     () => (hasServerSidePagination ? dataSize : data.length),
     [hasServerSidePagination, dataSize, data],
@@ -174,6 +183,7 @@ TableProps<D>): React.ReactElement => {
       rowActions,
       dataSize: tableDataSize,
       isMultiSelect,
+      useControlledState,
     },
     useColumnOrder,
     useSortBy,
