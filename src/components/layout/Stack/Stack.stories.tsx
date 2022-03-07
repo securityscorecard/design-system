@@ -14,6 +14,10 @@ export default {
       options: ['center', 'flex-end', 'flex-start', 'baseline', 'stretch'],
       control: { type: 'select' },
     },
+    align: {
+      options: ['center', 'flex-end', 'flex-start', 'baseline', 'stretch'],
+      control: { type: 'select' },
+    },
   },
 } as Meta;
 

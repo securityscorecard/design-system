@@ -35,6 +35,7 @@ export const parameters = {
         'layout',
         'components',
         ['typography', 'forms'],
+        'Code examples',
       ],
     },
   },
