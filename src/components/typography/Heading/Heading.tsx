@@ -61,7 +61,7 @@ const HeadingH4 = styled.h4`
   ${HeadingBase};
   font-size: ${getFontSize('h4')};
   line-height: ${getLineHeight('lg')};
-  font-weight: ${getFontWeight('bold')};
+  font-weight: ${getFontWeight('semibold')};
 `;
 
 const headingSizes = {
