@@ -1,7 +1,7 @@
 export interface SingleDatePickerProps {
   value: Date | null;
-  onChange: () => void;
-  minDate: Date;
-  maxDate: Date;
+  onChange: (date: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
   placeholder?: string;
 }

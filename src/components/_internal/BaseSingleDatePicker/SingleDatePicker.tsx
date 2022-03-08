@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 
-import { datePickerStyles } from '../DateRangePicker/styles';
+import { datePickerStyles } from '../BaseDateRangePicker/styles';
 import { singleDatePickerStyles } from './styles';
 import { SingleDatePickerProps } from './SingleDatePicker.types';
 

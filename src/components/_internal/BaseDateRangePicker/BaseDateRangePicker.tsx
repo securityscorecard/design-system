@@ -5,13 +5,13 @@ import DatePicker from 'react-datepicker';
 import { any, prop } from 'ramda';
 import { isNotNull } from 'ramda-adjunct';
 
-import { FlexContainer } from '../../../FlexContainer';
+import { FlexContainer } from '../../FlexContainer';
 import { datePickerStyles, dateRangePickerStyles } from './styles';
 import {
-  DateRangePickerPropTypes,
-  DateRangePickerProps,
-  DateRangePlaceholderPropTypes,
-} from './DateRangePicker.types';
+  BaseDateRangePickerPropTypes,
+  BaseDateRangePickerProps,
+  BaseDateRangePlaceholderPropTypes,
+} from './BaseDateRangePicker.types';
 
 const StyledDatePicker = styled(FlexContainer)`
   ${datePickerStyles}
@@ -20,7 +20,7 @@ const StyledDatePicker = styled(FlexContainer)`
 
 const isRangeDefined = any(isNotNull);
 
-const DateRangePicker: React.FC<DateRangePickerProps> = ({
+const BaseDateRangePicker: React.FC<BaseDateRangePickerProps> = ({
   value = { startDate: null, endDate: null },
   onChange,
   minDate,
@@ -79,12 +79,12 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   );
 };
 
-export default DateRangePicker;
+export default BaseDateRangePicker;
 
-DateRangePicker.propTypes = {
+BaseDateRangePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: DateRangePickerPropTypes,
+  value: BaseDateRangePickerPropTypes,
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),
-  placeholder: DateRangePlaceholderPropTypes,
+  placeholder: BaseDateRangePlaceholderPropTypes,
 };

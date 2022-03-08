@@ -14,7 +14,7 @@ import { BannerVariants } from './Banner.enums';
 import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
-import { Inline, Padbox, Stack } from '../layout';
+import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { FlexContainer } from '../FlexContainer';
@@ -83,7 +83,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Text = styled(BaseText)`
-  max-width: 64ch;
+  max-width: 125ch;
 `;
 
 const Banner: React.FC<BannerProps> = ({
@@ -113,33 +113,28 @@ const Banner: React.FC<BannerProps> = ({
           gap={SpaceSizes.mdPlus}
           stretch={StretchEnum.start}
         >
-          <Stack gap={SpaceSizes.sm}>
-            <Text as="div" size={TextSizes.md}>
-              {children}
-            </Text>
-            {isNonEmptyArray(actions) && (
-              <Inline gap={SpaceSizes.mdPlus}>
-                {actions.map((action) => (
-                  <StyledButton
-                    key={action.name}
-                    color={ButtonColors.primary}
-                    href={
-                      (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
-                        .href
-                    }
-                    name={action.name}
-                    to={
-                      (action as RelativeLinkActionKind<[React.MouseEvent]>).to
-                    }
-                    variant={ButtonVariants.text}
-                    onClick={action.onClick}
-                  >
-                    {action.label}
-                  </StyledButton>
-                ))}
-              </Inline>
-            )}
-          </Stack>
+          <Text as="div" size={TextSizes.md}>
+            {children}
+          </Text>
+          {isNonEmptyArray(actions) && (
+            <Inline gap={SpaceSizes.mdPlus}>
+              {actions.map((action) => (
+                <StyledButton
+                  key={action.name}
+                  color={ButtonColors.primary}
+                  href={
+                    (action as AbsoluteLinkActionKind<[React.MouseEvent]>).href
+                  }
+                  name={action.name}
+                  to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+                  variant={ButtonVariants.text}
+                  onClick={action.onClick}
+                >
+                  {action.label}
+                </StyledButton>
+              ))}
+            </Inline>
+          )}
           <CloseButton
             aria-label="Close"
             marginCompensation={SpaceSizes.md}

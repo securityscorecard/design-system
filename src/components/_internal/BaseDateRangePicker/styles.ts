@@ -3,17 +3,19 @@ import { transparentize } from 'polished';
 
 import {
   getColor,
+  getFontFamily,
   getFontSize,
   getFontWeight,
   getFormStyle,
   getLineHeight,
   getRadii,
   pxToRem,
-} from '../../../../utils';
+} from '../../../utils';
 
 export const datePickerStyles = css`
   .DateRangePicker-input {
-    height: ${pxToRem(32)};
+    font-family: ${getFontFamily('base')};
+    height: ${getFormStyle('fieldHeight')};
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
     border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
