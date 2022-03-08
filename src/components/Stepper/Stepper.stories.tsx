@@ -60,7 +60,7 @@ const steps = [
   },
 ];
 
-export const playground: Story<StepperProps> = (args) => (
+export const Playground: Story<StepperProps> = (args) => (
   <Stepper {...args}>
     {steps.map(({ label, summary }) => (
       <Step
@@ -72,7 +72,7 @@ export const playground: Story<StepperProps> = (args) => (
     ))}
   </Stepper>
 );
-playground.args = {
+Playground.args = {
   activeStep: 0,
 };
 

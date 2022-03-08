@@ -11,9 +11,9 @@ export default {
   component: Signal,
 } as Meta;
 
-export const playground: Story<SignalProps> = (args) => <Signal {...args} />;
-playground.args = { kind: SignalKinds.high };
-playground.argTypes = {
+export const Playground: Story<SignalProps> = (args) => <Signal {...args} />;
+Playground.args = { kind: SignalKinds.high };
+Playground.argTypes = {
   kind: { ...generateControl('select', SignalKinds) },
 };
 

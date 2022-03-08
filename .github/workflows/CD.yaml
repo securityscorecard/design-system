@@ -39,55 +39,6 @@ jobs:
       - name: Run Unit Tests
         run: yarn test
 
-  # TODO: enable this after we have public repository
-  # chromatic-ui:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0 # Required to retrieve git history
-
-  #     - uses: dorny/paths-filter@v2
-  #       id: changes
-  #       with:
-  #         filters: |
-  #           src:
-  #             - 'src/**'
-  #           dependencies:
-  #             - 'package.json'
-  #             - 'yarn.lock'
-
-  #     - name: Use Node.js
-  #       uses: actions/setup-node@v1
-  #       if: steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true'
-  #       with:
-  #         node-version: '12'
-
-  #     - name: Cache node modules
-  #       uses: actions/cache@v1
-  #       if: steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true'
-  #       id: cache
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-  #         restore-keys: |
-  #           ${{ runner.OS }}-node-${{ env.cache-name }}-
-  #           ${{ runner.OS }}-node-
-  #           ${{ runner.OS }}-
-
-  #     - name: Install Packages
-  #       if: steps.cache.outputs.cache-hit != 'true' && (steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true')
-  #       run: yarn install --frozen-lockfile
-
-  #     - uses: chromaui/action@v1
-  #       if: steps.changes.outputs.src == 'true' || steps.changes.outputs.dependencies == 'true'
-  #       env:
-  #         STORYBOOK_PROXIMA_NOVA_LINK: ${{secrets.PROXIMA_NOVA_LINK}}
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-  #         buildScriptName: storybook:build
-  #         exitZeroOnChanges: true
   types:
     runs-on: ubuntu-latest
     steps:

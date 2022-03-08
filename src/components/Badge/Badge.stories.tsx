@@ -16,17 +16,12 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<BadgeProps> = (args) => <Badge {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+export const Playground: Story<BadgeProps> = (args) => <Badge {...args} />;
+Playground.args = {
   count: 25,
   size: BadgeSizes.md,
 };
 
 export const SimpleBadge: Story = () => <Badge count={25} />;
-SimpleBadge.storyName = 'Simple Badge';
 
 export const BadgeWithHighCount: Story = () => <Badge count={120} />;
-BadgeWithHighCount.storyName = 'Badge With High Count';

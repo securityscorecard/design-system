@@ -41,7 +41,7 @@ const InlineTemplate: Story<InlineProps> = (args) => (
   </Inline>
 );
 
-export const playground = InlineTemplate.bind({});
+export const Playground = InlineTemplate.bind({});
 
 export const WithGap = InlineTemplate.bind({});
 WithGap.args = {

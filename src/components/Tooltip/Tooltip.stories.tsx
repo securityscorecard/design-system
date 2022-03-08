@@ -47,13 +47,10 @@ const popup = (
   </>
 );
 
-export const playground: Story<
+export const Playground: Story<
   TooltipProps & { children: React.ReactChild }
 > = (args) => <Tooltip {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   children: <Button size="lg">Button with tooltip</Button>,
   popup,
 };
@@ -104,7 +101,7 @@ export const Width: Story<TooltipProps & { children: React.ReactChild }> = (
 ) => <Tooltip {...args} />;
 
 Width.args = {
-  ...playground.args,
+  ...Playground.args,
   width: 400,
   defaultIsPopupDisplayed: true,
 };

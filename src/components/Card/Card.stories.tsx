@@ -68,8 +68,8 @@ const CardTemplate: Story<CardProps> = ({ direction, ...args }) => (
   </div>
 );
 
-export const playground = CardTemplate.bind({});
-playground.args = {
+export const Playground = CardTemplate.bind({});
+Playground.args = {
   direction: 'vertical',
   children: (
     <>
@@ -85,7 +85,7 @@ playground.args = {
 
 export const WithCardMediaOnTop = CardTemplate.bind({});
 WithCardMediaOnTop.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardMediaTemplate />
@@ -96,7 +96,7 @@ WithCardMediaOnTop.args = {
 };
 export const WithCardMediaInMiddle = CardTemplate.bind({});
 WithCardMediaInMiddle.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardHeaderTemplate />
@@ -108,7 +108,7 @@ WithCardMediaInMiddle.args = {
 
 export const WithCardMediaOnBottom = CardTemplate.bind({});
 WithCardMediaOnBottom.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardHeaderTemplate />
@@ -152,7 +152,7 @@ WithCardMediaOnRight.args = {
 
 export const CardMediaWithImageElement = CardTemplate.bind({});
 CardMediaWithImageElement.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardMedia<HTMLImageElement> alt="image" as="img" mediaSrc={image} />
@@ -164,7 +164,7 @@ CardMediaWithImageElement.args = {
 
 export const CardMediaWithBackgroundImage = CardTemplate.bind({});
 CardMediaWithBackgroundImage.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardMedia mediaSrc={image} style={{ height: '15rem' }} />
@@ -176,7 +176,7 @@ CardMediaWithBackgroundImage.args = {
 
 export const CardMediaWithNonMediaElement = CardTemplate.bind({});
 CardMediaWithNonMediaElement.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardMedia>
@@ -206,7 +206,7 @@ CardMediaWithNonMediaElement.args = {
 
 export const CardMediaWithVideo = CardTemplate.bind({});
 CardMediaWithVideo.args = {
-  ...playground.args,
+  ...Playground.args,
   children: (
     <>
       <CardMedia<HTMLVideoElement>

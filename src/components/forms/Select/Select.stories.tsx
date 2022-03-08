@@ -137,8 +137,8 @@ const SelectTemplate: Story<SelectProps> = (args) => {
   return <Select {...args} aria-label="Select" isMenuPositionRelative />;
 };
 
-export const playground: Story<SelectProps> = SelectTemplate.bind({});
-playground.args = {
+export const Playground: Story<SelectProps> = SelectTemplate.bind({});
+Playground.args = {
   options,
   placeholder: 'Select country...',
 };

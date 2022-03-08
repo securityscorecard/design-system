@@ -29,13 +29,10 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<
+export const Playground: Story<
   InputProps & React.InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Input {...args} aria-label="Input" />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = { type: 'text' };
+Playground.args = { type: 'text' };
 
 export const Default: Story = () => <Input aria-label="Input" type="text" />;
 

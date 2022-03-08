@@ -12,24 +12,25 @@ export default {
   parameters: {},
 } as Meta;
 
-export const playground: Story<RadioListItemProps> = (args) => (
-  <Stack gap={SpaceSizes.xs}>
-    <RadioListItem group={args.group} itemId="item-1" value={1}>
-      RadioListItem 1
-    </RadioListItem>
-    <RadioListItem group={args.group} itemId="item-2" value={2}>
-      RadioListItem 2
-    </RadioListItem>
-    <RadioListItem group={args.group} itemId="item-3" value={3}>
-      RadioListItem 3
-    </RadioListItem>
-  </Stack>
-);
-playground.parameters = {
-  chromatic: { disable: true },
+export const Playground: Story<RadioListItemProps> = (args) => {
+  const { group } = args;
+
+  return (
+    <Stack gap={SpaceSizes.xs}>
+      <RadioListItem group={group} itemId="item-1" value={1}>
+        RadioListItem 1
+      </RadioListItem>
+      <RadioListItem group={group} itemId="item-2" value={2}>
+        RadioListItem 2
+      </RadioListItem>
+      <RadioListItem group={group} itemId="item-3" value={3}>
+        RadioListItem 3
+      </RadioListItem>
+    </Stack>
+  );
 };
-playground.args = { group: 'playground' };
-playground.argTypes = {
+Playground.args = { group: 'playground' };
+Playground.argTypes = {
   group: {
     description: 'Radio list group name',
   },

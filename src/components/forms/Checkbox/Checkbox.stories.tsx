@@ -45,13 +45,10 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<CheckboxProps> = (args) => (
+export const Playground: Story<CheckboxProps> = (args) => (
   <Checkbox {...args} />
 );
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   name: 'playground',
   checkboxId: 'playground',
   label: labelMappingValues.labelAsString,

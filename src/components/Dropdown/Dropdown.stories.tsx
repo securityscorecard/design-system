@@ -61,8 +61,8 @@ const DropdownTemplate: Story<DropdownProps> = (args) => (
   </div>
 );
 
-export const playground = DropdownTemplate.bind({});
-playground.args = {
+export const Playground = DropdownTemplate.bind({});
+Playground.args = {
   trigger: <Button variant="outline">Trigger</Button>,
   onClose: action('onClose'),
   onOpen: action('onOpen'),
@@ -70,13 +70,13 @@ playground.args = {
 
 export const OnHoverEvent = DropdownTemplate.bind({});
 OnHoverEvent.args = {
-  ...playground.args,
+  ...Playground.args,
   triggerEvents: ['hover'],
 };
 
 export const OnFocusEvent = DropdownTemplate.bind({});
 OnFocusEvent.args = {
-  ...playground.args,
+  ...Playground.args,
   triggerEvents: ['focus'],
 };
 
@@ -164,7 +164,7 @@ export const Placements: Story<DropdownProps> = (args) => (
 );
 
 Placements.args = {
-  ...playground.args,
+  ...Playground.args,
   hasPaneArrow: true,
   defaultIsOpen: true,
   maxPaneWidth: 'auto',
@@ -177,7 +177,7 @@ Placements.parameters = {
 
 export const Elevated = DropdownTemplate.bind({});
 Elevated.args = {
-  ...playground.args,
+  ...Playground.args,
   isPaneElevated: true,
   defaultIsOpen: true,
 };
@@ -195,27 +195,27 @@ export const WithArrow: Story<DropdownProps> = (args) => (
   </div>
 );
 WithArrow.args = {
-  ...playground.args,
+  ...Playground.args,
   hasPaneArrow: true,
   defaultIsOpen: true,
 };
 
 export const WithCustomMaxWidth = DropdownTemplate.bind({});
 WithCustomMaxWidth.args = {
-  ...playground.args,
+  ...Playground.args,
   maxPaneWidth: 450,
   defaultIsOpen: true,
 };
 export const WithAutoMaxWidth = DropdownTemplate.bind({});
 WithAutoMaxWidth.args = {
-  ...playground.args,
+  ...Playground.args,
   maxPaneWidth: 'auto',
   defaultIsOpen: true,
 };
 
 export const WithCustomInnerPadding = DropdownTemplate.bind({});
 WithCustomInnerPadding.args = {
-  ...playground.args,
+  ...Playground.args,
   defaultIsOpen: true,
   innerPaddingSize: 'xl',
   innerPaddingType: 'squish',

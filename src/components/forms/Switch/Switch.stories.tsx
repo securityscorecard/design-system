@@ -22,11 +22,8 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<SwitchProps> = (args) => <Switch {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+export const Playground: Story<SwitchProps> = (args) => <Switch {...args} />;
+Playground.args = {
   label: 'Public',
   switchId: 'playground',
 };

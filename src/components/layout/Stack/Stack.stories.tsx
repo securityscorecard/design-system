@@ -21,7 +21,7 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<StackProps> = (args) => (
+export const Playground: Story<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>
     <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
       <Box />
@@ -36,7 +36,7 @@ export const playground: Story<StackProps> = (args) => (
     </Stack>
   </div>
 );
-playground.args = { gap: SpaceSizes.lg };
+Playground.args = { gap: SpaceSizes.lg };
 
 export const WithGap: Story<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#0275d8' }} {...args}>

@@ -38,11 +38,8 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<ButtonProps> = (args) => <Button {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+export const Playground: Story<ButtonProps> = (args) => <Button {...args} />;
+Playground.args = {
   children: 'Playground Button',
   variant: ButtonVariants.solid,
   size: ButtonSizes.md,

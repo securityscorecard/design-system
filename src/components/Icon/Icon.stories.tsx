@@ -17,19 +17,19 @@ export default {
   },
 } as Meta;
 
-export const sscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
-sscIcon.args = {
+export const SscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
+SscIcon.args = {
   name: SSCIconNames.wrench,
   color: 'neutral.900',
 };
 
-sscIcon.storyName = 'SecurityScorecard Icon';
+SscIcon.storyName = 'SecurityScorecard Icon';
 
-const StyledIcon = styled(Icon)`
+const SIcon = styled(Icon)`
   font-size: 2rem;
   color: #4aba00;
 `;
 
-export const styledIcon: Story<IconProps> = () => (
-  <StyledIcon name={SSCIconNames.wrench} type={IconTypes.ssc} />
+export const StyledIcon: Story<IconProps> = () => (
+  <SIcon name={SSCIconNames.wrench} type={IconTypes.ssc} />
 );
