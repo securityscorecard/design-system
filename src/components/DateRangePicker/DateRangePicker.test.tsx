@@ -7,7 +7,7 @@ import DateRangePicker from './DateRangePicker';
 
 const checkInputClick = (
   inputStartDate: HTMLElement,
-  handleChangeDate: jest.Mock<any, any>,
+  handleChangeDate: jest.Mock,
 ) => {
   userEvent.click(inputStartDate);
 
