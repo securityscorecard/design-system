@@ -1,3 +1,19 @@
+# [1.0.0-alpha.154](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.153...v1.0.0-alpha.154) (2022-03-08)
+
+
+### Bug Fixes
+
+* **Accordion:** updating with proper props ([e1c4755](https://github.com/securityscorecard/design-system/commit/e1c4755096ac3cd5476bb2e5fb0989d73ee39495))
+* **Banner:** revert actions position, increase character width ([650d4d2](https://github.com/securityscorecard/design-system/commit/650d4d26ebd680c1c251ddd7718b55c0826f4fff))
+* **DateRangePicker:** fix css properties for the input ([562085d](https://github.com/securityscorecard/design-system/commit/562085dbb3d4bcc750d49e2b794d444a12d13e37))
+
+
+### Features
+
+* **Accordion:** support custom node titles on accordion component ([ead41c3](https://github.com/securityscorecard/design-system/commit/ead41c3b28cd949825adcf9faa05259b32bab773))
+* **DatePicker:** add SingleDatePicker and DateRangePicker ([1b70082](https://github.com/securityscorecard/design-system/commit/1b70082fc901efbce30efd43697e592fd8ea3c7e))
+* **H4:** change weight to semibold ([d33df2e](https://github.com/securityscorecard/design-system/commit/d33df2ebea383a7fe64642ab54efca3d59c87741))
+
 # [1.0.0-alpha.153](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.152...v1.0.0-alpha.153) (2022-02-28)
 
 
