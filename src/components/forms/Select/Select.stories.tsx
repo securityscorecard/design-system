@@ -308,6 +308,34 @@ CustomOptionLabel.args = {
   defaultValue: [options[1], options[2]],
 };
 
+export const CustomMultiValueLabel: Story<SelectProps<true>> = (args) => (
+  <Select
+    formatOptionLabel={(data, meta) => {
+      const renderMultiValueLabel = meta.context === 'value';
+
+      return renderMultiValueLabel ? (
+        <Inline align="center" gap="xs">
+          <img
+            alt=""
+            src={icons[data.value]}
+            style={{ height: '0.875rem', display: 'inline-block' }}
+          />
+          <span>{data.label}</span>
+        </Inline>
+      ) : (
+        <span>{data.label}</span>
+      );
+    }}
+    {...args}
+  />
+);
+CustomMultiValueLabel.args = {
+  ...Default.args,
+  isMenuPositionRelative: true,
+  isMulti: true,
+  defaultIsMenuOpen: true,
+};
+
 export const CustomGroupLabel: Story<SelectProps<true>> = (args) => (
   <Select
     formatGroupLabel={(group) => (
