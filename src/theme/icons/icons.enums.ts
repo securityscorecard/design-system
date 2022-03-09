@@ -34,6 +34,8 @@ export const SSCIconNames = {
   checkCircleSolid: 'check-circle-solid',
   errorSolid: 'error-solid',
   ellipsisV: 'ellipsis-v',
+  certifiedBadge: 'certified-badge',
+  certifiedBadgeSolid: 'certified-badge-solid',
 } as const;
 
 export const IconTypes = {

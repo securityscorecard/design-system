@@ -38,3 +38,5 @@ export { lock } from './lock';
 export { checkCircleSolid } from './checkCircleSolid';
 export { errorSolid } from './errorSolid';
 export { ellipsisV } from './ellipsisV';
+export { certifiedBadge } from './certifiedBadge';
+export { certifiedBadgeSolid } from './certifiedBadgeSolid';
