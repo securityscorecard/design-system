@@ -33,14 +33,14 @@ const PillTemplate: Story<PillProps> = (args) => (
   </Inline>
 );
 
-export const playground: Story<PillProps> = (args) => <Pill {...args} />;
-playground.args = {
+export const Playground: Story<PillProps> = (args) => <Pill {...args} />;
+Playground.args = {
   label: 'Pill label',
 };
 
 export const Variants = PillTemplate.bind({});
 Variants.args = {
-  ...playground.args,
+  ...Playground.args,
 };
 
 export const Sizes: Story<PillProps> = (args) => (
@@ -55,18 +55,18 @@ export const Sizes: Story<PillProps> = (args) => (
     </Inline>
   </Stack>
 );
-Sizes.args = playground.args;
+Sizes.args = Playground.args;
 
 export const Removable = PillTemplate.bind({});
 Removable.args = {
-  ...playground.args,
+  ...Playground.args,
   onRemove: action('OnRemove'),
   size: 'sm',
 };
 
 export const Clickable = PillTemplate.bind({});
 Clickable.args = {
-  ...playground.args,
+  ...Playground.args,
   onClick: action('OnRemove'),
 };
 
@@ -106,7 +106,7 @@ export const WithAdornment: Story<PillProps> = (args) => (
     />
   </Inline>
 );
-WithAdornment.args = playground.args;
+WithAdornment.args = Playground.args;
 
 export const Truncation: Story<PillProps> = (args) => (
   <Stack gap="lg">
@@ -146,7 +146,7 @@ export const PillArray: Story<PillProps> = (args) => (
 
 export const WithAnchorElement = PillTemplate.bind({});
 WithAnchorElement.args = {
-  ...playground.args,
+  ...Playground.args,
   as: 'a',
   href: '#',
   isClickable: true,

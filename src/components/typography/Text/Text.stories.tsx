@@ -27,27 +27,24 @@ export default {
 
 const lipsum = `Lorem ipsum dolor sit amet`;
 
-export const playground: Story<TextProps & { children: React.ReactChild }> = (
+export const Playground: Story<TextProps & { children: React.ReactChild }> = (
   args,
 ) => <Text {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   children: 'Playground Text',
 };
 
-export const largeText: Story = () => <Text size={TextSizes.lg}>{lipsum}</Text>;
+export const LargeText: Story = () => <Text size={TextSizes.lg}>{lipsum}</Text>;
 
-export const mediumText: Story = () => (
+export const MediumText: Story = () => (
   <Text size={TextSizes.md}>{lipsum}</Text>
 );
 
-export const smallText: Story = () => <Text size={TextSizes.sm}>{lipsum}</Text>;
+export const SmallText: Story = () => <Text size={TextSizes.sm}>{lipsum}</Text>;
 
-smallText.storyName = 'Small Text (DEPRECATED)';
+SmallText.storyName = 'Small Text (DEPRECATED)';
 
-export const primaryText: Story = () => (
+export const PrimaryText: Story = () => (
   <>
     <Text>{lipsum}</Text>
     <br />
@@ -55,7 +52,7 @@ export const primaryText: Story = () => (
   </>
 );
 
-export const secondaryText: Story = () => (
+export const SecondaryText: Story = () => (
   <>
     <Text variant={TextVariants.secondary}>{lipsum}</Text>
     <br />
@@ -65,7 +62,7 @@ export const secondaryText: Story = () => (
   </>
 );
 
-export const contextText: Story = () => (
+export const ContextText: Story = () => (
   <>
     <Text variant={TextVariants.context}>{lipsum}</Text>
     <br />
@@ -75,9 +72,9 @@ export const contextText: Story = () => (
   </>
 );
 
-contextText.storyName = 'Context Text (DEPRECATED)';
+ContextText.storyName = 'Context Text (DEPRECATED)';
 
-export const monospaceText: Story = () => (
+export const MonospaceText: Story = () => (
   <>
     <Text variant={TextVariants.monospace}>{lipsum}</Text>
     <br />
@@ -87,9 +84,9 @@ export const monospaceText: Story = () => (
   </>
 );
 
-monospaceText.storyName = 'Monospace Text (DEPRECATED)';
+MonospaceText.storyName = 'Monospace Text (DEPRECATED)';
 
-export const dangerText: Story = () => (
+export const DangerText: Story = () => (
   <>
     <Text variant={TextVariants.danger}>{lipsum}</Text>
     <br />
@@ -99,7 +96,7 @@ export const dangerText: Story = () => (
   </>
 );
 
-export const shorthandComponents: Story = () => (
+export const ShorthandComponents: Story = () => (
   <>
     <Code>This is shorthand Code component</Code>
     <br />

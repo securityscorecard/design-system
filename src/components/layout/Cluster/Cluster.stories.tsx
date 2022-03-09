@@ -60,7 +60,7 @@ const ClusterTemplate: Story<ClusterProps> = (args) => (
   </Cluster>
 );
 
-export const playground = ClusterTemplate.bind({});
+export const Playground = ClusterTemplate.bind({});
 
 export const WithGap = ClusterTemplate.bind({});
 WithGap.args = {

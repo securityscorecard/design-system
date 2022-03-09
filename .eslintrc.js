@@ -36,6 +36,7 @@ module.exports = {
     'plugin:ramda/recommended',
     'plugin:testing-library/react',
     'plugin:jest-dom/recommended',
+    'plugin:storybook/recommended',
   ],
   plugins: ['filenames', 'fp', 'react-hooks', 'ramda'],
   rules: {

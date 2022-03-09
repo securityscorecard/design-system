@@ -49,7 +49,8 @@ const ContentB = () => (
   </section>
 );
 
-export const playground: Story<TabsProps> = (args) => {
+export const Playground: Story<TabsProps> = (args) => {
+  const { selectedValue } = args;
   return (
     <Stack gap={SpaceSizes.lg}>
       <Tabs {...args}>
@@ -58,19 +59,19 @@ export const playground: Story<TabsProps> = (args) => {
       </Tabs>
 
       <main>
-        {args.selectedValue === 'inventory' && <ContentA />}
-        {args.selectedValue === 'overview' && <ContentB />}
+        {selectedValue === 'inventory' && <ContentA />}
+        {selectedValue === 'overview' && <ContentB />}
       </main>
     </Stack>
   );
 };
-playground.argTypes = {
+Playground.argTypes = {
   selectedValue: {
     control: { type: 'select' },
     options: ['inventory', 'overview'],
   },
 };
-playground.args = { selectedValue: 'inventory' };
+Playground.args = { selectedValue: 'inventory' };
 
 export const OnlyTabs: Story = () => (
   <Tabs selectedValue="overview" onSelectTab={action('Select Tab')}>

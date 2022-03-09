@@ -9,13 +9,10 @@ export default {
   component: Password,
 } as Meta;
 
-export const playground: Story<PasswordProps> = (args) => (
+export const Playground: Story<PasswordProps> = (args) => (
   <Password {...args} aria-label="Password" />
 );
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.argTypes = {
+Playground.argTypes = {
   isDisabled: { control: 'boolean' },
   isInvalid: { control: 'boolean' },
   defaultIsRevealed: { control: 'boolean' },

@@ -10,13 +10,10 @@ export default {
   title: 'components/Collapsible',
 } as Meta;
 
-export const playground: Story<
+export const Playground: Story<
   CollapsibleProps & { children: React.ReactChild }
 > = (args) => <Collapsible {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   title: 'playground',
   subject: 'Collapsible',
   children:

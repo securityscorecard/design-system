@@ -52,17 +52,14 @@ const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasell
 magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
 leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravida sem semper et.`;
 
-export const playground: Story<ParagraphProps> = (args) => (
+export const Playground: Story<ParagraphProps> = (args) => (
   <Paragraph {...args} />
 );
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   children: lipsum,
 };
 
-export const defaultParagraph: Story = () => (
+export const DefaultParagraph: Story = () => (
   <>
     <Paragraph size={TextSizes.md} variant={TextVariants.monospace}>
       {lipsum}

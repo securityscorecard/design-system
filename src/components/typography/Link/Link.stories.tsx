@@ -22,10 +22,10 @@ const RouterLink = ({ children, to, ...props }) => (
   </button>
 );
 
-export const playground: Story<LinkProps> = (args) => (
+export const Playground: Story<LinkProps> = (args) => (
   <Link {...args}>Link</Link>
 );
-playground.argTypes = {
+Playground.argTypes = {
   color: { ...generateControl('select', LinkColors) },
   href: { control: { disable: true } },
   to: { control: { disable: true } },

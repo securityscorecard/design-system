@@ -27,57 +27,54 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<
+export const Playground: Story<
   HeadingProps & { children: React.ReactChild }
 > = (args) => <Heading {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   children: 'Playground Heading',
 };
 
-export const h0: Story = () => (
+export const H0Story: Story = () => (
   <>
     <H0>Heading H0</H0>
     <H0 variant={HeadingVariants.secondary}>Heading H0 - secondary</H0>
   </>
 );
-h0.storyName = 'Heading H0';
+H0Story.storyName = 'Heading H0';
 
-export const h1: Story = () => (
+export const H1Story: Story = () => (
   <>
     <H1>Heading H1</H1>
     <H1 variant={HeadingVariants.secondary}>Heading H1 - secondary</H1>
   </>
 );
-h1.storyName = 'Heading H1';
+H1Story.storyName = 'Heading H1';
 
-export const h2: Story = () => (
+export const H2Story: Story = () => (
   <>
     <H2>Heading H2</H2>
     <H2 variant={HeadingVariants.secondary}>Heading H2 - secondary</H2>
   </>
 );
-h2.storyName = 'Heading H2';
+H2Story.storyName = 'Heading H2';
 
-export const h3: Story = () => (
+export const H3Story: Story = () => (
   <>
     <H3>Heading H3</H3>
     <H3 variant={HeadingVariants.secondary}>Heading H3 - secondary</H3>
   </>
 );
-h3.storyName = 'Heading H3';
+H3Story.storyName = 'Heading H3';
 
-export const h4: Story = () => (
+export const H4Story: Story = () => (
   <>
     <H4>Heading H4</H4>
     <H4 variant={HeadingVariants.secondary}>Heading H4 - secondary</H4>
   </>
 );
-h4.storyName = 'Heading H4';
+H4Story.storyName = 'Heading H4';
 
-export const customizedH1: Story = () => (
+export const CustomizedH1: Story = () => (
   <Heading
     margin={{ vertical: 1 }}
     padding={{ horizontal: 2 }}
@@ -86,4 +83,4 @@ export const customizedH1: Story = () => (
     Heading H1
   </Heading>
 );
-customizedH1.storyName = 'Heading H1 with customized margins';
+CustomizedH1.storyName = 'Heading H1 with customized margins';

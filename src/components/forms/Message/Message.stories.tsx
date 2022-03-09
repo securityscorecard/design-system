@@ -22,13 +22,10 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<
+export const Playground: Story<
   MessageProps & { children: React.ReactChild }
 > = (args) => <Message {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   children: 'Form field message',
   variant: MessageVariants.note,
 };

@@ -19,9 +19,6 @@ export default {
 export const DefaultToast: Story = () => (
   <Toast onClose={action('close-toast')}>This is a notification.</Toast>
 );
-DefaultToast.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const LongToast: Story = () => (
   <Toast onClose={action('close-toast')}>
@@ -35,9 +32,6 @@ export const LongToast: Story = () => (
     </Stack>
   </Toast>
 );
-LongToast.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const TwoActions: Story = () => (
   <Toast onClose={action('close-toast')}>
@@ -54,9 +48,6 @@ export const TwoActions: Story = () => (
     </Stack>
   </Toast>
 );
-LongToast.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const CustomWidthToast: Story = () => (
   <Toast width={470} onClose={action('close-toast')}>
@@ -70,9 +61,6 @@ export const CustomWidthToast: Story = () => (
     </Stack>
   </Toast>
 );
-CustomWidthToast.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const InfoToastNoAction: Story = () => (
   <Toast variant={ToastVariants.info} onClose={action('close-toast')}>
@@ -82,9 +70,6 @@ export const InfoToastNoAction: Story = () => (
     </p>
   </Toast>
 );
-InfoToastNoAction.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const SuccessToastNoAction: Story = () => (
   <Toast variant={ToastVariants.success} onClose={action('close-toast')}>
@@ -94,9 +79,6 @@ export const SuccessToastNoAction: Story = () => (
     </p>
   </Toast>
 );
-SuccessToastNoAction.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const WarnToastNoAction: Story = () => (
   <Toast variant={ToastVariants.warn} onClose={action('close-toast')}>
@@ -106,9 +88,6 @@ export const WarnToastNoAction: Story = () => (
     </p>
   </Toast>
 );
-WarnToastNoAction.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const ErrorToastNoAction: Story = () => (
   <Toast variant={ToastVariants.error} onClose={action('close-toast')}>
@@ -118,9 +97,6 @@ export const ErrorToastNoAction: Story = () => (
     </p>
   </Toast>
 );
-ErrorToastNoAction.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};
 
 export const InfoToastWithActions: Story = () => (
   <Toast variant={ToastVariants.info} onClose={action('close-toast')}>
@@ -136,6 +112,3 @@ export const InfoToastWithActions: Story = () => (
     </Stack>
   </Toast>
 );
-InfoToastWithActions.parameters = {
-  chromatic: { pauseAnimationAtEnd: true },
-};

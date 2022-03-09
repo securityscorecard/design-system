@@ -32,26 +32,26 @@ const CenterTemplate: Story<CenterProps> = (args) => (
   </div>
 );
 
-export const playground = CenterTemplate.bind({});
-playground.args = {
+export const Playground = CenterTemplate.bind({});
+Playground.args = {
   maxWidth: 500,
 };
 
 export const WithCenteredChildren = CenterTemplate.bind({});
 WithCenteredChildren.args = {
-  ...playground.args,
+  ...Playground.args,
   areChildrenCentered: true,
 };
 
 export const WithCenteredText = CenterTemplate.bind({});
 WithCenteredText.args = {
-  ...playground.args,
+  ...Playground.args,
   isTextCentered: true,
 };
 
 export const WithGutters = CenterTemplate.bind({});
 WithGutters.args = {
-  ...playground.args,
+  ...Playground.args,
   gutters: SpaceSizes.lg,
 };
 

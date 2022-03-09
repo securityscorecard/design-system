@@ -41,8 +41,8 @@ const PadboxTemplate: Story<PadboxProps> = (args) => (
   </Padbox>
 );
 
-export const playground = PadboxTemplate.bind({});
-playground.args = {
+export const Playground = PadboxTemplate.bind({});
+Playground.args = {
   paddingType: PaddingTypes.square,
   paddingSize: SpaceSizes.none,
 };

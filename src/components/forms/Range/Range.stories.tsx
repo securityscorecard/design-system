@@ -13,29 +13,26 @@ const RangeTemplate: Story<
   RangeProps & React.InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Range {...args} aria-label="Input" />;
 
-export const playground = RangeTemplate.bind({});
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = { min: 0, max: 100 };
+export const Playground = RangeTemplate.bind({});
+Playground.args = { min: 0, max: 100 };
 
 export const Default = RangeTemplate.bind({});
 
 export const ProgressRight = RangeTemplate.bind({});
 ProgressRight.args = {
-  ...playground.args,
+  ...Playground.args,
   isProgressRight: true,
 };
 
 export const WithoutLabels = RangeTemplate.bind({});
 WithoutLabels.args = {
-  ...playground.args,
+  ...Playground.args,
   hasLabels: false,
 };
 
 export const Custom = RangeTemplate.bind({});
 Custom.args = {
-  ...playground.args,
+  ...Playground.args,
   defaultValue: 170,
   max: 300,
   min: 100,
@@ -44,6 +41,6 @@ Custom.args = {
 
 export const Disabled = RangeTemplate.bind({});
 Disabled.args = {
-  ...playground.args,
+  ...Playground.args,
   isDisabled: true,
 };

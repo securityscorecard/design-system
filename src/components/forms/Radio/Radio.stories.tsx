@@ -46,11 +46,8 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<RadioProps> = (args) => <Radio {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+export const Playground: Story<RadioProps> = (args) => <Radio {...args} />;
+Playground.args = {
   name: 'playground',
   radioId: 'playground',
   label: labelMappingValues.labelAsString,

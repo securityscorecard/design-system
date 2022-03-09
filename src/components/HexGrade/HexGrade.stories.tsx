@@ -16,15 +16,16 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<HexGradeProps> = (args) => (
-  <div style={{ backgroundColor: args.isInversed ? 'black' : 'transparent' }}>
-    <HexGrade {...args} />
-  </div>
-);
-playground.parameters = {
-  chromatic: { disable: true },
+export const Playground: Story<HexGradeProps> = (args) => {
+  const { isInversed } = args;
+
+  return (
+    <div style={{ backgroundColor: isInversed ? 'black' : 'transparent' }}>
+      <HexGrade {...args} />
+    </div>
+  );
 };
-playground.args = {
+Playground.args = {
   variant: HexGradeVariants.solid,
 };
 

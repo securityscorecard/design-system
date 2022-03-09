@@ -25,17 +25,14 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<SegmentedToggleProps> = (args) => (
+export const Playground: Story<SegmentedToggleProps> = (args) => (
   <SegmentedToggle {...args}>
     <SegmentedToggleItem itemId="input1" label="One" value="1" defaultChecked />
     <SegmentedToggleItem itemId="input2" label="Two" value="2" />
     <SegmentedToggleItem itemId="input3" label="Three" value="3" />
   </SegmentedToggle>
 );
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.args = {
+Playground.args = {
   group: 'playground',
   size: SegmentedToggleEnums.SegmentedToggleSizes.lg,
 };

@@ -16,12 +16,9 @@ export default {
   },
 } as Meta;
 
-export const playground: Story<TextAreaProps> = (args) => (
+export const Playground: Story<TextAreaProps> = (args) => (
   <TextArea {...args} aria-label="Text" />
 );
-playground.parameters = {
-  chromatic: { disable: true },
-};
 
 export const Default: Story = () => <TextArea aria-label="Text" />;
 

@@ -46,7 +46,7 @@ const GridTemplate: Story = (args) => (
   </Grid>
 );
 
-export const playground = GridTemplate.bind({});
+export const Playground = GridTemplate.bind({});
 
 export const WithGap = GridTemplate.bind({});
 WithGap.args = {

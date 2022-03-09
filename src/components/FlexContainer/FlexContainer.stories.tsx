@@ -17,7 +17,7 @@ export default {
   component: FlexContainer,
 } as Meta;
 
-export const sample: Story = () => (
+export const Sample: Story = () => (
   <>
     <FlexContainer alignItems="center" padding={2}>
       <H2 margin="none" padding={{ right: 2 }}>
