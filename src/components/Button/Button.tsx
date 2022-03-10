@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isNotNull, isNotUndefined, isNull, noop } from 'ramda-adjunct';
+import {
+  isNotNull,
+  isNotUndefined,
+  isNull,
+  isUndefined,
+  noop,
+} from 'ramda-adjunct';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
@@ -63,7 +69,7 @@ const Button: React.FC<
   ) : isNotUndefined(iconName) ? (
     <>
       <StyledIcon name={iconName} size={size} type={iconType} />
-      <span>{children}</span>
+      {isNotUndefined(children) && <span>{children}</span>}
     </>
   ) : (
     children
@@ -71,6 +77,7 @@ const Button: React.FC<
 
   return (
     <StyledButton
+      $hasOnlyIcon={isNotUndefined(iconName) && isUndefined(children)}
       as={domTag}
       color={color}
       disabled={isDisabled || isLoading}
