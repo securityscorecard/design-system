@@ -1,3 +1,10 @@
+# [1.0.0-alpha.156](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.155...v1.0.0-alpha.156) (2022-03-10)
+
+
+### Reverts
+
+* Revert "chore(package): upgrade Storybook to v6.5" ([db2e50c](https://github.com/securityscorecard/design-system/commit/db2e50c3338195b366e7f5fb03f5382cde2fc390))
+
 # [1.0.0-alpha.155](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.154...v1.0.0-alpha.155) (2022-03-10)
 
 
