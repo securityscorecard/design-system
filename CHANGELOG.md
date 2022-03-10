@@ -1,3 +1,11 @@
+# [1.0.0-alpha.155](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.154...v1.0.0-alpha.155) (2022-03-10)
+
+
+### Features
+
+* **Breadcrumb:** add breadcrumb component ([4e98b67](https://github.com/securityscorecard/design-system/commit/4e98b676a185eb3a6c8931b476dd2eafde03604b))
+* **Icon:** add certified badge icons ([6a78a04](https://github.com/securityscorecard/design-system/commit/6a78a041b262f124747822d99c81b1cc4c5dce6a))
+
 # [1.0.0-alpha.154](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.153...v1.0.0-alpha.154) (2022-03-08)
 
 
