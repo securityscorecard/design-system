@@ -63,7 +63,7 @@ const Button: React.FC<
   ) : isNotUndefined(iconName) ? (
     <>
       <StyledIcon name={iconName} size={size} type={iconType} />
-      <span>{children}</span>
+      {isNotUndefined(children) && <span>{children}</span>}
     </>
   ) : (
     children
