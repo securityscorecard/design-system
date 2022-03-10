@@ -25,16 +25,19 @@ export default {
       table: {
         defaultValue: { summary: defaultControlsConfig.hasSearch },
       },
+      type: { required: true },
     },
     hasFiltering: {
       control: { type: 'boolean' },
       table: { defaultValue: { summary: defaultControlsConfig.hasFiltering } },
+      type: { required: true },
     },
     defaultIsFilteringOpen: {
       control: { type: 'boolean' },
       table: {
         defaultValue: { summary: defaultControlsConfig.defaultIsFilteringOpen },
       },
+      type: { required: true },
     },
     defaultIsFilteringApplied: {
       control: { type: 'boolean' },
@@ -43,6 +46,7 @@ export default {
           summary: defaultControlsConfig.defaultIsFilteringApplied,
         },
       },
+      type: { required: true },
     },
     searchConfig: {
       control: { type: 'object' },
@@ -56,6 +60,7 @@ export default {
   }`,
         },
       },
+      type: { required: true },
     },
     filteringConfig: {
       control: { type: 'object' },
@@ -73,6 +78,7 @@ export default {
   }`,
         },
       },
+      type: { required: true },
     },
     onControlToggle: {
       control: { disabled: true },
@@ -81,6 +87,7 @@ export default {
           summary: defaultControlsConfig.onControlToggle,
         },
       },
+      type: { required: true },
     },
   },
 } as Meta;
