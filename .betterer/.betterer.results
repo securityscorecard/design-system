@@ -36,8 +36,8 @@ exports[`no more deprecated components`] = {
     "../src/components/Pagination/PaginationItem.tsx:3242598548": [
       [12, 0, 49, "\'../FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "3549974652"]
     ],
-    "../src/components/index.ts:3331299343": [
-      [11, 0, 32, "\'./FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "726759703"]
+    "../src/components/index.ts:348012398": [
+      [12, 0, 32, "\'./FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "726759703"]
     ]
   }`
 };

@@ -22,6 +22,7 @@ export interface TextButtonColors {
   hoverColor: string;
   activeColor: string;
   disabledColor: string;
+  borderColor: string;
 }
 
 export interface ButtonColors<T> {

@@ -29,10 +29,10 @@ const ButtonLarge = css`
 
 const ButtonMedium = css<BaseStyledButtonProps>`
   font-size: ${getFontSize('md')};
-  ${({ theme }) =>
+  ${({ $hasOnlyIcon, theme }) =>
     createPadding({
-      paddingSize: SpaceSizes.md,
-      paddingType: PaddingTypes.squish,
+      paddingSize: $hasOnlyIcon ? SpaceSizes.sm : SpaceSizes.md,
+      paddingType: $hasOnlyIcon ? PaddingTypes.square : PaddingTypes.squish,
       theme,
     })};
 `;
