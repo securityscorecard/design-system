@@ -1,3 +1,10 @@
+# [1.0.0-alpha.157](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.156...v1.0.0-alpha.157) (2022-03-11)
+
+
+### Features
+
+* **ButtonGroup:** add ButtonGroup component ([683ecf8](https://github.com/securityscorecard/design-system/commit/683ecf85da487c196f16226938e3bca815f72341))
+
 # [1.0.0-alpha.156](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.155...v1.0.0-alpha.156) (2022-03-10)
 
 
