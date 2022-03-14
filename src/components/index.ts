@@ -8,6 +8,7 @@ export * from './CloseButton';
 export * from './Collapsible';
 export * from './ControlDropdown';
 export * from './Datatable';
+export * from './Drawer';
 export * from './Dropdown';
 export * from './Filters';
 export * from './FlexContainer';
