@@ -138,7 +138,7 @@ const BaseTabLabel = styled(Padbox).withConfig<
   outline: none;
   text-decoration: none;
   cursor: pointer;
-  font-weight: ${getFontWeight('medium')};
+  font-weight: ${getFontWeight('semibold')};
 
   &:visited {
     color: ${getColor('neutral.900')};
