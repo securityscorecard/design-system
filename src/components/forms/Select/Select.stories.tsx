@@ -229,9 +229,14 @@ MultiSelect.args = {
 export const NoOptionFound = SelectTemplate.bind({});
 NoOptionFound.args = {
   ...Opened.args,
-
   defaultInputValue: 'foo',
   isClearable: true,
+};
+
+export const CustomNoOptionFound = SelectTemplate.bind({});
+CustomNoOptionFound.args = {
+  ...NoOptionFound.args,
+  noOptionsMessage: () => 'You know nothing, Jon Snow',
 };
 
 export const CustomMenuActions = SelectTemplate.bind({});
