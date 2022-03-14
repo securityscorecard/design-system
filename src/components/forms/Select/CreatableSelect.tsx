@@ -12,7 +12,7 @@ const CreatableSelect = <IsMulti extends boolean = false>({
   createNewLabel = 'Create',
   ...props
 }: CreatableSelectProps<IsMulti>): React.ReactElement => {
-  const defaultSelectProps = useSelectProps<IsMulti>(props);
+  const selectProps = useSelectProps<IsMulti>(props);
 
   return (
     <CreatableReactSelect
@@ -22,8 +22,7 @@ const CreatableSelect = <IsMulti extends boolean = false>({
           <Strong variant={TextVariants.inherit}>{inputValue}</Strong>
         </>
       )}
-      {...props}
-      {...defaultSelectProps}
+      {...selectProps}
     />
   );
 };

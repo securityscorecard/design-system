@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { reverse, slice } from 'ramda';
+import { slice } from 'ramda';
 import styled from 'styled-components';
 import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
 
@@ -98,8 +98,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ children, ...props }) => {
     });
   });
 
-  const allDropdownActions = reverse(
-    React.Children.map(children, (breadcrumbItem) => {
+  const allDropdownActions = slice(
+    1,
+    -2,
+  )(
+    React.Children.toArray(children).map((breadcrumbItem) => {
       if (!React.isValidElement(breadcrumbItem)) {
         return null;
       }

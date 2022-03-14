@@ -25,11 +25,12 @@ export const useSelectProps = <IsMulti extends boolean>({
   isClearable = false,
   maxPillLabelLength = 16,
   defaultIsMenuOpen,
-  defaultInputValue,
   menuActions,
   isMenuPositionRelative = false,
   isMulti,
   isLoading = false,
+  noOptionsMessage = ({ inputValue }) => `No match found for "${inputValue}"`,
+  ...props
 }: SelectProps<IsMulti>): Record<string, unknown> => {
   const DSTheme = useTheme();
   const sortedOptions = useDeepCompareMemo(
@@ -38,6 +39,8 @@ export const useSelectProps = <IsMulti extends boolean>({
   );
 
   return {
+    maxMenuHeight: 270,
+    ...props,
     closeMenuOnSelect: !isMulti,
     components: {
       DropdownIndicator,
@@ -50,7 +53,6 @@ export const useSelectProps = <IsMulti extends boolean>({
       Menu,
       Option,
     },
-    defaultInputValue,
     hideSelectedOptions: !isMulti,
     isClearable,
     isDisabled,
@@ -59,10 +61,9 @@ export const useSelectProps = <IsMulti extends boolean>({
     isLoading: false,
     isMenuPositionRelative,
     isMulti,
-    maxMenuHeight: 270,
     menuActions,
     defaultMenuIsOpen: defaultIsMenuOpen,
-    noOptionsMessage: ({ inputValue }) => `No match found for "${inputValue}"`,
+    noOptionsMessage,
     options: sortedOptions,
     placeholder,
     styles: selectStyles(DSTheme),
