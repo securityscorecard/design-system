@@ -68,7 +68,7 @@ describe('Breadcrumbs', () => {
     expect(screen.getByText(/Parent4/i)).toBeVisible();
   });
 
-  it('should show all items within dropdown in reversed order ', () => {
+  it('should show items within dropdown using correct order ', () => {
     renderWithProviders(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
@@ -88,8 +88,8 @@ describe('Breadcrumbs', () => {
 
     // Check reverse index for links within the dropdown
     const links = screen.queryAllByText('Link', { exact: false });
-    expect(links.findIndex((item) => item.textContent === 'Link1')).toBe(6);
-    expect(links.findIndex((item) => item.textContent === 'Link9')).toBe(0);
+    expect(links.findIndex((item) => item.textContent === 'Link5')).toBe(3);
+    expect(links.findIndex((item) => item.textContent === 'Link2')).toBe(0);
   });
 
   it('should be the last breadcrumb item not a link', () => {
