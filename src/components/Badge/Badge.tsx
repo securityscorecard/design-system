@@ -1,24 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultWhen } from 'ramda-adjunct';
-import { lt, pipe } from 'ramda';
+import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
-import { BadgeSizes } from './Badge.enums';
-import { getColor, pxToRem } from '../../utils';
+import { BadgeSizes, BadgeVariants } from './Badge.enums';
+import {
+  getColor,
+  getFontWeight,
+  getRadii,
+  getSpace,
+  pxToRem,
+} from '../../utils';
+import { SpaceSizes } from '../../theme';
 
-const badgeFontSizeMedium = css`
-  font-size: ${pxToRem(11)};
+const BadgeNeutral = css`
+  background-color: ${getColor('neutral.300')};
+  color: ${getColor('neutral.900')};
+`;
+const BadgeSuccess = css`
+  background-color: ${getColor('success.500')};
+  color: ${getColor('neutral.0')};
+`;
+const BadgeInfo = css`
+  background-color: ${getColor('info.500')};
+  color: ${getColor('neutral.0')};
+`;
+const BadgeWarn = css`
+  background-color: ${getColor('warning.500')};
+  color: ${getColor('neutral.0')};
+`;
+const BadgeError = css`
+  background-color: ${getColor('error.500')};
+  color: ${getColor('neutral.0')};
 `;
 
-const badgeFontSizeSmall = css`
-  font-size: ${pxToRem(9)};
-`;
+const badgeVariants = {
+  [BadgeVariants.neutral]: BadgeNeutral,
+  [BadgeVariants.success]: BadgeSuccess,
+  [BadgeVariants.info]: BadgeInfo,
+  [BadgeVariants.warn]: BadgeWarn,
+  [BadgeVariants.error]: BadgeError,
+};
 
 const badgeFontSizes = {
-  [BadgeSizes.md]: badgeFontSizeMedium,
-  [BadgeSizes.sm]: badgeFontSizeSmall,
+  [BadgeSizes.md]: 11,
+  [BadgeSizes.sm]: 9,
 };
 
 const BadgeElement = styled.span<BadgeElementProps>`
@@ -28,22 +56,27 @@ const BadgeElement = styled.span<BadgeElementProps>`
    * we need to use this magic to have number centered
    * vertically and horizontally */
   padding: 0.229em 0.231em 0.228em 0.226em;
-  border-radius: 1em;
-  ${({ size }) => badgeFontSizes[size]};
-  font-weight: 600;
+  border-radius: ${getRadii('round')};
+  font-size: ${({ $size }) => pxToRem(badgeFontSizes[$size])};
+  font-weight: ${getFontWeight('semibold')};
   text-align: center;
-  color: ${getColor('neutral.0')};
-  background-color: ${getColor('grade.D')};
+  ${({ $variant }) => badgeVariants[$variant]};
   box-sizing: content-box;
   line-height: 1;
   vertical-align: text-top;
-  margin-left: ${pxToRem(8)};
+  margin-left: ${getSpace(SpaceSizes.sm)};
 `;
 
-const normalizeCount = pipe(defaultWhen(lt(100), '99+'));
+const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
-const Badge: React.FC<BadgeProps> = ({ count, size = BadgeSizes.md }) => (
-  <BadgeElement size={size}>{normalizeCount(count)}</BadgeElement>
+const Badge: React.FC<BadgeProps> = ({
+  count,
+  size = BadgeSizes.md,
+  variant = BadgeVariants.error,
+}) => (
+  <BadgeElement $size={size} $variant={variant}>
+    {normalizeCount(count)}
+  </BadgeElement>
 );
 
 Badge.propTypes = {
