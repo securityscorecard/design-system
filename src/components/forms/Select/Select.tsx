@@ -9,9 +9,9 @@ import { GroupPropType, OptionPropType, SelectProps } from './Select.types';
 const Select = <IsMulti extends boolean = false>(
   props: SelectProps<IsMulti>,
 ): React.ReactElement => {
-  const defaultSelectProps = useSelectProps<IsMulti>(props);
+  const selectProps = useSelectProps<IsMulti>(props);
 
-  return <ReactSelect {...props} {...defaultSelectProps} />;
+  return <ReactSelect {...selectProps} />;
 };
 
 Select.propTypes = {
