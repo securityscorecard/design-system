@@ -1,3 +1,18 @@
+# [1.0.0-alpha.158](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.157...v1.0.0-alpha.158) (2022-03-15)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix order and options showed in dropdown ([97158f2](https://github.com/securityscorecard/design-system/commit/97158f277427a56d608199603dfd026b78905efe))
+* **Tabs:** fix font-weight to be the same as Button ([fef6695](https://github.com/securityscorecard/design-system/commit/fef6695689025df187e1edd17ab9392346c82eeb))
+
+
+### Features
+
+* **Badge:** implement semantic variants ([92d0c61](https://github.com/securityscorecard/design-system/commit/92d0c611fac12328a09b8ccb953ac065343a78e5))
+* **Modal:** change backdrop opacity to 0.25 ([63a96fd](https://github.com/securityscorecard/design-system/commit/63a96fd9a582613efecffc421bb0f7daf2e17158))
+* **Select:** expose react-select props to users ([9d2e019](https://github.com/securityscorecard/design-system/commit/9d2e0195383fd3c29f85584704fea464db33111a))
+
 # [1.0.0-alpha.157](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.156...v1.0.0-alpha.157) (2022-03-11)
 
 
