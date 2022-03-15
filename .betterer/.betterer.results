@@ -5,12 +5,6 @@
 //
 exports[`no more deprecated components`] = {
   value: `{
-    "../src/components/Datatable/Datatable.tsx:1417852123": [
-      [9, 0, 49, "\'../FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "3549974652"]
-    ],
-    "../src/components/Filters/Filters.stories.tsx:3228947137": [
-      [4, 0, 49, "\'../FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "3549974652"]
-    ],
     "../src/components/Filters/Filters.tsx:3632687698": [
       [31, 0, 49, "\'../FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "3549974652"]
     ],

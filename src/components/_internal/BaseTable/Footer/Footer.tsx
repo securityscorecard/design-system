@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
-import { FlexContainer } from '../../../FlexContainer';
+import { Padbox } from '../../../layout';
 import { Spinner } from '../../../Spinner';
 import { FooterProps } from './Footer.types';
 import GoToPage from './GoToPage';
 import { Pagination } from '../../../Pagination';
 
-const StyledFooter = styled(FlexContainer)`
+const StyledFooter = styled(Padbox)`
+  display: flex;
   padding: ${pxToRem(16)};
   flex: 0 0 ${pxToRem(64)};
   height: ${pxToRem(64)};

@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import { any, prop } from 'ramda';
 import { isNotNull } from 'ramda-adjunct';
 
-import { FlexContainer } from '../../FlexContainer';
+import { Padbox } from '../../layout';
 import { datePickerStyles, dateRangePickerStyles } from './styles';
 import {
   BaseDateRangePickerPropTypes,
@@ -13,7 +13,8 @@ import {
   BaseDateRangePlaceholderPropTypes,
 } from './BaseDateRangePicker.types';
 
-const StyledDatePicker = styled(FlexContainer)`
+const StyledDatePicker = styled(Padbox)`
+  display: flex;
   ${datePickerStyles}
   ${dateRangePickerStyles}
 `;
