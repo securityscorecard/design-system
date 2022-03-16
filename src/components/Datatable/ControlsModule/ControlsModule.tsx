@@ -4,7 +4,6 @@ import { map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils';
-import { FlexContainer } from '../../FlexContainer';
 import { SearchBar } from '../../forms/SearchBar';
 import { Filters } from '../../Filters';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
@@ -22,9 +21,10 @@ import { ControlTypes } from './ControlsModule.enums';
 import { ColumnsControls } from './ColumnsControls';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import { Inline, Padbox } from '../../layout';
+import { Inline, Padbox, Stack } from '../../layout';
 
-const FiltersContainer = styled(FlexContainer)`
+const FiltersContainer = styled(Padbox)`
+  display: flex;
   background-color: ${getColor('neutral.0')};
 `;
 
@@ -194,7 +194,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   };
 
   return (
-    <FlexContainer flexDirection="column">
+    <Stack>
       <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
         <Inline gap={SpaceSizes.lg} stretch="end">
           {isToolbarEnabled && (
@@ -289,7 +289,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
       </Padbox>
 
       {shouldShowFiltering && controlsState[ControlTypes.filters].isActive && (
-        <FiltersContainer padding={{ top: 1.2, bottom: 0.8, horizontal: 0.8 }}>
+        <FiltersContainer paddingSize={SpaceSizes.md}>
           <Filters
             fields={filteringFields}
             isLoading={isDataLoading}
@@ -301,7 +301,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
           />
         </FiltersContainer>
       )}
-    </FlexContainer>
+    </Stack>
   );
 };
 
