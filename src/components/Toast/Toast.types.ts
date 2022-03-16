@@ -1,11 +1,5 @@
-import React from 'react';
+import { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBanner.types';
 
-import { ToastVariants } from './Toast.enums';
-
-export type Variants = typeof ToastVariants[keyof typeof ToastVariants];
-
-export type ToastProps = {
-  onClose: React.MouseEventHandler;
+export interface ToastProps extends BaseToastBannerProps {
   width?: number;
-  variant?: Variants;
-};
+}

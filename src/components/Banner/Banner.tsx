@@ -11,34 +11,19 @@ import {
 } from '../../types/action.types';
 import * as CustomPropTypes from '../../types/customPropTypes';
 import { BannerVariants } from './Banner.enums';
-import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
-import { FlexContainer } from '../FlexContainer';
 import { Text as BaseText } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
-import { getColor, pxToRem } from '../../utils';
+import { getColor } from '../../utils';
 import { ColorTypes } from '../../theme/colors.enums';
 import { CloseButton } from '../CloseButton';
-
-const colorVariants = {
-  [BannerVariants.info]: ColorTypes.info500,
-  [BannerVariants.warn]: ColorTypes.warning500,
-  [BannerVariants.error]: ColorTypes.error500,
-  [BannerVariants.success]: ColorTypes.success500,
-};
-
-const iconVariants = {
-  [BannerVariants.info]: SSCIconNames.infoCircle,
-  [BannerVariants.warn]: SSCIconNames.exclTriangleSolid,
-  [BannerVariants.error]: SSCIconNames.errorSolid,
-  [BannerVariants.success]: SSCIconNames.checkCircleSolid,
-};
+import { BaseToastBanner } from '../_internal/BaseToastBanner';
+import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseToastBanner';
 
 const iconPxSizesVariants = {
   [BannerVariants.info]: 24,
@@ -57,24 +42,9 @@ const bgVariants = {
 const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
   border-width: 1px;
   border-style: solid;
-  border-color: ${({ $variant }) => getColor(colorVariants[$variant])};
+  border-color: ${({ $variant }) =>
+    getColor(baseToastBannerColorVariants[$variant])};
   background-color: ${({ $variant }) => getColor(bgVariants[$variant])};
-`;
-
-const IconPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
-  background-color: ${({ $variant }) => getColor(colorVariants[$variant])};
-  display: flex;
-  align-items: center;
-`;
-
-const IconWrapper = styled(FlexContainer)`
-  width: ${pxToRem(24)};
-  height: ${pxToRem(24)};
-`;
-
-const StyledIcon = styled(Icon)<{ $variant?: BannerProps['variant'] }>`
-  color: ${getColor('neutral.0')};
-  font-size: ${({ $variant }) => pxToRem(iconPxSizesVariants[$variant])};
 `;
 
 const StyledButton = styled(Button)`
@@ -93,20 +63,14 @@ const Banner: React.FC<BannerProps> = ({
   onClose,
 }) => (
   <StyledPadbox $variant={variant}>
-    <Inline align="stretch" stretch={StretchEnum.end}>
-      <IconPadbox
-        $variant={variant}
-        paddingSize={SpaceSizes.mdPlus}
-        paddingType={PaddingTypes.squish}
-      >
-        <IconWrapper alignItems="center">
-          <StyledIcon
-            $variant={variant}
-            name={iconVariants[variant]}
-            type={IconTypes.ssc}
-          />
-        </IconWrapper>
-      </IconPadbox>
+    <BaseToastBanner
+      iconPxSizesVariants={iconPxSizesVariants}
+      iconSize={24}
+      paddingSize={SpaceSizes.mdPlus}
+      paddingType={PaddingTypes.squish}
+      stretch={StretchEnum.end}
+      variant={variant}
+    >
       <Padbox paddingSize={SpaceSizes.md}>
         <Inline
           align="start"
@@ -142,7 +106,7 @@ const Banner: React.FC<BannerProps> = ({
           />
         </Inline>
       </Padbox>
-    </Inline>
+    </BaseToastBanner>
   </StyledPadbox>
 );
 

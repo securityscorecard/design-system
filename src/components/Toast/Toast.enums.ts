@@ -1,6 +1,3 @@
-export const ToastVariants = {
-  success: 'success',
-  info: 'info',
-  warn: 'warn',
-  error: 'error',
-} as const;
+import { BaseToastBannerVariants } from '../_internal/BaseToastBanner/BaseToastBanner.enums';
+
+export const ToastVariants = BaseToastBannerVariants;
