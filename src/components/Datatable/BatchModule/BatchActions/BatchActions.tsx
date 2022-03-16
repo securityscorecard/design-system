@@ -7,7 +7,6 @@ import { isNotUndefined } from 'ramda-adjunct';
 import { ColorTypes, SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils';
-import { FlexContainer } from '../../../FlexContainer';
 import { Inline } from '../../../layout';
 import { Button } from '../../../Button';
 import { ButtonVariants } from '../../../Button/Button.enums';
@@ -47,7 +46,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
   );
 
   return (
-    <FlexContainer>
+    <Inline>
       {actions.map((action) => {
         if (
           isNotUndefined(
@@ -92,7 +91,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
           </BatchActionButton>
         );
       })}
-    </FlexContainer>
+    </Inline>
   );
 };
 
