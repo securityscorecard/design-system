@@ -16,6 +16,7 @@ const StyledSortableItem = styled(Padbox)`
   border: 1px solid ${getColor('neutral.500')};
   border-radius: ${getRadii('default')};
   cursor: grab;
+  list-style-type: none;
 `;
 
 const IconWrapper = styled(Padbox)`
