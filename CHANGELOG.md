@@ -1,3 +1,16 @@
+# [1.0.0-alpha.159](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.158...v1.0.0-alpha.159) (2022-03-17)
+
+
+### Bug Fixes
+
+* **Datatable:** fix menu padding ([9e91d5e](https://github.com/securityscorecard/design-system/commit/9e91d5ea168f9b6daa8a65907424847d3b6fa5eb))
+* **SorttableList:** remove list-style bullet ([775c481](https://github.com/securityscorecard/design-system/commit/775c481d34b359c7204c10d1d1b7e3cac09ce3b0))
+
+
+### Features
+
+* **types:** expose Typescript declarations ([e557ae9](https://github.com/securityscorecard/design-system/commit/e557ae9f1c3ab7c4cd1b3fa25f9a47b2bb1d4313))
+
 # [1.0.0-alpha.158](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.157...v1.0.0-alpha.158) (2022-03-15)
 
 
