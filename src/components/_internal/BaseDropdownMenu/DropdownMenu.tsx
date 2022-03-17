@@ -19,6 +19,7 @@ import { Padbox, PadboxEnums } from '../../layout';
 export const List = styled.ul`
   list-style: none;
   margin: 0;
+  padding: 0;
   padding-top: ${getSpace(SpaceSizes.sm)};
   padding-bottom: ${getSpace(SpaceSizes.sm)};
 `;
