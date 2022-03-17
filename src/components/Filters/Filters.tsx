@@ -25,11 +25,12 @@ import {
   isUndefined,
   noop,
 } from 'ramda-adjunct';
+import styled from 'styled-components';
 
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
-import { FlexContainer } from '../FlexContainer';
+import { Padbox } from '../layout';
 import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
 
@@ -65,6 +66,12 @@ const getDefaultState = ([firstField]: Field[]) => {
     },
   ];
 };
+
+const FiltersBase = styled(Padbox)`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
@@ -300,7 +307,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <FlexContainer flexDirection="column" flexGrow={1}>
+    <FiltersBase>
       {filtersValues.map((props, index) => (
         <FilterRow
           key={generateId(props, index)}
@@ -328,7 +335,7 @@ const Filters: React.FC<FiltersProps> = ({
         onClose={handleCloseFilters}
         onSubmit={handleSubmitForm}
       />
-    </FlexContainer>
+    </FiltersBase>
   );
 };
 

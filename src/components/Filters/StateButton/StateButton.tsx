@@ -6,7 +6,7 @@ import { IconTypes } from '../../../theme/icons/icons.enums';
 import { Icon } from '../../Icon';
 import { Text } from '../../typography/Text';
 import { Spinner } from '../../Spinner';
-import { FlexContainer } from '../../FlexContainer';
+import { Padbox } from '../../layout';
 import {
   getColor,
   getDepth,
@@ -19,7 +19,8 @@ import {
 import { StateButtonProps } from './StateButton.types';
 import { useStateButtonIcon } from '../hooks/useStateButton';
 
-const Popup = styled(FlexContainer)`
+const Popup = styled(Padbox)`
+  display: flex;
   position: absolute;
   visibility: hidden;
   z-index: ${getDepth('tooltip')};

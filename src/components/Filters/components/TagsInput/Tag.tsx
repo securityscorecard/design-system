@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Icon } from '../../../Icon';
-import { FlexContainer } from '../../../FlexContainer';
+import { Padbox } from '../../../layout';
 import { ColorTypes } from '../../../../theme/colors.enums';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import {
@@ -16,7 +16,8 @@ import {
 } from '../../../../utils';
 import { TagsProps } from './Tag.types';
 
-const Container = styled(FlexContainer)`
+const Container = styled(Padbox)`
+  display: flex;
   background: ${getColor('neutral.200')};
   border-radius: ${getRadii('default')};
   color: ${getColor('neutral.900')};

@@ -1,4 +1,4 @@
-import { FlexContainerProps } from '../../../FlexContainer/FlexContainer.types';
+import { PadboxProps } from '../../../layout/Padbox/Padbox';
 
 export interface TagsInputProps {
   value: string[];
@@ -12,7 +12,7 @@ export interface TagsInputProps {
   onError?: (boolean) => void;
 }
 
-export interface TagsContainerProps extends FlexContainerProps {
+export interface TagsContainerProps extends PadboxProps {
   isFocused: boolean;
   isInvalid: boolean;
 }

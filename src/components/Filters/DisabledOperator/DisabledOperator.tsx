@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 import { Text } from '../../typography';
 import { TextSizes } from '../../typography/Text/Text.enums';
-import { FlexContainer } from '../../FlexContainer';
+import { Padbox } from '../../layout';
 import { getColor, getRadii, pxToRem } from '../../../utils';
 
-const Container = styled(FlexContainer)`
+const Container = styled(Padbox)`
+  display: flex;
   border-radius: ${getRadii('default')};
   background: ${getColor('neutral.200')};
   height: ${pxToRem(32)};

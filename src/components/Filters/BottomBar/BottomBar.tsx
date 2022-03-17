@@ -1,10 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { FlexContainer } from '../../FlexContainer';
+import { Inline, Padbox } from '../../layout';
 import { Paragraph } from '../../typography';
 import { Button } from '../../Button';
 import { BottomBarProps } from './BottomBar.types';
+import { pxToRem } from '../../../utils';
+import { SpaceSizes } from '../../../theme';
+
+const BottomBarBase = styled(Padbox)`
+  display: flex;
+  justify-content: space-between;
+  margin-top: ${pxToRem(10)};
+`;
 
 const BottomBar: React.FC<BottomBarProps> = ({
   onSubmit,
@@ -19,8 +28,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
 }) => {
   const canCancel = !isCancelDisabled && isLoading;
   return (
-    <FlexContainer justifyContent="space-between" margin={{ top: 0.5 }}>
-      <FlexContainer>
+    <BottomBarBase>
+      <Inline gap={SpaceSizes.lg}>
         <Button
           color="primary"
           iconName="plus"
@@ -34,8 +43,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
         <Button color="primary" size="md" variant="text" onClick={onClearAll}>
           Clear all
         </Button>
-      </FlexContainer>
-      <FlexContainer alignItems="center">
+      </Inline>
+      <Inline align="center" gap={SpaceSizes.md}>
         {hasUnappliedFilters && (
           <Paragraph
             as="div"
@@ -63,8 +72,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
         >
           Apply
         </Button>
-      </FlexContainer>
-    </FlexContainer>
+      </Inline>
+    </BottomBarBase>
   );
 };
 
