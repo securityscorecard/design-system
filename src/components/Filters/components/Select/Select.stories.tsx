@@ -1,23 +1,29 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
+import styled from 'styled-components';
 
 import Filters from '../../Filters';
-import { FlexContainer } from '../../../FlexContainer';
+import { Padbox } from '../../../layout';
 import {
   fieldsSelect,
   fieldsSelectMultiValue,
   fieldsSelectPlaceholder,
   fieldsSelectWithDefaultValue,
 } from '../../mocks/options';
+import { pxToRem } from '../../../../utils';
 
 export default {
   component: Filters,
   title: 'components/Filters/components/Select',
 } as Meta;
 
+const Wrapper = styled(Padbox)`
+  margin-left: ${pxToRem(60)};
+`;
+
 export const Select: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsSelect}
       onApply={action('onApply')}
@@ -25,11 +31,11 @@ export const Select: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
 
 export const SelectWithDefaultValue: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsSelectWithDefaultValue}
       onApply={action('onApply')}
@@ -37,11 +43,11 @@ export const SelectWithDefaultValue: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
 
 export const SelectMultiValue: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsSelectMultiValue}
       onApply={action('onApply')}
@@ -49,11 +55,11 @@ export const SelectMultiValue: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
 
 export const SelectPlaceholder: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsSelectPlaceholder}
       onApply={action('onApply')}
@@ -61,5 +67,5 @@ export const SelectPlaceholder: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
