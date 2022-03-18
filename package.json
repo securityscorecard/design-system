@@ -138,7 +138,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.2",
     "rollup-plugin-typescript2": "^0.27.1",
     "rollup-plugin-visualizer": "^4.2.2",
-    "semantic-release": "^17.2.3",
+    "semantic-release": "^17.4.2",
     "storybook-addon-designs": "^6.1.0",
     "storybook-addon-outline": "^1.4.1",
     "storycap": "3.0.4",
@@ -162,7 +162,9 @@
     "prismjs": "1.25.0",
     "ansi-regex": "5.0.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "marked": "^4.0.10",
+    "simple-git": "3.3.0"
   },
   "repository": {
     "type": "git",
