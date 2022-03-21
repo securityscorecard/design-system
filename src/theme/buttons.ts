@@ -5,7 +5,7 @@ export const createButtons = (themeColors: typeof colors): Buttons => ({
   variants: {
     solid: {
       primary: {
-        color: themeColors.neutral[300],
+        color: themeColors.neutral[0],
         bgColor: themeColors.primary[500],
         hoverBgColor: themeColors.primary[400],
         activeBgColor: themeColors.primary[200],
