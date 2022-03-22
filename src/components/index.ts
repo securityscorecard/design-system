@@ -33,3 +33,4 @@ export * from './forms';
 export * from './typography';
 export * from './SingleDatePicker';
 export * from './DateRangePicker';
+export * from './Breadcrumbs';

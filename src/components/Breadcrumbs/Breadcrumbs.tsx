@@ -5,20 +5,22 @@ import styled from 'styled-components';
 import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
 
 import { BreadcrumbsProps } from './Breadcrumbs.types';
-import { ColorTypes, Inline, SpaceSizes, getFontSize } from '../..';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
-import BreadcrumbItem from './BreadcrumbItem';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { ActionKinds } from '../../types/action.types';
+import { getFontSize } from '../../utils';
+import { ColorTypes, SpaceSizes } from '../../theme';
+import { Inline } from '../layout';
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div<{ $clickable?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${getFontSize('sm')};
+  font-size: ${({ theme }) => getFontSize('sm', { theme })};
   width: 1rem;
   height: 1rem;
+  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'normal')};
 `;
 
 const BreadcrumbsWrapper = styled.nav`
@@ -56,26 +58,22 @@ const renderItemsBeforeAndAfter = (
   allItems: React.ReactNode[],
   allDropdownActions: ActionKinds<React.MouseEvent[]>[],
 ) => {
-  const dropdown = () => {
-    return (
-      <DropdownMenu
-        key="breadcrumbs-dropdown"
-        actions={allDropdownActions}
-        paneWidth={270}
-        placement="bottom-start"
-        aria-hidden
-      >
-        <BreadcrumbItem>
-          <IconWrapper>
-            <Icon
-              aria-label="Open breadcrumbs menu"
-              name={SSCIconNames.ellipsisH}
-            />
-          </IconWrapper>
-        </BreadcrumbItem>
-      </DropdownMenu>
-    );
-  };
+  const dropdown = () => (
+    <DropdownMenu
+      key="breadcrumbs-dropdown"
+      actions={allDropdownActions}
+      paneWidth={270}
+      placement="bottom-start"
+      aria-hidden
+    >
+      <IconWrapper $clickable>
+        <Icon
+          aria-label="Open breadcrumbs menu"
+          name={SSCIconNames.ellipsisH}
+        />
+      </IconWrapper>
+    </DropdownMenu>
+  );
 
   return [
     ...slice(0, itemsBeforeCollapse, allItems),
