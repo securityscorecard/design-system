@@ -1,3 +1,10 @@
+# [1.0.0-alpha.160](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.159...v1.0.0-alpha.160) (2022-03-22)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** remove circular dependency issue ([d2d946a](https://github.com/securityscorecard/design-system/commit/d2d946ac96048bb98ff30c954418a8369b3e7127))
+
 # [1.0.0-alpha.159](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.158...v1.0.0-alpha.159) (2022-03-17)
 
 
