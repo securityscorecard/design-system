@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Column } from 'react-table';
+import { filter } from 'ramda';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import { fields } from '../Filters/mocks/options';
@@ -36,6 +37,27 @@ const columns: Column<Data>[] = [
   { accessor: 'col2', Header: 'Col2' },
 ];
 
+const TestDatatableComponent = () => {
+  const [entries, setEntries] = useState(data);
+  return (
+    <Datatable<Data>
+      data={entries}
+      columns={columns}
+      dataSize={entries.length}
+      batchActions={[
+        {
+          label: 'Remove',
+          name: 'remove',
+          onClick: (ids) => {
+            setEntries((prev) =>
+              filter((entry) => String(entry.id) !== ids[0], prev),
+            );
+          },
+        },
+      ]}
+    />
+  );
+};
 describe('Datatable', () => {
   beforeEach(() => {
     DatatableStore.replace(datatableInitialState);
@@ -84,5 +106,22 @@ describe('Datatable', () => {
       expect(DatatableStore.getRawState().isCanceled).toBe(true);
       expect(onCancelLoading).toHaveBeenCalled();
     });
+  });
+  it('should reset selected rows when data changes', () => {
+    renderWithProviders(<TestDatatableComponent />);
+
+    userEvent.click(
+      screen.getAllByRole('checkbox', {
+        name: /Toggle select/i,
+      })[2],
+    );
+
+    const elementCounter = screen.getByRole('heading', { level: 4 });
+
+    expect(elementCounter).toHaveTextContent('1 of 3 selected');
+
+    userEvent.click(screen.getByRole('button', { name: /Remove/i }));
+
+    expect(elementCounter).toHaveTextContent(/^2$/);
   });
 });
