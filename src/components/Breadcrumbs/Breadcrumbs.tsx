@@ -9,18 +9,28 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { ActionKinds } from '../../types/action.types';
-import { getFontSize } from '../../utils';
+import { getColor, getFontSize } from '../../utils';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
 
-const IconWrapper = styled.div<{ $clickable?: boolean }>`
+const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${({ theme }) => getFontSize('sm', { theme })};
+  font-size: ${getFontSize('sm')};
   width: 1rem;
   height: 1rem;
-  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'normal')};
+`;
+
+const IconWrapperDropdown = styled(IconWrapper)`
+  cursor: pointer;
+  color: ${getColor('neutral.700')};
+  &:hover {
+    color: ${getColor('primary.600')};
+  }
+  &:active {
+    color: ${getColor('primary.700')};
+  }
 `;
 
 const BreadcrumbsWrapper = styled.nav`
@@ -66,12 +76,12 @@ const renderItemsBeforeAndAfter = (
       placement="bottom-start"
       aria-hidden
     >
-      <IconWrapper $clickable>
+      <IconWrapperDropdown>
         <Icon
           aria-label="Open breadcrumbs menu"
           name={SSCIconNames.ellipsisH}
         />
-      </IconWrapper>
+      </IconWrapperDropdown>
     </DropdownMenu>
   );
 
