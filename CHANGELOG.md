@@ -1,3 +1,12 @@
+# [1.0.0-alpha.161](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.160...v1.0.0-alpha.161) (2022-03-23)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix font-size items. Fix dropdown's icon hover ([367fbd3](https://github.com/securityscorecard/design-system/commit/367fbd3d9f3385baa5daef3ff2021cebfb8e9bdf))
+* **ButtonGroup:** update solid color ([7cc185d](https://github.com/securityscorecard/design-system/commit/7cc185de4b26e9e50f890f0b5485571fba98b4d2))
+* **Datatable:** reset selection on data change ([39cce3b](https://github.com/securityscorecard/design-system/commit/39cce3b0131cf01f8db14aca1379d53667bf5897))
+
 # [1.0.0-alpha.160](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.159...v1.0.0-alpha.160) (2022-03-22)
 
 
