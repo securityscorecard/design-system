@@ -45,11 +45,13 @@ const Button: React.FC<
     RouterLink = requireRouterLink();
   }
 
-  const domTag = isNotNull(href)
-    ? 'a' // render 'a' tag if 'href' is present
-    : isNotNull(to)
-    ? RouterLink // render 'Link' if 'to' is present
-    : undefined; // use default
+  const domTag =
+    as ??
+    (isNotNull(href)
+      ? 'a' // render 'a' tag if 'href' is present
+      : isNotNull(to)
+      ? RouterLink // render 'Link' if 'to' is present
+      : undefined); // use default
 
   if (isNull(RouterLink) && isNull(domTag)) {
     return null;
