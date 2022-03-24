@@ -61,7 +61,7 @@
     "ramda": "^0.28.0",
     "ramda-adjunct": "^3.0.0",
     "react-container-query": "^0.12.0",
-    "react-cool-portal": "^1.1.0",
+    "react-cool-portal": "1.2.0",
     "react-datepicker": "^3.7.0",
     "react-input-autosize": "^3.0.0",
     "react-popper": "^2.2.5",
