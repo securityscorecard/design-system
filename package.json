@@ -72,8 +72,8 @@
     "use-deep-compare": "^1.1.0"
   },
   "devDependencies": {
-    "@betterer/cli": "^5.1.6",
-    "@betterer/eslint": "^5.1.6",
+    "@betterer/cli": "^5.1.7",
+    "@betterer/eslint": "^5.1.7",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@geometricpanda/storybook-addon-badges": "^0.0.3",

@@ -11,12 +11,12 @@
     "reg-cli": "^0.17.3",
     "serve": "^13.0.0",
     "start-server-and-test": "^1.14.0",
-    "storycap": "3.0.1"
+    "storycap": "3.0.1",
+    "strip-ansi": "^6.0.1",
+    "ansi-regex": "^6.0.1",
+    "trim-newlines": "3.0.1"
   },
   "resolutions": {
-    "lodash": "4.17.20",
-    "trim-newlines": "3.0.1",
-    "string-width": "4.1.0",
-    "ansi-regex": "5.0.1"
+    "lodash": "4.17.20"
   }
 }

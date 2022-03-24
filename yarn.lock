@@ -1195,15 +1195,15 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@betterer/betterer@^5.1.6":
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/@betterer/betterer/-/betterer-5.1.6.tgz#52ac359e57698be70cf72ecee9d1c1ff8e466660"
-  integrity sha512-9m41Bg/OE6CTGlO93H9VyJnh2tDiVoseGzdYXHwRXR+bBeGp+qov8RAI2+55erUGpnzlrAAkcH4pyvVtivDyvQ==
+"@betterer/betterer@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@betterer/betterer/-/betterer-5.1.7.tgz#dc0063a1721aec9eb53987d54cd03b4a928d13ae"
+  integrity sha512-D+yfUX+HY0l36MYSjEaZ0D3yHerVQggQ2ZJ/mXjORLq1CgwReaaM2Gc1D+/2+SAQTOMwJp6gwXcuB7e8gxheQQ==
   dependencies:
     "@betterer/constraints" "^5.0.0"
     "@betterer/errors" "^5.0.0"
     "@betterer/logger" "^5.1.5"
-    "@betterer/reporter" "^5.1.6"
+    "@betterer/reporter" "^5.1.7"
     "@phenomnomnominal/debug" "^0.2.5"
     "@phenomnomnominal/worker-require" "^0.0.34"
     chokidar "^3.3.1"
@@ -1212,20 +1212,20 @@
     lines-and-columns "^1.1.6"
     minimatch "^3.0.4"
     prettier "^2.3.2"
-    simple-git "^2.44.0"
+    simple-git "^3.1.1"
     ts-node "^10.2.1"
     tslib "^2.3.1"
   optionalDependencies:
     typescript ">=2.7"
 
-"@betterer/cli@^5.1.6":
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/@betterer/cli/-/cli-5.1.6.tgz#22b8c6b160ac0c1b0d1f66fe98bafe5bfa23d0f6"
-  integrity sha512-eT9oxmt0iHH8N6gcpw45ceGqyfnUJBqeSh4GBDbO6+LvfkT7z/KKfyCqMCXSLYxJcp50H9P2vWS3GTwyEM4znw==
+"@betterer/cli@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@betterer/cli/-/cli-5.1.7.tgz#c1a8769b221d796974fe07f30c80c260a6598f7a"
+  integrity sha512-ohZyPy/hGejNqJwPijqiWFHZ5TUSPRoBf58A8euy+A0QnQgAhuRdu8Vh9Jz5B8Orc1Jxj5+SaQXyLOq/lqpBaQ==
   dependencies:
-    "@betterer/betterer" "^5.1.6"
+    "@betterer/betterer" "^5.1.7"
     "@betterer/errors" "^5.0.0"
-    "@betterer/tasks" "^5.1.5"
+    "@betterer/tasks" "^5.1.7"
     "@phenomnomnominal/tsquery" "^4.1.1"
     "@phenomnomnominal/tstemplate" "^0.1.0"
     "@phenomnomnominal/worker-require" "^0.0.34"
@@ -1251,12 +1251,12 @@
   resolved "https://registry.yarnpkg.com/@betterer/errors/-/errors-5.0.0.tgz#0013de859b955499dc3a6abadd255dfadae69c54"
   integrity sha512-TDeaxGEXdlnBP3xz2jd47RjcnxqLBqq0waDGfVmvPxiuUAy/0txO8dq+P0K8oGuUd5oVIllAtGWfcmu3yjLJmw==
 
-"@betterer/eslint@^5.1.6":
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/@betterer/eslint/-/eslint-5.1.6.tgz#16a40cfa4bbd853fc870961f209f74b99709fc47"
-  integrity sha512-I9+yE0dM8wuJAw980tiB/8IpN0lohNXYwVMqEqdD7as3ztsqtGa2t8Nn9ougaMCsMHB0Wpi1JbTCyVZBWim5jw==
+"@betterer/eslint@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@betterer/eslint/-/eslint-5.1.7.tgz#68daf07f535a72f41c00f094642ab42dc13fcc81"
+  integrity sha512-mxgmnapBVU9eM8U2CrA+BLu8NpL80Y6r9Heak++htwHzUP3ByVuJq7ZuHDqcL4/b8+LlZjauthfPpWsRF0VFjA==
   dependencies:
-    "@betterer/betterer" "^5.1.6"
+    "@betterer/betterer" "^5.1.7"
     "@betterer/errors" "^5.0.0"
     tslib "^2.3.1"
 
@@ -1272,25 +1272,25 @@
     react-dom ">=16.8.4 || >=17.0.0"
     tslib "^2.3.1"
 
-"@betterer/reporter@^5.1.6":
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/@betterer/reporter/-/reporter-5.1.6.tgz#bde20a3e7b1a67e66d5a8d29c5676c3d767eb928"
-  integrity sha512-A8A5Zt0Qwzuwb1lvnxQhvoAz4Px0N7d/Ti9CQhYNNjWC+TkvQlMQj5VdPXZMyDaMANGmNGYgxgP1Vlt4EzHo8Q==
+"@betterer/reporter@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@betterer/reporter/-/reporter-5.1.7.tgz#59daf1b06d2bd49f7c09181afa3ef7c72f40968e"
+  integrity sha512-fxcg/d/z+d2WkJEg1R0jOLR7uY2Cl44eKSc1AYSRS1Odos7HVuS0djf5Q/PA0Npb/xNITd41CYLqk+AXkiB4sA==
   dependencies:
-    "@betterer/betterer" "^5.1.6"
+    "@betterer/betterer" "^5.1.7"
     "@betterer/errors" "^5.0.0"
     "@betterer/logger" "^5.1.5"
-    "@betterer/tasks" "^5.1.5"
+    "@betterer/tasks" "^5.1.7"
     ink "^3.0.9"
     ink-text-input "^4.0.1"
     react ">=16.8.4 || >=17.0.0"
     react-dom ">=16.8.4 || >=17.0.0"
     tslib "^2.3.1"
 
-"@betterer/tasks@^5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@betterer/tasks/-/tasks-5.1.5.tgz#6f0ffb8e2def096476e64309e2b878a8defc4028"
-  integrity sha512-YHk0ijemdQCQ3YEdqI8pliKNpY7tVYpRjdmRv8jBZChO3p1cfu214okR/bKglxpQsaaCXn6U4zc19Q0LGmOK3w==
+"@betterer/tasks@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@betterer/tasks/-/tasks-5.1.7.tgz#bf9084a50b9a2f76ea25771fce7167540a3cb748"
+  integrity sha512-s4ARlefVuEvIowM6+JI1a5GcjLXiCBp018T4GMS7tsKbAeWbAU79bYF0Tgv1OExxxnpokR0l/XBt+cPLSLEwcg==
   dependencies:
     "@betterer/errors" "^5.0.0"
     "@betterer/logger" "^5.1.5"
@@ -14506,7 +14506,7 @@ signale@^1.2.1:
     figures "^2.0.0"
     pkg-conf "^2.1.0"
 
-simple-git@3.3.0, simple-git@^2.44.0:
+simple-git@3.3.0, simple-git@^3.1.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-3.3.0.tgz#91692d576f851be691124781b79872b246d2f92c"
   integrity sha512-K9qcbbZwPHhk7MLi0k0ekvSFXJIrRoXgHhqMXAFM75qS68vdHTcuzmul1ilKI02F/4lXshVgBoDll2t++JK0PQ==
