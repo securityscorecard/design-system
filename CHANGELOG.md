@@ -1,3 +1,10 @@
+# [1.0.0-alpha.162](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.161...v1.0.0-alpha.162) (2022-03-24)
+
+
+### Bug Fixes
+
+* **button:** allow pass 'as' prop into component ([3cfc157](https://github.com/securityscorecard/design-system/commit/3cfc157169d611048d04e2a6ed600a4050e8286f))
+
 # [1.0.0-alpha.161](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.160...v1.0.0-alpha.161) (2022-03-23)
 
 
