@@ -46,3 +46,30 @@ export const WithCustomPlaceholder: Story = () => {
     />
   );
 };
+
+export const OpenDatepicker: Story = () => {
+  const [dateValue, handleChangeDate] = useState<Date>(null);
+
+  return (
+    <SingleDatePicker
+      placeholder="Custom placeholder"
+      value={dateValue}
+      defaultIsOpen
+      onChange={handleChangeDate}
+    />
+  );
+};
+
+export const YearPickerDatePicker: Story = () => {
+  const [dateValue, handleChangeDate] = useState<Date>(null);
+
+  return (
+    <SingleDatePicker
+      placeholder="Custom placeholder"
+      value={dateValue}
+      defaultIsOpen
+      defaultIsYearPickerOpen
+      onChange={handleChangeDate}
+    />
+  );
+};
