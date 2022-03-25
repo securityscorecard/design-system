@@ -21,7 +21,7 @@ import { ControlTypes } from './ControlsModule.enums';
 import { ColumnsControls } from './ColumnsControls';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import { Inline, Padbox, Stack } from '../../layout';
+import { Inline, Padbox } from '../../layout';
 
 const FiltersContainer = styled(Padbox)`
   display: flex;
@@ -194,7 +194,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   };
 
   return (
-    <Stack>
+    <div>
       <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
         <Inline gap={SpaceSizes.lg} stretch="end">
           {isToolbarEnabled && (
@@ -301,7 +301,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
           />
         </FiltersContainer>
       )}
-    </Stack>
+    </div>
   );
 };
 
