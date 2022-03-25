@@ -23,7 +23,7 @@ import {
 } from 'ramda';
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
-import { Inline, Padbox } from '../../layout';
+import { Inline } from '../../layout';
 import { Text } from '../../typography';
 import { TextSizes } from '../../typography/Text/Text.enums';
 import { StateButton } from '../StateButton';
@@ -50,18 +50,10 @@ const SplitField = styled.div<SplitFieldProps>`
       : css`
           width: 100%;
         `};
-  margin-right: ${pxToRem(6)};
-  &:first-of-type {
-    margin-left: ${pxToRem(6)};
-  }
-  &:last-of-type {
-    margin-right: ${pxToRem(0)};
-  }
 `;
 
 const Units = styled(Text)`
   flex-shrink: 0;
-  margin-left: ${pxToRem(8)};
   min-width: ${pxToRem(64)};
 `;
 
@@ -168,11 +160,6 @@ const renderSelectComponent = (Component, value, onChange) => {
     />
   );
 };
-
-const PaddedContainer = styled(Padbox)`
-  display: flex;
-  margin-bottom: ${pxToRem(10)};
-`;
 
 const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   if (isUndefined(Component)) return null;
@@ -288,15 +275,15 @@ const FilterRow: React.FC<FilterRowProps> = ({
   };
 
   return (
-    <PaddedContainer>
-      {!isDefaultState && (
+    <Inline gap={SpaceSizes.sm}>
+      {!isDefaultState ? (
         <StateButton
           index={index}
           isApplied={isApplied}
           isLoading={isLoading}
           onClick={onRemove}
         />
-      )}
+      ) : null}
       <SplitField $width={72}>
         {index === 1 ? (
           <SelectFilter
@@ -334,7 +321,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
           isInvalid,
         )}
       </SplitField>
-    </PaddedContainer>
+    </Inline>
   );
 };
 

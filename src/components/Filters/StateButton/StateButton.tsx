@@ -24,7 +24,7 @@ const Popup = styled(Padbox)`
   position: absolute;
   visibility: hidden;
   z-index: ${getDepth('tooltip')};
-  padding: ${pxToRem(8.5, 0, 8.5, 10)};
+  padding: ${pxToRem(8, 0, 8, 10)};
   background: ${getColor('error.500')};
   border-top-left-radius: ${getRadii('default')};
   border-bottom-left-radius: ${getRadii('default')};
@@ -38,11 +38,11 @@ const RemoveButton = styled.button`
   background: transparent;
   font-family: ${getFontFamily('base')};
   height: ${pxToRem(32)};
+  flex: 0 0 ${pxToRem(32)};
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: ${pxToRem(8, 5.5)};
   border: none;
   margin: 0;
 

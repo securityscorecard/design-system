@@ -2,17 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Inline, Padbox } from '../../layout';
+import { Inline } from '../../layout';
 import { Paragraph } from '../../typography';
 import { Button } from '../../Button';
 import { BottomBarProps } from './BottomBar.types';
-import { pxToRem } from '../../../utils';
+import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
 
-const BottomBarBase = styled(Padbox)`
-  display: flex;
-  justify-content: space-between;
-  margin-top: ${pxToRem(10)};
+const AddFilterButton = styled(Button)`
+  padding-left: ${getSpace(SpaceSizes.sm)};
 `;
 
 const BottomBar: React.FC<BottomBarProps> = ({
@@ -28,9 +26,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
 }) => {
   const canCancel = !isCancelDisabled && isLoading;
   return (
-    <BottomBarBase>
+    <Inline gap={SpaceSizes.lg} justify="space-between">
       <Inline gap={SpaceSizes.lg}>
-        <Button
+        <AddFilterButton
           color="primary"
           iconName="plus"
           margin={{ left: 0.5, right: 2 }}
@@ -38,20 +36,15 @@ const BottomBar: React.FC<BottomBarProps> = ({
           variant="text"
           onClick={onAdd}
         >
-          Add
-        </Button>
+          Add filter
+        </AddFilterButton>
         <Button color="primary" size="md" variant="text" onClick={onClearAll}>
           Clear all
         </Button>
       </Inline>
       <Inline align="center" gap={SpaceSizes.md}>
         {hasUnappliedFilters && (
-          <Paragraph
-            as="div"
-            margin={{ right: 0.8, bottom: 0 }}
-            size="md"
-            variant="secondary"
-          >
+          <Paragraph as="div" size="md" variant="secondary">
             You have unapplied filters
           </Paragraph>
         )}
@@ -73,7 +66,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
           Apply
         </Button>
       </Inline>
-    </BottomBarBase>
+    </Inline>
   );
 };
 

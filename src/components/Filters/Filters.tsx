@@ -27,12 +27,13 @@ import {
 } from 'ramda-adjunct';
 import styled from 'styled-components';
 
+import { Padbox, Stack } from '../layout';
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
-import { Padbox } from '../layout';
 import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
+import { SpaceSizes } from '../../theme';
 
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
@@ -308,33 +309,37 @@ const Filters: React.FC<FiltersProps> = ({
 
   return (
     <FiltersBase>
-      {filtersValues.map((props, index) => (
-        <FilterRow
-          key={generateId(props, index)}
-          fields={fields}
-          index={index}
-          isDefaultState={isDefaultState}
-          isInvalid={validValues[index] === false}
-          onConditionChange={handleConditionChange}
-          onError={(hasError) => handleError(hasError, index)}
-          onFieldChange={handleFieldChange}
-          onOperatorChange={handleOperatorChange}
-          onRemove={handleRemoveFilter}
-          onValueChange={handleValueChange}
-          {...filtersValues[index]}
+      <Stack gap={SpaceSizes.md}>
+        <Stack gap={SpaceSizes.sm}>
+          {filtersValues.map((props, index) => (
+            <FilterRow
+              key={generateId(props, index)}
+              fields={fields}
+              index={index}
+              isDefaultState={isDefaultState}
+              isInvalid={validValues[index] === false}
+              onConditionChange={handleConditionChange}
+              onError={(hasError) => handleError(hasError, index)}
+              onFieldChange={handleFieldChange}
+              onOperatorChange={handleOperatorChange}
+              onRemove={handleRemoveFilter}
+              onValueChange={handleValueChange}
+              {...filtersValues[index]}
+            />
+          ))}
+        </Stack>
+        <BottomBar
+          hasUnappliedFilters={hasUnappliedFilters}
+          isApplyDisabled={hasInvalidValues}
+          isCancelDisabled={isCancelDisabled}
+          isLoading={isLoading}
+          onAdd={handleAddRow}
+          onCancel={onCancel}
+          onClearAll={handleClearAll}
+          onClose={handleCloseFilters}
+          onSubmit={handleSubmitForm}
         />
-      ))}
-      <BottomBar
-        hasUnappliedFilters={hasUnappliedFilters}
-        isApplyDisabled={hasInvalidValues}
-        isCancelDisabled={isCancelDisabled}
-        isLoading={isLoading}
-        onAdd={handleAddRow}
-        onCancel={onCancel}
-        onClearAll={handleClearAll}
-        onClose={handleCloseFilters}
-        onSubmit={handleSubmitForm}
-      />
+      </Stack>
     </FiltersBase>
   );
 };
