@@ -8,10 +8,10 @@ import { Spinner } from '../../../Spinner';
 import { FooterProps } from './Footer.types';
 import GoToPage from './GoToPage';
 import { Pagination } from '../../../Pagination';
+import { SpaceSizes } from '../../../../theme';
 
 const StyledFooter = styled(Padbox)`
   display: flex;
-  padding: ${pxToRem(16)};
   flex: 0 0 ${pxToRem(64)};
   height: ${pxToRem(64)};
 `;
@@ -32,7 +32,12 @@ const Footer: React.FC<FooterProps> = ({
   const handlePageChange = (page) => onGotoPage(page - 1);
 
   return (
-    <StyledFooter as="footer" data-testid="footer" flexDirection="row">
+    <StyledFooter
+      as="footer"
+      data-testid="footer"
+      flexDirection="row"
+      paddingSize={SpaceSizes.md}
+    >
       <LoadingContainer>
         {isDataLoading && (
           <Spinner
