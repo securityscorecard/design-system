@@ -48,7 +48,11 @@ describe('Datatable/BatchActions', () => {
       renderWithProviders(<BatchActions actions={actions} />);
 
       fireEvent.click(screen.getByRole('button', { name: /Action/i }));
-      expect(actionFnMock).toBeCalledWith(selectedIds, false);
+      expect(actionFnMock).toBeCalledWith(
+        selectedIds,
+        false,
+        expect.any(Function),
+      );
     });
 
     it('should call onClick handler in dropdown action with correct parameters', () => {
@@ -57,7 +61,11 @@ describe('Datatable/BatchActions', () => {
       fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
       fireEvent.click(screen.getByRole('button', { name: /Dropdown Item/i }));
 
-      expect(subactionFnMock).toBeCalledWith(selectedIds, false);
+      expect(subactionFnMock).toBeCalledWith(
+        selectedIds,
+        false,
+        expect.any(Function),
+      );
     });
   });
   describe('given exclusive selection is enabled', () => {
@@ -78,7 +86,11 @@ describe('Datatable/BatchActions', () => {
       });
 
       fireEvent.click(screen.getByRole('button', { name: /Action/i }));
-      expect(actionFnMock).toBeCalledWith(selectedIds, true);
+      expect(actionFnMock).toBeCalledWith(
+        selectedIds,
+        true,
+        expect.any(Function),
+      );
     });
 
     it('should call onClick handler in dropdown action with correct parameters', () => {
@@ -92,7 +104,11 @@ describe('Datatable/BatchActions', () => {
       fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
       fireEvent.click(screen.getByRole('button', { name: /Dropdown Item/i }));
 
-      expect(subactionFnMock).toBeCalledWith(selectedIds, true);
+      expect(subactionFnMock).toBeCalledWith(
+        selectedIds,
+        true,
+        expect.any(Function),
+      );
     });
   });
   describe('given subactions are defined', () => {
