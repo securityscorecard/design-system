@@ -1,9 +1,10 @@
 import { action } from '@storybook/addon-actions';
 
+import { BatchActionArgs } from '../Datatable.types';
 import { Action } from '../types/Action.types';
 import { ActionKinds } from '../../../types/action.types';
 
-export const subactionsMock: ActionKinds<string[]>[] = [
+export const subactionsMock: ActionKinds<BatchActionArgs>[] = [
   {
     label: 'OnClick',
     name: 'onClick',
@@ -23,7 +24,7 @@ export const subactionsMock: ActionKinds<string[]>[] = [
   },
 ];
 
-export const actionsMock: Action<string[]>[] = [
+export const actionsMock: Action<BatchActionArgs>[] = [
   ...subactionsMock,
   {
     label: 'Dropdown',
