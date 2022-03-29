@@ -4,4 +4,8 @@ export interface SingleDatePickerProps {
   minDate?: Date;
   maxDate?: Date;
   placeholder?: string;
+  defaultIsOpen?: boolean;
+  defaultIsYearPickerOpen?: boolean;
+  startDate?: Date;
+  endDate?: Date;
 }

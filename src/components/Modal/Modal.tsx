@@ -10,7 +10,8 @@ import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Inline, Padbox } from '../layout';
 import { H3 } from '../typography';
-import { getColor, getDepth, getRadii, pxToRem } from '../../utils';
+import { Overlay } from '../_internal/BaseOverlay';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
 import { DSContext } from '../../theme/DSProvider/DSProvider';
@@ -23,19 +24,6 @@ const widthVariants = {
   [ModalSizes.md]: 600,
   [ModalSizes.lg]: 900,
 };
-
-const Overlay = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: ${getDepth('modal')};
-`;
 
 const BaseModal = styled.div<{ $maxWidth: number }>`
   display: flex;
@@ -76,7 +64,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     return (
       <Portal>
-        <Overlay>
+        <Overlay placement="center">
           <BaseModal
             ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
             $maxWidth={widthVariants[size]}

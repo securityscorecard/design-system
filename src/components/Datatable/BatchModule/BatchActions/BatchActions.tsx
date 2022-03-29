@@ -20,11 +20,9 @@ import {
 import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { BatchActionsProps } from './BatchActions.types';
 import { DatatableStore } from '../../Datatable.store';
+import { BatchActionArgs } from '../../Datatable.types';
 
-const BatchActionButton = styled(Button).attrs((props) => ({
-  variant: ButtonVariants.text,
-  ...props,
-}))`
+const BatchActionButton = styled(Button)`
   padding: ${pxToRem(9.5, 16)};
   line-height: ${pxToRem(13)};
   height: ${pxToRem(32)};
@@ -38,9 +36,15 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
     }),
   );
 
+  const handleResetSelection = () => {
+    DatatableStore.update((s) => {
+      s.shouldResetSelectedRows = true;
+    });
+  };
+
   const handleOnActionClick = useCallback(
     (onClick) => {
-      onClick(selectedIds, hasExclusiveSelection);
+      onClick(selectedIds, hasExclusiveSelection, handleResetSelection);
     },
     [selectedIds, hasExclusiveSelection],
   );
@@ -50,13 +54,16 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
       {actions.map((action) => {
         if (
           isNotUndefined(
-            (action as ActionWithSubactions<string[], boolean>).subActions,
+            (action as ActionWithSubactions<BatchActionArgs>).subActions,
           )
         ) {
-          const subActions = map((subAction) => ({
-            ...subAction,
-            onClick: () => handleOnActionClick(subAction.onClick),
-          }))((action as ActionWithSubactions<string[], boolean>).subActions);
+          const subActions = map(
+            (subAction) => ({
+              ...subAction,
+              onClick: () => handleOnActionClick(subAction.onClick),
+            }),
+            (action as ActionWithSubactions<BatchActionArgs>).subActions,
+          );
 
           return (
             <DropdownMenu
@@ -65,7 +72,11 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
               paneWidth={140}
               placement="bottom-end"
             >
-              <BatchActionButton name={action.name} onClick={action.onClick}>
+              <BatchActionButton
+                name={action.name}
+                variant={ButtonVariants.text}
+                onClick={action.onClick}
+              >
                 <Inline gap={SpaceSizes.xs}>
                   <span>{action.label}</span>
                   <Icon
@@ -82,9 +93,10 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
         return (
           <BatchActionButton
             key={action.name}
-            href={(action as AbsoluteLinkActionKind<string[], boolean>).href}
+            href={(action as AbsoluteLinkActionKind<BatchActionArgs>).href}
             name={action.name}
-            to={(action as RelativeLinkActionKind<string[], boolean>).to}
+            to={(action as RelativeLinkActionKind<BatchActionArgs>).to}
+            variant={ButtonVariants.text}
             onClick={() => handleOnActionClick(action.onClick)}
           >
             {action.label}

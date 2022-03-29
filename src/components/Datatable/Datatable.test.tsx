@@ -48,10 +48,11 @@ const TestDatatableComponent = () => {
         {
           label: 'Remove',
           name: 'remove',
-          onClick: (ids) => {
+          onClick: (ids, _, resetSelection) => {
             setEntries((prev) =>
               filter((entry) => String(entry.id) !== ids[0], prev),
             );
+            resetSelection();
           },
         },
       ]}
@@ -107,6 +108,7 @@ describe('Datatable', () => {
       expect(onCancelLoading).toHaveBeenCalled();
     });
   });
+
   it('should reset selected rows when data changes', () => {
     renderWithProviders(<TestDatatableComponent />);
 
@@ -123,5 +125,13 @@ describe('Datatable', () => {
     userEvent.click(screen.getByRole('button', { name: /Remove/i }));
 
     expect(elementCounter).toHaveTextContent(/^2$/);
+
+    userEvent.click(
+      screen.getAllByRole('checkbox', {
+        name: /Toggle select/i,
+      })[2],
+    );
+
+    expect(elementCounter).toHaveTextContent('1 of 2 selected');
   });
 });

@@ -16,7 +16,6 @@ import {
   allPass,
   any,
   equals,
-  isEmpty,
   keys,
   pick,
   pipe,
@@ -196,12 +195,6 @@ TableProps<D>): React.ReactElement => {
     gotoPage(newPageIndex);
     collectFetchParams(newPageIndex, pageSize, sortBy);
   };
-
-  useEffect(() => {
-    if (isEmpty(defaultSelectedRows)) {
-      dispatch({ type: actions.deselectAllRows });
-    }
-  }, [defaultSelectedRows, dispatch]);
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
