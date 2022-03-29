@@ -8,9 +8,10 @@ import {
   getFontWeight,
   pxToRem,
 } from '../../../../utils';
-import { FlexContainer } from '../../../FlexContainer';
+import { Inline } from '../../../layout';
 import { Input } from '../../../forms';
 import { GoToPageProps } from './GoToPage.types';
+import { SpaceSizes } from '../../../..';
 
 const SmallInput = styled(Input)`
   padding: ${pxToRem(8, 16)};
@@ -57,7 +58,7 @@ const GoToPage: React.FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
   };
 
   return (
-    <FlexContainer alignItems="center">
+    <Inline align="center" gap={SpaceSizes.md}>
       <GoToPageLabel htmlFor="goToPageInput">Go to page:</GoToPageLabel>
       <SmallInput
         ref={inputRef}
@@ -66,7 +67,7 @@ const GoToPage: React.FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
         type="number"
         onKeyDown={handlePageChange}
       />
-    </FlexContainer>
+    </Inline>
   );
 };
 

@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils';
-import { FlexContainer } from '../../FlexContainer';
-import { Col, Container, Row } from '../../layout';
+import { Col, Container, Inline, Row } from '../../layout';
 import { H2, H3 } from '../../typography';
 import { useStickyHeader } from '../hooks/useStickyHeader';
 import { HeaderProps } from './Header.types';
@@ -41,10 +40,7 @@ const Header: React.FC<HeaderProps> = ({
           <Container>
             <Row>
               <Col cols={width} offset={offset}>
-                <FlexContainer
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
+                <Inline align="center" justify="space-between">
                   <H3
                     as="h2"
                     margin="none"
@@ -57,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({
                     ariaLabel="Close modal window"
                     onClose={handleClose}
                   />
-                </FlexContainer>
+                </Inline>
               </Col>
             </Row>
           </Container>

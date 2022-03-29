@@ -13,6 +13,9 @@ type OnDataFetchArgs<D> = {
   filters: Filter[];
   query: string;
 };
+
+export type BatchActionArgs = [string[], boolean, () => void];
+
 export type OnDataFetchFn<D> = ({
   pageSize,
   pageIndex,
@@ -53,7 +56,7 @@ export interface DatatableProps<D extends Record<string, unknown>> {
    *
    * See: [action.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/types/action.types.ts)
    */
-  batchActions?: Action<string[]>[];
+  batchActions?: Action<BatchActionArgs>[];
   /**
    * Name of column used as table primary key or function to retrieve the key
    *

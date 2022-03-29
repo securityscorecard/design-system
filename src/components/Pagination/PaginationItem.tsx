@@ -10,7 +10,7 @@ import {
   getRadii,
   pxToRem,
 } from '../../utils';
-import { FlexContainer } from '../FlexContainer';
+import { Padbox } from '../layout';
 import { PaginationItemProps } from './Pagination.types';
 
 const StyledPaginationComponent = styled.button<{
@@ -105,11 +105,12 @@ PaginationItem.propTypes = {
   isShrinked: PropTypes.bool,
 };
 
-export const PaginationItemElipsis = styled(FlexContainer).attrs(() => ({
+export const PaginationItemElipsis = styled(Padbox).attrs(() => ({
   children: '...',
-  alignItems: 'center',
-  justifyContent: 'center',
 }))`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: ${pxToRem(40)};
   height: ${pxToRem(32)};
   font-size: ${getFontSize('md')};

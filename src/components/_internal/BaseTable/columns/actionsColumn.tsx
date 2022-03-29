@@ -3,7 +3,7 @@ import { map } from 'ramda';
 import styled, { css } from 'styled-components';
 import { CellProps } from 'react-table';
 
-import { FlexContainer } from '../../../FlexContainer';
+import { Inline } from '../../../layout';
 import { DropdownMenu } from '../../BaseDropdownMenu';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
@@ -59,7 +59,7 @@ export const actionsColumn = {
     }))(rowActions);
 
     return (
-      <FlexContainer flexGrow={1} justifyContent="center">
+      <Inline justify="center" stretch="start">
         <DropdownMenu actions={actions} paneWidth={140} placement="bottom-end">
           {(isActive) => (
             <RowActionsButton aria-label="Row Actions" isActive={isActive}>
@@ -73,7 +73,7 @@ export const actionsColumn = {
             </RowActionsButton>
           )}
         </DropdownMenu>
-      </FlexContainer>
+      </Inline>
     );
   },
 };

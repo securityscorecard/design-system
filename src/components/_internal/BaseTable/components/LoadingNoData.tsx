@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { H4, Paragraph } from '../../../typography';
-import { FlexContainer } from '../../../FlexContainer';
+import { Inline } from '../../../layout';
 import { Spinner } from '../../../Spinner';
 import { TextSizes } from '../../../typography/Text/Text.enums';
+import { SpaceSizes } from '../../../..';
 
 const LoadingNoData: React.FC = () => (
   <>
-    <FlexContainer alignItems="center">
+    <Inline align="center" gap={SpaceSizes.sm}>
       <Spinner
         borderWidth={2}
         height={16}
@@ -17,7 +18,7 @@ const LoadingNoData: React.FC = () => (
         dark
       />
       <H4 margin={{ top: 0, bottom: 0, left: 0.5 }}>Loading</H4>
-    </FlexContainer>
+    </Inline>
     <Paragraph margin={{ top: 0.8, bottom: 0.8 }} size={TextSizes.md}>
       This may take a few moments.
     </Paragraph>
