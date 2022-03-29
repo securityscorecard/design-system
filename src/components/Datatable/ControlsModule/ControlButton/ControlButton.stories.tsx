@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
-import { FlexContainer } from '../../../FlexContainer';
+import { Cluster, Padbox } from '../../../layout';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import ControlButton from './ControlButton';
 import { ControlButtonProps } from './ControlButton.types';
@@ -19,16 +19,20 @@ export default {
 
 export const Default: Story<ControlButtonProps> = (args) => (
   <>
-    <FlexContainer alignItems="center" flexWrap="wrap" margin={{ bottom: 1 }}>
-      <ControlButton {...args} />
-      <ControlButton {...args} isActive />
-      <ControlButton {...args} isApplied />
-    </FlexContainer>
-    <FlexContainer alignItems="center" flexWrap="wrap" margin={{ bottom: 1 }}>
-      <ControlButton {...args} className="hover" />
-      <ControlButton {...args} className="hover" isActive />
-      <ControlButton {...args} className="hover" isApplied />
-    </FlexContainer>
+    <Padbox paddingSize="sm">
+      <Cluster align="center">
+        <ControlButton {...args} />
+        <ControlButton {...args} isActive />
+        <ControlButton {...args} isApplied />
+      </Cluster>
+    </Padbox>
+    <Padbox paddingSize="sm">
+      <Cluster align="center">
+        <ControlButton {...args} className="hover" />
+        <ControlButton {...args} className="hover" isActive />
+        <ControlButton {...args} className="hover" isApplied />
+      </Cluster>
+    </Padbox>
   </>
 );
 

@@ -1,21 +1,27 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
+import styled from 'styled-components';
 
 import Filters from '../../Filters';
-import { FlexContainer } from '../../../FlexContainer';
+import { Padbox } from '../../../layout';
 import {
   fieldsSingleDate,
   fieldsSingleDatePlaceholderUnits,
 } from '../../mocks/options';
+import { pxToRem } from '../../../../utils';
 
 export default {
   component: Filters,
   title: 'components/Filters/components/SingleDatePicker',
 } as Meta;
 
+const Wrapper = styled(Padbox)`
+  margin-left: ${pxToRem(60)};
+`;
+
 export const SingleDate: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsSingleDate}
       onApply={action('onApply')}
@@ -23,11 +29,11 @@ export const SingleDate: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
 
 export const SingleDatePlaceholderUnits: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsSingleDatePlaceholderUnits}
       onApply={action('onApply')}
@@ -35,5 +41,5 @@ export const SingleDatePlaceholderUnits: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );

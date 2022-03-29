@@ -16,7 +16,7 @@ import { isEmptyArray, isNonEmptyString, isNotEmpty } from 'ramda-adjunct';
 
 import Tag from './Tag';
 import { Error } from '../../../forms/Message';
-import { FlexContainer } from '../../../FlexContainer';
+import { Padbox } from '../../../layout';
 import {
   getFontSize,
   getFormStyle,
@@ -27,7 +27,8 @@ import {
 import { validatePattern } from '../../helpers';
 import { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 
-const Container = styled(FlexContainer)<TagsContainerProps>`
+const Container = styled(Padbox)<TagsContainerProps>`
+  display: flex;
   width: 100%;
   min-height: ${pxToRem(32)};
   padding: ${({ isFocused }) => pxToRem(0, isFocused ? 15 : 16)};

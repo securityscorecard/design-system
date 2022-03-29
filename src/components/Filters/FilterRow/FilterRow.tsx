@@ -23,7 +23,7 @@ import {
 } from 'ramda';
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
-import { FlexContainer } from '../../FlexContainer';
+import { Inline } from '../../layout';
 import { Text } from '../../typography';
 import { TextSizes } from '../../typography/Text/Text.enums';
 import { StateButton } from '../StateButton';
@@ -39,6 +39,7 @@ import { operatorOptions } from '../data/operatorOptions';
 import { pxToRem } from '../../../utils';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
 import { BaseDateRangePickerPropTypes } from '../../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
+import { SpaceSizes } from '../../../theme';
 
 const SplitField = styled.div<SplitFieldProps>`
   ${({ $width }) =>
@@ -49,18 +50,10 @@ const SplitField = styled.div<SplitFieldProps>`
       : css`
           width: 100%;
         `};
-  margin-right: ${pxToRem(6)};
-  &:first-of-type {
-    margin-left: ${pxToRem(6)};
-  }
-  &:last-of-type {
-    margin-right: ${pxToRem(0)};
-  }
 `;
 
 const Units = styled(Text)`
   flex-shrink: 0;
-  margin-left: ${pxToRem(8)};
   min-width: ${pxToRem(64)};
 `;
 
@@ -126,7 +119,7 @@ const renderComponentWithProps = (
   const { component: ComponentWithProps, props } = Component;
   const { units } = props;
   return units ? (
-    <FlexContainer alignItems="center">
+    <Inline align="center" gap={SpaceSizes.sm}>
       <ComponentWithProps
         isInvalid={isInvalid}
         value={value}
@@ -135,7 +128,7 @@ const renderComponentWithProps = (
         {...props}
       />
       <Units size={TextSizes.md}>{units}</Units>
-    </FlexContainer>
+    </Inline>
   ) : (
     <ComponentWithProps
       isInvalid={isInvalid}
@@ -282,15 +275,15 @@ const FilterRow: React.FC<FilterRowProps> = ({
   };
 
   return (
-    <FlexContainer margin={{ bottom: 0.5 }}>
-      {!isDefaultState && (
+    <Inline gap={SpaceSizes.sm}>
+      {!isDefaultState ? (
         <StateButton
           index={index}
           isApplied={isApplied}
           isLoading={isLoading}
           onClick={onRemove}
         />
-      )}
+      ) : null}
       <SplitField $width={72}>
         {index === 1 ? (
           <SelectFilter
@@ -328,7 +321,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
           isInvalid,
         )}
       </SplitField>
-    </FlexContainer>
+    </Inline>
   );
 };
 

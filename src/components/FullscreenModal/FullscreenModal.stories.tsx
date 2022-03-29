@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
-import { FlexContainer } from '../FlexContainer';
+import { Inline } from '../layout';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Link, Paragraph } from '../typography';
 import FullscreenModal from './FullscreenModal';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
 import { Tooltip } from '../Tooltip';
+import { SpaceSizes } from '../../theme';
 
 export default {
   title: 'components/FullscreenModal',
@@ -57,15 +58,13 @@ const LongContent = () => (
   </>
 );
 const Footer = () => (
-  <FlexContainer justifyContent="space-between">
+  <Inline justify="space-between">
     <Button variant={ButtonVariants.outline}>Email me preview</Button>
-    <FlexContainer>
-      <Button margin={{ right: 0.5 }} variant={ButtonVariants.outline}>
-        Cancel
-      </Button>
+    <Inline gap={SpaceSizes.md}>
+      <Button variant={ButtonVariants.outline}>Cancel</Button>
       <Button variant={ButtonVariants.solid}>Submit</Button>
-    </FlexContainer>
-  </FlexContainer>
+    </Inline>
+  </Inline>
 );
 const Sidebar: React.FC<{
   modalRef?: HTMLElement;

@@ -5,8 +5,9 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { PaginationItem } from './PaginationItem';
 import PageButtons from './PageButtons';
-import { FlexContainer } from '../FlexContainer';
+import { Inline } from '../layout';
 import { PaginationProps } from './Pagination.types';
+import { SpaceSizes } from '../../theme';
 
 const Pagination: React.FC<PaginationProps> = ({
   pageCount,
@@ -14,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({
   onPageChange,
   pageButtonsCount = 8,
 }) => (
-  <FlexContainer as="nav" flexDirection="row" justifyContent="center">
+  <Inline gap={SpaceSizes.sm} justify="center">
     <PaginationItem
       aria-label="Previous page"
       isDisabled={currentPage - 1 === 0}
@@ -37,7 +38,7 @@ const Pagination: React.FC<PaginationProps> = ({
     >
       <Icon name={SSCIconNames.longArrowRight} />
     </PaginationItem>
-  </FlexContainer>
+  </Inline>
 );
 
 Pagination.propTypes = {

@@ -7,7 +7,7 @@ import { isUndefined, noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
 import { getColor, getRadii } from '../../utils';
-import { FlexContainer } from '../FlexContainer';
+import { Padbox } from '../layout';
 import { FieldPropTypes, FilterStatePropType } from '../Filters/Filters.types';
 import { useDataFetch } from './hooks/useDataFetch';
 import { useTableRowSelect } from './hooks/useTableRowSelect';
@@ -21,7 +21,9 @@ import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
 
-const StyledDatatable = styled(FlexContainer)`
+const StyledDatatable = styled(Padbox)`
+  display: flex;
+  flex-direction: column;
   position: relative;
   border: 1px solid ${getColor('neutral.400')};
   border-radius: ${getRadii('default')};
@@ -105,7 +107,7 @@ const Datatable = <D extends Record<string, unknown>>({
       };
 
   return (
-    <StyledDatatable flexDirection="column">
+    <StyledDatatable>
       {isControlsEnabled && (
         <ControlsModule<D>
           {...restControlsConfig}

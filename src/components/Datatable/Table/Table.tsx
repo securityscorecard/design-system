@@ -42,13 +42,13 @@ import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
 import { selectionColumn } from './columns/selectionColumn';
 import { LoadingOverlay } from './components';
-import { FlexContainer } from '../../FlexContainer';
+import { Padbox } from '../../layout';
 import { getColor, pxToRem } from '../../../utils';
 import { TableProps } from './Table.types';
 
-const NoDataContainer = styled(FlexContainer).attrs(() => ({
-  flexDirection: 'column',
-}))`
+const NoDataContainer = styled(Padbox)`
+  display: flex;
+  flex-direction: column;
   background: ${getColor('neutral.0')};
   padding: ${pxToRem(64)};
 `;

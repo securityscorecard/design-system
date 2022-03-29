@@ -1,22 +1,28 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
+import styled from 'styled-components';
 
 import Filters from '../../Filters';
-import { FlexContainer } from '../../../FlexContainer';
+import { Padbox } from '../../../layout';
 import {
   fieldsCount,
   fieldsCountPlaceholderUnits,
   fieldsCountValidation,
 } from '../../mocks/options';
+import { pxToRem } from '../../../../utils';
 
 export default {
   component: Filters,
   title: 'components/Filters/components/Count',
 } as Meta;
 
+const Wrapper = styled(Padbox)`
+  margin-left: ${pxToRem(60)};
+`;
+
 export const Count: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsCount}
       onApply={action('onApply')}
@@ -24,11 +30,11 @@ export const Count: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
 
 export const CountValidation: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsCountValidation}
       onApply={action('onApply')}
@@ -36,11 +42,11 @@ export const CountValidation: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );
 
 export const CountPlaceholderUnits: Story = () => (
-  <FlexContainer margin={{ left: 3 }}>
+  <Wrapper>
     <Filters
       fields={fieldsCountPlaceholderUnits}
       onApply={action('onApply')}
@@ -48,5 +54,5 @@ export const CountPlaceholderUnits: Story = () => (
       onChange={action('onChange')}
       onClose={action('onClose')}
     />
-  </FlexContainer>
+  </Wrapper>
 );

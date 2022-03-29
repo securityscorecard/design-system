@@ -1,11 +1,17 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import styled from 'styled-components';
 
 import DropdownMenu from './DropdownMenu';
 import { subactionsMock } from '../../Datatable/mocks/actions';
 import { DropdownMenuProps } from './DropdownMenu.types';
-import { FlexContainer } from '../../FlexContainer';
+import { Inline, Padbox } from '../../layout';
+import { pxToRem } from '../../../utils';
+
+const Wrapper = styled(Padbox)`
+  margin-bottom: ${pxToRem(100)};
+`;
 
 export default {
   title: 'components/Datatable/internalComponents/DropdownMenu',
@@ -53,18 +59,18 @@ export default {
 } as Meta;
 
 export const Default: Story<DropdownMenuProps> = (args) => (
-  <FlexContainer justifyContent="center">
+  <Inline justify="center">
     <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
-  </FlexContainer>
+  </Inline>
 );
 Default.args = {
   actions: subactionsMock,
 };
 
 export const OpenedOnInit: Story<DropdownMenuProps> = (args) => (
-  <FlexContainer justifyContent="center">
+  <Inline justify="center">
     <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
-  </FlexContainer>
+  </Inline>
 );
 OpenedOnInit.args = {
   ...Default.args,
@@ -72,9 +78,9 @@ OpenedOnInit.args = {
 };
 
 export const WithCustomWidth: Story<DropdownMenuProps> = (args) => (
-  <FlexContainer justifyContent="center">
+  <Inline justify="center">
     <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
-  </FlexContainer>
+  </Inline>
 );
 WithCustomWidth.args = {
   ...OpenedOnInit.args,
@@ -83,21 +89,27 @@ WithCustomWidth.args = {
 
 export const Placements: Story<DropdownMenuProps> = (args) => (
   <>
-    <FlexContainer justifyContent="center" margin={{ bottom: 5 }}>
-      <DropdownMenu {...args} placement="bottom">
-        Bottom
-      </DropdownMenu>
-    </FlexContainer>
-    <FlexContainer justifyContent="flex-start" margin={{ bottom: 5 }}>
-      <DropdownMenu {...args} placement="bottom-start">
-        Left
-      </DropdownMenu>
-    </FlexContainer>
-    <FlexContainer justifyContent="flex-end" margin={{ bottom: 5 }}>
-      <DropdownMenu {...args} placement="bottom-end">
-        Right
-      </DropdownMenu>
-    </FlexContainer>
+    <Wrapper>
+      <Inline justify="center">
+        <DropdownMenu {...args} placement="bottom">
+          Bottom
+        </DropdownMenu>
+      </Inline>
+    </Wrapper>
+    <Wrapper>
+      <Inline justify="flex-start">
+        <DropdownMenu {...args} placement="bottom-start">
+          Left
+        </DropdownMenu>
+      </Inline>
+    </Wrapper>
+    <Wrapper>
+      <Inline justify="flex-end">
+        <DropdownMenu {...args} placement="bottom-end">
+          Right
+        </DropdownMenu>
+      </Inline>
+    </Wrapper>
   </>
 );
 Placements.args = {

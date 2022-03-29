@@ -25,13 +25,15 @@ import {
   isUndefined,
   noop,
 } from 'ramda-adjunct';
+import styled from 'styled-components';
 
+import { Padbox, Stack } from '../layout';
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
-import { FlexContainer } from '../FlexContainer';
 import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
+import { SpaceSizes } from '../../theme';
 
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
@@ -65,6 +67,12 @@ const getDefaultState = ([firstField]: Field[]) => {
     },
   ];
 };
+
+const FiltersBase = styled(Padbox)`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
@@ -300,35 +308,39 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <FlexContainer flexDirection="column" flexGrow={1}>
-      {filtersValues.map((props, index) => (
-        <FilterRow
-          key={generateId(props, index)}
-          fields={fields}
-          index={index}
-          isDefaultState={isDefaultState}
-          isInvalid={validValues[index] === false}
-          onConditionChange={handleConditionChange}
-          onError={(hasError) => handleError(hasError, index)}
-          onFieldChange={handleFieldChange}
-          onOperatorChange={handleOperatorChange}
-          onRemove={handleRemoveFilter}
-          onValueChange={handleValueChange}
-          {...filtersValues[index]}
+    <FiltersBase>
+      <Stack gap={SpaceSizes.md}>
+        <Stack gap={SpaceSizes.sm}>
+          {filtersValues.map((props, index) => (
+            <FilterRow
+              key={generateId(props, index)}
+              fields={fields}
+              index={index}
+              isDefaultState={isDefaultState}
+              isInvalid={validValues[index] === false}
+              onConditionChange={handleConditionChange}
+              onError={(hasError) => handleError(hasError, index)}
+              onFieldChange={handleFieldChange}
+              onOperatorChange={handleOperatorChange}
+              onRemove={handleRemoveFilter}
+              onValueChange={handleValueChange}
+              {...filtersValues[index]}
+            />
+          ))}
+        </Stack>
+        <BottomBar
+          hasUnappliedFilters={hasUnappliedFilters}
+          isApplyDisabled={hasInvalidValues}
+          isCancelDisabled={isCancelDisabled}
+          isLoading={isLoading}
+          onAdd={handleAddRow}
+          onCancel={onCancel}
+          onClearAll={handleClearAll}
+          onClose={handleCloseFilters}
+          onSubmit={handleSubmitForm}
         />
-      ))}
-      <BottomBar
-        hasUnappliedFilters={hasUnappliedFilters}
-        isApplyDisabled={hasInvalidValues}
-        isCancelDisabled={isCancelDisabled}
-        isLoading={isLoading}
-        onAdd={handleAddRow}
-        onCancel={onCancel}
-        onClearAll={handleClearAll}
-        onClose={handleCloseFilters}
-        onSubmit={handleSubmitForm}
-      />
-    </FlexContainer>
+      </Stack>
+    </FiltersBase>
   );
 };
 
