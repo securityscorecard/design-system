@@ -1,3 +1,25 @@
+# [1.0.0-alpha.164](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.163...v1.0.0-alpha.164) (2022-03-29)
+
+
+### Bug Fixes
+
+* **FlexContaienr:** change paddings ([4a91996](https://github.com/securityscorecard/design-system/commit/4a91996a3176ef2eaa8585d451e595f188101c0e))
+* **FlexContainer:** replace FlexContainer with layout primitives ([b05f514](https://github.com/securityscorecard/design-system/commit/b05f514a7d78ccfa43a260478370208212fa8b9f))
+* **FlexContainer:** replace FlexContainer with layout primitives ([d393096](https://github.com/securityscorecard/design-system/commit/d3930969371efd30f3dbda502ff30ebd6dd35ebd))
+* **FlexContainer:** replace Stack with div ([665a98a](https://github.com/securityscorecard/design-system/commit/665a98afe318a6930a89a5f9e69d9d55b5b1cf6c))
+* **FlexContainer:** update BatchActions in datatable ([6cc92d1](https://github.com/securityscorecard/design-system/commit/6cc92d15a6361687e00f5e203c6711852f4f1d05))
+* **FlexContainer:** update datatable and filters ([62fa718](https://github.com/securityscorecard/design-system/commit/62fa7180da58fbb99a9802027bbc705747b554e6))
+* **FlexContainer:** update Table from datatable ([ab9d361](https://github.com/securityscorecard/design-system/commit/ab9d361cf233f960643bb95df3027b6ee383c902))
+* **FlexContainers:** improve filters ([51106a1](https://github.com/securityscorecard/design-system/commit/51106a13760c12f1e51bf10696fcbf29bb54e998))
+
+
+### Features
+
+* **Datatable:** pass selection reset as action argument ([6c68ff9](https://github.com/securityscorecard/design-system/commit/6c68ff990613eab6f3be249931564f74f5f3f3d1))
+* **DatePicker:** implement year picker ([72abf12](https://github.com/securityscorecard/design-system/commit/72abf12f8c9895297faeed1f79294a4e3b06039b))
+* **Drawer:** implement drawer component ([b88a2dd](https://github.com/securityscorecard/design-system/commit/b88a2ddf843a49d2aceeb2538b57baec15411747))
+* **UserAvatar:** add new UserAvatar component ([6efed4b](https://github.com/securityscorecard/design-system/commit/6efed4bdc588bb4a568ec476f042cfbd49a6669c))
+
 # [1.0.0-alpha.163](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.162...v1.0.0-alpha.163) (2022-03-28)
 
 
