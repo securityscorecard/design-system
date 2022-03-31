@@ -2,6 +2,7 @@ import { DefaultTheme } from 'styled-components';
 import {
   curry,
   either,
+  hasPath,
   identity,
   join,
   map,
@@ -13,7 +14,7 @@ import {
   unless,
   useWith,
 } from 'ramda';
-import { hasPath, isString, list } from 'ramda-adjunct';
+import { isString, list } from 'ramda-adjunct';
 import numeral from 'numeral';
 
 import { BASE_FONT_SIZE } from '../theme/constants';
