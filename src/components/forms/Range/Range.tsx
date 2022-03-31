@@ -33,6 +33,9 @@ const RangeInput = styled.input<RangeInputProps>`
       ${getFormStyle('focusBorderColor')};
     background: ${getFormStyle('bgColor')};
     cursor: pointer;
+    :hover {
+      box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
+    }
   }
 
   &::-moz-range-track {
@@ -66,6 +69,9 @@ const RangeInput = styled.input<RangeInputProps>`
       ${getFormStyle('focusBorderColor')};
     background: ${getFormStyle('bgColor')};
     cursor: pointer;
+    :hover {
+      box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
+    }
   }
 
   &::-webkit-slider-runnable-track {
@@ -81,6 +87,15 @@ const RangeInput = styled.input<RangeInputProps>`
             ${$percent}% 100%
         );
       `}
+  }
+
+  &:focus-visible {
+    ::-webkit-slider-thumb {
+      box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
+    }
+    ::-moz-range-thumb {
+      box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
+    }
   }
 
   &:disabled {
