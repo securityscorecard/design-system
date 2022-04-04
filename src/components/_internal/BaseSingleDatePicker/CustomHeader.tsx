@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import React, { useMemo } from 'react';
 
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import { SpaceSizes } from '../../..';
-import { Icon, Inline, Padbox } from '../..';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { getColor, getFontSize, getFontWeight, getRadii } from '../../../utils';
 import { ColorTypes } from '../../../theme/colors.enums';
+import { Icon } from '../../Icon';
+import { Inline, Padbox } from '../../layout';
+import { SpaceSizes } from '../../../theme';
 
 const months = [
   'January',

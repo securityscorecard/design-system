@@ -7,7 +7,7 @@ import { Inline, Stack } from '../layout';
 import Button from './Button';
 import { ButtonProps } from './Button.types';
 import { ButtonColors, ButtonSizes, ButtonVariants } from './Button.enums';
-import { SpaceSizes } from '../..';
+import { SpaceSizes } from '../../theme';
 
 export default {
   title: 'components/Button',

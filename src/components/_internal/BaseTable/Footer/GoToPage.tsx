@@ -11,7 +11,7 @@ import {
 import { Inline } from '../../../layout';
 import { Input } from '../../../forms';
 import { GoToPageProps } from './GoToPage.types';
-import { SpaceSizes } from '../../../..';
+import { SpaceSizes } from '../../../../theme';
 
 const SmallInput = styled(Input)`
   padding: ${pxToRem(8, 16)};
