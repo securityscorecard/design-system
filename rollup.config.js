@@ -4,6 +4,7 @@ import typescript from 'rollup-plugin-typescript2';
 import commonjs from '@rollup/plugin-commonjs';
 import url from '@rollup/plugin-url';
 import visualizer from 'rollup-plugin-visualizer';
+import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: {
@@ -16,11 +17,13 @@ export default {
       dir: 'build',
       entryFileNames: '[name].js',
       format: 'cjs',
+      plugins: [terser()],
     },
     {
       dir: 'build',
       entryFileNames: '[name].es.js',
       format: 'esm',
+      plugins: [terser()],
     },
   ],
   plugins: [
