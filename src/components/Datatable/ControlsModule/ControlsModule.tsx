@@ -36,9 +36,8 @@ const resetActiveControls: (
   map((controlState) => ({ ...controlState, isActive: false })),
 );
 
-const prepareControlState: (
-  providedState: [boolean, boolean],
-) => ControlState = zipObj(['isActive', 'isApplied']);
+const prepareControlState: (providedState: [boolean, boolean]) => ControlState =
+  zipObj(['isActive', 'isApplied']);
 
 const defaultControlState: ControlState = {
   isActive: false,

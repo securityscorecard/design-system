@@ -41,10 +41,8 @@ const generateId = ({ operator, field, condition }, index) =>
 const getDefaultConditionAndValue = ({ conditions }: Field) => {
   const defaultCondition = find(propEq('isDefault', true), conditions);
 
-  const {
-    value: defaultConditionValue,
-    component: defaultConditionComponent,
-  } = defaultTo(head(conditions), defaultCondition);
+  const { value: defaultConditionValue, component: defaultConditionComponent } =
+    defaultTo(head(conditions), defaultCondition);
 
   const defaultComponentValue = getDefaultComponentValue(
     defaultConditionComponent,

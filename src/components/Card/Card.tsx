@@ -37,9 +37,9 @@ const Card = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<CardProps>
 >(({ children, direction = 'vertical' }, ref) => {
-  const DirectionContainer = (direction === 'vertical'
-    ? Stack
-    : Inline) as React.ElementType;
+  const DirectionContainer = (
+    direction === 'vertical' ? Stack : Inline
+  ) as React.ElementType;
   return (
     <CardWrapper
       ref={ref}

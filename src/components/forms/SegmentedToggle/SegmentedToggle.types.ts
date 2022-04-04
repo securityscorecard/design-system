@@ -2,7 +2,8 @@ import React from 'react';
 
 import { SegmentedToggleSizes } from './SegmentedToggle.enums';
 
-export type Sizes = typeof SegmentedToggleSizes[keyof typeof SegmentedToggleSizes];
+export type Sizes =
+  typeof SegmentedToggleSizes[keyof typeof SegmentedToggleSizes];
 
 export interface SegmentedToggleItemProps
   extends Omit<React.HTMLAttributes<HTMLInputElement>, 'size'> {

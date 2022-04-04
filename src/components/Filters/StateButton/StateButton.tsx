@@ -72,12 +72,8 @@ const StateButton: React.FC<StateButtonProps> = ({
   isApplied = false,
   isLoading = false,
 }) => {
-  const {
-    iconColor,
-    iconName,
-    handleMouseOut,
-    handleMouseOver,
-  } = useStateButtonIcon(isApplied);
+  const { iconColor, iconName, handleMouseOut, handleMouseOver } =
+    useStateButtonIcon(isApplied);
   return (
     <RemoveButton
       aria-label="remove"

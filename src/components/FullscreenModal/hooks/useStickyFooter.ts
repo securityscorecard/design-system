@@ -9,10 +9,8 @@ export const useStickyFooter = (
   modalFooterRef: React.MutableRefObject<HTMLElement>,
 ): { isFixed: boolean; shouldShowScrollToTopButton: boolean } => {
   const [isFixed, setIsFixed] = useState(false);
-  const [
-    shouldShowScrollToTopButton,
-    setShouldShowScrollToTopButton,
-  ] = useState(false);
+  const [shouldShowScrollToTopButton, setShouldShowScrollToTopButton] =
+    useState(false);
 
   const showScrollToTopButton = useCallback(() => {
     if (isNull(modalRef.current)) return;

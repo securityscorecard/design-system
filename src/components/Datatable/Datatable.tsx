@@ -59,10 +59,7 @@ const Datatable = <D extends Record<string, unknown>>({
 
   const isCancelDisabled = isUndefined(onCancelLoading);
 
-  const {
-    onColumnOrderChange,
-    ...restControlsConfig
-  } = useDeepCompareMemo(
+  const { onColumnOrderChange, ...restControlsConfig } = useDeepCompareMemo(
     () =>
       mergeControlsConfig(
         assocPath(
@@ -77,9 +74,10 @@ const Datatable = <D extends Record<string, unknown>>({
     defaultSelectedRowIds,
     hasOnlyPerPageSelection,
     ...restTableConfig
-  } = useDeepCompareMemo<TableConfig<D>>(() => mergeTableConfig(tableConfig), [
-    tableConfig,
-  ]);
+  } = useDeepCompareMemo<TableConfig<D>>(
+    () => mergeTableConfig(tableConfig),
+    [tableConfig],
+  );
 
   useDataFetch<D>(onDataFetch);
   useTableRowSelect<D>(onSelect, defaultSelectedRowIds);

@@ -1,6 +1,7 @@
 import { StepperOrientations } from './Stepper.enums';
 
-export type Orientations = typeof StepperOrientations[keyof typeof StepperOrientations];
+export type Orientations =
+  typeof StepperOrientations[keyof typeof StepperOrientations];
 
 export interface BulletCircleProps {
   $isActive?: boolean;

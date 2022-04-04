@@ -12,8 +12,7 @@ import {
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from './constants';
 
 const family: Family = {
-  base:
-    "'proxima-nova', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
+  base: "'proxima-nova', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
   mono: "'space-mono', 'Courier New', Courier, monospace",
 };
 

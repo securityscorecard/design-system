@@ -3,8 +3,10 @@ import {
   FullscreenModalSizes,
 } from './FullscreenModal.enums';
 
-export type Sizes = typeof FullscreenModalSizes[keyof typeof FullscreenModalSizes];
-export type Layouts = typeof FullscreenModalLayouts[keyof typeof FullscreenModalLayouts];
+export type Sizes =
+  typeof FullscreenModalSizes[keyof typeof FullscreenModalSizes];
+export type Layouts =
+  typeof FullscreenModalLayouts[keyof typeof FullscreenModalLayouts];
 export type ColumnConfig = Record<
   'header' | 'sidebar' | 'content',
   [number, number]

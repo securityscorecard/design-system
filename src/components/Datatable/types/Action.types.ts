@@ -11,7 +11,7 @@ import {
 
 export type Action<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > =
   | ActionKinds<OnClickArgs, OnClickReturnType>
   | ActionWithSubactions<OnClickArgs, OnClickReturnType>;

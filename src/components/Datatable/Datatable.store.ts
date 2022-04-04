@@ -4,7 +4,7 @@ import { IdType, SortingRule } from 'react-table';
 import { Filter } from '../Filters/Filters.types';
 
 export type DatatableStoreShape<
-  D extends Record<string, unknown> = Record<string, unknown>
+  D extends Record<string, unknown> = Record<string, unknown>,
 > = {
   pageIndex: number;
   pageSize: number;
