@@ -1,9 +1,9 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React, { useState } from 'react';
 
-import { Inline } from '../..';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { generateControl } from '../../../utils/tests/storybook';
+import { Inline } from '../../layout';
 import { Stack } from '../../layout/Stack';
 import { Paragraph } from '../../typography';
 import Switch from './Switch';

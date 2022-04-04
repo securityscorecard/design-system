@@ -4,7 +4,9 @@ import { action } from '@storybook/addon-actions';
 
 import Checkbox from './Checkbox';
 import { CheckboxProps } from './Checkbox.types';
-import { Icon, Inline, Text } from '../..';
+import { Inline } from '../../layout';
+import { Icon } from '../../Icon';
+import { Text } from '../../typography/Text';
 
 const textExample = 'Use the same details for billing & shipping on my invoice';
 
