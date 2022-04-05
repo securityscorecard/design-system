@@ -1,3 +1,10 @@
+# [1.0.0-alpha.167](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.166...v1.0.0-alpha.167) (2022-04-05)
+
+
+### Features
+
+* **SegmentedToggle:** remove large size option ([7536264](https://github.com/securityscorecard/design-system/commit/7536264cb2eff59b45c37ea98afbfa00ae62d742))
+
 # [1.0.0-alpha.166](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.165...v1.0.0-alpha.166) (2022-04-05)
 
 
