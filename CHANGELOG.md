@@ -1,3 +1,10 @@
+# [1.0.0-alpha.166](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.165...v1.0.0-alpha.166) (2022-04-05)
+
+
+### Bug Fixes
+
+* **prettier:** fix prettier issues ([4b8d4d1](https://github.com/securityscorecard/design-system/commit/4b8d4d1d36a5082882e3ad3c601efb035ef2b27a))
+
 # [1.0.0-alpha.165](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.164...v1.0.0-alpha.165) (2022-04-05)
 
 
