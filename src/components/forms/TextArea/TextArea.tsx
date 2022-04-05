@@ -99,7 +99,11 @@ const TextArea: React.FC<
   className,
   ...props
 }) => {
-  const { value = '', defaultValue = '', onChange = noop } = props as {
+  const {
+    value = '',
+    defaultValue = '',
+    onChange = noop,
+  } = props as {
     value: string;
     defaultValue: string;
     onChange: React.ChangeEventHandler;

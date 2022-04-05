@@ -14,19 +14,17 @@ export const getCommonMargin = ({
   `;
 };
 
-export const getMarginFrom = (origin: 'start' | 'end') => ({
-  $direction,
-  paddingSize,
-  theme,
-}: CardWrapperPropsWithTheme): string => {
-  const value = getNegativeSpace(paddingSize, { theme });
+export const getMarginFrom =
+  (origin: 'start' | 'end') =>
+  ({ $direction, paddingSize, theme }: CardWrapperPropsWithTheme): string => {
+    const value = getNegativeSpace(paddingSize, { theme });
 
-  if (origin === 'start') {
-    return `
+    if (origin === 'start') {
+      return `
       margin-${$direction === 'vertical' ? 'top' : 'left'}: ${value};
     `;
-  }
-  return `
+    }
+    return `
     margin-${$direction === 'vertical' ? 'bottom' : 'right'}: ${value};
   `;
-};
+  };

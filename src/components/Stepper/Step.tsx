@@ -85,9 +85,8 @@ const Step = forwardRef<HTMLDivElement, React.PropsWithChildren<StepProps>>(
     { children, label, summary, index, isLast, shouldShowText, onStepClick },
     ref,
   ) => {
-    const { orientation, activeStep, areStepsExpanded } = useContext(
-      StepperContext,
-    );
+    const { orientation, activeStep, areStepsExpanded } =
+      useContext(StepperContext);
     const stepNumber = index + 1;
     const isActive = activeStep === index;
     const isDone = activeStep > index;

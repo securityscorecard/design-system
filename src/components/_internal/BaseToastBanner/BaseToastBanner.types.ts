@@ -4,7 +4,8 @@ import { InlineProps } from '../../layout/Inline/Inline';
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 import { BaseToastBannerVariants } from './BaseToastBanner.enums';
 
-export type Variants = typeof BaseToastBannerVariants[keyof typeof BaseToastBannerVariants];
+export type Variants =
+  typeof BaseToastBannerVariants[keyof typeof BaseToastBannerVariants];
 
 export interface BaseToastBannerWrapperProps {
   children: React.ReactNode;

@@ -7,7 +7,7 @@ import { useTheme } from 'styled-components';
 type UsePopup<
   Trigger extends PopperProps<null>['referenceElement'] = HTMLElement,
   Pane extends HTMLElement | null = HTMLElement,
-  Arrow extends ArrowOptions['element'] = undefined
+  Arrow extends ArrowOptions['element'] = undefined,
 > = (config: {
   triggerEl: Trigger;
   paneEl: Pane;

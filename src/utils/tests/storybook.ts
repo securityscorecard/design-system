@@ -2,7 +2,7 @@ import { keys, values, zipObj } from 'ramda';
 
 export const generateControl = <
   K extends string | number,
-  V extends string | number
+  V extends string | number,
 >(
   type: string,
   options: Record<K, V>,

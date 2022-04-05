@@ -31,24 +31,22 @@ export const simpleColumns: Column<Data>[] = [
     headerTooltip: <Text>Show status of the asset.</Text>,
     accessor: 'status',
     width: 96,
-    Cell: React.memo(
-      ({ value }: { value: string }): React.ReactElement => {
-        switch (value) {
-          case 'Removed':
-          case 'Dynamic':
-          case 'Claimed':
-          case 'Disputed':
-            return (
-              <Text size={TextSizes.inherit} variant={TextVariants.secondary}>
-                {value}
-              </Text>
-            );
+    Cell: React.memo(({ value }: { value: string }): React.ReactElement => {
+      switch (value) {
+        case 'Removed':
+        case 'Dynamic':
+        case 'Claimed':
+        case 'Disputed':
+          return (
+            <Text size={TextSizes.inherit} variant={TextVariants.secondary}>
+              {value}
+            </Text>
+          );
 
-          default:
-            return <Strong>{value}</Strong>;
-        }
-      },
-    ),
+        default:
+          return <Strong>{value}</Strong>;
+      }
+    }),
   },
   {
     Header: 'Domains',

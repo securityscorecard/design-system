@@ -5,7 +5,7 @@ import { ToPropType } from './to.types';
 
 export type ActionBase<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > = {
   label: string;
   name: string;
@@ -19,7 +19,7 @@ export const ActionBasePropType = {
 
 export type HandlerActionKind<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > = Required<ActionBase<OnClickArgs, OnClickReturnType>>;
 
 export const HandlerActionKindPropType = PropTypes.exact({
@@ -29,7 +29,7 @@ export const HandlerActionKindPropType = PropTypes.exact({
 
 export type RelativeLinkActionKind<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > = ActionBase<OnClickArgs, OnClickReturnType> & {
   to: To;
   href?: never;
@@ -43,7 +43,7 @@ export const RelativeLinkActionKindPropType = PropTypes.exact({
 
 export type AbsoluteLinkActionKind<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > = ActionBase<OnClickArgs, OnClickReturnType> & {
   href: string;
   to?: never;
@@ -57,7 +57,7 @@ export const AbsoluteLinkActionKindPropType = PropTypes.exact({
 
 export type ActionKinds<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > =
   | HandlerActionKind<OnClickArgs, OnClickReturnType>
   | AbsoluteLinkActionKind<OnClickArgs, OnClickReturnType>
@@ -65,7 +65,7 @@ export type ActionKinds<
 
 export type ActionWithSubactions<
   OnClickArgs extends Array<unknown>,
-  OnClickReturnType = void
+  OnClickReturnType = void,
 > = ActionBase<OnClickArgs, OnClickReturnType> & {
   subActions: ActionKinds<OnClickArgs, OnClickReturnType>[];
   href?: never;

@@ -77,9 +77,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [query, setQuery] = useState<string>(defaultValue);
   const [typingTimeout, setTypingTimeout] = useState<number>(0);
   const [isSearching, setIsSearching] = useState<boolean>(false);
-  const [isSuggestionDisplayed, setIsSuggestionsDisplayed] = useState<boolean>(
-    false,
-  );
+  const [isSuggestionDisplayed, setIsSuggestionsDisplayed] =
+    useState<boolean>(false);
 
   const clearSearch = async () => {
     setQuery('');

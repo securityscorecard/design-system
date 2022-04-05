@@ -102,19 +102,23 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
               <DropdownLink
                 as={domTag}
                 href={
-                  (action as AbsoluteLinkActionKind<
-                    React.MouseEvent[],
-                    boolean
-                  >).href
+                  (
+                    action as AbsoluteLinkActionKind<
+                      React.MouseEvent[],
+                      boolean
+                    >
+                  ).href
                 }
                 name={action.name}
                 paddingSize={SpaceSizes.md}
                 paddingType={PadboxEnums.PaddingTypes.squish}
                 to={
-                  (action as RelativeLinkActionKind<
-                    React.MouseEvent[],
-                    boolean
-                  >).to
+                  (
+                    action as RelativeLinkActionKind<
+                      React.MouseEvent[],
+                      boolean
+                    >
+                  ).to
                 }
                 onClick={action.onClick}
               >

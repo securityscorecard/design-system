@@ -101,9 +101,8 @@ const ControlsModuleTemplate = (args) => {
   return <ControlsModule {...args} />;
 };
 
-export const Default: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const Default: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 Default.args = mergeDeepRight(defaultControlsConfig, {
   searchConfig: {
@@ -120,63 +119,56 @@ Default.args = mergeDeepRight(defaultControlsConfig, {
   onControlToggle: action('ControlToggleClick'),
 });
 
-export const WithDisabledFiltering: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithDisabledFiltering: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithDisabledFiltering.args = {
   ...Default.args,
   hasFiltering: false,
 };
 
-export const WithOpenFiltering: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithOpenFiltering: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithOpenFiltering.args = {
   ...Default.args,
   defaultIsFilteringOpen: true,
 };
 
-export const WithAppliedFiltering: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithAppliedFiltering: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithAppliedFiltering.args = {
   ...Default.args,
   defaultIsFilteringApplied: true,
 };
 
-export const WithDisabledColumns: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithDisabledColumns: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithDisabledColumns.args = {
   ...Default.args,
   hasColumnOrdering: false,
 };
 
-export const WithOpenColumns: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithOpenColumns: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithOpenColumns.args = {
   ...Default.args,
   defaultIsColumnOrderingOpen: true,
 };
 
-export const WithAppliedColumns: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithAppliedColumns: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithAppliedColumns.args = {
   ...Default.args,
   defaultIsColumnOrderingApplied: true,
 };
 
-export const WithDisabledSearch: Story<
-  ControlsModuleProps<Data>
-> = ControlsModuleTemplate.bind({});
+export const WithDisabledSearch: Story<ControlsModuleProps<Data>> =
+  ControlsModuleTemplate.bind({});
 
 WithDisabledSearch.args = {
   ...Default.args,

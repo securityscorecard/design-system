@@ -44,9 +44,8 @@ const Password: React.FC<PasswordProps> = ({
   defaultIsRevealed = false,
   ...props
 }) => {
-  const [isPasswordRevealed, setIsPasswordRevealed] = useState(
-    defaultIsRevealed,
-  );
+  const [isPasswordRevealed, setIsPasswordRevealed] =
+    useState(defaultIsRevealed);
 
   const toggleVisibility = () => {
     setIsPasswordRevealed(!isPasswordRevealed);

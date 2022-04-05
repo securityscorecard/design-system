@@ -37,31 +37,30 @@ import PillLabel from '../../Pill/PillLabel';
 import PillRemoveButton from '../../Pill/PillRemoveButton';
 import { PillSizes, PillVariants } from '../../Pill/Pill.enums';
 
-export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig = (
-  DSTheme,
-) => (selectTheme) => ({
-  ...selectTheme,
-  colors: {
-    primary: DSTheme.colors.primary[400],
-    primary75: DSTheme.colors.primary[400],
-    primary50: DSTheme.colors.primary[200],
-    primary25: transparentize(0.9, DSTheme.colors.primary[400]),
-    danger: DSTheme.colors.error[500],
-    dangerLight: transparentize(0.9, DSTheme.colors.error[500]),
-    neutral0: DSTheme.colors.neutral[0],
-    neutral5: DSTheme.colors.neutral[100],
-    neutral10: DSTheme.colors.neutral[200],
-    neutral20: DSTheme.colors.neutral[300],
-    neutral30: DSTheme.colors.neutral[400],
-    neutral40: DSTheme.colors.neutral[500],
-    neutral50: DSTheme.colors.neutral[600],
-    neutral60: DSTheme.colors.neutral[700],
-    neutral70: DSTheme.colors.neutral[800],
-    neutral80: DSTheme.colors.neutral[900],
-    neutral90: DSTheme.colors.neutral[1000],
-  },
-  spacing: { ...selectTheme.spacing },
-});
+export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig =
+  (DSTheme) => (selectTheme) => ({
+    ...selectTheme,
+    colors: {
+      primary: DSTheme.colors.primary[400],
+      primary75: DSTheme.colors.primary[400],
+      primary50: DSTheme.colors.primary[200],
+      primary25: transparentize(0.9, DSTheme.colors.primary[400]),
+      danger: DSTheme.colors.error[500],
+      dangerLight: transparentize(0.9, DSTheme.colors.error[500]),
+      neutral0: DSTheme.colors.neutral[0],
+      neutral5: DSTheme.colors.neutral[100],
+      neutral10: DSTheme.colors.neutral[200],
+      neutral20: DSTheme.colors.neutral[300],
+      neutral30: DSTheme.colors.neutral[400],
+      neutral40: DSTheme.colors.neutral[500],
+      neutral50: DSTheme.colors.neutral[600],
+      neutral60: DSTheme.colors.neutral[700],
+      neutral70: DSTheme.colors.neutral[800],
+      neutral80: DSTheme.colors.neutral[900],
+      neutral90: DSTheme.colors.neutral[1000],
+    },
+    spacing: { ...selectTheme.spacing },
+  });
 
 const stateStyles = (color, width) => ({
   boxShadow: `inset 0 0 0 ${width} ${color}`,
@@ -308,21 +307,22 @@ export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
   </PillWrapper>
 );
 
-export const MultiValueLabel: (
-  maxLength: number,
-) => ComponentType<{
+export const MultiValueLabel: (maxLength: number) => ComponentType<{
   data: OptionType;
   innerProps: InnerProps;
-}> = (maxLength) => ({ children, innerProps, ...props }) => (
-  <PillLabel
-    $maxLength={maxLength}
-    $size={PillSizes.sm}
-    title={props.data.label}
-    {...innerProps}
-  >
-    {children}
-  </PillLabel>
-);
+}> =
+  (maxLength) =>
+  ({ children, innerProps, ...props }) =>
+    (
+      <PillLabel
+        $maxLength={maxLength}
+        $size={PillSizes.sm}
+        title={props.data.label}
+        {...innerProps}
+      >
+        {children}
+      </PillLabel>
+    );
 
 export const MultiValueRemove: ComponentType<{
   data: OptionType;

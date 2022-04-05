@@ -9,7 +9,7 @@ import { CellTypes } from './renderers.enums';
 import { abbreviateNumber } from '../../../../utils';
 import { defaultDSContext } from '../../../../theme/DSProvider/DSProvider';
 
-const row = ({ original: { col: 'val' } } as unknown) as Row<
+const row = { original: { col: 'val' } } as unknown as Row<
   Record<string, unknown>
 >;
 const multiValueValues = [1000, 2000, 3000];

@@ -4,19 +4,21 @@ import deepEqual from 'fast-deep-equal';
 
 import { DatatableStore, DatatableStoreShape } from '../../../Datatable.store';
 
-export const compare = (order: string[]) => (a: string, b: string): number => {
-  const index1 = order.indexOf(a);
-  const index2 = order.indexOf(b);
+export const compare =
+  (order: string[]) =>
+  (a: string, b: string): number => {
+    const index1 = order.indexOf(a);
+    const index2 = order.indexOf(b);
 
-  if (index1 === -1 && index2 >= 0) {
-    return 1;
-  }
-  if (index1 >= 0 && index2 === -1) {
-    return -1;
-  }
+    if (index1 === -1 && index2 >= 0) {
+      return 1;
+    }
+    if (index1 >= 0 && index2 === -1) {
+      return -1;
+    }
 
-  return comparator(lt)(index1, index2);
-};
+    return comparator(lt)(index1, index2);
+  };
 
 export const sortColumns = (
   order: string[],

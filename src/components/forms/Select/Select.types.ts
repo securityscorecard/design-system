@@ -28,12 +28,11 @@ export type SelectProps<IsMulti extends boolean = false> = ReactSelectProps<
   IsMulti
 > &
   BaseSelectProps<IsMulti>;
-export type CreatableSelectProps<
-  IsMulti extends boolean = false
-> = ReactSelectCreatableProps<Option, IsMulti> &
-  BaseSelectProps<IsMulti> & {
-    createNewLabel?: string;
-  };
+export type CreatableSelectProps<IsMulti extends boolean = false> =
+  ReactSelectCreatableProps<Option, IsMulti> &
+    BaseSelectProps<IsMulti> & {
+      createNewLabel?: string;
+    };
 
 export const OptionPropType = PropTypes.exact({
   value: PropTypes.string.isRequired,

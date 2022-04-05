@@ -232,9 +232,9 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     onValueRemove([]);
     onValuesChange([]);
   };
-  const handleClearAllOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleClearAllOnKeyDown: React.KeyboardEventHandler<
+    HTMLInputElement
+  > = (e) => {
     switch (e.key) {
       case ' ':
       case 'Enter':

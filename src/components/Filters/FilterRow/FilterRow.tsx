@@ -74,13 +74,11 @@ const getFieldConditions = (fieldValue, fields) =>
 const getDefaultCondition = (fieldValue, fields) => {
   const fieldConditions = getFieldConditions(fieldValue, fields);
 
-  const {
-    value: defaultConditionValue,
-    component: defaultConditionComponent,
-  } = pipe(
-    find(propEq('isDefault', true)),
-    defaultTo(head(fieldConditions)),
-  )(fieldConditions);
+  const { value: defaultConditionValue, component: defaultConditionComponent } =
+    pipe(
+      find(propEq('isDefault', true)),
+      defaultTo(head(fieldConditions)),
+    )(fieldConditions);
 
   const defaultComponentValue = getDefaultComponentValue(
     defaultConditionComponent,
@@ -219,10 +217,8 @@ const FilterRow: React.FC<FilterRowProps> = ({
   const fieldOptions = getFieldOptions(fields);
 
   const handleFieldChange = ({ value: selectedFieldValue }) => {
-    const {
-      defaultConditionValue,
-      defaultComponentValue,
-    } = getDefaultCondition(selectedFieldValue, fields);
+    const { defaultConditionValue, defaultComponentValue } =
+      getDefaultCondition(selectedFieldValue, fields);
 
     onFieldChange(
       selectedFieldValue,
