@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { SegmentedToggleProps } from './SegmentedToggle.types';
-import {
-  SegmentedToggle,
-  SegmentedToggleEnums,
-  SegmentedToggleItem,
-} from './index';
-import { generateControl } from '../../../utils/tests/storybook';
+import { SegmentedToggle, SegmentedToggleItem } from './index';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Stack } from '../../layout/Stack';
 import Text from '../../typography/Text/Text';
@@ -19,9 +14,6 @@ export default {
   component: SegmentedToggle,
   argTypes: {
     name: { control: { disable: true } },
-    size: {
-      ...generateControl('select', SegmentedToggleEnums.SegmentedToggleSizes),
-    },
   },
 } as Meta;
 
@@ -34,14 +26,10 @@ export const Playground: Story<SegmentedToggleProps> = (args) => (
 );
 Playground.args = {
   group: 'playground',
-  size: SegmentedToggleEnums.SegmentedToggleSizes.lg,
 };
 
 export const Default: Story = () => (
-  <SegmentedToggle
-    group="default"
-    size={SegmentedToggleEnums.SegmentedToggleSizes.lg}
-  >
+  <SegmentedToggle group="default">
     <SegmentedToggleItem
       itemId="default_input1"
       label="One"
@@ -56,10 +44,7 @@ export const Default: Story = () => (
 export const DifferentSizes: Story = () => (
   <Stack gap={SpaceSizes.lg} justify="flex-start">
     <Inline gap="md">
-      <SegmentedToggle
-        group="sizes_lg"
-        size={SegmentedToggleEnums.SegmentedToggleSizes.lg}
-      >
+      <SegmentedToggle group="sizes_lg">
         <SegmentedToggleItem
           itemId="lg_input1"
           label="One"
@@ -73,10 +58,7 @@ export const DifferentSizes: Story = () => (
       <Button size="lg">Button</Button>
     </Inline>
     <Inline gap="md">
-      <SegmentedToggle
-        group="sizes_md"
-        size={SegmentedToggleEnums.SegmentedToggleSizes.md}
-      >
+      <SegmentedToggle group="sizes_md">
         <SegmentedToggleItem
           itemId="md_input1"
           label="One"
@@ -94,11 +76,7 @@ export const DifferentSizes: Story = () => (
 
 export const Disabled: Story = () => (
   <Stack gap={SpaceSizes.lg} justify="flex-start">
-    <SegmentedToggle
-      group="sizes_lg_disabled"
-      size={SegmentedToggleEnums.SegmentedToggleSizes.lg}
-      isDisabled
-    >
+    <SegmentedToggle group="sizes_lg_disabled" isDisabled>
       <SegmentedToggleItem
         itemId="disabled_lg_input1"
         label="One"
@@ -113,11 +91,7 @@ export const Disabled: Story = () => (
       />
     </SegmentedToggle>
 
-    <SegmentedToggle
-      group="sizes_md_disabled"
-      size={SegmentedToggleEnums.SegmentedToggleSizes.md}
-      isDisabled
-    >
+    <SegmentedToggle group="sizes_md_disabled" isDisabled>
       <SegmentedToggleItem
         itemId="disabled_md_input1"
         label="One"
@@ -143,11 +117,7 @@ export const StateManagement: Story = () => {
 
   return (
     <Stack gap={SpaceSizes.lg} justify="flex-start">
-      <SegmentedToggle
-        group="state"
-        size={SegmentedToggleEnums.SegmentedToggleSizes.lg}
-        onChange={handleChange}
-      >
+      <SegmentedToggle group="state" onChange={handleChange}>
         <SegmentedToggleItem
           itemId="state_input1"
           label="One"

@@ -2,16 +2,13 @@ import React, { createRef } from 'react';
 import { screen } from '@testing-library/react';
 import { map } from 'ramda';
 
-import { SegmentedToggle, SegmentedToggleEnums, SegmentedToggleItem } from '.';
+import { SegmentedToggle, SegmentedToggleItem } from '.';
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 
 describe('SegmentedToggle', () => {
   it('should determine selected tab and input element by strict equality', () => {
     renderWithProviders(
-      <SegmentedToggle
-        group="default"
-        size={SegmentedToggleEnums.SegmentedToggleSizes.lg}
-      >
+      <SegmentedToggle group="default">
         <SegmentedToggleItem itemId="input1" label="One" value="1" />
         <SegmentedToggleItem itemId="input2" label="Two" value="2" />
         <SegmentedToggleItem
@@ -52,12 +49,7 @@ describe('SegmentedToggle', () => {
     const Items = map(Item);
 
     renderWithProviders(
-      <SegmentedToggle
-        group="default"
-        size={SegmentedToggleEnums.SegmentedToggleSizes.lg}
-      >
-        {Items(itemsArray)}
-      </SegmentedToggle>,
+      <SegmentedToggle group="default">{Items(itemsArray)}</SegmentedToggle>,
     );
 
     expect(refs[0].current.checked).toBeFalsy();
