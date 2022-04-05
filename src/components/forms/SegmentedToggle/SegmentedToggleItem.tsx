@@ -11,7 +11,6 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { getFormStyle } from '../../../utils/helpers';
 import { BaseTabsEnums } from '../../_internal/BaseTabs';
-import { SegmentedToggleSizes } from './SegmentedToggle.enums';
 
 const Radio = styled.input`
   display: none;
@@ -40,9 +39,8 @@ const SegmentedToggleItemWrapper = styled.span`
 const SegmentedToggleItem = forwardRef<
   HTMLInputElement,
   SegmentedToggleItemProps
->(({ label, value, group, size, itemId, ...props }, ref) => {
-  const paddingSize =
-    size === SegmentedToggleSizes.lg ? SpaceSizes.md : SpaceSizes.sm;
+>(({ label, value, group, itemId, ...props }, ref) => {
+  const paddingSize = SpaceSizes.sm;
 
   return (
     <SegmentedToggleItemWrapper>
@@ -61,7 +59,7 @@ const SegmentedToggleItem = forwardRef<
         htmlFor={itemId}
         paddingSize={paddingSize}
         paddingType={PaddingTypes.squish}
-        size={size}
+        size={BaseTabsEnums.BaseTabSizes.md}
       >
         {label}
       </BaseTabLabel>
@@ -74,7 +72,6 @@ SegmentedToggleItem.propTypes = {
   itemId: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   group: PropTypes.string,
-  size: PropTypes.oneOf(Object.values(SegmentedToggleSizes)),
 };
 
 export default SegmentedToggleItem;
