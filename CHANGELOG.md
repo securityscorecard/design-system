@@ -1,3 +1,10 @@
+# [1.0.0-alpha.165](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.164...v1.0.0-alpha.165) (2022-04-05)
+
+
+### Bug Fixes
+
+* **Range:** improve keyboard accessibility ([64081ac](https://github.com/securityscorecard/design-system/commit/64081ac018f563c0c0be9075368c3ed892f2d4f6))
+
 # [1.0.0-alpha.164](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.163...v1.0.0-alpha.164) (2022-03-29)
 
 
