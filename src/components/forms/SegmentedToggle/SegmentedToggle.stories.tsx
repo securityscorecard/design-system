@@ -6,8 +6,6 @@ import { SegmentedToggle, SegmentedToggleItem } from './index';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Stack } from '../../layout/Stack';
 import Text from '../../typography/Text/Text';
-import { Button } from '../../Button';
-import { Inline } from '../../layout/Inline';
 
 export default {
   title: 'components/forms/SegmentedToggle',
@@ -41,56 +39,8 @@ export const Default: Story = () => (
   </SegmentedToggle>
 );
 
-export const DifferentSizes: Story = () => (
-  <Stack gap={SpaceSizes.lg} justify="flex-start">
-    <Inline gap="md">
-      <SegmentedToggle group="sizes_lg">
-        <SegmentedToggleItem
-          itemId="lg_input1"
-          label="One"
-          value="1"
-          defaultChecked
-        />
-        <SegmentedToggleItem itemId="lg_input2" label="Two" value="2" />
-        <SegmentedToggleItem itemId="lg_input3" label="Three" value="3" />
-      </SegmentedToggle>
-      {/* Just to illustrate height match with button size */}
-      <Button size="lg">Button</Button>
-    </Inline>
-    <Inline gap="md">
-      <SegmentedToggle group="sizes_md">
-        <SegmentedToggleItem
-          itemId="md_input1"
-          label="One"
-          value="1"
-          defaultChecked
-        />
-        <SegmentedToggleItem itemId="md_input2" label="Two" value="2" />
-        <SegmentedToggleItem itemId="md_input3" label="Three" value="3" />
-      </SegmentedToggle>
-      {/* Just to illustrate height match with button size */}
-      <Button size="md">Button</Button>
-    </Inline>
-  </Stack>
-);
-
 export const Disabled: Story = () => (
   <Stack gap={SpaceSizes.lg} justify="flex-start">
-    <SegmentedToggle group="sizes_lg_disabled" isDisabled>
-      <SegmentedToggleItem
-        itemId="disabled_lg_input1"
-        label="One"
-        value="1"
-        defaultChecked
-      />
-      <SegmentedToggleItem itemId="disabled_lg_input2" label="Two" value="2" />
-      <SegmentedToggleItem
-        itemId="disabled_lg_input3"
-        label="Three"
-        value="3"
-      />
-    </SegmentedToggle>
-
     <SegmentedToggle group="sizes_md_disabled" isDisabled>
       <SegmentedToggleItem
         itemId="disabled_md_input1"
