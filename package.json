@@ -127,7 +127,6 @@
     "mockdate": "^3.0.5",
     "postcss": "^8.4.12",
     "prettier": "^2.6.0",
-    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.3.0",
