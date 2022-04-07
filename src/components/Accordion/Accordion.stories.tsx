@@ -2,16 +2,27 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import Accordion from './Accordion';
+import { AccordionProps } from './Accordion.types';
 
 export default {
   title: 'components/Accordion',
   component: Accordion,
+  argTypes: {
+    isCollapsedOnOpen: {
+      control: { type: 'boolean' },
+    },
+  },
 } as Meta;
 
 const items = [
   { id: 1, title: 'Item 1', content: 'Content', isOpen: true },
   { id: 2, title: 'Item 2', content: 'Content' },
 ];
+
+export const Playground: Story<AccordionProps> = (args) => (
+  <Accordion {...args} />
+);
+Playground.args = { items };
 
 export const DefaultAccordion: Story = () => (
   <Accordion items={items}>Accordion</Accordion>
