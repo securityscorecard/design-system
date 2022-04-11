@@ -4,7 +4,7 @@ import { isNotUndefined, isUndefined, noop } from 'ramda-adjunct';
 
 import { LinkRendererProps } from './renderers.types';
 
-const LinkRenderer = <D extends Record<string, unknown>>({
+function LinkRenderer<D extends Record<string, unknown>>({
   value,
   isDiscrete = false,
   onClick = noop,
@@ -13,7 +13,7 @@ const LinkRenderer = <D extends Record<string, unknown>>({
   component,
   rowData,
   className,
-}: LinkRendererProps<D>): React.ReactElement => {
+}: LinkRendererProps<D>): React.ReactElement {
   const isRelativeLink = isNotUndefined(toComposer);
   if (isRelativeLink && isUndefined(component)) {
     throw new Error(`You are trying to use 'toComposer' property but you didn't provide 'cellLinkComponent'.
@@ -39,6 +39,6 @@ Add valid component to 'cellLinkComponent', e.g. Link or NavLink from 'react-rou
       {value}
     </LinkComponent>
   );
-};
+}
 
 export default LinkRenderer;

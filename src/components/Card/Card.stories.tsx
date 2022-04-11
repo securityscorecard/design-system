@@ -38,29 +38,37 @@ export default {
   },
 } as Meta;
 
-const CardHeaderTemplate = () => (
-  <CardHeader actions={actions} subtitle="Card subtitle" title="Card title" />
-);
+function CardHeaderTemplate() {
+  return (
+    <CardHeader actions={actions} subtitle="Card subtitle" title="Card title" />
+  );
+}
 
-const CardContentTemplate = () => (
-  <CardContent>
-    <Paragraph margin="none">
-      Etiam id laoreet tellus. Pellentesque interdum porttitor iaculis. Ut leo
-      urna, lobortis ac fermentum at, efficitur vel lorem. Cras viverra tempor
-      augue, sed rutrum neque vestibulum at.
-    </Paragraph>
-  </CardContent>
-);
+function CardContentTemplate() {
+  return (
+    <CardContent>
+      <Paragraph margin="none">
+        Etiam id laoreet tellus. Pellentesque interdum porttitor iaculis. Ut leo
+        urna, lobortis ac fermentum at, efficitur vel lorem. Cras viverra tempor
+        augue, sed rutrum neque vestibulum at.
+      </Paragraph>
+    </CardContent>
+  );
+}
 
-const CardActionsTemplate = () => <CardActions actions={actions} />;
+function CardActionsTemplate() {
+  return <CardActions actions={actions} />;
+}
 
-const CardMediaTemplate = ({
+function CardMediaTemplate({
   width,
   height = '15rem',
 }: {
   width?: string;
   height?: string;
-}) => <CardMedia alt="test" mediaSrc={image} style={{ height, width }} />;
+}) {
+  return <CardMedia alt="test" mediaSrc={image} style={{ height, width }} />;
+}
 
 const CardTemplate: Story<CardProps> = ({ direction, ...args }) => (
   <div style={{ width: direction === 'vertical' ? '400px' : 'auto' }}>

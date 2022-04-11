@@ -18,7 +18,7 @@ const renderRestValue = (startIndex, formatter, values) =>
     }),
   )(values);
 
-const MultiValueRenderer = <D extends Record<string, unknown>>({
+function MultiValueRenderer<D extends Record<string, unknown>>({
   values,
   valueFormatter,
   multiValueDisplayLimit = 2,
@@ -28,7 +28,7 @@ const MultiValueRenderer = <D extends Record<string, unknown>>({
   linkComponent,
   rowData,
   tooltipComposer,
-}: MultiValueRendererProps<D>): React.ReactElement => {
+}: MultiValueRendererProps<D>): React.ReactElement {
   const hasDisplayLimit = multiValueDisplayLimit > 0;
   const valuesLength = values.length;
   const containsLink = any(isNotUndefined, [hrefComposer, toComposer, onClick]);
@@ -86,6 +86,6 @@ const MultiValueRenderer = <D extends Record<string, unknown>>({
       )}
     </div>
   );
-};
+}
 
 export default MultiValueRenderer;

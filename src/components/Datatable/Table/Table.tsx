@@ -73,7 +73,7 @@ const collectSelectedIds = <D,>(
   });
 };
 
-const Table = <D extends Record<string, unknown>>({
+function Table<D extends Record<string, unknown>>({
   columns,
   data,
   dataPrimaryKey,
@@ -96,7 +96,7 @@ const Table = <D extends Record<string, unknown>>({
   defaultPageIndex,
   defaultColumnOrder,
 }: // defaultHiddenColumns,
-TableProps<D>): React.ReactElement => {
+TableProps<D>): React.ReactElement {
   const tableDataSize = useMemo(
     () => (hasServerSidePagination ? dataSize : data.length),
     [hasServerSidePagination, dataSize, data],
@@ -336,6 +336,6 @@ TableProps<D>): React.ReactElement => {
       ) : null}
     </>
   );
-};
+}
 
 export default Table;

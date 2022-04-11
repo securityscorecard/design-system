@@ -50,7 +50,7 @@ const TableWrapper = styled.div`
   overflow: hidden;
 `;
 
-const Table = <D extends Record<string, unknown>>({
+function Table<D extends Record<string, unknown>>({
   columns,
   data,
   dataSize,
@@ -65,7 +65,7 @@ const Table = <D extends Record<string, unknown>>({
   onSortChange = noop,
   rowActions = [],
   dataPrimaryKey,
-}: TableProps<D>): React.ReactElement => {
+}: TableProps<D>): React.ReactElement {
   const defaultColumn = useMemo<Partial<Column<D>>>(
     () => ({
       minWidth: 40,
@@ -172,7 +172,7 @@ const Table = <D extends Record<string, unknown>>({
       ) : null}
     </TableWrapper>
   );
-};
+}
 
 Table.propTypes = {
   NoDataComponent: PropTypes.elementType,

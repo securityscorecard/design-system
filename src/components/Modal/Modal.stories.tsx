@@ -31,14 +31,16 @@ export default {
   },
 } as Meta;
 
-const Footer = () => (
-  <Inline gap={SpaceSizes.md} justify="flex-end">
-    <Button size={SpaceSizes.lg} variant="outline">
-      Cancel
-    </Button>
-    <Button size={SpaceSizes.lg}>Confirm</Button>
-  </Inline>
-);
+function Footer() {
+  return (
+    <Inline gap={SpaceSizes.md} justify="flex-end">
+      <Button size={SpaceSizes.lg} variant="outline">
+        Cancel
+      </Button>
+      <Button size={SpaceSizes.lg}>Confirm</Button>
+    </Inline>
+  );
+}
 
 export const Playground: Story<ModalProps> = (args) => {
   const [isShown, setIsShown] = useState(false);

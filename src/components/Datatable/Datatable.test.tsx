@@ -37,7 +37,7 @@ const columns: Column<Data>[] = [
   { accessor: 'col2', Header: 'Col2' },
 ];
 
-const TestDatatableComponent = () => {
+function TestDatatableComponent() {
   const [entries, setEntries] = useState(data);
   return (
     <Datatable<Data>
@@ -58,7 +58,7 @@ const TestDatatableComponent = () => {
       ]}
     />
   );
-};
+}
 describe('Datatable', () => {
   beforeEach(() => {
     DatatableStore.replace(datatableInitialState);

@@ -36,7 +36,7 @@ const mapSelectedRows = <D,>(defaultSelectedRowIds: IdType<D>[]) =>
     fromPairs,
   )(defaultSelectedRowIds);
 
-const Datatable = <D extends Record<string, unknown>>({
+function Datatable<D extends Record<string, unknown>>({
   data,
   dataSize,
   columns,
@@ -49,7 +49,7 @@ const Datatable = <D extends Record<string, unknown>>({
   isBatchModuleEnabled = true,
   controlsConfig = {},
   tableConfig = {},
-}: DatatableProps<D>): React.ReactElement => {
+}: DatatableProps<D>): React.ReactElement {
   // Set canceled signal to prevent data fetch when unmounting
   useEffect(
     () => () =>
@@ -134,7 +134,7 @@ const Datatable = <D extends Record<string, unknown>>({
       />
     </StyledDatatable>
   );
-};
+}
 
 Datatable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

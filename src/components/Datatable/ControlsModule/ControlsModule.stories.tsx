@@ -92,14 +92,14 @@ export default {
   },
 } as Meta;
 
-const ControlsModuleTemplate = (args) => {
+function ControlsModuleTemplate(args) {
   useColumnsControls(action('onColumnOrderChange'), simpleColumns, [
     'country',
     'source',
     'findingsCount',
   ]);
   return <ControlsModule {...args} />;
-};
+}
 
 export const Default: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});

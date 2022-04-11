@@ -49,11 +49,13 @@ const MonthSelector = styled.button`
   }
 `;
 
-const ChangeMonthIcon = (props) => (
-  <ChangeMonthIconContainer {...props}>
-    <Icon color={ColorTypes.neutral600} name={SSCIconNames.sortDown} />
-  </ChangeMonthIconContainer>
-);
+function ChangeMonthIcon(props) {
+  return (
+    <ChangeMonthIconContainer {...props}>
+      <Icon color={ColorTypes.neutral600} name={SSCIconNames.sortDown} />
+    </ChangeMonthIconContainer>
+  );
+}
 
 const MonthIndicator = styled.button`
   border-radius: ${getRadii('default')};

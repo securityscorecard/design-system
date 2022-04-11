@@ -11,11 +11,13 @@ const generateIconProps = ({ width, height, svgPathData }) => ({
   children: <path d={svgPathData} fill="currentColor" />,
 });
 
-const Mark = ({ children, ...props }) => (
-  <svg role="img" xmlns="http://www.w3.org/2000/svg" {...props}>
-    {children}
-  </svg>
-);
+function Mark({ children, ...props }) {
+  return (
+    <svg role="img" xmlns="http://www.w3.org/2000/svg" {...props}>
+      {children}
+    </svg>
+  );
+}
 
 const TableCheckbox = forwardRef(
   (

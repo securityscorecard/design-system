@@ -45,40 +45,42 @@ const StyledTh = styled.th`
   }
 `;
 
-const Head = <D extends Record<string, unknown>>({
+function Head<D extends Record<string, unknown>>({
   headerGroups,
-}: HeadProps<D>): React.ReactElement => (
-  <thead>
-    {headerGroups.map((headerGroup) => (
-      <tr {...headerGroup.getHeaderGroupProps()}>
-        {headerGroup.headers.map((column) => (
-          <StyledTh
-            {...column.getHeaderProps({
-              ...column.getSortByToggleProps({
-                ...column.getSortByToggleProps(),
-                title: column.canSort ? `Sort ${column.Header}` : undefined,
-              }),
-              ...shrinkIfSticky(column.sticky),
-            })}
-            sticky={column.sticky}
-          >
-            <TooltipWrapper
-              popupRenderer={() => column.headerTooltip}
-              shouldRender={isNotUndefined(column.headerTooltip)}
+}: HeadProps<D>): React.ReactElement {
+  return (
+    <thead>
+      {headerGroups.map((headerGroup) => (
+        <tr {...headerGroup.getHeaderGroupProps()}>
+          {headerGroup.headers.map((column) => (
+            <StyledTh
+              {...column.getHeaderProps({
+                ...column.getSortByToggleProps({
+                  ...column.getSortByToggleProps(),
+                  title: column.canSort ? `Sort ${column.Header}` : undefined,
+                }),
+                ...shrinkIfSticky(column.sticky),
+              })}
+              sticky={column.sticky}
             >
-              {column.render('Header')}
-            </TooltipWrapper>
-            {column.canSort && (
-              <SortingIcon
-                isSorted={column.isSorted}
-                isSortedDesc={column.isSortedDesc}
-              />
-            )}
-          </StyledTh>
-        ))}
-      </tr>
-    ))}
-  </thead>
-);
+              <TooltipWrapper
+                popupRenderer={() => column.headerTooltip}
+                shouldRender={isNotUndefined(column.headerTooltip)}
+              >
+                {column.render('Header')}
+              </TooltipWrapper>
+              {column.canSort && (
+                <SortingIcon
+                  isSorted={column.isSorted}
+                  isSortedDesc={column.isSortedDesc}
+                />
+              )}
+            </StyledTh>
+          ))}
+        </tr>
+      ))}
+    </thead>
+  );
+}
 
 export default Head;

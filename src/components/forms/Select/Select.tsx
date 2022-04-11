@@ -6,13 +6,13 @@ import { ActionKindsPropType } from '../../../types/action.types';
 import { useSelectProps } from './useSelectProps';
 import { GroupPropType, OptionPropType, SelectProps } from './Select.types';
 
-const Select = <IsMulti extends boolean = false>(
+function Select<IsMulti extends boolean = false>(
   props: SelectProps<IsMulti>,
-): React.ReactElement => {
+): React.ReactElement {
   const selectProps = useSelectProps<IsMulti>(props);
 
   return <ReactSelect {...selectProps} />;
-};
+}
 
 Select.propTypes = {
   options: PropTypes.arrayOf(

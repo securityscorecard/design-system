@@ -27,7 +27,7 @@ export const CardMediaWrapper = styled.div<CardMediaWrapperProps>`
 const MEDIA_COMPONENTS = ['video', 'audio', 'picture', 'iframe', 'img'];
 const IMAGE_COMPONENTS = ['picture', 'img'];
 
-const CardMedia = <El extends HTMLElement = HTMLDivElement>({
+function CardMedia<El extends HTMLElement = HTMLDivElement>({
   children,
   mediaSrc,
   as,
@@ -36,7 +36,7 @@ const CardMedia = <El extends HTMLElement = HTMLDivElement>({
   ...props
 }: React.PropsWithChildren<
   CardMediaProps & React.HTMLProps<El>
->): React.ReactElement => {
+>): React.ReactElement {
   const isMediaComponent = includes(as, MEDIA_COMPONENTS);
   const isImageComponent = includes(as, IMAGE_COMPONENTS);
   const hasMediaSrc = isNotUndefined(mediaSrc);
@@ -61,7 +61,7 @@ const CardMedia = <El extends HTMLElement = HTMLDivElement>({
       {!isMediaComponent && !hasMediaSrc ? children : null}
     </CardMediaWrapper>
   );
-};
+}
 
 CardMedia.propTypes = {
   mediaSrc: PropTypes.string,

@@ -13,11 +13,13 @@ import { Icon } from '../../../Icon';
 import { selectStyles } from './styles';
 import { OptionPropType, SelectProps } from './Select.types';
 
-const DropdownIndicator = (props) => (
-  <components.DropdownIndicator {...props}>
-    <Icon name={SSCIconNames.caretDown} type={IconTypes.ssc} />
-  </components.DropdownIndicator>
-);
+function DropdownIndicator(props) {
+  return (
+    <components.DropdownIndicator {...props}>
+      <Icon name={SSCIconNames.caretDown} type={IconTypes.ssc} />
+    </components.DropdownIndicator>
+  );
+}
 
 const MultiValue: React.FC<MultiValueProps<OptionTypeBase>> = (props) => {
   const { data, removeProps } = props;

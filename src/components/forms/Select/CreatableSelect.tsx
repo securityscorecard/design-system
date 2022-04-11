@@ -8,10 +8,10 @@ import { useSelectProps } from './useSelectProps';
 import Select from './Select';
 import { CreatableSelectProps } from './Select.types';
 
-const CreatableSelect = <IsMulti extends boolean = false>({
+function CreatableSelect<IsMulti extends boolean = false>({
   createNewLabel = 'Create',
   ...props
-}: CreatableSelectProps<IsMulti>): React.ReactElement => {
+}: CreatableSelectProps<IsMulti>): React.ReactElement {
   const selectProps = useSelectProps<IsMulti>(props);
 
   return (
@@ -25,7 +25,7 @@ const CreatableSelect = <IsMulti extends boolean = false>({
       {...selectProps}
     />
   );
-};
+}
 
 CreatableSelect.propTypes = {
   ...Select.propTypes,

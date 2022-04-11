@@ -47,7 +47,7 @@ const defaultControlState: ControlState = {
 const mergeControlState = mergeDeepRight(defaultControlState);
 
 // TODO: commented part will be enabled when functionality is implemented
-const ControlsModule = <D extends Record<string, unknown>>({
+function ControlsModule<D extends Record<string, unknown>>({
   hasSearch,
   searchConfig,
   hasFiltering,
@@ -72,7 +72,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
   // defaultViews,
   onCancelLoading,
   onControlToggle,
-}: ControlsModuleProps<D>): React.ReactElement => {
+}: ControlsModuleProps<D>): React.ReactElement {
   const {
     onClose: onFilteringClose,
     onApply: onFilteringApply,
@@ -302,7 +302,7 @@ const ControlsModule = <D extends Record<string, unknown>>({
       )}
     </div>
   );
-};
+}
 
 ControlsModule.propTypes = ControlsConfigPropType;
 

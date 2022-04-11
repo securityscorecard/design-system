@@ -53,13 +53,15 @@ export const getCounterContent = (
   </span>
 );
 
-const ElementCounterWrapper = ({ children, ...props }) => (
-  <Padbox paddingSize={SpaceSizes.sm} paddingType={PaddingTypes.squish}>
-    <Inline align="center" gap={SpaceSizes.xs} {...props}>
-      {children}
-    </Inline>
-  </Padbox>
-);
+function ElementCounterWrapper({ children, ...props }) {
+  return (
+    <Padbox paddingSize={SpaceSizes.sm} paddingType={PaddingTypes.squish}>
+      <Inline align="center" gap={SpaceSizes.xs} {...props}>
+        {children}
+      </Inline>
+    </Padbox>
+  );
+}
 
 const CounterText = styled(H4).attrs(() => ({
   margin: 'none',
