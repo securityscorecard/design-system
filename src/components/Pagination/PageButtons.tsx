@@ -59,6 +59,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({
   pageCount,
   onChange,
   positions,
+  renderItem = PaginationItem,
 }) => {
   const { pages, showLeftEllipsis, showRightEllipsis } = useMemo(
     () => calculatePagePositions(currentPage, pageCount, positions),
@@ -68,41 +69,44 @@ const PageButtons: React.FC<PageButtonsProps> = ({
   if (pageCount <= positions) {
     return (
       <>
-        {generatePages(1, pageCount).map((page) => (
-          <PaginationItem
-            key={`page-${page}`}
-            isCurrent={page === currentPage}
-            onClick={() => onChange(page)}
-          >
-            {formatNumber(page)}
-          </PaginationItem>
-        ))}
+        {generatePages(1, pageCount).map((page) =>
+          renderItem({
+            key: `page-${page}`,
+            page,
+            isCurrent: page === currentPage,
+            onClick: () => onChange(page),
+            children: formatNumber(page),
+          }),
+        )}
       </>
     );
   }
 
   return (
     <>
-      <PaginationItem isCurrent={currentPage === 1} onClick={() => onChange(1)}>
-        1
-      </PaginationItem>
+      {renderItem({
+        page: 1,
+        isCurrent: currentPage === 1,
+        onClick: () => onChange(1),
+        children: <>1</>,
+      })}
       {showLeftEllipsis && <PaginationItemElipsis />}
-      {pages.map((page) => (
-        <PaginationItem
-          key={page}
-          isCurrent={currentPage === page}
-          onClick={() => onChange(page)}
-        >
-          {formatNumber(page)}
-        </PaginationItem>
-      ))}
+      {pages.map((page) =>
+        renderItem({
+          key: page,
+          page,
+          isCurrent: currentPage === page,
+          onClick: () => onChange(page),
+          children: formatNumber(page),
+        }),
+      )}
       {showRightEllipsis && <PaginationItemElipsis />}
-      <PaginationItem
-        isCurrent={currentPage === pageCount}
-        onClick={() => onChange(pageCount)}
-      >
-        {formatNumber(pageCount)}
-      </PaginationItem>
+      {renderItem({
+        page: pageCount,
+        isCurrent: currentPage === pageCount,
+        onClick: () => onChange(pageCount),
+        children: formatNumber(pageCount),
+      })}
     </>
   );
 };

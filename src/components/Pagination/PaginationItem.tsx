@@ -88,6 +88,7 @@ export const PaginationItem: React.FC<PaginationItemProps> = ({
     <StyledPaginationComponent
       $isCurrent={isCurrent}
       $isShrinked={isShrinked}
+      data-testid="pagination-item"
       disabled={isDisabled}
       type="button"
       onClick={handleOnClick}

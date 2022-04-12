@@ -14,30 +14,34 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
   pageButtonsCount = 8,
+  renderItem = PaginationItem,
 }) => (
   <Inline gap={SpaceSizes.sm} justify="center">
-    <PaginationItem
-      aria-label="Previous page"
-      isDisabled={currentPage - 1 === 0}
-      isShrinked
-      onClick={() => onPageChange(currentPage - 1)}
-    >
-      <Icon name={SSCIconNames.longArrowLeft} />
-    </PaginationItem>
+    {renderItem &&
+      renderItem({
+        'aria-label': 'Previous page',
+        page: currentPage - 1,
+        isDisabled: currentPage - 1 === 0,
+        isShrinked: true,
+        onClick: () => onPageChange(currentPage - 1),
+        children: <Icon name={SSCIconNames.longArrowLeft} />,
+      })}
     <PageButtons
       currentPage={currentPage}
       pageCount={pageCount}
       positions={pageButtonsCount}
+      renderItem={renderItem}
       onChange={onPageChange}
     />
-    <PaginationItem
-      aria-label="Next page"
-      isDisabled={currentPage + 1 > pageCount}
-      isShrinked
-      onClick={() => onPageChange(currentPage + 1)}
-    >
-      <Icon name={SSCIconNames.longArrowRight} />
-    </PaginationItem>
+    {renderItem &&
+      renderItem({
+        'aria-label': 'Next page',
+        page: currentPage + 1,
+        isDisabled: currentPage + 1 > pageCount,
+        isShrinked: true,
+        onClick: () => onPageChange(currentPage + 1),
+        children: <Icon name={SSCIconNames.longArrowRight} />,
+      })}
   </Inline>
 );
 
@@ -46,6 +50,7 @@ Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   pageButtonsCount: PropTypes.number,
+  renderItem: PropTypes.func,
 };
 
 export default Pagination;

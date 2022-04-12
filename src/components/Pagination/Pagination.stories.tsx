@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Pagination from './Pagination';
 import { PaginationProps } from './Pagination.types';
+import { Button } from '..';
 
 export default {
   title: 'components/Pagination',
@@ -48,4 +49,11 @@ export const WithCustomPageButtonsCount = PaginationTemplate.bind({});
 WithCustomPageButtonsCount.args = {
   ...InMiddle.args,
   pageButtonsCount: 10,
+};
+
+export const WithCustomRenderItemFunction = PaginationTemplate.bind({});
+WithCustomRenderItemFunction.args = {
+  ...OnFirstPage.args,
+  currentPage: 10,
+  renderItem: (param) => <Button>{param.children}</Button>,
 };
