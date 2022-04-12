@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import { generateControl } from '../../utils/tests/storybook';
 import { Button } from '../Button';
-import { Inline, Stack } from '../layout';
+import { Inline, Padbox, Stack } from '../layout';
 import { H2, Paragraph } from '../typography';
 import { StepperProps } from './Stepper.types';
 import Stepper from './Stepper';
@@ -37,6 +37,7 @@ import { Stepper, Step } from '@securityscorecard/design-system';
       ...generateControl('select', StepperOrientations),
     },
   },
+  decorators: [(storyFn) => <Padbox>{storyFn()}</Padbox>],
 } as Meta;
 
 const steps = [

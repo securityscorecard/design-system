@@ -51,4 +51,17 @@ describe('Stepper', () => {
 
     expect(screen.queryByTestId('step-content')).not.toBeInTheDocument();
   });
+
+  it('should not render Step text if container width is lower than the text breakpoint ', () => {
+    render(
+      <div style={{ width: '550px' }}>
+        <Stepper orientation={StepperOrientations.horizontal}>
+          <Step label="Step 1" summary="This is a summary for step 1" />
+          <Step label="Step 2" summary="This is a summary for step 2" />
+        </Stepper>
+      </div>,
+    );
+    expect(screen.queryByText('Step 1')).toBeInTheDocument();
+    expect(screen.queryByText('Step 2')).not.toBeInTheDocument();
+  });
 });
