@@ -30,7 +30,8 @@
     "semantic-release": "semantic-release",
     "betterer": "betterer -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
     "betterer:precommit": "betterer precommit -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
-    "betterer:ci": "betterer ci -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict"
+    "betterer:ci": "betterer ci -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "react": "^16.8.0",
@@ -119,7 +120,7 @@
     "eslint-plugin-react-hooks": "^4.0.4",
     "eslint-plugin-testing-library": "^3.10.2",
     "history": "^5.3.0",
-    "husky": "^4.3.8",
+    "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-styled-components": "^7.0.8",
@@ -180,11 +181,5 @@
       "stylelint 'src/**/*.{js,ts,tsx}",
       "yarn run betterer:precommit"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   }
 }
