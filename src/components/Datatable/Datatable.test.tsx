@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Column } from 'react-table';
 import { filter } from 'ramda';
@@ -109,7 +109,7 @@ describe('Datatable', () => {
     });
   });
 
-  it('should reset selected rows when data changes', () => {
+  it('should reset selected rows when data changes', async () => {
     renderWithProviders(<TestDatatableComponent />);
 
     userEvent.click(
@@ -121,10 +121,9 @@ describe('Datatable', () => {
     const elementCounter = screen.getByRole('heading', { level: 4 });
 
     expect(elementCounter).toHaveTextContent('1 of 3 selected');
-
     userEvent.click(screen.getByRole('button', { name: /Remove/i }));
 
-    expect(elementCounter).toHaveTextContent(/^2$/);
+    await waitFor(() => expect(elementCounter).toHaveTextContent(/^2$/));
 
     userEvent.click(
       screen.getAllByRole('checkbox', {
