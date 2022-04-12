@@ -1,3 +1,10 @@
+# [1.0.0-alpha.168](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.167...v1.0.0-alpha.168) (2022-04-12)
+
+
+### Features
+
+* **Pagination:** Add prop function for rendering custom pagination items ([9b77dc0](https://github.com/securityscorecard/design-system/commit/9b77dc080b27c00f5900564a648724a18088cbfb))
+
 # [1.0.0-alpha.167](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.166...v1.0.0-alpha.167) (2022-04-05)
 
 
