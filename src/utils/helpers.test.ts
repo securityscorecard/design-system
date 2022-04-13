@@ -48,12 +48,12 @@ describe('getColor', () => {
     expect(getColor(ColorTypes.primary50, { theme })).toBe('#ebf4fc');
     expect(getColor(ColorTypes.neutral1000, { theme })).toBe('#000');
     expect(getColor(ColorTypes.neutral900, { theme })).toBe('#2a2a2a');
-    expect(getColor(ColorTypes.neutral800, { theme })).toBe('#5d5d5d');
-    expect(getColor(ColorTypes.neutral700, { theme })).toBe('#727272');
-    expect(getColor(ColorTypes.neutral600, { theme })).toBe('#b4b4b4');
-    expect(getColor(ColorTypes.neutral500, { theme })).toBe('#d1d1d1');
-    expect(getColor(ColorTypes.neutral400, { theme })).toBe('#dadada');
-    expect(getColor(ColorTypes.neutral300, { theme })).toBe('#eee');
+    expect(getColor(ColorTypes.neutral800, { theme })).toBe('#555555');
+    expect(getColor(ColorTypes.neutral700, { theme })).toBe('#686868');
+    expect(getColor(ColorTypes.neutral600, { theme })).toBe('#888888');
+    expect(getColor(ColorTypes.neutral500, { theme })).toBe('#a8a8a8');
+    expect(getColor(ColorTypes.neutral400, { theme })).toBe('#d8d8d8');
+    expect(getColor(ColorTypes.neutral300, { theme })).toBe('#e8e8e8');
     expect(getColor(ColorTypes.neutral200, { theme })).toBe('#f3f3f3');
     expect(getColor(ColorTypes.neutral100, { theme })).toBe('#f9f9f9');
     expect(getColor(ColorTypes.neutral0, { theme })).toBe('#fff');
