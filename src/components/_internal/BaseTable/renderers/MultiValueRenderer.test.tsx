@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
-import { join, pipe, slice } from 'ramda';
+import { identity, join, pipe, slice } from 'ramda';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import MultiValueRenderer from './MultiValueRenderer';
@@ -31,9 +31,11 @@ describe('Datatable/MultiValueRenderer', () => {
 
     fireEvent.mouseEnter(screen.getByText(`+ ${restValuesCount}`));
 
+    /* eslint-disable testing-library/no-node-access */
     expect(
       document.getElementById(defaultDSContext.portalsContainerId),
     ).toHaveTextContent(restValuesText);
+    /* eslint-enable testing-library/no-node-access */
   });
   it('should open tooltip when hover on value pill', () => {
     renderWithProviders(
@@ -41,15 +43,17 @@ describe('Datatable/MultiValueRenderer', () => {
         multiValueDisplayLimit={2}
         values={values}
         rowData={{}}
-        tooltipComposer={(val) => <>{val}</>}
+        tooltipComposer={identity}
       />,
     );
 
     fireEvent.mouseEnter(screen.getByText(values[0]));
 
+    /* eslint-disable testing-library/no-node-access */
     expect(
       document.getElementById(defaultDSContext.portalsContainerId),
     ).toHaveTextContent(values[0]);
+    /* eslint-enable testing-library/no-node-access */
   });
   it('should call "tooltipComposer" with correct arguments for each visible value', () => {
     const tooltipComposerMock = jest.fn();
@@ -144,6 +148,7 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
+    /* eslint-disable testing-library/no-node-access */
     expect(
       document.getElementsByClassName('ds-table-cell-multivalue')[0],
     ).toHaveTextContent('1K2K+ 1');
@@ -151,5 +156,6 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(
       document.getElementById(defaultDSContext.portalsContainerId),
     ).toHaveTextContent('3K');
+    /* eslint-enable testing-library/no-node-access */
   });
 });

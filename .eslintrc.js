@@ -32,8 +32,6 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:ramda/recommended',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended',
   ],
   plugins: ['filenames', 'fp', 'react-hooks', 'ramda'],
   rules: {
@@ -75,8 +73,7 @@ module.exports = {
     'react/boolean-prop-naming': [
       'error',
       {
-        rule:
-          '^(defaultIs|defaultHas|defaultShould|defaultAre|is|has|should|are)[A-Z]([A-Za-z0-9]?)+',
+        rule: '^(defaultIs|defaultHas|defaultShould|defaultAre|is|has|should|are)[A-Z]([A-Za-z0-9]?)+',
       },
     ],
     'react/prop-types': ['error', { ignore: ['children', 'as'] }],
@@ -100,6 +97,13 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/require-default-props': 'off',
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: ['arrow-function', 'function-declaration'],
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     'fp/no-arguments': 'error',
     'fp/no-delete': 'error',
     'fp/no-get-set': 'error',
@@ -144,6 +148,7 @@ module.exports = {
       env: {
         jest: true,
       },
+      extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
       rules: {
         'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
         'react/jsx-sort-props': 'off',
@@ -153,6 +158,7 @@ module.exports = {
       files: ['**/*.stories.tsx'],
       rules: {
         'react/prop-types': 'off',
+        'react/no-unstable-nested-components': [2, { allowAsProps: true }],
       },
     },
   ],

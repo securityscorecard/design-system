@@ -17,6 +17,7 @@ describe('Stepper', () => {
       </Stepper>,
     );
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(screen.getByTestId('stepper').children).toHaveLength(1);
   });
 
@@ -61,7 +62,7 @@ describe('Stepper', () => {
         </Stepper>
       </div>,
     );
-    expect(screen.queryByText('Step 1')).toBeInTheDocument();
+    expect(screen.getByText('Step 1')).toBeInTheDocument();
     expect(screen.queryByText('Step 2')).not.toBeInTheDocument();
   });
 });

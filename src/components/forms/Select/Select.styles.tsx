@@ -310,9 +310,10 @@ export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
 export const MultiValueLabel: (maxLength: number) => ComponentType<{
   data: OptionType;
   innerProps: InnerProps;
-}> = (maxLength) =>
-  function ({ children, innerProps, ...props }) {
-    return (
+}> =
+  (maxLength) =>
+  ({ children, innerProps, ...props }) =>
+    (
       <PillLabel
         $maxLength={maxLength}
         $size={PillSizes.sm}
@@ -322,7 +323,6 @@ export const MultiValueLabel: (maxLength: number) => ComponentType<{
         {children}
       </PillLabel>
     );
-  };
 
 export const MultiValueRemove: ComponentType<{
   data: OptionType;

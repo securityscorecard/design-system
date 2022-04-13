@@ -50,6 +50,10 @@ const TableWrapper = styled.div`
   overflow: hidden;
 `;
 
+const renderDefaultCell = <D extends Record<string, unknown>>(
+  props: CellProps<D>,
+): React.ReactElement => <CellRenderer<D> {...props} />;
+
 function Table<D extends Record<string, unknown>>({
   columns,
   data,
@@ -72,9 +76,8 @@ function Table<D extends Record<string, unknown>>({
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement => (
-        <CellRenderer<D> {...props} />
-      ),
+      Cell: (props: CellProps<D>): React.ReactElement =>
+        renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],

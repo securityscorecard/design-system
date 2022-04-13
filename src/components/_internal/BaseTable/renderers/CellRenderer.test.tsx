@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
-import { F as stubFalse } from 'ramda';
+import { identity, F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
@@ -257,7 +257,7 @@ describe('Datatable/CellRenderer', () => {
           column={{
             nullCondition: stubFalse,
             cellType: CellTypes.text,
-            cellTooltipPopupComposer: (val) => <>{val}</>,
+            cellTooltipPopupComposer: identity,
           }}
           row={row}
         />,
@@ -265,10 +265,11 @@ describe('Datatable/CellRenderer', () => {
 
       const value = screen.getByText(singleValue);
       fireEvent.mouseEnter(value);
-
+      /* eslint-disable testing-library/no-node-access */
       expect(
         document.getElementById(defaultDSContext.portalsContainerId),
       ).toHaveTextContent(singleValue);
+      /* eslint-enable testing-library/no-node-access */
     });
     it('should call "tooltipComposer" with correct arguments for each visible value', () => {
       const tooltipComposerMock = jest.fn();

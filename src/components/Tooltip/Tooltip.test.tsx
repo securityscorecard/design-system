@@ -17,22 +17,22 @@ describe('Tooltip', () => {
       renderWithProviders(
         <Tooltip popup={<span>{popupText}</span>}>{childrenText}</Tooltip>,
       );
-      const tooltipParent = screen.queryByText(childrenText);
+      const tooltipParent = screen.getByText(childrenText);
       expect(tooltipParent).toBeInTheDocument();
       fireEvent.mouseEnter(tooltipParent);
-      expect(screen.queryByText(popupText)).toBeInTheDocument();
+      expect(screen.getByText(popupText)).toBeInTheDocument();
     });
 
     it('should dissappear on mouseLeave event', async () => {
       renderWithProviders(
         <Tooltip popup={<span>{popupText}</span>}>{childrenText}</Tooltip>,
       );
-      const tooltipParent = screen.queryByText(childrenText);
+      const tooltipParent = screen.getByText(childrenText);
 
       expect(tooltipParent).toBeInTheDocument();
 
       fireEvent.mouseEnter(tooltipParent);
-      expect(screen.queryByText(popupText)).toBeInTheDocument();
+      expect(screen.getByText(popupText)).toBeInTheDocument();
 
       fireEvent.mouseLeave(tooltipParent);
       await waitForElementToBeRemoved(() => screen.queryByText(popupText));
@@ -43,7 +43,7 @@ describe('Tooltip', () => {
     it('should display children', () => {
       renderWithProviders(<Tooltip>{childrenText}</Tooltip>);
 
-      expect(screen.queryByText(childrenText)).toBeInTheDocument();
+      expect(screen.getByText(childrenText)).toBeInTheDocument();
     });
   });
 });

@@ -8,6 +8,13 @@ import { useSelectProps } from './useSelectProps';
 import Select from './Select';
 import { CreatableSelectProps } from './Select.types';
 
+const renderCreateLabel = (createNewLabel: string) => (inputValue: string) =>
+  (
+    <>
+      <span>{createNewLabel}</span>
+      <Strong variant={TextVariants.inherit}>{inputValue}</Strong>
+    </>
+  );
 function CreatableSelect<IsMulti extends boolean = false>({
   createNewLabel = 'Create',
   ...props
@@ -16,12 +23,7 @@ function CreatableSelect<IsMulti extends boolean = false>({
 
   return (
     <CreatableReactSelect
-      formatCreateLabel={(inputValue) => (
-        <>
-          <span>{createNewLabel}</span>
-          <Strong variant={TextVariants.inherit}>{inputValue}</Strong>
-        </>
-      )}
+      formatCreateLabel={renderCreateLabel(createNewLabel)}
       {...selectProps}
     />
   );

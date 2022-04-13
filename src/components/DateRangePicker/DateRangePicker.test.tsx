@@ -36,11 +36,11 @@ describe('DateRangePicker', () => {
 
     userEvent.click(screen.getByPlaceholderText('Start date'));
 
-    expect(screen.queryAllByText(/March 2021/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/March 2021/i)[0]).toBeInTheDocument();
 
     userEvent.click(screen.getByPlaceholderText('End date'));
 
-    expect(screen.queryAllByText(/March 2021/i)[1]).toBeInTheDocument();
+    expect(screen.getAllByText(/March 2021/i)[1]).toBeInTheDocument();
   });
 
   it('should call onchange when a start date or end date is picked', () => {

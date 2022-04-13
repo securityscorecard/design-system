@@ -73,6 +73,10 @@ const collectSelectedIds = <D,>(
   });
 };
 
+const renderDefaultCell = <D extends Record<string, unknown>>(
+  props: CellProps<D>,
+): React.ReactElement => <CellRenderer<D> {...props} />;
+
 function Table<D extends Record<string, unknown>>({
   columns,
   data,
@@ -112,9 +116,8 @@ TableProps<D>): React.ReactElement {
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement => (
-        <CellRenderer<D> {...props} />
-      ),
+      Cell: (props: CellProps<D>): React.ReactElement =>
+        renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],
@@ -315,14 +318,10 @@ TableProps<D>): React.ReactElement {
         <NoDataContainer>
           {isDataLoading ? (
             <LoadingNoData />
+          ) : hasAppliedFilters ? (
+            <NoMatchingDataComponent />
           ) : (
-            <>
-              {hasAppliedFilters ? (
-                <NoMatchingDataComponent />
-              ) : (
-                <NoDataComponent />
-              )}
-            </>
+            <NoDataComponent />
           )}
         </NoDataContainer>
       ) : pageCount !== 1 ? (
