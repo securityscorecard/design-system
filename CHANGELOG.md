@@ -1,3 +1,10 @@
+# [1.0.0-alpha.169](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.168...v1.0.0-alpha.169) (2022-04-13)
+
+
+### Features
+
+* **Toast:** add border style ([f8c66bc](https://github.com/securityscorecard/design-system/commit/f8c66bc3c5d6f073fe67605af5b02a579ec79cc3))
+
 # [1.0.0-alpha.168](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.167...v1.0.0-alpha.168) (2022-04-12)
 
 
