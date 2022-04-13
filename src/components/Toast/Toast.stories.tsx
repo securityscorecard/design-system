@@ -1,24 +1,44 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { noop } from 'ramda-adjunct';
 
 import Button from '../Button/Button';
 import { Inline, Stack } from '../layout';
 import { SpaceSizes } from '../../theme';
 import Toast from './Toast';
 import { ToastVariants } from './Toast.enums';
+import { ToastProps } from './Toast.types';
+import { generateControl } from '../../utils/tests/storybook';
+
+const styles = {
+  transform: 'scale(1)',
+  height: '200px',
+};
 
 export default {
   title: 'components/Toast',
   component: Toast,
-  parameters: {
-    docs: { inlineStories: false, iframeHeight: 200, source: { type: 'code' } },
+  decorators: [(storyFn) => <div style={styles}>{storyFn()}</div>],
+  argTypes: {
+    variant: {
+      ...generateControl('select', ToastVariants),
+    },
   },
 } as Meta;
 
-export const DefaultToast: Story = () => (
-  <Toast onClose={action('close-toast')}>This is a notification.</Toast>
+export const Playground: Story<ToastProps> = (args) => (
+  <Toast {...args}>
+    <Stack gap={SpaceSizes.sm} justify="flex-start">
+      <p>This is a notification.</p>
+      <Button variant="text">Action</Button>
+    </Stack>
+  </Toast>
 );
+
+Playground.args = {
+  onClose: noop,
+};
 
 export const LongToast: Story = () => (
   <Toast onClose={action('close-toast')}>

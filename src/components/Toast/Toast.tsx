@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
-import { getColor, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { Paragraph } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { ToastProps } from './Toast.types';
 import { SpaceSizes } from '../../theme/space.enums';
+import { Inline } from '../layout';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { Padbox } from '../layout/Padbox';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
@@ -38,6 +39,9 @@ const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   text-align: left;
   box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
   animation: ${ToastFromTop} 0.5s;
+  border: 1px solid ${getColor('neutral.500')};
+  border-radius: ${getRadii('default')};
+  overflow: hidden;
 `;
 
 const ToastContent = styled(Paragraph)`
@@ -70,19 +74,21 @@ const Toast: React.FC<ToastProps> = ({
       iconSize={16}
       paddingSize={SpaceSizes.sm}
       paddingType={PaddingTypes.squish}
-      stretch={StretchEnum.start}
+      stretch={StretchEnum.end}
       variant={variant}
     >
-      <Padbox paddingSize={SpaceSizes.md}>
-        <ToastContent as="div" margin="none" size={TextSizes.md}>
-          {children}
-        </ToastContent>
-      </Padbox>
-      <CloseButton
-        aria-label="Close"
-        marginCompensation={SpaceSizes.none}
-        onClose={onClose}
-      />
+      <Inline justify="space-between">
+        <Padbox paddingSize={SpaceSizes.md}>
+          <ToastContent as="div" margin="none" size={TextSizes.md}>
+            {children}
+          </ToastContent>
+        </Padbox>
+        <CloseButton
+          aria-label="Close"
+          marginCompensation={SpaceSizes.none}
+          onClose={onClose}
+        />
+      </Inline>
     </BaseToastBanner>
   </ToastContainer>
 );
