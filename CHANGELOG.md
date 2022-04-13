@@ -1,3 +1,10 @@
+# [1.0.0-alpha.170](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.169...v1.0.0-alpha.170) (2022-04-13)
+
+
+### Features
+
+* **theme:** update neutral colors ([1aea8e8](https://github.com/securityscorecard/design-system/commit/1aea8e8eca6f6a5820a56760ec66cf8b0eccfd55))
+
 # [1.0.0-alpha.169](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.168...v1.0.0-alpha.169) (2022-04-13)
 
 
