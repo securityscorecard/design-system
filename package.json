@@ -75,8 +75,8 @@
   "devDependencies": {
     "@betterer/cli": "^5.1.7",
     "@betterer/eslint": "^5.1.7",
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@geometricpanda/storybook-addon-badges": "^0.0.3",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
