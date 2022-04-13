@@ -9,16 +9,20 @@ import { Paragraph } from '../typography';
 import { Inline, Stack } from '../layout';
 import { pxToRem } from '../../utils/helpers';
 
-const Footer = () => (
-  <Inline>
-    <Button>Submit</Button>
-  </Inline>
-);
-const Adornment = () => (
-  <div data-testid="adornment">
-    <Icon name="cog" color="info.500" />
-  </div>
-);
+function Footer() {
+  return (
+    <Inline>
+      <Button>Submit</Button>
+    </Inline>
+  );
+}
+function Adornment() {
+  return (
+    <div data-testid="adornment">
+      <Icon name="cog" color="info.500" />
+    </div>
+  );
+}
 
 describe('Drawer', () => {
   it('should show footer if footer is defined', () => {

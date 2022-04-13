@@ -30,42 +30,48 @@ export default {
 } as Meta;
 
 const header = 'Invite vendor to SecurityScorecard';
-const Content = () => (
-  <Paragraph>
-    <Tooltip popup="testing content">Lorem ipsum dolor sit amet</Tooltip>,
-    consectetur adipiscing elit. Nam volutpat velit vel urna molestie, vitae
-    sodales sem hendrerit. Nunc risus nibh, rhoncus ut massa id, eleifend
-    lacinia orci. Morbi porta, urna ut tincidunt efficitur, lorem nulla
-    facilisis orci, sit amet rutrum augue elit ut elit. Interdum et malesuada
-    fames ac ante ipsum primis in faucibus. Suspendisse consectetur lectus
-    finibus diam posuere, elementum vehicula sapien placerat. In sed ornare ex,
-    quis lacinia lorem. Nunc rhoncus lorem a laoreet posuere. Nam cursus lorem
-    vestibulum semper pulvinar. Nunc tempus ornare urna, sit amet varius nisl
-    fringilla et. Fusce volutpat urna et aliquet dictum. In nec cursus elit.
-    Vivamus congue ac elit placerat suscipit. Nulla facilisi. Praesent
-    fringilla, quam sit amet blandit tempor, risus leo bibendum leo, ut aliquet
-    metus leo non neque. Etiam in ante arcu.
-  </Paragraph>
-);
-const LongContent = () => (
-  <>
-    <Content />
-    <Content />
-    <Content />
-    <Content />
-    <Content />
-    <Content />
-  </>
-);
-const Footer = () => (
-  <Inline justify="space-between">
-    <Button variant={ButtonVariants.outline}>Email me preview</Button>
-    <Inline gap={SpaceSizes.md}>
-      <Button variant={ButtonVariants.outline}>Cancel</Button>
-      <Button variant={ButtonVariants.solid}>Submit</Button>
+function Content() {
+  return (
+    <Paragraph>
+      <Tooltip popup="testing content">Lorem ipsum dolor sit amet</Tooltip>,
+      consectetur adipiscing elit. Nam volutpat velit vel urna molestie, vitae
+      sodales sem hendrerit. Nunc risus nibh, rhoncus ut massa id, eleifend
+      lacinia orci. Morbi porta, urna ut tincidunt efficitur, lorem nulla
+      facilisis orci, sit amet rutrum augue elit ut elit. Interdum et malesuada
+      fames ac ante ipsum primis in faucibus. Suspendisse consectetur lectus
+      finibus diam posuere, elementum vehicula sapien placerat. In sed ornare
+      ex, quis lacinia lorem. Nunc rhoncus lorem a laoreet posuere. Nam cursus
+      lorem vestibulum semper pulvinar. Nunc tempus ornare urna, sit amet varius
+      nisl fringilla et. Fusce volutpat urna et aliquet dictum. In nec cursus
+      elit. Vivamus congue ac elit placerat suscipit. Nulla facilisi. Praesent
+      fringilla, quam sit amet blandit tempor, risus leo bibendum leo, ut
+      aliquet metus leo non neque. Etiam in ante arcu.
+    </Paragraph>
+  );
+}
+function LongContent() {
+  return (
+    <>
+      <Content />
+      <Content />
+      <Content />
+      <Content />
+      <Content />
+      <Content />
+    </>
+  );
+}
+function Footer() {
+  return (
+    <Inline justify="space-between">
+      <Button variant={ButtonVariants.outline}>Email me preview</Button>
+      <Inline gap={SpaceSizes.md}>
+        <Button variant={ButtonVariants.outline}>Cancel</Button>
+        <Button variant={ButtonVariants.solid}>Submit</Button>
+      </Inline>
     </Inline>
-  </Inline>
-);
+  );
+}
 const Sidebar: React.FC<{
   modalRef?: HTMLElement;
 }> = ({ modalRef }) => {

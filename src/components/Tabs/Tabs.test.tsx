@@ -16,10 +16,10 @@ describe('Tabs', () => {
     );
 
     expect(
-      screen.queryByRole('tab', { name: /Overview/, selected: true }),
+      screen.getByRole('tab', { name: /Overview/, selected: true }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole('tab', {
+      screen.getByRole('tab', {
         name: /Overview section/,
         selected: false,
       }),
@@ -38,10 +38,10 @@ describe('Tabs', () => {
     );
 
     expect(
-      screen.queryByRole('tab', { name: /Overview/, selected: true }),
+      screen.getByRole('tab', { name: /Overview/, selected: true }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole('tab', {
+      screen.getByRole('tab', {
         name: /Section/,
         selected: false,
       }),

@@ -16,11 +16,13 @@ export default {
 
 // Link mock from 'react-router-dom'
 // eslint-disable-next-line react/prop-types
-const RouterLink = ({ children, to, ...props }) => (
-  <button type="button" onClick={action(`navigating-to-${to}`)} {...props}>
-    {children}
-  </button>
-);
+function RouterLink({ children, to, ...props }) {
+  return (
+    <button type="button" onClick={action(`navigating-to-${to}`)} {...props}>
+      {children}
+    </button>
+  );
+}
 
 export const Playground: Story<LinkProps> = (args) => (
   <Link {...args}>Link</Link>

@@ -488,16 +488,14 @@ export const IndicatorsContainer: ComponentType<
   return (
     <components.IndicatorsContainer {...props}>
       {isProcessing && (
-        <>
-          <Spinner
-            borderWidth={2}
-            height={16}
-            horizontalMargin={16}
-            verticalMargin={0}
-            width={16}
-            dark
-          />
-        </>
+        <Spinner
+          borderWidth={2}
+          height={16}
+          horizontalMargin={16}
+          verticalMargin={0}
+          width={16}
+          dark
+        />
       )}
       {children}
     </components.IndicatorsContainer>

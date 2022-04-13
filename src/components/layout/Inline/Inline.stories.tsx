@@ -28,9 +28,9 @@ export default {
   },
 } as Meta;
 
-const Box = ({ style = {} }: { style?: React.CSSProperties }) => (
-  <MockBox style={{ width: '150px', minHeight: '150px', ...style }} />
-);
+function Box({ style = {} }: { style?: React.CSSProperties }) {
+  return <MockBox style={{ width: '150px', minHeight: '150px', ...style }} />;
+}
 
 const InlineTemplate: Story<InlineProps> = (args) => (
   <Inline style={{ backgroundColor: '#0275d8' }} {...args}>

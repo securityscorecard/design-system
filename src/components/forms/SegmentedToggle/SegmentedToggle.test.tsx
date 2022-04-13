@@ -35,16 +35,18 @@ describe('SegmentedToggle', () => {
       });
 
     // eslint-disable-next-line react/prop-types
-    const Item = ({ itemId, label, value, ref }) => (
-      <SegmentedToggleItem
-        key={itemId}
-        itemId={itemId.toString()}
-        label={label}
-        value={value}
-        ref={ref}
-        defaultChecked={itemId === 2}
-      />
-    );
+    function Item({ itemId, label, value, ref }) {
+      return (
+        <SegmentedToggleItem
+          key={itemId}
+          itemId={itemId.toString()}
+          label={label}
+          value={value}
+          ref={ref}
+          defaultChecked={itemId === 2}
+        />
+      );
+    }
 
     const Items = map(Item);
 

@@ -20,7 +20,7 @@ describe('SingleDatePicker', () => {
 
     userEvent.click(screen.getByPlaceholderText('Enter date…'));
 
-    expect(screen.queryByText(/March 2021/i)).toBeInTheDocument();
+    expect(screen.getByText(/March 2021/i)).toBeInTheDocument();
   });
 
   it('should call onchange when a date is picked', () => {

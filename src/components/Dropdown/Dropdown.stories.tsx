@@ -34,24 +34,28 @@ import { Dropdown } from '@securityscorecard/design-system';
   },
 } as Meta;
 
-const Content = () => (
-  <Stack gap="md">
-    <Paragraph size="md">
-      Fusce elementum justo ac augue faucibus mattis. Aenean non feugiat metus,
-      in pretium dui.
-    </Paragraph>
-    <Inline gap="sm">
-      <Link>Action</Link>
-      <Link>Action</Link>
-    </Inline>
-  </Stack>
-);
+function Content() {
+  return (
+    <Stack gap="md">
+      <Paragraph size="md">
+        Fusce elementum justo ac augue faucibus mattis. Aenean non feugiat
+        metus, in pretium dui.
+      </Paragraph>
+      <Inline gap="sm">
+        <Link>Action</Link>
+        <Link>Action</Link>
+      </Inline>
+    </Stack>
+  );
+}
 
-const ShortContent = () => (
-  <Stack gap="md">
-    <Paragraph size="md">Short dropdown content</Paragraph>
-  </Stack>
-);
+function ShortContent() {
+  return (
+    <Stack gap="md">
+      <Paragraph size="md">Short dropdown content</Paragraph>
+    </Stack>
+  );
+}
 
 const DropdownTemplate: Story<DropdownProps> = (args) => (
   <div style={{ height: 140 }}>

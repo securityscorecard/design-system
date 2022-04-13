@@ -50,7 +50,11 @@ const TableWrapper = styled.div`
   overflow: hidden;
 `;
 
-const Table = <D extends Record<string, unknown>>({
+const renderDefaultCell = <D extends Record<string, unknown>>(
+  props: CellProps<D>,
+): React.ReactElement => <CellRenderer<D> {...props} />;
+
+function Table<D extends Record<string, unknown>>({
   columns,
   data,
   dataSize,
@@ -65,16 +69,15 @@ const Table = <D extends Record<string, unknown>>({
   onSortChange = noop,
   rowActions = [],
   dataPrimaryKey,
-}: TableProps<D>): React.ReactElement => {
+}: TableProps<D>): React.ReactElement {
   const defaultColumn = useMemo<Partial<Column<D>>>(
     () => ({
       minWidth: 40,
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement => (
-        <CellRenderer<D> {...props} />
-      ),
+      Cell: (props: CellProps<D>): React.ReactElement =>
+        renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],
@@ -172,7 +175,7 @@ const Table = <D extends Record<string, unknown>>({
       ) : null}
     </TableWrapper>
   );
-};
+}
 
 Table.propTypes = {
   NoDataComponent: PropTypes.elementType,

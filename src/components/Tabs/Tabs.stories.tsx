@@ -26,28 +26,32 @@ export default {
   },
 } as Meta;
 
-const ContentA = () => (
-  <section>
-    <h1>Invent</h1>
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
-      nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
-      perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
-      numquam? Unde, facilis facere.
-    </p>
-  </section>
-);
-const ContentB = () => (
-  <section>
-    <h1>Overview</h1>
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
-      nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
-      perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
-      numquam? Unde, facilis facere.
-    </p>
-  </section>
-);
+function ContentA() {
+  return (
+    <section>
+      <h1>Invent</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
+        nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
+        perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
+        numquam? Unde, facilis facere.
+      </p>
+    </section>
+  );
+}
+function ContentB() {
+  return (
+    <section>
+      <h1>Overview</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
+        nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
+        perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
+        numquam? Unde, facilis facere.
+      </p>
+    </section>
+  );
+}
 
 export const Playground: Story<TabsProps> = (args) => {
   const { selectedValue } = args;
@@ -104,12 +108,10 @@ export const RoutableTabs: Story = () => {
     <MemoryRouter>
       <Route
         component={({ match }) => (
-          <>
-            <Tabs selectedValue={match.url}>
-              <Tab value="/inventory">Inventory</Tab>
-              <Tab value="/overview">Overview</Tab>
-            </Tabs>
-          </>
+          <Tabs selectedValue={match.url}>
+            <Tab value="/inventory">Inventory</Tab>
+            <Tab value="/overview">Overview</Tab>
+          </Tabs>
         )}
         path="*"
       />

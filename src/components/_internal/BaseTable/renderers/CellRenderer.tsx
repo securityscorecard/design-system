@@ -8,7 +8,7 @@ import TooltipWrapper from '../components/TooltipWrapper';
 import { CellRendererProps } from './renderers.types';
 import { CellTypes } from './renderers.enums';
 
-const CellRenderer = <D extends Record<string, unknown>>({
+function CellRenderer<D extends Record<string, unknown>>({
   value,
   column: {
     cellType,
@@ -23,7 +23,7 @@ const CellRenderer = <D extends Record<string, unknown>>({
     multiValueDisplayLimit,
   },
   row: { original: rowData },
-}: CellRendererProps<D>): React.ReactElement => {
+}: CellRendererProps<D>): React.ReactElement {
   const cellValue = isNotUndefined(cellFormatter)
     ? cellFormatter(value, rowData)
     : value;
@@ -86,7 +86,7 @@ const CellRenderer = <D extends Record<string, unknown>>({
       {cellValue}
     </TooltipWrapper>
   );
-};
+}
 
 CellRenderer.propTypes = {
   value: PropTypes.oneOfType([

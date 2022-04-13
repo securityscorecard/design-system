@@ -12,6 +12,7 @@ const TooltipWrapper: React.FC<TooltipWrapperProps> = ({
   shouldRender ? (
     <Tooltip popup={popupRenderer()}>{children}</Tooltip>
   ) : (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>{children}</>
   );
 

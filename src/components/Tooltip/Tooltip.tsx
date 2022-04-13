@@ -16,6 +16,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 }) => {
   const parentRef = useRef(null);
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   if (isFalsy(popup)) return <>{children}</>;
 
   return (

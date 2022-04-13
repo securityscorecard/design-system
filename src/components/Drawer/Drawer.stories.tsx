@@ -36,32 +36,36 @@ export default {
   },
 } as Meta;
 
-const Footer = () => (
-  <Inline gap={SpaceSizes.md} justify="flex-end">
-    <Button size={SpaceSizes.lg} variant="outline">
-      Cancel
-    </Button>
-    <Button size={SpaceSizes.lg}>Confirm</Button>
-  </Inline>
-);
+function Footer() {
+  return (
+    <Inline gap={SpaceSizes.md} justify="flex-end">
+      <Button size={SpaceSizes.lg} variant="outline">
+        Cancel
+      </Button>
+      <Button size={SpaceSizes.lg}>Confirm</Button>
+    </Inline>
+  );
+}
 
-const Adornment = () => (
-  <Icon color="neutral.900" name="long-arrow-left" type="ssc" />
-);
+function Adornment() {
+  return <Icon color="neutral.900" name="long-arrow-left" type="ssc" />;
+}
 
-const Content = () => (
-  <Stack>
-    <H2>This is a placeholder</H2>
-    <Paragraph style={{ marginBottom: 0 }}>
-      You can replace this with a local component. You can also just override
-      the text, but keep in mind that you might lose content that way in case we
-      happend to change the underlying component. Lorem ipsum dolor sit amet,
-      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </Paragraph>
-  </Stack>
-);
+function Content() {
+  return (
+    <Stack>
+      <H2>This is a placeholder</H2>
+      <Paragraph style={{ marginBottom: 0 }}>
+        You can replace this with a local component. You can also just override
+        the text, but keep in mind that you might lose content that way in case
+        we happend to change the underlying component. Lorem ipsum dolor sit
+        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </Paragraph>
+    </Stack>
+  );
+}
 export const Playground: Story<DrawerProps> = (args) => {
   const [isShown, setIsShown] = useState(false);
 

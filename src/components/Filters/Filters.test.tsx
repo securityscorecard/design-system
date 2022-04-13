@@ -59,8 +59,8 @@ describe('Filters', () => {
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Clear all/i }));
 
-    expect(screen.queryByText('Option A')).toBeInTheDocument();
-    expect(screen.queryByText('is')).toBeInTheDocument();
+    expect(screen.getByText('Option A')).toBeInTheDocument();
+    expect(screen.getByText('is')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
   });
 
@@ -90,8 +90,8 @@ describe('Filters', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
 
-    expect(screen.queryByText('Option A')).toBeInTheDocument();
-    expect(screen.queryByText('is')).toBeInTheDocument();
+    expect(screen.getByText('Option A')).toBeInTheDocument();
+    expect(screen.getByText('is')).toBeInTheDocument();
     expect(screen.getByDisplayValue('a')).toBeInTheDocument();
   });
 
@@ -106,9 +106,7 @@ describe('Filters', () => {
     fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
 
-    expect(
-      screen.queryByText('You have unapplied filters'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('You have unapplied filters')).toBeInTheDocument();
   });
 
   it('should display message when applied filter is changed', () => {
@@ -128,9 +126,7 @@ describe('Filters', () => {
       target: { value: 'c' },
     });
 
-    expect(
-      screen.queryByText('You have unapplied filters'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('You have unapplied filters')).toBeInTheDocument();
   });
 
   it('should remove filter when clicked on Remove button', () => {
@@ -141,8 +137,8 @@ describe('Filters', () => {
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getAllByRole('button', { name: /remove/i })[0]);
 
-    expect(screen.queryByText('Option A')).toBeInTheDocument();
-    expect(screen.queryByText('is')).toBeInTheDocument();
+    expect(screen.getByText('Option A')).toBeInTheDocument();
+    expect(screen.getByText('is')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
   });
 
@@ -153,8 +149,8 @@ describe('Filters', () => {
 
     await selectEvent.select(screen.getByText('Option A'), 'Option B');
 
-    expect(screen.queryByText('is not')).toBeInTheDocument();
-    expect(screen.queryByPlaceholderText('Number')).toBeInTheDocument();
+    expect(screen.getByText('is not')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Number')).toBeInTheDocument();
   });
 
   it("should select first condition and component when field changed and hasn't set default", async () => {
@@ -164,8 +160,8 @@ describe('Filters', () => {
 
     await selectEvent.select(screen.getByText('Option A'), 'Option C');
 
-    expect(screen.queryByText('contains')).toBeInTheDocument();
-    expect(screen.queryByPlaceholderText('String')).toBeInTheDocument();
+    expect(screen.getByText('contains')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
   });
 
   it('should persist value when condition changed and components are the same', async () => {
@@ -204,12 +200,12 @@ describe('Filters', () => {
       />,
     );
 
-    expect(screen.queryByText('Option B')).toBeInTheDocument();
-    expect(screen.queryByText('is')).toBeInTheDocument();
+    expect(screen.getByText('Option B')).toBeInTheDocument();
+    expect(screen.getByText('is')).toBeInTheDocument();
     expect(screen.getByDisplayValue('2')).toBeInTheDocument();
 
-    expect(screen.queryByText('Option C')).toBeInTheDocument();
-    expect(screen.queryByText('contains')).toBeInTheDocument();
+    expect(screen.getByText('Option C')).toBeInTheDocument();
+    expect(screen.getByText('contains')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Value Option C')).toBeInTheDocument();
   });
 

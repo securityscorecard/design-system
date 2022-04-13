@@ -3,7 +3,9 @@ import { action } from '@storybook/addon-actions';
 import { FilterSuggestion } from './SearchBar.types';
 
 export const delay = (ms: number): Promise<ReturnType<typeof setTimeout>> =>
-  new Promise((res) => setTimeout(res, ms));
+  new Promise((res) => {
+    setTimeout(res, ms);
+  });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const mockOnSearch = async (query: string): Promise<void> => {
