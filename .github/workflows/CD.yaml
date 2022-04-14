@@ -249,7 +249,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: build
-          key: node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**') }}
+          key: node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         run: yarn build
@@ -290,7 +290,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: build
-          key: node-16-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**') }}
+          key: node-16-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         if: steps.library-build-cache.outputs.cache-hit != 'true'
