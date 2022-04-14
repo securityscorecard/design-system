@@ -1,3 +1,15 @@
+# [1.0.0-alpha.172](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.171...v1.0.0-alpha.172) (2022-04-14)
+
+
+### Build System
+
+* **ci:** fix the cache hash ([94a283b](https://github.com/securityscorecard/design-system/commit/94a283b1b2b2a6a1b6c29bf30d2d92f5198e82ac))
+
+
+### BREAKING CHANGES
+
+* **ci:** fixes the build as previous versions weren't working
+
 # [1.0.0-alpha.171](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.170...v1.0.0-alpha.171) (2022-04-14)
 
 
