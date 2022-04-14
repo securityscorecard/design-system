@@ -7,23 +7,19 @@ import visualizer from 'rollup-plugin-visualizer';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-  input: {
-    index: 'src/index.ts',
-    theme: 'src/theme/index.ts',
-    helpers: 'src/utils/index.ts',
-  },
+  input: 'src/index.ts',
   output: [
     {
       dir: 'build',
       entryFileNames: '[name].js',
       format: 'cjs',
-      plugins: [terser()],
+      sourcemap: true,
     },
     {
       dir: 'build',
       entryFileNames: '[name].es.js',
       format: 'esm',
-      plugins: [terser()],
+      sourcemap: true,
     },
   ],
   plugins: [
@@ -35,6 +31,7 @@ export default {
     }),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
+    terser(),
     visualizer({
       filename: `stats/stat.html`,
     }),
