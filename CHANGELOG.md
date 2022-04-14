@@ -1,3 +1,15 @@
+# [1.0.0-alpha.171](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.170...v1.0.0-alpha.171) (2022-04-14)
+
+
+### Build System
+
+* **terser:** fix the terser build ([005c59e](https://github.com/securityscorecard/design-system/commit/005c59eb5bb12a579778b539966a7637865f6f64))
+
+
+### BREAKING CHANGES
+
+* **terser:** fixes the build as previous versions weren't working
+
 # [1.0.0-alpha.170](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.169...v1.0.0-alpha.170) (2022-04-13)
 
 
