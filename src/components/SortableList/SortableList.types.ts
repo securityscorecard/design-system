@@ -1,5 +1,9 @@
-import { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core';
-import { DragCancelEvent } from '@dnd-kit/core/dist/components/DndContext/DndContext';
+import {
+  DragCancelEvent,
+  DragEndEvent,
+  DragOverEvent,
+  DragStartEvent,
+} from '@dnd-kit/core';
 
 export interface SortableItemProps {
   id: string;
