@@ -161,6 +161,7 @@ export const datePickerStyles = css`
     border: 8px solid transparent;
     height: 0;
     width: ${pxToRem(1)};
+    transform: none !important;
   }
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before,

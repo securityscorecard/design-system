@@ -40,11 +40,7 @@ describe('SingleDatePicker', () => {
     userEvent.click(input);
 
     // Click on a date
-    fireEvent.click(
-      screen.getByRole('button', {
-        name: /Choose Friday, March 12th, 2021/i,
-      }),
-    );
+    fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
 
     expect(handleChangeDate).toHaveBeenCalled();
   });
