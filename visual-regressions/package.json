@@ -14,7 +14,6 @@
     "storycap": "3.0.1"
   },
   "resolutions": {
-    "lodash": "4.17.20",
     "trim-newlines": "1.0.0",
     "string-width": "4.1.0"
   }
