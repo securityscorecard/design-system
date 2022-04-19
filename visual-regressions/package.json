@@ -14,7 +14,7 @@
     "storycap": "3.0.1"
   },
   "resolutions": {
-    "trim-newlines": "1.0.0",
+    "trim-newlines": "3.0.1",
     "string-width": "4.1.0"
   }
 }
