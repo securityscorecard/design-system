@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
+import styled from 'styled-components';
 
 import Drawer from './Drawer';
 import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
 import { SemanticModal } from '../SemanticModal';
-import { H2, Paragraph } from '../typography';
+import { H2, Link, Paragraph, Text } from '../typography';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button, ButtonEnums } from '../Button';
 import { Icon } from '../Icon';
 import { generateControl } from '../../utils/tests/storybook';
 import { SpaceSizes } from '../../index';
+import { getSpace } from '../../utils';
 
 export default {
   title: 'components/Drawer',
@@ -203,4 +205,95 @@ export const WithSemanticModal: Story = () => {
       </>
     </Drawer>
   );
+};
+
+const alphabet = Array.from(Array(26))
+  .map((_, i) => i + 65)
+  .map((x) => String.fromCharCode(x));
+
+const Subheader = styled(Padbox)`
+  position: sticky;
+  top: calc(${getSpace(SpaceSizes.lg)} / -2);
+  margin-top: calc(${getSpace(SpaceSizes.lg)} / -2) !important;
+  margin-left: calc(${getSpace(SpaceSizes.lg)} * -1);
+  margin-right: calc(${getSpace(SpaceSizes.lg)} * -1);
+
+  background: white;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
+`;
+
+export const WithSubheader: Story = () => (
+  <Drawer
+    footer={<Footer />}
+    size="lg"
+    title="Product categories"
+    onClose={action('close-modal')}
+  >
+    <Stack gap="lg">
+      <Subheader paddingSize={SpaceSizes.lg} paddingType="squish">
+        <Stack gap="lg">
+          <Inline gap="lg" justify="space-between">
+            <Text isBold>Company name</Text>
+            <Text>1821 entries</Text>
+          </Inline>
+          <Inline gap="sm">
+            {alphabet.map((char) => (
+              <Link href="#">{char}</Link>
+            ))}
+          </Inline>
+        </Stack>
+      </Subheader>
+      <Stack gap="md">
+        {Array.from(Array(10)).map(() => (
+          <Paragraph>
+            Talent she for lively eat led sister. Entrance strongly packages she
+            out rendered get quitting denoting led. Dwelling confined improved
+            it he no doubtful raptures. Several carried through an of up attempt
+            gravity. Situation to be at offending elsewhere distrusts if.
+            Particular use for considered projection cultivated. Worth of do
+            doubt shall it their. Extensive existence up me contained he
+            pronounce do. Excellence inquietude assistance precaution any
+            impression man sufficient.
+          </Paragraph>
+        ))}
+      </Stack>
+    </Stack>
+  </Drawer>
+);
+
+const codeExample = `
+const Subheader = styled(Padbox)\`
+  /* make subheader stick bellow the header */
+  position: sticky;
+  top: calc($\{getSpace(SpaceSizes.lg)} / -2);
+
+  /* compensate drawer content padding */
+  margin-top: calc(\${getSpace(SpaceSizes.lg)} / -2) !important;
+  margin-left: calc($\{getSpace(SpaceSizes.lg)} * -1);
+  margin-right: calc($\{getSpace(SpaceSizes.lg)} * -1);
+
+  /* visual styles */
+  background: white;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
+\`;
+
+export const WithSubheader: Story = () => (
+  <Drawer>
+    <Stack gap={SpaceSizes.lg}>
+      <Subheader paddingSize={SpaceSizes.lg} paddingType="squish">
+        /* content of Subheader */
+      </Subheader>
+      /* Drawer content */
+    </Stack>
+  </Drawer>
+);
+`;
+
+WithSubheader.parameters = {
+  screenshot: { skip: true },
+  docs: {
+    source: {
+      code: codeExample,
+    },
+  },
 };
