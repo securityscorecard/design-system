@@ -1881,10 +1881,10 @@
   dependencies:
     "@figspec/components" "^1.0.0"
 
-"@fluentui/react-component-ref@^0.59.0":
-  version "0.59.0"
-  resolved "https://registry.yarnpkg.com/@fluentui/react-component-ref/-/react-component-ref-0.59.0.tgz#d4dba85b45cf57df957f9d68168afc25f15b12e0"
-  integrity sha512-MojL/qgxMSMFYreI/TnLbFbFM+c5t78rxPcud7MqjI067dinGaLaj7zqO0lK3fpeLBJ69FJUW7C88xIdghk/tA==
+"@fluentui/react-component-ref@^0.62.0":
+  version "0.62.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-component-ref/-/react-component-ref-0.62.0.tgz#7c3db1fbe8ba208b7eed2e500822d9c75c7b70ea"
+  integrity sha512-ATrSWXoNftMowkMnykJHTVVHuI7oDnwH6nCDrg5Z9F4QnNozK9QYdhMxBfdvz5F283FRVpRz52kp9Z7kQwsLUw==
   dependencies:
     "@babel/runtime" "^7.10.4"
     react-is "^16.6.3"
