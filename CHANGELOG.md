@@ -1,3 +1,10 @@
+# [1.0.0-alpha.173](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.172...v1.0.0-alpha.173) (2022-04-20)
+
+
+### Features
+
+* export usePortal hook ([05c3a11](https://github.com/securityscorecard/design-system/commit/05c3a11f98e3e9c856e043084e49362ef39d4570))
+
 # [1.0.0-alpha.172](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.171...v1.0.0-alpha.172) (2022-04-14)
 
 
