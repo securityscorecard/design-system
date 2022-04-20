@@ -44,7 +44,7 @@
     "@dnd-kit/modifiers": "^1.0.5",
     "@dnd-kit/sortable": "^2.0.1",
     "@dnd-kit/utilities": "^1.0.3",
-    "@fluentui/react-component-ref": "^0.59.0",
+    "@fluentui/react-component-ref": "^0.62.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@popperjs/core": "^2.11.4",
