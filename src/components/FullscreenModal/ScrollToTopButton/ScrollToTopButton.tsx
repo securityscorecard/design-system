@@ -37,7 +37,7 @@ const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
 
   return (
     <StyledButton
-      color={ButtonColors.secondary}
+      color={ButtonColors.primary}
       variant={ButtonVariants.text}
       onClick={handleClick}
     >
