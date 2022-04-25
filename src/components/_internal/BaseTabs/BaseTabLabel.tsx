@@ -38,7 +38,7 @@ const mediumUnderlineSize = css`
 `;
 
 const smallUnderlineSize = css`
-  font-size: ${getFontSize('h4')};
+  font-size: ${getFontSize('h5')};
   line-height: ${getLineHeight('lg')};
 `;
 
