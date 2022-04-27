@@ -6,6 +6,7 @@ export const ButtonVariants = {
 
 export const ButtonColors = {
   primary: 'primary',
+  secondary: 'secondary',
   danger: 'danger',
 } as const;
 

@@ -46,6 +46,15 @@ export const createButtons = (themeColors: typeof colors): Buttons => ({
         disabledColor: themeColors.neutral[600],
         borderColor: themeColors.primary[200],
       },
+      secondary: {
+        color: themeColors.neutral[700],
+        hoverColor: themeColors.neutral[900],
+        activeColor: themeColors.neutral[1000],
+        focusBgColor: themeColors.neutral[50],
+        focusOutlineColor: themeColors.neutral[500],
+        disabledColor: themeColors.neutral[600],
+        borderColor: themeColors.neutral[500],
+      },
       danger: {
         color: themeColors.error[500],
         hoverColor: themeColors.error[600],
