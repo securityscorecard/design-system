@@ -19,7 +19,7 @@ import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { Text as BaseText } from '../typography';
 import { TextSizes } from '../typography/Text/Text.enums';
 import { SpaceSizes } from '../../theme';
-import { getColor } from '../../utils';
+import { getColor, getLineHeight } from '../../utils';
 import { ColorTypes } from '../../theme/colors.enums';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
@@ -50,6 +50,7 @@ const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
 const StyledButton = styled(Button)`
   height: inherit;
   padding: 0;
+  line-height: ${getLineHeight('md')};
 `;
 
 const Text = styled(BaseText)`
