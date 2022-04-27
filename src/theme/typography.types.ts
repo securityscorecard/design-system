@@ -11,6 +11,7 @@ export interface Size {
   h2: string;
   h3: string;
   h4: string;
+  h5: string;
   lg: string;
   md: string;
   sm: string;
