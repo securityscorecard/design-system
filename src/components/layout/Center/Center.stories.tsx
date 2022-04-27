@@ -22,9 +22,9 @@ export default {
 
 const CenterTemplate: Story<CenterProps> = (args) => (
   <div style={{ backgroundColor: '#dadada' }}>
-    <Center style={{ backgroundColor: '#0275d8' }} {...args}>
+    <Center style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
-      <Button color="secondary" variant="outline">
+      <Button color="primary" variant="solid">
         Click me
       </Button>
       <Box />

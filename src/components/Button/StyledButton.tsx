@@ -56,6 +56,12 @@ const buttonSizes = {
 /*
  * BUTTON VARIANTS
  */
+
+const focusState = css`
+  outline: 2px solid ${getButtonColor('focusOutlineColor')};
+  outline-offset: 2px;
+`;
+
 const ButtonSolid = css<BaseStyledButtonProps>`
   background-color: ${getButtonColor('bgColor')};
   border: 1px solid ${getButtonColor('bgColor')};
@@ -75,15 +81,22 @@ const ButtonSolid = css<BaseStyledButtonProps>`
           }
         `
       : css`
-          &:focus:not(:disabled),
           &:hover:not(:disabled),
           &:not([href]):not([tabindex]):not(:disabled):hover,
           &.hover,
+          &.hover {
+            background-color: ${getButtonColor('hoverBgColor')};
+            border-color: ${getButtonColor('hoverBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+          }
+          &:focus:not(:disabled),
           &.focus {
             background-color: ${getButtonColor('hoverBgColor')};
             border-color: ${getButtonColor('hoverBgColor')};
             color: ${getButtonColor('color')};
             text-decoration: none;
+            ${focusState};
           }
 
           &:not(:disabled):active,
@@ -117,21 +130,26 @@ const ButtonOutline = css<BaseStyledButtonProps>`
           }
         `
       : css`
-          &:focus:not(:disabled),
           &:hover:not(:disabled),
           &:not([href]):not([tabindex]):not(:disabled):hover,
-          &.hover,
-          &.focus {
+          &.hover {
             background-color: ${getButtonColor('hoverBgColor')};
             color: ${getButtonColor('color')};
             text-decoration: none;
           }
-
+          &:focus:not(:disabled),
+          &.focus {
+            background-color: ${getButtonColor('hoverBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+            ${focusState};
+          }
           &:not(:disabled):active,
           &:not([href]):not([tabindex]):not(:disabled):active,
           &.active {
             background-color: ${getButtonColor('activeBgColor')};
-            color: ${getButtonColor('color')};
+            border-color: ${getButtonColor('activeBorderColor')};
+            color: ${getButtonColor('activeColor')};
             text-decoration: none;
           }
         `}
@@ -156,13 +174,20 @@ const ButtonText = css<BaseStyledButtonProps>`
           }
         `
       : css`
-          &:focus:not(:disabled),
           &:hover:not(:disabled),
           &:not([href]):not([tabindex]):not(:disabled):hover,
-          &&&.hover,
-          &&&.focus {
+          &.hover,
+          &.hover {
             color: ${getButtonColor('hoverColor')};
             text-decoration: none;
+          }
+          &:focus:not(:disabled),
+          &.focus {
+            background-color: ${getButtonColor('focusBgColor')};
+            border-color: ${getButtonColor('focusBgColor')};
+            color: ${getButtonColor('color')};
+            text-decoration: none;
+            ${focusState};
           }
 
           &:not(:disabled):active,
