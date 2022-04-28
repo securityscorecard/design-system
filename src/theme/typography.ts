@@ -65,6 +65,10 @@ const margin: Margin = {
       top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
       bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
     },
+    h5: {
+      top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
+      bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
+    },
   },
   paragraph: {
     bottom: pxToRem(BASE_LINE_HEIGHT * 0.5), // 10px
