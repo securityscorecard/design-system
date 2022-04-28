@@ -16,21 +16,23 @@ import { pxToRem } from '../../../../utils';
 export default {
   component: Filters,
   title: 'components/Filters/components/Select',
+  argTypes: {
+    fields: {
+      control: { disable: true },
+    },
+    state: {
+      control: { disable: true },
+    },
+  },
 } as Meta;
 
 const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const Select: Story = () => (
+export const Playground: Story = (args) => (
   <Wrapper>
-    <Filters
-      fields={fieldsSelect}
-      onApply={action('onApply')}
-      onCancel={action('onCancel')}
-      onChange={action('onChange')}
-      onClose={action('onClose')}
-    />
+    <Filters fields={fieldsSelect} onApply={action('onApply')} {...args} />
   </Wrapper>
 );
 
