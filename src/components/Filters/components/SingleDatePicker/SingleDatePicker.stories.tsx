@@ -14,11 +14,25 @@ import { pxToRem } from '../../../../utils';
 export default {
   component: Filters,
   title: 'components/Filters/components/SingleDatePicker',
+  argTypes: {
+    fields: {
+      control: { disable: true },
+    },
+    state: {
+      control: { disable: true },
+    },
+  },
 } as Meta;
 
 const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
+
+export const Playground: Story = (args) => (
+  <Wrapper>
+    <Filters fields={fieldsSingleDate} onApply={action('onApply')} {...args} />
+  </Wrapper>
+);
 
 export const SingleDate: Story = () => (
   <Wrapper>
