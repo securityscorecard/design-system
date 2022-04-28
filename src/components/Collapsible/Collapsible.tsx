@@ -7,7 +7,7 @@ import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Strong, Text } from '../typography';
-import { TextSizes } from '../typography/Text/Text.enums';
+import { TextSizes, TextVariants } from '../typography/Text/Text.enums';
 import { CollapsibleProps } from './Collapsible.types';
 import { Padbox } from '../layout/Padbox';
 import { Inline } from '../layout/Inline';
@@ -77,8 +77,10 @@ const Collapsible: React.FC<CollapsibleProps> = ({
             type={IconTypes.ssc}
           />
           <div>
-            <Text size={TextSizes.md}>{title}</Text>
-            <Subject>{subject}</Subject>
+            <Text size={TextSizes.md} variant={TextVariants.secondary}>
+              {title}
+            </Text>
+            <Subject size={TextSizes.lg}>{subject}</Subject>
           </div>
         </Inline>
       </Header>
