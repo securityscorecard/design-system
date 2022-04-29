@@ -3,18 +3,19 @@ import { MemoryRouter } from 'react-router-dom';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 
-import DropdownMenu from './DropdownMenu';
-import { subactionsMock } from '../../Datatable/mocks/actions';
-import { DropdownMenuProps } from './DropdownMenu.types';
-import { Inline, Padbox } from '../../layout';
-import { pxToRem } from '../../../utils';
+import DropdownMenu from '../_internal/BaseDropdownMenu/DropdownMenu';
+import { subactionsMock } from '../Datatable/mocks/actions';
+import { DropdownMenuProps } from '../_internal/BaseDropdownMenu/DropdownMenu.types';
+import { Inline, Padbox } from '../layout';
+import { pxToRem } from '../../utils';
+import { ActionKinds } from '../../types/action.types';
 
 const Wrapper = styled(Padbox)`
   margin-bottom: ${pxToRem(100)};
 `;
 
 export default {
-  title: 'components/Datatable/internalComponents/DropdownMenu',
+  title: 'components/DropdownMenu',
   component: DropdownMenu,
   parameters: {
     docs: { disable: true },
@@ -64,7 +65,7 @@ export const Default: Story<DropdownMenuProps> = (args) => (
   </Inline>
 );
 Default.args = {
-  actions: subactionsMock,
+  actions: subactionsMock as unknown as ActionKinds<React.MouseEvent[]>[],
 };
 
 export const OpenedOnInit: Story<DropdownMenuProps> = (args) => (

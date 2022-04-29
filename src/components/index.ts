@@ -10,6 +10,7 @@ export * from './ControlDropdown';
 export * from './Datatable';
 export * from './Drawer';
 export * from './Dropdown';
+export * from './DropdownMenu';
 export * from './Filters';
 export * from './FlexContainer';
 export * from './FullscreenModal';
