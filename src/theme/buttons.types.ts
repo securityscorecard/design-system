@@ -33,6 +33,7 @@ export interface TextButtonColors {
 
 export interface ButtonColors<T> {
   primary: T;
+  secondary?: T;
   danger?: T;
 }
 
