@@ -1,11 +1,9 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 import {
   DocsContext,
   DocsStory,
   Heading,
   DocsStoryProps,
-  DocsContextProps,
-  StoryData,
   Anchor,
   Subheading,
   Description,
@@ -26,21 +24,9 @@ interface StoriesProps {
   includePrimary?: boolean;
 }
 
-const getDocsStories = (context: DocsContextProps): StoryData[] => {
-  const { storyStore, kind } = context;
-
-  if (!storyStore) {
-    return [];
-  }
-
-  return storyStore
-    .getStoriesForKind(kind)
-    .filter((s: any) => !(s.parameters?.docs?.disable));
-};
-
 export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimary = false }) => {
   const context = useContext(DocsContext);
-  const componentStories = getDocsStories(context);
+  const componentStories = context.componentStories().filter((s: any) => !(s.parameters?.docs?.disable));;
 
   let stories: DocsStoryProps[] = componentStories;
   if (!includePrimary) stories = stories.slice(1);
