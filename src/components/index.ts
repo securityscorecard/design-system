@@ -11,6 +11,7 @@ export * from './Datatable';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './DropdownMenu';
+export * from './FileSelector';
 export * from './Filters';
 export * from './FlexContainer';
 export * from './FullscreenModal';
