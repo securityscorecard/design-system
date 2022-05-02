@@ -22,6 +22,7 @@ const size: Size = {
   h2: pxToRem(BASE_FONT_SIZE * 1.875), // 30px
   h3: pxToRem(BASE_FONT_SIZE * 1.5), // 24px
   h4: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
+  h5: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
   lg: pxToRem(BASE_FONT_SIZE), // 16px
   md: pxToRem(BASE_FONT_SIZE * 0.875), // 14px
   sm: pxToRem(BASE_FONT_SIZE * 0.6875), // 11px, TO BE DEPRECATED
@@ -61,6 +62,10 @@ const margin: Margin = {
       bottom: pxToRem(BASE_LINE_HEIGHT * 1.5), // 30px
     },
     h4: {
+      top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
+      bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
+    },
+    h5: {
       top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
       bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
     },

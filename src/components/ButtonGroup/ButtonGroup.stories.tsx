@@ -63,22 +63,13 @@ OutlinePrimaryButtons.args = {
   variant: 'outline',
   color: 'primary',
 };
-export const OutlineSecondaryButtons = ButtonGroupTemplate.bind({});
-OutlineSecondaryButtons.args = {
-  ...OutlinePrimaryButtons.args,
-  color: 'secondary',
-};
 
 export const TextPrimaryButtons = ButtonGroupTemplate.bind({});
 TextPrimaryButtons.args = {
   variant: 'text',
   color: 'primary',
 };
-export const TextSecondaryButtons = ButtonGroupTemplate.bind({});
-TextSecondaryButtons.args = {
-  ...TextPrimaryButtons.args,
-  color: 'secondary',
-};
+
 export const TextDangerButtons = ButtonGroupTemplate.bind({});
 TextDangerButtons.args = {
   ...TextPrimaryButtons.args,

@@ -18,10 +18,10 @@ export default {
   ],
 } as Meta;
 
-export const playground: Story<SingleDatePickerProps> = (args) => (
+export const Playground: Story<SingleDatePickerProps> = (args) => (
   <SingleDatePicker {...args} />
 );
-playground.parameters = {
+Playground.parameters = {
   chromatic: { disable: true },
 };
 

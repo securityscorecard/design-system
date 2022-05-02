@@ -104,23 +104,6 @@ export const OutlineButtons: Story = () => (
         Disabled Button
       </Button>
     </Inline>
-    <Inline gap={SpaceSizes.md}>
-      <Button color="secondary" variant="outline">
-        Button
-      </Button>
-      <Button className="hover" color="secondary" variant="outline">
-        Hovered Button
-      </Button>
-      <Button className="focus" color="secondary" variant="outline">
-        Focused Button
-      </Button>
-      <Button className="active" color="secondary" variant="outline">
-        Active Button
-      </Button>
-      <Button color="secondary" variant="outline" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
   </Stack>
 );
 

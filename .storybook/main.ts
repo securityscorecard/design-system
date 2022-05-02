@@ -25,6 +25,13 @@ module.exports = {
       // shouldExtractValuesFromUnion: true, // disable it for now as it cause issues in SBv6.2
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
+        if (prop.parent) {
+          // filter inherited props
+          return !prop.parent.fileName.includes("node_modules/@types/react/")
+            && !prop.parent.fileName.includes("node_modules/@emotion/")
+            && !prop.parent.fileName.includes("node_modules/@types/node/")
+            && !prop.parent.fileName.includes("node_modules/typescript/");
+        }
         // filter inherited styled-components props
         return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
       },

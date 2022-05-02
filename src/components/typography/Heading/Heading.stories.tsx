@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import Heading, { H0, H1, H2, H3, H4 } from './Heading';
+import Heading, { H0, H1, H2, H3, H4, H5 } from './Heading';
 import { HeadingProps } from './Heading.types';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { generateControl } from '../../../utils/tests/storybook';
@@ -73,6 +73,14 @@ export const H4Story: Story = () => (
   </>
 );
 H4Story.storyName = 'Heading H4';
+
+export const H5Story: Story = () => (
+  <>
+    <H5>Heading H5</H5>
+    <H5 variant={HeadingVariants.secondary}>Heading H5 - secondary</H5>
+  </>
+);
+H5Story.storyName = 'Heading H5';
 
 export const CustomizedH1: Story = () => (
   <Heading

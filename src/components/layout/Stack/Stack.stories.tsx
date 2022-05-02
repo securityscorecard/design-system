@@ -23,9 +23,9 @@ export default {
 
 export const Playground: Story<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>
-    <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
+    <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
-      <Button color="secondary" variant="outline">
+      <Button color="primary" variant="solid">
         Click me gently
       </Button>
       <Stack style={{ backgroundColor: '#80baeb' }}>
@@ -39,7 +39,7 @@ export const Playground: Story<StackProps> = (args) => (
 Playground.args = { gap: SpaceSizes.lg };
 
 export const WithGap: Story<StackProps> = (args) => (
-  <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
+  <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Box />
     <Box />
@@ -50,7 +50,7 @@ WithGap.args = {
 };
 
 export const RecursiveGap: Story<StackProps> = (args) => (
-  <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
+  <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Box style={{ backgroundColor: '#579aa0' }}>
       <Box />
@@ -69,7 +69,7 @@ RecursiveGap.args = {
 
 export const SplitedStack: Story<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>
-    <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
+    <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
       <Box />
       <Box />
@@ -82,9 +82,9 @@ SplitedStack.args = {
 };
 
 export const WithHorizontalAlignment: Story<StackProps> = (args) => (
-  <Stack style={{ backgroundColor: '#0275d8' }} {...args}>
+  <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
-    <Button color="secondary" variant="outline">
+    <Button color="primary" variant="solid">
       Click me gently
     </Button>
     <Box />

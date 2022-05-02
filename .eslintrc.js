@@ -1,8 +1,11 @@
 module.exports = {
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  parser: '@typescript-eslint/parser',
+  // Specifies the ESLint parser
   parserOptions: {
-    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
+    ecmaVersion: 2020,
+    // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module',
+    // Allows for the use of imports
     ecmaFeatures: {
       jsx: true, // Allows for the parsing of JSX
     },
@@ -52,7 +55,12 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
     'import/prefer-default-export': 'off',
     'import/order': [
       'error',
@@ -66,9 +74,19 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
-    'sort-imports': ['error', { ignoreDeclarationSort: true }],
+    'sort-imports': [
+      'error',
+      {
+        ignoreDeclarationSort: true,
+      },
+    ],
     'prettier/prettier': 'error',
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.tsx'],
+      },
+    ],
     'react/jsx-props-no-spreading': 'off',
     'react/boolean-prop-naming': [
       'error',
@@ -76,7 +94,12 @@ module.exports = {
         rule: '^(defaultIs|defaultHas|defaultShould|defaultAre|is|has|should|are)[A-Z]([A-Za-z0-9]?)+',
       },
     ],
-    'react/prop-types': ['error', { ignore: ['children', 'as'] }],
+    'react/prop-types': [
+      'error',
+      {
+        ignore: ['children', 'as'],
+      },
+    ],
     'react/jsx-sort-props': [
       'error',
       {
@@ -128,7 +151,12 @@ module.exports = {
       },
     ],
     'no-nested-ternary': 'off',
-    'no-unused-expressions': ['error', { allowTernary: true }],
+    'no-unused-expressions': [
+      'error',
+      {
+        allowTernary: true,
+      },
+    ],
     'no-restricted-imports': [
       'warn',
       {
@@ -150,15 +178,26 @@ module.exports = {
       },
       extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
       rules: {
-        'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+        'react/jsx-filename-extension': [
+          1,
+          {
+            extensions: ['.ts', '.tsx'],
+          },
+        ],
         'react/jsx-sort-props': 'off',
       },
     },
     {
       files: ['**/*.stories.tsx'],
+      extends: ['plugin:storybook/recommended'],
       rules: {
         'react/prop-types': 'off',
-        'react/no-unstable-nested-components': [2, { allowAsProps: true }],
+        'react/no-unstable-nested-components': [
+          2,
+          {
+            allowAsProps: true,
+          },
+        ],
       },
     },
   ],
