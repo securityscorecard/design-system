@@ -40,3 +40,4 @@ export { errorSolid } from './errorSolid';
 export { ellipsisV } from './ellipsisV';
 export { certifiedBadge } from './certifiedBadge';
 export { certifiedBadgeSolid } from './certifiedBadgeSolid';
+export { upload } from './upload';
