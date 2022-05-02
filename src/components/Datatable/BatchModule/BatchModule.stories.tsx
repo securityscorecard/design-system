@@ -14,8 +14,6 @@ export default {
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
   parameters: {
     viewMode: 'story',
-    docs: { disable: true },
-    previewTabs: { 'storybook/docs/panel': { hidden: true } },
   },
   argTypes: {
     actions: {
@@ -62,10 +60,10 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<BatchModuleProps> = (args) => (
+export const Playground: Story<BatchModuleProps> = (args) => (
   <BatchModule {...args} />
 );
-Default.args = {
+Playground.args = {
   actions: [],
   dataSize: 1070000,
   hasSelection: defaultTableConfig.hasSelection,
@@ -86,7 +84,7 @@ export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
   }, []);
   return <BatchModule {...args} />;
 };
-WithSelectedRows.args = Default.args;
+WithSelectedRows.args = Playground.args;
 
 export const WithSelectedRowsAndExclusionLogic: Story<BatchModuleProps> = (
   args,
@@ -105,7 +103,7 @@ export const WithSelectedRowsAndExclusionLogic: Story<BatchModuleProps> = (
   return <BatchModule {...args} />;
 };
 WithSelectedRowsAndExclusionLogic.args = {
-  ...Default.args,
+  ...Playground.args,
   hasOnlyPerPageSelection: false,
 };
 
@@ -113,6 +111,6 @@ export const WithBatchActions: Story<BatchModuleProps> = (args) => (
   <BatchModule {...args} />
 );
 WithBatchActions.args = {
-  ...Default.args,
+  ...Playground.args,
   actions: actionsMock,
 };
