@@ -1,3 +1,21 @@
+# [1.0.0-alpha.174](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.173...v1.0.0-alpha.174) (2022-05-02)
+
+
+### Bug Fixes
+
+* **Button:** align label vertically ([25d5140](https://github.com/securityscorecard/design-system/commit/25d514051868b9a392c2f60e980618eab6ee1b6d))
+* **Collapsible:** adjust typography ([8ec214f](https://github.com/securityscorecard/design-system/commit/8ec214f623df38ad228cf634d9330d8342e2fedf))
+* **Tabs:** change sm font size to h5 ([0f7cf3f](https://github.com/securityscorecard/design-system/commit/0f7cf3f5fcfc7fe2454b4f2a4d0262d2780a12d7))
+
+
+### Features
+
+* **Button:** add outlined focus state ([89008be](https://github.com/securityscorecard/design-system/commit/89008bef2b5de9eab81ed6a8523bd11124710037))
+* **Button:** revert secondary text button removal ([e5b17b0](https://github.com/securityscorecard/design-system/commit/e5b17b05493a34fdf0fffb31c000b7fd89ad8a98))
+* **DropdownMenu:** export component ([2a4efce](https://github.com/securityscorecard/design-system/commit/2a4efcebc91d0d74bcaa992c047908d3e9a2e7a8))
+* **FileSelector:** add component ([df17509](https://github.com/securityscorecard/design-system/commit/df175097cc3db3caf0b16e043ce3a790d5996f87))
+* **Heading:** add new heading size ([28b0554](https://github.com/securityscorecard/design-system/commit/28b0554bf76eb72b23854e5e817e67cab46ca42b))
+
 # [1.0.0-alpha.173](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.172...v1.0.0-alpha.173) (2022-04-20)
 
 
