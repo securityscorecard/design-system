@@ -20,14 +20,15 @@ export default {
   component: Table,
   parameters: {
     viewMode: 'story',
-    docs: { disable: true },
-    previewTabs: { 'storybook/docs/panel': { hidden: true } },
     screenshot: {
       viewport: {
         width: 1820,
         height: 720,
       },
     },
+  },
+  argTypes: {
+    data: { control: { type: 'disabled' } },
   },
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
 } as Meta;
@@ -36,10 +37,22 @@ const TableTemplate: Story<TableProps<Data>> = (args) => (
   <Table<Data> {...args} />
 );
 
+export const Playground: Story<TableProps<Data>> = (args) => (
+  <TableTemplate {...args} />
+);
+
+Playground.args = {
+  ...omit(['onSelect'], defaultTableConfig),
+  data: assets.slice(0, 20),
+  dataSize: assets.length,
+  columns: simpleColumns,
+  defaultSelectedRows: {},
+};
+
 export const MinimalConfig = TableTemplate.bind({});
 MinimalConfig.args = {
   ...omit(['onSelect'], defaultTableConfig),
-  data: assets.slice(0, 50),
+  data: assets.slice(0, 20),
   columns: simpleColumns,
   dataSize: assets.length,
   defaultSelectedRows: {},
