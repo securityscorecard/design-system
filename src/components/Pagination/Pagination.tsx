@@ -26,13 +26,15 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick: () => onPageChange(currentPage - 1),
         children: <Icon name={SSCIconNames.longArrowLeft} />,
       })}
-    <PageButtons
-      currentPage={currentPage}
-      pageCount={pageCount}
-      positions={pageButtonsCount}
-      renderItem={renderItem}
-      onChange={onPageChange}
-    />
+    {pageButtonsCount !== 0 && (
+      <PageButtons
+        currentPage={currentPage}
+        pageCount={pageCount}
+        positions={pageButtonsCount}
+        renderItem={renderItem}
+        onChange={onPageChange}
+      />
+    )}
     {renderItem &&
       renderItem({
         'aria-label': 'Next page',
