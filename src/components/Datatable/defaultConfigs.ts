@@ -15,6 +15,7 @@ export const defaultTableConfig: TableConfig<Record<string, unknown>> = {
   isDataLoading: false,
   hasOnlyPerPageSelection: true,
   defaultSelectedRowIds: [],
+  pageButtonsCount: undefined,
   hasPagination: true,
   hasServerSidePagination: true,
   defaultPageSize: 50,

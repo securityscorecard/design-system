@@ -58,6 +58,7 @@ const MyFancyDatatable = () => <Datatable ...props />
       },
     },
     isDataLoading: { control: { disable: true } },
+    pageButtonsCount: { control: { disable: false }, defaultValue: 5 },
     dataPrimaryKey: {
       table: {
         type: {

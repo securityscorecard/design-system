@@ -174,6 +174,7 @@ Datatable.propTypes = {
     defaultIsColumnOrderingApplied: PropTypes.bool,
   }),
   tableConfig: PropTypes.exact(TableConfigPropType),
+  pageButtonsCount: PropTypes.number,
   onDataFetch: PropTypes.func,
   onCancelLoading: PropTypes.func,
 };

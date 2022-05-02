@@ -24,6 +24,7 @@ const PaginationContainer = styled.div`
 
 const Footer: React.FC<FooterProps> = ({
   pageCount,
+  pageButtonsCount,
   pageIndex,
   onGotoPage,
   isDataLoading = false,
@@ -55,6 +56,7 @@ const Footer: React.FC<FooterProps> = ({
           <PaginationContainer>
             <Pagination
               currentPage={pageIndex + 1}
+              pageButtonsCount={pageButtonsCount}
               pageCount={pageCount}
               onPageChange={handlePageChange}
             />
@@ -70,6 +72,7 @@ Footer.propTypes = {
   pageCount: PropTypes.number.isRequired,
   pageIndex: PropTypes.number.isRequired,
   onGotoPage: PropTypes.func.isRequired,
+  pageButtonsCount: PropTypes.number,
   hasPagination: PropTypes.bool,
   isDataLoading: PropTypes.bool,
 };
