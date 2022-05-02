@@ -19,14 +19,14 @@ export default {
   ],
 } as Meta;
 
-export const playground: Story<BaseDateRangePickerProps> = (args) => (
+export const Playground: Story<BaseDateRangePickerProps> = (args) => (
   <DateRangePicker {...args} />
 );
-playground.parameters = {
+Playground.parameters = {
   chromatic: { disable: true },
 };
 
-playground.args = {
+Playground.args = {
   maxDate: new Date('2021/03/28'),
   minDate: new Date('2021/03/01'),
 };
