@@ -85,13 +85,24 @@ export const datePickerStyles = css`
   }
   .react-datepicker__day:hover,
   .react-datepicker__day--keyboard-selected {
-    background-color: ${getColor('primary.400')};
+    background-color: ${getColor('primary.600')};
     border-radius: 4px;
     font-weight: ${getFontWeight('bold')};
     color: ${getColor('neutral.0')};
   }
   .react-datepicker__day:focus {
-    outline: 0;
+    background-color: ${getColor('primary.600')};
+    border-radius: 4px;
+    font-weight: ${getFontWeight('bold')};
+    color: ${getColor('neutral.0')};
+    outline: 2px solid ${getColor('primary.200')};
+    outline-offset: 2px;
+    position: relative;
+  }
+  .react-datepicker__day--in-range:focus {
+    outline: 2px solid ${getColor('primary.200')};
+    outline-offset: 2px;
+    position: relative;
   }
   .react-datepicker__navigation {
     top: ${pxToRem(36)};
@@ -222,10 +233,18 @@ export const datePickerStyles = css`
 
 export const singleDatePickerStyles = css`
   .react-datepicker__day--selected {
-    background-color: ${getColor('primary.400')};
+    background-color: ${getColor('primary.500')};
     font-weight: ${getFontWeight('bold')};
     color: ${getColor('neutral.0')};
-    border-radius: 16px;
+    border-radius: ${getRadii('default')};
+  }
+  .react-datepicker__day--range-start:focus,
+  .react-datepicker__day--range-end:focus,
+  .react-datepicker__day--selected:focus {
+    background-color: ${getColor('primary.600')};
+    outline: 2px solid ${getColor('primary.200')};
+    outline-offset: 2px;
+    position: relative;
   }
   .react-datepicker__year-wrapper {
     width: 224px;
