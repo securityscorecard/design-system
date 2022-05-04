@@ -43,7 +43,7 @@ export const Playground: Story<TableProps<Data>> = (args) => (
 
 Playground.args = {
   ...omit(['onSelect'], defaultTableConfig),
-  data: assets.slice(0, 20),
+  data: assets.slice(0, 50),
   dataSize: assets.length,
   columns: simpleColumns,
   defaultSelectedRows: {},
@@ -52,7 +52,7 @@ Playground.args = {
 export const MinimalConfig = TableTemplate.bind({});
 MinimalConfig.args = {
   ...omit(['onSelect'], defaultTableConfig),
-  data: assets.slice(0, 20),
+  data: assets.slice(0, 50),
   columns: simpleColumns,
   dataSize: assets.length,
   defaultSelectedRows: {},
@@ -122,7 +122,7 @@ WithSortedColumn.args = {
 export const WithCustomPageSize = TableTemplate.bind({});
 WithCustomPageSize.args = {
   ...MinimalConfig.args,
-  data: assets.slice(0, 20),
+  data: assets.slice(0, 50),
   defaultPageSize: 5,
   hasServerSidePagination: false,
 };
