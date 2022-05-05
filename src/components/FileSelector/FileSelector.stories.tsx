@@ -15,6 +15,25 @@ import { getColor, getRadii } from '../../utils';
 export default {
   title: 'components/FileSelector',
   component: FileSelector,
+  argTypes: {
+    accept: {
+      description:
+        'Accepted file mime types (https://www.iana.org/assignments/media-types/media-types.xhtml)',
+    },
+    maxFiles: {
+      description: 'The maximum number of dropped files',
+    },
+    onFileDialogCancel: {
+      description: 'Callback fired when file dialog is canceled',
+    },
+    onFileDialogOpen: {
+      description: 'Callback fired when dialog is opened',
+    },
+    validator: {
+      description:
+        'Custom validation function. It must return null if there are no errors.',
+    },
+  },
 } as Meta;
 
 const FileSelectorTemplate: Story<FileSelectorProps> = (args) => (
