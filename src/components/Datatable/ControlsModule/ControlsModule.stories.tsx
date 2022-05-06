@@ -16,8 +16,6 @@ export default {
   component: ControlsModule,
   parameters: {
     viewMode: 'story',
-    docs: { disable: true },
-    previewTabs: { 'storybook/docs/panel': { hidden: true } },
   },
   argTypes: {
     hasSearch: {
@@ -94,10 +92,11 @@ function ControlsModuleTemplate(args) {
   return <ControlsModule {...args} />;
 }
 
-export const Default: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const Playground: Story<ControlsModuleProps<Data>> = (args) => (
+  <ControlsModuleTemplate {...args} />
+);
 
-Default.args = mergeDeepRight(defaultControlsConfig, {
+Playground.args = mergeDeepRight(defaultControlsConfig, {
   searchConfig: {
     onSearch: action('SearchOnSearch'),
     onClear: action('SearchOnClear'),
@@ -116,7 +115,7 @@ export const WithDisabledFiltering: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithDisabledFiltering.args = {
-  ...Default.args,
+  ...Playground.args,
   hasFiltering: false,
 };
 
@@ -124,7 +123,7 @@ export const WithOpenFiltering: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithOpenFiltering.args = {
-  ...Default.args,
+  ...Playground.args,
   defaultIsFilteringOpen: true,
 };
 
@@ -132,7 +131,7 @@ export const WithAppliedFiltering: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithAppliedFiltering.args = {
-  ...Default.args,
+  ...Playground.args,
   defaultIsFilteringApplied: true,
 };
 
@@ -140,7 +139,7 @@ export const WithDisabledColumns: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithDisabledColumns.args = {
-  ...Default.args,
+  ...Playground.args,
   hasColumnOrdering: false,
 };
 
@@ -148,7 +147,7 @@ export const WithOpenColumns: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithOpenColumns.args = {
-  ...Default.args,
+  ...Playground.args,
   defaultIsColumnOrderingOpen: true,
 };
 
@@ -156,7 +155,7 @@ export const WithAppliedColumns: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithAppliedColumns.args = {
-  ...Default.args,
+  ...Playground.args,
   defaultIsColumnOrderingApplied: true,
 };
 
@@ -164,6 +163,6 @@ export const WithDisabledSearch: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});
 
 WithDisabledSearch.args = {
-  ...Default.args,
+  ...Playground.args,
   hasSearch: false,
 };

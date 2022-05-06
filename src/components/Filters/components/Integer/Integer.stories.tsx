@@ -15,21 +15,23 @@ import { pxToRem } from '../../../../utils';
 export default {
   component: Filters,
   title: 'components/Filters/components/Integer',
+  argTypes: {
+    fields: {
+      control: { disable: true },
+    },
+    state: {
+      control: { disable: true },
+    },
+  },
 } as Meta;
 
 const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const Integer: Story = () => (
+export const Playground: Story = (args) => (
   <Wrapper>
-    <Filters
-      fields={fieldsInteger}
-      onApply={action('onApply')}
-      onCancel={action('onCancel')}
-      onChange={action('onChange')}
-      onClose={action('onClose')}
-    />
+    <Filters fields={fieldsInteger} onApply={action('onApply')} {...args} />
   </Wrapper>
 );
 
