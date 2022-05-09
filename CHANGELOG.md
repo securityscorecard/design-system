@@ -1,3 +1,12 @@
+# [1.0.0-alpha.176](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.175...v1.0.0-alpha.176) (2022-05-09)
+
+
+### Bug Fixes
+
+* add port to npm registry ([40fd345](https://github.com/securityscorecard/design-system/commit/40fd345d92a395e6babc866b957c5b2c72487518))
+* **ci:** point to NPM registry in workflow ([f1aabc9](https://github.com/securityscorecard/design-system/commit/f1aabc987a93a7b00d15176de2ae9c1ef4ebd221))
+* fix auth token ([8255b1d](https://github.com/securityscorecard/design-system/commit/8255b1df2c5ff641e80f9c13ea397557d2ab6671))
+
 # [1.0.0-alpha.175](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.174...v1.0.0-alpha.175) (2022-05-09)
 
 
