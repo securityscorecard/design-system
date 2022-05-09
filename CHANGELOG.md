@@ -1,3 +1,10 @@
+# [1.0.0-alpha.175](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.174...v1.0.0-alpha.175) (2022-05-09)
+
+
+### Bug Fixes
+
+* change npm registry ([8cc2f99](https://github.com/securityscorecard/design-system/commit/8cc2f991fbb590eaf7f5cc7669578721b2382d22))
+
 # [1.0.0-alpha.174](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.173...v1.0.0-alpha.174) (2022-05-02)
 
 
