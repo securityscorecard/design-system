@@ -24,4 +24,7 @@ export interface Forms {
   switchColor: string;
   switchBgColor: string;
   switchKnobBgColor: string;
+  hoverBgColor: string;
+  hoverBorderColor: string;
+  pressedBgColor: string;
 }

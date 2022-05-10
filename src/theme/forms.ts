@@ -30,4 +30,7 @@ export const createForms = (themeColors: typeof colors): Forms => ({
   switchColor: themeColors.neutral[700],
   switchBgColor: themeColors.neutral[200],
   switchKnobBgColor: themeColors.neutral[800],
+  hoverBgColor: themeColors.primary[600],
+  hoverBorderColor: themeColors.primary[600],
+  pressedBgColor: themeColors.primary[700],
 });
