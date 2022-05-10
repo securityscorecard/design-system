@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['12', '14', '16']
+        node: ['14', '16', '18']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
@@ -28,10 +28,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-${{ matrix.node }}-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -58,10 +58,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-16-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -77,7 +77,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -88,10 +88,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-16-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -111,17 +111,16 @@ jobs:
       - name: Run Visual Regressions
         run: yarn test:storybook:visual:ci
 
+      - name: Tar artifacts
+        if: failure()
+        run: tar -cvf visual-test-reports.tar .storybook/image-snapshots
+
       - name: Archive visual artifacts
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: visual-test-reports
-          path: |
-            .storybook/image-snapshots/actual/*
-            .storybook/image-snapshots/diff/*
-            .storybook/image-snapshots/expected/*
-            .storybook/image-snapshots/report.html
-            .storybook/image-snapshots/report.json
+          path: visual-test-reports.tar
 
   lint:
     runs-on: ubuntu-latest
@@ -130,7 +129,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -141,10 +140,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-16-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -160,7 +159,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -171,10 +170,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-16-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -190,7 +189,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -201,9 +200,9 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-16-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -216,17 +215,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['12', '14', '16']
+        node: ['14', '16', '18']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@securityscorecard'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -235,10 +232,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-${{ matrix.node }}-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -254,6 +251,11 @@ jobs:
       - name: Build Step
         run: yarn build
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: bundle-stats-${{ matrix.node }}
+          path: stats
+
   build-and-publish:
     if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
     needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
@@ -263,7 +265,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
           registry-url: 'https://registry.npmjs.org'
@@ -276,10 +278,10 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-16-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-${{ env.cache-name }}-
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -295,11 +297,6 @@ jobs:
       - name: Build Step
         if: steps.library-build-cache.outputs.cache-hit != 'true'
         run: yarn build
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: bundle-stats
-          path: stats
 
       - name: Run Semantic Release
         run: yarn semantic-release
