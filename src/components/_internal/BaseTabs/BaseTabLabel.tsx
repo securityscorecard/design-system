@@ -74,15 +74,26 @@ const segmentedSizes = {
   [BaseTabSizes.md]: mediumSegmentedSize,
 };
 
+const commonHoverTab = css<BaseLabelProps>`
+  ${({ $isSelected, $color, theme }) =>
+    $color && $isSelected
+      ? lighten(0.1, getColor($color, { theme }))
+      : getColor('primary.600')}
+`;
+
 const underlineTab = css<BaseLabelProps & { size: Sizes }>`
   ${({ size }) => underlineSizes[size] || underlineSizes[BaseTabSizes.md]};
   padding-bottom: ${getSpace(SpaceSizes.xxs)};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
-      $isSelected ? getColor($color) : getColor('neutral.500')};
+      $isSelected
+        ? $color
+          ? getColor($color)
+          : getColor('primary.500')
+        : getColor('neutral.500')};
 
   &:hover {
-    border-bottom-color: ${({ $color }) => getColor($color)};
+    border-bottom-color: ${commonHoverTab};
   }
 
   &,
@@ -95,11 +106,14 @@ const textTab = css<BaseLabelProps & { size: Sizes }>`
   ${({ size }) => textSizes[size] || textSizes[BaseTabSizes.md]};
 
   color: ${({ $isSelected, $color }) =>
-    $isSelected ? getColor('neutral.900') : getColor($color)};
+    $isSelected
+      ? $color
+        ? getColor($color)
+        : getColor('neutral.900')
+      : getColor('primary.500')};
 
   &:hover {
-    color: ${({ $color, theme }) =>
-      lighten(0.1, getColor($color, { theme }) || $color)};
+    color: ${commonHoverTab};
   }
 `;
 

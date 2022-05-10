@@ -13,7 +13,7 @@ const Tab: React.FC<TabProps> = ({
   children,
   isSelected,
   onClick,
-  color = ColorTypes.primary500,
+  color,
   size = TabSizes.sm,
   variant = TabVariants.underline,
   value,
