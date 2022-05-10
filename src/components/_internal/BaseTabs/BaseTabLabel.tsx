@@ -133,7 +133,11 @@ const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
   color: ${getColor('neutral.900')};
 
   &:hover {
-    color: ${getColor('primary.400')};
+    color: ${getColor('primary.600')};
+  }
+
+  &:active {
+    color: ${getColor('primary.700')};
   }
 `;
 
