@@ -82,7 +82,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({
     );
   }
 
-  return (
+  return positions !== 1 ? (
     <>
       {renderItem({
         page: 1,
@@ -106,6 +106,16 @@ const PageButtons: React.FC<PageButtonsProps> = ({
         isCurrent: currentPage === pageCount,
         onClick: () => onChange(pageCount),
         children: formatNumber(pageCount),
+      })}
+    </>
+  ) : (
+    <>
+      {renderItem({
+        key: currentPage,
+        page: currentPage,
+        isCurrent: true,
+        onClick: () => onChange(currentPage),
+        children: formatNumber(currentPage),
       })}
     </>
   );

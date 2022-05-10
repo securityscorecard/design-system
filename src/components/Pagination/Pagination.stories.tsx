@@ -57,3 +57,17 @@ WithCustomRenderItemFunction.args = {
   currentPage: 10,
   renderItem: (param) => <Button>{param.children}</Button>,
 };
+
+export const OnlyCurrentPage = PaginationTemplate.bind({});
+OnlyCurrentPage.args = {
+  ...OnFirstPage.args,
+  pageButtonsCount: 1,
+  currentPage: 10,
+};
+
+export const OnlyArrows = PaginationTemplate.bind({});
+OnlyArrows.args = {
+  ...OnFirstPage.args,
+  pageButtonsCount: 0,
+  currentPage: 10,
+};
