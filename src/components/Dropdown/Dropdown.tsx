@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 import { Ref } from '@fluentui/react-component-ref';
@@ -9,124 +9,135 @@ import { DropdownProps } from './Dropdown.types';
 import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
 import ControlledDropdown from './ControlledDropdown';
 
-const Dropdown: React.FC<DropdownProps> = ({
-  children,
-  trigger,
-  triggerEvents = [DropdownTriggerEvents.click],
-  placement = DropdownPlacements.bottomStart,
-  innerPaddingSize = SpaceSizes.md,
-  innerPaddingType = PaddingTypes.square,
-  maxPaneWidth = 270,
-  isPaneElevated = false,
-  hasPaneArrow = false,
-  hoverHideDelay = 250,
-  defaultIsOpen = false,
-  onClose = noop,
-  onOpen = noop,
-}) => {
-  const [isVisible, setIsVisible] = useState(defaultIsOpen);
-  const [triggerEl, setTriggerEl] = useState(null);
-  const timeoutId = useRef(null);
+const Dropdown: React.FC<DropdownProps> = React.forwardRef(
+  (
+    {
+      children,
+      trigger,
+      triggerEvents = [DropdownTriggerEvents.click],
+      placement = DropdownPlacements.bottomStart,
+      innerPaddingSize = SpaceSizes.md,
+      innerPaddingType = PaddingTypes.square,
+      maxPaneWidth = 270,
+      isPaneElevated = false,
+      hasPaneArrow = false,
+      hoverHideDelay = 250,
+      defaultIsOpen = false,
+      onClose = noop,
+      onOpen = noop,
+    },
+    ref,
+  ) => {
+    const [isVisible, setIsVisible] = useState(defaultIsOpen);
+    const [triggerEl, setTriggerEl] = useState(null);
+    const timeoutId = useRef(null);
 
-  const showPane = () => {
-    onOpen();
-    setIsVisible(true);
-  };
+    const showPane = () => {
+      onOpen();
+      setIsVisible(true);
+    };
 
-  const hidePane = () => {
-    onClose();
-    setIsVisible(false);
-  };
-  const togglePane = () => {
-    isVisible === true ? hidePane() : showPane();
-  };
+    const hidePane = () => {
+      onClose();
+      setIsVisible(false);
+    };
+    const togglePane = () => {
+      isVisible === true ? hidePane() : showPane();
+    };
 
-  const handleTriggerOnClick = () => {
-    if (!triggerEvents.includes('click')) {
-      return;
-    }
-    togglePane();
-  };
+    useImperativeHandle(ref, () => ({
+      togglePane,
+      hidePane,
+      showPane,
+    }));
 
-  const handleTriggerOnKeyDown: React.KeyboardEventHandler = (e) => {
-    if (!triggerEvents.includes('click')) {
-      return;
-    }
+    const handleTriggerOnClick = () => {
+      if (!triggerEvents.includes('click')) {
+        return;
+      }
+      togglePane();
+    };
 
-    switch (e.key) {
-      case ' ':
-      case 'Enter':
-        e.preventDefault();
-        togglePane();
-        break;
-      case 'Escape':
-        e.preventDefault();
-        hidePane();
-        break;
-      default:
-    }
-  };
+    const handleTriggerOnKeyDown: React.KeyboardEventHandler = (e) => {
+      if (!triggerEvents.includes('click')) {
+        return;
+      }
 
-  const handleTriggerOnMouseEnter = () => {
-    if (!triggerEvents.includes('hover')) {
-      return;
-    }
-    if (timeoutId.current !== null) {
-      clearTimeout(timeoutId.current);
-      timeoutId.current = null;
-    }
-    showPane();
-  };
-  const handleTriggerOnMouseLeave = () => {
-    if (!triggerEvents.includes('hover')) {
-      return;
-    }
-    timeoutId.current = setTimeout(hidePane, hoverHideDelay);
-  };
-  const handleTriggerOnFocus = () => {
-    if (!triggerEvents.includes('focus')) {
-      return;
-    }
-    showPane();
-  };
-  const handleTriggerOnBlur = () => {
-    if (!triggerEvents.includes('focus')) {
-      return;
-    }
-    hidePane();
-  };
+      switch (e.key) {
+        case ' ':
+        case 'Enter':
+          e.preventDefault();
+          togglePane();
+          break;
+        case 'Escape':
+          e.preventDefault();
+          hidePane();
+          break;
+        default:
+      }
+    };
 
-  return (
-    <>
-      <Ref innerRef={setTriggerEl}>
-        {React.cloneElement(trigger, {
-          onClick: handleTriggerOnClick,
-          onTouchStart: handleTriggerOnClick,
-          onKeyDown: handleTriggerOnKeyDown,
-          onMouseEnter: handleTriggerOnMouseEnter,
-          onMouseLeave: handleTriggerOnMouseLeave,
-          onFocus: handleTriggerOnFocus,
-          onBlur: handleTriggerOnBlur,
-        })}
-      </Ref>
-      <ControlledDropdown
-        hasPaneArrow={hasPaneArrow}
-        innerPaddingSize={innerPaddingSize}
-        innerPaddingType={innerPaddingType}
-        isOpen={isVisible}
-        isPaneElevated={isPaneElevated}
-        maxPaneWidth={maxPaneWidth}
-        placement={placement}
-        triggerEl={triggerEl}
-        onClickOut={hidePane}
-        onMouseEnter={handleTriggerOnMouseEnter}
-        onMouseLeave={handleTriggerOnMouseLeave}
-      >
-        {children}
-      </ControlledDropdown>
-    </>
-  );
-};
+    const handleTriggerOnMouseEnter = () => {
+      if (!triggerEvents.includes('hover')) {
+        return;
+      }
+      if (timeoutId.current !== null) {
+        clearTimeout(timeoutId.current);
+        timeoutId.current = null;
+      }
+      showPane();
+    };
+    const handleTriggerOnMouseLeave = () => {
+      if (!triggerEvents.includes('hover')) {
+        return;
+      }
+      timeoutId.current = setTimeout(hidePane, hoverHideDelay);
+    };
+    const handleTriggerOnFocus = () => {
+      if (!triggerEvents.includes('focus')) {
+        return;
+      }
+      showPane();
+    };
+    const handleTriggerOnBlur = () => {
+      if (!triggerEvents.includes('focus')) {
+        return;
+      }
+      hidePane();
+    };
+
+    return (
+      <>
+        <Ref innerRef={setTriggerEl}>
+          {React.cloneElement(trigger, {
+            onClick: handleTriggerOnClick,
+            onTouchStart: handleTriggerOnClick,
+            onKeyDown: handleTriggerOnKeyDown,
+            onMouseEnter: handleTriggerOnMouseEnter,
+            onMouseLeave: handleTriggerOnMouseLeave,
+            onFocus: handleTriggerOnFocus,
+            onBlur: handleTriggerOnBlur,
+          })}
+        </Ref>
+        <ControlledDropdown
+          hasPaneArrow={hasPaneArrow}
+          innerPaddingSize={innerPaddingSize}
+          innerPaddingType={innerPaddingType}
+          isOpen={isVisible}
+          isPaneElevated={isPaneElevated}
+          maxPaneWidth={maxPaneWidth}
+          placement={placement}
+          triggerEl={triggerEl}
+          onClickOut={hidePane}
+          onMouseEnter={handleTriggerOnMouseEnter}
+          onMouseLeave={handleTriggerOnMouseLeave}
+        >
+          {children}
+        </ControlledDropdown>
+      </>
+    );
+  },
+);
 
 Dropdown.propTypes = {
   trigger: PropTypes.element.isRequired,

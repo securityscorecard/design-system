@@ -49,10 +49,8 @@ export const actionsColumn = {
   width: 48,
   disableSortBy: true,
   cellType: CellTypes.actions,
-  Cell: ({
-    row,
-    rowActions,
-  }: CellProps<Record<string, unknown>>): React.ReactElement => {
+  Cell: (props: CellProps<Record<string, unknown>>): React.ReactElement => {
+    const { row, rowActions } = props;
     const actions = map((action) => ({
       ...action,
       onClick: () => action.onClick(row.id, row.original),
