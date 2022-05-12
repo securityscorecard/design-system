@@ -20,8 +20,6 @@ export default {
   component: Table,
   parameters: {
     viewMode: 'story',
-    docs: { disable: true },
-    previewTabs: { 'storybook/docs/panel': { hidden: true } },
     screenshot: {
       viewport: {
         width: 1820,
@@ -29,12 +27,27 @@ export default {
       },
     },
   },
+  argTypes: {
+    data: { control: { type: 'disabled' } },
+  },
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
 } as Meta;
 
 const TableTemplate: Story<TableProps<Data>> = (args) => (
   <Table<Data> {...args} />
 );
+
+export const Playground: Story<TableProps<Data>> = (args) => (
+  <TableTemplate {...args} />
+);
+
+Playground.args = {
+  ...omit(['onSelect'], defaultTableConfig),
+  data: assets.slice(0, 50),
+  dataSize: assets.length,
+  columns: simpleColumns,
+  defaultSelectedRows: {},
+};
 
 export const MinimalConfig = TableTemplate.bind({});
 MinimalConfig.args = {
@@ -109,7 +122,7 @@ WithSortedColumn.args = {
 export const WithCustomPageSize = TableTemplate.bind({});
 WithCustomPageSize.args = {
   ...MinimalConfig.args,
-  data: assets.slice(0, 20),
+  data: assets.slice(0, 50),
   defaultPageSize: 5,
   hasServerSidePagination: false,
 };

@@ -147,6 +147,9 @@ const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
     border-radius: 20px;
     transition: 0.3s;
   }
+  &:active::after {
+    background-color: ${getFormStyle('hoverIndicatorColor')};
+  }
   transition: 0.3s;
 `;
 
@@ -160,6 +163,13 @@ const Input = styled.input<{
     color: ${getFormStyle('activeColor')};
     background: ${getFormStyle('disabledColor')};
     border-color: ${getFormStyle('disabledColor')};
+  }
+
+  &:hover + ${Label} {
+    background-color: ${getFormStyle('activeBgColor')};
+  }
+  &:active + ${Label} {
+    background-color: ${getFormStyle('activeBgColor')};
   }
 
   &:checked + ${Label} {
@@ -179,6 +189,12 @@ const Input = styled.input<{
       left: calc(100% - ${pxToRem(2)});
       transform: translateX(-100%);
     }
+  }
+  &:checked:hover + ${Label} {
+    background-color: ${getFormStyle('hoverBgColor')};
+  }
+  &:checked:active + ${Label} {
+    background-color: ${getFormStyle('pressedBgColor')};
   }
 `;
 

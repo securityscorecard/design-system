@@ -61,6 +61,7 @@ export const UsingWithAnotherComponentControlled: Story<DropdownProps> = (
       </span>
       <ControlledDropdown
         {...args}
+        ref={null}
         isOpen={isDropdownOpen}
         triggerEl={triggerEl}
         onClickOut={() => {

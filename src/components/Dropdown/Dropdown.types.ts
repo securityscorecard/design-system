@@ -93,4 +93,12 @@ export interface DropdownProps extends BaseDropdownProps {
    * Callback called when the dropdown pane is opened.
    */
   onOpen?: () => void;
+  /**
+   * Imperative handle ref
+   */
+  ref?: React.Ref<{
+    togglePane: () => void;
+    hidePane: () => void;
+    showPane: () => void;
+  }>;
 }

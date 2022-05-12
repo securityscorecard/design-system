@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Badges } from '../../../.storybook/storybook.enums';
 import Nav from './Nav';
 import NavItem from './NavItem';
+import { NavItemProps } from './NavItem.types';
 
 export default {
   title: 'components/Nav',
@@ -26,6 +27,18 @@ See docs: [Tabs](https://securityscorecard.github.io/design-system/alpha/?path=/
     },
   },
 } as Meta;
+
+export const Playground: Story<NavItemProps> = (args) => (
+  <Nav {...args}>
+    <NavItem to="#" isActive>
+      Open
+    </NavItem>
+    <NavItem to="#">Under Review</NavItem>
+    <NavItem to="#">Resolved</NavItem>
+    <NavItem to="#">Declined</NavItem>
+    <NavItem to="#">Decayed</NavItem>
+  </Nav>
+);
 
 export const NavigationWithRelativeLinksDefault: Story = () => (
   <Nav>

@@ -29,6 +29,7 @@ export interface TableConfig<D> {
   hasSorting: boolean;
   hasServerSideSorting: boolean;
   defaultSortBy: SortingRule<D>[];
+  pageButtonsCount?: number;
   defaultColumnOrder: IdType<D>[];
   // defaultHiddenColumns: IdType<D>[];
   rowActions: RowAction<D>[];

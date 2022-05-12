@@ -9,6 +9,9 @@ import { mockOnSearch, mockSuggestions } from './mocks';
 export default {
   title: 'components/forms/SearchBar',
   component: SearchBar,
+  argTypes: {
+    placeholder: { control: { type: 'text' } },
+  },
 } as Meta;
 
 const randomResults = ['Banana', 'Apple', 'Orange', 'Pear', 'Melon'];
@@ -19,8 +22,13 @@ const commonArgs = {
   onClear: noop,
 };
 
-export const Default: Story = () => (
-  <SearchBar aria-label="SearchBar" hasSuggestions={false} {...commonArgs} />
+export const Default: Story = (args) => (
+  <SearchBar
+    aria-label="SearchBar"
+    hasSuggestions={false}
+    {...commonArgs}
+    {...args}
+  />
 );
 
 export const WithValidation: Story = () => (

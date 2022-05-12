@@ -99,8 +99,9 @@ function Table<D extends Record<string, unknown>>({
   defaultSortBy,
   defaultPageIndex,
   defaultColumnOrder,
+  pageButtonsCount,
 }: // defaultHiddenColumns,
-TableProps<D>): React.ReactElement {
+TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
   const tableDataSize = useMemo(
     () => (hasServerSidePagination ? dataSize : data.length),
     [hasServerSidePagination, dataSize, data],
@@ -328,6 +329,7 @@ TableProps<D>): React.ReactElement {
         <Footer
           hasPagination={hasPagination && tableDataSize > 0}
           isDataLoading={isDataLoading}
+          pageButtonsCount={pageButtonsCount}
           pageCount={pageCount}
           pageIndex={pageIndex}
           onGotoPage={gotoPageAndLoadData}

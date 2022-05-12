@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isFunction, isNotUndefined, isNull } from 'ramda-adjunct';
+import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 
 import {
   AbsoluteLinkActionKind,
@@ -48,6 +48,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   placement = 'bottom',
 }) => {
   const [isActive, setIsActive] = useState(false);
+  const dropdownRef = useRef({
+    togglePane: noop,
+    hidePane: noop,
+    showPane: noop,
+  });
   const trigger: React.ReactElement = (
     <span className={className}>
       {isFunction(children) ? children(isActive) : children}
@@ -55,6 +60,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   );
   return (
     <Dropdown
+      ref={dropdownRef}
       defaultIsOpen={defaultIsOpen}
       innerPaddingSize={SpaceSizes.none}
       maxPaneWidth={paneWidth}
@@ -120,7 +126,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                     >
                   ).to
                 }
-                onClick={action.onClick}
+                onClick={(event) => {
+                  action.onClick(event);
+                  dropdownRef.current?.hidePane();
+                }}
               >
                 <Text size={TextEnums.TextSizes.md}>{action.label}</Text>
               </DropdownLink>
