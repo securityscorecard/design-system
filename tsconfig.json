@@ -13,10 +13,14 @@
     "allowJs": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "@types/testing-library__jest-dom"],
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", ".storybook/blocks/**/*", "jest.setup.ts"],
+  "include": [
+    "src/**/*",
+    ".storybook/blocks/**/*",
+    "jest.setup.ts",
+  ],
   "exclude": [
     "node_modules",
     "build",
