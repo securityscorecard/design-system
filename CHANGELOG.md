@@ -1,3 +1,21 @@
+# [1.0.0-alpha.177](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.176...v1.0.0-alpha.177) (2022-05-12)
+
+
+### Bug Fixes
+
+* heading exports ([2b5721b](https://github.com/securityscorecard/design-system/commit/2b5721b55e91da13fe48208f4711c1282eec5b9f))
+* **SegmentedToggle:** fix hover-pressed state colors ([b583d16](https://github.com/securityscorecard/design-system/commit/b583d16a570b70342f320e04488ca19ca255b829))
+* **Tabs:** change hover and selected colors ([6cc6278](https://github.com/securityscorecard/design-system/commit/6cc6278b86ebb6505974abe7490f8f9b75f2dc66))
+
+
+### Features
+
+* **Datatable:** add prop to hide dropdown on action click ([1742336](https://github.com/securityscorecard/design-system/commit/17423366cc4ddc15ffab22e765dfda9f59e2e1db))
+* **DataTable:** expose pageButtonsCount config ([f5a2b33](https://github.com/securityscorecard/design-system/commit/f5a2b3321c9c3b5cf025d2ed1d5d13a9566818db))
+* **Datepicker:** update focus state ([b0fc0a6](https://github.com/securityscorecard/design-system/commit/b0fc0a656a5c6bf7ff17505ddbef716d341f8710))
+* **pagination:** add special handling for page count property ([e6cf482](https://github.com/securityscorecard/design-system/commit/e6cf4828206f9a89338e5c4284d21b46aef3fd0e))
+* **Switch:** add hover and pressed styles ([4753c1b](https://github.com/securityscorecard/design-system/commit/4753c1bf140df8149d49bb32d143812c0113b7cc))
+
 # [1.0.0-alpha.176](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.175...v1.0.0-alpha.176) (2022-05-09)
 
 
