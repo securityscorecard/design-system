@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { noop } from 'ramda-adjunct';
+import { action } from '@storybook/addon-actions';
 
 import SearchBar from './SearchBar';
 import { renderSuggestionFilter } from './SearchSuggestionFormats';
 import { mockOnSearch, mockSuggestions } from './mocks';
+import { SearchBarProps } from './SearchBar.types';
+import { Inline, Stack } from '../../layout';
+import { Button } from '../../Button';
 
 export default {
   title: 'components/forms/SearchBar',
@@ -97,4 +101,29 @@ export const QuickFilters: Story = () => {
       onSearch={onSearch}
     />
   );
+};
+
+export const ControlledInput: Story<SearchBarProps> = (args) => {
+  const [query, setQuery] = useState('');
+
+  return (
+    <Stack gap="sm">
+      <SearchBar
+        {...args}
+        value={query}
+        onSearch={(value) => {
+          setQuery(value);
+          action('search')(value);
+        }}
+      />
+      <Inline gap="md">
+        <Button onClick={() => setQuery('controlledValue1')}>Set query</Button>
+        <Button onClick={() => setQuery('')}>Reset query</Button>
+      </Inline>
+    </Stack>
+  );
+};
+
+ControlledInput.parameters = {
+  screenshot: { skip: true },
 };

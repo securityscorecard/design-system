@@ -49,6 +49,7 @@ export interface SearchBarProps
   isValidatedOnSubmit?: boolean;
   pattern?: string;
   errorMessage?: string;
+  value?: string;
   defaultValue?: string;
 }
 

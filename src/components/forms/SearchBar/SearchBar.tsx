@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
 
@@ -67,18 +67,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
   isValidatedOnSubmit = false,
   pattern,
   errorMessage,
+  value,
+  defaultValue = '',
   ...props
 }) => {
-  const { defaultValue = '' } = props as {
-    defaultValue: string;
-  };
-
-  const [isInvalid, setInvalid] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>(defaultValue);
-  const [typingTimeout, setTypingTimeout] = useState<number>(0);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
-  const [isSuggestionDisplayed, setIsSuggestionsDisplayed] =
-    useState<boolean>(false);
+  const [isInvalid, setInvalid] = useState(false);
+  const [query, setQuery] = useState(value || defaultValue);
+  const [typingTimeout, setTypingTimeout] = useState(0);
+  const [isSearching, setIsSearching] = useState(false);
+  const [isSuggestionDisplayed, setIsSuggestionsDisplayed] = useState(false);
 
   const clearSearch = async () => {
     setQuery('');
@@ -88,25 +85,28 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setInvalid(false);
   };
 
-  const search = async (value) => {
-    if (isInvalid) {
-      return;
-    }
-    setIsSearching(true);
-    await onSearch(value);
-    setIsSearching(false);
-    if (!isNonEmptyString(value)) {
-      setIsSuggestionsDisplayed(false);
-    }
-  };
+  const search = useCallback(
+    async (searchedValue) => {
+      if (isInvalid) {
+        return;
+      }
+      setIsSearching(true);
+      await onSearch(searchedValue);
+      setIsSearching(false);
+      if (!isNonEmptyString(searchedValue)) {
+        setIsSuggestionsDisplayed(false);
+      }
+    },
+    [isInvalid, onSearch],
+  );
 
-  const debouncedSearch = async (value) => {
+  const debouncedSearch = async (searchedValue) => {
     if (typingTimeout) {
       window.clearTimeout(typingTimeout);
     }
     setTypingTimeout(
       window.setTimeout(() => {
-        search(value);
+        search(searchedValue);
       }, SEARCH_DEBOUNCE_TIME),
     );
   };
@@ -157,6 +157,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   useEffect(() => {
+    if (isNonEmptyString(value)) {
+      setQuery(value);
+      search(value);
+    }
+  }, [value, search]);
+
+  useEffect(() => {
     if (isNonEmptyArray(suggestions) && hasSuggestions) {
       setIsSuggestionsDisplayed(true);
     }
@@ -164,7 +171,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   }, [suggestions]);
 
   return (
-    <SearchBarWrapper>
+    <SearchBarWrapper {...props}>
       {isNonEmptyString(query) ? (
         <SearchBarIcon
           $position="start"
