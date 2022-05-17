@@ -492,7 +492,7 @@ export const IndicatorsContainer: ComponentType<
           borderWidth={2}
           height={16}
           horizontalMargin={16}
-          verticalMargin={0}
+          verticalMargin={8}
           width={16}
           dark
         />

@@ -178,6 +178,12 @@ Disabled.args = {
   isDisabled: true,
 };
 
+export const Loading = SelectTemplate.bind({});
+Loading.args = {
+  ...Default.args,
+  isLoading: true,
+};
+
 export const Clearable = SelectTemplate.bind({});
 Clearable.args = {
   ...WithDefaultValue.args,
