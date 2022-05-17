@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
+import { noop } from 'ramda-adjunct';
 
 import MultiValueInput from './MultiValueInput';
 import { Label } from '../Label';
 import { MultiValueInputProps } from './MultiValueInput.types';
-import { Heading } from '../../typography';
-import { Stack } from '../../layout';
+import { Heading, Strong } from '../../typography';
+import { Inline, Stack } from '../../layout';
+import { Button } from '../../Button';
+import { Banner } from '../../Banner';
 
 export default {
   component: MultiValueInput,
@@ -112,4 +115,45 @@ export const PillWrapping: Story<MultiValueInputProps> = (args) => (
 PillWrapping.args = {
   ...Playground.args,
   value: ['12345678901234567890', '1234567890'],
+};
+
+export const ControlledInput: Story<MultiValueInputProps> = (args) => {
+  const [values, setValues] = useState([]);
+
+  return (
+    <Stack gap="sm">
+      <Banner variant="warn" onClose={noop}>
+        Handling duplicated values is <Strong>up to the consumer</Strong> for
+        the controlled input.
+      </Banner>
+      <MultiValueInput
+        {...args}
+        value={values}
+        onValueAdd={(_, v) => {
+          setValues(v);
+          action('valueAdd')(v);
+        }}
+        onValueRemove={(v) => {
+          setValues(v);
+          action('valueRemove')(v);
+        }}
+        onValuesChange={(v) => {
+          setValues(v);
+          action('valuesChange')(v);
+        }}
+      />
+      <Inline gap="md">
+        <Button
+          onClick={() => setValues(['controlledValue1', 'controlledValue2'])}
+        >
+          Add values
+        </Button>
+        <Button onClick={() => setValues([])}>Reset values</Button>
+      </Inline>
+    </Stack>
+  );
+};
+
+ControlledInput.parameters = {
+  screenshot: { skip: true },
 };

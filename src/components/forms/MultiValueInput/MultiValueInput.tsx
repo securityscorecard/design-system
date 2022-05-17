@@ -22,6 +22,7 @@ import {
   noop,
   omitIndexes,
 } from 'ramda-adjunct';
+import { useDeepCompareEffect } from 'use-deep-compare';
 import 'focus-within-polyfill';
 
 import {
@@ -176,6 +177,10 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
       return newValues;
     });
   };
+
+  useDeepCompareEffect(() => {
+    setValues(value);
+  }, [value, setValues]);
 
   const handleInputOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
     e,
