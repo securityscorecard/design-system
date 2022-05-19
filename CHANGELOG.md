@@ -1,3 +1,20 @@
+# [1.0.0-alpha.178](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.177...v1.0.0-alpha.178) (2022-05-19)
+
+
+### Bug Fixes
+
+* **Select:** center indicators ([5cb4d20](https://github.com/securityscorecard/design-system/commit/5cb4d2070ac46f99f10ea2c19f029cb3b16b53ac))
+
+
+### Features
+
+* **Badge:** update font color ([9e0b4df](https://github.com/securityscorecard/design-system/commit/9e0b4dffb8c339257b312b5163f8673ba7c7e162))
+* **CloseButton:** add inverted color option ([0a044c5](https://github.com/securityscorecard/design-system/commit/0a044c5bc47f7c7326e18c40143454641eb2c6cb))
+* **colors:** update info and warning colors ([77d637c](https://github.com/securityscorecard/design-system/commit/77d637c9ec28c7d1002f0d1b17d1340e7c5b1bfe))
+* **MultiValueInput:** support controlled state ([93dec5d](https://github.com/securityscorecard/design-system/commit/93dec5da8e9ac1093a5fcf49c67742fac481470e))
+* **SearchBar:** support controlled state ([1da0116](https://github.com/securityscorecard/design-system/commit/1da01165a6044f4ff83755c1f420a56bc909bdbe))
+* **Select:** add loading state visual test ([8cd93e1](https://github.com/securityscorecard/design-system/commit/8cd93e10b44c72c1f7ad4e395c4878d82829e9e9))
+
 # [1.0.0-alpha.177](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.176...v1.0.0-alpha.177) (2022-05-12)
 
 
