@@ -180,6 +180,5 @@
       "stylelint 'src/**/*.{js,ts,tsx}",
       "yarn run betterer:precommit"
     ]
-  },
-  "packageManager": "yarn@3.2.0"
+  }
 }

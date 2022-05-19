@@ -7,7 +7,11 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { SpaceSizes } from '../../theme';
 import { getColor, getNegativeSpace, getRadii, getSpace } from '../../utils';
-import { AlignmentWrapperProps, CloseButtonProps } from './CloseButton.types';
+import {
+  AlignmentWrapperProps,
+  CloseButtonProps,
+  CloseButtonWrapperProps,
+} from './CloseButton.types';
 
 const AlignmentWrapper = styled.div<AlignmentWrapperProps>`
   && {
@@ -26,14 +30,15 @@ const IconWrapper = styled.div`
   border-radius: ${getRadii('default')};
 `;
 
-const CloseButtonWrapper = styled.button`
+const CloseButtonWrapper = styled.button<CloseButtonWrapperProps>`
   background-color: transparent;
   border: none;
   cursor: pointer;
   box-sizing: content-box;
   font-size: 1rem;
   padding: ${getSpace(SpaceSizes.sm)};
-  color: ${getColor('neutral.700')};
+  color: ${({ $isInverted, theme }) =>
+    getColor($isInverted ? 'neutral.0' : 'neutral.1000', { theme })};
 
   &:hover
     ${/* sc-selector */ IconWrapper},
@@ -57,6 +62,7 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
       onClose,
       ariaLabel = 'Close',
       marginCompensation = SpaceSizes.sm,
+      isInverted = false,
       ...props
     },
     ref,
@@ -64,6 +70,7 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
     <AlignmentWrapper $marginCompensation={marginCompensation}>
       <CloseButtonWrapper
         ref={ref}
+        $isInverted={isInverted}
         aria-label={ariaLabel}
         onClick={onClose}
         {...props}
@@ -80,6 +87,7 @@ CloseButton.propTypes = {
   onClose: PropTypes.func.isRequired,
   marginCompensation: PropTypes.oneOf(Object.values(SpaceSizes)),
   ariaLabel: PropTypes.string,
+  isInverted: PropTypes.bool,
 };
 
 export default CloseButton;

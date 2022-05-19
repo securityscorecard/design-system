@@ -17,11 +17,11 @@ import { SpaceSizes } from '../../theme';
 
 const BadgeNeutral = css`
   background-color: ${getColor('neutral.300')};
-  color: ${getColor('neutral.900')};
+  color: ${getColor('neutral.1000')};
 `;
 const BadgeSuccess = css`
   background-color: ${getColor('success.500')};
-  color: ${getColor('neutral.0')};
+  color: ${getColor('neutral.1000')};
 `;
 const BadgeInfo = css`
   background-color: ${getColor('info.500')};
@@ -29,7 +29,7 @@ const BadgeInfo = css`
 `;
 const BadgeWarn = css`
   background-color: ${getColor('warning.500')};
-  color: ${getColor('neutral.0')};
+  color: ${getColor('neutral.1000')};
 `;
 const BadgeError = css`
   background-color: ${getColor('error.500')};

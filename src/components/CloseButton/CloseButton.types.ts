@@ -17,4 +17,15 @@ export interface CloseButtonProps {
    * Accessible label for the close button
    */
   ariaLabel?: string;
+  /**
+   * option for semantic color backgrounds
+   */
+  isInverted?: boolean;
+}
+
+export interface CloseButtonWrapperProps {
+  /**
+   * option for semantic color backgrounds
+   */
+  $isInverted?: boolean;
 }

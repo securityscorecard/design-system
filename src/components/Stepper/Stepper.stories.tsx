@@ -76,6 +76,9 @@ export const Playground: Story<StepperProps> = (args) => (
 Playground.args = {
   activeStep: 0,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const StepTypes: Story<StepperProps> = (args) => (
   <Stepper {...args}>
