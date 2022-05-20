@@ -14,6 +14,7 @@ type StateReducerFn<D extends TableRecord> = (
 export const actions = {
   deselectAllRows: 'deselectAllRows',
   toggleSingleRowSelected: 'toggleSingleRowSelected',
+  setSelectedRows: 'setSelectedRows',
   cancelLoading: 'cancelLoading',
   preserveState: 'preserveState',
 };
@@ -41,7 +42,6 @@ export const tableActionsReducer =
           collectFetchParams(0, pageSize, sortBy);
         }, 0);
         return { ...newState, pageIndex: 0 };
-        break;
       case actions.deselectAllRows:
         return { ...newState, selectedRowIds: {} };
       case actions.toggleSingleRowSelected:
@@ -53,6 +53,8 @@ export const tableActionsReducer =
               : {}),
           } as TableState<D>['selectedRowIds'],
         };
+      case actions.setSelectedRows:
+        return { ...newState, selectedRowIds: action.ids };
       default:
         break;
     }
