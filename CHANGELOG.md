@@ -1,3 +1,11 @@
+# [1.0.0-alpha.179](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.178...v1.0.0-alpha.179) (2022-05-20)
+
+
+### Features
+
+* **Datatable:** allow columns control in batch module ([a77b00e](https://github.com/securityscorecard/design-system/commit/a77b00ecd16f5780d48e1c5edc5e05573a35ce1d))
+* **Datatable:** allow row selection reset via default prop ([9673dc3](https://github.com/securityscorecard/design-system/commit/9673dc3f287010936718d4546d8a17e4d74b139c))
+
 # [1.0.0-alpha.178](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.177...v1.0.0-alpha.178) (2022-05-19)
 
 
