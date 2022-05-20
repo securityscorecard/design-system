@@ -68,6 +68,7 @@ Playground.args = {
   dataSize: 1070000,
   hasSelection: defaultTableConfig.hasSelection,
   hasOnlyPerPageSelection: defaultTableConfig.hasOnlyPerPageSelection,
+  columns: { isButtonDisplayed: false },
 };
 
 export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
@@ -113,4 +114,12 @@ export const WithBatchActions: Story<BatchModuleProps> = (args) => (
 WithBatchActions.args = {
   ...Playground.args,
   actions: actionsMock,
+};
+
+export const WithColumns: Story<BatchModuleProps> = (args) => (
+  <BatchModule {...args} />
+);
+WithColumns.args = {
+  ...Playground.args,
+  columns: { isButtonDisplayed: true },
 };
