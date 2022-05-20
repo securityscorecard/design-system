@@ -132,6 +132,36 @@ WithDisabledControls.args = {
   isControlsEnabled: false,
 };
 
+export const WithDisabledControlsAndActiveColumns = DatatableTemplate.bind({});
+WithDisabledControlsAndActiveColumns.args = {
+  ...MinimalConfig.args,
+  isControlsEnabled: false,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    defaultIsColumnOrderingOpen: true,
+  },
+};
+
+export const WithDisabledControlsAndAppliedColumns = DatatableTemplate.bind({});
+WithDisabledControlsAndAppliedColumns.args = {
+  ...MinimalConfig.args,
+  isControlsEnabled: false,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    defaultIsColumnOrderingApplied: true,
+  },
+};
+
+export const WithDisabledControlsAndColumns = DatatableTemplate.bind({});
+WithDisabledControlsAndColumns.args = {
+  ...MinimalConfig.args,
+  isControlsEnabled: false,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    hasColumnOrdering: false,
+  },
+};
+
 export const WithOpenFiltering = DatatableTemplate.bind({});
 WithOpenFiltering.args = {
   ...MinimalConfig.args,
