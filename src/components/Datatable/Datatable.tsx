@@ -116,6 +116,14 @@ function Datatable<D extends Record<string, unknown>>({
       {isBatchModuleEnabled && (
         <BatchModule
           actions={batchActions}
+          columns={{
+            isButtonDisplayed:
+              !isControlsEnabled && restControlsConfig.hasColumnOrdering,
+            defaultIsColumnOrderingOpen:
+              restControlsConfig.defaultIsColumnOrderingOpen,
+            defaultIsColumnOrderingApplied:
+              restControlsConfig.defaultIsColumnOrderingApplied,
+          }}
           dataSize={dataSize}
           hasOnlyPerPageSelection={hasOnlyPerPageSelection}
           hasSelection={restTableConfig.hasSelection}

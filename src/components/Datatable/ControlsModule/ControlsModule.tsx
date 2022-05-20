@@ -7,7 +7,8 @@ import { getColor } from '../../../utils';
 import { SearchBar } from '../../forms/SearchBar';
 import { Filters } from '../../Filters';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { ControlButton } from './ControlButton';
+import { ColumnsControls } from '../components/ColumnsControls';
+import { ControlButton } from '../components/ControlButton';
 import { DatatableStore } from '../Datatable.store';
 import {
   ControlState,
@@ -18,7 +19,6 @@ import {
 } from './ControlsModule.types';
 import { Filter } from '../../Filters/Filters.types';
 import { ControlTypes } from './ControlsModule.enums';
-import { ColumnsControls } from './ColumnsControls';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Inline, Padbox } from '../../layout';
