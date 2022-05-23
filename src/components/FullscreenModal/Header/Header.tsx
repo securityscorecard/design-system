@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils';
 import { Col, Container, Inline, Row } from '../../layout';
-import { H2, H3 } from '../../typography';
+import { H2, H3 } from '../../typographyLegacy';
 import { useStickyHeader } from '../hooks/useStickyHeader';
 import { HeaderProps } from './Header.types';
 import { CloseButton } from '../../CloseButton';

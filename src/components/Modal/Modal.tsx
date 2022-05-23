@@ -9,7 +9,7 @@ import { ModalSizes } from './Modal.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Inline, Padbox } from '../layout';
-import { H3 } from '../typography';
+import { H3 } from '../typographyLegacy';
 import { Overlay } from '../_internal/BaseOverlay';
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';

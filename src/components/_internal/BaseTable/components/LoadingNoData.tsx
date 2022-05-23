@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { H4, Paragraph } from '../../../typography';
+import { H4, Paragraph } from '../../../typographyLegacy';
 import { Inline } from '../../../layout';
 import { Spinner } from '../../../Spinner';
-import { TextSizes } from '../../../typography/Text/Text.enums';
+import { TextSizes } from '../../../typographyLegacy/Text/Text.enums';
 import { SpaceSizes } from '../../../../theme';
 
 const LoadingNoData: React.FC = () => (

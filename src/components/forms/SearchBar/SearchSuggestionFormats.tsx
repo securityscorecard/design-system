@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Col, Row } from '../../layout';
-import { Strong } from '../../typography';
+import { Strong } from '../../typographyLegacy';
 import {
   renderSuggestionFunc,
   renderSuggestionWithFilterFunc,

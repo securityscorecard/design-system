@@ -5,7 +5,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { generateControl } from '../../../utils/tests/storybook';
 import { Inline } from '../../layout';
 import { Stack } from '../../layout/Stack';
-import { Paragraph } from '../../typography';
+import { Paragraph } from '../../typographyLegacy';
 import Switch from './Switch';
 import { SwitchSizes } from './Switch.enums';
 import { SwitchProps } from './Switch.types';

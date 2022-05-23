@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IconTypes } from '../../../theme/icons/icons.enums';
 import { Icon } from '../../Icon';
-import { Text } from '../../typography/Text';
+import { Text } from '../../typographyLegacy/Text';
 import { Spinner } from '../../Spinner';
 import { Padbox } from '../../layout';
 import {

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Text } from '../../typography';
-import { TextSizes } from '../../typography/Text/Text.enums';
+import { Text } from '../../typographyLegacy';
+import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { Padbox } from '../../layout';
 import { getColor, getRadii } from '../../../utils';
 import { SpaceSizes } from '../../../theme';

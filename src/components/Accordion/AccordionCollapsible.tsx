@@ -6,8 +6,8 @@ import { transparentize } from 'polished';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, getSpace, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
-import { Text } from '../typography';
-import { TextSizes } from '../typography/Text/Text.enums';
+import { Text } from '../typographyLegacy';
+import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import {
   AccordionCollapsibleProps,
   AccordionItemId,

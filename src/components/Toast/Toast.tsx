@@ -4,8 +4,8 @@ import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
 import { getColor, getRadii, pxToRem } from '../../utils';
-import { Paragraph } from '../typography';
-import { TextSizes } from '../typography/Text/Text.enums';
+import { Paragraph } from '../typographyLegacy';
+import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { ToastProps } from './Toast.types';
 import { SpaceSizes } from '../../theme/space.enums';
 import { Inline } from '../layout';

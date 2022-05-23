@@ -13,7 +13,7 @@ import { getColor, getSpace } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { Dropdown } from '../../Dropdown';
 import { SpaceSizes } from '../../../theme/space.enums';
-import { Text, TextEnums } from '../../typography';
+import { Text, TextEnums } from '../../typographyLegacy';
 import { Padbox, PadboxEnums } from '../../layout';
 
 export const List = styled.ul`

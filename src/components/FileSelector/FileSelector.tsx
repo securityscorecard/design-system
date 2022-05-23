@@ -10,8 +10,8 @@ import { Cluster, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
-import { Text } from '../typography';
-import { TextSizes, TextVariants } from '../typography/Text/Text.enums';
+import { Text } from '../typographyLegacy';
+import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { FileSelectorProps } from './FileSelector.types';
 import { FileSelectorSizes } from './FileSelector.enums';
 

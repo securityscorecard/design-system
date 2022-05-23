@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import { SpaceSizes } from '../../theme';
-import { Paragraph } from '../typography';
+import { Paragraph } from '../typographyLegacy';
 import { Stack } from '../layout';
 import Card from './Card';
 import CardHeader from './CardHeader';

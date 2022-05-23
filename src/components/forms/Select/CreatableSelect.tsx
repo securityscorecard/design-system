@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CreatableReactSelect from 'react-select/creatable';
 
-import { Strong } from '../../typography';
-import { TextVariants } from '../../typography/Text/Text.enums';
+import { Strong } from '../../typographyLegacy';
+import { TextVariants } from '../../typographyLegacy/Text/Text.enums';
 import { useSelectProps } from './useSelectProps';
 import Select from './Select';
 import { CreatableSelectProps } from './Select.types';
