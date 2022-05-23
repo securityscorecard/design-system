@@ -61,6 +61,9 @@ const ClusterTemplate: Story<ClusterProps> = (args) => (
 );
 
 export const Playground = ClusterTemplate.bind({});
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithGap = ClusterTemplate.bind({});
 WithGap.args = {

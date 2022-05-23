@@ -17,6 +17,9 @@ Playground.argTypes = {
   isInvalid: { control: 'boolean' },
   defaultIsRevealed: { control: 'boolean' },
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DefaultPassword: Story = () => (
   <Password aria-label="Password" defaultValue="C0mpl1c4t3dP4ssw0rd" />

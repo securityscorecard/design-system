@@ -25,6 +25,9 @@ export const Playground: Story<SegmentedToggleProps> = (args) => (
 Playground.args = {
   group: 'playground',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default: Story = () => (
   <SegmentedToggle group="default">

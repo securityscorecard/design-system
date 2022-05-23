@@ -37,6 +37,9 @@ Default.args = {
   onOpen: action('ColumnsOnOpen'),
   onReset: action('ColumnsOnReset'),
 };
+Default.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithCustomOrder: Story<ColumnsControlsProps> = ({
   isOpen,

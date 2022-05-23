@@ -58,6 +58,9 @@ export const Playground: Story<ParagraphProps> = (args) => (
 Playground.args = {
   children: lipsum,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DefaultParagraph: Story = () => (
   <>

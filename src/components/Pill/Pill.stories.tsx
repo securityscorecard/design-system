@@ -37,6 +37,9 @@ export const Playground: Story<PillProps> = (args) => <Pill {...args} />;
 Playground.args = {
   label: 'Pill label',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Variants = PillTemplate.bind({});
 Variants.args = {

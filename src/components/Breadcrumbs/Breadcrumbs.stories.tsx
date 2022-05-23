@@ -22,6 +22,9 @@ export const Playground: Story<BreadcrumbsProps> = () => {
     </Breadcrumbs>
   );
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithTwoItems: Story<BreadcrumbsProps> = () => {
   return (

@@ -90,6 +90,9 @@ Playground.args = {
     </>
   ),
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithCardMediaOnTop = CardTemplate.bind({});
 WithCardMediaOnTop.args = {

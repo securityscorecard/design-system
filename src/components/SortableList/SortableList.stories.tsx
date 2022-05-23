@@ -45,6 +45,9 @@ Playground.args = {
   onDragEnd: action('onDragEnd'),
   onDragCancel: action('onDragCancel'),
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithoutLabels = SortableListTemplate.bind({});
 WithoutLabels.args = {

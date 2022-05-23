@@ -42,6 +42,9 @@ const InlineTemplate: Story<InlineProps> = (args) => (
 );
 
 export const Playground = InlineTemplate.bind({});
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithGap = InlineTemplate.bind({});
 WithGap.args = {

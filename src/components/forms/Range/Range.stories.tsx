@@ -15,6 +15,9 @@ const RangeTemplate: Story<
 
 export const Playground = RangeTemplate.bind({});
 Playground.args = { min: 0, max: 100 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default = RangeTemplate.bind({});
 

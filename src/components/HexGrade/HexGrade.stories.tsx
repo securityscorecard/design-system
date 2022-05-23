@@ -28,6 +28,9 @@ export const Playground: Story<HexGradeProps> = (args) => {
 Playground.args = {
   variant: HexGradeVariants.solid,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const SolidHexGrades: Story = () => (
   <>

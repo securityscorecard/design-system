@@ -37,6 +37,9 @@ export const Playground: Story<StackProps> = (args) => (
   </div>
 );
 Playground.args = { gap: SpaceSizes.lg };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithGap: Story<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>

@@ -110,6 +110,9 @@ Playground.args = mergeDeepRight(defaultControlsConfig, {
   },
   onControlToggle: action('ControlToggleClick'),
 });
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithDisabledFiltering: Story<ControlsModuleProps<Data>> =
   ControlsModuleTemplate.bind({});

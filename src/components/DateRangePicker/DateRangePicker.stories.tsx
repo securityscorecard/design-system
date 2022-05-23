@@ -30,6 +30,9 @@ Playground.args = {
   maxDate: new Date('2021/03/28'),
   minDate: new Date('2021/03/01'),
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default: Story = () => {
   const [dateRange, handleChangeDateRange] = useState<BaseDateRange>({

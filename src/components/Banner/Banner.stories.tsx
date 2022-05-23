@@ -38,6 +38,9 @@ const BannerActions: ActionsArray = [
 export const Playground: Story<BannerProps> = (args) => (
   <Banner actions={[...BannerActions]} {...args} />
 );
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const InfoBanner: Story = () => (
   <Banner

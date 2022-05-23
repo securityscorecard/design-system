@@ -76,6 +76,9 @@ Playground.argTypes = {
   },
 };
 Playground.args = { selectedValue: 'inventory' };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const OnlyTabs: Story = () => (
   <Tabs selectedValue="overview" onSelectTab={action('Select Tab')}>

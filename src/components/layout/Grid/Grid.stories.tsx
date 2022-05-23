@@ -47,6 +47,9 @@ const GridTemplate: Story = (args) => (
 );
 
 export const Playground = GridTemplate.bind({});
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithGap = GridTemplate.bind({});
 WithGap.args = {

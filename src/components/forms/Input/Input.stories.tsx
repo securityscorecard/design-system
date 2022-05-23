@@ -33,6 +33,9 @@ export const Playground: Story<
   InputProps & React.InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Input {...args} aria-label="Input" />;
 Playground.args = { type: 'text' };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default: Story = () => <Input aria-label="Input" type="text" />;
 

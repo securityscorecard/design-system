@@ -39,6 +39,9 @@ Playground.argTypes = {
     control: { disable: true },
   },
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default: Story = () => (
   <RadioListItem group="default" itemId="item-1" value={1}>

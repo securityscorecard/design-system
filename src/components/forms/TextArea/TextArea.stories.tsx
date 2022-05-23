@@ -19,6 +19,9 @@ export default {
 export const Playground: Story<TextAreaProps> = (args) => (
   <TextArea {...args} aria-label="Text" />
 );
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default: Story = () => <TextArea aria-label="Text" />;
 

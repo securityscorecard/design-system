@@ -67,6 +67,9 @@ export const Default: Story<DropdownMenuProps> = (args) => (
 Default.args = {
   actions: subactionsMock as unknown as ActionKinds<React.MouseEvent[]>[],
 };
+Default.parameters = {
+  screenshot: { skip: true },
+};
 
 export const OpenedOnInit: Story<DropdownMenuProps> = (args) => (
   <Inline justify="center">

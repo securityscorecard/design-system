@@ -39,6 +39,9 @@ export const Playground: Story<ToastProps> = (args) => (
 Playground.args = {
   onClose: noop,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const LongToast: Story = () => (
   <Toast onClose={action('close-toast')}>

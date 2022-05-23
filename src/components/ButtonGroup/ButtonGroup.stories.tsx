@@ -26,6 +26,9 @@ export const Playground: Story<ButtonGroupProps> = (args) => (
     <Button>Button 3</Button>
   </ButtonGroup>
 );
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const ButtonGroupTemplate: Story<ButtonGroupProps> = (args) => (
   <Inline gap="lg">

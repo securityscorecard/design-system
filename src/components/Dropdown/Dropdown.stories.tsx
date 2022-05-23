@@ -71,6 +71,9 @@ Playground.args = {
   onClose: action('onClose'),
   onOpen: action('onOpen'),
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const OnHoverEvent = DropdownTemplate.bind({});
 OnHoverEvent.args = {

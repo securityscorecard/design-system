@@ -39,6 +39,9 @@ export const Playground: Story<NavItemProps> = (args) => (
     <NavItem to="#">Decayed</NavItem>
   </Nav>
 );
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const NavigationWithRelativeLinksDefault: Story = () => (
   <Nav>

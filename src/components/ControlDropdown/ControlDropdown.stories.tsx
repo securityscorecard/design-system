@@ -41,6 +41,9 @@ Playground.args = {
   onClose: action('OnClose'),
   onSubmit: action('OnSubmit'),
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithResetButton = ControlDropdownTemplate.bind({});
 WithResetButton.args = {

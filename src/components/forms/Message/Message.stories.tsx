@@ -29,6 +29,9 @@ Playground.args = {
   children: 'Form field message',
   variant: MessageVariants.note,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const NoteMessage: Story = () => <Note>Select your home country</Note>;
 export const ErrorMessage: Story = () => <Error>This field is required</Error>;

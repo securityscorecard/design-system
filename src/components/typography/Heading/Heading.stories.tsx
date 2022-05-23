@@ -33,6 +33,9 @@ export const Playground: Story<
 Playground.args = {
   children: 'Playground Heading',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const H0Story: Story = () => (
   <>

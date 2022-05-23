@@ -44,6 +44,9 @@ export const Playground = FileSelectorTemplate.bind({});
 Playground.parameters = {
   screenshot: { skip: true },
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 /* Sizes */
 export const FillSize = FileSelectorTemplate.bind({});

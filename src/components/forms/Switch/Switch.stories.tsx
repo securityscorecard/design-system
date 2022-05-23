@@ -27,6 +27,9 @@ Playground.args = {
   label: 'Public',
   switchId: 'playground',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Default: Story = () => <Switch switchId="default" />;
 
