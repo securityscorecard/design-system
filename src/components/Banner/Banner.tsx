@@ -14,7 +14,7 @@ import * as CustomPropTypes from '../../types/customPropTypes';
 import { BannerVariants } from './Banner.enums';
 import { Button } from '../Button';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
-import { Inline, Padbox } from '../layout';
+import { Inline, Padbox, Stack } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { Text as BaseText } from '../typographyLegacy';
@@ -30,17 +30,17 @@ import { Icon } from '../Icon';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const iconPxSizesVariants = {
-  [BannerVariants.info]: 24,
-  [BannerVariants.warn]: 21,
-  [BannerVariants.error]: 24,
-  [BannerVariants.success]: 24,
+  [BannerVariants.info]: 16,
+  [BannerVariants.warn]: 16,
+  [BannerVariants.error]: 16,
+  [BannerVariants.success]: 16,
 };
 
 const bgVariants = {
-  [BannerVariants.info]: ColorTypes.info50,
-  [BannerVariants.warn]: ColorTypes.warning50,
-  [BannerVariants.error]: ColorTypes.error50,
-  [BannerVariants.success]: ColorTypes.success50,
+  [BannerVariants.info]: ColorTypes.info700,
+  [BannerVariants.warn]: ColorTypes.warning500,
+  [BannerVariants.error]: ColorTypes.error500,
+  [BannerVariants.success]: ColorTypes.success500,
 };
 
 const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
@@ -51,15 +51,38 @@ const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
   background-color: ${({ $variant }) => getColor(bgVariants[$variant])};
 `;
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(Button)<{ $variant?: BannerProps['variant'] }>`
   height: inherit;
   padding: 0;
   line-height: ${getLineHeight('md')};
+  text-decoration: underline;
+  color: ${({ $variant }) =>
+    getColor(
+      $variant === 'info' || $variant === 'error'
+        ? 'neutral.0'
+        : 'neutral.1000',
+    )} !important;
 `;
 
-const Text = styled(BaseText)`
-  max-width: 125ch;
+const ContentWrapper = styled(Padbox)`
+  padding-left: 0rem;
 `;
+
+/* stylelint-disable */
+const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
+  max-width: 125ch;
+  color: ${({ $variant }) =>
+    getColor(
+      $variant === 'info' || $variant === 'error'
+        ? 'neutral.0'
+        : 'neutral.1000',
+    )};
+  display: -webkit-box;
+  overflow-y: auto;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+/* stylelint-enable */
 
 const Banner: React.FC<BannerProps> = ({
   children,
@@ -78,50 +101,49 @@ const Banner: React.FC<BannerProps> = ({
   ...props
 }) => {
   return (
-    <StyledPadbox
-      $variant={variant}
-      {...props}
-      className={cls(CLX_COMPONENT, className)}
-    >
+    <StyledPadbox $variant={variant} paddingSize={SpaceSizes.sm}>
       <BaseToastBanner
+        className={cls(CLX_COMPONENT, className)}
+        iconAlign="flex-start"
         iconPxSizesVariants={iconPxSizesVariants}
-        iconSize={24}
-        paddingSize={SpaceSizes.mdPlus}
-        paddingType={PaddingTypes.squish}
+        iconSize={16}
+        paddingSize={SpaceSizes.md}
+        paddingType={PaddingTypes.square}
         stretch={StretchEnum.end}
         variant={variant}
+        {...props}
       >
-        <Padbox paddingSize={SpaceSizes.md}>
-          <Inline
-            align="flex-start"
-            gap={SpaceSizes.mdPlus}
-            stretch={StretchEnum.start}
-          >
-            <Text as="div" size={TextSizes.md}>
-              {children}
-            </Text>
-            {isNonEmptyArray(actions) && (
-              <Inline gap={SpaceSizes.mdPlus}>
-                {actions.map((action) => (
-                  <StyledButton
-                    key={action.name}
-                    color={ButtonColors.primary}
-                    href={
-                      (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
-                        .href
-                    }
-                    name={action.name}
-                    to={
-                      (action as RelativeLinkActionKind<[React.MouseEvent]>).to
-                    }
-                    variant={ButtonVariants.text}
-                    onClick={action.onClick}
-                  >
-                    {action.label}
-                  </StyledButton>
-                ))}
-              </Inline>
-            )}
+        <ContentWrapper paddingSize={SpaceSizes.md}>
+          <Inline align="flex-start" gap={SpaceSizes.xl} stretch={1}>
+            <Stack align="center" gap={SpaceSizes.md}>
+              <Text $variant={variant} as="div" size={TextSizes.md}>
+                {children}
+              </Text>
+              {isNonEmptyArray(actions) && (
+                <Inline gap={SpaceSizes.mdPlus}>
+                  {actions.map((action) => (
+                    <StyledButton
+                      key={action.name}
+                      $variant={variant}
+                      color={ButtonColors.primary}
+                      href={
+                        (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
+                          .href
+                      }
+                      name={action.name}
+                      to={
+                        (action as RelativeLinkActionKind<[React.MouseEvent]>)
+                          .to
+                      }
+                      variant={ButtonVariants.text}
+                      onClick={action.onClick}
+                    >
+                      {action.label}
+                    </StyledButton>
+                  ))}
+                </Inline>
+              )}
+            </Stack>
             {__hasPagination && (
               <Inline gap={SpaceSizes.sm}>
                 <StyledButton
@@ -148,12 +170,13 @@ const Banner: React.FC<BannerProps> = ({
             {isDismissable && (
               <CloseButton
                 aria-label="Close banner"
+                isInverted={variant === 'error' || variant === 'info'}
                 marginCompensation={SpaceSizes.md}
                 onClose={onClose}
               />
             )}
           </Inline>
-        </Padbox>
+        </ContentWrapper>
       </BaseToastBanner>
     </StyledPadbox>
   );

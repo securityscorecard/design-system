@@ -15,7 +15,7 @@ import {
 } from './BaseToastBanner.types';
 
 export const baseToastBannerColorVariants = {
-  [BaseToastBannerVariants.info]: ColorTypes.info500,
+  [BaseToastBannerVariants.info]: ColorTypes.info700,
   [BaseToastBannerVariants.warn]: ColorTypes.warning500,
   [BaseToastBannerVariants.error]: ColorTypes.error500,
   [BaseToastBannerVariants.success]: ColorTypes.success500,
@@ -23,21 +23,24 @@ export const baseToastBannerColorVariants = {
 
 const iconVariants = {
   [BaseToastBannerVariants.info]: SSCIconNames.infoCircle,
-  [BaseToastBannerVariants.warn]: SSCIconNames.exclTriangleSolid,
-  [BaseToastBannerVariants.error]: SSCIconNames.errorSolid,
-  [BaseToastBannerVariants.success]: SSCIconNames.checkCircleSolid,
+  [BaseToastBannerVariants.warn]: SSCIconNames.errorCircle,
+  [BaseToastBannerVariants.error]: SSCIconNames.exclTriangleSolid,
+  [BaseToastBannerVariants.success]: SSCIconNames.check,
 };
 
 const IconPadbox = styled(Padbox)<{
   $variant?: BaseToastBannerProps['variant'];
+  $iconAlign: string;
 }>`
   background-color: ${({ $variant }) =>
     getColor(baseToastBannerColorVariants[$variant])};
   display: flex;
-  align-items: center;
+  align-items: ${({ $iconAlign }) => $iconAlign || 'center'};
 `;
 
-const IconWrapper = styled.div<{ $iconSize: number }>`
+const IconWrapper = styled.div<{
+  $iconSize: number;
+}>`
   display: flex;
   align-items: center;
   width: ${({ $iconSize }) => pxToRem($iconSize)};
@@ -48,7 +51,12 @@ const StyledIcon = styled(Icon)<{
   $variant?: BaseToastBannerWrapperProps['variant'];
   $iconPxSizesVariants: BaseToastBannerWrapperProps['iconPxSizesVariants'];
 }>`
-  color: ${getColor('neutral.0')};
+  color: ${({ $variant }) =>
+    getColor(
+      $variant === 'info' || $variant === 'error'
+        ? 'neutral.0'
+        : 'neutral.1000',
+    )};
   font-size: ${({ $variant, $iconPxSizesVariants }) =>
     pxToRem($iconPxSizesVariants[$variant])};
 `;
@@ -61,10 +69,12 @@ const BaseToastBanner: React.FC<BaseToastBannerWrapperProps> = ({
   stretch,
   iconSize,
   iconPxSizesVariants,
+  iconAlign = 'center',
 }) => (
   <Inline stretch={stretch}>
     {isNotNilOrEmpty(variant) && (
       <IconPadbox
+        $iconAlign={iconAlign}
         $variant={variant}
         paddingSize={paddingSize}
         paddingType={paddingType}

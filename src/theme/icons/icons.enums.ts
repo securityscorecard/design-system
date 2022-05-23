@@ -27,6 +27,7 @@ export const SSCIconNames = {
   infoCircle: 'info-circle',
   checkCircle: 'check-circle',
   error: 'error',
+  errorCircle: 'error-circle',
   exclTriangle: 'excl-triangle',
   ban: 'ban',
   lock: 'lock',
