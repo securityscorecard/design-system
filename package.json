@@ -49,6 +49,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@popperjs/core": "^2.11.4",
     "@react-aria/utils": "^3.12.0",
+    "@storybook/components": "^6.5.4",
     "@types/react": "16.14.5",
     "@types/styled-components": "^5.1.24",
     "@types/testing-library__jest-dom": "^5.14.3",
