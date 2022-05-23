@@ -54,6 +54,9 @@ Playground.args = {
   children: <Button size="lg">Button with tooltip</Button>,
   popup,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const Placements: Story = () => (
   <Stack gap={SpaceSizes.md}>

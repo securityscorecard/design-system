@@ -23,6 +23,9 @@ export const Playground: Story<AccordionProps> = (args) => (
   <Accordion {...args} />
 );
 Playground.args = { items };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DefaultAccordion: Story = () => (
   <Accordion items={items}>Accordion</Accordion>

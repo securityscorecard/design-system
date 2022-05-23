@@ -33,6 +33,9 @@ export const Playground: Story<TextProps & { children: React.ReactChild }> = (
 Playground.args = {
   children: 'Playground Text',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const LargeText: Story = () => <Text size={TextSizes.lg}>{lipsum}</Text>;
 

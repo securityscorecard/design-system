@@ -16,6 +16,9 @@ Playground.args = { kind: SignalKinds.high };
 Playground.argTypes = {
   kind: { ...generateControl('select', SignalKinds) },
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const SolidHexGrades: Story = () => (
   <>

@@ -23,6 +23,7 @@ export const Playground: Story<SingleDatePickerProps> = (args) => (
 );
 Playground.parameters = {
   chromatic: { disable: true },
+  screenshot: { skip: true },
 };
 
 export const Default: Story = () => {

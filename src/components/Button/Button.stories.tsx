@@ -45,6 +45,9 @@ Playground.args = {
   size: ButtonSizes.md,
   color: ButtonColors.primary,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const SolidButtons: Story = () => (
   <Stack gap={SpaceSizes.lg}>

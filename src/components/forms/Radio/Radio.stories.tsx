@@ -55,6 +55,9 @@ Playground.args = {
   label: labelMappingValues.labelAsString,
   defaultChecked: false,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DefaultRadio: Story = () => (
   <Radio

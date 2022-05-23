@@ -17,6 +17,9 @@ export const Playground: Story<SpinnerProps> = (args) => {
     </div>
   );
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DarkSpinner: Story = () => <Spinner dark />;
 

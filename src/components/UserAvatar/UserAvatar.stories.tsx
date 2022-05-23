@@ -31,6 +31,9 @@ Playground.args = {
   label: 'AB',
   size: UserAvatarSizes.md,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DifferentSizes: Story<UserAvatarProps> = () => (
   <Inline align="center" gap={SpaceSizes.lg}>

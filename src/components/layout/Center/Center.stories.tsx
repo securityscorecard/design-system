@@ -36,6 +36,9 @@ export const Playground = CenterTemplate.bind({});
 Playground.args = {
   maxWidth: 500,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithCenteredChildren = CenterTemplate.bind({});
 WithCenteredChildren.args = {

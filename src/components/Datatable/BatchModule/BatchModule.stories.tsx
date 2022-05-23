@@ -70,6 +70,9 @@ Playground.args = {
   hasOnlyPerPageSelection: defaultTableConfig.hasOnlyPerPageSelection,
   columns: { isButtonDisplayed: false },
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
   useEffect(() => {

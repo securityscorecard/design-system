@@ -46,6 +46,9 @@ Playground.args = {
   paddingType: PaddingTypes.square,
   paddingSize: SpaceSizes.none,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const SquareInset = PadboxTemplate.bind({});
 SquareInset.args = {

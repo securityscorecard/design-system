@@ -32,6 +32,9 @@ Playground.argTypes = {
   href: { control: { disable: true } },
   to: { control: { disable: true } },
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const PrimaryLink: Story = () => <Link href="#">Absolute Link</Link>;
 export const SecondaryLink: Story = () => (

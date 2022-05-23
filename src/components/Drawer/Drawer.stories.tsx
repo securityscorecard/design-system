@@ -95,6 +95,10 @@ export const Playground: Story<DrawerProps> = (args) => {
   );
 };
 
+Playground.parameters = {
+  screenshot: { skip: true },
+};
+
 export const WithTitleAndAdornment: Story = () => (
   <Drawer
     adornment={<Adornment />}

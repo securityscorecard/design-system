@@ -19,6 +19,9 @@ Playground.args = {
   children:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DefaultCollapsible: Story = () => (
   <Collapsible

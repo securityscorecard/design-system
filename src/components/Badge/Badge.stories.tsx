@@ -26,6 +26,9 @@ Playground.args = {
   count: 25,
   size: BadgeSizes.md,
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const SimpleBadge = BadgeTemplate.bind({});
 SimpleBadge.args = {

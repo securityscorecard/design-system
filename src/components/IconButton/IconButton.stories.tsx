@@ -23,6 +23,9 @@ Playground.args = {
   iconName: SSCIconNames.wrench,
   label: 'iconButton',
 };
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
 export const DefaultIconButton: Story<IconButtonProps> = () => (
   <IconButton iconName={SSCIconNames.wrench} label="Wrench" />
