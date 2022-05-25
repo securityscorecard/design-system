@@ -105,31 +105,6 @@ describe('Datatable/Table', () => {
 
     expect(screen.getAllByRole('checkbox')[0]).toBePartiallyChecked();
   });
-  it('should update selected rows when "defaultSelectedRows" is updated', () => {
-    const { rerender } = renderWithProviders(
-      <Table<Data>
-        data={data}
-        columns={columns}
-        dataSize={3}
-        defaultSelectedRows={{ 0: true, 1: true, 2: true }}
-        {...defaultTableConfig}
-      />,
-    );
-
-    expect(DatatableStore.getRawState().selectedIds).toHaveLength(3);
-
-    rerender(
-      <Table<Data>
-        data={data}
-        columns={columns}
-        dataSize={3}
-        defaultSelectedRows={{}}
-        {...defaultTableConfig}
-      />,
-    );
-
-    expect(DatatableStore.getRawState().selectedIds).toHaveLength(0);
-  });
   describe('given isMultiSelect prop is disabled', () => {
     it('should select only one row at time', () => {
       renderWithProviders(

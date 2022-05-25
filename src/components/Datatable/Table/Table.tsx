@@ -283,10 +283,6 @@ TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
   }, [selectedRowIds]);
 
   useEffect(() => {
-    dispatch({ type: actions.setSelectedRows, ids: defaultSelectedRows });
-  }, [dispatch, defaultSelectedRows]);
-
-  useEffect(() => {
     DatatableStore.update((s) => {
       s.pageIndex = defaultPageIndex;
       s.sortBy = defaultSortBy;
