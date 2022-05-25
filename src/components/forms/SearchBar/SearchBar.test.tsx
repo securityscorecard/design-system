@@ -92,4 +92,38 @@ describe('SearchBar', () => {
       screen.getByRole('button', { name: /suggestion 2/ }),
     ).toBeInTheDocument();
   });
+
+  it('should set query value when is externaly provided', () => {
+    const { rerender } = render(
+      <DSProvider>
+        <SearchBar value="query" onSearch={onSearch} onClear={onClear} />
+      </DSProvider>,
+    );
+
+    expect(screen.getByRole('textbox')).toHaveValue('query');
+
+    rerender(
+      <DSProvider>
+        <SearchBar value="" onSearch={onSearch} onClear={onClear} />
+      </DSProvider>,
+    );
+
+    expect(screen.getByRole('textbox')).toHaveValue('');
+  });
+
+  it('should call onSearch when value is changed', () => {
+    const { rerender } = render(
+      <DSProvider>
+        <SearchBar value="query" onSearch={onSearch} onClear={onClear} />
+      </DSProvider>,
+    );
+
+    rerender(
+      <DSProvider>
+        <SearchBar value="" onSearch={onSearch} onClear={onClear} />
+      </DSProvider>,
+    );
+
+    expect(onSearch).toHaveBeenCalled();
+  });
 });

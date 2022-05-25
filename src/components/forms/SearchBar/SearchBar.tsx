@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { isNonEmptyArray, isNonEmptyString } from 'ramda-adjunct';
+import {
+  isNonEmptyArray,
+  isNonEmptyString,
+  isNotUndefined,
+} from 'ramda-adjunct';
 
 import { createPadding, getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
@@ -157,7 +161,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   useEffect(() => {
-    if (isNonEmptyString(value)) {
+    if (isNotUndefined(value)) {
       setQuery(value);
       search(value);
     }
