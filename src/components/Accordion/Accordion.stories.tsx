@@ -38,3 +38,10 @@ export const DoesNotCollapsOnOpen: Story = () => (
   </Accordion>
 );
 DoesNotCollapsOnOpen.storyName = 'Does not collapse on open';
+
+export const NoCardAccordion: Story = () => (
+  <Accordion isCard={false} items={items}>
+    Accordion
+  </Accordion>
+);
+NoCardAccordion.storyName = 'Accordion without card wrapper';
