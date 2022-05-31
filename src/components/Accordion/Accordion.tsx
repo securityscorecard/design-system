@@ -19,6 +19,7 @@ const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
 const Accordion: React.FC<AccordionProps> = ({
   isCollapsedOnOpen = true,
   items,
+  isCard = true,
   ...props
 }) => {
   const [openIds, setOpenIds] = useState(pickOpen(items));
@@ -43,6 +44,7 @@ const Accordion: React.FC<AccordionProps> = ({
           key={`accordion-item-${id}`}
           handleHeaderClick={handleClick}
           id={id}
+          isCard={isCard}
           isOpen={includes(id, openIds)}
           title={title}
         >

@@ -20,25 +20,25 @@ import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 const Header = styled(Padbox)`
   cursor: pointer;
 
-  &:hover ${Text} {
-    color: ${getColor('primary.400')};
+  &:hover {
+    background-color: ${getColor('neutral.200')};
   }
 `;
 
-const Content = styled(Padbox)`
-  border-top: 1px dashed ${getColor('neutral.500')};
-`;
-
-const Container = styled.div<{ isOpen: boolean }>`
+const Container = styled.div<{ isOpen: boolean; isCard: boolean }>`
   ${({ isOpen }) =>
+    isOpen &&
+    css`
+      &:not(:last-child) {
+        margin-bottom: ${getSpace(SpaceSizes.md)};
+      }
+    `}
+  ${({ isOpen, isCard }) =>
+    isCard &&
     isOpen &&
     css`
       background: ${getColor('neutral.0')};
       box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
-
-      &:not(:last-child) {
-        margin-bottom: ${getSpace(SpaceSizes.md)};
-      }
     `}
 `;
 
@@ -59,6 +59,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   className,
   handleHeaderClick,
   isOpen = false,
+  isCard = true,
   id,
   title,
 }) => {
@@ -71,15 +72,15 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
     }
   };
   return (
-    <Container className={className} isOpen={isOpen}>
+    <Container className={className} isCard={isCard} isOpen={isOpen}>
       <Header
-        paddingSize={SpaceSizes.md}
+        paddingSize={SpaceSizes.sm}
         role="button"
         tabIndex={0}
         onClick={() => handleHeaderClick(id)}
         onKeyDown={(e) => handleKeyDown(e, id)}
       >
-        <Inline align="center" gap={SpaceSizes.md}>
+        <Inline align="center" gap={SpaceSizes.sm}>
           <IconWrapper paddingSize={SpaceSizes.xxs}>
             <StyledIcon
               name={SSCIconNames.chevronRight}
@@ -91,12 +92,9 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
         </Inline>
       </Header>
       {isOpen && (
-        <Content
-          paddingSize={SpaceSizes.lgPlus}
-          paddingType={PaddingTypes.squish}
-        >
+        <Padbox paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
           <Text size={TextSizes.md}>{children}</Text>
-        </Content>
+        </Padbox>
       )}
     </Container>
   );
