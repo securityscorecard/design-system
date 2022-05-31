@@ -1,3 +1,10 @@
+# [1.0.0-alpha.181](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.180...v1.0.0-alpha.181) (2022-05-31)
+
+
+### Features
+
+* **accordion:** allow to control accordion card wrapper ([cedcccd](https://github.com/securityscorecard/design-system/commit/cedcccd00ec71cbe62ae68dba4fd9935fd96ab64))
+
 # [1.0.0-alpha.180](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.179...v1.0.0-alpha.180) (2022-05-25)
 
 
