@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../../theme';
 import { getSpace } from '../../../utils';
-import { Text } from '../../typography';
-import { TextSizes } from '../../typography/Text/Text.enums';
+import { Text } from '../../typographyLegacy';
+import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 
 const LabelContainer = styled(Text)`
   display: block;

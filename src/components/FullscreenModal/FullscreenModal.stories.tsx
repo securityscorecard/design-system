@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { Inline } from '../layout';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
-import { Link, Paragraph } from '../typography';
+import { Link, Paragraph } from '../typographyLegacy';
 import FullscreenModal from './FullscreenModal';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
 import { Tooltip } from '../Tooltip';

@@ -9,9 +9,9 @@ import {
   getFontWeight,
   getLineHeight,
 } from '../../utils/helpers';
-import { Link } from '../typography/Link';
-import { Text, TextEnums } from '../typography/Text';
-import { TextSizes } from '../typography/Text/Text.enums';
+import { Link } from '../typographyLegacy/Link';
+import { Text, TextEnums } from '../typographyLegacy/Text';
+import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 
 const BreadcrumbLink = styled(Link)`
   font-weight: ${getFontWeight('regular')};

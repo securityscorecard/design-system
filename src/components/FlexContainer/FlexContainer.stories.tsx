@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import { H2, Paragraph } from '../typography';
+import { H2, Paragraph } from '../typographyLegacy';
 import FlexContainer from './FlexContainer';
 
 const lipsum = [

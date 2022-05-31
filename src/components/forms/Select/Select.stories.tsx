@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Select from './Select';
 import { SelectProps } from './Select.types';
 import { Inline, Stack } from '../../layout';
-import { Heading, Text } from '../../typography';
+import { Heading, Text } from '../../typographyLegacy';
 import { Pill } from '../../Pill';
 
 const options = [

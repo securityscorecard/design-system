@@ -9,7 +9,7 @@ import { SpaceSizes } from '../../theme';
 import { getColor, getRadii, getSpace } from '../../utils';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { Inline, InlineEnums, Stack } from '../layout';
-import { Heading, Text } from '../typography';
+import { Heading, Text } from '../typographyLegacy';
 import { Icon } from '../Icon';
 import { CardHeaderProps } from './Card.types';
 

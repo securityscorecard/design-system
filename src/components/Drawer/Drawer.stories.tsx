@@ -7,7 +7,7 @@ import Drawer from './Drawer';
 import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
 import { SemanticModal } from '../SemanticModal';
-import { H2, Link, Paragraph, Text } from '../typography';
+import { H2, Link, Paragraph, Text } from '../typographyLegacy';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button, ButtonEnums } from '../Button';
 import { Icon } from '../Icon';

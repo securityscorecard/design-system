@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
-import { H2, Paragraph } from '../typography';
+import { H2, Paragraph } from '../typographyLegacy';
 import { Inline, Padbox } from '../layout';
 import { Button, ButtonEnums } from '../Button';
 import { generateControl } from '../../utils/tests/storybook';

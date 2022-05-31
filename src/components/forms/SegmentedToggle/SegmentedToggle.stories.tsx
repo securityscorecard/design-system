@@ -5,7 +5,7 @@ import { SegmentedToggleProps } from './SegmentedToggle.types';
 import { SegmentedToggle, SegmentedToggleItem } from './index';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Stack } from '../../layout/Stack';
-import Text from '../../typography/Text/Text';
+import Text from '../../typographyLegacy/Text/Text';
 
 export default {
   title: 'components/forms/SegmentedToggle',

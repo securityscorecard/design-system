@@ -5,8 +5,8 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import { getColor, getSpace, pxToRem } from '../../utils';
 import { SpaceSizes } from '../../theme';
-import { Text } from '../typography/Text';
-import { TextSizes, TextVariants } from '../typography/Text/Text.enums';
+import { Text } from '../typographyLegacy/Text';
+import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { Inline, Padbox, Stack } from '../layout';
 import { StepProps } from './Stepper.types';
 import { StepperContext } from './Stepper.context';

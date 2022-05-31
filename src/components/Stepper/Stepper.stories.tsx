@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { generateControl } from '../../utils/tests/storybook';
 import { Button } from '../Button';
 import { Inline, Padbox, Stack } from '../layout';
-import { H2, Paragraph } from '../typography';
+import { H2, Paragraph } from '../typographyLegacy';
 import { StepperProps } from './Stepper.types';
 import Stepper from './Stepper';
 import Step from './Step';

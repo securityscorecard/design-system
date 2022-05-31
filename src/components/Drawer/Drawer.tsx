@@ -9,7 +9,7 @@ import { DrawerSizes } from './Drawer.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Inline, Padbox } from '../layout';
-import { H4 } from '../typography';
+import { H4 } from '../typographyLegacy';
 import { Overlay } from '../_internal/BaseOverlay';
 import { getColor, getDepth, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';

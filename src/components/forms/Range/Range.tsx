@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 
 import { getFormStyle, pxToRem } from '../../../utils';
-import { Text } from '../../typography';
+import { Text } from '../../typographyLegacy';
 import { Inline, Stack } from '../../layout';
 import { RangeInputProps, RangeProps } from './Range.types';
 

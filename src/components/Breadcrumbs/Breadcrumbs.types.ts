@@ -1,4 +1,4 @@
-import { LinkProps } from '../typography/Link/Link.types';
+import { LinkProps } from '../typographyLegacy/Link/Link.types';
 
 export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
   /**
