@@ -8,13 +8,13 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../utils';
-import { Button } from '../Button';
-import { ButtonVariants } from '../Button/Button.enums';
 import { NavItemProps } from './NavItem.types';
+import { BaseButton } from '../_internal/BaseButton';
+import { BaseButtonVariants } from '../_internal/BaseButton/BaseButton.enums';
 
-const NavItem = styled(Button)
+const NavItem = styled(BaseButton)
   .attrs(() => ({
-    variant: ButtonVariants.text,
+    variant: BaseButtonVariants.text,
   }))
   .withConfig<NavItemProps>({
     shouldForwardProp: (prop) => prop !== 'isActive',

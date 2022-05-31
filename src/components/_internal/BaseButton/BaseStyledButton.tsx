@@ -11,11 +11,11 @@ import {
   getFontWeight,
   getRadii,
   pxToRem,
-} from '../../utils';
-import { BaseStyledButtonProps } from './StyledButton.types';
-import { ButtonSizes, ButtonVariants } from './Button.enums';
-import { SpaceSizes } from '../../theme';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+} from '../../../utils';
+import { BaseStyledButtonProps } from './BaseStyledButton.types';
+import { SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
+import { BaseButtonSizes, BaseButtonVariants } from './BaseButton.enums';
 
 /*
  * BUTTON SIZES
@@ -47,9 +47,9 @@ const ButtonSmall = css<BaseStyledButtonProps>`
 `;
 
 const buttonSizes = {
-  [ButtonSizes.lg]: ButtonLarge,
-  [ButtonSizes.md]: ButtonMedium,
-  [ButtonSizes.sm]: ButtonSmall,
+  [BaseButtonSizes.lg]: ButtonLarge,
+  [BaseButtonSizes.md]: ButtonMedium,
+  [BaseButtonSizes.sm]: ButtonSmall,
 };
 
 /*
@@ -199,12 +199,12 @@ const ButtonText = css<BaseStyledButtonProps>`
 `;
 
 const buttonVariants = {
-  [ButtonVariants.solid]: ButtonSolid,
-  [ButtonVariants.outline]: ButtonOutline,
-  [ButtonVariants.text]: ButtonText,
+  [BaseButtonVariants.solid]: ButtonSolid,
+  [BaseButtonVariants.outline]: ButtonOutline,
+  [BaseButtonVariants.text]: ButtonText,
 };
 
-const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
+const BaseStyledButton = styled.button.withConfig<BaseStyledButtonProps>({
   shouldForwardProp: (property) =>
     !includes(property, [
       'size',
@@ -247,4 +247,4 @@ const StyledButton = styled.button.withConfig<BaseStyledButtonProps>({
   ${({ variant }) => buttonVariants[variant]};
 `;
 
-export default StyledButton;
+export default BaseStyledButton;

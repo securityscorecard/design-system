@@ -66,7 +66,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
               dark
             />
             <LoadingText>Loading</LoadingText>
-            <Button size="sm" variant="outline" onClick={onCancel}>
+            <Button variant="outline" onClick={onCancel}>
               Cancel
             </Button>
           </Inline>

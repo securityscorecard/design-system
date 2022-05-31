@@ -11,11 +11,7 @@ import {
   pxToRem,
 } from '../../utils/helpers';
 import { ButtonGroupProps, ButtonGroupWrapperProps } from './ButtonGroup.types';
-import {
-  ButtonColors,
-  ButtonSizes,
-  ButtonVariants,
-} from '../Button/Button.enums';
+import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 
 const GROUP_CLASSNAME = 'ds-grouped';
 
@@ -35,10 +31,8 @@ const ButtonOutline = css<ButtonGroupWrapperProps>`
   }
 `;
 const ButtonText = css<ButtonGroupWrapperProps>`
-  padding-left: ${({ $size, theme }) =>
-    getSpace($size === 'sm' ? 'sm' : 'md', { theme })};
-  padding-right: ${({ $size, theme }) =>
-    getSpace($size === 'sm' ? 'sm' : 'md', { theme })};
+  padding-left: ${getSpace('md')};
+  padding-right: ${getSpace('md')};
 
   &:after {
     background-color: ${(props) =>
@@ -76,8 +70,7 @@ const ButtonGroupWrapper = styled.div<ButtonGroupWrapperProps>`
     &::after {
       content: '';
       width: 1px;
-      height: ${({ $size, theme }) =>
-        pipe(getButtonHeight($size), pxToRem)({ theme })};
+      height: ${({ theme }) => pipe(getButtonHeight('md'), pxToRem)({ theme })};
       position: absolute;
       right: -1px;
       z-index: 1;
@@ -107,12 +100,7 @@ const ButtonGroup = React.forwardRef<
   React.PropsWithChildren<ButtonGroupProps>
 >(
   (
-    {
-      children,
-      variant = ButtonVariants.solid,
-      color = ButtonColors.primary,
-      size = ButtonSizes.md,
-    },
+    { children, variant = ButtonVariants.solid, color = ButtonColors.primary },
     ref,
   ) => {
     const buttonsArr: React.ReactNode[] = React.Children.toArray(children);
@@ -125,18 +113,12 @@ const ButtonGroup = React.forwardRef<
         ...button.props,
         className: `${button.props.className || ''} ${GROUP_CLASSNAME}`,
         variant,
-        size,
         color,
       });
     });
 
     return (
-      <ButtonGroupWrapper
-        ref={ref}
-        $color={color}
-        $size={size}
-        $variant={variant}
-      >
+      <ButtonGroupWrapper ref={ref} $color={color} $variant={variant}>
         {buttons}
       </ButtonGroupWrapper>
     );
@@ -145,7 +127,6 @@ const ButtonGroup = React.forwardRef<
 
 ButtonGroup.propTypes = {
   variant: PropTypes.oneOf(Object.values(ButtonVariants)),
-  size: PropTypes.oneOf(Object.values(ButtonSizes)),
   color: PropTypes.oneOf(Object.values(ButtonColors)),
 };
 

@@ -30,19 +30,9 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const ButtonGroupTemplate: Story<ButtonGroupProps> = (args) => (
+const ButtonGroupTemplate: Story<ButtonGroupProps> = (args) => (
   <Inline gap="lg">
-    <ButtonGroup {...args} size="lg">
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-      <Button>Button 3</Button>
-    </ButtonGroup>
-    <ButtonGroup {...args} size="md">
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-      <Button>Button 3</Button>
-    </ButtonGroup>
-    <ButtonGroup {...args} size="sm">
+    <ButtonGroup {...args}>
       <Button>Button 1</Button>
       <Button>Button 2</Button>
       <Button>Button 3</Button>
@@ -85,12 +75,7 @@ export const SplitButton: Story<ButtonGroupProps> = (args) => {
 
   return (
     <>
-      <ButtonGroup
-        {...args}
-        ref={setTriggerEl}
-        aria-label="split button"
-        size="lg"
-      >
+      <ButtonGroup {...args} ref={setTriggerEl} aria-label="split button">
         <Button>Primary action</Button>
         <Button
           aria-expanded={isDropdownOpen ? 'true' : undefined}

@@ -8,7 +8,7 @@ import { ColorTypes, SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { pxToRem } from '../../../../utils';
 import { Inline } from '../../../layout';
-import { Button } from '../../../Button';
+import { BaseButton } from '../../../_internal/BaseButton';
 import { ButtonVariants } from '../../../Button/Button.enums';
 import { Icon } from '../../../Icon';
 import { ActionPropType } from '../../types/Action.types';
@@ -22,7 +22,7 @@ import { BatchActionsProps } from './BatchActions.types';
 import { DatatableStore } from '../../Datatable.store';
 import { BatchActionArgs } from '../../Datatable.types';
 
-const BatchActionButton = styled(Button)`
+const BatchActionButton = styled(BaseButton)`
   padding: ${pxToRem(9.5, 16)};
   line-height: ${pxToRem(13)};
   height: ${pxToRem(32)};
