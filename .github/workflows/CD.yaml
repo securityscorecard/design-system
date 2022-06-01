@@ -219,7 +219,7 @@ jobs:
           node-version: '16'
 
       - name: Cache yarn pnp files
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         id: cache
         with:
           path: |
@@ -231,6 +231,7 @@ jobs:
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
 
