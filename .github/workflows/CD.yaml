@@ -21,15 +21,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -55,15 +56,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -89,15 +91,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -145,15 +148,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -179,15 +183,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -213,15 +218,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v1
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -249,15 +255,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -299,15 +306,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
       - name: Cache yarn pnp files
         uses: actions/cache@v3
         id: cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
