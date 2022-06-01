@@ -4037,6 +4037,7 @@ __metadata:
     "@storybook/react": ^6.5.6
     "@storybook/theming": ^6.5.6
     "@stylelint/postcss-css-in-js": ^0.37.2
+    "@testing-library/dom": ">=7.21.4"
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
     "@testing-library/react-hooks": ^7.0.2
@@ -7977,9 +7978,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/dom@npm:>=7":
+  version: 7.31.0
+  resolution: "@testing-library/dom@npm:7.31.0"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^4.2.0
+    aria-query: ^4.2.2
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.4
+    lz-string: ^1.4.4
+    pretty-format: ^26.6.2
+  checksum: 4214612561da33e4667ecb56d10ce8e2fe40b341b43802e9fb41790a807d962c2f4d45929647eef9a0b5787cb3a96a96d004f2ab1537a0e934975122bfdbda82
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:>=7, @testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.11.1":
   version: 8.16.0
   resolution: "@testing-library/dom@npm:8.16.0"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^4.2.0
+    aria-query: ^5.0.0
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.9
+    lz-string: ^1.4.4
+    pretty-format: ^27.0.2
+  checksum: 37aabbec872522bcb51106ecb700d9be601293e75445084b6cc195921db4b2d06d6bd4c67ad834174c129f2199c39aa540b6d17c296fcbd701dc99fd800afe36
+  languageName: node
+  linkType: hard
+
+"@testing-library/dom@npm:>=7.21.4, @testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.11.1":
+  version: 8.13.0
+  resolution: "@testing-library/dom@npm:8.13.0"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
