@@ -28,7 +28,6 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
           <Button
             key={action.name}
             href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
-            size={ButtonEnums.ButtonSizes.lg}
             to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
             variant={ButtonEnums.ButtonVariants.text}
             onClick={action.onClick}

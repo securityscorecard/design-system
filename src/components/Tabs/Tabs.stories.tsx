@@ -3,7 +3,6 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
-import { Button } from '../Button';
 import { Inline, Stack } from '../layout';
 import { Tab, Tabs } from '.';
 import { ColorTypes } from '../../theme/colors.enums';
@@ -186,8 +185,6 @@ export const SegmentedTabs: Story = () => (
         <Tab value="two">Two</Tab>
         <Tab value="three">Three</Tab>
       </Tabs>
-      {/* Just to illustrate height match with button size */}
-      <Button size="lg">Button</Button>
     </Inline>
 
     <Inline gap="md">
@@ -202,8 +199,6 @@ export const SegmentedTabs: Story = () => (
         <Tab value="two">Two</Tab>
         <Tab value="three">Three</Tab>
       </Tabs>
-      {/* Just to illustrate height match with button size */}
-      <Button size="md">Button</Button>
     </Inline>
   </Stack>
 );

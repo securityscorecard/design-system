@@ -32,13 +32,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
           color="primary"
           iconName="plus"
           margin={{ left: 0.5, right: 2 }}
-          size="md"
           variant="text"
           onClick={onAdd}
         >
           Add filter
         </AddFilterButton>
-        <Button color="primary" size="md" variant="text" onClick={onClearAll}>
+        <Button color="primary" variant="text" onClick={onClearAll}>
           Clear all
         </Button>
       </Inline>

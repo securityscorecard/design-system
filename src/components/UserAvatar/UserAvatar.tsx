@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { pipe, take, toUpper, trim } from 'ramda';
 import PropTypes from 'prop-types';
 
-import { Button } from '../Button';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
-import { Sizes, UserAvatarProps } from './UserAvatar.types';
+import { UserAvatarProps } from './UserAvatar.types';
 import {
   getButtonHeight,
   getFontSize,
@@ -15,9 +14,10 @@ import {
   pxToRem,
 } from '../../utils/helpers';
 import { UserAvatarSizes } from './UserAvatar.enums';
+import { BaseButton } from '../_internal/BaseButton';
 
 // TODO: migrate purple Brand when we change button colors.
-const StyledButton = styled(Button)<{ size: Sizes }>`
+const StyledButton = styled(BaseButton)`
   border-radius: ${getRadii('round')};
   font-size: ${getFontSize('md')};
   font-weight: ${getFontWeight('regular')};

@@ -7,7 +7,7 @@ import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
 import { H2, Paragraph } from '../typographyLegacy';
 import { Inline, Padbox } from '../layout';
-import { Button, ButtonEnums } from '../Button';
+import { Button } from '../Button';
 import { generateControl } from '../../utils/tests/storybook';
 import { SpaceSizes } from '../../index';
 
@@ -34,10 +34,8 @@ export default {
 function Footer() {
   return (
     <Inline gap={SpaceSizes.md} justify="flex-end">
-      <Button size={SpaceSizes.lg} variant="outline">
-        Cancel
-      </Button>
-      <Button size={SpaceSizes.lg}>Confirm</Button>
+      <Button variant="outline">Cancel</Button>
+      <Button>Confirm</Button>
     </Inline>
   );
 }
@@ -48,12 +46,7 @@ export const Playground: Story<ModalProps> = (args) => {
   return (
     <Padbox paddingSize={SpaceSizes.xxl}>
       <Inline justify="center">
-        <Button
-          size={ButtonEnums.ButtonSizes.lg}
-          onClick={() => setIsShown(!isShown)}
-        >
-          Open modal
-        </Button>
+        <Button onClick={() => setIsShown(!isShown)}>Open modal</Button>
         {isShown && (
           <Modal
             footer={<Footer />}

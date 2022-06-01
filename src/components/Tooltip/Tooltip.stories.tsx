@@ -51,7 +51,7 @@ export const Playground: Story<
   TooltipProps & { children: React.ReactChild }
 > = (args) => <Tooltip {...args} />;
 Playground.args = {
-  children: <Button size="lg">Button with tooltip</Button>,
+  children: <Button>Button with tooltip</Button>,
   popup,
 };
 Playground.parameters = {
@@ -65,36 +65,28 @@ export const Placements: Story = () => (
       popup={popup}
       defaultIsPopupDisplayed
     >
-      <Button size="md" isExpanded>
-        Top tooltip
-      </Button>
+      <Button isExpanded>Top tooltip</Button>
     </Tooltip>
     <Tooltip
       placement={PortalPlacements.right}
       popup={popup}
       defaultIsPopupDisplayed
     >
-      <Button size="md" isExpanded>
-        Right tooltip
-      </Button>
+      <Button isExpanded>Right tooltip</Button>
     </Tooltip>
     <Tooltip
       placement={PortalPlacements.left}
       popup={popup}
       defaultIsPopupDisplayed
     >
-      <Button size="md" isExpanded>
-        Left tooltip
-      </Button>
+      <Button isExpanded>Left tooltip</Button>
     </Tooltip>
     <Tooltip
       placement={PortalPlacements.bottom}
       popup={popup}
       defaultIsPopupDisplayed
     >
-      <Button size="md" isExpanded>
-        Bottom tooltip
-      </Button>
+      <Button isExpanded>Bottom tooltip</Button>
     </Tooltip>
   </Stack>
 );

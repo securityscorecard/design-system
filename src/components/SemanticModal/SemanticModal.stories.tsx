@@ -6,7 +6,7 @@ import SemanticModal from './SemanticModal';
 import { SemanticModalVariants } from './SemanticModal.enums';
 import { SemanticModalProps } from './SemanticModal.types';
 import { Inline, Padbox } from '../layout';
-import { Button, ButtonEnums } from '../Button';
+import { Button } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';
 import { SpaceSizes } from '../../theme';
 import { generateControl } from '../../utils/tests/storybook';
@@ -40,10 +40,7 @@ export const Playground: Story<SemanticModalProps> = (args) => {
   return (
     <Padbox paddingSize={SpaceSizes.xxl}>
       <Inline justify="center">
-        <Button
-          size={ButtonEnums.ButtonSizes.lg}
-          onClick={() => setIsShown(!isShown)}
-        >
+        <Button onClick={() => setIsShown(!isShown)}>
           Open semantic modal
         </Button>
       </Inline>
