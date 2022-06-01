@@ -35,7 +35,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Unit Tests
         run: yarn test
@@ -65,7 +65,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Types Check
         run: yarn types
@@ -95,7 +95,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Cache storybook build
         id: storybook-build-cache
@@ -147,7 +147,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Lint
         run: yarn lint
@@ -177,7 +177,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Lint
         run: yarn lint:css
@@ -206,7 +206,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Betterer
         run: yarn betterer:ci
@@ -239,7 +239,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Cache build
         id: library-build-cache
@@ -285,7 +285,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Cache build
         id: library-build-cache
