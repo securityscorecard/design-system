@@ -4,6 +4,7 @@
 ### Features
 
 * **SelectableGroup:** add SelectableGroup component ([2ba778a](https://github.com/securityscorecard/design-system/commit/2ba778acd0f0e3b1110f7ed3e7da1571eea0d424))
+* **Button:** remove size property from ([10850f](https://github.com/securityscorecard/design-system/commit/10850fed5d575e2457626c687191eef53939e4d8))
 
 # [1.0.0-alpha.181](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.180...v1.0.0-alpha.181) (2022-05-31)
 
