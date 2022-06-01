@@ -12,3 +12,4 @@ export * from './Switch';
 export * from './TextArea';
 export * from './SearchBar';
 export * from './SegmentedToggle';
+export * from './SelectableGroup';
