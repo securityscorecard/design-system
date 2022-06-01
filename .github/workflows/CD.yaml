@@ -21,11 +21,15 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -51,11 +55,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -81,11 +89,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -99,7 +111,7 @@ jobs:
 
       - name: Cache storybook build
         id: storybook-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: storybook-static
           key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
@@ -133,11 +145,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -163,11 +179,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -193,11 +213,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
         uses: actions/cache@v1
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -225,11 +249,15 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -243,7 +271,7 @@ jobs:
 
       - name: Cache build
         id: library-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: build
           key: node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
@@ -271,11 +299,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -289,7 +321,7 @@ jobs:
 
       - name: Cache build
         id: library-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: build
           key: node-16-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
