@@ -11,7 +11,12 @@ import {
   components,
 } from 'react-select';
 import { apply, assoc, both, includes, pick, pipe } from 'ramda';
-import { isEmptyString, isNonEmptyArray, isNotUndefined } from 'ramda-adjunct';
+import {
+  isEmptyString,
+  isNonEmptyArray,
+  isNotNilOrEmpty,
+  isNotUndefined,
+} from 'ramda-adjunct';
 import styled, { DefaultTheme } from 'styled-components';
 
 import { Checkbox } from '../Checkbox';
@@ -141,7 +146,7 @@ export const selectStyles: (
         ...(isDisabled && disabledStyles(DSTheme)),
       };
     },
-    valueContainer: (styles, { selectProps: { isMulti } }) => {
+    valueContainer: (styles, { selectProps: { isMulti, value } }) => {
       return {
         ...styles,
         display: 'flex',
@@ -149,7 +154,10 @@ export const selectStyles: (
         fontSize: DSTheme.typography.size.md,
         lineHeight: DSTheme.typography.lineHeight.md,
         padding: pxToRem(DSTheme.space.xs),
-        paddingLeft: !isMulti ? pxToRem(DSTheme.space.md) : undefined,
+        paddingLeft:
+          isMulti && isNotNilOrEmpty(value)
+            ? undefined
+            : pxToRem(DSTheme.space.md),
       };
     },
     singleValue: assoc('margin', 0),

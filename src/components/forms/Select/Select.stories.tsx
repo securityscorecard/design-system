@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import Select from './Select';
-import { SelectProps } from './Select.types';
+import { Option, SelectProps } from './Select.types';
 import { Inline, Stack } from '../../layout';
 import { Heading, Text } from '../../typographyLegacy';
 import { Pill } from '../../Pill';
@@ -360,4 +360,43 @@ export const CustomGroupLabel: Story<SelectProps<true>> = (args) => (
 );
 CustomGroupLabel.args = {
   ...MultiSelect.args,
+};
+
+const filterOptions = (inputValue: string) => {
+  return options.filter((i) =>
+    i.label.toLowerCase().includes(inputValue.toLowerCase()),
+  );
+};
+
+const promiseOptions = (inputValue: string): Promise<Option[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(filterOptions(inputValue));
+    }, 1000);
+  });
+
+export const AsyncSelect: Story<SelectProps<false>> = () => {
+  return (
+    <Stack gap="md">
+      <Select
+        loadOptions={promiseOptions}
+        placeholder="Single select (async)"
+        cacheOptions
+        defaultOptions
+        isAsync
+      />
+      <Select
+        loadOptions={promiseOptions}
+        placeholder="Multi select (async)"
+        cacheOptions
+        defaultOptions
+        isAsync
+        isMulti
+      />
+    </Stack>
+  );
+};
+
+AsyncSelect.parameters = {
+  screenshot: { skip: true },
 };

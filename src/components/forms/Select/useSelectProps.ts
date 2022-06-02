@@ -18,7 +18,7 @@ import {
 import { SelectProps } from './Select.types';
 
 export const useSelectProps = <IsMulti extends boolean>({
-  options,
+  options = [],
   placeholder = '',
   isInvalid = false,
   isDisabled = false,
