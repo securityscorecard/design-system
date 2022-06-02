@@ -5,6 +5,7 @@ import { GroupedOptionsType, OptionsType } from 'react-select';
 
 import { CreatableSelectProps, Option } from './Select.types';
 import CreatableSelect from './CreatableSelect';
+import { Stack } from '../../layout';
 
 export default {
   title: 'components/forms/Select/CreatableSelect',
@@ -92,6 +93,15 @@ OR
   },
 } as Meta;
 
+const options = [
+  { value: 'HR', label: 'Croatia', isDisabled: true },
+  { value: 'CU', label: 'Cuba' },
+  { value: 'CW', label: 'Cura\u00e7ao' },
+  { value: 'CY', label: 'Cyprus' },
+  { value: 'CZ', label: 'Czech Republic' },
+  { value: 'DK', label: 'Denmark' },
+];
+
 const CreatableSelectTemplate: Story<CreatableSelectProps<true>> = ({
   options: originalOptions,
   ...args
@@ -137,14 +147,7 @@ const CreatableSelectTemplate: Story<CreatableSelectProps<true>> = ({
 export const Playground = CreatableSelectTemplate.bind({});
 
 Playground.args = {
-  options: [
-    { value: 'HR', label: 'Croatia', isDisabled: true },
-    { value: 'CU', label: 'Cuba' },
-    { value: 'CW', label: 'Cura\u00e7ao' },
-    { value: 'CY', label: 'Cyprus' },
-    { value: 'CZ', label: 'Czech Republic' },
-    { value: 'DK', label: 'Denmark' },
-  ],
+  options,
   defaultIsMenuOpen: true,
   isClearable: true,
   isMulti: true,
@@ -157,4 +160,43 @@ export const SingleSelect = CreatableSelectTemplate.bind({});
 SingleSelect.args = {
   ...Playground.args,
   isMulti: false,
+};
+
+const filterOptions = (inputValue: string) => {
+  return options.filter((i) =>
+    i.label.toLowerCase().includes(inputValue.toLowerCase()),
+  );
+};
+
+const promiseOptions = (inputValue: string): Promise<Option[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(filterOptions(inputValue));
+    }, 1000);
+  });
+
+export const AsyncSelect: Story<CreatableSelectProps<false>> = () => {
+  return (
+    <Stack gap="md">
+      <CreatableSelect
+        loadOptions={promiseOptions}
+        placeholder="Single select (async)"
+        cacheOptions
+        defaultOptions
+        isAsync
+      />
+      <CreatableSelect
+        loadOptions={promiseOptions}
+        placeholder="Multi select (async)"
+        cacheOptions
+        defaultOptions
+        isAsync
+        isMulti
+      />
+    </Stack>
+  );
+};
+
+AsyncSelect.parameters = {
+  screenshot: { skip: true },
 };

@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactSelect from 'react-select';
+import AsyncReactSelect from 'react-select/async';
 import PropTypes from 'prop-types';
 
 import { ActionKindsPropType } from '../../../types/action.types';
 import { useSelectProps } from './useSelectProps';
 import { GroupPropType, OptionPropType, SelectProps } from './Select.types';
 
-function Select<IsMulti extends boolean = false>(
-  props: SelectProps<IsMulti>,
-): React.ReactElement {
+function Select<IsMulti extends boolean = false>({
+  isAsync = false,
+  ...props
+}: SelectProps<IsMulti>): React.ReactElement {
   const selectProps = useSelectProps<IsMulti>(props);
+
+  if (isAsync) {
+    return <AsyncReactSelect {...selectProps} />;
+  }
 
   return <ReactSelect {...selectProps} />;
 }
@@ -17,7 +23,7 @@ function Select<IsMulti extends boolean = false>(
 Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([OptionPropType, GroupPropType]),
-  ).isRequired,
+  ),
   placeholder: PropTypes.string,
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,
