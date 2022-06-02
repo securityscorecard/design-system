@@ -70,7 +70,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             $maxWidth={widthVariants[size]}
           >
             <Inline stretch={StretchEnum.start}>
-              <Padbox paddingSize={SpaceSizes.lg} paddingType="squish">
+              <Padbox paddingSize={SpaceSizes.lgPlus} paddingType="squish">
                 {isNotUndefined(title) && <Title>{title}</Title>}
               </Padbox>
               <CloseButton
@@ -79,13 +79,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
               />
             </Inline>
             <Content
-              paddingSize={SpaceSizes.lg}
+              paddingSize={SpaceSizes.lgPlus}
               paddingType={hasFooter ? 'squish' : 'square'}
             >
               {children}
             </Content>
             {hasFooter && (
-              <Footer paddingSize={SpaceSizes.lg} paddingType="squish">
+              <Footer paddingSize={SpaceSizes.lgPlus} paddingType="squish">
                 {footer}
               </Footer>
             )}
