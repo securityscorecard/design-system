@@ -31,6 +31,7 @@ export * from './Table';
 export * from './Tabs';
 export * from './Toast';
 export * from './Tooltip';
+export * from './WizardModal';
 export * from './layout';
 export * from './forms';
 export * from './typographyLegacy';
