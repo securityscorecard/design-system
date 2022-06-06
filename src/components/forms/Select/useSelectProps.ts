@@ -68,5 +68,6 @@ export const useSelectProps = <IsMulti extends boolean>({
     placeholder,
     styles: selectStyles(DSTheme),
     theme: reactSelectTheme(DSTheme),
+    classNamePrefix: 'ssc',
   };
 };
