@@ -8,6 +8,11 @@ export type ActionsArray = readonly [
   ActionKinds<[React.MouseEvent]>?,
 ];
 
-export interface BannerProps extends BaseToastBannerProps {
+type BaseBannerProps = Omit<BaseToastBannerProps, 'onClose'> & {
   actions?: ActionsArray;
-}
+};
+export type BannerProps = BaseBannerProps &
+  (
+    | { isDismissable?: true; onClose: React.MouseEventHandler }
+    | { isDismissable: false }
+  );

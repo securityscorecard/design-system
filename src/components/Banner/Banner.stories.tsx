@@ -116,3 +116,13 @@ export const ErrorBanner: Story = () => (
     Error Banner
   </Banner>
 );
+
+export const NonDismissableBanner: Story = () => (
+  <Banner
+    actions={[...BannerActions]}
+    isDismissable={false}
+    variant={BannerVariants.error}
+  >
+    Error Banner
+  </Banner>
+);

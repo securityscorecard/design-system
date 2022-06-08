@@ -61,7 +61,7 @@ const Banner: React.FC<BannerProps> = ({
   children,
   variant = BannerVariants.info,
   actions,
-  onClose,
+  ...props
 }) => (
   <StyledPadbox $variant={variant}>
     <BaseToastBanner
@@ -100,11 +100,13 @@ const Banner: React.FC<BannerProps> = ({
               ))}
             </Inline>
           )}
-          <CloseButton
-            aria-label="Close"
-            marginCompensation={SpaceSizes.md}
-            onClose={onClose}
-          />
+          {props.isDismissable && (
+            <CloseButton
+              aria-label="Close"
+              marginCompensation={SpaceSizes.md}
+              onClose={props.onClose}
+            />
+          )}
         </Inline>
       </Padbox>
     </BaseToastBanner>
@@ -113,8 +115,13 @@ const Banner: React.FC<BannerProps> = ({
 
 export default Banner;
 
+Banner.defaultProps = {
+  isDismissable: true,
+};
 Banner.propTypes = {
-  onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(Object.values(BannerVariants)),
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
+  // eslint-disable-next-line react/forbid-prop-types
+  isDismissable: PropTypes.any, // unfortunately there is no better way how to use descriminated unions in propTypes
+  onClose: PropTypes.func,
 };
