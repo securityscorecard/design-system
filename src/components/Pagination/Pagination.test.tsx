@@ -10,9 +10,9 @@ describe('Custom renderItem prop', () => {
   });
   it('should render custom item function instead of default one', () => {
     const customRenderItem = jest.fn();
-    customRenderItem.mockReturnValue(
-      <div data-testid="custom-pagination-item" />,
-    );
+    customRenderItem.mockImplementation((props) => (
+      <div key={props.key} data-testid="custom-pagination-item" />
+    ));
 
     renderWithProviders(
       <Pagination
@@ -37,6 +37,7 @@ describe('Custom renderItem prop', () => {
     customRenderItem.mockImplementation((props) => (
       <button
         type="button"
+        key={props.key}
         onClick={props.onClick}
         data-testid="custom-pagination-item"
       >
