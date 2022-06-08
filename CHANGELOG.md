@@ -1,3 +1,10 @@
+# [1.0.0-alpha.184](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.183...v1.0.0-alpha.184) (2022-06-08)
+
+
+### Features
+
+* **Banner:** allow non-dismissable banners ([4d08d4d](https://github.com/securityscorecard/design-system/commit/4d08d4d2b8ceecf836fe6170fc4f046628104693))
+
 # [1.0.0-alpha.183](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.182...v1.0.0-alpha.183) (2022-06-02)
 
 
