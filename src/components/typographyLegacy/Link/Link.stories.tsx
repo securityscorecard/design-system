@@ -42,11 +42,6 @@ export const SecondaryLink: Story = () => (
     Absolute Link
   </Link>
 );
-export const DangerLink: Story = () => (
-  <Link color={LinkColors.danger} href="#">
-    Absolute Link
-  </Link>
-);
 
 export const LinkInText: Story = () => (
   <>
@@ -58,7 +53,7 @@ export const LinkInText: Story = () => (
         Relative Link
       </Link>{' '}
       a commodo ornare. Aenean viverra diam{' '}
-      <Link color={LinkColors.danger} href="#">
+      <Link color={LinkColors.primary} href="#">
         sed ornare
       </Link>{' '}
       viverra. Aenean rutrum et mi quis dapibus.{' '}
@@ -73,7 +68,7 @@ export const LinkInText: Story = () => (
         Relative Link
       </Link>{' '}
       a commodo ornare. Aenean viverra diam{' '}
-      <Link color={LinkColors.danger} href="#">
+      <Link color={LinkColors.primary} href="#">
         sed ornare
       </Link>{' '}
       viverra. Aenean rutrum et mi quis dapibus.{' '}
@@ -88,7 +83,7 @@ export const LinkInText: Story = () => (
         Relative Link
       </Link>{' '}
       a commodo ornare. Aenean viverra diam{' '}
-      <Link color={LinkColors.danger} href="#">
+      <Link color={LinkColors.primary} href="#">
         sed ornare
       </Link>{' '}
       viverra. Aenean rutrum et mi quis dapibus.{' '}
