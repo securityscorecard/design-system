@@ -21,6 +21,7 @@ interface BaseSelectProps<IsMulti extends boolean = false> {
   defaultIsMenuOpen?: boolean;
   menuActions?: Array<ActionKinds<[MenuActionArgs<IsMulti>]>>;
   maxPillLabelLength?: number;
+  maxVisibleItem?: number;
   isMenuPositionRelative?: boolean;
   isInvalid?: boolean;
 }

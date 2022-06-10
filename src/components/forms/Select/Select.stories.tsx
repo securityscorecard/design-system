@@ -290,6 +290,25 @@ PillWrapping.args = {
   defaultValue: [longOptions[2], longOptions[1]],
 };
 
+export const MaxVisibleItem: Story<SelectProps<true>> = (args) => (
+  <div>
+    <Select {...args} />
+  </div>
+);
+MaxVisibleItem.args = {
+  ...MultiSelect.args,
+  options: longOptions,
+  defaultValue: [
+    longOptions[0],
+    longOptions[1],
+    longOptions[2],
+    longOptions[5],
+  ],
+  isClearable: false,
+  isMulti: true,
+  maxVisibleItem: 3,
+};
+
 const icons = {
   HR: 'https://flagicons.lipis.dev/flags/4x3/hr.svg',
   CU: 'https://flagicons.lipis.dev/flags/4x3/cu.svg',

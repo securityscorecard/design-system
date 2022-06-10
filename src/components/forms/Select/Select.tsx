@@ -38,6 +38,7 @@ Select.propTypes = {
   className: PropTypes.string,
   menuActions: PropTypes.arrayOf(ActionKindsPropType),
   maxPillLabelLength: PropTypes.number,
+  maxVisibleItem: PropTypes.number,
   isMenuPositionRelative: PropTypes.bool,
 };
 
