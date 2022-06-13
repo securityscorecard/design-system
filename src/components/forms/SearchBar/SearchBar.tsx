@@ -176,17 +176,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <SearchBarWrapper {...props}>
-      {isNonEmptyString(query) ? (
-        <SearchBarIcon
-          $position="start"
-          aria-label="Clear Search"
-          as={ClearSearchButton}
-          onClick={clearSearch}
-        >
-          <Icon
-            color={ColorTypes.neutral700}
-            name={SSCIconNames.times}
-            type={IconTypes.ssc}
+      {isSearching ? (
+        <SearchBarIcon $position="start">
+          <Spinner
+            borderWidth={2}
+            height={16}
+            verticalMargin={0}
+            width={16}
+            dark
           />
         </SearchBarIcon>
       ) : (
@@ -214,14 +211,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
       />
       {isInvalid && <Error>{errorMessage}</Error>}
 
-      {isSearching && (
-        <SearchBarIcon $position="end">
-          <Spinner
-            borderWidth={2}
-            height={16}
-            verticalMargin={0}
-            width={16}
-            dark
+      {isNonEmptyString(query) && (
+        <SearchBarIcon
+          $position="end"
+          aria-label="Clear Search"
+          as={ClearSearchButton}
+          onClick={clearSearch}
+        >
+          <Icon
+            color={ColorTypes.neutral700}
+            name={SSCIconNames.times}
+            type={IconTypes.ssc}
           />
         </SearchBarIcon>
       )}
