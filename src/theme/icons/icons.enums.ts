@@ -38,6 +38,8 @@ export const SSCIconNames = {
   certifiedBadgeSolid: 'certified-badge-solid',
   upload: 'upload',
   lightbulb: 'lightbulb',
+  chevronRightRegular: 'chevron-right-regular',
+  chevronLeftRegular: 'chevron-left-regular',
 } as const;
 
 export const IconTypes = {
