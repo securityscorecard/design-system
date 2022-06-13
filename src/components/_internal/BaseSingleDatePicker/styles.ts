@@ -216,9 +216,6 @@ export const datePickerStyles = css`
     bottom: ${pxToRem(-1)};
     border-top-color: ${getColor('neutral.400')};
   }
-  .react-datepicker-popper[data-placement^='bottom'] {
-    margin-top: ${pxToRem(10)};
-  }
   .react-datepicker-popper[data-placement='bottom-end']
     .react-datepicker__triangle,
   .react-datepicker-popper[data-placement='top-end']

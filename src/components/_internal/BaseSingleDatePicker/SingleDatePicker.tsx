@@ -39,6 +39,14 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
         minDate={minDate}
         open={defaultIsOpen}
         placeholderText={placeholder}
+        popperModifiers={[
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 10],
+            },
+          },
+        ]}
         renderCustomHeader={(props) => {
           return (
             <DatePickerCustomHeader
