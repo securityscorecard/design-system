@@ -50,12 +50,12 @@ export interface LinkColors {
   color: string;
   hoverColor: string;
   activeColor: string;
+  focusBgColor: string;
   decoration: string;
 }
 export interface Links {
   primary: LinkColors;
   secondary: LinkColors;
-  danger: LinkColors;
 }
 
 export interface Typography {

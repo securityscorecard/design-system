@@ -26,17 +26,18 @@ const StyledLink = styled.a`
   &:hover,
   &:not([href]):not([tabindex]):hover {
     color: ${getLinkStyle('hoverColor')};
-    text-decoration: none;
   }
 
   &:active,
   &:not([href]):not([tabindex]):active {
     color: ${getLinkStyle('activeColor')};
-    text-decoration: none;
   }
 
-  &:focus {
+  &:focus-visible,
+  &:not([href]):not([tabindex]):focus-visible {
     outline: 0;
+    color: ${getLinkStyle('hoverColor')};
+    background-color: ${getLinkStyle('focusBgColor')};
   }
 `;
 
