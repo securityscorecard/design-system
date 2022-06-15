@@ -18,14 +18,16 @@ const content = (
   </>
 );
 
-export const Playground: Story<CalloutProps> = (args) => <Callout {...args} />;
+const CalloutTemplate: Story<CalloutProps> = (args) => <Callout {...args} />;
+
+export const Playground = CalloutTemplate.bind({});
 Playground.args = {
-  icon: 'wrench',
   children: content,
 };
 Playground.parameters = { screenshot: { skip: true } };
 
-export const DefaultCallout: Story = () => (
-  <Callout icon="wrench">{content}</Callout>
-);
-DefaultCallout.storyName = 'DefaultCallout';
+export const DefaultCallout = CalloutTemplate.bind({});
+DefaultCallout.args = Playground.args;
+
+export const WithIcon = CalloutTemplate.bind({});
+WithIcon.args = { ...Playground.args, icon: 'wrench' };
