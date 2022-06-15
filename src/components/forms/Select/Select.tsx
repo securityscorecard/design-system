@@ -39,6 +39,7 @@ Select.propTypes = {
   menuActions: PropTypes.arrayOf(ActionKindsPropType),
   maxPillLabelLength: PropTypes.number,
   isMenuPositionRelative: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 Select.defaultProps = {
@@ -48,6 +49,7 @@ Select.defaultProps = {
   isClearable: false,
   maxPillLabelLength: 16,
   isMenuPositionRelative: false,
+  name: '',
 };
 
 export default Select;
