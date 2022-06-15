@@ -37,6 +37,7 @@ export const SSCIconNames = {
   certifiedBadge: 'certified-badge',
   certifiedBadgeSolid: 'certified-badge-solid',
   upload: 'upload',
+  lightbulb: 'lightbulb',
 } as const;
 
 export const IconTypes = {

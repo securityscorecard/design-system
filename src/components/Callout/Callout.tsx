@@ -31,7 +31,7 @@ const Container = styled(Padbox)`
 
 const Callout: React.FC<CalloutProps> = ({
   children,
-  icon = SSCIconNames.infoCircle,
+  icon = SSCIconNames.lightbulb,
 }) => (
   <Container paddingSize={SpaceSizes.md}>
     <Inline gap={SpaceSizes.md}>
