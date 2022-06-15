@@ -8,6 +8,7 @@ import { createLayout } from '../../theme/layout';
 import { createRadii } from '../../theme/radii';
 import { createSpace } from '../../theme/space';
 import { createTypography } from '../../theme/typography';
+import { tokens } from '../../theme/tokens';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -19,5 +20,6 @@ declare module 'styled-components' {
     depths: ReturnType<typeof createDepths>;
     space: ReturnType<typeof createSpace>;
     radii: ReturnType<typeof createRadii>;
+    tokens: typeof tokens;
   }
 }
