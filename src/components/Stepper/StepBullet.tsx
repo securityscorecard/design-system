@@ -25,6 +25,7 @@ const BulletWrapper = styled.span`
 const Bullet = styled.svg`
   width: ${pxToRem(bulletSize)};
   height: ${pxToRem(bulletSize)};
+  display: block;
 `;
 
 export const BulletCircle = styled.circle<BulletCircleProps>`
