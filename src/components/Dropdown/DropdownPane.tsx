@@ -122,6 +122,7 @@ const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(
         $isElevated={isElevated}
         $maxWidth={maxWidth}
         {...props}
+        data-testid="dropdown-pane"
       >
         <PaneContent
           paddingSize={contentPaddingSize}

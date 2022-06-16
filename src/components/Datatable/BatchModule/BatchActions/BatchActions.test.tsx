@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
@@ -93,7 +93,7 @@ describe('Datatable/BatchActions', () => {
       );
     });
 
-    it('should call onClick handler in dropdown action with correct parameters', () => {
+    it('should call onClick handler in dropdown action with correct parameters', async () => {
       renderWithProviders(<BatchActions actions={actions} />);
       act(() => {
         DatatableStore.update((s) => {
@@ -104,6 +104,10 @@ describe('Datatable/BatchActions', () => {
       fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
       fireEvent.click(screen.getByRole('button', { name: /Dropdown Item/i }));
 
+      await waitFor(() => {
+        expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
+      });
+
       expect(subactionFnMock).toBeCalledWith(
         selectedIds,
         true,
@@ -112,11 +116,14 @@ describe('Datatable/BatchActions', () => {
     });
   });
   describe('given subactions are defined', () => {
-    it('should create dropdown button', () => {
+    it('should create dropdown button', async () => {
       renderWithProviders(<BatchActions actions={actions} />);
 
       fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
 
+      await waitFor(() => {
+        expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+      });
       const dropdownItem = screen.getByRole('button', {
         name: /Dropdown Item/i,
       });

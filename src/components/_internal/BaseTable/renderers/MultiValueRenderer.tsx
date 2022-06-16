@@ -79,7 +79,7 @@ function MultiValueRenderer<D extends Record<string, unknown>>({
         <Tooltip
           popup={renderRestValue(multiValueDisplayLimit, formatter, values)}
         >
-          <div className="ds-multivalue-pill">
+          <div className="ds-multivalue-pill" data-testid="ds-multivalue-pill">
             + {valuesLength - multiValueDisplayLimit}
           </div>
         </Tooltip>

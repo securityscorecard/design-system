@@ -180,6 +180,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <SearchBarIcon $position="start">
           <Spinner
             borderWidth={2}
+            data-testid="searchbar-spinner"
             height={16}
             verticalMargin={0}
             width={16}

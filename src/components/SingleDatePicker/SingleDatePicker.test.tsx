@@ -1,12 +1,12 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import SingleDatePicker from './SingleDatePicker';
 
 describe('SingleDatePicker', () => {
-  it('should date picker popping up when user clicks on the input ', () => {
+  it('should date picker popping up when user clicks on the input ', async () => {
     const handleChangeDate = jest.fn();
 
     renderWithProviders(
@@ -20,10 +20,12 @@ describe('SingleDatePicker', () => {
 
     userEvent.click(screen.getByPlaceholderText('Enter date…'));
 
-    expect(screen.getByText(/March 2021/i)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/March 2021/i)).toBeInTheDocument();
+    });
   });
 
-  it('should call onchange when a date is picked', () => {
+  it('should call onchange when a date is picked', async () => {
     const handleChangeDate = jest.fn();
 
     renderWithProviders(
@@ -42,10 +44,12 @@ describe('SingleDatePicker', () => {
     // Click on a date
     fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
 
-    expect(handleChangeDate).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(handleChangeDate).toHaveBeenCalled();
+    });
   });
 
-  it('should determine selected date by input value', () => {
+  it('should determine selected date by input value', async () => {
     const handleChangeDate = jest.fn();
 
     renderWithProviders(
@@ -57,10 +61,12 @@ describe('SingleDatePicker', () => {
       />,
     );
 
-    expect(screen.getByDisplayValue('12 Mar, 2021')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByDisplayValue('12 Mar, 2021')).toBeInTheDocument();
+    });
   });
 
-  it('should change the default placeholder', () => {
+  it('should change the default placeholder', async () => {
     const handleChangeDate = jest.fn();
 
     renderWithProviders(
@@ -71,8 +77,10 @@ describe('SingleDatePicker', () => {
       />,
     );
 
-    expect(
-      screen.getByPlaceholderText('Custom placeholder'),
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByPlaceholderText('Custom placeholder'),
+      ).toBeInTheDocument();
+    });
   });
 });

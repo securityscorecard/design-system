@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
@@ -18,7 +18,7 @@ const checkInputClick = (
 };
 
 describe('DateRangePicker', () => {
-  it('should date range picker popping up when user clicks on the input ', () => {
+  it('should date range picker popping up when user clicks on the input ', async () => {
     const handleChangeDate = jest.fn();
 
     renderWithProviders(
@@ -32,11 +32,15 @@ describe('DateRangePicker', () => {
 
     userEvent.click(screen.getByPlaceholderText('Start date'));
 
-    expect(screen.getAllByText(/March 2021/i)[0]).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getAllByText(/March 2021/i)[0]).toBeInTheDocument();
+    });
 
     userEvent.click(screen.getByPlaceholderText('End date'));
 
-    expect(screen.getAllByText(/March 2021/i)[1]).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getAllByText(/March 2021/i)[1]).toBeInTheDocument();
+    });
   });
 
   it('should call onchange when a start date or end date is picked', () => {
@@ -105,7 +109,7 @@ describe('DateRangePicker', () => {
     ).toBeInTheDocument();
   });
 
-  it('should disable the dates outside the range', () => {
+  it('should disable the dates outside the range', async () => {
     const handleChangeDate = jest.fn();
 
     renderWithProviders(
@@ -124,9 +128,11 @@ describe('DateRangePicker', () => {
 
     userEvent.click(screen.getByPlaceholderText('Start date'));
 
-    const disabledButton = screen.getByLabelText(
-      'Not available Wednesday, March 3rd, 2021',
-    );
-    expect(disabledButton).toBeInTheDocument();
+    await waitFor(() => {
+      const disabledButton = screen.getByLabelText(
+        'Not available Wednesday, March 3rd, 2021',
+      );
+      expect(disabledButton).toBeInTheDocument();
+    });
   });
 });

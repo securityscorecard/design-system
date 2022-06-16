@@ -22,7 +22,7 @@ describe('Datatable/ControlsModule', () => {
   });
 
   describe('given filtering is enabled', () => {
-    it('should not display filters if no fields definition is provided', () => {
+    it('should not display filters if no fields definition is provided', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -41,12 +41,15 @@ describe('Datatable/ControlsModule', () => {
           }}
         />,
       );
+      await waitFor(() => {
+        expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
+      });
 
       expect(
         screen.queryByRole('button', { name: /Filters/i }),
       ).not.toBeInTheDocument();
     });
-    it('should open Filters component on Filters button click', () => {
+    it('should open Filters component on Filters button click', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -59,9 +62,13 @@ describe('Datatable/ControlsModule', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
 
+      await waitFor(() => {
+        expect(screen.getByTestId('filters')).toBeInTheDocument();
+      });
+
       expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
     });
-    it('should close Filters component on Filters button click when Filters are open', () => {
+    it('should close Filters component on Filters button click when Filters are open', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -74,10 +81,13 @@ describe('Datatable/ControlsModule', () => {
       );
 
       fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
+      await waitFor(() => {
+        expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
+      });
 
       expect(screen.queryByPlaceholderText('String')).not.toBeInTheDocument();
     });
-    it('should close Filters component on Column button click when Filters are open', () => {
+    it('should close Filters component on Column button click when Filters are open', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -90,22 +100,28 @@ describe('Datatable/ControlsModule', () => {
       );
 
       fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
+      await waitFor(() => {
+        expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
+      });
 
       expect(screen.queryByPlaceholderText('String')).not.toBeInTheDocument();
     });
   });
 
   describe('given column ordering is enabled', () => {
-    it('should open ColumnsControls component on Columns button click', () => {
+    it('should open ColumnsControls component on Columns button click', async () => {
       renderWithProviders(<ControlsModule {...defaultControlsConfig} />);
 
       fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
 
+      await waitFor(() => {
+        expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+      });
       expect(
         screen.getByRole('heading', { name: /Columns/i }),
       ).toBeInTheDocument();
     });
-    it('should close ColumnsControls component on Columns button click when ColumnsControls are open', () => {
+    it('should close ColumnsControls component on Columns button click when ColumnsControls are open', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -115,11 +131,14 @@ describe('Datatable/ControlsModule', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
 
+      await waitFor(() => {
+        expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
+      });
       expect(
         screen.queryByRole('heading', { name: /Columns/i }),
       ).not.toBeInTheDocument();
     });
-    it('should close ColumnsControls component on Filters button click when ColumnsControls are open', () => {
+    it('should close ColumnsControls component on Filters button click when ColumnsControls are open', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -133,6 +152,9 @@ describe('Datatable/ControlsModule', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
 
+      await waitFor(() => {
+        expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
+      });
       expect(
         screen.queryByRole('heading', { name: /Columns/i }),
       ).not.toBeInTheDocument();

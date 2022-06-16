@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity, join, pipe, slice } from 'ramda';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
@@ -15,7 +15,7 @@ describe('Datatable/MultiValueRenderer', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
-  it('should open tooltip with rest of values when hover on rest values pill', () => {
+  it('should open tooltip with rest of values when hover on rest values pill', async () => {
     const restValuesCount = values.length - numberOfVisibleItems;
     const restValuesText = pipe(
       slice(numberOfVisibleItems, values.length),
@@ -32,12 +32,14 @@ describe('Datatable/MultiValueRenderer', () => {
     fireEvent.mouseEnter(screen.getByText(`+ ${restValuesCount}`));
 
     /* eslint-disable testing-library/no-node-access */
-    expect(
-      document.getElementById(defaultDSContext.portalsContainerId),
-    ).toHaveTextContent(restValuesText);
+    await waitFor(() => {
+      expect(
+        document.getElementById(defaultDSContext.portalsContainerId),
+      ).toHaveTextContent(restValuesText);
+    });
     /* eslint-enable testing-library/no-node-access */
   });
-  it('should open tooltip when hover on value pill', () => {
+  it('should open tooltip when hover on value pill', async () => {
     renderWithProviders(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
@@ -50,9 +52,11 @@ describe('Datatable/MultiValueRenderer', () => {
     fireEvent.mouseEnter(screen.getByText(values[0]));
 
     /* eslint-disable testing-library/no-node-access */
-    expect(
-      document.getElementById(defaultDSContext.portalsContainerId),
-    ).toHaveTextContent(values[0]);
+    await waitFor(() => {
+      expect(
+        document.getElementById(defaultDSContext.portalsContainerId),
+      ).toHaveTextContent(values[0]);
+    });
     /* eslint-enable testing-library/no-node-access */
   });
   it('should call "tooltipComposer" with correct arguments for each visible value', () => {
@@ -102,7 +106,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(toComposerMock).toBeCalledWith(values[1], rowData);
     expect(toComposerMock).toBeCalledTimes(numberOfVisibleItems);
   });
-  it('should call "onClick" with correct arguments on value click', () => {
+  it('should call "onClick" with correct arguments on value click', async () => {
     const onClickMock = jest.fn();
     renderWithProviders(
       <MultiValueRenderer
@@ -137,7 +141,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(formatterMock).toBeCalledWith(shortValues[2], rowData);
     expect(formatterMock).toBeCalledTimes(shortValues.length);
   });
-  it('should format all values when "valueFormatter" is provided', () => {
+  it('should format all values when "valueFormatter" is provided', async () => {
     const numericValues = [1000, 2000, 3000];
     renderWithProviders(
       <MultiValueRenderer
@@ -153,9 +157,11 @@ describe('Datatable/MultiValueRenderer', () => {
       document.getElementsByClassName('ds-table-cell-multivalue')[0],
     ).toHaveTextContent('1K2K+ 1');
     fireEvent.mouseEnter(screen.getByText('+ 1'));
-    expect(
-      document.getElementById(defaultDSContext.portalsContainerId),
-    ).toHaveTextContent('3K');
+    await waitFor(() => {
+      expect(
+        document.getElementById(defaultDSContext.portalsContainerId),
+      ).toHaveTextContent('3K');
+    });
     /* eslint-enable testing-library/no-node-access */
   });
 });

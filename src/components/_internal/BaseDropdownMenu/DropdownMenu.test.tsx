@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
@@ -13,7 +13,7 @@ const actions = [
 ];
 
 describe('_internal/BaseDropdownMenu', () => {
-  it('should toggle pane on click', () => {
+  it('should toggle pane on click', async () => {
     renderWithProviders(
       <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
@@ -25,13 +25,22 @@ describe('_internal/BaseDropdownMenu', () => {
     });
     fireEvent.click(dropdownButton);
 
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
+
     const dropdownItem = screen.getByRole('button', { name: /Dropdown Item/i });
     expect(dropdownItem).toBeInTheDocument();
 
     fireEvent.click(dropdownButton);
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
+    });
+
     expect(dropdownItem).not.toBeInTheDocument();
   });
-  it('should close pane on click outside of Dropdown', () => {
+  it('should close pane on click outside of Dropdown', async () => {
     renderWithProviders(
       <DropdownMenu actions={actions} defaultIsOpen>
         <button type="button">Toggle Dropdown</button>
@@ -40,11 +49,15 @@ describe('_internal/BaseDropdownMenu', () => {
 
     fireEvent.click(document.body);
 
+    await waitFor(() => {
+      expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
+    });
+
     expect(
       screen.queryByRole('button', { name: /Dropdown Item/i }),
     ).not.toBeInTheDocument();
   });
-  it('should create "button" tag when "onClick" prop is provided', () => {
+  it('should create "button" tag when "onClick" prop is provided', async () => {
     renderWithProviders(
       <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
@@ -55,11 +68,14 @@ describe('_internal/BaseDropdownMenu', () => {
       name: /Toggle Dropdown/i,
     });
     fireEvent.click(dropdownButton);
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
 
     const dropdownItem = screen.getByRole('button', { name: /Dropdown Item/i });
     expect(dropdownItem.nodeName).toBe('BUTTON');
   });
-  it('should create "a" tag when "href" prop is provided', () => {
+  it('should create "a" tag when "href" prop is provided', async () => {
     const href = 'http://example.com';
     renderWithProviders(
       <DropdownMenu actions={[{ ...actions[0], href }]}>
@@ -72,11 +88,15 @@ describe('_internal/BaseDropdownMenu', () => {
     });
     fireEvent.click(dropdownButton);
 
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
+
     const dropdownItem = screen.getByRole('link', { name: /Dropdown Item/i });
     expect(dropdownItem.nodeName).toBe('A');
     expect(dropdownItem).toHaveAttribute('href', href);
   });
-  it('should create "RouterLink" component when "to" prop is provided', () => {
+  it('should create "RouterLink" component when "to" prop is provided', async () => {
     const to = {
       pathname: '/example',
       search: '?sort=name',
@@ -93,6 +113,10 @@ describe('_internal/BaseDropdownMenu', () => {
     });
     fireEvent.click(dropdownButton);
 
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
+
     const dropdownItem = screen.getByRole('link', { name: /Dropdown Item/i });
     expect(dropdownItem.nodeName).toBe('A');
     expect(dropdownItem).toHaveAttribute(
@@ -102,7 +126,7 @@ describe('_internal/BaseDropdownMenu', () => {
   });
 
   describe('given children is function', () => {
-    it('should pass isPaneDisplayed as a argument', () => {
+    it('should pass isPaneDisplayed as a argument', async () => {
       renderWithProviders(
         <DropdownMenu actions={actions}>
           {(isPaneDisplayed) => (
@@ -115,6 +139,10 @@ describe('_internal/BaseDropdownMenu', () => {
       expect(dropdownButton).toHaveTextContent('Show');
 
       fireEvent.click(dropdownButton);
+      await waitFor(() => {
+        expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+      });
+
       expect(dropdownButton).toHaveTextContent('Hide');
     });
   });
