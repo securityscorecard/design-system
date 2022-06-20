@@ -49,6 +49,12 @@ const BaseButton: React.FC<
     RouterLink = requireRouterLink();
   }
 
+  if (process.env.NODE_ENV !== 'production' && isDisabled && href) {
+    console.warn(
+      '"isDisabled" prop in <Button> component will be ignored if the "href" prop is defined',
+    );
+  }
+
   const domTag =
     as ??
     (isNotNull(href)

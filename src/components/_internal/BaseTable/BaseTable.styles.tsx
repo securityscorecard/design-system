@@ -127,6 +127,10 @@ export const StyledBaseTable = styled.table`
         border-radius: ${getRadii('default')};
         white-space: nowrap;
         margin: ${pxToRem(2)};
+
+        &.ds-table-cell-link {
+          text-decoration: none;
+        }
       }
     }
 

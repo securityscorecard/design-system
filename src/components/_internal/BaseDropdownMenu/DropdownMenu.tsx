@@ -24,7 +24,11 @@ export const List = styled.ul`
   padding-bottom: ${getSpace(SpaceSizes.sm)};
 `;
 
-export const DropdownLink = styled(Padbox)<DropdownLinkProps>`
+const FORWARD_PROP_EXCEPTIONS = ['paddingSize', 'paddingType'];
+
+export const DropdownLink = styled(Padbox).withConfig({
+  shouldForwardProp: (prop) => !FORWARD_PROP_EXCEPTIONS.includes(String(prop)),
+})<DropdownLinkProps>`
   width: 100%;
   display: block;
   cursor: pointer;

@@ -10,7 +10,7 @@ import {
   ValueContainerProps,
   components,
 } from 'react-select';
-import { apply, assoc, both, includes, pick, pipe } from 'ramda';
+import { append, apply, assoc, both, includes, pick, pipe, take } from 'ramda';
 import {
   isEmptyString,
   isNonEmptyArray,
@@ -405,24 +405,47 @@ export const Menu: ComponentType<MenuProps<OptionType, boolean>> = (props) => {
   );
 };
 
-export const ValueContainer: ComponentType<
-  ValueContainerProps<OptionType, boolean>
-> = (props) => {
-  const {
-    children,
-    selectProps: { isMulti },
-  } = props;
+export const ValueContainer: (
+  maxVisibleItem: number,
+  showAllItems: boolean,
+  handleOnClickShowAllItems: () => void,
+) => ComponentType<ValueContainerProps<OptionType, boolean>> =
+  (maxVisibleItem, showAllItems, handleOnClickShowAllItems) => (props) => {
+    const {
+      children,
+      selectProps: { isMulti },
+      getValue,
+    } = props;
 
-  if (isMulti) {
-    return (
-      <components.ValueContainer {...props}>
-        <Cluster gap={SpaceSizes.xs}>{children}</Cluster>
-      </components.ValueContainer>
-    );
-  }
+    if (isMulti) {
+      const qty = getValue().length;
+      const selectedValues = React.Children.toArray(children);
+      const pills =
+        isNotUndefined(maxVisibleItem) && !showAllItems && qty > maxVisibleItem
+          ? pipe(
+              take(maxVisibleItem),
+              append(
+                <PillWrapper
+                  key="more-items"
+                  size={PillSizes.sm}
+                  variant={PillVariants.solid}
+                  isClickable
+                  onClick={handleOnClickShowAllItems}
+                >
+                  + {qty - maxVisibleItem} more
+                </PillWrapper>,
+              ),
+            )(selectedValues)
+          : children;
+      return (
+        <components.ValueContainer {...props}>
+          <Cluster gap={SpaceSizes.xs}>{pills}</Cluster>
+        </components.ValueContainer>
+      );
+    }
 
-  return <components.ValueContainer {...props} />;
-};
+    return <components.ValueContainer {...props} />;
+  };
 
 const CreateNewOption = styled.div.attrs<{ variant: 'text'; color: 'primary' }>(
   () => ({
