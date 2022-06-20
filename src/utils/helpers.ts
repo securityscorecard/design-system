@@ -32,6 +32,7 @@ import { SpaceSize } from '../theme/space.types';
 import { Buttons } from '../theme/buttons.types';
 import { ColorTypes } from '../theme/colors.enums';
 import { createRadii } from '../theme/radii';
+import { tokens } from '../theme/tokens';
 
 export type Theme = {
   theme?: DefaultTheme;
@@ -165,6 +166,15 @@ export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
 export const getNegativeSpace = curry(
   (size: SpaceSize, { theme }: Theme): string =>
     pipe(path(['space', size]), negate, pxToRem)(theme),
+);
+
+// getToken:: String -> Token
+export const capitalize = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
+
+export const getToken = curry(
+  (name: keyof typeof tokens, { theme }: Theme): string =>
+    path(['tokens', name])(theme),
 );
 
 export const abbreviateNumber = (value: number): string =>
