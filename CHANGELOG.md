@@ -1,3 +1,10 @@
+# [1.0.0-alpha.187](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.186...v1.0.0-alpha.187) (2022-06-21)
+
+
+### Bug Fixes
+
+* **Stepper:** align label with bullet points ([a6a6d08](https://github.com/securityscorecard/design-system/commit/a6a6d0856945b07e564d6fc1328708e9cd30c1aa))
+
 # [1.0.0-alpha.186](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.185...v1.0.0-alpha.186) (2022-06-20)
 
 
