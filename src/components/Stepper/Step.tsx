@@ -15,6 +15,7 @@ import StepBullet, { BulletCircle, bulletSize } from './StepBullet';
 
 const StepLabel = styled(Text)`
   max-width: 26ch;
+  line-height: ${pxToRem(bulletSize)};
 `;
 
 const StepSummary = styled(Text)`
