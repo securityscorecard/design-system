@@ -219,7 +219,7 @@ const ButtonText = css<BaseStyledButtonProps>`
           &:not([href]):not([tabindex]):not(:disabled):active,
           &&&.active {
             color: ${getToken(`buttonText${capitalize(color)}TextActiveColor`)};
-            text-decoration: none;xx
+            text-decoration: none;
           }
         `}
 `;

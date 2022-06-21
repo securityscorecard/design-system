@@ -5,66 +5,66 @@ import { colors } from './colors';
  * component name, type, color, css property, selector, css value type (color, size)
  */
 
-export const tokens = {
+export const createTokens = (themeColors: typeof colors) => ({
   // Buttons
 
   // Solid
 
   // primary
-  buttonSolidPrimaryTextColor: colors.neutral[0],
-  buttonSolidPrimaryBgColor: colors.primary[500],
-  buttonSolidPrimaryBgHoverColor: colors.primary[400],
-  buttonSolidPrimaryBgActiveColor: colors.primary[700],
-  buttonSolidPrimaryOutlineFocusColor: colors.primary[200],
-  buttonSolidPrimaryBgDisabledColor: colors.primary[200],
+  buttonSolidPrimaryTextColor: themeColors.neutral[0],
+  buttonSolidPrimaryBgColor: themeColors.primary[500],
+  buttonSolidPrimaryBgHoverColor: themeColors.primary[400],
+  buttonSolidPrimaryBgActiveColor: themeColors.primary[700],
+  buttonSolidPrimaryOutlineFocusColor: themeColors.primary[200],
+  buttonSolidPrimaryBgDisabledColor: themeColors.primary[200],
 
   // danger
-  buttonSolidDangerTextColor: colors.neutral[0],
-  buttonSolidDangerBgColor: colors.error[500],
-  buttonSolidDangerBgHoverColor: colors.error[600],
-  buttonSolidDangerBgActiveColor: colors.error[700],
-  buttonSolidDangerOutlineFocusColor: colors.error[500],
-  buttonSolidDangerBgDisabledColor: colors.neutral[600],
+  buttonSolidDangerTextColor: themeColors.neutral[0],
+  buttonSolidDangerBgColor: themeColors.error[500],
+  buttonSolidDangerBgHoverColor: themeColors.error[600],
+  buttonSolidDangerBgActiveColor: themeColors.error[700],
+  buttonSolidDangerOutlineFocusColor: themeColors.error[500],
+  buttonSolidDangerBgDisabledColor: themeColors.neutral[600],
 
   // Outline
-  buttonOutlineTextColor: colors.primary[500],
+  buttonOutlineTextColor: themeColors.primary[500],
   buttonOutlineBgColor: 'transparent',
-  buttonOutlineBorderColor: colors.primary[500],
-  buttonOutlineBgHoverColor: colors.primary[50],
-  buttonOutlineTextActiveColor: colors.primary[700],
-  buttonOutlineBgActiveColor: colors.primary[50],
-  buttonOutlineBorderActiveColor: colors.primary[700],
-  buttonOutlineOutlineFocusColor: colors.primary[200],
-  buttonOutlineTextDisabledColor: colors.neutral[600],
-  buttonOutlineBgDisabledColor: colors.neutral[300],
-  buttonOutlineBorderDisabledColor: colors.neutral[400],
+  buttonOutlineBorderColor: themeColors.primary[500],
+  buttonOutlineBgHoverColor: themeColors.primary[50],
+  buttonOutlineTextActiveColor: themeColors.primary[700],
+  buttonOutlineBgActiveColor: themeColors.primary[50],
+  buttonOutlineBorderActiveColor: themeColors.primary[700],
+  buttonOutlineOutlineFocusColor: themeColors.primary[200],
+  buttonOutlineTextDisabledColor: themeColors.neutral[600],
+  buttonOutlineBgDisabledColor: themeColors.neutral[300],
+  buttonOutlineBorderDisabledColor: themeColors.neutral[400],
 
   // Text
 
   // primary
-  buttonTextPrimaryTextColor: colors.primary[500],
-  buttonTextPrimaryBorderColor: colors.primary[200],
-  buttonTextPrimaryTextHoverColor: colors.primary[400],
-  buttonTextPrimaryTextActiveColor: colors.primary[700],
-  buttonTextPrimaryBgFocusColor: colors.primary[50],
-  buttonTextPrimaryOutlineFocusColor: colors.primary[200],
-  buttonTextPrimaryTextDisabledColor: colors.neutral[600],
+  buttonTextPrimaryTextColor: themeColors.primary[500],
+  buttonTextPrimaryBorderColor: themeColors.primary[200],
+  buttonTextPrimaryTextHoverColor: themeColors.primary[400],
+  buttonTextPrimaryTextActiveColor: themeColors.primary[700],
+  buttonTextPrimaryBgFocusColor: themeColors.primary[50],
+  buttonTextPrimaryOutlineFocusColor: themeColors.primary[200],
+  buttonTextPrimaryTextDisabledColor: themeColors.neutral[600],
 
   // secondary
-  buttonTextSecondaryTextColor: colors.neutral[700],
-  buttonTextSecondaryBorderColor: colors.neutral[500],
-  buttonTextSecondaryTextHoverColor: colors.neutral[900],
-  buttonTextSecondaryTextActiveColor: colors.neutral[1000],
-  buttonTextSecondaryBgFocusColor: colors.neutral[50],
-  buttonTextSecondaryOutlineFocusColor: colors.neutral[500],
-  buttonTextSecondaryTextDisabledColor: colors.neutral[600],
+  buttonTextSecondaryTextColor: themeColors.neutral[700],
+  buttonTextSecondaryBorderColor: themeColors.neutral[500],
+  buttonTextSecondaryTextHoverColor: themeColors.neutral[900],
+  buttonTextSecondaryTextActiveColor: themeColors.neutral[1000],
+  buttonTextSecondaryBgFocusColor: themeColors.neutral[50],
+  buttonTextSecondaryOutlineFocusColor: themeColors.neutral[500],
+  buttonTextSecondaryTextDisabledColor: themeColors.neutral[600],
 
   // danger
-  buttonTextDangerTextColor: colors.error[500],
-  buttonTextDangerBorderColor: colors.error[100],
-  buttonTextDangerTextHoverColor: colors.error[600],
-  buttonTextDangerTextActiveColor: colors.error[700],
-  buttonTextDangerBgFocusColor: colors.error[50],
-  buttonTextDangerOutlineFocusColor: colors.error[500],
-  buttonTextDangerTextDisabledColor: colors.neutral[600],
-};
+  buttonTextDangerTextColor: themeColors.error[500],
+  buttonTextDangerBorderColor: themeColors.error[100],
+  buttonTextDangerTextHoverColor: themeColors.error[600],
+  buttonTextDangerTextActiveColor: themeColors.error[700],
+  buttonTextDangerBgFocusColor: themeColors.error[50],
+  buttonTextDangerOutlineFocusColor: themeColors.error[500],
+  buttonTextDangerTextDisabledColor: themeColors.neutral[600],
+});
