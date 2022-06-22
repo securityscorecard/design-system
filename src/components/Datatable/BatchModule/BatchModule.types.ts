@@ -6,7 +6,7 @@ export interface BatchModuleProps
     ElementCounterProps {
   columns: {
     isButtonDisplayed: boolean;
-    defaultIsColumnOrderingOpen?: boolean;
-    defaultIsColumnOrderingApplied?: boolean;
+    defaultIsColumnsControlsOpen?: boolean;
+    defaultIsColumnsControlsApplied?: boolean;
   };
 }

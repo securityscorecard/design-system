@@ -17,6 +17,7 @@ export type DatatableStoreShape<
   hasExclusiveSelection: boolean;
   shouldResetSelectedRows: boolean;
   columnOrder: IdType<D>[];
+  hiddenColumns: IdType<D>[];
   columns: Record<string, { label: string }>;
   isCanceled: boolean;
 };
@@ -35,6 +36,7 @@ export const datatableInitialState = {
   shouldResetSelectedRows: false,
   columns: {},
   columnOrder: [],
+  hiddenColumns: [],
 };
 
 export const DatatableStore = new Store<DatatableStoreShape>(

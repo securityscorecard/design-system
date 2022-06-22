@@ -20,7 +20,11 @@ export default {
 
 export const Default: Story<ColumnsControlsProps> = ({ isOpen, ...args }) => {
   const [isDefaultOpen, setIsDefaultOpen] = useState(isOpen);
-  useColumnsControls(action('onColumnOrderChange'), simpleColumns);
+  useColumnsControls(
+    action('onColumnOrderChange'),
+    action('onColumnVisibilityChange'),
+    simpleColumns,
+  );
 
   return (
     <ColumnsControls isOpen={isDefaultOpen} {...args}>
@@ -46,11 +50,12 @@ export const WithCustomOrder: Story<ColumnsControlsProps> = ({
   ...args
 }) => {
   const [isDefaultOpen, setIsDefaultOpen] = useState(isOpen);
-  useColumnsControls(action('onColumnOrderChange'), simpleColumns, [
-    'country',
-    'source',
-    'findingsCount',
-  ]);
+  useColumnsControls(
+    action('onColumnOrderChange'),
+    action('onColumnVisibilityChange'),
+    simpleColumns,
+    ['country', 'source', 'findingsCount'],
+  );
 
   return (
     <ColumnsControls isOpen={isDefaultOpen} {...args}>

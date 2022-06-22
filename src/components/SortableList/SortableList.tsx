@@ -4,6 +4,7 @@ import {
   DndContext,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   closestCenter,
   useSensor,
   useSensors,
@@ -16,15 +17,27 @@ import {
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { isNotUndefined } from 'ramda-adjunct';
+import styled from 'styled-components';
 
 import { Stack } from '../layout';
 import { SpaceSizes } from '../../theme';
 import SortableItem from './SortableItem';
 import { SortableListProps } from './SortableList.types';
+import { pxToRem } from '../../utils';
+
+const SortableListRoot = styled.div<{
+  $maxHeight: SortableListProps['maxHeight'];
+}>`
+  overflow: auto;
+  max-height: ${({ $maxHeight }) =>
+    isNotUndefined($maxHeight) && pxToRem($maxHeight)};
+`;
 
 const SortableList: React.FC<SortableListProps> = ({
   items,
   labels,
+  renderItem,
+  maxHeight,
   onOrderChange,
   onDragStart,
   onDragOver,
@@ -33,6 +46,7 @@ const SortableList: React.FC<SortableListProps> = ({
 }) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
+    useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
@@ -53,35 +67,44 @@ const SortableList: React.FC<SortableListProps> = ({
   };
 
   return (
-    <DndContext
-      collisionDetection={closestCenter}
-      modifiers={[restrictToVerticalAxis]}
-      sensors={sensors}
-      onDragCancel={onDragCancel}
-      onDragEnd={handleDragEnd}
-      onDragOver={onDragOver}
-      onDragStart={onDragStart}
-    >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <Stack
-          as="ul"
-          gap={SpaceSizes.xs}
-          style={{
-            paddingInlineStart: 0, // reset ul user agent styles, :facepalm: core-ui
-          }}
-        >
-          {items.map((item) => (
-            <SortableItem key={item} id={item} label={labels?.[item] || item} />
-          ))}
-        </Stack>
-      </SortableContext>
-    </DndContext>
+    <SortableListRoot $maxHeight={maxHeight}>
+      <DndContext
+        collisionDetection={closestCenter}
+        modifiers={[restrictToVerticalAxis]}
+        sensors={sensors}
+        onDragCancel={onDragCancel}
+        onDragEnd={handleDragEnd}
+        onDragOver={onDragOver}
+        onDragStart={onDragStart}
+      >
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          <Stack
+            as="ul"
+            gap={SpaceSizes.xs}
+            style={{
+              paddingInlineStart: 0, // reset ul user agent styles, :facepalm: core-ui
+            }}
+          >
+            {items.map((item) => (
+              <SortableItem
+                key={item}
+                id={item}
+                label={labels?.[item] || item}
+                renderItem={renderItem}
+              />
+            ))}
+          </Stack>
+        </SortableContext>
+      </DndContext>
+    </SortableListRoot>
   );
 };
 
 SortableList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string).isRequired,
   labels: PropTypes.shape({}),
+  maxHeight: PropTypes.number,
+  renderItem: PropTypes.func,
   onOrderChange: PropTypes.func,
   onDragStart: PropTypes.func,
   onDragOver: PropTypes.func,

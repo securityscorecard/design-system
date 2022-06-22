@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
+import { all, isEmpty, map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils';
@@ -54,14 +54,10 @@ function ControlsModule<D extends Record<string, unknown>>({
   filteringConfig,
   defaultIsFilteringOpen,
   defaultIsFilteringApplied,
-  // hasColumnVisibility,
-  // defaultIsColumnVisibilityOpen,
-  // defaultIsColumnVisibilityApplied,
-  // defaultHiddenColumns,
+  hasColumnsControls,
+  defaultIsColumnsControlsOpen,
+  defaultIsColumnsControlsApplied,
   isDataLoading,
-  hasColumnOrdering,
-  defaultIsColumnOrderingOpen,
-  defaultIsColumnOrderingApplied,
   // hasGrouping,
   // defaultIsGroupingOpen,
   // defaultIsGroupingApplied,
@@ -97,8 +93,8 @@ function ControlsModule<D extends Record<string, unknown>>({
     ),
     [ControlTypes.columns]: mergeControlState(
       prepareControlState([
-        /* defaultIsColumnVisibilityOpen || */ defaultIsColumnOrderingOpen,
-        /* defaultIsColumnVisibilityApplied || */ defaultIsColumnOrderingApplied,
+        defaultIsColumnsControlsOpen,
+        defaultIsColumnsControlsApplied,
       ]),
     ),
     // [ControlTypes.groups]: mergeControlState(
@@ -121,9 +117,7 @@ function ControlsModule<D extends Record<string, unknown>>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isToolbarEnabled = hasFiltering || hasColumnOrdering;
-  // hasColumnVisibility ||
-  // hasFiltering ||
+  const isToolbarEnabled = hasFiltering || hasColumnsControls;
   // hasGrouping ||
   // hasViews;
 
@@ -192,53 +186,67 @@ function ControlsModule<D extends Record<string, unknown>>({
     });
   };
 
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => ({ columnOrder: s.columnOrder, hiddenColumns: s.hiddenColumns }),
+      ({ columnOrder, hiddenColumns }) => {
+        if (all(isEmpty, [columnOrder, hiddenColumns])) {
+          applyControlStateChange(ControlTypes.columns, {
+            isApplied: false,
+          });
+        }
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <div>
       <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
         <Inline gap={SpaceSizes.lg} stretch="end">
           {isToolbarEnabled && (
             <Inline>
-              {
-                /* hasColumnVisibility || */ hasColumnOrdering && (
-                  <ColumnsControls
-                    isOpen={controlsState[ControlTypes.columns].isActive}
-                    onApply={(shouldApply) => {
-                      applyControlStateChange(ControlTypes.columns, {
-                        isApplied: shouldApply,
-                      });
-                      handleControlOnClick(
-                        ControlTypes.columns,
-                        controlsState[ControlTypes.columns].isActive,
-                      );
-                    }}
-                    onClose={() =>
+              {hasColumnsControls && (
+                <ColumnsControls
+                  isOpen={controlsState[ControlTypes.columns].isActive}
+                  onApply={(shouldApply) => {
+                    applyControlStateChange(ControlTypes.columns, {
+                      isApplied: shouldApply,
+                    });
+                    handleControlOnClick(
+                      ControlTypes.columns,
+                      controlsState[ControlTypes.columns].isActive,
+                    );
+                  }}
+                  onClose={() =>
+                    handleControlOnClick(
+                      ControlTypes.columns,
+                      controlsState[ControlTypes.columns].isActive,
+                    )
+                  }
+                  onOpen={() =>
+                    handleControlOnClick(
+                      ControlTypes.columns,
+                      controlsState[ControlTypes.columns].isActive,
+                    )
+                  }
+                >
+                  <ControlButton
+                    iconName={SSCIconNames.reorder}
+                    isActive={controlsState[ControlTypes.columns].isActive}
+                    isApplied={controlsState[ControlTypes.columns].isApplied}
+                    label="Columns"
+                    onClick={() =>
                       handleControlOnClick(
                         ControlTypes.columns,
                         controlsState[ControlTypes.columns].isActive,
                       )
                     }
-                    onOpen={() =>
-                      handleControlOnClick(
-                        ControlTypes.columns,
-                        controlsState[ControlTypes.columns].isActive,
-                      )
-                    }
-                  >
-                    <ControlButton
-                      iconName={SSCIconNames.reorder}
-                      isActive={controlsState[ControlTypes.columns].isActive}
-                      isApplied={controlsState[ControlTypes.columns].isApplied}
-                      label="Columns"
-                      onClick={() =>
-                        handleControlOnClick(
-                          ControlTypes.columns,
-                          controlsState[ControlTypes.columns].isActive,
-                        )
-                      }
-                    />
-                  </ColumnsControls>
-                )
-              }
+                  />
+                </ColumnsControls>
+              )}
               {shouldShowFiltering && (
                 <ControlButton
                   iconName={SSCIconNames.filter}

@@ -59,7 +59,11 @@ function Datatable<D extends Record<string, unknown>>({
 
   const isCancelDisabled = isUndefined(onCancelLoading);
 
-  const { onColumnOrderChange, ...restControlsConfig } = useDeepCompareMemo(
+  const {
+    onColumnOrderChange,
+    onColumnVisibilityChange,
+    ...restControlsConfig
+  } = useDeepCompareMemo(
     () =>
       mergeControlsConfig(
         assocPath(
@@ -83,8 +87,10 @@ function Datatable<D extends Record<string, unknown>>({
   useTableRowSelect<D>(onSelect, defaultSelectedRowIds);
   useColumnsControls(
     onColumnOrderChange,
+    onColumnVisibilityChange,
     columns,
     restTableConfig.defaultColumnOrder,
+    restTableConfig.defaultHiddenColumns,
   );
 
   const handleCancelLoading = isCancelDisabled
@@ -118,11 +124,11 @@ function Datatable<D extends Record<string, unknown>>({
           actions={batchActions}
           columns={{
             isButtonDisplayed:
-              !isControlsEnabled && restControlsConfig.hasColumnOrdering,
-            defaultIsColumnOrderingOpen:
-              restControlsConfig.defaultIsColumnOrderingOpen,
-            defaultIsColumnOrderingApplied:
-              restControlsConfig.defaultIsColumnOrderingApplied,
+              !isControlsEnabled && restControlsConfig.hasColumnsControls,
+            defaultIsColumnsControlsOpen:
+              restControlsConfig.defaultIsColumnsControlsOpen,
+            defaultIsColumnsControlsApplied:
+              restControlsConfig.defaultIsColumnsControlsApplied,
           }}
           dataSize={dataSize}
           hasOnlyPerPageSelection={hasOnlyPerPageSelection}
@@ -176,10 +182,10 @@ Datatable.propTypes = {
     }),
     defaultIsFilteringOpen: PropTypes.bool,
     defaultIsFilteringApplied: PropTypes.bool,
-    hasColumnOrdering: PropTypes.bool,
+    hasColumnsControls: PropTypes.bool,
     onColumnOrderChange: PropTypes.func,
-    defaultIsColumnOrderingOpen: PropTypes.bool,
-    defaultIsColumnOrderingApplied: PropTypes.bool,
+    defaultIsColumnsControlsOpen: PropTypes.bool,
+    defaultIsColumnsControlsApplied: PropTypes.bool,
   }),
   tableConfig: PropTypes.exact(TableConfigPropType),
   pageButtonsCount: PropTypes.number,
