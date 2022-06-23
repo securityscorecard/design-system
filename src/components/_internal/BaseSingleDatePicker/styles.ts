@@ -90,7 +90,7 @@ export const datePickerStyles = css`
     font-weight: ${getFontWeight('bold')};
     color: ${getColor('neutral.0')};
   }
-  .react-datepicker__day:focus {
+  .react-datepicker__day:focus-visible {
     background-color: ${getColor('primary.600')};
     border-radius: 4px;
     font-weight: ${getFontWeight('bold')};
@@ -99,7 +99,7 @@ export const datePickerStyles = css`
     outline-offset: 2px;
     position: relative;
   }
-  .react-datepicker__day--in-range:focus {
+  .react-datepicker__day--in-range:focus-visible {
     outline: 2px solid ${getColor('primary.200')};
     outline-offset: 2px;
     position: relative;
@@ -235,9 +235,9 @@ export const singleDatePickerStyles = css`
     color: ${getColor('neutral.0')};
     border-radius: ${getRadii('default')};
   }
-  .react-datepicker__day--range-start:focus,
-  .react-datepicker__day--range-end:focus,
-  .react-datepicker__day--selected:focus {
+  .react-datepicker__day--range-start:focus-visible,
+  .react-datepicker__day--range-end:focus-visible,
+  .react-datepicker__day--selected:focus-visible {
     background-color: ${getColor('primary.600')};
     outline: 2px solid ${getColor('primary.200')};
     outline-offset: 2px;
