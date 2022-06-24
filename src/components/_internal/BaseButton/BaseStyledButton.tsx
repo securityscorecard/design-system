@@ -257,7 +257,7 @@ const BaseStyledButton = styled.button.withConfig<BaseStyledButtonProps>({
 
   ${({ margin }) => createMarginSpacing(margin)};
 
-  &:focus-visible {
+  &:focus {
     outline: 0;
   }
 
