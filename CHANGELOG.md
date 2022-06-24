@@ -1,3 +1,20 @@
+# [1.0.0-alpha.188](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.187...v1.0.0-alpha.188) (2022-06-24)
+
+
+### Bug Fixes
+
+* **Button:** change focus state behaviour ([07abd1d](https://github.com/securityscorecard/design-system/commit/07abd1d38d31fee73a195515a3e4669582a73027))
+
+
+### Features
+
+* **BannersManager:** add banners management system ([737628f](https://github.com/securityscorecard/design-system/commit/737628f5856e47f6082fb37138112f00bddef68c))
+* **colors:** update primary colors ([f120837](https://github.com/securityscorecard/design-system/commit/f120837fa4c4f8e427cc84a73ed30165f302d1e7))
+* **getToken:** add getToken helper function ([a11a242](https://github.com/securityscorecard/design-system/commit/a11a2421835c5d3d4d7a18f9e9ca3220b504d3c3))
+* **tokens:** add DS tokens ([fc250ee](https://github.com/securityscorecard/design-system/commit/fc250eebba648a4b9857b29560f21c26ab563868))
+* **tokens:** change tokens to accept theme colors ([0418138](https://github.com/securityscorecard/design-system/commit/04181389f6ee809ac13b73081c93c1fb990e6e8b))
+* **tokens:** use tokens in baseStyledButton ([0692bee](https://github.com/securityscorecard/design-system/commit/0692beeb13ed7191b5fe3e8329c9fae3d76a86e8))
+
 # [1.0.0-alpha.187](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.186...v1.0.0-alpha.187) (2022-06-21)
 
 
