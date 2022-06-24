@@ -1,3 +1,10 @@
+# [1.0.0-alpha.189](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.188...v1.0.0-alpha.189) (2022-06-24)
+
+
+### Bug Fixes
+
+* **Button:** fix default focus state ([a212c54](https://github.com/securityscorecard/design-system/commit/a212c54b8172bd9f18457b7429ae4f932477bffe))
+
 # [1.0.0-alpha.188](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.187...v1.0.0-alpha.188) (2022-06-24)
 
 
