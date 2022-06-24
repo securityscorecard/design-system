@@ -11,8 +11,15 @@ export type ActionsArray = readonly [
 type BaseBannerProps = Omit<BaseToastBannerProps, 'onClose'> & {
   actions?: ActionsArray;
 };
-export type BannerProps = BaseBannerProps &
-  (
-    | { isDismissable?: true; onClose: React.MouseEventHandler }
-    | { isDismissable: false }
-  );
+
+export type BannerProps = BaseBannerProps & {
+  isDismissable?: boolean;
+  onClose?: React.MouseEventHandler;
+  __hasPagination?: boolean;
+  __onPrev?: () => void;
+  __onNext?: () => void;
+  __isFirst?: boolean;
+  __isLast?: boolean;
+  __current?: number;
+  __total?: number;
+};

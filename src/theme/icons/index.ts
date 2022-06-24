@@ -42,3 +42,5 @@ export { certifiedBadge } from './certifiedBadge';
 export { certifiedBadgeSolid } from './certifiedBadgeSolid';
 export { upload } from './upload';
 export { lightbulb } from './lightbulb';
+export { chevronRightRegular } from './chevronRightRegular';
+export { chevronLeftRegular } from './chevronLeftRegular';

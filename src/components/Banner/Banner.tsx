@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isNonEmptyArray } from 'ramda-adjunct';
+import { isNonEmptyArray, noop } from 'ramda-adjunct';
 
 import { BannerProps } from './Banner.types';
 import {
@@ -24,6 +24,8 @@ import { ColorTypes } from '../../theme/colors.enums';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
 import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseToastBanner';
+import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { Icon } from '../Icon';
 
 const iconPxSizesVariants = {
   [BannerVariants.info]: 24,
@@ -61,67 +63,99 @@ const Banner: React.FC<BannerProps> = ({
   children,
   variant = BannerVariants.info,
   actions,
-  ...props
-}) => (
-  <StyledPadbox $variant={variant}>
-    <BaseToastBanner
-      iconPxSizesVariants={iconPxSizesVariants}
-      iconSize={24}
-      paddingSize={SpaceSizes.mdPlus}
-      paddingType={PaddingTypes.squish}
-      stretch={StretchEnum.end}
-      variant={variant}
-    >
-      <Padbox paddingSize={SpaceSizes.md}>
-        <Inline
-          align="start"
-          gap={SpaceSizes.mdPlus}
-          stretch={StretchEnum.start}
-        >
-          <Text as="div" size={TextSizes.md}>
-            {children}
-          </Text>
-          {isNonEmptyArray(actions) && (
-            <Inline gap={SpaceSizes.mdPlus}>
-              {actions.map((action) => (
+  isDismissable = true,
+  onClose = noop,
+  __hasPagination = false,
+  __onPrev,
+  __onNext,
+  __isFirst,
+  __isLast,
+  __current,
+  __total,
+}) => {
+  return (
+    <StyledPadbox $variant={variant}>
+      <BaseToastBanner
+        iconPxSizesVariants={iconPxSizesVariants}
+        iconSize={24}
+        paddingSize={SpaceSizes.mdPlus}
+        paddingType={PaddingTypes.squish}
+        stretch={StretchEnum.end}
+        variant={variant}
+      >
+        <Padbox paddingSize={SpaceSizes.md}>
+          <Inline
+            align="flex-start"
+            gap={SpaceSizes.mdPlus}
+            stretch={StretchEnum.start}
+          >
+            <Text as="div" size={TextSizes.md}>
+              {children}
+            </Text>
+            {isNonEmptyArray(actions) && (
+              <Inline gap={SpaceSizes.mdPlus}>
+                {actions.map((action) => (
+                  <StyledButton
+                    key={action.name}
+                    color={ButtonColors.primary}
+                    href={
+                      (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
+                        .href
+                    }
+                    name={action.name}
+                    to={
+                      (action as RelativeLinkActionKind<[React.MouseEvent]>).to
+                    }
+                    variant={ButtonVariants.text}
+                    onClick={action.onClick}
+                  >
+                    {action.label}
+                  </StyledButton>
+                ))}
+              </Inline>
+            )}
+            {__hasPagination && (
+              <Inline gap={SpaceSizes.sm}>
                 <StyledButton
-                  key={action.name}
-                  color={ButtonColors.primary}
-                  href={
-                    (action as AbsoluteLinkActionKind<[React.MouseEvent]>).href
-                  }
-                  name={action.name}
-                  to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
-                  variant={ButtonVariants.text}
-                  onClick={action.onClick}
+                  aria-label="Show previous banner"
+                  isDisabled={__isFirst}
+                  variant="text"
+                  onClick={__onPrev}
                 >
-                  {action.label}
+                  <Icon name={SSCIconNames.chevronLeftRegular} />
                 </StyledButton>
-              ))}
-            </Inline>
-          )}
-          {props.isDismissable && (
-            <CloseButton
-              aria-label="Close"
-              marginCompensation={SpaceSizes.md}
-              onClose={props.onClose}
-            />
-          )}
-        </Inline>
-      </Padbox>
-    </BaseToastBanner>
-  </StyledPadbox>
-);
+                <Text as="div" size={TextSizes.md}>
+                  {__current} of {__total}
+                </Text>
+                <StyledButton
+                  aria-label="Show next banner"
+                  isDisabled={__isLast}
+                  variant="text"
+                  onClick={__onNext}
+                >
+                  <Icon name={SSCIconNames.chevronRightRegular} />
+                </StyledButton>
+              </Inline>
+            )}
+            {isDismissable && (
+              <CloseButton
+                aria-label="Close banner"
+                marginCompensation={SpaceSizes.md}
+                onClose={onClose}
+              />
+            )}
+          </Inline>
+        </Padbox>
+      </BaseToastBanner>
+    </StyledPadbox>
+  );
+};
 
 export default Banner;
 
-Banner.defaultProps = {
-  isDismissable: true,
-};
 Banner.propTypes = {
   variant: PropTypes.oneOf(Object.values(BannerVariants)),
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
-  // eslint-disable-next-line react/forbid-prop-types
-  isDismissable: PropTypes.any, // unfortunately there is no better way how to use descriminated unions in propTypes
+  isDismissable: PropTypes.bool,
   onClose: PropTypes.func,
 };
