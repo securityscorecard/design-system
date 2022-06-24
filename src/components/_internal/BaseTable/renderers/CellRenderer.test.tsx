@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity, F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
 
@@ -17,7 +17,7 @@ const singleValue = 'value';
 
 describe('Datatable/CellRenderer', () => {
   describe('given cell type is multiValue', () => {
-    it('should pass "cellOnClick" handler', () => {
+    it('should pass "cellOnClick" handler', async () => {
       const onClickMock = jest.fn();
       renderWithProviders(
         <CellRenderer
@@ -250,7 +250,7 @@ describe('Datatable/CellRenderer', () => {
   });
 
   describe('given cell type is not multivalue', () => {
-    it('should open tooltip when hover on value', () => {
+    it('should open tooltip when hover on value', async () => {
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -265,6 +265,10 @@ describe('Datatable/CellRenderer', () => {
 
       const value = screen.getByText(singleValue);
       fireEvent.mouseEnter(value);
+
+      await waitFor(() => {
+        expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+      });
       /* eslint-disable testing-library/no-node-access */
       expect(
         document.getElementById(defaultDSContext.portalsContainerId),

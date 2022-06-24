@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
@@ -43,7 +43,7 @@ describe('Breadcrumbs', () => {
     expect(screen.queryByText(/Parent4/i)).not.toBeInTheDocument();
   });
 
-  it('should show all items inside dropdown when dropdown is opened', () => {
+  it('should show all items inside dropdown when dropdown is opened', async () => {
     renderWithProviders(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
@@ -61,6 +61,10 @@ describe('Breadcrumbs', () => {
     expect(dropdownButton).toBeInTheDocument();
     fireEvent.click(dropdownButton);
 
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
+
     // expect dropdown options visible
     expect(screen.getByText(/Parent1/i)).toBeVisible();
     expect(screen.getByText(/Parent2/i)).toBeVisible();
@@ -68,7 +72,7 @@ describe('Breadcrumbs', () => {
     expect(screen.getByText(/Parent4/i)).toBeVisible();
   });
 
-  it('should show items within dropdown using correct order ', () => {
+  it('should show items within dropdown using correct order ', async () => {
     renderWithProviders(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
@@ -85,6 +89,9 @@ describe('Breadcrumbs', () => {
     const dropdownButton = screen.getByLabelText('Open breadcrumbs menu');
     expect(dropdownButton).toBeInTheDocument();
     fireEvent.click(dropdownButton);
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
 
     // Check reverse index for links within the dropdown
     const links = screen.queryAllByText('Link', { exact: false });
@@ -92,7 +99,7 @@ describe('Breadcrumbs', () => {
     expect(links.findIndex((item) => item.textContent === 'Link2')).toBe(0);
   });
 
-  it('should be the last breadcrumb item not a link', () => {
+  it('should be the last breadcrumb item not a link', async () => {
     renderWithProviders(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
@@ -109,6 +116,10 @@ describe('Breadcrumbs', () => {
     const dropdownButton = screen.getByLabelText('Open breadcrumbs menu');
     expect(dropdownButton).toBeInTheDocument();
     fireEvent.click(dropdownButton);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+    });
 
     // Check reverse index for links within the dropdown
     const links = screen.queryAllByText('Link', { exact: false });

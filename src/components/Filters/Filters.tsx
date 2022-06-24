@@ -306,7 +306,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <FiltersBase>
+    <FiltersBase data-testid="filters">
       <Stack gap={SpaceSizes.md}>
         <Stack gap={SpaceSizes.sm}>
           {filtersValues.map((props, index) => (
