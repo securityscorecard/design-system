@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
+import { pipe } from 'ramda';
 
 import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
@@ -22,7 +23,7 @@ const stateStyles = css`
 export const StyledInput = styled.input<InputProps>`
   display: block;
   width: 100%;
-  height: ${pxToRem(32)};
+  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
   padding: ${pxToRem(4, 16)};
   background: ${getFormStyle('bgColor')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};

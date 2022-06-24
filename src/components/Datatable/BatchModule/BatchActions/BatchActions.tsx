@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { map } from 'ramda';
+import { map, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { ColorTypes, SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
-import { pxToRem } from '../../../../utils';
+import { getFormStyle, pxToRem } from '../../../../utils';
 import { Inline } from '../../../layout';
 import { BaseButton } from '../../../_internal/BaseButton';
 import { ButtonVariants } from '../../../Button/Button.enums';
@@ -25,7 +25,7 @@ import { BatchActionArgs } from '../../Datatable.types';
 const BatchActionButton = styled(BaseButton)`
   padding: ${pxToRem(9.5, 16)};
   line-height: ${pxToRem(13)};
-  height: ${pxToRem(32)};
+  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
 `;
 
 const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
@@ -77,7 +77,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
                 variant={ButtonVariants.text}
                 onClick={action.onClick}
               >
-                <Inline gap={SpaceSizes.xs}>
+                <Inline align="center" gap={SpaceSizes.xs}>
                   <span>{action.label}</span>
                   <Icon
                     color={ColorTypes.neutral700}

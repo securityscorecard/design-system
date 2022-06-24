@@ -95,15 +95,8 @@ const indicatorStyles = (DSTheme) => ({
   alignItems: 'center',
   color: DSTheme.forms.indicatorColor,
   cursor: 'pointer',
-  padding: pipe(
-    getPaddingSpace,
-    apply(pxToRem),
-  )({
-    paddingSize: SpaceSizes.md,
-    paddingType: PaddingTypes.squish,
-    theme: DSTheme,
-  }),
-  height: pxToRem(30),
+  padding: `0rem ${pxToRem(18)}`,
+  height: pxToRem(34),
   margin: pxToRem(1, 0),
   ':hover': {
     color: DSTheme.forms.hoverIndicatorColor,
@@ -201,7 +194,7 @@ export const selectStyles: (
     }),
     clearIndicator: (_, { selectProps: { isProcessing } }) => ({
       ...indicatorStyles(DSTheme),
-      display: isProcessing ? 'none' : 'block',
+      display: isProcessing ? 'none' : 'flex',
       ':hover': {
         color: DSTheme.colors.error[500],
         backgroundColor: 'transparent',
@@ -522,7 +515,7 @@ export const IndicatorsContainer: ComponentType<
           borderWidth={2}
           height={16}
           horizontalMargin={16}
-          verticalMargin={8}
+          verticalMargin={10}
           width={16}
           dark
         />

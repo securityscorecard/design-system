@@ -26,7 +26,7 @@ const Label = styled(Padbox)`
   font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('semibold')};
   line-height: 1rem;
-  height: ${getButtonHeight('md')};
+  height: ${getButtonHeight('md')}px;
   cursor: pointer;
 
   &:hover {
@@ -42,11 +42,11 @@ const Input = styled.input`
     box-shadow: inset 0 0 0 2px ${getColor('primary.200')};
   }
   &:focus:checked + ${Label} {
-    box-shadow: inset 0 0 0 1px ${getColor('neutral.900')},
+    box-shadow: inset 0 0 0 2px ${getColor('neutral.900')},
       inset 0 0 0 3px ${getColor('primary.200')};
   }
   &:checked + ${Label} {
-    box-shadow: inset 0 0 0 1px ${getColor('neutral.900')};
+    box-shadow: inset 0 0 0 2px ${getColor('neutral.900')};
   }
   &:disabled + ${Label} {
     background: ${getColor('neutral.300')};

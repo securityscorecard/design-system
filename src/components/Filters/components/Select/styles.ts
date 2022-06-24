@@ -37,7 +37,7 @@ export const selectStyles: StylesConfig<Option, false> = {
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
-      minHeight: pxToRem(32),
+      minHeight: pxToRem(theme.forms.fieldHeight),
       padding: pxToRem(0, 16),
       background: theme.forms.bgColor,
       border: `${theme.forms.borderWidth} solid ${theme.forms.borderColor}`,

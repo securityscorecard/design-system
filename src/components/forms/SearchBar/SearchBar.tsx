@@ -6,7 +6,7 @@ import {
   isNotUndefined,
 } from 'ramda-adjunct';
 
-import { createPadding, getSpace, pxToRem } from '../../../utils';
+import { getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
@@ -17,7 +17,6 @@ import { renderSuggestionDefault } from './SearchSuggestionFormats';
 import { Error } from '../Message';
 import { validatePattern } from '../../Filters/helpers';
 import { ColorTypes, SpaceSizes } from '../../../theme';
-import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 
 const SEARCH_DEBOUNCE_TIME = 500;
 
@@ -37,12 +36,7 @@ const SearchBarIcon = styled.div<{ $position: 'start' | 'end' }>`
   width: ${pxToRem(16)};
   position: absolute;
   top: 0;
-  ${({ theme }) =>
-    createPadding({
-      paddingSize: SpaceSizes.md,
-      paddingType: PaddingTypes.squish,
-      theme,
-    })};
+  padding: ${pxToRem(9)} ${pxToRem(13)};
   ${({ $position }) => ($position === 'start' ? 'left' : 'right')}: 0;
   display: flex;
   align-items: center;
