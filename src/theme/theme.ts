@@ -11,6 +11,7 @@ import { createDepths } from './depths';
 import { createSpace } from './space';
 import { createRadii } from './radii';
 import { RecursivePartial } from '../types/utils.types';
+import { createTokens } from './tokens';
 
 export const createTheme = (
   overrides: RecursivePartial<DefaultTheme> = {},
@@ -24,10 +25,12 @@ export const createTheme = (
     depths: depthsOverride = {},
     space: spaceOverride = {},
     radii: radiiOverride = {},
+    tokens: tokensOverride = {},
     ...rest
   } = overrides;
 
   const colors = mergeDeepRight(themeColors, colorsOverride);
+  const tokens = mergeDeepRight(createTokens(colors), tokensOverride);
   const buttons = mergeDeepRight(createButtons(colors), buttonsOverride);
   const typography = mergeDeepRight(
     createTypography(colors),
@@ -48,6 +51,7 @@ export const createTheme = (
     depths,
     space,
     radii,
+    tokens,
     ...rest,
   };
 };

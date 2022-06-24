@@ -42,10 +42,16 @@ describe('abbreviateNumber', () => {
 
 describe('getColor', () => {
   it('should return correct color for current keys', () => {
-    expect(getColor(ColorTypes.primary500, { theme })).toBe('#0275d8');
-    expect(getColor(ColorTypes.primary400, { theme })).toBe('#1e88e5');
-    expect(getColor(ColorTypes.primary200, { theme })).toBe('#80baeb');
-    expect(getColor(ColorTypes.primary50, { theme })).toBe('#ebf4fc');
+    expect(getColor(ColorTypes.primary900, { theme })).toBe('#1b0471');
+    expect(getColor(ColorTypes.primary800, { theme })).toBe('#2c1193');
+    expect(getColor(ColorTypes.primary700, { theme })).toBe('#3b1ab7');
+    expect(getColor(ColorTypes.primary600, { theme })).toBe('#4d29d4');
+    expect(getColor(ColorTypes.primary500, { theme })).toBe('#6641f3');
+    expect(getColor(ColorTypes.primary400, { theme })).toBe('#8263f5');
+    expect(getColor(ColorTypes.primary300, { theme })).toBe('#a995f4');
+    expect(getColor(ColorTypes.primary200, { theme })).toBe('#cabdfb');
+    expect(getColor(ColorTypes.primary100, { theme })).toBe('#e5dffd');
+    expect(getColor(ColorTypes.primary50, { theme })).toBe('#f0ecfe');
     expect(getColor(ColorTypes.neutral1000, { theme })).toBe('#000');
     expect(getColor(ColorTypes.neutral900, { theme })).toBe('#2a2a2a');
     expect(getColor(ColorTypes.neutral800, { theme })).toBe('#555555');

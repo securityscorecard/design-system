@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { includes, pipe } from 'ramda';
 
 import {
+  capitalize,
   createMarginSpacing,
   createPadding,
   getButtonColor,
@@ -10,6 +11,7 @@ import {
   getFontSize,
   getFontWeight,
   getRadii,
+  getToken,
   pxToRem,
 } from '../../../utils';
 import { BaseStyledButtonProps } from './BaseStyledButton.types';
@@ -62,38 +64,52 @@ const focusState = css`
 `;
 
 const ButtonSolid = css<BaseStyledButtonProps>`
-  background-color: ${getButtonColor('bgColor')};
-  border: 1px solid ${getButtonColor('bgColor')};
+  background-color: ${({ color }) =>
+    getToken(`buttonSolid${capitalize(color)}BgColor`)};
+  border: 1px solid
+    ${({ color }) => getToken(`buttonSolid${capitalize(color)}BgColor`)};
   text-decoration: none;
 
   &,
   &:not([href]):not([tabindex]) {
-    color: ${getButtonColor('color')};
+    color: ${({ color }) =>
+      getToken(`buttonSolid${capitalize(color)}TextColor`)};
   }
 
-  ${({ disabled }) =>
+  ${({ disabled, color }) =>
     disabled
       ? css`
            {
-            background-color: ${getButtonColor('disabledBgColor')};
-            border-color: ${getButtonColor('disabledBgColor')};
+            background-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgDisabledColor`,
+            )};
+            border-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgDisabledColor`,
+            )};
           }
         `
       : css`
           &:hover:not(:disabled),
           &:not([href]):not([tabindex]):not(:disabled):hover,
-          &.hover,
           &.hover {
-            background-color: ${getButtonColor('hoverBgColor')};
-            border-color: ${getButtonColor('hoverBgColor')};
-            color: ${getButtonColor('color')};
+            background-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgHoverColor`,
+            )};
+            border-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgHoverColor`,
+            )};
+            color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
             text-decoration: none;
           }
           &:focus:not(:disabled),
           &.focus {
-            background-color: ${getButtonColor('hoverBgColor')};
-            border-color: ${getButtonColor('hoverBgColor')};
-            color: ${getButtonColor('color')};
+            background-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgHoverColor`,
+            )};
+            border-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgHoverColor`,
+            )};
+            color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
             text-decoration: none;
             ${focusState};
           }
@@ -101,54 +117,58 @@ const ButtonSolid = css<BaseStyledButtonProps>`
           &:not(:disabled):active,
           &:not([href]):not([tabindex]):not(:disabled):active,
           &.active {
-            background-color: ${getButtonColor('activeBgColor')};
-            border-color: ${getButtonColor('activeBgColor')};
-            color: ${getButtonColor('color')};
+            background-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgActiveColor`,
+            )};
+            border-color: ${getToken(
+              `buttonSolid${capitalize(color)}BgActiveColor`,
+            )};
+            color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
             text-decoration: none;
           }
         `}
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
-  background-color: ${getButtonColor('bgColor')};
+  background-color: ${getToken(`buttonOutlineBgColor`)};
   border: 1px solid ${getButtonColor('borderColor')};
   text-decoration: none;
 
   &,
   &:not([href]):not([tabindex]):not(:disabled) {
-    color: ${getButtonColor('color')};
+    color: ${getToken(`buttonOutlineTextColor`)};
   }
 
   ${({ disabled }) =>
     disabled
       ? css`
           & {
-            color: ${getButtonColor('disabledColor')};
-            background-color: ${getButtonColor('disabledBgColor')};
-            border-color: ${getButtonColor('disabledBorderColor')};
+            color: ${getToken(`buttonOutlineTextDisabledColor`)};
+            background-color: ${getToken(`buttonOutlineBgDisabledColor`)};
+            border-color: ${getToken(`buttonOutlineBorderDisabledColor`)};
           }
         `
       : css`
           &:hover:not(:disabled),
           &:not([href]):not([tabindex]):not(:disabled):hover,
           &.hover {
-            background-color: ${getButtonColor('hoverBgColor')};
-            color: ${getButtonColor('color')};
+            background-color: ${getToken(`buttonOutlineBgHoverColor`)};
+            color: ${getToken(`buttonOutlineTextColor`)};
             text-decoration: none;
           }
           &:focus:not(:disabled),
           &.focus {
-            background-color: ${getButtonColor('hoverBgColor')};
-            color: ${getButtonColor('color')};
+            background-color: ${getToken('buttonOutlineBgHoverColor')};
+            color: ${getToken('buttonOutlineTextColor')};
             text-decoration: none;
             ${focusState};
           }
           &:not(:disabled):active,
           &:not([href]):not([tabindex]):not(:disabled):active,
           &.active {
-            background-color: ${getButtonColor('activeBgColor')};
-            border-color: ${getButtonColor('activeBorderColor')};
-            color: ${getButtonColor('activeColor')};
+            background-color: ${getToken('buttonOutlineBgActiveColor')};
+            border-color: ${getToken('buttonOutlineBorderActiveColor')};
+            color: ${getToken('buttonOutlineTextActiveColor')};
             text-decoration: none;
           }
         `}
@@ -162,29 +182,35 @@ const ButtonText = css<BaseStyledButtonProps>`
 
   &,
   &:not([href]):not([tabindex]):not(:disabled) {
-    color: ${getButtonColor('color')};
+    color: ${({ color }) =>
+      getToken(`buttonText${capitalize(color)}TextColor`)};
   }
 
-  ${({ disabled }) =>
+  ${({ disabled, color }) =>
     disabled
       ? css`
           & {
-            color: ${getButtonColor('disabledColor')};
+            color: ${getToken(
+              `buttonText${capitalize(color)}TextDisabledColor`,
+            )};
           }
         `
       : css`
           &:hover:not(:disabled),
           &:not([href]):not([tabindex]):not(:disabled):hover,
-          &.hover,
           &.hover {
-            color: ${getButtonColor('hoverColor')};
+            color: ${getToken(`buttonText${capitalize(color)}TextHoverColor`)};
             text-decoration: none;
           }
           &:focus:not(:disabled),
           &.focus {
-            background-color: ${getButtonColor('focusBgColor')};
-            border-color: ${getButtonColor('focusBgColor')};
-            color: ${getButtonColor('color')};
+            background-color: ${getToken(
+              `buttonText${capitalize(color)}BgFocusColor`,
+            )};
+            border-color: ${getToken(
+              `buttonText${capitalize(color)}BgFocusColor`,
+            )};
+            color: ${getToken(`buttonText${capitalize(color)}TextColor`)};
             text-decoration: none;
             ${focusState};
           }
@@ -192,7 +218,7 @@ const ButtonText = css<BaseStyledButtonProps>`
           &:not(:disabled):active,
           &:not([href]):not([tabindex]):not(:disabled):active,
           &&&.active {
-            color: ${getButtonColor('activeColor')};
+            color: ${getToken(`buttonText${capitalize(color)}TextActiveColor`)};
             text-decoration: none;
           }
         `}

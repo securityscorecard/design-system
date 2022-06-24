@@ -21,7 +21,7 @@ describe('DSProvider', () => {
     renderComponent();
     const button = screen.getByRole('button');
 
-    expect(button).toHaveStyleRule('background', '#ebf4fc');
+    expect(button).toHaveStyleRule('background', '#f0ecfe');
     expect(button).toHaveStyleRule('color', '#2a2a2a');
   });
 
