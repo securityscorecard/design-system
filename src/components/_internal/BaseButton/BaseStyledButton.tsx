@@ -101,7 +101,7 @@ const ButtonSolid = css<BaseStyledButtonProps>`
             color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
             text-decoration: none;
           }
-          &:focus:not(:disabled),
+          &:focus-visible:not(:disabled),
           &.focus {
             background-color: ${getToken(
               `buttonSolid${capitalize(color)}BgHoverColor`,
@@ -156,7 +156,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
             color: ${getToken(`buttonOutlineTextColor`)};
             text-decoration: none;
           }
-          &:focus:not(:disabled),
+          &:focus-visible:not(:disabled),
           &.focus {
             background-color: ${getToken('buttonOutlineBgHoverColor')};
             color: ${getToken('buttonOutlineTextColor')};
@@ -202,7 +202,7 @@ const ButtonText = css<BaseStyledButtonProps>`
             color: ${getToken(`buttonText${capitalize(color)}TextHoverColor`)};
             text-decoration: none;
           }
-          &:focus:not(:disabled),
+          &:focus-visible:not(:disabled),
           &.focus {
             background-color: ${getToken(
               `buttonText${capitalize(color)}BgFocusColor`,
@@ -257,7 +257,7 @@ const BaseStyledButton = styled.button.withConfig<BaseStyledButtonProps>({
 
   ${({ margin }) => createMarginSpacing(margin)};
 
-  &:focus {
+  &:focus-visible {
     outline: 0;
   }
 
