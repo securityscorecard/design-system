@@ -1,3 +1,11 @@
+# [1.0.0-alpha.190](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.189...v1.0.0-alpha.190) (2022-06-27)
+
+
+### Bug Fixes
+
+* **InputGroup:** remove border when Select is not first element ([025ccaf](https://github.com/securityscorecard/design-system/commit/025ccaff0ab171a0cb21a25152f9c10a5667497c))
+* **Select:** prevent focus lose when value is changed ([606e131](https://github.com/securityscorecard/design-system/commit/606e1316ac69d95c106023db143a2f802a8cd680))
+
 # [1.0.0-alpha.189](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.188...v1.0.0-alpha.189) (2022-06-24)
 
 
