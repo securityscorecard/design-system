@@ -1,7 +1,6 @@
 import { useTheme } from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { has, sortBy } from 'ramda';
-import { useState } from 'react';
 
 import {
   ClearIndicator,
@@ -40,10 +39,6 @@ export const useSelectProps = <IsMulti extends boolean>({
     [options],
   );
 
-  const [showAllItems, setShowAllItems] = useState(false);
-
-  const handleOnClickShowAllItems = () => setShowAllItems(true);
-
   return {
     maxMenuHeight: 270,
     ...props,
@@ -52,13 +47,9 @@ export const useSelectProps = <IsMulti extends boolean>({
       DropdownIndicator,
       ClearIndicator,
       IndicatorsContainer,
-      ValueContainer: ValueContainer(
-        maxVisibleItem,
-        showAllItems,
-        handleOnClickShowAllItems,
-      ),
+      ValueContainer,
       MultiValueContainer,
-      MultiValueLabel: MultiValueLabel(maxPillLabelLength),
+      MultiValueLabel,
       MultiValueRemove,
       Menu,
       Option,
@@ -79,5 +70,7 @@ export const useSelectProps = <IsMulti extends boolean>({
     styles: selectStyles(DSTheme),
     theme: reactSelectTheme(DSTheme),
     classNamePrefix: 'ssc',
+    maxVisibleItem,
+    maxPillLabelLength,
   };
 };

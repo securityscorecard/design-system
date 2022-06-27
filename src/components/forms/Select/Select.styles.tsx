@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useState } from 'react';
 import { transparentize } from 'polished';
 import { ThemeConfig } from 'react-select/src/theme';
 import {
@@ -7,7 +7,6 @@ import {
   MenuProps,
   OptionProps,
   StylesConfig,
-  ValueContainerProps,
   components,
 } from 'react-select';
 import { append, apply, assoc, both, includes, pick, pipe, take } from 'ramda';
@@ -315,22 +314,21 @@ export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
   </PillWrapper>
 );
 
-export const MultiValueLabel: (maxLength: number) => ComponentType<{
-  data: OptionType;
-  innerProps: InnerProps;
-}> =
-  (maxLength) =>
-  ({ children, innerProps, ...props }) =>
-    (
-      <PillLabel
-        $maxLength={maxLength}
-        $size={PillSizes.sm}
-        title={props.data.label}
-        {...innerProps}
-      >
-        {children}
-      </PillLabel>
-    );
+export const MultiValueLabel = ({
+  children,
+  innerProps,
+  selectProps,
+  ...props
+}) => (
+  <PillLabel
+    $maxLength={selectProps.maxPillLabelLength}
+    $size={PillSizes.sm}
+    title={props.data.label}
+    {...innerProps}
+  >
+    {children}
+  </PillLabel>
+);
 
 export const MultiValueRemove: ComponentType<{
   data: OptionType;
@@ -405,47 +403,48 @@ export const Menu: ComponentType<MenuProps<OptionType, boolean>> = (props) => {
   );
 };
 
-export const ValueContainer: (
-  maxVisibleItem: number,
-  showAllItems: boolean,
-  handleOnClickShowAllItems: () => void,
-) => ComponentType<ValueContainerProps<OptionType, boolean>> =
-  (maxVisibleItem, showAllItems, handleOnClickShowAllItems) => (props) => {
-    const {
-      children,
-      selectProps: { isMulti },
-      getValue,
-    } = props;
+export const ValueContainer = (props) => {
+  const {
+    children,
+    selectProps: { isMulti, maxVisibleItem },
+    getValue,
+  } = props;
+  const [showAllItems, setShowAllItems] = useState(false);
 
-    if (isMulti) {
-      const qty = getValue().length;
-      const selectedValues = React.Children.toArray(children);
-      const pills =
-        isNotUndefined(maxVisibleItem) && !showAllItems && qty > maxVisibleItem
-          ? pipe(
-              take(maxVisibleItem),
-              append(
-                <PillWrapper
-                  key="more-items"
-                  size={PillSizes.sm}
-                  variant={PillVariants.solid}
-                  isClickable
-                  onClick={handleOnClickShowAllItems}
-                >
-                  + {qty - maxVisibleItem} more
-                </PillWrapper>,
-              ),
-            )(selectedValues)
-          : children;
-      return (
-        <components.ValueContainer {...props}>
-          <Cluster gap={SpaceSizes.xs}>{pills}</Cluster>
-        </components.ValueContainer>
-      );
-    }
+  if (isMulti) {
+    const qty = getValue().length;
+    const [values, input] = children;
+    const selectedValues = React.Children.toArray(values);
 
-    return <components.ValueContainer {...props} />;
-  };
+    const pills =
+      isNotUndefined(maxVisibleItem) && !showAllItems && qty > maxVisibleItem
+        ? pipe(
+            take(maxVisibleItem),
+            append(
+              <PillWrapper
+                key="more-items"
+                size={PillSizes.sm}
+                variant={PillVariants.solid}
+                isClickable
+                onClick={() => setShowAllItems(true)}
+              >
+                + {qty - maxVisibleItem} more
+              </PillWrapper>,
+            ),
+          )(selectedValues)
+        : values;
+    return (
+      <components.ValueContainer {...props}>
+        <Cluster gap={SpaceSizes.xs}>
+          {pills}
+          {input}
+        </Cluster>
+      </components.ValueContainer>
+    );
+  }
+
+  return <components.ValueContainer {...props} />;
+};
 
 const CreateNewOption = styled.div.attrs<{ variant: 'text'; color: 'primary' }>(
   () => ({
