@@ -1,3 +1,10 @@
+# [1.0.0-alpha.191](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.190...v1.0.0-alpha.191) (2022-06-27)
+
+
+### Features
+
+* **RadioListItem:** retire RadioListItem component from DS ([fd8c7cb](https://github.com/securityscorecard/design-system/commit/fd8c7cbc5ad31a9148275697ac4b325a4d9b2cff))
+
 # [1.0.0-alpha.190](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.189...v1.0.0-alpha.190) (2022-06-27)
 
 
