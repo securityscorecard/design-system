@@ -16,7 +16,7 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
 
-  & > *:first-child > .ssc__control {
+  .ssc__control {
     border: 0px;
     box-shadow: none;
   }
