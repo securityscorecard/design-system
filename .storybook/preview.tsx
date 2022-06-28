@@ -72,10 +72,10 @@ export const parameters = {
       color: '#4ABA00',
       title: 'Stable',
     },
-    [Badges.beta]: {
+    [Badges.experimental]: {
       contrast: '#333',
       color: '#E5BD00',
-      title: 'Beta',
+      title: 'Experimental',
     },
     [Badges.deprecated]: {
       contrast: '#333',
