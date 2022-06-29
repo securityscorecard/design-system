@@ -37,7 +37,7 @@ export const DividerInputGroup: Story = () => (
 export const SelectInputGroup: Story = () => (
   <InputGroup stretch="end">
     <Icon key="icon" name="search" />
-    <Select options={options} placeholder="Select a country" />
+    <Select options={options} placeholder="Select a country" isMulti />
   </InputGroup>
 );
 

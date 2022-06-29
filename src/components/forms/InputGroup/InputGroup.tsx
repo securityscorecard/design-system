@@ -29,7 +29,6 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
     border: none;
     box-shadow: none;
     border-radius: 0px;
-    height: ${getFormStyle('fieldHeight')};
   }
   & > * {
     ${(props) =>
