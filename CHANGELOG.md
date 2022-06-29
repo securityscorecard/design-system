@@ -1,3 +1,15 @@
+# [1.0.0-alpha.192](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.191...v1.0.0-alpha.192) (2022-06-29)
+
+
+### Bug Fixes
+
+* remove fixed height of input inside InputGroup ([27cddde](https://github.com/securityscorecard/design-system/commit/27cdddef8fd3395e206f9e108b615ca828673776))
+
+
+### Features
+
+* **SearchBar:** reimplement the SearchBar component ([e475d5b](https://github.com/securityscorecard/design-system/commit/e475d5bc4b9ded54d61eff8ae1f72407601eaba2))
+
 # [1.0.0-alpha.191](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.190...v1.0.0-alpha.191) (2022-06-27)
 
 
