@@ -1,5 +1,5 @@
 export const Badges = {
   stable: 'stable',
-  beta: 'beta',
+  experimental: 'experimental',
   deprecated: 'deprecated',
 } as const;

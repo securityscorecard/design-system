@@ -18,7 +18,6 @@ import { Error } from '../Message';
 import { validatePattern } from '../../Filters/helpers';
 import { ColorTypes, SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import { InputProps } from '../Input/Input.types';
 
 const SEARCH_DEBOUNCE_TIME = 500;
 
@@ -26,14 +25,11 @@ const SearchBarWrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled(Input)<InputProps & { $isSearching: boolean }>`
+const StyledInput = styled(Input)`
   padding-left: ${getSpace(SpaceSizes.lgPlus)};
 
-  ${({ $isSearching, theme }) =>
-    $isSearching &&
-    `
-    padding-right: ${getSpace(SpaceSizes.lgPlus, { theme })};
-  `};
+  padding-right: ${({ $isSearching, theme }) =>
+    getSpace($isSearching ? SpaceSizes.lgPlus : SpaceSizes.md, { theme })};
 `;
 
 const SearchBarIcon = styled.div<{ $position: 'start' | 'end' }>`
@@ -208,7 +204,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onBlur={handleBlur}
         onChange={handleChangeQuery}
         onFocus={handleFocus}
-        {...(hasSuggestions || { onKeyDown: handleKeyDown })}
+        {...(hasSuggestions ? {} : { onKeyDown: handleKeyDown })}
       />
       {isInvalid && <Error>{errorMessage}</Error>}
 

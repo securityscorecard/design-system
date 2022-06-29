@@ -58,6 +58,13 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   :-ms-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
   }
+
+  &[type='search']::-webkit-search-decoration,
+  &[type='search']::-webkit-search-cancel-button,
+  &[type='search']::-webkit-search-results-button,
+  &[type='search']::-webkit-search-results-decoration {
+    display: none;
+  }
 `;
 
 Input.propTypes = {
