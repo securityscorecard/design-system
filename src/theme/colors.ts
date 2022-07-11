@@ -59,6 +59,21 @@ export const colors = {
     D: '#f1431c',
     F: '#b40000',
   },
+  brand: {
+    50: '#f0ecfe',
+    100: '#e5dffd',
+    200: '#cabdfb',
+    300: '#a995f4',
+    400: '#8263f5',
+    500: '#6641f3',
+    600: '#4d29d4',
+    700: '#3b1ab7',
+    800: '#2c1193',
+    900: '#1b0471',
+  },
+  brandSecondary: {
+    500: '#E1C048',
+  },
   severity: {
     informational: '#0275D8',
     positive: '#49A25A',
