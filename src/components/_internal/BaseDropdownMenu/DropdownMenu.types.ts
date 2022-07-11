@@ -1,4 +1,4 @@
-import { To } from 'history';
+import type { To } from 'history';
 import { pick } from 'ramda';
 
 import { ActionKinds } from '../../../types/action.types';

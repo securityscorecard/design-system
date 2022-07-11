@@ -1,5 +1,5 @@
 import React from 'react';
-import { To } from 'history'; // just importing types
+import type { To } from 'history';
 
 import { LinkColors } from './Link.enums';
 

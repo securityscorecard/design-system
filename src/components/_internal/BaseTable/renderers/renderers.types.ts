@@ -1,6 +1,6 @@
-import { CellValue, Row } from 'react-table';
-import { To } from 'history';
-import { ReactComponentLike } from 'prop-types';
+import type { CellValue, Row } from 'react-table';
+import type { To } from 'history';
+import type { ReactComponentLike } from 'prop-types';
 
 import { CellTypes as CellTypesEnum } from './renderers.enums';
 

@@ -78,7 +78,7 @@ const Adornment = styled(Padbox)`
 `;
 
 const DrawerBox = forwardRef<HTMLDivElement, DrawerProps>(
-  ({ size, props, adornment, children, footer, title, onClose }, ref) => {
+  ({ size, adornment, children, footer, title, onClose, ...props }, ref) => {
     const hasFooter = isNotUndefined(footer);
     const hasAdornment = isNotUndefined(adornment);
 

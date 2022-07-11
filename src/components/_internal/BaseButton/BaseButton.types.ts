@@ -1,5 +1,5 @@
 import React from 'react';
-import { To } from 'history'; // just importing types
+import type { To } from 'history';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
 import { Types as IconTypes, SSCIcons } from '../../Icon/Icon.types';
