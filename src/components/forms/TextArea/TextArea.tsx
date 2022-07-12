@@ -34,7 +34,7 @@ const StyledTextArea = styled.textarea<{
   width: 100%;
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
+  line-height: ${getLineHeight('lg')};
   height: ${prop('height')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};

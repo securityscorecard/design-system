@@ -5,8 +5,8 @@ import { colors } from './colors';
 import { pxToRem } from '../utils';
 
 export const createForms = (themeColors: typeof colors): Forms => ({
-  fieldHeight: pxToRem(32),
-  fieldLineHeight: pxToRem(14),
+  fieldHeight: pxToRem(36),
+  fieldLineHeight: pxToRem(20),
   toggleSize: 20,
   color: themeColors.neutral[900],
   bgColor: themeColors.neutral[0],

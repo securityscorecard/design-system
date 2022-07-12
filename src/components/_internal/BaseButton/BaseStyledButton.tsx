@@ -29,7 +29,7 @@ const ButtonLarge = css`
 `;
 
 const ButtonMedium = css<BaseStyledButtonProps>`
-  font-size: ${getFontSize('md')};
+  font-size: ${getFontSize('lg')};
   ${({ $hasOnlyIcon, theme }) =>
     createPadding({
       paddingSize: $hasOnlyIcon ? SpaceSizes.sm : SpaceSizes.md,
@@ -59,8 +59,7 @@ const buttonSizes = {
  */
 
 const focusState = css`
-  outline: 2px solid ${getButtonColor('focusOutlineColor')};
-  outline-offset: 2px;
+  outline: 4px solid ${getButtonColor('focusOutlineColor')};
 `;
 
 const ButtonSolid = css<BaseStyledButtonProps>`
@@ -131,7 +130,7 @@ const ButtonSolid = css<BaseStyledButtonProps>`
 
 const ButtonOutline = css<BaseStyledButtonProps>`
   background-color: ${getToken(`buttonOutlineBgColor`)};
-  border: 1px solid ${getButtonColor('borderColor')};
+  border: 2px solid ${getButtonColor('borderColor')};
   text-decoration: none;
 
   &,
@@ -212,7 +211,6 @@ const ButtonText = css<BaseStyledButtonProps>`
             )};
             color: ${getToken(`buttonText${capitalize(color)}TextColor`)};
             text-decoration: none;
-            ${focusState};
           }
 
           &:not(:disabled):active,

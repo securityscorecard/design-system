@@ -54,7 +54,7 @@ const largeSegmentedSize = css`
 `;
 
 const mediumSegmentedSize = css`
-  font-size: ${getFontSize('md')};
+  font-size: ${getFontSize('lg')};
   line-height: 1;
 `;
 
