@@ -23,7 +23,7 @@ export interface RenderButtonProps {
 
 export interface SemanticModalProps {
   title: string;
-  message: string;
+  message: React.ReactNode;
   onClose: React.MouseEventHandler;
   actions: ActionsArray;
   variant?: Variants;

@@ -83,7 +83,7 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
             </div>
             <Stack gap={SpaceSizes.md}>
               <H3>{title}</H3>
-              <Text>{message}</Text>
+              <Text as="div">{message}</Text>
               <Padbox paddingSize={SpaceSizes.md}>
                 <Inline gap={SpaceSizes.md} justify="center">
                   {actions.map(
@@ -116,7 +116,7 @@ export default SemanticModal;
 
 SemanticModal.propTypes = {
   title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.node.isRequired,
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType)
     .isRequired,
   onClose: PropTypes.func.isRequired,

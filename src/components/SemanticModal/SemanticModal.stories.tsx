@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SemanticModal from './SemanticModal';
 import { SemanticModalVariants } from './SemanticModal.enums';
 import { SemanticModalProps } from './SemanticModal.types';
-import { Inline, Padbox } from '../layout';
+import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';
 import { SpaceSizes } from '../../theme';
@@ -18,7 +18,6 @@ export default {
     docs: {
       inlineStories: false,
       iframeHeight: 600,
-      source: { type: 'code' },
     },
   },
   argTypes: {
@@ -51,6 +50,9 @@ export const Playground: Story<SemanticModalProps> = (args) => {
 
 Playground.parameters = {
   screenshot: { skip: true },
+  docs: {
+    source: { type: 'code' },
+  },
 };
 
 Playground.args = {
@@ -113,4 +115,24 @@ export const Ban = SemanticModalTemplate.bind({});
 Ban.args = {
   ...Success.args,
   variant: SemanticModalVariants.ban,
+};
+
+export const MultiParagraphMessage = SemanticModalTemplate.bind({});
+MultiParagraphMessage.args = {
+  ...Success.args,
+  message: (
+    <Stack gap="md">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
+        dignissim enim. Interdum et malesuada fames ac ante ipsum primis in
+        faucibus.
+      </p>
+      <p>
+        Duis sem eros, ultrices eu mi eget, blandit vestibulum mauris.
+        Pellentesque at hendrerit orci. Aliquam vel ligula lectus. Curabitur
+        varius sed mauris ut aliquam. Integer sed iaculis quam, eget dignissim
+        nulla.
+      </p>
+    </Stack>
+  ),
 };
