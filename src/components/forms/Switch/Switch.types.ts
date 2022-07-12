@@ -11,7 +11,7 @@ export interface SwitchLabelProps {
 }
 
 export interface SwitchProps
-  extends Omit<React.HTMLAttributes<HTMLInputElement>, 'size'> {
+  extends Omit<React.ComponentPropsWithRef<'input'>, 'size'> {
   /**
    * ID to connect input and its label
    */

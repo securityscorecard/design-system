@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { IdType } from 'react-table';
+import type { IdType } from 'react-table';
 
 import {
   SearchBarPropType,
@@ -24,13 +24,11 @@ export interface ControlsConfig<D> {
   filteringConfig: Partial<FiltersProps>;
   defaultIsFilteringOpen: boolean;
   defaultIsFilteringApplied: boolean;
-  // hasColumnVisibility: boolean;
-  // defaultIsColumnVisibilityOpen: boolean;
-  // defaultIsColumnVisibilityApplied: boolean;
-  hasColumnOrdering: boolean;
-  defaultIsColumnOrderingOpen: boolean;
-  defaultIsColumnOrderingApplied: boolean;
+  hasColumnsControls: boolean;
+  defaultIsColumnsControlsOpen: boolean;
+  defaultIsColumnsControlsApplied: boolean;
   onColumnOrderChange: (columnOrder: IdType<D>[]) => void;
+  onColumnVisibilityChange: (hiddenColumns: IdType<D>[]) => void;
   onControlToggle: (control: Controls, isActive: boolean) => void;
   onCancelLoading: () => void;
   isDataLoading: boolean;
@@ -47,12 +45,9 @@ export const ControlsConfigPropType = {
   isDataLoading: PropTypes.bool,
   onCancelLoading: PropTypes.func,
   onControlToggle: PropTypes.func,
-  // hasColumnVisibility: PropTypes.bool.isRequired,
-  // defaultIsColumnVisibilityOpen: PropTypes.bool.isRequired,
-  // defaultIsColumnVisibilityApplied: PropTypes.bool.isRequired,
-  hasColumnOrdering: PropTypes.bool.isRequired,
-  defaultIsColumnOrderingOpen: PropTypes.bool.isRequired,
-  defaultIsColumnOrderingApplied: PropTypes.bool.isRequired,
+  hasColumnsControls: PropTypes.bool.isRequired,
+  defaultIsColumnsControlsOpen: PropTypes.bool.isRequired,
+  defaultIsColumnsControlsApplied: PropTypes.bool.isRequired,
   // hasGrouping: PropTypes.bool.isRequired,
   // defaultIsGroupingOpen: PropTypes.bool.isRequired,
   // defaultIsGroupingApplied: PropTypes.bool.isRequired,

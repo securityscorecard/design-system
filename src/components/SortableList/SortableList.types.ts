@@ -4,10 +4,14 @@ import {
   DragOverEvent,
   DragStartEvent,
 } from '@dnd-kit/core';
+import React from 'react';
 
-export interface SortableItemProps {
+interface SortableItem {
   id: string;
   label: string;
+}
+export interface SortableItemProps extends SortableItem {
+  renderItem?: (props: SortableItem) => React.ReactElement;
 }
 
 export interface SortableListProps {
@@ -19,6 +23,10 @@ export interface SortableListProps {
    * Object of items label. Keys should be values from `items` array.
    */
   labels?: Record<SortableItemProps['id'], SortableItemProps['label']>;
+  /**
+   * Maximal list height
+   */
+  maxHeight?: number;
   /**
    * Callback called when items order is changed
    */
@@ -39,4 +47,8 @@ export interface SortableListProps {
    * Callback when dragging is canceled (e.g. by pressing ESC)
    */
   onDragCancel?: (event: DragCancelEvent) => void;
+  /**
+   * Custom content renderer
+   */
+  renderItem?: SortableItemProps['renderItem'];
 }

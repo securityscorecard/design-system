@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { all, isEmpty } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -12,6 +13,7 @@ import { ControlButton } from '../components/ControlButton';
 import { BatchActions } from './BatchActions';
 import { ElementCounter } from './ElementCounter';
 import { BatchModuleProps } from './BatchModule.types';
+import { DatatableStore } from '../Datatable.store';
 
 const BatchModuleWrapper = styled(Padbox)`
   min-height: ${pxToRem(64)};
@@ -24,16 +26,29 @@ const BatchModule: React.FC<BatchModuleProps> = ({
   dataSize,
   columns: {
     isButtonDisplayed,
-    defaultIsColumnOrderingOpen = false,
-    defaultIsColumnOrderingApplied = false,
+    defaultIsColumnsControlsOpen = false,
+    defaultIsColumnsControlsApplied = false,
   },
 }) => {
   const [isColumnsActive, setIsColumnsActive] = useState(
-    defaultIsColumnOrderingOpen,
+    defaultIsColumnsControlsOpen,
   );
   const [isColumnsApplied, setIsColumnsApplied] = useState(
-    defaultIsColumnOrderingApplied,
+    defaultIsColumnsControlsApplied,
   );
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => ({ columnOrder: s.columnOrder, hiddenColumns: s.hiddenColumns }),
+      ({ columnOrder, hiddenColumns }) => {
+        if (all(isEmpty, [columnOrder, hiddenColumns])) {
+          setIsColumnsApplied(false);
+        }
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <BatchModuleWrapper paddingSize={SpaceSizes.md}>
@@ -81,8 +96,8 @@ BatchModule.propTypes = {
   ...ElementCounter.propTypes,
   columns: PropTypes.exact({
     isButtonDisplayed: PropTypes.bool,
-    defaultIsColumnOrderingOpen: PropTypes.bool,
-    defaultIsColumnOrderingApplied: PropTypes.bool,
+    defaultIsColumnsControlsOpen: PropTypes.bool,
+    defaultIsColumnsControlsApplied: PropTypes.bool,
   }),
 };
 

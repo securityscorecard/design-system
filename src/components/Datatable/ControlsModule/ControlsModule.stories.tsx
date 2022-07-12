@@ -84,11 +84,12 @@ export default {
 } as Meta;
 
 function ControlsModuleTemplate(args) {
-  useColumnsControls(action('onColumnOrderChange'), simpleColumns, [
-    'country',
-    'source',
-    'findingsCount',
-  ]);
+  useColumnsControls(
+    action('onColumnOrderChange'),
+    action('onColumnVisibilityChange'),
+    simpleColumns,
+    ['country', 'source', 'findingsCount'],
+  );
   return <ControlsModule {...args} />;
 }
 
@@ -143,7 +144,7 @@ export const WithDisabledColumns: Story<ControlsModuleProps<Data>> =
 
 WithDisabledColumns.args = {
   ...Playground.args,
-  hasColumnOrdering: false,
+  hasColumnsControls: false,
 };
 
 export const WithOpenColumns: Story<ControlsModuleProps<Data>> =
@@ -151,7 +152,7 @@ export const WithOpenColumns: Story<ControlsModuleProps<Data>> =
 
 WithOpenColumns.args = {
   ...Playground.args,
-  defaultIsColumnOrderingOpen: true,
+  defaultIsColumnsControlsOpen: true,
 };
 
 export const WithAppliedColumns: Story<ControlsModuleProps<Data>> =
@@ -159,7 +160,7 @@ export const WithAppliedColumns: Story<ControlsModuleProps<Data>> =
 
 WithAppliedColumns.args = {
   ...Playground.args,
-  defaultIsColumnOrderingApplied: true,
+  defaultIsColumnsControlsApplied: true,
 };
 
 export const WithDisabledSearch: Story<ControlsModuleProps<Data>> =

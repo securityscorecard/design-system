@@ -125,7 +125,7 @@ describe('Datatable/ControlsModule', () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
-          defaultIsColumnOrderingOpen
+          defaultIsColumnsControlsOpen
         />,
       );
 
@@ -146,7 +146,7 @@ describe('Datatable/ControlsModule', () => {
             ...defaultControlsConfig.filteringConfig,
             fields: filterFields,
           }}
-          defaultIsColumnOrderingOpen
+          defaultIsColumnsControlsOpen
         />,
       );
 

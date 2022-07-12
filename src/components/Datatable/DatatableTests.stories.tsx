@@ -138,7 +138,7 @@ WithDisabledControlsAndActiveColumns.args = {
   isControlsEnabled: false,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    defaultIsColumnOrderingOpen: true,
+    defaultIsColumnsControlsOpen: true,
   },
 };
 
@@ -148,7 +148,7 @@ WithDisabledControlsAndAppliedColumns.args = {
   isControlsEnabled: false,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    defaultIsColumnOrderingApplied: true,
+    defaultIsColumnsControlsApplied: true,
   },
 };
 
@@ -158,7 +158,7 @@ WithDisabledControlsAndColumns.args = {
   isControlsEnabled: false,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    hasColumnOrdering: false,
+    hasColumnsControls: false,
   },
 };
 
@@ -205,7 +205,7 @@ WithOpenColumns.args = {
   ...MinimalConfig.args,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    defaultIsColumnOrderingOpen: true,
+    defaultIsColumnsControlsOpen: true,
   },
 };
 WithOpenColumns.parameters = {
@@ -219,7 +219,7 @@ WithAppliedColumns.args = {
   ...MinimalConfig.args,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    defaultIsColumnOrderingApplied: true,
+    defaultIsColumnsControlsApplied: true,
   },
 };
 
@@ -228,8 +228,8 @@ WithOpenAndAppliedColumns.args = {
   ...MinimalConfig.args,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    defaultIsColumnOrderingOpen: true,
-    defaultIsColumnOrderingApplied: true,
+    defaultIsColumnsControlsOpen: true,
+    defaultIsColumnsControlsApplied: true,
   },
 };
 WithOpenAndAppliedColumns.parameters = {
@@ -243,7 +243,7 @@ WithDisabledColumns.args = {
   ...MinimalConfig.args,
   controlsConfig: {
     ...MinimalConfig.args.controlsConfig,
-    hasColumnOrdering: false,
+    hasColumnsControls: false,
   },
 };
 
@@ -271,4 +271,28 @@ export const WithSinglePage = DatatableTemplate.bind({});
 WithSinglePage.args = {
   ...MinimalConfig.args,
   dataSize: 50,
+};
+
+export const WithAllColumnsHidden = DatatableTemplate.bind({});
+WithAllColumnsHidden.args = {
+  ...MinimalConfig.args,
+  controlsConfig: {
+    ...MinimalConfig.args.controlsConfig,
+    defaultIsColumnsControlsApplied: true,
+  },
+  tableConfig: {
+    defaultHiddenColumns: [
+      'status',
+      'detectionMethod',
+      'country',
+      'findingsCount',
+      'ipAddress',
+      'domainsCount',
+      'source',
+      'issuesCount',
+      'observationDate',
+      'lastObservationDate',
+      'observedFor',
+    ],
+  },
 };

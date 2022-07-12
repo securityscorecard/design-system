@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { allPass, reduce } from 'ramda';
 import { Column, IdType } from 'react-table';
 import { isNotFunction, isNotUndefined } from 'ramda-adjunct';
+import { useDeepCompareEffect } from 'use-deep-compare';
 
 import { DatatableStore } from '../Datatable.store';
 
@@ -14,20 +15,28 @@ const normalizeColumns = (acc, { id, accessor, Header }) => ({
 
 export const useColumnsControls = <D extends Record<string, unknown>>(
   onColumnOrderChange: (columnOrder: IdType<D>[]) => void,
+  onColumnVisibilityChange: (hiddenColumns: IdType<D>[]) => void,
   columns: Column<D>[],
   defaultColumnOrder: IdType<D>[] = [],
+  defaultHiddenColumns: IdType<D>[] = [],
 ): void => {
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     DatatableStore.update((s) => {
       s.columns = reduce(normalizeColumns, {}, columns);
     });
   }, [columns]);
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     DatatableStore.update((s) => {
       s.columnOrder = defaultColumnOrder;
     });
   }, [defaultColumnOrder]);
+
+  useDeepCompareEffect(() => {
+    DatatableStore.update((s) => {
+      s.hiddenColumns = defaultHiddenColumns;
+    });
+  }, [defaultHiddenColumns]);
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
@@ -41,4 +50,17 @@ export const useColumnsControls = <D extends Record<string, unknown>>(
       unsubscribe();
     };
   }, [onColumnOrderChange]);
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => s.hiddenColumns,
+      (hiddenColumns) => {
+        onColumnVisibilityChange(hiddenColumns);
+      },
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [onColumnVisibilityChange]);
 };
