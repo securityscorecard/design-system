@@ -25,6 +25,13 @@ const widthVariants = {
   [ModalSizes.lg]: 900,
 };
 
+const paddingVariants = {
+  [ModalSizes.xs]: SpaceSizes.lg,
+  [ModalSizes.sm]: SpaceSizes.lg,
+  [ModalSizes.md]: SpaceSizes.lgPlus,
+  [ModalSizes.lg]: SpaceSizes.lgPlus,
+};
+
 const BaseModal = styled.div<{ $maxWidth: number }>`
   display: flex;
   flex-direction: column;
@@ -79,7 +86,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
               />
             </Inline>
             <Content
-              paddingSize={SpaceSizes.lgPlus}
+              paddingSize={paddingVariants[size]}
               paddingType={hasFooter ? 'squish' : 'square'}
             >
               {children}
