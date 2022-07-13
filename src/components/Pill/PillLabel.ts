@@ -11,7 +11,7 @@ const PillLabelSmall = css`
 `;
 const PillLabelMedium = css`
   font-size: ${getFontSize('lg')};
-  line-height: 1rem;
+  line-height: 1.25rem;
 `;
 
 const pillLabelSizes = {

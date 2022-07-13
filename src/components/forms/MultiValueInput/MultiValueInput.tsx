@@ -91,7 +91,8 @@ const InputContainer = styled.div`
     border: 0 none;
     color: ${getFormStyle('color')};
     font-family: ${getFontFamily('base')};
-    font-size: ${getFontSize('md')};
+    font-size: ${getFontSize('lg')};
+    line-height: ${getFormStyle('fieldLineHeight')};
     outline: none;
 
     &::-ms-clear {

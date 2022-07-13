@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
 import PropTypes from 'prop-types';
+import { pipe } from 'ramda';
 
-import { getColor, getSpace } from '../../../utils';
+import { getColor, getFormStyle, getSpace, pxToRem } from '../../../utils';
 import { Input } from '../Input';
 import { SpaceSizes } from '../../../theme';
-import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { Padbox } from '../../layout';
 import { Spinner } from '../../Spinner';
 import { useField } from './useField';
 import { SearchBarV2Props } from './SearchBarV2.types';
@@ -18,10 +17,7 @@ const SearchBarRoot = styled.div`
   position: relative;
 `;
 
-const IconWrapper = styled(Padbox).attrs({
-  paddingSize: SpaceSizes.md,
-  paddingType: PaddingTypes.squish,
-})`
+const IconWrapper = styled.div`
   position: absolute;
   top: 0;
   display: flex;
@@ -32,10 +28,13 @@ const IconWrapper = styled(Padbox).attrs({
 
 const SearchIconWrapper = styled(IconWrapper)`
   left: 0;
+  padding: ${getSpace(SpaceSizes.md)};
+  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
 `;
 
 const ClearButton = styled(IconWrapper)`
-  right: 0;
+  right: ${getSpace(SpaceSizes.md)};
+  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
   background: none;
   border: none;
   border-radius: 0;
@@ -146,7 +145,7 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
           onChange={handleOnChange}
           onKeyDown={hadleOnKeyDown}
         />
-        <SearchIconWrapper paddingSize={SpaceSizes.sm}>
+        <SearchIconWrapper>
           {isSearching ? (
             <Spinner
               borderWidth={2}
@@ -163,7 +162,6 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
           <ClearButton
             aria-label="Clear search value"
             as="button"
-            paddingSize={SpaceSizes.sm}
             onClick={handleClearSearch}
           >
             <Icon name={SSCIconNames.times} type={IconTypes.ssc} />

@@ -67,7 +67,7 @@ export const createButtons = (themeColors: typeof colors): Buttons => ({
     },
   },
   heights: {
-    md: 32,
+    md: 36,
     lg: 48,
     sm: 24,
   },

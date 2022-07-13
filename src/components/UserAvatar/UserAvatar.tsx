@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { pipe, take, toUpper, trim } from 'ramda';
 import PropTypes from 'prop-types';
 
@@ -16,12 +16,25 @@ import {
 import { UserAvatarSizes } from './UserAvatar.enums';
 import { BaseButton } from '../_internal/BaseButton';
 
+const smallAvatar = css`
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
+`;
+const mediumAvatar = css`
+  font-size: ${getFontSize('lg')};
+  line-height: ${getLineHeight('lg')};
+`;
+
+const avatarSizes = {
+  [UserAvatarSizes.sm]: smallAvatar,
+  [UserAvatarSizes.md]: mediumAvatar,
+};
+
 // TODO: migrate purple Brand when we change button colors.
 const StyledButton = styled(BaseButton)`
   border-radius: ${getRadii('round')};
-  font-size: ${getFontSize('md')};
   font-weight: ${getFontWeight('regular')};
-  line-height: ${getLineHeight('md')};
+  ${({ size }) => avatarSizes[size]};
   width: ${({ size, theme }) =>
     pipe(getButtonHeight(size), pxToRem)({ theme })};
 

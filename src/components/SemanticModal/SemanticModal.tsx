@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { SemanticModalVariants } from './SemanticModal.enums';
-import { SemanticModalProps } from './SemanticModal.types';
+import { RenderButtonProps, SemanticModalProps } from './SemanticModal.types';
 import { Modal, ModalEnums } from '../Modal';
 import { Button, ButtonEnums } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';
@@ -41,6 +41,26 @@ const StyledIcon = styled(Icon)<{ $variant?: SemanticModalProps['variant'] }>`
   font-size: ${pxToRem(48)};
 `;
 
+const renderButton = ({
+  action,
+  color,
+  isLoading,
+  variant,
+}: RenderButtonProps) => (
+  <Button
+    key={action.name}
+    color={color}
+    href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+    isLoading={isLoading}
+    name={action.name}
+    to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+    variant={variant}
+    onClick={action.onClick}
+  >
+    {action.label}
+  </Button>
+);
+
 const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
   (
     {
@@ -50,27 +70,10 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
       onClose,
       variant = SemanticModalVariants.success,
       primaryButtonColor = ButtonEnums.ButtonColors.primary,
+      isPrimaryButtonLoading = false,
     },
     ref,
   ) => {
-    const renderButton = (
-      action: ActionKinds<[React.MouseEvent]>,
-      buttonVariant: typeof ButtonEnums.ButtonVariants[keyof typeof ButtonEnums.ButtonVariants],
-      color: typeof ButtonEnums.ButtonColors[keyof typeof ButtonEnums.ButtonColors],
-    ) => (
-      <Button
-        key={action.name}
-        color={color}
-        href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
-        name={action.name}
-        to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
-        variant={buttonVariant}
-        onClick={action.onClick}
-      >
-        {action.label}
-      </Button>
-    );
-
     return (
       <Modal ref={ref} size={ModalEnums.ModalSizes.sm} onClose={onClose}>
         <Center isTextCentered>
@@ -80,21 +83,24 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
             </div>
             <Stack gap={SpaceSizes.md}>
               <H3>{title}</H3>
-              <Text>{message}</Text>
+              <Text as="div">{message}</Text>
               <Padbox paddingSize={SpaceSizes.md}>
                 <Inline gap={SpaceSizes.md} justify="center">
                   {actions.map(
                     (action: ActionKinds<[React.MouseEvent]>, index: number) =>
                       isNotUndefined(action) &&
-                      renderButton(
+                      renderButton({
                         action,
-                        index === 0
-                          ? ButtonEnums.ButtonVariants.outline
-                          : ButtonEnums.ButtonVariants.solid,
-                        index === 0
-                          ? ButtonEnums.ButtonColors.primary
-                          : primaryButtonColor,
-                      ),
+                        variant:
+                          index === 0
+                            ? ButtonEnums.ButtonVariants.outline
+                            : ButtonEnums.ButtonVariants.solid,
+                        color:
+                          index === 0
+                            ? ButtonEnums.ButtonColors.primary
+                            : primaryButtonColor,
+                        isLoading: index === 0 ? false : isPrimaryButtonLoading,
+                      }),
                   )}
                 </Inline>
               </Padbox>
@@ -110,10 +116,11 @@ export default SemanticModal;
 
 SemanticModal.propTypes = {
   title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.node.isRequired,
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType)
     .isRequired,
   onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(Object.values(SemanticModalVariants)),
   primaryButtonColor: PropTypes.oneOf(Object.values(ButtonColors)),
+  isPrimaryButtonLoading: PropTypes.bool,
 };

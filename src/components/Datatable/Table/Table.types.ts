@@ -31,7 +31,7 @@ export interface TableConfig<D> {
   defaultSortBy: SortingRule<D>[];
   pageButtonsCount?: number;
   defaultColumnOrder: IdType<D>[];
-  // defaultHiddenColumns: IdType<D>[];
+  defaultHiddenColumns: IdType<D>[];
   rowActions: RowAction<D>[];
   NoMatchingDataComponent: ReactComponentLike;
   NoDataComponent: ReactComponentLike;

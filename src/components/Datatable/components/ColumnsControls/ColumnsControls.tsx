@@ -7,7 +7,14 @@ import { ControlDropdown } from '../../../ControlDropdown';
 import { SortableList } from '../../../SortableList';
 import { DatatableStore } from '../../Datatable.store';
 import { useColumnOrder } from './hooks/useColumnOrder';
+import { useColumnVisibility } from './hooks/useColumnVisibility';
 import { ColumnsControlsProps } from './ColumnsControls.types';
+import { Inline } from '../../../layout';
+import { Text } from '../../../typographyLegacy';
+import { TextSizes } from '../../../typographyLegacy/Text/Text.enums';
+import { Switch } from '../../../forms';
+import { SwitchSizes } from '../../../forms/Switch/Switch.enums';
+import { SpaceSizes } from '../../../../theme';
 
 const ColumnsControls: React.FC<ColumnsControlsProps> = ({
   children,
@@ -25,20 +32,31 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
     resetOrderedColumns,
     isInDefaultOrder,
   } = useColumnOrder();
+  const {
+    hiddenColumns,
+    setHiddenColumn,
+    storeVisibleColumns,
+    reinitializeVisibleColumns,
+    resetVisisbleColumns,
+    isInDefaultVisibility,
+  } = useColumnVisibility();
   const allColumns = DatatableStore.useState((s) => s.columns);
 
   const handleCloseColumnsControl = () => {
     onClose();
     reinitializeOrderedColumns();
+    reinitializeVisibleColumns();
   };
   const handleApplyColumnsControl = () => {
-    onApply(!isInDefaultOrder);
+    onApply(!isInDefaultOrder || !isInDefaultVisibility);
     storeOrderedColumns();
+    storeVisibleColumns();
   };
 
   const handleResetColumnsControl = () => {
     onReset();
     resetOrderedColumns();
+    resetVisisbleColumns();
   };
 
   return (
@@ -55,6 +73,28 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
         <SortableList
           items={orderedColumns}
           labels={pluck('label')(allColumns)}
+          maxHeight={300}
+          renderItem={({ label, id }) => {
+            return (
+              <Inline
+                align="center"
+                data-id={id}
+                gap={SpaceSizes.sm}
+                justify="space-between"
+              >
+                <Text size={TextSizes.md}>{label}</Text>
+                <Switch
+                  checked={!hiddenColumns.includes(id)}
+                  name={`visibility-${id}`}
+                  size={SwitchSizes.sm}
+                  switchId={`visibility-${id}`}
+                  onChange={(e) => {
+                    setHiddenColumn(id, e.target.checked);
+                  }}
+                />
+              </Inline>
+            );
+          }}
           onOrderChange={setLocalColumnOrder}
         />
       </ControlDropdown>

@@ -42,9 +42,14 @@ import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
 import { selectionColumn } from './columns/selectionColumn';
 import { LoadingOverlay } from './components';
-import { Padbox } from '../../layout';
+import { Padbox, Stack } from '../../layout';
 import { getColor, pxToRem } from '../../../utils';
 import { TableProps } from './Table.types';
+import { SELECTION_COLUMN_ID } from '../../_internal/BaseTable/renderers/renderers.enums';
+import { H4, Paragraph } from '../../typographyLegacy';
+import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
+import { SpaceSizes } from '../../../theme';
+import { Button, ButtonEnums } from '../../Button';
 
 const NoDataContainer = styled(Padbox)`
   display: flex;
@@ -99,15 +104,18 @@ function Table<D extends Record<string, unknown>>({
   defaultSortBy,
   defaultPageIndex,
   defaultColumnOrder,
+  defaultHiddenColumns,
   pageButtonsCount,
-}: // defaultHiddenColumns,
-TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
+}: TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
   const tableDataSize = useMemo(
     () => (hasServerSidePagination ? dataSize : data.length),
     [hasServerSidePagination, dataSize, data],
   );
   const hasExclusiveSelection = DatatableStore.useState(
     (s) => s.hasExclusiveSelection,
+  );
+  const hiddenColumnsLength = DatatableStore.useState(
+    (s) => s.hiddenColumns.length,
   );
   const hasAppliedFilters = DatatableStore.useState((s) => s.hasAppliedFilters);
 
@@ -136,6 +144,7 @@ TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
     pageCount,
     dispatch,
     setColumnOrder,
+    setHiddenColumns,
     state: { pageIndex, selectedRowIds, pageSize, sortBy },
   } = useTable<D>(
     {
@@ -153,7 +162,7 @@ TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
         // ORDERING
         columnOrder: defaultColumnOrder,
         // VISIBILITY
-        // hiddenColumns: defaultHiddenColumns,
+        hiddenColumns: defaultHiddenColumns,
       },
       // PAGINATION
       manualPagination: hasServerSidePagination,
@@ -200,6 +209,12 @@ TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
     collectFetchParams(newPageIndex, pageSize, sortBy);
   };
 
+  const resetHiddenColumns = () => {
+    DatatableStore.update((s) => {
+      s.hiddenColumns = [];
+    });
+  };
+
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
       prop('isCanceled'),
@@ -244,6 +259,22 @@ TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
       unsubscribe();
     };
   }, [setColumnOrder]);
+
+  useEffect(() => {
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => s.hiddenColumns,
+      (hiddenColumns) => {
+        setHiddenColumns(
+          columns.length === hiddenColumns.length
+            ? [...hiddenColumns, SELECTION_COLUMN_ID]
+            : hiddenColumns,
+        );
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, [setHiddenColumns, columns.length]);
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
@@ -315,6 +346,26 @@ TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
           />
         )}
       </BaseTableAndLoadingOverlayContainer>
+      {hiddenColumnsLength === columns.length && (
+        <NoDataContainer>
+          <Stack gap={SpaceSizes.sm} justify="flex-start">
+            <Stack gap={SpaceSizes.md}>
+              <H4>
+                {dataSize} {dataSize === 1 ? 'items' : 'item'} found
+              </H4>
+              <Paragraph size={TextSizes.md}>
+                But all columns are hidden at the moment.
+              </Paragraph>
+            </Stack>
+            <Button
+              variant={ButtonEnums.ButtonVariants.text}
+              onClick={resetHiddenColumns}
+            >
+              Show Default Columns
+            </Button>
+          </Stack>
+        </NoDataContainer>
+      )}
       {tableDataSize === 0 ? (
         <NoDataContainer>
           {isDataLoading ? (

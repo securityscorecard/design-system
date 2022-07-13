@@ -22,7 +22,7 @@ export const datePickerStyles = css`
     border-radius: ${getRadii('default')};
     color: ${getFormStyle('color')};
     font-size: ${getFontSize('md')};
-    line-height: ${getLineHeight('md')};
+    line-height: ${getLineHeight('lg')};
     font-weight: ${getFontWeight('regular')};
   }
   .DateRangePicker-input:focus {

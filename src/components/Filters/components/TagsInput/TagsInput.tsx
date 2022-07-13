@@ -30,7 +30,7 @@ import { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 const Container = styled(Padbox)<TagsContainerProps>`
   display: flex;
   width: 100%;
-  min-height: ${pxToRem(32)};
+  min-height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
   padding: ${({ isFocused }) => pxToRem(0, isFocused ? 15 : 16)};
   background: ${getFormStyle('bgColor')};
   border-width: ${({ isFocused, isInvalid }) =>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Text } from '../../typographyLegacy';
+import { Text as BaseText } from '../../typographyLegacy';
 import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { Padbox } from '../../layout';
 import { getColor, getRadii } from '../../../utils';
@@ -14,6 +14,10 @@ const Container = styled(Padbox)`
   border-radius: ${getRadii('default')};
   background: ${getColor('neutral.200')};
   text-transform: capitalize;
+`;
+
+const Text = styled(BaseText)`
+  line-height: unset;
 `;
 
 const DisabledOperator: React.FC = ({ children }) => (
