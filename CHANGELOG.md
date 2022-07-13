@@ -1,3 +1,20 @@
+# [1.0.0-alpha.193](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.192...v1.0.0-alpha.193) (2022-07-13)
+
+
+### Bug Fixes
+
+* **Accordion:** fix icon size in Safari ([ef3dc0f](https://github.com/securityscorecard/design-system/commit/ef3dc0ff5a0a65c5d8f00235b39461f190262079))
+* adjust font size ([73a8591](https://github.com/securityscorecard/design-system/commit/73a8591c609076295ca49d54cf32fe3706612737))
+
+
+### Features
+
+* add new color constants ([f33dc22](https://github.com/securityscorecard/design-system/commit/f33dc22b9b4ad7acfa776e399cfb44789e365e20))
+* **Datatable:** add visibility toggles to columns controls ([39ddbec](https://github.com/securityscorecard/design-system/commit/39ddbeca4272389e0944fb23d35d8d280ca95c02))
+* **Modal:** add size based padding variations for Modal ([95e1225](https://github.com/securityscorecard/design-system/commit/95e1225b0e16e05970f1836e14effbfe247bb84f))
+* **SemanticModal:** add loading prop and extract renderButton fn ([0d55f58](https://github.com/securityscorecard/design-system/commit/0d55f58eb8dbae86adbd9b6f1b21fa3b3c06184c))
+* **SemanticModal:** allow message as a React node ([e00870e](https://github.com/securityscorecard/design-system/commit/e00870e556c87bd21fdb11401c69ff9a21189140))
+
 # [1.0.0-alpha.192](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.191...v1.0.0-alpha.192) (2022-06-29)
 
 
