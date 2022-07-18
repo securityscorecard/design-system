@@ -20,6 +20,10 @@ export interface CardHeaderProps {
    */
   title: string;
   /**
+   * Card main title adornment
+   */
+  adornment?: React.ReactNode;
+  /**
    * Subtitle text
    */
   subtitle?: string;
