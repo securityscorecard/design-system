@@ -72,12 +72,14 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
       value: valueFromProps,
       defaultValue,
       onChange: onChangeFromProps,
+      onKeyUp,
       onClear,
       onSearch,
       hasDebouncedSearch = false,
       debounceTime = 500,
       placeholder = 'Search',
       isDisabled = false,
+      isInvalid = false,
       isSearching: isSearchingFromProps = false,
       ...rest
     },
@@ -88,7 +90,9 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
       defaultValue,
       onChangeFromProps,
     );
-    const [isSearching, setIsSearching] = useState(isSearchingFromProps);
+    const [internalIsSearching, setInternalIsSearching] = useState(false);
+    const isSearching =
+      onSearch === undefined ? isSearchingFromProps : internalIsSearching;
     const [typingTimeout, setTypingTimeout] = useState(0);
     const hasValue = isNonEmptyString(value);
     const isClearButtonVisible =
@@ -105,9 +109,11 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
     };
 
     const search = async (val: string) => {
-      setIsSearching(true);
+      if (isInvalid) return;
+
+      setInternalIsSearching(true);
       await onSearch(val);
-      setIsSearching(false);
+      setInternalIsSearching(false);
     };
 
     const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -124,10 +130,11 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
       }
       onChange(e);
     };
-    const hadleOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
-      e,
-    ) => {
-      if (e.key === 'Enter') {
+    const handleOnKeyUp: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+      if (isNotUndefined(onKeyUp)) {
+        onKeyUp(e);
+      }
+      if (e.key === 'Enter' && isNotUndefined(onSearch)) {
         search(value);
       }
     };
@@ -139,11 +146,12 @@ const SearchBarV2 = React.forwardRef<HTMLInputElement, SearchBarV2Props>(
           ref={ref}
           $isClearable={isClearButtonVisible}
           isDisabled={isDisabled}
+          isInvalid={isInvalid}
           placeholder={placeholder}
           type="search"
           value={value}
           onChange={handleOnChange}
-          onKeyDown={hadleOnKeyDown}
+          onKeyUp={handleOnKeyUp}
         />
         <SearchIconWrapper>
           {isSearching ? (
@@ -178,11 +186,13 @@ SearchBarV2.propTypes = {
   hasDebouncedSearch: PropTypes.bool,
   debounceTime: PropTypes.number,
   isDisabled: PropTypes.bool,
+  isInvalid: PropTypes.bool,
   isSearching: PropTypes.bool,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onClear: PropTypes.func,
   onSearch: PropTypes.func,
+  onKeyUp: PropTypes.func,
 };
 
 export default SearchBarV2;
