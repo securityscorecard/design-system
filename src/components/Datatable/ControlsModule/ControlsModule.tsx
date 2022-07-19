@@ -4,7 +4,7 @@ import { all, isEmpty, map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils';
-import { SearchBar } from '../../forms/SearchBar';
+import { Search } from '../components/Search';
 import { Filters } from '../../Filters';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColumnsControls } from '../components/ColumnsControls';
@@ -283,13 +283,11 @@ function ControlsModule<D extends Record<string, unknown>>({
           )}
 
           {hasSearch && (
-            <SearchBar
+            <Search
               defaultValue={defaultSearchValue}
-              hasSuggestions={false}
               onClear={handleOnSearchClear}
               onSearch={handleOnSearch}
               {...restSearchConfig}
-              // renderSearchSuggestion={renderSuggestionFilter}
             />
           )}
         </Inline>

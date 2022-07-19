@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Hooks/usePortal" />
+
+## usePortal
+
+This is hook for creation of React Portal. It renders children into a DOM node that exists outside the DOM hierarchy of the parent component.
+
+You can pass following options via parameter object
+
+| Key                    | Type     | Default | Description                                                                                                         |
+| :--------------------- | :------- | :------ | :------------------------------------------------------------------------------------------------------------------ |
+| onShow                 | function |         | It is triggered when portal is shown or the `isPortalVisible` set to `true`                                         |
+| onHide                 | function |         | It is triggered when portal is hidden or the `isPortalVisible` set to `false`                                       |
+| hasInternalShowHide    | boolean  | false   | Enables/disables the built-in showPortal/hidePortal functions, which gives you a flexible way to handle your portal |
+| defaultIsPortalVisible | boolean  | false   | It is the initial show/hide state of the portal                                                                     |
+
+The return object includes following properties
+
+| Key             | Type      | Default | Description                                                                                    |
+| :-------------- | :-------- | :------ | :--------------------------------------------------------------------------------------------- |
+| Portal          | component |         | Renders children into a DOM node that exists outside the DOM hierarchy of the parent component |
+| togglePortal    | function  |         | To toggle (showPortal/hidePortal) the portal or set the `isPortalVisible` to `true/false`      |
+| showPortal      | function  |         | To show the portal or set the `isPortalVisible` set to `true`                                  |
+| hidePortal      | function  |         | To hide the portal or set the `isPortalVisible` set to `false`                                 |
+| isPortalVisible | boolean   | false   | The showPortal/hidePortal state                                                                |
+
+```js
+import { usePortal } from '@securityscorecard/design-system';
+
+const { Portal } = usePortal({ defaultIsPortalVisible: true });
+```

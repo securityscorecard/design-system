@@ -267,8 +267,10 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      userEvent.type(screen.getByPlaceholderText('Search'), `${query}{enter}`);
-      fireEvent.click(screen.getByLabelText('Clear Search'));
+      userEvent.type(screen.getByRole('searchbox'), `${query}{enter}`);
+      fireEvent.click(
+        screen.getByRole('button', { name: /Clear search value/i }),
+      );
 
       await waitFor(() => DatatableStore.getRawState().query === query);
       expect(DatatableStore.getRawState().query).toBe('');

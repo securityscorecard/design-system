@@ -72,9 +72,10 @@ const Banner: React.FC<BannerProps> = ({
   __isLast,
   __current,
   __total,
+  ...props
 }) => {
   return (
-    <StyledPadbox $variant={variant}>
+    <StyledPadbox $variant={variant} {...props}>
       <BaseToastBanner
         iconPxSizesVariants={iconPxSizesVariants}
         iconSize={24}
