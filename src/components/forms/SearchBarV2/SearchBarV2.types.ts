@@ -68,4 +68,8 @@ export type SearchBarV2Props = (
      * Disable the search field
      */
     isDisabled?: boolean;
+    /**
+     * The search value is invalid
+     */
+    isInvalid?: boolean;
   };

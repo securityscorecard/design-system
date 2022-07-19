@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import type { IdType } from 'react-table';
 
-import {
-  SearchBarPropType,
-  SearchBarProps,
-} from '../../forms/SearchBar/SearchBar.types';
+import { SearchPropType, SearchProps } from '../components/Search/Search.types';
 import { FiltersPropType, FiltersProps } from '../../Filters/Filters.types';
 import { ControlTypes } from './ControlsModule.enums';
 
@@ -19,7 +16,7 @@ export type ControlsLocalState = Record<Controls, ControlState>;
 
 export interface ControlsConfig<D> {
   hasSearch: boolean;
-  searchConfig: Partial<SearchBarProps>;
+  searchConfig: Partial<SearchProps>;
   hasFiltering: boolean;
   filteringConfig: Partial<FiltersProps>;
   defaultIsFilteringOpen: boolean;
@@ -37,7 +34,7 @@ export interface ControlsConfig<D> {
 // TODO: commented part will be enabled when functionality is implemented
 export const ControlsConfigPropType = {
   hasSearch: PropTypes.bool,
-  searchConfig: PropTypes.exact(SearchBarPropType).isRequired,
+  searchConfig: PropTypes.exact(SearchPropType).isRequired,
   hasFiltering: PropTypes.bool,
   defaultIsFilteringOpen: PropTypes.bool,
   defaultIsFilteringApplied: PropTypes.bool,
