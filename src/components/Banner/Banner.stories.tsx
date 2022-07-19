@@ -45,6 +45,7 @@ Playground.parameters = {
 export const InfoBanner: Story = () => (
   <Banner
     actions={[...BannerActions]}
+    data-custom-attr="test"
     variant={BannerVariants.info}
     onClose={action('close-banner')}
   >
