@@ -3,14 +3,15 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import { SpaceSizes } from '../../theme';
-import { Paragraph } from '../typographyLegacy';
+import { Text } from '../typographyLegacy';
 import { Stack } from '../layout';
 import Card from './Card';
-import CardHeader from './CardHeader';
+import CardHeader, { IconAdornmentWrapper } from './CardHeader';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
 import CardMedia from './CardMedia';
-import { CardProps } from './Card.types';
+import { CardProps, Directions } from './Card.types';
+import { Icon } from '../Icon';
 import { UserAvatar } from '../UserAvatar';
 
 const image =
@@ -39,13 +40,35 @@ export default {
   subcomponents: { CardHeader, CardContent, CardMedia, CardActions },
   decorators: [(storyFn) => <div>{storyFn()}</div>],
   argTypes: {
-    children: { control: { disabled: true } },
+    children: {
+      control: {
+        disabled: true,
+      },
+    },
   },
 } as Meta;
 
-function CardHeaderTemplate() {
+function CardHeaderTemplate({
+  title = 'Card Title',
+  subtitle = 'Card Subtitle',
+  titleLinesCount = 0,
+  subtitleLinesCount = 0,
+  onHelpClick = null,
+}) {
   return (
-    <CardHeader actions={actions} subtitle="Card subtitle" title="Card title" />
+    <CardHeader
+      actions={actions}
+      leftAdornment={
+        <IconAdornmentWrapper paddingSize={SpaceSizes.sm}>
+          <Icon color="neutral.800" name="grip-dots-vertical" />
+        </IconAdornmentWrapper>
+      }
+      maxSubtitleLinesCount={subtitleLinesCount}
+      maxTitleLinesCount={titleLinesCount}
+      subtitle={subtitle}
+      title={title}
+      onHelpClick={onHelpClick}
+    />
   );
 }
 
@@ -53,7 +76,7 @@ function CardHeaderTemplateWithAdornment() {
   return (
     <CardHeader
       actions={actions}
-      adornment={Adornment()}
+      leftAdornment={Adornment()}
       subtitle="Card subtitle"
       title="Card title"
     />
@@ -63,17 +86,26 @@ function CardHeaderTemplateWithAdornment() {
 function CardContentTemplate() {
   return (
     <CardContent>
-      <Paragraph margin="none">
+      <Text size="md">
         Etiam id laoreet tellus. Pellentesque interdum porttitor iaculis. Ut leo
         urna, lobortis ac fermentum at, efficitur vel lorem. Cras viverra tempor
         augue, sed rutrum neque vestibulum at.
-      </Paragraph>
+      </Text>
     </CardContent>
   );
 }
 
 function CardActionsTemplate() {
-  return <CardActions actions={actions} />;
+  return (
+    <CardActions
+      actions={actions}
+      rightAdornment={
+        <IconAdornmentWrapper paddingSize={SpaceSizes.none}>
+          <Icon color="neutral.700" name="resize" />
+        </IconAdornmentWrapper>
+      }
+    />
+  );
 }
 
 function CardMediaTemplate({
@@ -98,11 +130,9 @@ Playground.args = {
   children: (
     <>
       <CardMediaTemplate />
-      <Stack gap={SpaceSizes.md}>
-        <CardHeaderTemplate />
-        <CardContentTemplate />
-        <CardActionsTemplate />
-      </Stack>
+      <CardHeaderTemplate />
+      <CardContentTemplate />
+      <CardActionsTemplate />
     </>
   ),
 };
@@ -150,11 +180,9 @@ WithCardMediaOnLeft.args = {
   children: (
     <>
       <CardMediaTemplate height="auto" width="400px" />
-      <Stack align="space-between" gap={SpaceSizes.md}>
-        <Stack gap={SpaceSizes.md}>
-          <CardHeaderTemplate />
-          <CardContentTemplate />
-        </Stack>
+      <Stack align="space-between" gap={SpaceSizes.none}>
+        <CardHeaderTemplate />
+        <CardContentTemplate />
         <CardActionsTemplate />
       </Stack>
     </>
@@ -165,11 +193,9 @@ WithCardMediaOnRight.args = {
   direction: 'horizontal',
   children: (
     <>
-      <Stack align="space-between" gap={SpaceSizes.md}>
-        <Stack gap={SpaceSizes.md}>
-          <CardHeaderTemplate />
-          <CardContentTemplate />
-        </Stack>
+      <Stack gap={SpaceSizes.none}>
+        <CardHeaderTemplate />
+        <CardContentTemplate />
         <CardActionsTemplate />
       </Stack>
       <CardMediaTemplate height="auto" width="400px" />
@@ -262,4 +288,40 @@ CardMediaWithVideo.args = {
 };
 CardMediaWithVideo.parameters = {
   screenshot: { skip: true },
+};
+
+export const WithTruncationConfig = ({
+  direction = 'vertical',
+  title,
+  titleLinesCount = 2,
+  ...args
+}) => {
+  return (
+    <div style={{ width: direction === 'vertical' ? '400px' : 'auto' }}>
+      <Card direction={direction as Directions} {...args}>
+        <CardHeaderTemplate title={title} titleLinesCount={titleLinesCount} />
+        <CardMediaTemplate />
+        <CardContentTemplate />
+      </Card>
+    </div>
+  );
+};
+WithTruncationConfig.args = {
+  ...Playground.args,
+  title:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non pellentesque eros. Cras commodo sit amet justo ut elementum. Quisque at molestie sapien. Ut porttitor quam nisl, non commodo dolor.',
+  titleLinesCount: 2,
+  direction: 'vertical',
+};
+
+export const WithHelpClickHandler = CardTemplate.bind({});
+WithHelpClickHandler.args = {
+  ...Playground.args,
+  children: (
+    <>
+      <CardMediaTemplate />
+      <CardHeaderTemplate onHelpClick={action('help-click')} />
+      <CardContentTemplate />
+    </>
+  ),
 };

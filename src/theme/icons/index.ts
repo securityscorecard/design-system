@@ -44,3 +44,6 @@ export { upload } from './upload';
 export { lightbulb } from './lightbulb';
 export { chevronRightRegular } from './chevronRightRegular';
 export { chevronLeftRegular } from './chevronLeftRegular';
+export { gripDotsVertical } from './gripDotsVertical';
+export { questionCircle } from './questionCircle';
+export { resize } from './resize';
