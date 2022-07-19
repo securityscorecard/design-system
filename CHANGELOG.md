@@ -1,3 +1,14 @@
+# [1.0.0-alpha.194](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.193...v1.0.0-alpha.194) (2022-07-19)
+
+
+### Features
+
+* **Banner:** allow to consume custom props ([47489db](https://github.com/securityscorecard/design-system/commit/47489dbc67f1620c3a62b5debdc6582cddbae33b))
+* **Card:** allow to consume custom props ([b7456cd](https://github.com/securityscorecard/design-system/commit/b7456cd74eea89ba507961af6559a1b4777bcc64))
+* **Card:** extend header with left adornment ([cccbf00](https://github.com/securityscorecard/design-system/commit/cccbf008a09c1ee267e4ef4cee05b7bfc719c00d))
+* **Datatable:** replace Searchbar with new component ([c2c3e53](https://github.com/securityscorecard/design-system/commit/c2c3e5376849b14dc115b179af3db973f962511e))
+* **hooks:** export useLockBodyScroll hook and update docs ([c3c5df7](https://github.com/securityscorecard/design-system/commit/c3c5df741c2486638ad29b2ed00214a7f1e3baf5))
+
 # [1.0.0-alpha.193](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.192...v1.0.0-alpha.193) (2022-07-13)
 
 
