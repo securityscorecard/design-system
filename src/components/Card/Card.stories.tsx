@@ -88,7 +88,7 @@ function CardMediaTemplate({
 
 const CardTemplate: Story<CardProps> = ({ direction, ...args }) => (
   <div style={{ width: direction === 'vertical' ? '400px' : 'auto' }}>
-    <Card direction={direction} {...args} />
+    <Card direction={direction} {...args} data-custom-attr="test" />
   </div>
 );
 

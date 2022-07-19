@@ -36,7 +36,7 @@ const CardWrapper = styled(Padbox)<CardWrapperProps>`
 const Card = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<CardProps>
->(({ children, direction = 'vertical' }, ref) => {
+>(({ children, direction = 'vertical', ...props }, ref) => {
   const DirectionContainer = (
     direction === 'vertical' ? Stack : Inline
   ) as React.ElementType;
@@ -45,6 +45,7 @@ const Card = React.forwardRef<
       ref={ref}
       $direction={direction}
       paddingSize={SpaceSizes.mdPlus}
+      {...props}
     >
       <DirectionContainer gap={SpaceSizes.md}>{children}</DirectionContainer>
     </CardWrapper>
