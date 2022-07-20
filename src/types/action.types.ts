@@ -1,4 +1,4 @@
-import { To } from 'history';
+import type { To } from 'history';
 import PropTypes from 'prop-types';
 
 import { ToPropType } from './to.types';

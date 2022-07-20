@@ -150,6 +150,7 @@ const FullscreenModal = forwardRef(
   },
 );
 FullscreenModal.propTypes = {
+  /* eslint-disable react/no-unused-prop-types */
   header: PropTypes.node.isRequired,
   content: PropTypes.node.isRequired,
   footer: PropTypes.node.isRequired,
@@ -157,6 +158,7 @@ FullscreenModal.propTypes = {
   sidebar: PropTypes.node,
   layout: PropTypes.oneOf(Object.values(FullscreenModalLayouts)),
   scrollToTopButtonLabel: PropTypes.string,
+  /* eslint-enable */
 };
 
 export default FullscreenModal;

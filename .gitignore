@@ -11,5 +11,14 @@ build
 yarn-error.log
 stats
 
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # Storybook static build
 storybook-static
+

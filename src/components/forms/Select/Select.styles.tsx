@@ -300,7 +300,7 @@ export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
     isClickable={false}
     size={PillSizes.sm}
     variant={PillVariants.solid}
-    {...innerProps}
+    {...(innerProps as Record<string, unknown>)}
     {...props}
   >
     {children}

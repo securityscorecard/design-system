@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18']
+        node: ['14', '16', '18.5']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,11 +21,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -35,7 +40,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Unit Tests
         run: yarn test
@@ -51,11 +56,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -65,7 +75,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Types Check
         run: yarn types
@@ -81,11 +91,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -95,11 +110,11 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Cache storybook build
         id: storybook-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: storybook-static
           key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
@@ -133,11 +148,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -147,7 +167,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Lint
         run: yarn lint
@@ -163,11 +183,16 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -177,7 +202,7 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Lint
         run: yarn lint:css
@@ -193,20 +218,26 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run Betterer
         run: yarn betterer:ci
@@ -215,7 +246,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18']
+        node: ['14', '16', '18.5']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -225,11 +256,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -239,11 +275,11 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Cache build
         id: library-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: build
           key: node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
@@ -271,11 +307,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
         id: cache
         with:
-          path: node_modules
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
           key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-16-${{ env.cache-name }}-
@@ -285,11 +326,11 @@ jobs:
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Cache build
         id: library-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: build
           key: node-16-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
