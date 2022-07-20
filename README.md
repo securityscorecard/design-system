@@ -49,6 +49,23 @@ cd path/to/application
 yarn link @securityscorecard/design-system # use design-system
 ```
 
+## PNP with Yarn2
+This package is using Yarn2 with [Plug'n'play installation](https://yarnpkg.com/features/pnp). That
+means you won't see any `node_modules` folder in the root. If you already workded in this repository
+we recommend to you first remove the original `node_modules` folder and then run `yarn` to create Yarn
+cache. We do not expect any significant issues but if anything goes wrong feel free to reach to us or
+check the [Troubleshooting](#troubleshooting) section below.
+
+### <a name="troubleshooting"></a>Troubleshooting
+#### Cannot find module <require-path>
+This is usually caused by not using patched version of typescript package. If you are using VS Code
+please follow these steps:
+
+1. Press `cmd+shift+p` in a TypeScript file
+2. Choose "Select TypeScript Version"
+3. Pick "Use Workspace Version"
+4. Restart VS Code (if needed)
+
 ## Contributing
 
 - read the [Contributing guide](CONTRIBUTING.md)
