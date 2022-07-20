@@ -28,6 +28,7 @@ export const parameters = {
     storySort: {
       order: [
         'Getting Started',
+        'Overview',
         'Changelog',
         'Theme',
         ['createIconLibrary()', 'DSProvider', 'Colors', 'Space', 'Typography'],
