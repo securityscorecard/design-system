@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { isEmptyString } from 'ramda-adjunct';
 
 import { SearchPropType, SearchProps } from './Search.types';
 import { Error } from '../../../forms/Message';
@@ -26,8 +25,6 @@ const Search: React.FC<SearchProps> = ({
     onClear?.();
   };
   const search = async (searchQuery: string) => {
-    if (isEmptyString(searchQuery)) return;
-
     setIsSearching(true);
     await onSearch(searchQuery);
     setIsSearching(false);
