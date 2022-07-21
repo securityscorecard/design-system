@@ -77,10 +77,10 @@ const margin: Margin = {
 
 const createLinks = (themeColors: typeof colors): Links => ({
   primary: {
-    color: '#0275d8',
-    hoverColor: '#015399',
-    activeColor: '#0275d8',
-    focusBgColor: '#ebf4fc',
+    color: themeColors.primary[600],
+    hoverColor: themeColors.primary[800],
+    activeColor: themeColors.primary[600],
+    focusBgColor: themeColors.primary[50],
     decoration: 'underline',
   },
   secondary: {

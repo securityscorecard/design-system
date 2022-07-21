@@ -12,9 +12,9 @@ export const createTokens = (themeColors: typeof colors) => ({
 
   // primary
   buttonSolidPrimaryTextColor: themeColors.neutral[0],
-  buttonSolidPrimaryBgColor: themeColors.primary[500],
-  buttonSolidPrimaryBgHoverColor: themeColors.primary[400],
-  buttonSolidPrimaryBgActiveColor: themeColors.primary[700],
+  buttonSolidPrimaryBgColor: themeColors.primary[600],
+  buttonSolidPrimaryBgHoverColor: themeColors.primary[700],
+  buttonSolidPrimaryBgActiveColor: themeColors.primary[800],
   buttonSolidPrimaryOutlineFocusColor: themeColors.primary[200],
   buttonSolidPrimaryBgDisabledColor: themeColors.primary[200],
 
@@ -27,13 +27,13 @@ export const createTokens = (themeColors: typeof colors) => ({
   buttonSolidDangerBgDisabledColor: themeColors.neutral[600],
 
   // Outline
-  buttonOutlineTextColor: themeColors.primary[500],
+  buttonOutlineTextColor: themeColors.primary[600],
   buttonOutlineBgColor: 'transparent',
-  buttonOutlineBorderColor: themeColors.primary[500],
+  buttonOutlineBorderColor: themeColors.primary[600],
   buttonOutlineBgHoverColor: themeColors.primary[50],
-  buttonOutlineTextActiveColor: themeColors.primary[700],
+  buttonOutlineTextActiveColor: themeColors.primary[800],
   buttonOutlineBgActiveColor: themeColors.primary[50],
-  buttonOutlineBorderActiveColor: themeColors.primary[700],
+  buttonOutlineBorderActiveColor: themeColors.primary[800],
   buttonOutlineOutlineFocusColor: themeColors.primary[200],
   buttonOutlineTextDisabledColor: themeColors.neutral[600],
   buttonOutlineBgDisabledColor: themeColors.neutral[300],
