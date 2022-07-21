@@ -59,10 +59,8 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@popperjs/core": "^2.11.4",
     "@react-aria/utils": "^3.12.0",
-    "@storybook/components": "^6.5.4",
     "@types/react": "16.14.5",
     "@types/styled-components": "^5.1.24",
-    "@types/testing-library__jest-dom": "^5.14.3",
     "classnames": "^2.3.1",
     "csstype": "^3.0.11",
     "dayjs": "^1.11.0",
@@ -183,7 +181,8 @@
     "set-value": "4.1.0",
     "ansi-regex": "5.0.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "@emotion/react": "11.7.1"
   },
   "repository": {
     "type": "git",
