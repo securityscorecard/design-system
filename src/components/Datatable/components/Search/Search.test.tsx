@@ -57,6 +57,18 @@ describe('Search', () => {
     await waitFor(() => expect(onSearch).toHaveBeenCalled());
     jest.useRealTimers();
   });
+  it('should trigger search if value is empty', async () => {
+    renderWithProviders(
+      <Search defaultValue="ab" onClear={onClear} onSearch={onSearch} />,
+    );
+    const searchInput = screen.getByRole('searchbox');
+    jest.useFakeTimers();
+
+    expect(searchInput).toHaveValue('ab');
+    userEvent.type(searchInput, '{Backspace}{Backspace}');
+    await waitFor(() => expect(onSearch).toBeCalledWith(''));
+    jest.useRealTimers();
+  });
   it('should not trigger search when value is invalid', async () => {
     renderWithProviders(
       <Search onClear={onClear} onSearch={onSearch} pattern="[0-9]+" />,
@@ -101,6 +113,22 @@ describe('Search', () => {
 
       userEvent.type(searchInput, '{Enter}');
       await waitFor(() => expect(onSearch).toBeCalledWith('query'));
+    });
+
+    it('should trigger search if value is empty', async () => {
+      renderWithProviders(
+        <Search
+          isValidatedOnSubmit
+          defaultValue="ab"
+          onClear={onClear}
+          onSearch={onSearch}
+        />,
+      );
+      const searchInput = screen.getByRole('searchbox');
+
+      expect(searchInput).toHaveValue('ab');
+      userEvent.type(searchInput, '{Backspace}{Backspace}{Enter}');
+      await waitFor(() => expect(onSearch).toBeCalledWith(''));
     });
 
     it('should not trigger search when value is invalid', async () => {
