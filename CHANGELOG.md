@@ -1,3 +1,10 @@
+# [1.0.0-alpha.196](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.195...v1.0.0-alpha.196) (2022-07-21)
+
+
+### Bug Fixes
+
+* **build:** downgrade @emotion/react ([0cb9c46](https://github.com/securityscorecard/design-system/commit/0cb9c4601effd243b36a508827585f4be4f8e1f0))
+
 # [1.0.0-alpha.195](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.194...v1.0.0-alpha.195) (2022-07-21)
 
 
