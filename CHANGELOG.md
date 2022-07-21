@@ -1,3 +1,10 @@
+# [1.0.0-alpha.195](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.194...v1.0.0-alpha.195) (2022-07-21)
+
+
+### Bug Fixes
+
+* **Datatable:** allow search being called with empty value ([6f4fb51](https://github.com/securityscorecard/design-system/commit/6f4fb51508a0f0ccd90e5a08c26569ec30ede79d))
+
 # [1.0.0-alpha.194](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.193...v1.0.0-alpha.194) (2022-07-19)
 
 
