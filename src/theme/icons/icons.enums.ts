@@ -40,6 +40,9 @@ export const SSCIconNames = {
   lightbulb: 'lightbulb',
   chevronRightRegular: 'chevron-right-regular',
   chevronLeftRegular: 'chevron-left-regular',
+  gripDotsVertical: 'grip-dots-vertical',
+  questionCircle: 'question-circle',
+  resize: 'resize',
 } as const;
 
 export const IconTypes = {

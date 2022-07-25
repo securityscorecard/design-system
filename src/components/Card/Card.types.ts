@@ -1,5 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 import { ReactComponentLike } from 'prop-types';
+import React from 'react';
 
 import { SpaceSize } from '../../theme/space.types';
 import { ActionKinds } from '../../types/action.types';
@@ -12,6 +13,10 @@ export interface CardActionsProps {
    * List of available actions for the Card footer (maximal number of actions is 2)
    */
   actions: ActionKinds<React.MouseEvent[]>[];
+  /**
+   * Adornment placed on the right side.
+   */
+  rightAdornment: React.ReactNode;
 }
 
 export interface CardHeaderProps {
@@ -19,10 +24,6 @@ export interface CardHeaderProps {
    * Card main title
    */
   title: string;
-  /**
-   * Card main title adornment
-   */
-  adornment?: React.ReactNode;
   /**
    * Subtitle text
    */
@@ -35,6 +36,22 @@ export interface CardHeaderProps {
    * Actions menu aria label
    */
   actionsButtonLabel?: string;
+  /**
+   * Adornment placed on the left side.
+   */
+  leftAdornment?: React.ReactNode;
+  /**
+   *  Callback called when help button is clicked. Determines whether the help button is rendered or not.
+   */
+  onHelpClick?: () => void;
+  /**
+   * Title max number of lines.
+   */
+  maxTitleLinesCount?: number;
+  /**
+   * Subtitle max number of lines.
+   */
+  maxSubtitleLinesCount?: number;
 }
 
 export interface CardMediaProps {

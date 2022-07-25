@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { pipe, prop } from 'ramda';
 
-import { SpaceSizes } from '../../theme';
 import { Inline, Padbox, Stack } from '../layout';
-import { getColor, getRadii } from '../../utils';
+import { getColor, getRadii, getShadow, getSpace } from '../../utils';
 import { CardMediaWrapper } from './CardMedia';
 import { getCommonMargin, getMarginFrom } from './utils';
+import { SpaceSize } from '../../theme/space.types';
 import { CardProps, CardWrapperProps } from './Card.types';
+import { SpaceSizes } from '../../theme';
 
 const CardWrapper = styled(Padbox)<CardWrapperProps>`
   flex-grow: 1;
@@ -15,6 +17,7 @@ const CardWrapper = styled(Padbox)<CardWrapperProps>`
   border: 1px solid ${getColor('neutral.400')};
   border-radius: ${getRadii('default')};
   overflow: hidden;
+  ${getShadow}
 
   & ${/* sc-selector */ CardMediaWrapper} {
     ${getCommonMargin};
@@ -33,6 +36,14 @@ const CardWrapper = styled(Padbox)<CardWrapperProps>`
   }
 `;
 
+export const CardContainer = styled.div<{
+  horizontalPadding: SpaceSize;
+  verticalPadding: SpaceSize;
+}>`
+  padding: ${pipe(prop('verticalPadding'), getSpace)}
+    ${pipe(prop('horizontalPadding'), getSpace)};
+`;
+
 const Card = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<CardProps>
@@ -41,13 +52,8 @@ const Card = React.forwardRef<
     direction === 'vertical' ? Stack : Inline
   ) as React.ElementType;
   return (
-    <CardWrapper
-      ref={ref}
-      $direction={direction}
-      paddingSize={SpaceSizes.mdPlus}
-      {...props}
-    >
-      <DirectionContainer gap={SpaceSizes.md}>{children}</DirectionContainer>
+    <CardWrapper ref={ref} $direction={direction} {...props}>
+      <DirectionContainer gap={SpaceSizes.none}>{children}</DirectionContainer>
     </CardWrapper>
   );
 });
