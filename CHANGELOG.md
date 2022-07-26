@@ -1,3 +1,10 @@
+# [1.0.0-alpha.197](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.196...v1.0.0-alpha.197) (2022-07-26)
+
+
+### Bug Fixes
+
+* **SearchBarV2:** remove z-index from icon ([696b7a9](https://github.com/securityscorecard/design-system/commit/696b7a909c5900409c0288f688212eceefc3e83d))
+
 # [1.0.0-alpha.196](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.195...v1.0.0-alpha.196) (2022-07-21)
 
 
