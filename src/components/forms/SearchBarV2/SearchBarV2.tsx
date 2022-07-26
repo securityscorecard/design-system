@@ -22,7 +22,6 @@ const IconWrapper = styled.div`
   top: 0;
   display: flex;
   align-items: center;
-  z-index: 1;
   color: ${getColor('neutral.800')};
 `;
 
