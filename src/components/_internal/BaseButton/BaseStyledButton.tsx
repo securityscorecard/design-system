@@ -68,6 +68,7 @@ const ButtonSolid = css<BaseStyledButtonProps>`
   border: 1px solid
     ${({ color }) => getToken(`buttonSolid${capitalize(color)}BgColor`)};
   text-decoration: none;
+  font-weight: ${getFontWeight('regular')};
 
   &,
   &:not([href]):not([tabindex]) {
@@ -132,6 +133,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   background-color: ${getToken(`buttonOutlineBgColor`)};
   border: 2px solid ${getButtonColor('borderColor')};
   text-decoration: none;
+  font-weight: ${getFontWeight('regular')};
 
   &,
   &:not([href]):not([tabindex]):not(:disabled) {
