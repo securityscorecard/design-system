@@ -1,3 +1,10 @@
+# [1.0.0-alpha.198](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.197...v1.0.0-alpha.198) (2022-08-03)
+
+
+### Features
+
+* **Colors:** add brand color types ([4ba2e84](https://github.com/securityscorecard/design-system/commit/4ba2e84572a2d10b0438de3be17c6ab49b358790))
+
 # [1.0.0-alpha.197](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.196...v1.0.0-alpha.197) (2022-07-26)
 
 
