@@ -42,7 +42,12 @@ const kinds = {
   },
 };
 
-const Signal: React.FC<SignalProps> = ({ kind, size = 16, ...props }) => {
+const Signal: React.FC<SignalProps> = ({
+  kind,
+  size = 16,
+  title = '',
+  ...props
+}) => {
   const { color, paths } = prop(kind)(kinds);
 
   return (
@@ -53,6 +58,7 @@ const Signal: React.FC<SignalProps> = ({ kind, size = 16, ...props }) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
+      <title>{title}</title>
       <circle cx="8" cy="8" fill={color} r="8" />
       <g>
         {paths.map((path, key) => (
@@ -71,6 +77,7 @@ const Signal: React.FC<SignalProps> = ({ kind, size = 16, ...props }) => {
 Signal.propTypes = {
   kind: PropTypes.oneOf(Object.values(SignalKinds)).isRequired,
   size: PropTypes.number,
+  title: PropTypes.string,
 };
 
 export default Signal;
