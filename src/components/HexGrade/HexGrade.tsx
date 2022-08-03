@@ -66,15 +66,28 @@ const HexGrade: React.FC<HexGradeProps> = ({
     defaultTo(colors.neutral[700]),
   )(grades);
   const white = colors.neutral[0];
-  const hexStroke = isInversed ? white : gradeColor;
-  const hexFill =
-    variant === HexGradeVariants.outline
-      ? 'transparent'
-      : isInversed
-      ? white
-      : gradeColor;
-  const charFill =
-    isInversed || variant === HexGradeVariants.outline ? gradeColor : white;
+
+  const VariantColorsMap = {
+    [HexGradeVariants.cs]: {
+      hexFill: gradeColor,
+      charFill: isInversed ? gradeColor : white,
+      hexStroke: isInversed ? gradeColor : white,
+    },
+    [HexGradeVariants.solid]: {
+      hexFill: isInversed ? white : gradeColor,
+      charFill: isInversed ? gradeColor : white,
+      hexStroke: isInversed ? white : gradeColor,
+    },
+    [HexGradeVariants.outline]: {
+      hexFill: 'transparent',
+      charFill: isInversed ? white : gradeColor,
+      hexStroke: isInversed ? white : gradeColor,
+    },
+  };
+
+  const variantColors = VariantColorsMap[variant];
+
+  const { hexStroke, hexFill, charFill } = variantColors;
 
   const wrapperPath = isCSVariant
     ? 'M5 14.7017V42.334L11 46.029V18.165L33.0606 4.5792L27.2487 1L5 14.7017ZM15 48.334V20.7017L37.2487 7L59.4974 20.7017V48.334L37.2487 62.0357L15 48.334Z'
