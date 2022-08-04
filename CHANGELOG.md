@@ -1,3 +1,17 @@
+# [1.0.0-alpha.199](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.198...v1.0.0-alpha.199) (2022-08-04)
+
+
+### Bug Fixes
+
+* **HexGrade:** adjust outline inverse colors ([78f06d8](https://github.com/securityscorecard/design-system/commit/78f06d85925fdcbe319b2ffbaef7d69d7ebf881f))
+* update button and links styling ([09929b7](https://github.com/securityscorecard/design-system/commit/09929b792d874fd4833be83b63bf5ae18357dd3c))
+
+
+### Features
+
+* **Card:** add adornments ([98a5a96](https://github.com/securityscorecard/design-system/commit/98a5a96bc5550f5e453d761d84a6ec88d26b108a))
+* **Signal:** add title for accessibility ([585ac8a](https://github.com/securityscorecard/design-system/commit/585ac8ad210564520a79c38ba3b427dce2f0b7b3))
+
 # [1.0.0-alpha.198](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.197...v1.0.0-alpha.198) (2022-08-03)
 
 
