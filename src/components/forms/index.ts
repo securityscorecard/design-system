@@ -10,7 +10,6 @@ export * from './Range';
 export * from './Switch';
 export * from './TextArea';
 export * from './SearchBar';
-export * from './SearchBarV2';
 export * from './SegmentedToggle';
 export * from './SelectableGroup';
 export * from './InputGroup';

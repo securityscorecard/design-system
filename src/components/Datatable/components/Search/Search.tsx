@@ -4,7 +4,7 @@ import { SearchPropType, SearchProps } from './Search.types';
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../../Filters/helpers';
 import { Stack } from '../../../layout';
-import { SearchBarV2 } from '../../../forms';
+import { SearchBar } from '../../../forms';
 
 const Search: React.FC<SearchProps> = ({
   onSearch,
@@ -58,7 +58,7 @@ const Search: React.FC<SearchProps> = ({
 
   return (
     <Stack>
-      <SearchBarV2
+      <SearchBar
         isInvalid={isInvalid}
         isSearching={isSearching}
         pattern={pattern}

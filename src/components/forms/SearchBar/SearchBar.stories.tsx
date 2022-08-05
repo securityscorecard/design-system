@@ -1,120 +1,99 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { noop } from 'ramda-adjunct';
 import { action } from '@storybook/addon-actions';
 
-import SearchBar from './SearchBar';
-import { renderSuggestionFilter } from './SearchSuggestionFormats';
-import { mockOnSearch, mockSuggestions } from './mocks';
-import { SearchBarProps } from './SearchBar.types';
 import { Inline, Stack } from '../../layout';
 import { Button } from '../../Button';
+import { Badges } from '../../../../.storybook/storybook.enums';
+import SearchBar from './SearchBar';
+import { SearchBarProps } from './SearchBar.types';
 
 export default {
   title: 'components/forms/SearchBar',
   component: SearchBar,
+  parameters: {
+    badges: [Badges.experimental],
+  },
   argTypes: {
-    placeholder: { control: { type: 'text' } },
+    defaultValue: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    value: {
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    onChange: {
+      control: { disable: true },
+    },
   },
 } as Meta;
 
-const randomResults = ['Banana', 'Apple', 'Orange', 'Pear', 'Melon'];
+const SearchBarTemplate: Story<SearchBarProps> = (args) => (
+  <SearchBar {...args} />
+);
 
-const commonArgs = {
-  placeholder: 'Search for domains or IPs',
-  onSearch: mockOnSearch,
-  onClear: noop,
+export const Playground = SearchBarTemplate.bind({});
+Playground.args = {
+  onChange: action('onChange'),
+  onClear: action('onClear'),
+  onSearch: action('onSearch'),
+};
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
-export const Default: Story = (args) => (
-  <SearchBar
-    aria-label="SearchBar"
-    hasSuggestions={false}
-    {...commonArgs}
-    {...args}
-  />
-);
+export const DefaultState = SearchBarTemplate.bind({});
 
-export const WithValidation: Story = () => (
-  <SearchBar
-    aria-label="SearchBar"
-    errorMessage="Only a number with 1 to 5 digits is allowed"
-    hasSuggestions={false}
-    pattern="[0-9]{1,5}"
-    {...commonArgs}
-  />
-);
-
-export const WithValidationOnSubmit: Story = () => (
-  <SearchBar
-    aria-label="SearchBar"
-    errorMessage="Only a number with 1 to 5 digits is allowed"
-    hasSuggestions={false}
-    pattern="[0-9]{1,5}"
-    isValidatedOnSubmit
-    {...commonArgs}
-  />
-);
-
-export const WithSuggestions: Story = () => {
-  const [suggestions, setSuggestions] = useState([]);
-
-  const onSearch = () => {
-    mockOnSearch('query');
-    setSuggestions(
-      mockSuggestions(
-        randomResults[Math.floor(Math.random() * randomResults.length)],
-      ),
-    );
-  };
-
-  return (
-    <SearchBar
-      {...commonArgs}
-      suggestions={suggestions}
-      hasSuggestions
-      onClear={() => setSuggestions([])}
-      onSearch={onSearch}
-    />
-  );
+export const WithDefaultValue = SearchBarTemplate.bind({});
+WithDefaultValue.args = {
+  defaultValue: 'some default search query',
 };
 
-export const QuickFilters: Story = () => {
-  const [suggestions, setSuggestions] = useState([]);
+export const Disabled = SearchBarTemplate.bind({});
+Disabled.args = {
+  isDisabled: true,
+};
+export const Searching = SearchBarTemplate.bind({});
+Searching.args = {
+  value: 'search query',
+  isSearching: true,
+};
 
-  const onSearch = () => {
-    mockOnSearch('query');
-    setSuggestions(
-      mockSuggestions(
-        randomResults[Math.floor(Math.random() * randomResults.length)],
-      ),
-    );
-  };
-
-  return (
-    <SearchBar
-      {...commonArgs}
-      renderSearchSuggestion={renderSuggestionFilter}
-      suggestions={suggestions}
-      hasSuggestions
-      onClear={() => setSuggestions([])}
-      onSearch={onSearch}
-    />
-  );
+export const WithDebouncedSearch = SearchBarTemplate.bind({});
+WithDebouncedSearch.args = {
+  hasDebouncedSearch: true,
+  debounceTime: 300,
+};
+WithDebouncedSearch.parameters = {
+  screenshot: { skip: true },
 };
 
 export const ControlledInput: Story<SearchBarProps> = (args) => {
   const [query, setQuery] = useState('');
+
+  const handleSearch = (): Promise<void> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  };
 
   return (
     <Stack gap="sm">
       <SearchBar
         {...args}
         value={query}
-        onSearch={(value) => {
-          setQuery(value);
-          action('search')(value);
+        onChange={(e) => {
+          setQuery(e.target.value);
         }}
+        onClear={() => setQuery('')}
+        onSearch={handleSearch}
       />
       <Inline gap="md">
         <Button onClick={() => setQuery('controlledValue1')}>Set query</Button>
@@ -123,7 +102,6 @@ export const ControlledInput: Story<SearchBarProps> = (args) => {
     </Stack>
   );
 };
-
 ControlledInput.parameters = {
   screenshot: { skip: true },
 };
