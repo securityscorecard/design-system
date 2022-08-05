@@ -22,10 +22,12 @@ Playground.parameters = {
 
 export const SolidHexGrades: Story = () => (
   <>
+    <Signal kind={SignalKinds.critical} size={32} />
     <Signal kind={SignalKinds.high} size={32} />
     <Signal kind={SignalKinds.medium} size={32} />
     <Signal kind={SignalKinds.low} size={32} />
     <Signal kind={SignalKinds.positive} size={32} />
+    <Signal kind={SignalKinds.negligible} size={32} />
     <Signal kind={SignalKinds.info} size={32} />
   </>
 );
@@ -34,8 +36,8 @@ export const SizedSignals: Story = () => (
   <>
     <Signal kind={SignalKinds.high} size={16} />
     <Signal kind={SignalKinds.medium} size={32} />
-    <Signal kind={SignalKinds.low} size={65} />
+    <Signal kind={SignalKinds.low} size={64} />
     <Signal kind={SignalKinds.positive} size={96} />
-    <Signal kind={SignalKinds.info} size={128} />
+    <Signal kind={SignalKinds.negligible} size={128} />
   </>
 );
