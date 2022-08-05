@@ -1,3 +1,10 @@
+# [1.0.0-alpha.200](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.199...v1.0.0-alpha.200) (2022-08-05)
+
+
+### Features
+
+* **Signal:** add critical and negligible kinds ([7216be0](https://github.com/securityscorecard/design-system/commit/7216be0f5e491227f06f4723a26eda03bb2148e6))
+
 # [1.0.0-alpha.199](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.198...v1.0.0-alpha.199) (2022-08-04)
 
 
