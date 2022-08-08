@@ -117,7 +117,8 @@ export const WithOverflowingTitle: Story = () => (
 
 export const WithoutBackdrop: Story = () => {
   const [displaySomething, setDisplaySomething] = useState(false);
-
+  const [displayDrawer, setDisplayDrawer] = useState(false);
+  const [displaySemanticModal, setDisplaySemanticModal] = useState(false);
   return (
     <Padbox>
       <Stack align="center" gap={SpaceSizes.md} justify="center">
@@ -131,6 +132,9 @@ export const WithoutBackdrop: Story = () => {
           Excellence inquietude assistance precaution any impression man
           sufficient.
         </Paragraph>
+        <Button onClick={() => setDisplayDrawer(!displayDrawer)}>
+          Toggle drawer button
+        </Button>
         <Button onClick={() => setDisplaySomething(!displaySomething)}>
           Random button
         </Button>
@@ -147,15 +151,43 @@ export const WithoutBackdrop: Story = () => {
           </Paragraph>
         ))}
       </Stack>
-      <Drawer
-        footer={<Footer />}
-        hasBackdrop={false}
-        size="sm"
-        title="Small size drawer without backdrop"
-        onClose={action('close-modal')}
-      >
-        <Content />
-      </Drawer>
+      {displayDrawer && (
+        <Drawer
+          footer={<Footer />}
+          hasBackdrop={false}
+          size="sm"
+          title="Small size drawer without backdrop"
+          onClose={() => setDisplayDrawer(false)}
+        >
+          {/* <Content /> */}
+          <Button
+            onClick={() => setDisplaySemanticModal(!displaySemanticModal)}
+          >
+            Jump out modal now!
+          </Button>
+          {!displaySemanticModal || (
+            <SemanticModal
+              actions={[
+                {
+                  label: 'Cancel',
+                  name: 'Cancel',
+                  onClick: () => setDisplaySemanticModal(false),
+                },
+                {
+                  label: 'Destroy',
+                  name: 'Destroy',
+                  onClick: () => setDisplaySemanticModal(false),
+                },
+              ]}
+              message="Something bad is about to happen"
+              primaryButtonColor={ButtonEnums.ButtonColors.danger}
+              title="Attention!"
+              variant="error"
+              onClose={() => setDisplaySemanticModal(false)}
+            />
+          )}
+        </Drawer>
+      )}
     </Padbox>
   );
 };
