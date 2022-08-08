@@ -1,3 +1,10 @@
+# [1.0.0-alpha.201](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.200...v1.0.0-alpha.201) (2022-08-08)
+
+
+### Bug Fixes
+
+* **Drawer:** enable onOuterClick only for backdrop drawer ([4c3e8cc](https://github.com/securityscorecard/design-system/commit/4c3e8cc4035f11c6e9b5dffcde8e4bab80fc45f8))
+
 # [1.0.0-alpha.200](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.199...v1.0.0-alpha.200) (2022-08-05)
 
 
