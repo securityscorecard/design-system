@@ -30,6 +30,7 @@ export interface LineHeight {
   xl: string;
   lg: string;
   md: string;
+  h4: string;
 }
 
 type MarginValue = {

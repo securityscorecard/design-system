@@ -41,6 +41,7 @@ const lineHeight: LineHeight = {
   xl: pxToRem(BASE_LINE_HEIGHT * 1.5), // 30px
   lg: pxToRem(BASE_LINE_HEIGHT), // 20px
   md: pxToRem(BASE_LINE_HEIGHT * 0.8), // 16px
+  h4: pxToRem(BASE_LINE_HEIGHT), // 20px
 };
 
 const margin: Margin = {

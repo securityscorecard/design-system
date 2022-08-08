@@ -1,38 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { any } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { ActionKindsPropType } from '../../types/action.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
-import { getColor, getRadii } from '../../utils';
+import { getColor, getRadii, getSpace } from '../../utils';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { Inline, Padbox, Stack } from '../layout';
 import { Heading, Text } from '../typographyLegacy';
 import { Icon } from '../Icon';
 import { CardHeaderProps } from './Card.types';
 import { CardContainer } from './Card';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { Tooltip } from '../Tooltip';
 
-export const IconAdornmentWrapper = styled(Padbox)`
-  border-radius: ${getRadii('default')};
-`;
-
-const ActionButton = styled.button`
-  background-color: transparent;
+export const CardIconButton = styled.button<{
+  as?: string;
+  $isActive?: boolean;
+}>`
+  background-color: ${({ $isActive }) =>
+    $isActive ? getColor('primary.50') : 'transparent'};
   border: none;
-  cursor: pointer;
   box-sizing: content-box;
   color: ${getColor('neutral.800')};
   display: flex;
-
-  &:hover
-    ${/* sc-selector */ IconAdornmentWrapper},
-    &:focus
-    ${/* sc-selector */ IconAdornmentWrapper} {
-    background-color: ${getColor('primary.50')};
-  }
+  border-radius: ${getRadii('default')};
+  padding: ${getSpace(SpaceSizes.sm)};
+  ${(props) =>
+    props.as !== 'div' &&
+    css`
+      cursor: pointer;
+      &:hover,
+      &:focus-visible {
+        background-color: ${getColor('primary.50')};
+      }
+    `}
+`;
+export const CardIconWrapper = styled(Padbox)`
+  display: flex;
 `;
 
 /* stylelint-disable */
@@ -44,6 +51,9 @@ const LineTruncation = css<{ numberOfLines: number }>`
 `;
 /* stylelint-enable */
 
+const TitleArea = styled.div`
+  padding-top: ${getSpace(SpaceSizes.xs)};
+`;
 const Title = styled(Heading).attrs({
   size: 'h4',
 })`
@@ -58,7 +68,11 @@ const Subtitle = styled(Text).attrs({
 })`
   ${LineTruncation}
 `;
-
+const ButtonsArea = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin-right: calc(${getSpace(SpaceSizes.sm)} * -1) !important;
+`;
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   (
     {
@@ -68,46 +82,62 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
       subtitle,
       leftAdornment = null,
       onHelpClick,
+      helpTooltip,
       maxTitleLinesCount,
       maxSubtitleLinesCount,
     },
     ref,
-  ) => (
-    <CardContainer
-      horizontalPadding={SpaceSizes.mdPlus}
-      verticalPadding={SpaceSizes.md}
-    >
-      <Inline ref={ref} gap={SpaceSizes.sm} stretch={leftAdornment ? 2 : 1}>
-        {leftAdornment}
-        <Stack gap={SpaceSizes.xs}>
-          <Title numberOfLines={maxTitleLinesCount}>{title}</Title>
-          <Subtitle numberOfLines={maxSubtitleLinesCount}>{subtitle}</Subtitle>
-        </Stack>
-        {onHelpClick && (
-          <ActionButton onClick={onHelpClick}>
-            <IconAdornmentWrapper paddingSize={SpaceSizes.sm}>
-              <Icon color="neutral.800" name="question-circle" />
-            </IconAdornmentWrapper>
-          </ActionButton>
-        )}
-        {isNotUndefined(actions) && (
-          <DropdownMenu actions={actions} placement="bottom-end">
-            <ActionButton
-              aria-label={actionsButtonLabel}
-              title={actionsButtonLabel}
-            >
-              <IconAdornmentWrapper
-                paddingSize={SpaceSizes.md}
-                paddingType={PaddingTypes.squish}
-              >
-                <Icon name={SSCIconNames.ellipsisV} rotation={90} />
-              </IconAdornmentWrapper>
-            </ActionButton>
-          </DropdownMenu>
-        )}
-      </Inline>
-    </CardContainer>
-  ),
+  ) => {
+    const hasHelp = any(isNotUndefined, [onHelpClick, helpTooltip]);
+
+    return (
+      <CardContainer
+        horizontalPadding={SpaceSizes.mdPlus}
+        verticalPadding={SpaceSizes.md}
+      >
+        <Inline ref={ref} gap={SpaceSizes.sm} stretch={leftAdornment ? 2 : 1}>
+          <div>{leftAdornment}</div>
+          <TitleArea>
+            <Stack gap={SpaceSizes.xs}>
+              <Title numberOfLines={maxTitleLinesCount}>{title}</Title>
+              <Subtitle numberOfLines={maxSubtitleLinesCount}>
+                {subtitle}
+              </Subtitle>
+            </Stack>
+          </TitleArea>
+          <ButtonsArea>
+            {hasHelp && (
+              <Tooltip popup={helpTooltip}>
+                <CardIconButton
+                  as={isNotUndefined(onHelpClick) ? 'button' : 'div'}
+                  onClick={onHelpClick}
+                >
+                  <Icon color="neutral.800" name="question-circle" />
+                </CardIconButton>
+              </Tooltip>
+            )}
+            {isNotUndefined(actions) && (
+              <DropdownMenu actions={actions} placement="bottom-end">
+                {(isActive) => (
+                  <CardIconButton
+                    $isActive={isActive}
+                    aria-label={actionsButtonLabel}
+                    title={actionsButtonLabel}
+                  >
+                    <Icon
+                      name={SSCIconNames.ellipsisV}
+                      rotation={90}
+                      style={{ width: '1em' }}
+                    />
+                  </CardIconButton>
+                )}
+              </DropdownMenu>
+            )}
+          </ButtonsArea>
+        </Inline>
+      </CardContainer>
+    );
+  },
 );
 
 CardHeader.propTypes = {
@@ -118,6 +148,7 @@ CardHeader.propTypes = {
   leftAdornment: PropTypes.node,
   maxTitleLinesCount: PropTypes.number,
   maxSubtitleLinesCount: PropTypes.number,
+  helpTooltip: PropTypes.node,
   onHelpClick: PropTypes.func,
 };
 
