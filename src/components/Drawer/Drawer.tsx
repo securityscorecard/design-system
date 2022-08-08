@@ -146,7 +146,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
     const drawerProps = {
       size,
-      ref: mergeRefs<HTMLDivElement>(drawerRef, ref),
+      ref: hasBackdrop ? mergeRefs<HTMLDivElement>(drawerRef, ref) : ref,
       adornment,
       footer,
       children,
