@@ -1,3 +1,16 @@
+# [1.0.0-alpha.202](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.201...v1.0.0-alpha.202) (2022-08-09)
+
+
+### Bug Fixes
+
+* **Card:** make Card adjustments ([f0f5f3c](https://github.com/securityscorecard/design-system/commit/f0f5f3c0d8b051051cf39757396b499802552835))
+
+
+### Features
+
+* **Checkbox:** add focus state ([4a6255d](https://github.com/securityscorecard/design-system/commit/4a6255d040a076733ee2b63fbbc5b47b72682997))
+* **Radio:** add focus state ([612360a](https://github.com/securityscorecard/design-system/commit/612360a77520411fa9b3c87c94da63528c9d0deb))
+
 # [1.0.0-alpha.201](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.200...v1.0.0-alpha.201) (2022-08-08)
 
 
