@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { any } from 'ramda';
-import { isNotUndefined } from 'ramda-adjunct';
+import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 
 import { ActionKindsPropType } from '../../types/action.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -35,6 +35,9 @@ export const CardIconButton = styled.button<{
       &:hover,
       &:focus-visible {
         background-color: ${getColor('primary.50')};
+      }
+      &:focus {
+        outline: none;
       }
     `}
 `;
@@ -80,7 +83,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
       actionsButtonLabel = 'Actions menu',
       title,
       subtitle,
-      leftAdornment = null,
+      leftAdornment,
       onHelpClick,
       helpTooltip,
       maxTitleLinesCount,
@@ -96,7 +99,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
         verticalPadding={SpaceSizes.md}
       >
         <Inline ref={ref} gap={SpaceSizes.sm} stretch={leftAdornment ? 2 : 1}>
-          <div>{leftAdornment}</div>
+          {isNotNil(leftAdornment) && <div>{leftAdornment}</div>}
           <TitleArea>
             <Stack gap={SpaceSizes.xs}>
               <Title numberOfLines={maxTitleLinesCount}>{title}</Title>
