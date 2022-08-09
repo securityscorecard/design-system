@@ -14,6 +14,7 @@ import { CheckboxProps } from './Checkbox.types';
 const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 const getRemToggleSize = memoizeWith(
@@ -42,7 +43,8 @@ const Mark = styled.svg`
 `;
 
 const CheckboxInput = styled.input<TogglingInputProps>`
-  display: none;
+  opacity: 0;
+  position: absolute;
 
   &:checked + ${Box} {
     background: ${getFormStyle('activeBorderColor')};
@@ -62,6 +64,10 @@ const CheckboxInput = styled.input<TogglingInputProps>`
     ${Mark} {
       color: ${getFormStyle('disabledActiveColor')};
     }
+  }
+
+  &:focus-visible + ${Box} {
+    border: 2px solid ${getFormStyle('activeBorderColor')};
   }
 
   ${({ isIndeterminate }) =>
