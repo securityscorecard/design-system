@@ -51,7 +51,8 @@ const RadioLabel = styled(Label)<
 `;
 
 const RadioInput = styled.input<TogglingInputProps>`
-  display: none;
+  opacity: 0;
+  position: absolute;
 
   &:checked + ${/* sc-selector */ RadioLabel}::after {
     border: 6px solid ${getFormStyle('activeBorderColor')};
@@ -68,6 +69,10 @@ const RadioInput = styled.input<TogglingInputProps>`
 
   &:disabled:checked + ${/* sc-selector */ RadioLabel}::after {
     color: ${getFormStyle('disabledActiveColor')};
+  }
+
+  &:focus-visible + ${/* sc-selector */ RadioLabel}::before {
+    border: 2px solid ${getFormStyle('activeBorderColor')};
   }
 
   ${({ isInvalid }) =>
