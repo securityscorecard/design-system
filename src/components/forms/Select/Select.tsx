@@ -40,6 +40,7 @@ Select.propTypes = {
   maxPillLabelLength: PropTypes.number,
   maxVisibleItem: PropTypes.number,
   isMenuPositionRelative: PropTypes.bool,
+  components: PropTypes.shape(),
 };
 
 Select.defaultProps = {

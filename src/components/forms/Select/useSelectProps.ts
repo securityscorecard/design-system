@@ -44,6 +44,7 @@ export const useSelectProps = <IsMulti extends boolean>({
     ...props,
     closeMenuOnSelect: !isMulti,
     components: {
+      ...(props.components || {}),
       DropdownIndicator,
       ClearIndicator,
       IndicatorsContainer,
