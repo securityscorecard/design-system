@@ -15,9 +15,11 @@ const Tabs: React.FC<TabsProps> = ({
   onSelectTab,
   size = TabSizes.sm,
   variant = TabVariants.underline,
+  isExpanded = false,
 }) => {
   return (
     <BaseTabsWrapper
+      $isExpanded={isExpanded}
       $variant={variant}
       paddingSize={
         variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
@@ -26,6 +28,7 @@ const Tabs: React.FC<TabsProps> = ({
       <Inline
         gap={variant === TabVariants.segmented ? SpaceSizes.sm : SpaceSizes.lg}
         role="tablist"
+        stretch={isExpanded ? 'all' : 0}
       >
         {React.Children.map(children, (tab) => {
           if (!React.isValidElement(tab)) {
@@ -35,6 +38,7 @@ const Tabs: React.FC<TabsProps> = ({
           return React.cloneElement(tab, {
             size,
             variant,
+            isExpanded,
             key: tab.props.value,
             isSelected: selectedPatternMatcher(tab.props.value, selectedValue),
             onClick: onSelectTab,
@@ -52,6 +56,7 @@ Tabs.propTypes = {
   size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
   selectedPatternMatcher: PropTypes.func,
+  isExpanded: PropTypes.bool,
   onSelectTab: PropTypes.func,
 };
 

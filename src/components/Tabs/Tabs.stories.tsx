@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { Inline, Stack } from '../layout';
+import { Center, Inline, Padbox, Stack } from '../layout';
 import { Tab, Tabs } from '.';
 import { ColorTypes } from '../../theme/colors.enums';
 import { TabsProps } from './Tabs.types';
 import { generateControl } from '../../utils/tests/storybook';
 import { TabSizes, TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme';
+import { getColor } from '../../utils';
 
 export default {
   title: 'components/Tabs',
@@ -201,4 +203,26 @@ export const SegmentedTabs: Story = () => (
       </Tabs>
     </Inline>
   </Stack>
+);
+
+const BlockWrapper = styled(Padbox)`
+  background-color: ${getColor('neutral.200')};
+`;
+export const ExpandedTabs: Story = () => (
+  <Center maxWidth={500}>
+    <BlockWrapper paddingSize="md">
+      <Tabs
+        margin="none"
+        selectedValue="one"
+        size="lg"
+        variant="segmented"
+        isExpanded
+        onSelectTab={action('Select Tab')}
+      >
+        <Tab value="one">One</Tab>
+        <Tab value="two">Two</Tab>
+        <Tab value="three">Three</Tab>
+      </Tabs>
+    </BlockWrapper>
+  </Center>
 );

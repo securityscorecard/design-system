@@ -10,6 +10,15 @@ export const BaseTabsWrapper = styled(Padbox)<{
 }>`
   display: inline-block;
 
+  ${({ $variant, $isExpanded }) =>
+    $variant === BaseTabVariants.segmented &&
+    $isExpanded &&
+    css`
+      width: 100%;
+      display: flex:
+      flex-grow: 1;
+    `};
+
   ${({ $variant }) =>
     $variant === BaseTabVariants.segmented &&
     css`
