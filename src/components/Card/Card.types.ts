@@ -82,6 +82,7 @@ export interface CardMediaWrapperProps {
 
 export interface CardProps {
   children: React.ReactNode;
+  shouldAlignLastItemToBottom?: boolean;
 }
 
 export interface CardWrapperProps {

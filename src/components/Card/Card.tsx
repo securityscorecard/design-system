@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pipe, prop } from 'ramda';
 
@@ -16,11 +17,12 @@ const CardWrapper = styled(Padbox)<CardWrapperProps>`
   ${getShadow}
 `;
 
-const CardStack = styled(Stack)`
+const CardStack = styled(Stack)<{ $shouldAlignLastItemToBottom: boolean }>`
   height: 100%;
 
-  & > :last-child {
-    margin-top: auto;
+  & > :last-child:not(:first-child) {
+    ${({ $shouldAlignLastItemToBottom }) =>
+      $shouldAlignLastItemToBottom && 'margin-top: auto;'}
   }
 `;
 
@@ -33,13 +35,19 @@ export const CardContainer = styled.div<{
 `;
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, ...props }, ref) => {
+  ({ children, shouldAlignLastItemToBottom = false, ...props }, ref) => {
     return (
       <CardWrapper ref={ref} {...props}>
-        <CardStack>{children}</CardStack>
+        <CardStack $shouldAlignLastItemToBottom={shouldAlignLastItemToBottom}>
+          {children}
+        </CardStack>
       </CardWrapper>
     );
   },
 );
+
+Card.propTypes = {
+  shouldAlignLastItemToBottom: PropTypes.bool,
+};
 
 export default Card;
