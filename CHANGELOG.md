@@ -1,3 +1,10 @@
+# [1.0.0-alpha.203](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.202...v1.0.0-alpha.203) (2022-08-09)
+
+
+### Bug Fixes
+
+* **Card:** fix alignment issues ([c5a5e85](https://github.com/securityscorecard/design-system/commit/c5a5e85da95db2d01e8d4f8738797844e2eb342a))
+
 # [1.0.0-alpha.202](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.201...v1.0.0-alpha.202) (2022-08-09)
 
 
