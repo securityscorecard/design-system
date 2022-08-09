@@ -4,9 +4,6 @@ import React from 'react';
 
 import { SpaceSize } from '../../theme/space.types';
 import { ActionKinds } from '../../types/action.types';
-import { CardDirections } from './Card.enums';
-
-export type Directions = typeof CardDirections[keyof typeof CardDirections];
 
 export interface CardActionsProps {
   /**
@@ -45,6 +42,10 @@ export interface CardHeaderProps {
    */
   onHelpClick?: () => void;
   /**
+   * Node that shows as a tooltip on help button hover. Determines whether the help button is rendered or not.
+   */
+  helpTooltip?: React.ReactNode;
+  /**
    * Title max number of lines.
    */
   maxTitleLinesCount?: number;
@@ -80,15 +81,11 @@ export interface CardMediaWrapperProps {
 }
 
 export interface CardProps {
-  /**
-   * Main card axis controls layout primitive that will be used as a children wrapper
-   */
-  direction?: Directions;
+  children: React.ReactNode;
 }
 
 export interface CardWrapperProps {
   paddingSize: SpaceSize;
-  $direction: CardProps['direction'];
 }
 
 export interface CardWrapperPropsWithTheme extends CardWrapperProps {

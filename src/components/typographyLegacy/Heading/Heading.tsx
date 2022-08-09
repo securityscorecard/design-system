@@ -60,13 +60,13 @@ const HeadingH3 = styled.h3`
 const HeadingH4 = styled.h4`
   ${HeadingBase};
   font-size: ${getFontSize('h4')};
-  line-height: ${getLineHeight('lg')};
+  line-height: ${getLineHeight('h4')};
   font-weight: ${getFontWeight('semibold')};
 `;
 const HeadingH5 = styled.h5`
   ${HeadingBase};
   font-size: ${getFontSize('h5')};
-  line-height: ${getLineHeight('lg')};
+  line-height: ${getLineHeight('h4')};
   font-weight: ${getFontWeight('semibold')};
 `;
 

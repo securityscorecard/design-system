@@ -1,15 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pipe, prop } from 'ramda';
 
-import { Inline, Padbox, Stack } from '../layout';
+import { Padbox, Stack } from '../layout';
 import { getColor, getRadii, getShadow, getSpace } from '../../utils';
-import { CardMediaWrapper } from './CardMedia';
-import { getCommonMargin, getMarginFrom } from './utils';
 import { SpaceSize } from '../../theme/space.types';
 import { CardProps, CardWrapperProps } from './Card.types';
-import { SpaceSizes } from '../../theme';
 
 const CardWrapper = styled(Padbox)<CardWrapperProps>`
   flex-grow: 1;
@@ -18,21 +14,13 @@ const CardWrapper = styled(Padbox)<CardWrapperProps>`
   border-radius: ${getRadii('default')};
   overflow: hidden;
   ${getShadow}
+`;
 
-  & ${/* sc-selector */ CardMediaWrapper} {
-    ${getCommonMargin};
+const CardStack = styled(Stack)`
+  height: 100%;
 
-    &:first-child {
-      ${getMarginFrom('start')};
-    }
-
-    &:last-child {
-      ${getMarginFrom('end')};
-    }
-  }
-
-  & > ${/* sc-selector */ Inline} > * {
-    flex: 1;
+  & > :last-child {
+    margin-top: auto;
   }
 `;
 
@@ -44,22 +32,14 @@ export const CardContainer = styled.div<{
     ${pipe(prop('horizontalPadding'), getSpace)};
 `;
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.PropsWithChildren<CardProps>
->(({ children, direction = 'vertical', ...props }, ref) => {
-  const DirectionContainer = (
-    direction === 'vertical' ? Stack : Inline
-  ) as React.ElementType;
-  return (
-    <CardWrapper ref={ref} $direction={direction} {...props}>
-      <DirectionContainer gap={SpaceSizes.none}>{children}</DirectionContainer>
-    </CardWrapper>
-  );
-});
-
-Card.propTypes = {
-  direction: PropTypes.oneOf(['vertical', 'horizontal']),
-};
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <CardWrapper ref={ref} {...props}>
+        <CardStack>{children}</CardStack>
+      </CardWrapper>
+    );
+  },
+);
 
 export default Card;

@@ -8,7 +8,7 @@ import { getSpace } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { CardMediaProps, CardMediaWrapperProps } from './Card.types';
 
-export const CardMediaWrapper = styled.div<CardMediaWrapperProps>`
+const CardMediaWrapper = styled.div<CardMediaWrapperProps>`
   display: block;
   background-size: cover;
   background-repeat: no-repeat;
