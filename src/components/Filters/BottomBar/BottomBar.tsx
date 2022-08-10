@@ -35,10 +35,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
           variant="text"
           onClick={onAdd}
         >
-          Add filter
+          Add criteria
         </AddFilterButton>
         <Button color="primary" variant="text" onClick={onClearAll}>
-          Clear all
+          Clear all criteria
         </Button>
       </Inline>
       <Inline align="center" gap={SpaceSizes.md}>
