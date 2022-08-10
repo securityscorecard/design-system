@@ -280,7 +280,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
           onClick={onRemove}
         />
       ) : null}
-      <SplitField $width={72}>
+      <SplitField $width={85}>
         {index === 1 ? (
           <SelectFilter
             defaultValue={operatorOption}
