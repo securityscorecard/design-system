@@ -67,7 +67,7 @@ export default {
     onCancel: noop,
     state: [],
     fields: [],
-    isCancelDisabled: false,
+    isCancelEnabled: true,
   }`,
         },
       },

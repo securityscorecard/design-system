@@ -63,7 +63,7 @@ export interface FiltersProps {
   onCancel?: () => void;
   onChange?: (filters: Filter[]) => void;
   isLoading?: boolean;
-  isCancelDisabled?: boolean;
+  isCancelEnabled?: boolean;
   isOperatorFieldEnabled?: boolean;
   defaultOperator?: typeof Operators[keyof typeof Operators];
 }

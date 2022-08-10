@@ -80,7 +80,7 @@ const Filters: React.FC<FiltersProps> = ({
   onClose = noop,
   onCancel = noop,
   isLoading = false,
-  isCancelDisabled = false,
+  isCancelEnabled = true,
   isOperatorFieldEnabled = true,
   defaultOperator = Operators.and,
 }) => {
@@ -340,7 +340,7 @@ const Filters: React.FC<FiltersProps> = ({
         <BottomBar
           hasUnappliedFilters={hasUnappliedFilters}
           isApplyDisabled={hasInvalidValues}
-          isCancelDisabled={isCancelDisabled}
+          isCancelEnabled={isCancelEnabled}
           isLoading={isLoading}
           onAdd={handleAddRow}
           onCancel={onCancel}

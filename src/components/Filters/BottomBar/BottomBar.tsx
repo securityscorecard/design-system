@@ -19,19 +19,18 @@ const BottomBar: React.FC<BottomBarProps> = ({
   onClearAll,
   onClose,
   onCancel,
-  isCancelDisabled = false,
+  isCancelEnabled = true,
   isLoading = false,
   hasUnappliedFilters,
   isApplyDisabled = false,
 }) => {
-  const canCancel = !isCancelDisabled && isLoading;
+  const canCancel = isCancelEnabled && isLoading;
   return (
     <Inline gap={SpaceSizes.lg} justify="space-between">
       <Inline gap={SpaceSizes.lg}>
         <AddFilterButton
           color="primary"
           iconName="plus"
-          margin={{ left: 0.5, right: 2 }}
           variant="text"
           onClick={onAdd}
         >
@@ -49,7 +48,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
         )}
         <Button
           color="primary"
-          margin={{ right: 1 }}
           variant="outline"
           onClick={canCancel ? onCancel : onClose}
         >
@@ -78,7 +76,7 @@ BottomBar.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onClearAll: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  isCancelDisabled: PropTypes.bool,
+  isCancelEnabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   isApplyDisabled: PropTypes.bool,
 };

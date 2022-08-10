@@ -48,7 +48,7 @@ export const defaultControlsConfig: ControlsConfig<Record<string, unknown>> = {
     onClose: noop,
     state: [],
     fields: [],
-    isCancelDisabled: false,
+    isCancelEnabled: true,
   },
   defaultIsFilteringOpen: false,
   defaultIsFilteringApplied: false,

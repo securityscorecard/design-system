@@ -13,7 +13,7 @@ export default {
 export const Default: Story = () => (
   <Filters
     fields={fields}
-    isCancelDisabled
+    isCancelEnabled
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}

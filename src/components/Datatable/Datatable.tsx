@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
-import { isUndefined, noop } from 'ramda-adjunct';
+import { isNotUndefined, noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
 import { getColor, getRadii } from '../../utils';
@@ -57,7 +57,7 @@ function Datatable<D extends Record<string, unknown>>({
     [],
   );
 
-  const isCancelDisabled = isUndefined(onCancelLoading);
+  const isCancelEnabled = isNotUndefined(onCancelLoading);
 
   const {
     onColumnOrderChange,
@@ -67,8 +67,8 @@ function Datatable<D extends Record<string, unknown>>({
     () =>
       mergeControlsConfig(
         assocPath(
-          ['filteringConfig', 'isCancelDisabled'],
-          isCancelDisabled,
+          ['filteringConfig', 'isCancelEnabled'],
+          isCancelEnabled,
         )(controlsConfig),
       ),
     [controlsConfig],
@@ -93,9 +93,8 @@ function Datatable<D extends Record<string, unknown>>({
     restTableConfig.defaultHiddenColumns,
   );
 
-  const handleCancelLoading = isCancelDisabled
-    ? noop
-    : () => {
+  const handleCancelLoading = isCancelEnabled
+    ? () => {
         DatatableStore.update((s) => {
           s.isCanceled = true;
           s.filters = s.filters.map((filter) => ({
@@ -108,7 +107,8 @@ function Datatable<D extends Record<string, unknown>>({
 
           onCancelLoading();
         });
-      };
+      }
+    : noop;
 
   return (
     <StyledDatatable>
@@ -142,7 +142,7 @@ function Datatable<D extends Record<string, unknown>>({
         dataSize={dataSize}
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
         {...restTableConfig}
-        isCancelDisabled={isCancelDisabled}
+        isCancelDisabled={!isCancelEnabled}
         isDataLoading={isDataLoading}
         onCancelLoading={handleCancelLoading}
       />
@@ -178,7 +178,7 @@ Datatable.propTypes = {
       onClose: PropTypes.func,
       state: PropTypes.arrayOf(FilterStatePropType),
       fields: PropTypes.arrayOf(FieldPropTypes),
-      isCancelDisabled: PropTypes.bool,
+      isCancelEnabled: PropTypes.bool,
     }),
     defaultIsFilteringOpen: PropTypes.bool,
     defaultIsFilteringApplied: PropTypes.bool,
