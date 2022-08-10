@@ -1,3 +1,10 @@
+# [1.0.0-alpha.206](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.205...v1.0.0-alpha.206) (2022-08-10)
+
+
+### Features
+
+* **Tabs:** add isExpanded option ([2be393e](https://github.com/securityscorecard/design-system/commit/2be393e8e8a3f215871fde3d3414b30693552ae2))
+
 # [1.0.0-alpha.205](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.204...v1.0.0-alpha.205) (2022-08-10)
 
 
