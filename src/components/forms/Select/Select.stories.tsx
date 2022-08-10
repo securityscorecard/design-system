@@ -366,6 +366,23 @@ CustomMultiValueLabel.args = {
   defaultIsMenuOpen: true,
 };
 
+const MyMenuList = ({ children }) => {
+  return (
+    <div>
+      <Text>Custom MenuList</Text>
+      {children}
+    </div>
+  );
+};
+
+export const WithCustomComponents = SelectTemplate.bind({});
+WithCustomComponents.args = {
+  options,
+  components: {
+    MenuList: MyMenuList,
+  },
+};
+
 export const CustomGroupLabel: Story<SelectProps<true>> = (args) => (
   <Select
     formatGroupLabel={(group) => (
