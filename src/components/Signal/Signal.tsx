@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { propOr } from 'ramda';
+import { prop } from 'ramda';
+import { isNilOrEmpty } from 'ramda-adjunct';
 
 import { colors } from '../../theme/colors';
 import { SignalProps } from './Signal.types';
@@ -62,7 +63,9 @@ const Signal: React.FC<SignalProps> = ({
   title = '',
   ...props
 }) => {
-  const { color, paths } = propOr('info', kind.toLowerCase())(kinds);
+  if (isNilOrEmpty(kind)) return null;
+
+  const { color, paths } = prop(kind.toLowerCase())(kinds);
 
   return (
     <svg
