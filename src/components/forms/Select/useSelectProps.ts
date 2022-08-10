@@ -54,6 +54,7 @@ export const useSelectProps = <IsMulti extends boolean>({
       MultiValueRemove,
       Menu,
       Option,
+      ...(props.components || {}),
     },
     hideSelectedOptions: !isMulti,
     isClearable,
