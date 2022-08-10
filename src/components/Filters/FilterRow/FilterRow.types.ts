@@ -1,5 +1,6 @@
 import { Field, Filter } from '../Filters.types';
 import { Option } from '../components/Select/Select.types';
+import { Operators } from '../Filters.enums';
 
 export interface SplitFieldProps {
   $width?: number;
@@ -23,4 +24,6 @@ export interface FilterRowProps extends Filter {
   isLoading: boolean;
   isInvalid: boolean;
   onError?: (boolean) => void;
+  isOperatorFieldEnabled?: boolean;
+  defaultOperator?: typeof Operators[keyof typeof Operators];
 }

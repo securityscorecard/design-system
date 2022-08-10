@@ -64,6 +64,8 @@ export interface FiltersProps {
   onChange?: (filters: Filter[]) => void;
   isLoading?: boolean;
   isCancelDisabled?: boolean;
+  isOperatorFieldEnabled?: boolean;
+  defaultOperator?: typeof Operators[keyof typeof Operators];
 }
 
 export const FieldPropTypes = PropTypes.exact({
@@ -123,6 +125,8 @@ export const FiltersPropType = {
   state: PropTypes.arrayOf(FilterStatePropType),
   isLoading: PropTypes.bool,
   isCancelDisabled: PropTypes.bool,
+  isOperatorFieldEnabled: PropTypes.bool,
+  defaultOperator: PropTypes.oneOf(Object.values(Operators)),
   onClose: PropTypes.func,
   onCancel: PropTypes.func,
   onChange: PropTypes.func,

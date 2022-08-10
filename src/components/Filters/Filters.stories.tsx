@@ -54,3 +54,16 @@ export const FetchingResults: Story = () => (
     onClose={action('onClose')}
   />
 );
+
+export const WithFixedOperator: Story = () => (
+  <Filters
+    defaultOperator="or"
+    fields={fields}
+    isOperatorFieldEnabled={false}
+    state={state}
+    onApply={action('onApply')}
+    onCancel={action('onCancel')}
+    onChange={action('onChange')}
+    onClose={action('onClose')}
+  />
+);

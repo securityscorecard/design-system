@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   allPass,
   any,
@@ -74,14 +74,23 @@ const FiltersBase = styled(Padbox)`
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
-  state,
+  state: stateFromProps,
   onApply,
   onChange = noop,
   onClose = noop,
   onCancel = noop,
   isLoading = false,
   isCancelDisabled = false,
+  isOperatorFieldEnabled = true,
+  defaultOperator = Operators.and,
 }) => {
+  const state = useMemo(
+    () =>
+      isOperatorFieldEnabled
+        ? stateFromProps
+        : map(assoc('operator', defaultOperator), stateFromProps),
+    [stateFromProps, isOperatorFieldEnabled, defaultOperator],
+  );
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
@@ -312,10 +321,12 @@ const Filters: React.FC<FiltersProps> = ({
           {filtersValues.map((props, index) => (
             <FilterRow
               key={generateId(props, index)}
+              defaultOperator={defaultOperator}
               fields={fields}
               index={index}
               isDefaultState={isDefaultState}
               isInvalid={validValues[index] === false}
+              isOperatorFieldEnabled={isOperatorFieldEnabled}
               onConditionChange={handleConditionChange}
               onError={(hasError) => handleError(hasError, index)}
               onFieldChange={handleFieldChange}
