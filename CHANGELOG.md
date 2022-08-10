@@ -1,3 +1,10 @@
+# [1.0.0-alpha.207](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.206...v1.0.0-alpha.207) (2022-08-10)
+
+
+### Bug Fixes
+
+* **Select:** add ability to replace components in Select ([30bc428](https://github.com/securityscorecard/design-system/commit/30bc4280200491770ecd98f0974ba2690976f47b))
+
 # [1.0.0-alpha.206](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.205...v1.0.0-alpha.206) (2022-08-10)
 
 
