@@ -1,3 +1,10 @@
+# [1.0.0-alpha.205](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.204...v1.0.0-alpha.205) (2022-08-10)
+
+
+### Bug Fixes
+
+* **Signal:** hide Signal when kind not provided ([439a594](https://github.com/securityscorecard/design-system/commit/439a594bcffa5ea2e57f5aa44b00e092026188b6))
+
 # [1.0.0-alpha.204](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.203...v1.0.0-alpha.204) (2022-08-10)
 
 
