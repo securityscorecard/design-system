@@ -13,6 +13,7 @@ export interface TabProps {
   children: React.ReactNode;
   color?: LabelProps['$color'];
   isSelected?: LabelProps['$isSelected'];
+  isExpanded?: boolean;
   onClick?: (selectedValue: React.ReactText) => void;
   value: React.ReactText;
   size?: Sizes;
@@ -29,4 +30,5 @@ export interface TabsProps extends SpacingProps {
   ) => boolean;
   onSelectTab?: (selectedValue: React.ReactText) => void;
   children: React.ReactNode[];
+  isExpanded?: boolean;
 }

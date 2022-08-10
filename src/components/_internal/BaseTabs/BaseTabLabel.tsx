@@ -158,6 +158,13 @@ const BaseTabLabel = styled(Padbox).withConfig<
   cursor: pointer;
   font-weight: ${getFontWeight('semibold')};
 
+  ${({ $isExpanded }) =>
+    $isExpanded &&
+    css`
+      display: flex;
+      justify-content: center;
+    `};
+
   &:visited {
     color: ${getColor('neutral.900')};
   }

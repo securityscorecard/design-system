@@ -12,6 +12,7 @@ import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 const Tab: React.FC<TabProps> = ({
   children,
   isSelected,
+  isExpanded = false,
   onClick,
   color,
   size = TabSizes.sm,
@@ -43,6 +44,7 @@ const Tab: React.FC<TabProps> = ({
   return (
     <BaseTabLabel
       $color={color}
+      $isExpanded={isExpanded}
       $isSelected={isSelected}
       $variant={variant}
       aria-selected={isSelected}
@@ -65,6 +67,7 @@ Tab.propTypes = {
   size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
   isSelected: PropTypes.bool,
+  isExpanded: PropTypes.bool,
   color: PropTypes.oneOf([...Object.values(ColorTypes)]),
   onClick: PropTypes.func,
 };
