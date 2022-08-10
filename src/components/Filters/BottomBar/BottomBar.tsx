@@ -43,7 +43,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
       </Inline>
       <Inline align="center" gap={SpaceSizes.md}>
         {hasUnappliedFilters && (
-          <Paragraph as="div" size="md" variant="secondary">
+          <Paragraph as="div" margin="none" size="md" variant="secondary">
             You have unapplied filters
           </Paragraph>
         )}
