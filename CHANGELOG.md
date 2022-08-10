@@ -1,3 +1,10 @@
+# [1.0.0-alpha.204](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.203...v1.0.0-alpha.204) (2022-08-10)
+
+
+### Bug Fixes
+
+* **Signal:** default Signal to info ([71581cb](https://github.com/securityscorecard/design-system/commit/71581cbb05e658f0a5fc73188ff9b676870ffec1))
+
 # [1.0.0-alpha.203](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.202...v1.0.0-alpha.203) (2022-08-09)
 
 
