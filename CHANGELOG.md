@@ -1,3 +1,10 @@
+# [1.0.0-alpha.209](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.208...v1.0.0-alpha.209) (2022-08-11)
+
+
+### Bug Fixes
+
+* **Tab:** remove visited styling ([c577454](https://github.com/securityscorecard/design-system/commit/c577454719d2738bf7d2b657bbc46c8dc4877834))
+
 # [1.0.0-alpha.208](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.207...v1.0.0-alpha.208) (2022-08-11)
 
 
