@@ -207,6 +207,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   onError,
   isOperatorFieldEnabled,
   defaultOperator,
+  hasApplyButton,
 }) => {
   const { field, conditions, condition, component } = useFilterRow(
     fields,
@@ -277,7 +278,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
       {!isDefaultState ? (
         <StateButton
           index={index}
-          isApplied={isApplied}
+          isApplied={hasApplyButton ? isApplied : false}
           isLoading={isLoading}
           onClick={onRemove}
         />
@@ -353,5 +354,6 @@ FilterRow.propTypes = {
     PropTypes.instanceOf(Date),
     BaseDateRangePickerPropTypes,
   ]),
+  hasApplyButton: PropTypes.bool,
   onError: PropTypes.func,
 };

@@ -9,4 +9,5 @@ export interface BottomBarProps {
   isCancelEnabled?: boolean;
   isApplyDisabled?: boolean;
   hasCloseButton?: boolean;
+  hasApplyButton?: boolean;
 }

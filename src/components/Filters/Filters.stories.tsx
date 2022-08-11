@@ -48,6 +48,7 @@ export const FetchingResults: Story = () => (
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}
+    onClose={action('onClose')}
   />
 );
 
@@ -70,4 +71,8 @@ export const WithCloseButton: Story = () => (
     onApply={action('onApply')}
     onClose={action('onClose')}
   />
+);
+
+export const WithoutApplyButton: Story = () => (
+  <Filters fields={fields} state={state} onChange={action('onChange')} />
 );

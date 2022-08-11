@@ -96,6 +96,7 @@ const Filters: React.FC<FiltersProps> = ({
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
   const [validValues, setValidValues] = useState([true]);
   const hasCloseButton = isNotUndefined(onClose);
+  const hasApplyButton = isNotUndefined(onApply);
 
   useEffect(() => {
     // Set default
@@ -268,7 +269,7 @@ const Filters: React.FC<FiltersProps> = ({
     setValidValues([true]);
 
     callOnChange(defaultState);
-    onApply([]);
+    onApply?.([]);
   };
 
   const handleSubmitForm = (event) => {
@@ -285,7 +286,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(isEmptyArray(newFilters) ? defaultState : newFilters);
 
-    onApply(newFilters);
+    onApply?.(newFilters);
   };
 
   const handleRemoveFilter = (index) => () => {
@@ -324,6 +325,7 @@ const Filters: React.FC<FiltersProps> = ({
               key={generateId(props, index)}
               defaultOperator={defaultOperator}
               fields={fields}
+              hasApplyButton={hasApplyButton}
               index={index}
               isDefaultState={isDefaultState}
               isInvalid={validValues[index] === false}
@@ -339,6 +341,7 @@ const Filters: React.FC<FiltersProps> = ({
           ))}
         </Stack>
         <BottomBar
+          hasApplyButton={hasApplyButton}
           hasCloseButton={hasCloseButton}
           hasUnappliedFilters={hasUnappliedFilters}
           isApplyDisabled={hasInvalidValues}
