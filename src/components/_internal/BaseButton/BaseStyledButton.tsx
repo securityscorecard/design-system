@@ -24,12 +24,12 @@ import { BaseButtonSizes, BaseButtonVariants } from './BaseButton.enums';
  */
 
 const ButtonLarge = css`
-  font-size: ${getFontSize('lg')};
+  font-size: ${getFontSize('md')};
   ${({ theme }) => createPadding({ paddingSize: SpaceSizes.md, theme })};
 `;
 
 const ButtonMedium = css<BaseStyledButtonProps>`
-  font-size: ${getFontSize('lg')};
+  font-size: ${getFontSize('md')};
   ${({ $hasOnlyIcon, theme }) =>
     createPadding({
       paddingSize: $hasOnlyIcon ? SpaceSizes.sm : SpaceSizes.md,
