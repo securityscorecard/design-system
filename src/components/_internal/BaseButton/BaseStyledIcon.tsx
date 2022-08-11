@@ -7,7 +7,7 @@ import { BaseStyledIconProps } from './BaseStyledIcon.types';
 import { BaseButtonSizes } from './BaseButton.enums';
 
 export const iconSizes = {
-  [BaseButtonSizes.lg]: 16,
+  [BaseButtonSizes.lg]: 14,
   [BaseButtonSizes.md]: 12,
   [BaseButtonSizes.sm]: 10,
 };
