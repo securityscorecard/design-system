@@ -165,10 +165,6 @@ const BaseTabLabel = styled(Padbox).withConfig<
       justify-content: center;
     `};
 
-  &:visited {
-    color: ${getColor('neutral.900')};
-  }
-
   &:hover {
     text-decoration: none;
   }
