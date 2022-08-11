@@ -192,7 +192,8 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org",
-    "pkgRoot": "build"
+    "pkgRoot": "build",
+    "tag": "latest"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
