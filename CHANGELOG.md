@@ -1,3 +1,10 @@
+# [1.0.0-alpha.208](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.207...v1.0.0-alpha.208) (2022-08-11)
+
+
+### Features
+
+* **Button:** change font-size to 14px ([7db74f2](https://github.com/securityscorecard/design-system/commit/7db74f29ee84ef52f170ed1daec5993a8ef08b62))
+
 # [1.0.0-alpha.207](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.206...v1.0.0-alpha.207) (2022-08-10)
 
 
