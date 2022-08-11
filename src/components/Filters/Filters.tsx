@@ -77,7 +77,7 @@ const Filters: React.FC<FiltersProps> = ({
   state: stateFromProps,
   onApply,
   onChange = noop,
-  onClose = noop,
+  onClose,
   onCancel = noop,
   isLoading = false,
   isCancelEnabled = true,
@@ -94,7 +94,8 @@ const Filters: React.FC<FiltersProps> = ({
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
-  const [validValues, setValidValues] = useState<boolean[]>([true]);
+  const [validValues, setValidValues] = useState([true]);
+  const hasCloseButton = isNotUndefined(onClose);
 
   useEffect(() => {
     // Set default
@@ -338,6 +339,7 @@ const Filters: React.FC<FiltersProps> = ({
           ))}
         </Stack>
         <BottomBar
+          hasCloseButton={hasCloseButton}
           hasUnappliedFilters={hasUnappliedFilters}
           isApplyDisabled={hasInvalidValues}
           isCancelEnabled={isCancelEnabled}

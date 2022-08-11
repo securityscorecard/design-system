@@ -17,7 +17,6 @@ export const Default: Story = () => (
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}
-    onClose={action('onClose')}
   />
 );
 
@@ -28,7 +27,6 @@ export const WithState: Story = () => (
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}
-    onClose={action('onClose')}
   />
 );
 
@@ -39,7 +37,6 @@ export const UnappliedFilters: Story = () => (
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}
-    onClose={action('onClose')}
   />
 );
 
@@ -51,7 +48,6 @@ export const FetchingResults: Story = () => (
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}
-    onClose={action('onClose')}
   />
 );
 
@@ -64,6 +60,14 @@ export const WithFixedOperator: Story = () => (
     onApply={action('onApply')}
     onCancel={action('onCancel')}
     onChange={action('onChange')}
+  />
+);
+
+export const WithCloseButton: Story = () => (
+  <Filters
+    fields={fields}
+    state={state}
+    onApply={action('onApply')}
     onClose={action('onClose')}
   />
 );

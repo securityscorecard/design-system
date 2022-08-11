@@ -23,6 +23,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   isLoading = false,
   hasUnappliedFilters,
   isApplyDisabled = false,
+  hasCloseButton,
 }) => {
   const canCancel = isCancelEnabled && isLoading;
   return (
@@ -46,13 +47,15 @@ const BottomBar: React.FC<BottomBarProps> = ({
             You have unapplied filters
           </Paragraph>
         )}
-        <Button
-          color="primary"
-          variant="outline"
-          onClick={canCancel ? onCancel : onClose}
-        >
-          {canCancel ? 'Cancel' : 'Close'}
-        </Button>
+        {canCancel ? (
+          <Button color="primary" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+        ) : hasCloseButton ? (
+          <Button color="primary" variant="outline" onClick={onClose}>
+            Close
+          </Button>
+        ) : null}
         <Button
           color="primary"
           isDisabled={isApplyDisabled}
@@ -79,4 +82,5 @@ BottomBar.propTypes = {
   isCancelEnabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   isApplyDisabled: PropTypes.bool,
+  hasCloseButton: PropTypes.bool,
 };
