@@ -92,6 +92,7 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   className = '',
   onClick,
 }) => {
+  const bottomMargin = iconName === 'reorder' ? 0.1 : 0;
   return (
     <Button
       $isActive={isActive}
@@ -100,7 +101,10 @@ const ControlButton: React.FC<ControlButtonProps> = ({
       type="button"
       onClick={onClick}
     >
-      <ButtonIcon margin={{ right: 0.4 }} name={iconName} />
+      <ButtonIcon
+        margin={{ right: 0.4, bottom: bottomMargin }}
+        name={iconName}
+      />
       {label}
     </Button>
   );
