@@ -62,6 +62,7 @@ const Title = styled(Heading).attrs({
 })`
   margin-top: 0px;
   margin-bottom: 0px;
+  padding-bottom: 2px;
   ${LineTruncation}
 `;
 
