@@ -1,3 +1,10 @@
+# [1.0.0-alpha.211](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.210...v1.0.0-alpha.211) (2022-08-12)
+
+
+### Bug Fixes
+
+* **Datatable:** fix reorder icon position ([16aba54](https://github.com/securityscorecard/design-system/commit/16aba54ed0f8e2349bc1d8312e78aab2ff2b7c3b))
+
 # [1.0.0-alpha.210](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.209...v1.0.0-alpha.210) (2022-08-12)
 
 
