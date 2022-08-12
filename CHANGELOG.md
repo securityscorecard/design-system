@@ -1,3 +1,10 @@
+# [1.0.0-alpha.210](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.209...v1.0.0-alpha.210) (2022-08-12)
+
+
+### Features
+
+* **useOuterCallback:** export useOuterCallback hook ([f4ab797](https://github.com/securityscorecard/design-system/commit/f4ab797b4d44c97084b723073766663a66d34efd))
+
 # [1.0.0-alpha.209](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.208...v1.0.0-alpha.209) (2022-08-11)
 
 
