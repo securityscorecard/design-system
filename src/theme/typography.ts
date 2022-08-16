@@ -16,12 +16,18 @@ const family: Family = {
   mono: "'space-mono', 'Courier New', Courier, monospace",
 };
 
+// h1 32
+// h2 28
+// h3 24
+// h4 20
+// h5 18
+
 const size: Size = {
-  h0: pxToRem(BASE_FONT_SIZE * 2.625), // 42px
-  h1: pxToRem(BASE_FONT_SIZE * 2.25), // 36px
-  h2: pxToRem(BASE_FONT_SIZE * 1.875), // 30px
+  h0: pxToRem(BASE_FONT_SIZE * 2), // 42px
+  h1: pxToRem(BASE_FONT_SIZE * 2), // 36px
+  h2: pxToRem(BASE_FONT_SIZE * 1.75), // 30px
   h3: pxToRem(BASE_FONT_SIZE * 1.5), // 24px
-  h4: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
+  h4: pxToRem(BASE_FONT_SIZE * 1.25), // 20px
   h5: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
   lg: pxToRem(BASE_FONT_SIZE), // 16px
   md: pxToRem(BASE_FONT_SIZE * 0.875), // 14px
