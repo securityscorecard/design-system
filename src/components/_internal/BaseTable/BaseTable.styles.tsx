@@ -85,30 +85,22 @@ export const StyledBaseTable = styled.table`
       white-space: nowrap;
       cursor: pointer;
 
-      &,
-      &:not([href]):not([tabindex]) {
-        color: ${({ theme }) =>
-          getLinkStyle('color', { color: 'primary', theme })};
-      }
+      color: ${({ theme }) =>
+        getLinkStyle('color', { color: 'primary', theme })};
 
-      &.is-discrete,
-      &.is-discrete:not([href]):not([tabindex]) {
+      &.is-discrete {
         color: ${getColor('neutral.900')};
       }
 
       &:hover,
-      &:not([href]):not([tabindex]):hover,
-      &.is-discrete:hover,
-      &.is-discrete:not([href]):not([tabindex]):hover {
+      &.is-discrete:hover {
         color: ${({ theme }) =>
           getLinkStyle('hoverColor', { color: 'primary', theme })};
         text-decoration: none;
       }
 
       &:active,
-      &:not([href]):not([tabindex]):active,
-      &.is-discrete:active,
-      &.is-discrete:not([href]):not([tabindex]):active {
+      &.is-discrete:active {
         color: ${({ theme }) =>
           getLinkStyle('activeColor', { color: 'primary', theme })};
         text-decoration: none;

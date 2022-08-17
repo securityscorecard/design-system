@@ -16,26 +16,19 @@ const StyledLink = styled.a`
   background-color: transparent;
   white-space: nowrap;
   cursor: pointer;
-
-  &,
-  &:not([href]):not([tabindex]) {
-    color: ${getLinkStyle('color')};
-  }
+  color: ${getLinkStyle('color')};
 
   &:hover,
-  &:focus-visible,
-  &:not([href]):not([tabindex]):hover {
+  &:focus-visible {
     color: ${getLinkStyle('hoverColor')};
     text-decoration: ${getLinkStyle('decoration')};
   }
 
-  &:active,
-  &:not([href]):not([tabindex]):active {
+  &:active {
     color: ${getLinkStyle('activeColor')};
   }
 
-  &:focus-visible,
-  &:not([href]):not([tabindex]):focus-visible {
+  &:focus-visible {
     outline: 0;
     background-color: ${getLinkStyle('focusBgColor')};
     border-radius: ${getRadii('default')};

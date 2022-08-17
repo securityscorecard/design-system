@@ -17,19 +17,13 @@ const BreadcrumbLink = styled(Link)`
   font-weight: ${getFontWeight('regular')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
+  color: ${getColor('neutral.900')};
 
-  &,
-  &:not([href]):not([tabindex]) {
-    color: ${getColor('neutral.900')};
-  }
-
-  &:hover,
-  &:not([href]):not([tabindex]):hover {
+  &:hover {
     color: ${getColor('primary.600')};
   }
 
-  &:active,
-  &:not([href]):not([tabindex]):active {
+  &:active {
     color: ${getColor('primary.700')};
   }
 `;

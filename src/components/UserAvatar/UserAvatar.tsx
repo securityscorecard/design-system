@@ -43,7 +43,6 @@ const StyledButton = styled(BaseButton)`
 
   &:focus:not(:disabled),
   &:hover:not(:disabled),
-  &:not([href]):not([tabindex]):not(:disabled):hover,
   &.hover,
   &.focus {
     background-color: #5737cf;
@@ -51,7 +50,6 @@ const StyledButton = styled(BaseButton)`
   }
 
   &:not(:disabled):active,
-  &:not([href]):not([tabindex]):not(:disabled):active,
   &.active {
     background-color: #482ead;
     border-color: #482ead;

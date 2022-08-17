@@ -69,28 +69,20 @@ const ButtonSolid = css<BaseStyledButtonProps>`
     ${({ color }) => getToken(`buttonSolid${capitalize(color)}BgColor`)};
   text-decoration: none;
   font-weight: ${getFontWeight('regular')};
-
-  &,
-  &:not([href]):not([tabindex]) {
-    color: ${({ color }) =>
-      getToken(`buttonSolid${capitalize(color)}TextColor`)};
-  }
+  color: ${({ color }) => getToken(`buttonSolid${capitalize(color)}TextColor`)};
 
   ${({ disabled, color }) =>
     disabled
       ? css`
-           {
-            background-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgDisabledColor`,
-            )};
-            border-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgDisabledColor`,
-            )};
-          }
+          background-color: ${getToken(
+            `buttonSolid${capitalize(color)}BgDisabledColor`,
+          )};
+          border-color: ${getToken(
+            `buttonSolid${capitalize(color)}BgDisabledColor`,
+          )};
         `
       : css`
           &:hover:not(:disabled),
-          &:not([href]):not([tabindex]):not(:disabled):hover,
           &.hover {
             background-color: ${getToken(
               `buttonSolid${capitalize(color)}BgHoverColor`,
@@ -115,7 +107,6 @@ const ButtonSolid = css<BaseStyledButtonProps>`
           }
 
           &:not(:disabled):active,
-          &:not([href]):not([tabindex]):not(:disabled):active,
           &.active {
             background-color: ${getToken(
               `buttonSolid${capitalize(color)}BgActiveColor`,
@@ -134,11 +125,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   border: 2px solid ${getButtonColor('borderColor')};
   text-decoration: none;
   font-weight: ${getFontWeight('regular')};
-
-  &,
-  &:not([href]):not([tabindex]):not(:disabled) {
-    color: ${getToken(`buttonOutlineTextColor`)};
-  }
+  color: ${getToken(`buttonOutlineTextColor`)};
 
   ${({ disabled }) =>
     disabled
@@ -150,9 +137,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
           }
         `
       : css`
-          &:hover:not(:disabled),
-          &:not([href]):not([tabindex]):not(:disabled):hover,
-          &.hover {
+          &:hover:not(:disabled) &.hover {
             background-color: ${getToken(`buttonOutlineBgHoverColor`)};
             color: ${getToken(`buttonOutlineTextColor`)};
             text-decoration: none;
@@ -164,9 +149,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
             text-decoration: none;
             ${focusState};
           }
-          &:not(:disabled):active,
-          &:not([href]):not([tabindex]):not(:disabled):active,
-          &.active {
+          &:not(:disabled):active &.active {
             background-color: ${getToken('buttonOutlineBgActiveColor')};
             border-color: ${getToken('buttonOutlineBorderActiveColor')};
             color: ${getToken('buttonOutlineTextActiveColor')};
@@ -180,12 +163,7 @@ const ButtonText = css<BaseStyledButtonProps>`
   padding-left: 0;
   padding-right: 0;
   text-decoration: none;
-
-  &,
-  &:not([href]):not([tabindex]):not(:disabled) {
-    color: ${({ color }) =>
-      getToken(`buttonText${capitalize(color)}TextColor`)};
-  }
+  color: ${({ color }) => getToken(`buttonText${capitalize(color)}TextColor`)};
 
   ${({ disabled, color }) =>
     disabled
@@ -197,9 +175,7 @@ const ButtonText = css<BaseStyledButtonProps>`
           }
         `
       : css`
-          &:hover:not(:disabled),
-          &:not([href]):not([tabindex]):not(:disabled):hover,
-          &.hover {
+          &:hover:not(:disabled) &.hover {
             color: ${getToken(`buttonText${capitalize(color)}TextHoverColor`)};
             text-decoration: none;
           }
@@ -215,9 +191,7 @@ const ButtonText = css<BaseStyledButtonProps>`
             text-decoration: none;
           }
 
-          &:not(:disabled):active,
-          &:not([href]):not([tabindex]):not(:disabled):active,
-          &&&.active {
+          &:not(:disabled):active &&&.active {
             color: ${getToken(`buttonText${capitalize(color)}TextActiveColor`)};
             text-decoration: none;
           }
