@@ -1,3 +1,19 @@
+# [1.0.0-alpha.212](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.211...v1.0.0-alpha.212) (2022-08-17)
+
+
+### Bug Fixes
+
+* **Filters:** aling unapplied text message ([0372ff2](https://github.com/securityscorecard/design-system/commit/0372ff264c7a77c1932b6affba0f07d373df7810))
+* **Filters:** change button labels ([cf3e959](https://github.com/securityscorecard/design-system/commit/cf3e959c7b1630c2cb3cd8b5c1e2ae12a61e3c59))
+* **Filters:** fix condition field width ([28c650e](https://github.com/securityscorecard/design-system/commit/28c650eebf1a2384d50eab45bea32f56d32e2f8c))
+
+
+### Features
+
+* **Filters:** add ability to fix the operator ([bbc04bd](https://github.com/securityscorecard/design-system/commit/bbc04bdc0da46444509a40269ab8056c8fbe6483))
+* **Filters:** allow hiding of close button ([23d7da3](https://github.com/securityscorecard/design-system/commit/23d7da3e3aae31cc0b50a15b929e0e468cd3a3ca))
+* **Filters:** make apply button optional ([ce9c694](https://github.com/securityscorecard/design-system/commit/ce9c69440efd20153682bbf927b608feaab02762))
+
 # [1.0.0-alpha.211](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.210...v1.0.0-alpha.211) (2022-08-12)
 
 
