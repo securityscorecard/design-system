@@ -205,6 +205,9 @@ const FilterRow: React.FC<FilterRowProps> = ({
   isLoading,
   isInvalid,
   onError,
+  isOperatorFieldEnabled,
+  defaultOperator,
+  hasApplyButton,
 }) => {
   const { field, conditions, condition, component } = useFilterRow(
     fields,
@@ -275,23 +278,28 @@ const FilterRow: React.FC<FilterRowProps> = ({
       {!isDefaultState ? (
         <StateButton
           index={index}
-          isApplied={isApplied}
+          isApplied={hasApplyButton ? isApplied : false}
           isLoading={isLoading}
           onClick={onRemove}
         />
       ) : null}
-      <SplitField $width={72}>
-        {index === 1 ? (
+      <SplitField $width={85}>
+        {!isOperatorFieldEnabled ? (
+          <DisabledOperator>
+            {/* First row starts by Where operator */}
+            {index === 0 ? 'where' : defaultOperator}
+          </DisabledOperator>
+        ) : index !== 1 ? (
+          <DisabledOperator>
+            {/* First row starts by Where operator */}
+            {index === 0 ? 'where' : operatorValue}
+          </DisabledOperator>
+        ) : (
           <SelectFilter
             defaultValue={operatorOption}
             options={operatorOptions}
             onChange={onOperatorChange}
           />
-        ) : (
-          <DisabledOperator>
-            {/* First row starts by Where operator */}
-            {index === 0 ? 'where' : operatorValue}
-          </DisabledOperator>
         )}
       </SplitField>
       <SplitField $width={200}>
@@ -338,11 +346,14 @@ FilterRow.propTypes = {
   onConditionChange: PropTypes.func.isRequired,
   onValueChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  isOperatorFieldEnabled: PropTypes.bool,
+  defaultOperator: PropTypes.oneOf(Object.values(Operators)),
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.instanceOf(Date),
     BaseDateRangePickerPropTypes,
   ]),
+  hasApplyButton: PropTypes.bool,
   onError: PropTypes.func,
 };

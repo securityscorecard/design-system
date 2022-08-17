@@ -19,51 +19,55 @@ const BottomBar: React.FC<BottomBarProps> = ({
   onClearAll,
   onClose,
   onCancel,
-  isCancelDisabled = false,
+  isCancelEnabled = true,
   isLoading = false,
   hasUnappliedFilters,
   isApplyDisabled = false,
+  hasCloseButton,
+  hasApplyButton = true,
 }) => {
-  const canCancel = !isCancelDisabled && isLoading;
+  const canCancel = isCancelEnabled && isLoading;
   return (
     <Inline gap={SpaceSizes.lg} justify="space-between">
       <Inline gap={SpaceSizes.lg}>
         <AddFilterButton
           color="primary"
           iconName="plus"
-          margin={{ left: 0.5, right: 2 }}
           variant="text"
           onClick={onAdd}
         >
-          Add filter
+          Add criteria
         </AddFilterButton>
         <Button color="primary" variant="text" onClick={onClearAll}>
-          Clear all
+          Clear all criteria
         </Button>
       </Inline>
       <Inline align="center" gap={SpaceSizes.md}>
-        {hasUnappliedFilters && (
-          <Paragraph as="div" size="md" variant="secondary">
+        {hasUnappliedFilters && hasApplyButton && (
+          <Paragraph as="div" margin="none" size="md" variant="secondary">
             You have unapplied filters
           </Paragraph>
         )}
-        <Button
-          color="primary"
-          margin={{ right: 1 }}
-          variant="outline"
-          onClick={canCancel ? onCancel : onClose}
-        >
-          {canCancel ? 'Cancel' : 'Close'}
-        </Button>
-        <Button
-          color="primary"
-          isDisabled={isApplyDisabled}
-          isLoading={canCancel}
-          variant="solid"
-          onClick={onSubmit}
-        >
-          Apply
-        </Button>
+        {canCancel && hasApplyButton ? (
+          <Button color="primary" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+        ) : hasCloseButton ? (
+          <Button color="primary" variant="outline" onClick={onClose}>
+            Close
+          </Button>
+        ) : null}
+        {hasApplyButton && (
+          <Button
+            color="primary"
+            isDisabled={isApplyDisabled}
+            isLoading={canCancel}
+            variant="solid"
+            onClick={onSubmit}
+          >
+            Apply
+          </Button>
+        )}
       </Inline>
     </Inline>
   );
@@ -78,7 +82,9 @@ BottomBar.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onClearAll: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  isCancelDisabled: PropTypes.bool,
+  isCancelEnabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   isApplyDisabled: PropTypes.bool,
+  hasCloseButton: PropTypes.bool,
+  hasApplyButton: PropTypes.bool,
 };

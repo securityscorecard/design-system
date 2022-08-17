@@ -6,6 +6,8 @@ export interface BottomBarProps {
   onSubmit: (event: React.MouseEvent<HTMLElement>) => void;
   hasUnappliedFilters: boolean;
   isLoading?: boolean;
-  isCancelDisabled?: boolean;
+  isCancelEnabled?: boolean;
   isApplyDisabled?: boolean;
+  hasCloseButton?: boolean;
+  hasApplyButton?: boolean;
 }

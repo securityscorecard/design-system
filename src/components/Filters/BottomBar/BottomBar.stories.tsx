@@ -6,7 +6,12 @@ import { BottomBarProps } from './BottomBar.types';
 
 export default {
   component: BottomBar,
-  title: 'components/Filters/BottomBar',
+  title: 'components/Filters/internalComponents/BottomBar',
+  parameters: {
+    viewMode: 'story',
+    docs: { disable: true },
+    previewTabs: { 'storybook/docs/panel': { hidden: true } },
+  },
 } as Meta;
 
 export const Playground: Story<BottomBarProps> = (args) => (

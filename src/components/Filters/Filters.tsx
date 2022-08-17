@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   allPass,
   any,
@@ -74,18 +74,29 @@ const FiltersBase = styled(Padbox)`
 
 const Filters: React.FC<FiltersProps> = ({
   fields,
-  state,
+  state: stateFromProps,
   onApply,
   onChange = noop,
-  onClose = noop,
+  onClose,
   onCancel = noop,
   isLoading = false,
-  isCancelDisabled = false,
+  isCancelEnabled = true,
+  isOperatorFieldEnabled = true,
+  defaultOperator = Operators.and,
 }) => {
+  const state = useMemo(
+    () =>
+      isOperatorFieldEnabled
+        ? stateFromProps
+        : map(assoc('operator', defaultOperator), stateFromProps),
+    [stateFromProps, isOperatorFieldEnabled, defaultOperator],
+  );
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
-  const [validValues, setValidValues] = useState<boolean[]>([true]);
+  const [validValues, setValidValues] = useState([true]);
+  const hasCloseButton = isNotUndefined(onClose);
+  const hasApplyButton = isNotUndefined(onApply);
 
   useEffect(() => {
     // Set default
@@ -258,7 +269,7 @@ const Filters: React.FC<FiltersProps> = ({
     setValidValues([true]);
 
     callOnChange(defaultState);
-    onApply([]);
+    onApply?.([]);
   };
 
   const handleSubmitForm = (event) => {
@@ -275,7 +286,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     setFiltersValues(isEmptyArray(newFilters) ? defaultState : newFilters);
 
-    onApply(newFilters);
+    onApply?.(newFilters);
   };
 
   const handleRemoveFilter = (index) => () => {
@@ -312,10 +323,13 @@ const Filters: React.FC<FiltersProps> = ({
           {filtersValues.map((props, index) => (
             <FilterRow
               key={generateId(props, index)}
+              defaultOperator={defaultOperator}
               fields={fields}
+              hasApplyButton={hasApplyButton}
               index={index}
               isDefaultState={isDefaultState}
               isInvalid={validValues[index] === false}
+              isOperatorFieldEnabled={isOperatorFieldEnabled}
               onConditionChange={handleConditionChange}
               onError={(hasError) => handleError(hasError, index)}
               onFieldChange={handleFieldChange}
@@ -327,9 +341,11 @@ const Filters: React.FC<FiltersProps> = ({
           ))}
         </Stack>
         <BottomBar
+          hasApplyButton={hasApplyButton}
+          hasCloseButton={hasCloseButton}
           hasUnappliedFilters={hasUnappliedFilters}
           isApplyDisabled={hasInvalidValues}
-          isCancelDisabled={isCancelDisabled}
+          isCancelEnabled={isCancelEnabled}
           isLoading={isLoading}
           onAdd={handleAddRow}
           onCancel={onCancel}
