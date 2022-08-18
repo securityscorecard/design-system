@@ -241,32 +241,6 @@ const Component = styled.input`
 `;
 ```
 
-### getButtonColor
-
-Returns color for given key in combination of button variant and color prop.
-
-```js
-import { getButtonColor } from '@securityscorecard/design-system';
-
-// getButtonColor :: Type -> Props -> string
-// Type - type of color (src/theme/buttons.ts)
-// Props - styled-components props object (variant and color props are required)
-const Button = styled.button.attrs(() => ({
-  variant: 'solid', // <- required
-  color: 'primary', // <- required
-}))`
-  background-color: ${getButtonColor('bgColor')}; // -> #eee
-
-  &:hover {
-    background-color: ${getButtonColor('hoverBgColor')}; // -> #1e88e5
-  }
-
-  &:active {
-    background-color: ${getButtonColor('activeBgColor')}; // -> #80baeb
-  }
-`;
-```
-
 ### getButtonHeight
 
 Returns button height from theme for given key.

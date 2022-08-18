@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 import { pipe } from 'ramda';
 
 import {
-  getButtonColor,
   getButtonHeight,
+  getButtonToken,
   getRadii,
   getSpace,
   pxToRem,
@@ -23,7 +23,7 @@ const ButtonSolid = css`
 const ButtonOutline = css<ButtonGroupWrapperProps>`
   &:after {
     background-color: ${(props) =>
-      getButtonColor('borderColor', {
+      getButtonToken('BorderColor', {
         variant: props.$variant,
         color: props.$color,
         theme: props.theme,
@@ -36,7 +36,7 @@ const ButtonText = css<ButtonGroupWrapperProps>`
 
   &:after {
     background-color: ${(props) =>
-      getButtonColor('borderColor', {
+      getButtonToken('TextColor', {
         variant: props.$variant,
         color: props.$color,
         theme: props.theme,

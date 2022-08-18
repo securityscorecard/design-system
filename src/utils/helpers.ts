@@ -109,20 +109,6 @@ export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
   path(['forms', property], theme),
 );
 
-// getButtonColor :: Type -> Props -> string
-// Type - type of color (src/theme/buttons.ts)
-// Props - styled-components props object
-export const getButtonColor = curry((type, { variant, color, theme }) => {
-  if (hasPath(['buttons', 'variants', variant, color], theme)) {
-    return path(['buttons', 'variants', variant, color, type], theme);
-  }
-  // eslint-disable-next-line no-console
-  console.warn(
-    `Desired color variant (variant: "${variant}", color: "${color}") is not currently implemented. Using "primary" color instead.`,
-  );
-  return path(['buttons', variant, 'primary', type], theme);
-});
-
 // getButtonHeight :: Size -> Props -> string
 // Size - any key of 'heights' (src/theme/buttons.ts)
 // Props - styled-components props object
@@ -181,3 +167,9 @@ export const abbreviateNumber = (value: number): string =>
   numeral(value).format('0.[00]a').toUpperCase();
 
 export const getShadow = () => 'box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);';
+
+export const getButtonToken = curry((name, { variant, color, theme }) =>
+  getToken(`button${capitalize(variant)}${capitalize(color)}${name}`, {
+    theme,
+  }),
+);

@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components';
 import { includes, pipe } from 'ramda';
 
 import {
-  capitalize,
   createMarginSpacing,
   createPadding,
-  getButtonColor,
   getButtonHeight,
+  getButtonToken,
   getFontFamily,
   getFontSize,
   getFontWeight,
   getRadii,
-  getToken,
   pxToRem,
 } from '../../../utils';
 import { BaseStyledButtonProps } from './BaseStyledButton.types';
@@ -58,144 +56,109 @@ const buttonSizes = {
  * BUTTON VARIANTS
  */
 
-const focusState = css`
-  outline: 4px solid ${getButtonColor('focusOutlineColor')};
-`;
-
 const ButtonSolid = css<BaseStyledButtonProps>`
-  background-color: ${({ color }) =>
-    getToken(`buttonSolid${capitalize(color)}BgColor`)};
-  border: 1px solid
-    ${({ color }) => getToken(`buttonSolid${capitalize(color)}BgColor`)};
+  background-color: ${getButtonToken('BgColor')};
+  border: 1px solid ${getButtonToken('BgColor')};
   text-decoration: none;
   font-weight: ${getFontWeight('regular')};
-  color: ${({ color }) => getToken(`buttonSolid${capitalize(color)}TextColor`)};
+  color: ${getButtonToken(`TextColor`)};
 
-  ${({ disabled, color }) =>
-    disabled
-      ? css`
-          background-color: ${getToken(
-            `buttonSolid${capitalize(color)}BgDisabledColor`,
-          )};
-          border-color: ${getToken(
-            `buttonSolid${capitalize(color)}BgDisabledColor`,
-          )};
-        `
-      : css`
-          &:hover:not(:disabled),
-          &.hover {
-            background-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgHoverColor`,
-            )};
-            border-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgHoverColor`,
-            )};
-            color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
-            text-decoration: none;
-          }
-          &:focus-visible:not(:disabled),
-          &.focus {
-            background-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgHoverColor`,
-            )};
-            border-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgHoverColor`,
-            )};
-            color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
-            text-decoration: none;
-            ${focusState};
-          }
+  &:disabled,
+  &.disabled {
+    background-color: ${getButtonToken(`BgDisabledColor`)};
+    border-color: ${getButtonToken(`BgDisabledColor`)};
+    color: ${getButtonToken(`TextDisabledColor`)};
+  }
 
-          &:not(:disabled):active,
-          &.active {
-            background-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgActiveColor`,
-            )};
-            border-color: ${getToken(
-              `buttonSolid${capitalize(color)}BgActiveColor`,
-            )};
-            color: ${getToken(`buttonSolid${capitalize(color)}TextColor`)};
-            text-decoration: none;
-          }
-        `}
+  &:hover:not(:disabled),
+  &.hover {
+    background-color: ${getButtonToken(`BgHoverColor`)};
+    border-color: ${getButtonToken(`BgHoverColor`)};
+    color: ${getButtonToken(`TextColor`)};
+    text-decoration: none;
+  }
+  &:focus-visible:not(:disabled),
+  &.focus {
+    background-color: ${getButtonToken(`BgHoverColor`)};
+    border-color: ${getButtonToken(`BgHoverColor`)};
+    color: ${getButtonToken(`TextColor`)};
+    text-decoration: none;
+    outline: 4px solid ${getButtonToken(`OutlineFocusColor`)};
+  }
+
+  &:not(:disabled):active,
+  &.active {
+    background-color: ${getButtonToken(`BgActiveColor`)};
+    border-color: ${getButtonToken(`BgActiveColor`)};
+    color: ${getButtonToken(`TextColor`)};
+    text-decoration: none;
+  }
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
-  background-color: ${getToken(`buttonOutlineBgColor`)};
-  border: 2px solid ${getButtonColor('borderColor')};
+  background-color: ${getButtonToken('BgColor')};
+  border: 2px solid ${getButtonToken('BorderColor')};
   text-decoration: none;
   font-weight: ${getFontWeight('regular')};
-  color: ${getToken(`buttonOutlineTextColor`)};
+  color: ${getButtonToken('TextColor')};
 
-  ${({ disabled }) =>
-    disabled
-      ? css`
-          & {
-            color: ${getToken(`buttonOutlineTextDisabledColor`)};
-            background-color: ${getToken(`buttonOutlineBgDisabledColor`)};
-            border-color: ${getToken(`buttonOutlineBorderDisabledColor`)};
-          }
-        `
-      : css`
-          &:hover:not(:disabled) &.hover {
-            background-color: ${getToken(`buttonOutlineBgHoverColor`)};
-            color: ${getToken(`buttonOutlineTextColor`)};
-            text-decoration: none;
-          }
-          &:focus-visible:not(:disabled),
-          &.focus {
-            background-color: ${getToken('buttonOutlineBgHoverColor')};
-            color: ${getToken('buttonOutlineTextColor')};
-            text-decoration: none;
-            ${focusState};
-          }
-          &:not(:disabled):active &.active {
-            background-color: ${getToken('buttonOutlineBgActiveColor')};
-            border-color: ${getToken('buttonOutlineBorderActiveColor')};
-            color: ${getToken('buttonOutlineTextActiveColor')};
-            text-decoration: none;
-          }
-        `}
+  &:disabled,
+  &.disabled {
+    color: ${getButtonToken('TextDisabledColor')};
+    border-color: ${getButtonToken('BorderDisabledColor')};
+  }
+  &:hover:not(:disabled),
+  &.hover {
+    color: ${getButtonToken('TextHoverColor')};
+    border-color: ${getButtonToken('BorderHoverColor')};
+    text-decoration: none;
+  }
+  &:focus-visible:not(:disabled),
+  &.focus {
+    color: ${getButtonToken('TextFocusColor')};
+    border-color: ${getButtonToken('BorderFocusColor')};
+    outline: 4px solid ${getButtonToken('OutlineFocusColor')};
+    text-decoration: none;
+  }
+  &:not(:disabled):active,
+  &.active {
+    background-color: ${getButtonToken('BgActiveColor')};
+    border-color: ${getButtonToken('BorderActiveColor')};
+    color: ${getButtonToken('TextActiveColor')};
+    text-decoration: none;
+  }
 `;
 
 const ButtonText = css<BaseStyledButtonProps>`
   background-color: transparent;
+  border-color: transparent;
   padding-left: 0;
   padding-right: 0;
   text-decoration: none;
-  color: ${({ color }) => getToken(`buttonText${capitalize(color)}TextColor`)};
+  color: ${getButtonToken(`TextColor`)};
 
-  ${({ disabled, color }) =>
-    disabled
-      ? css`
-          & {
-            color: ${getToken(
-              `buttonText${capitalize(color)}TextDisabledColor`,
-            )};
-          }
-        `
-      : css`
-          &:hover:not(:disabled) &.hover {
-            color: ${getToken(`buttonText${capitalize(color)}TextHoverColor`)};
-            text-decoration: none;
-          }
-          &:focus-visible:not(:disabled),
-          &.focus {
-            background-color: ${getToken(
-              `buttonText${capitalize(color)}BgFocusColor`,
-            )};
-            border-color: ${getToken(
-              `buttonText${capitalize(color)}BgFocusColor`,
-            )};
-            color: ${getToken(`buttonText${capitalize(color)}TextColor`)};
-            text-decoration: none;
-          }
+  &:disabled,
+  &.disabled {
+    color: ${getButtonToken(`TextDisabledColor`)};
+  }
 
-          &:not(:disabled):active &&&.active {
-            color: ${getToken(`buttonText${capitalize(color)}TextActiveColor`)};
-            text-decoration: none;
-          }
-        `}
+  &:hover:not(:disabled),
+  &.hover {
+    color: ${getButtonToken(`TextHoverColor`)};
+    text-decoration: none;
+  }
+  &:focus-visible:not(:disabled),
+  &.focus {
+    background-color: ${getButtonToken(`BgFocusColor`)};
+    color: ${getButtonToken(`TextFocusColor`)};
+    text-decoration: none;
+  }
+
+  &:not(:disabled):active,
+  &&&.active {
+    color: ${getButtonToken(`TextActiveColor`)};
+    text-decoration: none;
+  }
 `;
 
 const buttonVariants = {
