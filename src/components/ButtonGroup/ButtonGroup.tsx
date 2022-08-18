@@ -5,9 +5,9 @@ import { pipe } from 'ramda';
 
 import {
   getButtonHeight,
-  getButtonToken,
   getRadii,
   getSpace,
+  getToken,
   pxToRem,
 } from '../../utils/helpers';
 import { ButtonGroupProps, ButtonGroupWrapperProps } from './ButtonGroup.types';
@@ -22,12 +22,7 @@ const ButtonSolid = css`
 `;
 const ButtonOutline = css<ButtonGroupWrapperProps>`
   &:after {
-    background-color: ${(props) =>
-      getButtonToken('BorderColor', {
-        variant: props.$variant,
-        color: props.$color,
-        theme: props.theme,
-      })};
+    background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
   }
 `;
 const ButtonText = css<ButtonGroupWrapperProps>`
@@ -35,12 +30,7 @@ const ButtonText = css<ButtonGroupWrapperProps>`
   padding-right: ${getSpace('md')};
 
   &:after {
-    background-color: ${(props) =>
-      getButtonToken('TextColor', {
-        variant: props.$variant,
-        color: props.$color,
-        theme: props.theme,
-      })};
+    background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
   }
 
   &:first-child {

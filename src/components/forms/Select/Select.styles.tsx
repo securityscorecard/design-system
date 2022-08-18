@@ -29,9 +29,9 @@ import { MenuActionArgs, Option as OptionType } from './Select.types';
 import { getPaddingSpace } from '../../../utils/space';
 import {
   createPadding,
-  getButtonToken,
   getColor,
   getSpace,
+  getToken,
   pxToRem,
 } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
@@ -446,13 +446,13 @@ const CreateNewOption = styled.div.attrs<{ variant: 'text'; color: 'primary' }>(
   }),
 )`
   cursor: pointer;
-  color: ${getButtonToken('TextColor')};
+  color: ${getToken('color-action-primary')};
 
   &:hover {
-    color: ${getButtonToken('TextHoverColor')};
+    color: ${getToken('color-action-primary-hover')};
   }
   &:active {
-    color: ${getButtonToken('TextActiveColor')};
+    color: ${getToken('color-action-primary-active')};
   }
 `;
 
