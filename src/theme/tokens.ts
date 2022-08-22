@@ -2,12 +2,16 @@ import { colors } from './colors';
 
 /**
  * naming:
- * - element (link, icon) - optional
+ * - ...TBD
+ * - component (link, pill...)
  * - category (color, font, size...)
- * - concept (action, feedback...) - optional
- * - property (background, text, border...) - optional
- * - variant (primary, secondary, solid...) - optional
- * - state (hover, focus, active...) - optional
+ * - concept (action, feedback...)
+ * - property (background, text, border...)
+ * - variant (primary, secondary, solid...)
+ * - state (hover, focus, active...)
+ * - ...TBD
+ *
+ * Ref: https://medium.com/eightshapes-llc/naming-tokens-in-design-systems-9e86c7444676
  */
 
 export const createTokens = (themeColors: typeof colors) => ({

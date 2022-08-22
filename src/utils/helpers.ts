@@ -2,7 +2,6 @@ import { DefaultTheme } from 'styled-components';
 import {
   curry,
   either,
-  hasPath,
   identity,
   join,
   map,
@@ -116,20 +115,6 @@ export const getButtonHeight = curry(
   (size: keyof Buttons['heights'], { theme }: Theme) =>
     path(['buttons', 'heights', size], theme),
 );
-
-// getLinkStyle :: Type -> Props -> string
-// Type - type of color / decoration
-// Props - styled-components props object
-export const getLinkStyle = curry((type, { color, theme }) => {
-  if (hasPath(['typography', 'links', color], theme)) {
-    return path(['typography', 'links', color, type], theme);
-  }
-  // eslint-disable-next-line no-console
-  console.warn(
-    `Desired color variant (color: "${color}") is not currently implemented. Using "primary" color instead.`,
-  );
-  return path(['typography', 'links', 'primary', type], theme);
-});
 
 // getDepth :: Element -> Props -> string
 // Element - any key of 'depth' (src/theme/depths.ts)

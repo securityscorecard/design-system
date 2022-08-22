@@ -4,39 +4,32 @@ import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { getFontWeight, getRadii, getToken } from '../../../utils';
+import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
 import { LinkProps } from './Link.types';
-import { LinkColors } from './Link.enums';
+import {
+  LinkActiveStyles,
+  LinkBaseStyles,
+  LinkFocusStyles,
+  LinkHoverStyles,
+} from '../../_internal/BaseLink';
 
-const StyledLink = styled.a`
-  margin: 0;
-  border: none;
-  font-family: inherit;
-  font-weight: ${getFontWeight('semibold')};
-  background-color: transparent;
-  white-space: nowrap;
-  cursor: pointer;
-  color: ${(p) => getToken(`link-color-text-${p.color}`, p)};
+const LinkRoot = styled.a`
+  ${LinkBaseStyles};
 
-  &:hover,
+  &:hover {
+    ${LinkHoverStyles};
+  }
+
   &:focus-visible {
-    color: ${(p) => getToken(`link-color-text-${p.color}-hover`, p)};
-    text-decoration: underline;
+    ${LinkFocusStyles};
   }
 
   &:active {
-    color: ${(p) => getToken(`link-color-text-${p.color}-active`, p)};
-  }
-
-  &:focus-visible {
-    outline: 0;
-    background-color: ${(p) =>
-      getToken(`link-color-background-${p.color}-focus`, p)};
-    border-radius: ${getRadii('default')};
+    ${LinkActiveStyles};
   }
 `;
 
-const Link: React.FC<LinkProps & React.ComponentProps<typeof StyledLink>> = ({
+const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
   children,
   color = LinkColors.primary,
   as = null,
@@ -63,16 +56,16 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof StyledLink>> = ({
   }
 
   return (
-    <StyledLink
+    <LinkRoot
+      $color={color}
       as={domTag}
-      color={color}
       href={href}
       to={to}
       onClick={onClick}
       {...props}
     >
       {children}
-    </StyledLink>
+    </LinkRoot>
   );
 };
 
