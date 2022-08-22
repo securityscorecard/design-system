@@ -22,14 +22,9 @@ const ButtonSolid = css<BaseStyledButtonProps>`
   background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
   color: ${getToken(`color-action-text-solid`)};
 
-  &:disabled,
-  &.disabled {
-    background-color: ${getToken(`color-action-background-disabled`)};
-    color: ${getToken(`color-action-text-disabled`)};
-  }
-
   &:hover,
   &.hover {
+    color: ${getToken(`color-action-text-solid`)};
     background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
   &:focus-visible,
@@ -42,6 +37,12 @@ const ButtonSolid = css<BaseStyledButtonProps>`
   &.active {
     background-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
   }
+
+  &:disabled,
+  &.disabled {
+    background-color: ${getToken(`color-action-background-disabled`)};
+    color: ${getToken(`color-action-text-disabled`)};
+  }
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
@@ -49,11 +50,6 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   border: 2px solid ${(p) => getToken(`color-action-${p.$color}`, p)};
   color: ${(p) => getToken(`color-action-${p.$color}`, p)};
 
-  &:disabled,
-  &.disabled {
-    color: ${getToken(`color-action-text-disabled`)};
-    border-color: ${getToken(`color-action-text-disabled`)};
-  }
   &:hover,
   &.hover {
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
@@ -72,6 +68,12 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     border-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
     color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
   }
+
+  &:disabled,
+  &.disabled {
+    color: ${getToken(`color-action-text-disabled`)};
+    border-color: ${getToken(`color-action-text-disabled`)};
+  }
 `;
 
 const ButtonText = css<BaseStyledButtonProps>`
@@ -81,11 +83,6 @@ const ButtonText = css<BaseStyledButtonProps>`
   padding-right: 0;
   font-weight: ${getFontWeight('semibold')};
   color: ${(p) => getToken(`color-action-${p.$color}`, p)};
-
-  &:disabled,
-  &.disabled {
-    color: ${getToken(`color-action-text-disabled`)};
-  }
 
   &:hover,
   &.hover {
@@ -101,6 +98,11 @@ const ButtonText = css<BaseStyledButtonProps>`
   &:active,
   &&&.active {
     color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
+  }
+
+  &:disabled,
+  &.disabled {
+    color: ${getToken(`color-action-text-disabled`)};
   }
 `;
 
