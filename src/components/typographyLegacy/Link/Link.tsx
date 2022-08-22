@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { getFontWeight, getLinkStyle, getRadii } from '../../../utils';
+import { getFontWeight, getRadii, getToken } from '../../../utils';
 import { LinkProps } from './Link.types';
 import { LinkColors } from './Link.enums';
 
@@ -16,21 +16,22 @@ const StyledLink = styled.a`
   background-color: transparent;
   white-space: nowrap;
   cursor: pointer;
-  color: ${getLinkStyle('color')};
+  color: ${(p) => getToken(`link-color-text-${p.color}`, p)};
 
   &:hover,
   &:focus-visible {
-    color: ${getLinkStyle('hoverColor')};
-    text-decoration: ${getLinkStyle('decoration')};
+    color: ${(p) => getToken(`link-color-text-${p.color}-hover`, p)};
+    text-decoration: underline;
   }
 
   &:active {
-    color: ${getLinkStyle('activeColor')};
+    color: ${(p) => getToken(`link-color-text-${p.color}-active`, p)};
   }
 
   &:focus-visible {
     outline: 0;
-    background-color: ${getLinkStyle('focusBgColor')};
+    background-color: ${(p) =>
+      getToken(`link-color-background-${p.color}-focus`, p)};
     border-radius: ${getRadii('default')};
   }
 `;

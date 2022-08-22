@@ -2,8 +2,9 @@ import { colors } from './colors';
 
 /**
  * naming:
+ * - element (link, icon) - optional
  * - category (color, font, size...)
- * - concept (action, feedback...)
+ * - concept (action, feedback...) - optional
  * - property (background, text, border...) - optional
  * - variant (primary, secondary, solid...) - optional
  * - state (hover, focus, active...) - optional
@@ -36,4 +37,12 @@ export const createTokens = (themeColors: typeof colors) => ({
   'color-action-background-disabled': themeColors.neutral[300],
   'color-action-text-disabled': themeColors.neutral[600],
   'color-action-text-solid': themeColors.neutral[0],
+  'link-color-text-primary': themeColors.primary[600],
+  'link-color-text-primary-hover': themeColors.primary[800],
+  'link-color-text-primary-active': themeColors.primary[600],
+  'link-color-background-primary-focus': themeColors.primary[50],
+  'link-color-text-secondary': themeColors.neutral[1000],
+  'link-color-text-secondary-hover': themeColors.neutral[800],
+  'link-color-text-secondary-active': themeColors.neutral[1000],
+  'link-color-background-secondary-focus': themeColors.neutral[200],
 });
