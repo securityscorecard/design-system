@@ -8,6 +8,7 @@ import {
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getToken,
 } from '../../utils/helpers';
 import { Link } from '../typographyLegacy/Link';
 import { Text, TextEnums } from '../typographyLegacy/Text';
@@ -19,12 +20,14 @@ const BreadcrumbLink = styled(Link)`
   line-height: ${getLineHeight('md')};
   color: ${getColor('neutral.900')};
 
-  &:hover {
-    color: ${getColor('primary.600')};
+  &:hover,
+  &:focus-visible {
+    color: ${getToken('color-action-primary-hover')};
+    text-decoration: none;
   }
 
   &:active {
-    color: ${getColor('primary.700')};
+    color: ${getToken('color-action-primary-active')};
   }
 `;
 

@@ -1,4 +1,4 @@
-import { LinkProps } from '@storybook/components';
+import { LinkProps } from '../typographyLegacy/Link/Link.types';
 
 export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
   /**
