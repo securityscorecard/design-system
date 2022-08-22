@@ -241,21 +241,6 @@ const Component = styled.input`
 `;
 ```
 
-### getButtonHeight
-
-Returns button height from theme for given key.
-
-```js
-import { getButtonHeight } from '@securityscorecard/design-system';
-
-// getButtonHeight :: Size -> Props -> string
-// Size - any key of 'heights' (src/theme/buttons.ts)
-// Props - styled-components props object
-const Button = styled.button`
-  height: ${pipe(getButtonHeight('lg'), pxToRem)};
-`; // -> height: 3rem;
-```
-
 ### getDepth
 
 Returns z-index from theme for given element.

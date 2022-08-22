@@ -12,6 +12,7 @@ import { generateControl } from '../../utils/tests/storybook';
 import { TabSizes, TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor } from '../../utils';
+import { Button } from '../Button';
 
 export default {
   title: 'components/Tabs',
@@ -175,25 +176,10 @@ export const TextTabs: Story = () => (
 
 export const SegmentedTabs: Story = () => (
   <Stack gap={SpaceSizes.lg}>
-    <Inline gap={SpaceSizes.md}>
-      <Tabs
-        margin="none"
-        selectedValue="one"
-        size="lg"
-        variant="segmented"
-        onSelectTab={action('Select Tab')}
-      >
-        <Tab value="one">One</Tab>
-        <Tab value="two">Two</Tab>
-        <Tab value="three">Three</Tab>
-      </Tabs>
-    </Inline>
-
     <Inline gap="md">
       <Tabs
         margin="none"
         selectedValue="one"
-        size="md"
         variant="segmented"
         onSelectTab={action('Select Tab')}
       >
@@ -201,6 +187,7 @@ export const SegmentedTabs: Story = () => (
         <Tab value="two">Two</Tab>
         <Tab value="three">Three</Tab>
       </Tabs>
+      <Button>Comparison</Button>
     </Inline>
   </Stack>
 );

@@ -6,7 +6,7 @@ export type Sizes = typeof SwitchSizes[keyof typeof SwitchSizes];
 
 export interface SwitchLabelProps {
   isDisabled?: boolean;
-  size?: Sizes;
+  $size?: Sizes;
   maxWidth?: number;
 }
 
@@ -27,7 +27,7 @@ export interface SwitchProps
   /**
    * Size of the Switch
    */
-  size?: SwitchLabelProps['size'];
+  size?: SwitchLabelProps['$size'];
   /**
    * Max width in px
    */

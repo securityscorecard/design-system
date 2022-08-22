@@ -28,10 +28,8 @@ import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
 import { Depths } from '../theme/depths.types';
 import { SpaceSize } from '../theme/space.types';
-import { Buttons } from '../theme/buttons.types';
 import { ColorTypes } from '../theme/colors.enums';
 import { createRadii } from '../theme/radii';
-import { createTokens } from '../theme/tokens';
 
 export type Theme = {
   theme?: DefaultTheme;
@@ -108,14 +106,6 @@ export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
   path(['forms', property], theme),
 );
 
-// getButtonHeight :: Size -> Props -> string
-// Size - any key of 'heights' (src/theme/buttons.ts)
-// Props - styled-components props object
-export const getButtonHeight = curry(
-  (size: keyof Buttons['heights'], { theme }: Theme) =>
-    path(['buttons', 'heights', size], theme),
-);
-
 // getDepth :: Element -> Props -> string
 // Element - any key of 'depth' (src/theme/depths.ts)
 // Props - styled-components props object
@@ -143,9 +133,8 @@ export const getNegativeSpace = curry(
 export const capitalize = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-export const getToken = curry(
-  (name: keyof ReturnType<typeof createTokens>, { theme }: Theme): string =>
-    path(['tokens', name])(theme),
+export const getToken = curry((name, { theme }: Theme): string =>
+  path(['tokens', name])(theme),
 );
 
 export const abbreviateNumber = (value: number): string =>

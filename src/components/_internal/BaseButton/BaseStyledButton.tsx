@@ -3,54 +3,15 @@ import { includes, pipe } from 'ramda';
 
 import {
   createMarginSpacing,
-  createPadding,
-  getButtonHeight,
   getFontFamily,
-  getFontSize,
   getFontWeight,
   getRadii,
   getToken,
   pxToRem,
 } from '../../../utils';
-import { BaseStyledButtonProps } from './BaseStyledButton.types';
-import { SpaceSizes } from '../../../theme';
-import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import { BaseButtonSizes, BaseButtonVariants } from './BaseButton.enums';
-
-/*
- * BUTTON SIZES
- */
-
-const ButtonLarge = css`
-  font-size: ${getFontSize('md')};
-  ${({ theme }) => createPadding({ paddingSize: SpaceSizes.md, theme })};
-`;
-
-const ButtonMedium = css<BaseStyledButtonProps>`
-  font-size: ${getFontSize('md')};
-  ${({ $hasOnlyIcon, theme }) =>
-    createPadding({
-      paddingSize: $hasOnlyIcon ? SpaceSizes.sm : SpaceSizes.md,
-      paddingType: $hasOnlyIcon ? PaddingTypes.square : PaddingTypes.squish,
-      theme,
-    })};
-`;
-
-const ButtonSmall = css<BaseStyledButtonProps>`
-  font-size: ${getFontSize('md')};
-  ${({ theme }) =>
-    createPadding({
-      paddingSize: SpaceSizes.sm,
-      paddingType: PaddingTypes.squish,
-      theme,
-    })};
-`;
-
-const buttonSizes = {
-  [BaseButtonSizes.lg]: ButtonLarge,
-  [BaseButtonSizes.md]: ButtonMedium,
-  [BaseButtonSizes.sm]: ButtonSmall,
-};
+import { BaseStyledButtonProps } from './BaseButton.types';
+import { BaseButtonVariants } from './BaseButton.enums';
+import { Padbox } from '../../layout';
 
 /*
  * BUTTON VARIANTS
@@ -58,7 +19,7 @@ const buttonSizes = {
 
 const ButtonSolid = css<BaseStyledButtonProps>`
   text-decoration: none;
-  background-color: ${(p) => getToken(`color-action-${p.color}`, p)};
+  background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
   color: ${getToken(`color-action-text-solid`)};
 
   &:disabled,
@@ -69,24 +30,24 @@ const ButtonSolid = css<BaseStyledButtonProps>`
 
   &:hover,
   &.hover {
-    background-color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
+    background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
   &:focus-visible,
   &.focus {
-    background-color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.color}-focus`, p)};
+    background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
   }
 
   &:active,
   &.active {
-    background-color: ${(p) => getToken(`color-action-${p.color}-active`, p)};
+    background-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
   }
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
   background-color: transparent;
-  border: 2px solid ${(p) => getToken(`color-action-${p.color}`, p)};
-  color: ${(p) => getToken(`color-action-${p.color}`, p)};
+  border: 2px solid ${(p) => getToken(`color-action-${p.$color}`, p)};
+  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
 
   &:disabled,
   &.disabled {
@@ -95,21 +56,21 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   }
   &:hover,
   &.hover {
-    color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
   &:focus-visible,
   &.focus {
-    color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.color}-focus`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
   }
   &:active,
   &.active {
     background-color: ${(p) =>
-      getToken(`color-action-background-${p.color}-active`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.color}-active`, p)};
-    color: ${(p) => getToken(`color-action-${p.color}-active`, p)};
+      getToken(`color-action-background-${p.$color}-active`, p)};
+    border-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
   }
 `;
 
@@ -119,7 +80,7 @@ const ButtonText = css<BaseStyledButtonProps>`
   padding-left: 0;
   padding-right: 0;
   font-weight: ${getFontWeight('semibold')};
-  color: ${(p) => getToken(`color-action-${p.color}`, p)};
+  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
 
   &:disabled,
   &.disabled {
@@ -128,18 +89,18 @@ const ButtonText = css<BaseStyledButtonProps>`
 
   &:hover,
   &.hover {
-    color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
   &:focus-visible,
   &.focus {
     background-color: ${(p) =>
-      getToken(`color-action-background-${p.color}-focus`, p)};
-    color: ${(p) => getToken(`color-action-${p.color}-hover`, p)};
+      getToken(`color-action-background-${p.$color}-focus`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
 
   &:active,
   &&&.active {
-    color: ${(p) => getToken(`color-action-${p.color}-active`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
   }
 `;
 
@@ -149,19 +110,9 @@ const buttonVariants = {
   [BaseButtonVariants.text]: ButtonText,
 };
 
-const BaseStyledButton = styled.button.withConfig<BaseStyledButtonProps>({
+const BaseStyledButton = styled(Padbox).withConfig<BaseStyledButtonProps>({
   shouldForwardProp: (property) =>
-    !includes(property, [
-      'size',
-      'variant',
-      'color',
-      'icon',
-      'margin',
-      'isLoading',
-      'isDisabled',
-      'isExpanded',
-      'theme',
-    ]),
+    !includes(property, ['theme', 'paddingType', 'paddingSize']),
 })`
   display: inline-flex;
   align-items: center;
@@ -174,17 +125,21 @@ const BaseStyledButton = styled.button.withConfig<BaseStyledButtonProps>({
   text-align: center;
   white-space: nowrap;
 
-  ${({ margin }) => createMarginSpacing(margin)};
-  ${({ isExpanded }) => isExpanded && 'width: 100%;'};
+  ${({ $margin }) => createMarginSpacing($margin)};
+  ${({ $isExpanded }) => $isExpanded && 'width: 100%;'};
   ${({ disabled }) => disabled && 'cursor: not-allowed;'};
-  ${({ isLoading }) => isLoading && 'cursor: progress;'};
+  ${({ $isLoading }) => $isLoading && 'cursor: progress;'};
 
-  height: ${({ size, theme }) =>
-    pipe(getButtonHeight(size), pxToRem)({ theme })};
-  line-height: ${({ size, theme }) =>
-    pipe(getButtonHeight(size), pxToRem)({ theme })};
-  ${({ size }) => buttonSizes[size]};
-  ${({ variant }) => buttonVariants[variant]};
+  height: ${pipe(getToken('size-action-size'), pxToRem)};
+  line-height: 1;
+  font-size: ${getToken('font-action-size')};
+  ${({ $hasOnlyIcon }) =>
+    $hasOnlyIcon &&
+    css`
+      width: ${pipe(getToken('size-action-size'), pxToRem)};
+    `};
+
+  ${({ $variant }) => buttonVariants[$variant]};
 
   &,
   &:hover,

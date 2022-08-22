@@ -13,10 +13,15 @@ const Tabs: React.FC<TabsProps> = ({
   selectedPatternMatcher = equals,
   children,
   onSelectTab,
-  size = TabSizes.sm,
+  size: sizeFromProps,
   variant = TabVariants.underline,
   isExpanded = false,
 }) => {
+  const size =
+    variant === TabVariants.segmented
+      ? TabSizes.md
+      : sizeFromProps || TabSizes.sm;
+
   return (
     <BaseTabsWrapper
       $isExpanded={isExpanded}

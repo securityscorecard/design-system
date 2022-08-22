@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { pipe } from 'ramda';
 
-import {
-  getButtonHeight,
-  getRadii,
-  getSpace,
-  getToken,
-  pxToRem,
-} from '../../utils/helpers';
+import { getRadii, getSpace, getToken, pxToRem } from '../../utils/helpers';
 import { ButtonGroupProps, ButtonGroupWrapperProps } from './ButtonGroup.types';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 
@@ -60,7 +54,7 @@ const ButtonGroupWrapper = styled.div<ButtonGroupWrapperProps>`
     &::after {
       content: '';
       width: 1px;
-      height: ${({ theme }) => pipe(getButtonHeight('md'), pxToRem)({ theme })};
+      height: ${pipe(getToken('size-action-size'), pxToRem)};
       position: absolute;
       right: -1px;
       z-index: 1;
