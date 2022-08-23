@@ -1,3 +1,10 @@
+# [1.0.0-alpha.213](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.212...v1.0.0-alpha.213) (2022-08-23)
+
+
+### Bug Fixes
+
+* **SearchBar:** rename SearchBarV2 ([203dc83](https://github.com/securityscorecard/design-system/commit/203dc837a7decc2661dddcf1f5077f583bc9a8cf))
+
 # [1.0.0-alpha.212](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.211...v1.0.0-alpha.212) (2022-08-17)
 
 
