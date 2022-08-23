@@ -1,68 +1,75 @@
-import PropTypes from 'prop-types';
-
-import { InputProps } from '../Input/Input.types';
-
-export interface SearchSuggestion {
-  name: string;
-  value: string;
-  onClick: () => void;
-}
-export interface FilterSuggestion extends SearchSuggestion {
-  filter?: {
-    field?: string;
-    condition?: string;
-  };
-}
-
-export const SuggestionPropType = PropTypes.oneOfType([
-  PropTypes.exact({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-  }),
-  PropTypes.exact({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-    filter: PropTypes.exact({
-      field: PropTypes.string.isRequired,
-      condition: PropTypes.string.isRequired,
-    }).isRequired,
-  }),
-]);
-
-export interface renderSuggestionFunc {
-  (suggestion: SearchSuggestion): React.ReactElement;
-}
-export interface renderSuggestionWithFilterFunc {
-  (suggestion: FilterSuggestion): React.ReactElement;
-}
-export interface SearchBarProps
-  extends InputProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
-  hasSuggestions?: boolean;
-  onSearch: (query: string) => void | Promise<void>;
-  onClear: () => void;
-  placeholder?: string;
-  suggestions?: FilterSuggestion[] | SearchSuggestion[];
-  renderSearchSuggestion?: renderSuggestionFunc;
-  isValidatedOnSubmit?: boolean;
-  pattern?: string;
-  errorMessage?: string;
-  value?: string;
-  defaultValue?: string;
-}
-
-export const SearchBarPropType = {
-  onSearch: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  hasSuggestions: PropTypes.bool,
-  suggestions: PropTypes.arrayOf(SuggestionPropType),
-  renderSearchSuggestion: PropTypes.func,
-  isValidatedOnSubmit: PropTypes.bool,
-  pattern: PropTypes.string,
-  errorMessage: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  defaultValue: PropTypes.string,
+type WithDebouncedSearch = {
+  /**
+   * If true search is triggered automatically by onChange event.
+   * */
+  hasDebouncedSearch: true;
+  /**
+   * Time used to debounce search, in milliseconds
+   */
+  debounceTime?: number;
 };
+
+type WithoutDebouncedSearch = {
+  hasDebouncedSearch?: false;
+  debounceTime?: never;
+};
+
+type DebounceProps = WithDebouncedSearch | WithoutDebouncedSearch;
+
+type ControlledSearchInputProps = {
+  /**
+   * Input value for controlled form component
+   */
+  value: string;
+  /**
+   * Change event
+   */
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  /**
+   * Default value for uncontrolled form component
+   */
+  defaultValue?: never;
+} & DebounceProps;
+
+type UncontrolledSearchInputProps = {
+  value?: never;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  defaultValue?: string;
+} & DebounceProps;
+
+export type SearchBarProps = (
+  | ControlledSearchInputProps
+  | UncontrolledSearchInputProps
+) &
+  Omit<React.ComponentPropsWithRef<'input'>, 'disabled'> & {
+    /**
+     * Event triggered by clicking clear button. For controlled component
+     * should reset the `value` property. For uncontrolled component
+     * clear is handled automatically but `onClear` is also triggered.
+     */
+    onClear?: () => void;
+    /**
+     * Event triggered by `Enter` key that calls function with current input
+     * value as first argument. If `hasDebouncedSearch` is set to `true` this
+     * function is called automatically when debounce time is reached.
+     *
+     * This function is not cancellable, if you need to cancel your search
+     * request you should implement search outside this component and not
+     * use `onSearch` property.
+     */
+    onSearch?: (value: string) => void | Promise<void>;
+    /**
+     * Show loader when `true`. If `onSearch` is defined, this property is used
+     * internally. If you implement search outside this component you may want
+     * to use this property to indicate that search is in progress.
+     */
+    isSearching?: boolean;
+    /**
+     * Disable the search field
+     */
+    isDisabled?: boolean;
+    /**
+     * The search value is invalid
+     */
+    isInvalid?: boolean;
+  };
