@@ -9,11 +9,7 @@ import {
   getFontWeight,
   pxToRem,
 } from '../../utils';
-import {
-  height as checkHeight,
-  width as checkWidth,
-  svgPathData,
-} from '../../theme/icons/check';
+import { width as checkWidth, svgPathData } from '../../theme/icons/check';
 import { BulletCircleProps, StepBulletProps } from './Stepper.types';
 
 export const bulletSize = 20;
@@ -64,7 +60,6 @@ const BULLET_VIEWBOX_SIZE = 20;
  */
 const checkIconRatio = BULLET_VIEWBOX_SIZE / checkWidth / 2;
 const translateX = checkWidth / 2;
-const translateY = checkHeight / 2;
 
 const StepBullet: React.FC<StepBulletProps> = ({
   stepNumber,
@@ -90,7 +85,7 @@ const StepBullet: React.FC<StepBulletProps> = ({
         <BulletCheck
           d={svgPathData}
           style={{
-            transform: `scale(${checkIconRatio}) matrix(1, 0, 0, 1, ${translateX}, ${translateY})`,
+            transform: `scale(${checkIconRatio}) matrix(1, 0, 0, 1, ${translateX}, ${translateX})`,
           }}
         />
       )}

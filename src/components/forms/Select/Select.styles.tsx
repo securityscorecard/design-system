@@ -428,7 +428,7 @@ export const ValueContainer = (props) => {
         : values;
     return (
       <components.ValueContainer {...props}>
-        <Cluster gap={SpaceSizes.xs}>
+        <Cluster align="center" gap={SpaceSizes.xs}>
           {pills}
           {input}
         </Cluster>

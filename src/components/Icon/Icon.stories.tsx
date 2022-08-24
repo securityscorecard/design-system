@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { head, pipe, sortBy, toPairs } from 'ramda';
 
 import Icon from './Icon';
 import { IconProps } from './Icon.types';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
+import { Text } from '../typographyLegacy';
+import { Grid, Inline } from '../layout';
 
 export default {
   title: 'components/Icon',
@@ -32,4 +35,16 @@ const SIcon = styled(Icon)`
 
 export const StyledIcon: Story<IconProps> = () => (
   <SIcon name={SSCIconNames.wrench} type={IconTypes.ssc} />
+);
+
+const sortedIconsList = pipe(toPairs, sortBy(head))(SSCIconNames);
+export const IconsList = () => (
+  <Grid cols={4} gap="md">
+    {sortedIconsList.map(([key, value]) => (
+      <Inline key={key} align="center" gap="md">
+        <Icon name={value} hasFixedWidth />
+        <Text>{key}</Text>
+      </Inline>
+    ))}
+  </Grid>
 );
