@@ -184,6 +184,9 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     }
 
     .ds-table-checkbox-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 0 0 ${getRemToggleSize};
       height: ${getRemToggleSize};
       width: ${getRemToggleSize};

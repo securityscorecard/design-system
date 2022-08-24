@@ -123,7 +123,7 @@ export const FiltersPropType = {
   fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
   state: PropTypes.arrayOf(FilterStatePropType),
   isLoading: PropTypes.bool,
-  isCancelDisabled: PropTypes.bool,
+  isCancelEnabled: PropTypes.bool,
   isOperatorFieldEnabled: PropTypes.bool,
   defaultOperator: PropTypes.oneOf(Object.values(Operators)),
   onApply: PropTypes.func,
