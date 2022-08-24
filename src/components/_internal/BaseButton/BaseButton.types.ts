@@ -8,6 +8,7 @@ import {
   BaseButtonSizes,
   BaseButtonVariants,
 } from './BaseButton.enums';
+import { PadboxProps } from '../../layout/Padbox/Padbox';
 
 export type Variants =
   typeof BaseButtonVariants[keyof typeof BaseButtonVariants];
@@ -30,4 +31,14 @@ export interface BaseButtonProps
   iconName?: SSCIcons | string;
   loadingText?: string;
   iconType?: IconTypes | string;
+}
+
+export interface BaseStyledButtonProps extends PadboxProps {
+  disabled?: boolean;
+  $hasOnlyIcon?: boolean;
+  $color: BaseButtonProps['color'];
+  $isExpanded: BaseButtonProps['isExpanded'];
+  $isLoading: BaseButtonProps['isLoading'];
+  $margin: BaseButtonProps['margin'];
+  $variant: BaseButtonProps['variant'];
 }

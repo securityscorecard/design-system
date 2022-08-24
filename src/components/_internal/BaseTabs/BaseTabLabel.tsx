@@ -3,13 +3,13 @@ import { lighten } from 'polished';
 import { __, includes, pipe, subtract } from 'ramda';
 
 import {
-  getButtonHeight,
   getColor,
   getFontSize,
   getFontWeight,
   getLineHeight,
   getRadii,
   getSpace,
+  getToken,
   pxToRem,
 } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
@@ -42,22 +42,6 @@ const smallUnderlineSize = css`
   line-height: ${getLineHeight('lg')};
 `;
 
-const getSegmentedLabelHeight = ({ size, theme }) =>
-  pipe(
-    getButtonHeight(size),
-    subtract(__, 2 * theme.space.xs),
-    pxToRem,
-  )({ theme });
-
-const largeSegmentedSize = css`
-  font-size: ${getFontSize('lg')};
-`;
-
-const mediumSegmentedSize = css`
-  font-size: ${getFontSize('lg')};
-  line-height: 1;
-`;
-
 const underlineSizes = {
   [BaseTabSizes.lg]: largeUnderlineSize,
   [BaseTabSizes.md]: mediumUnderlineSize,
@@ -67,11 +51,6 @@ const underlineSizes = {
 const textSizes = {
   [BaseTabSizes.lg]: largeTextSize,
   [BaseTabSizes.md]: mediumTextSize,
-};
-
-const segmentedSizes = {
-  [BaseTabSizes.lg]: largeSegmentedSize,
-  [BaseTabSizes.md]: mediumSegmentedSize,
 };
 
 const commonHoverTab = css<BaseLabelProps>`
@@ -123,9 +102,16 @@ export const segmentedTabSelected = css`
 `;
 
 const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
-  ${({ size = BaseTabSizes.md }) => segmentedSizes[size]};
+  font-size: ${getToken('font-action-size')};
+  font-weight: ${getFontWeight('regular')};
+  line-height: ${getToken('font-action-lineheight')};
 
-  height: ${getSegmentedLabelHeight};
+  height: ${({ theme }) =>
+    pipe(
+      getToken('size-action-size'),
+      subtract(__, 2 * theme.space.xs),
+      pxToRem,
+    )({ theme })};
   border: 1px solid transparent;
   ${({ $isSelected }) => $isSelected && segmentedTabSelected};
 
@@ -133,11 +119,11 @@ const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
   color: ${getColor('neutral.900')};
 
   &:hover {
-    color: ${getColor('primary.600')};
+    color: ${getToken('color-action-primary-hover')};
   }
 
   &:active {
-    color: ${getColor('primary.700')};
+    color: ${getToken('color-action-primary-active')};
   }
 `;
 
@@ -153,6 +139,8 @@ const BaseTabLabel = styled(Padbox).withConfig<
   shouldForwardProp: (property) =>
     !includes(property, ['paddingType', 'paddingSize']),
 })`
+  display: flex;
+  align-items: center;
   outline: none;
   text-decoration: none;
   cursor: pointer;
@@ -161,7 +149,6 @@ const BaseTabLabel = styled(Padbox).withConfig<
   ${({ $isExpanded }) =>
     $isExpanded &&
     css`
-      display: flex;
       justify-content: center;
     `};
 

@@ -4,45 +4,32 @@ import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { getFontWeight, getLinkStyle, getRadii } from '../../../utils';
+import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
 import { LinkProps } from './Link.types';
-import { LinkColors } from './Link.enums';
+import {
+  LinkActiveStyles,
+  LinkBaseStyles,
+  LinkFocusStyles,
+  LinkHoverStyles,
+} from '../../_internal/BaseLink';
 
-const StyledLink = styled.a`
-  margin: 0;
-  border: none;
-  font-family: inherit;
-  font-weight: ${getFontWeight('semibold')};
-  background-color: transparent;
-  white-space: nowrap;
-  cursor: pointer;
+const LinkRoot = styled.a`
+  ${LinkBaseStyles};
 
-  &,
-  &:not([href]):not([tabindex]) {
-    color: ${getLinkStyle('color')};
+  &:hover {
+    ${LinkHoverStyles};
   }
 
-  &:hover,
-  &:focus-visible,
-  &:not([href]):not([tabindex]):hover {
-    color: ${getLinkStyle('hoverColor')};
-    text-decoration: ${getLinkStyle('decoration')};
+  &:focus-visible {
+    ${LinkFocusStyles};
   }
 
-  &:active,
-  &:not([href]):not([tabindex]):active {
-    color: ${getLinkStyle('activeColor')};
-  }
-
-  &:focus-visible,
-  &:not([href]):not([tabindex]):focus-visible {
-    outline: 0;
-    background-color: ${getLinkStyle('focusBgColor')};
-    border-radius: ${getRadii('default')};
+  &:active {
+    ${LinkActiveStyles};
   }
 `;
 
-const Link: React.FC<LinkProps & React.ComponentProps<typeof StyledLink>> = ({
+const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
   children,
   color = LinkColors.primary,
   as = null,
@@ -69,16 +56,16 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof StyledLink>> = ({
   }
 
   return (
-    <StyledLink
+    <LinkRoot
+      $color={color}
       as={domTag}
-      color={color}
       href={href}
       to={to}
       onClick={onClick}
       {...props}
     >
       {children}
-    </StyledLink>
+    </LinkRoot>
   );
 };
 
