@@ -2286,15 +2286,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/react-fontawesome@npm:^0.1.14":
-  version: 0.1.19
-  resolution: "@fortawesome/react-fontawesome@npm:0.1.19"
+"@fortawesome/react-fontawesome@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@fortawesome/react-fontawesome@npm:0.2.0"
   dependencies:
     prop-types: ^15.8.1
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": ~1 || ~6
-    react: ">=16.x"
-  checksum: 77dbe1d5fa156a2ff4aa069d6c11f0ba1fcf43df72c9f03f1eec353d23798513a1f2773957a2bc3107fb8dc79fa606999ed91bf21659745bcc166abc4072819e
+    react: ">=16.3"
+  checksum: f652a0c2172e7b209e2d9e7e511f9b8c17abad85f55e0bd09bb1175ea1927693215da47eb6cd95b1f3a23bd124368553c677907fa76cb17c5093afc1fcffe338
   languageName: node
   linkType: hard
 
@@ -3395,7 +3395,7 @@ __metadata:
     "@dnd-kit/utilities": ^3.2.0
     "@fluentui/react-component-ref": ^0.62.0
     "@fortawesome/fontawesome-svg-core": ^1.2.35
-    "@fortawesome/react-fontawesome": ^0.1.14
+    "@fortawesome/react-fontawesome": ^0.2.0
     "@geometricpanda/storybook-addon-badges": ^0.2.1
     "@mdx-js/react": ^1.6.22
     "@popperjs/core": ^2.11.4
