@@ -10,7 +10,7 @@ import {
 import styled, { useTheme } from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { SpaceSizes } from '../../../theme';
+import { ColorTypes, SpaceSizes } from '../../../theme';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { getToken } from '../../../utils';
 import { SpacingSizeValuePropType } from '../../../types/spacing.types';
@@ -78,7 +78,7 @@ const BaseButton: React.FC<
     <>
       <Spinner
         borderWidth={2}
-        dark={variant !== BaseButtonVariants.solid}
+        color={ColorTypes.neutral600}
         height={theme.tokens['font-action-size']}
         verticalMargin={0}
         width={theme.tokens['font-action-size']}
