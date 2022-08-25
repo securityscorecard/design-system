@@ -13,20 +13,20 @@ export const LinkBaseStyles = css<LinkStylesProps>`
   background-color: transparent;
   white-space: nowrap;
   cursor: pointer;
-  color: ${(p) => getToken(`link-color-text-${p.$color}`, p)};
+  color: ${(p) => getToken(`color-action-link-${p.$color}`, p)};
 `;
 export const LinkHoverStyles = css<LinkStylesProps>`
-  color: ${(p) => getToken(`link-color-text-${p.$color}-hover`, p)};
+  color: ${(p) => getToken(`color-action-link-${p.$color}-hover`, p)};
   text-decoration: underline;
 `;
 export const LinkFocusStyles = css<LinkStylesProps>`
   outline: 0;
-  color: ${(p) => getToken(`link-color-text-${p.$color}-hover`, p)};
+  color: ${(p) => getToken(`color-action-link-${p.$color}-hover`, p)};
   text-decoration: underline;
   background-color: ${(p) =>
-    getToken(`link-color-background-${p.$color}-focus`, p)};
+    getToken(`color-action-link-background${p.$color}-focus`, p)};
   border-radius: ${getRadii('default')};
 `;
 export const LinkActiveStyles = css<LinkStylesProps>`
-  color: ${(p) => getToken(`link-color-text-${p.$color}-active`, p)};
+  color: ${(p) => getToken(`color-action-link-${p.$color}-active`, p)};
 `;
