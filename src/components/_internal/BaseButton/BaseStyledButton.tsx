@@ -12,6 +12,7 @@ import {
 import { BaseStyledButtonProps } from './BaseButton.types';
 import { BaseButtonVariants } from './BaseButton.enums';
 import { Padbox } from '../../layout';
+import { ButtonColors } from '../../Button/Button.enums';
 
 /*
  * BUTTON VARIANTS
@@ -76,28 +77,44 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   }
 `;
 
+const isLinkLike = (color) =>
+  color === ButtonColors.primary || color === ButtonColors.secondary
+    ? 'link-'
+    : '';
 const ButtonText = css<BaseStyledButtonProps>`
   background-color: transparent;
   border-color: transparent;
   padding-left: 0;
   padding-right: 0;
   font-weight: ${getFontWeight('semibold')};
-  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
+  color: ${(p) =>
+    getToken(`color-action-${isLinkLike(p.$color)}${p.$color}`, p)};
 
   &:hover,
   &.hover {
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    color: ${(p) =>
+      getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
   }
   &:focus-visible,
   &.focus {
     background-color: ${(p) =>
-      getToken(`color-action-background-${p.$color}-focus`, p)};
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+      getToken(
+        `color-action-${isLinkLike(p.$color)}background-${p.$color}-focus`,
+        p,
+      )};
+    color: ${(p) =>
+      getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
   }
 
   &:active,
   &&&.active {
-    color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
+    color: ${(p) =>
+      getToken(
+        `color-action-${
+          p.$color === 'primary' || p.$color === 'secondary' ? 'link-' : ''
+        }${p.$color}-active`,
+        p,
+      )};
   }
 
   &:disabled,
