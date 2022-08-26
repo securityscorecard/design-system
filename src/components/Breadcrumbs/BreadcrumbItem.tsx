@@ -8,6 +8,7 @@ import {
   getFontSize,
   getFontWeight,
   getLineHeight,
+  getToken,
 } from '../../utils/helpers';
 import { Link } from '../typographyLegacy/Link';
 import { Text, TextEnums } from '../typographyLegacy/Text';
@@ -17,20 +18,16 @@ const BreadcrumbLink = styled(Link)`
   font-weight: ${getFontWeight('regular')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-
-  &,
-  &:not([href]):not([tabindex]) {
-    color: ${getColor('neutral.900')};
-  }
+  color: ${getColor('neutral.900')};
 
   &:hover,
-  &:not([href]):not([tabindex]):hover {
-    color: ${getColor('primary.600')};
+  &:focus-visible {
+    color: ${getToken('color-action-primary-hover')};
+    text-decoration: none;
   }
 
-  &:active,
-  &:not([href]):not([tabindex]):active {
-    color: ${getColor('primary.700')};
+  &:active {
+    color: ${getToken('color-action-primary-active')};
   }
 `;
 

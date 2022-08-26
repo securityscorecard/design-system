@@ -4,12 +4,13 @@ import styled, { css } from 'styled-components';
 import { __, pipe, subtract } from 'ramda';
 
 import {
-  getButtonHeight,
   getFontFamily,
   getFontSize,
   getFontWeight,
   getFormStyle,
   getLineHeight,
+  getRadii,
+  getToken,
   pxToRem,
 } from '../../../utils';
 import { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
@@ -88,22 +89,27 @@ const switchCheckedLabelPaddings = {
   [SwitchSizes.sm]: SwitchPaddingCheckedSmall,
 };
 
-const getSwitchLabelAfterElementSize = ({ size, theme }) =>
+const switchSizes = {
+  [SwitchSizes.md]: 'size-action-size',
+  [SwitchSizes.sm]: 'size-action-size-sm',
+};
+
+const getSwitchLabelAfterElementSize = ({ $size, theme }) =>
   pipe(
-    getButtonHeight(size),
+    getToken(switchSizes[$size]),
     subtract(__, 1.5 * theme.space.xs),
     pxToRem,
   )({ theme });
 
-const getSwitchHeight = ({ size, theme }) =>
-  pipe(getButtonHeight(size), pxToRem)({ theme });
+const getSwitchHeight = ({ $size, theme }) =>
+  pipe(getToken(switchSizes[$size]), pxToRem)({ theme });
 
 const BaseLabel = styled.label`
   position: relative;
   display: inline-flex;
   align-items: center;
   margin: 0;
-  border-radius: 16px;
+  border-radius: ${getRadii('round')};
   cursor: pointer;
 `;
 
@@ -111,7 +117,7 @@ const Label = styled(BaseLabel)<SwitchLabelProps>`
   height: ${getSwitchHeight};
   line-height: ${getLineHeight('md')};
   background: ${getFormStyle('switchBgColor')};
-  ${({ size }) => switchLabelWrapperSizes[size]};
+  ${({ $size }) => switchLabelWrapperSizes[$size]};
 
   ${({ isDisabled }) =>
     css`
@@ -129,7 +135,7 @@ const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${({ size }) => switchNotCheckedLabelPaddings[size]};
+  ${({ $size }) => switchNotCheckedLabelPaddings[$size]};
 
   &::after {
     content: '';
@@ -144,7 +150,7 @@ const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
           isDisabled ? 'disabledColor' : 'switchKnobBgColor',
         )};
       `};
-    border-radius: 20px;
+    border-radius: ${getRadii('circle')};
     transition: 0.3s;
   }
   &:active::after {
@@ -220,12 +226,12 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         {...props}
       />
       <Label
+        $size={size}
         htmlFor={switchId}
         isDisabled={isDisabled}
         maxWidth={maxWidth}
-        size={size}
       >
-        <LabelContent isDisabled={isDisabled} size={size}>
+        <LabelContent $size={size} isDisabled={isDisabled}>
           {label}
         </LabelContent>
       </Label>

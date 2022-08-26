@@ -1,5 +1,5 @@
 /* eslint-disable filenames/match-exported */
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { identity, memoizeWith, pipe } from 'ramda';
 
 import {
@@ -8,10 +8,16 @@ import {
   getFontSize,
   getFontWeight,
   getFormStyle,
-  getLinkStyle,
   getRadii,
+  getToken,
   pxToRem,
 } from '../../../utils';
+import {
+  LinkActiveStyles,
+  LinkBaseStyles,
+  LinkFocusStyles,
+  LinkHoverStyles,
+} from '../BaseLink';
 
 const getRemToggleSize = memoizeWith(
   identity,
@@ -33,7 +39,39 @@ export const BaseTableContainer = styled.div`
   }
 `;
 
-export const StyledBaseTable = styled.table`
+const DsLinkCell = css`
+  ${LinkBaseStyles};
+
+  &:hover {
+    ${LinkHoverStyles};
+  }
+
+  &:focus-visible {
+    ${LinkFocusStyles};
+  }
+
+  &:active {
+    ${LinkActiveStyles};
+  }
+
+  &.is-discrete {
+    font-weight: ${getFontWeight('regular')};
+    color: ${getToken(`link-color-text-secondary`)};
+
+    &:hover {
+      color: ${getToken(`link-color-text-secondary-hover`)};
+    }
+    &:focus-visible {
+      color: ${getToken(`link-color-text-secondary-hover`)};
+      background-color: ${getToken(`link-color-background-secondary-focus`)};
+    }
+    &:active {
+      color: ${getToken(`link-color-text-secondary-active`)};
+    }
+  }
+`;
+
+export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
   width: 100%;
   transform: scale(1, -1);
 
@@ -48,7 +86,7 @@ export const StyledBaseTable = styled.table`
     align-items: flex-start;
     font-family: ${getFontFamily('base')};
     font-size: ${getFontSize('md')};
-    font-weight: ${getFontWeight('normal')};
+    font-weight: ${getFontWeight('regular')};
     line-height: ${pxToRem(24)};
     color: ${getColor('neutral.900')};
     background: ${getColor('neutral.0')};
@@ -75,44 +113,8 @@ export const StyledBaseTable = styled.table`
     &.is-odd {
       background: #fcfcfc;
     }
-
     .ds-table-cell-link {
-      margin: 0;
-      border: none;
-      background: transparent;
-      text-decoration: ${({ theme }) =>
-        getLinkStyle('decoration', { color: 'primary', theme })};
-      white-space: nowrap;
-      cursor: pointer;
-
-      &,
-      &:not([href]):not([tabindex]) {
-        color: ${({ theme }) =>
-          getLinkStyle('color', { color: 'primary', theme })};
-      }
-
-      &.is-discrete,
-      &.is-discrete:not([href]):not([tabindex]) {
-        color: ${getColor('neutral.900')};
-      }
-
-      &:hover,
-      &:not([href]):not([tabindex]):hover,
-      &.is-discrete:hover,
-      &.is-discrete:not([href]):not([tabindex]):hover {
-        color: ${({ theme }) =>
-          getLinkStyle('hoverColor', { color: 'primary', theme })};
-        text-decoration: none;
-      }
-
-      &:active,
-      &:not([href]):not([tabindex]):active,
-      &.is-discrete:active,
-      &.is-discrete:not([href]):not([tabindex]):active {
-        color: ${({ theme }) =>
-          getLinkStyle('activeColor', { color: 'primary', theme })};
-        text-decoration: none;
-      }
+      ${DsLinkCell};
     }
 
     .ds-table-cell-multivalue {
@@ -130,6 +132,14 @@ export const StyledBaseTable = styled.table`
 
         &.ds-table-cell-link {
           text-decoration: none;
+          color: ${getColor('neutral.900')};
+
+          &:hover,
+          &:focus-visible,
+          &:active {
+            background-color: ${getColor('primary.50')};
+            color: ${getColor('neutral.900')};
+          }
         }
       }
     }
@@ -174,6 +184,9 @@ export const StyledBaseTable = styled.table`
     }
 
     .ds-table-checkbox-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 0 0 ${getRemToggleSize};
       height: ${getRemToggleSize};
       width: ${getRemToggleSize};

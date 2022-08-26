@@ -36,52 +36,48 @@ const Button = styled.button<StyledControlButtonProps>`
   font-family: ${getFontFamily('base')};
   font-weight: ${getFontWeight('medium')};
   font-size: ${getFontSize('md')};
+  color: ${getColor('neutral.800')};
 
   &:focus {
     outline: none;
   }
 
-  &,
-  &:not([href]):not([tabindex]) {
-    color: ${getColor('neutral.800')};
-
-    &:hover,
-    &.hover,
-    &:focus {
-      color: ${getColor('neutral.900')};
-    }
-
-    ${({ $isActive }) =>
-      $isActive &&
-      css`
-        background-color: ${getColor('neutral.0')};
-        color: ${getColor('primary.500')};
-        border-color: ${getColor('primary.500')};
-
-        &:hover,
-        &.hover,
-        &:focus {
-          color: ${getColor('primary.400')};
-          border-color: ${getColor('primary.400')};
-        }
-      `}
-
-    ${({ $isApplied }) =>
-      $isApplied &&
-      css`
-        ${ButtonIcon} {
-          color: ${getColor('primary.500')};
-        }
-
-        &:hover,
-        &.hover,
-        &:focus {
-          ${ButtonIcon} {
-            color: ${getColor('primary.400')};
-          }
-        }
-      `}
+  &:hover,
+  &.hover,
+  &:focus {
+    color: ${getColor('neutral.900')};
   }
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      background-color: ${getColor('neutral.0')};
+      color: ${getColor('primary.500')};
+      border-color: ${getColor('primary.500')};
+
+      &:hover,
+      &.hover,
+      &:focus {
+        color: ${getColor('primary.400')};
+        border-color: ${getColor('primary.400')};
+      }
+    `}
+
+  ${({ $isApplied }) =>
+    $isApplied &&
+    css`
+      ${ButtonIcon} {
+        color: ${getColor('primary.500')};
+      }
+
+      &:hover,
+      &.hover,
+      &:focus {
+        ${ButtonIcon} {
+          color: ${getColor('primary.400')};
+        }
+      }
+    `}
 `;
 
 const ControlButton: React.FC<ControlButtonProps> = ({
@@ -91,24 +87,18 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   isApplied = false,
   className = '',
   onClick,
-}) => {
-  const bottomMargin = iconName === 'reorder' ? 0.1 : 0;
-  return (
-    <Button
-      $isActive={isActive}
-      $isApplied={isApplied}
-      className={className}
-      type="button"
-      onClick={onClick}
-    >
-      <ButtonIcon
-        margin={{ right: 0.4, bottom: bottomMargin }}
-        name={iconName}
-      />
-      {label}
-    </Button>
-  );
-};
+}) => (
+  <Button
+    $isActive={isActive}
+    $isApplied={isApplied}
+    className={className}
+    type="button"
+    onClick={onClick}
+  >
+    <ButtonIcon margin={{ right: 0.4 }} name={iconName} />
+    {label}
+  </Button>
+);
 
 ControlButton.propTypes = {
   label: PropTypes.string.isRequired,

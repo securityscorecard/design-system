@@ -7,16 +7,19 @@ import {
   isUndefined,
   noop,
 } from 'ramda-adjunct';
+import styled, { useTheme } from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { SpaceSizes } from '../../../theme';
+import { ColorTypes, SpaceSizes } from '../../../theme';
 import { requireRouterLink } from '../../../utils/require-router-link';
+import { getToken } from '../../../utils';
 import { SpacingSizeValuePropType } from '../../../types/spacing.types';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Spinner } from '../../Spinner';
+import { Icon } from '../../Icon';
 import { SSCIcons, Types } from '../../Icon/Icon.types';
 import { Inline } from '../../layout';
 import BaseStyledButton from './BaseStyledButton';
-import StyledIcon, { iconSizes } from './BaseStyledIcon';
 import {
   BaseButtonColors,
   BaseButtonSizes,
@@ -24,13 +27,16 @@ import {
 } from './BaseButton.enums';
 import { BaseButtonProps } from './BaseButton.types';
 
+const BaseStyledIcon = styled(Icon)`
+  font-size: ${getToken('font-action-size')};
+`;
+
 const BaseButton: React.FC<
   BaseButtonProps & React.ComponentProps<typeof BaseStyledButton>
 > = ({
   children,
   variant = BaseButtonVariants.solid,
   color = BaseButtonColors.primary,
-  size = BaseButtonSizes.md,
   iconName,
   iconType = IconTypes.ssc,
   as = null,
@@ -45,6 +51,7 @@ const BaseButton: React.FC<
   ...props
 }) => {
   let RouterLink = null;
+  const theme = useTheme();
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();
   }
@@ -61,7 +68,7 @@ const BaseButton: React.FC<
       ? 'a' // render 'a' tag if 'href' is present
       : isNotNull(to)
       ? RouterLink // render 'Link' if 'to' is present
-      : undefined); // use default
+      : 'button'); // use default
 
   if (isNull(RouterLink) && isNull(domTag)) {
     return null;
@@ -71,16 +78,16 @@ const BaseButton: React.FC<
     <>
       <Spinner
         borderWidth={2}
-        dark={variant !== BaseButtonVariants.solid}
-        height={iconSizes[size]}
+        color={ColorTypes.neutral600}
+        height={theme.tokens['font-action-size']}
         verticalMargin={0}
-        width={iconSizes[size]}
+        width={theme.tokens['font-action-size']}
       />
       <span>{loadingText}</span>
     </>
   ) : isNotUndefined(iconName) ? (
     <>
-      <StyledIcon name={iconName} size={size} type={iconType} />
+      <BaseStyledIcon name={iconName} type={iconType} />
       {isNotUndefined(children) && <span>{children}</span>}
     </>
   ) : (
@@ -89,17 +96,18 @@ const BaseButton: React.FC<
 
   return (
     <BaseStyledButton
+      $color={color}
       $hasOnlyIcon={isNotUndefined(iconName) && isUndefined(children)}
+      $isExpanded={isExpanded}
+      $isLoading={isLoading}
+      $margin={margin}
+      $variant={variant}
       as={domTag}
-      color={color}
       disabled={isDisabled || isLoading}
       href={href}
-      isExpanded={isExpanded}
-      isLoading={isLoading}
-      margin={margin}
-      size={size}
+      paddingSize={SpaceSizes.md}
+      paddingType={PaddingTypes.squish}
       to={to}
-      variant={variant}
       onClick={onClick}
       {...props}
     >

@@ -131,7 +131,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
             type="button"
             onClick={handleSelectNoneClick}
           >
-            <Icon name={SSCIconNames.timesSolid} />
+            <Icon name={SSCIconNames.times} />
           </SelectionButton>
         )}
       </ElementCounterWrapper>

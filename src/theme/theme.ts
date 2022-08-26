@@ -30,7 +30,6 @@ export const createTheme = (
   } = overrides;
 
   const colors = mergeDeepRight(themeColors, colorsOverride);
-  const tokens = mergeDeepRight(createTokens(colors), tokensOverride);
   const buttons = mergeDeepRight(createButtons(colors), buttonsOverride);
   const typography = mergeDeepRight(
     createTypography(colors),
@@ -41,6 +40,10 @@ export const createTheme = (
   const depths = mergeDeepRight(createDepths(), depthsOverride);
   const space = mergeDeepRight(createSpace(), spaceOverride);
   const radii = mergeDeepRight(createRadii(), radiiOverride);
+  const tokens = mergeDeepRight(
+    createTokens(colors, typography),
+    tokensOverride,
+  );
 
   return {
     colors,

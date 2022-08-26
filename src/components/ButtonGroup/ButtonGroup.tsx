@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { pipe } from 'ramda';
 
-import {
-  getButtonColor,
-  getButtonHeight,
-  getRadii,
-  getSpace,
-  pxToRem,
-} from '../../utils/helpers';
+import { getRadii, getSpace, getToken, pxToRem } from '../../utils/helpers';
 import { ButtonGroupProps, ButtonGroupWrapperProps } from './ButtonGroup.types';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 
@@ -22,12 +16,7 @@ const ButtonSolid = css`
 `;
 const ButtonOutline = css<ButtonGroupWrapperProps>`
   &:after {
-    background-color: ${(props) =>
-      getButtonColor('borderColor', {
-        variant: props.$variant,
-        color: props.$color,
-        theme: props.theme,
-      })};
+    background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
   }
 `;
 const ButtonText = css<ButtonGroupWrapperProps>`
@@ -35,12 +24,7 @@ const ButtonText = css<ButtonGroupWrapperProps>`
   padding-right: ${getSpace('md')};
 
   &:after {
-    background-color: ${(props) =>
-      getButtonColor('borderColor', {
-        variant: props.$variant,
-        color: props.$color,
-        theme: props.theme,
-      })};
+    background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
   }
 
   &:first-child {
@@ -70,7 +54,7 @@ const ButtonGroupWrapper = styled.div<ButtonGroupWrapperProps>`
     &::after {
       content: '';
       width: 1px;
-      height: ${({ theme }) => pipe(getButtonHeight('md'), pxToRem)({ theme })};
+      height: ${pipe(getToken('size-action-size'), pxToRem)};
       position: absolute;
       right: -1px;
       z-index: 1;

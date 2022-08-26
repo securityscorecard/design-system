@@ -5,16 +5,17 @@ import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 import { useId } from '@react-aria/utils';
 import { useDeepCompareMemo } from 'use-deep-compare';
-import { sort } from 'ramda';
+import { pipe, sort } from 'ramda';
 
 import { Cluster, Padbox } from '../../layout';
 import { Option, SelectableGroupProps } from './SelectableGroup.types';
 import {
-  getButtonHeight,
   getColor,
   getFontSize,
   getFontWeight,
   getRadii,
+  getToken,
+  pxToRem,
 } from '../../../utils';
 
 const Label = styled(Padbox)`
@@ -26,7 +27,7 @@ const Label = styled(Padbox)`
   font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('semibold')};
   line-height: 1rem;
-  height: ${getButtonHeight('md')}px;
+  height: ${pipe(getToken('size-action-size'), pxToRem)};
   cursor: pointer;
 
   &:hover {

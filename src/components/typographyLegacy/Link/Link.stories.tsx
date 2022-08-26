@@ -4,10 +4,10 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { Paragraph } from '../index';
-import { LinkProps } from './Link.types';
-import { LinkColors } from './Link.enums';
+import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
 import Link from './Link';
 import { generateControl } from '../../../utils/tests/storybook';
+import { LinkProps } from './Link.types';
 
 export default {
   title: 'components/typography/Link',
