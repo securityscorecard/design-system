@@ -1,3 +1,24 @@
+# [1.0.0-alpha.214](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.213...v1.0.0-alpha.214) (2022-08-26)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** fix breadcrumbs styling ([2f4b7e1](https://github.com/securityscorecard/design-system/commit/2f4b7e1ea2d3a1ba2152e48741446b22417efcfa))
+* **Button:** apply correct design to buttons ([fe2b912](https://github.com/securityscorecard/design-system/commit/fe2b912c4dc5a27f35f179efc86556e3de9382a3))
+* **Button:** fix clashing styles ([43df014](https://github.com/securityscorecard/design-system/commit/43df014c342f0d7be9cab6e4b6c1c256eabdaae3))
+* **Datatable:** fix link styles ([56d29f4](https://github.com/securityscorecard/design-system/commit/56d29f42a9513c80611e3321a62c816c159eb35a))
+* **Link:** apply correct design to links ([7a771a4](https://github.com/securityscorecard/design-system/commit/7a771a474b83309d775cc0769f332b021d65e1d8))
+
+
+### Features
+
+* **Button:** align text button with link ([5b29c42](https://github.com/securityscorecard/design-system/commit/5b29c42c2c209337154cc8e00b50067437ebd12c))
+* **Button:** tokenize button size ([8298393](https://github.com/securityscorecard/design-system/commit/8298393fb529de6e695e643337a4bcf0088afa73))
+* **icons:** update icons core package ([01e03ce](https://github.com/securityscorecard/design-system/commit/01e03cec44b5393b5b93c82a052057ac4aaa22ec))
+* **icons:** update icons to v6 ([97f5781](https://github.com/securityscorecard/design-system/commit/97f5781759fc3ae696d254113b7055ab5d567f8f))
+* **Spinner:** allow pass custom theme color ([6a582c5](https://github.com/securityscorecard/design-system/commit/6a582c5c9b8b7bef65ac0b1d7c4f667ba247669d))
+* **tokens:** rework tokens naming convention ([815c2f0](https://github.com/securityscorecard/design-system/commit/815c2f07f8a974af0df83d2c5c61cf52f80f8801))
+
 # [1.0.0-alpha.213](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.212...v1.0.0-alpha.213) (2022-08-23)
 
 
