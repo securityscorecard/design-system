@@ -63,6 +63,7 @@ const commonHoverTab = css<BaseLabelProps>`
 const underlineTab = css<BaseLabelProps & { size: Sizes }>`
   ${({ size }) => underlineSizes[size] || underlineSizes[BaseTabSizes.md]};
   padding-bottom: ${getSpace(SpaceSizes.xxs)};
+  font-weight: ${getFontWeight('semibold')};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
       $isSelected
@@ -90,7 +91,7 @@ const textTab = css<BaseLabelProps & { size: Sizes }>`
         ? getColor($color)
         : getColor('neutral.900')
       : getColor('primary.500')};
-
+  font-weight: ${getFontWeight('semibold')};
   &:hover {
     color: ${commonHoverTab};
   }
@@ -144,7 +145,6 @@ const BaseTabLabel = styled(Padbox).withConfig<
   outline: none;
   text-decoration: none;
   cursor: pointer;
-  font-weight: ${getFontWeight('semibold')};
 
   ${({ $isExpanded }) =>
     $isExpanded &&
