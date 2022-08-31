@@ -214,28 +214,6 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
       margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
     }
   }
-
-  &.has-exclusive-selection .ds-table-checkbox {
-    .ds-table-checkbox-input {
-      &:checked + .ds-table-checkbox-mark {
-        background: ${getColor('neutral.0')};
-        border-color: ${getFormStyle('borderColor')};
-
-        .ds-table-checkbox-icon {
-          display: none;
-        }
-      }
-    }
-
-    .ds-table-checkbox-mark {
-      border-color: ${getFormStyle('activeBorderColor')};
-      background: ${getFormStyle('activeBorderColor')};
-
-      .ds-table-checkbox-icon {
-        display: block;
-      }
-    }
-  }
 `;
 
 export const BaseTableAndLoadingOverlayContainer = styled.div`

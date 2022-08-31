@@ -91,7 +91,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
   }, [selectedIds]);
 
   const computedSelectedLength = hasExclusiveSelection
-    ? dataSize - localSelectedLength
+    ? dataSize
     : localSelectedLength;
 
   const content = getCounterContent(dataSize, computedSelectedLength);
@@ -99,7 +99,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
   const handleSelectAllClick = () => {
     setLocalSelectedLength(0);
     DatatableStore.update((s) => {
-      s.hasExclusiveSelection = true;
+      s.shouldToggleAllRows = true;
       s.shouldResetSelectedRows = true;
     });
   };

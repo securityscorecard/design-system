@@ -15,6 +15,7 @@ export type DatatableStoreShape<
   isDataLoading: boolean;
   selectedIds: string[];
   hasExclusiveSelection: boolean;
+  shouldToggleAllRows: boolean;
   shouldResetSelectedRows: boolean;
   columnOrder: IdType<D>[];
   hiddenColumns: IdType<D>[];
@@ -33,6 +34,7 @@ export const datatableInitialState = {
   isCanceled: false,
   selectedIds: [],
   hasExclusiveSelection: false,
+  shouldToggleAllRows: false,
   shouldResetSelectedRows: false,
   columns: {},
   columnOrder: [],

@@ -133,20 +133,7 @@ function Table<D extends Record<string, unknown>>({
   );
 
   // TABLE INITIALIZATION
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    rows,
-    prepareRow,
-    gotoPage,
-    pageCount,
-    dispatch,
-    setColumnOrder,
-    setHiddenColumns,
-    state: { pageIndex, selectedRowIds, pageSize, sortBy },
-  } = useTable<D>(
+  const table = useTable<D>(
     {
       columns,
       data,
@@ -202,6 +189,21 @@ function Table<D extends Record<string, unknown>>({
     },
   );
 
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    rows,
+    prepareRow,
+    gotoPage,
+    pageCount,
+    dispatch,
+    setColumnOrder,
+    setHiddenColumns,
+    state: { pageIndex, selectedRowIds, pageSize, sortBy },
+  } = table;
+
   const gotoFirstPage = useCallback(() => gotoPage(0), [gotoPage]);
 
   const gotoPageAndLoadData = (newPageIndex) => {
@@ -235,17 +237,26 @@ function Table<D extends Record<string, unknown>>({
 
   useEffect(() => {
     const unsubscribe = DatatableStore.createReaction(
-      (s) => s.shouldResetSelectedRows,
-      (shouldResetSelectedRows, newState) => {
+      (s) => ({
+        shouldResetSelectedRows: s.shouldResetSelectedRows,
+        shouldToggleAllRows: s.shouldToggleAllRows,
+      }),
+      ({ shouldResetSelectedRows, shouldToggleAllRows }, newState) => {
         if (shouldResetSelectedRows) {
           dispatch({ type: actions.deselectAllRows });
           newState.shouldResetSelectedRows = false;
+        }
+        if (shouldToggleAllRows) {
+          table.toggleAllRowsSelected(true);
+          newState.shouldToggleAllRows = false;
+          newState.hasExclusiveSelection = true;
         }
       },
     );
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line
   }, [dispatch]);
 
   useEffect(() => {
