@@ -74,5 +74,10 @@ export const WithCloseButton: Story = () => (
 );
 
 export const WithoutApplyButton: Story = () => (
-  <Filters fields={fields} state={state} onChange={action('onChange')} />
+  <Filters
+    fields={fields}
+    state={state}
+    onChange={action('onChange')}
+    onError={action('onError')}
+  />
 );

@@ -79,6 +79,7 @@ const Filters: React.FC<FiltersProps> = ({
   onChange = noop,
   onClose,
   onCancel = noop,
+  onError,
   isLoading = false,
   isCancelEnabled = true,
   isOperatorFieldEnabled = true,
@@ -146,6 +147,8 @@ const Filters: React.FC<FiltersProps> = ({
     newValidValues[index] = !hasError;
 
     setValidValues(newValidValues);
+
+    onError?.(hasError);
   };
 
   const hasInvalidValues = validValues.some((valid) => valid === false);

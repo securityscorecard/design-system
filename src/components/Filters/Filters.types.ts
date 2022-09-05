@@ -62,6 +62,7 @@ export interface FiltersProps {
   onClose?: () => void;
   onCancel?: () => void;
   onChange?: (filters: Filter[]) => void;
+  onError?: (hasError: boolean) => void;
   isLoading?: boolean;
   isCancelEnabled?: boolean;
   isOperatorFieldEnabled?: boolean;
@@ -130,4 +131,5 @@ export const FiltersPropType = {
   onClose: PropTypes.func,
   onCancel: PropTypes.func,
   onChange: PropTypes.func,
+  onError: PropTypes.func,
 };
