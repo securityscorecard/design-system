@@ -46,8 +46,8 @@ export default {
 function CardHeaderTemplate({
   title = 'Card Title',
   subtitle = 'Card Subtitle',
-  titleLinesCount = 0,
-  subtitleLinesCount = 0,
+  titleLinesCount = undefined,
+  subtitleLinesCount = undefined,
   onHelpClick = null,
   helpTooltip = null,
   leftAdornment = (
@@ -265,13 +265,20 @@ CardMediaWithVideo.parameters = {
 
 export const WithTruncationConfig = ({
   title,
-  titleLinesCount = 2,
+  titleLinesCount,
+  subtitle,
+  subtitleLinesCount,
   ...args
 }) => {
   return (
     <div style={{ width: '400px' }}>
       <Card {...args}>
-        <CardHeaderTemplate title={title} titleLinesCount={titleLinesCount} />
+        <CardHeaderTemplate
+          subtitle={subtitle}
+          subtitleLinesCount={subtitleLinesCount}
+          title={title}
+          titleLinesCount={titleLinesCount}
+        />
         <CardMediaTemplate />
         <CardContentTemplate />
       </Card>
@@ -281,8 +288,11 @@ export const WithTruncationConfig = ({
 WithTruncationConfig.args = {
   ...Playground.args,
   title:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non pellentesque eros. Cras commodo sit amet justo ut elementum. Quisque at molestie sapien. Ut porttitor quam nisl, non commodo dolor.',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit vestibulum non pellentesque eros. Cras commodo sit amet justo ut elementum. Quisque at molestie sapien. Ut porttitor quam nisl, non commodo dolor.',
   titleLinesCount: 2,
+  subtitle:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit vestibulum non pellentesque eros. Cras commodo sit amet justo ut elementum. Quisque at molestie sapien. Ut porttitor quam nisl, non commodo dolor.',
+  subtitleLinesCount: 2,
   direction: 'vertical',
 };
 
