@@ -2,12 +2,16 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
+import { prop } from 'ramda';
 
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { AlignItemsPropType } from '../../../types/flex.types';
 
+interface GridWrapperProps {
+  $overflow: 'hidden' | 'visible';
+}
 interface GridParentProps {
   $gap?: SpaceSize;
   $align?: Property.AlignItems;
@@ -32,13 +36,17 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
    */
   wrapperEl?: ReactComponentLike;
   /**
+   * Overflow type of the wrapper element
+   */
+  wrapperOverflow?: GridWrapperProps['$overflow'];
+  /**
    * Tag or component reference for parent element
    */
   parentEl?: ReactComponentLike;
 }
 
-const GridWrapper = styled.div`
-  overflow: hidden;
+const GridWrapper = styled.div<GridWrapperProps>`
+  overflow: ${prop('$overflow')};
 `;
 const GridParent = styled.div<GridParentProps>(
   ({ $cols, $gap, $align, theme }) => {
@@ -65,9 +73,10 @@ const Grid: React.FC<GridProps> = ({
   cols,
   parentEl,
   wrapperEl,
+  wrapperOverflow = 'hidden',
   ...props
 }) => (
-  <GridWrapper as={wrapperEl}>
+  <GridWrapper $overflow={wrapperOverflow} as={wrapperEl}>
     <GridParent $align={align} $cols={cols} $gap={gap} as={parentEl} {...props}>
       {children}
     </GridParent>
@@ -80,6 +89,7 @@ Grid.propTypes = {
   align: AlignItemsPropType,
   wrapperEl: PropTypes.elementType,
   parentEl: PropTypes.elementType,
+  wrapperOverflow: PropTypes.oneOf(['hidden', 'visible']),
 };
 
 Grid.defaultProps = {
