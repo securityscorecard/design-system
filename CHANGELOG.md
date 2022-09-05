@@ -1,3 +1,10 @@
+# [1.0.0-alpha.215](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.214...v1.0.0-alpha.215) (2022-09-05)
+
+
+### Features
+
+* **Filters:** expose onError callback ([4e0e508](https://github.com/securityscorecard/design-system/commit/4e0e5083677a1968ba6c22e3580768662f1a3c33))
+
 # [1.0.0-alpha.214](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.213...v1.0.0-alpha.214) (2022-08-26)
 
 
