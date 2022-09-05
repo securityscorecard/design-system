@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
@@ -29,12 +30,16 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
           {actions.map((action) => (
             <Button
               key={action.name}
+              aria-label={action.ariaLabel}
               href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+              iconName={action.iconName}
+              iconType={action.iconType}
+              isDisabled={action.isDisabled}
               to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
               variant={ButtonEnums.ButtonVariants.text}
               onClick={action.onClick}
             >
-              {action.label}
+              {isNonEmptyString(action.label) && action.label}
             </Button>
           ))}
         </Inline>

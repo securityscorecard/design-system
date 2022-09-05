@@ -8,7 +8,7 @@ import CardHeader, { CardIconButton } from './CardHeader';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
 import CardMedia from './CardMedia';
-import { CardProps } from './Card.types';
+import { CardActionsProps, CardProps } from './Card.types';
 import { Icon } from '../Icon';
 import { UserAvatar } from '../UserAvatar';
 import { Grid } from '../layout';
@@ -95,10 +95,14 @@ function CardContentTemplate() {
   );
 }
 
-function CardActionsTemplate() {
+function CardActionsTemplate({
+  actions: actionsFromProps = actions,
+}: {
+  actions?: CardActionsProps['actions'];
+}) {
   return (
     <CardActions
-      actions={actions}
+      actions={actionsFromProps}
       rightAdornment={
         <div style={{ marginRight: '-8px' }}>
           <CardIconButton>
@@ -297,6 +301,45 @@ WithHelpClickHandler.args = {
         onHelpClick={action('help-click')}
       />
       <CardContentTemplate />
+    </>
+  ),
+};
+
+export const WithDisabledAction = CardTemplate.bind({});
+WithDisabledAction.args = {
+  ...Playground.args,
+  children: (
+    <>
+      <CardMediaTemplate />
+      <CardHeaderTemplate />
+      <CardContentTemplate />
+      <CardActionsTemplate
+        actions={[actions[0], { ...actions[1], isDisabled: true }]}
+      />
+    </>
+  ),
+};
+
+export const WithIconOnlyAction = CardTemplate.bind({});
+WithIconOnlyAction.args = {
+  ...Playground.args,
+  children: (
+    <>
+      <CardMediaTemplate />
+      <CardHeaderTemplate />
+      <CardContentTemplate />
+      <CardActionsTemplate
+        actions={[
+          actions[0],
+          {
+            name: 'icon',
+            label: '',
+            ariaLabel: 'Upload',
+            iconName: 'upload',
+            onClick: action('click-icon-button'),
+          },
+        ]}
+      />
     </>
   ),
 };
