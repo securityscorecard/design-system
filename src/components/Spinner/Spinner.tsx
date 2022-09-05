@@ -44,8 +44,8 @@ const Spinner = styled.div<SpinnerProps>`
 Spinner.propTypes = {
   dark: PropTypes.bool,
   color: PropTypes.oneOf(Object.values(ColorTypes)),
-  width: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   verticalMargin: PropTypes.number,
   horizontalMargin: PropTypes.oneOfType([
     PropTypes.number,
