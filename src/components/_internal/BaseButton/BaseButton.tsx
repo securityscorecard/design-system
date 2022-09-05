@@ -74,6 +74,7 @@ const BaseButton: React.FC<
     return null;
   }
 
+  const hasOnlyIcon = isNotUndefined(iconName) && isUndefined(children);
   const content = isLoading ? (
     <>
       <Spinner
@@ -83,7 +84,7 @@ const BaseButton: React.FC<
         verticalMargin={0}
         width={theme.tokens['font-action-size']}
       />
-      <span>{loadingText}</span>
+      {!hasOnlyIcon && <span>{loadingText}</span>}
     </>
   ) : isNotUndefined(iconName) ? (
     <>
@@ -97,7 +98,7 @@ const BaseButton: React.FC<
   return (
     <BaseStyledButton
       $color={color}
-      $hasOnlyIcon={isNotUndefined(iconName) && isUndefined(children)}
+      $hasOnlyIcon={hasOnlyIcon}
       $isExpanded={isExpanded}
       $isLoading={isLoading}
       $margin={margin}
