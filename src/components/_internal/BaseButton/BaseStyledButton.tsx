@@ -104,6 +104,7 @@ const ButtonText = css<BaseStyledButtonProps>`
       )};
     color: ${(p) =>
       getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
+    outline: none;
   }
 
   &:active,
