@@ -1,3 +1,19 @@
+# [1.0.0-alpha.216](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.215...v1.0.0-alpha.216) (2022-09-06)
+
+
+### Bug Fixes
+
+* **Button:** explicitly remove outline for text buttons ([4ca3d95](https://github.com/securityscorecard/design-system/commit/4ca3d954f2e212d09ec71c6b7564e306eae65659))
+* **Button:** hide loading text when button has only icon ([c283d8f](https://github.com/securityscorecard/design-system/commit/c283d8fecfaa067c1bea4da91be89ed1b358f183))
+* **Spinner:** fix types for width and height ([a12a469](https://github.com/securityscorecard/design-system/commit/a12a46952a64e04026a1774d825ec3eba4c53e9a))
+
+
+### Features
+
+* **CardActions:** extend actions properties ([79f26a2](https://github.com/securityscorecard/design-system/commit/79f26a223dcc54879a454599927067f1bc838aa3))
+* **CardHeader:** show full title when header is truncated ([7a991ec](https://github.com/securityscorecard/design-system/commit/7a991ecc18886a830e702068aea271b988dea282))
+* **Grid:** allow changing wrapper element overflow ([73717ba](https://github.com/securityscorecard/design-system/commit/73717ba4b0b08ca51fa2b9d28410f65b1e72796c))
+
 # [1.0.0-alpha.215](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.214...v1.0.0-alpha.215) (2022-09-05)
 
 
