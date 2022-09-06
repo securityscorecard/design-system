@@ -102,8 +102,18 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
           {isNotNil(leftAdornment) && <div>{leftAdornment}</div>}
           <TitleArea>
             <Stack gap={SpaceSizes.xs}>
-              <Title numberOfLines={maxTitleLinesCount}>{title}</Title>
-              <Subtitle numberOfLines={maxSubtitleLinesCount}>
+              <Title
+                numberOfLines={maxTitleLinesCount}
+                title={isNotUndefined(maxTitleLinesCount) ? title : undefined}
+              >
+                {title}
+              </Title>
+              <Subtitle
+                numberOfLines={maxSubtitleLinesCount}
+                title={
+                  isNotUndefined(maxSubtitleLinesCount) ? subtitle : undefined
+                }
+              >
                 {subtitle}
               </Subtitle>
             </Stack>

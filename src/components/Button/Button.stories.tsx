@@ -243,6 +243,26 @@ export const LoadingButtons: Story = () => (
     <Button color="primary" variant="text" isLoading>
       Button
     </Button>
+    <Button
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      variant="solid"
+      isLoading
+    />
+
+    <Button
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      variant="outline"
+      isLoading
+    />
+
+    <Button
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      variant="text"
+      isLoading
+    />
   </Inline>
 );
 
