@@ -4,12 +4,22 @@ import React from 'react';
 
 import { SpaceSize } from '../../theme/space.types';
 import { ActionKinds } from '../../types/action.types';
+import { SSCIcons, Types } from '../Icon/Icon.types';
 
 export interface CardActionsProps {
   /**
    * List of available actions for the Card footer (maximal number of actions is 2)
    */
-  actions: ActionKinds<React.MouseEvent[]>[];
+  actions: ActionKinds<
+    React.MouseEvent[],
+    void,
+    {
+      isDisabled?: boolean;
+      iconName?: SSCIcons | string;
+      iconType?: Types | string;
+      ariaLabel?: string;
+    }
+  >[];
   /**
    * Adornment placed on the right side.
    */

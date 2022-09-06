@@ -58,10 +58,11 @@ export const AbsoluteLinkActionKindPropType = PropTypes.exact({
 export type ActionKinds<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
+  AdditionalProps = Record<string, unknown>,
 > =
-  | HandlerActionKind<OnClickArgs, OnClickReturnType>
-  | AbsoluteLinkActionKind<OnClickArgs, OnClickReturnType>
-  | RelativeLinkActionKind<OnClickArgs, OnClickReturnType>;
+  | (HandlerActionKind<OnClickArgs, OnClickReturnType> & AdditionalProps)
+  | (AbsoluteLinkActionKind<OnClickArgs, OnClickReturnType> & AdditionalProps)
+  | (RelativeLinkActionKind<OnClickArgs, OnClickReturnType> & AdditionalProps);
 
 export type ActionWithSubactions<
   OnClickArgs extends Array<unknown>,
