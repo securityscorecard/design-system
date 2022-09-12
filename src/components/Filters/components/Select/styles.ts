@@ -64,4 +64,17 @@ export const selectStyles: StylesConfig<Option, false> = {
   dropdownIndicator: () => ({
     ...indicatorStyles,
   }),
+  option: (styles, { isSelected, isFocused, isDisabled }) => ({
+    ...styles,
+    backgroundColor: isSelected
+      ? theme.colors.neutral[300]
+      : isFocused
+      ? theme.colors.primary[50]
+      : 'transparent',
+    color: isDisabled ? theme.colors.neutral[600] : theme.forms.color,
+    ':active': {
+      ...styles[':active'],
+      backgroundColor: theme.colors.primary[200],
+    },
+  }),
 };
