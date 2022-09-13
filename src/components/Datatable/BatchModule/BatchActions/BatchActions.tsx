@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { map, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { ColorTypes, SpaceSizes } from '../../../../theme';
+import { SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { getFormStyle, pxToRem } from '../../../../utils';
 import { Inline } from '../../../layout';
@@ -79,11 +79,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
               >
                 <Inline align="center" gap={SpaceSizes.xs}>
                   <span>{action.label}</span>
-                  <Icon
-                    color={ColorTypes.neutral700}
-                    margin={{ left: 0.25 }}
-                    name={SSCIconNames.caretDown}
-                  />
+                  <Icon margin={{ left: 0.25 }} name={SSCIconNames.caretDown} />
                 </Inline>
               </BatchActionButton>
             </DropdownMenu>
