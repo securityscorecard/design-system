@@ -58,7 +58,7 @@ const TitleArea = styled.div`
   padding-top: ${getSpace(SpaceSizes.xs)};
 `;
 const Title = styled(Heading).attrs({
-  size: 'h4',
+  size: 'h5',
 })`
   margin-top: 0px;
   margin-bottom: 0px;
