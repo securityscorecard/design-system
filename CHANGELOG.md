@@ -1,3 +1,16 @@
+# [1.0.0-alpha.217](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.216...v1.0.0-alpha.217) (2022-09-13)
+
+
+### Bug Fixes
+
+* **Card:** use smaller card title ([8c6a9e5](https://github.com/securityscorecard/design-system/commit/8c6a9e53efb9778e010b65c4d1560cef51735b87))
+* **Select:** fix option colors ([8cb4572](https://github.com/securityscorecard/design-system/commit/8cb457255b52697ec9cbe0cc09d5c9e45cf46601))
+
+
+### Features
+
+* **BatchActions:** make the caret down same color as text ([9514ad4](https://github.com/securityscorecard/design-system/commit/9514ad4c614039f50ba349e344200f3990c932b3))
+
 # [1.0.0-alpha.216](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.215...v1.0.0-alpha.216) (2022-09-06)
 
 
