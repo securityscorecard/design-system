@@ -1,3 +1,16 @@
+# [1.0.0-alpha.218](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.217...v1.0.0-alpha.218) (2022-09-22)
+
+
+### Bug Fixes
+
+* **Datatable:** reset selection after performing search ([8dab9b6](https://github.com/securityscorecard/design-system/commit/8dab9b69a600373ab60bba0832c9c33160bed8b1))
+* **SearchBar:** trigger search when default value is provided ([6c71558](https://github.com/securityscorecard/design-system/commit/6c71558e0a7934408cab1f46ce097a3ab3902c3d))
+
+
+### Features
+
+* **Datatable:** propagate reset selection function to parent ([850dfb9](https://github.com/securityscorecard/design-system/commit/850dfb9fefa4b0e94a7491ba77ec6f43452fe017))
+
 # [1.0.0-alpha.217](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.216...v1.0.0-alpha.217) (2022-09-13)
 
 
