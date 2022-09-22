@@ -49,6 +49,7 @@ function Datatable<D extends Record<string, unknown>>({
   isBatchModuleEnabled = true,
   controlsConfig = {},
   tableConfig = {},
+  resetSelectionFn,
 }: DatatableProps<D>): React.ReactElement {
   // Set canceled signal to prevent data fetch when unmounting
   useEffect(
@@ -109,6 +110,12 @@ function Datatable<D extends Record<string, unknown>>({
         });
       }
     : noop;
+
+  resetSelectionFn?.(() => {
+    DatatableStore.update((s) => {
+      s.shouldResetSelectedRows = true;
+    });
+  });
 
   return (
     <StyledDatatable>
@@ -189,6 +196,7 @@ Datatable.propTypes = {
   }),
   tableConfig: PropTypes.exact(TableConfigPropType),
   pageButtonsCount: PropTypes.number,
+  resetSelectionFn: PropTypes.func,
   onDataFetch: PropTypes.func,
   onCancelLoading: PropTypes.func,
 };

@@ -187,6 +187,12 @@ ServerSidePlayground.storyName = 'Playground (Server-Side implementation)';
 export const InBrowserPlayground: Story<DatatableProps<Data>> = (args) => {
   const [data, setData] = useState(assets);
 
+  const resetFilter = useRef(null);
+
+  const storeResetFn = (resetFn) => {
+    resetFilter.current = resetFn;
+  };
+
   const handleOnSearch = (query) => {
     action('onSearch')(query);
     const result = assets.filter((asset) => asset.ipAddress.includes(query));
@@ -224,6 +230,7 @@ export const InBrowserPlayground: Story<DatatableProps<Data>> = (args) => {
       data={data}
       dataPrimaryKey={argsDataPrimaryKey || 'ipAddress'}
       dataSize={data.length}
+      resetSelectionFn={storeResetFn}
       tableConfig={{
         ...argsTableConfig,
         rowActions: [
