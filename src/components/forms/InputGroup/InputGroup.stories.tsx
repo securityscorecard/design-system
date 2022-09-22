@@ -5,6 +5,7 @@ import InputGroup from './InputGroup';
 import { Input, Password, Select } from '..';
 import { Icon } from '../../Icon';
 import { Button } from '../../Button';
+import { SearchBar } from '../SearchBar';
 
 export default {
   title: 'components/forms/InputGroup',
@@ -62,5 +63,12 @@ export const InputGroupWithPassword: Story = () => (
   <InputGroup stretch="end" hasDivider>
     <Icon key="icon" name="eye" />
     <Password />
+  </InputGroup>
+);
+
+export const InputGroupWithSearchBar: Story = () => (
+  <InputGroup stretch="end" hasDivider>
+    <Select options={options} placeholder="Select a country" isMulti />
+    <SearchBar />
   </InputGroup>
 );
