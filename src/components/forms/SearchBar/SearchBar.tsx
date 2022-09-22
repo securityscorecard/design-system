@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { isNonEmptyString, isNotUndefined } from 'ramda-adjunct';
+import {
+  isNonEmptyString,
+  isNotNilOrEmpty,
+  isNotUndefined,
+} from 'ramda-adjunct';
 import PropTypes from 'prop-types';
 import { pipe } from 'ramda';
 
@@ -107,13 +111,24 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       }
     };
 
-    const search = async (val: string) => {
-      if (isInvalid) return;
+    const search = useCallback(
+      async (val: string) => {
+        if (isInvalid) return;
 
-      setInternalIsSearching(true);
-      await onSearch(val);
-      setInternalIsSearching(false);
-    };
+        setInternalIsSearching(true);
+        await onSearch?.(val);
+        setInternalIsSearching(false);
+      },
+      [isInvalid, onSearch],
+    );
+
+    // trigger search on mount if defaultValue is provided
+    useEffect(() => {
+      if (isNotNilOrEmpty(value)) {
+        search(value);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
       const eventValue = e.target.value;

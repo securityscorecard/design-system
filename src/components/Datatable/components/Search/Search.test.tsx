@@ -20,7 +20,7 @@ describe('Search', () => {
   afterAll(() => {
     resetIconLibrary();
   });
-  it('should have defaultValue when provided', () => {
+  it('should have defaultValue when provided', async () => {
     renderWithProviders(
       <Search
         defaultValue="Searching for Default"
@@ -29,7 +29,9 @@ describe('Search', () => {
       />,
     );
     const searchInput = screen.getByRole('searchbox');
-    expect(searchInput).toHaveValue('Searching for Default');
+    await waitFor(() =>
+      expect(searchInput).toHaveValue('Searching for Default'),
+    );
   });
 
   it('should clear value when clear button is clicked', async () => {

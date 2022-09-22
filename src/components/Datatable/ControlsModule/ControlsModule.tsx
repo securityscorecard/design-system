@@ -174,6 +174,7 @@ function ControlsModule<D extends Record<string, unknown>>({
       s.pageIndex = 0;
       s.query = query;
       s.isCanceled = false;
+      s.shouldResetSelectedRows = true;
     });
   };
 

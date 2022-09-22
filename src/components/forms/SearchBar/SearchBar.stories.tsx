@@ -4,16 +4,12 @@ import { action } from '@storybook/addon-actions';
 
 import { Inline, Stack } from '../../layout';
 import { Button } from '../../Button';
-import { Badges } from '../../../../.storybook/storybook.enums';
 import SearchBar from './SearchBar';
 import { SearchBarProps } from './SearchBar.types';
 
 export default {
   title: 'components/forms/SearchBar',
   component: SearchBar,
-  parameters: {
-    badges: [Badges.experimental],
-  },
   argTypes: {
     defaultValue: {
       control: { type: 'text' },
@@ -51,6 +47,7 @@ export const DefaultState = SearchBarTemplate.bind({});
 
 export const WithDefaultValue = SearchBarTemplate.bind({});
 WithDefaultValue.args = {
+  ...Playground.args,
   defaultValue: 'some default search query',
 };
 

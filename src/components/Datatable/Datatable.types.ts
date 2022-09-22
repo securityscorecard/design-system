@@ -83,4 +83,8 @@ export interface DatatableProps<D extends Record<string, unknown>> {
    * See: [Table.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/components/Datatable/Table/Table.types.ts)
    */
   tableConfig?: Partial<TableConfig<D>>;
+  /**
+   * Function that allow storing selection reset function in the parent component
+   */
+  resetSelectionFn?: (resetFn: () => void) => void;
 }
