@@ -11,6 +11,7 @@ import { Inline, Padbox } from '../../layout';
 import { InputGroupProps } from './InputGroup.types';
 import { InlineProps } from '../../layout/Inline/Inline';
 import { Button } from '../../Button';
+import { SearchBar } from '../SearchBar';
 
 const InputGroupContainer = styled(Inline)<InputGroupProps>`
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
@@ -41,7 +42,8 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
     border-radius: ${getRadii('default')} 0 0 ${getRadii('default')} !important;
   }
   & > *:last-child,
-  & > *:last-child input[type='password'] {
+  & > *:last-child input[type='password'],
+  & > *:last-child input[type='search'] {
     border-right: 0px !important;
     border-radius: 0 ${getRadii('default')} ${getRadii('default')} 0 !important;
   }
@@ -57,11 +59,19 @@ const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
   hasDivider,
   ...inlineProps
 }) => {
-  const ALLOWED_CHILDREN = [Select, Input, Icon, Button, Password, InputGroup];
+  const ALLOWED_CHILDREN = [
+    Select,
+    Input,
+    Icon,
+    Button,
+    Password,
+    InputGroup,
+    SearchBar,
+  ];
   React.Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
       throw new Error(
-        'Only Select, Input, InputGroup, Icon, Button and Password are valid childs of InputGroup',
+        'Only Select, Input, InputGroup, Icon, Button, SearchBar and Password are valid childs of InputGroup',
       );
     }
   });
