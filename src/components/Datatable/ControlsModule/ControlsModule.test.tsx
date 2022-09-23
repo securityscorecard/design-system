@@ -161,6 +161,46 @@ describe('Datatable/ControlsModule', () => {
     });
   });
 
+  describe('given search is enabled', () => {
+    it('should perform search on mount when defaultValue is provided', async () => {
+      const onSearchMock = jest.fn();
+      renderWithProviders(
+        <ControlsModule
+          {...defaultControlsConfig}
+          hasFiltering={false}
+          // Test related properties
+          hasSearch
+          searchConfig={{
+            onSearch: onSearchMock,
+            onClear: defaultControlsConfig.searchConfig.onClear,
+            defaultValue: 'query',
+          }}
+        />,
+      );
+
+      await waitFor(() => {
+        expect(onSearchMock).toBeCalledWith('query');
+      });
+    });
+    it('should not perform search when no defaultValue is provided', async () => {
+      const onSearchMock = jest.fn();
+      renderWithProviders(
+        <ControlsModule
+          {...defaultControlsConfig}
+          hasFiltering={false}
+          // Test related properties
+          hasSearch
+          searchConfig={{
+            onSearch: onSearchMock,
+            onClear: defaultControlsConfig.searchConfig.onClear,
+          }}
+        />,
+      );
+
+      expect(onSearchMock).not.toBeCalled();
+    });
+  });
+
   describe('DatatableStore actions', () => {
     it('should store filtering state in store on mount', () => {
       const filterState = [

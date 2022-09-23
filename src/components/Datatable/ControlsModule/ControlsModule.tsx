@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { all, isEmpty, map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
-import { isNonEmptyArray } from 'ramda-adjunct';
+import { isNonEmptyArray, isNotNilOrEmpty } from 'ramda-adjunct';
 
 import { getColor } from '../../../utils';
 import { Search } from '../components/Search';
@@ -186,6 +186,13 @@ function ControlsModule<D extends Record<string, unknown>>({
       s.query = '';
     });
   };
+  // trigger search on mount if defaultValue is provided
+  useEffect(() => {
+    if (isNotNilOrEmpty(defaultSearchValue)) {
+      handleOnSearch(defaultSearchValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
