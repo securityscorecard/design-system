@@ -1,3 +1,11 @@
+# [1.0.0-alpha.219](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.218...v1.0.0-alpha.219) (2022-09-23)
+
+
+### Bug Fixes
+
+* **Datatable:** trigger search when default value is provided ([a53d24c](https://github.com/securityscorecard/design-system/commit/a53d24c683880e0ec2b5ddc5ba5b08ccfdabd418))
+* **InputGroup:** add SearchBar as allowed child ([6c461ea](https://github.com/securityscorecard/design-system/commit/6c461ead101bdac063a111f0f37128e446899ac3))
+
 # [1.0.0-alpha.218](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.217...v1.0.0-alpha.218) (2022-09-22)
 
 
