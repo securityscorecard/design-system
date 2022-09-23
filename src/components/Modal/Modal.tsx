@@ -56,7 +56,10 @@ const Footer = styled(Padbox)`
 `;
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ title, onClose, footer, size = ModalSizes.md, children }, ref) => {
+  (
+    { title, onClose, footer, size = ModalSizes.md, children, ...rest },
+    ref,
+  ) => {
     const { portalsContainerId } = useContext(DSContext);
     const { Portal } = usePortal({
       containerId: portalsContainerId,
@@ -75,6 +78,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           <BaseModal
             ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
             $maxWidth={widthVariants[size]}
+            {...rest}
           >
             <Inline stretch={StretchEnum.start}>
               <Padbox paddingSize={SpaceSizes.lgPlus} paddingType="squish">
