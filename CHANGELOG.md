@@ -1,3 +1,11 @@
+# [1.0.0-alpha.220](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.219...v1.0.0-alpha.220) (2022-09-26)
+
+
+### Bug Fixes
+
+* **Modal:** pass rest props to modal ([071d7b6](https://github.com/securityscorecard/design-system/commit/071d7b6e1b35b54b762a5b43f911cedd18b047fe))
+* **SearchBar:** fix clear buton hover color ([5a1fef4](https://github.com/securityscorecard/design-system/commit/5a1fef4d3b35b1796a9d9b47560940013bf81bf6))
+
 # [1.0.0-alpha.219](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.218...v1.0.0-alpha.219) (2022-09-23)
 
 
