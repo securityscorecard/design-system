@@ -45,8 +45,6 @@ const ClearButton = styled(IconWrapper)`
 
   &:hover,
   &:focus {
-    color: ${getColor('neutral.0')};
-
     ::after {
       content: '';
       position: absolute;
