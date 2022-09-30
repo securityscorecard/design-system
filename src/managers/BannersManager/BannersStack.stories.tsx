@@ -12,7 +12,6 @@ import BannersStack from './BannersStack';
 import {
   Banner,
   Button,
-  ButtonGroup,
   Error,
   Inline,
   Input,
@@ -100,57 +99,53 @@ const Controls = () => {
       </Inline>
       <Inline align="center" gap="md">
         <Text>Trigger from hook:</Text>
-        <ButtonGroup>
-          <Button
-            isDisabled={isIdUsed}
-            onClick={() => {
-              if (!isIdUsed) {
-                addBanner(composeBanner());
-                setId('');
-              }
-            }}
-          >
-            Add banner
-          </Button>
-          <Button
-            isDisabled={!isIdUsed}
-            onClick={() => {
-              if (isIdUsed) {
-                removeBanner(id);
-                setId('');
-              }
-            }}
-          >
-            Remove banner
-          </Button>
-        </ButtonGroup>
+        <Button
+          isDisabled={isIdUsed}
+          onClick={() => {
+            if (!isIdUsed) {
+              addBanner(composeBanner());
+              setId('');
+            }
+          }}
+        >
+          Add banner
+        </Button>
+        <Button
+          isDisabled={!isIdUsed}
+          onClick={() => {
+            if (isIdUsed) {
+              removeBanner(id);
+              setId('');
+            }
+          }}
+        >
+          Remove banner
+        </Button>
       </Inline>
       <Inline align="center" gap="md">
         <Text>Trigger via event:</Text>
-        <ButtonGroup>
-          <Button
-            isDisabled={isIdUsed}
-            onClick={() => {
-              if (!isIdUsed) {
-                addBannerEvent(composeBanner());
-                setId('');
-              }
-            }}
-          >
-            Add banner
-          </Button>
-          <Button
-            isDisabled={!isIdUsed}
-            onClick={() => {
-              if (isIdUsed) {
-                removeBannerEvent(id);
-                setId('');
-              }
-            }}
-          >
-            Remove banner
-          </Button>
-        </ButtonGroup>
+        <Button
+          isDisabled={isIdUsed}
+          onClick={() => {
+            if (!isIdUsed) {
+              addBannerEvent(composeBanner());
+              setId('');
+            }
+          }}
+        >
+          Add banner
+        </Button>
+        <Button
+          isDisabled={!isIdUsed}
+          onClick={() => {
+            if (isIdUsed) {
+              removeBannerEvent(id);
+              setId('');
+            }
+          }}
+        >
+          Remove banner
+        </Button>
       </Inline>
     </Stack>
   );
