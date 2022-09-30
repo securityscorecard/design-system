@@ -1,3 +1,11 @@
+# [1.0.0-alpha.221](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.220...v1.0.0-alpha.221) (2022-09-30)
+
+
+### Bug Fixes
+
+* changed line-height to 1rem in state button ([9ce7519](https://github.com/securityscorecard/design-system/commit/9ce751902e4647fa5806365d450396b210337cb8))
+* **SearchBar:** add shouldTriggerSearchOnMount prop ([ed410aa](https://github.com/securityscorecard/design-system/commit/ed410aaff3aec058642a77ddec93c5b7d6df4a9b))
+
 # [1.0.0-alpha.220](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.219...v1.0.0-alpha.220) (2022-09-26)
 
 
