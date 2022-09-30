@@ -72,4 +72,8 @@ export type SearchBarProps = (
      * The search value is invalid
      */
     isInvalid?: boolean;
+    /**
+     * When true search will be triggered on mount when defaultValue is provided
+     */
+    shouldTriggerSearchOnMount?: boolean;
   };

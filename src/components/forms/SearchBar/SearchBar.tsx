@@ -82,6 +82,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       isDisabled = false,
       isInvalid = false,
       isSearching: isSearchingFromProps = false,
+      shouldTriggerSearchOnMount = false,
       ...rest
     },
     ref,
@@ -122,7 +123,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
 
     // trigger search on mount if defaultValue is provided
     useEffect(() => {
-      if (isNotNilOrEmpty(value)) {
+      if (shouldTriggerSearchOnMount && isNotNilOrEmpty(value)) {
         search(value);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -200,6 +201,7 @@ SearchBar.propTypes = {
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
   isSearching: PropTypes.bool,
+  shouldTriggerSearchOnMount: PropTypes.bool,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onClear: PropTypes.func,
