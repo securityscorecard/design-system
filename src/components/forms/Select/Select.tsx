@@ -51,5 +51,6 @@ Select.defaultProps = {
   maxPillLabelLength: 16,
   isMenuPositionRelative: false,
 };
+Select.displayName = 'Select';
 
 export default Select;

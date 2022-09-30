@@ -41,4 +41,5 @@ function Body<D extends Record<string, unknown>>({
   );
 }
 
+Body.displayName = 'Body';
 export default Body;

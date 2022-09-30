@@ -83,4 +83,5 @@ function Head<D extends Record<string, unknown>>({
   );
 }
 
+Head.displayName = 'Head';
 export default Head;

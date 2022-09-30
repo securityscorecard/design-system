@@ -319,5 +319,6 @@ function ControlsModule<D extends Record<string, unknown>>({
 }
 
 ControlsModule.propTypes = ControlsConfigPropType;
+ControlsModule.displayName = 'ControlsModule';
 
 export default ControlsModule;

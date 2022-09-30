@@ -5,6 +5,38 @@ import commonjs from '@rollup/plugin-commonjs';
 import url from '@rollup/plugin-url';
 import visualizer from 'rollup-plugin-visualizer';
 import { terser } from 'rollup-plugin-terser';
+import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
+import addDisplayNameTransformer from 'ts-react-display-name';
+import { head, last, pipe, split } from 'ramda';
+
+const getFilename = pipe(split('/'), last, split('.'), head);
+const styledComponentsTransformer = createStyledComponentsTransformer({
+  getDisplayName: (file, bindingName) => {
+    const filename = getFilename(file);
+    return bindingName === filename
+      ? bindingName
+      : `${filename}__${bindingName}`;
+  },
+});
+const displayNameTransformer = addDisplayNameTransformer({
+  funcTypes: [
+    'React.FunctionComponent',
+    'React.FC',
+    'FunctionComponent',
+    'FC',
+    'React.SFC',
+    'React.StatelessComponent',
+    'SFC',
+    'StatelessComponent',
+  ],
+  classTypes: [
+    'React.Component',
+    'React.PureComponent',
+    'Component',
+    'PureComponent',
+  ],
+  factoryFuncs: ['React.forwardRef', 'React.memo', 'forwardRef', 'memo'],
+});
 
 export default {
   input: 'src/index.ts',
@@ -30,7 +62,14 @@ export default {
       include: ['**/*.woff2', '**/*.woff'],
     }),
     commonjs(),
-    typescript({ useTsconfigDeclarationDir: true }),
+    typescript({
+      useTsconfigDeclarationDir: true,
+      transformers: [
+        () => ({
+          before: [displayNameTransformer, styledComponentsTransformer],
+        }),
+      ],
+    }),
     terser(),
     visualizer({
       filename: `stats/stat.html`,

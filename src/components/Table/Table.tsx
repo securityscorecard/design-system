@@ -195,4 +195,5 @@ Table.propTypes = {
   onSortChange: PropTypes.func,
 };
 
+Table.displayName = 'Table';
 export default Table;

@@ -88,4 +88,5 @@ function MultiValueRenderer<D extends Record<string, unknown>>({
   );
 }
 
+MultiValueRenderer.displayName = 'MultiValueRenderer';
 export default MultiValueRenderer;

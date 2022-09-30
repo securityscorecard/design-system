@@ -3498,8 +3498,10 @@ __metadata:
     stylelint-config-styled-components: ^0.1.1
     stylelint-processor-styled-components: ^1.10.0
     ts-jest: ^27.1.4
+    ts-react-display-name: ^1.2.2
     tslib: ^2.3.1
     typescript: ^4.7.4
+    typescript-plugin-styled-components: ^2.0.0
     use-deep-compare: ^1.1.0
   peerDependencies:
     "@storybook/addons": ^6.5.6
@@ -20572,6 +20574,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-react-display-name@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "ts-react-display-name@npm:1.2.2"
+  checksum: c09421fdc5e5cb8530fad6fee494e91671cce9ce14c9058158c446f89e1af3a8659c7b44d365d82e4f806aa5cb12385dc8b6a91b0f38c2b7a1607f800673fb94
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.14.1":
   version: 3.14.1
   resolution: "tsconfig-paths@npm:3.14.1"
@@ -20713,6 +20722,15 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 33b39f3d0e8463985eeaeeacc3cb2e28bc3dfaf2a5ed219628c0b629d5d7b810b0eb2165f9f607c34871d5daa92ba1dc69f49051cf7d578b4cbd26c340b9d1b1
+  languageName: node
+  linkType: hard
+
+"typescript-plugin-styled-components@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "typescript-plugin-styled-components@npm:2.0.0"
+  peerDependencies:
+    typescript: ^4.0
+  checksum: b4048b45e576ef01e0439f2f7fd6bddd96d83eb6fd91956b0952f56cfcbe952ab2a1330f1c46851b78f5bdf71821f43123145c0be1db6bb578257913a70ddd0b
   languageName: node
   linkType: hard
 
