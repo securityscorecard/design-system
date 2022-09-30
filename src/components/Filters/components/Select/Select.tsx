@@ -16,7 +16,7 @@ import { OptionPropType, SelectProps } from './Select.types';
 function DropdownIndicator(props) {
   return (
     <components.DropdownIndicator {...props}>
-      <Icon name={SSCIconNames.caretDown} type={IconTypes.ssc} />
+      <Icon name={SSCIconNames.angleDown} type={IconTypes.ssc} />
     </components.DropdownIndicator>
   );
 }

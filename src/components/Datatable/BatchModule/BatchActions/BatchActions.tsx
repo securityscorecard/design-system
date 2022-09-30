@@ -79,7 +79,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
               >
                 <Inline align="center" gap={SpaceSizes.xs}>
                   <span>{action.label}</span>
-                  <Icon margin={{ left: 0.25 }} name={SSCIconNames.caretDown} />
+                  <Icon margin={{ left: 0.25 }} name={SSCIconNames.angleDown} />
                 </Inline>
               </BatchActionButton>
             </DropdownMenu>

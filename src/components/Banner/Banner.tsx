@@ -123,7 +123,7 @@ const Banner: React.FC<BannerProps> = ({
                   variant="text"
                   onClick={__onPrev}
                 >
-                  <Icon name={SSCIconNames.chevronLeftRegular} />
+                  <Icon name={SSCIconNames.angleLeft} />
                 </StyledButton>
                 <Text as="div" size={TextSizes.md}>
                   {__current} of {__total}
@@ -134,7 +134,7 @@ const Banner: React.FC<BannerProps> = ({
                   variant="text"
                   onClick={__onNext}
                 >
-                  <Icon name={SSCIconNames.chevronRightRegular} />
+                  <Icon name={SSCIconNames.angleRight} />
                 </StyledButton>
               </Inline>
             )}

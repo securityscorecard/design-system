@@ -268,7 +268,7 @@ export const DropdownIndicator: IndicatorComponentType<OptionType, boolean> = (
 ) => {
   return (
     <components.DropdownIndicator {...props}>
-      <Icon name={SSCIconNames.chevronDown} type={IconTypes.ssc} />
+      <Icon name={SSCIconNames.angleDown} type={IconTypes.ssc} />
     </components.DropdownIndicator>
   );
 };
