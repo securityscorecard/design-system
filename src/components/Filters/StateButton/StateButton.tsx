@@ -12,7 +12,6 @@ import {
   getDepth,
   getFontFamily,
   getFontWeight,
-  getLineHeight,
   getRadii,
   pxToRem,
 } from '../../../utils';
@@ -62,7 +61,7 @@ const RemoveButton = styled.button`
 
 const LightText = styled(Text)`
   color: ${getColor('neutral.0')};
-  line-height: ${getLineHeight('md')};
+  line-height: 1rem;
   font-weight: ${getFontWeight('medium')};
 `;
 
