@@ -3514,6 +3514,7 @@ __metadata:
     react-dom: ^16.14.0
     react-is: ">= 16.8.0"
     react-router-dom: ^5.2.0
+    react-select: ^4.3.1
     require-from-string: ^2.0.2
     styled-components: ^5.1.0
   languageName: unknown

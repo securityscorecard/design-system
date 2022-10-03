@@ -22,6 +22,11 @@ export default {
       sourcemap: true,
     },
   ],
+  external: [
+    'react-select/async',
+    'react-select/creatable',
+    'react-select/async-creatable',
+  ],
   plugins: [
     autoExternal(),
     resolve(),
@@ -33,7 +38,8 @@ export default {
     typescript({ useTsconfigDeclarationDir: true }),
     terser(),
     visualizer({
-      filename: `stats/stat.html`,
+      filename: 'stats/stat.html',
+      template: 'sunburst',
     }),
   ],
 };
