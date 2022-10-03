@@ -1,3 +1,10 @@
+# [1.0.0-alpha.222](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.221...v1.0.0-alpha.222) (2022-10-03)
+
+
+### Features
+
+* **ButtonGroup:** remove ButtonGroup ([8b37c1a](https://github.com/securityscorecard/design-system/commit/8b37c1ad372705b2bbf41028c32b074293b7e799))
+
 # [1.0.0-alpha.221](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.220...v1.0.0-alpha.221) (2022-09-30)
 
 
