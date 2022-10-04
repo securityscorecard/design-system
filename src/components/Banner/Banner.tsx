@@ -152,11 +152,12 @@ const Banner: React.FC<BannerProps> = ({
   );
 };
 
-export default Banner;
-
 Banner.propTypes = {
   variant: PropTypes.oneOf(Object.values(BannerVariants)),
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
   isDismissable: PropTypes.bool,
   onClose: PropTypes.func,
 };
+Banner.displayName = 'Banner';
+
+export default Banner;

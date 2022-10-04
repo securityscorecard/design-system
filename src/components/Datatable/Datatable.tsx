@@ -201,4 +201,5 @@ Datatable.propTypes = {
   onCancelLoading: PropTypes.func,
 };
 
+Datatable.displayName = 'Datatable';
 export default Datatable;

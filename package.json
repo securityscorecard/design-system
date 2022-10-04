@@ -170,8 +170,10 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^27.1.4",
+    "ts-react-display-name": "^1.2.2",
     "tslib": "^2.3.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "typescript-plugin-styled-components": "^2.0.0"
   },
   "resolutions": {
     "trim": "1.0.1",

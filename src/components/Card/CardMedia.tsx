@@ -69,5 +69,6 @@ CardMedia.propTypes = {
   alt: PropTypes.string,
   as: PropTypes.elementType,
 };
+CardMedia.displayName = 'CardMedia';
 
 export default CardMedia;

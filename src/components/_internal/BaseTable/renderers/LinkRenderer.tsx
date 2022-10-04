@@ -41,4 +41,5 @@ Add valid component to 'cellLinkComponent', e.g. Link or NavLink from 'react-rou
   );
 }
 
+LinkRenderer.displayName = 'LinkRenderer';
 export default LinkRenderer;

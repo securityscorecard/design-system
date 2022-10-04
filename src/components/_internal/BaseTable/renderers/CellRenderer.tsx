@@ -93,7 +93,11 @@ CellRenderer.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.shape({}),
+      ]),
     ),
   ]).isRequired,
   column: PropTypes.shape({
@@ -113,4 +117,5 @@ CellRenderer.propTypes = {
   }),
 };
 
+CellRenderer.displayName = 'CellRenderer';
 export default CellRenderer;

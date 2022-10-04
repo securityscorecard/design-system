@@ -1,5 +1,6 @@
 import type { To } from 'history';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import { ToPropType } from './to.types';
 
@@ -7,13 +8,13 @@ export type ActionBase<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
 > = {
-  label: string;
+  label: React.ReactNode;
   name: string;
   onClick?: (...args: OnClickArgs) => OnClickReturnType;
 };
 
 export const ActionBasePropType = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
 };
 

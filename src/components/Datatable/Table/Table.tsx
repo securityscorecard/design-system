@@ -390,4 +390,5 @@ function Table<D extends Record<string, unknown>>({
   );
 }
 
+Table.displayName = 'Table';
 export default Table;

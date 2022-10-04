@@ -62,6 +62,7 @@ function ElementCounterWrapper({ children, ...props }) {
     </Padbox>
   );
 }
+ElementCounterWrapper.displayName = 'ElementCounterWrapper';
 
 const CounterText = styled(H4).attrs(() => ({
   margin: 'none',

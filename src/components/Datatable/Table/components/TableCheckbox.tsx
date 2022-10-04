@@ -18,6 +18,7 @@ function Mark({ children, ...props }) {
     </svg>
   );
 }
+Mark.displayName = 'Mark';
 
 const TableCheckbox = forwardRef(
   (

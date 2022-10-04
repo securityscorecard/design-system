@@ -44,7 +44,7 @@ CreatableSelect.propTypes = {
   ...Select.propTypes,
   createNewLabel: PropTypes.string,
 };
-
 CreatableSelect.defaultProps = Select.defaultProps;
+CreatableSelect.displayName = 'CreatableSelect';
 
 export default CreatableSelect;
