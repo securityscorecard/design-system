@@ -245,7 +245,7 @@ function ControlsModule<D extends Record<string, unknown>>({
                   }
                 >
                   <ControlButton
-                    iconName={SSCIconNames.reorder}
+                    iconName={SSCIconNames.table}
                     label="Columns"
                     onClick={() =>
                       handleControlOnClick(

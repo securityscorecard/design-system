@@ -44,6 +44,7 @@ export const SSCIconNames = {
   angleLeft: 'angle-left',
   angleUp: 'angle-up',
   angleDown: 'angle-down',
+  table: 'table',
 } as const;
 
 export const IconTypes = {
