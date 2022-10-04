@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
-import { Cluster, Padbox } from '../../../layout';
+import { Inline, Padbox } from '../../../layout';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import ControlButton from './ControlButton';
 import { ControlButtonProps } from './ControlButton.types';
@@ -20,18 +20,16 @@ export default {
 export const Default: Story<ControlButtonProps> = (args) => (
   <>
     <Padbox paddingSize="sm">
-      <Cluster align="center">
+      <Inline align="center" gap="mdPlus">
         <ControlButton {...args} />
-        <ControlButton {...args} isActive />
-        <ControlButton {...args} isApplied />
-      </Cluster>
+        <ControlButton {...args} appliedFilters={4} />
+      </Inline>
     </Padbox>
     <Padbox paddingSize="sm">
-      <Cluster align="center">
+      <Inline align="center" gap="mdPlus">
         <ControlButton {...args} className="hover" />
-        <ControlButton {...args} className="hover" isActive />
-        <ControlButton {...args} className="hover" isApplied />
-      </Cluster>
+        <ControlButton {...args} appliedFilters={4} className="hover" />
+      </Inline>
     </Padbox>
   </>
 );
@@ -43,10 +41,7 @@ Default.args = {
 };
 
 Default.argTypes = {
-  isActive: {
-    control: { type: 'boolean' },
-  },
-  isApplied: {
-    control: { type: 'boolean' },
+  appliedFilters: {
+    control: { type: 'number' },
   },
 };

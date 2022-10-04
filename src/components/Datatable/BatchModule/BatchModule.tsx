@@ -33,9 +33,7 @@ const BatchModule: React.FC<BatchModuleProps> = ({
   const [isColumnsActive, setIsColumnsActive] = useState(
     defaultIsColumnsControlsOpen,
   );
-  const [isColumnsApplied, setIsColumnsApplied] = useState(
-    defaultIsColumnsControlsApplied,
-  );
+  const [, setIsColumnsApplied] = useState(defaultIsColumnsControlsApplied);
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
       (s) => ({ columnOrder: s.columnOrder, hiddenColumns: s.hiddenColumns }),
@@ -70,8 +68,6 @@ const BatchModule: React.FC<BatchModuleProps> = ({
             >
               <ControlButton
                 iconName={SSCIconNames.reorder}
-                isActive={isColumnsActive}
-                isApplied={isColumnsApplied}
                 label="Columns"
                 onClick={() => {
                   setIsColumnsActive((prev) => !prev);
