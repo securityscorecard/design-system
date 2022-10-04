@@ -1,3 +1,13 @@
+# [1.0.0-alpha.223](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.222...v1.0.0-alpha.223) (2022-10-04)
+
+
+### Features
+
+* **AngleDownIon:** fix the dimensions ([f8c244f](https://github.com/securityscorecard/design-system/commit/f8c244f0d7c1ca2879b12b854a4bb99d7ebcdd8c))
+* **bundle:** externalize react-select dependency ([b1fdecb](https://github.com/securityscorecard/design-system/commit/b1fdecbf94577780302dcbed3d7e32d541b081ae))
+* **Icons:** add angle icons ([25cc55e](https://github.com/securityscorecard/design-system/commit/25cc55e0ffd7eea8086b6626374845bc9d89f7f2))
+* **Icons:** replace chevrons and carets with angles ([837f0bb](https://github.com/securityscorecard/design-system/commit/837f0bb99889d79b03c94898688b03528f08e71f))
+
 # [1.0.0-alpha.222](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.221...v1.0.0-alpha.222) (2022-10-03)
 
 
