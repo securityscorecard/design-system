@@ -40,6 +40,10 @@ export const SSCIconNames = {
   gripDotsVertical: 'grip-dots-vertical',
   questionCircle: 'question-circle',
   resize: 'resize',
+  angleRight: 'angle-right',
+  angleLeft: 'angle-left',
+  angleUp: 'angle-up',
+  angleDown: 'angle-down',
 } as const;
 
 export const IconTypes = {

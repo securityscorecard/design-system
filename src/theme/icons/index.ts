@@ -44,3 +44,7 @@ export { chevronLeftRegular } from './chevronLeftRegular';
 export { gripDotsVertical } from './gripDotsVertical';
 export { questionCircle } from './questionCircle';
 export { resize } from './resize';
+export { angleRight } from './angleRight';
+export { angleLeft } from './angleLeft';
+export { angleUp } from './angleUp';
+export { angleDown } from './angleDown';

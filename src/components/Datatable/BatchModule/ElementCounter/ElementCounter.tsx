@@ -165,7 +165,7 @@ const ElementCounter: React.FC<ElementCounterProps> = ({
           >
             <Icon
               data-testid="selection-dropdown"
-              name={SSCIconNames.caretDown}
+              name={SSCIconNames.angleDown}
             />
           </SelectionButton>
         </DropdownMenu>

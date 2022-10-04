@@ -50,10 +50,7 @@ const insertSeparators = (items: React.ReactElement[]) => {
         current,
         // eslint-disable-next-line react/no-array-index-key
         <IconWrapper key={`separator-${index}`} aria-hidden>
-          <Icon
-            color={ColorTypes.neutral600}
-            name={SSCIconNames.chevronRight}
-          />
+          <Icon color={ColorTypes.neutral600} name={SSCIconNames.angleRight} />
         </IconWrapper>,
       ];
     }

@@ -84,7 +84,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
         <Inline align="center" gap={SpaceSizes.sm}>
           <IconWrapper paddingSize={SpaceSizes.xxs}>
             <StyledIcon
-              name={SSCIconNames.chevronRight}
+              name={SSCIconNames.angleRight}
               rotation={isOpen ? 90 : undefined}
               type={IconTypes.ssc}
             />

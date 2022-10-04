@@ -73,7 +73,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
         <Inline align="center" gap={SpaceSizes.lg}>
           <StyledIcon
             isRotated={isOpen}
-            name={SSCIconNames.chevronRight}
+            name={SSCIconNames.angleRight}
             type={IconTypes.ssc}
           />
           <div>

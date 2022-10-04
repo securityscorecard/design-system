@@ -52,7 +52,7 @@ const MonthSelector = styled.button`
 function ChangeMonthIcon(props) {
   return (
     <ChangeMonthIconContainer {...props}>
-      <Icon color={ColorTypes.neutral600} name={SSCIconNames.sortDown} />
+      <Icon color={ColorTypes.neutral600} name={SSCIconNames.angleDown} />
     </ChangeMonthIconContainer>
   );
 }
