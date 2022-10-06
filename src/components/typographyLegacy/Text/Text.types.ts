@@ -7,6 +7,7 @@ export interface TextProps {
   size?: Sizes;
   variant?: Variants;
   isBold?: boolean;
+  className?: string;
 }
 
 export type CodeProps = Omit<TextProps, 'variant'>;

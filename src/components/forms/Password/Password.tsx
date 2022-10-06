@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import cls from 'classnames';
 
 import { createPadding, getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
@@ -9,6 +10,7 @@ import { Input } from '../Input';
 import { PasswordProps } from './Password.types';
 import { ColorTypes, SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const PasswordWrapper = styled.div`
   position: relative;
@@ -42,6 +44,7 @@ const Password: React.FC<PasswordProps> = ({
   isInvalid = false,
   isDisabled = false,
   defaultIsRevealed = false,
+  className,
   ...props
 }) => {
   const [isPasswordRevealed, setIsPasswordRevealed] =
@@ -52,7 +55,7 @@ const Password: React.FC<PasswordProps> = ({
   };
 
   return (
-    <PasswordWrapper>
+    <PasswordWrapper className={cls(CLX_COMPONENT, className)}>
       <PasswordInput
         isDisabled={isDisabled}
         isInvalid={isInvalid}
@@ -77,6 +80,7 @@ Password.propTypes = {
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,
   defaultIsRevealed: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Password;

@@ -1,3 +1,5 @@
+import { DefaultTheme } from 'styled-components';
+
 import { Color } from '../../../theme/colors.types';
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 import { BaseTabVariants } from './BaseTabs.enums';
@@ -9,4 +11,6 @@ export interface BaseLabelProps extends PadboxProps {
   $color: Color;
   $variant?: Variants;
   $isExpanded?: boolean;
+  theme: DefaultTheme;
+  className?: string;
 }

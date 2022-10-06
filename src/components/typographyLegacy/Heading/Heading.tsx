@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { path } from 'ramda';
+import cls from 'classnames';
 
 import {
   createSpacings,
@@ -13,6 +14,7 @@ import {
 } from '../../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const primaryVariant = css`
   color: ${getColor('neutral.900')};
@@ -85,9 +87,15 @@ const Heading: React.FC<
   children,
   size = HeadingSizes.h1,
   variant = HeadingVariants.primary,
+  className,
   ...props
 }) => {
-  const additionalProps = { size, variant, ...props };
+  const additionalProps = {
+    size,
+    variant,
+    className: cls(CLX_COMPONENT, className),
+    ...props,
+  };
 
   return React.createElement(headingSizes[size], additionalProps, children);
 };
@@ -95,6 +103,7 @@ const Heading: React.FC<
 Heading.propTypes = {
   size: PropTypes.oneOf(Object.values(HeadingSizes)),
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
+  className: PropTypes.string,
 };
 
 export default Heading;

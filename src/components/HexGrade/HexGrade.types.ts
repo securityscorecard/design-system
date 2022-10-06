@@ -10,4 +10,5 @@ export interface HexGradeProps {
   size?: number;
   isInversed?: boolean;
   margin?: SpacingSizeValue;
+  className?: string;
 }

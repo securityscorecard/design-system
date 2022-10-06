@@ -11,6 +11,7 @@ import { Icon } from '../Icon';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { SSCIcons } from '../Icon/Icon.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const IconContainer = styled.div`
   width: ${pxToRem(36)};
@@ -33,7 +34,7 @@ const Callout: React.FC<CalloutProps> = ({
   children,
   icon = SSCIconNames.lightbulb,
 }) => (
-  <Container paddingSize={SpaceSizes.md}>
+  <Container className={CLX_COMPONENT} paddingSize={SpaceSizes.md}>
     <Inline gap={SpaceSizes.md}>
       <IconContainer>
         {typeof icon === 'string' ? (

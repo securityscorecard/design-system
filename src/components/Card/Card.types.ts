@@ -97,6 +97,7 @@ export interface CardProps {
   to?: string;
   href?: string;
   shouldAlignLastItemToBottom?: boolean;
+  className?: string;
 }
 
 export interface CardWrapperProps {

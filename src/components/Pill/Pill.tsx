@@ -2,12 +2,14 @@ import React from 'react';
 import { gt } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import PropTypes from 'prop-types';
+import cls from 'classnames';
 
 import { PillSizes, PillVariants } from './Pill.enums';
 import { PillProps } from './Pill.types';
 import PillWrapper from './PillWrapper';
 import PillLabel from './PillLabel';
 import PillRemoveButton from './PillRemoveButton';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const Pill: React.FC<PillProps> = ({
   label,
@@ -18,6 +20,7 @@ const Pill: React.FC<PillProps> = ({
   adornment,
   onClick,
   onRemove,
+  className,
   ...props
 }) => {
   const isPillClickable = isNotUndefined(onClick) || isClickable;
@@ -67,6 +70,7 @@ const Pill: React.FC<PillProps> = ({
 
   return (
     <PillWrapper
+      className={cls(CLX_COMPONENT, className)}
       isClickable={isPillClickable}
       size={size}
       variant={variant}
@@ -99,6 +103,7 @@ Pill.propTypes = {
   adornment: PropTypes.node,
   maxLabelLength: PropTypes.number,
   isClickable: PropTypes.bool,
+  className: PropTypes.string,
   onClick: PropTypes.func,
   onRemove: PropTypes.func,
 };

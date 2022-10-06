@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import { datePickerStyles, singleDatePickerStyles } from './styles';
 import { SingleDatePickerProps } from './SingleDatePicker.types';
 import { DatePickerCustomHeader } from './CustomHeader';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 export const StyledDatePicker = styled.div`
   ${datePickerStyles}
@@ -28,7 +29,7 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
   const pickerRef = useRef({ calendar: { instanceRef: { changeYear: noop } } });
   const toggleYearPicker = () => setShowYearPicker(!showYearPicker);
   return (
-    <StyledDatePicker>
+    <StyledDatePicker className={CLX_COMPONENT}>
       <DatePicker
         ref={pickerRef}
         calendarClassName="DateRangePicker-calendar"

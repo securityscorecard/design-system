@@ -9,6 +9,7 @@ type BaseProps = {
    * List of selectable options
    */
   options: Option[];
+  className?: string;
 };
 
 type DiscriminatedProps =

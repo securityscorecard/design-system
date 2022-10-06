@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 import { Property } from 'csstype';
+import cls from 'classnames';
 
 import {
   AlignItemsPropType,
@@ -12,6 +13,7 @@ import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { StretchEnum } from './Inline.enums';
+import { CLX_LAYOUT } from '../../../theme/constants';
 
 type Stretch = typeof StretchEnum[keyof typeof StretchEnum];
 
@@ -33,6 +35,7 @@ export interface InlineProps {
    * Child or children to fill available space
    */
   stretch?: number | Stretch;
+  className?: string;
 }
 
 const getStretchStyle = (
@@ -62,7 +65,10 @@ const getStretchStyle = (
   }
 };
 
-const Inline = styled.div<InlineProps>`
+const Inline = styled.div.attrs((props) => ({
+  ...props,
+  className: cls(CLX_LAYOUT, props?.className),
+}))<InlineProps>`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -93,6 +99,7 @@ Inline.propTypes = {
     PropTypes.number,
     PropTypes.oneOf<Stretch>(Object.values(StretchEnum)),
   ]),
+  className: PropTypes.string,
 };
 
 Inline.defaultProps = {

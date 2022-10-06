@@ -96,10 +96,10 @@ const tabVariants = {
   [BaseTabVariants.segmented]: segmentedTab,
 };
 
-const BaseTabLabel = styled(Padbox).withConfig<BaseLabelProps>({
+const BaseTabLabel = styled(Padbox).withConfig({
   shouldForwardProp: (property) =>
     !includes(property, ['paddingType', 'paddingSize']),
-})`
+})<BaseLabelProps>`
   display: flex;
   align-items: center;
   outline: none;

@@ -15,6 +15,7 @@ import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { ToastVariants } from './Toast.enums';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const ToastFromTop = keyframes`
   from {
@@ -68,7 +69,11 @@ const Toast: React.FC<ToastProps> = ({
   width = 400,
   variant,
 }) => (
-  <ToastContainer $width={width} onClick={stopPropagation}>
+  <ToastContainer
+    $width={width}
+    className={CLX_COMPONENT}
+    onClick={stopPropagation}
+  >
     <BaseToastBanner
       iconPxSizesVariants={iconPxSizesVariants}
       iconSize={16}

@@ -10,4 +10,5 @@ export interface ModalProps {
   footer?: React.ReactNode;
   title?: string;
   size?: Sizes;
+  className?: string;
 }

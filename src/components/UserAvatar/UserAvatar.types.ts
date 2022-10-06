@@ -12,4 +12,5 @@ export interface UserAvatarProps {
    * The size of the avatar
    */
   size?: Sizes;
+  className?: string;
 }

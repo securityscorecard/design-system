@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
@@ -12,6 +13,7 @@ import {
   LinkFocusStyles,
   LinkHoverStyles,
 } from '../../_internal/BaseLink';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const LinkRoot = styled.a`
   ${LinkBaseStyles};
@@ -36,6 +38,7 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
   href = null,
   to = null,
   onClick,
+  className,
   ...props
 }) => {
   let RouterLink = null;
@@ -59,6 +62,7 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
     <LinkRoot
       $color={color}
       as={domTag}
+      className={cls(CLX_COMPONENT, className)}
       href={href}
       to={to}
       onClick={onClick}
@@ -80,6 +84,7 @@ Link.propTypes = {
     }),
   ]),
   color: PropTypes.oneOf(Object.values(LinkColors)),
+  className: PropTypes.string,
   onClick: PropTypes.func,
 };
 

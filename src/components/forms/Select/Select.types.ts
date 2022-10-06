@@ -24,6 +24,7 @@ interface BaseSelectProps<IsMulti extends boolean = false> {
   maxVisibleItem?: number;
   isMenuPositionRelative?: boolean;
   isInvalid?: boolean;
+  className?: string;
 }
 
 type SyncSelectProps<IsMulti extends boolean = false> = {

@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { createSpacings, getColor } from '../../utils';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
@@ -19,6 +20,7 @@ import { ColorTypes } from '../../theme/colors.enums';
 import { Color } from '../../theme/colors.types';
 import { IconProps, SSCIcons, Types } from './Icon.types';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
   shouldForwardProp: (property) => !includes(property, ['margin', 'color']),
@@ -40,7 +42,7 @@ const Icon: React.FC<
   ...props
 }) => (
   <StyledIcon
-    className={className}
+    className={cls(CLX_COMPONENT, className)}
     color={color}
     fixedWidth={hasFixedWidth}
     icon={findIconDefinition({

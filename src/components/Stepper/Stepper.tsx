@@ -2,6 +2,7 @@ import React, { forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useContainerQuery } from 'react-container-query';
 import { pathEq } from 'ramda';
+import cls from 'classnames';
 
 import { SpaceSizes } from '../../theme';
 import { Inline, Stack } from '../layout';
@@ -9,6 +10,7 @@ import { StepperProps } from './Stepper.types';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { StepperContext } from './Stepper.context';
 import { StepperOrientations } from './Stepper.enums';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const SHOW_TEXT_BREAKPOINT = 'show-step-text';
 
@@ -23,6 +25,7 @@ const Stepper = forwardRef<
       showTextBreakpoint = 600,
       orientation = StepperOrientations.horizontal,
       areStepsExpanded = false,
+      className,
       ...props
     },
     ref,
@@ -64,13 +67,19 @@ const Stepper = forwardRef<
     return (
       <StepperContext.Provider value={context}>
         {orientation === StepperOrientations.vertical ? (
-          <Stack ref={mergedRef} gap={SpaceSizes.sm} {...props}>
+          <Stack
+            ref={mergedRef}
+            className={cls(CLX_COMPONENT, className)}
+            gap={SpaceSizes.sm}
+            {...props}
+          >
             {steps}
           </Stack>
         ) : (
           <Inline
             ref={mergedRef}
             align="flex-start"
+            className={cls(CLX_COMPONENT, className)}
             gap={SpaceSizes.sm}
             {...props}
           >
@@ -87,6 +96,7 @@ Stepper.propTypes = {
   showTextBreakpoint: PropTypes.number,
   orientation: PropTypes.oneOf(Object.values(StepperOrientations)),
   areStepsExpanded: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Stepper;

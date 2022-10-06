@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { __, pipe, subtract } from 'ramda';
+import cls from 'classnames';
 
 import {
   getFontFamily,
@@ -15,6 +16,7 @@ import {
 } from '../../../utils';
 import { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
 import { SwitchSizes } from './Switch.enums';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 // Minimum width for
 const SwitchMdWithLabel = 96;
@@ -27,7 +29,6 @@ const SwitchLabelWrapperMedium = css<{ label: string; maxWidth: number }>`
     css`
       min-width: ${pxToRem(label ? SwitchMdWithLabel : SwitchMdWithoutLabel)};
     `}
-
   ${({ maxWidth }) =>
     maxWidth &&
     css`
@@ -40,7 +41,6 @@ const SwitchLabelWrapperSmall = css<{ label: string; maxWidth: number }>`
     css`
       min-width: ${pxToRem(label ? SwitchSmWithLabel : SwitchSmWithoutLabel)};
     `}
-
   ${({ maxWidth }) =>
     maxWidth &&
     css`
@@ -118,7 +118,6 @@ const Label = styled(BaseLabel)<SwitchLabelProps>`
   line-height: ${getLineHeight('md')};
   background: ${getFormStyle('switchBgColor')};
   ${({ $size }) => switchLabelWrapperSizes[$size]};
-
   ${({ isDisabled }) =>
     css`
       color: ${getFormStyle(isDisabled ? 'disabledColor' : 'switchColor')};
@@ -136,7 +135,6 @@ const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
   overflow: hidden;
   text-overflow: ellipsis;
   ${({ $size }) => switchNotCheckedLabelPaddings[$size]};
-
   &::after {
     content: '';
     position: absolute;
@@ -205,8 +203,17 @@ const Input = styled.input<{
 `;
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>(
-  ({ switchId, isDisabled = false, size = SwitchSizes.md, ...props }, ref) => (
-    <SwitchWrapper>
+  (
+    {
+      switchId,
+      isDisabled = false,
+      size = SwitchSizes.md,
+      className,
+      ...props
+    },
+    ref,
+  ) => (
+    <SwitchWrapper className={cls(CLX_COMPONENT, className)}>
       <Input
         ref={ref}
         $size={size}
@@ -226,6 +233,7 @@ Switch.propTypes = {
   switchId: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
   size: PropTypes.oneOf(Object.values(SwitchSizes)),
+  className: PropTypes.string,
 };
 
 export default Switch;

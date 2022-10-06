@@ -7,6 +7,7 @@ export interface BadgeProps {
   count: number;
   size?: BadgeElementProps['$size'];
   variant?: BadgeElementProps['$variant'];
+  className?: string;
 }
 
 export interface BadgeElementProps {

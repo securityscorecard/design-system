@@ -22,4 +22,5 @@ export interface SegmentedToggleProps {
    * Callback when the SegmentedToggle has changed
    */
   onChange?: React.ChangeEventHandler;
+  className?: string;
 }

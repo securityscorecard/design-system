@@ -130,10 +130,10 @@ const buttonVariants = {
   [BaseButtonVariants.text]: ButtonText,
 };
 
-const BaseStyledButton = styled(Padbox).withConfig<BaseStyledButtonProps>({
+const BaseStyledButton = styled(Padbox).withConfig({
   shouldForwardProp: (property) =>
     !includes(property, ['theme', 'paddingType', 'paddingSize']),
-})`
+})<BaseStyledButtonProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
