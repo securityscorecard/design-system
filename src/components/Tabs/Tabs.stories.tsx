@@ -9,7 +9,7 @@ import { Tab, Tabs } from '.';
 import { ColorTypes } from '../../theme/colors.enums';
 import { TabsProps } from './Tabs.types';
 import { generateControl } from '../../utils/tests/storybook';
-import { TabSizes, TabVariants } from './Tabs.enums';
+import { TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor } from '../../utils';
 import { Button } from '../Button';
@@ -18,9 +18,6 @@ export default {
   title: 'components/Tabs',
   component: Tabs,
   argTypes: {
-    size: {
-      ...generateControl('select', TabSizes),
-    },
     variant: {
       ...generateControl('select', TabVariants),
     },
@@ -130,48 +127,19 @@ export const RoutableTabs: Story = () => {
 };
 
 export const UnderlineTabs: Story = () => (
-  <Stack gap={SpaceSizes.lg}>
-    <Tabs selectedValue="one" size="lg" onSelectTab={action('Select Tab')}>
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-    <Tabs selectedValue="one" size="md" onSelectTab={action('Select Tab')}>
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-    <Tabs selectedValue="one" size="sm" onSelectTab={action('Select Tab')}>
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-  </Stack>
+  <Tabs selectedValue="one" onSelectTab={action('Select Tab')}>
+    <Tab value="one">One</Tab>
+    <Tab value="two">Two</Tab>
+    <Tab value="three">Three</Tab>
+  </Tabs>
 );
 
 export const TextTabs: Story = () => (
-  <Stack gap={SpaceSizes.lg}>
-    <Tabs
-      selectedValue="one"
-      size="lg"
-      variant="text"
-      onSelectTab={action('Select Tab')}
-    >
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-    <Tabs
-      selectedValue="one"
-      size="md"
-      variant="text"
-      onSelectTab={action('Select Tab')}
-    >
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-  </Stack>
+  <Tabs selectedValue="one" variant="text" onSelectTab={action('Select Tab')}>
+    <Tab value="one">One</Tab>
+    <Tab value="two">Two</Tab>
+    <Tab value="three">Three</Tab>
+  </Tabs>
 );
 
 export const SegmentedTabs: Story = () => (
@@ -201,7 +169,6 @@ export const ExpandedTabs: Story = () => (
       <Tabs
         margin="none"
         selectedValue="one"
-        size="lg"
         variant="segmented"
         isExpanded
         onSelectTab={action('Select Tab')}

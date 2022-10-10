@@ -7,6 +7,7 @@ import { BaseTabVariants } from './BaseTabs.enums';
 
 export const BaseTabsWrapper = styled(Padbox)<{
   $variant: Variants;
+  $isExpanded: boolean;
 }>`
   display: inline-block;
 

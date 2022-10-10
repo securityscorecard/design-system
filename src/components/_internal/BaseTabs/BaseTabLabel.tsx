@@ -13,45 +13,9 @@ import {
   pxToRem,
 } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
-import { BaseLabelProps, Sizes } from './BaseTabLabel.types';
-import { BaseTabSizes, BaseTabVariants } from './BaseTabs.enums';
+import { BaseLabelProps } from './BaseTabLabel.types';
+import { BaseTabVariants } from './BaseTabs.enums';
 import { Padbox } from '../../layout/Padbox';
-
-const largeTextSize = css`
-  font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('md')};
-`;
-
-const mediumTextSize = css`
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
-`;
-
-const largeUnderlineSize = css`
-  font-size: ${getFontSize('h2')};
-  line-height: ${getLineHeight('xxl')};
-`;
-
-const mediumUnderlineSize = css`
-  font-size: ${getFontSize('h3')};
-  line-height: ${getLineHeight('xl')};
-`;
-
-const smallUnderlineSize = css`
-  font-size: ${getFontSize('h5')};
-  line-height: ${getLineHeight('lg')};
-`;
-
-const underlineSizes = {
-  [BaseTabSizes.lg]: largeUnderlineSize,
-  [BaseTabSizes.md]: mediumUnderlineSize,
-  [BaseTabSizes.sm]: smallUnderlineSize,
-};
-
-const textSizes = {
-  [BaseTabSizes.lg]: largeTextSize,
-  [BaseTabSizes.md]: mediumTextSize,
-};
 
 const commonHoverTab = css<BaseLabelProps>`
   ${({ $isSelected, $color, theme }) =>
@@ -60,8 +24,9 @@ const commonHoverTab = css<BaseLabelProps>`
       : getColor('primary.600')}
 `;
 
-const underlineTab = css<BaseLabelProps & { size: Sizes }>`
-  ${({ size }) => underlineSizes[size] || underlineSizes[BaseTabSizes.md]};
+const underlineTab = css<BaseLabelProps>`
+  font-size: ${getFontSize('h5')};
+  line-height: ${getLineHeight('lg')};
   padding-bottom: ${getSpace(SpaceSizes.xxs)};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
@@ -81,9 +46,9 @@ const underlineTab = css<BaseLabelProps & { size: Sizes }>`
   }
 `;
 
-const textTab = css<BaseLabelProps & { size: Sizes }>`
-  ${({ size }) => textSizes[size] || textSizes[BaseTabSizes.md]};
-
+const textTab = css<BaseLabelProps>`
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
   color: ${({ $isSelected, $color }) =>
     $isSelected
       ? $color
@@ -101,7 +66,7 @@ export const segmentedTabSelected = css`
   border: 1px solid ${getColor('primary.200')};
 `;
 
-const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
+const segmentedTab = css<BaseLabelProps>`
   font-size: ${getToken('font-action-size')};
   font-weight: ${getFontWeight('regular')};
   line-height: ${getToken('font-action-lineheight')};
@@ -133,9 +98,7 @@ const tabVariants = {
   [BaseTabVariants.segmented]: segmentedTab,
 };
 
-const BaseTabLabel = styled(Padbox).withConfig<
-  BaseLabelProps & { size: Sizes }
->({
+const BaseTabLabel = styled(Padbox).withConfig<BaseLabelProps>({
   shouldForwardProp: (property) =>
     !includes(property, ['paddingType', 'paddingSize']),
 })`

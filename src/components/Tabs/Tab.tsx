@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { TabProps } from './Tabs.types';
-import { TabSizes, TabVariants } from './Tabs.enums';
+import { TabVariants } from './Tabs.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
@@ -15,7 +15,6 @@ const Tab: React.FC<TabProps> = ({
   isExpanded = false,
   onClick,
   color,
-  size = TabSizes.sm,
   variant = TabVariants.underline,
   value,
 }) => {
@@ -35,11 +34,7 @@ const Tab: React.FC<TabProps> = ({
   }
 
   const paddingSize =
-    variant !== TabVariants.segmented
-      ? SpaceSizes.none
-      : size === TabSizes.lg
-      ? SpaceSizes.md
-      : SpaceSizes.sm;
+    variant !== TabVariants.segmented ? SpaceSizes.none : SpaceSizes.sm;
 
   return (
     <BaseTabLabel
@@ -52,7 +47,6 @@ const Tab: React.FC<TabProps> = ({
       paddingSize={paddingSize}
       paddingType={PaddingTypes.squish}
       role="tab"
-      size={size}
       tabIndex={0}
       {...handler}
     >
@@ -64,7 +58,6 @@ const Tab: React.FC<TabProps> = ({
 Tab.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(Object.values(TabSizes)),
   variant: PropTypes.oneOf(Object.values(TabVariants)),
   isSelected: PropTypes.bool,
   isExpanded: PropTypes.bool,
