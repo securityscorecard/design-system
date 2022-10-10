@@ -205,17 +205,7 @@ const Input = styled.input<{
 `;
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>(
-  (
-    {
-      switchId,
-      label,
-      isDisabled = false,
-      size = SwitchSizes.md,
-      maxWidth,
-      ...props
-    },
-    ref,
-  ) => (
+  ({ switchId, isDisabled = false, size = SwitchSizes.md, ...props }, ref) => (
     <SwitchWrapper>
       <Input
         ref={ref}
@@ -225,15 +215,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         type="checkbox"
         {...props}
       />
-      <Label
-        $size={size}
-        htmlFor={switchId}
-        isDisabled={isDisabled}
-        maxWidth={maxWidth}
-      >
-        <LabelContent $size={size} isDisabled={isDisabled}>
-          {label}
-        </LabelContent>
+      <Label $size={size} htmlFor={switchId} isDisabled={isDisabled}>
+        <LabelContent $size={size} isDisabled={isDisabled} />
       </Label>
     </SwitchWrapper>
   ),
@@ -241,10 +224,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
 
 Switch.propTypes = {
   switchId: PropTypes.string.isRequired,
-  label: PropTypes.node,
   isDisabled: PropTypes.bool,
   size: PropTypes.oneOf(Object.values(SwitchSizes)),
-  maxWidth: PropTypes.number,
 };
 
 export default Switch;

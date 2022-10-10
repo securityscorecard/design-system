@@ -19,17 +19,9 @@ export interface SwitchProps
   /**
    * Indicates if switch is disabled or not
    */
-  isDisabled?: SwitchLabelProps['isDisabled'];
-  /**
-   * Text in switch
-   */
-  label?: React.ReactNode;
+  isDisabled?: boolean;
   /**
    * Size of the Switch
    */
-  size?: SwitchLabelProps['$size'];
-  /**
-   * Max width in px
-   */
-  maxWidth?: SwitchLabelProps['maxWidth'];
+  size?: Sizes;
 }
