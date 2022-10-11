@@ -1,3 +1,10 @@
+# [1.0.0-alpha.224](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.223...v1.0.0-alpha.224) (2022-10-11)
+
+
+### Features
+
+* **Switch:** remove label ([263db07](https://github.com/securityscorecard/design-system/commit/263db07dd6405d9207472e9d29af5f213749a7c9))
+
 # [1.0.0-alpha.223](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.222...v1.0.0-alpha.223) (2022-10-04)
 
 
