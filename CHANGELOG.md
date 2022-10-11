@@ -1,3 +1,10 @@
+# [1.0.0-alpha.225](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.224...v1.0.0-alpha.225) (2022-10-11)
+
+
+### Features
+
+* **forms:** change default border color to neutral.500 ([4f06d89](https://github.com/securityscorecard/design-system/commit/4f06d895fbaaa99236bf7399d857992e931fa590))
+
 # [1.0.0-alpha.224](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.223...v1.0.0-alpha.224) (2022-10-11)
 
 
