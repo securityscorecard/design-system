@@ -24,7 +24,13 @@ const Tabs: React.FC<TabsProps> = ({
     }
   >
     <Inline
-      gap={variant === TabVariants.segmented ? SpaceSizes.sm : SpaceSizes.lg}
+      gap={
+        variant === TabVariants.segmented
+          ? SpaceSizes.sm
+          : variant === TabVariants.underline
+          ? SpaceSizes.none
+          : SpaceSizes.lg
+      }
       role="tablist"
       stretch={isExpanded ? 'all' : 0}
     >

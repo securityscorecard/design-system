@@ -34,7 +34,11 @@ const Tab: React.FC<TabProps> = ({
   }
 
   const paddingSize =
-    variant !== TabVariants.segmented ? SpaceSizes.none : SpaceSizes.sm;
+    variant === TabVariants.segmented
+      ? SpaceSizes.sm
+      : variant === TabVariants.underline
+      ? SpaceSizes.md
+      : SpaceSizes.none;
 
   return (
     <BaseTabLabel

@@ -13,6 +13,8 @@ import { TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor } from '../../utils';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
+import { Badge } from '../Badge';
 
 export default {
   title: 'components/Tabs',
@@ -129,8 +131,16 @@ export const RoutableTabs: Story = () => {
 export const UnderlineTabs: Story = () => (
   <Tabs selectedValue="one" onSelectTab={action('Select Tab')}>
     <Tab value="one">One</Tab>
-    <Tab value="two">Two</Tab>
-    <Tab value="three">Three</Tab>
+    <Tab value="two">
+      <Inline align="center" gap="sm">
+        <Icon color="primary.500" name="sitemap" style={{ fontSize: '1rem' }} />
+        <span>Two</span>
+        <Badge count={3} variant="neutral" />
+      </Inline>
+    </Tab>
+    <Tab color={ColorTypes.error700} value="three">
+      Three
+    </Tab>
   </Tabs>
 );
 
