@@ -1,3 +1,11 @@
+# [1.0.0-alpha.226](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.225...v1.0.0-alpha.226) (2022-10-12)
+
+
+### Features
+
+* **ControlButton:** add badge to filters ([09cc235](https://github.com/securityscorecard/design-system/commit/09cc235e488b0c5ec1e3ed820bc5b6d3e3e21611))
+* **Icon:** add table icon to Columns ([69b0f1c](https://github.com/securityscorecard/design-system/commit/69b0f1c3df579d6c2588a7069e6342cb9e73788d))
+
 # [1.0.0-alpha.225](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.224...v1.0.0-alpha.225) (2022-10-11)
 
 
