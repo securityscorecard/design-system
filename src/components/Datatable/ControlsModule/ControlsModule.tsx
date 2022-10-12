@@ -107,6 +107,7 @@ function ControlsModule<D extends Record<string, unknown>>({
     //   ]),
     // ),
   });
+  const [appliedFilters, setAppliedFilters] = useState(0);
 
   useEffect(() => {
     DatatableStore.update((s) => {
@@ -165,6 +166,8 @@ function ControlsModule<D extends Record<string, unknown>>({
       s.hasAppliedFilters = hasAppliedFilters;
       s.isCanceled = false;
     });
+
+    setAppliedFilters(appliedfilters.length);
   };
 
   const handleOnSearch = (query: string): void => {
@@ -215,7 +218,7 @@ function ControlsModule<D extends Record<string, unknown>>({
       <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
         <Inline gap={SpaceSizes.lg} stretch="end">
           {isToolbarEnabled && (
-            <Inline>
+            <Inline gap="mdPlus">
               {hasColumnsControls && (
                 <ColumnsControls
                   isOpen={controlsState[ControlTypes.columns].isActive}
@@ -242,9 +245,7 @@ function ControlsModule<D extends Record<string, unknown>>({
                   }
                 >
                   <ControlButton
-                    iconName={SSCIconNames.reorder}
-                    isActive={controlsState[ControlTypes.columns].isActive}
-                    isApplied={controlsState[ControlTypes.columns].isApplied}
+                    iconName={SSCIconNames.table}
                     label="Columns"
                     onClick={() =>
                       handleControlOnClick(
@@ -257,9 +258,9 @@ function ControlsModule<D extends Record<string, unknown>>({
               )}
               {shouldShowFiltering && (
                 <ControlButton
+                  appliedFilters={appliedFilters}
                   iconName={SSCIconNames.filter}
-                  isActive={controlsState[ControlTypes.filters].isActive}
-                  isApplied={controlsState[ControlTypes.filters].isApplied}
+                  // isActive={controlsState[ControlTypes.filters].isActive}
                   label="Filters"
                   onClick={() =>
                     handleControlOnClick(
