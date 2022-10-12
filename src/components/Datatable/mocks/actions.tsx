@@ -1,8 +1,12 @@
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { BatchActionArgs } from '../Datatable.types';
 import { Action } from '../types/Action.types';
 import { ActionKinds } from '../../../types/action.types';
+import Inline from '../../layout/Inline/Inline';
+import Icon from '../../Icon/Icon';
+import { Tooltip } from '../../Tooltip';
 
 export const subactionsMock: ActionKinds<BatchActionArgs>[] = [
   {
@@ -36,8 +40,15 @@ export const actionsMock: Action<BatchActionArgs>[] = [
 
 export const tableActionsMock: Action<string[]>[] = [
   {
-    label: 'Export',
     name: 'Export',
+    label: (
+      <Inline align="center" gap="sm">
+        <span>Export</span>
+        <Tooltip popup="This is an informative tooltip">
+          <Icon name="info-circle" />
+        </Tooltip>
+      </Inline>
+    ),
     onClick: action('onBatchActionClick (export)'),
   },
   {
@@ -73,7 +84,14 @@ export const datatableRowActions = [
 
 export const datatableBatchActions = [
   {
-    label: 'Add assets',
+    label: (
+      <Inline align="center" gap="sm">
+        <span>Add assets</span>
+        <Tooltip popup="This is an informative tooltip">
+          <Icon name="info-circle" />
+        </Tooltip>
+      </Inline>
+    ),
     name: 'add-assets',
     onClick: action('onBatchActionClick (add assets)'),
   },
