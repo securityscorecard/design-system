@@ -17,7 +17,6 @@ export * from './FlexContainer';
 export * from './FullscreenModal';
 export * from './HexGrade';
 export * from './Icon';
-export * from './IconButton';
 export * from './Modal';
 export * from './Nav';
 export * from './Pagination';
