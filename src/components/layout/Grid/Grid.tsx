@@ -75,13 +75,26 @@ const Grid: React.FC<GridProps> = ({
   wrapperEl,
   wrapperOverflow = 'hidden',
   ...props
-}) => (
-  <GridWrapper $overflow={wrapperOverflow} as={wrapperEl}>
-    <GridParent $align={align} $cols={cols} $gap={gap} as={parentEl} {...props}>
-      {children}
-    </GridParent>
-  </GridWrapper>
-);
+}) => {
+  if (cols === 1) {
+    throw new Error(
+      '[design-system/Grid] Minimal number of columns is 2. Use Stack instead of Grid[cols=1]',
+    );
+  }
+  return (
+    <GridWrapper $overflow={wrapperOverflow} as={wrapperEl}>
+      <GridParent
+        $align={align}
+        $cols={cols}
+        $gap={gap}
+        as={parentEl}
+        {...props}
+      >
+        {children}
+      </GridParent>
+    </GridWrapper>
+  );
+};
 
 Grid.propTypes = {
   gap: PropTypes.oneOf(Object.values(SpaceSizes)),
