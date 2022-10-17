@@ -1,3 +1,11 @@
+# [1.0.0-alpha.227](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.226...v1.0.0-alpha.227) (2022-10-17)
+
+
+### Features
+
+* **IconButton:** remove IconButton ([abe892f](https://github.com/securityscorecard/design-system/commit/abe892f9aff001493bf71d57c40b626e11166581))
+* **IconButton:** remove IconButton from Storybook ([864a815](https://github.com/securityscorecard/design-system/commit/864a815140b5ea3ccf1ccf9fff40638378b95a51))
+
 # [1.0.0-alpha.226](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.225...v1.0.0-alpha.226) (2022-10-12)
 
 
