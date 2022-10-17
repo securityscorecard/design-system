@@ -1,3 +1,10 @@
+# [1.0.0-alpha.228](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.227...v1.0.0-alpha.228) (2022-10-17)
+
+
+### Features
+
+* **Grid:** throw Error on cols=1 ([1086d29](https://github.com/securityscorecard/design-system/commit/1086d29927fb600b661b42a3fba11d8061d9d8c8))
+
 # [1.0.0-alpha.227](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.226...v1.0.0-alpha.227) (2022-10-17)
 
 
