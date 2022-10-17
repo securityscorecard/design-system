@@ -37,6 +37,9 @@ export default {
         defaultValue: { summary: '"hidden"' },
       },
     },
+    cols: {
+      control: { type: 'number', min: 2 },
+    },
   },
 } as Meta;
 
