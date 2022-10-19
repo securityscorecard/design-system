@@ -205,6 +205,7 @@ const FileSelector = ({
           <ExtendableButton
             iconName={SSCIconNames.upload}
             isDisabled={isDisabled}
+            type="button"
             variant={ButtonVariants.outline}
           >
             {buttonLabel}
