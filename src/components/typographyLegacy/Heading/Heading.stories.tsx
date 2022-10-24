@@ -95,3 +95,10 @@ export const CustomizedH1: Story = () => (
   </Heading>
 );
 CustomizedH1.storyName = 'Heading H1 with customized margins';
+
+export const HeadingAs: Story = () => (
+  <Heading as="h3" size={HeadingSizes.h1}>
+    Heading H1 as H3
+  </Heading>
+);
+HeadingAs.storyName = 'Heading H1 as H3';
