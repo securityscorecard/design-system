@@ -55,6 +55,12 @@ export const tableActionsMock: Action<string[]>[] = [
     name: 'Remove',
     onClick: action('onBatchActionClick (remove)'),
   },
+  {
+    label: 'Tooltip',
+    name: 'Tooltip',
+    tooltip: 'You can display a tooltip by using the `tooltip` prop',
+    onClick: action('onBatchActionClick (tooltip)'),
+  },
 ];
 
 export const datatableRowActions = [
