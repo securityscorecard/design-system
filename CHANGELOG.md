@@ -1,3 +1,10 @@
+# [1.0.0-alpha.229](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.228...v1.0.0-alpha.229) (2022-10-24)
+
+
+### Bug Fixes
+
+* **Card:** add interactive properties ([39604d7](https://github.com/securityscorecard/design-system/commit/39604d7ccc00b694d0454be5ccc7edcbb0010ecb))
+
 # [1.0.0-alpha.228](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.227...v1.0.0-alpha.228) (2022-10-17)
 
 
