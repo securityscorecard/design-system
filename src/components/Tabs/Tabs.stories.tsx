@@ -2,25 +2,20 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
 
-import { Center, Inline, Padbox, Stack } from '../layout';
+import { Inline, Stack } from '../layout';
 import { Tab, Tabs } from '.';
-import { ColorTypes } from '../../theme/colors.enums';
 import { TabsProps } from './Tabs.types';
 import { generateControl } from '../../utils/tests/storybook';
-import { TabSizes, TabVariants } from './Tabs.enums';
-import { SpaceSizes } from '../../theme';
-import { getColor } from '../../utils';
-import { Button } from '../Button';
+import { TabVariants } from './Tabs.enums';
+import { Icon } from '../Icon';
+import { Badge } from '../Badge';
+import { Heading, Paragraph } from '../typographyLegacy';
 
 export default {
   title: 'components/Tabs',
   component: Tabs,
   argTypes: {
-    size: {
-      ...generateControl('select', TabSizes),
-    },
     variant: {
       ...generateControl('select', TabVariants),
     },
@@ -28,188 +23,120 @@ export default {
   },
 } as Meta;
 
-function ContentA() {
-  return (
-    <section>
-      <h1>Invent</h1>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
-        nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
-        perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
-        numquam? Unde, facilis facere.
-      </p>
-    </section>
-  );
-}
-function ContentB() {
-  return (
-    <section>
-      <h1>Overview</h1>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
-        nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
-        perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
-        numquam? Unde, facilis facere.
-      </p>
-    </section>
-  );
-}
+const TabPanel = ({ title }) => (
+  <Stack gap="md">
+    <Heading size="h3">{title}</Heading>
+    <Paragraph>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
+      nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
+      perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
+      numquam? Unde, facilis facere.
+    </Paragraph>
+  </Stack>
+);
 
-export const Playground: Story<TabsProps> = (args) => {
-  const { selectedValue } = args;
-  return (
-    <Stack gap={SpaceSizes.lg}>
-      <Tabs {...args}>
-        <Tab value="inventory">Inventory</Tab>
-        <Tab value="overview">Overview</Tab>
-      </Tabs>
+const TabsTemplate: Story<TabsProps> = (args) => (
+  <Tabs {...args}>
+    <Tab value="overview">Overview</Tab>
+    <Tab value="inventory">
+      <Inline align="center" gap="sm">
+        <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
+        <span>Inventory</span>
+        <Badge count={3} variant="neutral" />
+      </Inline>
+    </Tab>
+    <Tab value="profile">Profile</Tab>
+  </Tabs>
+);
 
-      <main>
-        {selectedValue === 'inventory' && <ContentA />}
-        {selectedValue === 'overview' && <ContentB />}
-      </main>
-    </Stack>
-  );
+export const Playground: Story<TabsProps> = TabsTemplate.bind({});
+Playground.args = {
+  selectedValue: 'overview',
+  onSelectTab: action('onSelectTab'),
 };
-Playground.argTypes = {
-  selectedValue: {
-    control: { type: 'select' },
-    options: ['inventory', 'overview'],
-  },
-};
-Playground.args = { selectedValue: 'inventory' };
 Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const OnlyTabs: Story = () => (
-  <Tabs selectedValue="overview" onSelectTab={action('Select Tab')}>
-    <Tab value="inventory">Inventory</Tab>
-    <Tab color={ColorTypes.error700} value="overview">
+export const UnderlineTabs = TabsTemplate.bind({});
+UnderlineTabs.args = { ...Playground.args, variant: 'underline' };
+
+export const UnderlineTabsWithCustomColor: Story<TabsProps> = (args) => (
+  <Tabs {...args}>
+    <Tab color="error.700" value="overview">
       Overview
     </Tab>
+    <Tab value="inventory">
+      <Inline align="center" gap="sm">
+        <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
+        <span>Inventory</span>
+        <Badge count={3} variant="neutral" />
+      </Inline>
+    </Tab>
+    <Tab value="Profile">Profile</Tab>
   </Tabs>
 );
+UnderlineTabsWithCustomColor.args = Playground.args;
 
-export const StatefulTabs: Story = () => {
-  const [selected, setSelected] = useState<string | number>('inventory');
+export const TextTabs = TabsTemplate.bind({});
+TextTabs.args = { ...Playground.args, variant: 'text' };
+
+export const SegmentedTabs = TabsTemplate.bind({});
+SegmentedTabs.args = { ...Playground.args, variant: 'segmented' };
+
+export const SegmentedExpandedTabs = TabsTemplate.bind({});
+SegmentedExpandedTabs.args = { ...SegmentedTabs.args, isExpanded: true };
+
+export const StatefulTabs: Story<TabsProps> = (args) => {
+  const { selectedValue } = args;
+  const [currentTab, setCurrentTab] = useState(selectedValue);
+
   return (
-    <Stack gap={SpaceSizes.lg}>
-      <Tabs selectedValue={selected} onSelectTab={setSelected}>
-        <Tab value="inventory">Inventory</Tab>
-        <Tab value="overview">Overview</Tab>
-      </Tabs>
-
+    <Stack gap="lg">
+      <TabsTemplate
+        {...args}
+        selectedValue={currentTab}
+        onSelectTab={setCurrentTab}
+      />
       <main>
-        {selected === 'inventory' && <ContentA />}
-        {selected === 'overview' && <ContentB />}
+        <TabPanel title={currentTab} />
       </main>
     </Stack>
   );
 };
+StatefulTabs.args = Playground.args;
+StatefulTabs.parameters = {
+  screenshot: { skip: true },
+};
 
-export const RoutableTabs: Story = () => {
+export const RoutableTabs: Story<TabsProps> = (args) => {
   return (
-    <MemoryRouter>
-      <Route
-        component={({ match }) => (
-          <Tabs selectedValue={match.url}>
-            <Tab value="/inventory">Inventory</Tab>
-            <Tab value="/overview">Overview</Tab>
-          </Tabs>
-        )}
-        path="*"
-      />
+    <MemoryRouter initialEntries={['/overview']}>
+      <Stack gap="lg">
+        <Route
+          component={({ match }) => (
+            <Tabs {...args} selectedValue={match.url}>
+              <Tab value="/overview">Overview</Tab>
+              <Tab value="/inventory">Inventory</Tab>
+            </Tabs>
+          )}
+          path="*"
+        />
 
-      <Switch>
-        <Route component={ContentA} path="/inventory" />
-        <Route component={ContentB} path="/overview" />
-      </Switch>
+        <Switch>
+          <Route
+            path="/inventory"
+            render={() => <TabPanel title="inventory" />}
+          />
+          <Route
+            path="/overview"
+            render={() => <TabPanel title="overview" />}
+          />
+        </Switch>
+      </Stack>
     </MemoryRouter>
   );
 };
-
-export const UnderlineTabs: Story = () => (
-  <Stack gap={SpaceSizes.lg}>
-    <Tabs selectedValue="one" size="lg" onSelectTab={action('Select Tab')}>
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-    <Tabs selectedValue="one" size="md" onSelectTab={action('Select Tab')}>
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-    <Tabs selectedValue="one" size="sm" onSelectTab={action('Select Tab')}>
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-  </Stack>
-);
-
-export const TextTabs: Story = () => (
-  <Stack gap={SpaceSizes.lg}>
-    <Tabs
-      selectedValue="one"
-      size="lg"
-      variant="text"
-      onSelectTab={action('Select Tab')}
-    >
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-    <Tabs
-      selectedValue="one"
-      size="md"
-      variant="text"
-      onSelectTab={action('Select Tab')}
-    >
-      <Tab value="one">One</Tab>
-      <Tab value="two">Two</Tab>
-      <Tab value="three">Three</Tab>
-    </Tabs>
-  </Stack>
-);
-
-export const SegmentedTabs: Story = () => (
-  <Stack gap={SpaceSizes.lg}>
-    <Inline gap="md">
-      <Tabs
-        margin="none"
-        selectedValue="one"
-        variant="segmented"
-        onSelectTab={action('Select Tab')}
-      >
-        <Tab value="one">One</Tab>
-        <Tab value="two">Two</Tab>
-        <Tab value="three">Three</Tab>
-      </Tabs>
-      <Button>Comparison</Button>
-    </Inline>
-  </Stack>
-);
-
-const BlockWrapper = styled(Padbox)`
-  background-color: ${getColor('neutral.200')};
-`;
-export const ExpandedTabs: Story = () => (
-  <Center maxWidth={500}>
-    <BlockWrapper paddingSize="md">
-      <Tabs
-        margin="none"
-        selectedValue="one"
-        size="lg"
-        variant="segmented"
-        isExpanded
-        onSelectTab={action('Select Tab')}
-      >
-        <Tab value="one">One</Tab>
-        <Tab value="two">Two</Tab>
-        <Tab value="three">Three</Tab>
-      </Tabs>
-    </BlockWrapper>
-  </Center>
-);
+RoutableTabs.parameters = {
+  screenshot: { skip: true },
+};

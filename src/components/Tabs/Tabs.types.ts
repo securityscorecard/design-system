@@ -1,10 +1,7 @@
 import React from 'react';
 
 import { SpacingProps } from '../../types/spacing.types';
-import {
-  BaseLabelProps,
-  Sizes,
-} from '../_internal/BaseTabs/BaseTabLabel.types';
+import { BaseLabelProps } from '../_internal/BaseTabs/BaseTabLabel.types';
 import { PadboxProps } from '../layout/Padbox/Padbox';
 
 export interface LabelProps extends BaseLabelProps, PadboxProps {}
@@ -16,12 +13,10 @@ export interface TabProps {
   isExpanded?: boolean;
   onClick?: (selectedValue: React.ReactText) => void;
   value: React.ReactText;
-  size?: Sizes;
   variant?: LabelProps['$variant'];
 }
 
 export interface TabsProps extends SpacingProps {
-  size?: TabProps['size'];
   variant?: LabelProps['$variant'];
   selectedValue: React.ReactText;
   selectedPatternMatcher?: (

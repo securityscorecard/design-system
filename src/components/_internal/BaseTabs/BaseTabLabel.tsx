@@ -1,98 +1,63 @@
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import { setLightness } from 'polished';
 import { __, includes, pipe, subtract } from 'ramda';
 
 import {
   getColor,
-  getFontSize,
   getFontWeight,
-  getLineHeight,
   getRadii,
-  getSpace,
   getToken,
   pxToRem,
 } from '../../../utils';
-import { SpaceSizes } from '../../../theme';
-import { BaseLabelProps, Sizes } from './BaseTabLabel.types';
-import { BaseTabSizes, BaseTabVariants } from './BaseTabs.enums';
+import { BaseLabelProps } from './BaseTabLabel.types';
+import { BaseTabVariants } from './BaseTabs.enums';
 import { Padbox } from '../../layout/Padbox';
 
-const largeTextSize = css`
-  font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('md')};
-`;
-
-const mediumTextSize = css`
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
-`;
-
-const largeUnderlineSize = css`
-  font-size: ${getFontSize('h2')};
-  line-height: ${getLineHeight('xxl')};
-`;
-
-const mediumUnderlineSize = css`
-  font-size: ${getFontSize('h3')};
-  line-height: ${getLineHeight('xl')};
-`;
-
-const smallUnderlineSize = css`
-  font-size: ${getFontSize('h5')};
-  line-height: ${getLineHeight('lg')};
-`;
-
-const underlineSizes = {
-  [BaseTabSizes.lg]: largeUnderlineSize,
-  [BaseTabSizes.md]: mediumUnderlineSize,
-  [BaseTabSizes.sm]: smallUnderlineSize,
-};
-
-const textSizes = {
-  [BaseTabSizes.lg]: largeTextSize,
-  [BaseTabSizes.md]: mediumTextSize,
-};
-
-const commonHoverTab = css<BaseLabelProps>`
-  ${({ $isSelected, $color, theme }) =>
-    $color && $isSelected
-      ? lighten(0.1, getColor($color, { theme }))
-      : getColor('primary.600')}
-`;
-
-const underlineTab = css<BaseLabelProps & { size: Sizes }>`
-  ${({ size }) => underlineSizes[size] || underlineSizes[BaseTabSizes.md]};
-  padding-bottom: ${getSpace(SpaceSizes.xxs)};
+const underlineTab = css<BaseLabelProps>`
+  font-weight: ${({ $isSelected }) =>
+    $isSelected ? getFontWeight('semibold') : getFontWeight('regular')};
+  line-height: 1.5rem;
+  color: ${getColor('neutral.900')};
   border-bottom: 2px solid
     ${({ $isSelected, $color }) =>
       $isSelected
         ? $color
           ? getColor($color)
-          : getColor('primary.500')
-        : getColor('neutral.500')};
+          : getToken('color-action-primary')
+        : getColor('neutral.400')};
 
-  &:hover {
-    border-bottom-color: ${commonHoverTab};
-  }
-
-  &,
   &:hover {
     color: ${getColor('neutral.900')};
+    border-bottom-color: ${({ $color, theme }) =>
+      $color
+        ? setLightness(0.85, getColor($color, { theme }))
+        : getToken('color-action-primary-focus')};
+  }
+
+  &:focus-visible {
+    border-bottom-color: ${({ $color }) =>
+      $color ? getColor($color) : getToken('color-action-primary')};
+    font-weight: ${getFontWeight('semibold')};
+    background-color: ${({ $color, theme }) =>
+      $color
+        ? setLightness(0.95, getColor($color, { theme }))
+        : getToken('color-action-background-primary-focus')};
   }
 `;
 
-const textTab = css<BaseLabelProps & { size: Sizes }>`
-  ${({ size }) => textSizes[size] || textSizes[BaseTabSizes.md]};
-
-  color: ${({ $isSelected, $color }) =>
+const textTab = css<BaseLabelProps>`
+  line-height: ${getToken('font-action-lineheight')};
+  font-weight: ${getFontWeight('semibold')};
+  color: ${({ $isSelected }) =>
     $isSelected
-      ? $color
-        ? getColor($color)
-        : getColor('neutral.900')
-      : getColor('primary.500')};
+      ? getColor('neutral.900')
+      : getToken('color-action-link-primary')};
 
   &:hover {
-    color: ${commonHoverTab};
+    color: ${getToken('color-action-link-primary-hover')};
+  }
+  &:focus-visible {
+    background-color: ${getToken('color-action-link-background-primary-focus')};
   }
 `;
 
@@ -101,9 +66,7 @@ export const segmentedTabSelected = css`
   border: 1px solid ${getColor('primary.200')};
 `;
 
-const segmentedTab = css<BaseLabelProps & { size: Sizes }>`
-  font-size: ${getToken('font-action-size')};
-  font-weight: ${getFontWeight('regular')};
+const segmentedTab = css<BaseLabelProps>`
   line-height: ${getToken('font-action-lineheight')};
 
   height: ${({ theme }) =>
@@ -133,9 +96,7 @@ const tabVariants = {
   [BaseTabVariants.segmented]: segmentedTab,
 };
 
-const BaseTabLabel = styled(Padbox).withConfig<
-  BaseLabelProps & { size: Sizes }
->({
+const BaseTabLabel = styled(Padbox).withConfig<BaseLabelProps>({
   shouldForwardProp: (property) =>
     !includes(property, ['paddingType', 'paddingSize']),
 })`
@@ -144,7 +105,8 @@ const BaseTabLabel = styled(Padbox).withConfig<
   outline: none;
   text-decoration: none;
   cursor: pointer;
-  font-weight: ${getFontWeight('semibold')};
+
+  font-size: ${getToken('font-action-size')};
 
   ${({ $isExpanded }) =>
     $isExpanded &&
