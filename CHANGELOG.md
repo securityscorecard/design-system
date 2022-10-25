@@ -1,3 +1,11 @@
+# [1.0.0-alpha.230](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.229...v1.0.0-alpha.230) (2022-10-25)
+
+
+### Features
+
+* **Tabs:** remove 'size' property ([114c3e5](https://github.com/securityscorecard/design-system/commit/114c3e5d15dd218b6731743ad21109a0fa5e50a3))
+* **Tabs:** update underline styling ([8e535ec](https://github.com/securityscorecard/design-system/commit/8e535ec20c652380f5e95b506d5b8059b26b912d))
+
 # [1.0.0-alpha.229](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.228...v1.0.0-alpha.229) (2022-10-24)
 
 
