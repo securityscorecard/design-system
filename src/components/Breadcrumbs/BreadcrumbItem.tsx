@@ -35,21 +35,18 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   children,
   isSelected = false,
   ...props
-}) => (
-  <li>
-    {isSelected ? (
-      <Text
-        aria-current="page"
-        size={TextSizes.md}
-        variant={TextEnums.TextVariants.secondary}
-      >
-        {children}
-      </Text>
-    ) : (
-      <BreadcrumbLink {...props}>{children}</BreadcrumbLink>
-    )}
-  </li>
-);
+}) =>
+  isSelected ? (
+    <Text
+      aria-current="page"
+      size={TextSizes.md}
+      variant={TextEnums.TextVariants.secondary}
+    >
+      {children}
+    </Text>
+  ) : (
+    <BreadcrumbLink {...props}>{children}</BreadcrumbLink>
+  );
 
 BreadcrumbItem.propTypes = {
   children: PropTypes.node.isRequired,
