@@ -1,3 +1,10 @@
+# [1.0.0-alpha.231](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.230...v1.0.0-alpha.231) (2022-10-25)
+
+
+### Bug Fixes
+
+* fix breadcrumbs layout ([8051c80](https://github.com/securityscorecard/design-system/commit/8051c80a82849a41828cf355556dad0be220a62d))
+
 # [1.0.0-alpha.230](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.229...v1.0.0-alpha.230) (2022-10-25)
 
 
