@@ -58,7 +58,7 @@ export const actionsColumn = {
 
     return (
       <Inline justify="center" stretch="start">
-        <DropdownMenu actions={actions} paneWidth={140} placement="bottom-end">
+        <DropdownMenu actions={actions} paneWidth="auto" placement="bottom-end">
           {(isActive) => (
             <RowActionsButton aria-label="Row Actions" isActive={isActive}>
               <SVGIcon
