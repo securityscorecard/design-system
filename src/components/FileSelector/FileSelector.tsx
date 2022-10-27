@@ -177,6 +177,7 @@ const FileSelector = ({
             isDisabled,
             isExpanded: size === FileSelectorSizes.fill,
             variant: ButtonVariants.outline,
+            type: 'button',
           })}
         >
           {buttonLabel}
@@ -210,6 +211,7 @@ const FileSelector = ({
           <ExtendableButton
             iconName={SSCIconNames.upload}
             isDisabled={isDisabled}
+            type="button"
             variant={ButtonVariants.outline}
           >
             {buttonLabel}
