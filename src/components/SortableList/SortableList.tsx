@@ -24,6 +24,7 @@ import { SpaceSizes } from '../../theme';
 import SortableItem from './SortableItem';
 import { SortableListProps } from './SortableList.types';
 import { pxToRem } from '../../utils';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const SortableListRoot = styled.div<{
   $maxHeight: SortableListProps['maxHeight'];
@@ -67,7 +68,7 @@ const SortableList: React.FC<SortableListProps> = ({
   };
 
   return (
-    <SortableListRoot $maxHeight={maxHeight}>
+    <SortableListRoot $maxHeight={maxHeight} className={CLX_COMPONENT}>
       <DndContext
         collisionDetection={closestCenter}
         modifiers={[restrictToVerticalAxis]}

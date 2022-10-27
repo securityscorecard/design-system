@@ -11,6 +11,7 @@ import { H4 } from '../typographyLegacy';
 import { ControlDropdownProps } from './ControlDropdown.types';
 import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const ControlDropdown: React.FC<ControlDropdownProps> = ({
   children,
@@ -36,6 +37,7 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
   }
   return (
     <ControlledDropdown
+      className={CLX_COMPONENT}
       innerPaddingSize={SpaceSizes.none}
       isOpen={isOpen}
       maxPaneWidth={width}

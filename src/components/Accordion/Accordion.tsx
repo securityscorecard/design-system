@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
+import cls from 'classnames';
 
 import { Stack } from '../layout';
 import {
@@ -10,6 +11,7 @@ import {
   AccordionProps,
 } from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
   filter(propEq('isOpen', true)),
@@ -20,6 +22,7 @@ const Accordion: React.FC<AccordionProps> = ({
   isCollapsedOnOpen = true,
   items,
   isCard = true,
+  className,
   ...props
 }) => {
   const [openIds, setOpenIds] = useState(pickOpen(items));
@@ -38,7 +41,7 @@ const Accordion: React.FC<AccordionProps> = ({
   );
 
   return (
-    <Stack {...props}>
+    <Stack {...props} className={cls(CLX_COMPONENT, className)}>
       {items.map(({ title, id, content }) => (
         <AccordionCollapsible
           key={`accordion-item-${id}`}
@@ -58,6 +61,7 @@ const Accordion: React.FC<AccordionProps> = ({
 Accordion.propTypes = {
   items: PropTypes.arrayOf(AccordionItemPropType).isRequired,
   isCollapsedOnOpen: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Accordion;

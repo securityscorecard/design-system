@@ -13,4 +13,5 @@ export interface BreadcrumbsProps {
    * The list of breadcrumb items
    */
   children: React.ReactNode[];
+  className?: string;
 }

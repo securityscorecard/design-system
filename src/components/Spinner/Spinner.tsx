@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
 import { isString } from 'ramda-adjunct';
 import { transparentize } from 'polished';
+import cls from 'classnames';
 
 import { getColor, pxToRem } from '../../utils';
 import { SpinnerProps } from './Spinner.types';
 import { ColorTypes } from '../../theme';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const spin = keyframes`
   from {
@@ -22,7 +24,9 @@ const getHorizontalMargin = pipe(
   unless(isString, pxToRem),
 );
 
-const Spinner = styled.div<SpinnerProps>`
+const Spinner = styled.div.attrs({
+  className: cls(CLX_COMPONENT, 'spinner'),
+})<SpinnerProps>`
   margin-top: ${({ verticalMargin }) => pxToRem(verticalMargin)};
   margin-bottom: ${({ verticalMargin }) => pxToRem(verticalMargin)};
   margin-left: ${getHorizontalMargin};
@@ -55,7 +59,6 @@ Spinner.propTypes = {
 };
 
 Spinner.defaultProps = {
-  className: 'spinner',
   dark: false,
   width: 24,
   height: 24,

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
 import { prop } from 'ramda';
+import cls from 'classnames';
 
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
@@ -11,6 +12,7 @@ import {
   AlignItemsPropType,
   JustifyContentPropType,
 } from '../../../types/flex.types';
+import { CLX_LAYOUT } from '../../../theme/constants';
 
 interface ClusterWrapperProps {
   $overflow: 'hidden' | 'visible';
@@ -19,6 +21,7 @@ interface ClusterParentProps {
   $gap?: SpaceSize;
   $align?: Property.AlignItems;
   $justify?: Property.JustifyContent;
+  className?: string;
 }
 
 export interface ClusterProps extends React.HTMLAttributes<HTMLElement> {
@@ -46,6 +49,7 @@ export interface ClusterProps extends React.HTMLAttributes<HTMLElement> {
    * Tag or component reference for parent element
    */
   parentEl?: ReactComponentLike;
+  className?: string;
 }
 
 const ClusterWrapper = styled.div<ClusterWrapperProps>`
@@ -79,7 +83,11 @@ const Cluster: React.FC<ClusterProps> = ({
   wrapperOverflow = 'hidden',
   ...props
 }) => (
-  <ClusterWrapper $overflow={wrapperOverflow} as={wrapperEl}>
+  <ClusterWrapper
+    $overflow={wrapperOverflow}
+    as={wrapperEl}
+    className={cls(CLX_LAYOUT, props?.className)}
+  >
     <ClusterParent
       $align={align}
       $gap={gap}
@@ -98,6 +106,7 @@ Cluster.propTypes = {
   justify: JustifyContentPropType,
   wrapperEl: PropTypes.elementType,
   parentEl: PropTypes.elementType,
+  className: PropTypes.string,
 };
 
 Cluster.defaultProps = {

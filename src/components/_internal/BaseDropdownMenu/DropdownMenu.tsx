@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import {
   AbsoluteLinkActionKind,
@@ -15,6 +16,7 @@ import { Dropdown } from '../../Dropdown';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Text, TextEnums } from '../../typographyLegacy';
 import { Padbox, PadboxEnums } from '../../layout';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 export const List = styled.ul`
   list-style: none;
@@ -58,7 +60,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     showPane: noop,
   });
   const trigger: React.ReactElement = (
-    <span className={className}>
+    <span className={cls(CLX_COMPONENT, className)}>
       {isFunction(children) ? children(isActive) : children}
     </span>
   );

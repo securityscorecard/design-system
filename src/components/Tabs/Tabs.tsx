@@ -7,6 +7,7 @@ import { TabsProps } from './Tabs.types';
 import { TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme/space.enums';
 import { BaseTabsWrapper } from '../_internal/BaseTabs/BaseTabsWrapper';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const Tabs: React.FC<TabsProps> = ({
   selectedValue,
@@ -19,6 +20,7 @@ const Tabs: React.FC<TabsProps> = ({
   <BaseTabsWrapper
     $isExpanded={isExpanded}
     $variant={variant}
+    className={CLX_COMPONENT}
     paddingSize={
       variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
     }

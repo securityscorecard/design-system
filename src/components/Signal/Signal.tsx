@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNilOrEmpty } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { colors } from '../../theme/colors';
 import { SignalProps } from './Signal.types';
 import { SignalKinds } from './Signal.enums';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const kinds = {
   [SignalKinds.critical]: {
@@ -61,6 +63,7 @@ const Signal: React.FC<SignalProps> = ({
   kind,
   size = 16,
   title = '',
+  className,
   ...props
 }) => {
   if (isNilOrEmpty(kind)) return null;
@@ -69,6 +72,7 @@ const Signal: React.FC<SignalProps> = ({
 
   return (
     <svg
+      className={cls(CLX_COMPONENT, className)}
       height={size}
       viewBox="0 0 16 16"
       width={size}
@@ -95,6 +99,7 @@ Signal.propTypes = {
   kind: PropTypes.oneOf(Object.values(SignalKinds)).isRequired,
   size: PropTypes.number,
   title: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Signal;

@@ -6,6 +6,7 @@ import { path, pipe } from 'ramda';
 
 import { pxToRem } from '../../../utils';
 import { ColProps, Cols } from './Col.types';
+import { CLX_LAYOUT } from '../../../theme/constants';
 
 const getColWidth = (cols: Cols): { flex: string } | { width: number } => {
   if (cols === 'auto') return { flex: '1 1 auto' };
@@ -25,7 +26,11 @@ const StyledCol = styled(Box)`
 `;
 
 const Col: React.FC<ColProps> = ({ children, cols, offset }) => (
-  <StyledCol ml={`${(100 / 12) * offset}%`} {...getColWidth(cols)}>
+  <StyledCol
+    ml={`${(100 / 12) * offset}%`}
+    {...getColWidth(cols)}
+    className={CLX_LAYOUT}
+  >
     {children}
   </StyledCol>
 );

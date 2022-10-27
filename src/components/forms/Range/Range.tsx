@@ -2,11 +2,13 @@ import React, { forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { getFormStyle, pxToRem } from '../../../utils';
 import { Text } from '../../typographyLegacy';
 import { Inline, Stack } from '../../layout';
 import { RangeInputProps, RangeProps } from './Range.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const RangeWrapper = styled.div`
   display: flex;
@@ -161,6 +163,7 @@ const Range = forwardRef<HTMLInputElement, RangeProps>(
       step,
       defaultValue,
       onChange = noop,
+      className,
       ...props
     },
     ref,
@@ -175,7 +178,7 @@ const Range = forwardRef<HTMLInputElement, RangeProps>(
     };
 
     return (
-      <RangeWrapper>
+      <RangeWrapper className={cls(CLX_COMPONENT, className)}>
         <Inline align="flex-start" gap="sm">
           {hasLabels && (
             <RangeLabel variant={isDisabled ? 'secondary' : 'primary'}>
@@ -228,6 +231,7 @@ Range.propTypes = {
   isDisabled: PropTypes.bool,
   hasLabels: PropTypes.bool,
   isProgressRight: PropTypes.bool,
+  className: PropTypes.string,
   onChange: PropTypes.func,
 };
 

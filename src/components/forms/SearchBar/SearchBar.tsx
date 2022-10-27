@@ -7,6 +7,7 @@ import {
 } from 'ramda-adjunct';
 import PropTypes from 'prop-types';
 import { pipe } from 'ramda';
+import cls from 'classnames';
 
 import { getColor, getFormStyle, getSpace, pxToRem } from '../../../utils';
 import { Input } from '../Input';
@@ -16,6 +17,7 @@ import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
 import { useField } from './useField';
 import { SearchBarProps } from './SearchBar.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const SearchBarRoot = styled.div`
   position: relative;
@@ -83,6 +85,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       isInvalid = false,
       isSearching: isSearchingFromProps = false,
       shouldTriggerSearchOnMount = false,
+      className,
       ...rest
     },
     ref,
@@ -153,7 +156,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     };
 
     return (
-      <SearchBarRoot>
+      <SearchBarRoot className={cls(CLX_COMPONENT, className)}>
         <SearchInput
           {...rest}
           ref={ref}
@@ -203,6 +206,7 @@ SearchBar.propTypes = {
   isSearching: PropTypes.bool,
   shouldTriggerSearchOnMount: PropTypes.bool,
   placeholder: PropTypes.string,
+  className: PropTypes.string,
   onChange: PropTypes.func,
   onClear: PropTypes.func,
   onSearch: PropTypes.func,

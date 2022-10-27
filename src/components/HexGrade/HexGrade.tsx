@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { defaultTo, path, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import styled from 'styled-components';
+import cls from 'classnames';
 
 import { colors } from '../../theme/colors';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { createMarginSpacing } from '../../utils';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import { HexGradeProps } from './HexGrade.types';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const grades = {
   [HexGradeGrades.unknown]: {
@@ -58,6 +60,7 @@ const HexGrade: React.FC<HexGradeProps> = ({
   size = 64,
   isInversed = false,
   margin,
+  className,
   ...props
 }) => {
   const isCSVariant = variant === HexGradeVariants.cs;
@@ -98,6 +101,7 @@ const HexGrade: React.FC<HexGradeProps> = ({
 
   return (
     <StyledSVG
+      className={cls(CLX_COMPONENT, className)}
       height={size}
       margin={margin}
       viewBox="0 0 64 64"
@@ -123,6 +127,7 @@ HexGrade.propTypes = {
   size: PropTypes.number,
   isInversed: PropTypes.bool,
   margin: SpacingSizeValuePropType,
+  className: PropTypes.string,
 };
 
 export default HexGrade;

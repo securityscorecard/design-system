@@ -61,4 +61,5 @@ export interface PillProps extends Partial<PillWrapperProps> {
    * Element rendered before the label.
    */
   adornment?: React.ReactNode;
+  className?: string;
 }

@@ -14,6 +14,7 @@ import { BaseSingleDatePicker } from '../BaseSingleDatePicker';
 import { Inline } from '../../layout/Inline';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { StretchEnum } from '../../layout/Inline/Inline.enums';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const StyledDatePicker = styled.div`
   ${dateRangePickerStyles}
@@ -50,7 +51,7 @@ const BaseDateRangePicker: React.FC<BaseDateRangePickerProps> = ({
   };
 
   return (
-    <StyledDatePicker>
+    <StyledDatePicker className={CLX_COMPONENT}>
       <Inline gap={SpaceSizes.sm} stretch={StretchEnum.all}>
         <BaseSingleDatePicker
           endDate={endDate}

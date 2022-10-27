@@ -29,6 +29,7 @@ import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
 import { TableProps } from './Table.types';
 import { RowActionKindsPropType } from '../_internal/BaseTable/BaseTable.types';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const useIsMountRender = (): boolean => {
   const isMountRef = useRef(true);
@@ -147,7 +148,7 @@ function Table<D extends Record<string, unknown>>({
   );
 
   return (
-    <TableWrapper>
+    <TableWrapper className={CLX_COMPONENT}>
       <BaseTableAndLoadingOverlayContainer>
         <BaseTableContainer>
           <StyledBaseTable {...getTableProps()}>

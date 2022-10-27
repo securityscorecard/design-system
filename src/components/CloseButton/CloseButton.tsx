@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
+import cls from 'classnames';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
@@ -12,6 +13,7 @@ import {
   CloseButtonProps,
   CloseButtonWrapperProps,
 } from './CloseButton.types';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const AlignmentWrapper = styled.div<AlignmentWrapperProps>`
   && {
@@ -63,11 +65,15 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
       ariaLabel = 'Close',
       marginCompensation = SpaceSizes.sm,
       isInverted = false,
+      className,
       ...props
     },
     ref,
   ) => (
-    <AlignmentWrapper $marginCompensation={marginCompensation}>
+    <AlignmentWrapper
+      $marginCompensation={marginCompensation}
+      className={cls(CLX_COMPONENT, className)}
+    >
       <CloseButtonWrapper
         ref={ref}
         $isInverted={isInverted}
@@ -88,6 +94,7 @@ CloseButton.propTypes = {
   marginCompensation: PropTypes.oneOf(Object.values(SpaceSizes)),
   ariaLabel: PropTypes.string,
   isInverted: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default CloseButton;

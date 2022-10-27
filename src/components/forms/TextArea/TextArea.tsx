@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
+import cls from 'classnames';
 
 import {
   createPadding,
@@ -19,6 +20,7 @@ import { TextAreaProps } from './TextArea.types';
 import { useAutosize } from './hooks/useAutosize';
 import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
 import { SpaceSizes } from '../../../theme';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const TextAreaWrapper = styled.div<{ height: string }>`
   position: relative;
@@ -127,7 +129,11 @@ const TextArea: React.FC<
   const isFieldInvalid = isInvalid || currentValueLength > maxLength;
 
   return (
-    <TextAreaWrapper className={className} height={parentHeight} style={style}>
+    <TextAreaWrapper
+      className={cls(CLX_COMPONENT, className)}
+      height={parentHeight}
+      style={style}
+    >
       <StyledTextArea
         ref={textAreaRef}
         disabled={isDisabled}

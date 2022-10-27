@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import { Property } from 'csstype';
+import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { AlignItemsPropType } from '../../../types/flex.types';
+import { CLX_LAYOUT } from '../../../theme/constants';
 
 export interface StackProps {
   /**
@@ -30,9 +32,13 @@ export interface StackProps {
    * Should apply gap recursively (on nested levels)
    */
   isRecursive?: boolean;
+  className?: string;
 }
 
-const Stack = styled.div<StackProps>`
+const Stack = styled.div.attrs((props) => ({
+  ...props,
+  className: cls(CLX_LAYOUT, props?.className),
+}))<StackProps>`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -70,6 +76,7 @@ Stack.propTypes = {
   justify: AlignItemsPropType,
   splitAt: PropTypes.number,
   isRecursive: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Stack.defaultProps = {

@@ -20,6 +20,7 @@ import { TableConfig, TableConfigPropType } from './Table/Table.types';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const StyledDatatable = styled(Padbox)`
   display: flex;
@@ -118,7 +119,7 @@ function Datatable<D extends Record<string, unknown>>({
   });
 
   return (
-    <StyledDatatable>
+    <StyledDatatable className={CLX_COMPONENT}>
       {isControlsEnabled && (
         <ControlsModule<D>
           {...restControlsConfig}
