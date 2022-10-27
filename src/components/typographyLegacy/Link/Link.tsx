@@ -13,7 +13,7 @@ import {
   LinkFocusStyles,
   LinkHoverStyles,
 } from '../../_internal/BaseLink';
-import { CLX_COMPONENT } from '../../../theme/constants';
+import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const LinkRoot = styled.a`
   ${LinkBaseStyles};
@@ -62,7 +62,7 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
     <LinkRoot
       $color={color}
       as={domTag}
-      className={cls(CLX_COMPONENT, className)}
+      className={cls(CLX_TYPOGRAPHY, className)}
       href={href}
       to={to}
       onClick={onClick}

@@ -14,7 +14,7 @@ import {
 } from '../../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
-import { CLX_COMPONENT } from '../../../theme/constants';
+import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const primaryVariant = css`
   color: ${getColor('neutral.900')};
@@ -93,7 +93,7 @@ const Heading: React.FC<
   const additionalProps = {
     size,
     variant,
-    className: cls(CLX_COMPONENT, className),
+    className: cls(CLX_TYPOGRAPHY, className),
     ...props,
   };
 

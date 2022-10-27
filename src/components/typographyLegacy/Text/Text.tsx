@@ -11,7 +11,7 @@ import {
 } from '../../../utils';
 import { TextSizes, TextVariants } from './Text.enums';
 import { CodeProps, StrongProps, TextProps } from './Text.types';
-import { CLX_COMPONENT } from '../../../theme/constants';
+import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const largeSize = css`
   font-size: ${getFontSize('lg')};
@@ -67,7 +67,7 @@ const variants = {
 
 const Text = styled.span.attrs((props) => ({
   ...props,
-  className: cls(CLX_COMPONENT, props?.className),
+  className: cls(CLX_TYPOGRAPHY, props?.className),
 }))<TextProps>`
   font-family: inherit;
   font-weight: ${({ isBold, theme }) =>
