@@ -19,6 +19,13 @@ stats
 !.yarn/sdks
 !.yarn/versions
 
+visual-regressions/.yarn/*
+!visual-regressions/.yarn/patches
+!visual-regressions/.yarn/plugins
+!visual-regressions/.yarn/releases
+!visual-regressions/.yarn/sdks
+!visual-regressions/.yarn/versions
+
 # Storybook static build
 storybook-static
 
