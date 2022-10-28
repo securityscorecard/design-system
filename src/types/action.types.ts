@@ -11,6 +11,7 @@ export type ActionBase<
   label: React.ReactNode;
   name: string;
   onClick?: (...args: OnClickArgs) => OnClickReturnType;
+  tooltip?: React.ReactNode;
 };
 
 export const ActionBasePropType = {
@@ -21,7 +22,8 @@ export const ActionBasePropType = {
 export type HandlerActionKind<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
-> = Required<ActionBase<OnClickArgs, OnClickReturnType>>;
+> = ActionBase<OnClickArgs, OnClickReturnType> &
+  Required<Pick<ActionBase<OnClickArgs>, 'onClick'>>;
 
 export const HandlerActionKindPropType = PropTypes.exact({
   ...ActionBasePropType,
