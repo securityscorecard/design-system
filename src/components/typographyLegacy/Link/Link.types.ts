@@ -8,4 +8,5 @@ export interface LinkProps {
   href?: string;
   to?: To;
   color?: Colors;
+  className?: string;
 }

@@ -8,6 +8,7 @@ import { Paragraph } from '../../typographyLegacy';
 import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { MessageVariants } from './Message.enums';
 import { MessageProps } from './Message.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const MessageContainer = styled.div`
   padding-top: ${getSpace(SpaceSizes.sm)};
@@ -22,7 +23,7 @@ const Message: React.FC<MessageProps> = ({
   children,
   variant = MessageVariants.note,
 }) => (
-  <MessageContainer>
+  <MessageContainer className={CLX_COMPONENT}>
     <Paragraph size={TextSizes.md} variant={variant}>
       {children}
     </Paragraph>

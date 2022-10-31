@@ -12,5 +12,6 @@ export interface DrawerProps {
   size?: Sizes;
   adornment?: React.ReactNode;
   hasBackdrop?: boolean;
+  className?: string;
   [key: string]: unknown;
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { add, identity, memoizeWith, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
@@ -10,6 +11,7 @@ import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const CheckboxWrapper = styled.div`
   display: flex;
@@ -147,7 +149,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const hasLabel = isNotUndefined(label);
 
     return (
-      <CheckboxWrapper className={className}>
+      <CheckboxWrapper className={cls(CLX_COMPONENT, className)}>
         <CheckboxInput
           ref={ref}
           disabled={isDisabled}

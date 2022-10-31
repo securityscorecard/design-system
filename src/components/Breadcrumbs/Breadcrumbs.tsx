@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { slice } from 'ramda';
 import styled from 'styled-components';
 import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { BreadcrumbsProps } from './Breadcrumbs.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -12,6 +13,7 @@ import { ActionKinds } from '../../types/action.types';
 import { getColor, getFontSize } from '../../utils';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const IconWrapper = styled.div`
   display: flex;
@@ -89,7 +91,11 @@ const renderItemsBeforeAndAfter = (
   ];
 };
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ children, ...props }) => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   const allItems = React.Children.map(children, (breadcrumbItem) => {
     if (!React.isValidElement(breadcrumbItem)) {
       return null;
@@ -125,7 +131,10 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ children, ...props }) => {
   );
 
   return (
-    <BreadcrumbsWrapper aria-label="Breadcrumb">
+    <BreadcrumbsWrapper
+      aria-label="Breadcrumb"
+      className={cls(CLX_COMPONENT, className)}
+    >
       <Inline align="center" as="ol" gap={SpaceSizes.xs} justify="center">
         {insertSeparators(
           maxItems && allItems.length <= maxItems
@@ -139,6 +148,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ children, ...props }) => {
 
 Breadcrumbs.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
+  className: PropTypes.string,
 };
 
 export default Breadcrumbs;

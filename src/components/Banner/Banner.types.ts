@@ -22,4 +22,5 @@ export type BannerProps = BaseBannerProps & {
   __isLast?: boolean;
   __current?: number;
   __total?: number;
+  className?: string;
 };

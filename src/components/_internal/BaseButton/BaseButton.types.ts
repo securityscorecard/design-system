@@ -1,5 +1,6 @@
 import React from 'react';
 import type { To } from 'history';
+import { DefaultTheme } from 'styled-components';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
 import { Types as IconTypes, SSCIcons } from '../../Icon/Icon.types';
@@ -35,6 +36,8 @@ export interface BaseButtonProps
 
 export interface BaseStyledButtonProps extends PadboxProps {
   disabled?: boolean;
+  theme: DefaultTheme;
+  className?: string;
   $hasOnlyIcon?: boolean;
   $color: BaseButtonProps['color'];
   $isExpanded: BaseButtonProps['isExpanded'];

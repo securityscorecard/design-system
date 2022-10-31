@@ -32,6 +32,7 @@ export interface AccordionProps {
    * Is accordion item to be wrapped in shadowed box when open
    */
   isCard?: boolean;
+  className?: string;
 }
 
 export const AccordionItemIdPropType = PropTypes.oneOfType([

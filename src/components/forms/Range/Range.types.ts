@@ -31,6 +31,7 @@ export interface RangeProps
    * The step size of the input
    */
   step?: number;
+  className?: string;
 }
 export interface RangeInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

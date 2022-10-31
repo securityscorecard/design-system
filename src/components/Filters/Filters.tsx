@@ -34,6 +34,7 @@ import { BottomBar } from './BottomBar';
 import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
 import { Operators } from './Filters.enums';
 import { SpaceSizes } from '../../theme';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const generateId = ({ operator, field, condition }, index) =>
   `${operator}-${field}-${condition}-${index}`;
@@ -320,7 +321,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <FiltersBase data-testid="filters">
+    <FiltersBase className={CLX_COMPONENT} data-testid="filters">
       <Stack gap={SpaceSizes.md}>
         <Stack gap={SpaceSizes.sm}>
           {filtersValues.map((props, index) => (

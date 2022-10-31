@@ -14,6 +14,7 @@ import {
   pxToRem,
 } from '../../utils';
 import { SpaceSizes } from '../../theme';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const BadgeNeutral = css`
   background-color: ${getColor('neutral.300')};
@@ -74,7 +75,7 @@ const Badge: React.FC<BadgeProps> = ({
   size = BadgeSizes.md,
   variant = BadgeVariants.error,
 }) => (
-  <BadgeElement $size={size} $variant={variant}>
+  <BadgeElement $size={size} $variant={variant} className={CLX_COMPONENT}>
     {normalizeCount(count)}
   </BadgeElement>
 );

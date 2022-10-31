@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { getSpace, pxToRem } from '../../../utils';
 import { SpaceSize } from '../../../theme/space.types';
 import { SpaceSizes } from '../../../theme/space.enums';
+import { CLX_LAYOUT } from '../../../theme/constants';
 
 export interface CenterProps {
   /**
@@ -24,17 +26,23 @@ export interface CenterProps {
    * Centers text in component
    */
   isTextCentered?: boolean;
+  className?: string;
 }
 
-const Center = styled.div.withConfig<CenterProps>({
-  shouldForwardProp: (prop) =>
-    !includes(prop, [
-      'maxWidth',
-      'gutters',
-      'areChildrenCentered',
-      'isTextCentered',
-    ]),
-})`
+const Center = styled.div
+  .withConfig<CenterProps>({
+    shouldForwardProp: (prop) =>
+      !includes(prop, [
+        'maxWidth',
+        'gutters',
+        'areChildrenCentered',
+        'isTextCentered',
+      ]),
+  })
+  .attrs((props) => ({
+    ...props,
+    className: cls(CLX_LAYOUT, props?.className),
+  }))<CenterProps>`
   box-sizing: content-box;
   margin-left: auto;
   margin-right: auto;
@@ -65,6 +73,7 @@ Center.propTypes = {
   gutters: PropTypes.oneOf(Object.values(SpaceSizes)),
   areChildrenCentered: PropTypes.bool,
   isTextCentered: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Center.defaultProps = {

@@ -59,6 +59,7 @@ export interface StepperProps {
    * Is content visible for all steps. Only for vertical orientation.
    */
   areStepsExpanded?: boolean;
+  className?: string;
 }
 
 export interface StepperContextValue {

@@ -7,4 +7,5 @@ export type Variants = typeof HeadingVariants[keyof typeof HeadingVariants];
 export interface HeadingProps extends SpacingProps {
   size?: Sizes;
   variant?: Variants;
+  className?: string;
 }

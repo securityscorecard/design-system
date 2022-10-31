@@ -24,4 +24,5 @@ export interface SwitchProps
    * Size of the Switch
    */
   size?: Sizes;
+  className?: string;
 }
