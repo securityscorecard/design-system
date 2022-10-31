@@ -8,9 +8,19 @@ export default {
   title: 'components/Accordion',
   component: Accordion,
   argTypes: {
-    isCollapsedOnOpen: {
-      control: { type: 'boolean' },
-    },
+    items: {
+      table: {
+        type: {
+          summary: 'AccordionItem[]',
+          detail:`{
+  title: string | ReactNode;
+  content: ReactNode;
+  isOpen?: boolean;
+  id: string | number;
+}`
+        }
+      }
+    }
   },
 } as Meta;
 

@@ -20,8 +20,17 @@ export interface AccordionCollapsibleProps {
 }
 
 export interface AccordionProps {
-  isCollapsedOnOpen?: boolean;
+  /**
+   * List of accordion items
+   */
   items: AccordionItem[];
+  /**
+   * Allow multiple item to be open at the same time
+   */
+  isCollapsedOnOpen?: boolean;
+  /**
+   * Is accordion item to be wrapped in shadowed box when open
+   */
   isCard?: boolean;
   className?: string;
 }

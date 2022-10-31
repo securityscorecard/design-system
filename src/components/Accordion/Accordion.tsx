@@ -61,6 +61,7 @@ const Accordion: React.FC<AccordionProps> = ({
 Accordion.propTypes = {
   items: PropTypes.arrayOf(AccordionItemPropType).isRequired,
   isCollapsedOnOpen: PropTypes.bool,
+  isCard: PropTypes.bool,
   className: PropTypes.string,
 };
 
