@@ -28,6 +28,7 @@ import {
 } from './BaseButton.enums';
 import { BaseButtonProps } from './BaseButton.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { useLogger } from '../../../hooks/useLogger';
 
 const BaseStyledIcon = styled(Icon)`
   font-size: ${getToken('font-action-size')};
@@ -55,12 +56,13 @@ const BaseButton: React.FC<
 }) => {
   let RouterLink = null;
   const theme = useTheme();
+  const { warn } = useLogger('Button');
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();
   }
 
-  if (process.env.NODE_ENV !== 'production' && isDisabled && href) {
-    console.warn(
+  if (isDisabled && href) {
+    warn(
       '"isDisabled" prop in <Button> component will be ignored if the "href" prop is defined',
     );
   }

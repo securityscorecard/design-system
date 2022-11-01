@@ -16,6 +16,7 @@ import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { FileSelectorProps } from './FileSelector.types';
 import { FileSelectorSizes } from './FileSelector.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { useLogger } from '../../hooks/useLogger';
 
 const ExtendableButton = styled(Button)``;
 const FileSelectorWrapper = styled(Padbox)`
@@ -96,6 +97,7 @@ const FileSelector = ({
   className,
   ...props
 }: FileSelectorProps) => {
+  const { error } = useLogger('FileSelector');
   const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({
     disabled: isDisabled,
     noClick: isClickDisabled,
@@ -125,11 +127,9 @@ const FileSelector = ({
   const passedProps = omit(['width', 'height'], props);
 
   if (isClickDisabled && isDragDisabled) {
-    if (process.env.NODE_ENV !== 'production') {
-      throw new Error(
-        '[design-system/FileSelector] Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
-      );
-    }
+    error(
+      'Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
+    );
     return null;
   }
 

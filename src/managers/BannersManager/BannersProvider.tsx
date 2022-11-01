@@ -7,9 +7,10 @@ import { createCtx } from '../common/createCtx';
 import { ACTIONS } from './enums';
 import { useManagerEvents } from '../common/useManagerEvents';
 
-export const errorMessage =
-  '[banner-manager] "useBanners" must be inside a "BannersProvider" with a value';
-const BannersContext = createCtx<BannersContextProps>(errorMessage);
+const BannersContext = createCtx<BannersContextProps>(
+  'banner-manager',
+  '"useBanners" must be inside a "BannersProvider" with a value',
+);
 
 export const useBanners = BannersContext.useContext;
 export const BannersProvider = ({

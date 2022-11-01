@@ -25,7 +25,9 @@ describe('useFilterRow', () => {
       useFilterRow(mockTestFields, 'option x', 'xxx'),
     );
     expect(result.error).toEqual(
-      Error('Field value "option x" was not found in the fields array'),
+      Error(
+        '[design-system/useFilterRow] Field value "option x" was not found in the fields array',
+      ),
     );
   });
   it('should throw error when condition is not found', () => {
@@ -35,7 +37,7 @@ describe('useFilterRow', () => {
 
     expect(result.error).toEqual(
       Error(
-        'For field value "option a" was not found condition matching condition value "xxx"',
+        '[design-system/useFilterRow] For field value "option a" was not found condition matching condition value "xxx"',
       ),
     );
   });
@@ -49,7 +51,9 @@ describe('useFilterRow', () => {
     );
 
     expect(result.error).toEqual(
-      Error('Field item does not contain any conditions'),
+      Error(
+        '[design-system/useFilterRow] Field item does not contain any conditions',
+      ),
     );
   });
 });
