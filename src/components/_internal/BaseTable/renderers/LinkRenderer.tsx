@@ -3,6 +3,7 @@ import cls from 'classnames';
 import { isNotUndefined, isUndefined, noop } from 'ramda-adjunct';
 
 import { LinkRendererProps } from './renderers.types';
+import { useLogger } from '../../../../hooks/useLogger';
 
 function LinkRenderer<D extends Record<string, unknown>>({
   value,
@@ -14,10 +15,13 @@ function LinkRenderer<D extends Record<string, unknown>>({
   rowData,
   className,
 }: LinkRendererProps<D>): React.ReactElement {
+  const { error } = useLogger('LinkRenderer');
   const isRelativeLink = isNotUndefined(toComposer);
   if (isRelativeLink && isUndefined(component)) {
-    throw new Error(`You are trying to use 'toComposer' property but you didn't provide 'cellLinkComponent'.
+    error(`You are trying to use 'toComposer' property but you didn't provide 'cellLinkComponent'.
 Add valid component to 'cellLinkComponent', e.g. Link or NavLink from 'react-router'`);
+
+    return null;
   }
 
   const to = isRelativeLink ? toComposer(value, rowData) : undefined;

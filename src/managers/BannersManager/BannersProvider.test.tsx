@@ -1,13 +1,17 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 
-import { BannersProvider, errorMessage, useBanners } from './BannersProvider';
+import { BannersProvider, useBanners } from './BannersProvider';
 
 describe('BannersManager/useBanners', () => {
   it('should throw when used outside of BannersProvider', () => {
     const { result } = renderHook(() => useBanners());
 
-    expect(result.error).toStrictEqual(Error(errorMessage));
+    expect(result.error).toStrictEqual(
+      Error(
+        '[design-system/banner-manager] "useBanners" must be inside a "BannersProvider" with a value',
+      ),
+    );
   });
 
   it('should return context value', () => {

@@ -10,6 +10,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { AlignItemsPropType } from '../../../types/flex.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
+import { useLogger } from '../../../hooks/useLogger';
 
 interface GridWrapperProps {
   $overflow: 'hidden' | 'visible';
@@ -79,10 +80,10 @@ const Grid: React.FC<GridProps> = ({
   wrapperOverflow = 'hidden',
   ...props
 }) => {
+  const { error } = useLogger('Grid');
   if (cols === 1) {
-    throw new Error(
-      '[design-system/Grid] Minimal number of columns is 2. Use Stack instead of Grid[cols=1]',
-    );
+    error('Minimal number of columns is 2. Use Stack instead of Grid[cols=1]');
+    return null;
   }
   return (
     <GridWrapper
