@@ -1,10 +1,13 @@
 import { createContext, useContext } from 'react';
 
-export function createCtx<P>(errorMessage: string) {
+import { useLogger } from '../../hooks/useLogger';
+
+export function createCtx<P>(namespace: string, errorMessage: string) {
   const ctx = createContext<P | undefined>(undefined);
   function useCtx() {
+    const { error } = useLogger(namespace);
     const c = useContext(ctx);
-    if (!c) throw new Error(errorMessage);
+    if (!c) error(errorMessage);
     return c;
   }
   return {

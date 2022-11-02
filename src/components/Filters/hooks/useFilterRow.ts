@@ -4,6 +4,7 @@ import { isUndefined } from 'ramda-adjunct';
 import { Condition, Field } from '../Filters.types';
 import { PickOption, UseFilterRowType } from './useFilterRow.types';
 import { Option } from '../components/Select/Select.types';
+import { useLogger } from '../../../hooks/useLogger';
 
 export const normalizeOptions: <O extends Option>(options: O) => PickOption<O> =
   pick(['value', 'label']);
@@ -13,14 +14,13 @@ export const useFilterRow = (
   fieldValue: string,
   conditionValue: string,
 ): UseFilterRowType => {
+  const { error } = useLogger('useFilterRow');
   const field = find(propEq('value', fieldValue), fields);
   if (isUndefined(field))
-    throw new Error(
-      `Field value "${fieldValue}" was not found in the fields array`,
-    );
+    error(`Field value "${fieldValue}" was not found in the fields array`);
 
   if (isUndefined(field.conditions))
-    throw new Error(`Field item does not contain any conditions`);
+    error(`Field item does not contain any conditions`);
   const conditions = pipe(prop('conditions'), map(normalizeOptions))(field);
 
   const condition = pipe(
@@ -28,7 +28,7 @@ export const useFilterRow = (
     find(propEq('value', conditionValue)),
   )(field);
   if (isUndefined(condition))
-    throw new Error(
+    error(
       `For field value "${fieldValue}" was not found condition matching condition value "${conditionValue}"`,
     );
 

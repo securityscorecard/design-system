@@ -21,6 +21,7 @@ import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { BatchActionsProps } from './BatchActions.types';
 import { DatatableStore } from '../../Datatable.store';
 import { BatchActionArgs } from '../../Datatable.types';
+import { Tooltip } from '../../../Tooltip';
 
 const BatchActionButton = styled(BaseButton)`
   padding: ${pxToRem(9.5, 16)};
@@ -52,6 +53,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
   return (
     <Inline>
       {actions.map((action) => {
+        let element;
         if (
           isNotUndefined(
             (action as ActionWithSubactions<BatchActionArgs>).subActions,
@@ -65,7 +67,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
             (action as ActionWithSubactions<BatchActionArgs>).subActions,
           );
 
-          return (
+          element = (
             <DropdownMenu
               key={action.name}
               actions={subActions}
@@ -84,20 +86,22 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
               </BatchActionButton>
             </DropdownMenu>
           );
+        } else {
+          element = (
+            <BatchActionButton
+              key={action.name}
+              href={(action as AbsoluteLinkActionKind<BatchActionArgs>).href}
+              name={action.name}
+              to={(action as RelativeLinkActionKind<BatchActionArgs>).to}
+              variant={ButtonVariants.text}
+              onClick={() => handleOnActionClick(action.onClick)}
+            >
+              {action.label}
+            </BatchActionButton>
+          );
         }
 
-        return (
-          <BatchActionButton
-            key={action.name}
-            href={(action as AbsoluteLinkActionKind<BatchActionArgs>).href}
-            name={action.name}
-            to={(action as RelativeLinkActionKind<BatchActionArgs>).to}
-            variant={ButtonVariants.text}
-            onClick={() => handleOnActionClick(action.onClick)}
-          >
-            {action.label}
-          </BatchActionButton>
-        );
+        return <Tooltip popup={action.tooltip}>{element}</Tooltip>;
       })}
     </Inline>
   );

@@ -3,6 +3,7 @@ import { DefaultTheme } from 'styled-components';
 export interface DSContextValue {
   portalsContainerId: string;
   hasIncludedGlobalStyles: boolean;
+  debugMode: boolean;
 }
 export interface DSProviderProps {
   /**

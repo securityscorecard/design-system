@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useId } from '@react-aria/utils';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { pipe, sort } from 'ramda';
+import cls from 'classnames';
 
 import { Cluster, Padbox } from '../../layout';
 import { Option, SelectableGroupProps } from './SelectableGroup.types';
@@ -17,6 +18,7 @@ import {
   getToken,
   pxToRem,
 } from '../../../utils';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const Label = styled(Padbox)`
   display: flex;
@@ -77,6 +79,7 @@ const SelectableGroup: React.FC<SelectableGroupProps> = ({
   defaultValue: defaultValueFromProps,
   options,
   name,
+  className,
   ...props
 }) => {
   const isControlled = isNotUndefined(valueFromProps);
@@ -106,7 +109,7 @@ const SelectableGroup: React.FC<SelectableGroupProps> = ({
   );
 
   return (
-    <Cluster gap="sm" {...props}>
+    <Cluster gap="sm" {...props} className={cls(CLX_COMPONENT, className)}>
       {sortedOptions.map(
         ({ value: optionValue, label, isDisabled = false }) => {
           const optionId = `${optionValue}-${id}`;
@@ -156,6 +159,7 @@ SelectableGroup.propTypes = {
     }),
   ).isRequired,
   name: PropTypes.string,
+  className: PropTypes.string,
   onChange: PropTypes.func,
 };
 

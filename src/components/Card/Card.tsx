@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { pipe, prop } from 'ramda';
+import cls from 'classnames';
 
 import { Padbox, Stack } from '../layout';
 import { getColor, getRadii, getShadow, getSpace, getToken } from '../../utils';
 import { SpaceSize } from '../../theme/space.types';
 import { CardProps, CardWrapperProps } from './Card.types';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const InteractiveCard = css`
   transition: box-shadow 0.3s ease-in-out;
@@ -66,7 +68,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       domTag = as;
     }
     return (
-      <CardWrapper ref={ref} {...props} as={domTag}>
+      <CardWrapper
+        ref={ref}
+        {...props}
+        as={domTag}
+        className={cls(CLX_COMPONENT, props?.className)}
+      >
         <CardStack $shouldAlignLastItemToBottom={shouldAlignLastItemToBottom}>
           {children}
         </CardStack>
@@ -77,6 +84,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
 Card.propTypes = {
   shouldAlignLastItemToBottom: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Card;

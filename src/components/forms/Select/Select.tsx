@@ -2,22 +2,32 @@ import React from 'react';
 import ReactSelect from 'react-select';
 import AsyncReactSelect from 'react-select/async';
 import PropTypes from 'prop-types';
+import cls from 'classnames';
 
 import { ActionKindsPropType } from '../../../types/action.types';
 import { useSelectProps } from './useSelectProps';
 import { GroupPropType, OptionPropType, SelectProps } from './Select.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 function Select<IsMulti extends boolean = false>({
   isAsync = false,
   ...props
 }: SelectProps<IsMulti>): React.ReactElement {
   const selectProps = useSelectProps<IsMulti>(props);
+  const { className } = props;
 
   if (isAsync) {
-    return <AsyncReactSelect {...selectProps} />;
+    return (
+      <AsyncReactSelect
+        {...selectProps}
+        className={cls(CLX_COMPONENT, className)}
+      />
+    );
   }
 
-  return <ReactSelect {...selectProps} />;
+  return (
+    <ReactSelect {...selectProps} className={cls(CLX_COMPONENT, className)} />
+  );
 }
 
 Select.propTypes = {
@@ -50,6 +60,7 @@ Select.defaultProps = {
   isClearable: false,
   maxPillLabelLength: 16,
   isMenuPositionRelative: false,
+  className: '',
 };
 Select.displayName = 'Select';
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
@@ -17,6 +18,7 @@ import { SpaceSizes } from '../../theme';
 import { DSContext } from '../../theme/DSProvider/DSProvider';
 import { CloseButton } from '../CloseButton';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const widthVariants = {
   [ModalSizes.xs]: 320,
@@ -57,7 +59,15 @@ const Footer = styled(Padbox)`
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
-    { title, onClose, footer, size = ModalSizes.md, children, ...rest },
+    {
+      title,
+      onClose,
+      footer,
+      size = ModalSizes.md,
+      children,
+      className,
+      ...rest
+    },
     ref,
   ) => {
     const { portalsContainerId } = useContext(DSContext);
@@ -78,6 +88,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           <BaseModal
             ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
             $maxWidth={widthVariants[size]}
+            className={cls(CLX_COMPONENT, className)}
             {...rest}
           >
             <Inline stretch={StretchEnum.start}>
@@ -115,4 +126,5 @@ Modal.propTypes = {
   title: PropTypes.string,
   footer: PropTypes.node,
   size: PropTypes.oneOf(Object.values(ModalSizes)),
+  className: PropTypes.string,
 };

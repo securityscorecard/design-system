@@ -10,6 +10,7 @@ import { FullscreenModalLayouts } from './FullscreenModal.enums';
 import { ColumnConfigMap, FullscreenModalProps } from './FullscreenModal.types';
 import { Col, Container, Row } from '../layout';
 import { useModal } from './hooks/useModal';
+import { useLogger } from '../../hooks/useLogger';
 
 const BaseModal = styled.div`
   width: 100%;
@@ -62,6 +63,7 @@ const FullscreenModalContent = forwardRef(
     }: FullscreenModalProps,
     ref: React.MutableRefObject<HTMLDivElement>,
   ): React.ReactElement => {
+    const { error } = useLogger('FullscreenModal');
     const closeOnEsc = useCallback(
       (e: KeyboardEvent) => {
         if (e.key === 'Escape' || e.key === 'Esc') {
@@ -89,11 +91,12 @@ const FullscreenModalContent = forwardRef(
     const totalContentWidth = contentCols + sidebarCols;
 
     if (hasLayoutSidebar && isUndefined(sidebar)) {
-      throw new Error(
+      error(
         `You chose to use modal layout with sidebar (current: ${layout}) but you didn't provide sidebar content.
 You should either provide content in "sidebar" property or switch layout to "${FullscreenModalLayouts.single6}" or "${FullscreenModalLayouts.single8}"
 `,
       );
+      return null;
     }
 
     return (

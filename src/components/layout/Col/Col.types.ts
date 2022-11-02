@@ -9,4 +9,5 @@ export interface ColProps {
    * Offset from left
    */
   offset?: number;
+  className?: string;
 }

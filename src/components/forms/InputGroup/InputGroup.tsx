@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { prop } from 'ramda';
+import cls from 'classnames';
 
 import { getFormStyle, getRadii } from '../../../utils';
 import { Input } from '../Input';
@@ -12,6 +14,8 @@ import { InputGroupProps } from './InputGroup.types';
 import { InlineProps } from '../../layout/Inline/Inline';
 import { Button } from '../../Button';
 import { SearchBar } from '../SearchBar';
+import { CLX_COMPONENT } from '../../../theme/constants';
+import { useLogger } from '../../../hooks/useLogger';
 
 const InputGroupContainer = styled(Inline)<InputGroupProps>`
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
@@ -57,8 +61,10 @@ const IconContainer = styled(Padbox)`
 const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
   children,
   hasDivider,
+  className,
   ...inlineProps
 }) => {
+  const { error } = useLogger('InputGroup');
   const ALLOWED_CHILDREN = [
     Select,
     Input,
@@ -70,13 +76,14 @@ const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
   ];
   React.Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
-      throw new Error(
+      error(
         'Only Select, Input, InputGroup, Icon, Button, SearchBar and Password are valid childs of InputGroup',
       );
     }
   });
   return (
     <InputGroupContainer
+      className={cls(CLX_COMPONENT, className)}
       hasDivider={hasDivider}
       {...inlineProps}
       stretch={inlineProps.stretch || 'start'}
@@ -91,6 +98,9 @@ const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
   );
 };
 
-InputGroup.propTypes = {};
+InputGroup.propTypes = {
+  hasDivider: PropTypes.bool,
+  className: PropTypes.string,
+};
 
 export default InputGroup;

@@ -23,6 +23,7 @@ export interface AccordionProps {
   isCollapsedOnOpen?: boolean;
   items: AccordionItem[];
   isCard?: boolean;
+  className?: string;
 }
 
 export const AccordionItemIdPropType = PropTypes.oneOfType([

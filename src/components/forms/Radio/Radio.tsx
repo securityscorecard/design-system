@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const RadioLabel = styled(Label)<
   React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
@@ -94,6 +96,7 @@ const Radio: React.FC<RadioProps> = ({
   label,
   isDisabled = false,
   isInvalid = false,
+  className,
   ...props
 }) => {
   const hasLabel = isNotUndefined(label);
@@ -101,6 +104,7 @@ const Radio: React.FC<RadioProps> = ({
   return (
     <div>
       <RadioInput
+        className={cls(CLX_COMPONENT, className)}
         disabled={isDisabled}
         id={radioId}
         isInvalid={isInvalid}
@@ -121,6 +125,7 @@ Radio.propTypes = {
   label: PropTypes.node,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Radio;

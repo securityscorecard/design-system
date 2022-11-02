@@ -10,6 +10,7 @@ import { DSContextValue, DSProviderProps } from './DSProvider.types';
 export const defaultDSContext = {
   portalsContainerId: 'portals',
   hasIncludedGlobalStyles: true,
+  debugMode: false,
 };
 export const DSContext = React.createContext<DSContextValue>(defaultDSContext);
 

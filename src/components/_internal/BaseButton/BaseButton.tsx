@@ -8,6 +8,7 @@ import {
   noop,
 } from 'ramda-adjunct';
 import styled, { useTheme } from 'styled-components';
+import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColorTypes, SpaceSizes } from '../../../theme';
@@ -26,6 +27,8 @@ import {
   BaseButtonVariants,
 } from './BaseButton.enums';
 import { BaseButtonProps } from './BaseButton.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
+import { useLogger } from '../../../hooks/useLogger';
 
 const BaseStyledIcon = styled(Icon)`
   font-size: ${getToken('font-action-size')};
@@ -48,16 +51,18 @@ const BaseButton: React.FC<
   isLoading = false,
   isExpanded = false,
   loadingText = 'Loading',
+  className,
   ...props
 }) => {
   let RouterLink = null;
   const theme = useTheme();
+  const { warn } = useLogger('Button');
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();
   }
 
-  if (process.env.NODE_ENV !== 'production' && isDisabled && href) {
-    console.warn(
+  if (isDisabled && href) {
+    warn(
       '"isDisabled" prop in <Button> component will be ignored if the "href" prop is defined',
     );
   }
@@ -104,6 +109,7 @@ const BaseButton: React.FC<
       $margin={margin}
       $variant={variant}
       as={domTag}
+      className={cls(CLX_COMPONENT, className)}
       disabled={isDisabled || isLoading}
       href={href}
       paddingSize={SpaceSizes.md}

@@ -11,9 +11,11 @@ import {
 import { InputProps } from './Input.types';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   disabled: isDisabled,
+  className: CLX_COMPONENT,
 }))<InputProps>`
   display: block;
   width: 100%;

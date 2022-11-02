@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import { omit } from 'ramda';
+import cls from 'classnames';
 
 import { SpaceSizes } from '../../theme/space.enums';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -14,6 +15,8 @@ import { Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { FileSelectorProps } from './FileSelector.types';
 import { FileSelectorSizes } from './FileSelector.enums';
+import { CLX_COMPONENT } from '../../theme/constants';
+import { useLogger } from '../../hooks/useLogger';
 
 const ExtendableButton = styled(Button)``;
 const FileSelectorWrapper = styled(Padbox)`
@@ -91,8 +94,10 @@ const FileSelector = ({
   onDragOver,
   onDragLeave,
   validator,
+  className,
   ...props
 }: FileSelectorProps) => {
+  const { error } = useLogger('FileSelector');
   const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({
     disabled: isDisabled,
     noClick: isClickDisabled,
@@ -122,11 +127,9 @@ const FileSelector = ({
   const passedProps = omit(['width', 'height'], props);
 
   if (isClickDisabled && isDragDisabled) {
-    if (process.env.NODE_ENV !== 'production') {
-      throw new Error(
-        '[design-system/FileSelector] Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
-      );
-    }
+    error(
+      'Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
+    );
     return null;
   }
 
@@ -144,6 +147,7 @@ const FileSelector = ({
           paddingSize: SpaceSizes.sm,
           ...passedProps,
         })}
+        className={cls(CLX_COMPONENT, className)}
       >
         <input {...getInputProps()} />
         <DropTextWrapper
@@ -164,7 +168,7 @@ const FileSelector = ({
 
   if (isDragDisabled) {
     return (
-      <div>
+      <div className={cls(CLX_COMPONENT, className)}>
         <input {...getInputProps()} />
         <ExtendableButton
           {...getRootProps({
@@ -173,6 +177,7 @@ const FileSelector = ({
             isDisabled,
             isExpanded: size === FileSelectorSizes.fill,
             variant: ButtonVariants.outline,
+            type: 'button',
           })}
         >
           {buttonLabel}
@@ -194,6 +199,7 @@ const FileSelector = ({
         paddingSize: SpaceSizes.sm,
         ...passedProps,
       })}
+      className={cls(CLX_COMPONENT, className)}
     >
       <input {...getInputProps()} />
       <Cluster
@@ -205,6 +211,7 @@ const FileSelector = ({
           <ExtendableButton
             iconName={SSCIconNames.upload}
             isDisabled={isDisabled}
+            type="button"
             variant={ButtonVariants.outline}
           >
             {buttonLabel}

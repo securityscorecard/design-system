@@ -24,6 +24,7 @@ import {
 } from 'ramda-adjunct';
 import { useDeepCompareEffect } from 'use-deep-compare';
 import 'focus-within-polyfill';
+import cls from 'classnames';
 
 import {
   getColor,
@@ -43,6 +44,7 @@ import {
   MultiValueInputProps,
   ValueContainerProps,
 } from './MultiValueInput.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const getBorderStyle = (width, color) => css`
   box-shadow: inset 0 0 0 ${getFormStyle(width)} ${getFormStyle(color)};
@@ -263,7 +265,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     <ValueContainer
       $isDisabled={isDisabled}
       $isInvalid={isInvalid}
-      className={className}
+      className={cls(CLX_COMPONENT, className)}
       data-testid="multivalueinputContainer"
       id={id}
       onClick={handleContainerOnClick}

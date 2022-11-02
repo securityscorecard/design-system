@@ -6,4 +6,5 @@ export interface SignalProps {
   kind: Kinds;
   size?: number;
   title?: string;
+  className?: string;
 }

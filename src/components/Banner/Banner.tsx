@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
+import cls from 'classnames';
 
 import { BannerProps } from './Banner.types';
 import {
@@ -26,6 +27,7 @@ import { BaseToastBanner } from '../_internal/BaseToastBanner';
 import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseToastBanner';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const iconPxSizesVariants = {
   [BannerVariants.info]: 24,
@@ -72,10 +74,15 @@ const Banner: React.FC<BannerProps> = ({
   __isLast,
   __current,
   __total,
+  className,
   ...props
 }) => {
   return (
-    <StyledPadbox $variant={variant} {...props}>
+    <StyledPadbox
+      $variant={variant}
+      {...props}
+      className={cls(CLX_COMPONENT, className)}
+    >
       <BaseToastBanner
         iconPxSizesVariants={iconPxSizesVariants}
         iconSize={24}
@@ -156,6 +163,7 @@ Banner.propTypes = {
   variant: PropTypes.oneOf(Object.values(BannerVariants)),
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
   isDismissable: PropTypes.bool,
+  className: PropTypes.string,
   onClose: PropTypes.func,
 };
 Banner.displayName = 'Banner';

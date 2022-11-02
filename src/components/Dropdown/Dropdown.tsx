@@ -8,6 +8,7 @@ import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { DropdownProps } from './Dropdown.types';
 import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
 import ControlledDropdown from './ControlledDropdown';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const Dropdown: React.FC<DropdownProps> = React.forwardRef(
   (
@@ -120,6 +121,7 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
           })}
         </Ref>
         <ControlledDropdown
+          className={CLX_COMPONENT}
           hasPaneArrow={hasPaneArrow}
           innerPaddingSize={innerPaddingSize}
           innerPaddingType={innerPaddingType}

@@ -76,4 +76,5 @@ export type SearchBarProps = (
      * When true search will be triggered on mount when defaultValue is provided
      */
     shouldTriggerSearchOnMount?: boolean;
+    className?: string;
   };

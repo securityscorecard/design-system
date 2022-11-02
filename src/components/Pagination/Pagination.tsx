@@ -8,6 +8,7 @@ import PageButtons from './PageButtons';
 import { Inline } from '../layout';
 import { PaginationProps } from './Pagination.types';
 import { SpaceSizes } from '../../theme';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const Pagination: React.FC<PaginationProps> = ({
   pageCount,
@@ -16,7 +17,7 @@ const Pagination: React.FC<PaginationProps> = ({
   pageButtonsCount = 8,
   renderItem = PaginationItem,
 }) => (
-  <Inline gap={SpaceSizes.sm} justify="center">
+  <Inline className={CLX_COMPONENT} gap={SpaceSizes.sm} justify="center">
     {renderItem &&
       renderItem({
         'aria-label': 'Previous page',

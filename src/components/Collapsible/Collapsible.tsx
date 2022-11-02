@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
+import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, getRadii, pxToRem } from '../../utils';
@@ -13,6 +14,7 @@ import { Padbox } from '../layout/Padbox';
 import { Inline } from '../layout/Inline';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const Header = styled(Padbox)`
   width: 100%;
@@ -64,7 +66,10 @@ const Collapsible: React.FC<CollapsibleProps> = ({
   };
 
   return (
-    <Container className={className} withBackground={isOpen}>
+    <Container
+      className={cls(CLX_COMPONENT, className)}
+      withBackground={isOpen}
+    >
       <Header
         paddingSize={SpaceSizes.lg}
         paddingType={PaddingTypes.squish}
