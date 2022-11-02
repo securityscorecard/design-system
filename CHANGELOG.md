@@ -1,3 +1,18 @@
+# [1.0.0-alpha.232](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.231...v1.0.0-alpha.232) (2022-11-02)
+
+
+### Bug Fixes
+
+* **BatchActions:** add tooltip option ([2c88380](https://github.com/securityscorecard/design-system/commit/2c88380ac45d4507d38f3cbb6452497ae1481030))
+
+
+### Features
+
+* add className to components ([65b5067](https://github.com/securityscorecard/design-system/commit/65b50672ccc74e91921e9c96cc7a76186c494a70))
+* add typography className ([8c2c701](https://github.com/securityscorecard/design-system/commit/8c2c7016f6c6c91977457fb1a31b8ffe6fffb8c2))
+* **FileSelector:** add type=button ([5856da1](https://github.com/securityscorecard/design-system/commit/5856da15f248a6d99509d4309dc12ebf101d03cc))
+* **logging:** implement DS logger ([5569a36](https://github.com/securityscorecard/design-system/commit/5569a3686f7485e86d09ad8974c11131db5c16f3))
+
 # [1.0.0-alpha.231](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.230...v1.0.0-alpha.231) (2022-10-25)
 
 
