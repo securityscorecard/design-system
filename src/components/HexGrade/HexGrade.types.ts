@@ -8,7 +8,7 @@ export interface HexGradeProps {
   variant?: Variants;
   grade?: Grades;
   size?: number;
-  isInversed?: boolean;
+  isInverted?: boolean;
   margin?: SpacingSizeValue;
   className?: string;
 }

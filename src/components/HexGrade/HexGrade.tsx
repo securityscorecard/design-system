@@ -58,7 +58,7 @@ const HexGrade: React.FC<HexGradeProps> = ({
   variant = HexGradeVariants.solid,
   grade,
   size = 64,
-  isInversed = false,
+  isInverted = false,
   margin,
   className,
   ...props
@@ -73,18 +73,18 @@ const HexGrade: React.FC<HexGradeProps> = ({
   const VariantColorsMap = {
     [HexGradeVariants.cs]: {
       hexFill: gradeColor,
-      charFill: isInversed ? gradeColor : white,
-      hexStroke: isInversed ? gradeColor : white,
+      charFill: isInverted ? gradeColor : white,
+      hexStroke: isInverted ? gradeColor : white,
     },
     [HexGradeVariants.solid]: {
-      hexFill: isInversed ? white : gradeColor,
-      charFill: isInversed ? gradeColor : white,
-      hexStroke: isInversed ? white : gradeColor,
+      hexFill: isInverted ? white : gradeColor,
+      charFill: isInverted ? gradeColor : white,
+      hexStroke: isInverted ? white : gradeColor,
     },
     [HexGradeVariants.outline]: {
       hexFill: 'transparent',
-      charFill: isInversed ? white : gradeColor,
-      hexStroke: isInversed ? white : gradeColor,
+      charFill: isInverted ? white : gradeColor,
+      hexStroke: isInverted ? white : gradeColor,
     },
   };
 
@@ -125,7 +125,7 @@ HexGrade.propTypes = {
   variant: PropTypes.oneOf(Object.values(HexGradeVariants)),
   grade: PropTypes.oneOf(Object.values(HexGradeGrades)),
   size: PropTypes.number,
-  isInversed: PropTypes.bool,
+  isInverted: PropTypes.bool,
   margin: SpacingSizeValuePropType,
   className: PropTypes.string,
 };
