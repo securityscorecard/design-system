@@ -10,7 +10,7 @@ import {
   RelativeLinkActionKind,
 } from '../../../types/action.types';
 import { DropdownLinkProps, DropdownMenuProps } from './DropdownMenu.types';
-import { getColor, getSpace } from '../../../utils';
+import { getColor, getSpace, pxToRem } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { Dropdown } from '../../Dropdown';
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -32,6 +32,7 @@ export const DropdownLink = styled(Padbox).withConfig({
   shouldForwardProp: (prop) => !FORWARD_PROP_EXCEPTIONS.includes(String(prop)),
 })<DropdownLinkProps>`
   width: 100%;
+  min-width: ${pxToRem(140)};
   display: block;
   cursor: pointer;
   background: transparent;
