@@ -64,7 +64,7 @@ export default {
     resolve(),
     url({
       limit: 10 * 1024, // inline files < 10k, copy files > 10k
-      include: ['**/*.woff2', '**/*.woff'],
+      include: ['**/*.woff2', '**/*.woff', '**/*.css'],
     }),
     commonjs(),
     typescript({

@@ -1,6 +1,11 @@
 import { css } from 'styled-components';
 
-import { getFontWeight, getRadii, getToken } from '../../../utils';
+import {
+  getFontFamily,
+  getFontWeight,
+  getRadii,
+  getToken,
+} from '../../../utils';
 import { Colors } from './BaseLink.types';
 
 type LinkStylesProps = { $color: Colors };
@@ -8,7 +13,7 @@ type LinkStylesProps = { $color: Colors };
 export const LinkBaseStyles = css<LinkStylesProps>`
   margin: 0;
   border: none;
-  font-family: inherit;
+  font-family: ${getFontFamily('base')};
   font-weight: ${getFontWeight('semibold')};
   background-color: transparent;
   white-space: nowrap;

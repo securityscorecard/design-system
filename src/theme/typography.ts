@@ -1,3 +1,7 @@
+import { createGlobalStyle } from 'styled-components';
+
+import '@fontsource/inter/variable-full.css';
+
 import { colors } from './colors';
 import { pxToRem } from '../utils';
 import {
@@ -11,8 +15,31 @@ import {
 } from './typography.types';
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from './constants';
 
+export default createGlobalStyle`
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+  body {
+    font-family: 'Inter', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+`;
 const family: Family = {
-  base: "'proxima-nova', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
+  base: "'Inter', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
   mono: "'space-mono', 'Courier New', Courier, monospace",
 };
 

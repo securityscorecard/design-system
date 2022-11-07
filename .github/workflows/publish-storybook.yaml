@@ -34,8 +34,6 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build Storybook
-        env:
-          STORYBOOK_PROXIMA_NOVA_LINK: ${{secrets.PROXIMA_NOVA_LINK}}
         run: yarn storybook:build --docs
 
       - name: Get version

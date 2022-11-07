@@ -69,7 +69,7 @@ const Text = styled.span.attrs((props) => ({
   ...props,
   className: cls(CLX_TYPOGRAPHY, props?.className),
 }))<TextProps>`
-  font-family: inherit;
+  font-family: ${getFontFamily('base')};
   font-weight: ${({ isBold, theme }) =>
     isBold ? getFontWeight('bold', { theme }) : 'inherit'};
   ${({ size }) => sizes[size]};

@@ -2270,6 +2270,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^4.5.14":
+  version: 4.5.14
+  resolution: "@fontsource/inter@npm:4.5.14"
+  checksum: 4e2eb9e54f8de0025bca7ad8e0822549f1873c5d9a634b8f99630d7bba750b1c86263229bae99375fc82489daa38df41e0304c77c3efda2d9a2f78d0eba3ec56
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-common-types@npm:6.1.2":
   version: 6.1.2
   resolution: "@fortawesome/fontawesome-common-types@npm:6.1.2"
@@ -3394,6 +3401,7 @@ __metadata:
     "@dnd-kit/sortable": ^7.0.1
     "@dnd-kit/utilities": ^3.2.0
     "@fluentui/react-component-ref": ^0.62.0
+    "@fontsource/inter": ^4.5.14
     "@fortawesome/fontawesome-svg-core": ^6.1.2
     "@fortawesome/react-fontawesome": ^0.2.0
     "@geometricpanda/storybook-addon-badges": ^0.2.1

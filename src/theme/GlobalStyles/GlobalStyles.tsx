@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import '@fontsource/inter';
 
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../constants';
 import { getColor, getFontFamily, getFontWeight, pxToRem } from '../../utils';
@@ -11,6 +12,24 @@ export default createGlobalStyle`
     src: url(${SpaceMonoRegularWoff2}), url(${SpaceMonoRegularWoff});
     font-style: normal;
     font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 700;
+    font-display: swap;
   }
 
   /* http://meyerweb.com/eric/tools/css/reset/

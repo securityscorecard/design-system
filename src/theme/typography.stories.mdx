@@ -12,16 +12,27 @@ leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravi
 # Typography
 
 Design System have defined two basic font families. As base font family we are using sans-serif
-`ProximaNova` font, for monospaced text we are using `SpaceMono` font.
+`Inter` font, for monospaced text we are using `SpaceMono` font.
 
 ## Font licensing
 
-### ProximaNova
+### Inter
 
-ProximaNova is licensed font that cannot be bundled and redistributed along with this package. If you
-want to use this font you have to obtain your own license for this font. You can use for example
-[Adobe Fonts](https://fonts.adobe.com/fonts/proxima-nova) service.
+Inter is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
+It is not bundled with the package due to its size, therefore it needs to be included in your html imports.
 
+Example:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+```
+ or by direct import 
+
+ ```
+yarn add @fontsource/inter
+ ```
 ### SpaceMono
 
 SpaceMono is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
@@ -30,7 +41,7 @@ and is bundled within this package.
 <FontPalette>
   <FontItem
     title="theme.typography.family.base"
-    subtitle="ProximaNova"
+    subtitle="Inter"
     sampleText={lipsum}
     fontFamily={theme.typography.family.base}
   />
