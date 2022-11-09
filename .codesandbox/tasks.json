@@ -1,0 +1,98 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "yarn install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "build": {
+      "name": "build",
+      "command": "yarn build",
+      "runAtStart": false
+    },
+    "storybook": {
+      "name": "storybook",
+      "command": "yarn storybook",
+      "runAtStart": true
+    },
+    "storybook:build": {
+      "name": "storybook:build",
+      "command": "yarn storybook:build",
+      "runAtStart": false
+    },
+    "test:storybook:visual": {
+      "name": "test:storybook:visual",
+      "command": "yarn test:storybook:visual",
+      "runAtStart": false
+    },
+    "test:storybook:visual:update": {
+      "name": "test:storybook:visual:update",
+      "command": "yarn test:storybook:visual:update",
+      "runAtStart": false
+    },
+    "test:storybook:visual:ci": {
+      "name": "test:storybook:visual:ci",
+      "command": "yarn test:storybook:visual:ci",
+      "runAtStart": false
+    },
+    "test": {
+      "name": "test",
+      "command": "yarn test",
+      "runAtStart": false
+    },
+    "test:watch": {
+      "name": "test:watch",
+      "command": "yarn test:watch",
+      "runAtStart": false
+    },
+    "types": {
+      "name": "types",
+      "command": "yarn types",
+      "runAtStart": false
+    },
+    "lint": {
+      "name": "lint",
+      "command": "yarn lint",
+      "runAtStart": false
+    },
+    "lint:fix": {
+      "name": "lint:fix",
+      "command": "yarn lint:fix",
+      "runAtStart": false
+    },
+    "lint:css": {
+      "name": "lint:css",
+      "command": "yarn lint:css",
+      "runAtStart": false
+    },
+    "semantic-release": {
+      "name": "semantic-release",
+      "command": "yarn semantic-release",
+      "runAtStart": false
+    },
+    "betterer": {
+      "name": "betterer",
+      "command": "yarn betterer",
+      "runAtStart": false
+    },
+    "betterer:precommit": {
+      "name": "betterer:precommit",
+      "command": "yarn betterer:precommit",
+      "runAtStart": false
+    },
+    "betterer:ci": {
+      "name": "betterer:ci",
+      "command": "yarn betterer:ci",
+      "runAtStart": false
+    },
+    "prepare": {
+      "name": "prepare",
+      "command": "yarn prepare",
+      "runAtStart": false
+    }
+  }
+}
