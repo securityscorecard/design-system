@@ -21,6 +21,10 @@ const Header = styled(Padbox)`
   cursor: pointer;
 `;
 
+const HeaderContent = styled.div`
+  flex: 1;
+`;
+
 const Content = styled(Padbox)`
   border-top: 1px solid ${getColor('neutral.500')};
 `;
@@ -81,12 +85,12 @@ const Collapsible: React.FC<CollapsibleProps> = ({
             name={SSCIconNames.angleRight}
             type={IconTypes.ssc}
           />
-          <div>
-            <Text size={TextSizes.md} variant={TextVariants.secondary}>
+          <HeaderContent>
+            <Text as="div" size={TextSizes.md} variant={TextVariants.secondary}>
               {title}
             </Text>
-            <Subject size={TextSizes.lg}>{subject}</Subject>
-          </div>
+            {subject && <Subject size={TextSizes.lg}>{subject}</Subject>}
+          </HeaderContent>
         </Inline>
       </Header>
       {isOpen && (
