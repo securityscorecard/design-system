@@ -38,3 +38,4 @@ export * from './SingleDatePicker';
 export * from './DateRangePicker';
 export * from './Breadcrumbs';
 export * from './UserAvatar';
+export * from './Wizard';
