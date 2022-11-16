@@ -95,10 +95,12 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
               <Padbox paddingSize={SpaceSizes.lgPlus} paddingType="squish">
                 {isNotUndefined(title) && <Title>{title}</Title>}
               </Padbox>
-              <CloseButton
-                marginCompensation={SpaceSizes.none}
-                onClose={onClose}
-              />
+              {onClose && (
+                <CloseButton
+                  marginCompensation={SpaceSizes.none}
+                  onClose={onClose}
+                />
+              )}
             </Inline>
             <Content
               paddingSize={paddingVariants[size]}

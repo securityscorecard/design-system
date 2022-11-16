@@ -13,4 +13,8 @@ export interface UserAvatarProps {
    */
   size?: Sizes;
   className?: string;
+  /**
+   * Used to inverse the colors of the avatar
+   */
+  isInverted?: boolean;
 }

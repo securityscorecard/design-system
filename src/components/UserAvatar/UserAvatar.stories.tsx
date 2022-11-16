@@ -45,3 +45,19 @@ export const DifferentSizes: Story<UserAvatarProps> = () => (
 export const NormalizeText: Story<UserAvatarProps> = () => (
   <UserAvatar label="cdab long text with spaces" />
 );
+
+export const InvertedColors: Story<UserAvatarProps> = () => (
+  <UserAvatar label="AB" isInverted />
+);
+
+InvertedColors.parameters = {
+  backgrounds: {
+    default: 'primary',
+    values: [
+      {
+        name: 'primary',
+        value: '#4d29d4',
+      },
+    ],
+  },
+};
