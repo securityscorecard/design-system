@@ -1,3 +1,18 @@
+# [1.0.0-alpha.233](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.232...v1.0.0-alpha.233) (2022-11-16)
+
+
+### Bug Fixes
+
+* **Datatable:** set rows action pane width to auto ([8b05c83](https://github.com/securityscorecard/design-system/commit/8b05c836b212e412384235edd9c642dddb749ea5))
+* **HexGrade:** prop rename isInversed to isInverted ([897a675](https://github.com/securityscorecard/design-system/commit/897a675258952907f694d00fdc2518a1c7e7aef3))
+* **UserAvatar:** add isInverted prop ([d7bb368](https://github.com/securityscorecard/design-system/commit/d7bb368710a63c0466c787fd7fb9008783a87f7b))
+
+
+### Features
+
+* **Collapsible:** allow custom elements in header ([9e9a6de](https://github.com/securityscorecard/design-system/commit/9e9a6dea10b17420609de194b05af2de6de7620c))
+* **Wizard:** add Wizard ([ea278bc](https://github.com/securityscorecard/design-system/commit/ea278bc21b11953434371a1a70d38e7fb526984b))
+
 # [1.0.0-alpha.232](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.231...v1.0.0-alpha.232) (2022-11-02)
 
 
