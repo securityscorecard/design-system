@@ -45,6 +45,7 @@ const renderButton = ({
   action,
   color,
   isLoading,
+  loadingText,
   variant,
 }: RenderButtonProps) => (
   <Button
@@ -52,6 +53,7 @@ const renderButton = ({
     color={color}
     href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
     isLoading={isLoading}
+    loadingText={loadingText}
     name={action.name}
     to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
     variant={variant}
@@ -71,6 +73,7 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
       variant = SemanticModalVariants.success,
       primaryButtonColor = ButtonEnums.ButtonColors.primary,
       isPrimaryButtonLoading = false,
+      loadingText = '',
     },
     ref,
   ) => {
@@ -100,6 +103,7 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
                             ? ButtonEnums.ButtonColors.primary
                             : primaryButtonColor,
                         isLoading: index === 0 ? false : isPrimaryButtonLoading,
+                        loadingText,
                       }),
                   )}
                 </Inline>
@@ -123,4 +127,5 @@ SemanticModal.propTypes = {
   variant: PropTypes.oneOf(Object.values(SemanticModalVariants)),
   primaryButtonColor: PropTypes.oneOf(Object.values(ButtonColors)),
   isPrimaryButtonLoading: PropTypes.bool,
+  loadingText: PropTypes.string,
 };

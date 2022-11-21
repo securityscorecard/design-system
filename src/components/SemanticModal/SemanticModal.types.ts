@@ -19,6 +19,7 @@ export interface RenderButtonProps {
   variant: typeof ButtonEnums.ButtonVariants[keyof typeof ButtonEnums.ButtonVariants];
   color: typeof ButtonEnums.ButtonColors[keyof typeof ButtonEnums.ButtonColors];
   isLoading: boolean;
+  loadingText: string;
 }
 
 export interface SemanticModalProps {
@@ -29,4 +30,5 @@ export interface SemanticModalProps {
   variant?: Variants;
   primaryButtonColor?: ButtonColors;
   isPrimaryButtonLoading?: boolean;
+  loadingText?: string;
 }
