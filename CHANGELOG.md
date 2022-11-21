@@ -1,3 +1,33 @@
+# [1.0.0-alpha.233](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.232...v1.0.0-alpha.233) (2022-11-16)
+
+
+### Bug Fixes
+
+* **Datatable:** set rows action pane width to auto ([8b05c83](https://github.com/securityscorecard/design-system/commit/8b05c836b212e412384235edd9c642dddb749ea5))
+* **HexGrade:** prop rename isInversed to isInverted ([897a675](https://github.com/securityscorecard/design-system/commit/897a675258952907f694d00fdc2518a1c7e7aef3))
+* **UserAvatar:** add isInverted prop ([d7bb368](https://github.com/securityscorecard/design-system/commit/d7bb368710a63c0466c787fd7fb9008783a87f7b))
+
+
+### Features
+
+* **Collapsible:** allow custom elements in header ([9e9a6de](https://github.com/securityscorecard/design-system/commit/9e9a6dea10b17420609de194b05af2de6de7620c))
+* **Wizard:** add Wizard ([ea278bc](https://github.com/securityscorecard/design-system/commit/ea278bc21b11953434371a1a70d38e7fb526984b))
+
+# [1.0.0-alpha.232](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.231...v1.0.0-alpha.232) (2022-11-02)
+
+
+### Bug Fixes
+
+* **BatchActions:** add tooltip option ([2c88380](https://github.com/securityscorecard/design-system/commit/2c88380ac45d4507d38f3cbb6452497ae1481030))
+
+
+### Features
+
+* add className to components ([65b5067](https://github.com/securityscorecard/design-system/commit/65b50672ccc74e91921e9c96cc7a76186c494a70))
+* add typography className ([8c2c701](https://github.com/securityscorecard/design-system/commit/8c2c7016f6c6c91977457fb1a31b8ffe6fffb8c2))
+* **FileSelector:** add type=button ([5856da1](https://github.com/securityscorecard/design-system/commit/5856da15f248a6d99509d4309dc12ebf101d03cc))
+* **logging:** implement DS logger ([5569a36](https://github.com/securityscorecard/design-system/commit/5569a3686f7485e86d09ad8974c11131db5c16f3))
+
 # [1.0.0-alpha.232](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.231...v1.0.0-alpha.232) (2022-11-02)
 
 
