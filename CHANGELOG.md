@@ -1,3 +1,10 @@
+# [1.0.0-alpha.234](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.233...v1.0.0-alpha.234) (2022-11-21)
+
+
+### Features
+
+* **SemanticModal:** add loading text to the renderButton ([8ace2b3](https://github.com/securityscorecard/design-system/commit/8ace2b32c82326cf3942eff11898abf4ba3f2262))
+
 # [1.0.0-alpha.233](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.232...v1.0.0-alpha.233) (2022-11-16)
 
 
