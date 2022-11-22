@@ -74,7 +74,7 @@ const DropTextWrapper = styled(Padbox)`
 
 const FileSelector = ({
   buttonLabel = 'Upload',
-  dropLabel = 'or Drop files here',
+  dropLabel = 'or drop files here',
   isClickDisabled = false,
   isDragDisabled = false,
   isDisabled = false,
