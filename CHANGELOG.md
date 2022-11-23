@@ -1,3 +1,16 @@
+# [1.0.0-alpha.235](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.234...v1.0.0-alpha.235) (2022-11-23)
+
+
+### Bug Fixes
+
+* **FileSelector:** update drop copy ([b2f3139](https://github.com/securityscorecard/design-system/commit/b2f3139d1b529685deff2b43696829835dd25782))
+* **Select:** remove hideSelectedOptions prop ([57855c0](https://github.com/securityscorecard/design-system/commit/57855c059eff3b5cb9f4ee69a7299219461fac37))
+
+
+### Features
+
+* **font:** apply typography updates ([1ce8737](https://github.com/securityscorecard/design-system/commit/1ce8737492abacf36f5471bd5b663ebacfc5b2c7))
+
 # [1.0.0-alpha.234](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.233...v1.0.0-alpha.234) (2022-11-21)
 
 
