@@ -95,9 +95,6 @@ export default createGlobalStyle`
   }
   *, *:before, *:after {
     box-sizing: border-box;
-    /* Fix antialiasing */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 
     /* Disable user select on everything but texts */
     user-select: none;

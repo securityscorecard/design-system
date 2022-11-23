@@ -17,31 +17,31 @@ const family: Family = {
 };
 
 const size: Size = {
-  h0: pxToRem(BASE_FONT_SIZE * 2.625), // 42px
-  h1: pxToRem(BASE_FONT_SIZE * 2.25), // 36px
-  h2: pxToRem(BASE_FONT_SIZE * 1.875), // 30px
+  h0: pxToRem(BASE_FONT_SIZE * 2), // 32px
+  h1: pxToRem(BASE_FONT_SIZE * 2), // 32px
+  h2: pxToRem(BASE_FONT_SIZE * 1.75), // 28px
   h3: pxToRem(BASE_FONT_SIZE * 1.5), // 24px
-  h4: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
+  h4: pxToRem(BASE_FONT_SIZE * 1.25), // 20px
   h5: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
   lg: pxToRem(BASE_FONT_SIZE), // 16px
   md: pxToRem(BASE_FONT_SIZE * 0.875), // 14px
-  sm: pxToRem(BASE_FONT_SIZE * 0.6875), // 11px, TO BE DEPRECATED
+  sm: pxToRem(BASE_FONT_SIZE * 0.75), // 12px, TO BE DEPRECATED
 };
 
 const weight: Weight = {
-  light: 200,
+  light: 400,
   regular: 400,
   medium: 500,
-  semibold: 600,
+  semibold: 500,
   bold: 700,
 };
 
 const lineHeight: LineHeight = {
-  xxl: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
-  xl: pxToRem(BASE_LINE_HEIGHT * 1.5), // 30px
-  lg: pxToRem(BASE_LINE_HEIGHT), // 20px
-  md: pxToRem(BASE_LINE_HEIGHT * 0.8), // 16px
-  h4: pxToRem(BASE_LINE_HEIGHT), // 20px
+  xxl: '1.25',
+  xl: '1.25',
+  lg: '1.5',
+  md: '1.5',
+  h4: '1.25',
 };
 
 const margin: Margin = {
