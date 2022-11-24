@@ -3,16 +3,13 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 
 import Badge from './Badge';
 import { BadgeProps } from './Badge.types';
-import { BadgeSizes, BadgeVariants } from './Badge.enums';
+import { BadgeVariants } from './Badge.enums';
 import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/Badge',
   component: Badge,
   argTypes: {
-    size: {
-      ...generateControl('select', BadgeSizes),
-    },
     variant: {
       ...generateControl('select', BadgeVariants),
     },
@@ -23,16 +20,16 @@ const BadgeTemplate: Story<BadgeProps> = (args) => <Badge {...args} />;
 
 export const Playground = BadgeTemplate.bind({});
 Playground.args = {
-  count: 25,
-  size: BadgeSizes.md,
+  count: 32,
 };
+
 Playground.parameters = {
   screenshot: { skip: true },
 };
 
 export const SimpleBadge = BadgeTemplate.bind({});
 SimpleBadge.args = {
-  count: 25,
+  count: 32,
 };
 
 export const BadgeWithHighCount = BadgeTemplate.bind({});
@@ -64,4 +61,20 @@ export const ErrorBadge = BadgeTemplate.bind({});
 ErrorBadge.args = {
   ...SimpleBadge.args,
   variant: 'error',
+};
+
+export const TextBadge = BadgeTemplate.bind({});
+TextBadge.args = {
+  ...SimpleBadge.args,
+  variant: 'info',
+  count: undefined,
+  text: 'New',
+};
+export const TextBadgeWithIcon = BadgeTemplate.bind({});
+TextBadgeWithIcon.args = {
+  ...SimpleBadge.args,
+  variant: 'info',
+  count: undefined,
+  text: 'New',
+  iconName: 'lightbulb',
 };
