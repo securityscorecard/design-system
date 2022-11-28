@@ -14,7 +14,7 @@ jobs:
         node: ['14', '16', '18']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -132,7 +132,7 @@ jobs:
 
       - name: Archive visual artifacts
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: visual-test-reports
           path: visual-test-reports.tar
@@ -141,7 +141,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -176,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -211,7 +211,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -246,10 +246,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18.5']
+        node: ['14', '16', '18']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -287,7 +287,7 @@ jobs:
       - name: Build Step
         run: yarn build
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: bundle-stats-${{ matrix.node }}
           path: stats
@@ -298,7 +298,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -346,3 +346,79 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
+
+  build-docs:
+    needs: build-and-publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: alpha
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Get version
+        id: get_version
+        run: |
+          echo  "packageVersion=$(git describe --tags)" >> $GITHUB_ENV
+
+      - name: Cache storybook build
+        id: storybook-build-cache
+        uses: actions/cache@v3
+        with:
+          path: docs-build
+          key: docs-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
+          restore-keys: |
+            docs-
+
+      - name: Build Storybook
+        if: steps.storybook-build-cache.outputs.cache-hit != 'true'
+        run: yarn build-storybook -o ./docs-build/${{ env.packageVersion }}
+
+      - name: Generate redirect index
+        env:
+          VERSION: ${{ env.packageVersion }}
+        run: |
+          yarn node ./scripts/generate-index.js
+
+      - name: Upload Storybook artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: storybook
+          path: ./docs-build
+          retention-days: 1
+
+
+  deploy-docs:
+    needs: build-docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - name: Download Storybook artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: storybook
+
+      - name: Commit storybook
+        run: |
+          git config --global user.name "Continuous Integration"
+          git config --global user.email "username@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish docs for ${{ env.packageVersion }}"
+          git push
+
