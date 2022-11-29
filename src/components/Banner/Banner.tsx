@@ -21,7 +21,6 @@ import { Text as BaseText } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor, getLineHeight } from '../../utils';
-import { ColorTypes } from '../../theme/colors.enums';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
 import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseToastBanner';
@@ -36,32 +35,15 @@ const iconPxSizesVariants = {
   [BannerVariants.success]: 16,
 };
 
-const bgVariants = {
-  [BannerVariants.info]: ColorTypes.info700,
-  [BannerVariants.warn]: ColorTypes.warning500,
-  [BannerVariants.error]: ColorTypes.error500,
-  [BannerVariants.success]: ColorTypes.success500,
-};
-
 const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${({ $variant }) =>
+  background-color: ${({ $variant }) =>
     getColor(baseToastBannerColorVariants[$variant])};
-  background-color: ${({ $variant }) => getColor(bgVariants[$variant])};
 `;
 
 const StyledButton = styled(Button)<{ $variant?: BannerProps['variant'] }>`
   height: inherit;
   padding: 0;
   line-height: ${getLineHeight('md')};
-  text-decoration: underline;
-  color: ${({ $variant }) =>
-    getColor(
-      $variant === 'info' || $variant === 'error'
-        ? 'neutral.0'
-        : 'neutral.1000',
-    )} !important;
 `;
 
 const ContentWrapper = styled(Padbox)`
@@ -71,12 +53,7 @@ const ContentWrapper = styled(Padbox)`
 /* stylelint-disable */
 const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
   max-width: 125ch;
-  color: ${({ $variant }) =>
-    getColor(
-      $variant === 'info' || $variant === 'error'
-        ? 'neutral.0'
-        : 'neutral.1000',
-    )};
+  color: ${getColor('neutral.1000')};
   display: -webkit-box;
   overflow-y: auto;
   -webkit-line-clamp: 2;
@@ -101,9 +78,12 @@ const Banner: React.FC<BannerProps> = ({
   ...props
 }) => {
   return (
-    <StyledPadbox $variant={variant} paddingSize={SpaceSizes.sm}>
+    <StyledPadbox
+      $variant={variant}
+      className={cls(CLX_COMPONENT, className)}
+      paddingSize={SpaceSizes.sm}
+    >
       <BaseToastBanner
-        className={cls(CLX_COMPONENT, className)}
         iconAlign="flex-start"
         iconPxSizesVariants={iconPxSizesVariants}
         iconSize={16}
@@ -170,7 +150,6 @@ const Banner: React.FC<BannerProps> = ({
             {isDismissable && (
               <CloseButton
                 aria-label="Close banner"
-                isInverted={variant === 'error' || variant === 'info'}
                 marginCompensation={SpaceSizes.md}
                 onClose={onClose}
               />

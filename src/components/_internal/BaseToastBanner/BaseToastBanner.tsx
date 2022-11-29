@@ -15,10 +15,10 @@ import {
 } from './BaseToastBanner.types';
 
 export const baseToastBannerColorVariants = {
-  [BaseToastBannerVariants.info]: ColorTypes.info700,
-  [BaseToastBannerVariants.warn]: ColorTypes.warning500,
-  [BaseToastBannerVariants.error]: ColorTypes.error500,
-  [BaseToastBannerVariants.success]: ColorTypes.success500,
+  [BaseToastBannerVariants.info]: ColorTypes.info50,
+  [BaseToastBannerVariants.warn]: ColorTypes.warning50,
+  [BaseToastBannerVariants.error]: ColorTypes.error50,
+  [BaseToastBannerVariants.success]: ColorTypes.success50,
 };
 
 const iconVariants = {
@@ -26,6 +26,13 @@ const iconVariants = {
   [BaseToastBannerVariants.warn]: SSCIconNames.errorCircle,
   [BaseToastBannerVariants.error]: SSCIconNames.exclTriangleSolid,
   [BaseToastBannerVariants.success]: SSCIconNames.check,
+};
+
+const iconColorVariants = {
+  [BaseToastBannerVariants.info]: ColorTypes.info500,
+  [BaseToastBannerVariants.warn]: ColorTypes.warning500,
+  [BaseToastBannerVariants.error]: ColorTypes.error500,
+  [BaseToastBannerVariants.success]: ColorTypes.success500,
 };
 
 const IconPadbox = styled(Padbox)<{
@@ -51,12 +58,7 @@ const StyledIcon = styled(Icon)<{
   $variant?: BaseToastBannerWrapperProps['variant'];
   $iconPxSizesVariants: BaseToastBannerWrapperProps['iconPxSizesVariants'];
 }>`
-  color: ${({ $variant }) =>
-    getColor(
-      $variant === 'info' || $variant === 'error'
-        ? 'neutral.0'
-        : 'neutral.1000',
-    )};
+  color: ${({ $variant }) => getColor(iconColorVariants[$variant])};
   font-size: ${({ $variant, $iconPxSizesVariants }) =>
     pxToRem($iconPxSizesVariants[$variant])};
 `;
