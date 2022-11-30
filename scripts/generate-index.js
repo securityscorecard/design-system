@@ -5,7 +5,7 @@ const path = require('path');
 
 const docsRootPath = path.resolve(__dirname, '../docs-build/index.html');
 const version = process.env.VERSION;
-const url = `https://ajkl2533.github.io/semantic-release-test/${version}`;
+const url = `https://securityscorecard.github.io/design-system/${version}`;
 const content = `<!DOCTYPE HTML>
 <html lang="en-US">
     <head>
