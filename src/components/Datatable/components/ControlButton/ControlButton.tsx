@@ -25,9 +25,7 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   >
     <Inline align="center" gap="sm">
       <span>{label}</span>
-      {appliedFilters > 0 && (
-        <Badge count={appliedFilters} size="md" variant="neutral" />
-      )}
+      {appliedFilters > 0 && <Badge count={appliedFilters} variant="neutral" />}
     </Inline>
   </Button>
 );
