@@ -15,6 +15,7 @@ export interface BaseToastBannerWrapperProps {
   stretch: InlineProps['stretch'];
   iconSize: number;
   iconPxSizesVariants: { [key: number]: number };
+  iconAlign?: string;
 }
 
 export interface BaseToastBannerProps {
