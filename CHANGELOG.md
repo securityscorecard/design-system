@@ -1,3 +1,17 @@
+# [1.0.0-alpha.236](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.235...v1.0.0-alpha.236) (2022-11-30)
+
+
+### Bug Fixes
+
+* **Badge:** update badge styling add text and icon ([06481ec](https://github.com/securityscorecard/design-system/commit/06481ec3847cbdb968005905a1653d7a83ec7143))
+* **ControlledDropdown:** add style prop ([31e5c0f](https://github.com/securityscorecard/design-system/commit/31e5c0f9446b35e7b2dea3fc731c753ec49fc6ef))
+
+
+### Features
+
+* **Banner:** add new style to banner ([90303f3](https://github.com/securityscorecard/design-system/commit/90303f384dc4a098eca9f1697c36907be703493a))
+* **Banner:** update styles ([69d7567](https://github.com/securityscorecard/design-system/commit/69d7567921010a9506af5d1ab0c81fbb400720f4))
+
 # [1.0.0-alpha.235](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.234...v1.0.0-alpha.235) (2022-11-23)
 
 
