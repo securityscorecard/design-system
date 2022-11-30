@@ -26,6 +26,7 @@ const ControlledDropdown = forwardRef<
       isPaneElevated = false,
       hasPaneArrow = false,
       onClickOut,
+      style = {},
       ...props
     },
     ref,
@@ -52,7 +53,7 @@ const ControlledDropdown = forwardRef<
           hasArrow={hasPaneArrow}
           isElevated={isPaneElevated}
           maxWidth={maxPaneWidth}
-          style={styles.popper}
+          style={{ ...styles.popper, ...style }}
           onClickOut={onClickOut}
           {...props}
           {...attributes.popper}
@@ -79,6 +80,9 @@ ControlledDropdown.propTypes = {
   ]),
   isPaneElevated: PropTypes.bool,
   hasPaneArrow: PropTypes.bool,
+  style: PropTypes.objectOf(
+    PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  ),
   onClickOut: PropTypes.func,
 };
 
