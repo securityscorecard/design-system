@@ -22,7 +22,8 @@
         "assets": ["package.json", "yarn.lock", "CHANGELOG.md"],
         "message": "chore(release): bump version to ${nextRelease.version}\n\n${nextRelease.notes}"
       }
-    ]
+    ],
+    "semantic-release-export-data"
   ],
   "preset": "angular"
 }
