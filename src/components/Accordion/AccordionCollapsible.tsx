@@ -25,6 +25,10 @@ const Header = styled(Padbox)`
   }
 `;
 
+const Content = styled(Padbox)`
+  padding-top: 0;
+`;
+
 const Container = styled.div<{ isOpen: boolean; isCard: boolean }>`
   ${({ isOpen }) =>
     isOpen &&
@@ -93,9 +97,9 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
         </Inline>
       </Header>
       {isOpen && (
-        <Padbox paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
+        <Content paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
           <Text size={TextSizes.md}>{children}</Text>
-        </Padbox>
+        </Content>
       )}
     </Container>
   );
