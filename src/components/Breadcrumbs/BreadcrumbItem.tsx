@@ -34,6 +34,8 @@ const BreadcrumbLink = styled(Link)`
 const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   children,
   isSelected = false,
+  to = undefined,
+  href = undefined,
   ...props
 }) =>
   isSelected ? (
@@ -45,11 +47,22 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
       {children}
     </Text>
   ) : (
-    <BreadcrumbLink {...props}>{children}</BreadcrumbLink>
+    <BreadcrumbLink href={href} to={to} {...props}>
+      {children}
+    </BreadcrumbLink>
   );
 
 BreadcrumbItem.propTypes = {
   children: PropTypes.node.isRequired,
+  to: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+      hash: PropTypes.string,
+    }),
+  ]),
+  href: PropTypes.string,
 };
 
 export default BreadcrumbItem;
