@@ -1,3 +1,12 @@
+# [1.0.0-alpha.237](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.236...v1.0.0-alpha.237) (2022-12-07)
+
+
+### Bug Fixes
+
+* **Accordion:** remove content top padding ([59d18a0](https://github.com/securityscorecard/design-system/commit/59d18a0057b1959a0cf52d72e19b1014ce16b9f7))
+* **Badge:** fix alignment issues ([6066ed3](https://github.com/securityscorecard/design-system/commit/6066ed337cb213269053b836d1770a76a278a72e))
+* **theme:** change base font family to Inter ([b3c83e9](https://github.com/securityscorecard/design-system/commit/b3c83e9731700c0eb68efcefc6bd8e26386e58f1))
+
 # [1.0.0-alpha.236](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.235...v1.0.0-alpha.236) (2022-11-30)
 
 
