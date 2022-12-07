@@ -6,12 +6,19 @@ import styled, { css } from 'styled-components';
 
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
 import { BadgeVariants } from './Badge.enums';
-import { getColor, getFontWeight, getRadii, pxToRem } from '../../utils';
+import {
+  getColor,
+  getFontSize,
+  getFontWeight,
+  getRadii,
+  pxToRem,
+} from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { SpaceSizes } from '../../theme';
 import { SSCIcons, Types } from '../Icon/Icon.types';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
-import { Inline } from '../layout';
+import { Inline, Padbox } from '../layout';
 
 const BadgeNeutral = css`
   background-color: ${getColor('neutral.300')};
@@ -42,18 +49,16 @@ const badgeVariants = {
   [BadgeVariants.error]: BadgeError,
 };
 
-const BadgeElement = styled.span<BadgeElementProps>`
+const BadgeElement = styled(Padbox)<BadgeElementProps>`
   display: inline-block;
-  min-width: 1em;
-  padding: 0.125rem 0.5rem;
+  min-width: 1.5rem;
+  padding-block: 0.125rem;
   border-radius: ${getRadii('round')};
-  font-size: ${pxToRem(14)};
+  font-size: ${getFontSize('md')};
   font-weight: ${getFontWeight('regular')};
   text-align: center;
   ${({ $variant }) => badgeVariants[$variant]};
-  box-sizing: content-box;
-  line-height: 1.3125rem;
-  vertical-align: text-top;
+  line-height: ${pxToRem(20)};
 `;
 
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
@@ -65,7 +70,11 @@ const Badge: React.FC<BadgeProps> = ({
   iconType,
   variant = BadgeVariants.error,
 }) => (
-  <BadgeElement $variant={variant} className={CLX_COMPONENT}>
+  <BadgeElement
+    $variant={variant}
+    className={CLX_COMPONENT}
+    paddingSize={SpaceSizes.sm}
+  >
     <Inline align="center" as="span" gap="sm" justify="center">
       {iconName ? <Icon name={iconName} type={iconType} /> : null}
       <span>{count ? normalizeCount(count) : text}</span>
