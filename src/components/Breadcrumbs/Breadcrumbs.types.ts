@@ -1,3 +1,5 @@
+import type { To } from 'history';
+
 import { LinkProps } from '../typographyLegacy/Link/Link.types';
 
 export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
@@ -6,6 +8,8 @@ export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
    */
   children: React.ReactNode;
   isSelected?: boolean;
+  to?: To;
+  href?: string;
 }
 
 export interface BreadcrumbsProps {
