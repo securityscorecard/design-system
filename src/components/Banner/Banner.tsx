@@ -82,6 +82,7 @@ const Banner: React.FC<BannerProps> = ({
       $variant={variant}
       className={cls(CLX_COMPONENT, className)}
       paddingSize={SpaceSizes.sm}
+      {...props}
     >
       <BaseToastBanner
         iconAlign="flex-start"
@@ -91,7 +92,6 @@ const Banner: React.FC<BannerProps> = ({
         paddingType={PaddingTypes.square}
         stretch={StretchEnum.end}
         variant={variant}
-        {...props}
       >
         <ContentWrapper paddingSize={SpaceSizes.md}>
           <Inline align="flex-start" gap={SpaceSizes.xl} stretch={1}>
