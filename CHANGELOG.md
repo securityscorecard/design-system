@@ -1,3 +1,10 @@
+# [1.0.0-alpha.238](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.237...v1.0.0-alpha.238) (2022-12-08)
+
+
+### Bug Fixes
+
+* **Banner:** move props to wrapper component ([90e11a6](https://github.com/securityscorecard/design-system/commit/90e11a67374b48be5c7345c6f019a52b61689a35))
+
 # [1.0.0-alpha.237](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.236...v1.0.0-alpha.237) (2022-12-07)
 
 
