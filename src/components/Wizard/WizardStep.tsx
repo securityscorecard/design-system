@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useRegisterStep } from './hooks/useRegisterStep';
 import { useWizardContext } from './hooks/useWizardContext';
-import { WizardStepProps } from './Wizard.types';
+import { WizardActionPropType, WizardStepProps } from './Wizard.types';
 
-export const WizardStep: React.FC<WizardStepProps> = ({
+const WizardStep: React.FC<WizardStepProps> = ({
   children,
   ...step
 }: WizardStepProps) => {
@@ -13,3 +14,12 @@ export const WizardStep: React.FC<WizardStepProps> = ({
   useRegisterStep(step);
   return isActiveStep ? <div>{children}</div> : null;
 };
+
+WizardStep.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  primaryAction: WizardActionPropType.isRequired,
+  secondaryAction: WizardActionPropType,
+};
+
+export default WizardStep;
