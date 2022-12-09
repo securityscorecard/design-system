@@ -3,11 +3,12 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import Wizard from './Wizard';
-import { WizardStep } from './WizardStep';
+import WizardStep from './WizardStep';
 
 export default {
   title: 'components/Wizard',
   component: Wizard,
+  subcomponents: { WizardStep },
   parameters: {
     docs: {
       inlineStories: false,
