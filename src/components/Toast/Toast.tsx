@@ -28,11 +28,14 @@ const ToastFromTop = keyframes`
   }
 `;
 
-const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
+export const ToastArea = styled.div`
   position: fixed;
   z-index: 9999;
   top: ${pxToRem(70)};
   right: ${pxToRem(20)};
+`;
+
+const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   width: ${({ $width }) => pxToRem($width)};
   max-height: ${pxToRem(240)};
   background-color: ${getColor('neutral.0')};
@@ -63,46 +66,59 @@ const iconPxSizesVariants = {
 
 const stopPropagation = (event) => event?.stopPropagation();
 
+const ToastAreaContainer: React.FC<{
+  isStandalone: boolean;
+}> = ({ children, isStandalone }) => {
+  // eslint-disable-next-line
+  return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
+};
+
 const Toast: React.FC<ToastProps> = ({
   onClose,
   children,
   width = 400,
   variant,
-}) => (
-  <ToastContainer
-    $width={width}
-    className={CLX_COMPONENT}
-    onClick={stopPropagation}
-  >
-    <BaseToastBanner
-      iconAlign="center"
-      iconPxSizesVariants={iconPxSizesVariants}
-      iconSize={16}
-      paddingSize={SpaceSizes.sm}
-      paddingType={PaddingTypes.squish}
-      stretch={StretchEnum.end}
-      variant={variant}
-    >
-      <Inline justify="space-between">
-        <Padbox paddingSize={SpaceSizes.md}>
-          <ToastContent as="div" margin="none" size={TextSizes.md}>
-            {children}
-          </ToastContent>
-        </Padbox>
-        <CloseButton
-          aria-label="Close"
-          marginCompensation={SpaceSizes.none}
-          onClose={onClose}
-        />
-      </Inline>
-    </BaseToastBanner>
-  </ToastContainer>
-);
+  isStandalone = true,
+}) => {
+  return (
+    <ToastAreaContainer isStandalone={isStandalone}>
+      <ToastContainer
+        $width={width}
+        className={CLX_COMPONENT}
+        onClick={stopPropagation}
+      >
+        <BaseToastBanner
+          iconAlign="center"
+          iconPxSizesVariants={iconPxSizesVariants}
+          iconSize={16}
+          paddingSize={SpaceSizes.sm}
+          paddingType={PaddingTypes.squish}
+          stretch={StretchEnum.end}
+          variant={variant}
+        >
+          <Inline justify="space-between">
+            <Padbox paddingSize={SpaceSizes.md}>
+              <ToastContent as="div" margin="none" size={TextSizes.md}>
+                {children}
+              </ToastContent>
+            </Padbox>
+            <CloseButton
+              aria-label="Close"
+              marginCompensation={SpaceSizes.none}
+              onClose={onClose}
+            />
+          </Inline>
+        </BaseToastBanner>
+      </ToastContainer>
+    </ToastAreaContainer>
+  );
+};
 
 Toast.propTypes = {
   onClose: PropTypes.func.isRequired,
   width: PropTypes.number,
   variant: PropTypes.oneOf(Object.values(ToastVariants)),
+  isStandalone: PropTypes.bool,
 };
 
 export default Toast;

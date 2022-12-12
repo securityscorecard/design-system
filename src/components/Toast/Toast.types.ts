@@ -2,4 +2,5 @@ import { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBann
 
 export interface ToastProps extends BaseToastBannerProps {
   width?: number;
+  isStandalone?: boolean;
 }
