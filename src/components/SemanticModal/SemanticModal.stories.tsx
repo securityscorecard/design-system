@@ -22,12 +22,30 @@ export default {
   },
   argTypes: {
     variant: {
+      description: 'Semantic type of modal',
       ...generateControl('select', SemanticModalVariants),
     },
+    message: {
+      description: 'Main message text field',
+    },
+    onClose: {
+      description: 'Action executed on CloseButton click',
+    },
+    title: {
+      description: 'Message heading',
+    },
+    isPrimaryButtonLoading: {
+      description:
+        'When certain process is still running, you can set the primary button to "loading" state',
+    },
+    loadingText: { description: 'Loading state text' },
     actions: {
+      description: 'An array of action items that are rendered as buttons',
       control: { disable: true },
     },
     primaryButtonColor: {
+      description:
+        'Changes the colour of the primary button so the priamry action can match the message',
       ...generateControl('select', ButtonColors),
     },
   },
