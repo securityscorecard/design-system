@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <h1>DS Highlighter</h1>
+    <button class="button" id="mark-layout">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16">
+        <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+        <path fill="currentColor" d="M448 32C483.3 32 512 60.65 512 96V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H448zM448 80H64C55.16 80 48 87.16 48 96V160H464V96C464 87.16 456.8 80 448 80zM64 432H144V208H48V416C48 424.8 55.16 432 64 432zM192 432H448C456.8 432 464 424.8 464 416V208H192V432z"/>
+      </svg>
+      Highlight layout components
+    </button>
+    <button class="button" id="mark-components">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16">
+        <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+        <path fill="currentColor" d="M448 92.99V207.5L539.9 242.4C561.6 250.6 576 271.5 576 294.7V413.9C576 436.1 562.9 456.2 542.5 465.1L446.2 507.5C432.2 513.7 416.3 513.8 402.2 507.1L288 460.7L173.8 507.1C159.7 513.8 143.8 513.7 129.8 507.5L33.46 465.1C13.13 456.2 0 436.1 0 413.9V294.7C0 271.5 14.39 250.6 36.15 242.4L128 207.5V92.99C128 69.32 142.9 48.2 165.2 40.24L269.2 3.134C281.4-1.209 294.6-1.209 306.8 3.134L410.8 40.24C433.1 48.2 448 69.32 448 92.99V92.99zM290.7 48.34C288.1 47.72 287.1 47.72 285.3 48.34L204.1 77.32L288 109.5L371.9 77.32L290.7 48.34zM264 238.6V151.7L176 117.9V207.2L264 238.6zM312 238.6L400 207.2V117.9L312 151.7V238.6zM176 353.9V455.1L264 418.7V320.2L176 353.9zM52.78 421.2L128 454.3V353.9L48 323.2V413.9C48 417.1 49.88 419.9 52.78 421.2zM400 353.9L312 320.2V418.7L400 455.1V353.9zM448 454.3L523.2 421.2C526.1 419.9 528 417.1 528 413.9V323.2L448 353.9V454.3zM155 250.7C153.2 250 151.3 250.1 149.5 250.7L70.81 280.6L152 311.7L235.9 279.5L155 250.7zM340.1 279.5L424 311.7L505.2 280.6L426.5 250.7C424.7 250.1 422.8 250 420.1 250.7L340.1 279.5z"/>
+      </svg>
+      Highlight functional components
+    </button>
+    <button class="button" id="mark-text">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="16">
+        <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+        <path fill="currentColor" d="M198.4 47.47c-7.094-18.62-37.78-18.62-44.88 0l-152 400c-4.703 12.41 1.516 26.25 13.91 30.97c12.44 4.75 26.28-1.531 30.97-13.91L83.12 368h185.8l36.68 96.53C309.2 474.1 318.3 480 328 480c2.844 0 5.719-.5 8.531-1.562c12.39-4.719 18.61-18.56 13.91-30.97L198.4 47.47zM101.4 320L176 123.6L250.6 320H101.4zM616 160c-13.25 0-24 10.75-24 24v4.889c-21.99-17.79-49.58-28.88-80-28.88c-70.58 0-128 57.41-128 128l.0007 63.93c0 70.59 57.42 128.1 127.1 128.1c30.42 0 58.01-11.11 79.1-28.9V456c0 13.25 10.75 24 24 24S640 469.3 640 456v-272C640 170.8 629.3 160 616 160zM592 352c0 44.13-35.89 80-80 80s-80-35.88-80-80V288c0-44.13 35.89-80 80-80s80 35.88 80 80V352z"/>
+      </svg>
+      Highlight text components
+    </button>
+    <hr/>
+    <button class="button" id="reset-all">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16">
+        <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+        <path fill="currentColor" d="M424 80C437.3 80 448 90.75 448 104C448 117.3 437.3 128 424 128H412.4L388.4 452.7C385.9 486.1 358.1 512 324.6 512H123.4C89.92 512 62.09 486.1 59.61 452.7L35.56 128H24C10.75 128 0 117.3 0 104C0 90.75 10.75 80 24 80H93.82L130.5 24.94C140.9 9.357 158.4 0 177.1 0H270.9C289.6 0 307.1 9.358 317.5 24.94L354.2 80H424zM177.1 48C174.5 48 171.1 49.34 170.5 51.56L151.5 80H296.5L277.5 51.56C276 49.34 273.5 48 270.9 48H177.1zM364.3 128H83.69L107.5 449.2C108.1 457.5 115.1 464 123.4 464H324.6C332.9 464 339.9 457.5 340.5 449.2L364.3 128z"/>
+      </svg>
+      Reset
+    </button>
+    <script src="popup.js"></script>
+  </body>
+</html>

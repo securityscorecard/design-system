@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Inline, Stack } from '../layout';
 import { Modal } from '../Modal';
@@ -38,6 +39,14 @@ const Wizard: React.FC<WizardProps> = ({
       </Modal>
     </WizardProvider>
   );
+};
+
+Wizard.propTypes = {
+  initialStep: PropTypes.string,
+  size: PropTypes.oneOf(Object.keys(ModalSizes)),
+  isBackwardNavigationEnabled: PropTypes.bool,
+  onStepChange: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default Wizard;
