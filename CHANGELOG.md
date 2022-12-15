@@ -1,3 +1,15 @@
+# [1.0.0-alpha.239](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.238...v1.0.0-alpha.239) (2022-12-15)
+
+
+### Bug Fixes
+
+* **Wizard:** export WizardStep and add prop-types ([119a566](https://github.com/securityscorecard/design-system/commit/119a566ec01f017226e08e976c11b21065af24b9))
+
+
+### Features
+
+* add NotificationsManager ([e2952d9](https://github.com/securityscorecard/design-system/commit/e2952d92adc6dc5a3a4c24d9ac9da3cea97d8cc7))
+
 # [1.0.0-alpha.238](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.237...v1.0.0-alpha.238) (2022-12-08)
 
 
