@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
+import { Stack } from '../../layout';
 import Text, { Code, Strong } from './Text';
 import { TextProps } from './Text.types';
 import { TextSizes, TextVariants } from './Text.enums';
@@ -44,6 +45,46 @@ export const MediumText: Story = () => (
 );
 
 export const SmallText: Story = () => <Text size={TextSizes.sm}>{lipsum}</Text>;
+export const TextHeading1: Story = () => (
+  <Stack>
+    <Text size={TextSizes.h1}>{lipsum}</Text>
+    <Text size={TextSizes.h1} variant="secondary">
+      {lipsum}
+    </Text>
+  </Stack>
+);
+export const TextHeading2: Story = () => (
+  <Stack>
+    <Text size={TextSizes.h2}>{lipsum}</Text>
+    <Text size={TextSizes.h2} variant="secondary">
+      {lipsum}
+    </Text>
+  </Stack>
+);
+export const TextHeading3: Story = () => (
+  <Stack>
+    <Text size={TextSizes.h3}>{lipsum}</Text>
+    <Text size={TextSizes.h3} variant="secondary">
+      {lipsum}
+    </Text>
+  </Stack>
+);
+export const TextHeading4: Story = () => (
+  <Stack>
+    <Text size={TextSizes.h4}>{lipsum}</Text>
+    <Text size={TextSizes.h4} variant="secondary">
+      {lipsum}
+    </Text>
+  </Stack>
+);
+export const TextHeading5: Story = () => (
+  <Stack>
+    <Text size={TextSizes.h5}>{lipsum}</Text>
+    <Text size={TextSizes.h5} variant="secondary">
+      {lipsum}
+    </Text>
+  </Stack>
+);
 
 SmallText.storyName = 'Small Text (DEPRECATED)';
 
