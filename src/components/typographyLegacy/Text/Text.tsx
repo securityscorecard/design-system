@@ -9,10 +9,15 @@ import {
   getFontWeight,
   getLineHeight,
 } from '../../../utils';
+import { HeadingProps } from '../Heading/Heading.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { CodeProps, StrongProps, TextProps } from './Text.types';
 import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
+const HeadingBase = css<HeadingProps>`
+  font-family: ${getFontFamily('base')};
+  font-weight: ${getFontWeight('medium')};
+`;
 const largeSize = css`
   font-size: ${getFontSize('lg')};
   line-height: ${getLineHeight('lg')};
@@ -24,6 +29,31 @@ const mediumSize = css`
 const smallSize = css`
   font-size: ${getFontSize('sm')};
   line-height: ${getLineHeight('md')};
+`;
+const h1 = css`
+  ${HeadingBase};
+  font-size: ${getFontSize('h1')};
+  line-height: ${getLineHeight('xxl')};
+`;
+const h2 = css`
+  ${HeadingBase};
+  font-size: ${getFontSize('h2')};
+  line-height: ${getLineHeight('xxl')};
+`;
+const h3 = css`
+  ${HeadingBase};
+  font-size: ${getFontSize('h3')};
+  line-height: ${getLineHeight('xl')};
+`;
+const h4 = css`
+  ${HeadingBase};
+  font-size: ${getFontSize('h4')};
+  line-height: ${getLineHeight('h4')};
+`;
+const h5 = css`
+  ${HeadingBase};
+  font-size: ${getFontSize('h5')};
+  line-height: ${getLineHeight('h4')};
 `;
 const inheritSize = css`
   font-size: inherit;
@@ -53,6 +83,11 @@ const sizes = {
   [TextSizes.lg]: largeSize,
   [TextSizes.md]: mediumSize,
   [TextSizes.sm]: smallSize,
+  [TextSizes.h1]: h1,
+  [TextSizes.h2]: h2,
+  [TextSizes.h3]: h3,
+  [TextSizes.h4]: h4,
+  [TextSizes.h5]: h5,
   [TextSizes.inherit]: inheritSize,
 };
 
