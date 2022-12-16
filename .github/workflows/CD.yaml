@@ -355,119 +355,119 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
 
-  get-next-version:
-    name: '📟 Get next released version'
-    if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
-    needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # get-next-version:
+  #   name: '📟 Get next released version'
+  #   if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
+  #   needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Install Packages
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable
+  #     - name: Install Packages
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: yarn install --immutable
 
-      - name: Run Semantic Release
-        run: yarn semantic-release --dry-run
-        id: get-next-version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
+  #     - name: Run Semantic Release
+  #       run: yarn semantic-release --dry-run
+  #       id: get-next-version
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #         NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
 
-    outputs:
-      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
-      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
+  #   outputs:
+  #     new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
+  #     new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
 
-  build-docs:
-    name: '📒 Build documentation'
-    needs: [get-next-version, build-and-publish]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: alpha
+  # build-docs:
+  #   name: '📒 Build documentation'
+  #   needs: [get-next-version, build-and-publish]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #         ref: alpha
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Cache yarn pnp files
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            .yarn/cache
-            .yarn/unplugged
-            .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+  #     - name: Cache yarn pnp files
+  #       uses: actions/cache@v3
+  #       id: cache
+  #       with:
+  #         path: |
+  #           .yarn/cache
+  #           .yarn/unplugged
+  #           .yarn/install-state.gz
+  #           .pnp.cjs
+  #           .pnp.loader.mjs
+  #         key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node-16-${{ env.cache-name }}-
+  #           ${{ runner.os }}-node-${{ env.cache-name }}-
+  #           ${{ runner.os }}-node-
+  #           ${{ runner.os }}-
 
-      - name: Install Packages
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable
+  #     - name: Install Packages
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: yarn install --immutable
 
-      - name: Cache storybook build
-        id: storybook-build-cache
-        uses: actions/cache@v3
-        with:
-          path: docs-build
-          key: docs-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
-          restore-keys: |
-            docs-
+  #     - name: Cache storybook build
+  #       id: storybook-build-cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: docs-build
+  #         key: docs-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
+  #         restore-keys: |
+  #           docs-
 
-      - name: Build Storybook
-        if: steps.storybook-build-cache.outputs.cache-hit != 'true'
-        run: yarn build-storybook -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
+  #     - name: Build Storybook
+  #       if: steps.storybook-build-cache.outputs.cache-hit != 'true'
+  #       run: yarn build-storybook -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
 
-      - name: Generate redirect index
-        env:
-          VERSION: ${{ needs.get-next-version.outputs.new-release-version }}
-        run: |
-          yarn node ./scripts/generate-index.js
+  #     - name: Generate redirect index
+  #       env:
+  #         VERSION: ${{ needs.get-next-version.outputs.new-release-version }}
+  #       run: |
+  #         yarn node ./scripts/generate-index.js
 
-      - name: Upload Storybook artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: storybook
-          path: ./docs-build
-          retention-days: 1
+  #     - name: Upload Storybook artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: storybook
+  #         path: ./docs-build
+  #         retention-days: 1
 
-  deploy-docs:
-    name: '📤 Deploy documentation'
-    needs: [get-next-version, build-docs]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: gh-pages
+  # deploy-docs:
+  #   name: '📤 Deploy documentation'
+  #   needs: [get-next-version, build-docs]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         ref: gh-pages
 
-      - name: Download Storybook artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: storybook
+  #     - name: Download Storybook artifact
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: storybook
 
-      - name: Commit storybook
-        run: |
-          git config --global user.name "Continuous Integration"
-          git config --global user.email "username@users.noreply.github.com"
-          git add -A
-          git commit -m "Publish docs for ${{ needs.get-next-version.outputs.new-release-version }}"
-          git push
+  #     - name: Commit storybook
+  #       run: |
+  #         git config --global user.name "Continuous Integration"
+  #         git config --global user.email "username@users.noreply.github.com"
+  #         git add -A
+  #         git commit -m "Publish docs for ${{ needs.get-next-version.outputs.new-release-version }}"
+  #         git push
