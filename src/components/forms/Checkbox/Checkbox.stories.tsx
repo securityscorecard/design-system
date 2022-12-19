@@ -29,10 +29,29 @@ export default {
   title: 'components/forms/Checkbox',
   component: Checkbox,
   argTypes: {
-    name: { control: { disable: true } },
-    checkboxId: { control: { disable: true } },
-    defaultChecked: { table: { type: { summary: 'boolean' } } },
+    name: {
+      description: 'Name property of the form',
+      control: { disable: true },
+    },
+    checkboxId: {
+      description: 'ID property of the form',
+      control: { disable: true },
+    },
+    defaultChecked: {
+      description: 'Default value of the checkbox',
+      table: { type: { summary: 'boolean' } },
+    },
+    isDisabled: {
+      description: 'Make element not interactive when certain condition is met',
+    },
+    isIndeterminate: {
+      description: 'Subordinate checkboxes might have various values',
+    },
+    isInvalid: {
+      description: 'It marks the selection when wrong',
+    },
     label: {
+      description: 'Adds text to the checkbox',
       options: Object.keys(labelMappingValues),
       mapping: labelMappingValues,
       control: {
