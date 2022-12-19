@@ -15,7 +15,7 @@ import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
