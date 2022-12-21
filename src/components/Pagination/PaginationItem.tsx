@@ -18,6 +18,7 @@ const StyledPaginationComponent = styled.button<{
   $isCurrent: boolean;
 }>`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   min-width: ${pxToRem(40)};
