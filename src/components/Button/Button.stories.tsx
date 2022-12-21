@@ -271,17 +271,32 @@ export const ButtonsWithIconOverview: Story = () => (
     <Button color="primary" iconName={SSCIconNames.wrench} variant="solid">
       Button
     </Button>
-    <Button color="primary" iconName={SSCIconNames.wrench} variant="solid" />
+    <Button
+      ariaLabel="Wrench solid icon button"
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      variant="solid"
+    />
 
     <Button color="primary" iconName={SSCIconNames.wrench} variant="outline">
       Button
     </Button>
-    <Button color="primary" iconName={SSCIconNames.wrench} variant="outline" />
+    <Button
+      ariaLabel="Wrench outline icon button"
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      variant="outline"
+    />
 
     <Button color="primary" iconName={SSCIconNames.wrench} variant="text">
       Button
     </Button>
-    <Button color="primary" iconName={SSCIconNames.wrench} variant="text" />
+    <Button
+      ariaLabel="Wrench text icon button"
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      variant="text"
+    />
   </Inline>
 );
 
