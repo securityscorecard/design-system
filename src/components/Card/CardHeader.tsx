@@ -122,6 +122,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
             {hasHelp && (
               <Tooltip popup={helpTooltip}>
                 <CardIconButton
+                  aria-label="Help"
                   as={isNotUndefined(onHelpClick) ? 'button' : 'div'}
                   onClick={onHelpClick}
                 >

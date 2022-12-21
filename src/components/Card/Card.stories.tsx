@@ -53,7 +53,7 @@ function CardHeaderTemplate({
   helpTooltip = null,
   leftAdornment = (
     <div style={{ marginLeft: '-8px' }}>
-      <CardIconButton>
+      <CardIconButton aria-label="Drag Card">
         <Icon color="neutral.800" name="grip-dots-vertical" />
       </CardIconButton>
     </div>
@@ -106,7 +106,7 @@ function CardActionsTemplate({
       actions={actionsFromProps}
       rightAdornment={
         <div style={{ marginRight: '-8px' }}>
-          <CardIconButton>
+          <CardIconButton aria-label="Resize Card">
             <Icon color="neutral.700" name="resize" />
           </CardIconButton>
         </div>
