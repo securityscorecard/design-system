@@ -37,6 +37,11 @@ export const BaseTableContainer = styled.div`
   &::-webkit-scrollbar-thumb {
     background: content-box ${getColor('neutral.500')};
   }
+  &:focus-visible {
+    outline-color: ${getColor('primary.500')};
+    outline-style: solid;
+    outline-width: 2px;
+  }
 `;
 
 const DsLinkCell = css`
