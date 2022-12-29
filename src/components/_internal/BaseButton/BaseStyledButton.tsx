@@ -158,7 +158,9 @@ const BaseStyledButton = styled(Padbox).withConfig({
     css`
       width: ${pipe(getToken('size-action-size'), pxToRem)};
     `};
-
+  &:focus {
+    outline: 0;
+  }
   ${({ $variant }) => buttonVariants[$variant]};
 
   &,
@@ -166,9 +168,6 @@ const BaseStyledButton = styled(Padbox).withConfig({
   &:focus-visible,
   &:active {
     text-decoration: none;
-  }
-  &:focus {
-    outline: 0;
   }
 `;
 
