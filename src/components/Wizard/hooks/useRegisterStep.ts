@@ -8,15 +8,9 @@ export const useRegisterStep = (step: WizardStep) => {
   useEffect(() => {
     // Register step
     update((state) => {
-      const isInitialStep = state.initialStep === step.id;
       return {
         ...state,
         steps: [...state.steps, step],
-        activeStep: isInitialStep
-          ? step
-          : state.activeStep
-          ? state.activeStep
-          : step,
       };
     });
     // Unregister step
@@ -26,5 +20,24 @@ export const useRegisterStep = (step: WizardStep) => {
         steps: state.steps.filter((item) => item.id === step.id),
       }));
     // eslint-disable-next-line
-  }, [step.id, step.name]);
+  }, [step.id]);
+
+  // Update step state
+  useEffect(() => {
+    update((state) => {
+      return {
+        ...state,
+        steps: state.steps.map((item) => (item.id === step.id ? step : item)),
+      };
+    });
+    // eslint-disable-next-line
+  }, [
+    step.name,
+    step.primaryAction.isDisabled,
+    step.primaryAction.label,
+    step.primaryAction.onClick,
+    step.secondaryAction?.isDisabled,
+    step.secondaryAction?.label,
+    step.secondaryAction?.onClick,
+  ]);
 };

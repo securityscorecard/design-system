@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Button } from '../Button';
 import { Inline } from '../layout';
-import { useWizardContext } from './hooks/useWizardContext';
+import { useActiveStep } from './hooks/useActiveStep';
 import { useWizardNavigation } from './hooks/useWizardNavigation';
 
 export const WizardActions = () => {
-  const { activeStep } = useWizardContext();
+  const activeStep = useActiveStep();
   const navigation = useWizardNavigation();
 
   if (!activeStep) return null;

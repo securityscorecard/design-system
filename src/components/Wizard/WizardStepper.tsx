@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Step, Stepper } from '../Stepper';
+import { useActiveStep } from './hooks/useActiveStep';
 import { useWizardContext } from './hooks/useWizardContext';
 import { useWizardNavigation } from './hooks/useWizardNavigation';
 
 export const WizardStepper = () => {
-  const { steps, activeStep, isBackwardNavigationEnabled } = useWizardContext();
+  const { steps, isBackwardNavigationEnabled } = useWizardContext();
+  const activeStep = useActiveStep();
   const navigation = useWizardNavigation();
   const activeStepIndex = steps.findIndex((item) => item.id === activeStep.id);
   return steps.length >= 3 ? (
