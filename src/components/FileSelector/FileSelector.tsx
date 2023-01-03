@@ -198,6 +198,7 @@ const FileSelector = ({
         $height: sizes?.height,
         paddingSize: SpaceSizes.sm,
         ...passedProps,
+        role: 'presentation',
       })}
       className={cls(CLX_COMPONENT, className)}
     >
