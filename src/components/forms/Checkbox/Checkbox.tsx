@@ -162,7 +162,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         <Box>
           <Mark
-            role="img"
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             {...generateIconProps(isIndeterminate ? indeterminate : checked)}
           />
