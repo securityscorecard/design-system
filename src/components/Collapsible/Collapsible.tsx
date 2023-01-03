@@ -77,7 +77,9 @@ const Collapsible: React.FC<CollapsibleProps> = ({
       <Header
         paddingSize={SpaceSizes.lg}
         paddingType={PaddingTypes.squish}
+        tabIndex={0}
         onClick={handleHeaderClick}
+        onKeyDown={(e) => ['Enter', ' '].includes(e.key) && handleHeaderClick()}
       >
         <Inline align="center" gap={SpaceSizes.lg}>
           <StyledIcon
