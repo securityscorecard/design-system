@@ -52,7 +52,6 @@ const BaseButton: React.FC<
   isExpanded = false,
   loadingText = 'Loading',
   className,
-  ariaLabel,
   ...props
 }) => {
   let RouterLink = null;
@@ -94,7 +93,7 @@ const BaseButton: React.FC<
     </>
   ) : isNotUndefined(iconName) ? (
     <>
-      <BaseStyledIcon aria-label={ariaLabel} name={iconName} type={iconType} />
+      <BaseStyledIcon name={iconName} type={iconType} />
       {isNotUndefined(children) && <span>{children}</span>}
     </>
   ) : (
@@ -109,7 +108,6 @@ const BaseButton: React.FC<
       $isLoading={isLoading}
       $margin={margin}
       $variant={variant}
-      aria-label={ariaLabel}
       as={domTag}
       className={cls(CLX_COMPONENT, className)}
       disabled={isDisabled || isLoading}
@@ -119,6 +117,7 @@ const BaseButton: React.FC<
       to={to}
       onClick={onClick}
       {...props}
+      aria-label={isLoading && hasOnlyIcon ? 'Loading' : props?.['aria-label']}
     >
       <Inline align="center" gap={SpaceSizes.sm}>
         {content}
@@ -154,7 +153,6 @@ BaseButton.propTypes = {
     PropTypes.string,
   ]),
   loadingText: PropTypes.string,
-  ariaLabel: PropTypes.string,
   onClick: PropTypes.func,
 };
 

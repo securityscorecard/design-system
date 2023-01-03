@@ -272,7 +272,7 @@ export const ButtonsWithIconOverview: Story = () => (
       Button
     </Button>
     <Button
-      ariaLabel="Wrench solid icon button"
+      aria-label="Wrench solid icon button"
       color="primary"
       iconName={SSCIconNames.wrench}
       variant="solid"
@@ -282,7 +282,7 @@ export const ButtonsWithIconOverview: Story = () => (
       Button
     </Button>
     <Button
-      ariaLabel="Wrench outline icon button"
+      aria-label="Wrench outline icon button"
       color="primary"
       iconName={SSCIconNames.wrench}
       variant="outline"
@@ -292,7 +292,7 @@ export const ButtonsWithIconOverview: Story = () => (
       Button
     </Button>
     <Button
-      ariaLabel="Wrench text icon button"
+      aria-label="Wrench text icon button"
       color="primary"
       iconName={SSCIconNames.wrench}
       variant="text"
