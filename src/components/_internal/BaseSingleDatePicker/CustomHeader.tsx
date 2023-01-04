@@ -98,7 +98,11 @@ export const DatePickerCustomHeader: React.FC<{
 
   return (
     <Inline stretch={2}>
-      <MonthSelector type="button" onClick={onClickLeft}>
+      <MonthSelector
+        aria-label="Previous month button"
+        type="button"
+        onClick={onClickLeft}
+      >
         <ChangeMonthIcon direction="left" />
       </MonthSelector>
       <MonthIndicator onClick={() => toggleYearPicker()}>
@@ -106,7 +110,11 @@ export const DatePickerCustomHeader: React.FC<{
           {`${getMonth(date)} ${getYear(date)}`}
         </Padbox>
       </MonthIndicator>
-      <MonthSelector type="button" onClick={onClickRight}>
+      <MonthSelector
+        aria-label="Next month button"
+        type="button"
+        onClick={onClickRight}
+      >
         <ChangeMonthIcon direction="right" />
       </MonthSelector>
     </Inline>

@@ -117,6 +117,7 @@ const BaseButton: React.FC<
       to={to}
       onClick={onClick}
       {...props}
+      aria-label={isLoading && hasOnlyIcon ? 'Loading' : props?.['aria-label']}
     >
       <Inline align="center" gap={SpaceSizes.sm}>
         {content}
