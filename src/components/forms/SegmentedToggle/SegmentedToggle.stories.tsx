@@ -11,7 +11,10 @@ export default {
   title: 'components/forms/SegmentedToggle',
   component: SegmentedToggle,
   argTypes: {
-    name: { control: { disable: true } },
+    name: {
+      control: { disable: true },
+      description: 'Name parameter for the form',
+    },
   },
 } as Meta;
 

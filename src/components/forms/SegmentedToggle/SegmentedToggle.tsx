@@ -31,7 +31,7 @@ const SegmentedToggle = forwardRef<
       className={cls(CLX_COMPONENT, className)}
       paddingSize={SpaceSizes.xs}
     >
-      <Inline gap={SpaceSizes.sm} role="tablist">
+      <Inline gap={SpaceSizes.sm} role="radiogroup">
         {React.Children.map(children, (segmentedToggleItem) => {
           if (!React.isValidElement(segmentedToggleItem)) {
             return null;
