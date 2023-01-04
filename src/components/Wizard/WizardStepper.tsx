@@ -11,7 +11,7 @@ export const WizardStepper = () => {
   const navigation = useWizardNavigation();
   const activeStepIndex = steps.findIndex((item) => item.id === activeStep.id);
   return steps.length >= 3 ? (
-    <Stepper activeStep={activeStepIndex}>
+    <Stepper activeStep={activeStepIndex} showTextBreakpoint={10000}>
       {steps.map((item) => (
         <Step
           key={item.id}
