@@ -324,7 +324,7 @@ function Table<D extends Record<string, unknown>>({
   return (
     <>
       <BaseTableAndLoadingOverlayContainer>
-        <BaseTableContainer>
+        <BaseTableContainer tabIndex={0}>
           <StyledBaseTable
             className={cls({
               'has-exclusive-selection': hasExclusiveSelection,

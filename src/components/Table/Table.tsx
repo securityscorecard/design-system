@@ -48,7 +48,6 @@ const TableWrapper = styled.div`
   border-top-width: 0;
   background: ${getColor('neutral.200')};
   border-radius: ${getRadii('default')};
-  overflow: hidden;
 `;
 
 const renderDefaultCell = <D extends Record<string, unknown>>(
@@ -150,7 +149,7 @@ function Table<D extends Record<string, unknown>>({
   return (
     <TableWrapper className={CLX_COMPONENT}>
       <BaseTableAndLoadingOverlayContainer>
-        <BaseTableContainer>
+        <BaseTableContainer tabIndex={0}>
           <StyledBaseTable {...getTableProps()}>
             <Head headerGroups={headerGroups} />
             <Body<D>

@@ -20,7 +20,7 @@ export default {
     (storyFn) => (
       <MemoryRouter>
         <div style={{ width: '400px', margin: '0 auto' }}>
-          <BaseTableContainer>
+          <BaseTableContainer tabIndex={0}>
             <StyledBaseTable>
               <tbody>
                 <tr>
