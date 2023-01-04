@@ -64,9 +64,9 @@ function CardMedia<El extends HTMLElement = HTMLDivElement>({
 }
 
 CardMedia.propTypes = {
+  alt: PropTypes.string.isRequired,
   mediaSrc: PropTypes.string,
   style: PropTypes.shape({}),
-  alt: PropTypes.string,
   as: PropTypes.elementType,
 };
 CardMedia.displayName = 'CardMedia';

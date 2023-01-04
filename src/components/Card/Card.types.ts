@@ -78,7 +78,7 @@ export interface CardMediaProps {
   /**
    * Alternative text from media elements
    */
-  alt?: string;
+  alt: string;
   /**
    * Can specify any element or React component.
    */

@@ -198,7 +198,11 @@ CardMediaWithBackgroundImage.args = {
   ...Playground.args,
   children: (
     <>
-      <CardMedia mediaSrc={image} style={{ height: '15rem' }} />
+      <CardMedia
+        alt="bakground image"
+        mediaSrc={image}
+        style={{ height: '15rem' }}
+      />
       <CardHeaderTemplate />
       <CardContentTemplate />
     </>
@@ -222,7 +226,7 @@ CardMediaWithNonMediaElement.args = {
   ...Playground.args,
   children: (
     <>
-      <CardMedia>
+      <CardMedia alt="SVG as image">
         <svg
           id="chart"
           style={{ width: '100%', display: 'block' }}
@@ -253,6 +257,7 @@ CardMediaWithVideo.args = {
   children: (
     <>
       <CardMedia<HTMLVideoElement>
+        alt="video"
         as="video"
         mediaSrc="https://vod-progressive.akamaized.net/exp=1645198892~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F365%2F27%2F676828330%2F3118616272.mp4~hmac=acd6dc57f710956af000af6fc01f8f629d6b6b611bd6581d157bb38cdec202a7/vimeo-prod-skyfire-std-us/01/365/27/676828330/3118616272.mp4"
         style={{ height: '14rem' }}
