@@ -7,6 +7,7 @@ import { WizardActionPropType, WizardStepProps } from './Wizard.types';
 import { useActiveStep } from './hooks/useActiveStep';
 import { pxToRem } from '../../utils';
 
+// The fixed container height helps to improve Wizard UX by keeping the CTAs at the same horizontal place, however in the future this could be responsiveness constrain.
 const StepContainer = styled.div`
   height: ${pxToRem(418)};
 `;
