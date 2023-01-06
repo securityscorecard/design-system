@@ -31,6 +31,10 @@ const BreadcrumbLink = styled(Link)`
   }
 `;
 
+const ListItem = styled.li`
+  list-style-type: none;
+`;
+
 const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   children,
   isSelected = false,
@@ -38,7 +42,7 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   href = undefined,
   ...props
 }) => (
-  <li>
+  <ListItem>
     {isSelected ? (
       <Text
         aria-current="page"
@@ -52,7 +56,7 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
         {children}
       </BreadcrumbLink>
     )}
-  </li>
+  </ListItem>
 );
 
 BreadcrumbItem.propTypes = {

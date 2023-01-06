@@ -39,6 +39,10 @@ const BreadcrumbsWrapper = styled.nav`
   display: flex;
 `;
 
+const InlineOrderedList = styled(Inline)`
+  padding: 0;
+`;
+
 const itemsAfterCollapse = 2;
 const itemsBeforeCollapse = 1;
 const maxItems = 3;
@@ -135,13 +139,18 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       aria-label="Breadcrumb"
       className={cls(CLX_COMPONENT, className)}
     >
-      <Inline align="center" as="ol" gap={SpaceSizes.xs} justify="center">
+      <InlineOrderedList
+        align="center"
+        as="ol"
+        gap={SpaceSizes.xs}
+        justify="center"
+      >
         {insertSeparators(
           maxItems && allItems.length <= maxItems
             ? allItems
             : renderItemsBeforeAndAfter(allItems, allDropdownActions),
         )}
-      </Inline>
+      </InlineOrderedList>
     </BreadcrumbsWrapper>
   );
 };
