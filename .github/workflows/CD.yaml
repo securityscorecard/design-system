@@ -314,6 +314,23 @@ jobs:
         with:
           node-version: 16
 
+      - name: Cache yarn pnp files
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
+
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
@@ -397,6 +414,7 @@ jobs:
 
   build-docs:
     name: '📒 Build documentation'
+    if: needs.get-next-version.outputs.new-release-published == 'true' && needs.get-next-version.outputs.status == 'success'
     needs: [get-next-version, build-and-publish]
     runs-on: ubuntu-latest
     steps:
