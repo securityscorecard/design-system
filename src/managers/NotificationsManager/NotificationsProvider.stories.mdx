@@ -9,15 +9,16 @@ This feature provides an api to display toast notifications programatically
 
 ## Usage
 
-First, you need to wrap your application with the `NotificationsProvider` component.
+First, you need to render in your application the `NotificationsProvider` component.
 
 ```jsx
 import { NotificationsProvider } from '@securityscorecard/design-system';
 
 const App = () => (
-  <NotificationsProvider>
+  <>
+    <NotificationsProvider />
     <YourApplication />
-  </NotificationsProvider>
+  </>
 );
 ```
 
