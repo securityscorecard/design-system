@@ -15,7 +15,7 @@ import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,6 +37,10 @@ const IconWrapperDropdown = styled(IconWrapper)`
 
 const BreadcrumbsWrapper = styled.nav`
   display: flex;
+`;
+
+const InlineOrderedList = styled(Inline)`
+  padding: 0;
 `;
 
 const itemsAfterCollapse = 2;
@@ -135,13 +139,18 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       aria-label="Breadcrumb"
       className={cls(CLX_COMPONENT, className)}
     >
-      <Inline align="center" as="ol" gap={SpaceSizes.xs} justify="center">
+      <InlineOrderedList
+        align="center"
+        as="ol"
+        gap={SpaceSizes.xs}
+        justify="center"
+      >
         {insertSeparators(
           maxItems && allItems.length <= maxItems
             ? allItems
             : renderItemsBeforeAndAfter(allItems, allDropdownActions),
         )}
-      </Inline>
+      </InlineOrderedList>
     </BreadcrumbsWrapper>
   );
 };
