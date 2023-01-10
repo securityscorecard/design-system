@@ -93,7 +93,7 @@ export interface CardMediaWrapperProps {
 export interface CardProps {
   children: React.ReactNode;
   as?: ReactComponentLike;
-  onClick?: () => void;
+  onClick?: (event: Event) => void;
   to?: string;
   href?: string;
   shouldAlignLastItemToBottom?: boolean;
