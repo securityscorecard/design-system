@@ -10,7 +10,7 @@ import { WizardStep } from './Wizard.types';
 
 export interface WizardState {
   initialStep?: string;
-  activeStep?: WizardStep;
+  activeStepId?: string;
   steps: WizardStep[];
   isBackwardNavigationEnabled: boolean;
   update: Dispatch<SetStateAction<WizardState>>;
@@ -18,7 +18,7 @@ export interface WizardState {
 
 export const WizardContext = React.createContext<WizardState>({
   initialStep: undefined,
-  activeStep: undefined,
+  activeStepId: undefined,
   steps: [],
   isBackwardNavigationEnabled: false,
   update: () => null,
@@ -38,19 +38,21 @@ export const WizardProvider: React.FC<WizardProviderProps> = ({
   onStepChange,
 }) => {
   const [state, update] = useState<WizardState>({
-    activeStep: undefined,
+    activeStepId: undefined,
     update: () => null,
     initialStep,
     steps: [],
     isBackwardNavigationEnabled,
   });
 
+  const activeStep = state.steps.find((item) => item.id === state.activeStepId);
+
   useEffect(() => {
-    if (state.activeStep) {
-      onStepChange(state.activeStep);
+    if (activeStep) {
+      onStepChange(activeStep);
     }
     // eslint-disable-next-line
-  }, [state.activeStep?.name, onStepChange]);
+  }, [activeStep?.name, onStepChange]);
 
   const value = useMemo(() => ({ ...state, update }), [state]);
   return (

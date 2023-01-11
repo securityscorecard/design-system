@@ -122,10 +122,16 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
             {hasHelp && (
               <Tooltip popup={helpTooltip}>
                 <CardIconButton
+                  aria-label="Help"
                   as={isNotUndefined(onHelpClick) ? 'button' : 'div'}
+                  data-interactive="true"
                   onClick={onHelpClick}
                 >
-                  <Icon color="neutral.800" name="question-circle" />
+                  <Icon
+                    color="neutral.800"
+                    data-interactive="true"
+                    name="question-circle"
+                  />
                 </CardIconButton>
               </Tooltip>
             )}
@@ -135,9 +141,11 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
                   <CardIconButton
                     $isActive={isActive}
                     aria-label={actionsButtonLabel}
+                    data-interactive="true"
                     title={actionsButtonLabel}
                   >
                     <Icon
+                      data-interactive="true"
                       name={SSCIconNames.ellipsisV}
                       rotation={90}
                       style={{ width: '1em' }}

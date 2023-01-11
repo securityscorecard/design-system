@@ -11,6 +11,7 @@ function Body<D extends Record<string, unknown>>({
   ...bodyProps
 }: BodyProps<D>): React.ReactElement {
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     <tbody {...bodyProps}>
       {rows.map((row, index) => {
         prepareRow(row);

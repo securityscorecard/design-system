@@ -111,9 +111,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           }
 
           return (
-            <li key={action.name}>
+            <li key={action.name} data-interactive="true">
               <DropdownLink
                 as={domTag}
+                data-interactive="true"
                 href={
                   (
                     action as AbsoluteLinkActionKind<
@@ -138,7 +139,9 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                   dropdownRef.current?.hidePane();
                 }}
               >
-                <Text size={TextEnums.TextSizes.md}>{action.label}</Text>
+                <Text data-interactive="true" size={TextEnums.TextSizes.md}>
+                  {action.label}
+                </Text>
               </DropdownLink>
             </li>
           );

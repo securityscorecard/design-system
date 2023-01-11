@@ -31,26 +31,33 @@ const BreadcrumbLink = styled(Link)`
   }
 `;
 
+const ListItem = styled.li`
+  list-style-type: none;
+`;
+
 const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   children,
   isSelected = false,
   to = undefined,
   href = undefined,
   ...props
-}) =>
-  isSelected ? (
-    <Text
-      aria-current="page"
-      size={TextSizes.md}
-      variant={TextEnums.TextVariants.secondary}
-    >
-      {children}
-    </Text>
-  ) : (
-    <BreadcrumbLink href={href} to={to} {...props}>
-      {children}
-    </BreadcrumbLink>
-  );
+}) => (
+  <ListItem>
+    {isSelected ? (
+      <Text
+        aria-current="page"
+        size={TextSizes.md}
+        variant={TextEnums.TextVariants.secondary}
+      >
+        {children}
+      </Text>
+    ) : (
+      <BreadcrumbLink href={href} to={to} {...props}>
+        {children}
+      </BreadcrumbLink>
+    )}
+  </ListItem>
+);
 
 BreadcrumbItem.propTypes = {
   children: PropTypes.node.isRequired,

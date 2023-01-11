@@ -53,6 +53,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
   ...props
 }) => (
   <StyledButton
+    aria-label="User avatar"
     className={cls(CLX_COMPONENT, className)}
     color={ButtonColors.primary}
     paddingSize={SpaceSizes.none}
