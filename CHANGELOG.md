@@ -1,3 +1,40 @@
+# [1.0.0-alpha.240](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.239...v1.0.0-alpha.240) (2023-01-11)
+
+
+### Bug Fixes
+
+* **Accordion:** align opener icon to top of title ([1e49ff7](https://github.com/securityscorecard/design-system/commit/1e49ff7c035cdcb92a87d98b1358e08e7e6ce8c7))
+* **Button:** fix focus-visible outline ([c0d8b3d](https://github.com/securityscorecard/design-system/commit/c0d8b3d238e6c4509de8013501a50ce1f4a70382))
+* **Card:** fix accessibility issues ([eacb613](https://github.com/securityscorecard/design-system/commit/eacb6130771df20cf926bd82619b6d0201ec73bc))
+* **Card:** fix action button when onClick is defined ([fd8f557](https://github.com/securityscorecard/design-system/commit/fd8f557e5d5820e1b9f602b3db5e2b2b1e6a88a8))
+* **Collapsible:** fix accessibility issues ([239c391](https://github.com/securityscorecard/design-system/commit/239c3915fcf53f27162df4d8f6ba063d15610c66))
+* **FileSelector:** fix accesibility issue ([1bb961e](https://github.com/securityscorecard/design-system/commit/1bb961efa838b1976ea4df04847ec63ed512d708))
+* **Pagination:** add flex shrink to items ([57ce9fc](https://github.com/securityscorecard/design-system/commit/57ce9fc558bc58c984a70ee030aced12522f9e27))
+* **Wizard:** fix wizard state management ([571f64f](https://github.com/securityscorecard/design-system/commit/571f64fdf12d6552a49de398402f93c46a4acdbd))
+
+
+### Features
+
+* add same content height, hide non active steps in wizard ([8a74150](https://github.com/securityscorecard/design-system/commit/8a74150b78676d548eecead4d37f140b47ee2154))
+* adding comment on fixed height ([d325803](https://github.com/securityscorecard/design-system/commit/d325803c224521235e73b4f018576aeb14ed3954))
+* **Breadcrumbs:** change children to list items ([f66a93d](https://github.com/securityscorecard/design-system/commit/f66a93d11e263d36b57478fffd1617f1467abd83))
+* **Breadcrumbs:** remove default list styles ([bfa91ee](https://github.com/securityscorecard/design-system/commit/bfa91ee6136ace0aee0e27c8e3265a650d26a9ae))
+* **Button:** add aria-label ([3e954f1](https://github.com/securityscorecard/design-system/commit/3e954f1c40c44eb7880ce2a8871730d347b75533))
+* **CardMedia:** make alt attribute required ([4b4fa68](https://github.com/securityscorecard/design-system/commit/4b4fa68a1a2a2fbe342b3a27d2ac793d30105764))
+* **Checkbox:** change image role ([3626118](https://github.com/securityscorecard/design-system/commit/3626118feb971303ddf1370bfe1e8bc4d33e4af4))
+* **CustomHeader:** add aria-label to MonthSelector ([f4e09ac](https://github.com/securityscorecard/design-system/commit/f4e09ace76a673c406fe9d905e6ff12f0f6acb78))
+* **Datatable:** change role for ellipsis button ([f3a2599](https://github.com/securityscorecard/design-system/commit/f3a25993c22f958c1c828dfcb0c70ca64398dd92))
+* **SegmentedToggle:** change role to radiogroup ([f28d26e](https://github.com/securityscorecard/design-system/commit/f28d26e4ca614ff794b789cbe3530a4d7bc219f3))
+* **Table:** add focus to scrollable area ([b77b932](https://github.com/securityscorecard/design-system/commit/b77b9322c52ddc865aad07990d0b194179da2e52))
+* **Text:** add Heading size option ([fa4a64d](https://github.com/securityscorecard/design-system/commit/fa4a64df955db73145b6ba31a3759a184b726fc8))
+* update visual snapshots ([5fdcc85](https://github.com/securityscorecard/design-system/commit/5fdcc85294c82c600a3247b89c2008d180aa62b4))
+* **UserAvatar:** add aria label ([0a9cab2](https://github.com/securityscorecard/design-system/commit/0a9cab267659e976b3a44b02bcc12a33e4b8439c))
+
+
+### BREAKING CHANGES
+
+* **CardMedia:** alt attribute needs to be always defined at CardMedia component
+
 # [1.0.0-alpha.239](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.238...v1.0.0-alpha.239) (2022-12-15)
 
 
