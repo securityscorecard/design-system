@@ -67,12 +67,22 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     if (as) {
       domTag = as;
     }
+    const handleClick = (event) => {
+      if (
+        event.target?.dataset?.interactive ||
+        event.target?.parentElement?.dataset?.interactive
+      ) {
+        return;
+      }
+      props.onClick(event);
+    };
     return (
       <CardWrapper
         ref={ref}
         {...props}
         as={domTag}
         className={cls(CLX_COMPONENT, props?.className)}
+        onClick={props.onClick ? handleClick : undefined}
       >
         <CardStack $shouldAlignLastItemToBottom={shouldAlignLastItemToBottom}>
           {children}
