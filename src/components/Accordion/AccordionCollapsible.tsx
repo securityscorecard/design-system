@@ -51,7 +51,7 @@ const IconWrapper = styled(Padbox)`
   align-items: center;
   justify-content: center;
   width: ${pxToRem(16)};
-  height: ${pxToRem(16)};
+  height: ${pxToRem(24)};
 `;
 const StyledIcon = styled(Icon)`
   transition: transform 200ms;
@@ -85,7 +85,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
         onClick={() => handleHeaderClick(id)}
         onKeyDown={(e) => handleKeyDown(e, id)}
       >
-        <Inline align="center" gap={SpaceSizes.sm}>
+        <Inline gap={SpaceSizes.sm}>
           <IconWrapper paddingSize={SpaceSizes.xxs}>
             <StyledIcon
               name={SSCIconNames.angleRight}
@@ -106,7 +106,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
 };
 
 AccordionCollapsible.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   handleHeaderClick: PropTypes.func.isRequired,
   id: AccordionItemIdPropType.isRequired,
   className: PropTypes.string,
