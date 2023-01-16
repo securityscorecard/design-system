@@ -21,6 +21,7 @@ import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { useLocalStorageState } from '../../hooks/useLocalStorageState';
 
 const StyledDatatable = styled(Padbox)`
   display: flex;
@@ -38,6 +39,7 @@ const mapSelectedRows = <D,>(defaultSelectedRowIds: IdType<D>[]) =>
   )(defaultSelectedRowIds);
 
 function Datatable<D extends Record<string, unknown>>({
+  id,
   data,
   dataSize,
   columns,
@@ -52,6 +54,26 @@ function Datatable<D extends Record<string, unknown>>({
   tableConfig = {},
   resetSelectionFn,
 }: DatatableProps<D>): React.ReactElement {
+  const [persistedState, setPersistedState] = useLocalStorageState(
+    `datatable_${id}`,
+  );
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    const unsubscribe = DatatableStore.subscribe(
+      (s) => {
+        return { hiddenColumns: s.hiddenColumns, columnOrder: s.columnOrder };
+      },
+      (partial) => {
+        setPersistedState(partial);
+      },
+    );
+    // eslint-disable-next-line
+    return unsubscribe;
+  }, []);
+
   // Set canceled signal to prevent data fetch when unmounting
   useEffect(
     () => () =>
@@ -91,8 +113,8 @@ function Datatable<D extends Record<string, unknown>>({
     onColumnOrderChange,
     onColumnVisibilityChange,
     columns,
-    restTableConfig.defaultColumnOrder,
-    restTableConfig.defaultHiddenColumns,
+    persistedState?.columnOrder || restTableConfig.defaultColumnOrder,
+    persistedState?.hiddenColumns || restTableConfig.defaultHiddenColumns,
   );
 
   const handleCancelLoading = isCancelEnabled

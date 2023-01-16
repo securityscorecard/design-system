@@ -25,6 +25,7 @@ export type OnDataFetchFn<D> = ({
 }: OnDataFetchArgs<D>) => void;
 
 export interface DatatableProps<D extends Record<string, unknown>> {
+  id?: string;
   /**
    * Table data you want to display
    */
