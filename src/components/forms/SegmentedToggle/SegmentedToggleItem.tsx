@@ -59,6 +59,7 @@ const SegmentedToggleItem = forwardRef<
         htmlFor={itemId}
         paddingSize={paddingSize}
         paddingType={PaddingTypes.squish}
+        style={{ marginBottom: 0 }}
       >
         {label}
       </BaseTabLabel>
