@@ -105,7 +105,7 @@ const Banner: React.FC<BannerProps> = ({
                     <StyledButton
                       key={action.name}
                       $variant={variant}
-                      color={ButtonColors.primary}
+                      color={ButtonColors.secondary}
                       href={
                         (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
                           .href
