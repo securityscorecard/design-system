@@ -118,7 +118,7 @@ describe('Datatable', () => {
       })[2],
     );
 
-    const elementCounter = screen.getByRole('heading', { level: 4 });
+    const elementCounter = screen.getByTestId('counter-content');
 
     expect(elementCounter).toHaveTextContent('1 of 3 selected');
     userEvent.click(screen.getByRole('button', { name: /Remove/i }));
