@@ -1,6 +1,13 @@
+import type { To } from 'history';
+
 import { UserAvatarSizes } from './UserAvatar.enums';
 
 export type Sizes = typeof UserAvatarSizes[keyof typeof UserAvatarSizes];
+
+export type UserAvatarRootProps = {
+  $isInverted?: boolean;
+  $size?: Sizes;
+};
 
 export interface UserAvatarProps {
   /**
@@ -11,10 +18,13 @@ export interface UserAvatarProps {
   /**
    * The size of the avatar
    */
-  size?: Sizes;
+  size?: UserAvatarRootProps['$size'];
   className?: string;
   /**
    * Used to inverse the colors of the avatar
    */
-  isInverted?: boolean;
+  isInverted?: UserAvatarRootProps['$isInverted'];
+  href?: string;
+  to?: To;
+  onClick?: React.MouseEventHandler;
 }
