@@ -1,3 +1,19 @@
+# [1.0.0-alpha.241](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.240...v1.0.0-alpha.241) (2023-01-25)
+
+
+### Bug Fixes
+
+* **Banner:** make actions color secondary ([e5b9631](https://github.com/securityscorecard/design-system/commit/e5b9631cb9d60884b544c8191b0990be84d65101))
+* **Datepicker:** reset buttons ([383109a](https://github.com/securityscorecard/design-system/commit/383109a20f618064fda5c69d1d82a121500b6af1))
+* **SegmentedToggleItem:** specify margin bottom ([d2f6068](https://github.com/securityscorecard/design-system/commit/d2f606826eec09a6849b0cd6e5389bbd933a2dc8))
+
+
+### Features
+
+* **Datatable:** persist column settings ([3cbbf25](https://github.com/securityscorecard/design-system/commit/3cbbf25705a4ee08d6eed5ef72dc7fa077b58551))
+* **ElementCounter:** change H4 to text size h4 ([4982974](https://github.com/securityscorecard/design-system/commit/4982974c83fe86f7b080595182648261365201a1))
+* **UserAvatar:** render non-interactive element ([5af7830](https://github.com/securityscorecard/design-system/commit/5af78309560e0eef1e5be5a6e5a5ecb752250cd4))
+
 # [1.0.0-alpha.240](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.239...v1.0.0-alpha.240) (2023-01-11)
 
 
