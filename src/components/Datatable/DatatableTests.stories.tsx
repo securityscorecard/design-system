@@ -296,3 +296,9 @@ WithAllColumnsHidden.args = {
     ],
   },
 };
+
+export const WithPersistedState = DatatableTemplate.bind({});
+WithPersistedState.args = {
+  ...MinimalConfig.args,
+  id: 'persisted_state',
+};

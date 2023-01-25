@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { action } from '@storybook/addon-actions';
 
 import { generateControl } from '../../utils/tests/storybook';
 import UserAvatar from './UserAvatar';
@@ -12,21 +13,17 @@ export default {
   title: 'components/UserAvatar',
   component: UserAvatar,
   argTypes: {
-    label: {
-      control: { type: 'text' },
-      table: {
-        type: { summary: 'string' },
-      },
-    },
     size: {
       ...generateControl('select', UserAvatarSizes),
     },
   },
 } as Meta;
 
-export const Playground: Story<UserAvatarProps> = (args) => (
+const UserAvatarTemplate: Story<UserAvatarProps> = (args) => (
   <UserAvatar {...args} />
 );
+
+export const Playground = UserAvatarTemplate.bind({});
 Playground.args = {
   label: 'AB',
   size: UserAvatarSizes.md,
@@ -35,21 +32,27 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const DifferentSizes: Story<UserAvatarProps> = () => (
+export const DifferentSizes: Story<UserAvatarProps> = (args) => (
   <Inline align="center" gap={SpaceSizes.lg}>
-    <UserAvatar label="AB" size={UserAvatarSizes.sm} />
-    <UserAvatar label="AB" size={UserAvatarSizes.md} />
+    <UserAvatar {...args} size={UserAvatarSizes.sm} />
+    <UserAvatar {...args} size={UserAvatarSizes.md} />
   </Inline>
 );
+DifferentSizes.args = {
+  label: Playground.args.label,
+};
 
-export const NormalizeText: Story<UserAvatarProps> = () => (
-  <UserAvatar label="cdab long text with spaces" />
-);
+export const NormalizeText = UserAvatarTemplate.bind({});
+NormalizeText.args = {
+  label: 'cdab long text with spaces',
+};
 
-export const InvertedColors: Story<UserAvatarProps> = () => (
-  <UserAvatar label="AB" isInverted />
-);
-
+export const InvertedColors = UserAvatarTemplate.bind({});
+InvertedColors.args = {
+  ...Playground.args,
+  isInverted: true,
+  onClick: action('onClick'),
+};
 InvertedColors.parameters = {
   backgrounds: {
     default: 'primary',
@@ -60,4 +63,13 @@ InvertedColors.parameters = {
       },
     ],
   },
+};
+
+export const InteractiveAvatar = UserAvatarTemplate.bind({});
+InteractiveAvatar.args = {
+  ...Playground.args,
+  onClick: action('onClick'),
+};
+InteractiveAvatar.parameters = {
+  screenshot: { skip: true },
 };

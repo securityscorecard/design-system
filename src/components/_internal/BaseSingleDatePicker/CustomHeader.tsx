@@ -41,6 +41,8 @@ const ChangeMonthIconContainer = styled.div<{ direction: string }>`
 
 const MonthSelector = styled.button`
   border-radius: ${getRadii('default')};
+  border: 0;
+  background: transparent;
   &:hover {
     background-color: ${getColor(ColorTypes.primary50)};
   }
@@ -59,6 +61,8 @@ function ChangeMonthIcon(props) {
 
 const MonthIndicator = styled.button`
   border-radius: ${getRadii('default')};
+  border: 0;
+  background: transparent;
   font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('semibold')};
   &:hover {

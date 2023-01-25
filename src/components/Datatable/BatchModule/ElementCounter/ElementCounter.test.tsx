@@ -125,7 +125,7 @@ describe('Datatable/ElementCounter', () => {
             hasOnlyPerPageSelection={false}
           />,
         );
-        const counter = screen.getByRole('heading');
+        const counter = screen.getByTestId('counter-content');
 
         expect(counter).toHaveTextContent('1K');
 
@@ -144,7 +144,7 @@ describe('Datatable/ElementCounter', () => {
             hasOnlyPerPageSelection={false}
           />,
         );
-        const counter = screen.getByRole('heading');
+        const counter = screen.getByTestId('counter-content');
 
         expect(counter).toHaveTextContent('1K');
 

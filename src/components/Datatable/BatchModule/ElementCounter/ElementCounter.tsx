@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
 
-import { H4 } from '../../../typographyLegacy';
+import { Text } from '../../../typographyLegacy';
 import { HeadingVariants } from '../../../typographyLegacy/Heading/Heading.enums';
 import {
   abbreviateNumber,
@@ -64,7 +64,8 @@ function ElementCounterWrapper({ children, ...props }) {
 }
 ElementCounterWrapper.displayName = 'ElementCounterWrapper';
 
-const CounterText = styled(H4).attrs(() => ({
+const CounterText = styled(Text).attrs(() => ({
+  size: 'h4',
   margin: 'none',
   variant: HeadingVariants.secondary,
 }))`
