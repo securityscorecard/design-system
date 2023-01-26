@@ -10,10 +10,11 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { ActionKinds } from '../../types/action.types';
-import { getColor, getFontSize } from '../../utils';
+import { getColor, getFontSize, pxToRem } from '../../utils';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { BreadcrumbLink } from './BreadcrumbItem';
 
 const IconWrapper = styled.li`
   display: flex;
@@ -24,15 +25,9 @@ const IconWrapper = styled.li`
   height: 1rem;
 `;
 
-const IconWrapperDropdown = styled(IconWrapper)`
-  cursor: pointer;
+const DropdownBreadcrumbLink = styled(BreadcrumbLink)`
   color: ${getColor('neutral.700')};
-  &:hover {
-    color: ${getColor('primary.600')};
-  }
-  &:active {
-    color: ${getColor('primary.700')};
-  }
+  width: ${pxToRem(21)};
 `;
 
 const BreadcrumbsWrapper = styled.nav`
@@ -41,6 +36,8 @@ const BreadcrumbsWrapper = styled.nav`
 
 const InlineOrderedList = styled(Inline)`
   padding: 0;
+  margin: 0;
+  list-style: none;
 `;
 
 const itemsAfterCollapse = 2;
@@ -72,20 +69,21 @@ const renderItemsBeforeAndAfter = (
   allDropdownActions: ActionKinds<React.MouseEvent[]>[],
 ) => {
   const dropdown = () => (
-    <DropdownMenu
-      key="breadcrumbs-dropdown"
-      actions={allDropdownActions}
-      paneWidth={270}
-      placement="bottom-start"
-      aria-hidden
-    >
-      <IconWrapperDropdown>
-        <Icon
+    <li key="breadcrumbs-dropdown">
+      <DropdownMenu
+        actions={allDropdownActions}
+        paneWidth={270}
+        placement="bottom-start"
+        aria-hidden
+      >
+        <DropdownBreadcrumbLink
           aria-label="Open breadcrumbs menu"
-          name={SSCIconNames.ellipsisH}
+          color="secondary"
+          iconName={SSCIconNames.ellipsisH}
+          variant="text"
         />
-      </IconWrapperDropdown>
-    </DropdownMenu>
+      </DropdownMenu>
+    </li>
   );
 
   return [
