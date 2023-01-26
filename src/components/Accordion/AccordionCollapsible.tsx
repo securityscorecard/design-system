@@ -55,8 +55,7 @@ const IconWrapper = styled(Padbox)`
 `;
 const StyledIcon = styled(Icon)`
   transition: transform 200ms;
-  height: auto;
-  width: 1rem;
+  height: 1em;
 `;
 
 const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
