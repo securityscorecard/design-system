@@ -2,7 +2,6 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { MemoryRouter } from 'react-router-dom';
 
-import { Link, Paragraph } from '../typographyLegacy';
 import { BreadcrumbsProps } from './Breadcrumbs.types';
 import Breadcrumbs from './Breadcrumbs';
 import BreadcrumbItem from './BreadcrumbItem';
@@ -12,6 +11,21 @@ export default {
   component: Breadcrumbs,
   subcomponents: { BreadcrumbItem },
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+\`\`\`jsx
+import { Breadcrumbs, BreadcrumbItem } from '@securityscorecard/design-system';
+\`\`\`
+
+The BreadcrumbItem is a link that should help the user to get to the place in the navigation
+structure where he needs to go. It accepts all props you can give to a link, but makesure to
+give it \`to\` or \`href\` attributes. Otherwise the link would be inactive plain text.
+The current page shouldn't have these defined though.`,
+      },
+    },
+  },
 } as Meta;
 
 export const Playground: Story<BreadcrumbsProps> = () => {
@@ -27,22 +41,6 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const BreadcrumbsInfo: Story = () => (
-  <Paragraph>
-    The BreadcrumbItem is a{' '}
-    <Link href="/?path=/docs/components-typography-link--playground">link</Link>{' '}
-    that should help the user to get to the place in the navigation structure
-    where he needs to go. It accepts all props you can give to a link, but make
-    sure to give it &apos;to&apos; or &apos;href&apos; attributes. Otherwise the
-    link would be inactive plain text. The current page shouldn&apos;t have
-    these defined though.
-  </Paragraph>
-);
-
-BreadcrumbsInfo.parameters = {
-  screenshot: { skip: true },
-};
-
 export const WithTwoItems: Story<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
@@ -55,7 +53,9 @@ export const WithTwoItems: Story<BreadcrumbsProps> = () => {
 export const WithMoreThanThreeItems: Story<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
-      <BreadcrumbItem href="#">Root</BreadcrumbItem>
+      <BreadcrumbItem href="#" iconName="cog">
+        Root
+      </BreadcrumbItem>
       <BreadcrumbItem href="#">Parent1</BreadcrumbItem>
       <BreadcrumbItem href="#">Parent2</BreadcrumbItem>
       <BreadcrumbItem href="#">Parent3</BreadcrumbItem>
