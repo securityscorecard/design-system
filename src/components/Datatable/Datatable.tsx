@@ -172,6 +172,12 @@ function Datatable<D extends Record<string, unknown>>({
         dataSize={dataSize}
         defaultSelectedRows={mapSelectedRows(defaultSelectedRowIds)}
         {...restTableConfig}
+        defaultColumnOrder={
+          persistedState?.columnOrder || restTableConfig.defaultColumnOrder
+        }
+        defaultHiddenColumns={
+          persistedState?.hiddenColumns || restTableConfig.defaultHiddenColumns
+        }
         isCancelDisabled={!isCancelEnabled}
         isDataLoading={isDataLoading}
         onCancelLoading={handleCancelLoading}
