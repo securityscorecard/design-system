@@ -1,3 +1,17 @@
+# [1.0.0-alpha.242](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.241...v1.0.0-alpha.242) (2023-02-01)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** use correct markup ([2d0a232](https://github.com/securityscorecard/design-system/commit/2d0a2329fdd36da846d22a5929480e79ae7f7b9a))
+* **Datatable:** fix persisted state ([015bb49](https://github.com/securityscorecard/design-system/commit/015bb49b6ab7e8ddf885205d3062d6e7c1c34878))
+
+
+### Features
+
+* **Accordion:** make icon size match Collapsible ([b4ccfe0](https://github.com/securityscorecard/design-system/commit/b4ccfe0ccf3af9d2161843d7299bf2030eaac4eb))
+* **DropdownMenu:** add keyboard navigation ([965c679](https://github.com/securityscorecard/design-system/commit/965c679093d7769a8964dc36c2f4c9d9caa8cb89))
+
 # [1.0.0-alpha.241](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.240...v1.0.0-alpha.241) (2023-01-25)
 
 
