@@ -1,3 +1,10 @@
+# [1.0.0-alpha.243](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.242...v1.0.0-alpha.243) (2023-02-13)
+
+
+### Reverts
+
+* Revert "feat(DropdownMenu): add keyboard navigation" ([fb13a44](https://github.com/securityscorecard/design-system/commit/fb13a445489bd4153859b9e2d12f5e5345a7c061))
+
 # [1.0.0-alpha.242](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.241...v1.0.0-alpha.242) (2023-02-01)
 
 
