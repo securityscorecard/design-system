@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
@@ -46,14 +46,6 @@ export const DropdownLink = styled(Padbox).withConfig({
   }
 `;
 
-type InteractiveElement = HTMLButtonElement | HTMLAnchorElement;
-
-const getOptions = () => {
-  return Array.from(
-    document.querySelectorAll<InteractiveElement>('[data-dropdown-item]'),
-  );
-};
-
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   actions,
   defaultIsOpen = false,
@@ -68,56 +60,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     hidePane: noop,
     showPane: noop,
   });
-  const containerRef = useRef(null);
   const trigger: React.ReactElement = (
     <span className={cls(CLX_COMPONENT, className)}>
       {isFunction(children) ? children(isActive) : children}
     </span>
   );
-
-  const handleKeyDown = (event) => {
-    const selectOption = (direction = 'DOWN') => {
-      const options = getOptions();
-      const index = options.indexOf(
-        document.activeElement as InteractiveElement,
-      );
-      const target = options[index + (direction === 'DOWN' ? 1 : -1)];
-      target?.focus();
-    };
-    const fn = {
-      // Focus the next sub-item or item.
-      ArrowDown: () => selectOption('DOWN'),
-      // Focus the previous sub-item or item.
-      ArrowUp: () => selectOption('UP'),
-      Escape: () => dropdownRef.current?.hidePane(),
-    }[event.key];
-    fn?.();
-  };
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      const containsActiveElement = containerRef.current?.contains(
-        document.activeElement,
-      );
-      if (!containsActiveElement) {
-        dropdownRef.current?.hidePane();
-      }
-    });
-  };
-
-  // Focus trap
-  // eslint-disable-next-line
-  useEffect(() => {
-    const active = document.activeElement;
-    if (isActive) {
-      setTimeout(() => {
-        const options = getOptions();
-        options[0]?.focus();
-      });
-      return () => (active as InteractiveElement)?.focus();
-    }
-  }, [isActive]);
-
   return (
     <Dropdown
       ref={dropdownRef}
@@ -129,7 +76,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       onClose={() => setIsActive(false)}
       onOpen={() => setIsActive(true)}
     >
-      <List ref={containerRef} onBlur={handleBlur} onKeyDown={handleKeyDown}>
+      <List>
         {actions.map((action) => {
           let RouterLink = null;
           if (
@@ -167,7 +114,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             <li key={action.name} data-interactive="true">
               <DropdownLink
                 as={domTag}
-                data-dropdown-item="true"
                 data-interactive="true"
                 href={
                   (
