@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { Inline, Stack } from '../layout';
 import { HexGrade } from '../HexGrade';
 import { Paragraph, Text } from '../typographyLegacy';
+import { Button } from '../Button';
 import Accordion from './Accordion';
 import { AccordionProps } from './Accordion.types';
 
@@ -13,6 +14,9 @@ export default {
   argTypes: {
     isCollapsedOnOpen: {
       control: { type: 'boolean' },
+    },
+    openItems: {
+      description: 'Array of ids that can be changed by external state',
     },
   },
 } as Meta;
@@ -68,4 +72,38 @@ CustomTitleElement.args = {
   items: [
     { id: 0, title: <AccordionItemTitle />, content: 'Content', isOpen: true },
   ],
+};
+
+export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
+  const [openItems, setOpenItems] = useState([]);
+  const handleOnClick = (id: string) => {
+    if (!openItems.includes(id)) {
+      const newItems = [id];
+      return setOpenItems(newItems);
+    }
+    return setOpenItems([...openItems]);
+  };
+
+  const localItems = [
+    { id: 'first', title: 'Item 1', content: 'Content', isOpen: true },
+    { id: 'second', title: 'Item 2', content: 'Content' },
+    { id: 'third', title: 'Item 3', content: 'Content' },
+  ];
+
+  return (
+    <Inline gap="xl">
+      <Stack gap="sm" justify="flex-start">
+        <Button variant="text" onClick={() => handleOnClick('first')}>
+          First section
+        </Button>
+        <Button variant="text" onClick={() => handleOnClick('second')}>
+          Second section
+        </Button>
+        <Button variant="text" onClick={() => handleOnClick('third')}>
+          Third section
+        </Button>
+      </Stack>
+      <Accordion items={localItems} openItems={openItems} />
+    </Inline>
+  );
 };
