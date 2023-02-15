@@ -1,3 +1,10 @@
+# [1.0.0-alpha.244](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.243...v1.0.0-alpha.244) (2023-02-15)
+
+
+### Features
+
+* **Accordion:** add external opening ([498122e](https://github.com/securityscorecard/design-system/commit/498122e9c7e5b1a4953886c79462fbc5e0920013))
+
 # [1.0.0-alpha.243](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.242...v1.0.0-alpha.243) (2023-02-13)
 
 
