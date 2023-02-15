@@ -24,6 +24,7 @@ export interface AccordionProps {
   items: AccordionItem[];
   isCard?: boolean;
   className?: string;
+  openItems: AccordionItemId[];
 }
 
 export const AccordionItemIdPropType = PropTypes.oneOfType([
