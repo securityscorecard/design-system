@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 
 import { Text } from '../index';
 import { TextSizes, TextVariants } from '../Text/Text.enums';

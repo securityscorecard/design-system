@@ -10,21 +10,12 @@
     "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "allowJs": true,
+    "allowJs": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "types": ["jest", "node", "testing-library__jest-dom"],
     "resolveJsonModule": true
   },
-  "include": [
-    "src/**/*",
-    ".storybook/blocks/**/*",
-    "jest.setup.ts",
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "src/**/*.mdx",
-    "src/**/_*"
-  ]
+  "include": ["src/**/*", ".storybook/blocks/**/*", "jest.setup.ts"],
+  "exclude": ["node_modules", "build", "src/**/*.mdx", "src/**/_*"]
 }

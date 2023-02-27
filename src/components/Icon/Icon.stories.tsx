@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { head, pipe, sortBy, toPairs } from 'ramda';
 
 import Icon from './Icon';

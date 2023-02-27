@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { Row } from 'react-table';
 import { MemoryRouter } from 'react-router-dom';
 import { equals, F as stubFalse } from 'ramda';

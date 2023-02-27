@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 
 import Heading, { H0, H1, H2, H3, H4, H5 } from './Heading';
 import { HeadingProps } from './Heading.types';

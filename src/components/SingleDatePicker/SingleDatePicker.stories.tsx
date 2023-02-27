@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 
 import SingleDatePicker from './SingleDatePicker';
 import { SingleDatePickerProps } from '../_internal/BaseSingleDatePicker/SingleDatePicker.types';

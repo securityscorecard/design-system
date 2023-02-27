@@ -1,18 +1,8 @@
 import React from 'react';
 import { withScreenshot } from 'storycap';
-import { withDesign } from 'storybook-addon-designs';
-import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgsTable,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs';
 
 import { DSProvider, createIconLibrary } from '../src/theme';
 import { colors } from '../src/theme/colors';
-import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
 export const parameters = {
@@ -49,40 +39,10 @@ export const parameters = {
   },
   docs: {
     source: { type: 'dynamic' },
-    page: () => (
-      <>
-        <Title />
-        <Subtitle />
-        <Description />
-        <Primary />
-        <ArgsTable story={PRIMARY_STORY} />
-        <StoriesWithDesign />
-      </>
-    ),
   },
   // storycap settings
   screenshot: {
     fullPage: true,
-  },
-  design: {
-    type: 'figma',
-  },
-  badgesConfig: {
-    [Badges.stable]: {
-      contrast: '#333',
-      color: '#4ABA00',
-      title: 'Stable',
-    },
-    [Badges.experimental]: {
-      contrast: '#333',
-      color: '#E5BD00',
-      title: 'Experimental',
-    },
-    [Badges.deprecated]: {
-      contrast: '#333',
-      color: '#F1431C',
-      title: 'Deprecated',
-    },
   },
 };
 
@@ -94,4 +54,4 @@ const wrapper = (storyFn) => (
   </>
 );
 
-export const decorators = [withDesign, withScreenshot, wrapper];
+export const decorators = [withScreenshot, wrapper];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { isNull } from 'ramda-adjunct';
 import { GroupedOptionsType, OptionsType } from 'react-select';
 

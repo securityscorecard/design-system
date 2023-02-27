@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { Paragraph } from '../index';

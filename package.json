@@ -16,8 +16,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "storybook": "start-storybook -p 8008",
-    "storybook:build": "build-storybook --quiet",
+    "storybook": "storybook dev -p 8008",
+    "storybook:build": "storybook build --quiet",
     "test:storybook:visual": "./visual-regressions/bin/take-and-check-in-docker.sh",
     "test:storybook:visual:update": "./visual-regressions/bin/take-and-update-in-docker.sh",
     "test:storybook:visual:ci": "./visual-regressions/bin/take-and-check-in-docker-ci.sh",
@@ -34,8 +34,6 @@
     "prepare": "husky install"
   },
   "peerDependencies": {
-    "@storybook/addons": "^6.5.6",
-    "@storybook/api": "^6.5.6",
     "@testing-library/dom": ">=7.21.4",
     "@types/node": "*",
     "@types/react": "16.14.5",
@@ -86,12 +84,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0",
     "@babel/types": "^7.17.10",
     "@betterer/cli": "^5.1.7",
     "@betterer/eslint": "^5.1.7",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
-    "@geometricpanda/storybook-addon-badges": "^0.2.1",
     "@mdx-js/react": "^1.6.22",
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-node-resolve": "^13.2.0",
@@ -102,15 +102,13 @@
     "@semantic-release/github": "^8.0.4",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "@storybook/addon-a11y": "^6.5.6",
-    "@storybook/addon-actions": "^6.5.6",
-    "@storybook/addon-backgrounds": "^6.5.6",
-    "@storybook/addon-controls": "^6.5.6",
-    "@storybook/addon-docs": "^6.5.6",
-    "@storybook/addon-measure": "^6.5.6",
-    "@storybook/components": "^6.5.6",
-    "@storybook/react": "^6.5.6",
-    "@storybook/theming": "^6.5.6",
+    "@storybook/addon-a11y": "^7.0.0-beta.53",
+    "@storybook/addon-actions": "^7.0.0-beta.53",
+    "@storybook/addon-docs": "^7.0.0-beta.53",
+    "@storybook/addon-essentials": "^7.0.0-beta.53",
+    "@storybook/react": "^7.0.0-beta.53",
+    "@storybook/react-webpack5": "^7.0.0-beta.53",
+    "@storybook/theming": "^7.0.0-beta.53",
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@testing-library/dom": ">=7.21.4",
     "@testing-library/jest-dom": "^5.16.4",
@@ -151,6 +149,7 @@
     "prettier": "^2.6.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-is": "^18.2.0",
     "react-router-dom": "^5.3.0",
     "react-select": "^4.3.1",
     "react-select-event": "^5.3.0",
@@ -163,9 +162,8 @@
     "rollup-plugin-visualizer": "^5.6.0",
     "semantic-release": "^19.0.2",
     "semantic-release-export-data": "^1.0.1",
-    "storybook-addon-designs": "^6.2.1",
-    "storybook-addon-outline": "^1.4.2",
-    "storycap": "3.0.4",
+    "storybook": "^7.0.0-beta.53",
+    "storycap": "^4.0.0",
     "styled-components": "^5.3.3",
     "stylelint": "^13.13.1",
     "stylelint-config-recommended": "^3.0.0",
@@ -174,7 +172,7 @@
     "ts-jest": "^27.1.4",
     "ts-react-display-name": "^1.2.2",
     "tslib": "^2.3.1",
-    "typescript": "^4.7.4",
+    "typescript": "4.7.4",
     "typescript-plugin-styled-components": "^2.0.0"
   },
   "resolutions": {
@@ -206,5 +204,5 @@
       "yarn run betterer:precommit"
     ]
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.4.1"
 }

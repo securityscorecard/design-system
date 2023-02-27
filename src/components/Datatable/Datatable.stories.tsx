@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import MockDate from 'mockdate';
 
 import assets from '../_internal/BaseTable/mocks/ipAssets.json';

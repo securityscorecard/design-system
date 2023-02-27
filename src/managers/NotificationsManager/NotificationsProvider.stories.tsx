@@ -14,7 +14,6 @@ import {
 } from '../../components';
 import { NotificationsProvider } from './NotificationsProvider';
 import { ToastVariants } from '../../components/Toast/Toast.enums';
-import { Badges } from '../../../.storybook/storybook.enums';
 
 export default {
   title: 'managers/NotificationsProvider',
@@ -22,7 +21,7 @@ export default {
   decorators: [
     (storyFn) => <NotificationsProvider>{storyFn()}</NotificationsProvider>,
   ],
-  parameters: { screenshot: { skip: true }, badges: [Badges.experimental] },
+  parameters: { screenshot: { skip: true } },
 } as Meta;
 
 const options = [

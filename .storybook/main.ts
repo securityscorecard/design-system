@@ -1,19 +1,7 @@
 const { includes } = require('ramda');
-
 module.exports = {
-  stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-actions',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-measure',
-    'storycap',
-    'storybook-addon-designs',
-    'storybook-addon-outline',
-    '@geometricpanda/storybook-addon-badges',
-  ],
+  stories: ['../src/**/*.@(mdx|stories.@(tsx|jsx))'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-a11y', 'storycap'],
   features: {
     postcss: false,
   },
@@ -27,14 +15,23 @@ module.exports = {
       propFilter: (prop) => {
         if (prop.parent) {
           // filter inherited props
-          return !prop.parent.fileName.includes("node_modules/@types/react/")
-            && !prop.parent.fileName.includes("node_modules/@emotion/")
-            && !prop.parent.fileName.includes("node_modules/@types/node/")
-            && !prop.parent.fileName.includes("node_modules/typescript/");
+          return (
+            !prop.parent.fileName.includes('node_modules/@types/react/') &&
+            !prop.parent.fileName.includes('node_modules/@emotion/') &&
+            !prop.parent.fileName.includes('node_modules/@types/node/') &&
+            !prop.parent.fileName.includes('node_modules/typescript/')
+          );
         }
         // filter inherited styled-components props
         return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
       },
     },
+  },
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
+  docs: {
+    autodocs: true,
   },
 };

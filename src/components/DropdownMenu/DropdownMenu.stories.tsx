@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import styled from 'styled-components';
 
 import DropdownMenu from '../_internal/BaseDropdownMenu/DropdownMenu';

@@ -1,7 +1,7 @@
 FROM ubuntu:bionic
 
 RUN apt update \
-&& apt upgrade
+&& apt upgrade -y
 RUN apt install -y curl
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash
@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 
 COPY package.json .
 COPY yarn.lock .
-RUN yarn --frozen-lockfile || (tail -30 yarn-error.log && exit 1)
+RUN yarn --immutable || (tail -30 yarn-error.log && exit 1)
 COPY bin bin
 
 ENV PATH="$PATH:/usr/src/app/node_modules/.bin/"

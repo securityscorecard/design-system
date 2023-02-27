@@ -1,21 +1,19 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Badges } from '../../../.storybook/storybook.enums';
 import Nav from './Nav';
 import NavItem from './NavItem';
 import { NavItemProps } from './NavItem.types';
 
 export default {
-  title: 'components/Nav',
+  title: 'components/Nav (DEPRECATED)',
   component: Nav,
   subcomponents: { NavItem },
   decorators: [(storyFn) => <BrowserRouter>{storyFn()}</BrowserRouter>],
 
   parameters: {
-    badges: [Badges.deprecated],
     docs: {
       description: {
         component: `<div class="deprecated">Deprecated since v1.0.0-alpha.83}</div>

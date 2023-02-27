@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Paragraph } from '../typographyLegacy';

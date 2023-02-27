@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 
 import ElementCounter from './ElementCounter';
 import { DatatableStore } from '../../Datatable.store';

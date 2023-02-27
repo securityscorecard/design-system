@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import MockDate from 'mockdate';
 

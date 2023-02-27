@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';

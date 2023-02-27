@@ -2,9 +2,9 @@ function highlightLayoutComponents() {
   console.log('layout');
   const components = document.querySelectorAll('.ssc-ds-layout');
 
-  components.forEach((component)=>{
-    component.style.outline=`2px solid rgba(255, 0, 255,0.5)`;
-  })
+  components.forEach((component) => {
+    component.style.outline = `2px solid rgba(255, 0, 255,0.5)`;
+  });
 }
 
 function highlightFunctionalComponents() {
@@ -12,10 +12,10 @@ function highlightFunctionalComponents() {
   const components = document.querySelectorAll('.ssc-ds-component');
   console.log(components);
 
-  components.forEach((component)=>{
-    component.style.outline=`2px solid rgba(173, 255, 47,0.8)`;
-    component.style.backgroundColor=`rgba(173, 255, 47,0.5)`;
-  })
+  components.forEach((component) => {
+    component.style.outline = `2px solid rgba(173, 255, 47,0.8)`;
+    component.style.backgroundColor = `rgba(173, 255, 47,0.5)`;
+  });
 }
 
 function highlightTypographyComponents() {
@@ -23,27 +23,29 @@ function highlightTypographyComponents() {
   const components = document.querySelectorAll('.ssc-ds-typography');
   console.log(components);
 
-  components.forEach((component)=>{
-    component.style.color=`red`;
-  })
+  components.forEach((component) => {
+    component.style.color = `red`;
+  });
 }
 
 function resetHighlight() {
-  const components = document.querySelectorAll('.ssc-ds-layout, .ssc-ds-component, .ssc-ds-typography');
+  const components = document.querySelectorAll(
+    '.ssc-ds-layout, .ssc-ds-component, .ssc-ds-typography',
+  );
 
-  components.forEach((component)=>{
+  components.forEach((component) => {
     component.style.removeProperty('outline');
     component.style.removeProperty('background-color');
     component.style.removeProperty('color');
-  })
+  });
 }
 
 const layoutComponentsButton = document.getElementById('mark-layout');
 const functionalComponentsButton = document.getElementById('mark-components');
 const typographyComponentsButton = document.getElementById('mark-text');
-const resetButton= document.getElementById('reset-all');
+const resetButton = document.getElementById('reset-all');
 
-layoutComponentsButton.addEventListener("click", async () => {
+layoutComponentsButton.addEventListener('click', async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.scripting.executeScript({
@@ -52,7 +54,7 @@ layoutComponentsButton.addEventListener("click", async () => {
   });
 });
 
-functionalComponentsButton.addEventListener("click", async () => {
+functionalComponentsButton.addEventListener('click', async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.scripting.executeScript({
@@ -61,7 +63,7 @@ functionalComponentsButton.addEventListener("click", async () => {
   });
 });
 
-typographyComponentsButton.addEventListener("click", async () => {
+typographyComponentsButton.addEventListener('click', async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.scripting.executeScript({
@@ -70,7 +72,7 @@ typographyComponentsButton.addEventListener("click", async () => {
   });
 });
 
-resetButton.addEventListener("click", async () => {
+resetButton.addEventListener('click', async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   chrome.scripting.executeScript({
@@ -78,5 +80,3 @@ resetButton.addEventListener("click", async () => {
     func: resetHighlight,
   });
 });
-
-
