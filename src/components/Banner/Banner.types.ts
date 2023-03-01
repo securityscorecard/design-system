@@ -22,5 +22,6 @@ export type BannerProps = BaseBannerProps & {
   __isLast?: boolean;
   __current?: number;
   __total?: number;
+  changeLayoutBreakpoint?: number;
   className?: string;
 };
