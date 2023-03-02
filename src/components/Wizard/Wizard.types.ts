@@ -25,7 +25,7 @@ export interface WizardAction {
   isDisabled?: boolean;
 }
 
-export const WizardActionPropType = PropTypes.shape({
+export const WizardActionPropType = PropTypes.exact({
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
