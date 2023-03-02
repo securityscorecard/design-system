@@ -13,6 +13,8 @@ WORKDIR /usr/src/app
 
 COPY package.json .
 COPY yarn.lock .
+COPY .yarnrc.yml .
+COPY .yarn ./.yarn
 RUN yarn --immutable || (tail -30 yarn-error.log && exit 1)
 COPY bin bin
 
