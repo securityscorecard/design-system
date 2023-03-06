@@ -111,7 +111,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           }
 
           return (
-            <li key={action.name} data-interactive="true">
+            <li
+              key={action.name}
+              data-interactive="true"
+              style={{ overflow: 'hidden' }}
+            >
               <DropdownLink
                 as={domTag}
                 data-interactive="true"
