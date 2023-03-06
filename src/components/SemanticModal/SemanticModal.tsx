@@ -9,7 +9,7 @@ import { Modal, ModalEnums } from '../Modal';
 import { Button, ButtonEnums } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';
 import { Icon } from '../Icon';
-import { H3, Text } from '../typographyLegacy';
+import { H4, Text } from '../typographyLegacy';
 import {
   AbsoluteLinkActionKind,
   ActionKinds,
@@ -85,8 +85,10 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
               <StyledIcon $variant={variant} name={iconVariants[variant]} />
             </div>
             <Stack gap={SpaceSizes.md}>
-              <H3>{title}</H3>
-              <Text as="div">{message}</Text>
+              <H4>{title}</H4>
+              <Text as="div" size="md">
+                {message}
+              </Text>
               <Padbox paddingSize={SpaceSizes.md}>
                 <Inline gap={SpaceSizes.md} justify="center">
                   {actions.map(
