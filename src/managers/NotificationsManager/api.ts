@@ -12,7 +12,7 @@ export const removeNotification = (id: string) => {
   );
 };
 
-export const addNotification = (notification: Required<Notification>) => {
+export const addNotification = (notification: Notification) => {
   window.dispatchEvent(
     createCustomEvent<typeof ACTIONS, { notification: Notification }>(
       ACTIONS.ADD_NOTIFICATION,
@@ -21,7 +21,7 @@ export const addNotification = (notification: Required<Notification>) => {
       },
     ),
   );
-  if (notification.autoDismiss) {
+  if (notification.autoDismiss || notification.autoDismiss === undefined) {
     setTimeout(() => removeNotification(notification.id), 6000);
   }
 };
