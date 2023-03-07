@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
-import { H2, Paragraph } from '../typographyLegacy';
+import { H5, Paragraph } from '../typographyLegacy';
 import { Inline, Padbox } from '../layout';
 import { Button } from '../Button';
 import { generateControl } from '../../utils/tests/storybook';
@@ -54,8 +54,8 @@ export const Playground: Story<ModalProps> = (args) => {
             onClose={() => setIsShown(false)}
             {...args}
           >
-            <H2 style={{ margin: 0 }}>This is a placeholder</H2>
-            <Paragraph style={{ marginBottom: 0 }}>
+            <H5 style={{ margin: 0 }}>This is a placeholder</H5>
+            <Paragraph size="md" style={{ marginBottom: 0 }}>
               You can replace this with a local component. You can also just
               override the text, but keep in mind that you might lose content
               that way in case we happend to change the underlying component.
@@ -77,8 +77,8 @@ Playground.parameters = {
 
 export const WithTitle: Story = () => (
   <Modal footer={<Footer />} title="Title" onClose={action('close-modal')}>
-    <H2 style={{ margin: 0 }}>This is a placeholder</H2>
-    <Paragraph style={{ marginBottom: 0 }}>
+    <H5 style={{ margin: 0 }}>This is a placeholder</H5>
+    <Paragraph size="md" style={{ marginBottom: 0 }}>
       You can replace this with a local component. You can also just override
       the text, but keep in mind that you might lose content that way in case we
       happend to change the underlying component. Lorem ipsum dolor sit amet,
@@ -91,8 +91,8 @@ export const WithTitle: Story = () => (
 
 export const WithLongContent: Story = () => (
   <Modal footer={<Footer />} title="Title" onClose={action('close-modal')}>
-    <H2 style={{ margin: 0 }}>This is a placeholder</H2>
-    <Paragraph style={{ marginBottom: 0 }}>
+    <H5 style={{ margin: 0 }}>This is a placeholder</H5>
+    <Paragraph size="md" style={{ marginBottom: 0 }}>
       You can replace this with a local component. You can also just override
       the text, but keep in mind that you might lose content that way in case we
       happend to change the underlying component. Lorem ipsum dolor sit amet,
@@ -118,8 +118,8 @@ export const WithLongContent: Story = () => (
 
 export const WithoutTitle: Story = () => (
   <Modal footer={<Footer />} onClose={action('close-modal')}>
-    <H2 style={{ margin: 0 }}>This is a placeholder</H2>
-    <Paragraph style={{ marginBottom: 0 }}>
+    <H5 style={{ margin: 0 }}>This is a placeholder</H5>
+    <Paragraph size="md" style={{ marginBottom: 0 }}>
       You can replace this with a local component. You can also just override
       the text, but keep in mind that you might lose content that way in case we
       happend to change the underlying component. Lorem ipsum dolor sit amet,
@@ -132,8 +132,8 @@ export const WithoutTitle: Story = () => (
 
 export const WithoutFooter: Story = () => (
   <Modal title="Simple modal" onClose={action('close-modal')}>
-    <H2 style={{ margin: 0 }}>This is a placeholder</H2>
-    <Paragraph style={{ marginBottom: 0 }}>
+    <H5 style={{ margin: 0 }}>This is a placeholder</H5>
+    <Paragraph size="md" style={{ marginBottom: 0 }}>
       You can replace this with a local component. You can also just override
       the text, but keep in mind that you might lose content that way in case we
       happend to change the underlying component. Lorem ipsum dolor sit amet,
