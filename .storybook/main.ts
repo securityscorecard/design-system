@@ -1,6 +1,7 @@
-const { includes } = require('ramda');
+import { includes } from 'ramda';
+import type { StorybookConfig } from '@storybook/react/types';
 
-module.exports = {
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
   addons: [
     '@storybook/addon-a11y',
@@ -27,10 +28,12 @@ module.exports = {
       propFilter: (prop) => {
         if (prop.parent) {
           // filter inherited props
-          return !prop.parent.fileName.includes("node_modules/@types/react/")
-            && !prop.parent.fileName.includes("node_modules/@emotion/")
-            && !prop.parent.fileName.includes("node_modules/@types/node/")
-            && !prop.parent.fileName.includes("node_modules/typescript/");
+          return (
+            !prop.parent.fileName.includes('node_modules/@types/react/') &&
+            !prop.parent.fileName.includes('node_modules/@emotion/') &&
+            !prop.parent.fileName.includes('node_modules/@types/node/') &&
+            !prop.parent.fileName.includes('node_modules/typescript/')
+          );
         }
         // filter inherited styled-components props
         return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
@@ -38,3 +41,5 @@ module.exports = {
     },
   },
 };
+
+export default config;
