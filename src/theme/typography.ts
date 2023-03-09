@@ -12,8 +12,8 @@ import {
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from './constants';
 
 const family: Family = {
-  base: "Inter, 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
-  mono: "'space-mono', 'Courier New', Courier, monospace",
+  base: "Inter, Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif",
+  mono: "'Space Mono', 'Courier New', Courier, monospace",
 };
 
 const size: Size = {

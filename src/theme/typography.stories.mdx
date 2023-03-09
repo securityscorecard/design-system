@@ -12,36 +12,48 @@ leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravi
 # Typography
 
 Design System have defined two basic font families. As base font family we are using sans-serif
-`Inter` font, for monospaced text we are using `SpaceMono` font.
+`Inter` font, for monospaced text we are using `Space Mono` font. These fonts are not bundled
+together with the Design System and need to be installed separately;
 
-## Font licensing
+## Installation
 
-### Inter
+### yarn
 
-Inter is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
-It is not bundled with the package due to its size, therefore it needs to be included in your html imports.
+```bash
+yarn add @fontsource/inter @fontsource/space-mono
+```
 
-Example:
+### npm
+
+```bash
+npm install @fontsource/inter @fontsource/space-mono
+```
+
+### CDN
+
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.cdnfonts.com/css/inter?styles=29139,29137,29128"
+/>
+<link
+  href="https://fonts.cdnfonts.com/css/space-mono?styles=18436"
+  rel="stylesheet"
+/>
+```
+
+### Google Web Fonts
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Mono&display=swap"
   rel="stylesheet"
 />
 ```
 
-or by direct import
-
-```
-yarn add @fontsource/inter
-```
-
-### SpaceMono
-
-SpaceMono is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
-and is bundled within this package.
+## Typography styles
 
 <FontPalette>
   <FontItem
@@ -52,7 +64,7 @@ and is bundled within this package.
   />
   <FontItem
     title="theme.typography.family.mono"
-    subtitle="SpaceMono"
+    subtitle="Space Mono"
     sampleText={lipsum}
     fontFamily={theme.typography.family.mono}
   />
@@ -157,3 +169,13 @@ and is bundled within this package.
     lineHeight={theme.typography.lineHeight.md}
   />
 </FontPalette>
+
+## Font licensing
+
+### Inter
+
+Inter is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
+
+### Space Mono
+
+Space Mono is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
