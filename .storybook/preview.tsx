@@ -9,13 +9,15 @@ import {
   ArgsTable,
   PRIMARY_STORY,
 } from '@storybook/addon-docs';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 
 import { DSProvider, createIconLibrary } from '../src/theme';
 import { colors } from '../src/theme/colors';
 import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
-import '@fontsource/inter';
+SyntaxHighlighter.registerLanguage('bash', bash);
 
 export const parameters = {
   backgrounds: {
