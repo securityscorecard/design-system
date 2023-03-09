@@ -87,6 +87,7 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@fontsource/inter": "^4.5.15",
+    "@fontsource/space-mono": "^4.5.12",
     "@geometricpanda/storybook-addon-badges": "^0.2.1",
     "@mdx-js/react": "^1.6.22",
     "@semantic-release/changelog": "^6.0.1",
