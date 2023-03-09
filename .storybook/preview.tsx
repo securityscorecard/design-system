@@ -17,6 +17,9 @@ import { colors } from '../src/theme/colors';
 import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
+import '@fontsource/space-mono';
+import '@fontsource/inter';
+
 SyntaxHighlighter.registerLanguage('bash', bash);
 
 export const parameters = {
