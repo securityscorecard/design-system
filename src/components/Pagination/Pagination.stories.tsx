@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { PaginationProps } from './Pagination.types';
+
 import { action } from '@storybook/addon-actions';
 
 import Pagination from './Pagination';
-import { PaginationProps } from './Pagination.types';
 import { Button } from '..';
 
 export default {

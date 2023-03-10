@@ -1,5 +1,7 @@
+import type { FC } from 'react';
+
 import styled from 'styled-components';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
@@ -71,7 +73,7 @@ const MonthIndicator = styled.button`
   }
 `;
 
-export const DatePickerCustomHeader: React.FC<{
+export const DatePickerCustomHeader: FC<{
   decreaseMonth: () => void;
   increaseMonth: () => void;
   increaseYear: () => void;

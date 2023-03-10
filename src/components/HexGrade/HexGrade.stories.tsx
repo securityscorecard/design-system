@@ -1,7 +1,6 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { HexGradeProps } from './HexGrade.types';
 
-import { HexGradeProps } from './HexGrade.types';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import HexGrade from './HexGrade';
 import { generateControl } from '../../utils/tests/storybook';

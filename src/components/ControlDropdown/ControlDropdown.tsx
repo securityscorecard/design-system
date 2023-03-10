@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import type { FC } from 'react';
+import type { ControlDropdownProps } from './ControlDropdown.types';
+
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -8,12 +11,11 @@ import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { CloseButton } from '../CloseButton';
 import { H4 } from '../typographyLegacy';
-import { ControlDropdownProps } from './ControlDropdown.types';
 import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const ControlDropdown: React.FC<ControlDropdownProps> = ({
+const ControlDropdown: FC<ControlDropdownProps> = ({
   children,
   title,
   parentRef,

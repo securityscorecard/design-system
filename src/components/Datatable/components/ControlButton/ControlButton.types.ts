@@ -1,4 +1,4 @@
-import { SSCIcons } from '../../../Icon/Icon.types';
+import type { SSCIcons } from '../../../Icon/Icon.types';
 
 export interface ControlButtonProps {
   label: string;

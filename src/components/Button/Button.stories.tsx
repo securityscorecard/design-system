@@ -1,11 +1,10 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ButtonProps } from './Button.types';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { Inline, Stack } from '../layout';
 import Button from './Button';
-import { ButtonProps } from './Button.types';
 import { ButtonColors, ButtonVariants } from './Button.enums';
 import { SpaceSizes } from '../../theme';
 

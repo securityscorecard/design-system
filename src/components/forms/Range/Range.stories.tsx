@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { InputHTMLAttributes } from 'react';
+import type { RangeProps } from './Range.types';
 
 import Range from './Range';
-import { RangeProps } from './Range.types';
 
 export default {
   title: 'components/forms/Range',
@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 const RangeTemplate: Story<
-  RangeProps & React.InputHTMLAttributes<HTMLInputElement>
+  RangeProps & InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Range {...args} aria-label="Input" />;
 
 export const Playground = RangeTemplate.bind({});

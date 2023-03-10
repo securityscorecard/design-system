@@ -6,7 +6,7 @@
 
 /* solid - triangle-exclamation */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

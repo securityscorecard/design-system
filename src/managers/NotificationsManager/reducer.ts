@@ -1,4 +1,6 @@
-import { ACTIONS, Notification } from './types';
+import type { Notification } from './types';
+
+import { ACTIONS } from './types';
 
 type NotificationAction =
   | {

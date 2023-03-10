@@ -1,15 +1,14 @@
-import React from 'react';
-
-import { Placements } from '../Dropdown/Dropdown.types';
+import type { CSSProperties, ReactNode } from 'react';
+import type { Placements } from '../Dropdown/Dropdown.types';
 
 export interface TooltipPopupProps {
   $placement: Placements;
   $width: number;
   $space: number;
-  style: React.CSSProperties;
+  style: CSSProperties;
 }
 export interface TooltipProps {
-  popup?: React.ReactNode;
+  popup?: ReactNode;
   className?: string;
   placement?: Placements;
   width?: number;

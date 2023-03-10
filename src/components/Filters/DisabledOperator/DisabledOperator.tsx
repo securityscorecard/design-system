@@ -1,4 +1,5 @@
-import React from 'react';
+import type { FC } from 'react';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -20,7 +21,7 @@ const Text = styled(BaseText)`
   line-height: unset;
 `;
 
-const DisabledOperator: React.FC = ({ children }) => (
+const DisabledOperator: FC = ({ children }) => (
   <Container paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
     <Text size={TextSizes.md}>{children}</Text>
   </Container>

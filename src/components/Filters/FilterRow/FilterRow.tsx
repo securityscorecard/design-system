@@ -1,4 +1,7 @@
-import React from 'react';
+import type { FC, ReactNode } from 'react';
+import type { FilterRowProps, SplitFieldProps } from './FilterRow.types';
+import type { ComponentWithProps as ComponentWithPropsTypes } from '../Filters.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -29,11 +32,7 @@ import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { StateButton } from '../StateButton';
 import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
-import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
-import {
-  ComponentWithProps as ComponentWithPropsTypes,
-  FieldPropTypes,
-} from '../Filters.types';
+import { FieldPropTypes } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 import { operatorOptions } from '../data/operatorOptions';
 import { pxToRem } from '../../../utils';
@@ -58,7 +57,7 @@ const Units = styled(Text)`
 `;
 
 export const getDefaultComponentValue = (
-  defaultConditionComponent: React.ReactNode | ComponentWithPropsTypes,
+  defaultConditionComponent: ReactNode | ComponentWithPropsTypes,
 ): string | undefined => {
   const componentDefaultValue = path(
     ['props', 'defaultValue'],
@@ -188,7 +187,7 @@ const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   );
 };
 
-const FilterRow: React.FC<FilterRowProps> = ({
+const FilterRow: FC<FilterRowProps> = ({
   fields,
   index,
   onOperatorChange,

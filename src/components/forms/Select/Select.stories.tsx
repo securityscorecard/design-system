@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Option, SelectProps } from './Select.types';
+
 import { action } from '@storybook/addon-actions';
 
 import Select from './Select';
-import { Option, SelectProps } from './Select.types';
 import { Inline, Stack } from '../../layout';
 import { Heading, Text } from '../../typographyLegacy';
 import { Pill } from '../../Pill';

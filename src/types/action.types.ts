@@ -1,6 +1,7 @@
 import type { To } from 'history';
+import type { ReactNode } from 'react';
+
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import { ToPropType } from './to.types';
 
@@ -8,10 +9,10 @@ export type ActionBase<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
 > = {
-  label: React.ReactNode;
+  label: ReactNode;
   name: string;
   onClick?: (...args: OnClickArgs) => OnClickReturnType;
-  tooltip?: React.ReactNode;
+  tooltip?: ReactNode;
 };
 
 export const ActionBasePropType = {

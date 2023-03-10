@@ -1,4 +1,5 @@
-import React from 'react';
+import type { ComponentPropsWithRef, FC, HTMLProps } from 'react';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
@@ -20,8 +21,8 @@ const LabelContainer = styled(Text)`
   }
 `;
 
-const Label: React.FC<
-  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Text>
+const Label: FC<
+  HTMLProps<HTMLLabelElement> & ComponentPropsWithRef<typeof Text>
 > = ({ children, htmlFor, className, ...props }) => (
   <LabelContainer
     as="label"

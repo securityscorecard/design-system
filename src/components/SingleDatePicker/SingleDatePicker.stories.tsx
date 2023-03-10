@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SingleDatePickerProps } from '../_internal/BaseSingleDatePicker/SingleDatePicker.types';
+
+import { useState } from 'react';
 
 import SingleDatePicker from './SingleDatePicker';
-import { SingleDatePickerProps } from '../_internal/BaseSingleDatePicker/SingleDatePicker.types';
 
 export default {
   title: 'components/SingleDatePicker',

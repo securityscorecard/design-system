@@ -1,6 +1,7 @@
-import { Field, Filter } from '../Filters.types';
-import { Option } from '../components/Select/Select.types';
-import { Operators } from '../Filters.enums';
+import type { MouseEventHandler } from 'react-select';
+import type { Field, Filter } from '../Filters.types';
+import type { Option } from '../components/Select/Select.types';
+import type { Operators } from '../Filters.enums';
 
 export interface SplitFieldProps {
   $width?: number;
@@ -18,7 +19,7 @@ export interface FilterRowProps extends Filter {
   ) => void;
   onConditionChange: (condition: string, value: string, index: number) => void;
   onValueChange: (value: string, index: number) => void;
-  onRemove: (index: number) => React.MouseEventHandler;
+  onRemove: (index: number) => MouseEventHandler;
   isDefaultState: boolean;
   isApplied: boolean;
   isLoading: boolean;

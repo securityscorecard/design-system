@@ -1,3 +1,5 @@
+import type { SpinnerProps } from './Spinner.types';
+
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
@@ -6,7 +8,6 @@ import { transparentize } from 'polished';
 import cls from 'classnames';
 
 import { getColor, pxToRem } from '../../utils';
-import { SpinnerProps } from './Spinner.types';
 import { ColorTypes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 

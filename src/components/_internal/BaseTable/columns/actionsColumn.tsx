@@ -1,7 +1,8 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { CellProps } from 'react-table';
+
 import { map } from 'ramda';
 import styled, { css } from 'styled-components';
-import { CellProps } from 'react-table';
 
 import { Inline } from '../../../layout';
 import { DropdownMenu } from '../../BaseDropdownMenu';
@@ -49,7 +50,7 @@ export const actionsColumn = {
   width: 48,
   disableSortBy: true,
   cellType: CellTypes.actions,
-  Cell: (props: CellProps<Record<string, unknown>>): React.ReactElement => {
+  Cell: (props: CellProps<Record<string, unknown>>): ReactElement => {
     const { row, rowActions } = props;
     const actions = map((action) => ({
       ...action,

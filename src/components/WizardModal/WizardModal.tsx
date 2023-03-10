@@ -1,11 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { WizardModalProps } from './WizardModal.types';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { usePortal } from '../../hooks/usePortal';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { getColor, getDepth, getRadii } from '../../utils';
-import { WizardModalProps } from './WizardModal.types';
 import { Padbox } from '../layout';
 
 const BlurredOverlay = styled.div`
@@ -33,7 +34,7 @@ const BaseModal = styled(Padbox)`
   }
 `;
 
-const WizardModal: React.FC<WizardModalProps> = ({ children }) => {
+const WizardModal: FC<WizardModalProps> = ({ children }) => {
   const { Portal } = usePortal();
   useLockBodyScroll();
 

@@ -1,4 +1,4 @@
-import { ActionType, IdType, SortingRule, TableState } from 'react-table';
+import type { ActionType, IdType, SortingRule, TableState } from 'react-table';
 
 type TableRecord = Record<string, unknown>;
 

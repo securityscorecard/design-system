@@ -1,8 +1,9 @@
-import {
+import type {
   IconDefinition,
   IconPack,
-  library,
 } from '@fortawesome/fontawesome-svg-core';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import * as SSCIcons from './icons';

@@ -1,6 +1,6 @@
-import { find, findIndex, propEq, remove, update } from 'ramda';
-
 import type { InstanceId } from './types';
+
+import { find, findIndex, propEq, remove, update } from 'ramda';
 
 export const randomId = () =>
   Math.floor((1 + Math.random()) * 0x10000)

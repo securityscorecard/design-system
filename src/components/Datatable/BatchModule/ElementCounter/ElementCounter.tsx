@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import type { FC, ReactElement } from 'react';
+import type { ElementCounterProps } from './ElementCounter.types';
+
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
@@ -16,7 +19,6 @@ import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { Icon } from '../../../Icon';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { DatatableStore } from '../../Datatable.store';
-import { ElementCounterProps } from './ElementCounter.types';
 import { Inline, Padbox } from '../../../layout';
 import { SpaceSizes } from '../../../../theme';
 import { PaddingTypes } from '../../../layout/Padbox/Padbox.enums';
@@ -41,7 +43,7 @@ const SelectionButton = styled.button`
 export const getCounterContent = (
   totalLength: number,
   selectedLength = 0,
-): React.ReactElement => (
+): ReactElement => (
   <span data-testid="counter-content">
     {isPositive(selectedLength) && isPositive(totalLength)
       ? `${abbreviateNumber(selectedLength)} of ${abbreviateNumber(
@@ -72,7 +74,7 @@ const CounterText = styled(Text).attrs(() => ({
   line-height: ${pxToRem(24)};
 `;
 
-const ElementCounter: React.FC<ElementCounterProps> = ({
+const ElementCounter: FC<ElementCounterProps> = ({
   dataSize,
   hasSelection,
   hasOnlyPerPageSelection,

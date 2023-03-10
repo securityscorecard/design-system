@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import type { Meta, Story } from '@storybook/react';
+import type { BannerProps } from '../../components/Banner/Banner.types';
+import type { BannersStackProps } from './types';
+
+import { useEffect, useState } from 'react';
 import { useDeepCompareEffect } from 'use-deep-compare';
 import { pluck } from 'ramda';
 
@@ -22,8 +25,6 @@ import {
   Strong,
   Text,
 } from '../../components';
-import type { BannerProps } from '../../components/Banner/Banner.types';
-import type { BannersStackProps } from './types';
 import { BannerVariants } from '../../components/Banner/Banner.enums';
 
 export default {

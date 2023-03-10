@@ -1,15 +1,18 @@
-import React, { useReducer } from 'react';
+import type { ReactNode } from 'react';
+import type { Notification } from './types';
+
+import { useReducer } from 'react';
 
 import { Stack, Toast } from '../../components';
 import { ToastArea } from '../../components/Toast/Toast';
 import { useManagerEvents } from '../common/useManagerEvents';
-import { ACTIONS, Notification } from './types';
+import { ACTIONS } from './types';
 import { NotificationsProviderReducer } from './reducer';
 
 export const NotificationsProvider = ({
   children,
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) => {
   const [state, dispatch] = useReducer(NotificationsProviderReducer, []);
 

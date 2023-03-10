@@ -6,7 +6,7 @@
 
 /* solid - circle-info */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

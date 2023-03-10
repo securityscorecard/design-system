@@ -1,7 +1,9 @@
+import type { PopperProps } from 'react-popper';
+import type { Placement } from '@popperjs/core';
+import type { Options as ArrowOptions } from '@popperjs/core/lib/modifiers/arrow';
+
+import { usePopper } from 'react-popper';
 import { isNotUndefined } from 'ramda-adjunct';
-import { PopperProps, usePopper } from 'react-popper';
-import { Placement } from '@popperjs/core';
-import { Options as ArrowOptions } from '@popperjs/core/lib/modifiers/arrow';
 import { useTheme } from 'styled-components';
 
 type UsePopup<

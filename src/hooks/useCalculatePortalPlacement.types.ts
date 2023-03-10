@@ -1,4 +1,4 @@
-import { PortalPlacements } from './useCalculatePortalPlacements.enums';
+import type { PortalPlacements } from './useCalculatePortalPlacements.enums';
 
 export type StyleProps = {
   space: number;

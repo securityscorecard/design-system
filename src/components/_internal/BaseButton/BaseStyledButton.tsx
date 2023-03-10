@@ -1,3 +1,5 @@
+import type { BaseStyledButtonProps } from './BaseButton.types';
+
 import styled, { css } from 'styled-components';
 import { includes, pipe } from 'ramda';
 
@@ -9,7 +11,6 @@ import {
   getToken,
   pxToRem,
 } from '../../../utils';
-import { BaseStyledButtonProps } from './BaseButton.types';
 import { BaseButtonVariants } from './BaseButton.enums';
 import { Padbox } from '../../layout';
 import { ButtonColors } from '../../Button/Button.enums';

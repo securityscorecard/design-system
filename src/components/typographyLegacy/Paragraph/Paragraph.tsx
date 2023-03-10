@@ -1,3 +1,5 @@
+import type { ParagraphProps } from './Paragraph.types';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { path } from 'ramda';
@@ -6,7 +8,6 @@ import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import { createSpacings } from '../../../utils';
 import { Text } from '../Text';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
-import { ParagraphProps } from './Paragraph.types';
 
 const Paragraph = styled(Text)<ParagraphProps>`
   margin-bottom: ${path([

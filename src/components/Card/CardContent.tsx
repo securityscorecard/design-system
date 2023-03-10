@@ -1,11 +1,13 @@
-import React from 'react';
+import type { PropsWithChildren } from 'react';
+
+import { forwardRef } from 'react';
 
 import { SpaceSizes } from '../../theme';
 import { CardContainer } from './Card';
 
-const CardContent = React.forwardRef<
+const CardContent = forwardRef<
   HTMLDivElement,
-  React.PropsWithChildren<Record<string, unknown>>
+  PropsWithChildren<Record<string, unknown>>
 >(({ children, ...props }, ref) => (
   <CardContainer
     ref={ref}

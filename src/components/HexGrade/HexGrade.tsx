@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { HexGradeProps } from './HexGrade.types';
+
 import PropTypes from 'prop-types';
 import { defaultTo, path, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -9,7 +11,6 @@ import { colors } from '../../theme/colors';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { createMarginSpacing } from '../../utils';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
-import { HexGradeProps } from './HexGrade.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const grades = {
@@ -54,7 +55,7 @@ const StyledSVG = styled.svg<HexGradeProps>`
   ${({ margin }) => createMarginSpacing(margin)};
 `;
 
-const HexGrade: React.FC<HexGradeProps> = ({
+const HexGrade: FC<HexGradeProps> = ({
   variant = HexGradeVariants.solid,
   grade,
   size = 64,

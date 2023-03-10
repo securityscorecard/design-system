@@ -1,11 +1,14 @@
-
 import { Meta, Props, IconGallery, IconItem } from '@storybook/addon-docs';
-import {flip, includes} from 'ramda';
+import { flip, includes } from 'ramda';
 
-import Icon from '../components/Icon/Icon'
-import { RegularIconNames, SolidIconNames, SSCIconNames, IconTypes } from './icons/icons.enums';
+import Icon from '../components/Icon/Icon';
+import {
+  RegularIconNames,
+  SolidIconNames,
+  SSCIconNames,
+  IconTypes,
+} from './icons/icons.enums';
 import createIconLibrary from './createIconLibrary';
-
 
 <Meta title="Theme/createIconLibrary()" />
 
@@ -17,7 +20,7 @@ System defined icons and you'll be able to use them later.
 
 ```jsx
 // main.js
-import React from 'react';
+
 import ReactDOM from 'react-dom';
 import App from './App';
 import { createIconLibrary } from '@securityscorecard/design-system';
@@ -28,12 +31,12 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
-
 ```
 
 ## Extending icons library
+
 By default we are including only minimal set of icon necessary for usage this library. However
 you can extend default set of icons in the library with icons provided by FontAwesome (either
 Free or Pro versions). All you have to do is provide array of icons as first argument of
@@ -48,7 +51,6 @@ import { createIconLibrary } from '@securityscorecard/design-system';
 
 createIconLibrary([fasBone, fab]);
 
-
 // Component.jsx
 export const Component = () => (
   <>
@@ -59,8 +61,9 @@ export const Component = () => (
 ```
 
 ## Default icon set
+
 <IconGallery>
-  {Object.values(SSCIconNames).map(iconName => (
+  {Object.values(SSCIconNames).map((iconName) => (
     <IconItem name={iconName} key={iconName}>
       <Icon name={iconName} type={IconTypes.ssc} />
     </IconItem>

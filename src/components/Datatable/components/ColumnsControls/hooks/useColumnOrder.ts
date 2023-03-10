@@ -1,8 +1,11 @@
+import type { Dispatch, SetStateAction } from 'react';
+import type { DatatableStoreShape } from '../../../Datatable.store';
+
 import { useEffect, useState } from 'react';
 import { comparator, keys, lt, sort } from 'ramda';
 import deepEqual from 'fast-deep-equal';
 
-import { DatatableStore, DatatableStoreShape } from '../../../Datatable.store';
+import { DatatableStore } from '../../../Datatable.store';
 
 export const compare =
   (order: string[]) =>
@@ -32,7 +35,7 @@ export const sortColumns = (
 
 export const useColumnOrder = (): {
   orderedColumns: string[];
-  setLocalColumnOrder: React.Dispatch<React.SetStateAction<string[]>>;
+  setLocalColumnOrder: Dispatch<SetStateAction<string[]>>;
   storeOrderedColumns: () => void;
   reinitializeOrderedColumns: () => void;
   resetOrderedColumns: () => void;

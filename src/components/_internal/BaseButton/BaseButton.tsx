@@ -1,4 +1,7 @@
-import React from 'react';
+import type { ComponentProps, FC } from 'react';
+import type { SSCIcons, Types } from '../../Icon/Icon.types';
+import type { BaseButtonProps } from './BaseButton.types';
+
 import PropTypes from 'prop-types';
 import {
   isNotNull,
@@ -18,7 +21,6 @@ import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Spinner } from '../../Spinner';
 import { Icon } from '../../Icon';
-import { SSCIcons, Types } from '../../Icon/Icon.types';
 import { Inline } from '../../layout';
 import BaseStyledButton from './BaseStyledButton';
 import {
@@ -26,7 +28,6 @@ import {
   BaseButtonSizes,
   BaseButtonVariants,
 } from './BaseButton.enums';
-import { BaseButtonProps } from './BaseButton.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
 
@@ -34,8 +35,8 @@ const BaseStyledIcon = styled(Icon)`
   font-size: ${getToken('font-action-size')};
 `;
 
-const BaseButton: React.FC<
-  BaseButtonProps & React.ComponentProps<typeof BaseStyledButton>
+const BaseButton: FC<
+  BaseButtonProps & ComponentProps<typeof BaseStyledButton>
 > = ({
   children,
   variant = BaseButtonVariants.solid,

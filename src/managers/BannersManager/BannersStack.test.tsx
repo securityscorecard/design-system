@@ -1,4 +1,6 @@
-import React from 'react';
+import type { ReactNode } from 'react';
+import type { BannerProps } from '../../components/Banner/Banner.types';
+
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -7,9 +9,8 @@ import { addBanner, removeBanner } from './events';
 import { BannersProvider } from './BannersProvider';
 import { Banner } from '../../components';
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
-import { BannerProps } from '../../components/Banner/Banner.types';
 
-const wrapper = ({ children }: { children: React.ReactNode }) => (
+const wrapper = ({ children }: { children: ReactNode }) => (
   <BannersProvider>{children}</BannersProvider>
 );
 const getBanner = (id: string, variant: BannerProps['variant'] = 'info') => ({

@@ -1,6 +1,7 @@
+import type { Field } from '../Filters.types';
+
 import { renderHook } from '@testing-library/react-hooks';
 
-import { Field } from '../Filters.types';
 import { mockTestFields } from '../mocks/options';
 import { useFilterRow } from './useFilterRow';
 

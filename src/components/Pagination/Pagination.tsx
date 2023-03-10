@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { PaginationProps } from './Pagination.types';
+
 import PropTypes from 'prop-types';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -6,11 +8,10 @@ import { Icon } from '../Icon';
 import { PaginationItem } from './PaginationItem';
 import PageButtons from './PageButtons';
 import { Inline } from '../layout';
-import { PaginationProps } from './Pagination.types';
 import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: FC<PaginationProps> = ({
   pageCount,
   currentPage,
   onPageChange,

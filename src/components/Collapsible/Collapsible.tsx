@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import type { FC } from 'react';
+import type { CollapsibleProps } from './Collapsible.types';
+
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
@@ -9,7 +12,6 @@ import { getColor, getRadii, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Strong, Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
-import { CollapsibleProps } from './Collapsible.types';
 import { Padbox } from '../layout/Padbox';
 import { Inline } from '../layout/Inline';
 import { SpaceSizes } from '../../theme/space.enums';
@@ -51,7 +53,7 @@ const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
   ${({ isRotated }) => isRotated && 'transform: rotate(90deg);'}
 `;
 
-const Collapsible: React.FC<CollapsibleProps> = ({
+const Collapsible: FC<CollapsibleProps> = ({
   children,
   className,
   defaultIsOpened = false,

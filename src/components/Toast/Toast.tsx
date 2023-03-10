@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { ToastProps } from './Toast.types';
+
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
@@ -6,7 +8,6 @@ import styled, { keyframes } from 'styled-components';
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { Paragraph } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
-import { ToastProps } from './Toast.types';
 import { SpaceSizes } from '../../theme/space.enums';
 import { Inline } from '../layout';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
@@ -66,14 +67,14 @@ const iconPxSizesVariants = {
 
 const stopPropagation = (event) => event?.stopPropagation();
 
-const ToastAreaContainer: React.FC<{
+const ToastAreaContainer: FC<{
   isStandalone: boolean;
 }> = ({ children, isStandalone }) => {
   // eslint-disable-next-line
   return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
 };
 
-const Toast: React.FC<ToastProps> = ({
+const Toast: FC<ToastProps> = ({
   onClose,
   children,
   width = 400,

@@ -1,4 +1,7 @@
-import React, { useRef } from 'react';
+import type { FC, KeyboardEvent } from 'react';
+import type { GoToPageProps } from './GoToPage.types';
+
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -10,7 +13,6 @@ import {
 } from '../../../../utils';
 import { Inline } from '../../../layout';
 import { Input } from '../../../forms';
-import { GoToPageProps } from './GoToPage.types';
 import { SpaceSizes } from '../../../../theme';
 
 const SmallInput = styled(Input)`
@@ -37,9 +39,9 @@ const GoToPageLabel = styled.label`
   color: ${getColor('neutral.700')};
 `;
 
-const GoToPage: React.FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
+const GoToPage: FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const handlePageChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handlePageChange = (e: KeyboardEvent<HTMLInputElement>) => {
     const { target, key } = e;
     const { value } = target as HTMLInputElement;
     const parsedValue = parseInt(value, 10);

@@ -1,5 +1,5 @@
-import { createContext } from 'react';
+import type { StepperContextValue } from './Stepper.types';
 
-import { StepperContextValue } from './Stepper.types';
+import { createContext } from 'react';
 
 export const StepperContext = createContext<StepperContextValue>({});

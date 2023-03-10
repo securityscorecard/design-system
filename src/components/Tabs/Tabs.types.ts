@@ -1,29 +1,28 @@
-import React from 'react';
-
-import { SpacingProps } from '../../types/spacing.types';
-import { BaseLabelProps } from '../_internal/BaseTabs/BaseTabLabel.types';
-import { PadboxProps } from '../layout/Padbox/Padbox';
+import type { ReactNode, ReactText } from 'react';
+import type { SpacingProps } from '../../types/spacing.types';
+import type { BaseLabelProps } from '../_internal/BaseTabs/BaseTabLabel.types';
+import type { PadboxProps } from '../layout/Padbox/Padbox';
 
 export interface LabelProps extends BaseLabelProps, PadboxProps {}
 
 export interface TabProps {
-  children: React.ReactNode;
+  children: ReactNode;
   color?: LabelProps['$color'];
   isSelected?: LabelProps['$isSelected'];
   isExpanded?: boolean;
-  onClick?: (selectedValue: React.ReactText) => void;
-  value: React.ReactText;
+  onClick?: (selectedValue: ReactText) => void;
+  value: ReactText;
   variant?: LabelProps['$variant'];
 }
 
 export interface TabsProps extends SpacingProps {
   variant?: LabelProps['$variant'];
-  selectedValue: React.ReactText;
+  selectedValue: ReactText;
   selectedPatternMatcher?: (
-    value: React.ReactText,
-    selectedValue: React.ReactText,
+    value: ReactText,
+    selectedValue: ReactText,
   ) => boolean;
-  onSelectTab?: (selectedValue: React.ReactText) => void;
-  children: React.ReactNode[];
+  onSelectTab?: (selectedValue: ReactText) => void;
+  children: ReactNode[];
   isExpanded?: boolean;
 }

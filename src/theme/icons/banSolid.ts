@@ -6,7 +6,7 @@
 
 /* solid - ban */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

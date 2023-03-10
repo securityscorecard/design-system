@@ -1,15 +1,17 @@
-import React from 'react';
+import type { FC, ReactElement } from 'react';
+import type { TabProps, TabsProps } from './Tabs.types';
+
 import PropTypes from 'prop-types';
 import { equals } from 'ramda';
+import { Children, cloneElement, isValidElement } from 'react';
 
 import { Inline } from '../layout';
-import type { TabProps, TabsProps } from './Tabs.types';
 import { TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme/space.enums';
 import { BaseTabsWrapper } from '../_internal/BaseTabs/BaseTabsWrapper';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Tabs: React.FC<TabsProps> = ({
+const Tabs: FC<TabsProps> = ({
   selectedValue,
   selectedPatternMatcher = equals,
   children,
@@ -36,12 +38,12 @@ const Tabs: React.FC<TabsProps> = ({
       role="tablist"
       stretch={isExpanded ? 'all' : 0}
     >
-      {React.Children.map(children, (tab) => {
-        if (!React.isValidElement(tab)) {
+      {Children.map(children, (tab) => {
+        if (!isValidElement(tab)) {
           return null;
         }
 
-        return React.cloneElement(tab as React.ReactElement<TabProps>, {
+        return cloneElement(tab as ReactElement<TabProps>, {
           variant,
           isExpanded,
           key: tab.props.value,

@@ -1,8 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { PasswordProps } from './Password.types';
 
 import Password from './Password';
-import { PasswordProps } from './Password.types';
 
 export default {
   title: 'components/forms/Password',

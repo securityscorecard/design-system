@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
-
-import DateRangePicker from './DateRangePicker';
-import {
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type {
   BaseDateRange,
   BaseDateRangePickerProps,
 } from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
+
+import { useState } from 'react';
+
+import DateRangePicker from './DateRangePicker';
 
 export default {
   title: 'components/DateRangePicker',

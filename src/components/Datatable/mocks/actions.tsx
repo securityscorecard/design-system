@@ -1,9 +1,9 @@
-import React from 'react';
+import type { BatchActionArgs } from '../Datatable.types';
+import type { Action } from '../types/Action.types';
+import type { ActionKinds } from '../../../types/action.types';
+
 import { action } from '@storybook/addon-actions';
 
-import { BatchActionArgs } from '../Datatable.types';
-import { Action } from '../types/Action.types';
-import { ActionKinds } from '../../../types/action.types';
 import Inline from '../../layout/Inline/Inline';
 import Icon from '../../Icon/Icon';
 import { Tooltip } from '../../Tooltip';

@@ -1,11 +1,11 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { CenterProps } from './Center';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { theme } from '../../../theme';
 import { Button } from '../../Button';
 import { Box } from '../mocks/Box';
-import Center, { CenterProps } from './Center';
+import Center from './Center';
 
 export default {
   title: 'layout/primitives/Center',

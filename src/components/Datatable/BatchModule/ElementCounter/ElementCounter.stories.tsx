@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ElementCounterProps } from './ElementCounter.types';
+
+import { useEffect } from 'react';
 
 import ElementCounter from './ElementCounter';
 import { DatatableStore } from '../../Datatable.store';
-import { ElementCounterProps } from './ElementCounter.types';
 import { defaultTableConfig } from '../../defaultConfigs';
 
 export default {

@@ -1,6 +1,8 @@
+import type { MutableRefObject } from 'react';
+
 export interface HeaderProps {
   width: number;
   offset: number;
-  modalRef: React.MutableRefObject<HTMLElement>;
+  modalRef: MutableRefObject<HTMLElement>;
   handleClose: () => void;
 }

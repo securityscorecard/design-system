@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import type { ReactElement } from 'react';
+import type { IdType } from 'react-table';
+import type { TableConfig } from './Table/Table.types';
+import type { DatatableProps } from './Datatable.types';
+
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
 import { isNotUndefined, noop } from 'ramda-adjunct';
-import { IdType } from 'react-table';
 
 import { getColor, getRadii } from '../../utils';
 import { Padbox } from '../layout';
@@ -16,8 +20,7 @@ import { mergeControlsConfig, mergeTableConfig } from './defaultConfigs';
 import { ControlsModule } from './ControlsModule';
 import { BatchModule } from './BatchModule';
 import { Table } from './Table';
-import { TableConfig, TableConfigPropType } from './Table/Table.types';
-import { DatatableProps } from './Datatable.types';
+import { TableConfigPropType } from './Table/Table.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -53,7 +56,7 @@ function Datatable<D extends Record<string, unknown>>({
   controlsConfig = {},
   tableConfig = {},
   resetSelectionFn,
-}: DatatableProps<D>): React.ReactElement {
+}: DatatableProps<D>): ReactElement {
   const [persistedState, setPersistedState] = useLocalStorageState(
     `datatable_${id}`,
   );

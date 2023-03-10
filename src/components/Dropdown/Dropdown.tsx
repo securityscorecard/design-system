@@ -1,16 +1,24 @@
-import React, { useImperativeHandle, useRef, useState } from 'react';
+import type { FC, KeyboardEventHandler } from 'react';
+import type { DropdownProps } from './Dropdown.types';
+
+import {
+  cloneElement,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 import { Ref } from '@fluentui/react-component-ref';
 
 import { SpaceSizes } from '../../theme';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { DropdownProps } from './Dropdown.types';
 import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
 import ControlledDropdown from './ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Dropdown: React.FC<DropdownProps> = React.forwardRef(
+const Dropdown: FC<DropdownProps> = forwardRef(
   (
     {
       children,
@@ -59,7 +67,7 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
       togglePane();
     };
 
-    const handleTriggerOnKeyDown: React.KeyboardEventHandler = (e) => {
+    const handleTriggerOnKeyDown: KeyboardEventHandler = (e) => {
       if (!triggerEvents.includes('click')) {
         return;
       }
@@ -110,7 +118,7 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
     return (
       <>
         <Ref innerRef={setTriggerEl}>
-          {React.cloneElement(trigger, {
+          {cloneElement(trigger, {
             onClick: handleTriggerOnClick,
             onTouchStart: handleTriggerOnClick,
             onKeyDown: handleTriggerOnKeyDown,

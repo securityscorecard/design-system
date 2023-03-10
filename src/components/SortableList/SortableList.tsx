@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { SortableListProps } from './SortableList.types';
+
 import PropTypes from 'prop-types';
 import {
   DndContext,
@@ -22,7 +24,6 @@ import styled from 'styled-components';
 import { Stack } from '../layout';
 import { SpaceSizes } from '../../theme';
 import SortableItem from './SortableItem';
-import { SortableListProps } from './SortableList.types';
 import { pxToRem } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 
@@ -34,7 +35,7 @@ const SortableListRoot = styled.div<{
     isNotUndefined($maxHeight) && pxToRem($maxHeight)};
 `;
 
-const SortableList: React.FC<SortableListProps> = ({
+const SortableList: FC<SortableListProps> = ({
   items,
   labels,
   renderItem,

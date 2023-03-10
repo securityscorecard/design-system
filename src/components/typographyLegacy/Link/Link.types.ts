@@ -1,10 +1,9 @@
-import React from 'react';
 import type { To } from 'history';
-
-import { Colors } from '../../_internal/BaseLink';
+import type { MouseEventHandler } from 'react';
+import type { Colors } from '../../_internal/BaseLink';
 
 export interface LinkProps {
-  onClick?: React.MouseEventHandler;
+  onClick?: MouseEventHandler;
   href?: string;
   to?: To;
   color?: Colors;

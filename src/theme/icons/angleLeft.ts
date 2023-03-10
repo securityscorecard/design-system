@@ -4,7 +4,7 @@
  * Copyright 2022 Fonticons, Inc.
  */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

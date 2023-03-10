@@ -1,11 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { ColProps, Cols } from './Col.types';
+
 import { Box } from 'reflexbox';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
 
 import { pxToRem } from '../../../utils';
-import { ColProps, Cols } from './Col.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
 const getColWidth = (cols: Cols): { flex: string } | { width: number } => {
@@ -25,7 +26,7 @@ const StyledCol = styled(Box)`
   padding-right: ${getColPadding};
 `;
 
-const Col: React.FC<ColProps> = ({ children, cols, offset }) => (
+const Col: FC<ColProps> = ({ children, cols, offset }) => (
   <StyledCol
     ml={`${(100 / 12) * offset}%`}
     {...getColWidth(cols)}

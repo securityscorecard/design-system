@@ -1,4 +1,3 @@
-import React from 'react';
 import { withScreenshot } from 'storycap';
 import { withDesign } from 'storybook-addon-designs';
 import {

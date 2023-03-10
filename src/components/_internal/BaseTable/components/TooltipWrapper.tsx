@@ -1,10 +1,11 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { TooltipWrapperProps } from './TooltipWrapper.types';
+
 import PropTypes from 'prop-types';
 
 import { Tooltip } from '../../../Tooltip';
-import { TooltipWrapperProps } from './TooltipWrapper.types';
 
-const TooltipWrapper: React.FC<TooltipWrapperProps> = ({
+const TooltipWrapper: FC<TooltipWrapperProps> = ({
   popupRenderer,
   shouldRender,
   children,

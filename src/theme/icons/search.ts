@@ -6,7 +6,7 @@
 
 /* solid - magnifying-glass */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

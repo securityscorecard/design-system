@@ -1,4 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import type { ChangeEventHandler, KeyboardEventHandler } from 'react';
+import type { SearchBarProps } from './SearchBar.types';
+
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   isNonEmptyString,
@@ -16,7 +19,6 @@ import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
 import { useField } from './useField';
-import { SearchBarProps } from './SearchBar.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const SearchBarRoot = styled.div`
@@ -69,7 +71,7 @@ const SearchInput = styled(Input)`
     getSpace($isClearable ? SpaceSizes.lgPlus : SpaceSizes.md, { theme })};
 `;
 
-const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
+const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
   (
     {
       value: valueFromProps,
@@ -132,7 +134,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       const eventValue = e.target.value;
       if (hasDebouncedSearch) {
         if (typingTimeout) {
@@ -146,7 +148,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       }
       onChange(e);
     };
-    const handleOnKeyUp: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    const handleOnKeyUp: KeyboardEventHandler<HTMLInputElement> = (e) => {
       if (isNotUndefined(onKeyUp)) {
         onKeyUp(e);
       }

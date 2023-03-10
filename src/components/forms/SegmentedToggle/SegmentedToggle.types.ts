@@ -1,9 +1,13 @@
-import React from 'react';
+import type {
+  ChangeEventHandler,
+  ComponentPropsWithoutRef,
+  ReactText,
+} from 'react';
 
 export interface SegmentedToggleItemProps
-  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> {
+  extends Omit<ComponentPropsWithoutRef<'input'>, 'size'> {
   label: string;
-  value: React.ReactText;
+  value: ReactText;
   itemId: string;
   group?: string;
 }
@@ -21,6 +25,6 @@ export interface SegmentedToggleProps {
   /**
    * Callback when the SegmentedToggle has changed
    */
-  onChange?: React.ChangeEventHandler;
+  onChange?: ChangeEventHandler;
   className?: string;
 }

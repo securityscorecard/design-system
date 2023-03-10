@@ -1,4 +1,4 @@
-import { Depths } from './depths.types';
+import type { Depths } from './depths.types';
 
 export const createDepths = (): Depths => ({
   dropdown: 1050,

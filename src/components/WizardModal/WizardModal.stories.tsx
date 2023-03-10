@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { WizardModalProps } from './WizardModal.types';
+
 import { action } from '@storybook/addon-actions';
 
 import WizardModal from './WizardModal';
-import { WizardModalProps } from './WizardModal.types';
 import { Inline, Padbox, Stack } from '../layout';
 import { H2, Paragraph } from '../typographyLegacy';
 import { Button, ButtonEnums } from '../Button';

@@ -1,5 +1,6 @@
 import type { To } from 'history';
 import type { Row } from 'react-table';
+
 import PropTypes from 'prop-types';
 
 import { ActionBasePropType } from '../../../types/action.types';

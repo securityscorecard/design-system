@@ -1,9 +1,11 @@
+import type { MutableRefObject } from 'react';
+
 import { useEffect, useRef } from 'react';
 import { isNotNull } from 'ramda-adjunct';
 
 export const useStickyObserver = (
-  modalRef: React.MutableRefObject<HTMLElement>,
-  elementRef: React.MutableRefObject<HTMLElement>,
+  modalRef: MutableRefObject<HTMLElement>,
+  elementRef: MutableRefObject<HTMLElement>,
   isInView: () => void,
 ): void => {
   const observerRef = useRef(null);

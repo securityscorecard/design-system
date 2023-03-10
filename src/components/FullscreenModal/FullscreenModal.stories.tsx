@@ -1,5 +1,7 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { FC } from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+
+import { useCallback, useEffect, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { Inline } from '../layout';
@@ -72,7 +74,7 @@ function Footer() {
     </Inline>
   );
 }
-const Sidebar: React.FC<{
+const Sidebar: FC<{
   modalRef?: HTMLElement;
 }> = ({ modalRef }) => {
   useEffect(() => {
@@ -130,22 +132,22 @@ SingleColumn6.argTypes = {
   header: {
     control: { disable: true },
     description: 'Content of the header wrapper',
-    table: { type: { summary: 'React.node' } },
+    table: { type: { summary: ' node' } },
   },
   content: {
     control: { disable: true },
     description: 'Content of the content wrapper',
-    table: { type: { summary: 'React.node' } },
+    table: { type: { summary: ' node' } },
   },
   footer: {
     control: { disable: true },
     description: 'Content of the footer wrapper',
-    table: { type: { summary: 'React.node' } },
+    table: { type: { summary: ' node' } },
   },
   sidebar: {
     control: { disable: true },
     description: 'Content of the sidebar wrapper',
-    table: { type: { summary: 'React.node' } },
+    table: { type: { summary: ' node' } },
   },
   scrollToTopButtonLabel: {
     control: { disable: true },

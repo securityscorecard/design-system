@@ -1,3 +1,5 @@
+import type { Field, Filter } from '../Filters.types';
+
 import {
   CountFilter,
   DateRangePickerFilter,
@@ -8,7 +10,6 @@ import {
   SingleDatePickerFilter,
   TagsInputFilter,
 } from '../components';
-import { Field, Filter } from '../Filters.types';
 import { Operators } from '../Filters.enums';
 import { patterns, validateDomains, validateIPs } from './validations';
 

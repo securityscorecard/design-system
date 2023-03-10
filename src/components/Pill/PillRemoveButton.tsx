@@ -1,11 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { PillRemoveButtonProps } from './Pill.types';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { getColor, getLineHeight, getRadii, pxToRem } from '../../utils';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
-import { PillRemoveButtonProps } from './Pill.types';
 
 const PillRemoveButtonWrapper = styled.button`
   display: flex;
@@ -29,7 +30,7 @@ const PillRemoveButtonWrapper = styled.button`
   }
 `;
 
-const PillRemoveButton: React.FC<PillRemoveButtonProps> = ({
+const PillRemoveButton: FC<PillRemoveButtonProps> = ({
   pillLabel,
   ...props
 }) => (

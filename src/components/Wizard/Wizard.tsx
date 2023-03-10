@@ -1,15 +1,16 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { WizardProps } from './Wizard.types';
+
 import PropTypes from 'prop-types';
 
 import { Inline, Stack } from '../layout';
 import { Modal } from '../Modal';
 import { ModalSizes } from '../Modal/Modal.enums';
 import { WizardProvider } from './Wizard.context';
-import { WizardProps } from './Wizard.types';
 import { WizardActions } from './WizardActions';
 import { WizardStepper } from './WizardStepper';
 
-const Wizard: React.FC<WizardProps> = ({
+const Wizard: FC<WizardProps> = ({
   initialStep,
   size = ModalSizes.lg,
   onStepChange = () => null,

@@ -1,7 +1,7 @@
-import { Store, registerInDevtools } from 'pullstate';
-import { IdType, SortingRule } from 'react-table';
+import type { IdType, SortingRule } from 'react-table';
+import type { Filter } from '../Filters/Filters.types';
 
-import { Filter } from '../Filters/Filters.types';
+import { Store, registerInDevtools } from 'pullstate';
 
 export type DatatableStoreShape<
   D extends Record<string, unknown> = Record<string, unknown>,

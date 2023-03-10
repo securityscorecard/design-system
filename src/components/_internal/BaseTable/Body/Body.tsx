@@ -1,15 +1,16 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { BodyProps } from './Body.types';
+
 import { isNotUndefined, isOdd } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { BodyProps } from './Body.types';
 import { shrinkIfSticky } from '../utils';
 
 function Body<D extends Record<string, unknown>>({
   rows,
   prepareRow,
   ...bodyProps
-}: BodyProps<D>): React.ReactElement {
+}: BodyProps<D>): ReactElement {
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     <tbody {...bodyProps}>

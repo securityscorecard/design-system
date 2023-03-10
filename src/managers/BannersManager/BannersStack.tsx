@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import type { BannersStackProps } from './types';
+
+import { cloneElement, useState } from 'react';
 import { indexOf, sort } from 'ramda';
 import { useDeepCompareEffect } from 'use-deep-compare';
 
 import { useBanners } from './BannersProvider';
-import type { BannersStackProps } from './types';
 
 const SORT_ORDER = ['error', 'warn', 'success', 'info'];
 const cmp = (a, b) => {
@@ -54,7 +55,7 @@ const BannersStack = ({ initialState = [] }: BannersStackProps) => {
     sortedInstances[index]?.component ||
     sortedInstances[sortedInstances.length - 1]?.component;
 
-  return React.cloneElement(currentComponent, {
+  return cloneElement(currentComponent, {
     onClose: handleRemove(currentComponent.props.onClose),
     __hasPagination: true,
     __onNext: moveToNext,

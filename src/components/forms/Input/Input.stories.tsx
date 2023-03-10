@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { InputHTMLAttributes } from 'react';
+import type { InputProps } from './Input.types';
 
 import Input from './Input';
-import { InputProps } from './Input.types';
 
 export default {
   title: 'components/forms/Input',
@@ -30,7 +30,7 @@ export default {
 } as Meta;
 
 export const Playground: Story<
-  InputProps & React.InputHTMLAttributes<HTMLInputElement>
+  InputProps & InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Input {...args} aria-label="Input" />;
 Playground.args = { type: 'text' };
 Playground.parameters = {

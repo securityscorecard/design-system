@@ -1,14 +1,15 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { SSCIcons } from '../../../Icon/Icon.types';
+import type { ControlButtonProps } from './ControlButton.types';
+
 import PropTypes from 'prop-types';
 
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { Button } from '../../../Button';
 import { Badge } from '../../../Badge';
 import { Inline } from '../../../layout';
-import { SSCIcons } from '../../../Icon/Icon.types';
-import { ControlButtonProps } from './ControlButton.types';
 
-const ControlButton: React.FC<ControlButtonProps> = ({
+const ControlButton: FC<ControlButtonProps> = ({
   label,
   iconName,
   appliedFilters = 0,

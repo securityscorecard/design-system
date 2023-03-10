@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
+
 import { logError } from '../hooks/useLogger';
 
-export const requireRouterLink = (): React.ReactNode | null => {
+export const requireRouterLink = (): ReactNode | null => {
   try {
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     return require('react-router-dom').Link;

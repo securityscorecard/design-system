@@ -1,10 +1,10 @@
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { IconProps } from './Icon.types';
+
 import styled from 'styled-components';
-import { Meta, Story } from '@storybook/react/types-6-0';
 import { head, pipe, sortBy, toPairs } from 'ramda';
 
 import Icon from './Icon';
-import { IconProps } from './Icon.types';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { Text } from '../typographyLegacy';

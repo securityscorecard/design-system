@@ -1,9 +1,12 @@
-import PropTypes from 'prop-types';
 import type { IdType } from 'react-table';
+import type { SearchProps } from '../components/Search/Search.types';
+import type { FiltersProps } from '../../Filters/Filters.types';
+import type { ControlTypes } from './ControlsModule.enums';
 
-import { SearchPropType, SearchProps } from '../components/Search/Search.types';
-import { FiltersPropType, FiltersProps } from '../../Filters/Filters.types';
-import { ControlTypes } from './ControlsModule.enums';
+import PropTypes from 'prop-types';
+
+import { FiltersPropType } from '../../Filters/Filters.types';
+import { SearchPropType } from '../components/Search/Search.types';
 
 export type Controls = typeof ControlTypes[keyof typeof ControlTypes];
 

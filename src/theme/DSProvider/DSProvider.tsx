@@ -1,20 +1,22 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { DSContextValue, DSProviderProps } from './DSProvider.types';
+
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
+import { createContext } from 'react';
 
 import { createTheme } from '../theme';
 import { GlobalStyles } from '../GlobalStyles';
-import { DSContextValue, DSProviderProps } from './DSProvider.types';
 
 export const defaultDSContext = {
   portalsContainerId: 'portals',
   hasIncludedGlobalStyles: true,
   debugMode: false,
 };
-export const DSContext = React.createContext<DSContextValue>(defaultDSContext);
+export const DSContext = createContext<DSContextValue>(defaultDSContext);
 
-const DSProvider: React.FC<DSProviderProps> = ({
+const DSProvider: FC<DSProviderProps> = ({
   children,
   theme = {},
   config = {},

@@ -1,11 +1,12 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { MultiValueRendererProps } from './renderers.types';
+
 import { any, identity, map, pipe, slice } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { Tooltip } from '../../../Tooltip';
 import LinkRenderer from './LinkRenderer';
 import TooltipWrapper from '../components/TooltipWrapper';
-import { MultiValueRendererProps } from './renderers.types';
 
 const renderRestValue = (startIndex, formatter, values) =>
   pipe(
@@ -28,7 +29,7 @@ function MultiValueRenderer<D extends Record<string, unknown>>({
   linkComponent,
   rowData,
   tooltipComposer,
-}: MultiValueRendererProps<D>): React.ReactElement {
+}: MultiValueRendererProps<D>): ReactElement {
   const hasDisplayLimit = multiValueDisplayLimit > 0;
   const valuesLength = values.length;
   const containsLink = any(isNotUndefined, [hrefComposer, toComposer, onClick]);

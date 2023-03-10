@@ -1,12 +1,14 @@
-import PropTypes, { ReactComponentLike } from 'prop-types';
-import { Column, IdType, SortingRule } from 'react-table';
-
-import { RendererColumnOptions } from '../../_internal/BaseTable/renderers/renderers.types';
-import {
+import type { ReactComponentLike } from 'prop-types';
+import type { Column, IdType, SortingRule } from 'react-table';
+import type { RendererColumnOptions } from '../../_internal/BaseTable/renderers/renderers.types';
+import type {
   PrimaryKey,
   RowAction,
-  RowActionKindsPropType,
 } from '../../_internal/BaseTable/BaseTable.types';
+
+import PropTypes from 'prop-types';
+
+import { RowActionKindsPropType } from '../../_internal/BaseTable/BaseTable.types';
 
 export type OnSelectFn<D> = (
   ids: IdType<D>[],

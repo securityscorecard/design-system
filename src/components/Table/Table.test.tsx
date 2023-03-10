@@ -1,6 +1,6 @@
-import React from 'react';
+import type { Column } from 'react-table';
+
 import { screen } from '@testing-library/react';
-import { Column } from 'react-table';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Table from './Table';

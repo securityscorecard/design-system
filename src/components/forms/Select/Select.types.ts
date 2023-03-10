@@ -1,10 +1,10 @@
-import { CommonProps, Props as ReactSelectProps } from 'react-select';
-import { Props as ReactSelectCreatableProps } from 'react-select/creatable';
-import { Props as ReactSelectAsyncProps } from 'react-select/async';
-import { Props as ReactSelectAsyncCreatableProps } from 'react-select/async-creatable';
-import PropTypes from 'prop-types';
+import type { CommonProps, Props as ReactSelectProps } from 'react-select';
+import type { Props as ReactSelectCreatableProps } from 'react-select/creatable';
+import type { Props as ReactSelectAsyncProps } from 'react-select/async';
+import type { Props as ReactSelectAsyncCreatableProps } from 'react-select/async-creatable';
+import type { ActionKinds } from '../../../types/action.types';
 
-import { ActionKinds } from '../../../types/action.types';
+import PropTypes from 'prop-types';
 
 export interface Option {
   value: string;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ReactChild } from 'react';
+import type { MessageProps } from './Message.types';
 
 import Message, { Error, Note } from './Message';
-import { MessageProps } from './Message.types';
 import { MessageVariants } from './Message.enums';
 import { generateControl } from '../../../utils/tests/storybook';
 
@@ -22,9 +22,9 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<
-  MessageProps & { children: React.ReactChild }
-> = (args) => <Message {...args} />;
+export const Playground: Story<MessageProps & { children: ReactChild }> = (
+  args,
+) => <Message {...args} />;
 Playground.args = {
   children: 'Form field message',
   variant: MessageVariants.note,

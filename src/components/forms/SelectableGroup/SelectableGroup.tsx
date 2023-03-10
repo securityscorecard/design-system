@@ -1,5 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { useState } from 'react';
+import type { ChangeEvent, FC } from 'react';
+import type { Option, SelectableGroupProps } from './SelectableGroup.types';
+
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
@@ -9,7 +12,6 @@ import { pipe, sort } from 'ramda';
 import cls from 'classnames';
 
 import { Cluster, Padbox } from '../../layout';
-import { Option, SelectableGroupProps } from './SelectableGroup.types';
 import {
   getColor,
   getFontSize,
@@ -72,7 +74,7 @@ const getNextValue = (value: string, currentValues: string[]) => {
   return currentValues.filter((cv) => cv !== value);
 };
 
-const SelectableGroup: React.FC<SelectableGroupProps> = ({
+const SelectableGroup: FC<SelectableGroupProps> = ({
   isMulti = false,
   onChange = noop,
   value: valueFromProps,
@@ -91,7 +93,7 @@ const SelectableGroup: React.FC<SelectableGroupProps> = ({
   );
   const value = isControlled ? valueFromProps : internalValue;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = isMulti
       ? getNextValue(e.target.value, value as string[])
       : e.target.value;

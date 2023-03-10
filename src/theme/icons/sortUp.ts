@@ -6,7 +6,7 @@
 
 /* solid - sort-up */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

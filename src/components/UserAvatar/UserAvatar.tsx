@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { UserAvatarProps, UserAvatarRootProps } from './UserAvatar.types';
+
 import styled, { css } from 'styled-components';
 import { any, pipe, take, toUpper, trim } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -6,7 +8,6 @@ import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
-import type { UserAvatarProps, UserAvatarRootProps } from './UserAvatar.types';
 import {
   getColor,
   getFontFamily,
@@ -73,7 +74,7 @@ const RootUserAvatar = styled.div<UserAvatarRootProps>`
 `;
 const normalizeString = pipe(trim, take(2), toUpper);
 
-const UserAvatar: React.FC<UserAvatarProps> = ({
+const UserAvatar: FC<UserAvatarProps> = ({
   label,
   size = UserAvatarSizes.md,
   className,

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { BatchModuleProps } from './BatchModule.types';
+
+import { useEffect } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { actionsMock } from '../mocks/actions';
 import BatchModule from './BatchModule';
-import { BatchModuleProps } from './BatchModule.types';
 import { DatatableStore } from '../Datatable.store';
 import { defaultTableConfig } from '../defaultConfigs';
 

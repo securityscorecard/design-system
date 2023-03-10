@@ -1,12 +1,14 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { NumberProps } from '../Number/Number.types';
+
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { StyledNumber } from '../Number/Number';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-import { NumberPropTypes, NumberProps } from '../Number/Number.types';
+import { NumberPropTypes } from '../Number/Number.types';
 
-const Integer: React.FC<NumberProps> = ({
+const Integer: FC<NumberProps> = ({
   value = '',
   onChange,
   min,

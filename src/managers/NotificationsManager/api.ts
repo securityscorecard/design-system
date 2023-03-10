@@ -1,5 +1,7 @@
+import type { Notification } from './types';
+
 import { createCustomEvent } from '../common/events';
-import { ACTIONS, Notification } from './types';
+import { ACTIONS } from './types';
 
 export const removeNotification = (id: string) => {
   window.dispatchEvent(

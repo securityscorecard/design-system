@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
+
 export interface CollapsibleProps {
   className?: string;
   defaultIsOpened?: boolean;
   subject?: string;
-  title: React.ReactNode;
+  title: ReactNode;
   onOpen?: () => void;
 }

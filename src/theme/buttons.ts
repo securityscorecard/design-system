@@ -1,5 +1,5 @@
-import { colors } from './colors';
-import { Buttons } from './buttons.types';
+import type { colors } from './colors';
+import type { Buttons } from './buttons.types';
 
 export const createButtons = (themeColors: typeof colors): Buttons => ({
   variants: {

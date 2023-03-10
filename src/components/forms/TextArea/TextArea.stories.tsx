@@ -1,8 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { TextAreaProps } from './TextArea.types';
 
 import TextArea from './TextArea';
-import { TextAreaProps } from './TextArea.types';
 
 export default {
   title: 'components/forms/TextArea',

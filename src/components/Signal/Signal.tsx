@@ -1,11 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { SignalProps } from './Signal.types';
+
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { colors } from '../../theme/colors';
-import { SignalProps } from './Signal.types';
 import { SignalKinds } from './Signal.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 
@@ -59,7 +60,7 @@ const kinds = {
   },
 };
 
-const Signal: React.FC<SignalProps> = ({
+const Signal: FC<SignalProps> = ({
   kind,
   size = 16,
   title = '',

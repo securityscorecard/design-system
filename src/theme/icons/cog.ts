@@ -6,7 +6,7 @@
 
 /* solid - gear */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

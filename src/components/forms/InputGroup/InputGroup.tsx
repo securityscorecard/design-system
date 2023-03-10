@@ -1,8 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { InputGroupProps } from './InputGroup.types';
+import type { InlineProps } from '../../layout/Inline/Inline';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import cls from 'classnames';
+import { Children } from 'react';
 
 import { getFormStyle, getRadii } from '../../../utils';
 import { Input } from '../Input';
@@ -10,8 +14,6 @@ import { Password } from '../Password';
 import { Select } from '../Select';
 import { Icon } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
-import { InputGroupProps } from './InputGroup.types';
-import { InlineProps } from '../../layout/Inline/Inline';
 import { Button } from '../../Button';
 import { SearchBar } from '../SearchBar';
 import { CLX_COMPONENT } from '../../../theme/constants';
@@ -58,7 +60,7 @@ const IconContainer = styled(Padbox)`
   align-items: center;
 `;
 
-const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
+const InputGroup: FC<InputGroupProps & InlineProps> = ({
   children,
   hasDivider,
   className,
@@ -74,7 +76,7 @@ const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
     InputGroup,
     SearchBar,
   ];
-  React.Children.forEach(children, (child) => {
+  Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
       error(
         'Only Select, Input, InputGroup, Icon, Button, SearchBar and Password are valid childs of InputGroup',
@@ -88,7 +90,7 @@ const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
       {...inlineProps}
       stretch={inlineProps.stretch || 'start'}
     >
-      {React.Children.map(children, (child) => {
+      {Children.map(children, (child) => {
         if (prop('type', child) === Icon) {
           return <IconContainer paddingSize="sm">{child}</IconContainer>;
         }

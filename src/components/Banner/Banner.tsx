@@ -1,15 +1,16 @@
-import React from 'react';
+import type { FC, MouseEvent } from 'react';
+import type { BannerProps } from './Banner.types';
+import type {
+  AbsoluteLinkActionKind,
+  RelativeLinkActionKind,
+} from '../../types/action.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { BannerProps } from './Banner.types';
-import {
-  AbsoluteLinkActionKind,
-  ActionKindsPropType,
-  RelativeLinkActionKind,
-} from '../../types/action.types';
+import { ActionKindsPropType } from '../../types/action.types';
 import * as CustomPropTypes from '../../types/customPropTypes';
 import { BannerVariants } from './Banner.enums';
 import { Button } from '../Button';
@@ -61,7 +62,7 @@ const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
 `;
 /* stylelint-enable */
 
-const Banner: React.FC<BannerProps> = ({
+const Banner: FC<BannerProps> = ({
   children,
   variant = BannerVariants.info,
   actions,
@@ -107,14 +108,10 @@ const Banner: React.FC<BannerProps> = ({
                       $variant={variant}
                       color={ButtonColors.secondary}
                       href={
-                        (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
-                          .href
+                        (action as AbsoluteLinkActionKind<[MouseEvent]>).href
                       }
                       name={action.name}
-                      to={
-                        (action as RelativeLinkActionKind<[React.MouseEvent]>)
-                          .to
-                      }
+                      to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
                       variant={ButtonVariants.text}
                       onClick={action.onClick}
                     >

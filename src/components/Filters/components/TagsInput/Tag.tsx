@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { TagsProps } from './Tag.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -14,7 +16,6 @@ import {
   getRadii,
   pxToRem,
 } from '../../../../utils';
-import { TagsProps } from './Tag.types';
 
 const Container = styled(Padbox)`
   display: flex;
@@ -38,7 +39,7 @@ const RemoveButton = styled.button`
   font-size: ${pxToRem(10)};
 `;
 
-const Tag: React.FC<TagsProps> = ({ value, onClose }) => (
+const Tag: FC<TagsProps> = ({ value, onClose }) => (
   <Container alignItems="center">
     {value}{' '}
     <RemoveButton type="button" onClick={onClose}>

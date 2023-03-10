@@ -1,14 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import type { ReactElement } from 'react';
+import type { CellProps, Column } from 'react-table';
+import type { TableProps } from './Table.types';
+
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  CellProps,
-  Column,
-  useFlexLayout,
-  usePagination,
-  useSortBy,
-  useTable,
-} from 'react-table';
+import { useFlexLayout, usePagination, useSortBy, useTable } from 'react-table';
 import { prop, F as stubFalse } from 'ramda';
 import { isNonEmptyArray, isNotUndefined, isString, noop } from 'ramda-adjunct';
 
@@ -27,7 +24,6 @@ import {
 import { getColor, getRadii } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
-import { TableProps } from './Table.types';
 import { RowActionKindsPropType } from '../_internal/BaseTable/BaseTable.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
@@ -52,7 +48,7 @@ const TableWrapper = styled.div`
 
 const renderDefaultCell = <D extends Record<string, unknown>>(
   props: CellProps<D>,
-): React.ReactElement => <CellRenderer<D> {...props} />;
+): ReactElement => <CellRenderer<D> {...props} />;
 
 function Table<D extends Record<string, unknown>>({
   columns,
@@ -69,15 +65,14 @@ function Table<D extends Record<string, unknown>>({
   onSortChange = noop,
   rowActions = [],
   dataPrimaryKey,
-}: TableProps<D>): React.ReactElement {
+}: TableProps<D>): ReactElement {
   const defaultColumn = useMemo<Partial<Column<D>>>(
     () => ({
       minWidth: 40,
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement =>
-        renderDefaultCell<D>(props),
+      Cell: (props: CellProps<D>): ReactElement => renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],

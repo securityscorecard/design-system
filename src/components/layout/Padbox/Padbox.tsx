@@ -1,12 +1,14 @@
-import styled, { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import type { SpaceSize } from '../../../theme/space.types';
+import type { PaddingType } from '../../../utils/space';
+
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme/space.enums';
-import { SpaceSize } from '../../../theme/space.types';
 import { createPadding } from '../../../utils';
 import { PaddingTypes } from './Padbox.enums';
-import { PaddingType } from '../../../utils/space';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
 export interface PadboxProps {

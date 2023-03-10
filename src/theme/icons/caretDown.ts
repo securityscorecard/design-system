@@ -6,7 +6,7 @@
 
 /* solid - caret-down */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

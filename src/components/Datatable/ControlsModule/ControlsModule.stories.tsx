@@ -1,15 +1,15 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ControlsModuleProps } from './ControlsModule.types';
+import type { Data } from '../../_internal/BaseTable/mocks/types';
+
 import { mergeDeepRight } from 'ramda';
 import { action } from '@storybook/addon-actions';
 
 import { fields } from '../../Filters/mocks/options';
 import { defaultControlsConfig } from '../defaultConfigs';
 import ControlsModule from './ControlsModule';
-import { ControlsModuleProps } from './ControlsModule.types';
 import { useColumnsControls } from '../hooks/useColumnsControls';
 import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';
-import { Data } from '../../_internal/BaseTable/mocks/types';
 
 export default {
   title: 'components/Datatable/internalComponents/ControlsModule',

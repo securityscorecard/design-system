@@ -1,4 +1,4 @@
-import { HeaderGroup } from 'react-table';
+import type { HeaderGroup } from 'react-table';
 
 export interface SortingIconProps {
   isSorted: boolean;

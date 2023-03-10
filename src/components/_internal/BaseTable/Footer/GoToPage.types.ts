@@ -1,4 +1,4 @@
-import { OnPageChangeFn } from '../../../Pagination/Pagination.types';
+import type { OnPageChangeFn } from '../../../Pagination/Pagination.types';
 
 export interface GoToPageProps {
   pageCount: number;

@@ -6,7 +6,7 @@
 
 /* solid - minus */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

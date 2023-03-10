@@ -1,3 +1,5 @@
+import type { TooltipPopupProps } from './Tooltip.types';
+
 import styled, { css } from 'styled-components';
 
 import { SpaceSizes } from '../../theme';
@@ -11,7 +13,6 @@ import {
   pxToRem,
 } from '../../utils';
 import { Padbox } from '../layout';
-import { TooltipPopupProps } from './Tooltip.types';
 
 const bottomPlacement = ({ $space, $width }) => css`
   &::before {

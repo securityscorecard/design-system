@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Step, Stepper } from '../Stepper';
 import { useActiveStep } from './hooks/useActiveStep';
 import { useWizardContext } from './hooks/useWizardContext';

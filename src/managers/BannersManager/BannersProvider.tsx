@@ -1,7 +1,9 @@
-import React, { useMemo } from 'react';
-
+import type { ReactNode } from 'react';
 import type { Banner, BannersContextProps } from './types';
 import type { InstanceId } from '../common/types';
+
+import { useMemo } from 'react';
+
 import { useBannersState } from './useBannersState';
 import { createCtx } from '../common/createCtx';
 import { ACTIONS } from './enums';
@@ -13,11 +15,7 @@ const BannersContext = createCtx<BannersContextProps>(
 );
 
 export const useBanners = BannersContext.useContext;
-export const BannersProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const BannersProvider = ({ children }: { children: ReactNode }) => {
   const { state, addBanner, removeBanner } = useBannersState();
 
   const context = useMemo(

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { TabsProps } from './Tabs.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
 import { Inline, Stack } from '../layout';
 import { Tab, Tabs } from '.';
-import { TabsProps } from './Tabs.types';
 import { generateControl } from '../../utils/tests/storybook';
 import { TabVariants } from './Tabs.enums';
 import { Icon } from '../Icon';

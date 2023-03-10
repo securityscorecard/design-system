@@ -1,4 +1,6 @@
+import type { MouseEventHandler } from 'react';
+
 export interface TagsProps {
   value: string;
-  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  onClose: MouseEventHandler<HTMLButtonElement>;
 }

@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Data } from '../_internal/BaseTable/mocks/types';
+import type { DatatableProps } from './Datatable.types';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
 import MockDate from 'mockdate';
 
 import assets from '../_internal/BaseTable/mocks/ipAssets.json';
-import { Data } from '../_internal/BaseTable/mocks/types';
 import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
 import { comparisonTable } from '../_internal/BaseTable/docs';
 import { controlsConfig } from './mocks/controls';
@@ -20,7 +22,6 @@ import {
   TableConfigType,
 } from './Datatable.storiesTypes';
 import Datatable from './Datatable';
-import { DatatableProps } from './Datatable.types';
 
 MockDate.set('2021-03-31T00:00:00Z');
 

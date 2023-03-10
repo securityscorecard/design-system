@@ -1,4 +1,7 @@
-import React, { useRef, useState } from 'react';
+import type { ChangeEventHandler, FC, PropsWithRef } from 'react';
+import type { TextAreaProps } from './TextArea.types';
+
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined, noop } from 'ramda-adjunct';
@@ -16,7 +19,6 @@ import {
   getSpace,
   pxToRem,
 } from '../../../utils';
-import { TextAreaProps } from './TextArea.types';
 import { useAutosize } from './hooks/useAutosize';
 import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
 import { SpaceSizes } from '../../../theme';
@@ -91,8 +93,8 @@ const Counter = styled.span<{ isInvalid: boolean }>`
     `}
 `;
 
-const TextArea: React.FC<
-  TextAreaProps & React.PropsWithRef<JSX.IntrinsicElements['textarea']>
+const TextArea: FC<
+  TextAreaProps & PropsWithRef<JSX.IntrinsicElements['textarea']>
 > = ({
   maxLength,
   isInvalid = false,
@@ -108,7 +110,7 @@ const TextArea: React.FC<
   } = props as {
     value: string;
     defaultValue: string;
-    onChange: React.ChangeEventHandler;
+    onChange: ChangeEventHandler;
   };
   const textAreaRef = useRef<HTMLTextAreaElement>();
   const { text, parentHeight, textAreaHeight, autosize } = useAutosize(

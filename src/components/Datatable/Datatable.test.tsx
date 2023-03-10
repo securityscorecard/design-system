@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import type { Column } from 'react-table';
+
+import { useState } from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Column } from 'react-table';
 import { filter } from 'ramda';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';

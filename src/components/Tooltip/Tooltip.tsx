@@ -1,12 +1,14 @@
-import React, { useRef } from 'react';
+import type { FC } from 'react';
+import type { TooltipProps } from './Tooltip.types';
+
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { isFalsy } from 'ramda-adjunct';
 
-import { TooltipProps } from './Tooltip.types';
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
 import { Dropdown } from '../Dropdown';
 
-const Tooltip: React.FC<TooltipProps> = ({
+const Tooltip: FC<TooltipProps> = ({
   children,
   popup,
   placement = PortalPlacements.bottom,

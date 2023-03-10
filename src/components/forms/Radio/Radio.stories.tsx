@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { RadioProps } from './Radio.types';
+
 import { action } from '@storybook/addon-actions';
 
 import Radio from './Radio';
-import { RadioProps } from './Radio.types';
 import { ColorTypes } from '../../../theme';
 import { Inline } from '../../layout';
 import { Icon } from '../../Icon';

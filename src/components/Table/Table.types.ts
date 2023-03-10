@@ -1,7 +1,9 @@
-import { ReactComponentLike } from 'prop-types';
-import { Column, SortingRule } from 'react-table';
-
-import { PrimaryKey, RowAction } from '../_internal/BaseTable/BaseTable.types';
+import type { ReactComponentLike } from 'prop-types';
+import type { Column, SortingRule } from 'react-table';
+import type {
+  PrimaryKey,
+  RowAction,
+} from '../_internal/BaseTable/BaseTable.types';
 
 export interface TableProps<D extends Record<string, unknown>> {
   /**

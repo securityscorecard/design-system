@@ -1,10 +1,9 @@
-import { Column, SortingRule } from 'react-table';
-
-import { PrimaryKey } from '../_internal/BaseTable/BaseTable.types';
-import { Filter } from '../Filters/Filters.types';
-import { ControlsConfig } from './ControlsModule/ControlsModule.types';
-import { TableConfig } from './Table/Table.types';
-import { Action } from './types/Action.types';
+import type { Column, SortingRule } from 'react-table';
+import type { PrimaryKey } from '../_internal/BaseTable/BaseTable.types';
+import type { Filter } from '../Filters/Filters.types';
+import type { ControlsConfig } from './ControlsModule/ControlsModule.types';
+import type { TableConfig } from './Table/Table.types';
+import type { Action } from './types/Action.types';
 
 type OnDataFetchArgs<D> = {
   pageSize: number;

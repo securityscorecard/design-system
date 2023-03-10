@@ -1,18 +1,20 @@
-import React, { forwardRef, useState } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ControlledDropdownProps } from './Dropdown.types';
+
+import { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
 import { usePopup } from '../../hooks/usePopup';
 import { usePortal } from '../../hooks/usePortal';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { ControlledDropdownProps } from './Dropdown.types';
 import DropdownPane from './DropdownPane';
 import { DropdownPlacements } from './Dropdown.enums';
 import { mergeRefs } from '../../utils/mergeRefs';
 
 const ControlledDropdown = forwardRef<
   HTMLDivElement,
-  ControlledDropdownProps & React.HTMLAttributes<HTMLDivElement>
+  ControlledDropdownProps & HTMLAttributes<HTMLDivElement>
 >(
   (
     {

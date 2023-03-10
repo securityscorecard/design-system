@@ -1,4 +1,5 @@
-import React from 'react';
+import type { FileSelectorProps } from './FileSelector.types';
+
 import styled, { css } from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import { omit } from 'ramda';
@@ -13,7 +14,6 @@ import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
-import { FileSelectorProps } from './FileSelector.types';
 import { FileSelectorSizes } from './FileSelector.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { useLogger } from '../../hooks/useLogger';

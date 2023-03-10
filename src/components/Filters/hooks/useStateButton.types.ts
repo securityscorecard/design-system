@@ -1,4 +1,4 @@
-import { Color } from '../../../theme/colors.types';
+import type { Color } from '../../../theme/colors.types';
 
 export interface IconProps {
   iconName: string;

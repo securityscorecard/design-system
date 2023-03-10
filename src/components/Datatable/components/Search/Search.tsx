@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import type { FC, KeyboardEventHandler } from 'react';
+import type { SearchProps } from './Search.types';
 
-import { SearchPropType, SearchProps } from './Search.types';
+import { useState } from 'react';
+
+import { SearchPropType } from './Search.types';
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../../Filters/helpers';
 import { Stack } from '../../../layout';
 import { SearchBar } from '../../../forms';
 
-const Search: React.FC<SearchProps> = ({
+const Search: FC<SearchProps> = ({
   onSearch,
   onClear,
   placeholder = 'Search',
@@ -29,7 +32,7 @@ const Search: React.FC<SearchProps> = ({
     await onSearch(searchQuery);
     setIsSearching(false);
   };
-  const handleKeyUp: React.KeyboardEventHandler = (e) => {
+  const handleKeyUp: KeyboardEventHandler = (e) => {
     const target = e.target as HTMLInputElement;
     const hasError = validatePattern(target);
     const searchValidQuery = () => {

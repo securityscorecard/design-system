@@ -1,14 +1,15 @@
 // Inspired by David Gilbertson (https://codepen.io/davidgilbertson/pen/ooXVyw)
 
-import React, { useCallback } from 'react';
-
-import {
+import type { MutableRefObject } from 'react';
+import type {
   StyleProps,
   UseCalculatePortalPlacementOptions,
 } from './useCalculatePortalPlacement.types';
 
+import { useCallback } from 'react';
+
 export const useCalculatePortaPlacement = (
-  { current }: React.MutableRefObject<HTMLSpanElement>,
+  { current }: MutableRefObject<HTMLSpanElement>,
   { placement, width = 270, space = 5 }: UseCalculatePortalPlacementOptions,
 ): (() => StyleProps) => {
   return useCallback(() => {

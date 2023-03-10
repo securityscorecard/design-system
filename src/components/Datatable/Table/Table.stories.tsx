@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { TableProps } from './Table.types';
+import type { Data } from '../../_internal/BaseTable/mocks/types';
+
+import { useEffect } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { omit } from 'ramda';
 import MockDate from 'mockdate';
 
 import Table from './Table';
-import { TableProps } from './Table.types';
-import { Data } from '../../_internal/BaseTable/mocks/types';
 import assets from '../../_internal/BaseTable/mocks/ipAssets.json';
 import { defaultTableConfig } from '../defaultConfigs';
 import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';

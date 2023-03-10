@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+import type { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
+
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { __, pipe, subtract } from 'ramda';
@@ -14,7 +16,6 @@ import {
   getToken,
   pxToRem,
 } from '../../../utils';
-import { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
 import { SwitchSizes } from './Switch.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';
 

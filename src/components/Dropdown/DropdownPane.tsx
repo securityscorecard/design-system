@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+import type { DropdownPaneProps, DropdownPaneStyles } from './Dropdown.types';
+
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { noop } from 'ramda-adjunct';
@@ -17,7 +19,6 @@ import { SpaceSizes } from '../../theme';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { DropdownPaneProps, DropdownPaneStyles } from './Dropdown.types';
 
 export const Arrow = styled.div`
   visibility: hidden;

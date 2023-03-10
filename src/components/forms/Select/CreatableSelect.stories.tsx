@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
-import { isNull } from 'ramda-adjunct';
-import { GroupedOptionsType, OptionsType } from 'react-select';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { GroupedOptionsType, OptionsType } from 'react-select';
+import type { CreatableSelectProps, Option } from './Select.types';
 
-import { CreatableSelectProps, Option } from './Select.types';
+import { isNull } from 'ramda-adjunct';
+import { useState } from 'react';
+
 import CreatableSelect from './CreatableSelect';
 import { Stack } from '../../layout';
 

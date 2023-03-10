@@ -1,18 +1,19 @@
-import React from 'react';
+import type {
+  AlignmentWrapperProps,
+  CloseButtonProps,
+  CloseButtonWrapperProps,
+} from './CloseButton.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import cls from 'classnames';
+import { forwardRef } from 'react';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { SpaceSizes } from '../../theme';
 import { getColor, getNegativeSpace, getRadii, getSpace } from '../../utils';
-import {
-  AlignmentWrapperProps,
-  CloseButtonProps,
-  CloseButtonWrapperProps,
-} from './CloseButton.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const AlignmentWrapper = styled.div<AlignmentWrapperProps>`
@@ -58,7 +59,7 @@ const CloseButtonWrapper = styled.button<CloseButtonWrapperProps>`
   }
 `;
 
-const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
+const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
   (
     {
       onClose,

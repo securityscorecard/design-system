@@ -1,7 +1,8 @@
+import type { Forms } from './forms.types';
+import type { colors } from './colors';
+
 import { transparentize } from 'polished';
 
-import { Forms } from './forms.types';
-import { colors } from './colors';
 import { pxToRem } from '../utils';
 
 export const createForms = (themeColors: typeof colors): Forms => ({

@@ -1,4 +1,7 @@
-import React from 'react';
+import type { ComponentProps, FC } from 'react';
+import type { SortingIconProps } from './Head.types';
+
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -6,13 +9,12 @@ import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { ColorTypes } from '../../../../theme/colors.enums';
 import { pxToRem } from '../../../../utils';
 import { Icon } from '../../../Icon';
-import { SortingIconProps } from './Head.types';
 
 const StyledIcon = styled(Icon).attrs((props) => ({
   color: ColorTypes.neutral700,
   margin: { left: 0.3 },
   ...props,
-}))<{ $isActive?: boolean } & React.ComponentProps<typeof Icon>>`
+}))<{ $isActive?: boolean } & ComponentProps<typeof Icon>>`
   font-size: ${pxToRem(10)};
 
   ${({ $isActive }) =>
@@ -22,16 +24,12 @@ const StyledIcon = styled(Icon).attrs((props) => ({
     `};
 `;
 
-const SortingIcon: React.FC<SortingIconProps> = React.memo(
-  ({ isSorted, isSortedDesc }) => {
-    if (isSortedDesc)
-      return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
-    if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
-    return (
-      <StyledIcon color={ColorTypes.neutral500} name={SSCIconNames.sort} />
-    );
-  },
-);
+const SortingIcon: FC<SortingIconProps> = memo(({ isSorted, isSortedDesc }) => {
+  if (isSortedDesc)
+    return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
+  if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
+  return <StyledIcon color={ColorTypes.neutral500} name={SSCIconNames.sort} />;
+});
 
 SortingIcon.propTypes = {
   isSorted: PropTypes.bool,

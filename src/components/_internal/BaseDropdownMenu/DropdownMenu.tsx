@@ -1,15 +1,20 @@
-import React, { useRef, useState } from 'react';
+import type { FC, MouseEvent, ReactElement } from 'react';
+import type {
+  AbsoluteLinkActionKind,
+  RelativeLinkActionKind,
+} from '../../../types/action.types';
+import type {
+  DropdownLinkProps,
+  DropdownMenuProps,
+} from './DropdownMenu.types';
+
+import { memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import {
-  AbsoluteLinkActionKind,
-  ActionKindsPropType,
-  RelativeLinkActionKind,
-} from '../../../types/action.types';
-import { DropdownLinkProps, DropdownMenuProps } from './DropdownMenu.types';
+import { ActionKindsPropType } from '../../../types/action.types';
 import { getColor, getSpace, pxToRem } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { Dropdown } from '../../Dropdown';
@@ -46,7 +51,7 @@ export const DropdownLink = styled(Padbox).withConfig({
   }
 `;
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({
+const DropdownMenu: FC<DropdownMenuProps> = ({
   actions,
   defaultIsOpen = false,
   paneWidth = 'auto',
@@ -60,7 +65,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     hidePane: noop,
     showPane: noop,
   });
-  const trigger: React.ReactElement = (
+  const trigger: ReactElement = (
     <span className={cls(CLX_COMPONENT, className)}>
       {isFunction(children) ? children(isActive) : children}
     </span>
@@ -81,21 +86,18 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           let RouterLink = null;
           if (
             isNotUndefined(
-              (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
-                .to,
+              (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
             )
           ) {
             RouterLink = requireRouterLink();
           }
 
           const domTag = isNotUndefined(
-            (action as AbsoluteLinkActionKind<React.MouseEvent[], boolean>)
-              .href,
+            (action as AbsoluteLinkActionKind<MouseEvent[], boolean>).href,
           )
             ? 'a' // render 'a' tag if 'href' is present
             : isNotUndefined(
-                (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
-                  .to,
+                (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
               )
             ? RouterLink // render 'Link' if 'to' is present
             : 'button'; // use default
@@ -103,8 +105,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           if (
             isNull(RouterLink) &&
             isNotUndefined(
-              (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
-                .to,
+              (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
             )
           ) {
             return null;
@@ -116,23 +117,13 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 as={domTag}
                 data-interactive="true"
                 href={
-                  (
-                    action as AbsoluteLinkActionKind<
-                      React.MouseEvent[],
-                      boolean
-                    >
-                  ).href
+                  (action as AbsoluteLinkActionKind<MouseEvent[], boolean>).href
                 }
                 name={action.name}
                 paddingSize={SpaceSizes.md}
                 paddingType={PadboxEnums.PaddingTypes.squish}
                 to={
-                  (
-                    action as RelativeLinkActionKind<
-                      React.MouseEvent[],
-                      boolean
-                    >
-                  ).to
+                  (action as RelativeLinkActionKind<MouseEvent[], boolean>).to
                 }
                 onClick={(event) => {
                   action.onClick(event);
@@ -163,4 +154,4 @@ DropdownMenu.propTypes = {
   placement: PropTypes.oneOf(['bottom', 'bottom-start', 'bottom-end']),
 };
 
-export default React.memo(DropdownMenu);
+export default memo(DropdownMenu);

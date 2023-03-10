@@ -1,7 +1,6 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SignalProps } from './Signal.types';
 
-import { SignalProps } from './Signal.types';
 import { SignalKinds } from './Signal.enums';
 import Signal from './Signal';
 import { generateControl } from '../../utils/tests/storybook';

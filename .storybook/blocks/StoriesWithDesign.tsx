@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import type { FC } from 'react';
 import {
   DocsContext,
   DocsStory,
@@ -10,23 +11,23 @@ import {
   Canvas,
   Story,
 } from '@storybook/addon-docs';
-import { TabsState } from '@storybook/components'
+import { TabsState } from '@storybook/components';
 import { Design } from 'storybook-addon-designs/blocks';
-import { isNonEmptyString } from 'ramda-adjunct'
-import styled from 'styled-components';
-
-const ImplementationBlock = styled.div`
-  padding-top: 25px;
-`;
+import { isNonEmptyString } from 'ramda-adjunct';
 
 interface StoriesProps {
   title?: JSX.Element | string;
   includePrimary?: boolean;
 }
 
-export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimary = false }) => {
+export const StoriesWithDesign: FC<StoriesProps> = ({
+  title,
+  includePrimary = false,
+}) => {
   const context = useContext(DocsContext);
-  const componentStories = context.componentStories().filter((s: any) => !(s.parameters?.docs?.disable));;
+  const componentStories = context
+    .componentStories()
+    .filter((s: any) => !s.parameters?.docs?.disable);
 
   let stories: DocsStoryProps[] = componentStories;
   if (!includePrimary) stories = stories.slice(1);
@@ -38,8 +39,13 @@ export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimar
     <>
       <Heading>{title}</Heading>
       {stories.map((story) => {
-        if (story)  {
-          const { id, name, withToolbar, parameters: { docs, design } } = story;
+        if (story) {
+          const {
+            id,
+            name,
+            withToolbar,
+            parameters: { docs, design },
+          } = story;
           const description = docs.description?.story;
 
           return isNonEmptyString(design?.url) ? (
@@ -48,16 +54,18 @@ export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimar
               {description && <Description markdown={description} />}
               <TabsState initial="implementation">
                 <div id="implementation" title="Implementation">
-                    <Canvas withToolbar={withToolbar}>
-                      <Story id={id} />
-                    </Canvas>
+                  <Canvas withToolbar={withToolbar}>
+                    <Story id={id} />
+                  </Canvas>
                 </div>
                 <div id="design" title="Design">
                   <Design storyId={id} />
                 </div>
               </TabsState>
             </Anchor>
-          ) : <DocsStory key={story.id} {...story} expanded />;
+          ) : (
+            <DocsStory key={story.id} {...story} expanded />
+          );
         }
 
         return null;

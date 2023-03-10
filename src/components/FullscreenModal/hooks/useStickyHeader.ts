@@ -1,3 +1,5 @@
+import type { MutableRefObject } from 'react';
+
 import { useCallback, useState } from 'react';
 import { isNull } from 'ramda-adjunct';
 
@@ -5,8 +7,8 @@ import { useStickyObserver } from './useStickyObserver';
 import { useDebouncedHandler } from './useDebouncedHandler';
 
 export const useStickyHeader = (
-  modalRef: React.MutableRefObject<HTMLElement>,
-  modalHeaderRef: React.MutableRefObject<HTMLElement>,
+  modalRef: MutableRefObject<HTMLElement>,
+  modalHeaderRef: MutableRefObject<HTMLElement>,
 ): { isFixed: boolean } => {
   const [isFixed, setIsFixed] = useState(false);
 

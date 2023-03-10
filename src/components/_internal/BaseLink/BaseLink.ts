@@ -1,7 +1,8 @@
+import type { Colors } from './BaseLink.types';
+
 import { css } from 'styled-components';
 
 import { getFontWeight, getRadii, getToken } from '../../../utils';
-import { Colors } from './BaseLink.types';
 
 type LinkStylesProps = { $color: Colors };
 

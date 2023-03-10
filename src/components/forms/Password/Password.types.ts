@@ -1,8 +1,9 @@
-import { InputProps } from '../Input/Input.types';
+import type { InputHTMLAttributes } from 'react';
+import type { InputProps } from '../Input/Input.types';
 
 export interface PasswordProps
   extends InputProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
+    InputHTMLAttributes<HTMLInputElement> {
   defaultIsRevealed?: boolean;
   className?: string;
 }

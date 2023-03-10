@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import type { FC } from 'react';
+import type { TagsContainerProps, TagsInputProps } from './TagsInput.types';
+
+import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -25,7 +28,6 @@ import {
   pxToRem,
 } from '../../../../utils';
 import { validatePattern } from '../../helpers';
-import { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 
 const Container = styled(Padbox)<TagsContainerProps>`
   display: flex;
@@ -89,7 +91,7 @@ const InputContainer = styled.div`
 const doesValueAlreadyExist = (tags, valueArray) =>
   any(includes(__, tags))(valueArray);
 
-const TagsInput: React.FC<TagsInputProps> = ({
+const TagsInput: FC<TagsInputProps> = ({
   value: tags = [],
   onChange,
   maxLength,

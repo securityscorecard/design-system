@@ -1,15 +1,16 @@
+import type { Property } from 'csstype';
+import type { SpaceSize } from '../../../theme/space.types';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
-import { Property } from 'csstype';
 import cls from 'classnames';
 
 import {
   AlignItemsPropType,
   JustifyContentPropType,
 } from '../../../types/flex.types';
-import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { StretchEnum } from './Inline.enums';

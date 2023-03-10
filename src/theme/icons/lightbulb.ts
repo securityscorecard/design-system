@@ -6,7 +6,7 @@
 
 /* regular - lightbulb */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,
