@@ -1,4 +1,7 @@
-import React, { useRef } from 'react';
+import type { FC } from 'react';
+import type { ColumnsControlsProps } from './ColumnsControls.types';
+
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { pluck } from 'ramda';
 import { noop } from 'ramda-adjunct';
@@ -8,7 +11,6 @@ import { SortableList } from '../../../SortableList';
 import { DatatableStore } from '../../Datatable.store';
 import { useColumnOrder } from './hooks/useColumnOrder';
 import { useColumnVisibility } from './hooks/useColumnVisibility';
-import { ColumnsControlsProps } from './ColumnsControls.types';
 import { Inline } from '../../../layout';
 import { Text } from '../../../typographyLegacy';
 import { TextSizes } from '../../../typographyLegacy/Text/Text.enums';
@@ -16,7 +18,7 @@ import { Switch } from '../../../forms';
 import { SwitchSizes } from '../../../forms/Switch/Switch.enums';
 import { SpaceSizes } from '../../../../theme';
 
-const ColumnsControls: React.FC<ColumnsControlsProps> = ({
+const ColumnsControls: FC<ColumnsControlsProps> = ({
   children,
   isOpen = false,
   onClose = noop,

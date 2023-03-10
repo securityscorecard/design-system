@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import type { ReactElement, ReactPortal } from 'react';
+
+import { useContext, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { isNull } from 'ramda-adjunct';
 
@@ -15,7 +17,7 @@ const createEl = (id: string): HTMLElement => {
 const getContainer = (id: string): HTMLElement =>
   document.getElementById(id) || createEl(id);
 
-export const useModal = (el: React.ReactElement): (() => React.ReactPortal) => {
+export const useModal = (el: ReactElement): (() => ReactPortal) => {
   const { portalsContainerId } = useContext(DSContext);
   const containerRef = useRef(getContainer(portalsContainerId));
 

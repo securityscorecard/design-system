@@ -1,4 +1,4 @@
-import { colors } from './colors';
+import type { colors } from './colors';
 
 export type Color = {
   [K in keyof typeof colors]: `${K}.${Extract<

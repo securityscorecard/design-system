@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import {
+import type { ChangeEvent, MutableRefObject, ReactElement } from 'react';
+import type {
   CellProps,
   Column,
   HeaderProps,
   TableToggleCommonProps,
 } from 'react-table';
+
+import { forwardRef, useEffect, useRef } from 'react';
 
 import {
   CellTypes,
@@ -17,11 +19,11 @@ interface IndeterminateCheckbox extends TableToggleCommonProps {
   id: string;
   isDisabled?: boolean;
 }
-const IndeterminateCheckbox = React.forwardRef(
+const IndeterminateCheckbox = forwardRef(
   (
     { id, indeterminate, isDisabled = false, ...rest }: IndeterminateCheckbox,
-    ref: React.MutableRefObject<HTMLInputElement>,
-  ): React.ReactElement => {
+    ref: MutableRefObject<HTMLInputElement>,
+  ): ReactElement => {
     const defaultRef = useRef<HTMLInputElement>();
     const resolvedRef = ref || defaultRef;
     useEffect(() => {
@@ -56,7 +58,7 @@ export function getSelectionColumn<
       isMultiSelect,
       dispatch,
       state: { selectedRowIds: tableSelectedRowIds },
-    }: HeaderProps<Record<string, unknown>>): React.ReactElement => {
+    }: HeaderProps<Record<string, unknown>>): ReactElement => {
       if (dataSize === 0) return null;
 
       const selectedLength = Object.keys(tableSelectedRowIds).length;
@@ -86,7 +88,7 @@ export function getSelectionColumn<
       isMultiSelect,
       row,
       dispatch,
-    }: CellProps<Record<string, unknown>>): React.ReactElement => {
+    }: CellProps<Record<string, unknown>>): ReactElement => {
       const id = `row-${row.id}`;
 
       return (
@@ -95,7 +97,7 @@ export function getSelectionColumn<
           {...row.getToggleRowSelectedProps({
             ...(!isMultiSelect
               ? {
-                  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                  onChange(e: ChangeEvent<HTMLInputElement>) {
                     dispatch({
                       type: actions.toggleSingleRowSelected,
                       id: row.id,

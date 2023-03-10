@@ -6,7 +6,7 @@
 
 /* solid - sitemap */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

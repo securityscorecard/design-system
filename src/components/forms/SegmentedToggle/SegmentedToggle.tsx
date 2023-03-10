@@ -1,12 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
-import { noop } from 'ramda-adjunct';
-import cls from 'classnames';
-
+import type { PropsWithChildren, ReactElement } from 'react';
 import type {
   SegmentedToggleItemProps,
   SegmentedToggleProps,
 } from './SegmentedToggle.types';
+
+import PropTypes from 'prop-types';
+import { Children, cloneElement, forwardRef, isValidElement } from 'react';
+import { noop } from 'ramda-adjunct';
+import cls from 'classnames';
+
 import { BaseTabsWrapper } from '../../_internal/BaseTabs/BaseTabsWrapper';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Inline } from '../../layout';
@@ -15,7 +17,7 @@ import { CLX_COMPONENT } from '../../../theme/constants';
 
 const SegmentedToggle = forwardRef<
   HTMLDivElement,
-  React.PropsWithChildren<SegmentedToggleProps>
+  PropsWithChildren<SegmentedToggleProps>
 >(
   (
     {
@@ -35,13 +37,13 @@ const SegmentedToggle = forwardRef<
       paddingSize={SpaceSizes.xs}
     >
       <Inline gap={SpaceSizes.sm} role="radiogroup">
-        {React.Children.map(children, (segmentedToggleItem) => {
-          if (!React.isValidElement(segmentedToggleItem)) {
+        {Children.map(children, (segmentedToggleItem) => {
+          if (!isValidElement(segmentedToggleItem)) {
             return null;
           }
 
-          return React.cloneElement(
-            segmentedToggleItem as React.ReactElement<SegmentedToggleItemProps>,
+          return cloneElement(
+            segmentedToggleItem as ReactElement<SegmentedToggleItemProps>,
             {
               key: segmentedToggleItem.props.value,
               name: group,

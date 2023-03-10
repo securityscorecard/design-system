@@ -1,3 +1,5 @@
+import type { MutableRefObject } from 'react';
+
 import { useCallback, useEffect, useState } from 'react';
 import { isNull } from 'ramda-adjunct';
 
@@ -5,8 +7,8 @@ import { useStickyObserver } from './useStickyObserver';
 import { useDebouncedHandler } from './useDebouncedHandler';
 
 export const useStickyFooter = (
-  modalRef: React.MutableRefObject<HTMLElement>,
-  modalFooterRef: React.MutableRefObject<HTMLElement>,
+  modalRef: MutableRefObject<HTMLElement>,
+  modalFooterRef: MutableRefObject<HTMLElement>,
 ): { isFixed: boolean; shouldShowScrollToTopButton: boolean } => {
   const [isFixed, setIsFixed] = useState(false);
   const [shouldShowScrollToTopButton, setShouldShowScrollToTopButton] =

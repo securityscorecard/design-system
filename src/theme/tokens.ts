@@ -1,4 +1,4 @@
-import { colors as themeColors } from './colors';
+import type { colors as themeColors } from './colors';
 import type { Typography } from './typography.types';
 
 /**

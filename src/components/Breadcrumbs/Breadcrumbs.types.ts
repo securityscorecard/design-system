@@ -1,7 +1,7 @@
 import type { To } from 'history';
-
+import type { ReactNode } from 'react';
 import type { SSCIcons } from '../Icon/Icon.types';
-import { LinkProps } from '../typographyLegacy/Link/Link.types';
+import type { LinkProps } from '../typographyLegacy/Link/Link.types';
 
 export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
   /**
@@ -19,6 +19,6 @@ export interface BreadcrumbsProps {
   /**
    * The list of breadcrumb items
    */
-  children: React.ReactNode[];
+  children: ReactNode[];
   className?: string;
 }

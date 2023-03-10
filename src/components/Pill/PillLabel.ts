@@ -1,8 +1,9 @@
+import type { PillLabelProps } from './Pill.types';
+
 import styled from 'styled-components';
 import { gt } from 'ramda';
 
 import { getColor, getFontSize } from '../../utils';
-import { PillLabelProps } from './Pill.types';
 
 const PillLabel = styled.div<PillLabelProps>`
   flex: 1 1 0%;

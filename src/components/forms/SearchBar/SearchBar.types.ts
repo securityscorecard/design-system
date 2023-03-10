@@ -1,3 +1,5 @@
+import type { ChangeEventHandler, ComponentPropsWithRef } from 'react';
+
 type WithDebouncedSearch = {
   /**
    * If true search is triggered automatically by onChange event.
@@ -24,7 +26,7 @@ type ControlledSearchInputProps = {
   /**
    * Change event
    */
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   /**
    * Default value for uncontrolled form component
    */
@@ -33,7 +35,7 @@ type ControlledSearchInputProps = {
 
 type UncontrolledSearchInputProps = {
   value?: never;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   defaultValue?: string;
 } & DebounceProps;
 
@@ -41,7 +43,7 @@ export type SearchBarProps = (
   | ControlledSearchInputProps
   | UncontrolledSearchInputProps
 ) &
-  Omit<React.ComponentPropsWithRef<'input'>, 'disabled'> & {
+  Omit<ComponentPropsWithRef<'input'>, 'disabled'> & {
     /**
      * Event triggered by clicking clear button. For controlled component
      * should reset the `value` property. For uncontrolled component

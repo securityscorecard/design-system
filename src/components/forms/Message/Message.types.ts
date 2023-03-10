@@ -1,4 +1,4 @@
-import { MessageVariants } from './Message.enums';
+import type { MessageVariants } from './Message.enums';
 
 export type Variants = typeof MessageVariants[keyof typeof MessageVariants];
 

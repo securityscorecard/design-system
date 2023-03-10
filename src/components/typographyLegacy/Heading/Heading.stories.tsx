@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ReactChild } from 'react';
+import type { HeadingProps } from './Heading.types';
 
 import Heading, { H1, H2, H3, H4, H5 } from './Heading';
-import { HeadingProps } from './Heading.types';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { generateControl } from '../../../utils/tests/storybook';
 
@@ -27,9 +27,9 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<
-  HeadingProps & { children: React.ReactChild }
-> = (args) => <Heading {...args} />;
+export const Playground: Story<HeadingProps & { children: ReactChild }> = (
+  args,
+) => <Heading {...args} />;
 Playground.args = {
   children: 'Playground Heading',
 };

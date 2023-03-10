@@ -1,8 +1,9 @@
+import type { Action, BannerInstance } from './types';
+import type { InstanceId } from '../common/types';
+
 import { useReducer } from 'react';
 
-import type { Action, BannerInstance } from './types';
 import { ACTIONS } from './enums';
-import { InstanceId } from '../common/types';
 import { addInstance, randomId, removeInstance } from '../common/utils';
 
 const reducer = (state: Required<BannerInstance>[], action: Action) => {

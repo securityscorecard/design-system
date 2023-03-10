@@ -1,7 +1,8 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { CellProps, Column } from 'react-table';
+
 import { map } from 'ramda';
 import styled, { css } from 'styled-components';
-import { CellProps, Column } from 'react-table';
 
 import { Inline } from '../../../layout';
 import { DropdownMenu } from '../../BaseDropdownMenu';
@@ -52,7 +53,7 @@ export function getActionsColumn<
     width: 48,
     disableSortBy: true,
     cellType: CellTypes.actions,
-    Cell: (props: CellProps<Record<string, unknown>>): React.ReactElement => {
+    Cell: (props: CellProps<Record<string, unknown>>): ReactElement => {
       const { row, rowActions } = props;
       const actions = map((action) => ({
         ...action,

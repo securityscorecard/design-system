@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button } from '../Button';
 import { Inline } from '../layout';
 import { useActiveStep } from './hooks/useActiveStep';

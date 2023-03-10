@@ -1,9 +1,11 @@
-import React, { useMemo } from 'react';
+import type { FC } from 'react';
+import type { PageButtonsProps } from './Pagination.types';
+
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { unfold } from 'ramda';
 
 import { PaginationItem, PaginationItemElipsis } from './PaginationItem';
-import { PageButtonsProps } from './Pagination.types';
 
 const generatePages = (start: number, end: number): number[] =>
   unfold((p) => (p > end ? false : [p, p + 1]), start);
@@ -54,7 +56,7 @@ export const calculatePagePositions: (
 const formatNumber = (val: number) =>
   new Intl.NumberFormat('en-US').format(val);
 
-const PageButtons: React.FC<PageButtonsProps> = ({
+const PageButtons: FC<PageButtonsProps> = ({
   currentPage,
   pageCount,
   onChange,

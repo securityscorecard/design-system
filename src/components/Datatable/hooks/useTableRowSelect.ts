@@ -1,8 +1,9 @@
+import type { IdType } from 'react-table';
+import type { OnSelectFn } from '../Table/Table.types';
+
 import { useEffect } from 'react';
-import { IdType } from 'react-table';
 
 import { DatatableStore } from '../Datatable.store';
-import { OnSelectFn } from '../Table/Table.types';
 
 export const useTableRowSelect = <D>(
   onSelect: OnSelectFn<D>,

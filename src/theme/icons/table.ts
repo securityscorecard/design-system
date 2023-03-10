@@ -6,7 +6,7 @@
 
 /* solid - table */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

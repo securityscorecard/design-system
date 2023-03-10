@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import type { ReactNode } from 'react';
+import type { ModalSizes } from '../Modal/Modal.types';
 
-import { ModalSizes } from '../Modal/Modal.types';
+import PropTypes from 'prop-types';
 
 export interface WizardProps {
   size?: ModalSizes;
@@ -9,7 +9,7 @@ export interface WizardProps {
   onClose?: () => void;
   isBackwardNavigationEnabled?: boolean;
   onStepChange?: (step: SingleWizardStep) => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export interface SingleWizardStep {
@@ -38,5 +38,5 @@ export interface WizardNavigation {
 }
 
 export type WizardStepProps = SingleWizardStep & {
-  children: React.ReactNode;
+  children: ReactNode;
 };

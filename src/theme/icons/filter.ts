@@ -6,7 +6,7 @@
 
 /* solid - filter */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

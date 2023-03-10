@@ -1,4 +1,7 @@
-import React, { useContext } from 'react';
+import type { ComponentPropsWithRef, FC } from 'react';
+import type { LinkProps } from './Link.types';
+
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
@@ -6,7 +9,6 @@ import cls from 'classnames';
 
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
-import { LinkProps } from './Link.types';
 import {
   LinkActiveStyles,
   LinkBaseStyles,
@@ -46,7 +48,7 @@ const LinkRoot = styled.a`
   ${({ $isExperimental }) => $isExperimental && experimetalLink}
 `;
 
-const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
+const Link: FC<LinkProps & ComponentPropsWithRef<typeof LinkRoot>> = ({
   children,
   color = LinkColors.primary,
   as = null,

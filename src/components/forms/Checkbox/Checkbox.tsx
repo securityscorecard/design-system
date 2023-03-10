@@ -1,4 +1,8 @@
-import React, { forwardRef } from 'react';
+import type { HTMLProps } from 'react';
+import type { TogglingInputProps } from '../types/forms.types';
+import type { CheckboxProps } from './Checkbox.types';
+
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { add, identity, memoizeWith, pipe } from 'ramda';
@@ -9,8 +13,6 @@ import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
 import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
-import { TogglingInputProps } from '../types/forms.types';
-import { CheckboxProps } from './Checkbox.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const CheckboxWrapper = styled.div`
@@ -106,7 +108,7 @@ const getLabelStyles = css`
   margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
 `;
 
-const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
+const CheckboxLabel = styled(Label)<HTMLProps<HTMLLabelElement>>`
   display: flex;
   align-items: center;
   padding-top: 0;

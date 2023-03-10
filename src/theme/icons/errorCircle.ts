@@ -6,7 +6,7 @@
 
 /* solid - circle-exclamation */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

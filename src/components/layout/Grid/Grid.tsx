@@ -1,13 +1,15 @@
-import React from 'react';
+import type { ReactComponentLike } from 'prop-types';
+import type { Property } from 'csstype';
+import type { FC, HTMLAttributes } from 'react';
+import type { SpaceSize } from '../../../theme/space.types';
+
 import styled, { css } from 'styled-components';
-import PropTypes, { ReactComponentLike } from 'prop-types';
-import { Property } from 'csstype';
+import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import cls from 'classnames';
 
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
-import { SpaceSize } from '../../../theme/space.types';
 import { AlignItemsPropType } from '../../../types/flex.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
@@ -21,7 +23,7 @@ interface GridParentProps {
   $cols?: number;
 }
 
-export interface GridProps extends React.HTMLAttributes<HTMLElement> {
+export interface GridProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */
@@ -70,7 +72,7 @@ const GridParent = styled.div<GridParentProps>(
   },
 );
 
-const Grid: React.FC<GridProps> = ({
+const Grid: FC<GridProps> = ({
   children,
   gap,
   align,

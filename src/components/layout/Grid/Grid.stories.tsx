@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { GridProps } from './Grid';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box } from '../mocks/Box';
-import Grid, { GridProps } from './Grid';
+import Grid from './Grid';
 import { Card, CardContent, CardHeader } from '../../Card';
 import { Text } from '../../typographyLegacy';
 

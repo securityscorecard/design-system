@@ -1,4 +1,17 @@
-import React, { useState } from 'react';
+import type {
+  ChangeEventHandler,
+  ClipboardEventHandler,
+  FC,
+  FocusEventHandler,
+  KeyboardEventHandler,
+  MouseEventHandler,
+} from 'react';
+import type {
+  MultiValueInputProps,
+  ValueContainerProps,
+} from './MultiValueInput.types';
+
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import AutosizeInput from 'react-input-autosize';
 import PropTypes from 'prop-types';
@@ -23,7 +36,6 @@ import {
   omitIndexes,
 } from 'ramda-adjunct';
 import { useDeepCompareEffect } from 'use-deep-compare';
-import 'focus-within-polyfill';
 import cls from 'classnames';
 
 import {
@@ -39,11 +51,9 @@ import { SpaceSizes } from '../../../theme';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Pill } from '../../Pill';
-import {
-  MultiValueInputProps,
-  ValueContainerProps,
-} from './MultiValueInput.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
+
+import 'focus-within-polyfill';
 
 const getBorderStyle = (width, color) => css`
   box-shadow: inset 0 0 0 ${getFormStyle(width)} ${getFormStyle(color)};
@@ -132,7 +142,7 @@ const ClearButton = styled.button`
   }
 `;
 
-const MultiValueInput: React.FC<MultiValueInputProps> = ({
+const MultiValueInput: FC<MultiValueInputProps> = ({
   value = [],
   isInvalid = false,
   isDisabled = false,
@@ -204,9 +214,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     setValues(value);
   }, [value, setValues]);
 
-  const handleInputOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleInputOnKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     switch (e.key) {
       case ';':
       case 'Enter':
@@ -228,9 +236,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     }
   };
 
-  const handleInputOnPaste: React.ClipboardEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleInputOnPaste: ClipboardEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     const pastedValue = onPaste(e);
 
@@ -241,14 +247,12 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     }
   };
 
-  const handleInputOnChange: React.ChangeEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleInputOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onInputChange(e);
     setInputValue(e.target.value);
   };
 
-  const handleInputOnBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+  const handleInputOnBlur: FocusEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     if (isInvalid) {
       return;
@@ -258,9 +262,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     }
   };
 
-  const handleContainerOnClick: React.MouseEventHandler<HTMLDivElement> = (
-    e,
-  ) => {
+  const handleContainerOnClick: MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     if (isNotNull(inputRef)) {
       inputRef.focus();
@@ -272,9 +274,9 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     onValueRemove([]);
     onValuesChange([]);
   };
-  const handleClearAllOnKeyDown: React.KeyboardEventHandler<
-    HTMLInputElement
-  > = (e) => {
+  const handleClearAllOnKeyDown: KeyboardEventHandler<HTMLInputElement> = (
+    e,
+  ) => {
     switch (e.key) {
       case ' ':
       case 'Enter':

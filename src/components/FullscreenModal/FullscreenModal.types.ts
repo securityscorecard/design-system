@@ -1,4 +1,5 @@
-import {
+import type { ReactNode } from 'react';
+import type {
   FullscreenModalLayouts,
   FullscreenModalSizes,
 } from './FullscreenModal.enums';
@@ -17,10 +18,10 @@ export type FullscreenModalColumnConfigMap = Record<
 >;
 export interface FullscreenModalProps {
   layout: FullscreenModalLayouts;
-  header: React.ReactNode;
-  content: React.ReactNode;
-  footer: React.ReactNode;
-  sidebar?: React.ReactNode;
+  header: ReactNode;
+  content: ReactNode;
+  footer: ReactNode;
+  sidebar?: ReactNode;
   scrollToTopButtonLabel?: string;
   onClose: () => void;
 }

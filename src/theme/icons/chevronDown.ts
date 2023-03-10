@@ -6,7 +6,7 @@
 
 /* solid - chevron-down */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

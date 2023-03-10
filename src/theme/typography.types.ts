@@ -1,4 +1,4 @@
-import { HeadingSizesTypes as HeadingSizes } from '../components/typographyLegacy/Heading/Heading.types';
+import type { HeadingSizesTypes as HeadingSizes } from '../components/typographyLegacy/Heading/Heading.types';
 
 export interface Family {
   base: string;

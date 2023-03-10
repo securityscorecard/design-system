@@ -1,14 +1,15 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { CalloutContainerProps, CalloutProps } from './Callout.types';
+import type { SSCIcons } from '../Icon/Icon.types';
+
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { CalloutContainerProps, CalloutProps } from './Callout.types';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { Text } from '../typographyLegacy';
 import { Icon } from '../Icon';
-import { SSCIcons } from '../Icon/Icon.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { CalloutColors } from './Callout.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -53,7 +54,7 @@ const Container = styled(Padbox)<CalloutContainerProps>`
   ${({ $color }) => calloutColors[$color]};
 `;
 
-const Callout: React.FC<CalloutProps> = ({
+const Callout: FC<CalloutProps> = ({
   children,
   icon = SSCIconNames.lightbulb,
   color = CalloutColors.info,

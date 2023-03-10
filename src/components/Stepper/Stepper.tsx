@@ -1,4 +1,7 @@
-import React, { forwardRef, useMemo } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
+import type { StepperProps } from './Stepper.types';
+
+import { Children, cloneElement, forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useContainerQuery } from 'react-container-query';
 import { pathEq } from 'ramda';
@@ -6,7 +9,6 @@ import cls from 'classnames';
 
 import { SpaceSizes } from '../../theme';
 import { Inline, Stack } from '../layout';
-import { StepperProps } from './Stepper.types';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { StepperContext } from './Stepper.context';
 import { StepperOrientations } from './Stepper.enums';
@@ -14,10 +16,7 @@ import { CLX_COMPONENT } from '../../theme/constants';
 
 const SHOW_TEXT_BREAKPOINT = 'show-step-text';
 
-const Stepper = forwardRef<
-  HTMLDivElement,
-  React.PropsWithChildren<StepperProps>
->(
+const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
   (
     {
       children,
@@ -38,11 +37,11 @@ const Stepper = forwardRef<
     );
     const [query, containerRef] = useContainerQuery(showTextQuery, undefined);
 
-    const stepsArr: React.ReactElement[] = React.Children.toArray(
-      children,
-    ).filter(pathEq(['type', 'displayName'], 'Step'));
+    const stepsArr: ReactElement[] = Children.toArray(children).filter(
+      pathEq(['type', 'displayName'], 'Step'),
+    );
     const steps = stepsArr.map((step, index) =>
-      React.cloneElement(step, {
+      cloneElement(step, {
         ...step.props,
         index,
         shouldShowText:

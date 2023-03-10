@@ -1,8 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SpinnerProps } from './Spinner.types';
 
 import Spinner from './Spinner';
-import { SpinnerProps } from './Spinner.types';
 
 export default {
   title: 'components/Spinner',

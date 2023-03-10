@@ -1,19 +1,21 @@
-import React from 'react';
+import type { MouseEvent } from 'react';
+import type {
+  AbsoluteLinkActionKind,
+  RelativeLinkActionKind,
+} from '../../types/action.types';
+import type { CardActionsProps } from './Card.types';
+
 import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
+import { forwardRef } from 'react';
 
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { Button, ButtonEnums } from '../Button';
-import {
-  AbsoluteLinkActionKind,
-  ActionKindsPropType,
-  RelativeLinkActionKind,
-} from '../../types/action.types';
-import { CardActionsProps } from './Card.types';
+import { ActionKindsPropType } from '../../types/action.types';
 import { CardContainer } from './Card';
 
-const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
+const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
   ({ actions, rightAdornment = null }, ref) => (
     <CardContainer
       horizontalPadding={SpaceSizes.mdPlus}
@@ -31,11 +33,11 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
               key={action.name}
               aria-label={action.ariaLabel}
               data-interactive="true"
-              href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+              href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
               iconName={action.iconName}
               iconType={action.iconType}
               isDisabled={action.isDisabled}
-              to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+              to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
               variant={ButtonEnums.ButtonVariants.text}
               onClick={action.onClick}
             >

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SemanticModalProps } from './SemanticModal.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import SemanticModal from './SemanticModal';
 import { SemanticModalVariants } from './SemanticModal.enums';
-import { SemanticModalProps } from './SemanticModal.types';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';

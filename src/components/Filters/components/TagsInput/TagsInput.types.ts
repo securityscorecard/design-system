@@ -1,4 +1,4 @@
-import { PadboxProps } from '../../../layout/Padbox/Padbox';
+import type { PadboxProps } from '../../../layout/Padbox/Padbox';
 
 export interface TagsInputProps {
   value: string[];

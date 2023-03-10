@@ -6,7 +6,7 @@
 
 /* regular - eye-slash */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

@@ -1,8 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { PadboxProps } from './Padbox';
+
 import styled from 'styled-components';
 
-import Padbox, { PadboxProps } from './Padbox';
+import Padbox from './Padbox';
 import { getColor } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { generateControl } from '../../../utils/tests/storybook';

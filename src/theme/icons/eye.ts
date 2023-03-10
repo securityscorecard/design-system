@@ -6,7 +6,7 @@
 
 /* regular - eye */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import type { FC } from 'react';
+import type { BatchModuleProps } from './BatchModule.types';
+
+import { useEffect, useState } from 'react';
 import { all, isEmpty } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
@@ -11,14 +14,13 @@ import { ColumnsControls } from '../components/ColumnsControls';
 import { ControlButton } from '../components/ControlButton';
 import { BatchActions } from './BatchActions';
 import { ElementCounter } from './ElementCounter';
-import { BatchModuleProps } from './BatchModule.types';
 import { DatatableStore } from '../Datatable.store';
 
 const BatchModuleWrapper = styled.div`
   padding: ${getSpace('md')};
 `;
 
-const BatchModule: React.FC<BatchModuleProps> = ({
+const BatchModule: FC<BatchModuleProps> = ({
   actions,
   hasSelection,
   hasOnlyPerPageSelection,

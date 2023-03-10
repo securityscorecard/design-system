@@ -1,8 +1,9 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { LinkRendererProps } from './renderers.types';
+
 import cls from 'classnames';
 import { isNotUndefined, isUndefined, noop } from 'ramda-adjunct';
 
-import { LinkRendererProps } from './renderers.types';
 import { useLogger } from '../../../../hooks/useLogger';
 
 function LinkRenderer<D extends Record<string, unknown>>({
@@ -14,7 +15,7 @@ function LinkRenderer<D extends Record<string, unknown>>({
   component,
   rowData,
   className,
-}: LinkRendererProps<D>): React.ReactElement {
+}: LinkRendererProps<D>): ReactElement {
   const { error } = useLogger('LinkRenderer');
   const isRelativeLink = isNotUndefined(toComposer);
   if (isRelativeLink && isUndefined(component)) {

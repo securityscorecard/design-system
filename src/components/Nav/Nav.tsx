@@ -1,10 +1,10 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { InlineProps } from '../layout/Inline/Inline';
 
 import { useLogger } from '../../hooks/useLogger';
 import { Inline } from '../layout';
-import { InlineProps } from '../layout/Inline/Inline';
 
-const Nav: React.FC<InlineProps> = (props) => {
+const Nav: FC<InlineProps> = (props) => {
   const { warn } = useLogger('Nav');
   warn(`<Nav> and <NavItem> components are deprecated and will be removed soon.
 

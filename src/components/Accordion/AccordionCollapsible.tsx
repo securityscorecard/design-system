@@ -1,4 +1,9 @@
-import React from 'react';
+import type { FC, KeyboardEvent } from 'react';
+import type {
+  AccordionCollapsibleProps,
+  AccordionItemId,
+} from './Accordion.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,11 +12,7 @@ import { getColor, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
-import {
-  AccordionCollapsibleProps,
-  AccordionItemId,
-  AccordionItemIdPropType,
-} from './Accordion.types';
+import { AccordionItemIdPropType } from './Accordion.types';
 import { Inline, Padbox } from '../layout';
 import { SpaceSizes } from '../../theme';
 
@@ -47,7 +48,7 @@ const StyledIcon = styled(Icon)`
   height: 1em;
 `;
 
-const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
+const AccordionCollapsible: FC<AccordionCollapsibleProps> = ({
   children,
   className,
   handleHeaderClick,
@@ -56,7 +57,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   title,
 }) => {
   const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLDivElement>,
+    e: KeyboardEvent<HTMLDivElement>,
     itemId?: AccordionItemId,
   ) => {
     if (e.key === 'Enter' || e.key === ' ') {

@@ -1,7 +1,9 @@
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Row } from 'react-table';
+import type { FC } from 'react';
+import type { CellRendererProps } from './renderers.types';
+
 import PropTypes from 'prop-types';
-import { Meta, Story } from '@storybook/react/types-6-0';
-import { Row } from 'react-table';
 import { MemoryRouter } from 'react-router-dom';
 import { equals, F as stubFalse } from 'ramda';
 import { action } from '@storybook/addon-actions';
@@ -9,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import { composeQuery } from '../mocks/columns';
 import { BaseTableContainer, StyledBaseTable } from '../BaseTable.styles';
 import CellRenderer from './CellRenderer';
-import { CellRendererProps } from './renderers.types';
 import { CellTypes } from './renderers.enums';
 import { abbreviateNumber } from '../../../../utils';
 
@@ -45,7 +46,7 @@ type CellRendererData = {
   column2: string[];
 };
 
-const LinkComponent: React.FC<{ to: string; className: string }> = ({
+const LinkComponent: FC<{ to: string; className: string }> = ({
   to,
   children,
   className,

@@ -1,17 +1,25 @@
-import React from 'react';
+import type {
+  EventHandler,
+  FC,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  MouseEvent,
+  MouseEventHandler,
+} from 'react';
+import type { PillProps } from './Pill.types';
+
 import { gt } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { PillColorsEnums } from './Pill.enums';
-import { PillProps } from './Pill.types';
 import PillWrapper from './PillWrapper';
 import PillLabel from './PillLabel';
 import PillRemoveButton from './PillRemoveButton';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Pill: React.FC<PillProps> = ({
+const Pill: FC<PillProps> = ({
   label,
   maxLabelLength = 16,
   isClickable = false,
@@ -25,14 +33,12 @@ const Pill: React.FC<PillProps> = ({
   const isPillClickable = isNotUndefined(onClick) || isClickable;
   const isPillRemovable = isNotUndefined(onRemove);
 
-  const handleOnClick: React.EventHandler<
-    React.MouseEvent | React.KeyboardEvent
-  > = (e) => {
+  const handleOnClick: EventHandler<MouseEvent | KeyboardEvent> = (e) => {
     if (isNotUndefined(onClick)) {
       onClick(e);
     }
   };
-  const handleOnKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
+  const handleOnKeyDown: KeyboardEventHandler<HTMLElement> = (e) => {
     switch (e.key) {
       case ' ':
       case 'Enter':
@@ -42,11 +48,11 @@ const Pill: React.FC<PillProps> = ({
     }
   };
 
-  const handleOnRemove: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleOnRemove: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     onRemove(e);
   };
-  const handleRemoveOnKeyDown: React.KeyboardEventHandler<HTMLButtonElement> = (
+  const handleRemoveOnKeyDown: KeyboardEventHandler<HTMLButtonElement> = (
     e,
   ) => {
     switch (e.key) {

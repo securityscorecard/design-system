@@ -1,14 +1,18 @@
-import React, { ComponentType, useState } from 'react';
-import { transparentize } from 'polished';
-import { ThemeConfig } from 'react-select/src/theme';
-import {
+import type { ComponentType, MouseEventHandler } from 'react';
+import type { ThemeConfig } from 'react-select/src/theme';
+import type {
   IndicatorComponentType,
   IndicatorContainerProps,
   MenuProps,
   OptionProps,
   StylesConfig,
-  components,
 } from 'react-select';
+import type { DefaultTheme } from 'styled-components';
+import type { MenuActionArgs, Option as OptionType } from './Select.types';
+
+import { Children, useState } from 'react';
+import { transparentize } from 'polished';
+import { components } from 'react-select';
 import { append, apply, assoc, both, includes, pick, pipe, take } from 'ramda';
 import {
   isEmptyString,
@@ -16,7 +20,7 @@ import {
   isNotNilOrEmpty,
   isNotUndefined,
 } from 'ramda-adjunct';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import { Checkbox } from '../Checkbox';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
@@ -25,7 +29,6 @@ import { ButtonVariants } from '../../Button/Button.enums';
 import { Cluster, Inline } from '../../layout';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Icon } from '../../Icon';
-import { MenuActionArgs, Option as OptionType } from './Select.types';
 import { getPaddingSpace } from '../../../utils/space';
 import {
   createPadding,
@@ -287,9 +290,9 @@ export const ClearIndicator: IndicatorComponentType<OptionType, boolean> = (
 type InnerProps = {
   id: string;
   key: string;
-  onClick: React.MouseEventHandler<HTMLElement>;
-  onMouseMove: React.MouseEventHandler<HTMLElement>;
-  onMouseOver: React.MouseEventHandler<HTMLElement>;
+  onClick: MouseEventHandler<HTMLElement>;
+  onMouseMove: MouseEventHandler<HTMLElement>;
+  onMouseOver: MouseEventHandler<HTMLElement>;
   tabIndex: number;
 };
 export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
@@ -406,7 +409,7 @@ export const ValueContainer = (props) => {
   if (isMulti) {
     const qty = getValue().length;
     const [values, input] = children;
-    const selectedValues = React.Children.toArray(values);
+    const selectedValues = Children.toArray(values);
 
     const pills =
       isNotUndefined(maxVisibleItem) && !showAllItems && qty > maxVisibleItem

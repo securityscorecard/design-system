@@ -1,11 +1,13 @@
-import React from 'react';
+import type { ReactComponentLike } from 'prop-types';
+import type { Property } from 'csstype';
+import type { FC, HTMLAttributes } from 'react';
+import type { SpaceSize } from '../../../theme/space.types';
+
 import styled, { css } from 'styled-components';
-import PropTypes, { ReactComponentLike } from 'prop-types';
-import { Property } from 'csstype';
+import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import cls from 'classnames';
 
-import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import {
@@ -24,7 +26,7 @@ interface ClusterParentProps {
   className?: string;
 }
 
-export interface ClusterProps extends React.HTMLAttributes<HTMLElement> {
+export interface ClusterProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */
@@ -73,7 +75,7 @@ const ClusterParent = styled.div<ClusterParentProps>(
   },
 );
 
-const Cluster: React.FC<ClusterProps> = ({
+const Cluster: FC<ClusterProps> = ({
   children,
   gap,
   align,

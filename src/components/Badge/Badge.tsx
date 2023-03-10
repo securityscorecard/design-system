@@ -1,10 +1,11 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { BadgeElementProps, BadgeProps } from './Badge.types';
+
 import PropTypes from 'prop-types';
 import { defaultWhen } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
-import type { BadgeElementProps, BadgeProps } from './Badge.types';
 import { BadgeVariants } from './Badge.enums';
 import {
   getColor,
@@ -60,10 +61,7 @@ const BadgeElement = styled(Padbox)<BadgeElementProps>`
 
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
-const Badge: React.FC<BadgeProps> = ({
-  count,
-  variant = BadgeVariants.error,
-}) => (
+const Badge: FC<BadgeProps> = ({ count, variant = BadgeVariants.error }) => (
   <BadgeElement
     $variant={variant}
     className={CLX_COMPONENT}

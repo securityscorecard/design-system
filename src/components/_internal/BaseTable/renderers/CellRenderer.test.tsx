@@ -1,7 +1,7 @@
-import React from 'react';
+import type { Row } from 'react-table';
+
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity, F as stubFalse } from 'ramda';
-import { Row } from 'react-table';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import CellRenderer from './CellRenderer';

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import type { Meta, Story } from '@storybook/react';
+
+import { useState } from 'react';
 
 import { addNotification, removeNotification, updateNotification } from './api';
 import {

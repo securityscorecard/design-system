@@ -6,7 +6,7 @@
 
 /* solid - upload */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

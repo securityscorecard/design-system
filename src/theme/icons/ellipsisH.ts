@@ -6,7 +6,7 @@
 
 /* solid - ellipsis */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

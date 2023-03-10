@@ -1,6 +1,5 @@
-import { Property } from 'csstype';
-
-import { SpacingProps } from '../../types/spacing.types';
+import type { Property } from 'csstype';
+import type { SpacingProps } from '../../types/spacing.types';
 
 export interface FlexContainerProps extends SpacingProps {
   alignItems?: Property.AlignItems;

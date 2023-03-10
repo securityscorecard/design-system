@@ -1,5 +1,6 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { PillProps } from './Pill.types';
+
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -8,7 +9,6 @@ import { Cluster, Inline, Stack } from '../layout';
 import { H4 } from '../typographyLegacy';
 import { Icon } from '../Icon';
 import Pill from './Pill';
-import { PillProps } from './Pill.types';
 import { PillColorsEnums } from './Pill.enums';
 import { capitalize, getRadii } from '../../utils';
 import { RadiusTypes } from '../../theme/radii.enums';

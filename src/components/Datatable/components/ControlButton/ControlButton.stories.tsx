@@ -1,11 +1,11 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ControlButtonProps } from './ControlButton.types';
+
 import { action } from '@storybook/addon-actions';
 
 import { Inline, Padbox } from '../../../layout';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import ControlButton from './ControlButton';
-import { ControlButtonProps } from './ControlButton.types';
 
 export default {
   title: 'components/Datatable/internalComponents/ControlsModule/ControlButton',

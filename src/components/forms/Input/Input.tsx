@@ -1,3 +1,5 @@
+import type { InputProps } from './Input.types';
+
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -8,7 +10,6 @@ import {
   getFormStyle,
   getRadii,
 } from '../../../utils';
-import { InputProps } from './Input.types';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { FileSelectorProps } from './FileSelector.types';
+
+import { useState } from 'react';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
 
 import FileSelector from './FileSelector';
-import { FileSelectorProps } from './FileSelector.types';
 import { FileSelectorSizes } from './FileSelector.enums';
 import { Inline, Padbox, Stack } from '../layout';
 import { SpaceSizes } from '../../theme/space.enums';

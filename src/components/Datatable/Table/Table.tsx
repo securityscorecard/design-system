@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import type { ReactElement } from 'react';
+import type { CellProps, Column, IdType, SortingRule } from 'react-table';
+import type { TableProps } from './Table.types';
+
+import { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import {
-  CellProps,
-  Column,
-  IdType,
-  SortingRule,
   useColumnOrder,
   useFlexLayout,
   usePagination,
@@ -44,7 +44,6 @@ import { getSelectionColumn } from './columns/selectionColumn';
 import { LoadingOverlay } from './components';
 import { Padbox, Stack } from '../../layout';
 import { getColor, pxToRem } from '../../../utils';
-import { TableProps } from './Table.types';
 import { SELECTION_COLUMN_ID } from '../../_internal/BaseTable/renderers/renderers.enums';
 import { H4, Paragraph } from '../../typographyLegacy';
 import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
@@ -84,7 +83,7 @@ const collectSelectedIds = <D,>(
 
 const renderDefaultCell = <D extends Record<string, unknown>>(
   props: CellProps<D>,
-): React.ReactElement => <CellRenderer<D> {...props} />;
+): ReactElement => <CellRenderer<D> {...props} />;
 
 function Table<D extends Record<string, unknown>>({
   columns,
@@ -110,7 +109,7 @@ function Table<D extends Record<string, unknown>>({
   defaultColumnOrder,
   defaultHiddenColumns,
   pageButtonsCount,
-}: TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
+}: TableProps<D> & { pageButtonsCount?: number }): ReactElement {
   const tableDataSize = useMemo(
     () => (hasServerSidePagination ? dataSize : data.length),
     [hasServerSidePagination, dataSize, data],
@@ -129,8 +128,7 @@ function Table<D extends Record<string, unknown>>({
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement =>
-        renderDefaultCell<D>(props),
+      Cell: (props: CellProps<D>): ReactElement => renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],

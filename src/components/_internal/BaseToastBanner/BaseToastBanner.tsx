@@ -1,4 +1,9 @@
-import React from 'react';
+import type { FC } from 'react';
+import type {
+  BaseToastBannerProps,
+  BaseToastBannerWrapperProps,
+} from './BaseToastBanner.types';
+
 import styled from 'styled-components';
 import { isNotNilOrEmpty } from 'ramda-adjunct';
 
@@ -9,10 +14,6 @@ import { ColorTypes } from '../../../theme/colors.enums';
 import { Padbox } from '../../layout/Padbox';
 import { Inline } from '../../layout/Inline';
 import { Icon } from '../../Icon';
-import {
-  BaseToastBannerProps,
-  BaseToastBannerWrapperProps,
-} from './BaseToastBanner.types';
 import { Spinner } from '../../Spinner';
 
 export const baseToastBannerColorVariants = {
@@ -66,7 +67,7 @@ const StyledIcon = styled(Icon)<{
     pxToRem($iconPxSizesVariants[$variant])};
 `;
 
-const BaseToastBanner: React.FC<BaseToastBannerWrapperProps> = ({
+const BaseToastBanner: FC<BaseToastBannerWrapperProps> = ({
   children,
   variant,
   paddingSize,

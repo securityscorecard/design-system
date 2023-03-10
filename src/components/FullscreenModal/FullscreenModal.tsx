@@ -1,4 +1,10 @@
-import React, { forwardRef, useCallback, useEffect, useRef } from 'react';
+import type { MutableRefObject, ReactElement } from 'react';
+import type {
+  FullscreenModalColumnConfigMap,
+  FullscreenModalProps,
+} from './FullscreenModal.types';
+
+import { forwardRef, useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
@@ -7,10 +13,6 @@ import { getColor } from '../../utils';
 import ModalHeader from './Header/Header';
 import ModalFooter from './Footer/Footer';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
-import {
-  FullscreenModalColumnConfigMap,
-  FullscreenModalProps,
-} from './FullscreenModal.types';
 import { Col, Container, Row } from '../layout';
 import { useModal } from './hooks/useModal';
 import { useLogger } from '../../hooks/useLogger';
@@ -64,8 +66,8 @@ const FullscreenModalContent = forwardRef(
       scrollToTopButtonLabel,
       onClose = noop,
     }: FullscreenModalProps,
-    ref: React.MutableRefObject<HTMLDivElement>,
-  ): React.ReactElement => {
+    ref: MutableRefObject<HTMLDivElement>,
+  ): ReactElement => {
     const { error } = useLogger('FullscreenModal');
     const closeOnEsc = useCallback(
       (e: KeyboardEvent) => {
@@ -144,8 +146,8 @@ You should either provide content in "sidebar" property or switch layout to "${F
 const FullscreenModal = forwardRef(
   (
     props: FullscreenModalProps,
-    ref: React.MutableRefObject<HTMLDivElement>,
-  ): React.ReactElement => {
+    ref: MutableRefObject<HTMLDivElement>,
+  ): ReactElement => {
     const defaultModalRef = useRef<HTMLDivElement>();
     const resolvedModalRef = ref || defaultModalRef;
     const renderModal = useModal(

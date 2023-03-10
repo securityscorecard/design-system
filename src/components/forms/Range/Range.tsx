@@ -1,4 +1,7 @@
-import React, { forwardRef, useState } from 'react';
+import type { ChangeEventHandler } from 'react';
+import type { RangeInputProps, RangeProps } from './Range.types';
+
+import { forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
@@ -7,7 +10,6 @@ import cls from 'classnames';
 import { getFormStyle, pxToRem } from '../../../utils';
 import { Text } from '../../typographyLegacy';
 import { Inline, Stack } from '../../layout';
-import { RangeInputProps, RangeProps } from './Range.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const RangeWrapper = styled.div`
@@ -172,7 +174,7 @@ const Range = forwardRef<HTMLInputElement, RangeProps>(
       defaultValue ?? (min + max) / 2,
     );
 
-    const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       setRangeValue(parseInt(e.target.value, 10));
       onChange(e);
     };

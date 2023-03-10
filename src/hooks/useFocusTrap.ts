@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import type { InteractiveElement } from '../components/Dropdown/Dropdown.types';
 
-import { InteractiveElement } from '../components/Dropdown/Dropdown.types';
+import { useEffect } from 'react';
 
 const interactiveElSelector = `
     a[href],

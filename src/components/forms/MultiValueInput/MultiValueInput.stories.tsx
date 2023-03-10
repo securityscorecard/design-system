@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { MultiValueInputProps } from './MultiValueInput.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { noop } from 'ramda-adjunct';
 
 import MultiValueInput from './MultiValueInput';
 import { Label } from '../Label';
-import { MultiValueInputProps } from './MultiValueInput.types';
 import { Heading, Strong } from '../../typographyLegacy';
 import { Inline, Stack } from '../../layout';
 import { Button } from '../../Button';

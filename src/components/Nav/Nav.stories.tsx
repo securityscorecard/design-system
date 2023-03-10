@@ -1,12 +1,12 @@
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { NavItemProps } from './NavItem.types';
+
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Badges } from '../../../.storybook/storybook.enums';
 import Nav from './Nav';
 import NavItem from './NavItem';
-import { NavItemProps } from './NavItem.types';
 
 export default {
   title: 'components/Nav',

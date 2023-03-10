@@ -1,4 +1,4 @@
-import { BadgeVariants } from './Badge.enums';
+import type { BadgeVariants } from './Badge.enums';
 
 export type BadgeVariant = typeof BadgeVariants[keyof typeof BadgeVariants];
 

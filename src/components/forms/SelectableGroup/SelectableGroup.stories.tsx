@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SelectableGroupProps } from './SelectableGroup.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import SelectableGroup from './SelectableGroup';
-import { SelectableGroupProps } from './SelectableGroup.types';
 import { Stack } from '../../layout';
 import { Button } from '../../Button';
 

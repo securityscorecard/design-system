@@ -1,11 +1,10 @@
-import React from 'react';
-
-import { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBanner.types';
-import { ActionKinds } from '../../types/action.types';
+import type { MouseEvent, MouseEventHandler } from 'react';
+import type { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBanner.types';
+import type { ActionKinds } from '../../types/action.types';
 
 export type ActionsArray = readonly [
-  ActionKinds<[React.MouseEvent]>?,
-  ActionKinds<[React.MouseEvent]>?,
+  ActionKinds<[MouseEvent]>?,
+  ActionKinds<[MouseEvent]>?,
 ];
 
 type BaseBannerProps = Omit<BaseToastBannerProps, 'onClose'> & {
@@ -14,7 +13,7 @@ type BaseBannerProps = Omit<BaseToastBannerProps, 'onClose'> & {
 
 export type BannerProps = BaseBannerProps & {
   isDismissable?: boolean;
-  onClose?: React.MouseEventHandler;
+  onClose?: MouseEventHandler;
   __hasPagination?: boolean;
   __onPrev?: () => void;
   __onNext?: () => void;

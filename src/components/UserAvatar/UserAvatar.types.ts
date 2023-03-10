@@ -1,6 +1,6 @@
 import type { To } from 'history';
-
-import { UserAvatarSizes } from './UserAvatar.enums';
+import type { MouseEventHandler } from 'react';
+import type { UserAvatarSizes } from './UserAvatar.enums';
 
 export type UserAvatarSizes =
   typeof UserAvatarSizes[keyof typeof UserAvatarSizes];
@@ -27,5 +27,5 @@ export interface UserAvatarProps {
   isInverted?: UserAvatarRootProps['$isInverted'];
   href?: string;
   to?: To;
-  onClick?: React.MouseEventHandler;
+  onClick?: MouseEventHandler;
 }

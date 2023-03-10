@@ -1,12 +1,13 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React, { useEffect, useState } from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { StepperProps } from './Stepper.types';
+
+import { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { generateControl } from '../../utils/tests/storybook';
 import { Button } from '../Button';
 import { Inline, Padbox, Stack } from '../layout';
 import { H2, Paragraph } from '../typographyLegacy';
-import { StepperProps } from './Stepper.types';
 import Stepper from './Stepper';
 import Step from './Step';
 import { StepperOrientations } from './Stepper.enums';

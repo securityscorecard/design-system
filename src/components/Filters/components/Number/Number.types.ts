@@ -1,8 +1,10 @@
+import type { ReactEventHandler } from 'react';
+
 import PropTypes from 'prop-types';
 
 export interface NumberProps {
   value: string;
-  onChange: (event: React.ReactEventHandler) => void;
+  onChange: (event: ReactEventHandler) => void;
   min?: number;
   max?: number;
   placeholder?: string;

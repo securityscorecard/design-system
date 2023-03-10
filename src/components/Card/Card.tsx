@@ -1,13 +1,14 @@
-import React from 'react';
+import type { SpaceSize } from '../../theme/space.types';
+import type { CardProps, CardWrapperProps } from './Card.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { pipe, prop } from 'ramda';
 import cls from 'classnames';
+import { forwardRef } from 'react';
 
 import { Padbox, Stack } from '../layout';
 import { getColor, getRadii, getShadow, getSpace } from '../../utils';
-import { SpaceSize } from '../../theme/space.types';
-import { CardProps, CardWrapperProps } from './Card.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const InteractiveCard = css`
@@ -49,7 +50,7 @@ export const CardContainer = styled.div<{
     ${pipe(prop('horizontalPadding'), getSpace)};
 `;
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
+const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ children, shouldAlignLastItemToBottom = false, as, ...props }, ref) => {
     let domTag;
     if (props.onClick) {

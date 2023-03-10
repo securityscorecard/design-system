@@ -1,13 +1,14 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { TagsInputProps } from './TagsInput.types';
+
 import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Error } from '../../../forms/Message';
-import { TagsInputProps } from './TagsInput.types';
 import { MultiValueInput } from '../../../forms';
 import { validatePattern } from '../../helpers';
 
-const TagsInput: React.FC<TagsInputProps> = ({
+const TagsInput: FC<TagsInputProps> = ({
   value: tags = [],
   onChange,
   maxLength,

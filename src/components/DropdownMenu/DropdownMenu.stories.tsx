@@ -1,14 +1,15 @@
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { MouseEvent } from 'react';
+import type { DropdownMenuProps } from '../_internal/BaseDropdownMenu/DropdownMenu.types';
+import type { ActionKinds } from '../../types/action.types';
+
 import { MemoryRouter } from 'react-router-dom';
-import { Meta, Story } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 
 import DropdownMenu from '../_internal/BaseDropdownMenu/DropdownMenu';
 import { subactionsMock } from '../Datatable/mocks/actions';
-import { DropdownMenuProps } from '../_internal/BaseDropdownMenu/DropdownMenu.types';
 import { Inline, Padbox } from '../layout';
 import { pxToRem } from '../../utils';
-import { ActionKinds } from '../../types/action.types';
 import { Button } from '../Button';
 
 const Wrapper = styled(Padbox)`
@@ -68,7 +69,7 @@ export const Default: Story<DropdownMenuProps> = (args) => (
   </Inline>
 );
 Default.args = {
-  actions: subactionsMock as unknown as ActionKinds<React.MouseEvent[]>[],
+  actions: subactionsMock as unknown as ActionKinds<MouseEvent[]>[],
 };
 Default.parameters = {
   screenshot: { skip: true },

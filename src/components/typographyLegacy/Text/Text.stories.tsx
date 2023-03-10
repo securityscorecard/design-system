@@ -1,10 +1,11 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ReactChild } from 'react';
+import type { TextProps } from './Text.types';
+
 import styled from 'styled-components';
 
 import { Inline, Stack } from '../../layout';
 import Text, { Code, Strong } from './Text';
-import { TextProps } from './Text.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { generateControl } from '../../../utils/tests/storybook';
 import { DSThemeOverride } from '../../../theme';
@@ -33,7 +34,7 @@ export default {
 
 const lipsum = `Lorem ipsum dolor sit amet`;
 
-export const Playground: Story<TextProps & { children: React.ReactChild }> = (
+export const Playground: Story<TextProps & { children: ReactChild }> = (
   args,
 ) => <Text {...args} />;
 Playground.args = {

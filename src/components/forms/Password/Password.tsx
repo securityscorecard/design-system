@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import type { FC } from 'react';
+import type { PasswordProps } from './Password.types';
+
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cls from 'classnames';
@@ -7,7 +10,6 @@ import { createPadding, getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Input } from '../Input';
-import { PasswordProps } from './Password.types';
 import { ColorTypes, SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';
@@ -41,7 +43,7 @@ const ToggleButton = styled.button`
   justify-content: center;
 `;
 
-const Password: React.FC<PasswordProps> = ({
+const Password: FC<PasswordProps> = ({
   isInvalid = false,
   isDisabled = false,
   defaultIsRevealed = false,

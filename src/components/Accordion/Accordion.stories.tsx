@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { AccordionProps } from './Accordion.types';
+
+import { useState } from 'react';
 import { includes } from 'ramda';
 
 import { Inline, Stack } from '../layout';
@@ -7,7 +9,6 @@ import { HexGrade } from '../HexGrade';
 import { Paragraph, Text } from '../typographyLegacy';
 import { Button } from '../Button';
 import Accordion from './Accordion';
-import { AccordionProps } from './Accordion.types';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 
 export default {

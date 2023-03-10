@@ -1,10 +1,11 @@
-import { find, map, pick, pipe, prop, propEq } from 'ramda';
-import { isUndefined } from 'ramda-adjunct';
+import type { Condition, Field } from '../Filters.types';
+import type { PickOption, UseFilterRowType } from './useFilterRow.types';
+import type { Option } from '../../forms/Select/Select.types';
 
-import { Condition, Field } from '../Filters.types';
-import { PickOption, UseFilterRowType } from './useFilterRow.types';
+import { isUndefined } from 'ramda-adjunct';
+import { find, map, pick, pipe, prop, propEq } from 'ramda';
+
 import { useLogger } from '../../../hooks/useLogger';
-import { Option } from '../../forms/Select/Select.types';
 
 export const normalizeOptions: <O extends Option>(options: O) => PickOption<O> =
   pick(['value', 'label']);

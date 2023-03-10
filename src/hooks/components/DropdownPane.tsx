@@ -1,4 +1,9 @@
-import React from 'react';
+import type { FC } from 'react';
+import type {
+  DropdownPaneProps,
+  DropdownPaneStyles,
+} from './DropdownPane.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
@@ -11,7 +16,6 @@ import {
   getRadii,
 } from '../../utils';
 import { useOuterClick } from '../useOuterCallback';
-import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
@@ -27,7 +31,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
     $isElevated && `box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')}`};
 `;
 
-const DropdownPane: React.FC<DropdownPaneProps> = ({
+const DropdownPane: FC<DropdownPaneProps> = ({
   children,
   onClickOut,
   isElevated = false,

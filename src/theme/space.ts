@@ -1,4 +1,4 @@
-import { Space } from './space.types';
+import type { Space } from './space.types';
 
 const spacingScale = [0, 2, 4, 8, 16, 24, 32, 48, 64, 96, 128];
 

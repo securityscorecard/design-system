@@ -1,15 +1,13 @@
-import React from 'react';
+import type { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
+import type { FC } from 'react';
+import type { Color } from '../../theme/colors.types';
+import type { IconProps, SSCIcons, Types } from './Icon.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from '@fortawesome/react-fontawesome';
-import {
-  IconName,
-  IconPrefix,
-  findIconDefinition,
-} from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -17,8 +15,6 @@ import cls from 'classnames';
 import { createSpacings, getColor } from '../../utils';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { ColorTypes } from '../../theme/colors.enums';
-import { Color } from '../../theme/colors.types';
-import { IconProps, SSCIcons, Types } from './Icon.types';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
@@ -30,7 +26,7 @@ const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
   ${createSpacings};
 `;
 
-const Icon: React.FC<
+const Icon: FC<
   IconProps &
     Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>
 > = ({

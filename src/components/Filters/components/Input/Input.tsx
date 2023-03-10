@@ -1,13 +1,14 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { InputProps } from './Input.types';
+
 import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
 
-import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../helpers';
 import { Input as BaseInput } from '../../../forms';
 
-const Input: React.FC<InputProps> = ({
+const Input: FC<InputProps> = ({
   value = '',
   onChange,
   maxLength,

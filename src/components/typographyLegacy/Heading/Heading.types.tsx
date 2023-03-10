@@ -1,5 +1,5 @@
-import { HeadingSizes, HeadingVariants } from './Heading.enums';
-import { SpacingProps } from '../../../types/spacing.types';
+import type { HeadingSizes, HeadingVariants } from './Heading.enums';
+import type { SpacingProps } from '../../../types/spacing.types';
 
 export type HeadingSizesTypes = typeof HeadingSizes[keyof typeof HeadingSizes];
 export type HeadingVariantsTypes =

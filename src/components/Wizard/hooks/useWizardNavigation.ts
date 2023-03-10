@@ -1,5 +1,6 @@
+import type { SingleWizardStep, WizardNavigation } from '../Wizard.types';
+
 import { useWizardContext } from './useWizardContext';
-import { SingleWizardStep, WizardNavigation } from '../Wizard.types';
 import { useActiveStep } from './useActiveStep';
 
 export const useWizardNavigation = (): WizardNavigation => {

@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
-import { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import type { RecursivePartial } from '../types/utils.types';
+
 import { mergeDeepRight } from 'ramda';
 
 import { colors as themeColors } from './colors';

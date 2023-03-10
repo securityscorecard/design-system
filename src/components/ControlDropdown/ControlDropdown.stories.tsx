@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ControlDropdownProps } from './ControlDropdown.types';
+
+import { useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { Paragraph } from '../typographyLegacy';
 import { Center } from '../layout';
-import { ControlDropdownProps } from './ControlDropdown.types';
 import ControlDropdown from './ControlDropdown';
 
 export default {

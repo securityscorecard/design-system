@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Data } from '../_internal/BaseTable/mocks/types';
+import type { DatatableProps } from './Datatable.types';
+
+import { useEffect } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import MockDate from 'mockdate';
 
@@ -8,10 +11,8 @@ import {
   fields as filtersFields,
   state as filtersState,
 } from '../Filters/mocks/options';
-import { Data } from '../_internal/BaseTable/mocks/types';
 import assets from '../_internal/BaseTable/mocks/ipAssets.json';
 import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
-import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { tableActionsMock } from './mocks/actions';
 import { Text } from '../typographyLegacy';

@@ -1,10 +1,12 @@
-import React, { forwardRef } from 'react';
+import type { MutableRefObject, ReactElement } from 'react';
+import type { TableCheckboxProps } from './TableCheckbox.types';
+
+import { forwardRef } from 'react';
 import cls from 'classnames';
 
 import * as checked from '../../../../theme/icons/check';
 import * as indeterminate from '../../../../theme/icons/minus';
 import { Checkbox } from '../../../forms';
-import { TableCheckboxProps } from './TableCheckbox.types';
 
 const generateIconProps = ({ width, height, svgPathData }) => ({
   viewBox: `0 0 ${width} ${height}`,
@@ -30,8 +32,8 @@ const TableCheckbox = forwardRef(
       style,
       ...props
     }: TableCheckboxProps,
-    ref: React.MutableRefObject<HTMLInputElement>,
-  ): React.ReactElement => (
+    ref: MutableRefObject<HTMLInputElement>,
+  ): ReactElement => (
     <div className="ds-table-checkbox">
       <input
         ref={ref}

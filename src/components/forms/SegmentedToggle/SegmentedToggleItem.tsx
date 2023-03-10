@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import type { SegmentedToggleItemProps } from './SegmentedToggle.types';
+
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { SegmentedToggleItemProps } from './SegmentedToggle.types';
 import { ColorTypes } from '../../../theme/colors.enums';
 import BaseTabLabel, {
   segmentedTabSelected,

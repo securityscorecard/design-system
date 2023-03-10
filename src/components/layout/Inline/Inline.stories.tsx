@@ -1,9 +1,10 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { CSSProperties } from 'react';
+import type { InlineProps } from './Inline';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box as MockBox } from '../mocks/Box';
-import Inline, { InlineProps } from './Inline';
+import Inline from './Inline';
 import { StretchEnum } from './Inline.enums';
 
 export default {
@@ -28,7 +29,7 @@ export default {
   },
 } as Meta;
 
-function Box({ style = {} }: { style?: React.CSSProperties }) {
+function Box({ style = {} }: { style?: CSSProperties }) {
   return <MockBox style={{ width: '150px', minHeight: '150px', ...style }} />;
 }
 

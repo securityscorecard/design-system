@@ -1,8 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { BottomBarProps } from './BottomBar.types';
 
 import BottomBar from './BottomBar';
-import { BottomBarProps } from './BottomBar.types';
 
 export default {
   component: BottomBar,

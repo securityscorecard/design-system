@@ -6,7 +6,7 @@
 
 /* solid - angle-right */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

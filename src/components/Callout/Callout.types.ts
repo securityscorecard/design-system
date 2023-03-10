@@ -1,12 +1,11 @@
-import React, { PropsWithChildren } from 'react';
-
-import { SSCIcons } from '../Icon/Icon.types';
-import { CalloutColors } from './Callout.enums';
+import type { PropsWithChildren, ReactNode } from 'react';
+import type { SSCIcons } from '../Icon/Icon.types';
+import type { CalloutColors } from './Callout.enums';
 
 export type CalloutColor = typeof CalloutColors[keyof typeof CalloutColors];
 
 export type CalloutProps = PropsWithChildren<{
-  icon: React.ReactNode | SSCIcons;
+  icon: ReactNode | SSCIcons;
   color: CalloutContainerProps['$color'];
 }>;
 

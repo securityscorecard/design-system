@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+
 import PropTypes from 'prop-types';
 
 export type AccordionItemId = string | number;

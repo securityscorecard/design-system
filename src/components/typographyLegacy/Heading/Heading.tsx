@@ -1,8 +1,15 @@
-import React from 'react';
+import type {
+  ComponentPropsWithRef,
+  ComponentPropsWithoutRef,
+  FC,
+} from 'react';
+import type { HeadingProps } from './Heading.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { path } from 'ramda';
 import cls from 'classnames';
+import { createElement } from 'react';
 
 import {
   createSpacings,
@@ -13,7 +20,6 @@ import {
   getLineHeight,
 } from '../../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
-import { HeadingProps } from './Heading.types';
 import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const primaryVariant = css`
@@ -76,9 +82,7 @@ const headingSizes = {
   h5: HeadingH5,
 };
 
-const Heading: React.FC<
-  HeadingProps & React.ComponentProps<typeof HeadingH1>
-> = ({
+const Heading: FC<HeadingProps & ComponentPropsWithRef<typeof HeadingH1>> = ({
   children,
   size = HeadingSizes.h1,
   variant = HeadingVariants.primary,
@@ -92,7 +96,7 @@ const Heading: React.FC<
     ...props,
   };
 
-  return React.createElement(headingSizes[size], additionalProps, children);
+  return createElement(headingSizes[size], additionalProps, children);
 };
 
 Heading.propTypes = {
@@ -115,9 +119,10 @@ H1.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H2: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H2: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+  children,
+  ...props
+}) => (
   <Heading size={HeadingSizes.h2} {...props}>
     {children}
   </Heading>
@@ -127,9 +132,10 @@ H2.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H3: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H3: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+  children,
+  ...props
+}) => (
   <Heading size={HeadingSizes.h3} {...props}>
     {children}
   </Heading>
@@ -139,9 +145,10 @@ H3.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H4: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H4: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+  children,
+  ...props
+}) => (
   <Heading size={HeadingSizes.h4} {...props}>
     {children}
   </Heading>
@@ -151,9 +158,10 @@ H4.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H5: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H5: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+  children,
+  ...props
+}) => (
   <Heading size={HeadingSizes.h5} {...props}>
     {children}
   </Heading>

@@ -1,7 +1,8 @@
-import { ACTIONS } from './enums';
 import type { BannerInstance } from './types';
+import type { InstanceId } from '../common/types';
+
+import { ACTIONS } from './enums';
 import { createCustomEvent } from '../common/events';
-import { InstanceId } from '../common/types';
 
 export const addBanner = (banner: Required<BannerInstance>) => {
   window.dispatchEvent(

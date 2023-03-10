@@ -1,5 +1,6 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { CardActionsProps, CardProps } from './Card.types';
+
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -9,7 +10,6 @@ import CardHeader, { CardIconButton } from './CardHeader';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
 import CardMedia from './CardMedia';
-import { CardActionsProps, CardProps } from './Card.types';
 import { Icon } from '../Icon';
 import { UserAvatar } from '../UserAvatar';
 import { Grid, Stack } from '../layout';

@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { BulletCircleProps, StepBulletProps } from './Stepper.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -10,7 +12,6 @@ import {
   pxToRem,
 } from '../../utils';
 import { width as checkWidth, svgPathData } from '../../theme/icons/check';
-import { BulletCircleProps, StepBulletProps } from './Stepper.types';
 
 export const bulletSize = 20;
 
@@ -61,7 +62,7 @@ const BULLET_VIEWBOX_SIZE = 20;
 const checkIconRatio = BULLET_VIEWBOX_SIZE / checkWidth / 2;
 const translateX = checkWidth / 2;
 
-const StepBullet: React.FC<StepBulletProps> = ({
+const StepBullet: FC<StepBulletProps> = ({
   stepNumber,
   isActive,
   isPending,

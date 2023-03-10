@@ -1,5 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ReactChild } from 'react';
+import type { TooltipProps } from './Tooltip.types';
+
 import { omit } from 'ramda';
 
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
@@ -7,7 +9,6 @@ import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
 import { Paragraph } from '../typographyLegacy';
 import Tooltip from './Tooltip';
-import { TooltipProps } from './Tooltip.types';
 import { generateControl } from '../../utils/tests/storybook';
 import { ButtonVariants } from '../Button/Button.enums';
 import { SpaceSizes } from '../../theme';
@@ -47,9 +48,9 @@ const popup = (
   </>
 );
 
-export const Playground: Story<
-  TooltipProps & { children: React.ReactChild }
-> = (args) => <Tooltip {...args} />;
+export const Playground: Story<TooltipProps & { children: ReactChild }> = (
+  args,
+) => <Tooltip {...args} />;
 Playground.args = {
   children: <Button>Button with tooltip</Button>,
   popup,
@@ -91,9 +92,9 @@ export const Placements: Story = () => (
   </Stack>
 );
 
-export const Width: Story<TooltipProps & { children: React.ReactChild }> = (
-  args,
-) => <Tooltip {...args} />;
+export const Width: Story<TooltipProps & { children: ReactChild }> = (args) => (
+  <Tooltip {...args} />
+);
 
 Width.args = {
   ...Playground.args,

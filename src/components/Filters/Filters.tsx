@@ -1,4 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import type { FC } from 'react';
+import type { Field, Filter, FiltersProps } from './Filters.types';
+
+import { useEffect, useMemo, useState } from 'react';
 import {
   allPass,
   any,
@@ -31,7 +34,7 @@ import { Padbox, Stack } from '../layout';
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
-import { Field, Filter, FiltersPropType, FiltersProps } from './Filters.types';
+import { FiltersPropType } from './Filters.types';
 import { Operators } from './Filters.enums';
 import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -73,7 +76,7 @@ const FiltersBase = styled(Padbox)`
   flex-grow: 1;
 `;
 
-const Filters: React.FC<FiltersProps> = ({
+const Filters: FC<FiltersProps> = ({
   fields,
   state: stateFromProps,
   onApply,

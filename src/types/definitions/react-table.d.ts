@@ -1,4 +1,4 @@
-import {
+import type {
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
   UseExpandedHooks,
@@ -47,8 +47,7 @@ import {
   UseSortByOptions,
   UseSortByState,
 } from 'react-table';
-
-import {
+import type {
   CustomColumnOptions,
   RowAction,
 } from '../../components/Datatable/Table/Table.types';

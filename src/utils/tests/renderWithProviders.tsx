@@ -1,5 +1,6 @@
-import { RenderOptions, RenderResult, render } from '@testing-library/react';
-import React from 'react';
+import type { RenderOptions, RenderResult } from '@testing-library/react';
+
+import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { DSProvider } from '../../theme/DSProvider';

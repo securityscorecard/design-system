@@ -1,6 +1,9 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { CellProps, Column } from 'react-table';
+import type { Data } from './types';
+
+import { memo } from 'react';
 import { action } from '@storybook/addon-actions';
-import { CellProps, Column } from 'react-table';
 import { Link as RouterLink } from 'react-router-dom';
 import { pipe, reduce, toPairs } from 'ramda';
 import dayjs from 'dayjs';
@@ -13,7 +16,6 @@ import {
 import { Strong, Text } from '../../../typographyLegacy';
 import { Tooltip } from '../../../Tooltip';
 import { abbreviateNumber } from '../../../../utils';
-import { Data } from './types';
 
 export const composeQuery = pipe(
   toPairs,
@@ -34,7 +36,7 @@ export const simpleColumns: Column<Data>[] = [
     headerTooltip: <Text>Show status of the asset.</Text>,
     accessor: 'status',
     width: 96,
-    Cell: React.memo(({ value }: { value: string }): React.ReactElement => {
+    Cell: memo(({ value }: { value: string }): ReactElement => {
       switch (value) {
         case 'Removed':
         case 'Dynamic':
@@ -55,7 +57,7 @@ export const simpleColumns: Column<Data>[] = [
     Header: 'Domains',
     accessor: 'domainsCount',
     width: 96,
-    cellTooltipPopupComposer: (val: string, row: Data): React.ReactElement => (
+    cellTooltipPopupComposer: (val: string, row: Data): ReactElement => (
       <div>
         <div>{val}</div>
         <pre>
@@ -129,7 +131,7 @@ export const simpleColumns: Column<Data>[] = [
       row: {
         original: { observationDate, lastObservationDate },
       },
-    }: CellProps<Data>): React.ReactElement => {
+    }: CellProps<Data>): ReactElement => {
       dayjs.extend(relativeTime);
 
       return (

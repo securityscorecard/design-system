@@ -1,4 +1,5 @@
-import React from 'react';
+import type { ReactNode } from 'react';
+
 import { act, renderHook } from '@testing-library/react-hooks';
 
 import { BannersProvider, useBanners } from './BannersProvider';
@@ -10,7 +11,7 @@ const testBanner = {
   component: <Banner>test</Banner>,
 };
 
-const wrapper = ({ children }: { children: React.ReactNode }) => (
+const wrapper = ({ children }: { children: ReactNode }) => (
   <BannersProvider>{children}</BannersProvider>
 );
 describe('BannersManager/events', () => {

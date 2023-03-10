@@ -1,18 +1,19 @@
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ReactChild } from 'react';
+import type { CollapsibleProps } from './Collapsible.types';
+
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
 
 import Collapsible from './Collapsible';
-import { CollapsibleProps } from './Collapsible.types';
 
 export default {
   component: Collapsible,
   title: 'components/Collapsible',
 } as Meta;
 
-export const Playground: Story<
-  CollapsibleProps & { children: React.ReactChild }
-> = (args) => <Collapsible {...args} />;
+export const Playground: Story<CollapsibleProps & { children: ReactChild }> = (
+  args,
+) => <Collapsible {...args} />;
 Playground.args = {
   title: 'playground',
   subject: 'Collapsible',

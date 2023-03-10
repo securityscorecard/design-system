@@ -1,4 +1,7 @@
-import React, { forwardRef, useContext } from 'react';
+import type { PropsWithChildren } from 'react';
+import type { StepProps } from './Stepper.types';
+
+import { forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -8,7 +11,6 @@ import { SpaceSizes } from '../../theme';
 import { Text } from '../typographyLegacy/Text';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { Inline, Padbox, Stack } from '../layout';
-import { StepProps } from './Stepper.types';
 import { StepperContext } from './Stepper.context';
 import { StepperOrientations } from './Stepper.enums';
 import StepBullet, { BulletCircle, bulletSize } from './StepBullet';
@@ -77,7 +79,7 @@ const StepContent = styled.div<{ $isLast?: StepProps['isLast'] }>`
   `};
 `;
 
-const Step = forwardRef<HTMLDivElement, React.PropsWithChildren<StepProps>>(
+const Step = forwardRef<HTMLDivElement, PropsWithChildren<StepProps>>(
   (
     { children, label, summary, index, isLast, shouldShowText, onStepClick },
     ref,

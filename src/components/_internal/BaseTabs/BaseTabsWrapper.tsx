@@ -1,8 +1,9 @@
+import type { Variants } from './BaseTabLabel.types';
+
 import styled, { css } from 'styled-components';
 
 import { Padbox } from '../../layout';
 import { getColor, getRadii } from '../../../utils';
-import { Variants } from './BaseTabLabel.types';
 import { BaseTabVariants } from './BaseTabs.enums';
 
 export const BaseTabsWrapper = styled(Padbox)<{
