@@ -1,4 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react';
+import type { MutableRefObject } from 'react';
+
+import { useLayoutEffect, useState } from 'react';
 import { isNotUndefined } from 'ramda-adjunct';
 import { path } from 'ramda';
 
@@ -8,7 +10,7 @@ const getHeight = (ref) => {
 };
 
 export const useAutosize = (
-  ref: React.MutableRefObject<HTMLTextAreaElement>,
+  ref: MutableRefObject<HTMLTextAreaElement>,
   value: string,
 ): {
   text: string;

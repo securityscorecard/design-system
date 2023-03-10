@@ -1,4 +1,13 @@
-import React, { useCallback } from 'react';
+import type { FC } from 'react';
+import type {
+  AbsoluteLinkActionKind,
+  ActionWithSubactions,
+  RelativeLinkActionKind,
+} from '../../../../types/action.types';
+import type { BatchActionsProps } from './BatchActions.types';
+import type { BatchActionArgs } from '../../Datatable.types';
+
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { map, pipe } from 'ramda';
@@ -12,15 +21,8 @@ import { BaseButton } from '../../../_internal/BaseButton';
 import { ButtonVariants } from '../../../Button/Button.enums';
 import { Icon } from '../../../Icon';
 import { ActionPropType } from '../../types/Action.types';
-import {
-  AbsoluteLinkActionKind,
-  ActionWithSubactions,
-  RelativeLinkActionKind,
-} from '../../../../types/action.types';
 import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
-import { BatchActionsProps } from './BatchActions.types';
 import { DatatableStore } from '../../Datatable.store';
-import { BatchActionArgs } from '../../Datatable.types';
 import { Tooltip } from '../../../Tooltip';
 
 const BatchActionButton = styled(BaseButton)`
@@ -29,7 +31,7 @@ const BatchActionButton = styled(BaseButton)`
   height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
 `;
 
-const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
+const BatchActions: FC<BatchActionsProps> = ({ actions }) => {
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
       selectedIds: s.selectedIds,

@@ -1,14 +1,14 @@
 import 'styled-components';
 
-import { colors } from '../../theme/colors';
-import { createButtons } from '../../theme/buttons';
-import { createDepths } from '../../theme/depths';
-import { createForms } from '../../theme/forms';
-import { createLayout } from '../../theme/layout';
-import { createRadii } from '../../theme/radii';
-import { createSpace } from '../../theme/space';
-import { createTypography } from '../../theme/typography';
-import { tokens } from '../../theme/tokens';
+import type { colors } from '../../theme/colors';
+import type { createButtons } from '../../theme/buttons';
+import type { createDepths } from '../../theme/depths';
+import type { createForms } from '../../theme/forms';
+import type { createLayout } from '../../theme/layout';
+import type { createRadii } from '../../theme/radii';
+import type { createSpace } from '../../theme/space';
+import type { createTypography } from '../../theme/typography';
+import type { tokens } from '../../theme/tokens';
 
 declare module 'styled-components' {
   export interface DefaultTheme {

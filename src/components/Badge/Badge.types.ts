@@ -1,5 +1,5 @@
-import { Types as IconTypes, SSCIcons } from '../Icon/Icon.types';
-import { BadgeVariants } from './Badge.enums';
+import type { Types as IconTypes, SSCIcons } from '../Icon/Icon.types';
+import type { BadgeVariants } from './Badge.enums';
 
 export type BadgeVariant = typeof BadgeVariants[keyof typeof BadgeVariants];
 

@@ -1,8 +1,9 @@
+import type { IconProps, StateButtonIconHook } from './useStateButton.types';
+
 import { useEffect, useState } from 'react';
 
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColorTypes } from '../../../theme/colors.enums';
-import { IconProps, StateButtonIconHook } from './useStateButton.types';
 
 const timesIconColor = ColorTypes.neutral700;
 const checkIconColor = ColorTypes.neutral600;

@@ -1,8 +1,9 @@
+import type { OnDataFetchFn } from '../Datatable.types';
+
 import { useEffect } from 'react';
 import { pick, propEq, when } from 'ramda';
 
 import { DatatableStore } from '../Datatable.store';
-import { OnDataFetchFn } from '../Datatable.types';
 
 export const useDataFetch = <D>(onDataFetch: OnDataFetchFn<D>): void => {
   useEffect(() => {

@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import type { HTMLProps, ReactNode } from 'react';
 
 export type OnPageChangeFn = (page: number) => void;
 
 export type customRenderItem = (
-  props: PaginationItemProps & React.HTMLProps<HTMLButtonElement>,
+  props: PaginationItemProps & HTMLProps<HTMLButtonElement>,
 ) => ReactNode;
 export interface PageButtonsProps {
   currentPage: number;

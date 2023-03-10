@@ -1,12 +1,17 @@
+import type { ReactNode } from 'react';
+import type {
+  BaseDateRange,
+  BaseDateRangePlaceholderProps,
+} from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
+import type { Option } from './components/Select/Select.types';
+
 import PropTypes from 'prop-types';
 
 import {
-  BaseDateRange,
   BaseDateRangePickerPropTypes,
   BaseDateRangePlaceholderPropTypes,
-  BaseDateRangePlaceholderProps,
 } from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
-import { Option, OptionPropType } from './components/Select/Select.types';
+import { OptionPropType } from './components/Select/Select.types';
 import { Operators } from './Filters.enums';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
@@ -28,12 +33,12 @@ interface ComponentProps {
 }
 
 export interface ComponentWithProps {
-  component: React.ReactNode;
+  component: ReactNode;
   props: ComponentProps;
 }
 
 export interface Condition {
-  component: React.ReactNode | ComponentWithProps;
+  component: ReactNode | ComponentWithProps;
   label: string;
   value: string;
   isDefault?: boolean;

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { BatchActionsProps } from './BatchActions.types';
+
 import { MemoryRouter } from 'react-router-dom';
 
 import BatchActions from './BatchActions';
 import { actionsMock } from '../../mocks/actions';
-import { BatchActionsProps } from './BatchActions.types';
 
 export default {
   title: 'components/Datatable/internalComponents/BatchModule/BatchActions',

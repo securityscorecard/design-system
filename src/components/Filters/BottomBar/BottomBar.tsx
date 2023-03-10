@@ -1,11 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { BottomBarProps } from './BottomBar.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Inline } from '../../layout';
 import { Paragraph } from '../../typographyLegacy';
 import { Button } from '../../Button';
-import { BottomBarProps } from './BottomBar.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
 
@@ -13,7 +14,7 @@ const AddFilterButton = styled(Button)`
   padding-left: ${getSpace(SpaceSizes.sm)};
 `;
 
-const BottomBar: React.FC<BottomBarProps> = ({
+const BottomBar: FC<BottomBarProps> = ({
   onSubmit,
   onAdd,
   onClearAll,

@@ -1,11 +1,12 @@
-import React, { forwardRef, useContext } from 'react';
+import type { ModalProps } from './Modal.types';
+
+import { forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';

@@ -1,18 +1,20 @@
-import * as React from 'react';
+import type { FC, MouseEvent, ReactElement, ReactNode } from 'react';
+import type {
+  BreadcrumbItemProps,
+  BreadcrumbsProps,
+} from './Breadcrumbs.types';
+import type { ActionKinds } from '../../types/action.types';
+
 import PropTypes from 'prop-types';
 import { slice } from 'ramda';
 import styled from 'styled-components';
 import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
+import { Children, cloneElement, isValidElement } from 'react';
 
-import type {
-  BreadcrumbItemProps,
-  BreadcrumbsProps,
-} from './Breadcrumbs.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
-import { ActionKinds } from '../../types/action.types';
 import { getColor, getFontSize, pxToRem } from '../../utils';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
@@ -47,7 +49,7 @@ const itemsAfterCollapse = 3;
 const itemsBeforeCollapse = 1;
 
 // Build list of breadcrumbs interspersing a separator
-const insertSeparators = (items: React.ReactElement[]) => {
+const insertSeparators = (items: ReactElement[]) => {
   return items.reduce((prev, current, index) => {
     if (index < items.length - 1) {
       return [
@@ -84,8 +86,8 @@ const renderDropdown = (actions: ActionKinds<React.MouseEvent[]>[]) => (
 
 // this renders the list of items only when the count of the actions is bigger than 2
 const renderItemsBeforeAndAfter = (
-  allItems: React.ReactNode[],
-  allDropdownActions: ActionKinds<React.MouseEvent[]>[],
+  allItems: ReactNode[],
+  allDropdownActions: ActionKinds<MouseEvent[]>[],
 ) => {
   const dropdown = renderDropdown(allDropdownActions);
   return [
@@ -95,33 +97,30 @@ const renderItemsBeforeAndAfter = (
   ];
 };
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+const Breadcrumbs: FC<BreadcrumbsProps> = ({
   children,
   className,
   ...props
 }) => {
-  const allItems = React.Children.map(children, (breadcrumbItem) => {
-    if (!React.isValidElement(breadcrumbItem)) {
+  const allItems = Children.map(children, (breadcrumbItem) => {
+    if (!isValidElement(breadcrumbItem)) {
       return null;
     }
 
-    return React.cloneElement(
-      breadcrumbItem as React.ReactElement<BreadcrumbItemProps>,
-      {
-        isSelected:
-          isNilOrEmpty(breadcrumbItem.props.to) &&
-          isNilOrEmpty(breadcrumbItem.props.href),
-        ...props,
-      },
-    );
+    return cloneElement(breadcrumbItem as ReactElement<BreadcrumbItemProps>, {
+      isSelected:
+        isNilOrEmpty(breadcrumbItem.props.to) &&
+        isNilOrEmpty(breadcrumbItem.props.href),
+      ...props,
+    });
   });
 
   const allDropdownActions = slice(
     itemsBeforeCollapse,
     -Math.abs(itemsAfterCollapse),
   )(
-    React.Children.toArray(children).map((breadcrumbItem) => {
-      if (!React.isValidElement(breadcrumbItem)) {
+    Children.toArray(children).map((breadcrumbItem) => {
+      if (!isValidElement(breadcrumbItem)) {
         return null;
       }
       return {

@@ -1,15 +1,15 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Data } from '../_internal/BaseTable/mocks/types';
+import type { TableProps } from './Table.types';
+
 import { MemoryRouter } from 'react-router-dom';
 import MockDate from 'mockdate';
 import { action } from '@storybook/addon-actions';
 
-import { Data } from '../_internal/BaseTable/mocks/types';
 import assets from '../_internal/BaseTable/mocks/ipAssets.json';
 import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
 import { comparisonTable } from '../_internal/BaseTable/docs';
 import Table from './Table';
-import { TableProps } from './Table.types';
 import { datatableRowActions } from '../Datatable/mocks/actions';
 
 MockDate.set('2021-03-31T00:00:00Z');

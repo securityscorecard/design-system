@@ -1,9 +1,11 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { WizardStepProps } from './Wizard.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useRegisterStep } from './hooks/useRegisterStep';
-import { WizardActionPropType, WizardStepProps } from './Wizard.types';
+import { WizardActionPropType } from './Wizard.types';
 import { useActiveStep } from './hooks/useActiveStep';
 import { pxToRem } from '../../utils';
 
@@ -12,7 +14,7 @@ const StepContainer = styled.div`
   height: ${pxToRem(418)};
 `;
 
-const WizardStep: React.FC<WizardStepProps> = ({
+const WizardStep: FC<WizardStepProps> = ({
   children,
   ...step
 }: WizardStepProps) => {

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { DropdownProps } from './Dropdown.types';
+
+import { useState } from 'react';
 
 import { Button } from '../Button';
 import ControlledDropdown from './ControlledDropdown';
-import { DropdownProps } from './Dropdown.types';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { CreatableSelect } from '../forms/Select';

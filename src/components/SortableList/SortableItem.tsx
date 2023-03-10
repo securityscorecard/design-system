@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { SortableItemProps } from './SortableList.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSortable } from '@dnd-kit/sortable';
@@ -7,7 +9,6 @@ import { CSS } from '@dnd-kit/utilities';
 import { getColor, getRadii, getSpace, pxToRem } from '../../utils';
 import { Text } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
-import { SortableItemProps } from './SortableList.types';
 import { SpaceSizes } from '../../theme';
 import { Inline, Padbox } from '../layout';
 
@@ -41,11 +42,7 @@ const Handle = styled(Padbox)`
   }
 `;
 
-const SortableItem: React.FC<SortableItemProps> = ({
-  label,
-  id,
-  renderItem,
-}) => {
+const SortableItem: FC<SortableItemProps> = ({ label, id, renderItem }) => {
   const {
     attributes,
     listeners,

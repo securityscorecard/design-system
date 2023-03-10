@@ -1,5 +1,5 @@
 import type { Instance, InstanceId, ManagerContext } from '../common/types';
-import { ACTIONS } from './enums';
+import type { ACTIONS } from './enums';
 
 type BannerBody = {
   component: JSX.Element;

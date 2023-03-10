@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ModalProps } from './Modal.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Modal from './Modal';
-import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
 import { H5, Paragraph } from '../typographyLegacy';
 import { Inline, Padbox } from '../layout';

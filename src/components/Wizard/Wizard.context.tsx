@@ -1,12 +1,7 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import type { Dispatch, FC, ReactNode, SetStateAction } from 'react';
+import type { WizardStep } from './Wizard.types';
 
-import { WizardStep } from './Wizard.types';
+import { createContext, useEffect, useMemo, useState } from 'react';
 
 export interface WizardState {
   initialStep?: string;
@@ -16,7 +11,7 @@ export interface WizardState {
   update: Dispatch<SetStateAction<WizardState>>;
 }
 
-export const WizardContext = React.createContext<WizardState>({
+export const WizardContext = createContext<WizardState>({
   initialStep: undefined,
   activeStepId: undefined,
   steps: [],
@@ -25,13 +20,13 @@ export const WizardContext = React.createContext<WizardState>({
 });
 
 interface WizardProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   initialStep: string;
   isBackwardNavigationEnabled: boolean;
   onStepChange: (step: WizardStep) => void;
 }
 
-export const WizardProvider: React.FC<WizardProviderProps> = ({
+export const WizardProvider: FC<WizardProviderProps> = ({
   children,
   initialStep,
   isBackwardNavigationEnabled,

@@ -1,6 +1,7 @@
+import type { Column, IdType } from 'react-table';
+
 import { useEffect } from 'react';
 import { allPass, reduce } from 'ramda';
-import { Column, IdType } from 'react-table';
 import { isNotFunction, isNotUndefined } from 'ramda-adjunct';
 import { useDeepCompareEffect } from 'use-deep-compare';
 

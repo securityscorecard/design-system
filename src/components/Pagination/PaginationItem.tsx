@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { PaginationItemProps } from './Pagination.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -11,7 +13,6 @@ import {
   pxToRem,
 } from '../../utils';
 import { Padbox } from '../layout';
-import { PaginationItemProps } from './Pagination.types';
 
 const StyledPaginationComponent = styled.button<{
   $isShrinked: boolean;
@@ -70,7 +71,7 @@ const StyledPaginationComponent = styled.button<{
         `};
 `;
 
-export const PaginationItem: React.FC<PaginationItemProps> = ({
+export const PaginationItem: FC<PaginationItemProps> = ({
   children,
   isDisabled,
   isCurrent,

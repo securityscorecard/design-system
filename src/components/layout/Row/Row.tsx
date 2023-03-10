@@ -1,4 +1,5 @@
-import React from 'react';
+import type { FC } from 'react';
+
 import { Flex } from 'reflexbox';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
@@ -19,7 +20,7 @@ const StyledRow = styled(Flex).attrs((props) => ({
   ...props,
 }))``;
 
-const Row: React.FC = ({ children }) => (
+const Row: FC = ({ children }) => (
   <StyledRow flexWrap="wrap">{children}</StyledRow>
 );
 

@@ -1,8 +1,10 @@
-import React from 'react';
+import type { CardHeaderProps } from './Card.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { any } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
+import { forwardRef } from 'react';
 
 import { ActionKindsPropType } from '../../types/action.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -12,7 +14,6 @@ import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { Inline, Padbox, Stack } from '../layout';
 import { Heading, Text } from '../typographyLegacy';
 import { Icon } from '../Icon';
-import { CardHeaderProps } from './Card.types';
 import { CardContainer } from './Card';
 import { Tooltip } from '../Tooltip';
 
@@ -76,7 +77,7 @@ const ButtonsArea = styled.div`
   align-items: flex-start;
   margin-right: calc(${getSpace(SpaceSizes.sm)} * -1) !important;
 `;
-const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   (
     {
       actions,

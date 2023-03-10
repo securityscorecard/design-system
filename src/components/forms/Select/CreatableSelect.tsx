@@ -1,4 +1,6 @@
-import React from 'react';
+import type { ReactElement } from 'react';
+import type { CreatableSelectProps } from './Select.types';
+
 import PropTypes from 'prop-types';
 import CreatableReactSelect from 'react-select/creatable';
 import AsyncCreatableReactSelect from 'react-select/async-creatable';
@@ -8,7 +10,6 @@ import { Strong } from '../../typographyLegacy';
 import { TextVariants } from '../../typographyLegacy/Text/Text.enums';
 import { useSelectProps } from './useSelectProps';
 import Select from './Select';
-import { CreatableSelectProps } from './Select.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const renderCreateLabel = (createNewLabel: string) => (inputValue: string) =>
@@ -22,7 +23,7 @@ function CreatableSelect<IsMulti extends boolean = false>({
   createNewLabel = 'Create',
   isAsync = false,
   ...props
-}: CreatableSelectProps<IsMulti>): React.ReactElement {
+}: CreatableSelectProps<IsMulti>): ReactElement {
   const selectProps = useSelectProps<IsMulti>(props);
 
   if (isAsync) {

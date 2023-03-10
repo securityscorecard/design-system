@@ -44,6 +44,7 @@ module.exports = {
     '@typescript-eslint/no-useless-constructor': 'error',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    '@typescript-eslint/consistent-type-imports': 'error',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -66,6 +67,7 @@ module.exports = {
       'error',
       {
         groups: [
+          'type',
           ['builtin', 'external'],
           'internal',
           ['parent', 'sibling', 'index'],

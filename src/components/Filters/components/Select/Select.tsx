@@ -1,17 +1,16 @@
-import React from 'react';
+import type { MultiValueProps, OptionTypeBase } from 'react-select';
+import type { FC } from 'react';
+import type { SelectProps } from './Select.types';
+
 import PropTypes from 'prop-types';
-import ReactSelect, {
-  MultiValueProps,
-  OptionTypeBase,
-  components,
-} from 'react-select';
+import ReactSelect, { components } from 'react-select';
 import { toString } from 'ramda';
 
 import Tag from '../TagsInput/Tag';
 import { IconTypes, SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { Icon } from '../../../Icon';
 import { selectStyles } from './styles';
-import { OptionPropType, SelectProps } from './Select.types';
+import { OptionPropType } from './Select.types';
 
 function DropdownIndicator(props) {
   return (
@@ -21,12 +20,12 @@ function DropdownIndicator(props) {
   );
 }
 
-const MultiValue: React.FC<MultiValueProps<OptionTypeBase>> = (props) => {
+const MultiValue: FC<MultiValueProps<OptionTypeBase>> = (props) => {
   const { data, removeProps } = props;
   return <Tag value={data.label} onClose={removeProps.onClick} />;
 };
 
-const Select: React.FC<SelectProps> = (props) => {
+const Select: FC<SelectProps> = (props) => {
   const { value } = props;
 
   return (

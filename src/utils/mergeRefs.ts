@@ -1,4 +1,5 @@
-import { MutableRefObject, Ref } from 'react';
+import type { MutableRefObject, Ref } from 'react';
+
 import { forEach } from 'ramda';
 
 const isMutableRefObject = <T>(thing: unknown): thing is MutableRefObject<T> =>

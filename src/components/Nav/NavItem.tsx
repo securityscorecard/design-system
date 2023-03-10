@@ -1,3 +1,5 @@
+import type { NavItemProps } from './NavItem.types';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -8,7 +10,6 @@ import {
   getLineHeight,
   pxToRem,
 } from '../../utils';
-import { NavItemProps } from './NavItem.types';
 import { BaseButton } from '../_internal/BaseButton';
 import { BaseButtonVariants } from '../_internal/BaseButton/BaseButton.enums';
 

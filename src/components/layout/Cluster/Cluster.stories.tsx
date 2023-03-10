@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ClusterProps } from './Cluster';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box } from '../mocks/Box';
-import Cluster, { ClusterProps } from './Cluster';
+import Cluster from './Cluster';
 
 export default {
   title: 'layout/primitives/Cluster',

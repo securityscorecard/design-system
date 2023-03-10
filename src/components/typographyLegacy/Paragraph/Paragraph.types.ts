@@ -1,4 +1,6 @@
-import { SpacingProps } from '../../../types/spacing.types';
-import { Text } from '../Text';
+import type { ComponentPropsWithoutRef } from 'react';
+import type { SpacingProps } from '../../../types/spacing.types';
+import type { Text } from '../Text';
 
-export type ParagraphProps = SpacingProps & React.ComponentProps<typeof Text>;
+export type ParagraphProps = SpacingProps &
+  ComponentPropsWithoutRef<typeof Text>;

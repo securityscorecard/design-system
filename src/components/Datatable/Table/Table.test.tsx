@@ -1,6 +1,6 @@
-import React from 'react';
+import type { Column } from 'react-table';
+
 import { act, screen, waitFor } from '@testing-library/react';
-import { Column } from 'react-table';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';

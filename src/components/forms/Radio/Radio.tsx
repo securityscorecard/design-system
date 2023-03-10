@@ -1,4 +1,7 @@
-import React from 'react';
+import type { FC, HTMLProps } from 'react';
+import type { TogglingInputProps } from '../types/forms.types';
+import type { RadioProps } from './Radio.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -6,12 +9,10 @@ import cls from 'classnames';
 
 import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
-import { TogglingInputProps } from '../types/forms.types';
-import { RadioProps } from './Radio.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const RadioLabel = styled(Label)<
-  React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
+  HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
 >`
   position: relative;
   display: flex;
@@ -90,7 +91,7 @@ const RadioInput = styled.input<TogglingInputProps>`
     `}
 `;
 
-const Radio: React.FC<RadioProps> = ({
+const Radio: FC<RadioProps> = ({
   name,
   radioId,
   label,

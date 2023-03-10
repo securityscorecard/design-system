@@ -1,9 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ParagraphProps } from './Paragraph.types';
 
 import { Text } from '../index';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
-import { ParagraphProps } from './Paragraph.types';
 import Paragraph from './Paragraph';
 import { generateControl } from '../../../utils/tests/storybook';
 

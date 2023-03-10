@@ -1,14 +1,13 @@
-import React from 'react';
-
-import { InlineProps } from '../../layout/Inline/Inline';
-import { PadboxProps } from '../../layout/Padbox/Padbox';
-import { BaseToastBannerVariants } from './BaseToastBanner.enums';
+import type { MouseEventHandler, ReactNode } from 'react';
+import type { InlineProps } from '../../layout/Inline/Inline';
+import type { PadboxProps } from '../../layout/Padbox/Padbox';
+import type { BaseToastBannerVariants } from './BaseToastBanner.enums';
 
 export type Variants =
   typeof BaseToastBannerVariants[keyof typeof BaseToastBannerVariants];
 
 export interface BaseToastBannerWrapperProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant: Variants;
   paddingSize: PadboxProps['paddingSize'];
   paddingType: PadboxProps['paddingType'];
@@ -19,6 +18,6 @@ export interface BaseToastBannerWrapperProps {
 }
 
 export interface BaseToastBannerProps {
-  onClose: React.MouseEventHandler;
+  onClose: MouseEventHandler;
   variant?: Variants;
 }

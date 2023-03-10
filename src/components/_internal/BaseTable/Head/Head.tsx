@@ -1,5 +1,7 @@
+import type { ReactElement } from 'react';
+import type { HeadProps } from './Head.types';
+
 import { isNotUndefined } from 'ramda-adjunct';
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -12,7 +14,6 @@ import {
 import TooltipWrapper from '../components/TooltipWrapper';
 import { makeStickyColumn, shrinkIfSticky } from '../utils';
 import SortingIcon from './SortingIcon';
-import { HeadProps } from './Head.types';
 
 const StyledTh = styled.th`
   display: flex;
@@ -47,7 +48,7 @@ const StyledTh = styled.th`
 
 function Head<D extends Record<string, unknown>>({
   headerGroups,
-}: HeadProps<D>): React.ReactElement {
+}: HeadProps<D>): ReactElement {
   return (
     <thead>
       {headerGroups.map((headerGroup) => (

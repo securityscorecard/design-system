@@ -1,4 +1,19 @@
-import { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import type {
+  Family as FontFamily,
+  Size as FontSize,
+  Weight as FontWeight,
+  LineHeight,
+} from '../theme/typography.types';
+import type { Color } from '../theme/colors.types';
+import type { Forms } from '../theme/forms.types';
+import type { SpacingSizeValue } from '../types/spacing.types';
+import type { Depths } from '../theme/depths.types';
+import type { SpaceSize } from '../theme/space.types';
+import type { createRadii } from '../theme/radii';
+
+import numeral from 'numeral';
+import { isString, list } from 'ramda-adjunct';
 import {
   curry,
   either,
@@ -13,23 +28,9 @@ import {
   unless,
   useWith,
 } from 'ramda';
-import { isString, list } from 'ramda-adjunct';
-import numeral from 'numeral';
 
 import { BASE_FONT_SIZE } from '../theme/constants';
-import {
-  Family as FontFamily,
-  Size as FontSize,
-  Weight as FontWeight,
-  LineHeight,
-} from '../theme/typography.types';
-import { Color } from '../theme/colors.types';
-import { Forms } from '../theme/forms.types';
-import { SpacingSizeValue } from '../types/spacing.types';
-import { Depths } from '../theme/depths.types';
-import { SpaceSize } from '../theme/space.types';
 import { ColorTypes } from '../theme/colors.enums';
-import { createRadii } from '../theme/radii';
 
 export type Theme = {
   theme?: DefaultTheme;

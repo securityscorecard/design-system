@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
-import { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
+import type { RecursivePartial } from '../types/utils.types';
+
 import { mergeDeepRight } from 'ramda';
 
 import { colors as themeColors } from './colors';
@@ -10,7 +12,6 @@ import { createLayout } from './layout';
 import { createDepths } from './depths';
 import { createSpace } from './space';
 import { createRadii } from './radii';
-import { RecursivePartial } from '../types/utils.types';
 import { createTokens } from './tokens';
 
 export const createTheme = (

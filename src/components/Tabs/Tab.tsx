@@ -1,7 +1,8 @@
-import React from 'react';
+import type { FC, KeyboardEvent } from 'react';
+import type { TabProps } from './Tabs.types';
+
 import PropTypes from 'prop-types';
 
-import { TabProps } from './Tabs.types';
 import { TabVariants } from './Tabs.enums';
 import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
@@ -9,7 +10,7 @@ import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 
-const Tab: React.FC<TabProps> = ({
+const Tab: FC<TabProps> = ({
   children,
   isSelected,
   isExpanded = false,
@@ -19,7 +20,7 @@ const Tab: React.FC<TabProps> = ({
   value,
 }) => {
   const isLink = value?.toString()?.startsWith('/');
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       onClick(value);
     }

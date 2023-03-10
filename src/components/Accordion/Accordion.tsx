@@ -1,15 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import type {
+  AccordionItem,
+  AccordionItemId,
+  AccordionProps,
+} from './Accordion.types';
+
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
 import cls from 'classnames';
 
 import { Stack } from '../layout';
 import {
-  AccordionItem,
-  AccordionItemId,
   AccordionItemIdPropType,
   AccordionItemPropType,
-  AccordionProps,
 } from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -33,7 +36,7 @@ function filterState(
   return [...state, item];
 }
 
-const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
+const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       isCollapsedOnOpen = true,

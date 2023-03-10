@@ -1,17 +1,17 @@
-import {
+import type {
   DragCancelEvent,
   DragEndEvent,
   DragOverEvent,
   DragStartEvent,
 } from '@dnd-kit/core';
-import React from 'react';
+import type { ReactElement } from 'react';
 
 interface SortableItem {
   id: string;
   label: string;
 }
 export interface SortableItemProps extends SortableItem {
-  renderItem?: (props: SortableItem) => React.ReactElement;
+  renderItem?: (props: SortableItem) => ReactElement;
 }
 
 export interface SortableListProps {

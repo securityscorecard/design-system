@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
+import type { FC } from 'react';
+import type { OnHide, OnShow, RCPF } from 'react-cool-portal';
+
+import { useContext } from 'react';
 import { noop } from 'ramda-adjunct';
-import useCoolPortal, { OnHide, OnShow, RCPF } from 'react-cool-portal';
+import useCoolPortal from 'react-cool-portal';
 
 import { DSContext } from '../theme/DSProvider/DSProvider';
 
@@ -14,7 +17,7 @@ type UsePortal = (config?: {
   showPortal: RCPF;
   hidePortal: RCPF;
   isPortalVisible: boolean;
-  Portal: React.FC;
+  Portal: FC;
 };
 
 export const usePortal: UsePortal = ({

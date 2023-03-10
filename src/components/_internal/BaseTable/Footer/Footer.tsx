@@ -1,11 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { FooterProps } from './Footer.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
 import { Padbox } from '../../../layout';
 import { Spinner } from '../../../Spinner';
-import { FooterProps } from './Footer.types';
 import GoToPage from './GoToPage';
 import { Pagination } from '../../../Pagination';
 import { SpaceSizes } from '../../../../theme';
@@ -22,7 +23,7 @@ const PaginationContainer = styled.div`
   flex: 1 0 auto;
 `;
 
-const Footer: React.FC<FooterProps> = ({
+const Footer: FC<FooterProps> = ({
   pageCount,
   pageButtonsCount,
   pageIndex,

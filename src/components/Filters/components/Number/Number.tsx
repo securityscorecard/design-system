@@ -1,11 +1,13 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { NumberProps } from './Number.types';
+
 import styled from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { StyledInput } from '../Input/Input';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-import { NumberPropTypes, NumberProps } from './Number.types';
+import { NumberPropTypes } from './Number.types';
 
 export const StyledNumber = styled(StyledInput)`
   &::-webkit-inner-spin-button,
@@ -16,7 +18,7 @@ export const StyledNumber = styled(StyledInput)`
   appearance: textfield;
 `;
 
-const Number: React.FC<NumberProps> = ({
+const Number: FC<NumberProps> = ({
   value = '',
   onChange,
   min,

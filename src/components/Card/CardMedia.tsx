@@ -1,4 +1,6 @@
-import React from 'react';
+import type { HTMLProps, PropsWithChildren, ReactElement } from 'react';
+import type { CardMediaProps, CardMediaWrapperProps } from './Card.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
@@ -6,7 +8,6 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import { getSpace } from '../../utils';
 import { SpaceSizes } from '../../theme';
-import { CardMediaProps, CardMediaWrapperProps } from './Card.types';
 
 const CardMediaWrapper = styled.div<CardMediaWrapperProps>`
   display: block;
@@ -34,9 +35,7 @@ function CardMedia<El extends HTMLElement = HTMLDivElement>({
   style,
   alt,
   ...props
-}: React.PropsWithChildren<
-  CardMediaProps & React.HTMLProps<El>
->): React.ReactElement {
+}: PropsWithChildren<CardMediaProps & HTMLProps<El>>): ReactElement {
   const isMediaComponent = includes(as, MEDIA_COMPONENTS);
   const isImageComponent = includes(as, IMAGE_COMPONENTS);
   const hasMediaSrc = isNotUndefined(mediaSrc);

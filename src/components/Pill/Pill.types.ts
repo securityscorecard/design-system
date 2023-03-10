@@ -1,4 +1,12 @@
-import { PillSizes, PillVariants } from './Pill.enums';
+import type {
+  ElementType,
+  EventHandler,
+  HTMLAttributes,
+  KeyboardEvent,
+  MouseEvent,
+  ReactNode,
+} from 'react';
+import type { PillSizes, PillVariants } from './Pill.enums';
 
 export type Variants = typeof PillVariants[keyof typeof PillVariants];
 export type Sizes = typeof PillSizes[keyof typeof PillSizes];
@@ -8,7 +16,7 @@ export interface StyledPillWrapperProps {
   $isClickable: boolean;
 }
 
-export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
+export interface PillWrapperProps extends HTMLAttributes<HTMLElement> {
   /**
    * Styling variant of the pill
    */
@@ -28,8 +36,8 @@ export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
    * property is passed in, this can be overriden by `isClickable` property when using
    * custom element such as `a` tag without `onClick` property.
    */
-  onClick?: React.EventHandler<React.MouseEvent | React.KeyboardEvent>;
-  as?: React.ElementType;
+  onClick?: EventHandler<MouseEvent | KeyboardEvent>;
+  as?: ElementType;
 }
 
 export interface PillLabelProps {
@@ -38,7 +46,7 @@ export interface PillLabelProps {
 }
 
 export interface PillRemoveButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+  extends HTMLAttributes<HTMLButtonElement> {
   pillLabel: string;
 }
 
@@ -51,7 +59,7 @@ export interface PillProps extends Partial<PillWrapperProps> {
    * Callback called when remove button is clicked. Remove button is rendered
    * only when this property is defined.
    */
-  onRemove?: React.EventHandler<React.MouseEvent | React.KeyboardEvent>;
+  onRemove?: EventHandler<MouseEvent | KeyboardEvent>;
   /**
    * Maximal number of characters to display without truncation. If label is longer
    * that the limit it will be truncated with the ellipsis. Pass `0` to disable truncation.
@@ -60,6 +68,6 @@ export interface PillProps extends Partial<PillWrapperProps> {
   /**
    * Element rendered before the label.
    */
-  adornment?: React.ReactNode;
+  adornment?: ReactNode;
   className?: string;
 }

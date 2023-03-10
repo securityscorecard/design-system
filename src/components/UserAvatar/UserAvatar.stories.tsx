@@ -1,10 +1,10 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { UserAvatarProps } from './UserAvatar.types';
+
 import { action } from '@storybook/addon-actions';
 
 import { generateControl } from '../../utils/tests/storybook';
 import UserAvatar from './UserAvatar';
-import { UserAvatarProps } from './UserAvatar.types';
 import { UserAvatarSizes } from './UserAvatar.enums';
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';

@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { MessageProps } from './Message.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,7 +9,6 @@ import { getSpace } from '../../../utils';
 import { Paragraph } from '../../typographyLegacy';
 import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { MessageVariants } from './Message.enums';
-import { MessageProps } from './Message.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const MessageContainer = styled.div`
@@ -19,7 +20,7 @@ const MessageContainer = styled.div`
   }
 `;
 
-const Message: React.FC<MessageProps> = ({
+const Message: FC<MessageProps> = ({
   children,
   variant = MessageVariants.note,
 }) => (
@@ -36,9 +37,9 @@ Message.propTypes = {
 
 export default Message;
 
-export const Note: React.FC = ({ children }) => (
+export const Note: FC = ({ children }) => (
   <Message variant={MessageVariants.note}>{children}</Message>
 );
-export const Error: React.FC = ({ children }) => (
+export const Error: FC = ({ children }) => (
   <Message variant={MessageVariants.error}>{children}</Message>
 );

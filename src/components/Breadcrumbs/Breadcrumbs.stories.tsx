@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { BreadcrumbsProps } from './Breadcrumbs.types';
+
 import { MemoryRouter } from 'react-router-dom';
 
-import { BreadcrumbsProps } from './Breadcrumbs.types';
 import Breadcrumbs from './Breadcrumbs';
 import BreadcrumbItem from './BreadcrumbItem';
 

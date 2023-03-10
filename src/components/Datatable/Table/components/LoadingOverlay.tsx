@@ -1,9 +1,10 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { LoadingOverlayProps } from './LoadingOverlay.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { getColor, getRadii } from '../../../../utils';
-import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
 import { Button } from '../../../Button';
 import { Inline, Padbox } from '../../../layout';
@@ -48,7 +49,7 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+const LoadingOverlay: FC<LoadingOverlayProps> = ({
   isCancelable,
   onCancel,
 }) => (
