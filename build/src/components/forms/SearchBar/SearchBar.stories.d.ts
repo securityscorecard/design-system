@@ -1,0 +1,11 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { SearchBarProps } from './SearchBar.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: any;
+export declare const DefaultState: any;
+export declare const WithDefaultValue: any;
+export declare const Disabled: any;
+export declare const Searching: any;
+export declare const WithDebouncedSearch: any;
+export declare const ControlledInput: Story<SearchBarProps>;

@@ -1,0 +1,14 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { ButtonGroupProps } from './ButtonGroup.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<ButtonGroupProps>;
+export declare const ButtonGroupTemplate: Story<ButtonGroupProps>;
+export declare const SolidPrimaryButtons: any;
+export declare const SolidDangerButtons: any;
+export declare const OutlinePrimaryButtons: any;
+export declare const OutlineSecondaryButtons: any;
+export declare const TextPrimaryButtons: any;
+export declare const TextSecondaryButtons: any;
+export declare const TextDangerButtons: any;
+export declare const SplitButton: Story<ButtonGroupProps>;

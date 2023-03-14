@@ -1,0 +1,11 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { ButtonProps } from './Button.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<ButtonProps>;
+export declare const SolidButtons: Story;
+export declare const OutlineButtons: Story;
+export declare const TextButtons: Story;
+export declare const LoadingButtons: Story;
+export declare const ButtonsWithIconOverview: Story;
+export declare const ExpandedButtons: Story;

@@ -1,0 +1,13 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { ToastProps } from './Toast.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<ToastProps>;
+export declare const LongToast: Story;
+export declare const TwoActions: Story;
+export declare const CustomWidthToast: Story;
+export declare const InfoToastNoAction: Story;
+export declare const SuccessToastNoAction: Story;
+export declare const WarnToastNoAction: Story;
+export declare const ErrorToastNoAction: Story;
+export declare const InfoToastWithActions: Story;

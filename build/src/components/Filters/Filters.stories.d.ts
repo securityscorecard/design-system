@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Default: Story;
+export declare const WithState: Story;
+export declare const UnappliedFilters: Story;
+export declare const FetchingResults: Story;
+export declare const WithFixedOperator: Story;
+export declare const WithCloseButton: Story;
+export declare const WithoutApplyButton: Story;

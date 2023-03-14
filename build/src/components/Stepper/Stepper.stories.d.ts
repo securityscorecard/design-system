@@ -1,0 +1,11 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { StepperProps } from './Stepper.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<StepperProps>;
+export declare const StepTypes: Story<StepperProps>;
+export declare const WithHiddenLabels: any;
+export declare const Vertical: Story<StepperProps>;
+export declare const VerticalWithExpandedSteps: Story<StepperProps>;
+export declare const VerticalExample: Story<StepperProps>;
+export declare const HorizontalExample: Story<StepperProps>;

@@ -1,0 +1,13 @@
+import { Meta } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: any;
+export declare const SimpleBadge: any;
+export declare const BadgeWithHighCount: any;
+export declare const NeutralBadge: any;
+export declare const SuccessBadge: any;
+export declare const InfoBadge: any;
+export declare const WarnBadge: any;
+export declare const ErrorBadge: any;
+export declare const TextBadge: any;
+export declare const TextBadgeWithIcon: any;

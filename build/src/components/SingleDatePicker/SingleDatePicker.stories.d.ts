@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { SingleDatePickerProps } from '../_internal/BaseSingleDatePicker/SingleDatePicker.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<SingleDatePickerProps>;
+export declare const Default: Story;
+export declare const WithValueSelected: Story;
+export declare const WithCustomPlaceholder: Story;
+export declare const OpenDatepicker: Story;
+export declare const YearPickerDatePicker: Story;

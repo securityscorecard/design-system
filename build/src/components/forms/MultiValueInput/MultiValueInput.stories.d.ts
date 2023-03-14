@@ -1,0 +1,15 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { MultiValueInputProps } from './MultiValueInput.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: any;
+export declare const Filled: any;
+export declare const WithPlaceholder: any;
+export declare const Focus: any;
+export declare const Invalid: any;
+export declare const Disabled: any;
+export declare const NonClearable: any;
+export declare const Validation: Story;
+export declare const PillTruncation: Story<MultiValueInputProps>;
+export declare const PillWrapping: Story<MultiValueInputProps>;
+export declare const ControlledInput: Story<MultiValueInputProps>;

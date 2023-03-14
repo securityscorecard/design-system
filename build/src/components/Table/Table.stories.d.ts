@@ -1,0 +1,13 @@
+import { Meta } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const MinimalConfig: any;
+export declare const WithoutSorting: any;
+export declare const WithSortedColumn: any;
+export declare const WithCustomPageSize: any;
+export declare const WithNoData: any;
+export declare const WithNoDataCustom: any;
+export declare const DataIsLoadingWithoutPreviousData: any;
+export declare const WithSinglePage: any;
+export declare const WithoutHorizontalScrolling: any;
+export declare const WithRowActions: any;

@@ -1,0 +1,26 @@
+import type { To } from 'history';
+import { UserAvatarSizes } from './UserAvatar.enums';
+export declare type Sizes = typeof UserAvatarSizes[keyof typeof UserAvatarSizes];
+export declare type UserAvatarRootProps = {
+    $isInverted?: boolean;
+    $size?: Sizes;
+};
+export interface UserAvatarProps {
+    /**
+     * Used to render text elements inside the Avatar.
+     * It Will render the first two characters of the string always.
+     */
+    label: string;
+    /**
+     * The size of the avatar
+     */
+    size?: UserAvatarRootProps['$size'];
+    className?: string;
+    /**
+     * Used to inverse the colors of the avatar
+     */
+    isInverted?: UserAvatarRootProps['$isInverted'];
+    href?: string;
+    to?: To;
+    onClick?: React.MouseEventHandler;
+}

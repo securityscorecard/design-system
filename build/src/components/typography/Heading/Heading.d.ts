@@ -1,0 +1,10 @@
+import React from 'react';
+import { HeadingProps } from './Heading.types';
+declare const HeadingH1: import("styled-components").StyledComponent<"h1", import("styled-components").DefaultTheme, {}, never>;
+declare const Heading: React.FC<HeadingProps & React.ComponentProps<typeof HeadingH1>>;
+export default Heading;
+export declare const H0: React.FC<Omit<React.ComponentProps<typeof Heading>, 'size'>>;
+export declare const H1: React.FC<Omit<React.ComponentProps<typeof Heading>, 'size'>>;
+export declare const H2: React.FC<Omit<React.ComponentProps<typeof Heading>, 'size'>>;
+export declare const H3: React.FC<Omit<React.ComponentProps<typeof Heading>, 'size'>>;
+export declare const H4: React.FC<Omit<React.ComponentProps<typeof Heading>, 'size'>>;

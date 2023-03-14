@@ -1,0 +1,12 @@
+import React from 'react';
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { InputProps } from './Input.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<InputProps & React.InputHTMLAttributes<HTMLInputElement>>;
+export declare const Default: Story;
+export declare const Filled: Story;
+export declare const WithPlaceholder: Story;
+export declare const Focus: Story;
+export declare const Invalid: Story;
+export declare const Disabled: Story;

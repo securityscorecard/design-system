@@ -1,0 +1,13 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { TextAreaProps } from './TextArea.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<TextAreaProps>;
+export declare const Default: Story;
+export declare const Filled: Story;
+export declare const WithMaxLength: Story;
+export declare const WithPlaceholder: Story;
+export declare const Invalid: Story;
+export declare const Disabled: Story;
+export declare const Autosize: Story;
+export declare const WithCustomWidth: Story;

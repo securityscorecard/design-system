@@ -1,0 +1,17 @@
+import React from 'react';
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { TextProps } from './Text.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<TextProps & {
+    children: React.ReactChild;
+}>;
+export declare const LargeText: Story;
+export declare const MediumText: Story;
+export declare const SmallText: Story;
+export declare const PrimaryText: Story;
+export declare const SecondaryText: Story;
+export declare const ContextText: Story;
+export declare const MonospaceText: Story;
+export declare const DangerText: Story;
+export declare const ShorthandComponents: Story;

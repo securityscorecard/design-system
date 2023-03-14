@@ -1,0 +1,12 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { CheckboxProps } from './Checkbox.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<CheckboxProps>;
+export declare const DefaultCheckbox: Story;
+export declare const CheckedCheckbox: Story;
+export declare const IndeterminateCheckbox: Story;
+export declare const InvalidCheckbox: Story;
+export declare const DisabledCheckbox: Story;
+export declare const CheckboxWithLabelAsComponent: Story;
+export declare const CheckboxWithLabelAsComponentWithIcon: Story;

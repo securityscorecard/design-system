@@ -1,0 +1,11 @@
+import { Meta } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: any;
+export declare const WithGap: any;
+export declare const WithHorizontalAlignment: any;
+export declare const WithVerticalAlignment: any;
+export declare const WithStretchStart: any;
+export declare const WithStretchEnd: any;
+export declare const WithStretchAll: any;
+export declare const WithStretchAtIndex: any;

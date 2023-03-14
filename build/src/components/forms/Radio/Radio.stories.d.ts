@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { RadioProps } from './Radio.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<RadioProps>;
+export declare const DefaultRadio: Story;
+export declare const CheckedRadio: Story;
+export declare const InvalidRadio: Story;
+export declare const RadioWithLabelAsComponent: Story;
+export declare const RadioWithLabelAsComponentWithIcon: Story;

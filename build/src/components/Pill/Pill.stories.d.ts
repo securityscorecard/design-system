@@ -1,0 +1,14 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { PillProps } from './Pill.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<PillProps>;
+export declare const Variants: any;
+export declare const Sizes: Story<PillProps>;
+export declare const Removable: any;
+export declare const Clickable: any;
+export declare const ClickableAndDeletable: any;
+export declare const WithAdornment: Story<PillProps>;
+export declare const Truncation: Story<PillProps>;
+export declare const PillArray: Story<PillProps>;
+export declare const WithAnchorElement: any;

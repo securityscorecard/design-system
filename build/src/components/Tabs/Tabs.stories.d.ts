@@ -1,0 +1,12 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { TabsProps } from './Tabs.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<TabsProps>;
+export declare const UnderlineTabs: any;
+export declare const UnderlineTabsWithCustomColor: Story<TabsProps>;
+export declare const TextTabs: any;
+export declare const SegmentedTabs: any;
+export declare const SegmentedExpandedTabs: any;
+export declare const StatefulTabs: Story<TabsProps>;
+export declare const RoutableTabs: Story<TabsProps>;

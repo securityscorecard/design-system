@@ -1,0 +1,11 @@
+import { Meta } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const OnFirstPage: any;
+export declare const InMiddle: any;
+export declare const OnLastPage: any;
+export declare const WithHighPageNumber: any;
+export declare const WithCustomPageButtonsCount: any;
+export declare const WithCustomRenderItemFunction: any;
+export declare const OnlyCurrentPage: any;
+export declare const OnlyArrows: any;

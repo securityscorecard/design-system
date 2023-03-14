@@ -1,0 +1,13 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { BannerProps } from './Banner.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<BannerProps>;
+export declare const InfoBanner: Story;
+export declare const SuccessBanner: Story;
+export declare const LongInfoBanner: Story;
+export declare const InfoBannerOneAction: Story;
+export declare const InfoBannerNoAction: Story;
+export declare const WarnBanner: Story;
+export declare const ErrorBanner: Story;
+export declare const NonDismissableBanner: Story;

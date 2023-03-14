@@ -1,0 +1,22 @@
+import { DefaultTheme } from 'styled-components';
+import { SpacingSizeValue } from '../types/spacing.types';
+export declare type Theme = {
+    theme?: DefaultTheme;
+    margin?: SpacingSizeValue;
+    padding?: SpacingSizeValue;
+};
+export declare const pxToRem: any;
+export declare const getColor: any;
+export declare const getFontFamily: any;
+export declare const getFontWeight: any;
+export declare const getFontSize: any;
+export declare const getLineHeight: any;
+export declare const getRadii: any;
+export declare const getFormStyle: any;
+export declare const getDepth: any;
+export declare const getSpace: any;
+export declare const getNegativeSpace: any;
+export declare const capitalize: (string: any) => any;
+export declare const getToken: any;
+export declare const abbreviateNumber: (value: number) => string;
+export declare const getShadow: () => string;

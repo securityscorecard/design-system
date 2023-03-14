@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { ModalProps } from './Modal.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<ModalProps>;
+export declare const WithTitle: Story;
+export declare const WithLongContent: Story;
+export declare const WithoutTitle: Story;
+export declare const WithoutFooter: Story;
+export declare const FeedbackModal: Story;

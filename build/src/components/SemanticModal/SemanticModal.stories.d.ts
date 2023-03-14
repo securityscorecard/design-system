@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { SemanticModalProps } from './SemanticModal.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<SemanticModalProps>;
+export declare const Success: any;
+export declare const Warn: any;
+export declare const Error: any;
+export declare const Ban: any;
+export declare const MultiParagraphMessage: any;

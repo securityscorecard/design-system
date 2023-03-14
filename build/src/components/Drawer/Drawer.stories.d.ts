@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { DrawerProps } from './Drawer.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<DrawerProps>;
+export declare const WithTitleAndAdornment: Story;
+export declare const WithOverflowingTitle: Story;
+export declare const WithoutBackdrop: Story;
+export declare const WithSemanticModal: Story;
+export declare const WithSubheader: Story;

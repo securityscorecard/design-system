@@ -1,0 +1,13 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { ControlsModuleProps } from './ControlsModule.types';
+import { Data } from '../../_internal/BaseTable/mocks/types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<ControlsModuleProps<Data>>;
+export declare const WithDisabledFiltering: Story<ControlsModuleProps<Data>>;
+export declare const WithOpenFiltering: Story<ControlsModuleProps<Data>>;
+export declare const WithAppliedFiltering: Story<ControlsModuleProps<Data>>;
+export declare const WithDisabledColumns: Story<ControlsModuleProps<Data>>;
+export declare const WithOpenColumns: Story<ControlsModuleProps<Data>>;
+export declare const WithAppliedColumns: Story<ControlsModuleProps<Data>>;
+export declare const WithDisabledSearch: Story<ControlsModuleProps<Data>>;

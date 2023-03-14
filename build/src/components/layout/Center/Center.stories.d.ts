@@ -1,0 +1,8 @@
+import { Meta } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: any;
+export declare const WithCenteredChildren: any;
+export declare const WithCenteredText: any;
+export declare const WithGutters: any;
+export declare const WithCustomMaxWidth: any;

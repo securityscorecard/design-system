@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const DefaultInputGroup: Story;
+export declare const DividerInputGroup: Story;
+export declare const SelectInputGroup: Story;
+export declare const NestedInputGroup: Story;
+export declare const InputGroupWithButton: Story;
+export declare const InputGroupWithPassword: Story;
+export declare const InputGroupWithSearchBar: Story;

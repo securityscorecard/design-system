@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { HexGradeProps } from './HexGrade.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Playground: Story<HexGradeProps>;
+export declare const SolidHexGrades: Story;
+export declare const OutlineHexGrades: Story;
+export declare const CustomScorecardHexGrades: Story;
+export declare const SizedHexGrades: Story;
+export declare const InvertedHexGrades: Story;

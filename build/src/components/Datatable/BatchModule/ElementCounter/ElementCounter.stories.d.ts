@@ -1,0 +1,10 @@
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { ElementCounterProps } from './ElementCounter.types';
+declare const _default: Meta<import("@storybook/react/types-6-0").Args>;
+export default _default;
+export declare const Default: Story<ElementCounterProps>;
+export declare const WithoutSelection: Story<ElementCounterProps>;
+export declare const WithSelectedRows: Story<ElementCounterProps>;
+export declare const WithSelectedRowsAndExclusionLogic: Story<ElementCounterProps>;
+export declare const NoDataAvailable: Story<ElementCounterProps>;
+export declare const AbbreviatedCounts: Story<ElementCounterProps>;
