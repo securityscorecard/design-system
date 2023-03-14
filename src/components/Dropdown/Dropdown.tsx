@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef, useState } from 'react';
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 import { Ref } from '@fluentui/react-component-ref';
@@ -52,6 +52,27 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
       showPane,
     }));
 
+    // eslint-disable-next-line
+    useEffect(() => {
+      const handleKeyDown = (e) => {
+        if (!triggerEvents.includes('click')) {
+          return;
+        }
+        switch (e.key) {
+          case 'Escape':
+            e.preventDefault();
+            hidePane();
+            break;
+          default:
+        }
+      };
+      if (isVisible) {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+      }
+      // eslint-disable-next-line
+    }, [isVisible]);
+
     const handleTriggerOnClick = () => {
       if (!triggerEvents.includes('click')) {
         return;
@@ -69,10 +90,6 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
         case 'Enter':
           e.preventDefault();
           togglePane();
-          break;
-        case 'Escape':
-          e.preventDefault();
-          hidePane();
           break;
         default:
       }
@@ -107,6 +124,10 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
       hidePane();
     };
 
+    const isFocusTrapEnabled = triggerEvents.includes(
+      DropdownTriggerEvents.click,
+    );
+
     return (
       <>
         <Ref innerRef={setTriggerEl}>
@@ -122,6 +143,7 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
         </Ref>
         <ControlledDropdown
           className={CLX_COMPONENT}
+          focusTrap={isFocusTrapEnabled}
           hasPaneArrow={hasPaneArrow}
           innerPaddingSize={innerPaddingSize}
           innerPaddingType={innerPaddingType}
