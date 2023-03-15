@@ -2,17 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../constants';
 import { getColor, getFontFamily, getFontWeight, pxToRem } from '../../utils';
-import SpaceMonoRegularWoff2 from '../fonts/SpaceMono-Regular.woff2';
-import SpaceMonoRegularWoff from '../fonts/SpaceMono-Regular.woff';
 
 export default createGlobalStyle`
-  @font-face {
-    font-family: 'space-mono';
-    src: url(${SpaceMonoRegularWoff2}), url(${SpaceMonoRegularWoff});
-    font-style: normal;
-    font-weight: 400;
-  }
-
   /* http://meyerweb.com/eric/tools/css/reset/
     v4.0 | 20180602
     License: none (public domain)
