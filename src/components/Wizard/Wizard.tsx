@@ -43,7 +43,7 @@ const Wizard: React.FC<WizardProps> = ({
 
 Wizard.propTypes = {
   initialStep: PropTypes.string,
-  size: PropTypes.oneOf(Object.keys(ModalSizes)),
+  size: PropTypes.oneOf(Object.values(ModalSizes)),
   isBackwardNavigationEnabled: PropTypes.bool,
   onStepChange: PropTypes.func,
   onClose: PropTypes.func,

@@ -3,7 +3,10 @@ import React, { forwardRef } from 'react';
 import { noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { SegmentedToggleProps } from './SegmentedToggle.types';
+import type {
+  SegmentedToggleItemProps,
+  SegmentedToggleProps,
+} from './SegmentedToggle.types';
 import { BaseTabsWrapper } from '../../_internal/BaseTabs/BaseTabsWrapper';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Inline } from '../../layout';
@@ -37,13 +40,16 @@ const SegmentedToggle = forwardRef<
             return null;
           }
 
-          return React.cloneElement(segmentedToggleItem, {
-            key: segmentedToggleItem.props.value,
-            name: group,
-            disabled: isDisabled,
-            onChange,
-            ...props,
-          });
+          return React.cloneElement(
+            segmentedToggleItem as React.ReactElement<SegmentedToggleItemProps>,
+            {
+              key: segmentedToggleItem.props.value,
+              name: group,
+              disabled: isDisabled,
+              onChange,
+              ...props,
+            },
+          );
         })}
       </Inline>
     </BaseTabsWrapper>

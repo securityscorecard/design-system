@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { equals } from 'ramda';
 
 import { Inline } from '../layout';
-import { TabsProps } from './Tabs.types';
+import type { TabProps, TabsProps } from './Tabs.types';
 import { TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme/space.enums';
 import { BaseTabsWrapper } from '../_internal/BaseTabs/BaseTabsWrapper';
@@ -41,7 +41,7 @@ const Tabs: React.FC<TabsProps> = ({
           return null;
         }
 
-        return React.cloneElement(tab, {
+        return React.cloneElement(tab as React.ReactElement<TabProps>, {
           variant,
           isExpanded,
           key: tab.props.value,

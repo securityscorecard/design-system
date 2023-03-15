@@ -7,9 +7,10 @@
 # Dependency directory
 node_modules
 
-build
+dist
 yarn-error.log
 stats
+tsconfig.tsbuildinfo
 
 .pnp.*
 .yarn/*
