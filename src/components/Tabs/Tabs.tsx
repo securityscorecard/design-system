@@ -1,83 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { equals } from 'ramda';
 
-import { getColor, pxToRem } from '../../utils/helpers';
-import { FlexContainer } from '../FlexContainer';
-import { LabelProps, TabsProps } from './Tabs.types';
-
-const LabelList = styled(FlexContainer)`
-  list-style-type: none;
-  padding-left: 0;
-  margin-bottom: ${pxToRem(30)};
-`;
-const ListItem = styled.li`
-  &:not(:last-of-type) {
-    margin-right: ${pxToRem(30)};
-  }
-`;
-const Label = styled.a<LabelProps>`
-  font-weight: 500;
-  font-size: ${pxToRem(18)};
-  line-height: ${pxToRem(20)};
-  padding-bottom: ${pxToRem(3)};
-  cursor: pointer;
-  border-bottom: 2px solid
-    ${({ selected, color }) => (selected ? color : getColor('graphiteHB'))};
-  &:hover {
-    border-bottom: 2px solid ${({ color }) => color};
-  }
-`;
-
-const getValidActiveTab = (tabs, activeTabTitle) => {
-  const activeTab = tabs.find(({ title }) => title === activeTabTitle);
-  return activeTab || tabs[0];
-};
+import { Inline } from '../layout';
+import { TabsProps } from './Tabs.types';
+import { TabVariants } from './Tabs.enums';
+import { SpaceSizes } from '../../theme/space.enums';
+import { BaseTabsWrapper } from '../_internal/BaseTabs/BaseTabsWrapper';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const Tabs: React.FC<TabsProps> = ({
-  tabs,
-  activeTabTitle,
+  selectedValue,
+  selectedPatternMatcher = equals,
+  children,
   onSelectTab,
-  componentProps,
-}) => {
-  const { Component, title: validTabTitle } = getValidActiveTab(
-    tabs,
-    activeTabTitle,
-  );
+  variant = TabVariants.underline,
+  isExpanded = false,
+}) => (
+  <BaseTabsWrapper
+    $isExpanded={isExpanded}
+    $variant={variant}
+    className={CLX_COMPONENT}
+    paddingSize={
+      variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
+    }
+  >
+    <Inline
+      gap={
+        variant === TabVariants.segmented
+          ? SpaceSizes.sm
+          : variant === TabVariants.underline
+          ? SpaceSizes.none
+          : SpaceSizes.lg
+      }
+      role="tablist"
+      stretch={isExpanded ? 'all' : 0}
+    >
+      {React.Children.map(children, (tab) => {
+        if (!React.isValidElement(tab)) {
+          return null;
+        }
 
-  return (
-    <>
-      <LabelList as="ul">
-        {tabs.map(({ title, color }) => (
-          <ListItem key={title}>
-            <Label
-              color={color}
-              selected={validTabTitle === title}
-              onClick={() => onSelectTab(title)}
-            >
-              {title}
-            </Label>
-          </ListItem>
-        ))}
-      </LabelList>
-      <section>
-        <Component {...componentProps} />
-      </section>
-    </>
-  );
-};
+        return React.cloneElement(tab, {
+          variant,
+          isExpanded,
+          key: tab.props.value,
+          isSelected: selectedPatternMatcher(tab.props.value, selectedValue),
+          onClick: onSelectTab,
+        });
+      })}
+    </Inline>
+  </BaseTabsWrapper>
+);
 
 Tabs.propTypes = {
-  activeTabTitle: PropTypes.string.isRequired,
-  onSelectTab: PropTypes.func.isRequired,
-  tabs: PropTypes.arrayOf(
-    PropTypes.exact({
-      title: PropTypes.string.isRequired,
-      color: PropTypes.string.isRequired,
-      Component: PropTypes.elementType.isRequired,
-    }),
-  ),
-  componentProps: PropTypes.shape({}),
+  selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
+  variant: PropTypes.oneOf(Object.values(TabVariants)),
+  selectedPatternMatcher: PropTypes.func,
+  isExpanded: PropTypes.bool,
+  onSelectTab: PropTypes.func,
 };
 
 export default Tabs;

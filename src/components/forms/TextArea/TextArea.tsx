@@ -3,19 +3,24 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
+import cls from 'classnames';
 
 import {
-  createPaddingSpacing,
-  getBorderRadius,
+  createPadding,
   getColor,
   getFontFamily,
   getFontSize,
   getFormStyle,
   getLineHeight,
+  getRadii,
+  getSpace,
   pxToRem,
-} from '../../../utils/helpers';
+} from '../../../utils';
 import { TextAreaProps } from './TextArea.types';
-import useAutosize from './useAutosize';
+import { useAutosize } from './hooks/useAutosize';
+import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
+import { SpaceSizes } from '../../../theme';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const TextAreaWrapper = styled.div<{ height: string }>`
   position: relative;
@@ -27,25 +32,29 @@ const StyledTextArea = styled.textarea<{
   isInvalid: boolean;
   hasMaxLength: boolean;
 }>`
+  resize: none;
   width: 100%;
   font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('lg')};
+  font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('lg')};
   height: ${prop('height')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
   box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
-  ${({ hasMaxLength }) =>
+  ${({ hasMaxLength, theme }) =>
     hasMaxLength
-      ? createPaddingSpacing({ vertical: 1, horizontal: 1, bottom: 2 })
-      : createPaddingSpacing(1)}
+      ? css`
+          ${createPadding({ paddingSize: SpaceSizes.md, theme })};
+          padding-bottom: ${getSpace(SpaceSizes.lg)};
+        `
+      : createPadding({ paddingSize: SpaceSizes.md, theme })};
   ${({ isInvalid }) =>
     isInvalid &&
     css`
       border-color: ${getFormStyle('invalidBorderColor')};
       box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
-    `}
+    `};
 
   &:disabled {
     background: ${getFormStyle('disabledBgColor')};
@@ -73,7 +82,7 @@ const Counter = styled.span<{ isInvalid: boolean }>`
   right: ${pxToRem(15)};
   bottom: ${pxToRem(10)};
   font-size: ${getFontSize('md')};
-  color: ${getColor('graphiteB')};
+  color: ${getColor('neutral.700')};
   background: ${getFormStyle('bgColor')};
   ${({ isInvalid }) =>
     isInvalid &&
@@ -84,8 +93,19 @@ const Counter = styled.span<{ isInvalid: boolean }>`
 
 const TextArea: React.FC<
   TextAreaProps & React.PropsWithRef<JSX.IntrinsicElements['textarea']>
-> = ({ maxLength, isInvalid = false, isDisabled = false, ...props }) => {
-  const { value = '', defaultValue = '', onChange = noop } = props as {
+> = ({
+  maxLength,
+  isInvalid = false,
+  isDisabled = false,
+  style,
+  className,
+  ...props
+}) => {
+  const {
+    value = '',
+    defaultValue = '',
+    onChange = noop,
+  } = props as {
     value: string;
     defaultValue: string;
     onChange: React.ChangeEventHandler;
@@ -96,17 +116,24 @@ const TextArea: React.FC<
     value || defaultValue,
   );
   const [currentValueLength, setCurrentValueLength] = useState(text.length);
+  const runAfterUpdate = useRunAfterUpdate();
 
   const handleOnChange = (e) => {
     onChange(e);
-    setCurrentValueLength(textAreaRef.current.value.length);
-    autosize();
+    runAfterUpdate(() => {
+      setCurrentValueLength(textAreaRef.current.value.length);
+      autosize();
+    });
   };
 
   const isFieldInvalid = isInvalid || currentValueLength > maxLength;
 
   return (
-    <TextAreaWrapper height={parentHeight}>
+    <TextAreaWrapper
+      className={cls(CLX_COMPONENT, className)}
+      height={parentHeight}
+      style={style}
+    >
       <StyledTextArea
         ref={textAreaRef}
         disabled={isDisabled}
@@ -131,6 +158,8 @@ TextArea.propTypes = {
   isDisabled: PropTypes.bool,
   value: PropTypes.string,
   defaultValue: PropTypes.string,
+  style: PropTypes.shape({}),
+  className: PropTypes.string,
   onChange: PropTypes.func,
 };
 

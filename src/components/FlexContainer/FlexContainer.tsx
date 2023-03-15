@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 
-import { createSpacings } from '../../utils/helpers';
+import { createSpacings } from '../../utils';
 import { FlexContainerProps } from './FlexContainer.types';
 
 const FlexContainer = styled.div<FlexContainerProps>`

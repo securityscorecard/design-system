@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks'
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Helpers/Methods" />
 
@@ -19,7 +19,9 @@ import { pxToRem } from '@securityscorecard/design-system';
 pxToRem(16, auto, 0); // -> '1rem auto 0'
 ```
 
-### createSpacing
+### createSpacing (DEPRECATED)
+
+Use `Layout Primitives` instead.
 
 Generates spacing values of given kind (`margin` or `padding`)
 for given value based on `BASE_LINE_HEIGHT` constant (currently set to `20`).
@@ -48,11 +50,17 @@ createSpacing('margin', { top: 1, bottom: 2, left: 3, right: 4 });
 */
 ```
 
-#### createMarginSpacing, createPaddingSpacing
+#### createMarginSpacing, createPaddingSpacing (DEPRECATED)
+
+Use `Layout Primitives` instead.
+
 Generates spacing values for given kind.
 
 ```js
-import { createMarginSpacing, createPaddingSpacing } from '@securityscorecard/design-system';
+import {
+  createMarginSpacing,
+  createPaddingSpacing,
+} from '@securityscorecard/design-system';
 
 createMarginSpacing({ horizontal: 2, vertical: 1 });
 /*
@@ -71,7 +79,10 @@ createPaddingSpacing({ horizontal: 2, vertical: 1 });
 */
 ```
 
-#### createSpacings
+#### createSpacings (DEPRECATED)
+
+Use `Layout Primitives` instead.
+
 Generates spacing values for both kinds.
 
 ```js
@@ -90,7 +101,36 @@ createSpacings({ margin: { horizontal: 2, vertical: 1 }, padding: 4 });
 */
 ```
 
+### createPadding
+
+Generates padding of given type with given [standard size](/docs/theme-space--page#inseting).
+
+```tsx
+import { createPadding } from '@securityscorecard/design-system';
+
+const Box = styled.div<{paddingType: PaddingType; paddingSize: SpaceSize}>`
+  ${createPadding};
+`
+
+<Box paddingType="square" paddingSize="lg" />
+/*
+  -> padding: 2rem;
+*/
+
+<Box paddingType="squish" paddingSize="lg" />
+/*
+  -> padding: 2rem 1rem;
+*/
+
+<Box paddingType="stretch" paddingSize="lg" />
+/*
+  -> padding: 1rem 2rem;
+*/
+
+```
+
 ## Theme getters
+
 These methods retrieving values from the [theme object](/docs/theme-theme-object--page)
 and can be used only in `styled-components` template literals.
 
@@ -105,7 +145,7 @@ import { getColor } from '@securityscorecard/design-system';
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
 // Props - styled-components props object
 const Component = styled.div`
-  color: ${getColor('graphite5B')};
+  color: ${getColor('neutral.0')};
 `; // -> color: #000;
 ```
 
@@ -121,7 +161,7 @@ import { getFontFamily } from '@securityscorecard/design-system';
 // Props - styled-components props object
 const Component = styled.div`
   font-family: ${getFontFamily('base')};
-`; // -> font-family: 'proxima-nova', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+`; // -> font-family: 'Inter', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 ```
 
 ### getFontWeight
@@ -169,17 +209,18 @@ const Component = styled.div`
 `; // -> line-height: 20px;
 ```
 
-### getBorderRadius
+### getRadii
 
-Returns border-radius from theme.
+Returns border-radius from theme for given key.
 
 ```js
-import { getBorderRadius } from '@securityscorecard/design-system';
+import { getRadii } from '@securityscorecard/design-system';
 
-// getBorderRadius :: Props -> string
+// getRadii :: Type -> Props -> string
+// Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object
 const Component = styled.div`
-  border-radius: ${getBorderRadius};
+  border-radius: ${getRadii('default')};
 `; // -> border-radius: 4px;
 ```
 
@@ -200,29 +241,32 @@ const Component = styled.input`
 `;
 ```
 
-### getButtonColor
+### getDepth
 
-Returns color for given key in combination of button variant and color prop.
-
+Returns z-index from theme for given element.
 
 ```js
-import { getButtonColor } from '@securityscorecard/design-system';
+import { getDepth } from '@securityscorecard/design-system';
 
-// getButtonColor :: Type -> Props -> string
-// Type - type of color (src/theme/buttons.ts)
-// Props - styled-components props object (variant and color props are required)
-const Button = styled.button.attrs(() => ({
-  variant: 'solid', // <- required
-  color: 'primary', // <- required
-}))`
-  background-color: ${getButtonColor('bgColor')}; // -> #eee
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+const Component = styled.input`
+  z-index: ${getDepth('modal')};
+`; // -> z-index: 1250;
+```
 
-  &:hover {
-    background-color: ${getButtonColor('hoverBgColor')}; // -> #1e88e5
-  }
+### getSpace
 
-  &:active {
-    background-color: ${getButtonColor('activeBgColor')}; // -> #80baeb
-  }
-`;
+Returns space value from theme for given size.
+
+```js
+import { getSpace } from '@securityscorecard/design-system';
+
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+const Component = styled.input`
+  margin-bottom: ${space('m')};
+`; // -> margin-bottom: 1rem;
 ```

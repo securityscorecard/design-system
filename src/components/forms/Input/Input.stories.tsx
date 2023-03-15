@@ -7,33 +7,34 @@ import { InputProps } from './Input.types';
 export default {
   title: 'components/forms/Input',
   component: Input,
+  argTypes: {
+    type: {
+      options: ['text', 'number', 'tel', 'email', 'password', 'date', 'url'],
+      control: {
+        type: 'select',
+      },
+      table: {
+        type: {
+          summary:
+            '"text" | "number" | "tel" | "email" | "password" | "date" | "url"',
+        },
+        defaultValue: { summary: 'text' },
+      },
+      description: 'Any valid HTML input type, *DO NOT USE* button like types',
+    },
+    placeholder: { control: 'text' },
+    defaultValue: { control: 'text' },
+    isInvalid: { control: 'boolean' },
+    isDisabled: { control: 'boolean' },
+  },
 } as Meta;
 
-export const playground: Story<InputProps> = (args) => (
-  <Input {...args} aria-label="Input" />
-);
-playground.parameters = {
-  chromatic: { disable: true },
-};
-playground.argTypes = {
-  type: {
-    control: {
-      type: 'select',
-      options: ['text', 'number', 'tel', 'email', 'password', 'date', 'url'],
-    },
-    table: {
-      type: {
-        summary:
-          '"text" | "number" | "tel" | "email" | "password" | "date" | "url"',
-      },
-    },
-    description: 'Any valid HTML input type, *DO NOT USE* button like types',
-    defaultValue: 'text',
-  },
-  placeholder: { control: 'text' },
-  defaultValue: { control: 'text' },
-  isInvalid: { control: 'boolean' },
-  isDisabled: { control: 'boolean' },
+export const Playground: Story<
+  InputProps & React.InputHTMLAttributes<HTMLInputElement>
+> = (args) => <Input {...args} aria-label="Input" />;
+Playground.args = { type: 'text' };
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
 export const Default: Story = () => <Input aria-label="Input" type="text" />;

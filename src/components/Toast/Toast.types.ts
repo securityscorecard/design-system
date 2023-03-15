@@ -1,5 +1,6 @@
-import React from 'react';
+import { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBanner.types';
 
-export type ToastProps = {
-  onClose: React.MouseEventHandler;
-};
+export interface ToastProps extends BaseToastBannerProps {
+  width?: number;
+  isStandalone?: boolean;
+}

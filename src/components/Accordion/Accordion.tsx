@@ -1,62 +1,91 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
+import cls from 'classnames';
 
-import { FlexContainer } from '../FlexContainer';
+import { Stack } from '../layout';
 import {
+  AccordionItem,
   AccordionItemId,
+  AccordionItemIdPropType,
   AccordionItemPropType,
   AccordionProps,
 } from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
+import { CLX_COMPONENT } from '../../theme/constants';
 
-const Accordion: React.FC<AccordionProps> = ({
-  isCollapsedOnOpen = true,
-  items,
-  ...props
-}) => {
-  const [openIds, setOpenIds] = useState(
-    items.filter((item) => item.isOpen).map((item) => item.id),
-  );
+const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
+  filter(propEq('isOpen', true)),
+  pluck('id'),
+);
 
-  const handleClick = useCallback(
-    (id: AccordionItemId) => {
-      setOpenIds(
-        openIds.includes(id)
-          ? openIds.filter((i) => i !== id)
-          : isCollapsedOnOpen
-          ? [id]
-          : [...openIds, id],
-      );
+function filterState(
+  state: AccordionItemId[],
+  item: AccordionItemId,
+  isCollapsedOnOpen: boolean,
+) {
+  if (includes(item, state)) {
+    return reject(equals(item), state);
+  }
+  if (isCollapsedOnOpen) {
+    return [item];
+  }
+  return [...state, item];
+}
+
+const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
+  (
+    {
+      isCollapsedOnOpen = true,
+      items,
+      openItems,
+      isCard = true,
+      className,
+      ...props
     },
-    [setOpenIds, openIds, isCollapsedOnOpen],
-  );
+    ref,
+  ) => {
+    const [openIds, setOpenIds] = useState(pickOpen(items));
 
-  return (
-    <FlexContainer
-      alignItems="flex-start"
-      flexDirection="column"
-      margin="none"
-      padding="none"
-      {...props}
-    >
-      {items.map((item) => (
-        <AccordionCollapsible
-          key={`accordion-item-${item.title}`}
-          handleHeaderClick={handleClick}
-          id={item.id}
-          isOpen={openIds.includes(item.id)}
-          title={item.title}
-        >
-          {item.content}
-        </AccordionCollapsible>
-      ))}
-    </FlexContainer>
-  );
-};
+    useEffect(
+      () =>
+        openItems?.forEach((item: AccordionItemId) =>
+          setOpenIds((state) => filterState(state, item, isCollapsedOnOpen)),
+        ),
+      [openItems, isCollapsedOnOpen],
+    );
+
+    const handleClick = useCallback(
+      (id: AccordionItemId) => {
+        setOpenIds((state) => filterState(state, id, isCollapsedOnOpen));
+      },
+      [setOpenIds, isCollapsedOnOpen],
+    );
+
+    return (
+      <Stack {...props} ref={ref} className={cls(CLX_COMPONENT, className)}>
+        {items.map(({ title, id, content }) => (
+          <AccordionCollapsible
+            key={`accordion-item-${id}`}
+            handleHeaderClick={handleClick}
+            id={id}
+            isCard={isCard}
+            isOpen={includes(id, openIds)}
+            title={title}
+          >
+            {content}
+          </AccordionCollapsible>
+        ))}
+      </Stack>
+    );
+  },
+);
 
 Accordion.propTypes = {
   items: PropTypes.arrayOf(AccordionItemPropType).isRequired,
   isCollapsedOnOpen: PropTypes.bool,
+  className: PropTypes.string,
+  openItems: PropTypes.arrayOf(AccordionItemIdPropType),
 };
 
 export default Accordion;

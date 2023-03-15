@@ -6,8 +6,8 @@ import DSProvider from './DSProvider';
 
 describe('DSProvider', () => {
   const Button = styled.button`
-    background: ${({ theme }) => theme.colors.kiwi};
-    color: ${({ theme }) => theme.colors.banana};
+    background: ${({ theme }) => theme.colors.primary[50]};
+    color: ${({ theme }) => theme.colors.neutral[900]};
   `;
 
   const renderComponent = (theme = undefined) =>
@@ -21,15 +21,15 @@ describe('DSProvider', () => {
     renderComponent();
     const button = screen.getByRole('button');
 
-    expect(button).toHaveStyleRule('background', '#4aba00');
-    expect(button).toHaveStyleRule('color', '#e5bd00');
+    expect(button).toHaveStyleRule('background', '#f0ecfe');
+    expect(button).toHaveStyleRule('color', '#2a2a2a');
   });
 
   it('should merge provided theme with default one', () => {
-    renderComponent({ colors: { kiwi: 'red' } });
+    renderComponent({ colors: { primary: { 50: 'red' } } });
     const button = screen.getByRole('button');
 
     expect(button).toHaveStyleRule('background', 'red');
-    expect(button).toHaveStyleRule('color', '#e5bd00');
+    expect(button).toHaveStyleRule('color', '#2a2a2a');
   });
 });

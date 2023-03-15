@@ -1,37 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { head, pipe, sortBy, toPairs } from 'ramda';
 
 import Icon from './Icon';
 import { IconProps } from './Icon.types';
-import { IconTypes, SSCIconNames } from './Icon.enums';
-import colors from '../../theme/colors';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { generateControl } from '../../utils/tests/storybook';
+import { Text } from '../typographyLegacy';
+import { Grid, Inline } from '../layout';
 
 export default {
   title: 'components/Icon',
   component: Icon,
+  argTypes: {
+    name: {
+      ...generateControl('select', SSCIconNames),
+    },
+  },
 } as Meta;
 
-export const sscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
-sscIcon.args = { type: IconTypes.ssc, name: SSCIconNames.wrench };
-sscIcon.argTypes = {
-  color: {
-    control: { type: 'select', options: Object.keys(colors) },
-    defaultValue: 'graphite4B',
-  },
-  hasFixedWidth: { control: 'boolean' },
-  name: {
-    control: { type: 'select', options: SSCIconNames },
-  },
+export const SscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
+SscIcon.args = {
+  name: SSCIconNames.wrench,
+  color: 'neutral.900',
 };
 
-sscIcon.storyName = 'SecurityScorecard Icon';
+SscIcon.storyName = 'SecurityScorecard Icon';
 
-const StyledIcon = styled(Icon)`
+const SIcon = styled(Icon)`
   font-size: 2rem;
   color: #4aba00;
 `;
 
-export const styledIcon: Story<IconProps> = () => (
-  <StyledIcon name={SSCIconNames.wrench} type={IconTypes.ssc} />
+export const StyledIcon: Story<IconProps> = () => (
+  <SIcon name={SSCIconNames.wrench} type={IconTypes.ssc} />
+);
+
+const sortedIconsList = pipe(toPairs, sortBy(head))(SSCIconNames);
+export const IconsList = () => (
+  <Grid cols={4} gap="md">
+    {sortedIconsList.map(([key, value]) => (
+      <Inline key={key} align="center" gap="md">
+        <Icon name={value} hasFixedWidth />
+        <Text>{key}</Text>
+      </Inline>
+    ))}
+  </Grid>
 );

@@ -1,14 +1,22 @@
+/*!
+ * Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2022 Fonticons, Inc.
+ */
+
+/* solid - xmark */
+
 import {
   IconDefinition,
   IconName,
   IconPrefix,
 } from '@fortawesome/fontawesome-svg-core';
 
-export const width = 315;
-export const height = 500;
-export const unicode = 'e005';
+export const width = 320;
+export const height = 512;
+export const unicode = 'e017';
 export const svgPathData =
-  'M 47.896 95.477 L 312.024 359.603 C 315.992 363.573 315.992 370.008 312.024 373.978 L 281.479 404.523 C 277.509 408.492 271.073 408.492 267.103 404.523 L 2.977 140.396 C -0.992 136.427 -0.992 129.992 2.977 126.022 L 33.523 95.477 C 37.492 91.508 43.927 91.508 47.896 95.477 Z M 312.024 140.396 L 47.896 404.523 C 43.927 408.492 37.492 408.492 33.522 404.523 L 2.977 373.978 C -0.992 370.008 -0.992 363.573 2.977 359.603 L 267.103 95.477 C 271.073 91.508 277.509 91.508 281.479 95.477 L 312.024 126.023 C 315.992 129.992 315.992 136.427 312.024 140.396 Z';
+  'M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z';
 
 export const times = {
   prefix: 'ssc' as IconPrefix,

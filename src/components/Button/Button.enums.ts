@@ -1,17 +1,8 @@
-export const ButtonVariants = {
-  solid: 'solid',
-  outline: 'outline',
-  text: 'text',
-} as const;
+import {
+  BaseButtonColors,
+  BaseButtonVariants,
+} from '../_internal/BaseButton/BaseButton.enums';
 
-export const ButtonColors = {
-  primary: 'primary',
-  secondary: 'secondary',
-  danger: 'danger',
-} as const;
+export const ButtonVariants = BaseButtonVariants;
 
-export const ButtonSizes = {
-  lg: 'lg',
-  md: 'md',
-  sm: 'sm',
-} as const;
+export const ButtonColors = BaseButtonColors;

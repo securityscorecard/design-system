@@ -1,69 +1,100 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { isNotUndefined } from 'ramda-adjunct';
+import styled, { css } from 'styled-components';
+import { pipe, prop } from 'ramda';
+import cls from 'classnames';
 
-import { SpacingSizeValuePropType } from '../../types/spacing.types';
-import { H3, Paragraph } from '../typography';
-import { TextSizes } from '../typography/Text/Text.enums';
-import { FlexContainer } from '../FlexContainer';
-import { Spinner } from '../Spinner';
-import { getColor, pxToRem } from '../../utils/helpers';
-import { CardProps } from './Card.types';
+import { Padbox, Stack } from '../layout';
+import { getColor, getRadii, getShadow, getSpace, getToken } from '../../utils';
+import { SpaceSize } from '../../theme/space.types';
+import { CardProps, CardWrapperProps } from './Card.types';
+import { CLX_COMPONENT } from '../../theme/constants';
 
-const CardWrapper = styled(FlexContainer)`
-  width: ${pxToRem(370)};
-  height: ${pxToRem(400)};
-  padding: ${pxToRem(40, 14, 0, 14)};
-  border-radius: 10px;
-  border: 2px solid ${getColor('graphite2H')};
+const InteractiveCard = css`
+  transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.07);
+  }
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.07),
+      inset 0 0 0 1px ${getToken('color-action-primary')};
+    border-color: ${getToken('color-action-primary')};
+  }
+  &:active {
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.07);
+  }
 `;
 
-const CardTitle = styled(H3).attrs(() => ({
-  margin: { top: 0, bottom: 0.4 },
-}))`
-  font-weight: bold;
-`;
-
-const CardContent = styled(FlexContainer)`
+const CardWrapper = styled(Padbox)<CardWrapperProps>`
   flex-grow: 1;
+  background-color: ${getColor('neutral.0')};
+  border: 1px solid ${getColor('neutral.400')};
+  border-radius: ${getRadii('default')};
+  overflow: hidden;
+  ${getShadow}
+  ${({ onClick, href, to }) => (onClick || href || to ? InteractiveCard : null)}
 `;
 
-const Card: React.FC<CardProps> = ({
-  children,
-  title,
-  subtitle,
-  margin = { bottom: 1.5 },
-  isLoading = false,
-  ...props
-}) => (
-  <CardWrapper
-    alignItems="center"
-    flexDirection="column"
-    margin={margin}
-    {...props}
-  >
-    <CardTitle>{title}</CardTitle>
-    {isNotUndefined(subtitle) && (
-      <Paragraph margin="none" size={TextSizes.md}>
-        {subtitle}
-      </Paragraph>
-    )}
-    <CardContent
-      alignItems="center"
-      flexDirection="column"
-      padding={{ vertical: 1.25 }}
-    >
-      {isLoading ? <Spinner dark /> : children}
-    </CardContent>
-  </CardWrapper>
+const CardStack = styled(Stack)<{ $shouldAlignLastItemToBottom: boolean }>`
+  height: 100%;
+
+  & > :last-child:not(:first-child) {
+    ${({ $shouldAlignLastItemToBottom }) =>
+      $shouldAlignLastItemToBottom && 'margin-top: auto;'}
+  }
+`;
+
+export const CardContainer = styled.div<{
+  horizontalPadding: SpaceSize;
+  verticalPadding: SpaceSize;
+}>`
+  padding: ${pipe(prop('verticalPadding'), getSpace)}
+    ${pipe(prop('horizontalPadding'), getSpace)};
+`;
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ children, shouldAlignLastItemToBottom = false, as, ...props }, ref) => {
+    let domTag;
+    if (props.onClick) {
+      domTag = 'button';
+    }
+    if (props.href) {
+      domTag = 'a';
+    }
+    if (as) {
+      domTag = as;
+    }
+    const handleClick = (event) => {
+      if (
+        event.target?.dataset?.interactive ||
+        event.target?.parentElement?.dataset?.interactive
+      ) {
+        return;
+      }
+      props.onClick(event);
+    };
+    return (
+      <CardWrapper
+        ref={ref}
+        {...props}
+        as={domTag}
+        className={cls(CLX_COMPONENT, props?.className)}
+        onClick={props.onClick ? handleClick : undefined}
+      >
+        <CardStack $shouldAlignLastItemToBottom={shouldAlignLastItemToBottom}>
+          {children}
+        </CardStack>
+      </CardWrapper>
+    );
+  },
 );
 
 Card.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  isLoading: PropTypes.bool,
-  margin: SpacingSizeValuePropType,
+  shouldAlignLastItemToBottom: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Card;

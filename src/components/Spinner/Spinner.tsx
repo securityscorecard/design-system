@@ -1,10 +1,14 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
 import { isString } from 'ramda-adjunct';
+import { transparentize } from 'polished';
+import cls from 'classnames';
 
-import { pxToRem } from '../../utils/helpers';
+import { getColor, pxToRem } from '../../utils';
 import { SpinnerProps } from './Spinner.types';
+import { ColorTypes } from '../../theme';
+import { CLX_COMPONENT } from '../../theme/constants';
 
 const spin = keyframes`
   from {
@@ -20,7 +24,9 @@ const getHorizontalMargin = pipe(
   unless(isString, pxToRem),
 );
 
-const Spinner = styled.div<SpinnerProps>`
+const Spinner = styled.div.attrs({
+  className: cls(CLX_COMPONENT, 'spinner'),
+})<SpinnerProps>`
   margin-top: ${({ verticalMargin }) => pxToRem(verticalMargin)};
   margin-bottom: ${({ verticalMargin }) => pxToRem(verticalMargin)};
   margin-left: ${getHorizontalMargin};
@@ -29,22 +35,21 @@ const Spinner = styled.div<SpinnerProps>`
   width: ${({ width }) => pxToRem(width)};
   height: ${({ height }) => pxToRem(height)};
   animation: ${spin} 1s infinite linear;
-  border: solid rgba(255, 255, 255, 0.2);
+  border: solid
+    ${({ dark, color, theme }) =>
+      transparentize(0.8)(
+        getColor(color || (dark ? 'neutral.1000' : 'neutral.0'), { theme }),
+      )};
   border-width: ${({ borderWidth }) => `${borderWidth}px`};
-  border-top-color: rgb(255, 255, 255);
-
-  ${({ dark }) =>
-    dark &&
-    css`
-      border-color: rgba(0, 0, 0, 0.2);
-      border-top-color: rgb(0, 0, 0);
-    `};
+  border-top-color: ${({ dark, color, theme }) =>
+    getColor(color || (dark ? 'neutral.1000' : 'neutral.0'), { theme })};
 `;
 
 Spinner.propTypes = {
   dark: PropTypes.bool,
-  width: PropTypes.number,
-  height: PropTypes.number,
+  color: PropTypes.oneOf(Object.values(ColorTypes)),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   verticalMargin: PropTypes.number,
   horizontalMargin: PropTypes.oneOfType([
     PropTypes.number,
@@ -54,7 +59,6 @@ Spinner.propTypes = {
 };
 
 Spinner.defaultProps = {
-  className: 'spinner',
   dark: false,
   width: 24,
   height: 24,

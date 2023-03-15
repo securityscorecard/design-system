@@ -1,59 +1,63 @@
+import { DefaultTheme } from 'styled-components';
 import {
-  DefaultTheme,
-  FlattenSimpleInterpolation,
-  css,
-} from 'styled-components';
-import {
-  any,
-  anyPass,
   curry,
-  equals,
-  isEmpty,
+  either,
+  identity,
   join,
   map,
+  memoizeWith,
+  negate,
   path,
   pipe,
+  split,
   unless,
+  useWith,
 } from 'ramda';
-import {
-  hasPath,
-  isNotUndefined,
-  isNumber,
-  isString,
-  list,
-} from 'ramda-adjunct';
+import { isString, list } from 'ramda-adjunct';
+import numeral from 'numeral';
 
-import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../theme/constants';
+import { BASE_FONT_SIZE } from '../theme/constants';
 import {
   Family as FontFamily,
   Size as FontSize,
   Weight as FontWeight,
   LineHeight,
 } from '../theme/typography.types';
-import { Colors } from '../theme/colors.types';
+import { Color } from '../theme/colors.types';
 import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
+import { Depths } from '../theme/depths.types';
+import { SpaceSize } from '../theme/space.types';
+import { ColorTypes } from '../theme/colors.enums';
+import { createRadii } from '../theme/radii';
 
-type Theme = {
+export type Theme = {
   theme?: DefaultTheme;
   margin?: SpacingSizeValue;
   padding?: SpacingSizeValue;
 };
 
-const converValueToRem = unless(
-  anyPass([equals(0), isString]),
-  (px) => `${px / BASE_FONT_SIZE}rem`,
+const convertValueToRem = memoizeWith(
+  identity,
+  unless(isString, (px) => `${px / BASE_FONT_SIZE}rem`),
 );
 
 // pxToRem :: (number | string)... -> string
-export const pxToRem = pipe(list, map(converValueToRem), join(' '));
+export const pxToRem = pipe(list, map(convertValueToRem), join(' '));
 
+// https://github.com/ramda/ramda/wiki/Cookbook#derivative-of-rprops-for-deep-fields
+// This useWith is not hook :D
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const dotPath = useWith(path, [split('.')]);
 // getColor :: Color -> Props -> string
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
 // Props - styled-components props object
-export const getColor = curry((color: keyof Colors, { theme }: Theme): string =>
-  path(['colors', color], theme),
-);
+export const getColor = curry((color: Color, { theme }: Theme): string => {
+  return either(
+    dotPath(`colors.${color}`),
+    dotPath(`colors.${ColorTypes[color]}`),
+  )(theme);
+});
 
 // getFontFamily :: Family -> Props -> string
 // Family - any key of 'family' (src/theme/typography.ts)
@@ -87,93 +91,53 @@ export const getLineHeight = curry(
     path(['typography', 'lineHeight', size], theme),
 );
 
-// getBorderRadius :: Props -> string
+// getRadii :: Type -> Props -> string
+// Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object
-export const getBorderRadius = pipe(
-  path(['theme', 'borderRadius']),
-  (radius) => `${radius}px`,
+export const getRadii = curry(
+  (type: keyof ReturnType<typeof createRadii>, { theme }: Theme): string =>
+    path(['radii', type], theme),
 );
 
 // getFormStyle :: Property -> Props -> string
 // Property - any key of 'forms' (src/theme/forms.ts)
 // Props - styled-components props object
-export const getFormStyle = (property: keyof Forms): string =>
-  path(['theme', 'forms', property]);
-
-// getButtonColor :: Type -> Props -> string
-// Type - type of color (src/theme/buttons.ts)
-// Props - styled-components props object
-export const getButtonColor = curry((type, { variant, color, theme }) => {
-  if (hasPath(['buttons', variant, color], theme)) {
-    return path(['buttons', variant, color, type], theme);
-  }
-  // eslint-disable-next-line no-console
-  console.warn(
-    `Desired color variant (variant: "${variant}", color: "${color}") is not currently implemented. Using "primary" color instead.`,
-  );
-  return path(['buttons', variant, 'primary', type], theme);
-});
-
-type SpacingKind = 'padding' | 'margin';
-
-const calculateSpacingValue = (direction: number, generic: number) =>
-  pxToRem(BASE_LINE_HEIGHT * (isNumber(direction) ? direction : generic));
-
-// createSpacing :: Kind -> Value -> string | string[]
-// Kind - 'margin' or 'padding'
-// Value - number or 'none' or object
-export const createSpacing = curry(
-  (kind: SpacingKind, value: SpacingSizeValue): string | string[] => {
-    if (value === undefined || isEmpty(value)) {
-      return undefined;
-    }
-
-    if (value === 'none') {
-      return `${kind}: 0;`;
-    }
-
-    if (isNumber(value)) {
-      return `${kind}: ${pxToRem(BASE_LINE_HEIGHT * value)};`;
-    }
-
-    const { vertical, horizontal, top, right, bottom, left } = value;
-    const result = [];
-
-    if (any(isNotUndefined, [vertical, top])) {
-      result.push(`${kind}-top: ${calculateSpacingValue(top, vertical)};`);
-    }
-    if (any(isNotUndefined, [vertical, bottom])) {
-      result.push(
-        `${kind}-bottom: ${calculateSpacingValue(bottom, vertical)};`,
-      );
-    }
-    if (any(isNotUndefined, [horizontal, left])) {
-      result.push(`${kind}-left: ${calculateSpacingValue(left, horizontal)};`);
-    }
-    if (any(isNotUndefined, [horizontal, right])) {
-      result.push(
-        `${kind}-right: ${calculateSpacingValue(right, horizontal)};`,
-      );
-    }
-
-    return result;
-  },
+export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
+  path(['forms', property], theme),
 );
 
-// createMarginSpacing :: Value -> string | string[]
-// Value - number or 'none' or object
-export const createMarginSpacing = createSpacing('margin');
+// getDepth :: Element -> Props -> string
+// Element - any key of 'depth' (src/theme/depths.ts)
+// Props - styled-components props object
+export const getDepth = curry(
+  (element: keyof Depths, { theme }: Theme): string =>
+    path(['depths', element], theme),
+);
 
-// createPaddingSpacing :: Value -> string | string[]
-// Value - number or 'none' or object
-export const createPaddingSpacing = createSpacing('padding');
+// getSpace:: Size -> Props -> string
+// Size - any key of 'space' (src/theme/space.ts)
+// Props - styled-components props object
+export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
+  pipe(path(['space', size]), pxToRem)(theme),
+);
 
-// createSpacings :: Object -> string
-// Object - {margin: number or 'none' or object, padding: number or 'none' or object }
-export const createSpacings = ({
-  margin,
-  padding,
-}: Theme): FlattenSimpleInterpolation => css`
-  ${createMarginSpacing(margin)};
-  ${createPaddingSpacing(padding)};
-`;
+// getNegativeSpace:: Size -> Props -> string
+// Size - any key of 'space' (src/theme/space.ts)
+// Props - styled-components props object
+export const getNegativeSpace = curry(
+  (size: SpaceSize, { theme }: Theme): string =>
+    pipe(path(['space', size]), negate, pxToRem)(theme),
+);
+
+// getToken:: String -> Token
+export const capitalize = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
+
+export const getToken = curry((name, { theme }: Theme): string =>
+  path(['tokens', name])(theme),
+);
+
+export const abbreviateNumber = (value: number): string =>
+  numeral(value).format('0.[00]a').toUpperCase();
+
+export const getShadow = () => 'box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);';

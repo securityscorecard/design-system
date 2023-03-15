@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import { H2, Paragraph } from '../typography';
+import { H2, Paragraph } from '../typographyLegacy';
 import FlexContainer from './FlexContainer';
 
 const lipsum = [
@@ -17,7 +17,7 @@ export default {
   component: FlexContainer,
 } as Meta;
 
-export const sample: Story = () => (
+export const Sample: Story = () => (
   <>
     <FlexContainer alignItems="center" padding={2}>
       <H2 margin="none" padding={{ right: 2 }}>

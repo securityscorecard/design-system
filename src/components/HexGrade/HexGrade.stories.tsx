@@ -4,35 +4,32 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { HexGradeProps } from './HexGrade.types';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import HexGrade from './HexGrade';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
   title: 'components/HexGrade',
   component: HexGrade,
+  argTypes: {
+    variant: {
+      ...generateControl('select', HexGradeVariants),
+    },
+  },
 } as Meta;
 
-export const playground: Story<HexGradeProps> = (args) => (
-  <div style={{ backgroundColor: args.isInversed ? 'black' : 'transparent' }}>
-    <HexGrade {...args} />
-  </div>
-);
-playground.parameters = {
-  chromatic: { disable: true },
+export const Playground: Story<HexGradeProps> = (args) => {
+  const { isInverted } = args;
+
+  return (
+    <div style={{ backgroundColor: isInverted ? 'black' : 'transparent' }}>
+      <HexGrade {...args} />
+    </div>
+  );
 };
-playground.argTypes = {
-  variant: {
-    control: { type: 'select', options: HexGradeVariants },
-    defaultValue: HexGradeVariants.solid,
-  },
-  grade: {
-    control: {
-      type: 'select',
-      options: { none: undefined, ...HexGradeGrades },
-    },
-    defaultValue: undefined,
-  },
-  isInversed: {
-    control: 'boolean',
-  },
+Playground.args = {
+  variant: HexGradeVariants.solid,
+};
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
 export const SolidHexGrades: Story = () => (
@@ -44,9 +41,18 @@ export const SolidHexGrades: Story = () => (
     <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.solid} />
     <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.solid} />
     <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.solid} />
+    <HexGrade
+      grade={HexGradeGrades.nonApplicable}
+      variant={HexGradeVariants.solid}
+    />
   </>
 );
 SolidHexGrades.storyName = 'Solid HexGrades';
+SolidHexGrades.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/vnzYfrwIISRYkr2iYE5TcD/Platform-Atoms?node-id=1891%3A0',
+  },
+};
 
 export const OutlineHexGrades: Story = () => (
   <>
@@ -60,9 +66,30 @@ export const OutlineHexGrades: Story = () => (
     <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.outline} />
     <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.outline} />
     <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.outline} />
+    <HexGrade
+      grade={HexGradeGrades.nonApplicable}
+      variant={HexGradeVariants.outline}
+    />
   </>
 );
 OutlineHexGrades.storyName = 'Outline HexGrades';
+
+export const CustomScorecardHexGrades: Story = () => (
+  <>
+    <HexGrade variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.unknown} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.A} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.B} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.C} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.D} variant={HexGradeVariants.cs} />
+    <HexGrade grade={HexGradeGrades.F} variant={HexGradeVariants.cs} />
+    <HexGrade
+      grade={HexGradeGrades.nonApplicable}
+      variant={HexGradeVariants.cs}
+    />
+  </>
+);
+CustomScorecardHexGrades.storyName = 'CustomScorecard HexGrades';
 
 export const SizedHexGrades: Story = () => (
   <>
@@ -95,76 +122,86 @@ export const SizedHexGrades: Story = () => (
 );
 SizedHexGrades.storyName = 'Sized HexGrades';
 
-export const InversedHexGrades: Story = () => (
+export const InvertedHexGrades: Story = () => (
   <div style={{ backgroundColor: 'black' }}>
     <div>
       <HexGrade
         grade={HexGradeGrades.unknown}
         variant={HexGradeVariants.solid}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.A}
         variant={HexGradeVariants.solid}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.B}
         variant={HexGradeVariants.solid}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.C}
         variant={HexGradeVariants.solid}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.D}
         variant={HexGradeVariants.solid}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.F}
         variant={HexGradeVariants.solid}
-        isInversed
+        isInverted
+      />
+      <HexGrade
+        grade={HexGradeGrades.nonApplicable}
+        variant={HexGradeVariants.solid}
+        isInverted
       />
     </div>
     <div>
       <HexGrade
         grade={HexGradeGrades.unknown}
         variant={HexGradeVariants.outline}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.A}
         variant={HexGradeVariants.outline}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.B}
         variant={HexGradeVariants.outline}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.C}
         variant={HexGradeVariants.outline}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.D}
         variant={HexGradeVariants.outline}
-        isInversed
+        isInverted
       />
       <HexGrade
         grade={HexGradeGrades.F}
         variant={HexGradeVariants.outline}
-        isInversed
+        isInverted
+      />
+      <HexGrade
+        grade={HexGradeGrades.nonApplicable}
+        variant={HexGradeVariants.outline}
+        isInverted
       />
     </div>
   </div>
 );
-InversedHexGrades.storyName = 'Inversed HexGrade';
-InversedHexGrades.parameters = {
+InvertedHexGrades.storyName = 'Inverted HexGrade';
+InvertedHexGrades.parameters = {
   backgrounds: {
     default: 'black',
   },

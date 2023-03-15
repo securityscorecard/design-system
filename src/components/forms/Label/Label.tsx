@@ -1,25 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import cls from 'classnames';
 
-import { Paragraph } from '../../typography';
-import { TextSizes, TextVariants } from '../../typography/Text/Text.enums';
+import { SpaceSizes } from '../../../theme';
+import { getSpace } from '../../../utils';
+import { Text } from '../../typographyLegacy';
+import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
-const BlockLabel = styled(Paragraph)`
+const LabelContainer = styled(Text)`
   display: block;
+  padding-top: ${getSpace(SpaceSizes.xs)};
+  padding-bottom: ${getSpace(SpaceSizes.xs)};
+  cursor: 'inherit';
+
+  > * {
+    margin: 0;
+  }
 `;
 
 const Label: React.FC<
-  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Paragraph>
-> = ({ children, ...props }) => (
-  <BlockLabel
+  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Text>
+> = ({ children, htmlFor, className, ...props }) => (
+  <LabelContainer
     as="label"
-    margin={{ bottom: 0.25 }}
-    size={TextSizes.lg}
-    variant={TextVariants.secondary}
+    className={cls(CLX_COMPONENT, className)}
+    htmlFor={htmlFor}
+    size={TextSizes.md}
     {...props}
   >
     {children}
-  </BlockLabel>
+  </LabelContainer>
 );
+
+Label.propTypes = {
+  htmlFor: PropTypes.string,
+  className: PropTypes.string,
+};
 
 export default Label;

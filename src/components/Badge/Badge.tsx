@@ -1,54 +1,98 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultWhen } from 'ramda-adjunct';
-import { lt, pipe } from 'ramda';
+import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
-import { BadgeSizes } from './Badge.enums';
-import { getColor, pxToRem } from '../../utils/helpers';
+import { BadgeVariants } from './Badge.enums';
+import {
+  getColor,
+  getFontSize,
+  getFontWeight,
+  getRadii,
+  pxToRem,
+} from '../../utils';
+import { CLX_COMPONENT } from '../../theme/constants';
+import { SpaceSizes } from '../../theme';
+import { SSCIcons, Types } from '../Icon/Icon.types';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { Icon } from '../Icon';
+import { Inline, Padbox } from '../layout';
 
-const badgeFontSizeMedium = css`
-  font-size: ${pxToRem(11)};
+const BadgeNeutral = css`
+  background-color: ${getColor('neutral.300')};
+  color: ${getColor('neutral.700')};
+`;
+const BadgeSuccess = css`
+  background-color: ${getColor('success.500')};
+  color: ${getColor('neutral.0')};
+`;
+const BadgeInfo = css`
+  background-color: ${getColor('info.500')};
+  color: ${getColor('neutral.0')};
+`;
+const BadgeWarn = css`
+  background-color: ${getColor('warning.500')};
+  color: ${getColor('neutral.900')};
+`;
+const BadgeError = css`
+  background-color: ${getColor('error.500')};
+  color: ${getColor('neutral.0')};
 `;
 
-const badgeFontSizeSmall = css`
-  font-size: ${pxToRem(9)};
-`;
-
-const badgeFontSizes = {
-  [BadgeSizes.md]: badgeFontSizeMedium,
-  [BadgeSizes.sm]: badgeFontSizeSmall,
+const badgeVariants = {
+  [BadgeVariants.neutral]: BadgeNeutral,
+  [BadgeVariants.success]: BadgeSuccess,
+  [BadgeVariants.info]: BadgeInfo,
+  [BadgeVariants.warn]: BadgeWarn,
+  [BadgeVariants.error]: BadgeError,
 };
 
-const BadgeElement = styled.span<BadgeElementProps>`
+const BadgeElement = styled(Padbox)<BadgeElementProps>`
   display: inline-block;
-  min-width: 1em;
-  /* cause our font is not aligned properly to baseline
-   * we need to use this magic to have number centered
-   * vertically and horizontally */
-  padding: 0.229em 0.231em 0.228em 0.226em;
-  border-radius: 1em;
-  ${({ size }) => badgeFontSizes[size]};
-  font-weight: 600;
+  min-width: 1.5rem;
+  padding-block: 0.125rem;
+  border-radius: ${getRadii('round')};
+  font-size: ${getFontSize('md')};
+  font-weight: ${getFontWeight('regular')};
   text-align: center;
-  color: ${getColor('graphite4H')};
-  background-color: ${getColor('strawberry')};
-  box-sizing: content-box;
-  line-height: 1;
-  vertical-align: text-top;
-  margin-left: ${pxToRem(8)};
+  ${({ $variant }) => badgeVariants[$variant]};
+  line-height: ${pxToRem(20)};
 `;
 
-const normalizeCount = pipe(defaultWhen(lt(100), '99+'));
+const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
-const Badge: React.FC<BadgeProps> = ({ count, size = BadgeSizes.md }) => (
-  <BadgeElement size={size}>{normalizeCount(count)}</BadgeElement>
+const Badge: React.FC<BadgeProps> = ({
+  count,
+  text,
+  iconName,
+  iconType,
+  variant = BadgeVariants.error,
+}) => (
+  <BadgeElement
+    $variant={variant}
+    className={CLX_COMPONENT}
+    paddingSize={SpaceSizes.sm}
+  >
+    <Inline align="center" as="span" gap="sm" justify="center">
+      {iconName ? <Icon name={iconName} type={iconType} /> : null}
+      <span>{count ? normalizeCount(count) : text}</span>
+    </Inline>
+  </BadgeElement>
 );
 
 Badge.propTypes = {
-  count: PropTypes.number.isRequired,
-  size: PropTypes.oneOf(Object.values(BadgeSizes)),
+  count: PropTypes.number,
+  text: PropTypes.string,
+  iconName: PropTypes.oneOfType([
+    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
+    PropTypes.string,
+  ]),
+  iconType: PropTypes.oneOfType([
+    PropTypes.oneOf<Types>(Object.values(IconTypes)),
+    PropTypes.string,
+  ]),
 };
 
 export default Badge;

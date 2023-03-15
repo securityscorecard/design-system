@@ -1,8 +1,11 @@
 module.exports = {
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  parser: '@typescript-eslint/parser',
+  // Specifies the ESLint parser
   parserOptions: {
-    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
+    ecmaVersion: 2020,
+    // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module',
+    // Allows for the use of imports
     ecmaFeatures: {
       jsx: true, // Allows for the parsing of JSX
     },
@@ -28,14 +31,10 @@ module.exports = {
   extends: [
     'airbnb',
     'plugin:import/typescript',
-    'prettier/@typescript-eslint',
-    'prettier/react',
     'prettier',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:ramda/recommended',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended',
   ],
   plugins: ['filenames', 'fp', 'react-hooks', 'ramda'],
   rules: {
@@ -56,7 +55,12 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
     'import/prefer-default-export': 'off',
     'import/order': [
       'error',
@@ -70,18 +74,32 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
-    'sort-imports': ['error', { ignoreDeclarationSort: true }],
+    'sort-imports': [
+      'error',
+      {
+        ignoreDeclarationSort: true,
+      },
+    ],
     'prettier/prettier': 'error',
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.tsx'],
+      },
+    ],
     'react/jsx-props-no-spreading': 'off',
     'react/boolean-prop-naming': [
       'error',
       {
-        rule:
-          '^(defaultIs|defaultHas|defaultShould|is|has|should)[A-Z]([A-Za-z0-9]?)+',
+        rule: '^(defaultIs|defaultHas|defaultShould|defaultAre|is|has|should|are)[A-Z]([A-Za-z0-9]?)+',
       },
     ],
-    'react/prop-types': ['error', { ignore: ['children', 'as'] }],
+    'react/prop-types': [
+      'error',
+      {
+        ignore: ['children', 'as'],
+      },
+    ],
     'react/jsx-sort-props': [
       'error',
       {
@@ -102,6 +120,13 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/require-default-props': 'off',
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: ['arrow-function', 'function-declaration'],
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     'fp/no-arguments': 'error',
     'fp/no-delete': 'error',
     'fp/no-get-set': 'error',
@@ -111,14 +136,39 @@ module.exports = {
     'fp/no-class': 'error',
     'fp/no-valueof-field': 'error',
     'filenames/match-exported': 'error',
-    'jsx-a11y/label-has-for': 'warn',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
         components: [],
       },
     ],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
     'no-nested-ternary': 'off',
+    'no-unused-expressions': [
+      'error',
+      {
+        allowTernary: true,
+      },
+    ],
+    'no-restricted-imports': [
+      'warn',
+      {
+        patterns: [
+          {
+            group: ['*/FlexContainer'],
+            message:
+              'FlexContainer is deprecated. Please use Layout primitives instead.',
+          },
+        ],
+      },
+    ],
   },
   overrides: [
     {
@@ -126,8 +176,28 @@ module.exports = {
       env: {
         jest: true,
       },
+      extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
       rules: {
-        'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+        'react/jsx-filename-extension': [
+          1,
+          {
+            extensions: ['.ts', '.tsx'],
+          },
+        ],
+        'react/jsx-sort-props': 'off',
+      },
+    },
+    {
+      files: ['**/*.stories.tsx'],
+      extends: ['plugin:storybook/recommended'],
+      rules: {
+        'react/prop-types': 'off',
+        'react/no-unstable-nested-components': [
+          2,
+          {
+            allowAsProps: true,
+          },
+        ],
       },
     },
   ],

@@ -9,33 +9,27 @@ export default {
   component: Spinner,
 } as Meta;
 
-export const playground: Story<SpinnerProps> = (args) => (
-  <div style={{ background: args.dark ? undefined : '#000', padding: '10px' }}>
-    <Spinner {...args} />
-  </div>
-);
-playground.parameters = {
-  chromatic: { disable: true },
+export const Playground: Story<SpinnerProps> = (args) => {
+  const { dark } = args;
+  return (
+    <div style={{ background: dark ? undefined : '#000', padding: '10px' }}>
+      <Spinner {...args} />
+    </div>
+  );
 };
-playground.argTypes = {
-  dark: {
-    control: { type: 'boolean' },
-    defaultValue: false,
-  },
-  horizontalMargin: {
-    control: { type: 'number' },
-  },
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
-export const darkSpinner: Story = () => <Spinner dark />;
+export const DarkSpinner: Story = () => <Spinner dark />;
 
-export const lightSpinner: Story = () => (
+export const LightSpinner: Story = () => (
   <div style={{ background: '#000', padding: '10px' }}>
     <Spinner />
   </div>
 );
 
-lightSpinner.parameters = {
+LightSpinner.parameters = {
   backgrounds: {
     default: 'black',
   },

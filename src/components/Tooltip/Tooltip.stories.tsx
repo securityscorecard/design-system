@@ -1,89 +1,102 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { omit } from 'ramda';
 
-import { FlexContainer } from '../FlexContainer';
+import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
+import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
-import { Paragraph } from '../typography';
+import { Paragraph } from '../typographyLegacy';
 import Tooltip from './Tooltip';
 import { TooltipProps } from './Tooltip.types';
-import { TooltipPlacements } from './Tooltip.enums';
+import { generateControl } from '../../utils/tests/storybook';
+import { ButtonVariants } from '../Button/Button.enums';
+import { SpaceSizes } from '../../theme';
 
 export default {
   title: 'components/Tooltip',
   component: Tooltip,
+  argTypes: {
+    popup: {
+      control: { disable: true },
+    },
+    children: {
+      control: { disable: true },
+    },
+    placement: {
+      ...generateControl(
+        'select',
+        omit(['bottomLeft', 'bottomRight'], PortalPlacements),
+      ),
+    },
+  },
   decorators: [
     (storyFn) => (
-      <FlexContainer
-        alignItems="center"
-        flexDirection="column"
-        padding={{ vertical: 3 }}
-      >
-        {storyFn()}
-      </FlexContainer>
+      <Padbox paddingSize={SpaceSizes.xxl}>
+        <Inline justify="center">{storyFn()}</Inline>
+      </Padbox>
     ),
   ],
 } as Meta;
 
 const popup = (
-  <Paragraph margin={{ bottom: 0 }} size="md">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  </Paragraph>
+  <>
+    <Paragraph margin={{ bottom: 0 }} size="md">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </Paragraph>
+    <Button variant={ButtonVariants.text}>Action</Button>
+  </>
 );
 
-export const playground: Story<TooltipProps> = (args) => <Tooltip {...args} />;
-playground.parameters = {
-  chromatic: { disable: true },
+export const Playground: Story<
+  TooltipProps & { children: React.ReactChild }
+> = (args) => <Tooltip {...args} />;
+Playground.args = {
+  children: <Button>Button with tooltip</Button>,
+  popup,
 };
-playground.argTypes = {
-  popup: {
-    control: { disable: true },
-    defaultValue: popup,
-  },
-  children: {
-    control: { disable: true },
-    defaultValue: <Button size="lg">Button with tooltip</Button>,
-  },
-  placement: { control: 'select', defaultValue: TooltipPlacements.bottom },
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
 export const Placements: Story = () => (
-  <>
-    <FlexContainer padding={{ vertical: 0.5 }}>
-      <Tooltip
-        className="hover"
-        placement={TooltipPlacements.top}
-        popup={popup}
-      >
-        <Button size="md">Top tooltip</Button>
-      </Tooltip>
-    </FlexContainer>
-    <FlexContainer padding={{ vertical: 0.5 }}>
-      <Tooltip
-        className="hover"
-        placement={TooltipPlacements.right}
-        popup={popup}
-      >
-        <Button size="md">Right tooltip</Button>
-      </Tooltip>
-    </FlexContainer>
-
-    <FlexContainer padding={{ vertical: 0.5 }}>
-      <Tooltip
-        className="hover"
-        placement={TooltipPlacements.left}
-        popup={popup}
-      >
-        <Button size="md">Left tooltip</Button>
-      </Tooltip>
-    </FlexContainer>
-    <FlexContainer padding={{ vertical: 0.5 }}>
-      <Tooltip
-        className="hover"
-        placement={TooltipPlacements.bottom}
-        popup={popup}
-      >
-        <Button size="md">Bottom tooltip</Button>
-      </Tooltip>
-    </FlexContainer>
-  </>
+  <Stack gap={SpaceSizes.md}>
+    <Tooltip
+      placement={PortalPlacements.top}
+      popup={popup}
+      defaultIsPopupDisplayed
+    >
+      <Button isExpanded>Top tooltip</Button>
+    </Tooltip>
+    <Tooltip
+      placement={PortalPlacements.right}
+      popup={popup}
+      defaultIsPopupDisplayed
+    >
+      <Button isExpanded>Right tooltip</Button>
+    </Tooltip>
+    <Tooltip
+      placement={PortalPlacements.left}
+      popup={popup}
+      defaultIsPopupDisplayed
+    >
+      <Button isExpanded>Left tooltip</Button>
+    </Tooltip>
+    <Tooltip
+      placement={PortalPlacements.bottom}
+      popup={popup}
+      defaultIsPopupDisplayed
+    >
+      <Button isExpanded>Bottom tooltip</Button>
+    </Tooltip>
+  </Stack>
 );
+
+export const Width: Story<TooltipProps & { children: React.ReactChild }> = (
+  args,
+) => <Tooltip {...args} />;
+
+Width.args = {
+  ...Playground.args,
+  width: 400,
+  defaultIsPopupDisplayed: true,
+};

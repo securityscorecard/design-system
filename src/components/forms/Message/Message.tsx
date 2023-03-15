@@ -1,23 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { Paragraph } from '../../typography';
-import { TextSizes } from '../../typography/Text/Text.enums';
+import { SpaceSizes } from '../../../theme';
+import { getSpace } from '../../../utils';
+import { Paragraph } from '../../typographyLegacy';
+import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { MessageVariants } from './Message.enums';
 import { MessageProps } from './Message.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
+
+const MessageContainer = styled.div`
+  padding-top: ${getSpace(SpaceSizes.sm)};
+  padding-bottom: ${getSpace(SpaceSizes.sm)};
+
+  > * {
+    margin: 0;
+  }
+`;
 
 const Message: React.FC<MessageProps> = ({
   children,
   variant = MessageVariants.note,
 }) => (
-  <Paragraph
-    margin="none"
-    padding={{ top: 0.25, bottom: 0.5 }}
-    size={TextSizes.md}
-    variant={variant}
-  >
-    {children}
-  </Paragraph>
+  <MessageContainer className={CLX_COMPONENT}>
+    <Paragraph size={TextSizes.md} variant={variant}>
+      {children}
+    </Paragraph>
+  </MessageContainer>
 );
 
 Message.propTypes = {

@@ -3,42 +3,59 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 
-import { getColor, pxToRem } from '../../utils/helpers';
-import { FlexContainer } from '../FlexContainer';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { getColor, getSpace, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
-import { IconTypes, SSCIconNames } from '../Icon/Icon.enums';
-import { Text } from '../typography';
-import { TextSizes } from '../typography/Text/Text.enums';
-import { AccordionCollapsibleProps, AccordionItemId } from './Accordion.types';
+import { Text } from '../typographyLegacy';
+import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import {
+  AccordionCollapsibleProps,
+  AccordionItemId,
+  AccordionItemIdPropType,
+} from './Accordion.types';
+import { Inline, Padbox } from '../layout';
+import { SpaceSizes } from '../../theme';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 
-const Header = styled(FlexContainer)`
-  width: 100%;
-  height: ${pxToRem(60)};
-  padding: ${pxToRem(0, 13)};
+const Header = styled(Padbox)`
   cursor: pointer;
+
+  &:hover {
+    background-color: ${getColor('neutral.200')};
+  }
 `;
 
-const Content = styled(Text)`
-  padding: ${pxToRem(24, 40)};
-  border-top: 1px dashed ${getColor('graphiteHB')};
+const Content = styled(Padbox)`
+  padding-top: 0;
 `;
 
-const Container = styled.div<{ isOpen: boolean }>`
-  width: 100%;
+const Container = styled.div<{ isOpen: boolean; isCard: boolean }>`
   ${({ isOpen }) =>
     isOpen &&
     css`
-      background: ${getColor('graphite5H')};
+      &:not(:last-child) {
+        margin-bottom: ${getSpace(SpaceSizes.md)};
+      }
+    `}
+  ${({ isOpen, isCard }) =>
+    isCard &&
+    isOpen &&
+    css`
+      background: ${getColor('neutral.0')};
       box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
     `}
 `;
 
-const StyledIcon = styled(Icon)<{ $isRotated: boolean }>`
-  margin-right: ${pxToRem(13)};
+const IconWrapper = styled(Padbox)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${pxToRem(16)};
+  height: ${pxToRem(24)};
+`;
+const StyledIcon = styled(Icon)`
   transition: transform 200ms;
-  ${({ $isRotated }) => $isRotated && 'transform: rotate(90deg);'}
-  height: ${pxToRem(11)};
-  width: ${pxToRem(11)};
+  height: 1em;
 `;
 
 const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
@@ -46,6 +63,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   className,
   handleHeaderClick,
   isOpen = false,
+  isCard = true,
   id,
   title,
 }) => {
@@ -58,24 +76,28 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
     }
   };
   return (
-    <Container className={className} isOpen={isOpen}>
+    <Container className={className} isCard={isCard} isOpen={isOpen}>
       <Header
-        alignItems="center"
+        paddingSize={SpaceSizes.sm}
         role="button"
         tabIndex={0}
         onClick={() => handleHeaderClick(id)}
         onKeyDown={(e) => handleKeyDown(e, id)}
       >
-        <StyledIcon
-          $isRotated={isOpen}
-          name={SSCIconNames.chevronRight}
-          type={IconTypes.ssc}
-        />
-        <Text size={TextSizes.lg}>{title}</Text>
+        <Inline gap={SpaceSizes.sm}>
+          <IconWrapper paddingSize={SpaceSizes.xxs}>
+            <StyledIcon
+              name={SSCIconNames.angleRight}
+              rotation={isOpen ? 90 : undefined}
+              type={IconTypes.ssc}
+            />
+          </IconWrapper>
+          <Text size={TextSizes.lg}>{title}</Text>
+        </Inline>
       </Header>
       {isOpen && (
-        <Content as="div" size={TextSizes.md}>
-          {children}
+        <Content paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
+          <Text size={TextSizes.md}>{children}</Text>
         </Content>
       )}
     </Container>
@@ -83,9 +105,9 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
 };
 
 AccordionCollapsible.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   handleHeaderClick: PropTypes.func.isRequired,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: AccordionItemIdPropType.isRequired,
   className: PropTypes.string,
   isOpen: PropTypes.bool,
 };

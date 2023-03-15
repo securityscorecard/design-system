@@ -1,4 +1,4 @@
-import { Sizes as HeadingSizes } from '../components/typography/Heading/Heading.types';
+import { Sizes as HeadingSizes } from '../components/typographyLegacy/Heading/Heading.types';
 
 export interface Family {
   base: string;
@@ -11,10 +11,10 @@ export interface Size {
   h2: string;
   h3: string;
   h4: string;
+  h5: string;
   lg: string;
   md: string;
   sm: string;
-  xs: string;
 }
 
 export interface Weight {
@@ -26,12 +26,11 @@ export interface Weight {
 }
 
 export interface LineHeight {
-  xxxl: string;
   xxl: string;
   xl: string;
   lg: string;
   md: string;
-  sm: string;
+  h4: string;
 }
 
 type MarginValue = {
@@ -48,10 +47,23 @@ export interface Margin {
   paragraph: MarginValue;
 }
 
+export interface LinkColors {
+  color: string;
+  hoverColor: string;
+  activeColor: string;
+  focusBgColor: string;
+  decoration: string;
+}
+export interface Links {
+  primary: LinkColors;
+  secondary: LinkColors;
+}
+
 export interface Typography {
   family: Family;
   size: Size;
   weight: Weight;
   lineHeight: LineHeight;
   margin: Margin;
+  links: Links;
 }

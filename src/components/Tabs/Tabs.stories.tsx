@@ -1,92 +1,142 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
+import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
-import Tabs from './Tabs';
-
-const contentStyle = {
-  width: '400px',
-  height: '300px',
-  border: '1px red dashed',
-};
+import { Inline, Stack } from '../layout';
+import { Tab, Tabs } from '.';
+import { TabsProps } from './Tabs.types';
+import { generateControl } from '../../utils/tests/storybook';
+import { TabVariants } from './Tabs.enums';
+import { Icon } from '../Icon';
+import { Badge } from '../Badge';
+import { Heading, Paragraph } from '../typographyLegacy';
 
 export default {
   title: 'components/Tabs',
   component: Tabs,
+  argTypes: {
+    variant: {
+      ...generateControl('select', TabVariants),
+    },
+    margin: { control: { disable: true } },
+  },
 } as Meta;
 
-type PropsWithTitle = {
-  title: string;
+const TabPanel = ({ title }) => (
+  <Stack gap="md">
+    <Heading size="h3">{title}</Heading>
+    <Paragraph>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla cumque
+      nostrum, pariatur qui sapiente optio quam tempora distinctio? Ipsam
+      perferendis reprehenderit, sequi corrupti pariatur laboriosam fuga
+      numquam? Unde, facilis facere.
+    </Paragraph>
+  </Stack>
+);
+
+const TabsTemplate: Story<TabsProps> = (args) => (
+  <Tabs {...args}>
+    <Tab value="overview">Overview</Tab>
+    <Tab value="inventory">
+      <Inline align="center" gap="sm">
+        <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
+        <span>Inventory</span>
+        <Badge count={3} variant="neutral" />
+      </Inline>
+    </Tab>
+    <Tab value="profile">Profile</Tab>
+  </Tabs>
+);
+
+export const Playground: Story<TabsProps> = TabsTemplate.bind({});
+Playground.args = {
+  selectedValue: 'overview',
+  onSelectTab: action('onSelectTab'),
+};
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
-const tabs = [
-  {
-    title: 'SecurityScorecard',
-    color: '#0275D8',
-    Component: ({ title }: PropsWithTitle) => (
-      <div style={contentStyle}>
-        Title: {title}
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </div>
-    ),
-  },
-  {
-    title: 'IHS Markit',
-    color: '#00AB4E',
-    Component: ({ title }: PropsWithTitle) => (
-      <div style={contentStyle}>
-        Title: {title}
-        <br />
-        Nunc congue nisi vitae suscipit. Interdum velit laoreet id donec
-        ultrices tincidunt arcu non sodales. Sed adipiscing diam donec
-        adipiscing tristique. Ut aliquam purus sit amet luctus venenatis lectus
-        magna fringilla. At ultrices mi tempus imperdiet nulla malesuada
-        pellentesque elit. Congue quisque egestas diam in arcu cursus euismod.
-        Amet volutpat consequat mauris nunc congue. Rhoncus dolor purus non enim
-        praesent elementum facilisis leo vel. Eleifend mi in nulla posuere
-        sollicitudin aliquam. Lectus magna fringilla urna porttitor rhoncus
-        dolor. Quis vel eros donec ac odio tempor orci dapibus ultrices.
-      </div>
-    ),
-  },
-];
+export const UnderlineTabs = TabsTemplate.bind({});
+UnderlineTabs.args = { ...Playground.args, variant: 'underline' };
 
-export const FirstTabSelected: Story = () => (
-  <Tabs
-    activeTabTitle="SecurityScorecard"
-    componentProps={{
-      title: 'im title for securityscorecard',
-    }}
-    tabs={tabs}
-    onSelectTab={action('NavItem-click')}
-  />
+export const UnderlineTabsWithCustomColor: Story<TabsProps> = (args) => (
+  <Tabs {...args}>
+    <Tab color="error.700" value="overview">
+      Overview
+    </Tab>
+    <Tab value="inventory">
+      <Inline align="center" gap="sm">
+        <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
+        <span>Inventory</span>
+        <Badge count={3} variant="neutral" />
+      </Inline>
+    </Tab>
+    <Tab value="Profile">Profile</Tab>
+  </Tabs>
 );
+UnderlineTabsWithCustomColor.args = Playground.args;
 
-export const SecondTabSelected: Story = () => (
-  <Tabs
-    activeTabTitle="IHS Markit"
-    componentProps={{
-      title: 'im title for ihs markit',
-    }}
-    tabs={tabs}
-    onSelectTab={action('NavItem-click')}
-  />
-);
+export const TextTabs = TabsTemplate.bind({});
+TextTabs.args = { ...Playground.args, variant: 'text' };
 
-export const InvalidTabSelected: Story = () => (
-  <Tabs
-    activeTabTitle="asdfasdfasdfasdf"
-    componentProps={{
-      title: 'im title for unknown tab',
-    }}
-    tabs={tabs}
-    onSelectTab={action('NavItem-click')}
-  />
-);
+export const SegmentedTabs = TabsTemplate.bind({});
+SegmentedTabs.args = { ...Playground.args, variant: 'segmented' };
+
+export const SegmentedExpandedTabs = TabsTemplate.bind({});
+SegmentedExpandedTabs.args = { ...SegmentedTabs.args, isExpanded: true };
+
+export const StatefulTabs: Story<TabsProps> = (args) => {
+  const { selectedValue } = args;
+  const [currentTab, setCurrentTab] = useState(selectedValue);
+
+  return (
+    <Stack gap="lg">
+      <TabsTemplate
+        {...args}
+        selectedValue={currentTab}
+        onSelectTab={setCurrentTab}
+      />
+      <main>
+        <TabPanel title={currentTab} />
+      </main>
+    </Stack>
+  );
+};
+StatefulTabs.args = Playground.args;
+StatefulTabs.parameters = {
+  screenshot: { skip: true },
+};
+
+export const RoutableTabs: Story<TabsProps> = (args) => {
+  return (
+    <MemoryRouter initialEntries={['/overview']}>
+      <Stack gap="lg">
+        <Route
+          component={({ match }) => (
+            <Tabs {...args} selectedValue={match.url}>
+              <Tab value="/overview">Overview</Tab>
+              <Tab value="/inventory">Inventory</Tab>
+            </Tabs>
+          )}
+          path="*"
+        />
+
+        <Switch>
+          <Route
+            path="/inventory"
+            render={() => <TabPanel title="inventory" />}
+          />
+          <Route
+            path="/overview"
+            render={() => <TabPanel title="overview" />}
+          />
+        </Switch>
+      </Stack>
+    </MemoryRouter>
+  );
+};
+RoutableTabs.parameters = {
+  screenshot: { skip: true },
+};

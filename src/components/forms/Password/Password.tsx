@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import cls from 'classnames';
 
-import { createPaddingSpacing, getFormStyle } from '../../../utils/helpers';
+import { createPadding, getSpace, pxToRem } from '../../../utils';
 import { Icon } from '../../Icon';
-import { IconTypes, SSCIconNames } from '../../Icon/Icon.enums';
+import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Input } from '../Input';
 import { PasswordProps } from './Password.types';
+import { ColorTypes, SpaceSizes } from '../../../theme';
+import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
 const PasswordWrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled(Input)`
-  ${createPaddingSpacing({ right: 2 })};
+const PasswordInput = styled(Input)`
+  padding-right: ${getSpace(SpaceSizes.lgPlus)};
 `;
 
 const ToggleButton = styled.button`
+  border: 0;
+  appearance: none;
+  background: none;
+  box-sizing: content-box;
+  width: ${pxToRem(16)};
   position: absolute;
   top: 0;
   right: 0;
-  height: ${getFormStyle('fieldHeight')};
-  width: ${getFormStyle('fieldHeight')};
+  ${({ theme }) =>
+    createPadding({
+      paddingSize: SpaceSizes.md,
+      paddingType: PaddingTypes.squish,
+      theme,
+    })};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,19 +44,19 @@ const Password: React.FC<PasswordProps> = ({
   isInvalid = false,
   isDisabled = false,
   defaultIsRevealed = false,
+  className,
   ...props
 }) => {
-  const [isPasswordRevealed, setIsPasswordRevealed] = useState(
-    defaultIsRevealed,
-  );
+  const [isPasswordRevealed, setIsPasswordRevealed] =
+    useState(defaultIsRevealed);
 
   const toggleVisibility = () => {
     setIsPasswordRevealed(!isPasswordRevealed);
   };
 
   return (
-    <PasswordWrapper>
-      <StyledInput
+    <PasswordWrapper className={cls(CLX_COMPONENT, className)}>
+      <PasswordInput
         isDisabled={isDisabled}
         isInvalid={isInvalid}
         {...props}
@@ -54,10 +67,9 @@ const Password: React.FC<PasswordProps> = ({
         onClick={toggleVisibility}
       >
         <Icon
-          color="graphite2B"
+          color={ColorTypes.neutral700}
           name={isPasswordRevealed ? SSCIconNames.eyeSlash : SSCIconNames.eye}
           type={IconTypes.ssc}
-          hasFixedWidth
         />
       </ToggleButton>
     </PasswordWrapper>
@@ -68,6 +80,7 @@ Password.propTypes = {
   isInvalid: PropTypes.bool,
   isDisabled: PropTypes.bool,
   defaultIsRevealed: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Password;

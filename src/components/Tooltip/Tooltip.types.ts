@@ -1,9 +1,17 @@
-import { TooltipPlacements } from './Tooltip.enums';
+import React from 'react';
 
-export type Placements = typeof TooltipPlacements[keyof typeof TooltipPlacements];
+import { Placements } from '../Dropdown/Dropdown.types';
 
+export interface TooltipPopupProps {
+  $placement: Placements;
+  $width: number;
+  $space: number;
+  style: React.CSSProperties;
+}
 export interface TooltipProps {
   popup?: React.ReactNode;
   className?: string;
   placement?: Placements;
+  width?: number;
+  defaultIsPopupDisplayed?: boolean;
 }

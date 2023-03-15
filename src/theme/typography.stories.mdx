@@ -1,8 +1,7 @@
-
-import { Meta,Story } from '@storybook/addon-docs/blocks';
+import { Meta, Story } from '@storybook/addon-docs';
 
 import { FontPalette, FontItem } from '../../.storybook/blocks/FontPallete';
-import typography from './typography';
+import { theme } from './theme';
 
 export const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra
 magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
@@ -13,15 +12,31 @@ leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravi
 # Typography
 
 Design System have defined two basic font families. As base font family we are using sans-serif
-`ProximaNova` font, for monospaced text we are using `SpaceMono` font.
+`Inter` font, for monospaced text we are using `SpaceMono` font.
 
 ## Font licensing
 
-### ProximaNova
+### Inter
 
-ProximaNova is licensed font that cannot be bundled and redistributed along with this package. If you
-want to use this font you have to obtain your own license for this font. You can use for example
-[Adobe Fonts](https://fonts.adobe.com/fonts/proxima-nova) service.
+Inter is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
+It is not bundled with the package due to its size, therefore it needs to be included in your html imports.
+
+Example:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+  rel="stylesheet"
+/>
+```
+
+or by direct import
+
+```
+yarn add @fontsource/inter
+```
 
 ### SpaceMono
 
@@ -31,119 +46,114 @@ and is bundled within this package.
 <FontPalette>
   <FontItem
     title="theme.typography.family.base"
-    subtitle="ProximaNova"
+    subtitle="Inter"
     sampleText={lipsum}
-    fontFamily={typography.family.base}
+    fontFamily={theme.typography.family.base}
   />
   <FontItem
     title="theme.typography.family.mono"
     subtitle="SpaceMono"
     sampleText={lipsum}
-    fontFamily={typography.family.mono}
+    fontFamily={theme.typography.family.mono}
   />
 </FontPalette>
 
 ## Font weights
+
 <FontPalette>
   <FontItem
     title="theme.typography.weight.light"
     subtitle="Light weight"
     sampleText={lipsum}
-    fontWeight={typography.weight.light}
+    fontWeight={theme.typography.weight.light}
   />
   <FontItem
     title="theme.typography.weight.regular"
     subtitle="Regular weight, monospace font can be used only with regular weight"
     sampleText={lipsum}
-    fontWeight={typography.weight.regular}
+    fontWeight={theme.typography.weight.regular}
   />
   <FontItem
     title="theme.typography.weight.medium"
     subtitle="Medium weight"
     sampleText={lipsum}
-    fontWeight={typography.weight.medium}
+    fontWeight={theme.typography.weight.medium}
   />
   <FontItem
     title="theme.typography.weight.semibold"
     subtitle="Semibold weight"
     sampleText={lipsum}
-    fontWeight={typography.weight.semibold}
+    fontWeight={theme.typography.weight.semibold}
   />
   <FontItem
     title="theme.typography.weight.bold"
     subtitle="Bold weight"
     sampleText={lipsum}
-    fontWeight={typography.weight.bold}
+    fontWeight={theme.typography.weight.bold}
   />
 </FontPalette>
 
 ## Font sizes
 
 ### Hedings
+
 <FontPalette>
   <FontItem
     title="theme.typography.size.h0"
     subtitle="Document header and other special cases"
     sampleText="Heading H0"
-    fontSize={typography.size.h0}
-    fontWeight={typography.weight.medium}
-    lineHeight={typography.lineHeight.xxxl}
+    fontSize={theme.typography.size.h0}
+    fontWeight={theme.typography.weight.medium}
   />
   <FontItem
     title="theme.typography.size.h1"
     subtitle="Page-level headers"
     sampleText="Heading H1"
-    fontSize={typography.size.h1}
-    fontWeight={typography.weight.medium}
-    lineHeight={typography.lineHeight.xxl}
+    fontSize={theme.typography.size.h1}
+    fontWeight={theme.typography.weight.medium}
+    lineHeight={theme.typography.lineHeight.xxl}
   />
   <FontItem
     title="theme.typography.size.h2"
     subtitle="Section and column headers"
     sampleText="Heading H2"
-    fontSize={typography.size.h2}
-    fontWeight={typography.weight.medium}
-    lineHeight={typography.lineHeight.xxl}
+    fontSize={theme.typography.size.h2}
+    fontWeight={theme.typography.weight.medium}
+    lineHeight={theme.typography.lineHeight.xxl}
   />
   <FontItem
     title="theme.typography.size.h3"
     subtitle="Subsection headers"
     sampleText="Heading H3"
-    fontSize={typography.size.h3}
-    fontWeight={typography.weight.medium}
-    lineHeight={typography.lineHeight.xl}
+    fontSize={theme.typography.size.h3}
+    fontWeight={theme.typography.weight.medium}
+    lineHeight={theme.typography.lineHeight.xl}
   />
   <FontItem
     title="theme.typography.size.h4"
     subtitle="Block headers"
     sampleText="Heading H4"
-    fontSize={typography.size.h4}
-    fontWeight={typography.weight.medium}
-    lineHeight={typography.lineHeight.lg}
+    fontSize={theme.typography.size.h4}
+    fontWeight={theme.typography.weight.medium}
+    lineHeight={theme.typography.lineHeight.lg}
   />
 </FontPalette>
 
 ### Body text
+
 <FontPalette>
   <FontItem
     title="theme.typography.size.lg"
     subtitle=""
     sampleText={lipsum}
-    fontSize={typography.size.lg}
-    lineHeight={typography.lineHeight.lg}
+    fontSize={theme.typography.size.lg}
+    lineHeight={theme.typography.lineHeight.lg}
   />
   <FontItem
     title="theme.typography.size.md"
     subtitle=""
     sampleText={lipsum}
-    fontSize={typography.size.md}
-    lineHeight={typography.lineHeight.md}
-  />
-  <FontItem
-    title="theme.typography.size.sm"
-    subtitle=""
-    sampleText={lipsum}
-    fontSize={typography.size.sm}
-    lineHeight={typography.lineHeight.md}
+    fontSize={theme.typography.size.md}
+    lineHeight={theme.typography.lineHeight.md}
   />
 </FontPalette>

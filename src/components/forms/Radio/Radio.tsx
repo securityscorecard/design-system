@@ -1,28 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { isNotUndefined } from 'ramda-adjunct';
+import cls from 'classnames';
 
-import {
-  createMarginSpacing,
-  getFormStyle,
-  pxToRem,
-} from '../../../utils/helpers';
+import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';
+import { CLX_COMPONENT } from '../../../theme/constants';
 
-const RadioWrapper = styled.div`
-  & + & {
-    ${createMarginSpacing({ top: 0.25 })};
-  }
-`;
-
-const RadioLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
+const RadioLabel = styled(Label)<
+  React.HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
+>`
   position: relative;
-  display: inline-block;
-  line-height: ${pxToRem(20)};
-  padding-left: ${pxToRem(30)};
+  display: flex;
+  align-items: center;
   margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  ${({ theme, hasLabel }) => {
+    const toggleSize = getFormStyle('toggleSize')({ theme });
+    const leftPadding = hasLabel ? toggleSize + theme.space.sm : toggleSize;
+
+    return css`
+      min-height: ${pxToRem(toggleSize)};
+      line-height: ${pxToRem(toggleSize)};
+      padding-left: ${pxToRem(leftPadding)};
+
+      &::before,
+      &::after {
+        height: ${pxToRem(20)};
+        width: ${pxToRem(20)};
+      }
+    `;
+  }}
 
   &::before,
   &::after {
@@ -31,9 +44,7 @@ const RadioLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
     display: inline-block;
     top: 0;
     left: 0;
-    height: ${pxToRem(20)};
-    width: ${pxToRem(20)};
-    border-radius: 100%;
+    border-radius: ${getRadii('circle')};
   }
 
   &::before {
@@ -42,10 +53,15 @@ const RadioLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
 `;
 
 const RadioInput = styled.input<TogglingInputProps>`
-  display: none;
+  opacity: 0;
+  position: absolute;
 
   &:checked + ${/* sc-selector */ RadioLabel}::after {
     border: 6px solid ${getFormStyle('activeBorderColor')};
+  }
+
+  &:disabled + ${/* sc-selector */ RadioLabel} {
+    color: ${getFormStyle('disabledColor')};
   }
 
   &:disabled + ${/* sc-selector */ RadioLabel}::before {
@@ -55,6 +71,10 @@ const RadioInput = styled.input<TogglingInputProps>`
 
   &:disabled:checked + ${/* sc-selector */ RadioLabel}::after {
     color: ${getFormStyle('disabledActiveColor')};
+  }
+
+  &:focus-visible + ${/* sc-selector */ RadioLabel}::before {
+    border: 2px solid ${getFormStyle('activeBorderColor')};
   }
 
   ${({ isInvalid }) =>
@@ -76,27 +96,36 @@ const Radio: React.FC<RadioProps> = ({
   label,
   isDisabled = false,
   isInvalid = false,
+  className,
   ...props
-}) => (
-  <RadioWrapper>
-    <RadioInput
-      disabled={isDisabled}
-      id={radioId}
-      isInvalid={isInvalid}
-      name={name}
-      type="radio"
-      {...props}
-    />
-    <RadioLabel htmlFor={radioId}>{label}</RadioLabel>
-  </RadioWrapper>
-);
+}) => {
+  const hasLabel = isNotUndefined(label);
+
+  return (
+    <div>
+      <RadioInput
+        className={cls(CLX_COMPONENT, className)}
+        disabled={isDisabled}
+        id={radioId}
+        isInvalid={isInvalid}
+        name={name}
+        type="radio"
+        {...props}
+      />
+      <RadioLabel hasLabel={hasLabel} htmlFor={radioId}>
+        {label}
+      </RadioLabel>
+    </div>
+  );
+};
 
 Radio.propTypes = {
   radioId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node,
   isDisabled: PropTypes.bool,
   isInvalid: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Radio;

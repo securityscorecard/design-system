@@ -1,238 +1,10 @@
-import {
-  createMarginSpacing,
-  createPaddingSpacing,
-  createSpacing,
-  pxToRem,
-} from './helpers';
-
-describe('createSpacing', () => {
-  it('should return correct kind spacing', () => {
-    expect(createSpacing('margin', 'none')).toBe('margin: 0;');
-    expect(createSpacing('padding', 'none')).toBe('padding: 0;');
-  });
-
-  describe('given margin is provided kind', () => {
-    it('should return undefined if no or empty value is provided', () => {
-      expect(createMarginSpacing(undefined)).toBe(undefined);
-      expect(createMarginSpacing({})).toBe(undefined);
-      expect(createMarginSpacing([])).toBe(undefined);
-      expect(createMarginSpacing('')).toBe(undefined);
-    });
-
-    it('should return zero-value if "none" value is provided', () => {
-      expect(createMarginSpacing('none')).toBe('margin: 0;');
-    });
-
-    it('should return correct value is number value is provided', () => {
-      expect(createMarginSpacing(1)).toBe('margin: 1.25rem;');
-    });
-
-    it('should return correct values when "vertical" property is provided', () => {
-      const result = createMarginSpacing({ vertical: 1 });
-      expect(result).toHaveLength(2);
-      expect(result[0]).toBe('margin-top: 1.25rem;');
-      expect(result[1]).toBe('margin-bottom: 1.25rem;');
-    });
-
-    it('should return correct values when "horizontal" property is provided', () => {
-      const result = createMarginSpacing({ horizontal: 1 });
-      expect(result).toHaveLength(2);
-      expect(result[0]).toBe('margin-left: 1.25rem;');
-      expect(result[1]).toBe('margin-right: 1.25rem;');
-    });
-
-    it('should return correct values when "top" property is provided', () => {
-      const result = createMarginSpacing({ top: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('margin-top: 1.25rem;');
-    });
-
-    it('should return correct values when "bottom" property is provided', () => {
-      const result = createMarginSpacing({ bottom: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('margin-bottom: 1.25rem;');
-    });
-
-    it('should return correct values when "left" property is provided', () => {
-      const result = createMarginSpacing({ left: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('margin-left: 1.25rem;');
-    });
-
-    it('should return correct values when "right" property is provided', () => {
-      const result = createMarginSpacing({ right: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('margin-right: 1.25rem;');
-    });
-
-    it('should return correct values when "vertical" and "horizontal" properties are provided', () => {
-      const result = createMarginSpacing({ vertical: 1, horizontal: 1 });
-      expect(result).toHaveLength(4);
-      expect(result[0]).toBe('margin-top: 1.25rem;');
-      expect(result[1]).toBe('margin-bottom: 1.25rem;');
-      expect(result[2]).toBe('margin-left: 1.25rem;');
-      expect(result[3]).toBe('margin-right: 1.25rem;');
-    });
-
-    it('should return correct values when all directional properties are provided', () => {
-      const result = createMarginSpacing({
-        top: 1,
-        bottom: 1,
-        left: 1,
-        right: 1,
-      });
-      expect(result).toHaveLength(4);
-      expect(result[0]).toBe('margin-top: 1.25rem;');
-      expect(result[1]).toBe('margin-bottom: 1.25rem;');
-      expect(result[2]).toBe('margin-left: 1.25rem;');
-      expect(result[3]).toBe('margin-right: 1.25rem;');
-    });
-
-    describe('when properties are mixed together', () => {
-      it('directional values should take precedence', () => {
-        const result = createMarginSpacing({
-          vertical: 2,
-          horizontal: 2,
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        });
-
-        expect(result).toHaveLength(4);
-        expect(result[0]).toBe('margin-top: 0;');
-        expect(result[1]).toBe('margin-bottom: 0;');
-        expect(result[2]).toBe('margin-left: 0;');
-        expect(result[3]).toBe('margin-right: 0;');
-      });
-
-      it('should return correct values', () => {
-        const result = createMarginSpacing({
-          horizontal: 2,
-          top: 1,
-        });
-
-        expect(result).toHaveLength(3);
-        expect(result[0]).toBe('margin-top: 1.25rem;');
-        expect(result[1]).toBe('margin-left: 2.5rem;');
-        expect(result[2]).toBe('margin-right: 2.5rem;');
-      });
-    });
-  });
-
-  describe('given padding is provided kind', () => {
-    it('should return undefined if no or empty value is provided', () => {
-      expect(createPaddingSpacing(undefined)).toBe(undefined);
-      expect(createPaddingSpacing({})).toBe(undefined);
-      expect(createPaddingSpacing([])).toBe(undefined);
-      expect(createPaddingSpacing('')).toBe(undefined);
-    });
-
-    it('should return zero-value if "none" value is provided', () => {
-      expect(createPaddingSpacing('none')).toBe('padding: 0;');
-    });
-
-    it('should return correct value is number value is provided', () => {
-      expect(createPaddingSpacing(1)).toBe('padding: 1.25rem;');
-    });
-
-    it('should return correct values when "vertical" property is provided', () => {
-      const result = createPaddingSpacing({ vertical: 1 });
-      expect(result).toHaveLength(2);
-      expect(result[0]).toBe('padding-top: 1.25rem;');
-      expect(result[1]).toBe('padding-bottom: 1.25rem;');
-    });
-
-    it('should return correct values when "horizontal" property is provided', () => {
-      const result = createPaddingSpacing({ horizontal: 1 });
-      expect(result).toHaveLength(2);
-      expect(result[0]).toBe('padding-left: 1.25rem;');
-      expect(result[1]).toBe('padding-right: 1.25rem;');
-    });
-
-    it('should return correct values when "top" property is provided', () => {
-      const result = createPaddingSpacing({ top: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('padding-top: 1.25rem;');
-    });
-
-    it('should return correct values when "bottom" property is provided', () => {
-      const result = createPaddingSpacing({ bottom: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('padding-bottom: 1.25rem;');
-    });
-
-    it('should return correct values when "left" property is provided', () => {
-      const result = createPaddingSpacing({ left: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('padding-left: 1.25rem;');
-    });
-
-    it('should return correct values when "right" property is provided', () => {
-      const result = createPaddingSpacing({ right: 1 });
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe('padding-right: 1.25rem;');
-    });
-
-    it('should return correct values when "vertical" and "horizontal" properties are provided', () => {
-      const result = createPaddingSpacing({ vertical: 1, horizontal: 1 });
-      expect(result).toHaveLength(4);
-      expect(result[0]).toBe('padding-top: 1.25rem;');
-      expect(result[1]).toBe('padding-bottom: 1.25rem;');
-      expect(result[2]).toBe('padding-left: 1.25rem;');
-      expect(result[3]).toBe('padding-right: 1.25rem;');
-    });
-
-    it('should return correct values when all directional properties are provided', () => {
-      const result = createPaddingSpacing({
-        top: 1,
-        bottom: 1,
-        left: 1,
-        right: 1,
-      });
-      expect(result).toHaveLength(4);
-      expect(result[0]).toBe('padding-top: 1.25rem;');
-      expect(result[1]).toBe('padding-bottom: 1.25rem;');
-      expect(result[2]).toBe('padding-left: 1.25rem;');
-      expect(result[3]).toBe('padding-right: 1.25rem;');
-    });
-
-    describe('when properties are mixed together', () => {
-      it('directional values should take precedence', () => {
-        const result = createPaddingSpacing({
-          vertical: 2,
-          horizontal: 2,
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        });
-
-        expect(result).toHaveLength(4);
-        expect(result[0]).toBe('padding-top: 0;');
-        expect(result[1]).toBe('padding-bottom: 0;');
-        expect(result[2]).toBe('padding-left: 0;');
-        expect(result[3]).toBe('padding-right: 0;');
-      });
-
-      it('should return correct values', () => {
-        const result = createPaddingSpacing({
-          horizontal: 2,
-          top: 1,
-        });
-
-        expect(result).toHaveLength(3);
-        expect(result[0]).toBe('padding-top: 1.25rem;');
-        expect(result[1]).toBe('padding-left: 2.5rem;');
-        expect(result[2]).toBe('padding-right: 2.5rem;');
-      });
-    });
-  });
-});
+import { getRadii } from '.';
+import { ColorTypes, RadiusTypes, theme } from '../theme';
+import { abbreviateNumber, getColor, pxToRem } from './helpers';
 
 describe('pxToRem', () => {
   it('should not convert 0 value', () => {
-    expect(pxToRem(0)).toBe('0');
+    expect(pxToRem(0)).toBe('0rem');
   });
 
   it('should not convert string value', () => {
@@ -247,6 +19,90 @@ describe('pxToRem', () => {
   });
 
   it('should return correct value is arguments are mixed', () => {
-    expect(pxToRem(16, 0, 8, 'auto')).toBe('1rem 0 0.5rem auto');
+    expect(pxToRem(16, 0, 8, 'auto')).toBe('1rem 0rem 0.5rem auto');
+  });
+});
+
+describe('abbreviateNumber', () => {
+  it('should convert long number to abbreviated format', () => {
+    expect(abbreviateNumber(1000)).toBe('1K');
+    expect(abbreviateNumber(1000000)).toBe('1M');
+    expect(abbreviateNumber(1000000000)).toBe('1B');
+  });
+
+  it('should display rounded value with maximum of 2 decimals', () => {
+    expect(abbreviateNumber(1000)).toBe('1K');
+    expect(abbreviateNumber(1100)).toBe('1.1K');
+    expect(abbreviateNumber(1110)).toBe('1.11K');
+    expect(abbreviateNumber(1114)).toBe('1.11K');
+    expect(abbreviateNumber(1115)).toBe('1.12K');
+    expect(abbreviateNumber(1119)).toBe('1.12K');
+  });
+});
+
+describe('getColor', () => {
+  it('should return correct color for current keys', () => {
+    expect(getColor(ColorTypes.primary900, { theme })).toBe('#1b0471');
+    expect(getColor(ColorTypes.primary800, { theme })).toBe('#2c1193');
+    expect(getColor(ColorTypes.primary700, { theme })).toBe('#3b1ab7');
+    expect(getColor(ColorTypes.primary600, { theme })).toBe('#4d29d4');
+    expect(getColor(ColorTypes.primary500, { theme })).toBe('#6641f3');
+    expect(getColor(ColorTypes.primary400, { theme })).toBe('#8263f5');
+    expect(getColor(ColorTypes.primary300, { theme })).toBe('#a995f4');
+    expect(getColor(ColorTypes.primary200, { theme })).toBe('#cabdfb');
+    expect(getColor(ColorTypes.primary100, { theme })).toBe('#e5dffd');
+    expect(getColor(ColorTypes.primary50, { theme })).toBe('#f0ecfe');
+    expect(getColor(ColorTypes.neutral1000, { theme })).toBe('#000');
+    expect(getColor(ColorTypes.neutral900, { theme })).toBe('#2a2a2a');
+    expect(getColor(ColorTypes.neutral800, { theme })).toBe('#555555');
+    expect(getColor(ColorTypes.neutral700, { theme })).toBe('#686868');
+    expect(getColor(ColorTypes.neutral600, { theme })).toBe('#888888');
+    expect(getColor(ColorTypes.neutral500, { theme })).toBe('#a8a8a8');
+    expect(getColor(ColorTypes.neutral400, { theme })).toBe('#d8d8d8');
+    expect(getColor(ColorTypes.neutral300, { theme })).toBe('#e8e8e8');
+    expect(getColor(ColorTypes.neutral200, { theme })).toBe('#f3f3f3');
+    expect(getColor(ColorTypes.neutral100, { theme })).toBe('#f9f9f9');
+    expect(getColor(ColorTypes.neutral0, { theme })).toBe('#fff');
+    expect(getColor(ColorTypes.info50, { theme })).toBe('#f0ecfe');
+    expect(getColor(ColorTypes.info100, { theme })).toBe('#dad1fc');
+    expect(getColor(ColorTypes.info500, { theme })).toBe('#6641f3');
+    expect(getColor(ColorTypes.info600, { theme })).toBe('#5433d2');
+    expect(getColor(ColorTypes.info700, { theme })).toBe('#41299a');
+    expect(getColor(ColorTypes.success50, { theme })).toBe('#edf6ef');
+    expect(getColor(ColorTypes.success100, { theme })).toBe('#d3e9d7');
+    expect(getColor(ColorTypes.success500, { theme })).toBe('#49a25a');
+    expect(getColor(ColorTypes.success600, { theme })).toBe('#3e8a4d');
+    expect(getColor(ColorTypes.success700, { theme })).toBe('#347340');
+    expect(getColor(ColorTypes.warning50, { theme })).toBe('#faf4e1');
+    expect(getColor(ColorTypes.warning100, { theme })).toBe('#f4e5af');
+    expect(getColor(ColorTypes.warning500, { theme })).toBe('#e1c048');
+    expect(getColor(ColorTypes.warning600, { theme })).toBe('#c1a337');
+    expect(getColor(ColorTypes.warning700, { theme })).toBe('#9f8321');
+    expect(getColor(ColorTypes.error50, { theme })).toBe('#f7e9e9');
+    expect(getColor(ColorTypes.error100, { theme })).toBe('#edc9ca');
+    expect(getColor(ColorTypes.error500, { theme })).toBe('#b21f24');
+    expect(getColor(ColorTypes.error600, { theme })).toBe('#971a1f');
+    expect(getColor(ColorTypes.error700, { theme })).toBe('#7e161a');
+    expect(getColor(ColorTypes.gradeA, { theme })).toBe('#4aba00');
+    expect(getColor(ColorTypes.gradeB, { theme })).toBe('#e5bd00');
+    expect(getColor(ColorTypes.gradeC, { theme })).toBe('#f08f00');
+    expect(getColor(ColorTypes.gradeD, { theme })).toBe('#f1431c');
+    expect(getColor(ColorTypes.gradeF, { theme })).toBe('#b40000');
+    expect(getColor(ColorTypes.severityInformational, { theme })).toBe(
+      '#0275D8',
+    );
+    expect(getColor(ColorTypes.severityPositive, { theme })).toBe('#49A25A');
+    expect(getColor(ColorTypes.severityLow, { theme })).toBe('#E4BE00');
+    expect(getColor(ColorTypes.severityMedium, { theme })).toBe('#E5883C');
+    expect(getColor(ColorTypes.severityHigh, { theme })).toBe('#B21F24');
+  });
+});
+
+describe('getRadii', () => {
+  it('should return correct value', () => {
+    expect(getRadii(RadiusTypes.default, { theme })).toBe('4px');
+    expect(getRadii(RadiusTypes.circle, { theme })).toBe('100%');
+    expect(getRadii(RadiusTypes.half, { theme })).toBe('2px');
+    expect(getRadii(RadiusTypes.round, { theme })).toBe('50em');
   });
 });

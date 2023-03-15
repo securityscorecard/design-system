@@ -1,4 +1,4 @@
-const {includes} = require('ramda')
+const { includes } = require('ramda');
 
 module.exports = {
   stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
@@ -8,20 +8,30 @@ module.exports = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-docs',
     '@storybook/addon-controls',
+    '@storybook/addon-measure',
+    'storycap',
+    'storybook-addon-designs',
+    'storybook-addon-outline',
+    '@geometricpanda/storybook-addon-badges',
   ],
+  features: {
+    postcss: false,
+  },
   typescript: {
     check: false,
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
+      // shouldExtractValuesFromUnion: true, // disable it for now as it cause issues in SBv6.2
       shouldExtractLiteralValuesFromEnum: true,
-      shouldExtractValuesFromUnion: true,
       propFilter: (prop) => {
         if (prop.parent) {
           // filter inherited props
-          return !prop.parent.fileName.includes("node_modules");
+          return !prop.parent.fileName.includes("node_modules/@types/react/")
+            && !prop.parent.fileName.includes("node_modules/@emotion/")
+            && !prop.parent.fileName.includes("node_modules/@types/node/")
+            && !prop.parent.fileName.includes("node_modules/typescript/");
         }
-
         // filter inherited styled-components props
         return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
       },
