@@ -1,3 +1,19 @@
+# [1.0.0-alpha.245](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.244...v1.0.0-alpha.245) (2023-03-15)
+
+
+### Bug Fixes
+
+* **Button:** update success variant colors ([a481557](https://github.com/securityscorecard/design-system/commit/a48155765f7031d5b8c1c01b5b82b527adadbcd8))
+* **Dropdown:** implement focus trap ([4dd24b8](https://github.com/securityscorecard/design-system/commit/4dd24b86134729595d5cd7589d3f647ef34a6e16))
+* **DropdownMenu:** add overflow hidden ([6e47e49](https://github.com/securityscorecard/design-system/commit/6e47e4983e963f112f0839dcce6c7e44e8ea134a))
+* **Modal:** adjust text size ([836638e](https://github.com/securityscorecard/design-system/commit/836638e6c3e752b56f6f6b1308aa9c3f975bfd82))
+* **NotificationsManager:** set autoDismiss default to true ([cd59599](https://github.com/securityscorecard/design-system/commit/cd59599cf0c301eb7eb51317ae211d726470b64e))
+
+
+### Features
+
+* **Banner:** add wide layout option ([7b9bb2f](https://github.com/securityscorecard/design-system/commit/7b9bb2f34cd3f73e76727e1a0dd55853d0e09a3a))
+
 # [1.0.0-alpha.244](https://github.com/securityscorecard/design-system/compare/v1.0.0-alpha.243...v1.0.0-alpha.244) (2023-02-15)
 
 
