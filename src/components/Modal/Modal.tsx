@@ -10,7 +10,7 @@ import { ModalSizes } from './Modal.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Inline, Padbox } from '../layout';
-import { H3 } from '../typographyLegacy';
+import { H4 } from '../typographyLegacy';
 import { Overlay } from '../_internal/BaseOverlay';
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
@@ -44,7 +44,7 @@ const BaseModal = styled.div<{ $maxWidth: number }>`
   background-color: ${getColor('neutral.0')};
 `;
 
-const Title = styled(H3)`
+const Title = styled(H4)`
   margin: 0;
 `;
 

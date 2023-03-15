@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useContainerQuery } from 'react-container-query';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -50,16 +51,42 @@ const ContentWrapper = styled(Padbox)`
   padding-left: 0rem;
 `;
 
-/* stylelint-disable */
 const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
-  max-width: 125ch;
+  max-width: 115ch;
   color: ${getColor('neutral.1000')};
-  display: -webkit-box;
-  overflow-y: auto;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 `;
-/* stylelint-enable */
+
+const CHANGE_LAYOUT_BREAKPOINT = 'change-banner-layout';
+
+const BannerContent: React.FC<BannerProps> = ({
+  variant,
+  children,
+  actions,
+}) => (
+  <>
+    <Text $variant={variant} as="div" size={TextSizes.md}>
+      {children}
+    </Text>
+    {isNonEmptyArray(actions) && (
+      <Inline gap={SpaceSizes.mdPlus}>
+        {actions.map((action) => (
+          <StyledButton
+            key={action.name}
+            $variant={variant}
+            color={ButtonColors.secondary}
+            href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+            name={action.name}
+            to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+            variant={ButtonVariants.text}
+            onClick={action.onClick}
+          >
+            {action.label}
+          </StyledButton>
+        ))}
+      </Inline>
+    )}
+  </>
+);
 
 const Banner: React.FC<BannerProps> = ({
   children,
@@ -75,10 +102,20 @@ const Banner: React.FC<BannerProps> = ({
   __current,
   __total,
   className,
+  changeLayoutBreakpoint = 960,
   ...props
 }) => {
+  const changeLayoutQuery = useMemo(
+    () => ({
+      [CHANGE_LAYOUT_BREAKPOINT]: { minWidth: changeLayoutBreakpoint },
+    }),
+    [changeLayoutBreakpoint],
+  );
+  const [query, containerRef] = useContainerQuery(changeLayoutQuery, undefined);
+  const isInline = query[CHANGE_LAYOUT_BREAKPOINT];
   return (
     <StyledPadbox
+      ref={containerRef}
       $variant={variant}
       className={cls(CLX_COMPONENT, className)}
       paddingSize={SpaceSizes.sm}
@@ -95,35 +132,23 @@ const Banner: React.FC<BannerProps> = ({
       >
         <ContentWrapper paddingSize={SpaceSizes.md}>
           <Inline align="flex-start" gap={SpaceSizes.xl} stretch={1}>
-            <Stack align="center" gap={SpaceSizes.md}>
-              <Text $variant={variant} as="div" size={TextSizes.md}>
-                {children}
-              </Text>
-              {isNonEmptyArray(actions) && (
-                <Inline gap={SpaceSizes.mdPlus}>
-                  {actions.map((action) => (
-                    <StyledButton
-                      key={action.name}
-                      $variant={variant}
-                      color={ButtonColors.secondary}
-                      href={
-                        (action as AbsoluteLinkActionKind<[React.MouseEvent]>)
-                          .href
-                      }
-                      name={action.name}
-                      to={
-                        (action as RelativeLinkActionKind<[React.MouseEvent]>)
-                          .to
-                      }
-                      variant={ButtonVariants.text}
-                      onClick={action.onClick}
-                    >
-                      {action.label}
-                    </StyledButton>
-                  ))}
-                </Inline>
-              )}
-            </Stack>
+            {isInline ? (
+              <Inline
+                align="flex-start"
+                gap={SpaceSizes.md}
+                justify="space-between"
+              >
+                <BannerContent actions={actions} variant={variant}>
+                  {children}
+                </BannerContent>
+              </Inline>
+            ) : (
+              <Stack align="center" gap={SpaceSizes.md}>
+                <BannerContent actions={actions} variant={variant}>
+                  {children}
+                </BannerContent>
+              </Stack>
+            )}
             {__hasPagination && (
               <Inline gap={SpaceSizes.sm}>
                 <StyledButton

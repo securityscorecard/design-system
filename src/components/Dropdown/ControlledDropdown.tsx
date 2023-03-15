@@ -9,6 +9,7 @@ import { ControlledDropdownProps } from './Dropdown.types';
 import DropdownPane from './DropdownPane';
 import { DropdownPlacements } from './Dropdown.enums';
 import { mergeRefs } from '../../utils/mergeRefs';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 const ControlledDropdown = forwardRef<
   HTMLDivElement,
@@ -25,6 +26,7 @@ const ControlledDropdown = forwardRef<
       maxPaneWidth = 270,
       isPaneElevated = false,
       hasPaneArrow = false,
+      focusTrap = true,
       onClickOut,
       style = {},
       ...props
@@ -40,6 +42,7 @@ const ControlledDropdown = forwardRef<
       placement,
     });
 
+    useFocusTrap({ el: paneEl, enabled: isOpen && focusTrap });
     const { Portal } = usePortal();
 
     return isOpen ? (
