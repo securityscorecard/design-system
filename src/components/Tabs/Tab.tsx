@@ -9,25 +9,26 @@ import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
+import { useTabsContext } from './Tabs';
 
-const Tab: FC<TabProps> = ({
-  children,
-  isSelected,
-  isExpanded = false,
-  onClick,
-  color,
-  variant = TabVariants.underline,
-  value,
-}) => {
+const Tab: FC<TabProps> = ({ children, color, value }) => {
   const isLink = value?.toString()?.startsWith('/');
+  const {
+    isExpanded = false,
+    selectTab,
+    variant = TabVariants.underline,
+    selectedValue,
+    selectedPatternMatcher,
+  } = useTabsContext();
+  const isSelected = selectedPatternMatcher(value, selectedValue);
   const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      onClick(value);
+      selectTab(value);
     }
   };
   const handler = isLink
     ? { to: value }
-    : { onClick: () => onClick(value), onKeyDown: (e) => handleKeyDown(e) };
+    : { onClick: () => selectTab(value), onKeyDown: (e) => handleKeyDown(e) };
   let RouterLink = null;
 
   if (isLink) {

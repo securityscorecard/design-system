@@ -2,6 +2,7 @@ import type { ReactNode, ReactText } from 'react';
 import type { SpacingProps } from '../../types/spacing.types';
 import type { BaseLabelProps } from '../_internal/BaseTabs/BaseTabLabel.types';
 import type { PadboxProps } from '../layout/Padbox/Padbox';
+import type { TabVariants } from './Tabs.enums';
 
 export interface LabelProps extends BaseLabelProps, PadboxProps {}
 
@@ -16,7 +17,7 @@ export interface TabProps {
 }
 
 export interface TabsProps extends SpacingProps {
-  variant?: LabelProps['$variant'];
+  variant?: keyof typeof TabVariants;
   selectedValue: ReactText;
   selectedPatternMatcher?: (
     value: ReactText,

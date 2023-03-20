@@ -4,7 +4,7 @@ import type { SSCIcons } from '../Icon/Icon.types';
 
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isNotUndefined } from 'ramda-adjunct';
+import { isNilOrEmpty, isNotUndefined } from 'ramda-adjunct';
 
 import { getFontWeight } from '../../utils/helpers';
 import { Text, TextEnums } from '../typographyLegacy/Text';
@@ -24,7 +24,6 @@ const ListItem = styled.li`
 
 const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
   children,
-  isSelected = false,
   to = undefined,
   href = undefined,
   iconName,
@@ -32,6 +31,7 @@ const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
 }) => {
   const hasIcon = isNotUndefined(iconName);
   const label = hasIcon ? { 'aria-label': children } : { children };
+  const isSelected = isNilOrEmpty(to) && isNilOrEmpty(href);
   return (
     <ListItem>
       {isSelected ? (

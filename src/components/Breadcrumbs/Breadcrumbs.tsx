@@ -1,16 +1,13 @@
 import type { FC, MouseEvent, ReactElement, ReactNode } from 'react';
-import type {
-  BreadcrumbItemProps,
-  BreadcrumbsProps,
-} from './Breadcrumbs.types';
+import type { BreadcrumbsProps } from './Breadcrumbs.types';
 import type { ActionKinds } from '../../types/action.types';
 
 import PropTypes from 'prop-types';
 import { slice } from 'ramda';
 import styled from 'styled-components';
-import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
+import { isNotNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
-import { Children, cloneElement, isValidElement } from 'react';
+import { Children, isValidElement } from 'react';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
@@ -97,24 +94,7 @@ const renderItemsBeforeAndAfter = (
   ];
 };
 
-const Breadcrumbs: FC<BreadcrumbsProps> = ({
-  children,
-  className,
-  ...props
-}) => {
-  const allItems = Children.map(children, (breadcrumbItem) => {
-    if (!isValidElement(breadcrumbItem)) {
-      return null;
-    }
-
-    return cloneElement(breadcrumbItem as ReactElement<BreadcrumbItemProps>, {
-      isSelected:
-        isNilOrEmpty(breadcrumbItem.props.to) &&
-        isNilOrEmpty(breadcrumbItem.props.href),
-      ...props,
-    });
-  });
-
+const Breadcrumbs: FC<BreadcrumbsProps> = ({ children, className }) => {
   const allDropdownActions = slice(
     itemsBeforeCollapse,
     -Math.abs(itemsAfterCollapse),
@@ -149,8 +129,8 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
       >
         {insertSeparators(
           allDropdownActions.length < 2
-            ? allItems
-            : renderItemsBeforeAndAfter(allItems, allDropdownActions),
+            ? children
+            : renderItemsBeforeAndAfter(children, allDropdownActions),
         )}
       </InlineOrderedList>
     </BreadcrumbsWrapper>
