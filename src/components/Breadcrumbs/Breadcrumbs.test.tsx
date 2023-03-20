@@ -6,7 +6,7 @@ import BreadcrumbItem from './BreadcrumbItem';
 import Breadcrumbs from './Breadcrumbs';
 
 describe('Breadcrumbs', () => {
-  it('should not show a dropdown button when breadcrumb have less than 3 items', () => {
+  it('should not show a dropdown button when breadcrumb have less than 5 items', () => {
     renderWithProviders(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
@@ -19,7 +19,7 @@ describe('Breadcrumbs', () => {
     expect(dropdownButton).not.toBeInTheDocument();
   });
 
-  it('should show a dropdown button when breadcrumb have more than 3 items', () => {
+  it('should show a dropdown button when breadcrumb have more than 5 items', () => {
     renderWithProviders(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
@@ -40,7 +40,6 @@ describe('Breadcrumbs', () => {
     expect(screen.queryByText(/Parent1/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Parent2/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Parent3/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Parent4/i)).not.toBeInTheDocument();
   });
 
   it('should show all items inside dropdown when dropdown is opened', async () => {
@@ -69,7 +68,6 @@ describe('Breadcrumbs', () => {
     expect(screen.getByText(/Parent1/i)).toBeVisible();
     expect(screen.getByText(/Parent2/i)).toBeVisible();
     expect(screen.getByText(/Parent3/i)).toBeVisible();
-    expect(screen.getByText(/Parent4/i)).toBeVisible();
   });
 
   it('should show items within dropdown using correct order ', async () => {
@@ -95,7 +93,7 @@ describe('Breadcrumbs', () => {
 
     // Check reverse index for links within the dropdown
     const links = screen.queryAllByText('Link', { exact: false });
-    expect(links.findIndex((item) => item.textContent === 'Link5')).toBe(3);
+    expect(links.findIndex((item) => item.textContent === 'Link4')).toBe(2);
     expect(links.findIndex((item) => item.textContent === 'Link2')).toBe(0);
   });
 
