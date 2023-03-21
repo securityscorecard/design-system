@@ -23,8 +23,8 @@ yarn run storybook
 
 ### Development in third-party application
 
-To avoid version conflicts within the application we need to link `react`, `react-dom` 
-and `styled-components` libraries from the third-party application into `design-system`.
+To avoid version conflicts within the application we need to link `react`, `react-dom`
+and `styled-components` libraries from the third-party application into `design-system`.
 
 ```sh
 cd path/to/application
@@ -33,7 +33,7 @@ cd ../react-dom && yarn link # register react-dom
 cd ../styled-components && yarn link # register styled-components
 ```
 
-Then we need to use registered packages in `design-system`, register package as the link and start build script.
+Then we need to use registered packages in `design-system`, register package as the link and start build script.
 
 ```sh
 cd path/to/design-system
@@ -42,7 +42,7 @@ yarn link # register design-system
 yarn build --watch # start build in watch mode
 ```
 
-At the end, we need to link `design-system` in a third-party application.
+At the end, we need to link `design-system` in a third-party application.
 
 ```sh
 cd path/to/application

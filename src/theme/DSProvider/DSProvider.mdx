@@ -1,7 +1,8 @@
-import { Meta, ArgsTable } from '@storybook/addon-docs';
+import { ArgsTable, Meta } from '@storybook/addon-docs';
+
 import DSProvider from './DSProvider';
 
-<Meta title="Theme/DSProvider" component={DSProvider} />
+<Meta title="Theme/DSProvider" />
 
 # DSProvider
 
@@ -10,10 +11,10 @@ You can extend [default Design System theme](/docs/theme-theme-object--page) wit
 values when `theme` prop is passed into the component. This component also includes reset CSS rules
 (this is opt-out feature via `config.hasIncludedGlobalStyles` property).
 
-
 <ArgsTable of={DSProvider} />
 
 ### Usage with default theme
+
 ```jsx
 // AppComponent.jsx
 import { DSProvider } from '@securityscorecard/design-system'
@@ -29,6 +30,7 @@ const AppComponent = (
 ```
 
 ### Usage with extended theme
+
 ```jsx
 // AppComponent.jsx
 import { DSProvider } from '@securityscorecard/design-system'
@@ -50,5 +52,3 @@ const AppComponent = (
   </Provider>
 );
 ```
-
-
