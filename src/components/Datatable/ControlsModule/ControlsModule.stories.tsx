@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { ControlsModuleProps } from './ControlsModule.types';
 import type { Data } from '../../_internal/BaseTable/mocks/types';
 

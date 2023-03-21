@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { Option, SelectProps } from './Select.types';
 
 import { action } from '@storybook/addon-actions';
@@ -210,7 +210,7 @@ DisabledOptions.args = {
   defaultIsMenuOpen: true,
 };
 
-export const MultiSelect: Story<SelectProps<true>> = (args) => (
+export const MultiSelect = (args) => (
   <Stack gap="md">
     <Select {...args} isClearable />
     <Select {...args} defaultInputValue="Cu" />
@@ -264,7 +264,7 @@ CustomMenuActions.args = {
   ],
 };
 
-export const PillTruncation: Story<SelectProps<true>> = (args) => (
+export const PillTruncation = (args) => (
   <Stack gap="md">
     <Heading size="h3">Default truncation N=16</Heading>
     <Select {...args} />
@@ -280,23 +280,18 @@ PillTruncation.args = {
   defaultValue: [longOptions[2], longOptions[1], longOptions[0]],
 };
 
-export const PillWrapping: Story<SelectProps<true>> = (args) => (
-  <div style={{ width: '200px' }}>
-    <Select {...args} />
-  </div>
-);
+export const PillWrapping: Story<SelectProps<true>> = SelectTemplate.bind({});
 PillWrapping.args = {
   ...MultiSelect.args,
   color: PillColors.gray,
   options: longOptions,
   defaultValue: [longOptions[2], longOptions[1]],
 };
+PillWrapping.decorators = [
+  (storyFn) => <div style={{ width: '200px' }}>{storyFn()}</div>,
+];
 
-export const MaxVisibleItem: Story<SelectProps<true>> = (args) => (
-  <div>
-    <Select {...args} />
-  </div>
-);
+export const MaxVisibleItem: Story<SelectProps<true>> = SelectTemplate.bind({});
 MaxVisibleItem.args = {
   ...MultiSelect.args,
   options: longOptions,
@@ -311,44 +306,39 @@ MaxVisibleItem.args = {
   maxVisibleItem: 3,
 };
 
-export const CustomOptionLabel: Story<SelectProps<true>> = (args) => (
-  <Select
-    formatOptionLabel={(data) => (
-      <Inline align="center" gap="xs">
-        <span>({data.value})</span>
-        <span>{data.label}</span>
-      </Inline>
-    )}
-    {...args}
-  />
+export const CustomOptionLabel: Story<SelectProps<true>> = SelectTemplate.bind(
+  {},
 );
 CustomOptionLabel.args = {
   ...MultiSelect.args,
   defaultValue: [options[1], options[2]],
+  formatOptionLabel: (data) => (
+    <Inline align="center" gap="xs">
+      <span>({data.value})</span>
+      <span>{data.label}</span>
+    </Inline>
+  ),
 };
 
-export const CustomMultiValueLabel: Story<SelectProps<true>> = (args) => (
-  <Select
-    formatOptionLabel={(data, meta) => {
-      const renderMultiValueLabel = meta.context === 'value';
-
-      return renderMultiValueLabel ? (
-        <Inline align="center" gap="xs">
-          <span>({data.value})</span>
-          <span>{data.label}</span>
-        </Inline>
-      ) : (
-        <span>{data.label}</span>
-      );
-    }}
-    {...args}
-  />
-);
+export const CustomMultiValueLabel: Story<SelectProps<true>> =
+  SelectTemplate.bind({});
 CustomMultiValueLabel.args = {
   ...Default.args,
   isMenuPositionRelative: true,
   isMulti: true,
   defaultIsMenuOpen: true,
+  formatOptionLabel: (data, meta) => {
+    const renderMultiValueLabel = meta.context === 'value';
+
+    return renderMultiValueLabel ? (
+      <Inline align="center" gap="xs">
+        <span>({data.value})</span>
+        <span>{data.label}</span>
+      </Inline>
+    ) : (
+      <span>{data.label}</span>
+    );
+  },
 };
 
 const MyMenuList = ({ children }) => {
@@ -368,19 +358,17 @@ WithCustomComponents.args = {
   },
 };
 
-export const CustomGroupLabel: Story<SelectProps<true>> = (args) => (
-  <Select
-    formatGroupLabel={(group) => (
-      <Inline gap="md" justify="space-between">
-        <Text isBold>{group.label}</Text>
-        <Pill label={group.options.length.toString()} />
-      </Inline>
-    )}
-    {...args}
-  />
+export const CustomGroupLabel: Story<SelectProps<true>> = SelectTemplate.bind(
+  {},
 );
 CustomGroupLabel.args = {
   ...MultiSelect.args,
+  formatGroupLabel: (group) => (
+    <Inline gap="md" justify="space-between">
+      <Text isBold>{group.label}</Text>
+      <Pill label={group.options.length.toString()} />
+    </Inline>
+  ),
 };
 
 const filterOptions = (inputValue: string) => {

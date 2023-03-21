@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 
 import { useCallback, useEffect, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
