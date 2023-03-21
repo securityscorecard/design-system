@@ -50,7 +50,7 @@ export const WithTwoItems: Story<BreadcrumbsProps> = () => {
   );
 };
 
-export const WithMoreThanThreeItems: Story<BreadcrumbsProps> = () => {
+export const WithDropdown: Story<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
       <BreadcrumbItem href="#" iconName="cog">
@@ -61,6 +61,20 @@ export const WithMoreThanThreeItems: Story<BreadcrumbsProps> = () => {
       <BreadcrumbItem href="#">Parent3</BreadcrumbItem>
       <BreadcrumbItem href="#">Parent4</BreadcrumbItem>
       <BreadcrumbItem href="#">Parent5</BreadcrumbItem>
+      <BreadcrumbItem href="">Current</BreadcrumbItem>
+    </Breadcrumbs>
+  );
+};
+
+export const OnLimit: Story<BreadcrumbsProps> = () => {
+  return (
+    <Breadcrumbs>
+      <BreadcrumbItem href="#" iconName="cog">
+        Root
+      </BreadcrumbItem>
+      <BreadcrumbItem href="#">Parent1</BreadcrumbItem>
+      <BreadcrumbItem href="#">Parent2</BreadcrumbItem>
+      <BreadcrumbItem href="#">Parent3</BreadcrumbItem>
       <BreadcrumbItem href="">Current</BreadcrumbItem>
     </Breadcrumbs>
   );
@@ -78,4 +92,8 @@ export const WithRelativeLinks: Story<BreadcrumbsProps> = () => {
       <BreadcrumbItem to="">Current</BreadcrumbItem>
     </Breadcrumbs>
   );
+};
+
+WithRelativeLinks.parameters = {
+  screenshot: { skip: true },
 };

@@ -17,6 +17,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { Text, TextEnums } from '../../typographyLegacy';
 import { Padbox, PadboxEnums } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { InteractiveElement } from '../../Dropdown/Dropdown.types';
 
 export const List = styled.ul`
   list-style: none;
@@ -46,6 +47,12 @@ export const DropdownLink = styled(Padbox).withConfig({
   }
 `;
 
+const getOptions = () => {
+  return Array.from(
+    document.querySelectorAll<InteractiveElement>('[data-dropdown-item]'),
+  );
+};
+
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   actions,
   defaultIsOpen = false,
@@ -60,11 +67,42 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     hidePane: noop,
     showPane: noop,
   });
+  const containerRef = useRef(null);
   const trigger: React.ReactElement = (
     <span className={cls(CLX_COMPONENT, className)}>
       {isFunction(children) ? children(isActive) : children}
     </span>
   );
+
+  const handleKeyDown = (event) => {
+    const selectOption = (direction = 'DOWN') => {
+      const options = getOptions();
+      const index = options.indexOf(
+        document.activeElement as InteractiveElement,
+      );
+      const target = options[index + (direction === 'DOWN' ? 1 : -1)];
+      target?.focus();
+    };
+    const fn = {
+      // Focus the next sub-item or item.
+      ArrowDown: () => selectOption('DOWN'),
+      // Focus the previous sub-item or item.
+      ArrowUp: () => selectOption('UP'),
+    }[event.key];
+    fn?.();
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      const containsActiveElement = containerRef.current?.contains(
+        document.activeElement,
+      );
+      if (!containsActiveElement) {
+        dropdownRef.current?.hidePane();
+      }
+    });
+  };
+
   return (
     <Dropdown
       ref={dropdownRef}
@@ -76,7 +114,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
       onClose={() => setIsActive(false)}
       onOpen={() => setIsActive(true)}
     >
-      <List>
+      <List ref={containerRef} onBlur={handleBlur} onKeyDown={handleKeyDown}>
         {actions.map((action) => {
           let RouterLink = null;
           if (
@@ -118,6 +156,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             >
               <DropdownLink
                 as={domTag}
+                data-dropdown-item="true"
                 data-interactive="true"
                 href={
                   (

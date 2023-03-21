@@ -43,9 +43,8 @@ const InlineOrderedList = styled(Inline)`
   list-style: none;
 `;
 
-const itemsAfterCollapse = 2;
+const itemsAfterCollapse = 3;
 const itemsBeforeCollapse = 1;
-const maxItems = 3;
 
 // Build list of breadcrumbs interspersing a separator
 const insertSeparators = (items: React.ReactElement[]) => {
@@ -65,33 +64,33 @@ const insertSeparators = (items: React.ReactElement[]) => {
   }, []);
 };
 
-// this renders the list of items only when the quantity
-// is bigger than maxItems
+const renderDropdown = (actions: ActionKinds<React.MouseEvent[]>[]) => (
+  <li key="breadcrumbs-dropdown">
+    <DropdownMenu
+      actions={actions}
+      paneWidth={270}
+      placement="bottom-start"
+      aria-hidden
+    >
+      <DropdownBreadcrumbLink
+        aria-label="Open breadcrumbs menu"
+        color="secondary"
+        iconName={SSCIconNames.ellipsisH}
+        variant="text"
+      />
+    </DropdownMenu>
+  </li>
+);
+
+// this renders the list of items only when the count of the actions is bigger than 2
 const renderItemsBeforeAndAfter = (
   allItems: React.ReactNode[],
   allDropdownActions: ActionKinds<React.MouseEvent[]>[],
 ) => {
-  const dropdown = () => (
-    <li key="breadcrumbs-dropdown">
-      <DropdownMenu
-        actions={allDropdownActions}
-        paneWidth={270}
-        placement="bottom-start"
-        aria-hidden
-      >
-        <DropdownBreadcrumbLink
-          aria-label="Open breadcrumbs menu"
-          color="secondary"
-          iconName={SSCIconNames.ellipsisH}
-          variant="text"
-        />
-      </DropdownMenu>
-    </li>
-  );
-
+  const dropdown = renderDropdown(allDropdownActions);
   return [
     ...slice(0, itemsBeforeCollapse, allItems),
-    dropdown(),
+    dropdown,
     ...slice(allItems.length - itemsAfterCollapse, allItems.length, allItems),
   ];
 };
@@ -118,8 +117,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   });
 
   const allDropdownActions = slice(
-    1,
-    -2,
+    itemsBeforeCollapse,
+    -Math.abs(itemsAfterCollapse),
   )(
     React.Children.toArray(children).map((breadcrumbItem) => {
       if (!React.isValidElement(breadcrumbItem)) {
@@ -150,7 +149,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         justify="center"
       >
         {insertSeparators(
-          maxItems && allItems.length <= maxItems
+          allDropdownActions.length < 2
             ? allItems
             : renderItemsBeforeAndAfter(allItems, allDropdownActions),
         )}
