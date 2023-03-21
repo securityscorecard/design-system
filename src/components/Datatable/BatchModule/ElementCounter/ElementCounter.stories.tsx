@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { ElementCounterProps } from './ElementCounter.types';
 
 import { useEffect } from 'react';

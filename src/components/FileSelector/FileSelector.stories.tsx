@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { FileSelectorProps } from './FileSelector.types';
 
 import { useState } from 'react';

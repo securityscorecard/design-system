@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { GroupedOptionsType, OptionsType } from 'react-select';
 import type { CreatableSelectProps, Option } from './Select.types';
 

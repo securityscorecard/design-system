@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { ReactChild } from 'react';
 import type { TextProps } from './Text.types';
 

@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 
 import { H2, Paragraph } from '../typographyLegacy';
 import FlexContainer from './FlexContainer';
