@@ -101,7 +101,11 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
           );
         }
 
-        return <Tooltip popup={action.tooltip}>{element}</Tooltip>;
+        return (
+          <Tooltip key={action.name} popup={action.tooltip}>
+            {element}
+          </Tooltip>
+        );
       })}
     </Inline>
   );
