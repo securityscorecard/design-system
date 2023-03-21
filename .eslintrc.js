@@ -19,8 +19,8 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
-      node: {
-        extensions: ['.js', '.ts', '.tsx', '.d.ts'],
+      typescript: {
+        alwaysTryTypes: true,
       },
     },
   },
@@ -201,6 +201,14 @@ module.exports = {
             allowAsProps: true,
           },
         ],
+      },
+    },
+    {
+      files: ['**/*.md', '**/*.mdx'],
+      extends: ['plugin:mdx/recommended'],
+      rules: {
+        'react/prop-types': 'off',
+        'react/jsx-filename-extension': [1, { extensions: ['.mdx'] }],
       },
     },
   ],

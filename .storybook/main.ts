@@ -1,26 +1,29 @@
 import { includes } from 'ramda';
-import type { StorybookConfig } from '@storybook/react/types';
+import remarkGfm from 'remark-gfm';
+import { mergeConfig } from 'vite';
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(jsx|tsx)'],
   addons: [
+    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
     '@storybook/addon-a11y',
-    '@storybook/addon-actions',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-measure',
-    'storycap',
     'storybook-addon-designs',
-    'storybook-addon-outline',
     '@geometricpanda/storybook-addon-badges',
+    'storycap',
   ],
-  features: {
-    postcss: false,
-  },
   typescript: {
     check: false,
-    checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       // shouldExtractValuesFromUnion: true, // disable it for now as it cause issues in SBv6.2
@@ -40,6 +43,22 @@ const config: StorybookConfig = {
       },
     },
   },
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+  docs: {
+    autodocs: true,
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      define: {
+        'process.env.STORYBOOK': true,
+      },
+      build: {
+        sourcemap: false,
+      },
+    });
+  },
 };
-
 export default config;
