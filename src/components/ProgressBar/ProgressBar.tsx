@@ -1,13 +1,14 @@
-import React, { forwardRef } from 'react';
-import { prop } from 'ramda';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
 import type {
   ProgressBarProps,
   ProgressBarVariant,
   RootProgressProps,
 } from './ProgressBar.types';
+
+import { forwardRef } from 'react';
+import { prop } from 'ramda';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 import { CLX_COMPONENT } from '../../theme/constants';
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { ColorTypes } from '../../theme';

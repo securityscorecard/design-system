@@ -4,4 +4,4 @@ stats
 .git
 visual-regressions
 extension
-*.md
+CHANGELOG.md

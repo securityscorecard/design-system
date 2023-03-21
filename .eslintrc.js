@@ -209,6 +209,7 @@ module.exports = {
       rules: {
         'react/prop-types': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.mdx'] }],
+        'react/self-closing-comp': 'off',
       },
     },
   ],

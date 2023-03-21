@@ -1,4 +1,6 @@
-import React from 'react';
+import type { HintTooltipProps } from './HintTooltip.types';
+import type { Color } from '../../theme/colors.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -7,9 +9,7 @@ import { includes } from 'ramda';
 import { getColor } from '../../utils';
 import { Tooltip } from '../Tooltip';
 import { Icon } from '../Icon';
-import { HintTooltipProps } from './HintTooltip.types';
 import { ColorTypes } from '../../theme';
-import { Color } from '../../theme/colors.types';
 
 const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
   shouldForwardProp: (property) => !includes(property, ['color']),

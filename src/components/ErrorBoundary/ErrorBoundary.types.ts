@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Property } from 'csstype';
+import type { Property } from 'csstype';
 
 export interface ErrorBoundaryProps {
   size: 'xs' | 'sm' | 'md' | 'lg';

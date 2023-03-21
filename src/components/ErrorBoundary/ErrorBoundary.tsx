@@ -1,8 +1,9 @@
+import type { ErrorBoundaryProps } from './ErrorBoundary.types';
+
 import React from 'react';
 import styled from 'styled-components';
 import { partialRight, pipe, prop } from 'ramda';
 
-import { ErrorBoundaryProps } from './ErrorBoundary.types';
 import { Inline, Stack } from '../layout';
 import { Link, Text } from '../typographyLegacy';
 import { pxToRem } from '../../utils';

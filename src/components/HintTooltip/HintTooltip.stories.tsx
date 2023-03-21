@@ -1,9 +1,9 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
+import type { HintTooltipProps } from './HintTooltip.types';
+
 import styled from 'styled-components';
 
 import HintTooltip from './HintTooltip';
-import { HintTooltipProps } from './HintTooltip.types';
 import { Link, Paragraph, Text } from '../typographyLegacy';
 import { Inline, Padbox, Stack } from '../layout';
 import { SpaceSizes } from '../../theme';

@@ -1,8 +1,9 @@
+import type { ScoreDeltaProps } from './ScoreDelta.types';
+
 import React from 'react';
 import styled from 'styled-components';
 import { partialRight, pipe, prop } from 'ramda';
 
-import { ScoreDeltaProps } from './ScoreDelta.types';
 import { Inline } from '../layout';
 import { getColor, getFontSize } from '../../utils';
 import { ColorTypes } from '../../theme';

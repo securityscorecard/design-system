@@ -1,14 +1,7 @@
-import { Meta, Props, IconGallery, IconItem } from '@storybook/addon-docs';
-import { flip, includes } from 'ramda';
+import { IconGallery, IconItem, Meta } from '@storybook/addon-docs';
 
 import Icon from '../components/Icon/Icon';
-import {
-  RegularIconNames,
-  SolidIconNames,
-  SSCIconNames,
-  IconTypes,
-} from './icons/icons.enums';
-import createIconLibrary from './createIconLibrary';
+import { IconTypes, SSCIconNames } from './icons/icons.enums';
 
 <Meta title="Theme/createIconLibrary()" />
 
@@ -64,7 +57,7 @@ export const Component = () => (
 
 <IconGallery>
   {Object.values(SSCIconNames).map((iconName) => (
-    <IconItem name={iconName} key={iconName}>
+    <IconItem key={iconName} name={iconName}>
       <Icon name={iconName} type={IconTypes.ssc} />
     </IconItem>
   ))}

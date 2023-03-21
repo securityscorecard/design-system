@@ -1,5 +1,4 @@
-import React from 'react';
-import { Meta } from '@storybook/react/types-6-0';
+import type { Meta } from '@storybook/react';
 
 import ErrorBoundary from './ErrorBoundary';
 import { Stack } from '../layout';
