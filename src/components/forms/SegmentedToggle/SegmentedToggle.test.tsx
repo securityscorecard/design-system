@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import { createRef } from 'react';
 import { screen } from '@testing-library/react';
 import { map } from 'ramda';
 

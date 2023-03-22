@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SegmentedToggleProps } from './SegmentedToggle.types';
 
-import { SegmentedToggleProps } from './SegmentedToggle.types';
+import { useState } from 'react';
+
 import { SegmentedToggle, SegmentedToggleItem } from './index';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Stack } from '../../layout/Stack';

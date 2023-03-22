@@ -1,10 +1,11 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { InputProps } from './Input.types';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
 import { pipe } from 'ramda';
 
-import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
 import {
   getFontSize,
@@ -53,7 +54,7 @@ export const StyledInput = styled.input<InputProps>`
     `}
 `;
 
-const Input: React.FC<InputProps> = ({
+const Input: FC<InputProps> = ({
   value = '',
   onChange,
   maxLength,

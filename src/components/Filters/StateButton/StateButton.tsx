@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { StateButtonProps } from './StateButton.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -15,7 +17,6 @@ import {
   getRadii,
   pxToRem,
 } from '../../../utils';
-import { StateButtonProps } from './StateButton.types';
 import { useStateButtonIcon } from '../hooks/useStateButton';
 
 const Popup = styled(Padbox)`
@@ -65,7 +66,7 @@ const LightText = styled(Text)`
   font-weight: ${getFontWeight('medium')};
 `;
 
-const StateButton: React.FC<StateButtonProps> = ({
+const StateButton: FC<StateButtonProps> = ({
   index,
   onClick,
   isApplied = false,

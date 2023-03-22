@@ -1,4 +1,4 @@
-import { TextSizes, TextVariants } from './Text.enums';
+import type { TextSizes, TextVariants } from './Text.enums';
 
 export type Sizes = typeof TextSizes[keyof typeof TextSizes];
 export type Variants = typeof TextVariants[keyof typeof TextVariants];

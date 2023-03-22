@@ -1,4 +1,7 @@
-import React, { useRef } from 'react';
+import type { FC } from 'react';
+import type { HeaderProps } from './Header.types';
+
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -6,7 +9,6 @@ import { getColor, pxToRem } from '../../../utils';
 import { Col, Container, Inline, Row } from '../../layout';
 import { H2, H3 } from '../../typographyLegacy';
 import { useStickyHeader } from '../hooks/useStickyHeader';
-import { HeaderProps } from './Header.types';
 import { CloseButton } from '../../CloseButton';
 
 const BaseStickyHeader = styled.header`
@@ -23,7 +25,7 @@ const BaseHeader = styled.header`
   padding: ${pxToRem(56, 0, 24)};
 `;
 
-const Header: React.FC<HeaderProps> = ({
+const Header: FC<HeaderProps> = ({
   children,
   width,
   offset,

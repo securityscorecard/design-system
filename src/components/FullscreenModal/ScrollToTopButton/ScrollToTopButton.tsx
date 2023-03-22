@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { ScrollToTopButtonProps } from './ScrollToTopButton.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -8,7 +10,6 @@ import { Button } from '../../Button';
 import { ButtonColors, ButtonVariants } from '../../Button/Button.enums';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { ScrollToTopButtonProps } from './ScrollToTopButton.types';
 
 const StyledButton = styled(Button)`
   flex-direction: column;
@@ -23,7 +24,7 @@ const ButtonText = styled.span`
   margin-top: ${pxToRem(4)};
 `;
 
-const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
+const ScrollToTopButton: FC<ScrollToTopButtonProps> = ({
   onClick,
   label = 'Scroll to top',
 }) => {

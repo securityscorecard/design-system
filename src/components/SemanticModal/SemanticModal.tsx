@@ -1,21 +1,26 @@
-import React, { forwardRef } from 'react';
+import type { MouseEvent } from 'react';
+import type {
+  RenderButtonProps,
+  SemanticModalProps,
+} from './SemanticModal.types';
+import type {
+  AbsoluteLinkActionKind,
+  ActionKinds,
+  RelativeLinkActionKind,
+} from '../../types/action.types';
+
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { SemanticModalVariants } from './SemanticModal.enums';
-import { RenderButtonProps, SemanticModalProps } from './SemanticModal.types';
 import { Modal, ModalEnums } from '../Modal';
 import { Button, ButtonEnums } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';
 import { Icon } from '../Icon';
 import { H4, Text } from '../typographyLegacy';
-import {
-  AbsoluteLinkActionKind,
-  ActionKinds,
-  ActionKindsPropType,
-  RelativeLinkActionKind,
-} from '../../types/action.types';
+import { ActionKindsPropType } from '../../types/action.types';
 import * as CustomPropTypes from '../../types/customPropTypes';
 import { getColor, pxToRem } from '../../utils';
 import { Center, Inline, Padbox, Stack } from '../layout';
@@ -51,11 +56,11 @@ const renderButton = ({
   <Button
     key={action.name}
     color={color}
-    href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+    href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
     isLoading={isLoading}
     loadingText={loadingText}
     name={action.name}
-    to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+    to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
     variant={variant}
     onClick={action.onClick}
   >
@@ -92,7 +97,7 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
               <Padbox paddingSize={SpaceSizes.md}>
                 <Inline gap={SpaceSizes.md} justify="center">
                   {actions.map(
-                    (action: ActionKinds<[React.MouseEvent]>, index: number) =>
+                    (action: ActionKinds<[MouseEvent]>, index: number) =>
                       isNotUndefined(action) &&
                       renderButton({
                         action,

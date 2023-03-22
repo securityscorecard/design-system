@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-
 import type { ValueOf } from './types';
+
+import { useEffect } from 'react';
 
 export const useManagerEvents = <A extends Record<string, string>>(listeners: {
   [key in ValueOf<A>]: (e: CustomEvent) => void;

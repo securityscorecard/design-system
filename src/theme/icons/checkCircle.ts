@@ -6,7 +6,7 @@
 
 /* regular - circle-check */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

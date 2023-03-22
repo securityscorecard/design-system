@@ -6,7 +6,7 @@
 
 /* solid - check */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

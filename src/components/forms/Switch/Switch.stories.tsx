@@ -1,5 +1,5 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SwitchProps } from './Switch.types';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { generateControl } from '../../../utils/tests/storybook';
@@ -8,7 +8,6 @@ import { Stack } from '../../layout/Stack';
 import { Paragraph } from '../../typographyLegacy';
 import Switch from './Switch';
 import { SwitchSizes } from './Switch.enums';
-import { SwitchProps } from './Switch.types';
 
 export default {
   title: 'components/forms/Switch',

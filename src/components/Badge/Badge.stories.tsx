@@ -1,8 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { BadgeProps } from './Badge.types';
 
 import Badge from './Badge';
-import { BadgeProps } from './Badge.types';
 import { BadgeVariants } from './Badge.enums';
 import { generateControl } from '../../utils/tests/storybook';
 

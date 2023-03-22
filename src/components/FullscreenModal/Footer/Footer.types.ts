@@ -1,6 +1,8 @@
+import type { MutableRefObject } from 'react';
+
 export interface FooterProps {
   width: number;
   offset: number;
-  modalRef: React.MutableRefObject<HTMLElement>;
+  modalRef: MutableRefObject<HTMLElement>;
   scrollToTopButtonLabel: string;
 }

@@ -1,4 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import type { ReactElement } from 'react';
+import type {
+  ControlState,
+  Controls,
+  ControlsLocalState,
+  ControlsModuleProps,
+} from './ControlsModule.types';
+import type { Filter } from '../../Filters/Filters.types';
+
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { all, isEmpty, map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray, isNotNilOrEmpty } from 'ramda-adjunct';
@@ -10,14 +19,7 @@ import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColumnsControls } from '../components/ColumnsControls';
 import { ControlButton } from '../components/ControlButton';
 import { DatatableStore } from '../Datatable.store';
-import {
-  ControlState,
-  Controls,
-  ControlsConfigPropType,
-  ControlsLocalState,
-  ControlsModuleProps,
-} from './ControlsModule.types';
-import { Filter } from '../../Filters/Filters.types';
+import { ControlsConfigPropType } from './ControlsModule.types';
 import { ControlTypes } from './ControlsModule.enums';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
@@ -68,7 +70,7 @@ function ControlsModule<D extends Record<string, unknown>>({
   // defaultViews,
   onCancelLoading,
   onControlToggle,
-}: ControlsModuleProps<D>): React.ReactElement {
+}: ControlsModuleProps<D>): ReactElement {
   const {
     onClose: onFilteringClose,
     onApply: onFilteringApply,

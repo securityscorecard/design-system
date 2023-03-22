@@ -1,6 +1,7 @@
-import React from 'react';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ToastProps } from './Toast.types';
+
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
 import { noop } from 'ramda-adjunct';
 
 import Button from '../Button/Button';
@@ -8,7 +9,6 @@ import { Inline, Stack } from '../layout';
 import { SpaceSizes } from '../../theme';
 import Toast from './Toast';
 import { ToastVariants } from './Toast.enums';
-import { ToastProps } from './Toast.types';
 import { generateControl } from '../../utils/tests/storybook';
 
 const styles = {

@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
+
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -7,7 +9,6 @@ import { getColor, getRadii } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { PillSizes, PillVariants } from './Pill.enums';
-import { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
 
 const PillSolid = css`
   background-color: ${getColor('neutral.300')};
@@ -42,7 +43,7 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
     `}
 `;
 
-const PillWrapper: React.FC<PillWrapperProps> = ({
+const PillWrapper: FC<PillWrapperProps> = ({
   children,
   variant,
   size,

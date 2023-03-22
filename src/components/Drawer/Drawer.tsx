@@ -1,11 +1,12 @@
-import React, { forwardRef, useContext } from 'react';
+import type { DrawerProps } from './Drawer.types';
+
+import { forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';

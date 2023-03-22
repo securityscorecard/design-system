@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { SortableListProps } from './SortableList.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { zipObj } from 'ramda';
 
 import SortableList from './SortableList';
-import { SortableListProps } from './SortableList.types';
 
 export default {
   title: 'components/SortableList',

@@ -1,6 +1,5 @@
-import { colors } from './colors';
-import { pxToRem } from '../utils';
-import {
+import type { colors } from './colors';
+import type {
   Family,
   LineHeight,
   Links,
@@ -9,6 +8,8 @@ import {
   Typography,
   Weight,
 } from './typography.types';
+
+import { pxToRem } from '../utils';
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from './constants';
 
 const family: Family = {

@@ -1,3 +1,6 @@
+import type { HeadingProps } from '../Heading/Heading.types';
+import type { CodeProps, StrongProps, TextProps } from './Text.types';
+
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
@@ -9,9 +12,7 @@ import {
   getFontWeight,
   getLineHeight,
 } from '../../../utils';
-import { HeadingProps } from '../Heading/Heading.types';
 import { TextSizes, TextVariants } from './Text.enums';
-import { CodeProps, StrongProps, TextProps } from './Text.types';
 import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const HeadingBase = css<HeadingProps>`

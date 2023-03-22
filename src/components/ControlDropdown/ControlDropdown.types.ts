@@ -1,12 +1,11 @@
-import React from 'react';
-
-import { Placements } from '../Dropdown/Dropdown.types';
+import type { MutableRefObject } from 'react';
+import type { Placements } from '../Dropdown/Dropdown.types';
 
 export interface ControlDropdownProps {
   /**
    * Reference to opener button used to calculate correct position
    */
-  parentRef: React.MutableRefObject<HTMLSpanElement>;
+  parentRef: MutableRefObject<HTMLSpanElement>;
   /**
    * Title in dropdown header
    */

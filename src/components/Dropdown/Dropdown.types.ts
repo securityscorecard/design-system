@@ -1,8 +1,16 @@
-import { ReactElement } from 'react';
-
-import { SpaceSize } from '../../theme/space.types';
-import { PaddingType } from '../../utils/space';
-import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropsWithChildren,
+  ReactElement,
+  Ref,
+} from 'react';
+import type { SpaceSize } from '../../theme/space.types';
+import type { PaddingType } from '../../utils/space';
+import type {
+  DropdownPlacements,
+  DropdownTriggerEvents,
+} from './Dropdown.enums';
 
 export type TriggerEvents =
   typeof DropdownTriggerEvents[keyof typeof DropdownTriggerEvents];
@@ -13,17 +21,17 @@ export interface DropdownPaneStyles {
   $isElevated?: boolean;
   $maxWidth: number | 'auto';
 }
-export type DropdownPaneProps = React.PropsWithChildren<
+export type DropdownPaneProps = PropsWithChildren<
   {
     isElevated: DropdownPaneStyles['$isElevated'];
     maxWidth: DropdownPaneStyles['$maxWidth'];
     onClickOut?: () => void;
     hasArrow: boolean;
     arrowRef: (el: HTMLElement) => void;
-    arrowStyles: React.CSSProperties;
+    arrowStyles: CSSProperties;
     contentPaddingSize: SpaceSize;
     contentPaddingType: PaddingType;
-  } & React.HTMLAttributes<HTMLDivElement>
+  } & HTMLAttributes<HTMLDivElement>
 >;
 
 interface BaseDropdownProps {
@@ -100,7 +108,7 @@ export interface DropdownProps extends BaseDropdownProps {
   /**
    * Imperative handle ref
    */
-  ref?: React.Ref<{
+  ref?: Ref<{
     togglePane: () => void;
     hidePane: () => void;
     showPane: () => void;

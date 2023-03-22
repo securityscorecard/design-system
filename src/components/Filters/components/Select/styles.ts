@@ -1,9 +1,10 @@
+import type { StylesConfig } from 'react-select';
+import type { Option } from './Select.types';
+
 import { assoc, includes } from 'ramda';
-import { StylesConfig } from 'react-select';
 
 import { pxToRem } from '../../../../utils';
 import { theme } from '../../../../theme';
-import { Option } from './Select.types';
 
 const stateStyles = {
   padding: `${pxToRem(0, 15)}`,

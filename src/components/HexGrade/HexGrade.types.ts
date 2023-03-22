@@ -1,5 +1,5 @@
-import { SpacingSizeValue } from '../../types/spacing.types';
-import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
+import type { SpacingSizeValue } from '../../types/spacing.types';
+import type { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 
 export type Variants = typeof HexGradeVariants[keyof typeof HexGradeVariants];
 export type Grades = typeof HexGradeGrades[keyof typeof HexGradeGrades];

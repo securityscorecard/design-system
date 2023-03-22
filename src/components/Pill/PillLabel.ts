@@ -1,9 +1,10 @@
+import type { PillLabelProps } from './Pill.types';
+
 import styled, { css } from 'styled-components';
 import { gt } from 'ramda';
 
 import { getColor, getFontSize } from '../../utils';
 import { PillSizes } from './Pill.enums';
-import { PillLabelProps } from './Pill.types';
 
 const PillLabelSmall = css`
   font-size: ${getFontSize('md')};

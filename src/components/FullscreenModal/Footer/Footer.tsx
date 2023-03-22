@@ -1,4 +1,7 @@
-import React, { useRef } from 'react';
+import type { FC } from 'react';
+import type { FooterProps } from './Footer.types';
+
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -6,7 +9,6 @@ import { getColor, pxToRem } from '../../../utils';
 import { ScrollToTopButton } from '../ScrollToTopButton';
 import { useStickyFooter } from '../hooks/useStickyFooter';
 import { Col, Container, Inline, Padbox, Row } from '../../layout';
-import { FooterProps } from './Footer.types';
 import { SpaceSizes } from '../../../theme';
 
 const BaseStickyFooter = styled.footer`
@@ -24,7 +26,7 @@ const BaseFooter = styled.footer`
   margin-top: ${pxToRem(40)};
 `;
 
-const Footer: React.FC<FooterProps> = ({
+const Footer: FC<FooterProps> = ({
   children,
   width,
   offset,

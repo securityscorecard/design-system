@@ -1,3 +1,5 @@
+import type { SelectProps } from './Select.types';
+
 import { useTheme } from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { has, sortBy } from 'ramda';
@@ -15,7 +17,6 @@ import {
   reactSelectTheme,
   selectStyles,
 } from './Select.styles';
-import { SelectProps } from './Select.types';
 
 export const useSelectProps = <IsMulti extends boolean>({
   options = [],

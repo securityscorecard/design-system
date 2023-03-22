@@ -1,4 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { BaseDateRangePickerProps } from './BaseDateRangePicker.types';
+
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { any, prop } from 'ramda';
@@ -7,7 +9,6 @@ import { isNotNull } from 'ramda-adjunct';
 import { dateRangePickerStyles } from './styles';
 import {
   BaseDateRangePickerPropTypes,
-  BaseDateRangePickerProps,
   BaseDateRangePlaceholderPropTypes,
 } from './BaseDateRangePicker.types';
 import { BaseSingleDatePicker } from '../BaseSingleDatePicker';
@@ -23,7 +24,7 @@ const StyledDatePicker = styled.div`
 
 const isRangeDefined = any(isNotNull);
 
-const BaseDateRangePicker: React.FC<BaseDateRangePickerProps> = ({
+const BaseDateRangePicker: FC<BaseDateRangePickerProps> = ({
   value = { startDate: null, endDate: null },
   onChange,
   minDate,

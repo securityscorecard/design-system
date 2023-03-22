@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { StackProps } from './Stack';
 
 import { SpaceSizes } from '../../../theme/space.enums';
-import Stack, { StackProps } from './Stack';
+import Stack from './Stack';
 import { Button } from '../../Button';
 import { Box } from '../mocks/Box';
 

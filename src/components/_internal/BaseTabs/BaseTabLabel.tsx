@@ -1,3 +1,5 @@
+import type { BaseLabelProps } from './BaseTabLabel.types';
+
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 import { __, includes, pipe, subtract } from 'ramda';
@@ -9,7 +11,6 @@ import {
   getToken,
   pxToRem,
 } from '../../../utils';
-import { BaseLabelProps } from './BaseTabLabel.types';
 import { BaseTabVariants } from './BaseTabs.enums';
 import { Padbox } from '../../layout/Padbox';
 

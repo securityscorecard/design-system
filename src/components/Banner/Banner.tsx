@@ -1,16 +1,18 @@
-import React, { useMemo } from 'react';
+import type { FC, MouseEvent } from 'react';
+import type { BannerProps } from './Banner.types';
+import type {
+  AbsoluteLinkActionKind,
+  RelativeLinkActionKind,
+} from '../../types/action.types';
+
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContainerQuery } from 'react-container-query';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { BannerProps } from './Banner.types';
-import {
-  AbsoluteLinkActionKind,
-  ActionKindsPropType,
-  RelativeLinkActionKind,
-} from '../../types/action.types';
+import { ActionKindsPropType } from '../../types/action.types';
 import * as CustomPropTypes from '../../types/customPropTypes';
 import { BannerVariants } from './Banner.enums';
 import { Button } from '../Button';
@@ -58,11 +60,7 @@ const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
 
 const CHANGE_LAYOUT_BREAKPOINT = 'change-banner-layout';
 
-const BannerContent: React.FC<BannerProps> = ({
-  variant,
-  children,
-  actions,
-}) => (
+const BannerContent: FC<BannerProps> = ({ variant, children, actions }) => (
   <>
     <Text $variant={variant} as="div" size={TextSizes.md}>
       {children}
@@ -74,9 +72,9 @@ const BannerContent: React.FC<BannerProps> = ({
             key={action.name}
             $variant={variant}
             color={ButtonColors.secondary}
-            href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+            href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
             name={action.name}
-            to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+            to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
             variant={ButtonVariants.text}
             onClick={action.onClick}
           >
@@ -88,7 +86,7 @@ const BannerContent: React.FC<BannerProps> = ({
   </>
 );
 
-const Banner: React.FC<BannerProps> = ({
+const Banner: FC<BannerProps> = ({
   children,
   variant = BannerVariants.info,
   actions,

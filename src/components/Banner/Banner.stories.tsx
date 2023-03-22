@@ -1,10 +1,10 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { ActionsArray, BannerProps } from './Banner.types';
+
 import { action } from '@storybook/addon-actions';
 
 import Banner from './Banner';
 import { BannerVariants } from './Banner.enums';
-import { ActionsArray, BannerProps } from './Banner.types';
 import { generateControl } from '../../utils/tests/storybook';
 
 export default {

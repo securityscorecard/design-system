@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
+import type { InputHTMLAttributes } from 'react';
+import type { InputProps } from '../../../forms/Input/Input.types';
 
-import { InputProps } from '../../../forms/Input/Input.types';
+import PropTypes from 'prop-types';
 
 export interface SearchProps
   extends InputProps,
-    React.InputHTMLAttributes<HTMLInputElement> {
+    InputHTMLAttributes<HTMLInputElement> {
   onSearch: (query: string) => void | Promise<void>;
   onClear: () => void;
   placeholder?: string;

@@ -1,3 +1,5 @@
+import type { SpaceSize } from '../../../theme/space.types';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { includes } from 'ramda';
@@ -5,7 +7,6 @@ import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { getSpace, pxToRem } from '../../../utils';
-import { SpaceSize } from '../../../theme/space.types';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
 

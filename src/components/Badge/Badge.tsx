@@ -1,10 +1,12 @@
-import React from 'react';
+import type { FC } from 'react';
+import type { BadgeElementProps, BadgeProps } from './Badge.types';
+import type { SSCIcons, Types } from '../Icon/Icon.types';
+
 import PropTypes from 'prop-types';
 import { defaultWhen } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
-import type { BadgeElementProps, BadgeProps } from './Badge.types';
 import { BadgeVariants } from './Badge.enums';
 import {
   getColor,
@@ -15,7 +17,6 @@ import {
 } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { SpaceSizes } from '../../theme';
-import { SSCIcons, Types } from '../Icon/Icon.types';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { Inline, Padbox } from '../layout';
@@ -63,7 +64,7 @@ const BadgeElement = styled(Padbox)<BadgeElementProps>`
 
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
-const Badge: React.FC<BadgeProps> = ({
+const Badge: FC<BadgeProps> = ({
   count,
   text,
   iconName,

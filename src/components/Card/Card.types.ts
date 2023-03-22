@@ -1,17 +1,16 @@
-import { DefaultTheme } from 'styled-components';
-import { ReactComponentLike } from 'prop-types';
-import React from 'react';
-
-import { SpaceSize } from '../../theme/space.types';
-import { ActionKinds } from '../../types/action.types';
-import { SSCIcons, Types } from '../Icon/Icon.types';
+import type { DefaultTheme } from 'styled-components';
+import type { ReactComponentLike } from 'prop-types';
+import type { CSSProperties, MouseEvent, ReactNode } from 'react';
+import type { SpaceSize } from '../../theme/space.types';
+import type { ActionKinds } from '../../types/action.types';
+import type { SSCIcons, Types } from '../Icon/Icon.types';
 
 export interface CardActionsProps {
   /**
    * List of available actions for the Card footer (maximal number of actions is 2)
    */
   actions: ActionKinds<
-    React.MouseEvent[],
+    MouseEvent[],
     void,
     {
       isDisabled?: boolean;
@@ -23,7 +22,7 @@ export interface CardActionsProps {
   /**
    * Adornment placed on the right side.
    */
-  rightAdornment: React.ReactNode;
+  rightAdornment: ReactNode;
 }
 
 export interface CardHeaderProps {
@@ -38,7 +37,7 @@ export interface CardHeaderProps {
   /**
    * List of available actions in the dropdown menu
    */
-  actions?: ActionKinds<React.MouseEvent[]>[];
+  actions?: ActionKinds<MouseEvent[]>[];
   /**
    * Actions menu aria label
    */
@@ -46,7 +45,7 @@ export interface CardHeaderProps {
   /**
    * Adornment placed on the left side.
    */
-  leftAdornment?: React.ReactNode;
+  leftAdornment?: ReactNode;
   /**
    *  Callback called when help button is clicked. Determines whether the help button is rendered or not.
    */
@@ -54,7 +53,7 @@ export interface CardHeaderProps {
   /**
    * Node that shows as a tooltip on help button hover. Determines whether the help button is rendered or not.
    */
-  helpTooltip?: React.ReactNode;
+  helpTooltip?: ReactNode;
   /**
    * Title max number of lines.
    */
@@ -74,7 +73,7 @@ export interface CardMediaProps {
   /**
    * Custom css `style` attribute
    */
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   /**
    * Alternative text from media elements
    */
@@ -91,7 +90,7 @@ export interface CardMediaWrapperProps {
 }
 
 export interface CardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   as?: ReactComponentLike;
   onClick?: (event: Event) => void;
   to?: string;

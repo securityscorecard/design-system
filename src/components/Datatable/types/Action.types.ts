@@ -1,9 +1,12 @@
+import type {
+  ActionKinds,
+  ActionWithSubactions,
+} from '../../../types/action.types';
+
 import PropTypes from 'prop-types';
 
 import {
   AbsoluteLinkActionKindPropType,
-  ActionKinds,
-  ActionWithSubactions,
   ActionWithSubactionsPropType,
   HandlerActionKindPropType,
   RelativeLinkActionKindPropType,

@@ -1,8 +1,7 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { CalloutProps } from './Callout.types';
 
 import Callout from './Callout';
-import { CalloutProps } from './Callout.types';
 import { Link, Strong } from '../typographyLegacy';
 
 export default {

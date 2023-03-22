@@ -3,7 +3,7 @@
  * DO NOT FORGET to add license comment if you are adding icon from FontAwesome
  */
 
-import {
+import type {
   IconDefinition,
   IconName,
   IconPrefix,

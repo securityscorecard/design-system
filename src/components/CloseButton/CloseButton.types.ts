@@ -1,4 +1,5 @@
-import { SpaceSize } from '../../theme/space.types';
+import type { MouseEventHandler } from 'react';
+import type { SpaceSize } from '../../theme/space.types';
 
 export type AlignmentWrapperProps = {
   $marginCompensation?: SpaceSize;
@@ -9,7 +10,7 @@ export interface CloseButtonProps {
   /**
    * Callback called when the close button is clicked
    */
-  onClose: React.MouseEventHandler;
+  onClose: MouseEventHandler;
   /**
    *
    */

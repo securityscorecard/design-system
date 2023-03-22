@@ -1,4 +1,4 @@
-import { Layout } from './layout.types';
+import type { Layout } from './layout.types';
 
 export const createLayout = (): Layout => ({
   containerWidth: 1170,

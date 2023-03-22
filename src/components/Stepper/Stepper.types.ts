@@ -1,4 +1,4 @@
-import { StepperOrientations } from './Stepper.enums';
+import type { StepperOrientations } from './Stepper.enums';
 
 export type Orientations =
   typeof StepperOrientations[keyof typeof StepperOrientations];

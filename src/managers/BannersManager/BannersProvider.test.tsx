@@ -1,4 +1,5 @@
-import React from 'react';
+import type { ReactNode } from 'react';
+
 import { renderHook } from '@testing-library/react-hooks';
 
 import { BannersProvider, useBanners } from './BannersProvider';
@@ -15,7 +16,7 @@ describe('BannersManager/useBanners', () => {
   });
 
   it('should return context value', () => {
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
+    const wrapper = ({ children }: { children: ReactNode }) => (
       <BannersProvider>{children}</BannersProvider>
     );
     const { result } = renderHook(() => useBanners(), { wrapper });

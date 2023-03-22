@@ -1,7 +1,7 @@
+import type { TupleType, TypeChecker } from './customPropTypes.types';
+
 import { gt, length } from 'ramda';
 import { isEmptyArray, isNotArray, isUndefined } from 'ramda-adjunct';
-
-import { TupleType, TypeChecker } from './customPropTypes.types';
 
 // Taken from https://stackoverflow.com/a/51165301/2216488
 function CustomPropTypeError(message: string) {

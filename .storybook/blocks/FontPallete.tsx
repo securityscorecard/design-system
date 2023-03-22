@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import type { FC } from 'react';
 import styled from 'styled-components';
 
 import { theme } from '../../src/theme';
@@ -73,7 +73,7 @@ interface FontProps {
   sampleText: string;
 }
 
-export const FontItem: FunctionComponent<FontProps> = ({
+export const FontItem: FC<FontProps> = ({
   title,
   subtitle,
   fontFamily = theme.typography.family.base,
@@ -100,7 +100,7 @@ export const FontItem: FunctionComponent<FontProps> = ({
   );
 };
 
-export const FontPalette: FunctionComponent = ({ children, ...props }) => (
+export const FontPalette: FC = ({ children, ...props }) => (
   <List {...props}>
     <ListHeading>
       <ListName>Name</ListName>

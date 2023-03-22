@@ -1,6 +1,8 @@
+import type { ReactEventHandler } from 'react';
+
 export interface InputProps {
   value: string;
-  onChange: (event: React.ReactEventHandler) => void;
+  onChange: (event: ReactEventHandler) => void;
   placeholder?: string;
   isInvalid?: boolean;
   maxLength?: number;

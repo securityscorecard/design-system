@@ -1,8 +1,9 @@
+import type { ControlsConfig } from './ControlsModule/ControlsModule.types';
+import type { TableConfig } from './Table/Table.types';
+
 import { mergeDeepRight } from 'ramda';
 import { noop } from 'ramda-adjunct';
 
-import { ControlsConfig } from './ControlsModule/ControlsModule.types';
-import { TableConfig } from './Table/Table.types';
 import { NoMatchingData } from './Table/components';
 import { NoData } from '../_internal/BaseTable';
 

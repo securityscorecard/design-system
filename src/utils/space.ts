@@ -1,17 +1,19 @@
-import {
+import type {
   DefaultTheme,
   FlattenSimpleInterpolation,
-  css,
 } from 'styled-components';
+import type { SpacingSizeValue } from '../types/spacing.types';
+import type { Theme } from './helpers';
+import type { SpaceSize } from '../theme/space.types';
+
+import { css } from 'styled-components';
 import { any, apply, concat, curry, isEmpty, path, pipe } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 
 import { BASE_LINE_HEIGHT } from '../theme/constants';
-import { SpacingSizeValue } from '../types/spacing.types';
 import { SpaceSizes } from '../theme/space.enums';
-import { Theme, pxToRem } from './helpers';
+import { pxToRem } from './helpers';
 import { PaddingTypes } from '../components/layout/Padbox/Padbox.enums';
-import { SpaceSize } from '../theme/space.types';
 
 export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];
 type PaddingSpaceProps = {

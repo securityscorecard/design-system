@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { DrawerProps } from './Drawer.types';
+
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
 import Drawer from './Drawer';
-import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
 import { SemanticModal } from '../SemanticModal';
 import { H2, Link, Paragraph, Text } from '../typographyLegacy';
