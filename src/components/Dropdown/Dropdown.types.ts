@@ -64,6 +64,10 @@ export interface ControlledDropdownProps extends BaseDropdownProps {
    */
   isOpen: boolean;
   /**
+   * Boolean that enabled the dropdown pane focus trap.
+   */
+  focusTrap?: boolean;
+  /**
    * Callback called when user clicks outside the dropdown pane.
    */
   onClickOut?: DropdownPaneProps['onClickOut'];
@@ -102,3 +106,5 @@ export interface DropdownProps extends BaseDropdownProps {
     showPane: () => void;
   }>;
 }
+
+export type InteractiveElement = HTMLButtonElement | HTMLAnchorElement;
