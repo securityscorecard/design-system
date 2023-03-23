@@ -13,6 +13,7 @@ export const WizardStepper = () => {
       {steps.map((item) => (
         <Step
           key={item.id}
+          id={item.id}
           label={item.name}
           onStepClick={
             isBackwardNavigationEnabled

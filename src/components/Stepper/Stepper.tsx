@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactElement } from 'react';
 import type { StepperProps } from './Stepper.types';
 
-import { Children, cloneElement, forwardRef, useMemo } from 'react';
+import { Children, forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useContainerQuery } from 'react-container-query';
 import { pathEq } from 'ramda';
@@ -10,11 +10,23 @@ import cls from 'classnames';
 import { SpaceSizes } from '../../theme';
 import { Inline, Stack } from '../layout';
 import { mergeRefs } from '../../utils/mergeRefs';
-import { StepperContext } from './Stepper.context';
 import { StepperOrientations } from './Stepper.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { createCtx } from '../../managers/common/createCtx';
 
 const SHOW_TEXT_BREAKPOINT = 'show-step-text';
+
+export const { useContext: useStepperContext, Provider } = createCtx<{
+  activeStep: number;
+  orientation: keyof typeof StepperOrientations;
+  areStepsExpanded: boolean;
+  shouldShowText: boolean;
+  stepsCount: number;
+  getStepIndex: (string) => number;
+}>(
+  'StepperContext',
+  '"useStepperContext" must be inside a "StepperContext" with a value',
+);
 
 const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
   (
@@ -37,34 +49,29 @@ const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
     );
     const [query, containerRef] = useContainerQuery(showTextQuery, undefined);
 
-    const stepsArr: ReactElement[] = Children.toArray(children).filter(
+    const steps: ReactElement[] = Children.toArray(children).filter(
       pathEq(['type', 'displayName'], 'Step'),
     );
-    const steps = stepsArr.map((step, index) =>
-      cloneElement(step, {
-        ...step.props,
-        index,
-        shouldShowText:
-          activeStep === index ||
-          query[SHOW_TEXT_BREAKPOINT] ||
-          orientation === StepperOrientations.vertical,
-        isLast: index + 1 === stepsArr.length,
-      }),
-    );
-
     const mergedRef = mergeRefs(ref, containerRef);
+    const shouldDisplayTextBreakpoint = query[SHOW_TEXT_BREAKPOINT];
 
     const context = useMemo(
       () => ({
         activeStep,
         orientation,
         areStepsExpanded,
+        shouldShowText:
+          shouldDisplayTextBreakpoint ||
+          orientation === StepperOrientations.vertical,
+        getStepIndex: (id: string) =>
+          steps.findIndex((item) => item.props.id === id),
+        stepsCount: steps.length,
       }),
-      [activeStep, orientation, areStepsExpanded],
+      [activeStep, orientation, areStepsExpanded, steps],
     );
 
     return (
-      <StepperContext.Provider value={context}>
+      <Provider value={context}>
         {orientation === StepperOrientations.vertical ? (
           <Stack
             ref={mergedRef}
@@ -85,7 +92,7 @@ const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
             {steps}
           </Inline>
         )}
-      </StepperContext.Provider>
+      </Provider>
     );
   },
 );

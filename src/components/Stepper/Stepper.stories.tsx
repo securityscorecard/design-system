@@ -45,28 +45,34 @@ const steps = [
   {
     label: 'Shopping Cart',
     summary: 'Review your shopping cart',
+    id: 'shopping-cart',
   },
   {
     label: 'Transport',
     summary: 'Choose a transportation type',
+    id: 'transport',
   },
   {
     label: 'Payment',
     summary: 'Choose a payment type',
+    id: 'payment',
   },
   {
     label: 'Recapitulation',
+    id: 'recapitulation',
   },
   {
     label: 'Confirmation',
+    id: 'confirmation',
   },
 ];
 
 export const Playground: Story<StepperProps> = (args) => (
   <Stepper {...args}>
-    {steps.map(({ label, summary }) => (
+    {steps.map(({ label, summary, id }) => (
       <Step
         key={label}
+        id={id}
         label={label}
         summary={summary}
         onStepClick={action('onStepClick')}
@@ -84,11 +90,11 @@ Playground.parameters = {
 export const StepTypes: Story<StepperProps> = (args) => (
   <Stepper {...args}>
     {[
-      { label: 'Done step' },
-      { label: 'Active step' },
-      { label: 'Pending step' },
-    ].map(({ label }) => (
-      <Step key={label} label={label} />
+      { label: 'Done step', id: 'done' },
+      { label: 'Active step', id: 'active' },
+      { label: 'Pending step', id: 'pending' },
+    ].map(({ label, id }) => (
+      <Step key={label} id={id} label={label} />
     ))}
   </Stepper>
 );
@@ -105,11 +111,11 @@ WithHiddenLabels.decorators = [
 export const Vertical: Story<StepperProps> = (args) => (
   <Stepper {...args}>
     {[
-      { label: 'Done step', summary: 'Done step summary' },
-      { label: 'Active step', summary: 'Active step summary' },
-      { label: 'Pending step', summary: 'Pending step summary' },
-    ].map(({ label, summary }) => (
-      <Step key={label} label={label} summary={summary}>
+      { id: 'done', label: 'Done step', summary: 'Done step summary' },
+      { id: 'active', label: 'Active step', summary: 'Active step summary' },
+      { id: 'pending', label: 'Pending step', summary: 'Pending step summary' },
+    ].map(({ label, summary, id }) => (
+      <Step key={label} id={id} label={label} summary={summary}>
         {label} content
       </Step>
     ))}
@@ -123,11 +129,11 @@ Vertical.args = {
 export const VerticalWithExpandedSteps: Story<StepperProps> = (args) => (
   <Stepper {...args}>
     {[
-      { label: 'Done step', summary: 'Done step summary' },
-      { label: 'Active step', summary: 'Active step summary' },
-      { label: 'Pending step', summary: 'Pending step summary' },
-    ].map(({ label, summary }) => (
-      <Step key={label} label={label} summary={summary}>
+      { id: 'done', label: 'Done step', summary: 'Done step summary' },
+      { id: 'active', label: 'Active step', summary: 'Active step summary' },
+      { id: 'pending', label: 'Pending step', summary: 'Pending step summary' },
+    ].map(({ label, summary, id }) => (
+      <Step key={label} id={id} label={label} summary={summary}>
         {label} content
       </Step>
     ))}
@@ -151,9 +157,10 @@ export const VerticalExample: Story<StepperProps> = ({
   return (
     <Stack gap="lg">
       <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map(({ label, summary }, index) => (
+        {steps.map(({ id, label, summary }, index) => (
           <Step
             key={label}
+            id={id}
             label={label}
             summary={summary}
             onStepClick={setActiveStep}
@@ -213,9 +220,10 @@ export const HorizontalExample: Story<StepperProps> = ({
   return (
     <Stack gap="lg">
       <Stepper activeStep={activeStep}>
-        {steps.map(({ label, summary }) => (
+        {steps.map(({ id, label, summary }) => (
           <Step
             key={label}
+            id={id}
             label={label}
             summary={summary}
             onStepClick={setActiveStep}
