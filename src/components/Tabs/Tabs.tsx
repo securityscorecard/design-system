@@ -1,15 +1,26 @@
-import type { FC, ReactElement } from 'react';
-import type { TabProps, TabsProps } from './Tabs.types';
+import type { FC, ReactText } from 'react';
+import type { TabsProps } from './Tabs.types';
 
 import PropTypes from 'prop-types';
 import { equals } from 'ramda';
-import { Children, cloneElement, isValidElement } from 'react';
 
 import { Inline } from '../layout';
 import { TabVariants } from './Tabs.enums';
 import { SpaceSizes } from '../../theme/space.enums';
 import { BaseTabsWrapper } from '../_internal/BaseTabs/BaseTabsWrapper';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { createCtx } from '../../managers/common/createCtx';
+
+export const { useContext: useTabsContext, Provider } = createCtx<{
+  selectedPatternMatcher: (a: ReactText, b: ReactText) => boolean;
+  selectedValue: ReactText;
+  selectTab: (selectedValue: ReactText) => void;
+  isExpanded: boolean;
+  variant: keyof typeof TabVariants;
+}>(
+  'TabsContext',
+  '"useTabsContext" must be inside a "TabsContext" with a value',
+);
 
 const Tabs: FC<TabsProps> = ({
   selectedValue,
@@ -19,40 +30,38 @@ const Tabs: FC<TabsProps> = ({
   variant = TabVariants.underline,
   isExpanded = false,
 }) => (
-  <BaseTabsWrapper
-    $isExpanded={isExpanded}
-    $variant={variant}
-    className={CLX_COMPONENT}
-    paddingSize={
-      variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
-    }
+  <Provider
+    value={{
+      selectedPatternMatcher,
+      selectedValue,
+      selectTab: onSelectTab,
+      isExpanded,
+      variant,
+    }}
   >
-    <Inline
-      gap={
-        variant === TabVariants.segmented
-          ? SpaceSizes.sm
-          : variant === TabVariants.underline
-          ? SpaceSizes.none
-          : SpaceSizes.lg
+    <BaseTabsWrapper
+      $isExpanded={isExpanded}
+      $variant={variant}
+      className={CLX_COMPONENT}
+      paddingSize={
+        variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
       }
-      role="tablist"
-      stretch={isExpanded ? 'all' : 0}
     >
-      {Children.map(children, (tab) => {
-        if (!isValidElement(tab)) {
-          return null;
+      <Inline
+        gap={
+          variant === TabVariants.segmented
+            ? SpaceSizes.sm
+            : variant === TabVariants.underline
+            ? SpaceSizes.none
+            : SpaceSizes.lg
         }
-
-        return cloneElement(tab as ReactElement<TabProps>, {
-          variant,
-          isExpanded,
-          key: tab.props.value,
-          isSelected: selectedPatternMatcher(tab.props.value, selectedValue),
-          onClick: onSelectTab,
-        });
-      })}
-    </Inline>
-  </BaseTabsWrapper>
+        role="tablist"
+        stretch={isExpanded ? 'all' : 0}
+      >
+        {children}
+      </Inline>
+    </BaseTabsWrapper>
+  </Provider>
 );
 
 Tabs.propTypes = {
