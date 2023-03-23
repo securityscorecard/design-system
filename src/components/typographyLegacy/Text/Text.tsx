@@ -120,7 +120,7 @@ Text.propTypes = {
 };
 
 Text.defaultProps = {
-  size: TextSizes.lg,
+  size: TextSizes.md,
   variant: TextVariants.primary,
   isBold: false,
 };
