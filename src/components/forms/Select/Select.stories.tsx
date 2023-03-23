@@ -309,24 +309,11 @@ MaxVisibleItem.args = {
   maxVisibleItem: 3,
 };
 
-const icons = {
-  HR: 'https://flagicons.lipis.dev/flags/4x3/hr.svg',
-  CU: 'https://flagicons.lipis.dev/flags/4x3/cu.svg',
-  CW: 'https://flagicons.lipis.dev/flags/4x3/cw.svg',
-  CY: 'https://flagicons.lipis.dev/flags/4x3/cy.svg',
-  CZ: 'https://flagicons.lipis.dev/flags/4x3/cz.svg',
-  DK: 'https://flagicons.lipis.dev/flags/4x3/dk.svg',
-};
-
 export const CustomOptionLabel: Story<SelectProps<true>> = (args) => (
   <Select
     formatOptionLabel={(data) => (
       <Inline align="center" gap="xs">
-        <img
-          alt=""
-          src={icons[data.value]}
-          style={{ height: '0.875rem', display: 'inline-block' }}
-        />
+        <span>({data.value})</span>
         <span>{data.label}</span>
       </Inline>
     )}
@@ -345,11 +332,7 @@ export const CustomMultiValueLabel: Story<SelectProps<true>> = (args) => (
 
       return renderMultiValueLabel ? (
         <Inline align="center" gap="xs">
-          <img
-            alt=""
-            src={icons[data.value]}
-            style={{ height: '0.875rem', display: 'inline-block' }}
-          />
+          <span>({data.value})</span>
           <span>{data.label}</span>
         </Inline>
       ) : (
