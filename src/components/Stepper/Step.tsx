@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import type { StepProps } from './Stepper.types';
 
-import { forwardRef, useContext } from 'react';
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -11,9 +11,9 @@ import { SpaceSizes } from '../../theme';
 import { Text } from '../typographyLegacy/Text';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { Inline, Padbox, Stack } from '../layout';
-import { StepperContext } from './Stepper.context';
 import { StepperOrientations } from './Stepper.enums';
 import StepBullet, { BulletCircle, bulletSize } from './StepBullet';
+import { useStepperContext } from './Stepper';
 
 const StepLabel = styled(Text)`
   max-width: 26ch;
@@ -80,16 +80,22 @@ const StepContent = styled.div<{ $isLast?: StepProps['isLast'] }>`
 `;
 
 const Step = forwardRef<HTMLDivElement, PropsWithChildren<StepProps>>(
-  (
-    { children, label, summary, index, isLast, shouldShowText, onStepClick },
-    ref,
-  ) => {
-    const { orientation, activeStep, areStepsExpanded } =
-      useContext(StepperContext);
+  ({ id, children, label, summary, onStepClick }, ref) => {
+    const {
+      orientation,
+      activeStep,
+      areStepsExpanded,
+      getStepIndex,
+      stepsCount,
+      shouldShowText,
+    } = useStepperContext();
+    const index = getStepIndex(id);
+    const isLast = index === stepsCount - 1;
     const stepNumber = index + 1;
     const isActive = activeStep === index;
     const isDone = activeStep > index;
     const isPending = activeStep < index;
+    const shouldDisplayLabel = shouldShowText || isActive;
 
     const isStepClickable = isDone && isNotUndefined(onStepClick);
 
@@ -105,7 +111,7 @@ const Step = forwardRef<HTMLDivElement, PropsWithChildren<StepProps>>(
           isPending={isPending}
           stepNumber={stepNumber}
         />
-        {shouldShowText && (
+        {shouldDisplayLabel && (
           <Stack gap={SpaceSizes.xs}>
             <StepLabel isBold={isActive}>{label}</StepLabel>
             {isNotUndefined(summary) && (
@@ -143,11 +149,9 @@ const Step = forwardRef<HTMLDivElement, PropsWithChildren<StepProps>>(
 );
 Step.displayName = 'Step';
 Step.propTypes = {
+  id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   summary: PropTypes.string,
-  index: PropTypes.number,
-  shouldShowText: PropTypes.bool,
-  isLast: PropTypes.bool,
   onStepClick: PropTypes.func,
 };
 

@@ -16,6 +16,7 @@ export interface StepBulletProps {
 }
 
 export interface StepProps {
+  id: string;
   /**
    * Step main label
    */
