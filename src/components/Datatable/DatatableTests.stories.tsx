@@ -35,7 +35,7 @@ const DatatableTemplate: Story<DatatableProps<Data>> = (args) => (
 
 export const MinimalConfig = DatatableTemplate.bind({});
 MinimalConfig.args = {
-  data: assets.slice(0, 50),
+  data: assets.slice(0, 5),
   columns: simpleColumns,
   dataSize: assets.length,
   controlsConfig: {
@@ -57,7 +57,7 @@ export const WithSelectedRows = DatatableTemplate.bind({});
 WithSelectedRows.args = {
   ...MinimalConfig.args,
   tableConfig: {
-    defaultSelectedRowIds: [1, 6, 24],
+    defaultSelectedRowIds: [1, 3],
   },
 };
 
@@ -65,7 +65,7 @@ export const WithSelectedRowsAndExclusionLogic = DatatableTemplate.bind({});
 WithSelectedRowsAndExclusionLogic.args = {
   ...MinimalConfig.args,
   tableConfig: {
-    defaultSelectedRowIds: [1, 6, 24],
+    defaultSelectedRowIds: [1, 3],
     hasOnlyPerPageSelection: false,
   },
 };
