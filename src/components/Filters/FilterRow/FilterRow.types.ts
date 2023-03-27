@@ -1,6 +1,6 @@
 import { Field, Filter } from '../Filters.types';
-import { Option } from '../components/Select/Select.types';
 import { Operators } from '../Filters.enums';
+import { Option } from '../../forms/Select/Select.types';
 
 export interface SplitFieldProps {
   $width?: number;
