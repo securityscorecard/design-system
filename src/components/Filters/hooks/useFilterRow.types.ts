@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { Option } from '../../forms/Select/Select.types';
 import { Condition, Field } from '../Filters.types';
-import { Option } from '../components/Select/Select.types';
 
 export type PickOption<O extends Option> = Pick<O, 'value' | 'label'>;
 

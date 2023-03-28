@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 
+import { Option, OptionPropType } from '../forms/Select/Select.types';
 import {
   BaseDateRange,
   BaseDateRangePickerPropTypes,
   BaseDateRangePlaceholderPropTypes,
   BaseDateRangePlaceholderProps,
 } from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
-import { Option, OptionPropType } from './components/Select/Select.types';
 import { Operators } from './Filters.enums';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];
