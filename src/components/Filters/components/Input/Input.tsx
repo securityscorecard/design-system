@@ -1,57 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
-import { pipe } from 'ramda';
 
 import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
-import {
-  getFontSize,
-  getFormStyle,
-  getRadii,
-  pxToRem,
-} from '../../../../utils';
 import { validatePattern } from '../../helpers';
-
-const stateStyles = css`
-  padding: ${pxToRem(3, 15)};
-  border: ${getFormStyle('statefulBorderWidth')} solid;
-  outline: none;
-`;
-
-export const StyledInput = styled.input<InputProps>`
-  display: block;
-  width: 100%;
-  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
-  padding: ${pxToRem(4, 16)};
-  background: ${getFormStyle('bgColor')};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
-  color: ${getFormStyle('color')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getFontSize('md')};
-
-  &:focus {
-    ${stateStyles}
-    border-color: ${getFormStyle('focusBorderColor')};
-  }
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: ${getFormStyle('placeholderColor')};
-  }
-  :-ms-input-placeholder {
-    color: ${getFormStyle('placeholderColor')};
-  }
-
-  ${({ isInvalid }) =>
-    isInvalid &&
-    css`
-      ${stateStyles}
-      border-color: ${getFormStyle('invalidBorderColor')};
-    `}
-`;
+import { Input as BaseInput } from '../../../forms';
 
 const Input: React.FC<InputProps> = ({
   value = '',
@@ -63,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   placeholder = 'String',
   isInvalid = false,
   onError,
+  ...props
 }) => {
   const handleOnValidate = (event) => {
     const { target } = event;
@@ -77,7 +32,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <>
-      <StyledInput
+      <BaseInput
         isInvalid={isInvalid}
         maxLength={maxLength}
         pattern={pattern}
@@ -86,6 +41,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onBlur={handleOnValidate}
         onChange={handleOnChange}
+        {...props}
       />
       {isInvalid && <Error>{errorMessage}</Error>}
     </>

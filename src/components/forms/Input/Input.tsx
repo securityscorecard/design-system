@@ -67,6 +67,14 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   &[type='search']::-webkit-search-results-decoration {
     display: none;
   }
+  &[type='number'][data-has-spin='false'] {
+    appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
 `;
 
 Input.propTypes = {
