@@ -1,15 +1,15 @@
-import { Meta, Canvas, Story } from '@storybook/addon-docs';
+import { Canvas, Meta } from '@storybook/addon-docs';
 
 import { DSProvider } from '../../theme';
 import { Stack } from '../layout';
 import {
-  Label,
-  Note,
+  Checkbox,
   Error,
   Input,
-  Select,
+  Label,
+  Note,
   Radio,
-  Checkbox,
+  Select,
   Switch,
   TextArea,
 } from './index';
@@ -32,62 +32,62 @@ export const options = [
     <form>
       <Stack gap="md">
         <Stack>
-          <Label>Your Name</Label>
+          <Label />
           <Input type="text" isInvalid />
-          <Error>This field is required</Error>
+          <Error />
         </Stack>
         <Stack>
-          <Label>Your Country</Label>
+          <Label />
           <Select options={options} />
-          <Note>Where you currently live</Note>
+          <Note />
         </Stack>
         <Stack>
-          <Label>I am</Label>
+          <Label />
           <Stack gap="xs">
-            <Radio name="species" radioId="human" label="Human" value="human" />
+            <Radio label="species" name="human" radioId="Human" value="human" />
             <Radio
-              name="species"
-              radioId="animal"
-              label="Animal"
+              label="species"
+              name="animal"
+              radioId="Animal"
               value="animal"
             />
           </Stack>
         </Stack>
         <Stack>
-          <Label>My hobbies</Label>
+          <Label />
           <Stack gap="xs">
             <Checkbox
-              name="hobbies"
-              checkboxId="reading"
-              label="Reading"
+              checkboxId="hobbies"
+              label="reading"
+              name="Reading"
               value="reading"
             />
             <Checkbox
-              name="hobbies"
-              checkboxId="sleeping"
-              label="Sleeping"
+              checkboxId="hobbies"
+              label="sleeping"
+              name="Sleeping"
               value="sleeping"
             />
             <Checkbox
-              name="hobbies"
-              checkboxId="programming"
-              label="Programming"
+              checkboxId="hobbies"
+              label="programming"
+              name="Programming"
               value="programming"
             />
             <Checkbox
-              name="hobbies"
-              checkboxId="testing"
-              label="Testing"
+              checkboxId="hobbies"
+              label="testing"
+              name="Testing"
               value="testing"
             />
           </Stack>
         </Stack>
         <Stack justify="flex-start">
-          <Label>Do you want to make your profile public?</Label>
-          <Switch switchId="public" label="public" />
+          <Label />
+          <Switch label="public" switchId="public" />
         </Stack>
         <Stack>
-          <Label>Your message to us</Label>
+          <Label />
           <TextArea maxLength="140" />
         </Stack>
       </Stack>

@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { Row } from 'react-table';
 import type { FC } from 'react';
 import type { CellRendererProps } from './renderers.types';

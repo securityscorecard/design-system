@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { PadboxProps } from './Padbox';
 
 import styled from 'styled-components';

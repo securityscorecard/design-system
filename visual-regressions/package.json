@@ -5,17 +5,16 @@
   "scripts": {
     "take-and-check": "./bin/take.sh && ./bin/check.sh",
     "take-and-update": "./bin/take.sh && ./bin/update.sh",
-    "serve-take-and-check": "start-server-and-test 'serve storybook' http-get://localhost:3000 'STORYBOOK_URL=http://localhost:3000 ./bin/take.sh && ./bin/check.sh'"
+    "serve-take-and-check": "start-server-and-test 'serve storybook -L' http-get://localhost:3000 'STORYBOOK_URL=http://localhost:3000 ./bin/take.sh && ./bin/check.sh'"
   },
   "devDependencies": {
     "reg-cli": "^0.17.7",
-    "serve": "^13.0.0",
-    "start-server-and-test": "^1.14.0",
-    "storycap": "3.1.7"
+    "serve": "^14.2.0",
+    "start-server-and-test": "^2.0.0",
+    "storycap": "^4.0.0"
   },
   "resolutions": {
-    "minimatch": "3.0.5",
-    "trim-newlines": "^4.0.2"
+    "trim-newlines": "^3.0.1"
   },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.5.0"
 }

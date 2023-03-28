@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { TextAreaProps } from './TextArea.types';
 
 import TextArea from './TextArea';

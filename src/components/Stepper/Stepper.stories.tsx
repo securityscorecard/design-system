@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { StepperProps } from './Stepper.types';
 
 import { useEffect, useState } from 'react';

@@ -10,6 +10,7 @@ But it also required more definitions for each element, so we have decided to us
 First, a short review of the replacement components called layout primitives.
 
 ## [Padbox](?path=/docs/layout-primitives-padbox--playground)
+
 Padbox is the only container that allows for styling, and its purpose is distancing content through padding. "PaddingSize" is the main argument, but any other styling arguments are accepted by this component.
 
 ## [Stack](?path=/docs/layout-primitives-stack--playground)
@@ -96,9 +97,7 @@ const WhiteLabelingLogoContainer = styled(Padbox)`
 `;
 
 <Inline gap={SpaceSizes.lg} stretch="start">
-  <Stack gap={SpaceSizes.md}>
-    {...someLogic}
-  </Stack>
+  <Stack gap={SpaceSizes.md}>{...someLogic}</Stack>
   <WhiteLabelingLogoContainer
     borderColor={
       brandingOptions.COMPANY_AND_SSC === selectedBrandingType
@@ -108,7 +107,7 @@ const WhiteLabelingLogoContainer = styled(Padbox)`
   >
     {...moreLogic}
   </WhiteLabelingLogoContainer>
-</Inline>
+</Inline>;
 ```
 
 3.

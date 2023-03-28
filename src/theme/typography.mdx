@@ -1,0 +1,179 @@
+import { Meta } from '@storybook/addon-docs';
+
+import { FontItem, FontPalette } from '../../.storybook/blocks/FontPallete';
+import { theme } from './theme';
+
+export const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra
+magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
+leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravida sem semper et.`;
+
+<Meta title="Theme/Typography" />
+
+# Typography
+
+Design System have defined two basic font families. As base font family we are using sans-serif
+`Inter` font, for monospaced text we are using `Space Mono` font. These fonts are not bundled
+together with the Design System and need to be installed separately;
+
+## Installation
+
+### yarn
+
+```bash
+yarn add @fontsource/inter @fontsource/space-mono
+```
+
+### npm
+
+```bash
+npm install @fontsource/inter @fontsource/space-mono
+```
+
+### CDN
+
+```html
+<link
+  rel="stylesheet"
+  href="https://fonts.cdnfonts.com/css/inter?styles=29139,29137,29128"
+/>
+<link
+  href="https://fonts.cdnfonts.com/css/space-mono?styles=18436"
+  rel="stylesheet"
+/>
+```
+
+### Google Web Fonts
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Mono&display=swap"
+  rel="stylesheet"
+/>
+```
+
+## Typography styles
+
+<FontPalette>
+  <FontItem
+    fontFamily="theme.typography.family.base"
+    sampleText="Inter"
+    subtitle={lipsum}
+    title={theme.typography.family.base}
+  />
+  <FontItem
+    fontFamily="theme.typography.family.mono"
+    sampleText="Space Mono"
+    subtitle={lipsum}
+    title={theme.typography.family.mono}
+  />
+</FontPalette>
+
+## Font weights
+
+<FontPalette>
+  <FontItem
+    fontWeight="theme.typography.weight.light"
+    sampleText="Light weight"
+    subtitle={lipsum}
+    title={theme.typography.weight.light}
+  />
+  <FontItem
+    fontWeight="theme.typography.weight.regular"
+    sampleText="Regular weight, monospace font can be used only with regular weight"
+    subtitle={lipsum}
+    title={theme.typography.weight.regular}
+  />
+  <FontItem
+    fontWeight="theme.typography.weight.medium"
+    sampleText="Medium weight"
+    subtitle={lipsum}
+    title={theme.typography.weight.medium}
+  />
+  <FontItem
+    fontWeight="theme.typography.weight.semibold"
+    sampleText="Semibold weight"
+    subtitle={lipsum}
+    title={theme.typography.weight.semibold}
+  />
+  <FontItem
+    fontWeight="theme.typography.weight.bold"
+    sampleText="Bold weight"
+    subtitle={lipsum}
+    title={theme.typography.weight.bold}
+  />
+</FontPalette>
+
+## Font sizes
+
+### Hedings
+
+<FontPalette>
+  <FontItem
+    fontSize="theme.typography.size.h0"
+    fontWeight="Document header and other special cases"
+    sampleText="Heading H0"
+    subtitle={theme.typography.size.h0}
+    title={theme.typography.weight.medium}
+  />
+  <FontItem
+    fontSize="theme.typography.size.h1"
+    fontWeight="Page-level headers"
+    lineHeight="Heading H1"
+    sampleText={theme.typography.size.h1}
+    subtitle={theme.typography.weight.medium}
+    title={theme.typography.lineHeight.xxl}
+  />
+  <FontItem
+    fontSize="theme.typography.size.h2"
+    fontWeight="Section and column headers"
+    lineHeight="Heading H2"
+    sampleText={theme.typography.size.h2}
+    subtitle={theme.typography.weight.medium}
+    title={theme.typography.lineHeight.xxl}
+  />
+  <FontItem
+    fontSize="theme.typography.size.h3"
+    fontWeight="Subsection headers"
+    lineHeight="Heading H3"
+    sampleText={theme.typography.size.h3}
+    subtitle={theme.typography.weight.medium}
+    title={theme.typography.lineHeight.xl}
+  />
+  <FontItem
+    fontSize="theme.typography.size.h4"
+    fontWeight="Block headers"
+    lineHeight="Heading H4"
+    sampleText={theme.typography.size.h4}
+    subtitle={theme.typography.weight.medium}
+    title={theme.typography.lineHeight.lg}
+  />
+</FontPalette>
+
+### Body text
+
+<FontPalette>
+  <FontItem
+    fontSize="theme.typography.size.lg"
+    lineHeight={lipsum}
+    sampleText={theme.typography.size.lg}
+    title={theme.typography.lineHeight.lg}
+  />
+  <FontItem
+    fontSize="theme.typography.size.md"
+    lineHeight={lipsum}
+    sampleText={theme.typography.size.md}
+    title={theme.typography.lineHeight.md}
+  />
+</FontPalette>
+
+## Font licensing
+
+### Inter
+
+Inter is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
+
+### Space Mono
+
+Space Mono is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).

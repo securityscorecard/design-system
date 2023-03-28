@@ -8,21 +8,20 @@ This hook is used fith forward ref and helps you listen to the events outside of
 
 You can pass following options via parameter object
 
-| Key                    | Type     | Default | Description                                                                                                         |
-| :--------------------- | :------- | :------ | :------------------------------------------------------------------------------------------------------------------ |
-| callback               | function |         | It is triggered on events happening outside of the element (listened to `Escape`, `Enter` keypress and `Click`)     |
+| Key      | Type     | Default | Description                                                                                                     |
+| :------- | :------- | :------ | :-------------------------------------------------------------------------------------------------------------- |
+| callback | function |         | It is triggered on events happening outside of the element (listened to `Escape`, `Enter` keypress and `Click`) |
 
 The return object includes following properties
 
-| Key             | Type      | Default | Description                                                                                    |
-| :-------------- | :-------- | :------ | :--------------------------------------------------------------------------------------------- |
-| ref             | Object    |         | Creates an object that is then passed into the component that reacts to the outside events     |
+| Key | Type   | Default | Description                                                                                |
+| :-- | :----- | :------ | :----------------------------------------------------------------------------------------- |
+| ref | Object |         | Creates an object that is then passed into the component that reacts to the outside events |
 
 ```js
 import { useOuterClick } from '@securityscorecard/design-system';
 
 const Component = () => {
-
   const onClick = () => callAction();
   const outerRef = useOuterClick(onClick);
 

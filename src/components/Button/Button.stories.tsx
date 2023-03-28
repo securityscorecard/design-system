@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Meta, Story } from '@storybook/react';
 import type { ButtonProps } from './Button.types';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
