@@ -117,7 +117,7 @@ const renderComponentWithProps = (
   const { component: ComponentWithProps, props } = Component;
   const { units } = props;
   return units ? (
-    <Inline align="center" gap={SpaceSizes.sm}>
+    <Inline align="center" gap={SpaceSizes.sm} stretch="start">
       <ComponentWithProps
         isInvalid={isInvalid}
         value={value}

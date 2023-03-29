@@ -143,6 +143,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   onValuesChange = noop,
   onInputChange = noop,
   placeholder,
+  pattern,
   id,
   inputId,
   inputValue: defaultInputValue = '',
@@ -155,6 +156,10 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   const [inputRef, setInputRef] = useState(null);
 
   const addValue = (newValue: string): void => {
+    const isValid = inputRef?.checkValidity();
+    if (!isValid) {
+      return;
+    }
     // add only unique values
     const isDuplicateValue = includes(newValue, values);
 
@@ -308,6 +313,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
                 injectStyles={false}
                 inputRef={setInputRef}
                 minWidth={15}
+                pattern={pattern}
                 placeholder={isEmptyArray(values) ? placeholder : undefined}
                 value={inputValue}
                 onChange={(e) => handleInputOnChange(e)}
