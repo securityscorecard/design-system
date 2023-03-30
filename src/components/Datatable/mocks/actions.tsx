@@ -82,6 +82,19 @@ export const datatableRowActions = [
   },
 ];
 
+export const datatableMultipleRowActions = [
+  {
+    label: 'Detail',
+    name: 'detail',
+    onClick: action('onTableRowActionClick (detail)'),
+  },
+  {
+    label: 'Edit',
+    name: 'edit',
+    onClick: action('onTableRowActionClick (edit)'),
+  },
+];
+
 export const datatableBatchActions = [
   {
     label: (

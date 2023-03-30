@@ -8,6 +8,7 @@ import { DropdownMenu } from '../../BaseDropdownMenu';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
 import { ACTIONS_COLUMN_ID, CellTypes } from '../renderers/renderers.enums';
+import { Link } from '../../../typographyLegacy';
 
 const SVGIcon = styled.svg`
   display: inline-block;
@@ -46,7 +47,6 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
 export const actionsColumn = {
   id: ACTIONS_COLUMN_ID,
   sticky: 'right',
-  width: 48,
   disableSortBy: true,
   cellType: CellTypes.actions,
   Cell: (props: CellProps<Record<string, unknown>>): React.ReactElement => {
@@ -55,6 +55,18 @@ export const actionsColumn = {
       ...action,
       onClick: () => action.onClick(row.id, row.original),
     }))(rowActions);
+    const isSingleAction = actions.length === 1;
+
+    if (isSingleAction) {
+      const [action] = actions;
+      return (
+        <Inline align="center">
+          <Link style={{ whiteSpace: 'normal' }} variant="text" {...action}>
+            {action.label}
+          </Link>
+        </Inline>
+      );
+    }
 
     return (
       <Inline justify="center" stretch="start">
@@ -74,4 +86,8 @@ export const actionsColumn = {
       </Inline>
     );
   },
+};
+
+export const getActionsColumn = (rowActions) => {
+  return { ...actionsColumn, width: rowActions.length === 1 ? 100 : 48 };
 };

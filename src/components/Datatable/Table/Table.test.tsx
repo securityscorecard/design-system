@@ -149,9 +149,6 @@ describe('Datatable/Table', () => {
         ]}
       />,
     );
-    userEvent.click(
-      screen.getAllByRole('button', { name: /Row Actions/i })[rowIndex],
-    );
 
     userEvent.click(
       screen.getAllByRole('button', { name: 'Action' })[rowIndex],

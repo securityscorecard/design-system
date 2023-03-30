@@ -36,7 +36,7 @@ import {
   Head,
   LoadingNoData,
   StyledBaseTable,
-  actionsColumn,
+  getActionsColumn,
 } from '../../_internal/BaseTable';
 import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
@@ -197,7 +197,7 @@ function Table<D extends Record<string, unknown>>({
       hooks.visibleColumns.push((visibleColumns) => [
         ...(hasSelection ? [selectionColumn] : []),
         ...visibleColumns,
-        ...(isNonEmptyArray(rowActions) ? [actionsColumn] : []),
+        ...(isNonEmptyArray(rowActions) ? [getActionsColumn(rowActions)] : []),
       ]);
     },
   );

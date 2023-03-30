@@ -10,7 +10,10 @@ import { Data } from '../../_internal/BaseTable/mocks/types';
 import assets from '../../_internal/BaseTable/mocks/ipAssets.json';
 import { defaultTableConfig } from '../defaultConfigs';
 import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';
-import { datatableRowActions } from '../mocks/actions';
+import {
+  datatableMultipleRowActions,
+  datatableRowActions,
+} from '../mocks/actions';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 
 MockDate.set('2021-03-31T00:00:00Z');
@@ -68,6 +71,12 @@ export const WithRowActions = TableTemplate.bind({});
 WithRowActions.args = {
   ...MinimalConfig.args,
   rowActions: datatableRowActions,
+};
+
+export const WithMultipleRowActions = TableTemplate.bind({});
+WithMultipleRowActions.args = {
+  ...MinimalConfig.args,
+  rowActions: datatableMultipleRowActions,
 };
 
 export const WithSelectedRows = TableTemplate.bind({});
