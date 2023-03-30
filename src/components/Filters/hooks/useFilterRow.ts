@@ -3,8 +3,8 @@ import { isUndefined } from 'ramda-adjunct';
 
 import { Condition, Field } from '../Filters.types';
 import { PickOption, UseFilterRowType } from './useFilterRow.types';
-import { Option } from '../components/Select/Select.types';
 import { useLogger } from '../../../hooks/useLogger';
+import { Option } from '../../forms/Select/Select.types';
 
 export const normalizeOptions: <O extends Option>(options: O) => PickOption<O> =
   pick(['value', 'label']);
