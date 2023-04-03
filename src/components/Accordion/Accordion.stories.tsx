@@ -7,6 +7,7 @@ import { Paragraph, Text } from '../typographyLegacy';
 import { Button } from '../Button';
 import Accordion from './Accordion';
 import { AccordionProps } from './Accordion.types';
+import { CollapsibleVariants } from '../Collapsible/Collapsible.enums';
 
 export default {
   title: 'components/Accordion',
@@ -38,6 +39,12 @@ Playground.parameters = {
 
 export const DefaultAccordion = AccordionTemplate.bind({});
 DefaultAccordion.args = Playground.args;
+
+export const InlineAccordion = AccordionTemplate.bind({});
+InlineAccordion.args = {
+  ...Playground.args,
+  variant: CollapsibleVariants.inline,
+};
 
 export const DoesNotCollapsOnOpen = AccordionTemplate.bind({});
 DoesNotCollapsOnOpen.args = {

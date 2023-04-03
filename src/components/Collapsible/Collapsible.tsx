@@ -1,47 +1,60 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { includes } from 'ramda';
 import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { Icon } from '../Icon';
-import { Strong, Text } from '../typographyLegacy';
+import { Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { CollapsibleProps } from './Collapsible.types';
 import { Padbox } from '../layout/Padbox';
 import { Inline } from '../layout/Inline';
 import { SpaceSizes } from '../../theme/space.enums';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { CollapsibleVariants } from './Collapsible.enums';
 
 const Header = styled(Padbox)`
   width: 100%;
   cursor: pointer;
+
+  .inline & {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid ${getColor('neutral.400')};
+  }
 `;
 
 const HeaderContent = styled.div`
   flex: 1;
+  .inline & {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    ${Text} {
+      width: 50%;
+    }
+  }
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px solid ${getColor('neutral.500')};
+  .regular & {
+    border-top: 1px solid ${getColor('neutral.400')};
+  }
+  .inline & {
+    padding-left: 0;
+    padding-right: 0;
+  }
 `;
 
-const Container = styled.div<{ withBackground: boolean }>`
-  border: 1px solid ${getColor('neutral.500')};
-  border-radius: ${getRadii('default')};
-  ${({ withBackground }) =>
-    withBackground &&
-    css`
-      background: ${getColor('neutral.100')};
-    `}
-`;
-
-const Subject = styled(Strong)`
-  display: block;
-  margin-top: ${pxToRem(4)};
+const Container = styled(Padbox)`
+  &.regular {
+    border: 1px solid ${getColor('neutral.400')};
+    border-radius: ${getRadii('default')};
+  }
 `;
 
 const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
@@ -54,49 +67,75 @@ const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
 const Collapsible: React.FC<CollapsibleProps> = ({
   children,
   className,
+  isOpen = undefined,
   defaultIsOpened = false,
   subject,
   title,
   onOpen,
+  subtitle: _subtitle,
+  onChange = (value) => value,
+  variant = CollapsibleVariants.regular,
 }) => {
-  const [isOpen, setOpen] = useState(defaultIsOpened);
+  const [_open, setOpen] = useState(isOpen || defaultIsOpened);
+  const subtitle = _subtitle || subject;
+  const isControlled = isOpen !== undefined;
+  const open = isControlled ? isOpen : _open;
 
   const handleHeaderClick = () => {
-    const willOpen = !isOpen;
-    setOpen(willOpen);
-    if (typeof onOpen === 'function' && willOpen) {
+    const value = !open;
+    if (isControlled) {
+      onChange(value);
+    } else {
+      setOpen(value);
+    }
+    if (typeof onOpen === 'function' && value) {
       onOpen();
     }
   };
 
   return (
     <Container
-      className={cls(CLX_COMPONENT, className)}
+      className={cls(CLX_COMPONENT, className, {
+        regular: variant === CollapsibleVariants.regular,
+        inline: variant === CollapsibleVariants.inline,
+      })}
+      variant={variant}
       withBackground={isOpen}
     >
       <Header
-        paddingSize={SpaceSizes.lg}
+        paddingSize={SpaceSizes.mdPlus}
         paddingType={PaddingTypes.squish}
         tabIndex={0}
         onClick={handleHeaderClick}
         onKeyDown={(e) => ['Enter', ' '].includes(e.key) && handleHeaderClick()}
       >
-        <Inline align="center" gap={SpaceSizes.lg}>
+        <Inline align="center" gap={SpaceSizes.md}>
           <StyledIcon
+            height={20}
             isRotated={isOpen}
             name={SSCIconNames.angleRight}
             type={IconTypes.ssc}
+            width={20}
           />
           <HeaderContent>
-            <Text as="div" size={TextSizes.md} variant={TextVariants.secondary}>
+            <Text
+              as="div"
+              size={TextSizes.lg}
+              variant={TextVariants.primary}
+              isBold
+            >
               {title}
             </Text>
-            {subject && <Subject size={TextSizes.lg}>{subject}</Subject>}
+            {subtitle && (
+              <Text size={TextSizes.md} variant={TextVariants.secondary}>
+                {subtitle}
+              </Text>
+            )}
           </HeaderContent>
         </Inline>
       </Header>
-      {isOpen && (
-        <Content paddingSize={SpaceSizes.lg}>
+      {open && (
+        <Content paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
           <Text as="div" size={TextSizes.md}>
             {children}
           </Text>
@@ -109,9 +148,12 @@ const Collapsible: React.FC<CollapsibleProps> = ({
 Collapsible.propTypes = {
   subject: PropTypes.string.isRequired,
   title: PropTypes.node.isRequired,
+  subtitle: PropTypes.node,
   className: PropTypes.string,
   defaultIsOpened: PropTypes.bool,
+  variant: PropTypes.string,
   onOpen: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 export default Collapsible;

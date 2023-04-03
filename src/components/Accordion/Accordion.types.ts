@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
+import { CollapsibleVariants } from '../Collapsible/Collapsible.enums';
+
 export type AccordionItemId = string | number;
 
 export type AccordionItem = {
@@ -25,6 +27,7 @@ export interface AccordionProps {
   isCard?: boolean;
   className?: string;
   openItems: AccordionItemId[];
+  variant?: CollapsibleVariants;
 }
 
 export const AccordionItemIdPropType = PropTypes.oneOfType([

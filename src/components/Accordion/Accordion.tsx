@@ -11,8 +11,10 @@ import {
   AccordionItemPropType,
   AccordionProps,
 } from './Accordion.types';
-import AccordionCollapsible from './AccordionCollapsible';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { Collapsible } from '../Collapsible';
+import { SpaceSizes } from '../../theme';
+import { CollapsibleVariants } from '../Collapsible/Collapsible.enums';
 
 const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
   filter(propEq('isOpen', true)),
@@ -39,13 +41,15 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
       isCollapsedOnOpen = true,
       items,
       openItems,
-      isCard = true,
       className,
+      variant: _variant = CollapsibleVariants.regular,
+      isCard,
       ...props
     },
     ref,
   ) => {
     const [openIds, setOpenIds] = useState(pickOpen(items));
+    const variant = isCard === false ? CollapsibleVariants.inline : _variant;
 
     useEffect(
       () =>
@@ -55,7 +59,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
       [openItems, isCollapsedOnOpen],
     );
 
-    const handleClick = useCallback(
+    const handleChange = useCallback(
       (id: AccordionItemId) => {
         setOpenIds((state) => filterState(state, id, isCollapsedOnOpen));
       },
@@ -63,18 +67,25 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     );
 
     return (
-      <Stack {...props} ref={ref} className={cls(CLX_COMPONENT, className)}>
-        {items.map(({ title, id, content }) => (
-          <AccordionCollapsible
-            key={`accordion-item-${id}`}
-            handleHeaderClick={handleClick}
-            id={id}
-            isCard={isCard}
-            isOpen={includes(id, openIds)}
+      <Stack
+        gap={
+          variant === CollapsibleVariants.regular
+            ? SpaceSizes.sm
+            : SpaceSizes.none
+        }
+        {...props}
+        ref={ref}
+        className={cls(CLX_COMPONENT, className)}
+      >
+        {items.map(({ title, content, id }) => (
+          <Collapsible
+            isOpen={openIds.includes(id)}
             title={title}
+            variant={variant}
+            onChange={() => handleChange(id)}
           >
             {content}
-          </AccordionCollapsible>
+          </Collapsible>
         ))}
       </Stack>
     );
@@ -84,6 +95,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
 Accordion.propTypes = {
   items: PropTypes.arrayOf(AccordionItemPropType).isRequired,
   isCollapsedOnOpen: PropTypes.bool,
+  variant: PropTypes.string,
   className: PropTypes.string,
   openItems: PropTypes.arrayOf(AccordionItemIdPropType),
 };
