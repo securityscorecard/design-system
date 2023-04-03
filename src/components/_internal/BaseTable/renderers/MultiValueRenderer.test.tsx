@@ -29,7 +29,7 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    fireEvent.mouseEnter(screen.getByText(`+ ${restValuesCount}`));
+    fireEvent.pointerEnter(screen.getByText(`+ ${restValuesCount}`));
 
     /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
@@ -49,7 +49,7 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    fireEvent.mouseEnter(screen.getByText(values[0]));
+    fireEvent.pointerEnter(screen.getByText(values[0]));
 
     /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
@@ -156,7 +156,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(
       document.getElementsByClassName('ds-table-cell-multivalue')[0],
     ).toHaveTextContent('1K2K+ 1');
-    fireEvent.mouseEnter(screen.getByText('+ 1'));
+    fireEvent.pointerEnter(screen.getByText('+ 1'));
     await waitFor(() => {
       expect(
         document.getElementById(defaultDSContext.portalsContainerId),

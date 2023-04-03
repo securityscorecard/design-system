@@ -264,7 +264,7 @@ describe('Datatable/CellRenderer', () => {
       );
 
       const value = screen.getByText(singleValue);
-      fireEvent.mouseEnter(value);
+      fireEvent.pointerEnter(value);
 
       await waitFor(() => {
         expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
