@@ -3522,6 +3522,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma-capacity/babel-plugin-react-display-name@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@prisma-capacity/babel-plugin-react-display-name@npm:1.0.6"
+  checksum: 8ae582d5e6de0b6d8e8174639cb411b3460ff38399925108ff6798f1a75bb95f0e71690d3bd320fc662e099ba1c74413ffcdbb6c0cac4bc0d1d17853ec140cb6
+  languageName: node
+  linkType: hard
+
 "@react-aria/ssr@npm:^3.2.0":
   version: 3.2.0
   resolution: "@react-aria/ssr@npm:3.2.0"
@@ -3658,6 +3665,7 @@ __metadata:
     "@geometricpanda/storybook-addon-badges": ^1.1.1
     "@mdx-js/react": ^1.6.22
     "@popperjs/core": ^2.11.4
+    "@prisma-capacity/babel-plugin-react-display-name": ^1.0.6
     "@react-aria/utils": ^3.12.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/commit-analyzer": ^9.0.2
@@ -3690,7 +3698,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.55.0
     "@typescript-eslint/parser": ^5.55.0
     "@vitejs/plugin-react": ^3.1.0
-    babel-plugin-add-react-displayname: "npm:add-react-displayname@^0.0.7"
     babel-plugin-styled-components: ^2.0.7
     classnames: ^2.3.1
     csstype: ^3.0.11
@@ -6805,13 +6812,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.8.0
   checksum: 4e93e6e9fb996cc5f1505e924eb8e8cc7b25c294ba9629762a2715390f48af6a4c14dbb84cd9730013ac0e03267a5a9aa2fb6318c544489cda7f50f4e506def4
-  languageName: node
-  linkType: hard
-
-"babel-plugin-add-react-displayname@npm:add-react-displayname@^0.0.7":
-  version: 0.0.7
-  resolution: "add-react-displayname@npm:0.0.7"
-  checksum: eab64760a014a42fbe919e8a9823b5ad2e5190f9aa61d2c7df92722a6e1b7b57ca37ff05b2cb362e5b14067ca795dfcac4764297a2d0cd1299a63a6822fcab59
   languageName: node
   linkType: hard
 

@@ -10,7 +10,10 @@ const commonPlugins = [
   viteRequire(),
   react({
     babel: {
-      plugins: ['babel-plugin-styled-components', 'add-react-displayname'],
+      plugins: [
+        'babel-plugin-styled-components',
+        '@prisma-capacity/babel-plugin-react-display-name',
+      ],
     },
   }),
 ];
