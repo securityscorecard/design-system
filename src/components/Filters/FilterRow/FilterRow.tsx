@@ -283,7 +283,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
           onClick={onRemove}
         />
       ) : null}
-      <SplitField $width={85}>
+      <SplitField $width={96}>
         {!isOperatorFieldEnabled ? (
           <DisabledOperator>
             {/* First row starts by Where operator */}
