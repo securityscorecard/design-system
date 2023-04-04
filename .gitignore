@@ -20,12 +20,12 @@ tsconfig.tsbuildinfo
 !.yarn/sdks
 !.yarn/versions
 
-visual-regressions/.yarn/*
-!visual-regressions/.yarn/patches
-!visual-regressions/.yarn/plugins
-!visual-regressions/.yarn/releases
-!visual-regressions/.yarn/sdks
-!visual-regressions/.yarn/versions
+packages/visual-regressions/.yarn/*
+!packages/visual-regressions/.yarn/patches
+!packages/visual-regressions/.yarn/plugins
+!packages/visual-regressions/.yarn/releases
+!packages/visual-regressions/.yarn/sdks
+!packages/visual-regressions/.yarn/versions
 
 # Storybook static build
 storybook-static
