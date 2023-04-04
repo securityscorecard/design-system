@@ -135,8 +135,8 @@ const Dropdown: React.FC<DropdownProps> = React.forwardRef(
             onClick: handleTriggerOnClick,
             onTouchStart: handleTriggerOnClick,
             onKeyDown: handleTriggerOnKeyDown,
-            onMouseEnter: handleTriggerOnMouseEnter,
-            onMouseLeave: handleTriggerOnMouseLeave,
+            onPointerEnter: handleTriggerOnMouseEnter,
+            onPointerLeave: handleTriggerOnMouseLeave,
             onFocus: handleTriggerOnFocus,
             onBlur: handleTriggerOnBlur,
           })}
