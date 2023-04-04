@@ -191,13 +191,3 @@ DrawerBox.propTypes = {
   size: PropTypes.oneOf(Object.values(DrawerSizes)),
   props: PropTypes.objectOf(PropTypes.oneOf([PropTypes.string])),
 };
-Drawer.propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  adornment: PropTypes.node,
-  footer: PropTypes.node,
-  size: PropTypes.oneOf(Object.values(DrawerSizes)),
-  hasBackdrop: PropTypes.bool,
-  className: PropTypes.string,
-};

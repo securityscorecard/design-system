@@ -172,6 +172,7 @@ module.exports = {
         ],
       },
     ],
+    'no-restricted-syntax': 'off',
   },
   overrides: [
     {
@@ -188,6 +189,12 @@ module.exports = {
           },
         ],
         'react/jsx-sort-props': 'off',
+      },
+    },
+    {
+      files: ['scripts/*.ts', 'scripts/*.js'],
+      rules: {
+        'no-console': 'off',
       },
     },
     {

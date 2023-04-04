@@ -1,0 +1,19 @@
+# typescript-to-proptypes
+
+Code taken from https://github.com/mui/material-ui/tree/fda2bc0c1375631bae756bcdfab1dd38daef36f1/packages/typescript-to-proptypes
+
+An API for converting [TypeScript](https://www.npmjs.com/package/typescript) definitions to [PropTypes](https://www.npmjs.com/package/prop-types) using the TypeScript Compiler API
+
+## Support
+
+| Component type   |                    |
+| :--------------- | :----------------- |
+| Class            | :heavy_check_mark: |
+| Function         | :heavy_check_mark: |
+| Const functions  | :heavy_check_mark: |
+| React.memo       | :heavy_check_mark: |
+| React.ForwardRef | :heavy_check_mark: |
+
+## License
+
+This project is licensed under the terms of the [MIT license](/LICENSE).

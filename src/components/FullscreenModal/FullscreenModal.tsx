@@ -101,6 +101,7 @@ const FullscreenModalContent = forwardRef(
 You should either provide content in "sidebar" property or switch layout to "${FullscreenModalLayouts.single6}" or "${FullscreenModalLayouts.single8}"
 `,
       );
+
       return null;
     }
 
@@ -125,6 +126,7 @@ You should either provide content in "sidebar" property or switch layout to "${F
                 {sidebar}
               </Col>
             )}
+
             <Col cols={contentCols} offset={contentOffset}>
               {content}
               <ModalFooter
@@ -157,16 +159,27 @@ const FullscreenModal = forwardRef(
     return renderModal();
   },
 );
-FullscreenModal.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  header: PropTypes.node.isRequired,
+
+FullscreenModal.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   content: PropTypes.node.isRequired,
   footer: PropTypes.node.isRequired,
+  header: PropTypes.node.isRequired,
+  layout: PropTypes.oneOf([
+    'sidebar-4-6',
+    'sidebar-4-8',
+    'single-10',
+    'single-6',
+    'single-8',
+  ]).isRequired,
   onClose: PropTypes.func.isRequired,
-  sidebar: PropTypes.node,
-  layout: PropTypes.oneOf(Object.values(FullscreenModalLayouts)),
   scrollToTopButtonLabel: PropTypes.string,
-  /* eslint-enable */
-};
+  sidebar: PropTypes.node,
+} as any;
 
 export default FullscreenModal;

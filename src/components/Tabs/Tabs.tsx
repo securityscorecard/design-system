@@ -64,14 +64,45 @@ const Tabs: FC<TabsProps> = ({
   </Provider>
 );
 
-Tabs.propTypes = {
-  selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  variant: PropTypes.oneOf(Object.values(TabVariants)),
-  selectedPatternMatcher: PropTypes.func,
+Tabs.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   isExpanded: PropTypes.bool,
+  margin: PropTypes.oneOfType([
+    PropTypes.oneOf(['none']),
+    PropTypes.number,
+    PropTypes.shape({
+      bottom: PropTypes.number,
+      horizontal: PropTypes.number,
+      left: PropTypes.number,
+      right: PropTypes.number,
+      top: PropTypes.number,
+      vertical: PropTypes.number,
+    }),
+  ]),
   onSelectTab: PropTypes.func,
-};
+  padding: PropTypes.oneOfType([
+    PropTypes.oneOf(['none']),
+    PropTypes.number,
+    PropTypes.shape({
+      bottom: PropTypes.number,
+      horizontal: PropTypes.number,
+      left: PropTypes.number,
+      right: PropTypes.number,
+      top: PropTypes.number,
+      vertical: PropTypes.number,
+    }),
+  ]),
+  selectedPatternMatcher: PropTypes.func,
+  selectedValue: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired,
+  ]).isRequired,
+  variant: PropTypes.oneOf(['segmented', 'text', 'underline']),
+} as any;
 
 export default Tabs;

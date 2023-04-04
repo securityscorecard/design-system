@@ -1,4 +1,5 @@
 import type { FileSelectorProps } from './FileSelector.types';
+import PropTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { useDropzone } from 'react-dropzone';
@@ -130,6 +131,7 @@ const FileSelector = ({
     error(
       'Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
     );
+
     return null;
   }
 
@@ -233,5 +235,62 @@ const FileSelector = ({
     </FileSelectorWrapper>
   );
 };
+
+FileSelector.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Button label text
+   */
+  buttonLabel: PropTypes.string,
+  /**
+   * Drop label text displayed after button
+   */
+  dropLabel: PropTypes.string,
+  /**
+   * Change FileSelector to error state
+   */
+  hasError: PropTypes.bool,
+  /**
+   * Hides button and disable click event so only drop files is available
+   */
+  isClickDisabled: PropTypes.bool,
+  /**
+   * Disables the FileSelector
+   */
+  isDisabled: PropTypes.bool,
+  /**
+   * Hide drop zone and display only button, drop event is disabled
+   */
+  isDragDisabled: PropTypes.bool,
+  /**
+   * Maximal file size in bytes
+   */
+  maxFileSize: PropTypes.number,
+  /**
+   * Minimal file size in bytes
+   */
+  minFileSize: PropTypes.number,
+  /**
+   * Callback fired when selected files are accepted
+   */
+  onFilesAccepted: PropTypes.func,
+  /**
+   * Callback fired on file drop or select through native dialog
+   */
+  onFilesDrop: PropTypes.func,
+  /**
+   * Callback fired when selected files are rejected
+   */
+  onFilesRejected: PropTypes.func,
+  /**
+   * Size variant of the FileSelector
+   */
+  size: PropTypes.oneOf(['area', 'compact', 'fill']),
+} as any;
 
 export default FileSelector;

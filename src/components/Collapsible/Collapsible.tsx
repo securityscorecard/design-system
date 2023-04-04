@@ -108,12 +108,18 @@ const Collapsible: FC<CollapsibleProps> = ({
   );
 };
 
-Collapsible.propTypes = {
-  subject: PropTypes.string.isRequired,
-  title: PropTypes.node.isRequired,
+Collapsible.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   className: PropTypes.string,
   defaultIsOpened: PropTypes.bool,
   onOpen: PropTypes.func,
-};
+  subject: PropTypes.string,
+  title: PropTypes.node.isRequired,
+} as any;
 
 export default Collapsible;

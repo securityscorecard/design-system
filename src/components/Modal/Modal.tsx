@@ -123,11 +123,16 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
 export default Modal;
 
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string,
-  footer: PropTypes.node,
-  size: PropTypes.oneOf(Object.values(ModalSizes)),
+Modal.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   className: PropTypes.string,
-};
+  footer: PropTypes.node,
+  onClose: PropTypes.func,
+  size: PropTypes.oneOf(['lg', 'md', 'sm', 'xs']),
+  title: PropTypes.string,
+} as any;

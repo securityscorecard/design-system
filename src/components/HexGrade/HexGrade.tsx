@@ -122,13 +122,19 @@ const HexGrade: FC<HexGradeProps> = ({
   );
 };
 
-HexGrade.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HexGradeVariants)),
-  grade: PropTypes.oneOf(Object.values(HexGradeGrades)),
-  size: PropTypes.number,
+HexGrade.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  className: PropTypes.string,
+  grade: PropTypes.oneOf(['?', 'A', 'B', 'C', 'D', 'F', 'n/a']),
   isInverted: PropTypes.bool,
   margin: SpacingSizeValuePropType,
-  className: PropTypes.string,
-};
+  size: PropTypes.number,
+  variant: PropTypes.oneOf(['cs', 'outline', 'solid']),
+} as any;
 
 export default HexGrade;

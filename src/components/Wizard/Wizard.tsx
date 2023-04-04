@@ -42,12 +42,18 @@ const Wizard: FC<WizardProps> = ({
   );
 };
 
-Wizard.propTypes = {
+Wizard.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   initialStep: PropTypes.string,
-  size: PropTypes.oneOf(Object.values(ModalSizes)),
   isBackwardNavigationEnabled: PropTypes.bool,
-  onStepChange: PropTypes.func,
   onClose: PropTypes.func,
-};
+  onStepChange: PropTypes.func,
+  size: PropTypes.oneOf(['lg', 'md', 'sm', 'xs']),
+} as any;
 
 export default Wizard;

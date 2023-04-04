@@ -102,16 +102,49 @@ const SortableList: FC<SortableListProps> = ({
   );
 };
 
-SortableList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+SortableList.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Sorted array of list items keys. Items has to be unique.
+   */
+  items: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  /**
+   * Object of items label. Keys should be values from `items` array.
+   */
   labels: PropTypes.shape({}),
+  /**
+   * Maximal list height
+   */
   maxHeight: PropTypes.number,
-  renderItem: PropTypes.func,
-  onOrderChange: PropTypes.func,
-  onDragStart: PropTypes.func,
-  onDragOver: PropTypes.func,
-  onDragEnd: PropTypes.func,
+  /**
+   * Callback when dragging is canceled (e.g. by pressing ESC)
+   */
   onDragCancel: PropTypes.func,
-};
+  /**
+   * Callback when dragging ends
+   */
+  onDragEnd: PropTypes.func,
+  /**
+   * Callback when dragging over another item
+   */
+  onDragOver: PropTypes.func,
+  /**
+   * Callback when dragging starts
+   */
+  onDragStart: PropTypes.func,
+  /**
+   * Callback called when items order is changed
+   */
+  onOrderChange: PropTypes.func,
+  /**
+   * Custom content renderer
+   */
+  renderItem: PropTypes.func,
+} as any;
 
 export default SortableList;

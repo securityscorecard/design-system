@@ -37,6 +37,7 @@ const Pagination: FC<PaginationProps> = ({
         onChange={onPageChange}
       />
     )}
+
     {renderItem &&
       renderItem({
         'aria-label': 'Next page',
@@ -49,12 +50,33 @@ const Pagination: FC<PaginationProps> = ({
   </Inline>
 );
 
-Pagination.propTypes = {
-  pageCount: PropTypes.number.isRequired,
+Pagination.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Number of current page. Starts with 1.
+   */
   currentPage: PropTypes.number.isRequired,
+  /**
+   * Callback called when pagination button is clicked.
+   */
   onPageChange: PropTypes.func.isRequired,
+  /**
+   * Number of page positions. This also includes ellipsis positions if visible.
+   */
   pageButtonsCount: PropTypes.number,
+  /**
+   * Total number of pages.
+   */
+  pageCount: PropTypes.number.isRequired,
+  /**
+   * Custom pagination item render function
+   */
   renderItem: PropTypes.func,
-};
+} as any;
 
 export default Pagination;

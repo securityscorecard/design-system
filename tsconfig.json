@@ -16,6 +16,7 @@
     "isolatedModules": true,
     "strict": false
   },
-  "include": ["src/**/*", ".storybook/**/*"],
+  "include": ["src/**/*", ".storybook/**/*", "packages/**/*", "scripts/**/*"],
+  "exclude": ["packages/typescript-to-proptypes/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

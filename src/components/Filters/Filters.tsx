@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import PropTypes from 'prop-types';
 import type { Field, Filter, FiltersProps } from './Filters.types';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -96,6 +97,7 @@ const Filters: FC<FiltersProps> = ({
         : map(assoc('operator', defaultOperator), stateFromProps),
     [stateFromProps, isOperatorFieldEnabled, defaultOperator],
   );
+
   const [filtersValues, setFiltersValues] = useState<Array<Filter>>(null);
   const [isDefaultState, setIsDefaultState] = useState(true);
   const [hasUnappliedFilters, setHasUnappliedFilters] = useState(false);
@@ -201,6 +203,7 @@ const Filters: FC<FiltersProps> = ({
         },
         filters,
       );
+
       callOnChange(newFilters);
 
       return newFilters;
@@ -221,6 +224,7 @@ const Filters: FC<FiltersProps> = ({
         },
         filters,
       );
+
       callOnChange(newFilters);
 
       return newFilters;
@@ -240,6 +244,7 @@ const Filters: FC<FiltersProps> = ({
         },
         filters,
       );
+
       callOnChange(newFilters);
 
       return newFilters;
@@ -367,4 +372,96 @@ const Filters: FC<FiltersProps> = ({
 
 export default Filters;
 
-Filters.propTypes = FiltersPropType;
+Filters.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  defaultOperator: PropTypes.oneOf(['and', 'or']),
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      conditions: PropTypes.arrayOf(
+        PropTypes.shape({
+          component: PropTypes.oneOfType([
+            PropTypes.element.isRequired,
+            PropTypes.number.isRequired,
+            PropTypes.shape({}).isRequired,
+            PropTypes.shape({
+              '__@iterator@393': PropTypes.func.isRequired,
+              '__@unscopables@719': PropTypes.func.isRequired,
+              at: PropTypes.func.isRequired,
+              concat: PropTypes.func.isRequired,
+              copyWithin: PropTypes.func.isRequired,
+              entries: PropTypes.func.isRequired,
+              every: PropTypes.func.isRequired,
+              fill: PropTypes.func.isRequired,
+              filter: PropTypes.func.isRequired,
+              find: PropTypes.func.isRequired,
+              findIndex: PropTypes.func.isRequired,
+              flat: PropTypes.func.isRequired,
+              flatMap: PropTypes.func.isRequired,
+              forEach: PropTypes.func.isRequired,
+              includes: PropTypes.func.isRequired,
+              indexOf: PropTypes.func.isRequired,
+              join: PropTypes.func.isRequired,
+              keys: PropTypes.func.isRequired,
+              lastIndexOf: PropTypes.func.isRequired,
+              length: PropTypes.number.isRequired,
+              map: PropTypes.func.isRequired,
+              pop: PropTypes.func.isRequired,
+              push: PropTypes.func.isRequired,
+              reduce: PropTypes.func.isRequired,
+              reduceRight: PropTypes.func.isRequired,
+              reverse: PropTypes.func.isRequired,
+              shift: PropTypes.func.isRequired,
+              slice: PropTypes.func.isRequired,
+              some: PropTypes.func.isRequired,
+              sort: PropTypes.func.isRequired,
+              splice: PropTypes.func.isRequired,
+              toLocaleString: PropTypes.func.isRequired,
+              toString: PropTypes.func.isRequired,
+              unshift: PropTypes.func.isRequired,
+              values: PropTypes.func.isRequired,
+            }).isRequired,
+            PropTypes.string.isRequired,
+            PropTypes.bool.isRequired,
+          ]).isRequired,
+          isDefault: PropTypes.bool.isRequired.isRequired,
+          label: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  isCancelEnabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  isOperatorFieldEnabled: PropTypes.bool,
+  onApply: PropTypes.func,
+  onCancel: PropTypes.func,
+  onChange: PropTypes.func,
+  onClose: PropTypes.func,
+  onError: PropTypes.func,
+  state: PropTypes.arrayOf(
+    PropTypes.shape({
+      condition: PropTypes.string,
+      field: PropTypes.string,
+      isApplied: PropTypes.bool,
+      isCanceled: PropTypes.bool,
+      isLoading: PropTypes.bool,
+      operator: PropTypes.oneOf(['and', 'or']),
+      value: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.string),
+        PropTypes.instanceOf(Date),
+        PropTypes.shape({
+          endDate: PropTypes.instanceOf(Date),
+          startDate: PropTypes.instanceOf(Date),
+        }),
+        PropTypes.string,
+      ]),
+    }),
+  ),
+} as any;

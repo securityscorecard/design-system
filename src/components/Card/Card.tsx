@@ -93,9 +93,19 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
   },
 );
 
-Card.propTypes = {
-  shouldAlignLastItemToBottom: PropTypes.bool,
+Card.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  as: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
-};
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  shouldAlignLastItemToBottom: PropTypes.bool,
+  to: PropTypes.string,
+} as any;
 
 export default Card;

@@ -90,12 +90,39 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
   ),
 );
 
-CloseButton.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  marginCompensation: PropTypes.oneOf(Object.values(SpaceSizes)),
+CloseButton.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Accessible label for the close button
+   */
   ariaLabel: PropTypes.string,
-  isInverted: PropTypes.bool,
   className: PropTypes.string,
-};
+  /**
+   * option for semantic color backgrounds
+   */
+  isInverted: PropTypes.bool,
+  marginCompensation: PropTypes.oneOf([
+    'lg',
+    'lgPlus',
+    'md',
+    'mdPlus',
+    'none',
+    'sm',
+    'xl',
+    'xlPlus',
+    'xs',
+    'xxl',
+    'xxs',
+  ]),
+  /**
+   * Callback called when the close button is clicked
+   */
+  onClose: PropTypes.func.isRequired,
+} as any;
 
 export default CloseButton;

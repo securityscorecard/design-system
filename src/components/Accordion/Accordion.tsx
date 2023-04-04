@@ -84,11 +84,33 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   },
 );
 
-Accordion.propTypes = {
-  items: PropTypes.arrayOf(AccordionItemPropType).isRequired,
-  isCollapsedOnOpen: PropTypes.bool,
+Accordion.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   className: PropTypes.string,
-  openItems: PropTypes.arrayOf(AccordionItemIdPropType),
-};
+  isCard: PropTypes.bool,
+  isCollapsedOnOpen: PropTypes.bool,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      content: PropTypes.node.isRequired,
+      id: PropTypes.oneOfType([
+        PropTypes.number.isRequired,
+        PropTypes.string.isRequired,
+      ]).isRequired,
+      isOpen: PropTypes.bool.isRequired.isRequired,
+      title: PropTypes.node.isRequired,
+    }).isRequired,
+  ).isRequired,
+  openItems: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.number.isRequired,
+      PropTypes.string.isRequired,
+    ]).isRequired,
+  ).isRequired,
+} as any;
 
 export default Accordion;

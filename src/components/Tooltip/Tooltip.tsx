@@ -40,12 +40,34 @@ const Tooltip: FC<TooltipProps> = ({
   );
 };
 
-Tooltip.propTypes = {
-  popup: PropTypes.node,
+Tooltip.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   className: PropTypes.string,
-  placement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  width: PropTypes.number,
   defaultIsPopupDisplayed: PropTypes.bool,
-};
+  placement: PropTypes.oneOf([
+    'auto-end',
+    'auto-start',
+    'auto',
+    'bottom-end',
+    'bottom-start',
+    'bottom',
+    'left-end',
+    'left-start',
+    'left',
+    'right-end',
+    'right-start',
+    'right',
+    'top-end',
+    'top-start',
+    'top',
+  ]),
+  popup: PropTypes.node,
+  width: PropTypes.number,
+} as any;
 
 export default Tooltip;

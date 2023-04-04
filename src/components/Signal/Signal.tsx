@@ -96,11 +96,25 @@ const Signal: FC<SignalProps> = ({
   );
 };
 
-Signal.propTypes = {
-  kind: PropTypes.oneOf(Object.values(SignalKinds)).isRequired,
+Signal.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  className: PropTypes.string,
+  kind: PropTypes.oneOf([
+    'critical',
+    'high',
+    'info',
+    'low',
+    'medium',
+    'negligible',
+    'positive',
+  ]).isRequired,
   size: PropTypes.number,
   title: PropTypes.string,
-  className: PropTypes.string,
-};
+} as any;
 
 export default Signal;

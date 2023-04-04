@@ -102,16 +102,53 @@ const Pill: FC<PillProps> = ({
   );
 };
 
-Pill.propTypes = {
-  label: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(Object.values(PillVariants)),
-  size: PropTypes.oneOf(Object.values(PillSizes)),
+Pill.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Element rendered before the label.
+   */
   adornment: PropTypes.node,
-  maxLabelLength: PropTypes.number,
-  isClickable: PropTypes.bool,
+  as: PropTypes.elementType,
   className: PropTypes.string,
+  /**
+   * Flag that enabled hover functionality on the pill. This should be used only when
+   * passing custom element (e.g. `a` tag) throught the `as` property without passing
+   * `onClick` property.
+   */
+  isClickable: PropTypes.bool,
+  /**
+   * Pill text
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * Maximal number of characters to display without truncation. If label is longer
+   * that the limit it will be truncated with the ellipsis. Pass `0` to disable truncation.
+   */
+  maxLabelLength: PropTypes.number,
+  /**
+   * Callback called when the pill is clicked. Hover functionality is enabled when this
+   * property is passed in, this can be overriden by `isClickable` property when using
+   * custom element such as `a` tag without `onClick` property.
+   */
   onClick: PropTypes.func,
+  /**
+   * Callback called when remove button is clicked. Remove button is rendered
+   * only when this property is defined.
+   */
   onRemove: PropTypes.func,
-};
+  /**
+   * Size of the pill
+   */
+  size: PropTypes.oneOf(['md', 'sm']),
+  /**
+   * Styling variant of the pill
+   */
+  variant: PropTypes.oneOf(['outline', 'solid']),
+} as any;
 
 export default Pill;

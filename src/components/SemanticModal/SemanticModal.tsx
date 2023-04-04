@@ -125,14 +125,25 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
 
 export default SemanticModal;
 
-SemanticModal.propTypes = {
-  title: PropTypes.string.isRequired,
-  message: PropTypes.node.isRequired,
+SemanticModal.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType)
     .isRequired,
-  onClose: PropTypes.func.isRequired,
-  variant: PropTypes.oneOf(Object.values(SemanticModalVariants)),
-  primaryButtonColor: PropTypes.oneOf(Object.values(ButtonColors)),
   isPrimaryButtonLoading: PropTypes.bool,
   loadingText: PropTypes.string,
-};
+  message: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+  primaryButtonColor: PropTypes.oneOf([
+    'danger',
+    'primary',
+    'secondary',
+    'success',
+  ]),
+  title: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['ban', 'error', 'success', 'warn']),
+} as any;

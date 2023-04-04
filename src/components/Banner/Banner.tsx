@@ -109,6 +109,7 @@ const Banner: FC<BannerProps> = ({
     }),
     [changeLayoutBreakpoint],
   );
+
   const [query, containerRef] = useContainerQuery(changeLayoutQuery, undefined);
   const isInline = query[CHANGE_LAYOUT_BREAKPOINT];
   return (
@@ -147,6 +148,7 @@ const Banner: FC<BannerProps> = ({
                 </BannerContent>
               </Stack>
             )}
+
             {__hasPagination && (
               <Inline gap={SpaceSizes.sm}>
                 <StyledButton
@@ -170,6 +172,7 @@ const Banner: FC<BannerProps> = ({
                 </StyledButton>
               </Inline>
             )}
+
             {isDismissable && (
               <CloseButton
                 aria-label="Close banner"
@@ -184,13 +187,21 @@ const Banner: FC<BannerProps> = ({
   );
 };
 
-Banner.propTypes = {
-  variant: PropTypes.oneOf(Object.values(BannerVariants)),
+Banner.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
-  isDismissable: PropTypes.bool,
+  changeLayoutBreakpoint: PropTypes.number,
   className: PropTypes.string,
+  isDismissable: PropTypes.bool,
   onClose: PropTypes.func,
-};
+  variant: PropTypes.oneOf(['error', 'info', 'success', 'warn']),
+} as any;
+
 Banner.displayName = 'Banner';
 
 export default Banner;

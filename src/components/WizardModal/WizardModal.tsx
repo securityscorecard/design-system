@@ -48,7 +48,3 @@ const WizardModal: FC<WizardModalProps> = ({ children }) => {
 };
 
 export default WizardModal;
-
-WizardModal.propTypes = {
-  children: PropTypes.node.isRequired,
-};

@@ -1,0 +1,372 @@
+import _ from 'lodash';
+
+import * as t from './types';
+
+export interface GenerateOptions {
+  /**
+   * If source itself written in typescript prop-types disable prop-types validation
+   * by injecting propTypes as
+   * ```jsx
+   * .propTypes = { ... } as any
+   * ```
+   */
+  disablePropTypesTypeChecking?: boolean;
+  /**
+   * Set to true if you want to make sure `babel-plugin-transform-react-remove-prop-types` recognizes the generated .propTypes.
+   */
+  ensureBabelPluginTransformReactRemovePropTypesIntegration?: boolean;
+  /**
+   * Enable/disable the default sorting (ascending) or provide your own sort function
+   * @default true
+   */
+  sortProptypes?:
+    | boolean
+    | ((a: t.PropTypeDefinition, b: t.PropTypeDefinition) => 0 | -1 | 1);
+  /**
+   * The name used when importing prop-types
+   * @default 'PropTypes'
+   */
+  importedName?: string;
+  /**
+   * Enable/disable including JSDoc comments
+   * @default true
+   */
+  includeJSDoc?: boolean;
+  /**
+   * Previous source code of the validator for each prop type
+   */
+  previousPropTypesSource?: Map<string, string>;
+  /**
+   * Given the `prop`, the `previous` source of the validator and the `generated` source:
+   * What source should be injected? `previous` is `undefined` if the validator
+   * didn't exist before
+   * @default Uses `generated` source
+   */
+  reconcilePropTypes?(
+    proptype: t.PropTypeDefinition,
+    previous: string | undefined,
+    generated: string,
+  ): string;
+  /**
+   * Control which PropTypes are included in the final result
+   * @param proptype The current PropType about to be converted to text
+   */
+  shouldInclude?(proptype: t.PropTypeDefinition): boolean | undefined;
+  /**
+   * A comment that will be added to the start of the PropTypes code block
+   * @example
+   * foo.propTypes = {
+   *  // Comment goes here
+   * }
+   */
+  comment?: string;
+  /**
+   * Overrides the given `sortLiteralUnions` based on the proptype.
+   * If `undefined` is returned the default `sortLiteralUnions` will be used.
+   */
+  getSortLiteralUnions?: (
+    component: t.Component,
+    propType: t.PropTypeDefinition,
+  ) => ((a: t.LiteralType, b: t.LiteralType) => number) | undefined;
+  /**
+   * By default literals in unions are sorted by:
+   * - numbers last, ascending
+   * - anything else by their stringified value using localeCompare
+   */
+  sortLiteralUnions?: (a: t.LiteralType, b: t.LiteralType) => number;
+}
+
+function defaultSortLiteralUnions(a: t.LiteralType, b: t.LiteralType) {
+  const { value: valueA } = a;
+  const { value: valueB } = b;
+  // numbers ascending
+  if (typeof valueA === 'number' && typeof valueB === 'number') {
+    return valueA - valueB;
+  }
+  // numbers last
+  if (typeof valueA === 'number') {
+    return 1;
+  }
+  if (typeof valueB === 'number') {
+    return -1;
+  }
+  // sort anything else by their stringified value
+  return String(valueA).localeCompare(String(valueB));
+}
+
+/**
+ * Generates code from the given component
+ * @param component The component to convert to code
+ * @param options The options used to control the way the code gets generated
+ */
+export function generate(
+  component: t.Component,
+  options: GenerateOptions = {},
+): string {
+  const {
+    disablePropTypesTypeChecking = false,
+    ensureBabelPluginTransformReactRemovePropTypesIntegration = false,
+    importedName = 'PropTypes',
+    includeJSDoc = true,
+    sortProptypes = true,
+    previousPropTypesSource = new Map<string, string>(),
+    reconcilePropTypes = (
+      _prop: t.PropTypeDefinition,
+      _previous: string,
+      generated: string,
+    ) => generated,
+    shouldInclude,
+    getSortLiteralUnions = () => defaultSortLiteralUnions,
+  } = options;
+
+  function jsDoc(documentedNode: t.PropTypeDefinition | t.LiteralType): string {
+    if (!includeJSDoc || !documentedNode.jsDoc) {
+      return '';
+    }
+    return `/**\n* ${documentedNode.jsDoc
+      .split(/\r?\n/)
+      .reduce((prev, curr) => `${prev}\n* ${curr}`)}\n*/\n`;
+  }
+
+  function generatePropType(
+    propType: t.PropType,
+    context: {
+      component: t.Component;
+      propTypeDefinition: t.PropTypeDefinition;
+    },
+  ): string {
+    const { isOptional } = context.propTypeDefinition;
+    if (propType.type === 'InterfaceNode') {
+      return `${importedName}.shape({\n${propType.types
+        .slice()
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([name, type]) => `"${name}": ${generatePropType(type, context)}`)
+        .join(',\n')}\n})${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'FunctionNode') {
+      return `${importedName}.func${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'StringNode') {
+      return `${importedName}.string${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'boolean') {
+      return `${importedName}.bool${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'NumericNode') {
+      return `${importedName}.number${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'LiteralNode') {
+      return `${importedName}.oneOf([${jsDoc(propType)}${propType.value}])${
+        isOptional ? '' : '.isRequired'
+      }`;
+    }
+
+    if (propType.type === 'ObjectNode') {
+      return `${importedName}.shape({})${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'any') {
+      // key isn't a prop like the others, see
+      // https://github.com/mui/material-ui/issues/25304
+      if (context.propTypeDefinition.name === 'key') {
+        return '() => null';
+      }
+
+      return `${importedName}.any${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'ElementNode') {
+      return `${importedName}.${propType.elementType}${
+        isOptional ? '' : '.isRequired'
+      }`;
+    }
+
+    if (propType.type === 'InstanceOfNode') {
+      return `${importedName}.instanceOf(${propType.instance})${
+        isOptional ? '' : '.isRequired'
+      }`;
+    }
+
+    if (propType.type === 'DOMElementNode') {
+      return `function (props, propName) {
+			if (props[propName] == null) {
+				return ${
+          propType.optional
+            ? 'null'
+            : `new Error("Prop '" + propName + "' is required but wasn't specified")`
+        }
+			} else if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
+				return new Error("Expected prop '" + propName + "' to be of type Element")
+			}
+		}`;
+    }
+
+    if (propType.type === 'array') {
+      if (propType.arrayType.type === 'any') {
+        return `${importedName}.array${isOptional ? '' : '.isRequired'}`;
+      }
+
+      return `${importedName}.arrayOf(${generatePropType(
+        propType.arrayType,
+        context,
+      )})${isOptional ? '' : '.isRequired'}`;
+    }
+
+    if (propType.type === 'UnionNode') {
+      const uniqueTypes = t.uniqueUnionTypes(propType).types;
+      const isUnionOptional =
+        isOptional ||
+        uniqueTypes.some(
+          (type) =>
+            type.type === 'UndefinedNode' ||
+            (type.type === 'LiteralNode' && type.value === 'null'),
+        );
+      const nonNullishUniqueTypes = uniqueTypes.filter((type) => {
+        return (
+          type.type !== 'UndefinedNode' &&
+          !(type.type === 'LiteralNode' && type.value === 'null')
+        );
+      });
+
+      if (
+        uniqueTypes.length === 2 &&
+        uniqueTypes.some((type) => type.type === 'DOMElementNode')
+      ) {
+        return generatePropType(
+          t.createDOMElementType({
+            jsDoc: undefined,
+            optional: isUnionOptional,
+          }),
+          context,
+        );
+      }
+
+      let [literals, rest] = _.partition(
+        isUnionOptional ? nonNullishUniqueTypes : uniqueTypes,
+        (type): type is t.LiteralType => type.type === 'LiteralNode',
+      );
+
+      const sortLiteralUnions =
+        getSortLiteralUnions(context.component, context.propTypeDefinition) ||
+        defaultSortLiteralUnions;
+      literals = literals.sort(sortLiteralUnions);
+
+      const nodeToStringName = (type: t.PropType): string => {
+        if (type.type === 'InstanceOfNode') {
+          return `${type.type}.${type.instance}`;
+        }
+        if (type.type === 'InterfaceNode') {
+          // An interface is PropTypes.shape
+          // Use `ShapeNode` to get it sorted in the correct order
+          return `ShapeNode`;
+        }
+
+        return type.type;
+      };
+
+      rest = rest.sort((a, b) =>
+        nodeToStringName(a).localeCompare(nodeToStringName(b)),
+      );
+
+      if (
+        literals.find((x) => x.value === 'true') &&
+        literals.find((x) => x.value === 'false')
+      ) {
+        rest.push(t.createBooleanType({ jsDoc: undefined }));
+        literals = literals.filter(
+          (x) => x.value !== 'true' && x.value !== 'false',
+        );
+      }
+
+      const literalProps =
+        literals.length !== 0
+          ? `${importedName}.oneOf([${literals
+              .map((x) => `${jsDoc(x)}${x.value}`)
+              .reduce((prev, curr) => `${prev},${curr}`)}])`
+          : '';
+
+      if (rest.length === 0) {
+        return `${literalProps}${isUnionOptional ? '' : '.isRequired'}`;
+      }
+
+      if (literals.length === 0 && rest.length === 1) {
+        return `${generatePropType(rest[0], context)}${
+          isUnionOptional ? '' : '.isRequired'
+        }`;
+      }
+
+      return `${importedName}.oneOfType([${
+        literalProps ? `${literalProps}, ` : ''
+      }${rest
+        .map((type) => generatePropType(type, context))
+        .reduce((prev, curr) => `${prev},${curr}`)}])${
+        isUnionOptional ? '' : '.isRequired'
+      }`;
+    }
+
+    throw new Error(
+      `Nothing to handle node of type "${propType.type}" in "${context.propTypeDefinition.name}"`,
+    );
+  }
+
+  function generatePropTypeDefinition(
+    propTypeDefinition: t.PropTypeDefinition,
+    context: { component: t.Component },
+  ): string {
+    const validatorSource = reconcilePropTypes(
+      propTypeDefinition,
+      previousPropTypesSource.get(propTypeDefinition.name),
+      `${generatePropType(propTypeDefinition.propType, {
+        component: context.component,
+        propTypeDefinition,
+      })}`,
+    );
+
+    return `${jsDoc(propTypeDefinition)}"${
+      propTypeDefinition.name
+    }": ${validatorSource},`;
+  }
+
+  const propTypes = component.types.slice();
+
+  if (typeof sortProptypes === 'function') {
+    propTypes.sort(sortProptypes);
+  } else if (sortProptypes === true) {
+    propTypes.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  let filteredNodes = propTypes;
+  if (shouldInclude) {
+    filteredNodes = filteredNodes.filter((type) => shouldInclude(type));
+  }
+
+  if (filteredNodes.length === 0) {
+    return '';
+  }
+  const generated = filteredNodes
+    .map((prop) => generatePropTypeDefinition(prop, { component }))
+    .reduce((prev, curr) => `${prev}\n${curr}`);
+  if (generated.length === 0) {
+    return '';
+  }
+
+  const comment =
+    options.comment &&
+    `// ${options.comment
+      .split(/\r?\n/gm)
+      .reduce((prev, curr) => `${prev}\n// ${curr}`)}\n`;
+
+  const propTypesMemberTrailingComment =
+    ensureBabelPluginTransformReactRemovePropTypesIntegration
+      ? '/* remove-proptypes */'
+      : '';
+  const propTypesCasting = disablePropTypesTypeChecking ? ' as any' : '';
+  const propTypesBanner = comment !== undefined ? comment : '';
+
+  return `${component.name}.propTypes ${propTypesMemberTrailingComment}= {\n${propTypesBanner}${generated}\n}${propTypesCasting}`;
+}

@@ -35,11 +35,13 @@ const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
       }),
       [showTextBreakpoint],
     );
+
     const [query, containerRef] = useContainerQuery(showTextQuery, undefined);
 
     const stepsArr: ReactElement[] = Children.toArray(children).filter(
       pathEq(['type', 'displayName'], 'Step'),
     );
+
     const steps = stepsArr.map((step, index) =>
       cloneElement(step, {
         ...step.props,
@@ -90,12 +92,30 @@ const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
   },
 );
 
-Stepper.propTypes = {
+Stepper.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Currently active step number, zero-based
+   */
   activeStep: PropTypes.number,
-  showTextBreakpoint: PropTypes.number,
-  orientation: PropTypes.oneOf(Object.values(StepperOrientations)),
+  /**
+   * Is content visible for all steps. Only for vertical orientation.
+   */
   areStepsExpanded: PropTypes.bool,
   className: PropTypes.string,
-};
+  /**
+   * Stepper orientation
+   */
+  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+  /**
+   * Minimal width (in pixels) of Stepper container when labels of inactive steps are displayed.
+   */
+  showTextBreakpoint: PropTypes.number,
+} as any;
 
 export default Stepper;

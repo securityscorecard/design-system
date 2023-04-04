@@ -35,12 +35,27 @@ const DSProvider: FC<DSProviderProps> = ({
   );
 };
 
-DSProvider.propTypes = {
-  theme: PropTypes.shape({}),
+DSProvider.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Design system config object
+   */
   config: PropTypes.shape({
-    portalsContainer: PropTypes.string,
+    debugMode: PropTypes.bool,
     hasIncludedGlobalStyles: PropTypes.bool,
+    portalsContainerId: PropTypes.string,
   }),
-};
+  /**
+   * Override and extends default theme.
+   *
+   * See: [Default theme](/?path=/docs/theme-theme-object--page)
+   */
+  theme: PropTypes.any,
+} as any;
 
 export default DSProvider;

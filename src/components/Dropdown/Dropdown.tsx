@@ -172,24 +172,95 @@ const Dropdown: FC<DropdownProps> = forwardRef(
   },
 );
 
-Dropdown.propTypes = {
-  trigger: PropTypes.element.isRequired,
-  triggerEvents: PropTypes.arrayOf(
-    PropTypes.oneOf(Object.values(DropdownTriggerEvents)),
-  ),
-  placement: PropTypes.oneOf(Object.values(DropdownPlacements)),
-  innerPaddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
-  innerPaddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
-  maxPaneWidth: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  isPaneElevated: PropTypes.bool,
-  hasPaneArrow: PropTypes.bool,
-  hoverHideDelay: PropTypes.number,
+Dropdown.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Default visibility state.
+   */
   defaultIsOpen: PropTypes.bool,
+  /**
+   * Should show arrow tip pointing to the center of trigger element.
+   */
+  hasPaneArrow: PropTypes.bool,
+  /**
+   * Delay until the dropdown pane is closed. Used only for `hover` triggerEvent, in ms.
+   */
+  hoverHideDelay: PropTypes.number,
+  /**
+   * Size of padding in the dropdown pane.
+   */
+  innerPaddingSize: PropTypes.oneOf([
+    'lg',
+    'lgPlus',
+    'md',
+    'mdPlus',
+    'none',
+    'sm',
+    'xl',
+    'xlPlus',
+    'xs',
+    'xxl',
+    'xxs',
+  ]),
+  /**
+   * Type of padding in the dropdown pane.
+   */
+  innerPaddingType: PropTypes.oneOf(['square', 'squish', 'stretch']),
+  /**
+   * Should have the dropdown pane box shadow.
+   */
+  isPaneElevated: PropTypes.bool,
+  /**
+   * Maximal width of the dropdown pane. When set to 'auto',
+   * the pane width is controlled by it's content.
+   */
+  maxPaneWidth: PropTypes.oneOfType([
+    PropTypes.oneOf(['auto']),
+    PropTypes.number,
+  ]),
+  /**
+   * Callback called when the dropdown pane is closed.
+   */
   onClose: PropTypes.func,
+  /**
+   * Callback called when the dropdown pane is opened.
+   */
   onOpen: PropTypes.func,
-};
+  /**
+   * Alignement of the dropdown pane.
+   */
+  placement: PropTypes.oneOf([
+    'auto-end',
+    'auto-start',
+    'auto',
+    'bottom-end',
+    'bottom-start',
+    'bottom',
+    'left-end',
+    'left-start',
+    'left',
+    'right-end',
+    'right-start',
+    'right',
+    'top-end',
+    'top-start',
+    'top',
+  ]),
+  /**
+   * React element used to trigger the dropdown pane.
+   */
+  trigger: PropTypes.element.isRequired,
+  /**
+   * Array of events which triggers the dropdown pane visibility change.
+   */
+  triggerEvents: PropTypes.arrayOf(
+    PropTypes.oneOf(['click', 'focus', 'hover']),
+  ),
+} as any;
 
 export default Dropdown;

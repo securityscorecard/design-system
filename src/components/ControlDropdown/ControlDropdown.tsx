@@ -77,6 +77,7 @@ const ControlDropdown: FC<ControlDropdownProps> = ({
                 </Button>
               </div>
             )}
+
             <Inline gap={SpaceSizes.sm} justify="flex-end">
               <Button variant={ButtonVariants.outline} onClick={onClose}>
                 {closeLabel}
@@ -92,23 +93,75 @@ const ControlDropdown: FC<ControlDropdownProps> = ({
   );
 };
 
-ControlDropdown.propTypes = {
-  title: PropTypes.string.isRequired,
-  parentRef: PropTypes.exact({
-    current:
-      typeof Element === 'undefined'
-        ? PropTypes.any
-        : PropTypes.instanceOf(HTMLSpanElement),
-  }).isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
-  submitLabel: PropTypes.string,
+ControlDropdown.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  /**
+   * Label of close button in footer
+   */
   closeLabel: PropTypes.string,
-  resetLabel: PropTypes.string,
-  placement: PropTypes.oneOf(Object.values(ControlDropdownPlacements)),
-  width: PropTypes.number,
+  /**
+   * Flag to control show/hide of the dropdown
+   */
+  isOpen: PropTypes.bool,
+  /**
+   * Callback when dropdown is closed
+   */
+  onClose: PropTypes.func.isRequired,
+  /**
+   * Callback when Reset to defaults is clicked. When not provided button will not show.
+   */
   onReset: PropTypes.func,
-};
+  /**
+   * Callback when Apply button is clicked
+   */
+  onSubmit: PropTypes.func.isRequired,
+  /**
+   * Reference to opener button used to calculate correct position
+   */
+  parentRef: PropTypes.shape({
+    current: PropTypes.shape({}).isRequired,
+  }).isRequired,
+  /**
+   * Position to which dropdown will be aligned
+   */
+  placement: PropTypes.oneOf([
+    'auto-end',
+    'auto-start',
+    'auto',
+    'bottom-end',
+    'bottom-start',
+    'bottom',
+    'left-end',
+    'left-start',
+    'left',
+    'right-end',
+    'right-start',
+    'right',
+    'top-end',
+    'top-start',
+    'top',
+  ]),
+  /**
+   * Label of reset button in footer
+   */
+  resetLabel: PropTypes.string,
+  /**
+   * Label of submit button in footer
+   */
+  submitLabel: PropTypes.string,
+  /**
+   * Title in dropdown header
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * Width of the dropdown
+   */
+  width: PropTypes.number,
+} as any;
 
 export default ControlDropdown;

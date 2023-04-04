@@ -51,11 +51,57 @@ const Callout: FC<CalloutProps> = ({
   </Container>
 );
 
-Callout.propTypes = {
+Callout.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   icon: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-  ]),
-};
+    PropTypes.element.isRequired,
+    PropTypes.number.isRequired,
+    PropTypes.shape({}).isRequired,
+    PropTypes.shape({
+      '__@iterator@393': PropTypes.func.isRequired,
+      '__@unscopables@719': PropTypes.func.isRequired,
+      at: PropTypes.func.isRequired,
+      concat: PropTypes.func.isRequired,
+      copyWithin: PropTypes.func.isRequired,
+      entries: PropTypes.func.isRequired,
+      every: PropTypes.func.isRequired,
+      fill: PropTypes.func.isRequired,
+      filter: PropTypes.func.isRequired,
+      find: PropTypes.func.isRequired,
+      findIndex: PropTypes.func.isRequired,
+      flat: PropTypes.func.isRequired,
+      flatMap: PropTypes.func.isRequired,
+      forEach: PropTypes.func.isRequired,
+      includes: PropTypes.func.isRequired,
+      indexOf: PropTypes.func.isRequired,
+      join: PropTypes.func.isRequired,
+      keys: PropTypes.func.isRequired,
+      lastIndexOf: PropTypes.func.isRequired,
+      length: PropTypes.number.isRequired,
+      map: PropTypes.func.isRequired,
+      pop: PropTypes.func.isRequired,
+      push: PropTypes.func.isRequired,
+      reduce: PropTypes.func.isRequired,
+      reduceRight: PropTypes.func.isRequired,
+      reverse: PropTypes.func.isRequired,
+      shift: PropTypes.func.isRequired,
+      slice: PropTypes.func.isRequired,
+      some: PropTypes.func.isRequired,
+      sort: PropTypes.func.isRequired,
+      splice: PropTypes.func.isRequired,
+      toLocaleString: PropTypes.func.isRequired,
+      toString: PropTypes.func.isRequired,
+      unshift: PropTypes.func.isRequired,
+      values: PropTypes.func.isRequired,
+    }).isRequired,
+    PropTypes.string.isRequired,
+    PropTypes.bool.isRequired,
+  ]).isRequired,
+} as any;
 
 export default Callout;

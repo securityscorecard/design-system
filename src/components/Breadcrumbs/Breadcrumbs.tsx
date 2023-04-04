@@ -137,9 +137,14 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ children, className }) => {
   );
 };
 
-Breadcrumbs.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
+Breadcrumbs.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   className: PropTypes.string,
-};
+} as any;
 
 export default Breadcrumbs;

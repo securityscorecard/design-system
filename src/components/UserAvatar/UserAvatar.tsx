@@ -112,21 +112,37 @@ const UserAvatar: FC<UserAvatarProps> = ({
     </RootUserAvatar>
   );
 
-UserAvatar.propTypes = {
-  label: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(Object.values(UserAvatarSizes)),
+UserAvatar.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   className: PropTypes.string,
-  isInverted: PropTypes.bool,
   href: PropTypes.string,
+  /**
+   * Used to inverse the colors of the avatar
+   */
+  isInverted: PropTypes.bool,
+  /**
+   * Used to render text elements inside the Avatar.
+   * It Will render the first two characters of the string always.
+   */
+  label: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  /**
+   * The size of the avatar
+   */
+  size: PropTypes.oneOf(['md', 'sm']),
   to: PropTypes.oneOfType([
-    PropTypes.string,
     PropTypes.shape({
+      hash: PropTypes.string,
       pathname: PropTypes.string,
       search: PropTypes.string,
-      hash: PropTypes.string,
     }),
+    PropTypes.string,
   ]),
-  onClick: PropTypes.func,
-};
+} as any;
 
 export default UserAvatar;

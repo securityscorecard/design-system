@@ -115,11 +115,17 @@ const Toast: FC<ToastProps> = ({
   );
 };
 
-Toast.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  variant: PropTypes.oneOf(Object.values(ToastVariants)),
+Toast.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
   isStandalone: PropTypes.bool,
-};
+  onClose: PropTypes.func.isRequired,
+  variant: PropTypes.oneOf(['error', 'info', 'success', 'warn']),
+  width: PropTypes.number,
+} as any;
 
 export default Toast;

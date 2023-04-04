@@ -83,17 +83,19 @@ const Badge: FC<BadgeProps> = ({
   </BadgeElement>
 );
 
-Badge.propTypes = {
+Badge.propTypes /* remove-proptypes */ = {
+  //
+  // =============== WARNING ================
+  // | These PropTypes are auto-generated   |
+  // | from the TypeScript type definitions  |
+  // ========================================
+  //
+  className: PropTypes.string,
   count: PropTypes.number,
+  iconName: PropTypes.string,
+  iconType: PropTypes.string,
   text: PropTypes.string,
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
-  iconType: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
-};
+  variant: PropTypes.oneOf(['error', 'info', 'neutral', 'success', 'warn']),
+} as any;
 
 export default Badge;
