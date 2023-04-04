@@ -2,6 +2,6 @@ dist
 storybook-static
 stats
 .git
-visual-regressions
-extension
+packages/visual-regressions
+packages/ds-chrome-extension
 CHANGELOG.md
