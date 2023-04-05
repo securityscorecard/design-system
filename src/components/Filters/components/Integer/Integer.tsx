@@ -1,10 +1,10 @@
 import React from 'react';
 import { isNonEmptyString } from 'ramda-adjunct';
 
-import { StyledNumber } from '../Number/Number';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
 import { NumberPropTypes, NumberProps } from '../Number/Number.types';
+import { Input } from '../../../forms';
 
 const Integer: React.FC<NumberProps> = ({
   value = '',
@@ -32,7 +32,8 @@ const Integer: React.FC<NumberProps> = ({
 
   return (
     <>
-      <StyledNumber
+      <Input
+        data-has-spin="false"
         isInvalid={isInvalid}
         placeholder={placeholder}
         type="number"

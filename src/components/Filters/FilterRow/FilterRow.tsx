@@ -117,7 +117,7 @@ const renderComponentWithProps = (
   const { component: ComponentWithProps, props } = Component;
   const { units } = props;
   return units ? (
-    <Inline align="center" gap={SpaceSizes.sm}>
+    <Inline align="center" gap={SpaceSizes.sm} stretch="start">
       <ComponentWithProps
         isInvalid={isInvalid}
         value={value}
@@ -283,7 +283,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
           onClick={onRemove}
         />
       ) : null}
-      <SplitField $width={85}>
+      <SplitField $width={96}>
         {!isOperatorFieldEnabled ? (
           <DisabledOperator>
             {/* First row starts by Where operator */}
