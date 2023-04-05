@@ -1,3 +1,16 @@
+## [1.0.1](https://github.com/securityscorecard/design-system/compare/v1.0.0...v1.0.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* **BatchActions:** add key prop ([1e2b731](https://github.com/securityscorecard/design-system/commit/1e2b731fa68315e1e4fb79ab833c38ae3c597e8f))
+* **Filters:** fix operator label clipping ([a00e3e7](https://github.com/securityscorecard/design-system/commit/a00e3e74813d3ea84f896d790d7e68e6d3c2a330))
+* **Filters:** remove dupe input ([80b6c96](https://github.com/securityscorecard/design-system/commit/80b6c96eddf149cf7f9c6d9b302b41b87043918e))
+* **MultiValueInput:** align styles with Select ([05ec102](https://github.com/securityscorecard/design-system/commit/05ec102bbf1f98339973e5394be49fd5ed0ec632))
+* remove dupe multi value input ([7e65ecd](https://github.com/securityscorecard/design-system/commit/7e65ecd2aaf3053aa89ce1bbca646b08b7bfd62d))
+* remove dupe Select ([8a0b49b](https://github.com/securityscorecard/design-system/commit/8a0b49b5e629c799e22cc4ad21dc2054f6990544))
+* **Tooltip:** fix for disabled buttons ([6804e8c](https://github.com/securityscorecard/design-system/commit/6804e8c6cdc7d06bcc18733512d050d602293e22))
+
 # 1.0.0 (2023-03-20)
 
 
