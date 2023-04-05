@@ -15,6 +15,8 @@ import { colors } from '../src/theme/colors';
 import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
+import '@fontsource/inter';
+
 export const parameters = {
   backgrounds: {
     default: 'white',
