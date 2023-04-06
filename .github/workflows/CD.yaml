@@ -213,7 +213,7 @@ jobs:
         run: yarn lint:css
 
   betterer:
-    name: "🚧 Check Betterer rules"
+    name: '🚧 Check Betterer rules'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -301,7 +301,7 @@ jobs:
 
   get-next-version:
     name: '📟 Get next released version'
-    if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
     continue-on-error: true
     needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
     runs-on: ubuntu-latest
@@ -356,7 +356,7 @@ jobs:
 
   build-and-publish:
     name: '🚀 Publish new version'
-    if: "github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/alpha') && !contains(github.event.head_commit.message, 'chore(release):')"
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
     needs: get-next-version
     runs-on: ubuntu-latest
     steps:
@@ -410,8 +410,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
 
-
-
   build-docs:
     name: '📒 Build documentation'
     if: needs.get-next-version.outputs.new-release-published == 'true' && needs.get-next-version.outputs.status == 'success'
@@ -422,7 +420,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: alpha
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
