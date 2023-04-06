@@ -246,6 +246,16 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     setInputValue(e.target.value);
   };
 
+  const handleInputOnBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+    if (isInvalid) {
+      return;
+    }
+    if (isNonEmptyString(inputValue)) {
+      addValue((e.target as HTMLInputElement).value);
+    }
+  };
+
   const handleContainerOnClick: React.MouseEventHandler<HTMLDivElement> = (
     e,
   ) => {
@@ -316,6 +326,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
                 pattern={pattern}
                 placeholder={isEmptyArray(values) ? placeholder : undefined}
                 value={inputValue}
+                onBlur={handleInputOnBlur}
                 onChange={(e) => handleInputOnChange(e)}
                 onKeyDown={handleInputOnKeyDown}
                 onPaste={handleInputOnPaste}
