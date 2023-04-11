@@ -51,23 +51,15 @@ export const WithGap: Story<StackProps> = (args) => (
 WithGap.args = {
   gap: SpaceSizes.lg,
 };
-
-export const RecursiveGap: Story<StackProps> = (args) => (
+export const WithResponsiveGap: Story<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
-    <Box style={{ backgroundColor: '#579aa0' }}>
-      <Box />
-      <div style={{ backgroundColor: '#b4b4b4' }}>
-        <Box />
-        <Box />
-      </div>
-    </Box>
+    <Box />
     <Box />
   </Stack>
 );
-RecursiveGap.args = {
-  gap: SpaceSizes.xl,
-  isRecursive: true,
+WithResponsiveGap.args = {
+  gap: [SpaceSizes.xl, SpaceSizes.sm],
 };
 
 export const SplitedStack: Story<StackProps> = (args) => (

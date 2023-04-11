@@ -1,22 +1,21 @@
 import type { Property } from 'csstype';
-import type { ElementType, FC, HTMLAttributes } from 'react';
-import type { SpaceSize } from '../../../theme/space.types';
+import type { FC, HTMLAttributes } from 'react';
+import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled, { css } from 'styled-components';
-import { prop } from 'ramda';
 import cls from 'classnames';
 
-import { getSpace } from '../../../utils';
+import { parseResponsiveStyles } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
+import { gapParser } from '../../../utils/parsers';
 
-interface GridWrapperProps {
-  $overflow: 'hidden' | 'visible';
-}
-interface GridParentProps {
-  $gap?: SpaceSize;
+interface GridRootProps {
+  $gap?: ResponsiveSpaceSize;
   $align?: Property.AlignItems;
+  $overflow?: Property.Overflow;
+  $justify?: Property.JustifyItems;
   $cols?: number;
 }
 
@@ -24,82 +23,47 @@ export interface GridProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */
-  gap?: GridParentProps['$gap'];
+  gap?: GridRootProps['$gap'];
   /**
    * Number of columns in the grid
    */
-  cols?: GridParentProps['$cols'];
+  cols?: GridRootProps['$cols'];
   /**
    * Vertical alignment of elements inside Inline
    */
-  align?: GridParentProps['$align'];
-  /**
-   * Tag or component reference for wrapper element
-   */
-  wrapperEl?: ElementType;
-  /**
-   * Overflow type of the wrapper element
-   */
-  wrapperOverflow?: GridWrapperProps['$overflow'];
-  /**
-   * Tag or component reference for parent element
-   */
-  parentEl?: ElementType;
+  align?: GridRootProps['$align'];
   className?: string;
 }
 
-const GridWrapper = styled.div<GridWrapperProps>`
-  overflow: ${prop('$overflow')};
-`;
-const GridParent = styled.div<GridParentProps>(
-  ({ $cols, $gap, $align, theme }) => {
-    const gapSize = getSpace($gap, { theme });
-
+const GridRoot = styled.div<GridRootProps>(
+  ({ $cols, $align, $justify, $overflow }) => {
     return css`
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
       align-items: ${$align};
-      margin: calc(${gapSize} / -2);
-
-      & > * {
-        width: calc(${100 / $cols}% - ${gapSize});
-        margin: calc(${gapSize} / 2);
-      }
+      overflow: ${$overflow};
+      justify-items: ${$justify};
+      ${parseResponsiveStyles('grid-gap', '$gap', gapParser)};
+      grid-template-columns: repeat(${$cols}, 1fr);
     `;
   },
 );
 
-const Grid: FC<GridProps> = ({
-  children,
-  gap,
-  align,
-  cols,
-  parentEl,
-  wrapperEl,
-  wrapperOverflow = 'hidden',
-  ...props
-}) => {
+const Grid: FC<GridProps> = ({ children, gap, align, cols, ...props }) => {
   const { error } = useLogger('Grid');
   if (cols === 1) {
     error('Minimal number of columns is 2. Use Stack instead of Grid[cols=1]');
     return null;
   }
   return (
-    <GridWrapper
-      $overflow={wrapperOverflow}
-      as={wrapperEl}
+    <GridRoot
+      $align={align}
+      $cols={cols}
+      $gap={gap}
       className={cls(CLX_LAYOUT, props?.className)}
+      {...props}
     >
-      <GridParent
-        $align={align}
-        $cols={cols}
-        $gap={gap}
-        as={parentEl}
-        {...props}
-      >
-        {children}
-      </GridParent>
-    </GridWrapper>
+      {children}
+    </GridRoot>
   );
 };
 

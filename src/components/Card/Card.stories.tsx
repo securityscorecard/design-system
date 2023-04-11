@@ -361,7 +361,7 @@ WithIconOnlyAction.args = {
 };
 
 export const LastItemAlignment = () => (
-  <Grid gap="lg">
+  <Grid cols={3} gap="lg">
     <Card shouldAlignLastItemToBottom>
       <CardHeaderTemplate />
       <CardActionsTemplate />

@@ -4,8 +4,6 @@ import type { GridProps } from './Grid';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box } from '../mocks/Box';
 import Grid from './Grid';
-import { Card, CardContent, CardHeader } from '../../Card';
-import { Text } from '../../typographyLegacy';
 
 export default {
   title: 'layout/primitives/Grid',
@@ -28,13 +26,6 @@ export default {
       control: { type: 'text' },
       table: {
         defaultValue: { summary: '"div"' },
-      },
-    },
-    wrapperOverflow: {
-      options: ['hidden', 'visible'],
-      control: { type: 'radio' },
-      table: {
-        defaultValue: { summary: '"hidden"' },
       },
     },
     cols: {
@@ -78,33 +69,4 @@ export const WithCustomColumnsNumber = GridTemplate.bind({});
 WithCustomColumnsNumber.args = {
   ...WithGap.args,
   cols: 3,
-};
-
-const ComposedCard = () => (
-  <Card>
-    <CardHeader subtitle="Card subtitle" title="Card title" />
-    <CardContent>
-      <Text size="md">
-        Etiam id laoreet tellus. Pellentesque interdum porttitor iaculis. Ut leo
-        urna, lobortis ac fermentum at, efficitur vel lorem. Cras viverra tempor
-        augue, sed rutrum neque vestibulum at.
-      </Text>
-    </CardContent>
-  </Card>
-);
-
-export const WithVisibleOverflow: Story<GridProps> = (args) => (
-  <Grid {...args}>
-    <ComposedCard />
-    <ComposedCard />
-    <ComposedCard />
-    <ComposedCard />
-    <ComposedCard />
-    <ComposedCard />
-  </Grid>
-);
-WithVisibleOverflow.args = {
-  gap: SpaceSizes.lg,
-  cols: 3,
-  wrapperOverflow: 'visible',
 };

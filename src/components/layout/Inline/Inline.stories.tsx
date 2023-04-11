@@ -52,6 +52,14 @@ WithGap.args = {
   gap: SpaceSizes.sm,
 };
 
+export const WithResponsiveGap = InlineTemplate.bind({});
+WithResponsiveGap.args = {
+  gap: {
+    sm: 'xl',
+    lg: 'sm',
+  },
+};
+
 export const WithHorizontalAlignment = InlineTemplate.bind({});
 WithHorizontalAlignment.args = {
   ...WithGap.args,

@@ -51,6 +51,12 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
+export const ResponsivePadding = PadboxTemplate.bind({});
+ResponsivePadding.args = {
+  paddingType: PaddingTypes.square,
+  paddingSize: [SpaceSizes.none, SpaceSizes.xl],
+};
+
 export const SquareInset = PadboxTemplate.bind({});
 SquareInset.args = {
   paddingType: PaddingTypes.square,

@@ -1,12 +1,12 @@
-import { colors } from './colors';
-import { createButtons } from './buttons';
-import { createDepths } from './depths';
-import { createForms } from './forms';
-import { createLayout } from './layout';
-import { createRadii } from './radii';
-import { createSpace } from './space';
-import { createTypography } from './typography';
-import { createTokens } from './tokens';
+import type { colors } from './colors';
+import type { createButtons } from './buttons';
+import type { createDepths } from './depths';
+import type { createForms } from './forms';
+import type { createLayout } from './layout';
+import type { createRadii } from './radii';
+import type { createSpace } from './space';
+import type { createTypography } from './typography';
+import type { createTokens } from './tokens';
 
 export interface Theme {
   colors: typeof colors;
@@ -18,4 +18,6 @@ export interface Theme {
   space: ReturnType<typeof createSpace>;
   radii: ReturnType<typeof createRadii>;
   tokens: ReturnType<typeof createTokens>;
+  breakpoints: string[];
+  breakpointsKeys: string[];
 }
