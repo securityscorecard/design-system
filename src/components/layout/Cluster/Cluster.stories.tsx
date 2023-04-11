@@ -70,6 +70,11 @@ WithGap.args = {
   gap: SpaceSizes.sm,
 };
 
+export const WithResponsiveGap = ClusterTemplate.bind({});
+WithResponsiveGap.args = {
+  gap: [SpaceSizes.sm, SpaceSizes.xxl],
+};
+
 export const WithHorizontalAlignment = ClusterTemplate.bind({});
 WithHorizontalAlignment.args = {
   ...WithGap.args,
@@ -93,6 +98,5 @@ export const AsNavigation: Story<ClusterProps> = (args) => (
 );
 AsNavigation.args = {
   ...WithGap.args,
-  wrapperEl: 'nav',
-  parentEl: 'ul',
+  as: 'ul',
 };

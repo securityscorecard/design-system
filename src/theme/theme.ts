@@ -13,6 +13,7 @@ import { createDepths } from './depths';
 import { createSpace } from './space';
 import { createRadii } from './radii';
 import { createTokens } from './tokens';
+import { createBreakpoints } from './breakpoints';
 
 export const createTheme = (
   overrides: RecursivePartial<DefaultTheme> = {},
@@ -27,6 +28,7 @@ export const createTheme = (
     space: spaceOverride = {},
     radii: radiiOverride = {},
     tokens: tokensOverride = {},
+    breakpoints: breakpointsOverride = [],
     ...rest
   } = overrides;
 
@@ -45,6 +47,10 @@ export const createTheme = (
     createTokens(colors, typography),
     tokensOverride,
   );
+  const breakpoints =
+    breakpointsOverride && breakpointsOverride.length
+      ? breakpointsOverride
+      : createBreakpoints();
 
   return {
     colors,
@@ -56,6 +62,8 @@ export const createTheme = (
     space,
     radii,
     tokens,
+    breakpoints: Object.values(breakpoints),
+    breakpointsKeys: Object.keys(breakpoints),
     ...rest,
   };
 };

@@ -1,4 +1,3 @@
-import type { DefaultTheme } from 'styled-components';
 import type {
   Family as FontFamily,
   Size as FontSize,
@@ -11,9 +10,11 @@ import type { SpacingSizeValue } from '../types/spacing.types';
 import type { Depths } from '../theme/depths.types';
 import type { SpaceSize } from '../theme/space.types';
 import type { createRadii } from '../theme/radii';
+import type { DefaultTheme } from 'styled-components';
 
+import { css } from 'styled-components';
 import numeral from 'numeral';
-import { isString, list } from 'ramda-adjunct';
+import { ensureArray, isString, list } from 'ramda-adjunct';
 import {
   curry,
   either,
@@ -142,3 +143,67 @@ export const abbreviateNumber = (value: number): string =>
   numeral(value).format('0.[00]a').toUpperCase();
 
 export const getShadow = () => 'box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);';
+
+const getBreakpointQuery = (value) => `@media screen and (min-width: ${value})`;
+
+const getBreakpoint = (i, theme) => getBreakpointQuery(theme.breakpoints[i]);
+
+export const parseResponsiveStylesArrayNotation = (
+  cssProperty,
+  responsiveProperty,
+  parser,
+  props,
+) => {
+  const { theme } = props;
+  const sx = ensureArray(props[responsiveProperty]).map((value, i) => {
+    if (value === null) return undefined;
+    if (i === 0) {
+      return css`
+        ${cssProperty}: ${parser(value, props)};
+      `;
+    }
+    return css`
+      ${getBreakpoint(i - 1, theme)} {
+        ${cssProperty}: ${parser(value, props)};
+      }
+    `;
+  });
+  return sx;
+};
+
+export const parseResponsiveStylesObjectNotation = (
+  cssProperty,
+  responsiveProperty,
+  parser,
+  props,
+) => {
+  const { theme } = props;
+  const value = props[responsiveProperty];
+  const keys = Object.keys(value);
+  return keys.map((key) => {
+    const index = theme.breakpointsKeys.indexOf(key);
+    return css`
+      ${getBreakpointQuery(theme.breakpoints[index])} {
+        ${cssProperty}: ${parser(value[key], props)};
+      }
+    `;
+  });
+};
+
+export const parseResponsiveStyles =
+  (cssProperty, responsiveProperty, parser) => (props) => {
+    const value = props[responsiveProperty];
+    return typeof value === 'object' && !Array.isArray(value)
+      ? parseResponsiveStylesObjectNotation(
+          cssProperty,
+          responsiveProperty,
+          parser,
+          props,
+        )
+      : parseResponsiveStylesArrayNotation(
+          cssProperty,
+          responsiveProperty,
+          parser,
+          props,
+        );
+  };

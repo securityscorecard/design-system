@@ -1,21 +1,19 @@
 import type { Property } from 'csstype';
-import type { ElementType, FC, HTMLAttributes } from 'react';
-import type { SpaceSize } from '../../../theme/space.types';
+import type { FC, HTMLAttributes } from 'react';
+import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled, { css } from 'styled-components';
-import { prop } from 'ramda';
 import cls from 'classnames';
 
-import { getSpace } from '../../../utils';
+import { parseResponsiveStyles } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
+import { gapParser } from '../../../utils/parsers';
 
-interface ClusterWrapperProps {
-  $overflow: 'hidden' | 'visible';
-}
-interface ClusterParentProps {
-  $gap?: SpaceSize;
+interface ClusterRootProps {
+  $gap?: ResponsiveSpaceSize;
   $align?: Property.AlignItems;
+  $overflow?: Property.Overflow;
   $justify?: Property.JustifyContent;
   className?: string;
 }
@@ -24,76 +22,46 @@ export interface ClusterProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */
-  gap?: ClusterParentProps['$gap'];
+  gap?: ClusterRootProps['$gap'];
   /**
    * Horizontal alignment of elements inside Inline
    */
-  justify?: ClusterParentProps['$justify'];
+  justify?: ClusterRootProps['$justify'];
   /**
    * Vertical alignment of elements inside Inline
    */
-  align?: ClusterParentProps['$align'];
-  /**
-   * Tag or component reference for wrapper element
-   */
-  wrapperEl?: ElementType;
-  /**
-   * Overflow type of the wrapper element
-   */
-  wrapperOverflow?: ClusterWrapperProps['$overflow'];
-  /**
-   * Tag or component reference for parent element
-   */
-  parentEl?: ElementType;
+  align?: ClusterRootProps['$align'];
   className?: string;
 }
 
-const ClusterWrapper = styled.div<ClusterWrapperProps>`
-  overflow: ${prop('$overflow')};
-`;
-const ClusterParent = styled.div<ClusterParentProps>(
-  ({ $gap, $justify, $align, theme }) => {
-    const gapSize = getSpace($gap, { theme });
-
-    return css`
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: ${$justify};
-      align-items: ${$align};
-      margin: calc(${gapSize} / -2);
-
-      & > * {
-        margin: calc(${gapSize} / 2);
-      }
-    `;
-  },
-);
+const ClusterRoot = styled.div<ClusterRootProps>(({ $justify, $align }) => {
+  return css`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: ${$justify};
+    align-items: ${$align};
+    ${parseResponsiveStyles('gap', '$gap', gapParser)};
+  `;
+});
 
 const Cluster: FC<ClusterProps> = ({
   children,
   gap,
   align,
   justify,
-  parentEl,
-  wrapperEl,
-  wrapperOverflow = 'hidden',
   ...props
 }) => (
-  <ClusterWrapper
-    $overflow={wrapperOverflow}
-    as={wrapperEl}
+  <ClusterRoot
+    $align={align}
+    $gap={gap}
+    $justify={justify}
     className={cls(CLX_LAYOUT, props?.className)}
+    {...props}
   >
-    <ClusterParent
-      $align={align}
-      $gap={gap}
-      $justify={justify}
-      as={parentEl}
-      {...props}
-    >
-      {children}
-    </ClusterParent>
-  </ClusterWrapper>
+    {children}
+  </ClusterRoot>
 );
 
 Cluster.defaultProps = {

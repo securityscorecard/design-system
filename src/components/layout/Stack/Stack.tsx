@@ -1,5 +1,5 @@
 import type { Property } from 'csstype';
-import type { SpaceSize } from '../../../theme/space.types';
+import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled from 'styled-components';
 import { prop } from 'ramda';
@@ -7,14 +7,15 @@ import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme/space.enums';
-import { getSpace } from '../../../utils';
+import { parseResponsiveStyles } from '../../../utils';
 import { CLX_LAYOUT } from '../../../theme/constants';
+import { gapParser } from '../../../utils/parsers';
 
 export interface StackProps {
   /**
    * Whitespace between each child of the Stack
    */
-  gap?: SpaceSize;
+  gap?: ResponsiveSpaceSize;
   /**
    * Horizontal alignment of elements inside Stack
    */
@@ -27,10 +28,6 @@ export interface StackProps {
    * Index of element after which the Stack is splitted. Leave 'undefined' for no splitting.
    */
   splitAt?: number;
-  /**
-   * Should apply gap recursively (on nested levels)
-   */
-  isRecursive?: boolean;
   className?: string;
 }
 
@@ -43,18 +40,11 @@ const Stack = styled.div.attrs((props) => ({
   flex-wrap: nowrap;
   align-items: ${prop('justify')};
   justify-content: ${prop('align')};
+  ${parseResponsiveStyles('gap', 'gap', gapParser)};
 
-  /* FIXME: Until we remove 'margin' property from other components we need to
-    increase specificity of those nesting , since it can be overriden by inner
-    elements with the same specificity. This can lead to inconsistent output
-    of visual test if styled-components puts CSS in different order into Head. */
-  ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * {
+  && > * {
     margin-top: 0;
     margin-bottom: 0;
-  }
-
-  ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * + * {
-    margin-top: ${({ gap, theme }) => getSpace(gap, { theme })};
   }
 
   ${({ splitAt }) =>
@@ -73,7 +63,6 @@ const Stack = styled.div.attrs((props) => ({
 Stack.defaultProps = {
   gap: SpaceSizes.none,
   justify: 'stretch',
-  isRecursive: false,
 };
 
 export default Stack;
