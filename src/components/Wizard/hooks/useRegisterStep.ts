@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
 import { useWizardContext } from './useWizardContext';
-import { WizardStep } from '../Wizard.types';
+import { SingleWizardStep } from '../Wizard.types';
 
-export const useRegisterStep = (step: WizardStep) => {
+export const useRegisterStep = (step: SingleWizardStep) => {
   const { update } = useWizardContext();
   useEffect(() => {
     // Register step

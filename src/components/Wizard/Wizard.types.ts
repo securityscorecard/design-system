@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Sizes } from '../Modal/Modal.types';
+import { ModalSizes } from '../Modal/Modal.types';
 
 export interface WizardProps {
-  size?: Sizes;
+  size?: ModalSizes;
   initialStep?: string;
   onClose?: () => void;
   isBackwardNavigationEnabled?: boolean;
-  onStepChange?: (step: WizardStep) => void;
+  onStepChange?: (step: SingleWizardStep) => void;
   children: React.ReactNode;
 }
 
-export interface WizardStep {
+export interface SingleWizardStep {
   id: string;
   name: string;
   primaryAction: WizardAction;
@@ -32,11 +32,11 @@ export const WizardActionPropType = PropTypes.shape({
 });
 
 export interface WizardNavigation {
-  goToStep: (step: WizardStep) => void;
+  goToStep: (step: SingleWizardStep) => void;
   goToPreviousStep: () => void;
   goToNextStep: () => void;
 }
 
-export type WizardStepProps = WizardStep & {
+export type WizardStepProps = SingleWizardStep & {
   children: React.ReactNode;
 };

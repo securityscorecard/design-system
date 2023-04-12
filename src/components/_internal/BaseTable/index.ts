@@ -8,3 +8,4 @@ export { default as CellRenderer } from './renderers/CellRenderer';
 export { actionsColumn } from './columns/actionsColumn';
 export * from './BaseTable.styles';
 export * from './utils';
+export * from './BaseTable.types';

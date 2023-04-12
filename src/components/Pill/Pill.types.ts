@@ -1,10 +1,10 @@
 import { PillSizes, PillVariants } from './Pill.enums';
 
-export type Variants = typeof PillVariants[keyof typeof PillVariants];
-export type Sizes = typeof PillSizes[keyof typeof PillSizes];
+export type PillVariants = typeof PillVariants[keyof typeof PillVariants];
+export type PillSizes = typeof PillSizes[keyof typeof PillSizes];
 
 export interface StyledPillWrapperProps {
-  $variant: Variants;
+  $variant: PillVariants;
   $isClickable: boolean;
 }
 
@@ -22,7 +22,7 @@ export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Size of the pill
    */
-  size: Sizes;
+  size: PillSizes;
   /**
    * Callback called when the pill is clicked. Hover functionality is enabled when this
    * property is passed in, this can be overriden by `isClickable` property when using
@@ -33,7 +33,7 @@ export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export interface PillLabelProps {
-  $size: Sizes;
+  $size: PillSizes;
   $maxLength?: number;
 }
 

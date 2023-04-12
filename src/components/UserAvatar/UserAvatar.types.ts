@@ -2,11 +2,12 @@ import type { To } from 'history';
 
 import { UserAvatarSizes } from './UserAvatar.enums';
 
-export type Sizes = typeof UserAvatarSizes[keyof typeof UserAvatarSizes];
+export type UserAvatarSizes =
+  typeof UserAvatarSizes[keyof typeof UserAvatarSizes];
 
 export type UserAvatarRootProps = {
   $isInverted?: boolean;
-  $size?: Sizes;
+  $size?: UserAvatarSizes;
 };
 
 export interface UserAvatarProps {
