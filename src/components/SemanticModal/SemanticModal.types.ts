@@ -5,9 +5,10 @@ import { ButtonColors } from '../Button/Button.enums';
 import { ActionKinds } from '../../types/action.types';
 import { ButtonEnums } from '../Button';
 
-export type Variants =
+export type SemanticModalVariants =
   typeof SemanticModalVariants[keyof typeof SemanticModalVariants];
-export type ButtonColors = typeof ButtonColors[keyof typeof ButtonColors];
+export type SemanticModalButtonColors =
+  typeof ButtonColors[keyof typeof ButtonColors];
 
 type ActionsArray = readonly [
   ActionKinds<[React.MouseEvent]>?,
@@ -27,8 +28,8 @@ export interface SemanticModalProps {
   message: React.ReactNode;
   onClose: React.MouseEventHandler;
   actions: ActionsArray;
-  variant?: Variants;
-  primaryButtonColor?: ButtonColors;
+  variant?: SemanticModalVariants;
+  primaryButtonColor?: SemanticModalButtonColors;
   isPrimaryButtonLoading?: boolean;
   loadingText?: string;
 }
