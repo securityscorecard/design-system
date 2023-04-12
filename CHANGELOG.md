@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/securityscorecard/design-system/compare/v1.0.2...v1.1.0) (2023-04-12)
+
+
+### Bug Fixes
+
+* **BaseTable:** update scrollbar appearence ([dec1352](https://github.com/securityscorecard/design-system/commit/dec1352c9b6ec0ef0bc05b72e49fb741371363f2))
+
+
+### Features
+
+* **Typescript:** export types from theme ([8170f08](https://github.com/securityscorecard/design-system/commit/8170f088b79138a9fb09554f7f4c3821e7f210fa))
+* **Typescript:** export types with components ([579924f](https://github.com/securityscorecard/design-system/commit/579924fc7a6caa67faa33c3305def8708c7f17e9))
+
 ## [1.0.2](https://github.com/securityscorecard/design-system/compare/v1.0.1...v1.0.2) (2023-04-06)
 
 
