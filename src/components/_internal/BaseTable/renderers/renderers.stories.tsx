@@ -3,7 +3,6 @@ import type { Row } from 'react-table';
 import type { FC } from 'react';
 import type { CellRendererProps } from './renderers.types';
 
-import PropTypes from 'prop-types';
 import { MemoryRouter } from 'react-router-dom';
 import { equals, F as stubFalse } from 'ramda';
 import { action } from '@storybook/addon-actions';
@@ -55,10 +54,6 @@ const LinkComponent: FC<{ to: string; className: string }> = ({
     {children}
   </a>
 );
-LinkComponent.propTypes = {
-  to: PropTypes.string.isRequired,
-  className: PropTypes.string,
-};
 
 /**
  *  DEFAULT RENDERER

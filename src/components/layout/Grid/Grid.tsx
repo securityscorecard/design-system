@@ -1,16 +1,13 @@
-import type { ReactComponentLike } from 'prop-types';
 import type { Property } from 'csstype';
-import type { FC, HTMLAttributes } from 'react';
+import type { ElementType, FC, HTMLAttributes } from 'react';
 import type { SpaceSize } from '../../../theme/space.types';
 
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import cls from 'classnames';
 
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
-import { AlignItemsPropType } from '../../../types/flex.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
 
@@ -39,7 +36,7 @@ export interface GridProps extends HTMLAttributes<HTMLElement> {
   /**
    * Tag or component reference for wrapper element
    */
-  wrapperEl?: ReactComponentLike;
+  wrapperEl?: ElementType;
   /**
    * Overflow type of the wrapper element
    */
@@ -47,7 +44,7 @@ export interface GridProps extends HTMLAttributes<HTMLElement> {
   /**
    * Tag or component reference for parent element
    */
-  parentEl?: ReactComponentLike;
+  parentEl?: ElementType;
   className?: string;
 }
 
@@ -104,16 +101,6 @@ const Grid: FC<GridProps> = ({
       </GridParent>
     </GridWrapper>
   );
-};
-
-Grid.propTypes = {
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  cols: PropTypes.number,
-  align: AlignItemsPropType,
-  wrapperEl: PropTypes.elementType,
-  parentEl: PropTypes.elementType,
-  wrapperOverflow: PropTypes.oneOf(['hidden', 'visible']),
-  className: PropTypes.string,
 };
 
 Grid.defaultProps = {

@@ -1,12 +1,10 @@
 import type { CardHeaderProps } from './Card.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { any } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 import { forwardRef } from 'react';
 
-import { ActionKindsPropType } from '../../types/action.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor, getRadii, getSpace } from '../../utils';
@@ -161,17 +159,5 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
     );
   },
 );
-
-CardHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  actions: PropTypes.arrayOf(ActionKindsPropType),
-  actionsButtonLabel: PropTypes.string,
-  leftAdornment: PropTypes.node,
-  maxTitleLinesCount: PropTypes.number,
-  maxSubtitleLinesCount: PropTypes.number,
-  helpTooltip: PropTypes.node,
-  onHelpClick: PropTypes.func,
-};
 
 export default CardHeader;

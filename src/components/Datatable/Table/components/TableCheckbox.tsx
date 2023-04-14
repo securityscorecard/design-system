@@ -6,7 +6,6 @@ import cls from 'classnames';
 
 import * as checked from '../../../../theme/icons/check';
 import * as indeterminate from '../../../../theme/icons/minus';
-import { Checkbox } from '../../../forms';
 
 const generateIconProps = ({ width, height, svgPathData }) => ({
   viewBox: `0 0 ${width} ${height}`,
@@ -61,7 +60,5 @@ const TableCheckbox = forwardRef(
     </div>
   ),
 );
-
-TableCheckbox.propTypes = Checkbox.propTypes;
 
 export default TableCheckbox;

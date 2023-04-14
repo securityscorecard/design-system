@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { StateButtonProps } from './StateButton.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { IconTypes } from '../../../theme/icons/icons.enums';
@@ -99,10 +98,3 @@ const StateButton: FC<StateButtonProps> = ({
 };
 
 export default StateButton;
-
-StateButton.propTypes = {
-  index: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-  isApplied: PropTypes.bool,
-  isLoading: PropTypes.bool,
-};

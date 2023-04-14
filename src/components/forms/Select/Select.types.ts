@@ -4,8 +4,6 @@ import type { Props as ReactSelectAsyncProps } from 'react-select/async';
 import type { Props as ReactSelectAsyncCreatableProps } from 'react-select/async-creatable';
 import type { ActionKinds } from '../../../types/action.types';
 
-import PropTypes from 'prop-types';
-
 export interface Option {
   value: string;
   label: string;
@@ -49,14 +47,3 @@ export type CreatableSelectProps<IsMulti extends boolean = false> =
   BaseSelectProps<IsMulti> & {
     createNewLabel?: string;
   } & (SyncCreatableSelectProps<IsMulti> | AsyncCreatableSelectProps<IsMulti>);
-
-export const OptionPropType = PropTypes.exact({
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
-});
-
-export const GroupPropType = PropTypes.exact({
-  label: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(OptionPropType).isRequired,
-});

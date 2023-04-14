@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { PillRemoveButtonProps } from './Pill.types';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { getColor, getLineHeight, getRadii, pxToRem } from '../../utils';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -42,9 +41,5 @@ const PillRemoveButton: FC<PillRemoveButtonProps> = ({
     <Icon name={SSCIconNames.times} />
   </PillRemoveButtonWrapper>
 );
-
-PillRemoveButton.propTypes = {
-  pillLabel: PropTypes.string.isRequired,
-};
 
 export default PillRemoveButton;

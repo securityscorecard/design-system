@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { FooterProps } from './Footer.types';
 
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, pxToRem } from '../../../utils';
@@ -71,18 +70,6 @@ const Footer: FC<FooterProps> = ({
       </BaseFooter>
     </>
   );
-};
-
-Footer.propTypes = {
-  width: PropTypes.number.isRequired,
-  offset: PropTypes.number.isRequired,
-  modalRef: PropTypes.exact({
-    current:
-      typeof Element === 'undefined'
-        ? PropTypes.any
-        : PropTypes.instanceOf(HTMLElement),
-  }).isRequired,
-  scrollToTopButtonLabel: PropTypes.string,
 };
 
 export default Footer;

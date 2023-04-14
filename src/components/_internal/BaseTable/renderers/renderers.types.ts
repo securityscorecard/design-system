@@ -1,7 +1,7 @@
 import type { CellValue, Row } from 'react-table';
 import type { To } from 'history';
-import type { ReactComponentLike } from 'prop-types';
 import type { CellTypes as CellTypesEnum } from './renderers.enums';
+import type { ElementType } from 'react';
 
 type OnClickFn<D> = (value: CellValue, rowData: D) => void;
 type HrefComposerFn<D> = (value: CellValue, rowData: D) => string;
@@ -18,7 +18,7 @@ interface InteractiveRendererProps<D> {
 export interface LinkRendererProps<D> extends InteractiveRendererProps<D> {
   value: CellValue;
   rowData: D;
-  component?: ReactComponentLike;
+  component?: ElementType;
   isDiscrete?: boolean;
   className?: string;
 }
@@ -29,7 +29,7 @@ export interface MultiValueRendererProps<D>
   valueFormatter?: CellFormaterFn<D>;
   multiValueDisplayLimit?: number;
   tooltipComposer?: TooltipPopupComposerFn<D>;
-  linkComponent?: ReactComponentLike;
+  linkComponent?: ElementType;
   rowData: D;
 }
 
@@ -37,7 +37,7 @@ export type CellTypes = typeof CellTypesEnum[keyof typeof CellTypesEnum];
 
 export type RendererColumnOptions<D> = {
   cellType?: CellTypes;
-  cellLinkComponent?: ReactComponentLike;
+  cellLinkComponent?: ElementType;
   cellOnClick?: OnClickFn<D>;
   cellHrefComposer?: HrefComposerFn<D>;
   cellToComposer?: ToComposerFn<D>;

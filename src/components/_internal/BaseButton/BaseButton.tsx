@@ -1,8 +1,6 @@
 import type { ComponentProps, FC } from 'react';
-import type { SSCIcons, Types } from '../../Icon/Icon.types';
 import type { BaseButtonProps } from './BaseButton.types';
 
-import PropTypes from 'prop-types';
 import {
   isNotNull,
   isNotUndefined,
@@ -13,21 +11,16 @@ import {
 import styled, { useTheme } from 'styled-components';
 import cls from 'classnames';
 
-import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
+import { IconTypes } from '../../../theme/icons/icons.enums';
 import { ColorTypes, SpaceSizes } from '../../../theme';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { getToken } from '../../../utils';
-import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Spinner } from '../../Spinner';
 import { Icon } from '../../Icon';
 import { Inline } from '../../layout';
 import BaseStyledButton from './BaseStyledButton';
-import {
-  BaseButtonColors,
-  BaseButtonSizes,
-  BaseButtonVariants,
-} from './BaseButton.enums';
+import { BaseButtonColors, BaseButtonVariants } from './BaseButton.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
 
@@ -125,36 +118,6 @@ const BaseButton: FC<
       </Inline>
     </BaseStyledButton>
   );
-};
-
-BaseButton.propTypes = {
-  variant: PropTypes.oneOf(Object.values(BaseButtonVariants)),
-  size: PropTypes.oneOf(Object.values(BaseButtonSizes)),
-  color: PropTypes.oneOf(Object.values(BaseButtonColors)),
-  isDisabled: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  isExpanded: PropTypes.bool,
-  margin: SpacingSizeValuePropType,
-  href: PropTypes.string,
-  to: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      hash: PropTypes.string,
-    }),
-  ]),
-  className: PropTypes.string,
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
-  iconType: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
-  loadingText: PropTypes.string,
-  onClick: PropTypes.func,
 };
 
 export default BaseButton;

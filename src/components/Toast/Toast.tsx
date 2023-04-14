@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { ToastProps } from './Toast.types';
 
-import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
@@ -113,13 +112,6 @@ const Toast: FC<ToastProps> = ({
       </ToastContainer>
     </ToastAreaContainer>
   );
-};
-
-Toast.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  variant: PropTypes.oneOf(Object.values(ToastVariants)),
-  isStandalone: PropTypes.bool,
 };
 
 export default Toast;

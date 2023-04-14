@@ -3,7 +3,6 @@ import type { SearchProps } from './Search.types';
 
 import { useState } from 'react';
 
-import { SearchPropType } from './Search.types';
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../../Filters/helpers';
 import { Stack } from '../../../layout';
@@ -74,7 +73,5 @@ const Search: FC<SearchProps> = ({
     </Stack>
   );
 };
-
-Search.propTypes = SearchPropType;
 
 export default Search;

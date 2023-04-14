@@ -2,14 +2,12 @@ import type { Property } from 'csstype';
 import type { SpaceSize } from '../../../theme/space.types';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { getSpace } from '../../../utils';
-import { AlignItemsPropType } from '../../../types/flex.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
 export interface StackProps {
@@ -71,14 +69,6 @@ const Stack = styled.div.attrs((props) => ({
     }
   `}
 `;
-
-Stack.propTypes = {
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  justify: AlignItemsPropType,
-  splitAt: PropTypes.number,
-  isRecursive: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 Stack.defaultProps = {
   gap: SpaceSizes.none,

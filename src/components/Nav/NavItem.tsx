@@ -1,7 +1,6 @@
 import type { NavItemProps } from './NavItem.types';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import {
   getColor,
@@ -50,9 +49,5 @@ const NavItem = styled(BaseButton)
     vertical-align: text-bottom;
   }
 `;
-
-NavItem.propTypes = {
-  isActive: PropTypes.bool,
-};
 
 export default NavItem;

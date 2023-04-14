@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { MessageProps } from './Message.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { SpaceSizes } from '../../../theme';
@@ -30,10 +29,6 @@ const Message: FC<MessageProps> = ({
     </Paragraph>
   </MessageContainer>
 );
-
-Message.propTypes = {
-  variant: PropTypes.oneOf(Object.values(MessageVariants)),
-};
 
 export default Message;
 

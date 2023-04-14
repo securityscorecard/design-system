@@ -265,7 +265,6 @@ export const selectStyles: (
   };
 };
 
-/* eslint-disable react/prop-types */
 export const DropdownIndicator: IndicatorComponentType<OptionType, boolean> = (
   props,
 ) => {
@@ -527,4 +526,3 @@ export const IndicatorsContainer: ComponentType<
     </components.IndicatorsContainer>
   );
 };
-/* eslint-enable react/prop-types */

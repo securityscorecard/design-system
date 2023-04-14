@@ -1,7 +1,6 @@
 import type { ModalProps } from './Modal.types';
 
 import { forwardRef, useContext } from 'react';
-import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -122,12 +121,3 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 );
 
 export default Modal;
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string,
-  footer: PropTypes.node,
-  size: PropTypes.oneOf(Object.values(ModalSizes)),
-  className: PropTypes.string,
-};

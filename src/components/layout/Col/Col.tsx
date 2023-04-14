@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { ColProps, Cols } from './Col.types';
 
 import { Box } from 'reflexbox';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
 
@@ -35,14 +34,6 @@ const Col: FC<ColProps> = ({ children, cols, offset }) => (
     {children}
   </StyledCol>
 );
-
-Col.propTypes = {
-  cols: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  offset: PropTypes.number,
-};
 
 Col.defaultProps = {
   cols: 'auto',

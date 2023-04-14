@@ -3,7 +3,6 @@ import type { TagsContainerProps, TagsInputProps } from './TagsInput.types';
 
 import { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import {
   __,
   any,
@@ -195,15 +194,3 @@ const TagsInput: FC<TagsInputProps> = ({
 };
 
 export default TagsInput;
-
-TagsInput.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string),
-  maxLength: PropTypes.number,
-  pattern: PropTypes.string,
-  errorMessage: PropTypes.string,
-  placeholder: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  onValidate: PropTypes.func,
-  onError: PropTypes.func,
-};

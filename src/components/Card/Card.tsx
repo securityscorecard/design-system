@@ -1,7 +1,6 @@
 import type { SpaceSize } from '../../theme/space.types';
 import type { CardProps, CardWrapperProps } from './Card.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { pipe, prop } from 'ramda';
 import cls from 'classnames';
@@ -92,10 +91,5 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     );
   },
 );
-
-Card.propTypes = {
-  shouldAlignLastItemToBottom: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default Card;

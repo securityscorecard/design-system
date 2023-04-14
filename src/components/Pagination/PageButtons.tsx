@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { PageButtonsProps } from './Pagination.types';
 
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { unfold } from 'ramda';
 
 import { PaginationItem, PaginationItemElipsis } from './PaginationItem';
@@ -121,13 +120,6 @@ const PageButtons: FC<PageButtonsProps> = ({
       })}
     </>
   );
-};
-
-PageButtons.propTypes = {
-  currentPage: PropTypes.number.isRequired,
-  pageCount: PropTypes.number.isRequired,
-  positions: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default PageButtons;

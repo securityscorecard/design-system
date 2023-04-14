@@ -2,7 +2,6 @@ import type { ChangeEventHandler, FC, PropsWithRef } from 'react';
 import type { TextAreaProps } from './TextArea.types';
 
 import { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
@@ -152,17 +151,6 @@ const TextArea: FC<
       )}
     </TextAreaWrapper>
   );
-};
-
-TextArea.propTypes = {
-  maxLength: PropTypes.number,
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
-  style: PropTypes.shape({}),
-  className: PropTypes.string,
-  onChange: PropTypes.func,
 };
 
 export default TextArea;

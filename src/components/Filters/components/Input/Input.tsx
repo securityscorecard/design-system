@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { InputProps } from './Input.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
 import { pipe } from 'ramda';
@@ -92,15 +91,5 @@ const Input: FC<InputProps> = ({
     </>
   );
 };
-Input.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
-  maxLength: PropTypes.number,
-  pattern: PropTypes.string,
-  errorMessage: PropTypes.string,
-  placeholder: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  onValidate: PropTypes.func,
-  onError: PropTypes.func,
-};
+
 export default Input;

@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react';
 import type { CellRendererProps } from './renderers.types';
 
-import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import LinkRenderer from './LinkRenderer';
@@ -88,35 +87,6 @@ function CellRenderer<D extends Record<string, unknown>>({
     </TooltipWrapper>
   );
 }
-
-CellRenderer.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.shape({}),
-      ]),
-    ),
-  ]).isRequired,
-  column: PropTypes.shape({
-    cellType: PropTypes.oneOf(Object.values(CellTypes)),
-    cellLinkComponent: PropTypes.elementType,
-    cellHrefComposer: PropTypes.func,
-    cellToComposer: PropTypes.func,
-    cellOnClick: PropTypes.func,
-    cellFormatter: PropTypes.func,
-    cellTooltipPopupComposer: PropTypes.func,
-    nullCondition: PropTypes.func,
-    nullConditionValue: PropTypes.string,
-    multiValueDisplayLimit: PropTypes.number,
-  }).isRequired,
-  row: PropTypes.shape({
-    original: PropTypes.shape({}),
-  }),
-};
 
 CellRenderer.displayName = 'CellRenderer';
 export default CellRenderer;

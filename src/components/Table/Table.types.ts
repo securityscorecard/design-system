@@ -1,9 +1,9 @@
-import type { ReactComponentLike } from 'prop-types';
 import type { Column, SortingRule } from 'react-table';
 import type {
   PrimaryKey,
   RowAction,
 } from '../_internal/BaseTable/BaseTable.types';
+import type { ElementType } from 'react';
 
 export interface TableProps<D extends Record<string, unknown>> {
   /**
@@ -33,7 +33,7 @@ export interface TableProps<D extends Record<string, unknown>> {
   /**
    * Component rendered when table have no data
    */
-  NoDataComponent?: ReactComponentLike;
+  NoDataComponent?: ElementType;
   /**
    * Callback called when pagination is clicked
    */

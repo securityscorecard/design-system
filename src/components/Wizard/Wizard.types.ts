@@ -1,8 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Sizes } from '../Modal/Modal.types';
 
-import PropTypes from 'prop-types';
-
 export interface WizardProps {
   size?: Sizes;
   initialStep?: string;
@@ -24,12 +22,6 @@ export interface WizardAction {
   onClick: (props: WizardNavigation) => void;
   isDisabled?: boolean;
 }
-
-export const WizardActionPropType = PropTypes.exact({
-  label: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool,
-});
 
 export interface WizardNavigation {
   goToStep: (step: WizardStep) => void;

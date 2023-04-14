@@ -2,7 +2,6 @@ import type { PropsWithChildren, ReactElement } from 'react';
 import type { StepperProps } from './Stepper.types';
 
 import { Children, forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useContainerQuery } from 'react-container-query';
 import { pathEq } from 'ramda';
 import cls from 'classnames';
@@ -96,13 +95,5 @@ const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
     );
   },
 );
-
-Stepper.propTypes = {
-  activeStep: PropTypes.number,
-  showTextBreakpoint: PropTypes.number,
-  orientation: PropTypes.oneOf(Object.values(StepperOrientations)),
-  areStepsExpanded: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default Stepper;

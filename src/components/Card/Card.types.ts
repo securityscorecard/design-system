@@ -1,6 +1,5 @@
 import type { DefaultTheme } from 'styled-components';
-import type { ReactComponentLike } from 'prop-types';
-import type { CSSProperties, MouseEvent, ReactNode } from 'react';
+import type { CSSProperties, ElementType, MouseEvent, ReactNode } from 'react';
 import type { SpaceSize } from '../../theme/space.types';
 import type { ActionKinds } from '../../types/action.types';
 import type { SSCIcons, Types } from '../Icon/Icon.types';
@@ -81,7 +80,7 @@ export interface CardMediaProps {
   /**
    * Can specify any element or React component.
    */
-  as?: ReactComponentLike;
+  as?: ElementType;
 }
 
 export interface CardMediaWrapperProps {
@@ -91,7 +90,7 @@ export interface CardMediaWrapperProps {
 
 export interface CardProps {
   children: ReactNode;
-  as?: ReactComponentLike;
+  as?: ElementType;
   onClick?: (event: Event) => void;
   to?: string;
   href?: string;

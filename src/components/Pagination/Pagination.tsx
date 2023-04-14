@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import type { PaginationProps } from './Pagination.types';
 
-import PropTypes from 'prop-types';
-
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { PaginationItem } from './PaginationItem';
@@ -48,13 +46,5 @@ const Pagination: FC<PaginationProps> = ({
       })}
   </Inline>
 );
-
-Pagination.propTypes = {
-  pageCount: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  pageButtonsCount: PropTypes.number,
-  renderItem: PropTypes.func,
-};
 
 export default Pagination;

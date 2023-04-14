@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { DSContextValue, DSProviderProps } from './DSProvider.types';
 
-import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
 import { createContext } from 'react';
@@ -33,14 +32,6 @@ const DSProvider: FC<DSProviderProps> = ({
       <DSContext.Provider value={dsConfig}>{children}</DSContext.Provider>
     </ThemeProvider>
   );
-};
-
-DSProvider.propTypes = {
-  theme: PropTypes.shape({}),
-  config: PropTypes.shape({
-    portalsContainer: PropTypes.string,
-    hasIncludedGlobalStyles: PropTypes.bool,
-  }),
 };
 
 export default DSProvider;

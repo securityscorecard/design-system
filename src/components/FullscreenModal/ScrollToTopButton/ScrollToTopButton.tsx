@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { ScrollToTopButtonProps } from './ScrollToTopButton.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -46,11 +45,6 @@ const ScrollToTopButton: FC<ScrollToTopButtonProps> = ({
       <ButtonText>{label}</ButtonText>
     </StyledButton>
   );
-};
-
-ScrollToTopButton.propTypes = {
-  label: PropTypes.string,
-  onClick: PropTypes.func,
 };
 
 export default ScrollToTopButton;

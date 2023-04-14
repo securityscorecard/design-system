@@ -1,14 +1,12 @@
 import type { SpinnerProps } from './Spinner.types';
 
 import styled, { keyframes } from 'styled-components';
-import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
 import { isString } from 'ramda-adjunct';
 import { transparentize } from 'polished';
 import cls from 'classnames';
 
 import { getColor, pxToRem } from '../../utils';
-import { ColorTypes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const spin = keyframes`
@@ -45,19 +43,6 @@ const Spinner = styled.div.attrs({
   border-top-color: ${({ dark, color, theme }) =>
     getColor(color || (dark ? 'neutral.1000' : 'neutral.0'), { theme })};
 `;
-
-Spinner.propTypes = {
-  dark: PropTypes.bool,
-  color: PropTypes.oneOf(Object.values(ColorTypes)),
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  verticalMargin: PropTypes.number,
-  horizontalMargin: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  borderWidth: PropTypes.number,
-};
 
 Spinner.defaultProps = {
   dark: false,

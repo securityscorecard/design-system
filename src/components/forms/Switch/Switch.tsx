@@ -1,7 +1,6 @@
 import type { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
 
 import { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { __, pipe, subtract } from 'ramda';
 import cls from 'classnames';
@@ -229,12 +228,5 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     </SwitchWrapper>
   ),
 );
-
-Switch.propTypes = {
-  switchId: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
-  size: PropTypes.oneOf(Object.values(SwitchSizes)),
-  className: PropTypes.string,
-};
 
 export default Switch;
