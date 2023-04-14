@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { SingleDatePickerProps } from './SingleDatePicker.types';
 
 import { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { noop } from 'ramda-adjunct';
 import DatePicker from 'react-datepicker';
@@ -79,13 +78,3 @@ const SingleDatePicker: FC<SingleDatePickerProps> = ({
 };
 
 export default SingleDatePicker;
-
-SingleDatePicker.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.instanceOf(Date),
-  minDate: PropTypes.instanceOf(Date),
-  maxDate: PropTypes.instanceOf(Date),
-  placeholder: PropTypes.string,
-  defaultIsOpen: PropTypes.bool,
-  defaultIsYearPickerOpen: PropTypes.bool,
-};

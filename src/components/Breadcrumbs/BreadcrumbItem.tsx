@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import type { BreadcrumbItemProps } from './Breadcrumbs.types';
-import type { SSCIcons } from '../Icon/Icon.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNilOrEmpty, isNotUndefined } from 'ramda-adjunct';
 
@@ -10,7 +8,6 @@ import { getFontWeight } from '../../utils/helpers';
 import { Text, TextEnums } from '../typographyLegacy/Text';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { Button } from '../Button';
-import { SSCIconNames } from '../../theme/icons/icons.enums';
 
 export const BreadcrumbLink = styled(Button)`
   font-weight: ${getFontWeight('regular')};
@@ -55,23 +52,6 @@ const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
       )}
     </ListItem>
   );
-};
-
-BreadcrumbItem.propTypes = {
-  children: PropTypes.string.isRequired,
-  to: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      hash: PropTypes.string,
-    }),
-  ]),
-  href: PropTypes.string,
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
 };
 
 export default BreadcrumbItem;

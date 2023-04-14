@@ -3,7 +3,6 @@ import type { CellProps, Column } from 'react-table';
 import type { TableProps } from './Table.types';
 
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useFlexLayout, usePagination, useSortBy, useTable } from 'react-table';
 import { prop, F as stubFalse } from 'ramda';
@@ -24,7 +23,6 @@ import {
 import { getColor, getRadii } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
-import { RowActionKindsPropType } from '../_internal/BaseTable/BaseTable.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const useIsMountRender = (): boolean => {
@@ -171,24 +169,6 @@ function Table<D extends Record<string, unknown>>({
     </TableWrapper>
   );
 }
-
-Table.propTypes = {
-  NoDataComponent: PropTypes.elementType,
-  hasPagination: PropTypes.bool,
-  defaultPageSize: PropTypes.number,
-  hasSorting: PropTypes.bool,
-  defaultPageIndex: PropTypes.number,
-  defaultSortBy: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      desc: PropTypes.bool,
-    }),
-  ),
-  rowActions: PropTypes.arrayOf(RowActionKindsPropType),
-  dataPrimaryKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  onPageChange: PropTypes.func,
-  onSortChange: PropTypes.func,
-};
 
 Table.displayName = 'Table';
 export default Table;

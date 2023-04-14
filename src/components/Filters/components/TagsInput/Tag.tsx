@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { TagsProps } from './Tag.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Icon } from '../../../Icon';
@@ -53,8 +52,3 @@ const Tag: FC<TagsProps> = ({ value, onClose }) => (
 );
 
 export default Tag;
-
-Tag.propTypes = {
-  value: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-};

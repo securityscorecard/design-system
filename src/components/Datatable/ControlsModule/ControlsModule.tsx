@@ -19,7 +19,6 @@ import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColumnsControls } from '../components/ColumnsControls';
 import { ControlButton } from '../components/ControlButton';
 import { DatatableStore } from '../Datatable.store';
-import { ControlsConfigPropType } from './ControlsModule.types';
 import { ControlTypes } from './ControlsModule.enums';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
@@ -321,7 +320,6 @@ function ControlsModule<D extends Record<string, unknown>>({
   );
 }
 
-ControlsModule.propTypes = ControlsConfigPropType;
 ControlsModule.displayName = 'ControlsModule';
 
 export default ControlsModule;

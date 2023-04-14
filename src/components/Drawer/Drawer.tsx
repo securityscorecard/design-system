@@ -1,7 +1,6 @@
 import type { DrawerProps } from './Drawer.types';
 
 import { forwardRef, useContext } from 'react';
-import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -181,23 +180,3 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 );
 
 export default Drawer;
-
-DrawerBox.propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  adornment: PropTypes.node,
-  footer: PropTypes.node,
-  size: PropTypes.oneOf(Object.values(DrawerSizes)),
-  props: PropTypes.objectOf(PropTypes.oneOf([PropTypes.string])),
-};
-Drawer.propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-  adornment: PropTypes.node,
-  footer: PropTypes.node,
-  size: PropTypes.oneOf(Object.values(DrawerSizes)),
-  hasBackdrop: PropTypes.bool,
-  className: PropTypes.string,
-};

@@ -3,7 +3,6 @@ import type { ChangeEvent, FC } from 'react';
 import type { Option, SelectableGroupProps } from './SelectableGroup.types';
 
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 import { useId } from '@react-aria/utils';
@@ -150,19 +149,6 @@ const SelectableGroup: FC<SelectableGroupProps> = ({
       )}
     </Cluster>
   );
-};
-
-SelectableGroup.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.exact({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      isDisabled: PropTypes.bool,
-    }),
-  ).isRequired,
-  name: PropTypes.string,
-  className: PropTypes.string,
-  onChange: PropTypes.func,
 };
 
 export default SelectableGroup;

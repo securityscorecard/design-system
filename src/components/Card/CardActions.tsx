@@ -5,15 +5,12 @@ import type {
 } from '../../types/action.types';
 import type { CardActionsProps } from './Card.types';
 
-import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
 import { forwardRef } from 'react';
 
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { Button, ButtonEnums } from '../Button';
-import * as CustomPropTypes from '../../types/customPropTypes';
-import { ActionKindsPropType } from '../../types/action.types';
 import { CardContainer } from './Card';
 
 const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
@@ -51,10 +48,5 @@ const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
     </CardContainer>
   ),
 );
-
-CardActions.propTypes = {
-  actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
-  rightAdornment: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-};
 
 export default CardActions;

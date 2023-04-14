@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
-import type { SSCIcons, Types } from '../Icon/Icon.types';
 
-import PropTypes from 'prop-types';
 import { defaultWhen } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
@@ -17,7 +15,6 @@ import {
 } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { SpaceSizes } from '../../theme';
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { Inline, Padbox } from '../layout';
 
@@ -82,18 +79,5 @@ const Badge: FC<BadgeProps> = ({
     </Inline>
   </BadgeElement>
 );
-
-Badge.propTypes = {
-  count: PropTypes.number,
-  text: PropTypes.string,
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
-  iconType: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
-};
 
 export default Badge;

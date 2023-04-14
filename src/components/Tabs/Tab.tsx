@@ -1,10 +1,7 @@
 import type { FC, KeyboardEvent } from 'react';
 import type { TabProps } from './Tabs.types';
 
-import PropTypes from 'prop-types';
-
 import { TabVariants } from './Tabs.enums';
-import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
@@ -59,16 +56,6 @@ const Tab: FC<TabProps> = ({ children, color, value }) => {
       {children}
     </BaseTabLabel>
   );
-};
-
-Tab.propTypes = {
-  children: PropTypes.node.isRequired,
-  value: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(Object.values(TabVariants)),
-  isSelected: PropTypes.bool,
-  isExpanded: PropTypes.bool,
-  color: PropTypes.oneOf([...Object.values(ColorTypes)]),
-  onClick: PropTypes.func,
 };
 
 export default Tab;

@@ -5,7 +5,6 @@ import type {
 } from 'react';
 import type { HeadingProps } from './Heading.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { path } from 'ramda';
 import cls from 'classnames';
@@ -104,12 +103,6 @@ const Heading: FC<HeadingProps & ComponentPropsWithRef<typeof HeadingH1>> = ({
   return createElement(headingSizes[size], additionalProps, children);
 };
 
-Heading.propTypes = {
-  size: PropTypes.oneOf(Object.values(HeadingSizes)),
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-  className: PropTypes.string,
-};
-
 export default Heading;
 
 export const H0: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
@@ -121,10 +114,6 @@ export const H0: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   </Heading>
 );
 
-H0.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
-
 export const H1: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   children,
   ...props
@@ -133,10 +122,6 @@ export const H1: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
     {children}
   </Heading>
 );
-
-H1.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
 
 export const H2: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   children,
@@ -147,10 +132,6 @@ export const H2: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   </Heading>
 );
 
-H2.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
-
 export const H3: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   children,
   ...props
@@ -159,10 +140,6 @@ export const H3: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
     {children}
   </Heading>
 );
-
-H3.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
 
 export const H4: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   children,
@@ -173,10 +150,6 @@ export const H4: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   </Heading>
 );
 
-H4.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
-
 export const H5: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
   children,
   ...props
@@ -185,7 +158,3 @@ export const H5: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
     {children}
   </Heading>
 );
-
-H5.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};

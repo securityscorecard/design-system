@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { LoadingOverlayProps } from './LoadingOverlay.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { getColor, getRadii } from '../../../../utils';
@@ -78,10 +77,5 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({
     </LoadingIndicatorContainer>
   </LoadingOverlayContainer>
 );
-
-LoadingOverlay.propTypes = {
-  isCancelable: PropTypes.bool,
-  onCancel: PropTypes.func,
-};
 
 export default LoadingOverlay;

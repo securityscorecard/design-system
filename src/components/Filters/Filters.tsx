@@ -34,7 +34,6 @@ import { Padbox, Stack } from '../layout';
 import { FilterRow } from './FilterRow';
 import { getDefaultComponentValue } from './FilterRow/FilterRow';
 import { BottomBar } from './BottomBar';
-import { FiltersPropType } from './Filters.types';
 import { Operators } from './Filters.enums';
 import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -366,5 +365,3 @@ const Filters: FC<FiltersProps> = ({
 };
 
 export default Filters;
-
-Filters.propTypes = FiltersPropType;

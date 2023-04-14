@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { WizardModalProps } from './WizardModal.types';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { usePortal } from '../../hooks/usePortal';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
@@ -48,7 +47,3 @@ const WizardModal: FC<WizardModalProps> = ({ children }) => {
 };
 
 export default WizardModal;
-
-WizardModal.propTypes = {
-  children: PropTypes.node.isRequired,
-};

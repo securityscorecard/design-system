@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 
-import PropTypes from 'prop-types';
-
 export type AccordionItemId = string | number;
 
 export type AccordionItem = {
@@ -27,15 +25,3 @@ export interface AccordionProps {
   className?: string;
   openItems: AccordionItemId[];
 }
-
-export const AccordionItemIdPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]);
-
-export const AccordionItemPropType = PropTypes.exact({
-  title: PropTypes.node.isRequired,
-  content: PropTypes.node.isRequired,
-  isOpen: PropTypes.bool,
-  id: AccordionItemIdPropType.isRequired,
-});

@@ -1,7 +1,6 @@
 import type { SegmentedToggleItemProps } from './SegmentedToggle.types';
 
 import { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { ColorTypes } from '../../../theme/colors.enums';
@@ -71,11 +70,5 @@ const SegmentedToggleItem = forwardRef<
     </SegmentedToggleItemWrapper>
   );
 });
-
-SegmentedToggleItem.propTypes = {
-  label: PropTypes.string.isRequired,
-  itemId: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
 
 export default SegmentedToggleItem;

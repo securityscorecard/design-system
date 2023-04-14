@@ -1,9 +1,7 @@
 import type { FC } from 'react';
 import type { CalloutProps } from './Callout.types';
-import type { SSCIcons } from '../Icon/Icon.types';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
@@ -50,12 +48,5 @@ const Callout: FC<CalloutProps> = ({
     </Inline>
   </Container>
 );
-
-Callout.propTypes = {
-  icon: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-  ]),
-};
 
 export default Callout;

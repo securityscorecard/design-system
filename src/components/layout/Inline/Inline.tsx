@@ -1,19 +1,14 @@
 import type { Property } from 'csstype';
 import type { SpaceSize } from '../../../theme/space.types';
+import type { StretchEnum } from './Inline.enums';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import {
-  AlignItemsPropType,
-  JustifyContentPropType,
-} from '../../../types/flex.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
-import { StretchEnum } from './Inline.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
 type Stretch = typeof StretchEnum[keyof typeof StretchEnum];
@@ -91,17 +86,6 @@ const Inline = styled.div.attrs((props) => ({
     margin-left: ${({ gap, theme }) => getSpace(gap, { theme })};
   }
 `;
-
-Inline.propTypes = {
-  align: AlignItemsPropType,
-  justify: JustifyContentPropType,
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  stretch: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<Stretch>(Object.values(StretchEnum)),
-  ]),
-  className: PropTypes.string,
-};
 
 Inline.defaultProps = {
   gap: SpaceSizes.none,

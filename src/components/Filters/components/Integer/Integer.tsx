@@ -6,7 +6,6 @@ import { isNonEmptyString } from 'ramda-adjunct';
 import { StyledNumber } from '../Number/Number';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-import { NumberPropTypes } from '../Number/Number.types';
 
 const Integer: FC<NumberProps> = ({
   value = '',
@@ -48,5 +47,3 @@ const Integer: FC<NumberProps> = ({
 };
 
 export default Integer;
-
-Integer.propTypes = NumberPropTypes;

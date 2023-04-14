@@ -2,7 +2,6 @@ import type { FC, KeyboardEvent } from 'react';
 import type { GoToPageProps } from './GoToPage.types';
 
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {
@@ -71,11 +70,6 @@ const GoToPage: FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
       />
     </Inline>
   );
-};
-
-GoToPage.propTypes = {
-  pageCount: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
 };
 
 export default GoToPage;

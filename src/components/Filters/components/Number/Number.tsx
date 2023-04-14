@@ -7,7 +7,6 @@ import { isNonEmptyString } from 'ramda-adjunct';
 import { StyledInput } from '../Input/Input';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-import { NumberPropTypes } from './Number.types';
 
 export const StyledNumber = styled(StyledInput)`
   &::-webkit-inner-spin-button,
@@ -52,5 +51,3 @@ const Number: FC<NumberProps> = ({
 };
 
 export default Number;
-
-Number.propTypes = NumberPropTypes;

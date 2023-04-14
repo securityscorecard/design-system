@@ -1,7 +1,6 @@
 import type { DropdownPaneProps, DropdownPaneStyles } from './Dropdown.types';
 
 import { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { noop } from 'ramda-adjunct';
 
@@ -18,7 +17,6 @@ import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Padbox } from '../layout';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 
 export const Arrow = styled.div`
   visibility: hidden;
@@ -136,19 +134,5 @@ const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(
     );
   },
 );
-
-DropdownPane.propTypes = {
-  isElevated: PropTypes.bool.isRequired,
-  maxWidth: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]).isRequired,
-  hasArrow: PropTypes.bool.isRequired,
-  arrowRef: PropTypes.func.isRequired,
-  arrowStyles: PropTypes.shape({}),
-  contentPaddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
-  contentPaddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
-  onClickOut: PropTypes.func,
-};
 
 export default DropdownPane;

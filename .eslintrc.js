@@ -96,12 +96,8 @@ module.exports = {
         rule: '^(defaultIs|defaultHas|defaultShould|defaultAre|is|has|should|are)[A-Z]([A-Za-z0-9]?)+',
       },
     ],
-    'react/prop-types': [
-      'error',
-      {
-        ignore: ['children', 'as'],
-      },
-    ],
+    'react/prop-types': 'off',
+    'react/default-props-match-prop-types': 'off',
     'react/jsx-sort-props': [
       'error',
       {
@@ -109,14 +105,6 @@ module.exports = {
         callbacksLast: true,
         shorthandLast: true,
         reservedFirst: true,
-      },
-    ],
-    'react/sort-prop-types': [
-      'error',
-      {
-        requiredFirst: true,
-        callbacksLast: true,
-        noSortAlphabetically: true,
       },
     ],
     'react-hooks/rules-of-hooks': 'error',
@@ -194,7 +182,6 @@ module.exports = {
       files: ['**/*.stories.tsx'],
       extends: ['plugin:storybook/recommended'],
       rules: {
-        'react/prop-types': 'off',
         'react/no-unstable-nested-components': [
           2,
           {
@@ -207,7 +194,6 @@ module.exports = {
       files: ['**/*.md', '**/*.mdx'],
       extends: ['plugin:mdx/recommended'],
       rules: {
-        'react/prop-types': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.mdx'] }],
       },
     },

@@ -4,7 +4,6 @@ import type {
   AccordionItemId,
 } from './Accordion.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 
@@ -13,7 +12,6 @@ import { getColor, getSpace, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
-import { AccordionItemIdPropType } from './Accordion.types';
 import { Inline, Padbox } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
@@ -103,14 +101,6 @@ const AccordionCollapsible: FC<AccordionCollapsibleProps> = ({
       )}
     </Container>
   );
-};
-
-AccordionCollapsible.propTypes = {
-  title: PropTypes.node.isRequired,
-  handleHeaderClick: PropTypes.func.isRequired,
-  id: AccordionItemIdPropType.isRequired,
-  className: PropTypes.string,
-  isOpen: PropTypes.bool,
 };
 
 export default AccordionCollapsible;

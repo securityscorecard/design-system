@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { FooterProps } from './Footer.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
@@ -67,15 +66,6 @@ const Footer: FC<FooterProps> = ({
       )}
     </StyledFooter>
   );
-};
-
-Footer.propTypes = {
-  pageCount: PropTypes.number.isRequired,
-  pageIndex: PropTypes.number.isRequired,
-  onGotoPage: PropTypes.func.isRequired,
-  pageButtonsCount: PropTypes.number,
-  hasPagination: PropTypes.bool,
-  isDataLoading: PropTypes.bool,
 };
 
 export default Footer;

@@ -1,7 +1,6 @@
 import type { SpaceSize } from '../../../theme/space.types';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -68,14 +67,6 @@ const Center = styled.div
 
   ${({ isTextCentered }) => isTextCentered && `text-align: center;`};
 `;
-
-Center.propTypes = {
-  maxWidth: PropTypes.number,
-  gutters: PropTypes.oneOf(Object.values(SpaceSizes)),
-  areChildrenCentered: PropTypes.bool,
-  isTextCentered: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 Center.defaultProps = {
   gutters: SpaceSizes.none,

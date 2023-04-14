@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { SortableItemProps } from './SortableList.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -90,12 +89,6 @@ const SortableItem: FC<SortableItemProps> = ({ label, id, renderItem }) => {
       </Inline>
     </StyledSortableItem>
   );
-};
-
-SortableItem.propTypes = {
-  label: PropTypes.string,
-  id: PropTypes.string,
-  renderItem: PropTypes.func,
 };
 
 export default SortableItem;

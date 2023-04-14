@@ -8,7 +8,6 @@ import {
   isNotNilOrEmpty,
   isNotUndefined,
 } from 'ramda-adjunct';
-import PropTypes from 'prop-types';
 import { pipe } from 'ramda';
 import cls from 'classnames';
 
@@ -197,22 +196,5 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
     );
   },
 );
-
-SearchBar.propTypes = {
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
-  hasDebouncedSearch: PropTypes.bool,
-  debounceTime: PropTypes.number,
-  isDisabled: PropTypes.bool,
-  isInvalid: PropTypes.bool,
-  isSearching: PropTypes.bool,
-  shouldTriggerSearchOnMount: PropTypes.bool,
-  placeholder: PropTypes.string,
-  className: PropTypes.string,
-  onChange: PropTypes.func,
-  onClear: PropTypes.func,
-  onSearch: PropTypes.func,
-  onKeyUp: PropTypes.func,
-};
 
 export default SearchBar;

@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { SignalProps } from './Signal.types';
 
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -94,13 +93,6 @@ const Signal: FC<SignalProps> = ({
       </g>
     </svg>
   );
-};
-
-Signal.propTypes = {
-  kind: PropTypes.oneOf(Object.values(SignalKinds)).isRequired,
-  size: PropTypes.number,
-  title: PropTypes.string,
-  className: PropTypes.string,
 };
 
 export default Signal;

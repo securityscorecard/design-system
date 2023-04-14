@@ -3,7 +3,6 @@ import type { InputGroupProps } from './InputGroup.types';
 import type { InlineProps } from '../../layout/Inline/Inline';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import cls from 'classnames';
 import { Children } from 'react';
@@ -98,11 +97,6 @@ const InputGroup: FC<InputGroupProps & InlineProps> = ({
       })}
     </InputGroupContainer>
   );
-};
-
-InputGroup.propTypes = {
-  hasDivider: PropTypes.bool,
-  className: PropTypes.string,
 };
 
 export default InputGroup;

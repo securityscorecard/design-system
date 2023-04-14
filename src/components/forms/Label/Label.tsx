@@ -1,7 +1,6 @@
 import type { ComponentPropsWithRef, FC, HTMLProps } from 'react';
 
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme';
@@ -34,10 +33,5 @@ const Label: FC<
     {children}
   </LabelContainer>
 );
-
-Label.propTypes = {
-  htmlFor: PropTypes.string,
-  className: PropTypes.string,
-};
 
 export default Label;

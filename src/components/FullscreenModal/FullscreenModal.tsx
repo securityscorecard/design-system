@@ -5,7 +5,6 @@ import type {
 } from './FullscreenModal.types';
 
 import { forwardRef, useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isUndefined, noop } from 'ramda-adjunct';
 
@@ -157,16 +156,5 @@ const FullscreenModal = forwardRef(
     return renderModal();
   },
 );
-FullscreenModal.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  header: PropTypes.node.isRequired,
-  content: PropTypes.node.isRequired,
-  footer: PropTypes.node.isRequired,
-  onClose: PropTypes.func.isRequired,
-  sidebar: PropTypes.node,
-  layout: PropTypes.oneOf(Object.values(FullscreenModalLayouts)),
-  scrollToTopButtonLabel: PropTypes.string,
-  /* eslint-enable */
-};
 
 export default FullscreenModal;
