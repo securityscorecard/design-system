@@ -16,15 +16,16 @@
     "types": ["jest", "node", "testing-library__jest-dom"],
     "resolveJsonModule": true
   },
-  "include": [
-    "src/**/*",
-    ".storybook/blocks/**/*",
-    "jest.setup.ts",
-  ],
+  "include": ["src/**/*"],
   "exclude": [
     "node_modules",
     "build",
     "src/**/*.mdx",
-    "src/**/_*"
+    "src/**/*.stories.tsx",
+    "src/**/*.storiesTypes.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/mocks/*",
+    "src/utils/tests/*"
   ]
 }

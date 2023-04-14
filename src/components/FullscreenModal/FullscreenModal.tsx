@@ -7,7 +7,10 @@ import { getColor } from '../../utils';
 import ModalHeader from './Header/Header';
 import ModalFooter from './Footer/Footer';
 import { FullscreenModalLayouts } from './FullscreenModal.enums';
-import { ColumnConfigMap, FullscreenModalProps } from './FullscreenModal.types';
+import {
+  FullscreenModalColumnConfigMap,
+  FullscreenModalProps,
+} from './FullscreenModal.types';
 import { Col, Container, Row } from '../layout';
 import { useModal } from './hooks/useModal';
 import { useLogger } from '../../hooks/useLogger';
@@ -22,7 +25,7 @@ const BaseModal = styled.div`
   background-color: ${getColor('neutral.0')};
 `;
 
-const columnConfigMap: ColumnConfigMap = {
+const columnConfigMap: FullscreenModalColumnConfigMap = {
   [FullscreenModalLayouts.single6]: {
     header: [6, 3],
     sidebar: [0, 0],

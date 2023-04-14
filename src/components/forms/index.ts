@@ -13,3 +13,4 @@ export * from './SearchBar';
 export * from './SegmentedToggle';
 export * from './SelectableGroup';
 export * from './InputGroup';
+export * from './types/forms.types';

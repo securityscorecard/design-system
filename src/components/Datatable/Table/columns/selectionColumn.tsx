@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { CellProps, HeaderProps, TableToggleCommonProps } from 'react-table';
+import {
+  CellProps,
+  Column,
+  HeaderProps,
+  TableToggleCommonProps,
+} from 'react-table';
 
 import {
   CellTypes,
@@ -37,67 +42,71 @@ const IndeterminateCheckbox = React.forwardRef(
   },
 );
 
-export const selectionColumn = {
-  id: SELECTION_COLUMN_ID,
-  sticky: 'left',
-  width: 48,
-  disableSortBy: true,
-  Header: ({
-    getToggleAllRowsSelectedProps,
-    dataSize,
-    isMultiSelect,
-    dispatch,
-    state: { selectedRowIds: tableSelectedRowIds },
-  }: HeaderProps<Record<string, unknown>>): React.ReactElement => {
-    if (dataSize === 0) return null;
+export function getSelectionColumn<
+  D extends Record<string, unknown>,
+>(): Column<D> {
+  return {
+    id: SELECTION_COLUMN_ID,
+    sticky: 'left',
+    width: 48,
+    disableSortBy: true,
+    Header: ({
+      getToggleAllRowsSelectedProps,
+      dataSize,
+      isMultiSelect,
+      dispatch,
+      state: { selectedRowIds: tableSelectedRowIds },
+    }: HeaderProps<Record<string, unknown>>): React.ReactElement => {
+      if (dataSize === 0) return null;
 
-    const selectedLength = Object.keys(tableSelectedRowIds).length;
-    const indeterminate = selectedLength > 0 && selectedLength < dataSize;
+      const selectedLength = Object.keys(tableSelectedRowIds).length;
+      const indeterminate = selectedLength > 0 && selectedLength < dataSize;
 
-    return (
-      <IndeterminateCheckbox
-        id="header-select-all"
-        {...getToggleAllRowsSelectedProps({
-          ...(!isMultiSelect
-            ? {
-                onChange() {
-                  dispatch({
-                    type: actions.deselectAllRows,
-                  });
-                },
-              }
-            : {}),
-        })}
-        indeterminate={indeterminate}
-        isDisabled={!isMultiSelect && selectedLength === 0}
-      />
-    );
-  },
-  cellType: CellTypes.selection,
-  Cell: ({
-    isMultiSelect,
-    row,
-    dispatch,
-  }: CellProps<Record<string, unknown>>): React.ReactElement => {
-    const id = `row-${row.id}`;
+      return (
+        <IndeterminateCheckbox
+          id="header-select-all"
+          {...getToggleAllRowsSelectedProps({
+            ...(!isMultiSelect
+              ? {
+                  onChange() {
+                    dispatch({
+                      type: actions.deselectAllRows,
+                    });
+                  },
+                }
+              : {}),
+          })}
+          indeterminate={indeterminate}
+          isDisabled={!isMultiSelect && selectedLength === 0}
+        />
+      );
+    },
+    cellType: CellTypes.selection,
+    Cell: ({
+      isMultiSelect,
+      row,
+      dispatch,
+    }: CellProps<Record<string, unknown>>): React.ReactElement => {
+      const id = `row-${row.id}`;
 
-    return (
-      <IndeterminateCheckbox
-        id={id}
-        {...row.getToggleRowSelectedProps({
-          ...(!isMultiSelect
-            ? {
-                onChange(e: React.ChangeEvent<HTMLInputElement>) {
-                  dispatch({
-                    type: actions.toggleSingleRowSelected,
-                    id: row.id,
-                    value: e.target.checked,
-                  });
-                },
-              }
-            : {}),
-        })}
-      />
-    );
-  },
-};
+      return (
+        <IndeterminateCheckbox
+          id={id}
+          {...row.getToggleRowSelectedProps({
+            ...(!isMultiSelect
+              ? {
+                  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                    dispatch({
+                      type: actions.toggleSingleRowSelected,
+                      id: row.id,
+                      value: e.target.checked,
+                    });
+                  },
+                }
+              : {}),
+          })}
+        />
+      );
+    },
+  };
+}
