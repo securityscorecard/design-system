@@ -10,12 +10,10 @@ import type {
 import type { InteractiveElement } from '../../Dropdown/Dropdown.types';
 
 import { memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { ActionKindsPropType } from '../../../types/action.types';
 import { getColor, getSpace, pxToRem } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { Dropdown } from '../../Dropdown';
@@ -182,18 +180,6 @@ const DropdownMenu: FC<DropdownMenuProps> = ({
       </List>
     </Dropdown>
   );
-};
-
-DropdownMenu.propTypes = {
-  actions: PropTypes.arrayOf(ActionKindsPropType).isRequired,
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
-  defaultIsOpen: PropTypes.bool,
-  paneWidth: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  className: PropTypes.string,
-  placement: PropTypes.oneOf(['bottom', 'bottom-start', 'bottom-end']),
 };
 
 export default memo(DropdownMenu);

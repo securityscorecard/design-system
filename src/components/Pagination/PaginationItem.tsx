@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { PaginationItemProps } from './Pagination.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import {
@@ -96,13 +95,6 @@ export const PaginationItem: FC<PaginationItemProps> = ({
       {children}
     </StyledPaginationComponent>
   );
-};
-
-PaginationItem.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool,
-  isCurrent: PropTypes.bool,
-  isShrinked: PropTypes.bool,
 };
 
 export const PaginationItemElipsis = styled(Padbox).attrs(() => ({

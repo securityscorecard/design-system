@@ -2,7 +2,6 @@ import type { HeadingProps } from '../Heading/Heading.types';
 import type { CodeProps, StrongProps, TextProps } from './Text.types';
 
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import {
@@ -112,13 +111,6 @@ const Text = styled.span.attrs((props) => ({
   ${({ variant }) => variants[variant]};
 `;
 
-Text.propTypes = {
-  size: PropTypes.oneOf(Object.values(TextSizes)),
-  variant: PropTypes.oneOf(Object.values(TextVariants)),
-  isBold: PropTypes.bool,
-  className: PropTypes.string,
-};
-
 Text.defaultProps = {
   size: TextSizes.md,
   variant: TextVariants.primary,
@@ -130,21 +122,10 @@ export default Text;
 export const Strong = styled(Text).attrs<StrongProps>(() => ({
   as: 'strong',
   isBold: true,
-}))``;
-
-Strong.propTypes = {
-  variant: PropTypes.oneOf(Object.values(TextVariants)),
-};
-Strong.defaultProps = {
   size: TextSizes.inherit,
-};
+}))``;
 
 export const Code = styled(Text).attrs<CodeProps>(() => ({
   variant: TextVariants.monospace,
   as: 'code',
 }))``;
-
-Code.propTypes = {
-  size: PropTypes.oneOf(Object.values(TextSizes)),
-  isBold: PropTypes.bool,
-};

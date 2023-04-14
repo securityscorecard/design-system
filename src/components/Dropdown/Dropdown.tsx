@@ -9,7 +9,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 import { Ref } from '@fluentui/react-component-ref';
 
@@ -171,25 +170,5 @@ const Dropdown: FC<DropdownProps> = forwardRef(
     );
   },
 );
-
-Dropdown.propTypes = {
-  trigger: PropTypes.element.isRequired,
-  triggerEvents: PropTypes.arrayOf(
-    PropTypes.oneOf(Object.values(DropdownTriggerEvents)),
-  ),
-  placement: PropTypes.oneOf(Object.values(DropdownPlacements)),
-  innerPaddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
-  innerPaddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
-  maxPaneWidth: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  isPaneElevated: PropTypes.bool,
-  hasPaneArrow: PropTypes.bool,
-  hoverHideDelay: PropTypes.number,
-  defaultIsOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  onOpen: PropTypes.func,
-};
 
 export default Dropdown;

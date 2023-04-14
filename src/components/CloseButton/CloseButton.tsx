@@ -4,7 +4,6 @@ import type {
   CloseButtonWrapperProps,
 } from './CloseButton.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import cls from 'classnames';
@@ -87,13 +86,5 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
     </AlignmentWrapper>
   ),
 );
-
-CloseButton.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  marginCompensation: PropTypes.oneOf(Object.values(SpaceSizes)),
-  ariaLabel: PropTypes.string,
-  isInverted: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default CloseButton;

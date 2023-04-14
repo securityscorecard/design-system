@@ -2,7 +2,6 @@ import type { ComponentProps, FC } from 'react';
 import type { SortingIconProps } from './Head.types';
 
 import { memo } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
@@ -30,10 +29,5 @@ const SortingIcon: FC<SortingIconProps> = memo(({ isSorted, isSortedDesc }) => {
   if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
   return <StyledIcon color={ColorTypes.neutral500} name={SSCIconNames.sort} />;
 });
-
-SortingIcon.propTypes = {
-  isSorted: PropTypes.bool,
-  isSortedDesc: PropTypes.bool,
-};
 
 export default SortingIcon;

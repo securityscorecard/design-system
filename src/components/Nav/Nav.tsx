@@ -16,6 +16,4 @@ https://securityscorecard.github.io/design-system/alpha/?path=/docs/components-t
   return <Inline as="nav" {...props} />;
 };
 
-Nav.propTypes = Inline.propTypes;
-
 export default Nav;

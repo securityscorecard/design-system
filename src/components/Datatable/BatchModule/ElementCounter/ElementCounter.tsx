@@ -2,7 +2,6 @@ import type { FC, ReactElement } from 'react';
 import type { ElementCounterProps } from './ElementCounter.types';
 
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import styled, { useTheme } from 'styled-components';
 
@@ -178,12 +177,6 @@ const ElementCounter: FC<ElementCounterProps> = ({
       )}
     </ElementCounterWrapper>
   );
-};
-
-ElementCounter.propTypes = {
-  dataSize: PropTypes.number.isRequired,
-  hasSelection: PropTypes.bool.isRequired,
-  hasOnlyPerPageSelection: PropTypes.bool.isRequired,
 };
 
 export default ElementCounter;

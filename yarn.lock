@@ -3771,7 +3771,6 @@ __metadata:
     polished: ^4.2.2
     postcss: ^8.4.12
     prettier: ^2.6.0
-    prop-types: ^15.8.1
     pullstate: ^1.23.0
     ramda: ^0.28.0
     ramda-adjunct: ^3.0.0

@@ -2,7 +2,6 @@ import type { FC, MouseEvent, ReactElement, ReactNode } from 'react';
 import type { BreadcrumbsProps } from './Breadcrumbs.types';
 import type { ActionKinds } from '../../types/action.types';
 
-import PropTypes from 'prop-types';
 import { slice } from 'ramda';
 import styled from 'styled-components';
 import { isNotNilOrEmpty } from 'ramda-adjunct';
@@ -135,11 +134,6 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ children, className }) => {
       </InlineOrderedList>
     </BreadcrumbsWrapper>
   );
-};
-
-Breadcrumbs.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  className: PropTypes.string,
 };
 
 export default Breadcrumbs;

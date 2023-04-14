@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
 
-import PropTypes from 'prop-types';
 import { defaultWhen } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
@@ -70,9 +69,5 @@ const Badge: FC<BadgeProps> = ({ count, variant = BadgeVariants.error }) => (
     <span>{normalizeCount(count)}</span>
   </BadgeElement>
 );
-
-Badge.propTypes = {
-  count: PropTypes.number,
-};
 
 export default Badge;

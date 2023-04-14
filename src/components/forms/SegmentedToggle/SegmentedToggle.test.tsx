@@ -5,6 +5,19 @@ import { map } from 'ramda';
 import { SegmentedToggle, SegmentedToggleItem } from '.';
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 
+function Item({ itemId, label, value, ref }) {
+  return (
+    <SegmentedToggleItem
+      key={itemId}
+      itemId={itemId.toString()}
+      label={label}
+      value={value}
+      ref={ref}
+      defaultChecked={itemId === 2}
+    />
+  );
+}
+
 describe('SegmentedToggle', () => {
   it('should determine selected tab and input element by strict equality', () => {
     renderWithProviders(
@@ -33,20 +46,6 @@ describe('SegmentedToggle', () => {
       .map((_, i) => {
         return { itemId: i, label: i.toString(), value: i, ref: refs[i] };
       });
-
-    // eslint-disable-next-line react/prop-types
-    function Item({ itemId, label, value, ref }) {
-      return (
-        <SegmentedToggleItem
-          key={itemId}
-          itemId={itemId.toString()}
-          label={label}
-          value={value}
-          ref={ref}
-          defaultChecked={itemId === 2}
-        />
-      );
-    }
 
     const Items = map(Item);
 

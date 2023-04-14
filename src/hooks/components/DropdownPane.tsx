@@ -4,7 +4,6 @@ import type {
   DropdownPaneStyles,
 } from './DropdownPane.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 
@@ -48,11 +47,6 @@ const DropdownPane: FC<DropdownPaneProps> = ({
       {children}
     </StyledDropdownPane>
   );
-};
-
-DropdownPane.propTypes = {
-  onClickOut: PropTypes.func.isRequired,
-  isElevated: PropTypes.bool,
 };
 
 export default DropdownPane;

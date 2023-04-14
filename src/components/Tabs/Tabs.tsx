@@ -1,7 +1,6 @@
 import type { FC, ReactText } from 'react';
 import type { TabsProps } from './Tabs.types';
 
-import PropTypes from 'prop-types';
 import { equals } from 'ramda';
 
 import { Inline } from '../layout';
@@ -63,15 +62,5 @@ const Tabs: FC<TabsProps> = ({
     </BaseTabsWrapper>
   </Provider>
 );
-
-Tabs.propTypes = {
-  selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  variant: PropTypes.oneOf(Object.values(TabVariants)),
-  selectedPatternMatcher: PropTypes.func,
-  isExpanded: PropTypes.bool,
-  onSelectTab: PropTypes.func,
-};
 
 export default Tabs;

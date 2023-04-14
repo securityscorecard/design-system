@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { ColumnsControlsProps } from './ColumnsControls.types';
 
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { pluck } from 'ramda';
 import { noop } from 'ramda-adjunct';
 
@@ -104,14 +103,6 @@ const ColumnsControls: FC<ColumnsControlsProps> = ({
       </ControlDropdown>
     </span>
   );
-};
-
-ColumnsControls.propTypes = {
-  children: PropTypes.oneOf([PropTypes.func, PropTypes.node]).isRequired,
-  onClose: PropTypes.func.isRequired,
-  onApply: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
-  onReset: PropTypes.func,
 };
 
 export default ColumnsControls;

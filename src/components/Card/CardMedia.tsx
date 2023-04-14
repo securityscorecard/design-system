@@ -1,7 +1,6 @@
 import type { HTMLProps, PropsWithChildren, ReactElement } from 'react';
 import type { CardMediaProps, CardMediaWrapperProps } from './Card.types';
 
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -62,12 +61,6 @@ function CardMedia<El extends HTMLElement = HTMLDivElement>({
   );
 }
 
-CardMedia.propTypes = {
-  alt: PropTypes.string.isRequired,
-  mediaSrc: PropTypes.string,
-  style: PropTypes.shape({}),
-  as: PropTypes.elementType,
-};
 CardMedia.displayName = 'CardMedia';
 
 export default CardMedia;

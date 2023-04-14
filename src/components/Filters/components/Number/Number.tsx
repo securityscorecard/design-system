@@ -5,7 +5,6 @@ import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-import { NumberPropTypes } from './Number.types';
 import { Input } from '../../../forms';
 
 const Number: FC<NumberProps> = ({
@@ -43,5 +42,3 @@ const Number: FC<NumberProps> = ({
 };
 
 export default Number;
-
-Number.propTypes = NumberPropTypes;

@@ -63,7 +63,6 @@
     "focus-within-polyfill": "^5.2.1",
     "numeral": "^2.0.6",
     "polished": "^4.2.2",
-    "prop-types": "^15.8.1",
     "pullstate": "^1.23.0",
     "ramda": "^0.28.0",
     "ramda-adjunct": "^3.0.0",

@@ -1,7 +1,6 @@
 import type { ChangeEvent, PropsWithChildren } from 'react';
 import type { SegmentedToggleProps } from './SegmentedToggle.types';
 
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 import { noop } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -44,12 +43,5 @@ const SegmentedToggle = forwardRef<
     </Provider>
   ),
 );
-
-SegmentedToggle.propTypes = {
-  group: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
-  className: PropTypes.string,
-  onChange: PropTypes.func,
-};
 
 export default SegmentedToggle;

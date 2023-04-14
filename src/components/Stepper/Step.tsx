@@ -2,7 +2,6 @@ import type { PropsWithChildren } from 'react';
 import type { StepProps } from './Stepper.types';
 
 import { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -148,11 +147,5 @@ const Step = forwardRef<HTMLDivElement, PropsWithChildren<StepProps>>(
   },
 );
 Step.displayName = 'Step';
-Step.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  summary: PropTypes.string,
-  onStepClick: PropTypes.func,
-};
 
 export default Step;

@@ -2,7 +2,6 @@ import type { HTMLAttributes } from 'react';
 import type { ControlledDropdownProps } from './Dropdown.types';
 
 import { forwardRef, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
 import { usePopup } from '../../hooks/usePopup';
@@ -69,26 +68,5 @@ const ControlledDropdown = forwardRef<
     ) : null;
   },
 );
-
-ControlledDropdown.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  triggerEl:
-    typeof Element === 'undefined'
-      ? PropTypes.any
-      : PropTypes.instanceOf(HTMLElement),
-  placement: PropTypes.oneOf(Object.values(DropdownPlacements)),
-  innerPaddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
-  innerPaddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
-  maxPaneWidth: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  isPaneElevated: PropTypes.bool,
-  hasPaneArrow: PropTypes.bool,
-  style: PropTypes.objectOf(
-    PropTypes.oneOf([PropTypes.string, PropTypes.number]),
-  ),
-  onClickOut: PropTypes.func,
-};
 
 export default ControlledDropdown;

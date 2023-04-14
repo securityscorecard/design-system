@@ -1,7 +1,5 @@
 import type { ReactEventHandler } from 'react';
 
-import PropTypes from 'prop-types';
-
 export interface NumberProps {
   value: string;
   onChange: (event: ReactEventHandler) => void;
@@ -12,14 +10,3 @@ export interface NumberProps {
   isInvalid?: boolean;
   onError?: (boolean) => void;
 }
-
-export const NumberPropTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  placeholder: PropTypes.string,
-  errorMessage: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  onError: PropTypes.func,
-};

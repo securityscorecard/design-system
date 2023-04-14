@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { CollapsibleProps } from './Collapsible.types';
 
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 import cls from 'classnames';
@@ -109,14 +108,6 @@ const Collapsible: FC<CollapsibleProps> = ({
       )}
     </Container>
   );
-};
-
-Collapsible.propTypes = {
-  title: PropTypes.node.isRequired,
-  subject: PropTypes.string,
-  className: PropTypes.string,
-  defaultIsOpened: PropTypes.bool,
-  onOpen: PropTypes.func,
 };
 
 export default Collapsible;

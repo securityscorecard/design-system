@@ -2,7 +2,6 @@ import type { ComponentPropsWithRef, FC } from 'react';
 import type { LinkProps } from './Link.types';
 
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -90,21 +89,6 @@ const Link: FC<LinkProps & ComponentPropsWithRef<typeof LinkRoot>> = ({
       {children}
     </LinkRoot>
   );
-};
-
-Link.propTypes = {
-  href: PropTypes.string,
-  to: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      hash: PropTypes.string,
-    }),
-  ]),
-  color: PropTypes.oneOf(Object.values(LinkColors)),
-  className: PropTypes.string,
-  onClick: PropTypes.func,
 };
 
 export default Link;

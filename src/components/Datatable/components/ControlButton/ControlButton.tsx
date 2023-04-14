@@ -1,10 +1,6 @@
 import type { FC } from 'react';
-import type { SSCIcons } from '../../../Icon/Icon.types';
 import type { ControlButtonProps } from './ControlButton.types';
 
-import PropTypes from 'prop-types';
-
-import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { Button } from '../../../Button';
 import { Badge } from '../../../Badge';
 import { Pill } from '../../../Pill';
@@ -35,14 +31,5 @@ const ControlButton: FC<ControlButtonProps> = ({
     </Inline>
   </Button>
 );
-
-ControlButton.propTypes = {
-  label: PropTypes.string.isRequired,
-  iconName: PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)).isRequired,
-  onClick: PropTypes.func.isRequired,
-  appliedFilters: PropTypes.number,
-  hiddenColumns: PropTypes.number,
-  className: PropTypes.string,
-};
 
 export default ControlButton;

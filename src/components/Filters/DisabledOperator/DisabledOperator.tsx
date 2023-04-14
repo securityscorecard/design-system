@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Text as BaseText } from '../../typographyLegacy';
@@ -28,7 +27,3 @@ const DisabledOperator: FC = ({ children }) => (
 );
 
 export default DisabledOperator;
-
-DisabledOperator.propTypes = {
-  children: PropTypes.node.isRequired,
-};

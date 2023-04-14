@@ -8,7 +8,6 @@ import type { BatchActionsProps } from './BatchActions.types';
 import type { BatchActionArgs } from '../../Datatable.types';
 
 import { useCallback } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { map, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -20,7 +19,6 @@ import { Inline } from '../../../layout';
 import { BaseButton } from '../../../_internal/BaseButton';
 import { ButtonVariants } from '../../../Button/Button.enums';
 import { Icon } from '../../../Icon';
-import { ActionPropType } from '../../types/Action.types';
 import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { DatatableStore } from '../../Datatable.store';
 import { Tooltip } from '../../../Tooltip';
@@ -111,10 +109,6 @@ const BatchActions: FC<BatchActionsProps> = ({ actions }) => {
       })}
     </Inline>
   );
-};
-
-BatchActions.propTypes = {
-  actions: PropTypes.arrayOf(ActionPropType).isRequired,
 };
 
 export default BatchActions;

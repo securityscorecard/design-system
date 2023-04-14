@@ -1,7 +1,6 @@
 import type { InputProps } from './Input.types';
 
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 
 import {
   createPadding,
@@ -77,11 +76,6 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
     }
   }
 `;
-
-Input.propTypes = {
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-};
 
 Input.defaultProps = {
   isInvalid: false,

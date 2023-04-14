@@ -10,7 +10,6 @@ import type { PillProps } from './Pill.types';
 
 import { gt } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { PillColorsEnums } from './Pill.enums';
@@ -97,17 +96,6 @@ const Pill: FC<PillProps> = ({
       )}
     </PillWrapper>
   );
-};
-
-Pill.propTypes = {
-  label: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(Object.values(PillColorsEnums)),
-  adornment: PropTypes.node,
-  maxLabelLength: PropTypes.number,
-  isClickable: PropTypes.bool,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  onRemove: PropTypes.func,
 };
 
 export default Pill;

@@ -6,7 +6,6 @@ import { isNonEmptyString } from 'ramda-adjunct';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
 import { Input } from '../../../forms';
-import { NumberPropTypes } from '../Number/Number.types';
 
 const Count: FC<NumberProps> = ({
   value = '',
@@ -49,5 +48,3 @@ const Count: FC<NumberProps> = ({
 };
 
 export default Count;
-
-Count.propTypes = NumberPropTypes;

@@ -11,17 +11,13 @@ import type {
 
 import { forwardRef } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { SemanticModalVariants } from './SemanticModal.enums';
 import { Modal, ModalEnums } from '../Modal';
 import { Button, ButtonEnums } from '../Button';
-import { ButtonColors } from '../Button/Button.enums';
 import { Icon } from '../Icon';
 import { H4, Text } from '../typographyLegacy';
-import { ActionKindsPropType } from '../../types/action.types';
-import * as CustomPropTypes from '../../types/customPropTypes';
 import { getColor, pxToRem } from '../../utils';
 import { Center, Inline, Padbox, Stack } from '../layout';
 import { Color, SpaceSizes } from '../../theme';
@@ -124,15 +120,3 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
 );
 
 export default SemanticModal;
-
-SemanticModal.propTypes = {
-  title: PropTypes.string.isRequired,
-  message: PropTypes.node.isRequired,
-  actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType)
-    .isRequired,
-  onClose: PropTypes.func.isRequired,
-  variant: PropTypes.oneOf(Object.values(SemanticModalVariants)),
-  primaryButtonColor: PropTypes.oneOf(Object.values(ButtonColors)),
-  isPrimaryButtonLoading: PropTypes.bool,
-  loadingText: PropTypes.string,
-};

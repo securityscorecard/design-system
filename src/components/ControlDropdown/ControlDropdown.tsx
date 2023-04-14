@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { ControlDropdownProps } from './ControlDropdown.types';
 
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { SpaceSizes } from '../../theme';
@@ -90,25 +89,6 @@ const ControlDropdown: FC<ControlDropdownProps> = ({
       </Padbox>
     </ControlledDropdown>
   );
-};
-
-ControlDropdown.propTypes = {
-  title: PropTypes.string.isRequired,
-  parentRef: PropTypes.exact({
-    current:
-      typeof Element === 'undefined'
-        ? PropTypes.any
-        : PropTypes.instanceOf(HTMLSpanElement),
-  }).isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
-  submitLabel: PropTypes.string,
-  closeLabel: PropTypes.string,
-  resetLabel: PropTypes.string,
-  placement: PropTypes.oneOf(Object.values(ControlDropdownPlacements)),
-  width: PropTypes.number,
-  onReset: PropTypes.func,
 };
 
 export default ControlDropdown;

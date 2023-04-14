@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import type { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
 
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
 import { getRadii, getSpace } from '../../utils';
@@ -49,10 +48,5 @@ const PillWrapper: FC<PillWrapperProps> = ({
     </Inline>
   </StyledPillWrapper>
 );
-
-PillWrapper.propTypes = {
-  isClickable: PropTypes.bool.isRequired,
-  color: PropTypes.oneOf(Object.values(PillColorsEnums)).isRequired,
-};
 
 export default PillWrapper;

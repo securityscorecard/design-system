@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { all, isEmpty } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { getSpace } from '../../../utils';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
@@ -86,16 +85,6 @@ const BatchModule: FC<BatchModuleProps> = ({
       </Inline>
     </BatchModuleWrapper>
   );
-};
-
-BatchModule.propTypes = {
-  ...BatchActions.propTypes,
-  ...ElementCounter.propTypes,
-  columns: PropTypes.exact({
-    isButtonDisplayed: PropTypes.bool,
-    defaultIsColumnsControlsOpen: PropTypes.bool,
-    defaultIsColumnsControlsApplied: PropTypes.bool,
-  }),
 };
 
 export default BatchModule;

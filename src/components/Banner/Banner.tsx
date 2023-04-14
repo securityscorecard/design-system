@@ -6,14 +6,11 @@ import type {
 } from '../../types/action.types';
 
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContainerQuery } from 'react-container-query';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { ActionKindsPropType } from '../../types/action.types';
-import * as CustomPropTypes from '../../types/customPropTypes';
 import { BannerVariants } from './Banner.enums';
 import { Button } from '../Button';
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
@@ -184,13 +181,6 @@ const Banner: FC<BannerProps> = ({
   );
 };
 
-Banner.propTypes = {
-  variant: PropTypes.oneOf(Object.values(BannerVariants)),
-  actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
-  isDismissable: PropTypes.bool,
-  className: PropTypes.string,
-  onClose: PropTypes.func,
-};
 Banner.displayName = 'Banner';
 
 export default Banner;
