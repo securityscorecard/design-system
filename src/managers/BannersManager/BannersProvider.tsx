@@ -1,6 +1,6 @@
+import type { ReactNode } from 'react';
 import type { BannerInstance, BannersContextProps } from './types';
 import type { InstanceId } from '../common/types';
-import type { ReactNode } from 'react';
 
 import { useMemo } from 'react';
 

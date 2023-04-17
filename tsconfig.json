@@ -16,6 +16,17 @@
     "isolatedModules": true,
     "strict": false
   },
-  "include": ["src/**/*", ".storybook/**/*"],
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "src/**/*.mdx",
+    "src/**/*.stories.tsx",
+    "src/**/*.storiesTypes.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/mocks/*",
+    "src/utils/tests/*"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
