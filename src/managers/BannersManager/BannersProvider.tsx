@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import type { Banner, BannersContextProps } from './types';
+import type { BannerInstance, BannersContextProps } from './types';
 import type { InstanceId } from '../common/types';
 import { useBannersState } from './useBannersState';
 import { createCtx } from '../common/createCtx';
@@ -30,7 +30,7 @@ export const BannersProvider = ({
   );
 
   const listeners = {
-    [ACTIONS.addBanner]: (e: { detail: Banner }) => {
+    [ACTIONS.addBanner]: (e: { detail: BannerInstance }) => {
       context.addBanner(e.detail);
     },
     [ACTIONS.removeBanner]: (e: { detail: InstanceId }) => {

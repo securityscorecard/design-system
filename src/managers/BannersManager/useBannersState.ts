@@ -1,16 +1,16 @@
 import { useReducer } from 'react';
 
-import type { Action, Banner } from './types';
+import type { Action, BannerInstance } from './types';
 import { ACTIONS } from './enums';
 import { InstanceId } from '../common/types';
 import { addInstance, randomId, removeInstance } from '../common/utils';
 
-const reducer = (state: Required<Banner>[], action: Action) => {
+const reducer = (state: Required<BannerInstance>[], action: Action) => {
   switch (action.type) {
     case ACTIONS.addBanner:
-      return addInstance<Banner>(state, action.payload);
+      return addInstance<BannerInstance>(state, action.payload);
     case ACTIONS.removeBanner:
-      return removeInstance<Banner>(state, action.payload as string);
+      return removeInstance<BannerInstance>(state, action.payload as string);
     default:
       return state;
   }
@@ -19,7 +19,7 @@ const reducer = (state: Required<Banner>[], action: Action) => {
 export const useBannersState = () => {
   const [state, dispatch] = useReducer(reducer, []);
 
-  const addBanner = (banner: Banner) => {
+  const addBanner = (banner: BannerInstance) => {
     dispatch({
       type: ACTIONS.addBanner,
       payload: {

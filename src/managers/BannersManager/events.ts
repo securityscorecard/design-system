@@ -1,11 +1,14 @@
 import { ACTIONS } from './enums';
-import type { Banner } from './types';
+import type { BannerInstance } from './types';
 import { createCustomEvent } from '../common/events';
 import { InstanceId } from '../common/types';
 
-export const addBanner = (banner: Required<Banner>) => {
+export const addBanner = (banner: Required<BannerInstance>) => {
   window.dispatchEvent(
-    createCustomEvent<typeof ACTIONS, Banner>(ACTIONS.addBanner, banner),
+    createCustomEvent<typeof ACTIONS, BannerInstance>(
+      ACTIONS.addBanner,
+      banner,
+    ),
   );
 };
 export const removeBanner = (id: InstanceId) => {
