@@ -3,7 +3,7 @@ import type {
   BaseDateRange,
   BaseDateRangePlaceholderProps,
 } from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
-import type { Option } from './components/Select/Select.types';
+import type { Option } from '../forms/Select/Select.types';
 import type { Operators } from './Filters.enums';
 
 type OperatorTypes = typeof Operators[keyof typeof Operators];

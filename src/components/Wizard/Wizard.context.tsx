@@ -1,12 +1,12 @@
 import type { Dispatch, FC, ReactNode, SetStateAction } from 'react';
-import type { WizardStep } from './Wizard.types';
+import type { SingleWizardStep } from './Wizard.types';
 
 import { createContext, useEffect, useMemo, useState } from 'react';
 
 export interface WizardState {
   initialStep?: string;
   activeStepId?: string;
-  steps: WizardStep[];
+  steps: SingleWizardStep[];
   isBackwardNavigationEnabled: boolean;
   update: Dispatch<SetStateAction<WizardState>>;
 }
@@ -23,7 +23,7 @@ interface WizardProviderProps {
   children: ReactNode;
   initialStep: string;
   isBackwardNavigationEnabled: boolean;
-  onStepChange: (step: WizardStep) => void;
+  onStepChange: (step: SingleWizardStep) => void;
 }
 
 export const WizardProvider: FC<WizardProviderProps> = ({

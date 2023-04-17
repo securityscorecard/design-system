@@ -10,6 +10,10 @@ import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
+const RadioContainer = styled.div`
+  position: relative;
+`;
+
 const RadioLabel = styled(Label)<
   HTMLProps<HTMLLabelElement> & { hasLabel: boolean }
 >`
@@ -102,7 +106,7 @@ const Radio: FC<RadioProps> = ({
   const hasLabel = isNotUndefined(label);
 
   return (
-    <div>
+    <RadioContainer>
       <RadioInput
         className={cls(CLX_COMPONENT, className)}
         disabled={isDisabled}
@@ -115,7 +119,7 @@ const Radio: FC<RadioProps> = ({
       <RadioLabel hasLabel={hasLabel} htmlFor={radioId}>
         {label}
       </RadioLabel>
-    </div>
+    </RadioContainer>
   );
 };
 

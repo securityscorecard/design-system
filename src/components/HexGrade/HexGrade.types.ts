@@ -1,11 +1,12 @@
 import type { SpacingSizeValue } from '../../types/spacing.types';
 import type { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 
-export type Variants = typeof HexGradeVariants[keyof typeof HexGradeVariants];
+export type HexGradeVariants =
+  typeof HexGradeVariants[keyof typeof HexGradeVariants];
 export type Grades = typeof HexGradeGrades[keyof typeof HexGradeGrades];
 
 export interface HexGradeProps {
-  variant?: Variants;
+  variant?: HexGradeVariants;
   grade?: Grades;
   size?: number;
   isInverted?: boolean;

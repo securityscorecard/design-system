@@ -6,14 +6,14 @@ export interface ValueContainerProps extends PadboxProps {
   $isDisabled: boolean;
 }
 
-export interface PillLabelProps {
+export interface MultiValuePillLabelProps {
   $maxLength: number;
 }
 
 export interface MultiValueProps {
   label: string;
   isDisabled: ValueContainerProps['$isDisabled'];
-  maxLength: PillLabelProps['$maxLength'];
+  maxLength: MultiValuePillLabelProps['$maxLength'];
   onRemove: () => void;
 }
 

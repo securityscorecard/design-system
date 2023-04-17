@@ -30,12 +30,19 @@ export const BaseTableContainer = styled.div`
   overflow-x: auto;
 
   &::-webkit-scrollbar {
-    border-bottom: 1px solid ${getColor('neutral.400')};
-    appearance: none;
-    height: ${pxToRem(12)};
+    box-sizing: content-box;
+    outline: 1px solid ${getColor('neutral.400')};
+    height: ${pxToRem(20)};
   }
   &::-webkit-scrollbar-thumb {
-    background: content-box ${getColor('neutral.500')};
+    border-radius: ${getRadii('round')};
+    background-color: ${getColor('neutral.600')};
+    border: 6px solid ${getColor('neutral.200')};
+  }
+  &::-webkit-scrollbar-track-piece {
+    border-radius: ${getRadii('round')};
+    background-color: ${getColor('neutral.300')};
+    border: 6px solid ${getColor('neutral.200')};
   }
   &:focus-visible {
     outline-color: ${getColor('primary.500')};

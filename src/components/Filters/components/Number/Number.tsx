@@ -1,21 +1,11 @@
 import type { FC } from 'react';
 import type { NumberProps } from './Number.types';
 
-import styled from 'styled-components';
 import { isNonEmptyString } from 'ramda-adjunct';
 
-import { StyledInput } from '../Input/Input';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-
-export const StyledNumber = styled(StyledInput)`
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    appearance: none;
-    margin: 0;
-  }
-  appearance: textfield;
-`;
+import { Input } from '../../../forms';
 
 const Number: FC<NumberProps> = ({
   value = '',
@@ -37,7 +27,8 @@ const Number: FC<NumberProps> = ({
 
   return (
     <>
-      <StyledNumber
+      <Input
+        data-has-spin="false"
         isInvalid={isInvalid}
         placeholder={placeholder}
         step="any"

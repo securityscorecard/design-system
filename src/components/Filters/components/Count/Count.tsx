@@ -3,9 +3,9 @@ import type { NumberProps } from '../Number/Number.types';
 
 import { isNonEmptyString } from 'ramda-adjunct';
 
-import { StyledNumber } from '../Number/Number';
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
+import { Input } from '../../../forms';
 
 const Count: FC<NumberProps> = ({
   value = '',
@@ -33,7 +33,8 @@ const Count: FC<NumberProps> = ({
 
   return (
     <>
-      <StyledNumber
+      <Input
+        data-has-spin="false"
         isInvalid={isInvalid}
         placeholder={placeholder}
         type="number"
