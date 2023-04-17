@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/securityscorecard/design-system/compare/v1.1.0...v1.1.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* **types:** export missing type definitions ([06f7bba](https://github.com/securityscorecard/design-system/commit/06f7bba6a272b0fb9da7690c4a73fc703ab8841a))
+
 # [1.1.0](https://github.com/securityscorecard/design-system/compare/v1.0.2...v1.1.0) (2023-04-12)
 
 
