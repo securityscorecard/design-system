@@ -1,6 +1,6 @@
 import type { MouseEventHandler } from 'react-select';
 import type { Field, Filter } from '../Filters.types';
-import type { Option } from '../components/Select/Select.types';
+import type { Option } from '../../forms/Select/Select.types';
 import type { Operators } from '../Filters.enums';
 
 export interface SplitFieldProps {

@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import type { CellProps } from 'react-table';
+import type { CellProps, Column } from 'react-table';
 
 import { map } from 'ramda';
 import styled, { css } from 'styled-components';
@@ -44,35 +44,43 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
     `};
 `;
 
-export const actionsColumn = {
-  id: ACTIONS_COLUMN_ID,
-  sticky: 'right',
-  width: 48,
-  disableSortBy: true,
-  cellType: CellTypes.actions,
-  Cell: (props: CellProps<Record<string, unknown>>): ReactElement => {
-    const { row, rowActions } = props;
-    const actions = map((action) => ({
-      ...action,
-      onClick: () => action.onClick(row.id, row.original),
-    }))(rowActions);
+export function getActionsColumn<
+  D extends Record<string, unknown>,
+>(): Column<D> {
+  return {
+    id: ACTIONS_COLUMN_ID,
+    sticky: 'right',
+    width: 48,
+    disableSortBy: true,
+    cellType: CellTypes.actions,
+    Cell: (props: CellProps<Record<string, unknown>>): ReactElement => {
+      const { row, rowActions } = props;
+      const actions = map((action) => ({
+        ...action,
+        onClick: () => action.onClick(row.id, row.original),
+      }))(rowActions);
 
-    return (
-      <Inline justify="center" stretch="start">
-        <DropdownMenu actions={actions} paneWidth="auto" placement="bottom-end">
-          {(isActive) => (
-            <RowActionsButton aria-label="Row Actions" isActive={isActive}>
-              <SVGIcon
-                role="presentation"
-                viewBox={`0 0 ${width} ${height}`}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d={svgPathData} fill="currentColor" />
-              </SVGIcon>
-            </RowActionsButton>
-          )}
-        </DropdownMenu>
-      </Inline>
-    );
-  },
-};
+      return (
+        <Inline justify="center" stretch="start">
+          <DropdownMenu
+            actions={actions}
+            paneWidth="auto"
+            placement="bottom-end"
+          >
+            {(isActive) => (
+              <RowActionsButton aria-label="Row Actions" isActive={isActive}>
+                <SVGIcon
+                  role="presentation"
+                  viewBox={`0 0 ${width} ${height}`}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d={svgPathData} fill="currentColor" />
+                </SVGIcon>
+              </RowActionsButton>
+            )}
+          </DropdownMenu>
+        </Inline>
+      );
+    },
+  };
+}

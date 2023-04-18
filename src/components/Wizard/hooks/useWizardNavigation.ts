@@ -1,4 +1,4 @@
-import type { WizardNavigation, WizardStep } from '../Wizard.types';
+import type { SingleWizardStep, WizardNavigation } from '../Wizard.types';
 
 import { useWizardContext } from './useWizardContext';
 import { useActiveStep } from './useActiveStep';
@@ -8,7 +8,7 @@ export const useWizardNavigation = (): WizardNavigation => {
   const activeStep = useActiveStep();
   const activeStepIndex = steps.findIndex((item) => item.id === activeStep.id);
 
-  const goToStep = (step: WizardStep) => {
+  const goToStep = (step: SingleWizardStep) => {
     update((state) => ({ ...state, activeStepId: step.id }));
   };
 

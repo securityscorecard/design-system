@@ -4,17 +4,20 @@ import type {
   FullscreenModalSizes,
 } from './FullscreenModal.enums';
 
-export type Sizes =
+export type FullscreenModalSizes =
   typeof FullscreenModalSizes[keyof typeof FullscreenModalSizes];
-export type Layouts =
+export type FullscreenModalLayouts =
   typeof FullscreenModalLayouts[keyof typeof FullscreenModalLayouts];
-export type ColumnConfig = Record<
+export type FullscreenModalColumnConfig = Record<
   'header' | 'sidebar' | 'content',
   [number, number]
 >;
-export type ColumnConfigMap = Record<Layouts, ColumnConfig>;
+export type FullscreenModalColumnConfigMap = Record<
+  FullscreenModalLayouts,
+  FullscreenModalColumnConfig
+>;
 export interface FullscreenModalProps {
-  layout: Layouts;
+  layout: FullscreenModalLayouts;
   header: ReactNode;
   content: ReactNode;
   footer: ReactNode;

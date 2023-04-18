@@ -5,4 +5,5 @@ export { BaseSingleDatePicker as SingleDatePickerFilter } from '../../_internal/
 export { NumberFilter } from './Number';
 export { IntegerFilter } from './Integer';
 export { CountFilter } from './Count';
-export { SelectFilter } from './Select';
+
+export { Select as SelectFilter } from '../../forms';

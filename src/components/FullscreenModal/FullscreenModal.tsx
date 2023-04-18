@@ -1,6 +1,6 @@
 import type { MutableRefObject, ReactElement } from 'react';
 import type {
-  ColumnConfigMap,
+  FullscreenModalColumnConfigMap,
   FullscreenModalProps,
 } from './FullscreenModal.types';
 
@@ -26,7 +26,7 @@ const BaseModal = styled.div`
   background-color: ${getColor('neutral.0')};
 `;
 
-const columnConfigMap: ColumnConfigMap = {
+const columnConfigMap: FullscreenModalColumnConfigMap = {
   [FullscreenModalLayouts.single6]: {
     header: [6, 3],
     sidebar: [0, 0],

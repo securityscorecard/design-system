@@ -143,8 +143,8 @@ const Dropdown: FC<DropdownProps> = forwardRef(
             onClick: handleTriggerOnClick,
             onTouchStart: handleTriggerOnClick,
             onKeyDown: handleTriggerOnKeyDown,
-            onMouseEnter: handleTriggerOnMouseEnter,
-            onMouseLeave: handleTriggerOnMouseLeave,
+            onPointerEnter: handleTriggerOnMouseEnter,
+            onPointerLeave: handleTriggerOnMouseLeave,
             onFocus: handleTriggerOnFocus,
             onBlur: handleTriggerOnBlur,
           })}

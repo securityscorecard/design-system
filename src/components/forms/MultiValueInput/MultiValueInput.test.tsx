@@ -94,6 +94,16 @@ describe('MultiValueInput', () => {
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith(pastedValue, pastedValue);
     });
+    it('should add new value on blur', () => {
+      const inputValue = 'value';
+      render(<MultiValueInput onValueAdd={mockValueAdd} />);
+
+      userEvent.type(screen.getByRole('textbox'), `${inputValue}`);
+      screen.getByRole('textbox').blur();
+
+      expect(mockValueAdd).toHaveBeenCalledTimes(1);
+      expect(mockValueAdd).toHaveBeenCalledWith([inputValue], [inputValue]);
+    });
     it('should not add duplicated value', () => {
       const inputValue = 'value';
       render(

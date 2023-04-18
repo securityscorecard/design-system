@@ -54,7 +54,7 @@ export interface DatatableProps<D extends Record<string, unknown>> {
   /**
    * List of available batch actions for table
    *
-   * See: [action.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/types/action.types.ts)
+   * See: [action.types.ts](https://github.com/securityscorecard/design-system/blob/main/src/types/action.types.ts)
    */
   batchActions?: Action<BatchActionArgs>[];
   /**
@@ -74,13 +74,13 @@ export interface DatatableProps<D extends Record<string, unknown>> {
   /**
    * Config object for controls module
    *
-   * See: [ControlsModule.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/components/Datatable/ControlsModule/ControlsModule.types.ts)
+   * See: [ControlsModule.types.ts](https://github.com/securityscorecard/design-system/blob/main/src/components/Datatable/ControlsModule/ControlsModule.types.ts)
    */
   controlsConfig?: Partial<ControlsConfig<D>>;
   /**
    * Config object for table
    *
-   * See: [Table.types.ts](https://github.com/securityscorecard/design-system/blob/alpha/src/components/Datatable/Table/Table.types.ts)
+   * See: [Table.types.ts](https://github.com/securityscorecard/design-system/blob/main/src/components/Datatable/Table/Table.types.ts)
    */
   tableConfig?: Partial<TableConfig<D>>;
   /**

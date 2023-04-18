@@ -18,7 +18,7 @@ import {
   LoadingNoData,
   NoData,
   StyledBaseTable,
-  actionsColumn,
+  getActionsColumn,
 } from '../_internal/BaseTable';
 import { getColor, getRadii } from '../../utils';
 import { SpaceSizes } from '../../theme';
@@ -119,7 +119,7 @@ function Table<D extends Record<string, unknown>>({
     (hooks) => {
       hooks.visibleColumns.push((visibleColumns) => [
         ...visibleColumns,
-        ...(isNonEmptyArray(rowActions) ? [actionsColumn] : []),
+        ...(isNonEmptyArray(rowActions) ? [getActionsColumn<D>()] : []),
       ]);
     },
   );

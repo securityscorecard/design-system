@@ -1,6 +1,6 @@
 import type { Condition, Field } from '../Filters.types';
 import type { PickOption, UseFilterRowType } from './useFilterRow.types';
-import type { Option } from '../components/Select/Select.types';
+import type { Option } from '../../forms/Select/Select.types';
 
 import { isUndefined } from 'ramda-adjunct';
 import { find, map, pick, pipe, prop, propEq } from 'ramda';

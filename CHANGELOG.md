@@ -1,3 +1,44 @@
+## [1.1.1](https://github.com/securityscorecard/design-system/compare/v1.1.0...v1.1.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* **types:** export missing type definitions ([06f7bba](https://github.com/securityscorecard/design-system/commit/06f7bba6a272b0fb9da7690c4a73fc703ab8841a))
+
+# [1.1.0](https://github.com/securityscorecard/design-system/compare/v1.0.2...v1.1.0) (2023-04-12)
+
+
+### Bug Fixes
+
+* **BaseTable:** update scrollbar appearence ([dec1352](https://github.com/securityscorecard/design-system/commit/dec1352c9b6ec0ef0bc05b72e49fb741371363f2))
+
+
+### Features
+
+* **Typescript:** export types from theme ([8170f08](https://github.com/securityscorecard/design-system/commit/8170f088b79138a9fb09554f7f4c3821e7f210fa))
+* **Typescript:** export types with components ([579924f](https://github.com/securityscorecard/design-system/commit/579924fc7a6caa67faa33c3305def8708c7f17e9))
+
+## [1.0.2](https://github.com/securityscorecard/design-system/compare/v1.0.1...v1.0.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **MultiValueInput:** store value on blur ([1f1e41c](https://github.com/securityscorecard/design-system/commit/1f1e41ce6c15e605dc687d6ca561fcd29ac46819))
+* **Radio:** wrap component in relative container ([369c02b](https://github.com/securityscorecard/design-system/commit/369c02bf6f9eb32fc5181661f642030a0bdf8946))
+
+## [1.0.1](https://github.com/securityscorecard/design-system/compare/v1.0.0...v1.0.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* **BatchActions:** add key prop ([1e2b731](https://github.com/securityscorecard/design-system/commit/1e2b731fa68315e1e4fb79ab833c38ae3c597e8f))
+* **Filters:** fix operator label clipping ([a00e3e7](https://github.com/securityscorecard/design-system/commit/a00e3e74813d3ea84f896d790d7e68e6d3c2a330))
+* **Filters:** remove dupe input ([80b6c96](https://github.com/securityscorecard/design-system/commit/80b6c96eddf149cf7f9c6d9b302b41b87043918e))
+* **MultiValueInput:** align styles with Select ([05ec102](https://github.com/securityscorecard/design-system/commit/05ec102bbf1f98339973e5394be49fd5ed0ec632))
+* remove dupe multi value input ([7e65ecd](https://github.com/securityscorecard/design-system/commit/7e65ecd2aaf3053aa89ce1bbca646b08b7bfd62d))
+* remove dupe Select ([8a0b49b](https://github.com/securityscorecard/design-system/commit/8a0b49b5e629c799e22cc4ad21dc2054f6990544))
+* **Tooltip:** fix for disabled buttons ([6804e8c](https://github.com/securityscorecard/design-system/commit/6804e8c6cdc7d06bcc18733512d050d602293e22))
+
 # 1.0.0 (2023-03-20)
 
 

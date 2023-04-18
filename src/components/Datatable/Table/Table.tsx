@@ -36,11 +36,11 @@ import {
   Head,
   LoadingNoData,
   StyledBaseTable,
-  actionsColumn,
+  getActionsColumn,
 } from '../../_internal/BaseTable';
 import { DatatableStore } from '../Datatable.store';
 import { actions, tableActionsReducer } from './Table.reducer';
-import { selectionColumn } from './columns/selectionColumn';
+import { getSelectionColumn } from './columns/selectionColumn';
 import { LoadingOverlay } from './components';
 import { Padbox, Stack } from '../../layout';
 import { getColor, pxToRem } from '../../../utils';
@@ -193,9 +193,9 @@ function Table<D extends Record<string, unknown>>({
     useFlexLayout,
     (hooks) => {
       hooks.visibleColumns.push((visibleColumns) => [
-        ...(hasSelection ? [selectionColumn] : []),
+        ...(hasSelection ? [getSelectionColumn<D>()] : []),
         ...visibleColumns,
-        ...(isNonEmptyArray(rowActions) ? [actionsColumn] : []),
+        ...(isNonEmptyArray(rowActions) ? [getActionsColumn<D>()] : []),
       ]);
     },
   );

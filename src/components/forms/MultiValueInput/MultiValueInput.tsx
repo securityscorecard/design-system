@@ -2,6 +2,7 @@ import type {
   ChangeEventHandler,
   ClipboardEventHandler,
   FC,
+  FocusEventHandler,
   KeyboardEventHandler,
   MouseEventHandler,
 } from 'react';
@@ -37,18 +38,17 @@ import { useDeepCompareEffect } from 'use-deep-compare';
 import cls from 'classnames';
 
 import {
-  getColor,
   getFontFamily,
   getFontSize,
   getFormStyle,
   getRadii,
+  getSpace,
   pxToRem,
 } from '../../../utils';
 import { Cluster, Inline, Padbox } from '../../layout';
 import { SpaceSizes } from '../../../theme';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Pill } from '../../Pill';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
@@ -58,7 +58,7 @@ const getBorderStyle = (width, color) => css`
   box-shadow: inset 0 0 0 ${getFormStyle(width)} ${getFormStyle(color)};
 `;
 
-const ValueContainer = styled(Padbox)<ValueContainerProps>`
+const Control = styled.div<ValueContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +91,15 @@ const ValueContainer = styled(Padbox)<ValueContainerProps>`
     `};
 `;
 
+const ValueContainer = styled(Padbox)`
+  padding-left: ${getSpace(SpaceSizes.md)};
+  ${({ $hasValue, theme }) =>
+    $hasValue &&
+    css`
+      padding-left: ${getSpace(SpaceSizes.xs, { theme })};
+    `};
+`;
+
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -101,7 +110,7 @@ const InputContainer = styled.div`
     border: 0 none;
     color: ${getFormStyle('color')};
     font-family: ${getFontFamily('base')};
-    font-size: ${getFontSize('lg')};
+    font-size: ${getFontSize('md')};
     line-height: ${getFormStyle('fieldLineHeight')};
     outline: none;
 
@@ -111,18 +120,25 @@ const InputContainer = styled.div`
   }
 `;
 
-const ClearButton = styled(Padbox)`
-  margin: ${pxToRem(1, 0)};
+const ClearButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   color: ${getFormStyle('indicatorColor')};
+  background: transparent none;
+  border: 0 none;
   cursor: pointer;
-  font-size: ${getFontSize('md')};
+  font-size: ${getFontSize('lg')};
+  padding: ${pxToRem(0, 18)};
+  height: ${pxToRem(34)};
+  margin: ${pxToRem(1, 0)};
 
-  &:hover,
   &:focus {
-    color: ${getColor('error.500')};
+    outline: none;
+  }
+  &:hover,
+  &:focus-visible {
+    color: ${getFormStyle('hoverIndicatorColor')};
   }
 `;
 
@@ -136,6 +152,7 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
   onValuesChange = noop,
   onInputChange = noop,
   placeholder,
+  pattern,
   id,
   inputId,
   inputValue: defaultInputValue = '',
@@ -148,6 +165,10 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
   const [inputRef, setInputRef] = useState(null);
 
   const addValue = (newValue: string): void => {
+    const isValid = inputRef?.checkValidity();
+    if (!isValid) {
+      return;
+    }
     // add only unique values
     const isDuplicateValue = includes(newValue, values);
 
@@ -228,6 +249,16 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
     setInputValue(e.target.value);
   };
 
+  const handleInputOnBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+    if (isInvalid) {
+      return;
+    }
+    if (isNonEmptyString(inputValue)) {
+      addValue((e.target as HTMLInputElement).value);
+    }
+  };
+
   const handleContainerOnClick: MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     if (isNotNull(inputRef)) {
@@ -262,7 +293,7 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
   };
 
   return (
-    <ValueContainer
+    <Control
       $isDisabled={isDisabled}
       $isInvalid={isInvalid}
       className={cls(CLX_COMPONENT, className)}
@@ -270,8 +301,12 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
       id={id}
       onClick={handleContainerOnClick}
     >
-      <Inline align="flex-start" justify="space-between">
-        <Padbox paddingSize={SpaceSizes.xs} style={{ overflow: 'hidden' }}>
+      <Inline align="center" justify="space-between">
+        <ValueContainer
+          $hasValue={isNonEmptyArray(values)}
+          paddingSize={SpaceSizes.xs}
+          style={{ overflow: 'hidden' }}
+        >
           <Cluster gap={SpaceSizes.xs}>
             {values.map((label, index) => (
               <Pill
@@ -289,21 +324,20 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
                 injectStyles={false}
                 inputRef={setInputRef}
                 minWidth={15}
+                pattern={pattern}
                 placeholder={isEmptyArray(values) ? placeholder : undefined}
                 value={inputValue}
+                onBlur={handleInputOnBlur}
                 onChange={(e) => handleInputOnChange(e)}
                 onKeyDown={handleInputOnKeyDown}
                 onPaste={handleInputOnPaste}
               />
             </InputContainer>
           </Cluster>
-        </Padbox>
+        </ValueContainer>
         {isClearable && !isDisabled && isNonEmptyArray(values) && (
           <ClearButton
             aria-label="Clear all values"
-            as="button"
-            paddingSize={SpaceSizes.md}
-            paddingType={PaddingTypes.squish}
             onClick={handleClearAllOnClick}
             onKeyDown={handleClearAllOnKeyDown}
           >
@@ -311,7 +345,7 @@ const MultiValueInput: FC<MultiValueInputProps> = ({
           </ClearButton>
         )}
       </Inline>
-    </ValueContainer>
+    </Control>
   );
 };
 
