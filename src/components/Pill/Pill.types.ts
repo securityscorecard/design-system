@@ -1,4 +1,5 @@
 import type {
+  ComponentPropsWithRef,
   ElementType,
   EventHandler,
   HTMLAttributes,
@@ -12,7 +13,7 @@ export interface StyledPillWrapperProps {
   $color: string;
 }
 
-export interface PillWrapperProps extends HTMLAttributes<HTMLElement> {
+export interface PillWrapperProps extends ComponentPropsWithRef<'span'> {
   /**
    * Flag that enabled hover functionality on the pill. This should be used only when
    * passing custom element (e.g. `a` tag) throught the `as` property without passing

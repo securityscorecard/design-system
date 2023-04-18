@@ -1,5 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
-import type { InputHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import type { RangeProps } from './Range.types';
 
 import Range from './Range';
@@ -9,9 +9,9 @@ export default {
   component: Range,
 } as Meta;
 
-const RangeTemplate: Story<
-  RangeProps & InputHTMLAttributes<HTMLInputElement>
-> = (args) => <Range {...args} aria-label="Input" />;
+const RangeTemplate: Story<RangeProps & ComponentPropsWithRef<'input'>> = (
+  args,
+) => <Range {...args} aria-label="Input" />;
 
 export const Playground = RangeTemplate.bind({});
 Playground.args = { min: 0, max: 100 };

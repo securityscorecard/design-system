@@ -1,4 +1,4 @@
-import type { ChangeEvent, ClipboardEvent, InputHTMLAttributes } from 'react';
+import type { ChangeEvent, ClipboardEvent, ComponentPropsWithRef } from 'react';
 import type { PadboxProps } from '../../layout/Padbox/Padbox';
 
 export interface ValueContainerProps extends PadboxProps {
@@ -17,8 +17,7 @@ export interface MultiValueProps {
   onRemove: () => void;
 }
 
-export interface MultiValueInputProps
-  extends InputHTMLAttributes<HTMLInputElement> {
+export interface MultiValueInputProps extends ComponentPropsWithRef<'input'> {
   value?: Array<MultiValueProps['label']>;
   isInvalid?: ValueContainerProps['$isInvalid'];
   isDisabled?: ValueContainerProps['$isDisabled'];

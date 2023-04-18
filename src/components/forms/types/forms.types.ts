@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { ComponentPropsWithRef, ReactNode } from 'react';
 
 export interface TogglingInputProps {
   isInvalid?: boolean;
@@ -7,7 +7,7 @@ export interface TogglingInputProps {
 
 export interface TogglingProps
   extends TogglingInputProps,
-    InputHTMLAttributes<HTMLInputElement> {
+    ComponentPropsWithRef<'input'> {
   name: string;
   label?: ReactNode;
   isDisabled?: boolean;

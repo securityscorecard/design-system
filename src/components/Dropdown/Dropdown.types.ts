@@ -1,6 +1,6 @@
 import type {
   CSSProperties,
-  HTMLAttributes,
+  ComponentPropsWithRef,
   PropsWithChildren,
   ReactElement,
   Ref,
@@ -31,7 +31,7 @@ export type DropdownPaneProps = PropsWithChildren<
     arrowStyles: CSSProperties;
     contentPaddingSize: SpaceSize;
     contentPaddingType: PaddingType;
-  } & HTMLAttributes<HTMLDivElement>
+  } & ComponentPropsWithRef<'div'>
 >;
 
 interface BaseDropdownProps {
