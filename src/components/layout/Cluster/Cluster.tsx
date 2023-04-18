@@ -1,5 +1,5 @@
 import type { Property } from 'csstype';
-import type { FC, HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef, FC } from 'react';
 import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled, { css } from 'styled-components';
@@ -18,7 +18,7 @@ interface ClusterRootProps {
   className?: string;
 }
 
-export interface ClusterProps extends HTMLAttributes<HTMLElement> {
+export interface ClusterProps extends ComponentPropsWithRef<'div'> {
   /**
    * Whitespace around each child of the Inline
    */
