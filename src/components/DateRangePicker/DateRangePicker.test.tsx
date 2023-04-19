@@ -4,11 +4,11 @@ import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import DateRangePicker from './DateRangePicker';
 
-const checkInputClick = (
+const checkInputClick = async (
   inputStartDate: HTMLElement,
   handleChangeDate: jest.Mock,
 ) => {
-  userEvent.click(inputStartDate);
+  await userEvent.click(inputStartDate);
 
   // Click on a date
   fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
@@ -29,13 +29,13 @@ describe('DateRangePicker', () => {
       />,
     );
 
-    userEvent.click(screen.getByPlaceholderText('Start date'));
+    await userEvent.click(screen.getByPlaceholderText('Start date'));
 
     await waitFor(() => {
       expect(screen.getAllByText(/March 2021/i)[0]).toBeInTheDocument();
     });
 
-    userEvent.click(screen.getByPlaceholderText('End date'));
+    await userEvent.click(screen.getByPlaceholderText('End date'));
 
     await waitFor(() => {
       expect(screen.getAllByText(/March 2021/i)[1]).toBeInTheDocument();
@@ -125,7 +125,7 @@ describe('DateRangePicker', () => {
 
     // test a date outside the range
 
-    userEvent.click(screen.getByPlaceholderText('Start date'));
+    fireEvent.click(screen.getByPlaceholderText('Start date'));
 
     await waitFor(() => {
       const disabledButton = screen.getByLabelText(
