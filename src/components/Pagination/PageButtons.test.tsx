@@ -61,7 +61,7 @@ describe('Pagination/PageButtons', () => {
     expect(screen.getAllByRole('button')).toHaveLength(pageCount);
   });
 
-  it('should call onChange handler with correct parameters', () => {
+  it('should call onChange handler with correct parameters', async () => {
     const changeMock = jest.fn();
     renderWithProviders(
       <PageButtons
@@ -73,13 +73,13 @@ describe('Pagination/PageButtons', () => {
     );
     const pageButtons = screen.getAllByRole('button');
 
-    userEvent.click(pageButtons[0]);
+    await userEvent.click(pageButtons[0]);
     expect(changeMock).toHaveBeenCalledWith(1);
 
-    userEvent.click(pageButtons[1]);
+    await userEvent.click(pageButtons[1]);
     expect(changeMock).toHaveBeenCalledWith(4);
 
-    userEvent.click(pageButtons[3]);
+    await userEvent.click(pageButtons[3]);
     expect(changeMock).toHaveBeenCalledWith(10);
   });
 });

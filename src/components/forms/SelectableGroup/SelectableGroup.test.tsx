@@ -26,7 +26,7 @@ describe('SelectableGroup', () => {
       expect(screen.getByRole('radio', { name: /Hiking/i })).toBeChecked();
       expect(screen.getByRole('radio', { name: /Games/i })).not.toBeChecked();
     });
-    it('calls onChange when provided', () => {
+    it('calls onChange when provided', async () => {
       const onChangeMock = jest.fn();
       renderWithProviders(
         <SelectableGroup
@@ -37,7 +37,7 @@ describe('SelectableGroup', () => {
         />,
       );
 
-      userEvent.click(screen.getByRole('radio', { name: /Hiking/i }));
+      await userEvent.click(screen.getByRole('radio', { name: /Hiking/i }));
 
       expect(onChangeMock).toBeCalledWith('hiking');
     });
@@ -59,7 +59,7 @@ describe('SelectableGroup', () => {
         screen.getByRole('checkbox', { name: /Games/i }),
       ).not.toBeChecked();
     });
-    it('calls onChange when provided', () => {
+    it('calls onChange when provided', async () => {
       const onChangeMock = jest.fn();
       renderWithProviders(
         <SelectableGroup
@@ -71,7 +71,7 @@ describe('SelectableGroup', () => {
         />,
       );
 
-      userEvent.click(screen.getByRole('checkbox', { name: /Hiking/i }));
+      await userEvent.click(screen.getByRole('checkbox', { name: /Hiking/i }));
 
       expect(onChangeMock).toBeCalledWith(['hiking']);
     });

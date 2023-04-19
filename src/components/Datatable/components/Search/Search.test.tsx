@@ -38,11 +38,11 @@ describe('Search', () => {
     renderWithProviders(<Search onClear={onClear} onSearch={onSearch} />);
     const searchInput = screen.getByRole('searchbox');
 
-    userEvent.type(searchInput, 'query');
+    await userEvent.type(searchInput, 'query');
     expect(searchInput).toHaveValue('query');
 
     const clearButton = await screen.findByLabelText('Clear search value');
-    userEvent.click(clearButton);
+    await userEvent.click(clearButton);
 
     await waitFor(() => expect(searchInput).toHaveValue(''));
     expect(onClear).toHaveBeenCalled();
@@ -51,9 +51,11 @@ describe('Search', () => {
   it('should trigger search when value is changed', async () => {
     renderWithProviders(<Search onClear={onClear} onSearch={onSearch} />);
     const searchInput = screen.getByRole('searchbox');
-    jest.useFakeTimers();
+    jest.useFakeTimers({
+      doNotFake: ['setTimeout'],
+    });
 
-    userEvent.type(searchInput, 'query');
+    await userEvent.type(searchInput, 'query');
     expect(searchInput).toHaveValue('query');
 
     await waitFor(() => expect(onSearch).toHaveBeenCalled());
@@ -64,10 +66,12 @@ describe('Search', () => {
       <Search defaultValue="ab" onClear={onClear} onSearch={onSearch} />,
     );
     const searchInput = screen.getByRole('searchbox');
-    jest.useFakeTimers();
+    jest.useFakeTimers({
+      doNotFake: ['setTimeout'],
+    });
 
     expect(searchInput).toHaveValue('ab');
-    userEvent.type(searchInput, '{Backspace}{Backspace}');
+    await userEvent.type(searchInput, '{Backspace}{Backspace}');
     await waitFor(() => expect(onSearch).toBeCalledWith(''));
     jest.useRealTimers();
   });
@@ -77,29 +81,29 @@ describe('Search', () => {
     );
     const searchInput = screen.getByRole('searchbox');
 
-    userEvent.type(searchInput, 'query{Enter}');
+    await userEvent.type(searchInput, 'query{Enter}');
     await waitFor(() => expect(onSearch).not.toBeCalled());
   });
 
-  it('should validate according to pattern', () => {
+  it('should validate according to pattern', async () => {
     renderWithProviders(
       <Search onClear={onClear} onSearch={onSearch} pattern="[0-9]+" />,
     );
     const searchInput = screen.getByRole('searchbox');
 
     expect(searchInput).toBeValid();
-    userEvent.type(searchInput, 'query');
+    await userEvent.type(searchInput, 'query');
     expect(searchInput).toBeInvalid();
   });
-  it('should reset validation when value is empty string', () => {
+  it('should reset validation when value is empty string', async () => {
     renderWithProviders(
       <Search onClear={onClear} onSearch={onSearch} pattern="[0-9]+" />,
     );
     const searchInput = screen.getByRole('searchbox');
 
-    userEvent.type(searchInput, 'ab');
+    await userEvent.type(searchInput, 'ab');
     expect(searchInput).toBeInvalid();
-    userEvent.type(searchInput, '{Backspace}{Backspace}');
+    await userEvent.type(searchInput, '{Backspace}{Backspace}');
     expect(searchInput).toBeValid();
   });
 
@@ -110,10 +114,10 @@ describe('Search', () => {
       );
       const searchInput = screen.getByRole('searchbox');
 
-      userEvent.type(searchInput, 'query');
+      await userEvent.type(searchInput, 'query');
       expect(onSearch).not.toBeCalled();
 
-      userEvent.type(searchInput, '{Enter}');
+      await userEvent.type(searchInput, '{Enter}');
       await waitFor(() => expect(onSearch).toBeCalledWith('query'));
     });
 
@@ -129,7 +133,7 @@ describe('Search', () => {
       const searchInput = screen.getByRole('searchbox');
 
       expect(searchInput).toHaveValue('ab');
-      userEvent.type(searchInput, '{Backspace}{Backspace}{Enter}');
+      await userEvent.type(searchInput, '{Backspace}{Backspace}{Enter}');
       await waitFor(() => expect(onSearch).toBeCalledWith(''));
     });
 
@@ -144,7 +148,7 @@ describe('Search', () => {
       );
       const searchInput = screen.getByRole('searchbox');
 
-      userEvent.type(searchInput, 'query{Enter}');
+      await userEvent.type(searchInput, 'query{Enter}');
       expect(onSearch).not.toBeCalled();
     });
   });
