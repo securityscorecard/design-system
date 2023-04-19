@@ -1,5 +1,5 @@
 import type { Property } from 'csstype';
-import type { SpaceSize } from '../../../theme/space.types';
+import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 import type { StretchEnum } from './Inline.enums';
 
 import styled from 'styled-components';
@@ -7,9 +7,10 @@ import { prop } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { getSpace } from '../../../utils';
+import { parseResponsiveStyles } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
+import { gapParser } from '../../../utils/parsers';
 
 type Stretch = typeof StretchEnum[keyof typeof StretchEnum];
 
@@ -17,7 +18,7 @@ export interface InlineProps {
   /**
    * Whitespace between each child of the Inline
    */
-  gap?: SpaceSize;
+  gap?: ResponsiveSpaceSize;
   /**
    * Horizontal alignment of elements inside Inline
    *
@@ -70,21 +71,14 @@ const Inline = styled.div.attrs((props) => ({
   flex-wrap: nowrap;
   justify-content: ${prop('justify')};
   align-items: ${prop('align')};
+  ${parseResponsiveStyles('gap', 'gap', gapParser)};
 
-  ${({ stretch }) => isNotUndefined(stretch) && getStretchStyle(stretch)}
-
-  /* FIXME: Until we remove 'margin' property from other components we need to
-    increase specificity of those nesting , since it can be overriden by inner
-    elements with the same specificity. This can lead to inconsistent output
-    of visual test if styled-components puts CSS in different order into Head. */
   && > * {
     margin-left: 0;
     margin-right: 0;
   }
 
-  && > * + * {
-    margin-left: ${({ gap, theme }) => getSpace(gap, { theme })};
-  }
+  ${({ stretch }) => isNotUndefined(stretch) && getStretchStyle(stretch)}
 `;
 
 Inline.defaultProps = {

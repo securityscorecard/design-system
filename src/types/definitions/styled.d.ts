@@ -20,6 +20,8 @@ declare module 'styled-components' {
     depths: ReturnType<typeof createDepths>;
     space: ReturnType<typeof createSpace>;
     radii: ReturnType<typeof createRadii>;
+    breakpoints: string[];
+    breakpointsKeys: string[];
     tokens: typeof tokens;
   }
 }
