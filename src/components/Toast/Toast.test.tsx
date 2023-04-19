@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { DSProvider, createIconLibrary } from '../../theme';
+import { DSProvider } from '../../theme';
 import Toast from './Toast';
 
 describe('Toast', () => {
@@ -10,7 +10,6 @@ describe('Toast', () => {
 
   describe('when close button is clicked', () => {
     it('should call onClose handler', () => {
-      createIconLibrary();
       render(
         <DSProvider>
           <Toast onClose={onCloseHandler}>Toast notification</Toast>

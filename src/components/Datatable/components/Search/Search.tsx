@@ -1,7 +1,7 @@
 import type { FC, KeyboardEventHandler } from 'react';
 import type { SearchProps } from './Search.types';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../../Filters/helpers';
@@ -20,6 +20,13 @@ const Search: FC<SearchProps> = ({
   const [isInvalid, setIsInvalid] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(0);
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const clear = () => {
     setIsSearching(false);
@@ -27,9 +34,13 @@ const Search: FC<SearchProps> = ({
     onClear?.();
   };
   const search = async (searchQuery: string) => {
-    setIsSearching(true);
+    if (isMounted.current) {
+      setIsSearching(true);
+    }
     await onSearch(searchQuery);
-    setIsSearching(false);
+    if (isMounted.current) {
+      setIsSearching(false);
+    }
   };
   const handleKeyUp: KeyboardEventHandler = (e) => {
     const target = e.target as HTMLInputElement;

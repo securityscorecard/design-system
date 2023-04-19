@@ -3,22 +3,16 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { createIconLibrary, resetIconLibrary } from '../../../../theme';
 import Search from './Search';
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 
 const onSearch = jest.fn();
+const onSearchInvalid = jest.fn();
 const onClear = jest.fn();
 
 describe('Search', () => {
-  beforeAll(() => {
-    createIconLibrary();
-  });
   afterEach(() => {
     jest.clearAllMocks();
-  });
-  afterAll(() => {
-    resetIconLibrary();
   });
   it('should have defaultValue when provided', async () => {
     renderWithProviders(
@@ -142,14 +136,14 @@ describe('Search', () => {
         <Search
           isValidatedOnSubmit
           onClear={onClear}
-          onSearch={onSearch}
+          onSearch={onSearchInvalid}
           pattern="[0-9]+"
         />,
       );
       const searchInput = screen.getByRole('searchbox');
 
       await userEvent.type(searchInput, 'query{Enter}');
-      expect(onSearch).not.toBeCalled();
+      expect(onSearchInvalid).not.toBeCalled();
     });
   });
 });
