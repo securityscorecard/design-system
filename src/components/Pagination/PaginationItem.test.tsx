@@ -5,11 +5,11 @@ import { PaginationItem } from './PaginationItem';
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 
 describe('Pagination/PaginationItem', () => {
-  it('should not call onClick handler for current page', () => {
+  it('should not call onClick handler for current page', async () => {
     const clickMock = jest.fn();
     renderWithProviders(<PaginationItem onClick={clickMock} isCurrent />);
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(clickMock).not.toHaveBeenCalled();
   });
 });

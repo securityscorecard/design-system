@@ -10,45 +10,45 @@ describe('Datatable/GoToPage', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
-  it('should call onPageChange handler with "1" when value is less than or equal to 0', () => {
+  it('should call onPageChange handler with "1" when value is less than or equal to 0', async () => {
     renderWithProviders(
       <GoToPage pageCount={8} onPageChange={pageChangeMock} />,
     );
 
-    userEvent.type(
+    await userEvent.type(
       screen.getByRole('spinbutton', { name: /Go to page:/i }),
-      '-5{enter}',
+      '-5{Enter}',
     );
 
     expect(pageChangeMock).toHaveBeenCalledWith(1);
   });
-  it('should call onPageChange handler with actual value when value is in page count interval', () => {
+  it('should call onPageChange handler with actual value when value is in page count interval', async () => {
     const page = 4;
     renderWithProviders(
       <GoToPage pageCount={8} onPageChange={pageChangeMock} />,
     );
 
-    userEvent.type(
+    await userEvent.type(
       screen.getByRole('spinbutton', { name: /Go to page:/i }),
-      `${page}{enter}`,
+      `${page}{Enter}`,
     );
 
     expect(pageChangeMock).toHaveBeenCalledWith(page);
   });
-  it('should call onPageChange handler with highest page number value when value is greater than page count', () => {
+  it('should call onPageChange handler with highest page number value when value is greater than page count', async () => {
     const pageCount = 8;
     renderWithProviders(
       <GoToPage pageCount={pageCount} onPageChange={pageChangeMock} />,
     );
 
-    userEvent.type(
+    await userEvent.type(
       screen.getByRole('spinbutton', { name: /Go to page:/i }),
-      '15{enter}',
+      '15{Enter}',
     );
 
     expect(pageChangeMock).toHaveBeenCalledWith(pageCount);
   });
-  it('should display "1" when provided value is less than or equal to 0', () => {
+  it('should display "1" when provided value is less than or equal to 0', async () => {
     renderWithProviders(
       <GoToPage pageCount={8} onPageChange={pageChangeMock} />,
     );
@@ -56,11 +56,11 @@ describe('Datatable/GoToPage', () => {
     const input = screen.getByRole('spinbutton', {
       name: /Go to page:/i,
     }) as HTMLInputElement;
-    userEvent.type(input, '-5{enter}');
+    await userEvent.type(input, '-5{Enter}');
 
     expect(input.value).toBe('1');
   });
-  it('should display actual provided value when is in page count interval', () => {
+  it('should display actual provided value when is in page count interval', async () => {
     const page = 4;
     renderWithProviders(
       <GoToPage pageCount={8} onPageChange={pageChangeMock} />,
@@ -69,11 +69,11 @@ describe('Datatable/GoToPage', () => {
     const input = screen.getByRole('spinbutton', {
       name: /Go to page:/i,
     }) as HTMLInputElement;
-    userEvent.type(input, `${page}{enter}`);
+    await userEvent.type(input, `${page}{Enter}`);
 
     expect(input.value).toBe(`${page}`);
   });
-  it('should display highest page number value when provided value is greater than page count', () => {
+  it('should display highest page number value when provided value is greater than page count', async () => {
     const pageCount = 8;
     renderWithProviders(
       <GoToPage pageCount={pageCount} onPageChange={pageChangeMock} />,
@@ -82,7 +82,7 @@ describe('Datatable/GoToPage', () => {
     const input = screen.getByRole('spinbutton', {
       name: /Go to page:/i,
     }) as HTMLInputElement;
-    userEvent.type(input, '15{enter}');
+    await userEvent.type(input, '15{Enter}');
 
     expect(input.value).toBe(`${pageCount}`);
   });

@@ -27,7 +27,7 @@ describe('BannersManager/BannersStack', () => {
 
     expect(screen.getByText('1 of 2')).toBeInTheDocument();
   });
-  it('should correctly order banners by severity', () => {
+  it('should correctly order banners by severity', async () => {
     renderWithProviders(<BannersStack />, { wrapper });
 
     act(() => {
@@ -38,16 +38,22 @@ describe('BannersManager/BannersStack', () => {
     });
 
     expect(screen.getByText('error')).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button', { name: /Show next banner/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /Show next banner/i }),
+    );
     expect(screen.getByText('warn')).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button', { name: /Show next banner/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /Show next banner/i }),
+    );
     expect(screen.getByText('success')).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button', { name: /Show next banner/i }));
+    await userEvent.click(
+      screen.getByRole('button', { name: /Show next banner/i }),
+    );
     expect(screen.getByText('info')).toBeInTheDocument();
   });
 
   describe('pagination', () => {
-    it('should navigate between banners', () => {
+    it('should navigate between banners', async () => {
       renderWithProviders(
         <BannersStack
           initialState={[getBanner('test 2'), getBanner('test')]}
@@ -57,18 +63,18 @@ describe('BannersManager/BannersStack', () => {
 
       expect(screen.getByText('1 of 2')).toBeInTheDocument();
       expect(screen.getByText('test')).toBeInTheDocument();
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: /Show next banner/i }),
       );
       expect(screen.getByText('2 of 2')).toBeInTheDocument();
       expect(screen.getByText('test 2')).toBeInTheDocument();
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: /Show previous banner/i }),
       );
       expect(screen.getByText('1 of 2')).toBeInTheDocument();
       expect(screen.getByText('test')).toBeInTheDocument();
     });
-    it('should navigate to the previous banner when last banner in stack is removed', () => {
+    it('should navigate to the previous banner when last banner in stack is removed', async () => {
       renderWithProviders(
         <BannersStack
           initialState={[
@@ -79,20 +85,20 @@ describe('BannersManager/BannersStack', () => {
         />,
         { wrapper },
       );
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: /Show next banner/i }),
       );
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: /Show next banner/i }),
       );
       expect(screen.getByText('3 of 3')).toBeInTheDocument();
       expect(screen.getByText('test 3')).toBeInTheDocument();
 
-      userEvent.click(screen.getByRole('button', { name: /Close/i }));
+      await userEvent.click(screen.getByRole('button', { name: /Close/i }));
       expect(screen.getByText('2 of 2')).toBeInTheDocument();
       expect(screen.getByText('test 2')).toBeInTheDocument();
     });
-    it('should navigate to the next banner when first banner in stack is removed', () => {
+    it('should navigate to the next banner when first banner in stack is removed', async () => {
       renderWithProviders(
         <BannersStack
           initialState={[
@@ -107,7 +113,7 @@ describe('BannersManager/BannersStack', () => {
       expect(screen.getByText('1 of 3')).toBeInTheDocument();
       expect(screen.getByText('test')).toBeInTheDocument();
 
-      userEvent.click(screen.getByRole('button', { name: /Close/i }));
+      await userEvent.click(screen.getByRole('button', { name: /Close/i }));
       expect(screen.getByText('1 of 2')).toBeInTheDocument();
       expect(screen.getByText('test 2')).toBeInTheDocument();
     });
