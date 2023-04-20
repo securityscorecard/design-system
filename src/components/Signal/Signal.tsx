@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { SignalProps } from './Signal.types';
 
 import { prop } from 'ramda';
+import { forwardRef } from 'react';
 import { isNilOrEmpty, isUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -59,45 +60,42 @@ const kinds = {
   },
 };
 
-const Signal: FC<SignalProps> = ({
-  kind,
-  size = 16,
-  title = '',
-  className,
-  ...props
-}) => {
-  if (isNilOrEmpty(kind)) return null;
+const Signal: FC<SignalProps> = forwardRef<SVGSVGElement, SignalProps>(
+  ({ kind, size = 16, title = '', className, ...props }, ref) => {
+    if (isNilOrEmpty(kind)) return null;
 
-  const severityKind = prop(kind.toLowerCase(), kinds);
+    const severityKind = prop(kind.toLowerCase(), kinds);
 
-  if (isUndefined(severityKind)) return null;
+    if (isUndefined(severityKind)) return null;
 
-  const { color, paths } = severityKind;
+    const { color, paths } = severityKind;
 
-  return (
-    <svg
-      className={cls(CLX_COMPONENT, className)}
-      data-testid="ds-severity-icon"
-      height={size}
-      viewBox="0 0 16 16"
-      width={size}
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <title>{title}</title>
-      <circle cx="8" cy="8" fill={color} r="8" />
-      <g>
-        {paths.map((path, key) => (
-          <path
-            // eslint-disable-next-line react/no-array-index-key
-            key={`${kind}-icon-${key}`}
-            d={path}
-            fill={colors.neutral[0]}
-          />
-        ))}
-      </g>
-    </svg>
-  );
-};
+    return (
+      <svg
+        ref={ref}
+        className={cls(CLX_COMPONENT, className)}
+        data-testid="ds-severity-icon"
+        height={size}
+        viewBox="0 0 16 16"
+        width={size}
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <title>{title}</title>
+        <circle cx="8" cy="8" fill={color} r="8" />
+        <g>
+          {paths.map((path, key) => (
+            <path
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${kind}-icon-${key}`}
+              d={path}
+              fill={colors.neutral[0]}
+            />
+          ))}
+        </g>
+      </svg>
+    );
+  },
+);
 
 export default Signal;

@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { WizardModalProps } from './WizardModal.types';
 
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { usePortal } from '../../hooks/usePortal';
@@ -34,17 +35,17 @@ const BaseModal = styled(Padbox)`
   }
 `;
 
-const WizardModal: FC<WizardModalProps> = ({ children }) => {
+const WizardModal: FC<WizardModalProps> = forwardRef(({ children }, ref) => {
   const { Portal } = usePortal();
   useLockBodyScroll();
 
   return (
     <Portal>
       <BlurredOverlay>
-        <BaseModal>{children}</BaseModal>
+        <BaseModal ref={ref}>{children}</BaseModal>
       </BlurredOverlay>
     </Portal>
   );
-};
+});
 
 export default WizardModal;

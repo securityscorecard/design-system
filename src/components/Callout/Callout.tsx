@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { CalloutContainerProps, CalloutProps } from './Callout.types';
 
 import styled, { css } from 'styled-components';
+import { forwardRef } from 'react';
 
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
@@ -52,32 +53,34 @@ const Container = styled(Padbox)<CalloutContainerProps>`
   ${({ $color }) => calloutColors[$color]};
 `;
 
-const Callout: FC<CalloutProps> = ({
-  children,
-  icon = SSCIconNames.lightbulb,
-  color = CalloutColors.info,
-}) => (
-  <Container
-    $color={color}
-    className={CLX_COMPONENT}
-    paddingSize={SpaceSizes.md}
-  >
-    <Inline gap={SpaceSizes.md}>
-      <IconContainer $color={color}>
-        {typeof icon === 'string' ? (
-          <Icon
-            color={
-              color === 'info' ? ColorTypes.info700 : ColorTypes.neutral700
-            }
-            name={icon}
-          />
-        ) : (
-          icon
-        )}
-      </IconContainer>
-      <Text style={{ alignSelf: 'center' }}>{children}</Text>
-    </Inline>
-  </Container>
+const Callout: FC<CalloutProps> = forwardRef<HTMLSpanElement, CalloutProps>(
+  (
+    { children, icon = SSCIconNames.lightbulb, color = CalloutColors.info },
+    ref,
+  ) => (
+    <Container
+      ref={ref}
+      $color={color}
+      className={CLX_COMPONENT}
+      paddingSize={SpaceSizes.md}
+    >
+      <Inline gap={SpaceSizes.md}>
+        <IconContainer $color={color}>
+          {typeof icon === 'string' ? (
+            <Icon
+              color={
+                color === 'info' ? ColorTypes.info700 : ColorTypes.neutral700
+              }
+              name={icon}
+            />
+          ) : (
+            icon
+          )}
+        </IconContainer>
+        <Text style={{ alignSelf: 'center' }}>{children}</Text>
+      </Inline>
+    </Container>
+  ),
 );
 
 export default Callout;

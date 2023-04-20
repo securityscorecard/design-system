@@ -1,4 +1,3 @@
-import type { FC, MouseEvent, ReactElement } from 'react';
 import type {
   AbsoluteLinkActionKind,
   RelativeLinkActionKind,
@@ -8,8 +7,9 @@ import type {
   DropdownMenuProps,
 } from './DropdownMenu.types';
 import type { InteractiveElement } from '../../Dropdown/Dropdown.types';
+import type { FC, MouseEvent, ReactElement } from 'react';
 
-import { memo, useRef, useState } from 'react';
+import { forwardRef, memo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -55,131 +55,140 @@ const getOptions = () => {
   );
 };
 
-const DropdownMenu: FC<DropdownMenuProps> = ({
-  actions,
-  defaultIsOpen = false,
-  paneWidth = 'auto',
-  children,
-  className,
-  placement = 'bottom',
-}) => {
-  const [isActive, setIsActive] = useState(false);
-  const dropdownRef = useRef({
-    togglePane: noop,
-    hidePane: noop,
-    showPane: noop,
-  });
-  const containerRef = useRef(null);
-  const trigger: ReactElement = (
-    <span className={cls(CLX_COMPONENT, className)}>
-      {isFunction(children) ? children(isActive) : children}
-    </span>
-  );
-
-  const handleKeyDown = (event) => {
-    const selectOption = (direction = 'DOWN') => {
-      const options = getOptions();
-      const index = options.indexOf(
-        document.activeElement as InteractiveElement,
-      );
-      const target = options[index + (direction === 'DOWN' ? 1 : -1)];
-      target?.focus();
-    };
-    const fn = {
-      // Focus the next sub-item or item.
-      ArrowDown: () => selectOption('DOWN'),
-      // Focus the previous sub-item or item.
-      ArrowUp: () => selectOption('UP'),
-    }[event.key];
-    fn?.();
-  };
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      const containsActiveElement = containerRef.current?.contains(
-        document.activeElement,
-      );
-      if (!containsActiveElement) {
-        dropdownRef.current?.hidePane();
-      }
+const DropdownMenu: FC<DropdownMenuProps> = forwardRef<
+  HTMLSpanElement,
+  DropdownMenuProps
+>(
+  (
+    {
+      actions,
+      defaultIsOpen = false,
+      paneWidth = 'auto',
+      children,
+      className,
+      placement = 'bottom',
+    },
+    ref,
+  ) => {
+    const [isActive, setIsActive] = useState(false);
+    const dropdownRef = useRef({
+      togglePane: noop,
+      hidePane: noop,
+      showPane: noop,
     });
-  };
+    const containerRef = useRef(null);
+    const trigger: ReactElement = (
+      <span ref={ref} className={cls(CLX_COMPONENT, className)}>
+        {isFunction(children) ? children(isActive) : children}
+      </span>
+    );
 
-  return (
-    <Dropdown
-      ref={dropdownRef}
-      defaultIsOpen={defaultIsOpen}
-      innerPaddingSize={SpaceSizes.none}
-      maxPaneWidth={paneWidth}
-      placement={placement}
-      trigger={trigger}
-      onClose={() => setIsActive(false)}
-      onOpen={() => setIsActive(true)}
-    >
-      <List ref={containerRef} onBlur={handleBlur} onKeyDown={handleKeyDown}>
-        {actions.map((action) => {
-          let RouterLink = null;
-          if (
-            isNotUndefined(
-              (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
-            )
-          ) {
-            RouterLink = requireRouterLink();
-          }
+    const handleKeyDown = (event) => {
+      const selectOption = (direction = 'DOWN') => {
+        const options = getOptions();
+        const index = options.indexOf(
+          document.activeElement as InteractiveElement,
+        );
+        const target = options[index + (direction === 'DOWN' ? 1 : -1)];
+        target?.focus();
+      };
+      const fn = {
+        // Focus the next sub-item or item.
+        ArrowDown: () => selectOption('DOWN'),
+        // Focus the previous sub-item or item.
+        ArrowUp: () => selectOption('UP'),
+      }[event.key];
+      fn?.();
+    };
 
-          const domTag = isNotUndefined(
-            (action as AbsoluteLinkActionKind<MouseEvent[], boolean>).href,
-          )
-            ? 'a' // render 'a' tag if 'href' is present
-            : isNotUndefined(
+    const handleBlur = () => {
+      setTimeout(() => {
+        const containsActiveElement = containerRef.current?.contains(
+          document.activeElement,
+        );
+        if (!containsActiveElement) {
+          dropdownRef.current?.hidePane();
+        }
+      });
+    };
+
+    return (
+      <Dropdown
+        ref={dropdownRef}
+        defaultIsOpen={defaultIsOpen}
+        innerPaddingSize={SpaceSizes.none}
+        maxPaneWidth={paneWidth}
+        placement={placement}
+        trigger={trigger}
+        onClose={() => setIsActive(false)}
+        onOpen={() => setIsActive(true)}
+      >
+        <List ref={containerRef} onBlur={handleBlur} onKeyDown={handleKeyDown}>
+          {actions.map((action) => {
+            let RouterLink = null;
+            if (
+              isNotUndefined(
                 (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
               )
-            ? RouterLink // render 'Link' if 'to' is present
-            : 'button'; // use default
+            ) {
+              RouterLink = requireRouterLink();
+            }
 
-          if (
-            isNull(RouterLink) &&
-            isNotUndefined(
-              (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
+            const domTag = isNotUndefined(
+              (action as AbsoluteLinkActionKind<MouseEvent[], boolean>).href,
             )
-          ) {
-            return null;
-          }
+              ? 'a' // render 'a' tag if 'href' is present
+              : isNotUndefined(
+                  (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
+                )
+              ? RouterLink // render 'Link' if 'to' is present
+              : 'button'; // use default
 
-          return (
-            <li
-              key={action.name}
-              data-interactive="true"
-              style={{ overflow: 'hidden' }}
-            >
-              <DropdownLink
-                as={domTag}
-                data-dropdown-item="true"
+            if (
+              isNull(RouterLink) &&
+              isNotUndefined(
+                (action as RelativeLinkActionKind<MouseEvent[], boolean>).to,
+              )
+            ) {
+              return null;
+            }
+
+            return (
+              <li
+                key={action.name}
                 data-interactive="true"
-                href={
-                  (action as AbsoluteLinkActionKind<MouseEvent[], boolean>).href
-                }
-                name={action.name}
-                paddingSize={SpaceSizes.md}
-                paddingType={PadboxEnums.PaddingTypes.squish}
-                to={
-                  (action as RelativeLinkActionKind<MouseEvent[], boolean>).to
-                }
-                onClick={(event) => {
-                  action.onClick(event);
-                  dropdownRef.current?.hidePane();
-                }}
+                style={{ overflow: 'hidden' }}
               >
-                <Text data-interactive="true" size={TextEnums.TextSizes.md}>
-                  {action.label}
-                </Text>
-              </DropdownLink>
-            </li>
-          );
-        })}
-      </List>
-    </Dropdown>
-  );
-};
+                <DropdownLink
+                  as={domTag}
+                  data-dropdown-item="true"
+                  data-interactive="true"
+                  href={
+                    (action as AbsoluteLinkActionKind<MouseEvent[], boolean>)
+                      .href
+                  }
+                  name={action.name}
+                  paddingSize={SpaceSizes.md}
+                  paddingType={PadboxEnums.PaddingTypes.squish}
+                  to={
+                    (action as RelativeLinkActionKind<MouseEvent[], boolean>).to
+                  }
+                  onClick={(event) => {
+                    action.onClick(event);
+                    dropdownRef.current?.hidePane();
+                  }}
+                >
+                  <Text data-interactive="true" size={TextEnums.TextSizes.md}>
+                    {action.label}
+                  </Text>
+                </DropdownLink>
+              </li>
+            );
+          })}
+        </List>
+      </Dropdown>
+    );
+  },
+);
 
 export default memo(DropdownMenu);

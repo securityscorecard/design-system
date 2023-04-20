@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { ToastProps } from './Toast.types';
 
 import { transparentize } from 'polished';
+import { forwardRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { getColor, getRadii, pxToRem } from '../../utils';
@@ -73,45 +74,42 @@ const ToastAreaContainer: FC<{
   return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
 };
 
-const Toast: FC<ToastProps> = ({
-  onClose,
-  children,
-  width = 400,
-  variant,
-  isStandalone = true,
-}) => {
-  return (
-    <ToastAreaContainer isStandalone={isStandalone}>
-      <ToastContainer
-        $width={width}
-        className={CLX_COMPONENT}
-        onClick={stopPropagation}
-      >
-        <BaseToastBanner
-          iconAlign="center"
-          iconPxSizesVariants={iconPxSizesVariants}
-          iconSize={16}
-          paddingSize={SpaceSizes.sm}
-          paddingType={PaddingTypes.squish}
-          stretch={StretchEnum.end}
-          variant={variant}
+const Toast: FC<ToastProps> = forwardRef<HTMLDivElement, ToastProps>(
+  ({ onClose, children, width = 400, variant, isStandalone = true }, ref) => {
+    return (
+      <ToastAreaContainer isStandalone={isStandalone}>
+        <ToastContainer
+          ref={ref}
+          $width={width}
+          className={CLX_COMPONENT}
+          onClick={stopPropagation}
         >
-          <Inline justify="space-between">
-            <Padbox paddingSize={SpaceSizes.md}>
-              <ToastContent as="div" margin="none" size={TextSizes.md}>
-                {children}
-              </ToastContent>
-            </Padbox>
-            <CloseButton
-              aria-label="Close"
-              marginCompensation={SpaceSizes.none}
-              onClose={onClose}
-            />
-          </Inline>
-        </BaseToastBanner>
-      </ToastContainer>
-    </ToastAreaContainer>
-  );
-};
+          <BaseToastBanner
+            iconAlign="center"
+            iconPxSizesVariants={iconPxSizesVariants}
+            iconSize={16}
+            paddingSize={SpaceSizes.sm}
+            paddingType={PaddingTypes.squish}
+            stretch={StretchEnum.end}
+            variant={variant}
+          >
+            <Inline justify="space-between">
+              <Padbox paddingSize={SpaceSizes.md}>
+                <ToastContent as="div" margin="none" size={TextSizes.md}>
+                  {children}
+                </ToastContent>
+              </Padbox>
+              <CloseButton
+                aria-label="Close"
+                marginCompensation={SpaceSizes.none}
+                onClose={onClose}
+              />
+            </Inline>
+          </BaseToastBanner>
+        </ToastContainer>
+      </ToastAreaContainer>
+    );
+  },
+);
 
 export default Toast;

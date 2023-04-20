@@ -3,6 +3,7 @@ import type { ComponentPropsWithRef, FC } from 'react';
 import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled, { css } from 'styled-components';
+import { forwardRef } from 'react';
 import cls from 'classnames';
 
 import { parseResponsiveStyles } from '../../../utils';
@@ -48,24 +49,29 @@ const GridRoot = styled.div<GridRootProps>(
   },
 );
 
-const Grid: FC<GridProps> = ({ children, gap, align, cols, ...props }) => {
-  const { error } = useLogger('Grid');
-  if (cols === 1) {
-    error('Minimal number of columns is 2. Use Stack instead of Grid[cols=1]');
-    return null;
-  }
-  return (
-    <GridRoot
-      $align={align}
-      $cols={cols}
-      $gap={gap}
-      className={cls(CLX_LAYOUT, props?.className)}
-      {...props}
-    >
-      {children}
-    </GridRoot>
-  );
-};
+const Grid: FC<GridProps> = forwardRef<HTMLDivElement, GridProps>(
+  ({ children, gap, align, cols, ...props }, ref) => {
+    const { error } = useLogger('Grid');
+    if (cols === 1) {
+      error(
+        'Minimal number of columns is 2. Use Stack instead of Grid[cols=1]',
+      );
+      return null;
+    }
+    return (
+      <GridRoot
+        ref={ref}
+        $align={align}
+        $cols={cols}
+        $gap={gap}
+        className={cls(CLX_LAYOUT, props?.className)}
+        {...props}
+      >
+        {children}
+      </GridRoot>
+    );
+  },
+);
 
 Grid.defaultProps = {
   gap: SpaceSizes.none,

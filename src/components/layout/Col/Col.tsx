@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { ColProps, Cols } from './Col.types';
 
+import { forwardRef } from 'react';
 import { Box } from 'reflexbox';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
@@ -25,15 +26,16 @@ const StyledCol = styled(Box)`
   padding-right: ${getColPadding};
 `;
 
-const Col: FC<ColProps> = ({ children, cols, offset }) => (
+const Col: FC<ColProps> = forwardRef(({ children, cols, offset }, ref) => (
   <StyledCol
+    ref={ref}
     ml={`${(100 / 12) * offset}%`}
     {...getColWidth(cols)}
     className={CLX_LAYOUT}
   >
     {children}
   </StyledCol>
-);
+));
 
 Col.defaultProps = {
   cols: 'auto',

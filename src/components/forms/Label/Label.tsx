@@ -2,6 +2,7 @@ import type { ComponentPropsWithRef, FC, HTMLProps } from 'react';
 
 import styled from 'styled-components';
 import cls from 'classnames';
+import { forwardRef } from 'react';
 
 import { SpaceSizes } from '../../../theme';
 import { getSpace } from '../../../utils';
@@ -22,8 +23,9 @@ const LabelContainer = styled(Text)`
 
 const Label: FC<
   HTMLProps<HTMLLabelElement> & ComponentPropsWithRef<typeof Text>
-> = ({ children, htmlFor, className, ...props }) => (
+> = forwardRef(({ children, htmlFor, className, ...props }, ref) => (
   <LabelContainer
+    ref={ref}
     as="label"
     className={cls(CLX_COMPONENT, className)}
     htmlFor={htmlFor}
@@ -32,6 +34,6 @@ const Label: FC<
   >
     {children}
   </LabelContainer>
-);
+));
 
 export default Label;

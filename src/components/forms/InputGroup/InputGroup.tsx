@@ -1,11 +1,11 @@
-import type { FC } from 'react';
 import type { InputGroupProps } from './InputGroup.types';
 import type { InlineProps } from '../../layout/Inline/Inline';
+import type { FC } from 'react';
 
+import { Children, forwardRef } from 'react';
 import styled from 'styled-components';
 import { prop } from 'ramda';
 import cls from 'classnames';
-import { Children } from 'react';
 
 import { getFormStyle, getRadii } from '../../../utils';
 import { Input } from '../Input';
@@ -64,12 +64,10 @@ const IconContainer = styled(Padbox)`
   align-items: center;
 `;
 
-const InputGroup: FC<InputGroupProps & InlineProps> = ({
-  children,
-  hasDivider,
-  className,
-  ...inlineProps
-}) => {
+const InputGroup: FC<InputGroupProps & InlineProps> = forwardRef<
+  HTMLDivElement,
+  InputGroupProps & InlineProps
+>(({ children, hasDivider, className, ...inlineProps }, ref) => {
   const { error } = useLogger('InputGroup');
   const ALLOWED_CHILDREN = [
     Select,
@@ -89,6 +87,7 @@ const InputGroup: FC<InputGroupProps & InlineProps> = ({
   });
   return (
     <InputGroupContainer
+      ref={ref}
       className={cls(CLX_COMPONENT, className)}
       hasDivider={hasDivider}
       {...inlineProps}
@@ -102,6 +101,6 @@ const InputGroup: FC<InputGroupProps & InlineProps> = ({
       })}
     </InputGroupContainer>
   );
-};
+});
 
 export default InputGroup;
