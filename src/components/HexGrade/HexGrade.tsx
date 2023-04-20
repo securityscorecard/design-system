@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { HexGradeProps } from './HexGrade.types';
 
+import { forwardRef } from 'react';
 import { defaultTo, path, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import styled from 'styled-components';
@@ -53,71 +54,77 @@ const StyledSVG = styled.svg<HexGradeProps>`
   ${({ margin }) => createMarginSpacing(margin)};
 `;
 
-const HexGrade: FC<HexGradeProps> = ({
-  variant = HexGradeVariants.solid,
-  grade,
-  size = 64,
-  isInverted = false,
-  margin,
-  className,
-  ...props
-}) => {
-  const isCSVariant = variant === HexGradeVariants.cs;
-  const gradeColor = pipe(
-    path([grade, 'color']),
-    defaultTo(colors.neutral[700]),
-  )(grades);
-  const white = colors.neutral[0];
-
-  const VariantColorsMap = {
-    [HexGradeVariants.cs]: {
-      hexFill: gradeColor,
-      charFill: isInverted ? gradeColor : white,
-      hexStroke: isInverted ? gradeColor : white,
+const HexGrade: FC<HexGradeProps> = forwardRef<SVGSVGElement, HexGradeProps>(
+  (
+    {
+      variant = HexGradeVariants.solid,
+      grade,
+      size = 64,
+      isInverted = false,
+      margin,
+      className,
+      ...props
     },
-    [HexGradeVariants.solid]: {
-      hexFill: isInverted ? white : gradeColor,
-      charFill: isInverted ? gradeColor : white,
-      hexStroke: isInverted ? white : gradeColor,
-    },
-    [HexGradeVariants.outline]: {
-      hexFill: 'transparent',
-      charFill: isInverted ? white : gradeColor,
-      hexStroke: isInverted ? white : gradeColor,
-    },
-  };
+    ref,
+  ) => {
+    const isCSVariant = variant === HexGradeVariants.cs;
+    const gradeColor = pipe(
+      path([grade, 'color']),
+      defaultTo(colors.neutral[700]),
+    )(grades);
+    const white = colors.neutral[0];
 
-  const variantColors = VariantColorsMap[variant];
+    const VariantColorsMap = {
+      [HexGradeVariants.cs]: {
+        hexFill: gradeColor,
+        charFill: isInverted ? gradeColor : white,
+        hexStroke: isInverted ? gradeColor : white,
+      },
+      [HexGradeVariants.solid]: {
+        hexFill: isInverted ? white : gradeColor,
+        charFill: isInverted ? gradeColor : white,
+        hexStroke: isInverted ? white : gradeColor,
+      },
+      [HexGradeVariants.outline]: {
+        hexFill: 'transparent',
+        charFill: isInverted ? white : gradeColor,
+        hexStroke: isInverted ? white : gradeColor,
+      },
+    };
 
-  const { hexStroke, hexFill, charFill } = variantColors;
+    const variantColors = VariantColorsMap[variant];
 
-  const wrapperPath = isCSVariant
-    ? 'M5 14.7017V42.334L11 46.029V18.165L33.0606 4.5792L27.2487 1L5 14.7017ZM15 48.334V20.7017L37.2487 7L59.4974 20.7017V48.334L37.2487 62.0357L15 48.334Z'
-    : 'M 57.212 46.562 L 32.004 61.116 L 6.797 46.562 L 6.797 17.457 L 32.004 2.903 L 57.212 17.457 Z';
-  const strokeProps = !isCSVariant
-    ? { stroke: hexStroke, strokeWidth: '5' }
-    : {};
+    const { hexStroke, hexFill, charFill } = variantColors;
 
-  return (
-    <StyledSVG
-      className={cls(CLX_COMPONENT, className)}
-      height={size}
-      margin={margin}
-      viewBox="0 0 64 64"
-      width={size}
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path d={wrapperPath} fill={hexFill} {...strokeProps} />
-      {isNotUndefined(grade) && (
-        <path
-          d={grades[grade].path}
-          fill={charFill}
-          transform={isCSVariant ? grades[grade].csTransform : undefined}
-        />
-      )}
-    </StyledSVG>
-  );
-};
+    const wrapperPath = isCSVariant
+      ? 'M5 14.7017V42.334L11 46.029V18.165L33.0606 4.5792L27.2487 1L5 14.7017ZM15 48.334V20.7017L37.2487 7L59.4974 20.7017V48.334L37.2487 62.0357L15 48.334Z'
+      : 'M 57.212 46.562 L 32.004 61.116 L 6.797 46.562 L 6.797 17.457 L 32.004 2.903 L 57.212 17.457 Z';
+    const strokeProps = !isCSVariant
+      ? { stroke: hexStroke, strokeWidth: '5' }
+      : {};
+
+    return (
+      <StyledSVG
+        ref={ref}
+        className={cls(CLX_COMPONENT, className)}
+        height={size}
+        margin={margin}
+        viewBox="0 0 64 64"
+        width={size}
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <path d={wrapperPath} fill={hexFill} {...strokeProps} />
+        {isNotUndefined(grade) && (
+          <path
+            d={grades[grade].path}
+            fill={charFill}
+            transform={isCSVariant ? grades[grade].csTransform : undefined}
+          />
+        )}
+      </StyledSVG>
+    );
+  },
+);
 
 export default HexGrade;

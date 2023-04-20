@@ -1,6 +1,6 @@
-import type { FC } from 'react';
-import type { MessageProps } from './Message.types';
+import type { BaseMessageProps, MessageProps } from './Message.types';
 
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { SpaceSizes } from '../../../theme';
@@ -19,22 +19,29 @@ const MessageContainer = styled.div`
   }
 `;
 
-const Message: FC<MessageProps> = ({
-  children,
-  variant = MessageVariants.note,
-}) => (
-  <MessageContainer className={CLX_COMPONENT}>
-    <Paragraph size={TextSizes.md} variant={variant}>
-      {children}
-    </Paragraph>
-  </MessageContainer>
+const Message = forwardRef<HTMLDivElement, MessageProps>(
+  ({ children, variant = MessageVariants.note }, ref) => (
+    <MessageContainer ref={ref} className={CLX_COMPONENT}>
+      <Paragraph size={TextSizes.md} variant={variant}>
+        {children}
+      </Paragraph>
+    </MessageContainer>
+  ),
 );
 
 export default Message;
 
-export const Note: FC = ({ children }) => (
-  <Message variant={MessageVariants.note}>{children}</Message>
+export const Note = forwardRef<HTMLDivElement, BaseMessageProps>(
+  ({ children }, ref) => (
+    <Message ref={ref} variant={MessageVariants.note}>
+      {children}
+    </Message>
+  ),
 );
-export const Error: FC = ({ children }) => (
-  <Message variant={MessageVariants.error}>{children}</Message>
+export const Error = forwardRef<HTMLDivElement, BaseMessageProps>(
+  ({ children }, ref) => (
+    <Message ref={ref} variant={MessageVariants.error}>
+      {children}
+    </Message>
+  ),
 );

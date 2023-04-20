@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { CollapsibleProps } from './Collapsible.types';
 
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 import cls from 'classnames';
@@ -52,59 +52,67 @@ const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
   ${({ isRotated }) => isRotated && 'transform: rotate(90deg);'}
 `;
 
-const Collapsible: FC<CollapsibleProps> = ({
-  children,
-  className,
-  defaultIsOpened = false,
-  subject,
-  title,
-  onOpen,
-}) => {
-  const [isOpen, setOpen] = useState(defaultIsOpened);
+const Collapsible: FC<CollapsibleProps> = forwardRef<
+  HTMLDivElement,
+  CollapsibleProps
+>(
+  (
+    { children, className, defaultIsOpened = false, subject, title, onOpen },
+    ref,
+  ) => {
+    const [isOpen, setOpen] = useState(defaultIsOpened);
 
-  const handleHeaderClick = () => {
-    const willOpen = !isOpen;
-    setOpen(willOpen);
-    if (typeof onOpen === 'function' && willOpen) {
-      onOpen();
-    }
-  };
+    const handleHeaderClick = () => {
+      const willOpen = !isOpen;
+      setOpen(willOpen);
+      if (typeof onOpen === 'function' && willOpen) {
+        onOpen();
+      }
+    };
 
-  return (
-    <Container
-      className={cls(CLX_COMPONENT, className)}
-      withBackground={isOpen}
-    >
-      <Header
-        paddingSize={SpaceSizes.lg}
-        paddingType={PaddingTypes.squish}
-        tabIndex={0}
-        onClick={handleHeaderClick}
-        onKeyDown={(e) => ['Enter', ' '].includes(e.key) && handleHeaderClick()}
+    return (
+      <Container
+        ref={ref}
+        className={cls(CLX_COMPONENT, className)}
+        withBackground={isOpen}
       >
-        <Inline align="center" gap={SpaceSizes.lg}>
-          <StyledIcon
-            isRotated={isOpen}
-            name={SSCIconNames.angleRight}
-            type={IconTypes.ssc}
-          />
-          <HeaderContent>
-            <Text as="div" size={TextSizes.md} variant={TextVariants.secondary}>
-              {title}
+        <Header
+          paddingSize={SpaceSizes.lg}
+          paddingType={PaddingTypes.squish}
+          tabIndex={0}
+          onClick={handleHeaderClick}
+          onKeyDown={(e) =>
+            ['Enter', ' '].includes(e.key) && handleHeaderClick()
+          }
+        >
+          <Inline align="center" gap={SpaceSizes.lg}>
+            <StyledIcon
+              isRotated={isOpen}
+              name={SSCIconNames.angleRight}
+              type={IconTypes.ssc}
+            />
+            <HeaderContent>
+              <Text
+                as="div"
+                size={TextSizes.md}
+                variant={TextVariants.secondary}
+              >
+                {title}
+              </Text>
+              {subject && <Subject size={TextSizes.lg}>{subject}</Subject>}
+            </HeaderContent>
+          </Inline>
+        </Header>
+        {isOpen && (
+          <Content paddingSize={SpaceSizes.lg}>
+            <Text as="div" size={TextSizes.md}>
+              {children}
             </Text>
-            {subject && <Subject size={TextSizes.lg}>{subject}</Subject>}
-          </HeaderContent>
-        </Inline>
-      </Header>
-      {isOpen && (
-        <Content paddingSize={SpaceSizes.lg}>
-          <Text as="div" size={TextSizes.md}>
-            {children}
-          </Text>
-        </Content>
-      )}
-    </Container>
-  );
-};
+          </Content>
+        )}
+      </Container>
+    );
+  },
+);
 
 export default Collapsible;

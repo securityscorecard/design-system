@@ -1,7 +1,7 @@
-import type { FC } from 'react';
 import type { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
 
 import styled, { css } from 'styled-components';
+import { forwardRef } from 'react';
 
 import { SpaceSizes } from '../../theme';
 import { getColor, getRadii } from '../../utils';
@@ -42,24 +42,21 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
     `}
 `;
 
-const PillWrapper: FC<PillWrapperProps> = ({
-  children,
-  variant,
-  size,
-  isClickable,
-  ...props
-}) => (
-  <StyledPillWrapper
-    $isClickable={isClickable}
-    $variant={variant}
-    {...props}
-    paddingSize={size === PillSizes.sm ? SpaceSizes.xs : SpaceSizes.sm}
-    paddingType={PaddingTypes.square}
-  >
-    <Inline align="center" gap={SpaceSizes.xs}>
-      {children}
-    </Inline>
-  </StyledPillWrapper>
+const PillWrapper = forwardRef<HTMLSpanElement, PillWrapperProps>(
+  ({ children, variant, size, isClickable, ...props }, ref) => (
+    <StyledPillWrapper
+      ref={ref}
+      $isClickable={isClickable}
+      $variant={variant}
+      {...props}
+      paddingSize={size === PillSizes.sm ? SpaceSizes.xs : SpaceSizes.sm}
+      paddingType={PaddingTypes.square}
+    >
+      <Inline align="center" gap={SpaceSizes.xs}>
+        {children}
+      </Inline>
+    </StyledPillWrapper>
+  ),
 );
 
 export default PillWrapper;

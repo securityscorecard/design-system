@@ -1,7 +1,7 @@
 import type { ChangeEventHandler, FC, PropsWithRef } from 'react';
 import type { TextAreaProps } from './TextArea.types';
 
-import { useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
@@ -22,6 +22,7 @@ import { useAutosize } from './hooks/useAutosize';
 import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
 import { SpaceSizes } from '../../../theme';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { mergeRefs } from '../../../utils/mergeRefs';
 
 const TextAreaWrapper = styled.div<{ height: string }>`
   position: relative;
@@ -95,63 +96,69 @@ const Counter = styled.span<{ isInvalid: boolean }>`
 
 const TextArea: FC<
   TextAreaProps & PropsWithRef<JSX.IntrinsicElements['textarea']>
-> = ({
-  maxLength,
-  isInvalid = false,
-  isDisabled = false,
-  style,
-  className,
-  ...props
-}) => {
-  const {
-    value = '',
-    defaultValue = '',
-    onChange = noop,
-  } = props as {
-    value: string;
-    defaultValue: string;
-    onChange: ChangeEventHandler;
-  };
-  const textAreaRef = useRef<HTMLTextAreaElement>();
-  const { text, parentHeight, textAreaHeight, autosize } = useAutosize(
-    textAreaRef,
-    value || defaultValue,
-  );
-  const [currentValueLength, setCurrentValueLength] = useState(text.length);
-  const runAfterUpdate = useRunAfterUpdate();
+> = forwardRef(
+  (
+    {
+      maxLength,
+      isInvalid = false,
+      isDisabled = false,
+      style,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const {
+      value = '',
+      defaultValue = '',
+      onChange = noop,
+    } = props as {
+      value: string;
+      defaultValue: string;
+      onChange: ChangeEventHandler;
+    };
+    const textAreaRef = useRef<HTMLTextAreaElement>();
+    const mergedRef = mergeRefs(textAreaRef, ref);
+    const { text, parentHeight, textAreaHeight, autosize } = useAutosize(
+      textAreaRef,
+      value || defaultValue,
+    );
+    const [currentValueLength, setCurrentValueLength] = useState(text.length);
+    const runAfterUpdate = useRunAfterUpdate();
 
-  const handleOnChange = (e) => {
-    onChange(e);
-    runAfterUpdate(() => {
-      setCurrentValueLength(textAreaRef.current.value.length);
-      autosize();
-    });
-  };
+    const handleOnChange = (e) => {
+      onChange(e);
+      runAfterUpdate(() => {
+        setCurrentValueLength(textAreaRef.current.value.length);
+        autosize();
+      });
+    };
 
-  const isFieldInvalid = isInvalid || currentValueLength > maxLength;
+    const isFieldInvalid = isInvalid || currentValueLength > maxLength;
 
-  return (
-    <TextAreaWrapper
-      className={cls(CLX_COMPONENT, className)}
-      height={parentHeight}
-      style={style}
-    >
-      <StyledTextArea
-        ref={textAreaRef}
-        disabled={isDisabled}
-        hasMaxLength={isNotUndefined(maxLength)}
-        height={textAreaHeight}
-        isInvalid={isFieldInvalid}
-        onChange={handleOnChange}
-        {...omit(['onChange'], props)}
-      />
-      {isNotUndefined(maxLength) && (
-        <Counter isInvalid={isFieldInvalid}>
-          {maxLength - currentValueLength}
-        </Counter>
-      )}
-    </TextAreaWrapper>
-  );
-};
+    return (
+      <TextAreaWrapper
+        className={cls(CLX_COMPONENT, className)}
+        height={parentHeight}
+        style={style}
+      >
+        <StyledTextArea
+          ref={mergedRef}
+          disabled={isDisabled}
+          hasMaxLength={isNotUndefined(maxLength)}
+          height={textAreaHeight}
+          isInvalid={isFieldInvalid}
+          onChange={handleOnChange}
+          {...omit(['onChange'], props)}
+        />
+        {isNotUndefined(maxLength) && (
+          <Counter isInvalid={isFieldInvalid}>
+            {maxLength - currentValueLength}
+          </Counter>
+        )}
+      </TextAreaWrapper>
+    );
+  },
+);
 
 export default TextArea;

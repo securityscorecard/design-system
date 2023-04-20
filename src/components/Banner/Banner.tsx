@@ -5,7 +5,7 @@ import type {
   RelativeLinkActionKind,
 } from '../../types/action.types';
 
-import { useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { useContainerQuery } from 'react-container-query';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
@@ -21,6 +21,7 @@ import { Text as BaseText } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor, getLineHeight } from '../../utils';
+import { mergeRefs } from '../../utils/mergeRefs';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
 import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseToastBanner';
@@ -83,103 +84,112 @@ const BannerContent: FC<BannerProps> = ({ variant, children, actions }) => (
   </>
 );
 
-const Banner: FC<BannerProps> = ({
-  children,
-  variant = BannerVariants.info,
-  actions,
-  isDismissable = true,
-  onClose = noop,
-  __hasPagination = false,
-  __onPrev,
-  __onNext,
-  __isFirst,
-  __isLast,
-  __current,
-  __total,
-  className,
-  changeLayoutBreakpoint = 960,
-  ...props
-}) => {
-  const changeLayoutQuery = useMemo(
-    () => ({
-      [CHANGE_LAYOUT_BREAKPOINT]: { minWidth: changeLayoutBreakpoint },
-    }),
-    [changeLayoutBreakpoint],
-  );
-  const [query, containerRef] = useContainerQuery(changeLayoutQuery, undefined);
-  const isInline = query[CHANGE_LAYOUT_BREAKPOINT];
-  return (
-    <StyledPadbox
-      ref={containerRef}
-      $variant={variant}
-      className={cls(CLX_COMPONENT, className)}
-      paddingSize={SpaceSizes.sm}
-      {...props}
-    >
-      <BaseToastBanner
-        iconAlign="flex-start"
-        iconPxSizesVariants={iconPxSizesVariants}
-        iconSize={16}
-        paddingSize={SpaceSizes.md}
-        paddingType={PaddingTypes.square}
-        stretch={StretchEnum.end}
-        variant={variant}
+const Banner: FC<BannerProps> = forwardRef(
+  (
+    {
+      children,
+      variant = BannerVariants.info,
+      actions,
+      isDismissable = true,
+      onClose = noop,
+      __hasPagination = false,
+      __onPrev,
+      __onNext,
+      __isFirst,
+      __isLast,
+      __current,
+      __total,
+      className,
+      changeLayoutBreakpoint = 960,
+      ...props
+    },
+    ref,
+  ) => {
+    const changeLayoutQuery = useMemo(
+      () => ({
+        [CHANGE_LAYOUT_BREAKPOINT]: { minWidth: changeLayoutBreakpoint },
+      }),
+      [changeLayoutBreakpoint],
+    );
+    const [query, containerRef] = useContainerQuery(
+      changeLayoutQuery,
+      undefined,
+    );
+    const isInline = query[CHANGE_LAYOUT_BREAKPOINT];
+    const mergedRef = mergeRefs(containerRef, ref);
+    return (
+      <StyledPadbox
+        ref={mergedRef}
+        $variant={variant}
+        className={cls(CLX_COMPONENT, className)}
+        paddingSize={SpaceSizes.sm}
+        {...props}
       >
-        <ContentWrapper paddingSize={SpaceSizes.md}>
-          <Inline align="flex-start" gap={SpaceSizes.xl} stretch={1}>
-            {isInline ? (
-              <Inline
-                align="flex-start"
-                gap={SpaceSizes.md}
-                justify="space-between"
-              >
-                <BannerContent actions={actions} variant={variant}>
-                  {children}
-                </BannerContent>
-              </Inline>
-            ) : (
-              <Stack align="center" gap={SpaceSizes.md}>
-                <BannerContent actions={actions} variant={variant}>
-                  {children}
-                </BannerContent>
-              </Stack>
-            )}
-            {__hasPagination && (
-              <Inline gap={SpaceSizes.sm}>
-                <StyledButton
-                  aria-label="Show previous banner"
-                  isDisabled={__isFirst}
-                  variant="text"
-                  onClick={__onPrev}
+        <BaseToastBanner
+          iconAlign="flex-start"
+          iconPxSizesVariants={iconPxSizesVariants}
+          iconSize={16}
+          paddingSize={SpaceSizes.md}
+          paddingType={PaddingTypes.square}
+          stretch={StretchEnum.end}
+          variant={variant}
+        >
+          <ContentWrapper paddingSize={SpaceSizes.md}>
+            <Inline align="flex-start" gap={SpaceSizes.xl} stretch={1}>
+              {isInline ? (
+                <Inline
+                  align="flex-start"
+                  gap={SpaceSizes.md}
+                  justify="space-between"
                 >
-                  <Icon name={SSCIconNames.angleLeft} />
-                </StyledButton>
-                <Text as="div" size={TextSizes.md}>
-                  {__current} of {__total}
-                </Text>
-                <StyledButton
-                  aria-label="Show next banner"
-                  isDisabled={__isLast}
-                  variant="text"
-                  onClick={__onNext}
-                >
-                  <Icon name={SSCIconNames.angleRight} />
-                </StyledButton>
-              </Inline>
-            )}
-            {isDismissable && (
-              <CloseButton
-                aria-label="Close banner"
-                marginCompensation={SpaceSizes.md}
-                onClose={onClose}
-              />
-            )}
-          </Inline>
-        </ContentWrapper>
-      </BaseToastBanner>
-    </StyledPadbox>
-  );
-};
+                  <BannerContent actions={actions} variant={variant}>
+                    {children}
+                  </BannerContent>
+                </Inline>
+              ) : (
+                <Stack align="center" gap={SpaceSizes.md}>
+                  <BannerContent actions={actions} variant={variant}>
+                    {children}
+                  </BannerContent>
+                </Stack>
+              )}
+              {__hasPagination && (
+                <Inline gap={SpaceSizes.sm}>
+                  <StyledButton
+                    aria-label="Show previous banner"
+                    isDisabled={__isFirst}
+                    variant="text"
+                    onClick={__onPrev}
+                  >
+                    <Icon name={SSCIconNames.angleLeft} />
+                  </StyledButton>
+                  <Text as="div" size={TextSizes.md}>
+                    {__current} of {__total}
+                  </Text>
+                  <StyledButton
+                    aria-label="Show next banner"
+                    isDisabled={__isLast}
+                    variant="text"
+                    onClick={__onNext}
+                  >
+                    <Icon name={SSCIconNames.angleRight} />
+                  </StyledButton>
+                </Inline>
+              )}
+              {isDismissable && (
+                <CloseButton
+                  aria-label="Close banner"
+                  marginCompensation={SpaceSizes.md}
+                  onClose={onClose}
+                />
+              )}
+            </Inline>
+          </ContentWrapper>
+        </BaseToastBanner>
+      </StyledPadbox>
+    );
+  },
+);
 
 Banner.displayName = 'Banner';
 

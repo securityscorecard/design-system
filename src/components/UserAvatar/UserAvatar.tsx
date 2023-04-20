@@ -4,6 +4,7 @@ import type { UserAvatarProps, UserAvatarRootProps } from './UserAvatar.types';
 import styled, { css } from 'styled-components';
 import { any, pipe, take, toUpper, trim } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
+import { forwardRef } from 'react';
 import cls from 'classnames';
 
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
@@ -76,42 +77,52 @@ const RootUserAvatar = styled.div<UserAvatarRootProps>`
 `;
 const normalizeString = pipe(trim, take(2), toUpper);
 
-const UserAvatar: FC<UserAvatarProps> = ({
-  label,
-  size = UserAvatarSizes.md,
-  className,
-  href,
-  to,
-  onClick,
-  isInverted = false,
-  ...props
-}) =>
-  any(isNotUndefined, [href, to, onClick]) ? (
-    <RootUserAvatar
-      $isInverted={isInverted}
-      $size={size}
-      aria-label="User avatar"
-      as={BaseButton}
-      className={cls(CLX_COMPONENT, className)}
-      color={ButtonColors.primary}
-      href={href}
-      paddingSize={SpaceSizes.none}
-      to={to}
-      variant={ButtonVariants.solid}
-      onClick={onClick}
-      {...props}
-    >
-      {normalizeString(label)}
-    </RootUserAvatar>
-  ) : (
-    <RootUserAvatar
-      $isInverted={isInverted}
-      $size={size}
-      className={cls(CLX_COMPONENT, className)}
-      {...props}
-    >
-      {normalizeString(label)}
-    </RootUserAvatar>
-  );
+const UserAvatar: FC<UserAvatarProps> = forwardRef<
+  HTMLDivElement,
+  UserAvatarProps
+>(
+  (
+    {
+      label,
+      size = UserAvatarSizes.md,
+      className,
+      href,
+      to,
+      onClick,
+      isInverted = false,
+      ...props
+    },
+    ref,
+  ) =>
+    any(isNotUndefined, [href, to, onClick]) ? (
+      <RootUserAvatar
+        ref={ref}
+        $isInverted={isInverted}
+        $size={size}
+        aria-label="User avatar"
+        as={BaseButton}
+        className={cls(CLX_COMPONENT, className)}
+        color={ButtonColors.primary}
+        href={href}
+        paddingSize={SpaceSizes.none}
+        to={to}
+        variant={ButtonVariants.solid}
+        onClick={onClick}
+        {...props}
+      >
+        {normalizeString(label)}
+      </RootUserAvatar>
+    ) : (
+      <RootUserAvatar
+        ref={ref}
+        $isInverted={isInverted}
+        $size={size}
+        className={cls(CLX_COMPONENT, className)}
+        {...props}
+      >
+        {normalizeString(label)}
+      </RootUserAvatar>
+    ),
+);
 
 export default UserAvatar;

@@ -1,7 +1,8 @@
 import type { Property } from 'csstype';
-import type { ComponentPropsWithRef, FC } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
 
@@ -46,22 +47,19 @@ const ClusterRoot = styled.div<ClusterRootProps>(({ $justify, $align }) => {
   `;
 });
 
-const Cluster: FC<ClusterProps> = ({
-  children,
-  gap,
-  align,
-  justify,
-  ...props
-}) => (
-  <ClusterRoot
-    $align={align}
-    $gap={gap}
-    $justify={justify}
-    className={cls(CLX_LAYOUT, props?.className)}
-    {...props}
-  >
-    {children}
-  </ClusterRoot>
+const Cluster = forwardRef<HTMLDivElement, ClusterProps>(
+  ({ children, gap, align, justify, ...props }, ref) => (
+    <ClusterRoot
+      ref={ref}
+      $align={align}
+      $gap={gap}
+      $justify={justify}
+      className={cls(CLX_LAYOUT, props?.className)}
+      {...props}
+    >
+      {children}
+    </ClusterRoot>
+  ),
 );
 
 Cluster.defaultProps = {

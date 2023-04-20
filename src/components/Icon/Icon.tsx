@@ -4,6 +4,7 @@ import type { FC } from 'react';
 import type { Color } from '../../theme/colors.types';
 import type { IconProps } from './Icon.types';
 
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -26,24 +27,30 @@ const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
 const Icon: FC<
   IconProps &
     Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>
-> = ({
-  name,
-  type = IconTypes.ssc,
-  color,
-  className = '',
-  hasFixedWidth = false,
-  ...props
-}) => (
-  <StyledIcon
-    className={cls(CLX_COMPONENT, className)}
-    color={color}
-    fixedWidth={hasFixedWidth}
-    icon={findIconDefinition({
-      iconName: name as IconName,
-      prefix: type as IconPrefix,
-    })}
-    {...props}
-  />
+> = forwardRef(
+  (
+    {
+      name,
+      type = IconTypes.ssc,
+      color,
+      className = '',
+      hasFixedWidth = false,
+      ...props
+    },
+    ref,
+  ) => (
+    <StyledIcon
+      ref={ref}
+      className={cls(CLX_COMPONENT, className)}
+      color={color}
+      fixedWidth={hasFixedWidth}
+      icon={findIconDefinition({
+        iconName: name as IconName,
+        prefix: type as IconPrefix,
+      })}
+      {...props}
+    />
+  ),
 );
 
 export default Icon;
