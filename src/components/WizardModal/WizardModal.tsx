@@ -14,7 +14,7 @@ const BlurredOverlay = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgb(0 0 0 / 25%);
   backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
@@ -28,6 +28,7 @@ const BaseModal = styled(Padbox)`
   border-radius: ${getRadii('default')};
   background-color: ${getColor('neutral.0')};
   overflow: auto;
+
   > * {
     height: 100%;
   }

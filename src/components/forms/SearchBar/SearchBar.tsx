@@ -65,7 +65,6 @@ const ClearButton = styled(IconWrapper)`
 
 const SearchInput = styled(Input)`
   padding-left: ${getSpace(SpaceSizes.lgPlus)};
-
   padding-right: ${({ $isClearable, theme }) =>
     getSpace($isClearable ? SpaceSizes.lgPlus : SpaceSizes.md, { theme })};
 `;

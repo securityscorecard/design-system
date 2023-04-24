@@ -41,7 +41,7 @@ const StyledTextArea = styled.textarea<{
   height: ${prop('height')};
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
-  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
+  box-shadow: inset 0 0 0 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
   ${({ hasMaxLength, theme }) =>
     hasMaxLength
@@ -54,25 +54,26 @@ const StyledTextArea = styled.textarea<{
     isInvalid &&
     css`
       border-color: ${getFormStyle('invalidBorderColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
+      box-shadow: inset 0 0 0 1px ${getFormStyle('invalidBorderColor')};
     `};
 
   &:disabled {
     background: ${getFormStyle('disabledBgColor')};
     border-color: ${getFormStyle('disabledBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBgColor')};
+    box-shadow: inset 0 0 0 1px ${getFormStyle('disabledBgColor')};
   }
 
   &:focus {
     outline: none;
     border-color: ${getFormStyle('focusBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0 0 0 1px ${getFormStyle('focusBorderColor')};
   }
 
   ::placeholder,
   ::-webkit-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
   }
+
   :-ms-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
   }

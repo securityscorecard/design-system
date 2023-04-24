@@ -36,8 +36,7 @@ const Stack = styled.div.attrs((props) => ({
   className: cls(CLX_LAYOUT, props?.className),
 }))<StackProps>`
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
   align-items: ${prop('justify')};
   justify-content: ${prop('align')};
   ${parseResponsiveStyles('gap', 'gap', gapParser)};

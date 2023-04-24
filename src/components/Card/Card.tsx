@@ -15,10 +15,10 @@ const InteractiveCard = css`
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 10px 16px rgb(0 0 0 / 7%);
   }
   &:active {
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 0 4px 2px rgb(0 0 0 / 7%);
   }
 `;
 

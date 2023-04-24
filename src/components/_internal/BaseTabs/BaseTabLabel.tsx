@@ -56,7 +56,6 @@ export const segmentedTabSelected = css`
 
 const segmentedTab = css<BaseLabelProps>`
   line-height: ${getToken('font-action-lineheight')};
-
   height: ${({ theme }) =>
     pipe(
       getToken('size-action-size'),
@@ -65,7 +64,6 @@ const segmentedTab = css<BaseLabelProps>`
     )({ theme })};
   border: 1px solid transparent;
   ${({ $isSelected }) => $isSelected && segmentedTabSelected};
-
   border-radius: ${getRadii('half')};
   color: ${getColor('neutral.900')};
 
@@ -93,7 +91,6 @@ const BaseTabLabel = styled(Padbox).withConfig({
   outline: none;
   text-decoration: none;
   cursor: pointer;
-
   font-size: ${getToken('font-action-size')};
 
   ${({ $isExpanded }) =>

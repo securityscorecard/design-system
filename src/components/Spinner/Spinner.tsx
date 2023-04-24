@@ -26,10 +26,8 @@ const getHorizontalMargin = pipe(
 const Spinner = styled.div.attrs({
   className: cls(CLX_COMPONENT, 'spinner'),
 })<SpinnerProps>`
-  margin-top: ${({ verticalMargin }) => pxToRem(verticalMargin)};
-  margin-bottom: ${({ verticalMargin }) => pxToRem(verticalMargin)};
-  margin-left: ${getHorizontalMargin};
-  margin-right: ${getHorizontalMargin};
+  margin: ${({ verticalMargin }) => pxToRem(verticalMargin)}
+    ${getHorizontalMargin};
   border-radius: 50%;
   width: ${({ width }) => pxToRem(width)};
   height: ${({ height }) => pxToRem(height)};

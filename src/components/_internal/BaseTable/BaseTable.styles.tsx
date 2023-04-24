@@ -29,11 +29,13 @@ export const BaseTableContainer = styled.div`
     outline: 1px solid ${getColor('neutral.400')};
     height: ${pxToRem(20)};
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('primary.500')};
     border: 6px solid ${getColor('neutral.0')};
   }
+
   &::-webkit-scrollbar-track-piece {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('neutral.300')};
@@ -59,7 +61,12 @@ const DsLinkCell = css`
     &:hover {
       color: ${getToken(`link-color-text-secondary-hover`)};
     }
-    &:active {
+    <<<<<<< HEAD ======= &:focus-visible {
+      color: ${getToken(`link-color-text-secondary-hover`)};
+      background-color: ${getToken(`link-color-background-secondary-focus`)};
+    }
+
+    >>>>>>>a0add7f8 (style(css): fix stylelint issues) &:active {
       color: ${getToken(`link-color-text-secondary-active`)};
     }
   }
@@ -95,6 +102,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
       &.is-sticky-left {
         left: 0;
       }
+
       &.is-sticky-right {
         right: 0;
       }
@@ -103,6 +111,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     &.is-odd {
       background: #fcfcfc;
     }
+
     .ds-table-cell-link {
       ${DsLinkCell};
     }
@@ -157,6 +166,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
           display: block;
         }
       }
+
       &:disabled + .ds-table-checkbox-mark {
         border-color: ${getFormStyle('disabledBorderColor')};
         background: ${getFormStyle('disabledBgColor')};

@@ -30,7 +30,6 @@ const StepButton = styled.button`
 
   &:hover {
     cursor: pointer;
-
     ${/* sc-selector */ BulletCircle} {
       fill: ${getColor('primary.50')};
     }

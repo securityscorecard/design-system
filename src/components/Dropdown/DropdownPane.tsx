@@ -55,25 +55,29 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   &[data-popper-placement^='top'] > ${/* sc-selector */ Arrow} {
     bottom: ${({ theme }) =>
       `calc(${getSpace(SpaceSizes.sm, { theme })} / -2)`};
-    &:before {
+
+    &::before {
       transform: rotate(225deg);
     }
   }
   &[data-popper-placement^='bottom'] > ${/* sc-selector */ Arrow} {
     top: ${({ theme }) => `calc(${getSpace(SpaceSizes.sm, { theme })} / -2)`};
-    &:before {
+
+    &::before {
       transform: rotate(45deg);
     }
   }
   &[data-popper-placement^='left'] > ${/* sc-selector */ Arrow} {
     right: ${({ theme }) => `calc(${getSpace(SpaceSizes.sm, { theme })} / -2)`};
-    &:before {
+
+    &::before {
       transform: rotate(135deg);
     }
   }
   &[data-popper-placement^='right'] > ${/* sc-selector */ Arrow} {
     left: ${({ theme }) => `calc(${getSpace(SpaceSizes.sm, { theme })} / -2)`};
-    &:before {
+
+    &::before {
       transform: rotate(315deg);
     }
   }
@@ -82,7 +86,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
     $isElevated &&
     css`
       border-color: transparent;
-      filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.25));
+      filter: drop-shadow(0 0 8px rgb(0 0 0 / 25%));
 
       & > ${/* sc-selector */ Arrow}:before {
         border-color: transparent;

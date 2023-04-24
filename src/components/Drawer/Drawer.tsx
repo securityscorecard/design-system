@@ -49,21 +49,19 @@ const BaseDrawer = styled.div<{ $maxWidth: number }>`
   width: 100%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
   background-color: ${getColor('neutral.0')};
-  box-shadow: -4px 0px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px 0 16px rgb(0 0 0 / 10%);
 `;
 
 const TitleWrapper = styled(Padbox)`
   overflow: hidden;
 `;
 
-/* stylelint-disable */
 const Title = styled(H4)`
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
-/* stylelint-enable */
 
 const Content = styled(Padbox)`
   overflow-y: auto;

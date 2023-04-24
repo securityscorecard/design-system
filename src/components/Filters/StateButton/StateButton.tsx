@@ -44,7 +44,6 @@ const RemoveButton = styled.button`
   position: relative;
   border: none;
   margin: 0;
-
   cursor: ${({ disabled }) => !disabled && 'pointer'};
 
   &:hover {

@@ -23,19 +23,22 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
   border-radius: ${getRadii('default')};
 
   .ssc__control {
-    border: 0px;
+    border: 0;
     box-shadow: none;
   }
+
   & > & {
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
   }
+
   & > *,
   input:not([id^='react-select']) {
     border: none;
     box-shadow: none;
-    border-radius: 0px;
+    border-radius: 0;
   }
+
   & > * {
     ${(props) =>
       props.hasDivider &&
@@ -43,13 +46,15 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
         'borderColor',
       )(props)};`}
   }
+
   & > *:first-child {
     border-radius: ${getRadii('default')} 0 0 ${getRadii('default')} !important;
   }
+
   & > *:last-child,
   & > *:last-child input[type='password'],
   & > *:last-child input[type='search'] {
-    border-right: 0px !important;
+    border-right: 0 !important;
     border-radius: 0 ${getRadii('default')} ${getRadii('default')} 0 !important;
   }
 `;

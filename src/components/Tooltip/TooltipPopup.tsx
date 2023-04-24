@@ -26,8 +26,8 @@ const bottomPlacement = ({ $space, $width }) => css`
     transform: translate(-50%);
     top: -5px;
     left: 50%;
-    border-width: 0 5px 5px 5px;
-    border-color: transparent transparent #fff transparent;
+    border-width: 0 5px 5px;
+    border-color: transparent transparent #fff;
   }
 `;
 
@@ -43,8 +43,8 @@ const topPlacement = ({ $space, $width }) => css`
     transform: translate(-50%);
     bottom: -5px;
     left: 50%;
-    border-width: 5px 5px 0 5px;
-    border-color: #fff transparent transparent transparent;
+    border-width: 5px 5px 0;
+    border-color: #fff transparent transparent;
   }
 `;
 
@@ -102,7 +102,7 @@ const TooltipPopup = styled(Padbox).attrs(() => ({
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 0 5px rgb(0 0 0 / 25%));
   border-radius: ${getRadii('default')};
 
   &::before {
