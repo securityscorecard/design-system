@@ -48,13 +48,7 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
-  <<<<<<< HEAD ======= &:focus-visible,
-  &.focus {
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
-  }
-  >>>>>>>a0add7f8 (style(css): fix stylelint issues) &:disabled,
+  &:disabled,
   &.disabled {
     color: ${getToken(`color-action-text-disabled`)};
     border-color: ${getToken(`color-action-text-disabled`)};
