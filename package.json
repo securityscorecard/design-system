@@ -117,8 +117,8 @@
     "@types/react-table": "^7.7.10",
     "@types/styled-components": "^5.1.24",
     "@types/testing-library__jest-dom": "^5.14.5",
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
-    "@typescript-eslint/parser": "^5.55.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react": "^3.1.0",
     "babel-plugin-styled-components": "^2.0.7",
     "eslint": "^8.11.0",
@@ -170,10 +170,8 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "ts-react-display-name": "^1.2.2",
-    "tslib": "^2.3.1",
-    "typescript": "4.9.5",
-    "typescript-plugin-styled-components": "^2.0.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4",
     "vite": "^4.1.4",
     "vite-plugin-dts": "^2.0.2",
     "vite-require": "^0.2.3"
@@ -192,7 +190,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org",
     "pkgRoot": "dist",
-    "tag": "latest"
+    "tag": "next"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

@@ -28,6 +28,7 @@ export default defineConfig({
         ...commonPlugins,
         dts({
           insertTypesEntry: true,
+          tsConfigFilePath: 'tsconfig.build.json',
         }),
         visualizer({
           filename: 'stats/stat.html',
