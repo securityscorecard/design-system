@@ -67,8 +67,7 @@ const Inline = styled.div.attrs((props) => ({
   className: cls(CLX_LAYOUT, props?.className),
 }))<InlineProps>`
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   justify-content: ${prop('justify')};
   align-items: ${prop('align')};
   ${parseResponsiveStyles('gap', 'gap', gapParser)};

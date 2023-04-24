@@ -37,14 +37,17 @@ const avatar = css`
 const invertedAvatar = css`
   color: ${getColor('neutral.1000')};
   background-color: ${getColor('neutral.0')};
+
   &:hover {
     background-color: ${getColor('primary.50')};
     color: ${getColor('neutral.900')};
   }
+
   &:focus {
     background-color: ${getColor('neutral.0')};
     color: ${getColor('neutral.900')};
   }
+
   &:active {
     background-color: ${getColor('primary.200')};
     color: ${getColor('neutral.900')};

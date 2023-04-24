@@ -30,6 +30,7 @@ const StepButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+
   &:focus {
     outline: 0;
   }

@@ -27,6 +27,7 @@ const Radio = styled.input`
 
   :disabled + ${BaseTabLabel} {
     color: ${getFormStyle('disabledColor')};
+
     &:hover {
       color: ${getFormStyle('disabledColor')};
     }

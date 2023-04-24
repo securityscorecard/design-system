@@ -17,7 +17,6 @@ const RangeWrapper = styled.div`
 `;
 
 const RangeInput = styled.input<RangeInputProps>`
-  /* stylelint-disable property-no-vendor-prefix */
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -36,6 +35,7 @@ const RangeInput = styled.input<RangeInputProps>`
       ${getFormStyle('focusBorderColor')};
     background: ${getFormStyle('bgColor')};
     cursor: pointer;
+
     :hover {
       box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
     }
@@ -72,6 +72,7 @@ const RangeInput = styled.input<RangeInputProps>`
       ${getFormStyle('focusBorderColor')};
     background: ${getFormStyle('bgColor')};
     cursor: pointer;
+
     :hover {
       box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
     }
@@ -96,6 +97,7 @@ const RangeInput = styled.input<RangeInputProps>`
     ::-webkit-slider-thumb {
       box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
     }
+
     ::-moz-range-thumb {
       box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
     }
@@ -107,17 +109,21 @@ const RangeInput = styled.input<RangeInputProps>`
         ${getFormStyle('borderColor')};
       cursor: not-allowed;
     }
+
     ::-moz-range-track {
       background: ${getFormStyle('borderColor')};
     }
+
     ::-moz-range-progress {
       background: ${getFormStyle('borderColor')};
     }
+
     ::-webkit-slider-thumb {
       border: ${getFormStyle('statefulBorderWidth')} solid
         ${getFormStyle('borderColor')};
       pointer-events: none;
     }
+
     ::-webkit-slider-runnable-track {
       background: ${getFormStyle('borderColor')};
     }

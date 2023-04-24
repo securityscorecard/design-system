@@ -9,10 +9,9 @@ const FlexContainer = styled.div<FlexContainerProps>`
   display: flex;
   align-items: ${prop('alignItems')};
   justify-content: ${prop('justifyContent')};
-  flex-direction: ${prop('flexDirection')};
+  flex-flow: ${prop('flexDirection')} ${prop('flexWrap')};
   flex-grow: ${prop('flexGrow')};
   flex-shrink: ${prop('flexShrink')};
-  flex-wrap: ${prop('flexWrap')};
   ${createSpacings};
 `;
 

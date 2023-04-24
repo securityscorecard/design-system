@@ -136,6 +136,7 @@ const ClearButton = styled.button`
   &:focus {
     outline: none;
   }
+
   &:hover,
   &:focus-visible {
     color: ${getFormStyle('hoverIndicatorColor')};

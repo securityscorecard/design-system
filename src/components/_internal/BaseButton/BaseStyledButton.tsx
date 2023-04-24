@@ -29,6 +29,7 @@ const ButtonSolid = css<BaseStyledButtonProps>`
     color: ${getToken(`color-action-text-solid`)};
     background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
+
   &:focus-visible,
   &.focus {
     background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
@@ -57,12 +58,14 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
+
   &:focus-visible,
   &.focus {
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
   }
+
   &:active,
   &.active {
     background-color: ${(p) =>
@@ -96,6 +99,7 @@ const ButtonText = css<BaseStyledButtonProps>`
     color: ${(p) =>
       getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
   }
+
   &:focus-visible,
   &.focus {
     background-color: ${(p) =>
@@ -145,15 +149,14 @@ const BaseStyledButton = styled(Padbox).withConfig({
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
-
   ${({ $margin }) => createMarginSpacing($margin)};
   ${({ $isExpanded }) => $isExpanded && 'width: 100%;'};
   ${({ disabled }) => disabled && 'cursor: not-allowed;'};
   ${({ $isLoading }) => $isLoading && 'cursor: progress;'};
-
   height: ${pipe(getToken('size-action-size'), pxToRem)};
   line-height: 1;
   font-size: ${getToken('font-action-size')};
+
   ${({ $hasOnlyIcon }) =>
     $hasOnlyIcon &&
     css`

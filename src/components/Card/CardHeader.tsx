@@ -31,10 +31,12 @@ export const CardIconButton = styled.button<{
     props.as !== 'div' &&
     css`
       cursor: pointer;
+
       &:hover,
       &:focus-visible {
         background-color: ${getColor('primary.50')};
       }
+
       &:focus {
         outline: none;
       }
@@ -44,7 +46,6 @@ export const CardIconWrapper = styled(Padbox)`
   display: flex;
 `;
 
-/* stylelint-disable */
 const LineTruncation = css<{ numberOfLines: number }>`
   display: -webkit-box;
   -webkit-line-clamp: ${(props) => props.numberOfLines || 'unset'};
@@ -59,8 +60,8 @@ const TitleArea = styled.div`
 const Title = styled(Heading).attrs({
   size: 'h5',
 })`
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   ${LineTruncation}
 `;
 
