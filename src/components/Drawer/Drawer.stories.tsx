@@ -247,9 +247,8 @@ const Subheader = styled(Padbox)`
   margin-top: calc(${getSpace(SpaceSizes.lg)} / -2) !important;
   margin-left: calc(${getSpace(SpaceSizes.lg)} * -1);
   margin-right: calc(${getSpace(SpaceSizes.lg)} * -1);
-
   background: white;
-  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px 2px rgb(0 0 0 / 10%);
 `;
 
 export const WithSubheader: Story = () => (

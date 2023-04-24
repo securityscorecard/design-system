@@ -28,15 +28,18 @@ export default createGlobalStyle`
     font-size: 100%;
     vertical-align: baseline;
   }
+
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
   footer, header, hgroup, main, menu, nav, section {
     display: block;
   }
+
   /* HTML5 hidden-attribute fix for newer browsers */
   *[hidden] {
     display: none;
   }
+
   body {
     background: ${getColor('neutral.0')};
     font-family: ${getFontFamily('base')};
@@ -45,30 +48,37 @@ export default createGlobalStyle`
     line-height: ${pxToRem(BASE_LINE_HEIGHT)};
     color: ${getColor('neutral.900')};
   }
+
   ol, ul {
     list-style: none;
   }
+
   blockquote, q {
     quotes: none;
   }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
+
+  blockquote::before, blockquote::after,
+  q::before, q::after {
     content: '';
     content: none;
   }
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
-  /* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ (2015/04/28)*/
+
+  /* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ (2015/04/28) */
   html {
     box-sizing: border-box;
   }
+
   /* Additional resets */
   a {
     text-decoration: none;
     color: inherit;
   }
+
   button {
     border: none;
     margin: 0;
@@ -81,15 +91,16 @@ export default createGlobalStyle`
     text-align: inherit;
     outline: none;
     line-height: inherit;
-    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-appearance: none;
   }
-  *, *:before, *:after {
+
+  *, *::before, *::after {
     box-sizing: border-box;
 
     /* Disable user select on everything but texts */
     user-select: none;
   }
+
   p, h1, h2, h3, h4, h5, h6, blockquote, pre, ul, ol, li, table, tr, th, td, input, textarea {
     user-select: text;
   }

@@ -45,9 +45,11 @@ const MonthSelector = styled.button`
   border-radius: ${getRadii('default')};
   border: 0;
   background: transparent;
+
   &:hover {
     background-color: ${getColor(ColorTypes.primary50)};
   }
+
   &:hover svg {
     color: ${getColor(ColorTypes.primary600)};
   }
@@ -67,6 +69,7 @@ const MonthIndicator = styled.button`
   background: transparent;
   font-size: ${getFontSize('lg')};
   font-weight: ${getFontWeight('semibold')};
+
   &:hover {
     color: ${getColor(ColorTypes.primary600)};
     background-color: ${getColor(ColorTypes.primary50)};

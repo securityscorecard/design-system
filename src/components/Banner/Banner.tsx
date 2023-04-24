@@ -47,7 +47,7 @@ const StyledButton = styled(Button)<{ $variant?: BannerProps['variant'] }>`
 `;
 
 const ContentWrapper = styled(Padbox)`
-  padding-left: 0rem;
+  padding-left: 0;
 `;
 
 const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`

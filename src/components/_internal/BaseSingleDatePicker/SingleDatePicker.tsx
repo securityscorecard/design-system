@@ -33,8 +33,8 @@ const SingleDatePicker: FC<SingleDatePickerProps> = ({
     <StyledDatePicker className={CLX_COMPONENT}>
       <DatePicker
         ref={pickerRef}
-        calendarClassName="DateRangePicker-calendar"
-        className="DateRangePicker-input"
+        calendarClassName="ds-data-range-picker__calendar"
+        className="ds-data-range-picker__input"
         dateFormat="d MMM, yyyy"
         endDate={endDate}
         maxDate={maxDate}

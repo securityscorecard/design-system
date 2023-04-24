@@ -134,6 +134,7 @@ const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
   ${({ $size }) => switchNotCheckedLabelPaddings[$size]};
   &::after {
     content: '';
@@ -151,9 +152,11 @@ const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
     border-radius: ${getRadii('circle')};
     transition: 0.3s;
   }
+
   &:active::after {
     background-color: ${getFormStyle('hoverIndicatorColor')};
   }
+
   transition: 0.3s;
 `;
 
@@ -176,9 +179,12 @@ const Input = styled.input<{
     background-color: ${getFormStyle('activeBgColor')};
   }
 
-  &:checked + ${Label} {
-    ${LabelContent} {
-      ${({ $size }) => switchCheckedLabelPaddings[$size]};
+  &:checked + ${Label} ${LabelContent} {
+    ${({ $size }) => switchCheckedLabelPaddings[$size]};
+    &::after {
+      background: ${getFormStyle('activeColor')};
+      left: calc(100% - ${pxToRem(2)});
+      transform: translateX(-100%);
     }
   }
 
@@ -187,13 +193,7 @@ const Input = styled.input<{
     background: ${getFormStyle('activeBorderColor')};
     border-color: ${getFormStyle('activeBorderColor')};
   }
-  &:checked + ${Label} {
-    ${/* sc-selector */ LabelContent}::after {
-      background: ${getFormStyle('activeColor')};
-      left: calc(100% - ${pxToRem(2)});
-      transform: translateX(-100%);
-    }
-  }
+
   &:checked:hover + ${Label} {
     background-color: ${getFormStyle('hoverBgColor')};
   }

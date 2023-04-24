@@ -34,20 +34,21 @@ export const BaseTableContainer = styled.div`
     outline: 1px solid ${getColor('neutral.400')};
     height: ${pxToRem(20)};
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('neutral.600')};
     border: 6px solid ${getColor('neutral.200')};
   }
+
   &::-webkit-scrollbar-track-piece {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('neutral.300')};
     border: 6px solid ${getColor('neutral.200')};
   }
+
   &:focus-visible {
-    outline-color: ${getColor('primary.500')};
-    outline-style: solid;
-    outline-width: 2px;
+    outline: ${getColor('primary.500')} solid 2px;
   }
 `;
 
@@ -73,10 +74,12 @@ const DsLinkCell = css`
     &:hover {
       color: ${getToken(`link-color-text-secondary-hover`)};
     }
+
     &:focus-visible {
       color: ${getToken(`link-color-text-secondary-hover`)};
       background-color: ${getToken(`link-color-background-secondary-focus`)};
     }
+
     &:active {
       color: ${getToken(`link-color-text-secondary-active`)};
     }
@@ -117,6 +120,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
       &.is-sticky-left {
         left: 0;
       }
+
       &.is-sticky-right {
         right: 0;
       }
@@ -125,6 +129,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     &.is-odd {
       background: #fcfcfc;
     }
+
     .ds-table-cell-link {
       ${DsLinkCell};
     }
@@ -180,6 +185,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
           display: block;
         }
       }
+
       &:disabled + .ds-table-checkbox-mark {
         border-color: ${getFormStyle('disabledBorderColor')};
         background: ${getFormStyle('disabledBgColor')};

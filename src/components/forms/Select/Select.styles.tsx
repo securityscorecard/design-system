@@ -453,6 +453,7 @@ const CreateNewOption = styled.div.attrs<{ variant: 'text'; color: 'primary' }>(
   &:hover {
     color: ${getToken('color-action-primary-hover')};
   }
+
   &:active {
     color: ${getToken('color-action-primary-active')};
   }
