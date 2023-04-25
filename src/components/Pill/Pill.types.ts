@@ -1,4 +1,5 @@
 import type {
+  ComponentPropsWithRef,
   ElementType,
   EventHandler,
   HTMLAttributes,
@@ -16,7 +17,7 @@ export interface StyledPillWrapperProps {
   $isClickable: boolean;
 }
 
-export interface PillWrapperProps extends HTMLAttributes<HTMLElement> {
+export interface PillWrapperProps extends ComponentPropsWithRef<'span'> {
   /**
    * Styling variant of the pill
    */

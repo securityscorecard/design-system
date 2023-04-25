@@ -1,4 +1,3 @@
-import type { HTMLAttributes } from 'react';
 import type { ControlledDropdownProps } from './Dropdown.types';
 
 import { forwardRef, useState } from 'react';
@@ -14,7 +13,7 @@ import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 const ControlledDropdown = forwardRef<
   HTMLDivElement,
-  ControlledDropdownProps & HTMLAttributes<HTMLDivElement>
+  ControlledDropdownProps & React.ComponentPropsWithRef<'div'>
 >(
   (
     {

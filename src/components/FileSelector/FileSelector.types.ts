@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import type { DropzoneOptions } from 'react-dropzone';
 import type { FileSelectorSizes } from './FileSelector.enums';
 
@@ -49,7 +49,7 @@ type CustomFileSelectorProps = {
   onFilesRejected?: DropzoneOptions['onDropRejected'];
 };
 
-type BaseFileSelectorProps = HTMLAttributes<HTMLDivElement> &
+type BaseFileSelectorProps = ComponentPropsWithoutRef<'div'> &
   Omit<
     DropzoneOptions,
     | 'disabled'

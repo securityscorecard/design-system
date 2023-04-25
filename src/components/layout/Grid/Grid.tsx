@@ -1,5 +1,5 @@
 import type { Property } from 'csstype';
-import type { FC, HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef, FC } from 'react';
 import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled, { css } from 'styled-components';
@@ -19,7 +19,7 @@ interface GridRootProps {
   $cols?: number;
 }
 
-export interface GridProps extends HTMLAttributes<HTMLElement> {
+export interface GridProps extends ComponentPropsWithRef<'div'> {
   /**
    * Whitespace around each child of the Inline
    */

@@ -1,6 +1,6 @@
-import type { InputHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
-export interface RangeProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface RangeProps extends ComponentPropsWithRef<'input'> {
   /**
    * Element id to retreive value by external components
    */
@@ -34,7 +34,7 @@ export interface RangeProps extends InputHTMLAttributes<HTMLInputElement> {
   step?: number;
   className?: string;
 }
-export interface RangeInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface RangeInputProps extends ComponentPropsWithRef<'input'> {
   isInvalid?: boolean;
   isDisabled?: boolean;
   isProgressRight?: boolean;

@@ -1,5 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
-import type { InputHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import type { InputProps } from './Input.types';
 
 import Input from './Input';
@@ -29,9 +29,9 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<
-  InputProps & InputHTMLAttributes<HTMLInputElement>
-> = (args) => <Input {...args} aria-label="Input" />;
+export const Playground: Story<InputProps & ComponentPropsWithRef<'input'>> = (
+  args,
+) => <Input {...args} aria-label="Input" />;
 Playground.args = { type: 'text' };
 Playground.parameters = {
   screenshot: { skip: true },
