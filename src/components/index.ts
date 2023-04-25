@@ -20,7 +20,6 @@ export * from './FullscreenModal';
 export * from './HexGrade';
 export * from './Icon';
 export * from './Modal';
-export * from './Nav';
 export * from './Pagination';
 export * from './Pill';
 export * from './SemanticModal';
