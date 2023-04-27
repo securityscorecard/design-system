@@ -2,6 +2,7 @@ import type { FC, ReactText } from 'react';
 import type { TabsProps } from './Tabs.types';
 
 import { equals } from 'ramda';
+import { forwardRef } from 'react';
 
 import { Inline } from '../layout';
 import { TabVariants } from './Tabs.enums';
@@ -21,46 +22,52 @@ export const { useContext: useTabsContext, Provider } = createCtx<{
   '"useTabsContext" must be inside a "TabsContext" with a value',
 );
 
-const Tabs: FC<TabsProps> = ({
-  selectedValue,
-  selectedPatternMatcher = equals,
-  children,
-  onSelectTab,
-  variant = TabVariants.underline,
-  isExpanded = false,
-}) => (
-  <Provider
-    value={{
-      selectedPatternMatcher,
+const Tabs: FC<TabsProps> = forwardRef(
+  (
+    {
       selectedValue,
-      selectTab: onSelectTab,
-      isExpanded,
-      variant,
-    }}
-  >
-    <BaseTabsWrapper
-      $isExpanded={isExpanded}
-      $variant={variant}
-      className={CLX_COMPONENT}
-      paddingSize={
-        variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
-      }
+      selectedPatternMatcher = equals,
+      children,
+      onSelectTab,
+      variant = TabVariants.underline,
+      isExpanded = false,
+    },
+    ref,
+  ) => (
+    <Provider
+      value={{
+        selectedPatternMatcher,
+        selectedValue,
+        selectTab: onSelectTab,
+        isExpanded,
+        variant,
+      }}
     >
-      <Inline
-        gap={
-          variant === TabVariants.segmented
-            ? SpaceSizes.sm
-            : variant === TabVariants.underline
-            ? SpaceSizes.none
-            : SpaceSizes.lg
+      <BaseTabsWrapper
+        ref={ref}
+        $isExpanded={isExpanded}
+        $variant={variant}
+        className={CLX_COMPONENT}
+        paddingSize={
+          variant === TabVariants.segmented ? SpaceSizes.xs : SpaceSizes.none
         }
-        role="tablist"
-        stretch={isExpanded ? 'all' : 0}
       >
-        {children}
-      </Inline>
-    </BaseTabsWrapper>
-  </Provider>
+        <Inline
+          gap={
+            variant === TabVariants.segmented
+              ? SpaceSizes.sm
+              : variant === TabVariants.underline
+              ? SpaceSizes.none
+              : SpaceSizes.lg
+          }
+          role="tablist"
+          stretch={isExpanded ? 'all' : 0}
+        >
+          {children}
+        </Inline>
+      </BaseTabsWrapper>
+    </Provider>
+  ),
 );
 
 export default Tabs;

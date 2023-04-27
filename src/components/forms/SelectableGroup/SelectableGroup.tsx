@@ -2,7 +2,7 @@
 import type { ChangeEvent, FC } from 'react';
 import type { Option, SelectableGroupProps } from './SelectableGroup.types';
 
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
 import { useId } from '@react-aria/utils';
@@ -73,82 +73,95 @@ const getNextValue = (value: string, currentValues: string[]) => {
   return currentValues.filter((cv) => cv !== value);
 };
 
-const SelectableGroup: FC<SelectableGroupProps> = ({
-  isMulti = false,
-  onChange = noop,
-  value: valueFromProps,
-  defaultValue: defaultValueFromProps,
-  options,
-  name,
-  className,
-  ...props
-}) => {
-  const isControlled = isNotUndefined(valueFromProps);
-  const defaultValue = defaultValueFromProps || (isMulti ? [] : '');
+const SelectableGroup: FC<SelectableGroupProps> = forwardRef<
+  HTMLDivElement,
+  SelectableGroupProps
+>(
+  (
+    {
+      isMulti = false,
+      onChange = noop,
+      value: valueFromProps,
+      defaultValue: defaultValueFromProps,
+      options,
+      name,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const isControlled = isNotUndefined(valueFromProps);
+    const defaultValue = defaultValueFromProps || (isMulti ? [] : '');
 
-  const id = useId();
-  const [internalValue, setInternalValue] = useState<string | string[]>(
-    defaultValue,
-  );
-  const value = isControlled ? valueFromProps : internalValue;
+    const id = useId();
+    const [internalValue, setInternalValue] = useState<string | string[]>(
+      defaultValue,
+    );
+    const value = isControlled ? valueFromProps : internalValue;
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = isMulti
-      ? getNextValue(e.target.value, value as string[])
-      : e.target.value;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = isMulti
+        ? getNextValue(e.target.value, value as string[])
+        : e.target.value;
 
-    onChange(newValue);
+      onChange(newValue);
 
-    if (!isControlled) {
-      setInternalValue(newValue);
-    }
-  };
+      if (!isControlled) {
+        setInternalValue(newValue);
+      }
+    };
 
-  const sortedOptions = useDeepCompareMemo<Option[]>(
-    () => sortOptions(options),
-    [options],
-  );
+    const sortedOptions = useDeepCompareMemo<Option[]>(
+      () => sortOptions(options),
+      [options],
+    );
 
-  return (
-    <Cluster gap="sm" {...props} className={cls(CLX_COMPONENT, className)}>
-      {sortedOptions.map(
-        ({ value: optionValue, label, isDisabled = false }) => {
-          const optionId = `${optionValue}-${id}`;
-          const optionProps = isMulti
-            ? {
-                checked: value.indexOf(optionValue) !== -1,
-                name: optionValue,
-                type: 'checkbox',
-              }
-            : {
-                checked: value === optionValue,
-                name,
-                type: 'radio',
-              };
+    return (
+      <Cluster
+        ref={ref}
+        gap="sm"
+        {...props}
+        className={cls(CLX_COMPONENT, className)}
+      >
+        {sortedOptions.map(
+          ({ value: optionValue, label, isDisabled = false }) => {
+            const optionId = `${optionValue}-${id}`;
+            const optionProps = isMulti
+              ? {
+                  checked: value.indexOf(optionValue) !== -1,
+                  name: optionValue,
+                  type: 'checkbox',
+                }
+              : {
+                  checked: value === optionValue,
+                  name,
+                  type: 'radio',
+                };
 
-          return (
-            <div key={optionId}>
-              <Input
-                disabled={isDisabled}
-                id={optionId}
-                value={optionValue}
-                onChange={handleChange}
-                {...optionProps}
-              />
-              <Label
-                as="label"
-                htmlFor={optionId}
-                paddingSize="md"
-                paddingType="squish"
-              >
-                {label}
-              </Label>
-            </div>
-          );
-        },
-      )}
-    </Cluster>
-  );
-};
+            return (
+              <div key={optionId}>
+                <Input
+                  disabled={isDisabled}
+                  id={optionId}
+                  value={optionValue}
+                  onChange={handleChange}
+                  {...optionProps}
+                />
+                <Label
+                  as="label"
+                  htmlFor={optionId}
+                  paddingSize="md"
+                  paddingType="squish"
+                >
+                  {label}
+                </Label>
+              </div>
+            );
+          },
+        )}
+      </Cluster>
+    );
+  },
+);
 
 export default SelectableGroup;

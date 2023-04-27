@@ -5,6 +5,7 @@ import type { RadioProps } from './Radio.types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
+import { forwardRef } from 'react';
 
 import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
@@ -94,33 +95,39 @@ const RadioInput = styled.input<TogglingInputProps>`
     `}
 `;
 
-const Radio: FC<RadioProps> = ({
-  name,
-  radioId,
-  label,
-  isDisabled = false,
-  isInvalid = false,
-  className,
-  ...props
-}) => {
-  const hasLabel = isNotUndefined(label);
+const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
+  (
+    {
+      name,
+      radioId,
+      label,
+      isDisabled = false,
+      isInvalid = false,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const hasLabel = isNotUndefined(label);
 
-  return (
-    <RadioContainer>
-      <RadioInput
-        className={cls(CLX_COMPONENT, className)}
-        disabled={isDisabled}
-        id={radioId}
-        isInvalid={isInvalid}
-        name={name}
-        type="radio"
-        {...props}
-      />
-      <RadioLabel hasLabel={hasLabel} htmlFor={radioId}>
-        {label}
-      </RadioLabel>
-    </RadioContainer>
-  );
-};
+    return (
+      <RadioContainer>
+        <RadioInput
+          ref={ref}
+          className={cls(CLX_COMPONENT, className)}
+          disabled={isDisabled}
+          id={radioId}
+          isInvalid={isInvalid}
+          name={name}
+          type="radio"
+          {...props}
+        />
+        <RadioLabel hasLabel={hasLabel} htmlFor={radioId}>
+          {label}
+        </RadioLabel>
+      </RadioContainer>
+    );
+  },
+);
 
 export default Radio;

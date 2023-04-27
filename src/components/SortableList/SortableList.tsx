@@ -10,6 +10,7 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
+import { forwardRef } from 'react';
 import {
   SortableContext,
   arrayMove,
@@ -34,71 +35,83 @@ const SortableListRoot = styled.div<{
     isNotUndefined($maxHeight) && pxToRem($maxHeight)};
 `;
 
-const SortableList: FC<SortableListProps> = ({
-  items,
-  labels,
-  renderItem,
-  maxHeight,
-  onOrderChange,
-  onDragStart,
-  onDragOver,
-  onDragEnd,
-  onDragCancel,
-}) => {
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(TouchSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
+const SortableList: FC<SortableListProps> = forwardRef<
+  HTMLDivElement,
+  SortableListProps
+>(
+  (
+    {
+      items,
+      labels,
+      renderItem,
+      maxHeight,
+      onOrderChange,
+      onDragStart,
+      onDragOver,
+      onDragEnd,
+      onDragCancel,
+    },
+    ref,
+  ) => {
+    const sensors = useSensors(
+      useSensor(PointerSensor),
+      useSensor(TouchSensor),
+      useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+      }),
+    );
 
-  const handleDragEnd = (event) => {
-    if (isNotUndefined(onDragEnd)) {
-      onDragEnd(event);
-    }
+    const handleDragEnd = (event) => {
+      if (isNotUndefined(onDragEnd)) {
+        onDragEnd(event);
+      }
 
-    const { active, over } = event;
+      const { active, over } = event;
 
-    if (isNotUndefined(onOrderChange) && active.id !== over.id) {
-      const oldIndex = items.indexOf(active.id);
-      const newIndex = items.indexOf(over.id);
-      onOrderChange(arrayMove(items, oldIndex, newIndex));
-    }
-  };
+      if (isNotUndefined(onOrderChange) && active.id !== over.id) {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+        onOrderChange(arrayMove(items, oldIndex, newIndex));
+      }
+    };
 
-  return (
-    <SortableListRoot $maxHeight={maxHeight} className={CLX_COMPONENT}>
-      <DndContext
-        collisionDetection={closestCenter}
-        modifiers={[restrictToVerticalAxis]}
-        sensors={sensors}
-        onDragCancel={onDragCancel}
-        onDragEnd={handleDragEnd}
-        onDragOver={onDragOver}
-        onDragStart={onDragStart}
+    return (
+      <SortableListRoot
+        ref={ref}
+        $maxHeight={maxHeight}
+        className={CLX_COMPONENT}
       >
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          <Stack
-            as="ul"
-            gap={SpaceSizes.xs}
-            style={{
-              paddingInlineStart: 0, // reset ul user agent styles, :facepalm: core-ui
-            }}
-          >
-            {items.map((item) => (
-              <SortableItem
-                key={item}
-                id={item}
-                label={labels?.[item] || item}
-                renderItem={renderItem}
-              />
-            ))}
-          </Stack>
-        </SortableContext>
-      </DndContext>
-    </SortableListRoot>
-  );
-};
+        <DndContext
+          collisionDetection={closestCenter}
+          modifiers={[restrictToVerticalAxis]}
+          sensors={sensors}
+          onDragCancel={onDragCancel}
+          onDragEnd={handleDragEnd}
+          onDragOver={onDragOver}
+          onDragStart={onDragStart}
+        >
+          <SortableContext items={items} strategy={verticalListSortingStrategy}>
+            <Stack
+              as="ul"
+              gap={SpaceSizes.xs}
+              style={{
+                paddingInlineStart: 0, // reset ul user agent styles, :facepalm: core-ui
+              }}
+            >
+              {items.map((item) => (
+                <SortableItem
+                  key={item}
+                  id={item}
+                  label={labels?.[item] || item}
+                  renderItem={renderItem}
+                />
+              ))}
+            </Stack>
+          </SortableContext>
+        </DndContext>
+      </SortableListRoot>
+    );
+  },
+);
 
 export default SortableList;

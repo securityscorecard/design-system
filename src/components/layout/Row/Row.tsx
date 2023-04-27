@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { Flex } from 'reflexbox';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
@@ -14,14 +12,10 @@ const getRowMargin = pipe(
   pxToRem,
 );
 
-const StyledRow = styled(Flex).attrs((props) => ({
+const Row = styled(Flex).attrs((props) => ({
   mx: getRowMargin(props),
   className: cls(CLX_LAYOUT, props?.className),
   ...props,
 }))``;
-
-const Row: FC = ({ children }) => (
-  <StyledRow flexWrap="wrap">{children}</StyledRow>
-);
 
 export default Row;

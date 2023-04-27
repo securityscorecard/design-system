@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import { omit } from 'ramda';
 import cls from 'classnames';
+import { forwardRef } from 'react';
 
 import { SpaceSizes } from '../../theme/space.enums';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -72,68 +73,127 @@ const DropTextWrapper = styled(Padbox)`
     `}
 `;
 
-const FileSelector = ({
-  buttonLabel = 'Upload',
-  dropLabel = 'or drop files here',
-  isClickDisabled = false,
-  isDragDisabled = false,
-  isDisabled = false,
-  hasError = false,
-  size = FileSelectorSizes.fill,
-  multiple,
-  accept,
-  minFileSize,
-  maxFileSize,
-  maxFiles,
-  onFilesDrop,
-  onFilesAccepted,
-  onFilesRejected,
-  onFileDialogCancel,
-  onFileDialogOpen,
-  onDragEnter,
-  onDragOver,
-  onDragLeave,
-  validator,
-  className,
-  ...props
-}: FileSelectorProps) => {
-  const { error } = useLogger('FileSelector');
-  const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({
-    disabled: isDisabled,
-    noClick: isClickDisabled,
-    noDrag: isDragDisabled,
-    multiple,
-    accept,
-    minSize: minFileSize,
-    maxSize: maxFileSize,
-    maxFiles,
-    onDrop: onFilesDrop,
-    onDropAccepted: onFilesAccepted,
-    onDropRejected: onFilesRejected,
-    onFileDialogCancel,
-    onFileDialogOpen,
-    onDragEnter,
-    onDragOver,
-    onDragLeave,
-    validator,
-  });
-  const sizes =
-    size === FileSelectorSizes.area && 'width' in props && 'height' in props
-      ? {
-          width: props.width,
-          height: props.height,
-        }
-      : {};
-  const passedProps = omit(['width', 'height'], props);
+const FileSelector = forwardRef<HTMLInputElement, FileSelectorProps>(
+  (
+    {
+      buttonLabel = 'Upload',
+      dropLabel = 'or drop files here',
+      isClickDisabled = false,
+      isDragDisabled = false,
+      isDisabled = false,
+      hasError = false,
+      size = FileSelectorSizes.fill,
+      multiple,
+      accept,
+      minFileSize,
+      maxFileSize,
+      maxFiles,
+      onFilesDrop,
+      onFilesAccepted,
+      onFilesRejected,
+      onFileDialogCancel,
+      onFileDialogOpen,
+      onDragEnter,
+      onDragOver,
+      onDragLeave,
+      validator,
+      className,
+      ...props
+    }: FileSelectorProps,
+    ref,
+  ) => {
+    const { error } = useLogger('FileSelector');
+    const { getRootProps, getInputProps, isDragActive, isFocused } =
+      useDropzone({
+        disabled: isDisabled,
+        noClick: isClickDisabled,
+        noDrag: isDragDisabled,
+        multiple,
+        accept,
+        minSize: minFileSize,
+        maxSize: maxFileSize,
+        maxFiles,
+        onDrop: onFilesDrop,
+        onDropAccepted: onFilesAccepted,
+        onDropRejected: onFilesRejected,
+        onFileDialogCancel,
+        onFileDialogOpen,
+        onDragEnter,
+        onDragOver,
+        onDragLeave,
+        validator,
+      });
+    const sizes =
+      size === FileSelectorSizes.area && 'width' in props && 'height' in props
+        ? {
+            width: props.width,
+            height: props.height,
+          }
+        : {};
+    const passedProps = omit(['width', 'height'], props);
 
-  if (isClickDisabled && isDragDisabled) {
-    error(
-      'Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
-    );
-    return null;
-  }
+    if (isClickDisabled && isDragDisabled) {
+      error(
+        'Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
+      );
+      return null;
+    }
 
-  if (isClickDisabled) {
+    if (isClickDisabled) {
+      return (
+        <FileSelectorWrapper
+          {...getRootProps({
+            $isDragActive: isDragActive,
+            $isFocused: isFocused,
+            $hasError: hasError,
+            $isDisabled: isDisabled,
+            $size: size,
+            $width: sizes?.width,
+            $height: sizes?.height,
+            paddingSize: SpaceSizes.sm,
+            ...passedProps,
+          })}
+          className={cls(CLX_COMPONENT, className)}
+        >
+          <input ref={ref} {...getInputProps()} />
+          <DropTextWrapper
+            $isCentered={size === FileSelectorSizes.area}
+            paddingSize={SpaceSizes.sm}
+            paddingType={PaddingTypes.squish}
+          >
+            <Text
+              size={TextSizes.md}
+              variant={
+                isDisabled ? TextVariants.secondary : TextVariants.primary
+              }
+            >
+              {dropLabel}
+            </Text>
+          </DropTextWrapper>
+        </FileSelectorWrapper>
+      );
+    }
+
+    if (isDragDisabled) {
+      return (
+        <div className={cls(CLX_COMPONENT, className)}>
+          <input ref={ref} {...getInputProps()} />
+          <ExtendableButton
+            {...getRootProps({
+              ...passedProps,
+              iconName: SSCIconNames.upload,
+              isDisabled,
+              isExpanded: size === FileSelectorSizes.fill,
+              variant: ButtonVariants.outline,
+              type: 'button',
+            })}
+          >
+            {buttonLabel}
+          </ExtendableButton>
+        </div>
+      );
+    }
+
     return (
       <FileSelectorWrapper
         {...getRootProps({
@@ -146,92 +206,43 @@ const FileSelector = ({
           $height: sizes?.height,
           paddingSize: SpaceSizes.sm,
           ...passedProps,
+          role: 'presentation',
         })}
         className={cls(CLX_COMPONENT, className)}
       >
-        <input {...getInputProps()} />
-        <DropTextWrapper
-          $isCentered={size === FileSelectorSizes.area}
-          paddingSize={SpaceSizes.sm}
-          paddingType={PaddingTypes.squish}
+        <input ref={ref} {...getInputProps()} />
+        <Cluster
+          align="center"
+          gap={SpaceSizes.sm}
+          justify={size === FileSelectorSizes.area ? 'center' : 'flex-start'}
         >
-          <Text
-            size={TextSizes.md}
-            variant={isDisabled ? TextVariants.secondary : TextVariants.primary}
+          <div>
+            <ExtendableButton
+              iconName={SSCIconNames.upload}
+              isDisabled={isDisabled}
+              type="button"
+              variant={ButtonVariants.outline}
+            >
+              {buttonLabel}
+            </ExtendableButton>
+          </div>
+          <DropTextWrapper
+            paddingSize={SpaceSizes.sm}
+            paddingType={PaddingTypes.squish}
           >
-            {dropLabel}
-          </Text>
-        </DropTextWrapper>
+            <Text
+              size={TextSizes.md}
+              variant={
+                isDisabled ? TextVariants.secondary : TextVariants.primary
+              }
+            >
+              {dropLabel}
+            </Text>
+          </DropTextWrapper>
+        </Cluster>
       </FileSelectorWrapper>
     );
-  }
-
-  if (isDragDisabled) {
-    return (
-      <div className={cls(CLX_COMPONENT, className)}>
-        <input {...getInputProps()} />
-        <ExtendableButton
-          {...getRootProps({
-            ...passedProps,
-            iconName: SSCIconNames.upload,
-            isDisabled,
-            isExpanded: size === FileSelectorSizes.fill,
-            variant: ButtonVariants.outline,
-            type: 'button',
-          })}
-        >
-          {buttonLabel}
-        </ExtendableButton>
-      </div>
-    );
-  }
-
-  return (
-    <FileSelectorWrapper
-      {...getRootProps({
-        $isDragActive: isDragActive,
-        $isFocused: isFocused,
-        $hasError: hasError,
-        $isDisabled: isDisabled,
-        $size: size,
-        $width: sizes?.width,
-        $height: sizes?.height,
-        paddingSize: SpaceSizes.sm,
-        ...passedProps,
-        role: 'presentation',
-      })}
-      className={cls(CLX_COMPONENT, className)}
-    >
-      <input {...getInputProps()} />
-      <Cluster
-        align="center"
-        gap={SpaceSizes.sm}
-        justify={size === FileSelectorSizes.area ? 'center' : 'flex-start'}
-      >
-        <div>
-          <ExtendableButton
-            iconName={SSCIconNames.upload}
-            isDisabled={isDisabled}
-            type="button"
-            variant={ButtonVariants.outline}
-          >
-            {buttonLabel}
-          </ExtendableButton>
-        </div>
-        <DropTextWrapper
-          paddingSize={SpaceSizes.sm}
-          paddingType={PaddingTypes.squish}
-        >
-          <Text
-            size={TextSizes.md}
-            variant={isDisabled ? TextVariants.secondary : TextVariants.primary}
-          >
-            {dropLabel}
-          </Text>
-        </DropTextWrapper>
-      </Cluster>
-    </FileSelectorWrapper>
-  );
-};
+  },
+);
 
 export default FileSelector;

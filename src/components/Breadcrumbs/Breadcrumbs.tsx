@@ -1,4 +1,4 @@
-import type { FC, MouseEvent, ReactElement, ReactNode } from 'react';
+import type { MouseEvent, ReactElement, ReactNode } from 'react';
 import type { BreadcrumbsProps } from './Breadcrumbs.types';
 import type { ActionKinds } from '../../types/action.types';
 
@@ -6,7 +6,7 @@ import { slice } from 'ramda';
 import styled from 'styled-components';
 import { isNotNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
-import { Children, isValidElement } from 'react';
+import { Children, forwardRef, isValidElement } from 'react';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
@@ -93,47 +93,50 @@ const renderItemsBeforeAndAfter = (
   ];
 };
 
-const Breadcrumbs: FC<BreadcrumbsProps> = ({ children, className }) => {
-  const allDropdownActions = slice(
-    itemsBeforeCollapse,
-    -Math.abs(itemsAfterCollapse),
-  )(
-    Children.toArray(children).map((breadcrumbItem) => {
-      if (!isValidElement(breadcrumbItem)) {
-        return null;
-      }
-      return {
-        label: breadcrumbItem.props.children,
-        name: breadcrumbItem.props.children,
-        ...(isNotNilOrEmpty(breadcrumbItem.props.to) && {
-          to: breadcrumbItem.props.to,
-        }),
-        ...(isNotNilOrEmpty(breadcrumbItem.props.href) && {
-          href: breadcrumbItem.props.href,
-        }),
-      };
-    }),
-  );
+const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
+  ({ children, className }, ref) => {
+    const allDropdownActions = slice(
+      itemsBeforeCollapse,
+      -Math.abs(itemsAfterCollapse),
+    )(
+      Children.toArray(children).map((breadcrumbItem) => {
+        if (!isValidElement(breadcrumbItem)) {
+          return null;
+        }
+        return {
+          label: breadcrumbItem.props.children,
+          name: breadcrumbItem.props.children,
+          ...(isNotNilOrEmpty(breadcrumbItem.props.to) && {
+            to: breadcrumbItem.props.to,
+          }),
+          ...(isNotNilOrEmpty(breadcrumbItem.props.href) && {
+            href: breadcrumbItem.props.href,
+          }),
+        };
+      }),
+    );
 
-  return (
-    <BreadcrumbsWrapper
-      aria-label="Breadcrumb"
-      className={cls(CLX_COMPONENT, className)}
-    >
-      <InlineOrderedList
-        align="center"
-        as="ol"
-        gap={SpaceSizes.xs}
-        justify="center"
+    return (
+      <BreadcrumbsWrapper
+        ref={ref}
+        aria-label="Breadcrumb"
+        className={cls(CLX_COMPONENT, className)}
       >
-        {insertSeparators(
-          allDropdownActions.length < 2
-            ? children
-            : renderItemsBeforeAndAfter(children, allDropdownActions),
-        )}
-      </InlineOrderedList>
-    </BreadcrumbsWrapper>
-  );
-};
+        <InlineOrderedList
+          align="center"
+          as="ol"
+          gap={SpaceSizes.xs}
+          justify="center"
+        >
+          {insertSeparators(
+            allDropdownActions.length < 2
+              ? children
+              : renderItemsBeforeAndAfter(children, allDropdownActions),
+          )}
+        </InlineOrderedList>
+      </BreadcrumbsWrapper>
+    );
+  },
+);
 
 export default Breadcrumbs;

@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { CalloutProps } from './Callout.types';
 
 import styled from 'styled-components';
+import { forwardRef } from 'react';
 
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
@@ -29,24 +30,23 @@ const Container = styled(Padbox)`
   border-radius: ${getRadii('default')};
 `;
 
-const Callout: FC<CalloutProps> = ({
-  children,
-  icon = SSCIconNames.lightbulb,
-}) => (
-  <Container className={CLX_COMPONENT} paddingSize={SpaceSizes.md}>
-    <Inline gap={SpaceSizes.md}>
-      <IconContainer>
-        {typeof icon === 'string' ? (
-          <Icon color={ColorTypes.neutral0} name={icon} />
-        ) : (
-          icon
-        )}
-      </IconContainer>
-      <Text size={TextSizes.lg} style={{ alignSelf: 'center' }}>
-        {children}
-      </Text>
-    </Inline>
-  </Container>
+const Callout: FC<CalloutProps> = forwardRef<HTMLSpanElement, CalloutProps>(
+  ({ children, icon = SSCIconNames.lightbulb }, ref) => (
+    <Container ref={ref} className={CLX_COMPONENT} paddingSize={SpaceSizes.md}>
+      <Inline gap={SpaceSizes.md}>
+        <IconContainer>
+          {typeof icon === 'string' ? (
+            <Icon color={ColorTypes.neutral0} name={icon} />
+          ) : (
+            icon
+          )}
+        </IconContainer>
+        <Text size={TextSizes.lg} style={{ alignSelf: 'center' }}>
+          {children}
+        </Text>
+      </Inline>
+    </Container>
+  ),
 );
 
 export default Callout;

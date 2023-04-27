@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { SignalProps } from './Signal.types';
 
 import { prop } from 'ramda';
+import { forwardRef } from 'react';
 import { isNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -59,40 +60,37 @@ const kinds = {
   },
 };
 
-const Signal: FC<SignalProps> = ({
-  kind,
-  size = 16,
-  title = '',
-  className,
-  ...props
-}) => {
-  if (isNilOrEmpty(kind)) return null;
+const Signal: FC<SignalProps> = forwardRef<SVGSVGElement, SignalProps>(
+  ({ kind, size = 16, title = '', className, ...props }, ref) => {
+    if (isNilOrEmpty(kind)) return null;
 
-  const { color, paths } = prop(kind.toLowerCase())(kinds);
+    const { color, paths } = prop(kind.toLowerCase())(kinds);
 
-  return (
-    <svg
-      className={cls(CLX_COMPONENT, className)}
-      height={size}
-      viewBox="0 0 16 16"
-      width={size}
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <title>{title}</title>
-      <circle cx="8" cy="8" fill={color} r="8" />
-      <g>
-        {paths.map((path, key) => (
-          <path
-            // eslint-disable-next-line react/no-array-index-key
-            key={`${kind}-icon-${key}`}
-            d={path}
-            fill={colors.neutral[0]}
-          />
-        ))}
-      </g>
-    </svg>
-  );
-};
+    return (
+      <svg
+        ref={ref}
+        className={cls(CLX_COMPONENT, className)}
+        height={size}
+        viewBox="0 0 16 16"
+        width={size}
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        <title>{title}</title>
+        <circle cx="8" cy="8" fill={color} r="8" />
+        <g>
+          {paths.map((path, key) => (
+            <path
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${kind}-icon-${key}`}
+              d={path}
+              fill={colors.neutral[0]}
+            />
+          ))}
+        </g>
+      </svg>
+    );
+  },
+);
 
 export default Signal;

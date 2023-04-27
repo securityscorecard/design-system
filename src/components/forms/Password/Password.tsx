@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { PasswordProps } from './Password.types';
 
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import styled from 'styled-components';
 import cls from 'classnames';
 
@@ -41,40 +41,46 @@ const ToggleButton = styled.button`
   justify-content: center;
 `;
 
-const Password: FC<PasswordProps> = ({
-  isInvalid = false,
-  isDisabled = false,
-  defaultIsRevealed = false,
-  className,
-  ...props
-}) => {
-  const [isPasswordRevealed, setIsPasswordRevealed] =
-    useState(defaultIsRevealed);
+const Password: FC<PasswordProps> = forwardRef(
+  (
+    {
+      isInvalid = false,
+      isDisabled = false,
+      defaultIsRevealed = false,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const [isPasswordRevealed, setIsPasswordRevealed] =
+      useState(defaultIsRevealed);
 
-  const toggleVisibility = () => {
-    setIsPasswordRevealed(!isPasswordRevealed);
-  };
+    const toggleVisibility = () => {
+      setIsPasswordRevealed(!isPasswordRevealed);
+    };
 
-  return (
-    <PasswordWrapper className={cls(CLX_COMPONENT, className)}>
-      <PasswordInput
-        isDisabled={isDisabled}
-        isInvalid={isInvalid}
-        {...props}
-        type={isPasswordRevealed ? 'text' : 'password'}
-      />
-      <ToggleButton
-        aria-label={`${isPasswordRevealed ? 'Hide' : 'Show'} password`}
-        onClick={toggleVisibility}
-      >
-        <Icon
-          color={ColorTypes.neutral700}
-          name={isPasswordRevealed ? SSCIconNames.eyeSlash : SSCIconNames.eye}
-          type={IconTypes.ssc}
+    return (
+      <PasswordWrapper className={cls(CLX_COMPONENT, className)}>
+        <PasswordInput
+          ref={ref}
+          isDisabled={isDisabled}
+          isInvalid={isInvalid}
+          {...props}
+          type={isPasswordRevealed ? 'text' : 'password'}
         />
-      </ToggleButton>
-    </PasswordWrapper>
-  );
-};
+        <ToggleButton
+          aria-label={`${isPasswordRevealed ? 'Hide' : 'Show'} password`}
+          onClick={toggleVisibility}
+        >
+          <Icon
+            color={ColorTypes.neutral700}
+            name={isPasswordRevealed ? SSCIconNames.eyeSlash : SSCIconNames.eye}
+            type={IconTypes.ssc}
+          />
+        </ToggleButton>
+      </PasswordWrapper>
+    );
+  },
+);
 
 export default Password;
