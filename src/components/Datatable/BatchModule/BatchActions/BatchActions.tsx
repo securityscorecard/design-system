@@ -75,6 +75,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
               placement="bottom-end"
             >
               <BatchActionButton
+                isDisabled={action.isDisabled}
                 name={action.name}
                 variant={ButtonVariants.text}
                 onClick={action.onClick}
@@ -91,6 +92,7 @@ const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
             <BatchActionButton
               key={action.name}
               href={(action as AbsoluteLinkActionKind<BatchActionArgs>).href}
+              isDisabled={action.isDisabled}
               name={action.name}
               to={(action as RelativeLinkActionKind<BatchActionArgs>).to}
               variant={ButtonVariants.text}

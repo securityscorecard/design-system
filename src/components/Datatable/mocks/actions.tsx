@@ -96,6 +96,16 @@ export const datatableBatchActions = [
     onClick: action('onBatchActionClick (add assets)'),
   },
   {
+    isDisabled: true,
+    label: (
+      <Inline align="center" gap="sm">
+        <span>Disabled action</span>
+      </Inline>
+    ),
+    name: 'disabled-action',
+    onClick: action('onBatchActionClick (disabled action)'),
+  },
+  {
     label: 'More actions',
     name: 'more-actions',
     subActions: [

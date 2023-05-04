@@ -8,6 +8,7 @@ export type ActionBase<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
 > = {
+  isDisabled?: boolean;
   label: React.ReactNode;
   name: string;
   onClick?: (...args: OnClickArgs) => OnClickReturnType;

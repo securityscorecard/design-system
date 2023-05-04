@@ -28,11 +28,14 @@ Menu.argTypes = {
         summary: 'Action[]',
         detail: `
 | {
+    isDisabled?: boolean;
     label: string;
     name: string;
+    disabled?: boolean;
     onClick: () => void;
   }
 | {
+    isDisabled?: boolean;
     label: string;
     name: string;
     to: To;
@@ -41,6 +44,7 @@ Menu.argTypes = {
     subActions?: never;
   }
 | {
+    isDisabled?: boolean;
     label: string;
     name: string;
     href: string;
@@ -49,6 +53,7 @@ Menu.argTypes = {
     subActions?: never;
   }
 | {
+    isDisabled?: boolean;
     label: string;
     name: string;
     subActions: ActionKinds[];
@@ -56,6 +61,15 @@ Menu.argTypes = {
     href?: never;
     to?: never;
   }
+  | {
+    isDisabled?: boolean;
+    label: string;
+    name: string;
+    subActions: ActionKinds[];
+    onClick?: () => void;
+    href?: never;
+    to?: never;
+  }  
         `,
       },
     },
