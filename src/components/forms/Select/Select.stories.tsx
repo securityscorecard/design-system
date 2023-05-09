@@ -7,6 +7,7 @@ import { Option, SelectProps } from './Select.types';
 import { Inline, Stack } from '../../layout';
 import { Heading, Text } from '../../typographyLegacy';
 import { Pill } from '../../Pill';
+import { PillColors } from '../../Pill/Pill.enums';
 
 const options = [
   { value: 'HR', label: 'Croatia', isDisabled: true },
@@ -286,6 +287,7 @@ export const PillWrapping: Story<SelectProps<true>> = (args) => (
 );
 PillWrapping.args = {
   ...MultiSelect.args,
+  color: PillColors.gray,
   options: longOptions,
   defaultValue: [longOptions[2], longOptions[1]],
 };

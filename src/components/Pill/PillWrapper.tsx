@@ -3,40 +3,28 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
-import { getColor, getRadii } from '../../utils';
+import { getRadii } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { PillSizes, PillVariants } from './Pill.enums';
+import { PillColors, PillColorsEnums } from './Pill.enums';
 import { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
-
-const PillSolid = css`
-  background-color: ${getColor('neutral.300')};
-`;
-
-const PillOutline = css`
-  background-color: ${getColor('neutral.0')};
-  box-shadow: inset 0 0 0 1px ${getColor('neutral.500')};
-`;
-
-const pillVariants = {
-  [PillVariants.solid]: PillSolid,
-  [PillVariants.outline]: PillOutline,
-};
 
 const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
   display: inline-block;
   min-width: 0;
   border-radius: ${getRadii('default')};
-  ${({ $variant }) => pillVariants[$variant]};
+  ${({ $color }) =>
+    css`
+      background-color: ${PillColors[$color][0]};
+    `}
 
-  ${({ $isClickable }) =>
+  ${({ $isClickable, $color }) =>
     $isClickable &&
     css`
       cursor: pointer;
-
       &:hover,
       &:focus {
-        background-color: ${getColor('primary.50')};
+        background-color: ${PillColors[$color][1]};
         outline: none;
       }
     `}
@@ -44,16 +32,15 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
 
 const PillWrapper: React.FC<PillWrapperProps> = ({
   children,
-  variant,
-  size,
   isClickable,
+  color,
   ...props
 }) => (
   <StyledPillWrapper
+    $color={color || PillColorsEnums.gray}
     $isClickable={isClickable}
-    $variant={variant}
     {...props}
-    paddingSize={size === PillSizes.sm ? SpaceSizes.xs : SpaceSizes.sm}
+    paddingSize={SpaceSizes.xs}
     paddingType={PaddingTypes.square}
   >
     <Inline align="center" gap={SpaceSizes.xs}>
@@ -63,9 +50,8 @@ const PillWrapper: React.FC<PillWrapperProps> = ({
 );
 
 PillWrapper.propTypes = {
-  variant: PropTypes.oneOf(Object.values(PillVariants)).isRequired,
-  size: PropTypes.oneOf(Object.values(PillSizes)).isRequired,
   isClickable: PropTypes.bool.isRequired,
+  color: PropTypes.oneOf(Object.values(PillColorsEnums)).isRequired,
 };
 
 export default PillWrapper;

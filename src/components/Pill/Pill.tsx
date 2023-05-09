@@ -4,7 +4,7 @@ import { isNotUndefined } from 'ramda-adjunct';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
-import { PillSizes, PillVariants } from './Pill.enums';
+import { PillColorsEnums } from './Pill.enums';
 import { PillProps } from './Pill.types';
 import PillWrapper from './PillWrapper';
 import PillLabel from './PillLabel';
@@ -13,14 +13,13 @@ import { CLX_COMPONENT } from '../../theme/constants';
 
 const Pill: React.FC<PillProps> = ({
   label,
-  variant = PillVariants.solid,
-  size = PillSizes.sm,
   maxLabelLength = 16,
   isClickable = false,
   adornment,
   onClick,
   onRemove,
   className,
+  color = PillColorsEnums.gray,
   ...props
 }) => {
   const isPillClickable = isNotUndefined(onClick) || isClickable;
@@ -71,16 +70,14 @@ const Pill: React.FC<PillProps> = ({
   return (
     <PillWrapper
       className={cls(CLX_COMPONENT, className)}
+      color={color}
       isClickable={isPillClickable}
-      size={size}
-      variant={variant}
       {...clickableProps}
       {...props}
     >
       {adornment}
       <PillLabel
         $maxLength={maxLabelLength}
-        $size={size}
         title={gt(maxLabelLength, 0) ? label : undefined}
       >
         {label}
@@ -98,8 +95,7 @@ const Pill: React.FC<PillProps> = ({
 
 Pill.propTypes = {
   label: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(Object.values(PillVariants)),
-  size: PropTypes.oneOf(Object.values(PillSizes)),
+  color: PropTypes.oneOf(Object.values(PillColorsEnums)),
   adornment: PropTypes.node,
   maxLabelLength: PropTypes.number,
   isClickable: PropTypes.bool,

@@ -9,27 +9,23 @@ import { H4 } from '../typographyLegacy';
 import { Icon } from '../Icon';
 import Pill from './Pill';
 import { PillProps } from './Pill.types';
-import { PillSizes, PillVariants } from './Pill.enums';
-import { getRadii } from '../../utils';
+import { PillColorsEnums } from './Pill.enums';
+import { capitalize, getRadii } from '../../utils';
 import { RadiusTypes } from '../../theme/radii.enums';
 
 export default {
   title: 'components/Pill',
   component: Pill,
   argTypes: {
-    variant: {
-      ...generateControl('select', PillVariants),
-    },
-    size: {
-      ...generateControl('select', PillSizes),
+    color: {
+      ...generateControl('select', PillColorsEnums),
     },
   },
 } as Meta;
 
 const PillTemplate: Story<PillProps> = (args) => (
   <Inline gap="md">
-    <Pill {...args} variant="solid" />
-    <Pill {...args} variant="outline" />
+    <Pill {...args} />
   </Inline>
 );
 
@@ -41,24 +37,13 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Variants = PillTemplate.bind({});
-Variants.args = {
-  ...Playground.args,
-};
-
-export const Sizes: Story<PillProps> = (args) => (
-  <Stack gap="md">
-    <Inline gap="md">
-      <Pill {...args} variant="solid" />
-      <Pill {...args} variant="outline" />
-    </Inline>
-    <Inline gap="md">
-      <Pill {...args} size="md" variant="solid" />
-      <Pill {...args} size="md" variant="outline" />
-    </Inline>
-  </Stack>
+export const Colors: Story<PillProps> = () => (
+  <Inline gap="md">
+    {Object.values(PillColorsEnums).map((color) => (
+      <Pill color={color} label={capitalize(color)} />
+    ))}
+  </Inline>
 );
-Sizes.args = Playground.args;
 
 export const Removable = PillTemplate.bind({});
 Removable.args = {
@@ -67,7 +52,14 @@ Removable.args = {
   size: 'sm',
 };
 
-export const Clickable = PillTemplate.bind({});
+export const Clickable: Story<PillProps> = (args) => (
+  <Inline gap="md">
+    {Object.values(PillColorsEnums).map((color) => (
+      <Pill key={color} {...args} color={color} label={capitalize(color)} />
+    ))}
+  </Inline>
+);
+
 Clickable.args = {
   ...Playground.args,
   onClick: action('OnRemove'),
@@ -91,9 +83,8 @@ export const WithAdornment: Story<PillProps> = (args) => (
     <Pill
       {...args}
       adornment={<Icon name="wrench" style={{ fontSize: '0.75rem' }} />}
-      variant="solid"
     />
-    <Pill {...args} adornment={<Bullet />} variant="outline" />
+    <Pill {...args} adornment={<Bullet />} />
     <Pill
       {...args}
       adornment={
@@ -105,7 +96,6 @@ export const WithAdornment: Story<PillProps> = (args) => (
           width="16"
         />
       }
-      variant="outline"
     />
   </Inline>
 );
@@ -141,7 +131,7 @@ export const PillArray: Story<PillProps> = (args) => (
   <div style={{ width: '250px' }}>
     <Cluster gap="sm">
       {days.map((day) => (
-        <Pill key={day} label={day} {...args} />
+        <Pill key={day} {...args} label={day} />
       ))}
     </Cluster>
   </div>
