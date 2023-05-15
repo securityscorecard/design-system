@@ -1,18 +1,9 @@
-import { PillSizes, PillVariants } from './Pill.enums';
-
-export type PillVariants = typeof PillVariants[keyof typeof PillVariants];
-export type PillSizes = typeof PillSizes[keyof typeof PillSizes];
-
 export interface StyledPillWrapperProps {
-  $variant: PillVariants;
   $isClickable: boolean;
+  $color: string;
 }
 
 export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Styling variant of the pill
-   */
-  variant: StyledPillWrapperProps['$variant'];
   /**
    * Flag that enabled hover functionality on the pill. This should be used only when
    * passing custom element (e.g. `a` tag) throught the `as` property without passing
@@ -20,20 +11,16 @@ export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
    */
   isClickable: StyledPillWrapperProps['$isClickable'];
   /**
-   * Size of the pill
-   */
-  size: PillSizes;
-  /**
    * Callback called when the pill is clicked. Hover functionality is enabled when this
    * property is passed in, this can be overriden by `isClickable` property when using
    * custom element such as `a` tag without `onClick` property.
    */
   onClick?: React.EventHandler<React.MouseEvent | React.KeyboardEvent>;
   as?: React.ElementType;
+  color?: StyledPillWrapperProps['$color'];
 }
 
 export interface PillLabelProps {
-  $size: PillSizes;
   $maxLength?: number;
 }
 
