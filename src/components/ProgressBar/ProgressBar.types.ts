@@ -1,12 +1,26 @@
-import type { PropsWithChildren } from 'react';
+import type {
+  ProgressBarSizes,
+  ProgressBarVariants,
+} from './ProgressBar.enums';
 
-import type { BaseToastBannerVariants } from '../_internal/BaseToastBanner/BaseToastBanner.enums';
+export type ProgressBarVariant =
+  typeof ProgressBarVariants[keyof typeof ProgressBarVariants];
+export type ProgressBarSize =
+  typeof ProgressBarSizes[keyof typeof ProgressBarSizes];
 
-export type ProgressBarVariants =
-  typeof BaseToastBannerVariants[keyof typeof BaseToastBannerVariants];
+export type ProgressBarProps = {
+  /** Current value of the progress bar */
+  value: number;
+  /** Maximal value of the progress bar, used for calculation of the active bar width */
+  maxValue: number;
+  /** Sizes of progress bar */
+  size: ProgressBarSize;
+  /** Styling variant of progress bar */
+  variant?: ProgressBarVariant;
+};
 
-export type ProgressBarProps = PropsWithChildren<{
-  progress: number;
-  size: 'thin' | 'normal';
-  variant?: ProgressBarVariants;
-}>;
+export type RootProgressProps = {
+  $progress: number;
+  $variant: ProgressBarProps['variant'];
+  $size: ProgressBarProps['size'];
+};

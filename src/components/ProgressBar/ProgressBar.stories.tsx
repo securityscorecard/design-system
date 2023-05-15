@@ -8,29 +8,32 @@ import { Stack } from '../layout';
 export default {
   title: 'components/ProgressBar',
   component: ProgressBar,
-  argTypes: {},
 } as Meta;
 
-const Cluster = (args) => (
-  <Stack gap="md">
-    <ProgressBar {...args} progress={25} />
-    <ProgressBar {...args} progress={50} />
-    <ProgressBar {...args} progress={75} />
-    <ProgressBar {...args} progress={100} />
-  </Stack>
+export const Playground: Story<ProgressBarProps> = (args) => (
+  <ProgressBar {...args} />
 );
+Playground.args = {
+  value: 50,
+};
+Playground.parameters = {
+  screenshot: { skip: true },
+};
 
-const ProgressBarTemplate: Story<ProgressBarProps> = () => (
+export const Variants: Story<ProgressBarProps> = (args) => (
   <Stack gap="lg" style={{ width: '50%', margin: 'auto' }}>
-    <Cluster variant="success" />
-    <Cluster size="thin" variant="success" />
-    <Cluster />
-    <Cluster size="thin" />
-    <Cluster variant="warn" />
-    <Cluster size="thin" variant="warn" />
-    <Cluster variant="error" />
-    <Cluster size="thin" variant="error" />
+    <ProgressBar {...args} variant="info" />
+    <ProgressBar {...args} variant="success" />
+    <ProgressBar {...args} variant="warn" />
+    <ProgressBar {...args} variant="error" />
   </Stack>
 );
+Variants.args = Playground.args;
 
-export const Examples = ProgressBarTemplate.bind({});
+export const Sizes: Story<ProgressBarProps> = (args) => (
+  <Stack gap="lg" style={{ width: '50%', margin: 'auto' }}>
+    <ProgressBar {...args} size="normal" />
+    <ProgressBar {...args} size="thin" />
+  </Stack>
+);
+Sizes.args = Playground.args;
