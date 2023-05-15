@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/securityscorecard/design-system/compare/v1.1.1...v1.2.0) (2023-05-15)
+
+
+### Features
+
+* **Pill:** add new color palette ([aeb32d0](https://github.com/securityscorecard/design-system/commit/aeb32d03dafa7adf61b6fa2c02b1bf1c7b53d04f))
+* **ProgressBar:** add progress bar ([fab1375](https://github.com/securityscorecard/design-system/commit/fab1375cbce9d45e7176f091c426e33a3c55f258))
+
 ## [1.1.1](https://github.com/securityscorecard/design-system/compare/v1.1.0...v1.1.1) (2023-04-17)
 
 
