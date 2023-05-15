@@ -23,6 +23,7 @@ export * from './Modal';
 export * from './Nav';
 export * from './Pagination';
 export * from './Pill';
+export * from './ProgressBar';
 export * from './SemanticModal';
 export * from './Signal';
 export * from './SingleDatePicker';
