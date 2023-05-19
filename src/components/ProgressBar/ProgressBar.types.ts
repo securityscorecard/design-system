@@ -12,9 +12,9 @@ export type ProgressBarProps = {
   /** Current value of the progress bar */
   value: number;
   /** Maximal value of the progress bar, used for calculation of the active bar width */
-  maxValue: number;
+  maxValue?: number;
   /** Sizes of progress bar */
-  size: ProgressBarSize;
+  size?: ProgressBarSize;
   /** Styling variant of progress bar */
   variant?: ProgressBarVariant;
 };
