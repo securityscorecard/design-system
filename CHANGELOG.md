@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/securityscorecard/design-system/compare/v1.2.0...v1.2.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* **types:** fix types field ([2459669](https://github.com/securityscorecard/design-system/commit/24596694c2a6f46fb5dd5480572bab579e190350))
+
 # [1.2.0](https://github.com/securityscorecard/design-system/compare/v1.1.1...v1.2.0) (2023-05-15)
 
 
