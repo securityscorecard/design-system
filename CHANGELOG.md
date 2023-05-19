@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/securityscorecard/design-system/compare/v1.2.1...v1.2.2) (2023-05-19)
+
+
+### Bug Fixes
+
+* **ProgressBar:** update optional props ([c99d68f](https://github.com/securityscorecard/design-system/commit/c99d68fc04c2022f1b0c2087c3a0d207b505384d))
+
 ## [1.2.1](https://github.com/securityscorecard/design-system/compare/v1.2.0...v1.2.1) (2023-05-19)
 
 
