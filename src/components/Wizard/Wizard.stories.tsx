@@ -2,6 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 
 import { action } from '@storybook/addon-actions';
 
+import { subcomponentsTemplate } from '../../../.storybook/docsTemplates';
 import Wizard from './Wizard';
 import WizardStep from './WizardStep';
 
@@ -11,9 +12,12 @@ export default {
   subcomponents: { WizardStep },
   parameters: {
     docs: {
-      inlineStories: false,
-      iframeHeight: 500,
+      story: {
+        inline: false,
+        iframeHeight: 900,
+      },
       source: { type: 'code' },
+      page: subcomponentsTemplate,
     },
   },
 } as Meta;

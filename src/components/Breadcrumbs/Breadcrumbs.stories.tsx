@@ -3,6 +3,7 @@ import type { BreadcrumbsProps } from './Breadcrumbs.types';
 
 import { MemoryRouter } from 'react-router-dom';
 
+import { subcomponentsTemplate } from '../../../.storybook/docsTemplates';
 import Breadcrumbs from './Breadcrumbs';
 import BreadcrumbItem from './BreadcrumbItem';
 
@@ -25,6 +26,7 @@ give it \`to\` or \`href\` attributes. Otherwise the link would be inactive plai
 The current page shouldn't have these defined though.`,
       },
     },
+    page: subcomponentsTemplate,
   },
 } as Meta;
 
