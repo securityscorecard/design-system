@@ -164,7 +164,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     return (
       <Portal>
         {hasBackdrop ? (
-          <Overlay placement="right">
+          <Overlay $placement="right">
             <DrawerBox {...drawerProps} />
           </Overlay>
         ) : (

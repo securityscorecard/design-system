@@ -66,6 +66,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       size = ModalSizes.md,
       children,
       className,
+      isOverlayBlurred = false,
       ...rest
     },
     ref,
@@ -84,7 +85,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     return (
       <Portal>
-        <Overlay placement="center">
+        <Overlay $isBlurred={isOverlayBlurred} $placement="center">
           <BaseModal
             ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
             $maxWidth={widthVariants[size]}

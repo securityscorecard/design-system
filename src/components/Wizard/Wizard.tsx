@@ -18,6 +18,7 @@ const Wizard: FC<WizardProps> = forwardRef<HTMLDivElement, WizardProps>(
       onStepChange = () => null,
       onClose = undefined,
       isBackwardNavigationEnabled,
+      isOverlayBlurred = true,
       children,
     }: WizardProps,
     ref,
@@ -28,7 +29,12 @@ const Wizard: FC<WizardProps> = forwardRef<HTMLDivElement, WizardProps>(
         isBackwardNavigationEnabled={isBackwardNavigationEnabled}
         onStepChange={onStepChange}
       >
-        <Modal ref={ref} size={size} onClose={onClose}>
+        <Modal
+          ref={ref}
+          isOverlayBlurred={isOverlayBlurred}
+          size={size}
+          onClose={onClose}
+        >
           <Stack gap="lg">
             {children}
             <Inline
