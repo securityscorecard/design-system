@@ -1,7 +1,7 @@
 import type { MouseEventHandler, ReactNode } from 'react';
 import type { ModalSizes } from './Modal.enums';
 
-export type ModalSizes = typeof ModalSizes[keyof typeof ModalSizes];
+export type ModalSizes = (typeof ModalSizes)[keyof typeof ModalSizes];
 
 export interface ModalProps {
   children: ReactNode;

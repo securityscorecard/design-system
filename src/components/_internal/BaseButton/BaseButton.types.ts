@@ -11,9 +11,9 @@ import type {
 import type { PadboxProps } from '../../layout/Padbox/Padbox';
 
 export type Variants =
-  typeof BaseButtonVariants[keyof typeof BaseButtonVariants];
-export type Sizes = typeof BaseButtonSizes[keyof typeof BaseButtonSizes];
-export type Colors = typeof BaseButtonColors[keyof typeof BaseButtonColors];
+  (typeof BaseButtonVariants)[keyof typeof BaseButtonVariants];
+export type Sizes = (typeof BaseButtonSizes)[keyof typeof BaseButtonSizes];
+export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
 
 export interface BaseButtonProps
   extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'as'> {

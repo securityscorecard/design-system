@@ -13,9 +13,9 @@ import type {
 } from './Dropdown.enums';
 
 export type TriggerEvents =
-  typeof DropdownTriggerEvents[keyof typeof DropdownTriggerEvents];
+  (typeof DropdownTriggerEvents)[keyof typeof DropdownTriggerEvents];
 export type Placements =
-  typeof DropdownPlacements[keyof typeof DropdownPlacements];
+  (typeof DropdownPlacements)[keyof typeof DropdownPlacements];
 
 export interface DropdownPaneStyles {
   $isElevated?: boolean;

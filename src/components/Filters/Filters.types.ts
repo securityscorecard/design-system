@@ -6,7 +6,7 @@ import type {
 import type { Option } from '../forms/Select/Select.types';
 import type { Operators } from './Filters.enums';
 
-type OperatorTypes = typeof Operators[keyof typeof Operators];
+type OperatorTypes = (typeof Operators)[keyof typeof Operators];
 
 interface ComponentProps {
   options?: Option[];
@@ -63,5 +63,5 @@ export interface FiltersProps {
   isLoading?: boolean;
   isCancelEnabled?: boolean;
   isOperatorFieldEnabled?: boolean;
-  defaultOperator?: typeof Operators[keyof typeof Operators];
+  defaultOperator?: (typeof Operators)[keyof typeof Operators];
 }
