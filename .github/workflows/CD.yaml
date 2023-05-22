@@ -75,6 +75,57 @@ jobs:
       - name: Run Types Check
         run: yarn types
 
+  storybook-tests:
+    name: '🛟 Run Storybook tests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Cache yarn files
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            .yarn/cache
+            .yarn/install-state.gz
+            node_modules
+          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ env.cache-name }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Cache storybook build
+        id: storybook-build-cache
+        uses: actions/cache@v3
+        with:
+          path: storybook-static
+          key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
+
+      - name: Build Storybook
+        if: steps.storybook-build-cache.outputs.cache-hit != 'true'
+        run: yarn storybook:build
+
+      - name: Run tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && yarn test-storybook"
+
   visual-tests:
     name: '🖼 Run visual tests'
     runs-on: ubuntu-latest

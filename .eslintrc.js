@@ -182,6 +182,7 @@ module.exports = {
       files: ['**/*.stories.tsx'],
       extends: ['plugin:storybook/recommended'],
       rules: {
+        'filenames/match-exported': 'off',
         'react/no-unstable-nested-components': [
           2,
           {
