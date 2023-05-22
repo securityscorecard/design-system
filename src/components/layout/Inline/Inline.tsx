@@ -12,7 +12,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
 import { gapParser } from '../../../utils/parsers';
 
-type Stretch = typeof StretchEnum[keyof typeof StretchEnum];
+type Stretch = (typeof StretchEnum)[keyof typeof StretchEnum];
 
 export interface InlineProps {
   /**

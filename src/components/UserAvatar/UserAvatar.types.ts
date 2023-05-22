@@ -3,7 +3,7 @@ import type { MouseEventHandler } from 'react';
 import type { UserAvatarSizes } from './UserAvatar.enums';
 
 export type UserAvatarSizes =
-  typeof UserAvatarSizes[keyof typeof UserAvatarSizes];
+  (typeof UserAvatarSizes)[keyof typeof UserAvatarSizes];
 
 export type UserAvatarRootProps = {
   $isInverted?: boolean;

@@ -1,13 +1,6 @@
+import React from 'react';
 import { withScreenshot } from 'storycap';
 import { withDesign } from 'storybook-addon-designs';
-import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgsTable,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 
@@ -17,6 +10,7 @@ import { Badges } from './storybook.enums';
 
 import '@fontsource/space-mono';
 import '@fontsource/inter';
+import { defaultTemplate } from './docsTemplates';
 
 SyntaxHighlighter.registerLanguage('bash', bash);
 
@@ -54,6 +48,7 @@ export const parameters = {
   },
   docs: {
     source: { type: 'dynamic' },
+    page: defaultTemplate,
   },
   // storycap settings
   screenshot: {
@@ -84,9 +79,7 @@ export const parameters = {
 createIconLibrary();
 
 const wrapper = (storyFn) => (
-  <>
-    <DSProvider>{storyFn()}</DSProvider>
-  </>
+  <DSProvider>{storyFn()}</DSProvider>
 );
 
 export const decorators = [withDesign, withScreenshot, wrapper];

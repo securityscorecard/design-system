@@ -5,9 +5,9 @@ import type {
 } from './FullscreenModal.enums';
 
 export type FullscreenModalSizes =
-  typeof FullscreenModalSizes[keyof typeof FullscreenModalSizes];
+  (typeof FullscreenModalSizes)[keyof typeof FullscreenModalSizes];
 export type FullscreenModalLayouts =
-  typeof FullscreenModalLayouts[keyof typeof FullscreenModalLayouts];
+  (typeof FullscreenModalLayouts)[keyof typeof FullscreenModalLayouts];
 export type FullscreenModalColumnConfig = Record<
   'header' | 'sidebar' | 'content',
   [number, number]

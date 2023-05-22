@@ -3,7 +3,7 @@ import type { SearchProps } from '../components/Search/Search.types';
 import type { FiltersProps } from '../../Filters/Filters.types';
 import type { ControlTypes } from './ControlsModule.enums';
 
-export type Controls = typeof ControlTypes[keyof typeof ControlTypes];
+export type Controls = (typeof ControlTypes)[keyof typeof ControlTypes];
 
 export type ControlState = {
   isActive: boolean;

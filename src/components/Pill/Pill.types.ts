@@ -9,8 +9,8 @@ import type {
 } from 'react';
 import type { PillSizes, PillVariants } from './Pill.enums';
 
-export type PillVariants = typeof PillVariants[keyof typeof PillVariants];
-export type PillSizes = typeof PillSizes[keyof typeof PillSizes];
+export type PillVariants = (typeof PillVariants)[keyof typeof PillVariants];
+export type PillSizes = (typeof PillSizes)[keyof typeof PillSizes];
 
 export interface StyledPillWrapperProps {
   $variant: PillVariants;

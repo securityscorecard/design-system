@@ -3,7 +3,7 @@ import type { Color } from '../../../theme/colors.types';
 import type { PadboxProps } from '../../layout/Padbox/Padbox';
 import type { BaseTabVariants } from './BaseTabs.enums';
 
-export type Variants = typeof BaseTabVariants[keyof typeof BaseTabVariants];
+export type Variants = (typeof BaseTabVariants)[keyof typeof BaseTabVariants];
 
 export interface BaseLabelProps extends PadboxProps {
   $isSelected?: boolean;
