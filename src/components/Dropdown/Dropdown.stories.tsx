@@ -176,11 +176,6 @@ Placements.args = {
   defaultIsOpen: true,
   maxPaneWidth: 'auto',
 };
-Placements.parameters = {
-  docs: {
-    inlineStories: true,
-  },
-};
 
 export const Elevated = DropdownTemplate.bind({});
 Elevated.args = {

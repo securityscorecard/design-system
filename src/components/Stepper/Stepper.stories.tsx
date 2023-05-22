@@ -4,6 +4,7 @@ import type { StepperProps } from './Stepper.types';
 import { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
+import { subcomponentsTemplate } from '../../../.storybook/docsTemplates';
 import { generateControl } from '../../utils/tests/storybook';
 import { Button } from '../Button';
 import { Inline, Padbox, Stack } from '../layout';
@@ -25,6 +26,7 @@ import { Stepper, Step } from '@securityscorecard/design-system';
 \`\`\`
       `,
       },
+      page: subcomponentsTemplate,
     },
     screenshot: {
       viewport: {

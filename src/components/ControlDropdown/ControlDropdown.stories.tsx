@@ -13,8 +13,10 @@ export default {
   component: ControlDropdown,
   parameters: {
     docs: {
-      inlineStories: false,
-      iframeHeight: 200,
+      story: {
+        inline: false,
+        iframeHeight: 200,
+      },
     },
   },
 } as Meta;

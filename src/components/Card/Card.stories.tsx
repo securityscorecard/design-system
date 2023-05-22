@@ -4,6 +4,7 @@ import type { CardActionsProps, CardProps } from './Card.types';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
+import { subcomponentsTemplate } from '../../../.storybook/docsTemplates';
 import { Text } from '../typographyLegacy';
 import Card from './Card';
 import CardHeader, { CardIconButton } from './CardHeader';
@@ -40,6 +41,11 @@ export default {
       control: {
         disabled: true,
       },
+    },
+  },
+  parameters: {
+    docs: {
+      page: subcomponentsTemplate,
     },
   },
 } as Meta;
