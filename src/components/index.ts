@@ -41,7 +41,6 @@ export * from './Tooltip';
 export * from './TrendIcon';
 export * from './UserAvatar';
 export * from './Wizard';
-export * from './WizardModal';
 export * from './layout';
 export * from './forms';
 export * from './typographyLegacy';
