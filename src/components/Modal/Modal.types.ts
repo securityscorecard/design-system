@@ -10,4 +10,5 @@ export interface ModalProps {
   title?: string;
   size?: ModalSizes;
   className?: string;
+  isOverlayBlurred?: boolean;
 }
