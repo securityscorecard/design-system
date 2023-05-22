@@ -11,7 +11,7 @@ exports[`no more deprecated components`] = {
     "../src/components/FlexContainer/index.ts:1246547685": [
       [0, 0, 59, "\'./FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "3330215570"]
     ],
-    "../src/components/index.ts:1682656253": [
+    "../src/components/index.ts:843195213": [
       [17, 0, 32, "\'./FlexContainer\' import is restricted from being used by a pattern. FlexContainer is deprecated. Please use Layout primitives instead.", "726759703"]
     ]
   }`

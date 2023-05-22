@@ -34,7 +34,6 @@ export * from './Toast';
 export * from './Tooltip';
 export * from './UserAvatar';
 export * from './Wizard';
-export * from './WizardModal';
 export * from './layout';
 export * from './forms';
 export * from './typographyLegacy';
