@@ -6,6 +6,7 @@ export interface WizardProps {
   initialStep?: string;
   onClose?: () => void;
   isBackwardNavigationEnabled?: boolean;
+  isOverlayBlurred?: boolean;
   onStepChange?: (step: SingleWizardStep) => void;
   children: ReactNode;
 }
