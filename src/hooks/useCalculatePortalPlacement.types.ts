@@ -9,7 +9,8 @@ export type StyleProps = {
   bottom?: number;
 };
 
-export type Placements = typeof PortalPlacements[keyof typeof PortalPlacements];
+export type Placements =
+  (typeof PortalPlacements)[keyof typeof PortalPlacements];
 
 export type UseCalculatePortalPlacementOptions = {
   placement: Placements;

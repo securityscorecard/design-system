@@ -33,7 +33,7 @@ export interface MultiValueRendererProps<D>
   rowData: D;
 }
 
-export type CellTypes = typeof CellTypesEnum[keyof typeof CellTypesEnum];
+export type CellTypes = (typeof CellTypesEnum)[keyof typeof CellTypesEnum];
 
 export type RendererColumnOptions<D> = {
   cellType?: CellTypes;

@@ -15,7 +15,7 @@ import { SpaceSizes } from '../theme/space.enums';
 import { pxToRem } from './helpers';
 import { PaddingTypes } from '../components/layout/Padbox/Padbox.enums';
 
-export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];
+export type PaddingType = (typeof PaddingTypes)[keyof typeof PaddingTypes];
 type PaddingSpaceProps = {
   paddingType: PaddingType;
   paddingSize: SpaceSize;

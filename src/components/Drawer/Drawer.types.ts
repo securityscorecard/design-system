@@ -1,7 +1,7 @@
 import type { MouseEventHandler, ReactNode } from 'react';
 import type { DrawerSizes } from './Drawer.enums';
 
-export type DrawerSizes = typeof DrawerSizes[keyof typeof DrawerSizes];
+export type DrawerSizes = (typeof DrawerSizes)[keyof typeof DrawerSizes];
 
 export interface DrawerProps {
   children: ReactNode;

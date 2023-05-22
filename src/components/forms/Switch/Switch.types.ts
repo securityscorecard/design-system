@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef } from 'react';
 import type { SwitchSizes } from './Switch.enums';
 
-export type Sizes = typeof SwitchSizes[keyof typeof SwitchSizes];
+export type Sizes = (typeof SwitchSizes)[keyof typeof SwitchSizes];
 
 export interface SwitchLabelProps {
   isDisabled?: boolean;

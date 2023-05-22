@@ -1,6 +1,6 @@
 import type { BadgeVariants } from './Badge.enums';
 
-export type BadgeVariant = typeof BadgeVariants[keyof typeof BadgeVariants];
+export type BadgeVariant = (typeof BadgeVariants)[keyof typeof BadgeVariants];
 
 export interface BadgeProps {
   count?: number;
