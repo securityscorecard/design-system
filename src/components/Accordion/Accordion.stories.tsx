@@ -1,118 +1,242 @@
-import type { Meta, Story } from '@storybook/react';
-import type { AccordionProps } from './Accordion.types';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
-import { includes } from 'ramda';
+import { action } from '@storybook/addon-actions';
+import { userEvent, within } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
-import { Inline, Stack } from '../layout';
-import { HexGrade } from '../HexGrade';
-import { Paragraph, Text } from '../typographyLegacy';
-import { Button } from '../Button';
 import Accordion from './Accordion';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
-
-export default {
-  title: 'components/Accordion',
-  component: Accordion,
-  argTypes: {
-    isCollapsedOnOpen: {
-      control: { type: 'boolean' },
-    },
-    openItems: {
-      description: 'Array of ids that can be changed by external state',
-    },
-  },
-} as Meta;
-
-const items = [
-  { id: 1, title: 'Item 1', content: 'Content', isOpen: true },
-  { id: 2, title: 'Item 2', content: 'Content' },
-];
-
-const AccordionTemplate: Story<AccordionProps> = (args) => (
-  <Accordion {...args} />
-);
-
-export const Playground = AccordionTemplate.bind({});
-Playground.args = { items };
-Playground.parameters = {
-  screenshot: { skip: true },
-};
-
-export const DefaultAccordion = AccordionTemplate.bind({});
-DefaultAccordion.args = Playground.args;
-
-export const DoesNotCollapseOnOpen = AccordionTemplate.bind({});
-DoesNotCollapseOnOpen.args = {
-  ...Playground.args,
-  isCollapsedOnOpen: false,
-};
-DoesNotCollapseOnOpen.storyName = 'Does not collapse on open';
-DoesNotCollapseOnOpen.parameters = {
-  screenshot: { skip: true },
-};
+import AccordionItem from './AccordionItem';
+import AccordionTrigger from './AccordionTrigger';
+import AccordionContent from './AccordionContent';
+import { Inline, Stack } from '../layout';
+import { Paragraph, Text } from '../typographyLegacy';
+import { Icon } from '../Icon';
+import { Button } from '../Button';
+import { ArgTypesGroups } from '../../../.storybook/storybook.enums';
 
 const AccordionItemTitle = () => (
   <Stack gap="sm">
     <Inline align="center" gap="md">
-      <HexGrade grade="A" size={24} />
-      <Text size={TextSizes.lg}>Company Name</Text>
+      <Icon color="grade.F" name="lightbulb" />
+      <Text>Exploring the Multiverse in Marvel Comics</Text>
     </Inline>
     <Paragraph>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor.
+      The concept of the multiverse has always been a key part of Marvel Comics,
+      &hellip;
     </Paragraph>
   </Stack>
 );
-export const CustomTitleElement: Story<AccordionProps> = AccordionTemplate.bind(
-  {},
-);
-CustomTitleElement.args = {
-  items: [
-    { id: 0, title: <AccordionItemTitle />, content: 'Content', isOpen: true },
-  ],
+
+const items = [
+  {
+    id: 'item1',
+    title: 'The Evolution of the Marvel Cinematic Universe',
+    content: `Over the past decade, the Marvel Cinematic Universe has become a cultural phenomenon, grossing billions of dollars at the box office and introducing audiences around the world to a host of beloved characters. But the success of the MCU didn't happen overnight. It was the result of years of planning, hard work, and a deep understanding of what makes these characters so special.`,
+  },
+  {
+    id: 'item2',
+    title: <AccordionItemTitle />,
+    content: (
+      <Paragraph>
+        &hellip;allowing for endless possibilities and variations on beloved
+        characters. But in recent years, the idea of the multiverse has taken on
+        even greater significance, with major storylines like Secret Wars and
+        the upcoming &ldquo;What If...?&rdquo; Disney+ series exploring the
+        concept in depth.
+      </Paragraph>
+    ),
+  },
+];
+
+/**
+ * The Accordion component is mostly used to organize and present a large amount of information in a compact and
+ * easy-to-navigate manner, while still providing users with the ability to selectively view the content they are interested in.
+ *
+ * The Accordion component is commonly used in documentation, FAQs, and other types of content-heavy pages.
+ *
+ * ## Usage
+ * ```js
+ * import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@securityscorecard/design-system'
+ * ```
+ *
+ * ## Playground
+ */
+const meta = {
+  component: Accordion,
+  argTypes: {
+    variant: { table: { category: ArgTypesGroups.appearance } },
+    type: { table: { category: ArgTypesGroups.behaviour } },
+    defaultValue: { table: { category: ArgTypesGroups.state } },
+    value: { table: { category: ArgTypesGroups.state } },
+    onValueChange: {
+      action: 'onValueChange',
+      table: { category: ArgTypesGroups.state },
+    },
+    className: { table: { category: ArgTypesGroups.common } },
+  },
+  subcomponents: { AccordionItem, AccordionTrigger, AccordionContent },
+  parameters: {
+    docs: {
+      // page: subcomponentsTemplate,
+    },
+  },
+} satisfies Meta<typeof Accordion>;
+
+export default meta;
+
+type Story = StoryObj<typeof Accordion>;
+
+const AccordionTemplate: Story = {
+  render: (args) => (
+    <Accordion {...args}>
+      {items.map((item) => (
+        <AccordionItem key={item.id} id={item.id}>
+          <AccordionTrigger>{item.title}</AccordionTrigger>
+          <AccordionContent>{item.content}</AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  ),
 };
 
-export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
-  const [openItems, setOpenItems] = useState<(string | number)[]>([]);
-  const handleOnClick = (id: string) => {
-    if (!openItems.includes(id)) {
-      const newItems = [id];
-      return setOpenItems(newItems);
-    }
-    return setOpenItems([...openItems]);
-  };
+export const Playground: Story = {
+  ...AccordionTemplate,
+};
 
-  const localItems = [
-    { id: 'first', title: 'Item 1', content: 'Content', isOpen: true },
-    { id: 'second', title: 'Item 2', content: 'Content' },
-    { id: 'third', title: 'Item 3', content: 'Content' },
-  ];
+export const InlineVariant: Story = {
+  ...AccordionTemplate,
+  args: {
+    variant: 'inline',
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const [first, second] = canvas.getAllByRole('button');
+
+    await step('Keyboard navigation', async () => {
+      await step('item is focusable by Tab', async () => {
+        await userEvent.tab();
+        await expect(first).toHaveFocus();
+      });
+      await step('navigation with arrow keys is working', async () => {
+        await userEvent.keyboard('[ArrowDown]');
+        await expect(second).toHaveFocus();
+        await userEvent.keyboard('[ArrowUp]');
+        await expect(first).toHaveFocus();
+      });
+      await step('item can be controlled by Space and Enter keys', async () => {
+        await userEvent.keyboard('[Space]');
+        await expect(first).toHaveAttribute('data-state', 'open');
+        await userEvent.keyboard('[Enter]');
+        await expect(first).toHaveAttribute('data-state', 'closed');
+      });
+      await step(
+        'navigation from first to last and opposite is working',
+        async () => {
+          await userEvent.keyboard('[ArrowUp]');
+          await expect(second).toHaveFocus();
+          await userEvent.keyboard('[ArrowDown]');
+          await expect(first).toHaveFocus();
+        },
+      );
+    });
+
+    await step('Only one item can be opened at the same time', async () => {
+      await userEvent.keyboard('[Space]');
+      await expect(first).toHaveAttribute('data-state', 'open');
+      await userEvent.keyboard('[ArrowDown]');
+      await userEvent.keyboard('[Space]');
+      await expect(first).toHaveAttribute('data-state', 'closed');
+      await expect(second).toHaveAttribute('data-state', 'open');
+    });
+  },
+};
+
+export const RegularVariant: Story = {
+  ...AccordionTemplate,
+  args: {
+    variant: 'regular',
+  },
+};
+
+export const WithMultipleOpenItems: Story = {
+  ...AccordionTemplate,
+  args: {
+    type: 'multiple',
+    defaultValue: ['item1', 'item2'],
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const [first, second] = canvas.getAllByRole('button');
+
+    await step('Multiple items can be opened at the same time', async () => {
+      await userEvent.keyboard('[Space]');
+      await userEvent.keyboard('[ArrowDown]');
+      await userEvent.keyboard('[Space]');
+      await expect(first).toHaveAttribute('data-state', 'open');
+      await expect(second).toHaveAttribute('data-state', 'open');
+    });
+  },
+};
+
+const ControlledAccordionCompnent = (args) => {
+  const [value, setValue] = useState([]);
 
   return (
-    <Inline gap="xl">
-      <Stack gap="sm" justify="flex-start">
-        <Button variant="text" onClick={() => handleOnClick('first')}>
-          {includes('first', openItems) && '->'} First section
+    <Stack gap="md">
+      <Inline align="center" gap="md">
+        <Button
+          variant="outline"
+          onClick={() => {
+            setValue(['item1']);
+          }}
+        >
+          Open first
         </Button>
-        <Button variant="text" onClick={() => handleOnClick('second')}>
-          {includes('second', openItems) && '->'} Second section
+        <Button
+          variant="outline"
+          onClick={() => {
+            setValue(['item2']);
+          }}
+        >
+          Open second
         </Button>
-        <Button variant="text" onClick={() => handleOnClick('third')}>
-          {includes('third', openItems) && '->'} Third section
-        </Button>
-      </Stack>
+      </Inline>
+
       <Accordion
-        isCollapsedOnOpen={false}
-        items={localItems}
-        openItems={openItems}
-        onChange={(ids) => {
-          setOpenItems(ids);
+        {...args}
+        value={value}
+        onValueChange={(v) => {
+          action('onValueChange')(v);
+          setValue(v);
         }}
-      />
-    </Inline>
+      >
+        {items.map((item) => (
+          <AccordionItem key={item.id} id={item.id}>
+            <AccordionTrigger>{item.title}</AccordionTrigger>
+            <AccordionContent>{item.content}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </Stack>
   );
 };
-AcordionWithExternalManagement.parameters = {
-  screenshot: { skip: true },
+
+export const ControlledAccordion: Story = {
+  render: ControlledAccordionCompnent,
+  args: {
+    type: 'multiple',
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    await step('Accordion can be controlled from outside', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: 'Open first' }));
+      await expect(
+        canvas.getByRole('button', { name: items[0].title as string }),
+      ).toHaveAttribute('data-state', 'open');
+    });
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };

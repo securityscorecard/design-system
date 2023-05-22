@@ -1,7 +1,6 @@
 import type { HintTooltipProps } from './HintTooltip.types';
 import type { Color } from '../../theme/colors.types';
 
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import { includes } from 'ramda';
@@ -33,11 +32,5 @@ const HintTooltip = ({ children, width, ...props }: HintTooltipProps) => (
     />
   </Tooltip>
 );
-
-HintTooltip.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  width: PropTypes.number,
-};
 
 export default HintTooltip;

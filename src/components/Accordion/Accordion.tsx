@@ -1,82 +1,65 @@
 import type {
-  AccordionItem,
-  AccordionItemId,
+  AccordionMultiProps,
   AccordionProps,
+  AccordionSingleProps,
+  AccordionVariant,
+  StyledAccordionVariantProp,
 } from './Accordion.types';
 
-import { forwardRef, useCallback, useEffect, useState } from 'react';
-import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
-import cls from 'classnames';
+import { forwardRef, useMemo } from 'react';
+import * as RadixAccordion from '@radix-ui/react-accordion';
+import styled, { css } from 'styled-components';
 
-import { Stack } from '../layout';
-import AccordionCollapsible from './AccordionCollapsible';
-import { CLX_COMPONENT } from '../../theme/constants';
+import { createCtx } from '../../managers/common/createCtx';
+import { AccordionVariants } from './Accordion.enums';
 
-const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
-  filter(propEq('isOpen', true)),
-  pluck('id'),
+export const { useContext: useAccordionContext, Provider } = createCtx<{
+  variant: AccordionVariant;
+}>(
+  'AccordionContext',
+  '"useAccordionContext" must be inside a "AccordionContext" with a value',
 );
 
-function filterState(
-  state: AccordionItemId[],
-  item: AccordionItemId,
-  isCollapsedOnOpen: boolean,
-) {
-  if (includes(item, state)) {
-    return reject(equals(item), state);
-  }
-  if (isCollapsedOnOpen) {
-    return [item];
-  }
-
-  return [...state, item];
-}
+const AccordionRoot = styled(RadixAccordion.Root)<StyledAccordionVariantProp>`
+  background-color: ${({ theme }) => theme.colors.neutral['0']};
+  ${({ $variant }) =>
+    $variant === AccordionVariants.regular &&
+    css`
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    `}
+`;
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
-    {
-      isCollapsedOnOpen = true,
-      items,
-      openItems,
-      className,
-      onChange,
-      ...props
-    },
-    ref,
+    { children, variant = AccordionVariants.inline, ...props },
+    forwardedRef,
   ) => {
-    const [openIds, setOpenIds] = useState(pickOpen(items));
-
-    useEffect(() => {
-      if (openItems !== undefined) {
-        setOpenIds(isCollapsedOnOpen ? [openItems[0]] : openItems);
-      }
-    }, [openItems, isCollapsedOnOpen]);
-
-    const handleClick = useCallback(
-      (id: AccordionItemId) => {
-        const nextState = filterState(openIds, id, isCollapsedOnOpen);
-        setOpenIds(nextState);
-        onChange?.(nextState);
-      },
-      [openIds, setOpenIds, onChange, isCollapsedOnOpen],
-    );
+    const singleProps = {
+      ...props,
+      type: props.type,
+      collapsible: true,
+    } as AccordionSingleProps & { collapsible: true };
+    const multiProps = {
+      ...props,
+      type: props.type,
+    } as AccordionMultiProps;
+    const type = props.type === 'single' ? singleProps : multiProps;
+    const ctx = useMemo(() => ({ variant }), [variant]);
 
     return (
-      <Stack {...props} ref={ref} className={cls(CLX_COMPONENT, className)}>
-        {items.map(({ title, id, content }) => (
-          <AccordionCollapsible
-            key={`accordion-item-${id}`}
-            handleHeaderClick={handleClick}
-            id={id}
-            isOpen={includes(id, openIds)}
-            title={title}
-          >
-            {content}
-          </AccordionCollapsible>
-        ))}
-      </Stack>
+      <Provider value={ctx}>
+        <AccordionRoot {...type} ref={forwardedRef} $variant={variant}>
+          {children}
+        </AccordionRoot>
+      </Provider>
     );
   },
 );
+
+Accordion.defaultProps = {
+  type: 'single',
+};
 
 export default Accordion;

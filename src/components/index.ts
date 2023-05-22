@@ -6,7 +6,6 @@ export * from './Button';
 export * from './Callout';
 export * from './Card';
 export * from './CloseButton';
-export * from './Collapsible';
 export * from './ControlDropdown';
 export * from './Datatable';
 export * from './DateRangePicker';
