@@ -1,4 +1,5 @@
 import type { DefaultTheme } from 'styled-components';
+import type { ReactNode } from 'react';
 
 export interface DSContextValue {
   portalsContainerId: string;
@@ -16,4 +17,5 @@ export interface DSProviderProps {
    * Design system config object
    */
   config?: Partial<DSContextValue>;
+  children: ReactNode;
 }

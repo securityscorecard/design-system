@@ -1,11 +1,9 @@
-import type { FC } from 'react';
-
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 
 import { useModal } from './useModal';
 import { defaultDSContext } from '../../../theme/DSProvider/DSProvider';
 
-const Modal: FC = () => <div>Modal Content</div>;
+const Modal = () => <div>Modal Content</div>;
 
 describe('useModal', () => {
   it('should append inline styles to portals container when mounted', () => {

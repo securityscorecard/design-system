@@ -1,4 +1,4 @@
-import type { FC, KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 import type { GoToPageProps } from './GoToPage.types';
 
 import { useRef } from 'react';
@@ -38,7 +38,7 @@ const GoToPageLabel = styled.label`
   color: ${getColor('neutral.700')};
 `;
 
-const GoToPage: FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
+const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handlePageChange = (e: KeyboardEvent<HTMLInputElement>) => {
     const { target, key } = e;

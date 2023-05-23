@@ -1,4 +1,4 @@
-import type { FC, KeyboardEventHandler } from 'react';
+import type { KeyboardEventHandler } from 'react';
 import type { DropdownProps } from './Dropdown.types';
 
 import {
@@ -18,7 +18,7 @@ import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
 import ControlledDropdown from './ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Dropdown: FC<DropdownProps> = forwardRef(
+const Dropdown = forwardRef(
   (
     {
       children,
@@ -34,7 +34,7 @@ const Dropdown: FC<DropdownProps> = forwardRef(
       defaultIsOpen = false,
       onClose = noop,
       onOpen = noop,
-    },
+    }: DropdownProps,
     ref,
   ) => {
     const [isVisible, setIsVisible] = useState(defaultIsOpen);

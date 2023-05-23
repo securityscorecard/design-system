@@ -1,6 +1,5 @@
 import type { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import type { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
-import type { FC } from 'react';
 import type { Color } from '../../theme/colors.types';
 import type { IconProps } from './Icon.types';
 
@@ -24,10 +23,11 @@ const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
   ${createSpacings};
 `;
 
-const Icon: FC<
+const Icon = forwardRef<
+  SVGSVGElement,
   IconProps &
     Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>
-> = forwardRef(
+>(
   (
     {
       name,

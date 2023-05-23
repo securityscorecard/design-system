@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { NumberProps } from '../Number/Number.types';
 
 import { isNonEmptyString } from 'ramda-adjunct';
@@ -7,7 +6,7 @@ import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
 import { Input } from '../../../forms';
 
-const Count: FC<NumberProps> = ({
+const Count = ({
   value = '',
   onChange,
   min,
@@ -16,7 +15,7 @@ const Count: FC<NumberProps> = ({
   errorMessage = 'Use only integers',
   isInvalid = false,
   onError,
-}) => {
+}: NumberProps) => {
   const handleKeyPress = (event) => {
     if (!/[0-9]/.test(event.key)) {
       event.preventDefault();

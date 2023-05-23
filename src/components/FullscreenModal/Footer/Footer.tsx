@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { FooterProps } from './Footer.types';
 
 import { useRef } from 'react';
@@ -25,13 +24,13 @@ const BaseFooter = styled.footer`
   margin-top: ${pxToRem(40)};
 `;
 
-const Footer: FC<FooterProps> = ({
+const Footer = ({
   children,
   width,
   offset,
   modalRef,
   scrollToTopButtonLabel,
-}) => {
+}: FooterProps) => {
   const modalFooterRef = useRef(null);
   const { isFixed, shouldShowScrollToTopButton } = useStickyFooter(
     modalRef,

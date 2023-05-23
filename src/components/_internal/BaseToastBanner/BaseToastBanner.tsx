@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type {
   BaseToastBannerProps,
   BaseToastBannerWrapperProps,
@@ -64,7 +63,7 @@ const StyledIcon = styled(Icon)<{
     pxToRem($iconPxSizesVariants[$variant])};
 `;
 
-const BaseToastBanner: FC<BaseToastBannerWrapperProps> = ({
+const BaseToastBanner = ({
   children,
   variant,
   paddingSize,
@@ -73,7 +72,7 @@ const BaseToastBanner: FC<BaseToastBannerWrapperProps> = ({
   iconSize,
   iconPxSizesVariants,
   iconAlign = 'center',
-}) => (
+}: BaseToastBannerWrapperProps) => (
   <Inline stretch={stretch}>
     {isNotNilOrEmpty(variant) && (
       <IconPadbox

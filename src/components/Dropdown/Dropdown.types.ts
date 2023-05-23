@@ -3,7 +3,7 @@ import type {
   ComponentPropsWithRef,
   PropsWithChildren,
   ReactElement,
-  Ref,
+  ReactNode,
 } from 'react';
 import type { SpaceSize } from '../../theme/space.types';
 import type { PaddingType } from '../../utils/space';
@@ -60,6 +60,7 @@ interface BaseDropdownProps {
    * Should show arrow tip pointing to the center of trigger element.
    */
   hasPaneArrow?: DropdownPaneProps['hasArrow'];
+  children: ReactNode;
 }
 
 export interface ControlledDropdownProps extends BaseDropdownProps {
@@ -105,14 +106,6 @@ export interface DropdownProps extends BaseDropdownProps {
    * Callback called when the dropdown pane is opened.
    */
   onOpen?: () => void;
-  /**
-   * Imperative handle ref
-   */
-  ref?: Ref<{
-    togglePane: () => void;
-    hidePane: () => void;
-    showPane: () => void;
-  }>;
 }
 
 export type InteractiveElement = HTMLButtonElement | HTMLAnchorElement;

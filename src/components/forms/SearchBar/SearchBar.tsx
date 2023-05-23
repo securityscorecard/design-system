@@ -69,7 +69,7 @@ const SearchInput = styled(Input)`
     getSpace($isClearable ? SpaceSizes.lgPlus : SpaceSizes.md, { theme })};
 `;
 
-const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
+const SearchBar = forwardRef(
   (
     {
       value: valueFromProps,
@@ -87,7 +87,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
       shouldTriggerSearchOnMount = false,
       className,
       ...rest
-    },
+    }: SearchBarProps,
     ref,
   ) => {
     const { value, onChange, isControlled, clearValue } = useField(

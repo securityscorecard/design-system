@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { Meta, Story } from '@storybook/react';
 
 import { useCallback, useEffect, useRef } from 'react';
@@ -76,9 +75,7 @@ function Footer() {
     </Inline>
   );
 }
-const Sidebar: FC<{
-  modalRef?: HTMLElement;
-}> = ({ modalRef }) => {
+const Sidebar = ({ modalRef }: { modalRef?: HTMLElement }) => {
   useEffect(() => {
     if (modalRef === null) return;
 

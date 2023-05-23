@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { PaginationItemProps } from './Pagination.types';
 
 import styled, { css } from 'styled-components';
@@ -73,14 +72,14 @@ const StyledPaginationComponent = styled.button<{
         `};
 `;
 
-export const PaginationItem: FC<PaginationItemProps> = ({
+export const PaginationItem = ({
   children,
   isDisabled,
   isCurrent,
   isShrinked,
   onClick,
   ...props
-}) => {
+}: PaginationItemProps) => {
   const handleOnClick = () => {
     if (isCurrent) {
       return;

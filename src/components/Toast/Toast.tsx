@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { ReactNode } from 'react';
 import type { ToastProps } from './Toast.types';
 
 import { transparentize } from 'polished';
@@ -67,14 +67,18 @@ const iconPxSizesVariants = {
 
 const stopPropagation = (event) => event?.stopPropagation();
 
-const ToastAreaContainer: FC<{
+const ToastAreaContainer = ({
+  children,
+  isStandalone,
+}: {
   isStandalone: boolean;
-}> = ({ children, isStandalone }) => {
+  children: ReactNode;
+}) => {
   // eslint-disable-next-line
   return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
 };
 
-const Toast: FC<ToastProps> = forwardRef<HTMLDivElement, ToastProps>(
+const Toast = forwardRef<HTMLDivElement, ToastProps>(
   ({ onClose, children, width = 400, variant, isStandalone = true }, ref) => {
     return (
       <ToastAreaContainer isStandalone={isStandalone}>

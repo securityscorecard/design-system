@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { NumberProps } from './Number.types';
 
 import { isNonEmptyString } from 'ramda-adjunct';
@@ -7,7 +6,7 @@ import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
 import { Input } from '../../../forms';
 
-const Number: FC<NumberProps> = ({
+const Number = ({
   value = '',
   onChange,
   min,
@@ -16,7 +15,7 @@ const Number: FC<NumberProps> = ({
   errorMessage = 'Use only numbers',
   isInvalid = false,
   onError,
-}) => {
+}: NumberProps) => {
   const handleOnChange = (event) => {
     onChange(event);
     const hasError =

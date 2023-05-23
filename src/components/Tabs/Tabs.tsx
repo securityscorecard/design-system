@@ -1,4 +1,3 @@
-import type { FC, ReactText } from 'react';
 import type { TabsProps } from './Tabs.types';
 
 import { equals } from 'ramda';
@@ -12,9 +11,9 @@ import { CLX_COMPONENT } from '../../theme/constants';
 import { createCtx } from '../../managers/common/createCtx';
 
 export const { useContext: useTabsContext, Provider } = createCtx<{
-  selectedPatternMatcher: (a: ReactText, b: ReactText) => boolean;
-  selectedValue: ReactText;
-  selectTab: (selectedValue: ReactText) => void;
+  selectedPatternMatcher: (a: string | number, b: string | number) => boolean;
+  selectedValue: string | number;
+  selectTab: (selectedValue: string | number) => void;
   isExpanded: boolean;
   variant: keyof typeof TabVariants;
 }>(
@@ -22,7 +21,7 @@ export const { useContext: useTabsContext, Provider } = createCtx<{
   '"useTabsContext" must be inside a "TabsContext" with a value',
 );
 
-const Tabs: FC<TabsProps> = forwardRef(
+const Tabs = forwardRef(
   (
     {
       selectedValue,
@@ -31,7 +30,7 @@ const Tabs: FC<TabsProps> = forwardRef(
       onSelectTab,
       variant = TabVariants.underline,
       isExpanded = false,
-    },
+    }: TabsProps,
     ref,
   ) => (
     <Provider

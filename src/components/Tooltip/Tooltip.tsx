@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { TooltipProps } from './Tooltip.types';
 
 import { forwardRef, useRef } from 'react';
@@ -8,7 +7,7 @@ import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums
 import { Dropdown } from '../Dropdown';
 import { mergeRefs } from '../../utils/mergeRefs';
 
-const Tooltip: FC<TooltipProps> = forwardRef(
+const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
   (
     {
       children,

@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import type { BannerProps } from './Banner.types';
 import type {
   AbsoluteLinkActionKind,
@@ -58,7 +58,7 @@ const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
 
 const CHANGE_LAYOUT_BREAKPOINT = 'change-banner-layout';
 
-const BannerContent: FC<BannerProps> = ({ variant, children, actions }) => (
+const BannerContent = ({ variant, children, actions }: BannerProps) => (
   <>
     <Text $variant={variant} as="div" size={TextSizes.md}>
       {children}
@@ -84,7 +84,7 @@ const BannerContent: FC<BannerProps> = ({ variant, children, actions }) => (
   </>
 );
 
-const Banner: FC<BannerProps> = forwardRef(
+const Banner = forwardRef<HTMLDivElement, BannerProps>(
   (
     {
       children,

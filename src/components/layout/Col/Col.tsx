@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { ColProps, Cols } from './Col.types';
 
 import { forwardRef } from 'react';
@@ -26,16 +25,18 @@ const StyledCol = styled(Box)`
   padding-right: ${getColPadding};
 `;
 
-const Col: FC<ColProps> = forwardRef(({ children, cols, offset }, ref) => (
-  <StyledCol
-    ref={ref}
-    ml={`${(100 / 12) * offset}%`}
-    {...getColWidth(cols)}
-    className={CLX_LAYOUT}
-  >
-    {children}
-  </StyledCol>
-));
+const Col = forwardRef<HTMLDivElement, ColProps>(
+  ({ children, cols, offset }, ref) => (
+    <StyledCol
+      ref={ref}
+      ml={`${(100 / 12) * offset}%`}
+      {...getColWidth(cols)}
+      className={CLX_LAYOUT}
+    >
+      {children}
+    </StyledCol>
+  ),
+);
 
 Col.defaultProps = {
   cols: 'auto',

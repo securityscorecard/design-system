@@ -1,6 +1,5 @@
 import type { InputGroupProps } from './InputGroup.types';
 import type { InlineProps } from '../../layout/Inline/Inline';
-import type { FC } from 'react';
 
 import { Children, forwardRef } from 'react';
 import styled from 'styled-components';
@@ -64,43 +63,50 @@ const IconContainer = styled(Padbox)`
   align-items: center;
 `;
 
-const InputGroup: FC<InputGroupProps & InlineProps> = forwardRef<
-  HTMLDivElement,
-  InputGroupProps & InlineProps
->(({ children, hasDivider, className, ...inlineProps }, ref) => {
-  const { error } = useLogger('InputGroup');
-  const ALLOWED_CHILDREN = [
-    Select,
-    Input,
-    Icon,
-    Button,
-    Password,
-    InputGroup,
-    SearchBar,
-  ];
-  Children.forEach(children, (child) => {
-    if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
-      error(
-        'Only Select, Input, InputGroup, Icon, Button, SearchBar and Password are valid childs of InputGroup',
-      );
-    }
-  });
-  return (
-    <InputGroupContainer
-      ref={ref}
-      className={cls(CLX_COMPONENT, className)}
-      hasDivider={hasDivider}
-      {...inlineProps}
-      stretch={inlineProps.stretch || 'start'}
-    >
-      {Children.map(children, (child) => {
-        if (prop('type', child) === Icon) {
-          return <IconContainer paddingSize="sm">{child}</IconContainer>;
-        }
-        return child;
-      })}
-    </InputGroupContainer>
-  );
-});
+const InputGroup = forwardRef<HTMLDivElement, InputGroupProps & InlineProps>(
+  (
+    {
+      children,
+      hasDivider,
+      className,
+      ...inlineProps
+    }: InputGroupProps & InlineProps,
+    ref,
+  ) => {
+    const { error } = useLogger('InputGroup');
+    const ALLOWED_CHILDREN = [
+      Select,
+      Input,
+      Icon,
+      Button,
+      Password,
+      InputGroup,
+      SearchBar,
+    ];
+    Children.forEach(children, (child) => {
+      if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
+        error(
+          'Only Select, Input, InputGroup, Icon, Button, SearchBar and Password are valid childs of InputGroup',
+        );
+      }
+    });
+    return (
+      <InputGroupContainer
+        ref={ref}
+        className={cls(CLX_COMPONENT, className)}
+        hasDivider={hasDivider}
+        {...inlineProps}
+        stretch={inlineProps.stretch || 'start'}
+      >
+        {Children.map(children, (child) => {
+          if (prop('type', child) === Icon) {
+            return <IconContainer paddingSize="sm">{child}</IconContainer>;
+          }
+          return child;
+        })}
+      </InputGroupContainer>
+    );
+  },
+);
 
 export default InputGroup;

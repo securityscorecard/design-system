@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { SortableItemProps } from './SortableList.types';
 
 import styled from 'styled-components';
@@ -40,7 +39,7 @@ const Handle = styled(Padbox)`
   }
 `;
 
-const SortableItem: FC<SortableItemProps> = ({ label, id, renderItem }) => {
+const SortableItem = ({ label, id, renderItem }: SortableItemProps) => {
   const {
     attributes,
     listeners,

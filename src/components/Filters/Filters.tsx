@@ -1,5 +1,4 @@
 import type { Field, Filter, FiltersProps } from './Filters.types';
-import type { FC } from 'react';
 
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import {
@@ -75,7 +74,7 @@ const FiltersBase = styled(Padbox)`
   flex-grow: 1;
 `;
 
-const Filters: FC<FiltersProps> = forwardRef(
+const Filters = forwardRef<HTMLDivElement, FiltersProps>(
   (
     {
       fields,
