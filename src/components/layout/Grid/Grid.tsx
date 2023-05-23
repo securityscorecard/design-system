@@ -1,5 +1,5 @@
 import type { Property } from 'csstype';
-import type { ComponentPropsWithRef, FC } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import type { ResponsiveSpaceSize } from '../../../types/responsive.types';
 
 import styled, { css } from 'styled-components';
@@ -49,7 +49,7 @@ const GridRoot = styled.div<GridRootProps>(
   },
 );
 
-const Grid: FC<GridProps> = forwardRef<HTMLDivElement, GridProps>(
+const Grid = forwardRef<HTMLDivElement, GridProps>(
   ({ children, gap, align, cols, ...props }, ref) => {
     const { error } = useLogger('Grid');
     if (cols === 1) {

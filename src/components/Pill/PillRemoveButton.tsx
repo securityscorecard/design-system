@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { PillRemoveButtonProps } from './Pill.types';
 
 import styled from 'styled-components';
@@ -29,10 +28,7 @@ const PillRemoveButtonWrapper = styled.button`
   }
 `;
 
-const PillRemoveButton: FC<PillRemoveButtonProps> = ({
-  pillLabel,
-  ...props
-}) => (
+const PillRemoveButton = ({ pillLabel, ...props }: PillRemoveButtonProps) => (
   <PillRemoveButtonWrapper
     aria-label={`Remove ${pillLabel}`}
     type="button"

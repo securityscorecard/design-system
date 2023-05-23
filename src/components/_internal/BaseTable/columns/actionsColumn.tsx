@@ -1,5 +1,4 @@
-import type { ReactElement } from 'react';
-import type { CellProps, Column } from 'react-table';
+import type { Column } from 'react-table';
 
 import { map } from 'ramda';
 import styled, { css } from 'styled-components';
@@ -53,7 +52,7 @@ export function getActionsColumn<
     width: 48,
     disableSortBy: true,
     cellType: CellTypes.actions,
-    Cell: (props: CellProps<Record<string, unknown>>): ReactElement => {
+    Cell: (props) => {
       const { row, rowActions } = props;
       const actions = map((action) => ({
         ...action,

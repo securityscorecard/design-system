@@ -1,4 +1,4 @@
-import type { ComponentType, MouseEventHandler } from 'react';
+import type { ComponentType, MouseEventHandler, ReactNode } from 'react';
 import type { ThemeConfig } from 'react-select/src/theme';
 import type {
   IndicatorComponentType,
@@ -294,11 +294,9 @@ type InnerProps = {
   onMouseOver: MouseEventHandler<HTMLElement>;
   tabIndex: number;
 };
-export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
-  children,
-  innerProps,
-  ...props
-}) => (
+export const MultiValueContainer: ComponentType<
+  { children: ReactNode } & Record<string, unknown>
+> = ({ children, innerProps, ...props }) => (
   <PillWrapper
     color={PillColorsEnums.gray}
     isClickable={false}

@@ -1,4 +1,4 @@
-import type { FC, KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 import type { TabProps } from './Tabs.types';
 
 import { TabVariants } from './Tabs.enums';
@@ -8,7 +8,7 @@ import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 import { useTabsContext } from './Tabs';
 
-const Tab: FC<TabProps> = ({ children, color, value }) => {
+const Tab = ({ children, color, value }: TabProps) => {
   const isLink = value?.toString()?.startsWith('/');
   const {
     isExpanded = false,

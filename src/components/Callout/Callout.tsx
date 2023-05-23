@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { CalloutContainerProps, CalloutProps } from './Callout.types';
 
 import styled, { css } from 'styled-components';
@@ -53,7 +52,7 @@ const Container = styled(Padbox)<CalloutContainerProps>`
   ${({ $color }) => calloutColors[$color]};
 `;
 
-const Callout: FC<CalloutProps> = forwardRef<HTMLSpanElement, CalloutProps>(
+const Callout = forwardRef<HTMLSpanElement, CalloutProps>(
   (
     { children, icon = SSCIconNames.lightbulb, color = CalloutColors.info },
     ref,

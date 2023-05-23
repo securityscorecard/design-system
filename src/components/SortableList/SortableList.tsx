@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { SortableListProps } from './SortableList.types';
 
 import {
@@ -35,10 +34,7 @@ const SortableListRoot = styled.div<{
     isNotUndefined($maxHeight) && pxToRem($maxHeight)};
 `;
 
-const SortableList: FC<SortableListProps> = forwardRef<
-  HTMLDivElement,
-  SortableListProps
->(
+const SortableList = forwardRef<HTMLDivElement, SortableListProps>(
   (
     {
       items,

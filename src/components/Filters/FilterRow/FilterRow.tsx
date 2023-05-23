@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import type { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import type { ComponentWithProps as ComponentWithPropsTypes } from '../Filters.types';
 
@@ -183,7 +183,7 @@ const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   );
 };
 
-const FilterRow: FC<FilterRowProps> = ({
+const FilterRow = ({
   fields,
   index,
   onOperatorChange,
@@ -203,7 +203,7 @@ const FilterRow: FC<FilterRowProps> = ({
   isOperatorFieldEnabled,
   defaultOperator,
   hasApplyButton,
-}) => {
+}: FilterRowProps) => {
   const { field, conditions, condition, component } = useFilterRow(
     fields,
     fieldValue,

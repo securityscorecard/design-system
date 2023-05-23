@@ -1,5 +1,5 @@
-import type { FC } from 'react';
 import type { UserAvatarProps, UserAvatarRootProps } from './UserAvatar.types';
+import type { Ref } from 'react';
 
 import styled, { css } from 'styled-components';
 import { any, pipe, take, toUpper, trim } from 'ramda';
@@ -18,7 +18,6 @@ import {
 } from '../../utils/helpers';
 import { UserAvatarSizes } from './UserAvatar.enums';
 import { BaseButton } from '../_internal/BaseButton';
-import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const smallAvatar = css`
@@ -71,8 +70,8 @@ const RootUserAvatar = styled.div<UserAvatarRootProps>`
 `;
 const normalizeString = pipe(trim, take(2), toUpper);
 
-const UserAvatar: FC<UserAvatarProps> = forwardRef<
-  HTMLDivElement,
+const UserAvatar = forwardRef<
+  HTMLButtonElement | HTMLDivElement,
   UserAvatarProps
 >(
   (
@@ -90,7 +89,7 @@ const UserAvatar: FC<UserAvatarProps> = forwardRef<
   ) =>
     any(isNotUndefined, [href, to, onClick]) ? (
       <RootUserAvatar
-        ref={ref}
+        ref={ref as Ref<HTMLButtonElement>}
         $isInverted={isInverted}
         $size={size}
         aria-label="User avatar"
@@ -98,7 +97,6 @@ const UserAvatar: FC<UserAvatarProps> = forwardRef<
         className={cls(CLX_COMPONENT, className)}
         color={ButtonColors.primary}
         href={href}
-        paddingSize={SpaceSizes.none}
         to={to}
         variant={ButtonVariants.solid}
         onClick={onClick}
@@ -108,7 +106,7 @@ const UserAvatar: FC<UserAvatarProps> = forwardRef<
       </RootUserAvatar>
     ) : (
       <RootUserAvatar
-        ref={ref}
+        ref={ref as Ref<HTMLDivElement>}
         $isInverted={isInverted}
         $size={size}
         className={cls(CLX_COMPONENT, className)}

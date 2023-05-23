@@ -1,4 +1,4 @@
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import type { ElementCounterProps } from './ElementCounter.types';
 
 import { useEffect, useState } from 'react';
@@ -70,11 +70,11 @@ const CounterText = styled(Text).attrs(() => ({
   line-height: ${pxToRem(24)};
 `;
 
-const ElementCounter: FC<ElementCounterProps> = ({
+const ElementCounter = ({
   dataSize,
   hasSelection,
   hasOnlyPerPageSelection,
-}) => {
+}: ElementCounterProps) => {
   const theme = useTheme();
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({

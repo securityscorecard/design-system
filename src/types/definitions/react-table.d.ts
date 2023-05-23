@@ -47,10 +47,8 @@ import type {
   UseSortByOptions,
   UseSortByState,
 } from 'react-table';
-import type {
-  CustomColumnOptions,
-  RowAction,
-} from '../../components/Datatable/Table/Table.types';
+import type { CustomColumnOptions } from '../../components/Datatable/Table/Table.types';
+import type { RowAction } from '../../components/_internal/BaseTable/BaseTable.types';
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration

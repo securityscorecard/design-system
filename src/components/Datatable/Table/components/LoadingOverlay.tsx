@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { LoadingOverlayProps } from './LoadingOverlay.types';
 
 import styled, { css } from 'styled-components';
@@ -45,10 +44,7 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay: FC<LoadingOverlayProps> = ({
-  isCancelable,
-  onCancel,
-}) => (
+const LoadingOverlay = ({ isCancelable, onCancel }: LoadingOverlayProps) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
     <LoadingIndicatorContainer>

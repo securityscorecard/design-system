@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { ControlDropdownProps } from './ControlDropdown.types';
 
 import { forwardRef, useEffect, useState } from 'react';
@@ -14,10 +13,7 @@ import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const ControlDropdown: FC<ControlDropdownProps> = forwardRef<
-  HTMLDivElement,
-  ControlDropdownProps
->(
+const ControlDropdown = forwardRef<HTMLDivElement, ControlDropdownProps>(
   (
     {
       children,

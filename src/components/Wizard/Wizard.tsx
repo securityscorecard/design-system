@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { WizardProps } from './Wizard.types';
 
 import { forwardRef } from 'react';
@@ -10,7 +9,7 @@ import { WizardProvider } from './Wizard.context';
 import { WizardActions } from './WizardActions';
 import { WizardStepper } from './WizardStepper';
 
-const Wizard: FC<WizardProps> = forwardRef<HTMLDivElement, WizardProps>(
+const Wizard = forwardRef<HTMLDivElement, WizardProps>(
   (
     {
       initialStep,
@@ -20,7 +19,7 @@ const Wizard: FC<WizardProps> = forwardRef<HTMLDivElement, WizardProps>(
       isBackwardNavigationEnabled,
       isOverlayBlurred = true,
       children,
-    }: WizardProps,
+    },
     ref,
   ) => {
     return (

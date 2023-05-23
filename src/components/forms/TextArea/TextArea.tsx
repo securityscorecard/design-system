@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, FC, PropsWithRef } from 'react';
+import type { ChangeEventHandler, ComponentPropsWithRef } from 'react';
 import type { TextAreaProps } from './TextArea.types';
 
 import { forwardRef, useRef, useState } from 'react';
@@ -94,9 +94,10 @@ const Counter = styled.span<{ isInvalid: boolean }>`
     `}
 `;
 
-const TextArea: FC<
-  TextAreaProps & PropsWithRef<JSX.IntrinsicElements['textarea']>
-> = forwardRef(
+const TextArea = forwardRef<
+  HTMLTextAreaElement,
+  TextAreaProps & ComponentPropsWithRef<'textarea'>
+>(
   (
     {
       maxLength,

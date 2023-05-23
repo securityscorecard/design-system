@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, FC } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import type { LinkProps } from './Link.types';
 
 import { useContext } from 'react';
@@ -47,7 +47,7 @@ const LinkRoot = styled.a`
   ${({ $isExperimental }) => $isExperimental && experimetalLink}
 `;
 
-const Link: FC<LinkProps & ComponentPropsWithRef<typeof LinkRoot>> = ({
+const Link = ({
   children,
   color = LinkColors.primary,
   as = null,
@@ -56,7 +56,7 @@ const Link: FC<LinkProps & ComponentPropsWithRef<typeof LinkRoot>> = ({
   onClick,
   className,
   ...props
-}) => {
+}: LinkProps & ComponentPropsWithRef<typeof LinkRoot>) => {
   let RouterLink = null;
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();

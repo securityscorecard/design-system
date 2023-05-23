@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import styled from 'styled-components';
 import { useMemo } from 'react';
 
@@ -76,15 +74,7 @@ const MonthIndicator = styled.button`
   }
 `;
 
-export const DatePickerCustomHeader: FC<{
-  decreaseMonth: () => void;
-  increaseMonth: () => void;
-  increaseYear: () => void;
-  decreaseYear: () => void;
-  toggleYearPicker: () => void;
-  date: Date;
-  showYearPicker: boolean;
-}> = ({
+export const DatePickerCustomHeader = ({
   decreaseMonth,
   decreaseYear,
   toggleYearPicker,
@@ -92,6 +82,14 @@ export const DatePickerCustomHeader: FC<{
   increaseMonth,
   increaseYear,
   showYearPicker,
+}: {
+  decreaseMonth: () => void;
+  increaseMonth: () => void;
+  increaseYear: () => void;
+  decreaseYear: () => void;
+  toggleYearPicker: () => void;
+  date: Date;
+  showYearPicker: boolean;
 }) => {
   const [onClickLeft, onClickRight] = useMemo(() => {
     return showYearPicker

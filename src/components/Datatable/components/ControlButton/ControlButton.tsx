@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { ControlButtonProps } from './ControlButton.types';
 
 import { Button } from '../../../Button';
@@ -6,14 +5,14 @@ import { Badge } from '../../../Badge';
 import { Pill } from '../../../Pill';
 import { Inline } from '../../../layout';
 
-const ControlButton: FC<ControlButtonProps> = ({
+const ControlButton = ({
   label,
   iconName,
   appliedFilters = 0,
   className = '',
   onClick,
   hiddenColumns = 0,
-}) => (
+}: ControlButtonProps) => (
   <Button
     className={className}
     iconName={iconName}

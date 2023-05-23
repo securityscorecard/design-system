@@ -1,10 +1,5 @@
 import type { ChangeEvent, MutableRefObject, ReactElement } from 'react';
-import type {
-  CellProps,
-  Column,
-  HeaderProps,
-  TableToggleCommonProps,
-} from 'react-table';
+import type { Column, TableToggleCommonProps } from 'react-table';
 
 import { forwardRef, useEffect, useRef } from 'react';
 
@@ -58,7 +53,7 @@ export function getSelectionColumn<
       isMultiSelect,
       dispatch,
       state: { selectedRowIds: tableSelectedRowIds },
-    }: HeaderProps<Record<string, unknown>>): ReactElement => {
+    }) => {
       if (dataSize === 0) return null;
 
       const selectedLength = Object.keys(tableSelectedRowIds).length;
@@ -84,11 +79,7 @@ export function getSelectionColumn<
       );
     },
     cellType: CellTypes.selection,
-    Cell: ({
-      isMultiSelect,
-      row,
-      dispatch,
-    }: CellProps<Record<string, unknown>>): ReactElement => {
+    Cell: ({ isMultiSelect, row, dispatch }) => {
       const id = `row-${row.id}`;
 
       return (

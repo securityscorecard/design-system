@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { SignalProps } from './Signal.types';
 
 import { prop } from 'ramda';
@@ -60,7 +59,7 @@ const kinds = {
   },
 };
 
-const Signal: FC<SignalProps> = forwardRef<SVGSVGElement, SignalProps>(
+const Signal = forwardRef<SVGSVGElement, SignalProps>(
   ({ kind, size = 16, title = '', className, ...props }, ref) => {
     if (isNilOrEmpty(kind)) return null;
 

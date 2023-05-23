@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { PasswordProps } from './Password.types';
 
 import { forwardRef, useState } from 'react';
@@ -42,7 +41,7 @@ const ToggleButton = styled.button`
   justify-content: center;
 `;
 
-const Password: FC<PasswordProps> = forwardRef(
+const Password = forwardRef<HTMLInputElement, PasswordProps>(
   (
     {
       isInvalid = false,

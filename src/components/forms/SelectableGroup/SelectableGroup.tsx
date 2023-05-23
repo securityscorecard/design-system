@@ -1,11 +1,10 @@
 /* eslint-disable react/destructuring-assignment */
-import type { ChangeEvent, FC } from 'react';
+import type { ChangeEvent } from 'react';
 import type { Option, SelectableGroupProps } from './SelectableGroup.types';
 
-import { forwardRef, useState } from 'react';
+import { forwardRef, useId, useState } from 'react';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import styled from 'styled-components';
-import { useId } from '@react-aria/utils';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { pipe, sort } from 'ramda';
 import cls from 'classnames';
@@ -73,10 +72,7 @@ const getNextValue = (value: string, currentValues: string[]) => {
   return currentValues.filter((cv) => cv !== value);
 };
 
-const SelectableGroup: FC<SelectableGroupProps> = forwardRef<
-  HTMLDivElement,
-  SelectableGroupProps
->(
+const SelectableGroup = forwardRef<HTMLDivElement, SelectableGroupProps>(
   (
     {
       isMulti = false,

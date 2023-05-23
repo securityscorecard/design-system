@@ -1,6 +1,5 @@
 import type {
   EventHandler,
-  FC,
   KeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
@@ -19,7 +18,7 @@ import PillLabel from './PillLabel';
 import PillRemoveButton from './PillRemoveButton';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Pill: FC<PillProps> = forwardRef<HTMLSpanElement, PillProps>(
+const Pill = forwardRef<HTMLSpanElement, PillProps>(
   (
     {
       label,

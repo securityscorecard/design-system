@@ -1,7 +1,8 @@
-import type { FC } from 'react';
 import type {
   AbsoluteLinkActionKind,
+  ActionKinds,
   ActionWithSubactions,
+  HandlerActionKind,
   RelativeLinkActionKind,
 } from '../../../../types/action.types';
 import type { BatchActionsProps } from './BatchActions.types';
@@ -29,7 +30,68 @@ const BatchActionButton = styled(BaseButton)`
   height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
 `;
 
-const BatchActions: FC<BatchActionsProps> = ({ actions }) => {
+const renderSubactions = ({
+  action,
+  handleSubactionClick,
+}: {
+  action: ActionWithSubactions<BatchActionArgs>;
+  handleSubactionClick: (
+    onClick: HandlerActionKind<BatchActionArgs>['onClick'],
+  ) => void;
+}) => {
+  const augmentedSubActions = map(
+    (subAction) => ({
+      ...subAction,
+      onClick: () => handleSubactionClick(subAction.onClick),
+    }),
+    action.subActions,
+  );
+
+  return (
+    <DropdownMenu
+      key={action.name}
+      actions={augmentedSubActions}
+      paneWidth={140}
+      placement="bottom-end"
+    >
+      <BatchActionButton
+        name={action.name}
+        variant={ButtonVariants.text}
+        onClick={action.onClick}
+      >
+        <Inline align="center" gap={SpaceSizes.xs}>
+          <span>{action.label}</span>
+          <Icon margin={{ left: 0.25 }} name={SSCIconNames.angleDown} />
+        </Inline>
+      </BatchActionButton>
+    </DropdownMenu>
+  );
+};
+const renderAction = ({
+  handleActionClick,
+  action,
+}: {
+  action: ActionKinds<BatchActionArgs>;
+  handleActionClick: (
+    onClick: HandlerActionKind<BatchActionArgs>['onClick'],
+  ) => void;
+}) => {
+  const { name, label, to, href, onClick } = action;
+  return (
+    <BatchActionButton
+      key={name}
+      href={href as AbsoluteLinkActionKind<BatchActionArgs>['href']}
+      name={name}
+      to={to as RelativeLinkActionKind<BatchActionArgs>['to']}
+      variant={ButtonVariants.text}
+      onClick={() => handleActionClick(onClick)}
+    >
+      {label}
+    </BatchActionButton>
+  );
+};
+
+const BatchActions = ({ actions }: BatchActionsProps) => {
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
       selectedIds: s.selectedIds,
@@ -53,54 +115,15 @@ const BatchActions: FC<BatchActionsProps> = ({ actions }) => {
   return (
     <Inline>
       {actions.map((action) => {
-        let element;
-        if (
-          isNotUndefined(
-            (action as ActionWithSubactions<BatchActionArgs>).subActions,
-          )
-        ) {
-          const subActions = map(
-            (subAction) => ({
-              ...subAction,
-              onClick: () => handleOnActionClick(subAction.onClick),
-            }),
-            (action as ActionWithSubactions<BatchActionArgs>).subActions,
-          );
-
-          element = (
-            <DropdownMenu
-              key={action.name}
-              actions={subActions}
-              paneWidth={140}
-              placement="bottom-end"
-            >
-              <BatchActionButton
-                name={action.name}
-                variant={ButtonVariants.text}
-                onClick={action.onClick}
-              >
-                <Inline align="center" gap={SpaceSizes.xs}>
-                  <span>{action.label}</span>
-                  <Icon margin={{ left: 0.25 }} name={SSCIconNames.angleDown} />
-                </Inline>
-              </BatchActionButton>
-            </DropdownMenu>
-          );
-        } else {
-          element = (
-            <BatchActionButton
-              key={action.name}
-              href={(action as AbsoluteLinkActionKind<BatchActionArgs>).href}
-              name={action.name}
-              to={(action as RelativeLinkActionKind<BatchActionArgs>).to}
-              variant={ButtonVariants.text}
-              onClick={() => handleOnActionClick(action.onClick)}
-            >
-              {action.label}
-            </BatchActionButton>
-          );
-        }
-
+        const element = isNotUndefined(action.subActions)
+          ? renderSubactions({
+              action: action as ActionWithSubactions<BatchActionArgs>,
+              handleSubactionClick: handleOnActionClick,
+            })
+          : renderAction({
+              action: action as ActionKinds<BatchActionArgs>,
+              handleActionClick: handleOnActionClick,
+            });
         return (
           <Tooltip key={action.name} popup={action.tooltip}>
             {element}

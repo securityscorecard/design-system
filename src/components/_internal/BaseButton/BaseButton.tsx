@@ -1,4 +1,3 @@
-import type { ComponentProps } from 'react';
 import type { BaseButtonProps } from './BaseButton.types';
 
 import {
@@ -29,10 +28,7 @@ const BaseStyledIcon = styled(Icon)`
   font-size: ${getToken('font-action-size')};
 `;
 
-const BaseButton = forwardRef<
-  HTMLButtonElement,
-  BaseButtonProps & ComponentProps<typeof BaseStyledButton>
->(
+const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
   (
     {
       children,

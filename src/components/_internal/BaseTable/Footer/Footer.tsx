@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { FooterProps } from './Footer.types';
 
 import styled from 'styled-components';
@@ -23,14 +22,14 @@ const PaginationContainer = styled.div`
   flex: 1 0 auto;
 `;
 
-const Footer: FC<FooterProps> = ({
+const Footer = ({
   pageCount,
   pageButtonsCount,
   pageIndex,
   onGotoPage,
   isDataLoading = false,
   hasPagination = true,
-}) => {
+}: FooterProps) => {
   const handlePageChange = (page) => onGotoPage(page - 1);
 
   return (

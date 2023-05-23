@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { TagsProps } from './Tag.types';
 
 import styled from 'styled-components';
@@ -38,7 +37,7 @@ const RemoveButton = styled.button`
   font-size: ${pxToRem(10)};
 `;
 
-const Tag: FC<TagsProps> = ({ value, onClose }) => (
+const Tag = ({ value, onClose }: TagsProps) => (
   <Container alignItems="center">
     {value}{' '}
     <RemoveButton type="button" onClick={onClose}>

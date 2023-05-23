@@ -1,4 +1,4 @@
-import type { ComponentProps, FC } from 'react';
+import type { ComponentProps } from 'react';
 import type { SortingIconProps } from './Head.types';
 
 import { memo } from 'react';
@@ -23,7 +23,7 @@ const StyledIcon = styled(Icon).attrs((props) => ({
     `};
 `;
 
-const SortingIcon: FC<SortingIconProps> = memo(({ isSorted, isSortedDesc }) => {
+const SortingIcon = memo(({ isSorted, isSortedDesc }: SortingIconProps) => {
   if (isSortedDesc)
     return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
   if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;

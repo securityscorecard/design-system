@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, FC, HTMLProps } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import styled from 'styled-components';
 import cls from 'classnames';
@@ -21,19 +21,19 @@ const LabelContainer = styled(Text)`
   }
 `;
 
-const Label: FC<
-  HTMLProps<HTMLLabelElement> & ComponentPropsWithRef<typeof Text>
-> = forwardRef(({ children, htmlFor, className, ...props }, ref) => (
-  <LabelContainer
-    ref={ref}
-    as="label"
-    className={cls(CLX_COMPONENT, className)}
-    htmlFor={htmlFor}
-    size={TextSizes.md}
-    {...props}
-  >
-    {children}
-  </LabelContainer>
-));
+const Label = forwardRef<HTMLLabelElement, ComponentPropsWithRef<typeof Text>>(
+  ({ children, htmlFor, className, ...props }, ref) => (
+    <LabelContainer
+      ref={ref}
+      as="label"
+      className={cls(CLX_COMPONENT, className)}
+      htmlFor={htmlFor}
+      size={TextSizes.md}
+      {...props}
+    >
+      {children}
+    </LabelContainer>
+  ),
+);
 
 export default Label;

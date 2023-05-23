@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { BatchModuleProps } from './BatchModule.types';
 
 import { useEffect, useState } from 'react';
@@ -19,17 +18,18 @@ const BatchModuleWrapper = styled.div`
   padding: ${getSpace('md')};
 `;
 
-const BatchModule: FC<BatchModuleProps> = ({
+const BatchModule = ({
   actions,
   hasSelection,
   hasOnlyPerPageSelection,
   dataSize,
+
   columns: {
     isButtonDisplayed,
     defaultIsColumnsControlsOpen = false,
     defaultIsColumnsControlsApplied = false,
   },
-}) => {
+}: BatchModuleProps) => {
   const [isColumnsActive, setIsColumnsActive] = useState(
     defaultIsColumnsControlsOpen,
   );

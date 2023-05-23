@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { BottomBarProps } from './BottomBar.types';
 
 import styled from 'styled-components';
@@ -13,7 +12,7 @@ const AddFilterButton = styled(Button)`
   padding-left: ${getSpace(SpaceSizes.sm)};
 `;
 
-const BottomBar: FC<BottomBarProps> = ({
+const BottomBar = ({
   onSubmit,
   onAdd,
   onClearAll,
@@ -25,7 +24,7 @@ const BottomBar: FC<BottomBarProps> = ({
   isApplyDisabled = false,
   hasCloseButton,
   hasApplyButton = true,
-}) => {
+}: BottomBarProps) => {
   const canCancel = isCancelEnabled && isLoading;
   return (
     <Inline gap={SpaceSizes.lg} justify="space-between">

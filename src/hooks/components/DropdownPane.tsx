@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type {
   DropdownPaneProps,
   DropdownPaneStyles,
@@ -30,12 +29,12 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
     $isElevated && `box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')}`};
 `;
 
-const DropdownPane: FC<DropdownPaneProps> = ({
+const DropdownPane = ({
   children,
   onClickOut,
   isElevated = false,
   ...props
-}) => {
+}: DropdownPaneProps) => {
   const dropdownPaneRef = useOuterClick<HTMLDivElement>(onClickOut);
 
   return (

@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { DSContextValue, DSProviderProps } from './DSProvider.types';
 
 import { ThemeProvider } from 'styled-components';
@@ -18,11 +17,7 @@ export const defaultDSContext: DSContextValue = {
 };
 export const DSContext = createContext<DSContextValue>(defaultDSContext);
 
-const DSProvider: FC<DSProviderProps> = ({
-  children,
-  theme = {},
-  config = {},
-}) => {
+const DSProvider = ({ children, theme = {}, config = {} }: DSProviderProps) => {
   const dsTheme = createTheme(theme);
   const { hasIncludedGlobalStyles, ...dsConfig } = mergeDeepRight(
     defaultDSContext,

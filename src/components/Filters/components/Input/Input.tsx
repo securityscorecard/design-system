@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { InputProps } from './Input.types';
 
 import { isNonEmptyString } from 'ramda-adjunct';
@@ -7,7 +6,7 @@ import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../helpers';
 import { Input as BaseInput } from '../../../forms';
 
-const Input: FC<InputProps> = ({
+const Input = ({
   value = '',
   onChange,
   maxLength,
@@ -18,7 +17,7 @@ const Input: FC<InputProps> = ({
   isInvalid = false,
   onError,
   ...props
-}) => {
+}: InputProps) => {
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);

@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { HexGradeProps } from './HexGrade.types';
 
 import { forwardRef } from 'react';
@@ -54,7 +53,7 @@ const StyledSVG = styled.svg<HexGradeProps>`
   ${({ margin }) => createMarginSpacing(margin)};
 `;
 
-const HexGrade: FC<HexGradeProps> = forwardRef<SVGSVGElement, HexGradeProps>(
+const HexGrade = forwardRef<SVGSVGElement, HexGradeProps>(
   (
     {
       variant = HexGradeVariants.solid,
@@ -64,7 +63,7 @@ const HexGrade: FC<HexGradeProps> = forwardRef<SVGSVGElement, HexGradeProps>(
       margin,
       className,
       ...props
-    },
+    }: HexGradeProps,
     ref,
   ) => {
     const theme = useTheme();

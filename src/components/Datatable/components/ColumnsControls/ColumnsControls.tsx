@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { ColumnsControlsProps } from './ColumnsControls.types';
 
 import { useRef } from 'react';
@@ -17,13 +16,13 @@ import { Switch } from '../../../forms';
 import { SwitchSizes } from '../../../forms/Switch/Switch.enums';
 import { SpaceSizes } from '../../../../theme';
 
-const ColumnsControls: FC<ColumnsControlsProps> = ({
+const ColumnsControls = ({
   children,
   isOpen = false,
   onClose = noop,
   onApply = noop,
   onReset = noop,
-}) => {
+}: ColumnsControlsProps) => {
   const parentRef = useRef(null);
   const {
     orderedColumns,

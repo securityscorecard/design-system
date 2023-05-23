@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
@@ -14,7 +12,7 @@ const ListItem = styled.li`
   }
 `;
 
-const NoMatchingData: FC = () => (
+const NoMatchingData = () => (
   <>
     <H4 margin={{ top: 0, bottom: 0.8 }}>
       No items match your current filters

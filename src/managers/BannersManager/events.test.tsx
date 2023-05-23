@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 
 import { BannersProvider, useBanners } from './BannersProvider';
 import { addBanner, removeBanner } from './events';
