@@ -1,2 +1,2 @@
-export { addNotification, removeNotification } from './api';
+export { addNotification, updateNotification, removeNotification } from './api';
 export { NotificationsProvider } from './NotificationsProvider';

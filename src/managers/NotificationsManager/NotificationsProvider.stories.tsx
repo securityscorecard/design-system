@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Meta, Story } from '@storybook/react';
 
-import { addNotification, removeNotification } from './api';
+import { addNotification, removeNotification, updateNotification } from './api';
 import {
   Button,
   Checkbox,
@@ -68,6 +68,18 @@ export const Playground: Story = () => {
             }
           >
             Add notification
+          </Button>
+          <Button
+            onClick={() =>
+              updateNotification({
+                id,
+                variant: variant.value,
+                content,
+                autoDismiss,
+              })
+            }
+          >
+            Update notification
           </Button>
           <Button onClick={() => removeNotification(id)}>
             Remove notification
