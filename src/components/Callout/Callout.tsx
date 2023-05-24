@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { partialRight, pipe, prop } from 'ramda';
 
 import { CalloutProps } from './Callout.types';
 import { ColorTypes, SpaceSizes } from '../../theme';
@@ -13,11 +14,25 @@ import { SSCIcons } from '../Icon/Icon.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 
+const IconColor = {
+  info: ColorTypes.info700,
+  neutral: ColorTypes.neutral700,
+};
+
+const IconContainerBackground = {
+  info: ColorTypes.info100,
+  neutral: ColorTypes.neutral300,
+};
+
 const IconContainer = styled.div`
   width: ${pxToRem(36)};
   height: ${pxToRem(36)};
   flex-shrink: 0;
-  background-color: ${getColor(ColorTypes.info700)};
+  background-color: ${pipe(
+    prop('variant'),
+    partialRight(prop, [IconContainerBackground]),
+    getColor,
+  )};
   border-radius: ${getRadii('circle')};
   display: flex;
   align-items: center;
@@ -25,20 +40,34 @@ const IconContainer = styled.div`
   font-size: ${getFontSize('mdPlus')};
 `;
 
+const ContainerBackground = {
+  info: ColorTypes.info50,
+  neutral: ColorTypes.neutral100,
+};
+
 const Container = styled(Padbox)`
-  background-color: ${getColor(ColorTypes.info50)};
+  background-color: ${pipe(
+    prop('variant'),
+    partialRight(prop, [ContainerBackground]),
+    getColor,
+  )};
   border-radius: ${getRadii('default')};
 `;
 
 const Callout: React.FC<CalloutProps> = ({
   children,
   icon = SSCIconNames.lightbulb,
+  variant = 'info',
 }) => (
-  <Container className={CLX_COMPONENT} paddingSize={SpaceSizes.md}>
+  <Container
+    className={CLX_COMPONENT}
+    paddingSize={SpaceSizes.md}
+    variant={variant}
+  >
     <Inline gap={SpaceSizes.md}>
-      <IconContainer>
+      <IconContainer variant={variant}>
         {typeof icon === 'string' ? (
-          <Icon color={ColorTypes.neutral0} name={icon} />
+          <Icon color={IconColor[variant]} name={icon} />
         ) : (
           icon
         )}

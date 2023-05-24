@@ -31,3 +31,6 @@ DefaultCallout.args = Playground.args;
 
 export const WithIcon = CalloutTemplate.bind({});
 WithIcon.args = { ...Playground.args, icon: 'wrench' };
+
+export const Neutral = CalloutTemplate.bind({});
+Neutral.args = { ...Playground.args, icon: 'wrench', variant: 'neutral' };
