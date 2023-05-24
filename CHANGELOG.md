@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/securityscorecard/design-system/compare/v1.2.2...v1.3.0) (2023-05-24)
+
+
+### Features
+
+* add update notification api ([157394c](https://github.com/securityscorecard/design-system/commit/157394c0e9a10484741ca892ad47070f9762efaa))
+
 ## [1.2.2](https://github.com/securityscorecard/design-system/compare/v1.2.1...v1.2.2) (2023-05-19)
 
 
