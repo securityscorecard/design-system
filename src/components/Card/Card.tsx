@@ -31,8 +31,8 @@ const InteractiveCard = css`
 const CardWrapper = styled(Padbox)<CardWrapperProps>`
   flex-grow: 1;
   background-color: ${getColor('neutral.0')};
-  border: 1px solid ${getColor('neutral.400')};
-  border-radius: ${getRadii('default')};
+  border: 1px solid ${getColor('neutral.300')};
+  border-radius: ${getRadii('double')};
   overflow: hidden;
   ${getShadow}
   ${({ onClick, href, to }) => (onClick || href || to ? InteractiveCard : null)}
