@@ -61,11 +61,11 @@ export const colors = {
     900: '#3E0002',
   },
   grade: {
-    A: '#4aba00',
-    B: '#e5bd00',
-    C: '#f08f00',
-    D: '#f1431c',
-    F: '#b40000',
+    A: '#4BBA76',
+    B: '#FFB147',
+    C: '#FB7A4F',
+    D: '#F32E43',
+    F: '#B81143',
   },
   brand: {
     50: '#f0ecfe',
@@ -83,10 +83,10 @@ export const colors = {
     500: '#E1C048',
   },
   severity: {
-    informational: '#0275D8',
-    positive: '#49A25A',
-    low: '#E4BE00',
-    medium: '#E5883C',
-    high: '#B21F24',
+    informational: '#5580D7',
+    positive: '#4BBA76',
+    low: '#FFB147',
+    medium: '#FB7A4F',
+    high: '#F32E43',
   },
 };
