@@ -35,14 +35,7 @@ function filterState(
 
 const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
   (
-    {
-      isCollapsedOnOpen = true,
-      items,
-      openItems,
-      isCard = true,
-      className,
-      ...props
-    },
+    { isCollapsedOnOpen = true, items, openItems, className, ...props },
     ref,
   ) => {
     const [openIds, setOpenIds] = useState(pickOpen(items));
@@ -69,7 +62,6 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
             key={`accordion-item-${id}`}
             handleHeaderClick={handleClick}
             id={id}
-            isCard={isCard}
             isOpen={includes(id, openIds)}
             title={title}
           >
