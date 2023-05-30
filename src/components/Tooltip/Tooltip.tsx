@@ -29,7 +29,7 @@ const Tooltip: React.FC<TooltipProps> = ({
           {children}
         </span>
       }
-      triggerEvents={['hover']}
+      triggerEvents={['hover', 'focus']}
       hasPaneArrow
       isPaneElevated
     >
