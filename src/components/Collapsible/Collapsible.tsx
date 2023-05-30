@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { includes } from 'ramda';
 import cls from 'classnames';
 
@@ -19,6 +19,17 @@ import { CLX_COMPONENT } from '../../theme/constants';
 const Header = styled(Padbox)`
   width: 100%;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgb(0 0 0 / 4%);
+  }
+
+  &:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 4px solid ${getColor('primary.200')};
+    border-radius: 4px;
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -26,17 +37,12 @@ const HeaderContent = styled.div`
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px solid ${getColor('neutral.500')};
+  border-top: 1px solid ${getColor('neutral.400')};
 `;
 
-const Container = styled.div<{ withBackground: boolean }>`
-  border: 1px solid ${getColor('neutral.500')};
+const Container = styled.div`
+  border: 1px solid ${getColor('neutral.400')};
   border-radius: ${getRadii('default')};
-  ${({ withBackground }) =>
-    withBackground &&
-    css`
-      background: ${getColor('neutral.100')};
-    `}
 `;
 
 const Subject = styled(Strong)`
@@ -70,18 +76,15 @@ const Collapsible: React.FC<CollapsibleProps> = ({
   };
 
   return (
-    <Container
-      className={cls(CLX_COMPONENT, className)}
-      withBackground={isOpen}
-    >
+    <Container className={cls(CLX_COMPONENT, className)}>
       <Header
-        paddingSize={SpaceSizes.lg}
+        paddingSize={SpaceSizes.mdPlus}
         paddingType={PaddingTypes.squish}
         tabIndex={0}
         onClick={handleHeaderClick}
         onKeyDown={(e) => ['Enter', ' '].includes(e.key) && handleHeaderClick()}
       >
-        <Inline align="center" gap={SpaceSizes.lg}>
+        <Inline align="center" gap={SpaceSizes.md}>
           <StyledIcon
             isRotated={isOpen}
             name={SSCIconNames.angleRight}
@@ -96,7 +99,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
         </Inline>
       </Header>
       {isOpen && (
-        <Content paddingSize={SpaceSizes.lg}>
+        <Content paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
           <Text as="div" size={TextSizes.md}>
             {children}
           </Text>
