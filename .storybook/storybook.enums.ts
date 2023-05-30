@@ -3,3 +3,10 @@ export const Badges = {
   experimental: 'experimental',
   deprecated: 'deprecated',
 } as const;
+
+export const ArgTypesGroups = {
+  behaviour: 'Behaviour',
+  state: 'State',
+  appearance: 'Appearance',
+  common: 'Common',
+}
