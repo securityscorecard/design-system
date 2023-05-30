@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import ScoreDelta from '.';
+import ScoreDelta from './ScoreDelta';
 import { Inline } from '../layout';
 
 export default {
