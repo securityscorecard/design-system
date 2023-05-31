@@ -50,3 +50,4 @@ export { angleLeft } from './angleLeft';
 export { angleUp } from './angleUp';
 export { angleDown } from './angleDown';
 export { table } from './table';
+export { infoCircleOutline } from './infoCircleOutline';
