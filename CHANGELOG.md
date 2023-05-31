@@ -1,3 +1,19 @@
+# [1.4.0](https://github.com/securityscorecard/design-system/compare/v1.3.0...v1.4.0) (2023-05-31)
+
+
+### Bug Fixes
+
+* **Card:** update styling ([9aaa331](https://github.com/securityscorecard/design-system/commit/9aaa3312f00d81a4ae788f634124fa3cf1070546))
+
+
+### Features
+
+* **Callout:** add variant property and styles ([ff56457](https://github.com/securityscorecard/design-system/commit/ff56457f088b73f922370d62b592307b03efd263))
+* **HintTooltip:** add HintTooltip component ([fa450a1](https://github.com/securityscorecard/design-system/commit/fa450a112afdea33956dbdbd3fc7d727eb1f9b5a))
+* **Icon:** add info-circle-outline icon ([745cfe7](https://github.com/securityscorecard/design-system/commit/745cfe735204ea8e6ac3b9ac215bf0d6acfb4198))
+* **ScoreDelta:** add component ([37792b3](https://github.com/securityscorecard/design-system/commit/37792b3c35dfb3a0bad3b60408442c80094b65c7))
+* **TrendIcon:** add component ([b6904ae](https://github.com/securityscorecard/design-system/commit/b6904ae3d9a2c17521cf8f6d062c94f58a8c8278))
+
 # [1.3.0](https://github.com/securityscorecard/design-system/compare/v1.2.2...v1.3.0) (2023-05-24)
 
 
