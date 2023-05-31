@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/securityscorecard/design-system/compare/v1.4.0...v1.4.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* **HexGrade:** remove direct access to colors ([2d0bb2b](https://github.com/securityscorecard/design-system/commit/2d0bb2b62ca5daa77e7dba12e1c6239cbf146dfd))
+
 # [1.4.0](https://github.com/securityscorecard/design-system/compare/v1.3.0...v1.4.0) (2023-05-31)
 
 
