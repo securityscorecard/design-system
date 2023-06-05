@@ -23,6 +23,13 @@ export const NotificationsProvider = ({
     });
   };
 
+  const updateNotification = (notification: Notification) => {
+    dispatch({
+      type: ACTIONS.UPDATE_NOTIFICATION,
+      notification,
+    });
+  };
+
   const removeNotification = (id: string) => {
     dispatch({
       type: ACTIONS.REMOVE_NOTIFICATION,
@@ -34,6 +41,9 @@ export const NotificationsProvider = ({
     [ACTIONS.ADD_NOTIFICATION]: (
       e: CustomEvent<{ notification: Notification }>,
     ) => addNotification(e.detail.notification),
+    [ACTIONS.UPDATE_NOTIFICATION]: (
+      e: CustomEvent<{ notification: Notification }>,
+    ) => updateNotification(e.detail.notification),
     [ACTIONS.REMOVE_NOTIFICATION]: (e: CustomEvent<{ id: string }>) =>
       removeNotification(e.detail.id),
   };

@@ -7,6 +7,7 @@ import Select from './Select';
 import { Inline, Stack } from '../../layout';
 import { Heading, Text } from '../../typographyLegacy';
 import { Pill } from '../../Pill';
+import { PillColors } from '../../Pill/Pill.enums';
 
 const options = [
   { value: 'HR', label: 'Croatia', isDisabled: true },
@@ -282,6 +283,7 @@ PillTruncation.args = {
 export const PillWrapping: Story<SelectProps<true>> = SelectTemplate.bind({});
 PillWrapping.args = {
   ...MultiSelect.args,
+  color: PillColors.gray,
   options: longOptions,
   defaultValue: [longOptions[2], longOptions[1]],
 };

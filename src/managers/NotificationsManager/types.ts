@@ -4,6 +4,7 @@ import type { Variants } from '../../components/_internal/BaseToastBanner/BaseTo
 // eslint-disable-next-line
 export enum ACTIONS {
   ADD_NOTIFICATION = 'ADD_NOTIFICATION',
+  UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION',
   REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION',
 }
 

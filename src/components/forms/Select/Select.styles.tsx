@@ -42,7 +42,7 @@ import { Spinner } from '../../Spinner';
 import PillWrapper from '../../Pill/PillWrapper';
 import PillLabel from '../../Pill/PillLabel';
 import PillRemoveButton from '../../Pill/PillRemoveButton';
-import { PillSizes, PillVariants } from '../../Pill/Pill.enums';
+import { PillColorsEnums } from '../../Pill/Pill.enums';
 
 export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig =
   (DSTheme) => (selectTheme) => ({
@@ -299,9 +299,8 @@ export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
   ...props
 }) => (
   <PillWrapper
+    color={PillColorsEnums.gray}
     isClickable={false}
-    size={PillSizes.sm}
-    variant={PillVariants.solid}
     {...(innerProps as Record<string, unknown>)}
     {...props}
   >
@@ -317,7 +316,6 @@ export const MultiValueLabel = ({
 }) => (
   <PillLabel
     $maxLength={selectProps.maxPillLabelLength}
-    $size={PillSizes.sm}
     title={props.data.label}
     {...innerProps}
   >
@@ -418,8 +416,6 @@ export const ValueContainer = (props) => {
             append(
               <PillWrapper
                 key="more-items"
-                size={PillSizes.sm}
-                variant={PillVariants.solid}
                 isClickable
                 onClick={() => setShowAllItems(true)}
               >

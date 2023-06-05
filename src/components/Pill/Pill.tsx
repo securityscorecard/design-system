@@ -13,7 +13,7 @@ import { gt } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { PillSizes, PillVariants } from './Pill.enums';
+import { PillColorsEnums } from './Pill.enums';
 import PillWrapper from './PillWrapper';
 import PillLabel from './PillLabel';
 import PillRemoveButton from './PillRemoveButton';
@@ -23,14 +23,13 @@ const Pill: FC<PillProps> = forwardRef<HTMLSpanElement, PillProps>(
   (
     {
       label,
-      variant = PillVariants.solid,
-      size = PillSizes.sm,
       maxLabelLength = 16,
       isClickable = false,
       adornment,
       onClick,
       onRemove,
       className,
+      color = PillColorsEnums.gray,
       ...props
     },
     ref,
@@ -82,16 +81,14 @@ const Pill: FC<PillProps> = forwardRef<HTMLSpanElement, PillProps>(
       <PillWrapper
         ref={ref}
         className={cls(CLX_COMPONENT, className)}
+        color={color}
         isClickable={isPillClickable}
-        size={size}
-        variant={variant}
         {...clickableProps}
         {...props}
       >
         {adornment}
         <PillLabel
           $maxLength={maxLabelLength}
-          $size={size}
           title={gt(maxLabelLength, 0) ? label : undefined}
         >
           {label}

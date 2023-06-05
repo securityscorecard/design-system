@@ -25,8 +25,11 @@ Playground.args = {
 };
 Playground.parameters = { screenshot: { skip: true } };
 
-export const DefaultCallout = CalloutTemplate.bind({});
-DefaultCallout.args = Playground.args;
+export const InfoCallout = CalloutTemplate.bind({});
+InfoCallout.args = Playground.args;
+
+export const NeutralCallout = CalloutTemplate.bind({});
+NeutralCallout.args = { ...Playground.args, color: 'neutral' };
 
 export const WithIcon = CalloutTemplate.bind({});
 WithIcon.args = { ...Playground.args, icon: 'wrench' };
