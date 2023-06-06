@@ -50,10 +50,11 @@ and hadling those events in event listeners.
 
 ### Exported funtions
 
-| Key             | Type     | Description           |
-| :-------------- | :------- | :-------------------- |
-| addNotification | <code /> | Adds new notification |
-| removeBanner    | <code /> | Remove notification   |
+| Key                | Type                                   | Description           |
+| :----------------- | :------------------------------------- | :-------------------- |
+| addNotification    | `(notification: Notification) => void` | Adds new notification |
+| updateNotification | `(notification: Notification) => void` | Update notification   |
+| removeBanner       | `(id: string) => void`                 | Remove notification   |
 
 ### Notification options
 

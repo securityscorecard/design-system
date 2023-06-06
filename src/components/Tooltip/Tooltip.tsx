@@ -36,7 +36,7 @@ const Tooltip: FC<TooltipProps> = forwardRef(
             {children}
           </span>
         }
-        triggerEvents={['hover']}
+        triggerEvents={['hover', 'focus']}
         hasPaneArrow
         isPaneElevated
       >

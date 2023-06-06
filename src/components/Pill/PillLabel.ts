@@ -1,30 +1,16 @@
 import type { PillLabelProps } from './Pill.types';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { gt } from 'ramda';
 
 import { getColor, getFontSize } from '../../utils';
-import { PillSizes } from './Pill.enums';
-
-const PillLabelSmall = css`
-  font-size: ${getFontSize('md')};
-  line-height: 1rem;
-`;
-const PillLabelMedium = css`
-  font-size: ${getFontSize('lg')};
-  line-height: 1.25rem;
-`;
-
-const pillLabelSizes = {
-  [PillSizes.sm]: PillLabelSmall,
-  [PillSizes.md]: PillLabelMedium,
-};
 
 const PillLabel = styled.div<PillLabelProps>`
   flex: 1 1 0%;
   white-space: nowrap;
   color: ${getColor('neutral.900')};
-  ${({ $size }) => pillLabelSizes[$size]};
+  font-size: ${getFontSize('md')};
+  line-height: 1rem;
 
   /* desired length + 2 chars for ellipsis */
   ${({ $maxLength }) =>

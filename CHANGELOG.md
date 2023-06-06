@@ -1,3 +1,55 @@
+## [1.4.1](https://github.com/securityscorecard/design-system/compare/v1.4.0...v1.4.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* **HexGrade:** remove direct access to colors ([2d0bb2b](https://github.com/securityscorecard/design-system/commit/2d0bb2b62ca5daa77e7dba12e1c6239cbf146dfd))
+
+# [1.4.0](https://github.com/securityscorecard/design-system/compare/v1.3.0...v1.4.0) (2023-05-31)
+
+
+### Bug Fixes
+
+* **Card:** update styling ([9aaa331](https://github.com/securityscorecard/design-system/commit/9aaa3312f00d81a4ae788f634124fa3cf1070546))
+
+
+### Features
+
+* **Callout:** add variant property and styles ([ff56457](https://github.com/securityscorecard/design-system/commit/ff56457f088b73f922370d62b592307b03efd263))
+* **HintTooltip:** add HintTooltip component ([fa450a1](https://github.com/securityscorecard/design-system/commit/fa450a112afdea33956dbdbd3fc7d727eb1f9b5a))
+* **Icon:** add info-circle-outline icon ([745cfe7](https://github.com/securityscorecard/design-system/commit/745cfe735204ea8e6ac3b9ac215bf0d6acfb4198))
+* **ScoreDelta:** add component ([37792b3](https://github.com/securityscorecard/design-system/commit/37792b3c35dfb3a0bad3b60408442c80094b65c7))
+* **TrendIcon:** add component ([b6904ae](https://github.com/securityscorecard/design-system/commit/b6904ae3d9a2c17521cf8f6d062c94f58a8c8278))
+
+# [1.3.0](https://github.com/securityscorecard/design-system/compare/v1.2.2...v1.3.0) (2023-05-24)
+
+
+### Features
+
+* add update notification api ([157394c](https://github.com/securityscorecard/design-system/commit/157394c0e9a10484741ca892ad47070f9762efaa))
+
+## [1.2.2](https://github.com/securityscorecard/design-system/compare/v1.2.1...v1.2.2) (2023-05-19)
+
+
+### Bug Fixes
+
+* **ProgressBar:** update optional props ([c99d68f](https://github.com/securityscorecard/design-system/commit/c99d68fc04c2022f1b0c2087c3a0d207b505384d))
+
+## [1.2.1](https://github.com/securityscorecard/design-system/compare/v1.2.0...v1.2.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* **types:** fix types field ([2459669](https://github.com/securityscorecard/design-system/commit/24596694c2a6f46fb5dd5480572bab579e190350))
+
+# [1.2.0](https://github.com/securityscorecard/design-system/compare/v1.1.1...v1.2.0) (2023-05-15)
+
+
+### Features
+
+* **Pill:** add new color palette ([aeb32d0](https://github.com/securityscorecard/design-system/commit/aeb32d03dafa7adf61b6fa2c02b1bf1c7b53d04f))
+* **ProgressBar:** add progress bar ([fab1375](https://github.com/securityscorecard/design-system/commit/fab1375cbce9d45e7176f091c426e33a3c55f258))
+
 ## [1.1.1](https://github.com/securityscorecard/design-system/compare/v1.1.0...v1.1.1) (2023-04-17)
 
 
