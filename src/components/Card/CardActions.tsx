@@ -5,7 +5,6 @@ import { isNonEmptyString } from 'ramda-adjunct';
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { Button, ButtonEnums } from '../Button';
-import * as CustomPropTypes from '../../types/customPropTypes';
 import {
   AbsoluteLinkActionKind,
   ActionKindsPropType,
@@ -27,7 +26,7 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
         justify="space-between"
       >
         <Inline gap={SpaceSizes.mdPlus}>
-          {actions.map((action) => (
+          {actions?.map((action) => (
             <Button
               key={action.name}
               aria-label={action.ariaLabel}
@@ -51,7 +50,7 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
 );
 
 CardActions.propTypes = {
-  actions: CustomPropTypes.tuple(ActionKindsPropType, ActionKindsPropType),
+  actions: PropTypes.arrayOf(ActionKindsPropType),
   rightAdornment: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
