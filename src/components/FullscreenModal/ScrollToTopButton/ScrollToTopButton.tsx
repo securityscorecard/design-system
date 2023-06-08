@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { ScrollToTopButtonProps } from './ScrollToTopButton.types';
 
 import styled from 'styled-components';
@@ -23,10 +22,10 @@ const ButtonText = styled.span`
   margin-top: ${pxToRem(4)};
 `;
 
-const ScrollToTopButton: FC<ScrollToTopButtonProps> = ({
+const ScrollToTopButton = ({
   onClick,
   label = 'Scroll to top',
-}) => {
+}: ScrollToTopButtonProps) => {
   const handleClick = () => {
     if (isNotUndefined(onClick)) {
       onClick();

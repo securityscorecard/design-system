@@ -1,13 +1,12 @@
-import type { FC } from 'react';
 import type { TooltipWrapperProps } from './TooltipWrapper.types';
 
 import { Tooltip } from '../../../Tooltip';
 
-const TooltipWrapper: FC<TooltipWrapperProps> = ({
+const TooltipWrapper = ({
   popupRenderer,
   shouldRender,
   children,
-}) =>
+}: TooltipWrapperProps) =>
   shouldRender ? (
     <Tooltip popup={popupRenderer()}>{children}</Tooltip>
   ) : (

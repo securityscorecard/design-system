@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { BaseDateRangePickerProps } from './BaseDateRangePicker.types';
 
 import styled from 'styled-components';
@@ -20,7 +19,7 @@ const StyledDatePicker = styled.div`
 
 const isRangeDefined = any(isNotNull);
 
-const BaseDateRangePicker: FC<BaseDateRangePickerProps> = forwardRef<
+const BaseDateRangePicker = forwardRef<
   HTMLDivElement,
   BaseDateRangePickerProps
 >(

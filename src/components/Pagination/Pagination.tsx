@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { PaginationProps } from './Pagination.types';
 
 import { forwardRef } from 'react';
@@ -11,10 +10,7 @@ import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Pagination: FC<PaginationProps> = forwardRef<
-  HTMLDivElement,
-  PaginationProps
->(
+const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
   (
     {
       pageCount,

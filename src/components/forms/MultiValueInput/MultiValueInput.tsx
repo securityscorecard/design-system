@@ -1,7 +1,6 @@
 import type {
   ChangeEventHandler,
   ClipboardEventHandler,
-  FC,
   FocusEventHandler,
   KeyboardEventHandler,
   MouseEventHandler,
@@ -143,7 +142,7 @@ const ClearButton = styled.button`
   }
 `;
 
-const MultiValueInput: FC<MultiValueInputProps> = forwardRef(
+const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
   (
     {
       value = [],

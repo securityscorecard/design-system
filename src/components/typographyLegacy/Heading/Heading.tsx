@@ -1,8 +1,4 @@
-import type {
-  ComponentPropsWithRef,
-  ComponentPropsWithoutRef,
-  FC,
-} from 'react';
+import type { ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react';
 import type { HeadingProps } from './Heading.types';
 
 import styled, { css } from 'styled-components';
@@ -86,13 +82,13 @@ const headingSizes = {
   h5: HeadingH5,
 };
 
-const Heading: FC<HeadingProps & ComponentPropsWithRef<typeof HeadingH1>> = ({
+const Heading = ({
   children,
   size = HeadingSizes.h1,
   variant = HeadingVariants.primary,
   className,
   ...props
-}) => {
+}: HeadingProps & ComponentPropsWithRef<typeof HeadingH1>) => {
   const additionalProps = {
     size,
     variant,
@@ -105,55 +101,55 @@ const Heading: FC<HeadingProps & ComponentPropsWithRef<typeof HeadingH1>> = ({
 
 export default Heading;
 
-export const H0: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+export const H0 = ({
   children,
   ...props
-}) => (
+}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
   <Heading size={HeadingSizes.h0} {...props}>
     {children}
   </Heading>
 );
 
-export const H1: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+export const H1 = ({
   children,
   ...props
-}) => (
+}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
   <Heading size={HeadingSizes.h1} {...props}>
     {children}
   </Heading>
 );
 
-export const H2: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+export const H2 = ({
   children,
   ...props
-}) => (
+}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
   <Heading size={HeadingSizes.h2} {...props}>
     {children}
   </Heading>
 );
 
-export const H3: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+export const H3 = ({
   children,
   ...props
-}) => (
+}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
   <Heading size={HeadingSizes.h3} {...props}>
     {children}
   </Heading>
 );
 
-export const H4: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+export const H4 = ({
   children,
   ...props
-}) => (
+}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
   <Heading size={HeadingSizes.h4} {...props}>
     {children}
   </Heading>
 );
 
-export const H5: FC<Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>> = ({
+export const H5 = ({
   children,
   ...props
-}) => (
+}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
   <Heading size={HeadingSizes.h5} {...props}>
     {children}
   </Heading>

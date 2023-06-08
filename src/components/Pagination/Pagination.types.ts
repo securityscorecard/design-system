@@ -18,6 +18,7 @@ export interface PaginationItemProps {
   isShrinked?: boolean;
   page?: number;
   onClick: () => void;
+  children: ReactNode;
 }
 
 export interface PaginationProps {

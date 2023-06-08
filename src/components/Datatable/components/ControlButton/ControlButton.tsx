@@ -1,17 +1,16 @@
-import type { FC } from 'react';
 import type { ControlButtonProps } from './ControlButton.types';
 
 import { Button } from '../../../Button';
 import { Badge } from '../../../Badge';
 import { Inline } from '../../../layout';
 
-const ControlButton: FC<ControlButtonProps> = ({
+const ControlButton = ({
   label,
   iconName,
   appliedFilters = 0,
   className = '',
   onClick,
-}) => (
+}: ControlButtonProps) => (
   <Button
     className={className}
     iconName={iconName}

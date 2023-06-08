@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { ReactNode } from 'react';
 import type { OnHide, OnShow, RCPF } from 'react-cool-portal';
 
 import { useContext } from 'react';
@@ -17,7 +17,7 @@ type UsePortal = (config?: {
   showPortal: RCPF;
   hidePortal: RCPF;
   isPortalVisible: boolean;
-  Portal: FC;
+  Portal: ({ children }: { children: ReactNode }) => JSX.Element;
 };
 
 export const usePortal: UsePortal = ({

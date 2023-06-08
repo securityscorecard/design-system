@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { WizardStepProps } from './Wizard.types';
 
 import { forwardRef } from 'react';
@@ -13,16 +12,15 @@ const StepContainer = styled.div`
   height: ${pxToRem(418)};
 `;
 
-const WizardStep: FC<WizardStepProps> = forwardRef<
-  HTMLDivElement,
-  WizardStepProps
->(({ children, ...step }: WizardStepProps, ref) => {
-  const activeStep = useActiveStep();
-  const isActiveStep = activeStep?.id === step.id;
-  useRegisterStep(step);
-  return isActiveStep ? (
-    <StepContainer ref={ref}>{children}</StepContainer>
-  ) : null;
-});
+const WizardStep = forwardRef<HTMLDivElement, WizardStepProps>(
+  ({ children, ...step }: WizardStepProps, ref) => {
+    const activeStep = useActiveStep();
+    const isActiveStep = activeStep?.id === step.id;
+    useRegisterStep(step);
+    return isActiveStep ? (
+      <StepContainer ref={ref}>{children}</StepContainer>
+    ) : null;
+  },
+);
 
 export default WizardStep;

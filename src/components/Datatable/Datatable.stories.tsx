@@ -1,6 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
 import type { Data } from '../_internal/BaseTable/mocks/types';
 import type { DatatableProps } from './Datatable.types';
+import type { Filter } from '../Filters';
+import type { SortingRule } from 'react-table';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -122,7 +124,19 @@ export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
   const timeoutRef = useRef(null);
 
   const dispatchFetchData = useCallback(
-    ({ pageSize, pageIndex, sortBy, filters, query }) => {
+    ({
+      pageSize,
+      pageIndex,
+      sortBy,
+      filters,
+      query,
+    }: {
+      pageSize?: number;
+      pageIndex?: number;
+      sortBy?: SortingRule<Data>[];
+      filters?: Filter[];
+      query?: string;
+    }) => {
       action('onDataFetch')({
         pageSize,
         pageIndex,

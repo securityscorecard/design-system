@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { BatchModuleProps } from './BatchModule.types';
 
 import { useEffect, useState } from 'react';
@@ -20,17 +19,18 @@ const BatchModuleWrapper = styled(Padbox)`
   min-height: ${pxToRem(64)};
 `;
 
-const BatchModule: FC<BatchModuleProps> = ({
+const BatchModule = ({
   actions,
   hasSelection,
   hasOnlyPerPageSelection,
   dataSize,
+
   columns: {
     isButtonDisplayed,
     defaultIsColumnsControlsOpen = false,
     defaultIsColumnsControlsApplied = false,
   },
-}) => {
+}: BatchModuleProps) => {
   const [isColumnsActive, setIsColumnsActive] = useState(
     defaultIsColumnsControlsOpen,
   );

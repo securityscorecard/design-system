@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { HeaderProps } from './Header.types';
 
 import { useRef } from 'react';
@@ -24,13 +23,13 @@ const BaseHeader = styled.header`
   padding: ${pxToRem(56, 0, 24)};
 `;
 
-const Header: FC<HeaderProps> = ({
+const Header = ({
   children,
   width,
   offset,
   modalRef,
   handleClose,
-}) => {
+}: HeaderProps) => {
   const modalHeaderRef = useRef(null);
   const { isFixed } = useStickyHeader(modalRef, modalHeaderRef);
 

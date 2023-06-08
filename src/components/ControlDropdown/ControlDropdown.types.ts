@@ -1,4 +1,4 @@
-import type { MutableRefObject } from 'react';
+import type { MutableRefObject, ReactNode } from 'react';
 import type { Placements } from '../Dropdown/Dropdown.types';
 
 export interface ControlDropdownProps {
@@ -46,4 +46,5 @@ export interface ControlDropdownProps {
    * Width of the dropdown
    */
   width?: number;
+  children: ReactNode;
 }

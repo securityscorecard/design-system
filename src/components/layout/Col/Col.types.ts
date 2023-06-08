@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export type Cols = 'auto' | number;
 
 export interface ColProps {
@@ -10,4 +12,5 @@ export interface ColProps {
    */
   offset?: number;
   className?: string;
+  children: ReactNode;
 }

@@ -1,6 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import type { Row } from 'react-table';
-import type { FC } from 'react';
+import type { ReactNode } from 'react';
 import type { CellRendererProps } from './renderers.types';
 
 import { MemoryRouter } from 'react-router-dom';
@@ -45,10 +45,14 @@ type CellRendererData = {
   column2: string[];
 };
 
-const LinkComponent: FC<{ to: string; className: string }> = ({
+const LinkComponent = ({
   to,
   children,
   className,
+}: {
+  children: ReactNode;
+  to: string;
+  className: string;
 }) => (
   <a className={className} href={to}>
     {children}

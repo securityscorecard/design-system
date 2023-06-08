@@ -1,4 +1,8 @@
-import type { HTMLProps, MouseEventHandler } from 'react';
+import type {
+  ComponentPropsWithRef,
+  ElementType,
+  MouseEventHandler,
+} from 'react';
 import type { To } from 'history';
 import type { DefaultTheme } from 'styled-components';
 import type { SpacingSizeValue } from '../../../types/spacing.types';
@@ -16,7 +20,7 @@ export type Sizes = (typeof BaseButtonSizes)[keyof typeof BaseButtonSizes];
 export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
 
 export interface BaseButtonProps
-  extends Omit<HTMLProps<HTMLButtonElement>, 'size' | 'as'> {
+  extends Omit<ComponentPropsWithRef<'button'>, 'size' | 'as'> {
   variant?: Variants;
   size?: Sizes;
   color?: Colors;
@@ -31,6 +35,7 @@ export interface BaseButtonProps
   iconName?: SSCIcons | string;
   loadingText?: string;
   iconType?: IconTypes | string;
+  as?: ElementType;
 }
 
 export interface BaseStyledButtonProps extends PadboxProps {

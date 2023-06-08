@@ -7,7 +7,7 @@ import type {
   DropdownMenuProps,
 } from './DropdownMenu.types';
 import type { InteractiveElement } from '../../Dropdown/Dropdown.types';
-import type { FC, MouseEvent, ReactElement } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
 
 import { forwardRef, memo, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -56,10 +56,7 @@ const getOptions = () => {
   );
 };
 
-const DropdownMenu: FC<DropdownMenuProps> = forwardRef<
-  HTMLSpanElement,
-  DropdownMenuProps
->(
+const DropdownMenu = forwardRef<HTMLSpanElement, DropdownMenuProps>(
   (
     {
       actions,

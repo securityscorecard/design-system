@@ -1,5 +1,5 @@
 import type { To } from 'history';
-import type { ReactNode } from 'react';
+import type { MouseEventHandler, ReactNode } from 'react';
 
 export type ActionBase<
   OnClickArgs extends Array<unknown>,
@@ -47,6 +47,7 @@ export type ActionWithSubactions<
   OnClickReturnType = void,
 > = ActionBase<OnClickArgs, OnClickReturnType> & {
   subActions: ActionKinds<OnClickArgs, OnClickReturnType>[];
+  onClick?: MouseEventHandler;
   href?: never;
   to?: never;
 };

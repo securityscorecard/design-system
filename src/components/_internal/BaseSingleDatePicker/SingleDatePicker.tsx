@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { SingleDatePickerProps } from './SingleDatePicker.types';
 
 import { forwardRef, useRef, useState } from 'react';
@@ -16,7 +15,7 @@ export const StyledDatePicker = styled.div`
   ${singleDatePickerStyles}
 `;
 
-const SingleDatePicker: FC<SingleDatePickerProps> = forwardRef(
+const SingleDatePicker = forwardRef(
   (
     {
       value = null,
@@ -28,7 +27,7 @@ const SingleDatePicker: FC<SingleDatePickerProps> = forwardRef(
       defaultIsYearPickerOpen,
       startDate,
       endDate,
-    },
+    }: SingleDatePickerProps,
     ref,
   ) => {
     const [showYearPicker, setShowYearPicker] = useState(

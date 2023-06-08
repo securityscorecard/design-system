@@ -274,9 +274,6 @@ describe('Datatable/ControlsModule', () => {
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(false);
     });
     it('should store search query when perform search', async () => {
-      jest.useFakeTimers({
-        doNotFake: ['setTimeout'],
-      });
       const query = 'Search query';
       renderWithProviders(
         <ControlsModule
@@ -292,11 +289,9 @@ describe('Datatable/ControlsModule', () => {
         screen.getByPlaceholderText('Search'),
         `${query}{Enter}`,
       );
-
-      await waitFor(() =>
-        expect(DatatableStore.getRawState().query).toBe(query),
-      );
-      jest.useRealTimers();
+      await waitFor(() => {
+        expect(DatatableStore.getRawState().query).toBe(query);
+      });
     });
     it('should clear search query on Clear button click', async () => {
       jest.useFakeTimers({

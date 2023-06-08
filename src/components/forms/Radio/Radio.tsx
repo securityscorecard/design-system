@@ -1,4 +1,4 @@
-import type { FC, HTMLProps } from 'react';
+import type { HTMLProps } from 'react';
 import type { TogglingInputProps } from '../types/forms.types';
 import type { RadioProps } from './Radio.types';
 
@@ -95,7 +95,7 @@ const RadioInput = styled.input<TogglingInputProps>`
     `}
 `;
 
-const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
   (
     {
       name,

@@ -1,14 +1,13 @@
-import type { FC, KeyboardEventHandler } from 'react';
+import type { KeyboardEventHandler } from 'react';
 import type { SearchProps } from './Search.types';
 
 import { useEffect, useRef, useState } from 'react';
 
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../../Filters/helpers';
-import { Stack } from '../../../layout';
 import { SearchBar } from '../../../forms';
 
-const Search: FC<SearchProps> = ({
+const Search = ({
   onSearch,
   onClear,
   placeholder = 'Search',
@@ -16,7 +15,7 @@ const Search: FC<SearchProps> = ({
   pattern,
   errorMessage,
   ...props
-}) => {
+}: SearchProps) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(0);
@@ -70,7 +69,7 @@ const Search: FC<SearchProps> = ({
   };
 
   return (
-    <Stack>
+    <div>
       <SearchBar
         isInvalid={isInvalid}
         isSearching={isSearching}
@@ -81,7 +80,7 @@ const Search: FC<SearchProps> = ({
         {...props}
       />
       {isInvalid && <Error>{errorMessage}</Error>}
-    </Stack>
+    </div>
   );
 };
 

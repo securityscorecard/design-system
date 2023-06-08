@@ -34,7 +34,6 @@ type ControlledSearchInputProps = {
 } & DebounceProps;
 
 type UncontrolledSearchInputProps = {
-  value?: never;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   defaultValue?: string;
 } & DebounceProps;
