@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { any } from 'ramda';
+import { any, includes } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 
 import { ActionKindsPropType } from '../../types/action.types';
@@ -15,6 +15,7 @@ import { Icon } from '../Icon';
 import { CardHeaderProps } from './Card.types';
 import { CardContainer } from './Card';
 import { Tooltip } from '../Tooltip';
+import { Color } from '../../theme/colors.types';
 
 export const CardIconButton = styled.button<{
   as?: string;
@@ -76,6 +77,21 @@ const ButtonsArea = styled.div`
   align-items: flex-start;
   margin-right: calc(${getSpace(SpaceSizes.sm)} * -1) !important;
 `;
+
+const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
+  shouldForwardProp: (property) => !includes(property, ['color']),
+})`
+  background: ${getColor('neutral.0')};
+  border: 1px solid ${getColor('neutral.0')};
+  border-radius: 100%;
+  color: ${({ color, theme }) =>
+    isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
+  &:focus-visible,
+  &:hover {
+    color: ${({ theme }) => getColor('neutral.700', { theme })};
+  }
+`;
+
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   (
     {
@@ -127,10 +143,10 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
                   data-interactive="true"
                   onClick={onHelpClick}
                 >
-                  <Icon
-                    color="neutral.800"
+                  <StyledIcon
+                    color="neutral.600"
                     data-interactive="true"
-                    name="question-circle"
+                    name="info-circle-outline"
                   />
                 </CardIconButton>
               </Tooltip>
