@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/securityscorecard/design-system/compare/v1.4.1...v1.4.2) (2023-06-08)
+
+
+### Bug Fixes
+
+* **CardActions:** accept empty array of actions ([8bab724](https://github.com/securityscorecard/design-system/commit/8bab724e016bd2e11eba47edb699ea7fd5fecb1a))
+
 ## [1.4.1](https://github.com/securityscorecard/design-system/compare/v1.4.0...v1.4.1) (2023-05-31)
 
 
