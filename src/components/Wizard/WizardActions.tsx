@@ -14,7 +14,7 @@ export const WizardActions = () => {
   const { primaryAction, secondaryAction } = activeStep;
 
   return (
-    <Inline gap="md">
+    <Inline gap="md" justify="flex-end">
       {secondaryAction ? (
         <Button
           isDisabled={secondaryAction.isDisabled}
