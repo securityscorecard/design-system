@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/securityscorecard/design-system/compare/v1.5.0...v1.5.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* **Collapsible:** fix header layout ([eb892c7](https://github.com/securityscorecard/design-system/commit/eb892c7c6a8d2fb8f4e41609397f077d85a50995))
+
 # [1.5.0](https://github.com/securityscorecard/design-system/compare/v1.4.2...v1.5.0) (2023-06-09)
 
 
