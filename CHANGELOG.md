@@ -1,3 +1,19 @@
+# [1.5.0](https://github.com/securityscorecard/design-system/compare/v1.4.2...v1.5.0) (2023-06-09)
+
+
+### Bug Fixes
+
+* **Toast:** add loading variant ([2469815](https://github.com/securityscorecard/design-system/commit/246981500963026d590723784a686949d09022fb))
+* **Wizard:** add right alignment for wizard actions ([c5f3049](https://github.com/securityscorecard/design-system/commit/c5f3049b5a12fef6a0fbbad8345947c82267b21e))
+
+
+### Features
+
+* **Accordion:** update accordion styling ([c6169b6](https://github.com/securityscorecard/design-system/commit/c6169b6ada6378507eb271a7a02bbca407195954))
+* **Card:** replace question circle icon with info ([a1a94c4](https://github.com/securityscorecard/design-system/commit/a1a94c4dcce3bca3985a1cce5a62a1a3beb840e0))
+* **Collapsible:** update collapsible styling ([0d3c049](https://github.com/securityscorecard/design-system/commit/0d3c049a78a5eafdb3a05b71927e40c576610efd))
+* **ErrorBoundary:** add component ([51c5b4d](https://github.com/securityscorecard/design-system/commit/51c5b4dcf20e368d15d4abdbc9183d076fcd0fbd))
+
 ## [1.4.2](https://github.com/securityscorecard/design-system/compare/v1.4.1...v1.4.2) (2023-06-08)
 
 
