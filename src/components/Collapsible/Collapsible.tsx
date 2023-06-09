@@ -5,9 +5,9 @@ import { includes } from 'ramda';
 import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { Icon } from '../Icon';
-import { Strong, Text } from '../typographyLegacy';
+import { Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { CollapsibleProps } from './Collapsible.types';
 import { Padbox } from '../layout/Padbox';
@@ -28,7 +28,7 @@ const Header = styled(Padbox)`
     position: relative;
     z-index: 1;
     outline: 4px solid ${getColor('primary.200')};
-    border-radius: 4px;
+    border-radius: ${getRadii('default')};
   }
 `;
 
@@ -43,11 +43,6 @@ const Content = styled(Padbox)`
 const Container = styled.div`
   border: 1px solid ${getColor('neutral.400')};
   border-radius: ${getRadii('default')};
-`;
-
-const Subject = styled(Strong)`
-  display: block;
-  margin-top: ${pxToRem(4)};
 `;
 
 const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
@@ -94,7 +89,11 @@ const Collapsible: React.FC<CollapsibleProps> = ({
             <Text as="div" size={TextSizes.md} variant={TextVariants.secondary}>
               {title}
             </Text>
-            {subject && <Subject size={TextSizes.lg}>{subject}</Subject>}
+            {subject && (
+              <Text as="div" size={TextSizes.lg} isBold>
+                {subject}
+              </Text>
+            )}
           </HeaderContent>
         </Inline>
       </Header>
@@ -110,8 +109,8 @@ const Collapsible: React.FC<CollapsibleProps> = ({
 };
 
 Collapsible.propTypes = {
-  subject: PropTypes.string.isRequired,
   title: PropTypes.node.isRequired,
+  subject: PropTypes.string,
   className: PropTypes.string,
   defaultIsOpened: PropTypes.bool,
   onOpen: PropTypes.func,
