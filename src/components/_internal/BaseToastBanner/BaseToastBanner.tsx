@@ -13,12 +13,14 @@ import {
   BaseToastBannerProps,
   BaseToastBannerWrapperProps,
 } from './BaseToastBanner.types';
+import { Spinner } from '../../Spinner';
 
 export const baseToastBannerColorVariants = {
   [BaseToastBannerVariants.info]: ColorTypes.info50,
   [BaseToastBannerVariants.warn]: ColorTypes.warning50,
   [BaseToastBannerVariants.error]: ColorTypes.error50,
   [BaseToastBannerVariants.success]: ColorTypes.success50,
+  [BaseToastBannerVariants.loading]: ColorTypes.neutral200,
 };
 
 const iconVariants = {
@@ -26,6 +28,7 @@ const iconVariants = {
   [BaseToastBannerVariants.warn]: SSCIconNames.errorCircle,
   [BaseToastBannerVariants.error]: SSCIconNames.exclTriangleSolid,
   [BaseToastBannerVariants.success]: SSCIconNames.check,
+  [BaseToastBannerVariants.loading]: null,
 };
 
 const iconColorVariants = {
@@ -82,12 +85,21 @@ const BaseToastBanner: React.FC<BaseToastBannerWrapperProps> = ({
         paddingType={paddingType}
       >
         <IconWrapper $iconSize={iconSize}>
-          <StyledIcon
-            $iconPxSizesVariants={iconPxSizesVariants}
-            $variant={variant}
-            name={iconVariants[variant]}
-            type={IconTypes.ssc}
-          />
+          {variant === 'loading' ? (
+            <Spinner
+              borderWidth={2}
+              color={ColorTypes.neutral1000}
+              height={16}
+              width={16}
+            />
+          ) : (
+            <StyledIcon
+              $iconPxSizesVariants={iconPxSizesVariants}
+              $variant={variant}
+              name={iconVariants[variant]}
+              type={IconTypes.ssc}
+            />
+          )}
         </IconWrapper>
       </IconPadbox>
     )}

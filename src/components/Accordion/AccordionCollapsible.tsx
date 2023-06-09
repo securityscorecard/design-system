@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
+import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getSpace, pxToRem } from '../../utils';
+import { getColor, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
@@ -15,43 +14,40 @@ import {
 } from './Accordion.types';
 import { Inline, Padbox } from '../layout';
 import { SpaceSizes } from '../../theme';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 
 const Header = styled(Padbox)`
   cursor: pointer;
+  border-bottom: 1px solid ${getColor('neutral.400')};
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 0.75rem 0;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
 
   &:hover {
-    background-color: ${getColor('neutral.200')};
+    background-color: rgb(0 0 0 / 4%);
+  }
+
+  &:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 4px solid ${getColor('primary.200')};
+    border-radius: 4px;
   }
 `;
 
-const Content = styled(Padbox)`
-  padding-top: 0;
-`;
-
-const Container = styled.div<{ isOpen: boolean; isCard: boolean }>`
-  ${({ isOpen }) =>
-    isOpen &&
-    css`
-      &:not(:last-child) {
-        margin-bottom: ${getSpace(SpaceSizes.md)};
-      }
-    `}
-  ${({ isOpen, isCard }) =>
-    isCard &&
-    isOpen &&
-    css`
-      background: ${getColor('neutral.0')};
-      box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
-    `}
+const Content = styled.div`
+  padding: 1rem 0;
 `;
 
 const IconWrapper = styled(Padbox)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${pxToRem(16)};
-  height: ${pxToRem(24)};
+  width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
 `;
 const StyledIcon = styled(Icon)`
   transition: transform 200ms;
@@ -63,7 +59,6 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
   className,
   handleHeaderClick,
   isOpen = false,
-  isCard = true,
   id,
   title,
 }) => {
@@ -76,7 +71,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
     }
   };
   return (
-    <Container className={className} isCard={isCard} isOpen={isOpen}>
+    <div className={className}>
       <Header
         paddingSize={SpaceSizes.sm}
         role="button"
@@ -84,7 +79,7 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
         onClick={() => handleHeaderClick(id)}
         onKeyDown={(e) => handleKeyDown(e, id)}
       >
-        <Inline gap={SpaceSizes.sm}>
+        <Inline align="center" gap={SpaceSizes.md}>
           <IconWrapper paddingSize={SpaceSizes.xxs}>
             <StyledIcon
               name={SSCIconNames.angleRight}
@@ -92,15 +87,19 @@ const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
               type={IconTypes.ssc}
             />
           </IconWrapper>
-          <Text size={TextSizes.lg}>{title}</Text>
+          <Text as="div" size={TextSizes.lg}>
+            {title}
+          </Text>
         </Inline>
       </Header>
       {isOpen && (
-        <Content paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
-          <Text size={TextSizes.md}>{children}</Text>
+        <Content>
+          <Text as="div" size={TextSizes.md}>
+            {children}
+          </Text>
         </Content>
       )}
-    </Container>
+    </div>
   );
 };
 

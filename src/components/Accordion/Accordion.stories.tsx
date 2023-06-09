@@ -39,19 +39,15 @@ Playground.parameters = {
 export const DefaultAccordion = AccordionTemplate.bind({});
 DefaultAccordion.args = Playground.args;
 
-export const DoesNotCollapsOnOpen = AccordionTemplate.bind({});
-DoesNotCollapsOnOpen.args = {
+export const DoesNotCollapseOnOpen = AccordionTemplate.bind({});
+DoesNotCollapseOnOpen.args = {
   ...Playground.args,
   isCollapsedOnOpen: false,
 };
-DoesNotCollapsOnOpen.storyName = 'Does not collapse on open';
-
-export const NoCardAccordion = AccordionTemplate.bind({});
-NoCardAccordion.args = {
-  ...Playground.args,
-  isCard: false,
+DoesNotCollapseOnOpen.storyName = 'Does not collapse on open';
+DoesNotCollapseOnOpen.parameters = {
+  screenshot: { skip: true },
 };
-NoCardAccordion.storyName = 'Accordion without card wrapper';
 
 const AccordionItemTitle = () => (
   <Stack gap="sm">
@@ -75,7 +71,7 @@ CustomTitleElement.args = {
 };
 
 export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
-  const [openItems, setOpenItems] = useState([]);
+  const [openItems, setOpenItems] = useState<string[]>([]);
   const handleOnClick = (id: string) => {
     if (!openItems.includes(id)) {
       const newItems = [id];
@@ -106,4 +102,7 @@ export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
       <Accordion items={localItems} openItems={openItems} />
     </Inline>
   );
+};
+AcordionWithExternalManagement.parameters = {
+  screenshot: { skip: true },
 };

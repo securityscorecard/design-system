@@ -16,13 +16,11 @@ export interface AccordionCollapsibleProps {
   title: ReactNode;
   handleHeaderClick?: (index?: AccordionItemId) => void;
   id: AccordionItemId;
-  isCard?: boolean;
 }
 
 export interface AccordionProps {
   isCollapsedOnOpen?: boolean;
   items: AccordionItem[];
-  isCard?: boolean;
   className?: string;
   openItems: AccordionItemId[];
 }

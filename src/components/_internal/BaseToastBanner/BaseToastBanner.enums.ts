@@ -3,4 +3,5 @@ export const BaseToastBannerVariants = {
   warn: 'warn',
   error: 'error',
   success: 'success',
+  loading: 'loading',
 } as const;
