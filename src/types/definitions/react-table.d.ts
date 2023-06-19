@@ -135,3 +135,10 @@ declare module 'react-table' {
       UseRowSelectRowProps<D>,
       UseRowStateRowProps<D> {}
 }
+
+declare module '@tanstack/react-table' {
+  interface ColumnMeta {
+    isStatic?: boolean;
+    updateData?: (rowIndex: number, columnId: string, value: unknown) => void;
+  }
+}
