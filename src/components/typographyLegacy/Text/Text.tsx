@@ -119,7 +119,7 @@ Text.propTypes = {
 };
 
 Text.defaultProps = {
-  size: TextSizes.lg,
+  size: TextSizes.md,
   variant: TextVariants.primary,
   isBold: false,
 };
@@ -129,7 +129,6 @@ export default Text;
 export const Strong = styled(Text).attrs<StrongProps>(() => ({
   as: 'strong',
   isBold: true,
-  size: TextSizes.inherit,
 }))``;
 
 Strong.propTypes = {
