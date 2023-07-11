@@ -28,6 +28,7 @@ const ToggleButton = styled.button`
   width: ${pxToRem(16)};
   position: absolute;
   top: 0;
+  bottom: 0;
   right: 0;
   ${({ theme }) =>
     createPadding({
