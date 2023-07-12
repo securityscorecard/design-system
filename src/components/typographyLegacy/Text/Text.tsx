@@ -134,6 +134,9 @@ export const Strong = styled(Text).attrs<StrongProps>(() => ({
 Strong.propTypes = {
   variant: PropTypes.oneOf(Object.values(TextVariants)),
 };
+Strong.defaultProps = {
+  size: TextSizes.inherit,
+};
 
 export const Code = styled(Text).attrs<CodeProps>(() => ({
   variant: TextVariants.monospace,
