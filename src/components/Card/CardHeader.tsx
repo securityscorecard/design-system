@@ -24,11 +24,12 @@ export const CardIconButton = styled.button<{
   background-color: ${({ $isActive }) =>
     $isActive ? getColor('primary.50') : 'transparent'};
   border: none;
-  box-sizing: content-box;
   color: ${getColor('neutral.800')};
   display: flex;
+  align-items: center;
   border-radius: ${getRadii('default')};
   padding: ${getSpace(SpaceSizes.sm)};
+  height: 2rem;
   ${(props) =>
     props.as !== 'div' &&
     css`
@@ -82,7 +83,6 @@ const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
   shouldForwardProp: (property) => !includes(property, ['color']),
 })`
   background: ${getColor('neutral.0')};
-  border: 1px solid ${getColor('neutral.0')};
   border-radius: 100%;
   color: ${({ color, theme }) =>
     isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};

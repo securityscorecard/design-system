@@ -27,7 +27,7 @@ Paragraph.propTypes = {
 };
 
 Paragraph.defaultProps = {
-  size: TextSizes.lg,
+  size: TextSizes.md,
   variant: TextVariants.primary,
   as: 'p',
 };

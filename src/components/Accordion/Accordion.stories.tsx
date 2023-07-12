@@ -7,6 +7,7 @@ import { Paragraph, Text } from '../typographyLegacy';
 import { Button } from '../Button';
 import Accordion from './Accordion';
 import { AccordionProps } from './Accordion.types';
+import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 
 export default {
   title: 'components/Accordion',
@@ -53,7 +54,7 @@ const AccordionItemTitle = () => (
   <Stack gap="sm">
     <Inline align="center" gap="md">
       <HexGrade grade="A" size={24} />
-      <Text>Company Name</Text>
+      <Text size={TextSizes.lg}>Company Name</Text>
     </Inline>
     <Paragraph>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
