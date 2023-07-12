@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/securityscorecard/design-system/compare/v1.5.1...v1.6.0) (2023-07-12)
+
+
+### Bug Fixes
+
+* **Select:** move cursor to field start ([e39cedb](https://github.com/securityscorecard/design-system/commit/e39cedb501bbfbe62a2ff1fc23e06cf0ab1efbca))
+* **Strong:** make inherit size default ([7ab6ffc](https://github.com/securityscorecard/design-system/commit/7ab6ffc273b5d35cc3eb725a830197b4585c671c))
+* **Text:** change default size ([7db54d3](https://github.com/securityscorecard/design-system/commit/7db54d357ed15cfd4d6261ebdb9ee150985ab9de))
+
+
+### Features
+
+* **GlobalStyles:** change base font size ([8276489](https://github.com/securityscorecard/design-system/commit/82764898c704165c0813fa9068388bde55f63f4a))
+
 ## [1.5.1](https://github.com/securityscorecard/design-system/compare/v1.5.0...v1.5.1) (2023-06-09)
 
 
