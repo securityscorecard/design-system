@@ -175,6 +175,7 @@ export const selectStyles: (
       fontSize: DSTheme.typography.size.md,
       lineHeight: DSTheme.typography.lineHeight.md,
       display: isEmptyString(children) ? 'none' : 'block',
+      position: 'absolute',
     }),
     indicatorsContainer: (styles) => ({
       ...styles,

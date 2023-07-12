@@ -50,7 +50,7 @@ export default createGlobalStyle`
     background: ${getColor('neutral.0')};
     font-family: ${getFontFamily('base')};
     font-weight: ${getFontWeight('regular')};
-    font-size: ${pxToRem(BASE_FONT_SIZE)};
+    font-size: ${pxToRem(BASE_FONT_SIZE * 0.875)};
     line-height: ${pxToRem(BASE_LINE_HEIGHT)};
     color: ${getColor('neutral.900')};
   }
