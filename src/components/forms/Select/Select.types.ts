@@ -25,6 +25,7 @@ interface BaseSelectProps<IsMulti extends boolean = false> {
   isMenuPositionRelative?: boolean;
   isInvalid?: boolean;
   className?: string;
+  onChange?: (value: Option) => void;
 }
 
 type SyncSelectProps<IsMulti extends boolean = false> = {

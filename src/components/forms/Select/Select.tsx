@@ -51,6 +51,7 @@ Select.propTypes = {
   maxVisibleItem: PropTypes.number,
   isMenuPositionRelative: PropTypes.bool,
   components: PropTypes.shape(),
+  onChange: PropTypes.func,
 };
 
 Select.defaultProps = {
