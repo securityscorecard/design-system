@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import { includes } from 'ramda';
 
 import { Inline, Stack } from '../layout';
 import { HexGrade } from '../HexGrade';
@@ -72,7 +73,7 @@ CustomTitleElement.args = {
 };
 
 export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
-  const [openItems, setOpenItems] = useState<string[]>([]);
+  const [openItems, setOpenItems] = useState<(string | number)[]>([]);
   const handleOnClick = (id: string) => {
     if (!openItems.includes(id)) {
       const newItems = [id];
@@ -91,16 +92,23 @@ export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
     <Inline gap="xl">
       <Stack gap="sm" justify="flex-start">
         <Button variant="text" onClick={() => handleOnClick('first')}>
-          First section
+          {includes('first', openItems) && '->'} First section
         </Button>
         <Button variant="text" onClick={() => handleOnClick('second')}>
-          Second section
+          {includes('second', openItems) && '->'} Second section
         </Button>
         <Button variant="text" onClick={() => handleOnClick('third')}>
-          Third section
+          {includes('third', openItems) && '->'} Third section
         </Button>
       </Stack>
-      <Accordion items={localItems} openItems={openItems} />
+      <Accordion
+        isCollapsedOnOpen={false}
+        items={localItems}
+        openItems={openItems}
+        onChange={(ids) => {
+          setOpenItems(ids);
+        }}
+      />
     </Inline>
   );
 };

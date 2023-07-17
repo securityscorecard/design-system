@@ -22,7 +22,8 @@ export interface AccordionProps {
   isCollapsedOnOpen?: boolean;
   items: AccordionItem[];
   className?: string;
-  openItems: AccordionItemId[];
+  openItems?: AccordionItemId[];
+  onChange?: (openIds: AccordionItemId[]) => void;
 }
 
 export const AccordionItemIdPropType = PropTypes.oneOfType([
