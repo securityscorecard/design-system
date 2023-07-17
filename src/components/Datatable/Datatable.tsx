@@ -197,6 +197,7 @@ Datatable.propTypes = {
   controlsConfig: PropTypes.exact({
     onControlToggle: PropTypes.func,
     onCancelLoading: PropTypes.func,
+    onColumnVisibilityChange: PropTypes.func,
     hasSearch: PropTypes.bool,
     searchConfig: PropTypes.exact({
       placeholder: PropTypes.string,
