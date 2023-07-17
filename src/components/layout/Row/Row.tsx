@@ -1,4 +1,3 @@
-import { Flex } from 'reflexbox';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
 import cls from 'classnames';
@@ -12,10 +11,15 @@ const getRowMargin = pipe(
   pxToRem,
 );
 
-const Row = styled(Flex).attrs((props) => ({
-  mx: getRowMargin(props),
+const Row = styled.div.attrs((props) => ({
   className: cls(CLX_LAYOUT, props?.className),
   ...props,
-}))``;
+}))`
+  margin-inline: ${(props) => getRowMargin(props)};
+  box-sizing: border-box;
+  min-width: 0;
+  flex-wrap: wrap;
+  display: flex;
+`;
 
 export default Row;
