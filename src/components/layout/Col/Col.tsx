@@ -1,17 +1,16 @@
 import type { ColProps, Cols } from './Col.types';
 
 import { forwardRef } from 'react';
-import { Box } from 'reflexbox';
 import styled from 'styled-components';
 import { path, pipe } from 'ramda';
 
 import { pxToRem } from '../../../utils';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
-const getColWidth = (cols: Cols): { flex: string } | { width: number } => {
+const getColWidth = (cols: Cols): { flex: string } | { width: string } => {
   if (cols === 'auto') return { flex: '1 1 auto' };
 
-  return { width: cols / 12 };
+  return { width: `${(cols / 12) * 100}%` };
 };
 
 const getColPadding: string = pipe(
@@ -20,19 +19,21 @@ const getColPadding: string = pipe(
   pxToRem,
 );
 
-const StyledCol = styled(Box)`
+const StyledCol = styled.div<{
+  $offset: ColProps['offset'];
+  $cols: ColProps['cols'];
+}>`
+  box-sizing: border-box;
+  min-width: 0;
   padding-left: ${getColPadding};
   padding-right: ${getColPadding};
+  margin-left: ${({ $offset }) => `${(100 / 12) * $offset}%`};
+  ${({ $cols }) => getColWidth($cols)};
 `;
 
 const Col = forwardRef<HTMLDivElement, ColProps>(
   ({ children, cols, offset }, ref) => (
-    <StyledCol
-      ref={ref}
-      ml={`${(100 / 12) * offset}%`}
-      {...getColWidth(cols)}
-      className={CLX_LAYOUT}
-    >
+    <StyledCol ref={ref} $cols={cols} $offset={offset} className={CLX_LAYOUT}>
       {children}
     </StyledCol>
   ),
