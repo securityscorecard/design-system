@@ -30,29 +30,37 @@ function filterState(
   if (isCollapsedOnOpen) {
     return [item];
   }
+
   return [...state, item];
 }
 
 const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
   (
-    { isCollapsedOnOpen = true, items, openItems, className, ...props },
+    {
+      isCollapsedOnOpen = true,
+      items,
+      openItems,
+      className,
+      onChange,
+      ...props
+    },
     ref,
   ) => {
     const [openIds, setOpenIds] = useState(pickOpen(items));
 
-    useEffect(
-      () =>
-        openItems?.forEach((item: AccordionItemId) =>
-          setOpenIds((state) => filterState(state, item, isCollapsedOnOpen)),
-        ),
-      [openItems, isCollapsedOnOpen],
-    );
+    useEffect(() => {
+      if (openItems !== undefined) {
+        setOpenIds(isCollapsedOnOpen ? [openItems[0]] : openItems);
+      }
+    }, [openItems, isCollapsedOnOpen]);
 
     const handleClick = useCallback(
       (id: AccordionItemId) => {
-        setOpenIds((state) => filterState(state, id, isCollapsedOnOpen));
+        const nextState = filterState(openIds, id, isCollapsedOnOpen);
+        setOpenIds(nextState);
+        onChange?.(nextState);
       },
-      [setOpenIds, isCollapsedOnOpen],
+      [openIds, setOpenIds, onChange, isCollapsedOnOpen],
     );
 
     return (
@@ -78,6 +86,7 @@ Accordion.propTypes = {
   isCollapsedOnOpen: PropTypes.bool,
   className: PropTypes.string,
   openItems: PropTypes.arrayOf(AccordionItemIdPropType),
+  onChange: PropTypes.func,
 };
 
 export default Accordion;
