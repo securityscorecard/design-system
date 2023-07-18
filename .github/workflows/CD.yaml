@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18']
+        node: ['14', '16', '18', '20']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -78,6 +78,15 @@ jobs:
   storybook-tests:
     name: '🛟 Run Storybook tests'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # shard: [
+        #   1/8, 2/8, 3/8, 4/8,
+        #   5/8, 6/8, 7/8, 8/8
+        # ]
+        shard: [
+          1/4, 2/4, 3/4, 4/4
+        ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -106,8 +115,21 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
+      - name: Cache Playwright
+        id: playwright-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install Playwright
         run: npx playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      - name: Install Playwright deps
+        run: npx playwright install-deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
 
       - name: Cache storybook build
         id: storybook-build-cache
@@ -121,10 +143,12 @@ jobs:
         run: yarn storybook:build
 
       - name: Run tests
+        env:
+          SHARD: ${{matrix.shard}}
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:6006 && yarn test-storybook"
+            "npx wait-on tcp:6006 && yarn test-storybook --shard=${SHARD}"
 
   visual-tests:
     name: '🖼 Run visual tests'
@@ -289,7 +313,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18']
+        node: ['14', '16', '18', '20']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -337,7 +361,7 @@ jobs:
     name: '📟 Get next released version'
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
     continue-on-error: true
-    needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
+    needs: [storybook-tests, unit-tests, visual-tests, types, lint, lint-css, betterer, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
