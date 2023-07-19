@@ -36,4 +36,5 @@ export interface MultiValueInputProps
   onValueRemove?: (nextValues: MultiValueInputProps['value']) => void;
   onValuesChange?: (nextValues: MultiValueInputProps['value']) => void;
   onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void | string;
 }

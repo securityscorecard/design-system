@@ -142,6 +142,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   onValueRemove = noop,
   onValuesChange = noop,
   onInputChange = noop,
+  onPaste = noop,
   placeholder,
   pattern,
   id,
@@ -174,10 +175,9 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
         split(';'),
         map(trim),
         filter(isNonEmptyString),
-        uniq,
       )(newValue);
       const newValues = [...values, ...parsedValues];
-      setValues(newValues);
+      setValues(uniq(newValues));
       onValueAdd(parsedValues, newValues);
       onValuesChange(newValues);
     } else {
@@ -233,10 +233,13 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
     e,
   ) => {
     e.preventDefault();
-    const pastedValue = (e.clipboardData || window.clipboardData).getData(
-      'text',
-    );
-    addValue(pastedValue);
+    const pastedValue = onPaste(e);
+
+    if (typeof pastedValue === 'string') {
+      addValue(pastedValue);
+    } else {
+      addValue((e.clipboardData || window.clipboardData).getData('text'));
+    }
   };
 
   const handleInputOnChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -363,6 +366,7 @@ MultiValueInput.propTypes = {
   onValueRemove: PropTypes.func,
   onValuesChange: PropTypes.func,
   onInputChange: PropTypes.func,
+  onPaste: PropTypes.func,
 };
 
 export default MultiValueInput;
