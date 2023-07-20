@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/securityscorecard/design-system/compare/v1.6.0...v1.7.0) (2023-07-20)
+
+
+### Bug Fixes
+
+* **Accordion:** make 'openItems' act as value ([a8261f7](https://github.com/securityscorecard/design-system/commit/a8261f7439106e85e21dac5e9ffad6c684a41c1b))
+* **Datatable:** add onColumnVisibilityChange to proptypes ([374cfe9](https://github.com/securityscorecard/design-system/commit/374cfe9ba3b2d31c9d90729d0489c56118e1921b))
+
+
+### Features
+
+* **MultiValueInput:** add 'onPaste' callback ([03639a2](https://github.com/securityscorecard/design-system/commit/03639a2681eff658ae5b86471e4d612a49cb82c0))
+
 # [1.6.0](https://github.com/securityscorecard/design-system/compare/v1.5.1...v1.6.0) (2023-07-12)
 
 
