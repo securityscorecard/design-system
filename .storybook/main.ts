@@ -19,7 +19,7 @@ const config: StorybookConfig = {
     },
     '@storybook/addon-a11y',
     '@storybook/addon-interactions',
-    'storybook-addon-designs',
+    '@storybook/addon-designs',
     '@geometricpanda/storybook-addon-badges',
     'storycap',
   ],

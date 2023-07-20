@@ -2,7 +2,7 @@ import { Meta } from '@storybook/addon-docs';
 
 import copySVGcode from './images/CopySVGcode.png';
 
-<Meta title="code examples/add svg icon to DS icon library" />
+<Meta title="code examples/Add SVG icon to DS icon library" />
 
 # Add SVG to the Design System icon library
 
@@ -18,7 +18,11 @@ When you use the free license icon, don't forget to add the license note into th
 
 1. Find the icon's SVG first and copy the SVG file. Go to fontawesome.com and find the icon you want in the free license icon library. Copy the SVG code.
 
-<img alt={copySVGcode} src="Image alt" width={240} />
+<img
+  src={copySVGcode}
+  alt="FontAwesome copy SVG code illustration"
+  width={240}
+/>
 
 2. Create a new file in src/theme/icons and name it with your icon name using camel-case. Copy the '\_template.ts' content into your file.
 

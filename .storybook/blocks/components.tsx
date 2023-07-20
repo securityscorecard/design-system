@@ -10,8 +10,10 @@ export const Table = styled.table`
 
 export const TableHead = styled.thead`
   background-color: #f3f3f3;
+
   tr {
     border-bottom: 2px solid #dadada;
+
     > th + th {
       border-left: 1px solid #dadada
     }
@@ -28,6 +30,7 @@ export const TableBody = styled.tbody`
   tr {
     border-bottom: 1px solid #dadada;
   }
+
   td {
     padding: 0.75rem 0.5rem;
   }

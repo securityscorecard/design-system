@@ -194,8 +194,12 @@ module.exports = {
     {
       files: ['**/*.md', '**/*.mdx'],
       extends: ['plugin:mdx/recommended'],
+      settings: {
+        'mdx/code-blocks': false,
+      },
       rules: {
         'react/jsx-filename-extension': [1, { extensions: ['.mdx'] }],
+        'react/jsx-sort-props': 'off',
         'react/self-closing-comp': 'off',
       },
     },

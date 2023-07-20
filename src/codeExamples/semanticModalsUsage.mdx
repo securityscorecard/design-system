@@ -2,9 +2,9 @@ import { Meta } from '@storybook/addon-docs';
 
 import SemanticModal from './images/SemanticModal.png';
 
-<Meta title="code examples/using semantic modals" />
+<Meta title="code examples/Using semantic modals" />
 
-## Using semantic modals
+# Using semantic modals
 
 Several different popup actions notify the user about what is going on around the platform. Notifications through the Toast component inform him about successful action results, and about what will eventually need the user's attention. The Toast component is mostly not related to the user's immediate actions - so how do we notify the user about immediate problems?
 
@@ -12,7 +12,7 @@ Inside the forms, whenever there's an error, the user gets an error message. Whe
 
 The difference between notification and semantic modal is that notification displays the information and through actions leads you to where the problem is (another space), whereas the semantic modal allows you to execute the action directly.
 
-### Semantic modal parameters
+## Semantic modal parameters
 
 | Key                    | Type     | Default | Description                                                                                        |
 | :--------------------- | :------- | :------ | :------------------------------------------------------------------------------------------------- |
@@ -32,41 +32,38 @@ The difference between notification and semantic modal is that notification disp
 | name    | string   |         | Button name parameter                 |
 
 ```js
-
-import { SemanticModal, SemanticModalEnums } from 'securityscorecard/design-system';
+import { SemanticModal } from 'securityscorecard/design-system';
 
 /** ex. tries to turn off 2FA for the whole company
-* this is not a desired action from the security standpoint
-* to make sure this action is not made by accident
-* we alert the user to confirm this is really what he wants to do
-*/
+ * this is not a desired action from the security standpoint
+ * to make sure this action is not made by accident
+ * we alert the user to confirm this is really what he wants to do
+ */
 
 const turnOff2FAModal = () => (
   <SemanticModal
-    title="Turning off 2FA"
-    message="You are going to turn off 2FA enforcement for your company. This action will decrease your sign up security. Are you sure you want to proceed?"
     actions={[
       {
-        label: "Turn off 2FA",
-        name: "turn off 2FA",
+        label: 'Turn off 2FA',
+        name: 'turn off 2FA',
         onClick: () => proceed(),
       },
       {
-        label: "Cancel",
-        name: "cancel",
+        label: 'Cancel',
+        name: 'cancel',
         onClick: () => cancel(),
       },
     ]}
-    variant="danger"
+    message="You are going to turn off 2FA enforcement for your company. This action will decrease your sign up security. Are you sure you want to proceed?"
     primaryButtonColor="error"
+    title="Turning off 2FA"
+    variant="danger"
   />
 );
 
-...
-  if(set2FA(user, false)) {
-    displayModal(turnOff2FAModal, true)
-  }
-
+if (set2FA(user, false)) {
+  displayModal(turnOff2FAModal, true);
+}
 ```
 
-<img alt={SemanticModal} src="Image alt" width={640} />
+<img src={SemanticModal} alt="SemanticModal rendered example" width={640} />

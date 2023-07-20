@@ -2,7 +2,7 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Hooks/usePortal" />
 
-## usePortal
+# usePortal
 
 This is hook for creation of React Portal. It renders children into a DOM node that exists outside the DOM hierarchy of the parent component.
 
@@ -25,7 +25,7 @@ The return object includes following properties
 | hidePortal      | function  |         | To hide the portal or set the `isPortalVisible` set to `false`                                 |
 | isPortalVisible | boolean   | false   | The showPortal/hidePortal state                                                                |
 
-```js
+```jsx
 import { usePortal } from '@securityscorecard/design-system';
 
 const { Portal } = usePortal({ defaultIsPortalVisible: true });
