@@ -69,6 +69,9 @@ const steps = [
   },
 ];
 
+const containerDecorator = (width) => (storyFn) =>
+  <div style={{ width }}>{storyFn()}</div>;
+
 export const Playground: Story<StepperProps> = (args) => (
   <Stepper {...args}>
     {steps.map(({ label, summary, id }) => (
@@ -88,6 +91,7 @@ Playground.args = {
 Playground.parameters = {
   screenshot: { skip: true },
 };
+Playground.decorators = [containerDecorator('1820px')];
 
 export const StepTypes: Story<StepperProps> = (args) => (
   <Stepper {...args}>
@@ -103,12 +107,11 @@ export const StepTypes: Story<StepperProps> = (args) => (
 StepTypes.args = {
   activeStep: 1,
 };
+StepTypes.decorators = [containerDecorator('1820px')];
 
 export const WithHiddenLabels = StepTypes.bind({});
 WithHiddenLabels.args = StepTypes.args;
-WithHiddenLabels.decorators = [
-  (storyFn) => <div style={{ width: '550px' }}>{storyFn()}</div>,
-];
+WithHiddenLabels.decorators = [containerDecorator('550px')];
 
 export const Vertical: Story<StepperProps> = (args) => (
   <Stepper {...args}>
