@@ -244,16 +244,19 @@ function ControlsModule<D extends Record<string, unknown>>({
                     )
                   }
                 >
-                  <ControlButton
-                    iconName={SSCIconNames.table}
-                    label="Columns"
-                    onClick={() =>
-                      handleControlOnClick(
-                        ControlTypes.columns,
-                        controlsState[ControlTypes.columns].isActive,
-                      )
-                    }
-                  />
+                  {(props) => (
+                    <ControlButton
+                      iconName={SSCIconNames.table}
+                      label="Toggle columns"
+                      onClick={() =>
+                        handleControlOnClick(
+                          ControlTypes.columns,
+                          controlsState[ControlTypes.columns].isActive,
+                        )
+                      }
+                      {...props}
+                    />
+                  )}
                 </ColumnsControls>
               )}
               {shouldShowFiltering && (

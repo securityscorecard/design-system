@@ -14,6 +14,7 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   appliedFilters = 0,
   className = '',
   onClick,
+  hiddenColumns = 0,
 }) => (
   <Button
     className={className}
@@ -26,6 +27,9 @@ const ControlButton: React.FC<ControlButtonProps> = ({
     <Inline align="center" gap="sm">
       <span>{label}</span>
       {appliedFilters > 0 && <Badge count={appliedFilters} variant="neutral" />}
+      {hiddenColumns > 0 && (
+        <Badge text={`${hiddenColumns} hidden`} variant="neutral" />
+      )}
     </Inline>
   </Button>
 );
@@ -35,6 +39,7 @@ ControlButton.propTypes = {
   iconName: PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)).isRequired,
   onClick: PropTypes.func.isRequired,
   appliedFilters: PropTypes.number,
+  hiddenColumns: PropTypes.number,
   className: PropTypes.string,
 };
 

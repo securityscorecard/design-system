@@ -22,7 +22,7 @@ export const Default: Story<ControlButtonProps> = (args) => (
     <Padbox paddingSize="sm">
       <Inline align="center" gap="mdPlus">
         <ControlButton {...args} />
-        <ControlButton {...args} appliedFilters={4} />
+        <ControlButton {...args} hiddenColumns={4} />
       </Inline>
     </Padbox>
     <Padbox paddingSize="sm">
