@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 
 import DSProvider from './DSProvider';
+import { Subset } from '../../types/utils.types';
 
 describe('DSProvider', () => {
   const Button = styled.button`
@@ -10,7 +11,9 @@ describe('DSProvider', () => {
     color: ${({ theme }) => theme.colors.neutral[900]};
   `;
 
-  const renderComponent = (theme = undefined) =>
+  const renderComponent = (
+    theme: Subset<DefaultTheme> | undefined = undefined,
+  ) =>
     render(
       <DSProvider theme={theme}>
         <Button>Test</Button>

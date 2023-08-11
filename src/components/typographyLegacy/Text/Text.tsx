@@ -61,19 +61,19 @@ const inheritSize = css`
 `;
 
 const primaryVariant = css`
-  color: ${getColor('neutral.900')};
+  color: ${getColor('text.primary')};
 `;
 const secondaryVariant = css`
-  color: ${getColor('neutral.700')};
+  color: ${getColor('text.secondary')};
 `;
 const contextVariant = css`
-  color: ${getColor('neutral.600')};
+  color: ${getColor('text.context')};
 `;
 const monospaceVariant = css`
   font-family: ${getFontFamily('mono')};
 `;
 const dangerVariant = css`
-  color: ${getColor('error.500')};
+  color: ${getColor('text.danger')};
 `;
 const inheritVariant = `
   color: inherit;

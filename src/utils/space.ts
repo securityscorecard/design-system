@@ -9,7 +9,7 @@ import { isNotUndefined, isNumber } from 'ramda-adjunct';
 import { BASE_LINE_HEIGHT } from '../theme/constants';
 import { SpacingSizeValue } from '../types/spacing.types';
 import { SpaceSizes } from '../theme/space.enums';
-import { Theme, pxToRem } from './helpers';
+import { ThemeType, pxToRem } from './helpers';
 import { PaddingTypes } from '../components/layout/Padbox/Padbox.enums';
 import { SpaceSize } from '../theme/space.types';
 
@@ -105,7 +105,7 @@ export const createPaddingSpacing = createSpacing('padding');
 export const createSpacings = ({
   margin,
   padding,
-}: Theme): FlattenSimpleInterpolation => css`
+}: ThemeType): FlattenSimpleInterpolation => css`
   ${createMarginSpacing(margin)};
   ${createPaddingSpacing(padding)};
 `;

@@ -10,11 +10,11 @@ import { createLayout } from './layout';
 import { createDepths } from './depths';
 import { createSpace } from './space';
 import { createRadii } from './radii';
-import { RecursivePartial } from '../types/utils.types';
 import { createTokens } from './tokens';
+import { Subset } from '../types/utils.types';
 
 export const createTheme = (
-  overrides: RecursivePartial<DefaultTheme> = {},
+  overrides: Subset<DefaultTheme> = {},
 ): DefaultTheme => {
   const {
     colors: colorsOverride = {},
