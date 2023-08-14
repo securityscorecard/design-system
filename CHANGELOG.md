@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/securityscorecard/design-system/compare/v1.7.0...v1.8.0) (2023-08-14)
+
+
+### Features
+
+* **DataTableControls:** add number of hidden columns ([dc684da](https://github.com/securityscorecard/design-system/commit/dc684dab47e20bee8a73f0b0de578b8bac555461))
+* **DsThemeOverride:** allow local them overrides ([46fa3c7](https://github.com/securityscorecard/design-system/commit/46fa3c7e1bb93b8c6dd4da113e4ae649477f4eef))
+
 # [1.7.0](https://github.com/securityscorecard/design-system/compare/v1.6.0...v1.7.0) (2023-07-20)
 
 
