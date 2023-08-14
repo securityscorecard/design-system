@@ -14,7 +14,7 @@ import { makeStickyColumn, shrinkIfSticky } from '../utils';
 import SortingIcon from './SortingIcon';
 import { HeadProps } from './Head.types';
 
-const StyledTh = styled.th`
+const StyledTh = styled.th<{ sticky?: string }>`
   display: flex;
   align-items: center;
   min-height: ${pxToRem(48)};

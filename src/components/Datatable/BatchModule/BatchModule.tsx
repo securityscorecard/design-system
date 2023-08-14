@@ -67,8 +67,8 @@ const BatchModule: React.FC<BatchModuleProps> = ({
               }}
             >
               <ControlButton
-                iconName={SSCIconNames.reorder}
-                label="Columns"
+                iconName={SSCIconNames.table}
+                label="Toggle columns"
                 onClick={() => {
                   setIsColumnsActive((prev) => !prev);
                 }}

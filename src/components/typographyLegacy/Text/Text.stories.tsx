@@ -1,11 +1,16 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
+import styled from 'styled-components';
 
-import { Stack } from '../../layout';
+import { Inline, Stack } from '../../layout';
 import Text, { Code, Strong } from './Text';
 import { TextProps } from './Text.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { generateControl } from '../../../utils/tests/storybook';
+import { DSThemeOverride } from '../../../theme';
+import { getColor, getRadii } from '../../../utils';
+import { Heading } from '../Heading';
+import { Paragraph } from '../Paragraph';
 
 export default {
   title: 'components/typography/Text',
@@ -148,3 +153,66 @@ export const ShorthandComponents: Story = () => (
     <Strong>This is shorthand Strong component</Strong>
   </>
 );
+
+const DarkBox = styled.div`
+  background: linear-gradient(
+    130deg,
+    ${getColor('brand.900')} 0%,
+    ${getColor('brand.800')} 100%
+  );
+  padding: 2rem;
+  border-radius: ${getRadii('double')};
+  max-width: 30rem;
+`;
+
+export const DarkMode: Story = () => (
+  <DarkBox>
+    <DSThemeOverride
+      overrides={(theme) => ({
+        colors: {
+          text: {
+            primary: theme.colors.neutral[0],
+            secondary: theme.colors.neutral[500],
+            danger: '#fd4a4a',
+          },
+        },
+      })}
+    >
+      <Stack gap="lg">
+        <Stack as="hgroup" gap="sm">
+          <Heading>Very cool feature title</Heading>
+          <Paragraph variant="secondary">
+            Morbi auctor consectetur ex ut pellentesque. Vestibulum vitae
+            pretium odio, non dignissim dui. Pellentesque congue purus purus,
+            ultricies ullamcorper leo finibus quis.
+          </Paragraph>
+        </Stack>
+        <Inline gap="lg" justify="space-between">
+          <Stack>
+            <Text size="h2" variant={TextVariants.primary}>
+              200
+            </Text>
+            <Text variant={TextVariants.secondary}>First metric</Text>
+          </Stack>
+          <Stack>
+            <Text size="h2" variant={TextVariants.danger}>
+              -53
+            </Text>
+            <Text variant={TextVariants.secondary}>Negative metric</Text>
+          </Stack>
+          <Stack>
+            <Text size="h2" variant={TextVariants.primary}>
+              31
+            </Text>
+            <Text variant={TextVariants.secondary}>Third metric</Text>
+          </Stack>
+        </Inline>
+      </Stack>
+    </DSThemeOverride>
+  </DarkBox>
+);
+DarkMode.parameters = {
+  docs: {
+    source: { type: 'code' },
+  },
+};

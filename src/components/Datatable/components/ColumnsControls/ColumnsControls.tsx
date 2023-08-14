@@ -61,11 +61,13 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
 
   return (
     <span ref={parentRef}>
-      {children}
+      {typeof children === 'function'
+        ? children({ hiddenColumns: hiddenColumns.length })
+        : children}
       <ControlDropdown
         isOpen={isOpen}
         parentRef={parentRef}
-        title="Columns"
+        title="Toggle columns"
         onClose={handleCloseColumnsControl}
         onReset={handleResetColumnsControl}
         onSubmit={handleApplyColumnsControl}
@@ -103,6 +105,7 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
 };
 
 ColumnsControls.propTypes = {
+  children: PropTypes.oneOf(PropTypes.func, PropTypes.node).isRequired,
   onClose: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
