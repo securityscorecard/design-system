@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/securityscorecard/design-system/compare/v1.8.0...v1.8.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* **ColumnsControl:** fix incorrect syntax on PropTypes definition ([578b55f](https://github.com/securityscorecard/design-system/commit/578b55f738d854d9ea17fed450c7d55ecd4759ba))
+
 # [1.8.0](https://github.com/securityscorecard/design-system/compare/v1.7.0...v1.8.0) (2023-08-14)
 
 
