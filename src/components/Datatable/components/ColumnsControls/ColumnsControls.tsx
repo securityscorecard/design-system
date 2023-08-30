@@ -105,7 +105,7 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
 };
 
 ColumnsControls.propTypes = {
-  children: PropTypes.oneOf(PropTypes.func, PropTypes.node).isRequired,
+  children: PropTypes.oneOf([PropTypes.func, PropTypes.node]).isRequired,
   onClose: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
