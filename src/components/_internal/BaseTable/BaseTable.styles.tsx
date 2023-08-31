@@ -9,6 +9,7 @@ import {
   getFontWeight,
   getFormStyle,
   getRadii,
+  getSpace,
   getToken,
   pxToRem,
 } from '../../../utils';
@@ -30,19 +31,18 @@ export const BaseTableContainer = styled.div`
   overflow-x: auto;
 
   &::-webkit-scrollbar {
-    box-sizing: content-box;
-    outline: 1px solid ${getColor('neutral.400')};
-    height: ${pxToRem(20)};
+    box-sizing: border-box;
+    height: ${pxToRem(24)};
   }
   &::-webkit-scrollbar-thumb {
     border-radius: ${getRadii('round')};
-    background-color: ${getColor('neutral.600')};
-    border: 6px solid ${getColor('neutral.200')};
+    background-color: ${getColor('primary.500')};
+    border: ${getSpace('sm')} solid ${getColor('neutral.0')};
   }
   &::-webkit-scrollbar-track-piece {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('neutral.300')};
-    border: 6px solid ${getColor('neutral.200')};
+    border: ${getSpace('sm')} solid ${getColor('neutral.0')};
   }
   &:focus-visible {
     outline-color: ${getColor('primary.500')};
@@ -252,4 +252,5 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
 
 export const BaseTableAndLoadingOverlayContainer = styled.div`
   position: relative;
+  border-top: 1px solid ${getColor('neutral.400')};
 `;

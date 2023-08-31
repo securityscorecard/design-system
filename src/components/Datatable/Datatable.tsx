@@ -28,8 +28,8 @@ const StyledDatatable = styled(Padbox)`
   flex-direction: column;
   position: relative;
   border: 1px solid ${getColor('neutral.400')};
-  border-radius: ${getRadii('default')};
-  background: ${getColor('neutral.200')};
+  border-radius: ${getRadii('double')};
+  background: ${getColor('neutral.0')};
 `;
 
 const mapSelectedRows = <D,>(defaultSelectedRowIds: IdType<D>[]) =>
