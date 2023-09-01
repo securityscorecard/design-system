@@ -5,6 +5,9 @@ import { noop } from 'ramda-adjunct';
 
 import {
   Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Badge,
   Banner,
   BreadcrumbItem,
@@ -23,6 +26,7 @@ import {
   Inline,
   Input,
   Label,
+  Link,
   MultiValueInput,
   Pagination,
   Paragraph,
@@ -155,7 +159,7 @@ export const StickerToastItem = () => {
 
 export const StickerItem = ({ title, children, id }) => {
   return (
-    <StickerContainer id={id}>
+    <StickerContainer id={id} className="sb-unstyled">
       <Stack
         align="space-between"
         gap={SpaceSizes.md}
@@ -187,7 +191,7 @@ export const StickerItem = ({ title, children, id }) => {
         </Inline>
         <Inline justify="center">{children}</Inline>
         <Inline justify="flex-end">
-          <a href={`?path=/docs/${id}`}>See documentation →</a>
+          <Link href={`?path=/docs/${id}`}>See documentation →</Link>
         </Inline>
       </Stack>
     </StickerContainer>
@@ -198,23 +202,25 @@ export const StickerList = () => {
   return (
     <Grid cols={3} gap={SpaceSizes.lg}>
       <StickerItem id="components-accordion--playground" title="Accordion">
-        <Accordion
-          items={[
-            {
-              content: 'Content',
-              id: 1,
-              isOpen: true,
-              title: 'Item 1',
-            },
-            {
-              content: 'Content',
-              id: 2,
-              title: 'Item 2',
-            },
-          ]}
+        <div
+          style={{
+            background: 'white',
+            padding: '0.5rem',
+            borderRadius: '4px',
+            width: '100%',
+          }}
         >
-          Accordion
-        </Accordion>
+          <Accordion defaultValue="item1">
+            <AccordionItem id="item1">
+              <AccordionTrigger>Item 1</AccordionTrigger>
+              <AccordionContent>Content</AccordionContent>
+            </AccordionItem>
+            <AccordionItem id="item2">
+              <AccordionTrigger>Item 2</AccordionTrigger>
+              <AccordionContent>Content</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       </StickerItem>
       <StickerItem id="components-button--playground" title="Button">
         <Button color="primary" variant="solid">
