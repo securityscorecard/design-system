@@ -246,7 +246,7 @@ function ControlsModule<D extends Record<string, unknown>>({
                 >
                   {(props) => (
                     <ControlButton
-                      iconName={SSCIconNames.table}
+                      iconName={SSCIconNames.columns3}
                       label="Toggle columns"
                       onClick={() =>
                         handleControlOnClick(

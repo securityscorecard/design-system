@@ -4,10 +4,9 @@ import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { pxToRem } from '../../../utils';
-import { SpaceSizes } from '../../../theme';
+import { getSpace } from '../../../utils';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { Inline, Padbox } from '../../layout';
+import { Inline } from '../../layout';
 import { ColumnsControls } from '../components/ColumnsControls';
 import { ControlButton } from '../components/ControlButton';
 import { BatchActions } from './BatchActions';
@@ -15,8 +14,8 @@ import { ElementCounter } from './ElementCounter';
 import { BatchModuleProps } from './BatchModule.types';
 import { DatatableStore } from '../Datatable.store';
 
-const BatchModuleWrapper = styled(Padbox)`
-  min-height: ${pxToRem(64)};
+const BatchModuleWrapper = styled.div`
+  padding: ${getSpace('md')};
 `;
 
 const BatchModule: React.FC<BatchModuleProps> = ({
@@ -49,9 +48,9 @@ const BatchModule: React.FC<BatchModuleProps> = ({
   }, []);
 
   return (
-    <BatchModuleWrapper paddingSize={SpaceSizes.md}>
+    <BatchModuleWrapper>
       <Inline align="center" justify="space-between">
-        <Inline align="center">
+        <Inline align="center" gap="md">
           {isButtonDisplayed && (
             <ColumnsControls
               isOpen={isColumnsActive}
@@ -67,7 +66,7 @@ const BatchModule: React.FC<BatchModuleProps> = ({
               }}
             >
               <ControlButton
-                iconName={SSCIconNames.table}
+                iconName={SSCIconNames.columns3}
                 label="Toggle columns"
                 onClick={() => {
                   setIsColumnsActive((prev) => !prev);

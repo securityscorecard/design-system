@@ -36,13 +36,13 @@ export const BaseTableContainer = styled.div`
   }
   &::-webkit-scrollbar-thumb {
     border-radius: ${getRadii('round')};
-    background-color: ${getColor('neutral.600')};
-    border: 6px solid ${getColor('neutral.200')};
+    background-color: ${getColor('primary.500')};
+    border: 6px solid ${getColor('neutral.0')};
   }
   &::-webkit-scrollbar-track-piece {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('neutral.300')};
-    border: 6px solid ${getColor('neutral.200')};
+    border: 6px solid ${getColor('neutral.0')};
   }
   &:focus-visible {
     outline-color: ${getColor('primary.500')};
