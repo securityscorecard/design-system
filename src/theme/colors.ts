@@ -1,14 +1,14 @@
 const primary = {
-  50: '#f0ecfe',
-  100: '#e5dffd',
-  200: '#cabdfb',
-  300: '#a995f4',
-  400: '#8263f5',
-  500: '#6641f3',
-  600: '#4d29d4',
-  700: '#3b1ab7',
-  800: '#2c1193',
-  900: '#1b0471',
+  50: '#E7F0FF',
+  100: '#D3E4FF',
+  200: '#B4D0FF',
+  300: '#81B0FF',
+  400: '#3E85FA',
+  500: '#1163EA',
+  600: '#014FCF',
+  700: '#003B9D',
+  800: '#002B72',
+  900: '#001A45',
 };
 
 const neutral = {
@@ -26,13 +26,16 @@ const neutral = {
 };
 
 const info = {
-  50: '#f0ecfe',
-  100: '#dad1fc',
-  500: '#6641f3',
-  600: '#5433d2',
-  700: '#41299a',
-  800: '#26146D',
-  900: '#160944',
+  50: '#E7F0FF',
+  100: '#D3E4FF',
+  200: '#B4D0FF',
+  300: '#81B0FF',
+  400: '#3E85FA',
+  500: '#1163EA',
+  600: '#014FCF',
+  700: '#003B9D',
+  800: '#002B72',
+  900: '#001A45',
 };
 
 const success = {
@@ -66,11 +69,11 @@ const error = {
 };
 
 const grade = {
-  A: '#4aba00',
-  B: '#e5bd00',
-  C: '#f08f00',
-  D: '#f1431c',
-  F: '#b40000',
+  A: '#4BBA76',
+  B: '#FFB147',
+  C: '#FB7A4F',
+  D: '#F32E43',
+  F: '#B81143',
 };
 
 const brand = {
@@ -91,11 +94,11 @@ const brandSecondary = {
 } as const;
 
 const severity = {
-  informational: '#0275D8',
-  positive: '#49A25A',
-  low: '#E4BE00',
-  medium: '#E5883C',
-  high: '#B21F24',
+  informational: '#5580D7',
+  positive: '#4BBA76',
+  low: '#FFB147',
+  medium: '#FB7A4F',
+  high: '#F32E43',
 };
 
 export const colors = {
