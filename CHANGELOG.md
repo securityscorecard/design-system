@@ -1,3 +1,12 @@
+## [1.8.2](https://github.com/securityscorecard/design-system/compare/v1.8.1...v1.8.2) (2023-09-07)
+
+
+### Bug Fixes
+
+* **Datatable:** adjust border ([41f80d3](https://github.com/securityscorecard/design-system/commit/41f80d32d87dee4cadbda501a94c9ce0f4e296db))
+* **Datatable:** update styling ([f03a23a](https://github.com/securityscorecard/design-system/commit/f03a23a18ba2b6e36da09a493fb77ff0c4b5379d))
+* update colors ([736bf2a](https://github.com/securityscorecard/design-system/commit/736bf2acd1e8ae45f36ad2d2753e7d101dc86b0d))
+
 ## [1.8.1](https://github.com/securityscorecard/design-system/compare/v1.8.0...v1.8.1) (2023-08-30)
 
 
