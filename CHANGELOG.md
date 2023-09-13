@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/securityscorecard/design-system/compare/v1.8.2...v1.8.3) (2023-09-13)
+
+
+### Bug Fixes
+
+* **Filters:** extend value interface ([fab447b](https://github.com/securityscorecard/design-system/commit/fab447b2752b23f12599faa182bedf54277b6040))
+
 ## [1.8.2](https://github.com/securityscorecard/design-system/compare/v1.8.1...v1.8.2) (2023-09-07)
 
 
