@@ -52,7 +52,7 @@ export interface Filter {
   isApplied: boolean;
   isLoading: boolean;
   isCanceled: boolean;
-  value?: string | string[] | Date | BaseDateRange;
+  value?: string | string[] | Date | BaseDateRange | Record<string, unknown>;
 }
 
 export interface FiltersProps {
