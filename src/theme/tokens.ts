@@ -50,7 +50,7 @@ export const createTokens = (
   'color-action-link-primary-active': colors.primary[600],
   'color-action-link-background-primary-focus': colors.primary[50],
   'color-action-link-secondary': colors.neutral[1000],
-  'color-action-link-secondary-hover': colors.neutral[800],
+  'color-action-link-secondary-hover': colors.neutral[700],
   'color-action-link-secondary-active': colors.neutral[1000],
   'color-action-link-background-secondary-focus': colors.neutral[200],
 
