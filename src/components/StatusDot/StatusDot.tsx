@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { getRadii, pxToRem } from '../../utils';
 
-const StatusDotColors = {
+export const StatusDotColors = {
   good: '100, 244, 81',
   bad: '242, 46, 67',
   neutral: '84, 129, 217',
