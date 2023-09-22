@@ -32,6 +32,7 @@ export * from './Signal';
 export * from './SingleDatePicker';
 export * from './SortableList';
 export * from './Spinner';
+export * from './StatusDot';
 export * from './Stepper';
 export * from './Table';
 export * from './Tabs';
