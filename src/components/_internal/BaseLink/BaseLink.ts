@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 import { getFontWeight, getRadii, getToken } from '../../../utils';
 import { Colors } from './BaseLink.types';
 
-type LinkStylesProps = { $color: Colors };
+type LinkStylesProps = { $color: Colors; $isExperimental: boolean };
 
 export const LinkBaseStyles = css<LinkStylesProps>`
   margin: 0;
@@ -24,7 +24,7 @@ export const LinkFocusStyles = css<LinkStylesProps>`
   color: ${(p) => getToken(`color-action-link-${p.$color}-hover`, p)};
   text-decoration: underline;
   background-color: ${(p) =>
-    getToken(`color-action-link-background${p.$color}-focus`, p)};
+    getToken(`color-action-link-background-${p.$color}-focus`, p)};
   border-radius: ${getRadii('default')};
 `;
 export const LinkActiveStyles = css<LinkStylesProps>`
