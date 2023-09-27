@@ -299,15 +299,22 @@ WithAllColumnsHidden.args = {
   },
 };
 
-export const WithPersistedState = () => (
-  <Stack gap="md">
-    <Text>
-      An id must be provided to the Datatable in order to persists the table
-      configuration.
-    </Text>
-    {DatatableTemplate({
-      ...MinimalConfig.args,
-      id: 'persisted_state',
-    })}
-  </Stack>
-);
+export const WithPersistedState = DatatableTemplate.bind({});
+WithPersistedState.args = {
+  ...MinimalConfig.args,
+  id: 'persisted_state',
+};
+WithPersistedState.parameters = {
+  screenshot: { skip: true },
+};
+WithPersistedState.decorators = [
+  (storyFn) => (
+    <Stack gap="md">
+      <Text>
+        An id must be provided to the Datatable in order to persists the table
+        configuration.
+      </Text>
+      {storyFn()}
+    </Stack>
+  ),
+];
