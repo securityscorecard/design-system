@@ -34,11 +34,6 @@ const ButtonSolid = css<BaseStyledButtonProps>`
     outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
   }
 
-  &:active,
-  &.active {
-    background-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
-  }
-
   &:disabled,
   &.disabled {
     background-color: ${getToken(`color-action-background-disabled`)};
@@ -53,6 +48,8 @@ const ButtonOutline = css<BaseStyledButtonProps>`
 
   &:hover,
   &.hover {
+    background-color: ${(p) =>
+      getToken(`color-action-background-${p.$color}-active`, p)};
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
@@ -61,13 +58,6 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
-  }
-  &:active,
-  &.active {
-    background-color: ${(p) =>
-      getToken(`color-action-background-${p.$color}-active`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
-    color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
   }
 
   &:disabled,
@@ -107,17 +97,6 @@ const ButtonText = css<BaseStyledButtonProps>`
     outline: none;
   }
 
-  &:active,
-  &&&.active {
-    color: ${(p) =>
-      getToken(
-        `color-action-${
-          p.$color === 'primary' || p.$color === 'secondary' ? 'link-' : ''
-        }${p.$color}-active`,
-        p,
-      )};
-  }
-
   &:disabled,
   &.disabled {
     color: ${getToken(`color-action-text-disabled`)};
@@ -144,6 +123,8 @@ const BaseStyledButton = styled(Padbox).withConfig({
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
+  transition: all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53),
+    transform 50ms cubic-bezier(0.55, 0.085, 0.68, 0.53), outline 0ms;
 
   ${({ $margin }) => createMarginSpacing($margin)};
   ${({ $isExpanded }) => $isExpanded && 'width: 100%;'};
@@ -168,6 +149,18 @@ const BaseStyledButton = styled(Padbox).withConfig({
   &:focus-visible,
   &:active {
     text-decoration: none;
+  }
+
+  &:active,
+  &&&.active {
+    transform: scale(0.98);
+  }
+
+  @media (prefers-reduced-motion) {
+    &:active,
+    &&&.active {
+      transform: scale(1);
+    }
   }
 `;
 
