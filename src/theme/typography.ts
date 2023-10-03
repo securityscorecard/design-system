@@ -17,7 +17,6 @@ const family: Family = {
 };
 
 const size: Size = {
-  h0: pxToRem(BASE_FONT_SIZE * 2), // 32px
   h1: pxToRem(BASE_FONT_SIZE * 2), // 32px
   h2: pxToRem(BASE_FONT_SIZE * 1.75), // 28px
   h3: pxToRem(BASE_FONT_SIZE * 1.5), // 24px
@@ -46,10 +45,6 @@ const lineHeight: LineHeight = {
 
 const margin: Margin = {
   heading: {
-    h0: {
-      top: pxToRem(BASE_LINE_HEIGHT * 6), // 120px
-      bottom: pxToRem(BASE_LINE_HEIGHT * 3), // 60px
-    },
     h1: {
       top: pxToRem(BASE_LINE_HEIGHT * 5), // 100px
       bottom: pxToRem(BASE_LINE_HEIGHT * 2.5), // 50px

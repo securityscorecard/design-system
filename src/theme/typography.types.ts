@@ -6,7 +6,6 @@ export interface Family {
 }
 
 export interface Size {
-  h0: string;
   h1: string;
   h2: string;
   h3: string;
