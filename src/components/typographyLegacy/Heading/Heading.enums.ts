@@ -1,5 +1,4 @@
 export const HeadingSizes = {
-  h0: 'h0',
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',

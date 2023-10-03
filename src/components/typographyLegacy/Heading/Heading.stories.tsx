@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import Heading, { H0, H1, H2, H3, H4, H5 } from './Heading';
+import Heading, { H1, H2, H3, H4, H5 } from './Heading';
 import { HeadingProps } from './Heading.types';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { generateControl } from '../../../utils/tests/storybook';
@@ -36,14 +36,6 @@ Playground.args = {
 Playground.parameters = {
   screenshot: { skip: true },
 };
-
-export const H0Story: Story = () => (
-  <>
-    <H0>Heading H0</H0>
-    <H0 variant={HeadingVariants.secondary}>Heading H0 - secondary</H0>
-  </>
-);
-H0Story.storyName = 'Heading H0';
 
 export const H1Story: Story = () => (
   <>
