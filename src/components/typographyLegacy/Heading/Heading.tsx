@@ -48,6 +48,7 @@ const HeadingH1 = styled.h1`
   ${HeadingBase};
   font-size: ${getFontSize('h1')};
   line-height: ${getLineHeight('xxl')};
+  font-weight: ${getFontWeight('bold')};
 `;
 const HeadingH2 = styled.h2`
   ${HeadingBase};
