@@ -78,6 +78,7 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
         ref={ref}
         $isInverted={isInverted}
         aria-label={ariaLabel}
+        type="button"
         onClick={onClose}
         {...props}
       >
