@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
-import { isNilOrEmpty } from 'ramda-adjunct';
+import { isNilOrEmpty, isUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { colors } from '../../theme/colors';
@@ -68,11 +68,16 @@ const Signal: React.FC<SignalProps> = ({
 }) => {
   if (isNilOrEmpty(kind)) return null;
 
-  const { color, paths } = prop(kind.toLowerCase())(kinds);
+  const severityKind = prop(kind.toLowerCase(), kinds);
+
+  if (isUndefined(severityKind)) return null;
+
+  const { color, paths } = severityKind;
 
   return (
     <svg
       className={cls(CLX_COMPONENT, className)}
+      data-testid="ds-severity-icon"
       height={size}
       viewBox="0 0 16 16"
       width={size}
