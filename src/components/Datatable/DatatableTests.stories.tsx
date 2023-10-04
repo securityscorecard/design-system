@@ -14,6 +14,8 @@ import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { tableActionsMock } from './mocks/actions';
+import { Text } from '../typographyLegacy';
+import { Stack } from '../layout';
 
 MockDate.set('2021-03-31T00:00:00Z');
 
@@ -302,3 +304,17 @@ WithPersistedState.args = {
   ...MinimalConfig.args,
   id: 'persisted_state',
 };
+WithPersistedState.parameters = {
+  screenshot: { skip: true },
+};
+WithPersistedState.decorators = [
+  (storyFn) => (
+    <Stack gap="md">
+      <Text>
+        An id must be provided to the Datatable in order to persists the table
+        configuration.
+      </Text>
+      {storyFn()}
+    </Stack>
+  ),
+];

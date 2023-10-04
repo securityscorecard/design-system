@@ -39,15 +39,11 @@ const HeadingBase = css<HeadingProps>`
   ${({ variant }) => variants[variant]};
 `;
 
-const HeadingH0 = styled.h1`
-  ${HeadingBase};
-  font-size: ${getFontSize('h0')};
-  line-height: normal;
-`;
 const HeadingH1 = styled.h1`
   ${HeadingBase};
   font-size: ${getFontSize('h1')};
   line-height: ${getLineHeight('xxl')};
+  font-weight: ${getFontWeight('bold')};
 `;
 const HeadingH2 = styled.h2`
   ${HeadingBase};
@@ -73,7 +69,6 @@ const HeadingH5 = styled.h5`
 `;
 
 const headingSizes = {
-  h0: HeadingH0,
   h1: HeadingH1,
   h2: HeadingH2,
   h3: HeadingH3,
@@ -107,18 +102,6 @@ Heading.propTypes = {
 };
 
 export default Heading;
-
-export const H0: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
-  <Heading size={HeadingSizes.h0} {...props}>
-    {children}
-  </Heading>
-);
-
-H0.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
 
 export const H1: React.FC<
   Omit<React.ComponentProps<typeof Heading>, 'size'>

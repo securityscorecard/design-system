@@ -23,7 +23,7 @@ export const createTokens = (
   'color-action-secondary': colors.neutral[700],
   'color-action-success': colors.success[700],
   'color-action-danger': colors.error[500],
-  'color-action-primary-hover': colors.primary[700],
+  'color-action-primary-hover': colors.primary[800],
   'color-action-secondary-hover': colors.neutral[900],
   'color-action-success-hover': colors.success[800],
   'color-action-danger-hover': colors.error[600],
