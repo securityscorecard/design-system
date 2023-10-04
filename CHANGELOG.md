@@ -1,3 +1,24 @@
+# [1.9.0](https://github.com/securityscorecard/design-system/compare/v1.8.3...v1.9.0) (2023-10-04)
+
+
+### Bug Fixes
+
+* **Signal:** handle unknown value gracefully ([1423697](https://github.com/securityscorecard/design-system/commit/1423697967d6483dcfd18e1ebb7fe50c65cebc2d))
+* **StatusDot:** export the component from package ([9804dad](https://github.com/securityscorecard/design-system/commit/9804dad90efd140ecd7c4ce286e9120c552b2357))
+* **StatusPill:** export the component from package ([3a96af2](https://github.com/securityscorecard/design-system/commit/3a96af28a57f00c836ee797460b518bf477dea54))
+
+
+### Features
+
+* **Button:** add active animation ([45fcf8c](https://github.com/securityscorecard/design-system/commit/45fcf8cfd0d8ee030cd43770091d54d214da844b))
+* **CloseButton:** add type attribute ([b3a9103](https://github.com/securityscorecard/design-system/commit/b3a910300577a19e46485ce64c97986301fdb27e))
+* **Heading:** change H1 font weight to bold ([00eb53a](https://github.com/securityscorecard/design-system/commit/00eb53ad4e0355f87852e853680dba3893c0cf33))
+* **Heading:** remove H0 ([633a9d8](https://github.com/securityscorecard/design-system/commit/633a9d871f0e5337362478c30570671f448b1f8e))
+* **Icons:** update icons to 6.4.2 ([783f00b](https://github.com/securityscorecard/design-system/commit/783f00be86e1aee546021205b127e3af70557a6b))
+* **Link:** add experimental underline ([5650034](https://github.com/securityscorecard/design-system/commit/56500342e379a022ab6880cc4adfbc2bae0c33a9))
+* **StatusDot:** add component ([5793bd6](https://github.com/securityscorecard/design-system/commit/5793bd66baa8f0b5ceef6d9894ad50c012969e1a))
+* **StatusPill:** add component ([0b46773](https://github.com/securityscorecard/design-system/commit/0b46773d95476a01bf1d9c6d7df6756b1aecb8c3))
+
 ## [1.8.3](https://github.com/securityscorecard/design-system/compare/v1.8.2...v1.8.3) (2023-09-13)
 
 
