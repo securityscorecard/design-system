@@ -12,7 +12,7 @@ import {
   IconPrefix,
 } from '@fortawesome/fontawesome-svg-core';
 
-export const width = 320;
+export const width = 384;
 export const height = 512;
 export const unicode = 'e017';
 export const svgPathData =
