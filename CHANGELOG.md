@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/securityscorecard/design-system/compare/v1.9.0...v1.9.1) (2023-10-05)
+
+
+### Bug Fixes
+
+* **TimesIcon:** add correct width ([46c62c9](https://github.com/securityscorecard/design-system/commit/46c62c9b198b28a78ec619df1c2eb171a68fa11d))
+
 # [1.9.0](https://github.com/securityscorecard/design-system/compare/v1.8.3...v1.9.0) (2023-10-04)
 
 
