@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { pluck } from 'ramda';
 import { noop } from 'ramda-adjunct';
+import { useDeepCompareEffect } from 'use-deep-compare';
 
 import { ControlDropdown } from '../../../ControlDropdown';
 import { SortableList } from '../../../SortableList';
@@ -32,31 +33,42 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
     resetOrderedColumns,
     isInDefaultOrder,
   } = useColumnOrder();
-  const {
-    hiddenColumns,
-    setHiddenColumn,
-    storeVisibleColumns,
-    reinitializeVisibleColumns,
-    resetVisisbleColumns,
-    isInDefaultVisibility,
-  } = useColumnVisibility();
+  const { isInDefaultVisibility } = useColumnVisibility();
   const allColumns = DatatableStore.useState((s) => s.columns);
+  const hiddenColumns = DatatableStore.useState((s) => s.hiddenColumns);
+  console.log(
+    '🚀 ~ file: ColumnsControls.tsx:38 ~ hiddenColumns:',
+    hiddenColumns,
+  );
+
+  const [localHiddenColumns, setLocalHiddenColumns] = useState(hiddenColumns);
+  console.log(
+    '🚀 ~ file: ColumnsControls.tsx:42 ~ localHiddenColumns:',
+    localHiddenColumns,
+  );
+
+  useDeepCompareEffect(() => {
+    setLocalHiddenColumns(hiddenColumns);
+  }, [hiddenColumns]);
 
   const handleCloseColumnsControl = () => {
     onClose();
     reinitializeOrderedColumns();
-    reinitializeVisibleColumns();
   };
   const handleApplyColumnsControl = () => {
     onApply(!isInDefaultOrder || !isInDefaultVisibility);
     storeOrderedColumns();
-    storeVisibleColumns();
+    DatatableStore.update((s) => {
+      s.hiddenColumns = localHiddenColumns;
+    });
   };
 
   const handleResetColumnsControl = () => {
     onReset();
     resetOrderedColumns();
-    resetVisisbleColumns();
+    DatatableStore.update((s) => {
+      s.hiddenColumns = [];
+    });
   };
 
   return (
@@ -86,12 +98,26 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
               >
                 <Text size={TextSizes.md}>{label}</Text>
                 <Switch
-                  checked={!hiddenColumns.includes(id)}
+                  checked={!localHiddenColumns.includes(id)}
                   name={`visibility-${id}`}
                   size={SwitchSizes.sm}
                   switchId={`visibility-${id}`}
                   onChange={(e) => {
-                    setHiddenColumn(id, e.target.checked);
+                    const { checked } = e.target;
+                    setLocalHiddenColumns((prev) => {
+                      console.log(
+                        '🚀 ~ file: ColumnsControls.tsx:101 ~ setLocalHiddenColumns ~ prev:',
+                        prev,
+                      );
+                      const next = checked
+                        ? prev.filter((col) => col !== id)
+                        : [...prev, id];
+                      console.log(
+                        '🚀 ~ file: ColumnsControls.tsx:102 ~ next:',
+                        next,
+                      );
+                      return next;
+                    });
                   }}
                 />
               </Inline>

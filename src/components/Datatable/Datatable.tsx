@@ -54,6 +54,9 @@ function Datatable<D extends Record<string, unknown>>({
   tableConfig = {},
   resetSelectionFn,
 }: DatatableProps<D>): React.ReactElement {
+  useEffect(() => {
+    DatatableStore.update(() => datatableInitialState);
+  }, []);
   const [persistedState, setPersistedState] = useLocalStorageState(
     `datatable_${id}`,
   );
