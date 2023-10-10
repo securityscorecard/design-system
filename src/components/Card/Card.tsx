@@ -5,7 +5,7 @@ import { pipe, prop } from 'ramda';
 import cls from 'classnames';
 
 import { Padbox, Stack } from '../layout';
-import { getColor, getRadii, getShadow, getSpace, getToken } from '../../utils';
+import { getColor, getRadii, getShadow, getSpace } from '../../utils';
 import { SpaceSize } from '../../theme/space.types';
 import { CardProps, CardWrapperProps } from './Card.types';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -16,12 +16,6 @@ const InteractiveCard = css`
 
   &:hover {
     box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.07);
-  }
-  &:focus-visible {
-    outline: 0;
-    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.07),
-      inset 0 0 0 1px ${getToken('color-action-primary')};
-    border-color: ${getToken('color-action-primary')};
   }
   &:active {
     box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.07);

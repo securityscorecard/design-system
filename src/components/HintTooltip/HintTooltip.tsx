@@ -19,7 +19,6 @@ const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
   border-radius: 100%;
   color: ${({ color, theme }) =>
     isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
-  &:focus-visible,
   &:hover {
     color: ${({ theme }) => getColor('neutral.700', { theme })};
   }

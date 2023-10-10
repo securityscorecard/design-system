@@ -34,12 +34,8 @@ export const CardIconButton = styled.button<{
     props.as !== 'div' &&
     css`
       cursor: pointer;
-      &:hover,
-      &:focus-visible {
+      &:hover {
         background-color: ${getColor('primary.50')};
-      }
-      &:focus {
-        outline: none;
       }
     `}
 `;
@@ -86,7 +82,6 @@ const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
   border-radius: 100%;
   color: ${({ color, theme }) =>
     isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
-  &:focus-visible,
   &:hover {
     color: ${({ theme }) => getColor('neutral.700', { theme })};
   }

@@ -12,12 +12,7 @@ import {
   getToken,
   pxToRem,
 } from '../../../utils';
-import {
-  LinkActiveStyles,
-  LinkBaseStyles,
-  LinkFocusStyles,
-  LinkHoverStyles,
-} from '../BaseLink';
+import { LinkActiveStyles, LinkBaseStyles, LinkHoverStyles } from '../BaseLink';
 
 const getRemToggleSize = memoizeWith(
   identity,
@@ -44,11 +39,6 @@ export const BaseTableContainer = styled.div`
     background-color: ${getColor('neutral.300')};
     border: 6px solid ${getColor('neutral.0')};
   }
-  &:focus-visible {
-    outline-color: ${getColor('primary.500')};
-    outline-style: solid;
-    outline-width: 2px;
-  }
 `;
 
 const DsLinkCell = css`
@@ -56,10 +46,6 @@ const DsLinkCell = css`
 
   &:hover {
     ${LinkHoverStyles};
-  }
-
-  &:focus-visible {
-    ${LinkFocusStyles};
   }
 
   &:active {
@@ -72,10 +58,6 @@ const DsLinkCell = css`
 
     &:hover {
       color: ${getToken(`link-color-text-secondary-hover`)};
-    }
-    &:focus-visible {
-      color: ${getToken(`link-color-text-secondary-hover`)};
-      background-color: ${getToken(`link-color-background-secondary-focus`)};
     }
     &:active {
       color: ${getToken(`link-color-text-secondary-active`)};
@@ -103,10 +85,6 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     color: ${getColor('neutral.900')};
     background: ${getColor('neutral.0')};
     padding: ${pxToRem(12, 8)};
-
-    &:focus {
-      outline: none;
-    }
 
     &.is-sticky {
       justify-content: center;
@@ -147,7 +125,6 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
           color: ${getColor('neutral.900')};
 
           &:hover,
-          &:focus-visible,
           &:active {
             background-color: ${getColor('primary.50')};
             color: ${getColor('neutral.900')};

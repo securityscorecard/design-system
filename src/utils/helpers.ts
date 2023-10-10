@@ -30,6 +30,7 @@ import { Depths } from '../theme/depths.types';
 import { SpaceSize } from '../theme/space.types';
 import { ColorTypes } from '../theme/colors.enums';
 import { createRadii } from '../theme/radii';
+import { createTokens } from '../theme/tokens';
 
 export type ThemeType = {
   theme?: DefaultTheme;
@@ -139,7 +140,12 @@ export const getNegativeSpace = curry(
 export const capitalize = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-export const getToken = curry((name, { theme }: ThemeType): string =>
+type Tokens = keyof ReturnType<typeof createTokens>;
+type GetToken = {
+  (name: Tokens, { theme }: ThemeType): string;
+  (name: Tokens): ({ theme }: ThemeType) => string;
+};
+export const getToken: GetToken = curry((name, { theme }: ThemeType): string =>
   path(['tokens', name])(theme),
 );
 

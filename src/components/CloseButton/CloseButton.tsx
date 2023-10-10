@@ -41,12 +41,9 @@ const CloseButtonWrapper = styled.button<CloseButtonWrapperProps>`
   padding: ${getSpace(SpaceSizes.sm)};
   color: ${({ $isInverted, theme }) =>
     getColor($isInverted ? 'neutral.0' : 'neutral.1000', { theme })};
+  outline-offset: ${getNegativeSpace(SpaceSizes.sm)};
 
-  &:hover
-    ${/* sc-selector */ IconWrapper},
-    &:focus
-    ${/* sc-selector */ IconWrapper} {
-    outline: none;
+  &:hover ${/* sc-selector */ IconWrapper} {
     background-color: ${(props) =>
       transparentize(0.96, getColor('neutral.1000', props))};
   }

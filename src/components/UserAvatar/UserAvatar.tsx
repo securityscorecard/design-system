@@ -41,10 +41,6 @@ const invertedAvatar = css`
     background-color: ${getColor('primary.50')};
     color: ${getColor('neutral.900')};
   }
-  &:focus {
-    background-color: ${getColor('neutral.0')};
-    color: ${getColor('neutral.900')};
-  }
   &:active {
     background-color: ${getColor('primary.200')};
     color: ${getColor('neutral.900')};

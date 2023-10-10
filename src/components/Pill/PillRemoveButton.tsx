@@ -23,7 +23,7 @@ const PillRemoveButtonWrapper = styled.button`
   border-radius: ${getRadii('circle')};
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: ${getColor('neutral.0')};
     background-color: ${getColor('error.500')};
   }
