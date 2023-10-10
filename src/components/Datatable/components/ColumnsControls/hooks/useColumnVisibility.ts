@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { isEmptyArray } from 'ramda-adjunct';
+import { useDeepCompareEffect } from 'use-deep-compare';
 
 import { DatatableStore } from '../../../Datatable.store';
 
@@ -11,23 +12,12 @@ export const useColumnVisibility = (): {
   resetVisisbleColumns: () => void;
   isInDefaultVisibility: boolean;
 } => {
-  const { hiddenColumns } = DatatableStore.useState((s) => ({
-    hiddenColumns: s.hiddenColumns,
-  }));
+  const hiddenColumns = DatatableStore.useState((s) => s.hiddenColumns);
   const [localHiddenColumns, setLocalHiddenColumns] = useState(hiddenColumns);
 
-  useEffect(() => {
-    const unsubscribe = DatatableStore.subscribe(
-      (s) => ({ hidden: s.hiddenColumns }),
-      ({ hidden }) => {
-        setLocalHiddenColumns(hidden);
-      },
-    );
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  useDeepCompareEffect(() => {
+    setLocalHiddenColumns(hiddenColumns);
+  }, [hiddenColumns]);
   const setHiddenColumn = (id, value) => {
     if (value === true) {
       setLocalHiddenColumns((prev) => prev.filter((col) => col !== id));
