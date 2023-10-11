@@ -1,0 +1,271 @@
+[{
+  "id": "6b4fe179-fa17-43a3-920d-5c042710a297",
+  "ipAddress": "95.169.148.250",
+  "status": "Attributed",
+  "country": "Indonesia",
+  "findingsCount": 8677,
+  "observationDate": "2016-05-02 17:44:06",
+  "organization": {
+    "name": "Feedfire",
+    "domain": "bluehost.com",
+    "score": 68,
+    "grade": "D"
+  },
+  "detectionMethod": [
+    "SSC Res.",
+    "WHOIS",
+    "Pub. Data"
+  ]
+}, {
+  "id": "0eef1659-7f8a-48b7-bed3-a317d78b92ed",
+  "ipAddress": "46.5.99.160",
+  "status": "Dynamic",
+  "country": "France",
+  "findingsCount": 21110,
+  "observationDate": "2017-03-27 22:49:26",
+  "organization": {
+    "name": "Centizu",
+    "domain": "imgur.com",
+    "score": 92,
+    "grade": "A"
+  },
+  "detectionMethod": [
+    "SSC Res.",
+    "WHOIS"
+  ]
+}, {
+  "id": "58269fe5-79a6-4572-863c-916e7f36f464",
+  "ipAddress": "93.1.162.66",
+  "status": "Attributed",
+  "country": "Philippines",
+  "findingsCount": 5625,
+  "observationDate": "2016-03-26 16:44:07",
+  "organization": {
+    "name": "Voonyx",
+    "domain": "digg.com",
+    "score": 68,
+    "grade": "D"
+  },
+  "detectionMethod": [
+    "Pub. Data"
+  ]
+}, {
+  "id": "ec8f9e5b-aa6d-4beb-918c-afde09a8b043",
+  "ipAddress": "5.44.131.249",
+  "status": "Claimed",
+  "country": "Sweden",
+  "findingsCount": 6492,
+  "observationDate": "2020-10-25 23:36:28",
+  "organization": {
+    "name": "Oyoba",
+    "domain": "simplemachines.org",
+    "score": 63,
+    "grade": "D"
+  }
+}, {
+  "id": "8301bd2b-fd1d-41a4-befe-57feffd7becb",
+  "ipAddress": "111.140.95.96",
+  "status": "Dynamic",
+  "country": "Norway",
+  "findingsCount": 20606,
+  "observationDate": "2018-03-21 07:44:33",
+  "organization": {
+    "name": "Ainyx",
+    "domain": "mozilla.org",
+    "score": 80,
+    "grade": "C"
+  },
+  "detectionMethod": [
+    "SSC Res."
+  ]
+}, {
+  "id": "2d3b90a5-dbfd-4502-8fbb-ee99720ac94a",
+  "ipAddress": "120.69.240.244",
+  "status": "Dynamic",
+  "country": "Ukraine",
+  "findingsCount": 12924,
+  "observationDate": "2015-10-11 01:44:51",
+  "organization": {
+    "name": "Jaxbean",
+    "domain": "hugedomains.com",
+    "score": 74,
+    "grade": "C"
+  },
+  "detectionMethod": [
+    "SSL",
+    "Cloud",
+    "WHOIS"
+  ]
+}, {
+  "id": "48a37150-50b2-4650-b576-26c648ce9f35",
+  "ipAddress": "82.213.103.3",
+  "status": "Claimed",
+  "country": "Russia",
+  "findingsCount": 17450,
+  "observationDate": "2016-03-14 07:54:54",
+  "organization": {
+    "name": "Quaxo",
+    "domain": "princeton.edu",
+    "score": 59,
+    "grade": "F"
+  },
+  "detectionMethod": [
+    "Cloud",
+    "DNS"
+  ]
+}, {
+  "id": "b434d304-3648-4f81-b7f3-3e0d42bd52c3",
+  "ipAddress": "37.183.83.239",
+  "status": "Attributed",
+  "country": "Indonesia",
+  "findingsCount": 12953,
+  "observationDate": "2018-08-29 17:53:50",
+  "organization": {
+    "name": "Ozu",
+    "domain": "t-online.de",
+    "score": 79,
+    "grade": "C"
+  },
+  "detectionMethod": [
+    "SSL",
+    "DNS",
+    "3rd party",
+    "Pub. Data",
+    "WHOIS",
+    "Cloud"
+  ]
+}, {
+  "id": "445f17d9-474e-4ec3-b52c-6dacc45a9f73",
+  "ipAddress": "244.162.168.173",
+  "status": "Attributed",
+  "country": "Russia",
+  "findingsCount": 5630,
+  "observationDate": "2017-02-19 21:22:32",
+  "organization": {
+    "name": "Oyoloo",
+    "domain": "xing.com",
+    "score": 53,
+    "grade": "F"
+  },
+  "detectionMethod": [
+    "3rd party"
+  ]
+}, {
+  "id": "8d71cd72-dcd2-4118-87fa-469b4ca6d483",
+  "ipAddress": "243.133.158.211",
+  "status": "Claimed",
+  "country": "Ukraine",
+  "findingsCount": 20699,
+  "observationDate": "2016-06-27 11:13:46",
+  "organization": {
+    "name": "Riffpedia",
+    "domain": "ucla.edu",
+    "score": 81,
+    "grade": "B"
+  },
+  "detectionMethod": [
+    "Pub. Data",
+    "SSC Res.",
+    "WHOIS",
+    "SSL",
+    "Cloud",
+    "3rd party"
+  ]
+}, {
+  "id": "3ad516d8-c94e-4c67-a8cd-fba9d3910f90",
+  "ipAddress": "245.163.9.111",
+  "status": "Dynamic",
+  "country": "Luxembourg",
+  "findingsCount": 15206,
+  "observationDate": "2019-10-09 02:11:20",
+  "organization": {
+    "name": "Topicstorm",
+    "domain": "amazonaws.com",
+    "score": 63,
+    "grade": "D"
+  },
+  "detectionMethod": [
+    "Cloud",
+    "Pub. Data",
+    "DNS"
+  ]
+}, {
+  "id": "8c75902e-a7c2-4e25-b8f0-0ac27a6867e5",
+  "ipAddress": "87.21.50.105",
+  "status": "Removed",
+  "country": "China",
+  "findingsCount": 21623,
+  "observationDate": "2016-08-03 04:35:21",
+  "organization": {
+    "name": "Layo",
+    "domain": "independent.co.uk",
+    "score": 66,
+    "grade": "D"
+  },
+  "detectionMethod": [
+    "WHOIS",
+    "Pub. Data",
+    "SSC Res.",
+    "Cloud",
+    "3rd party",
+    "DNS"
+  ]
+}, {
+  "id": "dd921cdd-c310-4476-984a-6709db1c486e",
+  "ipAddress": "207.131.194.235",
+  "status": "Dynamic",
+  "country": "Philippines",
+  "findingsCount": 500,
+  "observationDate": "2018-10-11 04:11:07",
+  "organization": {
+    "name": "Dabvine",
+    "domain": "bizjournals.com",
+    "score": 74,
+    "grade": "C"
+  },
+  "detectionMethod": [
+    "SSL",
+    "SSC Res.",
+    "3rd party"
+  ]
+}, {
+  "id": "32c8ce1f-e640-480f-8531-e80a1a29d1a9",
+  "ipAddress": "226.215.165.243",
+  "status": "Claimed",
+  "country": "Thailand",
+  "findingsCount": 8272,
+  "observationDate": "2018-04-17 12:05:20",
+  "organization": {
+    "name": "Izio",
+    "domain": "cyberchimps.com",
+    "score": 97,
+    "grade": "A"
+  },
+  "detectionMethod": [
+    "Cloud",
+    "Pub. Data",
+    "SSL",
+    "DNS",
+    "3rd party",
+    "WHOIS"
+  ]
+}, {
+  "id": "e0d2d4c9-eeba-4984-84ee-36e8040ef8ca",
+  "ipAddress": "149.39.184.66",
+  "status": "Claimed",
+  "country": "China",
+  "findingsCount": 10784,
+  "observationDate": "2016-12-09 14:05:46",
+  "organization": {
+    "name": "Ooba",
+    "domain": "sitemeter.com",
+    "score": 98,
+    "grade": "A"
+  },
+  "detectionMethod": [
+    "DNS",
+    "SSC Res.",
+    "Cloud",
+    "WHOIS"
+  ]
+}]
