@@ -3997,6 +3997,7 @@ __metadata:
     "@storybook/react": ^6.5.6
     "@storybook/theming": ^6.5.6
     "@stylelint/postcss-css-in-js": ^0.37.2
+    "@tanstack/react-table": ^8.10.6
     "@testing-library/dom": ">=7.21.4"
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
@@ -5584,6 +5585,25 @@ __metadata:
     postcss: ">=7.0.0"
     postcss-syntax: ">=0.36.2"
   checksum: 5e39bca575356992c27d59fd9ca9ee38867369bdf5bb3d9e31dc074680b77b4b820d48074e5cc0337e047edd8c1e7ef18996bc83199376138f42fbc8ed0cabeb
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-table@npm:^8.10.6":
+  version: 8.10.6
+  resolution: "@tanstack/react-table@npm:8.10.6"
+  dependencies:
+    "@tanstack/table-core": 8.10.6
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 4b920fa36c70ed2de356c8c0e99f497f6ee8ab5bc74bc57f1f9aa8cc5d580ea3eb4a7743a03ad149fc43629efb157c592aba620141fb230d5529646dd6c7c002
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.10.6":
+  version: 8.10.6
+  resolution: "@tanstack/table-core@npm:8.10.6"
+  checksum: 05e7f15171f02053d1a9e552a7877e878a827635d3d4ed50387fa3d0e4ede9eb325eae758a4faa921dc2dd552302f4b49bb3b540e3511bff16b6a2b92d450429
   languageName: node
   linkType: hard
 
