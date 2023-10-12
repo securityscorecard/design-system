@@ -1,23 +1,12 @@
 import React from 'react';
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { flexRender } from '@tanstack/react-table';
 
-export default function Datatable<D>({
-  data,
-  columns,
-}: {
-  data: D[];
-  columns: ColumnDef<D>[];
-}) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
+import HeaderCell from './header/HeaderCell';
+import { useDatatable } from './hooks/useDatatable';
+import { DatatableOptions } from './Datatable.types';
+
+const Datatable = <D,>(props: DatatableOptions<D>) => {
+  const table = useDatatable(props);
 
   return (
     <table>
@@ -25,14 +14,7 @@ export default function Datatable<D>({
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-              </th>
+              <HeaderCell key={header.id} header={header} table={table} />
             ))}
           </tr>
         ))}
@@ -50,4 +32,6 @@ export default function Datatable<D>({
       </tbody>
     </table>
   );
-}
+};
+
+export default Datatable;
