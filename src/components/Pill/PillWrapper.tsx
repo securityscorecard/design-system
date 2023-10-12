@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
-import { getRadii, pxToRem } from '../../utils';
+import { getRadii, getSpace } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { PillColors, PillColorsEnums } from './Pill.enums';
@@ -28,8 +28,8 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
         outline: none;
       }
     `}
-  padding-right: ${pxToRem(8)};
-  padding-left: ${pxToRem(8)};
+  padding-right: ${getSpace('sm')};
+  padding-left: ${getSpace('sm')};
 `;
 
 const PillWrapper: React.FC<PillWrapperProps> = ({

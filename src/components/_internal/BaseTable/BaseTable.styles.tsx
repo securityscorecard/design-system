@@ -138,7 +138,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
         align-items: center;
         padding: ${pxToRem(0, 8)};
         background: ${getColor('neutral.200')};
-        border-radius: ${getRadii('default')};
+        border-radius: ${getRadii('round')};
         white-space: nowrap;
         margin: ${pxToRem(2)};
 
