@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { partialRight, pipe, prop } from 'ramda';
 
 import { Icon } from '../Icon';
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
 import { ColorTypes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 
@@ -38,6 +38,7 @@ const IconWrapper = styled.div<{ type: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: ${getFontSize('lg')};
 `;
 
 export const TrendIcon = React.forwardRef<
