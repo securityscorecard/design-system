@@ -1,0 +1,81 @@
+[{
+  "id": "6b4fe179-fa17-43a3-920d-5c042710a297",
+  "organization": {
+    "name": "Feedfire",
+    "domain": "bluehost.com",
+    "score": 68,
+    "grade": "D"
+  }
+}, {
+  "id": "0eef1659-7f8a-48b7-bed3-a317d78b92ed",
+  "organization": {
+    "name": "Centizu",
+    "domain": "imgur.com",
+    "score": 92,
+    "grade": "A"
+  }
+}, {
+  "id": "58269fe5-79a6-4572-863c-916e7f36f464",
+  "organization": {
+    "name": "Voonyx",
+    "domain": "digg.com",
+    "score": 68,
+    "grade": "D"
+  }
+}, {
+  "id": "ec8f9e5b-aa6d-4beb-918c-afde09a8b043",
+  "organization": {
+    "name": "Oyoba",
+    "domain": "simplemachines.org",
+    "score": 63,
+    "grade": "D"
+  }
+}, {
+  "id": "8301bd2b-fd1d-41a4-befe-57feffd7becb",
+  "organization": {
+    "name": "Ainyx",
+    "domain": "mozilla.org",
+    "score": 80,
+    "grade": "C"
+  }
+}, {
+  "id": "2d3b90a5-dbfd-4502-8fbb-ee99720ac94a",
+  "organization": {
+    "name": "Jaxbean",
+    "domain": "hugedomains.com",
+    "score": 74,
+    "grade": "C"
+  }
+}, {
+  "id": "48a37150-50b2-4650-b576-26c648ce9f35",
+  "organization": {
+    "name": "Quaxo",
+    "domain": "princeton.edu",
+    "score": 59,
+    "grade": "F"
+  }
+}, {
+  "id": "b434d304-3648-4f81-b7f3-3e0d42bd52c3",
+  "organization": {
+    "name": "Ozu",
+    "domain": "t-online.de",
+    "score": 79,
+    "grade": "C"
+  }
+}, {
+  "id": "445f17d9-474e-4ec3-b52c-6dacc45a9f73",
+  "organization": {
+    "name": "Oyoloo",
+    "domain": "xing.com",
+    "score": 53,
+    "grade": "F"
+  }
+}, {
+  "id": "8d71cd72-dcd2-4118-87fa-469b4ca6d483",
+  "organization": {
+    "name": "Riffpedia",
+    "domain": "ucla.edu",
+    "score": 81,
+    "grade": "B"
+  }
+}]
