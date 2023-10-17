@@ -1,14 +1,15 @@
 import React from 'react';
-import { Header, Table, flexRender } from '@tanstack/react-table';
+import { Header, flexRender } from '@tanstack/react-table';
 
 import HeaderCellSortLabel from './HeaderCellSortLabel';
+import { DatatableInstance } from '../Datatable.types';
 
 const HeaderCell = <D,>({
   header,
   table,
 }: {
   header: Header<D, unknown>;
-  table: Table<D>;
+  table: DatatableInstance<D>;
 }) => {
   return (
     <th key={header.id}>
