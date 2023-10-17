@@ -17,7 +17,6 @@ export default {
 export const PaginationEnabled: Story = Template.bind({});
 PaginationEnabled.args = {
   ...Template.args,
-  initialState: { pagination: { pageSize: 1 } },
 };
 
 export const DisabledPagination: Story = Template.bind({});

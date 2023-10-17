@@ -93,6 +93,7 @@
     "@betterer/eslint": "^5.1.7",
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
+    "@faker-js/faker": "^8.2.0",
     "@fontsource/inter": "^4.5.15",
     "@geometricpanda/storybook-addon-badges": "^0.2.1",
     "@mdx-js/react": "^1.6.22",
