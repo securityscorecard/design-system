@@ -15,10 +15,7 @@ import {
 } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { SpaceSizes } from '../../theme';
-import { SSCIcons, Types } from '../Icon/Icon.types';
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { Icon } from '../Icon';
-import { Inline, Padbox } from '../layout';
+import { Padbox } from '../layout';
 
 const BadgeNeutral = css`
   background-color: ${getColor('neutral.300')};
@@ -65,9 +62,6 @@ const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
 const Badge: React.FC<BadgeProps> = ({
   count,
-  text,
-  iconName,
-  iconType,
   variant = BadgeVariants.error,
 }) => (
   <BadgeElement
@@ -75,24 +69,12 @@ const Badge: React.FC<BadgeProps> = ({
     className={CLX_COMPONENT}
     paddingSize={SpaceSizes.sm}
   >
-    <Inline align="center" as="span" gap="sm" justify="center">
-      {iconName ? <Icon name={iconName} type={iconType} /> : null}
-      <span>{count ? normalizeCount(count) : text}</span>
-    </Inline>
+    <span>{normalizeCount(count)}</span>
   </BadgeElement>
 );
 
 Badge.propTypes = {
   count: PropTypes.number,
-  text: PropTypes.string,
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
-  iconType: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
 };
 
 export default Badge;
