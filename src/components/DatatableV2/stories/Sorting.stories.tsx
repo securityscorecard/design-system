@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ColumnDef, SortingState } from '@tanstack/react-table';
+import { ComponentMeta } from '@storybook/react';
+import { SortingState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
-import dataSource from '../mocks/data.json';
-import { DataSource } from '../mocks/data.types';
+import Template, { Story, columns } from './Template';
 
 export default {
   title: 'components/DatatableV2/Sorting',
@@ -13,19 +12,6 @@ export default {
     screenshot: { skip: true },
   },
 } as ComponentMeta<typeof Datatable>;
-
-const columns: ColumnDef<DataSource>[] = [
-  { accessorKey: 'organization.name' },
-  { accessorKey: 'organization.domain' },
-  { accessorKey: 'organization.grade' },
-];
-
-type Story = ComponentStory<typeof Datatable<DataSource>>;
-const Template: Story = (args) => <Datatable {...args} />;
-Template.args = {
-  columns,
-  data: dataSource as DataSource[],
-};
 
 export const SortingEnabled: Story = Template.bind({});
 SortingEnabled.args = Template.args;
