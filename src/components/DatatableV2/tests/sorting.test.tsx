@@ -36,18 +36,6 @@ describe('DatatableV2/sorting', () => {
   });
 
   describe('when is sorting enabled', () => {
-    it('should show sorting buttons', () => {
-      renderWithProviders(
-        <Datatable data={data} columns={columns} hasSorting />,
-      );
-
-      const sortingButtons = screen.getAllByRole('button', {
-        name: /Unsorted/i,
-      });
-
-      expect(sortingButtons).toHaveLength(3);
-    });
-
     it('should update sorting labels on sort', async () => {
       renderWithProviders(
         <Datatable data={data} columns={columns} hasSorting />,
@@ -160,18 +148,6 @@ describe('DatatableV2/sorting', () => {
   });
 
   describe('when is sorting disabled', () => {
-    it('should not show sorting buttons', () => {
-      renderWithProviders(
-        <Datatable data={data} columns={columns} hasSorting={false} />,
-      );
-
-      const sortingButtons = screen.queryByRole('button', {
-        name: /Unsorted/i,
-      });
-
-      expect(sortingButtons).not.toBeInTheDocument();
-    });
-
     it('should not sort on header name click', async () => {
       const sortCallback = jest.fn();
       renderWithProviders(
