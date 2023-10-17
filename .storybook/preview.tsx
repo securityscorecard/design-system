@@ -92,7 +92,7 @@ createIconLibrary();
 
 const wrapper = (storyFn) => (
   <>
-    <DSProvider>{storyFn()}</DSProvider>
+    <DSProvider config={{debugMode: true}}>{storyFn()}</DSProvider>
   </>
 );
 
