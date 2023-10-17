@@ -1,5 +1,7 @@
 import React from 'react';
-import { Header, SortDirection, Table } from '@tanstack/react-table';
+import { Header, SortDirection } from '@tanstack/react-table';
+
+import { DatatableInstance } from '../Datatable.types';
 
 const HeaderCellSortLabel = <D,>({
   direction,
@@ -8,7 +10,7 @@ const HeaderCellSortLabel = <D,>({
 }: {
   direction: SortDirection | false;
   header: Header<D, unknown>;
-  table: Table<D>;
+  table: DatatableInstance<D>;
 }) => {
   const { column } = header;
   const { columnDef } = column;
