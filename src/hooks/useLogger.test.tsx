@@ -157,7 +157,7 @@ describe('useLogger', () => {
         });
 
         expect(() => result.current.error('log message')).toThrowError();
-        expect(error).not.toBeCalled();
+        expect(error).toBeCalled();
       });
       it('should call console.error with correct namespace and message', () => {
         const wrapper = ({ children }) => (

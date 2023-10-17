@@ -1,31 +1,32 @@
-import { T } from 'ramda';
 import {
   getCoreRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 
-import { DatatableOptions } from '../Datatable.types';
+import { DatatableInstance, DatatableOptions } from '../Datatable.types';
+import { useOptions } from './useOptions';
 
 export const useDatatable = <D>({
   data,
   columns,
-  hasSorting = true,
-  hasMultiSort = true,
-  hasSortingRemoval = true,
-  ...restDatatableOptions
-}: DatatableOptions<D>) => {
+  ...options
+}: DatatableOptions<D>): DatatableInstance<D> => {
+  const tableOptions = useOptions<D>(options);
+
   const table = useReactTable({
+    ...tableOptions,
     columns,
     data,
-    enableMultiSort: hasMultiSort,
-    enableSorting: hasSorting,
-    enableSortingRemoval: hasSortingRemoval,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: hasSorting ? getSortedRowModel() : undefined,
-    isMultiSortEvent: T,
-    ...restDatatableOptions,
-  });
+    getPaginationRowModel: tableOptions.enablePagination
+      ? getPaginationRowModel()
+      : undefined,
+    getSortedRowModel: tableOptions.enableSorting
+      ? getSortedRowModel()
+      : undefined,
+  }) as DatatableInstance<D>;
 
   return table;
 };
