@@ -149,7 +149,7 @@ const FileSelector = ({
         })}
         className={cls(CLX_COMPONENT, className)}
       >
-        <input {...getInputProps()} />
+        <input aria-label="upload file" aria-hidden {...getInputProps()} />
         <DropTextWrapper
           $isCentered={size === FileSelectorSizes.area}
           paddingSize={SpaceSizes.sm}
@@ -169,7 +169,7 @@ const FileSelector = ({
   if (isDragDisabled) {
     return (
       <div className={cls(CLX_COMPONENT, className)}>
-        <input {...getInputProps()} />
+        <input aria-label="upload file" aria-hidden {...getInputProps()} />
         <ExtendableButton
           {...getRootProps({
             ...passedProps,
@@ -202,7 +202,7 @@ const FileSelector = ({
       })}
       className={cls(CLX_COMPONENT, className)}
     >
-      <input {...getInputProps()} />
+      <input aria-label="upload file" {...getInputProps()} />
       <Cluster
         align="center"
         gap={SpaceSizes.sm}
@@ -212,6 +212,7 @@ const FileSelector = ({
           <ExtendableButton
             iconName={SSCIconNames.upload}
             isDisabled={isDisabled}
+            tabIndex={-1}
             type="button"
             variant={ButtonVariants.outline}
           >
