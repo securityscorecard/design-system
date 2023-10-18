@@ -34,6 +34,14 @@ DisabledSortingRemoval.args = {
   hasSortingRemoval: false,
 };
 
+export const InitialSorting: Story = Template.bind({});
+InitialSorting.args = {
+  ...Template.args,
+  initialState: {
+    sorting: [{ id: 'organization_name', desc: true }],
+  },
+};
+
 export const SortingManagedState: Story = (args) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
