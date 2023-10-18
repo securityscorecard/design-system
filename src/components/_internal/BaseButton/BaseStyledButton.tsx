@@ -12,7 +12,6 @@ import {
 import { BaseStyledButtonProps } from './BaseButton.types';
 import { BaseButtonVariants } from './BaseButton.enums';
 import { Padbox } from '../../layout';
-import { ButtonColors } from '../../Button/Button.enums';
 
 /*
  * BUTTON VARIANTS
@@ -27,11 +26,6 @@ const ButtonSolid = css<BaseStyledButtonProps>`
   &.hover {
     color: ${getToken(`color-action-text-solid`)};
     background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-  }
-  &:focus-visible,
-  &.focus {
-    background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
   }
 
   &:disabled,
@@ -53,12 +47,6 @@ const ButtonOutline = css<BaseStyledButtonProps>`
     color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
     border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
-  &:focus-visible,
-  &.focus {
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
-  }
 
   &:disabled,
   &.disabled {
@@ -67,34 +55,19 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   }
 `;
 
-const isLinkLike = (color) =>
-  color === ButtonColors.primary || color === ButtonColors.secondary
-    ? 'link-'
-    : '';
 const ButtonText = css<BaseStyledButtonProps>`
   background-color: transparent;
   border-color: transparent;
   padding-left: 0;
   padding-right: 0;
   font-weight: ${getFontWeight('semibold')};
-  color: ${(p) =>
-    getToken(`color-action-${isLinkLike(p.$color)}${p.$color}`, p)};
+  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
 
   &:hover,
   &.hover {
-    color: ${(p) =>
-      getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
-  }
-  &:focus-visible,
-  &.focus {
-    background-color: ${(p) =>
-      getToken(
-        `color-action-${isLinkLike(p.$color)}background-${p.$color}-focus`,
-        p,
-      )};
-    color: ${(p) =>
-      getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
-    outline: none;
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    background: ${(p) =>
+      getToken(`color-action-background-${p.$color}-focus`, p)};
   }
 
   &:disabled,
@@ -139,9 +112,7 @@ const BaseStyledButton = styled(Padbox).withConfig({
     css`
       width: ${pipe(getToken('size-action-size'), pxToRem)};
     `};
-  &:focus {
-    outline: 0;
-  }
+
   ${({ $variant }) => buttonVariants[$variant]};
 
   &,

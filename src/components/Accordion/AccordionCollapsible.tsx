@@ -29,13 +29,6 @@ const Header = styled(Padbox)`
   &:hover {
     background-color: rgb(0 0 0 / 4%);
   }
-
-  &:focus-visible {
-    position: relative;
-    z-index: 1;
-    outline: 4px solid ${getColor('primary.200')};
-    border-radius: 4px;
-  }
 `;
 
 const Content = styled.div`

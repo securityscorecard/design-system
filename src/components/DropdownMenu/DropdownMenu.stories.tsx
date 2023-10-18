@@ -9,6 +9,7 @@ import { DropdownMenuProps } from '../_internal/BaseDropdownMenu/DropdownMenu.ty
 import { Inline, Padbox } from '../layout';
 import { pxToRem } from '../../utils';
 import { ActionKinds } from '../../types/action.types';
+import { Button } from '../Button';
 
 const Wrapper = styled(Padbox)`
   margin-bottom: ${pxToRem(100)};
@@ -61,7 +62,9 @@ export default {
 
 export const Default: Story<DropdownMenuProps> = (args) => (
   <Inline justify="center">
-    <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
+    <DropdownMenu {...args}>
+      <Button>Handler</Button>
+    </DropdownMenu>
   </Inline>
 );
 Default.args = {
