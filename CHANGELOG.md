@@ -1,3 +1,20 @@
+# [1.10.0](https://github.com/securityscorecard/design-system/compare/v1.9.2...v1.10.0) (2023-10-18)
+
+
+### Bug Fixes
+
+* **FileSelector:** fix accessibility ([fd539cb](https://github.com/securityscorecard/design-system/commit/fd539cb7b1b1a8188572086b40c3fa1dc4e25c46))
+* **TrendIcon:** fix icon size ([4a0b8ad](https://github.com/securityscorecard/design-system/commit/4a0b8ad8fbfcf3b00306af93c74a37dc362280dc))
+
+
+### Features
+
+* **action:** unify focus state ([dc3a8f1](https://github.com/securityscorecard/design-system/commit/dc3a8f17d527a080f10c83054f2457333c996ed5))
+* **Badge:** remove icon and text variant ([9e1afbc](https://github.com/securityscorecard/design-system/commit/9e1afbcce783620dc6198bf53b7758038a6b2c56))
+* **Datatable:** make multivalue pills round ([3183c86](https://github.com/securityscorecard/design-system/commit/3183c86c9a010ecca654e00e74aff210979ee087))
+* **Pill:** make pill round ([bf185b2](https://github.com/securityscorecard/design-system/commit/bf185b20cf45fe251e7d8a0510d08acc275caa03))
+* **StatusDot:** use success.500 for green ([7ff2407](https://github.com/securityscorecard/design-system/commit/7ff2407853566799438cde10a60699c3d9861897))
+
 ## [1.9.2](https://github.com/securityscorecard/design-system/compare/v1.9.1...v1.9.2) (2023-10-10)
 
 
