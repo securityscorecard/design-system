@@ -2271,6 +2271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "@faker-js/faker@npm:8.2.0"
+  checksum: febc17018acfb841a348591bfe415e815ea981bf7fa0a12670ac2b449479ad7e9e7b130c42878ec30210da964c13a620a3303dc00d63cb13ded00c6fc701e2be
+  languageName: node
+  linkType: hard
+
 "@figspec/components@npm:^1.0.0":
   version: 1.0.1
   resolution: "@figspec/components@npm:1.0.1"
@@ -3435,6 +3442,7 @@ __metadata:
     "@dnd-kit/modifiers": ^6.0.0
     "@dnd-kit/sortable": ^7.0.1
     "@dnd-kit/utilities": ^3.2.0
+    "@faker-js/faker": ^8.2.0
     "@fluentui/react-component-ref": ^0.62.0
     "@fontsource/inter": ^4.5.15
     "@fortawesome/fontawesome-svg-core": ^6.1.2

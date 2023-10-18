@@ -1,12 +1,11 @@
-import dataSource from './data.json';
-import { DataSource } from './data.types';
+import { DataSource, generateData } from './data';
 
 interface Result {
   entries: DataSource[];
   pageCount: number;
 }
 
-const data = dataSource as DataSource[];
+const data = generateData(100);
 export const fetchData = (options: {
   pageIndex: number;
   pageSize: number;
