@@ -32,6 +32,7 @@ export interface BaseButtonProps
   iconName?: SSCIcons | string;
   loadingText?: string;
   iconType?: IconTypes | string;
+  tabIndex?: number;
 }
 
 export interface BaseStyledButtonProps extends PadboxProps {

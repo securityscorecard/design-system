@@ -62,19 +62,3 @@ ErrorBadge.args = {
   ...SimpleBadge.args,
   variant: 'error',
 };
-
-export const TextBadge = BadgeTemplate.bind({});
-TextBadge.args = {
-  ...SimpleBadge.args,
-  variant: 'info',
-  count: undefined,
-  text: 'New',
-};
-export const TextBadgeWithIcon = BadgeTemplate.bind({});
-TextBadgeWithIcon.args = {
-  ...SimpleBadge.args,
-  variant: 'info',
-  count: undefined,
-  text: 'New',
-  iconName: 'lightbulb',
-};

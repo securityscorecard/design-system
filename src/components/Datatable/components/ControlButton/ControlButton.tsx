@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { Button } from '../../../Button';
 import { Badge } from '../../../Badge';
+import { Pill } from '../../../Pill';
 import { Inline } from '../../../layout';
 import { SSCIcons } from '../../../Icon/Icon.types';
 import { ControlButtonProps } from './ControlButton.types';
@@ -28,7 +29,7 @@ const ControlButton: React.FC<ControlButtonProps> = ({
       <span>{label}</span>
       {appliedFilters > 0 && <Badge count={appliedFilters} variant="neutral" />}
       {hiddenColumns > 0 && (
-        <Badge text={`${hiddenColumns} hidden`} variant="neutral" />
+        <Pill color="gray" label={`${hiddenColumns} hidden`} />
       )}
     </Inline>
   </Button>
