@@ -1,17 +1,18 @@
 import React from 'react';
 import { flexRender } from '@tanstack/react-table';
 
+import { useLogger } from '../../hooks/useLogger';
 import HeaderCell from './header/HeaderCell';
 import { useDatatable } from './hooks/useDatatable';
 import { DatatableOptions } from './Datatable.types';
 import Pagination from './toolbar/Pagination';
-import { useLogger } from '../../hooks/useLogger';
 
 const Datatable = <D,>(props: DatatableOptions<D>) => {
   const logger = useLogger('DatatableV2');
   const table = useDatatable(props);
 
-  logger.log('DatatableInstance', table);
+  logger.log('Datatable Instance', table);
+  logger.log('Datatable State', table.getState());
 
   return (
     <div>
