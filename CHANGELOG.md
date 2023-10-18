@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/securityscorecard/design-system/compare/v1.9.1...v1.9.2) (2023-10-10)
+
+
+### Bug Fixes
+
+* **Datatable:** fix column visibility state ([74dc800](https://github.com/securityscorecard/design-system/commit/74dc8005afe7ff7e78ab90aa2649bd983f9977af))
+
 ## [1.9.1](https://github.com/securityscorecard/design-system/compare/v1.9.0...v1.9.1) (2023-10-05)
 
 

@@ -10,7 +10,6 @@ import { LinkProps } from './Link.types';
 import {
   LinkActiveStyles,
   LinkBaseStyles,
-  LinkFocusStyles,
   LinkHoverStyles,
 } from '../../_internal/BaseLink';
 import { CLX_TYPOGRAPHY } from '../../../theme/constants';
@@ -38,10 +37,6 @@ const LinkRoot = styled.a`
 
   &:hover {
     ${LinkHoverStyles};
-  }
-
-  &:focus-visible {
-    ${LinkFocusStyles};
   }
 
   &:active {

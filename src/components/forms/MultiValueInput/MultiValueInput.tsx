@@ -123,12 +123,11 @@ const ClearButton = styled.button`
   padding: ${pxToRem(0, 18)};
   height: ${pxToRem(34)};
   margin: ${pxToRem(1, 0)};
+  outline-offset: 0;
+  border-top-right-radius: ${getRadii('default')};
+  border-bottom-right-radius: ${getRadii('default')};
 
-  &:focus {
-    outline: none;
-  }
-  &:hover,
-  &:focus-visible {
+  &:hover {
     color: ${getFormStyle('hoverIndicatorColor')};
   }
 `;
