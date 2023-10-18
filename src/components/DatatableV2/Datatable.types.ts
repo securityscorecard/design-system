@@ -28,11 +28,20 @@ export interface DatatableOptions<D>
    * @default true
    */
   hasSortingRemoval?: boolean;
+  /**
+   * @default true
+   */
+  hasRowsPerPage?: boolean;
+  rowsPerPageOptions?: number[];
+  rowsCount?: number;
 }
 
 export interface ParsedDatatableOptions<D>
   extends Omit<Partial<TableOptions<D>>, 'data' | 'columns'> {
   enablePagination?: boolean;
+  enableRowsPerPage?: boolean;
+  rowsPerPageOptions?: number[];
+  rowsCount?: number;
 }
 
 export interface DatatableInstance<D>
