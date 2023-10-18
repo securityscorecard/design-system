@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { getColor, getSpace, pxToRem } from '../../utils';
+import { getColor, getRadii, getSpace, pxToRem } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { Text } from '../typographyLegacy/Text';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
@@ -25,18 +25,14 @@ const StepSummary = styled(Text)`
 const StepButton = styled.button`
   border: 0 none;
   background: transparent none;
+  border-radius: ${getRadii('default')};
 
   &:hover {
     cursor: pointer;
-  }
-  &:focus {
-    outline: 0;
-  }
-  &:hover
-    ${/* sc-selector */ BulletCircle},
-    &:focus
+
     ${/* sc-selector */ BulletCircle} {
-    fill: ${getColor('primary.50')};
+      fill: ${getColor('primary.50')};
+    }
   }
 `;
 

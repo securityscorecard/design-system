@@ -68,7 +68,7 @@ const CheckboxInput = styled.input<TogglingInputProps>`
     }
   }
 
-  &:focus-visible + ${Box} {
+  &:focus + ${Box} {
     border: 2px solid ${getFormStyle('activeBorderColor')};
   }
 

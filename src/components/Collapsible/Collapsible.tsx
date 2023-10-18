@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 import cls from 'classnames';
 
@@ -19,16 +19,16 @@ import { CLX_COMPONENT } from '../../theme/constants';
 const Header = styled(Padbox)`
   width: 100%;
   cursor: pointer;
+  border-radius: ${getRadii('default')};
 
+  ${({ $isOpen }) =>
+    $isOpen &&
+    css`
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    `}
   &:hover {
     background-color: rgb(0 0 0 / 4%);
-  }
-
-  &:focus-visible {
-    position: relative;
-    z-index: 1;
-    outline: 4px solid ${getColor('primary.200')};
-    border-radius: ${getRadii('default')};
   }
 `;
 
@@ -73,6 +73,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
   return (
     <Container className={cls(CLX_COMPONENT, className)}>
       <Header
+        $isOpen={isOpen}
         paddingSize={SpaceSizes.mdPlus}
         paddingType={PaddingTypes.squish}
         tabIndex={0}

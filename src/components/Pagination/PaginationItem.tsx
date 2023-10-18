@@ -39,9 +39,6 @@ const StyledPaginationComponent = styled.button<{
   &:last-of-type {
     margin-right: 0;
   }
-  &:focus {
-    outline: none;
-  }
   &:disabled {
     color: ${getColor('neutral.600')};
     cursor: default;

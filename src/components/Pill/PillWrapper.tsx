@@ -22,10 +22,8 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
     $isClickable &&
     css`
       cursor: pointer;
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: ${PillColors[$color][1]};
-        outline: none;
       }
     `}
 `;
