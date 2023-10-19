@@ -15,9 +15,7 @@ export default {
 } as ComponentMeta<typeof Datatable>;
 
 export const PaginationEnabled: Story = Template.bind({});
-PaginationEnabled.args = {
-  ...Template.args,
-};
+PaginationEnabled.args = Template.args;
 
 export const DisabledPagination: Story = Template.bind({});
 DisabledPagination.args = { ...Template.args, hasPagination: false };
