@@ -43,7 +43,9 @@ InitialSorting.args = {
 };
 
 export const SortingManagedState: Story = (args) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: 'organization_name', desc: true },
+  ]);
 
   return (
     <Datatable state={{ sorting }} onSortingChange={setSorting} {...args} />
