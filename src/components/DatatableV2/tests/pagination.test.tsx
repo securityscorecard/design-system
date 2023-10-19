@@ -67,4 +67,22 @@ describe('DatatableV2/sorting', () => {
       expect(screen.getByText('Strange')).toBeInTheDocument();
     });
   });
+
+  describe('when rows per page are enabled', () => {
+    it('should correctly change rows per page count', () => {
+      renderWithProviders(
+        <Datatable
+          data={data}
+          columns={columns}
+          initialState={{ pagination: { pageSize: 3 } }}
+          rowsPerPageOptions={[1, 3]}
+        />,
+      );
+
+      expect(screen.getAllByRole('row')).toHaveLength(4); // 3 data rows + 1 header row
+
+      userEvent.selectOptions(screen.getByLabelText('Number of rows'), '1');
+      expect(screen.getAllByRole('row')).toHaveLength(2); // 1 data row + 1 header row
+    });
+  });
 });
