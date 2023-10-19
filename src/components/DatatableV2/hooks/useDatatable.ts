@@ -4,8 +4,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useMemo } from 'react';
 
 import { DatatableInstance, DatatableOptions } from '../Datatable.types';
+import { useDislayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
 
 export const useDatatable = <D>({
@@ -14,10 +16,16 @@ export const useDatatable = <D>({
   ...options
 }: DatatableOptions<D>): DatatableInstance<D> => {
   const tableOptions = useOptions<D>(options);
+  const displayColumns = useDislayColumns<D>(tableOptions);
+
+  const columnDefs = useMemo(
+    () => [...displayColumns, ...columns],
+    [columns, displayColumns],
+  );
 
   const table = useReactTable({
     ...tableOptions,
-    columns,
+    columns: columnDefs,
     data,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: tableOptions.enablePagination
