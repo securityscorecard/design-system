@@ -1,11 +1,9 @@
 import React from 'react';
-import { flexRender } from '@tanstack/react-table';
 
 import { useLogger } from '../../hooks/useLogger';
-import HeaderCell from './header/HeaderCell';
 import { useDatatable } from './hooks/useDatatable';
 import { DatatableOptions } from './Datatable.types';
-import Pagination from './toolbar/Pagination';
+import TableWrapper from './table/TableWrapper';
 
 const Datatable = <D,>(props: DatatableOptions<D>) => {
   const logger = useLogger('DatatableV2');
@@ -14,33 +12,7 @@ const Datatable = <D,>(props: DatatableOptions<D>) => {
   logger.log('Datatable Instance', table);
   logger.log('Datatable State', table.getState());
 
-  return (
-    <div>
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <HeaderCell key={header.id} header={header} table={table} />
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {table.options.enablePagination && <Pagination table={table} />}
-    </div>
-  );
+  return <TableWrapper table={table} />;
 };
 
 export default Datatable;
