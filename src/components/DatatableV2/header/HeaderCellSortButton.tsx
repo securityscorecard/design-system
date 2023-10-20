@@ -3,7 +3,7 @@ import { Header, SortDirection } from '@tanstack/react-table';
 
 import { DatatableInstance } from '../Datatable.types';
 
-const HeaderCellSortLabel = <D,>({
+const HeaderCellSortButton = <D,>({
   direction,
   header,
   table,
@@ -31,6 +31,7 @@ const HeaderCellSortLabel = <D,>({
   return (
     <button
       aria-label={label}
+      className="ds-table-header-cell-sort-button"
       type="button"
       onClick={column.getToggleSortingHandler()}
     >
@@ -40,4 +41,4 @@ const HeaderCellSortLabel = <D,>({
   );
 };
 
-export default HeaderCellSortLabel;
+export default HeaderCellSortButton;
