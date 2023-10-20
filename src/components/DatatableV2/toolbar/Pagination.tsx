@@ -26,11 +26,17 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
   return (
-    <div>
+    <div className="ds-table-pagination">
       {options.enableRowsPerPage && (
-        <div>
-          <label htmlFor="rowsPerPageSelect">Number of rows</label>
+        <div className="ds-table-pagination-rows-per-page-wrapper">
+          <label
+            className="ds-table-pagination-rows-per-page-label"
+            htmlFor="rowsPerPageSelect"
+          >
+            Number of rows
+          </label>
           <select
+            className="ds-table-pagination-rows-per-page-select"
             id="rowsPerPageSelect"
             value={pageSize}
             onChange={(e) => {
@@ -38,21 +44,28 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             }}
           >
             {options.rowsPerPageOptions.map((size) => (
-              <option key={size} value={size}>
+              <option
+                key={size}
+                className="ds-table-pagination-rows-per-page-option"
+                value={size}
+              >
                 {size}
               </option>
             ))}
           </select>
         </div>
       )}
-      <div>
+      <div className="ds-table-pagination-item-count">
         Showing {firstRowIndex + 1}-{lastRowIndex} of {totalRowCount} total
         items
       </div>
-      <div>
-        <span>Page {currentPage}</span>
+      <div className="ds-table-pagination-buttons-wrapper">
+        <span className="ds-table-pagination-buttons-current-page">
+          Page {currentPage}
+        </span>
         <button
           aria-label="Go to the first page of table"
+          className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
           disabled={!getCanPreviousPage()}
           type="button"
           onClick={() => setPageIndex(0)}
@@ -61,6 +74,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
         </button>
         <button
           aria-label="Go to the previous page of table"
+          className="ds-table-pagination-buttons-prev-button ds-table-pagination-buttons-button"
           disabled={!getCanPreviousPage()}
           type="button"
           onClick={() => previousPage()}
@@ -69,6 +83,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
         </button>
         <button
           aria-label="Go to the next page of table"
+          className="ds-table-pagination-buttons-next-button ds-table-pagination-buttons-button"
           disabled={!getCanNextPage()}
           type="button"
           onClick={() => nextPage()}
@@ -77,6 +92,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
         </button>
         <button
           aria-label="Go to the last page of table"
+          className="ds-table-pagination-buttons-last-button ds-table-pagination-buttons-button"
           disabled={!getCanNextPage()}
           type="button"
           onClick={() => setPageIndex(lastPage)}

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Row } from '@tanstack/react-table';
 import React, { ComponentProps, useEffect, useRef } from 'react';
 
@@ -16,7 +15,14 @@ const IndeterminateCheckbox = ({
     }
   }, [ref, indeterminate, props.checked]);
 
-  return <input ref={ref} type="checkbox" {...props} />;
+  return (
+    <input
+      ref={ref}
+      className="ds-table-select-multi-button ds-table-select-button"
+      type="checkbox"
+      {...props}
+    />
+  );
 };
 
 const SelectButton = <D,>({
@@ -60,7 +66,11 @@ const SelectButton = <D,>({
       {...common}
     />
   ) : (
-    <input type="radio" {...common} />
+    <input
+      className="ds-table-select-single-button ds-table-select-button"
+      type="radio"
+      {...common}
+    />
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, flexRender } from '@tanstack/react-table';
 
-import HeaderCellSortLabel from './HeaderCellSortLabel';
+import HeaderCellSortButton from './HeaderCellSortButton';
 import { DatatableInstance } from '../Datatable.types';
 
 const HeaderCell = <D,>({
@@ -12,16 +12,19 @@ const HeaderCell = <D,>({
   table: DatatableInstance<D>;
 }) => {
   return (
-    <th key={header.id}>
+    <th key={header.id} className="ds-table-header-cell ds-table-cell">
       {/* I know what I'm doing here */}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-      <span onClick={header.column.getToggleSortingHandler()}>
+      <span
+        className="ds-table-header-cell-label"
+        onClick={header.column.getToggleSortingHandler()}
+      >
         {header.isPlaceholder
           ? null
           : flexRender(header.column.columnDef.header, header.getContext())}
       </span>
       {header.column.getCanSort() ? (
-        <HeaderCellSortLabel
+        <HeaderCellSortButton
           direction={header.column.getIsSorted()}
           header={header}
           table={table}
