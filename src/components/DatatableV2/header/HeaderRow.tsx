@@ -1,14 +1,13 @@
-import { HeaderGroup } from '@tanstack/react-table';
 import React from 'react';
 
-import { DatatableInstance } from '../Datatable.types';
+import { DatatableHeaderGroup, DatatableInstance } from '../Datatable.types';
 import HeaderCell from './HeaderCell';
 
 const HeaderRow = <D,>({
   headerGroup,
   table,
 }: {
-  headerGroup: HeaderGroup<D>;
+  headerGroup: DatatableHeaderGroup<D>;
   table: DatatableInstance<D>;
 }) => {
   return (

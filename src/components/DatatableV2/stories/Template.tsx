@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentStory } from '@storybook/react';
-import { ColumnDef } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
 import { DataSource, generateData } from '../mocks/data';
+import { DatatableColumnDef } from '../Datatable.types';
 
-export const columns: ColumnDef<DataSource>[] = [
+export const columns: DatatableColumnDef<DataSource>[] = [
   { accessorKey: 'organization.name' },
   { accessorKey: 'organization.domain' },
   { accessorKey: 'organization.grade' },

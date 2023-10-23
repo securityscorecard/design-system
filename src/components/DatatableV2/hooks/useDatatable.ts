@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-table';
 import { useMemo } from 'react';
 
+import { prepareColumns } from '../columns.utils';
 import { DatatableInstance, DatatableOptions } from '../Datatable.types';
 import { useDislayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
@@ -19,12 +20,15 @@ export const useDatatable = <D>({
   const displayColumns = useDislayColumns<D>(tableOptions);
 
   const columnDefs = useMemo(
-    () => [...displayColumns, ...columns],
+    () => prepareColumns({ columnDefs: [...displayColumns, ...columns] }),
     [columns, displayColumns],
   );
 
   const table = useReactTable({
     ...tableOptions,
+    // I know what I'm doing here
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     columns: columnDefs,
     data,
     getCoreRowModel: getCoreRowModel(),
@@ -34,7 +38,7 @@ export const useDatatable = <D>({
     getSortedRowModel: tableOptions.enableSorting
       ? getSortedRowModel()
       : undefined,
-  }) as DatatableInstance<D>;
+  }) as unknown as DatatableInstance<D>;
 
   return table;
 };
