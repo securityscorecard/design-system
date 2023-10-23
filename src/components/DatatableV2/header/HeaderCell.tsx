@@ -1,35 +1,51 @@
 import React from 'react';
-import { Header, flexRender } from '@tanstack/react-table';
+import { flexRender } from '@tanstack/react-table';
 
 import HeaderCellSortButton from './HeaderCellSortButton';
-import { DatatableInstance } from '../Datatable.types';
+import { DatatableHeader, DatatableInstance } from '../Datatable.types';
+import HeaderCellColumnActionsButton from './HeaderCellColumnActionsButton';
 
 const HeaderCell = <D,>({
   header,
   table,
 }: {
-  header: Header<D, unknown>;
+  header: DatatableHeader<D>;
   table: DatatableInstance<D>;
 }) => {
+  const {
+    options: { enableColumnActions },
+  } = table;
+  const {
+    column: { columnDef, getCanSort, getIsSorted, getToggleSortingHandler },
+    getContext,
+    id,
+    isPlaceholder,
+  } = header;
+
+  const showColumnActions =
+    (enableColumnActions || columnDef?.enableColumnActions) &&
+    columnDef?.enableColumnActions !== false;
+
   return (
-    <th key={header.id} className="ds-table-header-cell ds-table-cell">
+    <th key={id} className="ds-table-header-cell ds-table-cell">
       {/* I know what I'm doing here */}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <span
         className="ds-table-header-cell-label"
-        onClick={header.column.getToggleSortingHandler()}
+        onClick={getToggleSortingHandler()}
       >
-        {header.isPlaceholder
-          ? null
-          : flexRender(header.column.columnDef.header, header.getContext())}
+        {isPlaceholder ? null : flexRender(columnDef.header, getContext())}
       </span>
-      {header.column.getCanSort() ? (
+      {getCanSort() && (
         <HeaderCellSortButton
-          direction={header.column.getIsSorted()}
+          direction={getIsSorted()}
           header={header}
           table={table}
         />
-      ) : null}
+      )}
+      {showColumnActions && (
+        <HeaderCellColumnActionsButton header={header} table={table} />
+      )}
     </th>
   );
 };

@@ -18,10 +18,10 @@ export const PaginationEnabled: Story = Template.bind({});
 PaginationEnabled.args = Template.args;
 
 export const DisabledPagination: Story = Template.bind({});
-DisabledPagination.args = { ...Template.args, hasPagination: false };
+DisabledPagination.args = { ...Template.args, enablePagination: false };
 
 export const DisabledRowsPerPage: Story = Template.bind({});
-DisabledRowsPerPage.args = { ...Template.args, hasRowsPerPage: false };
+DisabledRowsPerPage.args = { ...Template.args, enableRowsPerPage: false };
 
 export const CustomRowsPerPageOptions: Story = Template.bind({});
 CustomRowsPerPageOptions.args = {
