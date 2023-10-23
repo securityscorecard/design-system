@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { abbreviateNumber } from '../../../utils';
 import { DatatableInstance } from '../Datatable.types';
 
 const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
@@ -10,7 +11,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
     getPrePaginationRowModel,
     getState,
     nextPage,
-    options,
+    options: { enableRowsPerPage, rowsCount, rowsPerPageOptions },
     previousPage,
     setPageIndex,
     setPageSize,
@@ -20,14 +21,13 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
 
   const currentPage = pageIndex + 1;
   const lastPage = getPageCount() - 1;
-  const totalRowCount =
-    options.rowsCount ?? getPrePaginationRowModel().rows.length;
+  const totalRowCount = rowsCount ?? getPrePaginationRowModel().rows.length;
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
   return (
-    <div className="ds-table-pagination">
-      {options.enableRowsPerPage && (
+    <div className="ds-table-pagination-toolbar">
+      {enableRowsPerPage && (
         <div className="ds-table-pagination-rows-per-page-wrapper">
           <label
             className="ds-table-pagination-rows-per-page-label"
@@ -43,7 +43,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
               setPageSize(Number(e.target.value));
             }}
           >
-            {options.rowsPerPageOptions.map((size) => (
+            {rowsPerPageOptions.map((size) => (
               <option
                 key={size}
                 className="ds-table-pagination-rows-per-page-option"
@@ -56,8 +56,12 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
         </div>
       )}
       <div className="ds-table-pagination-item-count">
-        Showing {firstRowIndex + 1}-{lastRowIndex} of {totalRowCount} total
-        items
+        Showing {(firstRowIndex + 1).toLocaleString('en-US')}-
+        {lastRowIndex.toLocaleString('en-US')} of{' '}
+        <abbr title={totalRowCount.toString()}>
+          {abbreviateNumber(totalRowCount)}
+        </abbr>{' '}
+        total items
       </div>
       <div className="ds-table-pagination-buttons-wrapper">
         <span className="ds-table-pagination-buttons-current-page">
