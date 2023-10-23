@@ -1,10 +1,9 @@
 import { ColumnDef, Table, TableOptions } from '@tanstack/react-table';
+import { ReactNode } from 'react';
 
 export interface DatatableOptions<D>
   extends Omit<
     Partial<TableOptions<D>>,
-    | 'columns'
-    | 'data'
     | 'enableMultiRowSelection'
     | 'enableMultiSort'
     | 'enableRowSelection'
@@ -55,6 +54,11 @@ export interface DatatableOptions<D>
    * @default 'all'
    */
   selectAllMode?: 'page' | 'all';
+  renderRowSelectionActions?: (props: {
+    selectedRows: D[];
+    totalRowCount: number;
+    table: DatatableInstance<D>;
+  }) => ReactNode;
 }
 
 export type DatatableColumnDef<D, V = unknown> = ColumnDef<D, V> & {
@@ -63,6 +67,8 @@ export type DatatableColumnDef<D, V = unknown> = ColumnDef<D, V> & {
 
 export interface ParsedDatatableOptions<D>
   extends Omit<Partial<TableOptions<D>>, 'data' | 'columns'> {
+  columns: DatatableOptions<D>['columns'];
+  data: DatatableOptions<D>['data'];
   defaultDisplayColumn?: Partial<DatatableColumnDef<D>> & {
     columnDefType: 'display';
   };
@@ -72,6 +78,7 @@ export interface ParsedDatatableOptions<D>
   rowsCount?: DatatableOptions<D>['rowsCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
   selectAllMode?: DatatableOptions<D>['selectAllMode'];
+  renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
 }
 
 export interface DatatableInstance<D>

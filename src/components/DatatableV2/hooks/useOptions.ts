@@ -4,6 +4,8 @@ import { T } from 'ramda';
 import { DatatableOptions, ParsedDatatableOptions } from '../Datatable.types';
 
 export const useOptions = <D>({
+  columns,
+  data,
   hasMultiRowSelection = true,
   hasMultiSort = true,
   hasPagination = true,
@@ -13,6 +15,7 @@ export const useOptions = <D>({
   hasSorting = true,
   hasSortingRemoval = true,
   manualPagination,
+  renderRowSelectionActions,
   rowsPerPageOptions = [10, 25, 50, 100],
   selectAllMode = 'all',
   ...restDatatableOptions
@@ -24,6 +27,8 @@ export const useOptions = <D>({
   }
 
   return {
+    columns,
+    data,
     defaultDisplayColumn: {
       columnDefType: 'display',
       enableSorting: false,
@@ -38,6 +43,7 @@ export const useOptions = <D>({
     enableSortingRemoval: hasSortingRemoval,
     isMultiSortEvent: T,
     manualPagination: __manualPagination,
+    renderRowSelectionActions,
     rowsPerPageOptions,
     selectAllMode,
     ...restDatatableOptions,

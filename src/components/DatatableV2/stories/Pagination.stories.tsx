@@ -39,16 +39,22 @@ InitialPagination.args = {
 
 export const PaginationManagedState: Story = (args) => {
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 3,
-    pageSize: 2,
+    pageIndex: 1,
+    pageSize: 25,
   });
 
   return (
-    <Datatable
-      state={{ pagination }}
-      onPaginationChange={setPagination}
-      {...args}
-    />
+    <>
+      <Datatable
+        state={{ pagination }}
+        onPaginationChange={setPagination}
+        {...args}
+      />
+      <div>
+        <strong>Debug:</strong>
+        <pre>{JSON.stringify(pagination, null, 2)}</pre>
+      </div>
+    </>
   );
 };
 PaginationManagedState.args = Template.args;
@@ -66,15 +72,21 @@ export const ManualPagination: Story = (args) => {
   });
 
   return (
-    <Datatable
-      {...args}
-      columns={columns}
-      data={dataQuery?.data?.entries ?? []}
-      pageCount={dataQuery?.data?.pageCount ?? -1}
-      rowsCount={dataQuery?.data?.rowsCount}
-      state={{ pagination }}
-      manualPagination
-      onPaginationChange={setPagination}
-    />
+    <>
+      <Datatable
+        {...args}
+        columns={columns}
+        data={dataQuery?.data?.entries ?? []}
+        pageCount={dataQuery?.data?.pageCount ?? -1}
+        rowsCount={dataQuery?.data?.rowsCount}
+        state={{ pagination }}
+        manualPagination
+        onPaginationChange={setPagination}
+      />
+      <div>
+        <strong>Debug:</strong>
+        <pre>{JSON.stringify(pagination, null, 2)}</pre>
+      </div>
+    </>
   );
 };
