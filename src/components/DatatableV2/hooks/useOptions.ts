@@ -6,14 +6,15 @@ import { DatatableOptions, ParsedDatatableOptions } from '../Datatable.types';
 export const useOptions = <D>({
   columns,
   data,
-  hasMultiRowSelection = true,
-  hasMultiSort = true,
-  hasPagination = true,
-  hasRowSelection = false,
-  hasRowsPerPage = true,
-  hasSelectAll = true,
-  hasSorting = true,
-  hasSortingRemoval = true,
+  enableColumnActions = true,
+  enableMultiRowSelection = true,
+  enableMultiSort = true,
+  enablePagination = true,
+  enableRowSelection = false,
+  enableRowsPerPage = true,
+  enableSelectAll = true,
+  enableSorting = true,
+  enableSortingRemoval = true,
   manualPagination,
   renderRowSelectionActions,
   rowsPerPageOptions = [10, 25, 50, 100],
@@ -22,7 +23,7 @@ export const useOptions = <D>({
 }: Partial<DatatableOptions<D>>): ParsedDatatableOptions<D> => {
   let __manualPagination = manualPagination;
 
-  if (manualPagination === undefined && hasPagination === false) {
+  if (manualPagination === undefined && enablePagination === false) {
     __manualPagination = true;
   }
 
@@ -33,14 +34,15 @@ export const useOptions = <D>({
       columnDefType: 'display',
       enableSorting: false,
     },
-    enableMultiRowSelection: hasMultiRowSelection,
-    enableMultiSort: hasMultiSort,
-    enablePagination: hasPagination,
-    enableRowSelection: hasRowSelection,
-    enableRowsPerPage: hasRowsPerPage,
-    enableSelectAll: hasSelectAll,
-    enableSorting: hasSorting,
-    enableSortingRemoval: hasSortingRemoval,
+    enableColumnActions,
+    enableMultiRowSelection,
+    enableMultiSort,
+    enablePagination,
+    enableRowSelection,
+    enableRowsPerPage,
+    enableSelectAll,
+    enableSorting,
+    enableSortingRemoval,
     isMultiSortEvent: T,
     manualPagination: __manualPagination,
     renderRowSelectionActions,

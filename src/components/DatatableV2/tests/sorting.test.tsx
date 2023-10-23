@@ -1,10 +1,10 @@
-import { ColumnDef } from '@tanstack/react-table';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
+import { DatatableColumnDef } from '../Datatable.types';
 
 type Data = {
   name: string;
@@ -18,7 +18,7 @@ const data: Data[] = [
   { name: 'Bruce', surname: 'Banner', color: 'green' },
 ];
 
-const columns: ColumnDef<Data>[] = [
+const columns: DatatableColumnDef<Data>[] = [
   { accessorKey: 'name' },
   { accessorKey: 'surname' },
   { accessorKey: 'color' },
@@ -38,7 +38,7 @@ describe('DatatableV2/sorting', () => {
   describe('when is sorting enabled', () => {
     it('should update sorting labels on sort', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} hasSorting />,
+        <Datatable data={data} columns={columns} enableSorting />,
       );
 
       const sortingButtons = screen.getAllByRole('button', {
@@ -57,7 +57,7 @@ describe('DatatableV2/sorting', () => {
 
     it('should correctly sort table', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} hasSorting />,
+        <Datatable data={data} columns={columns} enableSorting />,
       );
 
       const sortingButtons = screen.getAllByRole('button', {
@@ -99,8 +99,8 @@ describe('DatatableV2/sorting', () => {
         <Datatable
           data={data}
           columns={columns}
-          hasSorting
-          hasSortingRemoval={false}
+          enableSorting
+          enableSortingRemoval={false}
         />,
       );
 
@@ -128,7 +128,7 @@ describe('DatatableV2/sorting', () => {
             columns[1],
             { ...columns[2], enableSorting: false },
           ]}
-          hasSorting
+          enableSorting
           onStateChange={sortCallback}
         />,
       );
@@ -155,7 +155,7 @@ describe('DatatableV2/sorting', () => {
           data={data}
           columns={columns}
           onStateChange={sortCallback}
-          hasSorting={false}
+          enableSorting={false}
         />,
       );
 
