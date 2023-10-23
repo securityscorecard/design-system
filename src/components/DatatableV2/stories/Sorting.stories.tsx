@@ -48,7 +48,13 @@ export const SortingManagedState: Story = (args) => {
   ]);
 
   return (
-    <Datatable state={{ sorting }} onSortingChange={setSorting} {...args} />
+    <>
+      <Datatable state={{ sorting }} onSortingChange={setSorting} {...args} />
+      <div>
+        <strong>Debug:</strong>
+        <pre>{JSON.stringify(sorting, null, 2)}</pre>
+      </div>
+    </>
   );
 };
 SortingManagedState.args = Template.args;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentMeta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { RowSelectionState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
@@ -47,6 +48,45 @@ ConditionallyEnabledSelection.args = {
   hasRowSelection: (row) => row.original.organization.grade !== 'A',
 };
 
+export const RowSelectionActions: Story = Template.bind({});
+RowSelectionActions.args = {
+  ...SelectionEnabled.args,
+  initialState: {
+    rowSelection: {
+      'ae62aa4c-5fe5-44b7-88e0-bb0b2e07a370': true,
+      'b5fa06ab-739e-4140-b5a0-d1c8841db036': true,
+    },
+  },
+  renderRowSelectionActions: ({ selectedRows, table }) => (
+    <div>
+      <button
+        type="button"
+        onClick={() => {
+          action('selectedRows')(selectedRows);
+        }}
+      >
+        Show selected rows
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          table.setRowSelection?.(() =>
+            table.options.data.reduce(
+              (acc, row) =>
+                row.organization.grade === 'F'
+                  ? { ...acc, [row.id]: true }
+                  : acc,
+              {},
+            ),
+          );
+        }}
+      >
+        Select all F grades
+      </button>
+    </div>
+  ),
+};
+
 export const SelectionManagedState: Story = (args) => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({
     'ae62aa4c-5fe5-44b7-88e0-bb0b2e07a370': true,
@@ -54,11 +94,17 @@ export const SelectionManagedState: Story = (args) => {
   });
 
   return (
-    <Datatable
-      state={{ rowSelection }}
-      onRowSelectionChange={setRowSelection}
-      {...args}
-    />
+    <>
+      <Datatable
+        state={{ rowSelection }}
+        onRowSelectionChange={setRowSelection}
+        {...args}
+      />
+      <div>
+        <strong>Debug:</strong>
+        <pre>{JSON.stringify(rowSelection, null, 2)}</pre>
+      </div>
+    </>
   );
 };
 SelectionManagedState.args = SelectionEnabled.args;
