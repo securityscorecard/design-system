@@ -17,23 +17,23 @@ export default {
 export const SelectionEnabled: Story = Template.bind({});
 SelectionEnabled.args = {
   ...Template.args,
-  hasRowSelection: true,
+  enableRowSelection: true,
   getRowId: (row) => row.id,
 };
 
 export const DisabledSelection: Story = Template.bind({});
-DisabledSelection.args = { ...Template.args, hasRowSelection: false };
+DisabledSelection.args = { ...Template.args, enableRowSelection: false };
 
 export const SingleRowSelection: Story = Template.bind({});
 SingleRowSelection.args = {
   ...SelectionEnabled.args,
-  hasMultiRowSelection: false,
+  enableMultiRowSelection: false,
 };
 
 export const DisabledSelectAllHeader: Story = Template.bind({});
 DisabledSelectAllHeader.args = {
   ...SelectionEnabled.args,
-  hasSelectAll: false,
+  enableSelectAll: false,
 };
 
 export const SelectAllModePage: Story = Template.bind({});
@@ -45,7 +45,7 @@ SelectAllModeAll.args = { ...SelectionEnabled.args, selectAllMode: 'all' };
 export const ConditionallyEnabledSelection: Story = Template.bind({});
 ConditionallyEnabledSelection.args = {
   ...Template.args,
-  hasRowSelection: (row) => row.original.organization.grade !== 'A',
+  enableRowSelection: (row) => row.original.organization.grade !== 'A',
 };
 
 export const RowSelectionActions: Story = Template.bind({});

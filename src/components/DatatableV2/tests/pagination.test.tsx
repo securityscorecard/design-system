@@ -1,10 +1,10 @@
-import { ColumnDef } from '@tanstack/react-table';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
+import { DatatableColumnDef } from '../Datatable.types';
 
 type Data = {
   name: string;
@@ -18,7 +18,7 @@ const data: Data[] = [
   { name: 'Bruce', surname: 'Banner', color: 'green' },
 ];
 
-const columns: ColumnDef<Data>[] = [
+const columns: DatatableColumnDef<Data>[] = [
   { accessorKey: 'name' },
   { accessorKey: 'surname' },
   { accessorKey: 'color' },
@@ -41,7 +41,7 @@ describe('DatatableV2/sorting', () => {
         <Datatable
           data={data}
           columns={columns}
-          hasPagination
+          enablePagination
           initialState={{ pagination: { pageSize: 1 } }}
         />,
       );
