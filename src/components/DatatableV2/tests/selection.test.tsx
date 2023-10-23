@@ -1,10 +1,10 @@
-import { ColumnDef } from '@tanstack/react-table';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
+import { DatatableColumnDef } from '../Datatable.types';
 
 type Data = {
   name: string;
@@ -18,7 +18,7 @@ const data: Data[] = [
   { name: 'Bruce', surname: 'Banner', color: 'green' },
 ];
 
-const columns: ColumnDef<Data>[] = [
+const columns: DatatableColumnDef<Data>[] = [
   { accessorKey: 'name' },
   { accessorKey: 'surname' },
   { accessorKey: 'color' },
@@ -38,7 +38,7 @@ describe('DatatableV2/selection', () => {
   describe('when is selection enabled', () => {
     it('should select row on click', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} hasRowSelection />,
+        <Datatable data={data} columns={columns} enableRowSelection />,
       );
 
       await userEvent.click(screen.getAllByLabelText('Toggle select row')[0]);
@@ -57,7 +57,7 @@ describe('DatatableV2/selection', () => {
         <Datatable
           data={data}
           columns={columns}
-          hasRowSelection
+          enableRowSelection
           initialState={{ rowSelection: { 0: true } }}
         />,
       );
@@ -72,7 +72,7 @@ describe('DatatableV2/selection', () => {
     describe('select all', () => {
       it('should select all rows on click on selection header', async () => {
         renderWithProviders(
-          <Datatable data={data} columns={columns} hasRowSelection />,
+          <Datatable data={data} columns={columns} enableRowSelection />,
         );
 
         await userEvent.click(screen.getByLabelText('Toggle select all'));
@@ -87,7 +87,7 @@ describe('DatatableV2/selection', () => {
           <Datatable
             data={data}
             columns={columns}
-            hasRowSelection
+            enableRowSelection
             initialState={{ rowSelection: { 0: true, 1: true, 2: true } }}
           />,
         );
@@ -110,7 +110,7 @@ describe('DatatableV2/selection', () => {
           <Datatable
             data={data}
             columns={columns}
-            hasRowSelection={(row) => row.original.color !== 'green'}
+            enableRowSelection={(row) => row.original.color !== 'green'}
           />,
         );
         await userEvent.click(screen.getByLabelText('Toggle select all'));
@@ -127,7 +127,7 @@ describe('DatatableV2/selection', () => {
           <Datatable
             data={data}
             columns={columns}
-            hasRowSelection
+            enableRowSelection
             selectAllMode="page"
             initialState={{ pagination: { pageSize: 2 } }}
           />,
@@ -152,7 +152,7 @@ describe('DatatableV2/selection', () => {
           <Datatable
             data={data}
             columns={columns}
-            hasRowSelection
+            enableRowSelection
             selectAllMode="all"
             initialState={{ pagination: { pageSize: 2 } }}
           />,
@@ -175,8 +175,8 @@ describe('DatatableV2/selection', () => {
         <Datatable
           data={data}
           columns={columns}
-          hasRowSelection
-          hasMultiRowSelection={false}
+          enableRowSelection
+          enableMultiRowSelection={false}
         />,
       );
 
