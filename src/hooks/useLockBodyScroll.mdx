@@ -2,12 +2,12 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Hooks/useLockBodyScroll" />
 
-## useLockBodyScroll
+# useLockBodyScroll
 
 This hook is called to prevent scrolling the body of a page while a component is positioned over the page.
 Basically, call the useLockBodyScroll hook in any component and body scrolling will be locked until that component unmounts
 
-```js
+```jsx
 import { useLockBodyScroll } from '@securityscorecard/design-system';
 
 function ModalWithLockedBody({ title, content, onClose }) {

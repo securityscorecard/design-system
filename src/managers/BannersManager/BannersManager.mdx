@@ -62,10 +62,10 @@ and hadling those events in event listeners.
 
 ### Exported funtions
 
-| Key          | Type     | Description                                   |
-| :----------- | :------- | :-------------------------------------------- |
-| addBanner    | <code /> | Adds new banner into the banner stack         |
-| removeBanner | <code /> | Remove banner with given ID from banner stack |
+| Key          | Type                          | Description                                   |
+| :----------- | :---------------------------- | :-------------------------------------------- |
+| addBanner    | `(newBanner: Banner) => void` | Adds new banner into the banner stack         |
+| removeBanner | `(bannerId: string) => void`  | Remove banner with given ID from banner stack |
 
 ## BannersStack
 
@@ -101,11 +101,11 @@ const SomewhereInApplication = () => (
 If you ever end up with need to inspecting current banner stack state you can use `useBanners` hook. This hook acts as a wrapper for accessing
 banners context. It returns `instances` which is the current stack of banners as well as the `addBanner` and `removeBanner` functions.
 
-| Key          | Type     | Description                                   |
-| :----------- | :------- | :-------------------------------------------- |
-| addBanner    | <code /> | Adds new banner into the banner stack         |
-| removeBanner | <code /> | Remove banner with given ID from banner stack |
-| instances    | <code /> | Current banners stack                         |
+| Key          | Type                          | Description                                   |
+| :----------- | :---------------------------- | :-------------------------------------------- |
+| addBanner    | `(newBanner: Banner) => void` | Adds new banner into the banner stack         |
+| removeBanner | `(bannerId: string) => void`  | Remove banner with given ID from banner stack |
+| instances    | `Banner[]`                    | Current banners stack                         |
 
 ## Types
 

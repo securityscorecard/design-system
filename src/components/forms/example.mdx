@@ -32,62 +32,62 @@ export const options = [
     <form>
       <Stack gap="md">
         <Stack>
-          <Label />
+          <Label>Your Name</Label>
           <Input type="text" isInvalid />
-          <Error />
+          <Error>This field is required</Error>
         </Stack>
         <Stack>
-          <Label />
+          <Label>Your Country</Label>
           <Select options={options} />
-          <Note />
+          <Note>Where you currently live</Note>
         </Stack>
         <Stack>
-          <Label />
+          <Label>I am</Label>
           <Stack gap="xs">
-            <Radio label="species" name="human" radioId="Human" value="human" />
+            <Radio name="species" radioId="human" label="Human" value="human" />
             <Radio
-              label="species"
-              name="animal"
-              radioId="Animal"
+              name="species"
+              radioId="animal"
+              label="Animal"
               value="animal"
             />
           </Stack>
         </Stack>
         <Stack>
-          <Label />
+          <Label>My hobbies</Label>
           <Stack gap="xs">
             <Checkbox
-              checkboxId="hobbies"
-              label="reading"
-              name="Reading"
+              name="hobbies"
+              checkboxId="reading"
+              label="Reading"
               value="reading"
             />
             <Checkbox
-              checkboxId="hobbies"
-              label="sleeping"
-              name="Sleeping"
+              name="hobbies"
+              checkboxId="sleeping"
+              label="Sleeping"
               value="sleeping"
             />
             <Checkbox
-              checkboxId="hobbies"
-              label="programming"
-              name="Programming"
+              name="hobbies"
+              checkboxId="programming"
+              label="Programming"
               value="programming"
             />
             <Checkbox
-              checkboxId="hobbies"
-              label="testing"
-              name="Testing"
+              name="hobbies"
+              checkboxId="testing"
+              label="Testing"
               value="testing"
             />
           </Stack>
         </Stack>
         <Stack justify="flex-start">
-          <Label />
-          <Switch label="public" switchId="public" />
+          <Label>Do you want to make your profile public?</Label>
+          <Switch switchId="public" label="public" />
         </Stack>
         <Stack>
-          <Label />
+          <Label>Your message to us</Label>
           <TextArea maxLength="140" />
         </Stack>
       </Stack>

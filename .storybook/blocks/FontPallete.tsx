@@ -1,7 +1,5 @@
-import type { FC } from 'react';
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
-
-import { theme } from '../../src/theme';
 
 const List = styled.div`
   font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
@@ -12,14 +10,14 @@ const List = styled.div`
   line-height: 20px;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 `;
 const ListHeading = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-bottom: 20px;
   font-weight: 700;
-  color: rgba(51, 51, 51, 0.6);
+  color: rgb(51 51 51 / 60%);
 `;
 
 const ListName = styled.div`
@@ -41,26 +39,26 @@ const ItemDescription = styled.div`
 `;
 const ItemTitle = styled.div`
   font-weight: 700;
-  color: #333333;
+  color: #333;
   word-break: break;
 `;
 const ItemSubtitle = styled.div`
-  color: rgba(51, 51, 51, 0.8);
+  color: rgb(51 51 51 / 80%);
 `;
 
 interface SampleTextProps {
-  readonly fontFamily?: string;
-  readonly fontWeight?: number;
-  readonly fontSize?: string;
-  readonly lineHeight?: string;
+  readonly $fontFamily?: string;
+  readonly $fontWeight?: number;
+  readonly $fontSize?: string;
+  readonly $lineHeight?: number | string;
 }
 
 const SampleText = styled.div<SampleTextProps>`
   flex: 1;
-  font-family: ${({ fontFamily }) => fontFamily};
-  font-weight: ${({ fontWeight }) => fontWeight};
-  font-size: ${({ fontSize }) => fontSize};
-  line-height: ${({ lineHeight }) => lineHeight};
+  font-family: ${({ $fontFamily }) => $fontFamily};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  font-size: ${({ $fontSize }) => $fontSize};
+  line-height: ${({ $lineHeight }) => $lineHeight};
 `;
 
 interface FontProps {
@@ -69,19 +67,19 @@ interface FontProps {
   fontFamily?: string;
   fontWeight?: number;
   fontSize?: string;
-  lineHeight?: string;
+  lineHeight?: number | string;
   sampleText: string;
 }
 
-export const FontItem: FC<FontProps> = ({
+export const FontItem = ({
   title,
   subtitle,
-  fontFamily = theme.typography.family.base,
-  fontWeight = theme.typography.weight.regular,
-  fontSize = theme.typography.size.lg,
-  lineHeight = 'normal',
+  fontFamily = 'Inter',
+  fontWeight = 400,
+  fontSize = '0.875rem',
+  lineHeight = 1.5,
   sampleText,
-}) => {
+}: FontProps) => {
   return (
     <Item>
       <ItemDescription>
@@ -89,10 +87,11 @@ export const FontItem: FC<FontProps> = ({
         <ItemSubtitle>{subtitle}</ItemSubtitle>
       </ItemDescription>
       <SampleText
-        fontFamily={fontFamily}
-        fontWeight={fontWeight}
-        fontSize={fontSize}
-        lineHeight={lineHeight}
+        className=' sb-unstyled'
+        $fontFamily={fontFamily}
+        $fontWeight={fontWeight}
+        $fontSize={fontSize}
+        $lineHeight={lineHeight}
       >
         {sampleText}
       </SampleText>
@@ -100,7 +99,7 @@ export const FontItem: FC<FontProps> = ({
   );
 };
 
-export const FontPalette: FC = ({ children, ...props }) => (
+export const FontPalette = ({ children, ...props }: { children: ReactNode }) => (
   <List {...props}>
     <ListHeading>
       <ListName>Name</ListName>

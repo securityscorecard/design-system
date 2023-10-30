@@ -1,6 +1,5 @@
 import React from 'react';
 import { withScreenshot } from 'storycap';
-import { withDesign } from 'storybook-addon-designs';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 
@@ -49,6 +48,16 @@ export const parameters = {
   docs: {
     source: { type: 'dynamic' },
     page: defaultTemplate,
+    // Disabling TOC until bugs are fixed
+    // https://github.com/storybookjs/storybook/issues/23541
+    // https://github.com/storybookjs/storybook/issues/23542
+    // toc: {
+    //   contentsSelector: '.sbdocs-content',
+    //   headingSelector: 'h2, h3',
+    //   ignoreSelector: '#primary',
+    //   title: 'Table of Contents',
+    //   disable: false,
+    // }
   },
   // storycap settings
   screenshot: {
@@ -82,4 +91,4 @@ const wrapper = (storyFn) => (
   <DSProvider>{storyFn()}</DSProvider>
 );
 
-export const decorators = [withDesign, withScreenshot, wrapper];
+export const decorators = [withScreenshot, wrapper];
