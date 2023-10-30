@@ -15,7 +15,6 @@ export * from './DropdownMenu';
 export * from './FileSelector';
 export * from './Filters';
 export * from './FlexContainer';
-export * from './FullscreenModal';
 export * from './HexGrade';
 export * from './HintTooltip';
 export * from './Icon';
