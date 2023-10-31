@@ -103,7 +103,6 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableSorting?: boolean;
-
   /**
    * @default true
    */
@@ -141,6 +140,11 @@ export interface DatatableOptions<D>
     totalRowCount: number;
     table: DatatableInstance<D>;
   }) => ReactNode;
+
+  /**
+   * @default true
+   */
+  enableHiding?: boolean;
 
   /**
    * @default true
