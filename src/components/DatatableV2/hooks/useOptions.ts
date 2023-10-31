@@ -1,6 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import { T } from 'ramda';
-
 import { DatatableOptions, ParsedDatatableOptions } from '../Datatable.types';
 
 export const useOptions = <D>({
@@ -43,7 +41,6 @@ export const useOptions = <D>({
     enableSelectAll,
     enableSorting,
     enableSortingRemoval,
-    isMultiSortEvent: T,
     manualPagination: __manualPagination,
     renderRowSelectionActions,
     rowsPerPageOptions,
