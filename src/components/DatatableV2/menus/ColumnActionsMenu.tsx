@@ -3,7 +3,7 @@ import React from 'react';
 import { ControlledDropdown } from '../../Dropdown';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 
-const MenuItem = ({ children, onClick, isDisabled }) => (
+const MenuItem = ({ children, onClick, isDisabled = false }) => (
   <button
     disabled={isDisabled}
     style={{ display: 'block' }}
@@ -26,7 +26,7 @@ const ColumnActionsMenu = <D,>({
   table: DatatableInstance<D>;
 }) => {
   const {
-    options: { enableSorting, enableSortingRemoval },
+    options: { enableSorting, enableHiding, enableSortingRemoval },
   } = table;
   const { column } = header;
 
@@ -40,6 +40,10 @@ const ColumnActionsMenu = <D,>({
   };
   const handleClearSort = () => {
     column.clearSorting();
+    setButtonRef(null);
+  };
+  const handleHideColumn = () => {
+    column.toggleVisibility(false);
     setButtonRef(null);
   };
 
@@ -69,6 +73,13 @@ const ColumnActionsMenu = <D,>({
               ❌ Clear sort
             </MenuItem>
           ),
+        ]
+      : []),
+    ...(enableHiding && column.getCanHide()
+      ? [
+          <MenuItem key={3} onClick={handleHideColumn}>
+            👀 Hide column
+          </MenuItem>,
         ]
       : []),
   ].filter(Boolean);
