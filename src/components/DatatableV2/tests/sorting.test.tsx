@@ -4,25 +4,7 @@ import React from 'react';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
-import { DatatableColumnDef } from '../Datatable.types';
-
-type Data = {
-  name: string;
-  surname: string;
-  color: string;
-};
-
-const data: Data[] = [
-  { name: 'Stephen', surname: 'Strange', color: 'blue' },
-  { name: 'Steve', surname: 'Rogers', color: 'blue' },
-  { name: 'Bruce', surname: 'Banner', color: 'green' },
-];
-
-const columns: DatatableColumnDef<Data>[] = [
-  { accessorKey: 'name' },
-  { accessorKey: 'surname' },
-  { accessorKey: 'color' },
-];
+import { columns, data } from './mocks';
 
 describe('DatatableV2/sorting', () => {
   it('should have sorting enabled by default', () => {
@@ -70,7 +52,7 @@ describe('DatatableV2/sorting', () => {
       expect(tableCellsSorted[5]).toHaveTextContent('blue');
       expect(tableCellsSorted[8]).toHaveTextContent('green');
 
-      await userEvent.click(sortingButtons[1]);
+      await userEvent.click(sortingButtons[1], { shiftKey: true });
       const tableCellsMultiSorted = await screen.findAllByRole('cell');
       expect(tableCellsMultiSorted[1]).toHaveTextContent('Rogers');
       expect(tableCellsMultiSorted[4]).toHaveTextContent('Strange');
