@@ -1,7 +1,8 @@
 import type { CardHeaderProps } from './Card.types';
+import type { Color } from '../../theme/colors.types';
 
 import styled, { css } from 'styled-components';
-import { any } from 'ramda';
+import { any, includes } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 import { forwardRef } from 'react';
 
@@ -22,23 +23,19 @@ export const CardIconButton = styled.button<{
   background-color: ${({ $isActive }) =>
     $isActive ? getColor('primary.50') : 'transparent'};
   border: none;
-  box-sizing: content-box;
   color: ${getColor('neutral.800')};
   display: flex;
+  align-items: center;
   border-radius: ${getRadii('default')};
   padding: ${getSpace(SpaceSizes.sm)};
+  height: 2rem;
   ${(props) =>
     props.as !== 'div' &&
     css`
       cursor: pointer;
 
-      &:hover,
-      &:focus-visible {
+      &:hover {
         background-color: ${getColor('primary.50')};
-      }
-
-      &:focus {
-        outline: none;
       }
     `}
 `;
@@ -76,6 +73,20 @@ const ButtonsArea = styled.div`
   align-items: flex-start;
   margin-right: calc(${getSpace(SpaceSizes.sm)} * -1) !important;
 `;
+
+const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
+  shouldForwardProp: (property) => !includes(property, ['color']),
+})`
+  background: ${getColor('neutral.0')};
+  border-radius: 100%;
+  color: ${({ color, theme }) =>
+    isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
+
+  &:hover {
+    color: ${({ theme }) => getColor('neutral.700', { theme })};
+  }
+`;
+
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   (
     {
@@ -127,10 +138,10 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
                   data-interactive="true"
                   onClick={onHelpClick}
                 >
-                  <Icon
-                    color="neutral.800"
+                  <StyledIcon
+                    color="neutral.600"
                     data-interactive="true"
-                    name="question-circle"
+                    name="info-circle-outline"
                   />
                 </CardIconButton>
               </Tooltip>

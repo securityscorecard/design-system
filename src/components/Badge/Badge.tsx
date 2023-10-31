@@ -15,8 +15,7 @@ import {
 } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { SpaceSizes } from '../../theme';
-import { Icon } from '../Icon';
-import { Inline, Padbox } from '../layout';
+import { Padbox } from '../layout';
 
 const BadgeNeutral = css`
   background-color: ${getColor('neutral.300')};
@@ -62,17 +61,14 @@ const BadgeElement = styled(Padbox)<BadgeElementProps>`
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ count, text, iconName, iconType, variant = BadgeVariants.error }, ref) => (
+  ({ count, variant = BadgeVariants.error }, ref) => (
     <BadgeElement
       ref={ref}
       $variant={variant}
       className={CLX_COMPONENT}
       paddingSize={SpaceSizes.sm}
     >
-      <Inline align="center" as="span" gap="sm" justify="center">
-        {iconName ? <Icon name={iconName} type={iconType} /> : null}
-        <span>{count ? normalizeCount(count) : text}</span>
-      </Inline>
+      <span>{normalizeCount(count)}</span>
     </BadgeElement>
   ),
 );

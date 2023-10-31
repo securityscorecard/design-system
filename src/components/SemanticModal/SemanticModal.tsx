@@ -8,6 +8,7 @@ import type {
   ActionKinds,
   RelativeLinkActionKind,
 } from '../../types/action.types';
+import type { Color } from '../../theme';
 
 import { forwardRef } from 'react';
 import styled from 'styled-components';
@@ -23,7 +24,7 @@ import { Center, Inline, Padbox, Stack } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 
-const colorVariants = {
+const colorVariants: Record<keyof typeof SemanticModalVariants, Color> = {
   [SemanticModalVariants.success]: 'success.500',
   [SemanticModalVariants.warn]: 'warning.500',
   [SemanticModalVariants.error]: 'error.500',

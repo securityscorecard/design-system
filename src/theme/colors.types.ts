@@ -1,4 +1,8 @@
-import type { ColorTypes } from './colors.enums';
+import type { colors } from './colors';
 
-export type Color = (typeof ColorTypes)[keyof typeof ColorTypes];
-export type Colors = Record<Color, string>;
+export type Color = {
+  [K in keyof typeof colors]: `${K}.${Extract<
+    keyof (typeof colors)[K],
+    string | number
+  >}`;
+}[keyof typeof colors];

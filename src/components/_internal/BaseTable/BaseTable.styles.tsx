@@ -12,12 +12,7 @@ import {
   getToken,
   pxToRem,
 } from '../../../utils';
-import {
-  LinkActiveStyles,
-  LinkBaseStyles,
-  LinkFocusStyles,
-  LinkHoverStyles,
-} from '../BaseLink';
+import { LinkActiveStyles, LinkBaseStyles, LinkHoverStyles } from '../BaseLink';
 
 const getRemToggleSize = memoizeWith(
   identity,
@@ -37,18 +32,14 @@ export const BaseTableContainer = styled.div`
 
   &::-webkit-scrollbar-thumb {
     border-radius: ${getRadii('round')};
-    background-color: ${getColor('neutral.600')};
-    border: 6px solid ${getColor('neutral.200')};
+    background-color: ${getColor('primary.500')};
+    border: 6px solid ${getColor('neutral.0')};
   }
 
   &::-webkit-scrollbar-track-piece {
     border-radius: ${getRadii('round')};
     background-color: ${getColor('neutral.300')};
-    border: 6px solid ${getColor('neutral.200')};
-  }
-
-  &:focus-visible {
-    outline: ${getColor('primary.500')} solid 2px;
+    border: 6px solid ${getColor('neutral.0')};
   }
 `;
 
@@ -57,10 +48,6 @@ const DsLinkCell = css`
 
   &:hover {
     ${LinkHoverStyles};
-  }
-
-  &:focus-visible {
-    ${LinkFocusStyles};
   }
 
   &:active {
@@ -73,11 +60,6 @@ const DsLinkCell = css`
 
     &:hover {
       color: ${getToken(`link-color-text-secondary-hover`)};
-    }
-
-    &:focus-visible {
-      color: ${getToken(`link-color-text-secondary-hover`)};
-      background-color: ${getToken(`link-color-background-secondary-focus`)};
     }
 
     &:active {
@@ -106,10 +88,6 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     color: ${getColor('neutral.900')};
     background: ${getColor('neutral.0')};
     padding: ${pxToRem(12, 8)};
-
-    &:focus {
-      outline: none;
-    }
 
     &.is-sticky {
       justify-content: center;
@@ -143,7 +121,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
         align-items: center;
         padding: ${pxToRem(0, 8)};
         background: ${getColor('neutral.200')};
-        border-radius: ${getRadii('default')};
+        border-radius: ${getRadii('round')};
         white-space: nowrap;
         margin: ${pxToRem(2)};
 
@@ -152,7 +130,6 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
           color: ${getColor('neutral.900')};
 
           &:hover,
-          &:focus-visible,
           &:active {
             background-color: ${getColor('primary.50')};
             color: ${getColor('neutral.900')};

@@ -34,16 +34,6 @@ const underlineTab = css<BaseLabelProps>`
         ? setLightness(0.85, getColor($color, { theme }))
         : getToken('color-action-primary-focus')};
   }
-
-  &:focus-visible {
-    border-bottom-color: ${({ $color }) =>
-      $color ? getColor($color) : getToken('color-action-primary')};
-    font-weight: ${getFontWeight('semibold')};
-    background-color: ${({ $color, theme }) =>
-      $color
-        ? setLightness(0.95, getColor($color, { theme }))
-        : getToken('color-action-background-primary-focus')};
-  }
 `;
 
 const textTab = css<BaseLabelProps>`
@@ -56,10 +46,6 @@ const textTab = css<BaseLabelProps>`
 
   &:hover {
     color: ${getToken('color-action-link-primary-hover')};
-  }
-
-  &:focus-visible {
-    background-color: ${getToken('color-action-link-background-primary-focus')};
   }
 `;
 

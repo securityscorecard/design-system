@@ -7,10 +7,13 @@ import { createContext } from 'react';
 import { createTheme } from '../theme';
 import { GlobalStyles } from '../GlobalStyles';
 
-export const defaultDSContext = {
+export const defaultDSContext: DSContextValue = {
   portalsContainerId: 'portals',
   hasIncludedGlobalStyles: true,
   debugMode: false,
+  experimental: {
+    accessibleLink: false,
+  },
 };
 export const DSContext = createContext<DSContextValue>(defaultDSContext);
 

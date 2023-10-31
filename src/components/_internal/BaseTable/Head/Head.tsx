@@ -15,7 +15,7 @@ import TooltipWrapper from '../components/TooltipWrapper';
 import { makeStickyColumn, shrinkIfSticky } from '../utils';
 import SortingIcon from './SortingIcon';
 
-const StyledTh = styled.th`
+const StyledTh = styled.th<{ sticky?: string }>`
   display: flex;
   align-items: center;
   min-height: ${pxToRem(48)};
@@ -24,7 +24,7 @@ const StyledTh = styled.th`
   line-height: ${getLineHeight('md')};
   text-align: left;
   padding: ${pxToRem(12, 8)};
-  background-color: ${getColor('neutral.200')};
+  background-color: ${getColor('neutral.0')};
   border-color: ${getColor('neutral.400')};
   border-style: solid;
   border-width: 1px 0 1px 1px;

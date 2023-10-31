@@ -41,7 +41,7 @@ const Input = styled.input`
   position: absolute;
   opacity: 0;
 
-  &:focus + ${Label} {
+  &:focus-visible + ${Label} {
     box-shadow: inset 0 0 0 2px ${getColor('primary.200')};
   }
   &:focus:checked + ${Label} {

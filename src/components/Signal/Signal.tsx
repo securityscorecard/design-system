@@ -2,7 +2,7 @@ import type { SignalProps } from './Signal.types';
 
 import { prop } from 'ramda';
 import { forwardRef } from 'react';
-import { isNilOrEmpty } from 'ramda-adjunct';
+import { isNilOrEmpty, isUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { colors } from '../../theme/colors';
@@ -63,12 +63,17 @@ const Signal = forwardRef<SVGSVGElement, SignalProps>(
   ({ kind, size = 16, title = '', className, ...props }, ref) => {
     if (isNilOrEmpty(kind)) return null;
 
-    const { color, paths } = prop(kind.toLowerCase())(kinds);
+    const severityKind = prop(kind.toLowerCase(), kinds);
+
+    if (isUndefined(severityKind)) return null;
+
+    const { color, paths } = severityKind;
 
     return (
       <svg
         ref={ref}
         className={cls(CLX_COMPONENT, className)}
+        data-testid="ds-severity-icon"
         height={size}
         viewBox="0 0 16 16"
         width={size}

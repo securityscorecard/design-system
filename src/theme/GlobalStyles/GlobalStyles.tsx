@@ -1,7 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
 import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../constants';
-import { getColor, getFontFamily, getFontWeight, pxToRem } from '../../utils';
+import {
+  getColor,
+  getFontFamily,
+  getFontWeight,
+  getToken,
+  pxToRem,
+} from '../../utils';
 
 export default createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -44,9 +50,9 @@ export default createGlobalStyle`
     background: ${getColor('neutral.0')};
     font-family: ${getFontFamily('base')};
     font-weight: ${getFontWeight('regular')};
-    font-size: ${pxToRem(BASE_FONT_SIZE)};
+    font-size: ${pxToRem(BASE_FONT_SIZE * 0.875)};
     line-height: ${pxToRem(BASE_LINE_HEIGHT)};
-    color: ${getColor('neutral.900')};
+    color: ${getColor('text.primary')};
   }
 
   ol, ul {
@@ -103,5 +109,18 @@ export default createGlobalStyle`
 
   p, h1, h2, h3, h4, h5, h6, blockquote, pre, ul, ol, li, table, tr, th, td, input, textarea {
     user-select: text;
+  }
+
+  /* global focus style */
+  a, button, [tabindex="0"] {
+    outline-offset: ${getToken('action-focus-ring-offset')};
+  }
+
+  a:focus, button:focus, [tabindex="0"]:focus {
+    outline: none;
+  }
+
+  a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
+    outline: ${getToken('action-focus-ring')};
   }
 `;

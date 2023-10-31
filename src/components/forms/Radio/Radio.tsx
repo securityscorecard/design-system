@@ -78,7 +78,7 @@ const RadioInput = styled.input<TogglingInputProps>`
     color: ${getFormStyle('disabledActiveColor')};
   }
 
-  &:focus-visible + ${/* sc-selector */ RadioLabel}::before {
+  &:focus + ${/* sc-selector */ RadioLabel}::before {
     border: 2px solid ${getFormStyle('activeBorderColor')};
   }
 

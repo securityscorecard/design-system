@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import type { DefaultTheme } from 'styled-components';
-import type { RecursivePartial } from '../types/utils.types';
+import type { Subset } from '../types/utils.types';
 
 import { mergeDeepRight } from 'ramda';
 
@@ -16,7 +16,7 @@ import { createTokens } from './tokens';
 import { createBreakpoints } from './breakpoints';
 
 export const createTheme = (
-  overrides: RecursivePartial<DefaultTheme> = {},
+  overrides: Subset<DefaultTheme> = {},
 ): DefaultTheme => {
   const {
     colors: colorsOverride = {},

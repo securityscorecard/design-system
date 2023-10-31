@@ -12,6 +12,7 @@ import {
 } from '../components';
 import { Operators } from '../Filters.enums';
 import { patterns, validateDomains, validateIPs } from './validations';
+import MockObjectFilter from './MockObjectFilter';
 
 export const mockTestFields: Field[] = [
   {
@@ -325,6 +326,18 @@ export const fields: Field[] = [
     value: 'detection method',
     label: 'Detection Method',
   },
+  {
+    conditions: [
+      { component: MockObjectFilter, value: 'is', label: 'is' },
+      {
+        component: MockObjectFilter,
+        value: 'is not',
+        label: 'is not',
+      },
+    ],
+    value: 'ip and assets',
+    label: 'IP and Assets',
+  },
 ];
 
 export const state: Filter[] = [
@@ -401,6 +414,15 @@ export const state: Filter[] = [
     field: 'detection method',
     condition: 'contains',
     value: 'any',
+    isApplied: true,
+    isLoading: false,
+    isCanceled: false,
+  },
+  {
+    operator: Operators.and,
+    field: 'ip and assets',
+    condition: 'is',
+    value: { inputValue: '1.1.1.1', includeAsset: ['include_domains'] },
     isApplied: true,
     isLoading: false,
     isCanceled: false,

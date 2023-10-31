@@ -1,3 +1,143 @@
+# [1.10.0](https://github.com/securityscorecard/design-system/compare/v1.9.2...v1.10.0) (2023-10-18)
+
+
+### Bug Fixes
+
+* **FileSelector:** fix accessibility ([fd539cb](https://github.com/securityscorecard/design-system/commit/fd539cb7b1b1a8188572086b40c3fa1dc4e25c46))
+* **TrendIcon:** fix icon size ([4a0b8ad](https://github.com/securityscorecard/design-system/commit/4a0b8ad8fbfcf3b00306af93c74a37dc362280dc))
+
+
+### Features
+
+* **action:** unify focus state ([dc3a8f1](https://github.com/securityscorecard/design-system/commit/dc3a8f17d527a080f10c83054f2457333c996ed5))
+* **Badge:** remove icon and text variant ([9e1afbc](https://github.com/securityscorecard/design-system/commit/9e1afbcce783620dc6198bf53b7758038a6b2c56))
+* **Datatable:** make multivalue pills round ([3183c86](https://github.com/securityscorecard/design-system/commit/3183c86c9a010ecca654e00e74aff210979ee087))
+* **Pill:** make pill round ([bf185b2](https://github.com/securityscorecard/design-system/commit/bf185b20cf45fe251e7d8a0510d08acc275caa03))
+* **StatusDot:** use success.500 for green ([7ff2407](https://github.com/securityscorecard/design-system/commit/7ff2407853566799438cde10a60699c3d9861897))
+
+## [1.9.2](https://github.com/securityscorecard/design-system/compare/v1.9.1...v1.9.2) (2023-10-10)
+
+
+### Bug Fixes
+
+* **Datatable:** fix column visibility state ([74dc800](https://github.com/securityscorecard/design-system/commit/74dc8005afe7ff7e78ab90aa2649bd983f9977af))
+
+## [1.9.1](https://github.com/securityscorecard/design-system/compare/v1.9.0...v1.9.1) (2023-10-05)
+
+
+### Bug Fixes
+
+* **TimesIcon:** add correct width ([46c62c9](https://github.com/securityscorecard/design-system/commit/46c62c9b198b28a78ec619df1c2eb171a68fa11d))
+
+# [1.9.0](https://github.com/securityscorecard/design-system/compare/v1.8.3...v1.9.0) (2023-10-04)
+
+
+### Bug Fixes
+
+* **Signal:** handle unknown value gracefully ([1423697](https://github.com/securityscorecard/design-system/commit/1423697967d6483dcfd18e1ebb7fe50c65cebc2d))
+* **StatusDot:** export the component from package ([9804dad](https://github.com/securityscorecard/design-system/commit/9804dad90efd140ecd7c4ce286e9120c552b2357))
+* **StatusPill:** export the component from package ([3a96af2](https://github.com/securityscorecard/design-system/commit/3a96af28a57f00c836ee797460b518bf477dea54))
+
+
+### Features
+
+* **Button:** add active animation ([45fcf8c](https://github.com/securityscorecard/design-system/commit/45fcf8cfd0d8ee030cd43770091d54d214da844b))
+* **CloseButton:** add type attribute ([b3a9103](https://github.com/securityscorecard/design-system/commit/b3a910300577a19e46485ce64c97986301fdb27e))
+* **Heading:** change H1 font weight to bold ([00eb53a](https://github.com/securityscorecard/design-system/commit/00eb53ad4e0355f87852e853680dba3893c0cf33))
+* **Heading:** remove H0 ([633a9d8](https://github.com/securityscorecard/design-system/commit/633a9d871f0e5337362478c30570671f448b1f8e))
+* **Icons:** update icons to 6.4.2 ([783f00b](https://github.com/securityscorecard/design-system/commit/783f00be86e1aee546021205b127e3af70557a6b))
+* **Link:** add experimental underline ([5650034](https://github.com/securityscorecard/design-system/commit/56500342e379a022ab6880cc4adfbc2bae0c33a9))
+* **StatusDot:** add component ([5793bd6](https://github.com/securityscorecard/design-system/commit/5793bd66baa8f0b5ceef6d9894ad50c012969e1a))
+* **StatusPill:** add component ([0b46773](https://github.com/securityscorecard/design-system/commit/0b46773d95476a01bf1d9c6d7df6756b1aecb8c3))
+
+## [1.8.3](https://github.com/securityscorecard/design-system/compare/v1.8.2...v1.8.3) (2023-09-13)
+
+
+### Bug Fixes
+
+* **Filters:** extend value interface ([fab447b](https://github.com/securityscorecard/design-system/commit/fab447b2752b23f12599faa182bedf54277b6040))
+
+## [1.8.2](https://github.com/securityscorecard/design-system/compare/v1.8.1...v1.8.2) (2023-09-07)
+
+
+### Bug Fixes
+
+* **Datatable:** adjust border ([41f80d3](https://github.com/securityscorecard/design-system/commit/41f80d32d87dee4cadbda501a94c9ce0f4e296db))
+* **Datatable:** update styling ([f03a23a](https://github.com/securityscorecard/design-system/commit/f03a23a18ba2b6e36da09a493fb77ff0c4b5379d))
+* update colors ([736bf2a](https://github.com/securityscorecard/design-system/commit/736bf2acd1e8ae45f36ad2d2753e7d101dc86b0d))
+
+## [1.8.1](https://github.com/securityscorecard/design-system/compare/v1.8.0...v1.8.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* **ColumnsControl:** fix incorrect syntax on PropTypes definition ([578b55f](https://github.com/securityscorecard/design-system/commit/578b55f738d854d9ea17fed450c7d55ecd4759ba))
+
+# [1.8.0](https://github.com/securityscorecard/design-system/compare/v1.7.0...v1.8.0) (2023-08-14)
+
+
+### Features
+
+* **DataTableControls:** add number of hidden columns ([dc684da](https://github.com/securityscorecard/design-system/commit/dc684dab47e20bee8a73f0b0de578b8bac555461))
+* **DsThemeOverride:** allow local them overrides ([46fa3c7](https://github.com/securityscorecard/design-system/commit/46fa3c7e1bb93b8c6dd4da113e4ae649477f4eef))
+
+# [1.7.0](https://github.com/securityscorecard/design-system/compare/v1.6.0...v1.7.0) (2023-07-20)
+
+
+### Bug Fixes
+
+* **Accordion:** make 'openItems' act as value ([a8261f7](https://github.com/securityscorecard/design-system/commit/a8261f7439106e85e21dac5e9ffad6c684a41c1b))
+* **Datatable:** add onColumnVisibilityChange to proptypes ([374cfe9](https://github.com/securityscorecard/design-system/commit/374cfe9ba3b2d31c9d90729d0489c56118e1921b))
+
+
+### Features
+
+* **MultiValueInput:** add 'onPaste' callback ([03639a2](https://github.com/securityscorecard/design-system/commit/03639a2681eff658ae5b86471e4d612a49cb82c0))
+
+# [1.6.0](https://github.com/securityscorecard/design-system/compare/v1.5.1...v1.6.0) (2023-07-12)
+
+
+### Bug Fixes
+
+* **Select:** move cursor to field start ([e39cedb](https://github.com/securityscorecard/design-system/commit/e39cedb501bbfbe62a2ff1fc23e06cf0ab1efbca))
+* **Strong:** make inherit size default ([7ab6ffc](https://github.com/securityscorecard/design-system/commit/7ab6ffc273b5d35cc3eb725a830197b4585c671c))
+* **Text:** change default size ([7db54d3](https://github.com/securityscorecard/design-system/commit/7db54d357ed15cfd4d6261ebdb9ee150985ab9de))
+
+
+### Features
+
+* **GlobalStyles:** change base font size ([8276489](https://github.com/securityscorecard/design-system/commit/82764898c704165c0813fa9068388bde55f63f4a))
+
+## [1.5.1](https://github.com/securityscorecard/design-system/compare/v1.5.0...v1.5.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* **Collapsible:** fix header layout ([eb892c7](https://github.com/securityscorecard/design-system/commit/eb892c7c6a8d2fb8f4e41609397f077d85a50995))
+
+# [1.5.0](https://github.com/securityscorecard/design-system/compare/v1.4.2...v1.5.0) (2023-06-09)
+
+
+### Bug Fixes
+
+* **Toast:** add loading variant ([2469815](https://github.com/securityscorecard/design-system/commit/246981500963026d590723784a686949d09022fb))
+* **Wizard:** add right alignment for wizard actions ([c5f3049](https://github.com/securityscorecard/design-system/commit/c5f3049b5a12fef6a0fbbad8345947c82267b21e))
+
+
+### Features
+
+* **Accordion:** update accordion styling ([c6169b6](https://github.com/securityscorecard/design-system/commit/c6169b6ada6378507eb271a7a02bbca407195954))
+* **Card:** replace question circle icon with info ([a1a94c4](https://github.com/securityscorecard/design-system/commit/a1a94c4dcce3bca3985a1cce5a62a1a3beb840e0))
+* **Collapsible:** update collapsible styling ([0d3c049](https://github.com/securityscorecard/design-system/commit/0d3c049a78a5eafdb3a05b71927e40c576610efd))
+* **ErrorBoundary:** add component ([51c5b4d](https://github.com/securityscorecard/design-system/commit/51c5b4dcf20e368d15d4abdbc9183d076fcd0fbd))
+
+## [1.4.2](https://github.com/securityscorecard/design-system/compare/v1.4.1...v1.4.2) (2023-06-08)
+
+
+### Bug Fixes
+
+* **CardActions:** accept empty array of actions ([8bab724](https://github.com/securityscorecard/design-system/commit/8bab724e016bd2e11eba47edb699ea7fd5fecb1a))
+
 ## [1.4.1](https://github.com/securityscorecard/design-system/compare/v1.4.0...v1.4.1) (2023-05-31)
 
 

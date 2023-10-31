@@ -1,8 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import type { ProgressBarProps } from './ProgressBar.types';
 
-import React from 'react';
-
 import ProgressBar from './ProgressBar';
 import { Stack } from '../layout';
 

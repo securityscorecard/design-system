@@ -1,3 +1,4 @@
+// TODO(rpodrazky): kill this with fire or automate creation
 export const ColorTypes = {
   primary50: 'primary.50',
   primary100: 'primary.100',
@@ -61,4 +62,9 @@ export const ColorTypes = {
   severityLow: 'severity.low',
   severityMedium: 'severity.medium',
   severityHigh: 'severity.high',
+  textPrimary: 'text.primary',
+  textSecondary: 'text.secondary',
+  textContext: 'text.context',
+  textDanger: 'text.danger',
+  textInverted: 'text.inverted',
 } as const;

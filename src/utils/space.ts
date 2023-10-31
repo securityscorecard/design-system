@@ -3,7 +3,7 @@ import type {
   FlattenSimpleInterpolation,
 } from 'styled-components';
 import type { SpacingSizeValue } from '../types/spacing.types';
-import type { Theme } from './helpers';
+import type { ThemeType } from './helpers';
 import type { SpaceSize } from '../theme/space.types';
 
 import { css } from 'styled-components';
@@ -107,7 +107,7 @@ export const createPaddingSpacing = createSpacing('padding');
 export const createSpacings = ({
   margin,
   padding,
-}: Theme): FlattenSimpleInterpolation => css`
+}: ThemeType): FlattenSimpleInterpolation => css`
   ${createMarginSpacing(margin)};
   ${createPaddingSpacing(padding)};
 `;

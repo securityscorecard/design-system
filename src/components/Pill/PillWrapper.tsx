@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { forwardRef } from 'react';
 
 import { SpaceSizes } from '../../theme';
-import { getRadii } from '../../utils';
+import { getRadii, getSpace } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { PillColors, PillColorsEnums } from './Pill.enums';
@@ -12,21 +12,20 @@ import { PillColors, PillColorsEnums } from './Pill.enums';
 const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
   display: inline-block;
   min-width: 0;
-  border-radius: ${getRadii('default')};
+  border-radius: ${getRadii('round')};
+  padding-right: ${getSpace('sm')};
+  padding-left: ${getSpace('sm')};
   ${({ $color }) =>
     css`
       background-color: ${PillColors[$color][0]};
     `}
-
   ${({ $isClickable, $color }) =>
     $isClickable &&
     css`
       cursor: pointer;
 
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: ${PillColors[$color][1]};
-        outline: none;
       }
     `}
 `;

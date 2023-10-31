@@ -26,7 +26,7 @@ const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
         justify="space-between"
       >
         <Inline gap={SpaceSizes.mdPlus}>
-          {actions.map((action) => (
+          {actions?.map((action) => (
             <Button
               key={action.name}
               aria-label={action.ariaLabel}

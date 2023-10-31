@@ -15,4 +15,5 @@ export const controlsConfig = {
     onSearch: action('onSearch'),
     onClear: action('onClear'),
   },
+  onColumnVisibilityChange: action('columnVisibilityChange'),
 };
