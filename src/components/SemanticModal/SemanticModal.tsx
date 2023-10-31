@@ -8,6 +8,7 @@ import type {
   ActionKinds,
   RelativeLinkActionKind,
 } from '../../types/action.types';
+import type { Color } from '../../theme';
 
 import { forwardRef } from 'react';
 import styled from 'styled-components';
@@ -20,7 +21,7 @@ import { Icon } from '../Icon';
 import { H4, Text } from '../typographyLegacy';
 import { getColor, pxToRem } from '../../utils';
 import { Center, Inline, Padbox, Stack } from '../layout';
-import { Color, SpaceSizes } from '../../theme';
+import { SpaceSizes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 
 const colorVariants: Record<keyof typeof SemanticModalVariants, Color> = {

@@ -1,7 +1,6 @@
 import type { DefaultTheme } from 'styled-components';
 import type { ReactNode } from 'react';
-
-import { Subset } from '../../types/utils.types';
+import type { Subset } from '../../types/utils.types';
 
 export interface DSContextValue {
   portalsContainerId: string;

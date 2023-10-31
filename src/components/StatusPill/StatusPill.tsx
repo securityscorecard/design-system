@@ -1,10 +1,9 @@
+import type { StatusPillProps } from './StatusPill.types';
+
 import React from 'react';
 import Styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { StatusDot } from '../StatusDot/index';
-import { StatusDotColors } from '../StatusDot/StatusDot';
-import { StatusPillProps } from './StatusPill.types';
 import PillLabel from '../Pill/PillLabel';
 import { SpaceSizes } from '../../theme';
 import { Inline, Padbox } from '../layout';
@@ -37,8 +36,4 @@ const StatusPill: React.FC<StatusPillProps> = ({
   </StyledPillWrapper>
 );
 
-StatusPill.propTypes = {
-  label: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(Object.keys(StatusDotColors)),
-};
 export default StatusPill;

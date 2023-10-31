@@ -1,8 +1,10 @@
+import type { DefaultTheme } from 'styled-components';
+import type { Subset } from '../../types/utils.types';
+
 import { render, screen } from '@testing-library/react';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import DSProvider from './DSProvider';
-import { Subset } from '../../types/utils.types';
 
 describe('DSProvider', () => {
   const Button = styled.button`

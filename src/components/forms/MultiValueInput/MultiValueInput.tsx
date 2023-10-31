@@ -33,7 +33,6 @@ import {
   omitIndexes,
 } from 'ramda-adjunct';
 import { useDeepCompareEffect } from 'use-deep-compare';
-import 'focus-within-polyfill';
 import cls from 'classnames';
 
 import {

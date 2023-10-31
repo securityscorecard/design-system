@@ -1,10 +1,13 @@
-import { isFunction } from 'ramda-adjunct';
-import React, { ReactNode } from 'react';
-import { DefaultTheme, ThemeProvider } from 'styled-components';
+import type { ReactNode } from 'react';
+import type { DefaultTheme } from 'styled-components';
+import type { Subset } from '../../types/utils.types';
+import type { Theme } from '../theme.types';
 
-import { Subset } from '../../types/utils.types';
+import { isFunction } from 'ramda-adjunct';
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+
 import { createTheme } from '../theme';
-import { Theme } from '../theme.types';
 
 interface DSThemeProviderProps {
   overrides: Subset<Theme> | ((defaultTheme: Theme) => Subset<Theme>);

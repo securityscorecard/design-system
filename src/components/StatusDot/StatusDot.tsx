@@ -1,6 +1,4 @@
-import React from 'react';
 import Styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { getRadii, pxToRem } from '../../utils';
 
@@ -26,9 +24,5 @@ const StatusDot = ({
 }: {
   color: keyof typeof StatusDotColors;
 }) => <StatusDotComponent color={color} role="presentation" />;
-
-StatusDot.propTypes = {
-  color: PropTypes.oneOf(Object.keys(StatusDotColors)),
-};
 
 export default StatusDot;

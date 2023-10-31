@@ -1,4 +1,4 @@
-import { StatusDotColors } from '../StatusDot/StatusDot';
+import type { StatusDotColors } from '../StatusDot/StatusDot';
 
 export interface StatusPillProps {
   color?: keyof typeof StatusDotColors;

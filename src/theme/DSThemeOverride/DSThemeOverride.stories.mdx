@@ -1,6 +1,6 @@
-import { Meta, ArgsTable, Story, Source } from '@storybook/addon-docs';
-import DSThemeOverride from './DSThemeOverride';
+import { ArgsTable, Meta, Source, Story } from '@storybook/addon-docs';
 
+import DSThemeOverride from './DSThemeOverride';
 
 <Meta title="Theme/DSThemeOverride" component={DSThemeOverride} />
 
@@ -15,6 +15,7 @@ theme modifications. Whether it's tweaking colors, adjusting spacing, or fine-tu
 elements, all while maintaining the broader design consistency of the application.
 
 ## Overrides vs. extension
+
 The `DSThemeOverride` component will strictly allowing local override of the theme. If you need to
 extend the default theme with new values you have to pass those to the `DSProvider` component and its
 `theme` property.
@@ -28,7 +29,7 @@ you to assign any value to the overriden object.
 <ArgsTable of={DSThemeOverride} />
 
 ```jsx
-const DarkBox = ({children}) => (
+const DarkBox = ({ children }) => (
   <DSThemeOverride
     overrides={(theme) => ({
       colors: {
@@ -42,11 +43,12 @@ const DarkBox = ({children}) => (
   >
     {children}
   </DSThemeOverride>
-)
+);
 ```
 
 ## Example
-<div style={{display: 'flex', justifyContent: 'center'}}>
-<Story id="components-typography-text--dark-mode" />
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Story id="components-typography-text--dark-mode" />
 </div>
 <Source type="dynamic" id="components-typography-text--dark-mode" />

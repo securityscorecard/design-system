@@ -2,7 +2,7 @@ import type { AccordionVariants } from './Accordion.enums';
 import type { ReactElement } from 'react';
 
 export type AccordionVariant =
-  typeof AccordionVariants[keyof typeof AccordionVariants];
+  (typeof AccordionVariants)[keyof typeof AccordionVariants];
 
 export type AccordionItemId = string;
 
