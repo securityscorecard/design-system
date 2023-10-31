@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header, SortDirection } from '@tanstack/react-table';
+import { SortDirection } from '@tanstack/react-table';
 
-import { DatatableInstance } from '../Datatable.types';
+import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 
 const HeaderCellSortButton = <D,>({
   direction,
@@ -9,7 +9,7 @@ const HeaderCellSortButton = <D,>({
   table,
 }: {
   direction: SortDirection | false;
-  header: Header<D, unknown>;
+  header: DatatableHeader<D>;
   table: DatatableInstance<D>;
 }) => {
   const { column } = header;
@@ -17,9 +17,9 @@ const HeaderCellSortButton = <D,>({
   const { sorting } = table.getState();
 
   const columnName =
-    typeof columnDef.header === 'string'
-      ? columnDef.header
-      : columnDef.header(header.getContext());
+    typeof columnDef.header === 'function'
+      ? columnDef.header(header.getContext())
+      : columnDef.header;
   const label =
     direction === 'desc'
       ? `Sorted by ${columnName} descending`

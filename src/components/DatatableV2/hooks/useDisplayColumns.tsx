@@ -20,7 +20,7 @@ export const useDislayColumns = <D,>(
             cell: ({ table, row }) => <SelectButton row={row} table={table} />,
             ...tableOptions.defaultDisplayColumn,
           },
-        ] as DatatableColumnDef<D>[]
+        ] as Partial<DatatableColumnDef<D>>[]
       ).filter(Boolean),
     [
       tableOptions.enableRowSelection,

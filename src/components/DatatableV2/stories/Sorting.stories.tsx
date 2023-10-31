@@ -17,10 +17,10 @@ export const SortingEnabled: Story = Template.bind({});
 SortingEnabled.args = Template.args;
 
 export const DisabledSorting: Story = Template.bind({});
-DisabledSorting.args = { ...Template.args, hasSorting: false };
+DisabledSorting.args = { ...Template.args, enableSorting: false };
 
 export const DisabledMultiSorting: Story = Template.bind({});
-DisabledMultiSorting.args = { ...Template.args, hasMultiSort: false };
+DisabledMultiSorting.args = { ...Template.args, enableMultiSort: false };
 
 export const DisabledSortingForColumn: Story = Template.bind({});
 DisabledSortingForColumn.args = {
@@ -31,7 +31,7 @@ DisabledSortingForColumn.args = {
 export const DisabledSortingRemoval: Story = Template.bind({});
 DisabledSortingRemoval.args = {
   ...Template.args,
-  hasSortingRemoval: false,
+  enableSortingRemoval: false,
 };
 
 export const InitialSorting: Story = Template.bind({});
