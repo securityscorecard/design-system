@@ -36,6 +36,7 @@ export interface BaseButtonProps
   loadingText?: string;
   iconType?: IconTypes | string;
   as?: ElementType;
+  tabIndex?: number;
 }
 
 export interface BaseStyledButtonProps extends PadboxProps {

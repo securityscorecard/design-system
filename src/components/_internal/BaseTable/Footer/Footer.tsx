@@ -2,17 +2,18 @@ import type { FooterProps } from './Footer.types';
 
 import styled from 'styled-components';
 
-import { pxToRem } from '../../../../utils';
+import { getColor, pxToRem } from '../../../../utils';
 import { Padbox } from '../../../layout';
 import { Spinner } from '../../../Spinner';
 import GoToPage from './GoToPage';
 import { Pagination } from '../../../Pagination';
 import { SpaceSizes } from '../../../../theme';
+import { PaddingTypes } from '../../../layout/Padbox/Padbox.enums';
 
 const StyledFooter = styled(Padbox)`
   display: flex;
-  flex: 0 0 ${pxToRem(64)};
-  height: ${pxToRem(64)};
+  align-items: center;
+  border-top: 1px solid ${getColor('neutral.400')};
 `;
 const LoadingContainer = styled.div`
   padding: ${pxToRem(8, 24, 8, 8)};
@@ -37,6 +38,7 @@ const Footer = ({
       data-testid="footer"
       flexDirection="row"
       paddingSize={SpaceSizes.md}
+      paddingType={PaddingTypes.squish}
     >
       <LoadingContainer>
         {isDataLoading && (

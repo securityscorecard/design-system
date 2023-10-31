@@ -31,6 +31,7 @@ const options = [
   { label: 'Success', value: ToastVariants.success },
   { label: 'Warn', value: ToastVariants.warn },
   { label: 'Error', value: ToastVariants.error },
+  { label: 'Loading', value: ToastVariants.loading },
 ];
 
 export const Playground: Story = () => {

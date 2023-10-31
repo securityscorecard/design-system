@@ -1,14 +1,14 @@
 import type {
+  MultiValueInputProps,
+  ValueContainerProps,
+} from './MultiValueInput.types';
+import type {
   ChangeEventHandler,
   ClipboardEventHandler,
   FocusEventHandler,
   KeyboardEventHandler,
   MouseEventHandler,
 } from 'react';
-import type {
-  MultiValueInputProps,
-  ValueContainerProps,
-} from './MultiValueInput.types';
 
 import { forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -146,13 +146,11 @@ const ClearButton = styled.button`
   padding: ${pxToRem(0, 18)};
   height: ${pxToRem(34)};
   margin: ${pxToRem(1, 0)};
+  outline-offset: 0;
+  border-top-right-radius: ${getRadii('default')};
+  border-bottom-right-radius: ${getRadii('default')};
 
-  &:focus {
-    outline: none;
-  }
-
-  &:hover,
-  &:focus-visible {
+  &:hover {
     color: ${getFormStyle('hoverIndicatorColor')};
   }
 `;
@@ -168,6 +166,7 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
       onValueRemove = noop,
       onValuesChange = noop,
       onInputChange = noop,
+      onPaste = noop,
       placeholder,
       pattern,
       id,
@@ -202,10 +201,9 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
           split(';'),
           map(trim),
           filter(isNonEmptyString),
-          uniq,
         )(newValue);
         const newValues = [...values, ...parsedValues];
-        setValues(newValues);
+        setValues(uniq(newValues));
         onValueAdd(parsedValues, newValues);
         onValuesChange(newValues);
       } else {
@@ -259,10 +257,13 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
 
     const handleInputOnPaste: ClipboardEventHandler<HTMLInputElement> = (e) => {
       e.preventDefault();
-      const pastedValue = (e.clipboardData || window.clipboardData).getData(
-        'text',
-      );
-      addValue(pastedValue);
+      const pastedValue = onPaste(e);
+
+      if (typeof pastedValue === 'string') {
+        addValue(pastedValue);
+      } else {
+        addValue((e.clipboardData || window.clipboardData).getData('text'));
+      }
     };
 
     const handleInputOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -327,6 +328,7 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
           <ValueContainer
             $hasValue={isNonEmptyArray(values)}
             paddingSize={SpaceSizes.xs}
+            style={{ overflow: 'hidden' }}
           >
             {values.map((label, index) => (
               <Pill
@@ -352,7 +354,7 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
                 type="text"
                 value={inputValue}
                 onBlur={handleInputOnBlur}
-                onChange={(e) => handleInputOnChange(e)}
+                onChange={handleInputOnChange}
                 onKeyDown={handleInputOnKeyDown}
                 onPaste={handleInputOnPaste}
               />
@@ -361,7 +363,6 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
           {isClearable && !isDisabled && isNonEmptyArray(values) && (
             <ClearButton
               aria-label="Clear all values"
-              type="reset"
               onClick={handleClearAllOnClick}
               onKeyDown={handleClearAllOnKeyDown}
             >

@@ -3,7 +3,7 @@ import type { ElementCounterProps } from './ElementCounter.types';
 
 import { useEffect, useState } from 'react';
 import { isPositive } from 'ramda-adjunct';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { Text } from '../../../typographyLegacy';
 import { HeadingVariants } from '../../../typographyLegacy/Heading/Heading.enums';
@@ -18,9 +18,8 @@ import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { Icon } from '../../../Icon';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import { DatatableStore } from '../../Datatable.store';
-import { Inline, Padbox } from '../../../layout';
+import { Inline } from '../../../layout';
 import { SpaceSizes } from '../../../../theme';
-import { PaddingTypes } from '../../../layout/Padbox/Padbox.enums';
 
 const SelectionButton = styled.button`
   display: inline-flex;
@@ -56,17 +55,15 @@ export const getCounterContent = (
 
 function ElementCounterWrapper({ children, ...props }) {
   return (
-    <Padbox paddingSize={SpaceSizes.sm} paddingType={PaddingTypes.squish}>
-      <Inline align="center" gap={SpaceSizes.xs} {...props}>
-        {children}
-      </Inline>
-    </Padbox>
+    <Inline align="center" gap={SpaceSizes.xs} {...props}>
+      {children}
+    </Inline>
   );
 }
 ElementCounterWrapper.displayName = 'ElementCounterWrapper';
 
 const CounterText = styled(Text).attrs(() => ({
-  size: 'h4',
+  size: 'md',
   margin: 'none',
   variant: HeadingVariants.secondary,
 }))`
@@ -78,6 +75,7 @@ const ElementCounter = ({
   hasSelection,
   hasOnlyPerPageSelection,
 }: ElementCounterProps) => {
+  const theme = useTheme();
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
       selectedIds: s.selectedIds,
@@ -134,7 +132,10 @@ const ElementCounter = ({
             type="button"
             onClick={handleSelectNoneClick}
           >
-            <Icon name={SSCIconNames.times} />
+            <Icon
+              name={SSCIconNames.times}
+              style={{ fontSize: getFontSize('md', { theme }) }}
+            />
           </SelectionButton>
         )}
       </ElementCounterWrapper>
@@ -169,6 +170,7 @@ const ElementCounter = ({
             <Icon
               data-testid="selection-dropdown"
               name={SSCIconNames.angleDown}
+              style={{ fontSize: getFontSize('md', { theme }) }}
             />
           </SelectionButton>
         </DropdownMenu>

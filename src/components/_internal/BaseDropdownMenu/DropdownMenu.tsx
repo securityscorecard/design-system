@@ -44,9 +44,8 @@ export const DropdownLink = styled(Padbox).withConfig({
   text-align: left;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     background: ${getColor('primary.50')};
-    outline: none;
   }
 `;
 

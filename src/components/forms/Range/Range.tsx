@@ -213,7 +213,7 @@ const Range = forwardRef<HTMLInputElement, RangeProps>(
                 $left={calcPercentage(rangeValue, min, max)}
                 isDisabled={isDisabled}
               >
-                {rangeValue}
+                <Text>{rangeValue}</Text>
               </RangeValue>
             </RangeValueContainer>
           </Stack>

@@ -5,18 +5,17 @@ import { all, isEmpty } from 'ramda';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
 
-import { pxToRem } from '../../../utils';
-import { SpaceSizes } from '../../../theme';
+import { getSpace } from '../../../utils';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { Inline, Padbox } from '../../layout';
+import { Inline } from '../../layout';
 import { ColumnsControls } from '../components/ColumnsControls';
 import { ControlButton } from '../components/ControlButton';
 import { BatchActions } from './BatchActions';
 import { ElementCounter } from './ElementCounter';
 import { DatatableStore } from '../Datatable.store';
 
-const BatchModuleWrapper = styled(Padbox)`
-  min-height: ${pxToRem(64)};
+const BatchModuleWrapper = styled.div`
+  padding: ${getSpace('md')};
 `;
 
 const BatchModule = ({
@@ -50,9 +49,9 @@ const BatchModule = ({
   }, []);
 
   return (
-    <BatchModuleWrapper paddingSize={SpaceSizes.md}>
+    <BatchModuleWrapper>
       <Inline align="center" justify="space-between">
-        <Inline align="center">
+        <Inline align="center" gap="md">
           {isButtonDisplayed && (
             <ColumnsControls
               isOpen={isColumnsActive}
@@ -68,8 +67,8 @@ const BatchModule = ({
               }}
             >
               <ControlButton
-                iconName={SSCIconNames.reorder}
-                label="Columns"
+                iconName={SSCIconNames.columns3}
+                label="Toggle columns"
                 onClick={() => {
                   setIsColumnsActive((prev) => !prev);
                 }}

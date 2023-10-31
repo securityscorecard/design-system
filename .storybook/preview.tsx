@@ -29,7 +29,7 @@ export const parameters = {
         'Overview',
         'Changelog',
         'Theme',
-        ['createIconLibrary()', 'DSProvider', 'Colors', 'Space', 'Typography'],
+        ['createIconLibrary()', 'DSProvider', 'DSThemeOverride', 'Colors', 'Space', 'Typography'],
         'Helpers',
         'layout',
         'components',

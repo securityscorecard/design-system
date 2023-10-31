@@ -50,6 +50,10 @@ import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
 import { SpaceSizes } from '../../../theme';
 import { Button, ButtonEnums } from '../../Button';
 
+const NoDataOutline = styled.div`
+  border-top: 1px solid ${getColor('neutral.400')};
+`;
+
 const NoDataContainer = styled(Padbox)`
   display: flex;
   flex-direction: column;
@@ -345,24 +349,26 @@ function Table<D extends Record<string, unknown>>({
         )}
       </BaseTableAndLoadingOverlayContainer>
       {hiddenColumnsLength === columns.length && (
-        <NoDataContainer>
-          <Stack gap={SpaceSizes.sm} justify="flex-start">
-            <Stack gap={SpaceSizes.md}>
-              <H4>
-                {dataSize} {dataSize === 1 ? 'items' : 'item'} found
-              </H4>
-              <Paragraph size={TextSizes.md}>
-                But all columns are hidden at the moment.
-              </Paragraph>
+        <NoDataOutline>
+          <NoDataContainer>
+            <Stack gap={SpaceSizes.sm} justify="flex-start">
+              <Stack gap={SpaceSizes.md}>
+                <H4>
+                  {dataSize} {dataSize === 1 ? 'items' : 'item'} found
+                </H4>
+                <Paragraph size={TextSizes.md}>
+                  But all columns are hidden at the moment.
+                </Paragraph>
+              </Stack>
+              <Button
+                variant={ButtonEnums.ButtonVariants.text}
+                onClick={resetHiddenColumns}
+              >
+                Show Default Columns
+              </Button>
             </Stack>
-            <Button
-              variant={ButtonEnums.ButtonVariants.text}
-              onClick={resetHiddenColumns}
-            >
-              Show Default Columns
-            </Button>
-          </Stack>
-        </NoDataContainer>
+          </NoDataContainer>
+        </NoDataOutline>
       )}
       {tableDataSize === 0 ? (
         <NoDataContainer>

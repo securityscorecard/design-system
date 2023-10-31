@@ -61,11 +61,13 @@ const ColumnsControls = ({
 
   return (
     <span ref={parentRef}>
-      {children}
+      {typeof children === 'function'
+        ? children({ hiddenColumns: hiddenColumns.length })
+        : children}
       <ControlDropdown
         isOpen={isOpen}
         parentRef={parentRef}
-        title="Columns"
+        title="Toggle columns"
         onClose={handleCloseColumnsControl}
         onReset={handleResetColumnsControl}
         onSubmit={handleApplyColumnsControl}

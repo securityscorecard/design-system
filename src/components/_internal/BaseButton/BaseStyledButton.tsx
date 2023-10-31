@@ -13,7 +13,6 @@ import {
 } from '../../../utils';
 import { BaseButtonVariants } from './BaseButton.enums';
 import { Padbox } from '../../layout';
-import { ButtonColors } from '../../Button/Button.enums';
 
 /*
  * BUTTON VARIANTS
@@ -30,17 +29,6 @@ const ButtonSolid = css<BaseStyledButtonProps>`
     background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
 
-  &:focus-visible,
-  &.focus {
-    background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
-  }
-
-  &:active,
-  &.active {
-    background-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
-  }
-
   &:disabled,
   &.disabled {
     background-color: ${getToken(`color-action-background-disabled`)};
@@ -55,23 +43,10 @@ const ButtonOutline = css<BaseStyledButtonProps>`
 
   &:hover,
   &.hover {
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-  }
-
-  &:focus-visible,
-  &.focus {
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    outline: 4px solid ${(p) => getToken(`color-action-${p.$color}-focus`, p)};
-  }
-
-  &:active,
-  &.active {
     background-color: ${(p) =>
       getToken(`color-action-background-${p.$color}-active`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
-    color: ${(p) => getToken(`color-action-${p.$color}-active`, p)};
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
   }
 
   &:disabled,
@@ -81,46 +56,19 @@ const ButtonOutline = css<BaseStyledButtonProps>`
   }
 `;
 
-const isLinkLike = (color) =>
-  color === ButtonColors.primary || color === ButtonColors.secondary
-    ? 'link-'
-    : '';
 const ButtonText = css<BaseStyledButtonProps>`
   background-color: transparent;
   border-color: transparent;
   padding-left: 0;
   padding-right: 0;
   font-weight: ${getFontWeight('semibold')};
-  color: ${(p) =>
-    getToken(`color-action-${isLinkLike(p.$color)}${p.$color}`, p)};
+  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
 
   &:hover,
   &.hover {
-    color: ${(p) =>
-      getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
-  }
-
-  &:focus-visible,
-  &.focus {
-    background-color: ${(p) =>
-      getToken(
-        `color-action-${isLinkLike(p.$color)}background-${p.$color}-focus`,
-        p,
-      )};
-    color: ${(p) =>
-      getToken(`color-action-${isLinkLike(p.$color)}${p.$color}-hover`, p)};
-    outline: none;
-  }
-
-  &:active,
-  &&&.active {
-    color: ${(p) =>
-      getToken(
-        `color-action-${
-          p.$color === 'primary' || p.$color === 'secondary' ? 'link-' : ''
-        }${p.$color}-active`,
-        p,
-      )};
+    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    background: ${(p) =>
+      getToken(`color-action-background-${p.$color}-focus`, p)};
   }
 
   &:disabled,
@@ -149,6 +97,8 @@ const BaseStyledButton = styled(Padbox).withConfig({
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
+  transition: all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53),
+    transform 50ms cubic-bezier(0.55, 0.085, 0.68, 0.53), outline 0ms;
   ${({ $margin }) => createMarginSpacing($margin)};
   ${({ $isExpanded }) => $isExpanded && 'width: 100%;'};
   ${({ disabled }) => disabled && 'cursor: not-allowed;'};
@@ -162,9 +112,7 @@ const BaseStyledButton = styled(Padbox).withConfig({
     css`
       width: ${pipe(getToken('size-action-size'), pxToRem)};
     `};
-  &:focus {
-    outline: 0;
-  }
+
   ${({ $variant }) => buttonVariants[$variant]};
 
   &,
@@ -172,6 +120,18 @@ const BaseStyledButton = styled(Padbox).withConfig({
   &:focus-visible,
   &:active {
     text-decoration: none;
+  }
+
+  &:active,
+  &&&.active {
+    transform: scale(0.98);
+  }
+
+  @media (prefers-reduced-motion) {
+    &:active,
+    &&&.active {
+      transform: scale(1);
+    }
   }
 `;
 

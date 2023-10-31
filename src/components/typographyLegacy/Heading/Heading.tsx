@@ -18,10 +18,10 @@ import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const primaryVariant = css`
-  color: ${getColor('neutral.900')};
+  color: ${getColor('text.primary')};
 `;
 const secondaryVariant = css`
-  color: ${getColor('neutral.700')};
+  color: ${getColor('text.secondary')};
 `;
 
 const variants = {
@@ -40,15 +40,11 @@ const HeadingBase = css<HeadingProps>`
   ${({ variant }) => variants[variant]};
 `;
 
-const HeadingH0 = styled.h1`
-  ${HeadingBase};
-  font-size: ${getFontSize('h0')};
-  line-height: normal;
-`;
 const HeadingH1 = styled.h1`
   ${HeadingBase};
   font-size: ${getFontSize('h1')};
   line-height: ${getLineHeight('xxl')};
+  font-weight: ${getFontWeight('bold')};
 `;
 const HeadingH2 = styled.h2`
   ${HeadingBase};
@@ -74,7 +70,6 @@ const HeadingH5 = styled.h5`
 `;
 
 const headingSizes = {
-  h0: HeadingH0,
   h1: HeadingH1,
   h2: HeadingH2,
   h3: HeadingH3,
@@ -100,15 +95,6 @@ const Heading = ({
 };
 
 export default Heading;
-
-export const H0 = ({
-  children,
-  ...props
-}: Omit<ComponentPropsWithoutRef<typeof Heading>, 'size'>) => (
-  <Heading size={HeadingSizes.h0} {...props}>
-    {children}
-  </Heading>
-);
 
 export const H1 = ({
   children,

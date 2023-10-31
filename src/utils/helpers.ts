@@ -11,6 +11,7 @@ import type { Depths } from '../theme/depths.types';
 import type { SpaceSize } from '../theme/space.types';
 import type { createRadii } from '../theme/radii';
 import type { DefaultTheme } from 'styled-components';
+import type { createTokens } from '../theme/tokens';
 
 import { css } from 'styled-components';
 import numeral from 'numeral';
@@ -33,7 +34,7 @@ import {
 import { BASE_FONT_SIZE } from '../theme/constants';
 import { ColorTypes } from '../theme/colors.enums';
 
-export type Theme = {
+export type ThemeType = {
   theme?: DefaultTheme;
   margin?: SpacingSizeValue;
   padding?: SpacingSizeValue;
@@ -54,18 +55,24 @@ const dotPath = useWith(path, [split('.')]);
 // getColor :: Color -> Props -> string
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
 // Props - styled-components props object
-export const getColor = curry((color: Color, { theme }: Theme): string => {
-  return either(
-    dotPath(`colors.${color}`),
-    dotPath(`colors.${ColorTypes[color]}`),
-  )(theme);
-});
+type GetColor = {
+  (color: Color, { theme }: ThemeType): string;
+  (color: Color): ({ theme }: ThemeType) => string;
+};
+export const getColor: GetColor = curry(
+  (color: Color, { theme }: ThemeType): string => {
+    return either(
+      dotPath(`colors.${color}`),
+      dotPath(`colors.${ColorTypes[color]}`),
+    )(theme);
+  },
+);
 
 // getFontFamily :: Family -> Props -> string
 // Family - any key of 'family' (src/theme/typography.ts)
 // Props - styled-components props object
 export const getFontFamily = curry(
-  (family: keyof FontFamily, { theme }: Theme): string =>
+  (family: keyof FontFamily, { theme }: ThemeType): string =>
     path(['typography', 'family', family], theme),
 );
 
@@ -73,7 +80,7 @@ export const getFontFamily = curry(
 // Weight - any key of 'weight' (src/theme/typography.ts)
 // Props - styled-components props object
 export const getFontWeight = curry(
-  (weight: keyof FontWeight, { theme }: Theme): string =>
+  (weight: keyof FontWeight, { theme }: ThemeType): string =>
     path(['typography', 'weight', weight], theme),
 );
 
@@ -81,7 +88,7 @@ export const getFontWeight = curry(
 // Size - any key of 'size' (src/theme/typography.ts)
 // Props - styled-components props object
 export const getFontSize = curry(
-  (size: keyof FontSize, { theme }: Theme): string =>
+  (size: keyof FontSize, { theme }: ThemeType): string =>
     path(['typography', 'size', size], theme),
 );
 
@@ -89,7 +96,7 @@ export const getFontSize = curry(
 // Size - any key of 'lineHeight' (src/theme/typography.ts)
 // Props - styled-components props object
 export const getLineHeight = curry(
-  (size: keyof LineHeight, { theme }: Theme): string =>
+  (size: keyof LineHeight, { theme }: ThemeType): string =>
     path(['typography', 'lineHeight', size], theme),
 );
 
@@ -97,7 +104,7 @@ export const getLineHeight = curry(
 // Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object
 export const getRadii = curry(
-  (type: keyof ReturnType<typeof createRadii>, { theme }: Theme): string =>
+  (type: keyof ReturnType<typeof createRadii>, { theme }: ThemeType): string =>
     path(['radii', type], theme),
 );
 
@@ -112,14 +119,14 @@ export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
 // Element - any key of 'depth' (src/theme/depths.ts)
 // Props - styled-components props object
 export const getDepth = curry(
-  (element: keyof Depths, { theme }: Theme): string =>
+  (element: keyof Depths, { theme }: ThemeType): string =>
     path(['depths', element], theme),
 );
 
 // getSpace:: Size -> Props -> string
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
-export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
+export const getSpace = curry((size: SpaceSize, { theme }: ThemeType): string =>
   pipe(path(['space', size]), pxToRem)(theme),
 );
 
@@ -127,7 +134,7 @@ export const getSpace = curry((size: SpaceSize, { theme }: Theme): string =>
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
 export const getNegativeSpace = curry(
-  (size: SpaceSize, { theme }: Theme): string =>
+  (size: SpaceSize, { theme }: ThemeType): string =>
     pipe(path(['space', size]), negate, pxToRem)(theme),
 );
 
@@ -135,7 +142,12 @@ export const getNegativeSpace = curry(
 export const capitalize = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-export const getToken = curry((name, { theme }: Theme): string =>
+type Tokens = keyof ReturnType<typeof createTokens>;
+type GetToken = {
+  (name: Tokens, { theme }: ThemeType): string;
+  (name: Tokens): ({ theme }: ThemeType) => string;
+};
+export const getToken: GetToken = curry((name, { theme }: ThemeType): string =>
   path(['tokens', name])(theme),
 );
 

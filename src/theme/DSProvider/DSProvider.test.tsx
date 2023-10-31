@@ -1,3 +1,6 @@
+import type { DefaultTheme } from 'styled-components';
+import type { Subset } from '../../types/utils.types';
+
 import { render, screen } from '@testing-library/react';
 import styled from 'styled-components';
 
@@ -9,7 +12,9 @@ describe('DSProvider', () => {
     color: ${({ theme }) => theme.colors.neutral[900]};
   `;
 
-  const renderComponent = (theme = undefined) =>
+  const renderComponent = (
+    theme: Subset<DefaultTheme> | undefined = undefined,
+  ) =>
     render(
       <DSProvider theme={theme}>
         <Button>Test</Button>
@@ -20,7 +25,7 @@ describe('DSProvider', () => {
     renderComponent();
     const button = screen.getByRole('button');
 
-    expect(button).toHaveStyleRule('background', '#f0ecfe');
+    expect(button).toHaveStyleRule('background', '#E7F0FF');
     expect(button).toHaveStyleRule('color', '#2a2a2a');
   });
 

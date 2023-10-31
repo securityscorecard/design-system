@@ -62,7 +62,7 @@ const insertSeparators = (items: ReactElement[]) => {
   }, []);
 };
 
-const renderDropdown = (actions: ActionKinds<React.MouseEvent[]>[]) => (
+const renderDropdown = (actions: ActionKinds<MouseEvent[]>[]) => (
   <li key="breadcrumbs-dropdown">
     <DropdownMenu
       actions={actions}

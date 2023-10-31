@@ -7,7 +7,7 @@ import cls from 'classnames';
 import { forwardRef } from 'react';
 
 import { Padbox, Stack } from '../layout';
-import { getColor, getRadii, getShadow, getSpace, getToken } from '../../utils';
+import { getColor, getRadii, getShadow, getSpace } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const InteractiveCard = css`
@@ -16,13 +16,6 @@ const InteractiveCard = css`
 
   &:hover {
     box-shadow: 0 10px 16px rgb(0 0 0 / 7%);
-  }
-
-  &:focus-visible {
-    outline: 0;
-    box-shadow: 0 10px 16px rgb(0 0 0 / 7%),
-      inset 0 0 0 1px ${getToken('color-action-primary')};
-    border-color: ${getToken('color-action-primary')};
   }
 
   &:active {

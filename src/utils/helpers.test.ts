@@ -42,16 +42,16 @@ describe('abbreviateNumber', () => {
 
 describe('getColor', () => {
   it('should return correct color for current keys', () => {
-    expect(getColor(ColorTypes.primary900, { theme })).toBe('#1b0471');
-    expect(getColor(ColorTypes.primary800, { theme })).toBe('#2c1193');
-    expect(getColor(ColorTypes.primary700, { theme })).toBe('#3b1ab7');
-    expect(getColor(ColorTypes.primary600, { theme })).toBe('#4d29d4');
-    expect(getColor(ColorTypes.primary500, { theme })).toBe('#6641f3');
-    expect(getColor(ColorTypes.primary400, { theme })).toBe('#8263f5');
-    expect(getColor(ColorTypes.primary300, { theme })).toBe('#a995f4');
-    expect(getColor(ColorTypes.primary200, { theme })).toBe('#cabdfb');
-    expect(getColor(ColorTypes.primary100, { theme })).toBe('#e5dffd');
-    expect(getColor(ColorTypes.primary50, { theme })).toBe('#f0ecfe');
+    expect(getColor(ColorTypes.primary900, { theme })).toBe('#001A45');
+    expect(getColor(ColorTypes.primary800, { theme })).toBe('#002B72');
+    expect(getColor(ColorTypes.primary700, { theme })).toBe('#003B9D');
+    expect(getColor(ColorTypes.primary600, { theme })).toBe('#014FCF');
+    expect(getColor(ColorTypes.primary500, { theme })).toBe('#1163EA');
+    expect(getColor(ColorTypes.primary400, { theme })).toBe('#3E85FA');
+    expect(getColor(ColorTypes.primary300, { theme })).toBe('#81B0FF');
+    expect(getColor(ColorTypes.primary200, { theme })).toBe('#B4D0FF');
+    expect(getColor(ColorTypes.primary100, { theme })).toBe('#D3E4FF');
+    expect(getColor(ColorTypes.primary50, { theme })).toBe('#E7F0FF');
     expect(getColor(ColorTypes.neutral1000, { theme })).toBe('#000');
     expect(getColor(ColorTypes.neutral900, { theme })).toBe('#2a2a2a');
     expect(getColor(ColorTypes.neutral800, { theme })).toBe('#555555');
@@ -63,11 +63,11 @@ describe('getColor', () => {
     expect(getColor(ColorTypes.neutral200, { theme })).toBe('#f3f3f3');
     expect(getColor(ColorTypes.neutral100, { theme })).toBe('#f9f9f9');
     expect(getColor(ColorTypes.neutral0, { theme })).toBe('#fff');
-    expect(getColor(ColorTypes.info50, { theme })).toBe('#f0ecfe');
-    expect(getColor(ColorTypes.info100, { theme })).toBe('#dad1fc');
-    expect(getColor(ColorTypes.info500, { theme })).toBe('#6641f3');
-    expect(getColor(ColorTypes.info600, { theme })).toBe('#5433d2');
-    expect(getColor(ColorTypes.info700, { theme })).toBe('#41299a');
+    expect(getColor(ColorTypes.info50, { theme })).toBe('#E7F0FF');
+    expect(getColor(ColorTypes.info100, { theme })).toBe('#D3E4FF');
+    expect(getColor(ColorTypes.info500, { theme })).toBe('#1163EA');
+    expect(getColor(ColorTypes.info600, { theme })).toBe('#014FCF');
+    expect(getColor(ColorTypes.info700, { theme })).toBe('#003B9D');
     expect(getColor(ColorTypes.success50, { theme })).toBe('#edf6ef');
     expect(getColor(ColorTypes.success100, { theme })).toBe('#d3e9d7');
     expect(getColor(ColorTypes.success500, { theme })).toBe('#49a25a');
@@ -83,18 +83,18 @@ describe('getColor', () => {
     expect(getColor(ColorTypes.error500, { theme })).toBe('#b21f24');
     expect(getColor(ColorTypes.error600, { theme })).toBe('#971a1f');
     expect(getColor(ColorTypes.error700, { theme })).toBe('#7e161a');
-    expect(getColor(ColorTypes.gradeA, { theme })).toBe('#4aba00');
-    expect(getColor(ColorTypes.gradeB, { theme })).toBe('#e5bd00');
-    expect(getColor(ColorTypes.gradeC, { theme })).toBe('#f08f00');
-    expect(getColor(ColorTypes.gradeD, { theme })).toBe('#f1431c');
-    expect(getColor(ColorTypes.gradeF, { theme })).toBe('#b40000');
+    expect(getColor(ColorTypes.gradeA, { theme })).toBe('#4BBA76');
+    expect(getColor(ColorTypes.gradeB, { theme })).toBe('#FFB147');
+    expect(getColor(ColorTypes.gradeC, { theme })).toBe('#FB7A4F');
+    expect(getColor(ColorTypes.gradeD, { theme })).toBe('#F32E43');
+    expect(getColor(ColorTypes.gradeF, { theme })).toBe('#B81143');
     expect(getColor(ColorTypes.severityInformational, { theme })).toBe(
-      '#0275D8',
+      '#5580D7',
     );
-    expect(getColor(ColorTypes.severityPositive, { theme })).toBe('#49A25A');
-    expect(getColor(ColorTypes.severityLow, { theme })).toBe('#E4BE00');
-    expect(getColor(ColorTypes.severityMedium, { theme })).toBe('#E5883C');
-    expect(getColor(ColorTypes.severityHigh, { theme })).toBe('#B21F24');
+    expect(getColor(ColorTypes.severityPositive, { theme })).toBe('#4BBA76');
+    expect(getColor(ColorTypes.severityLow, { theme })).toBe('#FFB147');
+    expect(getColor(ColorTypes.severityMedium, { theme })).toBe('#FB7A4F');
+    expect(getColor(ColorTypes.severityHigh, { theme })).toBe('#F32E43');
   });
 });
 

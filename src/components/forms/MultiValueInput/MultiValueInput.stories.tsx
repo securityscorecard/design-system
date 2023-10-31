@@ -52,6 +52,15 @@ export const Playground = {
     onValueRemove: action('OnValueRemove'),
     onValuesChange: action('OnValuesChange'),
     onInputChange: action('OnInputChange'),
+    onPaste: (e) => {
+      const pastedValue = (e.clipboardData || window.clipboardData).getData(
+        'text',
+      );
+      return pastedValue
+        .split(';')
+        .filter((i) => i !== '3')
+        .join(';');
+    },
   },
 };
 

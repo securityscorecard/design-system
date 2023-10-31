@@ -135,3 +135,12 @@ export const InfoToastWithActions: Story = () => (
     </Stack>
   </Toast>
 );
+
+export const LoadingToastVariant: Story = () => (
+  <Toast variant={ToastVariants.loading} onClose={action('close-toast')}>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non massa a
+      lacus posuere.
+    </p>
+  </Toast>
+);

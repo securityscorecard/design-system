@@ -1,7 +1,8 @@
 import type { ComponentPropsWithRef } from 'react';
 import type { LinkProps } from './Link.types';
 
-import styled from 'styled-components';
+import { useContext } from 'react';
+import styled, { css } from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -10,10 +11,27 @@ import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
 import {
   LinkActiveStyles,
   LinkBaseStyles,
-  LinkFocusStyles,
   LinkHoverStyles,
 } from '../../_internal/BaseLink';
 import { CLX_TYPOGRAPHY } from '../../../theme/constants';
+import { DSContext } from '../../../theme/DSProvider/DSProvider';
+import { getColor, getFontWeight, getToken } from '../../../utils';
+
+const experimetalLink = css<Required<{ $color: LinkProps['color'] }>>`
+  text-decoration: underline;
+  font-weight: ${getFontWeight('regular')};
+
+  &:hover {
+    color: ${({ $color, theme }) =>
+      $color === LinkColors.secondary
+        ? getColor('neutral.700', { theme })
+        : getToken(`color-action-link-primary-hover`, { theme })};
+  }
+
+  &:focus-visible {
+    text-decoration: none;
+  }
+`;
 
 const LinkRoot = styled.a`
   ${LinkBaseStyles};
@@ -22,13 +40,11 @@ const LinkRoot = styled.a`
     ${LinkHoverStyles};
   }
 
-  &:focus-visible {
-    ${LinkFocusStyles};
-  }
-
   &:active {
     ${LinkActiveStyles};
   }
+
+  ${({ $isExperimental }) => $isExperimental && experimetalLink}
 `;
 
 const Link = ({
@@ -45,6 +61,7 @@ const Link = ({
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();
   }
+  const { experimental } = useContext(DSContext);
 
   const domTag =
     as ||
@@ -67,6 +84,7 @@ const Link = ({
       to={to}
       onClick={onClick}
       {...props}
+      $isExperimental={experimental.accessibleLink}
     >
       {children}
     </LinkRoot>

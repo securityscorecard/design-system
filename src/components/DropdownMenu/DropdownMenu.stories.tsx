@@ -10,6 +10,7 @@ import DropdownMenu from '../_internal/BaseDropdownMenu/DropdownMenu';
 import { subactionsMock } from '../Datatable/mocks/actions';
 import { Inline, Padbox } from '../layout';
 import { pxToRem } from '../../utils';
+import { Button } from '../Button';
 
 const Wrapper = styled(Padbox)`
   margin-bottom: ${pxToRem(100)};
@@ -62,7 +63,9 @@ export default {
 
 export const Default: Story<DropdownMenuProps> = (args) => (
   <Inline justify="center">
-    <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
+    <DropdownMenu {...args}>
+      <Button>Handler</Button>
+    </DropdownMenu>
   </Inline>
 );
 Default.args = {

@@ -8,7 +8,6 @@ import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { Text } from '../typographyLegacy';
 import { Icon } from '../Icon';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { CalloutColors } from './Callout.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -32,7 +31,7 @@ const IconContainer = styled.div<CalloutContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${getFontSize('mdPlus')};
+  font-size: ${getFontSize('lg')};
   ${({ $color }) => calloutIconColors[$color]};
 `;
 
@@ -77,9 +76,7 @@ const Callout = forwardRef<HTMLSpanElement, CalloutProps>(
             icon
           )}
         </IconContainer>
-        <Text size={TextSizes.lg} style={{ alignSelf: 'center' }}>
-          {children}
-        </Text>
+        <Text style={{ alignSelf: 'center' }}>{children}</Text>
       </Inline>
     </Container>
   ),
