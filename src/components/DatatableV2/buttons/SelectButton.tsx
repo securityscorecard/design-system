@@ -1,7 +1,6 @@
-import { Row } from '@tanstack/react-table';
 import React, { ComponentProps, useEffect, useRef } from 'react';
 
-import { DatatableInstance } from '../Datatable.types';
+import { DatatableInstance, DatatableRow } from '../Datatable.types';
 
 const IndeterminateCheckbox = ({
   indeterminate,
@@ -30,7 +29,7 @@ const SelectButton = <D,>({
   table,
   isSelectAll,
 }: {
-  row?: Row<D>;
+  row?: DatatableRow<D>;
   table: DatatableInstance<D>;
   isSelectAll?: boolean;
 }) => {

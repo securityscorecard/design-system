@@ -25,10 +25,10 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
       }) => ReactNode)
     | ReactNode;
   cell?: (props: {
-    cell: Cell<D, V>;
+    cell: DatatableCell<D>;
     column: DatatableColumn<D, V>;
     renderedCellValue: ReactNode;
-    row: Row<D>;
+    row: DatatableRow<D>;
     rowRef?: RefObject<HTMLTableRowElement>;
     table: DatatableInstance<D>;
   }) => ReactNode;
@@ -63,6 +63,20 @@ export type DatatableHeader<D> = Omit<
   };
 };
 
+export type DatatableCell<D> = Omit<Cell<D, unknown>, 'column'> & {
+  column: DatatableColumn<D>;
+};
+
+export type DatatableRow<D> = Omit<Row<D>, 'getVisibleCells'> & {
+  getVisibleCells: () => DatatableCell<D>[];
+};
+
+export interface DatatableRowModel<D> {
+  flatRows: DatatableRow<D>[];
+  rows: DatatableRow<D>[];
+  rowsById: { [key: string]: DatatableRow<D> };
+}
+
 export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
   headers: DatatableHeader<D>[];
 };
@@ -85,7 +99,11 @@ export interface ParsedDatatableOptions<D>
 }
 
 export interface DatatableInstance<D>
-  extends Omit<Partial<Table<D>>, 'options' | 'getHeaderGroups'> {
+  extends Omit<
+    Partial<Table<D>>,
+    'options' | 'getRowModel' | 'getHeaderGroups'
+  > {
+  getRowModel: () => DatatableRowModel<D>;
   getHeaderGroups: () => DatatableHeaderGroup<D>[];
   options: ParsedDatatableOptions<D>;
 }
@@ -145,6 +163,11 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableHiding?: boolean;
+
+  /**
+   * @default true
+   */
+  enablePinning?: boolean;
 
   /**
    * @default true
