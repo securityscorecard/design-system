@@ -38,7 +38,10 @@ export const InitialSorting: Story = Template.bind({});
 InitialSorting.args = {
   ...Template.args,
   initialState: {
-    sorting: [{ id: 'organization_name', desc: true }],
+    sorting: [
+      { id: 'organization_grade', desc: true },
+      { id: 'organization_name', desc: false },
+    ],
   },
 };
 

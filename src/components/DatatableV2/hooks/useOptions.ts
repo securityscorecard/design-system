@@ -1,12 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import { T } from 'ramda';
-
 import { DatatableOptions, ParsedDatatableOptions } from '../Datatable.types';
 
 export const useOptions = <D>({
   columns,
   data,
   enableColumnActions = true,
+  enableHiding = true,
   enableMultiRowSelection = true,
   enableMultiSort = true,
   enablePagination = true,
@@ -32,9 +31,12 @@ export const useOptions = <D>({
     data,
     defaultDisplayColumn: {
       columnDefType: 'display',
+      enableColumnActions: false,
+      enableHiding: false,
       enableSorting: false,
     },
     enableColumnActions,
+    enableHiding,
     enableMultiRowSelection,
     enableMultiSort,
     enablePagination,
@@ -43,7 +45,6 @@ export const useOptions = <D>({
     enableSelectAll,
     enableSorting,
     enableSortingRemoval,
-    isMultiSortEvent: T,
     manualPagination: __manualPagination,
     renderRowSelectionActions,
     rowsPerPageOptions,
