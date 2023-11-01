@@ -4,6 +4,7 @@ import { flexRender } from '@tanstack/react-table';
 import HeaderCellSortButton from './HeaderCellSortButton';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import HeaderCellColumnActionsButton from './HeaderCellColumnActionsButton';
+import { getCommonCellStyles } from '../columns.utils';
 
 const HeaderCell = <D,>({
   header,
@@ -15,19 +16,23 @@ const HeaderCell = <D,>({
   const {
     options: { enableColumnActions },
   } = table;
-  const {
-    column: { columnDef, getCanSort, getIsSorted, getToggleSortingHandler },
-    getContext,
-    id,
-    isPlaceholder,
-  } = header;
+  const { column, getContext, id, isPlaceholder } = header;
+  const { columnDef, getCanSort, getIsSorted, getToggleSortingHandler } =
+    column;
 
   const showColumnActions =
     (enableColumnActions || columnDef?.enableColumnActions) &&
     columnDef?.enableColumnActions !== false;
 
   return (
-    <th key={id} className="ds-table-header-cell ds-table-cell">
+    <th
+      key={id}
+      className="ds-table-header-cell ds-table-cell"
+      style={getCommonCellStyles({
+        table,
+        column,
+      })}
+    >
       {/* I know what I'm doing here */}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <span
