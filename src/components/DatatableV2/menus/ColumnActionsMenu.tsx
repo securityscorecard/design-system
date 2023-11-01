@@ -1,4 +1,5 @@
 import React from 'react';
+import { ColumnPinningPosition } from '@tanstack/react-table';
 
 import { ControlledDropdown } from '../../Dropdown';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
@@ -26,16 +27,17 @@ const ColumnActionsMenu = <D,>({
   table: DatatableInstance<D>;
 }) => {
   const {
-    options: { enableSorting, enableHiding, enableSortingRemoval },
+    options: {
+      enableHiding,
+      enablePinning,
+      enableSorting,
+      enableSortingRemoval,
+    },
   } = table;
   const { column } = header;
 
-  const handleSortAsc = () => {
-    column.toggleSorting(false);
-    setButtonRef(null);
-  };
-  const handleSortDesc = () => {
-    column.toggleSorting(true);
+  const handleSort = (isDesc: boolean) => {
+    column.toggleSorting(isDesc);
     setButtonRef(null);
   };
   const handleClearSort = () => {
@@ -46,27 +48,31 @@ const ColumnActionsMenu = <D,>({
     column.toggleVisibility(false);
     setButtonRef(null);
   };
+  const handlePinColumn = (dir: ColumnPinningPosition) => {
+    column.pin(dir);
+    setButtonRef(null);
+  };
 
   const columnActionsMenu = [
     ...(enableSorting && column.getCanSort()
       ? [
           <MenuItem
-            key={0}
+            key="col-action-sort-asc"
             isDisabled={column.getIsSorted() === 'asc'}
-            onClick={handleSortAsc}
+            onClick={() => handleSort(false)}
           >
             🔼 Ascending sort
           </MenuItem>,
           <MenuItem
-            key={1}
+            key="col-action-sort-desc"
             isDisabled={column.getIsSorted() === 'desc'}
-            onClick={handleSortDesc}
+            onClick={() => handleSort(true)}
           >
             🔽 Descending sort
           </MenuItem>,
           enableSortingRemoval !== false && (
             <MenuItem
-              key={2}
+              key="col-action-sort-reset"
               isDisabled={!column.getIsSorted()}
               onClick={handleClearSort}
             >
@@ -77,8 +83,33 @@ const ColumnActionsMenu = <D,>({
       : []),
     ...(enableHiding && column.getCanHide()
       ? [
-          <MenuItem key={3} onClick={handleHideColumn}>
+          <MenuItem key="col-action-hide-col" onClick={handleHideColumn}>
             👀 Hide column
+          </MenuItem>,
+        ]
+      : []),
+    ...(enablePinning && column.getCanPin()
+      ? [
+          <MenuItem
+            key="col-action-pin-left"
+            isDisabled={column.getIsPinned() === 'left'}
+            onClick={() => handlePinColumn('left')}
+          >
+            📌 Pin column to left
+          </MenuItem>,
+          <MenuItem
+            key="col-action-pin-right"
+            isDisabled={column.getIsPinned() === 'right'}
+            onClick={() => handlePinColumn('right')}
+          >
+            📌 Pin column to right
+          </MenuItem>,
+          <MenuItem
+            key="col-action-pin-reset"
+            isDisabled={!column.getIsPinned()}
+            onClick={() => handlePinColumn(false)}
+          >
+            ❌ Unpin column
           </MenuItem>,
         ]
       : []),
