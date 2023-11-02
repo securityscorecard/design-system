@@ -43,7 +43,7 @@ const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   text-align: left;
   box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
   animation: ${ToastFromTop} 0.5s;
-  border: 1px solid ${getColor('neutral.500')};
+  border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};
   overflow: hidden;
 `;

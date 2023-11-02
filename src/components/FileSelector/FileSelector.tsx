@@ -19,7 +19,7 @@ import { CLX_COMPONENT } from '../../theme/constants';
 import { useLogger } from '../../hooks/useLogger';
 
 const ExtendableButton = styled(Button)``;
-const FileSelectorWrapper = styled(Padbox)`
+const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
   background-color: ${getColor('neutral.0')};
   border: 1px dashed ${getColor('neutral.500')};
   border-radius: ${getRadii('default')};

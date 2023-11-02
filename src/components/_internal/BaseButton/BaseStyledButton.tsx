@@ -6,6 +6,7 @@ import {
   getFontFamily,
   getFontWeight,
   getRadii,
+  getSpace,
   getToken,
   pxToRem,
 } from '../../../utils';
@@ -76,10 +77,17 @@ const ButtonText = css<BaseStyledButtonProps>`
   }
 `;
 
+const ButtonGhost = css<BaseStyledButtonProps>`
+  ${ButtonText}
+  padding-left: ${getSpace('sm')};
+  padding-right: ${getSpace('sm')};
+`;
+
 const buttonVariants = {
   [BaseButtonVariants.solid]: ButtonSolid,
   [BaseButtonVariants.outline]: ButtonOutline,
   [BaseButtonVariants.text]: ButtonText,
+  [BaseButtonVariants.ghost]: ButtonGhost,
 };
 
 const BaseStyledButton = styled(Padbox).withConfig({
