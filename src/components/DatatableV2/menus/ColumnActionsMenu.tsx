@@ -27,14 +27,18 @@ const ColumnActionsMenu = <D,>({
   table: DatatableInstance<D>;
 }) => {
   const {
+    getState,
     options: {
+      enableColumnPinning,
+      enableColumnResizing,
       enableHiding,
-      enablePinning,
       enableSorting,
       enableSortingRemoval,
     },
+    setColumnSizingInfo,
   } = table;
   const { column } = header;
+  const { columnSizing } = getState();
 
   const handleSort = (isDesc: boolean) => {
     column.toggleSorting(isDesc);
@@ -51,6 +55,13 @@ const ColumnActionsMenu = <D,>({
   const handlePinColumn = (dir: ColumnPinningPosition) => {
     column.pin(dir);
     setButtonRef(null);
+  };
+  const handleResetColumnSize = () => {
+    setColumnSizingInfo((old) => ({
+      ...old,
+      isResizingColumn: false,
+    }));
+    column.resetSize();
   };
 
   const columnActionsMenu = [
@@ -88,28 +99,39 @@ const ColumnActionsMenu = <D,>({
           </MenuItem>,
         ]
       : []),
-    ...(enablePinning && column.getCanPin()
+    ...(enableColumnPinning && column.getCanPin()
       ? [
           <MenuItem
             key="col-action-pin-left"
             isDisabled={column.getIsPinned() === 'left'}
             onClick={() => handlePinColumn('left')}
           >
-            📌 Pin column to left
+            📌 Pin column
           </MenuItem>,
-          <MenuItem
-            key="col-action-pin-right"
-            isDisabled={column.getIsPinned() === 'right'}
-            onClick={() => handlePinColumn('right')}
-          >
-            📌 Pin column to right
-          </MenuItem>,
+          // <MenuItem
+          //   key="col-action-pin-right"
+          //   isDisabled={column.getIsPinned() === 'right'}
+          //   onClick={() => handlePinColumn('right')}
+          // >
+          //   📌 Pin column to right
+          // </MenuItem>,
           <MenuItem
             key="col-action-pin-reset"
             isDisabled={!column.getIsPinned()}
             onClick={() => handlePinColumn(false)}
           >
             ❌ Unpin column
+          </MenuItem>,
+        ]
+      : []),
+    ...(enableColumnResizing && column.getCanResize()
+      ? [
+          <MenuItem
+            key="col-action-size-reset"
+            isDisabled={!columnSizing[column.id]}
+            onClick={() => handleResetColumnSize()}
+          >
+            ❌ Reset column size
           </MenuItem>,
         ]
       : []),
