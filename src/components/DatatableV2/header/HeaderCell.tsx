@@ -5,6 +5,7 @@ import HeaderCellSortButton from './HeaderCellSortButton';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import HeaderCellColumnActionsButton from './HeaderCellColumnActionsButton';
 import { getCommonCellStyles } from '../columns.utils';
+import HeaderCellResizeHandler from './HeaderCellResizeHandler';
 
 const HeaderCell = <D,>({
   header,
@@ -16,9 +17,14 @@ const HeaderCell = <D,>({
   const {
     options: { enableColumnActions },
   } = table;
-  const { column, getContext, id, isPlaceholder } = header;
-  const { columnDef, getCanSort, getIsSorted, getToggleSortingHandler } =
-    column;
+  const { column, getContext, getSize, id, isPlaceholder } = header;
+  const {
+    columnDef,
+    getCanResize,
+    getCanSort,
+    getIsSorted,
+    getToggleSortingHandler,
+  } = column;
 
   const showColumnActions =
     (enableColumnActions || columnDef?.enableColumnActions) &&
@@ -28,10 +34,14 @@ const HeaderCell = <D,>({
     <th
       key={id}
       className="ds-table-header-cell ds-table-cell"
-      style={getCommonCellStyles({
-        table,
-        column,
-      })}
+      style={{
+        ...getCommonCellStyles({
+          table,
+          header,
+          column,
+        }),
+        width: getSize(),
+      }}
     >
       {/* I know what I'm doing here */}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
@@ -50,6 +60,9 @@ const HeaderCell = <D,>({
       )}
       {showColumnActions && (
         <HeaderCellColumnActionsButton header={header} table={table} />
+      )}
+      {getCanResize() && (
+        <HeaderCellResizeHandler header={header} table={table} />
       )}
     </th>
   );
