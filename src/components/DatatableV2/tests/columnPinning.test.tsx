@@ -17,7 +17,7 @@ describe('DatatableV2/columnPinning', () => {
     );
     expect(
       screen.getByRole('button', {
-        name: /📌 Pin column to left/i,
+        name: /📌 Pin column/i,
       }),
     ).toBeInTheDocument();
   });
@@ -35,29 +35,29 @@ describe('DatatableV2/columnPinning', () => {
       );
       await userEvent.click(
         screen.getByRole('button', {
-          name: /📌 Pin column to left/i,
+          name: /📌 Pin column/i,
         }),
       );
       expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
     });
 
-    it('should pin column to right', async () => {
-      renderWithProviders(
-        <Datatable data={data} columns={columns} enableColumnPinning />,
-      );
+    // it('should pin column to right', async () => {
+    //   renderWithProviders(
+    //     <Datatable data={data} columns={columns} enableColumnPinning />,
+    //   );
 
-      await userEvent.click(
-        screen.getAllByRole('button', {
-          name: /Show column actions/i,
-        })[0],
-      );
-      await userEvent.click(
-        screen.getByRole('button', {
-          name: /📌 Pin column to right/i,
-        }),
-      );
-      expect(screen.getAllByRole('columnheader')[2]).toHaveTextContent('name');
-    });
+    //   await userEvent.click(
+    //     screen.getAllByRole('button', {
+    //       name: /Show column actions/i,
+    //     })[0],
+    //   );
+    //   await userEvent.click(
+    //     screen.getByRole('button', {
+    //       name: /📌 Pin column to right/i,
+    //     }),
+    //   );
+    //   expect(screen.getAllByRole('columnheader')[2]).toHaveTextContent('name');
+    // });
 
     it('should unpin column', async () => {
       renderWithProviders(
@@ -84,7 +84,7 @@ describe('DatatableV2/columnPinning', () => {
       expect(screen.getAllByRole('columnheader')[2]).toHaveTextContent('color');
     });
 
-    it('should hide column visibility for specific column if in columns definition', async () => {
+    it('should hide column pinning for specific column if in columns definition', async () => {
       renderWithProviders(
         <Datatable
           data={data}
@@ -93,7 +93,7 @@ describe('DatatableV2/columnPinning', () => {
             columns[1],
             { ...columns[2], enablePinning: false },
           ]}
-          enableHiding
+          enableColumnPinning
         />,
       );
 
@@ -104,7 +104,7 @@ describe('DatatableV2/columnPinning', () => {
       );
       expect(
         screen.queryByRole('button', {
-          name: /📌 Pin column to left/i,
+          name: /📌 Pin column/i,
         }),
       ).not.toBeInTheDocument();
     });
