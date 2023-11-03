@@ -109,7 +109,10 @@ export interface DatatableInstance<D>
 }
 
 export interface DatatableOptions<D>
-  extends Omit<Partial<TableOptions<D>>, 'data' | 'columns'> {
+  extends Omit<
+    Partial<TableOptions<D>>,
+    'data' | 'columns' | 'columnResizeMode' | 'enablePinning'
+  > {
   data: D[];
   columns: DatatableColumnDef<D>[];
 
@@ -167,10 +170,15 @@ export interface DatatableOptions<D>
   /**
    * @default true
    */
-  enablePinning?: boolean;
+  enableColumnPinning?: boolean;
 
   /**
    * @default true
    */
   enableColumnActions?: boolean;
+
+  /**
+   * @default true
+   */
+  enableColumnResizing?: boolean;
 }
