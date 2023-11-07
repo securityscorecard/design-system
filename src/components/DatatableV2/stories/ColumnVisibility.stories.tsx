@@ -22,7 +22,10 @@ DisabledColumnVisibility.args = { ...Template.args, enableHiding: false };
 export const DisabledColumnVisibilityForColumn: Story = Template.bind({});
 DisabledColumnVisibilityForColumn.args = {
   ...Template.args,
-  columns: [...columns, { accessorKey: 'country', enableHiding: false }],
+  columns: [
+    ...columns,
+    { accessorKey: 'country', header: 'Country', enableHiding: false },
+  ],
 };
 
 export const InitialColumnVisibility: Story = Template.bind({});

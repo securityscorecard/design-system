@@ -4,6 +4,7 @@ import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
 import Header from '../header/Header';
 import { parseCSSVarId } from '../columns.utils';
+import Settings from '../panels/Settings';
 
 const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -11,7 +12,12 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     getState,
     options: { columns },
   } = table;
-  const { columnSizing, columnSizingInfo, columnVisibility } = getState();
+  const {
+    columnSizing,
+    columnSizingInfo,
+    columnVisibility,
+    showColumnSettings,
+  } = getState();
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();
@@ -29,10 +35,13 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
 
   return (
-    <table className="ds-table" style={columnSizeVars}>
-      <Header table={table} />
-      <Body table={table} />
-    </table>
+    <div>
+      <table className="ds-table" style={columnSizeVars}>
+        <Header table={table} />
+        <Body table={table} />
+      </table>
+      {showColumnSettings && <Settings table={table} />}
+    </div>
   );
 };
 
