@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import SelectButton from '../buttons/SelectButton';
 import { DatatableColumnDef, ParsedDatatableOptions } from '../Datatable.types';
 
-export const useDislayColumns = <D,>(
+export const useDisplayColumns = <D,>(
   tableOptions: ParsedDatatableOptions<D>,
 ) => {
   return useMemo(
@@ -12,15 +12,17 @@ export const useDislayColumns = <D,>(
         [
           tableOptions.enableRowSelection && {
             id: 'select',
-            header:
+            header: '',
+            headerComponent:
               tableOptions.enableSelectAll &&
               tableOptions.enableMultiRowSelection
                 ? ({ table }) => <SelectButton table={table} isSelectAll />
                 : null,
             cell: ({ table, row }) => <SelectButton row={row} table={table} />,
+            size: 40,
             ...tableOptions.defaultDisplayColumn,
           },
-        ] as Partial<DatatableColumnDef<D>>[]
+        ] as DatatableColumnDef<D>[]
       ).filter(Boolean),
     [
       tableOptions.enableRowSelection,

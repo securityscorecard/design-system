@@ -27,6 +27,7 @@ export const CustomRowsPerPageOptions: Story = Template.bind({});
 CustomRowsPerPageOptions.args = {
   ...Template.args,
   rowsPerPageOptions: [5, 10, 15],
+  initialState: { pagination: { pageIndex: 3 } },
 };
 
 export const InitialPagination: Story = Template.bind({});

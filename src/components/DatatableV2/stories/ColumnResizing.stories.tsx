@@ -22,7 +22,10 @@ DisabledColumnResizing.args = { ...Template.args, enableColumnResizing: false };
 export const DisabledColumnResizingForColumn: Story = Template.bind({});
 DisabledColumnResizingForColumn.args = {
   ...Template.args,
-  columns: [...columns, { accessorKey: 'country', enableResizing: false }],
+  columns: [
+    ...columns,
+    { accessorKey: 'country', header: 'Country', enableResizing: false },
+  ],
 };
 
 export const CustomDefaultColumnWidths: Story = Template.bind({});
@@ -38,7 +41,10 @@ CustomDefaultColumnWidths.args = {
 export const SpecificSizingForColumn: Story = Template.bind({});
 SpecificSizingForColumn.args = {
   ...Template.args,
-  columns: [...columns, { accessorKey: 'country', size: 400 }],
+  columns: [
+    ...columns,
+    { accessorKey: 'country', header: 'Country', size: 400 },
+  ],
 };
 
 export const InitialColumnResizing: Story = Template.bind({});

@@ -22,7 +22,10 @@ DisabledColumnPinning.args = { ...Template.args, enableColumnPinning: false };
 export const DisabledColumnPinningForColumn: Story = Template.bind({});
 DisabledColumnPinningForColumn.args = {
   ...Template.args,
-  columns: [...columns, { accessorKey: 'country', enablePinning: false }],
+  columns: [
+    ...columns,
+    { accessorKey: 'country', header: 'Country', enablePinning: false },
+  ],
 };
 
 export const InitialColumnPinning: Story = Template.bind({});

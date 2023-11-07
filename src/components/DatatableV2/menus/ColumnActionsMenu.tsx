@@ -36,6 +36,7 @@ const ColumnActionsMenu = <D,>({
       enableSortingRemoval,
     },
     setColumnSizingInfo,
+    setShowColumnSettings,
   } = table;
   const { column } = header;
   const { columnSizing } = getState();
@@ -62,6 +63,11 @@ const ColumnActionsMenu = <D,>({
       isResizingColumn: false,
     }));
     column.resetSize();
+    setButtonRef(null);
+  };
+  const handleColumnSettings = () => {
+    setShowColumnSettings((old) => !old);
+    setButtonRef(null);
   };
 
   const columnActionsMenu = [
@@ -132,6 +138,13 @@ const ColumnActionsMenu = <D,>({
             onClick={() => handleResetColumnSize()}
           >
             ❌ Reset column size
+          </MenuItem>,
+        ]
+      : []),
+    ...(enableHiding || enableColumnPinning
+      ? [
+          <MenuItem key="col-action-settings" onClick={handleColumnSettings}>
+            ⚙️ Column settings
           </MenuItem>,
         ]
       : []),

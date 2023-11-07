@@ -13,7 +13,7 @@ export const data: Data[] = [
 ];
 
 export const columns: DatatableColumnDef<Data>[] = [
-  { accessorKey: 'name' },
-  { accessorKey: 'surname' },
-  { accessorKey: 'color' },
+  { accessorKey: 'name', header: 'name' },
+  { accessorKey: 'surname', header: 'surname' },
+  { accessorKey: 'color', header: 'color' },
 ];

@@ -1,23 +1,33 @@
 import {
+  AccessorFn,
   Cell,
   Column,
   ColumnDef,
   DeepKeys,
+  Getter,
   Header,
   HeaderGroup,
+  InitialTableState,
   Row,
   Table,
   TableOptions,
+  TableState,
 } from '@tanstack/react-table';
-import { ReactNode, RefObject } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
   'accessorFn' | 'accessorFn' | 'cell' | 'header'
 > & {
-  accessorFn?: (originalRow: D) => V;
+  accessorFn?: AccessorFn<D, V>;
   accessorKey?: DeepKeys<D> | (string & Record<string, unknown>);
-  header?:
+  /**
+   * `header` is used as a readable column name on multiple places withing the table UI.
+   *
+   *  If you want to render custom JSX in that table header cell use `headerComponent` property.
+   */
+  header: string;
+  headerComponent?:
     | ((props: {
         column: DatatableColumn<D, V>;
         header: DatatableHeader<D>;
@@ -27,9 +37,9 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
   cell?: (props: {
     cell: DatatableCell<D>;
     column: DatatableColumn<D, V>;
-    renderedCellValue: ReactNode;
+    getValue: Getter<V>;
+    renderValue: Getter<V | null>;
     row: DatatableRow<D>;
-    rowRef?: RefObject<HTMLTableRowElement>;
     table: DatatableInstance<D>;
   }) => ReactNode;
   columnDefType?: 'display' | 'data';
@@ -81,6 +91,12 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
   headers: DatatableHeader<D>[];
 };
 
+interface CustomState {
+  showColumnSettings: boolean;
+}
+export type DatatableInitialState = InitialTableState & CustomState;
+export type DatatableState = TableState & CustomState;
+
 export interface ParsedDatatableOptions<D>
   extends Omit<Partial<TableOptions<D>>, 'data' | 'columns'> {
   columns: DatatableOptions<D>['columns'];
@@ -92,29 +108,46 @@ export interface ParsedDatatableOptions<D>
   enablePagination?: DatatableOptions<D>['enablePagination'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
+  initialState?: DatatableOptions<D>['initialState'];
+  onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
+  renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
   rowsCount?: DatatableOptions<D>['rowsCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
   selectAllMode?: DatatableOptions<D>['selectAllMode'];
-  renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
+  state?: DatatableOptions<D>['state'];
 }
 
 export interface DatatableInstance<D>
   extends Omit<
     Partial<Table<D>>,
-    'options' | 'getRowModel' | 'getHeaderGroups'
+    | 'getAllLeafColumns'
+    | 'getHeaderGroups'
+    | 'getRowModel'
+    | 'getState'
+    | 'options'
   > {
   getRowModel: () => DatatableRowModel<D>;
   getHeaderGroups: () => DatatableHeaderGroup<D>[];
+  getAllLeafColumns: () => DatatableColumn<D>[];
+  getState: () => DatatableState;
   options: ParsedDatatableOptions<D>;
+  setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface DatatableOptions<D>
   extends Omit<
     Partial<TableOptions<D>>,
-    'data' | 'columns' | 'columnResizeMode' | 'enablePinning'
+    | 'columnResizeMode'
+    | 'columns'
+    | 'data'
+    | 'enablePinning'
+    | 'initialState'
+    | 'state'
   > {
   data: D[];
   columns: DatatableColumnDef<D>[];
+  initialState?: Partial<DatatableInitialState>;
+  state?: Partial<DatatableState>;
 
   /**
    * @default true
@@ -181,4 +214,6 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableColumnResizing?: boolean;
+
+  onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
 }
