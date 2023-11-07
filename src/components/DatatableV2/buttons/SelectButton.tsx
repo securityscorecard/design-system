@@ -1,28 +1,7 @@
-import React, { ComponentProps, useEffect, useRef } from 'react';
+import React, { ComponentProps } from 'react';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
-
-const IndeterminateCheckbox = ({
-  indeterminate,
-  ...props
-}: ComponentProps<'input'> & { indeterminate?: boolean }) => {
-  const ref = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (typeof indeterminate === 'boolean') {
-      ref.current.indeterminate = !props.checked && indeterminate;
-    }
-  }, [ref, indeterminate, props.checked]);
-
-  return (
-    <input
-      ref={ref}
-      className="ds-table-select-multi-button ds-table-select-button"
-      type="checkbox"
-      {...props}
-    />
-  );
-};
+import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 
 const SelectButton = <D,>({
   row,
@@ -59,6 +38,7 @@ const SelectButton = <D,>({
 
   return enableMultiRowSelection ? (
     <IndeterminateCheckbox
+      className="ds-table-select-multi-button ds-table-select-button"
       indeterminate={
         isSelectAll ? table.getIsSomeRowsSelected() && !allRowsSelected : false
       }
