@@ -1,15 +1,17 @@
 import {
+  ColumnSizingState,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { prepareColumns } from '../columns.utils';
 import { DatatableInstance, DatatableOptions } from '../Datatable.types';
-import { useDislayColumns } from './useDisplayColumns';
+import { useDisplayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 export const useDatatable = <D>({
   data,
@@ -17,7 +19,16 @@ export const useDatatable = <D>({
   ...options
 }: DatatableOptions<D>): DatatableInstance<D> => {
   const tableOptions = useOptions<D>(options);
-  const displayColumns = useDislayColumns<D>(tableOptions);
+  const displayColumns = useDisplayColumns<D>(tableOptions);
+
+  const [showColumnSettings, setShowColumnSettings] = useState<boolean>(
+    tableOptions.initialState?.showColumnSettings ?? false,
+  );
+  const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
+    tableOptions.initialState?.columnSizing ?? {},
+  );
+
+  const debouncedSetColumnSizing = useDebounce(setColumnSizing);
 
   const columnDefs = useMemo(
     () => prepareColumns({ columnDefs: [...displayColumns, ...columns] }),
@@ -38,7 +49,17 @@ export const useDatatable = <D>({
     getSortedRowModel: tableOptions.enableSorting
       ? getSortedRowModel()
       : undefined,
+    state: {
+      showColumnSettings,
+      columnSizing,
+      ...tableOptions.state,
+    },
   }) as unknown as DatatableInstance<D>;
+
+  table.setShowColumnSettings =
+    tableOptions.onShowColumnSettings ?? setShowColumnSettings;
+  table.setColumnSizing =
+    tableOptions.onColumnSizingChange ?? debouncedSetColumnSizing;
 
   return table;
 };

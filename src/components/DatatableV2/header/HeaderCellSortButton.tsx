@@ -16,10 +16,7 @@ const HeaderCellSortButton = <D,>({
   const { columnDef } = column;
   const { sorting } = table.getState();
 
-  const columnName =
-    typeof columnDef.header === 'function'
-      ? columnDef.header(header.getContext())
-      : columnDef.header;
+  const columnName = columnDef.header;
   const label =
     direction === 'desc'
       ? `Sorted by ${columnName} descending`

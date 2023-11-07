@@ -30,6 +30,9 @@ const HeaderCell = <D,>({
     (enableColumnActions || columnDef?.enableColumnActions) &&
     columnDef?.enableColumnActions !== false;
 
+  const headerElement =
+    flexRender(columnDef.headerComponent, getContext()) ?? columnDef.header;
+
   return (
     <th
       key={id}
@@ -49,7 +52,7 @@ const HeaderCell = <D,>({
         className="ds-table-header-cell-label"
         onClick={getToggleSortingHandler()}
       >
-        {isPlaceholder ? null : flexRender(columnDef.header, getContext())}
+        {isPlaceholder ? null : headerElement}
       </span>
       {getCanSort() && (
         <HeaderCellSortButton
