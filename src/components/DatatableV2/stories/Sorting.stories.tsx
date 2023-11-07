@@ -25,7 +25,10 @@ DisabledMultiSorting.args = { ...Template.args, enableMultiSort: false };
 export const DisabledSortingForColumn: Story = Template.bind({});
 DisabledSortingForColumn.args = {
   ...Template.args,
-  columns: [...columns, { accessorKey: 'country', enableSorting: false }],
+  columns: [
+    ...columns,
+    { accessorKey: 'country', header: 'Country', enableSorting: false },
+  ],
 };
 
 export const DisabledSortingRemoval: Story = Template.bind({});

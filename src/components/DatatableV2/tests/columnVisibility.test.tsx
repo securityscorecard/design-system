@@ -37,7 +37,7 @@ describe('DatatableV2/columnVisibility', () => {
         }),
       );
       expect(
-        screen.queryByRole('columnheader', { name: 'name' }),
+        screen.queryByRole('columnheader', { name: 'name ⋮' }),
       ).not.toBeInTheDocument();
     });
 
