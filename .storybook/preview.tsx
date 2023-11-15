@@ -22,7 +22,7 @@ export const parameters = {
     default: 'white',
     values: [
       { name: 'white', value: colors.neutral[0] },
-      { name: 'grey', value: colors.neutral[400] },
+      { name: 'grey', value: colors.neutral[200] },
       { name: 'black', value: colors.neutral[1000] },
     ],
   },
