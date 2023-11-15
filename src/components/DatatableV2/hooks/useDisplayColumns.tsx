@@ -3,6 +3,9 @@ import React, { useMemo } from 'react';
 import SelectButton from '../buttons/SelectButton';
 import { DatatableColumnDef, ParsedDatatableOptions } from '../Datatable.types';
 
+export const displayColumnIds = {
+  select: 'ssc_dt_select',
+};
 export const useDisplayColumns = <D,>(
   tableOptions: ParsedDatatableOptions<D>,
 ) => {
@@ -11,7 +14,7 @@ export const useDisplayColumns = <D,>(
       (
         [
           tableOptions.enableRowSelection && {
-            id: 'select',
+            id: displayColumnIds.select,
             header: '',
             headerComponent:
               tableOptions.enableSelectAll &&
