@@ -29,6 +29,7 @@ const ColumnActionsMenu = <D,>({
   const {
     getState,
     options: {
+      enableColumnOrdering,
       enableColumnPinning,
       enableColumnResizing,
       enableHiding,
@@ -141,7 +142,7 @@ const ColumnActionsMenu = <D,>({
           </MenuItem>,
         ]
       : []),
-    ...(enableHiding || enableColumnPinning
+    ...(enableHiding || enableColumnPinning || enableColumnOrdering
       ? [
           <MenuItem key="col-action-settings" onClick={handleColumnSettings}>
             ⚙️ Column settings
