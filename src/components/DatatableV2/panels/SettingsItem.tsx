@@ -1,3 +1,5 @@
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';
@@ -10,10 +12,33 @@ const SettingsItem = <D,>({
   table: DatatableInstance<D>;
 }) => {
   const {
-    options: { enableColumnPinning, enableHiding },
+    options: { enableColumnPinning, enableHiding, enableColumnOrdering },
   } = table;
+  const {
+    attributes,
+    listeners,
+    setActivatorNodeRef,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: column.id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
   return (
-    <div>
+    <div ref={setNodeRef} style={style}>
+      {enableColumnOrdering && (
+        <button
+          ref={setActivatorNodeRef}
+          aria-label={`Reorder ${column.columnDef.header} column`}
+          type="button"
+          {...attributes}
+          {...listeners}
+        >
+          ↕️
+        </button>
+      )}
       <span>{column.columnDef.header}</span>
       {enableHiding && (
         <input
