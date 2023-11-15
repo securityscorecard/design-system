@@ -32,19 +32,21 @@ export const InitialColumnPinning: Story = Template.bind({});
 InitialColumnPinning.args = {
   ...Template.args,
   initialState: {
-    columnPinning: { left: ['organization_grade'] },
+    columnPinning: { left: ['score'] },
   },
+  enableRowSelection: true,
 };
 
 export const ColumnPinningManagedState: Story = (args) => {
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
-    left: ['organization_grade'],
+    left: ['score'],
   });
 
   return (
     <>
       <Datatable
         state={{ columnPinning }}
+        enableRowSelection
         onColumnPinningChange={setColumnPinning}
         {...args}
       />

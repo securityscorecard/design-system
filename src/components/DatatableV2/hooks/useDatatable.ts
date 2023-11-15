@@ -7,9 +7,13 @@ import {
 } from '@tanstack/react-table';
 import { useMemo, useState } from 'react';
 
-import { prepareColumns } from '../columns.utils';
-import { DatatableInstance, DatatableOptions } from '../Datatable.types';
-import { useDisplayColumns } from './useDisplayColumns';
+import { getDefaultColumnOrder, prepareColumns } from '../columns.utils';
+import {
+  DatatableInitialState,
+  DatatableInstance,
+  DatatableOptions,
+} from '../Datatable.types';
+import { displayColumnIds, useDisplayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
 import { useDebounce } from '../../../hooks/useDebounce';
 
@@ -21,19 +25,37 @@ export const useDatatable = <D>({
   const tableOptions = useOptions<D>(options);
   const displayColumns = useDisplayColumns<D>(tableOptions);
 
-  const [showColumnSettings, setShowColumnSettings] = useState<boolean>(
-    tableOptions.initialState?.showColumnSettings ?? false,
-  );
-  const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
-    tableOptions.initialState?.columnSizing ?? {},
-  );
-
-  const debouncedSetColumnSizing = useDebounce(setColumnSizing);
-
   const columnDefs = useMemo(
     () => prepareColumns({ columnDefs: [...displayColumns, ...columns] }),
     [columns, displayColumns],
   );
+
+  const initialState = useMemo<Partial<DatatableInitialState>>(() => {
+    const initState = tableOptions.initialState ?? {};
+    initState.columnOrder = getDefaultColumnOrder(
+      initState.columnOrder ?? [],
+      columnDefs,
+      tableOptions,
+    );
+    initState.columnPinning = {
+      left: [
+        ...(tableOptions.enableRowSelection ? [displayColumnIds.select] : []),
+        ...(initState.columnPinning?.left ?? []),
+      ],
+      right: [...(initState.columnPinning?.right ?? [])],
+    };
+
+    return initState;
+  }, [tableOptions, columnDefs]);
+
+  const [showColumnSettings, setShowColumnSettings] = useState<boolean>(
+    initialState?.showColumnSettings ?? false,
+  );
+  const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
+    initialState?.columnSizing ?? {},
+  );
+
+  const debouncedSetColumnSizing = useDebounce(setColumnSizing);
 
   const table = useReactTable({
     ...tableOptions,
@@ -49,6 +71,7 @@ export const useDatatable = <D>({
     getSortedRowModel: tableOptions.enableSorting
       ? getSortedRowModel()
       : undefined,
+    initialState,
     state: {
       showColumnSettings,
       columnSizing,
