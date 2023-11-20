@@ -8,9 +8,14 @@ import { Inline, Padbox, Stack } from '../layout';
 import { H2, Paragraph } from '../typographyLegacy';
 import { Button, ButtonEnums } from '../Button';
 import { SpaceSizes } from '../../theme';
+import { Badges } from '../../../.storybook/storybook.enums';
 
+/**
+ * This component is DEPRECATED and subject to removal in V2.
+ * Use Wizard component instead
+ */
 export default {
-  title: 'components/modals/WizardModal',
+  title: 'components/modals/WizardModal (DEPRECATED)',
   component: WizardModal,
   parameters: {
     docs: {
@@ -18,6 +23,7 @@ export default {
       iframeHeight: 500,
       source: { type: 'code' },
     },
+    badges: [Badges.deprecated],
   },
 } as Meta;
 

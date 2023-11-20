@@ -25,7 +25,7 @@ const BaseModal = styled(Padbox)`
   max-height: 66vh;
   width: 100%;
   max-width: 900px;
-  border-radius: ${getRadii('default')};
+  border-radius: ${getRadii('large')};
   background-color: ${getColor('neutral.0')};
   overflow: auto;
   > * {
