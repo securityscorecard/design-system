@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/securityscorecard/design-system/compare/v1.11.0...v1.12.0) (2023-11-20)
+
+
+### Features
+
+* **modals:** use bigger corner rounding ([3589bc5](https://github.com/securityscorecard/design-system/commit/3589bc5c1c363d170668290c85912d931296b6fb))
+* **Surface:** add component ([4f152cf](https://github.com/securityscorecard/design-system/commit/4f152cfe189ab2ff7d7d55a011eec346e71e4f6b))
+
 # [1.11.0](https://github.com/securityscorecard/design-system/compare/v1.10.0...v1.11.0) (2023-11-02)
 
 
