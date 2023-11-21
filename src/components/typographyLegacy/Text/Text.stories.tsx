@@ -91,8 +91,6 @@ export const TextHeading5: Story = () => (
   </Stack>
 );
 
-SmallText.storyName = 'Small Text (DEPRECATED)';
-
 export const PrimaryText: Story = () => (
   <>
     <Text>{lipsum}</Text>
