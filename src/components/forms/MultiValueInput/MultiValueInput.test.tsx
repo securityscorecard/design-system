@@ -95,6 +95,23 @@ describe('MultiValueInput', () => {
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith(pastedValue, pastedValue);
     });
+    it('should add a comma separated values list', () => {
+      const pastedValue = ['value1', 'value2', 'value3'];
+      render(<MultiValueInput valuesDelimiter="," onValueAdd={mockValueAdd} />);
+
+      userEvent.paste(
+        screen.getByRole('textbox') as HTMLInputElement,
+        pastedValue.join(','),
+        {
+          clipboardData: {
+            getData: () => pastedValue.join(','),
+          },
+        } as unknown, // as I really don't need other properties of this object
+      );
+
+      expect(mockValueAdd).toHaveBeenCalledTimes(1);
+      expect(mockValueAdd).toHaveBeenCalledWith(pastedValue, pastedValue);
+    });
     it('should add new value on blur', () => {
       const inputValue = 'value';
       render(<MultiValueInput onValueAdd={mockValueAdd} />);

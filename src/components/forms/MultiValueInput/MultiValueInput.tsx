@@ -143,6 +143,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   onInputChange = noop,
   onPaste = noop,
   placeholder,
+  valuesDelimiter = ';',
   pattern,
   id,
   inputId,
@@ -167,11 +168,11 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
       return;
     }
 
-    const containsMultipleValues = includes(';', newValue);
+    const containsMultipleValues = includes(valuesDelimiter, newValue);
 
     if (containsMultipleValues) {
       const parsedValues = pipe(
-        split(';'),
+        split(valuesDelimiter),
         map(trim),
         filter(isNonEmptyString),
       )(newValue);
@@ -360,6 +361,7 @@ MultiValueInput.propTypes = {
   id: PropTypes.string,
   inputId: PropTypes.string,
   inputValue: PropTypes.string,
+  valuesDelimiter: PropTypes.string,
   maxPillLabelLength: PropTypes.number,
   onValueAdd: PropTypes.func,
   onValueRemove: PropTypes.func,

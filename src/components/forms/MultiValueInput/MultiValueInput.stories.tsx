@@ -26,6 +26,7 @@ Playground.args = {
   onValueRemove: action('OnValueRemove'),
   onValuesChange: action('OnValuesChange'),
   onInputChange: action('OnInputChange'),
+  valuesDelimiter: ',',
   onPaste: (e) => {
     const pastedValue = (e.clipboardData || window.clipboardData).getData(
       'text',
