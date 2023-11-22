@@ -21,7 +21,7 @@ import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { Text as BaseText } from '../typographyLegacy';
 import { TextSizes } from '../typographyLegacy/Text/Text.enums';
 import { SpaceSizes } from '../../theme';
-import { getColor, getLineHeight } from '../../utils';
+import { getColor, getLineHeight, getRadii } from '../../utils';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
 import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseToastBanner';
@@ -39,6 +39,7 @@ const iconPxSizesVariants = {
 const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
   background-color: ${({ $variant }) =>
     getColor(baseToastBannerColorVariants[$variant])};
+  border-radius: ${getRadii('default')};
 `;
 
 const StyledButton = styled(Button)<{ $variant?: BannerProps['variant'] }>`
