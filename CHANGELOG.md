@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/securityscorecard/design-system/compare/v1.12.0...v1.13.0) (2023-11-22)
+
+
+### Features
+
+* **BannerManagement:** remove Banner Management ([20bf685](https://github.com/securityscorecard/design-system/commit/20bf685c0e41f8d628f1ef8053ce72f6a3c772cb))
+
 # [1.12.0](https://github.com/securityscorecard/design-system/compare/v1.11.0...v1.12.0) (2023-11-20)
 
 
