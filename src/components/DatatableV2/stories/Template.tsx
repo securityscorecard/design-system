@@ -40,7 +40,7 @@ export type Story = ComponentStory<typeof Datatable<DataSource>>;
 const Template: Story = (args) => <Datatable {...args} />;
 Template.args = {
   columns,
-  data: generateData(50),
+  data: generateData(25),
 };
 
 export default Template;

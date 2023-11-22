@@ -13,6 +13,7 @@ const primary = {
 
 const neutral = {
   0: '#fff',
+  50: '#fcfcfc',
   100: '#f9f9f9',
   200: '#f3f3f3',
   300: '#e8e8e8',

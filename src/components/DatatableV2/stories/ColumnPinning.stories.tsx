@@ -32,7 +32,7 @@ export const InitialColumnPinning: Story = Template.bind({});
 InitialColumnPinning.args = {
   ...Template.args,
   initialState: {
-    columnPinning: { left: ['score'] },
+    columnPinning: { left: ['score'], right: ['detectionMethod'] },
   },
   enableRowSelection: true,
 };

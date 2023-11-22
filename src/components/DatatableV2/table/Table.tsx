@@ -5,6 +5,7 @@ import Body from '../body/Body';
 import Header from '../header/Header';
 import { parseCSSVarId } from '../columns.utils';
 import Settings from '../panels/Settings';
+import TableRoot from './TableRoot';
 
 const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -35,13 +36,13 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
 
   return (
-    <div>
+    <TableRoot>
       <table className="ds-table" style={columnSizeVars}>
         <Header table={table} />
         <Body table={table} />
       </table>
       {showColumnSettings && <Settings table={table} />}
-    </div>
+    </TableRoot>
   );
 };
 

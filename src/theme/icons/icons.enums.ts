@@ -48,6 +48,9 @@ export const SSCIconNames = {
   table: 'table',
   infoCircleOutline: 'info-circle-outline',
   columns3: 'columns-3',
+  backwardStep: 'backward-step',
+  gripLines: 'grip-lines',
+  thumbstack: 'thumbstack',
 } as const;
 
 export const IconTypes = {

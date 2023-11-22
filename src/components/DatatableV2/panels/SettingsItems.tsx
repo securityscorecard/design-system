@@ -118,9 +118,11 @@ const SettingsItems = <D,>({
         items={allColumns}
         strategy={verticalListSortingStrategy}
       >
-        {allColumns.map((column) => (
-          <SettingsItem key={column.id} column={column} table={table} />
-        ))}
+        <div>
+          {allColumns.map((column) => (
+            <SettingsItem key={column.id} column={column} table={table} />
+          ))}
+        </div>
       </SortableContext>
     </DndContext>
   );

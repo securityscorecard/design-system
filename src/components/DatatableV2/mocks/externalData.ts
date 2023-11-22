@@ -3,7 +3,7 @@ import { DataSource, generateData } from './data';
 interface Result {
   entries: DataSource[];
   pageCount: number;
-  rowsCount: number;
+  rowCount: number;
 }
 
 const data = generateData(100);
@@ -17,7 +17,7 @@ export const fetchData = (options: {
       (options.pageIndex + 1) * options.pageSize,
     ),
     pageCount: Math.ceil(data.length / options.pageSize),
-    rowsCount: data.length,
+    rowCount: data.length,
   };
 };
 

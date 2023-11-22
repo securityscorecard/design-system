@@ -58,6 +58,7 @@ describe('DatatableV2/sorting', () => {
           columns={columns}
           initialState={{ pagination: { pageSize: 3 } }}
           rowsPerPageOptions={[1, 3]}
+          enableRowsPerPage
         />,
       );
 

@@ -39,7 +39,12 @@ describe('DatatableV2/sorting', () => {
 
     it('should correctly sort table', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} enableSorting />,
+        <Datatable
+          data={data}
+          columns={columns}
+          enableSorting
+          enableMultiSort
+        />,
       );
 
       const sortingButtons = screen.getAllByRole('button', {

@@ -27,7 +27,7 @@ export const CustomRowsPerPageOptions: Story = Template.bind({});
 CustomRowsPerPageOptions.args = {
   ...Template.args,
   rowsPerPageOptions: [5, 10, 15],
-  initialState: { pagination: { pageIndex: 3 } },
+  enableRowsPerPage: true,
 };
 
 export const InitialPagination: Story = Template.bind({});
@@ -79,7 +79,7 @@ export const ManualPagination: Story = (args) => {
         columns={columns}
         data={dataQuery?.data?.entries ?? []}
         pageCount={dataQuery?.data?.pageCount ?? -1}
-        rowsCount={dataQuery?.data?.rowsCount}
+        rowCount={dataQuery?.data?.rowCount}
         state={{ pagination }}
         manualPagination
         onPaginationChange={setPagination}
