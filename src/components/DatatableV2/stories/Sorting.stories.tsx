@@ -42,20 +42,25 @@ InitialSorting.args = {
   ...Template.args,
   initialState: {
     sorting: [
-      { id: 'organization_grade', desc: true },
-      { id: 'organization_name', desc: false },
+      { id: 'score', desc: true },
+      { id: 'organization.name', desc: false },
     ],
   },
 };
 
 export const SortingManagedState: Story = (args) => {
   const [sorting, setSorting] = useState<SortingState>([
-    { id: 'organization_name', desc: true },
+    { id: 'organization.name', desc: true },
   ]);
 
   return (
     <>
-      <Datatable state={{ sorting }} onSortingChange={setSorting} {...args} />
+      <Datatable
+        state={{ sorting }}
+        manualSorting
+        onSortingChange={setSorting}
+        {...args}
+      />
       <div>
         <strong>Debug:</strong>
         <pre>{JSON.stringify(sorting, null, 2)}</pre>
