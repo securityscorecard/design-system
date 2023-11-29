@@ -2,6 +2,8 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 
+import { Inline, Padbox } from '../../layout';
+import IconButton from '../buttons/IconButton';
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';
 
 const SettingsItem = <D,>({
@@ -27,42 +29,53 @@ const SettingsItem = <D,>({
     transition,
   };
   return (
-    <div ref={setNodeRef} style={style}>
-      {enableColumnOrdering && (
-        <button
-          ref={setActivatorNodeRef}
-          aria-label={`Reorder ${column.columnDef.header} column`}
-          type="button"
-          {...attributes}
-          {...listeners}
-        >
-          ↕️
-        </button>
-      )}
-      <span>{column.columnDef.header}</span>
-      {enableHiding && (
-        <input
-          aria-label={`${column.getIsVisible() ? 'Hide' : 'Show'} ${
-            column.columnDef.header
-          } column`}
-          checked={column.getIsVisible()}
-          disabled={!column.getCanHide()}
-          type="checkbox"
-          onChange={(e) => column.toggleVisibility(e.target.checked)}
-        />
-      )}
-      {enableColumnPinning && (
-        <input
-          aria-label={`${column.getIsPinned() !== false ? 'Unpin' : 'Pin'} ${
-            column.columnDef.header
-          } column`}
-          checked={column.getIsPinned() !== false}
-          disabled={!column.getCanPin()}
-          type="checkbox"
-          onChange={(e) => column.pin(e.target.checked ? 'left' : false)}
-        />
-      )}
-    </div>
+    <Padbox
+      ref={setNodeRef}
+      className="ds-table-settings-panel-item"
+      paddingSize="md"
+      style={style}
+    >
+      <Inline align="center" gap="md" stretch={2}>
+        {enableColumnOrdering && (
+          <IconButton
+            ref={setActivatorNodeRef}
+            iconName="grip-lines"
+            label={`Reorder ${column.columnDef.header} column`}
+            type="button"
+            {...attributes}
+            {...listeners}
+            style={{ cursor: 'row-resize' }}
+          />
+        )}
+        <span>{column.columnDef.header}</span>
+        {enableHiding && (
+          <div className="ds-table-checkbox-wrapper">
+            <input
+              aria-label={`${column.getIsVisible() ? 'Hide' : 'Show'} ${
+                column.columnDef.header
+              } column`}
+              checked={column.getIsVisible()}
+              disabled={!column.getCanHide()}
+              type="checkbox"
+              onChange={(e) => column.toggleVisibility(e.target.checked)}
+            />
+          </div>
+        )}
+        {enableColumnPinning && (
+          <div className="ds-table-checkbox-wrapper">
+            <input
+              aria-label={`${
+                column.getIsPinned() !== false ? 'Unpin' : 'Pin'
+              } ${column.columnDef.header} column`}
+              checked={column.getIsPinned() !== false}
+              disabled={!column.getCanPin()}
+              type="checkbox"
+              onChange={(e) => column.pin(e.target.checked ? 'left' : false)}
+            />
+          </div>
+        )}
+      </Inline>
+    </Padbox>
   );
 };
 
