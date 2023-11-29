@@ -44,6 +44,7 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
   }) => ReactNode;
   columnDefType?: 'display' | 'data';
   enableColumnActions?: boolean;
+  enableOrdering?: boolean;
 };
 
 export type DatatableDefinedColumnDef<D, V = unknown> = DatatableColumnDef<
@@ -105,6 +106,7 @@ export interface ParsedDatatableOptions<D>
     columnDefType: 'display';
   };
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
+  enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
   enablePagination?: DatatableOptions<D>['enablePagination'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
@@ -121,6 +123,9 @@ export interface DatatableInstance<D>
   extends Omit<
     Partial<Table<D>>,
     | 'getAllLeafColumns'
+    | 'getLeftLeafColumns'
+    | 'getRightLeafColumns'
+    | 'getCenterLeafColumns'
     | 'getHeaderGroups'
     | 'getRowModel'
     | 'getState'
@@ -129,6 +134,9 @@ export interface DatatableInstance<D>
   getRowModel: () => DatatableRowModel<D>;
   getHeaderGroups: () => DatatableHeaderGroup<D>[];
   getAllLeafColumns: () => DatatableColumn<D>[];
+  getCenterLeafColumns: () => DatatableColumn<D>[];
+  getLeftLeafColumns: () => DatatableColumn<D>[];
+  getRightLeafColumns: () => DatatableColumn<D>[];
   getState: () => DatatableState;
   options: ParsedDatatableOptions<D>;
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
@@ -214,6 +222,11 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableColumnResizing?: boolean;
+
+  /**
+   * @default true
+   */
+  enableColumnOrdering?: boolean;
 
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
 }

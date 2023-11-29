@@ -186,17 +186,22 @@ describe('DatatableV2/columnSettingsPanel', () => {
         columns={columns}
         initialState={{
           showColumnSettings: true,
-          columnPinning: { left: ['color'] },
         }}
       />,
     );
+
+    await userEvent.click(
+      screen.getByRole('checkbox', {
+        name: /Pin color column/i,
+      }),
+    );
+    expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
 
     await userEvent.click(
       screen.getByRole('button', {
         name: /Unpin all columns/i,
       }),
     );
-
     expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('name');
   });
 });

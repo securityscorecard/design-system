@@ -2,22 +2,49 @@ import React, { useMemo } from 'react';
 
 import { DatatableInstance } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
-import SettingsItem from './SettingsItem';
+import SettingsItems from './SettingsItems';
 
 const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
     getAllLeafColumns,
+    getCenterLeafColumns,
+    getLeftLeafColumns,
+    getRightLeafColumns,
+    getState,
     options: { enableColumnPinning, enableHiding },
+    setColumnOrder,
     setColumnPinning,
     setColumnVisibility,
     setShowColumnSettings,
+    initialState,
   } = table;
+  const { columnOrder, columnPinning } = getState();
 
   const allColumns = useMemo(() => {
+    if (columnOrder.length > 0) {
+      return [
+        ...getLeftLeafColumns(),
+        ...Array.from(new Set(columnOrder)).map((colId) =>
+          getCenterLeafColumns().find((col) => col?.id === colId),
+        ),
+        ...getRightLeafColumns(),
+      ]
+        .filter(Boolean)
+        .filter((col) => col.columnDef.columnDefType === 'data');
+    }
+
     return getAllLeafColumns().filter(
       (col) => col.columnDef.columnDefType === 'data',
     );
-  }, [getAllLeafColumns]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    columnOrder,
+    columnPinning,
+    getAllLeafColumns,
+    getLeftLeafColumns,
+    getRightLeafColumns,
+    getCenterLeafColumns,
+  ]);
 
   const getColumnsVisibilityInfo = () => {
     const hideableColumns = getAllLeafColumns().filter(
@@ -58,8 +85,9 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
           <button
             type="button"
             onClick={() => {
-              setColumnPinning({});
-              setColumnVisibility({});
+              setColumnPinning(initialState.columnPinning ?? {});
+              setColumnVisibility(initialState.columnVisibility ?? {});
+              setColumnOrder(initialState.columnOrder ?? []);
             }}
           >
             Reset to default
@@ -83,16 +111,14 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
               aria-label="Unpin all columns"
               type="button"
               onClick={() => {
-                setColumnPinning({});
+                setColumnPinning(initialState.columnPinning ?? {});
               }}
             >
               ❌
             </button>
           )}
         </div>
-        {allColumns.map((column) => (
-          <SettingsItem key={column.id} column={column} table={table} />
-        ))}
+        <SettingsItems allColumns={allColumns} table={table} />
       </div>
     </div>
   );

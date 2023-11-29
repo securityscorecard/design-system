@@ -53,8 +53,8 @@ RowSelectionActions.args = {
   ...SelectionEnabled.args,
   initialState: {
     rowSelection: {
-      'ae62aa4c-5fe5-44b7-88e0-bb0b2e07a370': true,
-      'b5fa06ab-739e-4140-b5a0-d1c8841db036': true,
+      'e23968c3-3f19-44b2-aee9-c4a1d7c326ee': true,
+      'eb43a2df-8884-43f1-bfe8-eea3545bbded': true,
     },
   },
   renderRowSelectionActions: ({ selectedRows, table }) => (
@@ -89,8 +89,8 @@ RowSelectionActions.args = {
 
 export const SelectionManagedState: Story = (args) => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({
-    'ae62aa4c-5fe5-44b7-88e0-bb0b2e07a370': true,
-    'b5fa06ab-739e-4140-b5a0-d1c8841db036': true,
+    'e23968c3-3f19-44b2-aee9-c4a1d7c326ee': true,
+    'eb43a2df-8884-43f1-bfe8-eea3545bbded': true,
   });
 
   return (
