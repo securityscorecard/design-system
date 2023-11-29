@@ -1,5 +1,10 @@
 import React, { useMemo } from 'react';
 
+import { Button } from '../../Button';
+import { CloseButton } from '../../CloseButton';
+import { Icon } from '../../Icon';
+import { Inline, Padbox, Stack } from '../../layout';
+import { Text } from '../../typographyLegacy';
 import { DatatableInstance } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
@@ -69,57 +74,94 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
   };
 
   return (
-    <div className="ds-table-settings-toolbar">
-      <header>
-        <span>Column settings</span>
-        <button
-          aria-label="Close column settings"
-          type="button"
-          onClick={() => setShowColumnSettings(false)}
-        >
-          ❌
-        </button>
-      </header>
-      <div>
-        <div>
-          <button
-            type="button"
-            onClick={() => {
-              setColumnPinning(initialState.columnPinning ?? {});
-              setColumnVisibility(initialState.columnVisibility ?? {});
-              setColumnOrder(initialState.columnOrder ?? []);
-            }}
+    <div className="ds-table-settings-panel">
+      <Padbox
+        as="header"
+        paddingSize="mdPlus"
+        style={{ borderBottom: '1px solid var(--sscds-borderColor' }}
+      >
+        <Inline align="center" gap="md" justify="space-between">
+          <Inline align="center" gap="md">
+            <Icon name="columns-3" />
+            <Text isBold>Column settings</Text>
+          </Inline>
+          <CloseButton
+            ariaLabel="Close column settings"
+            marginCompensation="md"
+            onClose={() => setShowColumnSettings(false)}
+          />
+        </Inline>
+      </Padbox>
+      <Padbox
+        paddingSize="md"
+        paddingType="squish"
+        style={{ overflow: 'auto' }}
+      >
+        <Stack gap="sm">
+          <Inline
+            align="flex-end"
+            gap="md"
+            stretch="start"
+            style={{ paddingRight: '1rem' }}
           >
-            Reset to default
-          </button>
-          {enableHiding && (
-            <IndeterminateCheckbox
-              aria-label={`${
-                getColumnsVisibilityInfo().areAllColumnsVisible
-                  ? 'Hide'
-                  : 'Show'
-              } all columns`}
-              checked={getColumnsVisibilityInfo().areAllColumnsVisible}
-              indeterminate={getColumnsVisibilityInfo().areSomeColumnsVisible}
-              onChange={(e) =>
-                handleToggleAllColumnsVisibility(e.target.checked)
-              }
-            />
-          )}
-          {enableColumnPinning && (
-            <button
-              aria-label="Unpin all columns"
-              type="button"
-              onClick={() => {
-                setColumnPinning(initialState.columnPinning ?? {});
-              }}
-            >
-              ❌
-            </button>
-          )}
-        </div>
-        <SettingsItems allColumns={allColumns} table={table} />
-      </div>
+            <div>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => {
+                  setColumnPinning(initialState.columnPinning ?? {});
+                  setColumnVisibility(initialState.columnVisibility ?? {});
+                  setColumnOrder(initialState.columnOrder ?? []);
+                }}
+              >
+                Reset to default
+              </Button>
+            </div>
+            <Inline gap="sm">
+              {enableHiding && (
+                <Stack gap="sm" justify="center">
+                  <Text variant="secondary">Show</Text>
+                  <div
+                    className="ds-table-checkbox-wrapper"
+                    style={{ height: '2.25rem' }}
+                  >
+                    <IndeterminateCheckbox
+                      aria-label={`${
+                        getColumnsVisibilityInfo().areAllColumnsVisible
+                          ? 'Hide'
+                          : 'Show'
+                      } all columns`}
+                      checked={getColumnsVisibilityInfo().areAllColumnsVisible}
+                      indeterminate={
+                        getColumnsVisibilityInfo().areSomeColumnsVisible
+                      }
+                      onChange={(e) =>
+                        handleToggleAllColumnsVisibility(e.target.checked)
+                      }
+                    />
+                  </div>
+                </Stack>
+              )}
+              {enableColumnPinning && (
+                <Stack gap="sm" justify="center">
+                  <Text variant="secondary">Pin</Text>
+                  <Button
+                    aria-label="Unpin all columns"
+                    color="secondary"
+                    iconName="times"
+                    type="button"
+                    variant="ghost"
+                    onClick={() => {
+                      setColumnPinning(initialState.columnPinning ?? {});
+                    }}
+                  />
+                </Stack>
+              )}
+            </Inline>
+          </Inline>
+          <SettingsItems allColumns={allColumns} table={table} />
+        </Stack>
+      </Padbox>
     </div>
   );
 };
