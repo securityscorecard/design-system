@@ -38,10 +38,12 @@ export const useDatatable = <D>({
       tableOptions,
     );
     initState.columnPinning = {
-      left: [
-        ...(tableOptions.enableRowSelection ? [displayColumnIds.select] : []),
-        ...(initState.columnPinning?.left ?? []),
-      ],
+      left: Array.from(
+        new Set([
+          ...(tableOptions.enableRowSelection ? [displayColumnIds.select] : []),
+          ...(initState.columnPinning?.left ?? []),
+        ]),
+      ),
       right: [...(initState.columnPinning?.right ?? [])],
     };
 
