@@ -57,17 +57,7 @@ const HeaderCellResizeHandler = <D,>({
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <hr
       aria-orientation="vertical"
-      style={{
-        margin: 0,
-        border: 0,
-        display: 'inline-block',
-        height: 20,
-        width: 5,
-        background: 'rgba(0, 0, 0, 0.5)',
-        cursor: 'col-resize',
-        userSelect: 'none',
-        touchAction: 'none',
-      }}
+      className="ds-table-header-cell-resize-handler"
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
       onDoubleClick={handleColumnSizeReset}

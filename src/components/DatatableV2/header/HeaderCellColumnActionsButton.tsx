@@ -1,5 +1,7 @@
-import React, { MouseEvent, useState } from 'react';
+import React from 'react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
+import IconButton from '../buttons/IconButton';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import ColumnActionsMenu from '../menus/ColumnActionsMenu';
 
@@ -10,34 +12,18 @@ const HeaderCellColumnActionsButton = <D,>({
   header: DatatableHeader<D>;
   table: DatatableInstance<D>;
 }) => {
-  const [buttonRef, setButtonRef] = useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    setButtonRef(e.currentTarget);
-  };
-
   return (
-    <>
-      <button
-        aria-label={
-          buttonRef === null ? 'Show column actions' : 'Hide column actions'
-        }
-        className="ds-table-header-cell-column-actions-button"
-        type="button"
-        onClick={handleClick}
-      >
-        ⋮
-      </button>
-      <ColumnActionsMenu
-        buttonRef={buttonRef}
-        header={header}
-        setButtonRef={setButtonRef}
-        table={table}
-      />
-    </>
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <IconButton
+          className="ds-table-header-cell-column-actions-button"
+          iconName="ellipsis-v"
+          label="Column actions"
+        />
+      </DropdownMenu.Trigger>
+
+      <ColumnActionsMenu header={header} table={table} />
+    </DropdownMenu.Root>
   );
 };
 
