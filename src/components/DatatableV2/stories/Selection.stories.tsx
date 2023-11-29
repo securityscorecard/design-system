@@ -5,6 +5,7 @@ import { RowSelectionState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
+import { Button } from '../../Button';
 
 export default {
   title: 'components/DatatableV2/Selection',
@@ -58,17 +59,16 @@ RowSelectionActions.args = {
     },
   },
   renderRowSelectionActions: ({ selectedRows, table }) => (
-    <div>
-      <button
-        type="button"
+    <>
+      <Button
+        variant="outline"
         onClick={() => {
           action('selectedRows')(selectedRows);
         }}
       >
         Show selected rows
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         onClick={() => {
           table.setRowSelection?.(() =>
             table.options.data.reduce(
@@ -82,8 +82,8 @@ RowSelectionActions.args = {
         }}
       >
         Select all F grades
-      </button>
-    </div>
+      </Button>
+    </>
   ),
 };
 
