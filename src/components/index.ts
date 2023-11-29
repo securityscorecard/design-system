@@ -9,6 +9,7 @@ export * from './CloseButton';
 export * from './Collapsible';
 export * from './ControlDropdown';
 export * from './Datatable';
+export * from './DatatableV2';
 export * from './DateRangePicker';
 export * from './Drawer';
 export * from './Dropdown';
