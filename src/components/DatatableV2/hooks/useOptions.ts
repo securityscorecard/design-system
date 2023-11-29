@@ -13,14 +13,15 @@ export const useOptions = <D>({
   enableColumnResizing = true,
   enableHiding = true,
   enableMultiRowSelection = true,
-  enableMultiSort = true,
+  enableMultiSort = false,
   enablePagination = true,
   enableRowSelection = false,
-  enableRowsPerPage = true,
+  enableRowsPerPage = false,
   enableSelectAll = true,
   enableSorting = true,
   enableSortingRemoval = true,
   manualPagination,
+  manualSorting,
   renderRowSelectionActions,
   rowsPerPageOptions = [10, 25, 50, 100],
   selectAllMode = 'all',
@@ -36,9 +37,14 @@ export const useOptions = <D>({
     [defaultColumn],
   );
   let __manualPagination = manualPagination;
+  let __manualSorting = manualSorting;
 
   if (manualPagination === undefined && enablePagination === false) {
     __manualPagination = true;
+  }
+
+  if (manualSorting === undefined && enableSorting === false) {
+    __manualSorting = true;
   }
 
   return {
@@ -68,6 +74,7 @@ export const useOptions = <D>({
     enableSorting,
     enableSortingRemoval,
     manualPagination: __manualPagination,
+    manualSorting: __manualSorting,
     renderRowSelectionActions,
     rowsPerPageOptions,
     selectAllMode,
