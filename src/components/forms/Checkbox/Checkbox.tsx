@@ -181,7 +181,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
 Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
-  checkboxId: PropTypes.string,
+  checkboxId: PropTypes.string.isRequired,
   label: PropTypes.node,
   className: PropTypes.string,
   isDisabled: PropTypes.bool,
