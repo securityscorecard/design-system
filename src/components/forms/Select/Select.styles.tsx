@@ -485,6 +485,7 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
       <components.Option {...props}>
         <Inline gap={SpaceSizes.sm}>
           <Checkbox
+            checkboxId={`select-${label}`}
             checked={isSelected}
             isDisabled={isDisabled}
             label={children}
