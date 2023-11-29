@@ -1,5 +1,6 @@
 import { ColumnOrderState } from '@tanstack/react-table';
 import { pluck } from 'ramda';
+import { CSSProperties } from 'react';
 
 import {
   DatatableColumn,
@@ -34,6 +35,16 @@ const getIsLastLeftPinnedColumn = <D>(
 const getIsFirstRightPinnedColumn = <D>(column: DatatableColumn<D>) =>
   column.getIsPinned() === 'right' && column.getPinnedIndex() === 0;
 
+const getTotalRight = <D>(
+  table: DatatableInstance<D>,
+  column: DatatableColumn<D>,
+) => {
+  return table
+    .getRightLeafHeaders()
+    .slice(column.getPinnedIndex() + 1)
+    .reduce((acc, col) => acc + col.getSize(), 0);
+};
+
 export const getCommonCellStyles = <D>({
   table,
   header,
@@ -42,17 +53,45 @@ export const getCommonCellStyles = <D>({
   table: DatatableInstance<D>;
   header?: DatatableHeader<D>;
   column: DatatableColumn<D>;
-}) => ({
-  borderRight: getIsLastLeftPinnedColumn(table, column)
-    ? '1px solid black'
-    : 'none',
-  borderLeft: getIsFirstRightPinnedColumn(column) ? '1px solid black' : 'none',
+}): CSSProperties => ({
+  display: 'flex',
   minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
     header?.id ?? column.id,
   )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
   width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
     header?.id ?? column.id,
   )}-size) * 1px)`,
+  flex: `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
+    header?.id ?? column.id,
+  )}-size) 0 auto`,
+  flexDirection: header ? 'column' : 'row',
+  height: '100%',
+  // alignItems: 'flex-start',
+  position: column.getIsPinned() ? 'sticky' : undefined,
+  zIndex: column.getIsPinned() ? '1' : undefined,
+  left:
+    column.getIsPinned() === 'left'
+      ? `${column.getStart('left')}px`
+      : undefined,
+  right:
+    column.getIsPinned() === 'right'
+      ? `${getTotalRight(table, column)}px`
+      : undefined,
+  backgroundColor: column.getIsPinned()
+    ? 'var(--sscds-table-color-background)'
+    : undefined,
+  borderRight: getIsLastLeftPinnedColumn(table, column)
+    ? '1px solid var(--sscds-table-color-border)'
+    : 'inherit',
+  borderLeft: getIsFirstRightPinnedColumn(column)
+    ? '1px solid var(--sscds-table-color-border)'
+    : 'inherit',
+
+  boxShadow: getIsLastLeftPinnedColumn(table, column)
+    ? 'var(--sscds-table-shadow-pin-left)'
+    : getIsFirstRightPinnedColumn(column)
+    ? 'var(--sscds-table-shadow-pin-right)'
+    : 'none',
 });
 
 export const reorderColumn = <D>(

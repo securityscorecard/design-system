@@ -113,7 +113,7 @@ export interface ParsedDatatableOptions<D>
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
-  rowsCount?: DatatableOptions<D>['rowsCount'];
+  rowCount?: DatatableOptions<D>['rowCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
   selectAllMode?: DatatableOptions<D>['selectAllMode'];
   state?: DatatableOptions<D>['state'];
@@ -151,6 +151,29 @@ export interface DatatableOptions<D>
     | 'enablePinning'
     | 'initialState'
     | 'state'
+    | 'groupedColumnMode'
+    | 'onGroupingChange'
+    | 'getGroupedRowModel'
+    | 'enableGrouping'
+    | 'manualGrouping'
+    | 'aggregationFns'
+    | 'filterFns'
+    | 'filterFromLeafRows'
+    | 'getFilteredRowModel'
+    | 'enableFilters'
+    | 'globalFilterFn'
+    | 'manualFiltering'
+    | 'onColumnFiltersChange'
+    | 'onGlobalFilterChange'
+    | 'maxLeafRowFilterDepth'
+    | 'enableColumnFilters'
+    | 'enableGlobalFilter'
+    | 'getColumnCanGlobalFilter'
+    | 'onRowPinningChange'
+    | 'enableRowPinning'
+    | 'keepPinnedRows'
+    | 'getSubRows'
+    | 'enableSubRowSelection'
   > {
   data: D[];
   columns: DatatableColumnDef<D>[];
@@ -158,7 +181,7 @@ export interface DatatableOptions<D>
   state?: Partial<DatatableState>;
 
   /**
-   * @default true
+   * @default false
    */
   enableMultiSort?: boolean;
   /**
@@ -175,11 +198,11 @@ export interface DatatableOptions<D>
    */
   enablePagination?: boolean;
   /**
-   * @default true
+   * @default false
    */
   enableRowsPerPage?: boolean;
   rowsPerPageOptions?: number[];
-  rowsCount?: number;
+  rowCount?: number;
 
   /**
    * @default false
