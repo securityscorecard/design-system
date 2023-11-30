@@ -94,6 +94,8 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
 
 interface CustomState {
   showColumnSettings: boolean;
+  isLoading: boolean;
+  showProgress: boolean;
 }
 export type DatatableInitialState = InitialTableState & CustomState;
 export type DatatableState = TableState & CustomState;

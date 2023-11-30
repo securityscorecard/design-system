@@ -11,7 +11,23 @@ import {
   ParsedDatatableOptions,
 } from './Datatable.types';
 
+export const getColumnId = <D>(columnDef: DatatableColumnDef<D>): string =>
+  columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;
+
 export const parseCSSVarId = (id: string) => id.replace(/[^a-zA-Z0-9]/g, '_');
+
+export const getAllLeafColumnDefs = <D>(
+  columns: DatatableColumnDef<D>[],
+): DatatableColumnDef<D>[] => {
+  const allLeafColumnDefs: DatatableColumnDef<D>[] = [];
+  const getLeafColumns = (cols: DatatableColumnDef<D>[]) => {
+    cols.forEach((col) => {
+      allLeafColumnDefs.push(col);
+    });
+  };
+  getLeafColumns(columns);
+  return allLeafColumnDefs;
+};
 
 export const prepareColumns = <D>({
   columnDefs,
@@ -54,7 +70,6 @@ export const getCommonCellStyles = <D>({
   header?: DatatableHeader<D>;
   column: DatatableColumn<D>;
 }): CSSProperties => ({
-  display: 'flex',
   minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
     header?.id ?? column.id,
   )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
@@ -66,7 +81,6 @@ export const getCommonCellStyles = <D>({
   )}-size) 0 auto`,
   flexDirection: header ? 'column' : 'row',
   height: '100%',
-  // alignItems: 'flex-start',
   position: column.getIsPinned() ? 'sticky' : undefined,
   zIndex: column.getIsPinned() ? '1' : undefined,
   left:

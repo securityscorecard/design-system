@@ -97,3 +97,5 @@ const wrapper = (storyFn) => (
 );
 
 export const decorators = [withDesign, withScreenshot, wrapper];
+
+window.Math.random = () => 0.5;

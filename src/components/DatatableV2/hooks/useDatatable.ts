@@ -7,7 +7,12 @@ import {
 } from '@tanstack/react-table';
 import { useMemo, useState } from 'react';
 
-import { getDefaultColumnOrder, prepareColumns } from '../columns.utils';
+import {
+  getAllLeafColumnDefs,
+  getColumnId,
+  getDefaultColumnOrder,
+  prepareColumns,
+} from '../columns.utils';
 import {
   DatatableInitialState,
   DatatableInstance,
@@ -17,17 +22,16 @@ import { displayColumnIds, useDisplayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
 import { useDebounce } from '../../../hooks/useDebounce';
 
-export const useDatatable = <D>({
-  data,
-  columns,
-  ...options
-}: DatatableOptions<D>): DatatableInstance<D> => {
+export const useDatatable = <D>(
+  options: DatatableOptions<D>,
+): DatatableInstance<D> => {
   const tableOptions = useOptions<D>(options);
   const displayColumns = useDisplayColumns<D>(tableOptions);
 
   const columnDefs = useMemo(
-    () => prepareColumns({ columnDefs: [...displayColumns, ...columns] }),
-    [columns, displayColumns],
+    () =>
+      prepareColumns({ columnDefs: [...displayColumns, ...options.columns] }),
+    [options.columns, displayColumns],
   );
 
   const initialState = useMemo<Partial<DatatableInitialState>>(() => {
@@ -59,13 +63,34 @@ export const useDatatable = <D>({
 
   const debouncedSetColumnSizing = useDebounce(setColumnSizing);
 
+  const data: D[] = useMemo(
+    () =>
+      options.state?.isLoading && !options.data.length
+        ? [
+            ...Array(
+              options.state?.pagination?.pageSize ||
+                initialState?.pagination?.pageSize ||
+                10,
+            ).fill(null),
+          ].map(() =>
+            Object.assign(
+              {},
+              ...getAllLeafColumnDefs(tableOptions.columns).map((col) => ({
+                [getColumnId(col)]: null,
+              })),
+            ),
+          )
+        : options.data,
+    [
+      initialState?.pagination?.pageSize,
+      options.data,
+      options.state?.isLoading,
+      options.state?.pagination?.pageSize,
+      tableOptions.columns,
+    ],
+  );
+
   const table = useReactTable({
-    ...tableOptions,
-    // I know what I'm doing here
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    columns: columnDefs,
-    data,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: tableOptions.enablePagination
       ? getPaginationRowModel()
@@ -73,6 +98,12 @@ export const useDatatable = <D>({
     getSortedRowModel: tableOptions.enableSorting
       ? getSortedRowModel()
       : undefined,
+    ...tableOptions,
+    // I know what I'm doing here
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    columns: columnDefs,
+    data,
     initialState,
     state: {
       showColumnSettings,

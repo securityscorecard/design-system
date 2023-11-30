@@ -13,8 +13,10 @@ const SelectButton = <D,>({
   isSelectAll?: boolean;
 }) => {
   const {
+    getState,
     options: { enableMultiRowSelection, selectAllMode },
   } = table;
+  const { isLoading } = getState();
 
   const allRowsSelected = !isSelectAll
     ? undefined
@@ -24,7 +26,7 @@ const SelectButton = <D,>({
 
   const common: ComponentProps<'input'> = {
     checked: isSelectAll ? allRowsSelected : row?.getIsSelected(),
-    disabled: row && !row?.getCanSelect(),
+    disabled: isLoading || (row && !row?.getCanSelect()),
     'aria-label': isSelectAll ? 'Toggle select all' : 'Toggle select row',
     onChange: (e) => {
       e.stopPropagation();

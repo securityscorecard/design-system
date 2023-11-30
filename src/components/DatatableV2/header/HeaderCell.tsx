@@ -40,6 +40,7 @@ const HeaderCell = <D,>({
       key={id}
       className={clx('ds-table-header-cell ds-table-cell', {
         isSorted: getIsSorted(),
+        'ds-table-cell-display': columnDef.columnDefType === 'display',
       })}
       style={{
         ...getCommonCellStyles({
