@@ -51,7 +51,8 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
     >
       {table.options.enableRowSelection && <Selection table={table} />}
       <Table table={table} />
-      {table.options.enablePagination && <Pagination table={table} />}
+      {table.options.enablePagination &&
+        table.getRowModel().rows.length > 0 && <Pagination table={table} />}
     </Surface>
   );
 };

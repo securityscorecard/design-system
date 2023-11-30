@@ -112,6 +112,7 @@ export interface ParsedDatatableOptions<D>
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
+  renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
   rowCount?: DatatableOptions<D>['rowCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
@@ -252,4 +253,6 @@ export interface DatatableOptions<D>
   enableColumnOrdering?: boolean;
 
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
+
+  renderNoDataFallback?: (props: { table: DatatableInstance<D> }) => ReactNode;
 }
