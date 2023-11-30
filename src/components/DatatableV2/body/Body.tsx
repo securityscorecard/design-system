@@ -31,7 +31,7 @@ const Body = <D,>({ table }: { table: DatatableInstance<D> }) => {
                     <Text as="p" size="h5">
                       No results found
                     </Text>
-                    <Paragraph variant="secondary">
+                    <Paragraph as="div" variant="secondary">
                       This may happen because:
                       <List>
                         <li>the data set is empty</li>

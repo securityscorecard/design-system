@@ -36,6 +36,11 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           paddingType: 'squish',
           theme,
         }),
+        '--sscds-table-spacing-cell-display': getPaddingSize({
+          paddingSize: 'md',
+          paddingType: 'stretch',
+          theme,
+        }),
         '--sscds-table-typography-weight-header': getFontWeight('bold', {
           theme,
         }),

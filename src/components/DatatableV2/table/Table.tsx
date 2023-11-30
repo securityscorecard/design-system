@@ -6,6 +6,7 @@ import Header from '../header/Header';
 import { parseCSSVarId } from '../columns.utils';
 import Settings from '../panels/Settings';
 import TableRoot from './TableRoot';
+import ProgressBar from './ProgressBar';
 
 const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -18,6 +19,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     columnSizingInfo,
     columnVisibility,
     showColumnSettings,
+    showProgress,
   } = getState();
 
   const columnSizeVars = useMemo(() => {
@@ -37,10 +39,12 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
 
   return (
     <TableRoot>
+      {showProgress && <ProgressBar isTop />}
       <table className="ds-table" style={columnSizeVars}>
         <Header table={table} />
         <Body table={table} />
       </table>
+      {showProgress && <ProgressBar isBottom />}
       {showColumnSettings && <Settings table={table} />}
     </TableRoot>
   );
