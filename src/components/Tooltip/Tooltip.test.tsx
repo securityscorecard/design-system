@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 
 import Tooltip from './Tooltip';
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
@@ -16,16 +16,28 @@ describe('Tooltip', () => {
       const tooltipParent = screen.getByText(childrenText);
       fireEvent.pointerMove(tooltipParent);
       expect(tooltipParent).toBeInTheDocument();
-      await waitFor(() => {
-        expect(screen.getByTestId('ssc-tooltip')).toBeInTheDocument();
-      });
+      expect(await screen.findByTestId('ssc-tooltip')).toBeInTheDocument();
     });
   });
   describe('when popup is not defined', () => {
-    it('should display children', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it('should display children', async () => {
       renderWithProviders(<Tooltip>{childrenText}</Tooltip>);
+      const tooltipParent = screen.getByText(childrenText);
+      fireEvent.pointerMove(tooltipParent);
+      act(() => {
+        jest.advanceTimersByTime(5000);
+      });
 
       expect(screen.getByText(childrenText)).toBeInTheDocument();
+      expect(screen.queryByTestId('ssc-tooltip')).not.toBeInTheDocument();
     });
   });
 });
