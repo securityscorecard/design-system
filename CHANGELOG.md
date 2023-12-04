@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/securityscorecard/design-system/compare/v1.15.0...v1.15.1) (2023-12-04)
+
+
+### Bug Fixes
+
+* **Tooltip:** fix showing empty tooltip ([2c72220](https://github.com/securityscorecard/design-system/commit/2c7222032f3c06e982a75e37883c747e27d6960f))
+
 # [1.15.0](https://github.com/securityscorecard/design-system/compare/v1.14.0...v1.15.0) (2023-12-04)
 
 
