@@ -27,14 +27,24 @@ module.exports = {
       propFilter: (prop) => {
         if (prop.parent) {
           // filter inherited props
-          return !prop.parent.fileName.includes("node_modules/@types/react/")
-            && !prop.parent.fileName.includes("node_modules/@emotion/")
-            && !prop.parent.fileName.includes("node_modules/@types/node/")
-            && !prop.parent.fileName.includes("node_modules/typescript/");
+          return (
+            !prop.parent.fileName.includes('node_modules/@types/react/') &&
+            !prop.parent.fileName.includes('node_modules/@emotion/') &&
+            !prop.parent.fileName.includes('node_modules/@types/node/') &&
+            !prop.parent.fileName.includes('node_modules/typescript/')
+          );
         }
         // filter inherited styled-components props
         return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
       },
     },
+  },
+  webpackFinal: async (config) => {
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: 'javascript/auto',
+    });
+    return config;
   },
 };

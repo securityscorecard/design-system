@@ -28,7 +28,7 @@ describe('Drawer', () => {
   it('should show footer if footer is defined', () => {
     renderWithProviders(
       <Drawer
-        size="sm"
+        size="md"
         onClose={() => null}
         title="Test drawer"
         footer={<Footer />}
@@ -46,7 +46,7 @@ describe('Drawer', () => {
   it('should display adornment if adornment is defined', () => {
     renderWithProviders(
       <Drawer
-        size="sm"
+        size="md"
         onClose={() => null}
         title="Test drawer"
         adornment={<Adornment />}
@@ -63,20 +63,20 @@ describe('Drawer', () => {
 
   it('should have the correct width', () => {
     renderWithProviders(
-      <Drawer size="sm" onClose={() => null} title="Test drawer">
+      <Drawer size="md" onClose={() => null} title="Test drawer">
         <Stack>
           <Paragraph>Whatever happens, happens here</Paragraph>
         </Stack>
       </Drawer>,
     );
-    const maxWidthValue = pxToRem('360');
+    const maxWidthValue = pxToRem('480');
     const drawer = screen.getByRole('dialog');
     expect(drawer).toHaveStyle(`max-width: ${maxWidthValue}`);
   });
 
   it('should display the title', () => {
     renderWithProviders(
-      <Drawer size="sm" onClose={() => null} title="Test drawer">
+      <Drawer size="md" onClose={() => null} title="Test drawer">
         <Stack>
           <Paragraph>Whatever happens, happens here</Paragraph>
         </Stack>
@@ -90,7 +90,7 @@ describe('Drawer', () => {
   it('should display the content', () => {
     renderWithProviders(
       <Drawer
-        size="sm"
+        size="md"
         onClose={() => null}
         title="Test drawer"
         data-testid="drawer"

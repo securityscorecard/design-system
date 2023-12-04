@@ -5,6 +5,11 @@ import { createIconLibrary, resetIconLibrary } from './src';
 
 beforeAll(() => {
   createIconLibrary();
+  global.ResizeObserver = jest.fn().mockReturnValue({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  });
 });
 
 afterAll(() => {
