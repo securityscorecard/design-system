@@ -8,7 +8,7 @@ import { columns, data } from './mocks';
 
 describe('DatatableV2/sorting', () => {
   it('should have sorting enabled by default', () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     expect(
       screen.getAllByRole('button', {
@@ -20,7 +20,7 @@ describe('DatatableV2/sorting', () => {
   describe('when is sorting enabled', () => {
     it('should update sorting labels on sort', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} enableSorting />,
+        <Datatable data={data} columns={columns} enableSorting id="test" />,
       );
 
       const sortingButtons = screen.getAllByRole('button', {
@@ -44,6 +44,7 @@ describe('DatatableV2/sorting', () => {
           columns={columns}
           enableSorting
           enableMultiSort
+          id="test"
         />,
       );
 
@@ -53,15 +54,15 @@ describe('DatatableV2/sorting', () => {
 
       await userEvent.click(sortingButtons[2]);
       const tableCellsSorted = await screen.findAllByRole('cell');
-      expect(tableCellsSorted[2]).toHaveTextContent('blue');
-      expect(tableCellsSorted[5]).toHaveTextContent('blue');
-      expect(tableCellsSorted[8]).toHaveTextContent('green');
+      expect(tableCellsSorted[3]).toHaveTextContent('blue');
+      expect(tableCellsSorted[7]).toHaveTextContent('blue');
+      expect(tableCellsSorted[11]).toHaveTextContent('green');
 
       await userEvent.click(sortingButtons[1], { shiftKey: true });
       const tableCellsMultiSorted = await screen.findAllByRole('cell');
-      expect(tableCellsMultiSorted[1]).toHaveTextContent('Rogers');
-      expect(tableCellsMultiSorted[4]).toHaveTextContent('Strange');
-      expect(tableCellsMultiSorted[7]).toHaveTextContent('Banner');
+      expect(tableCellsMultiSorted[2]).toHaveTextContent('Rogers');
+      expect(tableCellsMultiSorted[6]).toHaveTextContent('Strange');
+      expect(tableCellsMultiSorted[10]).toHaveTextContent('Banner');
     });
 
     it('should sort on header name click', async () => {
@@ -70,6 +71,7 @@ describe('DatatableV2/sorting', () => {
         <Datatable
           data={data}
           columns={columns}
+          id="test"
           onStateChange={sortCallback}
         />,
       );
@@ -88,6 +90,7 @@ describe('DatatableV2/sorting', () => {
           columns={columns}
           enableSorting
           enableSortingRemoval={false}
+          id="test"
         />,
       );
 
@@ -117,6 +120,7 @@ describe('DatatableV2/sorting', () => {
           ]}
           enableSorting
           onStateChange={sortCallback}
+          id="test"
         />,
       );
 
@@ -143,6 +147,7 @@ describe('DatatableV2/sorting', () => {
           columns={columns}
           onStateChange={sortCallback}
           enableSorting={false}
+          id="test"
         />,
       );
 

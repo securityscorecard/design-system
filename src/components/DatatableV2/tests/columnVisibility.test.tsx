@@ -8,7 +8,7 @@ import { columns, data } from './mocks';
 
 describe('DatatableV2/columnVisibility', () => {
   it.skip('should have column visibility enabled by default', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     await userEvent.click(
       screen.getAllByRole('button', {
@@ -24,7 +24,9 @@ describe('DatatableV2/columnVisibility', () => {
 
   describe('when is column visibility enabled', () => {
     it.skip('should hide column', async () => {
-      renderWithProviders(<Datatable data={data} columns={columns} />);
+      renderWithProviders(
+        <Datatable data={data} columns={columns} id="test" />,
+      );
 
       await userEvent.click(
         screen.getAllByRole('button', {
@@ -51,6 +53,7 @@ describe('DatatableV2/columnVisibility', () => {
             { ...columns[2], enableHiding: false },
           ]}
           enableHiding
+          id="test"
         />,
       );
 

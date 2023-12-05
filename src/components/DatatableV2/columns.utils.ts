@@ -138,5 +138,5 @@ export const getDefaultColumnOrder = <D>(
       ...columnOrder,
       ...defaultColumnOrder,
     ]),
-  );
+  ).filter(Boolean);
 };

@@ -41,6 +41,8 @@ const Template: Story = (args) => <Datatable {...args} />;
 Template.args = {
   columns,
   data: generateData(25),
+  enablePersistentState: false,
+  id: 'datatable_template',
 };
 
 export default Template;

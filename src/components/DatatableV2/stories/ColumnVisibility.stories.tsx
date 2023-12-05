@@ -32,12 +32,14 @@ export const InitialColumnVisibility: Story = Template.bind({});
 InitialColumnVisibility.args = {
   ...Template.args,
   initialState: {
-    columnVisibility: { organization_grade: false },
+    columnVisibility: { score: false },
   },
 };
 
 export const ColumnVisibilityManagedState: Story = (args) => {
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    score: false,
+  });
 
   return (
     <>
