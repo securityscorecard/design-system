@@ -19,7 +19,43 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
   'accessorFn' | 'accessorFn' | 'cell' | 'header'
 > & {
+  /**
+   * You can use this to compose cell value from multiple keys in data object.
+   *
+   * Example:
+   * If your data looks like:
+   * ```
+   * type Person = {
+   *   firstName: string;
+   *   lastName: string;
+   *   age: number;
+   * }
+   * ```
+   *
+   * You can extract full name with:
+   * ```
+   * {
+   *   header: 'fullname'
+   *   accessorFn: row => `${row.firstName} ${row.lastName}
+   * }
+   */
   accessorFn?: AccessorFn<D, V>;
+  /**
+   * Points cell value to single key in your data object.
+   *
+   * Example:
+   * ```
+   * type Person = {
+   *   firstName: string;
+   *   lastName: string;
+   *   age: number;
+   * }
+   *
+   * {
+   *   header: 'age'
+   *   accessorKey: 'age
+   * }
+   */
   accessorKey?: DeepKeys<D> | (string & Record<string, unknown>);
   /**
    * `header` is used as a readable column name on multiple places withing the table UI.
@@ -27,6 +63,9 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
    *  If you want to render custom JSX in that table header cell use `headerComponent` property.
    */
   header: string;
+  /**
+   * Provide custom implementation for showing column header.
+   */
   headerComponent?:
     | ((props: {
         column: DatatableColumn<D, V>;
@@ -34,6 +73,9 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
         table: DatatableInstance<D>;
       }) => ReactNode)
     | ReactNode;
+  /**
+   * Provide custom implementation for showing column value.
+   */
   cell?: (props: {
     cell: DatatableCell<D>;
     column: DatatableColumn<D, V>;
@@ -42,8 +84,22 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
     row: DatatableRow<D>;
     table: DatatableInstance<D>;
   }) => ReactNode;
+  /**
+   * Defines column purpose. If this is left empty table will consider the column to be `data` type.
+   * If the column is meant to display non-tabular data (e.g. buttons) you need to set this property
+   * to `display`. This will filter out the column from column ordering and disables table functions
+   * (pinning, sizing, sorting, etc).
+   *
+   * @default data
+   */
   columnDefType?: 'display' | 'data';
+  /**
+   * Enables/disables actions menu in header for given column.
+   */
   enableColumnActions?: boolean;
+  /**
+   * Enables/disables ordering for given column.
+   */
   enableOrdering?: boolean;
 };
 
@@ -148,49 +204,141 @@ export interface DatatableInstance<D>
 export interface DatatableOptions<D>
   extends Omit<
     Partial<TableOptions<D>>,
+    | 'aggregationFns'
+    | 'autoResetExpanded'
     | 'columnResizeMode'
     | 'columns'
     | 'data'
-    | 'enablePinning'
-    | 'initialState'
-    | 'state'
-    | 'groupedColumnMode'
-    | 'onGroupingChange'
-    | 'getGroupedRowModel'
+    | 'enableColumnFilters'
+    | 'enableExpanding'
+    | 'enableFilters'
+    | 'enableGlobalFilter'
     | 'enableGrouping'
-    | 'manualGrouping'
-    | 'aggregationFns'
+    | 'enablePinning'
+    | 'enableRowPinning'
+    | 'enableSubRowSelection'
     | 'filterFns'
     | 'filterFromLeafRows'
+    | 'getColumnCanGlobalFilter'
+    | 'getCoreRowModel'
+    | 'getExpandedRowModel'
+    | 'getFacetedMinMaxValues'
+    | 'getFacetedRowModel'
+    | 'getFacetedUniqueValues'
     | 'getFilteredRowModel'
-    | 'enableFilters'
+    | 'getGroupedRowModel'
+    | 'getIsRowExpanded'
+    | 'getPaginationRowModel'
+    | 'getRowCanExpand'
+    | 'getSortedRowModel'
+    | 'getSubRows'
     | 'globalFilterFn'
+    | 'groupedColumnMode'
+    | 'initialState'
+    | 'keepPinnedRows'
     | 'manualFiltering'
+    | 'manualGrouping'
+    | 'maxLeafRowFilterDepth'
     | 'onColumnFiltersChange'
     | 'onGlobalFilterChange'
-    | 'maxLeafRowFilterDepth'
-    | 'enableColumnFilters'
-    | 'enableGlobalFilter'
-    | 'getColumnCanGlobalFilter'
+    | 'onGroupingChange'
     | 'onRowPinningChange'
-    | 'enableRowPinning'
-    | 'keepPinnedRows'
-    | 'getSubRows'
-    | 'enableSubRowSelection'
+    | 'state'
+    | 'manualExpanding'
+    | 'mergeOptions'
+    | 'onExpandedChange'
+    | 'paginateExpandedRows'
+    | 'sortingFns'
   > {
-  data: D[];
+  /**
+   * Definition of the table columns. Each column definition is REQUIRED to have `header` property
+   * set. If you define a column that is not used for displaing row data (e.g. have button...),
+   * please provide `columnDefType: 'display'`. Setting this property will disable some unnecessary
+   * functionalities and filter out the column from column orderdering.
+   */
   columns: DatatableColumnDef<D>[];
   /**
-   * Unique table identifier. Used as id for storing table state to LocalStorage when enablePersistentState is enabled
+   * Table data that will be displayed.
    */
-  id: string;
-  initialState?: Partial<DatatableInitialState>;
-  state?: Partial<DatatableState>;
-
+  data: D[];
+  /**
+   * Enables/disables actions menu in column header with column-related actions.
+   *
+   * @default true
+   */
+  enableColumnActions?: boolean;
+  /**
+   * Enables/disables column ordering for the table.
+   * Controlled in table column settings panel accessible through the column actions menu.
+   *
+   * @default true
+   */
+  enableColumnOrdering?: boolean;
+  /**
+   * Enables/disables column pinning for the table. Controlled in the column actions menu or table
+   * column settings panel accessible through the column actions menu.
+   *
+   * @default true
+   */
+  enableColumnPinning?: boolean;
+  /**
+   * Enables/disables column resizing for the table. Columns can be resized by dragging handler in
+   * the column header.
+   *
+   * @default true
+   */
+  enableColumnResizing?: boolean;
+  /**
+   * Enables/disables column hiding for the table. Controlled in the column actions menu or table
+   * column settings panel accessible through the column actions menu.
+   *
+   * @default true
+   */
+  enableHiding?: boolean;
+  /**
+   * Enables/disables selection of multiple rows in the table. If this is `false` radio buttons will
+   * be displayed instead of checkboxes and there will be no select all option in the table header.
+   *
+   * @default true
+   */
+  enableMultiRowSelection?: TableOptions<D>['enableMultiRowSelection'];
   /**
    * @default false
    */
   enableMultiSort?: boolean;
+  /**
+   * Enables/disables pagination for the table.
+   *
+   * @default true
+   */
+  enablePagination?: boolean;
+  /**
+   * Enables/disables storing table state into LocalStorage. This will automatically store pinned
+   * and hidden columns, columns order and size and sorting. This property REQUIRES 'id' prop to be
+   * set. The state will be stored in LS with key in format `sscds_dt_<id>`.
+   *
+   * @default true
+   */
+  enablePersistentState?: boolean;
+  /**
+   * Enables/disables row selection for the table.
+   *
+   * @default true
+   */
+  enableRowSelection?: TableOptions<D>['enableRowSelection'];
+  /**
+   * Enables/disables rows per page selector for the table. This property REQUIRES
+   * `enablePagination` to be true.
+   *
+   * @default false
+   */
+  enableRowsPerPage?: boolean;
+  /**
+   * Enables/disables checkbox in the table header that selects all rows at once.
+   *
+   * @default true
+   */
+  enableSelectAll?: boolean;
   /**
    * @default true
    */
@@ -199,71 +347,63 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableSortingRemoval?: boolean;
-
   /**
-   * @default true
+   * Unique table identifier. Used as id for storing table state to LocalStorage when enablePersistentState is enabled
    */
-  enablePagination?: boolean;
+  id: string;
   /**
-   * @default false
+   * Default state of the table. This is used when table is initialized and is used when state is
+   * restored to default.
    */
-  enableRowsPerPage?: boolean;
-  rowsPerPageOptions?: number[];
-  rowCount?: number;
-
+  initialState?: Partial<DatatableInitialState>;
   /**
-   * @default true
+   * If provided, this function will be called with an `updaterFn` when `state.showColumnSetting`
+   * changes. This overrides the default internal state management, so you are expected to manage
+   * this state on your own. You can pass the managed state back to the table via the
+   * `tableOptions.state.showColumnSettings` option.
+   *
    */
-  enableRowSelection?: TableOptions<D>['enableRowSelection'];
+  onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
   /**
-   * @default true
+   * You can provide your own implementation of the state when there are no data in the table. This
+   * property accepts React component with one property `table` which holds current instance of the
+   * table.
    */
-  enableMultiRowSelection?: TableOptions<D>['enableMultiRowSelection'];
+  renderNoDataFallback?: (props: { table: DatatableInstance<D> }) => ReactNode;
   /**
-   * @default true
+   * You can provide your own implementation of the row actions container. This property accepts
+   * React component with properties:
+   *  - `selectedRows` - array of currently selected rows
+   *  - `totalRowCount` - count of all rows in the table
+   *  - `table` - current instance of the table
    */
-  enableSelectAll?: boolean;
-  /**
-   * @default 'all'
-   */
-  selectAllMode?: 'page' | 'all';
   renderRowSelectionActions?: (props: {
     selectedRows: D[];
     totalRowCount: number;
     table: DatatableInstance<D>;
   }) => ReactNode;
-
   /**
-   * @default true
+   * Expected number of rows in the dataset which is used for displaying pagination correctly when
+   * pagination is not managed internally. This property is REQUIRED for the manual (managed,
+   * server-side) pagination.
    */
-  enableHiding?: boolean;
-
+  rowCount?: number;
   /**
-   * @default true
+   * List of options for the row count displayed on the current page.
+   *
+   * default: `[10, 25, 50, 100]`
    */
-  enableColumnPinning?: boolean;
-
+  rowsPerPageOptions?: number[];
   /**
-   * @default true
+   * Switch mode for the select all checkbox in the table header. When `page` is set checkbox will
+   * select all rows in the current page. When `all` is set checkbox will select all rows in the
+   * table.
+   *
+   * @default page
    */
-  enableColumnActions?: boolean;
-
+  selectAllMode?: 'page' | 'all';
   /**
-   * @default true
+   * Current state of the table. Used when you need to manage table state on your own.
    */
-  enableColumnResizing?: boolean;
-
-  /**
-   * @default true
-   */
-  enableColumnOrdering?: boolean;
-
-  onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
-
-  /**
-   * @default true
-   */
-  enablePersistentState?: boolean;
-
-  renderNoDataFallback?: (props: { table: DatatableInstance<D> }) => ReactNode;
+  state?: Partial<DatatableState>;
 }

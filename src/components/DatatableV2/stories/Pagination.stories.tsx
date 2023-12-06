@@ -20,8 +20,8 @@ PaginationEnabled.args = Template.args;
 export const DisabledPagination: Story = Template.bind({});
 DisabledPagination.args = { ...Template.args, enablePagination: false };
 
-export const DisabledRowsPerPage: Story = Template.bind({});
-DisabledRowsPerPage.args = { ...Template.args, enableRowsPerPage: false };
+export const EnabledRowsPerPage: Story = Template.bind({});
+EnabledRowsPerPage.args = { ...Template.args, enableRowsPerPage: true };
 
 export const CustomRowsPerPageOptions: Story = Template.bind({});
 CustomRowsPerPageOptions.args = {
@@ -34,14 +34,14 @@ export const InitialPagination: Story = Template.bind({});
 InitialPagination.args = {
   ...Template.args,
   initialState: {
-    pagination: { pageSize: 25, pageIndex: 1 },
+    pagination: { pageSize: 10, pageIndex: 1 },
   },
 };
 
 export const PaginationManagedState: Story = (args) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 1,
-    pageSize: 25,
+    pageSize: 10,
   });
 
   return (
