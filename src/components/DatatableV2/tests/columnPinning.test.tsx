@@ -8,7 +8,7 @@ import { columns, data } from './mocks';
 
 describe('DatatableV2/columnPinning', () => {
   it.skip('should have column pinning enabled by default', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     await userEvent.click(
       screen.getAllByRole('button', {
@@ -25,7 +25,12 @@ describe('DatatableV2/columnPinning', () => {
   describe('when is column pinning enabled', () => {
     it.skip('should pin column to left', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} enableColumnPinning />,
+        <Datatable
+          data={data}
+          columns={columns}
+          enableColumnPinning
+          id="test"
+        />,
       );
 
       await userEvent.click(
@@ -66,6 +71,7 @@ describe('DatatableV2/columnPinning', () => {
           columns={columns}
           enableColumnPinning
           initialState={{ columnPinning: { left: ['color'] } }}
+          id="test"
         />,
       );
 
@@ -94,6 +100,7 @@ describe('DatatableV2/columnPinning', () => {
             { ...columns[2], enablePinning: false },
           ]}
           enableColumnPinning
+          id="test"
         />,
       );
 

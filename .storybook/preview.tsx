@@ -99,3 +99,12 @@ const wrapper = (storyFn) => (
 export const decorators = [withDesign, withScreenshot, wrapper];
 
 window.Math.random = () => 0.5;
+
+function clearDatatableLS() {
+  Object.keys(localStorage)
+  .filter(x =>
+    x.startsWith('sscds_dt_'))
+  .forEach(x =>
+    localStorage.removeItem(x))
+}
+clearDatatableLS()

@@ -18,7 +18,6 @@ export default {
 export const SelectionEnabled: Story = Template.bind({});
 SelectionEnabled.args = {
   ...Template.args,
-  enableRowSelection: true,
   getRowId: (row) => row.id,
 };
 

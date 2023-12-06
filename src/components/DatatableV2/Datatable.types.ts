@@ -180,6 +180,10 @@ export interface DatatableOptions<D>
   > {
   data: D[];
   columns: DatatableColumnDef<D>[];
+  /**
+   * Unique table identifier. Used as id for storing table state to LocalStorage when enablePersistentState is enabled
+   */
+  id: string;
   initialState?: Partial<DatatableInitialState>;
   state?: Partial<DatatableState>;
 
@@ -208,7 +212,7 @@ export interface DatatableOptions<D>
   rowCount?: number;
 
   /**
-   * @default false
+   * @default true
    */
   enableRowSelection?: TableOptions<D>['enableRowSelection'];
   /**
@@ -255,6 +259,11 @@ export interface DatatableOptions<D>
   enableColumnOrdering?: boolean;
 
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
+
+  /**
+   * @default true
+   */
+  enablePersistentState?: boolean;
 
   renderNoDataFallback?: (props: { table: DatatableInstance<D> }) => ReactNode;
 }

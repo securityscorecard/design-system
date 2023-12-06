@@ -17,7 +17,7 @@ describe('DatatableV2/columnResizing', () => {
   });
 
   it('should have column resizing enabled by default', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     expect(screen.getAllByRole('separator')).toHaveLength(columns.length);
   });
@@ -30,6 +30,7 @@ describe('DatatableV2/columnResizing', () => {
           data={data}
           columns={columns}
           onColumnSizingChange={columnSizeMock}
+          id="test"
         />,
       );
 
@@ -47,6 +48,7 @@ describe('DatatableV2/columnResizing', () => {
           data={data}
           columns={columns}
           onColumnSizingChange={columnSizeMock}
+          id="test"
         />,
       );
 
@@ -63,6 +65,7 @@ describe('DatatableV2/columnResizing', () => {
           data={data}
           columns={columns}
           onColumnSizingChange={columnSizeMock}
+          id="test"
         />,
       );
 
@@ -80,6 +83,7 @@ describe('DatatableV2/columnResizing', () => {
           columns={columns}
           initialState={{ columnSizing: { name: 500 } }}
           onColumnSizingChange={columnSizeMock}
+          id="test"
         />,
       );
 
@@ -97,6 +101,7 @@ describe('DatatableV2/columnResizing', () => {
           columns={columns}
           initialState={{ columnSizing: { name: 500 } }}
           onColumnSizingChange={columnSizeMock}
+          id="test"
         />,
       );
 

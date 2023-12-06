@@ -8,7 +8,7 @@ import { columns, data } from './mocks';
 
 describe('DatatableV2/sorting', () => {
   it('should have pagination enabled by default', () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     expect(
       screen.getByRole('button', {
@@ -25,6 +25,7 @@ describe('DatatableV2/sorting', () => {
           columns={columns}
           enablePagination
           initialState={{ pagination: { pageSize: 1 } }}
+          id="test"
         />,
       );
 
@@ -59,6 +60,7 @@ describe('DatatableV2/sorting', () => {
           initialState={{ pagination: { pageSize: 3 } }}
           rowsPerPageOptions={[1, 3]}
           enableRowsPerPage
+          id="test"
         />,
       );
 

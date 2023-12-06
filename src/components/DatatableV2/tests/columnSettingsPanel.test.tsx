@@ -8,7 +8,7 @@ import { columns, data } from './mocks';
 
 describe('DatatableV2/columnSettingsPanel', () => {
   it.skip('should open the column settings panel via column actions menu', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     await userEvent.click(
       screen.getAllByRole('button', {
@@ -30,6 +30,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         data={data}
         columns={columns}
         initialState={{ showColumnSettings: true }}
+        id="test"
       />,
     );
 
@@ -50,6 +51,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         data={data}
         columns={columns}
         initialState={{ showColumnSettings: true }}
+        id="test"
       />,
     );
 
@@ -77,6 +79,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
           showColumnSettings: true,
           columnVisibility: { name: false },
         }}
+        id="test"
       />,
     );
     expect(
@@ -103,6 +106,8 @@ describe('DatatableV2/columnSettingsPanel', () => {
           showColumnSettings: true,
           columnVisibility: { name: false, surname: false, color: false },
         }}
+        id="test"
+        enableRowSelection={false}
       />,
     );
     expect(screen.queryByRole('columnheader')).not.toBeInTheDocument();
@@ -124,6 +129,8 @@ describe('DatatableV2/columnSettingsPanel', () => {
         initialState={{
           showColumnSettings: true,
         }}
+        id="test"
+        enableRowSelection={false}
       />,
     );
     expect(screen.getAllByRole('columnheader')).toHaveLength(3);
@@ -143,6 +150,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         data={data}
         columns={columns}
         initialState={{ showColumnSettings: true }}
+        id="test"
       />,
     );
 
@@ -152,7 +160,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
       }),
     );
 
-    expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
+    expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('color');
   });
 
   it('should unpin column in table', async () => {
@@ -164,10 +172,11 @@ describe('DatatableV2/columnSettingsPanel', () => {
           showColumnSettings: true,
           columnPinning: { left: ['color'] },
         }}
+        id="test"
       />,
     );
 
-    expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
+    expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('color');
 
     await userEvent.click(
       screen.getByRole('checkbox', {
@@ -175,8 +184,8 @@ describe('DatatableV2/columnSettingsPanel', () => {
       }),
     );
 
-    expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('name');
-    expect(screen.getAllByRole('columnheader')[2]).toHaveTextContent('color');
+    expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('name');
+    expect(screen.getAllByRole('columnheader')[3]).toHaveTextContent('color');
   });
 
   it('should reset column pinning', async () => {
@@ -187,6 +196,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         initialState={{
           showColumnSettings: true,
         }}
+        id="test"
       />,
     );
 
@@ -195,13 +205,13 @@ describe('DatatableV2/columnSettingsPanel', () => {
         name: /Pin color column/i,
       }),
     );
-    expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
+    expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('color');
 
     await userEvent.click(
       screen.getByRole('button', {
         name: /Unpin all columns/i,
       }),
     );
-    expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('name');
+    expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('name');
   });
 });

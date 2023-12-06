@@ -35,7 +35,11 @@ const SettingsItem = <D,>({
       paddingSize="md"
       style={style}
     >
-      <Inline align="center" gap="md" stretch={2}>
+      <Inline
+        align="center"
+        gap="md"
+        stretch={enableColumnOrdering ? 2 : 'start'}
+      >
         {enableColumnOrdering && (
           <IconButton
             ref={setActivatorNodeRef}

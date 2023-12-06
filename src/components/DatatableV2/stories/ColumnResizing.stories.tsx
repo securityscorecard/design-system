@@ -28,8 +28,8 @@ DisabledColumnResizingForColumn.args = {
   ],
 };
 
-export const CustomDefaultColumnWidths: Story = Template.bind({});
-CustomDefaultColumnWidths.args = {
+export const CustomDefaultColumnsWidth: Story = Template.bind({});
+CustomDefaultColumnsWidth.args = {
   ...Template.args,
   defaultColumn: {
     minSize: 200,

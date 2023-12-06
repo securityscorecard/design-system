@@ -7,20 +7,25 @@ import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
 describe('DatatableV2/selection', () => {
-  it('should have selection disabled by default', () => {
-    renderWithProviders(<Datatable data={data} columns={columns} />);
+  it('should have selection enabled by default', () => {
+    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
     expect(
-      screen.queryByRole('checkbox', {
-        name: /Toggle select row/i,
+      screen.getByRole('checkbox', {
+        name: /Toggle select all/i,
       }),
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
   });
 
   describe('when is selection enabled', () => {
     it('should select row on click', async () => {
       renderWithProviders(
-        <Datatable data={data} columns={columns} enableRowSelection />,
+        <Datatable
+          data={data}
+          columns={columns}
+          enableRowSelection
+          id="test"
+        />,
       );
 
       await userEvent.click(screen.getAllByLabelText('Toggle select row')[0]);
@@ -41,6 +46,7 @@ describe('DatatableV2/selection', () => {
           columns={columns}
           enableRowSelection
           initialState={{ rowSelection: { 0: true } }}
+          id="test"
         />,
       );
 
@@ -54,7 +60,12 @@ describe('DatatableV2/selection', () => {
     describe('select all', () => {
       it('should select all rows on click on selection header', async () => {
         renderWithProviders(
-          <Datatable data={data} columns={columns} enableRowSelection />,
+          <Datatable
+            data={data}
+            columns={columns}
+            enableRowSelection
+            id="test"
+          />,
         );
 
         await userEvent.click(screen.getByLabelText('Toggle select all'));
@@ -71,6 +82,7 @@ describe('DatatableV2/selection', () => {
             columns={columns}
             enableRowSelection
             initialState={{ rowSelection: { 0: true, 1: true, 2: true } }}
+            id="test"
           />,
         );
 
@@ -93,6 +105,7 @@ describe('DatatableV2/selection', () => {
             data={data}
             columns={columns}
             enableRowSelection={(row) => row.original.color !== 'green'}
+            id="test"
           />,
         );
         await userEvent.click(screen.getByLabelText('Toggle select all'));
@@ -112,6 +125,7 @@ describe('DatatableV2/selection', () => {
             enableRowSelection
             selectAllMode="page"
             initialState={{ pagination: { pageSize: 2 } }}
+            id="test"
           />,
         );
 
@@ -137,6 +151,7 @@ describe('DatatableV2/selection', () => {
             enableRowSelection
             selectAllMode="all"
             initialState={{ pagination: { pageSize: 2 } }}
+            id="test"
           />,
         );
 
@@ -159,6 +174,7 @@ describe('DatatableV2/selection', () => {
           columns={columns}
           enableRowSelection
           enableMultiRowSelection={false}
+          id="test"
         />,
       );
 
