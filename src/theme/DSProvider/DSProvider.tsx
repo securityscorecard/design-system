@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { ThemeProvider } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
 
@@ -31,7 +32,9 @@ const DSProvider: React.FC<DSProviderProps> = ({
   return (
     <ThemeProvider theme={dsTheme}>
       {hasIncludedGlobalStyles && <GlobalStyles />}
-      <DSContext.Provider value={dsConfig}>{children}</DSContext.Provider>
+      <DSContext.Provider value={dsConfig}>
+        <RadixTooltip.Provider>{children}</RadixTooltip.Provider>
+      </DSContext.Provider>
     </ThemeProvider>
   );
 };
