@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/securityscorecard/design-system/compare/v1.16.0...v1.16.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* **Tooltip:** add css namespace to tooltip content ([9a97a55](https://github.com/securityscorecard/design-system/commit/9a97a558e364b21562e3a76a63a9ac5c70308e1f))
+
 # [1.16.0](https://github.com/securityscorecard/design-system/compare/v1.15.1...v1.16.0) (2023-12-06)
 
 
