@@ -25,7 +25,7 @@ export const useOptions = <D>({
   renderNoDataFallback,
   renderRowSelectionActions,
   rowsPerPageOptions = [10, 25, 50, 100],
-  selectAllMode = 'all',
+  selectAllMode = 'page',
   ...restDatatableOptions
 }: Partial<DatatableOptions<D>>): ParsedDatatableOptions<D> => {
   const __defaultColumn = useMemo(

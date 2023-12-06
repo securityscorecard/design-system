@@ -22,6 +22,13 @@ import { displayColumnIds, useDisplayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
 import { useDebounce } from '../../../hooks/useDebounce';
 
+const getMaxRowsPerPageOption = (rowsPerPageOptions) => {
+  if (Array.isArray(rowsPerPageOptions)) {
+    return rowsPerPageOptions[rowsPerPageOptions.length - 1];
+  }
+  return null;
+};
+
 export const useDatatable = <D>(
   options: DatatableOptions<D>,
 ): DatatableInstance<D> => {
@@ -49,6 +56,13 @@ export const useDatatable = <D>(
         ]),
       ),
       right: [...(initState.columnPinning?.right ?? [])],
+    };
+    initState.pagination = {
+      pageIndex: initState?.pagination?.pageIndex ?? 0,
+      pageSize:
+        initState?.pagination?.pageSize ??
+        getMaxRowsPerPageOption(tableOptions.rowsPerPageOptions) ??
+        50,
     };
 
     return initState;
