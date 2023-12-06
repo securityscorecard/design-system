@@ -38,6 +38,7 @@ module.exports = {
   ],
   plugins: ['filenames', 'fp', 'react-hooks', 'ramda'],
   rules: {
+    'no-plusplus': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-useless-constructor': 'off',
