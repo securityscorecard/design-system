@@ -39,11 +39,14 @@ export const usePersistentState = <D>(
           []),
       ]),
     ),
-    right: [
-      ...(state?.columnPinning?.right ??
-        initialState?.columnPinning?.right ??
-        []),
-    ],
+    right: Array.from(
+      new Set([
+        ...(props?.enableRowActions ?? true ? [displayColumnIds.actions] : []),
+        ...(state?.columnPinning?.right ??
+          initialState?.columnPinning?.right ??
+          []),
+      ]),
+    ),
   });
   const [columnSizing, setColumnSizing] = useState(
     state?.columnSizing ?? initialState?.columnSizing ?? {},
