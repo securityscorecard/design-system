@@ -103,6 +103,18 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
    * Enables/disables ordering for given column.
    */
   enableOrdering?: boolean;
+  /**
+   * You can provide your own implementation of the column header tooltip. This property accepts
+   * React component with properties:
+   *  - `column` - current column object
+   *  - `header` - current header object
+   *  - `table` - current instance of the table
+   */
+  renderHeaderTooltip?: (props: {
+    column: DatatableColumn<D, V>;
+    header: DatatableHeader<D>;
+    table: DatatableInstance<D>;
+  }) => ReactNode;
 };
 
 export type DatatableDefinedColumnDef<D, V = unknown> = DatatableColumnDef<
