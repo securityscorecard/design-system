@@ -33,6 +33,7 @@ export const usePersistentState = <D>(
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
     left: Array.from(
       new Set([
+        ...(props?.enableExpanding ?? false ? [displayColumnIds.expand] : []),
         ...(props?.enableRowSelection ?? true ? [displayColumnIds.select] : []),
         ...(state?.columnPinning?.left ??
           initialState?.columnPinning?.left ??

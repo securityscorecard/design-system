@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
+import DetailPanel from '../panels/DetailPanel';
 import BodyCell from './BodyCell';
 
 const BodyRow = <D,>({
@@ -10,12 +11,21 @@ const BodyRow = <D,>({
   row: DatatableRow<D>;
   table: DatatableInstance<D>;
 }) => {
+  const {
+    options: { renderDetailPanel },
+  } = table;
+  const { getVisibleCells, getIsExpanded } = row;
   return (
-    <tr className="ds-table-body-row ds-table-row">
-      {row.getVisibleCells().map((cell) => (
-        <BodyCell key={cell.id} cell={cell} table={table} />
-      ))}
-    </tr>
+    <>
+      <tr className="ds-table-body-row ds-table-row">
+        {getVisibleCells().map((cell) => (
+          <BodyCell key={cell.id} cell={cell} table={table} />
+        ))}
+      </tr>
+      {renderDetailPanel && getIsExpanded() && (
+        <DetailPanel row={row} table={table} />
+      )}
+    </>
   );
 };
 
