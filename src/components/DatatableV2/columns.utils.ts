@@ -72,7 +72,10 @@ export const getCommonCellStyles = <D>({
 }): CSSProperties => ({
   minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
     header?.id ?? column.id,
-  )}-size) * 1px), ${column.columnDef.minSize ?? 30}px)`,
+  )}-size) * 1px), ${column.columnDef.minSize ?? 60}px)`,
+  // maxWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
+  //   header?.id ?? column.id,
+  // )}-size) * 1px), ${column.columnDef.maxSize ?? 600}px)`,
   width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
     header?.id ?? column.id,
   )}-size) * 1px)`,

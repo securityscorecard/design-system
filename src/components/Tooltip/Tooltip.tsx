@@ -6,11 +6,11 @@ import { pipe, prop } from 'ramda';
 import { isFalsy } from 'ramda-adjunct';
 
 import { Padbox } from '../layout';
-import { getColor, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { TooltipProps } from './Tooltip.types';
 
-const Content = styled(RadixTooltip.Content)<{ $width: number }>`
-  border-radius: 4px;
+const Content = styled(RadixTooltip.Content)<{ $width: TooltipProps['width'] }>`
+  border-radius: ${getRadii('default')};
   color: ${getColor('neutral.900')};
   background-color: ${getColor('neutral.0')};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
@@ -127,7 +127,7 @@ Tooltip.propTypes = {
   popup: PropTypes.node,
   className: PropTypes.string,
   placement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  width: PropTypes.number,
+  width: PropTypes.oneOf(['auto', PropTypes.oneOfType([PropTypes.number])]),
   defaultIsPopupDisplayed: PropTypes.bool,
 };
 

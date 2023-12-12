@@ -15,6 +15,8 @@ import {
 } from '@tanstack/react-table';
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 
+import { Types as SSCIconTypes, SSCIcons } from '../Icon';
+
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
   'accessorFn' | 'accessorFn' | 'cell' | 'header'
@@ -148,6 +150,24 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
   headers: DatatableHeader<D>[];
 };
 
+export type DatatableRowAction<D> = null | {
+  label: string;
+  /* eslint-disable @typescript-eslint/ban-types */
+  iconName: SSCIcons | (string & {});
+  iconType?: SSCIconTypes | (string & {});
+  /* eslint-enable @typescript-eslint/ban-types */
+  onClick(props: {
+    row: DatatableRow<D>;
+    table: DatatableInstance<D>;
+  }): (event: Event) => void;
+  isDisabled?:
+    | boolean
+    | ((props: {
+        row: DatatableRow<D>;
+        table: DatatableInstance<D>;
+      }) => boolean);
+};
+
 interface CustomState {
   showColumnSettings: boolean;
   isLoading: boolean;
@@ -166,12 +186,14 @@ export interface ParsedDatatableOptions<D>
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
   enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
   enablePagination?: DatatableOptions<D>['enablePagination'];
+  enableRowActions?: DatatableOptions<D>['enableRowActions'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
+  rowActions?: DatatableOptions<D>['rowActions'];
   rowCount?: DatatableOptions<D>['rowCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
   selectAllMode?: DatatableOptions<D>['selectAllMode'];
@@ -321,6 +343,12 @@ export interface DatatableOptions<D>
    */
   enablePersistentState?: boolean;
   /**
+   * Enables/disables row actions column for the table.
+   *
+   * @default false
+   */
+  enableRowActions?: boolean;
+  /**
    * Enables/disables row selection for the table.
    *
    * @default true
@@ -382,6 +410,12 @@ export interface DatatableOptions<D>
     totalRowCount: number;
     table: DatatableInstance<D>;
   }) => ReactNode;
+  /**
+   * List of actions available on the row data. Actions will be rendered as last column of the table.
+   * If only one action is provided it will be rendered directly in the column. If multiple actions
+   * are provided actions will be rendered in dropdown menu.
+   */
+  rowActions?: DatatableRowAction<D>[];
   /**
    * Expected number of rows in the dataset which is used for displaying pagination correctly when
    * pagination is not managed internally. This property is REQUIRED for the manual (managed,

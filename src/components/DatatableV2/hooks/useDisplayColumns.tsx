@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
 
+import RowActionsButton from '../buttons/RowActionsButton';
 import SelectButton from '../buttons/SelectButton';
 import { DatatableColumnDef, ParsedDatatableOptions } from '../Datatable.types';
 
 export const displayColumnIds = {
   select: 'ssc_dt_select',
+  actions: 'ssc_dt_actions',
 };
 export const useDisplayColumns = <D,>(
   tableOptions: ParsedDatatableOptions<D>,
@@ -22,7 +24,16 @@ export const useDisplayColumns = <D,>(
                 ? ({ table }) => <SelectButton table={table} isSelectAll />
                 : null,
             cell: ({ table, row }) => <SelectButton row={row} table={table} />,
-            size: 40,
+            size: 45,
+            ...tableOptions.defaultDisplayColumn,
+          },
+          tableOptions.enableRowActions && {
+            id: displayColumnIds.actions,
+            header: '',
+            cell: ({ table, row }) => (
+              <RowActionsButton row={row} table={table} />
+            ),
+            size: 45,
             ...tableOptions.defaultDisplayColumn,
           },
         ] as DatatableColumnDef<D>[]
@@ -32,6 +43,7 @@ export const useDisplayColumns = <D,>(
       tableOptions.enableSelectAll,
       tableOptions.enableMultiRowSelection,
       tableOptions.defaultDisplayColumn,
+      tableOptions.enableRowActions,
     ],
   );
 };

@@ -55,7 +55,12 @@ export const useDatatable = <D>(
           ...(initState.columnPinning?.left ?? []),
         ]),
       ),
-      right: [...(initState.columnPinning?.right ?? [])],
+      right: Array.from(
+        new Set([
+          ...(tableOptions.enableRowActions ? [displayColumnIds.actions] : []),
+          ...(initState.columnPinning?.right ?? []),
+        ]),
+      ),
     };
     initState.pagination = {
       pageIndex: initState?.pagination?.pageIndex ?? 0,
