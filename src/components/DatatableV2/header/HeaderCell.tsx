@@ -8,6 +8,7 @@ import HeaderCellColumnActionsButton from './HeaderCellColumnActionsButton';
 import { getCommonCellStyles } from '../columns.utils';
 import HeaderCellResizeHandler from './HeaderCellResizeHandler';
 import { Inline } from '../../layout';
+import { Tooltip } from '../../Tooltip';
 
 const HeaderCell = <D,>({
   header,
@@ -27,20 +28,31 @@ const HeaderCell = <D,>({
     getIsSorted,
     getToggleSortingHandler,
   } = column;
+  const {
+    columnDefType,
+    enableColumnActions: cdEnableColumnActions,
+    header: cdHeader,
+    headerComponent,
+    renderHeaderTooltip,
+  } = columnDef;
 
   const showColumnActions =
-    (enableColumnActions || columnDef?.enableColumnActions) &&
-    columnDef?.enableColumnActions !== false;
+    (enableColumnActions || cdEnableColumnActions) &&
+    cdEnableColumnActions !== false;
 
-  const headerElement =
-    flexRender(columnDef.headerComponent, getContext()) ?? columnDef.header;
+  const tooltipPopup = renderHeaderTooltip?.({
+    column,
+    header,
+    table,
+  });
+  const headerElement = flexRender(headerComponent, getContext()) ?? cdHeader;
 
   return (
     <th
       key={id}
       className={clx('ds-table-header-cell ds-table-cell', {
         isSorted: getIsSorted(),
-        'ds-table-cell-display': columnDef.columnDefType === 'display',
+        'ds-table-cell-display': columnDefType === 'display',
       })}
       style={{
         ...getCommonCellStyles({
@@ -58,22 +70,19 @@ const HeaderCell = <D,>({
             <div
               className="ds-table-header-cell-title"
               style={{
-                whiteSpace:
-                  (columnDef.header?.length ?? 0) < 20 ? 'nowrap' : 'normal',
-                minWidth: `${Math.min(columnDef.header?.length ?? 0, 4)}ch`,
-                overflow:
-                  columnDef.columnDefType === 'data' ? 'hidden' : undefined,
+                whiteSpace: (cdHeader?.length ?? 0) < 20 ? 'nowrap' : 'normal',
+                minWidth: `${Math.min(cdHeader?.length ?? 0, 4)}ch`,
+                overflow: columnDefType === 'data' ? 'hidden' : undefined,
                 cursor: getCanSort() ? 'pointer' : undefined,
               }}
-              title={
-                columnDef.columnDefType === 'data'
-                  ? columnDef.header
-                  : undefined
-              }
+              title={columnDefType === 'data' ? cdHeader : undefined}
               onClick={getToggleSortingHandler()}
             >
-              {headerElement}
+              <Tooltip placement="top" popup={tooltipPopup}>
+                {headerElement}
+              </Tooltip>
             </div>
+
             {getCanSort() && (
               <HeaderCellSortButton
                 direction={getIsSorted()}
