@@ -197,12 +197,14 @@ export interface ParsedDatatableOptions<D>
   };
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
   enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
+  enableExpandAll?: DatatableOptions<D>['enableExpandAll'];
   enablePagination?: DatatableOptions<D>['enablePagination'];
   enableRowActions?: DatatableOptions<D>['enableRowActions'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
+  renderDetailPanel?: DatatableOptions<D>['renderDetailPanel'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
   rowActions?: DatatableOptions<D>['rowActions'];
@@ -239,12 +241,10 @@ export interface DatatableOptions<D>
   extends Omit<
     Partial<TableOptions<D>>,
     | 'aggregationFns'
-    | 'autoResetExpanded'
     | 'columnResizeMode'
     | 'columns'
     | 'data'
     | 'enableColumnFilters'
-    | 'enableExpanding'
     | 'enableFilters'
     | 'enableGlobalFilter'
     | 'enableGrouping'
@@ -278,9 +278,7 @@ export interface DatatableOptions<D>
     | 'onGroupingChange'
     | 'onRowPinningChange'
     | 'state'
-    | 'manualExpanding'
     | 'mergeOptions'
-    | 'onExpandedChange'
     | 'paginateExpandedRows'
     | 'sortingFns'
   > {
@@ -322,6 +320,10 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableColumnResizing?: boolean;
+  /**
+   * Enables/disables button in the table header that expands all detail panels at once.
+   */
+  enableExpandAll?: boolean;
   /**
    * Enables/disables column hiding for the table. Controlled in the column actions menu or table
    * column settings panel accessible through the column actions menu.
@@ -404,6 +406,16 @@ export interface DatatableOptions<D>
    *
    */
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
+  /**
+   * Provide your own implementation of row details panel. This property accepts React component\
+   * with properties:
+   *  - `row`: current row, row data are accessible through `row.original`
+   *  - `table` - current instance of the table
+   */
+  renderDetailPanel?: (props: {
+    row: DatatableRow<D>;
+    table: DatatableInstance<D>;
+  }) => ReactNode;
   /**
    * You can provide your own implementation of the state when there are no data in the table. This
    * property accepts React component with one property `table` which holds current instance of the

@@ -36,7 +36,7 @@ const IconButtonRoot = styled(Padbox)`
     background: ${getColor('primary.50')};
     color: ${getColor('text.primary')};
   }
-  &:active {
+  &:not(:disabled):active {
     background: ${getColor('primary.200')};
     color: ${getColor('text.primary')};
   }

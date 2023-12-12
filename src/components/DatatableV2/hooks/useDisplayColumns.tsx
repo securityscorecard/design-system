@@ -1,10 +1,13 @@
 import React, { useMemo } from 'react';
 
+import ExpandAllButton from '../buttons/ExpandAllButton';
+import ExpandButton from '../buttons/ExpandButton';
 import RowActionsButton from '../buttons/RowActionsButton';
 import SelectButton from '../buttons/SelectButton';
 import { DatatableColumnDef, ParsedDatatableOptions } from '../Datatable.types';
 
 export const displayColumnIds = {
+  expand: 'ssc_dt_expand',
   select: 'ssc_dt_select',
   actions: 'ssc_dt_actions',
 };
@@ -15,6 +18,15 @@ export const useDisplayColumns = <D,>(
     () =>
       (
         [
+          tableOptions.enableExpanding && {
+            id: displayColumnIds.expand,
+            header: '',
+            headerComponent: tableOptions.enableExpandAll
+              ? ExpandAllButton
+              : null,
+            cell: ExpandButton,
+            ...tableOptions.defaultDisplayColumn,
+          },
           tableOptions.enableRowSelection && {
             id: displayColumnIds.select,
             header: '',
@@ -23,7 +35,7 @@ export const useDisplayColumns = <D,>(
               tableOptions.enableMultiRowSelection
                 ? ({ table }) => <SelectButton table={table} isSelectAll />
                 : null,
-            cell: ({ table, row }) => <SelectButton row={row} table={table} />,
+            cell: SelectButton,
             size: 45,
             ...tableOptions.defaultDisplayColumn,
           },
@@ -39,6 +51,8 @@ export const useDisplayColumns = <D,>(
         ] as DatatableColumnDef<D>[]
       ).filter(Boolean),
     [
+      tableOptions.enableExpanding,
+      tableOptions.enableExpandAll,
       tableOptions.enableRowSelection,
       tableOptions.enableSelectAll,
       tableOptions.enableMultiRowSelection,
