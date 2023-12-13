@@ -22,6 +22,7 @@ export * from './FullscreenModal';
 export * from './HexGrade';
 export * from './HintTooltip';
 export * from './Icon';
+export * from './Loading';
 export * from './Modal';
 export * from './Nav';
 export * from './Pagination';

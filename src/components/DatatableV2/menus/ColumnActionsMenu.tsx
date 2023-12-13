@@ -1,59 +1,9 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ColumnPinningPosition } from '@tanstack/react-table';
-import styled from 'styled-components';
 
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
-import { getRadii, getToken } from '../../../utils';
-import { Inline, Padbox } from '../../layout';
-import { Icon, SSCIcons } from '../../Icon';
-import { Text } from '../../typographyLegacy';
-
-const MenuContent = styled(DropdownMenu.Content)`
-  border: 1px solid rgba(0 0 0/15%);
-  border-radius: ${getRadii('default')};
-  background: white;
-  padding: 0.5rem 0;
-`;
-
-const MenuItemRoot = styled(DropdownMenu.Item)`
-  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
-
-  &:not(:disabled):hover {
-    background: ${getToken('color-action-background-primary-focus')};
-    outline: none;
-  }
-`;
-const MenuSeparator = styled(DropdownMenu.Separator)`
-  height: 1px;
-  background-color: rgba(0 0 0/15%);
-  margin: 0.5rem 0;
-`;
-
-const MenuItem = ({
-  children,
-  onClick,
-  isDisabled = false,
-  icon,
-}: {
-  children: string;
-  icon: SSCIcons;
-  onClick: () => void;
-  isDisabled?: boolean;
-}) => (
-  <MenuItemRoot
-    className="ds-table-column-actions-menu-item"
-    disabled={isDisabled}
-    onSelect={onClick}
-  >
-    <Padbox paddingSize="md" paddingType="squish">
-      <Inline align="center" gap="md">
-        <Icon color="neutral.700" name={icon} hasFixedWidth />
-        <Text>{children}</Text>
-      </Inline>
-    </Padbox>
-  </MenuItemRoot>
-);
+import { MenuContent, MenuItem, MenuSeparator } from './menuElements';
 
 const ColumnActionsMenu = <D,>({
   header,
@@ -106,7 +56,8 @@ const ColumnActionsMenu = <D,>({
       ? [
           <MenuItem
             key="col-action-sort-asc"
-            icon="sort-up"
+            className="ds-table-column-actions-menu-item"
+            iconName="sort-up"
             isDisabled={column.getIsSorted() === 'asc'}
             onClick={() => handleSort(false)}
           >
@@ -114,7 +65,8 @@ const ColumnActionsMenu = <D,>({
           </MenuItem>,
           <MenuItem
             key="col-action-sort-desc"
-            icon="sort-down"
+            className="ds-table-column-actions-menu-item"
+            iconName="sort-down"
             isDisabled={column.getIsSorted() === 'desc'}
             onClick={() => handleSort(true)}
           >
@@ -123,7 +75,8 @@ const ColumnActionsMenu = <D,>({
           enableSortingRemoval !== false && (
             <MenuItem
               key="col-action-sort-reset"
-              icon="times"
+              className="ds-table-column-actions-menu-item"
+              iconName="times"
               isDisabled={!column.getIsSorted()}
               onClick={handleClearSort}
             >
@@ -131,7 +84,7 @@ const ColumnActionsMenu = <D,>({
             </MenuItem>
           ),
           enableHiding && column.getCanHide() ? (
-            <MenuSeparator key="sep-01" />
+            <MenuSeparator key="col-action-sep-01" />
           ) : undefined,
         ]
       : []),
@@ -139,13 +92,14 @@ const ColumnActionsMenu = <D,>({
       ? [
           <MenuItem
             key="col-action-hide-col"
-            icon="eye-slash"
+            className="ds-table-column-actions-menu-item"
+            iconName="eye-slash"
             onClick={handleHideColumn}
           >
             Hide column
           </MenuItem>,
           !enableHiding && !enableColumnPinning && !enableColumnOrdering ? (
-            <MenuSeparator key="sep-02" />
+            <MenuSeparator key="col-action-sep-02" />
           ) : undefined,
         ]
       : []),
@@ -153,13 +107,14 @@ const ColumnActionsMenu = <D,>({
       ? [
           <MenuItem
             key="col-action-settings"
-            icon="columns-3"
+            className="ds-table-column-actions-menu-item"
+            iconName="columns-3"
             onClick={handleColumnSettings}
           >
             Column settings
           </MenuItem>,
           enableColumnPinning && column.getCanPin() ? (
-            <MenuSeparator key="sep-03" />
+            <MenuSeparator key="col-action-sep-03" />
           ) : undefined,
         ]
       : []),
@@ -167,13 +122,15 @@ const ColumnActionsMenu = <D,>({
       ? [
           <MenuItem
             key="col-action-pin-left"
-            icon="thumbstack"
+            className="ds-table-column-actions-menu-item"
+            iconName="thumbstack"
             isDisabled={column.getIsPinned() === 'left'}
             onClick={() => handlePinColumn('left')}
           >
             Pin column
           </MenuItem>,
           // <MenuItem
+          //   className="ds-table-column-actions-menu-item"
           //   key="col-action-pin-right"
           //   isDisabled={column.getIsPinned() === 'right'}
           //   onClick={() => handlePinColumn('right')}
@@ -182,14 +139,15 @@ const ColumnActionsMenu = <D,>({
           // </MenuItem>,
           <MenuItem
             key="col-action-pin-reset"
-            icon="times"
+            className="ds-table-column-actions-menu-item"
+            iconName="times"
             isDisabled={!column.getIsPinned()}
             onClick={() => handlePinColumn(false)}
           >
             Unpin column
           </MenuItem>,
           enableColumnResizing && column.getCanResize() ? (
-            <MenuSeparator key="sep-04" />
+            <MenuSeparator key="col-action-sep-04" />
           ) : undefined,
         ]
       : []),
@@ -197,7 +155,8 @@ const ColumnActionsMenu = <D,>({
       ? [
           <MenuItem
             key="col-action-size-reset"
-            icon="times"
+            className="ds-table-column-actions-menu-item"
+            iconName="times"
             isDisabled={!columnSizing[column.id]}
             onClick={() => handleResetColumnSize()}
           >

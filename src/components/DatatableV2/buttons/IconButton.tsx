@@ -1,15 +1,18 @@
-import React, { ComponentProps, forwardRef } from 'react';
+import React, { ComponentProps, forwardRef, memo } from 'react';
 import styled from 'styled-components';
 
-import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { getColor, getRadii } from '../../../utils';
-import { Icon } from '../../Icon';
+import { Icon, SSCIcons } from '../../Icon';
 import { Padbox } from '../../layout';
+import { Tooltip } from '../../Tooltip';
 
 interface IconButtonProps extends ComponentProps<'button'> {
   label: string;
-  iconName: typeof SSCIconNames[keyof typeof SSCIconNames];
+  /* eslint-disable @typescript-eslint/ban-types */
+  iconName: SSCIcons | (string & {});
+  /* eslint-enable @typescript-eslint/ban-types */
   iconProps?: Partial<ComponentProps<typeof Icon>>;
+  isDisabled?: boolean;
 }
 
 const IconButtonRoot = styled(Padbox)`
@@ -27,33 +30,41 @@ const IconButtonRoot = styled(Padbox)`
 
   &:disabled {
     cursor: auto;
+    opacity: 0.6;
   }
   &:not(:disabled):hover {
     background: ${getColor('primary.50')};
     color: ${getColor('text.primary')};
   }
-  &:active {
+  &:not(:disabled):active {
     background: ${getColor('primary.200')};
     color: ${getColor('text.primary')};
   }
 `;
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ iconName, label, iconProps, ...props }, ref) => {
+  ({ iconName, label, iconProps, isDisabled, ...props }, ref) => {
     return (
-      <IconButtonRoot
-        ref={ref}
-        aria-label={label}
-        as="button"
-        paddingSize="sm"
-        paddingType="squish"
-        type="button"
-        {...props}
+      <Tooltip
+        placement="top"
+        popup={isDisabled ? undefined : label}
+        width="auto"
       >
-        <Icon name={iconName} {...iconProps} />
-      </IconButtonRoot>
+        <IconButtonRoot
+          ref={ref}
+          aria-label={label}
+          as="button"
+          disabled={isDisabled}
+          paddingSize="sm"
+          paddingType="squish"
+          type="button"
+          {...props}
+        >
+          <Icon name={iconName} {...iconProps} />
+        </IconButtonRoot>
+      </Tooltip>
     );
   },
 );
 
-export default IconButton;
+export default memo(IconButton);

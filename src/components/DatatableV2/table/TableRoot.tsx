@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getFontSize } from '../../../utils';
+import { getFontSize, pxToRem } from '../../../utils';
 
 const TableRoot = styled.div`
   position: relative;
@@ -13,7 +13,6 @@ const TableRoot = styled.div`
     transform: scale(1, -1);
   }
 
-  /** LAYOUT */
   .ds-table,
   .ds-table-header,
   .ds-table-body {
@@ -25,25 +24,31 @@ const TableRoot = styled.div`
   .ds-table-body-row {
     align-items: flex-start;
     justify-content: flex-start;
+
+    &:nth-child(odd) .ds-table-cell {
+      background-color: var(--sscds-table-color-zebra);
+    }
+
+    &.isSelected .ds-table-cell {
+      background-color: var(--sscds-table-color-selection) !important;
+    }
   }
   .ds-table-cell {
     display: flex;
     padding: var(--sscds-table-spacing-cell);
+    background-color: var(--sscds-table-color-background);
   }
-  /** END LAYOUT */
 
   .ds-table-header-row,
   .ds-table-row:not(:last-of-type) {
     border-bottom: 1px solid var(--sscds-table-color-border);
-  }
-  .ds-table-body-row:nth-child(odd) {
-    background-color: var(--sscds-table-color-zebra);
   }
 
   .ds-table-header-cell {
     position: relative;
     justify-content: center;
     padding: var(--sscds-table-spacing-cell-header);
+    /* height: ${pxToRem(60)}; */
 
     &:not(:last-of-type) {
       border-right: 1px solid var(--sscds-table-color-border) !important;
@@ -63,7 +68,7 @@ const TableRoot = styled.div`
       border: 0;
       display: inline-block;
       width: 0.25rem;
-      background: var(--sscds-table-color-resize);
+      background: var(--sscds-table-color-accent);
       cursor: col-resize;
       user-select: none;
       touch-action: none;
