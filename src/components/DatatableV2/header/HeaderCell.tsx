@@ -62,7 +62,11 @@ const HeaderCell = <D,>({
         }),
       }}
     >
-      {isPlaceholder ? null : (
+      {columnDefType === 'display' ? (
+        <Inline align="center" justify="center">
+          {headerElement}
+        </Inline>
+      ) : isPlaceholder ? null : (
         <Inline align="center" gap="xs" justify="space-between">
           <Inline align="center" style={{ overflow: 'hidden' }}>
             {/* I know what I'm doing here */}

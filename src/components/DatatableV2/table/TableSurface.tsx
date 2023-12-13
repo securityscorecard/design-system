@@ -23,9 +23,10 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         '--sscds-table-color-background': 'var(--sscds-background)',
         '--sscds-table-color-border': 'var(--sscds-borderColor)',
         '--sscds-table-color-zebra': getColor('neutral.50', { theme }),
-        '--sscds-table-color-resize': getColor('primary.500', { theme }),
+        '--sscds-table-color-accent': getColor('primary.500', { theme }),
         '--sscds-table-color-settings-background':
           'var(--sscds-table-color-background)',
+        '--sscds-table-color-selection': getColor('primary.50', { theme }),
         '--sscds-table-spacing-cell': getPaddingSize({
           paddingSize: 'md',
           paddingType: 'square',
@@ -37,8 +38,8 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           theme,
         }),
         '--sscds-table-spacing-cell-display': getPaddingSize({
-          paddingSize: 'md',
-          paddingType: 'stretch',
+          paddingSize: 'sm',
+          paddingType: 'square',
           theme,
         }),
         '--sscds-table-typography-weight-header': getFontWeight('bold', {
@@ -51,6 +52,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '-8px 0px 8px 0px rgba(0, 0, 0, 0.05)',
         '--sscds-table-size-settings-width': '22.5rem',
         '--sscds-table-radii-settings-item': getRadii('default', { theme }),
+        position: 'relative',
       }}
       hasBorder
     >
