@@ -19,6 +19,7 @@ const Content = styled(RadixTooltip.Content)<{ $width: TooltipProps['width'] }>`
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   width: ${pipe(prop('$width'), pxToRem)};
+  z-index: 1;
 
   &[data-state='delayed-open'][data-side='top'] {
     animation-name: slideDownAndFade;

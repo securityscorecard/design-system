@@ -56,7 +56,6 @@ export const useOptions = <D>({
     defaultColumn: __defaultColumn,
     defaultDisplayColumn: {
       columnDefType: 'display',
-      size: 45,
       enableColumnActions: false,
       enableHiding: false,
       enableOrdering: false,

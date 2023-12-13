@@ -2,17 +2,26 @@ import React from 'react';
 import { pluck } from 'ramda';
 import styled from 'styled-components';
 
-import { abbreviateNumber } from '../../../utils';
+import { abbreviateNumber, pxToRem } from '../../../utils';
 import { DatatableInstance } from '../Datatable.types';
 import { Inline, Padbox } from '../../layout';
 import { Button } from '../../Button';
+import SelectButton from '../buttons/SelectButton';
 
 const SelectionRoot = styled(Padbox)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+
+  background-color: var(--sscds-table-color-selection);
+  height: ${pxToRem(60 + 1)};
   border-bottom: 1px solid var(--sscds-table-color-border);
 `;
 const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
-    options: { renderRowSelectionActions, rowCount },
+    options: { renderRowSelectionActions, rowCount, enableSelectAll },
     getPrePaginationRowModel,
     getSelectedRowModel,
     toggleAllRowsSelected,
@@ -34,6 +43,13 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
     >
       <Inline align="center" gap="md" justify="space-between">
         <Inline align="center" className="ds-table-selection-overview" gap="md">
+          {enableSelectAll && (
+            <SelectButton
+              style={{ marginLeft: '-14px' }}
+              table={table}
+              isSelectAll
+            />
+          )}
           <div>
             <strong className="ds-table-selection-currently-selected">
               {selectedRowsCount.toLocaleString('en-US')}

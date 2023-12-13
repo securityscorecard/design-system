@@ -1,13 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { abbreviateNumber } from '../../../utils';
+import { abbreviateNumber, getFormStyle, getRadii } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
 import IconButton from '../buttons/IconButton';
 import { DatatableInstance } from '../Datatable.types';
 
 const PaginationRoot = styled(Padbox)`
   border-top: 1px solid var(--sscds-table-color-border);
+`;
+const Select = styled.select`
+  border: 1px solid ${getFormStyle('borderColor')};
+  border-radius: ${getRadii('default')};
+  color: ${getFormStyle('color')};
+  height: ${getFormStyle('fieldHeight')};
 `;
 
 const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
@@ -37,6 +43,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
       <Inline align="center" gap="md" justify="space-between">
         {enableRowsPerPage && (
           <Inline
+            align="center"
             className="ds-table-pagination-rows-per-page-wrapper"
             gap="md"
           >
@@ -46,7 +53,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             >
               Number of rows
             </label>
-            <select
+            <Select
               className="ds-table-pagination-rows-per-page-select"
               id="rowsPerPageSelect"
               value={pageSize}
@@ -63,7 +70,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
                   {size}
                 </option>
               ))}
-            </select>
+            </Select>
           </Inline>
         )}
         <div className="ds-table-pagination-item-count">

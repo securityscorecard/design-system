@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef } from 'react';
+import React, { ComponentProps, forwardRef, memo } from 'react';
 import styled from 'styled-components';
 
 import { getColor, getRadii } from '../../../utils';
@@ -67,4 +67,4 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   },
 );
 
-export default IconButton;
+export default memo(IconButton);

@@ -1,4 +1,5 @@
 import React from 'react';
+import clx from 'classnames';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import DetailPanel from '../panels/DetailPanel';
@@ -14,10 +15,19 @@ const BodyRow = <D,>({
   const {
     options: { renderDetailPanel },
   } = table;
-  const { getVisibleCells, getIsExpanded } = row;
+  const { getVisibleCells, getIsExpanded, getIsSelected } = row;
   return (
     <>
-      <tr className="ds-table-body-row ds-table-row">
+      <tr
+        className={clx('ds-table-body-row ds-table-row', {
+          isSelected: getIsSelected(),
+        })}
+        style={{
+          backgroundColor: getIsSelected()
+            ? 'var(--sscds-table-color-selection)'
+            : undefined,
+        }}
+      >
         {getVisibleCells().map((cell) => (
           <BodyCell key={cell.id} cell={cell} table={table} />
         ))}

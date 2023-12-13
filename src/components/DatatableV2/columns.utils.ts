@@ -10,6 +10,7 @@ import {
   DatatableInstance,
   ParsedDatatableOptions,
 } from './Datatable.types';
+import { displayColumnIds } from './hooks/useDisplayColumns';
 
 export const getColumnId = <D>(columnDef: DatatableColumnDef<D>): string =>
   columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header;
@@ -69,47 +70,70 @@ export const getCommonCellStyles = <D>({
   table: DatatableInstance<D>;
   header?: DatatableHeader<D>;
   column: DatatableColumn<D>;
-}): CSSProperties => ({
-  minWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-    header?.id ?? column.id,
-  )}-size) * 1px), ${column.columnDef.minSize ?? 60}px)`,
-  // maxWidth: `max(calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-  //   header?.id ?? column.id,
-  // )}-size) * 1px), ${column.columnDef.maxSize ?? 600}px)`,
-  width: `calc(var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-    header?.id ?? column.id,
-  )}-size) * 1px)`,
-  flex: `var(--${header ? 'header' : 'col'}-${parseCSSVarId(
-    header?.id ?? column.id,
-  )}-size) 0 auto`,
-  flexDirection: header ? 'column' : 'row',
-  height: '100%',
-  position: column.getIsPinned() ? 'sticky' : undefined,
-  zIndex: column.getIsPinned() ? '1' : undefined,
-  left:
-    column.getIsPinned() === 'left'
-      ? `${column.getStart('left')}px`
-      : undefined,
-  right:
-    column.getIsPinned() === 'right'
-      ? `${getTotalRight(table, column)}px`
-      : undefined,
-  backgroundColor: column.getIsPinned()
-    ? 'var(--sscds-table-color-background)'
-    : undefined,
-  borderRight: getIsLastLeftPinnedColumn(table, column)
-    ? '1px solid var(--sscds-table-color-border)'
-    : 'inherit',
-  borderLeft: getIsFirstRightPinnedColumn(column)
-    ? '1px solid var(--sscds-table-color-border)'
-    : 'inherit',
+}): CSSProperties => {
+  const CSSVarId = parseCSSVarId(header?.id ?? column.id);
+  const isPinned = column.getIsPinned();
+  const isLastLeftColumn = getIsLastLeftPinnedColumn(table, column);
+  const isFirstRightColumn = getIsFirstRightPinnedColumn(column);
 
-  boxShadow: getIsLastLeftPinnedColumn(table, column)
-    ? 'var(--sscds-table-shadow-pin-left)'
-    : getIsFirstRightPinnedColumn(column)
-    ? 'var(--sscds-table-shadow-pin-right)'
-    : 'none',
-});
+  const pinnedStyle: CSSProperties = isPinned
+    ? {
+        position: 'sticky',
+        zIndex: '1',
+        left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
+        right:
+          isPinned === 'right'
+            ? `${getTotalRight(table, column)}px`
+            : undefined,
+        borderRight: isLastLeftColumn
+          ? '1px solid var(--sscds-table-color-border)'
+          : 'inherit',
+        borderLeft: isFirstRightColumn
+          ? '1px solid var(--sscds-table-color-border)'
+          : 'inherit',
+
+        boxShadow: isLastLeftColumn
+          ? 'var(--sscds-table-shadow-pin-left)'
+          : isFirstRightColumn
+          ? 'var(--sscds-table-shadow-pin-right)'
+          : 'none',
+      }
+    : {};
+
+  const sizes = (): CSSProperties => {
+    if (CSSVarId === displayColumnIds.select) {
+      return {
+        minWidth: '2.5rem',
+        flex: '0 0 2.5rem',
+        justifyContent: 'center',
+      };
+    }
+    if (
+      CSSVarId === displayColumnIds.expand ||
+      CSSVarId === displayColumnIds.actions
+    ) {
+      return {
+        minWidth: '3rem',
+        flex: '0 0 3rem',
+        justifyContent: 'center',
+      };
+    }
+    return {
+      minWidth: `max(calc(var(--${
+        header ? 'header' : 'col'
+      }-${CSSVarId}-size) * 1px), ${column.columnDef.minSize ?? 60}px)`,
+      width: `calc(var(--${header ? 'header' : 'col'}-${CSSVarId}-size) * 1px)`,
+      flex: `var(--${header ? 'header' : 'col'}-${CSSVarId}-size) 0 auto`,
+    };
+  };
+
+  return {
+    ...sizes(),
+    flexDirection: header ? 'column' : 'row',
+    height: header ? '3.75rem' : '100%',
+    ...pinnedStyle,
+  };
+};
 
 export const reorderColumn = <D>(
   draggedColumn: DatatableColumn<D>,
