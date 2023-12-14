@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getFontSize, pxToRem } from '../../../utils';
+import { getColor, getFontSize, getRadii, pxToRem } from '../../../utils';
 
 const TableRoot = styled.div`
   position: relative;
@@ -8,6 +8,22 @@ const TableRoot = styled.div`
   max-width: 100%;
   overflow-x: auto;
   transform: scale(1, -1);
+
+  &::-webkit-scrollbar {
+    box-sizing: content-box;
+    height: 1.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: ${getRadii('round')};
+    background-color: ${getColor('primary.500')};
+    border: 8px solid ${getColor('neutral.0')};
+  }
+  &::-webkit-scrollbar-track-piece {
+    border-radius: ${getRadii('round')};
+    background-color: ${getColor('neutral.300')};
+    border: 8px solid ${getColor('neutral.0')};
+  }
+
   .ds-table {
     width: 100%;
     transform: scale(1, -1);
