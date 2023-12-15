@@ -53,6 +53,10 @@ const TableRoot = styled.div`
     display: flex;
     padding: var(--sscds-table-spacing-cell);
     background-color: var(--sscds-table-color-background);
+
+    &.isPinned + .ds-table-cell:not(.isPinned) {
+      border-left: none !important;
+    }
   }
 
   .ds-table-header-row,
@@ -66,8 +70,8 @@ const TableRoot = styled.div`
     padding: var(--sscds-table-spacing-cell-header);
     /* height: ${pxToRem(60)}; */
 
-    &:not(:last-of-type) {
-      border-right: 1px solid var(--sscds-table-color-border) !important;
+    &:not(:first-of-type) {
+      border-left: 1px solid var(--sscds-table-color-border) !important;
     }
 
     .ds-table-header-cell-title {

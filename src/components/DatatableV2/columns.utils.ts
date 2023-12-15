@@ -66,10 +66,12 @@ export const getCommonCellStyles = <D>({
   table,
   header,
   column,
+  hasHorizontalScroll,
 }: {
   table: DatatableInstance<D>;
   header?: DatatableHeader<D>;
   column: DatatableColumn<D>;
+  hasHorizontalScroll: boolean;
 }): CSSProperties => {
   const CSSVarId = parseCSSVarId(header?.id ?? column.id);
   const isPinned = column.getIsPinned();
@@ -92,7 +94,9 @@ export const getCommonCellStyles = <D>({
           ? '1px solid var(--sscds-table-color-border)'
           : 'inherit',
 
-        boxShadow: isLastLeftColumn
+        boxShadow: !hasHorizontalScroll
+          ? 'none'
+          : isLastLeftColumn
           ? 'var(--sscds-table-shadow-pin-left)'
           : isFirstRightColumn
           ? 'var(--sscds-table-shadow-pin-right)'

@@ -13,6 +13,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     getFlatHeaders,
     getState,
     options: { columns },
+    refs: { tableRef },
   } = table;
   const {
     columnSizing,
@@ -40,7 +41,13 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   return (
     <TableRoot tabIndex={0}>
       {showProgress && <ProgressBar isTop />}
-      <table className="ds-table" style={columnSizeVars}>
+      <table
+        ref={(ref) => {
+          tableRef.current = ref;
+        }}
+        className="ds-table"
+        style={columnSizeVars}
+      >
         <Header table={table} />
         <Body table={table} />
       </table>
