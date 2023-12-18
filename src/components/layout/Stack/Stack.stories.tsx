@@ -1,27 +1,17 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
-import Stack, { StackProps } from './Stack';
+import Stack, { StackSC } from './Stack';
 import { Button } from '../../Button';
 import { Box } from '../mocks/Box';
 
 export default {
   title: 'layout/primitives/Stack',
   component: Stack,
-  argTypes: {
-    justify: {
-      options: ['center', 'flex-end', 'flex-start', 'baseline', 'stretch'],
-      control: { type: 'select' },
-    },
-    align: {
-      options: ['center', 'flex-end', 'flex-start', 'baseline', 'stretch'],
-      control: { type: 'select' },
-    },
-  },
-} as Meta;
+} as ComponentMeta<typeof Stack>;
 
-export const Playground: Story<StackProps> = (args) => (
+export const Playground: ComponentStory<typeof Stack> = (args) => (
   <div style={{ height: '20rem' }}>
     <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
@@ -41,7 +31,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithGap: Story<StackProps> = (args) => (
+export const WithGap: ComponentStory<typeof Stack> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Box />
@@ -52,8 +42,8 @@ WithGap.args = {
   gap: SpaceSizes.lg,
 };
 
-export const RecursiveGap: Story<StackProps> = (args) => (
-  <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
+export const RecursiveGap: ComponentStory<typeof StackSC> = (args) => (
+  <StackSC style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Box style={{ backgroundColor: '#579aa0' }}>
       <Box />
@@ -63,14 +53,14 @@ export const RecursiveGap: Story<StackProps> = (args) => (
       </div>
     </Box>
     <Box />
-  </Stack>
+  </StackSC>
 );
 RecursiveGap.args = {
   gap: SpaceSizes.xl,
   isRecursive: true,
 };
 
-export const SplitedStack: Story<StackProps> = (args) => (
+export const SplitedStack: ComponentStory<typeof Stack> = (args) => (
   <div style={{ height: '20rem' }}>
     <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
@@ -84,7 +74,7 @@ SplitedStack.args = {
   gap: SpaceSizes.sm,
 };
 
-export const WithHorizontalAlignment: Story<StackProps> = (args) => (
+export const WithHorizontalAlignment: ComponentStory<typeof Stack> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Button color="primary" variant="solid">

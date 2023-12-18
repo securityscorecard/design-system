@@ -19,6 +19,20 @@ export default createGlobalStyle`
     font-weight: 400;
   }
 
+  :root {
+    --sscds-space-none: 0;
+    --sscds-space-xxs: 0.125rem;
+    --sscds-space-xs: 0.25rem;
+    --sscds-space-sm: 0.5rem;
+    --sscds-space-md: 1rem;
+    --sscds-space-mdPlus: 1.5rem;
+    --sscds-space-lg: 2rem;
+    --sscds-space-lgPlus: 3rem;
+    --sscds-space-xl: 4rem;
+    --sscds-space-xlPlus: 6rem;
+    --sscds-space-xxl: 8rem;
+  }
+
   /* http://meyerweb.com/eric/tools/css/reset/
     v4.0 | 20180602
     License: none (public domain)

@@ -13,6 +13,7 @@ module.exports = {
     'storybook-addon-designs',
     'storybook-addon-outline',
     '@geometricpanda/storybook-addon-badges',
+    "storybook-css-modules",
   ],
   features: {
     postcss: false,
