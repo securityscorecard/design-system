@@ -17,7 +17,6 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
       background="white"
       radius="md"
       style={{
-        overflow: 'hidden',
         '--sscds-table-transition':
           'all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53), outline 0ms',
         '--sscds-table-color-background': 'var(--sscds-background)',
@@ -53,6 +52,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         '--sscds-table-size-settings-width': '22.5rem',
         '--sscds-table-radii-settings-item': getRadii('default', { theme }),
         position: 'relative',
+        overflow: 'hidden',
       }}
       hasBorder
     >

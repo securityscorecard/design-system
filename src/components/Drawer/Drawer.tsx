@@ -26,6 +26,7 @@ import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { Text } from '../typographyLegacy';
+import { FloatingProvider } from '../../contexts/FloatingContext';
 
 const widthVariants = {
   [DrawerSizes.md]: 480,
@@ -185,17 +186,19 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     useLockBodyScroll({ enabled: hasBackdrop });
 
     return (
-      <Portal>
-        {hasBackdrop ? (
-          <Overlay placement="right">
-            <DrawerBox {...drawerProps} />
-          </Overlay>
-        ) : (
-          <DrawerWrapper>
-            <DrawerBox {...drawerProps} />
-          </DrawerWrapper>
-        )}
-      </Portal>
+      <FloatingProvider>
+        <Portal>
+          {hasBackdrop ? (
+            <Overlay placement="right">
+              <DrawerBox {...drawerProps} />
+            </Overlay>
+          ) : (
+            <DrawerWrapper>
+              <DrawerBox {...drawerProps} />
+            </DrawerWrapper>
+          )}
+        </Portal>
+      </FloatingProvider>
     );
   },
 );

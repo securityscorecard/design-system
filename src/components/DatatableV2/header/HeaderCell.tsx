@@ -9,6 +9,7 @@ import { getCommonCellStyles } from '../columns.utils';
 import HeaderCellResizeHandler from './HeaderCellResizeHandler';
 import { Inline } from '../../layout';
 import { Tooltip } from '../../Tooltip';
+import { useHasHozintalScroll } from '../hooks/useHasHozintalScroll';
 
 const HeaderCell = <D,>({
   header,
@@ -26,6 +27,7 @@ const HeaderCell = <D,>({
     getCanResize,
     getCanSort,
     getIsSorted,
+    getIsPinned,
     getToggleSortingHandler,
   } = column;
   const {
@@ -35,6 +37,8 @@ const HeaderCell = <D,>({
     headerComponent,
     renderHeaderTooltip,
   } = columnDef;
+
+  const hasHorizontalScroll = useHasHozintalScroll(table);
 
   const showColumnActions =
     (enableColumnActions || cdEnableColumnActions) &&
@@ -52,6 +56,7 @@ const HeaderCell = <D,>({
       key={id}
       className={clx('ds-table-header-cell ds-table-cell', {
         isSorted: getIsSorted(),
+        isPinned: getIsPinned(),
         'ds-table-cell-display': columnDefType === 'display',
       })}
       style={{
@@ -59,6 +64,7 @@ const HeaderCell = <D,>({
           table,
           header,
           column,
+          hasHorizontalScroll,
         }),
       }}
     >
