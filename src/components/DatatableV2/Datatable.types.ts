@@ -13,7 +13,7 @@ import {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, MutableRefObject, ReactNode, SetStateAction } from 'react';
 
 import { Types as SSCIconTypes, SSCIcons } from '../Icon';
 
@@ -232,9 +232,12 @@ export interface DatatableInstance<D>
   getCenterLeafColumns: () => DatatableColumn<D>[];
   getLeftLeafColumns: () => DatatableColumn<D>[];
   getRightLeafColumns: () => DatatableColumn<D>[];
-  getState: () => DatatableState;
+  getState: () => DatatableState & { width: number };
   options: ParsedDatatableOptions<D>;
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
+  refs: {
+    tableRef: MutableRefObject<HTMLTableElement>;
+  };
 }
 
 export interface DatatableOptions<D>

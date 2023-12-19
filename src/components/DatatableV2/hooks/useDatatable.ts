@@ -6,7 +6,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import {
   getAllLeafColumnDefs,
@@ -35,6 +35,7 @@ export const useDatatable = <D>(
 ): DatatableInstance<D> => {
   const tableOptions = useOptions<D>(options);
   const displayColumns = useDisplayColumns<D>(tableOptions);
+  const tableRef = useRef<HTMLTableElement>();
 
   const columnDefs = useMemo(
     () =>
@@ -81,6 +82,20 @@ export const useDatatable = <D>(
   const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
     initialState?.columnSizing ?? {},
   );
+  const [width, setWidth] = useState(0);
+
+  const onResize = () => {
+    setWidth(tableRef.current.getBoundingClientRect().width);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+  useLayoutEffect(() => {
+    onResize();
+  }, []);
 
   const debouncedSetColumnSizing = useDebounce(setColumnSizing);
 
@@ -123,6 +138,10 @@ export const useDatatable = <D>(
       showColumnSettings,
       columnSizing,
       ...tableOptions.state,
+      // I know what I'm doing here
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      width,
     },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: tableOptions.enablePagination
@@ -135,6 +154,10 @@ export const useDatatable = <D>(
       ? getExpandedRowModel()
       : undefined,
   }) as unknown as DatatableInstance<D>;
+
+  table.refs = {
+    tableRef,
+  };
 
   table.setShowColumnSettings =
     tableOptions.onShowColumnSettings ?? setShowColumnSettings;

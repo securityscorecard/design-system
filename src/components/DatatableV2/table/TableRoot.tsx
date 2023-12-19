@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getFontSize, pxToRem } from '../../../utils';
+import { getColor, getFontSize, getRadii, pxToRem } from '../../../utils';
 
 const TableRoot = styled.div`
   position: relative;
@@ -8,6 +8,22 @@ const TableRoot = styled.div`
   max-width: 100%;
   overflow-x: auto;
   transform: scale(1, -1);
+
+  &::-webkit-scrollbar {
+    box-sizing: content-box;
+    height: 1.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: ${getRadii('round')};
+    background-color: ${getColor('primary.500')};
+    border: 8px solid ${getColor('neutral.0')};
+  }
+  &::-webkit-scrollbar-track-piece {
+    border-radius: ${getRadii('round')};
+    background-color: ${getColor('neutral.300')};
+    border: 8px solid ${getColor('neutral.0')};
+  }
+
   .ds-table {
     width: 100%;
     transform: scale(1, -1);
@@ -37,6 +53,10 @@ const TableRoot = styled.div`
     display: flex;
     padding: var(--sscds-table-spacing-cell);
     background-color: var(--sscds-table-color-background);
+
+    &.isPinned + .ds-table-cell:not(.isPinned) {
+      border-left: none !important;
+    }
   }
 
   .ds-table-header-row,
@@ -50,8 +70,8 @@ const TableRoot = styled.div`
     padding: var(--sscds-table-spacing-cell-header);
     /* height: ${pxToRem(60)}; */
 
-    &:not(:last-of-type) {
-      border-right: 1px solid var(--sscds-table-color-border) !important;
+    &:not(:first-of-type) {
+      border-left: 1px solid var(--sscds-table-color-border) !important;
     }
 
     .ds-table-header-cell-title {
