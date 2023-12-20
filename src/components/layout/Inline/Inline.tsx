@@ -1,9 +1,15 @@
+import React, {
+  ComponentPropsWithoutRef,
+  ElementType,
+  PropsWithChildren,
+  forwardRef,
+} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 import { Property } from 'csstype';
-import cls from 'classnames';
+import clx from 'classnames';
 
 import {
   AlignItemsPropType,
@@ -14,6 +20,7 @@ import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { StretchEnum } from './Inline.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
+import styles from './Inline.module.css';
 
 type Stretch = typeof StretchEnum[keyof typeof StretchEnum];
 
@@ -36,6 +43,7 @@ export interface InlineProps {
    */
   stretch?: number | Stretch;
   className?: string;
+  component?: ElementType;
 }
 
 const getStretchStyle = (
@@ -65,9 +73,9 @@ const getStretchStyle = (
   }
 };
 
-const Inline = styled.div.attrs((props) => ({
+const InlineSC = styled.div.attrs((props) => ({
   ...props,
-  className: cls(CLX_LAYOUT, props?.className),
+  className: clx(CLX_LAYOUT, props?.className),
 }))<InlineProps>`
   display: flex;
   flex-direction: row;
@@ -91,6 +99,46 @@ const Inline = styled.div.attrs((props) => ({
   }
 `;
 
+const Inline = forwardRef<
+  HTMLDivElement,
+  PropsWithChildren<InlineProps & ComponentPropsWithoutRef<'div'>>
+>(
+  (
+    {
+      children,
+      className,
+      stretch,
+      justify,
+      align,
+      gap,
+      style,
+      component: Element = 'div',
+      ...props
+    },
+    ref,
+  ) => {
+    return (
+      <Element
+        ref={ref}
+        className={clx(styles['sscds-inline'], className, CLX_LAYOUT)}
+        data-sscds-inline-stretch={
+          typeof stretch !== 'undefined' ? stretch : undefined
+        }
+        style={{
+          '--sscds-inline-gap': `var(--sscds-space-${gap}, --sscds-space-none)`,
+          '--sscds-inline-justify': justify,
+          '--sscds-inline-align': align,
+          ...style,
+        }}
+        data-sscds-layout
+        {...props}
+      >
+        {children}
+      </Element>
+    );
+  },
+);
+
 Inline.propTypes = {
   align: AlignItemsPropType,
   justify: JustifyContentPropType,
@@ -106,4 +154,5 @@ Inline.defaultProps = {
   gap: SpaceSizes.none,
 };
 
+export { InlineSC };
 export default Inline;

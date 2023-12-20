@@ -1,0 +1,25 @@
+.sscds-inline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: var(--sscds-inline-align, 'initial');
+  justify-content: var(--sscds-inline-justify, 'initial');
+  gap: var(--sscds-inline-gap);
+}
+
+.sscds-inline.sscds-inline > * {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.sscds-inline[data-sscds-inline-stretch='start'] > :first-child,
+.sscds-inline[data-sscds-inline-stretch='end'] > :last-child,
+.sscds-inline[data-sscds-inline-stretch='all'] > * ,
+.sscds-inline[data-sscds-inline-stretch='1'] > :nth-child(1),
+.sscds-inline[data-sscds-inline-stretch='2'] > :nth-child(2),
+.sscds-inline[data-sscds-inline-stretch='3'] > :nth-child(3),
+.sscds-inline[data-sscds-inline-stretch='4'] > :nth-child(4),
+.sscds-inline[data-sscds-inline-stretch='5'] > :nth-child(5),
+.sscds-inline[data-sscds-inline-stretch='6'] > :nth-child(6) {
+  flex: 1 1 0%;
+}

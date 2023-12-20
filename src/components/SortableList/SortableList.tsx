@@ -80,7 +80,7 @@ const SortableList: React.FC<SortableListProps> = ({
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           <Stack
-            as="ul"
+            component="ul"
             gap={SpaceSizes.xs}
             style={{
               paddingInlineStart: 0, // reset ul user agent styles, :facepalm: core-ui

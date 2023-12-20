@@ -132,7 +132,7 @@ const Banner: React.FC<BannerProps> = ({
         variant={variant}
       >
         <ContentWrapper paddingSize={SpaceSizes.md}>
-          <Inline align="flex-start" gap={SpaceSizes.xl} stretch={1}>
+          <Inline align="flex-start" stretch="start">
             {isInline ? (
               <Inline
                 align="flex-start"
