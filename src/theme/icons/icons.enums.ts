@@ -52,6 +52,7 @@ export const SSCIconNames = {
   gripLines: 'grip-lines',
   thumbstack: 'thumbstack',
   anglesRight: 'angles-right',
+  copy: 'copy',
 } as const;
 
 export const IconTypes = {
