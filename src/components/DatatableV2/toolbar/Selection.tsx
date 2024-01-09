@@ -7,7 +7,7 @@ import { DatatableInstance } from '../Datatable.types';
 import { Inline, Padbox } from '../../layout';
 import { Button } from '../../Button';
 import SelectButton from '../buttons/SelectButton';
-import { useHasHozintalScroll } from '../hooks/useHasHozintalScroll';
+import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 
 const SelectionRoot = styled(Padbox)<{ $hasHorizontalScroll: boolean }>`
   position: absolute;
@@ -28,7 +28,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
     toggleAllRowsSelected,
   } = table;
 
-  const hasHorizontalScroll = useHasHozintalScroll(table);
+  const hasHorizontalScroll = useHasHorizontalScroll(table);
 
   const selectedRows = getSelectedRowModel().rows;
   const selectedRowsCount = selectedRows.length;

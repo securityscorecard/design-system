@@ -9,7 +9,7 @@ import { getCommonCellStyles } from '../columns.utils';
 import HeaderCellResizeHandler from './HeaderCellResizeHandler';
 import { Inline } from '../../layout';
 import { Tooltip } from '../../Tooltip';
-import { useHasHozintalScroll } from '../hooks/useHasHozintalScroll';
+import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 
 const HeaderCell = <D,>({
   header,
@@ -38,7 +38,7 @@ const HeaderCell = <D,>({
     renderHeaderTooltip,
   } = columnDef;
 
-  const hasHorizontalScroll = useHasHozintalScroll(table);
+  const hasHorizontalScroll = useHasHorizontalScroll(table);
 
   const showColumnActions =
     (enableColumnActions || cdEnableColumnActions) &&
