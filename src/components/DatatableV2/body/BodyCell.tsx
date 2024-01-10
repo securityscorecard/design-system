@@ -4,7 +4,7 @@ import clx from 'classnames';
 
 import { getCommonCellStyles } from '../columns.utils';
 import { DatatableCell, DatatableInstance } from '../Datatable.types';
-import { useHasHozintalScroll } from '../hooks/useHasHozintalScroll';
+import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 import Skeleton from './Skeleton';
 
 const BodyCell = <D,>({
@@ -19,7 +19,7 @@ const BodyCell = <D,>({
   const { isLoading } = table.getState();
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
-  const hasHorizontalScroll = useHasHozintalScroll(table);
+  const hasHorizontalScroll = useHasHorizontalScroll(table);
 
   useEffect(() => {
     if (!isLoading || skeletonWidth !== 100) return;
