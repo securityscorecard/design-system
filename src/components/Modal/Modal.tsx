@@ -38,7 +38,7 @@ const paddingVariants = {
 const BaseModal = styled.div<{ $maxWidth: number }>`
   display: flex;
   flex-direction: column;
-  max-height: 66vh;
+  max-height: 90vh;
   width: 100%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
   border-radius: ${getRadii('large')};
