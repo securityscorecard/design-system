@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/securityscorecard/design-system/compare/v1.20.0...v1.20.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* **Badge:** do not render badge if count is undefined ([50242c5](https://github.com/securityscorecard/design-system/commit/50242c5d7e8a89a6d54d349432cfc983a60bcb7b))
+
 # [1.20.0](https://github.com/securityscorecard/design-system/compare/v1.19.0...v1.20.0) (2024-01-24)
 
 
