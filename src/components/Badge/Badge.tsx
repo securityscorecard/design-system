@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defaultWhen } from 'ramda-adjunct';
+import { defaultWhen, isNotUndefined } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
@@ -63,15 +63,16 @@ const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 const Badge: React.FC<BadgeProps> = ({
   count,
   variant = BadgeVariants.error,
-}) => (
-  <BadgeElement
-    $variant={variant}
-    className={CLX_COMPONENT}
-    paddingSize={SpaceSizes.sm}
-  >
-    <span>{normalizeCount(count)}</span>
-  </BadgeElement>
-);
+}) =>
+  isNotUndefined(count) ? (
+    <BadgeElement
+      $variant={variant}
+      className={CLX_COMPONENT}
+      paddingSize={SpaceSizes.sm}
+    >
+      <span>{normalizeCount(count)}</span>
+    </BadgeElement>
+  ) : null;
 
 Badge.propTypes = {
   count: PropTypes.number,
