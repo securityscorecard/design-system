@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactComponentLike } from 'prop-types';
 
 import { Placements } from '../Dropdown/Dropdown.types';
 
@@ -14,4 +15,5 @@ export interface TooltipProps {
   placement?: Placements;
   width?: 'auto' | number;
   defaultIsPopupDisplayed?: boolean;
+  wrapperEl?: ReactComponentLike;
 }

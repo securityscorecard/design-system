@@ -10,10 +10,11 @@ import { getColor, getDepth, getRadii, pxToRem } from '../../utils';
 import { TooltipProps } from './Tooltip.types';
 import { useFloatingContext } from '../../contexts/FloatingContext';
 
-const Content = styled(RadixTooltip.Content)<{
+type ContentProps = {
   $width: TooltipProps['width'];
   $isInFloatingElement: boolean;
-}>`
+};
+const Content = styled(RadixTooltip.Content)<ContentProps>`
   border-radius: ${getRadii('default')};
   color: ${getColor('neutral.900')};
   background-color: ${getColor('neutral.0')};
@@ -93,6 +94,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   placement = 'bottom',
   popup,
   width = 270,
+  wrapperEl: Wrapper = 'span',
   ...props
 }) => {
   const side = placement.split('-')[0];
@@ -108,7 +110,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   return (
     <RadixTooltip.Root defaultOpen={defaultIsPopupDisplayed} delayDuration={0}>
       <RadixTooltip.Trigger asChild>
-        <span {...props}>{children}</span>
+        <Wrapper {...props}>{children}</Wrapper>
       </RadixTooltip.Trigger>
       <RadixTooltip.Portal>
         <Content
