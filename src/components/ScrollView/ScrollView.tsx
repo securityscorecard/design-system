@@ -42,7 +42,8 @@ const ScrollViewRoot = styled(Surface)`
         rgba(0, 0, 0, 0.15),
         rgba(0, 0, 0, 0)
       )
-      center bottom;
+      center bottom,
+    var(--sscds-background);
   background-repeat: no-repeat;
   background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
   background-attachment: local, local, scroll, scroll;
@@ -53,7 +54,7 @@ export const ScrollView = forwardRef<HTMLDivElement, ScrollViewProps>(
     {
       children,
       maxHeight = '100%',
-      radius = 'sm',
+      radius = 'none',
       hasBorder = false,
       style,
       ...props
