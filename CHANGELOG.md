@@ -1,3 +1,10 @@
+## [1.20.2](https://github.com/securityscorecard/design-system/compare/v1.20.1...v1.20.2) (2024-01-25)
+
+
+### Bug Fixes
+
+* **ScrollView:** fix container background ([8a375cb](https://github.com/securityscorecard/design-system/commit/8a375cb4d94b4fdfcf3c12f6069703383c3e000e))
+
 ## [1.20.1](https://github.com/securityscorecard/design-system/compare/v1.20.0...v1.20.1) (2024-01-24)
 
 
