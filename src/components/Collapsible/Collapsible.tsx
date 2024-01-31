@@ -5,7 +5,7 @@ import { includes } from 'ramda';
 import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getRadii } from '../../utils';
+import { getColor } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
@@ -15,11 +15,12 @@ import { Inline } from '../layout/Inline';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { Surface } from '../layout';
 
 const Header = styled(Padbox)`
   width: 100%;
   cursor: pointer;
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-borderRadius);
 
   ${({ $isOpen }) =>
     $isOpen &&
@@ -28,7 +29,7 @@ const Header = styled(Padbox)`
       border-bottom-left-radius: 0;
     `}
   &:hover {
-    background-color: rgb(0 0 0 / 4%);
+    background-color: ${getColor('primary.50')};
   }
 `;
 
@@ -37,12 +38,7 @@ const HeaderContent = styled.div`
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px solid ${getColor('neutral.400')};
-`;
-
-const Container = styled.div`
-  border: 1px solid ${getColor('neutral.400')};
-  border-radius: ${getRadii('default')};
+  border-top: 1px solid var(--sscds-borderColor);
 `;
 
 const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
@@ -71,7 +67,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
   };
 
   return (
-    <Container className={cls(CLX_COMPONENT, className)}>
+    <Surface className={cls(CLX_COMPONENT, className)} radius="sm" hasBorder>
       <Header
         $isOpen={isOpen}
         paddingSize={SpaceSizes.mdPlus}
@@ -105,7 +101,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
           </Text>
         </Content>
       )}
-    </Container>
+    </Surface>
   );
 };
 

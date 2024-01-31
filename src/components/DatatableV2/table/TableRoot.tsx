@@ -138,6 +138,7 @@ const TableRoot = styled.div`
     box-shadow: var(--sscds-table-shadow-settings);
     width: 100%;
     max-width: var(--sscds-table-size-settings-width);
+    z-index: 2;
   }
   .ds-table-settings-panel-item {
     border: 1px solid var(--sscds-table-color-border);

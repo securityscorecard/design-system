@@ -6,7 +6,6 @@ import { getPaddingSize } from '../../../utils/space';
 import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import Pagination from '../toolbar/Pagination';
-import Selection from '../toolbar/Selection';
 import Table from './Table';
 
 const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
@@ -37,8 +36,8 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           theme,
         }),
         '--sscds-table-spacing-cell-display': getPaddingSize({
-          paddingSize: 'sm',
-          paddingType: 'square',
+          paddingSize: 'md',
+          paddingType: 'stretch',
           theme,
         }),
         '--sscds-table-typography-weight-header': getFontWeight('bold', {
@@ -56,7 +55,6 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
       }}
       hasBorder
     >
-      {table.options.enableRowSelection && <Selection table={table} />}
       <Table table={table} />
       {table.options.enablePagination &&
         table.getRowModel().rows.length > 0 && <Pagination table={table} />}
