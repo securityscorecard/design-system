@@ -1,3 +1,13 @@
+## [1.20.3](https://github.com/securityscorecard/design-system/compare/v1.20.2...v1.20.3) (2024-01-31)
+
+
+### Bug Fixes
+
+* **Collapsible:** add white background ([04f67a4](https://github.com/securityscorecard/design-system/commit/04f67a4840e89fc7060378cdb92a7d14702d1ec0))
+* **DatatableV2:** adjust select button padding ([0e46974](https://github.com/securityscorecard/design-system/commit/0e469742fba6776c8f9f4cdab7d175300dd7b8a3))
+* **DatatableV2:** fix selection bar z index ([58219c8](https://github.com/securityscorecard/design-system/commit/58219c8e538a5038f00872c6301add8182ec62d1))
+* **useLockBodyScroll:** fix hook to only allow 1 lock ([6e5ca51](https://github.com/securityscorecard/design-system/commit/6e5ca517b41f2b83959fc2071fcc44bcee9b8003))
+
 ## [1.20.2](https://github.com/securityscorecard/design-system/compare/v1.20.1...v1.20.2) (2024-01-25)
 
 
