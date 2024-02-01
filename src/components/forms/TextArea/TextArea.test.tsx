@@ -1,5 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import TextArea from './TextArea';
 
@@ -13,5 +14,14 @@ describe('TextArea', () => {
 
       expect(textarea).toHaveValue('0123456789');
     });
+  });
+
+  it('should update char counter', () => {
+    render(<TextArea maxLength={5} />);
+
+    const textarea = screen.getByRole('textbox');
+    userEvent.type(textarea, 'aaa');
+
+    expect(screen.getByText('2')).toBeInTheDocument();
   });
 });
