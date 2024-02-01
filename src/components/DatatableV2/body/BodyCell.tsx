@@ -5,7 +5,7 @@ import clx from 'classnames';
 import { getCommonCellStyles } from '../columns.utils';
 import { DatatableCell, DatatableInstance } from '../Datatable.types';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
-import Skeleton from './Skeleton';
+import Skeleton from '../../Skeleton/Skeleton';
 
 const BodyCell = <D,>({
   cell,
