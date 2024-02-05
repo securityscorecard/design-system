@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent, MouseEvent } from 'react';
 import PropTypes from 'prop-types';
 
 import { TabProps } from './Tabs.types';
@@ -11,22 +11,31 @@ import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 
 const Tab: React.FC<TabProps> = ({
   children,
-  isSelected,
-  isExpanded = false,
-  onClick,
   color,
-  variant = TabVariants.underline,
+  onClick,
   value,
+  __variant,
+  __isExpanded,
+  __isSelected,
+  __onSelectTab,
 }) => {
   const isLink = value?.toString()?.startsWith('/');
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      onClick(value);
+      __onSelectTab(value);
     }
   };
   const handler = isLink
-    ? { to: value }
-    : { onClick: () => onClick(value), onKeyDown: (e) => handleKeyDown(e) };
+    ? { to: value, onClick }
+    : {
+        onClick: (e: MouseEvent<HTMLAnchorElement>) => {
+          __onSelectTab(value);
+          onClick?.(e);
+        },
+        onKeyDown: (e: KeyboardEvent<HTMLAnchorElement>) => {
+          handleKeyDown(e);
+        },
+      };
   let RouterLink = null;
 
   if (isLink) {
@@ -34,19 +43,19 @@ const Tab: React.FC<TabProps> = ({
   }
 
   const paddingSize =
-    variant === TabVariants.segmented
+    __variant === TabVariants.segmented
       ? SpaceSizes.sm
-      : variant === TabVariants.underline
+      : __variant === TabVariants.underline
       ? SpaceSizes.md
       : SpaceSizes.none;
 
   return (
     <BaseTabLabel
       $color={color}
-      $isExpanded={isExpanded}
-      $isSelected={isSelected}
-      $variant={variant}
-      aria-selected={isSelected}
+      $isExpanded={__isExpanded}
+      $isSelected={__isSelected}
+      $variant={__variant}
+      aria-selected={__isSelected}
       as={isLink ? RouterLink : 'a'}
       paddingSize={paddingSize}
       paddingType={PaddingTypes.squish}
@@ -62,10 +71,13 @@ const Tab: React.FC<TabProps> = ({
 Tab.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(Object.values(TabVariants)),
-  isSelected: PropTypes.bool,
-  isExpanded: PropTypes.bool,
   color: PropTypes.oneOf([...Object.values(ColorTypes)]),
+  __variant: PropTypes.oneOf(Object.values(TabVariants)),
+  // eslint-disable-next-line
+  __isSelected: PropTypes.bool,
+  // eslint-disable-next-line
+  __isExpanded: PropTypes.bool,
+  __onSelectTab: PropTypes.func, // internal property
   onClick: PropTypes.func,
 };
 
