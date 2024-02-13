@@ -4,7 +4,7 @@ import { ExpandedState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
-import { Code } from '../../typographyLegacy';
+import Snippet from '../../Snippet/Snippet';
 import { Padbox } from '../../layout';
 
 export default {
@@ -17,9 +17,9 @@ export default {
 
 const Panel = ({ row }) => (
   <Padbox paddingSize="md">
-    <pre>
-      <Code size="sm">{JSON.stringify(row.original, null, 2)}</Code>
-    </pre>
+    <Snippet shouldDedent={false} isExpanded>
+      {JSON.stringify(row.original, null, 2)}
+    </Snippet>
   </Padbox>
 );
 

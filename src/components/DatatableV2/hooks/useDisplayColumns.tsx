@@ -37,7 +37,7 @@ export const useDisplayColumns = <D,>(
                 ? ({ table }) => <SelectButton table={table} isSelectAll />
                 : null,
             cell: SelectButton,
-            size: 37,
+            size: 40,
             ...tableOptions.defaultDisplayColumn,
           },
           tableOptions.enableRowActions && {
