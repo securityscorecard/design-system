@@ -30,11 +30,17 @@ DetailPanelEnabled.args = {
   enableExpandAll: true,
   renderDetailPanel: Panel,
 };
+DetailPanelEnabled.parameters = {
+  screenshot: { skip: false },
+};
 
 export const DisableExpandAll: Story = Template.bind({});
 DisableExpandAll.args = {
   ...DetailPanelEnabled.args,
   enableExpandAll: false,
+};
+DisableExpandAll.parameters = {
+  screenshot: { skip: false },
 };
 
 export const InitialExpandedAllDetailPanels: Story = Template.bind({});
@@ -44,6 +50,9 @@ InitialExpandedAllDetailPanels.args = {
     expanded: true,
   },
 };
+InitialExpandedAllDetailPanels.parameters = {
+  screenshot: { skip: false },
+};
 
 export const InitialExpandedSomeDetailPanels: Story = Template.bind({});
 InitialExpandedSomeDetailPanels.args = {
@@ -51,6 +60,9 @@ InitialExpandedSomeDetailPanels.args = {
   initialState: {
     expanded: { 2: true, 4: true },
   },
+};
+InitialExpandedSomeDetailPanels.parameters = {
+  screenshot: { skip: false },
 };
 
 export const DetailPanelManagedState: Story = (args) => {

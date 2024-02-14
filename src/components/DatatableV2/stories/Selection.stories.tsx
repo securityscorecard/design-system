@@ -20,20 +20,32 @@ SelectionEnabled.args = {
   ...Template.args,
   getRowId: (row) => row.id,
 };
+SelectionEnabled.parameters = {
+  screenshot: { skip: false },
+};
 
 export const DisabledSelection: Story = Template.bind({});
 DisabledSelection.args = { ...Template.args, enableRowSelection: false };
+DisabledSelection.parameters = {
+  screenshot: { skip: false },
+};
 
 export const SingleRowSelection: Story = Template.bind({});
 SingleRowSelection.args = {
   ...SelectionEnabled.args,
   enableMultiRowSelection: false,
 };
+SingleRowSelection.parameters = {
+  screenshot: { skip: false },
+};
 
 export const DisabledSelectAllHeader: Story = Template.bind({});
 DisabledSelectAllHeader.args = {
   ...SelectionEnabled.args,
   enableSelectAll: false,
+};
+DisabledSelectAllHeader.parameters = {
+  screenshot: { skip: false },
 };
 
 export const SelectAllModePage: Story = Template.bind({});
@@ -46,6 +58,9 @@ export const ConditionallyEnabledSelection: Story = Template.bind({});
 ConditionallyEnabledSelection.args = {
   ...Template.args,
   enableRowSelection: (row) => row.original.organization.grade !== 'A',
+};
+ConditionallyEnabledSelection.parameters = {
+  screenshot: { skip: false },
 };
 
 export const RowSelectionActions: Story = Template.bind({});
@@ -84,6 +99,9 @@ RowSelectionActions.args = {
       </Button>
     </>
   ),
+};
+RowSelectionActions.parameters = {
+  screenshot: { skip: false },
 };
 
 export const SelectionManagedState: Story = (args) => {
