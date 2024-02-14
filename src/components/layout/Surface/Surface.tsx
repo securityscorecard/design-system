@@ -24,8 +24,8 @@ interface SurfaceProps extends ComponentPropsWithoutRef<'div'> {
 const SurfaceRoot = styled.div`
   background: var(--sscds-background);
   border-radius: var(--sscds-radius);
-  box-shadow: var(--sscds-elevation);
-  border: var(--sscds-borderWidth) solid var(--sscds-borderColor);
+  box-shadow: inset 0 0 0 var(--sscds-borderWidth) var(--sscds-borderColor),
+    var(--sscds-elevation);
   transition: border-radius 300ms ease-in, background 300ms ease-in,
     box-shadow 300ms ease-in;
 `;
@@ -46,7 +46,7 @@ const getBackground = (
 
 const getShadow = (elevation: number) => {
   return elevation === 0
-    ? 'none'
+    ? '0 0 0 transparent'
     : `0px ${elevation * 2}px ${elevation * 6}px rgba(0 0 0/15%)`;
 };
 
