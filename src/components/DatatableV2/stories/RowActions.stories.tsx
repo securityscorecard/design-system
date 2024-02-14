@@ -44,17 +44,26 @@ RowActionsEnabled.args = {
     },
   ],
 };
+RowActionsEnabled.parameters = {
+  screenshot: { skip: false },
+};
 
 export const DisabledRowActions: Story = Template.bind({});
 DisabledRowActions.args = {
   ...Template.args,
   enableRowActions: false,
 };
+DisabledRowActions.parameters = {
+  screenshot: { skip: false },
+};
 
 export const NoRowActions: Story = Template.bind({});
 NoRowActions.args = {
   ...Template.args,
   enableRowActions: true,
+};
+NoRowActions.parameters = {
+  screenshot: { skip: false },
 };
 
 export const SingleRowAction: Story = Template.bind({});
@@ -72,6 +81,9 @@ SingleRowAction.args = {
     },
   ],
 };
+SingleRowAction.parameters = {
+  screenshot: { skip: false },
+};
 
 export const ConditionallyDisabledRowActions: Story = Template.bind({});
 ConditionallyDisabledRowActions.args = {
@@ -85,7 +97,7 @@ ConditionallyDisabledRowActions.args = {
         ({ row, table }) =>
         (event) =>
           action('row action')({ row, table, event }),
-      isDisabled: ({ row }) => row.original.organization.grade === 'A',
+      isDisabled: ({ row }) => row.original.organization.grade === 'D',
     },
     {
       iconName: 'lock',
@@ -119,7 +131,10 @@ ConditionallyDisabledSingleRowAction.args = {
         ({ row, table }) =>
         (event) =>
           action('row action')({ row, table, event }),
-      isDisabled: ({ row }) => row.original.organization.grade === 'A',
+      isDisabled: ({ row }) => row.original.organization.grade === 'D',
     },
   ],
+};
+ConditionallyDisabledSingleRowAction.parameters = {
+  screenshot: { skip: false },
 };

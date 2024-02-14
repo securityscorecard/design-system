@@ -37,13 +37,16 @@ CustomDefaultColumnsWidth.args = {
     maxSize: 350,
   },
 };
+CustomDefaultColumnsWidth.parameters = {
+  screenshot: { skip: false },
+};
 
 export const SpecificSizingForColumn: Story = Template.bind({});
 SpecificSizingForColumn.args = {
   ...Template.args,
   columns: [
-    ...columns,
     { accessorKey: 'country', header: 'Country', size: 400 },
+    ...columns,
   ],
 };
 
@@ -51,13 +54,16 @@ export const InitialColumnResizing: Story = Template.bind({});
 InitialColumnResizing.args = {
   ...Template.args,
   initialState: {
-    columnSizing: { organization_name: 300 },
+    columnSizing: { 'organization.name': 300 },
   },
+};
+InitialColumnResizing.parameters = {
+  screenshot: { skip: false },
 };
 
 export const ColumnResizingManagedState: Story = (args) => {
   const [columnSizing, setColumnSizing] = useState<ColumnSizingState>({
-    organization_name: 300,
+    'organization.name': 300,
   });
 
   const timeout = useRef<number | null>(null);

@@ -6,9 +6,6 @@ import Template, { Story, columns } from './Template';
 export default {
   title: 'components/DatatableV2/ColumnActions',
   component: Datatable,
-  parameters: {
-    screenshot: { skip: true },
-  },
 } as ComponentMeta<typeof Datatable>;
 
 export const ColumnActionsEnabled: Story = Template.bind({});

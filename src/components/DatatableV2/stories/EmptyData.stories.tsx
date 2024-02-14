@@ -11,9 +11,6 @@ import { Button } from '../../Button';
 export default {
   title: 'components/DatatableV2/EmptyData',
   component: Datatable,
-  parameters: {
-    screenshot: { skip: true },
-  },
 } as ComponentMeta<typeof Datatable>;
 
 export const Default: Story = Template.bind({});
