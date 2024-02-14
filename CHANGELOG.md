@@ -1,3 +1,17 @@
+# [1.21.0](https://github.com/securityscorecard/design-system/compare/v1.20.3...v1.21.0) (2024-02-14)
+
+
+### Bug Fixes
+
+* **DatatableV2:** fix minor issues ([52b78d6](https://github.com/securityscorecard/design-system/commit/52b78d64d24a24d7cb4f5184dc32e3269c8e6093))
+* **Textarea:** fix char counter ([b4c1ad4](https://github.com/securityscorecard/design-system/commit/b4c1ad47a4b50b51db068d87d4172d3b1de2304a))
+
+
+### Features
+
+* **Skeleton:** add Skeleton component ([2917919](https://github.com/securityscorecard/design-system/commit/2917919896c72b92566d32cb34e9d48b52b8d5ec))
+* **Tabs:** allow passing onClick to Tab component ([3a63b70](https://github.com/securityscorecard/design-system/commit/3a63b70b4aa77814d261adc2144d6a0540d5c21c))
+
 ## [1.20.3](https://github.com/securityscorecard/design-system/compare/v1.20.2...v1.20.3) (2024-01-31)
 
 
