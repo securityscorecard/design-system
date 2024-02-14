@@ -43,6 +43,10 @@ Template.args = {
   data: generateData(25),
   enablePersistentState: false,
   id: 'datatable_template',
+  initialState: {
+    pagination: { pageSize: 5 },
+  },
+  rowsPerPageOptions: [5, 10, 25, 50, 100],
 };
 
 export default Template;

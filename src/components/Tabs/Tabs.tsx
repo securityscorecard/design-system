@@ -42,11 +42,11 @@ const Tabs: React.FC<TabsProps> = ({
         }
 
         return React.cloneElement(tab, {
-          variant,
-          isExpanded,
-          key: tab.props.value,
-          isSelected: selectedPatternMatcher(tab.props.value, selectedValue),
-          onClick: onSelectTab,
+          __key: tab.props.value,
+          __variant: variant,
+          __isExpanded: isExpanded,
+          __isSelected: selectedPatternMatcher(tab.props.value, selectedValue),
+          __onSelectTab: onSelectTab,
         });
       })}
     </Inline>

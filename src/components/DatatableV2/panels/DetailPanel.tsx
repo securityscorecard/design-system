@@ -14,7 +14,7 @@ const DetailPanel = <D,>({
   } = table;
   return (
     <tr className="ds-table-body-row ds-table-row ds-table-detail-panel">
-      <td colSpan={row.getVisibleCells().length}>
+      <td colSpan={row.getVisibleCells().length} style={{ flexGrow: 1 }}>
         {renderDetailPanel({ table, row })}
       </td>
     </tr>

@@ -7,9 +7,6 @@ import Template, { Story } from './Template';
 export default {
   title: 'components/DatatableV2/Loading',
   component: Datatable,
-  parameters: {
-    screenshot: { skip: true },
-  },
 } as ComponentMeta<typeof Datatable>;
 
 export const Loading: Story = Template.bind({});

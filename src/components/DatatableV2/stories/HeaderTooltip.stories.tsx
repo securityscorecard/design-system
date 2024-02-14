@@ -3,6 +3,8 @@ import { ComponentMeta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
+import { DatatableColumn, DatatableHeader } from '../Datatable.types';
+import { DataSource } from '../mocks/data';
 
 export default {
   title: 'components/DatatableV2/HeaderTooltip',
@@ -12,7 +14,13 @@ export default {
   },
 } as ComponentMeta<typeof Datatable>;
 
-const TooltipComponent = ({ header, column }) => (
+const TooltipComponent = ({
+  header,
+  column,
+}: {
+  header: DatatableHeader<DataSource>;
+  column: DatatableColumn<DataSource>;
+}) => (
   <div>
     {column.columnDef.header} - {header.id}
   </div>

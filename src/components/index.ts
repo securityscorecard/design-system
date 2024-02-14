@@ -50,3 +50,4 @@ export * from './layout';
 export * from './forms';
 export * from './typographyLegacy';
 export * from './ScrollView';
+export * from './Skeleton';

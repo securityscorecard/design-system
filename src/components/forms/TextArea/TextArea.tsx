@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { isNotUndefined, noop } from 'ramda-adjunct';
+import { isNotUndefined, isString } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
 import cls from 'classnames';
 
@@ -101,29 +101,31 @@ const TextArea: React.FC<
   className,
   ...props
 }) => {
-  const {
-    value = '',
-    defaultValue = '',
-    onChange = noop,
-  } = props as {
+  const { value, defaultValue, onChange } = props as {
     value: string;
     defaultValue: string;
     onChange: React.ChangeEventHandler;
   };
   const textAreaRef = useRef<HTMLTextAreaElement>();
+  const isControlled = isNotUndefined(value) && isString(value);
   const { text, parentHeight, textAreaHeight, autosize } = useAutosize(
     textAreaRef,
-    value || defaultValue,
+    value ?? defaultValue ?? '',
   );
   const [currentValueLength, setCurrentValueLength] = useState(text.length);
   const runAfterUpdate = useRunAfterUpdate();
 
   const handleOnChange = (e) => {
-    onChange(e);
-    runAfterUpdate(() => {
+    onChange?.(e);
+    if (isControlled) {
+      runAfterUpdate(() => {
+        setCurrentValueLength(textAreaRef.current.value.length);
+        autosize();
+      });
+    } else {
       setCurrentValueLength(textAreaRef.current.value.length);
       autosize();
-    });
+    }
   };
 
   const isFieldInvalid = isInvalid || currentValueLength > maxLength;
@@ -140,8 +142,9 @@ const TextArea: React.FC<
         hasMaxLength={isNotUndefined(maxLength)}
         height={textAreaHeight}
         isInvalid={isFieldInvalid}
+        value={text}
         onChange={handleOnChange}
-        {...omit(['onChange'], props)}
+        {...omit(['onChange', 'defaultValue'], props)}
       />
       {isNotUndefined(maxLength) && (
         <Counter isInvalid={isFieldInvalid}>

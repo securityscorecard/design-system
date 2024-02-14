@@ -60,6 +60,9 @@ InitialColumnOrdering.args = {
     ],
   },
 };
+InitialColumnOrdering.parameters = {
+  screenshot: { skip: false },
+};
 
 /**
  * For managed state all columns has to be provided as a default value
