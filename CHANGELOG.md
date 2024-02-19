@@ -1,3 +1,15 @@
+# [1.20.0](https://github.com/securityscorecard/design-system/compare/v1.19.0...v1.20.0) (2024-01-24)
+
+
+### Bug Fixes
+
+* **Modal:** increase modal max height to 90vh ([58cee2b](https://github.com/securityscorecard/design-system/commit/58cee2b1c1be01bb3a421ea2dda96ad03f2f694d))
+
+
+### Features
+
+* **Tooltip:** allow passing wrapper element ([b158442](https://github.com/securityscorecard/design-system/commit/b1584420f032474fc8893adaaeabd31ea9fc1ce8))
+
 # [1.19.0](https://github.com/securityscorecard/design-system/compare/v1.18.0...v1.19.0) (2024-01-10)
 
 
