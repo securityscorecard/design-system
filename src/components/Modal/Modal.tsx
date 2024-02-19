@@ -40,7 +40,7 @@ const BaseModal = styled.div<{ $maxWidth: number }>`
   max-height: 66vh;
   width: 100%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
-  border-radius: ${getRadii('default')};
+  border-radius: ${getRadii('large')};
   background-color: ${getColor('neutral.0')};
 `;
 

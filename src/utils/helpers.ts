@@ -105,7 +105,7 @@ export const getLineHeight: HelperFn<keyof LineHeight> = curry(
     path(['typography', 'lineHeight', size], theme),
 );
 
-type Radii = keyof ReturnType<typeof createRadii>;
+export type Radii = keyof ReturnType<typeof createRadii>;
 // getRadii :: Type -> Props -> string
 // Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object
