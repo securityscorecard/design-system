@@ -88,7 +88,18 @@ export const parameters = {
 createIconLibrary();
 
 const wrapper = (storyFn) => (
-  <DSProvider>{storyFn()}</DSProvider>
+  <DSProvider config={{debugMode: true}}>{storyFn()}</DSProvider>
 );
 
 export const decorators = [withScreenshot, wrapper];
+
+window.Math.random = () => 0.5;
+
+function clearDatatableLS() {
+  Object.keys(localStorage)
+  .filter(x =>
+    x.startsWith('sscds_dt_'))
+  .forEach(x =>
+    localStorage.removeItem(x))
+}
+clearDatatableLS()

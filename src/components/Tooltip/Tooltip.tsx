@@ -3,6 +3,7 @@ import type { TooltipProps } from './Tooltip.types';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import styled from 'styled-components';
 import { pipe, prop } from 'ramda';
+import { isFalsy } from 'ramda-adjunct';
 
 import { Padbox } from '../layout';
 import { getColor, pxToRem } from '../../utils';
@@ -101,6 +102,9 @@ const Tooltip = ({
     : placement.endsWith('-end')
     ? 'end'
     : 'center';
+
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  if (isFalsy(popup)) return <>{children}</>;
 
   return (
     <RadixTooltip.Provider>

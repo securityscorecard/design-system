@@ -8,6 +8,7 @@ export * from './Card';
 export * from './CloseButton';
 export * from './ControlDropdown';
 export * from './Datatable';
+export * from './DatatableV2';
 export * from './DateRangePicker';
 export * from './Drawer';
 export * from './Dropdown';

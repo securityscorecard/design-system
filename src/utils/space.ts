@@ -40,13 +40,11 @@ export const getPaddingSpace = ({
   }
 };
 
+export const getPaddingSize = pipe(getPaddingSpace, apply(pxToRem));
+
 // createPadding :: Object -> string
 // Object - { paddingSize: keyof typeof space; paddingType: keyof typeof paddingTypes; theme: DefaultTheme; }
-export const createPadding = pipe(
-  getPaddingSpace,
-  apply(pxToRem),
-  concat('padding: '),
-);
+export const createPadding = pipe(getPaddingSize, concat('padding: '));
 
 type SpacingKind = 'padding' | 'margin';
 

@@ -52,3 +52,6 @@ export { angleDown } from './angleDown';
 export { table } from './table';
 export { infoCircleOutline } from './infoCircleOutline';
 export { columns3 } from './columns-3';
+export { backwardStep } from './backwardStep';
+export { gripLines } from './gripLines';
+export { thumbstack } from './thumbstack';

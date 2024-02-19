@@ -1,3 +1,43 @@
+# [1.16.0](https://github.com/securityscorecard/design-system/compare/v1.15.1...v1.16.0) (2023-12-06)
+
+
+### Bug Fixes
+
+* **Datatable:** update default props ([52345c7](https://github.com/securityscorecard/design-system/commit/52345c7fbc185132bd2673c71b21a96e96b139ce))
+* **DatatableV2:** set default page size to 50 ([9e6a3cb](https://github.com/securityscorecard/design-system/commit/9e6a3cbc99667c155b18c1fc091990ebca789124))
+
+
+### Features
+
+* **Datatable:** add basic styles ([9d17665](https://github.com/securityscorecard/design-system/commit/9d176651dd47fe5718d74175528575b3e3149ee4))
+* **Datatable:** add IconButton ([eb50c86](https://github.com/securityscorecard/design-system/commit/eb50c86a94bd2a566a91517d14060c7434807802))
+* **Datatable:** add sorting in column actions ([df18aa5](https://github.com/securityscorecard/design-system/commit/df18aa5d1320039064d60eaf388e8933b1ce2461))
+* **Datatable:** add styles for table header ([7388487](https://github.com/securityscorecard/design-system/commit/7388487ef5603ef28a962bab0746b14baab3e6be))
+* **Datatable:** add styles for toolbats and panels ([9981323](https://github.com/securityscorecard/design-system/commit/99813238b0ead050e81240fd26a2a88e3ec28052))
+* **DatatableV2:** add basic table skeleton ([b3334c7](https://github.com/securityscorecard/design-system/commit/b3334c7dbf1b37099844254d5a24be2eee056f87))
+* **DatatableV2:** implement column actions dropdown ([10a871f](https://github.com/securityscorecard/design-system/commit/10a871f95dcfa06702a8c10a8d40ba2c476cab79))
+* **DatatableV2:** implement column ordering ([029a2df](https://github.com/securityscorecard/design-system/commit/029a2dfc16f4a8bae09355a14756212ad4d282a9))
+* **DatatableV2:** implement column pinning ([b198482](https://github.com/securityscorecard/design-system/commit/b198482b89778441205a23231f549bdeed7a690e))
+* **DatatableV2:** implement column resizing ([4f4f1f6](https://github.com/securityscorecard/design-system/commit/4f4f1f67fb3b834607f71458ff261cff02d5233d))
+* **DatatableV2:** implement column settings panel ([d0acab3](https://github.com/securityscorecard/design-system/commit/d0acab321ed33e75c6fd1bb54260ac719d4b6901))
+* **DatatableV2:** implement column visibility ([d6724f0](https://github.com/securityscorecard/design-system/commit/d6724f03282d23b17c0931037cc2ad5901a33390))
+* **DatatableV2:** implement empty data message ([f91f990](https://github.com/securityscorecard/design-system/commit/f91f9900e1197eff2d1ad29b990e1f8d88ec6811))
+* **DatatableV2:** implement loading states ([cb11843](https://github.com/securityscorecard/design-system/commit/cb11843ea86cab5a58f1159cfcc930b9c265b587))
+* **DatatableV2:** implement pagination ([e764d2e](https://github.com/securityscorecard/design-system/commit/e764d2e35f3688efba60f47e77f34fb7f131fc44))
+* **DatatableV2:** implement rows per page select ([28b9559](https://github.com/securityscorecard/design-system/commit/28b9559a1f41060060c7b0cbca777f3f65ba2548))
+* **DatatableV2:** implement selection ([7d37a06](https://github.com/securityscorecard/design-system/commit/7d37a065ff101f9f06eed2c6aa280e289f0d3fe9))
+* **DatatableV2:** implement selection toolbar ([c1244c2](https://github.com/securityscorecard/design-system/commit/c1244c25156f303f72f660d35edaf389e2d77748))
+* **DatatableV2:** implement sorting ([10f68c9](https://github.com/securityscorecard/design-system/commit/10f68c921f2e701693f69967ceb1d514ef357c04))
+* **DatatableV2:** implement storing state in LS ([51ae576](https://github.com/securityscorecard/design-system/commit/51ae5769d496c8634e274debc6f04a03d2dbac9e))
+* **icons:** add datatable icons ([d34527d](https://github.com/securityscorecard/design-system/commit/d34527d385cc9d512bb3a575414b28687a02e04d))
+
+## [1.15.1](https://github.com/securityscorecard/design-system/compare/v1.15.0...v1.15.1) (2023-12-04)
+
+
+### Bug Fixes
+
+* **Tooltip:** fix showing empty tooltip ([2c72220](https://github.com/securityscorecard/design-system/commit/2c7222032f3c06e982a75e37883c747e27d6960f))
+
 # [1.15.0](https://github.com/securityscorecard/design-system/compare/v1.14.0...v1.15.0) (2023-12-04)
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useContext } from 'react';
 
 import { DSContext } from '../theme/DSProvider/DSProvider';
@@ -7,35 +8,52 @@ export const logStyles = ['color: darkturquoise', ...styles].join(';');
 export const warnStyles = ['color: darkorange', ...styles].join(';');
 export const errorStyles = ['color: crimson', ...styles].join(';');
 
-export const logError = (namespace, message) => {
+export const logError = (namespace, message, ...data: unknown[]) => {
   if (process.env.NODE_ENV !== 'production') {
+    console.error(
+      `%c[design-system/${namespace}]  `,
+      errorStyles,
+      message,
+      ...data,
+    );
     throw new Error(`[design-system/${namespace}] ${message}`);
   } else {
-    // eslint-disable-next-line no-console
-    console.error(`%c[design-system/${namespace}]  `, errorStyles, message);
+    console.error(
+      `%c[design-system/${namespace}]  `,
+      errorStyles,
+      message,
+      ...data,
+    );
   }
 };
-// eslint-disable-next-line import/prefer-default-export
 export const useLogger = (namespace: string) => {
   const { debugMode } = useContext(DSContext);
 
   return {
-    log: (message: string) => {
+    log: (message: string, ...data: unknown[]) => {
       if (!debugMode) {
         return;
       }
-      // eslint-disable-next-line no-console
-      console.log(`%c[design-system/${namespace}]  `, logStyles, message);
+      console.log(
+        `%c[design-system/${namespace}]  `,
+        logStyles,
+        message,
+        ...data,
+      );
     },
-    warn: (message: string) => {
+    warn: (message: string, ...data: unknown[]) => {
       if (process.env.NODE_ENV === 'production') {
         return;
       }
-      // eslint-disable-next-line no-console
-      console.warn(`%c[design-system/${namespace}]  `, warnStyles, message);
+      console.warn(
+        `%c[design-system/${namespace}]  `,
+        warnStyles,
+        message,
+        ...data,
+      );
     },
-    error: (message: string) => {
-      logError(namespace, message);
+    error: (message: string, ...data: unknown[]) => {
+      logError(namespace, message, ...data);
     },
   };
 };
