@@ -100,10 +100,12 @@ const variants = {
   [TextVariants.inherit]: inheritVariant,
 };
 
-const Text = styled.span.attrs((props) => ({
-  ...props,
-  className: cls(CLX_TYPOGRAPHY, props?.className),
-}))<TextProps>`
+const Text = styled.span.attrs<{ variant: keyof typeof TextVariants }>(
+  (props) => ({
+    ...props,
+    className: cls(CLX_TYPOGRAPHY, props?.className),
+  }),
+)<TextProps>`
   font-family: inherit;
   font-weight: ${({ isBold, theme }) =>
     isBold ? getFontWeight('bold', { theme }) : 'inherit'};

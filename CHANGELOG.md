@@ -1,3 +1,17 @@
+# [1.11.0](https://github.com/securityscorecard/design-system/compare/v1.10.0...v1.11.0) (2023-11-02)
+
+
+### Bug Fixes
+
+* adjust helpers typing ([2719c6b](https://github.com/securityscorecard/design-system/commit/2719c6bb7e031a08c467c017a827ae426f79c198))
+* improve typing ([bde3160](https://github.com/securityscorecard/design-system/commit/bde3160dbbaa7575832bb209be572f35119d22fd))
+* **Toast:** adjust border color ([75957b9](https://github.com/securityscorecard/design-system/commit/75957b974d7d867881e48a3af94c2a69815ceb3e))
+
+
+### Features
+
+* **Button:** add ghost variant ([5327137](https://github.com/securityscorecard/design-system/commit/53271372d3dba324859b779ead27462b4a1a8c3d))
+
 # [1.10.0](https://github.com/securityscorecard/design-system/compare/v1.9.2...v1.10.0) (2023-10-18)
 
 

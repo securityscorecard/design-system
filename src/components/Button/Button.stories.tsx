@@ -199,6 +199,67 @@ export const TextButtons: Story = () => (
   </Stack>
 );
 
+export const GhostButtons: Story = () => (
+  <Stack gap={SpaceSizes.lg}>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="primary" variant="ghost">
+        Button
+      </Button>
+      <Button className="hover" color="primary" variant="ghost">
+        Hovered Button
+      </Button>
+      <Button className="active" color="primary" variant="ghost">
+        Active Button
+      </Button>
+      <Button color="primary" variant="ghost" isDisabled>
+        Disabled Button
+      </Button>
+    </Inline>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="secondary" variant="ghost">
+        Button
+      </Button>
+      <Button className="hover" color="secondary" variant="ghost">
+        Hovered Button
+      </Button>
+      <Button className="active" color="secondary" variant="ghost">
+        Active Button
+      </Button>
+      <Button color="secondary" variant="ghost" isDisabled>
+        Disabled Button
+      </Button>
+    </Inline>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="success" variant="ghost">
+        Button
+      </Button>
+      <Button className="hover" color="success" variant="ghost">
+        Hovered Button
+      </Button>
+      <Button className="active" color="success" variant="ghost">
+        Active Button
+      </Button>
+      <Button color="success" variant="ghost" isDisabled>
+        Disabled Button
+      </Button>
+    </Inline>
+    <Inline gap={SpaceSizes.md}>
+      <Button color="danger" variant="ghost">
+        Button
+      </Button>
+      <Button className="hover" color="danger" variant="ghost">
+        Hovered Button
+      </Button>
+      <Button className="active" color="danger" variant="ghost">
+        Active Button
+      </Button>
+      <Button color="danger" variant="ghost" isDisabled>
+        Disabled Button
+      </Button>
+    </Inline>
+  </Stack>
+);
+
 export const LoadingButtons: Story = () => (
   <Inline gap={SpaceSizes.md}>
     <Button color="primary" variant="solid" isLoading>
