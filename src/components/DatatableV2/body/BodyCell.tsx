@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import clx from 'classnames';
 
 import { getCommonCellStyles } from '../columns.utils';
+import { useHasHozintalScroll } from '../hooks/useHasHozintalScroll';
 import Skeleton from './Skeleton';
 
 const BodyCell = <D,>({
@@ -19,6 +20,8 @@ const BodyCell = <D,>({
   const { isLoading } = table.getState();
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
+  const hasHorizontalScroll = useHasHozintalScroll(table);
+
   useEffect(() => {
     if (!isLoading || skeletonWidth !== 100) return;
     const size = column.getSize();
@@ -37,6 +40,7 @@ const BodyCell = <D,>({
       style={getCommonCellStyles({
         table,
         column,
+        hasHorizontalScroll,
       })}
     >
       {isLoading ? (

@@ -15,6 +15,7 @@ import { Icon } from '../Icon';
 import { generateControl } from '../../utils/tests/storybook';
 import { SpaceSizes } from '../../index';
 import { getSpace } from '../../utils';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'components/Drawer',
@@ -60,11 +61,12 @@ function Content() {
       <H2>This is a placeholder</H2>
       <Paragraph style={{ marginBottom: 0 }}>
         You can replace this with a local component. You can also just override
-        the text, but keep in mind that you might lose content that way in case
-        we happend to change the underlying component. Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        the text, but <Tooltip popup="I'm tooltip">keep in mind</Tooltip> that
+        you might lose content that way in case we happend to change the
+        underlying component. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat.
       </Paragraph>
     </Stack>
   );

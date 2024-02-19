@@ -14,7 +14,13 @@ import type {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
+import type {
+  Dispatch,
+  MutableRefObject,
+  ReactElement,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 import type { Types as SSCIconTypes, SSCIcons } from '../Icon';
 
 export type DatatableColumnDef<D, V = unknown> = Omit<
@@ -74,7 +80,7 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
         header: DatatableHeader<D>;
         table: DatatableInstance<D>;
       }) => ReactElement)
-    | ReactNode;
+    | ReactElement;
   /**
    * Provide custom implementation for showing column value.
    */
@@ -243,9 +249,12 @@ export interface DatatableInstance<D>
   getCenterLeafColumns: () => DatatableColumn<D>[];
   getLeftLeafColumns: () => DatatableColumn<D>[];
   getRightLeafColumns: () => DatatableColumn<D>[];
-  getState: () => DatatableState;
+  getState: () => DatatableState & { width: number };
   options: ParsedDatatableOptions<D>;
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
+  refs: {
+    tableRef: MutableRefObject<HTMLTableElement>;
+  };
 }
 
 export interface DatatableOptions<D>

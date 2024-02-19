@@ -6,9 +6,13 @@ import { pipe, prop } from 'ramda';
 import { isFalsy } from 'ramda-adjunct';
 
 import { Padbox } from '../layout';
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { getColor, getDepth, getRadii, pxToRem } from '../../utils';
+import { useFloatingContext } from '../../contexts/FloatingContext';
 
-const Content = styled(RadixTooltip.Content)<{ $width: TooltipProps['width'] }>`
+const Content = styled(RadixTooltip.Content)<{
+  $width: TooltipProps['width'];
+  $isInFloatingElement: boolean;
+}>`
   border-radius: ${getRadii('default')};
   color: ${getColor('neutral.900')};
   background-color: ${getColor('neutral.0')};
@@ -18,7 +22,8 @@ const Content = styled(RadixTooltip.Content)<{ $width: TooltipProps['width'] }>`
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   width: ${pipe(prop('$width'), pxToRem)};
-  z-index: 1;
+  z-index: ${({ $isInFloatingElement, theme }) =>
+    $isInFloatingElement ? getDepth('modal', { theme }) + 1 : 1};
 
   &[data-state='delayed-open'][data-side='top'] {
     animation-name: slide-down-and-fade;
@@ -103,7 +108,7 @@ const Tooltip = ({
     : placement.endsWith('-end')
     ? 'end'
     : 'center';
-
+  const isInFloatingElement = useFloatingContext() ?? false;
   // eslint-disable-next-line react/jsx-no-useless-fragment
   if (isFalsy(popup)) return <>{children}</>;
 
@@ -114,6 +119,7 @@ const Tooltip = ({
       </RadixTooltip.Trigger>
       <RadixTooltip.Portal>
         <Content
+          $isInFloatingElement={isInFloatingElement}
           $width={width}
           align={align}
           alignOffset={12}

@@ -1,3 +1,16 @@
+# [1.18.0](https://github.com/securityscorecard/design-system/compare/v1.17.0...v1.18.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* **Tooltip:** set correct z-index in floating elements ([ef3ec00](https://github.com/securityscorecard/design-system/commit/ef3ec008c38b6130263a3b48610b913798fb4453))
+
+
+### Features
+
+* **DatatableV2:** hide shadow on pinned columns ([f13e7a6](https://github.com/securityscorecard/design-system/commit/f13e7a6603d16d225457098689c2f95e7c9cb045))
+* **DatatableV2:** show scrollbar when needed ([14127d6](https://github.com/securityscorecard/design-system/commit/14127d60643c37c31c00421c509c74a82d5a6bad))
+
 # [1.17.0](https://github.com/securityscorecard/design-system/compare/v1.16.1...v1.17.0) (2023-12-13)
 
 

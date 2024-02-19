@@ -121,27 +121,27 @@ export const getFormStyle: HelperFn<keyof Forms> = curry(
     path(['forms', property], theme),
 );
 
-// getDepth :: Element -> Props -> string
+// getDepth :: Element -> Props -> number
 // Element - any key of 'depth' (src/theme/depths.ts)
 // Props - styled-components props object
-export const getDepth: HelperFn<keyof Depths> = curry(
-  (element: keyof Depths, { theme }: ThemeType): string =>
+export const getDepth: HelperFn<keyof Depths, number> = curry(
+  (element: keyof Depths, { theme }: ThemeType): number =>
     path(['depths', element], theme),
 );
 
-// getSpace:: Size -> Props -> string
+// getSpace:: Size -> Props -> number
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
-export const getSpace: HelperFn<SpaceSize> = curry(
-  (size: SpaceSize, { theme }: ThemeType): string =>
+export const getSpace: HelperFn<SpaceSize, number> = curry(
+  (size: SpaceSize, { theme }: ThemeType): number =>
     pipe(path(['space', size]), pxToRem)(theme),
 );
 
-// getNegativeSpace:: Size -> Props -> string
+// getNegativeSpace:: Size -> Props -> number
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
-export const getNegativeSpace: HelperFn<SpaceSize> = curry(
-  (size: SpaceSize, { theme }: ThemeType): string =>
+export const getNegativeSpace: HelperFn<SpaceSize, number> = curry(
+  (size: SpaceSize, { theme }: ThemeType): number =>
     pipe(path(['space', size]), negate, pxToRem)(theme),
 );
 
