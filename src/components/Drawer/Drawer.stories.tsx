@@ -205,7 +205,6 @@ export const WithSemanticModal: Story = () => {
   return (
     <Drawer
       footer={<Footer />}
-      size="sm"
       title="With semantic modal"
       onClose={action('close-modal')}
     >

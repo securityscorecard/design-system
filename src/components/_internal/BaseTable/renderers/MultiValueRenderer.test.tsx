@@ -1,25 +1,17 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { identity, join, pipe, slice } from 'ramda';
+import { identity } from 'ramda';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import MultiValueRenderer from './MultiValueRenderer';
 import { abbreviateNumber } from '../../../../utils';
-import { defaultDSContext } from '../../../../theme/DSProvider/DSProvider';
 
 const values = ['a', 'b', 'c', 'd', 'e'];
 const numberOfVisibleItems = 2;
 const rowData = { col: 'val' };
 
 describe('Datatable/MultiValueRenderer', () => {
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
   it('should open tooltip with rest of values when hover on rest values pill', async () => {
     const restValuesCount = values.length - numberOfVisibleItems;
-    const restValuesText = pipe(
-      slice(numberOfVisibleItems, values.length),
-      join(''),
-    )(values);
     renderWithProviders(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
@@ -28,14 +20,15 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    fireEvent.pointerEnter(screen.getByText(`+ ${restValuesCount}`));
+    fireEvent.pointerMove(screen.getByText(`+ ${restValuesCount}`));
 
     /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
-      expect(
-        document.getElementById(defaultDSContext.portalsContainerId),
-      ).toHaveTextContent(restValuesText);
+      expect(screen.getAllByText('c')[0]).toBeInTheDocument();
     });
+
+    expect(screen.getAllByText('d')[0]).toBeInTheDocument();
+    expect(screen.getAllByText('e')[0]).toBeInTheDocument();
     /* eslint-enable testing-library/no-node-access */
   });
   it('should open tooltip when hover on value pill', async () => {
@@ -52,9 +45,7 @@ describe('Datatable/MultiValueRenderer', () => {
 
     /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
-      expect(
-        document.getElementById(defaultDSContext.portalsContainerId),
-      ).toHaveTextContent(values[0]);
+      expect(screen.getByText(values[0])).toBeInTheDocument();
     });
     /* eslint-enable testing-library/no-node-access */
   });
@@ -155,11 +146,9 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(
       document.getElementsByClassName('ds-table-cell-multivalue')[0],
     ).toHaveTextContent('1K2K+ 1');
-    fireEvent.pointerEnter(screen.getByText('+ 1'));
+    fireEvent.pointerMove(screen.getByText('+ 1'));
     await waitFor(() => {
-      expect(
-        document.getElementById(defaultDSContext.portalsContainerId),
-      ).toHaveTextContent('3K');
+      expect(screen.getByTestId('ssc-tooltip')).toBeInTheDocument();
     });
     /* eslint-enable testing-library/no-node-access */
   });

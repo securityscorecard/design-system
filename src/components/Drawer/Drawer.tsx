@@ -9,19 +9,25 @@ import cls from 'classnames';
 import { DrawerSizes } from './Drawer.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
-import { Inline, Padbox } from '../layout';
-import { H4 } from '../typographyLegacy';
+import { Inline, Padbox, Surface } from '../layout';
 import { Overlay } from '../_internal/BaseOverlay';
-import { getColor, getDepth, pxToRem } from '../../utils';
+import {
+  getColor,
+  getDepth,
+  getFontWeight,
+  getSpace,
+  pxToRem,
+} from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
 import { DSContext } from '../../theme/DSProvider/DSProvider';
 import { CloseButton } from '../CloseButton';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { Text } from '../typographyLegacy';
 
 const widthVariants = {
-  [DrawerSizes.sm]: 360,
   [DrawerSizes.md]: 480,
   [DrawerSizes.lg]: 720,
   [DrawerSizes.xl]: 960,
@@ -39,25 +45,35 @@ const DrawerWrapper = styled.div`
 `;
 
 const Header = styled(Padbox)`
-  border-bottom: 1px solid ${getColor('neutral.500')};
+  border-bottom: 1px solid ${getColor('neutral.400')};
 `;
 
-const BaseDrawer = styled.div<{ $maxWidth: number }>`
+const SurfaceContainer = styled.div<{ $maxWidth: number }>`
+  height: calc(100% - ${getSpace('lgPlus')});
+  max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
+  margin: ${getSpace('mdPlus')};
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
+const BaseDrawer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
-  max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
-  background-color: ${getColor('neutral.0')};
-  box-shadow: -4px 0 16px rgb(0 0 0 / 10%);
 `;
 
 const TitleWrapper = styled(Padbox)`
   overflow: hidden;
 `;
 
-const Title = styled(H4)`
+/* stylelint-disable */
+const Title = styled(Text).attrs({
+  as: 'p',
+  size: 'lg',
+})`
   margin: 0;
+  font-weight: ${getFontWeight('bold')};
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -68,8 +84,9 @@ const Content = styled(Padbox)`
   flex-grow: 2;
 `;
 
-const Footer = styled(Padbox)`
-  border-top: 1px solid ${getColor('neutral.500')};
+const Footer = styled.div`
+  border-top: 1px solid ${getColor('neutral.400')};
+  padding: ${getSpace('md')} ${getSpace('mdPlus')};
 `;
 
 const Adornment = styled(Padbox)`
@@ -86,42 +103,46 @@ const DrawerBox = forwardRef<HTMLDivElement, DrawerProps>(
     const hasAdornment = isNotUndefined(adornment);
 
     return (
-      <BaseDrawer
-        ref={ref}
-        $maxWidth={widthVariants[size]}
-        aria-labelledby="ds-drawer-title"
-        className={cls(CLX_COMPONENT, className)}
-        role="dialog"
-        {...props}
-      >
-        <Header>
-          <Inline stretch={StretchEnum.start}>
-            <Padbox paddingSize={SpaceSizes.lg} paddingType="squish">
-              <Inline align="center" gap={SpaceSizes.md}>
-                {hasAdornment && <Adornment>{adornment}</Adornment>}
-                <TitleWrapper>
-                  <Title id="ds-drawer-title">{title}</Title>
-                </TitleWrapper>
-              </Inline>
-            </Padbox>
-            <CloseButton
-              marginCompensation={SpaceSizes.none}
-              onClose={onClose}
-            />
-          </Inline>
-        </Header>
-        <Content
-          paddingSize={SpaceSizes.lg}
-          paddingType={hasFooter ? 'squish' : 'square'}
+      <SurfaceContainer $maxWidth={widthVariants[size]} role="dialog">
+        <Surface
+          background="white"
+          elevation={5}
+          radius="lg"
+          style={{ display: 'flex', width: '100%' }}
+          hasBorder
         >
-          {children}
-        </Content>
-        {hasFooter && (
-          <Footer paddingSize={SpaceSizes.lg} paddingType="squish">
-            {footer}
-          </Footer>
-        )}
-      </BaseDrawer>
+          <BaseDrawer
+            ref={ref}
+            aria-labelledby="ds-drawer-title"
+            className={cls(CLX_COMPONENT, className)}
+            {...props}
+          >
+            <Header>
+              <Padbox
+                paddingSize={SpaceSizes.mdPlus}
+                paddingType={PaddingTypes.squish}
+              >
+                <Inline align="center" stretch={StretchEnum.start}>
+                  <Inline align="center" gap={SpaceSizes.md}>
+                    {hasAdornment && <Adornment>{adornment}</Adornment>}
+                    <TitleWrapper>
+                      <Title id="ds-drawer-title">{title}</Title>
+                    </TitleWrapper>
+                  </Inline>
+                  <CloseButton
+                    marginCompensation={SpaceSizes.md}
+                    onClose={onClose}
+                  />
+                </Inline>
+              </Padbox>
+            </Header>
+            <Content paddingSize={SpaceSizes.mdPlus} paddingType="square">
+              {children}
+            </Content>
+            {hasFooter && <Footer>{footer}</Footer>}
+          </BaseDrawer>
+        </Surface>
+      </SurfaceContainer>
     );
   },
 );
