@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getFontSize } from '../../../utils';
+import { getFontSize, pxToRem } from '../../../utils';
 
 const TableRoot = styled.div`
   position: relative;
@@ -14,7 +14,6 @@ const TableRoot = styled.div`
     transform: scale(1, -1);
   }
 
-  /** LAYOUT */
   .ds-table,
   .ds-table-header,
   .ds-table-body {
@@ -28,11 +27,20 @@ const TableRoot = styled.div`
   .ds-table-body-row {
     align-items: flex-start;
     justify-content: flex-start;
+
+    &:nth-child(odd) .ds-table-cell {
+      background-color: var(--sscds-table-color-zebra);
+    }
+
+    &.is-selected .ds-table-cell {
+      background-color: var(--sscds-table-color-selection) !important;
+    }
   }
 
   .ds-table-cell {
     display: flex;
     padding: var(--sscds-table-spacing-cell);
+    background-color: var(--sscds-table-color-background);
   }
 
   /** END LAYOUT */
@@ -69,7 +77,7 @@ const TableRoot = styled.div`
       border: 0;
       display: inline-block;
       width: 0.25rem;
-      background: var(--sscds-table-color-resize);
+      background: var(--sscds-table-color-accent);
       cursor: col-resize;
       user-select: none;
       touch-action: none;
@@ -94,8 +102,7 @@ const TableRoot = styled.div`
       }
     }
 
-    /* stylelint-disable-next-line selector-class-pattern */
-    &.isSorted .ds-table-header-cell-sort-button {
+    &.is-sorted .ds-table-header-cell-sort-button {
       opacity: 1;
     }
   }

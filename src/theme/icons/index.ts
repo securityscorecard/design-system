@@ -55,3 +55,4 @@ export { columns3 } from './columns-3';
 export { backwardStep } from './backwardStep';
 export { gripLines } from './gripLines';
 export { thumbstack } from './thumbstack';
+export { anglesRight } from './anglesRight';

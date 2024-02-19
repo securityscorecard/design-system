@@ -85,7 +85,7 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getByLabelText('Toggle select all'));
+        await userEvent.click(screen.getAllByLabelText('Toggle select all')[0]);
 
         expect(
           screen.getAllByLabelText('Toggle select row')[0],
@@ -128,7 +128,7 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getByLabelText('Toggle select all'));
+        await userEvent.click(screen.getAllByLabelText('Toggle select all')[0]);
         expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
 
@@ -136,7 +136,7 @@ describe('DatatableV2/selection', () => {
           screen.getByRole('button', { name: /Go to the next page of table/i }),
         );
         expect(
-          screen.getByLabelText('Toggle select all'),
+          screen.getAllByLabelText('Toggle select all')[0],
         ).toBePartiallyChecked();
         expect(
           screen.getAllByLabelText('Toggle select row')[0],
@@ -154,14 +154,14 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getByLabelText('Toggle select all'));
+        await userEvent.click(screen.getAllByLabelText('Toggle select all')[0]);
         expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
 
         await userEvent.click(
           screen.getByRole('button', { name: /Go to the next page of table/i }),
         );
-        expect(screen.getByLabelText('Toggle select all')).toBeChecked();
+        expect(screen.getAllByLabelText('Toggle select all')[0]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
       });
     });

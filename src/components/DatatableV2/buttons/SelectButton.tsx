@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ComponentPropsWithoutRef } from 'react';
 import type { DatatableInstance, DatatableRow } from '../Datatable.types';
 
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
@@ -7,11 +7,12 @@ const SelectButton = <D,>({
   row,
   table,
   isSelectAll,
+  style,
 }: {
   row?: DatatableRow<D>;
   table: DatatableInstance<D>;
   isSelectAll?: boolean;
-}) => {
+} & ComponentPropsWithoutRef<'input'>) => {
   const {
     getState,
     options: { enableMultiRowSelection, selectAllMode },
@@ -38,6 +39,13 @@ const SelectButton = <D,>({
     },
   };
 
+  const styles = {
+    width: '1.25rem',
+    height: '1.25rem',
+    accentColor: 'var(--sscds-table-color-accent)',
+    ...style,
+  };
+
   return enableMultiRowSelection ? (
     <IndeterminateCheckbox
       className="ds-table-select-multi-button ds-table-select-button"
@@ -45,12 +53,14 @@ const SelectButton = <D,>({
         isSelectAll ? table.getIsSomeRowsSelected() && !allRowsSelected : false
       }
       {...common}
+      style={styles}
     />
   ) : (
     <input
       className="ds-table-select-single-button ds-table-select-button"
       type="radio"
       {...common}
+      style={styles}
     />
   );
 };

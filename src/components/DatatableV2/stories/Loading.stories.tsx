@@ -16,6 +16,7 @@ export const Loading: Story = Template.bind({});
 Loading.args = {
   ...Template.args,
   data: [],
+  enableRowSelection: false,
   state: {
     isLoading: true,
   },
@@ -23,31 +24,30 @@ Loading.args = {
 
 export const LoadingWithInheritedNumberOfRows: Story = Template.bind({});
 LoadingWithInheritedNumberOfRows.args = {
-  ...Template.args,
-  data: [],
+  ...Loading.args,
   initialState: { pagination: { pageSize: 5 } },
-  state: {
-    isLoading: true,
-  },
 };
 
 export const LoadingWithProgress: Story = Template.bind({});
 LoadingWithProgress.args = {
-  ...Template.args,
-  data: [],
+  ...Loading.args,
   state: {
     isLoading: true,
+    showProgress: true,
   },
 };
 
 export const LoadingWithSelection: Story = Template.bind({});
 LoadingWithSelection.args = {
-  ...Template.args,
-  data: [],
+  ...Loading.args,
   enableRowSelection: true,
-  state: {
-    isLoading: true,
-  },
+};
+
+export const LoadingWithDetailPanel: Story = Template.bind({});
+LoadingWithDetailPanel.args = {
+  ...Loading.args,
+  enableExpanding: true,
+  enableExpandAll: true,
 };
 
 export const Reloading: Story = Template.bind({});

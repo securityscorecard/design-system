@@ -20,6 +20,7 @@ export * from './FlexContainer';
 export * from './HexGrade';
 export * from './HintTooltip';
 export * from './Icon';
+export * from './Loading';
 export * from './Modal';
 export * from './Pagination';
 export * from './Pill';

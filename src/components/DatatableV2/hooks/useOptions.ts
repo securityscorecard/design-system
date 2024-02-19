@@ -14,6 +14,8 @@ export const useOptions = <D>({
   enableColumnOrdering = true,
   enableColumnPinning = true,
   enableColumnResizing = true,
+  enableExpandAll = false,
+  enableExpanding = false,
   enableHiding = true,
   enableMultiRowSelection = true,
   enableMultiSort = false,
@@ -68,6 +70,8 @@ export const useOptions = <D>({
     enableColumnOrdering,
     enableColumnPinning,
     enableColumnResizing,
+    enableExpandAll,
+    enableExpanding,
     enableHiding,
     enableMultiRowSelection,
     enableMultiSort,
@@ -85,5 +89,6 @@ export const useOptions = <D>({
     selectAllMode,
     ...restDatatableOptions,
     columnResizeMode: 'onChange',
+    paginateExpandedRows: false,
   };
 };

@@ -11,7 +11,7 @@ export interface TooltipProps {
   popup?: ReactNode;
   className?: string;
   placement?: Placements;
-  width?: number;
+  width?: 'auto' | number;
   defaultIsPopupDisplayed?: boolean;
   children: ReactNode;
 }

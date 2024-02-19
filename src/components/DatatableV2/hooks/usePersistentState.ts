@@ -34,17 +34,21 @@ export const usePersistentState = <D>(
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
     left: Array.from(
       new Set([
+        ...(props?.enableExpanding ?? false ? [displayColumnIds.expand] : []),
         ...(props?.enableRowSelection ?? true ? [displayColumnIds.select] : []),
         ...(state?.columnPinning?.left ??
           initialState?.columnPinning?.left ??
           []),
       ]),
     ),
-    right: [
-      ...(state?.columnPinning?.right ??
-        initialState?.columnPinning?.right ??
-        []),
-    ],
+    right: Array.from(
+      new Set([
+        ...(props?.enableRowActions ?? true ? [displayColumnIds.actions] : []),
+        ...(state?.columnPinning?.right ??
+          initialState?.columnPinning?.right ??
+          []),
+      ]),
+    ),
   });
   const [columnSizing, setColumnSizing] = useState(
     state?.columnSizing ?? initialState?.columnSizing ?? {},

@@ -15,6 +15,7 @@ import type {
   TableState,
 } from '@tanstack/react-table';
 import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
+import type { Types as SSCIconTypes, SSCIcons } from '../Icon';
 
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
@@ -102,6 +103,18 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
    * Enables/disables ordering for given column.
    */
   enableOrdering?: boolean;
+  /**
+   * You can provide your own implementation of the column header tooltip. This property accepts
+   * React component with properties:
+   *  - `column` - current column object
+   *  - `header` - current header object
+   *  - `table` - current instance of the table
+   */
+  renderHeaderTooltip?: (props: {
+    column: DatatableColumn<D, V>;
+    header: DatatableHeader<D>;
+    table: DatatableInstance<D>;
+  }) => ReactNode;
 };
 
 export type DatatableDefinedColumnDef<D, V = unknown> = DatatableColumnDef<
@@ -160,6 +173,24 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
   headers: DatatableHeader<D>[];
 };
 
+export type DatatableRowAction<D> = null | {
+  label: string;
+  /* eslint-disable @typescript-eslint/ban-types */
+  iconName: SSCIcons | (string & {});
+  iconType?: SSCIconTypes | (string & {});
+  /* eslint-enable @typescript-eslint/ban-types */
+  onClick(props: {
+    row: DatatableRow<D>;
+    table: DatatableInstance<D>;
+  }): (event: Event) => void;
+  isDisabled?:
+    | boolean
+    | ((props: {
+        row: DatatableRow<D>;
+        table: DatatableInstance<D>;
+      }) => boolean);
+};
+
 interface CustomState {
   showColumnSettings: boolean;
   isLoading: boolean;
@@ -177,13 +208,17 @@ export interface ParsedDatatableOptions<D>
   };
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
   enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
+  enableExpandAll?: DatatableOptions<D>['enableExpandAll'];
   enablePagination?: DatatableOptions<D>['enablePagination'];
+  enableRowActions?: DatatableOptions<D>['enableRowActions'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
+  renderDetailPanel?: DatatableOptions<D>['renderDetailPanel'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
+  rowActions?: DatatableOptions<D>['rowActions'];
   rowCount?: DatatableOptions<D>['rowCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
   selectAllMode?: DatatableOptions<D>['selectAllMode'];
@@ -217,12 +252,10 @@ export interface DatatableOptions<D>
   extends Omit<
     Partial<TableOptions<D>>,
     | 'aggregationFns'
-    | 'autoResetExpanded'
     | 'columnResizeMode'
     | 'columns'
     | 'data'
     | 'enableColumnFilters'
-    | 'enableExpanding'
     | 'enableFilters'
     | 'enableGlobalFilter'
     | 'enableGrouping'
@@ -256,9 +289,7 @@ export interface DatatableOptions<D>
     | 'onGroupingChange'
     | 'onRowPinningChange'
     | 'state'
-    | 'manualExpanding'
     | 'mergeOptions'
-    | 'onExpandedChange'
     | 'paginateExpandedRows'
     | 'sortingFns'
   > {
@@ -301,6 +332,10 @@ export interface DatatableOptions<D>
    */
   enableColumnResizing?: boolean;
   /**
+   * Enables/disables button in the table header that expands all detail panels at once.
+   */
+  enableExpandAll?: boolean;
+  /**
    * Enables/disables column hiding for the table. Controlled in the column actions menu or table
    * column settings panel accessible through the column actions menu.
    *
@@ -332,6 +367,12 @@ export interface DatatableOptions<D>
    * @default true
    */
   enablePersistentState?: boolean;
+  /**
+   * Enables/disables row actions column for the table.
+   *
+   * @default false
+   */
+  enableRowActions?: boolean;
   /**
    * Enables/disables row selection for the table.
    *
@@ -377,6 +418,16 @@ export interface DatatableOptions<D>
    */
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
   /**
+   * Provide your own implementation of row details panel. This property accepts React component\
+   * with properties:
+   *  - `row`: current row, row data are accessible through `row.original`
+   *  - `table` - current instance of the table
+   */
+  renderDetailPanel?: (props: {
+    row: DatatableRow<D>;
+    table: DatatableInstance<D>;
+  }) => ReactNode;
+  /**
    * You can provide your own implementation of the state when there are no data in the table. This
    * property accepts React component with one property `table` which holds current instance of the
    * table.
@@ -394,6 +445,12 @@ export interface DatatableOptions<D>
     totalRowCount: number;
     table: DatatableInstance<D>;
   }) => ReactNode;
+  /**
+   * List of actions available on the row data. Actions will be rendered as last column of the table.
+   * If only one action is provided it will be rendered directly in the column. If multiple actions
+   * are provided actions will be rendered in dropdown menu.
+   */
+  rowActions?: DatatableRowAction<D>[];
   /**
    * Expected number of rows in the dataset which is used for displaying pagination correctly when
    * pagination is not managed internally. This property is REQUIRED for the manual (managed,

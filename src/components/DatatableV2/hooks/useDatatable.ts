@@ -7,6 +7,7 @@ import type {
 
 import {
   getCoreRowModel,
+  getExpandedRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -52,11 +53,17 @@ export const useDatatable = <D>(
     initState.columnPinning = {
       left: Array.from(
         new Set([
+          ...(tableOptions.enableExpanding ? [displayColumnIds.expand] : []),
           ...(tableOptions.enableRowSelection ? [displayColumnIds.select] : []),
           ...(initState.columnPinning?.left ?? []),
         ]),
       ),
-      right: [...(initState.columnPinning?.right ?? [])],
+      right: Array.from(
+        new Set([
+          ...(tableOptions.enableRowActions ? [displayColumnIds.actions] : []),
+          ...(initState.columnPinning?.right ?? []),
+        ]),
+      ),
     };
     initState.pagination = {
       pageIndex: initState?.pagination?.pageIndex ?? 0,
@@ -106,13 +113,6 @@ export const useDatatable = <D>(
   );
 
   const table = useReactTable({
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: tableOptions.enablePagination
-      ? getPaginationRowModel()
-      : undefined,
-    getSortedRowModel: tableOptions.enableSorting
-      ? getSortedRowModel()
-      : undefined,
     ...tableOptions,
     // I know what I'm doing here
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -125,6 +125,16 @@ export const useDatatable = <D>(
       columnSizing,
       ...tableOptions.state,
     },
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: tableOptions.enablePagination
+      ? getPaginationRowModel()
+      : undefined,
+    getSortedRowModel: tableOptions.enableSorting
+      ? getSortedRowModel()
+      : undefined,
+    getExpandedRowModel: tableOptions.enableExpanding
+      ? getExpandedRowModel()
+      : undefined,
   }) as unknown as DatatableInstance<D>;
 
   table.setShowColumnSettings =

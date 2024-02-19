@@ -6,10 +6,10 @@ import { pipe, prop } from 'ramda';
 import { isFalsy } from 'ramda-adjunct';
 
 import { Padbox } from '../layout';
-import { getColor, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 
-const Content = styled(RadixTooltip.Content)<{ $width: number }>`
-  border-radius: 4px;
+const Content = styled(RadixTooltip.Content)<{ $width: TooltipProps['width'] }>`
+  border-radius: ${getRadii('default')};
   color: ${getColor('neutral.900')};
   background-color: ${getColor('neutral.0')};
   box-shadow: 0 0 8px rgb(0 0 0 / 25%);
@@ -18,6 +18,7 @@ const Content = styled(RadixTooltip.Content)<{ $width: number }>`
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   width: ${pipe(prop('$width'), pxToRem)};
+  z-index: 1;
 
   &[data-state='delayed-open'][data-side='top'] {
     animation-name: slide-down-and-fade;
@@ -107,34 +108,26 @@ const Tooltip = ({
   if (isFalsy(popup)) return <>{children}</>;
 
   return (
-    <RadixTooltip.Provider>
-      <RadixTooltip.Root
-        defaultOpen={defaultIsPopupDisplayed}
-        delayDuration={0}
-      >
-        <RadixTooltip.Trigger asChild>
-          <span {...props}>{children}</span>
-        </RadixTooltip.Trigger>
-        <RadixTooltip.Portal>
-          <Content
-            $width={width}
-            align={align}
-            alignOffset={12}
-            arrowPadding={4}
-            data-testid="ssc-tooltip"
-            side={side as 'bottom' | 'top' | 'left' | 'right'}
-            sideOffset={2}
-          >
-            <Padbox paddingSize="md">{popup}</Padbox>
-            <RadixTooltip.Arrow
-              className="tooltip-arrow"
-              height={6}
-              width={12}
-            />
-          </Content>
-        </RadixTooltip.Portal>
-      </RadixTooltip.Root>
-    </RadixTooltip.Provider>
+    <RadixTooltip.Root defaultOpen={defaultIsPopupDisplayed} delayDuration={0}>
+      <RadixTooltip.Trigger asChild>
+        <span {...props}>{children}</span>
+      </RadixTooltip.Trigger>
+      <RadixTooltip.Portal>
+        <Content
+          $width={width}
+          align={align}
+          alignOffset={12}
+          arrowPadding={4}
+          className="ssc-ui-styled"
+          data-testid="ssc-tooltip"
+          side={side as 'bottom' | 'top' | 'left' | 'right'}
+          sideOffset={2}
+        >
+          <Padbox paddingSize="md">{popup}</Padbox>
+          <RadixTooltip.Arrow className="tooltip-arrow" height={6} width={12} />
+        </Content>
+      </RadixTooltip.Portal>
+    </RadixTooltip.Root>
   );
 };
 

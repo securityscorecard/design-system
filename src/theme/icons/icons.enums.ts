@@ -51,6 +51,7 @@ export const SSCIconNames = {
   backwardStep: 'backward-step',
   gripLines: 'grip-lines',
   thumbstack: 'thumbstack',
+  anglesRight: 'angles-right',
 } as const;
 
 export const IconTypes = {

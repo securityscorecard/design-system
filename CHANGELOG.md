@@ -1,3 +1,21 @@
+# [1.17.0](https://github.com/securityscorecard/design-system/compare/v1.16.1...v1.17.0) (2023-12-13)
+
+
+### Features
+
+* **DatatableV2:** implement detail panel ([b1c9e63](https://github.com/securityscorecard/design-system/commit/b1c9e63a77c5e275c0fa31aee02f31de2ecc5ce1))
+* **DatatableV2:** implement header tooltip ([e57081e](https://github.com/securityscorecard/design-system/commit/e57081e014aa12c8bd2df77e7750e118f983971e))
+* **DatatableV2:** implement row actions ([5af556f](https://github.com/securityscorecard/design-system/commit/5af556fbe196569f6af95d9d66c654da41228102))
+* **DatatableV2:** style selection toolbar ([5644e5b](https://github.com/securityscorecard/design-system/commit/5644e5b3ca40f8303fbabcf407b48e560f08d6bc))
+* **Loading:** add Loading component ([7c0a93e](https://github.com/securityscorecard/design-system/commit/7c0a93ec13235f9c17a07a22307f441e4ef4c1af))
+
+## [1.16.1](https://github.com/securityscorecard/design-system/compare/v1.16.0...v1.16.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* **Tooltip:** add css namespace to tooltip content ([9a97a55](https://github.com/securityscorecard/design-system/commit/9a97a558e364b21562e3a76a63a9ac5c70308e1f))
+
 # [1.16.0](https://github.com/securityscorecard/design-system/compare/v1.15.1...v1.16.0) (2023-12-06)
 
 
