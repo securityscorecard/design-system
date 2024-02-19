@@ -168,6 +168,7 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
       onInputChange = noop,
       onPaste = noop,
       placeholder,
+      valuesDelimiter = ';',
       pattern,
       id,
       inputId,
@@ -194,11 +195,11 @@ const MultiValueInput = forwardRef<HTMLDivElement, MultiValueInputProps>(
         return;
       }
 
-      const containsMultipleValues = includes(';', newValue);
+      const containsMultipleValues = includes(valuesDelimiter, newValue);
 
       if (containsMultipleValues) {
         const parsedValues = pipe(
-          split(';'),
+          split(valuesDelimiter),
           map(trim),
           filter(isNonEmptyString),
         )(newValue);

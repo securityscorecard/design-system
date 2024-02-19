@@ -25,7 +25,7 @@ const size: Size = {
   h5: pxToRem(BASE_FONT_SIZE * 1.125), // 18px
   lg: pxToRem(BASE_FONT_SIZE), // 16px
   md: pxToRem(BASE_FONT_SIZE * 0.875), // 14px
-  sm: pxToRem(BASE_FONT_SIZE * 0.75), // 12px, TO BE DEPRECATED
+  sm: pxToRem(BASE_FONT_SIZE * 0.75), // 12px
 };
 
 const weight: Weight = {

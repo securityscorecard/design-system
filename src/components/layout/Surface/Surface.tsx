@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ComponentPropsWithoutRef, ReactNode } from 'react';
 import type { Radii } from '../../../utils';
 
 import { forwardRef } from 'react';
@@ -10,7 +10,7 @@ const SurfaceBackgrounds = ['white', 'dynamic', 'transparent'] as const;
 const SurfaceRadii = ['none', 'sm', 'md', 'lg'] as const;
 const SurfaceMode = ['light', 'dark'] as const;
 
-interface SurfaceProps {
+interface SurfaceProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
   background?: (typeof SurfaceBackgrounds)[number];
   radius?: (typeof SurfaceRadii)[number];
@@ -67,6 +67,7 @@ const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
       hasBorder = false,
       mode = 'light',
       children,
+      style,
       ...rest
     },
     ref,
@@ -80,6 +81,7 @@ const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
       '--sscds-borderWidth': hasBorder ? '1px' : '0',
       '--sscds-borderColor':
         mode === 'light' ? 'rgba(0 0 0/15%)' : 'rgba(255 255 255/15%)',
+      ...style,
     };
 
     return (

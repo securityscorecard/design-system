@@ -1,3 +1,16 @@
+# [1.14.0](https://github.com/securityscorecard/design-system/compare/v1.13.0...v1.14.0) (2023-11-22)
+
+
+### Bug Fixes
+
+* **Surface:** merge style prop instead of overwrite ([801322e](https://github.com/securityscorecard/design-system/commit/801322e27b392d273e6df931f2d81d42050bc923))
+
+
+### Features
+
+* **Banner:** add corner rounding ([48b462b](https://github.com/securityscorecard/design-system/commit/48b462beaf1e8f805dfc0a0821523431571f0a11))
+* **MultiValueInput:** add value delimiter prop ([987b958](https://github.com/securityscorecard/design-system/commit/987b958d3ad698e6af55dc65936027ff39c8244b))
+
 # [1.13.0](https://github.com/securityscorecard/design-system/compare/v1.12.0...v1.13.0) (2023-11-22)
 
 
