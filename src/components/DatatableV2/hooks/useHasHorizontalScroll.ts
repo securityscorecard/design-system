@@ -1,6 +1,6 @@
 import type { DatatableInstance } from '../Datatable.types';
 
-export const useHasHozintalScroll = <D>(table: DatatableInstance<D>) => {
+export const useHasHorizontalScroll = <D>(table: DatatableInstance<D>) => {
   const { getState, getVisibleFlatColumns } = table;
   const { width } = getState();
 

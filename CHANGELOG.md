@@ -1,3 +1,11 @@
+# [1.19.0](https://github.com/securityscorecard/design-system/compare/v1.18.0...v1.19.0) (2024-01-10)
+
+
+### Features
+
+* **ScrollView:** add new component ([e5cdd1b](https://github.com/securityscorecard/design-system/commit/e5cdd1b0a75990c580ac7ecefef8bae89651ae18))
+* **Snippet:** add component ([ea22329](https://github.com/securityscorecard/design-system/commit/ea2232961abd59591153a0fa0749bedbd67f79f1))
+
 # [1.18.0](https://github.com/securityscorecard/design-system/compare/v1.17.0...v1.18.0) (2023-12-19)
 
 

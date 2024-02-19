@@ -6749,6 +6749,7 @@ __metadata:
     classnames: ^2.3.1
     csstype: ^3.0.11
     dayjs: ^1.11.0
+    dedent: ^1.5.1
     eslint: ^8.11.0
     eslint-config-airbnb: ^19.0.4
     eslint-config-prettier: ^8.8.0
@@ -11773,6 +11774,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dedent@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "dedent@npm:1.5.1"
+  peerDependencies:
+    babel-plugin-macros: ^3.1.0
+  peerDependenciesMeta:
+    babel-plugin-macros:
+      optional: true
+  checksum: c3c300a14edf1bdf5a873f9e4b22e839d62490bc5c8d6169c1f15858a1a76733d06a9a56930e963d677a2ceeca4b6b0894cc5ea2f501aa382ca5b92af3413c2a
+  languageName: node
+  linkType: hard
+
 "deep-extend@npm:^0.6.0":
   version: 0.6.0
   resolution: "deep-extend@npm:0.6.0"
@@ -13731,12 +13744,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.14.7":
-  version: 1.15.1
-  resolution: "follow-redirects@npm:1.15.1"
+  version: 1.15.4
+  resolution: "follow-redirects@npm:1.15.4"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 6aa4e3e3cdfa3b9314801a1cd192ba756a53479d9d8cca65bf4db3a3e8834e62139245cd2f9566147c8dfe2efff1700d3e6aefd103de4004a7b99985e71dd533
+  checksum: e178d1deff8b23d5d24ec3f7a94cde6e47d74d0dc649c35fc9857041267c12ec5d44650a0c5597ef83056ada9ea6ca0c30e7c4f97dbf07d035086be9e6a5b7b6
   languageName: node
   linkType: hard
 

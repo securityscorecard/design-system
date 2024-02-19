@@ -56,3 +56,4 @@ export { backwardStep } from './backwardStep';
 export { gripLines } from './gripLines';
 export { thumbstack } from './thumbstack';
 export { anglesRight } from './anglesRight';
+export { copy } from './copy';
