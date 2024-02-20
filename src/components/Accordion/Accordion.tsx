@@ -21,7 +21,6 @@ export const { useContext: useAccordionContext, Provider } = createCtx<{
 );
 
 const AccordionRoot = styled(RadixAccordion.Root)<StyledAccordionVariantProp>`
-  background-color: ${({ theme }) => theme.colors.neutral['0']};
   ${({ $variant }) =>
     $variant === AccordionVariants.regular &&
     css`

@@ -9,6 +9,7 @@ import { useAccordionContext } from './Accordion';
 import { Icon } from '../Icon';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { AccordionVariants } from './Accordion.enums';
+import { getColor } from '../../utils';
 
 const AccordionHeaderRoot = styled(
   RadixAccordion.Header,
@@ -47,7 +48,7 @@ const AccordionTriggerRoot = styled(
     `}
 
   &:hover {
-    background-color: rgb(0 0 0 / 4%);
+    background-color: ${getColor('primary.50')};
   }
 
   &:focus-visible {
