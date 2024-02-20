@@ -38,6 +38,15 @@ InitialColumnPinning.args = {
   },
   enableRowSelection: true,
 };
+InitialColumnPinning.parameters = {
+  screenshot: {
+    skip: false,
+    viewport: {
+      width: 600,
+      height: 1600,
+    },
+  },
+};
 
 export const ColumnPinningManagedState: Story = (args) => {
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({

@@ -8,6 +8,7 @@ import { parseCSSVarId } from '../columns.utils';
 import Settings from '../panels/Settings';
 import TableRoot from './TableRoot';
 import ProgressBar from './ProgressBar';
+import Selection from '../toolbar/Selection';
 
 const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -41,7 +42,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
 
   return (
     <TableRoot tabIndex={0}>
-      {showProgress && <ProgressBar isTop />}
+      {showProgress && <ProgressBar $isTop />}
       <table
         ref={(ref) => {
           tableRef.current = ref;
@@ -52,8 +53,9 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
         <Header table={table} />
         <Body table={table} />
       </table>
-      {showProgress && <ProgressBar isBottom />}
+      {showProgress && <ProgressBar $isBottom />}
       {showColumnSettings && <Settings table={table} />}
+      {table.options.enableRowSelection && <Selection table={table} />}
     </TableRoot>
   );
 };

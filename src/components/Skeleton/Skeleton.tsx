@@ -1,8 +1,10 @@
+import type { SkeletonProps } from './Skeleton.types';
+
 import styled, { keyframes } from 'styled-components';
 import { includes } from 'ramda';
 import { memo } from 'react';
 
-import { getColor, getRadii, pxToRem } from '../../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 
 const wave = keyframes`
   0% {
@@ -17,17 +19,23 @@ const wave = keyframes`
     transform: translateX(100%);
   }
 `;
-const Skeleton = styled.span.withConfig({
+
+const Placeholder = styled.span.withConfig({
   shouldForwardProp: (property) => !includes(property, ['width']),
-})<{ width?: number | string }>`
+})<SkeletonProps>`
   display: block;
   background: ${getColor('neutral.300')};
   position: relative;
   overflow: hidden;
-  height: 1.25rem;
-  width: ${({ width }) => pxToRem(width ?? '100%')};
-  border-radius: ${getRadii('default')};
+  height: ${({ height }) => pxToRem(height ?? 'auto')};
+  width: ${({ width }) => pxToRem(width ?? 'auto')};
+  border-radius: ${({ variant = 'text', theme }) =>
+    getRadii(variant === 'circular' ? 'circle' : 'default')({ theme })};
   -webkit-mask-image: radial-gradient(white, black);
+
+  &:empty::before {
+    content: '\\00a0';
+  }
 
   &::after {
     animation: ${wave} 2s linear 0.5s infinite;
@@ -43,5 +51,9 @@ const Skeleton = styled.span.withConfig({
     inset: 0;
   }
 `;
+
+const Skeleton: React.FC<SkeletonProps> = (props) => {
+  return <Placeholder {...props} />;
+};
 
 export default memo(Skeleton);

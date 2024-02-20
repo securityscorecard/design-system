@@ -1,3 +1,41 @@
+# [1.21.0](https://github.com/securityscorecard/design-system/compare/v1.20.3...v1.21.0) (2024-02-14)
+
+
+### Bug Fixes
+
+* **DatatableV2:** fix minor issues ([52b78d6](https://github.com/securityscorecard/design-system/commit/52b78d64d24a24d7cb4f5184dc32e3269c8e6093))
+* **Textarea:** fix char counter ([b4c1ad4](https://github.com/securityscorecard/design-system/commit/b4c1ad47a4b50b51db068d87d4172d3b1de2304a))
+
+
+### Features
+
+* **Skeleton:** add Skeleton component ([2917919](https://github.com/securityscorecard/design-system/commit/2917919896c72b92566d32cb34e9d48b52b8d5ec))
+* **Tabs:** allow passing onClick to Tab component ([3a63b70](https://github.com/securityscorecard/design-system/commit/3a63b70b4aa77814d261adc2144d6a0540d5c21c))
+
+## [1.20.3](https://github.com/securityscorecard/design-system/compare/v1.20.2...v1.20.3) (2024-01-31)
+
+
+### Bug Fixes
+
+* **Collapsible:** add white background ([04f67a4](https://github.com/securityscorecard/design-system/commit/04f67a4840e89fc7060378cdb92a7d14702d1ec0))
+* **DatatableV2:** adjust select button padding ([0e46974](https://github.com/securityscorecard/design-system/commit/0e469742fba6776c8f9f4cdab7d175300dd7b8a3))
+* **DatatableV2:** fix selection bar z index ([58219c8](https://github.com/securityscorecard/design-system/commit/58219c8e538a5038f00872c6301add8182ec62d1))
+* **useLockBodyScroll:** fix hook to only allow 1 lock ([6e5ca51](https://github.com/securityscorecard/design-system/commit/6e5ca517b41f2b83959fc2071fcc44bcee9b8003))
+
+## [1.20.2](https://github.com/securityscorecard/design-system/compare/v1.20.1...v1.20.2) (2024-01-25)
+
+
+### Bug Fixes
+
+* **ScrollView:** fix container background ([8a375cb](https://github.com/securityscorecard/design-system/commit/8a375cb4d94b4fdfcf3c12f6069703383c3e000e))
+
+## [1.20.1](https://github.com/securityscorecard/design-system/compare/v1.20.0...v1.20.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* **Badge:** do not render badge if count is undefined ([50242c5](https://github.com/securityscorecard/design-system/commit/50242c5d7e8a89a6d54d349432cfc983a60bcb7b))
+
 # [1.20.0](https://github.com/securityscorecard/design-system/compare/v1.19.0...v1.20.0) (2024-01-24)
 
 

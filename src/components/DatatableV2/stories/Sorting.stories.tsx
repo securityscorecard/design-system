@@ -49,6 +49,9 @@ InitialSorting.args = {
     ],
   },
 };
+InitialSorting.parameters = {
+  screenshot: { skip: false },
+};
 
 export const SortingManagedState: Story = (args) => {
   const [sorting, setSorting] = useState<SortingState>([

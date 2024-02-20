@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from 'react';
+import type { KeyboardEvent, MouseEvent } from 'react';
 import type { TabProps } from './Tabs.types';
 
 import { TabVariants } from './Tabs.enums';
@@ -8,7 +8,7 @@ import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 import { useTabsContext } from './Tabs';
 
-const Tab = ({ children, color, value }: TabProps) => {
+const Tab = ({ children, color, onClick, value }: TabProps) => {
   const isLink = value?.toString()?.startsWith('/');
   const {
     isExpanded = false,
@@ -24,8 +24,16 @@ const Tab = ({ children, color, value }: TabProps) => {
     }
   };
   const handler = isLink
-    ? { to: value }
-    : { onClick: () => selectTab(value), onKeyDown: (e) => handleKeyDown(e) };
+    ? { to: value, onClick }
+    : {
+        onClick: (e: MouseEvent<HTMLAnchorElement>) => {
+          selectTab(value);
+          onClick?.(e);
+        },
+        onKeyDown: (e: KeyboardEvent<HTMLAnchorElement>) => {
+          handleKeyDown(e);
+        },
+      };
   let RouterLink = null;
 
   if (isLink) {

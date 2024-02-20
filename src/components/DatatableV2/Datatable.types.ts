@@ -25,7 +25,19 @@ import type { Types as SSCIconTypes, SSCIcons } from '../Icon';
 
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
-  'accessorFn' | 'accessorFn' | 'cell' | 'header'
+  | 'accessorFn'
+  | 'accessorFn'
+  | 'cell'
+  | 'header'
+  | 'aggregatedCell'
+  | 'aggregationFn'
+  | 'enableColumnFilter'
+  | 'enableGlobalFilter'
+  | 'enableGrouping'
+  | 'filterFn'
+  | 'footer'
+  | 'getGroupingValue'
+  | 'getUniqueValues'
 > & {
   /**
    * You can use this to compose cell value from multiple keys in data object.
@@ -43,8 +55,9 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
    * You can extract full name with:
    * ```
    * {
-   *   header: 'fullname'
+   *   header: 'Full name'
    *   accessorFn: row => `${row.firstName} ${row.lastName}
+   *   id: 'fullname
    * }
    */
   accessorFn?: AccessorFn<D, V>;
@@ -60,7 +73,7 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
    * }
    *
    * {
-   *   header: 'age'
+   *   header: 'Age'
    *   accessorKey: 'age
    * }
    */
@@ -202,8 +215,16 @@ interface CustomState {
   isLoading: boolean;
   showProgress: boolean;
 }
-export type DatatableInitialState = InitialTableState & CustomState;
-export type DatatableState = TableState & CustomState;
+export type DatatableInitialState = Omit<
+  InitialTableState,
+  'columnFilter' | 'globalFilter' | 'grouping' | 'rowPinning'
+> &
+  CustomState;
+export type DatatableState = Omit<
+  TableState,
+  'columnFilters' | 'globalFilter' | 'grouping' | 'rowPinning'
+> &
+  CustomState;
 
 export interface ParsedDatatableOptions<D>
   extends Omit<Partial<TableOptions<D>>, 'data' | 'columns'> {
@@ -341,7 +362,15 @@ export interface DatatableOptions<D>
    */
   enableColumnResizing?: boolean;
   /**
+   * Enables/disables expanding detail panel for all rows.
+   *
+   * @default false
+   */
+  enableExpanding?: boolean;
+  /**
    * Enables/disables button in the table header that expands all detail panels at once.
+   *
+   * @default false
    */
   enableExpandAll?: boolean;
   /**
@@ -362,6 +391,10 @@ export interface DatatableOptions<D>
    * @default false
    */
   enableMultiSort?: boolean;
+  /**
+   * @default false
+   */
+  enableMultiRemove?: boolean;
   /**
    * Enables/disables pagination for the table.
    *
@@ -427,9 +460,9 @@ export interface DatatableOptions<D>
    */
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
   /**
-   * Provide your own implementation of row details panel. This property accepts React component\
+   * Provide your own implementation of row details panel. This property accepts React component
    * with properties:
-   *  - `row`: current row, row data are accessible through `row.original`
+   *  - `row` - current row, row data are accessible through `row.original`
    *  - `table` - current instance of the table
    */
   renderDetailPanel?: (props: {

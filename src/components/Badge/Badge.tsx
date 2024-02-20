@@ -1,7 +1,7 @@
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
 
 import { forwardRef } from 'react';
-import { defaultWhen } from 'ramda-adjunct';
+import { defaultWhen, isNotUndefined } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
@@ -61,16 +61,17 @@ const BadgeElement = styled(Padbox)<BadgeElementProps>`
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
 const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ count, variant = BadgeVariants.error }, ref) => (
-    <BadgeElement
-      ref={ref}
-      $variant={variant}
-      className={CLX_COMPONENT}
-      paddingSize={SpaceSizes.sm}
-    >
-      <span>{normalizeCount(count)}</span>
-    </BadgeElement>
-  ),
+  ({ count, variant = BadgeVariants.error }, ref) =>
+    isNotUndefined(count) ? (
+      <BadgeElement
+        ref={ref}
+        $variant={variant}
+        className={CLX_COMPONENT}
+        paddingSize={SpaceSizes.sm}
+      >
+        <span>{normalizeCount(count)}</span>
+      </BadgeElement>
+    ) : null,
 );
 
 export default Badge;

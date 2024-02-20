@@ -1,4 +1,5 @@
 import type { DatatableHeader, DatatableInstance } from '../Datatable.types';
+import type { CSSProperties } from 'react';
 
 import { flexRender } from '@tanstack/react-table';
 import clx from 'classnames';
@@ -10,6 +11,15 @@ import HeaderCellResizeHandler from './HeaderCellResizeHandler';
 import { Inline } from '../../layout';
 import { Tooltip } from '../../Tooltip';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
+import { displayColumnIds } from '../hooks/useDisplayColumns';
+
+const getTextHeaderStyle = (
+  labelLength: number | undefined,
+): CSSProperties => ({
+  whiteSpace: (labelLength ?? 0) < 20 ? 'nowrap' : 'normal',
+  minWidth: `${Math.min(labelLength ?? 0, 4)}ch`,
+  overflow: 'hidden',
+});
 
 const HeaderCell = <D,>({
   header,
@@ -50,7 +60,7 @@ const HeaderCell = <D,>({
     table,
   });
   const headerElement = flexRender(headerComponent, getContext()) ?? cdHeader;
-
+  const headerStyle = getTextHeaderStyle(cdHeader?.length);
   return (
     <th
       key={id}
@@ -68,11 +78,7 @@ const HeaderCell = <D,>({
         }),
       }}
     >
-      {columnDefType === 'display' ? (
-        <Inline align="center" justify="center">
-          {headerElement}
-        </Inline>
-      ) : isPlaceholder ? null : (
+      {isPlaceholder ? null : columnDefType === 'data' ? (
         <Inline align="center" gap="xs" justify="space-between">
           <Inline align="center" style={{ overflow: 'hidden' }}>
             {/* I know what I'm doing here */}
@@ -80,12 +86,10 @@ const HeaderCell = <D,>({
             <div
               className="ds-table-header-cell-title"
               style={{
-                whiteSpace: (cdHeader?.length ?? 0) < 20 ? 'nowrap' : 'normal',
-                minWidth: `${Math.min(cdHeader?.length ?? 0, 4)}ch`,
-                overflow: columnDefType === 'data' ? 'hidden' : undefined,
+                ...headerStyle,
                 cursor: getCanSort() ? 'pointer' : undefined,
               }}
-              title={columnDefType === 'data' ? cdHeader : undefined}
+              title={cdHeader}
               onClick={getToggleSortingHandler()}
             >
               <Tooltip placement="top" popup={tooltipPopup}>
@@ -107,6 +111,22 @@ const HeaderCell = <D,>({
           {getCanResize() && (
             <HeaderCellResizeHandler header={header} table={table} />
           )}
+        </Inline>
+      ) : Object.values(displayColumnIds).indexOf(columnDef.id) > 0 ? (
+        <Inline align="center" justify="center">
+          {headerElement}
+        </Inline>
+      ) : (
+        <Inline align="center" justify="flex-start">
+          <div
+            className="ds-table-header-cell-title"
+            style={headerStyle}
+            title={cdHeader}
+          >
+            <Tooltip placement="top" popup={tooltipPopup}>
+              {headerElement}
+            </Tooltip>
+          </div>
         </Inline>
       )}
     </th>

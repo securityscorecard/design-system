@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import Datatable from '../Datatable';
 import Template from './Template';
-import { Code } from '../../typographyLegacy';
+import Snippet from '../../Snippet/Snippet';
 import { Padbox } from '../../layout';
 
 export default {
@@ -19,9 +19,9 @@ export default {
 
 const Panel = ({ row }) => (
   <Padbox paddingSize="md">
-    <pre>
-      <Code size="sm">{JSON.stringify(row.original, null, 2)}</Code>
-    </pre>
+    <Snippet shouldDedent={false} isExpanded>
+      {JSON.stringify(row.original, null, 2)}
+    </Snippet>
   </Padbox>
 );
 
@@ -32,11 +32,17 @@ DetailPanelEnabled.args = {
   enableExpandAll: true,
   renderDetailPanel: Panel,
 };
+DetailPanelEnabled.parameters = {
+  screenshot: { skip: false },
+};
 
 export const DisableExpandAll: Story = Template.bind({});
 DisableExpandAll.args = {
   ...DetailPanelEnabled.args,
   enableExpandAll: false,
+};
+DisableExpandAll.parameters = {
+  screenshot: { skip: false },
 };
 
 export const InitialExpandedAllDetailPanels: Story = Template.bind({});
@@ -46,6 +52,9 @@ InitialExpandedAllDetailPanels.args = {
     expanded: true,
   },
 };
+InitialExpandedAllDetailPanels.parameters = {
+  screenshot: { skip: false },
+};
 
 export const InitialExpandedSomeDetailPanels: Story = Template.bind({});
 InitialExpandedSomeDetailPanels.args = {
@@ -53,6 +62,9 @@ InitialExpandedSomeDetailPanels.args = {
   initialState: {
     expanded: { 2: true, 4: true },
   },
+};
+InitialExpandedSomeDetailPanels.parameters = {
+  screenshot: { skip: false },
 };
 
 export const DetailPanelManagedState: Story = (args) => {

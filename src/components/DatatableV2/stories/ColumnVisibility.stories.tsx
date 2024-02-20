@@ -37,6 +37,9 @@ InitialColumnVisibility.args = {
     columnVisibility: { score: false },
   },
 };
+InitialColumnVisibility.parameters = {
+  screenshot: { skip: false },
+};
 
 export const ColumnVisibilityManagedState: Story = (args) => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({

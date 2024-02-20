@@ -32,6 +32,10 @@ DisabledColumnHidingInSettingsPanel.args = {
     showColumnSettings: true,
   },
 };
+DisabledColumnHidingInSettingsPanel.parameters = {
+  screenshot: { skip: false },
+};
+
 export const DisabledColumnPinningInSettingsPanel: Story = Template.bind({});
 DisabledColumnPinningInSettingsPanel.args = {
   ...Template.args,
@@ -40,6 +44,9 @@ DisabledColumnPinningInSettingsPanel.args = {
     showColumnSettings: true,
   },
 };
+DisabledColumnPinningInSettingsPanel.parameters = {
+  screenshot: { skip: false },
+};
 
 export const InitialColumnSettingsPanel: Story = Template.bind({});
 InitialColumnSettingsPanel.args = {
@@ -47,6 +54,9 @@ InitialColumnSettingsPanel.args = {
   initialState: {
     showColumnSettings: true,
   },
+};
+InitialColumnSettingsPanel.parameters = {
+  screenshot: { skip: false },
 };
 
 export const ColumnSettingsPanelManagedState: Story = (args) => {

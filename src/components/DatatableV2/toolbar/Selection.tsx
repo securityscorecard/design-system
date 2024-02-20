@@ -9,12 +9,20 @@ import { Button } from '../../Button';
 import SelectButton from '../buttons/SelectButton';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 
+export const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
+  const { getSelectedRowModel } = table;
+  const selectedRows = getSelectedRowModel().rows;
+  const selectedRowsCount = selectedRows.length;
+  return selectedRowsCount;
+};
+
 const SelectionRoot = styled(Padbox)<{ $hasHorizontalScroll: boolean }>`
-  position: absolute;
-  top: ${({ $hasHorizontalScroll }) => ($hasHorizontalScroll ? '1.5rem' : 0)};
+  position: sticky;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: 1;
+  transform: scale(1, -1);
   background-color: var(--sscds-table-color-selection);
   height: ${pxToRem(60 + 1)};
   border-bottom: 1px solid var(--sscds-table-color-border);
@@ -28,9 +36,8 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
   } = table;
 
   const hasHorizontalScroll = useHasHorizontalScroll(table);
-
+  const selectedRowsCount = getSelectedRowsCount(table);
   const selectedRows = getSelectedRowModel().rows;
-  const selectedRowsCount = selectedRows.length;
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
   if (selectedRowsCount === 0) {

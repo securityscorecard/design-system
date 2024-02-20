@@ -13,7 +13,7 @@ import { Inline, Padbox, Stack } from '../layout';
 import { Button, ButtonEnums } from '../Button';
 import { Icon } from '../Icon';
 import { generateControl } from '../../utils/tests/storybook';
-import { SpaceSizes } from '../../index';
+import { Modal, SpaceSizes } from '../../index';
 import { getSpace } from '../../utils';
 import { Tooltip } from '../Tooltip';
 
@@ -292,6 +292,57 @@ export const WithSubheader: Story = () => (
     </Stack>
   </Drawer>
 );
+
+export const ModalNested: Story = () => {
+  const [drawerVisible, setDrawerVisibility] = useState(false);
+  const [modalVisible, setModalVisibility] = useState(false);
+  const [counter, setCounter] = useState(0);
+  return (
+    <div>
+      <Button onClick={() => setDrawerVisibility(true)}>Open drawer</Button>
+      {Array.from(Array(10)).map(() => (
+        <Paragraph>
+          Talent she for lively eat led sister. Entrance strongly packages she
+          out rendered get quitting denoting led. Dwelling confined improved it
+          he no doubtful raptures. Several carried through an of up attempt
+          gravity. Situation to be at offending elsewhere distrusts if.
+          Particular use for considered projection cultivated. Worth of do doubt
+          shall it their. Extensive existence up me contained he pronounce do.
+          Excellence inquietude assistance precaution any impression man
+          sufficient.
+        </Paragraph>
+      ))}
+      {modalVisible ? (
+        <Modal
+          onClose={() => {
+            setModalVisibility(false);
+            setCounter(counter + 1);
+          }}
+        >
+          <Paragraph>
+            Talent she for lively eat led sister. Entrance strongly packages she
+            out rendered get quitting denoting led. Dwelling confined improved
+            it he no doubtful raptures. Several carried through an of up attempt
+            gravity. Situation to be at offending elsewhere distrusts if.
+            Particular use for considered projection cultivated. Worth of do
+            doubt shall it their. Extensive existence up me contained he
+            pronounce do. Excellence inquietude assistance precaution any
+            impression man sufficient.
+          </Paragraph>
+        </Modal>
+      ) : null}
+      {drawerVisible ? (
+        <Drawer onClose={() => setDrawerVisibility(false)}>
+          <Button onClick={() => setModalVisibility(true)}>Open Modal</Button>
+        </Drawer>
+      ) : null}
+    </div>
+  );
+};
+
+ModalNested.parameters = {
+  screenshot: { skip: true },
+};
 
 const codeExample = `
 const Subheader = styled(Padbox)\`

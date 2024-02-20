@@ -6,7 +6,7 @@ import clx from 'classnames';
 
 import { getCommonCellStyles } from '../columns.utils';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
-import Skeleton from './Skeleton';
+import Skeleton from '../../Skeleton/Skeleton';
 
 const BodyCell = <D,>({
   cell,

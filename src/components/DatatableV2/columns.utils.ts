@@ -39,7 +39,11 @@ export const prepareColumns = <D>({
   columnDefs.map((columnDef) => ({
     ...columnDef,
     id: columnDef.id ?? columnDef.accessorKey?.toString?.() ?? columnDef.header,
-    columnDefType: columnDef?.columnDefType ?? 'data',
+    columnDefType:
+      columnDef?.columnDefType ??
+      (!columnDef.accessorKey && !columnDef.accessorFn && columnDef.id)
+        ? 'display'
+        : 'data',
     enableSorting: columnDef?.enableSorting ?? true,
   }));
 

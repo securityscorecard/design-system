@@ -1,9 +1,9 @@
-import type { ChangeEventHandler, ComponentPropsWithRef } from 'react';
+import type { ComponentPropsWithRef, MutableRefObject } from 'react';
 import type { TextAreaProps } from './TextArea.types';
 
 import { forwardRef, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { isNotUndefined, noop } from 'ramda-adjunct';
+import { isNotUndefined, isString } from 'ramda-adjunct';
 import { omit, prop } from 'ramda';
 import cls from 'classnames';
 
@@ -24,35 +24,38 @@ import { SpaceSizes } from '../../../theme';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { mergeRefs } from '../../../utils/mergeRefs';
 
-const TextAreaWrapper = styled.div<{ height: string }>`
+const TextAreaWrapper = styled.div<{ $height: string }>`
   position: relative;
-  height: ${prop('height')};
+  height: ${prop('$height')};
 `;
 
-const StyledTextArea = styled.textarea<{
-  height: string;
-  isInvalid: boolean;
-  hasMaxLength: boolean;
-}>`
+type StyledTextAreaProps = {
+  $height: string;
+  $isInvalid: boolean;
+  $hasMaxLength: boolean;
+};
+const StyledTextArea = styled.textarea<StyledTextAreaProps>`
   resize: none;
   width: 100%;
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('lg')};
-  height: ${prop('height')};
+  height: ${prop('$height')};
+
+  /* height: inherit; */
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
   box-shadow: inset 0 0 0 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
-  ${({ hasMaxLength, theme }) =>
-    hasMaxLength
+  ${({ $hasMaxLength, theme }) =>
+    $hasMaxLength
       ? css`
           ${createPadding({ paddingSize: SpaceSizes.md, theme })};
           padding-bottom: ${getSpace(SpaceSizes.lg)};
         `
       : createPadding({ paddingSize: SpaceSizes.md, theme })};
-  ${({ isInvalid }) =>
-    isInvalid &&
+  ${({ $isInvalid }) =>
+    $isInvalid &&
     css`
       border-color: ${getFormStyle('invalidBorderColor')};
       box-shadow: inset 0 0 0 1px ${getFormStyle('invalidBorderColor')};
@@ -99,56 +102,50 @@ const TextArea = forwardRef<
   TextAreaProps & ComponentPropsWithRef<'textarea'>
 >(
   (
-    {
-      maxLength,
-      isInvalid = false,
-      isDisabled = false,
-      style,
-      className,
-      ...props
-    },
+    { maxLength, isInvalid = false, isDisabled = false, className, ...props },
     ref,
   ) => {
-    const {
-      value = '',
-      defaultValue = '',
-      onChange = noop,
-    } = props as {
+    const { value, defaultValue, onChange } = props as {
       value: string;
       defaultValue: string;
-      onChange: ChangeEventHandler;
+      onChange: React.ChangeEventHandler;
     };
     const textAreaRef = useRef<HTMLTextAreaElement>();
     const mergedRef = mergeRefs(textAreaRef, ref);
+    const isControlled = isNotUndefined(value) && isString(value);
     const { text, parentHeight, textAreaHeight, autosize } = useAutosize(
-      textAreaRef,
-      value || defaultValue,
+      mergedRef as MutableRefObject<HTMLTextAreaElement>,
+      value ?? defaultValue ?? '',
     );
     const [currentValueLength, setCurrentValueLength] = useState(text.length);
     const runAfterUpdate = useRunAfterUpdate();
 
     const handleOnChange = (e) => {
-      onChange(e);
-      runAfterUpdate(() => {
+      onChange?.(e);
+      if (isControlled) {
+        runAfterUpdate(() => {
+          setCurrentValueLength(textAreaRef.current.value.length);
+          autosize();
+        });
+      } else {
         setCurrentValueLength(textAreaRef.current.value.length);
         autosize();
-      });
+      }
     };
 
     const isFieldInvalid = isInvalid || currentValueLength > maxLength;
 
     return (
       <TextAreaWrapper
+        $height={parentHeight}
         className={cls(CLX_COMPONENT, className)}
-        height={parentHeight}
-        style={style}
       >
         <StyledTextArea
           ref={mergedRef}
+          $hasMaxLength={isNotUndefined(maxLength)}
+          $height={textAreaHeight}
+          $isInvalid={isFieldInvalid}
           disabled={isDisabled}
-          hasMaxLength={isNotUndefined(maxLength)}
-          height={textAreaHeight}
-          isInvalid={isFieldInvalid}
           onChange={handleOnChange}
           {...omit(['onChange'], props)}
         />

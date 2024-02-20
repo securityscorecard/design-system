@@ -3,6 +3,7 @@ import type {
   DatatableInitialState,
   DatatableInstance,
   DatatableOptions,
+  ParsedDatatableOptions,
 } from '../Datatable.types';
 
 import {
@@ -24,7 +25,12 @@ import { displayColumnIds, useDisplayColumns } from './useDisplayColumns';
 import { useOptions } from './useOptions';
 import { useDebounce } from '../../../hooks/useDebounce';
 
-const getMaxRowsPerPageOption = (rowsPerPageOptions) => {
+const getMaxRowsPerPageOption = <D>(
+  tableOptions: ParsedDatatableOptions<D>,
+) => {
+  const { enableRowsPerPage, rowsPerPageOptions } = tableOptions;
+  if (!enableRowsPerPage) return null;
+
   if (Array.isArray(rowsPerPageOptions)) {
     return rowsPerPageOptions[rowsPerPageOptions.length - 1];
   }
@@ -70,7 +76,7 @@ export const useDatatable = <D>(
       pageIndex: initState?.pagination?.pageIndex ?? 0,
       pageSize:
         initState?.pagination?.pageSize ??
-        getMaxRowsPerPageOption(tableOptions.rowsPerPageOptions) ??
+        getMaxRowsPerPageOption(tableOptions) ??
         50,
     };
 
