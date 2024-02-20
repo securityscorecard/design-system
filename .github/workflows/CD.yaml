@@ -9,18 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18']
+        node: ['18', '20']
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
@@ -46,24 +46,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz.
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -80,24 +80,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -111,7 +111,7 @@ jobs:
 
       - name: Cache storybook build
         id: storybook-build-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: storybook-static
           key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
@@ -131,24 +131,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -159,7 +159,7 @@ jobs:
 
       - name: Cache storybook build
         id: storybook-build-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: storybook-static
           key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
@@ -187,24 +187,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -221,24 +221,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -255,24 +255,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -289,18 +289,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14', '16', '18']
+        node: ['18', '20']
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
@@ -320,7 +320,7 @@ jobs:
 
       - name: Cache build
         id: library-build-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
           key: node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
@@ -341,24 +341,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -393,26 +393,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -423,10 +423,10 @@ jobs:
 
       - name: Cache build
         id: library-build-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
-          key: node-16-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
+          key: node-20-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         if: steps.library-build-cache.outputs.cache-hit != 'true'
@@ -447,27 +447,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: '20'
 
       - name: Cache yarn files
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
             .yarn/cache
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-20-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-20-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -478,7 +478,7 @@ jobs:
 
       - name: Cache storybook build
         id: storybook-build-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: docs-build
           key: docs-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
@@ -508,12 +508,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
 
       - name: Download Storybook artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: storybook
 

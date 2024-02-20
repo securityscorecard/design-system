@@ -1,14 +1,12 @@
-FROM ubuntu:bionic
+FROM node:20.11.1
 
-RUN apt update \
-&& apt upgrade
-RUN apt install -y curl
-
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash
-RUN apt install -y nodejs
-RUN apt install -y chromium-browser
-
-RUN npm install -g yarn
+RUN apt-get update -qq \
+  && apt-get install -qq --no-install-recommends \
+    apt-utils \
+    ca-certificates \
+    apt-transport-https \
+    chromium \
+  && apt-get upgrade -qq
 
 
 WORKDIR /usr/src/app

@@ -69,5 +69,5 @@ export const Controlled: Story = () => {
   );
 };
 Controlled.parameters = {
-  screenshot: { disable: true },
+  screenshot: { skip: true },
 };
