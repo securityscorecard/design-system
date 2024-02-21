@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-docker run --rm --network host -v "$PWD/.storybook/image-snapshots/:/usr/src/app/snapshots" -it abykovssc/visual-regressions:multi-arch-ubuntu-v2 yarn take-and-check
+docker run --rm --network host -v "$PWD/.storybook/image-snapshots/:/usr/src/app/snapshots" -it radekpodrazky/visual-regressions:node20.11.1-chrome-121.0.6167.160-001 yarn take-and-check

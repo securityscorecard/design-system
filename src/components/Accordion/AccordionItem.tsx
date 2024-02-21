@@ -17,6 +17,7 @@ const AccordionItemRoot = styled(
   ${({ $variant }) =>
     $variant === AccordionVariants.regular &&
     css`
+      background-color: ${({ theme }) => theme.colors.neutral['0']};
       border: 1px solid ${({ theme }) => theme.colors.neutral['400']};
       border-radius: 4px;
     `}

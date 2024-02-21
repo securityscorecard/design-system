@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import type { ToastProps } from './Toast.types';
 
 import { transparentize } from 'polished';
@@ -44,7 +44,7 @@ const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   text-align: left;
   box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')};
   animation: ${ToastFromTop} 0.5s;
-  border: 1px solid ${getColor('neutral.500')};
+  border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};
   overflow: hidden;
 `;
@@ -72,10 +72,9 @@ const ToastAreaContainer = ({
   isStandalone,
 }: {
   isStandalone: boolean;
-  children: ReactNode;
+  children: ReactElement;
 }) => {
-  // eslint-disable-next-line
-  return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
+  return isStandalone ? <ToastArea>{children}</ToastArea> : children;
 };
 
 const Toast = forwardRef<HTMLDivElement, ToastProps>(

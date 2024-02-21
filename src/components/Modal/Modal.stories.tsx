@@ -11,6 +11,7 @@ import { Inline, Padbox } from '../layout';
 import { Button } from '../Button';
 import { generateControl } from '../../utils/tests/storybook';
 import { SpaceSizes } from '../../index';
+import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'components/modals/Modal',
@@ -60,12 +61,13 @@ export const Playground: Story<ModalProps> = (args) => {
             <H5 style={{ margin: 0 }}>This is a placeholder</H5>
             <Paragraph size="md" style={{ marginBottom: 0 }}>
               You can replace this with a local component. You can also just
-              override the text, but keep in mind that you might lose content
-              that way in case we happend to change the underlying component.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              override the text, but{' '}
+              <Tooltip popup="I'm tooltip">keep in mind</Tooltip> that you might
+              lose content that way in case we happend to change the underlying
+              component. Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat.
             </Paragraph>
           </Modal>
         )}

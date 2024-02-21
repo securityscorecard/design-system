@@ -26,6 +26,7 @@ export interface MultiValueInputProps extends ComponentPropsWithRef<'input'> {
   id?: string;
   inputId?: string;
   inputValue?: string;
+  valuesDelimiter?: string;
   maxPillLabelLength?: MultiValueProps['maxLength'];
   onValueAdd?: (
     addedValues: MultiValueInputProps['value'],

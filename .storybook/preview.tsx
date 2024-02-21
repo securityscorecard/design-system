@@ -18,7 +18,7 @@ export const parameters = {
     default: 'white',
     values: [
       { name: 'white', value: colors.neutral[0] },
-      { name: 'grey', value: colors.neutral[400] },
+      { name: 'grey', value: colors.neutral[200] },
       { name: 'black', value: colors.neutral[1000] },
     ],
   },
@@ -88,7 +88,18 @@ export const parameters = {
 createIconLibrary();
 
 const wrapper = (storyFn) => (
-  <DSProvider>{storyFn()}</DSProvider>
+  <DSProvider config={{debugMode: true}}>{storyFn()}</DSProvider>
 );
 
 export const decorators = [withScreenshot, wrapper];
+
+window.Math.random = () => 0.5;
+
+function clearDatatableLS() {
+  Object.keys(localStorage)
+  .filter(x =>
+    x.startsWith('sscds_dt_'))
+  .forEach(x =>
+    localStorage.removeItem(x))
+}
+clearDatatableLS()

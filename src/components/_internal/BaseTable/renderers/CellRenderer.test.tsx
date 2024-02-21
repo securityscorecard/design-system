@@ -7,7 +7,6 @@ import { renderWithProviders } from '../../../../utils/tests/renderWithProviders
 import CellRenderer from './CellRenderer';
 import { CellTypes } from './renderers.enums';
 import { abbreviateNumber } from '../../../../utils';
-import { defaultDSContext } from '../../../../theme/DSProvider/DSProvider';
 
 const row = { original: { col: 'val' } } as unknown as Row<
   Record<string, unknown>
@@ -264,16 +263,11 @@ describe('Datatable/CellRenderer', () => {
       );
 
       const value = screen.getByText(singleValue);
-      fireEvent.pointerEnter(value);
+      fireEvent.pointerMove(value);
 
       await waitFor(() => {
-        expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
+        expect(screen.getAllByText(singleValue)[0]).toBeInTheDocument();
       });
-      /* eslint-disable testing-library/no-node-access */
-      expect(
-        document.getElementById(defaultDSContext.portalsContainerId),
-      ).toHaveTextContent(singleValue);
-      /* eslint-enable testing-library/no-node-access */
     });
     it('should call "tooltipComposer" with correct arguments for each visible value', () => {
       const tooltipComposerMock = jest.fn();

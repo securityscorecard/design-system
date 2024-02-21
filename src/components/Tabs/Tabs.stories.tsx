@@ -38,15 +38,19 @@ const TabPanel = ({ title }) => (
 
 const TabsTemplate: Story<TabsProps> = (args) => (
   <Tabs {...args}>
-    <Tab value="overview">Overview</Tab>
-    <Tab value="inventory">
+    <Tab value="overview" onClick={action('tab-click')}>
+      Overview
+    </Tab>
+    <Tab value="inventory" onClick={action('tab-click')}>
       <Inline align="center" gap="sm">
         <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
         <span>Inventory</span>
         <Badge count={3} variant="neutral" />
       </Inline>
     </Tab>
-    <Tab value="profile">Profile</Tab>
+    <Tab value="profile" onClick={action('tab-click')}>
+      Profile
+    </Tab>
   </Tabs>
 );
 
@@ -117,8 +121,17 @@ export const RoutableTabs: Story<TabsProps> = (args) => {
         <Route
           component={({ match }) => (
             <Tabs {...args} selectedValue={match.url}>
-              <Tab value="/overview">Overview</Tab>
-              <Tab value="/inventory">Inventory</Tab>
+              <Tab
+                value="/overview"
+                onClick={(e) => {
+                  action('tab-click')(e);
+                }}
+              >
+                Overview
+              </Tab>
+              <Tab value="/inventory" onClick={action('tab-click')}>
+                Inventory
+              </Tab>
             </Tabs>
           )}
           path="*"

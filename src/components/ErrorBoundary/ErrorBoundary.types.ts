@@ -6,6 +6,6 @@ export interface ErrorBoundaryProps {
   justify?: Property.JustifyContent;
   illustration?: ReactNode;
   onClick?: () => void;
-  title: ReactNode;
-  content: ReactNode;
+  title?: ReactNode;
+  content?: ReactNode;
 }

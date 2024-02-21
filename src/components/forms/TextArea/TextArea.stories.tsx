@@ -1,6 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
 import type { TextAreaProps } from './TextArea.types';
 
+import { useState } from 'react';
+
 import TextArea from './TextArea';
 
 export default {
@@ -52,6 +54,20 @@ export const Autosize: Story = () => (
   <TextArea aria-label="Text" defaultValue={lipsum} />
 );
 
-export const WithCustomWidth: Story = () => (
-  <TextArea aria-label="Text" maxLength={100} style={{ width: '60ch' }} />
-);
+export const Controlled: Story = () => {
+  const [val, setVal] = useState('');
+
+  return (
+    <TextArea
+      aria-label="Text"
+      maxLength={100}
+      value={val}
+      onChange={(e) => {
+        setVal(e.target.value);
+      }}
+    />
+  );
+};
+Controlled.parameters = {
+  screenshot: { skip: true },
+};

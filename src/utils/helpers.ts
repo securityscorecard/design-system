@@ -40,13 +40,22 @@ export type ThemeType = {
   padding?: SpacingSizeValue;
 };
 
+type HelperFn<Input, ReturnType = string> = {
+  (input: Input, { theme }: ThemeType): ReturnType;
+  (input: Input): ({ theme }: ThemeType) => ReturnType;
+};
+
 const convertValueToRem = memoizeWith(
   identity,
   unless(isString, (px) => `${px / BASE_FONT_SIZE}rem`),
 );
 
 // pxToRem :: (number | string)... -> string
-export const pxToRem = pipe(list, map(convertValueToRem), join(' '));
+export const pxToRem: (...px: Array<number | string>) => string = pipe(
+  list,
+  map(convertValueToRem),
+  join(' '),
+);
 
 // https://github.com/ramda/ramda/wiki/Cookbook#derivative-of-rprops-for-deep-fields
 // This useWith is not hook :D
@@ -55,11 +64,7 @@ const dotPath = useWith(path, [split('.')]);
 // getColor :: Color -> Props -> string
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)
 // Props - styled-components props object
-type GetColor = {
-  (color: Color, { theme }: ThemeType): string;
-  (color: Color): ({ theme }: ThemeType) => string;
-};
-export const getColor: GetColor = curry(
+export const getColor: HelperFn<Color> = curry(
   (color: Color, { theme }: ThemeType): string => {
     return either(
       dotPath(`colors.${color}`),
@@ -71,7 +76,7 @@ export const getColor: GetColor = curry(
 // getFontFamily :: Family -> Props -> string
 // Family - any key of 'family' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getFontFamily = curry(
+export const getFontFamily: HelperFn<keyof FontFamily> = curry(
   (family: keyof FontFamily, { theme }: ThemeType): string =>
     path(['typography', 'family', family], theme),
 );
@@ -79,7 +84,7 @@ export const getFontFamily = curry(
 // getFontWeight :: Weight -> Props -> number
 // Weight - any key of 'weight' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getFontWeight = curry(
+export const getFontWeight: HelperFn<keyof FontWeight> = curry(
   (weight: keyof FontWeight, { theme }: ThemeType): string =>
     path(['typography', 'weight', weight], theme),
 );
@@ -87,7 +92,7 @@ export const getFontWeight = curry(
 // getFontSize :: Size -> Props -> string
 // Size - any key of 'size' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getFontSize = curry(
+export const getFontSize: HelperFn<keyof FontSize> = curry(
   (size: keyof FontSize, { theme }: ThemeType): string =>
     path(['typography', 'size', size], theme),
 );
@@ -95,46 +100,48 @@ export const getFontSize = curry(
 // getLineHeight :: Size -> Props -> string
 // Size - any key of 'lineHeight' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getLineHeight = curry(
+export const getLineHeight: HelperFn<keyof LineHeight> = curry(
   (size: keyof LineHeight, { theme }: ThemeType): string =>
     path(['typography', 'lineHeight', size], theme),
 );
 
+export type Radii = keyof ReturnType<typeof createRadii>;
 // getRadii :: Type -> Props -> string
 // Type - any key of 'radii' (src/theme/radii.ts)
 // Props - styled-components props object
-export const getRadii = curry(
-  (type: keyof ReturnType<typeof createRadii>, { theme }: ThemeType): string =>
-    path(['radii', type], theme),
+export const getRadii: HelperFn<Radii> = curry(
+  (type: Radii, { theme }: ThemeType): string => path(['radii', type], theme),
 );
 
 // getFormStyle :: Property -> Props -> string
 // Property - any key of 'forms' (src/theme/forms.ts)
 // Props - styled-components props object
-export const getFormStyle = curry((property: keyof Forms, { theme }): string =>
-  path(['forms', property], theme),
+export const getFormStyle: HelperFn<keyof Forms> = curry(
+  (property: keyof Forms, { theme }): string =>
+    path(['forms', property], theme),
 );
 
-// getDepth :: Element -> Props -> string
+// getDepth :: Element -> Props -> number
 // Element - any key of 'depth' (src/theme/depths.ts)
 // Props - styled-components props object
-export const getDepth = curry(
-  (element: keyof Depths, { theme }: ThemeType): string =>
+export const getDepth: HelperFn<keyof Depths, number> = curry(
+  (element: keyof Depths, { theme }: ThemeType): number =>
     path(['depths', element], theme),
 );
 
-// getSpace:: Size -> Props -> string
+// getSpace:: Size -> Props -> number
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
-export const getSpace = curry((size: SpaceSize, { theme }: ThemeType): string =>
-  pipe(path(['space', size]), pxToRem)(theme),
+export const getSpace: HelperFn<SpaceSize, number> = curry(
+  (size: SpaceSize, { theme }: ThemeType): number =>
+    pipe(path(['space', size]), pxToRem)(theme),
 );
 
-// getNegativeSpace:: Size -> Props -> string
+// getNegativeSpace:: Size -> Props -> number
 // Size - any key of 'space' (src/theme/space.ts)
 // Props - styled-components props object
-export const getNegativeSpace = curry(
-  (size: SpaceSize, { theme }: ThemeType): string =>
+export const getNegativeSpace: HelperFn<SpaceSize, number> = curry(
+  (size: SpaceSize, { theme }: ThemeType): number =>
     pipe(path(['space', size]), negate, pxToRem)(theme),
 );
 
@@ -143,12 +150,8 @@ export const capitalize = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 type Tokens = keyof ReturnType<typeof createTokens>;
-type GetToken = {
-  (name: Tokens, { theme }: ThemeType): string;
-  (name: Tokens): ({ theme }: ThemeType) => string;
-};
-export const getToken: GetToken = curry((name, { theme }: ThemeType): string =>
-  path(['tokens', name])(theme),
+export const getToken: HelperFn<Tokens> = curry(
+  (name, { theme }: ThemeType): string => path(['tokens', name])(theme),
 );
 
 export const abbreviateNumber = (value: number): string =>

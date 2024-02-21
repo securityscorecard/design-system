@@ -53,9 +53,10 @@ function Datatable<D extends Record<string, unknown>>({
   tableConfig = {},
   resetSelectionFn,
 }: DatatableProps<D>): ReactElement {
-  const [persistedState, setPersistedState] = useLocalStorageState(
-    `datatable_${id}`,
-  );
+  const [persistedState, setPersistedState] = useLocalStorageState<{
+    hiddenColumns: string[];
+    columnOrder: string[];
+  }>(`datatable_${id}`);
 
   useEffect(() => {
     if (!id) {

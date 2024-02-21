@@ -1,3 +1,187 @@
+# [1.21.0](https://github.com/securityscorecard/design-system/compare/v1.20.3...v1.21.0) (2024-02-14)
+
+
+### Bug Fixes
+
+* **DatatableV2:** fix minor issues ([52b78d6](https://github.com/securityscorecard/design-system/commit/52b78d64d24a24d7cb4f5184dc32e3269c8e6093))
+* **Textarea:** fix char counter ([b4c1ad4](https://github.com/securityscorecard/design-system/commit/b4c1ad47a4b50b51db068d87d4172d3b1de2304a))
+
+
+### Features
+
+* **Skeleton:** add Skeleton component ([2917919](https://github.com/securityscorecard/design-system/commit/2917919896c72b92566d32cb34e9d48b52b8d5ec))
+* **Tabs:** allow passing onClick to Tab component ([3a63b70](https://github.com/securityscorecard/design-system/commit/3a63b70b4aa77814d261adc2144d6a0540d5c21c))
+
+## [1.20.3](https://github.com/securityscorecard/design-system/compare/v1.20.2...v1.20.3) (2024-01-31)
+
+
+### Bug Fixes
+
+* **Collapsible:** add white background ([04f67a4](https://github.com/securityscorecard/design-system/commit/04f67a4840e89fc7060378cdb92a7d14702d1ec0))
+* **DatatableV2:** adjust select button padding ([0e46974](https://github.com/securityscorecard/design-system/commit/0e469742fba6776c8f9f4cdab7d175300dd7b8a3))
+* **DatatableV2:** fix selection bar z index ([58219c8](https://github.com/securityscorecard/design-system/commit/58219c8e538a5038f00872c6301add8182ec62d1))
+* **useLockBodyScroll:** fix hook to only allow 1 lock ([6e5ca51](https://github.com/securityscorecard/design-system/commit/6e5ca517b41f2b83959fc2071fcc44bcee9b8003))
+
+## [1.20.2](https://github.com/securityscorecard/design-system/compare/v1.20.1...v1.20.2) (2024-01-25)
+
+
+### Bug Fixes
+
+* **ScrollView:** fix container background ([8a375cb](https://github.com/securityscorecard/design-system/commit/8a375cb4d94b4fdfcf3c12f6069703383c3e000e))
+
+## [1.20.1](https://github.com/securityscorecard/design-system/compare/v1.20.0...v1.20.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* **Badge:** do not render badge if count is undefined ([50242c5](https://github.com/securityscorecard/design-system/commit/50242c5d7e8a89a6d54d349432cfc983a60bcb7b))
+
+# [1.20.0](https://github.com/securityscorecard/design-system/compare/v1.19.0...v1.20.0) (2024-01-24)
+
+
+### Bug Fixes
+
+* **Modal:** increase modal max height to 90vh ([58cee2b](https://github.com/securityscorecard/design-system/commit/58cee2b1c1be01bb3a421ea2dda96ad03f2f694d))
+
+
+### Features
+
+* **Tooltip:** allow passing wrapper element ([b158442](https://github.com/securityscorecard/design-system/commit/b1584420f032474fc8893adaaeabd31ea9fc1ce8))
+
+# [1.19.0](https://github.com/securityscorecard/design-system/compare/v1.18.0...v1.19.0) (2024-01-10)
+
+
+### Features
+
+* **ScrollView:** add new component ([e5cdd1b](https://github.com/securityscorecard/design-system/commit/e5cdd1b0a75990c580ac7ecefef8bae89651ae18))
+* **Snippet:** add component ([ea22329](https://github.com/securityscorecard/design-system/commit/ea2232961abd59591153a0fa0749bedbd67f79f1))
+
+# [1.18.0](https://github.com/securityscorecard/design-system/compare/v1.17.0...v1.18.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* **Tooltip:** set correct z-index in floating elements ([ef3ec00](https://github.com/securityscorecard/design-system/commit/ef3ec008c38b6130263a3b48610b913798fb4453))
+
+
+### Features
+
+* **DatatableV2:** hide shadow on pinned columns ([f13e7a6](https://github.com/securityscorecard/design-system/commit/f13e7a6603d16d225457098689c2f95e7c9cb045))
+* **DatatableV2:** show scrollbar when needed ([14127d6](https://github.com/securityscorecard/design-system/commit/14127d60643c37c31c00421c509c74a82d5a6bad))
+
+# [1.17.0](https://github.com/securityscorecard/design-system/compare/v1.16.1...v1.17.0) (2023-12-13)
+
+
+### Features
+
+* **DatatableV2:** implement detail panel ([b1c9e63](https://github.com/securityscorecard/design-system/commit/b1c9e63a77c5e275c0fa31aee02f31de2ecc5ce1))
+* **DatatableV2:** implement header tooltip ([e57081e](https://github.com/securityscorecard/design-system/commit/e57081e014aa12c8bd2df77e7750e118f983971e))
+* **DatatableV2:** implement row actions ([5af556f](https://github.com/securityscorecard/design-system/commit/5af556fbe196569f6af95d9d66c654da41228102))
+* **DatatableV2:** style selection toolbar ([5644e5b](https://github.com/securityscorecard/design-system/commit/5644e5b3ca40f8303fbabcf407b48e560f08d6bc))
+* **Loading:** add Loading component ([7c0a93e](https://github.com/securityscorecard/design-system/commit/7c0a93ec13235f9c17a07a22307f441e4ef4c1af))
+
+## [1.16.1](https://github.com/securityscorecard/design-system/compare/v1.16.0...v1.16.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* **Tooltip:** add css namespace to tooltip content ([9a97a55](https://github.com/securityscorecard/design-system/commit/9a97a558e364b21562e3a76a63a9ac5c70308e1f))
+
+# [1.16.0](https://github.com/securityscorecard/design-system/compare/v1.15.1...v1.16.0) (2023-12-06)
+
+
+### Bug Fixes
+
+* **Datatable:** update default props ([52345c7](https://github.com/securityscorecard/design-system/commit/52345c7fbc185132bd2673c71b21a96e96b139ce))
+* **DatatableV2:** set default page size to 50 ([9e6a3cb](https://github.com/securityscorecard/design-system/commit/9e6a3cbc99667c155b18c1fc091990ebca789124))
+
+
+### Features
+
+* **Datatable:** add basic styles ([9d17665](https://github.com/securityscorecard/design-system/commit/9d176651dd47fe5718d74175528575b3e3149ee4))
+* **Datatable:** add IconButton ([eb50c86](https://github.com/securityscorecard/design-system/commit/eb50c86a94bd2a566a91517d14060c7434807802))
+* **Datatable:** add sorting in column actions ([df18aa5](https://github.com/securityscorecard/design-system/commit/df18aa5d1320039064d60eaf388e8933b1ce2461))
+* **Datatable:** add styles for table header ([7388487](https://github.com/securityscorecard/design-system/commit/7388487ef5603ef28a962bab0746b14baab3e6be))
+* **Datatable:** add styles for toolbats and panels ([9981323](https://github.com/securityscorecard/design-system/commit/99813238b0ead050e81240fd26a2a88e3ec28052))
+* **DatatableV2:** add basic table skeleton ([b3334c7](https://github.com/securityscorecard/design-system/commit/b3334c7dbf1b37099844254d5a24be2eee056f87))
+* **DatatableV2:** implement column actions dropdown ([10a871f](https://github.com/securityscorecard/design-system/commit/10a871f95dcfa06702a8c10a8d40ba2c476cab79))
+* **DatatableV2:** implement column ordering ([029a2df](https://github.com/securityscorecard/design-system/commit/029a2dfc16f4a8bae09355a14756212ad4d282a9))
+* **DatatableV2:** implement column pinning ([b198482](https://github.com/securityscorecard/design-system/commit/b198482b89778441205a23231f549bdeed7a690e))
+* **DatatableV2:** implement column resizing ([4f4f1f6](https://github.com/securityscorecard/design-system/commit/4f4f1f67fb3b834607f71458ff261cff02d5233d))
+* **DatatableV2:** implement column settings panel ([d0acab3](https://github.com/securityscorecard/design-system/commit/d0acab321ed33e75c6fd1bb54260ac719d4b6901))
+* **DatatableV2:** implement column visibility ([d6724f0](https://github.com/securityscorecard/design-system/commit/d6724f03282d23b17c0931037cc2ad5901a33390))
+* **DatatableV2:** implement empty data message ([f91f990](https://github.com/securityscorecard/design-system/commit/f91f9900e1197eff2d1ad29b990e1f8d88ec6811))
+* **DatatableV2:** implement loading states ([cb11843](https://github.com/securityscorecard/design-system/commit/cb11843ea86cab5a58f1159cfcc930b9c265b587))
+* **DatatableV2:** implement pagination ([e764d2e](https://github.com/securityscorecard/design-system/commit/e764d2e35f3688efba60f47e77f34fb7f131fc44))
+* **DatatableV2:** implement rows per page select ([28b9559](https://github.com/securityscorecard/design-system/commit/28b9559a1f41060060c7b0cbca777f3f65ba2548))
+* **DatatableV2:** implement selection ([7d37a06](https://github.com/securityscorecard/design-system/commit/7d37a065ff101f9f06eed2c6aa280e289f0d3fe9))
+* **DatatableV2:** implement selection toolbar ([c1244c2](https://github.com/securityscorecard/design-system/commit/c1244c25156f303f72f660d35edaf389e2d77748))
+* **DatatableV2:** implement sorting ([10f68c9](https://github.com/securityscorecard/design-system/commit/10f68c921f2e701693f69967ceb1d514ef357c04))
+* **DatatableV2:** implement storing state in LS ([51ae576](https://github.com/securityscorecard/design-system/commit/51ae5769d496c8634e274debc6f04a03d2dbac9e))
+* **icons:** add datatable icons ([d34527d](https://github.com/securityscorecard/design-system/commit/d34527d385cc9d512bb3a575414b28687a02e04d))
+
+## [1.15.1](https://github.com/securityscorecard/design-system/compare/v1.15.0...v1.15.1) (2023-12-04)
+
+
+### Bug Fixes
+
+* **Tooltip:** fix showing empty tooltip ([2c72220](https://github.com/securityscorecard/design-system/commit/2c7222032f3c06e982a75e37883c747e27d6960f))
+
+# [1.15.0](https://github.com/securityscorecard/design-system/compare/v1.14.0...v1.15.0) (2023-12-04)
+
+
+### Bug Fixes
+
+* **Tooltip:** use radix implementation ([3bc319f](https://github.com/securityscorecard/design-system/commit/3bc319fdd2b9c3eac0f8663f242f02569c51ed80))
+
+
+### Features
+
+* **Checkbox:** make checkboxId required ([1dec284](https://github.com/securityscorecard/design-system/commit/1dec284550823a79908169c89929bdfb824a6704))
+* **Drawer:** update drawer styling ([836c18b](https://github.com/securityscorecard/design-system/commit/836c18bdfc9e18f19cc5238e319ae42131c7d762))
+
+# [1.14.0](https://github.com/securityscorecard/design-system/compare/v1.13.0...v1.14.0) (2023-11-22)
+
+
+### Bug Fixes
+
+* **Surface:** merge style prop instead of overwrite ([801322e](https://github.com/securityscorecard/design-system/commit/801322e27b392d273e6df931f2d81d42050bc923))
+
+
+### Features
+
+* **Banner:** add corner rounding ([48b462b](https://github.com/securityscorecard/design-system/commit/48b462beaf1e8f805dfc0a0821523431571f0a11))
+* **MultiValueInput:** add value delimiter prop ([987b958](https://github.com/securityscorecard/design-system/commit/987b958d3ad698e6af55dc65936027ff39c8244b))
+
+# [1.13.0](https://github.com/securityscorecard/design-system/compare/v1.12.0...v1.13.0) (2023-11-22)
+
+
+### Features
+
+* **BannerManagement:** remove Banner Management ([20bf685](https://github.com/securityscorecard/design-system/commit/20bf685c0e41f8d628f1ef8053ce72f6a3c772cb))
+
+# [1.12.0](https://github.com/securityscorecard/design-system/compare/v1.11.0...v1.12.0) (2023-11-20)
+
+
+### Features
+
+* **modals:** use bigger corner rounding ([3589bc5](https://github.com/securityscorecard/design-system/commit/3589bc5c1c363d170668290c85912d931296b6fb))
+* **Surface:** add component ([4f152cf](https://github.com/securityscorecard/design-system/commit/4f152cfe189ab2ff7d7d55a011eec346e71e4f6b))
+
+# [1.11.0](https://github.com/securityscorecard/design-system/compare/v1.10.0...v1.11.0) (2023-11-02)
+
+
+### Bug Fixes
+
+* adjust helpers typing ([2719c6b](https://github.com/securityscorecard/design-system/commit/2719c6bb7e031a08c467c017a827ae426f79c198))
+* improve typing ([bde3160](https://github.com/securityscorecard/design-system/commit/bde3160dbbaa7575832bb209be572f35119d22fd))
+* **Toast:** adjust border color ([75957b9](https://github.com/securityscorecard/design-system/commit/75957b974d7d867881e48a3af94c2a69815ceb3e))
+
+
+### Features
+
+* **Button:** add ghost variant ([5327137](https://github.com/securityscorecard/design-system/commit/53271372d3dba324859b779ead27462b4a1a8c3d))
+
 # [1.10.0](https://github.com/securityscorecard/design-system/compare/v1.9.2...v1.10.0) (2023-10-18)
 
 
