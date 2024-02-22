@@ -1,12 +1,9 @@
-import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { isNotUndefined, isString } from 'ramda-adjunct';
-import { omit, prop } from 'ramda';
 import cls from 'classnames';
+import { isNotUndefined } from 'ramda-adjunct';
 
 import {
-  createPadding,
   getColor,
   getFontFamily,
   getFontSize,
@@ -16,58 +13,55 @@ import {
   getSpace,
   pxToRem,
 } from '../../../utils';
-import { TextAreaProps } from './TextArea.types';
-import { useAutosize } from './hooks/useAutosize';
-import { useRunAfterUpdate } from './hooks/useRunAfterUpdate';
-import { SpaceSizes } from '../../../theme';
+import { Padbox } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { useAutosize } from './hooks/useAutosize';
+import { mergeRefs } from '../../../utils/mergeRefs';
 
-const TextAreaWrapper = styled.div<{ height: string }>`
-  position: relative;
-  height: ${prop('height')};
-`;
+interface TextAreaProps {
+  maxLength?: number;
+  isInvalid?: boolean;
+  isDisabled?: boolean;
+  maxHeight?: number;
+  minHeight?: number;
+}
+type TextareaStyledProps = {
+  $minHeight?: TextAreaProps['minHeight'];
+  $maxHeight?: TextAreaProps['maxHeight'];
+};
+type TextareaRootProps = {
+  $minHeight?: TextAreaProps['minHeight'];
+  $maxHeight?: TextAreaProps['maxHeight'];
+  $isDisabled?: TextAreaProps['isDisabled'];
+  $isInvalid?: TextAreaProps['isInvalid'];
+};
 
-const StyledTextArea = styled.textarea<{
-  height: string;
-  isInvalid: boolean;
-  hasMaxLength: boolean;
-}>`
-  resize: none;
+const TextareaStyled = styled.textarea<TextareaStyledProps>`
+  display: block;
+  border: 0 none;
   width: 100%;
+  background-color: transparent;
+  resize: none;
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('lg')};
-  height: ${prop('height')};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
-  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
-  ${({ hasMaxLength, theme }) =>
-    hasMaxLength
-      ? css`
-          ${createPadding({ paddingSize: SpaceSizes.md, theme })};
-          padding-bottom: ${getSpace(SpaceSizes.lg)};
-        `
-      : createPadding({ paddingSize: SpaceSizes.md, theme })};
-  ${({ isInvalid }) =>
-    isInvalid &&
-    css`
-      border-color: ${getFormStyle('invalidBorderColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
-    `};
+  padding: 0;
 
-  &:disabled {
-    background: ${getFormStyle('disabledBgColor')};
-    border-color: ${getFormStyle('disabledBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBgColor')};
-  }
+  ${({ $minHeight }) =>
+    $minHeight &&
+    css`
+      min-height: ${pxToRem($minHeight)};
+    `};
+  ${({ $maxHeight }) =>
+    $maxHeight &&
+    css`
+      max-height: ${pxToRem($maxHeight)};
+    `};
 
   &:focus {
     outline: none;
-    border-color: ${getFormStyle('focusBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
   }
-
   ::placeholder,
   ::-webkit-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
@@ -77,93 +71,117 @@ const StyledTextArea = styled.textarea<{
   }
 `;
 
-const Counter = styled.span<{ isInvalid: boolean }>`
+const TextareaRoot = styled(Padbox)<TextareaRootProps>`
+  position: relative;
+  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+  border-radius: ${getRadii('default')};
+  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
+  color: ${getFormStyle('color')};
+  cursor: text;
+
+  ${({ $hasMaxLength }) =>
+    $hasMaxLength &&
+    css`
+      padding-bottom: ${getSpace('lg')};
+    `};
+  ${({ $isDisabled }) =>
+    $isDisabled &&
+    css`
+      background: ${getFormStyle('disabledBgColor')};
+      border-color: ${getFormStyle('disabledBorderColor')};
+      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBgColor')};
+    `};
+  ${({ $isInvalid }) =>
+    $isInvalid &&
+    css`
+      border-color: ${getFormStyle('invalidBorderColor')};
+      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
+    `};
+
+  &:focus-within {
+    outline: none;
+    border-color: ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
+  }
+`;
+
+const Counter = styled.span<{ $isInvalid: boolean }>`
   position: absolute;
-  right: ${pxToRem(15)};
-  bottom: ${pxToRem(10)};
+  right: ${pxToRem(14)};
+  bottom: ${pxToRem(8)};
   font-size: ${getFontSize('md')};
-  color: ${getColor('neutral.700')};
-  background: ${getFormStyle('bgColor')};
-  ${({ isInvalid }) =>
-    isInvalid &&
+  color: ${getColor('text.secondary')};
+
+  ${({ $isInvalid }) =>
+    $isInvalid &&
     css`
       color: ${getFormStyle('invalidBorderColor')};
     `}
 `;
 
-const TextArea: React.FC<
-  TextAreaProps & React.PropsWithRef<JSX.IntrinsicElements['textarea']>
-> = ({
-  maxLength,
-  isInvalid = false,
-  isDisabled = false,
-  style,
-  className,
-  ...props
-}) => {
-  const { value, defaultValue, onChange } = props as {
-    value: string;
-    defaultValue: string;
-    onChange: React.ChangeEventHandler;
-  };
-  const textAreaRef = useRef<HTMLTextAreaElement>();
-  const isControlled = isNotUndefined(value) && isString(value);
-  const { text, parentHeight, textAreaHeight, autosize } = useAutosize(
-    textAreaRef,
-    value ?? defaultValue ?? '',
-  );
-  const [currentValueLength, setCurrentValueLength] = useState(text.length);
-  const runAfterUpdate = useRunAfterUpdate();
+const getHeightBoundary = (height: number, hasMaxLength: boolean) =>
+  height - (hasMaxLength ? 32 : 16) - 16; // height - bottom padding (lg of md) - top padding
 
-  const handleOnChange = (e) => {
-    onChange?.(e);
-    if (isControlled) {
-      runAfterUpdate(() => {
-        setCurrentValueLength(textAreaRef.current.value.length);
-        autosize();
-      });
-    } else {
-      setCurrentValueLength(textAreaRef.current.value.length);
-      autosize();
-    }
-  };
+const TextArea = forwardRef<
+  HTMLTextAreaElement,
+  TextAreaProps & Omit<ComponentPropsWithoutRef<'textarea'>, 'disabled'>
+>(
+  (
+    {
+      maxLength,
+      isInvalid,
+      isDisabled,
+      className,
+      maxHeight = 600,
+      minHeight,
+      ...props
+    },
+    ref,
+  ) => {
+    const { value, defaultValue, ...rest } = props;
+    const [val, setVal] = useState((defaultValue as string) || '');
+    const [textAreaRef, setTextAreaRef] = useState(null);
+    const combinedRefs = mergeRefs(ref, setTextAreaRef);
+    const isControlled = value !== undefined;
+    const currentValueLength = isControlled
+      ? (value as string).length
+      : val.length;
+    const isFieldInvalid = isInvalid || currentValueLength > maxLength;
+    const hasMaxLength = isNotUndefined(maxLength);
+    useAutosize(textAreaRef, isControlled ? (value as string) : val);
 
-  const isFieldInvalid = isInvalid || currentValueLength > maxLength;
-
-  return (
-    <TextAreaWrapper
-      className={cls(CLX_COMPONENT, className)}
-      height={parentHeight}
-      style={style}
-    >
-      <StyledTextArea
-        ref={textAreaRef}
-        disabled={isDisabled}
-        hasMaxLength={isNotUndefined(maxLength)}
-        height={textAreaHeight}
-        isInvalid={isFieldInvalid}
-        value={text}
-        onChange={handleOnChange}
-        {...omit(['onChange', 'defaultValue'], props)}
-      />
-      {isNotUndefined(maxLength) && (
-        <Counter isInvalid={isFieldInvalid}>
-          {maxLength - currentValueLength}
-        </Counter>
-      )}
-    </TextAreaWrapper>
-  );
-};
-
-TextArea.propTypes = {
-  maxLength: PropTypes.number,
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
-  style: PropTypes.shape({}),
-  className: PropTypes.string,
-  onChange: PropTypes.func,
-};
+    return (
+      <TextareaRoot
+        $hasMaxLength={hasMaxLength}
+        $isDisabled={isDisabled}
+        $isInvalid={isFieldInvalid}
+        className={cls(CLX_COMPONENT, className)}
+        paddingSize="md"
+        onClick={() => {
+          textAreaRef.focus();
+        }}
+      >
+        <TextareaStyled
+          ref={combinedRefs}
+          {...rest}
+          $maxHeight={getHeightBoundary(maxHeight, hasMaxLength)}
+          $minHeight={getHeightBoundary(minHeight, hasMaxLength)}
+          disabled={isDisabled}
+          {...(!isControlled
+            ? {
+                value: val,
+                onChange: (e) => setVal(e.target.value),
+              }
+            : {})}
+        />
+        {isNotUndefined(maxLength) && (
+          <Counter $isInvalid={isFieldInvalid}>
+            {maxLength - currentValueLength}
+          </Counter>
+        )}
+      </TextareaRoot>
+    );
+  },
+);
 
 export default TextArea;
