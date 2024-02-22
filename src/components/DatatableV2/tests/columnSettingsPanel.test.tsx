@@ -121,7 +121,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
     expect(screen.getAllByRole('columnheader')).toHaveLength(3);
   });
 
-  it('should hide all column', async () => {
+  it('should hide all column except one', async () => {
     renderWithProviders(
       <Datatable
         data={data}
@@ -140,8 +140,8 @@ describe('DatatableV2/columnSettingsPanel', () => {
         name: /Hide all columns/i,
       }),
     );
-
-    expect(screen.queryByRole('columnheader')).not.toBeInTheDocument();
+    // eslint-disable-next-line jest-dom/prefer-in-document
+    expect(screen.getAllByRole('columnheader')).toHaveLength(1);
   });
 
   it('should pin column in table', async () => {
