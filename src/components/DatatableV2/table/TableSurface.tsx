@@ -19,7 +19,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         '--sscds-table-transition':
           'all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53), outline 0ms',
         '--sscds-table-color-background': 'var(--sscds-background)',
-        '--sscds-table-color-border': 'var(--sscds-borderColor)',
+        '--sscds-table-color-border': 'var(--sscds-border-color)',
         '--sscds-table-color-zebra': getColor('neutral.50', { theme }),
         '--sscds-table-color-accent': getColor('primary.500', { theme }),
         '--sscds-table-color-settings-background':

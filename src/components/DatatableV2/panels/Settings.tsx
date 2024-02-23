@@ -78,7 +78,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
       <Padbox
         as="header"
         paddingSize="mdPlus"
-        style={{ borderBottom: '1px solid var(--sscds-borderColor' }}
+        style={{ borderBottom: '1px solid var(--sscds-border-color' }}
       >
         <Inline align="center" gap="md" justify="space-between">
           <Inline align="center" gap="md">

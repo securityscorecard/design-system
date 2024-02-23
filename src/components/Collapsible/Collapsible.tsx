@@ -38,7 +38,7 @@ const HeaderContent = styled.div`
 `;
 
 const Content = styled(Padbox)`
-  border-top: 1px solid var(--sscds-borderColor);
+  border-top: 1px solid var(--sscds-border-color);
 `;
 
 const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
