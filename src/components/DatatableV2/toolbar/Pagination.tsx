@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useContainerQuery } from 'react-container-query';
 
 import { abbreviateNumber, getFormStyle, getRadii } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
 import IconButton from '../buttons/IconButton';
 import { DatatableInstance } from '../Datatable.types';
 
-const PaginationRoot = styled(Padbox)`
-  border-top: 1px solid var(--sscds-table-color-border);
-`;
+const cq = {
+  sm: {
+    maxWidth: 512,
+  },
+  md: {
+    minWidth: 513,
+    maxWidth: 720,
+  },
+};
+
 const Select = styled.select`
   border: 1px solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
@@ -38,10 +46,18 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
+  // @ts-expect-error types of react-container-query wrongly marks second arg as required
+  const [cqParams, containerRef] = useContainerQuery(cq);
+  const isLg = !cqParams.sm && !cqParams.md;
+
   return (
-    <PaginationRoot className="ds-table-pagination-toolbar" paddingSize="md">
+    <Padbox
+      ref={containerRef}
+      className="ds-table-pagination-toolbar"
+      paddingSize="md"
+    >
       <Inline align="center" gap="md" justify="space-between">
-        {enableRowsPerPage && (
+        {enableRowsPerPage && !cqParams.sm && (
           <Inline
             align="center"
             className="ds-table-pagination-rows-per-page-wrapper"
@@ -51,7 +67,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
               className="ds-table-pagination-rows-per-page-label"
               htmlFor="rowsPerPageSelect"
             >
-              Number of rows
+              {cqParams.md ? 'Rows' : 'Number of rows'}
             </label>
             <Select
               className="ds-table-pagination-rows-per-page-select"
@@ -74,20 +90,20 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
           </Inline>
         )}
         <div className="ds-table-pagination-item-count">
-          Showing {(firstRowIndex + 1).toLocaleString('en-US')}-
+          {(firstRowIndex + 1).toLocaleString('en-US')}-
           {lastRowIndex.toLocaleString('en-US')} of{' '}
           <abbr title={totalRowCount.toString()}>
             {abbreviateNumber(totalRowCount)}
-          </abbr>{' '}
-          total items
+          </abbr>
+          {isLg && ' total items'}
         </div>
         <Inline
           align="center"
           className="ds-table-pagination-buttons-wrapper"
-          gap="md"
+          gap="sm"
         >
           <span className="ds-table-pagination-buttons-current-page">
-            Page {currentPage}
+            {!isLg ? 'Pg.' : 'Page'} {currentPage}
           </span>
           <IconButton
             className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
@@ -120,7 +136,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
           />
         </Inline>
       </Inline>
-    </PaginationRoot>
+    </Padbox>
   );
 };
 
