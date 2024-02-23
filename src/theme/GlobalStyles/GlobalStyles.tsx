@@ -137,6 +137,8 @@ export default createGlobalStyle`
     outline: ${getToken('action-focus-ring')};
   }
   :root {
-    ${generateColorsCSSVars}
+    ${generateColorsCSSVars};
+    --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --sscds-action-transition: all 300ms var(--sscds-transition-fn),outline 0ms;
   }
 `;
