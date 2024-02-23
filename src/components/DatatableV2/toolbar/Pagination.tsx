@@ -91,30 +91,30 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
           </span>
           <IconButton
             className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
-            disabled={!getCanPreviousPage()}
             iconName="backward-step"
+            isDisabled={!getCanPreviousPage()}
             label="Go to the first page of table"
             onClick={() => setPageIndex(0)}
           />
           <IconButton
             className="ds-table-pagination-buttons-prev-button ds-table-pagination-buttons-button"
-            disabled={!getCanPreviousPage()}
             iconName="angle-left"
+            isDisabled={!getCanPreviousPage()}
             label="Go to the previous page of table"
             onClick={() => previousPage()}
           />
           <IconButton
             className="ds-table-pagination-buttons-next-button ds-table-pagination-buttons-button"
-            disabled={!getCanNextPage()}
             iconName="angle-right"
+            isDisabled={!getCanNextPage()}
             label="Go to the next page of table"
             onClick={() => nextPage()}
           />
           <IconButton
             className="ds-table-pagination-buttons-last-button ds-table-pagination-buttons-button"
-            disabled={!getCanNextPage()}
             iconName="backward-step"
             iconProps={{ rotation: 180 }}
+            isDisabled={!getCanNextPage()}
             label="Go to the last page of table"
             onClick={() => setPageIndex(lastPage)}
           />
