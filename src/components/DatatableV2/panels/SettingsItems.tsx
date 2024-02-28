@@ -82,9 +82,11 @@ const screenReaderAnnouncements = <D,>(allColumns: DatatableColumn<D>[]) => {
 const SettingsItems = <D,>({
   allColumns,
   table,
+  canHideMoreColumns,
 }: {
   allColumns: DatatableColumn<D>[];
   table: DatatableInstance<D>;
+  canHideMoreColumns: boolean;
 }) => {
   const { getState, setColumnOrder } = table;
   const { columnOrder } = getState();
@@ -120,7 +122,12 @@ const SettingsItems = <D,>({
       >
         <div>
           {allColumns.map((column) => (
-            <SettingsItem key={column.id} column={column} table={table} />
+            <SettingsItem
+              key={column.id}
+              canColumnHide={canHideMoreColumns}
+              column={column}
+              table={table}
+            />
           ))}
         </div>
       </SortableContext>

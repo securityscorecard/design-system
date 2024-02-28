@@ -9,9 +9,11 @@ import { DatatableColumn, DatatableInstance } from '../Datatable.types';
 const SettingsItem = <D,>({
   column,
   table,
+  canColumnHide,
 }: {
   column: DatatableColumn<D>;
   table: DatatableInstance<D>;
+  canColumnHide: boolean;
 }) => {
   const {
     options: { enableColumnPinning, enableHiding, enableColumnOrdering },
@@ -59,7 +61,10 @@ const SettingsItem = <D,>({
                 column.columnDef.header
               } column`}
               checked={column.getIsVisible()}
-              disabled={!column.getCanHide()}
+              disabled={
+                (!canColumnHide && column.getIsVisible()) ||
+                !column.getCanHide()
+              }
               type="checkbox"
               onChange={(e) => column.toggleVisibility(e.target.checked)}
             />

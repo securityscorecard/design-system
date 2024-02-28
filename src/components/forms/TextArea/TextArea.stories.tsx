@@ -1,58 +1,70 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import React, { useState } from 'react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import TextArea from './TextArea';
-import { TextAreaProps } from './TextArea.types';
 
 export default {
   title: 'components/forms/TextArea',
   component: TextArea,
-  argTypes: {
-    maxLength: {
-      description: 'Sets maximal length of text and enables characters counter',
-    },
-    placeholder: { control: 'text', table: { type: { summary: 'string' } } },
-    defaultValue: { control: 'text', table: { type: { summary: 'string' } } },
-  },
-} as Meta;
+} as ComponentMeta<typeof TextArea>;
 
-export const Playground: Story<TextAreaProps> = (args) => (
-  <TextArea {...args} aria-label="Text" />
-);
+type Story = ComponentStory<typeof TextArea>;
+const Template: Story = (args) => <TextArea aria-label="Text" {...args} />;
+
+export const Playground: Story = Template.bind({});
 Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => <TextArea aria-label="Text" />;
+export const Default: Story = Template.bind({});
 
-export const Filled: Story = () => (
-  <TextArea aria-label="Text" defaultValue="DefaultValue text" />
-);
+export const Filled: Story = Template.bind({});
+Filled.args = {
+  defaultValue: 'DefaultValue text',
+};
 
-export const WithMaxLength: Story = () => (
-  <TextArea aria-label="Text" maxLength={100} />
-);
+export const WithMaxLength: Story = Template.bind({});
+WithMaxLength.args = {
+  maxLength: 100,
+};
 
-export const WithPlaceholder: Story = () => (
-  <TextArea aria-label="Text" placeholder="Your comment..." />
-);
+export const WithPlaceholder: Story = Template.bind({});
+WithPlaceholder.args = { placeholder: 'Your comment...' };
 
-export const Invalid: Story = () => (
-  <TextArea
-    aria-label="Text"
-    defaultValue="Text over 10 characters limit"
-    maxLength={10}
-    isInvalid
-  />
-);
+export const Invalid: Story = Template.bind({});
+Invalid.args = {
+  defaultValue: 'Text over 10 characters limit',
+  maxLength: 10,
+  isInvalid: true,
+};
 
-export const Disabled: Story = () => <TextArea aria-label="Text" isDisabled />;
+export const Disabled: Story = Template.bind({});
+Disabled.args = { isDisabled: true };
 
 const lipsum = `Donec sed nunc sed leo vestibulum pretium. Aenean sollicitudin velit neque. Curabitur placerat, velit sit amet lobortis condimentum, libero tortor ullamcorper quam, nec porttitor massa sem quis tellus. Sed feugiat nec libero a fermentum. Vivamus laoreet sapien convallis, interdum sapien vitae, lobortis eros. Ut interdum dui ut mauris malesuada, vitae pellentesque est fermentum. Cras quis erat est. Proin tempus a leo ut pulvinar. Nulla scelerisque tempor mollis. Etiam quis dolor non diam sollicitudin mollis eu vitae nisl. Vestibulum bibendum augue vel justo fringilla, sed ultrices libero congue. Maecenas nec erat ac ante mollis eleifend. Sed ut mattis metus. Nullam molestie, diam blandit aliquam tincidunt, magna leo auctor diam, vel eleifend risus ex vel tortor. Donec ornare pellentesque urna quis volutpat. Donec dictum, arcu id luctus tincidunt, arcu purus venenatis lorem, at imperdiet orci lacus a metus.`;
-export const Autosize: Story = () => (
-  <TextArea aria-label="Text" defaultValue={lipsum} />
-);
+export const Autosize: Story = Template.bind({});
+Autosize.args = { defaultValue: lipsum };
 
-export const WithCustomWidth: Story = () => (
-  <TextArea aria-label="Text" maxLength={100} style={{ width: '60ch' }} />
-);
+export const WithMinHeight: Story = Template.bind({});
+WithMinHeight.args = { minHeight: 300 };
+
+export const WithMaxHeight: Story = Template.bind({});
+WithMaxHeight.args = { ...Autosize.args, maxHeight: 150 };
+
+export const ControlledInput: Story = (args) => {
+  const [value, setValue] = useState(lipsum);
+
+  return (
+    <TextArea
+      aria-label="Text"
+      {...args}
+      value={value}
+      onChange={(e) => {
+        setValue(e.target.value);
+      }}
+    />
+  );
+};
+ControlledInput.parameters = {
+  screenshot: { skip: true },
+};

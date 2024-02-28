@@ -104,8 +104,8 @@ const BaseStyledButton = styled(Padbox).withConfig({
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
-  transition: all 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53),
-    transform 50ms cubic-bezier(0.55, 0.085, 0.68, 0.53), outline 0ms;
+  transition: var(--sscds-action-transition),
+    transform 50ms var(--sscds-transition-fn);
 
   ${({ $margin }) => createMarginSpacing($margin)};
   ${({ $isExpanded }) => $isExpanded && 'width: 100%;'};

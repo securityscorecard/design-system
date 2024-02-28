@@ -1,39 +1,26 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { isNotUndefined } from 'ramda-adjunct';
-import { path } from 'ramda';
-
-const getHeight = (ref) => {
-  const scrollHeight = path(['current', 'scrollHeight'])(ref);
-  return isNotUndefined(scrollHeight) ? `${scrollHeight + 2}px` : 'auto';
-};
+/* eslint-disable no-param-reassign */
+import { useCallback, useEffect, useLayoutEffect } from 'react';
 
 export const useAutosize = (
-  ref: React.MutableRefObject<HTMLTextAreaElement>,
+  textAreaRef: HTMLTextAreaElement | null,
   value: string,
-): {
-  text: string;
-  parentHeight: string;
-  textAreaHeight: string;
-  autosize: () => void;
-} => {
-  const [text, setText] = useState(value);
-  const [textAreaHeight, setTextAreaHeight] = useState('auto');
-  const [parentHeight, setParentHeight] = useState('auto');
-
+) => {
+  const setHeight = useCallback(() => {
+    if (textAreaRef) {
+      textAreaRef.style.height = 'auto';
+      textAreaRef.style.height = `${textAreaRef.scrollHeight}px`;
+    }
+  }, [textAreaRef]);
   useLayoutEffect(() => {
-    const height = getHeight(ref);
+    setHeight();
+  }, [setHeight, value]);
 
-    setParentHeight(height);
-    setTextAreaHeight(height);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text]);
-
-  const autosize = () => {
-    const height = getHeight(ref);
-    setTextAreaHeight('auto');
-    setParentHeight(height);
-    setText(ref.current.value);
-  };
-
-  return { text, parentHeight, textAreaHeight, autosize };
+  useEffect(() => {
+    window.addEventListener('resize', setHeight);
+    document.fonts.addEventListener('loadingdone', setHeight);
+    return () => {
+      window.removeEventListener('resize', setHeight);
+      document.fonts.removeEventListener('loadingdone', setHeight);
+    };
+  }, [setHeight]);
 };

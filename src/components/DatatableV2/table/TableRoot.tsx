@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getColor, getFontSize, getRadii, pxToRem } from '../../../utils';
+import { getColor, getFontSize, getRadii } from '../../../utils';
 
 const TableRoot = styled.div`
   position: relative;
@@ -68,7 +68,6 @@ const TableRoot = styled.div`
     position: relative;
     justify-content: center;
     padding: var(--sscds-table-spacing-cell-header);
-    /* height: ${pxToRem(60)}; */
 
     &:not(:first-of-type) {
       border-left: 1px solid var(--sscds-table-color-border) !important;
@@ -97,7 +96,7 @@ const TableRoot = styled.div`
       bottom: 0;
       right: 0;
       opacity: 0;
-      transition: var(--sscds-table-transition);
+      transition: var(--sscds-action-transition);
     }
 
     .ds-table-header-cell-sort-button {
