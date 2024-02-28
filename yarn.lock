@@ -4235,7 +4235,7 @@ __metadata:
     ramda: ^0.28.0
     ramda-adjunct: ^3.0.0
     react: ^16.14.0
-    react-container-query: ^0.12.0
+    react-container-query: ^0.13.0
     react-cool-portal: ^1.2.0
     react-datepicker: ^4.6.0
     react-dom: ^16.14.0
@@ -18326,16 +18326,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-container-query@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "react-container-query@npm:0.12.0"
+"react-container-query@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "react-container-query@npm:0.13.0"
   dependencies:
     container-query-toolkit: 0.1.3
     resize-observer-lite: 0.2.3
   peerDependencies:
-    react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
-    react-dom: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
-  checksum: 3c059c7f8099bd4fb616ca0d7bac3ba5e348af1e6f541e5c32d1f3fbad79181429193ec97b037c685cfc5df27120125e1938597ee268871f64eb93cfcda0703a
+    react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0 || ^17 || ^18
+    react-dom: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0 || ^17 || ^18
+  checksum: deabed7dc001197f5b7bcf89bc7e94fb25bfa2fd21c2b5a1df585b3a08e0b781fb45df13bf3a83014c4ed39bd7a5f7ffbd0a300974e0e29edd9fdbd327921975
   languageName: node
   linkType: hard
 
