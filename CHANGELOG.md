@@ -1,3 +1,19 @@
+# [1.22.0](https://github.com/securityscorecard/design-system/compare/v1.21.0...v1.22.0) (2024-02-28)
+
+
+### Bug Fixes
+
+* **DatatableV2:** prevent hiding all columns ([cba1984](https://github.com/securityscorecard/design-system/commit/cba1984816e376a816832ea1e53152782895e0a8))
+* **DatatableV2:** remove border around pagination panel ([54c2dc1](https://github.com/securityscorecard/design-system/commit/54c2dc1bc23b5e0fdfa1cbb205823537b818519a))
+* **Surface:** apply lighter background to dynamic variant ([1b776be](https://github.com/securityscorecard/design-system/commit/1b776be0998341acd401305116743ca5569181ef))
+* **theme:** expose colors as CSS variables ([08c9583](https://github.com/securityscorecard/design-system/commit/08c9583d9d7b56a61e058d3e07ecfc35929d3b77))
+
+
+### Features
+
+* **DatatableV2:** add pagination breakpoints for smaller containers ([5f99d69](https://github.com/securityscorecard/design-system/commit/5f99d69498b27345f6b2452fe7baf655bdf58378))
+* **TextArea:** simplify implementation of TextArea ([81713ff](https://github.com/securityscorecard/design-system/commit/81713ff7ce685605fcd9556e5bbeb71882c7df7c))
+
 # [1.21.0](https://github.com/securityscorecard/design-system/compare/v1.20.3...v1.21.0) (2024-02-14)
 
 
