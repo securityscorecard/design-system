@@ -65,6 +65,3 @@ export const ControlledInput: Story = (args) => {
     />
   );
 };
-ControlledInput.parameters = {
-  screenshot: { skip: true },
-};

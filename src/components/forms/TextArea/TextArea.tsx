@@ -119,8 +119,13 @@ const Counter = styled.span<{ $isInvalid: boolean }>`
     `}
 `;
 
-const getHeightBoundary = (height: number, hasMaxLength: boolean) =>
-  height - (hasMaxLength ? 32 : 16) - 16; // height - bottom padding (lg of md) - top padding
+const getHeightBoundary = (
+  height: number | undefined,
+  hasMaxLength: boolean,
+): number | null =>
+  height
+    ? height - (hasMaxLength ? 32 : 16) - 16 // height - bottom padding (lg of md) - top padding
+    : null;
 
 const TextArea = forwardRef<
   HTMLTextAreaElement,
@@ -172,7 +177,7 @@ const TextArea = forwardRef<
                 value: val,
                 onChange: (e) => setVal(e.target.value),
               }
-            : {})}
+            : { value })}
         />
         {isNotUndefined(maxLength) && (
           <Counter $isInvalid={isFieldInvalid}>
