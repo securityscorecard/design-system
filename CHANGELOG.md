@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/securityscorecard/design-system/compare/v1.22.0...v1.22.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* **TextArea:** pass value into controlled input ([a7214aa](https://github.com/securityscorecard/design-system/commit/a7214aaf12e8bcb629f7ab2b6e440943f5d44e05))
+
 # [1.22.0](https://github.com/securityscorecard/design-system/compare/v1.21.0...v1.22.0) (2024-02-28)
 
 
