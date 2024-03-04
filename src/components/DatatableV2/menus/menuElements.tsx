@@ -40,10 +40,9 @@ export const MenuItem = ({
   className,
 }: {
   children: string;
-  /* eslint-disable @typescript-eslint/ban-types */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   iconName: SSCIcons | (string & {});
-  iconType?: SSCIconTypes | (string & {});
-  /* eslint-enable @typescript-eslint/ban-types */
+  iconType?: SSCIconTypes;
   onClick: (event: Event) => void;
   isDisabled?: boolean;
   className?: string;

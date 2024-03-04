@@ -3,7 +3,7 @@ import type { To } from 'history';
 import { DefaultTheme } from 'styled-components';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
-import { Types as IconTypes, SSCIcons } from '../../Icon/Icon.types';
+import { BaseIconProps } from '../../Icon/Icon.types';
 import {
   BaseButtonColors,
   BaseButtonSizes,
@@ -15,12 +15,6 @@ export type Variants =
   typeof BaseButtonVariants[keyof typeof BaseButtonVariants];
 export type Sizes = typeof BaseButtonSizes[keyof typeof BaseButtonSizes];
 export type Colors = typeof BaseButtonColors[keyof typeof BaseButtonColors];
-
-export interface BaseIcon {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  name: SSCIcons | (string & {});
-  type?: IconTypes;
-}
 
 export interface BaseButtonProps
   extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'as'> {
@@ -35,12 +29,12 @@ export interface BaseButtonProps
   href?: string;
   to?: To;
   className?: string;
-  iconStart?: BaseIcon;
-  iconEnd?: BaseIcon;
+  iconStart?: BaseIconProps;
+  iconEnd?: BaseIconProps;
   /** @deprecated Use iconStart property instead */
-  iconName?: SSCIcons | string;
+  iconName?: BaseIconProps['name'];
   /** @deprecated Use iconStart property instead */
-  iconType?: IconTypes | string;
+  iconType?: BaseIconProps['type'];
   loadingText?: string;
   tabIndex?: number;
 }

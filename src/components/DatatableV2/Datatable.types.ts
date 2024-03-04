@@ -181,10 +181,9 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
 
 export type DatatableRowAction<D> = null | {
   label: string;
-  /* eslint-disable @typescript-eslint/ban-types */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   iconName: SSCIcons | (string & {});
-  iconType?: SSCIconTypes | (string & {});
-  /* eslint-enable @typescript-eslint/ban-types */
+  iconType?: SSCIconTypes;
   onClick(props: {
     row: DatatableRow<D>;
     table: DatatableInstance<D>;
