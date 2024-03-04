@@ -1,15 +1,16 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Callout from './Callout';
-import { CalloutProps } from './Callout.types';
 import { Link, Strong } from '../typographyLegacy';
+import { Icon } from '../Icon';
 
 export default {
   title: 'components/Callout',
   component: Callout,
-  argTypes: {},
-} as Meta;
+} as ComponentMeta<typeof Callout>;
+
+type Story = ComponentStory<typeof Callout>;
 
 const content = (
   <>
@@ -18,19 +19,19 @@ const content = (
   </>
 );
 
-const CalloutTemplate: Story<CalloutProps> = (args) => <Callout {...args} />;
+const CalloutTemplate = (args) => <Callout {...args} />;
 
-export const Playground = CalloutTemplate.bind({});
+export const Playground: Story = CalloutTemplate.bind({});
 Playground.args = {
   children: content,
 };
 Playground.parameters = { screenshot: { skip: true } };
 
-export const InfoCallout = CalloutTemplate.bind({});
+export const InfoCallout: Story = CalloutTemplate.bind({});
 InfoCallout.args = Playground.args;
 
-export const NeutralCallout = CalloutTemplate.bind({});
+export const NeutralCallout: Story = CalloutTemplate.bind({});
 NeutralCallout.args = { ...Playground.args, color: 'neutral' };
 
-export const WithIcon = CalloutTemplate.bind({});
-WithIcon.args = { ...Playground.args, icon: 'wrench' };
+export const WithIcon: Story = CalloutTemplate.bind({});
+WithIcon.args = { ...Playground.args, icon: <Icon name="wrench" /> };

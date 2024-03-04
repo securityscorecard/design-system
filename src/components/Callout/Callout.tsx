@@ -15,9 +15,11 @@ import { CLX_COMPONENT } from '../../theme/constants';
 
 const CalloutIconNeutral = css`
   background-color: ${getColor(ColorTypes.neutral300)};
+  color: ${getColor(ColorTypes.neutral700)};
 `;
 const CalloutIconInfo = css`
   background-color: ${getColor(ColorTypes.info100)};
+  color: ${getColor(ColorTypes.info700)};
 `;
 const calloutIconColors = {
   [CalloutColors.neutral]: CalloutIconNeutral,
@@ -53,11 +55,11 @@ const Container = styled(Padbox)<CalloutContainerProps>`
   ${({ $color }) => calloutColors[$color]};
 `;
 
-const Callout: React.FC<CalloutProps> = ({
+const Callout = ({
   children,
   icon = SSCIconNames.lightbulb,
   color = CalloutColors.info,
-}) => (
+}: CalloutProps) => (
   <Container
     $color={color}
     className={CLX_COMPONENT}
@@ -65,16 +67,7 @@ const Callout: React.FC<CalloutProps> = ({
   >
     <Inline gap={SpaceSizes.md}>
       <IconContainer $color={color}>
-        {typeof icon === 'string' ? (
-          <Icon
-            color={
-              color === 'info' ? ColorTypes.info700 : ColorTypes.neutral700
-            }
-            name={icon}
-          />
-        ) : (
-          icon
-        )}
+        {typeof icon === 'string' ? <Icon name={icon} /> : icon}
       </IconContainer>
       <Text style={{ alignSelf: 'center' }}>{children}</Text>
     </Inline>
