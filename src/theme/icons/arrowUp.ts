@@ -1,14 +1,22 @@
+/*!
+ * Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2023 Fonticons, Inc.
+ */
+
+/* solid - arrow-up */
+
 import {
   IconDefinition,
   IconName,
   IconPrefix,
 } from '@fortawesome/fontawesome-svg-core';
 
-export const width = 9;
-export const height = 13;
+export const width = 384;
+export const height = 512;
 export const unicode = 'e007';
 export const svgPathData =
-  'M 3.616 1.866 L 4.324 1.159 C 4.421 1.061 4.579 1.061 4.677 1.159 L 8.053 4.534 C 8.17 4.652 8.17 4.841 8.053 4.959 L 7.593 5.418 C 7.476 5.535 7.286 5.535 7.169 5.418 L 5.125 3.375 L 5.125 11.68 C 5.125 11.846 4.991 11.98 4.825 11.98 L 4.175 11.98 C 4.009 11.98 3.875 11.846 3.875 11.68 L 3.875 3.385 L 1.831 5.428 C 1.714 5.545 1.524 5.545 1.407 5.428 L 0.947 4.968 C 0.83 4.851 0.83 4.661 0.947 4.544 L 3.621 1.871 Z';
+  'M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z';
 
 export const arrowUp = {
   prefix: 'ssc' as IconPrefix,

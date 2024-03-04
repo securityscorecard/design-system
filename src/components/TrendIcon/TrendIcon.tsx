@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { partialRight, pipe, prop } from 'ramda';
 
 import { Icon } from '../Icon';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
@@ -8,9 +7,9 @@ import { ColorTypes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 
 const IconRotation = {
-  positive: '45deg',
-  negative: '135deg',
-  stable: '0deg',
+  positive: 'rotate-45',
+  negative: 'rotate-135',
+  stable: '',
 };
 
 const IconBackgroundColor = {
@@ -26,19 +25,16 @@ const FontColor = {
 };
 
 const IconWrapper = styled.div<{ type: string }>`
-  transform: rotate(${pipe(prop('type'), partialRight(prop, [IconRotation]))});
-  background: ${pipe(
-    prop('type'),
-    partialRight(prop, [IconBackgroundColor]),
-    getColor,
-  )};
+  background: ${({ type, theme }) =>
+    getColor(IconBackgroundColor[type])({ theme })};
   width: ${pxToRem(20)};
   height: ${pxToRem(20)};
   border-radius: ${getRadii('circle')};
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${getFontSize('lg')};
+  font-size: ${({ type, theme }) =>
+    getFontSize(type === 'stable' ? 'lg' : 'md')({ theme })};
 `;
 
 export const TrendIcon = React.forwardRef<
@@ -48,7 +44,12 @@ export const TrendIcon = React.forwardRef<
   const icon = type === 'stable' ? SSCIconNames.minus : SSCIconNames.arrowUp;
   return (
     <IconWrapper ref={ref} type={type}>
-      <Icon color={FontColor[type]} name={icon} />
+      <Icon
+        color={FontColor[type]}
+        name={icon}
+        title={type}
+        transform={IconRotation[type]}
+      />
     </IconWrapper>
   );
 });
