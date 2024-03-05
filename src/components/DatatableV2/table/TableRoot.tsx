@@ -74,12 +74,13 @@ const TableRoot = styled.div`
     }
 
     .ds-table-header-cell-title {
+      text-align: left;
       font-weight: var(--sscds-table-typography-weight-header);
-      text-overflow: ellipsis;
-
-      &:hover {
-        text-overflow: clip;
-      }
+      /* stylelint-disable value-no-vendor-prefix, property-no-vendor-prefix*/
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      /* stylelint-enable value-no-vendor-prefix, property-no-vendor-prefix */
     }
 
     .ds-table-header-cell-resize-handler {
