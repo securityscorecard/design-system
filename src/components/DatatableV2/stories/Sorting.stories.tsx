@@ -19,8 +19,8 @@ SortingEnabled.args = Template.args;
 export const DisabledSorting: Story = Template.bind({});
 DisabledSorting.args = { ...Template.args, enableSorting: false };
 
-export const DisabledMultiSorting: Story = Template.bind({});
-DisabledMultiSorting.args = { ...Template.args, enableMultiSort: false };
+export const EnabledMultiSorting: Story = Template.bind({});
+EnabledMultiSorting.args = { ...Template.args, enableMultiSort: true };
 
 export const DisabledSortingForColumn: Story = Template.bind({});
 DisabledSortingForColumn.args = {
@@ -39,7 +39,7 @@ DisabledSortingRemoval.args = {
 
 export const InitialSorting: Story = Template.bind({});
 InitialSorting.args = {
-  ...Template.args,
+  ...EnabledMultiSorting.args,
   initialState: {
     sorting: [
       { id: 'score', desc: true },
