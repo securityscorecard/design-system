@@ -1,3 +1,10 @@
+## [1.22.3](https://github.com/securityscorecard/design-system/compare/v1.22.2...v1.22.3) (2024-03-06)
+
+
+### Bug Fixes
+
+* **Signal:** fix sizing issue for info and positive signals ([29b2f91](https://github.com/securityscorecard/design-system/commit/29b2f91a45641cbd35f43ea9032e8cee93d2be62))
+
 ## [1.22.2](https://github.com/securityscorecard/design-system/compare/v1.22.1...v1.22.2) (2024-03-06)
 
 
