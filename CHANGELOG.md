@@ -1,3 +1,12 @@
+## [1.22.2](https://github.com/securityscorecard/design-system/compare/v1.22.1...v1.22.2) (2024-03-06)
+
+
+### Bug Fixes
+
+* **Callout:** let icon inherit color by property ([658e7ef](https://github.com/securityscorecard/design-system/commit/658e7effc13a1dc473fc9a75a6f9af15e8139856))
+* **DatatableV2:** change header label behaviour ([cfa5311](https://github.com/securityscorecard/design-system/commit/cfa5311d4a29c07b9216056a306653c4c6412e26))
+* **Signal:** update signal component ([6babff6](https://github.com/securityscorecard/design-system/commit/6babff6f29a2b4b5f89089970e1f0edb82b36a7c))
+
 ## [1.22.1](https://github.com/securityscorecard/design-system/compare/v1.22.0...v1.22.1) (2024-02-28)
 
 
