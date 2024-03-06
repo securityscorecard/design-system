@@ -8,8 +8,8 @@ import { colors } from '../../theme/colors';
 import { SignalProps } from './Signal.types';
 import { SignalKinds } from './Signal.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
-import { Icon } from '../Icon';
-import { ColorTypes } from '../../theme';
+import { svgPathData as positiveIcon } from '../../theme/icons/checkCircleSolid';
+import { svgPathData as infoIcon } from '../../theme/icons/infoCircle';
 
 interface BaseSvgProps {
   title: string;
@@ -63,6 +63,35 @@ const SeverityIcon: React.FC<
   );
 };
 
+const RoundIcon = ({
+  signal,
+  className,
+  size = 16,
+  title,
+  ...props
+}: BaseSvgProps & { signal: 'informational' | 'positive' }) => (
+  <svg
+    className={cls(CLX_COMPONENT, className)}
+    data-testid="ds-severity-icon"
+    height={size}
+    viewBox="0 0 512 512"
+    width={size}
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+    style={{
+      overflow: 'visible',
+      ...(props.style || {}),
+      color: `var(--sscds-severity-${signal})`,
+    }}
+  >
+    <title>{title}</title>
+    <path
+      d={signal === 'positive' ? positiveIcon : infoIcon}
+      fill="currentColor"
+    />
+  </svg>
+);
+
 const components = {
   [SignalKinds.low]: (props) => (
     <SeverityIcon
@@ -91,23 +120,13 @@ const components = {
     />
   ),
   [SignalKinds.critical]: (props) => <SeverityIcon {...props} />,
-  [SignalKinds.positive]: ({ size, ...props }: BaseSvgProps) => (
-    <Icon
-      aria-hidden={false}
-      color={ColorTypes.severityPositive}
-      data-testid="ds-severity-icon"
-      name="check-circle-solid"
-      style={{ fontSize: size, verticalAlign: 0 }}
-      {...props}
-    />
+  [SignalKinds.positive]: (props) => (
+    <RoundIcon data-testid="ds-severity-icon" signal="positive" {...props} />
   ),
-  [SignalKinds.info]: ({ size, ...props }: BaseSvgProps) => (
-    <Icon
-      aria-hidden={false}
-      color={ColorTypes.severityInformational}
+  [SignalKinds.info]: (props) => (
+    <RoundIcon
       data-testid="ds-severity-icon"
-      name="info-circle"
-      style={{ fontSize: size, verticalAlign: 0 }}
+      signal="informational"
       {...props}
     />
   ),
