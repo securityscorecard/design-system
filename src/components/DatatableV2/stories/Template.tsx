@@ -8,7 +8,7 @@ import { Pill } from '../../Pill';
 import { Cluster } from '../../layout';
 
 export const columns: DatatableColumnDef<DataSource>[] = [
-  { accessorKey: 'organization.name', header: 'Name' },
+  { accessorKey: 'organization.name', header: 'Name', enableHiding: true },
   {
     accessorKey: 'organization.domain',
     header: 'Domain',

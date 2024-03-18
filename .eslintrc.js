@@ -177,6 +177,7 @@ module.exports = {
           },
         ],
         'react/jsx-sort-props': 'off',
+        'react/prop-types': 'off',
       },
     },
     {

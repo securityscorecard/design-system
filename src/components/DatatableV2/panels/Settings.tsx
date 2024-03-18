@@ -7,6 +7,7 @@ import { CloseButton } from '../../CloseButton';
 import { Icon } from '../../Icon';
 import { Inline, Padbox, Stack } from '../../layout';
 import { Text } from '../../typographyLegacy';
+import { getHidableColumns } from '../columns.utils';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
 
@@ -26,6 +27,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
   } = table;
   const { columnOrder, columnPinning } = getState();
 
+  const canHideMoreColumns = getHidableColumns(table).length > 1;
   const allColumns = useMemo(() => {
     if (columnOrder.length > 0) {
       return [
@@ -68,10 +70,20 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
     };
   };
 
-  const handleToggleAllColumnsVisibility = (isVisible: boolean) => {
+  const handleToggleAllColumnsVisibility = (nextVisibility: boolean) => {
     getAllLeafColumns()
       .filter((col) => col.columnDef.enableHiding !== false)
-      .forEach((col) => col.toggleVisibility(isVisible));
+      .forEach((col, index) => {
+        /**
+         * if next state will be true (all cols visible) then toggle visibility
+         * OR
+         * if next state will be false (all cols hidden) and the current index is not 0
+         * then toggle visibility so always at least one column remain visible
+         */
+        if (nextVisibility || (!nextVisibility && index !== 0)) {
+          col.toggleVisibility(nextVisibility);
+        }
+      });
   };
 
   return (
@@ -79,7 +91,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
       <Padbox
         as="header"
         paddingSize="mdPlus"
-        style={{ borderBottom: '1px solid var(--sscds-borderColor' }}
+        style={{ borderBottom: '1px solid var(--sscds-border-color' }}
       >
         <Inline align="center" gap="md" justify="space-between">
           <Inline align="center" gap="md">
@@ -160,7 +172,11 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
               )}
             </Inline>
           </Inline>
-          <SettingsItems allColumns={allColumns} table={table} />
+          <SettingsItems
+            allColumns={allColumns}
+            canHideMoreColumns={canHideMoreColumns}
+            table={table}
+          />
         </Stack>
       </Padbox>
     </div>

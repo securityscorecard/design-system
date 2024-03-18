@@ -1,3 +1,42 @@
+## [1.22.3](https://github.com/securityscorecard/design-system/compare/v1.22.2...v1.22.3) (2024-03-06)
+
+
+### Bug Fixes
+
+* **Signal:** fix sizing issue for info and positive signals ([29b2f91](https://github.com/securityscorecard/design-system/commit/29b2f91a45641cbd35f43ea9032e8cee93d2be62))
+
+## [1.22.2](https://github.com/securityscorecard/design-system/compare/v1.22.1...v1.22.2) (2024-03-06)
+
+
+### Bug Fixes
+
+* **Callout:** let icon inherit color by property ([658e7ef](https://github.com/securityscorecard/design-system/commit/658e7effc13a1dc473fc9a75a6f9af15e8139856))
+* **DatatableV2:** change header label behaviour ([cfa5311](https://github.com/securityscorecard/design-system/commit/cfa5311d4a29c07b9216056a306653c4c6412e26))
+* **Signal:** update signal component ([6babff6](https://github.com/securityscorecard/design-system/commit/6babff6f29a2b4b5f89089970e1f0edb82b36a7c))
+
+## [1.22.1](https://github.com/securityscorecard/design-system/compare/v1.22.0...v1.22.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* **TextArea:** pass value into controlled input ([a7214aa](https://github.com/securityscorecard/design-system/commit/a7214aaf12e8bcb629f7ab2b6e440943f5d44e05))
+
+# [1.22.0](https://github.com/securityscorecard/design-system/compare/v1.21.0...v1.22.0) (2024-02-28)
+
+
+### Bug Fixes
+
+* **DatatableV2:** prevent hiding all columns ([cba1984](https://github.com/securityscorecard/design-system/commit/cba1984816e376a816832ea1e53152782895e0a8))
+* **DatatableV2:** remove border around pagination panel ([54c2dc1](https://github.com/securityscorecard/design-system/commit/54c2dc1bc23b5e0fdfa1cbb205823537b818519a))
+* **Surface:** apply lighter background to dynamic variant ([1b776be](https://github.com/securityscorecard/design-system/commit/1b776be0998341acd401305116743ca5569181ef))
+* **theme:** expose colors as CSS variables ([08c9583](https://github.com/securityscorecard/design-system/commit/08c9583d9d7b56a61e058d3e07ecfc35929d3b77))
+
+
+### Features
+
+* **DatatableV2:** add pagination breakpoints for smaller containers ([5f99d69](https://github.com/securityscorecard/design-system/commit/5f99d69498b27345f6b2452fe7baf655bdf58378))
+* **TextArea:** simplify implementation of TextArea ([81713ff](https://github.com/securityscorecard/design-system/commit/81713ff7ce685605fcd9556e5bbeb71882c7df7c))
+
 # [1.21.0](https://github.com/securityscorecard/design-system/compare/v1.20.3...v1.21.0) (2024-02-14)
 
 

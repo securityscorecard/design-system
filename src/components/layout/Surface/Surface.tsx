@@ -23,8 +23,7 @@ const SurfaceRoot = styled.div`
   background: var(--sscds-background);
   border-radius: var(--sscds-radius);
   box-shadow: var(--sscds-elevation);
-  /* stylelint-disable-next-line custom-property-pattern */
-  border: var(--sscds-borderWidth) solid var(--sscds-borderColor);
+  border: var(--sscds-border-width) solid var(--sscds-border-color);
   transition: border-radius 300ms ease-in, background 300ms ease-in,
     box-shadow 300ms ease-in;
 `;
@@ -34,7 +33,7 @@ const getBackground = (
 ): string => {
   switch (background) {
     case 'dynamic':
-      return mode === 'light' ? 'rgba(0 0 0/5%)' : 'rgba(255 255 255/10%)';
+      return mode === 'light' ? 'rgba(0 0 0/2.5%)' : 'rgba(255 255 255/10%)';
     case 'white':
       return 'white';
     case 'transparent':
@@ -78,8 +77,8 @@ const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
       '--sscds-radius':
         radius === 'none' ? 0 : getRadii(radiiMap[radius], { theme }),
       '--sscds-elevation': getShadow(elevation),
-      '--sscds-borderWidth': hasBorder ? '1px' : '0',
-      '--sscds-borderColor':
+      '--sscds-border-width': hasBorder ? '1px' : '0',
+      '--sscds-border-color':
         mode === 'light' ? 'rgba(0 0 0/15%)' : 'rgba(255 255 255/15%)',
       ...style,
     };

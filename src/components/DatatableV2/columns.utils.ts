@@ -176,3 +176,8 @@ export const getDefaultColumnOrder = <D>(
     ]),
   ).filter(Boolean);
 };
+
+export const getHidableColumns = <D>(table: DatatableInstance<D>) =>
+  table
+    .getVisibleFlatColumns()
+    .filter((col) => Object.values(displayColumnIds).indexOf(col.id) === -1);

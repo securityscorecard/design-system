@@ -85,12 +85,13 @@ const TableRoot = styled.div`
     }
 
     .ds-table-header-cell-title {
+      text-align: left;
       font-weight: var(--sscds-table-typography-weight-header);
-      text-overflow: ellipsis;
-
-      &:hover {
-        text-overflow: clip;
-      }
+      /* stylelint-disable value-no-vendor-prefix, property-no-vendor-prefix*/
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      /* stylelint-enable value-no-vendor-prefix, property-no-vendor-prefix */
     }
 
     .ds-table-header-cell-resize-handler {
@@ -107,7 +108,7 @@ const TableRoot = styled.div`
       bottom: 0;
       right: 0;
       opacity: 0;
-      transition: var(--sscds-table-transition);
+      transition: var(--sscds-action-transition);
     }
 
     .ds-table-header-cell-sort-button {

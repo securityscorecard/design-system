@@ -1,6 +1,6 @@
 {
   "name": "@securityscorecard/design-system",
-  "version": "1.21.0",
+  "version": "1.22.3",
   "description": "Security Scorecard Design System",
   "author": "Radek Podrazky <rpodrazky@securityscorecard.io>",
   "license": "Apache-2.0",
@@ -67,7 +67,7 @@
     "pullstate": "^1.23.0",
     "ramda": "^0.28.0",
     "ramda-adjunct": "^3.4.0",
-    "react-container-query": "^0.12.0",
+    "react-container-query": "^0.13.0",
     "react-cool-portal": "^1.2.0",
     "react-datepicker": "^4.6.0",
     "react-dropzone": "^12.1.0",

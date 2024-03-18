@@ -9,6 +9,23 @@ import {
   pxToRem,
 } from '../../utils';
 
+const flattenColors = ([key, value]) => {
+  if (typeof value === 'string') {
+    return [[key, value]];
+  }
+  return Object.entries(value).flatMap(([k, v]) =>
+    flattenColors([`${key}-${k}`, v]),
+  );
+};
+
+export const generateColorsCSSVars = ({ theme: { colors } }) => {
+  return Object.entries(colors)
+    .flatMap(flattenColors)
+    .map(([key, value]) => [`--sscds-${key}`, value])
+    .map((item) => item.join(':'))
+    .join(';\n');
+};
+
 export default createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/
     v4.0 | 20180602
@@ -122,5 +139,10 @@ export default createGlobalStyle`
 
   a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
     outline: ${getToken('action-focus-ring')};
+  }
+  :root {
+    ${generateColorsCSSVars};
+    --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --sscds-action-transition: all 300ms var(--sscds-transition-fn),outline 0ms;
   }
 `;
