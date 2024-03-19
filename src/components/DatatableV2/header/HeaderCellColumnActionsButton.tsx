@@ -12,12 +12,21 @@ const HeaderCellColumnActionsButton = <D,>({
   header: DatatableHeader<D>;
   table: DatatableInstance<D>;
 }) => {
+  const { column } = header;
+  const { getIsSorted } = column;
+  const direction = getIsSorted();
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <IconButton
           className="ds-table-header-cell-column-actions-button"
-          iconName="ellipsis-v"
+          iconName={
+            direction === 'desc'
+              ? 'sort-down'
+              : direction === 'asc'
+              ? 'sort-up'
+              : 'ellipsis-v'
+          }
           label="Column actions"
         />
       </DropdownMenu.Trigger>

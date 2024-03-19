@@ -14,9 +14,11 @@ import { CLX_COMPONENT } from '../../theme/constants';
 
 const CalloutIconNeutral = css`
   background-color: ${getColor(ColorTypes.neutral300)};
+  color: ${getColor(ColorTypes.neutral700)};
 `;
 const CalloutIconInfo = css`
   background-color: ${getColor(ColorTypes.info100)};
+  color: ${getColor(ColorTypes.info700)};
 `;
 const calloutIconColors = {
   [CalloutColors.neutral]: CalloutIconNeutral,

@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react';
 import { flexRender } from '@tanstack/react-table';
 import clx from 'classnames';
 
-import HeaderCellSortButton from './HeaderCellSortButton';
+// import HeaderCellSortButton from './HeaderCellSortButton';
 import HeaderCellColumnActionsButton from './HeaderCellColumnActionsButton';
 import { getCommonCellStyles } from '../columns.utils';
 import HeaderCellResizeHandler from './HeaderCellResizeHandler';
@@ -16,7 +16,6 @@ import { displayColumnIds } from '../hooks/useDisplayColumns';
 const getTextHeaderStyle = (
   labelLength: number | undefined,
 ): CSSProperties => ({
-  whiteSpace: (labelLength ?? 0) < 20 ? 'nowrap' : 'normal',
   minWidth: `${Math.min(labelLength ?? 0, 4)}ch`,
   overflow: 'hidden',
 });
@@ -97,13 +96,13 @@ const HeaderCell = <D,>({
               </Tooltip>
             </div>
 
-            {getCanSort() && (
+            {/* {getCanSort() && (
               <HeaderCellSortButton
                 direction={getIsSorted()}
                 header={header}
                 table={table}
               />
-            )}
+            )} */}
           </Inline>
           {showColumnActions && (
             <HeaderCellColumnActionsButton header={header} table={table} />

@@ -4,6 +4,7 @@ import type { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { MenuContent, MenuItem, MenuSeparator } from './menuElements';
+import { getHidableColumns } from '../columns.utils';
 
 const ColumnActionsMenu = <D,>({
   header,
@@ -27,6 +28,8 @@ const ColumnActionsMenu = <D,>({
   } = table;
   const { column } = header;
   const { columnSizing } = getState();
+
+  const hidableColumns = getHidableColumns(table);
 
   const handleSort = (isDesc: boolean) => {
     column.toggleSorting(isDesc);
@@ -94,6 +97,7 @@ const ColumnActionsMenu = <D,>({
             key="col-action-hide-col"
             className="ds-table-column-actions-menu-item"
             iconName="eye-slash"
+            isDisabled={hidableColumns.length === 1}
             onClick={handleHideColumn}
           >
             Hide column

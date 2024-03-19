@@ -9,7 +9,7 @@ import { Icon } from '../../Icon';
 import { Padbox } from '../../layout';
 import { Tooltip } from '../../Tooltip';
 
-interface IconButtonProps extends ComponentProps<'button'> {
+interface IconButtonProps extends Omit<ComponentProps<'button'>, 'disabled'> {
   label: string;
   /* eslint-disable @typescript-eslint/ban-types */
   iconName: SSCIcons | (string & {});
@@ -28,7 +28,7 @@ const IconButtonRoot = styled(Padbox)`
   cursor: pointer;
   color: ${getColor('neutral.500')};
   border-radius: ${getRadii('round')};
-  transition: var(--sscds-transition);
+  transition: var(--sscds-action-transition);
 
   &:disabled {
     cursor: auto;

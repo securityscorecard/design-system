@@ -6,15 +6,11 @@ import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
 /**
- * There tests right now doesn't guarantee correct functionality
+ * The tests right now doesn't guarantee correct functionality
  * as we only check for calling the `onColumnSizingChange` callback
  * We need to figure out some better way of teseting here
  */
 describe('DatatableV2/columnResizing', () => {
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('should have column resizing enabled by default', async () => {
     renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
 
@@ -38,6 +34,7 @@ describe('DatatableV2/columnResizing', () => {
       fireEvent.mouseMove(handler, { clientX: 20, clientY: 30 });
       fireEvent.mouseUp(handler);
       expect(columnSizeMock).toBeCalledTimes(2);
+      columnSizeMock.mockReset();
     });
 
     it('should resize column by using left and right arrow keys', async () => {
@@ -55,6 +52,7 @@ describe('DatatableV2/columnResizing', () => {
       await userEvent.type(handler, '{arrowright}{arrowleft}');
 
       expect(columnSizeMock).toBeCalledTimes(3);
+      columnSizeMock.mockReset();
     });
 
     it('should not resize column by using other keys', async () => {
@@ -72,6 +70,7 @@ describe('DatatableV2/columnResizing', () => {
       await userEvent.type(handler, '{arrowup}{arrowdown}{space}{enter}');
 
       expect(columnSizeMock).toBeCalledTimes(1);
+      columnSizeMock.mockReset();
     });
 
     it('should reset column sizing on double click', async () => {
@@ -90,6 +89,7 @@ describe('DatatableV2/columnResizing', () => {
       await userEvent.dblClick(handler);
 
       expect(columnSizeMock).toBeCalledTimes(3);
+      columnSizeMock.mockReset();
     });
 
     it.skip('should reset column sizing with column action', async () => {
@@ -116,6 +116,7 @@ describe('DatatableV2/columnResizing', () => {
       );
 
       expect(columnSizeMock).toBeCalledTimes(1);
+      columnSizeMock.mockReset();
     });
   });
 });
