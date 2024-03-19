@@ -140,6 +140,7 @@ export default createGlobalStyle`
   a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
     outline: ${getToken('action-focus-ring')};
   }
+
   :root {
     ${generateColorsCSSVars};
     --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);

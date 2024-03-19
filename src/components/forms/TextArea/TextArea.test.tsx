@@ -25,20 +25,20 @@ describe('TextArea', () => {
   });
 
   describe('should update char counter', () => {
-    it('as uncontrolled input', () => {
+    it('as uncontrolled input', async () => {
       render(<TextArea maxLength={5} />);
 
       const textarea = screen.getByRole('textbox');
-      userEvent.type(textarea, 'aaa');
+      await userEvent.type(textarea, 'aaa');
 
       expect(screen.getByText('2')).toBeInTheDocument();
     });
-    it('as controlled input', () => {
+    it('as controlled input', async () => {
       const mockOnChange = jest.fn();
       render(<ControlledTextArea maxLength={5} mockOnChange={mockOnChange} />);
 
       const textarea = screen.getByRole('textbox');
-      userEvent.type(textarea, 'aaa');
+      await userEvent.type(textarea, 'aaa');
 
       expect(screen.getByText('2')).toBeInTheDocument();
     });
