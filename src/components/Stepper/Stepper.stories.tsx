@@ -69,8 +69,9 @@ const steps = [
   },
 ];
 
-const containerDecorator = (width) => (storyFn) =>
-  <div style={{ width }}>{storyFn()}</div>;
+const containerDecorator = (width) => (storyFn) => (
+  <div style={{ width }}>{storyFn()}</div>
+);
 
 export const Playground: Story<StepperProps> = (args) => (
   <Stepper {...args}>
