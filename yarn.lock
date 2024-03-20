@@ -4192,7 +4192,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.4.1
     "@types/node": ^16.11.27
-    "@types/react": 16.14.5
+    "@types/react": ^18.2.0
     "@types/react-select": ^4.0.18
     "@types/react-table": ^7.7.10
     "@types/styled-components": ^5.1.24
@@ -4276,7 +4276,6 @@ __metadata:
     "@storybook/api": ^6.5.6
     "@testing-library/dom": ">=7.21.4"
     "@types/node": "*"
-    "@types/react": 16.14.5
     "@types/styled-components": ^5.1.24
     "@types/testing-library__jest-dom": ^5.14.3
     postcss-syntax: ">=0.36.2"
@@ -6341,14 +6340,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:16.14.5":
-  version: 16.14.5
-  resolution: "@types/react@npm:16.14.5"
+"@types/react@npm:*, @types/react@npm:>=16.9.0, @types/react@npm:^18.2.0":
+  version: 18.2.67
+  resolution: "@types/react@npm:18.2.67"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 5dd962b769e88e4390dbfb93cdb99f5db964d80c1da92bf8c34a570971cae2c1bbe0c399bace0d070ef4a253d41aa8f40c6ac7c5bc6979ef24c95740819380e6
+  checksum: 9e48122b0e8d0ae20601f613aca32289eeb94d55c58ff03a7dc532d80ed289a1ba9715f14b773bd926ccdd63e503717f14264143ef531dc370063abe09dee0b2
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^17":
+  version: 17.0.79
+  resolution: "@types/react@npm:17.0.79"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 6ad4c26d46e5d6f6d2ad78e01e563aaffb3a84f9341bf7ee18cf20ffdb180962ba283b7ac11e4fcda95b6323b70ebf560c2e843b6abc134fff2b85c843a74537
   languageName: node
   linkType: hard
 

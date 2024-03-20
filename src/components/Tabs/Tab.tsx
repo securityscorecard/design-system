@@ -9,7 +9,7 @@ import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 
-const Tab: React.FC<TabProps> = ({
+const Tab = ({
   children,
   color,
   onClick,
@@ -18,7 +18,7 @@ const Tab: React.FC<TabProps> = ({
   __isExpanded,
   __isSelected,
   __onSelectTab,
-}) => {
+}: TabProps) => {
   const isLink = value?.toString()?.startsWith('/');
   const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {

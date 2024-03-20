@@ -48,10 +48,7 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
-  isCancelable,
-  onCancel,
-}) => (
+const LoadingOverlay = ({ isCancelable, onCancel }: LoadingOverlayProps) => (
   <LoadingOverlayContainer>
     <LoadingBackground />
     <LoadingIndicatorContainer>

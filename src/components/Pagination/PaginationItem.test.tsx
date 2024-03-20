@@ -8,7 +8,11 @@ import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 describe('Pagination/PaginationItem', () => {
   it('should not call onClick handler for current page', () => {
     const clickMock = jest.fn();
-    renderWithProviders(<PaginationItem onClick={clickMock} isCurrent />);
+    renderWithProviders(
+      <PaginationItem onClick={clickMock} isCurrent>
+        1
+      </PaginationItem>,
+    );
 
     userEvent.click(screen.getByRole('button'));
     expect(clickMock).not.toHaveBeenCalled();

@@ -29,10 +29,7 @@ const PillRemoveButtonWrapper = styled.button`
   }
 `;
 
-const PillRemoveButton: React.FC<PillRemoveButtonProps> = ({
-  pillLabel,
-  ...props
-}) => (
+const PillRemoveButton = ({ pillLabel, ...props }: PillRemoveButtonProps) => (
   <PillRemoveButtonWrapper
     aria-label={`Remove ${pillLabel}`}
     type="button"

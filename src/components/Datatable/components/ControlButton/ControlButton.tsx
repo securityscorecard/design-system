@@ -9,14 +9,14 @@ import { Inline } from '../../../layout';
 import { SSCIcons } from '../../../Icon/Icon.types';
 import { ControlButtonProps } from './ControlButton.types';
 
-const ControlButton: React.FC<ControlButtonProps> = ({
+const ControlButton = ({
   label,
   iconName,
   appliedFilters = 0,
   className = '',
   onClick,
   hiddenColumns = 0,
-}) => (
+}: ControlButtonProps) => (
   <Button
     className={className}
     iconName={iconName}

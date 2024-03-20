@@ -38,7 +38,7 @@ const RemoveButton = styled.button`
   font-size: ${pxToRem(10)};
 `;
 
-const Tag: React.FC<TagsProps> = ({ value, onClose }) => (
+const Tag = ({ value, onClose }: TagsProps) => (
   <Container alignItems="center">
     {value}{' '}
     <RemoveButton type="button" onClick={onClose}>

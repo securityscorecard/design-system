@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { Row } from 'react-table';
@@ -45,10 +45,14 @@ type CellRendererData = {
   column2: string[];
 };
 
-const LinkComponent: React.FC<{ to: string; className: string }> = ({
+const LinkComponent = ({
   to,
   children,
   className,
+}: {
+  to: string;
+  className: string;
+  children: ReactNode;
 }) => (
   <a className={className} href={to}>
     {children}

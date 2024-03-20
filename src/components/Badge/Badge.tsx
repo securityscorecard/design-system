@@ -60,10 +60,7 @@ const BadgeElement = styled(Padbox)<BadgeElementProps>`
 
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
-const Badge: React.FC<BadgeProps> = ({
-  count,
-  variant = BadgeVariants.error,
-}) =>
+const Badge = ({ count, variant = BadgeVariants.error }: BadgeProps) =>
   isNotUndefined(count) ? (
     <BadgeElement
       $variant={variant}

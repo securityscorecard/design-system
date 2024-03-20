@@ -88,7 +88,7 @@ const Content = styled(RadixTooltip.Content)<ContentProps>`
   }
 `;
 
-const Tooltip: React.FC<TooltipProps> = ({
+const Tooltip = ({
   children,
   defaultIsPopupDisplayed,
   placement = 'bottom',
@@ -96,7 +96,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   width = 270,
   wrapperEl: Wrapper = 'span',
   ...props
-}) => {
+}: TooltipProps) => {
   const side = placement.split('-')[0];
   const align = placement.endsWith('-start')
     ? 'start'

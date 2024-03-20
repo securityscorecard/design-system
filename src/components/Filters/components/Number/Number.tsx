@@ -6,7 +6,7 @@ import { validateNumber } from '../../helpers';
 import { NumberPropTypes, NumberProps } from './Number.types';
 import { Input } from '../../../forms';
 
-const Number: React.FC<NumberProps> = ({
+const Number = ({
   value = '',
   onChange,
   min,
@@ -15,7 +15,7 @@ const Number: React.FC<NumberProps> = ({
   errorMessage = 'Use only numbers',
   isInvalid = false,
   onError,
-}) => {
+}: NumberProps) => {
   const handleOnChange = (event) => {
     onChange(event);
     const hasError =

@@ -30,12 +30,12 @@ const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
   padding-left: ${getSpace('sm')};
 `;
 
-const PillWrapper: React.FC<PillWrapperProps> = ({
+const PillWrapper = ({
   children,
   isClickable,
   color,
   ...props
-}) => (
+}: PillWrapperProps) => (
   <StyledPillWrapper
     $color={color || PillColorsEnums.gray}
     $isClickable={isClickable}

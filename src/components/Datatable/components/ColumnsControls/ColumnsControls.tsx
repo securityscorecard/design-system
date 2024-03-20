@@ -16,13 +16,13 @@ import { Switch } from '../../../forms';
 import { SwitchSizes } from '../../../forms/Switch/Switch.enums';
 import { SpaceSizes } from '../../../../theme';
 
-const ColumnsControls: React.FC<ColumnsControlsProps> = ({
+const ColumnsControls = ({
   children,
   isOpen = false,
   onClose = noop,
   onApply = noop,
   onReset = noop,
-}) => {
+}: ColumnsControlsProps) => {
   const parentRef = useRef(null);
   const {
     orderedColumns,
@@ -105,7 +105,7 @@ const ColumnsControls: React.FC<ColumnsControlsProps> = ({
 };
 
 ColumnsControls.propTypes = {
-  children: PropTypes.oneOf([PropTypes.func, PropTypes.node]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
   onClose: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,

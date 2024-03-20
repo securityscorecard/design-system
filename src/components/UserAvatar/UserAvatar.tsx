@@ -69,7 +69,7 @@ const RootUserAvatar = styled.div<UserAvatarRootProps>`
 `;
 const normalizeString = pipe(trim, take(2), toUpper);
 
-const UserAvatar: React.FC<UserAvatarProps> = ({
+const UserAvatar = ({
   label,
   size = UserAvatarSizes.md,
   className,
@@ -78,7 +78,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
   onClick,
   isInverted = false,
   ...props
-}) =>
+}: UserAvatarProps) =>
   any(isNotUndefined, [href, to, onClick]) ? (
     <RootUserAvatar
       $isInverted={isInverted}

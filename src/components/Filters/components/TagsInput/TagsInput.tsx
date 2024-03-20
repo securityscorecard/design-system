@@ -7,7 +7,7 @@ import { TagsInputProps } from './TagsInput.types';
 import { MultiValueInput } from '../../../forms';
 import { validatePattern } from '../../helpers';
 
-const TagsInput: React.FC<TagsInputProps> = ({
+const TagsInput = ({
   value: tags = [],
   onChange,
   maxLength,
@@ -17,7 +17,7 @@ const TagsInput: React.FC<TagsInputProps> = ({
   onError,
   placeholder = 'Enter value',
   isInvalid = false,
-}) => {
+}: TagsInputProps) => {
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);

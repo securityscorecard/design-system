@@ -37,7 +37,7 @@ const GoToPageLabel = styled.label`
   color: ${getColor('neutral.700')};
 `;
 
-const GoToPage: React.FC<GoToPageProps> = ({ pageCount, onPageChange }) => {
+const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handlePageChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const { target, key } = e;

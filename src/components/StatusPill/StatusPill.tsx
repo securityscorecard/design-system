@@ -22,10 +22,7 @@ const StyledPillWrapper = Styled(Padbox)`
   padding-top: ${pxToRem(3)};
 `;
 
-const StatusPill: React.FC<StatusPillProps> = ({
-  color = 'inactive',
-  label,
-}) => (
+const StatusPill = ({ color = 'inactive', label }: StatusPillProps) => (
   <StyledPillWrapper
     paddingSize={SpaceSizes.xs}
     paddingType={PaddingTypes.squish}

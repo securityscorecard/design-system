@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
@@ -47,6 +47,7 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
    */
   parentEl?: ReactComponentLike;
   className?: string;
+  children: ReactNode;
 }
 
 const GridWrapper = styled.div<GridWrapperProps>`
@@ -70,7 +71,7 @@ const GridParent = styled.div<GridParentProps>(
   },
 );
 
-const Grid: React.FC<GridProps> = ({
+const Grid = ({
   children,
   gap,
   align,
@@ -79,7 +80,7 @@ const Grid: React.FC<GridProps> = ({
   wrapperEl,
   wrapperOverflow = 'hidden',
   ...props
-}) => {
+}: GridProps) => {
   const { error } = useLogger('Grid');
   if (cols === 1) {
     error('Minimal number of columns is 2. Use Stack instead of Grid[cols=1]');

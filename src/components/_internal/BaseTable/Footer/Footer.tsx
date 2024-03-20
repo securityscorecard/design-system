@@ -23,14 +23,14 @@ const PaginationContainer = styled.div`
   flex: 1 0 auto;
 `;
 
-const Footer: React.FC<FooterProps> = ({
+const Footer = ({
   pageCount,
   pageButtonsCount,
   pageIndex,
   onGotoPage,
   isDataLoading = false,
   hasPagination = true,
-}) => {
+}: FooterProps) => {
   const handlePageChange = (page) => onGotoPage(page - 1);
 
   return (

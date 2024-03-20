@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
@@ -30,28 +30,31 @@ const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
   ${createSpacings};
 `;
 
-const Icon: React.FC<
-  IconProps &
-    Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>
-> = ({
+const Icon = ({
   name,
   type = IconTypes.ssc,
   color,
   className = '',
   hasFixedWidth = false,
   ...props
-}) => (
-  <StyledIcon
-    className={cls(CLX_COMPONENT, className)}
-    color={color}
-    fixedWidth={hasFixedWidth}
-    icon={findIconDefinition({
-      iconName: name as IconName,
-      prefix: type as IconPrefix,
-    })}
-    {...props}
-  />
-);
+}: IconProps &
+  Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>) => {
+  const ref = useRef<SVGSVGElement>(null);
+  return (
+    <StyledIcon
+      // @ts-expect-error this passing ref through styled components is rabbit hole
+      ref={ref}
+      className={cls(CLX_COMPONENT, className)}
+      color={color}
+      fixedWidth={hasFixedWidth}
+      icon={findIconDefinition({
+        iconName: name as IconName,
+        prefix: type as IconPrefix,
+      })}
+      {...props}
+    />
+  );
+};
 
 Icon.propTypes = {
   name: PropTypes.oneOfType([

@@ -47,14 +47,14 @@ const StyledIcon = styled(Icon)`
   height: 1em;
 `;
 
-const AccordionCollapsible: React.FC<AccordionCollapsibleProps> = ({
+const AccordionCollapsible = ({
   children,
   className,
   handleHeaderClick,
   isOpen = false,
   id,
   title,
-}) => {
+}: AccordionCollapsibleProps) => {
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement>,
     itemId?: AccordionItemId,

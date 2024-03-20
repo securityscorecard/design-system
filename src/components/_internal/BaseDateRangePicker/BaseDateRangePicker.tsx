@@ -23,13 +23,13 @@ const StyledDatePicker = styled.div`
 
 const isRangeDefined = any(isNotNull);
 
-const BaseDateRangePicker: React.FC<BaseDateRangePickerProps> = ({
+const BaseDateRangePicker = ({
   value = { startDate: null, endDate: null },
   onChange,
   minDate,
   maxDate,
   placeholder,
-}) => {
+}: BaseDateRangePickerProps) => {
   const { startDate, endDate } = value;
   const startDatePlaceholder = prop('startDate', placeholder);
   const endDatePlaceholder = prop('endDate', placeholder);

@@ -188,7 +188,7 @@ const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   );
 };
 
-const FilterRow: React.FC<FilterRowProps> = ({
+const FilterRow = ({
   fields,
   index,
   onOperatorChange,
@@ -208,7 +208,7 @@ const FilterRow: React.FC<FilterRowProps> = ({
   isOperatorFieldEnabled,
   defaultOperator,
   hasApplyButton,
-}) => {
+}: FilterRowProps) => {
   const { field, conditions, condition, component } = useFilterRow(
     fields,
     fieldValue,

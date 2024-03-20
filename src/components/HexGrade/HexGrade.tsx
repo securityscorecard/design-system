@@ -54,7 +54,7 @@ const StyledSVG = styled.svg<HexGradeProps>`
   ${({ margin }) => createMarginSpacing(margin)};
 `;
 
-const HexGrade: React.FC<HexGradeProps> = ({
+const HexGrade = ({
   variant = HexGradeVariants.solid,
   grade,
   size = 64,
@@ -62,7 +62,7 @@ const HexGrade: React.FC<HexGradeProps> = ({
   margin,
   className,
   ...props
-}) => {
+}: HexGradeProps) => {
   const theme = useTheme();
   const isCSVariant = variant === HexGradeVariants.cs;
   const gradeColorType = pipe(

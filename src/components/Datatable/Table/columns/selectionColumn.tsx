@@ -56,7 +56,7 @@ export function getSelectionColumn<
       isMultiSelect,
       dispatch,
       state: { selectedRowIds: tableSelectedRowIds },
-    }: HeaderProps<Record<string, unknown>>): React.ReactElement => {
+    }: HeaderProps<D>) => {
       if (dataSize === 0) return null;
 
       const selectedLength = Object.keys(tableSelectedRowIds).length;
@@ -82,11 +82,7 @@ export function getSelectionColumn<
       );
     },
     cellType: CellTypes.selection,
-    Cell: ({
-      isMultiSelect,
-      row,
-      dispatch,
-    }: CellProps<Record<string, unknown>>): React.ReactElement => {
+    Cell: ({ isMultiSelect, row, dispatch }: CellProps<D>) => {
       const id = `row-${row.id}`;
 
       return (
