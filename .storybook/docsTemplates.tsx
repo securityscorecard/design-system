@@ -1,6 +1,6 @@
 import {
+  ArgTypes,
   Controls,
-  ArgsTable,
   Description,
   Primary,
   Stories,
@@ -12,10 +12,10 @@ export const defaultTemplate = () => (
   <>
     <Title />
     <Subtitle />
-    <Description  />
-    <Primary  />
+    <Description />
+    <Primary />
     <Controls />
-    <Stories includePrimary={false}  />
+    <Stories includePrimary={false} />
   </>
 );
 export const subcomponentsTemplate = () => (
@@ -24,7 +24,7 @@ export const subcomponentsTemplate = () => (
     <Subtitle />
     <Description />
     <Primary />
-    <ArgsTable />
+    <ArgTypes />
     <Stories includePrimary={false} />
   </>
 );

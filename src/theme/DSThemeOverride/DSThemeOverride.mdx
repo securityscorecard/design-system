@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Source, Story } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Source, Story } from '@storybook/blocks';
 
 import DSThemeOverride from './DSThemeOverride';
 
@@ -26,7 +26,7 @@ The `overrides` property accept either a function that returns the subset of the
 the subset itself. The function accepts the default theme object as the first argument which allows
 you to assign any value to the overriden object.
 
-<ArgsTable of={DSThemeOverride} />
+<ArgTypes of={DSThemeOverride} />
 
 ```jsx
 const DarkBox = ({ children }) => (

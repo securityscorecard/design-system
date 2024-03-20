@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { userEvent, within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import { userEvent, within } from '@storybook/test';
+import { expect } from '@storybook/test';
 
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem';
