@@ -1,5 +1,8 @@
 {
-  "branches": ["main"],
+  "branches": [
+    {"name": "main"},
+    {"name": "beta", "channel":"beta", "prerelease": true}
+  ],
   "repositoryUrl": "https://github.com/securityscorecard/design-system.git",
   "debug": "true",
   "plugins": [
