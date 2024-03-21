@@ -10,6 +10,8 @@ node_modules
 build
 yarn-error.log
 stats
+coverage
+.scannerwork
 
 .pnp.*
 .yarn/*
@@ -28,4 +30,3 @@ visual-regressions/.yarn/*
 
 # Storybook static build
 storybook-static
-
