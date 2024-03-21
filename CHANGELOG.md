@@ -1,3 +1,10 @@
+# [1.23.0-beta.1](https://github.com/securityscorecard/design-system/compare/v1.22.3...v1.23.0-beta.1) (2024-03-21)
+
+
+### Features
+
+* **types:** explicitly define children property ([38092c0](https://github.com/securityscorecard/design-system/commit/38092c07b6bdb902aa6a716e171fcff6ec25d1d7))
+
 ## [1.22.3](https://github.com/securityscorecard/design-system/compare/v1.22.2...v1.22.3) (2024-03-06)
 
 
