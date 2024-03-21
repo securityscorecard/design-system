@@ -301,7 +301,7 @@ jobs:
 
   get-next-version:
     name: '📟 Get next released version'
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta') && !contains(github.event.head_commit.message, 'chore(release):')
     continue-on-error: true
     needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
     runs-on: ubuntu-latest
@@ -356,7 +356,7 @@ jobs:
 
   build-and-publish:
     name: '🚀 Publish new version'
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta') && !contains(github.event.head_commit.message, 'chore(release):')
     needs: get-next-version
     runs-on: ubuntu-latest
     steps:
@@ -462,6 +462,7 @@ jobs:
         run: yarn build-storybook -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
 
       - name: Generate redirect index
+        if: github.ref == 'refs/heads/main'
         env:
           VERSION: ${{ needs.get-next-version.outputs.new-release-version }}
         run: |
