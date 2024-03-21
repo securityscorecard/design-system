@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
@@ -66,20 +66,24 @@ const iconPxSizesVariants = {
 
 const stopPropagation = (event) => event?.stopPropagation();
 
-const ToastAreaContainer: React.FC<{
+const ToastAreaContainer = ({
+  children,
+  isStandalone,
+}: {
   isStandalone: boolean;
-}> = ({ children, isStandalone }) => {
+  children: ReactNode;
+}) => {
   // eslint-disable-next-line
   return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
 };
 
-const Toast: React.FC<ToastProps> = ({
+const Toast = ({
   onClose,
   children,
   width = 400,
   variant,
   isStandalone = true,
-}) => {
+}: ToastProps) => {
   return (
     <ToastAreaContainer isStandalone={isStandalone}>
       <ToastContainer

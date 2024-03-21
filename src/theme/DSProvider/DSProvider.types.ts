@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { DefaultTheme } from 'styled-components';
 
 import { Subset } from '../../types/utils.types';
@@ -21,4 +22,5 @@ export interface DSProviderProps {
    * Design system config object
    */
   config?: Partial<DSContextValue>;
+  children: ReactNode;
 }

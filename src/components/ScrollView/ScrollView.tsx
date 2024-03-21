@@ -68,6 +68,7 @@ export const ScrollView = forwardRef<HTMLDivElement, ScrollViewProps>(
 
     return (
       <ScrollViewRoot
+        // @ts-expect-error this passing ref through styled components is rabbit hole
         ref={ref}
         hasBorder={hasBorder}
         radius={radius}

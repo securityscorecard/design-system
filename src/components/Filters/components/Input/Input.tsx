@@ -7,7 +7,7 @@ import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../helpers';
 import { Input as BaseInput } from '../../../forms';
 
-const Input: React.FC<InputProps> = ({
+const Input = ({
   value = '',
   onChange,
   maxLength,
@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
   isInvalid = false,
   onError,
   ...props
-}) => {
+}: InputProps) => {
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);

@@ -13,7 +13,7 @@ const ListItem = styled.li`
   }
 `;
 
-const NoMatchingData: React.FC = () => (
+const NoMatchingData = () => (
   <>
     <H4 margin={{ top: 0, bottom: 0.8 }}>
       No items match your current filters

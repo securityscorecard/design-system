@@ -66,7 +66,7 @@ const StyledIcon = styled(Icon)<{
     pxToRem($iconPxSizesVariants[$variant])};
 `;
 
-const BaseToastBanner: React.FC<BaseToastBannerWrapperProps> = ({
+const BaseToastBanner = ({
   children,
   variant,
   paddingSize,
@@ -75,7 +75,7 @@ const BaseToastBanner: React.FC<BaseToastBannerWrapperProps> = ({
   iconSize,
   iconPxSizesVariants,
   iconAlign = 'center',
-}) => (
+}: BaseToastBannerWrapperProps) => (
   <Inline stretch={stretch}>
     {isNotNilOrEmpty(variant) && (
       <IconPadbox

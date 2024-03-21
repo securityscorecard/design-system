@@ -76,15 +76,13 @@ const headingSizes = {
   h5: HeadingH5,
 };
 
-const Heading: React.FC<
-  HeadingProps & React.ComponentProps<typeof HeadingH1>
-> = ({
+const Heading = ({
   children,
   size = HeadingSizes.h1,
   variant = HeadingVariants.primary,
   className,
   ...props
-}) => {
+}: HeadingProps & React.ComponentProps<typeof HeadingH1>) => {
   const additionalProps = {
     size,
     variant,
@@ -103,9 +101,9 @@ Heading.propTypes = {
 
 export default Heading;
 
-export const H1: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+type SizelessHeading = Omit<React.ComponentProps<typeof Heading>, 'size'>;
+
+export const H1 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h1} {...props}>
     {children}
   </Heading>
@@ -115,9 +113,7 @@ H1.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H2: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H2 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h2} {...props}>
     {children}
   </Heading>
@@ -127,9 +123,7 @@ H2.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H3: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H3 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h3} {...props}>
     {children}
   </Heading>
@@ -139,9 +133,7 @@ H3.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H4: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H4 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h4} {...props}>
     {children}
   </Heading>
@@ -151,9 +143,7 @@ H4.propTypes = {
   variant: PropTypes.oneOf(Object.values(HeadingVariants)),
 };
 
-export const H5: React.FC<
-  Omit<React.ComponentProps<typeof Heading>, 'size'>
-> = ({ children, ...props }) => (
+export const H5 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h5} {...props}>
     {children}
   </Heading>

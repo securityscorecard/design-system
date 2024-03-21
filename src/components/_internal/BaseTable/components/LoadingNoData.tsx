@@ -6,7 +6,7 @@ import { Spinner } from '../../../Spinner';
 import { TextSizes } from '../../../typographyLegacy/Text/Text.enums';
 import { SpaceSizes } from '../../../../theme';
 
-const LoadingNoData: React.FC = () => (
+const LoadingNoData = () => (
   <>
     <Inline align="center" gap={SpaceSizes.sm}>
       <Spinner

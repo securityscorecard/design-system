@@ -31,12 +31,12 @@ interface WizardProviderProps {
   onStepChange: (step: SingleWizardStep) => void;
 }
 
-export const WizardProvider: React.FC<WizardProviderProps> = ({
+export const WizardProvider = ({
   children,
   initialStep,
   isBackwardNavigationEnabled,
   onStepChange,
-}) => {
+}: WizardProviderProps) => {
   const [state, update] = useState<WizardState>({
     activeStepId: undefined,
     update: () => null,

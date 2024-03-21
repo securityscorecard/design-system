@@ -24,7 +24,7 @@ interface StoriesProps {
   includePrimary?: boolean;
 }
 
-export const StoriesWithDesign: React.FC<StoriesProps> = ({ title, includePrimary = false }) => {
+export const StoriesWithDesign = ({ title, includePrimary = false }:StoriesProps) => {
   const context = useContext(DocsContext);
   const componentStories = context.componentStories().filter((s: any) => !(s.parameters?.docs?.disable));;
 

@@ -20,9 +20,12 @@ const LabelContainer = styled(Text)`
   }
 `;
 
-const Label: React.FC<
-  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Text>
-> = ({ children, htmlFor, className, ...props }) => (
+const Label = ({
+  children,
+  htmlFor,
+  className,
+  ...props
+}: React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Text>) => (
   <LabelContainer
     as="label"
     className={cls(CLX_COMPONENT, className)}

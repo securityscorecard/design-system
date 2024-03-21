@@ -67,14 +67,14 @@ const StyledPaginationComponent = styled.button<{
         `};
 `;
 
-export const PaginationItem: React.FC<PaginationItemProps> = ({
+export const PaginationItem = ({
   children,
   isDisabled,
   isCurrent,
   isShrinked,
   onClick,
   ...props
-}) => {
+}: PaginationItemProps) => {
   const handleOnClick = () => {
     if (isCurrent) {
       return;

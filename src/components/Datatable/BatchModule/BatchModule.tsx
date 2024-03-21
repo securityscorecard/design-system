@@ -18,7 +18,7 @@ const BatchModuleWrapper = styled.div`
   padding: ${getSpace('md')};
 `;
 
-const BatchModule: React.FC<BatchModuleProps> = ({
+const BatchModule = ({
   actions,
   hasSelection,
   hasOnlyPerPageSelection,
@@ -28,7 +28,7 @@ const BatchModule: React.FC<BatchModuleProps> = ({
     defaultIsColumnsControlsOpen = false,
     defaultIsColumnsControlsApplied = false,
   },
-}) => {
+}: BatchModuleProps) => {
   const [isColumnsActive, setIsColumnsActive] = useState(
     defaultIsColumnsControlsOpen,
   );

@@ -14,7 +14,7 @@ export const StyledDatePicker = styled.div`
   ${singleDatePickerStyles}
 `;
 
-const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
+const SingleDatePicker = ({
   value = null,
   onChange = noop,
   minDate,
@@ -24,7 +24,7 @@ const SingleDatePicker: React.FC<SingleDatePickerProps> = ({
   defaultIsYearPickerOpen,
   startDate,
   endDate,
-}) => {
+}: SingleDatePickerProps) => {
   const [showYearPicker, setShowYearPicker] = useState(defaultIsYearPickerOpen);
   const pickerRef = useRef({ calendar: { instanceRef: { changeYear: noop } } });
   const toggleYearPicker = () => setShowYearPicker(!showYearPicker);

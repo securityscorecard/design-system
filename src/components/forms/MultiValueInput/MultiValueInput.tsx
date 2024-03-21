@@ -132,7 +132,7 @@ const ClearButton = styled.button`
   }
 `;
 
-const MultiValueInput: React.FC<MultiValueInputProps> = ({
+const MultiValueInput = ({
   value = [],
   isInvalid = false,
   isDisabled = false,
@@ -151,7 +151,7 @@ const MultiValueInput: React.FC<MultiValueInputProps> = ({
   maxPillLabelLength = 16,
   className,
   ...props
-}) => {
+}: MultiValueInputProps) => {
   const [values, setValues] = useState(value);
   const [inputValue, setInputValue] = useState(defaultInputValue);
   const [inputRef, setInputRef] = useState(null);

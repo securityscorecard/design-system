@@ -11,7 +11,7 @@ import PillLabel from './PillLabel';
 import PillRemoveButton from './PillRemoveButton';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Pill: React.FC<PillProps> = ({
+const Pill = ({
   label,
   maxLabelLength = 16,
   isClickable = false,
@@ -21,7 +21,7 @@ const Pill: React.FC<PillProps> = ({
   className,
   color = PillColorsEnums.gray,
   ...props
-}) => {
+}: PillProps) => {
   const isPillClickable = isNotUndefined(onClick) || isClickable;
   const isPillRemovable = isNotUndefined(onRemove);
 

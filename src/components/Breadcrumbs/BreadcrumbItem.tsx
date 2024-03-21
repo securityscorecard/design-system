@@ -21,14 +21,14 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
+const BreadcrumbItem = ({
   children,
   isSelected = false,
   to = undefined,
   href = undefined,
   iconName,
   ...props
-}) => {
+}: BreadcrumbItemProps) => {
   const hasIcon = isNotUndefined(iconName);
   const label = hasIcon ? { 'aria-label': children } : { children };
   return (

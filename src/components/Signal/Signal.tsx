@@ -21,9 +21,7 @@ interface BaseSvgProps {
 
 const INACTIVE_BAR_COLOR = '#0000001a';
 
-const SeverityIcon: React.FC<
-  BaseSvgProps & { colors: [string, string, string] }
-> = ({
+const SeverityIcon = ({
   colors: barColors = [
     INACTIVE_BAR_COLOR,
     INACTIVE_BAR_COLOR,
@@ -33,7 +31,7 @@ const SeverityIcon: React.FC<
   size = 16,
   title,
   ...props
-}) => {
+}: BaseSvgProps & { colors: [string, string, string] }) => {
   return (
     <svg
       className={cls(CLX_COMPONENT, className)}
@@ -135,7 +133,7 @@ const components = {
 components[SignalKinds.negligible] = components[SignalKinds.info];
 components[SignalKinds.critical] = components[SignalKinds.high];
 
-const Signal: React.FC<SignalProps> = ({ kind, ...props }) => {
+const Signal = ({ kind, ...props }: SignalProps) => {
   if (isNilOrEmpty(kind)) return null;
 
   const Component = prop(kind.toLowerCase(), components);

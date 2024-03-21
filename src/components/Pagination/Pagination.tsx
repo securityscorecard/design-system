@@ -10,13 +10,13 @@ import { PaginationProps } from './Pagination.types';
 import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination = ({
   pageCount,
   currentPage,
   onPageChange,
   pageButtonsCount = 8,
   renderItem = PaginationItem,
-}) => (
+}: PaginationProps) => (
   <Inline className={CLX_COMPONENT} gap={SpaceSizes.sm} justify="center">
     {renderItem &&
       renderItem({

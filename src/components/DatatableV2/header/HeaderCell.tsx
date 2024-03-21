@@ -1,5 +1,4 @@
 import React, { CSSProperties } from 'react';
-import { flexRender } from '@tanstack/react-table';
 import clx from 'classnames';
 
 // import HeaderCellSortButton from './HeaderCellSortButton';
@@ -11,6 +10,7 @@ import { Inline } from '../../layout';
 import { Tooltip } from '../../Tooltip';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 import { displayColumnIds } from '../hooks/useDisplayColumns';
+import { parseFromValuesOrFunc } from '../utils';
 
 const getTextHeaderStyle = (
   labelLength: number | undefined,
@@ -57,7 +57,10 @@ const HeaderCell = <D,>({
     header,
     table,
   });
-  const headerElement = flexRender(headerComponent, getContext()) ?? cdHeader;
+  const headerElement = parseFromValuesOrFunc(
+    headerComponent ?? cdHeader,
+    getContext(),
+  );
   const headerStyle = getTextHeaderStyle(cdHeader?.length);
   return (
     <th

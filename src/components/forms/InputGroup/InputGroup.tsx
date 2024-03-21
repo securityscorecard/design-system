@@ -58,12 +58,12 @@ const IconContainer = styled(Padbox)`
   align-items: center;
 `;
 
-const InputGroup: React.FC<InputGroupProps & InlineProps> = ({
+const InputGroup = ({
   children,
   hasDivider,
   className,
   ...inlineProps
-}) => {
+}: InputGroupProps & InlineProps) => {
   const { error } = useLogger('InputGroup');
   const ALLOWED_CHILDREN = [
     Select,

@@ -73,7 +73,7 @@ const FiltersBase = styled(Padbox)`
   flex-grow: 1;
 `;
 
-const Filters: React.FC<FiltersProps> = ({
+const Filters = ({
   fields,
   state: stateFromProps,
   onApply,
@@ -85,7 +85,7 @@ const Filters: React.FC<FiltersProps> = ({
   isCancelEnabled = true,
   isOperatorFieldEnabled = true,
   defaultOperator = Operators.and,
-}) => {
+}: FiltersProps) => {
   const state = useMemo(
     () =>
       isOperatorFieldEnabled

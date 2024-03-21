@@ -34,7 +34,7 @@ const SortableListRoot = styled.div<{
     isNotUndefined($maxHeight) && pxToRem($maxHeight)};
 `;
 
-const SortableList: React.FC<SortableListProps> = ({
+const SortableList = ({
   items,
   labels,
   renderItem,
@@ -44,7 +44,7 @@ const SortableList: React.FC<SortableListProps> = ({
   onDragOver,
   onDragEnd,
   onDragCancel,
-}) => {
+}: SortableListProps) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor),

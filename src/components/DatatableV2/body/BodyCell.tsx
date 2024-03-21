@@ -1,4 +1,3 @@
-import { flexRender } from '@tanstack/react-table';
 import React, { useEffect, useState } from 'react';
 import clx from 'classnames';
 
@@ -6,6 +5,7 @@ import { getCommonCellStyles } from '../columns.utils';
 import { DatatableCell, DatatableInstance } from '../Datatable.types';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 import Skeleton from '../../Skeleton/Skeleton';
+import { parseFromValuesOrFunc } from '../utils';
 
 const BodyCell = <D,>({
   cell,
@@ -45,7 +45,7 @@ const BodyCell = <D,>({
       {isLoading ? (
         <Skeleton width={skeletonWidth} />
       ) : (
-        flexRender(cell.column.columnDef.cell, cell.getContext())
+        parseFromValuesOrFunc(cell.column.columnDef.cell, cell.getContext())
       )}
     </td>
   );

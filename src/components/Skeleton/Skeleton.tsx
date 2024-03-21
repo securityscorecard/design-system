@@ -53,7 +53,7 @@ const Placeholder = styled.span.withConfig({
   }
 `;
 
-const Skeleton: React.FC<SkeletonProps> = (props) => {
+const Skeleton = (props: SkeletonProps) => {
   return <Placeholder {...props} />;
 };
 

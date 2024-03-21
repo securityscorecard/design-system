@@ -14,7 +14,7 @@ interface MockObjectFilterProps {
   value: MockObject;
 }
 
-const MockObjectFilter: React.FC<MockObjectFilterProps> = ({ value }) => {
+const MockObjectFilter = ({ value }: MockObjectFilterProps) => {
   const [ipValue, setIpValue] = useState(value?.inputValue);
   const options = [
     {

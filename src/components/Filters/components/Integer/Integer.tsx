@@ -6,7 +6,7 @@ import { validateNumber } from '../../helpers';
 import { NumberPropTypes, NumberProps } from '../Number/Number.types';
 import { Input } from '../../../forms';
 
-const Integer: React.FC<NumberProps> = ({
+const Integer = ({
   value = '',
   onChange,
   min,
@@ -15,7 +15,7 @@ const Integer: React.FC<NumberProps> = ({
   errorMessage = 'Use only integers',
   isInvalid = false,
   onError,
-}) => {
+}: NumberProps) => {
   const handleKeyPress = (event) => {
     if (!/-|[0-9]/.test(event.key)) {
       event.preventDefault();

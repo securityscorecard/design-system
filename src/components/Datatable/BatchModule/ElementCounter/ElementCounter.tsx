@@ -69,11 +69,11 @@ const CounterText = styled(Text).attrs(() => ({
   line-height: ${pxToRem(24)};
 `;
 
-const ElementCounter: React.FC<ElementCounterProps> = ({
+const ElementCounter = ({
   dataSize,
   hasSelection,
   hasOnlyPerPageSelection,
-}) => {
+}: ElementCounterProps) => {
   const theme = useTheme();
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({

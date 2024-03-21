@@ -34,9 +34,7 @@ const BaseStyledIcon = styled(Icon)`
   font-size: ${getToken('font-action-size')};
 `;
 
-const BaseButton: React.FC<
-  BaseButtonProps & React.ComponentProps<typeof BaseStyledButton>
-> = ({
+const BaseButton = ({
   children,
   variant = BaseButtonVariants.solid,
   color = BaseButtonColors.primary,
@@ -53,7 +51,7 @@ const BaseButton: React.FC<
   loadingText = 'Loading',
   className,
   ...props
-}) => {
+}: BaseButtonProps & React.ComponentProps<typeof BaseStyledButton>) => {
   let RouterLink = null;
   const theme = useTheme();
   const { warn } = useLogger('Button');

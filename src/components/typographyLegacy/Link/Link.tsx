@@ -46,7 +46,7 @@ const LinkRoot = styled.a`
   ${({ $isExperimental }) => $isExperimental && experimetalLink}
 `;
 
-const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
+const Link = ({
   children,
   color = LinkColors.primary,
   as = null,
@@ -55,7 +55,7 @@ const Link: React.FC<LinkProps & React.ComponentProps<typeof LinkRoot>> = ({
   onClick,
   className,
   ...props
-}) => {
+}: LinkProps & React.ComponentProps<typeof LinkRoot>) => {
   let RouterLink = null;
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();

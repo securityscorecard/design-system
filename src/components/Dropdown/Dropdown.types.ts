@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { SpaceSize } from '../../theme/space.types';
 import { PaddingType } from '../../utils/space';
@@ -97,14 +97,7 @@ export interface DropdownProps extends BaseDropdownProps {
    * Callback called when the dropdown pane is opened.
    */
   onOpen?: () => void;
-  /**
-   * Imperative handle ref
-   */
-  ref?: React.Ref<{
-    togglePane: () => void;
-    hidePane: () => void;
-    showPane: () => void;
-  }>;
+  children: ReactNode;
 }
 
 export type InteractiveElement = HTMLButtonElement | HTMLAnchorElement;

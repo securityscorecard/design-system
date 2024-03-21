@@ -19,10 +19,10 @@ const MessageContainer = styled.div`
   }
 `;
 
-const Message: React.FC<MessageProps> = ({
+const Message = ({
   children,
   variant = MessageVariants.note,
-}) => (
+}: MessageProps) => (
   <MessageContainer className={CLX_COMPONENT}>
     <Paragraph size={TextSizes.md} variant={variant}>
       {children}
@@ -36,9 +36,9 @@ Message.propTypes = {
 
 export default Message;
 
-export const Note: React.FC = ({ children }) => (
+export const Note = ({ children }: Pick<MessageProps, 'children'>) => (
   <Message variant={MessageVariants.note}>{children}</Message>
 );
-export const Error: React.FC = ({ children }) => (
+export const Error = ({ children }: Pick<MessageProps, 'children'>) => (
   <Message variant={MessageVariants.error}>{children}</Message>
 );

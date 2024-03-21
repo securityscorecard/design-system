@@ -71,15 +71,17 @@ const MonthIndicator = styled.button`
   }
 `;
 
-export const DatePickerCustomHeader: React.FC<{
+type DatePickerCustomHeaderProps = {
   decreaseMonth: () => void;
   increaseMonth: () => void;
   increaseYear: () => void;
   decreaseYear: () => void;
   toggleYearPicker: () => void;
   date: Date;
+  // eslint-disable-next-line react/boolean-prop-naming
   showYearPicker: boolean;
-}> = ({
+};
+export const DatePickerCustomHeader = ({
   decreaseMonth,
   decreaseYear,
   toggleYearPicker,
@@ -87,7 +89,7 @@ export const DatePickerCustomHeader: React.FC<{
   increaseMonth,
   increaseYear,
   showYearPicker,
-}) => {
+}: DatePickerCustomHeaderProps) => {
   const [onClickLeft, onClickRight] = useMemo(() => {
     return showYearPicker
       ? [decreaseYear, increaseYear]
