@@ -55,7 +55,7 @@ const Link = ({
   onClick,
   className,
   ...props
-}: LinkProps & React.ComponentProps<typeof LinkRoot>) => {
+}: LinkProps) => {
   let RouterLink = null;
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();
