@@ -1,3 +1,10 @@
+# [1.23.0-beta.3](https://github.com/securityscorecard/design-system/compare/v1.23.0-beta.2...v1.23.0-beta.3) (2024-03-22)
+
+
+### Bug Fixes
+
+* **types:** add children prop ([11e0348](https://github.com/securityscorecard/design-system/commit/11e03487378e125250853c7b7ac0f78d9b9cf34c))
+
 # [1.23.0-beta.2](https://github.com/securityscorecard/design-system/compare/v1.23.0-beta.1...v1.23.0-beta.2) (2024-03-22)
 
 
