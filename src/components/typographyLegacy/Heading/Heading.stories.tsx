@@ -27,9 +27,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<
-  HeadingProps & { children: React.ReactChild }
-> = (args) => <Heading {...args} />;
+export const Playground: Story<HeadingProps> = (args) => <Heading {...args} />;
 Playground.args = {
   children: 'Playground Heading',
 };

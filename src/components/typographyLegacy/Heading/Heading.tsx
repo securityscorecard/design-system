@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { path } from 'ramda';
@@ -82,11 +82,12 @@ const Heading = ({
   variant = HeadingVariants.primary,
   className,
   ...props
-}: HeadingProps & React.ComponentProps<typeof HeadingH1>) => {
+}: HeadingProps & ComponentPropsWithoutRef<'h1'>) => {
   const additionalProps = {
     size,
     variant,
     className: cls(CLX_TYPOGRAPHY, className),
+    children,
     ...props,
   };
 
