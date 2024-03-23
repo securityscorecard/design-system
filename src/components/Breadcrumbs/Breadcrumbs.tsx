@@ -138,7 +138,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     >
       <InlineOrderedList
         align="center"
-        as="ol"
+        component="ol"
         gap={SpaceSizes.xs}
         justify="center"
       >

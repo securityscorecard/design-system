@@ -1,15 +1,22 @@
+import React, {
+  ComponentPropsWithoutRef,
+  ElementType,
+  PropsWithChildren,
+  forwardRef,
+} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import { Property } from 'csstype';
-import cls from 'classnames';
+import clx from 'classnames';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { AlignItemsPropType } from '../../../types/flex.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
+import styles from './Stack.module.css';
 
 export interface StackProps {
   /**
@@ -33,11 +40,12 @@ export interface StackProps {
    */
   isRecursive?: boolean;
   className?: string;
+  component?: ElementType;
 }
 
-const Stack = styled.div.attrs((props) => ({
+const StackSC = styled.div.attrs((props) => ({
   ...props,
-  className: cls(CLX_LAYOUT, props?.className),
+  className: clx(CLX_LAYOUT, props?.className),
 }))<StackProps>`
   display: flex;
   flex-direction: column;
@@ -70,19 +78,59 @@ const Stack = styled.div.attrs((props) => ({
     }
   `}
 `;
+const Stack = forwardRef<
+  HTMLDivElement,
+  PropsWithChildren<
+    Omit<StackProps, 'isRecursive'> & ComponentPropsWithoutRef<'div'>
+  >
+>(
+  (
+    {
+      children,
+      className,
+      splitAt,
+      justify,
+      align,
+      gap,
+      style,
+      component: Element = 'div',
+      ...props
+    },
+    ref,
+  ) => {
+    return (
+      <Element
+        ref={ref}
+        className={clx(styles['sscds-stack'], className, CLX_LAYOUT)}
+        data-sscds-stack-split={
+          typeof splitAt !== 'undefined' ? splitAt : undefined
+        }
+        style={{
+          '--sscds-stack-gap': `var(--sscds-space-${gap}, --sscds-space-none)`,
+          '--sscds-stack-justify': justify,
+          '--sscds-stack-align': align,
+          ...style,
+        }}
+        data-sscds-layout
+        {...props}
+      >
+        {children}
+      </Element>
+    );
+  },
+);
 
 Stack.propTypes = {
   gap: PropTypes.oneOf(Object.values(SpaceSizes)),
   justify: AlignItemsPropType,
   splitAt: PropTypes.number,
-  isRecursive: PropTypes.bool,
   className: PropTypes.string,
 };
 
 Stack.defaultProps = {
   gap: SpaceSizes.none,
   justify: 'stretch',
-  isRecursive: false,
 };
 
+export { StackSC };
 export default Stack;

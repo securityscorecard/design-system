@@ -49,7 +49,7 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
         <Stack gap={SpaceSizes.md}>
           <Inline
             align="center"
-            as="header"
+            component="header"
             gap={SpaceSizes.md}
             justify="space-between"
           >
@@ -63,7 +63,7 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
           {children}
           <Inline
             align="center"
-            as="footer"
+            component="footer"
             gap={SpaceSizes.md}
             justify="flex-end"
             stretch="start"

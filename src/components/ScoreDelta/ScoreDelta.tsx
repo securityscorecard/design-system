@@ -31,7 +31,7 @@ const ScoreDelta = React.forwardRef<HTMLDivElement, ScoreDeltaProps>(
     const text = Math.abs(delta).toFixed(decimalsCount);
 
     return (
-      <Inline ref={ref} align="center" as="span" gap="sm">
+      <Inline ref={ref} align="center" component="span" gap="sm">
         <TrendIcon type={type} />
         <Label type={type}>{text}</Label>
       </Inline>

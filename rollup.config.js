@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import url from '@rollup/plugin-url';
 import visualizer from 'rollup-plugin-visualizer';
 import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
 import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
 import addDisplayNameTransformer from 'ts-react-display-name';
 import { head, last, pipe, split } from 'ramda';
@@ -74,6 +75,12 @@ export default {
           before: [displayNameTransformer, styledComponentsTransformer],
         }),
       ],
+    }),
+    postcss({
+      modules: true,
+      extract: true,
+      // eslint-disable-next-line global-require
+      plugins: [require('autoprefixer')],
     }),
     terser(),
     visualizer({

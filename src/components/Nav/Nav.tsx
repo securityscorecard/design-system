@@ -13,7 +13,7 @@ Instead please use <Tabs> component (variant: \`text\`, size: \`large\`).
 https://securityscorecard.github.io/design-system/alpha/?path=/docs/components-tabs--playground#text-tabs
 `);
 
-  return <Inline as="nav" {...props} />;
+  return <Inline component="nav" {...props} />;
 };
 
 Nav.propTypes = Inline.propTypes;
