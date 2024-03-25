@@ -48,14 +48,14 @@ const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
   ${({ isRotated }) => isRotated && 'transform: rotate(90deg);'}
 `;
 
-const Collapsible: React.FC<CollapsibleProps> = ({
+const Collapsible = ({
   children,
   className,
   defaultIsOpened = false,
   subject,
   title,
   onOpen,
-}) => {
+}: CollapsibleProps) => {
   const [isOpen, setOpen] = useState(defaultIsOpened);
 
   const handleHeaderClick = () => {

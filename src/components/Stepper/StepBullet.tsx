@@ -61,12 +61,12 @@ const BULLET_VIEWBOX_SIZE = 20;
 const checkIconRatio = BULLET_VIEWBOX_SIZE / checkWidth / 2;
 const translateX = checkWidth / 2;
 
-const StepBullet: React.FC<StepBulletProps> = ({
+const StepBullet = ({
   stepNumber,
   isActive,
   isPending,
   isDone,
-}) => (
+}: StepBulletProps) => (
   <BulletWrapper>
     <Bullet viewBox={`0 0 ${BULLET_VIEWBOX_SIZE} ${BULLET_VIEWBOX_SIZE}`}>
       <BulletCircle

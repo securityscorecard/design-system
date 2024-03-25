@@ -10,7 +10,13 @@ import { DropdownPlacements, DropdownTriggerEvents } from './Dropdown.enums';
 import ControlledDropdown from './ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Dropdown: React.FC<DropdownProps> = React.forwardRef(
+type DropdownHandle = {
+  togglePane: () => void;
+  hidePane: () => void;
+  showPane: () => void;
+};
+
+const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
   (
     {
       children,

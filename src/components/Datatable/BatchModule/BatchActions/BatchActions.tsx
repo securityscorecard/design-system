@@ -29,7 +29,7 @@ const BatchActionButton = styled(BaseButton)`
   height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
 `;
 
-const BatchActions: React.FC<BatchActionsProps> = ({ actions }) => {
+const BatchActions = ({ actions }: BatchActionsProps) => {
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
       selectedIds: s.selectedIds,

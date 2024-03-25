@@ -9,14 +9,14 @@ import { SpaceSizes } from '../../theme/space.enums';
 import { BaseTabsWrapper } from '../_internal/BaseTabs/BaseTabsWrapper';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const Tabs: React.FC<TabsProps> = ({
+const Tabs = ({
   selectedValue,
   selectedPatternMatcher = equals,
   children,
   onSelectTab,
   variant = TabVariants.underline,
   isExpanded = false,
-}) => (
+}: TabsProps) => (
   <BaseTabsWrapper
     $isExpanded={isExpanded}
     $variant={variant}

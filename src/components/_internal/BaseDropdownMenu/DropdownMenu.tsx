@@ -52,14 +52,14 @@ const getOptions = () => {
   );
 };
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({
+const DropdownMenu = ({
   actions,
   defaultIsOpen = false,
   paneWidth = 'auto',
   children,
   className,
   placement = 'bottom',
-}) => {
+}: DropdownMenuProps) => {
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef({
     togglePane: noop,

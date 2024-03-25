@@ -16,6 +16,7 @@ export interface AccordionCollapsibleProps {
   title: ReactNode;
   handleHeaderClick?: (index?: AccordionItemId) => void;
   id: AccordionItemId;
+  children: ReactNode;
 }
 
 export interface AccordionProps {

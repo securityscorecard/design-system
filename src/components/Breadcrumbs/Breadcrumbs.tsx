@@ -92,11 +92,7 @@ const renderItemsBeforeAndAfter = (
   ];
 };
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+const Breadcrumbs = ({ children, className, ...props }: BreadcrumbsProps) => {
   const allItems = React.Children.map(children, (breadcrumbItem) => {
     if (!React.isValidElement(breadcrumbItem)) {
       return null;

@@ -12,10 +12,7 @@ const StepContainer = styled.div`
   height: ${pxToRem(418)};
 `;
 
-const WizardStep: React.FC<WizardStepProps> = ({
-  children,
-  ...step
-}: WizardStepProps) => {
+const WizardStep = ({ children, ...step }: WizardStepProps) => {
   const activeStep = useActiveStep();
   const isActiveStep = activeStep?.id === step.id;
   useRegisterStep(step);

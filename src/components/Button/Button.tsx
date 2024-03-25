@@ -1,8 +1,5 @@
-import React from 'react';
-
-import { ButtonProps } from './Button.types';
 import { BaseButton } from '../_internal/BaseButton';
 
-const Button: React.FC<ButtonProps> = BaseButton;
+const Button = BaseButton;
 
 export default Button;

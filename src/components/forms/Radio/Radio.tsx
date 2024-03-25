@@ -94,7 +94,7 @@ const RadioInput = styled.input<TogglingInputProps>`
     `}
 `;
 
-const Radio: React.FC<RadioProps> = ({
+const Radio = ({
   name,
   radioId,
   label,
@@ -102,7 +102,7 @@ const Radio: React.FC<RadioProps> = ({
   isInvalid = false,
   className,
   ...props
-}) => {
+}: RadioProps) => {
   const hasLabel = isNotUndefined(label);
 
   return (

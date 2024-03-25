@@ -41,11 +41,7 @@ const Handle = styled(Padbox)`
   }
 `;
 
-const SortableItem: React.FC<SortableItemProps> = ({
-  label,
-  id,
-  renderItem,
-}) => {
+const SortableItem = ({ label, id, renderItem }: SortableItemProps) => {
   const {
     attributes,
     listeners,

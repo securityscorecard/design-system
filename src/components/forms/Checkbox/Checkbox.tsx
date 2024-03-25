@@ -106,7 +106,7 @@ const getLabelStyles = css`
   margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
 `;
 
-const CheckboxLabel = styled(Label)<React.HTMLProps<HTMLLabelElement>>`
+const CheckboxLabel = styled(Label)<{ isDisabled: boolean }>`
   display: flex;
   align-items: center;
   padding-top: 0;

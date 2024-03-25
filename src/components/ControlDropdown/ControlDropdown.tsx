@@ -13,7 +13,7 @@ import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
-const ControlDropdown: React.FC<ControlDropdownProps> = ({
+const ControlDropdown = ({
   children,
   title,
   parentRef,
@@ -26,7 +26,7 @@ const ControlDropdown: React.FC<ControlDropdownProps> = ({
   resetLabel = 'Reset to defaults',
   placement = ControlDropdownPlacements.bottomLeft,
   width = 390,
-}) => {
+}: ControlDropdownProps) => {
   const [, setMounted] = useState(false);
   useEffect(() => {
     // Note: the popup hook used by the ControlledDropdown needs to be notified when the ref changes

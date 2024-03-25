@@ -4,4 +4,5 @@ export interface CollapsibleProps {
   subject?: string;
   title: React.ReactNode;
   onOpen?: () => void;
+  children: React.ReactNode;
 }

@@ -1,3 +1,5 @@
+import { ElementType, ReactNode } from 'react';
+
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { SpacingProps } from '../../../types/spacing.types';
 
@@ -9,4 +11,6 @@ export interface HeadingProps extends SpacingProps {
   size?: HeadingSizesTypes;
   variant?: HeadingVariantsTypes;
   className?: string;
+  children: ReactNode;
+  as?: ElementType;
 }

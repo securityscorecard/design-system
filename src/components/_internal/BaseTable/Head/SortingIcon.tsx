@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
@@ -22,8 +21,8 @@ const StyledIcon = styled(Icon).attrs((props) => ({
     `};
 `;
 
-const SortingIcon: React.FC<SortingIconProps> = React.memo(
-  ({ isSorted, isSortedDesc }) => {
+const SortingIcon = React.memo(
+  ({ isSorted, isSortedDesc }: SortingIconProps) => {
     if (isSortedDesc)
       return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
     if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
@@ -32,10 +31,5 @@ const SortingIcon: React.FC<SortingIconProps> = React.memo(
     );
   },
 );
-
-SortingIcon.propTypes = {
-  isSorted: PropTypes.bool,
-  isSortedDesc: PropTypes.bool,
-};
 
 export default SortingIcon;

@@ -18,11 +18,7 @@ export const defaultDSContext: DSContextValue = {
 };
 export const DSContext = React.createContext<DSContextValue>(defaultDSContext);
 
-const DSProvider: React.FC<DSProviderProps> = ({
-  children,
-  theme = {},
-  config = {},
-}) => {
+const DSProvider = ({ children, theme = {}, config = {} }: DSProviderProps) => {
   const dsTheme = createTheme(theme);
   const { hasIncludedGlobalStyles, ...dsConfig } = mergeDeepRight(
     defaultDSContext,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { Placements } from '../Dropdown/Dropdown.types';
 
@@ -47,4 +47,5 @@ export interface ControlDropdownProps {
    * Width of the dropdown
    */
   width?: number;
+  children: ReactNode;
 }

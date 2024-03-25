@@ -54,13 +54,13 @@ export const calculatePagePositions: (
 const formatNumber = (val: number) =>
   new Intl.NumberFormat('en-US').format(val);
 
-const PageButtons: React.FC<PageButtonsProps> = ({
+const PageButtons = ({
   currentPage,
   pageCount,
   onChange,
   positions,
   renderItem = PaginationItem,
-}) => {
+}: PageButtonsProps) => {
   const { pages, showLeftEllipsis, showRightEllipsis } = useMemo(
     () => calculatePagePositions(currentPage, pageCount, positions),
     [currentPage, pageCount, positions],

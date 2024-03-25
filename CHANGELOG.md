@@ -1,3 +1,24 @@
+# [1.23.0-beta.3](https://github.com/securityscorecard/design-system/compare/v1.23.0-beta.2...v1.23.0-beta.3) (2024-03-22)
+
+
+### Bug Fixes
+
+* **types:** add children prop ([11e0348](https://github.com/securityscorecard/design-system/commit/11e03487378e125250853c7b7ac0f78d9b9cf34c))
+
+# [1.23.0-beta.2](https://github.com/securityscorecard/design-system/compare/v1.23.0-beta.1...v1.23.0-beta.2) (2024-03-22)
+
+
+### Bug Fixes
+
+* remove types from package dependencies ([28ee76f](https://github.com/securityscorecard/design-system/commit/28ee76f4bea30552c08906439a119be924e3712e))
+
+# [1.23.0-beta.1](https://github.com/securityscorecard/design-system/compare/v1.22.3...v1.23.0-beta.1) (2024-03-21)
+
+
+### Features
+
+* **types:** explicitly define children property ([38092c0](https://github.com/securityscorecard/design-system/commit/38092c07b6bdb902aa6a716e171fcff6ec25d1d7))
+
 ## [1.22.3](https://github.com/securityscorecard/design-system/compare/v1.22.2...v1.22.3) (2024-03-06)
 
 

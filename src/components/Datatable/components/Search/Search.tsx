@@ -6,7 +6,7 @@ import { validatePattern } from '../../../Filters/helpers';
 import { Stack } from '../../../layout';
 import { SearchBar } from '../../../forms';
 
-const Search: React.FC<SearchProps> = ({
+const Search = ({
   onSearch,
   onClear,
   placeholder = 'Search',
@@ -14,7 +14,7 @@ const Search: React.FC<SearchProps> = ({
   pattern,
   errorMessage,
   ...props
-}) => {
+}: SearchProps) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(0);
@@ -55,6 +55,23 @@ const Search: React.FC<SearchProps> = ({
       );
     }
   };
+
+  if (props.defaultValue !== undefined) {
+    return (
+      <Stack>
+        <SearchBar
+          isInvalid={isInvalid}
+          isSearching={isSearching}
+          pattern={pattern}
+          placeholder={placeholder}
+          onClear={clear}
+          onKeyUp={handleKeyUp}
+          {...props}
+        />
+        {isInvalid && <Error>{errorMessage}</Error>}
+      </Stack>
+    );
+  }
 
   return (
     <Stack>

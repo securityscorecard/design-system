@@ -59,11 +59,7 @@ const Text = styled(BaseText)<{ $variant?: BannerProps['variant'] }>`
 
 const CHANGE_LAYOUT_BREAKPOINT = 'change-banner-layout';
 
-const BannerContent: React.FC<BannerProps> = ({
-  variant,
-  children,
-  actions,
-}) => (
+const BannerContent = ({ variant, children, actions }: BannerProps) => (
   <>
     <Text $variant={variant} as="div" size={TextSizes.md}>
       {children}
@@ -89,7 +85,7 @@ const BannerContent: React.FC<BannerProps> = ({
   </>
 );
 
-const Banner: React.FC<BannerProps> = ({
+const Banner = ({
   children,
   variant = BannerVariants.info,
   actions,
@@ -105,7 +101,7 @@ const Banner: React.FC<BannerProps> = ({
   className,
   changeLayoutBreakpoint = 960,
   ...props
-}) => {
+}: BannerProps) => {
   const changeLayoutQuery = useMemo(
     () => ({
       [CHANGE_LAYOUT_BREAKPOINT]: { minWidth: changeLayoutBreakpoint },

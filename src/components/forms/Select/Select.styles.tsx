@@ -1,4 +1,4 @@
-import React, { ComponentType, useState } from 'react';
+import React, { ComponentType, ReactNode, useState } from 'react';
 import { transparentize } from 'polished';
 import { ThemeConfig } from 'react-select/src/theme';
 import {
@@ -292,15 +292,14 @@ type InnerProps = {
   onMouseOver: React.MouseEventHandler<HTMLElement>;
   tabIndex: number;
 };
-export const MultiValueContainer: ComponentType<Record<string, unknown>> = ({
-  children,
-  innerProps,
-  ...props
-}) => (
+export const MultiValueContainer: ComponentType<{
+  children: ReactNode;
+  innerProps: InnerProps;
+}> = ({ children, innerProps, ...props }) => (
   <PillWrapper
     color={PillColorsEnums.gray}
     isClickable={false}
-    {...(innerProps as Record<string, unknown>)}
+    {...innerProps}
     {...props}
   >
     {children}

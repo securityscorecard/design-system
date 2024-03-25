@@ -81,13 +81,11 @@ export type DatatableColumnDef<D, V = unknown> = Omit<
   /**
    * Provide custom implementation for showing column header.
    */
-  headerComponent?:
-    | ((props: {
-        column: DatatableColumn<D, V>;
-        header: DatatableHeader<D>;
-        table: DatatableInstance<D>;
-      }) => ReactNode)
-    | ReactNode;
+  headerComponent?: (props: {
+    column: DatatableColumn<D, V>;
+    header: DatatableHeader<D>;
+    table: DatatableInstance<D>;
+  }) => ReactNode;
   /**
    * Provide custom implementation for showing column value.
    */
@@ -157,8 +155,19 @@ export type DatatableHeader<D> = Omit<
   };
 };
 
-export type DatatableCell<D> = Omit<Cell<D, unknown>, 'column'> & {
+export type DatatableCell<D, V = unknown> = Omit<
+  Cell<D, unknown>,
+  'column' | 'getContext'
+> & {
   column: DatatableColumn<D>;
+  getContext: () => {
+    cell: DatatableCell<D>;
+    column: DatatableColumn<D>;
+    getValue: Getter<V>;
+    renderValue: Getter<V | null>;
+    row: DatatableRow<D>;
+    table: DatatableInstance<D>;
+  };
 };
 
 export type DatatableRow<D> = Omit<Row<D>, 'getVisibleCells'> & {

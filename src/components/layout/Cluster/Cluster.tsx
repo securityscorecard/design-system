@@ -73,7 +73,7 @@ const ClusterParent = styled.div<ClusterParentProps>(
   },
 );
 
-const Cluster: React.FC<ClusterProps> = ({
+const Cluster = ({
   children,
   gap,
   align,
@@ -82,7 +82,7 @@ const Cluster: React.FC<ClusterProps> = ({
   wrapperEl,
   wrapperOverflow = 'hidden',
   ...props
-}) => (
+}: ClusterProps) => (
   <ClusterWrapper
     $overflow={wrapperOverflow}
     as={wrapperEl}

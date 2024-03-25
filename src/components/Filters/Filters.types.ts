@@ -28,12 +28,12 @@ interface ComponentProps {
 }
 
 export interface ComponentWithProps {
-  component: React.ReactNode;
+  component: React.ElementType | React.ReactNode;
   props: ComponentProps;
 }
 
 export interface Condition {
-  component: React.ReactNode | ComponentWithProps;
+  component: React.ElementType | React.ReactNode | ComponentWithProps;
   label: string;
   value: string;
   isDefault?: boolean;

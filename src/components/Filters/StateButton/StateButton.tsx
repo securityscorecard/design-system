@@ -65,12 +65,12 @@ const LightText = styled(Text)`
   font-weight: ${getFontWeight('medium')};
 `;
 
-const StateButton: React.FC<StateButtonProps> = ({
+const StateButton = ({
   index,
   onClick,
   isApplied = false,
   isLoading = false,
-}) => {
+}: StateButtonProps) => {
   const { iconColor, iconName, handleMouseOut, handleMouseOver } =
     useStateButtonIcon(isApplied);
   return (

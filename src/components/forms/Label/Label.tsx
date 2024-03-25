@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme';
-import { getSpace } from '../../../utils';
-import { Text } from '../../typographyLegacy';
-import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
+import { getFontSize, getLineHeight, getSpace } from '../../../utils';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
-const LabelContainer = styled(Text)`
+const LabelRoot = styled.label`
   display: block;
   padding-top: ${getSpace(SpaceSizes.xs)};
   padding-bottom: ${getSpace(SpaceSizes.xs)};
+  font-size: ${getFontSize('md')};
+  line-height: ${getLineHeight('md')};
   cursor: 'inherit';
 
   > * {
@@ -20,18 +20,19 @@ const LabelContainer = styled(Text)`
   }
 `;
 
-const Label: React.FC<
-  React.HTMLProps<HTMLLabelElement> & React.ComponentProps<typeof Text>
-> = ({ children, htmlFor, className, ...props }) => (
-  <LabelContainer
-    as="label"
+const Label = ({
+  children,
+  htmlFor,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<'label'> & { children: ReactNode }) => (
+  <LabelRoot
     className={cls(CLX_COMPONENT, className)}
     htmlFor={htmlFor}
-    size={TextSizes.md}
     {...props}
   >
     {children}
-  </LabelContainer>
+  </LabelRoot>
 );
 
 Label.propTypes = {

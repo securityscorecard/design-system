@@ -9,7 +9,7 @@ import { WizardProps } from './Wizard.types';
 import { WizardActions } from './WizardActions';
 import { WizardStepper } from './WizardStepper';
 
-const Wizard: React.FC<WizardProps> = ({
+const Wizard = ({
   initialStep,
   size = ModalSizes.lg,
   onStepChange = () => null,

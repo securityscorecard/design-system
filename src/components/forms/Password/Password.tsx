@@ -41,13 +41,13 @@ const ToggleButton = styled.button`
   justify-content: center;
 `;
 
-const Password: React.FC<PasswordProps> = ({
+const Password = ({
   isInvalid = false,
   isDisabled = false,
   defaultIsRevealed = false,
   className,
   ...props
-}) => {
+}: PasswordProps) => {
   const [isPasswordRevealed, setIsPasswordRevealed] =
     useState(defaultIsRevealed);
 

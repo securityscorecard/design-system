@@ -27,21 +27,21 @@ const IllustrationContainer = styled.div<{ size: string }>`
 const DEFAULT_TITLE = 'We cannot show this information now';
 const DEFAULT_CONTENT = 'If the problem persists, contact support.';
 
-const ExtraSmallErrorBoundary: React.FC<ErrorBoundaryProps> = ({
+const ExtraSmallErrorBoundary = ({
   content = 'Failed to load.',
-}) => (
+}: ErrorBoundaryProps) => (
   <Text size="md" variant="secondary">
     {content}
   </Text>
 );
 
-const SmallErrorBoundary: React.FC<ErrorBoundaryProps> = ({
+const SmallErrorBoundary = ({
   title = DEFAULT_TITLE,
   content = DEFAULT_CONTENT,
   illustration,
   onClick,
   size,
-}) => {
+}: ErrorBoundaryProps) => {
   return (
     <Inline align="center" gap="md">
       {illustration && (
@@ -59,14 +59,14 @@ const SmallErrorBoundary: React.FC<ErrorBoundaryProps> = ({
     </Inline>
   );
 };
-const MediumErrorBoundary: React.FC<ErrorBoundaryProps> = ({
+const MediumErrorBoundary = ({
   illustration,
   title = DEFAULT_TITLE,
   content = DEFAULT_CONTENT,
   justify = 'center',
   size,
   onClick,
-}) => {
+}: ErrorBoundaryProps) => {
   return (
     <Stack gap="sm" justify={justify}>
       {illustration && (
@@ -90,7 +90,7 @@ const ComponentSizeMap = {
   lg: MediumErrorBoundary,
 };
 
-const ErrorBoundary: React.FC<ErrorBoundaryProps> = (props) => {
+const ErrorBoundary = (props: ErrorBoundaryProps) => {
   const { size } = props;
   const Component = ComponentSizeMap[size];
   return <Component {...props} />;
