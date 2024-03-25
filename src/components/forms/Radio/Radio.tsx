@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { getFormStyle, getRadii, pxToRem } from '../../../utils';
+import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';
@@ -53,6 +53,7 @@ const RadioLabel = styled(Label)<
 
   &::before {
     border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+    background-color: ${getColor('neutral.0')};
   }
 `;
 

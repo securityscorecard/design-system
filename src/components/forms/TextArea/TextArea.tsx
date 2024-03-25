@@ -78,6 +78,7 @@ const TextareaRoot = styled(Padbox)<TextareaRootProps>`
   box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
   color: ${getFormStyle('color')};
   cursor: text;
+  background-color: ${getColor('neutral.0')};
 
   ${({ $hasMaxLength }) =>
     $hasMaxLength &&
