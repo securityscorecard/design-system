@@ -32,7 +32,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
       <Inline gap={SpaceSizes.lg}>
         <AddFilterButton
           color="primary"
-          iconName="plus"
+          iconStart={{ iconName: 'plus' }}
           variant="text"
           onClick={onAdd}
         >
