@@ -31,6 +31,23 @@ export default {
     },
     iconName: {
       ...generateControl('select', SSCIconNames),
+      description: '@deprecated Use iconStart property instead',
+    },
+    iconStart: {
+      iconName: { ...generateControl('select', SSCIconNames) },
+      iconType: 'ssc',
+    },
+    iconEnd: {
+      iconName: { ...generateControl('select', SSCIconNames) },
+      iconType: 'ssc',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `Parameters "iconName" and "iconType" are deprecated. These are kept for backward compatibility. You should define the icon using 
+        \`\`\`iconStart={{iconName, iconType}}\`\`\` to define the icon before text or with \`\`\`iconEnd={{iconName, iconType}}\`\`\` to place icon after text`,
+      },
     },
   },
 } as Meta;
@@ -276,21 +293,21 @@ export const LoadingButtons: Story = () => (
     </Button>
     <Button
       color="primary"
-      iconName={SSCIconNames.wrench}
+      iconStart={{ iconName: SSCIconNames.wrench }}
       variant="solid"
       isLoading
     />
 
     <Button
       color="primary"
-      iconName={SSCIconNames.wrench}
+      iconStart={{ iconName: SSCIconNames.wrench }}
       variant="outline"
       isLoading
     />
 
     <Button
       color="primary"
-      iconName={SSCIconNames.wrench}
+      iconStart={{ iconName: SSCIconNames.wrench }}
       variant="text"
       isLoading
     />
@@ -299,35 +316,77 @@ export const LoadingButtons: Story = () => (
 
 export const ButtonsWithIconOverview: Story = () => (
   <Inline gap={SpaceSizes.md}>
-    <Button color="primary" iconName={SSCIconNames.wrench} variant="solid">
+    <Button
+      color="primary"
+      iconStart={{ iconName: SSCIconNames.wrench }}
+      variant="solid"
+    >
       Button
     </Button>
     <Button
       aria-label="Wrench solid icon button"
       color="primary"
-      iconName={SSCIconNames.wrench}
+      iconStart={{ iconName: SSCIconNames.wrench }}
       variant="solid"
     />
+    <Button
+      color="primary"
+      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      variant="solid"
+    >
+      Button
+    </Button>
+    <Button
+      color="primary"
+      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      iconStart={{ iconName: SSCIconNames.wrench }}
+      variant="solid"
+    >
+      Button
+    </Button>
 
-    <Button color="primary" iconName={SSCIconNames.wrench} variant="outline">
+    <Button
+      color="primary"
+      iconStart={{ iconName: SSCIconNames.wrench }}
+      variant="outline"
+    >
       Button
     </Button>
     <Button
       aria-label="Wrench outline icon button"
       color="primary"
-      iconName={SSCIconNames.wrench}
+      iconStart={{ iconName: SSCIconNames.wrench }}
       variant="outline"
     />
+    <Button
+      color="primary"
+      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      variant="outline"
+    >
+      Button
+    </Button>
 
-    <Button color="primary" iconName={SSCIconNames.wrench} variant="text">
+    <Button
+      color="primary"
+      iconStart={{ iconName: SSCIconNames.wrench }}
+      variant="text"
+    >
       Button
     </Button>
     <Button
       aria-label="Wrench text icon button"
       color="primary"
-      iconName={SSCIconNames.wrench}
+      iconStart={{ iconName: SSCIconNames.wrench }}
       variant="text"
     />
+    <Button
+      aria-label="Wrench text icon button"
+      color="primary"
+      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      variant="text"
+    >
+      Button
+    </Button>
   </Inline>
 );
 

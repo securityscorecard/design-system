@@ -40,6 +40,8 @@ const BaseButton: React.FC<
   children,
   variant = BaseButtonVariants.solid,
   color = BaseButtonColors.primary,
+  iconStart,
+  iconEnd,
   iconName,
   iconType = IconTypes.ssc,
   as = null,
@@ -61,6 +63,8 @@ const BaseButton: React.FC<
     RouterLink = requireRouterLink();
   }
 
+  const startIcon = iconName ? { iconName, iconType } : iconStart;
+
   if (isDisabled && href) {
     warn(
       '"isDisabled" prop in <Button> component will be ignored if the "href" prop is defined',
@@ -79,7 +83,9 @@ const BaseButton: React.FC<
     return null;
   }
 
-  const hasOnlyIcon = isNotUndefined(iconName) && isUndefined(children);
+  const hasOnlyIcon =
+    (isNotUndefined(startIcon) || isNotUndefined(iconEnd)) &&
+    isUndefined(children);
   const content = isLoading ? (
     <>
       <Spinner
@@ -91,10 +97,15 @@ const BaseButton: React.FC<
       />
       {!hasOnlyIcon && <span>{loadingText}</span>}
     </>
-  ) : isNotUndefined(iconName) ? (
+  ) : isNotUndefined(startIcon) || isNotUndefined(iconEnd) ? (
     <>
-      <BaseStyledIcon name={iconName} type={iconType} />
+      {startIcon && (
+        <BaseStyledIcon name={startIcon?.iconName} type={startIcon?.iconType} />
+      )}
       {isNotUndefined(children) && <span>{children}</span>}
+      {iconEnd && (
+        <BaseStyledIcon name={iconEnd.iconName} type={iconEnd.iconType} />
+      )}
     </>
   ) : (
     children

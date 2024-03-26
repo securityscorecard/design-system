@@ -45,7 +45,7 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
         <BreadcrumbLink
           color="secondary"
           href={href}
-          iconName={iconName}
+          iconStart={{ iconName }}
           to={to}
           variant="text"
           {...props}
