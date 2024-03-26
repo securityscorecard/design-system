@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "storybook": "start-storybook -p 8008",
+    "storybook": "start-storybook -p 8008 --no-open",
     "storybook:build": "build-storybook --quiet",
     "test:storybook:visual": "./visual-regressions/bin/take-and-check-in-docker.sh",
     "test:storybook:visual:update": "./visual-regressions/bin/take-and-update-in-docker.sh",

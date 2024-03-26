@@ -31,7 +31,7 @@ export interface BaseButtonProps
   className?: string;
   iconName?: SSCIcons | string;
   loadingText?: string;
-  iconType?: IconTypes | string;
+  iconType?: IconTypes;
   tabIndex?: number;
 }
 
