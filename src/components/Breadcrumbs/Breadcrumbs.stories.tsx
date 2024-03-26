@@ -53,7 +53,7 @@ export const WithTwoItems: Story<BreadcrumbsProps> = () => {
 export const WithDropdown: Story<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
-      <BreadcrumbItem href="#" iconName="cog">
+      <BreadcrumbItem href="#" iconStart={{ iconName: 'cog' }}>
         Root
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Parent1</BreadcrumbItem>
