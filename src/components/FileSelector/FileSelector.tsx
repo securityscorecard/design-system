@@ -173,7 +173,7 @@ const FileSelector = ({
         <ExtendableButton
           {...getRootProps({
             ...passedProps,
-            iconName: SSCIconNames.upload,
+            iconStart: { iconName: SSCIconNames.upload },
             isDisabled,
             isExpanded: size === FileSelectorSizes.fill,
             variant: ButtonVariants.outline,
@@ -210,7 +210,7 @@ const FileSelector = ({
       >
         <div>
           <ExtendableButton
-            iconName={SSCIconNames.upload}
+            iconStart={{ iconName: SSCIconNames.upload }}
             isDisabled={isDisabled}
             tabIndex={-1}
             type="button"

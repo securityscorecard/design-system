@@ -30,7 +30,7 @@ Custom.args = {
       <Paragraph variant="secondary">
         If you want to see followd companies in here you need to add it first
       </Paragraph>
-      <Button iconName="plus" onClick={action('add-company')}>
+      <Button iconStart={{ iconName: 'plus' }} onClick={action('add-company')}>
         Add company
       </Button>
     </Stack>

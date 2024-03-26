@@ -106,7 +106,7 @@ const Snippet = forwardRef<
               aria-label={
                 isCopied ? 'Copied to clipboard' : 'Copy to clipboard'
               }
-              iconName={isCopied ? 'check' : 'copy'}
+              iconStart={{ iconName: isCopied ? 'check' : 'copy' }}
               variant="ghost"
               onClick={() => copy(snippetText)}
             >
