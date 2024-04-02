@@ -16,6 +16,7 @@ export const MenuContent = styled(DropdownMenu.Content)`
 
 const MenuItemRoot = styled(DropdownMenu.Item)`
   opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  cursor: pointer;
 
   &:hover {
     background: ${({ disabled, theme }) =>
