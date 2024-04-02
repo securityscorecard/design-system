@@ -16,6 +16,12 @@ export type Variants =
 export type Sizes = typeof BaseButtonSizes[keyof typeof BaseButtonSizes];
 export type Colors = typeof BaseButtonColors[keyof typeof BaseButtonColors];
 
+export interface BaseIcon {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  iconName: SSCIcons | (string & {});
+  iconType?: IconTypes | string;
+}
+
 export interface BaseButtonProps
   extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'as'> {
   variant?: Variants;
@@ -29,9 +35,13 @@ export interface BaseButtonProps
   href?: string;
   to?: To;
   className?: string;
+  iconStart?: BaseIcon;
+  iconEnd?: BaseIcon;
+  /** @deprecated Use iconStart property instead */
   iconName?: SSCIcons | string;
-  loadingText?: string;
+  /** @deprecated Use iconStart property instead */
   iconType?: IconTypes | string;
+  loadingText?: string;
   tabIndex?: number;
 }
 
