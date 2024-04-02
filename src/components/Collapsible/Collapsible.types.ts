@@ -1,8 +1,19 @@
+import { ReactNode } from 'react';
+
 export interface CollapsibleProps {
-  className?: string;
-  defaultIsOpened?: boolean;
+  /** Main title, accepts custom react node */
+  title: ReactNode;
+  /** Content of collapsible panel */
+  children: ReactNode;
+  /** Second header line */
   subject?: string;
-  title: React.ReactNode;
+  /** (UNCONTROLLED) Default state of collapsible panel */
+  defaultIsOpen?: boolean;
+  /** (UNCONTROLLED) Callback fired when collapsible panel is opened */
   onOpen?: () => void;
-  children: React.ReactNode;
+  /** (CONTROLLED) Collapsible panel external state */
+  isOpen?: boolean;
+  /** (CONTROLLED) Callback fired on collapsible panel state change */
+  onOpenChange?: (open: boolean) => void;
+  className?: string;
 }
