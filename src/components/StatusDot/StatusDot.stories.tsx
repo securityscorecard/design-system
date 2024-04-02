@@ -11,9 +11,10 @@ export default {
 
 export const Default: Story = () => (
   <Inline gap="lg">
-    <StatusDot color="good" />
-    <StatusDot color="bad" />
-    <StatusDot color="neutral" />
+    <StatusDot color="success" />
+    <StatusDot color="danger" />
+    <StatusDot color="warn" />
+    <StatusDot color="info" />
     <StatusDot color="inactive" />
   </Inline>
 );

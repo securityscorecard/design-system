@@ -2,23 +2,26 @@ import React from 'react';
 import Styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getRadii, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 
 export const StatusDotColors = {
-  good: '73, 162, 90',
-  bad: '242, 46, 67',
-  neutral: '84, 129, 217',
-  inactive: '216, 216, 216',
+  good: 'success.500',
+  bad: 'error.500',
+  neutral: 'info.500',
+  success: 'success.500',
+  danger: 'error.500',
+  warn: 'severity.low',
+  info: 'info.500',
+  inactive: 'neutral.400',
 } as const;
 
 const StatusDotComponent = Styled.div`
   width: ${pxToRem(12)};
   height: ${pxToRem(12)};
   border-radius: ${getRadii('round')};
-  background-color: rgb(${({ color }) => StatusDotColors[color]});
+  background-color: ${({ color }) => getColor(StatusDotColors[color])};
   border: 2px solid white;
-  box-shadow: 0 0 12px 0px rgba(${({ color }) =>
-    `${StatusDotColors[color]}, 0.5`});
+  box-shadow: 0 0 12px 0px ${({ color }) => getColor(StatusDotColors[color])}80;
 `;
 
 const StatusDot = ({
