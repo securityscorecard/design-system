@@ -58,7 +58,6 @@ export const useOptions = <D>({
       columnDefType: 'display',
       enableColumnActions: false,
       enableHiding: false,
-      enableOrdering: false,
       enablePinning: false,
       enableResizing: false,
       enableSorting: false,

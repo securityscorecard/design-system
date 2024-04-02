@@ -3,7 +3,7 @@ import React, { ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 
 import Datatable from '../Datatable';
-import Template, { Story, columns } from './Template';
+import Template, { Story } from './Template';
 
 export default {
   title: 'components/DatatableV2/ColumnOrdering',
@@ -22,15 +22,6 @@ export const DisabledColumnOrdering: Story = Template.bind({});
 DisabledColumnOrdering.args = {
   ...Template.args,
   enableColumnOrdering: false,
-};
-
-export const DisabledColumnOrderingForColumn: Story = Template.bind({});
-DisabledColumnOrderingForColumn.args = {
-  ...Template.args,
-  columns: [
-    ...columns,
-    { accessorKey: 'country', header: 'Country', enableOrdering: false },
-  ],
 };
 
 export const ColumnOrderingWithPinnedColumns: Story = Template.bind({});
