@@ -100,3 +100,16 @@ Width.args = {
   width: 400,
   defaultIsPopupDisplayed: true,
 };
+
+export const WithDelay: Story<TooltipProps & { children: React.ReactChild }> = (
+  args,
+) => <Tooltip {...args} />;
+
+WithDelay.args = {
+  ...Playground.args,
+  enterDelay: 1000,
+};
+
+WithDelay.parameters = {
+  screenshot: { skip: true },
+};

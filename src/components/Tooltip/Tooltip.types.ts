@@ -14,6 +14,7 @@ export interface TooltipProps {
   className?: string;
   placement?: Placements;
   width?: 'auto' | number;
+  enterDelay?: number;
   defaultIsPopupDisplayed?: boolean;
   wrapperEl?: ReactComponentLike;
   children: ReactNode;
