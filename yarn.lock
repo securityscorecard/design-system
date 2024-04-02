@@ -3514,6 +3514,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-collapsible@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-collapsible@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/primitive": 1.0.1
+    "@radix-ui/react-compose-refs": 1.0.1
+    "@radix-ui/react-context": 1.0.1
+    "@radix-ui/react-id": 1.0.1
+    "@radix-ui/react-presence": 1.0.1
+    "@radix-ui/react-primitive": 1.0.3
+    "@radix-ui/react-use-controllable-state": 1.0.1
+    "@radix-ui/react-use-layout-effect": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 26976e4a72a3e0f4b2c62af2898b3e205c3652af46a3b41cda9a43567fe8381d9ef6afb0b29e3214c450b847f4f2099a533cffc5045844ecab290e9fa6114ca9
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-collection@npm:1.0.3":
   version: 1.0.3
   resolution: "@radix-ui/react-collection@npm:1.0.3"
@@ -4162,6 +4189,7 @@ __metadata:
     "@geometricpanda/storybook-addon-badges": ^0.2.1
     "@mdx-js/react": ^1.6.22
     "@popperjs/core": ^2.11.4
+    "@radix-ui/react-collapsible": ^1.0.3
     "@radix-ui/react-dropdown-menu": ^2.0.6
     "@radix-ui/react-tooltip": ^1.0.7
     "@react-aria/utils": ^3.12.0

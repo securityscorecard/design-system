@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { includes } from 'ramda';
 import cls from 'classnames';
+import * as RadixCollapsible from '@radix-ui/react-collapsible';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor } from '../../utils';
+import { createPadding, getColor } from '../../utils';
 import { Icon } from '../Icon';
 import { Text } from '../typographyLegacy';
 import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
 import { CollapsibleProps } from './Collapsible.types';
-import { Padbox } from '../layout/Padbox';
 import { Inline } from '../layout/Inline';
 import { SpaceSizes } from '../../theme/space.enums';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
-import { Surface } from '../layout';
+import { Padbox, Surface } from '../layout';
 
 const Header = styled(Padbox)`
   width: 100%;
   cursor: pointer;
-  border-radius: var(--sscds-borderRadius);
+  border-radius: var(--sscds-radius);
 
   ${({ $isOpen }) =>
     $isOpen &&
@@ -37,80 +34,91 @@ const HeaderContent = styled.div`
   flex: 1;
 `;
 
-const Content = styled(Padbox)`
+const Content = styled(RadixCollapsible.Content)`
   border-top: 1px solid var(--sscds-border-color);
+  ${({ theme }) =>
+    createPadding({ paddingType: 'squish', paddingSize: 'lg', theme })}
 `;
 
-const StyledIcon = styled(Icon).withConfig<{ isRotated: boolean }>({
-  shouldForwardProp: (property) => !includes(property, ['isRotated']),
-})`
+const StyledIcon = styled(Icon)`
   transition: transform 200ms;
-  ${({ isRotated }) => isRotated && 'transform: rotate(90deg);'}
 `;
 
 const Collapsible = ({
   children,
   className,
-  defaultIsOpened = false,
+  defaultIsOpen = false,
   subject,
   title,
   onOpen,
+  onOpenChange,
+  isOpen: controlledIsOpen,
 }: CollapsibleProps) => {
-  const [isOpen, setOpen] = useState(defaultIsOpened);
+  const isControlled = typeof onOpenChange === 'function';
+  const [isOpen, setIsOpen] = useState(defaultIsOpen);
+  const internalIsOpen = controlledIsOpen ?? isOpen;
 
-  const handleHeaderClick = () => {
-    const willOpen = !isOpen;
-    setOpen(willOpen);
-    if (typeof onOpen === 'function' && willOpen) {
-      onOpen();
+  const handleHeaderClick = (open) => {
+    if (isControlled) {
+      onOpenChange(open);
+    } else {
+      setIsOpen(open);
+    }
+    if (!isControlled && open) {
+      onOpen?.();
     }
   };
 
   return (
-    <Surface className={cls(CLX_COMPONENT, className)} radius="sm" hasBorder>
-      <Header
-        $isOpen={isOpen}
-        paddingSize={SpaceSizes.mdPlus}
-        paddingType={PaddingTypes.squish}
-        tabIndex={0}
-        onClick={handleHeaderClick}
-        onKeyDown={(e) => ['Enter', ' '].includes(e.key) && handleHeaderClick()}
+    <RadixCollapsible.Root
+      open={internalIsOpen}
+      onOpenChange={handleHeaderClick}
+    >
+      <Surface
+        className={cls(CLX_COMPONENT, className)}
+        radius="sm"
+        style={{ display: 'flex', flexDirection: 'column' }}
+        hasBorder
       >
-        <Inline align="center" gap={SpaceSizes.md}>
-          <StyledIcon
-            isRotated={isOpen}
-            name={SSCIconNames.angleRight}
-            type={IconTypes.ssc}
-          />
-          <HeaderContent>
-            <Text as="div" size={TextSizes.md} variant={TextVariants.secondary}>
-              {title}
+        <RadixCollapsible.Trigger>
+          <Header
+            $isOpen={internalIsOpen}
+            paddingSize="mdPlus"
+            paddingType="squish"
+          >
+            <Inline align="center" gap={SpaceSizes.md}>
+              <StyledIcon
+                name={SSCIconNames.angleRight}
+                rotation={internalIsOpen ? 90 : undefined}
+                type={IconTypes.ssc}
+              />
+              <HeaderContent>
+                <Text
+                  as="div"
+                  size={TextSizes.md}
+                  variant={TextVariants.secondary}
+                >
+                  {title}
+                </Text>
+                {subject && (
+                  <Text as="div" size={TextSizes.lg} isBold>
+                    {subject}
+                  </Text>
+                )}
+              </HeaderContent>
+            </Inline>
+          </Header>
+        </RadixCollapsible.Trigger>
+        {internalIsOpen && (
+          <Content>
+            <Text as="div" size={TextSizes.md}>
+              {children}
             </Text>
-            {subject && (
-              <Text as="div" size={TextSizes.lg} isBold>
-                {subject}
-              </Text>
-            )}
-          </HeaderContent>
-        </Inline>
-      </Header>
-      {isOpen && (
-        <Content paddingSize={SpaceSizes.lg} paddingType={PaddingTypes.squish}>
-          <Text as="div" size={TextSizes.md}>
-            {children}
-          </Text>
-        </Content>
-      )}
-    </Surface>
+          </Content>
+        )}
+      </Surface>
+    </RadixCollapsible.Root>
   );
-};
-
-Collapsible.propTypes = {
-  title: PropTypes.node.isRequired,
-  subject: PropTypes.string,
-  className: PropTypes.string,
-  defaultIsOpened: PropTypes.bool,
-  onOpen: PropTypes.func,
 };
 
 export default Collapsible;
