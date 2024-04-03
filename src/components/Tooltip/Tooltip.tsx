@@ -94,6 +94,7 @@ const Tooltip = ({
   placement = 'bottom',
   popup,
   width = 270,
+  enterDelay = 100,
   wrapperEl: Wrapper = 'span',
   ...props
 }: TooltipProps) => {
@@ -108,7 +109,10 @@ const Tooltip = ({
   if (isFalsy(popup)) return <>{children}</>;
 
   return (
-    <RadixTooltip.Root defaultOpen={defaultIsPopupDisplayed} delayDuration={0}>
+    <RadixTooltip.Root
+      defaultOpen={defaultIsPopupDisplayed}
+      delayDuration={enterDelay}
+    >
       <RadixTooltip.Trigger asChild>
         <Wrapper {...props}>{children}</Wrapper>
       </RadixTooltip.Trigger>

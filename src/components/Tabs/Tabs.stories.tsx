@@ -42,7 +42,7 @@ const TabsTemplate: Story<TabsProps> = (args) => (
     </Tab>
     <Tab value="inventory" onClick={action('tab-click')}>
       <Inline align="center" gap="sm">
-        <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
+        <Icon color="primary.500" name="sitemap" style={{ fontSize: '1rem' }} />
         <span>Inventory</span>
         <Badge count={3} variant="neutral" />
       </Inline>
@@ -72,7 +72,7 @@ export const UnderlineTabsWithCustomColor: Story<TabsProps> = (args) => (
     </Tab>
     <Tab value="inventory">
       <Inline align="center" gap="sm">
-        <Icon color="primary.500" name="reorder" style={{ fontSize: '1rem' }} />
+        <Icon color="primary.500" name="sitemap" style={{ fontSize: '1rem' }} />
         <span>Inventory</span>
         <Badge count={3} variant="neutral" />
       </Inline>

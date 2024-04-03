@@ -29,7 +29,7 @@ const BreadcrumbItem = ({
   iconName,
   ...props
 }: BreadcrumbItemProps) => {
-  const hasIcon = isNotUndefined(iconName);
+  const hasIcon = isNotUndefined(iconName) || isNotUndefined(props.iconStart);
   const label = hasIcon ? { 'aria-label': children } : { children };
   return (
     <ListItem>
@@ -45,7 +45,7 @@ const BreadcrumbItem = ({
         <BreadcrumbLink
           color="secondary"
           href={href}
-          iconName={iconName}
+          iconStart={{ iconName }}
           to={to}
           variant="text"
           {...props}
