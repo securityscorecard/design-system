@@ -1,3 +1,20 @@
+# [1.24.0](https://github.com/securityscorecard/design-system/compare/v1.23.0...v1.24.0) (2024-04-03)
+
+
+### Bug Fixes
+
+* **DatatableV2:** remove column ordering ([2ddd7fd](https://github.com/securityscorecard/design-system/commit/2ddd7fd08797f27b11c05df1df800b3538d80af7))
+* **icons:** remove unused icons ([e0ce373](https://github.com/securityscorecard/design-system/commit/e0ce373796f18d3373d3621730840fa23a0845c7))
+
+
+### Features
+
+* **Button:** add iconStart and IconEnd properties ([c7e57ac](https://github.com/securityscorecard/design-system/commit/c7e57ac1ebe81c9eb205a6c7907d7ecc359270e4))
+* **Collapsible:** add controlled mode ([63eef04](https://github.com/securityscorecard/design-system/commit/63eef042d305b8cb59c190e60cc7be78e3193698))
+* **DatatableV2:** set cursor for actions ([99bdd9f](https://github.com/securityscorecard/design-system/commit/99bdd9f32eede8bfbcf15fa570edc971eac5a511))
+* **StatusDot:** update colors and add warn color ([509bc2b](https://github.com/securityscorecard/design-system/commit/509bc2b475d7e139a59e203dc664bd2c41eb7a9a))
+* **Tooltip:** add enter delay prop ([b4908eb](https://github.com/securityscorecard/design-system/commit/b4908eb97e1e96c062ec3dea96fc2006eed0368a))
+
 # [1.23.0](https://github.com/securityscorecard/design-system/compare/v1.22.3...v1.23.0) (2024-03-25)
 
 
