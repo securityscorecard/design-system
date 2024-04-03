@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/securityscorecard/design-system/compare/v1.24.0...v1.24.1) (2024-04-03)
+
+
+### Bug Fixes
+
+* **Button:** fix icon props API ([e36a1ef](https://github.com/securityscorecard/design-system/commit/e36a1ef885ad7031db4e9af1fc411fb9400b5883))
+
 # [1.24.0](https://github.com/securityscorecard/design-system/compare/v1.23.0...v1.24.0) (2024-04-03)
 
 
