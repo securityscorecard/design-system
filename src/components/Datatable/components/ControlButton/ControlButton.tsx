@@ -19,7 +19,7 @@ const ControlButton = ({
 }: ControlButtonProps) => (
   <Button
     className={className}
-    iconStart={{ iconName, iconType: 'ssc' }}
+    iconStart={{ name: iconName, type: 'ssc' }}
     type="button"
     variant="text"
     onClick={onClick}

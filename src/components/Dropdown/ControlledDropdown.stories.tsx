@@ -50,7 +50,7 @@ export const UsingWithAnotherComponentControlled: Story<DropdownProps> = (
     <>
       <span ref={setTriggerEl} /* HACK since Button does not forward ref */>
         <Button
-          iconStart={{ iconName: 'plus' }}
+          iconStart={{ name: 'plus' }}
           variant="text"
           onClick={() => {
             setIsDropdownOpen((prev) => !prev);

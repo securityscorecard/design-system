@@ -240,7 +240,7 @@ export const UsingWithAnotherComponent: Story<DropdownProps> = () => (
   <Dropdown
     innerPaddingSize="sm"
     trigger={
-      <Button iconStart={{ iconName: 'plus' }} variant="text">
+      <Button iconStart={{ name: 'plus' }} variant="text">
         Add kitten
       </Button>
     }

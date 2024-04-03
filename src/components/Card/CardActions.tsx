@@ -33,8 +33,8 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
               data-interactive="true"
               href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
               iconStart={{
-                iconName: action.iconName,
-                iconType: action.iconType,
+                name: action.iconName,
+                type: action.iconType,
               }}
               isDisabled={action.isDisabled}
               to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}

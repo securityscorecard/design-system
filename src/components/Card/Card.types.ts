@@ -16,7 +16,7 @@ export interface CardActionsProps {
     {
       isDisabled?: boolean;
       iconName?: SSCIcons | string;
-      iconType?: Types | string;
+      iconType?: Types;
       ariaLabel?: string;
     }
   >[];
