@@ -18,8 +18,8 @@ export type Colors = typeof BaseButtonColors[keyof typeof BaseButtonColors];
 
 export interface BaseIcon {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  iconName: SSCIcons | (string & {});
-  iconType?: IconTypes | string;
+  name: SSCIcons | (string & {});
+  type?: IconTypes;
 }
 
 export interface BaseButtonProps

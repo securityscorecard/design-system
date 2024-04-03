@@ -160,7 +160,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
                   <Button
                     aria-label="Unpin all columns"
                     color="secondary"
-                    iconStart={{ iconName: 'times' }}
+                    iconStart={{ name: 'times' }}
                     type="button"
                     variant="ghost"
                     onClick={() => {

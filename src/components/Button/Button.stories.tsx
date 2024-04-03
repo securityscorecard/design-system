@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { Inline, Stack } from '../layout';
 import Button from './Button';
@@ -31,21 +31,45 @@ export default {
     },
     iconName: {
       ...generateControl('select', SSCIconNames),
-      description: '@deprecated Use iconStart property instead',
+      description: '(Deprecated) Use iconStart property instead',
+    },
+    iconType: {
+      ...generateControl('select', IconTypes),
+      description: '(Deprecated) Use iconStart property instead',
     },
     iconStart: {
-      iconName: { ...generateControl('select', SSCIconNames) },
-      iconType: 'ssc',
+      control: {
+        type: 'object',
+      },
+      table: {
+        type: {
+          summary: 'BaseIcon',
+          detail: `{
+  name: SSCIcons | (string & {});
+  type?: IconTypes;
+}`,
+        },
+      },
     },
     iconEnd: {
-      iconName: { ...generateControl('select', SSCIconNames) },
-      iconType: 'ssc',
+      control: {
+        type: 'object',
+      },
+      table: {
+        type: {
+          summary: 'BaseIcon',
+          detail: `{
+  name: SSCIcons | (string & {});
+  type?: IconTypes;
+}`,
+        },
+      },
     },
   },
   parameters: {
     docs: {
       description: {
-        component: `Parameters "iconName" and "iconType" are deprecated. These are kept for backward compatibility. You should define the icon using 
+        component: `Parameters "iconName" and "iconType" are deprecated. These are kept for backward compatibility. You should define the icon using
         \`\`\`iconStart={{iconName, iconType}}\`\`\` to define the icon before text or with \`\`\`iconEnd={{iconName, iconType}}\`\`\` to place icon after text`,
       },
     },
@@ -293,21 +317,21 @@ export const LoadingButtons: Story = () => (
     </Button>
     <Button
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="solid"
       isLoading
     />
 
     <Button
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="outline"
       isLoading
     />
 
     <Button
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="text"
       isLoading
     />
@@ -318,7 +342,7 @@ export const ButtonsWithIconOverview: Story = () => (
   <Inline gap={SpaceSizes.md}>
     <Button
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="solid"
     >
       Button
@@ -326,20 +350,20 @@ export const ButtonsWithIconOverview: Story = () => (
     <Button
       aria-label="Wrench solid icon button"
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="solid"
     />
     <Button
       color="primary"
-      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      iconEnd={{ name: SSCIconNames.wrench, type: 'ssc' }}
       variant="solid"
     >
       Button
     </Button>
     <Button
       color="primary"
-      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconEnd={{ name: SSCIconNames.cog, type: 'ssc' }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="solid"
     >
       Button
@@ -347,7 +371,7 @@ export const ButtonsWithIconOverview: Story = () => (
 
     <Button
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="outline"
     >
       Button
@@ -355,12 +379,12 @@ export const ButtonsWithIconOverview: Story = () => (
     <Button
       aria-label="Wrench outline icon button"
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="outline"
     />
     <Button
       color="primary"
-      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      iconEnd={{ name: SSCIconNames.wrench, type: 'ssc' }}
       variant="outline"
     >
       Button
@@ -368,7 +392,7 @@ export const ButtonsWithIconOverview: Story = () => (
 
     <Button
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="text"
     >
       Button
@@ -376,17 +400,24 @@ export const ButtonsWithIconOverview: Story = () => (
     <Button
       aria-label="Wrench text icon button"
       color="primary"
-      iconStart={{ iconName: SSCIconNames.wrench }}
+      iconStart={{ name: SSCIconNames.wrench }}
       variant="text"
     />
     <Button
       aria-label="Wrench text icon button"
       color="primary"
-      iconEnd={{ iconName: SSCIconNames.wrench, iconType: 'ssc' }}
+      iconEnd={{ name: SSCIconNames.wrench, type: 'ssc' }}
       variant="text"
     >
       Button
     </Button>
+    <Button
+      aria-label="Wrench text icon button"
+      color="primary"
+      iconName={SSCIconNames.wrench}
+      iconType="ssc"
+      variant="text"
+    />
   </Inline>
 );
 
