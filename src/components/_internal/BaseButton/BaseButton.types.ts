@@ -12,9 +12,9 @@ import {
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 
 export type Variants =
-  typeof BaseButtonVariants[keyof typeof BaseButtonVariants];
-export type Sizes = typeof BaseButtonSizes[keyof typeof BaseButtonSizes];
-export type Colors = typeof BaseButtonColors[keyof typeof BaseButtonColors];
+  (typeof BaseButtonVariants)[keyof typeof BaseButtonVariants];
+export type Sizes = (typeof BaseButtonSizes)[keyof typeof BaseButtonSizes];
+export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
 
 export interface BaseIcon {
   // eslint-disable-next-line @typescript-eslint/ban-types

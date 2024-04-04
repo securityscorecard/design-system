@@ -25,6 +25,6 @@ export interface FilterRowProps extends Filter {
   isInvalid: boolean;
   onError?: (boolean) => void;
   isOperatorFieldEnabled?: boolean;
-  defaultOperator?: typeof Operators[keyof typeof Operators];
+  defaultOperator?: (typeof Operators)[keyof typeof Operators];
   hasApplyButton?: boolean;
 }

@@ -1,7 +1,7 @@
 import { addInstance, removeInstance, updateInstance } from './utils';
 
 const instance = { id: '1', x: 1 };
-const initialState: typeof instance[] = [];
+const initialState: (typeof instance)[] = [];
 
 describe('managers/utils', () => {
   describe('addInstance', () => {
