@@ -14,11 +14,11 @@ const SurfaceMode = ['light', 'dark'] as const;
 
 interface SurfaceProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
-  background?: typeof SurfaceBackgrounds[number];
-  radius?: typeof SurfaceRadii[number];
+  background?: (typeof SurfaceBackgrounds)[number];
+  radius?: (typeof SurfaceRadii)[number];
   elevation?: number;
   hasBorder?: boolean;
-  mode?: typeof SurfaceMode[number];
+  mode?: (typeof SurfaceMode)[number];
 }
 
 const SurfaceRoot = styled.div`
@@ -30,8 +30,8 @@ const SurfaceRoot = styled.div`
     box-shadow 300ms ease-in;
 `;
 const getBackground = (
-  background: typeof SurfaceBackgrounds[number],
-  mode: typeof SurfaceMode[number],
+  background: (typeof SurfaceBackgrounds)[number],
+  mode: (typeof SurfaceMode)[number],
 ): string => {
   switch (background) {
     case 'dynamic':
@@ -51,7 +51,7 @@ const getShadow = (elevation: number) => {
 };
 
 const radiiMap: Record<
-  Exclude<typeof SurfaceRadii[number], 'none'>,
+  Exclude<(typeof SurfaceRadii)[number], 'none'>,
   Exclude<Radii, 'circle' | 'half' | 'round'>
 > = {
   sm: 'default',

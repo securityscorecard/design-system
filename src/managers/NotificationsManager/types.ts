@@ -9,7 +9,7 @@ export enum ACTIONS {
   REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION',
 }
 
-export type NotificationActions = typeof ACTIONS[keyof typeof ACTIONS];
+export type NotificationActions = (typeof ACTIONS)[keyof typeof ACTIONS];
 
 export interface Notification {
   id: string;

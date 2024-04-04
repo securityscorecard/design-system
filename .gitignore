@@ -13,7 +13,6 @@ stats
 coverage
 .scannerwork
 
-.pnp.*
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

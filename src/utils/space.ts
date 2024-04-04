@@ -13,7 +13,7 @@ import { ThemeType, pxToRem } from './helpers';
 import { PaddingTypes } from '../components/layout/Padbox/Padbox.enums';
 import { SpaceSize } from '../theme/space.types';
 
-export type PaddingType = typeof PaddingTypes[keyof typeof PaddingTypes];
+export type PaddingType = (typeof PaddingTypes)[keyof typeof PaddingTypes];
 type PaddingSpaceProps = {
   paddingType: PaddingType;
   paddingSize: SpaceSize;

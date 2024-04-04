@@ -22,16 +22,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
+            node_modules
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -58,19 +55,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-18-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -94,19 +88,16 @@ jobs:
         with:
           node-version: 16 # use Node@16 until we upgrade Storybook
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -152,19 +143,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-18-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -188,19 +176,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-18-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -224,19 +209,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-18-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -263,16 +245,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
+            node_modules
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
@@ -314,19 +293,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-18-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -370,19 +346,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-18-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-18-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -427,19 +400,16 @@ jobs:
         with:
           node-version: 16  # use Node@16 until we upgrade Storybook
 
-      - name: Cache yarn pnp files
+      - name: Cache yarn files
         uses: actions/cache@v4
         id: cache
         with:
           path: |
-            .yarn/cache
-            .yarn/unplugged
             .yarn/install-state.gz
-            .pnp.cjs
-            .pnp.loader.mjs
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+            node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
