@@ -121,13 +121,10 @@ export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
   const timeoutRef = useRef(null);
 
   const dispatchFetchData = useCallback(
-    ({ pageSize, pageIndex, sortBy, filters, query }) => {
+    ({ pageSize, pageIndex }) => {
       action('onDataFetch')({
         pageSize,
         pageIndex,
-        sortBy,
-        filters,
-        query,
       });
       setIsLoading(true);
       timeoutRef.current = setTimeout(() => {

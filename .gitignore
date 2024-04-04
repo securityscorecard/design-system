@@ -12,6 +12,7 @@ yarn-error.log
 stats
 coverage
 .scannerwork
+tsconfig.tsbuildinfo
 
 .yarn/*
 !.yarn/patches

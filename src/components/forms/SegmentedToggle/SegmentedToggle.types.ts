@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface SegmentedToggleItemProps
-  extends Omit<React.HTMLAttributes<HTMLInputElement>, 'size'> {
+  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> {
   label: string;
   value: React.ReactText;
   itemId: string;

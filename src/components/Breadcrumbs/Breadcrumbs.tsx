@@ -5,7 +5,10 @@ import styled from 'styled-components';
 import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { BreadcrumbsProps } from './Breadcrumbs.types';
+import type {
+  BreadcrumbItemProps,
+  BreadcrumbsProps,
+} from './Breadcrumbs.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
@@ -98,12 +101,15 @@ const Breadcrumbs = ({ children, className, ...props }: BreadcrumbsProps) => {
       return null;
     }
 
-    return React.cloneElement(breadcrumbItem, {
-      isSelected:
-        isNilOrEmpty(breadcrumbItem.props.to) &&
-        isNilOrEmpty(breadcrumbItem.props.href),
-      ...props,
-    });
+    return React.cloneElement(
+      breadcrumbItem as React.ReactElement<BreadcrumbItemProps>,
+      {
+        isSelected:
+          isNilOrEmpty(breadcrumbItem.props.to) &&
+          isNilOrEmpty(breadcrumbItem.props.href),
+        ...props,
+      },
+    );
   });
 
   const allDropdownActions = slice(
