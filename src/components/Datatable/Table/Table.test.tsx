@@ -134,7 +134,7 @@ describe('Datatable/Table', () => {
       );
     });
   });
-  it.only('should call onClick handler in row action dropdown with correct parameters', async () => {
+  it('should call onClick handler in row action dropdown with correct parameters', async () => {
     const rowActionMock = jest.fn();
     const rowIndex = 0;
     renderWithProviders(
