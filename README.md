@@ -18,7 +18,7 @@ npm install @securityscorecard/design-system
 git clone https://github.com/securityscorecard/design-system
 cd design-system
 yarn
-yarn run storybook
+yarn storybook
 ```
 
 ### Development in third-party application
