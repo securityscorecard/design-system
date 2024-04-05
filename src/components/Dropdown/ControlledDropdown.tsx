@@ -83,9 +83,6 @@ ControlledDropdown.propTypes = {
   ]),
   isPaneElevated: PropTypes.bool,
   hasPaneArrow: PropTypes.bool,
-  style: PropTypes.objectOf(
-    PropTypes.oneOf([PropTypes.string, PropTypes.number]),
-  ),
   onClickOut: PropTypes.func,
 };
 

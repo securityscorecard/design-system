@@ -15,7 +15,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { StretchEnum } from './Inline.enums';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
-type Stretch = typeof StretchEnum[keyof typeof StretchEnum];
+type Stretch = (typeof StretchEnum)[keyof typeof StretchEnum];
 
 export interface InlineProps {
   /**

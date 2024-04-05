@@ -1,20 +1,21 @@
-FROM ubuntu:bionic
+FROM node:18.20.0
 
-RUN apt update \
-&& apt upgrade
-RUN apt install -y curl
-
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash
-RUN apt install -y nodejs
-RUN apt install -y chromium-browser
-RUN npm install -g yarn
-
+RUN apt-get update -q -y \
+  && apt-get install -q -y --no-install-recommends \
+    apt-utils \
+    ca-certificates \
+    apt-transport-https \
+    chromium \
+  && apt-get upgrade -q -y \
+  && apt-get clean
 
 WORKDIR /usr/src/app
 
 COPY package.json .
 COPY yarn.lock .
-RUN yarn --frozen-lockfile || (tail -30 yarn-error.log && exit 1)
+COPY .yarnrc.yml .
+COPY .yarn ./.yarn
+RUN yarn --immutable || (tail -30 yarn-error.log && exit 1)
 COPY bin bin
 
 ENV PATH="$PATH:/usr/src/app/node_modules/.bin/"

@@ -128,6 +128,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'react/react-in-jsx-scope': 'off',
     'fp/no-arguments': 'error',
     'fp/no-delete': 'error',
     'fp/no-get-set': 'error',

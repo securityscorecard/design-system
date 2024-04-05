@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   roots: ['./src'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
