@@ -1,3 +1,25 @@
+# [2.0.0-beta.1](https://github.com/securityscorecard/design-system/compare/v1.24.1...v2.0.0-beta.1) (2024-04-05)
+
+
+### Build System
+
+* replace building with vite ([4c0b9df](https://github.com/securityscorecard/design-system/commit/4c0b9dfc7635723558067db784342e05daa954f3))
+* use Node@18 as build version ([b30ce31](https://github.com/securityscorecard/design-system/commit/b30ce31c0e1c864d5492e4b3584fb7cfdf5e28ee))
+
+
+### chore
+
+* **yarn:** switch to node-modules linker ([823ccaf](https://github.com/securityscorecard/design-system/commit/823ccaf5c513b4f4e2eb24a3952873dcfa7d8d23))
+
+
+### BREAKING CHANGES
+
+* This commit contains possibly several braking changes. It updates large number of dependencies and adds `exports` field in the package.json. We also slightly change the setting of the tsconfig.
+
+Ref UXD-1107
+* **yarn:** This PR takes advantage of changing yarn.lock format and refresh its whole content. This will lead to large number of changes in underlying package versions.
+* Changing used Node version for building the library should always be treated as breaking. The upgrade of Chromium version used in Docker image for taking visual tests had impact on large number of tests.
+
 ## [1.24.1](https://github.com/securityscorecard/design-system/compare/v1.24.0...v1.24.1) (2024-04-03)
 
 
