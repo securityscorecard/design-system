@@ -58,7 +58,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
             <SelectButton
               style={{ marginLeft: '-14px' }}
               table={table}
-              isSelectAll
+              isHeaderCheckbox
             />
           )}
           <div>

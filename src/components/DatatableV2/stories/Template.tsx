@@ -47,6 +47,7 @@ Template.args = {
     pagination: { pageSize: 5 },
   },
   rowsPerPageOptions: [5, 10, 25, 50, 100],
+  getRowId: (row) => row.id,
 };
 
 export default Template;
