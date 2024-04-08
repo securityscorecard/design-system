@@ -1,3 +1,10 @@
+## [1.24.2](https://github.com/securityscorecard/design-system/compare/v1.24.1...v1.24.2) (2024-04-08)
+
+
+### Bug Fixes
+
+* **Drawer:** fix backdrop flickering with outside clicks ([192d585](https://github.com/securityscorecard/design-system/commit/192d58561e9fe62cd790b2ba64f5115d50adeefa))
+
 ## [1.24.1](https://github.com/securityscorecard/design-system/compare/v1.24.0...v1.24.1) (2024-04-03)
 
 
