@@ -169,6 +169,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       containerId: portalsContainerId,
       internalShowHide: false,
       autoRemoveContainer: false,
+      clickOutsideToHide: hasBackdrop,
     });
     const drawerRef = useOuterClick<HTMLDivElement>(onClose);
 
