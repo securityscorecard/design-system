@@ -58,7 +58,10 @@ export const InitialExpandedSomeDetailPanels: Story = Template.bind({});
 InitialExpandedSomeDetailPanels.args = {
   ...DetailPanelEnabled.args,
   initialState: {
-    expanded: { 2: true, 4: true },
+    expanded: {
+      'dc7f6ee9-be51-4938-90f5-d6b48d95f498': true,
+      'e23968c3-3f19-44b2-aee9-c4a1d7c326ee': true,
+    },
   },
 };
 InitialExpandedSomeDetailPanels.parameters = {
@@ -66,7 +69,9 @@ InitialExpandedSomeDetailPanels.parameters = {
 };
 
 export const DetailPanelManagedState: Story = (args) => {
-  const [expanded, setExpanded] = useState<ExpandedState>({ 1: true });
+  const [expanded, setExpanded] = useState<ExpandedState>({
+    'dc7f6ee9-be51-4938-90f5-d6b48d95f498': true,
+  });
 
   return (
     <>

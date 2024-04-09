@@ -30,6 +30,15 @@ DisabledSelection.parameters = {
   screenshot: { skip: false },
 };
 
+export const DisabledBatchRowSelection: Story = Template.bind({});
+DisabledBatchRowSelection.args = {
+  ...Template.args,
+  enableBatchRowSelection: false,
+};
+DisabledBatchRowSelection.parameters = {
+  screenshot: { skip: false },
+};
+
 export const SingleRowSelection: Story = Template.bind({});
 SingleRowSelection.args = {
   ...SelectionEnabled.args,
