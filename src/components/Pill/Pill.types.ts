@@ -35,6 +35,10 @@ export interface PillProps extends Partial<PillWrapperProps> {
    */
   label: string;
   /**
+   * Pill title, if not provided it will be the same as the label.
+   */
+  title?: string;
+  /**
    * Callback called when remove button is clicked. Remove button is rendered
    * only when this property is defined.
    */

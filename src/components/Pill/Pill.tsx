@@ -12,6 +12,7 @@ import PillRemoveButton from './PillRemoveButton';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const Pill = ({
+  title,
   label,
   maxLabelLength = 16,
   isClickable = false,
@@ -78,7 +79,7 @@ const Pill = ({
       {adornment}
       <PillLabel
         $maxLength={maxLabelLength}
-        title={gt(maxLabelLength, 0) ? label : undefined}
+        title={gt(maxLabelLength, 0) ? title || label : undefined}
       >
         {label}
       </PillLabel>
