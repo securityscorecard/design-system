@@ -20,7 +20,6 @@ import { Types as SSCIconTypes, SSCIcons } from '../Icon';
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
   | 'accessorFn'
-  | 'accessorFn'
   | 'cell'
   | 'header'
   | 'aggregatedCell'
@@ -221,6 +220,7 @@ export interface ParsedDatatableOptions<D>
   defaultDisplayColumn?: Partial<DatatableColumnDef<D>> & {
     columnDefType: 'display';
   };
+  enableBatchRowSelection?: DatatableOptions<D>['enableBatchRowSelection'];
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
   enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
   enableExpandAll?: DatatableOptions<D>['enableExpandAll'];
@@ -263,6 +263,7 @@ export interface DatatableInstance<D>
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
   refs: {
     tableRef: MutableRefObject<HTMLTableElement>;
+    lastSelectedRowIdRef: MutableRefObject<null | string>;
   };
 }
 
@@ -409,6 +410,12 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableRowSelection?: TableOptions<D>['enableRowSelection'];
+  /**
+   * Enables/disables batch row selection when `Shift` key is pressed.
+   *
+   * @default true
+   */
+  enableBatchRowSelection?: boolean;
   /**
    * Enables/disables rows per page selector for the table. This property REQUIRES
    * `enablePagination` to be true.

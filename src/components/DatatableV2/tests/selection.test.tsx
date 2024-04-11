@@ -57,6 +57,25 @@ describe('DatatableV2/selection', () => {
       ).not.toBeChecked();
     });
 
+    describe('batch selection', () => {
+      it('should select row in batches when Shift key is pressed', async () => {
+        renderWithProviders(
+          <Datatable
+            data={data}
+            columns={columns}
+            enableRowSelection
+            id="test"
+          />,
+        );
+        const rows = screen.getAllByLabelText('Toggle select row');
+        await userEvent.click(rows[0]);
+        await userEvent.click(rows[2], { shiftKey: true });
+
+        expect(rows[1]).toBeChecked();
+        expect(screen.getAllByLabelText('Toggle select all')[0]).toBeChecked();
+      });
+    });
+
     describe('select all', () => {
       it('should select all rows on click on selection header', async () => {
         renderWithProviders(

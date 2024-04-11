@@ -42,6 +42,7 @@ export const useDatatable = <D>(
   const tableOptions = useOptions<D>(options);
   const displayColumns = useDisplayColumns<D>(tableOptions);
   const tableRef = useRef<HTMLTableElement>();
+  const lastSelectedRowIdRef = useRef<null | string>(null);
 
   const columnDefs = useMemo(
     () =>
@@ -163,6 +164,7 @@ export const useDatatable = <D>(
 
   table.refs = {
     tableRef,
+    lastSelectedRowIdRef,
   };
 
   table.setShowColumnSettings =

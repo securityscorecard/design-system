@@ -1,17 +1,61 @@
-import React, { ComponentProps, ComponentPropsWithoutRef } from 'react';
+import React, {
+  ChangeEvent,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from 'react';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 
+const selectRowHandler =
+  <D,>({ row, table }: { row: DatatableRow<D>; table: DatatableInstance<D> }) =>
+  (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      options: { enableBatchRowSelection, enableMultiRowSelection },
+      refs: { lastSelectedRowIdRef: lastSelectedRowId },
+    } = table;
+    const wasCurrentRowChecked = row.getIsSelected();
+
+    row.toggleSelected(!wasCurrentRowChecked);
+
+    if (
+      enableBatchRowSelection &&
+      enableMultiRowSelection &&
+      (event.nativeEvent as PointerEvent).shiftKey &&
+      lastSelectedRowId.current !== null
+    ) {
+      const { rows } = table.getPrePaginationRowModel();
+      const lastIndex = rows.findIndex(
+        (r) => r.id === lastSelectedRowId.current,
+      );
+
+      if (lastIndex !== -1) {
+        const isLastIndexChecked = rows[lastIndex].getIsSelected();
+        const currentIndex = rows.findIndex((r) => r.id === row.id);
+        const [start, end] =
+          lastIndex < currentIndex
+            ? [lastIndex, currentIndex]
+            : [currentIndex, lastIndex];
+        if (wasCurrentRowChecked !== isLastIndexChecked) {
+          for (let i = start; i <= end; i++) {
+            rows[i].toggleSelected(!wasCurrentRowChecked);
+          }
+        }
+      }
+    }
+
+    lastSelectedRowId.current = row.id;
+  };
+
 const SelectButton = <D,>({
   row,
   table,
-  isSelectAll,
+  isHeaderCheckbox = false,
   style,
 }: {
   row?: DatatableRow<D>;
   table: DatatableInstance<D>;
-  isSelectAll?: boolean;
+  isHeaderCheckbox?: boolean;
 } & ComponentPropsWithoutRef<'input'>) => {
   const {
     getState,
@@ -19,23 +63,25 @@ const SelectButton = <D,>({
   } = table;
   const { isLoading } = getState();
 
-  const allRowsSelected = !isSelectAll
-    ? undefined
-    : selectAllMode === 'all'
-    ? table.getIsAllRowsSelected()
-    : table.getIsAllPageRowsSelected();
+  const allRowsSelected =
+    selectAllMode === 'all'
+      ? table.getIsAllRowsSelected()
+      : table.getIsAllPageRowsSelected();
 
   const common: ComponentProps<'input'> = {
-    checked: isSelectAll ? allRowsSelected : row?.getIsSelected(),
+    checked: isHeaderCheckbox ? allRowsSelected : row?.getIsSelected(),
     disabled: isLoading || (row && !row?.getCanSelect()),
-    'aria-label': isSelectAll ? 'Toggle select all' : 'Toggle select row',
+    'aria-label': isHeaderCheckbox ? 'Toggle select all' : 'Toggle select row',
     onChange: (e) => {
       e.stopPropagation();
-      row
-        ? row.getToggleSelectedHandler()(e)
-        : selectAllMode === 'all'
-        ? table.getToggleAllRowsSelectedHandler()(e)
-        : table.getToggleAllPageRowsSelectedHandler()(e);
+
+      if (isHeaderCheckbox) {
+        selectAllMode === 'all'
+          ? table.getToggleAllRowsSelectedHandler()(e)
+          : table.getToggleAllPageRowsSelectedHandler()(e);
+      } else {
+        selectRowHandler({ row, table })(e);
+      }
     },
   };
 
@@ -50,7 +96,9 @@ const SelectButton = <D,>({
     <IndeterminateCheckbox
       className="ds-table-select-multi-button ds-table-select-button"
       indeterminate={
-        isSelectAll ? table.getIsSomeRowsSelected() && !allRowsSelected : false
+        isHeaderCheckbox
+          ? table.getIsSomeRowsSelected() && !allRowsSelected
+          : false
       }
       {...common}
       style={styles}
