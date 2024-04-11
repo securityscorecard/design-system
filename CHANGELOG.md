@@ -1,3 +1,11 @@
+# [1.25.0](https://github.com/securityscorecard/design-system/compare/v1.24.2...v1.25.0) (2024-04-11)
+
+
+### Features
+
+* **DatatableV2:** allow batch selection with Shift key ([f145088](https://github.com/securityscorecard/design-system/commit/f145088a9cb3167b636be429f8359e93e01691fc))
+* **Pill:** expose "title" property ([a9700d9](https://github.com/securityscorecard/design-system/commit/a9700d902a98a3dff1b26fe9dd6fc0b8a1111ada))
+
 ## [1.24.2](https://github.com/securityscorecard/design-system/compare/v1.24.1...v1.24.2) (2024-04-08)
 
 
