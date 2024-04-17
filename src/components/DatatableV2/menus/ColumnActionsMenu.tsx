@@ -1,6 +1,6 @@
 import React from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ColumnPinningPosition } from '@tanstack/react-table';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import { MenuContent, MenuItem, MenuSeparator } from './menuElements';
@@ -19,15 +19,17 @@ const ColumnActionsMenu = <D,>({
       enableColumnOrdering,
       enableColumnPinning,
       enableColumnResizing,
+      enableFullScreenMode,
       enableHiding,
       enableSorting,
       enableSortingRemoval,
     },
     setColumnSizingInfo,
     setShowColumnSettings,
+    setIsFullscreenMode,
   } = table;
   const { column } = header;
-  const { columnSizing } = getState();
+  const { columnSizing, isFullscreenMode } = getState();
 
   const hidableColumns = getHidableColumns(table);
 
@@ -52,6 +54,9 @@ const ColumnActionsMenu = <D,>({
   };
   const handleColumnSettings = () => {
     setShowColumnSettings((old) => !old);
+  };
+  const handleFullscreenMode = () => {
+    setIsFullscreenMode((old) => !old);
   };
 
   const columnActionsMenu = [
@@ -166,6 +171,21 @@ const ColumnActionsMenu = <D,>({
           >
             Reset column size
           </MenuItem>,
+          enableFullScreenMode ? (
+            <MenuSeparator key="col-action-sep-05" />
+          ) : undefined,
+        ]
+      : []),
+    ...(enableFullScreenMode
+      ? [
+          <MenuItem
+            key="col-action-fullscreen"
+            className="ds-table-column-actions-menu-item"
+            iconName={isFullscreenMode ? 'compress' : 'expand'}
+            onClick={handleFullscreenMode}
+          >
+            Toggle full screen
+          </MenuItem>,
         ]
       : []),
   ].filter(Boolean);
@@ -173,9 +193,11 @@ const ColumnActionsMenu = <D,>({
   return (
     <DropdownMenu.Portal>
       <MenuContent
+        $isFullscreen={isFullscreenMode}
         align="start"
         className="ds-table-column-actions-menu-content"
         collisionPadding={10}
+        sideOffset={5}
       >
         {columnActionsMenu}
       </MenuContent>
