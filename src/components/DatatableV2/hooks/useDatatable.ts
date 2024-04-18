@@ -86,6 +86,9 @@ export const useDatatable = <D>(
   const [showColumnSettings, setShowColumnSettings] = useState<boolean>(
     initialState?.showColumnSettings ?? false,
   );
+  const [isFullscreenMode, setIsFullscreenMode] = useState(
+    initialState?.isFullscreenMode ?? false,
+  );
   const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
     initialState?.columnSizing ?? {},
   );
@@ -143,6 +146,7 @@ export const useDatatable = <D>(
     initialState,
     state: {
       showColumnSettings,
+      isFullscreenMode,
       columnSizing,
       ...tableOptions.state,
       // I know what I'm doing here
@@ -169,6 +173,8 @@ export const useDatatable = <D>(
 
   table.setShowColumnSettings =
     tableOptions.onShowColumnSettings ?? setShowColumnSettings;
+  table.setIsFullscreenMode =
+    tableOptions.onFullscreenModeChange ?? setIsFullscreenMode;
   table.setColumnSizing =
     tableOptions.onColumnSizingChange ?? debouncedSetColumnSizing;
 

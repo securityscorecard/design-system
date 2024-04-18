@@ -121,6 +121,10 @@ const TableRoot = styled.div`
     align-items: flex-start;
   }
 
+  .ds-table-body-cell:has([data-radix-popper-content-wrapper]) {
+    z-index: 2 !important;
+  }
+
   .ds-table-cell-display {
     padding: var(--sscds-table-spacing-cell-display);
   }
@@ -161,6 +165,19 @@ const TableRoot = styled.div`
     padding: 0 0.5rem;
     align-items: center;
     justify-content: center;
+  }
+
+  &.isFullscreen {
+    .ds-table {
+      max-height: calc(100vh - var(--sscds-table-height-pagination));
+      overflow: auto;
+    }
+
+    .ds-table-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
   }
 `;
 

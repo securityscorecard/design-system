@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { getColor, getRadii } from '../../../utils';
 import { Icon, SSCIcons } from '../../Icon';
 import { Padbox } from '../../layout';
-import { Tooltip } from '../../Tooltip';
 
 interface IconButtonProps extends Omit<ComponentProps<'button'>, 'disabled'> {
   label: string;
@@ -36,7 +35,8 @@ const IconButtonRoot = styled(Padbox)`
     background: ${getColor('primary.50')};
     color: ${getColor('text.primary')};
   }
-  &:not(:disabled):active {
+  &:not(:disabled):active,
+  &:not(:disabled)[data-state='open'] {
     background: ${getColor('primary.200')};
     color: ${getColor('text.primary')};
   }
@@ -45,24 +45,18 @@ const IconButtonRoot = styled(Padbox)`
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ iconName, label, iconProps, isDisabled, ...props }, ref) => {
     return (
-      <Tooltip
-        placement="top"
-        popup={isDisabled ? undefined : label}
-        width="auto"
+      <IconButtonRoot
+        ref={ref}
+        aria-label={label}
+        as="button"
+        disabled={isDisabled}
+        paddingSize="sm"
+        paddingType="squish"
+        type="button"
+        {...props}
       >
-        <IconButtonRoot
-          ref={ref}
-          aria-label={label}
-          as="button"
-          disabled={isDisabled}
-          paddingSize="sm"
-          paddingType="squish"
-          type="button"
-          {...props}
-        >
-          <Icon name={iconName} {...iconProps} />
-        </IconButtonRoot>
-      </Tooltip>
+        <Icon name={iconName} {...iconProps} />
+      </IconButtonRoot>
     );
   },
 );
