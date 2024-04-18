@@ -51,7 +51,9 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   border-radius: ${getRadii('default')};
   border: 1px solid ${getColor('neutral.600')};
   z-index: ${({ $isInFloatingElement, theme }) =>
-    $isInFloatingElement ? getDepth('modal', { theme }) + 1 : 1};
+    $isInFloatingElement
+      ? getDepth('modal', { theme }) + 1
+      : getDepth('dropdown', { theme })};
   ${({ $maxWidth }) => css`
     width: ${$maxWidth === 'auto' ? 'auto' : '100%'};
     max-width: ${$maxWidth === 'auto' ? 'auto' : pxToRem($maxWidth)};
