@@ -1,3 +1,17 @@
+# [1.26.0](https://github.com/securityscorecard/design-system/compare/v1.25.0...v1.26.0) (2024-04-18)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** make item icon optional ([7e4369e](https://github.com/securityscorecard/design-system/commit/7e4369ee70849f7c3bcfeaa291e4ead2a21f9483))
+* **Dropdown:** make pane aware of floating context ([3c54d93](https://github.com/securityscorecard/design-system/commit/3c54d93714c5a6a7871277d338488a1054947fa1))
+
+
+### Features
+
+* **DatatableV2:** add table full screen mode ([a5c796e](https://github.com/securityscorecard/design-system/commit/a5c796e28bbe0b342cd57aad02b800bc01451aff))
+* **StatusDot:** remove legacy colors ([6d79761](https://github.com/securityscorecard/design-system/commit/6d79761aede468844e4b8319a9feb953ac9fb25f))
+
 # [1.25.0](https://github.com/securityscorecard/design-system/compare/v1.24.2...v1.25.0) (2024-04-11)
 
 
