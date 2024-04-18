@@ -5,6 +5,7 @@ import { noop } from 'ramda-adjunct';
 
 import {
   getColor,
+  getDepth,
   getFontFamily,
   getFontSize,
   getLineHeight,
@@ -18,6 +19,7 @@ import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { DropdownPaneProps, DropdownPaneStyles } from './Dropdown.types';
+import { useFloatingContext } from '../../contexts/FloatingContext';
 
 export const Arrow = styled.div`
   visibility: hidden;
@@ -48,6 +50,8 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   line-height: ${getLineHeight('md')};
   border-radius: ${getRadii('default')};
   border: 1px solid ${getColor('neutral.600')};
+  z-index: ${({ $isInFloatingElement, theme }) =>
+    $isInFloatingElement ? getDepth('modal', { theme }) + 1 : 1};
   ${({ $maxWidth }) => css`
     width: ${$maxWidth === 'auto' ? 'auto' : '100%'};
     max-width: ${$maxWidth === 'auto' ? 'auto' : pxToRem($maxWidth)};
@@ -115,11 +119,12 @@ const DropdownPane = forwardRef<HTMLDivElement, DropdownPaneProps>(
     ref,
   ) => {
     const dropdownPaneRef = useOuterClick<HTMLDivElement>(onClickOut);
-
+    const isInFloatingElement = useFloatingContext() ?? false;
     return (
       <StyledDropdownPane
         ref={mergeRefs<HTMLDivElement>(dropdownPaneRef, ref)}
         $isElevated={isElevated}
+        $isInFloatingElement={isInFloatingElement}
         $maxWidth={maxWidth}
         {...props}
         data-testid="dropdown-pane"

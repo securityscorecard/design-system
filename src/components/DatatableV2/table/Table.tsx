@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
+import clx from 'classnames';
 
 import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
@@ -8,6 +9,7 @@ import Settings from '../panels/Settings';
 import TableRoot from './TableRoot';
 import ProgressBar from './ProgressBar';
 import Selection from '../toolbar/Selection';
+import { DSContext } from '../../../theme/DSProvider/DSProvider';
 
 const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -22,7 +24,9 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     columnVisibility,
     showColumnSettings,
     showProgress,
+    isFullscreenMode,
   } = getState();
+  const { datatable } = useContext(DSContext);
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();
@@ -39,8 +43,12 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
 
+  useEffect(() => {
+    datatable?.onFullscreenModeChange(isFullscreenMode);
+  }, [isFullscreenMode, datatable]);
+
   return (
-    <TableRoot tabIndex={0}>
+    <TableRoot className={clx({ isFullscreen: isFullscreenMode })} tabIndex={0}>
       {showProgress && <ProgressBar isTop />}
       <table
         ref={(ref) => {

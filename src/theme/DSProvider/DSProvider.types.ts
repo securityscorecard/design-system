@@ -10,6 +10,9 @@ export interface DSContextValue {
   experimental: {
     accessibleLink: boolean;
   };
+  datatable?: {
+    onFullscreenModeChange?: (enabled: boolean) => void;
+  };
 }
 export interface DSProviderProps {
   /**
