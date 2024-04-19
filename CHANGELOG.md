@@ -1,3 +1,11 @@
+## [1.26.1](https://github.com/securityscorecard/design-system/compare/v1.26.0...v1.26.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* **Dropdown:** use correct z-index ([69614e3](https://github.com/securityscorecard/design-system/commit/69614e30e97ae2218e7591d32ab199e4e4a9d959))
+* **Tooltip:** use correct z-index ([b56a185](https://github.com/securityscorecard/design-system/commit/b56a1850bba273b52d9f83795f45da7abe541a7a))
+
 # [1.26.0](https://github.com/securityscorecard/design-system/compare/v1.25.0...v1.26.0) (2024-04-18)
 
 
