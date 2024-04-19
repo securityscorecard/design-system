@@ -34,8 +34,9 @@ const YourComponent = () => (
     onClick={() => {
       addNotification({
         id: 'toast-1',
-        type: 'warning',
+        variant: 'warn',
         content: 'The rule has been resumed',
+        autoDismiss: true,
       });
     }}
   >
@@ -59,9 +60,9 @@ and hadling those events in event listeners.
 
 ### Notification options
 
-| Property    | type        | Required | Description                                                                                       |
-| :---------- | :---------- | :------- | :------------------------------------------------------------------------------------------------ |
-| id          | `boolean`   | `true`   | Unique identifier                                                                                 |
-| variant     | `string`    | `false`  | Specifies the type of toast notification that will be display. `info`, `warn`, `error`, `success` |
-| content     | `ReactNode` | `true`   | Content of the notification                                                                       |
-| autoDismiss | `boolean`   | `false`  | If defined, notification will be auto dismissed after 6000ms                                      |
+| Property    | type                                                                       | Required           | Default            | Description                                                    |
+| :---------- | :------------------------------------------------------------------------- | :----------------- | :----------------- | :------------------------------------------------------------- |
+| id          | <code>boolean</code>                                                       | <code>true</code>  | -                  | Unique identifier                                              |
+| content     | <code>ReactNode</code>                                                     | <code>true</code>  | -                  | Content of the notification                                    |
+| variant     | <code>'info'&#124;'warn'&#124;'error'&#124;'success'&#124;'loading'</code> | <code>false</code> | -                  | Specifies the type of toast notification that will be display. |
+| autoDismiss | <code>boolean</code>                                                       | <code>false</code> | <code>false</code> | If defined, notification will be auto dismissed after 6000ms   |
