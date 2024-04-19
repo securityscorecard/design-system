@@ -25,7 +25,9 @@ const Content = styled(RadixTooltip.Content)<ContentProps>`
   will-change: transform, opacity;
   width: ${pipe(prop('$width'), pxToRem)};
   z-index: ${({ $isInFloatingElement, theme }) =>
-    $isInFloatingElement ? getDepth('modal', { theme }) + 1 : 1};
+    $isInFloatingElement
+      ? getDepth('modal', { theme }) + 1
+      : getDepth('tooltip', { theme })};
 
   &[data-state='delayed-open'][data-side='top'] {
     animation-name: slideDownAndFade;
