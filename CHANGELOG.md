@@ -1,3 +1,11 @@
+## [1.26.2](https://github.com/securityscorecard/design-system/compare/v1.26.1...v1.26.2) (2024-04-25)
+
+
+### Bug Fixes
+
+* **CardActions:** make item icon optional ([0855240](https://github.com/securityscorecard/design-system/commit/0855240ec5a34d48c0584ff7b6e05740f7a25977))
+* **Snippet:** do not fail if invalid children provided ([56765bb](https://github.com/securityscorecard/design-system/commit/56765bb99d60f5cb4fdf5b60a0aeea9d303ba973))
+
 ## [1.26.1](https://github.com/securityscorecard/design-system/compare/v1.26.0...v1.26.1) (2024-04-19)
 
 
