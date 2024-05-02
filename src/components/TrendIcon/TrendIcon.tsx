@@ -1,54 +1,63 @@
 import React from 'react';
 import styled from 'styled-components';
-import { partialRight, pipe, prop } from 'ramda';
 
 import { Icon } from '../Icon';
+import { Padbox } from '../layout';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
-import { ColorTypes } from '../../theme';
-import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { Color } from '../../theme';
+import { RequireAtLeastOne } from '../../types/utils.types';
 
-const IconRotation = {
-  positive: '45deg',
-  negative: '135deg',
-  stable: '0deg',
+type Trend = 'positive' | 'negative' | 'stable';
+type TrendIconProps = {
+  /**
+   * @deprecated use "trend" property instead
+   */
+  type?: Trend;
+  trend?: Trend;
 };
 
-const IconBackgroundColor = {
-  positive: ColorTypes.success100,
-  negative: ColorTypes.error100,
-  stable: ColorTypes.neutral300,
+const IconRotation: Record<Trend, number> = {
+  positive: 45,
+  negative: 135,
+  stable: 0,
 };
 
-const FontColor = {
-  positive: ColorTypes.success500,
-  negative: ColorTypes.error500,
-  stable: ColorTypes.neutral600,
+const IconBackgroundColor: Record<Trend, Color> = {
+  positive: 'success.50',
+  negative: 'error.50',
+  stable: 'neutral.200',
 };
 
-const IconWrapper = styled.div<{ type: string }>`
-  transform: rotate(${pipe(prop('type'), partialRight(prop, [IconRotation]))});
-  background: ${pipe(
-    prop('type'),
-    partialRight(prop, [IconBackgroundColor]),
-    getColor,
-  )};
+const FontColor: Record<Trend, Color> = {
+  positive: 'success.700',
+  negative: 'error.700',
+  stable: 'neutral.700',
+};
+
+const IconWrapper = styled(Padbox)<{ $trend: Trend }>`
+  background: ${({ $trend, theme }) =>
+    getColor(IconBackgroundColor[$trend], { theme })};
   width: ${pxToRem(20)};
   height: ${pxToRem(20)};
-  border-radius: ${getRadii('circle')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: ${getFontSize('lg')};
+  border-radius: ${getRadii('default')};
+  display: grid;
+  place-items: center;
+  font-size: ${getFontSize('md')};
 `;
 
 export const TrendIcon = React.forwardRef<
   HTMLDivElement,
-  { type: 'positive' | 'negative' | 'stable' }
->(({ type }, ref) => {
-  const icon = type === 'stable' ? SSCIconNames.minus : SSCIconNames.arrowUp;
+  RequireAtLeastOne<TrendIconProps, 'type' | 'trend'>
+>(({ type, trend }, ref) => {
+  const trendValue = type || trend;
+
   return (
-    <IconWrapper ref={ref} type={type}>
-      <Icon color={FontColor[type]} name={icon} />
+    <IconWrapper ref={ref} $trend={trendValue} paddingSize="xxs">
+      <Icon
+        color={FontColor[trendValue]}
+        name={trendValue === 'stable' ? 'minus' : 'arrow-up'}
+        transform={{ rotate: IconRotation[trendValue] }}
+      />
     </IconWrapper>
   );
 });
