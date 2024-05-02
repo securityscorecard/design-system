@@ -4,10 +4,13 @@ import styled from 'styled-components';
 import { Icon } from '../Icon';
 import { Padbox } from '../layout';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
-import { Color } from '../../theme';
 import { RequireAtLeastOne } from '../../types/utils.types';
+import {
+  FontColor,
+  IconBackgroundColor,
+  Trend,
+} from '../_internal/BaseTrends/common';
 
-type Trend = 'positive' | 'negative' | 'stable';
 type TrendIconProps = {
   /**
    * @deprecated use "trend" property instead
@@ -20,18 +23,6 @@ const IconRotation: Record<Trend, number> = {
   positive: 45,
   negative: 135,
   stable: 0,
-};
-
-const IconBackgroundColor: Record<Trend, Color> = {
-  positive: 'success.50',
-  negative: 'error.50',
-  stable: 'neutral.200',
-};
-
-const FontColor: Record<Trend, Color> = {
-  positive: 'success.700',
-  negative: 'error.700',
-  stable: 'neutral.700',
 };
 
 const IconWrapper = styled(Padbox)<{ $trend: Trend }>`

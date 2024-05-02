@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import ScoreDelta from './ScoreDelta';
 import { Inline } from '../layout';
@@ -7,17 +7,26 @@ import { Inline } from '../layout';
 export default {
   title: 'components/ScoreDelta',
   component: ScoreDelta,
-} as Meta;
+} as ComponentMeta<typeof ScoreDelta>;
 
-export const Default: Story = () => (
-  <Inline gap="lg">
-    <ScoreDelta decimalsCount={2} delta={3.141516} />
-    <ScoreDelta decimalsCount={4} delta={3.141516} />
-    <ScoreDelta decimalsCount={6} delta={3.141516} />
-    <ScoreDelta decimalsCount={2} delta={0.15} />
-    <ScoreDelta decimalsCount={2} delta={0} />
-    <ScoreDelta delta={0} />
-    <ScoreDelta delta={-4} />
-    <ScoreDelta delta={-10} />
+type Story = ComponentStory<typeof ScoreDelta>;
+
+export const Playground: Story = (args) => <ScoreDelta {...args} />;
+Playground.args = {
+  delta: Math.PI,
+};
+Playground.parameters = { screenshot: { skip: true } };
+
+export const Trends: Story = (args) => (
+  <Inline gap="md">
+    <ScoreDelta {...args} delta={3.141516} />
+    <ScoreDelta {...args} delta={0} />
+    <ScoreDelta {...args} delta={-3.141516} />
   </Inline>
 );
+
+export const Decimals: Story = (args) => <ScoreDelta {...args} />;
+Decimals.args = {
+  ...Playground.args,
+  decimalsCount: 4,
+};
