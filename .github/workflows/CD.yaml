@@ -194,39 +194,6 @@ jobs:
       - name: Run Lint
         run: yarn lint:css
 
-  betterer:
-    name: '🚧 Check Betterer rules'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Cache yarn files
-        uses: actions/cache@v4
-        id: cache
-        with:
-          path: |
-            .yarn/install-state.gz
-            node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
-
-      - name: Install Packages
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable
-
-      - name: Run Betterer
-        run: yarn betterer:ci
-
   build:
     name: '🧰 Build package'
     runs-on: ubuntu-latest
@@ -279,7 +246,7 @@ jobs:
     name: '📟 Get next released version'
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta') && !contains(github.event.head_commit.message, 'chore(release):')
     continue-on-error: true
-    needs: [unit-tests, visual-tests, types, lint, lint-css, betterer, build]
+    needs: [unit-tests, visual-tests, types, lint, lint-css, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
