@@ -108,7 +108,9 @@ const Banner = ({
     }),
     [changeLayoutBreakpoint],
   );
-  const [query, containerRef] = useContainerQuery(changeLayoutQuery, undefined);
+  const [query, containerRef] = useContainerQuery(changeLayoutQuery, {
+    width: 1200,
+  });
   const isInline = query[CHANGE_LAYOUT_BREAKPOINT];
   return (
     <StyledPadbox

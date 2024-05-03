@@ -46,8 +46,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
-  // @ts-expect-error types of react-container-query wrongly marks second arg as required
-  const [cqParams, containerRef] = useContainerQuery(cq);
+  const [cqParams, containerRef] = useContainerQuery(cq, { width: 1200 });
   const isLg = !cqParams.sm && !cqParams.md;
 
   return (

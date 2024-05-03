@@ -36,7 +36,9 @@ const Stepper = forwardRef<
       }),
       [showTextBreakpoint],
     );
-    const [query, containerRef] = useContainerQuery(showTextQuery, undefined);
+    const [query, containerRef] = useContainerQuery(showTextQuery, {
+      width: 1200,
+    });
 
     const stepsArr: React.ReactElement[] = React.Children.toArray(
       children,
