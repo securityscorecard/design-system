@@ -1,6 +1,5 @@
 import React, { forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useContainerQuery } from 'react-container-query';
 import { pathEq } from 'ramda';
 import cls from 'classnames';
 
@@ -11,6 +10,7 @@ import { mergeRefs } from '../../utils/mergeRefs';
 import { StepperContext } from './Stepper.context';
 import { StepperOrientations } from './Stepper.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { useContainerQuery } from '../../hooks/useContainerQuery';
 
 const SHOW_TEXT_BREAKPOINT = 'show-step-text';
 
@@ -36,9 +36,7 @@ const Stepper = forwardRef<
       }),
       [showTextBreakpoint],
     );
-    const [query, containerRef] = useContainerQuery(showTextQuery, {
-      width: 1200,
-    });
+    const [query, containerRef] = useContainerQuery(showTextQuery);
 
     const stepsArr: React.ReactElement[] = React.Children.toArray(
       children,
