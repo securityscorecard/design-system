@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { TrendIcon } from './TrendIcon';
 import { Inline } from '../layout';
@@ -7,12 +7,20 @@ import { Inline } from '../layout';
 export default {
   title: 'components/TrendIcon',
   component: TrendIcon,
-} as Meta;
+} as ComponentMeta<typeof TrendIcon>;
 
-export const Default: Story = () => (
+type Story = ComponentStory<typeof TrendIcon>;
+
+export const Playground: Story = (args) => <TrendIcon {...args} />;
+Playground.args = {
+  trend: 'stable',
+};
+Playground.parameters = { screenshot: { skip: true } };
+
+export const Trends: Story = () => (
   <Inline gap="lg">
-    <TrendIcon type="positive" />
-    <TrendIcon type="stable" />
-    <TrendIcon type="negative" />
+    <TrendIcon trend="positive" />
+    <TrendIcon trend="stable" />
+    <TrendIcon trend="negative" />
   </Inline>
 );

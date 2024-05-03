@@ -1,25 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import { partialRight, pipe, prop } from 'ramda';
 
 import { ScoreDeltaProps } from './ScoreDelta.types';
-import { Inline } from '../layout';
-import { getColor, getFontSize } from '../../utils';
-import { ColorTypes } from '../../theme';
+import { Padbox } from '../layout';
+import {
+  getColor,
+  getFontSize,
+  getFontWeight,
+  getRadii,
+  getSpace,
+} from '../../utils';
 import { TrendIcon } from '../TrendIcon/TrendIcon';
+import {
+  FontColor,
+  IconBackgroundColor,
+  Trend,
+} from '../_internal/BaseTrends/common';
 
-const FontColor = {
-  positive: ColorTypes.success500,
-  negative: ColorTypes.error500,
-  stable: ColorTypes.neutral600,
-};
-
-const Label = styled.span<{ type: string }>`
+const ScoreDeltaRoot = styled(Padbox)<{ $trend: string }>`
+  background: ${({ $trend, theme }) =>
+    getColor(IconBackgroundColor[$trend], { theme })};
+  display: inline-flex;
+  align-items: center;
+  border-radius: ${getRadii('default')};
+`;
+const Label = styled.span<{ $trend: string }>`
   font-size: ${getFontSize('md')};
-  color: ${pipe(prop('type'), partialRight(prop, [FontColor]), getColor)};
+  font-weight: ${getFontWeight('medium')};
+  color: ${({ $trend, theme }) => getColor(FontColor[$trend], { theme })};
+  padding-inline: ${getSpace('xxs')};
 `;
 
-const getType = (delta: number) => {
+const getTrend = (delta: number): Trend => {
   if (delta > 0) return 'positive';
   if (delta < 0) return 'negative';
   return 'stable';
@@ -27,14 +39,14 @@ const getType = (delta: number) => {
 
 const ScoreDelta = React.forwardRef<HTMLDivElement, ScoreDeltaProps>(
   ({ delta, decimalsCount = 0 }, ref) => {
-    const type = getType(delta);
+    const trend = getTrend(delta);
     const text = Math.abs(delta).toFixed(decimalsCount);
 
     return (
-      <Inline ref={ref} align="center" as="span" gap="sm">
-        <TrendIcon type={type} />
-        <Label type={type}>{text}</Label>
-      </Inline>
+      <ScoreDeltaRoot ref={ref} $trend={trend} as="span" paddingSize="xxs">
+        <TrendIcon trend={trend} />
+        <Label $trend={trend}>{text}</Label>
+      </ScoreDeltaRoot>
     );
   },
 );
