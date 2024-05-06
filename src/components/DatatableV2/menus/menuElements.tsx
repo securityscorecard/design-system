@@ -7,11 +7,15 @@ import { Icon, Types as SSCIconTypes, SSCIcons } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
 import { Text } from '../../typographyLegacy';
 
-export const MenuContent = styled(DropdownMenu.Content)`
+export const MenuContent = styled(DropdownMenu.Content)<{
+  $isFullscreen: boolean;
+}>`
+  position: relative;
   border: 1px solid rgba(0 0 0/15%);
   border-radius: ${getRadii('default')};
   background: white;
   padding: 0.5rem 0;
+  z-index: ${({ $isFullscreen }) => ($isFullscreen ? 1000 : 2)};
 `;
 
 const MenuItemRoot = styled(DropdownMenu.Item)`

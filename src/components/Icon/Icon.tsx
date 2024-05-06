@@ -21,6 +21,7 @@ import { Color } from '../../theme/colors.types';
 import { IconProps, SSCIcons, Types } from './Icon.types';
 import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { useLogger } from '../../hooks/useLogger';
 
 const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
   shouldForwardProp: (property) => !includes(property, ['margin', 'color']),
@@ -39,7 +40,18 @@ const Icon = ({
   ...props
 }: IconProps &
   Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>) => {
+  const { warn } = useLogger('Icon');
   const ref = useRef<SVGSVGElement>(null);
+  const iconDefinition = findIconDefinition({
+    iconName: name as IconName,
+    prefix: type as IconPrefix,
+  });
+  if (iconDefinition === undefined) {
+    warn(
+      `Used icon was not found. You need to import it in the icon library. Looking for prefix: ${type}, name: ${name}`,
+    );
+    return null;
+  }
   return (
     <StyledIcon
       // @ts-expect-error this passing ref through styled components is rabbit hole
@@ -47,10 +59,7 @@ const Icon = ({
       className={cls(CLX_COMPONENT, className)}
       color={color}
       fixedWidth={hasFixedWidth}
-      icon={findIconDefinition({
-        iconName: name as IconName,
-        prefix: type as IconPrefix,
-      })}
+      icon={iconDefinition}
       {...props}
     />
   );

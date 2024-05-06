@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 import { getColor, getRadii, pxToRem } from '../../utils';
 
 export const StatusDotColors = {
-  good: 'success.500',
-  bad: 'error.500',
-  neutral: 'info.500',
   success: 'success.500',
   danger: 'error.500',
   warn: 'severity.low',

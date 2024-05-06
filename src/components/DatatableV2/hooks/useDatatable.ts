@@ -42,6 +42,7 @@ export const useDatatable = <D>(
   const tableOptions = useOptions<D>(options);
   const displayColumns = useDisplayColumns<D>(tableOptions);
   const tableRef = useRef<HTMLTableElement>();
+  const lastSelectedRowIdRef = useRef<null | string>(null);
 
   const columnDefs = useMemo(
     () =>
@@ -84,6 +85,9 @@ export const useDatatable = <D>(
 
   const [showColumnSettings, setShowColumnSettings] = useState<boolean>(
     initialState?.showColumnSettings ?? false,
+  );
+  const [isFullscreenMode, setIsFullscreenMode] = useState(
+    initialState?.isFullscreenMode ?? false,
   );
   const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
     initialState?.columnSizing ?? {},
@@ -142,6 +146,7 @@ export const useDatatable = <D>(
     initialState,
     state: {
       showColumnSettings,
+      isFullscreenMode,
       columnSizing,
       ...tableOptions.state,
       // I know what I'm doing here
@@ -163,10 +168,13 @@ export const useDatatable = <D>(
 
   table.refs = {
     tableRef,
+    lastSelectedRowIdRef,
   };
 
   table.setShowColumnSettings =
     tableOptions.onShowColumnSettings ?? setShowColumnSettings;
+  table.setIsFullscreenMode =
+    tableOptions.onFullscreenModeChange ?? setIsFullscreenMode;
   table.setColumnSizing =
     tableOptions.onColumnSizingChange ?? debouncedSetColumnSizing;
 

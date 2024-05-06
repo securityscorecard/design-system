@@ -12,6 +12,7 @@ export type Placements =
 export interface DropdownPaneStyles {
   $isElevated?: boolean;
   $maxWidth: number | 'auto';
+  $isInFloatingElement?: boolean;
 }
 export type DropdownPaneProps = React.PropsWithChildren<
   {

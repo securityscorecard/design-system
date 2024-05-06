@@ -38,6 +38,51 @@ Ref UXD-1107
 * **yarn:** This PR takes advantage of changing yarn.lock format and refresh its whole content. This will lead to large number of changes in underlying package versions.
 * Changing used Node version for building the library should always be treated as breaking. The upgrade of Chromium version used in Docker image for taking visual tests had impact on large number of tests.
 
+## [1.26.2](https://github.com/securityscorecard/design-system/compare/v1.26.1...v1.26.2) (2024-04-25)
+
+
+### Bug Fixes
+
+* **CardActions:** make item icon optional ([0855240](https://github.com/securityscorecard/design-system/commit/0855240ec5a34d48c0584ff7b6e05740f7a25977))
+* **Snippet:** do not fail if invalid children provided ([56765bb](https://github.com/securityscorecard/design-system/commit/56765bb99d60f5cb4fdf5b60a0aeea9d303ba973))
+
+## [1.26.1](https://github.com/securityscorecard/design-system/compare/v1.26.0...v1.26.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* **Dropdown:** use correct z-index ([69614e3](https://github.com/securityscorecard/design-system/commit/69614e30e97ae2218e7591d32ab199e4e4a9d959))
+* **Tooltip:** use correct z-index ([b56a185](https://github.com/securityscorecard/design-system/commit/b56a1850bba273b52d9f83795f45da7abe541a7a))
+
+# [1.26.0](https://github.com/securityscorecard/design-system/compare/v1.25.0...v1.26.0) (2024-04-18)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** make item icon optional ([7e4369e](https://github.com/securityscorecard/design-system/commit/7e4369ee70849f7c3bcfeaa291e4ead2a21f9483))
+* **Dropdown:** make pane aware of floating context ([3c54d93](https://github.com/securityscorecard/design-system/commit/3c54d93714c5a6a7871277d338488a1054947fa1))
+
+
+### Features
+
+* **DatatableV2:** add table full screen mode ([a5c796e](https://github.com/securityscorecard/design-system/commit/a5c796e28bbe0b342cd57aad02b800bc01451aff))
+* **StatusDot:** remove legacy colors ([6d79761](https://github.com/securityscorecard/design-system/commit/6d79761aede468844e4b8319a9feb953ac9fb25f))
+
+# [1.25.0](https://github.com/securityscorecard/design-system/compare/v1.24.2...v1.25.0) (2024-04-11)
+
+
+### Features
+
+* **DatatableV2:** allow batch selection with Shift key ([f145088](https://github.com/securityscorecard/design-system/commit/f145088a9cb3167b636be429f8359e93e01691fc))
+* **Pill:** expose "title" property ([a9700d9](https://github.com/securityscorecard/design-system/commit/a9700d902a98a3dff1b26fe9dd6fc0b8a1111ada))
+
+## [1.24.2](https://github.com/securityscorecard/design-system/compare/v1.24.1...v1.24.2) (2024-04-08)
+
+
+### Bug Fixes
+
+* **Drawer:** fix backdrop flickering with outside clicks ([192d585](https://github.com/securityscorecard/design-system/commit/192d58561e9fe62cd790b2ba64f5115d50adeefa))
+
 ## [1.24.1](https://github.com/securityscorecard/design-system/compare/v1.24.0...v1.24.1) (2024-04-03)
 
 

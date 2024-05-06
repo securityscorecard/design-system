@@ -32,10 +32,14 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
               aria-label={action.ariaLabel}
               data-interactive="true"
               href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
-              iconStart={{
-                name: action.iconName,
-                type: action.iconType,
-              }}
+              iconStart={
+                typeof action.iconName !== 'undefined'
+                  ? {
+                      name: action.iconName,
+                      type: action.iconType,
+                    }
+                  : undefined
+              }
               isDisabled={action.isDisabled}
               to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
               variant={ButtonEnums.ButtonVariants.text}
