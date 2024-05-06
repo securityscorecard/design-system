@@ -1,3 +1,21 @@
+# [2.0.0-beta.2](https://github.com/securityscorecard/design-system/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2024-05-06)
+
+
+### Build System
+
+* upgrade TS to v5.4.5 ([d02d237](https://github.com/securityscorecard/design-system/commit/d02d237cfccd9a69a33f12aa21d143f628134b09))
+
+
+### Features
+
+* use React 18.3 ([a333116](https://github.com/securityscorecard/design-system/commit/a333116474917dbe7d4040186b4e0f1c8374a18a))
+
+
+### BREAKING CHANGES
+
+* With this change we are removing support of React 17 and lower and we will be focusing only on version 18 and higher. Although majority of the DS can still work with lower versions of React we cannot guarantee that and we won't be providing fixes for older versions.
+* Upgrading on new major version of Typescript can possibly break some of the typings in third-party applications where DS is used.
+
 # [2.0.0-beta.1](https://github.com/securityscorecard/design-system/compare/v1.24.1...v2.0.0-beta.1) (2024-04-05)
 
 
