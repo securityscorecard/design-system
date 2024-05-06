@@ -50,35 +50,38 @@ function Head<D extends Record<string, unknown>>({
 }: HeadProps<D>): React.ReactElement {
   return (
     <thead>
-      {headerGroups.map((headerGroup) => (
-        <tr {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map((column) => (
-            <StyledTh
-              {...column.getHeaderProps({
+      {headerGroups.map((headerGroup) => {
+        const { key: rowKey, ...rowRest } = headerGroup.getHeaderGroupProps();
+        return (
+          <tr key={rowKey} {...rowRest}>
+            {headerGroup.headers.map((column) => {
+              const { key: cellKey, ...cellRest } = column.getHeaderProps({
                 ...column.getSortByToggleProps({
                   ...column.getSortByToggleProps(),
                   title: column.canSort ? `Sort ${column.Header}` : undefined,
                 }),
                 ...shrinkIfSticky(column.sticky),
-              })}
-              sticky={column.sticky}
-            >
-              <TooltipWrapper
-                popupRenderer={() => column.headerTooltip}
-                shouldRender={isNotUndefined(column.headerTooltip)}
-              >
-                {column.render('Header')}
-              </TooltipWrapper>
-              {column.canSort && (
-                <SortingIcon
-                  isSorted={column.isSorted}
-                  isSortedDesc={column.isSortedDesc}
-                />
-              )}
-            </StyledTh>
-          ))}
-        </tr>
-      ))}
+              });
+              return (
+                <StyledTh key={cellKey} {...cellRest} sticky={column.sticky}>
+                  <TooltipWrapper
+                    popupRenderer={() => column.headerTooltip}
+                    shouldRender={isNotUndefined(column.headerTooltip)}
+                  >
+                    {column.render('Header')}
+                  </TooltipWrapper>
+                  {column.canSort && (
+                    <SortingIcon
+                      isSorted={column.isSorted}
+                      isSortedDesc={column.isSortedDesc}
+                    />
+                  )}
+                </StyledTh>
+              );
+            })}
+          </tr>
+        );
+      })}
     </thead>
   );
 }

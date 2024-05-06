@@ -11,25 +11,31 @@ function Body<D extends Record<string, unknown>>({
   ...bodyProps
 }: BodyProps<D>): React.ReactElement {
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     <tbody {...bodyProps}>
       {rows.map((row, index) => {
         prepareRow(row);
+
+        const { key: rowKey, ...rowRest } = row.getRowProps();
         return (
           <tr
-            {...row.getRowProps()}
+            key={rowKey}
+            {...rowRest}
             className={cls('ds-table-row', { 'is-selected': row.isSelected })}
           >
             {row.cells.map((cell) => {
+              const { key: cellKey, ...cellRest } = cell.getCellProps(
+                shrinkIfSticky(cell.column.sticky),
+              );
               return (
                 <td
+                  key={cellKey}
                   className={cls('ds-table-cell', {
                     'is-sticky': isNotUndefined(cell.column.sticky),
                     'is-sticky-left': cell.column.sticky === 'left',
                     'is-sticky-right': cell.column.sticky === 'right',
                     'is-odd': isOdd(index),
                   })}
-                  {...cell.getCellProps(shrinkIfSticky(cell.column.sticky))}
+                  {...cellRest}
                 >
                   {cell.render('Cell')}
                 </td>

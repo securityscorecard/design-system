@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useContainerQuery } from 'react-container-query';
 
 import { abbreviateNumber, getFormStyle, getRadii } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
 import IconButton from '../buttons/IconButton';
 import { DatatableInstance } from '../Datatable.types';
+import { useContainerQuery } from '../../../hooks/useContainerQuery';
 
 const cq = {
   sm: {
@@ -46,7 +46,6 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
-  // @ts-expect-error types of react-container-query wrongly marks second arg as required
   const [cqParams, containerRef] = useContainerQuery(cq);
   const isLg = !cqParams.sm && !cqParams.md;
 
