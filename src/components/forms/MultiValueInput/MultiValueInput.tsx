@@ -274,7 +274,7 @@ const MultiValueInput = ({
     onValuesChange([]);
   };
   const handleClearAllOnKeyDown: React.KeyboardEventHandler<
-    HTMLInputElement
+    HTMLButtonElement
   > = (e) => {
     switch (e.key) {
       case ' ':
