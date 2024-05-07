@@ -26,7 +26,7 @@ RowActionsEnabled.args = {
           action('row action')({ row, table, event }),
     },
     {
-      iconName: 'lock',
+      iconName: 'times',
       label: 'Archive item',
       onClick:
         ({ row, table }) =>
@@ -100,7 +100,7 @@ ConditionallyDisabledRowActions.args = {
       isDisabled: ({ row }) => row.original.organization.grade === 'D',
     },
     {
-      iconName: 'lock',
+      iconName: 'times',
       label: 'Archive item',
       onClick:
         ({ row, table }) =>

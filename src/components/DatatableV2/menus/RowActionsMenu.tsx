@@ -17,9 +17,16 @@ const RowActionsMenu = <D,>({
   table: DatatableInstance<D>;
   rowActions: DatatableRowAction<D>[];
 }) => {
+  const { getState } = table;
+  const { isFullscreenMode } = getState();
   return (
     <DropdownMenu.Portal>
-      <MenuContent align="end">
+      <MenuContent
+        $isFullscreen={isFullscreenMode}
+        align="end"
+        collisionPadding={10}
+        sideOffset={5}
+      >
         {rowActions.map((action, i) => {
           if (action === null) {
             // eslint-disable-next-line react/no-array-index-key

@@ -46,7 +46,11 @@ const BreadcrumbItem = ({
         <BreadcrumbLink
           color="secondary"
           href={href}
-          iconStart={{ name: iconName, type: iconType }}
+          iconStart={
+            typeof iconName !== 'undefined'
+              ? { name: iconName, type: iconType }
+              : undefined
+          }
           to={to}
           variant="text"
           {...props}
@@ -56,7 +60,7 @@ const BreadcrumbItem = ({
     </ListItem>
   );
 };
-
+BreadcrumbItem.displayName = 'BreadcrumbItem';
 BreadcrumbItem.propTypes = {
   children: PropTypes.string.isRequired,
   to: PropTypes.oneOfType([

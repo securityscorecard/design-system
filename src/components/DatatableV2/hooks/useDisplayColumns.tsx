@@ -34,7 +34,7 @@ export const useDisplayColumns = <D,>(
             headerComponent:
               tableOptions.enableSelectAll &&
               tableOptions.enableMultiRowSelection
-                ? ({ table }) => <SelectButton table={table} isSelectAll />
+                ? ({ table }) => <SelectButton table={table} isHeaderCheckbox />
                 : null,
             cell: SelectButton,
             size: 40,

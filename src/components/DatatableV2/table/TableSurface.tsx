@@ -1,29 +1,50 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 
-import { getColor, getFontWeight, getRadii } from '../../../utils';
+import { getFontWeight, getRadii } from '../../../utils';
 import { getPaddingSize } from '../../../utils/space';
 import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import Pagination from '../toolbar/Pagination';
 import Table from './Table';
 
+const DatatableRoot = styled.div<{ $isFullscreen }>`
+  ${({ $isFullscreen }) =>
+    $isFullscreen &&
+    css`
+      --sscds-table-height-pagination: 4.25rem;
+
+      position: fixed;
+      inset: 0;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 999;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      display: grid;
+      grid-template-rows: 1fr var(--sscds-table-height-pagination);
+    `};
+`;
+
 const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const theme = useTheme();
+  const { getState } = table;
+  const { isFullscreenMode } = getState();
 
   return (
-    <div>
+    <DatatableRoot $isFullscreen={isFullscreenMode}>
       <Surface
         background="white"
-        radius="md"
+        radius={isFullscreenMode ? 'none' : 'md'}
         style={{
           '--sscds-table-color-background': 'var(--sscds-background)',
           '--sscds-table-color-border': 'var(--sscds-border-color)',
-          '--sscds-table-color-zebra': getColor('neutral.50', { theme }),
-          '--sscds-table-color-accent': getColor('primary.500', { theme }),
+          '--sscds-table-color-zebra': 'var(--sscds-neutral-50)',
+          '--sscds-table-color-accent': 'var(--sscds-primary-500)',
           '--sscds-table-color-settings-background':
             'var(--sscds-table-color-background)',
-          '--sscds-table-color-selection': getColor('primary.50', { theme }),
+          '--sscds-table-color-selection': 'var(--sscds-primary-50)',
           '--sscds-table-spacing-cell': getPaddingSize({
             paddingSize: 'md',
             paddingType: 'square',
@@ -51,7 +72,14 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '--sscds-table-size-settings-width': '22.5rem',
           '--sscds-table-radii-settings-item': getRadii('default', { theme }),
           position: 'relative',
-          overflow: 'hidden',
+          overflow: 'clip',
+          ...(isFullscreenMode
+            ? {
+                overflow: 'hidden',
+                width: '100%',
+                maxWidth: '100%',
+              }
+            : {}),
         }}
         hasBorder
       >
@@ -59,7 +87,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
       </Surface>
       {table.options.enablePagination &&
         table.getRowModel().rows.length > 0 && <Pagination table={table} />}
-    </div>
+    </DatatableRoot>
   );
 };
 

@@ -20,7 +20,6 @@ import { Types as SSCIconTypes, SSCIcons } from '../Icon';
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
   | 'accessorFn'
-  | 'accessorFn'
   | 'cell'
   | 'header'
   | 'aggregatedCell'
@@ -199,9 +198,14 @@ export type DatatableRowAction<D> = null | {
 };
 
 interface CustomState {
+  /** Opens column settings panel in table */
   showColumnSettings: boolean;
+  /** Display loading skeletons for table rows */
   isLoading: boolean;
+  /** Display loading progress bars on top and bottom of the table */
   showProgress: boolean;
+  /** Toggle Datatable viewing mode to fullscreen mode */
+  isFullscreenMode: boolean;
 }
 export type DatatableInitialState = Omit<
   InitialTableState,
@@ -221,15 +225,18 @@ export interface ParsedDatatableOptions<D>
   defaultDisplayColumn?: Partial<DatatableColumnDef<D>> & {
     columnDefType: 'display';
   };
+  enableBatchRowSelection?: DatatableOptions<D>['enableBatchRowSelection'];
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
   enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
   enableExpandAll?: DatatableOptions<D>['enableExpandAll'];
+  enableFullScreenMode?: DatatableOptions<D>['enableFullScreenMode'];
   enablePagination?: DatatableOptions<D>['enablePagination'];
   enableRowActions?: DatatableOptions<D>['enableRowActions'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
+  onFullscreenModeChange?: DatatableOptions<D>['onFullscreenModeChange'];
   renderDetailPanel?: DatatableOptions<D>['renderDetailPanel'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
@@ -261,8 +268,10 @@ export interface DatatableInstance<D>
   getState: () => DatatableState & { width: number };
   options: ParsedDatatableOptions<D>;
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
+  setIsFullscreenMode: Dispatch<SetStateAction<boolean>>;
   refs: {
     tableRef: MutableRefObject<HTMLTableElement>;
+    lastSelectedRowIdRef: MutableRefObject<null | string>;
   };
 }
 
@@ -362,6 +371,12 @@ export interface DatatableOptions<D>
    */
   enableExpandAll?: boolean;
   /**
+   * Enables/disables switching between fullscreen and normal mode.
+   *
+   * @default true
+   */
+  enableFullScreenMode?: boolean;
+  /**
    * Enables/disables column hiding for the table. Controlled in the column actions menu or table
    * column settings panel accessible through the column actions menu.
    *
@@ -410,6 +425,12 @@ export interface DatatableOptions<D>
    */
   enableRowSelection?: TableOptions<D>['enableRowSelection'];
   /**
+   * Enables/disables batch row selection when `Shift` key is pressed.
+   *
+   * @default true
+   */
+  enableBatchRowSelection?: boolean;
+  /**
    * Enables/disables rows per page selector for the table. This property REQUIRES
    * `enablePagination` to be true.
    *
@@ -440,11 +461,17 @@ export interface DatatableOptions<D>
    */
   initialState?: Partial<DatatableInitialState>;
   /**
+   * If provided, this function will be called with an `updaterFn` when `state.isFullscreenMode`
+   * changes. This overrides the default internal state management, so you are expected to manage
+   * this state on your own. You can pass the managed state back to the table via the
+   * `tableOptions.state.isFullscreenMode` option.
+   */
+  onFullscreenModeChange?: Dispatch<SetStateAction<boolean>>;
+  /**
    * If provided, this function will be called with an `updaterFn` when `state.showColumnSetting`
    * changes. This overrides the default internal state management, so you are expected to manage
    * this state on your own. You can pass the managed state back to the table via the
    * `tableOptions.state.showColumnSettings` option.
-   *
    */
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
   /**

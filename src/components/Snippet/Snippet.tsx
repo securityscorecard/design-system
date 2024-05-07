@@ -60,16 +60,19 @@ const Snippet = forwardRef<
     const [isExpanded, setIsExpanded] = useState(isExpandedFromProps);
     const { copy, isCopied } = useClipboard();
     const hasValidChildren = typeof children === 'string';
-    const snippetText = shouldDedent ? dedent(children) : children;
 
-    if (!hasValidChildren) {
-      error('Only string can be passed in `children` property');
-    }
     useLayoutEffect(() => {
       setIsExpandable(
         codeRef.current.getBoundingClientRect().height > maxHeight,
       );
     }, [setIsExpandable, maxHeight]);
+
+    if (!hasValidChildren) {
+      error('Only string can be passed in `children` property');
+      return null;
+    }
+
+    const snippetText = shouldDedent ? dedent(children) : children;
 
     return (
       <SnippetRoot

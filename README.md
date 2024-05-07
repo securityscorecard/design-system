@@ -18,36 +18,62 @@ npm install @securityscorecard/design-system
 git clone https://github.com/securityscorecard/design-system
 cd design-system
 yarn
-yarn run storybook
+yarn storybook
 ```
 
-### Development in third-party application
+### Testing and development in a third-party application
 
-To avoid version conflicts within the application we need to link `react`, `react-dom` 
-and `styled-components` libraries from the third-party application into `design-system`.
+In order to test out new features before release, we recommend using the `yalc` package. This package works as a local npm registry on your machine, allowing you to "install" unreleased versions of the Design System.
+
+First, you need to install `yalc` by running the following command in your terminal:
 
 ```sh
-cd path/to/application
-cd node_modules/react && yarn link # register react
-cd ../react-dom && yarn link # register react-dom
-cd ../styled-components && yarn link # register styled-components
+yarn global add yalc # for Yarn
+npm i yalc -g # for NPM
 ```
 
-Then we need to use registered packages in `design-system`, register package as the link and start build script.
+In order to publish the Design System to the local registry, you need to build it first with `yarn build` and then run the publish command with `yalc publish`. Alternatively, you can run both these commands in a single line like this:
 
 ```sh
-cd path/to/design-system
-yarn link react && yarn link react-dom && yarn link styled-components # use registered package
-yarn link # register design-system
-yarn build --watch # start build in watch mode
+yarn build && yalc publish
 ```
 
-At the end, we need to link `design-system` in a third-party application.
+Once you have published the Design System into the local registry, switch to the project you want to test with the new version and add the Design System:
 
 ```sh
-cd path/to/application
-yarn link @securityscorecard/design-system # use design-system
+yalc add @securityscorecard/design-system
 ```
+
+After adding the local package, you can run your project and start testing.
+
+To update the locally published package with new changes, follow the same process as above but instead of running `yalc add ...`, run `yalc update`.
+
+The re-publishing process can be simplified to `yarn build && yalc push`. The `yalc push` command will handle both publishing new versions to the local registry and updating the version in a project that uses the Design System from the local registry.To be able to test out new features before release we recommend using `yalc` (https://github.com/wclr/yalc) package. This package works as a local npm registry on your machine and allows you to "install" unreleased versions of the Design System.
+
+First, you need to install the `yalc`:
+
+```sh
+yarn global add yalc # for Yarn
+npm i yalc -g # for NPM
+```
+
+To publish the Design System to the local registry you need to first build DS with `yarn build` and next run publish with `yalc publish`. Or you can run this in a single command:
+
+```sh
+yarn build && yalc publish
+```
+
+After you publish DS into the local registry you need to switch to a project that you want to test with new version and add the DS.
+
+```sh
+yalc add @securityscorecard/design-system
+```
+
+After adding the local package you can run your project and test.
+
+To update the locally published package with new changes you can follow the process above with a small change in the last step where you don't run `yalc add ...` but instead, you can run `yalc update`.
+
+The re-publishing process can be simplified to `yarn build && yalc push`. The `yalc push` command will handle both publishing new versions to the local registry and updating version in a project using DS from the local registry.
 
 ## Contributing
 
