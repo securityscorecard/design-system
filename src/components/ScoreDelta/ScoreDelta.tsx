@@ -40,7 +40,12 @@ const getTrend = (delta: number): Trend => {
 const ScoreDelta = React.forwardRef<HTMLDivElement, ScoreDeltaProps>(
   ({ delta, decimalsCount = 0 }, ref) => {
     const trend = getTrend(delta);
-    const text = Math.abs(delta).toFixed(decimalsCount);
+    const absoluteDelta = Math.abs(delta);
+    const nearZeroLimit = 1 / 10 ** decimalsCount;
+    const isNearZeroDelta = absoluteDelta > 0 && absoluteDelta < nearZeroLimit;
+    const text = isNearZeroDelta
+      ? `<${nearZeroLimit}`
+      : absoluteDelta.toFixed(decimalsCount);
 
     return (
       <ScoreDeltaRoot ref={ref} $trend={trend} as="span" paddingSize="xxs">
