@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import ScoreDelta from './ScoreDelta';
-import { Inline } from '../layout';
+import { Inline, Stack } from '../layout';
 
 export default {
   title: 'components/ScoreDelta',
@@ -30,3 +30,11 @@ Decimals.args = {
   ...Playground.args,
   decimalsCount: 4,
 };
+
+export const NearZeroNumbers: Story = (args) => (
+  <Stack gap="md" justify="flex-start">
+    <ScoreDelta {...args} decimalsCount={1} delta={0.05} />
+    <ScoreDelta {...args} decimalsCount={2} delta={-0.005} />
+    <ScoreDelta {...args} decimalsCount={3} delta={0.0005} />
+  </Stack>
+);
