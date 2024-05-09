@@ -1,3 +1,9 @@
 export * as SignalEnums from './Signal.enums';
 export { default as Signal } from './Signal';
-export * from './Signal.types';
+export {
+  BreachRiskSignalKinds,
+  BusinessImpactSignalKinds,
+  IncidentLikelyhoodSignalKinds,
+  SeveritySignalKinds,
+  SignalProps,
+} from './Signal.types';
