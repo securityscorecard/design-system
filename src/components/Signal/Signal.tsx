@@ -1,7 +1,13 @@
 import React from 'react';
 import { isNilOrEmpty } from 'ramda-adjunct';
 
-import { SignalProps } from './Signal.types';
+import {
+  BreachRiskSignalKinds,
+  BusinessImpactSignalKinds,
+  IncidentLikelihoodSignalKinds,
+  SeveritySignalKinds,
+  SignalProps,
+} from './Signal.types';
 import BreachRiskSignal from './BreachRiskSignal';
 import BusinessImpactSignal from './BusinessImpactSignal';
 import IncidentLikelihoodSignal from './IncidentLikelihoodSignal';
@@ -13,15 +19,35 @@ export default function Signal(props: SignalProps) {
   if (isNilOrEmpty(kind)) return null;
 
   if (variant === 'breachRisk') {
-    return <BreachRiskSignal kind={kind} {...rest} />;
+    return (
+      <BreachRiskSignal
+        kind={kind.toLowerCase() as BreachRiskSignalKinds}
+        {...rest}
+      />
+    );
   }
   if (variant === 'businessImpact') {
-    return <BusinessImpactSignal kind={kind} {...rest} />;
+    return (
+      <BusinessImpactSignal
+        kind={kind.toLowerCase() as BusinessImpactSignalKinds}
+        {...rest}
+      />
+    );
   }
   if (variant === 'incidentLikelihood') {
-    return <IncidentLikelihoodSignal kind={kind} {...rest} />;
+    return (
+      <IncidentLikelihoodSignal
+        kind={kind.toLowerCase() as IncidentLikelihoodSignalKinds}
+        {...rest}
+      />
+    );
   }
 
-  return <SeveritySignal kind={kind} {...rest} />;
+  return (
+    <SeveritySignal
+      kind={kind.toLowerCase() as SeveritySignalKinds}
+      {...rest}
+    />
+  );
 }
 Signal.displayName = 'Signal';
