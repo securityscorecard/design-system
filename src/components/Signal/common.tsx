@@ -23,7 +23,7 @@ const criticalityColorsSeverity = [
 ];
 
 // we are using fixed colors because those are not defined in DS
-const criticalityColorsLikelyhood = [
+const criticalityColorsLikelihood = [
   undefined,
   '#f4907b',
   '#f36756',
@@ -135,7 +135,7 @@ export function HorizontalBars({
   return (
     <svg
       height={size}
-      style={{ color: criticalityColorsLikelyhood[criticality] }}
+      style={{ color: criticalityColorsLikelihood[criticality] }}
       viewBox="0 0 16 16"
       width={size}
       {...props}

@@ -92,20 +92,20 @@ BusinessImpact.argTypes = {
   },
 };
 
-export const IncidentLikelyhood: Story = (args) => (
+export const IncidentLikelihood: Story = (args) => (
   <Inline gap="sm">
-    <Signal {...args} kind="critical" variant="incidentLikelyhood" />
-    <Signal {...args} kind="high" variant="incidentLikelyhood" />
-    <Signal {...args} kind="medium" variant="incidentLikelyhood" />
-    <Signal {...args} kind="low" variant="incidentLikelyhood" />
-    <Signal {...args} kind="none" variant="incidentLikelyhood" />
+    <Signal {...args} kind="critical" variant="incidentLikelihood" />
+    <Signal {...args} kind="high" variant="incidentLikelihood" />
+    <Signal {...args} kind="medium" variant="incidentLikelihood" />
+    <Signal {...args} kind="low" variant="incidentLikelihood" />
+    <Signal {...args} kind="none" variant="incidentLikelihood" />
   </Inline>
 );
-IncidentLikelyhood.args = {
-  variant: 'incidentLikelyhood',
+IncidentLikelihood.args = {
+  variant: 'incidentLikelihood',
   size: 32,
 };
-IncidentLikelyhood.argTypes = {
+IncidentLikelihood.argTypes = {
   kind: {
     control: 'select',
     options: ['critical', 'high', 'medium', 'low', 'none'],

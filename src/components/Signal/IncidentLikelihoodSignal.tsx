@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { HorizontalBars, Icon, criticalityLevels } from './common';
-import { BaseSignalProps, IncidentLikelyhoodSignalKinds } from './Signal.types';
+import { BaseSignalProps, IncidentLikelihoodSignalKinds } from './Signal.types';
 
-function hasValidKind(kind: string): kind is IncidentLikelyhoodSignalKinds {
+function hasValidKind(kind: string): kind is IncidentLikelihoodSignalKinds {
   return ['critical', 'high', 'medium', 'low', 'none'].includes(kind);
 }
 
-export default function IncidentLikelyhoodSignal({
+export default function IncidentLikelihoodSignal({
   kind,
   title,
   ...props
 }: {
-  kind: IncidentLikelyhoodSignalKinds;
+  kind: IncidentLikelihoodSignalKinds;
 } & BaseSignalProps) {
   if (!hasValidKind(kind)) return null;
 
@@ -20,7 +20,7 @@ export default function IncidentLikelyhoodSignal({
     return (
       <HorizontalBars
         criticality={criticalityLevels[kind]}
-        title={title ?? `${kind} incident likelyhood`}
+        title={title ?? `${kind} incident likelihood`}
         {...props}
       />
     );
@@ -29,9 +29,9 @@ export default function IncidentLikelyhoodSignal({
   return (
     <Icon
       signal={kind}
-      title={title ?? `${kind} incident likelyhood`}
+      title={title ?? `${kind} incident likelihood`}
       {...props}
     />
   );
 }
-IncidentLikelyhoodSignal.displayName = 'IncidentLikelyhoodSignal';
+IncidentLikelihoodSignal.displayName = 'IncidentLikelihoodSignal';

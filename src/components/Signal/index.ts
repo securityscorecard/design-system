@@ -3,7 +3,7 @@ export { default as Signal } from './Signal';
 export {
   BreachRiskSignalKinds,
   BusinessImpactSignalKinds,
-  IncidentLikelyhoodSignalKinds,
+  IncidentLikelihoodSignalKinds,
   SeveritySignalKinds,
   SignalProps,
 } from './Signal.types';
