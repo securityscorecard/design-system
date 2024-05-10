@@ -1,6 +1,6 @@
 {
   "name": "@securityscorecard/design-system",
-  "version": "1.26.2",
+  "version": "0.0.0",
   "description": "Security Scorecard Design System",
   "author": "Radek Podrazky <rpodrazky@securityscorecard.io>",
   "license": "Apache-2.0",
@@ -91,10 +91,8 @@
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-node-resolve": "^13.2.0",
     "@rollup/plugin-url": "^6.1.0",
-    "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.4",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@storybook/addon-a11y": "^6.5.6",
