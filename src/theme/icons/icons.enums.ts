@@ -49,6 +49,6 @@ export const SSCIconNames = {
 export const IconTypes = {
   ssc: 'ssc',
   far: 'far',
-  fas: 'fas',
+  fal: 'fal',
   fab: 'fab',
 } as const;
