@@ -45,7 +45,7 @@ const SettingsItem = <D,>({
         {enableColumnOrdering && (
           <IconButton
             ref={setActivatorNodeRef}
-            iconName="grip-lines"
+            iconProps={{ name: 'grip-lines' }}
             label={`Reorder ${column.columnDef.header} column`}
             type="button"
             {...attributes}

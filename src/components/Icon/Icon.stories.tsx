@@ -37,10 +37,10 @@ Color.args = {
 
 export const Size: Story = (args) => (
   <Inline gap="md">
-    <Icon size="sm" {...args} />
-    <Icon size="md" {...args} />
-    <Icon size="lg" {...args} />
-    <Icon size="xl" {...args} />
+    <Icon {...args} size="sm" type="ssc" />
+    <Icon {...args} size="md" type="ssc" />
+    <Icon {...args} size="lg" type="ssc" />
+    <Icon {...args} size="xl" type="ssc" />
   </Inline>
 );
 Size.args = {
@@ -69,53 +69,8 @@ export const Flip: Story = (args) => (
   </Inline>
 );
 Flip.args = {
-  name: 'wrench',
+  name: 'upload',
   size: 'xl',
-};
-
-export const FreeTransform: Story = (args) => (
-  <Stack gap="lg">
-    <Inline gap="lg">
-      <Icon transform="shrink-8" {...args} />
-      <Icon {...args} />
-      <Icon transform="grow-8" {...args} />
-    </Inline>
-
-    <Inline gap="lg">
-      <Icon transform="shrink-8" {...args} />
-      <Icon transform="shrink-8 up-6" {...args} />
-      <Icon transform="shrink-8 up-6 right-6" {...args} />
-      <Icon transform="shrink-8 right-6" {...args} />
-      <Icon transform="shrink-8 down-6 right-6" {...args} />
-      <Icon transform="shrink-8 down-6" {...args} />
-      <Icon transform="shrink-8 down-6 left-6" {...args} />
-      <Icon transform="shrink-8 left-6" {...args} />
-      <Icon transform="shrink-8 up-6 left-6" {...args} />
-    </Inline>
-
-    <Inline gap="lg">
-      <Icon {...args} />
-      <Icon transform="rotate-45" {...args} />
-      <Icon transform="rotate-90" {...args} />
-      <Icon transform="rotate-135" {...args} />
-      <Icon transform="rotate-180" {...args} />
-      <Icon transform="rotate--135" {...args} />
-      <Icon transform="rotate--90" {...args} />
-      <Icon transform="rotate--45" {...args} />
-    </Inline>
-
-    <Inline gap="lg">
-      <Icon {...args} />
-      <Icon transform="flip-v" {...args} />
-      <Icon transform="flip-h" {...args} />
-      <Icon transform="flip-v flip-h" {...args} />
-    </Inline>
-  </Stack>
-);
-FreeTransform.args = {
-  name: 'filter',
-  size: 'xl',
-  style: { background: 'mistyrose' },
 };
 
 export const UnorderedList: Story = (args) => (

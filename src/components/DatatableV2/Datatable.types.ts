@@ -15,7 +15,7 @@ import {
 } from '@tanstack/react-table';
 import { Dispatch, MutableRefObject, ReactNode, SetStateAction } from 'react';
 
-import { Types as SSCIconTypes, SSCIcons } from '../Icon';
+import { IconNames, RegularIconTypes } from '../Icon';
 
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
@@ -181,9 +181,8 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
 
 export type DatatableRowAction<D> = null | {
   label: string;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  iconName: SSCIcons | (string & {});
-  iconType?: SSCIconTypes;
+  iconName: IconNames;
+  iconType?: RegularIconTypes;
   onClick(props: {
     row: DatatableRow<D>;
     table: DatatableInstance<D>;

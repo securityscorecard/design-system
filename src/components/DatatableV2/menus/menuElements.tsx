@@ -3,7 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import styled from 'styled-components';
 
 import { getRadii, getToken } from '../../../utils';
-import { Icon, Types as SSCIconTypes, SSCIcons } from '../../Icon';
+import { Icon, IconNames, RegularIconTypes } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
 import { Text } from '../../typographyLegacy';
 
@@ -40,9 +40,8 @@ export const MenuItem = ({
   className,
 }: {
   children: string;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  iconName: SSCIcons | (string & {});
-  iconType?: SSCIconTypes;
+  iconName: IconNames;
+  iconType?: RegularIconTypes;
   onClick: (event: Event) => void;
   isDisabled?: boolean;
   className?: string;
@@ -53,8 +52,9 @@ export const MenuItem = ({
         <Icon
           color="neutral.700"
           name={iconName}
+          size="sm"
           type={iconType}
-          hasFixedWidth
+          hasFixedSize
         />
         <Text>{children}</Text>
       </Inline>

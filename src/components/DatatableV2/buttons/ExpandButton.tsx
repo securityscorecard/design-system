@@ -20,8 +20,8 @@ const ExpandButton = <D,>({
 
   return (
     <IconButton
-      iconName="angle-right"
       iconProps={{
+        name: 'angle-right',
         rotation: isExpanded ? 90 : undefined,
       }}
       isDisabled={!canExpand && !renderDetailPanel}

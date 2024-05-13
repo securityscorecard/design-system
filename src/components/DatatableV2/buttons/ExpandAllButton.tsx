@@ -16,8 +16,8 @@ const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
 
   return (
     <IconButton
-      iconName="angles-right"
       iconProps={{
+        name: 'angles-right',
         rotation: areSomeRowsExpanded ? 270 : undefined,
       }}
       isDisabled={isLoading || !renderDetailPanel}

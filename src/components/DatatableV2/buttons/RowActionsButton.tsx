@@ -22,7 +22,7 @@ const RowActionsButton = <D,>({
         <DropdownMenu.Trigger asChild>
           <IconButton
             className="ds-table-header-cell-row-actions-button"
-            iconName="ellipsis-h"
+            iconProps={{ name: 'ellipsis-h' }}
             label="Row actions"
           />
         </DropdownMenu.Trigger>
@@ -36,8 +36,7 @@ const RowActionsButton = <D,>({
     return (
       <IconButton
         className="ds-table-header-cell-row-actions-button"
-        iconName={iconName}
-        iconProps={{ type: iconType }}
+        iconProps={{ name: iconName, type: iconType }}
         isDisabled={
           typeof isDisabled === 'function'
             ? isDisabled({ row, table })

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { SpaceSize } from '../../theme/space.types';
 import { ActionKinds } from '../../types/action.types';
-import { SSCIcons, Types } from '../Icon/Icon.types';
+import { IconNames, RegularIconTypes } from '../Icon/Icon.types';
 
 export interface CardActionsProps {
   /**
@@ -15,8 +15,8 @@ export interface CardActionsProps {
     void,
     {
       isDisabled?: boolean;
-      iconName?: SSCIcons | string;
-      iconType?: Types;
+      iconName?: IconNames;
+      iconType?: RegularIconTypes;
       ariaLabel?: string;
     }
   >[];

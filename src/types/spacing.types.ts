@@ -27,12 +27,12 @@ export const SpacingSizeValuePropType = PropTypes.oneOfType([
 
 export interface SpacingProps {
   /**
-   * DEPRECATED use Layout Primitives for layouts
+   * **DEPRECATED** use Layout Primitives for layouts
    *
    * @deprecated use layout primitives instead */
   margin?: SpacingSizeValue;
   /**
-   * DEPRECATED use Layout Primitives for layouts
+   * **DEPRECATED** use Layout Primitives for layouts
    *
    * @deprecated use layout primitives instead */
   padding?: SpacingSizeValue;
