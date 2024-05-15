@@ -21,6 +21,7 @@ export * from './FlexContainer';
 export * from './HexGrade';
 export * from './HintTooltip';
 export * from './Icon';
+export * from './IconWrapper';
 export * from './Loading';
 export * from './Modal';
 export * from './Pagination';
