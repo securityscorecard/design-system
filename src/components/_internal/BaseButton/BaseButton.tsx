@@ -7,13 +7,12 @@ import {
   isUndefined,
   noop,
 } from 'ramda-adjunct';
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { ColorTypes, SpaceSizes } from '../../../theme';
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { getToken } from '../../../utils';
 import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Spinner } from '../../Spinner';
@@ -29,10 +28,6 @@ import {
 import { BaseButtonProps } from './BaseButton.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
-
-const BaseStyledIcon = styled(Icon)`
-  font-size: ${getToken('font-action-size')};
-`;
 
 const BaseButton = ({
   children,
@@ -96,14 +91,14 @@ const BaseButton = ({
   ) : hasIcon ? (
     <>
       {hasStartIcon && (
-        <BaseStyledIcon
+        <Icon
           name={iconStart?.name ?? iconName}
           type={iconStart?.type ?? iconType}
         />
       )}
       {isNotUndefined(children) && <span>{children}</span>}
       {isNotUndefined(iconEnd) && !hasOnlyIcon && (
-        <BaseStyledIcon name={iconEnd?.name} type={iconEnd?.type ?? 'ssc'} />
+        <Icon name={iconEnd?.name} type={iconEnd?.type ?? 'ssc'} />
       )}
     </>
   ) : (

@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   IconName,
   IconPrefix,
@@ -15,19 +11,43 @@ import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { createSpacings, getColor } from '../../utils';
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
-import { ColorTypes } from '../../theme/colors.enums';
-import { Color } from '../../theme/colors.types';
-import { IconProps, SSCIcons, Types } from './Icon.types';
-import { SpacingSizeValuePropType } from '../../types/spacing.types';
+import { IconTypes } from '../../theme/icons/icons.enums';
+import { IconProps } from './Icon.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { useLogger } from '../../hooks/useLogger';
 
-const StyledIcon = styled(FontAwesomeIcon).withConfig<{ color: Color }>({
-  shouldForwardProp: (property) => !includes(property, ['margin', 'color']),
+const fontSizes: Record<IconProps['size'], string> = {
+  sm: '0.875rem',
+  md: '1rem',
+  lg: '1.5rem',
+  xl: '2rem',
+};
+const boxSizes: Record<IconProps['size'], string> = {
+  sm: '1rem',
+  md: '1.5rem',
+  lg: '2rem',
+  xl: '2.5rem',
+};
+
+const IconBox = styled.div<{
+  $size: IconProps['size'];
+}>`
+  display: inline-grid;
+  place-items: center;
+  width: ${({ $size }) => boxSizes[$size]};
+  height: ${({ $size }) => boxSizes[$size]};
+`;
+
+const StyledIcon = styled(FontAwesomeIcon).withConfig<{
+  $color: IconProps['color'];
+  $size: IconProps['size'];
+  $hasFixedSize: IconProps['hasFixedSize'];
+}>({
+  shouldForwardProp: (property) => !includes(property, ['margin']),
 })`
-  color: ${({ color, theme }) =>
-    isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
+  color: ${({ $color, theme }) =>
+    isNotUndefined($color) ? getColor($color, { theme }) : 'inherit'};
+  font-size: ${({ $size }) => $size && fontSizes[$size]};
   ${createSpacings};
 `;
 
@@ -35,11 +55,12 @@ const Icon = ({
   name,
   type = IconTypes.ssc,
   color,
+  size,
   className = '',
   hasFixedWidth = false,
+  hasFixedSize,
   ...props
-}: IconProps &
-  Omit<FontAwesomeIconProps, 'icon' | 'fixedWidth' | 'color' | 'size'>) => {
+}: IconProps) => {
   const { warn } = useLogger('Icon');
   const ref = useRef<SVGSVGElement>(null);
   const iconDefinition = findIconDefinition({
@@ -52,33 +73,24 @@ const Icon = ({
     );
     return null;
   }
-  return (
+  const icon = (
     <StyledIcon
-      // @ts-expect-error this passing ref through styled components is rabbit hole
       ref={ref}
+      $color={color}
+      $hasFixedSize={hasFixedSize}
+      $size={size}
       className={cls(CLX_COMPONENT, className)}
-      color={color}
       fixedWidth={hasFixedWidth}
       icon={iconDefinition}
       {...props}
     />
   );
-};
 
-Icon.propTypes = {
-  name: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]).isRequired,
-  type: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
-  color: PropTypes.oneOf([...Object.values(ColorTypes)]),
-  className: PropTypes.string,
-  hasFixedWidth: PropTypes.bool,
-  margin: SpacingSizeValuePropType,
-  padding: SpacingSizeValuePropType,
+  if (hasFixedSize) {
+    return <IconBox $size={size}>{icon}</IconBox>;
+  }
+
+  return icon;
 };
 
 export default Icon;

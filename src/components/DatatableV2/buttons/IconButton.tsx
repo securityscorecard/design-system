@@ -2,15 +2,12 @@ import React, { ComponentProps, forwardRef, memo } from 'react';
 import styled from 'styled-components';
 
 import { getColor, getRadii } from '../../../utils';
-import { Icon, SSCIcons } from '../../Icon';
+import { Icon, IconProps } from '../../Icon';
 import { Padbox } from '../../layout';
 
 interface IconButtonProps extends Omit<ComponentProps<'button'>, 'disabled'> {
   label: string;
-  /* eslint-disable @typescript-eslint/ban-types */
-  iconName: SSCIcons | (string & {});
-  /* eslint-enable @typescript-eslint/ban-types */
-  iconProps?: Partial<ComponentProps<typeof Icon>>;
+  iconProps: IconProps;
   isDisabled?: boolean;
 }
 
@@ -43,7 +40,7 @@ const IconButtonRoot = styled(Padbox)`
 `;
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ iconName, label, iconProps, isDisabled, ...props }, ref) => {
+  ({ label, iconProps, isDisabled, ...props }, ref) => {
     return (
       <IconButtonRoot
         ref={ref}
@@ -55,7 +52,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         type="button"
         {...props}
       >
-        <Icon name={iconName} {...iconProps} />
+        <Icon size="sm" hasFixedSize {...iconProps} />
       </IconButtonRoot>
     );
   },
