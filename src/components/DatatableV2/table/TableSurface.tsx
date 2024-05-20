@@ -40,7 +40,6 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         style={{
           '--sscds-table-color-background': 'var(--sscds-background)',
           '--sscds-table-color-border': 'var(--sscds-border-color)',
-          '--sscds-table-color-zebra': 'var(--sscds-neutral-50)',
           '--sscds-table-color-accent': 'var(--sscds-primary-500)',
           '--sscds-table-color-settings-background':
             'var(--sscds-table-color-background)',
