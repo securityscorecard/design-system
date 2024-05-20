@@ -24,7 +24,7 @@ const Body = <D,>({ table }: { table: DatatableInstance<D> }) => {
       {!rows.length ? (
         <tr style={{ display: 'flex' }}>
           <td colSpan={getVisibleLeafColumns().length} style={{ flex: 1 }}>
-            <Surface background="dynamic" radius="none">
+            <Surface background="white" radius="none">
               <Padbox paddingSize="xl">
                 {renderNoDataFallback?.({ table }) ?? (
                   <Stack gap="sm">

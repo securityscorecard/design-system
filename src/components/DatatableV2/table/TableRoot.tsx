@@ -41,10 +41,6 @@ const TableRoot = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
 
-    &:nth-child(odd) .ds-table-cell {
-      background-color: var(--sscds-table-color-zebra);
-    }
-
     &.isSelected .ds-table-cell {
       background-color: var(--sscds-table-color-selection) !important;
     }
