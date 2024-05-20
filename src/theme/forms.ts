@@ -11,7 +11,7 @@ export const createForms = (themeColors: typeof colors): Forms => ({
   color: themeColors.neutral[900],
   bgColor: themeColors.neutral[0],
   disabledColor: themeColors.neutral[500],
-  borderColor: themeColors.neutral[500],
+  borderColor: themeColors.neutral[400],
   borderWidth: '1px',
   statefulBorderWidth: '2px',
   focusBgColor: transparentize(0.9, themeColors.primary[400]),
