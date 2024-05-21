@@ -17,7 +17,7 @@ import { SpaceSizes } from '../../theme';
 
 const Header = styled(Padbox)`
   cursor: pointer;
-  border-bottom: 1px solid ${getColor('neutral.400')};
+  border-bottom: 1px solid ${getColor('neutral.300')};
   display: flex;
   align-items: center;
   flex: 1;

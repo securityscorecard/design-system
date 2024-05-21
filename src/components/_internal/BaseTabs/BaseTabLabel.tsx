@@ -24,7 +24,7 @@ const underlineTab = css<BaseLabelProps>`
         ? $color
           ? getColor($color)
           : getToken('color-action-primary')
-        : getColor('neutral.400')};
+        : getColor('neutral.300')};
 
   &:hover {
     color: ${getColor('neutral.900')};

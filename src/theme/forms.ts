@@ -22,7 +22,7 @@ export const createForms = (themeColors: typeof colors): Forms => ({
   activeBgColor: themeColors.primary[50],
   activeBorderColor: themeColors.primary[500],
   disabledBgColor: themeColors.neutral[300],
-  disabledBorderColor: themeColors.neutral[500],
+  disabledBorderColor: themeColors.neutral[400],
   disabledActiveColor: themeColors.neutral[700],
   placeholderColor: themeColors.neutral[700],
   indicatorColor: themeColors.neutral[700],

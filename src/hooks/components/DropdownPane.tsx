@@ -20,7 +20,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   font-family: ${getFontFamily('base')};
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
-  border: 1px solid ${getColor('neutral.600')};
+  border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};
 
   ${({ $isElevated }) =>

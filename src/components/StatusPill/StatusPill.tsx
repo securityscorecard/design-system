@@ -16,7 +16,7 @@ const StyledPillWrapper = Styled(Padbox)`
   height: ${pxToRem(24)};
   min-width: 0;
   border-radius: ${getRadii('round')};
-  border: 1px solid ${getColor('neutral.200')};
+  border: 1px solid ${getColor('neutral.300')};
   background-color: ${getColor('neutral.0')};
   padding-right: ${pxToRem(6)};
   padding-top: ${pxToRem(3)};

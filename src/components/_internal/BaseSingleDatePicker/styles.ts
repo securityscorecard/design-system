@@ -49,7 +49,7 @@ export const datePickerStyles = css`
   }
   .react-datepicker {
     background-color: ${getColor('neutral.0')};
-    border: 1px solid ${getColor('neutral.400')};
+    border: 1px solid ${getColor('neutral.300')};
     border-radius: 0.3rem;
     display: inline-block;
     position: relative;
@@ -90,42 +90,13 @@ export const datePickerStyles = css`
     font-weight: ${getFontWeight('bold')};
     color: ${getColor('neutral.0')};
   }
-  .react-datepicker__navigation {
-    top: ${pxToRem(36)};
-    background: none;
-    line-height: 1.7rem;
-    text-align: center;
-    cursor: pointer;
-    position: absolute;
-    padding: 0;
-    border: 0.45rem solid transparent;
-    z-index: 1;
-    height: ${pxToRem(10)};
-    width: ${pxToRem(10)};
-    text-indent: -999em;
-    overflow: hidden;
-  }
-  .react-datepicker__navigation--previous {
-    border-right-color: ${getColor('neutral.600')};
-    left: ${pxToRem(28)};
-  }
-  .react-datepicker__navigation--previous:hover {
-    border-right-color: ${getColor('neutral.700')};
-  }
-  .react-datepicker__navigation--next {
-    border-left-color: ${getColor('neutral.600')};
-    right: ${pxToRem(28)};
-  }
-  .react-datepicker__navigation--next:hover {
-    border-left-color: ${getColor('neutral.700')};
-  }
   .react-datepicker__triangle {
     position: absolute;
     left: ${pxToRem(50)} !important; /* Needed for input with 100% width */
     border-bottom-color: ${getColor('neutral.0')};
   }
   .react-datepicker__triangle::before {
-    border-bottom-color: ${getColor('neutral.600')};
+    border-bottom-color: ${getColor('neutral.300')};
   }
   .react-datepicker__day-name {
     display: inline-flex;
@@ -185,7 +156,7 @@ export const datePickerStyles = css`
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before {
     top: ${pxToRem(-1)};
-    border-bottom-color: ${getColor('neutral.400')};
+    border-bottom-color: ${getColor('neutral.300')};
   }
   .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle {
     bottom: 0;
@@ -200,7 +171,7 @@ export const datePickerStyles = css`
   .react-datepicker-popper[data-placement^='top']
     .react-datepicker__triangle::before {
     bottom: ${pxToRem(-1)};
-    border-top-color: ${getColor('neutral.400')};
+    border-top-color: ${getColor('neutral.300')};
   }
   .react-datepicker-popper[data-placement='bottom-end']
     .react-datepicker__triangle,
