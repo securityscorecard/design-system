@@ -2,12 +2,10 @@ import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
 import { isString } from 'ramda-adjunct';
-import { transparentize } from 'polished';
 import cls from 'classnames';
 
 import { getColor, pxToRem } from '../../utils';
 import { SpinnerProps } from './Spinner.types';
-import { ColorTypes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const spin = keyframes`
@@ -36,18 +34,15 @@ const Spinner = styled.div.attrs({
   height: ${({ height }) => pxToRem(height)};
   animation: ${spin} 1s infinite linear;
   border: solid
-    ${({ dark, color, theme }) =>
-      transparentize(0.8)(
-        getColor(color || (dark ? 'neutral.1000' : 'neutral.0'), { theme }),
-      )};
+    ${({ dark }) =>
+      dark ? 'var(--sscds-slateA-slateA6)' : 'var(--sscds-whiteA-whiteA4)'};
   border-width: ${({ borderWidth }) => `${borderWidth}px`};
-  border-top-color: ${({ dark, color, theme }) =>
-    getColor(color || (dark ? 'neutral.1000' : 'neutral.0'), { theme })};
+  border-top-color: ${({ dark, theme }) =>
+    getColor(dark ? 'neutral.800' : 'neutral.0', { theme })};
 `;
 
 Spinner.propTypes = {
   dark: PropTypes.bool,
-  color: PropTypes.oneOf(Object.values(ColorTypes)),
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   verticalMargin: PropTypes.number,

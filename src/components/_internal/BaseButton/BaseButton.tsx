@@ -11,7 +11,7 @@ import { useTheme } from 'styled-components';
 import cls from 'classnames';
 
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { ColorTypes, SpaceSizes } from '../../../theme';
+import { SpaceSizes } from '../../../theme';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
@@ -81,10 +81,10 @@ const BaseButton = ({
     <>
       <Spinner
         borderWidth={2}
-        color={ColorTypes.neutral600}
         height={theme.tokens['font-action-size']}
         verticalMargin={0}
         width={theme.tokens['font-action-size']}
+        dark
       />
       {!hasOnlyIcon && <span>{loadingText}</span>}
     </>

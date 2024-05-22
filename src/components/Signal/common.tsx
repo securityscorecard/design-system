@@ -22,12 +22,11 @@ const criticalityColorsSeverity = [
   'var(--sscds-severity-high)',
 ];
 
-// we are using fixed colors because those are not defined in DS
 const criticalityColorsLikelihood = [
   undefined,
-  '#f4907b',
-  '#f36756',
-  '#eb2f40',
+  'var(--sscds-likelihood-low)',
+  'var(--sscds-likelihood-medium)',
+  'var(--sscds-likelihood-high)',
 ];
 
 export function Svg({
@@ -108,7 +107,7 @@ export function Vertical4Bars({
   return (
     <svg
       height={size}
-      style={{ color: '#5c33ea' }} // we are using fixed color because it's not defined in DS
+      style={{ color: 'var(--sscds-impact)' }}
       viewBox="0 0 18 16"
       width={(size / 16) * 18}
       {...props}

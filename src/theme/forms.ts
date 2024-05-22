@@ -1,5 +1,3 @@
-import { transparentize } from 'polished';
-
 import { Forms } from './forms.types';
 import { colors } from './colors';
 import { pxToRem } from '../utils';
@@ -14,9 +12,7 @@ export const createForms = (themeColors: typeof colors): Forms => ({
   borderColor: themeColors.neutral[400],
   borderWidth: '1px',
   statefulBorderWidth: '2px',
-  focusBgColor: transparentize(0.9, themeColors.primary[400]),
   focusBorderColor: themeColors.primary[400],
-  invalidBgColor: transparentize(0.9, themeColors.error[500]),
   invalidBorderColor: themeColors.error[500],
   activeColor: themeColors.neutral[0],
   activeBgColor: themeColors.primary[50],

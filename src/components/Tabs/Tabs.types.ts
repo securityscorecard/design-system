@@ -8,7 +8,6 @@ export interface LabelProps extends BaseLabelProps, PadboxProps {}
 
 export interface TabProps {
   children: React.ReactNode;
-  color?: LabelProps['$color'];
   value: React.ReactText;
   onClick?: MouseEventHandler;
   /** Internal properties */

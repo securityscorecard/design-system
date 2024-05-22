@@ -5,135 +5,59 @@ import { colors } from './colors';
 
 # Colors
 
-## Primary
+## Base palettes
 
 <ColorPalette>
-  <ColorItem title="theme.colors.primary.700" colors={[colors.primary[700]]} />
-  <ColorItem title="theme.colors.primary.600" colors={[colors.primary[600]]} />
-  <ColorItem title="theme.colors.primary.500" colors={[colors.primary[500]]} />
-  <ColorItem title="theme.colors.primary.400" colors={[colors.primary[400]]} />
-  <ColorItem title="theme.colors.primary.200" colors={[colors.primary[200]]} />
-  <ColorItem title="theme.colors.primary.50" colors={[colors.primary[50]]} />
+  <ColorItem title="theme.colors.neutral" colors={colors.neutral} />
+  <ColorItem title="theme.colors.primary" colors={colors.primary} />
+  <ColorItem title="theme.colors.brand" colors={colors.brand} />
 </ColorPalette>
 
-## Neutral
+## Text
 
 <ColorPalette>
-  <ColorItem
-    title="theme.colors.neutral.1000"
-    subtitle="Pure black"
-    colors={[colors.neutral[1000]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.900"
-    subtitle="Primary text"
-    colors={[colors.neutral[900]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.800"
-    subtitle="Icons"
-    colors={[colors.neutral[800]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.700"
-    subtitle="Secondary text"
-    colors={[colors.neutral[700]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.600"
-    subtitle="Inactive text"
-    colors={[colors.neutral[600]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.500"
-    subtitle="Borders"
-    colors={[colors.neutral[500]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.400"
-    subtitle="Page title area background"
-    colors={[colors.neutral[400]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.300"
-    subtitle="Disabled button background"
-    colors={[colors.neutral[300]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.200"
-    subtitle="Table background"
-    colors={[colors.neutral[200]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.100"
-    subtitle="Page background"
-    colors={[colors.neutral[100]]}
-  />
-  <ColorItem
-    title="theme.colors.neutral.0"
-    subtitle="Pure white"
-    colors={[colors.neutral[0]]}
-  />
+  <ColorItem title="theme.colors.text" colors={colors.text} />
 </ColorPalette>
 
-## Semantic colors
-
-### Info
+## Semantic palettes
 
 <ColorPalette>
-  <ColorItem title="theme.colors.info.700" colors={[colors.info[700]]} />
-  <ColorItem title="theme.colors.info.600" colors={[colors.info[600]]} />
-  <ColorItem title="theme.colors.info.500" colors={[colors.info[500]]} />
-  <ColorItem title="theme.colors.info.100" colors={[colors.info[100]]} />
-  <ColorItem title="theme.colors.info.50" colors={[colors.info[50]]} />
+  <ColorItem title="theme.colors.success" colors={colors.success} />
+  <ColorItem title="theme.colors.warning" colors={colors.warning} />
+  <ColorItem title="theme.colors.error" colors={colors.error} />
+  <ColorItem title="theme.colors.info" colors={colors.info} />
 </ColorPalette>
 
-### Success
+## Signals
 
 <ColorPalette>
-  <ColorItem title="theme.colors.success.700" colors={[colors.success[700]]} />
-  <ColorItem title="theme.colors.success.600" colors={[colors.success[600]]} />
-  <ColorItem title="theme.colors.success.500" colors={[colors.success[500]]} />
-  <ColorItem title="theme.colors.success.100" colors={[colors.success[100]]} />
-  <ColorItem title="theme.colors.success.50" colors={[colors.success[50]]} />
+  <ColorItem title="theme.colors.grade" colors={colors.grade} />
+  <ColorItem title="theme.colors.severity" colors={colors.severity} />
+  <ColorItem title="theme.colors.likelihood" colors={colors.likelihood} />
+  <ColorItem title="theme.colors.impact" colors={[colors.impact]} />
 </ColorPalette>
 
-### Warning
+
+## Core colors
 
 <ColorPalette>
-  <ColorItem title="theme.colors.warning.700" colors={[colors.warning[700]]} />
-  <ColorItem title="theme.colors.warning.600" colors={[colors.warning[600]]} />
-  <ColorItem title="theme.colors.warning.500" colors={[colors.warning[500]]} />
-  <ColorItem title="theme.colors.warning.100" colors={[colors.warning[100]]} />
-  <ColorItem title="theme.colors.warning.50" colors={[colors.warning[50]]} />
+  <ColorItem title="theme.colors.slate" colors={colors.slate} />
+  <ColorItem title="theme.colors.indigo" colors={colors.indigo} />
+  <ColorItem title="theme.colors.green" colors={colors.green} />
+  <ColorItem title="theme.colors.amber" colors={colors.amber} />
+  <ColorItem title="theme.colors.tomato" colors={colors.tomato} />
+  <ColorItem title="theme.colors.slateA" colors={colors.slateA} />
+  <ColorItem title="theme.colors.whiteA" colors={colors.whiteA} />
 </ColorPalette>
 
-### Error
+## Decorative colors
 
 <ColorPalette>
-  <ColorItem title="theme.colors.error.700" colors={[colors.error[700]]} />
-  <ColorItem title="theme.colors.error.600" colors={[colors.error[600]]} />
-  <ColorItem title="theme.colors.error.500" colors={[colors.error[500]]} />
-  <ColorItem title="theme.colors.error.100" colors={[colors.error[100]]} />
-  <ColorItem title="theme.colors.error.50" colors={[colors.error[50]]} />
-</ColorPalette>
-
-## Grades
-
-<ColorPalette>
-  <ColorItem title="theme.colors.grade.A" colors={[colors.grade.A]} />
-  <ColorItem title="theme.colors.grade.B" colors={[colors.grade.B]} />
-  <ColorItem title="theme.colors.grade.C" colors={[colors.grade.C]} />
-  <ColorItem title="theme.colors.grade.D" colors={[colors.grade.D]} />
-  <ColorItem title="theme.colors.grade.F" colors={[colors.grade.F]} />
-</ColorPalette>
-
-## Severity
-
-<ColorPalette>
-  <ColorItem title="theme.colors.severity.informational" colors={[colors.severity.informational]} />
-  <ColorItem title="theme.colors.severity.positive" colors={[colors.severity.positive]} />
-  <ColorItem title="theme.colors.severity.low" colors={[colors.severity.low]} />
-  <ColorItem title="theme.colors.severity.medium" colors={[colors.severity.medium]} />
-  <ColorItem title="theme.colors.severity.high" colors={[colors.severity.high]} />
+  <ColorItem title="theme.colors.blue" colors={colors.blue} />
+  <ColorItem title="theme.colors.cyan" colors={colors.cyan} />
+  <ColorItem title="theme.colors.iris" colors={colors.iris} />
+  <ColorItem title="theme.colors.lime" colors={colors.lime} />
+  <ColorItem title="theme.colors.mauve" colors={colors.mauve} />
+  <ColorItem title="theme.colors.pink" colors={colors.pink} />
+  <ColorItem title="theme.colors.orange" colors={colors.orange} />
 </ColorPalette>

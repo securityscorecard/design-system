@@ -7,7 +7,7 @@ import { getColor, getRadii, pxToRem } from '../../utils';
 export const StatusDotColors = {
   success: 'success.500',
   danger: 'error.500',
-  warn: 'severity.low',
+  warn: 'warning.500',
   info: 'info.500',
   inactive: 'neutral.400',
 } as const;

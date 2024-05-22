@@ -1,5 +1,4 @@
 import React, { ComponentType, ReactNode, useState } from 'react';
-import { transparentize } from 'polished';
 import { ThemeConfig } from 'react-select/src/theme';
 import {
   IndicatorComponentType,
@@ -42,26 +41,26 @@ import PillRemoveButton from '../../Pill/PillRemoveButton';
 import { PillColorsEnums } from '../../Pill/Pill.enums';
 
 export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig =
-  (DSTheme) => (selectTheme) => ({
+  () => (selectTheme) => ({
     ...selectTheme,
     colors: {
-      primary: DSTheme.colors.primary[400],
-      primary75: DSTheme.colors.primary[400],
-      primary50: DSTheme.colors.primary[200],
-      primary25: transparentize(0.9, DSTheme.colors.primary[400]),
-      danger: DSTheme.colors.error[500],
-      dangerLight: transparentize(0.9, DSTheme.colors.error[500]),
-      neutral0: DSTheme.colors.neutral[0],
-      neutral5: DSTheme.colors.neutral[100],
-      neutral10: DSTheme.colors.neutral[200],
-      neutral20: DSTheme.colors.neutral[300],
-      neutral30: DSTheme.colors.neutral[400],
-      neutral40: DSTheme.colors.neutral[500],
-      neutral50: DSTheme.colors.neutral[600],
-      neutral60: DSTheme.colors.neutral[700],
-      neutral70: DSTheme.colors.neutral[800],
-      neutral80: DSTheme.colors.neutral[900],
-      neutral90: DSTheme.colors.neutral[1000],
+      primary: 'var(--sscds-primary-400)',
+      primary75: 'var(--sscds-primary-400)',
+      primary50: 'var(--sscds-primary-200)',
+      primary25: 'var(--sscds-primary-50)',
+      danger: 'var(--sscds-error-500)',
+      dangerLight: 'var(--sscds-error-50)',
+      neutral0: 'var(--sscds-neutral-0)',
+      neutral5: 'var(--sscds-neutral-100)',
+      neutral10: 'var(--sscds-neutral-200)',
+      neutral20: 'var(--sscds-neutral-300)',
+      neutral30: 'var(--sscds-neutral-400)',
+      neutral40: 'var(--sscds-neutral-500)',
+      neutral50: 'var(--sscds-neutral-600)',
+      neutral60: 'var(--sscds-neutral-700)',
+      neutral70: 'var(--sscds-neutral-800)',
+      neutral80: 'var(--sscds-neutral-900)',
+      neutral90: 'var(--sscds-neutral-1000)',
     },
     spacing: { ...selectTheme.spacing },
   });
@@ -208,7 +207,7 @@ export const selectStyles: (
       ...styles,
       ...(isMenuPositionRelative ? { position: 'relative' } : {}),
       border: `1px solid ${DSTheme.colors.neutral[300]}`,
-      boxShadow: `0px 1px 4px ${transparentize(0.85, '#000')}`,
+      boxShadow: `0px 1px 4px var(--sscds-slateA-slateA6)`,
       marginBottom: 0,
       marginTop: pxToRem(DSTheme.space.xs),
       paddingTop: pxToRem(DSTheme.space.sm),

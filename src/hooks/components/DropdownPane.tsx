@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { transparentize } from 'polished';
 
 import {
   getColor,
@@ -24,7 +23,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   border-radius: ${getRadii('default')};
 
   ${({ $isElevated }) =>
-    $isElevated && `box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')}`};
+    $isElevated && `box-shadow: 0 2px 6px 0 var(--sscds-slateA-slateA8)`};
 `;
 
 const DropdownPane = ({

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { transparentize } from 'polished';
 import cls from 'classnames';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -44,14 +43,12 @@ const CloseButtonWrapper = styled.button<CloseButtonWrapperProps>`
   outline-offset: ${getNegativeSpace(SpaceSizes.sm)};
 
   &:hover ${/* sc-selector */ IconWrapper} {
-    background-color: ${(props) =>
-      transparentize(0.96, getColor('neutral.1000', props))};
+    background-color: var(--sscds-slateA-slateA3);
   }
 
   &:active ${/* sc-selector */ IconWrapper} {
     outline: none;
-    background-color: ${(props) =>
-      transparentize(0.94, getColor('neutral.1000', props))};
+    background-color: var(--sscds-slateA-slateA4);
   }
 `;
 
