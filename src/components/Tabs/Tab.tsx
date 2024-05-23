@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { TabProps } from './Tabs.types';
 import { TabVariants } from './Tabs.enums';
-import { ColorTypes } from '../../theme/colors.enums';
 import { requireRouterLink } from '../../utils/require-router-link';
 import { SpaceSizes } from '../../theme/space.enums';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
@@ -11,7 +10,6 @@ import BaseTabLabel from '../_internal/BaseTabs/BaseTabLabel';
 
 const Tab = ({
   children,
-  color,
   onClick,
   value,
   __variant,
@@ -51,7 +49,6 @@ const Tab = ({
 
   return (
     <BaseTabLabel
-      $color={color}
       $isExpanded={__isExpanded}
       $isSelected={__isSelected}
       $variant={__variant}
@@ -71,7 +68,6 @@ const Tab = ({
 Tab.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
-  color: PropTypes.oneOf([...Object.values(ColorTypes)]),
   __variant: PropTypes.oneOf(Object.values(TabVariants)),
   // eslint-disable-next-line
   __isSelected: PropTypes.bool,

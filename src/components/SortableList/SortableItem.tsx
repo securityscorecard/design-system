@@ -13,7 +13,7 @@ import { Inline, Padbox } from '../layout';
 
 const StyledSortableItem = styled(Padbox)`
   background: ${getColor('neutral.0')};
-  border: 1px solid ${getColor('neutral.500')};
+  border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};
 
   list-style-type: none;

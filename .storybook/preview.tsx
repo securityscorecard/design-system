@@ -34,6 +34,7 @@ export const parameters = {
         'Changelog',
         'Theme',
         ['createIconLibrary()', 'DSProvider', 'DSThemeOverride', 'Colors', 'Space', 'Typography'],
+        'Iconography',
         'Helpers',
         'layout',
         'components',

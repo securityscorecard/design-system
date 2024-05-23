@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import { transparentize } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
 import { getColor, getRadii, pxToRem } from '../../utils';
@@ -41,7 +40,7 @@ const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
   background-color: ${getColor('neutral.0')};
   color: ${getColor('neutral.900')};
   text-align: left;
-  box-shadow: 0px 2px 6px 0px ${transparentize(0.85, '#000')};
+  box-shadow: 0px 2px 6px 0px var(--sscds-slateA-slateA6);
   animation: ${ToastFromTop} 0.5s;
   border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};

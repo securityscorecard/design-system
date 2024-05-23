@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { Inline, Stack } from '../layout';
 import Button from './Button';
@@ -34,7 +34,7 @@ export default {
       description: '(Deprecated) Use iconStart property instead',
     },
     iconType: {
-      ...generateControl('select', IconTypes),
+      ...generateControl('select', { ssc: 'ssc', far: 'far', fab: 'fab' }),
       description: '(Deprecated) Use iconStart property instead',
     },
     iconStart: {
@@ -46,7 +46,7 @@ export default {
           summary: 'BaseIcon',
           detail: `{
   name: SSCIcons | (string & {});
-  type?: IconTypes;
+  type?: 'ssc' | 'far' | 'fab';
 }`,
         },
       },
@@ -60,7 +60,7 @@ export default {
           summary: 'BaseIcon',
           detail: `{
   name: SSCIcons | (string & {});
-  type?: IconTypes;
+  type?: 'ssc' | 'far' | 'fab';
 }`,
         },
       },

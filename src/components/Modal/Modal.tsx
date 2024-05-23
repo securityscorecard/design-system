@@ -55,7 +55,7 @@ const Content = styled(Padbox)`
 `;
 
 const Footer = styled(Padbox)`
-  border-top: 1px solid ${getColor('neutral.500')};
+  border-top: 1px solid ${getColor('neutral.300')};
 `;
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (

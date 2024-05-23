@@ -1,14 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Meta, Story } from '@storybook/react/types-6-0';
-import { head, pipe, sortBy, toPairs } from 'ramda';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Icon from './Icon';
-import { IconProps } from './Icon.types';
-import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
+import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
-import { Text } from '../typographyLegacy';
-import { Grid, Inline } from '../layout';
+import { Inline, Stack } from '../layout';
 
 export default {
   title: 'components/Icon',
@@ -18,33 +14,83 @@ export default {
       ...generateControl('select', SSCIconNames),
     },
   },
-} as Meta;
+} as ComponentMeta<typeof Icon>;
 
-export const SscIcon: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
-SscIcon.args = {
-  name: SSCIconNames.wrench,
+type Story = ComponentStory<typeof Icon>;
+
+export const Playground: Story = (args) => <Icon {...args} />;
+Playground.args = {
+  name: 'wrench',
   color: 'neutral.900',
+  size: 'xl',
+};
+Playground.parameters = {
+  screenshot: { skip: true },
 };
 
-SscIcon.storyName = 'SecurityScorecard Icon';
+export const Color: Story = (args) => <Icon {...args} />;
+Color.args = {
+  name: 'error-circle',
+  color: 'error.500',
+  size: 'xl',
+};
 
-const SIcon = styled(Icon)`
-  font-size: 2rem;
-  color: #4aba00;
-`;
-
-export const StyledIcon: Story<IconProps> = () => (
-  <SIcon name={SSCIconNames.wrench} type={IconTypes.ssc} />
+export const Size: Story = (args) => (
+  <Inline gap="md">
+    <Icon {...args} size="sm" type="ssc" />
+    <Icon {...args} size="md" type="ssc" />
+    <Icon {...args} size="lg" type="ssc" />
+    <Icon {...args} size="xl" type="ssc" />
+  </Inline>
 );
+Size.args = {
+  name: 'eye',
+};
 
-const sortedIconsList = pipe(toPairs, sortBy(head))(SSCIconNames);
-export const IconsList = () => (
-  <Grid cols={4} gap="md">
-    {sortedIconsList.map(([key, value]) => (
-      <Inline key={key} align="center" gap="md">
-        <Icon name={value} hasFixedWidth />
-        <Text>{key}</Text>
-      </Inline>
-    ))}
-  </Grid>
+export const Rotation: Story = (args) => (
+  <Inline gap="md">
+    <Icon {...args} />
+    <Icon rotation={90} {...args} />
+    <Icon rotation={180} {...args} />
+    <Icon rotation={270} {...args} />
+  </Inline>
 );
+Rotation.args = {
+  name: 'long-arrow-left',
+  size: 'xl',
+};
+
+export const Flip: Story = (args) => (
+  <Inline gap="md">
+    <Icon {...args} />
+    <Icon flip="horizontal" {...args} />
+    <Icon flip="vertical" {...args} />
+    <Icon flip="both" {...args} />
+  </Inline>
+);
+Flip.args = {
+  name: 'upload',
+  size: 'xl',
+};
+
+export const UnorderedList: Story = (args) => (
+  <Stack as="ul" className="fa-ul" gap="sm">
+    <li>
+      <Icon {...args} /> list item
+    </li>
+    <li>
+      <Icon {...args} /> list item
+    </li>
+    <li>
+      <Icon {...args} /> list item
+    </li>
+    <li>
+      <Icon {...args} /> list item
+    </li>
+  </Stack>
+);
+UnorderedList.args = {
+  name: 'check',
+  listItem: true,
+  color: 'success.500',
+};

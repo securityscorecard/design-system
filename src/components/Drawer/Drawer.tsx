@@ -46,7 +46,7 @@ const DrawerWrapper = styled.div`
 `;
 
 const Header = styled(Padbox)`
-  border-bottom: 1px solid ${getColor('neutral.400')};
+  border-bottom: 1px solid ${getColor('neutral.300')};
 `;
 
 const SurfaceContainer = styled.div<{ $maxWidth: number }>`
@@ -88,7 +88,7 @@ const Content = styled(Padbox)`
 `;
 
 const Footer = styled.div`
-  border-top: 1px solid ${getColor('neutral.400')};
+  border-top: 1px solid ${getColor('neutral.300')};
   padding: ${getSpace('md')} ${getSpace('mdPlus')};
 `;
 

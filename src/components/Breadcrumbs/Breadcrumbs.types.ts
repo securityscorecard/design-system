@@ -1,6 +1,6 @@
 import type { To } from 'history';
 
-import type { SSCIcons, Types } from '../Icon/Icon.types';
+import type { IconNames, RegularIconTypes } from '../Icon/Icon.types';
 import { LinkProps } from '../typographyLegacy/Link/Link.types';
 
 export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
@@ -11,8 +11,8 @@ export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
   isSelected?: boolean;
   to?: To;
   href?: string;
-  iconName?: SSCIcons | string;
-  iconType?: Types;
+  iconName?: IconNames;
+  iconType?: RegularIconTypes;
   [key: string]: unknown;
 }
 

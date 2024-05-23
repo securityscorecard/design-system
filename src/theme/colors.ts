@@ -1,72 +1,86 @@
+import {
+  amber,
+  blue,
+  cyan,
+  green,
+  indigo,
+  iris,
+  lime,
+  mauve,
+  orange,
+  pink,
+  slate,
+  slateA,
+  tomato,
+  whiteA,
+} from '@radix-ui/colors';
+
 const primary = {
-  50: '#E7F0FF',
-  100: '#D3E4FF',
-  200: '#B4D0FF',
-  300: '#81B0FF',
-  400: '#3E85FA',
-  500: '#1163EA',
-  600: '#014FCF',
-  700: '#003B9D',
-  800: '#002B72',
-  900: '#001A45',
+  50: indigo.indigo3,
+  100: indigo.indigo5,
+  200: indigo.indigo6,
+  300: indigo.indigo7,
+  400: indigo.indigo8,
+  500: indigo.indigo9,
+  600: indigo.indigo9,
+  700: indigo.indigo10,
+  800: indigo.indigo11,
+  900: indigo.indigo12,
 };
 
 const neutral = {
-  0: '#fff',
-  50: '#fcfcfc',
-  100: '#f9f9f9',
-  200: '#f3f3f3',
-  300: '#e8e8e8',
-  400: '#d8d8d8',
-  500: '#a8a8a8',
-  600: '#888888',
-  700: '#686868',
-  800: '#555555',
-  900: '#2a2a2a',
-  1000: '#000',
+  0: '#ffffff',
+  50: slate.slate1,
+  100: slate.slate2,
+  200: slate.slate3,
+  300: slate.slate4,
+  400: slate.slate7,
+  500: slate.slate8,
+  600: slate.slate9,
+  700: slate.slate10,
+  800: slate.slate11,
+  900: slate.slate12,
+  1000: '#000000',
 };
 
 const info = {
-  50: '#E7F0FF',
-  100: '#D3E4FF',
-  200: '#B4D0FF',
-  300: '#81B0FF',
-  400: '#3E85FA',
-  500: '#1163EA',
-  600: '#014FCF',
-  700: '#003B9D',
-  800: '#002B72',
-  900: '#001A45',
+  50: indigo.indigo2,
+  100: indigo.indigo4,
+  500: indigo.indigo10,
+  600: indigo.indigo11,
+  700: indigo.indigo11,
+  800: indigo.indigo11,
+  900: indigo.indigo12,
 };
 
 const success = {
-  50: '#edf6ef',
-  100: '#d3e9d7',
-  500: '#49a25a',
-  600: '#3e8a4d',
-  700: '#347340',
-  800: '#1B5125',
-  900: '#0C3614',
+  50: green.green2,
+  100: green.green4,
+  500: green.green10,
+  600: green.green11,
+  700: green.green11,
+  800: green.green11,
+  900: green.green12,
 };
 
 const warning = {
-  50: '#faf4e1',
-  100: '#f4e5af',
-  500: '#e1c048',
-  600: '#c1a337',
-  700: '#9f8321',
-  800: '#80670D',
-  900: '#5B4908 ',
+  50: amber.amber2,
+  100: amber.amber4,
+  500: amber.amber10,
+  600: amber.amber11,
+  700: amber.amber11,
+  800: amber.amber11,
+  900: amber.amber12,
 };
 
 const error = {
-  50: '#f7e9e9',
-  100: '#edc9ca',
-  500: '#b21f24',
-  600: '#971a1f',
-  700: '#7e161a',
-  800: '#620408',
-  900: '#3E0002',
+  50: tomato.tomato2,
+  100: tomato.tomato4,
+  500: tomato.tomato11,
+  600: tomato.tomato11,
+  700: tomato.tomato11,
+  800: tomato.tomato11,
+  900: tomato.tomato12,
 };
 
 const grade = {
@@ -90,10 +104,6 @@ const brand = {
   900: '#1b0471',
 };
 
-const brandSecondary = {
-  500: '#E1C048',
-} as const;
-
 const severity = {
   informational: '#5580D7',
   positive: '#4BBA76',
@@ -102,7 +112,28 @@ const severity = {
   high: '#F32E43',
 };
 
+const impact = '#5c33ea';
+const likelihood = {
+  low: '#f4907b',
+  medium: '#f36756',
+  high: '#eb2f40',
+};
+
 export const colors = {
+  amber,
+  blue,
+  cyan,
+  green,
+  indigo,
+  iris,
+  lime,
+  mauve,
+  orange,
+  pink,
+  slate,
+  slateA,
+  tomato,
+  whiteA,
   primary,
   neutral,
   info,
@@ -111,11 +142,12 @@ export const colors = {
   error,
   grade,
   brand,
-  brandSecondary,
   severity,
+  impact,
+  likelihood,
   text: {
     primary: neutral[900],
-    secondary: neutral[700],
+    secondary: neutral[800],
     context: neutral[600],
     danger: error[500],
     inverted: neutral[0],

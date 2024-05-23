@@ -14,7 +14,7 @@ import { PaddingTypes } from '../../../layout/Padbox/Padbox.enums';
 const StyledFooter = styled(Padbox)`
   display: flex;
   align-items: center;
-  border-top: 1px solid ${getColor('neutral.400')};
+  border-top: 1px solid ${getColor('neutral.300')};
 `;
 const LoadingContainer = styled.div`
   padding: ${pxToRem(8, 24, 8, 8)};

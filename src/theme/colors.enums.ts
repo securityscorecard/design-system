@@ -56,7 +56,6 @@ export const ColorTypes = {
   brand700: 'brand.700',
   brand800: 'brand.800',
   brand900: 'brand.900',
-  brandSecondary500: 'brandSecondary.500',
   severityInformational: 'severity.informational',
   severityPositive: 'severity.positive',
   severityLow: 'severity.low',

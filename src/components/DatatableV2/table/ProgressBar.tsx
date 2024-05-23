@@ -21,7 +21,7 @@ const ProgressBar = styled.span.withConfig({
   shouldForwardProp: (property) => !includes(property, ['isTop', 'isBottom']),
 })<{ isTop?: boolean; isBottom?: boolean }>`
   display: block;
-  background: #ece8ff;
+  background: var(--sscds-brand-100);
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -36,7 +36,12 @@ const ProgressBar = styled.span.withConfig({
 
   &::after {
     animation: ${wave} 2s linear 0.5s infinite;
-    background: linear-gradient(90deg, transparent, #6641f3, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--sscds-brand-500),
+      transparent
+    );
     content: '';
     position: absolute;
     transform: translateX(-100%);
