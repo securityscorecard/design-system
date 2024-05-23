@@ -53,7 +53,7 @@ const StyledPaginationComponent = styled.button<{
   ${({ $isCurrent }) =>
     $isCurrent
       ? css`
-          border-color: ${getColor('neutral.500')};
+          border-color: ${getColor('neutral.400')};
           background-color: ${getColor('neutral.300')};
           font-size: ${getFontSize('lg')};
           font-weight: ${getFontWeight('bold')};
@@ -61,7 +61,7 @@ const StyledPaginationComponent = styled.button<{
         `
       : css`
           &:hover {
-            border-color: ${getColor('neutral.500')};
+            border-color: ${getColor('neutral.400')};
             background-color: ${getColor('neutral.0')};
           }
         `};

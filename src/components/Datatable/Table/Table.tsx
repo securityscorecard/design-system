@@ -52,7 +52,7 @@ import { SpaceSizes } from '../../../theme';
 import { Button, ButtonEnums } from '../../Button';
 
 const NoDataOutline = styled.div`
-  border-top: 1px solid ${getColor('neutral.400')};
+  border-top: 1px solid ${getColor('neutral.300')};
 `;
 
 const NoDataContainer = styled(Padbox)`

@@ -37,8 +37,8 @@ export const Arrow = styled.div`
     visibility: visible;
     content: '';
     background: ${getColor('neutral.0')};
-    border-left: 1px solid ${getColor('neutral.600')};
-    border-top: 1px solid ${getColor('neutral.600')};
+    border-left: 1px solid ${getColor('neutral.300')};
+    border-top: 1px solid ${getColor('neutral.300')};
   }
 `;
 
@@ -49,7 +49,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   font-size: ${getFontSize('md')};
   line-height: ${getLineHeight('md')};
   border-radius: ${getRadii('default')};
-  border: 1px solid ${getColor('neutral.600')};
+  border: 1px solid ${getColor('neutral.300')};
   z-index: ${({ $isInFloatingElement, theme }) =>
     $isInFloatingElement
       ? getDepth('modal', { theme }) + 1

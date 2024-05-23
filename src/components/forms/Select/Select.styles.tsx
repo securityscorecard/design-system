@@ -207,7 +207,7 @@ export const selectStyles: (
     menu: (styles, { selectProps: { isMenuPositionRelative } }) => ({
       ...styles,
       ...(isMenuPositionRelative ? { position: 'relative' } : {}),
-      border: `1px solid ${DSTheme.colors.neutral[500]}`,
+      border: `1px solid ${DSTheme.colors.neutral[300]}`,
       boxShadow: `0px 1px 4px ${transparentize(0.85, '#000')}`,
       marginBottom: 0,
       marginTop: pxToRem(DSTheme.space.xs),
@@ -330,7 +330,7 @@ export const MultiValueRemove: ComponentType<{
 
 const ActionsMenu = styled.div`
   margin-top: ${getSpace(SpaceSizes.sm)};
-  border-top: 1px solid ${getColor('neutral.500')};
+  border-top: 1px solid ${getColor('neutral.300')};
   padding-top: ${getSpace(SpaceSizes.sm)};
 `;
 
