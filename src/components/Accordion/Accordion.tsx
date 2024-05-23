@@ -19,7 +19,7 @@ const pickOpen: (items: AccordionItem[]) => AccordionItemId[] = pipe(
   pluck('id'),
 );
 
-function filterState(
+export function filterState(
   state: AccordionItemId[],
   item: AccordionItemId,
   isCollapsedOnOpen: boolean,
