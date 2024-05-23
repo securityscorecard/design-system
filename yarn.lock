@@ -3506,6 +3506,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/colors@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@radix-ui/colors@npm:3.0.0"
+  checksum: 5ac1b69df7a77525e2031c2d2948d6ef8d81c6b163809ee8e17a2138c4977678e3a9f67342595d2c88f0300f51fd2c64e24355008cda6c9db8dfd4ed3eaf9e8f
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.0.1":
   version: 1.0.1
   resolution: "@radix-ui/primitive@npm:1.0.1"
@@ -4210,6 +4217,7 @@ __metadata:
     "@geometricpanda/storybook-addon-badges": ^0.2.1
     "@mdx-js/react": ^1.6.22
     "@popperjs/core": ^2.11.4
+    "@radix-ui/colors": ^3.0.0
     "@radix-ui/react-collapsible": ^1.0.3
     "@radix-ui/react-dropdown-menu": ^2.0.6
     "@radix-ui/react-tooltip": ^1.0.7
@@ -4276,7 +4284,6 @@ __metadata:
     lint-staged: ^12.3.7
     mockdate: ^3.0.5
     numeral: ^2.0.6
-    polished: ^4.2.2
     postcss: ^8.4.12
     postcss-syntax: ">=0.36.2"
     prettier: ^2.6.0

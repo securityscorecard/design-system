@@ -8,9 +8,7 @@ export interface Forms {
   borderColor: string;
   borderWidth: string;
   statefulBorderWidth: string;
-  focusBgColor: string;
   focusBorderColor: string;
-  invalidBgColor: string;
   invalidBorderColor: string;
   activeColor: string;
   activeBgColor: string;

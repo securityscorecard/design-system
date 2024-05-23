@@ -14,7 +14,7 @@ import { ColorTypes } from '../../theme';
 
 const grades = {
   [HexGradeGrades.unknown]: {
-    color: ColorTypes.neutral700,
+    color: ColorTypes.neutral600,
     csTransform: 'translate(5.3 3.2)',
     path: 'M30.5599 35.9441L33.7279 34.9001C33.2599 34.5041 32.9359 33.8561 32.9359 33.2801C32.9359 30.0401 39.3799 29.6081 39.3799 24.2801C39.3799 21.0401 36.6079 18.6281 32.0719 18.6281C28.8319 18.6281 26.0599 19.9601 24.2239 22.1921L26.6359 24.8921C27.8599 23.3801 29.4439 22.3721 31.6399 22.3721C33.9799 22.3721 35.0599 23.5601 35.0599 24.9641C35.0599 28.0241 29.2639 28.4921 29.2639 32.8841C29.2639 34.0721 29.6959 35.1161 30.5599 35.9441ZM31.8559 43.3961C33.2239 43.3961 34.3759 42.2441 34.3759 40.8761C34.3759 39.5081 33.2239 38.3561 31.8559 38.3561C30.4879 38.3561 29.3359 39.5081 29.3359 40.8761C29.3359 42.2441 30.4879 43.3961 31.8559 43.3961Z',
   },
@@ -67,7 +67,7 @@ const HexGrade = ({
   const isCSVariant = variant === HexGradeVariants.cs;
   const gradeColorType = pipe(
     path([grade, 'color']),
-    defaultTo(ColorTypes.neutral700),
+    defaultTo(ColorTypes.neutral600),
   )(grades);
   const gradeColor = getColor(gradeColorType)({ theme });
   const white = getColor(ColorTypes.neutral0)({ theme });

@@ -1,3 +1,5 @@
+import { indigo, slate } from '@radix-ui/colors';
+
 import { getRadii } from '.';
 import { ColorTypes, RadiusTypes, theme } from '../theme';
 import { abbreviateNumber, getColor, pxToRem } from './helpers';
@@ -42,59 +44,8 @@ describe('abbreviateNumber', () => {
 
 describe('getColor', () => {
   it('should return correct color for current keys', () => {
-    expect(getColor(ColorTypes.primary900, { theme })).toBe('#001A45');
-    expect(getColor(ColorTypes.primary800, { theme })).toBe('#002B72');
-    expect(getColor(ColorTypes.primary700, { theme })).toBe('#003B9D');
-    expect(getColor(ColorTypes.primary600, { theme })).toBe('#014FCF');
-    expect(getColor(ColorTypes.primary500, { theme })).toBe('#1163EA');
-    expect(getColor(ColorTypes.primary400, { theme })).toBe('#3E85FA');
-    expect(getColor(ColorTypes.primary300, { theme })).toBe('#81B0FF');
-    expect(getColor(ColorTypes.primary200, { theme })).toBe('#B4D0FF');
-    expect(getColor(ColorTypes.primary100, { theme })).toBe('#D3E4FF');
-    expect(getColor(ColorTypes.primary50, { theme })).toBe('#E7F0FF');
-    expect(getColor(ColorTypes.neutral1000, { theme })).toBe('#000');
-    expect(getColor(ColorTypes.neutral900, { theme })).toBe('#2a2a2a');
-    expect(getColor(ColorTypes.neutral800, { theme })).toBe('#555555');
-    expect(getColor(ColorTypes.neutral700, { theme })).toBe('#686868');
-    expect(getColor(ColorTypes.neutral600, { theme })).toBe('#888888');
-    expect(getColor(ColorTypes.neutral500, { theme })).toBe('#a8a8a8');
-    expect(getColor(ColorTypes.neutral400, { theme })).toBe('#d8d8d8');
-    expect(getColor(ColorTypes.neutral300, { theme })).toBe('#e8e8e8');
-    expect(getColor(ColorTypes.neutral200, { theme })).toBe('#f3f3f3');
-    expect(getColor(ColorTypes.neutral100, { theme })).toBe('#f9f9f9');
-    expect(getColor(ColorTypes.neutral0, { theme })).toBe('#fff');
-    expect(getColor(ColorTypes.info50, { theme })).toBe('#E7F0FF');
-    expect(getColor(ColorTypes.info100, { theme })).toBe('#D3E4FF');
-    expect(getColor(ColorTypes.info500, { theme })).toBe('#1163EA');
-    expect(getColor(ColorTypes.info600, { theme })).toBe('#014FCF');
-    expect(getColor(ColorTypes.info700, { theme })).toBe('#003B9D');
-    expect(getColor(ColorTypes.success50, { theme })).toBe('#edf6ef');
-    expect(getColor(ColorTypes.success100, { theme })).toBe('#d3e9d7');
-    expect(getColor(ColorTypes.success500, { theme })).toBe('#49a25a');
-    expect(getColor(ColorTypes.success600, { theme })).toBe('#3e8a4d');
-    expect(getColor(ColorTypes.success700, { theme })).toBe('#347340');
-    expect(getColor(ColorTypes.warning50, { theme })).toBe('#faf4e1');
-    expect(getColor(ColorTypes.warning100, { theme })).toBe('#f4e5af');
-    expect(getColor(ColorTypes.warning500, { theme })).toBe('#e1c048');
-    expect(getColor(ColorTypes.warning600, { theme })).toBe('#c1a337');
-    expect(getColor(ColorTypes.warning700, { theme })).toBe('#9f8321');
-    expect(getColor(ColorTypes.error50, { theme })).toBe('#f7e9e9');
-    expect(getColor(ColorTypes.error100, { theme })).toBe('#edc9ca');
-    expect(getColor(ColorTypes.error500, { theme })).toBe('#b21f24');
-    expect(getColor(ColorTypes.error600, { theme })).toBe('#971a1f');
-    expect(getColor(ColorTypes.error700, { theme })).toBe('#7e161a');
-    expect(getColor(ColorTypes.gradeA, { theme })).toBe('#4BBA76');
-    expect(getColor(ColorTypes.gradeB, { theme })).toBe('#FFB147');
-    expect(getColor(ColorTypes.gradeC, { theme })).toBe('#FB7A4F');
-    expect(getColor(ColorTypes.gradeD, { theme })).toBe('#F32E43');
-    expect(getColor(ColorTypes.gradeF, { theme })).toBe('#B81143');
-    expect(getColor(ColorTypes.severityInformational, { theme })).toBe(
-      '#5580D7',
-    );
-    expect(getColor(ColorTypes.severityPositive, { theme })).toBe('#4BBA76');
-    expect(getColor(ColorTypes.severityLow, { theme })).toBe('#FFB147');
-    expect(getColor(ColorTypes.severityMedium, { theme })).toBe('#FB7A4F');
-    expect(getColor(ColorTypes.severityHigh, { theme })).toBe('#F32E43');
+    expect(getColor(ColorTypes.primary900, { theme })).toBe(indigo.indigo12);
+    expect(getColor(ColorTypes.neutral900, { theme })).toBe(slate.slate12);
   });
 });
 

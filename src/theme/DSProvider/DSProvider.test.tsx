@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import styled, { DefaultTheme } from 'styled-components';
+import { indigo, slate } from '@radix-ui/colors';
 
 import DSProvider from './DSProvider';
 import { Subset } from '../../types/utils.types';
@@ -24,8 +25,8 @@ describe('DSProvider', () => {
     renderComponent();
     const button = screen.getByRole('button');
 
-    expect(button).toHaveStyleRule('background', '#E7F0FF');
-    expect(button).toHaveStyleRule('color', '#2a2a2a');
+    expect(button).toHaveStyleRule('background', indigo.indigo3);
+    expect(button).toHaveStyleRule('color', slate.slate12);
   });
 
   it('should merge provided theme with default one', () => {
@@ -33,6 +34,6 @@ describe('DSProvider', () => {
     const button = screen.getByRole('button');
 
     expect(button).toHaveStyleRule('background', 'red');
-    expect(button).toHaveStyleRule('color', '#2a2a2a');
+    expect(button).toHaveStyleRule('color', slate.slate12);
   });
 });

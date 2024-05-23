@@ -101,7 +101,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     }
 
     &.is-odd {
-      background: #fcfcfc;
+      background: ${getColor('neutral.50')};
     }
     .ds-table-cell-link {
       ${DsLinkCell};

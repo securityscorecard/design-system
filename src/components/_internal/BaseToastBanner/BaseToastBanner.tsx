@@ -86,12 +86,7 @@ const BaseToastBanner = ({
       >
         <IconWrapper $iconSize={iconSize}>
           {variant === 'loading' ? (
-            <Spinner
-              borderWidth={2}
-              color={ColorTypes.neutral1000}
-              height={16}
-              width={16}
-            />
+            <Spinner borderWidth={2} height={16} width={16} dark />
           ) : (
             <StyledIcon
               $iconPxSizesVariants={iconPxSizesVariants}

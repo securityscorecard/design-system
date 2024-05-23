@@ -1,5 +1,4 @@
 import { css } from 'styled-components';
-import { transparentize } from 'polished';
 
 import {
   getColor,
@@ -44,7 +43,7 @@ export const datePickerStyles = css`
     font-weight: ${getFontWeight('regular')};
     padding: ${pxToRem(16)};
     border-radius: ${getRadii('default')};
-    box-shadow: 0 2px 6px 0 ${transparentize(0.85, '#000')};
+    box-shadow: 0 2px 6px 0 var(--sscds-slateA-slateA6);
     background: ${getColor('neutral.0')};
   }
   .react-datepicker {
