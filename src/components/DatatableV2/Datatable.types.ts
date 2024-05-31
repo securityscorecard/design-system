@@ -179,20 +179,20 @@ export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
   headers: DatatableHeader<D>[];
 };
 
+type RowActionCallbackUnion<D, Type> =
+  | Type
+  | ((props: { row: DatatableRow<D>; table: DatatableInstance<D> }) => Type);
+
 export type DatatableRowAction<D> = null | {
-  label: string;
-  iconName: IconNames;
-  iconType?: RegularIconTypes;
+  label: RowActionCallbackUnion<D, string>;
+  iconName: RowActionCallbackUnion<D, IconNames>;
+  iconType?: RowActionCallbackUnion<D, RegularIconTypes>;
   onClick(props: {
     row: DatatableRow<D>;
     table: DatatableInstance<D>;
   }): (event: Event) => void;
-  isDisabled?:
-    | boolean
-    | ((props: {
-        row: DatatableRow<D>;
-        table: DatatableInstance<D>;
-      }) => boolean);
+  isDisabled?: RowActionCallbackUnion<D, boolean>;
+  isDestructive?: boolean;
 };
 
 interface CustomState {

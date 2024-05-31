@@ -32,17 +32,27 @@ const RowActionsButton = <D,>({
   }
 
   if (rowActions.length === 1) {
-    const { label, iconName, onClick, isDisabled, iconType } = rowActions[0];
+    const { label, iconName, iconType, onClick, isDisabled, isDestructive } =
+      rowActions[0];
+
+    const resolvedLabel =
+      typeof label === 'function' ? label({ row, table }) : label;
+    const resolvedIconName =
+      typeof iconName === 'function' ? iconName({ row, table }) : iconName;
+    const resolvedIconType =
+      typeof iconType === 'function' ? iconType({ row, table }) : iconType;
+    const resolvedIsDisabled =
+      typeof isDisabled === 'function'
+        ? isDisabled({ row, table })
+        : isDisabled;
+
     return (
       <IconButton
         className="ds-table-header-cell-row-actions-button"
-        iconProps={{ name: iconName, type: iconType }}
-        isDisabled={
-          typeof isDisabled === 'function'
-            ? isDisabled({ row, table })
-            : isDisabled
-        }
-        label={label}
+        iconProps={{ name: resolvedIconName, type: resolvedIconType }}
+        isDestructive={isDestructive}
+        isDisabled={resolvedIsDisabled}
+        label={resolvedLabel}
         onClick={(e) => onClick({ row, table })(e as unknown as MouseEvent)}
       />
     );
