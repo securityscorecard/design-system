@@ -1,0 +1,7 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "custom-property-empty-line-before": null,
+    "custom-property-pattern": null
+  }
+}

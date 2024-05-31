@@ -1,0 +1,85 @@
+:root {
+  --sscds-font-family-body: "Inter, 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif";
+  --sscds-font-family-mono: "'space-mono', 'Courier New', Courier, monospace";
+
+
+  --sscds-font-size-10: 0.75rem; /* 12px */
+  --sscds-font-size-20: 0.875rem; /* 14px */
+  --sscds-font-size-30: 1rem; /* 16px */
+  --sscds-font-size-40: 1.25rem; /* 20px */
+  --sscds-font-size-50: 1.5rem; /* 24px */
+  --sscds-font-size-60: 1.75rem; /* 28px */
+  --sscds-font-size-70: 2rem; /* 32px */
+  --sscds-font-size-80: 2.5rem; /* 40px */
+  --sscds-font-size-90: 3rem; /* 48px */
+
+  --sscds-font-size-body-sm: var(--sscds-font-size-10);
+  --sscds-font-size-body-md: var(--sscds-font-size-20);
+  --sscds-font-size-body-lg: var(--sscds-font-size-30);
+
+  --sscds-font-size-heading-1: var(--sscds-font-size-70);
+  --sscds-font-size-heading-2: var(--sscds-font-size-60);
+  --sscds-font-size-heading-3: var(--sscds-font-size-50);
+  --sscds-font-size-heading-4: var(--sscds-font-size-40);
+  --sscds-font-size-heading-5: var(--sscds-font-size-30);
+
+  --sscds-font-size-display-sm: var(--sscds-font-size-70);
+  --sscds-font-size-display-md: var(--sscds-font-size-80);
+  --sscds-font-size-display-lg: var(--sscds-font-size-90);
+
+  --sscds-font-size-label-sm: var(--sscds-font-size-20);
+  --sscds-font-size-label-md: var(--sscds-font-size-30);
+
+  --sscds-font-size-title-sm: var(--sscds-font-size-20);
+  --sscds-font-size-title-md: var(--sscds-font-size-30);
+  --sscds-font-size-title-lg: var(--sscds-font-size-40);
+
+  --sscds-font-weight-400: 400; /* regular */
+  --sscds-font-weight-500: 500; /* medium */
+  --sscds-font-weight-600: 600; /* semi-bold */
+  --sscds-font-weight-700: 700; /* bold */
+
+  --sscds-font-weight-body-default: var(--sscds-font-weight-400);
+  --sscds-font-weight-body-strong: var(--sscds-font-weight-600);
+
+  --sscds-font-weight-heading: var(--sscds-font-weight-700);
+
+  --sscds-font-weight-display-default: var(--sscds-font-weight-700);
+  --sscds-font-weight-display-subtle: var(--sscds-font-weight-500);
+
+  --sscds-font-weight-label-default: var(--sscds-font-weight-500);
+  --sscds-font-weight-label-strong: var(--sscds-font-weight-700);
+
+  --sscds-font-weight-title: var(--sscds-font-weight-500);
+
+
+  --sscds-font-lineheight-10: 1rem; /* 16px */
+  --sscds-font-lineheight-20: 1.25rem; /* 20px */
+  --sscds-font-lineheight-30: 1.5rem; /* 24px */
+  --sscds-font-lineheight-40: 1.75rem; /* 28px */
+  --sscds-font-lineheight-50: 2rem; /* 32px */
+  --sscds-font-lineheight-60: 2.25rem; /* 36px */
+  --sscds-font-lineheight-70: 2.5rem; /* 40px */
+  --sscds-font-lineheight-80: 3rem; /* 48px */
+  --sscds-font-lineheight-90: 3.75rem; /* 60px */
+
+  --sscds-font-lineheight-body-sm: var(--sscds-font-lineheight-10);
+  --sscds-font-lineheight-body-md: var(--sscds-font-lineheight-20);
+  --sscds-font-lineheight-body-lg: var(--sscds-font-lineheight-30);
+
+  --sscds-font-lineheight-heading-1: var(--sscds-font-lineheight-70);
+  --sscds-font-lineheight-heading-2: var(--sscds-font-lineheight-60);
+  --sscds-font-lineheight-heading-3: var(--sscds-font-lineheight-50);
+  --sscds-font-lineheight-heading-4: var(--sscds-font-lineheight-40);
+  --sscds-font-lineheight-heading-5: var(--sscds-font-lineheight-30);
+
+  --sscds-font-lineheight-display-sm: var(--sscds-font-lineheight-70);
+  --sscds-font-lineheight-display-md: var(--sscds-font-lineheight-80);
+  --sscds-font-lineheight-display-lg: var(--sscds-font-lineheight-90);
+
+  --sscds-font-lineheight-label: var(--sscds-font-lineheight-30);
+
+  --sscds-font-lineheight-title-sm: var(--sscds-font-lineheight-70);
+  --sscds-font-lineheight-title-md: var(--sscds-font-lineheight-70);
+  --sscds-font-lineheight-title-lg: var(--sscds-font-lineheight-40);
+}

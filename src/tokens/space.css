@@ -1,0 +1,13 @@
+:root {
+  --sscds-space-none: 0;
+  --sscds-space-quarter-x: calc(var(--sscds-space-1x) / 4);
+  --sscds-space-half-x: calc(var(--sscds-space-1x) / 2);
+  --sscds-space-1x: 0.5rem;
+  --sscds-space-2x: calc(var(--sscds-space-1x) * 2);
+  --sscds-space-3x: calc(var(--sscds-space-1x) * 3);
+  --sscds-space-4x: calc(var(--sscds-space-1x) * 4);
+  --sscds-space-6x: calc(var(--sscds-space-1x) * 6);
+  --sscds-space-8x: calc(var(--sscds-space-1x) * 8);
+  --sscds-space-12x: calc(var(--sscds-space-1x) * 12);
+  --sscds-space-16x: calc(var(--sscds-space-1x) * 16);
+}

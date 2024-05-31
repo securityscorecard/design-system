@@ -16,6 +16,7 @@ import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
 import '@fontsource/inter';
+import '../src/tokens/index.css';
 
 export const parameters = {
   backgrounds: {

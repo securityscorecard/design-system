@@ -1,0 +1,19 @@
+:root {
+  --sscds-radii-0: 0;
+  --sscds-radii-10: 0.125rem;
+  --sscds-radii-20: 0.25rem;
+  --sscds-radii-30: 0.5rem;
+  --sscds-radii-40: 1rem;
+  --sscds-radii-50: 1.5rem;
+  --sscds-radii-circle: 100%;
+  --sscds-radii-pill: calc(infinity * 1px);
+
+  --sscds-radii-button: var(--sscds-radii-30);
+  --sscds-radii-input:  var(--sscds-radii-20);
+  --sscds-radii-card:  var(--sscds-radii-30);
+  --sscds-radii-dialog:  var(--sscds-radii-50);
+
+  --sscds-radii-surface-sm:  var(--sscds-radii-20);
+  --sscds-radii-surface-md:  var(--sscds-radii-30);
+  --sscds-radii-surface-lg:  var(--sscds-radii-50);
+}

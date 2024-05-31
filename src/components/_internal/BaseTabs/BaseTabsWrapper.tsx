@@ -16,7 +16,6 @@ export const BaseTabsWrapper = styled(Padbox)<{
     $isExpanded &&
     css`
       width: 100%;
-      display: flex:
       flex-grow: 1;
     `};
 
