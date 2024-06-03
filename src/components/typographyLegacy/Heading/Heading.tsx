@@ -11,10 +11,11 @@ import {
   getFontSize,
   getFontWeight,
   getLineHeight,
+  pxToRem,
 } from '../../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
-import { CLX_TYPOGRAPHY } from '../../../theme/constants';
+import { BASE_LINE_HEIGHT, CLX_TYPOGRAPHY } from '../../../theme/constants';
 
 const primaryVariant = css`
   color: ${getColor('text.primary')};
@@ -28,13 +29,34 @@ const variants = {
   secondary: secondaryVariant,
 };
 
+const margin = {
+  h1: {
+    top: pxToRem(BASE_LINE_HEIGHT * 5), // 100px
+    bottom: pxToRem(BASE_LINE_HEIGHT * 2.5), // 50px
+  },
+  h2: {
+    top: pxToRem(BASE_LINE_HEIGHT * 4), // 80px
+    bottom: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
+  },
+  h3: {
+    top: pxToRem(BASE_LINE_HEIGHT * 3), // 60px
+    bottom: pxToRem(BASE_LINE_HEIGHT * 1.5), // 30px
+  },
+  h4: {
+    top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
+    bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
+  },
+  h5: {
+    top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
+    bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
+  },
+} as const;
+
 const HeadingBase = css<HeadingProps>`
   font-family: ${getFontFamily('base')};
   font-weight: ${getFontWeight('medium')};
-  margin-top: ${({ size, theme }) =>
-    path(['typography', 'margin', 'heading', size, 'top'], theme)};
-  margin-bottom: ${({ size, theme }) =>
-    path(['typography', 'margin', 'heading', size, 'bottom'], theme)};
+  margin-top: ${({ size }) => path([size, 'top'], margin)};
+  margin-bottom: ${({ size }) => path([size, 'bottom'], margin)};
   ${createSpacings};
   ${({ variant }) => variants[variant]};
 `;

@@ -17,12 +17,6 @@ import { isString, list } from 'ramda-adjunct';
 import numeral from 'numeral';
 
 import { BASE_FONT_SIZE } from '../theme/constants';
-import {
-  Family as FontFamily,
-  Size as FontSize,
-  Weight as FontWeight,
-  LineHeight,
-} from '../theme/typography.types';
 import { Color } from '../theme/colors.types';
 import { Forms } from '../theme/forms.types';
 import { SpacingSizeValue } from '../types/spacing.types';
@@ -31,6 +25,7 @@ import { SpaceSize } from '../theme/space.types';
 import { ColorTypes } from '../theme/colors.enums';
 import { createRadii } from '../theme/radii';
 import { createTokens } from '../theme/tokens';
+import { createTypography } from '../theme/typography';
 
 export type ThemeType = {
   theme?: DefaultTheme;
@@ -74,32 +69,36 @@ export const getColor: HelperFn<Color> = curry(
 // getFontFamily :: Family -> Props -> string
 // Family - any key of 'family' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getFontFamily: HelperFn<keyof FontFamily> = curry(
-  (family: keyof FontFamily, { theme }: ThemeType): string =>
+type FontFamily = keyof ReturnType<typeof createTypography>['family'];
+export const getFontFamily: HelperFn<FontFamily> = curry(
+  (family: FontFamily, { theme }: ThemeType): string =>
     path(['typography', 'family', family], theme),
 );
 
 // getFontWeight :: Weight -> Props -> number
 // Weight - any key of 'weight' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getFontWeight: HelperFn<keyof FontWeight> = curry(
-  (weight: keyof FontWeight, { theme }: ThemeType): string =>
+type FontWeight = keyof ReturnType<typeof createTypography>['weight'];
+export const getFontWeight: HelperFn<FontWeight> = curry(
+  (weight: FontWeight, { theme }: ThemeType): string =>
     path(['typography', 'weight', weight], theme),
 );
 
 // getFontSize :: Size -> Props -> string
 // Size - any key of 'size' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getFontSize: HelperFn<keyof FontSize> = curry(
-  (size: keyof FontSize, { theme }: ThemeType): string =>
+type FontSize = keyof ReturnType<typeof createTypography>['size'];
+export const getFontSize: HelperFn<FontSize> = curry(
+  (size: FontSize, { theme }: ThemeType): string =>
     path(['typography', 'size', size], theme),
 );
 
 // getLineHeight :: Size -> Props -> string
 // Size - any key of 'lineHeight' (src/theme/typography.ts)
 // Props - styled-components props object
-export const getLineHeight: HelperFn<keyof LineHeight> = curry(
-  (size: keyof LineHeight, { theme }: ThemeType): string =>
+type LineHeight = keyof ReturnType<typeof createTypography>['lineHeight'];
+export const getLineHeight: HelperFn<LineHeight> = curry(
+  (size: LineHeight, { theme }: ThemeType): string =>
     path(['typography', 'lineHeight', size], theme),
 );
 

@@ -3,7 +3,6 @@ import { DefaultTheme } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
 
 import { colors as themeColors } from './colors';
-import { createButtons } from './buttons';
 import { createTypography } from './typography';
 import { createForms } from './forms';
 import { createLayout } from './layout';
@@ -18,7 +17,6 @@ export const createTheme = (
 ): DefaultTheme => {
   const {
     colors: colorsOverride = {},
-    buttons: buttonsOverride = {},
     typography: typographyOverride = {},
     forms: formsOverride = {},
     layout: layoutOverride = {},
@@ -30,11 +28,7 @@ export const createTheme = (
   } = overrides;
 
   const colors = mergeDeepRight(themeColors, colorsOverride);
-  const buttons = mergeDeepRight(createButtons(colors), buttonsOverride);
-  const typography = mergeDeepRight(
-    createTypography(colors),
-    typographyOverride,
-  );
+  const typography = mergeDeepRight(createTypography(), typographyOverride);
   const forms = mergeDeepRight(createForms(colors), formsOverride);
   const layout = mergeDeepRight(createLayout(), layoutOverride);
   const depths = mergeDeepRight(createDepths(), depthsOverride);
@@ -47,7 +41,6 @@ export const createTheme = (
 
   return {
     colors,
-    buttons,
     typography,
     forms,
     layout,
