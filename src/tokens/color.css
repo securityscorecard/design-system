@@ -275,7 +275,7 @@
   --sscds-color-border-default: var(--sscds-color-neutral-4);
 
   --sscds-color-border-surface-default: var(--black-a3);
-  --sscds-color-border-surface-invert: var(--white-a3);
+  --sscds-color-border-surface-inverse: var(--white-a3);
   --sscds-color-border-surface-none: var(--sscds-color-clear);
 
   --sscds-color-border-input-default: var(--sscds-color-neutral-8);
@@ -284,8 +284,9 @@
   --sscds-color-border-input-disabled: var(--sscds-color-neutral-8);
   --sscds-color-border-input-error: var(--sscds-color-danger-500);
 
-  --sscds-color-border-action-danger-default: var(--sscds-color-neutral-8);
-  --sscds-color-border-action-subtle-default: var(--sscds-color-neutral-7);
+  --sscds-color-border-action-focused: var(--indigo-9);
+  --sscds-color-border-action-danger: var(--sscds-color-neutral-8);
+  --sscds-color-border-action-subtle: var(--sscds-color-neutral-7);
 
   --sscds-color-link-default: var(--sscds-color-background-action-highlight-default);
   --sscds-color-link-hover: var(--sscds-color-background-action-highlight-hover);
