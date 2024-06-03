@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import autoExternal from 'rollup-plugin-auto-external';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
@@ -5,6 +7,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import url from '@rollup/plugin-url';
 import visualizer from 'rollup-plugin-visualizer';
 import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
+import del from 'rollup-plugin-delete';
 import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
 import addDisplayNameTransformer from 'ts-react-display-name';
 import { head, last, pipe, split } from 'ramda';
@@ -60,11 +64,17 @@ export default {
     'react-select/async-creatable',
   ],
   plugins: [
+    del({ targets: 'build/*' }),
     autoExternal(),
     resolve(),
     url({
       limit: 10 * 1024, // inline files < 10k, copy files > 10k
       include: ['**/*.woff2', '**/*.woff'],
+    }),
+    postcss({
+      extract: path.resolve('build/tokens.css'),
+      // eslint-disable-next-line global-require
+      plugins: [require('postcss-import')],
     }),
     commonjs(),
     typescript({
@@ -79,6 +89,10 @@ export default {
     visualizer({
       filename: 'stats/stat.html',
       template: 'sunburst',
+    }),
+    del({
+      targets: ['build/index.css', 'build/index.es.css'],
+      hook: 'buildEnd',
     }),
   ],
 };
