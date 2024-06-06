@@ -1,0 +1,26 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "customSyntax": "postcss-styled-syntax",
+  "rules": {
+    "selector-class-pattern": null,
+    "length-zero-no-unit": null,
+    "declaration-empty-line-before": null,
+    "no-duplicate-selectors": null,
+    "no-descending-specificity": null,
+    "rule-empty-line-before": null,
+    "selector-no-vendor-prefix": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "no-empty-source": null,
+    "color-function-notation":null,
+    "alpha-value-notation":null,
+    "custom-property-pattern":null,
+    "selector-pseudo-element-colon-notation":null,
+    "property-no-vendor-prefix":null,
+    "value-no-vendor-prefix":null,
+    "keyframes-name-pattern":null,
+    "color-hex-length":null,
+    "font-family-name-quotes":null,
+    "comment-empty-line-before":null,
+    "comment-whitespace-inside":null
+  }
+}

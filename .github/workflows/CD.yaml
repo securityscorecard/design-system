@@ -179,6 +179,9 @@ jobs:
   lint-css:
     name: '🎨 Lint CSS'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        type: ['css', 'css-jsx']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -210,7 +213,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Run Lint
-        run: yarn lint:css
+        run: yarn lint:${{matrix.type}}
 
   betterer:
     name: '🚧 Check Betterer rules'

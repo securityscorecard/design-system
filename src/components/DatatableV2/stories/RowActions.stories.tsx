@@ -37,6 +37,7 @@ RowActionsEnabled.args = {
     {
       iconName: 'ban',
       label: 'Remove',
+      isDestructive: true,
       onClick:
         ({ row, table }) =>
         (event) =>
@@ -111,6 +112,7 @@ ConditionallyDisabledRowActions.args = {
     {
       iconName: 'ban',
       label: 'Remove',
+      isDestructive: true,
       onClick:
         ({ row, table }) =>
         (event) =>
