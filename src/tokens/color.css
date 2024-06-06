@@ -151,6 +151,7 @@
 
   --sscds-color-info-050: var(--indigo-2);
   --sscds-color-info-100: var(--indigo-4);
+  --sscds-color-info-400: var(--indigo-8);
   --sscds-color-info-500: var(--indigo-10);
   --sscds-color-info-600: var(--indigo-11);
   --sscds-color-info-700: var(--indigo-11);
@@ -159,6 +160,7 @@
 
   --sscds-color-success-050: var(--green-2);
   --sscds-color-success-100: var(--green-4);
+  --sscds-color-success-400: var(--green-8);
   --sscds-color-success-500: var(--green-10);
   --sscds-color-success-600: var(--green-11);
   --sscds-color-success-700: var(--green-11);
@@ -167,6 +169,7 @@
 
   --sscds-color-warning-050: var(--amber-2);
   --sscds-color-warning-100: var(--amber-4);
+  --sscds-color-warning-400: var(--amber-8);
   --sscds-color-warning-500: var(--amber-10);
   --sscds-color-warning-600: var(--amber-11);
   --sscds-color-warning-700: var(--amber-11);
@@ -175,6 +178,7 @@
 
   --sscds-color-danger-050: var(--tomato-2);
   --sscds-color-danger-100: var(--tomato-4);
+  --sscds-color-danger-400: var(--tomato-8);
   --sscds-color-danger-500: var(--tomato-10);
   --sscds-color-danger-600: var(--tomato-11);
   --sscds-color-danger-700: var(--tomato-11);
@@ -273,6 +277,10 @@
   --sscds-color-background-pill-gray-hover: var(--sscds-color-neutral-5);
 
   --sscds-color-border-default: var(--sscds-color-neutral-4);
+  --sscds-color-border-info: var(--indigo-8);
+  --sscds-color-border-success: var(--green-8);
+  --sscds-color-border-warning: var(--amber-8);
+  --sscds-color-border-danger: var(--tomato-8);
 
   --sscds-color-border-surface-default: var(--black-a3);
   --sscds-color-border-surface-inverse: var(--white-a3);

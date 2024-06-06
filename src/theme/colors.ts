@@ -330,6 +330,10 @@ export const colors = {
   },
   border: {
     default: neutral[4],
+    info: indigo.indigo8,
+    success: green.green8,
+    warning: amber.amber8,
+    danger: tomato.tomato8,
     surface: {
       default: blackA.blackA3,
       inverse: whiteA.whiteA3,
