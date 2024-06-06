@@ -103,6 +103,7 @@ const neutral = {
 const info = {
   50: indigo.indigo2,
   100: indigo.indigo4,
+  400: indigo.indigo8,
   500: indigo.indigo10,
   600: indigo.indigo11,
   700: indigo.indigo11,
@@ -113,6 +114,7 @@ const info = {
 const success = {
   50: green.green2,
   100: green.green4,
+  400: green.green8,
   500: green.green10,
   600: green.green11,
   700: green.green11,
@@ -123,6 +125,7 @@ const success = {
 const warning = {
   50: amber.amber2,
   100: amber.amber4,
+  400: amber.amber8,
   500: amber.amber10,
   600: amber.amber11,
   700: amber.amber11,
@@ -133,6 +136,7 @@ const warning = {
 const error = {
   50: tomato.tomato2,
   100: tomato.tomato4,
+  400: tomato.tomato8,
   500: tomato.tomato11,
   600: tomato.tomato11,
   700: tomato.tomato11,
@@ -143,6 +147,7 @@ const error = {
 const danger = {
   50: tomato.tomato2,
   100: tomato.tomato4,
+  400: tomato.tomato8,
   500: tomato.tomato11,
   600: tomato.tomato11,
   700: tomato.tomato11,
