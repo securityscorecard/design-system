@@ -55,7 +55,7 @@ const severityScale = {
     40: '#B81143',
     50: '#9F0F3A',
   },
-} as const;
+};
 
 const primary = {
   50: indigo.indigo3,
@@ -68,7 +68,7 @@ const primary = {
   700: indigo.indigo10,
   800: indigo.indigo11,
   900: indigo.indigo12,
-} as const;
+};
 
 const neutral = {
   50: slate.slate1,
@@ -98,7 +98,7 @@ const neutral = {
   11: slate.slate11,
   12: slate.slate12,
   13: '#000000',
-} as const;
+};
 
 const info = {
   50: indigo.indigo2,
@@ -109,7 +109,7 @@ const info = {
   700: indigo.indigo11,
   800: indigo.indigo11,
   900: indigo.indigo12,
-} as const;
+};
 
 const success = {
   50: green.green2,
@@ -120,7 +120,7 @@ const success = {
   700: green.green11,
   800: green.green11,
   900: green.green12,
-} as const;
+};
 
 const warning = {
   50: amber.amber2,
@@ -131,7 +131,7 @@ const warning = {
   700: amber.amber11,
   800: amber.amber11,
   900: amber.amber12,
-} as const;
+};
 
 const error = {
   50: tomato.tomato2,
@@ -142,7 +142,7 @@ const error = {
   700: tomato.tomato11,
   800: tomato.tomato11,
   900: tomato.tomato12,
-} as const;
+};
 
 const danger = {
   50: tomato.tomato2,
@@ -153,7 +153,7 @@ const danger = {
   700: tomato.tomato11,
   800: tomato.tomato11,
   900: tomato.tomato12,
-} as const;
+};
 
 const grade = {
   A: severityScale.green[40],
@@ -161,7 +161,7 @@ const grade = {
   C: severityScale.orange[40],
   D: severityScale.red[40],
   F: severityScale.deepred[40],
-} as const;
+};
 
 const brand = {
   50: '#f0ecfe',
@@ -174,7 +174,7 @@ const brand = {
   700: '#3b1ab7',
   800: '#2c1193',
   900: '#1b0471',
-} as const;
+};
 
 const severity = {
   informational: info[600],
@@ -183,7 +183,7 @@ const severity = {
   medium: severityScale.orange[40],
   high: severityScale.red[40],
   critical: severityScale.deepred[40],
-} as const;
+};
 
 const impact = '#5c33ea';
 const likelihood = {
