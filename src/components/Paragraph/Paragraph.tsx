@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { SpacingSizeValuePropType } from '../../../types/spacing.types';
-import { createSpacings } from '../../../utils';
+import { SpacingSizeValuePropType } from '../../types/spacing.types';
+import { createSpacings } from '../../utils';
 import { Text } from '../Text';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { ParagraphProps } from './Paragraph.types';

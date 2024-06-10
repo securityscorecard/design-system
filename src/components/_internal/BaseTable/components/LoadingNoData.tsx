@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { H4, Paragraph } from '../../../typographyLegacy';
 import { Inline } from '../../../layout';
 import { Spinner } from '../../../Spinner';
-import { TextSizes } from '../../../typographyLegacy/Text/Text.enums';
+import { TextSizes } from '../../../Text/Text.enums';
 import { SpaceSizes } from '../../../../theme';
+import { H4 } from '../../../Heading';
+import { Paragraph } from '../../../Paragraph';
 
 const LoadingNoData = () => (
   <>

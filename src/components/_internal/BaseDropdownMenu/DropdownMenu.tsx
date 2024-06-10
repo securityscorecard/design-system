@@ -14,7 +14,7 @@ import { getColor, getSpace, pxToRem } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { Dropdown } from '../../Dropdown';
 import { SpaceSizes } from '../../../theme/space.enums';
-import { Text, TextEnums } from '../../typographyLegacy';
+import { Text, TextEnums } from '../../Text';
 import { Padbox, PadboxEnums } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { InteractiveElement } from '../../Dropdown/Dropdown.types';

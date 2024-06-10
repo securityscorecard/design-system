@@ -3,8 +3,8 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 
 import Skeleton from './Skeleton';
 import { Inline, Padbox, Stack, Surface } from '../layout';
-import { Text } from '../typographyLegacy/Text';
-import { Heading } from '../typographyLegacy/Heading';
+import { Text } from '../Text';
+import { Heading } from '../Heading';
 import { SkeletonProps } from './Skeleton.types';
 
 export default {

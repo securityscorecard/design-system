@@ -6,10 +6,11 @@ import { noop } from 'ramda-adjunct';
 import MultiValueInput from './MultiValueInput';
 import { Label } from '../Label';
 import { MultiValueInputProps } from './MultiValueInput.types';
-import { Heading, Strong } from '../../typographyLegacy';
 import { Inline, Stack } from '../../layout';
 import { Button } from '../../Button';
 import { Banner } from '../../Banner';
+import { Heading } from '../../Heading';
+import { Strong } from '../../Text';
 
 export default {
   component: MultiValueInput,

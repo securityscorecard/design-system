@@ -1,7 +1,7 @@
 import type { To } from 'history';
 
 import type { IconNames, RegularIconTypes } from '../Icon/Icon.types';
-import { LinkProps } from '../typographyLegacy/Link/Link.types';
+import { LinkProps } from '../Link/Link.types';
 
 export interface BreadcrumbItemProps extends Omit<LinkProps, 'color'> {
   /**

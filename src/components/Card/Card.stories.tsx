@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
-import { Text } from '../typographyLegacy';
+import { Text } from '../Text';
 import Card from './Card';
 import CardHeader, { CardIconButton } from './CardHeader';
 import CardActions from './CardActions';

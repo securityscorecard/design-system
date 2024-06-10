@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { generateControl } from '../../utils/tests/storybook';
 import { Cluster, Inline, Stack } from '../layout';
-import { H4 } from '../typographyLegacy';
+import { H4 } from '../Heading';
 import { Icon } from '../Icon';
 import Pill from './Pill';
 import { PillProps } from './Pill.types';

@@ -5,10 +5,10 @@ import { Text } from '../index';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { ParagraphProps } from './Paragraph.types';
 import Paragraph from './Paragraph';
-import { generateControl } from '../../../utils/tests/storybook';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
-  title: 'components/typography/Paragraph',
+  title: 'typography/Paragraph',
   component: Paragraph,
   argTypes: {
     children: {

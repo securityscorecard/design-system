@@ -12,10 +12,10 @@ import {
   getFontWeight,
   getLineHeight,
   pxToRem,
-} from '../../../utils';
+} from '../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
-import { BASE_LINE_HEIGHT, CLX_TYPOGRAPHY } from '../../../theme/constants';
+import { BASE_LINE_HEIGHT, CLX_TYPOGRAPHY } from '../../theme/constants';
 
 const primaryVariant = css`
   color: ${getColor('text.primary')};

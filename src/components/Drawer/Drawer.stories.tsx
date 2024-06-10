@@ -7,7 +7,10 @@ import Drawer from './Drawer';
 import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
 import { SemanticModal } from '../SemanticModal';
-import { H2, Link, Paragraph, Text } from '../typographyLegacy';
+import { H2 } from '../Heading';
+import { Paragraph } from '../Paragraph';
+import { Text } from '../Text';
+import { Link } from '../Link';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button, ButtonEnums } from '../Button';
 import { Icon } from '../Icon';
@@ -77,10 +80,10 @@ export const Playground: Story<DrawerProps> = (args) => {
         <Button onClick={() => setIsShown(!isShown)}>Open drawer</Button>
         {isShown && (
           <Drawer
+            {...args}
             footer={<Footer />}
             title="Title"
             onClose={() => setIsShown(false)}
-            {...args}
           >
             <Content />
           </Drawer>

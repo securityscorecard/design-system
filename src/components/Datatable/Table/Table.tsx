@@ -46,10 +46,11 @@ import { Padbox, Stack } from '../../layout';
 import { getColor, pxToRem } from '../../../utils';
 import { TableProps } from './Table.types';
 import { SELECTION_COLUMN_ID } from '../../_internal/BaseTable/renderers/renderers.enums';
-import { H4, Paragraph } from '../../typographyLegacy';
-import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
+import { TextSizes } from '../../Text/Text.enums';
 import { SpaceSizes } from '../../../theme';
 import { Button, ButtonEnums } from '../../Button';
+import { H4 } from '../../Heading';
+import { Paragraph } from '../../Paragraph';
 
 const NoDataOutline = styled.div`
   border-top: 1px solid ${getColor('neutral.300')};
