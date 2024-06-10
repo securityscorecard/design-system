@@ -26,7 +26,10 @@ const ExpandButton = <D,>({
       }}
       isDisabled={!canExpand && !renderDetailPanel}
       label={isExpanded ? 'Collapse row' : 'Expand row'}
-      onClick={() => toggleExpanded()}
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleExpanded();
+      }}
     />
   );
 };

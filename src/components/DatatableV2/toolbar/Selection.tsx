@@ -23,8 +23,7 @@ const SelectionRoot = styled(Padbox)<{ $hasHorizontalScroll: boolean }>`
   bottom: 0;
   z-index: 1;
   transform: scale(1, -1);
-
-  background-color: var(--sscds-table-color-selection);
+  background-color: var(--sscds-color-primary-050);
   height: ${pxToRem(60 + 1)};
   border-bottom: 1px solid var(--sscds-table-color-border);
 `;

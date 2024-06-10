@@ -57,6 +57,9 @@ export const MenuItem = ({
     $isDestructive={isDestructive}
     className={className}
     disabled={isDisabled}
+    onClick={(e) => {
+      e.stopPropagation();
+    }}
     onSelect={onClick}
   >
     <Padbox paddingSize="md" paddingType="squish">
