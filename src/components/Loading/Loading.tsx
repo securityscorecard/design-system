@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Padbox, Stack } from '../layout';
 import { ProgressBar } from '../ProgressBar';
 import { Spinner } from '../Spinner';
-import { Text } from '../typographyLegacy';
+import { Text } from '../Text';
 import { pxToRem } from '../../utils';
 import { LoadingRootProps } from './Loading.types';
 

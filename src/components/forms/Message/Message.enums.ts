@@ -1,4 +1,4 @@
-import { TextVariants } from '../../typographyLegacy/Text/Text.enums';
+import { TextVariants } from '../../Text/Text.enums';
 
 export const MessageVariants = {
   note: TextVariants.secondary,

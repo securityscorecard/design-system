@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
-import * as requireRouterLink from '../../../utils/require-router-link';
+import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import * as requireRouterLink from '../../utils/require-router-link';
 import Link from './Link';
 
 describe('Link', () => {

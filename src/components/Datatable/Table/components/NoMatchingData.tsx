@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
-import { H4, Paragraph } from '../../../typographyLegacy';
-import { TextSizes } from '../../../typographyLegacy/Text/Text.enums';
+import { H4 } from '../../../Heading';
+import { Paragraph } from '../../../Paragraph';
+import { TextSizes } from '../../../Text/Text.enums';
 
 const ListItem = styled.li`
   margin-left: ${pxToRem(16)};

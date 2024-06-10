@@ -4,17 +4,17 @@ import styled, { css } from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { requireRouterLink } from '../../../utils/require-router-link';
-import { LinkColors } from '../../_internal/BaseLink/BaseLink.enums';
+import { requireRouterLink } from '../../utils/require-router-link';
+import { LinkColors } from '../_internal/BaseLink/BaseLink.enums';
 import { LinkProps } from './Link.types';
 import {
   LinkActiveStyles,
   LinkBaseStyles,
   LinkHoverStyles,
-} from '../../_internal/BaseLink';
-import { CLX_TYPOGRAPHY } from '../../../theme/constants';
-import { DSContext } from '../../../theme/DSProvider/DSProvider';
-import { getColor, getFontWeight, getToken } from '../../../utils';
+} from '../_internal/BaseLink';
+import { CLX_TYPOGRAPHY } from '../../theme/constants';
+import { DSContext } from '../../theme/DSProvider/DSProvider';
+import { getColor, getFontWeight, getToken } from '../../utils';
 
 const experimetalLink = css<Required<{ $color: LinkProps['color'] }>>`
   text-decoration: underline;

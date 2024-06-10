@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { SpaceSizes } from '../../../theme';
 import { getSpace } from '../../../utils';
-import { Paragraph } from '../../typographyLegacy';
-import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
+import { Paragraph } from '../../Paragraph';
+import { TextSizes } from '../../Text/Text.enums';
 import { MessageVariants } from './Message.enums';
 import { MessageProps } from './Message.types';
 import { CLX_COMPONENT } from '../../../theme/constants';

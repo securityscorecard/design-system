@@ -5,8 +5,9 @@ import { action } from '@storybook/addon-actions';
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
 import { Stack } from '../../layout';
-import { Paragraph, Text } from '../../typographyLegacy';
 import { Button } from '../../Button';
+import { Text } from '../../Text';
+import { Paragraph } from '../../Paragraph';
 
 export default {
   title: 'components/DatatableV2/EmptyData',

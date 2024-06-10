@@ -2,18 +2,18 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 
-import { Inline, Stack } from '../../layout';
+import { Inline, Stack } from '../layout';
 import Text, { Code, Strong } from './Text';
 import { TextProps } from './Text.types';
 import { TextSizes, TextVariants } from './Text.enums';
-import { generateControl } from '../../../utils/tests/storybook';
-import { DSThemeOverride } from '../../../theme';
-import { getColor, getRadii } from '../../../utils';
-import { Heading } from '../Heading';
+import { generateControl } from '../../utils/tests/storybook';
+import { DSThemeOverride } from '../../theme';
+import { getColor, getRadii } from '../../utils';
 import { Paragraph } from '../Paragraph';
+import { Heading } from '../Heading';
 
 export default {
-  title: 'components/typography/Text',
+  title: 'typography/Text',
   component: Text,
   argTypes: {
     children: {
@@ -130,8 +130,6 @@ export const MonospaceText: Story = () => (
     </Text>
   </>
 );
-
-MonospaceText.storyName = 'Monospace Text (DEPRECATED)';
 
 export const DangerText: Story = () => (
   <>

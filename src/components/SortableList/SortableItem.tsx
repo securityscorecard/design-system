@@ -5,8 +5,8 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import { getColor, getRadii, getSpace, pxToRem } from '../../utils';
-import { Text } from '../typographyLegacy';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { Text } from '../Text';
+import { TextSizes } from '../Text/Text.enums';
 import { SortableItemProps } from './SortableList.types';
 import { SpaceSizes } from '../../theme';
 import { Inline, Padbox } from '../layout';

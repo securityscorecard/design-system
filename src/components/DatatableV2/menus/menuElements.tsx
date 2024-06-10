@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getRadii, getToken } from '../../../utils';
 import { Icon, IconNames, RegularIconTypes } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
-import { Text } from '../../typographyLegacy';
+import { Text } from '../../Text';
 
 export const MenuContent = styled(DropdownMenu.Content)<{
   $isFullscreen: boolean;

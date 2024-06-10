@@ -4,11 +4,12 @@ import { includes } from 'ramda';
 
 import { Inline, Stack } from '../layout';
 import { HexGrade } from '../HexGrade';
-import { Paragraph, Text } from '../typographyLegacy';
 import { Button } from '../Button';
 import Accordion from './Accordion';
 import { AccordionProps } from './Accordion.types';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { Text } from '../Text';
+import { TextSizes } from '../Text/Text.enums';
+import { Paragraph } from '../Paragraph';
 
 export default {
   title: 'components/Accordion',

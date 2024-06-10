@@ -4,8 +4,8 @@ import CreatableReactSelect from 'react-select/creatable';
 import AsyncCreatableReactSelect from 'react-select/async-creatable';
 import cls from 'classnames';
 
-import { Strong } from '../../typographyLegacy';
-import { TextVariants } from '../../typographyLegacy/Text/Text.enums';
+import { Strong } from '../../Text';
+import { TextVariants } from '../../Text/Text.enums';
 import { useSelectProps } from './useSelectProps';
 import Select from './Select';
 import { CreatableSelectProps } from './Select.types';

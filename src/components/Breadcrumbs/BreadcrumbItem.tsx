@@ -5,8 +5,8 @@ import { isNotUndefined } from 'ramda-adjunct';
 
 import { BreadcrumbItemProps } from './Breadcrumbs.types';
 import { getFontWeight } from '../../utils/helpers';
-import { Text, TextEnums } from '../typographyLegacy/Text';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { Text, TextEnums } from '../Text';
+import { TextSizes } from '../Text/Text.enums';
 import { Button } from '../Button';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import type { SSCIcons } from '../Icon/Icon.types';

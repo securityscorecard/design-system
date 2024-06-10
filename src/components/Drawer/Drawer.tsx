@@ -25,7 +25,7 @@ import { CloseButton } from '../CloseButton';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { Text } from '../typographyLegacy';
+import { Text } from '../Text';
 import { FloatingProvider } from '../../contexts/FloatingContext';
 
 const widthVariants = {

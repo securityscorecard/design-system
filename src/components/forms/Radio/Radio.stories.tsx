@@ -7,7 +7,7 @@ import { RadioProps } from './Radio.types';
 import { ColorTypes } from '../../../theme';
 import { Inline } from '../../layout';
 import { Icon } from '../../Icon';
-import { Text } from '../../typographyLegacy/Text';
+import { Text } from '../../Text';
 
 const textExample = 'Use the same details for billing & shipping on my invoice';
 

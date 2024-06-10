@@ -4,10 +4,10 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import Heading, { H1, H2, H3, H4, H5 } from './Heading';
 import { HeadingProps } from './Heading.types';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
-import { generateControl } from '../../../utils/tests/storybook';
+import { generateControl } from '../../utils/tests/storybook';
 
 export default {
-  title: 'components/typography/Heading',
+  title: 'typography/Heading',
   component: Heading,
   argTypes: {
     children: {

@@ -2,8 +2,9 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Callout from './Callout';
-import { Link, Strong } from '../typographyLegacy';
 import { Icon } from '../Icon';
+import { Link } from '../Link';
+import { Strong } from '../Text';
 
 export default {
   title: 'components/Callout',

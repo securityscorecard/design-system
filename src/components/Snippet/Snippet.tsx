@@ -4,7 +4,7 @@ import dedent from 'dedent';
 
 import { Button } from '../Button';
 import { Padbox, Surface } from '../layout';
-import { Code } from '../typographyLegacy';
+import { Code } from '../Text';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { useLogger } from '../../hooks/useLogger';
 import { useClipboard } from '../../hooks/useClipboard';

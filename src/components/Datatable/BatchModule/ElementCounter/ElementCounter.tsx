@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import styled, { useTheme } from 'styled-components';
 
-import { Text } from '../../../typographyLegacy';
-import { HeadingVariants } from '../../../typographyLegacy/Heading/Heading.enums';
+import { Text } from '../../../Text';
+import { HeadingVariants } from '../../../Heading/Heading.enums';
 import {
   abbreviateNumber,
   getColor,

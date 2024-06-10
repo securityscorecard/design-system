@@ -3,7 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Surface from './Surface';
 import { Padbox, Stack } from '../index';
-import { H5, Text } from '../../typographyLegacy';
+import { H5 } from '../../Heading';
+import { Text } from '../../Text';
 
 export default {
   title: 'layout/Surface',
