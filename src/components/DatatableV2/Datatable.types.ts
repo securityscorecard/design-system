@@ -204,6 +204,8 @@ interface CustomState {
   showProgress: boolean;
   /** Toggle Datatable viewing mode to fullscreen mode */
   isFullscreenMode: boolean;
+  /** Active row ID */
+  activeRowId: string;
 }
 export type DatatableInitialState = Omit<
   InitialTableState,
@@ -235,6 +237,8 @@ export interface ParsedDatatableOptions<D>
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
   onFullscreenModeChange?: DatatableOptions<D>['onFullscreenModeChange'];
+  onActiveRowIdChange?: DatatableOptions<D>['onActiveRowIdChange'];
+  onRowClick?: DatatableOptions<D>['onRowClick'];
   renderDetailPanel?: DatatableOptions<D>['renderDetailPanel'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
@@ -267,6 +271,7 @@ export interface DatatableInstance<D>
   options: ParsedDatatableOptions<D>;
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
   setIsFullscreenMode: Dispatch<SetStateAction<boolean>>;
+  setActiveRowId: Dispatch<SetStateAction<string>>;
   refs: {
     tableRef: MutableRefObject<HTMLTableElement>;
     lastSelectedRowIdRef: MutableRefObject<null | string>;
@@ -472,6 +477,24 @@ export interface DatatableOptions<D>
    * `tableOptions.state.showColumnSettings` option.
    */
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
+  /**
+   * If provided, this function will be called with an `updaterFn` when `state.activeRowId`
+   * changes. This overrides the default internal state management, so you are expected to manage
+   * this state on your own. You can pass the managed state back to the table via the
+   * `tableOptions.state.activeRowId` option.
+   */
+  onActiveRowIdChange?: Dispatch<SetStateAction<string>>;
+  /**
+   * Callback that is called when user clicks anywhere in the row area. Clicking on the selection
+   * checkbox, row expand button and the row actions stops event propagation and does not trigger
+   * the row click callback. We are passing argmuments into the callback:
+   *  - `row` - current row, row data are accessible through `row.original`
+   *  - `table` - current instance of the table
+   */
+  onRowClick?: (props: {
+    row: DatatableRow<D>;
+    table: DatatableInstance<D>;
+  }) => void;
   /**
    * Provide your own implementation of row details panel. This property accepts React component
    * with properties:

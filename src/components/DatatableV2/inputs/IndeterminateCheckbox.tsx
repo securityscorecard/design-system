@@ -13,7 +13,13 @@ const IndeterminateCheckbox = ({
   }, [ref, indeterminate, props.checked]);
 
   return (
-    <input ref={ref} className={props.className} type="checkbox" {...props} />
+    <input
+      ref={ref}
+      className={props.className}
+      type="checkbox"
+      {...props}
+      onClick={(e) => e.stopPropagation()}
+    />
   );
 };
 

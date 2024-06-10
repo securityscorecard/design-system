@@ -41,8 +41,12 @@ const TableRoot = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
 
-    &.isSelected .ds-table-cell {
-      background-color: var(--sscds-table-color-selection) !important;
+    &[data-active='true'] .ds-table-cell {
+      background-color: var(--sscds-table-color-active);
+    }
+    &[data-active]:hover .ds-table-cell {
+      background-color: var(--sscds-color-primary-050);
+      cursor: pointer;
     }
   }
   .ds-table-cell {

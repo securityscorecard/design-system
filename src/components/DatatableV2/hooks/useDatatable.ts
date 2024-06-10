@@ -92,6 +92,9 @@ export const useDatatable = <D>(
   const [columnSizing, setColumnSizing] = useState<ColumnSizingState>(
     initialState?.columnSizing ?? {},
   );
+  const [activeRowId, setActiveRowId] = useState<string>(
+    initialState?.activeRowId ?? undefined,
+  );
   const [width, setWidth] = useState(0);
 
   const onResize = () => {
@@ -148,6 +151,7 @@ export const useDatatable = <D>(
       showColumnSettings,
       isFullscreenMode,
       columnSizing,
+      activeRowId,
       ...tableOptions.state,
       // I know what I'm doing here
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -177,6 +181,7 @@ export const useDatatable = <D>(
     tableOptions.onFullscreenModeChange ?? setIsFullscreenMode;
   table.setColumnSizing =
     tableOptions.onColumnSizingChange ?? debouncedSetColumnSizing;
+  table.setActiveRowId = tableOptions.onActiveRowIdChange ?? setActiveRowId;
 
   return table;
 };
