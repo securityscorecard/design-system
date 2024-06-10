@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Padbox, Stack, Surface } from '../../layout';
-import { Paragraph, Text } from '../../typographyLegacy';
+import { Paragraph } from '../../Paragraph';
+import { Text } from '../../Text';
 import { DatatableInstance } from '../Datatable.types';
 import BodyRow from './BodyRow';
 

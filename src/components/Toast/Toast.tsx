@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
 import { getColor, getRadii, pxToRem } from '../../utils';
-import { Paragraph } from '../typographyLegacy';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { Paragraph } from '../Paragraph';
+import { TextSizes } from '../Text/Text.enums';
 import { ToastProps } from './Toast.types';
 import { SpaceSizes } from '../../theme/space.enums';
 import { Inline } from '../layout';

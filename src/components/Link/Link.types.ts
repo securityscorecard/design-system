@@ -6,7 +6,7 @@ import {
 } from 'react';
 import type { To } from 'history';
 
-import { Colors } from '../../_internal/BaseLink';
+import { Colors } from '../_internal/BaseLink';
 
 export interface LinkProps extends ComponentProps<'a'> {
   onClick?: MouseEventHandler;

@@ -5,7 +5,7 @@ import { SpaceSizes } from '../../../theme/space.enums';
 import { Box } from '../mocks/Box';
 import Grid, { GridProps } from './Grid';
 import { Card, CardContent, CardHeader } from '../../Card';
-import { Text } from '../../typographyLegacy';
+import { Text } from '../../Text';
 
 export default {
   title: 'layout/primitives/Grid',

@@ -8,11 +8,11 @@ import {
   getFontSize,
   getFontWeight,
   getLineHeight,
-} from '../../../utils';
+} from '../../utils';
 import { HeadingProps } from '../Heading/Heading.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { CodeProps, StrongProps, TextProps } from './Text.types';
-import { CLX_TYPOGRAPHY } from '../../../theme/constants';
+import { CLX_TYPOGRAPHY } from '../../theme/constants';
 
 const HeadingBase = css<HeadingProps>`
   font-family: ${getFontFamily('base')};

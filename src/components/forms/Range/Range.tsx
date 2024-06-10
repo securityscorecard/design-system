@@ -5,7 +5,7 @@ import { noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { getFormStyle, pxToRem } from '../../../utils';
-import { Text } from '../../typographyLegacy';
+import { Text } from '../../Text';
 import { Inline, Stack } from '../../layout';
 import { RangeInputProps, RangeProps } from './Range.types';
 import { CLX_COMPONENT } from '../../../theme/constants';

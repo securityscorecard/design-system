@@ -9,7 +9,6 @@ import { Modal, ModalEnums } from '../Modal';
 import { Button, ButtonEnums } from '../Button';
 import { ButtonColors } from '../Button/Button.enums';
 import { Icon } from '../Icon';
-import { H4, Text } from '../typographyLegacy';
 import {
   AbsoluteLinkActionKind,
   ActionKinds,
@@ -21,6 +20,8 @@ import { getColor, pxToRem } from '../../utils';
 import { Center, Inline, Padbox, Stack } from '../layout';
 import { Color, SpaceSizes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
+import { H4 } from '../Heading';
+import { Text } from '../Text';
 
 const colorVariants: Record<keyof typeof SemanticModalVariants, Color> = {
   [SemanticModalVariants.success]: 'success.500',

@@ -6,7 +6,7 @@ import Checkbox from './Checkbox';
 import { CheckboxProps } from './Checkbox.types';
 import { Inline } from '../../layout';
 import { Icon } from '../../Icon';
-import { Text } from '../../typographyLegacy/Text';
+import { Text } from '../../Text';
 
 const textExample = 'Use the same details for billing & shipping on my invoice';
 
