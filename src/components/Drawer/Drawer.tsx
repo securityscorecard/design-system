@@ -34,28 +34,29 @@ const widthVariants = {
   [DrawerSizes.xl]: 960,
 };
 
-const DrawerWrapper = styled.div`
-  position: fixed;
-  height: 100%;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: ${getDepth('modal')};
-`;
-
 const Header = styled(Padbox)`
   border-bottom: 1px solid ${getColor('neutral.300')};
 `;
 
-const SurfaceContainer = styled.div<{ $maxWidth: number }>`
+const SurfaceContainer = styled.div<{
+  $maxWidth: number;
+  $hasBackdrop: boolean;
+}>`
   height: calc(100% - ${getSpace('lgPlus')});
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
   margin: ${getSpace('mdPlus')};
   width: 100%;
   display: flex;
   flex-direction: row;
+
+  ${({ $hasBackdrop }) =>
+    !$hasBackdrop &&
+    `
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: ${getDepth('modal')};
+  `}
 `;
 
 const BaseDrawer = styled.div`
@@ -99,14 +100,28 @@ const Adornment = styled(Padbox)`
 
 const DrawerBox = forwardRef<HTMLDivElement, DrawerProps>(
   (
-    { size, adornment, children, footer, title, onClose, className, ...props },
+    {
+      size,
+      adornment,
+      children,
+      footer,
+      title,
+      onClose,
+      className,
+      hasBackdrop,
+      ...props
+    },
     ref,
   ) => {
     const hasFooter = isNotUndefined(footer);
     const hasAdornment = isNotUndefined(adornment);
 
     return (
-      <SurfaceContainer $maxWidth={widthVariants[size]} role="dialog">
+      <SurfaceContainer
+        $hasBackdrop={hasBackdrop}
+        $maxWidth={widthVariants[size]}
+        role="dialog"
+      >
         <Surface
           background="white"
           elevation={5}
@@ -181,6 +196,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       children,
       title,
       onClose,
+      hasBackdrop,
       ...props,
     };
 
@@ -194,9 +210,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               <DrawerBox {...drawerProps} />
             </Overlay>
           ) : (
-            <DrawerWrapper>
-              <DrawerBox {...drawerProps} />
-            </DrawerWrapper>
+            <DrawerBox {...drawerProps} />
           )}
         </Portal>
       </FloatingProvider>
