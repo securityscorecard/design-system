@@ -3,9 +3,9 @@ import clx from 'classnames';
 
 import { getCommonCellStyles } from '../columns.utils';
 import { DatatableCell, DatatableInstance } from '../Datatable.types';
-import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 import Skeleton from '../../Skeleton/Skeleton';
 import { parseFromValuesOrFunc } from '../utils';
+import { displayColumnIds } from '../hooks/useDisplayColumns';
 
 const BodyCell = <D,>({
   cell,
@@ -15,11 +15,11 @@ const BodyCell = <D,>({
   table: DatatableInstance<D>;
 }) => {
   const { column } = cell;
+  const { getIsPinned } = column;
   const { columnDefType } = column.columnDef;
   const { isLoading } = table.getState();
 
   const [skeletonWidth, setSkeletonWidth] = useState(100);
-  const hasHorizontalScroll = useHasHorizontalScroll(table);
 
   useEffect(() => {
     if (!isLoading || skeletonWidth !== 100) return;
@@ -35,11 +35,14 @@ const BodyCell = <D,>({
     <td
       className={clx('ds-table-body-cell ds-table-cell', {
         'ds-table-cell-display': columnDefType === 'display',
+        'ds-table-cell-select': column.id === displayColumnIds.select,
+        'ds-table-cell-expand': column.id === displayColumnIds.expand,
+        'ds-table-cell-actions': column.id === displayColumnIds.actions,
       })}
+      data-pinned={getIsPinned()}
       style={getCommonCellStyles({
         table,
         column,
-        hasHorizontalScroll,
       })}
     >
       {isLoading ? (

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useMemo } from 'react';
-import clx from 'classnames';
 
 import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
@@ -10,6 +9,7 @@ import TableRoot from './TableRoot';
 import ProgressBar from './ProgressBar';
 import Selection from '../toolbar/Selection';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
+import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 
 const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -27,6 +27,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     isFullscreenMode,
   } = getState();
   const { datatable } = useContext(DSContext);
+  const hasHorizontalScroll = useHasHorizontalScroll(table);
 
   const columnSizeVars = useMemo(() => {
     const headers = getFlatHeaders();
@@ -48,7 +49,11 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   }, [isFullscreenMode, datatable]);
 
   return (
-    <TableRoot className={clx({ isFullscreen: isFullscreenMode })} tabIndex={0}>
+    <TableRoot
+      data-fullscreen={isFullscreenMode}
+      data-horizontal-scroll={hasHorizontalScroll}
+      tabIndex={0}
+    >
       {showProgress && <ProgressBar isTop />}
       <table
         ref={(ref) => {

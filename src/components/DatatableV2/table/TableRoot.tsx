@@ -51,12 +51,32 @@ const TableRoot = styled.div`
   }
   .ds-table-cell {
     display: flex;
+    flex-direction: row;
     padding: var(--sscds-table-spacing-cell);
+    height: 100%;
     background-color: var(--sscds-table-color-background);
 
-    &.isPinned + .ds-table-cell:not(.isPinned) {
-      border-left: none !important;
+    &[data-pinned]:not([data-pinned='false']) {
+      position: sticky;
+      z-index: 1;
+
+      & + .ds-table-cell[data-pinned='false'] {
+        border-left: none !important;
+      }
     }
+  }
+
+  .ds-table-cell-select {
+    min-width: 2.5rem;
+    flex: 0 0 2.5rem;
+    justify-content: center;
+  }
+
+  .ds-table-cell-expand,
+  .ds-table-cell-actions {
+    min-width: 3rem;
+    flex: 0 0 3rem;
+    justify-content: center;
   }
 
   .ds-table-header-row,
@@ -66,7 +86,9 @@ const TableRoot = styled.div`
 
   .ds-table-header-cell {
     position: relative;
+    flex-direction: column;
     justify-content: center;
+    height: 3.75rem;
     padding: var(--sscds-table-spacing-cell-header);
 
     &:not(:first-of-type) {
@@ -98,6 +120,10 @@ const TableRoot = styled.div`
       right: 0;
       opacity: 0;
       transition: var(--sscds-action-transition);
+
+      &:focus-visible {
+        z-index: 1;
+      }
     }
 
     .ds-table-header-cell-sort-button {
@@ -112,7 +138,8 @@ const TableRoot = styled.div`
         opacity: 1;
       }
     }
-    &.isSorted .ds-table-header-cell-sort-button {
+    &[data-sorted]:not([data-sorted='false'])
+      .ds-table-header-cell-sort-button {
       opacity: 1;
     }
   }
@@ -167,7 +194,7 @@ const TableRoot = styled.div`
     justify-content: center;
   }
 
-  &.isFullscreen {
+  &[data-fullscreen='true'] {
     .ds-table {
       max-height: calc(100vh - var(--sscds-table-height-pagination));
       overflow: auto;
@@ -178,6 +205,27 @@ const TableRoot = styled.div`
       top: 0;
       z-index: 2;
     }
+  }
+
+  &[data-horizontal-scroll='false'] {
+    & .ds-table-cell {
+      box-shadow: none !important;
+    }
+  }
+
+  .ds-table-unstyled-button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    outline: none;
+    line-height: inherit;
+    -webkit-appearance: none;
   }
 `;
 
