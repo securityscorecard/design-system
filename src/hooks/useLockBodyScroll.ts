@@ -19,13 +19,19 @@ export const useLockBodyScroll = ({ enabled } = { enabled: true }): void => {
     const locked = BodyLock.isLocked();
     if (!locked) {
       BodyLock.lock();
+      // Check if radix disabled scrolling (e.g. DropdownMenu)
+      const isRadixBlockScroll = document.body.dataset.scrollLocked === '1';
+      // Check if there is overflow in inline style
+      const hasInlineOverflow = document.body.style.overflow !== '';
       // Get original body overflow
-      const originalStyle = window.getComputedStyle(document.body).overflow;
+      const originalStyle = isRadixBlockScroll
+        ? 'hidden auto'
+        : window.getComputedStyle(document.body).overflow;
       // Prevent scrolling on mount unless disabled (eg. modals or drawers without backdrop)
       document.body.style.overflow = enabled ? 'hidden' : 'auto';
       // Re-enable scrolling when component unmounts
       return () => {
-        document.body.style.overflow = originalStyle;
+        document.body.style.overflow = hasInlineOverflow ? originalStyle : '';
         BodyLock.unlock();
       };
     }
