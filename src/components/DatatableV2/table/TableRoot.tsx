@@ -88,7 +88,7 @@ const TableRoot = styled.div`
     position: relative;
     flex-direction: column;
     justify-content: center;
-    height: 3.75rem;
+    height: 3.25rem;
     padding: var(--sscds-table-spacing-cell-header);
 
     &:not(:first-of-type) {
