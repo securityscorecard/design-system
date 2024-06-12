@@ -1,8 +1,6 @@
 import React from 'react';
-import styled, { css, useTheme } from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { getFontWeight, getRadii } from '../../../utils';
-import { getPaddingSize } from '../../../utils/space';
 import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import Pagination from '../toolbar/Pagination';
@@ -28,7 +26,6 @@ const DatatableRoot = styled.div<{ $isFullscreen }>`
 `;
 
 const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
-  const theme = useTheme();
   const { getState } = table;
   const { isFullscreenMode } = getState();
 
@@ -41,27 +38,16 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '--sscds-table-color-background': 'var(--sscds-background)',
           '--sscds-table-color-border': 'var(--sscds-border-color)',
           '--sscds-table-color-accent': 'var(--sscds-color-primary-500)',
+          '--sscds-table-color-header-background':
+            'var(--sscds-color-neutral-2)',
           '--sscds-table-color-settings-background':
             'var(--sscds-table-color-background)',
           '--sscds-table-color-active': 'var(--sscds-color-neutral-3)',
-          '--sscds-table-spacing-cell': getPaddingSize({
-            paddingSize: 'md',
-            paddingType: 'square',
-            theme,
-          }),
-          '--sscds-table-spacing-cell-header': getPaddingSize({
-            paddingSize: 'md',
-            paddingType: 'squish',
-            theme,
-          }),
-          '--sscds-table-spacing-cell-display': getPaddingSize({
-            paddingSize: 'md',
-            paddingType: 'stretch',
-            theme,
-          }),
-          '--sscds-table-typography-weight-header': getFontWeight('bold', {
-            theme,
-          }),
+          '--sscds-table-spacing-cell': 'var(--sscds-space-1x)',
+          '--sscds-table-spacing-cell-header': 'var(--sscds-space-1x)',
+          '--sscds-table-spacing-cell-display': 'var(--sscds-space-1x)',
+          '--sscds-table-typography-weight-header':
+            'var(--sscds-font-weight-700)',
           '--sscds-table-shadow-settings':
             '-6px 0px 12px 0px rgba(0, 0, 0, 0.07)',
           '--sscds-table-shadow-pin-left':
@@ -69,7 +55,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '--sscds-table-shadow-pin-right':
             '-8px 0px 8px 0px rgba(0, 0, 0, 0.05)',
           '--sscds-table-size-settings-width': '22.5rem',
-          '--sscds-table-radii-settings-item': getRadii('default', { theme }),
+          '--sscds-table-radii-settings-item': 'var(--sscds-radii-default)',
           position: 'relative',
           overflow: 'clip',
           ...(isFullscreenMode

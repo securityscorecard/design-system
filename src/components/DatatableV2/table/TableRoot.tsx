@@ -88,8 +88,9 @@ const TableRoot = styled.div`
     position: relative;
     flex-direction: column;
     justify-content: center;
-    height: 3.75rem;
+    height: 3.25rem;
     padding: var(--sscds-table-spacing-cell-header);
+    background-color: var(--sscds-table-color-header-background);
 
     &:not(:first-of-type) {
       border-left: 1px solid var(--sscds-table-color-border) !important;
