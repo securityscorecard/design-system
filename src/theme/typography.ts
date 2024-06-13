@@ -47,7 +47,7 @@ const size = {
     md: sizeScale[80],
     lg: sizeScale[90],
   },
-  label: {
+  elementlabel: {
     sm: sizeScale[20],
     md: sizeScale[30],
   },

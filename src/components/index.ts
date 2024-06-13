@@ -14,6 +14,10 @@ export * from './DateRangePicker';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './DropdownMenu';
+export {
+  default as ElementLabel,
+  ElementLabelProps,
+} from './ElementLabel/ElementLabel';
 export * from './ErrorBoundary';
 export * from './FileSelector';
 export * from './Filters';

@@ -119,7 +119,7 @@
   --sscds-color-neutral-13: white;
 }
 
-:root {
+:root, .light, .light-theme, .dark, .dark-theme {
   --sscds-color-clear: transparent;
   --sscds-color-brand: var(--brand-500);
   --sscds-color-white: white;
@@ -209,7 +209,7 @@
   --sscds-color-brand-800: var(--brand-800);
   --sscds-color-brand-900: var(--brand-900);
 
-  --sscds-color-background-body: var(--sscds-color-neutral-2);
+  --sscds-color-background-body: var(--sscds-color-neutral-1);
   --sscds-color-background-overlay: var(--slate-a10);
 
   --sscds-color-background-surface-default: var(--sscds-color-neutral-0);
@@ -296,9 +296,9 @@
   --sscds-color-border-action-danger: var(--sscds-color-neutral-8);
   --sscds-color-border-action-subtle: var(--sscds-color-neutral-7);
 
-  --sscds-color-link-default: var(--sscds-color-background-action-highlight-default);
-  --sscds-color-link-hover: var(--sscds-color-background-action-highlight-hover);
-  --sscds-color-link-active: var(--sscds-color-background-action-highlight-active);
+  --sscds-color-link-default: var(--sscds-color-primary-800);
+  --sscds-color-link-hover: var(--sscds-color-primary-900);
+  --sscds-color-link-active: var(--sscds-color-primary-800);
   --sscds-color-link-visited: var(--purple-11);
 
   --sscds-color-text-default: var(--sscds-color-neutral-12);

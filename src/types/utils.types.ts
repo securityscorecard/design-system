@@ -1,3 +1,5 @@
+import { ElementType } from 'react';
+
 export type Extends<T, U extends T> = U;
 
 export type Subset<K> = {
@@ -17,3 +19,7 @@ export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   {
     [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
   }[Keys];
+
+export type WithAsProp<Props> = Props & {
+  as?: ElementType;
+};
