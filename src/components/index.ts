@@ -11,6 +11,7 @@ export * from './ControlDropdown';
 export * from './Datatable';
 export * from './DatatableV2';
 export * from './DateRangePicker';
+export { default as Display, DisplayProps } from './Display/Display';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './DropdownMenu';

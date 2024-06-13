@@ -22,16 +22,12 @@
   --sscds-font-size-heading-4: var(--sscds-font-size-40);
   --sscds-font-size-heading-5: var(--sscds-font-size-30);
 
-  --sscds-font-size-display-sm: var(--sscds-font-size-70);
-  --sscds-font-size-display-md: var(--sscds-font-size-80);
-  --sscds-font-size-display-lg: var(--sscds-font-size-90);
+  --sscds-font-size-display-sm: var(--sscds-font-size-50);
+  --sscds-font-size-display-md: var(--sscds-font-size-70);
+  --sscds-font-size-display-lg: var(--sscds-font-size-80);
 
   --sscds-font-size-elementlabel-sm: var(--sscds-font-size-20);
   --sscds-font-size-elementlabel-md: var(--sscds-font-size-30);
-
-  --sscds-font-size-title-sm: var(--sscds-font-size-20);
-  --sscds-font-size-title-md: var(--sscds-font-size-30);
-  --sscds-font-size-title-lg: var(--sscds-font-size-40);
 
   --sscds-font-weight-400: 400; /* regular */
   --sscds-font-weight-500: 500; /* medium */
@@ -48,8 +44,6 @@
 
   --sscds-font-weight-elementlabel-default: var(--sscds-font-weight-500);
   --sscds-font-weight-elementlabel-strong: var(--sscds-font-weight-700);
-
-  --sscds-font-weight-title: var(--sscds-font-weight-500);
 
   --sscds-font-lineheight-10: 1rem; /* 16px */
   --sscds-font-lineheight-20: 1.25rem; /* 20px */
@@ -71,13 +65,5 @@
   --sscds-font-lineheight-heading-4: var(--sscds-font-lineheight-40);
   --sscds-font-lineheight-heading-5: var(--sscds-font-lineheight-30);
 
-  --sscds-font-lineheight-display-sm: var(--sscds-font-lineheight-70);
-  --sscds-font-lineheight-display-md: var(--sscds-font-lineheight-80);
-  --sscds-font-lineheight-display-lg: var(--sscds-font-lineheight-90);
-
   --sscds-font-lineheight-elementlabel: var(--sscds-font-lineheight-30);
-
-  --sscds-font-lineheight-title-sm: var(--sscds-font-lineheight-70);
-  --sscds-font-lineheight-title-md: var(--sscds-font-lineheight-70);
-  --sscds-font-lineheight-title-lg: var(--sscds-font-lineheight-40);
 }

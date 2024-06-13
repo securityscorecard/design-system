@@ -51,11 +51,6 @@ const size = {
     sm: sizeScale[20],
     md: sizeScale[30],
   },
-  title: {
-    sm: sizeScale[20],
-    md: sizeScale[30],
-    lg: sizeScale[40],
-  },
 } as const;
 
 const weightScale = {
@@ -87,7 +82,6 @@ const weight = {
     default: weightScale[500],
     strong: weightScale[700],
   },
-  title: weightScale[500],
 } as const;
 
 const lineHeightScale = {
@@ -129,11 +123,6 @@ const lineHeight = {
     lg: lineHeightScale[90],
   },
   label: lineHeightScale[30],
-  title: {
-    sm: lineHeightScale[70],
-    md: lineHeightScale[70],
-    lg: lineHeightScale[40],
-  },
 } as const;
 
 export const createTypography = () => ({
