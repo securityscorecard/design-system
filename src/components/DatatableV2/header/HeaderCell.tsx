@@ -1,14 +1,12 @@
 import React, { CSSProperties } from 'react';
 import clx from 'classnames';
 
-// import HeaderCellSortButton from './HeaderCellSortButton';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import HeaderCellColumnActionsButton from './HeaderCellColumnActionsButton';
 import { getCommonCellStyles } from '../columns.utils';
 import HeaderCellResizeHandler from './HeaderCellResizeHandler';
 import { Inline } from '../../layout';
 import { Tooltip } from '../../Tooltip';
-import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 import { displayColumnIds } from '../hooks/useDisplayColumns';
 import { parseFromValuesOrFunc } from '../utils';
 
@@ -46,8 +44,6 @@ const HeaderCell = <D,>({
     renderHeaderTooltip,
   } = columnDef;
 
-  const hasHorizontalScroll = useHasHorizontalScroll(table);
-
   const showColumnActions =
     (enableColumnActions || cdEnableColumnActions) &&
     cdEnableColumnActions !== false;
@@ -66,45 +62,39 @@ const HeaderCell = <D,>({
     <th
       key={id}
       className={clx('ds-table-header-cell ds-table-cell', {
-        isSorted: getIsSorted(),
-        isPinned: getIsPinned(),
         'ds-table-cell-display': columnDefType === 'display',
+        'ds-table-cell-select': column.id === displayColumnIds.select,
+        'ds-table-cell-expand': column.id === displayColumnIds.expand,
+        'ds-table-cell-actions': column.id === displayColumnIds.actions,
       })}
+      data-pinned={getIsPinned()}
+      data-sorted={getIsSorted()}
       style={{
         ...getCommonCellStyles({
           table,
           header,
           column,
-          hasHorizontalScroll,
         }),
       }}
     >
       {isPlaceholder ? null : columnDefType === 'data' ? (
         <Inline align="center" gap="xs" justify="space-between">
           <Inline align="center" style={{ overflow: 'hidden' }}>
-            {/* I know what I'm doing here */}
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-            <div
-              className="ds-table-header-cell-title"
-              style={{
-                ...headerStyle,
-                cursor: getCanSort() ? 'pointer' : undefined,
-              }}
-              title={cdHeader}
-              onClick={getToggleSortingHandler()}
-            >
-              <Tooltip placement="top" popup={tooltipPopup}>
+            <Tooltip placement="top" popup={tooltipPopup}>
+              <button
+                aria-label={`Sort by ${cdHeader}`}
+                className="ds-table-header-cell-title ds-table-unstyled-button"
+                style={{
+                  ...headerStyle,
+                  cursor: getCanSort() ? 'pointer' : undefined,
+                }}
+                title={cdHeader}
+                type="button"
+                onClick={getToggleSortingHandler()}
+              >
                 {headerElement}
-              </Tooltip>
-            </div>
-
-            {/* {getCanSort() && (
-              <HeaderCellSortButton
-                direction={getIsSorted()}
-                header={header}
-                table={table}
-              />
-            )} */}
+              </button>
+            </Tooltip>
           </Inline>
           {showColumnActions && (
             <HeaderCellColumnActionsButton header={header} table={table} />
@@ -125,7 +115,9 @@ const HeaderCell = <D,>({
             title={cdHeader}
           >
             <Tooltip placement="top" popup={tooltipPopup}>
-              {headerElement}
+              <button className="ds-table-unstyled-button" type="button">
+                {headerElement}
+              </button>
             </Tooltip>
           </div>
         </Inline>
