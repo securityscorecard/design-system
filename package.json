@@ -86,7 +86,7 @@
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "@faker-js/faker": "^8.2.0",
-    "@fontsource/inter": "^4.5.15",
+    "@fontsource/inter": "^5.0.18",
     "@geometricpanda/storybook-addon-badges": "^0.2.1",
     "@mdx-js/react": "^1.6.22",
     "@rollup/plugin-commonjs": "^21.0.3",
@@ -122,6 +122,7 @@
     "@types/testing-library__jest-dom": "^5.14.3",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
+    "add": "^2.0.6",
     "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -176,7 +177,8 @@
     "ts-react-display-name": "^1.2.2",
     "tslib": "^2.3.1",
     "typescript": "^4.7.4",
-    "typescript-plugin-styled-components": "^2.0.0"
+    "typescript-plugin-styled-components": "^2.0.0",
+    "yarn": "^1.22.22"
   },
   "resolutions": {
     "trim": "1.0.1",

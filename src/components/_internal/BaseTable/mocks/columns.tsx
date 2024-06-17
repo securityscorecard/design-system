@@ -6,14 +6,11 @@ import { pipe, reduce, toPairs } from 'ramda';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import {
-  TextSizes,
-  TextVariants,
-} from '../../../typographyLegacy/Text/Text.enums';
-import { Strong, Text } from '../../../typographyLegacy';
+import { TextSizes, TextVariants } from '../../../Text/Text.enums';
 import { Tooltip } from '../../../Tooltip';
 import { abbreviateNumber } from '../../../../utils';
 import { Data } from './types';
+import { Strong, Text } from '../../../Text';
 
 export const composeQuery = pipe(
   toPairs,

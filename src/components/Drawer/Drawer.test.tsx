@@ -5,7 +5,7 @@ import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
-import { Paragraph } from '../typographyLegacy';
+import { Paragraph } from '../Paragraph';
 import { Inline, Stack } from '../layout';
 import { pxToRem } from '../../utils/helpers';
 

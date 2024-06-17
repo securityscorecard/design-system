@@ -4,7 +4,7 @@ import { Button } from '../../Button';
 import { CloseButton } from '../../CloseButton';
 import { Icon } from '../../Icon';
 import { Inline, Padbox, Stack } from '../../layout';
-import { Text } from '../../typographyLegacy';
+import { Text } from '../../Text';
 import { getHidableColumns } from '../columns.utils';
 import { DatatableInstance } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';

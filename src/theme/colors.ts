@@ -353,9 +353,9 @@ export const colors = {
     },
   },
   link: {
-    default: indigo.indigo9,
-    hover: indigo.indigo11,
-    active: indigo.indigo9,
+    default: indigo.indigo11,
+    hover: indigo.indigo12,
+    active: indigo.indigo11,
     visited: purple.purple11,
   },
   icon: {

@@ -10,7 +10,8 @@ import { generateControl } from '../../utils/tests/storybook';
 import { TabVariants } from './Tabs.enums';
 import { Icon } from '../Icon';
 import { Badge } from '../Badge';
-import { Heading, Paragraph } from '../typographyLegacy';
+import { Heading } from '../Heading';
+import { Paragraph } from '../Paragraph';
 
 export default {
   title: 'components/Tabs',

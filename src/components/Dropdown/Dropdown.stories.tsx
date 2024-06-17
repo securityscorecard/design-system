@@ -2,7 +2,6 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
-import { Link, Paragraph } from '../typographyLegacy';
 import { Inline, Stack } from '../layout';
 import { Button } from '../Button';
 import Dropdown from './Dropdown';
@@ -10,6 +9,8 @@ import { DropdownProps } from './Dropdown.types';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { CreatableSelect } from '../forms/Select';
+import { Paragraph } from '../Paragraph';
+import { Link } from '../Link';
 
 export default {
   title: 'components/Dropdown/Dropdown',

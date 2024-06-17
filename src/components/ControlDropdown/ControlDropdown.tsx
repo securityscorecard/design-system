@@ -7,7 +7,7 @@ import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
 import { CloseButton } from '../CloseButton';
-import { H4 } from '../typographyLegacy';
+import { H4 } from '../Heading';
 import { ControlDropdownProps } from './ControlDropdown.types';
 import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';

@@ -10,12 +10,13 @@ import { SpaceSizes } from '../../theme';
 import { getColor, getRadii, getSpace } from '../../utils';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { Inline, Padbox, Stack } from '../layout';
-import { Heading, Text } from '../typographyLegacy';
 import { Icon } from '../Icon';
 import { CardHeaderProps } from './Card.types';
 import { CardContainer } from './Card';
 import { Tooltip } from '../Tooltip';
 import { Color } from '../../theme/colors.types';
+import { Text } from '../Text';
+import { Heading } from '../Heading';
 
 export const CardIconButton = styled.button<{
   as?: string;
