@@ -21,6 +21,17 @@ export const RowOnClickEnabled: Story = Template.bind({});
 RowOnClickEnabled.args = {
   ...Template.args,
   onRowClick: ({ row, table }) => action('row action')({ row, table }),
+  enableRowActions: true,
+  rowActions: [
+    {
+      iconName: 'eye-slash',
+      label: 'Make private',
+      onClick:
+        ({ row, table }) =>
+        (event) =>
+          action('rowsAction button')({ row, table, event }),
+    },
+  ],
 };
 
 export const RowOnClickDisabled: Story = Template.bind({});
