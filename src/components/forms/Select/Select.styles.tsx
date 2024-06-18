@@ -451,6 +451,13 @@ const CreateNewOption = styled.div.attrs<{ variant: 'text'; color: 'primary' }>(
   }
 `;
 
+const StyledCheckbox = styled(Checkbox)`
+  & label {
+    /* the htmlFor attributes makes the label clickable which disrupts the row selection */
+    pointer-events: none;
+  }
+`;
+
 export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
   props,
 ) => {
@@ -482,7 +489,7 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
     <div>
       <components.Option {...props}>
         <Inline gap={SpaceSizes.sm}>
-          <Checkbox
+          <StyledCheckbox
             checkboxId={`select-${label}`}
             checked={isSelected}
             isDisabled={isDisabled}

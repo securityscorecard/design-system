@@ -45,6 +45,8 @@ const Mark = styled.svg`
 `;
 
 const CheckboxInput = styled.input<TogglingInputProps>`
+  height: ${getRemToggleSize};
+  width: ${getRemToggleSize};
   opacity: 0;
   position: absolute;
 
