@@ -10,7 +10,7 @@
   "devDependencies": {
     "reg-cli": "^0.17.7",
     "serve": "^13.0.0",
-    "start-server-and-test": "^1.14.0",
+    "start-server-and-test": "^2.0.0",
     "storycap": "^4.3.1"
   },
   "resolutions": {
