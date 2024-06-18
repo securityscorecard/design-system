@@ -3,9 +3,9 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import styled from 'styled-components';
 
 import { getRadii, getToken } from '../../../utils';
-import { Icon, Types as SSCIconTypes, SSCIcons } from '../../Icon';
+import { Icon, IconNames, RegularIconTypes } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
-import { Text } from '../../typographyLegacy';
+import { Text } from '../../Text';
 
 export const MenuContent = styled(DropdownMenu.Content)<{
   $isFullscreen: boolean;
@@ -18,15 +18,20 @@ export const MenuContent = styled(DropdownMenu.Content)<{
   z-index: ${({ $isFullscreen }) => ($isFullscreen ? 1000 : 2)};
 `;
 
-const MenuItemRoot = styled(DropdownMenu.Item)`
+const MenuItemRoot = styled(DropdownMenu.Item)<{ $isDestructive: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
   cursor: pointer;
 
   &:hover {
-    background: ${({ disabled, theme }) =>
+    background: ${({ disabled, $isDestructive, theme }) =>
       disabled
         ? 'transparent'
-        : getToken('color-action-background-primary-focus', { theme })};
+        : getToken(
+            $isDestructive
+              ? 'color-action-danger-focus'
+              : 'color-action-background-primary-focus',
+            { theme },
+          )};
     outline: none;
   }
 `;
@@ -35,27 +40,36 @@ export const MenuItem = ({
   children,
   onClick,
   isDisabled = false,
+  isDestructive = false,
   iconName,
   iconType,
   className,
 }: {
   children: string;
-  /* eslint-disable @typescript-eslint/ban-types */
-  iconName: SSCIcons | (string & {});
-  iconType?: SSCIconTypes | (string & {});
-  /* eslint-enable @typescript-eslint/ban-types */
+  iconName: IconNames;
+  iconType?: RegularIconTypes;
   onClick: (event: Event) => void;
   isDisabled?: boolean;
+  isDestructive?: boolean;
   className?: string;
 }) => (
-  <MenuItemRoot className={className} disabled={isDisabled} onSelect={onClick}>
+  <MenuItemRoot
+    $isDestructive={isDestructive}
+    className={className}
+    disabled={isDisabled}
+    onClick={(e) => {
+      e.stopPropagation();
+    }}
+    onSelect={onClick}
+  >
     <Padbox paddingSize="md" paddingType="squish">
       <Inline align="center" gap="md">
         <Icon
-          color="neutral.700"
+          color={isDestructive ? 'error.500' : 'neutral.700'}
           name={iconName}
+          size="sm"
           type={iconType}
-          hasFixedWidth
+          hasFixedSize
         />
         <Text>{children}</Text>
       </Inline>

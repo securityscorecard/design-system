@@ -6,7 +6,7 @@ import { CalloutContainerProps, CalloutProps } from './Callout.types';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
 import { Inline, Padbox } from '../layout';
-import { Text } from '../typographyLegacy';
+import { Text } from '../Text';
 import { Icon } from '../Icon';
 import { SSCIcons } from '../Icon/Icon.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';

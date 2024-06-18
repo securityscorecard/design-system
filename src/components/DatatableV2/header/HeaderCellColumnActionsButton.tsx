@@ -20,13 +20,14 @@ const HeaderCellColumnActionsButton = <D,>({
       <DropdownMenu.Trigger asChild>
         <IconButton
           className="ds-table-header-cell-column-actions-button"
-          iconName={
-            direction === 'desc'
-              ? 'sort-down'
-              : direction === 'asc'
-              ? 'sort-up'
-              : 'ellipsis-v'
-          }
+          iconProps={{
+            name:
+              direction === 'desc'
+                ? 'sort-down'
+                : direction === 'asc'
+                ? 'sort-up'
+                : 'ellipsis-v',
+          }}
           label="Column actions"
         />
       </DropdownMenu.Trigger>

@@ -1,43 +1,128 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { SignalProps } from './Signal.types';
-import { SignalKinds } from './Signal.enums';
 import Signal from './Signal';
-import { generateControl } from '../../utils/tests/storybook';
+import { Inline } from '../layout';
 
 export default {
   title: 'components/Signal',
   component: Signal,
-} as Meta;
+} as ComponentMeta<typeof Signal>;
 
-export const Playground: Story<SignalProps> = (args) => <Signal {...args} />;
-Playground.args = { kind: SignalKinds.high };
-Playground.argTypes = {
-  kind: { ...generateControl('select', SignalKinds) },
-};
+type Story = ComponentStory<typeof Signal>;
+
+export const Playground: Story = (args) => <Signal {...args} />;
+Playground.args = { variant: 'severity', kind: 'high', size: 32 };
 Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const SolidHexGrades: Story = () => (
-  <>
-    <Signal kind={SignalKinds.critical} size={32} />
-    <Signal kind={SignalKinds.high} size={32} />
-    <Signal kind={SignalKinds.medium} size={32} />
-    <Signal kind={SignalKinds.low} size={32} />
-    <Signal kind={SignalKinds.positive} size={32} />
-    <Signal kind={SignalKinds.negligible} size={32} />
-    <Signal kind={SignalKinds.info} size={32} />
-  </>
+export const Severity: Story = (args) => (
+  <Inline gap="sm">
+    <Signal {...args} kind="high" variant="severity" />
+    <Signal {...args} kind="medium" variant="severity" />
+    <Signal {...args} kind="low" variant="severity" />
+    <Signal {...args} kind="none" variant="severity" />
+    <Signal {...args} kind="info" variant="severity" />
+    <Signal {...args} kind="positive" variant="severity" />
+  </Inline>
 );
+Severity.args = {
+  variant: 'severity',
+  size: 32,
+};
+Severity.argTypes = {
+  kind: {
+    control: 'select',
+    options: ['high', 'medium', 'low', 'none', 'info', 'positive'],
+    table: {
+      type: {
+        summary: '"high"|"medium"|"low"|"none"|"info"|"positive"',
+      },
+    },
+  },
+};
+
+export const BreachRisk: Story = (args) => (
+  <Inline gap="sm">
+    <Signal {...args} kind="high" variant="breachRisk" />
+    <Signal {...args} kind="medium" variant="breachRisk" />
+    <Signal {...args} kind="low" variant="breachRisk" />
+    <Signal {...args} kind="none" variant="breachRisk" />
+  </Inline>
+);
+BreachRisk.args = {
+  variant: 'breachRisk',
+  size: 32,
+};
+BreachRisk.argTypes = {
+  kind: {
+    control: 'select',
+    options: ['high', 'medium', 'low', 'none'],
+    table: {
+      type: {
+        summary: '"high"|"medium"|"low"|"none"',
+      },
+    },
+  },
+};
+
+export const BusinessImpact: Story = (args) => (
+  <Inline gap="sm">
+    <Signal {...args} kind="critical" variant="businessImpact" />
+    <Signal {...args} kind="high" variant="businessImpact" />
+    <Signal {...args} kind="medium" variant="businessImpact" />
+    <Signal {...args} kind="low" variant="businessImpact" />
+    <Signal {...args} kind="none" variant="businessImpact" />
+  </Inline>
+);
+BusinessImpact.args = {
+  variant: 'businessImpact',
+  size: 32,
+};
+BusinessImpact.argTypes = {
+  kind: {
+    control: 'select',
+    options: ['critical', 'high', 'medium', 'low', 'none'],
+    table: {
+      type: {
+        summary: '"critical"|"high"|"medium"|"low"|"none"',
+      },
+    },
+  },
+};
+
+export const IncidentLikelihood: Story = (args) => (
+  <Inline gap="sm">
+    <Signal {...args} kind="critical" variant="incidentLikelihood" />
+    <Signal {...args} kind="high" variant="incidentLikelihood" />
+    <Signal {...args} kind="medium" variant="incidentLikelihood" />
+    <Signal {...args} kind="low" variant="incidentLikelihood" />
+    <Signal {...args} kind="none" variant="incidentLikelihood" />
+  </Inline>
+);
+IncidentLikelihood.args = {
+  variant: 'incidentLikelihood',
+  size: 32,
+};
+IncidentLikelihood.argTypes = {
+  kind: {
+    control: 'select',
+    options: ['critical', 'high', 'medium', 'low', 'none'],
+    table: {
+      type: {
+        summary: '"critical"|"high"|"medium"|"low"|"none"',
+      },
+    },
+  },
+};
 
 export const SizedSignals: Story = () => (
-  <>
-    <Signal kind={SignalKinds.high} size={16} />
-    <Signal kind={SignalKinds.medium} size={32} />
-    <Signal kind={SignalKinds.low} size={64} />
-    <Signal kind={SignalKinds.positive} size={96} />
-    <Signal kind={SignalKinds.negligible} size={128} />
-  </>
+  <Inline gap="sm">
+    <Signal kind="high" size={16} />
+    <Signal kind="medium" size={32} />
+    <Signal kind="low" size={64} />
+    <Signal kind="positive" size={96} />
+    <Signal kind="info" size={128} />
+  </Inline>
 );

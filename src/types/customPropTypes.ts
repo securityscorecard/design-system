@@ -4,7 +4,7 @@ import { isEmptyArray, isNotArray, isUndefined } from 'ramda-adjunct';
 import { TupleType, TypeChecker } from './customPropTypes.types';
 
 // Taken from https://stackoverflow.com/a/51165301/2216488
-function CustomPropTypeError(message: string) {
+export function CustomPropTypeError(message: string) {
   // eslint-disable-next-line fp/no-this
   this.message = message;
   // eslint-disable-next-line fp/no-this
@@ -12,7 +12,7 @@ function CustomPropTypeError(message: string) {
 }
 CustomPropTypeError.prototype = Error.prototype;
 
-function createChainableTypeChecker(validate) {
+export function createChainableTypeChecker(validate) {
   function checkType(
     isRequired,
     props,

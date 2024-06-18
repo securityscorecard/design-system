@@ -10,7 +10,8 @@ import { generateControl } from '../../utils/tests/storybook';
 import { TabVariants } from './Tabs.enums';
 import { Icon } from '../Icon';
 import { Badge } from '../Badge';
-import { Heading, Paragraph } from '../typographyLegacy';
+import { Heading } from '../Heading';
+import { Paragraph } from '../Paragraph';
 
 export default {
   title: 'components/Tabs',
@@ -64,23 +65,6 @@ Playground.parameters = {
 
 export const UnderlineTabs = TabsTemplate.bind({});
 UnderlineTabs.args = { ...Playground.args, variant: 'underline' };
-
-export const UnderlineTabsWithCustomColor: Story<TabsProps> = (args) => (
-  <Tabs {...args}>
-    <Tab color="error.700" value="overview">
-      Overview
-    </Tab>
-    <Tab value="inventory">
-      <Inline align="center" gap="sm">
-        <Icon color="primary.500" name="sitemap" style={{ fontSize: '1rem' }} />
-        <span>Inventory</span>
-        <Badge count={3} variant="neutral" />
-      </Inline>
-    </Tab>
-    <Tab value="Profile">Profile</Tab>
-  </Tabs>
-);
-UnderlineTabsWithCustomColor.args = Playground.args;
 
 export const TextTabs = TabsTemplate.bind({});
 TextTabs.args = { ...Playground.args, variant: 'text' };

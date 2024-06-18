@@ -1,80 +1,166 @@
+import {
+  amber,
+  blackA,
+  blue,
+  brown,
+  cyan,
+  green,
+  indigo,
+  iris,
+  lime,
+  mauve,
+  orange,
+  pink,
+  purple,
+  slate,
+  slateA,
+  teal,
+  tomato,
+  whiteA,
+} from '@radix-ui/colors';
+
+const severityScale = {
+  green: {
+    10: '#E9F7EE',
+    20: '#BDE6CC',
+    30: '#94D6AE',
+    40: '#4BBA76',
+    50: '#3A975E',
+  },
+  yellow: {
+    10: '#FFF4E5',
+    20: '#FFE2B8',
+    30: '#FFCE85',
+    40: '#FFB147',
+    50: '#F58D00',
+  },
+  orange: {
+    10: '#FFF0EB',
+    20: '#FECEBE',
+    30: '#FCA88C',
+    40: '#FB7A4F',
+    50: '#E03C05',
+  },
+  red: {
+    10: '#FDDDE1',
+    20: '#F99AA4',
+    30: '#F66979',
+    40: '#F32E43',
+    50: '#CB0C20',
+  },
+  deepred: {
+    10: '#FCDEE7',
+    20: '#F69DB8',
+    30: '#ED4074',
+    40: '#B81143',
+    50: '#9F0F3A',
+  },
+};
+
 const primary = {
-  50: '#E7F0FF',
-  100: '#D3E4FF',
-  200: '#B4D0FF',
-  300: '#81B0FF',
-  400: '#3E85FA',
-  500: '#1163EA',
-  600: '#014FCF',
-  700: '#003B9D',
-  800: '#002B72',
-  900: '#001A45',
+  50: indigo.indigo3,
+  100: indigo.indigo5,
+  200: indigo.indigo6,
+  300: indigo.indigo7,
+  400: indigo.indigo8,
+  500: indigo.indigo9,
+  600: indigo.indigo9,
+  700: indigo.indigo10,
+  800: indigo.indigo11,
+  900: indigo.indigo12,
 };
 
 const neutral = {
-  0: '#fff',
-  50: '#fcfcfc',
-  100: '#f9f9f9',
-  200: '#f3f3f3',
-  300: '#e8e8e8',
-  400: '#d8d8d8',
-  500: '#a8a8a8',
-  600: '#888888',
-  700: '#686868',
-  800: '#555555',
-  900: '#2a2a2a',
-  1000: '#000',
+  50: slate.slate1,
+  100: slate.slate2,
+  200: slate.slate3,
+  300: slate.slate4,
+  400: slate.slate7,
+  500: slate.slate8,
+  600: slate.slate9,
+  700: slate.slate10,
+  800: slate.slate11,
+  900: slate.slate12,
+  1000: '#000000',
+
+  /* new tokens */
+  0: '#ffffff',
+  1: slate.slate1,
+  2: slate.slate2,
+  3: slate.slate3,
+  4: slate.slate4,
+  5: slate.slate5,
+  6: slate.slate6,
+  7: slate.slate7,
+  8: slate.slate8,
+  9: slate.slate9,
+  10: slate.slate10,
+  11: slate.slate11,
+  12: slate.slate12,
+  13: '#000000',
 };
 
 const info = {
-  50: '#E7F0FF',
-  100: '#D3E4FF',
-  200: '#B4D0FF',
-  300: '#81B0FF',
-  400: '#3E85FA',
-  500: '#1163EA',
-  600: '#014FCF',
-  700: '#003B9D',
-  800: '#002B72',
-  900: '#001A45',
+  50: indigo.indigo2,
+  100: indigo.indigo4,
+  400: indigo.indigo8,
+  500: indigo.indigo10,
+  600: indigo.indigo11,
+  700: indigo.indigo11,
+  800: indigo.indigo11,
+  900: indigo.indigo12,
 };
 
 const success = {
-  50: '#edf6ef',
-  100: '#d3e9d7',
-  500: '#49a25a',
-  600: '#3e8a4d',
-  700: '#347340',
-  800: '#1B5125',
-  900: '#0C3614',
+  50: green.green2,
+  100: green.green4,
+  400: green.green8,
+  500: green.green10,
+  600: green.green11,
+  700: green.green11,
+  800: green.green11,
+  900: green.green12,
 };
 
 const warning = {
-  50: '#faf4e1',
-  100: '#f4e5af',
-  500: '#e1c048',
-  600: '#c1a337',
-  700: '#9f8321',
-  800: '#80670D',
-  900: '#5B4908 ',
+  50: amber.amber2,
+  100: amber.amber4,
+  400: amber.amber8,
+  500: amber.amber10,
+  600: amber.amber11,
+  700: amber.amber11,
+  800: amber.amber11,
+  900: amber.amber12,
 };
 
 const error = {
-  50: '#f7e9e9',
-  100: '#edc9ca',
-  500: '#b21f24',
-  600: '#971a1f',
-  700: '#7e161a',
-  800: '#620408',
-  900: '#3E0002',
+  50: tomato.tomato2,
+  100: tomato.tomato4,
+  400: tomato.tomato8,
+  500: tomato.tomato11,
+  600: tomato.tomato11,
+  700: tomato.tomato11,
+  800: tomato.tomato11,
+  900: tomato.tomato12,
+};
+
+const danger = {
+  50: tomato.tomato2,
+  100: tomato.tomato4,
+  400: tomato.tomato8,
+  500: tomato.tomato11,
+  600: tomato.tomato11,
+  700: tomato.tomato11,
+  800: tomato.tomato11,
+  900: tomato.tomato12,
 };
 
 const grade = {
-  A: '#4BBA76',
-  B: '#FFB147',
-  C: '#FB7A4F',
-  D: '#F32E43',
-  F: '#B81143',
+  A: severityScale.green[40],
+  B: severityScale.yellow[40],
+  C: severityScale.orange[40],
+  D: severityScale.red[40],
+  F: severityScale.deepred[40],
 };
 
 const brand = {
@@ -90,34 +176,196 @@ const brand = {
   900: '#1b0471',
 };
 
-const brandSecondary = {
-  500: '#E1C048',
-} as const;
-
 const severity = {
-  informational: '#5580D7',
-  positive: '#4BBA76',
-  low: '#FFB147',
-  medium: '#FB7A4F',
-  high: '#F32E43',
+  informational: info[600],
+  positive: severityScale.green[40],
+  low: severityScale.yellow[40],
+  medium: severityScale.orange[40],
+  high: severityScale.red[40],
+  critical: severityScale.deepred[40],
+};
+
+const impact = '#5c33ea';
+const likelihood = {
+  low: '#f4907b',
+  medium: '#f36756',
+  high: '#eb2f40',
 };
 
 export const colors = {
+  amber,
+  blue,
+  cyan,
+  green,
+  indigo,
+  iris,
+  lime,
+  mauve,
+  orange,
+  pink,
+  slate,
+  slateA,
+  tomato,
+  whiteA,
   primary,
   neutral,
   info,
   success,
   warning,
   error,
+  danger,
   grade,
   brand,
-  brandSecondary,
   severity,
+  impact,
+  likelihood,
   text: {
     primary: neutral[900],
-    secondary: neutral[700],
+    secondary: neutral[800],
     context: neutral[600],
-    danger: error[500],
     inverted: neutral[0],
+
+    /* new tokens */
+    default: neutral[12],
+    subtle: neutral[11],
+    disabled: neutral[9],
+    inverse: neutral[0],
+    white: '#fff',
+    danger: danger[700],
+    warning: warning[700],
+    success: success[700],
+  },
+
+  /* new tokens */
+  background: {
+    body: neutral[2],
+    overlay: slateA.slateA10,
+    surface: {
+      default: neutral[0],
+      dynamic: {
+        default: 'rgba(0 0 0/2.5%)',
+        inverse: whiteA.whiteA2,
+      },
+      none: 'transparent',
+    },
+    input: {
+      default: neutral[0],
+      hover: neutral[0],
+      focused: neutral[0],
+      disabled: neutral[4],
+      error: neutral[0],
+    },
+    action: {
+      main: {
+        default: indigo.indigo12,
+        hover: indigo.indigo11,
+        active: indigo.indigo12,
+        disabled: neutral[4],
+      },
+      subtle: {
+        default: 'transparent',
+        hover: neutral[3],
+        active: 'transparent',
+        disabled: neutral[4],
+      },
+      danger: {
+        default: tomato.tomato10,
+        hover: tomato.tomato11,
+        active: tomato.tomato10,
+        disabled: neutral[4],
+      },
+      highlight: {
+        default: indigo.indigo9,
+        hover: indigo.indigo11,
+        active: indigo.indigo9,
+        disabled: neutral[4],
+      },
+      pill: {
+        blue: {
+          default: blue.blue4,
+          hover: blue.blue5,
+        },
+        cyan: {
+          default: cyan.cyan4,
+          hover: cyan.cyan5,
+        },
+        teal: {
+          default: teal.teal4,
+          hover: teal.teal5,
+        },
+        green: {
+          default: green.green4,
+          hover: green.green5,
+        },
+        amber: {
+          default: amber.amber4,
+          hover: amber.amber5,
+        },
+        orange: {
+          default: orange.orange4,
+          hover: orange.orange5,
+        },
+        tomato: {
+          default: tomato.tomato4,
+          hover: tomato.tomato5,
+        },
+        pink: {
+          default: pink.pink4,
+          hover: pink.pink5,
+        },
+        purple: {
+          default: purple.purple4,
+          hover: purple.purple5,
+        },
+        brown: {
+          default: brown.brown4,
+          hover: brown.brown5,
+        },
+        gray: {
+          default: neutral[4],
+          hover: neutral[5],
+        },
+      },
+    },
+  },
+  border: {
+    default: neutral[4],
+    info: indigo.indigo8,
+    success: green.green8,
+    warning: amber.amber8,
+    danger: tomato.tomato8,
+    surface: {
+      default: blackA.blackA3,
+      inverse: whiteA.whiteA3,
+      none: 'transparent',
+    },
+    input: {
+      default: neutral[8],
+      hover: neutral[8],
+      focused: indigo.indigo9,
+      disabled: neutral[8],
+      error: danger[500],
+    },
+    action: {
+      focused: indigo.indigo9,
+      danger: neutral[8],
+      subtle: neutral[7],
+    },
+  },
+  link: {
+    default: indigo.indigo11,
+    hover: indigo.indigo12,
+    active: indigo.indigo11,
+    visited: purple.purple11,
+  },
+  icon: {
+    default: neutral[12],
+    subtle: neutral[11],
+    disabled: neutral[9],
+    inverse: neutral[0],
+    white: '#fff',
+    danger: danger[700],
+    warning: warning[700],
+    success: success[700],
   },
 };

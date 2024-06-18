@@ -17,8 +17,8 @@ import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 import { Inline, Padbox, Stack } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
-import { Text as BaseText } from '../typographyLegacy';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { Text as BaseText } from '../Text';
+import { TextSizes } from '../Text/Text.enums';
 import { SpaceSizes } from '../../theme';
 import { getColor, getLineHeight, getRadii } from '../../utils';
 import { CloseButton } from '../CloseButton';
@@ -36,10 +36,18 @@ const iconPxSizesVariants = {
   [BannerVariants.success]: 16,
 };
 
+const bannerBorderColor = {
+  [BannerVariants.info]: 'info.400',
+  [BannerVariants.warn]: 'warning.400',
+  [BannerVariants.error]: 'error.400',
+  [BannerVariants.success]: 'success.400',
+};
+
 const StyledPadbox = styled(Padbox)<{ $variant?: BannerProps['variant'] }>`
   background-color: ${({ $variant }) =>
     getColor(baseToastBannerColorVariants[$variant])};
-  border-radius: ${getRadii('default')};
+  border-radius: ${getRadii('double')};
+  border: 1px solid ${({ $variant }) => getColor(bannerBorderColor[$variant])};
 `;
 
 const StyledButton = styled(Button)<{ $variant?: BannerProps['variant'] }>`

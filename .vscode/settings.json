@@ -3,9 +3,13 @@
     "**/.yarn": true,
     "**/build": true
   },
-  "sonarlint.connectedMode.project": {
-    "connectionId": "https://sonarqube.prod-eks.ssc.band",
-    "projectKey": "securityscorecard_design-system_3c8a3f7f-942f-4414-a39a-f4b4f20c2f3f"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cssvar.postcssSyntax": {
+    "postcss-syntax": ["jsx", "tsx"]
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "cssvar.themes": [
+    "dark",
+    "dark-theme",
+  ],
+  "cssvar.excludeThemedVariables": true
 }

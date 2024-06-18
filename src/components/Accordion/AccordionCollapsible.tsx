@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
-import { Text } from '../typographyLegacy';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { TextSizes } from '../Text/Text.enums';
 import {
   AccordionCollapsibleProps,
   AccordionItemId,
@@ -14,10 +13,11 @@ import {
 } from './Accordion.types';
 import { Inline, Padbox } from '../layout';
 import { SpaceSizes } from '../../theme';
+import { Text } from '../Text';
 
 const Header = styled(Padbox)`
   cursor: pointer;
-  border-bottom: 1px solid ${getColor('neutral.400')};
+  border-bottom: 1px solid ${getColor('neutral.300')};
   display: flex;
   align-items: center;
   flex: 1;

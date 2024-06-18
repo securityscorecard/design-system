@@ -26,7 +26,7 @@ export const BaseTableContainer = styled.div`
 
   &::-webkit-scrollbar {
     box-sizing: content-box;
-    outline: 1px solid ${getColor('neutral.400')};
+    outline: 1px solid ${getColor('neutral.300')};
     height: ${pxToRem(20)};
   }
   &::-webkit-scrollbar-thumb {
@@ -101,7 +101,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     }
 
     &.is-odd {
-      background: #fcfcfc;
+      background: ${getColor('neutral.50')};
     }
     .ds-table-cell-link {
       ${DsLinkCell};

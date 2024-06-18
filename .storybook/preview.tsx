@@ -15,7 +15,11 @@ import { colors } from '../src/theme/colors';
 import { StoriesWithDesign } from './blocks/StoriesWithDesign';
 import { Badges } from './storybook.enums';
 
-import '@fontsource/inter';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '../src/tokens/tokens.css';
 
 export const parameters = {
   backgrounds: {
@@ -34,10 +38,12 @@ export const parameters = {
         'Changelog',
         'Theme',
         ['createIconLibrary()', 'DSProvider', 'DSThemeOverride', 'Colors', 'Space', 'Typography'],
+        'Iconography',
         'Helpers',
         'layout',
+        'typography',
         'components',
-        ['typography', 'forms', 'modals'],
+        ['forms', 'modals'],
         'managers',
         'Hooks',
         'Code examples',

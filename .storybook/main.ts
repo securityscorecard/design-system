@@ -14,6 +14,30 @@ const config: StorybookConfig = {
     'storybook-addon-designs',
     'storybook-addon-outline',
     '@geometricpanda/storybook-addon-badges',
+    {
+      name: '@storybook/addon-styling-webpack',
+      options: {
+        rules: [
+          // Replaces existing CSS rules to support PostCSS
+          {
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: { importLoaders: 1 }
+              },
+              {
+                // Gets options from `postcss.config.js` in your project root
+                loader: 'postcss-loader',
+                options: { postcssOptions: {plugins: [require('postcss-import')],} }
+              }
+            ],
+          }
+        ]
+      }
+    }
+
   ],
   features: {
     postcss: false,

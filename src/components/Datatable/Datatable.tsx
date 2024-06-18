@@ -27,7 +27,7 @@ const StyledDatatable = styled(Padbox)`
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid ${getColor('neutral.400')};
+  border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('double')};
   background: ${getColor('neutral.0')};
 `;

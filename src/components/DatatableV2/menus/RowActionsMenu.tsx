@@ -32,21 +32,41 @@ const RowActionsMenu = <D,>({
             // eslint-disable-next-line react/no-array-index-key
             return <MenuSeparator key={`row-actions-separator-${i}`} />;
           }
-          const { iconName, iconType, label, onClick, isDisabled } = action;
+          const {
+            iconName,
+            iconType,
+            label,
+            onClick,
+            isDisabled,
+            isDestructive,
+          } = action;
+
+          const resolvedLabel =
+            typeof label === 'function' ? label({ row, table }) : label;
+          const resolvedIconName =
+            typeof iconName === 'function'
+              ? iconName({ row, table })
+              : iconName;
+          const resolvedIconType =
+            typeof iconType === 'function'
+              ? iconType({ row, table })
+              : iconType;
+          const resolvedIsDisabled =
+            typeof isDisabled === 'function'
+              ? isDisabled({ row, table })
+              : isDisabled;
+
           return (
             <MenuItem
-              key={`row-actions-${label}`}
+              key={`row-actions-${resolvedLabel}`}
               className="ds-table-row-actions-menu-item"
-              iconName={iconName}
-              iconType={iconType}
-              isDisabled={
-                typeof isDisabled === 'function'
-                  ? isDisabled({ row, table })
-                  : isDisabled
-              }
+              iconName={resolvedIconName}
+              iconType={resolvedIconType}
+              isDestructive={isDestructive}
+              isDisabled={resolvedIsDisabled}
               onClick={onClick({ row, table })}
             >
-              {label}
+              {resolvedLabel}
             </MenuItem>
           );
         })}

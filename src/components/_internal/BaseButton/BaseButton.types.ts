@@ -3,7 +3,7 @@ import type { To } from 'history';
 import { DefaultTheme } from 'styled-components';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
-import { Types as IconTypes, SSCIcons } from '../../Icon/Icon.types';
+import type { IconNames, RegularIconTypes } from '../../Icon/Icon.types';
 import {
   BaseButtonColors,
   BaseButtonSizes,
@@ -17,9 +17,8 @@ export type Sizes = (typeof BaseButtonSizes)[keyof typeof BaseButtonSizes];
 export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
 
 export interface BaseIcon {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  name: SSCIcons | (string & {});
-  type?: IconTypes;
+  name: IconNames;
+  type?: RegularIconTypes;
 }
 
 export interface BaseButtonProps
@@ -38,9 +37,9 @@ export interface BaseButtonProps
   iconStart?: BaseIcon;
   iconEnd?: BaseIcon;
   /** @deprecated Use iconStart property instead */
-  iconName?: SSCIcons | string;
+  iconName?: IconNames;
   /** @deprecated Use iconStart property instead */
-  iconType?: IconTypes | string;
+  iconType?: RegularIconTypes;
   loadingText?: string;
   tabIndex?: number;
 }

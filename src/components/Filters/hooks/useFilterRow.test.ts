@@ -5,6 +5,15 @@ import { mockTestFields } from '../mocks/options';
 import { useFilterRow } from './useFilterRow';
 
 describe('useFilterRow', () => {
+  let loggerSpy;
+  beforeAll(() => {
+    loggerSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => jest.fn());
+  });
+  afterAll(() => {
+    loggerSpy.mockRestore();
+  });
   it('should return filter row configuration when field and condition are found', () => {
     const { result } = renderHook(() =>
       useFilterRow(mockTestFields, 'option a', 'is'),

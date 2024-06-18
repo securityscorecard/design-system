@@ -44,7 +44,7 @@ const NoDataContainer = styled(Padbox)`
 `;
 
 const TableWrapper = styled.div`
-  border: 1px solid ${getColor('neutral.400')};
+  border: 1px solid ${getColor('neutral.300')};
   border-top-width: 0;
   background: ${getColor('neutral.0')};
   border-radius: ${getRadii('default')};

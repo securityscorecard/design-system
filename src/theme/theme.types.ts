@@ -1,5 +1,4 @@
 import { colors } from './colors';
-import { createButtons } from './buttons';
 import { createDepths } from './depths';
 import { createForms } from './forms';
 import { createLayout } from './layout';
@@ -11,7 +10,6 @@ import { createTokens } from './tokens';
 export interface Theme {
   colors: typeof colors;
   typography: ReturnType<typeof createTypography>;
-  buttons: ReturnType<typeof createButtons>;
   forms: ReturnType<typeof createForms>;
   layout: ReturnType<typeof createLayout>;
   depths: ReturnType<typeof createDepths>;

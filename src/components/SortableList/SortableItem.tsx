@@ -5,15 +5,15 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import { getColor, getRadii, getSpace, pxToRem } from '../../utils';
-import { Text } from '../typographyLegacy';
-import { TextSizes } from '../typographyLegacy/Text/Text.enums';
+import { Text } from '../Text';
+import { TextSizes } from '../Text/Text.enums';
 import { SortableItemProps } from './SortableList.types';
 import { SpaceSizes } from '../../theme';
 import { Inline, Padbox } from '../layout';
 
 const StyledSortableItem = styled(Padbox)`
   background: ${getColor('neutral.0')};
-  border: 1px solid ${getColor('neutral.500')};
+  border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};
 
   list-style-type: none;

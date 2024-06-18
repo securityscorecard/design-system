@@ -14,7 +14,7 @@ import { simpleColumns } from '../_internal/BaseTable/mocks/columns';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { tableActionsMock } from './mocks/actions';
-import { Text } from '../typographyLegacy';
+import { Text } from '../Text';
 import { Stack } from '../layout';
 
 MockDate.set('2021-03-31T00:00:00Z');

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { setLightness } from 'polished';
 import { __, includes, pipe, subtract } from 'ramda';
 
 import {
@@ -19,19 +18,12 @@ const underlineTab = css<BaseLabelProps>`
   line-height: 1.5rem;
   color: ${getColor('neutral.900')};
   border-bottom: 2px solid
-    ${({ $isSelected, $color }) =>
-      $isSelected
-        ? $color
-          ? getColor($color)
-          : getToken('color-action-primary')
-        : getColor('neutral.400')};
+    ${({ $isSelected }) =>
+      $isSelected ? getToken('color-action-primary') : getColor('neutral.300')};
 
   &:hover {
     color: ${getColor('neutral.900')};
-    border-bottom-color: ${({ $color, theme }) =>
-      $color
-        ? setLightness(0.85, getColor($color, { theme }))
-        : getToken('color-action-primary-focus')};
+    border-bottom-color: ${getToken('color-action-primary-focus')};
   }
 `;
 
@@ -85,7 +77,7 @@ const tabVariants = {
 
 const BaseTabLabel = styled(Padbox).withConfig({
   shouldForwardProp: (property) =>
-    !includes(property, ['paddingType', 'paddingSize']),
+    !includes(property, ['paddingType', 'paddingSize', 'theme']),
 })<BaseLabelProps>`
   display: flex;
   align-items: center;

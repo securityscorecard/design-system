@@ -1,5 +1,5 @@
 import { colors as themeColors } from './colors';
-import type { Typography } from './typography.types';
+import { createTypography } from './typography';
 
 /**
  * naming:
@@ -17,7 +17,7 @@ import type { Typography } from './typography.types';
 
 export const createTokens = (
   colors: typeof themeColors,
-  typography: Typography,
+  typography: ReturnType<typeof createTypography>,
 ) => ({
   'action-focus-ring': `2px solid ${colors.primary[600]}`,
   'action-focus-ring-offset': '1px',

@@ -24,8 +24,8 @@ import {
 import { isArray, isNotUndefined, isNull, isUndefined } from 'ramda-adjunct';
 
 import { Inline } from '../../layout';
-import { Text } from '../../typographyLegacy';
-import { TextSizes } from '../../typographyLegacy/Text/Text.enums';
+import { Text } from '../../Text';
+import { TextSizes } from '../../Text/Text.enums';
 import { StateButton } from '../StateButton';
 import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';

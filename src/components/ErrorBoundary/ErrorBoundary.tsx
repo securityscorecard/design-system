@@ -4,8 +4,10 @@ import { partialRight, pipe, prop } from 'ramda';
 
 import { ErrorBoundaryProps } from './ErrorBoundary.types';
 import { Inline, Stack } from '../layout';
-import { Link, Text } from '../typographyLegacy';
 import { pxToRem } from '../../utils';
+import { useLogger } from '../../hooks/useLogger';
+import { Text } from '../Text';
+import { Link } from '../Link';
 
 const IllustrationContainerSizes = {
   sm: 24,
@@ -24,8 +26,8 @@ const IllustrationContainer = styled.div<{ size: string }>`
   height: ${getIllustrationSize};
 `;
 
-const DEFAULT_TITLE = 'We cannot show this information now';
-const DEFAULT_CONTENT = 'If the problem persists, contact support.';
+export const DEFAULT_TITLE = 'We cannot show this information now';
+export const DEFAULT_CONTENT = 'If the problem persists, contact support.';
 
 const ExtraSmallErrorBoundary = ({
   content = 'Failed to load.',
@@ -92,7 +94,18 @@ const ComponentSizeMap = {
 
 const ErrorBoundary = (props: ErrorBoundaryProps) => {
   const { size } = props;
+  const { error } = useLogger('ErrorBoundary');
   const Component = ComponentSizeMap[size];
+
+  if (typeof Component === 'undefined') {
+    error(
+      `Wrong size (${size}) was provided to ErrorBoundary component. Valid values are ${Object.keys(
+        ComponentSizeMap,
+      )}`,
+    );
+    return null;
+  }
+
   return <Component {...props} />;
 };
 

@@ -4,10 +4,12 @@ import styled from 'styled-components';
 
 import HintTooltip from './HintTooltip';
 import { HintTooltipProps } from './HintTooltip.types';
-import { Link, Paragraph, Text } from '../typographyLegacy';
 import { Inline, Padbox, Stack } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { getColor } from '../../utils';
+import { Paragraph } from '../Paragraph';
+import { Link } from '../Link';
+import { Text } from '../Text';
 
 export default {
   title: 'components/HintTooltip',

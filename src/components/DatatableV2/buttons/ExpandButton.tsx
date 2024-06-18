@@ -20,13 +20,16 @@ const ExpandButton = <D,>({
 
   return (
     <IconButton
-      iconName="angle-right"
       iconProps={{
+        name: 'angle-right',
         rotation: isExpanded ? 90 : undefined,
       }}
       isDisabled={!canExpand && !renderDetailPanel}
       label={isExpanded ? 'Collapse row' : 'Expand row'}
-      onClick={() => toggleExpanded()}
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleExpanded();
+      }}
     />
   );
 };

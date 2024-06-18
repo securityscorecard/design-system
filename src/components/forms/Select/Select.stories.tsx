@@ -5,9 +5,10 @@ import { action } from '@storybook/addon-actions';
 import Select from './Select';
 import { Option, SelectProps } from './Select.types';
 import { Inline, Stack } from '../../layout';
-import { Heading, Text } from '../../typographyLegacy';
 import { Pill } from '../../Pill';
 import { PillColors } from '../../Pill/Pill.enums';
+import { Heading } from '../../Heading';
+import { Text } from '../../Text';
 
 const options = [
   { value: 'HR', label: 'Croatia', isDisabled: true },

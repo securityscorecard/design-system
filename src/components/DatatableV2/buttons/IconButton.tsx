@@ -1,20 +1,18 @@
 import React, { ComponentProps, forwardRef, memo } from 'react';
 import styled from 'styled-components';
 
-import { getColor, getRadii } from '../../../utils';
-import { Icon, SSCIcons } from '../../Icon';
+import { getColor, getRadii, getToken } from '../../../utils';
+import { Icon, IconProps } from '../../Icon';
 import { Padbox } from '../../layout';
 
 interface IconButtonProps extends Omit<ComponentProps<'button'>, 'disabled'> {
   label: string;
-  /* eslint-disable @typescript-eslint/ban-types */
-  iconName: SSCIcons | (string & {});
-  /* eslint-enable @typescript-eslint/ban-types */
-  iconProps?: Partial<ComponentProps<typeof Icon>>;
+  iconProps: IconProps;
   isDisabled?: boolean;
+  isDestructive?: boolean;
 }
 
-const IconButtonRoot = styled(Padbox)`
+const IconButtonRoot = styled(Padbox)<{ $isDestructive: boolean }>`
   width: 1rem;
   height: 1rem;
   box-sizing: content-box;
@@ -23,7 +21,10 @@ const IconButtonRoot = styled(Padbox)`
   justify-content: center;
 
   cursor: pointer;
-  color: ${getColor('neutral.500')};
+  color: ${({ $isDestructive, theme }) =>
+    $isDestructive
+      ? getToken('color-action-danger', { theme })
+      : getColor('neutral.500', { theme })};
   border-radius: ${getRadii('round')};
   transition: var(--sscds-action-transition);
 
@@ -32,21 +33,34 @@ const IconButtonRoot = styled(Padbox)`
     opacity: 0.6;
   }
   &:not(:disabled):hover {
-    background: ${getColor('primary.50')};
-    color: ${getColor('text.primary')};
+    background: ${({ $isDestructive, theme }) =>
+      $isDestructive
+        ? getToken('color-action-danger-focus', { theme })
+        : getColor('primary.50', { theme })};
+    color: ${({ $isDestructive, theme }) =>
+      $isDestructive
+        ? getToken('color-action-danger-hover', { theme })
+        : getColor('text.primary', { theme })};
   }
   &:not(:disabled):active,
   &:not(:disabled)[data-state='open'] {
-    background: ${getColor('primary.200')};
-    color: ${getColor('text.primary')};
+    background: ${({ $isDestructive, theme }) =>
+      $isDestructive
+        ? getToken('color-action-danger-focus', { theme })
+        : getColor('primary.200', { theme })};
+    color: ${({ $isDestructive, theme }) =>
+      $isDestructive
+        ? getToken('color-action-danger-active', { theme })
+        : getColor('text.primary', { theme })};
   }
 `;
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ iconName, label, iconProps, isDisabled, ...props }, ref) => {
+  ({ label, iconProps, isDisabled, isDestructive = false, ...props }, ref) => {
     return (
       <IconButtonRoot
         ref={ref}
+        $isDestructive={isDestructive}
         aria-label={label}
         as="button"
         disabled={isDisabled}
@@ -55,7 +69,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         type="button"
         {...props}
       >
-        <Icon name={iconName} {...iconProps} />
+        <Icon size="sm" hasFixedSize {...iconProps} />
       </IconButtonRoot>
     );
   },

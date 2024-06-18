@@ -6,13 +6,13 @@ import cls from 'classnames';
 
 import { SpaceSizes } from '../../theme/space.enums';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { getColor, getFormStyle, getRadii, pxToRem } from '../../utils';
 import { Cluster, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { Button } from '../Button';
 import { ButtonVariants } from '../Button/Button.enums';
-import { Text } from '../typographyLegacy';
-import { TextSizes, TextVariants } from '../typographyLegacy/Text/Text.enums';
+import { Text } from '../Text';
+import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { FileSelectorProps } from './FileSelector.types';
 import { FileSelectorSizes } from './FileSelector.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -21,7 +21,7 @@ import { useLogger } from '../../hooks/useLogger';
 const ExtendableButton = styled(Button)``;
 const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
   background-color: ${getColor('neutral.0')};
-  border: 1px dashed ${getColor('neutral.500')};
+  border: 1px dashed ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
 
   ${({ $size, $width, $height }) => {
@@ -53,7 +53,8 @@ const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
   ${({ $isDisabled }) =>
     $isDisabled &&
     css`
-      background: ${getColor('neutral.300')};
+      background: ${getFormStyle('disabledBgColor')};
+      border-color: ${getFormStyle('disabledBorderColor')};
 
       ${ExtendableButton} {
         border-color: ${getColor('neutral.500')};

@@ -1,4 +1,4 @@
-import { SpaceSizes } from './space.enums';
+import { createSpace } from './space';
 
-export type SpaceSize = (typeof SpaceSizes)[keyof typeof SpaceSizes];
+export type SpaceSize = keyof ReturnType<typeof createSpace>;
 export type Space = Record<SpaceSize, number>;

@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Padbox, Stack, Surface } from '../../layout';
-import { Paragraph, Text } from '../../typographyLegacy';
+import { Paragraph } from '../../Paragraph';
+import { Text } from '../../Text';
 import { DatatableInstance } from '../Datatable.types';
 import BodyRow from './BodyRow';
 
@@ -24,7 +25,7 @@ const Body = <D,>({ table }: { table: DatatableInstance<D> }) => {
       {!rows.length ? (
         <tr style={{ display: 'flex' }}>
           <td colSpan={getVisibleLeafColumns().length} style={{ flex: 1 }}>
-            <Surface background="dynamic" radius="none">
+            <Surface background="white" radius="none">
               <Padbox paddingSize="xl">
                 {renderNoDataFallback?.({ table }) ?? (
                   <Stack gap="sm">

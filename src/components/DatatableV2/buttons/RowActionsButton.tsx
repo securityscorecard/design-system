@@ -22,7 +22,7 @@ const RowActionsButton = <D,>({
         <DropdownMenu.Trigger asChild>
           <IconButton
             className="ds-table-header-cell-row-actions-button"
-            iconName="ellipsis-h"
+            iconProps={{ name: 'ellipsis-h' }}
             label="Row actions"
           />
         </DropdownMenu.Trigger>
@@ -32,19 +32,31 @@ const RowActionsButton = <D,>({
   }
 
   if (rowActions.length === 1) {
-    const { label, iconName, onClick, isDisabled, iconType } = rowActions[0];
+    const { label, iconName, iconType, onClick, isDisabled, isDestructive } =
+      rowActions[0];
+
+    const resolvedLabel =
+      typeof label === 'function' ? label({ row, table }) : label;
+    const resolvedIconName =
+      typeof iconName === 'function' ? iconName({ row, table }) : iconName;
+    const resolvedIconType =
+      typeof iconType === 'function' ? iconType({ row, table }) : iconType;
+    const resolvedIsDisabled =
+      typeof isDisabled === 'function'
+        ? isDisabled({ row, table })
+        : isDisabled;
+
     return (
       <IconButton
         className="ds-table-header-cell-row-actions-button"
-        iconName={iconName}
-        iconProps={{ type: iconType }}
-        isDisabled={
-          typeof isDisabled === 'function'
-            ? isDisabled({ row, table })
-            : isDisabled
-        }
-        label={label}
-        onClick={(e) => onClick({ row, table })(e as unknown as MouseEvent)}
+        iconProps={{ name: resolvedIconName, type: resolvedIconType }}
+        isDestructive={isDestructive}
+        isDisabled={resolvedIsDisabled}
+        label={resolvedLabel}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick({ row, table })(e as unknown as MouseEvent);
+        }}
       />
     );
   }
