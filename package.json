@@ -190,7 +190,8 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "@emotion/react": "11.7.1",
-    "postcss": "^8.4.38"
+    "postcss": "^8.4.38",
+    "braces": "^3.0.3"
   },
   "repository": {
     "type": "git",
