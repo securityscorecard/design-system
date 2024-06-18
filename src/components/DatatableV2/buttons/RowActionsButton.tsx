@@ -53,7 +53,10 @@ const RowActionsButton = <D,>({
         isDestructive={isDestructive}
         isDisabled={resolvedIsDisabled}
         label={resolvedLabel}
-        onClick={(e) => onClick({ row, table })(e as unknown as MouseEvent)}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick({ row, table })(e as unknown as MouseEvent);
+        }}
       />
     );
   }
