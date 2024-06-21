@@ -208,10 +208,83 @@ describe('DatatableV2/columnSettingsPanel', () => {
     expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('color');
 
     await userEvent.click(
-      screen.getByRole('button', {
+      screen.getByRole('checkbox', {
+        name: /Pin all columns/i,
+      }),
+    );
+    await userEvent.click(
+      screen.getByRole('checkbox', {
         name: /Unpin all columns/i,
       }),
     );
     expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('name');
+  });
+
+  it('should pin all columns', async () => {
+    renderWithProviders(
+      <Datatable
+        data={data}
+        columns={columns}
+        initialState={{
+          showColumnSettings: true,
+        }}
+        id="test"
+      />,
+    );
+
+    expect(
+      screen
+        .getAllByRole('columnheader')
+        .filter((element) => element.getAttribute('data-pinned') === 'left'),
+    ).toHaveLength(1);
+    await userEvent.click(
+      screen.getByRole('checkbox', {
+        name: /Pin all columns/i,
+      }),
+    );
+    expect(
+      screen
+        .getAllByRole('columnheader')
+        .filter((element) => element.getAttribute('data-pinned') === 'left'),
+    ).toHaveLength(4);
+  });
+
+  it('should unpin all columns', async () => {
+    renderWithProviders(
+      <Datatable
+        data={data}
+        columns={columns}
+        initialState={{
+          showColumnSettings: true,
+        }}
+        id="test"
+      />,
+    );
+
+    expect(
+      screen
+        .getAllByRole('columnheader')
+        .filter((element) => element.getAttribute('data-pinned') === 'left'),
+    ).toHaveLength(1);
+    await userEvent.click(
+      screen.getByRole('checkbox', {
+        name: /Pin all columns/i,
+      }),
+    );
+    expect(
+      screen
+        .getAllByRole('columnheader')
+        .filter((element) => element.getAttribute('data-pinned') === 'left'),
+    ).toHaveLength(4);
+    await userEvent.click(
+      screen.getByRole('checkbox', {
+        name: /Unpin all columns/i,
+      }),
+    );
+    expect(
+      screen
+        .getAllByRole('columnheader')
+        .filter((element) => element.getAttribute('data-pinned') === 'left'),
+    ).toHaveLength(0);
   });
 });

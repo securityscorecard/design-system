@@ -69,6 +69,22 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
     };
   };
 
+  const getColumnsPinnabilityInfo = () => {
+    const pineableColumns = getAllLeafColumns().filter(
+      (col) => col.columnDef.enablePinning !== false,
+    );
+    const pinnedColumns = pineableColumns.filter(
+      (col) => col.getIsPinned() === false,
+    );
+
+    return {
+      areAllColumnsPinned: pinnedColumns.length === 0,
+      areSomeColumnsPinned:
+        pinnedColumns.length > 0 &&
+        pinnedColumns.length < pineableColumns.length,
+    };
+  };
+
   const handleToggleAllColumnsVisibility = (nextVisibility: boolean) => {
     getAllLeafColumns()
       .filter((col) => col.columnDef.enableHiding !== false)
@@ -83,6 +99,12 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
           col.toggleVisibility(nextVisibility);
         }
       });
+  };
+
+  const handleToggleAllColumnsPinnability = (pinned: boolean) => {
+    setColumnPinning(
+      pinned ? { left: getAllLeafColumns().map((col) => col.id) } : {},
+    );
   };
 
   return (
@@ -157,16 +179,25 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
               {enableColumnPinning && (
                 <Stack gap="sm" justify="center">
                   <Text variant="secondary">Pin</Text>
-                  <Button
-                    aria-label="Unpin all columns"
-                    color="secondary"
-                    iconStart={{ name: 'times' }}
-                    type="button"
-                    variant="ghost"
-                    onClick={() => {
-                      setColumnPinning(initialState.columnPinning ?? {});
-                    }}
-                  />
+                  <div
+                    className="ds-table-checkbox-wrapper"
+                    style={{ height: '2.25rem', marginLeft: '0.35rem' }}
+                  >
+                    <IndeterminateCheckbox
+                      aria-label={`${
+                        getColumnsPinnabilityInfo().areAllColumnsPinned
+                          ? 'Unpin'
+                          : 'Pin'
+                      } all columns`}
+                      checked={getColumnsPinnabilityInfo().areAllColumnsPinned}
+                      indeterminate={
+                        getColumnsPinnabilityInfo().areSomeColumnsPinned
+                      }
+                      onChange={(e) =>
+                        handleToggleAllColumnsPinnability(e.target.checked)
+                      }
+                    />
+                  </div>
                 </Stack>
               )}
             </Inline>
