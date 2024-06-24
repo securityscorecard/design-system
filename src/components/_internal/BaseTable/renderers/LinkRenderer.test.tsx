@@ -41,7 +41,6 @@ describe('Datatable/LinkRenderer', () => {
 
   describe('given "toComposer" property is provided', () => {
     it('should throw if no "component" property is provided', () => {
-      /* eslint-disable no-console */
       // prevent thrown error to propagate to logs
       const stdErr = console.error;
       console.error = jest.fn();
@@ -54,7 +53,6 @@ describe('Datatable/LinkRenderer', () => {
 
       // restore original console.error
       console.error = stdErr;
-      /* eslint-enable */
     });
     it('should call "toComposer" with correct arguments', () => {
       const toComposerMock = jest.fn();

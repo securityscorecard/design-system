@@ -19,17 +19,24 @@ const BodyRow = <D,>({
   const { getVisibleCells, getIsExpanded, getIsSelected, id } = row;
   const { activeRowId } = getState();
   const hasOnRowClick = typeof onRowClick === 'function';
+  const handleRowClick = () => {
+    if (hasOnRowClick) {
+      setActiveRowId(id);
+      onRowClick({ row, table });
+    }
+  };
 
   return (
     <>
       <tr
+        tabIndex={hasOnRowClick ? 0 : null}
         className="ds-table-body-row ds-table-row"
         data-active={hasOnRowClick ? id === activeRowId : undefined}
         data-selected={getIsSelected()}
-        onClick={() => {
-          if (hasOnRowClick) {
-            setActiveRowId(id);
-            onRowClick({ row, table });
+        onClick={handleRowClick}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            handleRowClick();
           }
         }}
       >

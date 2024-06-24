@@ -23,7 +23,6 @@ describe('Datatable/MultiValueRenderer', () => {
 
     fireEvent.pointerMove(screen.getByText(`+ ${restValuesCount}`));
 
-    /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
       expect(screen.getAllByText('c')[0]).toBeInTheDocument();
     });
@@ -44,11 +43,9 @@ describe('Datatable/MultiValueRenderer', () => {
 
     fireEvent.pointerEnter(screen.getByText(values[0]));
 
-    /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
       expect(screen.getByText(values[0])).toBeInTheDocument();
     });
-    /* eslint-enable testing-library/no-node-access */
   });
   it('should call "tooltipComposer" with correct arguments for each visible value', () => {
     const tooltipComposerMock = jest.fn();
@@ -143,7 +140,6 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    /* eslint-disable testing-library/no-node-access */
     expect(
       document.getElementsByClassName('ds-table-cell-multivalue')[0],
     ).toHaveTextContent('1K2K+ 1');
@@ -151,6 +147,5 @@ describe('Datatable/MultiValueRenderer', () => {
     await waitFor(() => {
       expect(screen.getByTestId('ssc-tooltip')).toBeInTheDocument();
     });
-    /* eslint-enable testing-library/no-node-access */
   });
 });

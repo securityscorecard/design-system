@@ -33,7 +33,6 @@ export const useFocusTrap = ({
       }, 0);
     };
     document.addEventListener('keydown', handleKeydown);
-    // eslint-disable-next-line
     return () => {
       document.removeEventListener('keydown', handleKeydown);
       (active as InteractiveElement)?.focus();

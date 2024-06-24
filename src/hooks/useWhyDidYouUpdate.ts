@@ -30,7 +30,6 @@ export const useWhyDidYouUpdate = (
 
       // If changesObj not empty then output to console
       if (Object.keys(changesObj).length) {
-        // eslint-disable-next-line no-console
         console.log(
           '%c[design-system/why-did-you-update]',
           logStyles,

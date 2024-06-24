@@ -7,7 +7,6 @@ const BodyLock = {
     document.body.dataset[DATA_ATTR] = 'true';
   },
   unlock: () => {
-    // eslint-disable-next-line
     delete document.body.dataset[DATA_ATTR];
   },
   isLocked: () => document.body.dataset[DATA_ATTR] === 'true',

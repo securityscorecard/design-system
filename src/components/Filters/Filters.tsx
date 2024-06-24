@@ -109,7 +109,6 @@ const Filters = ({
       setFiltersValues(state);
       setValidValues(state.map((field) => Boolean(field)));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, fields]);
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-/* eslint-disable filenames/match-exported */
 import styled, { css } from 'styled-components';
 import { identity, memoizeWith, pipe } from 'ramda';
 

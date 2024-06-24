@@ -2,10 +2,8 @@ import { logError } from '../hooks/useLogger';
 
 export const requireRouterLink = (): React.ReactNode | null => {
   try {
-    // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
     return require('react-router-dom').Link;
-  } catch (e) {
-    // eslint-disable-next-line no-console
+  } catch {
     logError(
       'router-link',
       `You're trying to use Link component without 'react-router-dom' installed as dependency

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useContext } from 'react';
 
 import { DSContext } from '../theme/DSProvider/DSProvider';

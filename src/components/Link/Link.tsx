@@ -67,8 +67,8 @@ const Link = ({
     (isNotNull(to)
       ? RouterLink // render 'Link' if 'to' is present
       : isNull(to) && isNull(href)
-      ? 'button' // render 'button' if 'to' and 'href' is not present
-      : undefined); // use default
+        ? 'button' // render 'button' if 'to' and 'href' is not present
+        : undefined); // use default
 
   if (isNull(RouterLink) && isNull(domTag)) {
     return null;

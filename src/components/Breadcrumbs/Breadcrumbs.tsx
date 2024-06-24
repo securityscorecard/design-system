@@ -53,7 +53,7 @@ const insertSeparators = (items: React.ReactElement[]) => {
       return [
         ...prev,
         current,
-        // eslint-disable-next-line react/no-array-index-key
+        // biome-ignore lint/suspicious/noArrayIndexKey: There is no better key
         <IconWrapper key={`separator-${index}`} aria-hidden>
           <Icon color={ColorTypes.neutral600} name={SSCIconNames.angleRight} />
         </IconWrapper>,

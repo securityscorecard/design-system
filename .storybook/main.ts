@@ -25,19 +25,20 @@ const config: StorybookConfig = {
               'style-loader',
               {
                 loader: 'css-loader',
-                options: { importLoaders: 1 }
+                options: { importLoaders: 1 },
               },
               {
                 // Gets options from `postcss.config.js` in your project root
                 loader: 'postcss-loader',
-                options: { postcssOptions: {plugins: [require('postcss-import')],} }
-              }
+                options: {
+                  postcssOptions: { plugins: [require('postcss-import')] },
+                },
+              },
             ],
-          }
-        ]
-      }
-    }
-
+          },
+        ],
+      },
+    },
   ],
   features: {
     postcss: false,

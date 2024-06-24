@@ -41,7 +41,6 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
       colSizes[`--col-${parseCSSVarId(header.column.id)}-size`] = colSize;
     }
     return colSizes;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, columnSizing, columnSizingInfo, columnVisibility]);
 
   useEffect(() => {

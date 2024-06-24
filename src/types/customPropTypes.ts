@@ -5,9 +5,7 @@ import { TupleType, TypeChecker } from './customPropTypes.types';
 
 // Taken from https://stackoverflow.com/a/51165301/2216488
 export function CustomPropTypeError(message: string) {
-  // eslint-disable-next-line fp/no-this
   this.message = message;
-  // eslint-disable-next-line fp/no-this
   this.stack = '';
 }
 CustomPropTypeError.prototype = Error.prototype;

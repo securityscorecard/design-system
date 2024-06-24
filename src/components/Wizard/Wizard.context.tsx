@@ -51,7 +51,6 @@ export const WizardProvider = ({
     if (activeStep) {
       onStepChange(activeStep);
     }
-    // eslint-disable-next-line
   }, [activeStep?.name, onStepChange]);
 
   const value = useMemo(() => ({ ...state, update }), [state]);

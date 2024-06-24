@@ -44,8 +44,8 @@ const Tab = ({
     __variant === TabVariants.segmented
       ? SpaceSizes.sm
       : __variant === TabVariants.underline
-      ? SpaceSizes.md
-      : SpaceSizes.none;
+        ? SpaceSizes.md
+        : SpaceSizes.none;
 
   return (
     <BaseTabLabel
@@ -69,9 +69,7 @@ Tab.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
   __variant: PropTypes.oneOf(Object.values(TabVariants)),
-  // eslint-disable-next-line
   __isSelected: PropTypes.bool,
-  // eslint-disable-next-line
   __isExpanded: PropTypes.bool,
   __onSelectTab: PropTypes.func, // internal property
   onClick: PropTypes.func,

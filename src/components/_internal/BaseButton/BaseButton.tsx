@@ -67,8 +67,8 @@ const BaseButton = ({
     (isNotNull(href)
       ? 'a' // render 'a' tag if 'href' is present
       : isNotNull(to)
-      ? RouterLink // render 'Link' if 'to' is present
-      : 'button'); // use default
+        ? RouterLink // render 'Link' if 'to' is present
+        : 'button'); // use default
 
   if (isNull(RouterLink) && isNull(domTag)) {
     return null;

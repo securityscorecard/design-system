@@ -26,21 +26,21 @@ export const calculatePagePositions: (
     currentPage < threshold
       ? 2 // fixed, second page
       : // is at right edge section of pagination
-      currentPage > pageCount - threshold
-      ? pageCount - threshold
-      : // this will count positions before current page in middle section
-        // [current page - round up(POSITIONS - 4 (first+last+2 elipsis) - 1 (current page))]
-        currentPage - Math.ceil((positionsCount - 4 - 1) / 2);
+        currentPage > pageCount - threshold
+        ? pageCount - threshold
+        : // this will count positions before current page in middle section
+          // [current page - round up(POSITIONS - 4 (first+last+2 elipsis) - 1 (current page))]
+          currentPage - Math.ceil((positionsCount - 4 - 1) / 2);
   const endPage =
     // is at left edge section of pagination
     currentPage < threshold
       ? positionsCount - 2
       : // is at right edge section of pagination
-      currentPage > pageCount - threshold
-      ? pageCount - 1 // fixed, second last page
-      : // this will count positions after current page in middle section
-        // [current page - round down(POSITIONS - 4 (first+last+2 elipsis) - 1 (current page))]
-        currentPage + Math.floor((positionsCount - 4 - 1) / 2);
+        currentPage > pageCount - threshold
+        ? pageCount - 1 // fixed, second last page
+        : // this will count positions after current page in middle section
+          // [current page - round down(POSITIONS - 4 (first+last+2 elipsis) - 1 (current page))]
+          currentPage + Math.floor((positionsCount - 4 - 1) / 2);
 
   const pages = generatePages(startPage, endPage);
 

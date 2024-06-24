@@ -140,7 +140,6 @@ describe('DatatableV2/columnSettingsPanel', () => {
         name: /Hide all columns/i,
       }),
     );
-    // eslint-disable-next-line jest-dom/prefer-in-document
     expect(screen.getAllByRole('columnheader')).toHaveLength(1);
   });
 

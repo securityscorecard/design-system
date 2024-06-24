@@ -29,7 +29,7 @@ const RowActionsMenu = <D,>({
       >
         {rowActions.map((action, i) => {
           if (action === null) {
-            // eslint-disable-next-line react/no-array-index-key
+            // biome-ignore lint/suspicious/noArrayIndexKey: There is no better key
             return <MenuSeparator key={`row-actions-separator-${i}`} />;
           }
           const {

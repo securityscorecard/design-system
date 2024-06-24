@@ -6,7 +6,14 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   getAllLeafColumnDefs,
@@ -97,18 +104,18 @@ export const useDatatable = <D>(
   );
   const [width, setWidth] = useState(0);
 
-  const onResize = () => {
+  const onResize = useCallback(() => {
     setWidth(tableRef.current.getBoundingClientRect().width);
-  };
+  }, []);
   useEffect(() => {
     window.addEventListener('resize', onResize);
     return () => {
       window.removeEventListener('resize', onResize);
     };
-  }, []);
+  }, [onResize]);
   useLayoutEffect(() => {
     onResize();
-  }, []);
+  }, [onResize]);
 
   const debouncedSetColumnSizing = useDebounce(setColumnSizing);
 
@@ -142,7 +149,6 @@ export const useDatatable = <D>(
   const table = useReactTable({
     ...tableOptions,
     // I know what I'm doing here
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     columns: columnDefs,
     data,
@@ -154,7 +160,6 @@ export const useDatatable = <D>(
       activeRowId,
       ...tableOptions.state,
       // I know what I'm doing here
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       width,
     },

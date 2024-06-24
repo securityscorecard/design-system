@@ -157,7 +157,6 @@ export const selectStyles: (
     multiValueLabel: () => ({}),
     multiValueRemove: () => ({}),
     // Disable TS because types are wrong for Input component
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     /* @ts-ignore */
     input: (_, { selectProps: { isMulti } }) => ({
       ...(!isMulti ? { margin: 0 } : {}),
@@ -222,8 +221,8 @@ export const selectStyles: (
       backgroundColor: isSelected
         ? DSTheme.colors.neutral[300]
         : isFocused
-        ? DSTheme.colors.primary[50]
-        : 'transparent',
+          ? DSTheme.colors.primary[50]
+          : 'transparent',
       color: isDisabled ? DSTheme.colors.neutral[600] : DSTheme.forms.color,
       fontSize: DSTheme.typography.size.md,
       lineHeight: DSTheme.typography.lineHeight.md,
@@ -262,7 +261,6 @@ export const selectStyles: (
   };
 };
 
-/* eslint-disable react/prop-types */
 export const DropdownIndicator: IndicatorComponentType<OptionType, boolean> = (
   props,
 ) => {

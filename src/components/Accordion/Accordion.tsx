@@ -60,7 +60,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
         setOpenIds(nextState);
         onChange?.(nextState);
       },
-      [openIds, setOpenIds, onChange, isCollapsedOnOpen],
+      [openIds, onChange, isCollapsedOnOpen],
     );
 
     return (

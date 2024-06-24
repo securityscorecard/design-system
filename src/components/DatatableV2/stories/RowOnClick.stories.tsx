@@ -165,7 +165,7 @@ export const OpenDrawerOnRowClick: Story = (args) => {
   const handleDrawerClose = useCallback(() => {
     setActiveRowId('');
     setDrawerData(null);
-  }, [setDrawerData, setActiveRowId]);
+  }, []);
 
   return (
     <>

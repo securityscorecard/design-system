@@ -47,7 +47,6 @@ export const Playground: Story = () => {
         <Input value={content} onChange={(e) => setContent(e.target.value)} />
         <Label>Type:</Label>
 
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-ignore */}
         <Select options={options} value={variant} onChange={setVariant} />
         <Label>Autodismiss:</Label>

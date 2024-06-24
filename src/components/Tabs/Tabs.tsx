@@ -30,8 +30,8 @@ const Tabs = ({
         variant === TabVariants.segmented
           ? SpaceSizes.sm
           : variant === TabVariants.underline
-          ? SpaceSizes.none
-          : SpaceSizes.lg
+            ? SpaceSizes.none
+            : SpaceSizes.lg
       }
       role="tablist"
       stretch={isExpanded ? 'all' : 0}

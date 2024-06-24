@@ -104,10 +104,9 @@ const Tooltip = ({
   const align = placement.endsWith('-start')
     ? 'start'
     : placement.endsWith('-end')
-    ? 'end'
-    : 'center';
+      ? 'end'
+      : 'center';
   const isInFloatingElement = useFloatingContext() ?? false;
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   if (isFalsy(popup)) return <>{children}</>;
 
   return (

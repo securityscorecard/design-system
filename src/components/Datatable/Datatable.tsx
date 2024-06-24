@@ -71,7 +71,6 @@ function Datatable<D extends Record<string, unknown>>({
         setPersistedState(partial);
       },
     );
-    // eslint-disable-next-line
     return unsubscribe;
   }, []);
 

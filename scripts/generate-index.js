@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs');
 const path = require('path');
-/* eslint-enable @typescript-eslint/no-var-requires */
 
 const docsRootPath = path.resolve(__dirname, '../docs-build');
 const alphaDocsRootPath = path.resolve(__dirname, '../docs-build/alpha');
@@ -14,9 +12,8 @@ const getContent = (isDynamic = false) => `<!DOCTYPE HTML>
     <meta http-equiv="refresh" content="1; url=${url}">
     <script type="text/javascript">
       window.location.href = \`${url}${
-  // eslint-disable-next-line no-template-curly-in-string
-  isDynamic ? '/${window.location.search}' : ''
-}\`
+        isDynamic ? '/${window.location.search}' : ''
+      }\`
     </script>
     <title>Page Redirection</title>
   </head>

@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { useMemo } from 'react';
 
 import { DatatableOptions, ParsedDatatableOptions } from '../Datatable.types';

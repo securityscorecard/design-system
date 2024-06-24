@@ -37,14 +37,14 @@ const HeaderCellResizeHandler = <D,>({
         key === 'ArrowLeft'
           ? oldValue - 10
           : key === 'ArrowRight'
-          ? oldValue + 10
-          : oldValue;
+            ? oldValue + 10
+            : oldValue;
       const newValue =
         updatedValue >= maxSize
           ? maxSize
           : updatedValue <= minSize
-          ? minSize
-          : updatedValue;
+            ? minSize
+            : updatedValue;
 
       return {
         ...old,
@@ -54,11 +54,9 @@ const HeaderCellResizeHandler = <D,>({
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <hr
       aria-orientation="vertical"
       className="ds-table-header-cell-resize-handler"
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
       onDoubleClick={handleColumnSizeReset}
       onKeyDown={handleKeyboardColumnResize}

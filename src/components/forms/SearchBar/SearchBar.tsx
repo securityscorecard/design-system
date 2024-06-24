@@ -129,7 +129,6 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       if (shouldTriggerSearchOnMount && isNotNilOrEmpty(value)) {
         search(value);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {

@@ -7,7 +7,6 @@ import { SpacingProps } from '../../types/spacing.types';
 
 export type SSCIcons = (typeof SSCIconNames)[keyof typeof SSCIconNames];
 export type Types = (typeof IconTypes)[keyof typeof IconTypes];
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type IconNames = SSCIcons | (string & {});
 export type RegularIconTypes = Exclude<Types, 'fal'>;
 export type LightIconTypes = Exclude<Types, 'far'>;

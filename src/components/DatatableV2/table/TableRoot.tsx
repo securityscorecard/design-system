@@ -44,9 +44,14 @@ const TableRoot = styled.div`
     &[data-active='true'] .ds-table-cell {
       background-color: var(--sscds-table-color-active);
     }
-    &[data-active]:hover .ds-table-cell {
+    &[data-active]:hover .ds-table-cell,
+    &[data-active]:focus-visible .ds-table-cell {
       background-color: var(--sscds-color-primary-050);
       cursor: pointer;
+
+    }
+    &[data-active]:focus-visible{
+      outline: none;
     }
   }
   .ds-table-cell {

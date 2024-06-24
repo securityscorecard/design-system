@@ -9,23 +9,23 @@ type NotificationAction =
   | { type: ACTIONS.UPDATE_NOTIFICATION; notification: Notification };
 
 export const NotificationsProviderReducer = (
-  // eslint-disable-next-line
-  state: Notification[] = [],
+  state: Notification[],
   action: NotificationAction,
 ) => {
+  const reducerState = state ?? [];
   switch (action.type) {
     case ACTIONS.ADD_NOTIFICATION: {
-      return [...state, action.notification];
+      return [...reducerState, action.notification];
     }
     case ACTIONS.UPDATE_NOTIFICATION: {
-      return state.map((item) =>
+      return reducerState.map((item) =>
         item.id === action.notification.id ? action.notification : item,
       );
     }
     case ACTIONS.REMOVE_NOTIFICATION: {
-      return state.filter((item) => item.id !== action.id);
+      return reducerState.filter((item) => item.id !== action.id);
     }
     default:
-      return state;
+      return reducerState;
   }
 };

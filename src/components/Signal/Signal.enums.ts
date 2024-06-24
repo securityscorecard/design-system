@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const SignalKinds = {
   critical: 'critical',
   high: 'high',

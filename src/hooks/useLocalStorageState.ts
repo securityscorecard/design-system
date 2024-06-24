@@ -4,7 +4,7 @@ export const useLocalStorageState = <S = Record<string, unknown>>(
   let persistedState: S;
   try {
     persistedState = JSON.parse(localStorage.getItem(key));
-  } catch (e) {
+  } catch {
     persistedState = undefined;
   }
   return [

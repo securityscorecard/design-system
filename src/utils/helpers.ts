@@ -51,8 +51,7 @@ export const pxToRem: (...px: Array<number | string>) => string = pipe(
 );
 
 // https://github.com/ramda/ramda/wiki/Cookbook#derivative-of-rprops-for-deep-fields
-// This useWith is not hook :D
-// eslint-disable-next-line react-hooks/rules-of-hooks
+// biome-ignore lint/correctness/useHookAtTopLevel: This useWith is not hook
 const dotPath = useWith(path, [split('.')]);
 // getColor :: Color -> Props -> string
 // Color - any key of 'ColorTypes' (src/theme/colors.enums.ts)

@@ -281,6 +281,7 @@ function Table<D extends Record<string, unknown>>({
     };
   }, [setHiddenColumns, columns.length]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: `pageIndex` is used
   useEffect(() => {
     const unsubscribe = DatatableStore.subscribe(
       prop('pageIndex'),

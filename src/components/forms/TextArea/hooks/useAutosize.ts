@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { useCallback, useEffect, useLayoutEffect } from 'react';
 
 export const useAutosize = (

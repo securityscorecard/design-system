@@ -131,11 +131,15 @@ const DropdownMenu = ({
           )
             ? 'a' // render 'a' tag if 'href' is present
             : isNotUndefined(
-                (action as RelativeLinkActionKind<React.MouseEvent[], boolean>)
-                  .to,
-              )
-            ? RouterLink // render 'Link' if 'to' is present
-            : 'button'; // use default
+                  (
+                    action as RelativeLinkActionKind<
+                      React.MouseEvent[],
+                      boolean
+                    >
+                  ).to,
+                )
+              ? RouterLink // render 'Link' if 'to' is present
+              : 'button'; // use default
 
           if (
             isNull(RouterLink) &&

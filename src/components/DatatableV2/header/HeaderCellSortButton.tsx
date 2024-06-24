@@ -41,8 +41,8 @@ const HeaderCellSortButton = <D,>({
     direction === 'desc'
       ? `Sorted by ${columnName} descending`
       : direction === 'asc'
-      ? `Sorted by ${columnName} ascending`
-      : 'Unsorted';
+        ? `Sorted by ${columnName} ascending`
+        : 'Unsorted';
   const sortedIndex = sorting.length > 1 ? column.getSortIndex() + 1 : 0;
 
   return (

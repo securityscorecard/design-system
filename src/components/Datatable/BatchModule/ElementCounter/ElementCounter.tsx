@@ -47,8 +47,8 @@ export const getCounterContent = (
           totalLength,
         )} selected`
       : isPositive(totalLength)
-      ? abbreviateNumber(totalLength)
-      : 'No data'}
+        ? abbreviateNumber(totalLength)
+        : 'No data'}
   </span>
 );
 

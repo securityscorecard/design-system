@@ -115,7 +115,6 @@ function ControlsModule<D extends Record<string, unknown>>({
       s.filters = filteringState;
       s.hasAppliedFilters = controlsState[ControlTypes.filters].isApplied;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isToolbarEnabled = hasFiltering || hasColumnsControls;
@@ -194,7 +193,6 @@ function ControlsModule<D extends Record<string, unknown>>({
     if (isNotNilOrEmpty(defaultSearchValue)) {
       handleOnSearch(defaultSearchValue);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

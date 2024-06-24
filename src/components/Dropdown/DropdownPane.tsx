@@ -60,8 +60,7 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   `}
 
   &[data-popper-placement^='top'] > ${/* sc-selector */ Arrow} {
-    bottom: ${({ theme }) =>
-      `calc(${getSpace(SpaceSizes.sm, { theme })} / -2)`};
+    bottom: ${({ theme }) => `calc(${getSpace(SpaceSizes.sm, { theme })} / -2)`};
     &:before {
       transform: rotate(225deg);
     }

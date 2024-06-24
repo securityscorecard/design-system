@@ -171,8 +171,8 @@ export const Icon = ({
         signal === 'info'
           ? `var(--sscds-severity-informational)`
           : signal === 'positive'
-          ? `var(--sscds-severity-positive)`
-          : '#eb2f40', // we are using fixed color because it's not defined in DS
+            ? `var(--sscds-severity-positive)`
+            : '#eb2f40', // we are using fixed color because it's not defined in DS
     }}
   >
     <title>{title}</title>
@@ -181,8 +181,8 @@ export const Icon = ({
         signal === 'info'
           ? infoIcon
           : signal === 'positive'
-          ? positiveIcon
-          : criticalIcon
+            ? positiveIcon
+            : criticalIcon
       }
       fill="currentColor"
     />

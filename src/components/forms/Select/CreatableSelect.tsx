@@ -11,13 +11,12 @@ import Select from './Select';
 import { CreatableSelectProps } from './Select.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
-const renderCreateLabel = (createNewLabel: string) => (inputValue: string) =>
-  (
-    <>
-      <span>{createNewLabel}</span>
-      <Strong variant={TextVariants.inherit}>{inputValue}</Strong>
-    </>
-  );
+const renderCreateLabel = (createNewLabel: string) => (inputValue: string) => (
+  <>
+    <span>{createNewLabel}</span>
+    <Strong variant={TextVariants.inherit}>{inputValue}</Strong>
+  </>
+);
 function CreatableSelect<IsMulti extends boolean = false>({
   createNewLabel = 'Create',
   isAsync = false,

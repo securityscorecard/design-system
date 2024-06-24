@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import { noop } from 'ramda';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Pagination from './Pagination';
@@ -17,8 +18,7 @@ describe('Custom renderItem prop', () => {
     renderWithProviders(
       <Pagination
         currentPage={1}
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        onPageChange={() => {}}
+        onPageChange={noop}
         pageCount={4}
         renderItem={customRenderItem}
       />,

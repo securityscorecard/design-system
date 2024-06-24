@@ -120,24 +120,21 @@ export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
   const [totalLength, setTotalLength] = useState(0);
   const timeoutRef = useRef(null);
 
-  const dispatchFetchData = useCallback(
-    ({ pageSize, pageIndex }) => {
-      action('onDataFetch')({
-        pageSize,
-        pageIndex,
-      });
-      setIsLoading(true);
-      timeoutRef.current = setTimeout(() => {
-        const startRow = pageSize * pageIndex;
-        const endRow = startRow + pageSize;
-        const fetchedData: Data[] = assets.slice(startRow, endRow);
-        setTableData(fetchedData);
-        setTotalLength(assets.length);
-        setIsLoading(false);
-      }, 500);
-    },
-    [setIsLoading, setTableData],
-  );
+  const dispatchFetchData = useCallback(({ pageSize, pageIndex }) => {
+    action('onDataFetch')({
+      pageSize,
+      pageIndex,
+    });
+    setIsLoading(true);
+    timeoutRef.current = setTimeout(() => {
+      const startRow = pageSize * pageIndex;
+      const endRow = startRow + pageSize;
+      const fetchedData: Data[] = assets.slice(startRow, endRow);
+      setTableData(fetchedData);
+      setTotalLength(assets.length);
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     dispatchFetchData({ pageSize: 50, pageIndex: 0 });

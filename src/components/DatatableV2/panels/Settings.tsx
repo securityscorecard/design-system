@@ -43,7 +43,6 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
     return getAllLeafColumns().filter(
       (col) => col.columnDef.columnDefType === 'data',
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     columnOrder,
     columnPinning,

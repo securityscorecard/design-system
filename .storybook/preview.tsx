@@ -37,7 +37,14 @@ export const parameters = {
         'Overview',
         'Changelog',
         'Theme',
-        ['createIconLibrary()', 'DSProvider', 'DSThemeOverride', 'Colors', 'Space', 'Typography'],
+        [
+          'createIconLibrary()',
+          'DSProvider',
+          'DSThemeOverride',
+          'Colors',
+          'Space',
+          'Typography',
+        ],
         'Iconography',
         'Helpers',
         'layout',
@@ -98,7 +105,7 @@ createIconLibrary();
 
 const wrapper = (storyFn) => (
   <>
-    <DSProvider config={{debugMode: true}}>{storyFn()}</DSProvider>
+    <DSProvider config={{ debugMode: true }}>{storyFn()}</DSProvider>
   </>
 );
 
@@ -108,9 +115,7 @@ window.Math.random = () => 0.5;
 
 function clearDatatableLS() {
   Object.keys(localStorage)
-  .filter(x =>
-    x.startsWith('sscds_dt_'))
-  .forEach(x =>
-    localStorage.removeItem(x))
+    .filter((x) => x.startsWith('sscds_dt_'))
+    .forEach((x) => localStorage.removeItem(x));
 }
-clearDatatableLS()
+clearDatatableLS();

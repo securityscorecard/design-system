@@ -34,7 +34,6 @@ describe('SegmentedToggle', () => {
         return { itemId: i, label: i.toString(), value: i, ref: refs[i] };
       });
 
-    // eslint-disable-next-line react/prop-types
     function Item({ itemId, label, value, ref }) {
       return (
         <SegmentedToggleItem

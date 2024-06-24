@@ -65,7 +65,7 @@ const Snippet = forwardRef<
       setIsExpandable(
         codeRef.current.getBoundingClientRect().height > maxHeight,
       );
-    }, [setIsExpandable, maxHeight]);
+    }, [maxHeight]);
 
     if (!hasValidChildren) {
       error('Only string can be passed in `children` property');

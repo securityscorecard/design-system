@@ -58,7 +58,6 @@ const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
       showPane,
     }));
 
-    // eslint-disable-next-line
     useEffect(() => {
       const handleKeyDown = (e) => {
         if (!triggerEvents.includes('click')) {
@@ -76,7 +75,6 @@ const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
       }
-      // eslint-disable-next-line
     }, [isVisible]);
 
     const handleTriggerOnClick = () => {

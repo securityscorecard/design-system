@@ -25,8 +25,8 @@ const HeaderCellColumnActionsButton = <D,>({
               direction === 'desc'
                 ? 'sort-down'
                 : direction === 'asc'
-                ? 'sort-up'
-                : 'ellipsis-v',
+                  ? 'sort-up'
+                  : 'ellipsis-v',
           }}
           label="Column actions"
         />

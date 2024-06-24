@@ -72,7 +72,6 @@ const ToastAreaContainer = ({
   isStandalone: boolean;
   children: ReactNode;
 }) => {
-  // eslint-disable-next-line
   return isStandalone ? <ToastArea>{children}</ToastArea> : <>{children}</>;
 };
 

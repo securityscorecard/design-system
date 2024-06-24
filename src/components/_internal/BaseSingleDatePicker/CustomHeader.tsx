@@ -29,7 +29,7 @@ const getMonth = (date: Date) => months[date.getMonth()];
 
 const ChangeMonthIconContainer = styled.div<{ direction: string }>`
   transform: ${(props) =>
-      props.direction === 'right' ? 'rotate(270deg)' : 'rotate(90deg)'}
+    props.direction === 'right' ? 'rotate(270deg)' : 'rotate(90deg)'}
     translate(0, -4px);
   font-size: ${getFontSize('lg')};
   width: 32px;
@@ -78,7 +78,6 @@ type DatePickerCustomHeaderProps = {
   decreaseYear: () => void;
   toggleYearPicker: () => void;
   date: Date;
-  // eslint-disable-next-line react/boolean-prop-naming
   showYearPicker: boolean;
 };
 export const DatePickerCustomHeader = ({

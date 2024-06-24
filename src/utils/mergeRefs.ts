@@ -16,7 +16,6 @@ export const mergeRefs = <T>(
       if (typeof ref === 'function') {
         ref(inst);
       } else if (isMutableRefObject<T>(ref)) {
-        // eslint-disable-next-line no-param-reassign
         ref.current = inst;
       }
     })(filteredRefs);

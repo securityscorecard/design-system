@@ -19,7 +19,6 @@ export const useRegisterStep = (step: SingleWizardStep) => {
         ...state,
         steps: state.steps.filter((item) => item.id === step.id),
       }));
-    // eslint-disable-next-line
   }, [step.id]);
 
   // Update step state
@@ -30,7 +29,6 @@ export const useRegisterStep = (step: SingleWizardStep) => {
         steps: state.steps.map((item) => (item.id === step.id ? step : item)),
       };
     });
-    // eslint-disable-next-line
   }, [
     step.name,
     step.primaryAction.isDisabled,

@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Variants } from '../../components/_internal/BaseToastBanner/BaseToastBanner.types';
 
-// eslint-disable-next-line
 export enum ACTIONS {
   ADD_NOTIFICATION = 'ADD_NOTIFICATION',
   UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION',

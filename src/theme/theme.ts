@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { DefaultTheme } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
 
