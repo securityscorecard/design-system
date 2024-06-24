@@ -4,7 +4,12 @@ export default {
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
   testPathIgnorePatterns: ['node_modules/'],
   transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
+    '^.+\\.[tj]sx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.build.json',
+      },
+    ],
     '^.+\\.mdx?$': '@storybook/addon-docs/jest-transform-mdx',
   },
   transformIgnorePatterns: ['node_modules/(?!(styled-reset-advanced))'],

@@ -1,29 +1,11 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "module": "preserve",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": false,
-    "noUncheckedIndexedAccess": true,
-    "forceConsistentCasingInFileNames": true,
-
-    /* Additional Options */
-    "esModuleInterop": true,
-    "allowJs": false,
-    "moduleDetection": "force",
-    "allowSyntheticDefaultImports": true,
-    "types": ["jest", "node", "testing-library__jest-dom"],
-  },
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.build.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
