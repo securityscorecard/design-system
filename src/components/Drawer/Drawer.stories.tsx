@@ -160,7 +160,7 @@ export const WithoutBackdrop: Story = () => {
         <Drawer
           footer={<Footer />}
           hasBackdrop={false}
-          size="sm"
+          size="md"
           title="Small size drawer without backdrop"
           onClose={() => setDisplayDrawer(false)}
         >
