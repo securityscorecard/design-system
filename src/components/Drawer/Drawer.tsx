@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -38,6 +38,13 @@ const Header = styled(Padbox)`
   border-bottom: 1px solid ${getColor('neutral.300')};
 `;
 
+const noBackdropStyle = css`
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: ${getDepth('modal')};
+`;
+
 const SurfaceContainer = styled.div<{
   $maxWidth: number;
   $hasBackdrop: boolean;
@@ -49,14 +56,7 @@ const SurfaceContainer = styled.div<{
   display: flex;
   flex-direction: row;
 
-  ${({ $hasBackdrop }) =>
-    !$hasBackdrop &&
-    `
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: ${getDepth('modal')};
-  `}
+  ${({ $hasBackdrop }) => !$hasBackdrop && noBackdropStyle};
 `;
 
 const BaseDrawer = styled.div`
@@ -64,7 +64,6 @@ const BaseDrawer = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-// box-shadow: -4px 0px 16px rgba(0, 0, 0, 0.1);
 
 const TitleWrapper = styled(Padbox)`
   overflow: hidden;
