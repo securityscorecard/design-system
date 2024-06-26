@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { action } from '@storybook/addon-actions';
 
 import Select from './Select';
 import { Option, SelectProps } from './Select.types';
-import { Inline, Stack } from '../../layout';
+import { Inline, Padbox, Stack } from '../../layout';
 import { Pill } from '../../Pill';
 import { PillColors } from '../../Pill/Pill.enums';
 import { Heading } from '../../Heading';
 import { Text } from '../../Text';
+import { Label } from '../Label';
+import { Button } from '../../Button';
 
 const options = [
   { value: 'HR', label: 'Croatia', isDisabled: true },
@@ -420,5 +422,57 @@ export const AsyncSelect: Story<SelectProps<false>> = () => {
 };
 
 AsyncSelect.parameters = {
+  screenshot: { skip: true },
+};
+
+export const MultiSelectWithControlledValue: Story<SelectProps<true>> = (
+  args,
+) => {
+  const [selectedOptions, setSelectedOptions] = useState([
+    options[1],
+    options[2],
+  ]);
+
+  return (
+    <Stack gap="md">
+      <Select
+        {...args}
+        closeMenuOnSelect={false}
+        value={selectedOptions}
+        menuIsOpen
+        onChange={(values) => {
+          setSelectedOptions(values);
+        }}
+      />
+
+      <Padbox>
+        <Label isBold>Selected Values</Label>
+        <Stack gap="md">
+          {selectedOptions.map((option) => (
+            <Inline key={option.value} gap="sm">
+              <Label style={{ width: '100px' }}>{option.label}</Label>
+              <Button
+                variant="text"
+                onClick={() =>
+                  setSelectedOptions((prev) =>
+                    prev.filter((o) => o.value !== option.value),
+                  )
+                }
+              >
+                Remove
+              </Button>
+            </Inline>
+          ))}
+        </Stack>
+      </Padbox>
+    </Stack>
+  );
+};
+MultiSelectWithControlledValue.args = {
+  ...OptionsGroup.args,
+  isMenuPositionRelative: true,
+  isMulti: true,
+};
+MultiSelectWithControlledValue.parameters = {
   screenshot: { skip: true },
 };
