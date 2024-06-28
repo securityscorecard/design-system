@@ -1,7 +1,11 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import { MenuContent, MenuItem, MenuSeparator } from './menuElements';
+import {
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
+} from '../../_internal/BaseDropdownMenu/menuElements';
 import {
   DatatableInstance,
   DatatableRow,

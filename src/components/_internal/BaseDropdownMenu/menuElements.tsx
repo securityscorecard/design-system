@@ -8,7 +8,7 @@ import { Inline, Padbox } from '../../layout';
 import { Text } from '../../Text';
 
 export const MenuContent = styled(DropdownMenu.Content)<{
-  $isFullscreen: boolean;
+  $isFullscreen?: boolean;
 }>`
   position: relative;
   border: 1px solid rgba(0 0 0/15%);
