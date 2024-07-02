@@ -35,9 +35,19 @@ import type {
 export const useDnD = <D>({
   items,
   setItems,
+  onDragEnd,
 }: {
   items: TreeItems<D>;
   setItems: Dispatch<SetStateAction<TreeItems<D>>>;
+  onDragEnd?: (
+    movedId: string,
+    rows: {
+      newItems: TreeItems<D>;
+      oldItems: TreeItems<D>;
+      flattenedNewItems?: TreeItems<D>;
+      flattenedOldItems?: TreeItems<D>;
+    },
+  ) => void;
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [overId, setOverId] = useState<string | null>(null);
@@ -149,6 +159,12 @@ export const useDnD = <D>({
       const newItems = buildTree(sortedItems);
 
       setItems(newItems);
+      onDragEnd?.(activeTreeItem.id, {
+        newItems,
+        oldItems: items,
+        flattenedNewItems: sortedItems,
+        flattenedOldItems: clonedItems,
+      });
     }
   };
 

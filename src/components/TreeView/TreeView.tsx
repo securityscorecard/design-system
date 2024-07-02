@@ -80,7 +80,7 @@ function TreeView<D>({
     handleDragMove,
     handleDragOver,
     handleDragStart,
-  } = useDnD({ items, setItems });
+  } = useDnD({ items, setItems, onDragEnd });
 
   const handleCollapse = (id: string) => {
     setItems((prevItems) =>
@@ -105,7 +105,6 @@ function TreeView<D>({
           handleDragCancel();
         }}
         onDragEnd={(e) => {
-          onDragEnd?.(e);
           handleDragEnd(e);
         }}
         onDragMove={(e) => {
@@ -142,7 +141,6 @@ function TreeView<D>({
                   row={row}
                   rowActions={rowActions}
                   rowHeight={rowHeight}
-                  value={id}
                   onActiveRowIdChange={onActiveRowIdChange}
                   onCollapse={
                     isCollapsible && subRows?.length

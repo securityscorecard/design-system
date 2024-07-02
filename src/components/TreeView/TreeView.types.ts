@@ -1,7 +1,6 @@
 import type { ComponentProps, MutableRefObject, ReactNode } from 'react';
 import type {
   DragCancelEvent,
-  DragEndEvent,
   DragMoveEvent,
   DragOverEvent,
   DragStartEvent,
@@ -10,38 +9,6 @@ import type {
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
 import { IconNames, RegularIconTypes } from '../Icon';
-
-export interface TreeItemProps<D> extends Omit<ComponentProps<'li'>, 'id'> {
-  depth: number;
-  value: string;
-  row: TreeViewRow<D>;
-  rowHeight?: number;
-  childCount?: number;
-  isClone?: boolean;
-  isGhost?: boolean;
-  isSortable?: boolean;
-  isCollapsible?: boolean;
-  collapsed?: boolean;
-  wrapperRef?: (node: HTMLLIElement) => void;
-  innerRef?: (node: HTMLDivElement) => void;
-  disableInteraction?: boolean;
-  disableSelection?: boolean;
-  onCollapse?: () => void;
-  onRowClick?: (row: TreeViewRow<D>) => void;
-  renderPrimaryContent?: (row: TreeViewRow<D>) => ReactNode;
-  renderSecondaryContent?: (row: TreeViewRow<D>) => ReactNode;
-  handleAttributes: DraggableAttributes;
-  handleListeners: SyntheticListenerMap;
-  activeRowId?: string;
-  onActiveRowIdChange?: (id: string) => void;
-  rowActions?: RowAction<D>[];
-}
-
-export interface SortableTreeItemProps<D>
-  extends Omit<TreeItemProps<D>, 'handleAttributes' | 'handleListeners'> {
-  id: string;
-  depth: number;
-}
 
 type RowActionCallbackUnion<D, Type> =
   | Type
@@ -56,24 +23,6 @@ export type RowAction<D> = null | {
   isDestructive?: boolean;
 };
 
-export interface TreeViewProps<D> {
-  data?: TreeItems<D>;
-  rowHeight?: number;
-  isCollapsible?: boolean;
-  isSortable?: boolean;
-  onDragCancel?: (event: DragCancelEvent) => void;
-  onDragEnd?: (event: DragEndEvent) => void;
-  onDragMove?: (event: DragMoveEvent) => void;
-  onDragOver?: (event: DragOverEvent) => void;
-  onDragStart?: (event: DragStartEvent) => void;
-  onRowClick?: (row: TreeViewRow<D>) => void;
-  renderPrimaryContent?: (row: TreeViewRow<D>) => ReactNode;
-  renderSecondaryContent?: (row: TreeViewRow<D>) => ReactNode;
-  activeRowId?: string;
-  onActiveRowIdChange?: (id: string) => void;
-  rowActions?: RowAction<D>[];
-}
-
 export interface BaseTreeItem<D> {
   id: string;
   collapsed?: boolean;
@@ -82,6 +31,63 @@ export interface BaseTreeItem<D> {
 export type TreeViewRow<D> = BaseTreeItem<D> & D;
 
 export type TreeItems<D> = TreeViewRow<D>[];
+
+export interface TreeViewProps<D> {
+  data: TreeItems<D>;
+  rowHeight?: number;
+  isCollapsible?: boolean;
+  isSortable?: boolean;
+  onDragCancel?: (event: DragCancelEvent) => void;
+  onDragEnd?: (
+    movedId: string,
+    rows: {
+      newItems: TreeItems<D>;
+      oldItems: TreeItems<D>;
+      flattenedNewItems?: TreeItems<D>;
+      flattenedOldItems?: TreeItems<D>;
+    },
+  ) => void;
+  onDragMove?: (event: DragMoveEvent) => void;
+  onDragOver?: (event: DragOverEvent) => void;
+  onDragStart?: (event: DragStartEvent) => void;
+  onRowClick?: (row: TreeViewRow<D>) => void;
+  renderPrimaryContent: (row: TreeViewRow<D>) => ReactNode;
+  renderSecondaryContent?: (row: TreeViewRow<D>) => ReactNode;
+  activeRowId?: string;
+  onActiveRowIdChange?: (id: string) => void;
+  rowActions?: RowAction<D>[];
+}
+
+export type SortableTreeItemProps<D> = Omit<
+  TreeItemProps<D>,
+  'handleAttributes' | 'handleListeners'
+>;
+
+export interface TreeItemProps<D> extends Omit<ComponentProps<'li'>, 'id'> {
+  depth: number;
+  id: string;
+  row: TreeViewRow<D>;
+  childCount?: number;
+  collapsed?: boolean;
+  disableInteraction?: boolean;
+  disableSelection?: boolean;
+  handleAttributes: DraggableAttributes;
+  handleListeners: SyntheticListenerMap;
+  innerRef?: (node: HTMLDivElement) => void;
+  isClone?: boolean;
+  isGhost?: boolean;
+  onCollapse?: () => void;
+  wrapperRef?: (node: HTMLLIElement) => void;
+  activeRowId?: TreeViewProps<D>['activeRowId'];
+  isCollapsible?: TreeViewProps<D>['isCollapsible'];
+  isSortable?: TreeViewProps<D>['isSortable'];
+  onActiveRowIdChange?: TreeViewProps<D>['onActiveRowIdChange'];
+  onRowClick?: TreeViewProps<D>['onRowClick'];
+  renderPrimaryContent?: TreeViewProps<D>['renderPrimaryContent'];
+  renderSecondaryContent?: TreeViewProps<D>['renderSecondaryContent'];
+  rowActions?: TreeViewProps<D>['rowActions'];
+  rowHeight?: TreeViewProps<D>['rowHeight'];
+}
 
 export type FlattenedItem<D> = {
   parentId: string | null;

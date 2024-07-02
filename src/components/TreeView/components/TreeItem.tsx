@@ -130,7 +130,7 @@ function TreeItem<D>({
   rowHeight,
   rowActions = [],
   style,
-  value,
+  id,
   wrapperRef,
   innerRef,
   activeRowId,
@@ -142,7 +142,7 @@ function TreeItem<D>({
     <TreeItemRoot
       // @ts-expect-error Typing styled-components refs is almost impossible :facepalm:
       ref={wrapperRef}
-      data-active={activeRowId === value}
+      data-active={activeRowId === id}
       data-clone={isClone}
       data-ghost={isGhost}
       data-interaction={!disableInteraction}
@@ -155,12 +155,12 @@ function TreeItem<D>({
       tabIndex={typeof onRowClick === 'function' ? 0 : -1}
       onClick={() => {
         onRowClick?.(row);
-        onActiveRowIdChange(value);
+        onActiveRowIdChange(id);
       }}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           onRowClick?.(row);
-          onActiveRowIdChange(value);
+          onActiveRowIdChange(id);
         }
       }}
       {...props}
@@ -188,7 +188,7 @@ function TreeItem<D>({
           <Padbox paddingSize="sm" data-content>
             <Inline align="center" gap="md">
               <StartContainer>
-                {renderPrimaryContent?.(row) ?? <Text isBold>{value}</Text>}
+                {renderPrimaryContent?.(row) ?? <Text isBold>{id}</Text>}
               </StartContainer>
               {renderSecondaryContent?.(row) ?? null}
             </Inline>

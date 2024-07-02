@@ -30,6 +30,7 @@ function SortableTreeItem<D>({
       disableSelection={iOS}
       handleAttributes={attributes}
       handleListeners={listeners}
+      id={id}
       innerRef={setDraggableNodeRef}
       isGhost={isDragging}
       style={{
