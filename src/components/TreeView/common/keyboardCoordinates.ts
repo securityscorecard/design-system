@@ -49,8 +49,8 @@ export const sortableTreeKeyboardCoordinates: <D>(
     if (horizontal.includes(event.code) && over?.id) {
       const { depth, maxDepth, minDepth } = getProjection(
         items,
-        active.id,
-        over.id,
+        active.id as string,
+        over.id as string,
         offset,
       );
 
@@ -133,8 +133,8 @@ export const sortableTreeKeyboardCoordinates: <D>(
         if (newItem && activeItem) {
           const { depth } = getProjection(
             items,
-            active.id,
-            closestId,
+            active.id as string,
+            closestId as string,
             (newItem.depth - activeItem.depth) * INDENTATION_WIDTH,
           );
 

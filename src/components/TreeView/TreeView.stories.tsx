@@ -34,6 +34,35 @@ export const Playground: Story = {
     ),
     onDragEnd: action('onDragEnd'),
     onRowClick: action('onRowClick'),
+    rowActions: [
+      {
+        iconName: 'eye-slash',
+        label: 'Make private',
+        onClick:
+          ({ row }) =>
+          (event) =>
+            action('row action')({ row, event }),
+        isDisabled: ({ row }) => row.grade === 'D',
+      },
+      {
+        iconName: 'times',
+        label: 'Archive item',
+        onClick:
+          ({ row }) =>
+          (event) =>
+            action('row action')({ row, event }),
+      },
+      null,
+      {
+        iconName: 'ban',
+        label: 'Remove',
+        isDestructive: true,
+        onClick:
+          ({ row }) =>
+          (event) =>
+            action('row action')({ row, event }),
+      },
+    ],
   },
   render: function Render(args) {
     const [activeRow, setActiveRow] = useState('');

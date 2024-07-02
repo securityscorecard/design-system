@@ -9,11 +9,19 @@ import { Text } from '../../Text';
 import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import CollapsibleHandle from './CollapsibleHandle';
 import { TreeItemProps } from '../TreeView.types';
+import RowActions from './RowActions';
 
 const TreeItemRoot = styled.li`
   list-style: none;
   box-sizing: border-box;
   padding-left: var(--sscds-treeitem-indent);
+
+  &:first-child {
+    border-radius: var(--sscds-radius) var(--sscds-radius) 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 var(--sscds-radius) var(--sscds-radius);
+  }
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--sscds-border-color);
@@ -120,6 +128,7 @@ function TreeItem<D>({
   renderSecondaryContent,
   row,
   rowHeight,
+  rowActions = [],
   style,
   value,
   wrapperRef,
@@ -159,7 +168,7 @@ function TreeItem<D>({
       <TreeItemContent ref={innerRef} style={style}>
         <Inline align="center" stretch={2} style={{ width: '100%' }}>
           <Padbox paddingSize="sm">
-            <Inline align="center" gap="sm">
+            <Inline align="center">
               {isSortable && (
                 <BaseHandle
                   {...handleAttributes}
@@ -184,6 +193,11 @@ function TreeItem<D>({
               {renderSecondaryContent?.(row) ?? null}
             </Inline>
           </Padbox>
+          {rowActions.length !== 0 && (
+            <Padbox paddingSize="sm">
+              <RowActions row={row} rowActions={rowActions} />
+            </Padbox>
+          )}
         </Inline>
         {isClone && childCount && childCount > 1 && (
           <CountBox>

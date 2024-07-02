@@ -9,6 +9,8 @@ import type {
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
+import { IconNames, RegularIconTypes } from '../Icon';
+
 export interface TreeItemProps<D> extends Omit<ComponentProps<'li'>, 'id'> {
   depth: number;
   value: string;
@@ -32,6 +34,7 @@ export interface TreeItemProps<D> extends Omit<ComponentProps<'li'>, 'id'> {
   handleListeners: SyntheticListenerMap;
   activeRowId?: string;
   onActiveRowIdChange?: (id: string) => void;
+  rowActions?: RowAction<D>[];
 }
 
 export interface SortableTreeItemProps<D>
@@ -39,6 +42,19 @@ export interface SortableTreeItemProps<D>
   id: string;
   depth: number;
 }
+
+type RowActionCallbackUnion<D, Type> =
+  | Type
+  | ((props: { row: TreeViewRow<D> }) => Type);
+
+export type RowAction<D> = null | {
+  label: RowActionCallbackUnion<D, string>;
+  iconName: RowActionCallbackUnion<D, IconNames>;
+  iconType?: RowActionCallbackUnion<D, RegularIconTypes>;
+  onClick(props: { row: TreeViewRow<D> }): (event: Event) => void;
+  isDisabled?: RowActionCallbackUnion<D, boolean>;
+  isDestructive?: boolean;
+};
 
 export interface TreeViewProps<D> {
   data?: TreeItems<D>;
@@ -55,6 +71,7 @@ export interface TreeViewProps<D> {
   renderSecondaryContent?: (row: TreeViewRow<D>) => ReactNode;
   activeRowId?: string;
   onActiveRowIdChange?: (id: string) => void;
+  rowActions?: RowAction<D>[];
 }
 
 export interface BaseTreeItem<D> {
@@ -76,19 +93,3 @@ export type SensorContext<D> = MutableRefObject<{
   items: FlattenedItem<D>[];
   offset: number;
 }>;
-
-// type RowActionCallbackUnion<D, Type> =
-//   | Type
-//   | ((props: { row: DatatableRow<D>; table: DatatableInstance<D> }) => Type);
-
-// export type TreeViewRowAction<D> = null | {
-//   label: RowActionCallbackUnion<D, string>;
-//   iconName: RowActionCallbackUnion<D, IconNames>;
-//   iconType?: RowActionCallbackUnion<D, RegularIconTypes>;
-//   onClick(props: {
-//     row: DatatableRow<D>;
-//     table: DatatableInstance<D>;
-//   }): (event: Event) => void;
-//   isDisabled?: RowActionCallbackUnion<D, boolean>;
-//   isDestructive?: boolean;
-// };

@@ -1,8 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import BaseHandle, {
-  BaseHandlePlaceholder,
-} from '../../_internal/BaseHandle/BaseHandle';
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
+
+export const IndentationPlaceholder = styled.div`
+  width: 1.5rem;
+  height: 1.5rem;
+`;
 
 function CollapsibleHandle({
   collapsed,
@@ -12,7 +16,7 @@ function CollapsibleHandle({
   onCollapse?: () => void;
 }) {
   if (typeof onCollapse === 'undefined') {
-    return <BaseHandlePlaceholder />;
+    return <IndentationPlaceholder />;
   }
 
   return (

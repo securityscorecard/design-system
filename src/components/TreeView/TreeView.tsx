@@ -63,6 +63,7 @@ function TreeView<D>({
   onRowClick,
   activeRowId,
   onActiveRowIdChange,
+  rowActions,
 }: TreeViewProps<D>) {
   const [items, setItems] = useState(() => data);
 
@@ -139,6 +140,7 @@ function TreeView<D>({
                   renderPrimaryContent={renderPrimaryContent}
                   renderSecondaryContent={renderSecondaryContent}
                   row={row}
+                  rowActions={rowActions}
                   rowHeight={rowHeight}
                   value={id}
                   onActiveRowIdChange={onActiveRowIdChange}
