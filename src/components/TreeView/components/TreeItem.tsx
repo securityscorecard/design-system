@@ -14,7 +14,14 @@ const TreeItemRoot = styled.li`
   list-style: none;
   box-sizing: border-box;
   padding-left: var(--sscds-treeitem-indent);
-  border-bottom: 1px solid var(--sscds-border-color);
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--sscds-border-color);
+  }
+
+  &[data-active='true'] {
+    background-color: var(--sscds-color-background-surface-dynamic-default);
+  }
 
   &[data-clone] {
     display: inline-block;
@@ -32,6 +39,18 @@ const TreeItemRoot = styled.li`
   &[data-selection='false'] {
     user-select: none;
     -webkit-user-select: none;
+  }
+
+  &[tabIndex='0'] {
+    cursor: pointer;
+
+    &[data-active='true'] {
+      background-color: var(--sscds-color-background-surface-dynamic-default);
+    }
+
+    &:hover {
+      background-color: var(--sscds-color-primary-050);
+    }
   }
 `;
 TreeItemRoot.displayName = 'TreeItemRoot';
@@ -105,19 +124,35 @@ function TreeItem<D>({
   value,
   wrapperRef,
   innerRef,
+  activeRowId,
+  onActiveRowIdChange,
+  onRowClick,
   ...props
 }: TreeItemProps<D>) {
   return (
     <TreeItemRoot
       // @ts-expect-error Typing styled-components refs is almost impossible :facepalm:
       ref={wrapperRef}
+      data-active={activeRowId === value}
       data-clone={isClone}
       data-ghost={isGhost}
       data-interaction={!disableInteraction}
       data-selection={!disableSelection}
+      role={typeof onRowClick === 'function' ? 'button' : 'listitem'}
       style={{
         '--sscds-treeitem-height': pxToRem(rowHeight),
         '--sscds-treeitem-indent': pxToRem(INDENTATION_WIDTH * depth),
+      }}
+      tabIndex={typeof onRowClick === 'function' ? 0 : -1}
+      onClick={() => {
+        onRowClick?.(row);
+        onActiveRowIdChange(value);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onRowClick?.(row);
+          onActiveRowIdChange(value);
+        }
       }}
       {...props}
     >

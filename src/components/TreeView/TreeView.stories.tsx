@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -33,6 +33,18 @@ export const Playground: Story = {
       </Inline>
     ),
     onDragEnd: action('onDragEnd'),
+    onRowClick: action('onRowClick'),
+  },
+  render: function Render(args) {
+    const [activeRow, setActiveRow] = useState('');
+
+    return (
+      <TreeView
+        activeRowId={activeRow}
+        onActiveRowIdChange={setActiveRow}
+        {...args}
+      />
+    );
   },
   parameters: {
     screenshot: { skip: true },

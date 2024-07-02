@@ -6,13 +6,12 @@ import type {
   DragOverEvent,
   DragStartEvent,
   DraggableAttributes,
-  UniqueIdentifier,
 } from '@dnd-kit/core';
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 
 export interface TreeItemProps<D> extends Omit<ComponentProps<'li'>, 'id'> {
   depth: number;
-  value: UniqueIdentifier;
+  value: string;
   row: TreeViewRow<D>;
   rowHeight?: number;
   childCount?: number;
@@ -26,15 +25,18 @@ export interface TreeItemProps<D> extends Omit<ComponentProps<'li'>, 'id'> {
   disableInteraction?: boolean;
   disableSelection?: boolean;
   onCollapse?: () => void;
+  onRowClick?: (row: TreeViewRow<D>) => void;
   renderPrimaryContent?: (row: TreeViewRow<D>) => ReactNode;
   renderSecondaryContent?: (row: TreeViewRow<D>) => ReactNode;
   handleAttributes: DraggableAttributes;
   handleListeners: SyntheticListenerMap;
+  activeRowId?: string;
+  onActiveRowIdChange?: (id: string) => void;
 }
 
 export interface SortableTreeItemProps<D>
   extends Omit<TreeItemProps<D>, 'handleAttributes' | 'handleListeners'> {
-  id: UniqueIdentifier;
+  id: string;
   depth: number;
 }
 
@@ -48,12 +50,15 @@ export interface TreeViewProps<D> {
   onDragMove?: (event: DragMoveEvent) => void;
   onDragOver?: (event: DragOverEvent) => void;
   onDragStart?: (event: DragStartEvent) => void;
+  onRowClick?: (row: TreeViewRow<D>) => void;
   renderPrimaryContent?: (row: TreeViewRow<D>) => ReactNode;
   renderSecondaryContent?: (row: TreeViewRow<D>) => ReactNode;
+  activeRowId?: string;
+  onActiveRowIdChange?: (id: string) => void;
 }
 
 export interface BaseTreeItem<D> {
-  id: UniqueIdentifier;
+  id: string;
   collapsed?: boolean;
   subRows?: TreeViewRow<D>[];
 }
@@ -62,7 +67,7 @@ export type TreeViewRow<D> = BaseTreeItem<D> & D;
 export type TreeItems<D> = TreeViewRow<D>[];
 
 export type FlattenedItem<D> = {
-  parentId: UniqueIdentifier | null;
+  parentId: string | null;
   depth: number;
   index: number;
 } & TreeViewRow<D>;

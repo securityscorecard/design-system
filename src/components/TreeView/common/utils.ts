@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-syntax */
-import type { UniqueIdentifier } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
 import { INDENTATION_WIDTH } from './constants';
@@ -33,8 +32,8 @@ function getMinDepth<D>({ nextItem }: { nextItem: FlattenedItem<D> }) {
 
 export function getProjection<D>(
   items: FlattenedItem<D>[],
-  activeId: UniqueIdentifier,
-  overId: UniqueIdentifier,
+  activeId: string,
+  overId: string,
   dragOffset: number,
 ) {
   const overItemIndex = items.findIndex(({ id }) => id === overId);
@@ -83,7 +82,7 @@ export function getProjection<D>(
 
 function flatten<D>(
   items: TreeItems<D>,
-  parentId: UniqueIdentifier | null = null,
+  parentId: string | null = null,
   depth = 0,
 ): FlattenedItem<D>[] {
   return items.reduce<FlattenedItem<D>[]>((acc, item, index) => {
@@ -98,10 +97,7 @@ function flatten<D>(
 export function flattenTree<D>(items: TreeItems<D>): FlattenedItem<D>[] {
   return flatten(items);
 }
-export function findItem<D>(
-  items: BaseTreeItem<D>[],
-  itemId: UniqueIdentifier,
-) {
+export function findItem<D>(items: BaseTreeItem<D>[], itemId: string) {
   return items.find(({ id }) => id === itemId);
 }
 export function buildTree<D>(flattenedItems: FlattenedItem<D>[]): TreeItems<D> {
@@ -123,7 +119,7 @@ export function buildTree<D>(flattenedItems: FlattenedItem<D>[]): TreeItems<D> {
 
 export function findItemDeep<D>(
   items: TreeItems<D>,
-  itemId: UniqueIdentifier,
+  itemId: string,
 ): BaseTreeItem<D> | undefined {
   for (const item of items) {
     const { id, subRows } = item;
@@ -146,7 +142,7 @@ export function findItemDeep<D>(
 
 export function setProperty<D, T extends keyof BaseTreeItem<D>>(
   items: TreeItems<D>,
-  id: UniqueIdentifier,
+  id: string,
   property: T,
   setter: (value: TreeViewRow<D>[T]) => TreeViewRow<D>[T],
 ) {
@@ -173,16 +169,13 @@ function countSubRows<D>(items: BaseTreeItem<D>[], count = 0): number {
   }, count);
 }
 
-export function getSubRowCount<D>(items: TreeItems<D>, id: UniqueIdentifier) {
+export function getSubRowCount<D>(items: TreeItems<D>, id: string) {
   const item = findItemDeep(items, id);
 
   return item ? countSubRows(item.subRows ?? []) : 0;
 }
 
-export function removeSubRowsOf<D>(
-  items: FlattenedItem<D>[],
-  ids: UniqueIdentifier[],
-) {
+export function removeSubRowsOf<D>(items: FlattenedItem<D>[], ids: string[]) {
   const excludeParentIds = [...ids];
 
   return items.filter((item) => {

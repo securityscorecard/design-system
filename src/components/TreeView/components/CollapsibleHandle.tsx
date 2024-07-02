@@ -26,7 +26,10 @@ function CollapsibleHandle({
         collapsed ? 'expand' : 'collapse'
       } nested rows, press the space bar.`}
       type="button"
-      onClick={onCollapse}
+      onClick={(e) => {
+        e.stopPropagation();
+        onCollapse();
+      }}
     />
   );
 }
