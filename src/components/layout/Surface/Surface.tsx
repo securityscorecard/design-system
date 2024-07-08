@@ -35,12 +35,14 @@ const getBackground = (
 ): string => {
   switch (background) {
     case 'dynamic':
-      return mode === 'light' ? 'rgba(0 0 0/2.5%)' : 'rgba(255 255 255/10%)';
+      return mode === 'light'
+        ? 'var(--sscds-color-background-surface-dynamic-default)'
+        : 'var(--sscds-color-background-surface-dynamic-inverse)';
     case 'white':
-      return 'white';
+      return 'var(--sscds-color-white)';
     case 'transparent':
     default:
-      return 'transparent';
+      return 'var(--sscds-color-clear)';
   }
 };
 
@@ -81,7 +83,9 @@ const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
       '--sscds-elevation': getShadow(elevation),
       '--sscds-border-width': hasBorder ? '1px' : '0',
       '--sscds-border-color':
-        mode === 'light' ? 'rgba(0 0 0/15%)' : 'rgba(255 255 255/15%)',
+        mode === 'light'
+          ? 'var(--sscds-color-border-surface-default)'
+          : 'var(--sscds-color-border-surface-inverse)',
       ...style,
     };
 
