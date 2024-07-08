@@ -138,6 +138,19 @@
   --sscds-color-neutral-11: var(--slate-11);
   --sscds-color-neutral-12: var(--slate-12);
 
+  --sscds-color-neutral-alpha-1: var(--slate-a1);
+  --sscds-color-neutral-alpha-2: var(--slate-a2);
+  --sscds-color-neutral-alpha-3: var(--slate-a3);
+  --sscds-color-neutral-alpha-4: var(--slate-a4);
+  --sscds-color-neutral-alpha-5: var(--slate-a5);
+  --sscds-color-neutral-alpha-6: var(--slate-a6);
+  --sscds-color-neutral-alpha-7: var(--slate-a7);
+  --sscds-color-neutral-alpha-8: var(--slate-a8);
+  --sscds-color-neutral-alpha-9: var(--slate-a9);
+  --sscds-color-neutral-alpha-10: var(--slate-a10);
+  --sscds-color-neutral-alpha-11: var(--slate-a11);
+  --sscds-color-neutral-alpha-12: var(--slate-a12);
+
   --sscds-color-primary-050: var(--indigo-3);
   --sscds-color-primary-100: var(--indigo-5);
   --sscds-color-primary-200: var(--indigo-6);
@@ -210,7 +223,7 @@
   --sscds-color-brand-900: var(--brand-900);
 
   --sscds-color-background-body: var(--sscds-color-neutral-1);
-  --sscds-color-background-overlay: var(--slate-a10);
+  --sscds-color-background-overlay: var(--sscds-color-neutral-alpha-10);
 
   --sscds-color-background-surface-default: var(--sscds-color-neutral-0);
   --sscds-color-background-surface-dynamic-default: rgba(0 0 0/2.5%);
@@ -229,7 +242,7 @@
   --sscds-color-background-action-main-disabled: var(--sscds-color-neutral-4);
 
   --sscds-color-background-action-subtle-default: var(--sscds-color-clear);
-  --sscds-color-background-action-subtle-hover: var(--sscds-color-neutral-3);
+  --sscds-color-background-action-subtle-hover: var(--sscds-color-neutral-alpha-3);
   --sscds-color-background-action-subtle-active: var(--sscds-color-clear);
   --sscds-color-background-action-subtle-disabled: var(--sscds-color-neutral-4);
 
