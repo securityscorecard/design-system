@@ -153,14 +153,18 @@ function TreeItem<D>({
         '--sscds-treeitem-indent': pxToRem(INDENTATION_WIDTH * depth),
       }}
       tabIndex={typeof onRowClick === 'function' ? 0 : -1}
+      data-dnd-item
       onClick={() => {
         onRowClick?.(row);
-        onActiveRowIdChange(id);
+        onActiveRowIdChange?.(id);
       }}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (
+          (e.target as HTMLElement).dataset['dnd-item'] !== undefined &&
+          (e.key === 'Enter' || e.key === ' ')
+        ) {
           onRowClick?.(row);
-          onActiveRowIdChange(id);
+          onActiveRowIdChange?.(id);
         }
       }}
       {...props}

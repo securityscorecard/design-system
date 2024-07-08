@@ -14,7 +14,11 @@ export const iOS = /iPad|iPhone|iPod/.test(navigator.platform);
 function getDragDepth(offset: number, indentationWidth: number) {
   return Math.round(offset / indentationWidth);
 }
-function getMaxDepth<D>({ previousItem }: { previousItem: FlattenedItem<D> }) {
+export function getMaxDepth<D>({
+  previousItem,
+}: {
+  previousItem?: FlattenedItem<D>;
+}) {
   if (previousItem) {
     return previousItem.depth + 1;
   }
@@ -22,7 +26,7 @@ function getMaxDepth<D>({ previousItem }: { previousItem: FlattenedItem<D> }) {
   return 0;
 }
 
-function getMinDepth<D>({ nextItem }: { nextItem: FlattenedItem<D> }) {
+export function getMinDepth<D>({ nextItem }: { nextItem?: FlattenedItem<D> }) {
   if (nextItem) {
     return nextItem.depth;
   }
