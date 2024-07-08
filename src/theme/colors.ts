@@ -262,6 +262,7 @@ export const colors = {
         inverse: whiteA.whiteA2,
       },
       none: 'transparent',
+      hover: neutral[2],
     },
     input: {
       default: neutral[0],
@@ -353,6 +354,8 @@ export const colors = {
       default: neutralAlpha[6],
       inverse: whiteA.whiteA3,
       none: 'transparent',
+      hover: neutral[8],
+      active: indigo.indigo9,
     },
     input: {
       default: neutral[8],
