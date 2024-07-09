@@ -1,9 +1,9 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import IconButton from './IconButton';
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import RowActionsMenu from '../menus/RowActionsMenu';
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 
 const RowActionsButton = <D,>({
   row,
@@ -20,7 +20,7 @@ const RowActionsButton = <D,>({
     return (
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <IconButton
+          <BaseHandle
             className="ds-table-header-cell-row-actions-button"
             iconProps={{ name: 'ellipsis-h' }}
             label="Row actions"
@@ -47,7 +47,7 @@ const RowActionsButton = <D,>({
         : isDisabled;
 
     return (
-      <IconButton
+      <BaseHandle
         className="ds-table-header-cell-row-actions-button"
         iconProps={{ name: resolvedIconName, type: resolvedIconType }}
         isDestructive={isDestructive}

@@ -45,7 +45,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '--sscds-table-color-active': 'var(--sscds-color-neutral-3)',
           '--sscds-table-spacing-cell': 'var(--sscds-space-2x)',
           '--sscds-table-spacing-cell-header': 'var(--sscds-space-2x)',
-          '--sscds-table-spacing-cell-display': 'var(--sscds-space-2x)',
+          '--sscds-table-spacing-cell-display': 'var(--sscds-space-1x)',
           '--sscds-table-typography-weight-header':
             'var(--sscds-font-weight-700)',
           '--sscds-table-shadow-settings':
