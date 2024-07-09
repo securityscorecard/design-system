@@ -1,9 +1,9 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import IconButton from '../buttons/IconButton';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import ColumnActionsMenu from '../menus/ColumnActionsMenu';
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 
 const HeaderCellColumnActionsButton = <D,>({
   header,
@@ -18,7 +18,7 @@ const HeaderCellColumnActionsButton = <D,>({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <IconButton
+        <BaseHandle
           className="ds-table-header-cell-column-actions-button"
           iconProps={{
             name:

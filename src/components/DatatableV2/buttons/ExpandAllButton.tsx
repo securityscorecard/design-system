@@ -1,7 +1,7 @@
 import React from 'react';
 
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import { DatatableInstance } from '../Datatable.types';
-import IconButton from './IconButton';
 
 const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -15,7 +15,7 @@ const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const areSomeRowsExpanded = getIsSomeRowsExpanded();
 
   return (
-    <IconButton
+    <BaseHandle
       iconProps={{
         name: 'angles-right',
         rotation: areSomeRowsExpanded ? 270 : undefined,

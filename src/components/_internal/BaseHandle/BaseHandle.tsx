@@ -19,6 +19,7 @@ const BaseHandleRoot = styled.button<{ $isDestructive?: boolean }>`
   height: 2rem;
   border-radius: var(--sscds-radii-default);
   color: var(--sscds-color-icon-default);
+  transition: var(--sscds-action-transition);
   cursor: pointer;
 
   &:hover,
@@ -39,6 +40,7 @@ const BaseHandleRoot = styled.button<{ $isDestructive?: boolean }>`
 
   &:disabled {
     opacity: 0.5;
+    cursor: auto;
 
     &:hover,
     &[data-state='open'] {

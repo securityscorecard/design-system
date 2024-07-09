@@ -3,6 +3,7 @@ import React, {
   ComponentProps,
   ComponentPropsWithoutRef,
 } from 'react';
+import clx from 'classnames';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
@@ -51,11 +52,13 @@ const SelectButton = <D,>({
   row,
   table,
   isHeaderCheckbox = false,
+  hasTargetWrapper = false,
   style,
 }: {
   row?: DatatableRow<D>;
   table: DatatableInstance<D>;
   isHeaderCheckbox?: boolean;
+  hasTargetWrapper?: boolean;
 } & ComponentPropsWithoutRef<'input'>) => {
   const {
     getState,
@@ -93,23 +96,33 @@ const SelectButton = <D,>({
   };
 
   return enableMultiRowSelection ? (
-    <IndeterminateCheckbox
-      className="ds-table-select-multi-button ds-table-select-button"
-      indeterminate={
-        isHeaderCheckbox
-          ? table.getIsSomeRowsSelected() && !allRowsSelected
-          : false
-      }
-      {...common}
-      style={styles}
-    />
+    // IndeterminateCheckbox is input field wrapper association is done by wrapping the component
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <label
+      className={clx({ 'ds-table-select-button-target': hasTargetWrapper })}
+    >
+      <IndeterminateCheckbox
+        className="ds-table-select-multi-button ds-table-select-button"
+        indeterminate={
+          isHeaderCheckbox
+            ? table.getIsSomeRowsSelected() && !allRowsSelected
+            : false
+        }
+        {...common}
+        style={styles}
+      />
+    </label>
   ) : (
-    <input
-      className="ds-table-select-single-button ds-table-select-button"
-      type="radio"
-      {...common}
-      style={styles}
-    />
+    <label
+      className={clx({ 'ds-table-select-button-target': hasTargetWrapper })}
+    >
+      <input
+        className="ds-table-select-single-button ds-table-select-button"
+        type="radio"
+        {...common}
+        style={styles}
+      />
+    </label>
   );
 };
 
