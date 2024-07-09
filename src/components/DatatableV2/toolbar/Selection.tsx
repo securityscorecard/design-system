@@ -2,11 +2,10 @@ import React from 'react';
 import { pluck } from 'ramda';
 import styled from 'styled-components';
 
-import { abbreviateNumber, pxToRem } from '../../../utils';
+import { abbreviateNumber } from '../../../utils';
 import { DatatableInstance } from '../Datatable.types';
 import { Inline, Padbox } from '../../layout';
 import { Button } from '../../Button';
-import SelectButton from '../buttons/SelectButton';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 
 export const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
@@ -20,16 +19,19 @@ const SelectionRoot = styled(Padbox)<{ $hasHorizontalScroll: boolean }>`
   position: sticky;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 16px;
   z-index: 1;
-  transform: scale(1, -1);
+  /* transform: scale(1, -1); */
   background-color: var(--sscds-color-primary-050);
-  height: ${pxToRem(52 + 1)};
-  border-bottom: 1px solid var(--sscds-table-color-border);
+  border: 1px solid var(--sscds-color-primary-600);
+  border-radius: var(--sscds-radii-30);
+  margin: 16px 32px 0;
+  box-shadow: 0 4px 12px rgba(0 0 0 / 25%);
+  padding-left: 16px;
 `;
 const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
-    options: { renderRowSelectionActions, rowCount, enableSelectAll },
+    options: { renderRowSelectionActions, rowCount },
     getPrePaginationRowModel,
     getSelectedRowModel,
     toggleAllRowsSelected,
@@ -52,13 +54,6 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
     >
       <Inline align="center" gap="md" justify="space-between">
         <Inline align="center" className="ds-table-selection-overview" gap="md">
-          {enableSelectAll && (
-            <SelectButton
-              style={{ marginLeft: '2px' }}
-              table={table}
-              isHeaderCheckbox
-            />
-          )}
           <div>
             <strong className="ds-table-selection-currently-selected">
               {selectedRowsCount.toLocaleString('en-US')}

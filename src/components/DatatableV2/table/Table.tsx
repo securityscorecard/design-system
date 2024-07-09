@@ -7,7 +7,6 @@ import { parseCSSVarId } from '../columns.utils';
 import Settings from '../panels/Settings';
 import TableRoot from './TableRoot';
 import ProgressBar from './ProgressBar';
-import Selection from '../toolbar/Selection';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
 import { useHasHorizontalScroll } from '../hooks/useHasHorizontalScroll';
 
@@ -67,7 +66,6 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
       </table>
       {showProgress && <ProgressBar isBottom />}
       {showColumnSettings && <Settings table={table} />}
-      {table.options.enableRowSelection && <Selection table={table} />}
     </TableRoot>
   );
 };
