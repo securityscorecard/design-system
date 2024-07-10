@@ -1,5 +1,5 @@
 const spacingScale = [0, 2, 4, 8, 16, 24, 32, 48, 64, 96, 128];
-const baseSpaceUnit = '0.5rem';
+const baseSpaceUnit = '0.25rem';
 
 export const createSpace = () => ({
   xxs: spacingScale[1],
@@ -15,7 +15,6 @@ export const createSpace = () => ({
 
   /* new tokens */
   none: 0,
-  'quarter-x': `calc(${baseSpaceUnit} / 4)`,
   'half-x': `calc(${baseSpaceUnit} / 2)`,
   '1x': baseSpaceUnit,
   '2x': `calc(${baseSpaceUnit} * 2)`,
@@ -25,4 +24,6 @@ export const createSpace = () => ({
   '8x': `calc(${baseSpaceUnit} * 8)`,
   '12x': `calc(${baseSpaceUnit} * 12)`,
   '16x': `calc(${baseSpaceUnit} * 16)`,
+  '24x': `calc(${baseSpaceUnit} * 24)`,
+  '32x': `calc(${baseSpaceUnit} * 32)`,
 });
