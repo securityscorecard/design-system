@@ -226,7 +226,7 @@
   --sscds-color-background-overlay: var(--sscds-color-neutral-alpha-10);
 
   --sscds-color-background-surface-default: var(--sscds-color-neutral-0);
-  --sscds-color-background-surface-dynamic-default: rgba(0 0 0/2.5%);
+  --sscds-color-background-surface-dynamic-default: var(--sscds-color-neutral-alpha-2);
   --sscds-color-background-surface-dynamic-inverse: var(--white-a2);
   --sscds-color-background-surface-none: var(--sscds-color-clear);
 
@@ -295,7 +295,7 @@
   --sscds-color-border-warning: var(--amber-8);
   --sscds-color-border-danger: var(--tomato-8);
 
-  --sscds-color-border-surface-default: var(--black-a3);
+  --sscds-color-border-surface-default: var(--sscds-color-neutral-alpha-6);
   --sscds-color-border-surface-inverse: var(--white-a3);
   --sscds-color-border-surface-none: var(--sscds-color-clear);
 
