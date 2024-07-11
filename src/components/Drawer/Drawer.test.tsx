@@ -136,6 +136,24 @@ describe('Drawer', () => {
 
     userEvent.click(dropdownItem);
 
-    expect(dropdownClickMock).toBeCalled();
+    expect(dropdownClickMock).toHaveBeenCalled();
+  });
+
+  it('should should trigger the onClose when clicking on overlay', () => {
+    const onCloseMock = jest.fn();
+    renderWithProviders(
+      <Drawer
+        size="md"
+        onClose={onCloseMock}
+        title="Test drawer"
+        data-testid="drawer"
+      >
+        Content
+      </Drawer>,
+    );
+
+    userEvent.click(screen.getByTestId('dialog-overlay'));
+
+    expect(onCloseMock).toHaveBeenCalled();
   });
 });
