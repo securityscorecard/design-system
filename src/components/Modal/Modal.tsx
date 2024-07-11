@@ -87,8 +87,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <FloatingProvider>
         <Portal>
-          <Overlay placement="center">
-            <BaseFocusTrap onDeactivate={onClose as () => void}>
+          <BaseFocusTrap onDeactivate={onClose as () => void}>
+            <Overlay data-testid="dialog-overlay" placement="center">
               <BaseModal
                 ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
                 $maxWidth={widthVariants[size]}
@@ -118,8 +118,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   </Footer>
                 )}
               </BaseModal>
-            </BaseFocusTrap>
-          </Overlay>
+            </Overlay>
+          </BaseFocusTrap>
         </Portal>
       </FloatingProvider>
     );

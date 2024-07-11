@@ -206,11 +206,11 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       <FloatingProvider>
         <Portal>
           {hasBackdrop ? (
-            <Overlay placement="right">
-              <BaseFocusTrap onDeactivate={onClose as () => void}>
+            <BaseFocusTrap onDeactivate={onClose as () => void}>
+              <Overlay data-testid="dialog-overlay" placement="right">
                 <DrawerBox {...drawerProps} />
-              </BaseFocusTrap>
-            </Overlay>
+              </Overlay>
+            </BaseFocusTrap>
           ) : (
             <BaseFocusTrap onDeactivate={onClose as () => void}>
               <DrawerBox {...drawerProps} />
