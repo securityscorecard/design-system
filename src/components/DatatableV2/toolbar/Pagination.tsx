@@ -7,15 +7,23 @@ import { Inline, Padbox } from '../../layout';
 import IconButton from '../buttons/IconButton';
 import { DatatableInstance } from '../Datatable.types';
 
-const cq = {
-  sm: {
-    maxWidth: 512,
-  },
-  md: {
-    minWidth: 513,
-    maxWidth: 720,
-  },
-};
+/**
+ * THIS IS A QUICK FIX
+ * We need to replace the `react-container-query` with CSS based container queries
+ */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const cq = window?.__STORYBOOK_PREVIEW__ // eslint-disable-line no-underscore-dangle
+  ? { sm: { maxWidth: 0 } }
+  : {
+      sm: {
+        maxWidth: 512,
+      },
+      md: {
+        minWidth: 513,
+        maxWidth: 720,
+      },
+    };
 
 const Select = styled.select`
   border: 1px solid ${getFormStyle('borderColor')};
