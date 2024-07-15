@@ -149,6 +149,11 @@ const TableRoot = styled.div`
     padding: var(--sscds-table-spacing-cell-display);
   }
 
+  .ds-table-detail-panel-cell {
+    position: sticky;
+    left: 0;
+  }
+
   .ds-table-select-button-target {
     width: 2rem;
     height: 2rem;
