@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18','20']
+        node: ['18','20','22']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -59,9 +59,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-22-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -92,9 +92,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -138,7 +138,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -147,9 +147,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-22-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -174,7 +174,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -183,9 +183,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-22-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -202,7 +202,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18','20']
+        node: ['18','20','22']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -258,7 +258,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -267,9 +267,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-22-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -309,7 +309,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 
@@ -320,9 +320,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-22-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
@@ -336,7 +336,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build
-          key: node-18-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
+          key: node-22-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         if: steps.library-build-cache.outputs.cache-hit != 'true'
@@ -374,9 +374,9 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
+            ${{ runner.os }}-node-16-${{ env.cache-name }}-
             ${{ runner.os }}-node-${{ env.cache-name }}-
             ${{ runner.os }}-node-
             ${{ runner.os }}-
