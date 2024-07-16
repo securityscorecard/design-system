@@ -1,7 +1,7 @@
 import React from 'react';
 
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
-import IconButton from './IconButton';
 
 const ExpandButton = <D,>({
   table,
@@ -19,7 +19,7 @@ const ExpandButton = <D,>({
   const isExpanded = getIsExpanded();
 
   return (
-    <IconButton
+    <BaseHandle
       iconProps={{
         name: 'angle-right',
         rotation: isExpanded ? 90 : undefined,

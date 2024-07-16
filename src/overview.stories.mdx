@@ -15,7 +15,7 @@ import {
   Stack,
   H5,
   Heading,
-  SelectableGroup,
+  CreatableSelect,
   Switch,
   TextArea,
   SemanticModal,
@@ -285,79 +285,83 @@ export const StickerList = () => {
         title="Select"
         id="components-forms-select-select--playground"
       >
-        <Select
-          aria-label="Select"
-          options={[
-            {
-              isDisabled: true,
-              label: 'Croatia',
-              value: 'HR',
-            },
-            {
-              label: 'Cuba',
-              value: 'CU',
-            },
-            {
-              label: 'Curaçao',
-              value: 'CW',
-            },
-            {
-              label: 'Cyprus',
-              value: 'CY',
-            },
-            {
-              label: 'Czech Republic',
-              value: 'CZ',
-            },
-            {
-              label: 'Denmark',
-              value: 'DK',
-            },
-          ]}
-          placeholder="Select country..."
-        />
+        <div style={{ width: '100%' }}>
+          <Select
+            aria-label="Select"
+            options={[
+              {
+                isDisabled: true,
+                label: 'Croatia',
+                value: 'HR',
+              },
+              {
+                label: 'Cuba',
+                value: 'CU',
+              },
+              {
+                label: 'Curaçao',
+                value: 'CW',
+              },
+              {
+                label: 'Cyprus',
+                value: 'CY',
+              },
+              {
+                label: 'Czech Republic',
+                value: 'CZ',
+              },
+              {
+                label: 'Denmark',
+                value: 'DK',
+              },
+            ]}
+            placeholder="Select country..."
+          />
+        </div>
       </StickerItem>
       <StickerItem
-        title="Selectable Group"
-        id="components-forms-selectablegroup--playground"
+        title="Creatable Select"
+        id="components-forms-creatable-select--playground"
       >
-        <SelectableGroup
-          name="playground"
-          onChange={() => {}}
-          options={[
-            {
-              label: 'Games',
-              value: 'games',
-            },
-            {
-              isDisabled: true,
-              label: 'Music',
-              value: 'music',
-            },
-            {
-              isDisabled: false,
-              label: 'Biking',
-              value: 'biking',
-            },
-            {
-              label: 'Hiking',
-              value: 'hiking',
-            },
-            {
-              isDisabled: true,
-              label: 'Programming',
-              value: 'programming',
-            },
-            {
-              label: 'Driving',
-              value: 'driving',
-            },
-            {
-              label: 'Kung Fu',
-              value: 'kungfu',
-            },
-          ]}
-        />
+        <div style={{ width: '100%' }}>
+          <CreatableSelect
+            name="playground"
+            onChange={() => {}}
+            options={[
+              {
+                label: 'Games',
+                value: 'games',
+              },
+              {
+                isDisabled: true,
+                label: 'Music',
+                value: 'music',
+              },
+              {
+                isDisabled: false,
+                label: 'Biking',
+                value: 'biking',
+              },
+              {
+                label: 'Hiking',
+                value: 'hiking',
+              },
+              {
+                isDisabled: true,
+                label: 'Programming',
+                value: 'programming',
+              },
+              {
+                label: 'Driving',
+                value: 'driving',
+              },
+              {
+                label: 'Kung Fu',
+                value: 'kungfu',
+              },
+            ]}
+          />
+        </div>
       </StickerItem>
       <StickerItem title="Switch" id="components-forms-switch--playground">
         <Switch label="Public" switchId="playground" />

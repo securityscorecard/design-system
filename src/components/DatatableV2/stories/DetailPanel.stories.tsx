@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { ExpandedState } from '@tanstack/react-table';
+import { action } from '@storybook/addon-actions';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
@@ -29,6 +30,17 @@ DetailPanelEnabled.args = {
   enableExpanding: true,
   enableExpandAll: true,
   renderDetailPanel: Panel,
+  enableRowActions: true,
+  rowActions: [
+    {
+      iconName: 'eye-slash',
+      label: 'Make private',
+      onClick:
+        ({ row, table }) =>
+        (event) =>
+          action('row action')({ row, table, event }),
+    },
+  ],
 };
 DetailPanelEnabled.parameters = {
   screenshot: { skip: false },

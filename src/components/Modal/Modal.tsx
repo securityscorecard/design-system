@@ -12,6 +12,7 @@ import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Inline, Padbox } from '../layout';
 import { H4 } from '../Heading';
 import { Overlay } from '../_internal/BaseOverlay';
+import { BaseFocusTrap } from '../_internal/BaseFocusTrap';
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
@@ -57,6 +58,7 @@ const Content = styled(Padbox)`
 const Footer = styled(Padbox)`
   border-top: 1px solid ${getColor('neutral.300')};
 `;
+
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
     {
@@ -85,37 +87,39 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <FloatingProvider>
         <Portal>
-          <Overlay placement="center">
-            <BaseModal
-              ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
-              $maxWidth={widthVariants[size]}
-              className={cls(CLX_COMPONENT, className, 'ssc-ui-styled')}
-              {...rest}
-            >
-              <Inline stretch={StretchEnum.start}>
-                <Padbox paddingSize={SpaceSizes.lgPlus} paddingType="squish">
-                  {isNotUndefined(title) && <Title>{title}</Title>}
-                </Padbox>
-                {onClose && (
-                  <CloseButton
-                    marginCompensation={SpaceSizes.none}
-                    onClose={onClose}
-                  />
-                )}
-              </Inline>
-              <Content
-                paddingSize={paddingVariants[size]}
-                paddingType={hasFooter ? 'squish' : 'square'}
+          <BaseFocusTrap onDeactivate={onClose as () => void}>
+            <Overlay data-testid="dialog-overlay" placement="center">
+              <BaseModal
+                ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
+                $maxWidth={widthVariants[size]}
+                className={cls(CLX_COMPONENT, className, 'ssc-ui-styled')}
+                {...rest}
               >
-                {children}
-              </Content>
-              {hasFooter && (
-                <Footer paddingSize={SpaceSizes.lgPlus} paddingType="squish">
-                  {footer}
-                </Footer>
-              )}
-            </BaseModal>
-          </Overlay>
+                <Inline stretch={StretchEnum.start}>
+                  <Padbox paddingSize={SpaceSizes.lgPlus} paddingType="squish">
+                    {isNotUndefined(title) && <Title>{title}</Title>}
+                  </Padbox>
+                  {onClose && (
+                    <CloseButton
+                      marginCompensation={SpaceSizes.none}
+                      onClose={onClose}
+                    />
+                  )}
+                </Inline>
+                <Content
+                  paddingSize={paddingVariants[size]}
+                  paddingType={hasFooter ? 'squish' : 'square'}
+                >
+                  {children}
+                </Content>
+                {hasFooter && (
+                  <Footer paddingSize={SpaceSizes.lgPlus} paddingType="squish">
+                    {footer}
+                  </Footer>
+                )}
+              </BaseModal>
+            </Overlay>
+          </BaseFocusTrap>
         </Portal>
       </FloatingProvider>
     );

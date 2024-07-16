@@ -1,11 +1,13 @@
 import { screen } from '@testing-library/react';
-import React from 'react';
+import userEvent from '@testing-library/user-event';
+import React, { act } from 'react';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { Paragraph } from '../Paragraph';
+import { DropdownMenu } from '../DropdownMenu';
 import { Inline, Stack } from '../layout';
 import { pxToRem } from '../../utils/helpers';
 
@@ -103,5 +105,58 @@ describe('Drawer', () => {
 
     const content = screen.getByText('Whatever happens, happens here');
     expect(content).toBeInTheDocument();
+  });
+
+  it('should allow clicking on interactive elements in dropdown', async () => {
+    const dropdownClickMock = jest.fn();
+    renderWithProviders(
+      <Drawer
+        size="md"
+        onClose={() => null}
+        title="Test drawer"
+        data-testid="drawer"
+      >
+        <DropdownMenu
+          actions={[
+            {
+              label: 'OnClick',
+              name: 'onClick',
+              onClick: dropdownClickMock,
+            },
+          ]}
+        >
+          <button type="button">Trigger</button>
+        </DropdownMenu>
+      </Drawer>,
+    );
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      userEvent.click(screen.getByRole('button', { name: /Trigger/i }));
+    });
+
+    const dropdownItem = screen.getByRole('button', { name: /OnClick/i });
+    expect(dropdownItem).toBeInTheDocument();
+
+    userEvent.click(dropdownItem);
+
+    expect(dropdownClickMock).toHaveBeenCalled();
+  });
+
+  it('should should trigger the onClose when clicking on overlay', () => {
+    const onCloseMock = jest.fn();
+    renderWithProviders(
+      <Drawer
+        size="md"
+        onClose={onCloseMock}
+        title="Test drawer"
+        data-testid="drawer"
+      >
+        Content
+      </Drawer>,
+    );
+
+    userEvent.click(screen.getByTestId('dialog-overlay'));
+
+    expect(onCloseMock).toHaveBeenCalled();
   });
 });

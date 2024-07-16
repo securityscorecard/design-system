@@ -3,7 +3,7 @@ import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 
 import { Inline, Padbox } from '../../layout';
-import IconButton from '../buttons/IconButton';
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';
 
 const SettingsItem = <D,>({
@@ -35,6 +35,7 @@ const SettingsItem = <D,>({
       ref={setNodeRef}
       className="ds-table-settings-panel-item"
       paddingSize="md"
+      paddingType="squish"
       style={style}
     >
       <Inline
@@ -43,14 +44,14 @@ const SettingsItem = <D,>({
         stretch={enableColumnOrdering ? 2 : 'start'}
       >
         {enableColumnOrdering && (
-          <IconButton
+          <BaseHandle
             ref={setActivatorNodeRef}
-            iconProps={{ name: 'grip-lines' }}
+            iconProps={{ name: 'grip-dots-vertical' }}
             label={`Reorder ${column.columnDef.header} column`}
             type="button"
             {...attributes}
             {...listeners}
-            style={{ cursor: 'row-resize' }}
+            style={{ cursor: 'grab' }}
           />
         )}
         <span>{column.columnDef.header}</span>

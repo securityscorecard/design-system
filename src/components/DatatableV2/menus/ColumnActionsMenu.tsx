@@ -3,7 +3,11 @@ import { ColumnPinningPosition } from '@tanstack/react-table';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
-import { MenuContent, MenuItem, MenuSeparator } from './menuElements';
+import {
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
+} from '../../_internal/BaseDropdownMenu/menuElements';
 import { getHidableColumns } from '../columns.utils';
 
 const ColumnActionsMenu = <D,>({
