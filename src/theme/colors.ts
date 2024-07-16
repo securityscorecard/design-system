@@ -1,6 +1,5 @@
 import {
   amber,
-  blackA,
   blue,
   brown,
   cyan,
@@ -259,10 +258,11 @@ export const colors = {
     surface: {
       default: neutral[0],
       dynamic: {
-        default: 'rgba(0 0 0/2.5%)',
+        default: neutralAlpha[2],
         inverse: whiteA.whiteA2,
       },
       none: 'transparent',
+      hover: neutral[2],
     },
     input: {
       default: neutral[0],
@@ -351,9 +351,11 @@ export const colors = {
     warning: amber.amber8,
     danger: tomato.tomato8,
     surface: {
-      default: blackA.blackA3,
+      default: neutralAlpha[6],
       inverse: whiteA.whiteA3,
       none: 'transparent',
+      hover: neutral[8],
+      active: indigo.indigo9,
     },
     input: {
       default: neutral[8],

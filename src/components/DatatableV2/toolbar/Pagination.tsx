@@ -4,8 +4,8 @@ import { useContainerQuery } from 'react-container-query';
 
 import { abbreviateNumber, getFormStyle, getRadii } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
-import IconButton from '../buttons/IconButton';
 import { DatatableInstance } from '../Datatable.types';
+import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 
 /**
  * THIS IS A QUICK FIX
@@ -63,6 +63,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
       ref={containerRef}
       className="ds-table-pagination-toolbar"
       paddingSize="md"
+      paddingType="squish"
     >
       <Inline align="center" gap="md" justify="space-between">
         {enableRowsPerPage && !cqParams.sm && (
@@ -113,28 +114,28 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
           <span className="ds-table-pagination-buttons-current-page">
             {!isLg ? 'Pg.' : 'Page'} {currentPage}
           </span>
-          <IconButton
+          <BaseHandle
             className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
             iconProps={{ name: 'backward-step' }}
             isDisabled={!getCanPreviousPage()}
             label="Go to the first page of table"
             onClick={() => setPageIndex(0)}
           />
-          <IconButton
+          <BaseHandle
             className="ds-table-pagination-buttons-prev-button ds-table-pagination-buttons-button"
             iconProps={{ name: 'angle-left' }}
             isDisabled={!getCanPreviousPage()}
             label="Go to the previous page of table"
             onClick={() => previousPage()}
           />
-          <IconButton
+          <BaseHandle
             className="ds-table-pagination-buttons-next-button ds-table-pagination-buttons-button"
             iconProps={{ name: 'angle-right' }}
             isDisabled={!getCanNextPage()}
             label="Go to the next page of table"
             onClick={() => nextPage()}
           />
-          <IconButton
+          <BaseHandle
             className="ds-table-pagination-buttons-last-button ds-table-pagination-buttons-button"
             iconProps={{ name: 'backward-step', rotation: 180 }}
             isDisabled={!getCanNextPage()}
