@@ -100,9 +100,16 @@ export const useDatatable = <D>(
   const onResize = () => {
     setWidth(tableRef.current.getBoundingClientRect().width);
   };
+  const onKeyDown = (event: { key: string }) => {
+    if (event.key === 'Escape') {
+      setIsFullscreenMode(false);
+    }
+  };
   useEffect(() => {
     window.addEventListener('resize', onResize);
+    window.addEventListener('keydown', onKeyDown);
     return () => {
+      window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('resize', onResize);
     };
   }, []);

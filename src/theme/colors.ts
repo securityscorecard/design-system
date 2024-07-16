@@ -1,6 +1,5 @@
 import {
   amber,
-  blackA,
   blue,
   brown,
   cyan,
@@ -98,6 +97,21 @@ const neutral = {
   11: slate.slate11,
   12: slate.slate12,
   13: '#000000',
+};
+
+const neutralAlpha = {
+  1: slateA.slateA1,
+  2: slateA.slateA2,
+  3: slateA.slateA3,
+  4: slateA.slateA4,
+  5: slateA.slateA5,
+  6: slateA.slateA6,
+  7: slateA.slateA7,
+  8: slateA.slateA8,
+  9: slateA.slateA9,
+  10: slateA.slateA10,
+  11: slateA.slateA11,
+  12: slateA.slateA12,
 };
 
 const info = {
@@ -209,6 +223,7 @@ export const colors = {
   whiteA,
   primary,
   neutral,
+  neutralAlpha,
   info,
   success,
   warning,
@@ -239,14 +254,15 @@ export const colors = {
   /* new tokens */
   background: {
     body: neutral[2],
-    overlay: slateA.slateA10,
+    overlay: neutralAlpha[10],
     surface: {
       default: neutral[0],
       dynamic: {
-        default: 'rgba(0 0 0/2.5%)',
+        default: neutralAlpha[2],
         inverse: whiteA.whiteA2,
       },
       none: 'transparent',
+      hover: neutral[2],
     },
     input: {
       default: neutral[0],
@@ -264,7 +280,7 @@ export const colors = {
       },
       subtle: {
         default: 'transparent',
-        hover: neutral[3],
+        hover: neutralAlpha[3],
         active: 'transparent',
         disabled: neutral[4],
       },
@@ -335,9 +351,11 @@ export const colors = {
     warning: amber.amber8,
     danger: tomato.tomato8,
     surface: {
-      default: blackA.blackA3,
+      default: neutralAlpha[6],
       inverse: whiteA.whiteA3,
       none: 'transparent',
+      hover: neutral[8],
+      active: indigo.indigo9,
     },
     input: {
       default: neutral[8],

@@ -25,7 +25,7 @@ export const useDisplayColumns = <D,>(
               ? ExpandAllButton
               : null,
             cell: ExpandButton,
-            size: 48,
+            size: 40,
             ...tableOptions.defaultDisplayColumn,
           },
           tableOptions.enableRowSelection && {
@@ -34,9 +34,15 @@ export const useDisplayColumns = <D,>(
             headerComponent:
               tableOptions.enableSelectAll &&
               tableOptions.enableMultiRowSelection
-                ? ({ table }) => <SelectButton table={table} isHeaderCheckbox />
+                ? ({ table }) => (
+                    <SelectButton
+                      table={table}
+                      hasTargetWrapper
+                      isHeaderCheckbox
+                    />
+                  )
                 : null,
-            cell: SelectButton,
+            cell: (props) => <SelectButton {...props} hasTargetWrapper />,
             size: 40,
             ...tableOptions.defaultDisplayColumn,
           },
@@ -46,7 +52,7 @@ export const useDisplayColumns = <D,>(
             cell: ({ table, row }) => (
               <RowActionsButton row={row} table={table} />
             ),
-            size: 48,
+            size: 40,
             ...tableOptions.defaultDisplayColumn,
           },
         ] as DatatableColumnDef<D>[]

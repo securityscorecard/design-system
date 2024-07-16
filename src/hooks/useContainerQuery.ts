@@ -14,7 +14,8 @@ export const useContainerQuery = (cq: Query) => {
   const [query, containerRef] = useRCQ(cq, undefined);
 
   // RCQ is unstable in visual tests, so we need to disable it to avoid false positives
-  if (process.env.STORYBOOK === 'true') {
+  // eslint-disable-next-line no-underscore-dangle
+  if (window?.__STORYBOOK_PREVIEW__) {
     return [{}, containerRef];
   }
 

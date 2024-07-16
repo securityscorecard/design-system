@@ -54,6 +54,8 @@ export * from './Tabs';
 export * from './Text';
 export * from './Toast';
 export * from './Tooltip';
+export { default as TreeView } from './TreeView/TreeView';
+export { type TreeViewProps } from './TreeView/TreeView.types';
 export * from './TrendIcon';
 export * from './UserAvatar';
 export * from './Wizard';
