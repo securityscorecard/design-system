@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
@@ -10,7 +10,6 @@ import DropdownPane from './DropdownPane';
 import { DropdownPlacements } from './Dropdown.enums';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
-import { useFloatingContext } from '../../contexts/FloatingContext';
 
 const ControlledDropdown = forwardRef<
   HTMLDivElement,
@@ -45,12 +44,9 @@ const ControlledDropdown = forwardRef<
 
     useFocusTrap({ el: paneEl, enabled: isOpen && focusTrap });
     const { Portal } = usePortal();
-    const isInFloatingElement = useFloatingContext() ?? false;
-
-    const MaybePortal = isInFloatingElement ? Fragment : Portal;
 
     return isOpen ? (
-      <MaybePortal>
+      <Portal>
         <DropdownPane
           ref={mergeRefs(ref, setPaneEl)}
           arrowRef={setArrowEl}
@@ -67,7 +63,7 @@ const ControlledDropdown = forwardRef<
         >
           {children}
         </DropdownPane>
-      </MaybePortal>
+      </Portal>
     ) : null;
   },
 );
