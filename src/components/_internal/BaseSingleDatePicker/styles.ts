@@ -115,6 +115,7 @@ export const datePickerStyles = css`
   }
   .react-datepicker-popper {
     z-index: 10;
+    width: 16.25rem;
   }
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle,
