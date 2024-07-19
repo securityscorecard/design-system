@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18','20','22']
+        node: ['18','20','22.4.1']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22.4.1'
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -138,7 +138,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22.4.1'
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -174,7 +174,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22.4.1'
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -202,7 +202,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18','20','22']
+        node: ['18','20','22.4.1']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -258,7 +258,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22.4.1'
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -309,7 +309,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22.4.1'
           registry-url: 'https://registry.npmjs.org'
           scope: '@securityscorecard'
 

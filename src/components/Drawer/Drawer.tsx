@@ -11,7 +11,6 @@ import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
 import { Inline, Padbox, Surface } from '../layout';
 import { Overlay } from '../_internal/BaseOverlay';
-import { BaseFocusTrap } from '../_internal/BaseFocusTrap';
 import {
   getColor,
   getDepth,
@@ -206,15 +205,11 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       <FloatingProvider>
         <Portal>
           {hasBackdrop ? (
-            <BaseFocusTrap onDeactivate={onClose as () => void}>
-              <Overlay data-testid="dialog-overlay" placement="right">
-                <DrawerBox {...drawerProps} />
-              </Overlay>
-            </BaseFocusTrap>
-          ) : (
-            <BaseFocusTrap onDeactivate={onClose as () => void}>
+            <Overlay data-testid="dialog-overlay" placement="right">
               <DrawerBox {...drawerProps} />
-            </BaseFocusTrap>
+            </Overlay>
+          ) : (
+            <DrawerBox {...drawerProps} />
           )}
         </Portal>
       </FloatingProvider>
@@ -233,7 +228,6 @@ DrawerBox.propTypes = {
   size: PropTypes.oneOf(Object.values(DrawerSizes)),
   props: PropTypes.objectOf(PropTypes.oneOf([PropTypes.string])),
 };
-
 Drawer.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,

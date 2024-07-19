@@ -60,6 +60,9 @@ export default createGlobalStyle`
     font-size: 100%;
     vertical-align: baseline;
   }
+  abbr {
+    text-decoration: none;
+  }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
   footer, header, hgroup, main, menu, nav, section {
