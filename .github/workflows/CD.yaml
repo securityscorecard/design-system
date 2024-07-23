@@ -26,12 +26,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -59,12 +54,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-22-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -92,12 +82,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -108,7 +93,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: storybook-static
-          key: ${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
+          key: storybook-tests-node-16-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
 
       - name: Build Storybook
         if: steps.storybook-build-cache.outputs.cache-hit != 'true'
@@ -147,12 +132,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-22-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -183,12 +163,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-22-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -219,12 +194,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -235,7 +205,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build
-          key: node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
+          key: build-node-${{ matrix.node }}-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         run: yarn build
@@ -267,12 +237,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-22-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -320,12 +285,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-22-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -336,7 +296,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build
-          key: node-22-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
+          key: build-node-22-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         if: steps.library-build-cache.outputs.cache-hit != 'true'
@@ -374,12 +334,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: ${{ runner.os }}-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-16-${{ env.cache-name }}-
-            ${{ runner.os }}-node-${{ env.cache-name }}-
-            ${{ runner.os }}-node-
-            ${{ runner.os }}-
+          key: node-modules-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -390,13 +345,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: docs-build
-          key: docs-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
-          restore-keys: |
-            docs-
+          key: storybook-docs-${{ needs.get-next-version.outputs.new-release-version }}-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
 
       - name: Build Storybook
         if: steps.storybook-build-cache.outputs.cache-hit != 'true'
-        run: yarn build-storybook -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
+        run: yarn build:storybook -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
 
       - name: Generate redirect index
         if: github.ref == 'refs/heads/main'
