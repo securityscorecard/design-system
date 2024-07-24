@@ -94,6 +94,7 @@
     "@commitlint/config-conventional": "^17.6.6",
     "@faker-js/faker": "^8.2.0",
     "@fontsource/inter": "^5.0.18",
+    "@fontsource/space-mono": "^5.0.20",
     "@geometricpanda/storybook-addon-badges": "^0.2.1",
     "@mdx-js/react": "^1.6.22",
     "@prisma-capacity/babel-plugin-react-display-name": "^1.0.6",

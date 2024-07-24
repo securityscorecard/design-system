@@ -1,6 +1,6 @@
 :root {
   --sscds-font-family-body: 'Inter', 'Lato', 'Helvetica Neue', arial, helvetica, sans-serif;
-  --sscds-font-family-mono: 'space-mono', 'Courier New', courier, monospace;
+  --sscds-font-family-mono: 'Space Mono', 'Courier New', courier, monospace;
 
   --sscds-font-size-10: 0.75rem; /* 12px */
   --sscds-font-size-20: 0.875rem; /* 14px */
