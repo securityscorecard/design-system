@@ -2786,6 +2786,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/space-mono@npm:^5.0.20":
+  version: 5.0.20
+  resolution: "@fontsource/space-mono@npm:5.0.20"
+  checksum: 9d09a9f1b7b87c53a959b9d757e98cf93aede9915e466a6397926c79e0bd090cb83f29cb28870e169cf91a45a8574537c4eb63301e119adf6da8e300b844353b
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-common-types@npm:6.5.2":
   version: 6.5.2
   resolution: "@fortawesome/fontawesome-common-types@npm:6.5.2"
@@ -4799,6 +4806,7 @@ __metadata:
     "@faker-js/faker": ^8.2.0
     "@fluentui/react-component-ref": ^0.62.0
     "@fontsource/inter": ^5.0.18
+    "@fontsource/space-mono": ^5.0.20
     "@fortawesome/fontawesome-svg-core": ^6.1.2
     "@fortawesome/react-fontawesome": ^0.2.0
     "@geometricpanda/storybook-addon-badges": ^0.2.1

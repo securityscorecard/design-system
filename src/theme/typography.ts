@@ -3,7 +3,7 @@ const family = {
 
   /* new tokens */
   body: "Inter, 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif",
-  mono: "'space-mono', 'Courier New', Courier, monospace",
+  mono: "'Space Mono', 'Courier New', Courier, monospace",
 } as const;
 
 const sizeScale = {
