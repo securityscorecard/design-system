@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import AutosizeInput from 'react-input-autosize';
 import PropTypes from 'prop-types';
 import {
   dropLast,
@@ -23,7 +22,6 @@ import {
   omitIndexes,
 } from 'ramda-adjunct';
 import { useDeepCompareEffect } from 'use-deep-compare';
-import 'focus-within-polyfill';
 import cls from 'classnames';
 
 import {
@@ -34,7 +32,7 @@ import {
   getSpace,
   pxToRem,
 } from '../../../utils';
-import { Cluster, Inline, Padbox } from '../../layout';
+import { Inline, Padbox } from '../../layout';
 import { SpaceSizes } from '../../../theme';
 import { Icon } from '../../Icon';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
@@ -83,7 +81,12 @@ const Control = styled.div<ValueContainerProps>`
 `;
 
 const ValueContainer = styled(Padbox)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${getSpace('xs')};
   padding-left: ${getSpace(SpaceSizes.md)};
+  overflow: hidden;
+  flex: 1 1 0%;
   ${({ $hasValue, theme }) =>
     $hasValue &&
     css`
@@ -92,22 +95,34 @@ const ValueContainer = styled(Padbox)`
 `;
 
 const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
+  display: inline-grid;
+  grid-area: 1 / 1 / 2 / 3;
+  grid-template-columns: 0 min-content;
   line-height: ${getFormStyle('fieldLineHeight')};
+  flex: 1 1 auto;
 
-  input {
-    background: transparent;
-    border: 0 none;
-    color: ${getFormStyle('color')};
-    font-family: ${getFontFamily('base')};
-    font-size: ${getFontSize('md')};
-    line-height: ${getFormStyle('fieldLineHeight')};
-    outline: none;
+  &::after {
+    content: attr(data-value) ' ';
+    visibility: hidden;
+    white-space: pre;
+    grid-area: 1 / 2 / auto / auto;
+    min-width: 2px;
+  }
+`;
 
-    &::-ms-clear {
-      display: none;
-    }
+const InputField = styled.input`
+  grid-area: 1 / 2 / auto / auto;
+  background: transparent;
+  border: 0 none;
+  color: ${getFormStyle('color')};
+  font-family: ${getFontFamily('base')};
+  font-size: ${getFontSize('md')};
+  line-height: ${getFormStyle('fieldLineHeight')};
+  outline: none;
+  min-width: 2px;
+  width: 100%;
+  &::-ms-clear {
+    display: none;
   }
 `;
 
@@ -309,37 +324,39 @@ const MultiValueInput = ({
           paddingSize={SpaceSizes.xs}
           style={{ overflow: 'hidden' }}
         >
-          <Cluster gap={SpaceSizes.xs}>
-            {values.map((label, index) => (
-              <Pill
-                key={label}
-                label={label}
-                maxLabelLength={maxPillLabelLength}
-                onRemove={!isDisabled ? hadleOnRemove(index) : undefined}
-              />
-            ))}
-            <InputContainer>
-              <AutosizeInput
-                {...props}
-                disabled={isDisabled}
-                id={inputId}
-                injectStyles={false}
-                inputRef={setInputRef}
-                minWidth={15}
-                pattern={pattern}
-                placeholder={isEmptyArray(values) ? placeholder : undefined}
-                value={inputValue}
-                onBlur={handleInputOnBlur}
-                onChange={(e) => handleInputOnChange(e)}
-                onKeyDown={handleInputOnKeyDown}
-                onPaste={handleInputOnPaste}
-              />
-            </InputContainer>
-          </Cluster>
+          {values.map((label, index) => (
+            <Pill
+              key={label}
+              label={label}
+              maxLabelLength={maxPillLabelLength}
+              onRemove={!isDisabled ? hadleOnRemove(index) : undefined}
+            />
+          ))}
+          <InputContainer data-value={inputValue || placeholder}>
+            <InputField
+              {...props}
+              ref={setInputRef}
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              disabled={isDisabled}
+              id={inputId}
+              pattern={pattern}
+              placeholder={isEmptyArray(values) ? placeholder : undefined}
+              spellCheck="false"
+              type="text"
+              value={inputValue}
+              onBlur={handleInputOnBlur}
+              onChange={(e) => handleInputOnChange(e)}
+              onKeyDown={handleInputOnKeyDown}
+              onPaste={handleInputOnPaste}
+            />
+          </InputContainer>
         </ValueContainer>
         {isClearable && !isDisabled && isNonEmptyArray(values) && (
           <ClearButton
             aria-label="Clear all values"
+            type="reset"
             onClick={handleClearAllOnClick}
             onKeyDown={handleClearAllOnKeyDown}
           >
