@@ -75,20 +75,6 @@ To update the locally published package with new changes you can follow the proc
 
 The re-publishing process can be simplified to `yarn build && yalc push`. The `yalc push` command will handle both publishing new versions to the local registry and updating version in a project using DS from the local registry.
 
-
-## PNP with Yarn Modern
-This project uses Yarn Modern with Plug'n'play installation method. As a result, you won't see any 'node_modules' folder in the root directory. If you have previously worked on this project, we recommend removing the original 'node_modules' folder before running 'yarn' to create a Yarn cache. Although we don't anticipate any major issues, if you encounter any problems, please don't hesitate to contact us or refer to the Troubleshooting section below.
-
-### Troubleshooting
-
-#### Cannot find module <require-path>
-This error can be caused by not using the patched version of the typescript package. If you are using VS Code, please follow the steps below:
-
-1. Press `cmd+shift+p` in a TypeScript file
-2. Choose "Select TypeScript Version"
-3. Pick "Use Workspace Version"
-4. Restart VS Code (if needed)
-
 ## Contributing
 
 - read the [Contributing guide](CONTRIBUTING.md)

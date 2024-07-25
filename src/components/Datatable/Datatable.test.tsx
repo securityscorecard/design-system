@@ -120,7 +120,9 @@ describe('Datatable', () => {
 
     const elementCounter = screen.getByTestId('counter-content');
 
-    expect(elementCounter).toHaveTextContent('1 of 3 selected');
+    await waitFor(() =>
+      expect(elementCounter).toHaveTextContent(/^1 of 3 selected$/),
+    );
     userEvent.click(screen.getByRole('button', { name: /Remove/i }));
 
     await waitFor(() => expect(elementCounter).toHaveTextContent(/^2$/));
@@ -131,6 +133,8 @@ describe('Datatable', () => {
       })[2],
     );
 
-    expect(elementCounter).toHaveTextContent('1 of 2 selected');
+    await waitFor(() =>
+      expect(elementCounter).toHaveTextContent(/^1 of 2 selected$/),
+    );
   });
 });

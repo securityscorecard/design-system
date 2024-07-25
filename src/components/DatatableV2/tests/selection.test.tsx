@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -155,9 +155,12 @@ describe('DatatableV2/selection', () => {
         await userEvent.click(
           screen.getByRole('button', { name: /Go to the next page of table/i }),
         );
-        expect(
-          screen.getAllByLabelText('Toggle select all')[0],
-        ).toBePartiallyChecked();
+
+        await waitFor(() => {
+          expect(
+            screen.getAllByLabelText('Toggle select all')[0],
+          ).toBePartiallyChecked();
+        });
         expect(
           screen.getAllByLabelText('Toggle select row')[0],
         ).not.toBeChecked();

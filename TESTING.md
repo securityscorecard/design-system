@@ -36,14 +36,6 @@ Linting (eslint and stylelint) is run in a pre-commit hook as well as in CI.
 `yarn lint:fix` - check and try to fix errors in all files
 `yarn lint:css` - check styled-components syntax in all files
 
-## Betterer (long term goals)
-
-We are utilizing a project called [Betterer](https://phenomnomnominal.github.io/betterer/) to maintain and continually improve our code quality. This tool performs tests to ensure that long-term goals, such as component deprecation and code migration, are met. We execute these checks in both pre-commit hooks and CI.
-
-### Scripts
-
-`yarn betterer` - check the codebase
-
 ## Typings
 
 The typing check is automatically run in CI.

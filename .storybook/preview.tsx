@@ -19,7 +19,8 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-import '../src/tokens/index.css';
+import '@fontsource/space-mono/400.css';
+import '../src/tokens/tokens.css';
 
 export const parameters = {
   backgrounds: {

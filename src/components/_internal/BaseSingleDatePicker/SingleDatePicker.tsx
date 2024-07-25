@@ -2,12 +2,20 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { noop } from 'ramda-adjunct';
-import DatePicker from 'react-datepicker';
+import ReactDatePicker from 'react-datepicker';
 
 import { datePickerStyles, singleDatePickerStyles } from './styles';
 import { SingleDatePickerProps } from './SingleDatePicker.types';
 import { DatePickerCustomHeader } from './CustomHeader';
 import { CLX_COMPONENT } from '../../../theme/constants';
+
+/**
+ * The imports in "react-datepicker" are strangely done and after migration to Vite
+ * the default import stopped working. This should point React to use the coorect import
+ */
+const DatePicker =
+  (ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ??
+  ReactDatePicker;
 
 export const StyledDatePicker = styled.div`
   ${datePickerStyles}

@@ -1,29 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useContainerQuery } from 'react-container-query';
 
 import { abbreviateNumber, getFormStyle, getRadii } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
+import { useContainerQuery } from '../../../hooks/useContainerQuery';
 import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 
-/**
- * THIS IS A QUICK FIX
- * We need to replace the `react-container-query` with CSS based container queries
- */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const cq = window?.__STORYBOOK_PREVIEW__ // eslint-disable-line no-underscore-dangle
-  ? { sm: { maxWidth: 0 } }
-  : {
-      sm: {
-        maxWidth: 512,
-      },
-      md: {
-        minWidth: 513,
-        maxWidth: 720,
-      },
-    };
+const cq = {
+  sm: {
+    maxWidth: 512,
+  },
+  md: {
+    minWidth: 513,
+    maxWidth: 720,
+  },
+};
 
 const Select = styled.select`
   border: 1px solid ${getFormStyle('borderColor')};
@@ -54,7 +46,6 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const firstRowIndex = pageIndex * pageSize;
   const lastRowIndex = Math.min(pageIndex * pageSize + pageSize, totalRowCount);
 
-  // @ts-expect-error types of react-container-query wrongly marks second arg as required
   const [cqParams, containerRef] = useContainerQuery(cq);
   const isLg = !cqParams.sm && !cqParams.md;
 

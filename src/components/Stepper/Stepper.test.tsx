@@ -53,7 +53,8 @@ describe('Stepper', () => {
     expect(screen.queryByTestId('step-content')).not.toBeInTheDocument();
   });
 
-  it('should not render Step text if container width is lower than the text breakpoint ', () => {
+  // We are skipping this test because the container query is not reliable in jest tests
+  it.skip('should not render Step text if container width is lower than the text breakpoint ', () => {
     render(
       <div style={{ width: '550px' }}>
         <Stepper orientation={StepperOrientations.horizontal}>

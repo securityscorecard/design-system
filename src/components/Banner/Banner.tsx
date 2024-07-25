@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useContainerQuery } from 'react-container-query';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -28,6 +27,7 @@ import { baseToastBannerColorVariants } from '../_internal/BaseToastBanner/BaseT
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { useContainerQuery } from '../../hooks/useContainerQuery';
 
 const iconPxSizesVariants = {
   [BannerVariants.info]: 16,
@@ -116,7 +116,7 @@ const Banner = ({
     }),
     [changeLayoutBreakpoint],
   );
-  const [query, containerRef] = useContainerQuery(changeLayoutQuery, undefined);
+  const [query, containerRef] = useContainerQuery(changeLayoutQuery);
   const isInline = query[CHANGE_LAYOUT_BREAKPOINT];
   return (
     <StyledPadbox

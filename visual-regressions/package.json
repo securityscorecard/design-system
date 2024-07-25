@@ -8,14 +8,10 @@
     "serve-take-and-check": "start-server-and-test 'serve storybook' http-get://localhost:3000 'STORYBOOK_URL=http://localhost:3000 ./bin/take.sh && ./bin/check.sh'"
   },
   "devDependencies": {
-    "reg-cli": "^0.17.7",
-    "serve": "^13.0.0",
-    "start-server-and-test": "^2.0.0",
-    "storycap": "^4.3.1"
+    "reg-cli": "0.18.1",
+    "serve": "^14.2.3",
+    "start-server-and-test": "^2.0.4",
+    "storycap": "^5.0.0"
   },
-  "resolutions": {
-    "minimatch": "3.0.5",
-    "trim-newlines": "^4.0.2"
-  },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@4.3.1"
 }

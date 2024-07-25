@@ -134,7 +134,7 @@ describe('Datatable/Table', () => {
       );
     });
   });
-  it('should call onClick handler in row action dropdown with correct parameters', () => {
+  it('should call onClick handler in row action dropdown with correct parameters', async () => {
     const rowActionMock = jest.fn();
     const rowIndex = 0;
     renderWithProviders(
@@ -153,9 +153,8 @@ describe('Datatable/Table', () => {
       screen.getAllByRole('button', { name: /Row Actions/i })[rowIndex],
     );
 
-    userEvent.click(
-      screen.getAllByRole('button', { name: 'Action' })[rowIndex],
-    );
+    const rowActions = await screen.findAllByRole('button', { name: 'Action' });
+    userEvent.click(rowActions[rowIndex]);
 
     expect(rowActionMock).toBeCalledWith(
       `${rowIndex}`,
@@ -371,7 +370,7 @@ describe('Datatable/Table', () => {
 
       userEvent.click(
         screen.getByRole('columnheader', {
-          name: /Sort Col2/i,
+          name: /Col2/i,
         }),
       );
 

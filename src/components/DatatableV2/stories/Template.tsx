@@ -27,7 +27,7 @@ export const columns: DatatableColumnDef<DataSource>[] = [
     cell: (props) => {
       return (
         <Cluster gap="xs">
-          {props.cell.getValue<DataSource['detectionMethod']>().map((val) => (
+          {props.cell.getValue<DataSource['detectionMethod']>()?.map((val) => (
             <Pill key={val} label={val} />
           ))}
         </Cluster>

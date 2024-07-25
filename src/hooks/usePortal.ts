@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useContext } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { noop } from 'ramda-adjunct';
 import useCoolPortal, { OnHide, OnShow, RCPF } from 'react-cool-portal';
 
@@ -14,7 +14,7 @@ type UsePortal = (config?: {
   showPortal: RCPF;
   hidePortal: RCPF;
   isPortalVisible: boolean;
-  Portal: ({ children }: { children: ReactNode }) => ReactElement;
+  Portal: FC<{ children: ReactNode }>;
 };
 
 export const usePortal: UsePortal = ({

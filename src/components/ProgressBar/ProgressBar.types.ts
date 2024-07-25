@@ -4,9 +4,9 @@ import type {
 } from './ProgressBar.enums';
 
 export type ProgressBarVariant =
-  typeof ProgressBarVariants[keyof typeof ProgressBarVariants];
+  (typeof ProgressBarVariants)[keyof typeof ProgressBarVariants];
 export type ProgressBarSize =
-  typeof ProgressBarSizes[keyof typeof ProgressBarSizes];
+  (typeof ProgressBarSizes)[keyof typeof ProgressBarSizes];
 
 export type ProgressBarProps = {
   /** Current value of the progress bar */

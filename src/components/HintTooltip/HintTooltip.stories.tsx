@@ -31,7 +31,7 @@ export default {
 const Popup = (
   <Stack gap="md">
     <Paragraph size="md">This is the tooltip content</Paragraph>
-    <Link variant="text">Here is some link</Link>
+    <Link>Here is some link</Link>
   </Stack>
 );
 

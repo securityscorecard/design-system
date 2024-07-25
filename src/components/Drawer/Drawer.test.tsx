@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { act } from 'react';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';
@@ -107,7 +107,7 @@ describe('Drawer', () => {
     expect(content).toBeInTheDocument();
   });
 
-  it('should allow clicking on interactive elements in dropdown', () => {
+  it('should allow clicking on interactive elements in dropdown', async () => {
     const dropdownClickMock = jest.fn();
     renderWithProviders(
       <Drawer
@@ -129,7 +129,10 @@ describe('Drawer', () => {
         </DropdownMenu>
       </Drawer>,
     );
-    userEvent.click(screen.getByRole('button', { name: /Trigger/i }));
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      userEvent.click(screen.getByRole('button', { name: /Trigger/i }));
+    });
 
     const dropdownItem = screen.getByRole('button', { name: /OnClick/i });
     expect(dropdownItem).toBeInTheDocument();

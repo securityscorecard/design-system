@@ -11,13 +11,13 @@ export * from './ControlDropdown';
 export * from './Datatable';
 export * from './DatatableV2';
 export * from './DateRangePicker';
-export { default as Display, DisplayProps } from './Display/Display';
+export { default as Display, type DisplayProps } from './Display/Display';
 export * from './Drawer';
 export * from './Dropdown';
 export * from './DropdownMenu';
 export {
   default as ElementLabel,
-  ElementLabelProps,
+  type ElementLabelProps,
 } from './ElementLabel/ElementLabel';
 export * from './ErrorBoundary';
 export * from './FileSelector';
@@ -55,7 +55,7 @@ export * from './Text';
 export * from './Toast';
 export * from './Tooltip';
 export { default as TreeView } from './TreeView/TreeView';
-export { TreeViewProps } from './TreeView/TreeView.types';
+export { type TreeViewProps } from './TreeView/TreeView.types';
 export * from './TrendIcon';
 export * from './UserAvatar';
 export * from './Wizard';

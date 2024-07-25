@@ -1,8 +1,7 @@
-const path = require("path");
+import { includes } from 'ramda';
+import type { StorybookConfig } from '@storybook/react/types';
 
-const { includes } = require('ramda');
-
-module.exports = {
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
   addons: [
     '@storybook/addon-a11y',
@@ -74,3 +73,5 @@ module.exports = {
     return config;
   },
 };
+
+export default config;

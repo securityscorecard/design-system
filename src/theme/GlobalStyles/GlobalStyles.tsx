@@ -8,8 +8,6 @@ import {
   getToken,
   pxToRem,
 } from '../../utils';
-import SpaceMonoRegularWoff2 from '../fonts/SpaceMono-Regular.woff2';
-import SpaceMonoRegularWoff from '../fonts/SpaceMono-Regular.woff';
 
 const flattenColors = ([key, value]) => {
   if (typeof value === 'string') {
@@ -29,13 +27,6 @@ export const generateColorsCSSVars = ({ theme: { colors } }) => {
 };
 
 export default createGlobalStyle`
-  @font-face {
-    font-family: 'space-mono';
-    src: url(${SpaceMonoRegularWoff2}), url(${SpaceMonoRegularWoff});
-    font-style: normal;
-    font-weight: 400;
-  }
-
   /* http://meyerweb.com/eric/tools/css/reset/
     v4.0 | 20180602
     License: none (public domain)
@@ -59,6 +50,9 @@ export default createGlobalStyle`
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
+  }
+  abbr {
+    text-decoration: none;
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,

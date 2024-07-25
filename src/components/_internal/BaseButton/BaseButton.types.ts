@@ -3,7 +3,7 @@ import type { To } from 'history';
 import { DefaultTheme } from 'styled-components';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
-import { IconNames, RegularIconTypes } from '../../Icon/Icon.types';
+import type { IconNames, RegularIconTypes } from '../../Icon/Icon.types';
 import {
   BaseButtonColors,
   BaseButtonSizes,
@@ -12,13 +12,15 @@ import {
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 
 export type Variants =
-  typeof BaseButtonVariants[keyof typeof BaseButtonVariants];
-export type Sizes = typeof BaseButtonSizes[keyof typeof BaseButtonSizes];
-export type Colors = typeof BaseButtonColors[keyof typeof BaseButtonColors];
-type BaseIconProps = {
+  (typeof BaseButtonVariants)[keyof typeof BaseButtonVariants];
+export type Sizes = (typeof BaseButtonSizes)[keyof typeof BaseButtonSizes];
+export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
+
+export interface BaseIcon {
   name: IconNames;
   type?: RegularIconTypes;
-};
+}
+
 export interface BaseButtonProps
   extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'as'> {
   variant?: Variants;
@@ -32,8 +34,8 @@ export interface BaseButtonProps
   href?: string;
   to?: To;
   className?: string;
-  iconStart?: BaseIconProps;
-  iconEnd?: BaseIconProps;
+  iconStart?: BaseIcon;
+  iconEnd?: BaseIcon;
   /** @deprecated Use iconStart property instead */
   iconName?: IconNames;
   /** @deprecated Use iconStart property instead */
