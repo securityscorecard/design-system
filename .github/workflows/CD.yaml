@@ -54,7 +54,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -132,7 +132,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -163,7 +163,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -237,7 +237,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -285,7 +285,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-22-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -296,7 +296,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build
-          key: build-node-22-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
+          key: build-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json', '**/rollup.config.js', 'src/**') }}
 
       - name: Build Step
         if: steps.library-build-cache.outputs.cache-hit != 'true'
@@ -349,7 +349,7 @@ jobs:
 
       - name: Build Storybook
         if: steps.storybook-build-cache.outputs.cache-hit != 'true'
-        run: yarn build:storybook -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
+        run: yarn storybook:build -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
 
       - name: Generate redirect index
         if: github.ref == 'refs/heads/main'
