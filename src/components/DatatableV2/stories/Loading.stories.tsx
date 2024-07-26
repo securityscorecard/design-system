@@ -1,5 +1,5 @@
 // import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
@@ -7,7 +7,7 @@ import Template, { Story } from './Template';
 export default {
   title: 'components/DatatableV2/Loading',
   component: Datatable,
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const Loading: Story = Template.bind({});
 Loading.args = {

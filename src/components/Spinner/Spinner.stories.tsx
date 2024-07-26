@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Spinner from './Spinner';
 import { SpinnerProps } from './Spinner.types';
@@ -9,7 +9,7 @@ export default {
   component: Spinner,
 } as Meta;
 
-export const Playground: Story<SpinnerProps> = (args) => {
+export const Playground: StoryFn<SpinnerProps> = (args) => {
   const { dark } = args;
   return (
     <div style={{ background: dark ? undefined : '#000', padding: '10px' }}>
@@ -21,9 +21,9 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const DarkSpinner: Story = () => <Spinner dark />;
+export const DarkSpinner: StoryFn = () => <Spinner dark />;
 
-export const LightSpinner: Story = () => (
+export const LightSpinner: StoryFn = () => (
   <div style={{ background: '#000', padding: '10px' }}>
     <Spinner />
   </div>

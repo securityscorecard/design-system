@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { noop } from 'ramda-adjunct';
 
 import Button from '../Button/Button';
@@ -27,7 +27,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<ToastProps> = (args) => (
+export const Playground: StoryFn<ToastProps> = (args) => (
   <Toast {...args}>
     <Stack gap={SpaceSizes.sm} justify="flex-start">
       <p>This is a notification.</p>
@@ -43,7 +43,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const LongToast: Story = () => (
+export const LongToast: StoryFn = () => (
   <Toast onClose={action('close-toast')}>
     <Stack gap={SpaceSizes.sm} justify="flex-start">
       <p>
@@ -56,7 +56,7 @@ export const LongToast: Story = () => (
   </Toast>
 );
 
-export const TwoActions: Story = () => (
+export const TwoActions: StoryFn = () => (
   <Toast onClose={action('close-toast')}>
     <Stack gap={SpaceSizes.sm} justify="flex-start">
       <p>
@@ -72,7 +72,7 @@ export const TwoActions: Story = () => (
   </Toast>
 );
 
-export const CustomWidthToast: Story = () => (
+export const CustomWidthToast: StoryFn = () => (
   <Toast width={470} onClose={action('close-toast')}>
     <Stack gap={SpaceSizes.sm} justify="flex-start">
       <p>
@@ -85,7 +85,7 @@ export const CustomWidthToast: Story = () => (
   </Toast>
 );
 
-export const InfoToastNoAction: Story = () => (
+export const InfoToastNoAction: StoryFn = () => (
   <Toast variant={ToastVariants.info} onClose={action('close-toast')}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non massa a
@@ -94,7 +94,7 @@ export const InfoToastNoAction: Story = () => (
   </Toast>
 );
 
-export const SuccessToastNoAction: Story = () => (
+export const SuccessToastNoAction: StoryFn = () => (
   <Toast variant={ToastVariants.success} onClose={action('close-toast')}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non massa a
@@ -103,7 +103,7 @@ export const SuccessToastNoAction: Story = () => (
   </Toast>
 );
 
-export const WarnToastNoAction: Story = () => (
+export const WarnToastNoAction: StoryFn = () => (
   <Toast variant={ToastVariants.warn} onClose={action('close-toast')}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non massa a
@@ -112,7 +112,7 @@ export const WarnToastNoAction: Story = () => (
   </Toast>
 );
 
-export const ErrorToastNoAction: Story = () => (
+export const ErrorToastNoAction: StoryFn = () => (
   <Toast variant={ToastVariants.error} onClose={action('close-toast')}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non massa a
@@ -121,7 +121,7 @@ export const ErrorToastNoAction: Story = () => (
   </Toast>
 );
 
-export const InfoToastWithActions: Story = () => (
+export const InfoToastWithActions: StoryFn = () => (
   <Toast variant={ToastVariants.info} onClose={action('close-toast')}>
     <Stack gap={SpaceSizes.sm} justify="flex-start">
       <p>
@@ -136,7 +136,7 @@ export const InfoToastWithActions: Story = () => (
   </Toast>
 );
 
-export const LoadingToastVariant: Story = () => (
+export const LoadingToastVariant: StoryFn = () => (
   <Toast variant={ToastVariants.loading} onClose={action('close-toast')}>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non massa a

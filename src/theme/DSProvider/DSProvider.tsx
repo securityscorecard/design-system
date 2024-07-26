@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { ThemeProvider } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
@@ -33,14 +32,6 @@ const DSProvider = ({ children, theme = {}, config = {} }: DSProviderProps) => {
       </DSContext.Provider>
     </ThemeProvider>
   );
-};
-
-DSProvider.propTypes = {
-  theme: PropTypes.shape({}),
-  config: PropTypes.shape({
-    portalsContainer: PropTypes.string,
-    hasIncludedGlobalStyles: PropTypes.bool,
-  }),
 };
 
 export default DSProvider;

@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="managers/NotificationsProvider/Docs" />
+
+# NotificationsProvider
+
+This feature provides an api to display toast notifications programatically
+
+## Usage
+
+First, you need to render in your application the `NotificationsProvider` component.
+
+```jsx
+import { NotificationsProvider } from '@securityscorecard/design-system';
+
+const App = () => (
+  <>
+    <NotificationsProvider />
+    <YourApplication />
+  </>
+);
+```
+
+Then you can use `addNotification` function to create a new toast notification.
+
+### Component
+
+```jsx
+import { addNotification } from '@securityscorecard/design-system';
+
+const YourComponent = () => (
+  <Button
+    onClick={() => {
+      addNotification({
+        id: 'toast-1',
+        variant: 'warn',
+        content: 'The rule has been resumed',
+        autoDismiss: true,
+      });
+    }}
+  >
+    Add new notification
+  </Button>
+);
+```
+
+## Provider functions
+
+Manager functions are based on dispatching [custom events](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events)
+and hadling those events in event listeners.
+
+### Exported funtions
+
+| Key                | Type                                                 | Description           |
+| :----------------- | :--------------------------------------------------- | :-------------------- |
+| addNotification    | <code>(notification: Notification) =&gt; void</code> | Adds new notification |
+| updateNotification | <code>(notification: Notification) =&gt; void</code> | Update notification   |
+| removeBanner       | <code>(id: string) =&gt; void</code>                 | Remove notification   |
+
+### Notification options
+
+| Property    | Type                                                                                                                                 | Required           | Default            | Description                                                    |
+| :---------- | :----------------------------------------------------------------------------------------------------------------------------------- | :----------------- | :----------------- | :------------------------------------------------------------- |
+| id          | <code>boolean</code>                                                                                                                 | <code>true</code>  | -                  | Unique identifier                                              |
+| content     | <code>ReactNode</code>                                                                                                               | <code>true</code>  | -                  | Content of the notification                                    |
+| variant     | <code>&apos;info&apos; &vert; &apos;warn&apos; &vert; &apos;error&apos; &vert; &apos;success&apos; &vert; &apos;loading&apos;</code> | <code>false</code> | -                  | Specifies the type of toast notification that will be display. |
+| autoDismiss | <code>boolean</code>                                                                                                                 | <code>false</code> | <code>false</code> | If defined, notification will be auto dismissed after 6000ms   |

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SegmentedToggleProps } from './SegmentedToggle.types';
 import { SegmentedToggle, SegmentedToggleItem } from './index';
@@ -18,7 +18,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<SegmentedToggleProps> = (args) => (
+export const Playground: StoryFn<SegmentedToggleProps> = (args) => (
   <SegmentedToggle {...args}>
     <SegmentedToggleItem itemId="input1" label="One" value="1" defaultChecked />
     <SegmentedToggleItem itemId="input2" label="Two" value="2" />
@@ -32,7 +32,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => (
+export const Default: StoryFn = () => (
   <SegmentedToggle group="default">
     <SegmentedToggleItem
       itemId="default_input1"
@@ -45,7 +45,7 @@ export const Default: Story = () => (
   </SegmentedToggle>
 );
 
-export const Disabled: Story = () => (
+export const Disabled: StoryFn = () => (
   <Stack gap={SpaceSizes.lg} justify="flex-start">
     <SegmentedToggle group="sizes_md_disabled" isDisabled>
       <SegmentedToggleItem
@@ -64,7 +64,7 @@ export const Disabled: Story = () => (
   </Stack>
 );
 
-export const StateManagement: Story = () => {
+export const StateManagement: StoryFn = () => {
   const [selected, setSelected] = useState('1');
 
   const handleChange = (e) => {

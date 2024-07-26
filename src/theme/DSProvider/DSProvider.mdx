@@ -1,0 +1,54 @@
+import { Controls, Meta } from '@storybook/blocks';
+
+import * as DSProviderStories from './DSProvider.stories';
+
+<Meta of={DSProviderStories} title="Theme/DSProvider" />
+
+# DSProvider
+
+In order to use Design System components you need to add `styled-components` theme provider.
+You can extend [default Design System theme](/docs/theme-theme-object--page) with you own
+values when `theme` prop is passed into the component. This component also includes reset CSS rules
+(this is opt-out feature via `config.hasIncludedGlobalStyles` property).
+
+<Controls />
+
+### Usage with default theme
+
+```jsx
+// AppComponent.jsx
+import { DSProvider } from '@securityscorecard/design-system'
+...
+
+const AppComponent = (
+  <Provider store={this.store}>
+    <DSProvider>
+      <Root />
+    </DSProvider>
+  </Provider>
+);
+```
+
+### Usage with extended theme
+
+```jsx
+// AppComponent.jsx
+import { DSProvider } from '@securityscorecard/design-system'
+...
+
+const customTheme = {
+  heights: {
+    header: '3rem',
+    footer: '2rem',
+  },
+  ...
+}
+
+const AppComponent = (
+  <Provider store={this.store}>
+    <DSProvider theme={customTheme}>
+      <Root />
+    </DSProvider>
+  </Provider>
+);
+```

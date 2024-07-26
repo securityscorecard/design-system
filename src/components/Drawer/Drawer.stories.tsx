@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -71,7 +71,7 @@ function Content() {
     </Stack>
   );
 }
-export const Playground: Story<DrawerProps> = (args) => {
+export const Playground: StoryFn<DrawerProps> = (args) => {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -97,7 +97,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithTitleAndAdornment: Story = () => (
+export const WithTitleAndAdornment: StoryFn = () => (
   <Drawer
     adornment={<Adornment />}
     footer={<Footer />}
@@ -109,7 +109,7 @@ export const WithTitleAndAdornment: Story = () => (
   </Drawer>
 );
 
-export const WithOverflowingTitle: Story = () => (
+export const WithOverflowingTitle: StoryFn = () => (
   <Drawer
     footer={<Footer />}
     size="md"
@@ -120,7 +120,7 @@ export const WithOverflowingTitle: Story = () => (
   </Drawer>
 );
 
-export const WithoutBackdrop: Story = () => {
+export const WithoutBackdrop: StoryFn = () => {
   const [displaySomething, setDisplaySomething] = useState(false);
   const [displayDrawer, setDisplayDrawer] = useState(false);
   const [displaySemanticModal, setDisplaySemanticModal] = useState(false);
@@ -197,7 +197,7 @@ export const WithoutBackdrop: Story = () => {
   );
 };
 
-export const WithSemanticModal: Story = () => {
+export const WithSemanticModal: StoryFn = () => {
   const [displaySemanticModal, setDisplaySemanticModal] = useState(false);
 
   const close = (): void => {
@@ -255,7 +255,7 @@ const Subheader = styled(Padbox)`
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
 `;
 
-export const WithSubheader: Story = () => (
+export const WithSubheader: StoryFn = () => (
   <Drawer
     footer={<Footer />}
     size="lg"
@@ -294,7 +294,7 @@ export const WithSubheader: Story = () => (
   </Drawer>
 );
 
-export const ModalNested: Story = () => {
+export const ModalNested: StoryFn = () => {
   const [drawerVisible, setDrawerVisibility] = useState(false);
   const [modalVisible, setModalVisibility] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -361,7 +361,7 @@ const Subheader = styled(Padbox)\`
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
 \`;
 
-export const WithSubheader: Story = () => (
+export const WithSubheader: StoryFn = () => (
   <Drawer>
     <Stack gap={SpaceSizes.lg}>
       <Subheader paddingSize={SpaceSizes.lg} paddingType="squish">

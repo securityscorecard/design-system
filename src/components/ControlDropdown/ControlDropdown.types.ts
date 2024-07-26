@@ -6,7 +6,7 @@ export interface ControlDropdownProps {
   /**
    * Reference to opener button used to calculate correct position
    */
-  parentRef: React.MutableRefObject<HTMLSpanElement>;
+  parentRef: React.MutableRefObject<HTMLSpanElement | null>;
   /**
    * Title in dropdown header
    */

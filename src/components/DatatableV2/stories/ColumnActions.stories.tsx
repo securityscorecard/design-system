@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
@@ -6,7 +6,7 @@ import Template, { Story, columns } from './Template';
 export default {
   title: 'components/DatatableV2/ColumnActions',
   component: Datatable,
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const ColumnActionsEnabled: Story = Template.bind({});
 ColumnActionsEnabled.args = Template.args;

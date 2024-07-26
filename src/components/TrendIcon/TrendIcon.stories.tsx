@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { TrendIcon } from './TrendIcon';
 import { Inline } from '../layout';
@@ -7,9 +7,9 @@ import { Inline } from '../layout';
 export default {
   title: 'components/TrendIcon',
   component: TrendIcon,
-} as ComponentMeta<typeof TrendIcon>;
+} as Meta<typeof TrendIcon>;
 
-type Story = ComponentStory<typeof TrendIcon>;
+type Story = StoryFn<typeof TrendIcon>;
 
 export const Playground: Story = (args) => <TrendIcon {...args} />;
 Playground.args = {

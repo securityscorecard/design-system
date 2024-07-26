@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { Row } from 'react-table';
 import { MemoryRouter } from 'react-router-dom';
 import { equals, F as stubFalse } from 'ramda';
@@ -63,10 +63,12 @@ LinkComponent.propTypes = {
   className: PropTypes.string,
 };
 
+type Story = StoryFn<CellRendererProps<CellRendererData>>;
+
 /**
  *  DEFAULT RENDERER
  */
-export const Default: Story<CellRendererProps<CellRendererData>> = (args) => (
+export const Default: Story = (args) => (
   <CellRenderer<CellRendererData> {...args} />
 );
 Default.args = {
@@ -80,9 +82,9 @@ Default.args = {
   } as Row<CellRendererData>,
 };
 
-export const WithNullValue: Story<CellRendererProps<CellRendererData>> = (
-  args,
-) => <CellRenderer<CellRendererData> {...args} />;
+export const WithNullValue: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 WithNullValue.args = {
   ...Default.args,
   value: 'unknown',
@@ -92,9 +94,9 @@ WithNullValue.args = {
   },
 };
 
-export const WithCustomNullValue: Story<CellRendererProps<CellRendererData>> = (
-  args,
-) => <CellRenderer<CellRendererData> {...args} />;
+export const WithCustomNullValue: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 WithCustomNullValue.args = {
   ...WithNullValue.args,
   column: {
@@ -103,9 +105,9 @@ WithCustomNullValue.args = {
   },
 };
 
-export const NullValueWithTooltip: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const NullValueWithTooltip: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 NullValueWithTooltip.args = {
   ...WithCustomNullValue.args,
   column: {
@@ -124,9 +126,9 @@ NullValueWithTooltip.args = {
 /**
  *  TEXT RENDERER
  */
-export const TextWithTooltip: Story<CellRendererProps<CellRendererData>> = (
-  args,
-) => <CellRenderer<CellRendererData> {...args} />;
+export const TextWithTooltip: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 TextWithTooltip.args = {
   ...Default.args,
   column: {
@@ -141,9 +143,9 @@ TextWithTooltip.args = {
     ),
   },
 };
-export const TextWithCustomFormatter: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const TextWithCustomFormatter: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 TextWithCustomFormatter.args = {
   ...Default.args,
   value: 123456789,
@@ -156,9 +158,9 @@ TextWithCustomFormatter.args = {
 /**
  *  MULTIVALUE RENDERER
  */
-export const MultiValue: Story<CellRendererProps<CellRendererData>> = (
-  args,
-) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValue: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValue.args = {
   ...Default.args,
   value: ['value1', 'value2', 'value3', 'value4', 'value5'],
@@ -167,9 +169,9 @@ MultiValue.args = {
     cellType: CellTypes.multiValue,
   },
 };
-export const MultiValueWithOnClick: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValueWithOnClick: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValueWithOnClick.args = {
   ...MultiValue.args,
   column: {
@@ -177,9 +179,9 @@ MultiValueWithOnClick.args = {
     cellOnClick: action('onCellValueClick'),
   },
 };
-export const MultiValueWithAbsoluteLink: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValueWithAbsoluteLink: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValueWithAbsoluteLink.args = {
   ...MultiValue.args,
   column: {
@@ -187,9 +189,9 @@ MultiValueWithAbsoluteLink.args = {
     cellHrefComposer: (val, row) => `?value=${val}&${composeQuery(row)}`,
   },
 };
-export const MultiValueWithRelativeLink: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValueWithRelativeLink: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValueWithRelativeLink.args = {
   ...MultiValue.args,
   column: {
@@ -198,9 +200,9 @@ MultiValueWithRelativeLink.args = {
     cellLinkComponent: LinkComponent,
   },
 };
-export const MultiValueWithTooltip: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValueWithTooltip: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValueWithTooltip.args = {
   ...MultiValue.args,
   column: {
@@ -215,9 +217,9 @@ MultiValueWithTooltip.args = {
     ),
   },
 };
-export const MultiValueWithDisabledDisplayLimit: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValueWithDisabledDisplayLimit: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValueWithDisabledDisplayLimit.args = {
   ...MultiValue.args,
   column: {
@@ -225,9 +227,9 @@ MultiValueWithDisabledDisplayLimit.args = {
     multiValueDisplayLimit: 0,
   },
 };
-export const MultiValueWithCustomFormatter: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const MultiValueWithCustomFormatter: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 MultiValueWithCustomFormatter.args = {
   ...MultiValue.args,
   value: [1235678, 987654, 654213],
@@ -240,9 +242,9 @@ MultiValueWithCustomFormatter.args = {
 /**
  *  LINK RENDERER
  */
-export const LinkWithOnClick: Story<CellRendererProps<CellRendererData>> = (
-  args,
-) => <CellRenderer<CellRendererData> {...args} />;
+export const LinkWithOnClick: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 LinkWithOnClick.args = {
   ...Default.args,
   column: {
@@ -251,9 +253,9 @@ LinkWithOnClick.args = {
     cellOnClick: action('onCellValueClick'),
   },
 };
-export const LinkWithAbsoluteLink: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const LinkWithAbsoluteLink: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 LinkWithAbsoluteLink.args = {
   ...LinkWithOnClick.args,
   column: {
@@ -261,9 +263,9 @@ LinkWithAbsoluteLink.args = {
     cellHrefComposer: (val, row) => `?value=${val}&${composeQuery(row)}`,
   },
 };
-export const LinkWithRelativeLink: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const LinkWithRelativeLink: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 LinkWithRelativeLink.args = {
   ...LinkWithOnClick.args,
   column: {
@@ -272,9 +274,9 @@ LinkWithRelativeLink.args = {
     cellLinkComponent: LinkComponent,
   },
 };
-export const LinkWithTooltip: Story<CellRendererProps<CellRendererData>> = (
-  args,
-) => <CellRenderer<CellRendererData> {...args} />;
+export const LinkWithTooltip: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 LinkWithTooltip.args = {
   ...LinkWithOnClick.args,
   column: {
@@ -289,9 +291,9 @@ LinkWithTooltip.args = {
     ),
   },
 };
-export const LinkWithCustomFormatter: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const LinkWithCustomFormatter: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 LinkWithCustomFormatter.args = {
   ...LinkWithOnClick.args,
   value: 123456789,
@@ -304,9 +306,9 @@ LinkWithCustomFormatter.args = {
 /**
  *  DISCRETE LINK RENDERER
  */
-export const DiscreteLinkWithOnClick: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const DiscreteLinkWithOnClick: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 DiscreteLinkWithOnClick.args = {
   ...Default.args,
   column: {
@@ -315,9 +317,9 @@ DiscreteLinkWithOnClick.args = {
     cellOnClick: action('onCellValueClick'),
   },
 };
-export const DiscreteLinkWithAbsoluteLink: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const DiscreteLinkWithAbsoluteLink: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 DiscreteLinkWithAbsoluteLink.args = {
   ...DiscreteLinkWithOnClick.args,
   column: {
@@ -325,9 +327,9 @@ DiscreteLinkWithAbsoluteLink.args = {
     cellHrefComposer: (val, row) => `?value=${val}&${composeQuery(row)}`,
   },
 };
-export const DiscreteLinkWithRelativeLink: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const DiscreteLinkWithRelativeLink: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 DiscreteLinkWithRelativeLink.args = {
   ...DiscreteLinkWithOnClick.args,
   column: {
@@ -336,9 +338,9 @@ DiscreteLinkWithRelativeLink.args = {
     cellLinkComponent: LinkComponent,
   },
 };
-export const DiscreteLinkWithTooltip: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const DiscreteLinkWithTooltip: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 DiscreteLinkWithTooltip.args = {
   ...DiscreteLinkWithOnClick.args,
   column: {
@@ -353,9 +355,9 @@ DiscreteLinkWithTooltip.args = {
     ),
   },
 };
-export const DiscreteLinkWithCustomFormatter: Story<
-  CellRendererProps<CellRendererData>
-> = (args) => <CellRenderer<CellRendererData> {...args} />;
+export const DiscreteLinkWithCustomFormatter: Story = (args) => (
+  <CellRenderer<CellRendererData> {...args} />
+);
 DiscreteLinkWithCustomFormatter.args = {
   ...DiscreteLinkWithOnClick.args,
   value: 123456789,

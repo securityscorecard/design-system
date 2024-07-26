@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
+import { OptionsType } from 'react-select';
 
 import { Button } from '../Button';
 import ControlledDropdown from './ControlledDropdown';
 import { DropdownProps } from './Dropdown.types';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { generateControl } from '../../utils/tests/storybook';
-import { CreatableSelect } from '../forms/Select';
+import { CreatableSelect, Option } from '../forms/Select';
 
 export default {
   title: 'components/Dropdown/ControlledDropdown',
@@ -39,12 +40,14 @@ const options = [
   { value: 'Jack', label: 'Jack' },
 ];
 
-export const UsingWithAnotherComponentControlled: Story<DropdownProps> = (
+export const UsingWithAnotherComponentControlled: StoryFn<DropdownProps> = (
   args,
 ) => {
-  const [currentValue, setCurrentValue] = useState(null);
+  const [currentValue, setCurrentValue] = useState<OptionsType<Option> | null>(
+    null,
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [triggerEl, setTriggerEl] = useState<HTMLElement>(null);
+  const [triggerEl, setTriggerEl] = useState<HTMLElement | null>(null);
 
   return (
     <>
@@ -63,7 +66,7 @@ export const UsingWithAnotherComponentControlled: Story<DropdownProps> = (
         {...args}
         ref={null}
         isOpen={isDropdownOpen}
-        triggerEl={triggerEl}
+        triggerEl={triggerEl as HTMLElement}
         onClickOut={() => {
           setIsDropdownOpen(false);
         }}
@@ -85,7 +88,7 @@ export const UsingWithAnotherComponentControlled: Story<DropdownProps> = (
           isMenuPositionRelative
           isMulti
           menuIsOpen
-          onChange={setCurrentValue}
+          onChange={(value) => setCurrentValue(value)}
           onCreateOption={(inputString) => {
             const newOption = {
               label: inputString,

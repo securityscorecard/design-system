@@ -1,77 +1,37 @@
-import { includes } from 'ramda';
-import type { StorybookConfig } from '@storybook/react/types';
+import type { StorybookConfig } from '@storybook/react-vite';
+import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(tsx|jsx|mdx)'],
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-actions',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-measure',
-    'storycap',
-    'storybook-addon-designs',
-    'storybook-addon-outline',
-    '@geometricpanda/storybook-addon-badges',
-    {
-      name: '@storybook/addon-styling-webpack',
-      options: {
-        rules: [
-          // Replaces existing CSS rules to support PostCSS
-          {
-            test: /\.css$/,
-            use: [
-              'style-loader',
-              {
-                loader: 'css-loader',
-                options: { importLoaders: 1 }
-              },
-              {
-                // Gets options from `postcss.config.js` in your project root
-                loader: 'postcss-loader',
-                options: { postcssOptions: {plugins: [require('postcss-import')],} }
-              }
-            ],
-          }
-        ]
-      }
-    }
-
+  stories: [
+    '../src/**/*.@(mdx|stories.@(tsx|jsx))',
+    '../docs/**/*.mdx'
   ],
-  features: {
-    postcss: false,
-  },
-  typescript: {
-    check: false,
-    checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {
-      // shouldExtractValuesFromUnion: true, // disable it for now as it cause issues in SBv6.2
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => {
-        if (prop.parent) {
-          // filter inherited props
-          return (
-            !prop.parent.fileName.includes('node_modules/@types/react/') &&
-            !prop.parent.fileName.includes('node_modules/@emotion/') &&
-            !prop.parent.fileName.includes('node_modules/@types/node/') &&
-            !prop.parent.fileName.includes('node_modules/typescript/')
-          );
-        }
-        // filter inherited styled-components props
-        return !includes(prop.name, ['theme', 'as', 'forwardedAs', 'ref']);
+  addons: [
+    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
       },
     },
-  },
-  webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.mjs$/,
-      include: /node_modules/,
-      type: 'javascript/auto',
+    '@storybook/addon-a11y',
+    '@storybook/addon-designs',
+    'storycap',
+  ],
+  framework: '@storybook/react-vite',
+  async viteFinal(config) {
+    const { mergeConfig } = await import('vite');
+
+    return mergeConfig(config, {
+      define: {
+        'process.env.STORYBOOK': true,
+    },
     });
-    return config;
-  },
+  }
 };
 
 export default config;

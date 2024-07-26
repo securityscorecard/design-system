@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Input from './Input';
 import { InputProps } from './Input.types';
@@ -29,7 +29,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<
+export const Playground: StoryFn<
   InputProps & React.InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Input {...args} aria-label="Input" />;
 Playground.args = { type: 'text' };
@@ -37,24 +37,24 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => <Input aria-label="Input" type="text" />;
+export const Default: StoryFn = () => <Input aria-label="Input" type="text" />;
 
-export const Filled: Story = () => (
+export const Filled: StoryFn = () => (
   <Input aria-label="Input" defaultValue="SecurityScorecard" type="text" />
 );
 
-export const WithPlaceholder: Story = () => (
+export const WithPlaceholder: StoryFn = () => (
   <Input aria-label="Input" placeholder="Company name" type="text" />
 );
 
-export const Focus: Story = () => (
+export const Focus: StoryFn = () => (
   <Input aria-label="Input" className="focus" type="text" />
 );
 
-export const Invalid: Story = () => (
+export const Invalid: StoryFn = () => (
   <Input aria-label="Input" type="text" isInvalid />
 );
 
-export const Disabled: Story = () => (
+export const Disabled: StoryFn = () => (
   <Input aria-label="Input" type="text" isDisabled />
 );

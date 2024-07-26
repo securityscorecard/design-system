@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Surface from './Surface';
 import { Padbox, Stack } from '../index';
@@ -12,7 +12,7 @@ export default {
   args: {
     mode: 'light',
   },
-} as ComponentMeta<typeof Surface>;
+} as Meta<typeof Surface>;
 
 const Child = ({ mode }) => (
   <Stack gap="sm">
@@ -28,7 +28,7 @@ const Child = ({ mode }) => (
   </Stack>
 );
 
-const Template: ComponentStory<typeof Surface> = (args) => (
+const Template: StoryFn<typeof Surface> = (args) => (
   <Surface {...args}>
     <Padbox paddingSize="md">
       <Child mode={args.mode ?? 'light'} />
@@ -36,7 +36,7 @@ const Template: ComponentStory<typeof Surface> = (args) => (
   </Surface>
 );
 
-export const Playground: ComponentStory<typeof Surface> = Template.bind({});
+export const Playground: StoryFn<typeof Surface> = Template.bind({});
 Playground.args = {
   mode: 'light',
   background: 'white',
@@ -48,7 +48,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Background: ComponentStory<typeof Surface> = (args) => {
+export const Background: StoryFn<typeof Surface> = (args) => {
   return (
     <Stack gap="lgPlus">
       <Template {...args} background="white" />
@@ -61,7 +61,7 @@ Background.parameters = {
   backgrounds: { default: 'grey' },
 };
 
-export const BorderRadius: ComponentStory<typeof Surface> = (args) => {
+export const BorderRadius: StoryFn<typeof Surface> = (args) => {
   return (
     <Stack gap="lgPlus">
       <Template {...args} radius="none" />
@@ -76,7 +76,7 @@ BorderRadius.args = {
   hasBorder: true,
 };
 
-export const Elevation: ComponentStory<typeof Surface> = (args) => {
+export const Elevation: StoryFn<typeof Surface> = (args) => {
   const elevation = args.elevation ?? 1;
   return (
     <Stack gap="lgPlus">
@@ -92,15 +92,13 @@ Elevation.args = {
   elevation: 1,
 };
 
-export const Bordered: ComponentStory<typeof Surface> = Template.bind({});
+export const Bordered: StoryFn<typeof Surface> = Template.bind({});
 Bordered.args = {
   background: 'white',
   hasBorder: true,
 };
 
-export const DynamicBackgroundOnLight: ComponentStory<typeof Surface> = (
-  args,
-) => (
+export const DynamicBackgroundOnLight: StoryFn<typeof Surface> = (args) => (
   <Surface {...args}>
     <Padbox paddingSize="md">
       <Child mode={args.mode} />
@@ -123,9 +121,7 @@ DynamicBackgroundOnLight.args = {
   hasBorder: true,
 };
 
-export const DynamicBackgroundOnDark: ComponentStory<typeof Surface> = (
-  args,
-) => (
+export const DynamicBackgroundOnDark: StoryFn<typeof Surface> = (args) => (
   <Surface {...args}>
     <Padbox paddingSize="md">
       <Child mode={args.mode} />

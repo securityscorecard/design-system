@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Label from './Label';
 
@@ -8,4 +8,4 @@ export default {
   component: Label,
 } as Meta;
 
-export const Default: Story = () => <Label>First name</Label>;
+export const Default: StoryFn = () => <Label>First name</Label>;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ const TabPanel = ({ title }) => (
   </Stack>
 );
 
-const TabsTemplate: Story<TabsProps> = (args) => (
+const TabsTemplate: StoryFn<TabsProps> = (args) => (
   <Tabs {...args}>
     <Tab value="overview" onClick={action('tab-click')}>
       Overview
@@ -54,7 +54,7 @@ const TabsTemplate: Story<TabsProps> = (args) => (
   </Tabs>
 );
 
-export const Playground: Story<TabsProps> = TabsTemplate.bind({});
+export const Playground: StoryFn<TabsProps> = TabsTemplate.bind({});
 Playground.args = {
   selectedValue: 'overview',
   onSelectTab: action('onSelectTab'),
@@ -75,7 +75,7 @@ SegmentedTabs.args = { ...Playground.args, variant: 'segmented' };
 export const SegmentedExpandedTabs = TabsTemplate.bind({});
 SegmentedExpandedTabs.args = { ...SegmentedTabs.args, isExpanded: true };
 
-export const StatefulTabs: Story<TabsProps> = (args) => {
+export const StatefulTabs: StoryFn<TabsProps> = (args) => {
   const { selectedValue } = args;
   const [currentTab, setCurrentTab] = useState(selectedValue);
 
@@ -97,7 +97,7 @@ StatefulTabs.parameters = {
   screenshot: { skip: true },
 };
 
-export const RoutableTabs: Story<TabsProps> = (args) => {
+export const RoutableTabs: StoryFn<TabsProps> = (args) => {
   return (
     <MemoryRouter initialEntries={['/overview']}>
       <Stack gap="lg">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta, Story } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import { addNotification, removeNotification, updateNotification } from './api';
 import {
@@ -14,7 +14,6 @@ import {
 } from '../../components';
 import { NotificationsProvider } from './NotificationsProvider';
 import { ToastVariants } from '../../components/Toast/Toast.enums';
-import { Badges } from '../../../.storybook/storybook.enums';
 
 export default {
   title: 'managers/NotificationsProvider',
@@ -22,7 +21,8 @@ export default {
   decorators: [
     (storyFn) => <NotificationsProvider>{storyFn()}</NotificationsProvider>,
   ],
-  parameters: { screenshot: { skip: true }, badges: [Badges.experimental] },
+  parameters: { screenshot: { skip: true } },
+  tags: ['!autodocs'],
 } as Meta;
 
 const options = [
@@ -33,7 +33,7 @@ const options = [
   { label: 'Loading', value: ToastVariants.loading },
 ];
 
-export const Playground: Story = () => {
+export const Playground: StoryFn<typeof NotificationsProvider> = () => {
   const [id, setId] = useState('test');
   const [content, setContent] = useState('This is a test notification');
   const [variant, setVariant] = useState(options[0]);

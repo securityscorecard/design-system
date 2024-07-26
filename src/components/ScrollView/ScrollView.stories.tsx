@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { faker } from '@faker-js/faker';
 
 import { ScrollView } from './ScrollView';
@@ -8,12 +8,12 @@ import { Padbox } from '../layout';
 export default {
   title: 'components/ScrollView',
   component: ScrollView,
-} as ComponentMeta<typeof ScrollView>;
+} as Meta<typeof ScrollView>;
 
 faker.seed(42);
 const content = faker.lorem.paragraphs(50);
 
-type Story = ComponentStory<typeof ScrollView>;
+type Story = StoryFn<typeof ScrollView>;
 const Template: Story = (args) => <ScrollView {...args}>{content}</ScrollView>;
 
 export const Playground: Story = Template.bind({});

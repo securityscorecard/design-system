@@ -1,18 +1,16 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Snippet from './Snippet';
 
 export default {
   title: 'components/Snippet',
   component: Snippet,
-} as ComponentMeta<typeof Snippet>;
+} as Meta<typeof Snippet>;
 
-const Template: ComponentStory<typeof Snippet> = (args) => (
-  <Snippet {...args} />
-);
+const Template: StoryFn<typeof Snippet> = (args) => <Snippet {...args} />;
 
-export const Playground: ComponentStory<typeof Snippet> = Template.bind({});
+export const Playground: StoryFn<typeof Snippet> = Template.bind({});
 Playground.args = {
   children: `
   "scripts": {
@@ -40,13 +38,13 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithoutCopy: ComponentStory<typeof Snippet> = Template.bind({});
+export const WithoutCopy: StoryFn<typeof Snippet> = Template.bind({});
 WithoutCopy.args = {
   ...Playground.args,
   canCopy: false,
 };
 
-export const WithoutDedent: ComponentStory<typeof Snippet> = Template.bind({});
+export const WithoutDedent: StoryFn<typeof Snippet> = Template.bind({});
 WithoutDedent.args = {
   children: JSON.stringify(
     [
@@ -62,23 +60,19 @@ WithoutDedent.args = {
   shouldDedent: false,
 };
 
-export const WithTextWrapping: ComponentStory<typeof Snippet> = Template.bind(
-  {},
-);
+export const WithTextWrapping: StoryFn<typeof Snippet> = Template.bind({});
 WithTextWrapping.args = {
   ...Playground.args,
   shouldWrapText: true,
 };
 
-export const Expanded: ComponentStory<typeof Snippet> = Template.bind({});
+export const Expanded: StoryFn<typeof Snippet> = Template.bind({});
 Expanded.args = {
   ...Playground.args,
   isExpanded: true,
 };
 
-export const CustomMaxHeight: ComponentStory<typeof Snippet> = Template.bind(
-  {},
-);
+export const CustomMaxHeight: StoryFn<typeof Snippet> = Template.bind({});
 CustomMaxHeight.args = {
   ...Playground.args,
   maxHeight: 1000,

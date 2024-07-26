@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
@@ -12,7 +12,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 const TooltipComponent = ({
   header,

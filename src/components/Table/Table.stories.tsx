@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import MockDate from 'mockdate';
 import { action } from '@storybook/addon-actions';
@@ -47,7 +47,7 @@ ${comparisonTable}
   ],
 } as Meta;
 
-const TableTemplate: Story<TableProps<Data>> = (args) => (
+const TableTemplate: StoryFn<TableProps<Data>> = (args) => (
   <Table<Data> {...args} />
 );
 

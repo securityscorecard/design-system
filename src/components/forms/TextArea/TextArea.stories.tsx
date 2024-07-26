@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import TextArea from './TextArea';
 
 export default {
   title: 'components/forms/TextArea',
   component: TextArea,
-} as ComponentMeta<typeof TextArea>;
+} as Meta<typeof TextArea>;
 
-type Story = ComponentStory<typeof TextArea>;
+type Story = StoryFn<typeof TextArea>;
 const Template: Story = (args) => <TextArea aria-label="Text" {...args} />;
 
 export const Playground: Story = Template.bind({});

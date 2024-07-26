@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Range from './Range';
 import { RangeProps } from './Range.types';
@@ -9,7 +9,7 @@ export default {
   component: Range,
 } as Meta;
 
-const RangeTemplate: Story<
+const RangeTemplate: StoryFn<
   RangeProps & React.InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Range {...args} aria-label="Input" />;
 

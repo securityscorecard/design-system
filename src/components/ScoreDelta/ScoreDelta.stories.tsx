@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import ScoreDelta from './ScoreDelta';
 import { Inline, Stack } from '../layout';
@@ -7,9 +7,9 @@ import { Inline, Stack } from '../layout';
 export default {
   title: 'components/ScoreDelta',
   component: ScoreDelta,
-} as ComponentMeta<typeof ScoreDelta>;
+} as Meta<typeof ScoreDelta>;
 
-type Story = ComponentStory<typeof ScoreDelta>;
+type Story = StoryFn<typeof ScoreDelta>;
 
 export const Playground: Story = (args) => <ScoreDelta {...args} />;
 Playground.args = {

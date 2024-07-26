@@ -1,0 +1,510 @@
+import { Meta } from '@storybook/blocks';
+import styled from 'styled-components';
+import React, { useState } from 'react';
+import { noop } from 'ramda-adjunct';
+
+import { getColor, getRadii, getSpace } from './utils';
+import { DSProvider, SpaceSizes } from './theme';
+import {
+  Accordion,
+  Badge,
+  Banner,
+  BreadcrumbItem,
+  Breadcrumbs,
+  Button,
+  Callout,
+  Checkbox,
+  CloseButton,
+  Collapsible,
+  CreatableSelect,
+  DateRangePicker,
+  Drawer,
+  FileSelector,
+  H5,
+  HexGrade,
+  Icon,
+  Inline,
+  Input,
+  Label,
+  MultiValueInput,
+  Pagination,
+  Paragraph,
+  Password,
+  Pill,
+  Radio,
+  Range,
+  SearchBar,
+  SegmentedToggle,
+  SegmentedToggleItem,
+  Select,
+  SemanticModal,
+  Signal,
+  SingleDatePicker,
+  SortableList,
+  Spinner,
+  Stack,
+  Strong,
+  Switch,
+  Tab,
+  Tabs,
+  TextArea,
+  Toast,
+  Tooltip,
+  UserAvatar,
+} from './components';
+
+<Meta title="Overview" />
+
+export const StickerContainer = styled.div`
+  background: ${getColor('neutral.300')};
+  border-radius: ${getRadii('default')};
+  padding: ${getSpace('md')};
+  h5 > a {
+    visibility: hidden;
+  }
+  &:hover {
+    h5 > a {
+      visibility: visible;
+    }
+  }
+`;
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+`;
+
+export const StickerModalItem = () => {
+  const [isShown, setIsShown] = useState();
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    setIsShown(!isShown);
+  };
+  return (
+    <>
+      <Button onClick={handleButtonClick}>Open modal</Button>
+      {isShown && (
+        <SemanticModal
+          actions={[
+            {
+              label: 'Secondary',
+              name: 'Secondary',
+              onClick: noop,
+            },
+            {
+              label: 'Primary',
+              name: 'Primary',
+              onClick: noop,
+            },
+          ]}
+          message="You can replace this with a local component. You can also just override the text, but keep in mind that you might lose content that way."
+          primaryButtonColor="primary"
+          title="This is a placeholder"
+          onClose={() => setIsShown(false)}
+        />
+      )}
+    </>
+  );
+};
+
+export const StickerDrawerItem = () => {
+  const [isVisible, setVisibility] = useState(false);
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    setVisibility(!isVisible);
+  };
+  return (
+    <>
+      <Button onClick={handleButtonClick}>Open drawer</Button>
+      {isVisible && (
+        <Drawer
+          footer={<div>Footer</div>}
+          size="sm"
+          title="Drawer"
+          onClose={() => setVisibility(false)}
+        >
+          <div>Content</div>
+        </Drawer>
+      )}
+    </>
+  );
+};
+
+export const StickerToastItem = () => {
+  const [isVisible, setVisibility] = useState(false);
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    setVisibility(!isVisible);
+  };
+  return (
+    <>
+      <Button onClick={handleButtonClick}>Toggle toast</Button>
+      {isVisible && (
+        <Toast
+          variant="info"
+          onClose={() => {
+            setVisibility(false);
+          }}
+        >
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non
+            massa a lacus posuere.
+          </p>
+        </Toast>
+      )}
+    </>
+  );
+};
+
+export const StickerItem = ({ title, children, id }) => {
+  return (
+    <StickerContainer id={id}>
+      <Stack
+        align="space-between"
+        gap={SpaceSizes.md}
+        style={{ minHeight: 300 }}
+      >
+        <Inline as={H5} gap="sm" variant="secondary">
+          <span>{title}</span>
+          <a
+            aria-hidden="true"
+            className="css-cflg6q"
+            href={`#${id}`}
+            tabIndex="-1"
+            target="_self"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              height="16"
+              version="1.1"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                fillRule="evenodd"
+              />
+            </svg>
+          </a>
+        </Inline>
+        <Inline justify="center">{children}</Inline>
+        <Inline justify="flex-end">
+          <a href={`?path=/docs/${id}`}>See documentation →</a>
+        </Inline>
+      </Stack>
+    </StickerContainer>
+  );
+};
+
+export const StickerList = () => {
+  return (
+    <Grid cols={3} gap={SpaceSizes.lg}>
+      <StickerItem id="components-accordion--playground" title="Accordion">
+        <Accordion
+          items={[
+            {
+              content: 'Content',
+              id: 1,
+              isOpen: true,
+              title: 'Item 1',
+            },
+            {
+              content: 'Content',
+              id: 2,
+              title: 'Item 2',
+            },
+          ]}
+        >
+          Accordion
+        </Accordion>
+      </StickerItem>
+      <StickerItem id="components-button--playground" title="Button">
+        <Button color="primary" variant="solid">
+          Click me
+        </Button>
+      </StickerItem>
+      <StickerItem id="components-forms-checkbox--playground" title="Checkbox">
+        <Checkbox
+          checkboxId="overview-cb"
+          label="Click me"
+          name="overview-cb"
+          onChange={noop}
+        />
+      </StickerItem>
+      <StickerItem id="components-forms-input--playground" title="Input">
+        <Input type="text" />
+      </StickerItem>
+      <StickerItem id="components-forms-label--default" title="Label">
+        <Label>Name</Label>
+      </StickerItem>
+      <StickerItem
+        id="components-forms-multivalueinput--playground"
+        title="MultiValueInput"
+      >
+        <div style={{ width: '100%' }}>
+          <MultiValueInput />
+        </div>
+      </StickerItem>
+      <StickerItem id="components-forms-password--playground" title="Password">
+        <Password />
+      </StickerItem>
+      <StickerItem id="components-forms-radio--playground" title="Radio">
+        <Radio label="Click me" name="radio" radioId="radio" />
+      </StickerItem>
+      <StickerItem id="components-forms-range--playground" title="Range">
+        <Range max={50} min={0} />
+      </StickerItem>
+      <StickerItem
+        id="components-forms-searchbar--playground"
+        title="Search Bar"
+      >
+        <SearchBar />
+      </StickerItem>
+      <StickerItem
+        id="components-forms-segmentedtoggle--playground"
+        title="Segmented Toggle"
+      >
+        <SegmentedToggle group="playground">
+          <SegmentedToggleItem
+            itemId="input1"
+            label="One"
+            value="1"
+            defaultChecked
+          />
+          <SegmentedToggleItem itemId="input2" label="Two" value="2" />
+          <SegmentedToggleItem itemId="input3" label="Three" value="3" />
+        </SegmentedToggle>
+      </StickerItem>
+      <StickerItem
+        id="components-forms-select-select--playground"
+        title="Select"
+      >
+        <div style={{ width: '100%' }}>
+          <Select
+            aria-label="Select"
+            options={[
+              {
+                isDisabled: true,
+                label: 'Croatia',
+                value: 'HR',
+              },
+              {
+                label: 'Cuba',
+                value: 'CU',
+              },
+              {
+                label: 'Curaçao',
+                value: 'CW',
+              },
+              {
+                label: 'Cyprus',
+                value: 'CY',
+              },
+              {
+                label: 'Czech Republic',
+                value: 'CZ',
+              },
+              {
+                label: 'Denmark',
+                value: 'DK',
+              },
+            ]}
+            placeholder="Select country..."
+          />
+        </div>
+      </StickerItem>
+      <StickerItem
+        id="components-forms-creatable-select--playground"
+        title="Creatable Select"
+      >
+        <div style={{ width: '100%' }}>
+          <CreatableSelect
+            name="playground"
+            options={[
+              {
+                label: 'Games',
+                value: 'games',
+              },
+              {
+                isDisabled: true,
+                label: 'Music',
+                value: 'music',
+              },
+              {
+                isDisabled: false,
+                label: 'Biking',
+                value: 'biking',
+              },
+              {
+                label: 'Hiking',
+                value: 'hiking',
+              },
+              {
+                isDisabled: true,
+                label: 'Programming',
+                value: 'programming',
+              },
+              {
+                label: 'Driving',
+                value: 'driving',
+              },
+              {
+                label: 'Kung Fu',
+                value: 'kungfu',
+              },
+            ]}
+            onChange={() => {}}
+          />
+        </div>
+      </StickerItem>
+      <StickerItem id="components-forms-switch--playground" title="Switch">
+        <Switch label="Public" switchId="playground" />
+      </StickerItem>
+      <StickerItem id="components-forms-textarea--playground" title="Text Area">
+        <TextArea aria-label="Text" />
+      </StickerItem>
+      <StickerItem
+        id="components-modals-semanticmodal--playground"
+        title="Semantic Modal"
+      >
+        <StickerModalItem />
+      </StickerItem>
+      <StickerItem id="components-badge--playground" title="Badge">
+        <Badge count={25} />
+      </StickerItem>
+      <StickerItem id="components-banner--playground" title="Banner">
+        <Banner variant="info">Info Banner</Banner>
+      </StickerItem>
+      <StickerItem id="components-breadcrumbs--playground" title="Breadcrumbs">
+        <Breadcrumbs>
+          <BreadcrumbItem href="#">Root</BreadcrumbItem>
+          <BreadcrumbItem href="#">Parent</BreadcrumbItem>
+          <BreadcrumbItem href="">Current</BreadcrumbItem>
+        </Breadcrumbs>
+      </StickerItem>
+      <StickerItem id="components-callout--playground" title="Callout">
+        <Callout>
+          <React.Fragment key=".0">
+            <Strong>Did you know?</Strong> This is a callout message
+          </React.Fragment>
+        </Callout>
+      </StickerItem>
+      <StickerItem id="components-closebutton--default" title="Close Button">
+        <CloseButton onClose={noop} />
+      </StickerItem>
+      <StickerItem id="components-collapsible--playground" title="Collapsible">
+        <Collapsible subject="Collapsible" title="playground">
+          Lorem ipsum dolor sit amet...
+        </Collapsible>
+      </StickerItem>
+      <StickerItem
+        id="components-daterangepicker--playground"
+        title="Date Range Picker"
+      >
+        <DateRangePicker
+          maxDate={new Date('2021-03-28T03:00:00.000Z')}
+          minDate={new Date('2021-03-01T03:00:00.000Z')}
+          value={{
+            endDate: null,
+            startDate: null,
+          }}
+          onChange={() => {}}
+        />
+      </StickerItem>
+      <StickerItem
+        id="components-fileselector--playground"
+        title="File Selector"
+      >
+        <FileSelector />
+      </StickerItem>
+      <StickerItem id="components-hexgrade--playground" title="Hex Grade">
+        <Inline>
+          <HexGrade variant="solid" />
+          <HexGrade grade="A" variant="solid" />
+          <HexGrade grade="B" variant="solid" />
+        </Inline>
+      </StickerItem>
+      <StickerItem id="components-icon--ssc-icon" title="Icon">
+        <Icon color="neutral.900" name="wrench" />
+      </StickerItem>
+      <StickerItem id="components-pill--playground" title="Pill">
+        <Pill label="Pill label" />
+      </StickerItem>
+      <StickerItem id="components-signal--playground" title="Signal">
+        <Inline gap={SpaceSizes.md}>
+          <Signal kind="high" size={32} />
+          <Signal kind="medium" size={32} />
+          <Signal kind="low" size={32} />
+        </Inline>
+      </StickerItem>
+      <StickerItem
+        id="components-singledatepicker--playground"
+        title="Single Date Picker"
+      >
+        <SingleDatePicker onChange={noop} />
+      </StickerItem>
+      <StickerItem
+        id="components-sortablelist--playground"
+        title="Sortable list"
+      >
+        <SortableList
+          items={['item1', 'item2', 'item3']}
+          labels={{
+            item1: 'Item 1',
+            item2: 'Item 2',
+            item3: 'Item 3',
+          }}
+          onDragCancel={noop}
+          onDragEnd={noop}
+          onDragOver={noop}
+          onDragStart={noop}
+          onOrderChange={noop}
+        />
+      </StickerItem>
+      <StickerItem id="components-spinner--playground" title="Spinner">
+        <Spinner dark />
+      </StickerItem>
+      <StickerItem id="components-tabs--playground" title="Tabs">
+        <Tabs selectedValue="inventory">
+          <Tab value="inventory">Inventory</Tab>
+          <Tab value="overview">Overview</Tab>
+        </Tabs>
+      </StickerItem>
+      <StickerItem id="components-tooltip--playground" title="Tooltip">
+        <Tooltip
+          popup={
+            <>
+              <Paragraph margin={{ bottom: 0 }} size="md">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </Paragraph>
+              <Button variant="text">Action</Button>
+            </>
+          }
+        >
+          <Button>Button with tooltip</Button>
+        </Tooltip>
+      </StickerItem>
+      <StickerItem id="components-useravatar--playground" title="User Avatar">
+        <UserAvatar label="AB" size="md" />
+      </StickerItem>
+      <StickerItem id="components-drawer--playground" title="Drawer">
+        <StickerDrawerItem />
+      </StickerItem>
+      <StickerItem id="components-toast--playground" title="Toast">
+        <StickerToastItem />
+      </StickerItem>
+      <StickerItem id="components-pagination--on-first-page" title="Pagination">
+        <Pagination currentPage={1} pageCount={3} onPageChange={noop} />
+      </StickerItem>
+    </Grid>
+  );
+};
+
+# Overview
+
+Components are the building blocks of our design system, each component serves an specific need. Find below a list of examples.
+
+<DSProvider>
+  <StickerList />
+</DSProvider>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { ProgressBarProps } from './ProgressBar.types';
 import ProgressBar from './ProgressBar';
@@ -10,7 +10,7 @@ export default {
   component: ProgressBar,
 } as Meta;
 
-export const Playground: Story<ProgressBarProps> = (args) => (
+export const Playground: StoryFn<ProgressBarProps> = (args) => (
   <ProgressBar {...args} />
 );
 Playground.args = {
@@ -20,7 +20,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Variants: Story<ProgressBarProps> = (args) => (
+export const Variants: StoryFn<ProgressBarProps> = (args) => (
   <Stack gap="lg" style={{ width: '50%', margin: 'auto' }}>
     <ProgressBar {...args} variant="info" />
     <ProgressBar {...args} variant="success" />
@@ -30,7 +30,7 @@ export const Variants: Story<ProgressBarProps> = (args) => (
 );
 Variants.args = Playground.args;
 
-export const Sizes: Story<ProgressBarProps> = (args) => (
+export const Sizes: StoryFn<ProgressBarProps> = (args) => (
   <Stack gap="lg" style={{ width: '50%', margin: 'auto' }}>
     <ProgressBar {...args} size="normal" />
     <ProgressBar {...args} size="thin" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Banner from './Banner';
@@ -35,14 +35,14 @@ const BannerActions: ActionsArray = [
   },
 ];
 
-export const Playground: Story<BannerProps> = (args) => (
+export const Playground: StoryFn<BannerProps> = (args) => (
   <Banner actions={[...BannerActions]} {...args} />
 );
 Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const InfoBanner: Story = () => (
+export const InfoBanner: StoryFn = () => (
   <Banner
     actions={[...BannerActions]}
     data-custom-attr="test"
@@ -53,7 +53,7 @@ export const InfoBanner: Story = () => (
   </Banner>
 );
 
-export const SuccessBanner: Story = () => (
+export const SuccessBanner: StoryFn = () => (
   <Banner
     actions={[...BannerActions]}
     variant={BannerVariants.success}
@@ -63,7 +63,7 @@ export const SuccessBanner: Story = () => (
   </Banner>
 );
 
-export const LongInfoBanner: Story = () => (
+export const LongInfoBanner: StoryFn = () => (
   <Banner
     actions={[...BannerActions]}
     variant={BannerVariants.info}
@@ -76,7 +76,7 @@ export const LongInfoBanner: Story = () => (
   </Banner>
 );
 
-export const InfoBannerOneAction: Story = () => (
+export const InfoBannerOneAction: StoryFn = () => (
   <Banner
     actions={[
       {
@@ -92,13 +92,13 @@ export const InfoBannerOneAction: Story = () => (
   </Banner>
 );
 
-export const InfoBannerNoAction: Story = () => (
+export const InfoBannerNoAction: StoryFn = () => (
   <Banner variant={BannerVariants.info} onClose={action('close-banner')}>
     Info Banner No Action
   </Banner>
 );
 
-export const WarnBanner: Story = () => (
+export const WarnBanner: StoryFn = () => (
   <Banner
     actions={[...BannerActions]}
     variant={BannerVariants.warn}
@@ -108,7 +108,7 @@ export const WarnBanner: Story = () => (
   </Banner>
 );
 
-export const ErrorBanner: Story = () => (
+export const ErrorBanner: StoryFn = () => (
   <Banner
     actions={[...BannerActions]}
     variant={BannerVariants.error}
@@ -118,7 +118,7 @@ export const ErrorBanner: Story = () => (
   </Banner>
 );
 
-export const NonDismissableBanner: Story = () => (
+export const NonDismissableBanner: StoryFn = () => (
   <Banner
     actions={[...BannerActions]}
     isDismissable={false}

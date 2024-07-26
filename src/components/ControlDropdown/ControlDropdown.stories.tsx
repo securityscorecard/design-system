@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Paragraph } from '../Paragraph';
@@ -18,8 +18,8 @@ export default {
   },
 } as Meta;
 
-const ControlDropdownTemplate: Story<ControlDropdownProps> = (args) => {
-  const handlerRef = useRef(null);
+const ControlDropdownTemplate: StoryFn<ControlDropdownProps> = (args) => {
+  const handlerRef = useRef<HTMLSpanElement | null>(null);
 
   return (
     <Center maxWidth={150} areChildrenCentered>

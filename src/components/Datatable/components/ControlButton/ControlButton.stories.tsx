@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Inline, Padbox } from '../../../layout';
@@ -17,7 +17,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ControlButtonProps> = (args) => (
+export const Default: StoryFn<ControlButtonProps> = (args) => (
   <>
     <Padbox paddingSize="sm">
       <Inline align="center" gap="mdPlus">

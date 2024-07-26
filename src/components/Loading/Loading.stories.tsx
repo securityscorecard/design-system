@@ -1,14 +1,14 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Loading from './Loading';
 
 export default {
   title: 'components/Loading',
   component: Loading,
-} as ComponentMeta<typeof Loading>;
+} as Meta<typeof Loading>;
 
-export const Playground: ComponentStory<typeof Loading> = (args) => (
+export const Playground: StoryFn<typeof Loading> = (args) => (
   <Loading {...args} />
 );
 Playground.args = {
@@ -23,7 +23,7 @@ Playground.parameters = {
 
 const Template = (args) => <Loading {...args} />;
 
-export const WithMessage: ComponentStory<typeof Loading> = Template.bind({});
+export const WithMessage: StoryFn<typeof Loading> = Template.bind({});
 
 WithMessage.args = {
   progress: 40,
@@ -33,9 +33,7 @@ WithMessage.args = {
   height: 24,
 };
 
-export const WithoutProgress: ComponentStory<typeof Loading> = Template.bind(
-  {},
-);
+export const WithoutProgress: StoryFn<typeof Loading> = Template.bind({});
 
 WithoutProgress.args = {
   subject: 'Data',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { mergeDeepRight } from 'ramda';
 import { action } from '@storybook/addon-actions';
 
@@ -21,24 +21,30 @@ export default {
     hasSearch: {
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: defaultControlsConfig.hasSearch },
+        defaultValue: { summary: defaultControlsConfig.hasSearch.toString() },
       },
     },
     hasFiltering: {
       control: { type: 'boolean' },
-      table: { defaultValue: { summary: defaultControlsConfig.hasFiltering } },
+      table: {
+        defaultValue: {
+          summary: defaultControlsConfig.hasFiltering.toString(),
+        },
+      },
     },
     defaultIsFilteringOpen: {
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: defaultControlsConfig.defaultIsFilteringOpen },
+        defaultValue: {
+          summary: defaultControlsConfig.defaultIsFilteringOpen.toString(),
+        },
       },
     },
     defaultIsFilteringApplied: {
       control: { type: 'boolean' },
       table: {
         defaultValue: {
-          summary: defaultControlsConfig.defaultIsFilteringApplied,
+          summary: defaultControlsConfig.defaultIsFilteringApplied.toString(),
         },
       },
     },
@@ -76,7 +82,7 @@ export default {
       control: { disabled: true },
       table: {
         defaultValue: {
-          summary: defaultControlsConfig.onControlToggle,
+          summary: '() => {}',
         },
       },
     },
@@ -93,9 +99,9 @@ function ControlsModuleTemplate(args) {
   return <ControlsModule {...args} />;
 }
 
-export const Playground: Story<ControlsModuleProps<Data>> = (args) => (
-  <ControlsModuleTemplate {...args} />
-);
+type Story = StoryFn<ControlsModuleProps<Data>>;
+
+export const Playground: Story = (args) => <ControlsModuleTemplate {...args} />;
 
 Playground.args = mergeDeepRight(defaultControlsConfig, {
   searchConfig: {
@@ -115,56 +121,49 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithDisabledFiltering: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithDisabledFiltering: Story = ControlsModuleTemplate.bind({});
 
 WithDisabledFiltering.args = {
   ...Playground.args,
   hasFiltering: false,
 };
 
-export const WithOpenFiltering: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithOpenFiltering: Story = ControlsModuleTemplate.bind({});
 
 WithOpenFiltering.args = {
   ...Playground.args,
   defaultIsFilteringOpen: true,
 };
 
-export const WithAppliedFiltering: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithAppliedFiltering: Story = ControlsModuleTemplate.bind({});
 
 WithAppliedFiltering.args = {
   ...Playground.args,
   defaultIsFilteringApplied: true,
 };
 
-export const WithDisabledColumns: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithDisabledColumns: Story = ControlsModuleTemplate.bind({});
 
 WithDisabledColumns.args = {
   ...Playground.args,
   hasColumnsControls: false,
 };
 
-export const WithOpenColumns: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithOpenColumns: Story = ControlsModuleTemplate.bind({});
 
 WithOpenColumns.args = {
   ...Playground.args,
   defaultIsColumnsControlsOpen: true,
 };
 
-export const WithAppliedColumns: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithAppliedColumns: Story = ControlsModuleTemplate.bind({});
 
 WithAppliedColumns.args = {
   ...Playground.args,
   defaultIsColumnsControlsApplied: true,
 };
 
-export const WithDisabledSearch: Story<ControlsModuleProps<Data>> =
-  ControlsModuleTemplate.bind({});
+export const WithDisabledSearch: Story = ControlsModuleTemplate.bind({});
 
 WithDisabledSearch.args = {
   ...Playground.args,

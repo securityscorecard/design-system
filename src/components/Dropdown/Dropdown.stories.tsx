@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Inline, Stack } from '../layout';
@@ -58,7 +58,7 @@ function ShortContent() {
   );
 }
 
-const DropdownTemplate: Story<DropdownProps> = (args) => (
+const DropdownTemplate: StoryFn<DropdownProps> = (args) => (
   <div style={{ height: 140 }}>
     <Dropdown {...args}>
       <Content />
@@ -88,7 +88,7 @@ OnFocusEvent.args = {
   triggerEvents: ['focus'],
 };
 
-export const Placements: Story<DropdownProps> = (args) => (
+export const Placements: StoryFn<DropdownProps> = (args) => (
   <Stack gap="xl">
     <Inline gap="lg" justify="space-between">
       <Dropdown
@@ -190,7 +190,7 @@ Elevated.args = {
   defaultIsOpen: true,
 };
 
-export const WithArrow: Story<DropdownProps> = (args) => (
+export const WithArrow: StoryFn<DropdownProps> = (args) => (
   <div style={{ height: 170 }}>
     <Inline gap="lg" justify="space-between">
       <Dropdown {...args} placement="bottom-start">
@@ -237,7 +237,7 @@ const options = [
   { value: 'Jack', label: 'Jack' },
 ];
 
-export const UsingWithAnotherComponent: Story<DropdownProps> = () => (
+export const UsingWithAnotherComponent: StoryFn<DropdownProps> = () => (
   <Dropdown
     innerPaddingSize="sm"
     trigger={

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { PaginationState } from '@tanstack/react-table';
 
 import { fetchData, useQuery } from '../mocks/externalData';
@@ -12,7 +12,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const PaginationEnabled: Story = Template.bind({});
 PaginationEnabled.args = Template.args;

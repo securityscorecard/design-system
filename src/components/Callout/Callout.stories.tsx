@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Callout from './Callout';
 import { Icon } from '../Icon';
@@ -9,9 +9,9 @@ import { Strong } from '../Text';
 export default {
   title: 'components/Callout',
   component: Callout,
-} as ComponentMeta<typeof Callout>;
+} as Meta<typeof Callout>;
 
-type Story = ComponentStory<typeof Callout>;
+type Story = StoryFn<typeof Callout>;
 
 const content = (
   <>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { ExpandedState } from '@tanstack/react-table';
 import { action } from '@storybook/addon-actions';
 
@@ -14,7 +14,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 const Panel = ({ row }) => (
   <Padbox paddingSize="md">

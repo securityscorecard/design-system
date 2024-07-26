@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Modal from './Modal';
@@ -42,7 +42,7 @@ function Footer() {
   );
 }
 
-export const Playground: Story<ModalProps> = (args) => {
+export const Playground: StoryFn<ModalProps> = (args) => {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -78,7 +78,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithTitle: Story = () => (
+export const WithTitle: StoryFn = () => (
   <Modal footer={<Footer />} title="Title" onClose={action('close-modal')}>
     <H5 style={{ margin: 0 }}>This is a placeholder</H5>
     <Paragraph size="md" style={{ marginBottom: 0 }}>
@@ -92,7 +92,7 @@ export const WithTitle: Story = () => (
   </Modal>
 );
 
-export const WithLongContent: Story = () => (
+export const WithLongContent: StoryFn = () => (
   <Modal footer={<Footer />} title="Title" onClose={action('close-modal')}>
     <H5 style={{ margin: 0 }}>This is a placeholder</H5>
     <Paragraph size="md" style={{ marginBottom: 0 }}>
@@ -119,7 +119,7 @@ export const WithLongContent: Story = () => (
   </Modal>
 );
 
-export const WithoutTitle: Story = () => (
+export const WithoutTitle: StoryFn = () => (
   <Modal footer={<Footer />} onClose={action('close-modal')}>
     <H5 style={{ margin: 0 }}>This is a placeholder</H5>
     <Paragraph size="md" style={{ marginBottom: 0 }}>
@@ -133,7 +133,7 @@ export const WithoutTitle: Story = () => (
   </Modal>
 );
 
-export const WithoutFooter: Story = () => (
+export const WithoutFooter: StoryFn = () => (
   <Modal title="Simple modal" onClose={action('close-modal')}>
     <H5 style={{ margin: 0 }}>This is a placeholder</H5>
     <Paragraph size="md" style={{ marginBottom: 0 }}>

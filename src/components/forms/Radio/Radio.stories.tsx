@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Radio from './Radio';
@@ -48,7 +48,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<RadioProps> = (args) => <Radio {...args} />;
+export const Playground: StoryFn<RadioProps> = (args) => <Radio {...args} />;
 Playground.args = {
   name: 'playground',
   radioId: 'playground',
@@ -59,7 +59,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const DefaultRadio: Story = () => (
+export const DefaultRadio: StoryFn = () => (
   <Radio
     label={textExample}
     name="defaultRadio"
@@ -68,7 +68,7 @@ export const DefaultRadio: Story = () => (
   />
 );
 
-export const CheckedRadio: Story = () => (
+export const CheckedRadio: StoryFn = () => (
   <Radio
     label={textExample}
     name="checkedRadio"
@@ -77,7 +77,7 @@ export const CheckedRadio: Story = () => (
   />
 );
 
-export const InvalidRadio: Story = () => (
+export const InvalidRadio: StoryFn = () => (
   <Radio
     label={textExample}
     name="invalidRadio"
@@ -86,7 +86,7 @@ export const InvalidRadio: Story = () => (
   />
 );
 
-export const RadioWithLabelAsComponent: Story = () => (
+export const RadioWithLabelAsComponent: StoryFn = () => (
   <Radio
     label={<Text>{textExample}</Text>}
     name="radioWithLabelAsComponent"
@@ -94,7 +94,7 @@ export const RadioWithLabelAsComponent: Story = () => (
   />
 );
 
-export const RadioWithLabelAsComponentWithIcon: Story = () => (
+export const RadioWithLabelAsComponentWithIcon: StoryFn = () => (
   <Radio
     label={
       <Inline align="center" gap="sm">

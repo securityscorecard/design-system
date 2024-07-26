@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import BottomBar from './BottomBar';
 import { BottomBarProps } from './BottomBar.types';
@@ -14,6 +14,6 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<BottomBarProps> = (args) => (
+export const Playground: StoryFn<BottomBarProps> = (args) => (
   <BottomBar {...args} />
 );

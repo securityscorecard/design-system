@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box } from '../mocks/Box';
@@ -45,7 +45,7 @@ export default {
   },
 } as Meta;
 
-const ClusterTemplate: Story<ClusterProps> = (args) => (
+const ClusterTemplate: StoryFn<ClusterProps> = (args) => (
   <Cluster style={{ backgroundColor: '#0275d8' }} {...args}>
     <Box>Item</Box>
     <Box style={{ height: '100px' }}>Long item</Box>
@@ -82,7 +82,7 @@ WithVerticalAlignment.args = {
   align: 'center',
 };
 
-export const AsNavigation: Story<ClusterProps> = (args) => (
+export const AsNavigation: StoryFn<ClusterProps> = (args) => (
   <Cluster style={{ backgroundColor: '#0275d8' }} {...args}>
     <Box as="li">Home</Box>
     <Box as="li">Products</Box>

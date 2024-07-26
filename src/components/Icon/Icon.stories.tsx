@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Icon from './Icon';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
@@ -14,9 +14,9 @@ export default {
       ...generateControl('select', SSCIconNames),
     },
   },
-} as ComponentMeta<typeof Icon>;
+} as Meta<typeof Icon>;
 
-type Story = ComponentStory<typeof Icon>;
+type Story = StoryFn<typeof Icon>;
 
 export const Playground: Story = (args) => <Icon {...args} />;
 Playground.args = {

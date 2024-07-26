@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box } from '../mocks/Box';
@@ -43,7 +43,7 @@ export default {
   },
 } as Meta;
 
-const GridTemplate: Story<GridProps> = (args) => (
+const GridTemplate: StoryFn<GridProps> = (args) => (
   <Grid style={{ backgroundColor: '#0275d8' }} {...args}>
     <Box>Item</Box>
     <Box>Long item</Box>
@@ -93,7 +93,7 @@ const ComposedCard = () => (
   </Card>
 );
 
-export const WithVisibleOverflow: Story<GridProps> = (args) => (
+export const WithVisibleOverflow: StoryFn<GridProps> = (args) => (
   <Grid {...args}>
     <ComposedCard />
     <ComposedCard />

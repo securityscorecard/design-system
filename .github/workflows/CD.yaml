@@ -73,7 +73,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16 # use Node@16 until we upgrade Storybook
+          node-version: '22.4.1'
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -82,7 +82,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'
@@ -93,7 +93,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: storybook-static
-          key: storybook-tests-node-16-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
+          key: storybook-tests-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
 
       - name: Build Storybook
         if: steps.storybook-build-cache.outputs.cache-hit != 'true'
@@ -325,7 +325,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16  # use Node@16 until we upgrade Storybook
+          node-version: '22.4.1'
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -334,7 +334,7 @@ jobs:
           path: |
             .yarn/install-state.gz
             node_modules
-          key: node-modules-node-16-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
 
       - name: Install Packages
         if: steps.cache.outputs.cache-hit != 'true'

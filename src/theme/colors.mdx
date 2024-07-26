@@ -1,0 +1,83 @@
+import { ColorItem, ColorPalette, Meta } from '@storybook/blocks';
+
+import { colors } from './colors';
+
+<Meta title="Theme/Colors" />
+
+# Colors
+
+## Base palettes
+
+<ColorPalette>
+  <ColorItem colors={colors.neutral} title="theme.colors.neutral" />
+
+<ColorItem colors={colors.primary} title="theme.colors.primary" />
+
+  <ColorItem colors={colors.brand} title="theme.colors.brand" />
+</ColorPalette>
+
+## Text
+
+<ColorPalette>
+  <ColorItem colors={colors.text} title="theme.colors.text" />
+</ColorPalette>
+
+## Semantic palettes
+
+<ColorPalette>
+  <ColorItem colors={colors.success} title="theme.colors.success" />
+
+<ColorItem colors={colors.warning} title="theme.colors.warning" />
+
+<ColorItem colors={colors.error} title="theme.colors.error" />
+
+  <ColorItem colors={colors.info} title="theme.colors.info" />
+</ColorPalette>
+
+## Signals
+
+<ColorPalette>
+  <ColorItem colors={colors.grade} title="theme.colors.grade" />
+
+<ColorItem colors={colors.severity} title="theme.colors.severity" />
+
+<ColorItem colors={colors.likelihood} title="theme.colors.likelihood" />
+
+  <ColorItem colors={[colors.impact]} title="theme.colors.impact" />
+</ColorPalette>
+
+## Core colors
+
+<ColorPalette>
+  <ColorItem colors={colors.slate} title="theme.colors.slate" />
+
+<ColorItem colors={colors.indigo} title="theme.colors.indigo" />
+
+<ColorItem colors={colors.green} title="theme.colors.green" />
+
+<ColorItem colors={colors.amber} title="theme.colors.amber" />
+
+<ColorItem colors={colors.tomato} title="theme.colors.tomato" />
+
+<ColorItem colors={colors.slateA} title="theme.colors.slateA" />
+
+  <ColorItem colors={colors.whiteA} title="theme.colors.whiteA" />
+</ColorPalette>
+
+## Decorative colors
+
+<ColorPalette>
+  <ColorItem colors={colors.blue} title="theme.colors.blue" />
+
+<ColorItem colors={colors.cyan} title="theme.colors.cyan" />
+
+<ColorItem colors={colors.iris} title="theme.colors.iris" />
+
+<ColorItem colors={colors.lime} title="theme.colors.lime" />
+
+<ColorItem colors={colors.mauve} title="theme.colors.mauve" />
+
+<ColorItem colors={colors.pink} title="theme.colors.pink" />
+
+  <ColorItem colors={colors.orange} title="theme.colors.orange" />
+</ColorPalette>

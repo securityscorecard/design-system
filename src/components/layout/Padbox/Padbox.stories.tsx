@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import Padbox, { PadboxProps } from './Padbox';
@@ -31,7 +31,7 @@ const Content = styled.div`
   background-color: ${getColor('primary.50')};
 `;
 
-const PadboxTemplate: Story<PadboxProps> = (args) => (
+const PadboxTemplate: StoryFn<PadboxProps> = (args) => (
   <Padbox style={{ backgroundColor: '#0275d8' }} {...args}>
     <Content>
       Sed id nulla ac est dignissim pharetra. Donec sit amet nulla vitae orci

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { zipObj } from 'ramda';
 
@@ -21,7 +21,10 @@ const listItemsLabels = zipObj(listItems, [
   'Item 6',
 ]);
 
-const SortableListTemplate: Story<SortableListProps> = ({ items, ...args }) => {
+const SortableListTemplate: StoryFn<SortableListProps> = ({
+  items,
+  ...args
+}) => {
   const [sortedItems, setSortedItems] = useState(items);
 
   return (

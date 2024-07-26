@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import SemanticModal from './SemanticModal';
@@ -51,7 +51,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<SemanticModalProps> = (args) => {
+export const Playground: StoryFn<SemanticModalProps> = (args) => {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -61,7 +61,7 @@ export const Playground: Story<SemanticModalProps> = (args) => {
           Open semantic modal
         </Button>
       </Inline>
-      {isShown && <SemanticModal onClose={() => setIsShown(false)} {...args} />}
+      {isShown && <SemanticModal {...args} onClose={() => setIsShown(false)} />}
     </Padbox>
   );
 };
@@ -92,7 +92,7 @@ Playground.args = {
   primaryButtonColor: ButtonColors.primary,
 };
 
-const SemanticModalTemplate: Story<SemanticModalProps> = (args) => (
+const SemanticModalTemplate: StoryFn<SemanticModalProps> = (args) => (
   <SemanticModal {...args} />
 );
 

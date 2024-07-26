@@ -1,4 +1,4 @@
-import React, { ComponentMeta } from '@storybook/react';
+import React, { Meta } from '@storybook/react';
 import { useState } from 'react';
 
 import Datatable from '../Datatable';
@@ -10,7 +10,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const ColumnSettingsPanelEnabled: Story = Template.bind({});
 ColumnSettingsPanelEnabled.args = Template.args;

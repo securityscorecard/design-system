@@ -35,6 +35,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:ramda/recommended',
+    'plugin:mdx/recommended',
   ],
   plugins: ['filenames', 'fp', 'react-hooks', 'ramda'],
   rules: {
@@ -85,7 +86,7 @@ module.exports = {
     'react/jsx-filename-extension': [
       1,
       {
-        extensions: ['.tsx'],
+        extensions: ['.tsx', '.mdx'],
       },
     ],
     'react/jsx-props-no-spreading': 'off',
@@ -202,6 +203,16 @@ module.exports = {
           },
         ],
         'react/destructuring-assignment': 'off',
+        'filenames/match-exported': 'off',
+        'import/no-extraneous-dependencies': 'off',
+      },
+    },
+    {
+      files: '*.mdx',
+      extends: 'plugin:mdx/recommended',
+      rules: {
+        'import/no-extraneous-dependencies': 'off',
+        'react/prop-types': 'off',
       },
     },
   ],

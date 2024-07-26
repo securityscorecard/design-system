@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Filters from './Filters';
@@ -10,7 +10,7 @@ export default {
   title: 'components/Filters',
 } as Meta;
 
-export const Default: Story = () => (
+export const Default: StoryFn = () => (
   <Filters
     fields={fields}
     isCancelEnabled
@@ -20,7 +20,7 @@ export const Default: Story = () => (
   />
 );
 
-export const WithState: Story = () => (
+export const WithState: StoryFn = () => (
   <Filters
     fields={fields}
     state={state}
@@ -30,7 +30,7 @@ export const WithState: Story = () => (
   />
 );
 
-export const UnappliedFilters: Story = () => (
+export const UnappliedFilters: StoryFn = () => (
   <Filters
     fields={fields}
     state={stateWithUnappliedFilters}
@@ -40,7 +40,7 @@ export const UnappliedFilters: Story = () => (
   />
 );
 
-export const FetchingResults: Story = () => (
+export const FetchingResults: StoryFn = () => (
   <Filters
     fields={fields}
     state={state}
@@ -52,7 +52,7 @@ export const FetchingResults: Story = () => (
   />
 );
 
-export const WithFixedOperator: Story = () => (
+export const WithFixedOperator: StoryFn = () => (
   <Filters
     defaultOperator="or"
     fields={fields}
@@ -64,7 +64,7 @@ export const WithFixedOperator: Story = () => (
   />
 );
 
-export const WithCloseButton: Story = () => (
+export const WithCloseButton: StoryFn = () => (
   <Filters
     fields={fields}
     state={state}
@@ -73,7 +73,7 @@ export const WithCloseButton: Story = () => (
   />
 );
 
-export const WithoutApplyButton: Story = () => (
+export const WithoutApplyButton: StoryFn = () => (
   <Filters
     fields={fields}
     state={state}

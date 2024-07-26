@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -29,13 +29,13 @@ const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const Playground: Story = (args) => (
+export const Playground: StoryFn = (args) => (
   <Wrapper>
     <Filters fields={fieldsTagsInput} onApply={action('onApply')} {...args} />
   </Wrapper>
 );
 
-export const TagsInput: Story = () => (
+export const TagsInput: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsTagsInput}
@@ -47,7 +47,7 @@ export const TagsInput: Story = () => (
   </Wrapper>
 );
 
-export const TagsInputValidation: Story = () => (
+export const TagsInputValidation: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsTagsInputValidation}
@@ -59,7 +59,7 @@ export const TagsInputValidation: Story = () => (
   </Wrapper>
 );
 
-export const TagsInputPlaceholderUnits: Story = () => (
+export const TagsInputPlaceholderUnits: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsTagsInputPlaceholderUnits}

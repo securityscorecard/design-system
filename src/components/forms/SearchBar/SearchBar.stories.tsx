@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Inline, Stack } from '../../layout';
@@ -29,7 +29,7 @@ export default {
   },
 } as Meta;
 
-const SearchBarTemplate: Story<SearchBarProps> = (args) => (
+const SearchBarTemplate: StoryFn<SearchBarProps> = (args) => (
   <SearchBar {...args} />
 );
 
@@ -70,7 +70,7 @@ WithDebouncedSearch.parameters = {
   screenshot: { skip: true },
 };
 
-export const ControlledInput: Story<SearchBarProps> = (args) => {
+export const ControlledInput: StoryFn<SearchBarProps> = (args) => {
   const [query, setQuery] = useState('');
 
   const handleSearch = (): Promise<void> => {

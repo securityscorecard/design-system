@@ -10,7 +10,6 @@ export default {
         tsconfig: 'tsconfig.build.json',
       },
     ],
-    '^.+\\.mdx?$': '@storybook/addon-docs/jest-transform-mdx',
   },
   transformIgnorePatterns: ['node_modules/(?!(styled-reset-advanced))'],
   testMatch: ['./**/*.(test).(ts|tsx)'],

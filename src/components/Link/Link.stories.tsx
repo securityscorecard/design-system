@@ -1,12 +1,11 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { Paragraph } from '../index';
 import { LinkColors } from '../_internal/BaseLink/BaseLink.enums';
 import Link from './Link';
-import { generateControl } from '../../utils/tests/storybook';
 import { LinkProps } from './Link.types';
 
 export default {
@@ -15,7 +14,6 @@ export default {
 } as Meta;
 
 // Link mock from 'react-router-dom'
-// eslint-disable-next-line react/prop-types
 function RouterLink({ children, to, ...props }) {
   return (
     <button type="button" onClick={action(`navigating-to-${to}`)} {...props}>
@@ -24,11 +22,10 @@ function RouterLink({ children, to, ...props }) {
   );
 }
 
-export const Playground: Story<LinkProps> = (args) => (
+export const Playground: StoryFn<LinkProps> = (args) => (
   <Link {...args}>Link</Link>
 );
 Playground.argTypes = {
-  color: { ...generateControl('select', LinkColors) },
   href: { control: { disable: true } },
   to: { control: { disable: true } },
 };
@@ -36,14 +33,14 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const PrimaryLink: Story = () => <Link href="#">Absolute Link</Link>;
-export const SecondaryLink: Story = () => (
+export const PrimaryLink: StoryFn = () => <Link href="#">Absolute Link</Link>;
+export const SecondaryLink: StoryFn = () => (
   <Link color={LinkColors.secondary} href="#">
     Absolute Link
   </Link>
 );
 
-export const LinkInText: Story = () => (
+export const LinkInText: StoryFn = () => (
   <>
     <Paragraph size={TextSizes.lg}>
       Lorem ipsum dolor sit amet, <Link href="#">absolute link</Link>. Donec

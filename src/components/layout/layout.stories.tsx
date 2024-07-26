@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Col, Container, Row } from './index';
@@ -38,7 +38,7 @@ const Content = styled.div`
   margin-bottom: 15px;
 `;
 
-export const SetWidthColumns: Story = () => (
+export const SetWidthColumns: StoryFn = () => (
   <Container>
     <Row>
       <Col cols={1}>
@@ -139,7 +139,7 @@ export const SetWidthColumns: Story = () => (
   </Container>
 );
 
-export const AutoWidthColumns: Story = () => (
+export const AutoWidthColumns: StoryFn = () => (
   <Container>
     <Row>
       <Col cols={4}>
@@ -152,7 +152,7 @@ export const AutoWidthColumns: Story = () => (
   </Container>
 );
 
-export const OffsetColumns: Story = () => (
+export const OffsetColumns: StoryFn = () => (
   <Container>
     <Row>
       <Col cols={4}>

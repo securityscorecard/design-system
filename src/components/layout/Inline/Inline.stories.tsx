@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Box as MockBox } from '../mocks/Box';
@@ -32,7 +32,7 @@ function Box({ style = {} }: { style?: React.CSSProperties }) {
   return <MockBox style={{ width: '150px', minHeight: '150px', ...style }} />;
 }
 
-const InlineTemplate: Story<InlineProps> = (args) => (
+const InlineTemplate: StoryFn<InlineProps> = (args) => (
   <Inline style={{ backgroundColor: '#0275d8' }} {...args}>
     <Box />
     <Box style={{ height: '300px' }} />

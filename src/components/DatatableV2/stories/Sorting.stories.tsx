@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { SortingState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
@@ -11,7 +11,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const SortingEnabled: Story = Template.bind({});
 SortingEnabled.args = Template.args;

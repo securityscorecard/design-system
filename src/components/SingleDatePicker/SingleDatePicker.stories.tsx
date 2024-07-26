@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import SingleDatePicker from './SingleDatePicker';
 import { SingleDatePickerProps } from '../_internal/BaseSingleDatePicker/SingleDatePicker.types';
@@ -18,7 +18,7 @@ export default {
   ],
 } as Meta;
 
-export const Playground: Story<SingleDatePickerProps> = (args) => (
+export const Playground: StoryFn<SingleDatePickerProps> = (args) => (
   <SingleDatePicker {...args} />
 );
 Playground.parameters = {
@@ -26,18 +26,20 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => {
-  const [dateValue, handleChangeDate] = useState<Date>(null);
+export const Default: StoryFn = () => {
+  const [dateValue, handleChangeDate] = useState<Date | null>(null);
   return <SingleDatePicker value={dateValue} onChange={handleChangeDate} />;
 };
 
-export const WithValueSelected: Story = () => {
-  const [dateValue, handleChangeDate] = useState<Date>(new Date('2021/03/05'));
+export const WithValueSelected: StoryFn = () => {
+  const [dateValue, handleChangeDate] = useState<Date | null>(
+    new Date('2021/03/05'),
+  );
   return <SingleDatePicker value={dateValue} onChange={handleChangeDate} />;
 };
 
-export const WithCustomPlaceholder: Story = () => {
-  const [dateValue, handleChangeDate] = useState<Date>(null);
+export const WithCustomPlaceholder: StoryFn = () => {
+  const [dateValue, handleChangeDate] = useState<Date | null>(null);
 
   return (
     <SingleDatePicker
@@ -48,8 +50,8 @@ export const WithCustomPlaceholder: Story = () => {
   );
 };
 
-export const OpenDatepicker: Story = () => {
-  const [dateValue, handleChangeDate] = useState<Date>(null);
+export const OpenDatepicker: StoryFn = () => {
+  const [dateValue, handleChangeDate] = useState<Date | null>(null);
 
   return (
     <SingleDatePicker
@@ -61,8 +63,8 @@ export const OpenDatepicker: Story = () => {
   );
 };
 
-export const YearPickerDatePicker: Story = () => {
-  const [dateValue, handleChangeDate] = useState<Date>(null);
+export const YearPickerDatePicker: StoryFn = () => {
+  const [dateValue, handleChangeDate] = useState<Date | null>(null);
 
   return (
     <SingleDatePicker

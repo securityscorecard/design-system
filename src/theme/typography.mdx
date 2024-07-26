@@ -1,0 +1,137 @@
+import { Meta } from '@storybook/blocks';
+
+import { FontItem, FontPalette } from '../../.storybook/blocks/FontPallete';
+import { theme } from './theme';
+
+export const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra
+magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
+leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravida sem semper et.`;
+
+<Meta title="Theme/Typography" />
+
+# Typography
+
+Design System have defined two basic font families. As base font family we are using sans-serif
+`Inter` font, for monospaced text we are using `Space Mono` font. These fonts are not bundled
+together with the Design System and need to be installed separately.
+
+## Installation
+
+### yarn
+
+```bash
+yarn add @fontsource/inter @fontsource/space-mono
+```
+
+### npm
+
+```bash
+npm install @fontsource/inter @fontsource/space-mono
+```
+
+### Google Web Fonts
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+  rel="stylesheet"
+/>
+```
+
+## Examples
+
+### Families
+
+<FontPalette>
+  <FontItem fontFamily={theme.typography.family.base} sampleText={lipsum} subtitle="Inter" title="theme.typography.family.base" />
+
+  <FontItem fontFamily={theme.typography.family.mono} sampleText={lipsum} subtitle="SpaceMono" title="theme.typography.family.mono" />
+</FontPalette>
+
+### Font weights
+
+<FontPalette>
+  <FontItem fontWeight={theme.typography.weight.light} sampleText={lipsum} subtitle="Light weight" title="theme.typography.weight.light" />
+
+<FontItem
+  fontWeight={theme.typography.weight.regular}
+  sampleText={lipsum}
+  subtitle="Regular weight, monospace font can be used only with regular weight"
+  title="theme.typography.weight.regular"
+/>
+
+<FontItem
+  fontWeight={theme.typography.weight.medium}
+  sampleText={lipsum}
+  subtitle="Medium weight"
+  title="theme.typography.weight.medium"
+/>
+
+<FontItem
+  fontWeight={theme.typography.weight.semibold}
+  sampleText={lipsum}
+  subtitle="Semibold weight"
+  title="theme.typography.weight.semibold"
+/>
+
+  <FontItem fontWeight={theme.typography.weight.bold} sampleText={lipsum} subtitle="Bold weight" title="theme.typography.weight.bold" />
+</FontPalette>
+
+### Font sizes
+
+#### Headings
+
+<FontPalette>
+  <FontItem fontSize={theme.typography.size.h1} fontWeight={theme.typography.weight.medium} lineHeight={theme.typography.lineHeight.xxl} sampleText="Heading H1" subtitle="Page-level headers" title="theme.typography.size.h1" />
+
+<FontItem
+  fontSize={theme.typography.size.h2}
+  fontWeight={theme.typography.weight.medium}
+  lineHeight={theme.typography.lineHeight.xxl}
+  sampleText="Heading H2"
+  subtitle="Section and column headers"
+  title="theme.typography.size.h2"
+/>
+
+<FontItem
+  fontSize={theme.typography.size.h3}
+  fontWeight={theme.typography.weight.medium}
+  lineHeight={theme.typography.lineHeight.xl}
+  sampleText="Heading H3"
+  subtitle="Subsection headers"
+  title="theme.typography.size.h3"
+/>
+
+<FontItem
+  fontSize={theme.typography.size.h4}
+  fontWeight={theme.typography.weight.medium}
+  lineHeight={theme.typography.lineHeight.lg}
+  sampleText="Heading H4"
+  subtitle="Block headers"
+  title="theme.typography.size.h4"
+/>
+
+  <FontItem fontSize={theme.typography.size.h5} fontWeight={theme.typography.weight.medium} lineHeight={theme.typography.lineHeight.mdPlus} sampleText="Heading H5" subtitle="Block headers" title="theme.typography.size.h5" />
+</FontPalette>
+
+#### Body text
+
+<FontPalette>
+  <FontItem fontSize={theme.typography.size.lg} lineHeight={theme.typography.lineHeight.lg} sampleText={lipsum} subtitle="" title="theme.typography.size.lg" />
+
+<FontItem
+  fontSize={theme.typography.size.md}
+  lineHeight={theme.typography.lineHeight.md}
+  sampleText={lipsum}
+  subtitle=""
+  title="theme.typography.size.md"
+/>
+
+  <FontItem fontSize={theme.typography.size.sm} lineHeight={theme.typography.lineHeight.md} sampleText={lipsum} subtitle="" title="theme.typography.size.sm" />
+</FontPalette>
