@@ -11,4 +11,6 @@
   --sscds-space-16x: calc(var(--sscds-space-1x) * 16);
   --sscds-space-24x: calc(var(--sscds-space-1x) * 24);
   --sscds-space-32x: calc(var(--sscds-space-1x) * 32);
+
+  --sscds-space-grid-gutter: 1.875rem; /* LEGACY VALUE - should be replaced with 8x */
 }
