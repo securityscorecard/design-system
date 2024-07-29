@@ -2,20 +2,14 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
-import {
-  getColor,
-  getFontFamily,
-  getFontSize,
-  getFontWeight,
-  getLineHeight,
-} from '../../utils';
+import { getFontSize, getFontWeight, getLineHeight } from '../../utils';
 import { HeadingProps } from '../Heading/Heading.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { CodeProps, StrongProps, TextProps } from './Text.types';
 import { CLX_TYPOGRAPHY } from '../../theme/constants';
 
 const HeadingBase = css<HeadingProps>`
-  font-family: ${getFontFamily('base')};
+  font-family: var(--sscds-font-family-body);
   font-weight: ${getFontWeight('medium')};
 `;
 const largeSize = css`
@@ -61,19 +55,20 @@ const inheritSize = css`
 `;
 
 const primaryVariant = css`
-  color: ${getColor('text.primary')};
+  color: var(--sscds-color-text-default);
 `;
 const secondaryVariant = css`
-  color: ${getColor('text.secondary')};
+  color: var(--sscds-color-text-subtle);
 `;
 const contextVariant = css`
-  color: ${getColor('text.context')};
+  color: var(--sscds-color-neutral-9);
 `;
 const monospaceVariant = css`
-  font-family: ${getFontFamily('mono')};
+  font-family: var(--sscds-font-family-mono);
+  color: var(--sscds-color-text-default);
 `;
 const dangerVariant = css`
-  color: ${getColor('text.danger')};
+  color: var(--sscds-color-text-danger);
 `;
 const inheritVariant = `
   color: inherit;
@@ -92,12 +87,16 @@ const sizes = {
 };
 
 const variants = {
-  [TextVariants.primary]: primaryVariant,
-  [TextVariants.secondary]: secondaryVariant,
-  [TextVariants.context]: contextVariant,
+  [TextVariants.default]: primaryVariant,
+  [TextVariants.subtle]: secondaryVariant,
   [TextVariants.monospace]: monospaceVariant,
   [TextVariants.danger]: dangerVariant,
   [TextVariants.inherit]: inheritVariant,
+
+  /** @deprecated */
+  [TextVariants.primary]: primaryVariant,
+  [TextVariants.secondary]: secondaryVariant,
+  [TextVariants.context]: contextVariant,
 };
 
 const Text = styled.span.attrs<{ variant: keyof typeof TextVariants }>(

@@ -11,10 +11,14 @@ export const TextSizes = {
 } as const;
 
 export const TextVariants = {
-  primary: 'primary',
-  secondary: 'secondary',
-  context: 'context',
+  default: 'default',
+  subtle: 'subtle',
   monospace: 'monospace',
   danger: 'danger',
   inherit: 'inherit',
+
+  /** @deprecated */
+  primary: 'primary',
+  secondary: 'secondary',
+  context: 'context',
 } as const;
