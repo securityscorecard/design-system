@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -21,7 +21,7 @@ const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const DateRange: Story = () => (
+export const DateRange: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsDateRange}
@@ -33,7 +33,7 @@ export const DateRange: Story = () => (
   </Wrapper>
 );
 
-export const DateRangeValidation: Story = () => (
+export const DateRangeValidation: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsDateRangeValidation}
@@ -45,7 +45,7 @@ export const DateRangeValidation: Story = () => (
   </Wrapper>
 );
 
-export const DateRangePlaceholderUnits: Story = () => (
+export const DateRangePlaceholderUnits: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsDateRangePlaceholderUnits}

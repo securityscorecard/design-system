@@ -1,10 +1,10 @@
 import React from 'react';
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Stack } from '../layout/Stack';
 import ElementLabel from './ElementLabel';
 
-export default {
+const meta = {
   title: 'typography/ElementLabel',
   component: ElementLabel,
   parameters: {
@@ -51,13 +51,15 @@ export default {
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
   },
-} as ComponentMeta<typeof ElementLabel>;
+} satisfies Meta<typeof ElementLabel>;
 
-type Story = ComponentStoryObj<typeof ElementLabel>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
   args: {

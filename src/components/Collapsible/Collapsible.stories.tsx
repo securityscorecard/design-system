@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Collapsible from './Collapsible';
 import { Button } from '../Button';
@@ -10,9 +10,9 @@ import { Stack } from '../layout';
 export default {
   component: Collapsible,
   title: 'components/Collapsible',
-} as ComponentMeta<typeof Collapsible>;
+} as Meta<typeof Collapsible>;
 
-type Story = ComponentStory<typeof Collapsible>;
+type Story = StoryFn<typeof Collapsible>;
 
 export const Playground: Story = (args) => <Collapsible {...args} />;
 Playground.args = {

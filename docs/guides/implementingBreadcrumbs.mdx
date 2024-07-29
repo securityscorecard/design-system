@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/blocks';
+
+import imageUrl from './images/Breadcrumbs.png';
+
+<Meta title="Guides/Implementing Breadcrumbs" />
+
+## Implementing Breadcrumbs
+
+Breadcrumbs component is an important part of the architecture structure and improves the navigation on the web giving a clear message where the user currently is.
+It makes the use of back buttons obsolete and navigating the web consistent.
+
+### Breadcrumbs parameters
+
+| Key      | Type   | Default | Description                                |
+| :------- | :----- | :------ | :----------------------------------------- |
+| children | string |         | React nodes - only BreadcrumbItem accepted |
+
+#### BreadcrumbItem
+
+| Key      | Type     | Default | Description                                               |
+| :------- | :------- | :------ | :-------------------------------------------------------- |
+| children | string   |         | This should be a string that is used as the link children |
+| onClick  | function |         | Alternative to "to" and "href" parameters of the link     |
+| to       | string   |         | Address for the link to navigate to                       |
+| href     | string   |         | Address for the link to navigate to                       |
+
+```js
+
+import { Breadcrumbs, BreadcrumbItem } from '@securityscorecard/design-system';
+
+...
+// this is an example Breadcrumbs for a fictional page
+
+const BreadcrumbsComponent = () => (
+  <Breadcrumbs>
+    <BreadcrumbItem href="/top-level">
+      Top level
+    </BreadcrumbItem>
+    <BreadcrumbItem href="/top-level/lower-level">
+      Lower level
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      Current level
+    </BreadcrumbItem>
+  </Breadcrumbs>
+);
+
+```
+
+This setup will render following:
+
+<img alt="Example of renderd breadcrumbs" src={imageUrl} width={320} />
+
+Notice the Current level has lighter color - this one doesn't have 'to' or 'href' defined, so it's inactive.

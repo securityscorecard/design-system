@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import MockDate from 'mockdate';
 
 import assets from '../_internal/BaseTable/mocks/ipAssets.json';
@@ -114,11 +114,11 @@ const MyFancyDatatable = () => <Datatable ...props />
   },
 } as Meta;
 
-export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
+export const ServerSidePlayground: StoryFn<DatatableProps<Data>> = (args) => {
   const [tableData, setTableData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalLength, setTotalLength] = useState(0);
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>();
 
   const dispatchFetchData = useCallback(
     ({ pageSize, pageIndex }) => {
@@ -181,7 +181,7 @@ export const ServerSidePlayground: Story<DatatableProps<Data>> = (args) => {
 };
 ServerSidePlayground.storyName = 'Playground (Server-Side implementation)';
 
-export const InBrowserPlayground: Story<DatatableProps<Data>> = (args) => {
+export const InBrowserPlayground: StoryFn<DatatableProps<Data>> = (args) => {
   const [data, setData] = useState(assets);
 
   const resetFilter = useRef(null);

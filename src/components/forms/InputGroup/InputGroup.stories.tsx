@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import InputGroup from './InputGroup';
 import { Input, Password, Select } from '..';
@@ -21,28 +21,28 @@ const options = [
   { value: 'DK', label: 'Denmark' },
 ];
 
-export const DefaultInputGroup: Story = () => (
+export const DefaultInputGroup: StoryFn = () => (
   <InputGroup hasDivider={false}>
     <Input key="input" placeholder="Search..." type="text" />
     <Icon key="icon" name="search" />
   </InputGroup>
 );
 
-export const DividerInputGroup: Story = () => (
+export const DividerInputGroup: StoryFn = () => (
   <InputGroup hasDivider>
     <Input key="input" placeholder="Search..." type="text" />
     <Icon key="icon" name="search" />
   </InputGroup>
 );
 
-export const SelectInputGroup: Story = () => (
+export const SelectInputGroup: StoryFn = () => (
   <InputGroup stretch="end">
     <Icon key="icon" name="search" />
     <Select options={options} placeholder="Select a country" isMulti />
   </InputGroup>
 );
 
-export const NestedInputGroup: Story = () => (
+export const NestedInputGroup: StoryFn = () => (
   <InputGroup stretch="end" hasDivider>
     <Select options={options} placeholder="Select a country" />
     <InputGroup>
@@ -52,21 +52,21 @@ export const NestedInputGroup: Story = () => (
   </InputGroup>
 );
 
-export const InputGroupWithButton: Story = () => (
+export const InputGroupWithButton: StoryFn = () => (
   <InputGroup stretch="end">
     <Input key="input" placeholder="Type here..." type="text" />
     <Button>Search</Button>
   </InputGroup>
 );
 
-export const InputGroupWithPassword: Story = () => (
+export const InputGroupWithPassword: StoryFn = () => (
   <InputGroup stretch="end" hasDivider>
     <Icon key="icon" name="eye" />
     <Password />
   </InputGroup>
 );
 
-export const InputGroupWithSearchBar: Story = () => (
+export const InputGroupWithSearchBar: StoryFn = () => (
   <InputGroup stretch="end" hasDivider>
     <Select options={options} placeholder="Select a country" isMulti />
     <SearchBar />

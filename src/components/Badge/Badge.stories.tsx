@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Badge from './Badge';
 import { BadgeProps } from './Badge.types';
@@ -16,7 +16,7 @@ export default {
   },
 } as Meta;
 
-const BadgeTemplate: Story<BadgeProps> = (args) => <Badge {...args} />;
+const BadgeTemplate: StoryFn<BadgeProps> = (args) => <Badge {...args} />;
 
 export const Playground = BadgeTemplate.bind({});
 Playground.args = {

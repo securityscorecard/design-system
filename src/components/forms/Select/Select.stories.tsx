@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { OptionsType } from 'react-select';
 
 import Select from './Select';
 import { Option, SelectProps } from './Select.types';
@@ -137,11 +138,13 @@ OR
   },
 } as Meta;
 
-const SelectTemplate: Story<SelectProps> = (args) => {
+type Story<Multi extends boolean = true> = StoryFn<SelectProps<Multi>>;
+
+const SelectTemplate: Story = (args) => {
   return <Select {...args} aria-label="Select" isMenuPositionRelative />;
 };
 
-export const Playground: Story<SelectProps> = SelectTemplate.bind({});
+export const Playground: Story<false> = SelectTemplate.bind({});
 Playground.args = {
   options,
   placeholder: 'Select country...',
@@ -213,7 +216,7 @@ DisabledOptions.args = {
   defaultIsMenuOpen: true,
 };
 
-export const MultiSelect: Story<SelectProps<true>> = (args) => (
+export const MultiSelect: Story = (args) => (
   <Stack gap="md">
     <Select {...args} isClearable />
     <Select {...args} defaultInputValue="Cu" />
@@ -267,7 +270,7 @@ CustomMenuActions.args = {
   ],
 };
 
-export const PillTruncation: Story<SelectProps<true>> = (args) => (
+export const PillTruncation: Story = (args) => (
   <Stack gap="md">
     <Heading size="h3">Default truncation N=16</Heading>
     <Select {...args} />
@@ -283,7 +286,7 @@ PillTruncation.args = {
   defaultValue: [longOptions[2], longOptions[1], longOptions[0]],
 };
 
-export const PillWrapping: Story<SelectProps<true>> = (args) => (
+export const PillWrapping: Story = (args) => (
   <div style={{ width: '200px' }}>
     <Select {...args} />
   </div>
@@ -295,7 +298,7 @@ PillWrapping.args = {
   defaultValue: [longOptions[2], longOptions[1]],
 };
 
-export const MaxVisibleItem: Story<SelectProps<true>> = (args) => (
+export const MaxVisibleItem: Story = (args) => (
   <div>
     <Select {...args} />
   </div>
@@ -314,7 +317,7 @@ MaxVisibleItem.args = {
   maxVisibleItem: 3,
 };
 
-export const CustomOptionLabel: Story<SelectProps<true>> = (args) => (
+export const CustomOptionLabel: Story = (args) => (
   <Select
     formatOptionLabel={(data) => (
       <Inline align="center" gap="xs">
@@ -330,7 +333,7 @@ CustomOptionLabel.args = {
   defaultValue: [options[1], options[2]],
 };
 
-export const CustomMultiValueLabel: Story<SelectProps<true>> = (args) => (
+export const CustomMultiValueLabel: Story = (args) => (
   <Select
     formatOptionLabel={(data, meta) => {
       const renderMultiValueLabel = meta.context === 'value';
@@ -371,7 +374,7 @@ WithCustomComponents.args = {
   },
 };
 
-export const CustomGroupLabel: Story<SelectProps<true>> = (args) => (
+export const CustomGroupLabel: Story = (args) => (
   <Select
     formatGroupLabel={(group) => (
       <Inline gap="md" justify="space-between">
@@ -399,7 +402,7 @@ const promiseOptions = (inputValue: string): Promise<Option[]> =>
     }, 1000);
   });
 
-export const AsyncSelect: Story<SelectProps<false>> = () => {
+export const AsyncSelect: Story<false> = () => {
   return (
     <Stack gap="md">
       <Select
@@ -425,10 +428,8 @@ AsyncSelect.parameters = {
   screenshot: { skip: true },
 };
 
-export const MultiSelectWithControlledValue: Story<SelectProps<true>> = (
-  args,
-) => {
-  const [selectedOptions, setSelectedOptions] = useState([
+export const MultiSelectWithControlledValue: Story = (args) => {
+  const [selectedOptions, setSelectedOptions] = useState<OptionsType<Option>>([
     options[1],
     options[2],
   ]);
@@ -446,7 +447,7 @@ export const MultiSelectWithControlledValue: Story<SelectProps<true>> = (
       />
 
       <Padbox>
-        <Label isBold>Selected Values</Label>
+        <Label>Selected Values</Label>
         <Stack gap="md">
           {selectedOptions.map((option) => (
             <Inline key={option.value} gap="sm">

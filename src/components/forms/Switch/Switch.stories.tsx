@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -21,7 +21,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<SwitchProps> = (args) => <Switch {...args} />;
+export const Playground: StoryFn<SwitchProps> = (args) => <Switch {...args} />;
 Playground.args = {
   switchId: 'playground',
 };
@@ -29,9 +29,9 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => <Switch switchId="default" />;
+export const Default: StoryFn = () => <Switch switchId="default" />;
 
-export const WithoutLabel: Story = () => (
+export const WithoutLabel: StoryFn = () => (
   <Stack gap="md">
     <Paragraph>Not Checked</Paragraph>
     <Inline align="center" gap={SpaceSizes.md}>

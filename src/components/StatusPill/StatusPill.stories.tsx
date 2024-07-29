@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import StatusPill from './StatusPill';
 import { Inline } from '../layout';
@@ -9,7 +9,7 @@ export default {
   component: StatusPill,
 } as Meta;
 
-export const Default: Story = () => (
+export const Default: StoryFn = () => (
   <Inline gap="lg">
     <StatusPill color="success" label="Success" />
     <StatusPill color="danger" label="Danger" />

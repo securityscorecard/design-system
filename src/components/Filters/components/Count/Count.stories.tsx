@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -21,7 +21,7 @@ const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const Count: Story = () => (
+export const Count: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsCount}
@@ -33,7 +33,7 @@ export const Count: Story = () => (
   </Wrapper>
 );
 
-export const CountValidation: Story = () => (
+export const CountValidation: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsCountValidation}
@@ -45,7 +45,7 @@ export const CountValidation: Story = () => (
   </Wrapper>
 );
 
-export const CountPlaceholderUnits: Story = () => (
+export const CountPlaceholderUnits: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsCountPlaceholderUnits}

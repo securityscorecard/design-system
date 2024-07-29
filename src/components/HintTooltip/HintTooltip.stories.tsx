@@ -1,11 +1,10 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import HintTooltip from './HintTooltip';
 import { HintTooltipProps } from './HintTooltip.types';
 import { Inline, Padbox, Stack } from '../layout';
-import { SpaceSizes } from '../../theme';
 import { getColor } from '../../utils';
 import { Paragraph } from '../Paragraph';
 import { Link } from '../Link';
@@ -21,7 +20,7 @@ export default {
   },
   decorators: [
     (storyFn) => (
-      <Padbox paddingSize={SpaceSizes.xxl}>
+      <Padbox paddingSize="xxl">
         <Inline justify="center">{storyFn()}</Inline>
       </Padbox>
     ),
@@ -39,18 +38,18 @@ const ColorBackgroundWrapper = styled(Padbox)`
   background-color: ${getColor('primary.50')};
 `;
 
-export const Default: Story<HintTooltipProps> = ({ ...args }) => (
+export const Default: StoryFn<HintTooltipProps> = ({ ...args }) => (
   <Inline>
-    <Padbox height="120" paddingSize="lg" width="240">
+    <Padbox paddingSize="lg">
       <HintTooltip {...args}>{Popup}</HintTooltip>
     </Padbox>
-    <ColorBackgroundWrapper height="120" paddingSize="lg" width="240">
+    <ColorBackgroundWrapper paddingSize="lg">
       <HintTooltip {...args}>{Popup}</HintTooltip>
     </ColorBackgroundWrapper>
   </Inline>
 );
 
-export const InlineHintTooltip: Story<HintTooltipProps> = () => (
+export const InlineHintTooltip: StoryFn<HintTooltipProps> = () => (
   <Stack gap="lg">
     <Inline align="center" gap="lg">
       <Text size="lg">Heading</Text>

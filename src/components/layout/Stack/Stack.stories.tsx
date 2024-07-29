@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import Stack, { StackProps } from './Stack';
@@ -21,7 +21,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<StackProps> = (args) => (
+export const Playground: StoryFn<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>
     <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
@@ -41,7 +41,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithGap: Story<StackProps> = (args) => (
+export const WithGap: StoryFn<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Box />
@@ -52,7 +52,7 @@ WithGap.args = {
   gap: SpaceSizes.lg,
 };
 
-export const RecursiveGap: Story<StackProps> = (args) => (
+export const RecursiveGap: StoryFn<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Box style={{ backgroundColor: '#579aa0' }}>
@@ -70,7 +70,7 @@ RecursiveGap.args = {
   isRecursive: true,
 };
 
-export const SplitedStack: Story<StackProps> = (args) => (
+export const SplitedStack: StoryFn<StackProps> = (args) => (
   <div style={{ height: '20rem' }}>
     <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />
@@ -84,7 +84,7 @@ SplitedStack.args = {
   gap: SpaceSizes.sm,
 };
 
-export const WithHorizontalAlignment: Story<StackProps> = (args) => (
+export const WithHorizontalAlignment: StoryFn<StackProps> = (args) => (
   <Stack style={{ backgroundColor: '#80baeb' }} {...args}>
     <Box />
     <Button color="primary" variant="solid">

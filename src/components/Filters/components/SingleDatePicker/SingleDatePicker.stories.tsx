@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -28,13 +28,13 @@ const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const Playground: Story = (args) => (
+export const Playground: StoryFn = (args) => (
   <Wrapper>
     <Filters fields={fieldsSingleDate} onApply={action('onApply')} {...args} />
   </Wrapper>
 );
 
-export const SingleDate: Story = () => (
+export const SingleDate: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsSingleDate}
@@ -46,7 +46,7 @@ export const SingleDate: Story = () => (
   </Wrapper>
 );
 
-export const SingleDatePlaceholderUnits: Story = () => (
+export const SingleDatePlaceholderUnits: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsSingleDatePlaceholderUnits}

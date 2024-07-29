@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Pagination from './Pagination';
@@ -16,7 +16,7 @@ export default {
   },
 } as Meta;
 
-const PaginationTemplate: Story<PaginationProps> = (args) => (
+const PaginationTemplate: StoryFn<PaginationProps> = (args) => (
   <Pagination {...args} />
 );
 

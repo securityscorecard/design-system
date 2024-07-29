@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Datatable from '../Datatable';
@@ -12,7 +12,7 @@ import { Paragraph } from '../../Paragraph';
 export default {
   title: 'components/DatatableV2/EmptyData',
   component: Datatable,
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const Default: Story = Template.bind({});
 Default.args = {

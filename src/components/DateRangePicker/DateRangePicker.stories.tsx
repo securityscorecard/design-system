@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DateRangePicker from './DateRangePicker';
 import {
@@ -19,7 +19,7 @@ export default {
   ],
 } as Meta;
 
-export const Playground: Story<BaseDateRangePickerProps> = (args) => (
+export const Playground: StoryFn<BaseDateRangePickerProps> = (args) => (
   <DateRangePicker {...args} />
 );
 Playground.parameters = {
@@ -34,7 +34,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => {
+export const Default: StoryFn = () => {
   const [dateRange, handleChangeDateRange] = useState<BaseDateRange>({
     startDate: null,
     endDate: null,
@@ -53,7 +53,7 @@ export const Default: Story = () => {
   );
 };
 
-export const WithDefaultValue: Story = () => {
+export const WithDefaultValue: StoryFn = () => {
   const [dateRange, handleChangeDateRange] = useState<BaseDateRange>({
     startDate: new Date('2021/03/05'),
     endDate: new Date('2021/03/10'),
@@ -72,10 +72,10 @@ export const WithDefaultValue: Story = () => {
   );
 };
 
-export const WithCustomPlaceholder: Story = () => {
+export const WithCustomPlaceholder: StoryFn = () => {
   const [dateRange, handleChangeDateRange] = useState<BaseDateRange>({
-    startDate: undefined,
-    endDate: undefined,
+    startDate: null,
+    endDate: null,
   });
 
   return (

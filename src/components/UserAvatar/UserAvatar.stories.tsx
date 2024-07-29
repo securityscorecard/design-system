@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { generateControl } from '../../utils/tests/storybook';
@@ -19,7 +19,7 @@ export default {
   },
 } as Meta;
 
-const UserAvatarTemplate: Story<UserAvatarProps> = (args) => (
+const UserAvatarTemplate: StoryFn<UserAvatarProps> = (args) => (
   <UserAvatar {...args} />
 );
 
@@ -32,7 +32,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const DifferentSizes: Story<UserAvatarProps> = (args) => (
+export const DifferentSizes: StoryFn<UserAvatarProps> = (args) => (
   <Inline align="center" gap={SpaceSizes.lg}>
     <UserAvatar {...args} size={UserAvatarSizes.sm} />
     <UserAvatar {...args} size={UserAvatarSizes.md} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { H2 } from '../Heading';
 import { Paragraph } from '../Paragraph';
@@ -18,7 +18,7 @@ export default {
   component: FlexContainer,
 } as Meta;
 
-export const Sample: Story = () => (
+export const Sample: StoryFn = () => (
   <>
     <FlexContainer alignItems="center" padding={2}>
       <H2 margin="none" padding={{ right: 2 }}>

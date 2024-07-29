@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Drawer } from '../../Drawer';
@@ -15,7 +15,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const RowOnClickEnabled: Story = Template.bind({});
 RowOnClickEnabled.args = {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
@@ -10,7 +10,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const FullscreenModeEnabled: Story = Template.bind({});
 FullscreenModeEnabled.args = Template.args;

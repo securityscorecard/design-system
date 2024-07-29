@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Inline, Stack } from '../layout';
@@ -33,7 +33,7 @@ export default {
 
 const lipsum = `Lorem ipsum dolor sit amet`;
 
-export const Playground: Story<TextProps & { children: React.ReactChild }> = (
+export const Playground: StoryFn<TextProps & { children: React.ReactChild }> = (
   args,
 ) => <Text {...args} />;
 Playground.args = {
@@ -43,14 +43,18 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const LargeText: Story = () => <Text size={TextSizes.lg}>{lipsum}</Text>;
+export const LargeText: StoryFn = () => (
+  <Text size={TextSizes.lg}>{lipsum}</Text>
+);
 
-export const MediumText: Story = () => (
+export const MediumText: StoryFn = () => (
   <Text size={TextSizes.md}>{lipsum}</Text>
 );
 
-export const SmallText: Story = () => <Text size={TextSizes.sm}>{lipsum}</Text>;
-export const TextHeading1: Story = () => (
+export const SmallText: StoryFn = () => (
+  <Text size={TextSizes.sm}>{lipsum}</Text>
+);
+export const TextHeading1: StoryFn = () => (
   <Stack>
     <Text size={TextSizes.h1}>{lipsum}</Text>
     <Text size={TextSizes.h1} variant="secondary">
@@ -58,7 +62,7 @@ export const TextHeading1: Story = () => (
     </Text>
   </Stack>
 );
-export const TextHeading2: Story = () => (
+export const TextHeading2: StoryFn = () => (
   <Stack>
     <Text size={TextSizes.h2}>{lipsum}</Text>
     <Text size={TextSizes.h2} variant="secondary">
@@ -66,7 +70,7 @@ export const TextHeading2: Story = () => (
     </Text>
   </Stack>
 );
-export const TextHeading3: Story = () => (
+export const TextHeading3: StoryFn = () => (
   <Stack>
     <Text size={TextSizes.h3}>{lipsum}</Text>
     <Text size={TextSizes.h3} variant="secondary">
@@ -74,7 +78,7 @@ export const TextHeading3: Story = () => (
     </Text>
   </Stack>
 );
-export const TextHeading4: Story = () => (
+export const TextHeading4: StoryFn = () => (
   <Stack>
     <Text size={TextSizes.h4}>{lipsum}</Text>
     <Text size={TextSizes.h4} variant="secondary">
@@ -82,7 +86,7 @@ export const TextHeading4: Story = () => (
     </Text>
   </Stack>
 );
-export const TextHeading5: Story = () => (
+export const TextHeading5: StoryFn = () => (
   <Stack>
     <Text size={TextSizes.h5}>{lipsum}</Text>
     <Text size={TextSizes.h5} variant="secondary">
@@ -91,7 +95,7 @@ export const TextHeading5: Story = () => (
   </Stack>
 );
 
-export const PrimaryText: Story = () => (
+export const PrimaryText: StoryFn = () => (
   <>
     <Text>{lipsum}</Text>
     <br />
@@ -99,7 +103,7 @@ export const PrimaryText: Story = () => (
   </>
 );
 
-export const SecondaryText: Story = () => (
+export const SecondaryText: StoryFn = () => (
   <>
     <Text variant={TextVariants.secondary}>{lipsum}</Text>
     <br />
@@ -109,7 +113,7 @@ export const SecondaryText: Story = () => (
   </>
 );
 
-export const ContextText: Story = () => (
+export const ContextText: StoryFn = () => (
   <>
     <Text variant={TextVariants.context}>{lipsum}</Text>
     <br />
@@ -121,7 +125,7 @@ export const ContextText: Story = () => (
 
 ContextText.storyName = 'Context Text (DEPRECATED)';
 
-export const MonospaceText: Story = () => (
+export const MonospaceText: StoryFn = () => (
   <>
     <Text variant={TextVariants.monospace}>{lipsum}</Text>
     <br />
@@ -131,7 +135,7 @@ export const MonospaceText: Story = () => (
   </>
 );
 
-export const DangerText: Story = () => (
+export const DangerText: StoryFn = () => (
   <>
     <Text variant={TextVariants.danger}>{lipsum}</Text>
     <br />
@@ -141,7 +145,7 @@ export const DangerText: Story = () => (
   </>
 );
 
-export const ShorthandComponents: Story = () => (
+export const ShorthandComponents: StoryFn = () => (
   <>
     <Code>This is shorthand Code component</Code>
     <br />
@@ -161,7 +165,7 @@ const DarkBox = styled.div`
   max-width: 30rem;
 `;
 
-export const DarkMode: Story = () => (
+export const DarkMode: StoryFn = () => (
   <DarkBox>
     <DSThemeOverride
       overrides={(theme) => ({

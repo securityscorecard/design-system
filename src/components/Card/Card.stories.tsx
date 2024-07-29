@@ -1,5 +1,5 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import React, { ComponentProps } from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -47,10 +47,10 @@ export default {
 function CardHeaderTemplate({
   title = 'Card Title',
   subtitle = 'Card Subtitle',
-  titleLinesCount = undefined,
-  subtitleLinesCount = undefined,
-  onHelpClick = null,
-  helpTooltip = null,
+  maxTitleLinesCount,
+  maxSubtitleLinesCount,
+  onHelpClick,
+  helpTooltip,
   leftAdornment = (
     <div style={{ marginLeft: '-8px' }}>
       <CardIconButton aria-label="Drag Card">
@@ -58,14 +58,14 @@ function CardHeaderTemplate({
       </CardIconButton>
     </div>
   ),
-}) {
+}: Partial<ComponentProps<typeof CardHeader>>) {
   return (
     <CardHeader
       actions={actions}
       helpTooltip={helpTooltip}
       leftAdornment={leftAdornment}
-      maxSubtitleLinesCount={subtitleLinesCount}
-      maxTitleLinesCount={titleLinesCount}
+      maxSubtitleLinesCount={maxSubtitleLinesCount}
+      maxTitleLinesCount={maxTitleLinesCount}
       subtitle={subtitle}
       title={title}
       onHelpClick={onHelpClick}
@@ -125,7 +125,7 @@ function CardMediaTemplate({
   return <CardMedia alt="test" mediaSrc={image} style={{ height, width }} />;
 }
 
-const CardTemplate: Story<CardProps> = ({ ...args }) => (
+const CardTemplate: StoryFn<CardProps> = ({ ...args }) => (
   <div style={{ width: '400px' }}>
     <Card {...args} data-custom-attr="test" />
   </div>
@@ -152,7 +152,7 @@ WithCardMediaOnTop.args = {
   children: (
     <>
       <CardMediaTemplate />
-      <CardHeaderTemplate leftAdornment={null} />
+      <CardHeaderTemplate leftAdornment={undefined} />
       <CardContentTemplate />
     </>
   ),
@@ -284,10 +284,10 @@ export const WithTruncationConfig = ({
     <div style={{ width: '400px' }}>
       <Card {...args}>
         <CardHeaderTemplate
+          maxSubtitleLinesCount={subtitleLinesCount}
+          maxTitleLinesCount={titleLinesCount}
           subtitle={subtitle}
-          subtitleLinesCount={subtitleLinesCount}
           title={title}
-          titleLinesCount={titleLinesCount}
         />
         <CardMediaTemplate />
         <CardContentTemplate />

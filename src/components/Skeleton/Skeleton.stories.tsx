@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Skeleton from './Skeleton';
 import { Inline, Padbox, Stack, Surface } from '../layout';
@@ -12,7 +12,7 @@ export default {
   component: Skeleton,
 } as Meta;
 
-export const Playground: Story<SkeletonProps> = (args) => (
+export const Playground: StoryFn<SkeletonProps> = (args) => (
   <Skeleton {...args} />
 );
 Playground.parameters = {
@@ -20,7 +20,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Default: Story = () => {
+export const Default: StoryFn = () => {
   return (
     <Stack gap="lg">
       <Surface radius="md" hasBorder>

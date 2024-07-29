@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Checkbox from './Checkbox';
@@ -66,7 +66,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<CheckboxProps> = (args) => (
+export const Playground: StoryFn<CheckboxProps> = (args) => (
   <Checkbox {...args} />
 );
 Playground.args = {
@@ -79,7 +79,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const DefaultCheckbox: Story = () => (
+export const DefaultCheckbox: StoryFn = () => (
   <Checkbox
     checkboxId="defaultCheckbox"
     label={textExample}
@@ -88,7 +88,7 @@ export const DefaultCheckbox: Story = () => (
   />
 );
 
-export const CheckedCheckbox: Story = () => (
+export const CheckedCheckbox: StoryFn = () => (
   <Checkbox
     checkboxId="checkedCheckbox"
     label={textExample}
@@ -97,7 +97,7 @@ export const CheckedCheckbox: Story = () => (
   />
 );
 
-export const IndeterminateCheckbox: Story = () => (
+export const IndeterminateCheckbox: StoryFn = () => (
   <Checkbox
     checkboxId="indeterminateCheckbox"
     label={textExample}
@@ -106,7 +106,7 @@ export const IndeterminateCheckbox: Story = () => (
   />
 );
 
-export const InvalidCheckbox: Story = () => (
+export const InvalidCheckbox: StoryFn = () => (
   <Checkbox
     checkboxId="invalidCheckbox"
     label={textExample}
@@ -115,7 +115,7 @@ export const InvalidCheckbox: Story = () => (
   />
 );
 
-export const DisabledCheckbox: Story = () => (
+export const DisabledCheckbox: StoryFn = () => (
   <Checkbox
     checkboxId="disabledCheckbox"
     label={textExample}
@@ -124,7 +124,7 @@ export const DisabledCheckbox: Story = () => (
   />
 );
 
-export const CheckboxWithLabelAsComponent: Story = () => (
+export const CheckboxWithLabelAsComponent: StoryFn = () => (
   <Checkbox
     checkboxId="disabledCheckbox"
     label={<Text>{textExample}</Text>}
@@ -133,7 +133,7 @@ export const CheckboxWithLabelAsComponent: Story = () => (
   />
 );
 
-export const CheckboxWithLabelAsComponentWithIcon: Story = () => (
+export const CheckboxWithLabelAsComponentWithIcon: StoryFn = () => (
   <Checkbox
     checkboxId="disabledCheckbox"
     label={

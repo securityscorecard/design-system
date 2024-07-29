@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import ColumnsControls from './ColumnsControls';
@@ -18,7 +18,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<ColumnsControlsProps> = ({ isOpen, ...args }) => {
+export const Default: StoryFn<ColumnsControlsProps> = ({ isOpen, ...args }) => {
   const [isDefaultOpen, setIsDefaultOpen] = useState(isOpen);
   useColumnsControls(
     action('onColumnOrderChange'),
@@ -45,7 +45,7 @@ Default.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithCustomOrder: Story<ColumnsControlsProps> = ({
+export const WithCustomOrder: StoryFn<ColumnsControlsProps> = ({
   isOpen,
   ...args
 }) => {

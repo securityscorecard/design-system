@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
 import { theme } from '../../../theme';
@@ -14,13 +14,13 @@ export default {
     maxWidth: {
       defaultValue: theme.layout.containerWidth,
       table: {
-        defaultValue: { summary: theme.layout.containerWidth },
+        defaultValue: { summary: theme.layout.containerWidth.toString() },
       },
     },
   },
 } as Meta;
 
-const CenterTemplate: Story<CenterProps> = (args) => (
+const CenterTemplate: StoryFn<CenterProps> = (args) => (
   <div style={{ backgroundColor: '#dadada' }}>
     <Center style={{ backgroundColor: '#80baeb' }} {...args}>
       <Box />

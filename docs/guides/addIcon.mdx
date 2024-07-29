@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/blocks';
+
+import copySVGcode from './images/CopySVGcode.png';
+
+<Meta title="Guides/Add svg icon to DS icon library" />
+
+# Add SVG to the Design System icon library
+
+When you need to add a new icon that is going to be used inside of the design system library, use the following step-by-step guide.
+
+## What doesn't belong in the DS icon library
+
+The design system library only has icons that are free license only and are used within the DS components as preset icons. If the icon can be added to the component through the component API, it doesn't need to be included in the design system library.
+
+When you use the free license icon, don't forget to add the license note into the file as a comment.
+
+## Step-by-step guide
+
+1. Find the icon's SVG first and copy the SVG file. Go to fontawesome.com and find the icon you want in the free license icon library. Copy the SVG code.
+
+<img
+  alt="Copy SVG code button in the FontAwesome UI"
+  src={copySVGcode}
+  width={240}
+/>
+
+2. Create a new file in src/theme/icons and name it with your icon name using camel-case. Copy the '\_template.ts' content into your file.
+
+3. In src/theme/icons/index.ts find the latest exported icon, and inside the icon's file find the icon's Unicode.
+
+4. In your file change your Unicode to the last one and add one. For example, a table has 'e030', so the next one will be 'e031'.
+
+5. Copy the SVG path data from your icon file and add them as a string to the 'svgPathData'.
+
+6. Set width and height properties from your icon's viewBox.
+
+7. Change your export name to the icon's name.
+
+8. In src/theme/icons/index.ts export your icon as the last icon to the bottom of the file. Keep the order of icons as they are created.
+
+9. Add your icon into src/theme/icons/icon.enums.ts as the last item.
+
+10. Run Storybook and check the icon is visible in the Icon component's list of all icons.

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { omit } from 'ramda';
 
 import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
@@ -47,7 +47,7 @@ const popup = (
   </>
 );
 
-export const Playground: Story<
+export const Playground: StoryFn<
   TooltipProps & { children: React.ReactChild }
 > = (args) => <Tooltip {...args} />;
 Playground.args = {
@@ -58,7 +58,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Placements: Story = () => (
+export const Placements: StoryFn = () => (
   <Stack gap={SpaceSizes.md}>
     <Tooltip
       placement={PortalPlacements.top}
@@ -91,7 +91,7 @@ export const Placements: Story = () => (
   </Stack>
 );
 
-export const Width: Story<TooltipProps & { children: React.ReactChild }> = (
+export const Width: StoryFn<TooltipProps & { children: React.ReactChild }> = (
   args,
 ) => <Tooltip {...args} />;
 
@@ -101,9 +101,9 @@ Width.args = {
   defaultIsPopupDisplayed: true,
 };
 
-export const WithDelay: Story<TooltipProps & { children: React.ReactChild }> = (
-  args,
-) => <Tooltip {...args} />;
+export const WithDelay: StoryFn<
+  TooltipProps & { children: React.ReactChild }
+> = (args) => <Tooltip {...args} />;
 
 WithDelay.args = {
   ...Playground.args,

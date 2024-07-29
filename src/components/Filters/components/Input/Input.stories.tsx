@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -23,7 +23,7 @@ const Wrapper = styled(Padbox)`
   margin-left: ${pxToRem(60)};
 `;
 
-export const Input: Story = () => (
+export const Input: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsInput}
@@ -35,7 +35,7 @@ export const Input: Story = () => (
   </Wrapper>
 );
 
-export const InputValidationMaxLength: Story = () => (
+export const InputValidationMaxLength: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsInputMaxLength}
@@ -47,7 +47,7 @@ export const InputValidationMaxLength: Story = () => (
   </Wrapper>
 );
 
-export const ExternalValidationDomain: Story = () => (
+export const ExternalValidationDomain: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsValidateDomainsExternal}
@@ -59,7 +59,7 @@ export const ExternalValidationDomain: Story = () => (
   </Wrapper>
 );
 
-export const ExternalValidationIps: Story = () => (
+export const ExternalValidationIps: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsValidateIPsExternal}
@@ -71,7 +71,7 @@ export const ExternalValidationIps: Story = () => (
   </Wrapper>
 );
 
-export const InputPlaceholderUnits: Story = () => (
+export const InputPlaceholderUnits: StoryFn = () => (
   <Wrapper>
     <Filters
       fields={fieldsInputPlaceholderUnits}

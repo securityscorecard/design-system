@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import TreeView from './TreeView';
@@ -8,16 +8,18 @@ import { Text } from '../Text';
 import { HexGrade } from '../HexGrade';
 import { DataSource, makeData } from './mocks/data';
 
-export default {
+const meta = {
   title: 'components/TreeView',
   component: TreeView,
   args: {
     data: makeData(1, 2, 2),
     renderPrimaryContent: ({ name }) => <Text isBold>{name}</Text>,
   },
-} as ComponentMeta<typeof TreeView<DataSource>>;
+} satisfies Meta<typeof TreeView<DataSource>>;
 
-type Story = ComponentStoryObj<typeof TreeView<DataSource>>;
+export default meta;
+
+type Story = StoryObj<typeof TreeView<DataSource>>;
 
 export const Playground: Story = {
   args: {

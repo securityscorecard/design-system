@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Wizard from './Wizard';
@@ -21,6 +21,9 @@ export default {
 const WizardTemplate = ({
   isBackwardNavigationEnabled = false,
   initialStep = undefined,
+}: {
+  isBackwardNavigationEnabled?: boolean;
+  initialStep?: string;
 }) => {
   return (
     <Wizard
@@ -70,9 +73,9 @@ const WizardTemplate = ({
   );
 };
 
-export const Playground: Story = () => <WizardTemplate />;
+export const Playground: StoryFn = () => <WizardTemplate />;
 
-export const TwoStepWizard: Story = () => {
+export const TwoStepWizard: StoryFn = () => {
   return (
     <Wizard onStepChange={action('Wizard/on-step-change')}>
       <WizardStep
@@ -103,10 +106,10 @@ export const TwoStepWizard: Story = () => {
   );
 };
 
-export const WithBackwardsNavigation: Story = () => (
+export const WithBackwardsNavigation: StoryFn = () => (
   <WizardTemplate isBackwardNavigationEnabled />
 );
 
-export const WithInitialStep: Story = () => (
+export const WithInitialStep: StoryFn = () => (
   <WizardTemplate initialStep="step-two" />
 );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';
 
@@ -36,7 +36,7 @@ export default {
   },
 } as Meta;
 
-const FileSelectorTemplate: Story<FileSelectorProps> = (args) => (
+const FileSelectorTemplate: StoryFn<FileSelectorProps> = (args) => (
   <FileSelector {...args} />
 );
 

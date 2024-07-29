@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import IconWrapper from './IconWrapper';
 import { Inline } from '../layout';
@@ -14,9 +14,9 @@ export default {
       ...generateControl('select', SSCIconNames),
     },
   },
-} as ComponentMeta<typeof IconWrapper>;
+} as Meta<typeof IconWrapper>;
 
-type Story = ComponentStory<typeof IconWrapper>;
+type Story = StoryFn<typeof IconWrapper>;
 
 export const Playground: Story = (args) => <IconWrapper {...args} />;
 Playground.args = { name: 'cog' };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import DropdownMenu from '../_internal/BaseDropdownMenu/DropdownMenu';
@@ -60,7 +60,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<DropdownMenuProps> = (args) => (
+export const Default: StoryFn<DropdownMenuProps> = (args) => (
   <Inline justify="center">
     <DropdownMenu {...args}>
       <Button>Handler</Button>
@@ -74,7 +74,7 @@ Default.parameters = {
   screenshot: { skip: true },
 };
 
-export const OpenedOnInit: Story<DropdownMenuProps> = (args) => (
+export const OpenedOnInit: StoryFn<DropdownMenuProps> = (args) => (
   <Inline justify="center">
     <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
   </Inline>
@@ -84,7 +84,7 @@ OpenedOnInit.args = {
   defaultIsOpen: true,
 };
 
-export const WithCustomWidth: Story<DropdownMenuProps> = (args) => (
+export const WithCustomWidth: StoryFn<DropdownMenuProps> = (args) => (
   <Inline justify="center">
     <DropdownMenu {...args}>Dropdown handler</DropdownMenu>
   </Inline>
@@ -94,7 +94,7 @@ WithCustomWidth.args = {
   paneWidth: 300,
 };
 
-export const Placements: Story<DropdownMenuProps> = (args) => (
+export const Placements: StoryFn<DropdownMenuProps> = (args) => (
   <>
     <Wrapper>
       <Inline justify="center">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
 
@@ -23,13 +23,15 @@ export default {
   },
 } as Meta;
 
-const PillTemplate: Story<PillProps> = (args) => (
+type Story = StoryFn<PillProps>;
+
+const PillTemplate: Story = (args) => (
   <Inline gap="md">
     <Pill {...args} />
   </Inline>
 );
 
-export const Playground: Story<PillProps> = (args) => <Pill {...args} />;
+export const Playground: Story = (args) => <Pill {...args} />;
 Playground.args = {
   label: 'Pill label',
 };
@@ -37,7 +39,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const Colors: Story<PillProps> = () => (
+export const Colors: Story = () => (
   <Inline gap="md">
     {Object.values(PillColorsEnums).map((color) => (
       <Pill color={color} label={capitalize(color)} />
@@ -52,7 +54,7 @@ Removable.args = {
   size: 'sm',
 };
 
-export const Clickable: Story<PillProps> = (args) => (
+export const Clickable: Story = (args) => (
   <Inline gap="md">
     {Object.values(PillColorsEnums).map((color) => (
       <Pill key={color} {...args} color={color} label={capitalize(color)} />
@@ -78,7 +80,7 @@ const Bullet = styled.div`
   border-radius: ${getRadii(RadiusTypes.circle)};
 `;
 
-export const WithAdornment: Story<PillProps> = (args) => (
+export const WithAdornment: Story = (args) => (
   <Inline gap="md">
     <Pill
       {...args}
@@ -101,7 +103,7 @@ export const WithAdornment: Story<PillProps> = (args) => (
 );
 WithAdornment.args = Playground.args;
 
-export const Truncation: Story<PillProps> = (args) => (
+export const Truncation: Story = (args) => (
   <Stack gap="lg">
     <Stack gap="sm" justify="flex-start">
       <H4>Default (maxLabelLength = 16)</H4>
@@ -127,7 +129,7 @@ const days = [
   'Saturday',
 ];
 
-export const PillArray: Story<PillProps> = (args) => (
+export const PillArray: Story = (args) => (
   <div style={{ width: '250px' }}>
     <Cluster gap="sm">
       {days.map((day) => (

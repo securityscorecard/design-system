@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import MockDate from 'mockdate';
 
@@ -30,7 +30,7 @@ export default {
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
 } as Meta;
 
-const DatatableTemplate: Story<DatatableProps<Data>> = (args) => (
+const DatatableTemplate: StoryFn<DatatableProps<Data>> = (args) => (
   <Datatable<Data> {...args} />
 );
 
@@ -95,7 +95,7 @@ WithNoData.args = {
   dataSize: 0,
 };
 
-export const WithNoMatchingData: Story<DatatableProps<Data>> = (args) => {
+export const WithNoMatchingData: StoryFn<DatatableProps<Data>> = (args) => {
   useEffect(() => {
     DatatableStore.update((s) => {
       s.hasAppliedFilters = true;

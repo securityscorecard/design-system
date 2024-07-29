@@ -1,10 +1,9 @@
-import React from 'react';
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { Stack } from '../layout/Stack';
 import Display from './Display';
 
-export default {
+const meta = {
   title: 'typography/Display',
   component: Display,
   parameters: {
@@ -42,7 +41,7 @@ export default {
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     hasTabularNumbers: {
@@ -51,13 +50,15 @@ export default {
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
   },
-} as ComponentMeta<typeof Display>;
+} satisfies Meta<typeof Display>;
 
-type Story = ComponentStoryObj<typeof Display>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
   args: {

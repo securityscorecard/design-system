@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import BatchActions from './BatchActions';
@@ -17,7 +17,7 @@ export default {
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
 } as Meta;
 
-export const Menu: Story<BatchActionsProps> = (args) => (
+export const Menu: StoryFn<BatchActionsProps> = (args) => (
   <BatchActions {...args} />
 );
 Menu.args = { actions: actionsMock };

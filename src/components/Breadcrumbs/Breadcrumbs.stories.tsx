@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { BreadcrumbsProps } from './Breadcrumbs.types';
@@ -28,7 +28,7 @@ The current page shouldn't have these defined though.`,
   },
 } as Meta;
 
-export const Playground: Story<BreadcrumbsProps> = () => {
+export const Playground: StoryFn<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
       <BreadcrumbItem href="#">Root</BreadcrumbItem>
@@ -41,7 +41,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithTwoItems: Story<BreadcrumbsProps> = () => {
+export const WithTwoItems: StoryFn<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
       <BreadcrumbItem href="#">Root</BreadcrumbItem>
@@ -50,7 +50,7 @@ export const WithTwoItems: Story<BreadcrumbsProps> = () => {
   );
 };
 
-export const WithDropdown: Story<BreadcrumbsProps> = () => {
+export const WithDropdown: StoryFn<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
       <BreadcrumbItem href="#" iconName="cog">
@@ -66,7 +66,7 @@ export const WithDropdown: Story<BreadcrumbsProps> = () => {
   );
 };
 
-export const OnLimit: Story<BreadcrumbsProps> = () => {
+export const OnLimit: StoryFn<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
       <BreadcrumbItem href="#" iconName="cog">
@@ -80,7 +80,7 @@ export const OnLimit: Story<BreadcrumbsProps> = () => {
   );
 };
 
-export const WithRelativeLinks: Story<BreadcrumbsProps> = () => {
+export const WithRelativeLinks: StoryFn<BreadcrumbsProps> = () => {
   return (
     <Breadcrumbs>
       <BreadcrumbItem to="/root">Root</BreadcrumbItem>

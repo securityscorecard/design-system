@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { RowSelectionState } from '@tanstack/react-table';
 
@@ -13,7 +13,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const SelectionEnabled: Story = Template.bind({});
 SelectionEnabled.args = {

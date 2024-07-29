@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { includes } from 'ramda';
 
 import { Inline, Stack } from '../layout';
@@ -29,7 +29,7 @@ const items = [
   { id: 2, title: 'Item 2', content: 'Content' },
 ];
 
-const AccordionTemplate: Story<AccordionProps> = (args) => (
+const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
   <Accordion {...args} />
 );
 
@@ -64,16 +64,15 @@ const AccordionItemTitle = () => (
     </Paragraph>
   </Stack>
 );
-export const CustomTitleElement: Story<AccordionProps> = AccordionTemplate.bind(
-  {},
-);
+export const CustomTitleElement: StoryFn<AccordionProps> =
+  AccordionTemplate.bind({});
 CustomTitleElement.args = {
   items: [
     { id: 0, title: <AccordionItemTitle />, content: 'Content', isOpen: true },
   ],
 };
 
-export const AcordionWithExternalManagement: Story<AccordionProps> = () => {
+export const AcordionWithExternalManagement: StoryFn<AccordionProps> = () => {
   const [openItems, setOpenItems] = useState<(string | number)[]>([]);
   const handleOnClick = (id: string) => {
     if (!openItems.includes(id)) {

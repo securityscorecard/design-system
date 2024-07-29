@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { head, pipe, sortBy, toPairs } from 'ramda';
 
 import { SSCIconNames } from './icons.enums';
@@ -16,7 +16,8 @@ export default {
       ...generateControl('select', SSCIconNames),
     },
   },
-} as ComponentMeta<typeof Icon>;
+  tags: ['autodocs', '!dev'],
+} as Meta<typeof Icon>;
 
 const sortedIconsList = pipe(toPairs, sortBy(head))(SSCIconNames);
 export const List = () => (

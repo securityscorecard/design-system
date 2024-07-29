@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { ColumnSizingState, OnChangeFn } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
@@ -11,7 +11,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
-} as ComponentMeta<typeof Datatable>;
+} as Meta<typeof Datatable>;
 
 export const ColumnResizingEnabled: Story = Template.bind({});
 ColumnResizingEnabled.args = Template.args;

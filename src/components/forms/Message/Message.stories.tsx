@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Message, { Error, Note } from './Message';
 import { MessageProps } from './Message.types';
@@ -22,9 +22,9 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<
-  MessageProps & { children: React.ReactChild }
-> = (args) => <Message {...args} />;
+export const Playground: StoryFn<MessageProps> = (args) => (
+  <Message {...args} />
+);
 Playground.args = {
   children: 'Form field message',
   variant: MessageVariants.note,
@@ -33,5 +33,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const NoteMessage: Story = () => <Note>Select your home country</Note>;
-export const ErrorMessage: Story = () => <Error>This field is required</Error>;
+export const NoteMessage: StoryFn = () => <Note>Select your home country</Note>;
+export const ErrorMessage: StoryFn = () => (
+  <Error>This field is required</Error>
+);

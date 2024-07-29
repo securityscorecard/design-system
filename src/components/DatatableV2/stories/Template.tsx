@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import { DataSource, generateData } from '../mocks/data';
@@ -36,7 +36,7 @@ export const columns: DatatableColumnDef<DataSource>[] = [
   },
 ];
 
-export type Story = ComponentStory<typeof Datatable<DataSource>>;
+export type Story = StoryFn<typeof Datatable<DataSource>>;
 const Template: Story = (args) => <Datatable {...args} />;
 Template.args = {
   columns,

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import { omit } from 'ramda';
 import MockDate from 'mockdate';
@@ -28,18 +28,16 @@ export default {
     },
   },
   argTypes: {
-    data: { control: { type: 'disabled' } },
+    data: { controls: { type: 'disabled' } },
   },
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
 } as Meta;
 
-const TableTemplate: Story<TableProps<Data>> = (args) => (
-  <Table<Data> {...args} />
-);
+type Story = StoryFn<TableProps<Data>>;
 
-export const Playground: Story<TableProps<Data>> = (args) => (
-  <TableTemplate {...args} />
-);
+const TableTemplate: Story = (args) => <Table<Data> {...args} />;
+
+export const Playground: Story = (args) => <TableTemplate {...args} />;
 
 Playground.args = {
   ...omit(['onSelect'], defaultTableConfig),
@@ -76,7 +74,7 @@ WithSelectedRows.args = {
   defaultSelectedRows: { 1: true, 6: true, 24: true },
 };
 
-export const WithExclusiveSelection: Story<TableProps<Data>> = (args) => {
+export const WithExclusiveSelection: Story = (args) => {
   useEffect(() => {
     DatatableStore.update((s) => {
       s.hasExclusiveSelection = true;
@@ -140,7 +138,7 @@ WithNoDataCustom.args = {
   NoDataComponent: () => <div>We do not have any data</div>,
 };
 
-export const WithNoMatchingData: Story<TableProps<Data>> = (args) => {
+export const WithNoMatchingData: Story = (args) => {
   useEffect(() => {
     DatatableStore.replace(datatableInitialState);
     DatatableStore.update((s) => {
@@ -156,7 +154,7 @@ export const WithNoMatchingData: Story<TableProps<Data>> = (args) => {
 };
 WithNoMatchingData.args = WithNoData.args;
 
-export const WithNoMatchingDataCustom: Story<TableProps<Data>> = (args) => {
+export const WithNoMatchingDataCustom: Story = (args) => {
   useEffect(() => {
     DatatableStore.replace(datatableInitialState);
     DatatableStore.update((s) => {

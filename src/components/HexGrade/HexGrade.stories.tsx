@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { HexGradeProps } from './HexGrade.types';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
@@ -16,7 +16,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<HexGradeProps> = (args) => {
+export const Playground: StoryFn<HexGradeProps> = (args) => {
   const { isInverted } = args;
 
   return (
@@ -32,7 +32,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const SolidHexGrades: Story = () => (
+export const SolidHexGrades: StoryFn = () => (
   <>
     <HexGrade variant={HexGradeVariants.solid} />
     <HexGrade grade={HexGradeGrades.unknown} variant={HexGradeVariants.solid} />
@@ -54,7 +54,7 @@ SolidHexGrades.parameters = {
   },
 };
 
-export const OutlineHexGrades: Story = () => (
+export const OutlineHexGrades: StoryFn = () => (
   <>
     <HexGrade variant={HexGradeVariants.outline} />
     <HexGrade
@@ -74,7 +74,7 @@ export const OutlineHexGrades: Story = () => (
 );
 OutlineHexGrades.storyName = 'Outline HexGrades';
 
-export const CustomScorecardHexGrades: Story = () => (
+export const CustomScorecardHexGrades: StoryFn = () => (
   <>
     <HexGrade variant={HexGradeVariants.cs} />
     <HexGrade grade={HexGradeGrades.unknown} variant={HexGradeVariants.cs} />
@@ -91,7 +91,7 @@ export const CustomScorecardHexGrades: Story = () => (
 );
 CustomScorecardHexGrades.storyName = 'CustomScorecard HexGrades';
 
-export const SizedHexGrades: Story = () => (
+export const SizedHexGrades: StoryFn = () => (
   <>
     <HexGrade
       grade={HexGradeGrades.A}
@@ -122,7 +122,7 @@ export const SizedHexGrades: Story = () => (
 );
 SizedHexGrades.storyName = 'Sized HexGrades';
 
-export const InvertedHexGrades: Story = () => (
+export const InvertedHexGrades: StoryFn = () => (
   <div style={{ backgroundColor: 'black' }}>
     <div>
       <HexGrade

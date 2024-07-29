@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import Signal from './Signal';
 import { Inline } from '../layout';
@@ -7,9 +7,9 @@ import { Inline } from '../layout';
 export default {
   title: 'components/Signal',
   component: Signal,
-} as ComponentMeta<typeof Signal>;
+} as Meta<typeof Signal>;
 
-type Story = ComponentStory<typeof Signal>;
+type Story = StoryFn<typeof Signal>;
 
 export const Playground: Story = (args) => <Signal {...args} />;
 Playground.args = { variant: 'severity', kind: 'high', size: 32 };

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
@@ -62,7 +62,9 @@ const steps = [
   },
 ];
 
-export const Playground: Story<StepperProps> = (args) => (
+type Story = StoryFn<StepperProps>;
+
+export const Playground: Story = (args) => (
   <Stepper {...args}>
     {steps.map(({ label, summary }) => (
       <Step
@@ -81,7 +83,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const StepTypes: Story<StepperProps> = (args) => (
+export const StepTypes: Story = (args) => (
   <Stepper {...args}>
     {[
       { label: 'Done step' },
@@ -102,7 +104,7 @@ WithHiddenLabels.decorators = [
   (storyFn) => <div style={{ width: '550px' }}>{storyFn()}</div>,
 ];
 
-export const Vertical: Story<StepperProps> = (args) => (
+export const Vertical: Story = (args) => (
   <Stepper {...args}>
     {[
       { label: 'Done step', summary: 'Done step summary' },
@@ -120,7 +122,7 @@ Vertical.args = {
   orientation: StepperOrientations.vertical,
 };
 
-export const VerticalWithExpandedSteps: Story<StepperProps> = (args) => (
+export const VerticalWithExpandedSteps: Story = (args) => (
   <Stepper {...args}>
     {[
       { label: 'Done step', summary: 'Done step summary' },
@@ -139,13 +141,11 @@ VerticalWithExpandedSteps.args = {
   areStepsExpanded: true,
 };
 
-export const VerticalExample: Story<StepperProps> = ({
-  activeStep: propsActiveStep,
-}) => {
+export const VerticalExample: Story = ({ activeStep: propsActiveStep }) => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    setActiveStep(propsActiveStep);
+    setActiveStep(propsActiveStep ?? 0);
   }, [propsActiveStep]);
 
   return (
@@ -156,7 +156,9 @@ export const VerticalExample: Story<StepperProps> = ({
             key={label}
             label={label}
             summary={summary}
-            onStepClick={setActiveStep}
+            onStepClick={(step) => {
+              setActiveStep(step ?? 0);
+            }}
           >
             <Stack gap="md">
               <Stack gap="sm">
@@ -201,13 +203,11 @@ VerticalExample.parameters = {
   screenshot: { skip: true },
 };
 
-export const HorizontalExample: Story<StepperProps> = ({
-  activeStep: propsActiveStep,
-}) => {
+export const HorizontalExample: Story = ({ activeStep: propsActiveStep }) => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    setActiveStep(propsActiveStep);
+    setActiveStep(propsActiveStep ?? 0);
   }, [propsActiveStep]);
 
   return (
@@ -218,7 +218,9 @@ export const HorizontalExample: Story<StepperProps> = ({
             key={label}
             label={label}
             summary={summary}
-            onStepClick={setActiveStep}
+            onStepClick={(step) => {
+              setActiveStep(step ?? 0);
+            }}
           />
         ))}
       </Stepper>

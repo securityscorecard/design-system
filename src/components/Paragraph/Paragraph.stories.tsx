@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { Text } from '../index';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
@@ -52,7 +52,7 @@ const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasell
 magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
 leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravida sem semper et.`;
 
-export const Playground: Story<ParagraphProps> = (args) => (
+export const Playground: StoryFn<ParagraphProps> = (args) => (
   <Paragraph {...args} />
 );
 Playground.args = {
@@ -62,7 +62,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const DefaultParagraph: Story = () => (
+export const DefaultParagraph: StoryFn = () => (
   <>
     <Paragraph size={TextSizes.md} variant={TextVariants.monospace}>
       {lipsum}
@@ -74,7 +74,7 @@ export const DefaultParagraph: Story = () => (
   </>
 );
 
-export const TextInParagraph: Story = () => (
+export const TextInParagraph: StoryFn = () => (
   <Paragraph>
     <Text variant={TextVariants.primary}>Lorem ipsum</Text> dolor sit amet,
     consectetur <Text variant={TextVariants.secondary}>adipiscing elit</Text>.

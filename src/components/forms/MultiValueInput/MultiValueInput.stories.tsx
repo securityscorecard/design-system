@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { noop } from 'ramda-adjunct';
 
@@ -17,7 +17,7 @@ export default {
   title: 'components/forms/MultiValueInput',
 } as Meta;
 
-const MultiValueInputTemplate: Story<MultiValueInputProps> = (args) => (
+const MultiValueInputTemplate: StoryFn<MultiValueInputProps> = (args) => (
   <MultiValueInput {...args} aria-label="MultiValueInput" />
 );
 
@@ -78,7 +78,7 @@ NonClearable.args = {
 };
 NonClearable.title = 'Non-clearable';
 
-export const Validation: Story = (args) => {
+export const Validation: StoryFn = (args) => {
   const [isInvalid, setIsInvalid] = useState(true);
 
   return (
@@ -99,7 +99,7 @@ export const Validation: Story = (args) => {
   );
 };
 
-export const PillTruncation: Story<MultiValueInputProps> = (args) => (
+export const PillTruncation: StoryFn<MultiValueInputProps> = (args) => (
   <Stack gap="md">
     <Heading size="h3">Default truncation N=16</Heading>
     <MultiValueInput {...args} />
@@ -118,7 +118,7 @@ PillTruncation.args = {
   ],
 };
 
-export const PillWrapping: Story<MultiValueInputProps> = (args) => (
+export const PillWrapping: StoryFn<MultiValueInputProps> = (args) => (
   <div style={{ width: '200px' }}>
     <MultiValueInput {...args} />
   </div>
@@ -128,8 +128,8 @@ PillWrapping.args = {
   value: ['12345678901234567890', '1234567890'],
 };
 
-export const ControlledInput: Story<MultiValueInputProps> = (args) => {
-  const [values, setValues] = useState([]);
+export const ControlledInput: StoryFn<MultiValueInputProps> = (args) => {
+  const [values, setValues] = useState<string[] | undefined>([]);
 
   return (
     <Stack gap="sm">

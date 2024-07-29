@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
@@ -76,7 +76,7 @@ export default {
   },
 } as Meta;
 
-export const Playground: Story<ButtonProps> = (args) => <Button {...args} />;
+export const Playground: StoryFn<ButtonProps> = (args) => <Button {...args} />;
 Playground.args = {
   children: 'Playground Button',
   variant: ButtonVariants.solid,
@@ -86,7 +86,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const SolidButtons: Story = () => (
+export const SolidButtons: StoryFn = () => (
   <Stack gap={SpaceSizes.lg}>
     <Inline gap={SpaceSizes.md}>
       <Button color="primary" variant="solid">
@@ -133,7 +133,7 @@ export const SolidButtons: Story = () => (
   </Stack>
 );
 
-export const OutlineButtons: Story = () => (
+export const OutlineButtons: StoryFn = () => (
   <Stack gap={SpaceSizes.lg}>
     <Inline gap={SpaceSizes.md}>
       <Button color="primary" variant="outline">
@@ -180,7 +180,7 @@ export const OutlineButtons: Story = () => (
   </Stack>
 );
 
-export const TextButtons: Story = () => (
+export const TextButtons: StoryFn = () => (
   <Stack gap={SpaceSizes.lg}>
     <Inline gap={SpaceSizes.md}>
       <Button color="primary" variant="text">
@@ -241,7 +241,7 @@ export const TextButtons: Story = () => (
   </Stack>
 );
 
-export const GhostButtons: Story = () => (
+export const GhostButtons: StoryFn = () => (
   <Stack gap={SpaceSizes.lg}>
     <Inline gap={SpaceSizes.md}>
       <Button color="primary" variant="ghost">
@@ -302,7 +302,7 @@ export const GhostButtons: Story = () => (
   </Stack>
 );
 
-export const LoadingButtons: Story = () => (
+export const LoadingButtons: StoryFn = () => (
   <Inline gap={SpaceSizes.md}>
     <Button color="primary" variant="solid" isLoading>
       Button
@@ -338,7 +338,7 @@ export const LoadingButtons: Story = () => (
   </Inline>
 );
 
-export const ButtonsWithIconOverview: Story = () => (
+export const ButtonsWithIconOverview: StoryFn = () => (
   <Inline gap={SpaceSizes.md}>
     <Button
       color="primary"
@@ -421,7 +421,7 @@ export const ButtonsWithIconOverview: Story = () => (
   </Inline>
 );
 
-export const ExpandedButtons: Story = () => (
+export const ExpandedButtons: StoryFn = () => (
   <Stack gap={SpaceSizes.lg}>
     <Button variant="solid" isExpanded>
       Full width button

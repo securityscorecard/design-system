@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { isNull } from 'ramda-adjunct';
 import { GroupedOptionsType, OptionsType } from 'react-select';
 
@@ -102,15 +102,17 @@ const options = [
   { value: 'DK', label: 'Denmark' },
 ];
 
-const CreatableSelectTemplate: Story<CreatableSelectProps<true>> = ({
+const CreatableSelectTemplate: StoryFn<CreatableSelectProps<true>> = ({
   options: originalOptions,
   ...args
 }) => {
   const [createdOptions, setCreatedOptions] = useState(originalOptions);
-  const [currentValue, setCurrentValue] = useState(null);
+  const [currentValue, setCurrentValue] = useState<OptionsType<Option> | null>(
+    null,
+  );
   const [isCreating, setIsCreating] = useState(false);
 
-  const handleCreateOption = (inputString) => {
+  const handleCreateOption = (inputString: string) => {
     setIsCreating(true);
     const newOption: Option = {
       label: inputString,
@@ -120,7 +122,7 @@ const CreatableSelectTemplate: Story<CreatableSelectProps<true>> = ({
     setTimeout(() => {
       setCreatedOptions(
         (prevState) =>
-          [...prevState, newOption] as
+          [...(prevState ?? []), newOption] as
             | GroupedOptionsType<Option>
             | OptionsType<Option>,
       );
@@ -175,7 +177,7 @@ const promiseOptions = (inputValue: string): Promise<Option[]> =>
     }, 1000);
   });
 
-export const AsyncSelect: Story<CreatableSelectProps<false>> = () => {
+export const AsyncSelect: StoryFn<CreatableSelectProps<false>> = () => {
   return (
     <Stack gap="md">
       <CreatableSelect

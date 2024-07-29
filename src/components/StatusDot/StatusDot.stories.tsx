@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import StatusDot from './StatusDot';
 import { Inline } from '../layout';
@@ -9,7 +9,7 @@ export default {
   component: StatusDot,
 } as Meta;
 
-export const Default: Story = () => (
+export const Default: StoryFn = () => (
   <Inline gap="lg">
     <StatusDot color="success" />
     <StatusDot color="danger" />

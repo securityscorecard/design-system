@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Footer from './Footer';
@@ -24,7 +24,7 @@ export default {
   },
 } as Meta;
 
-const FooterTemplate: Story<FooterProps> = (args) => <Footer {...args} />;
+const FooterTemplate: StoryFn<FooterProps> = (args) => <Footer {...args} />;
 
 export const Default = FooterTemplate.bind({});
 Default.args = {

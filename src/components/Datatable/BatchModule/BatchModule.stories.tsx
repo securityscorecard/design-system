@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { actionsMock } from '../mocks/actions';
@@ -55,14 +55,16 @@ export default {
     },
     shouldShowSelectionDropdown: {
       control: { type: 'boolean' },
-      table: { defaultValue: { summary: defaultTableConfig.hasSelection } },
+      table: {
+        defaultValue: { summary: defaultTableConfig.hasSelection.toString() },
+      },
     },
   },
 } as Meta;
 
-export const Playground: Story<BatchModuleProps> = (args) => (
-  <BatchModule {...args} />
-);
+type Story = StoryFn<BatchModuleProps>;
+
+export const Playground: Story = (args) => <BatchModule {...args} />;
 Playground.args = {
   actions: [],
   dataSize: 1070000,
@@ -74,7 +76,7 @@ Playground.parameters = {
   screenshot: { skip: true },
 };
 
-export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
+export const WithSelectedRows: Story = (args) => {
   useEffect(() => {
     DatatableStore.update((s) => {
       s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -90,9 +92,7 @@ export const WithSelectedRows: Story<BatchModuleProps> = (args) => {
 };
 WithSelectedRows.args = Playground.args;
 
-export const WithSelectedRowsAndExclusionLogic: Story<BatchModuleProps> = (
-  args,
-) => {
+export const WithSelectedRowsAndExclusionLogic: Story = (args) => {
   useEffect(() => {
     DatatableStore.update((s) => {
       s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -111,17 +111,13 @@ WithSelectedRowsAndExclusionLogic.args = {
   hasOnlyPerPageSelection: false,
 };
 
-export const WithBatchActions: Story<BatchModuleProps> = (args) => (
-  <BatchModule {...args} />
-);
+export const WithBatchActions: Story = (args) => <BatchModule {...args} />;
 WithBatchActions.args = {
   ...Playground.args,
   actions: actionsMock,
 };
 
-export const WithColumns: Story<BatchModuleProps> = (args) => (
-  <BatchModule {...args} />
-);
+export const WithColumns: Story = (args) => <BatchModule {...args} />;
 WithColumns.args = {
   ...Playground.args,
   columns: { isButtonDisplayed: true },

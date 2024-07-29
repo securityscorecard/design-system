@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 
 import ElementCounter from './ElementCounter';
 import { DatatableStore } from '../../Datatable.store';
@@ -17,29 +17,29 @@ export default {
   argTypes: {
     shouldShowSelectionDropdown: {
       control: { type: 'boolean' },
-      table: { defaultValue: { summary: defaultTableConfig.hasSelection } },
+      table: {
+        defaultValue: { summary: defaultTableConfig.hasSelection.toString() },
+      },
     },
   },
 } as Meta;
 
-export const Default: Story<ElementCounterProps> = (args) => (
-  <ElementCounter {...args} />
-);
+type Story = StoryFn<ElementCounterProps>;
+
+export const Default: Story = (args) => <ElementCounter {...args} />;
 Default.args = {
   dataSize: 120,
   hasSelection: true,
   hasOnlyPerPageSelection: true,
 };
 
-export const WithoutSelection: Story<ElementCounterProps> = (args) => (
-  <ElementCounter {...args} />
-);
+export const WithoutSelection: Story = (args) => <ElementCounter {...args} />;
 WithoutSelection.args = {
   ...Default.args,
   hasSelection: false,
 };
 
-export const WithSelectedRows: Story<ElementCounterProps> = (args) => {
+export const WithSelectedRows: Story = (args) => {
   useEffect(() => {
     DatatableStore.update((s) => {
       s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -55,9 +55,7 @@ export const WithSelectedRows: Story<ElementCounterProps> = (args) => {
 };
 WithSelectedRows.args = Default.args;
 
-export const WithSelectedRowsAndExclusionLogic: Story<ElementCounterProps> = (
-  args,
-) => {
+export const WithSelectedRowsAndExclusionLogic: Story = (args) => {
   useEffect(() => {
     DatatableStore.update((s) => {
       s.selectedIds = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -76,15 +74,13 @@ WithSelectedRowsAndExclusionLogic.args = {
   hasOnlyPerPageSelection: false,
 };
 
-export const NoDataAvailable: Story<ElementCounterProps> = (args) => (
-  <ElementCounter {...args} />
-);
+export const NoDataAvailable: Story = (args) => <ElementCounter {...args} />;
 NoDataAvailable.args = {
   ...Default.args,
   dataSize: 0,
 };
 
-export const AbbreviatedCounts: Story<ElementCounterProps> = (args) => (
+export const AbbreviatedCounts: Story = (args) => (
   <>
     <ElementCounter {...args} dataSize={1000} />
     <ElementCounter {...args} dataSize={1050000} />
