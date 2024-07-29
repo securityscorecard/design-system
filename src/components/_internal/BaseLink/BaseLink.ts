@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 
-import { getFontWeight, getRadii, getToken } from '../../../utils';
+import { getFontWeight, getRadii } from '../../../utils';
 import { Colors } from './BaseLink.types';
 
-type LinkStylesProps = { $color: Colors; $isExperimental: boolean };
+type LinkStylesProps = { $color: Colors };
 
 export const LinkBaseStyles = css<LinkStylesProps>`
   margin: 0;
@@ -13,13 +13,13 @@ export const LinkBaseStyles = css<LinkStylesProps>`
   background-color: transparent;
   white-space: nowrap;
   cursor: pointer;
-  color: ${(p) => getToken(`color-action-link-${p.$color}`, p)};
+  color: var(--sscds-link-color);
   border-radius: ${getRadii('default')};
 `;
 export const LinkHoverStyles = css<LinkStylesProps>`
-  color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+  color: var(--sscds-link-color-hover);
   text-decoration: underline;
 `;
 export const LinkActiveStyles = css<LinkStylesProps>`
-  color: ${(p) => getToken(`color-action-link-${p.$color}-active`, p)};
+  color: var(--sscds-link-color-active);
 `;

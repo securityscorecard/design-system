@@ -9,7 +9,6 @@ import {
   getFontWeight,
   getFormStyle,
   getRadii,
-  getToken,
   pxToRem,
 } from '../../../utils';
 import { LinkActiveStyles, LinkBaseStyles, LinkHoverStyles } from '../BaseLink';
@@ -42,6 +41,10 @@ export const BaseTableContainer = styled.div`
 `;
 
 const DsLinkCell = css`
+  --sscds-link-color: var(--sscds-color-link-default);
+  --sscds-link-color-hover: var(--sscds-color-link-hover);
+  --sscds-link-color-active: var(--sscds-color-link-active);
+
   ${LinkBaseStyles};
 
   &:hover {
@@ -53,15 +56,11 @@ const DsLinkCell = css`
   }
 
   &.is-discrete {
-    font-weight: ${getFontWeight('regular')};
-    color: ${getToken(`link-color-text-secondary`)};
+    --sscds-link-color: var(--sscds-color-neutral-13);
+    --sscds-link-color-hover: var(--sscds-color-neutral-11);
+    --sscds-link-color-active: var(--sscds-color-neutral-13);
 
-    &:hover {
-      color: ${getToken(`link-color-text-secondary-hover`)};
-    }
-    &:active {
-      color: ${getToken(`link-color-text-secondary-active`)};
-    }
+    font-weight: ${getFontWeight('regular')};
   }
 `;
 

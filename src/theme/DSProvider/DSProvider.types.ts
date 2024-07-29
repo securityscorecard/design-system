@@ -7,9 +7,6 @@ export interface DSContextValue {
   portalsContainerId: string;
   hasIncludedGlobalStyles: boolean;
   debugMode: boolean;
-  experimental: {
-    accessibleLink: boolean;
-  };
   datatable?: {
     onFullscreenModeChange?: (enabled: boolean) => void;
   };

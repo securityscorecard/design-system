@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { isNotNull, isNull } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -13,24 +12,6 @@ import {
   LinkHoverStyles,
 } from '../_internal/BaseLink';
 import { CLX_TYPOGRAPHY } from '../../theme/constants';
-import { DSContext } from '../../theme/DSProvider/DSProvider';
-import { getColor, getFontWeight, getToken } from '../../utils';
-
-const experimetalLink = css<Required<{ $color: LinkProps['color'] }>>`
-  text-decoration: underline;
-  font-weight: ${getFontWeight('regular')};
-
-  &:hover {
-    color: ${({ $color, theme }) =>
-      $color === LinkColors.secondary
-        ? getColor('neutral.700', { theme })
-        : getToken(`color-action-link-primary-hover`, { theme })};
-  }
-
-  &:focus-visible {
-    text-decoration: none;
-  }
-`;
 
 const LinkRoot = styled.a`
   ${LinkBaseStyles};
@@ -42,8 +23,6 @@ const LinkRoot = styled.a`
   &:active {
     ${LinkActiveStyles};
   }
-
-  ${({ $isExperimental }) => $isExperimental && experimetalLink}
 `;
 
 const Link = ({
@@ -60,7 +39,6 @@ const Link = ({
   if (isNull(as) && isNotNull(to)) {
     RouterLink = requireRouterLink();
   }
-  const { experimental } = useContext(DSContext);
 
   const domTag =
     as ||
@@ -83,7 +61,21 @@ const Link = ({
       to={to}
       onClick={onClick}
       {...props}
-      $isExperimental={experimental.accessibleLink}
+      style={{
+        '--sscds-link-color':
+          color === 'primary'
+            ? 'var(--sscds-color-link-default)'
+            : 'var(--sscds-color-neutral-13)',
+        '--sscds-link-color-hover':
+          color === 'primary'
+            ? 'var(--sscds-color-link-hover)'
+            : 'var(--sscds-color-neutral-12)',
+        '--sscds-link-color-active':
+          color === 'primary'
+            ? 'var(--sscds-color-link-active)'
+            : 'var(--sscds-color-neutral-13)',
+        ...props.style,
+      }}
     >
       {children}
     </LinkRoot>
