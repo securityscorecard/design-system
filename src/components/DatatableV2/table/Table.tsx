@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
 import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
@@ -53,6 +53,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
       <TableRoot
         data-fullscreen={isFullscreenMode}
         data-horizontal-scroll={hasHorizontalScroll}
+        data-settings-state={showColumnSettings ? 'open' : 'closed'}
         tabIndex={0}
       >
         {showProgress && <ProgressBar isTop />}
