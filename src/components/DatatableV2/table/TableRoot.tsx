@@ -9,6 +9,14 @@ const TableRoot = styled.div`
   overflow-x: auto;
   transform: scale(1, -1);
 
+  &[data-settings-state='open'] {
+    min-height: 37.5rem;
+    display: flex;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    background: var(--sscds-table-color-header-background);
+  }
+
   &::-webkit-scrollbar {
     box-sizing: content-box;
     height: 1.5rem;
