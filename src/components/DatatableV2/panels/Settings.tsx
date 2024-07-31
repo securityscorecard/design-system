@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '../../Button';
@@ -10,6 +10,7 @@ import { getHidableColumns } from '../columns.utils';
 import { DatatableInstance } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
+import { DSContext } from '../../../theme/DSProvider/DSProvider';
 
 const SettingsRoot = styled.div`
   display: flex;
@@ -64,6 +65,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
     initialState,
   } = table;
   const { columnOrder, columnPinning } = getState();
+  const { datatable } = useContext(DSContext);
 
   const canHideMoreColumns = getHidableColumns(table).length > 1;
   const allColumns = useMemo(() => {
@@ -168,7 +170,11 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
       <Padbox
         paddingSize="md"
         paddingType="squish"
-        style={{ overflow: 'auto', position: 'sticky', top: 0 }}
+        style={{
+          overflow: 'auto',
+          position: 'sticky',
+          top: datatable?.settingsOffset ?? 0,
+        }}
       >
         <Stack gap="sm">
           <Inline

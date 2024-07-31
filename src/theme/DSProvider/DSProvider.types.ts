@@ -9,6 +9,7 @@ export interface DSContextValue {
   debugMode: boolean;
   datatable?: {
     onFullscreenModeChange?: (enabled: boolean) => void;
+    settingsOffset?: string;
   };
 }
 export interface DSProviderProps {
