@@ -1,0 +1,15 @@
+import{j as o}from"./jsx-runtime-Nms4Y4qS.js";import{s as h,k as u}from"./space-B9R18Mwn.js";import{H as n}from"./HintTooltip-fN4AFiOI.js";import"./Surface-Cs7tekjF.js";import{P as p}from"./Padbox-BrtZqAZY.js";import{S as x}from"./Stack-B_iJg7G-.js";import{I as s}from"./Inline-Cavohj9s.js";import"./Cluster-f2eLrBJy.js";import{P as T}from"./Paragraph-DD2XWiUD.js";import{L as f}from"./Link-C_aB62BF.js";import{T as j}from"./Text-C1sA-5dj.js";import"./index-BwDkhjyp.js";import"./_commonjsHelpers-BosuxZz1.js";import"./index-Dk74W0Oi.js";import"./Tooltip-BAcCN_rY.js";import"./DSProvider-DzIDhM_J.js";import"./extends-CF3RwP-h.js";import"./index-DhoXBIRq.js";import"./theme-BW2FcxSF.js";import"./colors-DAn332pn.js";import"./FloatingContext-nGTlWJDF.js";import"./prop-3Huj0iT1.js";import"./Icon-B7DxM8PH.js";import"./index-DFvsTZbx.js";import"./index-CVyJwDg7.js";import"./useLogger-D4I9buOf.js";import"./flex.types-q2tZp175.js";import"./spacing.types-QRY9P8Qv.js";import"./require-router-link-m162i5rV.js";import"./react-router-dom-gpQgZfeg.js";import"./inheritsLoose-B6jfs0L0.js";import"./setPrototypeOf-DgZC2w_0.js";import"./tiny-invariant-CopsF_GD.js";import"./BaseLink-BTj3sWKL.js";import"./isNotNull-C0-yEnlk.js";const ro={title:"components/HintTooltip",component:n,argTypes:{children:{control:{disable:!0}}},decorators:[t=>o.jsx(p,{paddingSize:"xxl",children:o.jsx(s,{justify:"center",children:t()})})]},e=o.jsxs(x,{gap:"md",children:[o.jsx(T,{size:"md",children:"This is the tooltip content"}),o.jsx(f,{children:"Here is some link"})]}),H=h(p).withConfig({displayName:"HintTooltipstories__ColorBackgroundWrapper",componentId:"sc-1hiy0h0-0"})(["background-color:",";"],u("primary.50")),i=({...t})=>o.jsxs(s,{children:[o.jsx(p,{paddingSize:"lg",children:o.jsx(n,{...t,children:e})}),o.jsx(H,{paddingSize:"lg",children:o.jsx(n,{...t,children:e})})]}),r=()=>o.jsx(x,{gap:"lg",children:o.jsxs(s,{align:"center",gap:"lg",children:[o.jsx(j,{size:"lg",children:"Heading"}),o.jsx(n,{children:e})]})});i.__docgenInfo={description:"",methods:[],displayName:"Default"};r.__docgenInfo={description:"",methods:[],displayName:"InlineHintTooltip"};var a,l,m;i.parameters={...i.parameters,docs:{...(a=i.parameters)==null?void 0:a.docs,source:{originalSource:`({
+  ...args
+}) => <Inline>
+    <Padbox paddingSize="lg">
+      <HintTooltip {...args}>{Popup}</HintTooltip>
+    </Padbox>
+    <ColorBackgroundWrapper paddingSize="lg">
+      <HintTooltip {...args}>{Popup}</HintTooltip>
+    </ColorBackgroundWrapper>
+  </Inline>`,...(m=(l=i.parameters)==null?void 0:l.docs)==null?void 0:m.source}}};var d,c,g;r.parameters={...r.parameters,docs:{...(d=r.parameters)==null?void 0:d.docs,source:{originalSource:`() => <Stack gap="lg">
+    <Inline align="center" gap="lg">
+      <Text size="lg">Heading</Text>
+      <HintTooltip>{Popup}</HintTooltip>
+    </Inline>
+  </Stack>`,...(g=(c=r.parameters)==null?void 0:c.docs)==null?void 0:g.source}}};const to=["Default","InlineHintTooltip"];export{i as Default,r as InlineHintTooltip,to as __namedExportsOrder,ro as default};
