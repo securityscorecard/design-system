@@ -18,7 +18,7 @@ const config: StorybookConfig = {
         },
       },
     },
-    '@storybook/addon-a11y',
+    // '@storybook/addon-a11y',
     '@storybook/addon-designs',
     'storycap',
   ],
