@@ -1,1 +1,0 @@
-import{j as r}from"./jsx-runtime-Nms4Y4qS.js";import{r as t}from"./index-BwDkhjyp.js";const o=t.createContext(null),n=({children:e})=>r.jsx(o.Provider,{value:!0,children:e}),i=()=>t.useContext(o);n.__docgenInfo={description:"",methods:[],displayName:"FloatingProvider"};export{n as F,i as u};
