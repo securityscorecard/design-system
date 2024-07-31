@@ -1,35 +1,27 @@
-import React from 'react';
-import { Box } from 'reflexbox';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { path, pipe } from 'ramda';
 
-import { pxToRem } from '../../../utils';
-import { ColProps, Cols } from './Col.types';
+import { ColProps } from './Col.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
-const getColWidth = (cols: Cols): { flex: string } | { width: number } => {
-  if (cols === 'auto') return { flex: '1 1 auto' };
-
-  return { width: cols / 12 };
-};
-
-const getColPadding: string = pipe(
-  path(['theme', 'layout', 'columnGutter']),
-  (gutter) => gutter / 2,
-  pxToRem,
-);
-
-const StyledCol = styled(Box)`
-  padding-left: ${getColPadding};
-  padding-right: ${getColPadding};
+const StyledCol = styled.div`
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  margin-inline-start: var(--sscds-col-margin-start);
+  padding-inline: calc(var(--sscds-space-grid-gutter) / 2);
+  flex: 1 1 auto;
+  max-width: var(--sscds-col-width);
 `;
 
-const Col = ({ children, cols, offset }: ColProps) => (
+const Col = ({ children, cols = 'auto', offset = 0 }: ColProps) => (
   <StyledCol
-    ml={`${(100 / 12) * offset}%`}
-    {...getColWidth(cols)}
     className={CLX_LAYOUT}
+    style={{
+      '--sscds-col-margin-start': `calc(100% / 12 * ${offset})`,
+      '--sscds-col-width':
+        cols === 'auto' ? 'auto' : `calc(${cols} / 12 * 100%)`,
+    }}
   >
     {children}
   </StyledCol>
@@ -41,11 +33,6 @@ Col.propTypes = {
     PropTypes.oneOf<'auto'>(['auto']),
   ]),
   offset: PropTypes.number,
-};
-
-Col.defaultProps = {
-  cols: 'auto',
-  offset: 0,
 };
 
 export default Col;

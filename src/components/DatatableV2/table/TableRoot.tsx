@@ -9,6 +9,14 @@ const TableRoot = styled.div`
   overflow-x: auto;
   transform: scale(1, -1);
 
+  &[data-settings-state='open'] {
+    min-height: 37.5rem;
+    display: flex;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    background: var(--sscds-table-color-header-background);
+  }
+
   &::-webkit-scrollbar {
     box-sizing: content-box;
     height: 1.5rem;
@@ -159,44 +167,6 @@ const TableRoot = styled.div`
     height: 2rem;
     display: grid;
     place-items: center;
-  }
-
-  .ds-table-settings-panel {
-    transform: scale(1, -1);
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    border-left: 1px solid var(--sscds-table-color-border);
-    background: white;
-    box-shadow: var(--sscds-table-shadow-settings);
-    width: 100%;
-    max-width: var(--sscds-table-size-settings-width);
-    z-index: 2;
-  }
-  .ds-table-settings-panel-item {
-    border: 1px solid var(--sscds-table-color-border);
-
-    &:first-of-type {
-      border-top-left-radius: var(--sscds-table-radii-settings-item);
-      border-top-right-radius: var(--sscds-table-radii-settings-item);
-    }
-    &:last-of-type {
-      border-bottom-left-radius: var(--sscds-table-radii-settings-item);
-      border-bottom-right-radius: var(--sscds-table-radii-settings-item);
-    }
-  }
-  .ds-table-settings-panel-item + .ds-table-settings-panel-item {
-    margin-top: -1px;
-  }
-
-  .ds-table-checkbox-wrapper {
-    display: flex;
-    padding: 0 0.5rem;
-    align-items: center;
-    justify-content: center;
   }
 
   &[data-fullscreen='true'] {

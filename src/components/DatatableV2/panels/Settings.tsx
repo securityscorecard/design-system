@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
+import styled from 'styled-components';
 
 import { Button } from '../../Button';
 import { CloseButton } from '../../CloseButton';
@@ -9,6 +10,45 @@ import { getHidableColumns } from '../columns.utils';
 import { DatatableInstance } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
+import { DSContext } from '../../../theme/DSProvider/DSProvider';
+
+const SettingsRoot = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border-left: 1px solid var(--sscds-table-color-border);
+  background: white;
+  box-shadow: var(--sscds-table-shadow-settings);
+  width: 100%;
+  max-width: var(--sscds-table-size-settings-width);
+  z-index: 2;
+
+  .ds-table-settings-panel-item {
+    padding-left: 0.5rem;
+    border: 1px solid var(--sscds-table-color-border);
+
+    &:first-of-type {
+      border-top-left-radius: var(--sscds-table-radii-settings-item);
+      border-top-right-radius: var(--sscds-table-radii-settings-item);
+    }
+    &:last-of-type {
+      border-bottom-left-radius: var(--sscds-table-radii-settings-item);
+      border-bottom-right-radius: var(--sscds-table-radii-settings-item);
+    }
+  }
+  .ds-table-settings-panel-item + .ds-table-settings-panel-item {
+    margin-top: -1px;
+  }
+  .ds-table-checkbox-wrapper {
+    display: flex;
+    padding: 0 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+`;
 
 const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -25,6 +65,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
     initialState,
   } = table;
   const { columnOrder, columnPinning } = getState();
+  const { datatable } = useContext(DSContext);
 
   const canHideMoreColumns = getHidableColumns(table).length > 1;
   const allColumns = useMemo(() => {
@@ -108,7 +149,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
   };
 
   return (
-    <div className="ds-table-settings-panel">
+    <SettingsRoot className="ds-table-settings-panel">
       <Padbox
         as="header"
         paddingSize="mdPlus"
@@ -129,7 +170,11 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
       <Padbox
         paddingSize="md"
         paddingType="squish"
-        style={{ overflow: 'auto' }}
+        style={{
+          overflow: 'auto',
+          position: 'sticky',
+          top: datatable?.settingsOffset ?? 0,
+        }}
       >
         <Stack gap="sm">
           <Inline
@@ -209,7 +254,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
           />
         </Stack>
       </Padbox>
-    </div>
+    </SettingsRoot>
   );
 };
 

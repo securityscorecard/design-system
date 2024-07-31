@@ -6,7 +6,6 @@ import cls from 'classnames';
 
 import {
   createSpacings,
-  getColor,
   getFontFamily,
   getFontSize,
   getFontWeight,
@@ -18,13 +17,17 @@ import { HeadingProps } from './Heading.types';
 import { BASE_LINE_HEIGHT, CLX_TYPOGRAPHY } from '../../theme/constants';
 
 const primaryVariant = css`
-  color: ${getColor('text.primary')};
+  color: var(--sscds-color-text-default);
 `;
 const secondaryVariant = css`
-  color: ${getColor('text.secondary')};
+  color: var(--sscds-color-icon-subtle);
 `;
 
 const variants = {
+  default: primaryVariant,
+  subtle: secondaryVariant,
+
+  /** @deprecated */
   primary: primaryVariant,
   secondary: secondaryVariant,
 };

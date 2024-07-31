@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
 import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
@@ -49,26 +49,29 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   }, [isFullscreenMode, datatable]);
 
   return (
-    <TableRoot
-      data-fullscreen={isFullscreenMode}
-      data-horizontal-scroll={hasHorizontalScroll}
-      tabIndex={0}
-    >
-      {showProgress && <ProgressBar isTop />}
-      <table
-        ref={(ref) => {
-          tableRef.current = ref;
-        }}
-        className="ds-table"
-        style={columnSizeVars}
+    <>
+      <TableRoot
+        data-fullscreen={isFullscreenMode}
+        data-horizontal-scroll={hasHorizontalScroll}
+        data-settings-state={showColumnSettings ? 'open' : 'closed'}
+        tabIndex={0}
       >
-        <Header table={table} />
-        <Body table={table} />
-      </table>
-      {showProgress && <ProgressBar isBottom />}
+        {showProgress && <ProgressBar isTop />}
+        <table
+          ref={(ref) => {
+            tableRef.current = ref;
+          }}
+          className="ds-table"
+          style={columnSizeVars}
+        >
+          <Header table={table} />
+          <Body table={table} />
+        </table>
+        {showProgress && <ProgressBar isBottom />}
+        {table.options.enableRowSelection && <Selection table={table} />}
+      </TableRoot>
       {showColumnSettings && <Settings table={table} />}
-      {table.options.enableRowSelection && <Selection table={table} />}
-    </TableRoot>
+    </>
   );
 };
 

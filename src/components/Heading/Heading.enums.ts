@@ -7,6 +7,10 @@ export const HeadingSizes = {
 } as const;
 
 export const HeadingVariants = {
+  default: 'primary',
+  subtle: 'secondary',
+
+  /** @deprecated */
   primary: 'primary',
   secondary: 'secondary',
 } as const;
