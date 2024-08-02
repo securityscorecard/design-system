@@ -26,6 +26,7 @@ const SelectionRoot = styled(Padbox)<{ $hasHorizontalScroll: boolean }>`
   background-color: var(--sscds-color-primary-050);
   height: ${pxToRem(52 + 1)};
   border-bottom: 1px solid var(--sscds-table-color-border);
+  padding-inline-start: var(--sscds-space-4x);
 `;
 const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -54,7 +55,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
         <Inline align="center" className="ds-table-selection-overview" gap="md">
           {enableSelectAll && (
             <SelectButton
-              style={{ marginLeft: '2px' }}
+              style={{ marginLeft: '2px', display: 'flex' }}
               table={table}
               isHeaderCheckbox
             />

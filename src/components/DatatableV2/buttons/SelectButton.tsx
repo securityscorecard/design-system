@@ -92,7 +92,6 @@ const SelectButton = <D,>({
     width: '1.25rem',
     height: '1.25rem',
     accentColor: 'var(--sscds-table-color-accent)',
-    ...style,
   };
 
   return enableMultiRowSelection ? (
@@ -100,6 +99,7 @@ const SelectButton = <D,>({
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       className={clx({ 'ds-table-select-button-target': hasTargetWrapper })}
+      style={style}
     >
       <IndeterminateCheckbox
         className="ds-table-select-multi-button ds-table-select-button"
