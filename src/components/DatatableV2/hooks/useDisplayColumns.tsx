@@ -25,7 +25,7 @@ export const useDisplayColumns = <D,>(
               ? ExpandAllButton
               : null,
             cell: ExpandButton,
-            size: 40,
+            size: 56,
             ...tableOptions.defaultDisplayColumn,
           },
           tableOptions.enableRowSelection && {
@@ -43,7 +43,7 @@ export const useDisplayColumns = <D,>(
                   )
                 : null,
             cell: (props) => <SelectButton {...props} hasTargetWrapper />,
-            size: 40,
+            size: 56,
             ...tableOptions.defaultDisplayColumn,
           },
           tableOptions.enableRowActions && {
@@ -52,7 +52,7 @@ export const useDisplayColumns = <D,>(
             cell: ({ table, row }) => (
               <RowActionsButton row={row} table={table} />
             ),
-            size: 40,
+            size: 56,
             ...tableOptions.defaultDisplayColumn,
           },
         ] as DatatableColumnDef<D>[]

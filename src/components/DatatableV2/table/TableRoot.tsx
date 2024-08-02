@@ -151,8 +151,8 @@ const TableRoot = styled.div`
   .ds-table-cell-select,
   .ds-table-cell-expand,
   .ds-table-cell-actions {
-    min-width: 2.5rem;
-    flex: 0 0 2.5rem;
+    min-width: 3.5rem;
+    flex: 0 0 3.5rem;
     justify-content: center;
     padding: var(--sscds-table-spacing-cell-display);
   }
@@ -185,6 +185,9 @@ const TableRoot = styled.div`
   &[data-horizontal-scroll='false'] {
     & .ds-table-cell {
       box-shadow: none !important;
+    }
+    & .ds-table-body-cell {
+      border: none !important;
     }
   }
 
