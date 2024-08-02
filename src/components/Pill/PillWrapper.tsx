@@ -3,31 +3,30 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { SpaceSizes } from '../../theme';
-import { getRadii, getSpace } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { PillColors, PillColorsEnums } from './Pill.enums';
+import { PillBorders, PillColors, PillColorsEnums } from './Pill.enums';
 import { PillWrapperProps, StyledPillWrapperProps } from './Pill.types';
 
 const StyledPillWrapper = styled(Padbox)<StyledPillWrapperProps>`
   display: inline-block;
   min-width: 0;
-  border-radius: ${getRadii('round')};
+  border-radius: var(--sscds-radii-pill);
   ${({ $color }) =>
     css`
-      background-color: ${PillColors[$color][0]};
+      background-color: var(${PillColors[$color][0]});
     `}
 
   ${({ $isClickable, $color }) =>
     $isClickable &&
     css`
       cursor: pointer;
+      box-shadow: inset 0 0 0 1px var(${PillBorders[$color][0]});
       &:hover {
-        background-color: ${PillColors[$color][1]};
+        background-color: var(${PillColors[$color][1]});
+        box-shadow: inset 0 0 0 1px var(${PillBorders[$color][1]});
       }
     `}
-  padding-right: ${getSpace('sm')};
-  padding-left: ${getSpace('sm')};
 `;
 
 const PillWrapper = ({
@@ -40,8 +39,8 @@ const PillWrapper = ({
     $color={color || PillColorsEnums.gray}
     $isClickable={isClickable}
     {...props}
-    paddingSize={SpaceSizes.xs}
-    paddingType={PaddingTypes.square}
+    paddingSize={SpaceSizes.sm}
+    paddingType={PaddingTypes.squish}
   >
     <Inline align="center" gap={SpaceSizes.xs}>
       {children}
