@@ -229,7 +229,7 @@
   --sscds-color-brand-900: var(--brand-900);
 
   --sscds-color-background-body: var(--sscds-color-neutral-1);
-  --sscds-color-background-overlay: var(--sscds-color-neutral-alpha-10);
+  --sscds-color-background-overlay: var(--black-a8);
 
   --sscds-color-background-surface-default: var(--sscds-color-neutral-0);
   --sscds-color-background-surface-dynamic-default: var(--sscds-color-neutral-alpha-2);
