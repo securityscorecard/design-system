@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { any, includes } from 'ramda';
+import { any } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 
 import { ActionKindsPropType } from '../../types/action.types';
@@ -76,13 +76,11 @@ const ButtonsArea = styled.div`
   margin-right: calc(${getSpace(SpaceSizes.sm)} * -1) !important;
 `;
 
-const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
-  shouldForwardProp: (property) => !includes(property, ['color']),
-})`
+const StyledIcon = styled(Icon)<{ $color: Color }>`
   background: ${getColor('neutral.0')};
   border-radius: 100%;
-  color: ${({ color, theme }) =>
-    isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
+  color: ${({ $color, theme }) =>
+    isNotUndefined($color) ? getColor($color, { theme }) : 'inherit'};
   &:hover {
     color: ${({ theme }) => getColor('neutral.700', { theme })};
   }
@@ -140,7 +138,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
                   onClick={onHelpClick}
                 >
                   <StyledIcon
-                    color="neutral.600"
+                    $color="neutral.600"
                     data-interactive="true"
                     name="info-circle-outline"
                   />

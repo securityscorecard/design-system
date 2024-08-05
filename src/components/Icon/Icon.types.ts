@@ -28,7 +28,16 @@ interface BaseIconComponentProps
     > {
   name: IconNames;
   /** Changes icon color to defined color from theme */
-  color?: Color;
+  color?:
+    | Color
+    | `var(--sscds-color-icon-${
+        | 'default'
+        | 'subtle'
+        | 'disabled'
+        | 'inverse'
+        | 'danger'
+        | 'warning'
+        | 'success'})`;
   className?: string;
   /** Sets icon width to fixed size. Useful for aligning icons */
   hasFixedWidth?: boolean;
