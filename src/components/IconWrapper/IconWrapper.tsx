@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
 
 import { getRadii } from '../../utils';
@@ -19,13 +18,13 @@ const variances: Record<
   FlattenSimpleInterpolation
 > = {
   default: css`
-    box-shadow: inset 0 0 0 1px rgba(0 0 0/15%);
+    box-shadow: inset 0 0 0 1px var(--slate-a6);
   `,
   strong: css`
-    background-color: var(--sscds-info-50);
+    background-color: var(--sscds-color-info-100);
   `,
   subtle: css`
-    background-color: rgba(0 0 0/2.5%);
+    background-color: var(--slate-a3);
   `,
 };
 
@@ -55,7 +54,7 @@ export default function IconWrapper({
       {/* @ts-expect-error TS is not able to infer correct types here but types are correct */}
       <Icon
         {...rest}
-        color="neutral.1000"
+        color="var(--sscds-color-icon-default)"
         size={size === 'xs' ? 'sm' : size}
         hasFixedSize
       />
