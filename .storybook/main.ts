@@ -20,6 +20,7 @@ const config: StorybookConfig = {
     },
     // '@storybook/addon-a11y',
     '@storybook/addon-designs',
+    '@storybook/addon-themes',
     'storycap',
   ],
   framework: '@storybook/react-vite',
