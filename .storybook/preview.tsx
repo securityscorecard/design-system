@@ -1,9 +1,10 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
+// import { withThemeByClassName } from '@storybook/addon-themes';
 import { withScreenshot } from 'storycap';
 
 import { DSProvider, createIconLibrary } from '../src/theme';
-import { colors } from '../src/theme/colors';
+
 
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
@@ -11,6 +12,7 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/space-mono/400.css';
 import '../src/tokens/tokens.css';
+import { withThemeByClassName } from './decorators/withThemeByClassName';
 
 function clearDatatableLS() {
   Object.keys(localStorage)
@@ -24,11 +26,11 @@ window.Math.random = () => 0.5;
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'white',
+      default: undefined,
       values: [
-        { name: 'white', value: colors.neutral[0] },
-        { name: 'grey', value: colors.neutral[200] },
-        { name: 'black', value: colors.neutral[1000] },
+        { name: 'white', value: 'white' },
+        { name: 'grey', value: '#E8E8E8' },
+        { name: 'black', value: 'black' },
       ],
     },
     options: {
@@ -77,6 +79,13 @@ const preview: Preview = {
   decorators: [
     // @ts-expect-error as the type of the withScreenshot is too wide
     withScreenshot,
+    withThemeByClassName({
+      themes: {
+        Light: 'light',
+        Dark: 'dark',
+      },
+      defaultTheme: 'Light',
+    }),
     (storyFn) => (
       <DSProvider config={{ debugMode: true }}>{storyFn()}</DSProvider>
     ),
