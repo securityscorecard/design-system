@@ -1,18 +1,17 @@
-import React, { forwardRef, useContext } from 'react';
+import { forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import usePortal from 'react-cool-portal';
 import styled from 'styled-components';
-import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { ModalProps } from './Modal.types';
 import { ModalSizes } from './Modal.enums';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { useOuterClick } from '../../hooks/useOuterCallback';
-import { Inline, Padbox } from '../layout';
+import { Inline, Padbox, Surface } from '../layout';
 import { H4 } from '../Heading';
 import { Overlay } from '../_internal/BaseOverlay';
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
 import { DSContext } from '../../theme/DSProvider/DSProvider';
@@ -28,34 +27,32 @@ const widthVariants = {
   [ModalSizes.lg]: 900,
 };
 
-const paddingVariants = {
-  [ModalSizes.xs]: SpaceSizes.lg,
-  [ModalSizes.sm]: SpaceSizes.lg,
-  [ModalSizes.md]: SpaceSizes.lgPlus,
-  [ModalSizes.lg]: SpaceSizes.lgPlus,
-};
-
-const BaseModal = styled.div<{ $maxWidth: number }>`
+const BaseModal = styled(Surface)<{ $maxWidth: number }>`
   display: flex;
   flex-direction: column;
   max-height: 90vh;
   width: 100%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
-  border-radius: ${getRadii('large')};
-  background-color: ${getColor('neutral.0')};
 `;
 
 const Title = styled(H4)`
   margin: 0;
 `;
 
-const Content = styled(Padbox)`
-  padding-top: 0;
+const Header = styled.div`
+  padding: var(--sscds-space-dialog-content-padding);
+  padding-block-end: var(--sscds-space-2x);
+`;
+const Content = styled.div`
+  padding: var(--sscds-space-dialog-content-padding);
+  padding-block-start: 0;
   overflow-y: auto;
 `;
 
 const Footer = styled(Padbox)`
-  border-top: 1px solid ${getColor('neutral.300')};
+  border-top: 1px solid var(--sscds-border-color);
+  padding-inline: var(--sscds-space-dialog-content-padding);
+  padding-block: var(--sscds-space-4x);
 `;
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
@@ -76,7 +73,6 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       internalShowHide: false,
       autoRemoveContainer: false,
     });
-    const hasFooter = isNotUndefined(footer);
 
     const modalRef = useOuterClick<HTMLDivElement>(onClose);
 
@@ -89,13 +85,17 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             <BaseModal
               ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
               $maxWidth={widthVariants[size]}
+              background="white"
               className={cls(CLX_COMPONENT, className, 'ssc-ui-styled')}
+              elevation={3}
+              radius="lg"
+              hasBorder
               {...rest}
             >
               <Inline stretch={StretchEnum.start}>
-                <Padbox paddingSize={SpaceSizes.lgPlus} paddingType="squish">
-                  {isNotUndefined(title) && <Title>{title}</Title>}
-                </Padbox>
+                <Header>
+                  {typeof title !== 'undefined' && <Title>{title}</Title>}
+                </Header>
                 {onClose && (
                   <CloseButton
                     marginCompensation={SpaceSizes.none}
@@ -103,17 +103,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   />
                 )}
               </Inline>
-              <Content
-                paddingSize={paddingVariants[size]}
-                paddingType={hasFooter ? 'squish' : 'square'}
-              >
-                {children}
-              </Content>
-              {hasFooter && (
-                <Footer paddingSize={SpaceSizes.lgPlus} paddingType="squish">
-                  {footer}
-                </Footer>
-              )}
+              <Content>{children}</Content>
+              {typeof footer !== 'undefined' && <Footer>{footer}</Footer>}
             </BaseModal>
           </Overlay>
         </Portal>
