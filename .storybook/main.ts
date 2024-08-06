@@ -23,6 +23,10 @@ const config: StorybookConfig = {
     '@storybook/addon-themes',
     'storycap',
   ],
+  docs: { defaultName: 'Documentation' },
+  typescript: {
+    reactDocgen: process.env?.DOCS === 'true' ? 'react-docgen-typescript' : 'react-docgen',
+  },
   framework: '@storybook/react-vite',
   async viteFinal(config) {
     const { mergeConfig } = await import('vite');
