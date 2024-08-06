@@ -1,14 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import {
-  getColor,
-  getFontFamily,
-  getFontSize,
-  getFontWeight,
-  pxToRem,
-} from '../../utils';
+import { getColor, pxToRem } from '../../utils';
 import { width as checkWidth, svgPathData } from '../../theme/icons/check';
 import { BulletCircleProps, StepBulletProps } from './Stepper.types';
 
@@ -43,9 +36,9 @@ export const BulletCircle = styled.circle<BulletCircleProps>`
 
 const BulletText = styled.text`
   fill: ${getColor('neutral.0')};
-  font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('md')};
-  font-weight: ${getFontWeight('bold')};
+  font-family: var(--sscds-font-family-body);
+  font-size: var(--sscds-font-size-elementlabel-sm);
+  font-weight: var(--sscds-font-weight-elementlabel-default);
 `;
 
 const BulletCheck = styled.path`

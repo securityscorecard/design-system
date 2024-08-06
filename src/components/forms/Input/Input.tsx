@@ -1,13 +1,7 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import {
-  createPadding,
-  getFontFamily,
-  getFontSize,
-  getFormStyle,
-  getRadii,
-} from '../../../utils';
+import { createPadding, getFormStyle, getRadii } from '../../../utils';
 import { InputProps } from './Input.types';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
@@ -30,8 +24,8 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
   color: ${getFormStyle('color')};
-  font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('md')};
+  font-family: var(--sscds-font-family-body);
+  font-size: var(--sscds-font-size-body-md);
   line-height: ${getFormStyle('fieldLineHeight')};
   outline: none;
 

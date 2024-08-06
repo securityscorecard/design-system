@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getColor, getFontSize, getRadii } from '../../../utils';
+import { getColor, getRadii } from '../../../utils';
 
 const TableRoot = styled.div`
   position: relative;
@@ -124,7 +124,7 @@ const TableRoot = styled.div`
 
     .ds-table-header-cell-sort-button {
       opacity: 0;
-      font-size: ${getFontSize('sm')};
+      font-size: var(--sscds-font-size-body-sm);
     }
 
     &:hover,

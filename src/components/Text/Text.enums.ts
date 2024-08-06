@@ -13,6 +13,8 @@ export const TextSizes = {
 export const TextVariants = {
   default: 'default',
   subtle: 'subtle',
+  inverse: 'inverse',
+  white: 'white',
   monospace: 'monospace',
   danger: 'danger',
   inherit: 'inherit',

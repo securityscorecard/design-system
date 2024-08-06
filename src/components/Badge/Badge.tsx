@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultWhen, isNotUndefined } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
@@ -6,13 +5,7 @@ import styled, { css } from 'styled-components';
 
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
 import { BadgeVariants } from './Badge.enums';
-import {
-  getColor,
-  getFontSize,
-  getFontWeight,
-  getRadii,
-  pxToRem,
-} from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
@@ -51,8 +44,8 @@ const BadgeElement = styled(Padbox)<BadgeElementProps>`
   min-width: 1.5rem;
   padding-block: 0.125rem;
   border-radius: ${getRadii('round')};
-  font-size: ${getFontSize('md')};
-  font-weight: ${getFontWeight('regular')};
+  font-size: var(--sscds-font-size-elementlabel-sm);
+  font-weight: var(--sscds-font-weight-elementlabel-default);
   text-align: center;
   ${({ $variant }) => badgeVariants[$variant]};
   line-height: ${pxToRem(20)};

@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
-import { getFontSize, getFontWeight, getLineHeight } from '../../utils';
 import { HeadingProps } from '../Heading/Heading.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { CodeProps, StrongProps, TextProps } from './Text.types';
@@ -10,44 +9,43 @@ import { CLX_TYPOGRAPHY } from '../../theme/constants';
 
 const HeadingBase = css<HeadingProps>`
   font-family: var(--sscds-font-family-body);
-  font-weight: ${getFontWeight('medium')};
 `;
 const largeSize = css`
-  font-size: ${getFontSize('lg')};
-  line-height: ${getLineHeight('lg')};
+  font-size: var(--sscds-font-size-body-lg);
+  line-height: var(--sscds-font-lineheight-body-lg);
 `;
 const mediumSize = css`
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
+  font-size: var(--sscds-font-size-body-md);
+  line-height: var(--sscds-font-lineheight-body-md);
 `;
 const smallSize = css`
-  font-size: ${getFontSize('sm')};
-  line-height: ${getLineHeight('md')};
+  font-size: var(--sscds-font-size-body-sm);
+  line-height: var(--sscds-font-lineheight-body-sm);
 `;
 const h1 = css`
   ${HeadingBase};
-  font-size: ${getFontSize('h1')};
-  line-height: ${getLineHeight('xxl')};
+  font-size: var(--sscds-font-size-heading-1);
+  line-height: var(--sscds-font-lineheight-heading-1);
 `;
 const h2 = css`
   ${HeadingBase};
-  font-size: ${getFontSize('h2')};
-  line-height: ${getLineHeight('xxl')};
+  font-size: var(--sscds-font-size-heading-2);
+  line-height: var(--sscds-font-lineheight-heading-2);
 `;
 const h3 = css`
   ${HeadingBase};
-  font-size: ${getFontSize('h3')};
-  line-height: ${getLineHeight('xl')};
+  font-size: var(--sscds-font-size-heading-3);
+  line-height: var(--sscds-font-lineheight-heading-3);
 `;
 const h4 = css`
   ${HeadingBase};
-  font-size: ${getFontSize('h4')};
-  line-height: ${getLineHeight('h4')};
+  font-size: var(--sscds-font-size-heading-4);
+  line-height: var(--sscds-font-lineheight-heading-4);
 `;
 const h5 = css`
   ${HeadingBase};
-  font-size: ${getFontSize('h5')};
-  line-height: ${getLineHeight('h4')};
+  font-size: var(--sscds-font-size-heading-5);
+  line-height: var(--sscds-font-lineheight-heading-5);
 `;
 const inheritSize = css`
   font-size: inherit;
@@ -62,6 +60,12 @@ const secondaryVariant = css`
 `;
 const contextVariant = css`
   color: var(--sscds-color-neutral-9);
+`;
+const inverseVariant = css`
+  color: var(--sscds-color-text-inverse);
+`;
+const whiteVariant = css`
+  color: var(--sscds-color-text-white);
 `;
 const monospaceVariant = css`
   font-family: var(--sscds-font-family-mono);
@@ -89,6 +93,8 @@ const sizes = {
 const variants = {
   [TextVariants.default]: primaryVariant,
   [TextVariants.subtle]: secondaryVariant,
+  [TextVariants.inverse]: inverseVariant,
+  [TextVariants.white]: whiteVariant,
   [TextVariants.monospace]: monospaceVariant,
   [TextVariants.danger]: dangerVariant,
   [TextVariants.inherit]: inheritVariant,
@@ -106,8 +112,8 @@ const Text = styled.span.attrs<{ variant: keyof typeof TextVariants }>(
   }),
 )<TextProps>`
   font-family: inherit;
-  font-weight: ${({ isBold, theme }) =>
-    isBold ? getFontWeight('bold', { theme }) : 'inherit'};
+  font-weight: ${({ isBold }) =>
+    isBold ? 'var(--sscds-font-weight-body-strong)' : 'inherit'};
   ${({ size }) => sizes[size]};
   ${({ variant }) => variants[variant]};
 `;

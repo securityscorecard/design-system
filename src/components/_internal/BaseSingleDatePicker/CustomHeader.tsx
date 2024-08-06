@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { getColor, getFontSize, getFontWeight, getRadii } from '../../../utils';
+import { getColor, getRadii } from '../../../utils';
 import { ColorTypes } from '../../../theme/colors.enums';
 import { Icon } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
@@ -31,7 +31,7 @@ const ChangeMonthIconContainer = styled.div<{ direction: string }>`
   transform: ${(props) =>
       props.direction === 'right' ? 'rotate(270deg)' : 'rotate(90deg)'}
     translate(0, -4px);
-  font-size: ${getFontSize('lg')};
+  font-size: var(--sscds-font-size-elementlabel-md);
   width: 32px;
   height: 32px;
   display: flex;
@@ -63,8 +63,8 @@ const MonthIndicator = styled.button`
   border-radius: ${getRadii('default')};
   border: 0;
   background: transparent;
-  font-size: ${getFontSize('lg')};
-  font-weight: ${getFontWeight('semibold')};
+  font-size: var(--sscds-font-size-elementlabel-md);
+  font-weight: var(--sscds-font-weight-elementlabel-strong);
   &:hover {
     color: ${getColor(ColorTypes.primary600)};
     background-color: ${getColor(ColorTypes.primary50)};

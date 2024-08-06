@@ -3,8 +3,6 @@ import { includes, pipe } from 'ramda';
 
 import {
   createMarginSpacing,
-  getFontFamily,
-  getFontWeight,
   getRadii,
   getSpace,
   getToken,
@@ -61,7 +59,7 @@ const ButtonText = css<BaseStyledButtonProps>`
   border-color: transparent;
   padding-left: 0;
   padding-right: 0;
-  font-weight: ${getFontWeight('semibold')};
+  font-weight: var(--sscds-font-weight-elementlabel-default);
   color: ${(p) => getToken(`color-action-${p.$color}`, p)};
 
   &:hover,
@@ -99,8 +97,8 @@ const BaseStyledButton = styled(Padbox).withConfig({
   justify-content: center;
   border: none;
   border-radius: ${getRadii('default')};
-  font-family: ${getFontFamily('base')};
-  font-weight: ${getFontWeight('regular')};
+  font-family: var(--sscds-font-family-body);
+  font-weight: var(--sscds-font-weight-body-default);
   cursor: pointer;
   text-align: center;
   white-space: nowrap;

@@ -1,15 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import {
-  getColor,
-  getFontSize,
-  getFontWeight,
-  getLineHeight,
-  getRadii,
-  pxToRem,
-} from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { Padbox } from '../layout';
 import { PaginationItemProps } from './Pagination.types';
 
@@ -28,8 +20,8 @@ const StyledPaginationComponent = styled.button<{
   background: none;
   border: 1px solid transparent;
   border-radius: ${getRadii('default')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('lg')};
+  font-size: var(--sscds-font-size-elementlabel-sm);
+  line-height: var(--sscds-font-lineheight-elementlabel);
   color: ${getColor('neutral.900')};
   cursor: pointer;
 
@@ -55,8 +47,8 @@ const StyledPaginationComponent = styled.button<{
       ? css`
           border-color: ${getColor('neutral.400')};
           background-color: ${getColor('neutral.300')};
-          font-size: ${getFontSize('lg')};
-          font-weight: ${getFontWeight('bold')};
+          font-size: var(--sscds-font-size-elementlabel-md);
+          font-weight: var(--sscds-font-weight-elementlabel-strong);
           cursor: default;
         `
       : css`
@@ -112,8 +104,8 @@ export const PaginationItemElipsis = styled(Padbox).attrs(() => ({
   justify-content: center;
   width: ${pxToRem(40)};
   height: ${pxToRem(32)};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('lg')};
+  font-size: var(--sscds-font-size-elementlabel-sm);
+  line-height: var(--sscds-font-lineheight-elementlabel);
   color: ${getColor('neutral.600')};
   margin: ${pxToRem(0, 4)};
 `;

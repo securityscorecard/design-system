@@ -1,19 +1,10 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { __, pipe, subtract } from 'ramda';
 import cls from 'classnames';
 
-import {
-  getFontFamily,
-  getFontSize,
-  getFontWeight,
-  getFormStyle,
-  getLineHeight,
-  getRadii,
-  getToken,
-  pxToRem,
-} from '../../../utils';
+import { getFormStyle, getRadii, getToken, pxToRem } from '../../../utils';
 import { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
 import { SwitchSizes } from './Switch.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';
@@ -115,7 +106,6 @@ const BaseLabel = styled.label`
 
 const Label = styled(BaseLabel)<SwitchLabelProps>`
   height: ${getSwitchHeight};
-  line-height: ${getLineHeight('md')};
   background: ${getFormStyle('switchBgColor')};
   ${({ $size }) => switchLabelWrapperSizes[$size]};
   ${({ isDisabled }) =>
@@ -127,13 +117,7 @@ const Label = styled(BaseLabel)<SwitchLabelProps>`
 `;
 
 const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
-  font-size: ${getFontSize('md')};
-  font-family: ${getFontFamily('base')};
-  font-weight: ${getFontWeight('medium')};
   cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   ${({ $size }) => switchNotCheckedLabelPaddings[$size]};
   &::after {
     content: '';

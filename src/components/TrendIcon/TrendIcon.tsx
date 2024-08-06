@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Icon } from '../Icon';
 import { Padbox } from '../layout';
-import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { RequireAtLeastOne } from '../../types/utils.types';
 import {
   FontColor,
@@ -33,7 +33,6 @@ const IconWrapper = styled(Padbox)<{ $trend: Trend }>`
   border-radius: ${getRadii('default')};
   display: grid;
   place-items: center;
-  font-size: ${getFontSize('md')};
 `;
 
 export const TrendIcon = React.forwardRef<
@@ -47,6 +46,7 @@ export const TrendIcon = React.forwardRef<
       <Icon
         color={FontColor[trendValue]}
         name={trendValue === 'stable' ? 'minus' : 'arrow-up'}
+        size="sm"
         transform={{ rotate: IconRotation[trendValue] }}
       />
     </IconWrapper>

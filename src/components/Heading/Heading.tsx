@@ -1,20 +1,12 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { path } from 'ramda';
 import cls from 'classnames';
 
-import {
-  createSpacings,
-  getFontFamily,
-  getFontSize,
-  getFontWeight,
-  getLineHeight,
-  pxToRem,
-} from '../../utils';
+import { createSpacings } from '../../utils';
 import { HeadingSizes, HeadingVariants } from './Heading.enums';
 import { HeadingProps } from './Heading.types';
-import { BASE_LINE_HEIGHT, CLX_TYPOGRAPHY } from '../../theme/constants';
+import { CLX_TYPOGRAPHY } from '../../theme/constants';
 
 const primaryVariant = css`
   color: var(--sscds-color-text-default);
@@ -32,65 +24,37 @@ const variants = {
   secondary: secondaryVariant,
 };
 
-const margin = {
-  h1: {
-    top: pxToRem(BASE_LINE_HEIGHT * 5), // 100px
-    bottom: pxToRem(BASE_LINE_HEIGHT * 2.5), // 50px
-  },
-  h2: {
-    top: pxToRem(BASE_LINE_HEIGHT * 4), // 80px
-    bottom: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
-  },
-  h3: {
-    top: pxToRem(BASE_LINE_HEIGHT * 3), // 60px
-    bottom: pxToRem(BASE_LINE_HEIGHT * 1.5), // 30px
-  },
-  h4: {
-    top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
-    bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
-  },
-  h5: {
-    top: pxToRem(BASE_LINE_HEIGHT * 2), // 40px
-    bottom: pxToRem(BASE_LINE_HEIGHT), // 20px
-  },
-} as const;
-
 const HeadingBase = css<HeadingProps>`
-  font-family: ${getFontFamily('base')};
-  font-weight: ${getFontWeight('medium')};
-  margin-top: ${({ size }) => path([size, 'top'], margin)};
-  margin-bottom: ${({ size }) => path([size, 'bottom'], margin)};
+  font-family: var(--sscds-font-family-body);
+  font-weight: var(--sscds-font-weight-heading);
   ${createSpacings};
   ${({ variant }) => variants[variant]};
 `;
 
 const HeadingH1 = styled.h1`
   ${HeadingBase};
-  font-size: ${getFontSize('h1')};
-  line-height: ${getLineHeight('xxl')};
-  font-weight: ${getFontWeight('bold')};
+  font-size: var(--sscds-font-size-heading-1);
+  line-height: var(--sscds-font-lineheight-heading-1);
 `;
 const HeadingH2 = styled.h2`
   ${HeadingBase};
-  font-size: ${getFontSize('h2')};
-  line-height: ${getLineHeight('xxl')};
+  font-size: var(--sscds-font-size-heading-2);
+  line-height: var(--sscds-font-lineheight-heading-2);
 `;
 const HeadingH3 = styled.h3`
   ${HeadingBase};
-  font-size: ${getFontSize('h3')};
-  line-height: ${getLineHeight('xl')};
+  font-size: var(--sscds-font-size-heading-3);
+  line-height: var(--sscds-font-lineheight-heading-3);
 `;
 const HeadingH4 = styled.h4`
   ${HeadingBase};
-  font-size: ${getFontSize('h4')};
-  line-height: ${getLineHeight('h4')};
-  font-weight: ${getFontWeight('semibold')};
+  font-size: var(--sscds-font-size-heading-4);
+  line-height: var(--sscds-font-lineheight-heading-4);
 `;
 const HeadingH5 = styled.h5`
   ${HeadingBase};
-  font-size: ${getFontSize('h5')};
-  line-height: ${getLineHeight('h4')};
-  font-weight: ${getFontWeight('semibold')};
+  font-size: var(--sscds-font-size-heading-5);
+  line-height: var(--sscds-font-lineheight-heading-5);
 `;
 
 const headingSizes = {

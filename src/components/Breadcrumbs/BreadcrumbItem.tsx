@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { BreadcrumbItemProps } from './Breadcrumbs.types';
-import { getFontWeight } from '../../utils/helpers';
 import { Text, TextEnums } from '../Text';
 import { TextSizes } from '../Text/Text.enums';
 import { Button } from '../Button';
@@ -12,7 +11,7 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import type { SSCIcons } from '../Icon/Icon.types';
 
 export const BreadcrumbLink = styled(Button)`
-  font-weight: ${getFontWeight('regular')};
+  font-weight: var(--sscds-font-weight-body-default);
   padding-inline: 0;
   width: auto;
 `;
@@ -52,7 +51,7 @@ const BreadcrumbItem = ({
               : undefined
           }
           to={to}
-          variant="text"
+          variant="ghost"
           {...props}
           {...label}
         />

@@ -1,14 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { BASE_FONT_SIZE, BASE_LINE_HEIGHT } from '../constants';
-import {
-  getColor,
-  getFontFamily,
-  getFontWeight,
-  getToken,
-  pxToRem,
-} from '../../utils';
-
 const flattenColors = ([key, value]) => {
   if (typeof value === 'string') {
     return [[key, value]];
@@ -64,12 +55,12 @@ export default createGlobalStyle`
     display: none;
   }
   body {
-    background: ${getColor('neutral.0')};
-    font-family: ${getFontFamily('base')};
-    font-weight: ${getFontWeight('regular')};
-    font-size: ${pxToRem(BASE_FONT_SIZE * 0.875)};
-    line-height: ${pxToRem(BASE_LINE_HEIGHT)};
-    color: ${getColor('text.primary')};
+    background: var(--sscds-color-background-body);
+    font-family: var(--sscds-font-family-body);
+    font-weight: var(--sscds-font-weight-body-default);
+    font-size: var(--sscds-font-size-body-md);
+    line-height: var(--sscds-font-lineheight-body-md);
+    color: var(--sscds-color-text-default);
   }
   ol, ul {
     list-style: none;
@@ -122,13 +113,13 @@ export default createGlobalStyle`
 
   /* global focus style */
   a, button, [tabindex="0"] {
-    outline-offset: ${getToken('action-focus-ring-offset')};
+    outline-offset: 1px;
   }
   a:focus, button:focus, [tabindex="0"]:focus {
     outline: none;
   }
   a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
-    outline: ${getToken('action-focus-ring')};
+    outline: 2px solid var(--sscds-color-border-action-focused);
   }
   :root {
     ${generateColorsCSSVars};

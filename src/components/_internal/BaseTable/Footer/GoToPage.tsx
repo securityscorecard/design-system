@@ -2,16 +2,12 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  getColor,
-  getFontSize,
-  getFontWeight,
-  pxToRem,
-} from '../../../../utils';
+import { pxToRem } from '../../../../utils';
 import { Inline } from '../../../layout';
 import { Input } from '../../../forms';
 import { GoToPageProps } from './GoToPage.types';
 import { SpaceSizes } from '../../../../theme';
+import { Text } from '../../../Text';
 
 const SmallInput = styled(Input)`
   padding: ${pxToRem(8, 16)};
@@ -28,13 +24,6 @@ const SmallInput = styled(Input)`
   &:focus {
     padding: ${pxToRem(7, 15)};
   }
-`;
-const GoToPageLabel = styled.label`
-  margin-bottom: 0;
-  margin-right: ${pxToRem(16)};
-  font-size: ${getFontSize('lg')};
-  font-weight: ${getFontWeight('medium')};
-  color: ${getColor('neutral.700')};
 `;
 
 const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
@@ -59,7 +48,9 @@ const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
 
   return (
     <Inline align="center" gap={SpaceSizes.md}>
-      <GoToPageLabel htmlFor="goToPageInput">Go to page:</GoToPageLabel>
+      <Text as="label" htmlFor="goToPageInput" variant="subtle">
+        Go to page:
+      </Text>
       <SmallInput
         ref={inputRef}
         id="goToPageInput"

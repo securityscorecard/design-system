@@ -1,14 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  getColor,
-  getFontFamily,
-  getFontSize,
-  getLineHeight,
-  getRadii,
-} from '../../utils';
+import { getColor, getRadii } from '../../utils';
 import { useOuterClick } from '../useOuterCallback';
 import { DropdownPaneProps, DropdownPaneStyles } from './DropdownPane.types';
 
@@ -16,9 +9,9 @@ export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
   background: ${getColor('neutral.0')};
   color: ${getColor('neutral.900')};
-  font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
+  font-family: var(--sscds-font-family-body);
+  font-size: var(--sscds-font-size-body-md);
+  line-height: var(--sscds-font-lineheight-body-md);
   border: 1px solid ${getColor('neutral.300')};
   border-radius: ${getRadii('default')};
 

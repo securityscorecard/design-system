@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { noop } from 'ramda-adjunct';
 
-import {
-  getColor,
-  getDepth,
-  getFontFamily,
-  getFontSize,
-  getLineHeight,
-  getRadii,
-  getSpace,
-  pxToRem,
-} from '../../utils';
+import { getColor, getDepth, getRadii, getSpace, pxToRem } from '../../utils';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { SpaceSizes } from '../../theme';
 import { useOuterClick } from '../../hooks/useOuterCallback';
@@ -45,9 +36,9 @@ export const Arrow = styled.div`
 export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
   color: ${getColor('neutral.900')};
-  font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
+  font-family: var(--sscds-font-family-body);
+  font-size: var(--sscds-font-size-body-md);
+  line-height: var(--sscds-font-lineheight-body-md);
   border-radius: ${getRadii('default')};
   border: 1px solid ${getColor('neutral.300')};
   z-index: ${({ $isInFloatingElement, theme }) =>

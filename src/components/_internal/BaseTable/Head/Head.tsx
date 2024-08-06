@@ -2,27 +2,19 @@ import { isNotUndefined } from 'ramda-adjunct';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import {
-  getColor,
-  getFontSize,
-  getFontWeight,
-  getLineHeight,
-  pxToRem,
-} from '../../../../utils';
+import { getColor, pxToRem } from '../../../../utils';
 import TooltipWrapper from '../components/TooltipWrapper';
 import { makeStickyColumn, shrinkIfSticky } from '../utils';
 import SortingIcon from './SortingIcon';
 import { HeadProps } from './Head.types';
+import ElementLabel from '../../../ElementLabel/ElementLabel';
 
 const StyledTh = styled.th<{ sticky?: string }>`
   display: flex;
   align-items: center;
   min-height: ${pxToRem(48)};
-  font-weight: ${getFontWeight('bold')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
   text-align: left;
-  padding: ${pxToRem(12, 8)};
+  padding: ${pxToRem(8)};
   background-color: ${getColor('neutral.0')};
   border-color: ${getColor('neutral.300')};
   border-style: solid;
@@ -68,7 +60,9 @@ function Head<D extends Record<string, unknown>>({
                     popupRenderer={() => column.headerTooltip}
                     shouldRender={isNotUndefined(column.headerTooltip)}
                   >
-                    {column.render('Header')}
+                    <ElementLabel size="sm" isStrong>
+                      {column.render('Header')}
+                    </ElementLabel>
                   </TooltipWrapper>
                   {column.canSort && (
                     <SortingIcon

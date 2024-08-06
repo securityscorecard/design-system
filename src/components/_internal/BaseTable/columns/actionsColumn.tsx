@@ -1,11 +1,10 @@
-import React from 'react';
 import { map } from 'ramda';
 import styled, { css } from 'styled-components';
 import { CellProps, Column } from 'react-table';
 
 import { Inline } from '../../../layout';
 import { DropdownMenu } from '../../BaseDropdownMenu';
-import { getColor, getFontSize, getRadii, pxToRem } from '../../../../utils';
+import { getColor, getRadii, pxToRem } from '../../../../utils';
 import { height, svgPathData, width } from '../../../../theme/icons/ellipsisH';
 import { ACTIONS_COLUMN_ID, CellTypes } from '../renderers/renderers.enums';
 
@@ -22,7 +21,7 @@ const RowActionsButton = styled.button<{ isActive: boolean }>`
   width: ${pxToRem(24)};
   height: ${pxToRem(24)};
   color: ${getColor('neutral.600')};
-  font-size: ${getFontSize('lg')};
+  font-size: var(--sscds-font-size-elementlabel-md);
   border-radius: ${getRadii('default')};
   border: 0 none;
   background: transparent;

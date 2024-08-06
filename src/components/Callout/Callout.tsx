@@ -1,10 +1,9 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { CalloutContainerProps, CalloutProps } from './Callout.types';
 import { ColorTypes, SpaceSizes } from '../../theme';
-import { getColor, getFontSize, getRadii, pxToRem } from '../../utils';
+import { getColor, getRadii, pxToRem } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { Text } from '../Text';
 import { Icon } from '../Icon';
@@ -34,7 +33,7 @@ const IconContainer = styled.div<CalloutContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${getFontSize('lg')};
+  font-size: var(--sscds-font-size-body-lg);
   ${({ $color }) => calloutIconColors[$color]};
 `;
 

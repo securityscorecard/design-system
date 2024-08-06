@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { getColor, getFontWeight } from '../../../utils';
+import { getColor } from '../../../utils';
 
 export const dateRangePickerStyles = css`
   .react-datepicker__day--in-selecting-range {
@@ -17,7 +17,7 @@ export const dateRangePickerStyles = css`
   .react-datepicker__day--range-end,
   .react-datepicker__day--selecting-range-start {
     background-color: ${getColor('primary.500')};
-    font-weight: ${getFontWeight('bold')};
+    font-weight: var(--sscds-font-weight-elementlabel-strong);
     color: ${getColor('neutral.0')};
   }
   .react-datepicker__day--selected,

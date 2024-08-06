@@ -8,7 +8,6 @@ import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { ParagraphProps } from './Paragraph.types';
 
 const Paragraph = styled(Text)<ParagraphProps>`
-  margin-bottom: 0.625rem;
   ${createSpacings};
 `;
 
