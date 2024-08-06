@@ -1,25 +1,26 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Surface from './Surface';
 import { Padbox, Stack } from '../index';
 import { H5 } from '../../Heading';
 import { Text } from '../../Text';
 
-export default {
+const meta = {
   title: 'layout/Surface',
   component: Surface,
   args: {
     mode: 'light',
   },
-} as Meta<typeof Surface>;
+} satisfies Meta<typeof Surface>;
 
-const Child = ({ mode }) => (
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+const Child = () => (
   <Stack gap="sm">
-    <H5 style={{ color: mode === 'light' ? '#2a2a2a' : 'white' }}>
-      Hello user!
-    </H5>
-    <Text style={{ color: mode === 'light' ? '#2a2a2a' : 'white' }}>
+    <H5>Hello user!</H5>
+    <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
       pharetra magna lectus, a congue ex blandit vel. Donec id mi commodo eros
       porta tempus. Vivamus et elit ut leo tincidunt vehicula non a dolor.
@@ -28,121 +29,138 @@ const Child = ({ mode }) => (
   </Stack>
 );
 
-const Template: StoryFn<typeof Surface> = (args) => (
-  <Surface {...args}>
-    <Padbox paddingSize="md">
-      <Child mode={args.mode ?? 'light'} />
-    </Padbox>
-  </Surface>
-);
-
-export const Playground: StoryFn<typeof Surface> = Template.bind({});
-Playground.args = {
-  mode: 'light',
-  background: 'white',
-  radius: 'sm',
-  elevation: 0,
-  hasBorder: false,
-};
-Playground.parameters = {
-  screenshot: { skip: true },
+export const Playground: Story = {
+  args: {
+    mode: 'light',
+    background: 'default',
+    radius: 'sm',
+    elevation: 0,
+    hasBorder: false,
+    children: (
+      <Padbox paddingSize="md">
+        <Child />
+      </Padbox>
+    ),
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
 
-export const Background: StoryFn<typeof Surface> = (args) => {
-  return (
-    <Stack gap="lgPlus">
-      <Template {...args} background="white" />
-      <Template {...args} background="dynamic" />
-      <Template {...args} background="transparent" />
-    </Stack>
-  );
-};
-Background.parameters = {
-  backgrounds: { default: 'grey' },
-};
-
-export const BorderRadius: StoryFn<typeof Surface> = (args) => {
-  return (
-    <Stack gap="lgPlus">
-      <Template {...args} radius="none" />
-      <Template {...args} radius="sm" />
-      <Template {...args} radius="md" />
-      <Template {...args} radius="lg" />
-    </Stack>
-  );
-};
-BorderRadius.args = {
-  background: 'dynamic',
-  hasBorder: true,
+export const Background: Story = {
+  render: (args) => {
+    return (
+      <Stack gap="lgPlus">
+        <Surface {...args} background="white" />
+        <Surface {...args} background="dynamic" />
+        <Surface {...args} background="transparent" />
+      </Stack>
+    );
+  },
+  args: Playground.args,
+  parameters: {
+    backgrounds: { default: 'grey' },
+  },
 };
 
-export const Elevation: StoryFn<typeof Surface> = (args) => {
-  const elevation = args.elevation ?? 1;
-  return (
-    <Stack gap="lgPlus">
-      <Template {...args} elevation={elevation} />
-      <Template {...args} elevation={elevation + 1} />
-      <Template {...args} elevation={elevation + 2} />
-    </Stack>
-  );
-};
-Elevation.args = {
-  background: 'white',
-  hasBorder: true,
-  elevation: 1,
-};
-
-export const Bordered: StoryFn<typeof Surface> = Template.bind({});
-Bordered.args = {
-  background: 'white',
-  hasBorder: true,
+export const BorderRadius: Story = {
+  render: (args) => {
+    return (
+      <Stack gap="lgPlus">
+        <Surface {...args} radius="none" />
+        <Surface {...args} radius="sm" />
+        <Surface {...args} radius="md" />
+        <Surface {...args} radius="lg" />
+      </Stack>
+    );
+  },
+  args: {
+    ...Playground.args,
+    background: 'dynamic',
+    hasBorder: true,
+  },
 };
 
-export const DynamicBackgroundOnLight: StoryFn<typeof Surface> = (args) => (
-  <Surface {...args}>
-    <Padbox paddingSize="md">
-      <Child mode={args.mode} />
-      <Surface {...args}>
-        <Padbox paddingSize="md">
-          <Child mode={args.mode} />
-          <Surface {...args}>
-            <Padbox paddingSize="md">
-              <Child mode={args.mode} />
-            </Padbox>
-          </Surface>
-        </Padbox>
-      </Surface>
-    </Padbox>
-  </Surface>
-);
-DynamicBackgroundOnLight.args = {
-  background: 'dynamic',
-  mode: 'light',
-  hasBorder: true,
+export const Elevation: Story = {
+  render: (args) => {
+    const elevation = args.elevation ?? 1;
+    return (
+      <Stack gap="lgPlus">
+        <Surface {...args} elevation={elevation} />
+        <Surface {...args} elevation={elevation + 1} />
+        <Surface {...args} elevation={elevation + 2} />
+      </Stack>
+    );
+  },
+  args: {
+    ...Playground.args,
+    background: 'white',
+    hasBorder: true,
+    elevation: 1,
+  },
 };
 
-export const DynamicBackgroundOnDark: StoryFn<typeof Surface> = (args) => (
-  <Surface {...args}>
-    <Padbox paddingSize="md">
-      <Child mode={args.mode} />
-      <Surface {...args}>
-        <Padbox paddingSize="md">
-          <Child mode={args.mode} />
-          <Surface {...args}>
-            <Padbox paddingSize="md">
-              <Child mode={args.mode} />
-            </Padbox>
-          </Surface>
-        </Padbox>
-      </Surface>
-    </Padbox>
-  </Surface>
-);
-DynamicBackgroundOnDark.args = {
-  background: 'dynamic',
-  mode: 'dark',
-  hasBorder: true,
+export const Bordered: Story = {
+  args: {
+    ...Playground.args,
+    background: 'white',
+    hasBorder: true,
+  },
 };
-DynamicBackgroundOnDark.parameters = {
-  backgrounds: { default: 'black' },
+
+export const DynamicBackgroundOnLight: Story = {
+  render: (args) => (
+    <Surface {...args}>
+      <Padbox paddingSize="md">
+        <Child />
+        <Surface {...args}>
+          <Padbox paddingSize="md">
+            <Child />
+            <Surface {...args}>
+              <Padbox paddingSize="md">
+                <Child />
+              </Padbox>
+            </Surface>
+          </Padbox>
+        </Surface>
+      </Padbox>
+    </Surface>
+  ),
+  args: {
+    ...Playground.args,
+    background: 'dynamic',
+    mode: 'light',
+    hasBorder: true,
+  },
+};
+
+export const DynamicBackgroundOnDark: Story = {
+  render: (args) => (
+    <Surface {...args}>
+      <Padbox paddingSize="md">
+        <Child />
+        <Surface {...args}>
+          <Padbox paddingSize="md">
+            <Child />
+            <Surface {...args}>
+              <Padbox paddingSize="md">
+                <Child />
+              </Padbox>
+            </Surface>
+          </Padbox>
+        </Surface>
+      </Padbox>
+    </Surface>
+  ),
+  args: {
+    ...Playground.args,
+    background: 'dynamic',
+    mode: 'dark',
+    hasBorder: true,
+  },
+  parameters: {
+    themes: {
+      themeOverride: 'Dark',
+    },
+  },
 };

@@ -1,25 +1,41 @@
-import React, {
+import {
   CSSProperties,
   ComponentPropsWithoutRef,
   ReactNode,
   forwardRef,
 } from 'react';
 import styled, { useTheme } from 'styled-components';
+import clx from 'classnames';
 
 import { Radii, getRadii } from '../../../utils';
 
-const SurfaceBackgrounds = ['white', 'dynamic', 'transparent'] as const;
+const SurfaceBackgrounds = [
+  'default',
+  'white',
+  'dynamic',
+  'transparent',
+] as const;
 const SurfaceRadii = ['none', 'sm', 'md', 'lg'] as const;
 const SurfaceMode = ['light', 'dark'] as const;
 
-interface SurfaceProps extends ComponentPropsWithoutRef<'div'> {
+export type SurfaceProps = {
   children: ReactNode;
+  /** Background of the surface box */
   background?: (typeof SurfaceBackgrounds)[number];
+  /** Corner rounding of the surface box */
   radius?: (typeof SurfaceRadii)[number];
+  /** Size of the box shadow. Takes and integer, Bigger value, bigger size of the shadow */
   elevation?: number;
+  /** Show border around the surface box */
   hasBorder?: boolean;
+  /**
+   *  Switch color scheme for light or dark backgrounds
+   *
+   * @deprecated Replaced with design tokens for using dark mode add ".dark" classname
+   * to Surface or its parent
+   */
   mode?: (typeof SurfaceMode)[number];
-}
+} & ComponentPropsWithoutRef<'div'>;
 
 const SurfaceRoot = styled.div`
   background: var(--sscds-background);
@@ -31,15 +47,13 @@ const SurfaceRoot = styled.div`
 `;
 const getBackground = (
   background: (typeof SurfaceBackgrounds)[number],
-  mode: (typeof SurfaceMode)[number],
 ): string => {
   switch (background) {
     case 'dynamic':
-      return mode === 'light'
-        ? 'var(--sscds-color-background-surface-dynamic-default)'
-        : 'var(--sscds-color-background-surface-dynamic-inverse)';
+      return 'var(--sscds-color-background-surface-dynamic)';
+    case 'default':
     case 'white':
-      return 'var(--sscds-color-white)';
+      return 'var(--sscds-color-background-surface-default)';
     case 'transparent':
     default:
       return 'var(--sscds-color-clear)';
@@ -64,7 +78,7 @@ const radiiMap: Record<
 const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
   (
     {
-      background = 'white',
+      background = 'default',
       radius = 'sm',
       elevation = 0,
       hasBorder = false,
@@ -77,20 +91,27 @@ const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
   ) => {
     const theme = useTheme();
     const cssVars: CSSProperties = {
-      '--sscds-background': getBackground(background, mode),
+      '--sscds-background': getBackground(background),
       '--sscds-radius':
         radius === 'none' ? 0 : getRadii(radiiMap[radius], { theme }),
       '--sscds-elevation': getShadow(elevation),
       '--sscds-border-width': hasBorder ? '1px' : '0',
       '--sscds-border-color':
-        mode === 'light'
-          ? 'var(--sscds-color-border-surface-default)'
-          : 'var(--sscds-color-border-surface-inverse)',
+        background === 'dynamic'
+          ? 'var(--sscds-color-border-surface-dynamic)'
+          : 'var(--sscds-color-border-surface-default)',
       ...style,
     };
 
     return (
-      <SurfaceRoot ref={ref} style={cssVars} {...rest}>
+      <SurfaceRoot
+        ref={ref}
+        style={cssVars}
+        {...rest}
+        className={clx(rest.className, {
+          dark: mode === 'dark',
+        })}
+      >
         {children}
       </SurfaceRoot>
     );
