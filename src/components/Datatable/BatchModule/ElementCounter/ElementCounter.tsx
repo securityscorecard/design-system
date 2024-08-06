@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import { Text } from '../../../Text';
-import { HeadingVariants } from '../../../Heading/Heading.enums';
-import {
-  abbreviateNumber,
-  getColor,
-  getFontSize,
-  getSpace,
-  pxToRem,
-} from '../../../../utils';
+import { abbreviateNumber, getColor, getSpace } from '../../../../utils';
 import { DropdownMenu } from '../../../_internal/BaseDropdownMenu';
 import { Icon } from '../../../Icon';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
@@ -29,7 +22,7 @@ const SelectionButton = styled.button`
   cursor: pointer;
   height: 100%;
   padding: ${getSpace(SpaceSizes.xs)};
-  font-size: ${getFontSize('lg')};
+  font-size: var(--sscds-font-size-elementlabel-md);
   color: ${getColor('neutral.800')};
 
   &:hover {
@@ -61,20 +54,11 @@ function ElementCounterWrapper({ children, ...props }) {
 }
 ElementCounterWrapper.displayName = 'ElementCounterWrapper';
 
-const CounterText = styled(Text).attrs(() => ({
-  size: 'md',
-  margin: 'none',
-  variant: HeadingVariants.secondary,
-}))`
-  line-height: ${pxToRem(24)};
-`;
-
 const ElementCounter = ({
   dataSize,
   hasSelection,
   hasOnlyPerPageSelection,
 }: ElementCounterProps) => {
-  const theme = useTheme();
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
       selectedIds: s.selectedIds,
@@ -115,7 +99,9 @@ const ElementCounter = ({
   if (!hasSelection) {
     return (
       <ElementCounterWrapper>
-        <CounterText>{content}</CounterText>
+        <Text size="md" variant="secondary">
+          {content}
+        </Text>
       </ElementCounterWrapper>
     );
   }
@@ -123,7 +109,9 @@ const ElementCounter = ({
   if (hasOnlyPerPageSelection) {
     return (
       <ElementCounterWrapper>
-        <CounterText>{content}</CounterText>
+        <Text size="md" variant="secondary">
+          {content}
+        </Text>
         {localSelectedLength > 0 && (
           <SelectionButton
             aria-label="Select None"
@@ -131,10 +119,7 @@ const ElementCounter = ({
             type="button"
             onClick={handleSelectNoneClick}
           >
-            <Icon
-              name={SSCIconNames.times}
-              style={{ fontSize: getFontSize('md', { theme }) }}
-            />
+            <Icon name={SSCIconNames.times} size="sm" />
           </SelectionButton>
         )}
       </ElementCounterWrapper>
@@ -143,7 +128,9 @@ const ElementCounter = ({
 
   return (
     <ElementCounterWrapper>
-      <CounterText>{content}</CounterText>
+      <Text size="md" variant="secondary">
+        {content}
+      </Text>
       {dataSize > 0 && (
         <DropdownMenu
           actions={[
@@ -169,7 +156,7 @@ const ElementCounter = ({
             <Icon
               data-testid="selection-dropdown"
               name={SSCIconNames.angleDown}
-              style={{ fontSize: getFontSize('md', { theme }) }}
+              size="sm"
             />
           </SelectionButton>
         </DropdownMenu>

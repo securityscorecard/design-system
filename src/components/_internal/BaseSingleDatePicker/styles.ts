@@ -1,28 +1,19 @@
 import { css } from 'styled-components';
 
-import {
-  getColor,
-  getFontFamily,
-  getFontSize,
-  getFontWeight,
-  getFormStyle,
-  getLineHeight,
-  getRadii,
-  pxToRem,
-} from '../../../utils';
+import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
 
 export const datePickerStyles = css`
   .DateRangePicker-input {
-    font-family: ${getFontFamily('base')};
+    font-family: var(--sscds-font-family-body);
     height: ${getFormStyle('fieldHeight')};
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
     border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
     border-radius: ${getRadii('default')};
     color: ${getFormStyle('color')};
-    font-size: ${getFontSize('md')};
-    line-height: ${getLineHeight('lg')};
-    font-weight: ${getFontWeight('regular')};
+    font-size: var(--sscds-font-size-body-md);
+    line-height: var(--sscds-font-lineheight-body-md);
+    font-weight: var(--sscds-font-weight-body-default);
   }
   .DateRangePicker-input:focus {
     border: ${getFormStyle('statefulBorderWidth')} solid
@@ -38,9 +29,9 @@ export const datePickerStyles = css`
     color: ${getFormStyle('placeholderColor')};
   }
   .DateRangePicker-calendar {
-    font-size: ${getFontSize('md')};
-    line-height: ${getLineHeight('md')};
-    font-weight: ${getFontWeight('regular')};
+    font-size: var(--sscds-font-size-body-md);
+    line-height: var(--sscds-font-lineheight-body-md);
+    font-weight: var(--sscds-font-weight-body-default);
     padding: ${pxToRem(16)};
     border-radius: ${getRadii('default')};
     box-shadow: 0 2px 6px 0 var(--sscds-slateA-slateA6);
@@ -67,9 +58,9 @@ export const datePickerStyles = css`
     padding-top: 0;
   }
   .react-datepicker__current-month {
-    font-size: ${getFontSize('h4')};
-    line-height: ${getLineHeight('lg')};
-    font-weight: ${getFontWeight('medium')};
+    font-size: var(--sscds-font-size-heading-4);
+    line-height: var(--sscds-font-lineheight-heading-4);
+    font-weight: var(--sscds-font-weight-heading);
     margin-top: ${pxToRem(16)};
     margin-bottom: ${pxToRem(20)};
     color: ${getColor('neutral.900')};
@@ -86,7 +77,7 @@ export const datePickerStyles = css`
   .react-datepicker__day--keyboard-selected {
     background-color: ${getColor('primary.600')};
     border-radius: 4px;
-    font-weight: ${getFontWeight('bold')};
+    font-weight: var(--sscds-font-weight-elementlabel-strong);
     color: ${getColor('neutral.0')};
   }
   .react-datepicker__triangle {
@@ -188,7 +179,7 @@ export const datePickerStyles = css`
 export const singleDatePickerStyles = css`
   .react-datepicker__day--selected {
     background-color: ${getColor('primary.500')};
-    font-weight: ${getFontWeight('bold')};
+    font-weight: var(--sscds-font-weight-elementlabel-strong);
     color: ${getColor('neutral.0')};
     border-radius: ${getRadii('default')};
   }

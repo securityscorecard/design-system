@@ -1,22 +1,14 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { IconTypes } from '../../../theme/icons/icons.enums';
 import { Icon } from '../../Icon';
-import { Text } from '../../Text';
 import { Spinner } from '../../Spinner';
 import { Padbox } from '../../layout';
-import {
-  getColor,
-  getDepth,
-  getFontFamily,
-  getFontWeight,
-  getRadii,
-  pxToRem,
-} from '../../../utils';
+import { getColor, getDepth, getRadii, pxToRem } from '../../../utils';
 import { StateButtonProps } from './StateButton.types';
 import { useStateButtonIcon } from '../hooks/useStateButton';
+import ElementLabel from '../../ElementLabel/ElementLabel';
 
 const Popup = styled(Padbox)`
   display: flex;
@@ -35,7 +27,7 @@ const Popup = styled(Padbox)`
 
 const RemoveButton = styled.button`
   background: transparent;
-  font-family: ${getFontFamily('base')};
+  font-family: var(--sscds-font-family-body);
   height: ${pxToRem(32)};
   flex: 0 0 ${pxToRem(32)};
   display: flex;
@@ -57,12 +49,6 @@ const RemoveButton = styled.button`
     visibility: visible;
     opacity: 1;
   }
-`;
-
-const LightText = styled(Text)`
-  color: ${getColor('neutral.0')};
-  line-height: 1rem;
-  font-weight: ${getFontWeight('medium')};
 `;
 
 const StateButton = ({
@@ -91,7 +77,9 @@ const StateButton = ({
         />
       )}
       <Popup alignItems="center" justifyContent="center">
-        <LightText>Remove</LightText>
+        <ElementLabel color="inverse" size="sm" style={{ lineHeight: '1rem' }}>
+          Remove
+        </ElementLabel>
       </Popup>
     </RemoveButton>
   );

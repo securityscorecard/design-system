@@ -1,18 +1,17 @@
-import React, { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme';
-import { getFontSize, getLineHeight, getSpace } from '../../../utils';
+import { getSpace } from '../../../utils';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { Text } from '../../Text';
 
-const LabelRoot = styled.label`
+const LabelRoot = styled(Text)`
   display: block;
   padding-top: ${getSpace(SpaceSizes.xs)};
   padding-bottom: ${getSpace(SpaceSizes.xs)};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('md')};
   cursor: 'inherit';
 
   > * {
@@ -27,6 +26,7 @@ const Label = ({
   ...props
 }: ComponentPropsWithoutRef<'label'> & { children: ReactNode }) => (
   <LabelRoot
+    as="label"
     className={cls(CLX_COMPONENT, className)}
     htmlFor={htmlFor}
     {...props}
