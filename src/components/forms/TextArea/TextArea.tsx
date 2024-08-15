@@ -1,14 +1,11 @@
-import React, { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import {
   getColor,
-  getFontFamily,
-  getFontSize,
   getFormStyle,
-  getLineHeight,
   getRadii,
   getSpace,
   pxToRem,
@@ -17,6 +14,7 @@ import { Padbox } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useAutosize } from './hooks/useAutosize';
 import { mergeRefs } from '../../../utils/mergeRefs';
+import { Text } from '../../Text';
 
 interface TextAreaProps {
   maxLength?: number;
@@ -42,9 +40,9 @@ const TextareaStyled = styled.textarea<TextareaStyledProps>`
   width: 100%;
   background-color: transparent;
   resize: none;
-  font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getLineHeight('lg')};
+  font-family: var(--sscds-font-family-body);
+  font-size: var(--sscds-font-size-body-md);
+  line-height: var(--sscds-font-lineheight-body-md);
   color: ${getFormStyle('color')};
   padding: 0;
 
@@ -106,18 +104,10 @@ const TextareaRoot = styled(Padbox)<TextareaRootProps>`
   }
 `;
 
-const Counter = styled.span<{ $isInvalid: boolean }>`
+const Counter = styled.span`
   position: absolute;
   right: ${pxToRem(14)};
   bottom: ${pxToRem(8)};
-  font-size: ${getFontSize('md')};
-  color: ${getColor('text.secondary')};
-
-  ${({ $isInvalid }) =>
-    $isInvalid &&
-    css`
-      color: ${getFormStyle('invalidBorderColor')};
-    `}
 `;
 
 const getHeightBoundary = (
@@ -181,8 +171,10 @@ const TextArea = forwardRef<
             : { value })}
         />
         {isNotUndefined(maxLength) && (
-          <Counter $isInvalid={isFieldInvalid}>
-            {maxLength - currentValueLength}
+          <Counter>
+            <Text variant={isFieldInvalid ? 'danger' : 'subtle'}>
+              {maxLength - currentValueLength}
+            </Text>
           </Counter>
         )}
       </TextareaRoot>

@@ -48,7 +48,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '--sscds-table-spacing-cell-display':
             'var(--sscds-space-1x) var(--sscds-space-3x)',
           '--sscds-table-typography-weight-header':
-            'var(--sscds-font-weight-700)',
+            'var(--sscds-font-weight-elementlabel-strong)',
           '--sscds-table-shadow-settings':
             '-6px 0px 12px 0px rgba(0, 0, 0, 0.07)',
           '--sscds-table-shadow-pin-left':

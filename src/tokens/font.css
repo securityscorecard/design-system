@@ -32,18 +32,17 @@
   --sscds-font-weight-400: 400; /* regular */
   --sscds-font-weight-500: 500; /* medium */
   --sscds-font-weight-600: 600; /* semi-bold */
-  --sscds-font-weight-700: 700; /* bold */
 
   --sscds-font-weight-body-default: var(--sscds-font-weight-400);
   --sscds-font-weight-body-strong: var(--sscds-font-weight-600);
 
-  --sscds-font-weight-heading: var(--sscds-font-weight-700);
+  --sscds-font-weight-heading: var(--sscds-font-weight-600);
 
-  --sscds-font-weight-display-default: var(--sscds-font-weight-700);
+  --sscds-font-weight-display-default: var(--sscds-font-weight-600);
   --sscds-font-weight-display-subtle: var(--sscds-font-weight-500);
 
   --sscds-font-weight-elementlabel-default: var(--sscds-font-weight-500);
-  --sscds-font-weight-elementlabel-strong: var(--sscds-font-weight-700);
+  --sscds-font-weight-elementlabel-strong: var(--sscds-font-weight-600);
 
   --sscds-font-lineheight-10: 1rem; /* 16px */
   --sscds-font-lineheight-20: 1.25rem; /* 20px */

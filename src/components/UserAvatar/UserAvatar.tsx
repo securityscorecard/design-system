@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import { any, pipe, take, toUpper, trim } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -7,18 +6,12 @@ import cls from 'classnames';
 
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
 import type { UserAvatarProps, UserAvatarRootProps } from './UserAvatar.types';
-import {
-  getColor,
-  getFontFamily,
-  getFontWeight,
-  getRadii,
-  getToken,
-  pxToRem,
-} from '../../utils/helpers';
+import { getRadii, getToken, pxToRem } from '../../utils/helpers';
 import { UserAvatarSizes } from './UserAvatar.enums';
 import { BaseButton } from '../_internal/BaseButton';
 import { SpaceSizes } from '../../theme';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { Text } from '../Text';
 
 const smallAvatar = css`
   width: ${pipe(getToken('size-action-size-sm'), pxToRem)};
@@ -30,20 +23,16 @@ const mediumAvatar = css`
 `;
 
 const avatar = css`
-  color: ${getColor('neutral.0')};
-  background-color: ${getColor('primary.600')};
+  background-color: var(--sscds-color-primary-600);
 `;
 
 const invertedAvatar = css`
-  color: ${getColor('neutral.1000')};
-  background-color: ${getColor('neutral.0')};
+  background-color: var(--sscds-color-neutral-0);
   &:hover {
-    background-color: ${getColor('primary.50')};
-    color: ${getColor('neutral.900')};
+    background-color: var(--sscds-color-primary-050);
   }
   &:active {
-    background-color: ${getColor('primary.200')};
-    color: ${getColor('neutral.900')};
+    background-color: var(--sscds-color-primary-200);
   }
 `;
 
@@ -53,12 +42,8 @@ const avatarSizes = {
 };
 const userAvatarStyle = css<UserAvatarRootProps>`
   border-radius: ${getRadii('round')};
-  font-family: ${getFontFamily('base')};
-  font-weight: ${getFontWeight('regular')};
-  line-height: 1;
-  font-size: ${getToken('font-action-size')};
   ${({ $size }) => avatarSizes[$size]};
-  ${({ $isInverted }) => ($isInverted ? invertedAvatar : avatar)}
+  ${({ $isInverted }) => ($isInverted ? invertedAvatar : avatar)};
 `;
 
 const RootUserAvatar = styled.div<UserAvatarRootProps>`
@@ -94,7 +79,9 @@ const UserAvatar = ({
       onClick={onClick}
       {...props}
     >
-      {normalizeString(label)}
+      <Text variant={isInverted ? 'default' : 'white'}>
+        {normalizeString(label)}
+      </Text>
     </RootUserAvatar>
   ) : (
     <RootUserAvatar
@@ -103,7 +90,9 @@ const UserAvatar = ({
       className={cls(CLX_COMPONENT, className)}
       {...props}
     >
-      {normalizeString(label)}
+      <Text variant={isInverted ? 'default' : 'white'}>
+        {normalizeString(label)}
+      </Text>
     </RootUserAvatar>
   );
 

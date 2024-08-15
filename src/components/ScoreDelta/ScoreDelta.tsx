@@ -3,19 +3,14 @@ import styled from 'styled-components';
 
 import { ScoreDeltaProps } from './ScoreDelta.types';
 import { Padbox } from '../layout';
-import {
-  getColor,
-  getFontSize,
-  getFontWeight,
-  getRadii,
-  getSpace,
-} from '../../utils';
+import { getColor, getRadii, getSpace } from '../../utils';
 import { TrendIcon } from '../TrendIcon/TrendIcon';
 import {
   FontColor,
   IconBackgroundColor,
   Trend,
 } from '../_internal/BaseTrends/common';
+import ElementLabel from '../ElementLabel/ElementLabel';
 
 const ScoreDeltaRoot = styled(Padbox)<{ $trend: string }>`
   background: ${({ $trend, theme }) =>
@@ -24,9 +19,8 @@ const ScoreDeltaRoot = styled(Padbox)<{ $trend: string }>`
   align-items: center;
   border-radius: ${getRadii('default')};
 `;
-const Label = styled.span<{ $trend: string }>`
-  font-size: ${getFontSize('md')};
-  font-weight: ${getFontWeight('medium')};
+const Label = styled(ElementLabel)<{ $trend: string }>`
+  line-height: var(--sscds-font-lineheight-body-md);
   color: ${({ $trend, theme }) => getColor(FontColor[$trend], { theme })};
   padding-inline: ${getSpace('xxs')};
 `;
@@ -50,7 +44,9 @@ const ScoreDelta = React.forwardRef<HTMLDivElement, ScoreDeltaProps>(
     return (
       <ScoreDeltaRoot ref={ref} $trend={trend} as="span" paddingSize="xxs">
         <TrendIcon trend={trend} />
-        <Label $trend={trend}>{text}</Label>
+        <Label $trend={trend} size="sm">
+          {text}
+        </Label>
       </ScoreDeltaRoot>
     );
   },

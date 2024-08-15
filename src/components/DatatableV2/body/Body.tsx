@@ -29,7 +29,7 @@ const Body = <D,>({ table }: { table: DatatableInstance<D> }) => {
               <Padbox paddingSize="xl">
                 {renderNoDataFallback?.({ table }) ?? (
                   <Stack gap="sm">
-                    <Text as="p" size="h5">
+                    <Text as="p" size="lg" isBold>
                       No results found
                     </Text>
                     <Paragraph as="div" variant="secondary">

@@ -13,7 +13,7 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { ActionKinds } from '../../types/action.types';
-import { getColor, getFontSize, pxToRem } from '../../utils';
+import { getColor, pxToRem } from '../../utils';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -23,7 +23,6 @@ const IconWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${getFontSize('sm')};
   width: 1rem;
   height: 1rem;
 `;
@@ -55,7 +54,11 @@ const insertSeparators = (items: React.ReactElement[]) => {
         current,
         // eslint-disable-next-line react/no-array-index-key
         <IconWrapper key={`separator-${index}`} aria-hidden>
-          <Icon color={ColorTypes.neutral600} name={SSCIconNames.angleRight} />
+          <Icon
+            color={ColorTypes.neutral600}
+            name={SSCIconNames.angleRight}
+            size="sm"
+          />
         </IconWrapper>,
       ];
     }
