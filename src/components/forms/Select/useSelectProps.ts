@@ -27,6 +27,7 @@ export const useSelectProps = <IsMulti extends boolean>({
   maxVisibleItem,
   defaultIsMenuOpen,
   menuActions,
+  menuPlacement = 'auto',
   isMenuPositionRelative = false,
   isMulti,
   isLoading = false,
@@ -73,5 +74,6 @@ export const useSelectProps = <IsMulti extends boolean>({
     classNamePrefix: 'ssc',
     maxVisibleItem,
     maxPillLabelLength,
+    menuPlacement,
   };
 };

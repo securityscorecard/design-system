@@ -208,7 +208,7 @@ export const selectStyles: (
       ...(isMenuPositionRelative ? { position: 'relative' } : {}),
       border: `1px solid ${DSTheme.colors.neutral[300]}`,
       boxShadow: `0px 1px 4px var(--sscds-slateA-slateA6)`,
-      marginBottom: 0,
+      marginBottom: pxToRem(DSTheme.space.xs),
       marginTop: pxToRem(DSTheme.space.xs),
       paddingTop: pxToRem(DSTheme.space.sm),
       paddingBottom: pxToRem(DSTheme.space.sm),
