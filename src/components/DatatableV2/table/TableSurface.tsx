@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import Pagination from '../toolbar/Pagination';
+import Selection from '../toolbar/Selection';
 import Table from './Table';
 
 const DatatableRoot = styled.div<{ $isFullscreen }>`
@@ -71,6 +72,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
       >
         <Table table={table} />
       </Surface>
+      {table.options.enableRowSelection && <Selection table={table} />}
       {table.options.enablePagination &&
         table.getRowModel().rows.length > 0 && <Pagination table={table} />}
     </DatatableRoot>
