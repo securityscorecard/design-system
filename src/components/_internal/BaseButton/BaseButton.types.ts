@@ -4,16 +4,11 @@ import { DefaultTheme } from 'styled-components';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
 import type { IconNames, RegularIconTypes } from '../../Icon/Icon.types';
-import {
-  BaseButtonColors,
-  BaseButtonSizes,
-  BaseButtonVariants,
-} from './BaseButton.enums';
+import { BaseButtonColors, BaseButtonVariants } from './BaseButton.enums';
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 
 export type Variants =
   (typeof BaseButtonVariants)[keyof typeof BaseButtonVariants];
-export type Sizes = (typeof BaseButtonSizes)[keyof typeof BaseButtonSizes];
 export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
 
 export interface BaseIcon {
@@ -22,9 +17,8 @@ export interface BaseIcon {
 }
 
 export interface BaseButtonProps
-  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'as'> {
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'as'> {
   variant?: Variants;
-  size?: Sizes;
   color?: Colors;
   onClick?: React.MouseEventHandler;
   isDisabled?: boolean;
