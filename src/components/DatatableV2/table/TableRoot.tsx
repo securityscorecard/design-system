@@ -83,7 +83,7 @@ const TableRoot = styled.div`
     position: relative;
     flex-direction: column;
     justify-content: center;
-    height: 3.25rem;
+    min-height: 2.5rem;
     padding: var(--sscds-table-spacing-cell-header);
     background-color: var(--sscds-table-color-header-background);
 
@@ -127,10 +127,30 @@ const TableRoot = styled.div`
       font-size: var(--sscds-font-size-body-sm);
     }
 
+    .ds-table-header-cell-column-actions-button-wrapper {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--sscds-table-color-header-background) 20%
+      );
+      padding-block: var(--sscds-space-1x);
+      padding-inline-start: var(--sscds-space-4x);
+      padding-inline-end: var(--sscds-space-2x);
+      transition: var(--sscds-action-transition);
+    }
+
     &:hover,
     &:focus-within {
       .ds-table-header-cell-sort-button,
-      .ds-table-header-cell-resize-handler {
+      .ds-table-header-cell-resize-handler,
+      .ds-table-header-cell-column-actions-button-wrapper {
         opacity: 1;
       }
     }
