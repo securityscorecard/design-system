@@ -1,0 +1,1 @@
+import{j as a}from"./jsx-runtime-Cw0GR0a5.js";import{r}from"./index-CTjT7uj6.js";const e=r.createContext(null),o=({children:t})=>a.jsx(e.Provider,{value:!0,children:t}),i=()=>r.useContext(e);try{o.displayName="FloatingProvider",o.__docgenInfo={description:"",displayName:"FloatingProvider",props:{}}}catch{}export{o as F,i as u};

@@ -1,0 +1,1 @@
+import{z as v,L as t}from"./space-1LtLrmuu.js";import{z as i}from"./zipObj-DVsQulIT.js";var o=v(function(r){for(var l=t(r),n=l.length,s=[],a=0;a<n;)s[a]=r[l[a]],a+=1;return s});const c=(e,r)=>({options:o(r),control:{type:e,labels:i(o(r),t(r))}});export{c as g};
