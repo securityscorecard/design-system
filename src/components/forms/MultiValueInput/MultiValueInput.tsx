@@ -24,14 +24,7 @@ import {
 import { useDeepCompareEffect } from 'use-deep-compare';
 import cls from 'classnames';
 
-import {
-  getFontFamily,
-  getFontSize,
-  getFormStyle,
-  getRadii,
-  getSpace,
-  pxToRem,
-} from '../../../utils';
+import { getFormStyle, getRadii, getSpace, pxToRem } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
 import { SpaceSizes } from '../../../theme';
 import { Icon } from '../../Icon';
@@ -98,7 +91,7 @@ const InputContainer = styled.div`
   display: inline-grid;
   grid-area: 1 / 1 / 2 / 3;
   grid-template-columns: 0 min-content;
-  line-height: ${getFormStyle('fieldLineHeight')};
+  line-height: var(--sscds-font-lineheight-body-md);
   flex: 1 1 auto;
 
   &::after {
@@ -115,9 +108,9 @@ const InputField = styled.input`
   background: transparent;
   border: 0 none;
   color: ${getFormStyle('color')};
-  font-family: ${getFontFamily('base')};
-  font-size: ${getFontSize('md')};
-  line-height: ${getFormStyle('fieldLineHeight')};
+  font-family: var(--sscds-font-family-body);
+  font-size: var(--sscds-font-size-body-md);
+  line-height: var(--sscds-font-lineheight-body-md);
   outline: none;
   min-width: 2px;
   width: 100%;
@@ -134,7 +127,7 @@ const ClearButton = styled.button`
   background: transparent none;
   border: 0 none;
   cursor: pointer;
-  font-size: ${getFontSize('lg')};
+  font-size: var(--sscds-font-size-elementlabel-md);
   padding: ${pxToRem(0, 18)};
   height: ${pxToRem(34)};
   margin: ${pxToRem(1, 0)};

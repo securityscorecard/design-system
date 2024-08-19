@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -7,7 +7,6 @@ import {
   findIconDefinition,
 } from '@fortawesome/fontawesome-svg-core';
 import { includes } from 'ramda';
-import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import { createSpacings, getColor } from '../../utils';
@@ -38,6 +37,12 @@ const IconBox = styled.div<{
   height: ${({ $size }) => boxSizes[$size]};
 `;
 
+const getIconColor = ({ $color, theme }): string | undefined => {
+  if (typeof $color === 'undefined') return 'inherit';
+  if ($color.startsWith('var(')) return $color;
+  return getColor($color, { theme });
+};
+
 const StyledIcon = styled(FontAwesomeIcon).withConfig<{
   $color: IconProps['color'];
   $size: IconProps['size'];
@@ -45,8 +50,7 @@ const StyledIcon = styled(FontAwesomeIcon).withConfig<{
 }>({
   shouldForwardProp: (property) => !includes(property, ['margin']),
 })`
-  color: ${({ $color, theme }) =>
-    isNotUndefined($color) ? getColor($color, { theme }) : 'inherit'};
+  color: ${getIconColor};
   font-size: ${({ $size }) => $size && fontSizes[$size]};
   ${createSpacings};
 `;

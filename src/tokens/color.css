@@ -24,6 +24,12 @@
 @import url('@radix-ui/colors/slate-dark-alpha.css');
 @import url('@radix-ui/colors/tomato.css');
 @import url('@radix-ui/colors/tomato-dark.css');
+@import url('@radix-ui/colors/teal.css');
+@import url('@radix-ui/colors/teal-dark.css');
+@import url('@radix-ui/colors/purple.css');
+@import url('@radix-ui/colors/purple-dark.css');
+@import url('@radix-ui/colors/brown.css');
+@import url('@radix-ui/colors/brown-dark.css');
 @import url('@radix-ui/colors/white-alpha.css');
 @import url('@radix-ui/colors/black-alpha.css');
 
@@ -223,11 +229,10 @@
   --sscds-color-brand-900: var(--brand-900);
 
   --sscds-color-background-body: var(--sscds-color-neutral-1);
-  --sscds-color-background-overlay: var(--sscds-color-neutral-alpha-10);
+  --sscds-color-background-overlay: var(--black-a8);
 
   --sscds-color-background-surface-default: var(--sscds-color-neutral-0);
-  --sscds-color-background-surface-dynamic-default: var(--sscds-color-neutral-alpha-2);
-  --sscds-color-background-surface-dynamic-inverse: var(--white-a2);
+  --sscds-color-background-surface-dynamic: var(--sscds-color-neutral-alpha-2);
   --sscds-color-background-surface-none: var(--sscds-color-clear);
   --sscds-color-background-surface-hover: var(--sscds-color-neutral-2)
 
@@ -257,38 +262,28 @@
   --sscds-color-background-action-highlight-active: var(--indigo-9);
   --sscds-color-background-action-highlight-disabled: var(--sscds-color-neutral-4);
 
-  --sscds-color-background-pill-blue-default: var(--blue-4);
-  --sscds-color-background-pill-blue-hover: var(--blue-5);
-
-  --sscds-color-background-pill-cyan-default: var(--cyan-4);
-  --sscds-color-background-pill-cyan-hover: var(--cyan-5);
-
-  --sscds-color-background-pill-teal-default: var(--teal-4);
-  --sscds-color-background-pill-teal-hover: var(--teal-5);
-
-  --sscds-color-background-pill-green-default: var(--green-4);
-  --sscds-color-background-pill-green-hover: var(--green-5);
-
-  --sscds-color-background-pill-amber-default: var(--amber-4);
-  --sscds-color-background-pill-amber-hover: var(--amber-5);
-
-  --sscds-color-background-pill-orange-default: var(--orange-4);
-  --sscds-color-background-pill-orange-hover: var(--orange-5);
-
-  --sscds-color-background-pill-tomato-default: var(--tomato-4);
-  --sscds-color-background-pill-tomato-hover: var(--tomato-5);
-
-  --sscds-color-background-pill-pink-default: var(--pink-4);
-  --sscds-color-background-pill-pink-hover: var(--pink-5);
-
-  --sscds-color-background-pill-purple-default: var(--purple-4);
-  --sscds-color-background-pill-purple-hover: var(--purple-5);
-
-  --sscds-color-background-pill-brown-default: var(--brown-4);
-  --sscds-color-background-pill-brown-hover: var(--brown-5);
-
-  --sscds-color-background-pill-gray-default: var(--sscds-color-neutral-4);
-  --sscds-color-background-pill-gray-hover: var(--sscds-color-neutral-5);
+  --sscds-color-background-pill-blue-default: var(--blue-3);
+  --sscds-color-background-pill-blue-hover: var(--blue-4);
+  --sscds-color-background-pill-turquoise-default: var(--cyan-3);
+  --sscds-color-background-pill-turquoise-hover: var(--cyan-4);
+  --sscds-color-background-pill-teal-default: var(--teal-3);
+  --sscds-color-background-pill-teal-hover: var(--teal-4);
+  --sscds-color-background-pill-green-default: var(--green-3);
+  --sscds-color-background-pill-green-hover: var(--green-4);
+  --sscds-color-background-pill-yellow-default: var(--amber-3);
+  --sscds-color-background-pill-yellow-hover: var(--amber-4);
+  --sscds-color-background-pill-orange-default: var(--orange-3);
+  --sscds-color-background-pill-orange-hover: var(--orange-4);
+  --sscds-color-background-pill-red-default: var(--tomato-3);
+  --sscds-color-background-pill-red-hover: var(--tomato-4);
+  --sscds-color-background-pill-pink-default: var(--pink-3);
+  --sscds-color-background-pill-pink-hover: var(--pink-4);
+  --sscds-color-background-pill-purple-default: var(--purple-3);
+  --sscds-color-background-pill-purple-hover: var(--purple-4);
+  --sscds-color-background-pill-brown-default: var(--brown-3);
+  --sscds-color-background-pill-brown-hover: var(--brown-4);
+  --sscds-color-background-pill-gray-default: var(--sscds-color-neutral-3);
+  --sscds-color-background-pill-gray-hover: var(--sscds-color-neutral-4);
 
   --sscds-color-border-default: var(--sscds-color-neutral-4);
   --sscds-color-border-info: var(--indigo-8);
@@ -296,8 +291,8 @@
   --sscds-color-border-warning: var(--amber-8);
   --sscds-color-border-danger: var(--tomato-8);
 
-  --sscds-color-border-surface-default: var(--sscds-color-neutral-alpha-6);
-  --sscds-color-border-surface-inverse: var(--white-a3);
+  --sscds-color-border-surface-default: var(--sscds-color-border-default);
+  --sscds-color-border-surface-dynamic: var(--sscds-color-neutral-alpha-5);
   --sscds-color-border-surface-none: var(--sscds-color-clear);
   --sscds-color-border-surface-hover: var(--sscds-color-neutral-8);
   --sscds-color-border-surface-active: var(--sscds-color-border-action-focused)
@@ -311,6 +306,29 @@
   --sscds-color-border-action-focused: var(--indigo-9);
   --sscds-color-border-action-danger: var(--sscds-color-neutral-8);
   --sscds-color-border-action-subtle: var(--sscds-color-neutral-7);
+
+  --sscds-color-border-pill-blue-default: var(--blue-6);
+  --sscds-color-border-pill-blue-hover: var(--blue-7);
+  --sscds-color-border-pill-turquoise-default: var(--cyan-6);
+  --sscds-color-border-pill-turquoise-hover: var(--cyan-7);
+  --sscds-color-border-pill-teal-default: var(--teal-6);
+  --sscds-color-border-pill-teal-hover: var(--teal-7);
+  --sscds-color-border-pill-green-default: var(--green-6);
+  --sscds-color-border-pill-green-hover: var(--green-7);
+  --sscds-color-border-pill-yellow-default: var(--amber-6);
+  --sscds-color-border-pill-yellow-hover: var(--amber-7);
+  --sscds-color-border-pill-orange-default: var(--orange-6);
+  --sscds-color-border-pill-orange-hover: var(--orange-7);
+  --sscds-color-border-pill-red-default: var(--tomato-6);
+  --sscds-color-border-pill-red-hover: var(--tomato-7);
+  --sscds-color-border-pill-pink-default: var(--pink-6);
+  --sscds-color-border-pill-pink-hover: var(--pink-7);
+  --sscds-color-border-pill-purple-default: var(--purple-6);
+  --sscds-color-border-pill-purple-hover: var(--purple-7);
+  --sscds-color-border-pill-brown-default: var(--brown-6);
+  --sscds-color-border-pill-brown-hover: var(--brown-7);
+  --sscds-color-border-pill-gray-default: var(--sscds-color-neutral-6);
+  --sscds-color-border-pill-gray-hover: var(--sscds-color-neutral-7);
 
   --sscds-color-link-default: var(--sscds-color-primary-800);
   --sscds-color-link-hover: var(--sscds-color-primary-900);

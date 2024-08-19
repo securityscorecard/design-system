@@ -23,7 +23,7 @@ const size = {
   h2: sizeScale[60], // 28px
   h3: sizeScale[50], // 24px
   h4: sizeScale[40], // 20px
-  h5: '1.125rem', // 18px
+  h5: sizeScale[30], // 16px
   lg: sizeScale[30], // 16px
   md: sizeScale[20], // 14px
   sm: sizeScale[10], // 12px
@@ -57,15 +57,14 @@ const weightScale = {
   400: 400,
   500: 500,
   600: 600,
-  700: 700,
 } as const;
 
 const weight = {
   light: 400,
   regular: 400,
   medium: 500,
-  semibold: 500,
-  bold: 700,
+  semibold: 600,
+  bold: 600,
 
   /* new tokens */
   ...weightScale,
@@ -73,14 +72,14 @@ const weight = {
     default: weightScale[400],
     strong: weightScale[600],
   },
-  heading: weightScale[700],
+  heading: weightScale[600],
   display: {
     default: weightScale[700],
     subtle: weightScale[500],
   },
   label: {
     default: weightScale[500],
-    strong: weightScale[700],
+    strong: weightScale[600],
   },
 } as const;
 
@@ -97,11 +96,9 @@ const lineHeightScale = {
 } as const;
 
 const lineHeight = {
-  xxl: '1.25',
-  xl: '1.25',
-  lg: '1.5',
-  md: '1.5',
-  h4: '1.25',
+  xl: lineHeightScale[50],
+  lg: lineHeightScale[30],
+  md: lineHeightScale[20],
 
   /* new tokens */
   ...lineHeightScale,

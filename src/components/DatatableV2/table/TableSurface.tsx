@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import Pagination from '../toolbar/Pagination';
+import Selection from '../toolbar/Selection';
 import Table from './Table';
 
 const DatatableRoot = styled.div<{ $isFullscreen }>`
@@ -45,9 +46,10 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
           '--sscds-table-color-active': 'var(--sscds-color-neutral-3)',
           '--sscds-table-spacing-cell': 'var(--sscds-space-2x)',
           '--sscds-table-spacing-cell-header': 'var(--sscds-space-2x)',
-          '--sscds-table-spacing-cell-display': 'var(--sscds-space-1x)',
+          '--sscds-table-spacing-cell-display':
+            'var(--sscds-space-1x) var(--sscds-space-3x)',
           '--sscds-table-typography-weight-header':
-            'var(--sscds-font-weight-700)',
+            'var(--sscds-font-weight-elementlabel-strong)',
           '--sscds-table-shadow-settings':
             '-6px 0px 12px 0px rgba(0, 0, 0, 0.07)',
           '--sscds-table-shadow-pin-left':
@@ -70,6 +72,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
       >
         <Table table={table} />
       </Surface>
+      {table.options.enableRowSelection && <Selection table={table} />}
       {table.options.enablePagination &&
         table.getRowModel().rows.length > 0 && <Pagination table={table} />}
     </DatatableRoot>

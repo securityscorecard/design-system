@@ -1,20 +1,16 @@
 import styled, { css } from 'styled-components';
 import { __, includes, pipe, subtract } from 'ramda';
 
-import {
-  getColor,
-  getFontWeight,
-  getRadii,
-  getToken,
-  pxToRem,
-} from '../../../utils';
+import { getColor, getRadii, getToken, pxToRem } from '../../../utils';
 import { BaseLabelProps } from './BaseTabLabel.types';
 import { BaseTabVariants } from './BaseTabs.enums';
 import { Padbox } from '../../layout/Padbox';
 
 const underlineTab = css<BaseLabelProps>`
   font-weight: ${({ $isSelected }) =>
-    $isSelected ? getFontWeight('semibold') : getFontWeight('regular')};
+    $isSelected
+      ? 'var(--sscds-font-weight-body-strong)'
+      : 'var(--sscds-font-weight-body-default)'};
   line-height: 1.5rem;
   color: ${getColor('neutral.900')};
   border-bottom: 2px solid
@@ -28,8 +24,8 @@ const underlineTab = css<BaseLabelProps>`
 `;
 
 const textTab = css<BaseLabelProps>`
-  line-height: ${getToken('font-action-lineheight')};
-  font-weight: ${getFontWeight('semibold')};
+  line-height: var(--sscds-font-lineheight-elementlabel);
+  font-weight: var(--sscds-font-weight-elementlabel-default);
   color: ${({ $isSelected }) =>
     $isSelected
       ? getColor('neutral.900')
@@ -46,7 +42,7 @@ export const segmentedTabSelected = css`
 `;
 
 const segmentedTab = css<BaseLabelProps>`
-  line-height: ${getToken('font-action-lineheight')};
+  line-height: var(--sscds-font-lineheight-elementlabel);
 
   height: ${({ theme }) =>
     pipe(

@@ -1,8 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getColor, getLineHeight, getRadii, pxToRem } from '../../utils';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { PillRemoveButtonProps } from './Pill.types';
@@ -14,18 +12,18 @@ const PillRemoveButtonWrapper = styled.button`
   appearance: none;
   border: 0 none;
   background: transparent;
-  width: ${pxToRem(16)};
-  height: ${pxToRem(16)};
-  font-size: ${pxToRem(12)};
-  line-height: ${getLineHeight('md')};
-  color: ${getColor('neutral.700')};
+  width: 1rem;
+  height: 1rem;
+  font-size: var(--sscds-font-size-body-sm);
+  color: var(--sscds-color-icon-subtle);
   cursor: pointer;
-  border-radius: ${getRadii('circle')};
+  border-radius: var(--sscds-radii-circle);
+  margin-inline-end: calc(var(--sscds-space-1x) * -1) !important;
 
   &:hover,
   &:focus-visible {
-    color: ${getColor('neutral.0')};
-    background-color: ${getColor('error.500')};
+    color: var(--sscds-color-neutral-1);
+    background-color: var(--sscds-color-icon-danger);
   }
 `;
 

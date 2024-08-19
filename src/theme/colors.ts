@@ -298,48 +298,48 @@ export const colors = {
       },
       pill: {
         blue: {
-          default: blue.blue4,
-          hover: blue.blue5,
+          default: blue.blue3,
+          hover: blue.blue4,
         },
-        cyan: {
-          default: cyan.cyan4,
-          hover: cyan.cyan5,
+        turquoise: {
+          default: cyan.cyan3,
+          hover: cyan.cyan4,
         },
         teal: {
-          default: teal.teal4,
-          hover: teal.teal5,
+          default: teal.teal3,
+          hover: teal.teal4,
         },
         green: {
-          default: green.green4,
-          hover: green.green5,
+          default: green.green3,
+          hover: green.green4,
         },
-        amber: {
-          default: amber.amber4,
-          hover: amber.amber5,
+        yellow: {
+          default: amber.amber3,
+          hover: amber.amber4,
         },
         orange: {
-          default: orange.orange4,
-          hover: orange.orange5,
+          default: orange.orange3,
+          hover: orange.orange4,
         },
-        tomato: {
-          default: tomato.tomato4,
-          hover: tomato.tomato5,
+        red: {
+          default: tomato.tomato3,
+          hover: tomato.tomato4,
         },
         pink: {
-          default: pink.pink4,
-          hover: pink.pink5,
+          default: pink.pink3,
+          hover: pink.pink4,
         },
         purple: {
-          default: purple.purple4,
-          hover: purple.purple5,
+          default: purple.purple3,
+          hover: purple.purple4,
         },
         brown: {
-          default: brown.brown4,
-          hover: brown.brown5,
+          default: brown.brown3,
+          hover: brown.brown4,
         },
         gray: {
-          default: neutral[4],
-          hover: neutral[5],
+          default: neutral[3],
+          hover: neutral[4],
         },
       },
     },

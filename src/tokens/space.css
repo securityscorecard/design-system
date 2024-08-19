@@ -12,5 +12,7 @@
   --sscds-space-24x: calc(var(--sscds-space-1x) * 24);
   --sscds-space-32x: calc(var(--sscds-space-1x) * 32);
 
+  --sscds-space-dialog-content-padding: var(--sscds-space-6x);
+
   --sscds-space-grid-gutter: 1.875rem; /* LEGACY VALUE - should be replaced with 8x */
 }

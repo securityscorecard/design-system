@@ -1,4 +1,3 @@
-import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
@@ -16,24 +15,26 @@ const HeaderCellColumnActionsButton = <D,>({
   const { getIsSorted } = column;
   const direction = getIsSorted();
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <BaseHandle
-          className="ds-table-header-cell-column-actions-button"
-          iconProps={{
-            name:
-              direction === 'desc'
-                ? 'sort-down'
-                : direction === 'asc'
-                ? 'sort-up'
-                : 'ellipsis-v',
-          }}
-          label="Column actions"
-        />
-      </DropdownMenu.Trigger>
+    <div className="ds-table-header-cell-column-actions-button-wrapper">
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger asChild>
+          <BaseHandle
+            className="ds-table-header-cell-column-actions-button"
+            iconProps={{
+              name:
+                direction === 'desc'
+                  ? 'sort-down'
+                  : direction === 'asc'
+                  ? 'sort-up'
+                  : 'ellipsis-v',
+            }}
+            label="Column actions"
+          />
+        </DropdownMenu.Trigger>
 
-      <ColumnActionsMenu header={header} table={table} />
-    </DropdownMenu.Root>
+        <ColumnActionsMenu header={header} table={table} />
+      </DropdownMenu.Root>
+    </div>
   );
 };
 

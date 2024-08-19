@@ -16,7 +16,6 @@ import { Button, ButtonEnums } from '../Button';
 import { Icon } from '../Icon';
 import { generateControl } from '../../utils/tests/storybook';
 import { Modal, SpaceSizes } from '../../index';
-import { getSpace } from '../../utils';
 import { Tooltip } from '../Tooltip';
 
 export default {
@@ -246,10 +245,10 @@ const alphabet = Array.from(Array(26))
 
 const Subheader = styled(Padbox)`
   position: sticky;
-  top: calc(${getSpace(SpaceSizes.lg)} / -2);
-  margin-top: calc(${getSpace(SpaceSizes.lg)} / -2) !important;
-  margin-left: calc(${getSpace(SpaceSizes.lg)} * -1);
-  margin-right: calc(${getSpace(SpaceSizes.lg)} * -1);
+  top: calc(var(--sscds-space-dialog-content-padding) * -1);
+  margin-top: calc(var(--sscds-space-dialog-content-padding) * -1) !important;
+  margin-left: calc(var(--sscds-space-dialog-content-padding) * -1);
+  margin-right: calc(var(--sscds-space-dialog-content-padding) * -1);
 
   background: white;
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
@@ -263,7 +262,7 @@ export const WithSubheader: StoryFn = () => (
     onClose={action('close-modal')}
   >
     <Stack gap="lg">
-      <Subheader paddingSize={SpaceSizes.lg} paddingType="squish">
+      <Subheader paddingSize={SpaceSizes.mdPlus} paddingType="squish">
         <Stack gap="lg">
           <Inline gap="lg" justify="space-between">
             <Text isBold>Company name</Text>

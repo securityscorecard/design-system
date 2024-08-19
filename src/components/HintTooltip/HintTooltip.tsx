@@ -1,8 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
-import { includes } from 'ramda';
 
 import { getColor } from '../../utils';
 import { Tooltip } from '../Tooltip';
@@ -11,14 +9,14 @@ import { HintTooltipProps } from './HintTooltip.types';
 import { ColorTypes } from '../../theme';
 import { Color } from '../../theme/colors.types';
 
-const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
-  shouldForwardProp: (property) => !includes(property, ['color']),
-})`
+const StyledIcon = styled(Icon)<{
+  $color: Color;
+}>`
   background: ${getColor('neutral.0')};
   border: 1px solid ${getColor('neutral.0')};
   border-radius: 100%;
-  color: ${({ color, theme }) =>
-    isNotUndefined(color) ? getColor(color, { theme }) : 'inherit'};
+  color: ${({ $color, theme }) =>
+    isNotUndefined($color) ? getColor($color, { theme }) : 'inherit'};
   &:hover {
     color: ${({ theme }) => getColor('neutral.700', { theme })};
   }
@@ -27,7 +25,7 @@ const StyledIcon = styled(Icon).withConfig<{ color: Color }>({
 const HintTooltip = ({ children, width, ...props }: HintTooltipProps) => (
   <Tooltip popup={children} width={width} {...props}>
     <StyledIcon
-      color={ColorTypes.neutral600}
+      $color={ColorTypes.neutral600}
       name="info-circle-outline"
       tabIndex={0}
     />

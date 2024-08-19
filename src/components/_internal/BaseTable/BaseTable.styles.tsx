@@ -2,15 +2,7 @@
 import styled, { css } from 'styled-components';
 import { identity, memoizeWith, pipe } from 'ramda';
 
-import {
-  getColor,
-  getFontFamily,
-  getFontSize,
-  getFontWeight,
-  getFormStyle,
-  getRadii,
-  pxToRem,
-} from '../../../utils';
+import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { LinkActiveStyles, LinkBaseStyles, LinkHoverStyles } from '../BaseLink';
 
 const getRemToggleSize = memoizeWith(
@@ -60,7 +52,7 @@ const DsLinkCell = css`
     --sscds-link-color-hover: var(--sscds-color-neutral-11);
     --sscds-link-color-active: var(--sscds-color-neutral-13);
 
-    font-weight: ${getFontWeight('regular')};
+    font-weight: var(--sscds-font-weight-body-default);
   }
 `;
 
@@ -77,9 +69,9 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
   .ds-table-cell {
     display: flex;
     align-items: flex-start;
-    font-family: ${getFontFamily('base')};
-    font-size: ${getFontSize('md')};
-    font-weight: ${getFontWeight('regular')};
+    font-family: var(--sscds-font-family-body);
+    font-size: var(--sscds-font-size-body-md);
+    font-weight: var(--sscds-font-weight-body-default);
     line-height: ${pxToRem(24)};
     color: ${getColor('neutral.900')};
     background: ${getColor('neutral.0')};
@@ -186,7 +178,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
 
       .ds-table-checkbox-icon {
         display: none;
-        font-size: ${pxToRem(12)};
+        font-size: var(--sscds-font-size-body-sm);
         width: 1em;
         color: ${getFormStyle('activeColor')};
       }

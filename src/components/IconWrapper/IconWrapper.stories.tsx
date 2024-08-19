@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import IconWrapper from './IconWrapper';
@@ -43,3 +42,13 @@ export const Variants: Story = (args) => (
   </Inline>
 );
 Variants.args = { ...Playground.args, size: 'xl', type: 'ssc' };
+
+export const DarkMode: Story = (args) => (
+  <Inline gap="md">
+    <IconWrapper {...args} variant="default" />
+    <IconWrapper {...args} variant="subtle" />
+    <IconWrapper {...args} variant="strong" />
+  </Inline>
+);
+DarkMode.args = Variants.args;
+DarkMode.parameters = { themes: { themeOverride: 'Dark' } };
