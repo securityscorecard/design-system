@@ -244,25 +244,40 @@
   --sscds-color-background-input-disabled: var(--sscds-color-neutral-4);
   --sscds-color-background-input-error: var(--sscds-color-neutral-0);
 
-  --sscds-color-background-action-main-default: var(--indigo-12);
-  --sscds-color-background-action-main-hover: var(--indigo-11);
-  --sscds-color-background-action-main-active: var(--indigo-12);
-  --sscds-color-background-action-main-disabled: var(--sscds-color-neutral-4);
+  --sscds-color-background-action-base-default: var(--indigo-12);
+  --sscds-color-background-action-base-hover: var(--indigo-11);
+  --sscds-color-background-action-base-active: var(--sscds-color-background-action-base-default);
+  --sscds-color-background-action-base-disabled: var(--sscds-color-neutral-4);
 
-  --sscds-color-background-action-subtle-default: var(--sscds-color-clear);
+  --sscds-color-background-action-subtle-default: var(--white-a3);
   --sscds-color-background-action-subtle-hover: var(--sscds-color-neutral-alpha-3);
-  --sscds-color-background-action-subtle-active: var(--sscds-color-clear);
-  --sscds-color-background-action-subtle-disabled: var(--sscds-color-neutral-4);
+  --sscds-color-background-action-subtle-active: var(--sscds-color-background-action-subtle-default);
+  --sscds-color-background-action-subtle-disabled: var(--sscds-color-background-action-subtle-default);
 
   --sscds-color-background-action-danger-default: var(--tomato-10);
   --sscds-color-background-action-danger-hover: var(--tomato-11);
-  --sscds-color-background-action-danger-active: var(--tomato-10);
+  --sscds-color-background-action-danger-active: var(--sscds-color-background-action-danger-default);
   --sscds-color-background-action-danger-disabled: var(--sscds-color-neutral-4);
 
   --sscds-color-background-action-highlight-default: var(--indigo-9);
   --sscds-color-background-action-highlight-hover: var(--indigo-11);
-  --sscds-color-background-action-highlight-active: var(--indigo-9);
+  --sscds-color-background-action-highlight-active: var(--sscds-color-background-action-highlight-default);
   --sscds-color-background-action-highlight-disabled: var(--sscds-color-neutral-4);
+
+  --sscds-color-background-action-ghost-default: var(--sscds-color-clear);
+  --sscds-color-background-action-ghost-hover: var(--sscds-color-neutral-alpha-3);
+  --sscds-color-background-action-ghost-active: var(--sscds-color-background-action-ghost-default);
+  --sscds-color-background-action-ghost-disabled: var(--sscds-color-neutral-4);
+
+  --sscds-color-background-action-highlight-ghost-default: var(--sscds-color-background-action-ghost-default);
+  --sscds-color-background-action-highlight-ghost-hover: var(--sscds-color-background-action-ghost-hover);
+  --sscds-color-background-action-highlight-ghost-active: var(--sscds-color-background-action-ghost-active);
+  --sscds-color-background-action-highlight-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
+
+  --sscds-color-background-action-danger-ghost-default: var(--sscds-color-background-action-ghost-default);
+  --sscds-color-background-action-danger-ghost-hover: var(--tomato-3);
+  --sscds-color-background-action-danger-ghost-active: var(--sscds-color-background-action-ghost-active);
+  --sscds-color-background-action-danger-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
 
   --sscds-color-background-pill-blue-default: var(--blue-3);
   --sscds-color-background-pill-blue-hover: var(--blue-4);
@@ -306,7 +321,7 @@
   --sscds-color-border-input-error: var(--sscds-color-danger-500);
 
   --sscds-color-border-action-focused: var(--indigo-9);
-  --sscds-color-border-action-danger: var(--sscds-color-neutral-8);
+  --sscds-color-border-action-danger: var(--sscds-color-danger-500);
   --sscds-color-border-action-subtle: var(--sscds-color-neutral-7);
 
   --sscds-color-border-pill-blue-default: var(--blue-6);
