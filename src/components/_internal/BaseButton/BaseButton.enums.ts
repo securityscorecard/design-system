@@ -11,9 +11,3 @@ export const BaseButtonColors = {
   success: 'success',
   danger: 'danger',
 } as const;
-
-export const BaseButtonSizes = {
-  lg: 'lg',
-  md: 'md',
-  sm: 'sm',
-} as const;

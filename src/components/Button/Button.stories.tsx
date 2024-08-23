@@ -103,20 +103,6 @@ export const SolidButtons: StoryFn = () => (
       </Button>
     </Inline>
     <Inline gap={SpaceSizes.md}>
-      <Button color="success" variant="solid">
-        Button
-      </Button>
-      <Button className="hover" color="success" variant="solid">
-        Hovered Button
-      </Button>
-      <Button className="active" color="success" variant="solid">
-        Active Button
-      </Button>
-      <Button color="success" variant="solid" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
-    <Inline gap={SpaceSizes.md}>
       <Button color="danger" variant="solid">
         Button
       </Button>
@@ -134,50 +120,20 @@ export const SolidButtons: StoryFn = () => (
 );
 
 export const OutlineButtons: StoryFn = () => (
-  <Stack gap={SpaceSizes.lg}>
-    <Inline gap={SpaceSizes.md}>
-      <Button color="primary" variant="outline">
-        Button
-      </Button>
-      <Button className="hover" color="primary" variant="outline">
-        Hovered Button
-      </Button>
-      <Button className="active" color="primary" variant="outline">
-        Active Button
-      </Button>
-      <Button color="primary" variant="outline" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
-    <Inline gap={SpaceSizes.md}>
-      <Button color="success" variant="outline">
-        Button
-      </Button>
-      <Button className="hover" color="success" variant="outline">
-        Hovered Button
-      </Button>
-      <Button className="active" color="success" variant="outline">
-        Active Button
-      </Button>
-      <Button color="success" variant="outline" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
-    <Inline gap={SpaceSizes.md}>
-      <Button color="danger" variant="outline">
-        Button
-      </Button>
-      <Button className="hover" color="danger" variant="outline">
-        Hovered Button
-      </Button>
-      <Button className="active" color="danger" variant="outline">
-        Active Button
-      </Button>
-      <Button color="danger" variant="outline" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
-  </Stack>
+  <Inline gap={SpaceSizes.md}>
+    <Button color="primary" variant="outline">
+      Button
+    </Button>
+    <Button className="hover" color="primary" variant="outline">
+      Hovered Button
+    </Button>
+    <Button className="active" color="primary" variant="outline">
+      Active Button
+    </Button>
+    <Button color="primary" variant="outline" isDisabled>
+      Disabled Button
+    </Button>
+  </Inline>
 );
 
 export const TextButtons: StoryFn = () => (
@@ -207,20 +163,6 @@ export const TextButtons: StoryFn = () => (
         Active Button
       </Button>
       <Button color="secondary" variant="text" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
-    <Inline gap={SpaceSizes.md}>
-      <Button color="success" variant="text">
-        Button
-      </Button>
-      <Button className="hover" color="success" variant="text">
-        Hovered Button
-      </Button>
-      <Button className="active" color="success" variant="text">
-        Active Button
-      </Button>
-      <Button color="success" variant="text" isDisabled>
         Disabled Button
       </Button>
     </Inline>
@@ -268,20 +210,6 @@ export const GhostButtons: StoryFn = () => (
         Active Button
       </Button>
       <Button color="secondary" variant="ghost" isDisabled>
-        Disabled Button
-      </Button>
-    </Inline>
-    <Inline gap={SpaceSizes.md}>
-      <Button color="success" variant="ghost">
-        Button
-      </Button>
-      <Button className="hover" color="success" variant="ghost">
-        Hovered Button
-      </Button>
-      <Button className="active" color="success" variant="ghost">
-        Active Button
-      </Button>
-      <Button color="success" variant="ghost" isDisabled>
         Disabled Button
       </Button>
     </Inline>
