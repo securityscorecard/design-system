@@ -38,7 +38,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         style={{
           '--sscds-table-color-background': 'var(--sscds-background)',
           '--sscds-table-color-border': 'var(--sscds-border-color)',
-          '--sscds-table-color-accent': 'var(--sscds-color-primary-500)',
+          '--sscds-table-color-accent': 'var(--sscds-color-primary-9)',
           '--sscds-table-color-header-background':
             'var(--sscds-color-neutral-2)',
           '--sscds-table-color-settings-background':

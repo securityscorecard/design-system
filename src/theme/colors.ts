@@ -67,6 +67,20 @@ const primary = {
   700: indigo.indigo10,
   800: indigo.indigo11,
   900: indigo.indigo12,
+
+  /* new tokens */
+  1: indigo.indigo1,
+  2: indigo.indigo2,
+  3: indigo.indigo3,
+  4: indigo.indigo4,
+  5: indigo.indigo5,
+  6: indigo.indigo6,
+  7: indigo.indigo7,
+  8: indigo.indigo8,
+  9: indigo.indigo9,
+  10: indigo.indigo10,
+  11: indigo.indigo11,
+  12: indigo.indigo12,
 };
 
 const neutral = {

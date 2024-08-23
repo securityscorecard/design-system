@@ -157,16 +157,18 @@
   --sscds-color-neutral-alpha-11: var(--slate-a11);
   --sscds-color-neutral-alpha-12: var(--slate-a12);
 
-  --sscds-color-primary-050: var(--indigo-3);
-  --sscds-color-primary-100: var(--indigo-5);
-  --sscds-color-primary-200: var(--indigo-6);
-  --sscds-color-primary-300: var(--indigo-7);
-  --sscds-color-primary-400: var(--indigo-8);
-  --sscds-color-primary-500: var(--indigo-9);
-  --sscds-color-primary-600: var(--indigo-9);
-  --sscds-color-primary-700: var(--indigo-10);
-  --sscds-color-primary-800: var(--indigo-11);
-  --sscds-color-primary-900: var(--indigo-12);
+  --sscds-color-primary-1: var(--indigo-1);
+  --sscds-color-primary-2: var(--indigo-2);
+  --sscds-color-primary-3: var(--indigo-3);
+  --sscds-color-primary-4: var(--indigo-4);
+  --sscds-color-primary-5: var(--indigo-5);
+  --sscds-color-primary-6: var(--indigo-6);
+  --sscds-color-primary-7: var(--indigo-7);
+  --sscds-color-primary-8: var(--indigo-8);
+  --sscds-color-primary-9: var(--indigo-9);
+  --sscds-color-primary-10: var(--indigo-10);
+  --sscds-color-primary-11: var(--indigo-11);
+  --sscds-color-primary-12: var(--indigo-12);
 
   --sscds-color-info-050: var(--indigo-2);
   --sscds-color-info-100: var(--indigo-4);
@@ -330,9 +332,9 @@
   --sscds-color-border-pill-gray-default: var(--sscds-color-neutral-6);
   --sscds-color-border-pill-gray-hover: var(--sscds-color-neutral-7);
 
-  --sscds-color-link-default: var(--sscds-color-primary-800);
-  --sscds-color-link-hover: var(--sscds-color-primary-900);
-  --sscds-color-link-active: var(--sscds-color-primary-800);
+  --sscds-color-link-default: var(--sscds-color-text-action);
+  --sscds-color-link-hover: var(--sscds-color-primary-12);
+  --sscds-color-link-active: var(--sscds-color-link-default);
   --sscds-color-link-visited: var(--purple-11);
 
   --sscds-color-text-default: var(--sscds-color-neutral-12);
@@ -343,6 +345,7 @@
   --sscds-color-text-danger: var(--sscds-color-danger-700);
   --sscds-color-text-warning: var(--sscds-color-warning-700);
   --sscds-color-text-success: var(--sscds-color-success-700);
+  --sscds-color-text-action: var(--sscds-color-primary-11);
 
   --sscds-color-icon-default: var(--sscds-color-text-default);
   --sscds-color-icon-subtle: var(--sscds-color-text-subtle);
