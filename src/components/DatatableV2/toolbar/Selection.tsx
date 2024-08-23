@@ -17,7 +17,7 @@ export const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
 
 const SelectionRoot = styled(Surface)`
   position: sticky;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   right: 0;
   bottom: var(--sscds-space-4x);
