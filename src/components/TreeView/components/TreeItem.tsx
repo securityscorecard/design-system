@@ -57,7 +57,7 @@ const TreeItemRoot = styled.li`
     }
 
     &:hover {
-      background-color: var(--sscds-color-primary-050);
+      background-color: var(--sscds-color-primary-3);
     }
   }
 `;

@@ -45,8 +45,8 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
       elevation={2}
       radius="md"
       style={{
-        '--sscds-background': 'var(--sscds-color-primary-050)',
-        '--sscds-border-color': 'var(--sscds-color-primary-400)',
+        '--sscds-background': 'var(--sscds-color-primary-3)',
+        '--sscds-border-color': 'var(--sscds-color-primary-8)',
       }}
       hasBorder
     >

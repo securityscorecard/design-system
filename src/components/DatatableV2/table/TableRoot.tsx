@@ -53,7 +53,7 @@ const TableRoot = styled.div`
       background-color: var(--sscds-table-color-active);
     }
     &[data-active]:hover .ds-table-cell {
-      background-color: var(--sscds-color-primary-050);
+      background-color: var(--sscds-color-primary-3);
       cursor: pointer;
     }
   }
