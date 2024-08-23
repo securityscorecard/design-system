@@ -35,6 +35,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
+        method: 'alphabetical-by-kind',
         order: [
           'Getting Started',
           'Overview',
@@ -67,6 +68,9 @@ const preview: Preview = {
     },
     docs: {
       source: { type: 'dynamic' },
+      controls:{
+        sort: 'requiredFirst'
+      }
     },
     // storycap settings
     screenshot: {
