@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import IconButton from './IconButton';
+import IconButton, { type IconButtonPlain } from './IconButton';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { generateControl } from '../../utils/tests/storybook';
 
@@ -20,14 +20,146 @@ import { generateControl } from '../../utils/tests/storybook';
 const meta = {
   component: IconButton,
   argTypes: {
-    // @ts-expect-error there is union of enum and string
-    iconName: {
-      ...generateControl('select', SSCIconNames),
-    },
-    iconType: {
+    size: {
+      control: {
+        type: 'radio',
+      },
+      options: ['sm', 'md', 'lg'],
+      name: 'size',
+      description: 'Sizing variant',
       table: {
         type: {
-          summary: 'union',
+          summary: "'sm' | 'md' | 'lg'",
+        },
+        defaultValue: {
+          summary: "'md'",
+        },
+      },
+    },
+    variant: {
+      control: {
+        type: 'select',
+      },
+      options: [
+        'base',
+        'highlight',
+        'danger',
+        'subtle',
+        'ghost',
+        'highlight-ghost',
+        'danger-ghost',
+      ],
+      name: 'variant',
+      description: 'Visual variant of the button',
+      table: {
+        type: {
+          summary:
+            "'base' | 'highlight' | 'danger' | 'subtle' | 'ghost' | 'highlight-ghost' | 'danger-ghost'",
+        },
+        defaultValue: {
+          summary: "'base'",
+        },
+      },
+    },
+    iconName: {
+      name: 'iconName',
+      // @ts-expect-error Storybook is strangly typed here
+      type: {
+        required: true,
+      },
+      description: 'Name of the used icon',
+      table: {
+        type: {
+          summary: 'SSCIcons | (string & {})',
+        },
+      },
+      ...generateControl('select', SSCIconNames),
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+      name: 'label',
+      type: {
+        name: 'string',
+        required: true,
+      },
+      description: 'Human-readable label used for accessibility',
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+    },
+    iconType: {
+      control: {
+        type: 'object',
+      },
+      name: 'iconType',
+      description: 'Icon family from where the icon is used',
+      table: {
+        type: {
+          summary: "'ssc' | 'far'",
+        },
+        defaultValue: {
+          summary: "'ssc'",
+        },
+      },
+    },
+    iconRotation: {
+      control: {
+        type: 'radio',
+      },
+      options: [90, 180, 270],
+      name: 'iconRotation',
+      description: 'Icon rotation property',
+      table: {
+        type: {
+          summary: '90 | 180 | 270',
+        },
+      },
+    },
+    isDisabled: {
+      control: {
+        type: 'boolean',
+      },
+      name: 'isDisabled',
+      description: 'Disable the button to prevent clicking',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
+    isLoading: {
+      control: {
+        type: 'boolean',
+      },
+      name: 'isLoading',
+      description:
+        'Display loading spinner and disable button to prevent clicking',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
+    as: {
+      control: {
+        type: 'object',
+      },
+      name: 'as',
+      description:
+        'Used to type-safe property inference. By default `button` element is used, other common options will be `a` or `Link` from react-router',
+      table: {
+        type: {
+          summary: 'Element',
         },
       },
     },
@@ -35,7 +167,7 @@ const meta = {
   args: {
     onClick: action('button click'),
   },
-} satisfies Meta<typeof IconButton>;
+} satisfies Meta<typeof IconButtonPlain>;
 
 export default meta;
 

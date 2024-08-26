@@ -267,7 +267,7 @@
   --sscds-color-background-action-ghost-default: var(--sscds-color-clear);
   --sscds-color-background-action-ghost-hover: var(--sscds-color-neutral-alpha-3);
   --sscds-color-background-action-ghost-active: var(--sscds-color-background-action-ghost-default);
-  --sscds-color-background-action-ghost-disabled: var(--sscds-color-neutral-4);
+  --sscds-color-background-action-ghost-disabled: var(--sscds-color-clear);
 
   --sscds-color-background-action-highlight-ghost-default: var(--sscds-color-background-action-ghost-default);
   --sscds-color-background-action-highlight-ghost-hover: var(--sscds-color-background-action-ghost-hover);
