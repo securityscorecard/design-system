@@ -2,22 +2,26 @@ import type { CSSProperties, ElementType } from 'react';
 import { useMemo } from 'react';
 
 import type { IconButtonProps } from './types';
+import { forwardRefGenericComp } from '../../utils/forwardRefGenericComp';
 import { Spinner } from '../Spinner';
 import { getButtonSize, getCommonButtonStyles } from './utils';
 import { ButtonIcon, ButtonRoot } from './components';
 
-function IconButton<E extends ElementType = 'button'>({
-  label,
-  as,
-  elRef,
-  variant = 'base',
-  size = 'md',
-  iconName,
-  iconType = 'ssc',
-  isDisabled = false,
-  isLoading = false,
-  ...props
-}: IconButtonProps<E>) {
+export function IconButtonPlain<E extends ElementType = 'button'>(
+  {
+    label,
+    as,
+    variant = 'base',
+    size = 'md',
+    iconName,
+    iconType = 'ssc',
+    iconRotation,
+    isDisabled = false,
+    isLoading = false,
+    ...props
+  }: IconButtonProps<E>,
+  ref,
+) {
   const Tag = as || 'button';
   const isButtonDisabled = isDisabled || isLoading;
   const buttonStyles = useMemo<CSSProperties>(
@@ -31,7 +35,7 @@ function IconButton<E extends ElementType = 'button'>({
   return (
     <ButtonRoot
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={elRef as any}
+      ref={ref as any}
       as={Tag}
       type={Tag === 'button' ? 'button' : undefined}
       {...props}
@@ -52,11 +56,18 @@ function IconButton<E extends ElementType = 'button'>({
           dark
         />
       )}
-      {!isLoading && <ButtonIcon name={iconName} size={size} type={iconType} />}
+      {!isLoading && (
+        <ButtonIcon
+          name={iconName}
+          rotation={iconRotation}
+          size={size}
+          type={iconType}
+        />
+      )}
     </ButtonRoot>
   );
 }
 
-IconButton.displayName = 'IconButton';
+IconButtonPlain.displayName = 'IconButton';
 
-export default IconButton;
+export default forwardRefGenericComp(IconButtonPlain);

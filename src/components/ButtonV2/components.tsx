@@ -46,11 +46,20 @@ export const Label = styled.span`
   padding: 0rem var(--sscds-space-1x);
 `;
 
-export function ButtonIcon({ name, type, size }: BaseIcon & { size: Sizes }) {
+export function ButtonIcon({
+  name,
+  type,
+  size,
+  rotation,
+}: BaseIcon & { size: Sizes }) {
   return (
     <Icon
       name={name}
+      rotation={rotation}
       size={size === 'sm' ? 'sm' : 'md'}
+      style={{
+        transition: 'var(--sscds-action-transition)',
+      }}
       type={type ?? 'ssc'}
       hasFixedSize
     />

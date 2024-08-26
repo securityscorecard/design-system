@@ -3,26 +3,29 @@ import type { CSSProperties, ElementType } from 'react';
 import { useMemo } from 'react';
 
 import type { ButtonV2Props } from './types';
+import { forwardRefGenericComp } from '../../utils/forwardRefGenericComp';
 import { pxToRem } from '../../utils';
 import { Spinner } from '../Spinner';
 import { getButtonSize, getCommonButtonStyles } from './utils';
 import { ButtonIcon, ButtonRoot, Label } from './components';
 
-const ButtonV2 = <E extends ElementType = 'button'>({
-  children,
-  as,
-  elRef,
-  variant = 'base',
-  size = 'md',
-  iconStart,
-  iconEnd,
-  minWidth,
-  loadingText = 'Loading',
-  isDisabled = false,
-  isLoading = false,
-  isExpanded = false,
-  ...props
-}: ButtonV2Props<E>) => {
+export const ButtonV2Plain = <E extends ElementType = 'button'>(
+  {
+    children,
+    as,
+    variant = 'base',
+    size = 'md',
+    iconStart,
+    iconEnd,
+    minWidth,
+    loadingText = 'Loading',
+    isDisabled = false,
+    isLoading = false,
+    isExpanded = false,
+    ...props
+  }: ButtonV2Props<E>,
+  ref,
+) => {
   const Tag = as || 'button';
   const isButtonDisabled = isDisabled || isLoading;
   const buttonStyles = useMemo<CSSProperties>(
@@ -45,7 +48,7 @@ const ButtonV2 = <E extends ElementType = 'button'>({
   return (
     <ButtonRoot
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={elRef as any}
+      ref={ref as any}
       as={Tag}
       type={Tag === 'button' ? 'button' : undefined}
       {...props}
@@ -76,6 +79,6 @@ const ButtonV2 = <E extends ElementType = 'button'>({
   );
 };
 
-ButtonV2.displayName = 'ButtonV2';
+ButtonV2Plain.displayName = 'ButtonV2';
 
-export default ButtonV2;
+export default forwardRefGenericComp(ButtonV2Plain);

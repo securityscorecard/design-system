@@ -1,11 +1,14 @@
-import type { ComponentProps, ElementRef, ElementType, Ref } from 'react';
+import type { ComponentProps, ElementType } from 'react';
 
 import type { IconNames, RegularIconTypes } from '../Icon';
 
+type RotationProp = 90 | 180 | 270;
 export type BaseIcon = {
   name: IconNames;
   type?: RegularIconTypes;
+  rotation?: RotationProp;
 };
+
 export type Variants =
   | 'base'
   | 'highlight'
@@ -39,7 +42,6 @@ type ButtonOwnProps<Element extends ElementType> = {
   isExpanded?: boolean;
   /** Used to type-safe property inference. By default `button` element is used, other common options will be `a` or `Link` from react-router  */
   as?: Element;
-  elRef?: Ref<ElementRef<Element>>;
 };
 
 export type ButtonV2Props<Element extends ElementType> =
@@ -57,13 +59,14 @@ type IconButtonOwnProps<Element extends ElementType> = {
   iconName: IconNames;
   /** Icon family from where the icon is used */
   iconType?: RegularIconTypes;
+  /** Icon rotation property */
+  iconRotation?: RotationProp;
   /** Disable the button to prevent clicking */
   isDisabled?: boolean;
   /** Display loading spinner and disable button to prevent clicking */
   isLoading?: boolean;
   /** Used to type-safe property inference. By default `button` element is used, other common options will be `a` or `Link` from react-router  */
   as?: Element;
-  elRef?: Ref<ElementRef<Element>>;
 };
 
 export type IconButtonProps<Element extends ElementType> =
