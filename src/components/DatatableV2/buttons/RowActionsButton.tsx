@@ -1,9 +1,8 @@
-import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import RowActionsMenu from '../menus/RowActionsMenu';
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
+import IconButton from '../../ButtonV2/IconButton';
 
 const RowActionsButton = <D,>({
   row,
@@ -20,10 +19,12 @@ const RowActionsButton = <D,>({
     return (
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <BaseHandle
+          <IconButton
             className="ds-table-header-cell-row-actions-button"
-            iconProps={{ name: 'ellipsis-h' }}
+            iconName="ellipsis-h"
             label="Row actions"
+            size="sm"
+            variant="ghost"
           />
         </DropdownMenu.Trigger>
         <RowActionsMenu row={row} rowActions={rowActions} table={table} />
@@ -47,12 +48,14 @@ const RowActionsButton = <D,>({
         : isDisabled;
 
     return (
-      <BaseHandle
+      <IconButton
         className="ds-table-header-cell-row-actions-button"
-        iconProps={{ name: resolvedIconName, type: resolvedIconType }}
-        isDestructive={isDestructive}
+        iconName={resolvedIconName}
+        iconType={resolvedIconType}
         isDisabled={resolvedIsDisabled}
         label={resolvedLabel}
+        size="sm"
+        variant={isDestructive ? 'danger-ghost' : 'ghost'}
         onClick={(e) => {
           e.stopPropagation();
           onClick({ row, table })(e as unknown as MouseEvent);

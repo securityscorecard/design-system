@@ -1,7 +1,5 @@
-import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import {
   MenuContent,
   MenuItem,
@@ -9,6 +7,7 @@ import {
 } from '../../_internal/BaseDropdownMenu/menuElements';
 import { Inline } from '../../layout';
 import { RowAction, TreeViewRow } from '../TreeView.types';
+import IconButton from '../../ButtonV2/IconButton';
 
 function RowActions<D>({
   rowActions,
@@ -43,21 +42,21 @@ function RowActions<D>({
             typeof isDisabled === 'function' ? isDisabled({ row }) : isDisabled;
 
           return (
-            <BaseHandle
+            <IconButton
               key={`row-actions-${resolvedLabel}`}
-              iconProps={{
-                name: resolvedIconName,
-                type: resolvedIconType,
-              }}
-              isDestructive={isDestructive}
+              iconName={resolvedIconName}
+              iconType={resolvedIconType}
               isDisabled={resolvedIsDisabled}
+              label={resolvedLabel}
+              size="sm"
+              variant={isDestructive ? 'danger-ghost' : 'ghost'}
               onClick={(e) => {
                 e.stopPropagation();
                 onClick({ row })(e as unknown as MouseEvent);
               }}
             >
               {resolvedLabel}
-            </BaseHandle>
+            </IconButton>
           );
         })}
       </Inline>
@@ -67,7 +66,12 @@ function RowActions<D>({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <BaseHandle iconProps={{ name: 'ellipsis-v' }} label="Row Actions" />
+        <IconButton
+          iconName="ellipsis-v"
+          label="Row Actions"
+          size="sm"
+          variant="ghost"
+        />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <MenuContent align="end" collisionPadding={10} sideOffset={5}>
