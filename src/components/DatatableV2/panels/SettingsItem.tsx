@@ -1,10 +1,9 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import React from 'react';
 
 import { Inline, Padbox } from '../../layout';
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';
+import IconButton from '../../ButtonV2/IconButton';
 
 const SettingsItem = <D,>({
   column,
@@ -44,14 +43,15 @@ const SettingsItem = <D,>({
         stretch={enableColumnOrdering ? 2 : 'start'}
       >
         {enableColumnOrdering && (
-          <BaseHandle
+          <IconButton
             ref={setActivatorNodeRef}
-            iconProps={{ name: 'grip-dots-vertical' }}
+            iconName="grip-dots-vertical"
             label={`Reorder ${column.columnDef.header} column`}
-            type="button"
             {...attributes}
             {...listeners}
+            size="sm"
             style={{ cursor: 'grab' }}
+            variant="ghost"
           />
         )}
         <span>{column.columnDef.header}</span>

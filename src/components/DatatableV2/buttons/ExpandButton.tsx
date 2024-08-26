@@ -1,7 +1,5 @@
-import React from 'react';
-
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
+import IconButton from '../../ButtonV2/IconButton';
 
 const ExpandButton = <D,>({
   table,
@@ -19,13 +17,13 @@ const ExpandButton = <D,>({
   const isExpanded = getIsExpanded();
 
   return (
-    <BaseHandle
-      iconProps={{
-        name: 'angle-right',
-        rotation: isExpanded ? 90 : undefined,
-      }}
+    <IconButton
+      iconName="angle-right"
+      iconRotation={isExpanded ? 90 : undefined}
       isDisabled={!canExpand && !renderDetailPanel}
       label={isExpanded ? 'Collapse row' : 'Expand row'}
+      size="sm"
+      variant="ghost"
       onClick={(e) => {
         e.stopPropagation();
         toggleExpanded();
