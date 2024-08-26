@@ -1,58 +1,24 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cls from 'classnames';
 
-import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { Icon } from '../Icon';
 import { SpaceSizes } from '../../theme';
-import { getColor, getNegativeSpace, getRadii, getSpace } from '../../utils';
-import {
-  AlignmentWrapperProps,
-  CloseButtonProps,
-  CloseButtonWrapperProps,
-} from './CloseButton.types';
+import { getNegativeSpace } from '../../utils';
+import { AlignmentWrapperProps, CloseButtonProps } from './CloseButton.types';
 import { CLX_COMPONENT } from '../../theme/constants';
+import IconButton from '../ButtonV2/IconButton';
 
 const AlignmentWrapper = styled.div<AlignmentWrapperProps>`
   && {
     margin: ${({ $marginCompensation, theme }) =>
       getNegativeSpace($marginCompensation, { theme })};
     margin-left: 0;
+    padding: var(--sscds-space-2x);
   }
 `;
 
-const IconWrapper = styled.div`
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${getRadii('default')};
-`;
-
-const CloseButtonWrapper = styled.button<CloseButtonWrapperProps>`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  box-sizing: content-box;
-  font-size: 1rem;
-  padding: ${getSpace(SpaceSizes.sm)};
-  color: ${({ $isInverted, theme }) =>
-    getColor($isInverted ? 'neutral.0' : 'neutral.1000', { theme })};
-  outline-offset: ${getNegativeSpace(SpaceSizes.sm)};
-
-  &:hover ${/* sc-selector */ IconWrapper} {
-    background-color: var(--sscds-slateA-slateA3);
-  }
-
-  &:active ${/* sc-selector */ IconWrapper} {
-    outline: none;
-    background-color: var(--sscds-slateA-slateA4);
-  }
-`;
-
-const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
+const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
   (
     {
       onClose,
@@ -66,20 +32,19 @@ const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
   ) => (
     <AlignmentWrapper
       $marginCompensation={marginCompensation}
-      className={cls(CLX_COMPONENT, className)}
+      className={cls(CLX_COMPONENT, className, {
+        dark: isInverted,
+      })}
     >
-      <CloseButtonWrapper
+      <IconButton
         ref={ref}
-        $isInverted={isInverted}
-        aria-label={ariaLabel}
-        type="button"
+        iconName="times"
+        label={ariaLabel}
+        size="sm"
+        variant="ghost"
         onClick={onClose}
         {...props}
-      >
-        <IconWrapper>
-          <Icon name={SSCIconNames.times} />
-        </IconWrapper>
-      </CloseButtonWrapper>
+      />
     </AlignmentWrapper>
   ),
 );
