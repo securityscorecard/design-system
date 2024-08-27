@@ -19,20 +19,13 @@ import styled, { DefaultTheme } from 'styled-components';
 
 import { Checkbox } from '../Checkbox';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { Button } from '../../Button';
-import { ButtonVariants } from '../../Button/Button.enums';
+import Button from '../../ButtonV2/Button';
 import { Cluster, Inline } from '../../layout';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Icon } from '../../Icon';
 import { MenuActionArgs, Option as OptionType } from './Select.types';
 import { getPaddingSpace } from '../../../utils/space';
-import {
-  createPadding,
-  getColor,
-  getSpace,
-  getToken,
-  pxToRem,
-} from '../../../utils';
+import { getColor, getSpace, getToken, pxToRem } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
 import { Spinner } from '../../Spinner';
 import PillWrapper from '../../Pill/PillWrapper';
@@ -334,17 +327,8 @@ const ActionsMenu = styled.div`
 `;
 
 const SelectActionButton = styled(Button)`
-  ${({ theme }) =>
-    createPadding({
-      paddingSize: SpaceSizes.md,
-      paddingType: PaddingTypes.squish,
-      theme,
-    })};
   justify-content: flex-start;
-
-  &:hover {
-    background-color: ${getColor('primary.50')};
-  }
+  border-radius: 0;
 `;
 
 const getActionProps: (
@@ -379,7 +363,7 @@ export const Menu: ComponentType<MenuProps<OptionType, boolean>> = (props) => {
               {menuActions.map((action) => (
                 <SelectActionButton
                   key={action.name}
-                  variant={ButtonVariants.text}
+                  variant="highlight-ghost"
                   isExpanded
                   onClick={() => action.onClick(actionProps)}
                 >

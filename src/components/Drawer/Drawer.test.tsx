@@ -4,7 +4,7 @@ import React, { act } from 'react';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';
-import { Button } from '../Button';
+import Button from '../ButtonV2/Button';
 import { Icon } from '../Icon';
 import { Paragraph } from '../Paragraph';
 import { DropdownMenu } from '../DropdownMenu';

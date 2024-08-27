@@ -4,6 +4,11 @@ import type { BaseIcon, Sizes } from './types';
 import { Icon } from '../Icon';
 
 export const ButtonRoot = styled.button`
+  --sscds-button-padding-label: var(--sscds-space-1x);
+  --sscds-button-padding-compensation: calc(
+    -1 * (var(--sscds-button-padding-label) + var(--sscds-button-padding-inline))
+  );
+
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -15,10 +20,12 @@ export const ButtonRoot = styled.button`
   white-space: nowrap;
   transition: var(--sscds-action-transition),
     transform 50ms var(--sscds-transition-fn);
+  backdrop-filter: blur(2px);
 
   /* Size dependent */
   font-size: var(--sscds-button-font-size);
-  padding: var(--sscds-button-padding);
+  padding-block: var(--sscds-button-padding-block);
+  padding-inline: var(--sscds-button-padding-inline);
   height: var(--sscds-button-size, var(--sscds-button-height));
   width: var(--sscds-button-size, var(--sscds-button-width));
   min-width: var(--sscds-button-width-min);
@@ -43,7 +50,7 @@ export const ButtonRoot = styled.button`
   }
 `;
 export const Label = styled.span`
-  padding: 0rem var(--sscds-space-1x);
+  padding: 0rem var(--sscds-button-padding-label);
 `;
 
 export function ButtonIcon({

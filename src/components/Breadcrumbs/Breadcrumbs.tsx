@@ -13,24 +13,10 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { ActionKinds } from '../../types/action.types';
-import { getColor, pxToRem } from '../../utils';
 import { ColorTypes, SpaceSizes } from '../../theme';
 import { Inline } from '../layout';
 import { CLX_COMPONENT } from '../../theme/constants';
-import { BreadcrumbLink } from './BreadcrumbItem';
-
-const IconWrapper = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1rem;
-  height: 1rem;
-`;
-
-const DropdownBreadcrumbLink = styled(BreadcrumbLink)`
-  color: ${getColor('neutral.700')};
-  width: ${pxToRem(21)};
-`;
+import { IconLink } from './BreadcrumbItem';
 
 const BreadcrumbsWrapper = styled.nav`
   display: flex;
@@ -52,14 +38,14 @@ const insertSeparators = (items: React.ReactElement[]) => {
       return [
         ...prev,
         current,
-        // eslint-disable-next-line react/no-array-index-key
-        <IconWrapper key={`separator-${index}`} aria-hidden>
-          <Icon
-            color={ColorTypes.neutral600}
-            name={SSCIconNames.angleRight}
-            size="sm"
-          />
-        </IconWrapper>,
+        <Icon
+          // eslint-disable-next-line react/no-array-index-key
+          key={`separator-${index}`}
+          color={ColorTypes.neutral600}
+          name={SSCIconNames.angleRight}
+          size="sm"
+          hasFixedSize
+        />,
       ];
     }
 
@@ -75,12 +61,9 @@ const renderDropdown = (actions: ActionKinds<React.MouseEvent[]>[]) => (
       placement="bottom-start"
       aria-hidden
     >
-      <DropdownBreadcrumbLink
-        aria-label="Open breadcrumbs menu"
-        color="secondary"
-        iconName={SSCIconNames.ellipsisH}
-        variant="text"
-      />
+      <IconLink aria-label="Open breadcrumbs menu" color="secondary">
+        <Icon name="ellipsis-h" size="sm" />
+      </IconLink>
     </DropdownMenu>
   </li>
 );

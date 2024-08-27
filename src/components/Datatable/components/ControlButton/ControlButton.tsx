@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
-import { Button } from '../../../Button';
+import Button from '../../../ButtonV2/Button';
 import { Badge } from '../../../Badge';
 import { Pill } from '../../../Pill';
 import { Inline } from '../../../layout';
@@ -17,21 +17,21 @@ const ControlButton = ({
   onClick,
   hiddenColumns = 0,
 }: ControlButtonProps) => (
-  <Button
-    className={className}
-    iconStart={{ name: iconName, type: 'ssc' }}
-    type="button"
-    variant="text"
-    onClick={onClick}
-  >
-    <Inline align="center" gap="sm">
-      <span>{label}</span>
-      {appliedFilters > 0 && <Badge count={appliedFilters} variant="neutral" />}
-      {hiddenColumns > 0 && (
-        <Pill color="gray" label={`${hiddenColumns} hidden`} />
-      )}
-    </Inline>
-  </Button>
+  <Inline align="center" gap="xs">
+    <Button
+      className={className}
+      iconStart={{ name: iconName, type: 'ssc' }}
+      size="sm"
+      variant="ghost"
+      onClick={onClick}
+    >
+      {label}
+    </Button>
+    {appliedFilters > 0 && <Badge count={appliedFilters} variant="neutral" />}
+    {hiddenColumns > 0 && (
+      <Pill color="gray" label={`${hiddenColumns} hidden`} />
+    )}
+  </Inline>
 );
 
 ControlButton.propTypes = {
