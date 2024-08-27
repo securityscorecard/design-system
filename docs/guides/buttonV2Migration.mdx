@@ -17,6 +17,8 @@ import ex5after from './images/button-ex-05-after.png';
 
 The Button component in our design system has been updated to version 2.0, introducing a few breaking changes that you'll need to be aware of when migrating your existing implementations.
 
+Any of the following steps expect change of the imported component from `Button` to `ButtonV2`.
+
 ## Button element is no longer inferred from props
 
 In the previous version of the Button component, the underlying HTML element was inferred based on the provided props (e.g. using an `href` prop would render an `<a>` tag).
@@ -42,6 +44,22 @@ For buttons that contain only an icon without any label, we've introduced a new 
 - For buttons with only an icon, switch to using the new `IconButton` component.
 
 Please let me know if you have any other questions or need further assistance with the migration to Button v2.
+
+## Button variants naming has changed
+
+You were used to use variants like `solid` or `outline`. These names had larger coupling with the visual style than with actual button hierarchy. The `ButtonV2` changes this and implements new naming to better communicate how buttons should be used.
+
+### Migration steps:
+
+- Update any `variant` property on Button according to following rules:
+  - `variant=solid` -> `variant` property can be omitted (default value) or `variant=base`
+  - `variant=outline` -> `variant=subtle` variant
+  - `variant=text` -> `variant=ghost` variant
+- Remove any `color` property and update `variant` according to following rules:
+  - `variant=solid + color=danger` -> `variant=danger`
+  - `variant=outline + color=danger` -> `variant=danger-ghost`
+  - `variant=text + color=danger` -> `variant=danger-ghost`
+  - `variant=ghost + color=danger` -> `variant=danger-ghost`
 
 ## Common migration examples
 
