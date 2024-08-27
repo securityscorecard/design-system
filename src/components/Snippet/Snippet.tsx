@@ -1,26 +1,24 @@
-import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import dedent from 'dedent';
 
-import { Button } from '../Button';
 import { Padbox, Surface } from '../layout';
 import { Code } from '../Text';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { useLogger } from '../../hooks/useLogger';
 import { useClipboard } from '../../hooks/useClipboard';
-import { getColor, pxToRem } from '../../utils';
-import { Icon } from '../Icon';
+import { pxToRem } from '../../utils';
+import IconButton from '../ButtonV2/IconButton';
+import Button from '../ButtonV2/Button';
 
 const ButtonWrapper = styled.div<{ $position: 'top' | 'bottom' }>`
   position: absolute;
-  right: 0rem;
+  right: var(--sscds-space-1x);
   ${({ $position }) =>
     $position === 'top'
-      ? `top: 0rem;border-radius: 0 var(--sscds-radius);`
-      : `bottom: 0rem;border-radius: var(--sscds-radius) 0;`};
-  background-color: ${getColor('neutral.100')};
+      ? `top: var(--sscds-space-1x);`
+      : `bottom: var(--sscds-space-1x);`};
 `;
-const SnippetRoot = styled(Surface)``;
 const SnippetContent = styled(Padbox)`
   ${({ $shouldWrapText }) =>
     $shouldWrapText
@@ -75,9 +73,10 @@ const Snippet = forwardRef<
     const snippetText = shouldDedent ? dedent(children) : children;
 
     return (
-      <SnippetRoot
+      <Surface
         ref={ref}
         background="dynamic"
+        radius="md"
         style={{
           position: 'relative',
         }}
@@ -105,30 +104,30 @@ const Snippet = forwardRef<
         </SnippetContent>
         {hasValidChildren && canCopy && (
           <ButtonWrapper $position="top">
-            <Button
-              aria-label={
-                isCopied ? 'Copied to clipboard' : 'Copy to clipboard'
-              }
-              iconStart={{ name: isCopied ? 'check' : 'copy' }}
+            <IconButton
+              iconName={isCopied ? 'check' : 'copy'}
+              label={isCopied ? 'Copied to clipboard' : 'Copy to clipboard'}
               variant="ghost"
               onClick={() => copy(snippetText)}
-            >
-              {isCopied ? 'Copied' : undefined}
-            </Button>
+            />
           </ButtonWrapper>
         )}
         {isExpandable && (
           <ButtonWrapper $position="bottom">
             <Button
+              iconEnd={{
+                name: 'angle-down',
+                rotation: isExpanded ? 180 : undefined,
+              }}
+              size="sm"
               variant="ghost"
               onClick={() => setIsExpanded((prev) => !prev)}
             >
-              <span>{isExpanded ? 'Show less' : 'Show more'}</span>
-              <Icon name={isExpanded ? 'angle-up' : 'angle-down'} />
+              {isExpanded ? 'Show less' : 'Show more'}
             </Button>
           </ButtonWrapper>
         )}
-      </SnippetRoot>
+      </Surface>
     );
   },
 );

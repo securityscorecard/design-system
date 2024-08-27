@@ -12,6 +12,18 @@
   --sscds-space-24x: calc(var(--sscds-space-1x) * 24);
   --sscds-space-32x: calc(var(--sscds-space-1x) * 32);
 
+  --sscds-space-negative-half-x: calc(var(--sscds-space-negative-1x) / 2);
+  --sscds-space-negative-1x: -0.25rem;
+  --sscds-space-negative-2x: calc(var(--sscds-space-negative-1x) * 2);
+  --sscds-space-negative-3x: calc(var(--sscds-space-negative-1x) * 3);
+  --sscds-space-negative-4x: calc(var(--sscds-space-negative-1x) * 4);
+  --sscds-space-negative-6x: calc(var(--sscds-space-negative-1x) * 6);
+  --sscds-space-negative-8x: calc(var(--sscds-space-negative-1x) * 8);
+  --sscds-space-negative-12x: calc(var(--sscds-space-negative-1x) * 12);
+  --sscds-space-negative-16x: calc(var(--sscds-space-negative-1x) * 16);
+  --sscds-space-negative-24x: calc(var(--sscds-space-negative-1x) * 24);
+  --sscds-space-negative-32x: calc(var(--sscds-space-negative-1x) * 32);
+
   --sscds-space-dialog-content-padding: var(--sscds-space-6x);
 
   --sscds-space-grid-gutter: 1.875rem; /* LEGACY VALUE - should be replaced with 8x */

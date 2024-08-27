@@ -31,12 +31,18 @@ export const ButtonV2Plain = <E extends ElementType = 'button'>(
   const buttonStyles = useMemo<CSSProperties>(
     () => ({
       ...getCommonButtonStyles({ variant, size, disabled: isButtonDisabled }),
-      '--sscds-button-padding':
+      '--sscds-button-padding-block':
         size === 'lg'
-          ? 'var(--sscds-space-3x) var(--sscds-space-4x)'
+          ? 'var(--sscds-space-3x)'
           : size === 'sm'
-          ? 'var(--sscds-space-1x) var(--sscds-space-2x)'
-          : 'var(--sscds-space-2x) var(--sscds-space-3x)',
+          ? 'var(--sscds-space-1x)'
+          : 'var(--sscds-space-2x)',
+      '--sscds-button-padding-inline':
+        size === 'lg'
+          ? 'var(--sscds-space-4x)'
+          : size === 'sm'
+          ? 'var(--sscds-space-2x)'
+          : 'var(--sscds-space-3x)',
       '--sscds-button-width': isExpanded ? '100%' : 'auto',
       '--sscds-button-width-min':
         typeof minWidth !== 'undefined' ? pxToRem(minWidth) : 'auto',

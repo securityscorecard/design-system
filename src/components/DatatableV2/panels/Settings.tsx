@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../../Button';
+import Button from '../../ButtonV2/Button';
 import { CloseButton } from '../../CloseButton';
 import { Icon } from '../../Icon';
 import { Inline, Padbox, Stack } from '../../layout';
@@ -11,6 +11,7 @@ import { DatatableInstance } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
+import { getButtonSize } from '../../ButtonV2/utils';
 
 const SettingsRoot = styled.div`
   display: flex;
@@ -185,7 +186,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
           >
             <div>
               <Button
-                type="button"
+                size="sm"
                 variant="ghost"
                 onClick={() => {
                   setColumnPinning(initialState.columnPinning ?? {});
@@ -202,7 +203,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
                   <Text variant="secondary">Show</Text>
                   <div
                     className="ds-table-checkbox-wrapper"
-                    style={{ height: '2.25rem' }}
+                    style={{ height: getButtonSize('sm') }}
                   >
                     <IndeterminateCheckbox
                       aria-label={`${
@@ -226,7 +227,10 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
                   <Text variant="secondary">Pin</Text>
                   <div
                     className="ds-table-checkbox-wrapper"
-                    style={{ height: '2.25rem', marginLeft: '0.35rem' }}
+                    style={{
+                      height: getButtonSize('sm'),
+                      marginLeft: '0.35rem',
+                    }}
                   >
                     <IndeterminateCheckbox
                       aria-label={`${

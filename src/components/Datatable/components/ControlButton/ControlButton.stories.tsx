@@ -1,8 +1,7 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Inline, Padbox } from '../../../layout';
+import { Inline } from '../../../layout';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
 import ControlButton from './ControlButton';
 import { ControlButtonProps } from './ControlButton.types';
@@ -18,20 +17,11 @@ export default {
 } as Meta;
 
 export const Default: StoryFn<ControlButtonProps> = (args) => (
-  <>
-    <Padbox paddingSize="sm">
-      <Inline align="center" gap="mdPlus">
-        <ControlButton {...args} />
-        <ControlButton {...args} hiddenColumns={4} />
-      </Inline>
-    </Padbox>
-    <Padbox paddingSize="sm">
-      <Inline align="center" gap="mdPlus">
-        <ControlButton {...args} className="hover" />
-        <ControlButton {...args} appliedFilters={4} className="hover" />
-      </Inline>
-    </Padbox>
-  </>
+  <Inline align="center" gap="sm">
+    <ControlButton {...args} />
+    <ControlButton {...args} hiddenColumns={4} />
+    <ControlButton {...args} appliedFilters={4} />
+  </Inline>
 );
 
 Default.args = {
