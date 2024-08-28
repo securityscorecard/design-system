@@ -13,7 +13,13 @@ import { Stack } from '../layout';
  * ```js
  * import { ButtonV2 } from '@securityscorecard/design-system';
  * ```
- * See [Migration Guide](?path=/docs/guides-buttonv2-migration-guide--documentation)
+ * ## Using as links and with external routers
+ *
+ * In `ButtonV2`, you must now explicitly define the element to be rendered using the `as` prop. The default value for `as` is `button`, but you can now pass in `a` or a custom React component (like `Link` from react-router-dom) to render the appropriate element.
+ * This increases type-safety, as the component can correctly infer the available props based on the `as` value.
+ *
+ * ## Coming from original Button component?
+ * We prepared a comprehensive [migration guide](?path=/docs/guides-buttonv2-migration-guide--documentation) that should cover all main differences and help you with this transition.
  */
 const meta = {
   title: 'components/ButtonV2/ButtonV2',

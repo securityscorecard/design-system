@@ -23,7 +23,7 @@ Any of the following steps expect change of the imported component from `Button`
 
 In the previous version of the Button component, the underlying HTML element was inferred based on the provided props (e.g. using an `href` prop would render an `<a>` tag).
 In `ButtonV2`, you must now explicitly define the element to be rendered using the `as` prop. The default value for `as` is still `button`, but you can now pass in `a` or a custom React component (like `Link` from react-router-dom) to render the appropriate element.
-This change increases type-safety, as the component will now correctly infer the available props based on the as value. It also decouples the design system from specific UI frameworks, making it more flexible and reusable.
+This change increases type-safety, as the component will now correctly infer the available props based on the `as` value. It also decouples the design system from specific UI frameworks, making it more flexible and reusable.
 
 ### Migration steps:
 
