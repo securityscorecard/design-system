@@ -1,0 +1,2 @@
+import{P as e}from"./index-BRV0Se7Z.js";const n=e.oneOf(["inherit","-moz-initial","initial","revert","unset","center","end","flex-end","flex-start","self-end","self-start","start","baseline","normal","stretch"]),r=e.oneOf(["inherit","-moz-initial","initial","revert","unset","center","end","flex-end","flex-start","start","normal","stretch","space-around","space-between","space-evenly","left","right"]);export{n as A,r as J};
+//# sourceMappingURL=flex.types-BrkCVx66.js.map
