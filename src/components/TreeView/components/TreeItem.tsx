@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { Badge } from '../../Badge';
@@ -6,10 +5,10 @@ import { pxToRem } from '../../../utils';
 import { INDENTATION_WIDTH } from '../common/constants';
 import { Inline, Padbox } from '../../layout';
 import { Text } from '../../Text';
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import CollapsibleHandle from './CollapsibleHandle';
 import { TreeItemProps } from '../TreeView.types';
 import RowActions from './RowActions';
+import IconButton from '../../ButtonV2/IconButton';
 
 const TreeItemRoot = styled.li`
   list-style: none;
@@ -57,7 +56,7 @@ const TreeItemRoot = styled.li`
     }
 
     &:hover {
-      background-color: var(--sscds-color-primary-050);
+      background-color: var(--sscds-color-primary-3);
     }
   }
 `;
@@ -174,11 +173,14 @@ function TreeItem<D>({
           <Padbox paddingSize="sm">
             <Inline align="center">
               {isSortable && (
-                <BaseHandle
+                // @ts-expect-error 'aria-describedby' is used instead of 'label' prop. This comes from dnd-kit
+                <IconButton
                   {...handleAttributes}
                   {...handleListeners}
-                  iconProps={{ name: 'grip-dots-vertical' }}
+                  iconName="grip-dots-vertical"
+                  size="sm"
                   style={{ cursor: 'grab' }}
+                  variant="ghost"
                 />
               )}
               {isCollapsible && (

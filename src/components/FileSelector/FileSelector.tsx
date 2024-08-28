@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import { omit } from 'ramda';
@@ -9,8 +8,7 @@ import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, getFormStyle, getRadii, pxToRem } from '../../utils';
 import { Cluster, Padbox } from '../layout';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { Button } from '../Button';
-import { ButtonVariants } from '../Button/Button.enums';
+import Button from '../ButtonV2/Button';
 import { Text } from '../Text';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { FileSelectorProps } from './FileSelector.types';
@@ -18,11 +16,10 @@ import { FileSelectorSizes } from './FileSelector.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { useLogger } from '../../hooks/useLogger';
 
-const ExtendableButton = styled(Button)``;
 const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
   background-color: ${getColor('neutral.0')};
   border: 1px dashed ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
+  border-radius: ${getRadii('large')};
 
   ${({ $size, $width, $height }) => {
     if ($size === FileSelectorSizes.compact) return 'display: inline-flex;';
@@ -55,10 +52,6 @@ const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
     css`
       background: ${getFormStyle('disabledBgColor')};
       border-color: ${getFormStyle('disabledBorderColor')};
-
-      ${ExtendableButton} {
-        border-color: ${getColor('neutral.500')};
-      }
     `};
 `;
 
@@ -171,18 +164,17 @@ const FileSelector = ({
     return (
       <div className={cls(CLX_COMPONENT, className)}>
         <input aria-label="upload file" aria-hidden {...getInputProps()} />
-        <ExtendableButton
+        <Button
           {...getRootProps({
             ...passedProps,
             iconStart: { name: SSCIconNames.upload },
             isDisabled,
+            variant: 'subtle',
             isExpanded: size === FileSelectorSizes.fill,
-            variant: ButtonVariants.outline,
-            type: 'button',
           })}
         >
           {buttonLabel}
-        </ExtendableButton>
+        </Button>
       </div>
     );
   }
@@ -210,15 +202,14 @@ const FileSelector = ({
         justify={size === FileSelectorSizes.area ? 'center' : 'flex-start'}
       >
         <div>
-          <ExtendableButton
+          <Button
             iconStart={{ name: SSCIconNames.upload }}
             isDisabled={isDisabled}
             tabIndex={-1}
-            type="button"
-            variant={ButtonVariants.outline}
+            variant="subtle"
           >
             {buttonLabel}
-          </ExtendableButton>
+          </Button>
         </div>
         <DropTextWrapper
           paddingSize={SpaceSizes.sm}

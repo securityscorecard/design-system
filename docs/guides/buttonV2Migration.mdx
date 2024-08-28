@@ -1,0 +1,134 @@
+import { Meta } from '@storybook/blocks';
+
+import ex1before from './images/button-ex-01-before.png';
+import ex1after from './images/button-ex-01-after.png';
+import ex2before from './images/button-ex-02-before.png';
+import ex2after from './images/button-ex-02-after.png';
+import ex3before from './images/button-ex-03-before.png';
+import ex3after from './images/button-ex-03-after.png';
+import ex4before from './images/button-ex-04-before.png';
+import ex4after from './images/button-ex-04-after.png';
+import ex5before from './images/button-ex-05-before.png';
+import ex5after from './images/button-ex-05-after.png';
+
+<Meta title="Guides/ButtonV2 migration guide" />
+
+# ButtonV2 migration guide
+
+The Button component in our design system has been updated to version 2.0, introducing a few breaking changes that you'll need to be aware of when migrating your existing implementations.
+
+Any of the following steps expect change of the imported component from `Button` to `ButtonV2`.
+
+## Button element is no longer inferred from props
+
+In the previous version of the Button component, the underlying HTML element was inferred based on the provided props (e.g. using an `href` prop would render an `<a>` tag).
+In `ButtonV2`, you must now explicitly define the element to be rendered using the `as` prop. The default value for `as` is still `button`, but you can now pass in `a` or a custom React component (like `Link` from react-router-dom) to render the appropriate element.
+This change increases type-safety, as the component will now correctly infer the available props based on the as value. It also decouples the design system from specific UI frameworks, making it more flexible and reusable.
+
+### Migration steps:
+
+- Ensure you are passing an explicit `as` prop to the Button component, specifying the desired underlying element.
+- Update any existing Button usages to include the `as` prop.
+
+## Button label must now be a string
+
+Previously, the `children` prop of the `Button` component could accept any React node, allowing for custom content to be rendered inside the button.
+In `ButtonV2`, the `children` prop is now restricted to only accepting string values. This change helps ensure a consistent visual appearance and avoid potential rendering artifacts caused by custom React nodes.
+If you previously passed non-string content (such as icons) inside the button's children, you should migrate to using the dedicated `iconStart` or `iconEnd` props instead. This props allows you to add an icon before or after the button's label, maintaining the expected visual design.
+For buttons that contain only an icon without any label, we've introduced a new `IconButton` component that you should use.
+
+### Migration steps:
+
+- Update any `Button` usages to pass a string value for the `children` prop.
+- If you need to display an icon, use `iconStart` or `iconEnd` props instead of including it in the children.
+- For buttons with only an icon, switch to using the new `IconButton` component.
+
+Please let me know if you have any other questions or need further assistance with the migration to Button v2.
+
+## Button variants naming has changed
+
+You were used to use variants like `solid` or `outline`. These names had larger coupling with the visual style than with actual button hierarchy. The `ButtonV2` changes this and implements new naming to better communicate how buttons should be used.
+
+### Migration steps:
+
+- Update any `variant` property on Button according to following rules:
+  - `variant=solid` -> `variant` property can be omitted (default value) or `variant=base`
+  - `variant=outline` -> `variant=subtle` variant
+  - `variant=text` -> `variant=ghost` variant
+- Remove any `color` property and update `variant` according to following rules:
+  - `variant=solid + color=danger` -> `variant=danger`
+  - `variant=outline + color=danger` -> `variant=danger-ghost`
+  - `variant=text + color=danger` -> `variant=danger-ghost`
+  - `variant=ghost + color=danger` -> `variant=danger-ghost`
+
+## Common migration examples
+
+### External link without explicit `as` property
+
+<img
+  alt="Wrong: the button does not have explicitly set `as` property but use the `href` property"
+  src={ex4before}
+  width={470}
+/>
+
+<img
+  alt="Correct: the `as` property is set to `a`"
+  src={ex4after}
+  width={470}
+/>
+
+### React Router link without explicit `as` property
+
+<img
+  alt="Wrong: the button does not have explicitly set `as` property but use the `to` property"
+  src={ex5before}
+  width={470}
+/>
+
+<img
+  alt="Correct: the `Link` component is imported and the `as` property is set to `Link` on the button"
+  src={ex5after}
+  width={470}
+/>
+
+### Button with nested icon
+
+<img
+  alt="Wrong: example of nested Icon componente inside Button"
+  src={ex1before}
+  width={470}
+/>
+
+<img
+  alt="Correct: the new IconButton component is used instead"
+  src={ex1after}
+  width={470}
+/>
+
+### Button with nested React component
+
+<img
+  alt="Wrong: a React component is used in button label instead of plain string"
+  src={ex2before}
+  width={470}
+/>
+
+<img
+  alt="Correct: the button label contains only string and React component is extracted next to it"
+  src={ex2after}
+  width={470}
+/>
+
+### Button with icon after label
+
+<img
+  alt="Wrong: an Icon component is used next to the button label"
+  src={ex3before}
+  width={470}
+/>
+
+<img
+  alt="Correct: the `iconEnd` property is correctly used and the button label contains only string"
+  src={ex3after}
+  width={470}
+/>

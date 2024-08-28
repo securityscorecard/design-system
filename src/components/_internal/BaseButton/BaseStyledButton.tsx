@@ -3,7 +3,6 @@ import { includes, pipe } from 'ramda';
 
 import {
   createMarginSpacing,
-  getRadii,
   getSpace,
   getToken,
   pxToRem,
@@ -18,60 +17,93 @@ import { Padbox } from '../../layout';
 
 const ButtonSolid = css<BaseStyledButtonProps>`
   text-decoration: none;
-  background-color: ${(p) => getToken(`color-action-${p.$color}`, p)};
-  color: ${getToken(`color-action-text-solid`)};
+  background-color: var(--sscds-color-background-action-base-default);
+  color: var(--sscds-color-text-inverse);
 
   &:hover,
   &.hover {
-    color: ${getToken(`color-action-text-solid`)};
-    background-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    color: var(--sscds-color-text-inverse);
+    background-color: var(--sscds-color-background-action-base-hover);
   }
+
+  ${({ $color }) =>
+    $color === 'danger' &&
+    css`
+      background-color: var(--sscds-color-background-action-danger-default);
+
+      &:hover,
+      &.hover {
+        background-color: var(--sscds-color-background-action-danger-hover);
+      }
+    `};
 
   &:disabled,
   &.disabled {
-    background-color: ${getToken(`color-action-background-disabled`)};
-    color: ${getToken(`color-action-text-disabled`)};
+    background-color: var(--sscds-color-background-action-base-disabled);
+    color: var(--sscds-color-text-disabled);
   }
 `;
 
 const ButtonOutline = css<BaseStyledButtonProps>`
-  background-color: transparent;
-  border: 2px solid ${(p) => getToken(`color-action-${p.$color}`, p)};
-  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
+  background-color: var(--sscds-color-background-action-subtle-default);
+  border: 1px solid var(--sscds-color-border-action-subtle);
+  color: var(--sscds-color-text-default);
 
   &:hover,
   &.hover {
-    background-color: ${(p) =>
-      getToken(`color-action-background-${p.$color}-active`, p)};
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    border-color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
+    background-color: var(--sscds-color-background-action-subtle-hover);
+    color: var(--sscds-color-text-default);
+    border-color: var(--sscds-color-border-action-subtle);
   }
 
   &:disabled,
   &.disabled {
-    color: ${getToken(`color-action-text-disabled`)};
-    border-color: ${getToken(`color-action-text-disabled`)};
+    color: var(--sscds-color-text-disabled);
+    border-color: var(--sscds-color-text-action-disabled);
+    background-color: var(--sscds-color-background-action-subtle-default);
   }
 `;
 
 const ButtonText = css<BaseStyledButtonProps>`
-  background-color: transparent;
+  background-color: var(--sscds-color-background-action-ghost-default);
   border-color: transparent;
   padding-left: 0;
   padding-right: 0;
-  font-weight: var(--sscds-font-weight-elementlabel-default);
-  color: ${(p) => getToken(`color-action-${p.$color}`, p)};
+  color: var(--sscds-color-text-action);
 
   &:hover,
   &.hover {
-    color: ${(p) => getToken(`color-action-${p.$color}-hover`, p)};
-    background: ${(p) =>
-      getToken(`color-action-background-${p.$color}-focus`, p)};
+    color: var(--sscds-color-text-action);
+    background: var(--sscds-color-background-action-ghost-hover);
   }
+
+  ${({ $color }) =>
+    $color === 'secondary'
+      ? css`
+          color: var(--sscds-color-text-default);
+
+          &:hover,
+          &.hover {
+            color: var(--sscds-color-text-default);
+          }
+        `
+      : $color === 'danger' &&
+        css`
+          color: var(--sscds-color-text-danger);
+
+          &:hover,
+          &.hover {
+            color: var(--sscds-color-text-danger);
+            background-color: var(
+              --sscds-color-background-action-danger-ghost-hover
+            );
+          }
+        `};
 
   &:disabled,
   &.disabled {
-    color: ${getToken(`color-action-text-disabled`)};
+    color: var(--sscds-color-text-disabled);
+    background-color: var(--sscds-color-background-action-ghost-default);
   }
 `;
 
@@ -96,9 +128,9 @@ const BaseStyledButton = styled(Padbox).withConfig({
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-radii-button);
   font-family: var(--sscds-font-family-body);
-  font-weight: var(--sscds-font-weight-body-default);
+  font-weight: var(--sscds-font-weight-elementlabel-default);
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
@@ -112,7 +144,7 @@ const BaseStyledButton = styled(Padbox).withConfig({
 
   height: ${pipe(getToken('size-action-size'), pxToRem)};
   line-height: 1;
-  font-size: ${getToken('font-action-size')};
+  font-size: var(--sscds-font-size-elementlabel-sm);
   ${({ $hasOnlyIcon }) =>
     $hasOnlyIcon &&
     css`
@@ -138,6 +170,10 @@ const BaseStyledButton = styled(Padbox).withConfig({
     &&&.active {
       transform: scale(1);
     }
+  }
+  &:disabled,
+  &.disabled {
+    opacity: 0.75;
   }
 `;
 

@@ -2,7 +2,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import ColumnActionsMenu from '../menus/ColumnActionsMenu';
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
+import IconButton from '../../ButtonV2/IconButton';
 
 const HeaderCellColumnActionsButton = <D,>({
   header,
@@ -18,17 +18,18 @@ const HeaderCellColumnActionsButton = <D,>({
     <div className="ds-table-header-cell-column-actions-button-wrapper">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
-          <BaseHandle
+          <IconButton
             className="ds-table-header-cell-column-actions-button"
-            iconProps={{
-              name:
-                direction === 'desc'
-                  ? 'sort-down'
-                  : direction === 'asc'
-                  ? 'sort-up'
-                  : 'ellipsis-v',
-            }}
+            iconName={
+              direction === 'desc'
+                ? 'sort-down'
+                : direction === 'asc'
+                ? 'sort-up'
+                : 'ellipsis-v'
+            }
             label="Column actions"
+            size="sm"
+            variant="ghost"
           />
         </DropdownMenu.Trigger>
 

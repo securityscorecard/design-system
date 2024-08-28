@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
+import IconButton from '../../ButtonV2/IconButton';
 
 export const IndentationPlaceholder = styled.div`
   width: 1.5rem;
@@ -20,16 +19,15 @@ function CollapsibleHandle({
   }
 
   return (
-    <BaseHandle
+    <IconButton
       aria-expanded={!collapsed}
-      iconProps={{
-        name: 'angle-right',
-        rotation: collapsed ? undefined : 90,
-      }}
+      iconName="angle-right"
+      iconRotation={collapsed ? undefined : 90}
       label={`To ${
         collapsed ? 'expand' : 'collapse'
       } nested rows, press the space bar.`}
-      type="button"
+      size="sm"
+      variant="ghost"
       onClick={(e) => {
         e.stopPropagation();
         onCollapse();

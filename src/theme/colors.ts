@@ -67,6 +67,20 @@ const primary = {
   700: indigo.indigo10,
   800: indigo.indigo11,
   900: indigo.indigo12,
+
+  /* new tokens */
+  1: indigo.indigo1,
+  2: indigo.indigo2,
+  3: indigo.indigo3,
+  4: indigo.indigo4,
+  5: indigo.indigo5,
+  6: indigo.indigo6,
+  7: indigo.indigo7,
+  8: indigo.indigo8,
+  9: indigo.indigo9,
+  10: indigo.indigo10,
+  11: indigo.indigo11,
+  12: indigo.indigo12,
 };
 
 const neutral = {
@@ -249,6 +263,7 @@ export const colors = {
     danger: danger[700],
     warning: warning[700],
     success: success[700],
+    action: indigo.indigo11,
   },
 
   /* new tokens */
@@ -272,17 +287,17 @@ export const colors = {
       error: neutral[0],
     },
     action: {
-      main: {
+      base: {
         default: indigo.indigo12,
         hover: indigo.indigo11,
         active: indigo.indigo12,
         disabled: neutral[4],
       },
       subtle: {
-        default: 'transparent',
+        default: whiteA.whiteA3,
         hover: neutralAlpha[3],
-        active: 'transparent',
-        disabled: neutral[4],
+        active: whiteA.whiteA3,
+        disabled: whiteA.whiteA3,
       },
       danger: {
         default: tomato.tomato10,
@@ -366,7 +381,7 @@ export const colors = {
     },
     action: {
       focused: indigo.indigo9,
-      danger: neutral[8],
+      danger: danger[500],
       subtle: neutral[7],
     },
   },

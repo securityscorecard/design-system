@@ -48,7 +48,7 @@ import { TableProps } from './Table.types';
 import { SELECTION_COLUMN_ID } from '../../_internal/BaseTable/renderers/renderers.enums';
 import { TextSizes } from '../../Text/Text.enums';
 import { SpaceSizes } from '../../../theme';
-import { Button, ButtonEnums } from '../../Button';
+import Button from '../../ButtonV2/Button';
 import { H4 } from '../../Heading';
 import { Paragraph } from '../../Paragraph';
 
@@ -364,7 +364,10 @@ function Table<D extends Record<string, unknown>>({
                 </Paragraph>
               </Stack>
               <Button
-                variant={ButtonEnums.ButtonVariants.text}
+                style={{
+                  marginInlineStart: 'var(--sscds-button-padding-compensation)',
+                }}
+                variant="highlight-ghost"
                 onClick={resetHiddenColumns}
               >
                 Show Default Columns

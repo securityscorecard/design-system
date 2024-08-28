@@ -24,10 +24,3 @@ export interface CloseButtonProps {
   isInverted?: boolean;
   className?: string;
 }
-
-export interface CloseButtonWrapperProps {
-  /**
-   * option for semantic color backgrounds
-   */
-  $isInverted?: boolean;
-}

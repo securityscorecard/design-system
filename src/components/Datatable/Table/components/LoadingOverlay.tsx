@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { getColor, getRadii } from '../../../../utils';
 import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
-import { Button } from '../../../Button';
+import Button from '../../../ButtonV2/Button';
 import { Inline, Padbox } from '../../../layout';
 
 const overlayStyles = css`
@@ -63,7 +63,7 @@ const LoadingOverlay = ({ isCancelable, onCancel }: LoadingOverlayProps) => (
               dark
             />
             <LoadingText>Loading</LoadingText>
-            <Button variant="outline" onClick={onCancel}>
+            <Button variant="subtle" onClick={onCancel}>
               Cancel
             </Button>
           </Inline>

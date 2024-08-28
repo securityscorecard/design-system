@@ -1,23 +1,24 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { BreadcrumbItemProps } from './Breadcrumbs.types';
-import { Text, TextEnums } from '../Text';
-import { TextSizes } from '../Text/Text.enums';
-import { Button } from '../Button';
+import { Text } from '../Text';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import type { SSCIcons } from '../Icon/Icon.types';
-
-export const BreadcrumbLink = styled(Button)`
-  font-weight: var(--sscds-font-weight-body-default);
-  padding-inline: 0;
-  width: auto;
-`;
+import { Link } from '../Link';
+import { Icon } from '../Icon';
 
 const ListItem = styled.li`
   list-style-type: none;
+  display: flex;
+  align-items: center;
+`;
+
+export const IconLink = styled(Link)`
+  &:hover {
+    color: var(--sscds-color-icon-subtle);
+  }
 `;
 
 const BreadcrumbItem = ({
@@ -30,31 +31,27 @@ const BreadcrumbItem = ({
   ...props
 }: BreadcrumbItemProps) => {
   const hasIcon = isNotUndefined(iconName);
-  const label = hasIcon ? { 'aria-label': children } : { children };
+
   return (
     <ListItem>
       {isSelected ? (
-        <Text
-          aria-current="page"
-          size={TextSizes.md}
-          variant={TextEnums.TextVariants.secondary}
-        >
+        <Text aria-current="page" variant="subtle">
           {children}
         </Text>
-      ) : (
-        <BreadcrumbLink
+      ) : hasIcon ? (
+        <IconLink
           color="secondary"
           href={href}
-          iconStart={
-            typeof iconName !== 'undefined'
-              ? { name: iconName, type: iconType }
-              : undefined
-          }
           to={to}
-          variant="ghost"
           {...props}
-          {...label}
-        />
+          aria-label={children}
+        >
+          <Icon name={iconName} size="sm" type={iconType} />
+        </IconLink>
+      ) : (
+        <Link color="secondary" href={href} to={to} {...props}>
+          {children}
+        </Link>
       )}
     </ListItem>
   );

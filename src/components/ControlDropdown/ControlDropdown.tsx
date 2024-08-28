@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNotUndefined } from 'ramda-adjunct';
+import styled from 'styled-components';
 
 import { SpaceSizes } from '../../theme';
 import { Inline, Padbox, Stack } from '../layout';
-import { Button } from '../Button';
-import { ButtonVariants } from '../Button/Button.enums';
+import Button from '../ButtonV2/Button';
 import { CloseButton } from '../CloseButton';
 import { H4 } from '../Heading';
 import { ControlDropdownProps } from './ControlDropdown.types';
@@ -13,6 +13,9 @@ import { ControlDropdownPlacements } from './ControlDropdown.enums';
 import ControlledDropdown from '../Dropdown/ControlledDropdown';
 import { CLX_COMPONENT } from '../../theme/constants';
 
+const Bleed = styled.div`
+  margin-inline: var(--sscds-space-negative-4x);
+`;
 const ControlDropdown = ({
   children,
   title,
@@ -61,29 +64,39 @@ const ControlDropdown = ({
             />
           </Inline>
           {children}
-          <Inline
-            align="center"
-            as="footer"
-            gap={SpaceSizes.md}
-            justify="flex-end"
-            stretch="start"
-          >
-            {isNotUndefined(onReset) && (
-              <div>
-                <Button variant={ButtonVariants.text} onClick={onReset}>
-                  {resetLabel}
-                </Button>
-              </div>
-            )}
-            <Inline gap={SpaceSizes.sm} justify="flex-end">
-              <Button variant={ButtonVariants.outline} onClick={onClose}>
-                {closeLabel}
-              </Button>
-              <Button variant={ButtonVariants.solid} onClick={onSubmit}>
-                {submitLabel}
-              </Button>
-            </Inline>
-          </Inline>
+          <Bleed>
+            <Padbox
+              paddingSize="md"
+              style={{
+                borderTop: '1px solid var(--sscds-color-border-default)',
+                paddingBlockEnd: 0,
+              }}
+            >
+              <Inline
+                align="center"
+                as="footer"
+                gap="md"
+                justify="flex-end"
+                stretch="start"
+              >
+                {isNotUndefined(onReset) && (
+                  <div>
+                    <Button size="sm" variant="ghost" onClick={onReset}>
+                      {resetLabel}
+                    </Button>
+                  </div>
+                )}
+                <Inline gap={SpaceSizes.sm} justify="flex-end">
+                  <Button size="sm" variant="subtle" onClick={onClose}>
+                    {closeLabel}
+                  </Button>
+                  <Button size="sm" onClick={onSubmit}>
+                    {submitLabel}
+                  </Button>
+                </Inline>
+              </Inline>
+            </Padbox>
+          </Bleed>
         </Stack>
       </Padbox>
     </ControlledDropdown>

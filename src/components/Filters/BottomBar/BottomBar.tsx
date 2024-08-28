@@ -1,17 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import { Inline } from '../../layout';
 import { Paragraph } from '../../Paragraph';
-import { Button } from '../../Button';
 import { BottomBarProps } from './BottomBar.types';
-import { getSpace } from '../../../utils';
-import { SpaceSizes } from '../../../theme';
-
-const AddFilterButton = styled(Button)`
-  padding-left: ${getSpace(SpaceSizes.sm)};
-`;
+import Button from '../../ButtonV2/Button';
 
 const BottomBar = ({
   onSubmit,
@@ -28,41 +20,41 @@ const BottomBar = ({
 }: BottomBarProps) => {
   const canCancel = isCancelEnabled && isLoading;
   return (
-    <Inline gap={SpaceSizes.lg} justify="space-between">
-      <Inline gap={SpaceSizes.lg}>
-        <AddFilterButton
+    <Inline gap="lg" justify="space-between">
+      <Inline gap="sm">
+        <Button
           color="primary"
           iconStart={{ name: 'plus' }}
-          variant="text"
+          size="sm"
+          variant="ghost"
           onClick={onAdd}
         >
           Add criteria
-        </AddFilterButton>
-        <Button color="primary" variant="text" onClick={onClearAll}>
+        </Button>
+        <Button size="sm" variant="ghost" onClick={onClearAll}>
           Clear all criteria
         </Button>
       </Inline>
-      <Inline align="center" gap={SpaceSizes.md}>
+      <Inline align="center" gap="sm">
         {hasUnappliedFilters && hasApplyButton && (
           <Paragraph as="div" margin="none" size="md" variant="secondary">
             You have unapplied filters
           </Paragraph>
         )}
         {canCancel && hasApplyButton ? (
-          <Button color="primary" variant="outline" onClick={onCancel}>
+          <Button size="sm" variant="subtle" onClick={onCancel}>
             Cancel
           </Button>
         ) : hasCloseButton ? (
-          <Button color="primary" variant="outline" onClick={onClose}>
+          <Button size="sm" variant="subtle" onClick={onClose}>
             Close
           </Button>
         ) : null}
         {hasApplyButton && (
           <Button
-            color="primary"
             isDisabled={isApplyDisabled}
             isLoading={canCancel}
-            variant="solid"
+            size="sm"
             onClick={onSubmit}
           >
             Apply

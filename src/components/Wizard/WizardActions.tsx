@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Button } from '../Button';
+import Button from '../ButtonV2/Button';
 import { Inline } from '../layout';
 import { useActiveStep } from './hooks/useActiveStep';
 import { useWizardNavigation } from './hooks/useWizardNavigation';
@@ -14,11 +12,11 @@ export const WizardActions = () => {
   const { primaryAction, secondaryAction } = activeStep;
 
   return (
-    <Inline gap="md" justify="flex-end">
+    <Inline gap="sm" justify="flex-end">
       {secondaryAction ? (
         <Button
           isDisabled={secondaryAction.isDisabled}
-          variant="text"
+          variant="ghost"
           onClick={() => secondaryAction.onClick(navigation)}
         >
           {secondaryAction.label}

@@ -20,7 +20,6 @@ import {
 import { Filter } from '../../Filters/Filters.types';
 import { ControlTypes } from './ControlsModule.enums';
 import { SpaceSizes } from '../../../theme';
-import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Inline, Padbox } from '../../layout';
 
 const FiltersContainer = styled(Padbox)`
@@ -58,14 +57,6 @@ function ControlsModule<D extends Record<string, unknown>>({
   defaultIsColumnsControlsOpen,
   defaultIsColumnsControlsApplied,
   isDataLoading,
-  // hasGrouping,
-  // defaultIsGroupingOpen,
-  // defaultIsGroupingApplied,
-  // defaultGroups,
-  // hasViews,
-  // defaultIsViewsOpen,
-  // defaultIsViewsApplied,
-  // defaultViews,
   onCancelLoading,
   onControlToggle,
 }: ControlsModuleProps<D>): React.ReactElement {
@@ -97,15 +88,6 @@ function ControlsModule<D extends Record<string, unknown>>({
         defaultIsColumnsControlsApplied,
       ]),
     ),
-    // [ControlTypes.groups]: mergeControlState(
-    //   prepareControlState([defaultIsGroupingOpen, defaultIsGroupingApplied]),
-    // ),
-    // [ControlTypes.views]: mergeControlState(
-    //   prepareControlState([
-    //     defaultIsViewsOpen,
-    //     defaultIsViewsApplied,
-    //   ]),
-    // ),
   });
   const [appliedFilters, setAppliedFilters] = useState(0);
 
@@ -119,8 +101,6 @@ function ControlsModule<D extends Record<string, unknown>>({
   }, []);
 
   const isToolbarEnabled = hasFiltering || hasColumnsControls;
-  // hasGrouping ||
-  // hasViews;
 
   const shouldShowFiltering = hasFiltering && isNonEmptyArray(filteringFields);
 
@@ -215,10 +195,10 @@ function ControlsModule<D extends Record<string, unknown>>({
 
   return (
     <div>
-      <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
-        <Inline gap={SpaceSizes.lg} stretch="end">
+      <Padbox paddingSize={SpaceSizes.sm}>
+        <Inline align="center" gap={SpaceSizes.lg} stretch="end">
           {isToolbarEnabled && (
-            <Inline gap="mdPlus">
+            <Inline gap="sm">
               {hasColumnsControls && (
                 <ColumnsControls
                   isOpen={controlsState[ControlTypes.columns].isActive}
@@ -273,24 +253,6 @@ function ControlsModule<D extends Record<string, unknown>>({
                   }
                 />
               )}
-              {/* {hasGrouping && (
-              <ControlButton
-                iconName={SSCIconNames.sitemap}
-                isActive={controlsState[ControlTypes.groups].isActive}
-                isApplied={controlsState[ControlTypes.groups].isApplied}
-                label="Groups"
-                onClick={() => handleControlOnClick(ControlTypes.groups, controlsState[ControlTypes.groups].isActive)}
-              />
-            )}
-            {hasCustomViews && (
-              <ControlButton
-                iconName={SSCIconNames.cog}
-                isActive={controlsState[ControlTypes.views].isActive}
-                isApplied={controlsState[ControlTypes.views].isApplied}
-                label="Views"
-                onClick={() => handleControlOnClick(ControlTypes.views, controlsState[ControlTypes.views].isActive)}
-              />
-            )} */}
             </Inline>
           )}
 

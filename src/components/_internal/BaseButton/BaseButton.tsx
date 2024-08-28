@@ -20,11 +20,7 @@ import { Icon } from '../../Icon';
 import { SSCIcons, Types } from '../../Icon/Icon.types';
 import { Inline } from '../../layout';
 import BaseStyledButton from './BaseStyledButton';
-import {
-  BaseButtonColors,
-  BaseButtonSizes,
-  BaseButtonVariants,
-} from './BaseButton.enums';
+import { BaseButtonColors, BaseButtonVariants } from './BaseButton.enums';
 import { BaseButtonProps } from './BaseButton.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
@@ -133,7 +129,6 @@ const BaseButton = ({
 
 BaseButton.propTypes = {
   variant: PropTypes.oneOf(Object.values(BaseButtonVariants)),
-  size: PropTypes.oneOf(Object.values(BaseButtonSizes)),
   color: PropTypes.oneOf(Object.values(BaseButtonColors)),
   isDisabled: PropTypes.bool,
   isLoading: PropTypes.bool,

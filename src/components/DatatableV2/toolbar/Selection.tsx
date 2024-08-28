@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { abbreviateNumber } from '../../../utils';
 import { DatatableInstance } from '../Datatable.types';
 import { Inline, Padbox, Surface } from '../../layout';
-import { Button } from '../../Button';
+import Button from '../../ButtonV2/Button';
 import { Strong } from '../../Text';
 
 export const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
@@ -17,7 +17,7 @@ export const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
 
 const SelectionRoot = styled(Surface)`
   position: sticky;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   right: 0;
   bottom: var(--sscds-space-4x);
@@ -45,8 +45,8 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
       elevation={2}
       radius="md"
       style={{
-        '--sscds-background': 'var(--sscds-color-primary-050)',
-        '--sscds-border-color': 'var(--sscds-color-primary-400)',
+        '--sscds-background': 'var(--sscds-color-primary-3)',
+        '--sscds-border-color': 'var(--sscds-color-primary-8)',
       }}
       hasBorder
     >
@@ -55,7 +55,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
           <Inline
             align="center"
             className="ds-table-selection-overview"
-            gap="md"
+            gap="sm"
           >
             <div>
               <Strong className="ds-table-selection-currently-selected">
@@ -69,6 +69,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
             </div>
             <Button
               className="ds-table-selection-clear-button"
+              size="sm"
               variant="ghost"
               onClick={() => toggleAllRowsSelected(false)}
             >

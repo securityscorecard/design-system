@@ -23,16 +23,16 @@ const mediumAvatar = css`
 `;
 
 const avatar = css`
-  background-color: var(--sscds-color-primary-600);
+  background-color: var(--sscds-color-primary-9);
 `;
 
 const invertedAvatar = css`
   background-color: var(--sscds-color-neutral-0);
   &:hover {
-    background-color: var(--sscds-color-primary-050);
+    background-color: var(--sscds-color-primary-3);
   }
   &:active {
-    background-color: var(--sscds-color-primary-200);
+    background-color: var(--sscds-color-primary-6);
   }
 `;
 

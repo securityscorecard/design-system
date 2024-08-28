@@ -157,16 +157,18 @@
   --sscds-color-neutral-alpha-11: var(--slate-a11);
   --sscds-color-neutral-alpha-12: var(--slate-a12);
 
-  --sscds-color-primary-050: var(--indigo-3);
-  --sscds-color-primary-100: var(--indigo-5);
-  --sscds-color-primary-200: var(--indigo-6);
-  --sscds-color-primary-300: var(--indigo-7);
-  --sscds-color-primary-400: var(--indigo-8);
-  --sscds-color-primary-500: var(--indigo-9);
-  --sscds-color-primary-600: var(--indigo-9);
-  --sscds-color-primary-700: var(--indigo-10);
-  --sscds-color-primary-800: var(--indigo-11);
-  --sscds-color-primary-900: var(--indigo-12);
+  --sscds-color-primary-1: var(--indigo-1);
+  --sscds-color-primary-2: var(--indigo-2);
+  --sscds-color-primary-3: var(--indigo-3);
+  --sscds-color-primary-4: var(--indigo-4);
+  --sscds-color-primary-5: var(--indigo-5);
+  --sscds-color-primary-6: var(--indigo-6);
+  --sscds-color-primary-7: var(--indigo-7);
+  --sscds-color-primary-8: var(--indigo-8);
+  --sscds-color-primary-9: var(--indigo-9);
+  --sscds-color-primary-10: var(--indigo-10);
+  --sscds-color-primary-11: var(--indigo-11);
+  --sscds-color-primary-12: var(--indigo-12);
 
   --sscds-color-info-050: var(--indigo-2);
   --sscds-color-info-100: var(--indigo-4);
@@ -242,25 +244,40 @@
   --sscds-color-background-input-disabled: var(--sscds-color-neutral-4);
   --sscds-color-background-input-error: var(--sscds-color-neutral-0);
 
-  --sscds-color-background-action-main-default: var(--indigo-12);
-  --sscds-color-background-action-main-hover: var(--indigo-11);
-  --sscds-color-background-action-main-active: var(--indigo-12);
-  --sscds-color-background-action-main-disabled: var(--sscds-color-neutral-4);
+  --sscds-color-background-action-base-default: var(--indigo-12);
+  --sscds-color-background-action-base-hover: var(--indigo-11);
+  --sscds-color-background-action-base-active: var(--sscds-color-background-action-base-default);
+  --sscds-color-background-action-base-disabled: var(--sscds-color-neutral-4);
 
-  --sscds-color-background-action-subtle-default: var(--sscds-color-clear);
+  --sscds-color-background-action-subtle-default: var(--white-a3);
   --sscds-color-background-action-subtle-hover: var(--sscds-color-neutral-alpha-3);
-  --sscds-color-background-action-subtle-active: var(--sscds-color-clear);
-  --sscds-color-background-action-subtle-disabled: var(--sscds-color-neutral-4);
+  --sscds-color-background-action-subtle-active: var(--sscds-color-background-action-subtle-default);
+  --sscds-color-background-action-subtle-disabled: var(--sscds-color-background-action-subtle-default);
 
   --sscds-color-background-action-danger-default: var(--tomato-10);
   --sscds-color-background-action-danger-hover: var(--tomato-11);
-  --sscds-color-background-action-danger-active: var(--tomato-10);
+  --sscds-color-background-action-danger-active: var(--sscds-color-background-action-danger-default);
   --sscds-color-background-action-danger-disabled: var(--sscds-color-neutral-4);
 
   --sscds-color-background-action-highlight-default: var(--indigo-9);
   --sscds-color-background-action-highlight-hover: var(--indigo-11);
-  --sscds-color-background-action-highlight-active: var(--indigo-9);
+  --sscds-color-background-action-highlight-active: var(--sscds-color-background-action-highlight-default);
   --sscds-color-background-action-highlight-disabled: var(--sscds-color-neutral-4);
+
+  --sscds-color-background-action-ghost-default: var(--sscds-color-clear);
+  --sscds-color-background-action-ghost-hover: var(--sscds-color-neutral-alpha-3);
+  --sscds-color-background-action-ghost-active: var(--sscds-color-background-action-ghost-default);
+  --sscds-color-background-action-ghost-disabled: var(--sscds-color-clear);
+
+  --sscds-color-background-action-highlight-ghost-default: var(--sscds-color-background-action-ghost-default);
+  --sscds-color-background-action-highlight-ghost-hover: var(--sscds-color-background-action-ghost-hover);
+  --sscds-color-background-action-highlight-ghost-active: var(--sscds-color-background-action-ghost-active);
+  --sscds-color-background-action-highlight-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
+
+  --sscds-color-background-action-danger-ghost-default: var(--sscds-color-background-action-ghost-default);
+  --sscds-color-background-action-danger-ghost-hover: var(--tomato-3);
+  --sscds-color-background-action-danger-ghost-active: var(--sscds-color-background-action-ghost-active);
+  --sscds-color-background-action-danger-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
 
   --sscds-color-background-pill-blue-default: var(--blue-3);
   --sscds-color-background-pill-blue-hover: var(--blue-4);
@@ -304,7 +321,7 @@
   --sscds-color-border-input-error: var(--sscds-color-danger-500);
 
   --sscds-color-border-action-focused: var(--indigo-9);
-  --sscds-color-border-action-danger: var(--sscds-color-neutral-8);
+  --sscds-color-border-action-danger: var(--sscds-color-danger-500);
   --sscds-color-border-action-subtle: var(--sscds-color-neutral-7);
 
   --sscds-color-border-pill-blue-default: var(--blue-6);
@@ -330,9 +347,9 @@
   --sscds-color-border-pill-gray-default: var(--sscds-color-neutral-6);
   --sscds-color-border-pill-gray-hover: var(--sscds-color-neutral-7);
 
-  --sscds-color-link-default: var(--sscds-color-primary-800);
-  --sscds-color-link-hover: var(--sscds-color-primary-900);
-  --sscds-color-link-active: var(--sscds-color-primary-800);
+  --sscds-color-link-default: var(--sscds-color-text-action);
+  --sscds-color-link-hover: var(--sscds-color-primary-12);
+  --sscds-color-link-active: var(--sscds-color-link-default);
   --sscds-color-link-visited: var(--purple-11);
 
   --sscds-color-text-default: var(--sscds-color-neutral-12);
@@ -343,6 +360,7 @@
   --sscds-color-text-danger: var(--sscds-color-danger-700);
   --sscds-color-text-warning: var(--sscds-color-warning-700);
   --sscds-color-text-success: var(--sscds-color-success-700);
+  --sscds-color-text-action: var(--sscds-color-primary-11);
 
   --sscds-color-icon-default: var(--sscds-color-text-default);
   --sscds-color-icon-subtle: var(--sscds-color-text-subtle);

@@ -16,6 +16,8 @@ import { Button } from '../../Button';
 import { SearchBar } from '../SearchBar';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
+import ButtonV2 from '../../ButtonV2/Button';
+import IconButton from '../../ButtonV2/IconButton';
 
 const InputGroupContainer = styled(Inline)<InputGroupProps>`
   border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
@@ -70,6 +72,8 @@ const InputGroup = ({
     Input,
     Icon,
     Button,
+    ButtonV2,
+    IconButton,
     Password,
     InputGroup,
     SearchBar,
@@ -77,7 +81,7 @@ const InputGroup = ({
   React.Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
       error(
-        'Only Select, Input, InputGroup, Icon, Button, SearchBar and Password are valid childs of InputGroup',
+        'Only Select, Input, InputGroup, Icon, Button, ButtonV2, IconButton, SearchBar and Password are valid childs of InputGroup',
       );
     }
   });

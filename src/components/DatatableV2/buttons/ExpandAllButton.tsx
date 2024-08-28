@@ -1,7 +1,5 @@
-import React from 'react';
-
-import BaseHandle from '../../_internal/BaseHandle/BaseHandle';
 import { DatatableInstance } from '../Datatable.types';
+import IconButton from '../../ButtonV2/IconButton';
 
 const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -15,13 +13,13 @@ const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const areSomeRowsExpanded = getIsSomeRowsExpanded();
 
   return (
-    <BaseHandle
-      iconProps={{
-        name: 'angles-right',
-        rotation: areSomeRowsExpanded ? 270 : undefined,
-      }}
+    <IconButton
+      iconName="angles-right"
+      iconRotation={areSomeRowsExpanded ? 270 : undefined}
       isDisabled={isLoading || !renderDetailPanel}
       label={areSomeRowsExpanded ? 'Collapse all rows' : 'Expand all rows'}
+      size="sm"
+      variant="ghost"
       onClick={() => toggleAllRowsExpanded(!areSomeRowsExpanded)}
     />
   );
