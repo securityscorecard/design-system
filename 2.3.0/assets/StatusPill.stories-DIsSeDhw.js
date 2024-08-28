@@ -1,0 +1,8 @@
+import{j as o}from"./jsx-runtime-Cw0GR0a5.js";import{S as t}from"./StatusPill-Cc8mXGDd.js";import"./index-CoMEwqFC.js";import{I as a}from"./Inline-DPdVYO7t.js";import"./index-CTjT7uj6.js";import"./index-DzoB_gWM.js";import"./index-BRV0Se7Z.js";import"./StatusDot-Bgb0wVWW.js";import"./PillLabel-DZn6lXVM.js";import"./index-beAa1auE.js";import"./index-t-vajJ9r.js";import"./DSProvider-DOkUOQoq.js";import"./extends-CF3RwP-h.js";import"./index-DIVhMF2i.js";import"./theme-C3ps-iVb.js";import"./colors-2yNNI7_i.js";import"./checkCircleSolid-D_DFWg_A.js";import"./Padbox-DIe3-S_j.js";import"./index-C7IrpltL.js";import"./index-BUX0wYnk.js";import"./index-DZoBl2Wq.js";import"./flex.types-BrkCVx66.js";import"./prop-BgpcU4fO.js";import"./Cluster-DaqHgnAc.js";import"./useLogger-BNYGJgyi.js";const R={title:"components/StatusPill",component:t},r=()=>o.jsxs(a,{gap:"lg",children:[o.jsx(t,{color:"success",label:"Success"}),o.jsx(t,{color:"danger",label:"Danger"}),o.jsx(t,{color:"warn",label:"Warn"}),o.jsx(t,{color:"info",label:"Info"}),o.jsx(t,{color:"inactive",label:"Inactive"})]});r.__docgenInfo={description:"",methods:[],displayName:"Default"};var l,e,i;r.parameters={...r.parameters,docs:{...(l=r.parameters)==null?void 0:l.docs,source:{originalSource:`() => <Inline gap="lg">
+    <StatusPill color="success" label="Success" />
+    <StatusPill color="danger" label="Danger" />
+    <StatusPill color="warn" label="Warn" />
+    <StatusPill color="info" label="Info" />
+    <StatusPill color="inactive" label="Inactive" />
+  </Inline>`,...(i=(e=r.parameters)==null?void 0:e.docs)==null?void 0:i.source}}};const k=["Default"];export{r as Default,k as __namedExportsOrder,R as default};
+//# sourceMappingURL=StatusPill.stories-DIsSeDhw.js.map
