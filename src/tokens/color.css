@@ -362,6 +362,18 @@
   --sscds-color-text-success: var(--sscds-color-success-700);
   --sscds-color-text-action: var(--sscds-color-primary-11);
 
+  --sscds-color-text-pill-blue: var(--blue-12);
+  --sscds-color-text-pill-turquoise: var(--cyan-12);
+  --sscds-color-text-pill-teal: var(--teal-12);
+  --sscds-color-text-pill-green: var(--green-12);
+  --sscds-color-text-pill-yellow: var(--amber-12);
+  --sscds-color-text-pill-orange: var(--orange-12);
+  --sscds-color-text-pill-red: var(--tomato-12);
+  --sscds-color-text-pill-pink: var(--pink-12);
+  --sscds-color-text-pill-purple: var(--purple-12);
+  --sscds-color-text-pill-brown: var(--brown-12);
+  --sscds-color-text-pill-gray: var(--sscds-color-neutral-12);
+
   --sscds-color-icon-default: var(--sscds-color-text-default);
   --sscds-color-icon-subtle: var(--sscds-color-text-subtle);
   --sscds-color-icon-disabled: var(--sscds-color-text-disabled);
