@@ -7,7 +7,7 @@
   --sscds-radii-50: 1.5rem;
 
   --sscds-radii-circle: 100%;
-  --sscds-radii-pill: calc(infinity * 1px);
+  --sscds-radii-rounded: calc(infinity * 1px);
 
   --sscds-radii-default: var(--sscds-radii-20);
   --sscds-radii-button: var(--sscds-radii-30);

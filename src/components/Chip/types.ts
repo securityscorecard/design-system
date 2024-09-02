@@ -1,19 +1,8 @@
 import type { ComponentProps, ElementType, ReactNode } from 'react';
 
 import type { IconNames, RegularIconTypes } from '../Icon';
+import { Colors } from '../Pill';
 
-export type Colors =
-  | 'gray'
-  | 'blue'
-  | 'turquoise'
-  | 'teal'
-  | 'green'
-  | 'yellow'
-  | 'orange'
-  | 'red'
-  | 'pink'
-  | 'purple'
-  | 'brown';
 export type Sizes = 'sm' | 'md';
 
 export type ChipLabelProps = {

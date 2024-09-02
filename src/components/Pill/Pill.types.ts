@@ -1,6 +1,17 @@
+export type Colors =
+  | 'gray'
+  | 'blue'
+  | 'turquoise'
+  | 'teal'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'pink'
+  | 'purple'
+  | 'brown';
 export interface StyledPillWrapperProps {
   $isClickable: boolean;
-  $color: string;
 }
 
 export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
@@ -17,7 +28,8 @@ export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
    */
   onClick?: React.EventHandler<React.MouseEvent | React.KeyboardEvent>;
   as?: React.ElementType;
-  color?: StyledPillWrapperProps['$color'];
+  color?: Colors;
+  size?: 'sm' | 'md';
 }
 
 export interface PillLabelProps {
