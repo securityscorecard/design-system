@@ -8,6 +8,16 @@ export { default as IconButton } from './ButtonV2/IconButton';
 export { type ButtonV2Props, type IconButtonProps } from './ButtonV2/types';
 export * from './Callout';
 export * from './Card';
+export { default as Chip } from './Chip/Chip';
+export { default as InteractiveChip } from './Chip/InteractiveChip';
+export { default as ChipLabel } from './Chip/ChipLabel';
+export { default as ChipIcon } from './Chip/ChipIcon';
+export type {
+  ChipProps,
+  InteractiveChipProps,
+  ChipLabelProps,
+  ChipIconProps,
+} from './Chip/types';
 export * from './CloseButton';
 export * from './Collapsible';
 export * from './ControlDropdown';

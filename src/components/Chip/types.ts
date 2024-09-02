@@ -1,0 +1,52 @@
+import type { ComponentProps, ElementType, ReactNode } from 'react';
+
+import type { IconNames, RegularIconTypes } from '../Icon';
+
+export type Colors =
+  | 'gray'
+  | 'blue'
+  | 'turquoise'
+  | 'teal'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'pink'
+  | 'purple'
+  | 'brown';
+export type Sizes = 'sm' | 'md';
+
+export type ChipLabelProps = {
+  /** String label of the chip */
+  children: string;
+  /** Font weight. When true ChipLabel will be rendered as bold */
+  isStrong?: boolean;
+};
+
+export type ChipIconProps = {
+  /** Used icon name */
+  name: IconNames;
+  /** Used icon type, `ssc` or `far` */
+  type?: RegularIconTypes;
+};
+
+export type ChipProps = {
+  /**
+   * Chip content can be composed from `ChipLabel` and `ChipIcon` components to achieve
+   * desired visual style. Those components can be used in variable order
+   */
+  children: ReactNode;
+  /** Chip size variant */
+  size?: Sizes;
+  /** Chip color variant */
+  color?: Colors;
+};
+
+type InteractiveChipOwnProps<Element extends ElementType> = {
+  /** Used to type-safe property inference. By default `button` element is used, other common options will be `a` or `Link` from react-router  */
+  as?: Element;
+} & ChipProps;
+
+export type InteractiveChipProps<Element extends ElementType> =
+  InteractiveChipOwnProps<Element> &
+    Omit<ComponentProps<Element>, keyof InteractiveChipOwnProps<Element>>;
