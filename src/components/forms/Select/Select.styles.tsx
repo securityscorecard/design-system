@@ -31,7 +31,6 @@ import { Spinner } from '../../Spinner';
 import PillWrapper from '../../Pill/PillWrapper';
 import PillLabel from '../../Pill/PillLabel';
 import PillRemoveButton from '../../Pill/PillRemoveButton';
-import { PillColorsEnums } from '../../Pill/Pill.enums';
 
 export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig =
   () => (selectTheme) => ({
@@ -288,12 +287,7 @@ export const MultiValueContainer: ComponentType<{
   children: ReactNode;
   innerProps: InnerProps;
 }> = ({ children, innerProps, ...props }) => (
-  <PillWrapper
-    color={PillColorsEnums.gray}
-    isClickable={false}
-    {...innerProps}
-    {...props}
-  >
+  <PillWrapper isClickable={false} {...innerProps} {...props}>
     {children}
   </PillWrapper>
 );
@@ -400,7 +394,7 @@ export const ValueContainer = (props) => {
                 isClickable
                 onClick={() => setShowAllItems(true)}
               >
-                + {qty - maxVisibleItem} more
+                <PillLabel>+ {qty - maxVisibleItem} more</PillLabel>
               </PillWrapper>,
             ),
           )(selectedValues)

@@ -12,18 +12,18 @@ const PillRemoveButtonWrapper = styled.button`
   appearance: none;
   border: 0 none;
   background: transparent;
-  width: 1rem;
-  height: 1rem;
-  font-size: var(--sscds-font-size-body-sm);
-  color: var(--sscds-color-icon-subtle);
   cursor: pointer;
+  color: var(--sscds-pill-color-text, var(--sscds-color-text-pill-gray));
   border-radius: var(--sscds-radii-circle);
-  margin-inline-end: calc(var(--sscds-space-1x) * -1) !important;
+  margin-inline-end: calc(
+    var(--sscds-pill-padding-inline, var(--sscds-space-2x)) * -1
+  ) !important;
+  width: var(--sscds-pill-size, var(--sscds-font-lineheight-30));
+  height: var(--sscds-pill-size, var(--sscds-font-lineheight-30));
 
   &:hover,
   &:focus-visible {
-    color: var(--sscds-color-neutral-1);
-    background-color: var(--sscds-color-icon-danger);
+    background-color: var(--sscds-color-background-action-subtle-hover);
   }
 `;
 
@@ -33,7 +33,7 @@ const PillRemoveButton = ({ pillLabel, ...props }: PillRemoveButtonProps) => (
     type="button"
     {...props}
   >
-    <Icon name={SSCIconNames.times} />
+    <Icon name={SSCIconNames.times} size="sm" hasFixedSize />
   </PillRemoveButtonWrapper>
 );
 

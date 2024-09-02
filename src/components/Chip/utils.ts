@@ -1,4 +1,5 @@
-import { Colors, Sizes } from './types';
+import { Colors } from '../Pill';
+import { Sizes } from './types';
 
 export const getCommonChipStyles = ({
   size,
