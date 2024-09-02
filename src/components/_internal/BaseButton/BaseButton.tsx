@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   isNotNull,
   isNotUndefined,
@@ -10,14 +9,12 @@ import {
 import { useTheme } from 'styled-components';
 import cls from 'classnames';
 
-import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
+import { IconTypes } from '../../../theme/icons/icons.enums';
 import { SpaceSizes } from '../../../theme';
 import { requireRouterLink } from '../../../utils/require-router-link';
-import { SpacingSizeValuePropType } from '../../../types/spacing.types';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Spinner } from '../../Spinner';
 import { Icon } from '../../Icon';
-import { SSCIcons, Types } from '../../Icon/Icon.types';
 import { Inline } from '../../layout';
 import BaseStyledButton from './BaseStyledButton';
 import { BaseButtonColors, BaseButtonVariants } from './BaseButton.enums';
@@ -125,35 +122,6 @@ const BaseButton = ({
       </Inline>
     </BaseStyledButton>
   );
-};
-
-BaseButton.propTypes = {
-  variant: PropTypes.oneOf(Object.values(BaseButtonVariants)),
-  color: PropTypes.oneOf(Object.values(BaseButtonColors)),
-  isDisabled: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  isExpanded: PropTypes.bool,
-  margin: SpacingSizeValuePropType,
-  href: PropTypes.string,
-  to: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      hash: PropTypes.string,
-    }),
-  ]),
-  className: PropTypes.string,
-  iconName: PropTypes.oneOfType([
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-    PropTypes.string,
-  ]),
-  iconType: PropTypes.oneOfType([
-    PropTypes.oneOf<Types>(Object.values(IconTypes)),
-    PropTypes.string,
-  ]),
-  loadingText: PropTypes.string,
-  onClick: PropTypes.func,
 };
 
 export default BaseButton;
