@@ -11,8 +11,7 @@ export default {
   subcomponents: { WizardStep },
   parameters: {
     docs: {
-      inlineStories: false,
-      iframeHeight: 500,
+      story: { inline: false, height: 800 },
       source: { type: 'code' },
     },
   },
