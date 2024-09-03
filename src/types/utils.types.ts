@@ -23,3 +23,10 @@ export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
 export type WithAsProp<Props> = Props & {
   as?: ElementType;
 };
+
+export type ReactComponentLike =
+  | string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | ((props: any, context?: any) => any)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | (new (props: any, context?: any) => any);

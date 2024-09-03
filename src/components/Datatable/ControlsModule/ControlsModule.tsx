@@ -13,7 +13,6 @@ import { DatatableStore } from '../Datatable.store';
 import {
   ControlState,
   Controls,
-  ControlsConfigPropType,
   ControlsLocalState,
   ControlsModuleProps,
 } from './ControlsModule.types';
@@ -284,7 +283,6 @@ function ControlsModule<D extends Record<string, unknown>>({
   );
 }
 
-ControlsModule.propTypes = ControlsConfigPropType;
 ControlsModule.displayName = 'ControlsModule';
 
 export default ControlsModule;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { SearchPropType, SearchProps } from './Search.types';
+import { SearchProps } from './Search.types';
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../../Filters/helpers';
 import { Stack } from '../../../layout';
@@ -88,7 +88,5 @@ const Search = ({
     </Stack>
   );
 };
-
-Search.propTypes = SearchPropType;
 
 export default Search;

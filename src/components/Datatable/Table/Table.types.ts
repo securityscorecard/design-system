@@ -1,11 +1,10 @@
-import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Column, IdType, SortingRule } from 'react-table';
 
+import { ReactComponentLike } from '../../../types/utils.types';
 import { RendererColumnOptions } from '../../_internal/BaseTable/renderers/renderers.types';
 import {
   PrimaryKey,
   RowAction,
-  RowActionKindsPropType,
 } from '../../_internal/BaseTable/BaseTable.types';
 
 export type OnSelectFn<D> = (
@@ -36,37 +35,6 @@ export interface TableConfig<D> {
   NoMatchingDataComponent: ReactComponentLike;
   NoDataComponent: ReactComponentLike;
 }
-
-export const TableConfigPropType = {
-  onSelect: PropTypes.func,
-  NoDataComponent: PropTypes.elementType,
-  NoMatchingDataComponent: PropTypes.elementType,
-  hasSelection: PropTypes.bool,
-  isMultiSelect: PropTypes.bool,
-  hasOnlyPerPageSelection: PropTypes.bool,
-  defaultSelectedRowIds: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
-  hasPagination: PropTypes.bool,
-  hasServerSidePagination: PropTypes.bool,
-  defaultPageSize: PropTypes.number,
-  hasSorting: PropTypes.bool,
-  hasServerSideSorting: PropTypes.bool,
-  defaultPageIndex: PropTypes.number,
-  defaultSortBy: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      desc: PropTypes.bool,
-    }),
-  ),
-  defaultHiddenColumns: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
-  defaultColumnOrder: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ),
-  rowActions: PropTypes.arrayOf(RowActionKindsPropType),
-};
 
 export interface TableProps<D extends Record<string, unknown>>
   extends Omit<
