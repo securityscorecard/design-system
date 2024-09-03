@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import { Inline } from '../../layout';
 import { Paragraph } from '../../Paragraph';
 import { BottomBarProps } from './BottomBar.types';
@@ -66,17 +64,3 @@ const BottomBar = ({
 };
 
 export default BottomBar;
-
-BottomBar.propTypes = {
-  hasUnappliedFilters: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onAdd: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onClearAll: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  isCancelEnabled: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  isApplyDisabled: PropTypes.bool,
-  hasCloseButton: PropTypes.bool,
-  hasApplyButton: PropTypes.bool,
-};

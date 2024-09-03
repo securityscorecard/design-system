@@ -1,10 +1,6 @@
-import PropTypes from 'prop-types';
-
-import { Option, OptionPropType } from '../forms/Select/Select.types';
+import { Option } from '../forms/Select/Select.types';
 import {
   BaseDateRange,
-  BaseDateRangePickerPropTypes,
-  BaseDateRangePlaceholderPropTypes,
   BaseDateRangePlaceholderProps,
 } from '../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
 import { Operators } from './Filters.enums';
@@ -68,68 +64,3 @@ export interface FiltersProps {
   isOperatorFieldEnabled?: boolean;
   defaultOperator?: (typeof Operators)[keyof typeof Operators];
 }
-
-export const FieldPropTypes = PropTypes.exact({
-  conditions: PropTypes.arrayOf(
-    PropTypes.exact({
-      component: PropTypes.oneOfType([
-        PropTypes.elementType,
-        PropTypes.exact({
-          component: PropTypes.elementType,
-          props: PropTypes.exact({
-            options: PropTypes.arrayOf(OptionPropType),
-            defaultValue: OptionPropType,
-            isMulti: PropTypes.bool,
-            min: PropTypes.number,
-            max: PropTypes.number,
-            maxLength: PropTypes.number,
-            pattern: PropTypes.string,
-            errorMessage: PropTypes.string,
-            minDate: PropTypes.instanceOf(Date),
-            maxDate: PropTypes.instanceOf(Date),
-            units: PropTypes.string,
-            placeholder: PropTypes.oneOfType([
-              PropTypes.string,
-              BaseDateRangePlaceholderPropTypes,
-            ]),
-            onValidate: PropTypes.func,
-          }),
-        }),
-      ]).isRequired,
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      isDefault: PropTypes.bool,
-    }),
-  ).isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-});
-
-export const FilterStatePropType = PropTypes.exact({
-  operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
-  field: PropTypes.string.isRequired,
-  condition: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.instanceOf(Date),
-    BaseDateRangePickerPropTypes,
-  ]),
-  isApplied: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isCanceled: PropTypes.bool.isRequired,
-});
-
-export const FiltersPropType = {
-  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
-  state: PropTypes.arrayOf(FilterStatePropType),
-  isLoading: PropTypes.bool,
-  isCancelEnabled: PropTypes.bool,
-  isOperatorFieldEnabled: PropTypes.bool,
-  defaultOperator: PropTypes.oneOf(Object.values(Operators)),
-  onApply: PropTypes.func,
-  onClose: PropTypes.func,
-  onCancel: PropTypes.func,
-  onChange: PropTypes.func,
-  onError: PropTypes.func,
-};

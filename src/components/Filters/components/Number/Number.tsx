@@ -1,9 +1,8 @@
-import React from 'react';
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
-import { NumberPropTypes, NumberProps } from './Number.types';
+import { NumberProps } from './Number.types';
 import { Input } from '../../../forms';
 
 const Number = ({
@@ -41,5 +40,3 @@ const Number = ({
 };
 
 export default Number;
-
-Number.propTypes = NumberPropTypes;

@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { Text as BaseText } from '../../Text';
@@ -27,7 +26,3 @@ const DisabledOperator = ({ children }: { children: ReactNode }) => (
 );
 
 export default DisabledOperator;
-
-DisabledOperator.propTypes = {
-  children: PropTypes.node.isRequired,
-};
