@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
@@ -8,15 +7,13 @@ import { IdType } from 'react-table';
 
 import { getColor, getRadii } from '../../utils';
 import { Padbox } from '../layout';
-import { FieldPropTypes, FilterStatePropType } from '../Filters/Filters.types';
 import { useDataFetch } from './hooks/useDataFetch';
 import { useTableRowSelect } from './hooks/useTableRowSelect';
-import { ActionPropType } from './types/Action.types';
 import { mergeControlsConfig, mergeTableConfig } from './defaultConfigs';
 import { ControlsModule } from './ControlsModule';
 import { BatchModule } from './BatchModule';
 import { Table } from './Table';
-import { TableConfig, TableConfigPropType } from './Table/Table.types';
+import { TableConfig } from './Table/Table.types';
 import { DatatableProps } from './Datatable.types';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
 import { useColumnsControls } from './hooks/useColumnsControls';
@@ -187,50 +184,6 @@ function Datatable<D extends Record<string, unknown>>({
   );
 }
 
-Datatable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  dataSize: PropTypes.number.isRequired,
-  columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  isDataLoading: PropTypes.bool,
-  batchActions: PropTypes.arrayOf(ActionPropType),
-  dataPrimaryKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  isControlsEnabled: PropTypes.bool,
-  controlsConfig: PropTypes.exact({
-    onControlToggle: PropTypes.func,
-    onCancelLoading: PropTypes.func,
-    onColumnVisibilityChange: PropTypes.func,
-    hasSearch: PropTypes.bool,
-    searchConfig: PropTypes.exact({
-      placeholder: PropTypes.string,
-      onSearch: PropTypes.func,
-      onClear: PropTypes.func,
-      defaultValue: PropTypes.string,
-      isValidatedOnSubmit: PropTypes.bool,
-      pattern: PropTypes.string,
-      errorMessage: PropTypes.string,
-    }),
-    hasFiltering: PropTypes.bool,
-    filteringConfig: PropTypes.exact({
-      onChange: PropTypes.func,
-      onApply: PropTypes.func,
-      onClose: PropTypes.func,
-      state: PropTypes.arrayOf(FilterStatePropType),
-      fields: PropTypes.arrayOf(FieldPropTypes),
-      isCancelEnabled: PropTypes.bool,
-    }),
-    defaultIsFilteringOpen: PropTypes.bool,
-    defaultIsFilteringApplied: PropTypes.bool,
-    hasColumnsControls: PropTypes.bool,
-    onColumnOrderChange: PropTypes.func,
-    defaultIsColumnsControlsOpen: PropTypes.bool,
-    defaultIsColumnsControlsApplied: PropTypes.bool,
-  }),
-  tableConfig: PropTypes.exact(TableConfigPropType),
-  pageButtonsCount: PropTypes.number,
-  resetSelectionFn: PropTypes.func,
-  onDataFetch: PropTypes.func,
-  onCancelLoading: PropTypes.func,
-};
-
 Datatable.displayName = 'Datatable';
+
 export default Datatable;

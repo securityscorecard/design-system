@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import { InputProps } from '../../../forms/Input/Input.types';
 
 export interface SearchProps
@@ -14,14 +12,3 @@ export interface SearchProps
   value?: string;
   defaultValue?: string;
 }
-
-export const SearchPropType = {
-  onSearch: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  isValidatedOnSubmit: PropTypes.bool,
-  pattern: PropTypes.string,
-  errorMessage: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  defaultValue: PropTypes.string,
-};
