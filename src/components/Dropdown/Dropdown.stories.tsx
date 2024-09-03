@@ -17,6 +17,7 @@ export default {
   component: Dropdown,
   parameters: {
     docs: {
+      story: { inline: false, height: 300 },
       description: {
         component: `
 \`\`\`js
@@ -179,7 +180,7 @@ Placements.args = {
 };
 Placements.parameters = {
   docs: {
-    inlineStories: true,
+    story: { height: 400 },
   },
 };
 

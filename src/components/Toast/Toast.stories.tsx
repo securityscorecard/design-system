@@ -11,18 +11,17 @@ import { ToastVariants } from './Toast.enums';
 import { ToastProps } from './Toast.types';
 import { generateControl } from '../../utils/tests/storybook';
 
-const styles = {
-  transform: 'scale(1)',
-  height: '200px',
-};
-
 export default {
   title: 'components/Toast',
   component: Toast,
-  decorators: [(storyFn) => <div style={styles}>{storyFn()}</div>],
   argTypes: {
     variant: {
       ...generateControl('select', ToastVariants),
+    },
+  },
+  parameters: {
+    docs: {
+      story: { inline: false, height: 200 },
     },
   },
 } as Meta;
