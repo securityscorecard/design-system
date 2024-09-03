@@ -1,64 +1,84 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Badge from './Badge';
-import { BadgeProps } from './Badge.types';
-import { BadgeVariants } from './Badge.enums';
-import { generateControl } from '../../utils/tests/storybook';
+import { Inline } from '../layout';
 
-export default {
+/**
+ * ```jsx
+ * import { Badge } from '@securityscorecard/design-system';
+ * ```
+ */
+
+const meta = {
   title: 'components/Badge',
   component: Badge,
+  args: {
+    count: 32,
+  },
   argTypes: {
     variant: {
-      ...generateControl('select', BadgeVariants),
+      table: {
+        type: {
+          summary: "'neutral' | 'success' | 'info' | 'warn' | 'error'",
+        },
+      },
     },
   },
-} as Meta;
+} satisfies Meta<typeof Badge>;
 
-const BadgeTemplate: StoryFn<BadgeProps> = (args) => <Badge {...args} />;
+export default meta;
 
-export const Playground = BadgeTemplate.bind({});
-Playground.args = {
-  count: 32,
-};
+type Story = StoryObj<typeof meta>;
 
-Playground.parameters = {
-  screenshot: { skip: true },
+export const Playground: Story = {
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
-
-export const SimpleBadge = BadgeTemplate.bind({});
-SimpleBadge.args = {
-  count: 32,
+export const SimpleBadge: Story = {};
+export const BadgeWithHighCount: Story = {
+  args: {
+    count: 120,
+  },
 };
-
-export const BadgeWithHighCount = BadgeTemplate.bind({});
-BadgeWithHighCount.args = {
-  count: 120,
+export const NeutralBadge: Story = {
+  args: {
+    variant: 'neutral',
+  },
 };
-
-export const NeutralBadge = BadgeTemplate.bind({});
-NeutralBadge.args = {
-  ...SimpleBadge.args,
-  variant: 'neutral',
+export const SuccessBadge: Story = {
+  args: {
+    variant: 'success',
+  },
 };
-export const SuccessBadge = BadgeTemplate.bind({});
-SuccessBadge.args = {
-  ...SimpleBadge.args,
-  variant: 'success',
+export const InfoBadge: Story = {
+  args: {
+    variant: 'info',
+  },
 };
-export const InfoBadge = BadgeTemplate.bind({});
-InfoBadge.args = {
-  ...SimpleBadge.args,
-  variant: 'info',
+export const WarnBadge: Story = {
+  args: {
+    variant: 'warn',
+  },
 };
-export const WarnBadge = BadgeTemplate.bind({});
-WarnBadge.args = {
-  ...SimpleBadge.args,
-  variant: 'warn',
+export const ErrorBadge: Story = {
+  args: {
+    variant: 'error',
+  },
 };
-export const ErrorBadge = BadgeTemplate.bind({});
-ErrorBadge.args = {
-  ...SimpleBadge.args,
-  variant: 'error',
+export const ColorsDark: Story = {
+  render: (args) => (
+    <Inline gap="md">
+      <Badge {...args} variant="error" />
+      <Badge {...args} variant="neutral" />
+      <Badge {...args} variant="success" />
+      <Badge {...args} variant="info" />
+      <Badge {...args} variant="warn" />
+    </Inline>
+  ),
+  parameters: {
+    themes: {
+      themeOverride: 'Dark',
+    },
+  },
 };
