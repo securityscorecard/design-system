@@ -1,34 +1,30 @@
-import PropTypes from 'prop-types';
-import { defaultWhen, isNotUndefined } from 'ramda-adjunct';
+import { defaultWhen } from 'ramda-adjunct';
 import { lte, pipe } from 'ramda';
 import styled, { css } from 'styled-components';
 
 import type { BadgeElementProps, BadgeProps } from './Badge.types';
 import { BadgeVariants } from './Badge.enums';
-import { getColor, getRadii, pxToRem } from '../../utils';
 import { CLX_COMPONENT } from '../../theme/constants';
-import { SpaceSizes } from '../../theme';
-import { Padbox } from '../layout';
 
 const BadgeNeutral = css`
-  background-color: ${getColor('neutral.300')};
-  color: ${getColor('neutral.700')};
+  background-color: var(--sscds-color-neutral-4);
+  color: var(--sscds-color-text-default);
 `;
 const BadgeSuccess = css`
-  background-color: ${getColor('success.500')};
-  color: ${getColor('neutral.0')};
+  background-color: var(--sscds-color-success-500);
+  color: var(--sscds-color-text-white);
 `;
 const BadgeInfo = css`
-  background-color: ${getColor('info.500')};
-  color: ${getColor('neutral.0')};
+  background-color: var(--sscds-color-info-500);
+  color: var(--sscds-color-text-white);
 `;
 const BadgeWarn = css`
-  background-color: ${getColor('warning.500')};
-  color: ${getColor('neutral.900')};
+  background-color: var(--sscds-color-warning-500);
+  color: var(--sscds-color-text-black);
 `;
 const BadgeError = css`
-  background-color: ${getColor('error.500')};
-  color: ${getColor('neutral.0')};
+  background-color: var(--sscds-color-danger-500);
+  color: var(--sscds-color-text-white);
 `;
 
 const badgeVariants = {
@@ -39,33 +35,30 @@ const badgeVariants = {
   [BadgeVariants.error]: BadgeError,
 };
 
-const BadgeElement = styled(Padbox)<BadgeElementProps>`
+const BadgeElement = styled.div<BadgeElementProps>`
   display: inline-block;
   min-width: 1.5rem;
-  padding-block: 0.125rem;
-  border-radius: ${getRadii('round')};
+  padding: 0 var(--sscds-space-2x);
+  border-radius: var(--sscds-radii-rounded);
   font-size: var(--sscds-font-size-elementlabel-sm);
   font-weight: var(--sscds-font-weight-elementlabel-default);
   text-align: center;
   ${({ $variant }) => badgeVariants[$variant]};
-  line-height: ${pxToRem(20)};
+  line-height: var(--sscds-font-lineheight-elementlabel);
 `;
 
 const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
 
-const Badge = ({ count, variant = BadgeVariants.error }: BadgeProps) =>
-  isNotUndefined(count) ? (
-    <BadgeElement
-      $variant={variant}
-      className={CLX_COMPONENT}
-      paddingSize={SpaceSizes.sm}
-    >
+const Badge = ({ count, variant = 'error' }: BadgeProps) => {
+  if (typeof count === 'undefined') {
+    return null;
+  }
+
+  return (
+    <BadgeElement $variant={variant} className={CLX_COMPONENT}>
       <span>{normalizeCount(count)}</span>
     </BadgeElement>
-  ) : null;
-
-Badge.propTypes = {
-  count: PropTypes.number,
+  );
 };
 
 export default Badge;

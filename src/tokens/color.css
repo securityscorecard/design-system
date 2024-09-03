@@ -357,6 +357,7 @@
   --sscds-color-text-disabled: var(--sscds-color-neutral-9);
   --sscds-color-text-inverse: var(--sscds-color-neutral-0);
   --sscds-color-text-white: var(--sscds-color-white);
+  --sscds-color-text-black: var(--sscds-color-black);
   --sscds-color-text-danger: var(--sscds-color-danger-700);
   --sscds-color-text-warning: var(--sscds-color-warning-700);
   --sscds-color-text-success: var(--sscds-color-success-700);
