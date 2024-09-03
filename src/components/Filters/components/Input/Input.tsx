@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { InputProps } from './Input.types';
@@ -47,15 +45,5 @@ const Input = ({
     </>
   );
 };
-Input.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
-  maxLength: PropTypes.number,
-  pattern: PropTypes.string,
-  errorMessage: PropTypes.string,
-  placeholder: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  onValidate: PropTypes.func,
-  onError: PropTypes.func,
-};
+
 export default Input;
