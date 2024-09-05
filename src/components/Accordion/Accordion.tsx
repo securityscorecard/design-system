@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
 import cls from 'classnames';
 
@@ -7,8 +6,6 @@ import { Stack } from '../layout';
 import {
   AccordionItem,
   AccordionItemId,
-  AccordionItemIdPropType,
-  AccordionItemPropType,
   AccordionProps,
 } from './Accordion.types';
 import AccordionCollapsible from './AccordionCollapsible';
@@ -80,13 +77,5 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     );
   },
 );
-
-Accordion.propTypes = {
-  items: PropTypes.arrayOf(AccordionItemPropType).isRequired,
-  isCollapsedOnOpen: PropTypes.bool,
-  className: PropTypes.string,
-  openItems: PropTypes.arrayOf(AccordionItemIdPropType),
-  onChange: PropTypes.func,
-};
 
 export default Accordion;
