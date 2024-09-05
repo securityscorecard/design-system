@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { Row } from 'react-table';
 import { MemoryRouter } from 'react-router-dom';
@@ -58,10 +57,6 @@ const LinkComponent = ({
     {children}
   </a>
 );
-LinkComponent.propTypes = {
-  to: PropTypes.string.isRequired,
-  className: PropTypes.string,
-};
 
 type Story = StoryFn<CellRendererProps<CellRendererData>>;
 
