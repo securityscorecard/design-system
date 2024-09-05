@@ -1,17 +1,11 @@
-import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { pxToRem } from '../../utils';
 import { Paragraph } from '../Paragraph';
-import { TextSizes } from '../Text/Text.enums';
 import { ToastProps } from './Toast.types';
-import { SpaceSizes } from '../../theme/space.enums';
-import { Inline } from '../layout';
-import { StretchEnum } from '../layout/Inline/Inline.enums';
+import { Inline, Surface } from '../layout';
 import { Padbox } from '../layout/Padbox';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
-import { ToastVariants } from './Toast.enums';
 import { CloseButton } from '../CloseButton';
 import { BaseToastBanner } from '../_internal/BaseToastBanner';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -34,16 +28,12 @@ export const ToastArea = styled.div`
   right: ${pxToRem(20)};
 `;
 
-const ToastContainer = styled.div<{ $width?: ToastProps['width'] }>`
+const ToastContainer = styled(Surface)<{ $width?: ToastProps['width'] }>`
   width: ${({ $width }) => pxToRem($width)};
   max-height: ${pxToRem(240)};
-  background-color: ${getColor('neutral.0')};
-  color: ${getColor('neutral.900')};
+  color: var(--sscds-color-text-default);
   text-align: left;
-  box-shadow: 0px 2px 6px 0px var(--sscds-slateA-slateA6);
   animation: ${ToastFromTop} 0.5s;
-  border: 1px solid ${getColor('neutral.300')};
-  border-radius: ${getRadii('default')};
   overflow: hidden;
 `;
 
@@ -51,17 +41,10 @@ const ToastContent = styled(Paragraph)`
   text-decoration: none;
   text-align: left;
 
-  &&& button {
+  &&& button.sscds-button {
     margin-bottom: -10px;
   }
 `;
-
-const iconPxSizesVariants = {
-  [ToastVariants.info]: 16,
-  [ToastVariants.warn]: 14,
-  [ToastVariants.error]: 16,
-  [ToastVariants.success]: 16,
-};
 
 const stopPropagation = (event) => event?.stopPropagation();
 
@@ -88,26 +71,21 @@ const Toast = ({
       <ToastContainer
         $width={width}
         className={CLX_COMPONENT}
+        elevation={2}
+        radius="sm"
+        hasBorder
         onClick={stopPropagation}
       >
-        <BaseToastBanner
-          iconAlign="center"
-          iconPxSizesVariants={iconPxSizesVariants}
-          iconSize={16}
-          paddingSize={SpaceSizes.sm}
-          paddingType={PaddingTypes.squish}
-          stretch={StretchEnum.end}
-          variant={variant}
-        >
+        <BaseToastBanner paddingType="stretch" variant={variant}>
           <Inline justify="space-between">
-            <Padbox paddingSize={SpaceSizes.md}>
-              <ToastContent as="div" margin="none" size={TextSizes.md}>
+            <Padbox paddingSize="md">
+              <ToastContent as="div" margin="none">
                 {children}
               </ToastContent>
             </Padbox>
             <CloseButton
               aria-label="Close"
-              marginCompensation={SpaceSizes.none}
+              marginCompensation="none"
               onClose={onClose}
             />
           </Inline>
@@ -117,11 +95,6 @@ const Toast = ({
   );
 };
 
-Toast.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  variant: PropTypes.oneOf(Object.values(ToastVariants)),
-  isStandalone: PropTypes.bool,
-};
+Toast.displayName = 'Toast';
 
 export default Toast;

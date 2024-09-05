@@ -37,7 +37,8 @@ interface BaseIconComponentProps
         | 'inverse'
         | 'danger'
         | 'warning'
-        | 'success'})`;
+        | 'success'
+        | 'info'})`;
   className?: string;
   /** Sets icon width to fixed size. Useful for aligning icons */
   hasFixedWidth?: boolean;

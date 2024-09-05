@@ -381,6 +381,7 @@
   --sscds-color-icon-inverse: var(--sscds-color-text-inverse);
   --sscds-color-icon-white: var(--sscds-color-text-white);
   --sscds-color-icon-danger: var(--sscds-color-text-danger);
-  --sscds-color-icon-warning: var(--sscds-color-text-warning);
+  --sscds-color-icon-warning: var(--sscds-color-warning-800);
   --sscds-color-icon-success: var(--sscds-color-text-success);
+  --sscds-color-icon-info: var(--sscds-color-info-800);
 }

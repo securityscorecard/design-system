@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { InlineProps } from '../../layout/Inline/Inline';
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 import { BaseToastBannerVariants } from './BaseToastBanner.enums';
 
@@ -10,12 +9,8 @@ export type Variants =
 export interface BaseToastBannerWrapperProps {
   children: React.ReactNode;
   variant: Variants;
-  paddingSize: PadboxProps['paddingSize'];
-  paddingType: PadboxProps['paddingType'];
-  stretch: InlineProps['stretch'];
-  iconSize: number;
-  iconPxSizesVariants: { [key: number]: number };
-  iconAlign?: string;
+  paddingType?: PadboxProps['paddingType'];
+  hasBackground?: boolean;
 }
 
 export interface BaseToastBannerProps {

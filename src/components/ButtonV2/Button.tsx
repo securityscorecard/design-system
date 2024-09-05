@@ -1,6 +1,7 @@
 // eslint-disable-next-line filenames/match-exported
 import type { CSSProperties, ElementType } from 'react';
 import { useMemo } from 'react';
+import clx from 'classnames';
 
 import type { ButtonV2Props } from './types';
 import { forwardRefGenericComp } from '../../utils/forwardRefGenericComp';
@@ -58,6 +59,7 @@ export const ButtonV2Plain = <E extends ElementType = 'button'>(
       as={Tag}
       type={Tag === 'button' ? 'button' : undefined}
       {...props}
+      className={clx('sscds-buttonv2', props.className)}
       disabled={isButtonDisabled}
       style={{
         ...buttonStyles,

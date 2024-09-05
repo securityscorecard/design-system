@@ -1,11 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 import { isNotNilOrEmpty } from 'ramda-adjunct';
 
 import { BaseToastBannerVariants } from './BaseToastBanner.enums';
-import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
-import { getColor, pxToRem } from '../../../utils';
-import { ColorTypes } from '../../../theme/colors.enums';
+import { SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Padbox } from '../../layout/Padbox';
 import { Inline } from '../../layout/Inline';
 import { Icon } from '../../Icon';
@@ -16,83 +13,73 @@ import {
 import { Spinner } from '../../Spinner';
 
 export const baseToastBannerColorVariants = {
-  [BaseToastBannerVariants.info]: ColorTypes.info50,
-  [BaseToastBannerVariants.warn]: ColorTypes.warning50,
-  [BaseToastBannerVariants.error]: ColorTypes.error50,
-  [BaseToastBannerVariants.success]: ColorTypes.success50,
-  [BaseToastBannerVariants.loading]: ColorTypes.neutral200,
+  [BaseToastBannerVariants.info]: 'var(--sscds-color-info-050)',
+  [BaseToastBannerVariants.warn]: 'var(--sscds-color-warning-050)',
+  [BaseToastBannerVariants.error]: 'var(--sscds-color-danger-050)',
+  [BaseToastBannerVariants.success]: 'var(--sscds-color-success-050)',
+  [BaseToastBannerVariants.loading]: 'var(--sscds-color-neutral-3)',
 };
 
 const iconVariants = {
-  [BaseToastBannerVariants.info]: SSCIconNames.infoCircle,
+  [BaseToastBannerVariants.info]: SSCIconNames.infoCircleOutline,
   [BaseToastBannerVariants.warn]: SSCIconNames.errorCircle,
-  [BaseToastBannerVariants.error]: SSCIconNames.exclTriangleSolid,
+  [BaseToastBannerVariants.error]: SSCIconNames.exclTriangle,
   [BaseToastBannerVariants.success]: SSCIconNames.check,
   [BaseToastBannerVariants.loading]: null,
 };
 
 const iconColorVariants = {
-  [BaseToastBannerVariants.info]: ColorTypes.info500,
-  [BaseToastBannerVariants.warn]: ColorTypes.warning500,
-  [BaseToastBannerVariants.error]: ColorTypes.error500,
-  [BaseToastBannerVariants.success]: ColorTypes.success500,
-};
+  [BaseToastBannerVariants.info]: 'var(--sscds-color-icon-info)',
+  [BaseToastBannerVariants.warn]: 'var(--sscds-color-icon-warning)',
+  [BaseToastBannerVariants.error]: 'var(--sscds-color-icon-danger)',
+  [BaseToastBannerVariants.success]: 'var(--sscds-color-icon-success)',
+} as const;
 
 const IconPadbox = styled(Padbox)<{
   $variant?: BaseToastBannerProps['variant'];
-  $iconAlign: string;
 }>`
-  background-color: ${({ $variant }) =>
-    getColor(baseToastBannerColorVariants[$variant])};
+  background-color: ${({ $hasBackground, $variant }) =>
+    $hasBackground ? baseToastBannerColorVariants[$variant] : undefined};
   display: flex;
-  align-items: ${({ $iconAlign }) => $iconAlign || 'center'};
+  align-items: flex-start;
 `;
 
-const IconWrapper = styled.div<{
-  $iconSize: number;
-}>`
-  display: flex;
-  align-items: center;
-  width: ${({ $iconSize }) => pxToRem($iconSize)};
-  height: ${({ $iconSize }) => pxToRem($iconSize)};
-`;
-
-const StyledIcon = styled(Icon)<{
-  $variant?: BaseToastBannerWrapperProps['variant'];
-  $iconPxSizesVariants: BaseToastBannerWrapperProps['iconPxSizesVariants'];
-}>`
-  color: ${({ $variant }) => getColor(iconColorVariants[$variant])};
-  font-size: ${({ $variant, $iconPxSizesVariants }) =>
-    pxToRem($iconPxSizesVariants[$variant])};
+const IconWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
 `;
 
 const BaseToastBanner = ({
   children,
   variant,
-  paddingSize,
   paddingType,
-  stretch,
-  iconSize,
-  iconPxSizesVariants,
-  iconAlign = 'center',
+  hasBackground = true,
 }: BaseToastBannerWrapperProps) => (
-  <Inline stretch={stretch}>
+  <Inline stretch="end">
     {isNotNilOrEmpty(variant) && (
       <IconPadbox
-        $iconAlign={iconAlign}
+        $hasBackground={hasBackground}
         $variant={variant}
-        paddingSize={paddingSize}
+        paddingSize="md"
         paddingType={paddingType}
       >
-        <IconWrapper $iconSize={iconSize}>
+        <IconWrapper>
           {variant === 'loading' ? (
-            <Spinner borderWidth={2} height={16} width={16} dark />
+            <Spinner
+              borderWidth={2}
+              height={16}
+              verticalMargin={0}
+              width={16}
+              dark
+            />
           ) : (
-            <StyledIcon
-              $iconPxSizesVariants={iconPxSizesVariants}
-              $variant={variant}
+            <Icon
+              color={iconColorVariants[variant]}
               name={iconVariants[variant]}
-              type={IconTypes.ssc}
+              size="sm"
+              hasFixedSize
             />
           )}
         </IconWrapper>
