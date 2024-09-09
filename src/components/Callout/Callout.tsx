@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { CalloutContainerProps, CalloutProps } from './Callout.types';
 import { ColorTypes, SpaceSizes } from '../../theme';
@@ -7,7 +6,6 @@ import { getColor, getRadii, pxToRem } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { Text } from '../Text';
 import { Icon } from '../Icon';
-import { SSCIcons } from '../Icon/Icon.types';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { CalloutColors } from './Callout.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
@@ -72,12 +70,5 @@ const Callout = ({
     </Inline>
   </Container>
 );
-
-Callout.propTypes = {
-  icon: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.oneOf<SSCIcons>(Object.values(SSCIconNames)),
-  ]),
-};
 
 export default Callout;
