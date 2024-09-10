@@ -1,26 +1,11 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Banner from './Banner';
-import { BannerVariants } from './Banner.enums';
-import { ActionsArray, BannerProps } from './Banner.types';
+import { ActionsArray } from './Banner.types';
 import { generateControl } from '../../utils/tests/storybook';
-
-export default {
-  title: 'components/Banner',
-  component: Banner,
-  decorators: [
-    (storyFn) => (
-      <div style={{ padding: '25px', marginBottom: '25px' }}>{storyFn()}</div>
-    ),
-  ],
-  argTypes: {
-    variant: {
-      ...generateControl('select', BannerVariants),
-    },
-  },
-} as Meta;
+import { BannerVariants } from './Banner.enums';
+import { Stack } from '../layout';
 
 const BannerActions: ActionsArray = [
   {
@@ -35,95 +20,124 @@ const BannerActions: ActionsArray = [
   },
 ];
 
-export const Playground: StoryFn<BannerProps> = (args) => (
-  <Banner actions={[...BannerActions]} {...args} />
-);
-Playground.parameters = {
-  screenshot: { skip: true },
+/**
+ * ```js
+ * import { Banner } from '@securityscorecard/design-system';
+ * ```
+ */
+
+const meta = {
+  title: 'components/Banner',
+  component: Banner,
+  args: {
+    children: 'Banner text',
+    onClose: action('close-banner'),
+  },
+  argTypes: {
+    // @ts-expect-error Storybook is strangly typed here
+    variant: {
+      ...generateControl('select', BannerVariants),
+      table: {
+        type: {
+          summary: "'success' | 'info' | 'warn' | 'error'",
+        },
+      },
+    },
+    actions: {
+      table: {
+        type: {
+          summary: 'ActionKinds<[React.MouseEvent]>[]',
+          detail: `Array<
+  | HandlerActionKind<[React.MouseEvent]>
+  | AbsoluteLinkActionKind<[React.MouseEvent]>
+  | RelativeLinkActionKind<[React.MouseEvent]>
+>`,
+        },
+      },
+    },
+  },
+} satisfies Meta<typeof Banner>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Playground: Story = {
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
 
-export const InfoBanner: StoryFn = () => (
-  <Banner
-    actions={[...BannerActions]}
-    data-custom-attr="test"
-    variant={BannerVariants.info}
-    onClose={action('close-banner')}
-  >
-    Info Banner
-  </Banner>
-);
+export const VariantInfo: Story = {
+  args: {
+    actions: BannerActions,
+    variant: 'info',
+  },
+};
 
-export const SuccessBanner: StoryFn = () => (
-  <Banner
-    actions={[...BannerActions]}
-    variant={BannerVariants.success}
-    onClose={action('close-banner')}
-  >
-    Success Banner
-  </Banner>
-);
+export const VariantSuccess: Story = {
+  args: {
+    actions: BannerActions,
+    variant: 'success',
+  },
+};
 
-export const LongInfoBanner: StoryFn = () => (
-  <Banner
-    actions={[...BannerActions]}
-    variant={BannerVariants.info}
-    onClose={action('close-banner')}
-  >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+export const VariantWarn: Story = {
+  args: {
+    actions: BannerActions,
+    variant: 'warn',
+  },
+};
+
+export const VariantError: Story = {
+  args: {
+    actions: BannerActions,
+    variant: 'error',
+  },
+};
+
+export const LongContent: Story = {
+  args: {
+    ...VariantInfo.args,
+    children: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat.
-  </Banner>
-);
+    consequat.`,
+  },
+};
 
-export const InfoBannerOneAction: StoryFn = () => (
-  <Banner
-    actions={[
-      {
-        label: 'Action',
-        name: 'Action',
-        onClick: action('click-action'),
-      },
-    ]}
-    variant={BannerVariants.info}
-    onClose={action('close-banner')}
-  >
-    Info Banner One Action
-  </Banner>
-);
+export const WithOneAction: Story = {
+  args: {
+    actions: [BannerActions[0]],
+  },
+};
 
-export const InfoBannerNoAction: StoryFn = () => (
-  <Banner variant={BannerVariants.info} onClose={action('close-banner')}>
-    Info Banner No Action
-  </Banner>
-);
+export const WithNoAction: Story = {
+  args: {
+    actions: undefined,
+  },
+};
 
-export const WarnBanner: StoryFn = () => (
-  <Banner
-    actions={[...BannerActions]}
-    variant={BannerVariants.warn}
-    onClose={action('close-banner')}
-  >
-    Warn Banner
-  </Banner>
-);
+export const NonDismissable: Story = {
+  args: {
+    ...VariantError.args,
+    isDismissable: false,
+  },
+};
 
-export const ErrorBanner: StoryFn = () => (
-  <Banner
-    actions={[...BannerActions]}
-    variant={BannerVariants.error}
-    onClose={action('close-banner')}
-  >
-    Error Banner
-  </Banner>
-);
-
-export const NonDismissableBanner: StoryFn = () => (
-  <Banner
-    actions={[...BannerActions]}
-    isDismissable={false}
-    variant={BannerVariants.error}
-  >
-    Error Banner
-  </Banner>
-);
+export const ColorsDark: Story = {
+  render: (args) => (
+    <Stack gap="md">
+      <Banner {...args} variant="info" />
+      <Banner {...args} variant="success" />
+      <Banner {...args} variant="warn" />
+      <Banner {...args} variant="error" />
+      <Banner {...args} actions={BannerActions} variant="info" />
+    </Stack>
+  ),
+  parameters: {
+    themes: {
+      themeOverride: 'Dark',
+    },
+  },
+};
