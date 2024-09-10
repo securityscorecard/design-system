@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme';
@@ -34,10 +33,5 @@ const Label = ({
     {children}
   </LabelRoot>
 );
-
-Label.propTypes = {
-  htmlFor: PropTypes.string,
-  className: PropTypes.string,
-};
 
 export default Label;

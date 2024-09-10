@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { createPadding, getFormStyle, getRadii } from '../../../utils';
 import { InputProps } from './Input.types';
@@ -70,11 +69,6 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
     }
   }
 `;
-
-Input.propTypes = {
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-};
 
 Input.defaultProps = {
   isInvalid: false,

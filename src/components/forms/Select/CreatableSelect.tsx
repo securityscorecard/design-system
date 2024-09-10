@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import CreatableReactSelect from 'react-select/creatable';
 import AsyncCreatableReactSelect from 'react-select/async-creatable';
 import cls from 'classnames';
@@ -44,11 +43,8 @@ function CreatableSelect<IsMulti extends boolean = false>({
   );
 }
 
-CreatableSelect.propTypes = {
-  ...Select.propTypes,
-  createNewLabel: PropTypes.string,
-};
 CreatableSelect.defaultProps = Select.defaultProps;
+
 CreatableSelect.displayName = 'CreatableSelect';
 
 export default CreatableSelect;

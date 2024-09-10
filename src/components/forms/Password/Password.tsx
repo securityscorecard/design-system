@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 import styled from 'styled-components';
 import cls from 'classnames';
 
@@ -75,13 +74,6 @@ const Password = ({
       </ToggleButton>
     </PasswordWrapper>
   );
-};
-
-Password.propTypes = {
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  defaultIsRevealed: PropTypes.bool,
-  className: PropTypes.string,
 };
 
 export default Password;

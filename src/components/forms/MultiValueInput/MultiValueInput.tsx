@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 import {
   dropLast,
   filter,
@@ -359,25 +358,6 @@ const MultiValueInput = ({
       </Inline>
     </Control>
   );
-};
-
-MultiValueInput.propTypes = {
-  value: PropTypes.arrayOf(PropTypes.string),
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  className: PropTypes.string,
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-  inputId: PropTypes.string,
-  inputValue: PropTypes.string,
-  valuesDelimiter: PropTypes.string,
-  maxPillLabelLength: PropTypes.number,
-  onValueAdd: PropTypes.func,
-  onValueRemove: PropTypes.func,
-  onValuesChange: PropTypes.func,
-  onInputChange: PropTypes.func,
-  onPaste: PropTypes.func,
 };
 
 export default MultiValueInput;

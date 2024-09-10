@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactSelect from 'react-select';
 import AsyncReactSelect from 'react-select/async';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
-import { ActionKindsPropType } from '../../../types/action.types';
 import { useSelectProps } from './useSelectProps';
-import { GroupPropType, OptionPropType, SelectProps } from './Select.types';
+import { SelectProps } from './Select.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 function Select<IsMulti extends boolean = false>({
@@ -30,29 +28,6 @@ function Select<IsMulti extends boolean = false>({
   );
 }
 
-Select.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.oneOfType([OptionPropType, GroupPropType]),
-  ),
-  placeholder: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isClearable: PropTypes.bool,
-  isMulti: PropTypes.bool,
-  defaultValue: PropTypes.oneOfType([
-    OptionPropType,
-    PropTypes.arrayOf(OptionPropType),
-  ]),
-  defaultInputValue: PropTypes.string,
-  defaultIsMenuOpen: PropTypes.bool,
-  className: PropTypes.string,
-  menuActions: PropTypes.arrayOf(ActionKindsPropType),
-  maxPillLabelLength: PropTypes.number,
-  maxVisibleItem: PropTypes.number,
-  isMenuPositionRelative: PropTypes.bool,
-  components: PropTypes.shape({}),
-};
-
 Select.defaultProps = {
   placeholder: '',
   isInvalid: false,
@@ -62,6 +37,7 @@ Select.defaultProps = {
   isMenuPositionRelative: false,
   className: '',
 };
+
 Select.displayName = 'Select';
 
 export default Select;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import cls from 'classnames';
 
@@ -100,11 +99,6 @@ const InputGroup = ({
       })}
     </InputGroupContainer>
   );
-};
-
-InputGroup.propTypes = {
-  hasDivider: PropTypes.bool,
-  className: PropTypes.string,
 };
 
 export default InputGroup;
