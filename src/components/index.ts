@@ -45,6 +45,7 @@ export * from './IconWrapper';
 export * from './layout';
 export * from './Link';
 export * from './Loading';
+export { default as Logo, type LogoProps } from './Logo/Logo';
 export * from './Modal';
 export * from './Pagination';
 export * from './Paragraph';
