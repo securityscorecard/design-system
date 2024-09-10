@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
-import { ReactComponentLike } from 'prop-types';
 import React from 'react';
 
+import { ReactComponentLike } from '../../types/utils.types';
 import { SpaceSize } from '../../theme/space.types';
 import { ActionKinds } from '../../types/action.types';
 import { IconNames, RegularIconTypes } from '../Icon/Icon.types';
