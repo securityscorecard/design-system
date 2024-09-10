@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -122,15 +121,6 @@ const Radio = ({
       </RadioLabel>
     </RadioContainer>
   );
-};
-
-Radio.propTypes = {
-  radioId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.node,
-  isDisabled: PropTypes.bool,
-  isInvalid: PropTypes.bool,
-  className: PropTypes.string,
 };
 
 export default Radio;

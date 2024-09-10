@@ -1,5 +1,4 @@
-import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { add, identity, memoizeWith, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -180,15 +179,5 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     );
   },
 );
-
-Checkbox.propTypes = {
-  name: PropTypes.string.isRequired,
-  checkboxId: PropTypes.string.isRequired,
-  label: PropTypes.node,
-  className: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  isInvalid: PropTypes.bool,
-  isIndeterminate: PropTypes.bool,
-};
 
 export default Checkbox;
