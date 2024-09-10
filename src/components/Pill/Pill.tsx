@@ -18,8 +18,9 @@ const AdornmentWrapper = styled.div`
   margin-inline-start: calc(
     var(--sscds-pill-padding-inline, var(--sscds-space-2x)) / -2
   ) !important;
-  width: 1rem;
-  height: 1rem;
+  padding-block: var(--sscds-pill-padding-adornment-block);
+  min-width: 1rem;
+  min-height: 1rem;
 `;
 
 const Pill = ({
@@ -50,6 +51,8 @@ const Pill = ({
       '--sscds-pill-color-border-hover': `var(--sscds-color-border-pill-${color}-hover)`,
       '--sscds-pill-color-text': `var(--sscds-color-text-pill-${color})`,
       '--sscds-pill-padding-inline': 'var(--sscds-space-2x)',
+      '--sscds-pill-padding-adornment-block':
+        size === 'sm' ? 'var(--sscds-space-half-x)' : 'var(--sscds-space-1x)',
       '--sscds-pill-font-size':
         size === 'sm'
           ? 'var(--sscds-font-size-body-sm)'
@@ -115,7 +118,7 @@ const Pill = ({
         ...props.style,
       }}
     >
-      {typeof adornment !== 'undefined' && (
+      {typeof adornment !== 'undefined' && adornment !== null && (
         <AdornmentWrapper>{adornment}</AdornmentWrapper>
       )}
       <PillLabel
