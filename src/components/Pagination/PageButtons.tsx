@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import { unfold } from 'ramda';
 
 import { PaginationItem, PaginationItemElipsis } from './PaginationItem';
@@ -119,13 +118,6 @@ const PageButtons = ({
       })}
     </>
   );
-};
-
-PageButtons.propTypes = {
-  currentPage: PropTypes.number.isRequired,
-  pageCount: PropTypes.number.isRequired,
-  positions: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default PageButtons;
