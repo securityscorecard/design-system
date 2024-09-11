@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { SSCIconNames } from '../../theme/icons/icons.enums';
 import { Icon } from '../Icon';
@@ -36,9 +35,5 @@ const PillRemoveButton = ({ pillLabel, ...props }: PillRemoveButtonProps) => (
     <Icon name={SSCIconNames.times} size="sm" hasFixedSize />
   </PillRemoveButtonWrapper>
 );
-
-PillRemoveButton.propTypes = {
-  pillLabel: PropTypes.string.isRequired,
-};
 
 export default PillRemoveButton;

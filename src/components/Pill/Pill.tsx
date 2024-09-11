@@ -1,11 +1,9 @@
 import React, { useMemo } from 'react';
 import { gt } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 import styled from 'styled-components';
 
-import { PillColorsEnums } from './Pill.enums';
 import { PillProps } from './Pill.types';
 import PillWrapper from './PillWrapper';
 import PillLabel from './PillLabel';
@@ -136,17 +134,6 @@ const Pill = ({
       )}
     </PillWrapper>
   );
-};
-
-Pill.propTypes = {
-  label: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(Object.values(PillColorsEnums)),
-  adornment: PropTypes.node,
-  maxLabelLength: PropTypes.number,
-  isClickable: PropTypes.bool,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  onRemove: PropTypes.func,
 };
 
 export default Pill;
