@@ -1,7 +1,6 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { prop } from 'ramda';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import type {
   ProgressBarProps,
@@ -67,10 +66,4 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   ),
 );
 
-ProgressBar.propTypes = {
-  value: PropTypes.number.isRequired,
-  maxValue: PropTypes.number,
-  size: PropTypes.oneOf(Object.values(ProgressBarSizes)),
-  variant: PropTypes.oneOf(Object.values(ProgressBarVariants)),
-};
 export default ProgressBar;
