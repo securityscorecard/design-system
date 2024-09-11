@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useRef } from 'react';
 import { pluck } from 'ramda';
 import { noop } from 'ramda-adjunct';
 
@@ -102,14 +101,6 @@ const ColumnsControls = ({
       </ControlDropdown>
     </span>
   );
-};
-
-ColumnsControls.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
-  onClose: PropTypes.func.isRequired,
-  onApply: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
-  onReset: PropTypes.func,
 };
 
 export default ColumnsControls;

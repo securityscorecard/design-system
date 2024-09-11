@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 import { SpaceSize } from '../../theme/space.types';
 
 export type AlignmentWrapperProps = {
@@ -11,7 +13,7 @@ export interface CloseButtonProps {
    */
   onClose: React.MouseEventHandler;
   /**
-   *
+   * Allows user to add negative margin to the CloseButton to adjust alignment
    */
   marginCompensation?: AlignmentWrapperProps['$marginCompensation'];
   /**
@@ -19,8 +21,9 @@ export interface CloseButtonProps {
    */
   ariaLabel?: string;
   /**
-   * option for semantic color backgrounds
+   * Option for semantic color backgrounds
    */
   isInverted?: boolean;
   className?: string;
+  style?: CSSProperties;
 }

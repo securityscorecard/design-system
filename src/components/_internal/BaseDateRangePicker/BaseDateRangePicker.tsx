@@ -1,15 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { any, prop } from 'ramda';
 import { isNotNull } from 'ramda-adjunct';
 
 import { dateRangePickerStyles } from './styles';
-import {
-  BaseDateRangePickerPropTypes,
-  BaseDateRangePickerProps,
-  BaseDateRangePlaceholderPropTypes,
-} from './BaseDateRangePicker.types';
+import { BaseDateRangePickerProps } from './BaseDateRangePicker.types';
 import { BaseSingleDatePicker } from '../BaseSingleDatePicker';
 import { Inline } from '../../layout/Inline';
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -77,11 +71,3 @@ const BaseDateRangePicker = ({
 };
 
 export default BaseDateRangePicker;
-
-BaseDateRangePicker.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: BaseDateRangePickerPropTypes,
-  minDate: PropTypes.instanceOf(Date),
-  maxDate: PropTypes.instanceOf(Date),
-  placeholder: BaseDateRangePlaceholderPropTypes,
-};

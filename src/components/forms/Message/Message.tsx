@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { SpaceSizes } from '../../../theme';
@@ -29,10 +27,6 @@ const Message = ({
     </Paragraph>
   </MessageContainer>
 );
-
-Message.propTypes = {
-  variant: PropTypes.oneOf(Object.values(MessageVariants)),
-};
 
 export default Message;
 

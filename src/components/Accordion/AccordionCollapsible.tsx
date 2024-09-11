@@ -1,16 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { IconTypes, SSCIconNames } from '../../theme/icons/icons.enums';
 import { getColor, pxToRem } from '../../utils';
 import { Icon } from '../Icon';
 import { TextSizes } from '../Text/Text.enums';
-import {
-  AccordionCollapsibleProps,
-  AccordionItemId,
-  AccordionItemIdPropType,
-} from './Accordion.types';
+import { AccordionCollapsibleProps, AccordionItemId } from './Accordion.types';
 import { Inline, Padbox } from '../layout';
 import { SpaceSizes } from '../../theme';
 import { Text } from '../Text';
@@ -94,14 +89,6 @@ const AccordionCollapsible = ({
       )}
     </div>
   );
-};
-
-AccordionCollapsible.propTypes = {
-  title: PropTypes.node.isRequired,
-  handleHeaderClick: PropTypes.func.isRequired,
-  id: AccordionItemIdPropType.isRequired,
-  className: PropTypes.string,
-  isOpen: PropTypes.bool,
 };
 
 export default AccordionCollapsible;

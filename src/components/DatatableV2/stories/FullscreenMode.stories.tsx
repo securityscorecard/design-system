@@ -9,6 +9,9 @@ export default {
   component: Datatable,
   parameters: {
     screenshot: { skip: true },
+    docs: {
+      story: { inline: false, height: 600 },
+    },
   },
 } as Meta<typeof Datatable>;
 

@@ -185,7 +185,7 @@
     "typescript": "^5.5.2",
     "typescript-plugin-styled-components": "^3.0.0",
     "vite": "^5.2.8",
-    "vite-plugin-dts": "^3.8.1",
+    "vite-plugin-dts": "^4.1.0",
     "vite-require": "^0.2.3"
   },
   "resolutions": {

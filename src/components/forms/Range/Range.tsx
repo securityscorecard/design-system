@@ -1,6 +1,5 @@
 import React, { forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 import { noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -220,19 +219,5 @@ const Range = forwardRef<HTMLInputElement, RangeProps>(
     );
   },
 );
-
-Range.propTypes = {
-  min: PropTypes.number,
-  max: PropTypes.number,
-  defaultValue: PropTypes.number,
-  step: PropTypes.number,
-  rangeId: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  hasLabels: PropTypes.bool,
-  isProgressRight: PropTypes.bool,
-  className: PropTypes.string,
-  onChange: PropTypes.func,
-};
 
 export default Range;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { slice } from 'ramda';
 import styled from 'styled-components';
 import { isNilOrEmpty, isNotNilOrEmpty } from 'ramda-adjunct';
@@ -138,11 +137,6 @@ const Breadcrumbs = ({ children, className, ...props }: BreadcrumbsProps) => {
       </InlineOrderedList>
     </BreadcrumbsWrapper>
   );
-};
-
-Breadcrumbs.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  className: PropTypes.string,
 };
 
 export default Breadcrumbs;

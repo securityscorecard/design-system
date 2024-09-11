@@ -1,5 +1,6 @@
 import type { CSSProperties, ElementType } from 'react';
 import { useMemo } from 'react';
+import clx from 'classnames';
 
 import type { IconButtonProps } from './types';
 import { forwardRefGenericComp } from '../../utils/forwardRefGenericComp';
@@ -40,6 +41,7 @@ export function IconButtonPlain<E extends ElementType = 'button'>(
       type={Tag === 'button' ? 'button' : undefined}
       {...props}
       aria-label={label}
+      className={clx('sscds-buttonv2', props.className)}
       disabled={isButtonDisabled}
       style={{
         ...buttonStyles,

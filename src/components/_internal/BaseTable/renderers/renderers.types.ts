@@ -1,7 +1,7 @@
 import type { CellValue, Row } from 'react-table';
 import type { To } from 'history';
-import type { ReactComponentLike } from 'prop-types';
 
+import { ReactComponentLike } from '../../../../types/utils.types';
 import { CellTypes as CellTypesEnum } from './renderers.enums';
 
 type OnClickFn<D> = (value: CellValue, rowData: D) => void;

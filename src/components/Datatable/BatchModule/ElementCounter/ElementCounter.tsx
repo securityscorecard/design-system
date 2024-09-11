@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
 
@@ -163,12 +162,6 @@ const ElementCounter = ({
       )}
     </ElementCounterWrapper>
   );
-};
-
-ElementCounter.propTypes = {
-  dataSize: PropTypes.number.isRequired,
-  hasSelection: PropTypes.bool.isRequired,
-  hasOnlyPerPageSelection: PropTypes.bool.isRequired,
 };
 
 export default ElementCounter;

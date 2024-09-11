@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Error } from '../../../forms/Message';
@@ -40,15 +38,3 @@ const TagsInput = ({
 };
 
 export default TagsInput;
-
-TagsInput.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string),
-  maxLength: PropTypes.number,
-  pattern: PropTypes.string,
-  errorMessage: PropTypes.string,
-  placeholder: PropTypes.string,
-  isInvalid: PropTypes.bool,
-  onValidate: PropTypes.func,
-  onError: PropTypes.func,
-};

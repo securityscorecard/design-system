@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Inline } from '../layout';
@@ -7,7 +6,6 @@ import { SpaceSizes } from '../../theme';
 import { Button, ButtonEnums } from '../Button';
 import {
   AbsoluteLinkActionKind,
-  ActionKindsPropType,
   RelativeLinkActionKind,
 } from '../../types/action.types';
 import { CardActionsProps } from './Card.types';
@@ -54,10 +52,5 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
     </CardContainer>
   ),
 );
-
-CardActions.propTypes = {
-  actions: PropTypes.arrayOf(ActionKindsPropType),
-  rightAdornment: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-};
 
 export default CardActions;

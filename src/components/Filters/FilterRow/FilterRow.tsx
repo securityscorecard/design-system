@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
   __,
@@ -30,15 +29,10 @@ import { StateButton } from '../StateButton';
 import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
-import {
-  ComponentWithProps as ComponentWithPropsTypes,
-  FieldPropTypes,
-} from '../Filters.types';
-import { Operators } from '../Filters.enums';
+import { ComponentWithProps as ComponentWithPropsTypes } from '../Filters.types';
 import { operatorOptions } from '../data/operatorOptions';
 import { pxToRem } from '../../../utils';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
-import { BaseDateRangePickerPropTypes } from '../../_internal/BaseDateRangePicker/BaseDateRangePicker.types';
 import { SpaceSizes } from '../../../theme';
 
 const SplitField = styled.div<SplitFieldProps>`
@@ -330,30 +324,3 @@ const FilterRow = ({
 };
 
 export default FilterRow;
-
-FilterRow.propTypes = {
-  fields: PropTypes.arrayOf(FieldPropTypes).isRequired,
-  index: PropTypes.number.isRequired,
-  field: PropTypes.string.isRequired,
-  condition: PropTypes.string.isRequired,
-  operator: PropTypes.oneOf(Object.values(Operators)).isRequired,
-  isApplied: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isDefaultState: PropTypes.bool.isRequired,
-  isInvalid: PropTypes.bool.isRequired,
-  onOperatorChange: PropTypes.func.isRequired,
-  onFieldChange: PropTypes.func.isRequired,
-  onConditionChange: PropTypes.func.isRequired,
-  onValueChange: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-  isOperatorFieldEnabled: PropTypes.bool,
-  defaultOperator: PropTypes.oneOf(Object.values(Operators)),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.instanceOf(Date),
-    BaseDateRangePickerPropTypes,
-  ]),
-  hasApplyButton: PropTypes.bool,
-  onError: PropTypes.func,
-};

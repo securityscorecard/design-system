@@ -16,8 +16,7 @@ export default {
   component: SemanticModal,
   parameters: {
     docs: {
-      inlineStories: false,
-      iframeHeight: 600,
+      story: { inline: false, height: 500 },
     },
   },
   argTypes: {

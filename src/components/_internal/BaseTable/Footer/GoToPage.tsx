@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
@@ -60,11 +59,6 @@ const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
       />
     </Inline>
   );
-};
-
-GoToPage.propTypes = {
-  pageCount: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
 };
 
 export default GoToPage;

@@ -1,12 +1,10 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import cls from 'classnames';
 
 import {
   AbsoluteLinkActionKind,
-  ActionKindsPropType,
   RelativeLinkActionKind,
 } from '../../../types/action.types';
 import { DropdownLinkProps, DropdownMenuProps } from './DropdownMenu.types';
@@ -191,18 +189,6 @@ const DropdownMenu = ({
       </List>
     </Dropdown>
   );
-};
-
-DropdownMenu.propTypes = {
-  actions: PropTypes.arrayOf(ActionKindsPropType).isRequired,
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
-  defaultIsOpen: PropTypes.bool,
-  paneWidth: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  className: PropTypes.string,
-  placement: PropTypes.oneOf(['bottom', 'bottom-start', 'bottom-end']),
 };
 
 export default React.memo(DropdownMenu);

@@ -2,27 +2,33 @@ import React, { ReactNode } from 'react';
 
 import { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBanner.types';
 import { ActionKinds } from '../../types/action.types';
+import { BannerVariants } from './Banner.enums';
 
 export type ActionsArray = readonly [
   ActionKinds<[React.MouseEvent]>?,
   ActionKinds<[React.MouseEvent]>?,
 ];
 
-type BaseBannerProps = Omit<BaseToastBannerProps, 'onClose'> & {
-  actions?: ActionsArray;
-};
+type Variants = (typeof BannerVariants)[keyof typeof BannerVariants];
 
-export type BannerProps = BaseBannerProps & {
+export type BannerProps = {
+  /** Toggles display of the close button */
   isDismissable?: boolean;
+  /** Callback triggered on close button click */
   onClose?: React.MouseEventHandler;
-  __hasPagination?: boolean;
-  __onPrev?: () => void;
-  __onNext?: () => void;
-  __isFirst?: boolean;
-  __isLast?: boolean;
-  __current?: number;
-  __total?: number;
+  /** Banner container width in which action buttons will switch the layout from inline to block */
   changeLayoutBreakpoint?: number;
   className?: string;
+  /** Banner content */
   children: ReactNode;
+  /** List of actions used to generat banner buttons */
+  actions?: ActionsArray;
+  /** Color variant of the banner */
+  variant?: Variants;
+} & Omit<BaseToastBannerProps, 'onClose' | 'variant'>;
+
+export type BannerContentProps = {
+  children: ReactNode;
+  actions?: ActionsArray;
+  isInline?: boolean;
 };
