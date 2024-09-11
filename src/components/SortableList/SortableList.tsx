@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {
   DndContext,
   KeyboardSensor,
@@ -99,18 +97,6 @@ const SortableList = ({
       </DndContext>
     </SortableListRoot>
   );
-};
-
-SortableList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
-  labels: PropTypes.shape({}),
-  maxHeight: PropTypes.number,
-  renderItem: PropTypes.func,
-  onOrderChange: PropTypes.func,
-  onDragStart: PropTypes.func,
-  onDragOver: PropTypes.func,
-  onDragEnd: PropTypes.func,
-  onDragCancel: PropTypes.func,
 };
 
 export default SortableList;
