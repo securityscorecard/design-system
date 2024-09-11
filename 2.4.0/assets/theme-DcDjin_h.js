@@ -1,0 +1,5 @@
+import{j as t}from"./jsx-runtime-Cw0GR0a5.js";import{useMDXComponents as n}from"./index-DSkyVWTJ.js";import{ae as r,ah as i}from"./index-BFqCTqzQ.js";import{t as s}from"./theme-rODdEdpT.js";import"./index-CTjT7uj6.js";import"./iframe-BwyVvPEg.js";import"../sb-preview/runtime.js";import"./index-DIVhMF2i.js";import"./extends-CF3RwP-h.js";import"./isNativeReflectConstruct-lfp1ZYuW.js";import"./inheritsLoose-B6jfs0L0.js";import"./setPrototypeOf-DgZC2w_0.js";import"./index-MJJVguu6.js";import"./index-DrFu-skq.js";import"./colors-BJBAFLAc.js";import"./index-DzAsfYvZ.js";import"./styled-components.browser.esm-xOyuSOjK.js";function m(e){const o={h1:"h1",p:"p",...n(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(r,{title:"Theme/Theme Object"}),`
+`,t.jsx(o.h1,{id:"theme-object",children:"Theme object"}),`
+`,t.jsx(o.p,{children:"This is basic theme object used by Design System."}),`
+`,t.jsx(i,{code:JSON.stringify(s,null,2),language:"json"})]})}function S(e={}){const{wrapper:o}={...n(),...e.components};return o?t.jsx(o,{...e,children:t.jsx(m,{...e})}):m(e)}export{S as default};
+//# sourceMappingURL=theme-DcDjin_h.js.map
