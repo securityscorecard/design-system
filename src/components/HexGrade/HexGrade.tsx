@@ -1,11 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { defaultTo, path, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import styled, { useTheme } from 'styled-components';
 import cls from 'classnames';
 
-import { SpacingSizeValuePropType } from '../../types/spacing.types';
 import { createMarginSpacing, getColor } from '../../utils';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import { HexGradeProps } from './HexGrade.types';
@@ -121,15 +118,6 @@ const HexGrade = ({
       )}
     </StyledSVG>
   );
-};
-
-HexGrade.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HexGradeVariants)),
-  grade: PropTypes.oneOf(Object.values(HexGradeGrades)),
-  size: PropTypes.number,
-  isInverted: PropTypes.bool,
-  margin: SpacingSizeValuePropType,
-  className: PropTypes.string,
 };
 
 export default HexGrade;
