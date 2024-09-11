@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import { Property } from 'csstype';
@@ -8,7 +7,6 @@ import cls from 'classnames';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
-import { AlignItemsPropType } from '../../../types/flex.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
 export interface StackProps {
@@ -46,7 +44,7 @@ const Stack = styled.div.attrs((props) => ({
   justify-content: ${prop('align')};
 
   /* FIXME: Until we remove 'margin' property from other components we need to
-    increase specificity of those nesting , since it can be overriden by inner
+    increase specificity of those nesting , since it can be overridden by inner
     elements with the same specificity. This can lead to inconsistent output
     of visual test if styled-components puts CSS in different order into Head. */
   ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * {
@@ -70,14 +68,6 @@ const Stack = styled.div.attrs((props) => ({
     }
   `}
 `;
-
-Stack.propTypes = {
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  justify: AlignItemsPropType,
-  splitAt: PropTypes.number,
-  isRecursive: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 Stack.defaultProps = {
   gap: SpaceSizes.none,

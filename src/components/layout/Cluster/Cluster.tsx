@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
 import { prop } from 'ramda';
 import cls from 'classnames';
@@ -8,10 +7,7 @@ import cls from 'classnames';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
-import {
-  AlignItemsPropType,
-  JustifyContentPropType,
-} from '../../../types/flex.types';
+import { ReactComponentLike } from '../../../types/utils.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 
 interface ClusterWrapperProps {
@@ -99,15 +95,6 @@ const Cluster = ({
     </ClusterParent>
   </ClusterWrapper>
 );
-
-Cluster.propTypes = {
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  align: AlignItemsPropType,
-  justify: JustifyContentPropType,
-  wrapperEl: PropTypes.elementType,
-  parentEl: PropTypes.elementType,
-  className: PropTypes.string,
-};
 
 Cluster.defaultProps = {
   gap: SpaceSizes.none,

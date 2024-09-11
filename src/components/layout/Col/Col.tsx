@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { ColProps } from './Col.types';
@@ -26,13 +25,5 @@ const Col = ({ children, cols = 'auto', offset = 0 }: ColProps) => (
     {children}
   </StyledCol>
 );
-
-Col.propTypes = {
-  cols: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  offset: PropTypes.number,
-};
 
 export default Col;
