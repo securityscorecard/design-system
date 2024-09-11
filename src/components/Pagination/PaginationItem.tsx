@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { getColor, getRadii, pxToRem } from '../../utils';
@@ -87,13 +86,6 @@ export const PaginationItem = ({
       {children}
     </StyledPaginationComponent>
   );
-};
-
-PaginationItem.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool,
-  isCurrent: PropTypes.bool,
-  isShrinked: PropTypes.bool,
 };
 
 export const PaginationItemElipsis = styled(Padbox).attrs(() => ({
