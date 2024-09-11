@@ -1,5 +1,4 @@
 import React, { ComponentPropsWithoutRef } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
 
@@ -83,12 +82,6 @@ const Heading = ({
   return React.createElement(headingSizes[size], additionalProps, children);
 };
 
-Heading.propTypes = {
-  size: PropTypes.oneOf(Object.values(HeadingSizes)),
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-  className: PropTypes.string,
-};
-
 export default Heading;
 
 type SizelessHeading = Omit<React.ComponentProps<typeof Heading>, 'size'>;
@@ -99,19 +92,11 @@ export const H1 = ({ children, ...props }: SizelessHeading) => (
   </Heading>
 );
 
-H1.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
-
 export const H2 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h2} {...props}>
     {children}
   </Heading>
 );
-
-H2.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
 
 export const H3 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h3} {...props}>
@@ -119,26 +104,14 @@ export const H3 = ({ children, ...props }: SizelessHeading) => (
   </Heading>
 );
 
-H3.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
-
 export const H4 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h4} {...props}>
     {children}
   </Heading>
 );
 
-H4.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
-
 export const H5 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h5} {...props}>
     {children}
   </Heading>
 );
-
-H5.propTypes = {
-  variant: PropTypes.oneOf(Object.values(HeadingVariants)),
-};
