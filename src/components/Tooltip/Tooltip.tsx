@@ -1,6 +1,4 @@
-import React from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pipe, prop } from 'ramda';
 import { isFalsy } from 'ramda-adjunct';
@@ -136,14 +134,6 @@ const Tooltip = ({
       </RadixTooltip.Portal>
     </RadixTooltip.Root>
   );
-};
-
-Tooltip.propTypes = {
-  popup: PropTypes.node,
-  className: PropTypes.string,
-  placement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  width: PropTypes.oneOf(['auto', PropTypes.oneOfType([PropTypes.number])]),
-  defaultIsPopupDisplayed: PropTypes.bool,
 };
 
 export default Tooltip;
