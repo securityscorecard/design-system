@@ -1,5 +1,4 @@
 import React, { forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { pathEq } from 'ramda';
 import cls from 'classnames';
 
@@ -90,13 +89,5 @@ const Stepper = forwardRef<
     );
   },
 );
-
-Stepper.propTypes = {
-  activeStep: PropTypes.number,
-  showTextBreakpoint: PropTypes.number,
-  orientation: PropTypes.oneOf(Object.values(StepperOrientations)),
-  areStepsExpanded: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default Stepper;
