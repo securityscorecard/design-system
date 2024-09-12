@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { any, pipe, take, toUpper, trim } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { ButtonColors, ButtonVariants } from '../Button/Button.enums';
@@ -95,22 +94,5 @@ const UserAvatar = ({
       </Text>
     </RootUserAvatar>
   );
-
-UserAvatar.propTypes = {
-  label: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(Object.values(UserAvatarSizes)),
-  className: PropTypes.string,
-  isInverted: PropTypes.bool,
-  href: PropTypes.string,
-  to: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      hash: PropTypes.string,
-    }),
-  ]),
-  onClick: PropTypes.func,
-};
 
 export default UserAvatar;
