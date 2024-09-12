@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { equals } from 'ramda';
 
 import { Inline } from '../layout';
@@ -52,15 +51,5 @@ const Tabs = ({
     </Inline>
   </BaseTabsWrapper>
 );
-
-Tabs.propTypes = {
-  selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  variant: PropTypes.oneOf(Object.values(TabVariants)),
-  selectedPatternMatcher: PropTypes.func,
-  isExpanded: PropTypes.bool,
-  onSelectTab: PropTypes.func,
-};
 
 export default Tabs;
