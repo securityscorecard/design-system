@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getColor, getRadii } from '../../utils';
@@ -36,11 +35,6 @@ const DropdownPane = ({
       {children}
     </StyledDropdownPane>
   );
-};
-
-DropdownPane.propTypes = {
-  onClickOut: PropTypes.func.isRequired,
-  isElevated: PropTypes.bool,
 };
 
 export default DropdownPane;
