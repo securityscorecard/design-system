@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { HeadingProps } from '../Heading/Heading.types';
@@ -118,13 +117,6 @@ const Text = styled.span.attrs<{ variant: keyof typeof TextVariants }>(
   ${({ variant }) => variants[variant]};
 `;
 
-Text.propTypes = {
-  size: PropTypes.oneOf(Object.values(TextSizes)),
-  variant: PropTypes.oneOf(Object.values(TextVariants)),
-  isBold: PropTypes.bool,
-  className: PropTypes.string,
-};
-
 Text.defaultProps = {
   size: TextSizes.md,
   variant: TextVariants.primary,
@@ -138,9 +130,6 @@ export const Strong = styled(Text).attrs<StrongProps>(() => ({
   isBold: true,
 }))``;
 
-Strong.propTypes = {
-  variant: PropTypes.oneOf(Object.values(TextVariants)),
-};
 Strong.defaultProps = {
   size: TextSizes.inherit,
 };
@@ -149,8 +138,3 @@ export const Code = styled(Text).attrs<CodeProps>(() => ({
   variant: TextVariants.monospace,
   as: 'code',
 }))``;
-
-Code.propTypes = {
-  size: PropTypes.oneOf(Object.values(TextSizes)),
-  isBold: PropTypes.bool,
-};
