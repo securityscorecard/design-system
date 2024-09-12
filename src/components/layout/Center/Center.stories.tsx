@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -21,15 +20,13 @@ export default {
 } as Meta;
 
 const CenterTemplate: StoryFn<CenterProps> = (args) => (
-  <div style={{ backgroundColor: '#dadada' }}>
-    <Center style={{ backgroundColor: '#80baeb' }} {...args}>
-      <Box />
-      <Button color="primary" variant="solid">
-        Click me
-      </Button>
-      <Box />
-    </Center>
-  </div>
+  <Center {...args} style={{ backgroundColor: 'mistyrose' }}>
+    <Box />
+    <Button color="primary" variant="solid">
+      Click me
+    </Button>
+    <Box />
+  </Center>
 );
 
 export const Playground = CenterTemplate.bind({});

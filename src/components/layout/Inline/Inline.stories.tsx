@@ -33,7 +33,7 @@ function Box({ style = {} }: { style?: React.CSSProperties }) {
 }
 
 const InlineTemplate: StoryFn<InlineProps> = (args) => (
-  <Inline style={{ backgroundColor: '#0275d8' }} {...args}>
+  <Inline {...args}>
     <Box />
     <Box style={{ height: '300px' }} />
     <Box />
@@ -42,6 +42,9 @@ const InlineTemplate: StoryFn<InlineProps> = (args) => (
 );
 
 export const Playground = InlineTemplate.bind({});
+Playground.args = {
+  gap: 'md',
+};
 Playground.parameters = {
   screenshot: { skip: true },
 };
