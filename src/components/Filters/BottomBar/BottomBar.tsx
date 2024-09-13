@@ -2,6 +2,7 @@ import { Inline } from '../../layout';
 import { Paragraph } from '../../Paragraph';
 import { BottomBarProps } from './BottomBar.types';
 import Button from '../../ButtonV2/Button';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const BottomBar = ({
   onSubmit,
@@ -16,6 +17,7 @@ const BottomBar = ({
   hasCloseButton,
   hasApplyButton = true,
 }: BottomBarProps) => {
+  const { t } = useSafeTranslation();
   const canCancel = isCancelEnabled && isLoading;
   return (
     <Inline gap="lg" justify="space-between">
@@ -27,35 +29,36 @@ const BottomBar = ({
           variant="ghost"
           onClick={onAdd}
         >
-          Add criteria
+          {t('sscds:filters.addRule')}
         </Button>
         <Button size="sm" variant="ghost" onClick={onClearAll}>
-          Clear all criteria
+          {t('sscds:filters.clearRules')}
         </Button>
       </Inline>
       <Inline align="center" gap="sm">
         {hasUnappliedFilters && hasApplyButton && (
           <Paragraph as="div" margin="none" size="md" variant="secondary">
-            You have unapplied filters
+            {t('sscds:filters.unappliedFilters')}
           </Paragraph>
         )}
         {canCancel && hasApplyButton ? (
           <Button size="sm" variant="subtle" onClick={onCancel}>
-            Cancel
+            {t('sscds:filters.cancel')}
           </Button>
         ) : hasCloseButton ? (
           <Button size="sm" variant="subtle" onClick={onClose}>
-            Close
+            {t('sscds:filters.close')}
           </Button>
         ) : null}
         {hasApplyButton && (
           <Button
             isDisabled={isApplyDisabled}
             isLoading={canCancel}
+            loadingText={t('sscds:loading')}
             size="sm"
             onClick={onSubmit}
           >
-            Apply
+            {t('sscds:filters.apply')}
           </Button>
         )}
       </Inline>

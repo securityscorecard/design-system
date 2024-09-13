@@ -185,8 +185,7 @@ describe('Filters', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-
-    await selectEvent.select(screen.getByText('And'), 'Or');
+    await selectEvent.select(screen.getAllByText('And')[0], 'Or');
 
     expect(screen.queryAllByText(/Or/i)).toHaveLength(2);
   });

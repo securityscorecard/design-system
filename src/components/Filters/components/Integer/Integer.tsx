@@ -4,17 +4,22 @@ import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
 import { NumberProps } from '../Number/Number.types';
 import { Input } from '../../../forms';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const Integer = ({
   value = '',
   onChange,
   min,
   max,
-  placeholder = 'Integer',
-  errorMessage = 'Use only integers',
+  placeholder,
+  errorMessage,
   isInvalid = false,
   onError,
 }: NumberProps) => {
+  const { t } = useSafeTranslation();
+  const resolvedPlaceholder =
+    placeholder ?? t('sscds:filters.integer.placeholder');
+  const resolvedErrorMessage = errorMessage ?? t('sscds:filters.integer.error');
   const handleKeyPress = (event) => {
     if (!/-|[0-9]/.test(event.key)) {
       event.preventDefault();
@@ -34,13 +39,13 @@ const Integer = ({
       <Input
         data-has-spin="false"
         isInvalid={isInvalid}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         type="number"
         value={value}
         onChange={handleOnChange}
         onKeyPress={handleKeyPress}
       />
-      {isInvalid && <Error>{errorMessage}</Error>}
+      {isInvalid && <Error>{resolvedErrorMessage}</Error>}
     </>
   );
 };

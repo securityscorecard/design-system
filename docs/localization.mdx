@@ -1,0 +1,66 @@
+import { Meta, Subtitle } from '@storybook/blocks';
+
+<Meta title="Localization" />
+
+# Localization
+
+<Subtitle>
+  Localization is the process of adapting software to different languages and
+  regional differences. It involves translating text, adjusting layouts, and
+  adapting cultural elements to meet the needs of users in various locales.
+  Effective localization ensures that your application is accessible and
+  user-friendly across different regions and languages.
+</Subtitle>
+
+Our component library is designed with localization in mind, allowing you to easily create multilingual applications. By separating the text content from the component structure, we enable seamless integration of translations without altering the core functionality of the components.
+
+Localization not only involves translating text but also adapting to regional formatting conventions, such as date and number formats. Our localized components handle these variations automatically, ensuring a consistent user experience across different locales.
+
+## How Does It Work?
+
+We've chosen to implement localization using `i18next` and `react-i18next`. This decision was made to facilitate easy integration with applications that already use this popular localization infrastructure.
+
+`i18next` provides a robust framework for managing translations, while `react-i18next` offers React-specific bindings that make it simple to use localized content within our components. This approach allows for dynamic language switching and efficient management of translation resources.
+
+## Integration into Existing Apps
+
+Integrating our localized components into your existing application is straightforward. Here are the steps:
+
+1. Import available translations from the component library:
+
+```javascript
+import enUsLang from '@securityscorecars/design-system/locales/en-US';
+```
+
+If your preferred language is not available, you can create your own translations following the same structure.
+
+2. Provide the imported or created resources to your `i18next` configuration under the `sscds` namespace. Here's a simple example:
+
+```javascript
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import enUsLang from '@securityscorecars/design-system/locales/en-US';
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      sscds: enUsLang,
+    },
+  },
+  lng: 'en',
+  fallbackLng: 'en',
+  interpolation: {
+    escapeValue: false,
+  },
+});
+```
+
+By following these steps, your application will be set up to use the localized versions of our components. The components will automatically use the translations provided under the `sscds` namespace, allowing for seamless integration of multiple languages in your user interface.
+
+## Available languages
+
+- `en-US` - The default language
+- `ja-JP` - Japanese (日本語)
+- `es-ES` - Spanish
+- `pt-BR` - Brazilian Portuguese
+- `cs-CZ` - Czech
