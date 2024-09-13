@@ -1,10 +1,15 @@
+import {
+  type ComponentPropsWithRef,
+  type ElementType,
+  type ReactNode,
+  forwardRef,
+} from 'react';
 import styled from 'styled-components';
 import { prop } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import { Property } from 'csstype';
 import cls from 'classnames';
 
-import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { CLX_LAYOUT } from '../../../theme/constants';
@@ -31,48 +36,81 @@ export interface StackProps {
    */
   isRecursive?: boolean;
   className?: string;
+  children: ReactNode;
+  as?: ElementType;
 }
+type StackRootProps = {
+  $gap: StackProps['gap'];
+  $justify: StackProps['justify'];
+  $align: StackProps['align'];
+  $splitAt: StackProps['splitAt'];
+  $isRecursive: StackProps['isRecursive'];
+};
 
-const Stack = styled.div.attrs((props) => ({
-  ...props,
-  className: cls(CLX_LAYOUT, props?.className),
-}))<StackProps>`
+const StackRoot = styled.div<StackRootProps>`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: ${prop('justify')};
-  justify-content: ${prop('align')};
+  align-items: ${prop('$justify')};
+  justify-content: ${prop('$align')};
 
   /* FIXME: Until we remove 'margin' property from other components we need to
     increase specificity of those nesting , since it can be overridden by inner
     elements with the same specificity. This can lead to inconsistent output
     of visual test if styled-components puts CSS in different order into Head. */
-  ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * {
+  ${({ $isRecursive }) => ($isRecursive ? '&&' : '&& >')} * {
     margin-top: 0;
     margin-bottom: 0;
   }
 
-  ${({ isRecursive }) => (isRecursive ? '&&' : '&& >')} * + * {
-    margin-top: ${({ gap, theme }) => getSpace(gap, { theme })};
+  ${({ $isRecursive }) => ($isRecursive ? '&&' : '&& >')} * + * {
+    margin-top: ${({ $gap, theme }) => getSpace($gap, { theme })};
   }
 
-  ${({ splitAt }) =>
-    isNotUndefined(splitAt) &&
+  ${({ $splitAt }) =>
+    isNotUndefined($splitAt) &&
     `
     :only-child {
       height: 100%;
     }
 
-    > :nth-child(${splitAt}) {
+    > :nth-child(${$splitAt}) {
       margin-bottom: auto;
     }
   `}
 `;
 
-Stack.defaultProps = {
-  gap: SpaceSizes.none,
-  justify: 'stretch',
-  isRecursive: false,
-};
+const Stack = forwardRef<
+  HTMLDivElement,
+  StackProps & ComponentPropsWithRef<'div'>
+>(
+  (
+    {
+      children,
+      gap = 'none',
+      justify = 'stretch',
+      align,
+      splitAt,
+      isRecursive = false,
+      ...props
+    }: StackProps & ComponentPropsWithRef<'div'>,
+    ref,
+  ) => (
+    <StackRoot
+      ref={ref}
+      $align={align}
+      $gap={gap}
+      $isRecursive={isRecursive}
+      $justify={justify}
+      $splitAt={splitAt}
+      {...props}
+      className={cls(CLX_LAYOUT, props?.className)}
+    >
+      {children}
+    </StackRoot>
+  ),
+);
+
+Stack.displayName = 'Stack';
 
 export default Stack;

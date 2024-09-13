@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -44,7 +43,7 @@ export default {
 } as Meta;
 
 const GridTemplate: StoryFn<GridProps> = (args) => (
-  <Grid style={{ backgroundColor: '#0275d8' }} {...args}>
+  <Grid {...args}>
     <Box>Item</Box>
     <Box>Long item</Box>
     <Box>Very long item item item</Box>
@@ -59,6 +58,7 @@ const GridTemplate: StoryFn<GridProps> = (args) => (
 );
 
 export const Playground = GridTemplate.bind({});
+Playground.args = { gap: 'md' };
 Playground.parameters = {
   screenshot: { skip: true },
 };
