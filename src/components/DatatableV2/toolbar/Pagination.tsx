@@ -56,6 +56,60 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
       paddingType="squish"
     >
       <Inline align="center" gap="md" justify="space-between">
+        <div className="ds-table-pagination-item-count">
+          {(firstRowIndex + 1).toLocaleString('en-US')}-
+          {lastRowIndex.toLocaleString('en-US')} of{' '}
+          <abbr title={totalRowCount.toString()}>
+            {abbreviateNumber(totalRowCount)}
+          </abbr>
+          {isLg && ` total ${totalRowCount === 1 ? 'row' : 'rows'}`}
+        </div>
+        <Inline
+          align="center"
+          className="ds-table-pagination-buttons-wrapper"
+          gap="sm"
+        >
+          <IconButton
+            className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
+            iconName="backward-step"
+            isDisabled={!getCanPreviousPage()}
+            label="Go to the first page of table"
+            size="sm"
+            variant="ghost"
+            onClick={() => setPageIndex(0)}
+          />
+          <IconButton
+            className="ds-table-pagination-buttons-prev-button ds-table-pagination-buttons-button"
+            iconName="angle-left"
+            isDisabled={!getCanPreviousPage()}
+            label="Go to the previous page of table"
+            size="sm"
+            variant="ghost"
+            onClick={() => previousPage()}
+          />
+          <span className="ds-table-pagination-buttons-current-page">
+            {currentPage}
+          </span>
+          <IconButton
+            className="ds-table-pagination-buttons-next-button ds-table-pagination-buttons-button"
+            iconName="angle-right"
+            isDisabled={!getCanNextPage()}
+            label="Go to the next page of table"
+            size="sm"
+            variant="ghost"
+            onClick={() => nextPage()}
+          />
+          <IconButton
+            className="ds-table-pagination-buttons-last-button ds-table-pagination-buttons-button"
+            iconName="backward-step"
+            iconRotation={180}
+            isDisabled={!getCanNextPage()}
+            label="Go to the last page of table"
+            size="sm"
+            variant="ghost"
+            onClick={() => setPageIndex(lastPage)}
+          />
+        </Inline>
         {enableRowsPerPage && !cqParams.sm && (
           <Inline
             align="center"
@@ -66,7 +120,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
               className="ds-table-pagination-rows-per-page-label"
               htmlFor="rowsPerPageSelect"
             >
-              {cqParams.md ? 'Rows' : 'Number of rows'}
+              {cqParams.md ? 'Rows' : 'Rows per page'}
             </label>
             <Select
               className="ds-table-pagination-rows-per-page-select"
@@ -88,60 +142,6 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             </Select>
           </Inline>
         )}
-        <div className="ds-table-pagination-item-count">
-          {(firstRowIndex + 1).toLocaleString('en-US')}-
-          {lastRowIndex.toLocaleString('en-US')} of{' '}
-          <abbr title={totalRowCount.toString()}>
-            {abbreviateNumber(totalRowCount)}
-          </abbr>
-          {isLg && ' total items'}
-        </div>
-        <Inline
-          align="center"
-          className="ds-table-pagination-buttons-wrapper"
-          gap="sm"
-        >
-          <span className="ds-table-pagination-buttons-current-page">
-            {!isLg ? 'Pg.' : 'Page'} {currentPage}
-          </span>
-          <IconButton
-            className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
-            iconName="backward-step"
-            isDisabled={!getCanPreviousPage()}
-            label="Go to the first page of table"
-            size="sm"
-            variant="ghost"
-            onClick={() => setPageIndex(0)}
-          />
-          <IconButton
-            className="ds-table-pagination-buttons-prev-button ds-table-pagination-buttons-button"
-            iconName="angle-left"
-            isDisabled={!getCanPreviousPage()}
-            label="Go to the previous page of table"
-            size="sm"
-            variant="ghost"
-            onClick={() => previousPage()}
-          />
-          <IconButton
-            className="ds-table-pagination-buttons-next-button ds-table-pagination-buttons-button"
-            iconName="angle-right"
-            isDisabled={!getCanNextPage()}
-            label="Go to the next page of table"
-            size="sm"
-            variant="ghost"
-            onClick={() => nextPage()}
-          />
-          <IconButton
-            className="ds-table-pagination-buttons-last-button ds-table-pagination-buttons-button"
-            iconName="backward-step"
-            iconRotation={180}
-            isDisabled={!getCanNextPage()}
-            label="Go to the last page of table"
-            size="sm"
-            variant="ghost"
-            onClick={() => setPageIndex(lastPage)}
-          />
-        </Inline>
       </Inline>
     </Padbox>
   );

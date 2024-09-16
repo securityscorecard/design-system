@@ -234,6 +234,7 @@ export interface ParsedDatatableOptions<D>
   enableRowActions?: DatatableOptions<D>['enableRowActions'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
+  enableTopToolbar?: DatatableOptions<D>['enableTopToolbar'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
   onFullscreenModeChange?: DatatableOptions<D>['onFullscreenModeChange'];
@@ -394,10 +395,15 @@ export interface DatatableOptions<D>
    */
   enableMultiRowSelection?: TableOptions<D>['enableMultiRowSelection'];
   /**
+   * Enables/disables if multiple columns can be sorted at the same time. If enabled multiple columns
+   * can be sorted while SHIFT key is hold
+   *
    * @default false
    */
   enableMultiSort?: boolean;
   /**
+   * Enables/disables the ability to remove multi-sorts
+   *
    * @default false
    */
   enableMultiRemove?: boolean;
@@ -447,13 +453,23 @@ export interface DatatableOptions<D>
    */
   enableSelectAll?: boolean;
   /**
+   * Enables/disables table sorting
+   *
    * @default true
    */
   enableSorting?: boolean;
   /**
+   * Enables/disables if column can be toggled to unsorted state after sorting happened before
+   *
    * @default true
    */
   enableSortingRemoval?: boolean;
+  /**
+   * Enables/disables the top toolbar with table settings buttons
+   *
+   * @default true
+   */
+  enableTopToolbar?: boolean;
   /**
    * Unique table identifier. Used as id for storing table state to LocalStorage when enablePersistentState is enabled
    */
