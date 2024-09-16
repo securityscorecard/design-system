@@ -8,6 +8,7 @@ import { getColor, getDepth, getRadii, pxToRem } from '../../../utils';
 import { StateButtonProps } from './StateButton.types';
 import { useStateButtonIcon } from '../hooks/useStateButton';
 import ElementLabel from '../../ElementLabel/ElementLabel';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const Popup = styled(Padbox)`
   display: flex;
@@ -56,11 +57,12 @@ const StateButton = ({
   isApplied = false,
   isLoading = false,
 }: StateButtonProps) => {
+  const { t } = useSafeTranslation();
   const { iconColor, iconName, handleMouseOut, handleMouseOver } =
     useStateButtonIcon(isApplied);
   return (
     <RemoveButton
-      aria-label="remove"
+      aria-label={t('sscds:filters.removeRule')}
       onClick={onClick(index)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
@@ -75,9 +77,9 @@ const StateButton = ({
           hasFixedWidth
         />
       )}
-      <Popup alignItems="center" justifyContent="center">
+      <Popup>
         <ElementLabel color="inverse" size="sm" style={{ lineHeight: '1rem' }}>
-          Remove
+          {t('sscds:filters.removeRule')}
         </ElementLabel>
       </Popup>
     </RemoveButton>

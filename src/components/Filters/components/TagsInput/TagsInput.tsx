@@ -4,6 +4,7 @@ import { Error } from '../../../forms/Message';
 import { TagsInputProps } from './TagsInput.types';
 import { MultiValueInput } from '../../../forms';
 import { validatePattern } from '../../helpers';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const TagsInput = ({
   value: tags = [],
@@ -16,6 +17,9 @@ const TagsInput = ({
   placeholder = 'Enter value',
   isInvalid = false,
 }: TagsInputProps) => {
+  const { t } = useSafeTranslation();
+  const resolvedPlaceholder =
+    placeholder ?? t('sscds:filters.tagsInput.placeholder');
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);
@@ -27,7 +31,7 @@ const TagsInput = ({
       <MultiValueInput
         maxLength={maxLength}
         pattern={pattern}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         value={tags}
         onInputChange={handleOnValidate}
         onValuesChange={onChange}

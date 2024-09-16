@@ -14,6 +14,31 @@
       "require": "./build/index.cjs",
       "default": "./src/index.ts"
     },
+    "./locales/en-US": {
+      "types": "./build/locales/en-US.d.ts",
+      "import": "./build/en-US.mjs",
+      "require": "./build/en-US.cjs"
+    },
+    "./locales/cs-CZ": {
+      "types": "./build/locales/cs-CZ.d.ts",
+      "import": "./build/cs-CZ.mjs",
+      "require": "./build/cs-CZ.cjs"
+    },
+    "./locales/es-ES": {
+      "types": "./build/locales/es-ES.d.ts",
+      "import": "./build/es-ES.mjs",
+      "require": "./build/es-ES.cjs"
+    },
+    "./locales/pt-BR": {
+      "types": "./build/locales/pt-BR.d.ts",
+      "import": "./build/pt-BR.mjs",
+      "require": "./build/pt-BR.cjs"
+    },
+    "./locales/ja-JP": {
+      "types": "./build/locales/ja-JP.d.ts",
+      "import": "./build/ja-JP.mjs",
+      "require": "./build/ja-JP.cjs"
+    },
     "./tokens.css": {
       "import": "./build/tokens.css",
       "require": "./build/tokens.css"
@@ -71,6 +96,7 @@
     "csstype": "^3.0.11",
     "dedent": "^1.5.1",
     "fast-deep-equal": "^3.1.3",
+    "i18next": ">=17.3.1",
     "numeral": "^2.0.6",
     "pullstate": "^1.23.0",
     "ramda": "^0.28.0",
@@ -79,6 +105,7 @@
     "react-cool-portal": "^1.2.0",
     "react-datepicker": "^4.6.0",
     "react-dropzone": "^12.1.0",
+    "react-i18next": ">=11.18.6",
     "react-popper": "^2.2.5",
     "react-table": "^7.7.0",
     "react-table-sticky": "^1.1.3",

@@ -46,6 +46,11 @@ export default defineConfig({
       entry: [
         path.resolve(__dirname, 'src/index.ts'),
         path.resolve(__dirname, 'src/tokens/tokens.css'),
+        path.resolve(__dirname, 'src/locales/en-US.ts'),
+        path.resolve(__dirname, 'src/locales/cs-CZ.ts'),
+        path.resolve(__dirname, 'src/locales/es-ES.ts'),
+        path.resolve(__dirname, 'src/locales/pt-BR.ts'),
+        path.resolve(__dirname, 'src/locales/ja-JP.ts'),
       ],
       fileName: (format, name) => `${name}.${format === 'cjs' ? 'cjs' : 'mjs'}`,
       formats: ['es', 'cjs'],
