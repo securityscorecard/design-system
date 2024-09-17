@@ -66,7 +66,7 @@ describe('DatatableV2/sorting', () => {
 
       expect(screen.getAllByRole('row')).toHaveLength(4); // 3 data rows + 1 header row
 
-      userEvent.selectOptions(screen.getByLabelText('Number of rows'), '1');
+      userEvent.selectOptions(screen.getByLabelText('Rows per page'), '1');
       expect(screen.getAllByRole('row')).toHaveLength(2); // 1 data row + 1 header row
     });
   });

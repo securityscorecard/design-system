@@ -6,6 +6,7 @@ import { DatatableInstance } from '../Datatable.types';
 import Pagination from '../toolbar/Pagination';
 import Selection from '../toolbar/Selection';
 import Table from './Table';
+import TopToolbar from '../toolbar/TopToolbar';
 
 const DatatableRoot = styled.div<{ $isFullscreen }>`
   ${({ $isFullscreen }) =>
@@ -70,6 +71,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         }}
         hasBorder
       >
+        {table.options.enableTopToolbar && <TopToolbar table={table} />}
         <Table table={table} />
       </Surface>
       {table.options.enableRowSelection && <Selection table={table} />}

@@ -23,14 +23,11 @@ const ColumnActionsMenu = <D,>({
       enableColumnOrdering,
       enableColumnPinning,
       enableColumnResizing,
-      enableFullScreenMode,
       enableHiding,
       enableSorting,
       enableSortingRemoval,
     },
     setColumnSizingInfo,
-    setShowColumnSettings,
-    setIsFullscreenMode,
   } = table;
   const { column } = header;
   const { columnSizing, isFullscreenMode } = getState();
@@ -55,12 +52,6 @@ const ColumnActionsMenu = <D,>({
       isResizingColumn: false,
     }));
     column.resetSize();
-  };
-  const handleColumnSettings = () => {
-    setShowColumnSettings((old) => !old);
-  };
-  const handleFullscreenMode = () => {
-    setIsFullscreenMode((old) => !old);
   };
 
   const columnActionsMenu = [
@@ -116,21 +107,6 @@ const ColumnActionsMenu = <D,>({
           ) : undefined,
         ]
       : []),
-    ...(enableHiding || enableColumnPinning || enableColumnOrdering
-      ? [
-          <MenuItem
-            key="col-action-settings"
-            className="ds-table-column-actions-menu-item"
-            iconName="columns-3"
-            onClick={handleColumnSettings}
-          >
-            Column settings
-          </MenuItem>,
-          enableColumnPinning && column.getCanPin() ? (
-            <MenuSeparator key="col-action-sep-03" />
-          ) : undefined,
-        ]
-      : []),
     ...(enableColumnPinning && column.getCanPin()
       ? [
           <MenuItem
@@ -142,14 +118,6 @@ const ColumnActionsMenu = <D,>({
           >
             Pin column
           </MenuItem>,
-          // <MenuItem
-          //   className="ds-table-column-actions-menu-item"
-          //   key="col-action-pin-right"
-          //   isDisabled={column.getIsPinned() === 'right'}
-          //   onClick={() => handlePinColumn('right')}
-          // >
-          //   📌 Pin column to right
-          // </MenuItem>,
           <MenuItem
             key="col-action-pin-reset"
             className="ds-table-column-actions-menu-item"
@@ -174,21 +142,6 @@ const ColumnActionsMenu = <D,>({
             onClick={() => handleResetColumnSize()}
           >
             Reset column size
-          </MenuItem>,
-          enableFullScreenMode ? (
-            <MenuSeparator key="col-action-sep-05" />
-          ) : undefined,
-        ]
-      : []),
-    ...(enableFullScreenMode
-      ? [
-          <MenuItem
-            key="col-action-fullscreen"
-            className="ds-table-column-actions-menu-item"
-            iconName={isFullscreenMode ? 'compress' : 'expand'}
-            onClick={handleFullscreenMode}
-          >
-            Toggle full screen
           </MenuItem>,
         ]
       : []),
