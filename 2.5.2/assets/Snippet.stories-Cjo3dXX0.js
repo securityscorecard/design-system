@@ -1,0 +1,22 @@
+import{j as T}from"./jsx-runtime-Cw0GR0a5.js";import{S as E}from"./Snippet-CbWNTpCR.js";import"./index-CTjT7uj6.js";import"./styled-components.browser.esm-xOyuSOjK.js";import"./index-DR5XHNKF.js";import"./index-DT7C7tog.js";import"./index-BbaO5Nb4.js";import"./Padbox-DcClumXL.js";import"./index-C7IrpltL.js";import"./index-nwGNxYyI.js";import"./prop-BK8rocxd.js";import"./Inline.enums-DB1XHHNB.js";import"./Cluster-C2ONgLd-.js";import"./useLogger-BRbW6gx4.js";import"./DSProvider-OItu1eMI.js";import"./extends-CF3RwP-h.js";import"./index-DIVhMF2i.js";import"./theme-D0PvF__4.js";import"./colors-BJBAFLAc.js";import"./index-BIxA6EUN.js";import"./ErrorBoundary-BpLikDx8.js";import"./index-vxnc4v2T.js";import"./index-Ce7N-01r.js";import"./require-router-link-YRwpEbcA.js";import"./react-router-dom-DzSrOeqf.js";import"./inheritsLoose-B6jfs0L0.js";import"./setPrototypeOf-DgZC2w_0.js";import"./index-BRV0Se7Z.js";import"./tiny-invariant-CopsF_GD.js";import"./objectWithoutPropertiesLoose-CAYKN5F1.js";import"./isNull-DtrhChS2.js";import"./isNotNull-lH5ks6fm.js";import"./flip-D5ImYigC.js";import"./IconButton-BfF2jWqp.js";import"./components-BojOatfK.js";import"./index-DCTvgOp1.js";import"./Icon-B9Y_mYIL.js";import"./index-uyLpYamY.js";import"./index-CY6BXmKt.js";import"./Spinner-B9l4ubnC.js";import"./Button-DCr2txsF.js";const br={title:"components/Snippet",component:E},t=C=>T.jsx(E,{...C}),r=t.bind({});r.args={children:`
+  "scripts": {
+    "build": "rollup -c",
+    "betterer": "betterer -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
+    "betterer:precommit": "betterer precommit -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
+    "betterer:ci": "betterer ci -t ./tsconfig.json -c .betterer/.betterer.ts -r .betterer/.betterer.results --strict",
+    "test": "jest -w 1",
+    "test:watch": "jest --watch",
+    "types": "tsc --noEmit",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
+    "lint:fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
+    "lint:css": "stylelint 'src/**/*.{js,ts,tsx}'",
+    "storybook": "start-storybook -p 8008",
+    "storybook:build": "build-storybook --quiet",
+    "test:storybook:visual": "./visual-regressions/bin/take-and-check-in-docker.sh",
+    "test:storybook:visual:update": "./visual-regressions/bin/take-and-update-in-docker.sh",
+    "test:storybook:visual:ci": "./visual-regressions/bin/take-and-check-in-docker-ci.sh",
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
+  },
+  `};r.parameters={screenshot:{skip:!0}};const e=t.bind({});e.args={...r.args,canCopy:!1};const s=t.bind({});s.args={children:JSON.stringify([{name:"core-js",url:"https://github.com/zloirock/core-js",version:"core-js-global@2.6.12"}],null,2),shouldDedent:!1};const o=t.bind({});o.args={...r.args,shouldWrapText:!0};const i=t.bind({});i.args={...r.args,isExpanded:!0};const a=t.bind({});a.args={...r.args,maxHeight:1e3};var p,c,m;r.parameters={...r.parameters,docs:{...(p=r.parameters)==null?void 0:p.docs,source:{originalSource:"args => <Snippet {...args} />",...(m=(c=r.parameters)==null?void 0:c.docs)==null?void 0:m.source}}};var n,d,u;e.parameters={...e.parameters,docs:{...(n=e.parameters)==null?void 0:n.docs,source:{originalSource:"args => <Snippet {...args} />",...(u=(d=e.parameters)==null?void 0:d.docs)==null?void 0:u.source}}};var l,g,b;s.parameters={...s.parameters,docs:{...(l=s.parameters)==null?void 0:l.docs,source:{originalSource:"args => <Snippet {...args} />",...(b=(g=s.parameters)==null?void 0:g.docs)==null?void 0:b.source}}};var h,x,k;o.parameters={...o.parameters,docs:{...(h=o.parameters)==null?void 0:h.docs,source:{originalSource:"args => <Snippet {...args} />",...(k=(x=o.parameters)==null?void 0:x.docs)==null?void 0:k.source}}};var S,y,j;i.parameters={...i.parameters,docs:{...(S=i.parameters)==null?void 0:S.docs,source:{originalSource:"args => <Snippet {...args} />",...(j=(y=i.parameters)==null?void 0:y.docs)==null?void 0:j.source}}};var f,W,v;a.parameters={...a.parameters,docs:{...(f=a.parameters)==null?void 0:f.docs,source:{originalSource:"args => <Snippet {...args} />",...(v=(W=a.parameters)==null?void 0:W.docs)==null?void 0:v.source}}};const hr=["Playground","WithoutCopy","WithoutDedent","WithTextWrapping","Expanded","CustomMaxHeight"];export{a as CustomMaxHeight,i as Expanded,r as Playground,o as WithTextWrapping,e as WithoutCopy,s as WithoutDedent,hr as __namedExportsOrder,br as default};
+//# sourceMappingURL=Snippet.stories-Cjo3dXX0.js.map

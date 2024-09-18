@@ -1,0 +1,20 @@
+import{j as r}from"./jsx-runtime-Cw0GR0a5.js";import{r as j}from"./index-CTjT7uj6.js";import{a as k}from"./chunk-454WOBUV-DWuJqIWT.js";import{C as i}from"./index-qraLggsk.js";import"./index-Dyk1lTu2.js";import"./index-DR5XHNKF.js";import{S as v}from"./index-nwGNxYyI.js";import{B as P}from"./Button-DBUI4Jbs.js";import{S as B}from"./Snippet-CbWNTpCR.js";import"./v4-D8aEg3BZ.js";import"./styled-components.browser.esm-xOyuSOjK.js";import"./index-C7IrpltL.js";import"./extends-CF3RwP-h.js";import"./DSProvider-OItu1eMI.js";import"./index-DIVhMF2i.js";import"./theme-D0PvF__4.js";import"./colors-BJBAFLAc.js";import"./index-DT7C7tog.js";import"./index-uyLpYamY.js";import"./index-DCTvgOp1.js";import"./Icon-B9Y_mYIL.js";import"./index-BRV0Se7Z.js";import"./useLogger-BRbW6gx4.js";import"./index-BIxA6EUN.js";import"./index-BbaO5Nb4.js";import"./Padbox-DcClumXL.js";import"./Inline.enums-DB1XHHNB.js";import"./prop-BK8rocxd.js";import"./index-DOqtWUVi.js";import"./index-CECIl5yl.js";import"./isFunction-CoLsl8nV.js";import"./checkCircleSolid-CXNAtMl8.js";import"./require-router-link-YRwpEbcA.js";import"./react-router-dom-DzSrOeqf.js";import"./inheritsLoose-B6jfs0L0.js";import"./setPrototypeOf-DgZC2w_0.js";import"./tiny-invariant-CopsF_GD.js";import"./objectWithoutPropertiesLoose-CAYKN5F1.js";import"./index-CY6BXmKt.js";import"./Spinner-B9l4ubnC.js";import"./isNull-DtrhChS2.js";import"./isNotNull-lH5ks6fm.js";import"./noop-XW1TVrX5.js";import"./Cluster-C2ONgLd-.js";import"./ErrorBoundary-BpLikDx8.js";import"./index-vxnc4v2T.js";import"./index-Ce7N-01r.js";import"./flip-D5ImYigC.js";import"./IconButton-BfF2jWqp.js";import"./components-BojOatfK.js";import"./Button-DCr2txsF.js";const ve={component:i,title:"components/Collapsible"},t=e=>r.jsx(i,{...e});t.args={title:"playground",subject:"Collapsible",children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus"};t.parameters={screenshot:{skip:!0}};const o=e=>r.jsx(i,{...e});o.args={subject:"Website does not implement X-XSS-Protection Best Practices",title:"Resolve or Comment",onOpen:k("onOpen"),children:"You have 256 findings related to Website does not implement X-XSS-Protection Best Practices"};const p=e=>r.jsx(i,{...e});p.args={...o.args,defaultIsOpen:!0};const s=e=>{const[n,m]=j.useState(!0);return r.jsxs(v,{gap:"md",children:[r.jsx(i,{isOpen:n,onOpenChange:a=>m(a),...e}),r.jsx(P,{variant:"outline",onClick:()=>{m(a=>!a)},children:"Toggle"}),r.jsx(B,{children:`{
+          isOpen: ${n},
+        }`})]})};s.args=o.args;s.parameters={screenshot:{skip:!0}};var l,c,u;t.parameters={...t.parameters,docs:{...(l=t.parameters)==null?void 0:l.docs,source:{originalSource:"args => <Collapsible {...args} />",...(u=(c=t.parameters)==null?void 0:c.docs)==null?void 0:u.source}}};var d,g,C;o.parameters={...o.parameters,docs:{...(d=o.parameters)==null?void 0:d.docs,source:{originalSource:"args => <Collapsible {...args} />",...(C=(g=o.parameters)==null?void 0:g.docs)==null?void 0:C.source}}};var b,O,S;p.parameters={...p.parameters,docs:{...(b=p.parameters)==null?void 0:b.docs,source:{originalSource:"args => <Collapsible {...args} />",...(S=(O=p.parameters)==null?void 0:O.docs)==null?void 0:S.source}}};var x,f,h;s.parameters={...s.parameters,docs:{...(x=s.parameters)==null?void 0:x.docs,source:{originalSource:`args => {
+  const [isOpen, setIsOpen] = useState(true);
+  return <Stack gap="md">
+      <Collapsible isOpen={isOpen} onOpenChange={open => setIsOpen(open)} {...args} />
+
+      <Button variant="outline" onClick={() => {
+      setIsOpen(prev => !prev);
+    }}>
+        Toggle
+      </Button>
+      <Snippet>
+        {\`{
+          isOpen: \${isOpen},
+        }\`}
+      </Snippet>
+    </Stack>;
+}`,...(h=(f=s.parameters)==null?void 0:f.docs)==null?void 0:h.source}}};const Pe=["Playground","DefaultCollapsible","OpenedCollapsible","ControlledCollapsible"];export{s as ControlledCollapsible,o as DefaultCollapsible,p as OpenedCollapsible,t as Playground,Pe as __namedExportsOrder,ve as default};
+//# sourceMappingURL=Collapsible.stories-B1vNR0vp.js.map
