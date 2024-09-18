@@ -29,36 +29,36 @@ const BottomBar = ({
           variant="ghost"
           onClick={onAdd}
         >
-          {t('sscds:filters.addRule')}
+          {t('sscds|filters.addRule')}
         </Button>
         <Button size="sm" variant="ghost" onClick={onClearAll}>
-          {t('sscds:filters.clearRules')}
+          {t('sscds|filters.clearRules')}
         </Button>
       </Inline>
       <Inline align="center" gap="sm">
         {hasUnappliedFilters && hasApplyButton && (
           <Paragraph as="div" margin="none" size="md" variant="secondary">
-            {t('sscds:filters.unappliedFilters')}
+            {t('sscds|filters.unappliedFilters')}
           </Paragraph>
         )}
         {canCancel && hasApplyButton ? (
           <Button size="sm" variant="subtle" onClick={onCancel}>
-            {t('sscds:filters.cancel')}
+            {t('sscds|filters.cancel')}
           </Button>
         ) : hasCloseButton ? (
           <Button size="sm" variant="subtle" onClick={onClose}>
-            {t('sscds:filters.close')}
+            {t('sscds|filters.close')}
           </Button>
         ) : null}
         {hasApplyButton && (
           <Button
             isDisabled={isApplyDisabled}
             isLoading={canCancel}
-            loadingText={t('sscds:loading')}
+            loadingText={t('sscds|loading')}
             size="sm"
             onClick={onSubmit}
           >
-            {t('sscds:filters.apply')}
+            {t('sscds|filters.apply')}
           </Button>
         )}
       </Inline>

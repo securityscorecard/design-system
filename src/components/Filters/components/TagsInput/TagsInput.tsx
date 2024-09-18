@@ -19,7 +19,7 @@ const TagsInput = ({
 }: TagsInputProps) => {
   const { t } = useSafeTranslation();
   const resolvedPlaceholder =
-    placeholder ?? t('sscds:filters.tagsInput.placeholder');
+    placeholder ?? t('sscds|filters.tagsInput.placeholder');
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);

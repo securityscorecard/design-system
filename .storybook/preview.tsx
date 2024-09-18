@@ -39,6 +39,7 @@ i18n.use(initReactI18next).init({
   },
   defaultNS:'sscds',
   keySeparator: false,
+  nsSeparator: '|',
   lng: 'en-US',
   fallbackLng: 'en-US',
   interpolation: {

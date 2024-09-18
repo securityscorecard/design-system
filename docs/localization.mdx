@@ -49,11 +49,14 @@ i18n.use(initReactI18next).init({
   },
   lng: 'en',
   fallbackLng: 'en',
+  nsSeparator: '|',
   interpolation: {
     escapeValue: false,
   },
 });
 ```
+
+The Design System localization expects to use `|` as the namespace separator to prevent accidental clash with the existing keys containing the `:` character.
 
 By following these steps, your application will be set up to use the localized versions of our components. The components will automatically use the translations provided under the `sscds` namespace, allowing for seamless integration of multiple languages in your user interface.
 

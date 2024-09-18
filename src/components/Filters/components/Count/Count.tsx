@@ -18,8 +18,8 @@ const Count = ({
 }: NumberProps) => {
   const { t } = useSafeTranslation();
   const resolvedPlaceholder =
-    placeholder ?? t('sscds:filters.count.placeholder');
-  const resolvedErrorMessage = errorMessage ?? t('sscds:filters.count.error');
+    placeholder ?? t('sscds|filters.count.placeholder');
+  const resolvedErrorMessage = errorMessage ?? t('sscds|filters.count.error');
 
   const handleKeyPress = (event) => {
     if (!/[0-9]/.test(event.key)) {

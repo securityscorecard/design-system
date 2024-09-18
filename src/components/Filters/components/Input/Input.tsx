@@ -20,7 +20,7 @@ const Input = ({
 }: InputProps) => {
   const { t } = useSafeTranslation();
   const resolvedPlaceholder =
-    placeholder ?? t('sscds:filters.input.placeholder');
+    placeholder ?? t('sscds|filters.input.placeholder');
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);
