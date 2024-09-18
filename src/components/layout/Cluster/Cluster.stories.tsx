@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -46,7 +45,7 @@ export default {
 } as Meta;
 
 const ClusterTemplate: StoryFn<ClusterProps> = (args) => (
-  <Cluster style={{ backgroundColor: '#0275d8' }} {...args}>
+  <Cluster {...args}>
     <Box>Item</Box>
     <Box style={{ height: '100px' }}>Long item</Box>
     <Box>Very long item item item</Box>
@@ -61,6 +60,7 @@ const ClusterTemplate: StoryFn<ClusterProps> = (args) => (
 );
 
 export const Playground = ClusterTemplate.bind({});
+Playground.args = { gap: 'md' };
 Playground.parameters = {
   screenshot: { skip: true },
 };
@@ -80,19 +80,4 @@ export const WithVerticalAlignment = ClusterTemplate.bind({});
 WithVerticalAlignment.args = {
   ...WithGap.args,
   align: 'center',
-};
-
-export const AsNavigation: StoryFn<ClusterProps> = (args) => (
-  <Cluster style={{ backgroundColor: '#0275d8' }} {...args}>
-    <Box as="li">Home</Box>
-    <Box as="li">Products</Box>
-    <Box as="li">About us</Box>
-    <Box as="li">Settings</Box>
-    <Box as="li">Sign out</Box>
-  </Cluster>
-);
-AsNavigation.args = {
-  ...WithGap.args,
-  wrapperEl: 'nav',
-  parentEl: 'ul',
 };

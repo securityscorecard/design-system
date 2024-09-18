@@ -1,14 +1,9 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { prop } from 'ramda';
 import { isNotUndefined, isNumber } from 'ramda-adjunct';
 import { Property } from 'csstype';
 import cls from 'classnames';
 
-import {
-  AlignItemsPropType,
-  JustifyContentPropType,
-} from '../../../types/flex.types';
 import { SpaceSize } from '../../../theme/space.types';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -90,17 +85,6 @@ const Inline = styled.div.attrs((props) => ({
     margin-left: ${({ gap, theme }) => getSpace(gap, { theme })};
   }
 `;
-
-Inline.propTypes = {
-  align: AlignItemsPropType,
-  justify: JustifyContentPropType,
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  stretch: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<Stretch>(Object.values(StretchEnum)),
-  ]),
-  className: PropTypes.string,
-};
 
 Inline.defaultProps = {
   gap: SpaceSizes.none,

@@ -1868,6 +1868,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.24.8":
+  version: 7.25.6
+  resolution: "@babel/runtime@npm:7.25.6"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10/0c4134734deb20e1005ffb9165bf342e1074576621b246d8e5e41cc7cb315a885b7d98950fbf5c63619a2990a56ae82f444d35fe8c4691a0b70c2fe5673667dc
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.24.0, @babel/template@npm:^7.3.3":
   version: 7.24.0
   resolution: "@babel/template@npm:7.24.0"
@@ -4848,6 +4857,7 @@ __metadata:
     fast-deep-equal: "npm:^3.1.3"
     history: "npm:^5.3.0"
     husky: "npm:^7.0.4"
+    i18next: "npm:>=17.3.1"
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -4860,7 +4870,6 @@ __metadata:
     postcss-styled-syntax: "npm:^0.6.4"
     postcss-syntax: "npm:>=0.36.2"
     prettier: "npm:^2.6.0"
-    prop-types: "npm:^15.8.1"
     pullstate: "npm:^1.23.0"
     ramda: "npm:^0.28.0"
     ramda-adjunct: "npm:^3.0.0"
@@ -4870,6 +4879,7 @@ __metadata:
     react-datepicker: "npm:^4.6.0"
     react-dom: "npm:^18.3.1"
     react-dropzone: "npm:^12.1.0"
+    react-i18next: "npm:>=11.18.6"
     react-is: "npm:>= 18.3.1"
     react-popper: "npm:^2.2.5"
     react-router-dom: "npm:^5.3.0"
@@ -11997,6 +12007,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-parse-stringify@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "html-parse-stringify@npm:3.0.1"
+  dependencies:
+    void-elements: "npm:3.1.0"
+  checksum: 10/8743b76cc50e46d1956c1ad879d18eb9613b0d2d81e24686d633f9f69bb26b84676f64a926973de793cca479997017a63219278476d617b6c42d68246d7c07fe
+  languageName: node
+  linkType: hard
+
 "html-tags@npm:^3.1.0, html-tags@npm:^3.3.1":
   version: 3.3.1
   resolution: "html-tags@npm:3.3.1"
@@ -12106,6 +12125,15 @@ __metadata:
   bin:
     husky: lib/bin.js
   checksum: 10/8fecb619ab924bd99b2c9ce494bff88e45369c1125e07a603dfacb4bd60ef86840e08c689794c476189183e6223f0ea93aadebf78e3508479453c219358ca787
+  languageName: node
+  linkType: hard
+
+"i18next@npm:>=17.3.1":
+  version: 23.15.1
+  resolution: "i18next@npm:23.15.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.2"
+  checksum: 10/bfd4935517ddd68bd12ccc0b7bd454f1a19403b627d79a2fe81c9059380674f085804f8d7475dd248a887f90d9e2da0f9be64179ddf32e9eebac47e4b9f92889
   languageName: node
   linkType: hard
 
@@ -17800,6 +17828,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-i18next@npm:>=11.18.6":
+  version: 15.0.1
+  resolution: "react-i18next@npm:15.0.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.24.8"
+    html-parse-stringify: "npm:^3.0.1"
+  peerDependencies:
+    i18next: ">= 23.2.3"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10/2998565bdcdc37ba8d2b3531e36441e00c8bb7fb7c1cac35364a81722cb4e5a363288906566c91f3ad835abc5b0b78e14d8511f57b154a8e5c057a8e6096cb07
+  languageName: node
+  linkType: hard
+
 "react-input-autosize@npm:^3.0.0":
   version: 3.0.0
   resolution: "react-input-autosize@npm:3.0.0"
@@ -21382,6 +21428,13 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10/caa40343c2c4e6d8e257fccb4c3029f62909c319a86063ce727ed550925c0a834460b0d1ca20c4d6c915f35302aa1052f6ec5193099a47ce21d74b9b817e69e1
+  languageName: node
+  linkType: hard
+
+"void-elements@npm:3.1.0":
+  version: 3.1.0
+  resolution: "void-elements@npm:3.1.0"
+  checksum: 10/0390f818107fa8fce55bb0a5c3f661056001c1d5a2a48c28d582d4d847347c2ab5b7f8272314cac58acf62345126b6b09bea623a185935f6b1c3bbce0dfd7f7f
   languageName: node
   linkType: hard
 

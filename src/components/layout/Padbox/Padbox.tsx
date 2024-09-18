@@ -1,5 +1,4 @@
 import styled, { DefaultTheme } from 'styled-components';
-import PropTypes from 'prop-types';
 import cls from 'classnames';
 
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -32,12 +31,6 @@ const Padbox = styled.div.attrs((props) => ({
   box-sizing: border-box;
   ${createPadding};
 `;
-
-Padbox.propTypes = {
-  paddingType: PropTypes.oneOf(Object.values(PaddingTypes)),
-  paddingSize: PropTypes.oneOf(Object.values(SpaceSizes)),
-  className: PropTypes.string,
-};
 
 Padbox.defaultProps = {
   paddingType: PaddingTypes.square,

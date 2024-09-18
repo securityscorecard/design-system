@@ -1,5 +1,4 @@
-import React, { KeyboardEvent, MouseEvent } from 'react';
-import PropTypes from 'prop-types';
+import { KeyboardEvent, MouseEvent } from 'react';
 
 import { TabProps } from './Tabs.types';
 import { TabVariants } from './Tabs.enums';
@@ -63,18 +62,6 @@ const Tab = ({
       {children}
     </BaseTabLabel>
   );
-};
-
-Tab.propTypes = {
-  children: PropTypes.node.isRequired,
-  value: PropTypes.string.isRequired,
-  __variant: PropTypes.oneOf(Object.values(TabVariants)),
-  // eslint-disable-next-line
-  __isSelected: PropTypes.bool,
-  // eslint-disable-next-line
-  __isExpanded: PropTypes.bool,
-  __onSelectTab: PropTypes.func, // internal property
-  onClick: PropTypes.func,
 };
 
 export default Tab;

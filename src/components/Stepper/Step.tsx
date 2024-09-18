@@ -1,5 +1,4 @@
 import React, { forwardRef, useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -139,14 +138,7 @@ const Step = forwardRef<HTMLDivElement, React.PropsWithChildren<StepProps>>(
     );
   },
 );
+
 Step.displayName = 'Step';
-Step.propTypes = {
-  label: PropTypes.string.isRequired,
-  summary: PropTypes.string,
-  index: PropTypes.number,
-  shouldShowText: PropTypes.bool,
-  isLast: PropTypes.bool,
-  onStepClick: PropTypes.func,
-};
 
 export default Step;

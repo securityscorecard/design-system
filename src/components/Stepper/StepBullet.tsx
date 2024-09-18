@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { getColor, pxToRem } from '../../utils';
@@ -85,12 +84,5 @@ const StepBullet = ({
     </Bullet>
   </BulletWrapper>
 );
-
-StepBullet.propTypes = {
-  stepNumber: PropTypes.number.isRequired,
-  isActive: PropTypes.bool,
-  isPending: PropTypes.bool,
-  isDone: PropTypes.bool,
-};
 
 export default StepBullet;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -31,11 +30,5 @@ const HintTooltip = ({ children, width, ...props }: HintTooltipProps) => (
     />
   </Tooltip>
 );
-
-HintTooltip.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  width: PropTypes.number,
-};
 
 export default HintTooltip;

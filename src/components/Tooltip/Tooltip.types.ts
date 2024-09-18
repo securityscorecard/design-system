@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { ReactComponentLike } from 'prop-types';
 
+import { ReactComponentLike } from '../../types/utils.types';
 import { Placements } from '../Dropdown/Dropdown.types';
 
 export interface TooltipPopupProps {

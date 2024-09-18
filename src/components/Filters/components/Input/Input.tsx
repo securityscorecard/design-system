@@ -4,6 +4,7 @@ import { InputProps } from './Input.types';
 import { Error } from '../../../forms/Message';
 import { validatePattern } from '../../helpers';
 import { Input as BaseInput } from '../../../forms';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const Input = ({
   value = '',
@@ -12,11 +13,14 @@ const Input = ({
   pattern,
   errorMessage,
   onValidate = validatePattern,
-  placeholder = 'String',
+  placeholder,
   isInvalid = false,
   onError,
   ...props
 }: InputProps) => {
+  const { t } = useSafeTranslation();
+  const resolvedPlaceholder =
+    placeholder ?? t('sscds:filters.input.placeholder');
   const handleOnValidate = (event) => {
     const { target } = event;
     const hasError = onValidate(target) && isNonEmptyString(target.value);
@@ -34,7 +38,7 @@ const Input = ({
         isInvalid={isInvalid}
         maxLength={maxLength}
         pattern={pattern}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         type="text"
         value={value}
         onBlur={handleOnValidate}

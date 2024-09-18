@@ -1,16 +1,21 @@
-import styled from 'styled-components';
+import type { CSSProperties, ReactNode } from 'react';
 
-import { SpaceSizes } from '../../../theme/space.enums';
-import { getColor } from '../../../utils';
 import { Padbox } from '../Padbox';
+import { Surface } from '../Surface';
 
-export const Box = styled(Padbox).attrs(() => ({
-  paddingSize: SpaceSizes.sm,
-}))`
-  background-color: ${getColor('primary.50')};
-`;
-
-Box.defaultProps = {
-  children:
-    'Sed id nulla ac est dignissim pharetra. Donec sit amet nulla vitae orci auctor posuere in ac massa. Quisque blandit enim diam, eget interdum ante pretium eget.',
-};
+export const Box = ({
+  children,
+  style,
+}: {
+  children?: ReactNode;
+  style?: CSSProperties;
+}) => (
+  <Surface background="dynamic" radius="sm" style={style} hasBorder>
+    <Padbox paddingSize="sm">
+      {children ??
+        `Sed id nulla ac est dignissim pharetra. Donec sit amet nulla vitae orci
+      auctor posuere in ac massa. Quisque blandit enim diam, eget interdum ante
+      pretium eget.`}
+    </Padbox>
+  </Surface>
+);

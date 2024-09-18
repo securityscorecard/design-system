@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import PropTypes from 'prop-types';
 import { pipe, prop, unless } from 'ramda';
 import { isString } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -40,18 +39,6 @@ const Spinner = styled.div.attrs({
   border-top-color: ${({ dark, theme }) =>
     getColor(dark ? 'neutral.800' : 'neutral.0', { theme })};
 `;
-
-Spinner.propTypes = {
-  dark: PropTypes.bool,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  verticalMargin: PropTypes.number,
-  horizontalMargin: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf<'auto'>(['auto']),
-  ]),
-  borderWidth: PropTypes.number,
-};
 
 Spinner.defaultProps = {
   dark: false,

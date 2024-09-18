@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes, { ReactComponentLike } from 'prop-types';
 import { Property } from 'csstype';
 import { prop } from 'ramda';
 import cls from 'classnames';
@@ -8,7 +7,7 @@ import cls from 'classnames';
 import { getSpace } from '../../../utils';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { SpaceSize } from '../../../theme/space.types';
-import { AlignItemsPropType } from '../../../types/flex.types';
+import { ReactComponentLike } from '../../../types/utils.types';
 import { CLX_LAYOUT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
 
@@ -103,16 +102,6 @@ const Grid = ({
       </GridParent>
     </GridWrapper>
   );
-};
-
-Grid.propTypes = {
-  gap: PropTypes.oneOf(Object.values(SpaceSizes)),
-  cols: PropTypes.number,
-  align: AlignItemsPropType,
-  wrapperEl: PropTypes.elementType,
-  parentEl: PropTypes.elementType,
-  wrapperOverflow: PropTypes.oneOf(['hidden', 'visible']),
-  className: PropTypes.string,
 };
 
 Grid.defaultProps = {

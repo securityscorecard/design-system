@@ -4,6 +4,7 @@ import { Error } from '../../../forms/Message';
 import { validateNumber } from '../../helpers';
 import { NumberProps } from './Number.types';
 import { Input } from '../../../forms';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const Number = ({
   value = '',
@@ -15,6 +16,10 @@ const Number = ({
   isInvalid = false,
   onError,
 }: NumberProps) => {
+  const { t } = useSafeTranslation();
+  const resolvedPlaceholder =
+    placeholder ?? t('sscds:filters.number.placeholder');
+  const resolvedErrorMessage = errorMessage ?? t('sscds:filters.number.error');
   const handleOnChange = (event) => {
     onChange(event);
     const hasError =
@@ -28,13 +33,13 @@ const Number = ({
       <Input
         data-has-spin="false"
         isInvalid={isInvalid}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         step="any"
         type="number"
         value={value}
         onChange={handleOnChange}
       />
-      {isInvalid && <Error>{errorMessage}</Error>}
+      {isInvalid && <Error>{resolvedErrorMessage}</Error>}
     </>
   );
 };

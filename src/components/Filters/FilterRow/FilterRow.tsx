@@ -30,10 +30,10 @@ import { SelectFilter } from '../components';
 import { DisabledOperator } from '../DisabledOperator';
 import { FilterRowProps, SplitFieldProps } from './FilterRow.types';
 import { ComponentWithProps as ComponentWithPropsTypes } from '../Filters.types';
-import { operatorOptions } from '../data/operatorOptions';
 import { pxToRem } from '../../../utils';
 import { normalizeOptions, useFilterRow } from '../hooks/useFilterRow';
 import { SpaceSizes } from '../../../theme';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const SplitField = styled.div<SplitFieldProps>`
   ${({ $width }) =>
@@ -93,9 +93,8 @@ const getConditionComponent = curry(
     )(fieldValue, fields),
 );
 
-const getOperatorOptions = curry((operatorValue) =>
-  find(propEq('value', operatorValue))(operatorOptions),
-);
+const getOperatorOptions = (operatorValue, operatorOptions) =>
+  find(propEq('value', operatorValue), operatorOptions);
 
 const getFieldOptions = map(normalizeOptions);
 
@@ -203,13 +202,17 @@ const FilterRow = ({
   defaultOperator,
   hasApplyButton,
 }: FilterRowProps) => {
+  const { t } = useSafeTranslation();
   const { field, conditions, condition, component } = useFilterRow(
     fields,
     fieldValue,
     conditionValue,
   );
-
-  const operatorOption = getOperatorOptions(operatorValue);
+  const operatorOptions = [
+    { value: 'and', label: t('sscds:filters.andOperator') },
+    { value: 'or', label: t('sscds:filters.orOperator') },
+  ];
+  const operatorOption = getOperatorOptions(operatorValue, operatorOptions);
 
   const fieldOptions = getFieldOptions(fields);
 
@@ -281,12 +284,14 @@ const FilterRow = ({
         {!isOperatorFieldEnabled ? (
           <DisabledOperator>
             {/* First row starts by Where operator */}
-            {index === 0 ? 'where' : defaultOperator}
+            {index === 0 ? t('sscds:filters.whereOperator') : defaultOperator}
           </DisabledOperator>
         ) : index !== 1 ? (
           <DisabledOperator>
             {/* First row starts by Where operator */}
-            {index === 0 ? 'where' : operatorValue}
+            {index === 0
+              ? t('sscds:filters.whereOperator')
+              : operatorOption.label}
           </DisabledOperator>
         ) : (
           <SelectFilter
