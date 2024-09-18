@@ -3,7 +3,8 @@ import en from '../../locales/en-US';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
-    defaultNS: 'sscds';
+    defaultNS: ['sscds'];
+    nsSeparator: '|';
     resources: {
       sscds: typeof en;
     };

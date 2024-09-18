@@ -209,8 +209,8 @@ const FilterRow = ({
     conditionValue,
   );
   const operatorOptions = [
-    { value: 'and', label: t('sscds:filters.andOperator') },
-    { value: 'or', label: t('sscds:filters.orOperator') },
+    { value: 'and', label: t('sscds|filters.andOperator') },
+    { value: 'or', label: t('sscds|filters.orOperator') },
   ];
   const operatorOption = getOperatorOptions(operatorValue, operatorOptions);
 
@@ -284,13 +284,13 @@ const FilterRow = ({
         {!isOperatorFieldEnabled ? (
           <DisabledOperator>
             {/* First row starts by Where operator */}
-            {index === 0 ? t('sscds:filters.whereOperator') : defaultOperator}
+            {index === 0 ? t('sscds|filters.whereOperator') : defaultOperator}
           </DisabledOperator>
         ) : index !== 1 ? (
           <DisabledOperator>
             {/* First row starts by Where operator */}
             {index === 0
-              ? t('sscds:filters.whereOperator')
+              ? t('sscds|filters.whereOperator')
               : operatorOption.label}
           </DisabledOperator>
         ) : (

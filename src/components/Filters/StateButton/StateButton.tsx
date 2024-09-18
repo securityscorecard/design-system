@@ -62,7 +62,7 @@ const StateButton = ({
     useStateButtonIcon(isApplied);
   return (
     <RemoveButton
-      aria-label={t('sscds:filters.removeRule')}
+      aria-label={t('sscds|filters.removeRule')}
       onClick={onClick(index)}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
@@ -79,7 +79,7 @@ const StateButton = ({
       )}
       <Popup>
         <ElementLabel color="inverse" size="sm" style={{ lineHeight: '1rem' }}>
-          {t('sscds:filters.removeRule')}
+          {t('sscds|filters.removeRule')}
         </ElementLabel>
       </Popup>
     </RemoveButton>

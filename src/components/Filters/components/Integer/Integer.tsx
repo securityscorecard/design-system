@@ -18,8 +18,8 @@ const Integer = ({
 }: NumberProps) => {
   const { t } = useSafeTranslation();
   const resolvedPlaceholder =
-    placeholder ?? t('sscds:filters.integer.placeholder');
-  const resolvedErrorMessage = errorMessage ?? t('sscds:filters.integer.error');
+    placeholder ?? t('sscds|filters.integer.placeholder');
+  const resolvedErrorMessage = errorMessage ?? t('sscds|filters.integer.error');
   const handleKeyPress = (event) => {
     if (!/-|[0-9]/.test(event.key)) {
       event.preventDefault();

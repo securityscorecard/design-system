@@ -18,8 +18,8 @@ const Number = ({
 }: NumberProps) => {
   const { t } = useSafeTranslation();
   const resolvedPlaceholder =
-    placeholder ?? t('sscds:filters.number.placeholder');
-  const resolvedErrorMessage = errorMessage ?? t('sscds:filters.number.error');
+    placeholder ?? t('sscds|filters.number.placeholder');
+  const resolvedErrorMessage = errorMessage ?? t('sscds|filters.number.error');
   const handleOnChange = (event) => {
     onChange(event);
     const hasError =
