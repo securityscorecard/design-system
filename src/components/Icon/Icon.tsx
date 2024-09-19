@@ -53,6 +53,7 @@ const StyledIcon = styled(FontAwesomeIcon).withConfig<{
   color: ${getIconColor};
   font-size: ${({ $size }) => $size && fontSizes[$size]};
   ${createSpacings};
+  transition: transform 200ms var(--sscds-transition-fn);
 `;
 
 const Icon = ({
