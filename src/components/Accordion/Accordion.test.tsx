@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -37,13 +36,44 @@ describe('Accordion/filterState', () => {
 
 describe('Accordion', () => {
   const items = [
-    { id: 1, title: 'Item 1', content: 'Content 1', isOpen: false },
-    { id: 2, title: 'Item 2', content: 'Content 2', isOpen: true },
-    { id: 3, title: 'Item 3', content: 'Content 3', isOpen: false },
+    { id: 1, title: 'Item 1', content: 'Content 1' },
+    { id: 2, title: 'Item 2', content: 'Content 2' },
+    { id: 3, title: 'Item 3', content: 'Content 3' },
   ];
 
-  it('should correctly initialize with the open state of items based on the `pickOpen` function', () => {
+  it('should open accordion item on click', () => {
     render(<Accordion items={items} />);
+
+    expect(screen.queryByText('Content 1')).not.toBeInTheDocument();
+    userEvent.click(screen.getByText('Item 1'));
+    expect(screen.getByText('Content 1')).toBeVisible();
+  });
+
+  it('should close accordion item if another item is opened', () => {
+    render(<Accordion items={items} />);
+
+    userEvent.click(screen.getByText('Item 1'));
+    expect(screen.getByText('Content 1')).toBeVisible();
+
+    userEvent.click(screen.getByText('Item 2'));
+    expect(screen.getByText('Content 2')).toBeVisible();
+    expect(screen.queryByText('Content 1')).not.toBeInTheDocument();
+  });
+
+  it('should open multiple accordion items if if `isCollapsedOnOpen` is set to `false`', async () => {
+    render(<Accordion items={items} isCollapsedOnOpen={false} />);
+
+    userEvent.click(screen.getByText('Item 1'));
+    userEvent.click(screen.getByText('Item 2'));
+
+    expect(await screen.findByText('Content 1')).toBeVisible();
+    expect(await screen.findByText('Content 2')).toBeVisible();
+  });
+
+  it('should correctly initialize with the open state of items based on the `pickOpen` function', () => {
+    render(
+      <Accordion items={[items[0], { ...items[1], isOpen: true }, items[2]]} />,
+    );
     expect(screen.getByText('Content 2')).toBeInTheDocument();
     expect(screen.queryByText('Content 1')).not.toBeInTheDocument();
     expect(screen.queryByText('Content 3')).not.toBeInTheDocument();
@@ -62,7 +92,7 @@ describe('Accordion', () => {
     const onChangeMock = jest.fn();
     render(
       <Accordion
-        items={items}
+        items={[items[0], { ...items[1], isOpen: true }, items[2]]}
         onChange={onChangeMock}
         isCollapsedOnOpen={false}
       />,
