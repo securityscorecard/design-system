@@ -1,55 +1,50 @@
-import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { includes } from 'ramda';
 
 import { Inline, Stack } from '../layout';
 import { HexGrade } from '../HexGrade';
-import { Button } from '../Button';
+import Button from '../ButtonV2/Button';
 import Accordion from './Accordion';
-import { AccordionProps } from './Accordion.types';
 import { Text } from '../Text';
 import { TextSizes } from '../Text/Text.enums';
 import { Paragraph } from '../Paragraph';
+import { AccordionItemId } from './Accordion.types';
 
-export default {
+const meta = {
   title: 'components/Accordion',
   component: Accordion,
-  argTypes: {
-    isCollapsedOnOpen: {
-      control: { type: 'boolean' },
-    },
-    openItems: {
-      description: 'Array of ids that can be changed by external state',
-    },
-  },
-} as Meta;
+} satisfies Meta<typeof Accordion>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const items = [
   { id: 1, title: 'Item 1', content: 'Content', isOpen: true },
   { id: 2, title: 'Item 2', content: 'Content' },
 ];
 
-const AccordionTemplate: StoryFn<AccordionProps> = (args) => (
-  <Accordion {...args} />
-);
-
-export const Playground = AccordionTemplate.bind({});
-Playground.args = { items };
-Playground.parameters = {
-  screenshot: { skip: true },
+export const Playground: Story = {
+  args: {
+    items,
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
 
-export const DefaultAccordion = AccordionTemplate.bind({});
-DefaultAccordion.args = Playground.args;
-
-export const DoesNotCollapseOnOpen = AccordionTemplate.bind({});
-DoesNotCollapseOnOpen.args = {
-  ...Playground.args,
-  isCollapsedOnOpen: false,
+export const DefaultAccordion: Story = {
+  args: Playground.args,
 };
-DoesNotCollapseOnOpen.storyName = 'Does not collapse on open';
-DoesNotCollapseOnOpen.parameters = {
-  screenshot: { skip: true },
+
+export const DoesNotCollapseOnOpen: Story = {
+  args: {
+    items: [items[0], { ...items[1], isOpen: true }],
+    isCollapsedOnOpen: false,
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
 
 const AccordionItemTitle = () => (
@@ -64,54 +59,68 @@ const AccordionItemTitle = () => (
     </Paragraph>
   </Stack>
 );
-export const CustomTitleElement: StoryFn<AccordionProps> =
-  AccordionTemplate.bind({});
-CustomTitleElement.args = {
-  items: [
-    { id: 0, title: <AccordionItemTitle />, content: 'Content', isOpen: true },
-  ],
+export const CustomTitleElement: Story = {
+  args: {
+    items: [
+      {
+        id: 0,
+        title: <AccordionItemTitle />,
+        content: 'Content',
+        isOpen: true,
+      },
+    ],
+  },
 };
 
-export const AcordionWithExternalManagement: StoryFn<AccordionProps> = () => {
-  const [openItems, setOpenItems] = useState<(string | number)[]>([]);
-  const handleOnClick = (id: string) => {
-    if (!openItems.includes(id)) {
-      const newItems = [id];
-      return setOpenItems(newItems);
-    }
-    return setOpenItems([...openItems]);
-  };
+export const AcordionWithExternalManagement: Story = {
+  args: {
+    items,
+    isCollapsedOnOpen: false,
+  },
+  render: (args) => {
+    const [openItems, setOpenItems] = useState<AccordionItemId[]>([]);
+    const handleOnClick = (id: AccordionItemId) => {
+      if (!openItems.includes(id)) {
+        const newItems = [id];
+        return setOpenItems(newItems);
+      }
+      return setOpenItems([...openItems]);
+    };
 
-  const localItems = [
-    { id: 'first', title: 'Item 1', content: 'Content', isOpen: true },
-    { id: 'second', title: 'Item 2', content: 'Content' },
-    { id: 'third', title: 'Item 3', content: 'Content' },
-  ];
-
-  return (
-    <Inline gap="xl">
-      <Stack gap="sm" justify="flex-start">
-        <Button variant="text" onClick={() => handleOnClick('first')}>
-          {includes('first', openItems) && '->'} First section
-        </Button>
-        <Button variant="text" onClick={() => handleOnClick('second')}>
-          {includes('second', openItems) && '->'} Second section
-        </Button>
-        <Button variant="text" onClick={() => handleOnClick('third')}>
-          {includes('third', openItems) && '->'} Third section
-        </Button>
-      </Stack>
-      <Accordion
-        isCollapsedOnOpen={false}
-        items={localItems}
-        openItems={openItems}
-        onChange={(ids) => {
-          setOpenItems(ids);
-        }}
-      />
-    </Inline>
-  );
+    return (
+      <Inline gap="xl" stretch="end">
+        <Stack gap="sm" justify="flex-start">
+          {args.items.map((item) => (
+            <Button
+              variant="ghost"
+              onClick={() => {
+                handleOnClick(item.id);
+              }}
+            >
+              {includes(item.id, openItems) && '->'} {item.title.toString()}
+            </Button>
+          ))}
+        </Stack>
+        <Accordion
+          {...args}
+          openItems={openItems}
+          onChange={(ids) => {
+            setOpenItems(ids);
+          }}
+        />
+      </Inline>
+    );
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
-AcordionWithExternalManagement.parameters = {
-  screenshot: { skip: true },
+
+export const DarkMode: Story = {
+  args: Playground.args,
+  parameters: {
+    themes: {
+      themeOverride: 'Dark',
+    },
+  },
 };
