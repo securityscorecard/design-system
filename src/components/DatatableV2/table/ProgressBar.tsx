@@ -17,9 +17,14 @@ const wave = keyframes`
     transform: translateX(100%);
   }
 `;
-const ProgressBar = styled.span.withConfig({
-  shouldForwardProp: (property) => !includes(property, ['isTop', 'isBottom']),
-})<{ isTop?: boolean; isBottom?: boolean }>`
+
+const ProgressBar = styled.span
+  .attrs((props) => ({
+    role: props.role || 'progressbar',
+  }))
+  .withConfig({
+    shouldForwardProp: (property) => !includes(property, ['isTop', 'isBottom']),
+  })<{ isTop?: boolean; isBottom?: boolean }>`
   display: block;
   background: var(--sscds-brand-100);
   overflow: hidden;
@@ -51,9 +56,5 @@ const ProgressBar = styled.span.withConfig({
     top: 0;
   }
 `;
-
-ProgressBar.defaultProps = {
-  role: 'progressbar',
-};
 
 export default memo(ProgressBar);
