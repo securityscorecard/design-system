@@ -3,41 +3,20 @@ import styled, { css } from 'styled-components';
 import { any } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 
-import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { SpaceSizes } from '../../theme';
-import { getColor, getRadii, getSpace } from '../../utils';
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
 import { Inline, Padbox, Stack } from '../layout';
-import { Icon } from '../Icon';
 import { CardHeaderProps } from './Card.types';
 import { CardContainer } from './Card';
-import { Tooltip } from '../Tooltip';
-import { Color } from '../../theme/colors.types';
 import { Text } from '../Text';
 import { Heading } from '../Heading';
+import IconButton from '../ButtonV2/IconButton';
+import { IconButtonProps } from '../ButtonV2/types';
+import { HintTooltip } from '../HintTooltip';
 
-export const CardIconButton = styled.button<{
-  as?: string;
-  $isActive?: boolean;
-}>`
-  background-color: ${({ $isActive }) =>
-    $isActive ? getColor('primary.50') : 'transparent'};
-  border: none;
-  color: ${getColor('neutral.800')};
-  display: flex;
-  align-items: center;
-  border-radius: ${getRadii('default')};
-  padding: ${getSpace(SpaceSizes.sm)};
-  height: 2rem;
-  ${(props) =>
-    props.as !== 'div' &&
-    css`
-      cursor: pointer;
-      &:hover {
-        background-color: ${getColor('primary.50')};
-      }
-    `}
-`;
+export const CardIconButton = (
+  props: Omit<IconButtonProps<'button'>, 'variant' | 'size'>,
+) => <IconButton {...props} size="sm" variant="ghost" />;
+
 export const CardIconWrapper = styled(Padbox)`
   display: flex;
 `;
@@ -52,13 +31,11 @@ const LineTruncation = css<{ numberOfLines: number }>`
 /* stylelint-enable */
 
 const TitleArea = styled.div`
-  padding-top: ${getSpace(SpaceSizes.xs)};
+  padding-top: var(--sscds-space-1x);
 `;
 const Title = styled(Heading).attrs({
   size: 'h5',
 })`
-  margin-top: 0px;
-  margin-bottom: 0px;
   ${LineTruncation}
 `;
 
@@ -67,21 +44,6 @@ const Subtitle = styled(Text).attrs({
   variant: 'secondary',
 })`
   ${LineTruncation}
-`;
-const ButtonsArea = styled.div`
-  display: flex;
-  align-items: flex-start;
-  margin-right: calc(${getSpace(SpaceSizes.sm)} * -1) !important;
-`;
-
-const StyledIcon = styled(Icon)<{ $color: Color }>`
-  background: ${getColor('neutral.0')};
-  border-radius: 100%;
-  color: ${({ $color, theme }) =>
-    isNotUndefined($color) ? getColor($color, { theme }) : 'inherit'};
-  &:hover {
-    color: ${({ theme }) => getColor('neutral.700', { theme })};
-  }
 `;
 
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
@@ -92,24 +54,20 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
       title,
       subtitle,
       leftAdornment,
-      onHelpClick,
       helpTooltip,
       maxTitleLinesCount,
       maxSubtitleLinesCount,
-    },
+    }: CardHeaderProps,
     ref,
   ) => {
-    const hasHelp = any(isNotUndefined, [onHelpClick, helpTooltip]);
+    const hasHelp = any(isNotUndefined, [helpTooltip]);
 
     return (
-      <CardContainer
-        horizontalPadding={SpaceSizes.mdPlus}
-        verticalPadding={SpaceSizes.md}
-      >
-        <Inline ref={ref} gap={SpaceSizes.sm} stretch={leftAdornment ? 2 : 1}>
+      <CardContainer $horizontalPadding="6x" $verticalPadding="4x">
+        <Inline ref={ref} gap="sm" stretch={leftAdornment ? 2 : 1}>
           {isNotNil(leftAdornment) && <div>{leftAdornment}</div>}
           <TitleArea>
-            <Stack gap={SpaceSizes.xs}>
+            <Stack gap="xs">
               <Title
                 numberOfLines={maxTitleLinesCount}
                 title={isNotUndefined(maxTitleLinesCount) ? title : undefined}
@@ -126,43 +84,32 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
               </Subtitle>
             </Stack>
           </TitleArea>
-          <ButtonsArea>
+          <Inline className="ds-cardheader-buttonarea">
             {hasHelp && (
-              <Tooltip popup={helpTooltip}>
-                <CardIconButton
-                  aria-label="Help"
-                  as={isNotUndefined(onHelpClick) ? 'button' : 'div'}
-                  data-interactive="true"
-                  onClick={onHelpClick}
-                >
-                  <StyledIcon
-                    $color="neutral.600"
-                    data-interactive="true"
-                    name="info-circle-outline"
-                  />
-                </CardIconButton>
-              </Tooltip>
+              <div
+                style={{
+                  width: '2rem',
+                  height: '2rem',
+                  display: 'grid',
+                  placeContent: 'center',
+                }}
+              >
+                <HintTooltip>{helpTooltip}</HintTooltip>
+              </div>
             )}
             {isNotUndefined(actions) && (
               <DropdownMenu actions={actions} placement="bottom-end">
-                {(isActive) => (
-                  <CardIconButton
-                    $isActive={isActive}
-                    aria-label={actionsButtonLabel}
-                    data-interactive="true"
-                    title={actionsButtonLabel}
-                  >
-                    <Icon
-                      data-interactive="true"
-                      name={SSCIconNames.ellipsisV}
-                      rotation={90}
-                      style={{ width: '1em' }}
-                    />
-                  </CardIconButton>
-                )}
+                <CardIconButton
+                  data-interactive="true"
+                  iconName="ellipsis-h"
+                  label={actionsButtonLabel}
+                  style={{
+                    marginInlineEnd: 'var(--sscds-button-padding-compensation)',
+                  }}
+                />
               </DropdownMenu>
             )}
-          </ButtonsArea>
+          </Inline>
         </Inline>
       </CardContainer>
     );

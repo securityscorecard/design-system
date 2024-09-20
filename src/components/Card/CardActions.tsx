@@ -3,7 +3,7 @@ import { isNonEmptyString } from 'ramda-adjunct';
 
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
-import { Button, ButtonEnums } from '../Button';
+import { Button } from '../Button';
 import {
   AbsoluteLinkActionKind,
   RelativeLinkActionKind,
@@ -12,18 +12,18 @@ import { CardActionsProps } from './Card.types';
 import { CardContainer } from './Card';
 
 const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
-  ({ actions, rightAdornment = null }, ref) => (
-    <CardContainer
-      horizontalPadding={SpaceSizes.mdPlus}
-      verticalPadding={SpaceSizes.sm}
-    >
+  ({ actions, rightAdornment = null }: CardActionsProps, ref) => (
+    <CardContainer $horizontalPadding="6x" $verticalPadding="2x">
       <Inline
         ref={ref}
         align="center"
         gap={SpaceSizes.mdPlus}
         justify="space-between"
       >
-        <Inline gap={SpaceSizes.mdPlus}>
+        <Inline
+          gap={SpaceSizes.sm}
+          style={{ marginInlineStart: 'var(--sscds-space-negative-2x)' }}
+        >
           {actions?.map((action) => (
             <Button
               key={action.name}
@@ -40,10 +40,10 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
               }
               isDisabled={action.isDisabled}
               to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
-              variant={ButtonEnums.ButtonVariants.text}
+              variant="ghost"
               onClick={action.onClick}
             >
-              {isNonEmptyString(action.label) && action.label}
+              {isNonEmptyString(action.label) ? action.label : undefined}
             </Button>
           ))}
         </Inline>
