@@ -1,0 +1,16 @@
+:root {
+  --sscds-shadow-1x: 0px 2px 6px var(--black-a3);
+  --sscds-shadow-2x: 0px 4px 12px var(--black-a3);
+  --sscds-shadow-3x: 0px 6px 18px var(--black-a3);
+  --sscds-shadow-4x: 0px 8px 24px var(--black-a3);
+  --sscds-shadow-5x: 0px 10px 30px var(--black-a3);
+
+  --sscds-shadow-tooltip: var(--sscds-shadow-2x);
+  --sscds-shadow-dropdown: var(--sscds-shadow-2x);
+  --sscds-shadow-drawer: var(--sscds-shadow-5x);
+  --sscds-shadow-modal: var(--sscds-shadow-3x);
+
+  --sscds-shadow-card-default: var(--sscds-shadow-2x);
+  --sscds-shadow-card-hover: var(--sscds-shadow-3x);
+  --sscds-shadow-card-active: var(--sscds-shadow-1x);
+}

@@ -94,7 +94,7 @@ function TreeView<D>({
   };
 
   return (
-    <Surface background="white" elevation={2} radius="md" hasBorder>
+    <Surface elevation={2} radius="md" hasBorder>
       <DndContext
         accessibility={{ announcements }}
         collisionDetection={closestCenter}

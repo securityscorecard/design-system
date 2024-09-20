@@ -3,38 +3,20 @@ import {
   ComponentPropsWithoutRef,
   ReactNode,
   forwardRef,
+  useMemo,
 } from 'react';
-import styled, { useTheme } from 'styled-components';
-import clx from 'classnames';
-
-import { Radii, getRadii } from '../../../utils';
-
-const SurfaceBackgrounds = [
-  'default',
-  'white',
-  'dynamic',
-  'transparent',
-] as const;
-const SurfaceRadii = ['none', 'sm', 'md', 'lg'] as const;
-const SurfaceMode = ['light', 'dark'] as const;
+import styled from 'styled-components';
 
 export type SurfaceProps = {
   children: ReactNode;
   /** Background of the surface box */
-  background?: (typeof SurfaceBackgrounds)[number];
+  background?: 'default' | 'dynamic' | 'transparent';
   /** Corner rounding of the surface box */
-  radius?: (typeof SurfaceRadii)[number];
-  /** Size of the box shadow. Takes and integer, Bigger value, bigger size of the shadow */
-  elevation?: number;
+  radius?: 'none' | 'sm' | 'md' | 'lg';
+  /** Size of the box shadow. Takes an integer in scale 0..5. Bigger value, bigger size of the shadow */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   /** Show border around the surface box */
   hasBorder?: boolean;
-  /**
-   *  Switch color scheme for light or dark backgrounds
-   *
-   * @deprecated Replaced with design tokens for using dark mode add ".dark" classname
-   * to Surface or its parent
-   */
-  mode?: (typeof SurfaceMode)[number];
 } & ComponentPropsWithoutRef<'div'>;
 
 const SurfaceRoot = styled.div`
@@ -45,34 +27,16 @@ const SurfaceRoot = styled.div`
   transition: border-radius 300ms ease-in, background 300ms ease-in,
     box-shadow 300ms ease-in;
 `;
-const getBackground = (
-  background: (typeof SurfaceBackgrounds)[number],
-): string => {
+const getBackground = (background: SurfaceProps['background']): string => {
   switch (background) {
     case 'dynamic':
       return 'var(--sscds-color-background-surface-dynamic)';
     case 'default':
-    case 'white':
       return 'var(--sscds-color-background-surface-default)';
     case 'transparent':
     default:
       return 'var(--sscds-color-clear)';
   }
-};
-
-const getShadow = (elevation: number) => {
-  return elevation === 0
-    ? 'none'
-    : `0px ${elevation * 2}px ${elevation * 6}px rgba(0 0 0/15%)`;
-};
-
-const radiiMap: Record<
-  Exclude<(typeof SurfaceRadii)[number], 'none'>,
-  Exclude<Radii, 'circle' | 'half' | 'round'>
-> = {
-  sm: 'default',
-  md: 'double',
-  lg: 'large',
 };
 
 const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
@@ -82,40 +46,36 @@ const Surface = forwardRef<HTMLDivElement, SurfaceProps>(
       radius = 'sm',
       elevation = 0,
       hasBorder = false,
-      mode = 'light',
       children,
       style,
-      ...rest
-    },
+      ...props
+    }: SurfaceProps,
     ref,
   ) => {
-    const theme = useTheme();
-    const cssVars: CSSProperties = {
-      '--sscds-background': getBackground(background),
-      '--sscds-radius':
-        radius === 'none' ? 0 : getRadii(radiiMap[radius], { theme }),
-      '--sscds-elevation': getShadow(elevation),
-      '--sscds-border-width': hasBorder ? '1px' : '0',
-      '--sscds-border-color':
-        background === 'dynamic'
-          ? 'var(--sscds-color-border-surface-dynamic)'
-          : 'var(--sscds-color-border-surface-default)',
-      ...style,
-    };
+    const styles: CSSProperties = useMemo(
+      () => ({
+        '--sscds-background': getBackground(background),
+        '--sscds-radius':
+          radius === 'none' ? 0 : `var(--sscds-radii-surface-${radius})`,
+        '--sscds-elevation':
+          elevation === 0 ? 'none' : `var(--sscds-shadow-${elevation}x)`,
+        '--sscds-border-width': hasBorder ? '1px' : '0',
+        '--sscds-border-color':
+          background === 'dynamic'
+            ? 'var(--sscds-color-border-surface-dynamic)'
+            : 'var(--sscds-color-border-surface-default)',
+      }),
+      [background, elevation, hasBorder, radius],
+    );
 
     return (
-      <SurfaceRoot
-        ref={ref}
-        style={cssVars}
-        {...rest}
-        className={clx(rest.className, {
-          dark: mode === 'dark',
-        })}
-      >
+      <SurfaceRoot ref={ref} style={{ ...styles, ...style }} {...props}>
         {children}
       </SurfaceRoot>
     );
   },
 );
+
+Surface.displayName = 'Surface';
 
 export default Surface;
