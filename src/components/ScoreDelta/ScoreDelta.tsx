@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ScoreDeltaProps } from './ScoreDelta.types';
 import { Padbox } from '../layout';
 import { getColor, getRadii, getSpace } from '../../utils';
-import { TrendIcon } from '../TrendIcon/TrendIcon';
+import TrendIcon from '../TrendIcon/TrendIcon';
 import {
   FontColor,
   IconBackgroundColor,

@@ -35,10 +35,10 @@ const IconWrapper = styled(Padbox)<{ $trend: Trend }>`
   place-items: center;
 `;
 
-export const TrendIcon = React.forwardRef<
+const TrendIcon = React.forwardRef<
   HTMLDivElement,
   RequireAtLeastOne<TrendIconProps, 'type' | 'trend'>
->(({ type, trend }, ref) => {
+>(({ type, trend }: TrendIconProps, ref) => {
   const trendValue = type || trend;
 
   return (
