@@ -9,17 +9,17 @@ import type { DecoratorFunction, Renderer } from 'storybook/internal/types';
 import { addons, useParameter } from 'storybook/internal/preview-api';
 import type { StoryContext } from 'storybook/internal/types';
 
-export const PARAM_KEY = 'themes' as const;
-export const ADDON_ID = `storybook/${PARAM_KEY}` as const;
-export const GLOBAL_KEY = 'theme' as const;
-export const THEME_SWITCHER_ID = `${ADDON_ID}/theme-switcher` as const;
+const PARAM_KEY = 'themes' as const;
+const ADDON_ID = `storybook/${PARAM_KEY}` as const;
+const GLOBAL_KEY = 'theme' as const;
+const THEME_SWITCHER_ID = `${ADDON_ID}/theme-switcher` as const;
 
 interface ThemeAddonState {
   themesList: string[];
   themeDefault?: string;
 }
 
-export const DEFAULT_ADDON_STATE: ThemeAddonState = {
+const DEFAULT_ADDON_STATE: ThemeAddonState = {
   themesList: [],
   themeDefault: undefined,
 };
@@ -29,9 +29,9 @@ interface ThemeParameters {
   disable?: boolean;
 }
 
-export const DEFAULT_THEME_PARAMETERS: ThemeParameters = {};
+const DEFAULT_THEME_PARAMETERS: ThemeParameters = {};
 
-export const THEMING_EVENTS = {
+const THEMING_EVENTS = {
   REGISTER_THEMES: `${ADDON_ID}/REGISTER_THEMES`,
 } as const;
 
@@ -40,15 +40,15 @@ export const THEMING_EVENTS = {
  * @param StoryContext
  * @returns The global theme name set for your stories
  */
-export function pluckThemeFromContext({ globals }: StoryContext): string {
+function pluckThemeFromContext({ globals }: StoryContext): string {
   return globals[GLOBAL_KEY] || '';
 }
 
-export function useThemeParameters(): ThemeParameters {
+function useThemeParameters(): ThemeParameters {
   return useParameter<ThemeParameters>(PARAM_KEY, DEFAULT_THEME_PARAMETERS) as ThemeParameters;
 }
 
-export function initializeThemeState(themeNames: string[], defaultTheme: string) {
+function initializeThemeState(themeNames: string[], defaultTheme: string) {
   addons.getChannel().emit(THEMING_EVENTS.REGISTER_THEMES, {
     defaultTheme,
     themes: themeNames,

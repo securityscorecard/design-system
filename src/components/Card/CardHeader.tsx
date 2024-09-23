@@ -4,7 +4,7 @@ import { any } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
 
 import { DropdownMenu } from '../_internal/BaseDropdownMenu';
-import { Inline, Padbox, Stack } from '../layout';
+import { Inline, Stack } from '../layout';
 import { CardHeaderProps } from './Card.types';
 import { CardContainer } from './Card';
 import { Text } from '../Text';
@@ -16,10 +16,6 @@ import { HintTooltip } from '../HintTooltip';
 export const CardIconButton = (
   props: Omit<IconButtonProps<'button'>, 'variant' | 'size'>,
 ) => <IconButton {...props} size="sm" variant="ghost" />;
-
-export const CardIconWrapper = styled(Padbox)`
-  display: flex;
-`;
 
 /* stylelint-disable */
 const LineTruncation = css<{ numberOfLines: number }>`

@@ -7,7 +7,7 @@ import { createTheme } from '../theme';
 import { GlobalStyles } from '../GlobalStyles';
 import { DSContextValue, DSProviderProps } from './DSProvider.types';
 
-export const defaultDSContext: DSContextValue = {
+const defaultDSContext: DSContextValue = {
   portalsContainerId: 'portals',
   hasIncludedGlobalStyles: true,
   debugMode: false,

@@ -5,8 +5,8 @@ import { DSContext } from '../theme/DSProvider/DSProvider';
 
 const styles = ['font-weight: bold'];
 export const logStyles = ['color: darkturquoise', ...styles].join(';');
-export const warnStyles = ['color: darkorange', ...styles].join(';');
-export const errorStyles = ['color: crimson', ...styles].join(';');
+const warnStyles = ['color: darkorange', ...styles].join(';');
+const errorStyles = ['color: crimson', ...styles].join(';');
 
 export const logError = (namespace, message, ...data: unknown[]) => {
   if (process.env.NODE_ENV !== 'production') {

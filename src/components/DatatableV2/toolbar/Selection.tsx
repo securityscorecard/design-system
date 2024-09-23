@@ -8,7 +8,7 @@ import { Inline, Padbox, Surface } from '../../layout';
 import Button from '../../ButtonV2/Button';
 import { Strong } from '../../Text';
 
-export const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
+const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
   const { getSelectedRowModel } = table;
   const selectedRows = getSelectedRowModel().rows;
   const selectedRowsCount = selectedRows.length;

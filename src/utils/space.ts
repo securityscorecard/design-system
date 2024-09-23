@@ -38,7 +38,7 @@ export const getPaddingSpace = ({
   }
 };
 
-export const getPaddingSize = pipe(getPaddingSpace, apply(pxToRem));
+const getPaddingSize = pipe(getPaddingSpace, apply(pxToRem));
 
 // createPadding :: Object -> string
 // Object - { paddingSize: keyof typeof space; paddingType: keyof typeof paddingTypes; theme: DefaultTheme; }

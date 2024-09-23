@@ -10,7 +10,7 @@ import { Padbox } from '../layout';
 import { DropdownPaneProps, DropdownPaneStyles } from './Dropdown.types';
 import { useFloatingContext } from '../../contexts/FloatingContext';
 
-export const Arrow = styled.div`
+const Arrow = styled.div`
   visibility: hidden;
 
   &,
@@ -31,7 +31,7 @@ export const Arrow = styled.div`
   }
 `;
 
-export const StyledDropdownPane = styled.div<DropdownPaneStyles>`
+const StyledDropdownPane = styled.div<DropdownPaneStyles>`
   position: absolute;
   color: ${getColor('neutral.900')};
   font-family: var(--sscds-font-family-body);
