@@ -14,7 +14,7 @@ export const ADDON_ID = `storybook/${PARAM_KEY}` as const;
 export const GLOBAL_KEY = 'theme' as const;
 export const THEME_SWITCHER_ID = `${ADDON_ID}/theme-switcher` as const;
 
-export interface ThemeAddonState {
+interface ThemeAddonState {
   themesList: string[];
   themeDefault?: string;
 }
@@ -24,7 +24,7 @@ export const DEFAULT_ADDON_STATE: ThemeAddonState = {
   themeDefault: undefined,
 };
 
-export interface ThemeParameters {
+interface ThemeParameters {
   themeOverride?: string;
   disable?: boolean;
 }
@@ -55,7 +55,7 @@ export function initializeThemeState(themeNames: string[], defaultTheme: string)
   });
 }
 
-export interface ClassNameStrategyConfiguration {
+interface ClassNameStrategyConfiguration {
   themes: Record<string, string>;
   defaultTheme: string;
 }

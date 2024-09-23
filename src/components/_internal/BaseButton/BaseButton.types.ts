@@ -7,11 +7,10 @@ import type { IconNames, RegularIconTypes } from '../../Icon/Icon.types';
 import { BaseButtonColors, BaseButtonVariants } from './BaseButton.enums';
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 
-export type Variants =
-  (typeof BaseButtonVariants)[keyof typeof BaseButtonVariants];
-export type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
+type Variants = (typeof BaseButtonVariants)[keyof typeof BaseButtonVariants];
+type Colors = (typeof BaseButtonColors)[keyof typeof BaseButtonColors];
 
-export interface BaseIcon {
+interface BaseIcon {
   name: IconNames;
   type?: RegularIconTypes;
 }

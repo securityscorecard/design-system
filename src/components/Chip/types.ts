@@ -1,7 +1,7 @@
 import type { ComponentProps, ElementType, ReactNode } from 'react';
 
 import type { IconNames, RegularIconTypes } from '../Icon';
-import { Colors } from '../Pill';
+import { PillColors } from '../Pill';
 
 export type Sizes = 'sm' | 'md';
 
@@ -28,7 +28,7 @@ export type ChipProps = {
   /** Chip size variant */
   size?: Sizes;
   /** Chip color variant */
-  color?: Colors;
+  color?: PillColors;
 };
 
 type InteractiveChipOwnProps<Element extends ElementType> = {
