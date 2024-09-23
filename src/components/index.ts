@@ -6,7 +6,7 @@ export * from './Button';
 export { default as ButtonV2 } from './ButtonV2/Button';
 export { default as IconButton } from './ButtonV2/IconButton';
 export { type ButtonV2Props, type IconButtonProps } from './ButtonV2/types';
-export * from './Callout';
+export { default as Callout, type CalloutProps } from './Callout/Callout';
 export * from './Card';
 export { default as Chip } from './Chip/Chip';
 export { default as InteractiveChip } from './Chip/InteractiveChip';
