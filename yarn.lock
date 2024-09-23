@@ -1979,7 +1979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.17.10, @babel/types@npm:^7.20.7, @babel/types@npm:^7.22.5, @babel/types@npm:^7.23.0, @babel/types@npm:^7.24.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.8.3":
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.20.7, @babel/types@npm:^7.22.5, @babel/types@npm:^7.23.0, @babel/types@npm:^7.24.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.8.3":
   version: 7.24.0
   resolution: "@babel/types@npm:7.24.0"
   dependencies:
@@ -3268,15 +3268,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^1.6.22":
-  version: 1.6.22
-  resolution: "@mdx-js/react@npm:1.6.22"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0
-  checksum: 10/b4fc3b78ca7d922a48870610d4d788bb1f629b3fc728f918b3069eeea8791f5ba5fa6e6f2976b1a612da96051192b043607f0c015b76c263183c49112d492000
-  languageName: node
-  linkType: hard
-
 "@mdx-js/react@npm:^3.0.0":
   version: 3.0.1
   resolution: "@mdx-js/react@npm:3.0.1"
@@ -4511,7 +4502,6 @@ __metadata:
   resolution: "@securityscorecard/design-system@workspace:."
   dependencies:
     "@babel/core": "npm:^7.17.10"
-    "@babel/types": "npm:^7.17.10"
     "@commitlint/cli": "npm:^19.4.0"
     "@commitlint/config-conventional": "npm:^19.2.2"
     "@dnd-kit/core": "npm:^6.1.0"
@@ -4524,7 +4514,6 @@ __metadata:
     "@fontsource/space-mono": "npm:^5.0.20"
     "@fortawesome/fontawesome-svg-core": "npm:^6.1.2"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
-    "@mdx-js/react": "npm:^1.6.22"
     "@popperjs/core": "npm:^2.11.4"
     "@prisma-capacity/babel-plugin-react-display-name": "npm:^1.0.6"
     "@radix-ui/colors": "npm:^3.0.0"
@@ -4535,7 +4524,6 @@ __metadata:
     "@semantic-release/github": "npm:^10.1.6"
     "@semantic-release/npm": "npm:^12.0.1"
     "@semantic-release/release-notes-generator": "npm:^14.0.1"
-    "@storybook/addon-a11y": "npm:^8.2.7"
     "@storybook/addon-actions": "npm:^8.2.7"
     "@storybook/addon-coverage": "npm:^1.0.4"
     "@storybook/addon-designs": "npm:^8.0.3"
@@ -4621,7 +4609,6 @@ __metadata:
     react-select: "npm:^4.3.1"
     react-select-event: "npm:^5.3.0"
     react-table: "npm:^7.7.0"
-    react-table-sticky: "npm:^1.1.3"
     remark-gfm: "npm:^4.0.0"
     rollup-plugin-auto-external: "npm:^2.0.0"
     rollup-plugin-delete: "npm:^2.0.0"
@@ -4635,10 +4622,8 @@ __metadata:
     stylelint-config-standard: "npm:^36.0.0"
     ts-jest: "npm:^29.1.2"
     ts-node: "npm:^10.9.2"
-    ts-react-display-name: "npm:^1.2.2"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.6.2"
-    typescript-plugin-styled-components: "npm:^3.0.0"
     use-deep-compare: "npm:^1.1.0"
     vite: "npm:^5.4.6"
     vite-plugin-dts: "npm:^4.2.1"
@@ -4883,18 +4868,6 @@ __metadata:
   bin:
     github-codeowners: dist/cli.js
   checksum: 10/34120ef622616fef1ed8af12869d8c1803842aafa3fbacca263805ee7c85f58d11bdc301ef698c9b41268b275b9fd090f5d9f6d89c556abe9d52196e72d1c510
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-a11y@npm:^8.2.7":
-  version: 8.2.7
-  resolution: "@storybook/addon-a11y@npm:8.2.7"
-  dependencies:
-    "@storybook/addon-highlight": "npm:8.2.7"
-    axe-core: "npm:^4.2.0"
-  peerDependencies:
-    storybook: ^8.2.7
-  checksum: 10/1c4470014b0c9cb53eff94c2966101e8d0daae06f67469443b2aa78f30fab0d4139ea791d4d2ac3499656c50a56a5f0ab061034f0e4677448fe6a3422eba2f23
   languageName: node
   linkType: hard
 
@@ -7344,13 +7317,6 @@ __metadata:
   version: 4.7.0
   resolution: "axe-core@npm:4.7.0"
   checksum: 10/615c0f7722c3c9fcf353dbd70b00e2ceae234d4c17cbc839dd85c01d16797c4e4da45f8d27c6118e9e6b033fb06efd196106e13651a1b2f3a10e0f11c7b2f660
-  languageName: node
-  linkType: hard
-
-"axe-core@npm:^4.2.0":
-  version: 4.9.0
-  resolution: "axe-core@npm:4.9.0"
-  checksum: 10/d337c4600e522bb85ed7b242e8eea322892025bc3c951fcda4845a664f9cfb065c509bc17428315c7f8571a4b5c55552d9011d752a6aae8be006bfa54d725a42
   languageName: node
   linkType: hard
 
@@ -17798,13 +17764,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-table-sticky@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "react-table-sticky@npm:1.1.3"
-  checksum: 10/0c863532801cfc43a7056e7d9db6bd1738a6028ffb7fe7b71142dec5a3e307ed73793852b4b4c17b3aba4b77873e58e04bc6fe9b34191ea5cd338ebd3852f943
-  languageName: node
-  linkType: hard
-
 "react-table@npm:^7.7.0":
   version: 7.8.0
   resolution: "react-table@npm:7.8.0"
@@ -20158,13 +20117,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-react-display-name@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "ts-react-display-name@npm:1.2.2"
-  checksum: 10/31a4cc26426c969ef6647651e3ed3ff1486e739e4ec5c01c2838d2c289a1c0683abfb036296a821280fefc3f9b0cb6e4a82b242d0324bb898bd5df36bf338228
-  languageName: node
-  linkType: hard
-
 "tsconfig-paths@npm:^3.15.0":
   version: 3.15.0
   resolution: "tsconfig-paths@npm:3.15.0"
@@ -20378,15 +20330,6 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 10/2cc1bcf7d8c1237f6a16c04efc06637b2c5f2d74e58e84665445cf87668b85a21ab18dd751fa49eee6ae024b70326635d7b79ad37b1c370ed2fec6aeeeb52714
-  languageName: node
-  linkType: hard
-
-"typescript-plugin-styled-components@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "typescript-plugin-styled-components@npm:3.0.0"
-  peerDependencies:
-    typescript: ~4.8 || 5
-  checksum: 10/4098aec75019f2818613c1710370a9f3a9dd9f5e9850a5ab6d736e3d24cc55034b82c3e5e574080053700ce666ba3b037321993ca4835c832832460c42f34c66
   languageName: node
   linkType: hard
 
