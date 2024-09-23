@@ -8,9 +8,6 @@ import { Text } from '../../Text';
 const meta = {
   title: 'layout/Surface',
   component: Surface,
-  args: {
-    mode: 'light',
-  },
 } satisfies Meta<typeof Surface>;
 
 export default meta;
@@ -31,11 +28,6 @@ const Child = () => (
 
 export const Playground: Story = {
   args: {
-    mode: 'light',
-    background: 'default',
-    radius: 'sm',
-    elevation: 0,
-    hasBorder: false,
     children: (
       <Padbox paddingSize="md">
         <Child />
@@ -51,7 +43,7 @@ export const Background: Story = {
   render: (args) => {
     return (
       <Stack gap="lgPlus">
-        <Surface {...args} background="white" />
+        <Surface {...args} background="default" />
         <Surface {...args} background="dynamic" />
         <Surface {...args} background="transparent" />
       </Stack>
@@ -83,27 +75,25 @@ export const BorderRadius: Story = {
 
 export const Elevation: Story = {
   render: (args) => {
-    const elevation = args.elevation ?? 1;
     return (
       <Stack gap="lgPlus">
-        <Surface {...args} elevation={elevation} />
-        <Surface {...args} elevation={elevation + 1} />
-        <Surface {...args} elevation={elevation + 2} />
+        <Surface {...args} elevation={1} />
+        <Surface {...args} elevation={2} />
+        <Surface {...args} elevation={3} />
+        <Surface {...args} elevation={4} />
+        <Surface {...args} elevation={5} />
       </Stack>
     );
   },
   args: {
     ...Playground.args,
-    background: 'white',
     hasBorder: true,
-    elevation: 1,
   },
 };
 
 export const Bordered: Story = {
   args: {
     ...Playground.args,
-    background: 'white',
     hasBorder: true,
   },
 };
@@ -129,7 +119,6 @@ export const DynamicBackgroundOnLight: Story = {
   args: {
     ...Playground.args,
     background: 'dynamic',
-    mode: 'light',
     hasBorder: true,
   },
 };
@@ -155,7 +144,6 @@ export const DynamicBackgroundOnDark: Story = {
   args: {
     ...Playground.args,
     background: 'dynamic',
-    mode: 'dark',
     hasBorder: true,
   },
   parameters: {

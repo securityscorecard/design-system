@@ -84,7 +84,6 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             <BaseModal
               ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
               $maxWidth={widthVariants[size]}
-              background="white"
               className={cls(CLX_COMPONENT, className, 'ssc-ui-styled')}
               elevation={3}
               radius="lg"
