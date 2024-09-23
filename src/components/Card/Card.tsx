@@ -1,33 +1,31 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { pipe, prop } from 'ramda';
 import cls from 'classnames';
 
 import { Padbox, Stack } from '../layout';
-import { getColor, getRadii, getShadow, getSpace } from '../../utils';
 import { SpaceSize } from '../../theme/space.types';
 import { CardProps, CardWrapperProps } from './Card.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
 const InteractiveCard = css`
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 300ms var(--sscds-transition-fn);
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.07);
+    box-shadow: var(--sscds-shadow-card-hover);
   }
   &:active {
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.07);
+    box-shadow: var(--sscds-shadow-card-active);
   }
 `;
 
 const CardWrapper = styled(Padbox)<CardWrapperProps>`
   flex-grow: 1;
-  background-color: ${getColor('neutral.0')};
-  border: 1px solid ${getColor('neutral.300')};
-  border-radius: ${getRadii('double')};
+  background-color: var(--sscds-color-background-surface-default);
+  border: 1px solid var(--sscds-color-border-surface-default);
+  border-radius: var(--sscds-radii-surface-md);
   overflow: hidden;
-  ${getShadow}
+  box-shadow: var(--sscds-shadow-card-default);
   ${({ onClick, href, to }) => (onClick || href || to ? InteractiveCard : null)}
 `;
 
@@ -41,15 +39,18 @@ const CardStack = styled(Stack)<{ $shouldAlignLastItemToBottom: boolean }>`
 `;
 
 export const CardContainer = styled.div<{
-  horizontalPadding: SpaceSize;
-  verticalPadding: SpaceSize;
+  $horizontalPadding: SpaceSize;
+  $verticalPadding: SpaceSize;
 }>`
-  padding: ${pipe(prop('verticalPadding'), getSpace)}
-    ${pipe(prop('horizontalPadding'), getSpace)};
+  padding: ${({ $verticalPadding, $horizontalPadding }) =>
+    `var(--sscds-space-${$verticalPadding}) var(--sscds-space-${$horizontalPadding})`};
 `;
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, shouldAlignLastItemToBottom = false, as, ...props }, ref) => {
+  (
+    { children, shouldAlignLastItemToBottom = false, as, ...props }: CardProps,
+    ref,
+  ) => {
     let domTag;
     if (props.onClick) {
       domTag = 'button';
@@ -60,6 +61,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     if (as) {
       domTag = as;
     }
+
     const handleClick = (event) => {
       if (
         event.target?.dataset?.interactive ||

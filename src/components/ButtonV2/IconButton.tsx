@@ -29,6 +29,8 @@ export function IconButtonPlain<E extends ElementType = 'button'>(
     () => ({
       ...getCommonButtonStyles({ variant, size, disabled: isButtonDisabled }),
       '--sscds-button-size': getButtonSize(size),
+      '--sscds-button-padding-inline':
+        size === 'lg' ? 'var(--sscds-space-3x)' : 'var(--sscds-space-2x)',
     }),
     [variant, size, isButtonDisabled],
   );

@@ -11,6 +11,7 @@ import { Color } from '../../theme/colors.types';
 const StyledIcon = styled(Icon)<{
   $color: Color;
 }>`
+  display: block;
   background: ${getColor('neutral.0')};
   border: 1px solid ${getColor('neutral.0')};
   border-radius: 100%;
