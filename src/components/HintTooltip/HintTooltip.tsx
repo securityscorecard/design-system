@@ -1,34 +1,28 @@
 import styled from 'styled-components';
-import { isNotUndefined } from 'ramda-adjunct';
 
-import { getColor } from '../../utils';
 import { Tooltip } from '../Tooltip';
 import { Icon } from '../Icon';
 import { HintTooltipProps } from './HintTooltip.types';
-import { ColorTypes } from '../../theme';
-import { Color } from '../../theme/colors.types';
 
-const StyledIcon = styled(Icon)<{
-  $color: Color;
-}>`
-  display: block;
-  background: ${getColor('neutral.0')};
-  border: 1px solid ${getColor('neutral.0')};
+const StyledIcon = styled(Icon)<{ $flow: 'inline' | 'block' }>`
+  display: ${({ $flow }) => ($flow === 'block' ? 'block' : 'inline-block')};
+  background: var(--sscds-color-neutral-0);
+  border: 1px solid var(--sscds-color-neutral-0);
   border-radius: 100%;
-  color: ${({ $color, theme }) =>
-    isNotUndefined($color) ? getColor($color, { theme }) : 'inherit'};
+  color: var(--sscds-color-icon-subtle);
   &:hover {
-    color: ${({ theme }) => getColor('neutral.700', { theme })};
+    color: var(--sscds-color-icon-default);
   }
 `;
 
-const HintTooltip = ({ children, width, ...props }: HintTooltipProps) => (
+const HintTooltip = ({
+  children,
+  width,
+  flow = 'inline',
+  ...props
+}: HintTooltipProps) => (
   <Tooltip popup={children} width={width} {...props}>
-    <StyledIcon
-      $color={ColorTypes.neutral600}
-      name="info-circle-outline"
-      tabIndex={0}
-    />
+    <StyledIcon $flow={flow} name="info-circle-outline" tabIndex={0} />
   </Tooltip>
 );
 

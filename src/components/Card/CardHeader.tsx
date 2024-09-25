@@ -90,7 +90,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
                   placeContent: 'center',
                 }}
               >
-                <HintTooltip>{helpTooltip}</HintTooltip>
+                <HintTooltip flow="block">{helpTooltip}</HintTooltip>
               </div>
             )}
             {isNotUndefined(actions) && (
