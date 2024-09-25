@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { omit } from 'ramda';
 
-import { PortalPlacements } from '../../hooks/useCalculatePortalPlacements.enums';
+import { PortalPlacements } from './Tooltip.enums';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
 import { Paragraph } from '../Paragraph';

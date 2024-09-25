@@ -2,12 +2,7 @@ import { find, findIndex, propEq, remove, update } from 'ramda';
 
 import type { InstanceId } from './types';
 
-export const randomId = () =>
-  Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16)
-    .substring(1);
-
-export const findInstance = <I extends Record<string, unknown>>(
+const findInstance = <I extends Record<string, unknown>>(
   id: InstanceId,
   state: I[],
 ) => findIndex(propEq('id', id), state);

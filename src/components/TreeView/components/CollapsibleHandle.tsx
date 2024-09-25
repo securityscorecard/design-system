@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import IconButton from '../../ButtonV2/IconButton';
 
-export const IndentationPlaceholder = styled.div`
+const IndentationPlaceholder = styled.div`
   width: 1.5rem;
   height: 1.5rem;
 `;

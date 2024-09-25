@@ -5,4 +5,5 @@ export type {
   DatatableInstance,
   DatatableRow,
   DatatableRowAction,
+  DatatableState,
 } from './Datatable.types';

@@ -17,7 +17,7 @@ import { Padbox, PadboxEnums } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { InteractiveElement } from '../../Dropdown/Dropdown.types';
 
-export const List = styled.ul`
+const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
@@ -27,7 +27,7 @@ export const List = styled.ul`
 
 const FORWARD_PROP_EXCEPTIONS = ['paddingSize', 'paddingType'];
 
-export const DropdownLink = styled(Padbox).withConfig({
+const DropdownLink = styled(Padbox).withConfig({
   shouldForwardProp: (prop) => !FORWARD_PROP_EXCEPTIONS.includes(String(prop)),
 })<DropdownLinkProps>`
   width: 100%;

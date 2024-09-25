@@ -14,5 +14,3 @@ export const useLocalStorageState = <S = Record<string, unknown>>(
     },
   ] as const;
 };
-
-export default useLocalStorageState;

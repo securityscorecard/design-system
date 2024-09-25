@@ -1,4 +1,4 @@
-export type Colors =
+export type PillColors =
   | 'gray'
   | 'blue'
   | 'turquoise'
@@ -28,7 +28,7 @@ export interface PillWrapperProps extends React.HTMLAttributes<HTMLElement> {
    */
   onClick?: React.EventHandler<React.MouseEvent | React.KeyboardEvent>;
   as?: React.ElementType;
-  color?: Colors;
+  color?: PillColors;
   size?: 'sm' | 'md';
 }
 

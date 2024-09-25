@@ -1,7 +1,7 @@
 import type { To } from 'history';
 import React from 'react';
 
-export type ActionBase<
+type ActionBase<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
 > = {
@@ -11,7 +11,7 @@ export type ActionBase<
   tooltip?: React.ReactNode;
 };
 
-export type HandlerActionKind<
+type HandlerActionKind<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
 > = ActionBase<OnClickArgs, OnClickReturnType> &

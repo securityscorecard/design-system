@@ -16,7 +16,7 @@ const DatePicker =
   (ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ??
   ReactDatePicker;
 
-export const StyledDatePicker = styled.div`
+const StyledDatePicker = styled.div`
   ${datePickerStyles}
   ${singleDatePickerStyles}
 `;

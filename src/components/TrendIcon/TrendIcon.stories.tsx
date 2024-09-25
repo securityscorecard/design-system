@@ -1,7 +1,6 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
-import { TrendIcon } from './TrendIcon';
+import TrendIcon from './TrendIcon';
 import { Inline } from '../layout';
 
 export default {
