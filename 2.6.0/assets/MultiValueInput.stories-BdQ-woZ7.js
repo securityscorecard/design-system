@@ -1,0 +1,45 @@
+import{j as e}from"./jsx-runtime-Cw0GR0a5.js";import{r as ae}from"./index-CTjT7uj6.js";import{a as i}from"./chunk-454WOBUV-CM0pFb8Z.js";import{M as o}from"./MultiValueInput-9-z7I1u3.js";import"./index-ByR-Ex3O.js";import"./index-DozTNYRt.js";import"./index-O0QocxG4.js";import"./index-BC8DPgJ2.js";import"./index-CcmXMBOf.js";import{S as te}from"./index-uIya-cWM.js";import{L as se}from"./Label-DtIcT56G.js";import{S as re}from"./index-NWhnjyl5.js";import{a as b}from"./Heading-CP5qUNRg.js";import{B as oe}from"./Banner-taWe2n8j.js";import{n as ie}from"./noop-BfmH62Vh.js";import{I as le}from"./Inline.enums-DlaUPeKw.js";import{B as M}from"./Button-DfVLVEQy.js";import"./v4-CQkTLCs1.js";import"./styled-components.browser.esm-CkXiwQaI.js";import"./index-k3CGF2-i.js";import"./index-CbknQUej.js";import"./index-C7IrpltL.js";import"./index-DEer-CVx.js";import"./index-CMxDd3Da.js";import"./DSProvider-B7ofGRk-.js";import"./extends-CF3RwP-h.js";import"./index-DIVhMF2i.js";import"./theme-DY1VOCqR.js";import"./colors-BJBAFLAc.js";import"./isFunction-ORz17Qg7.js";import"./prop-CqBAad6K.js";import"./checkCircleSolid-CXNAtMl8.js";import"./index-DUHcbkNP.js";import"./Icon-Cs9KcX0_.js";import"./index-BRV0Se7Z.js";import"./useLogger-XTihx-r2.js";import"./index-BlYXqBWM.js";import"./Pill-z8JPj4-3.js";import"./PillRemoveButton-C9oge2rz.js";import"./isNonEmptyArray-0RkcjJFH.js";import"./isNotEmpty-CRWDvOhW.js";import"./Padbox-Suafv-Ni.js";import"./isNonEmptyString-CFGtbz4A.js";import"./isNotNull-CcOpPpmr.js";import"./isNull-D6Q9WflV.js";import"./trim-BPpD-fvq.js";import"./take-BGfUuSAC.js";import"./index-B0Us5nPq.js";import"./Cluster-CO02VLRh.js";import"./index-D2mRoxDo.js";import"./require-router-link-CU3avibx.js";import"./react-router-dom-B-6Qbk9C.js";import"./inheritsLoose-B6jfs0L0.js";import"./setPrototypeOf-DgZC2w_0.js";import"./tiny-invariant-CopsF_GD.js";import"./objectWithoutPropertiesLoose-CAYKN5F1.js";import"./index-BIl9TMb8.js";import"./Spinner-S-AlkdOj.js";import"./index-BjcCWu4d.js";import"./CloseButton-DolDE5X-.js";import"./IconButton-CIf20D8_.js";import"./components-9007xTyM.js";import"./index-D0Bewi1k.js";import"./isNotNilOrEmpty-DiaBY2VY.js";import"./isNilOrEmpty-4N7MeV5x.js";import"./isNil-CUap-F7z.js";import"./useContainerQuery-DqIcbuCK.js";const Ma={component:o,title:"components/forms/MultiValueInput"},l=a=>e.jsx(o,{...a,"aria-label":"MultiValueInput"}),r=l.bind({});r.args={onValueAdd:i("OnValueAdd"),onValueRemove:i("OnValueRemove"),onValuesChange:i("OnValuesChange"),onInputChange:i("OnInputChange"),valuesDelimiter:",",onPaste:a=>(a.clipboardData||window.clipboardData).getData("text").split(";").filter(t=>t!=="3").join(";")};const u=l.bind({});u.args={...r.args,value:["john@example.com","jane@example.com"]};const p=l.bind({});p.args={...r.args,placeholder:"Share with..."};const m=l.bind({});m.args={...r.args,isFocused:!0,className:"focus-within"};const c=l.bind({});c.args={...r.args,isInvalid:!0};const d=l.bind({});d.args={...r.args,isDisabled:!0};const n=l.bind({});n.args={...r.args,isClearable:!1,value:["john@example.com","jane@example.com"]};n.title="Non-clearable";const I=a=>{const[v,t]=ae.useState(!0);return e.jsxs(e.Fragment,{children:[e.jsx(se,{htmlFor:"number",children:"Numbers only"}),e.jsx(o,{...a,inputId:"emails",inputValue:"abc",isInvalid:v,pattern:"[0-9]+",value:["12"],onInputChange:s=>{t(!!s.target.validity.patternMismatch)}})]})},g=a=>e.jsxs(re,{gap:"md",children:[e.jsx(b,{size:"h3",children:"Default truncation N=16"}),e.jsx(o,{...a}),e.jsx(b,{size:"h3",children:"Custom truncation N=25"}),e.jsx(o,{...a,maxPillLabelLength:25}),e.jsx(b,{size:"h3",children:"Custom truncation N=5"}),e.jsx(o,{...a,maxPillLabelLength:5})]});g.args={...r.args,value:["123456789012345678901234567890","12345678901234567890","1234567890"]};const h=a=>e.jsx("div",{style:{width:"200px"},children:e.jsx(o,{...a})});h.args={...r.args,value:["12345678901234567890","1234567890"]};const V=a=>{const[v,t]=ae.useState([]);return e.jsxs(re,{gap:"sm",children:[e.jsxs(oe,{variant:"warn",onClose:ie,children:["Handling duplicated values is ",e.jsx(te,{children:"up to the consumer"})," for the controlled input."]}),e.jsx(o,{...a,value:v,onValueAdd:(s,x)=>{t(x),i("valueAdd")(x)},onValueRemove:s=>{t(s),i("valueRemove")(s)},onValuesChange:s=>{t(s),i("valuesChange")(s)}}),e.jsxs(le,{gap:"md",children:[e.jsx(M,{onClick:()=>t(["controlledValue1","controlledValue2"]),children:"Add values"}),e.jsx(M,{onClick:()=>t([]),children:"Reset values"})]})]})};V.parameters={screenshot:{skip:!0}};var j,S,C;r.parameters={...r.parameters,docs:{...(j=r.parameters)==null?void 0:j.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(C=(S=r.parameters)==null?void 0:S.docs)==null?void 0:C.source}}};var f,P,L;u.parameters={...u.parameters,docs:{...(f=u.parameters)==null?void 0:f.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(L=(P=u.parameters)==null?void 0:P.docs)==null?void 0:L.source}}};var N,k,B;p.parameters={...p.parameters,docs:{...(N=p.parameters)==null?void 0:N.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(B=(k=p.parameters)==null?void 0:k.docs)==null?void 0:B.source}}};var D,H,R;m.parameters={...m.parameters,docs:{...(D=m.parameters)==null?void 0:D.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(R=(H=m.parameters)==null?void 0:H.docs)==null?void 0:R.source}}};var w,y,A;c.parameters={...c.parameters,docs:{...(w=c.parameters)==null?void 0:w.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(A=(y=c.parameters)==null?void 0:y.docs)==null?void 0:A.source}}};var F,z,O;d.parameters={...d.parameters,docs:{...(F=d.parameters)==null?void 0:F.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(O=(z=d.parameters)==null?void 0:z.docs)==null?void 0:O.source}}};var _,W,E;n.parameters={...n.parameters,docs:{...(_=n.parameters)==null?void 0:_.docs,source:{originalSource:'args => <MultiValueInput {...args} aria-label="MultiValueInput" />',...(E=(W=n.parameters)==null?void 0:W.docs)==null?void 0:E.source}}};var T,q,G;I.parameters={...I.parameters,docs:{...(T=I.parameters)==null?void 0:T.docs,source:{originalSource:`args => {
+  const [isInvalid, setIsInvalid] = useState(true);
+  return <>
+      <Label htmlFor="number">Numbers only</Label>
+      <MultiValueInput {...args} inputId="emails" inputValue="abc" isInvalid={isInvalid} pattern="[0-9]+" value={['12']} onInputChange={e => {
+      setIsInvalid(!!e.target.validity.patternMismatch);
+    }} />
+    </>;
+}`,...(G=(q=I.parameters)==null?void 0:q.docs)==null?void 0:G.source}}};var J,K,Q;g.parameters={...g.parameters,docs:{...(J=g.parameters)==null?void 0:J.docs,source:{originalSource:`args => <Stack gap="md">
+    <Heading size="h3">Default truncation N=16</Heading>
+    <MultiValueInput {...args} />
+    <Heading size="h3">Custom truncation N=25</Heading>
+    <MultiValueInput {...args} maxPillLabelLength={25} />
+    <Heading size="h3">Custom truncation N=5</Heading>
+    <MultiValueInput {...args} maxPillLabelLength={5} />
+  </Stack>`,...(Q=(K=g.parameters)==null?void 0:K.docs)==null?void 0:Q.source}}};var U,X,Y;h.parameters={...h.parameters,docs:{...(U=h.parameters)==null?void 0:U.docs,source:{originalSource:`args => <div style={{
+  width: '200px'
+}}>
+    <MultiValueInput {...args} />
+  </div>`,...(Y=(X=h.parameters)==null?void 0:X.docs)==null?void 0:Y.source}}};var Z,$,ee;V.parameters={...V.parameters,docs:{...(Z=V.parameters)==null?void 0:Z.docs,source:{originalSource:`args => {
+  const [values, setValues] = useState<string[] | undefined>([]);
+  return <Stack gap="sm">
+      <Banner variant="warn" onClose={noop}>
+        Handling duplicated values is <Strong>up to the consumer</Strong> for
+        the controlled input.
+      </Banner>
+      <MultiValueInput {...args} value={values} onValueAdd={(_, v) => {
+      setValues(v);
+      action('valueAdd')(v);
+    }} onValueRemove={v => {
+      setValues(v);
+      action('valueRemove')(v);
+    }} onValuesChange={v => {
+      setValues(v);
+      action('valuesChange')(v);
+    }} />
+      <Inline gap="md">
+        <Button onClick={() => setValues(['controlledValue1', 'controlledValue2'])}>
+          Add values
+        </Button>
+        <Button onClick={() => setValues([])}>Reset values</Button>
+      </Inline>
+    </Stack>;
+}`,...(ee=($=V.parameters)==null?void 0:$.docs)==null?void 0:ee.source}}};const ja=["Playground","Filled","WithPlaceholder","Focus","Invalid","Disabled","NonClearable","Validation","PillTruncation","PillWrapping","ControlledInput"];export{V as ControlledInput,d as Disabled,u as Filled,m as Focus,c as Invalid,n as NonClearable,g as PillTruncation,h as PillWrapping,r as Playground,I as Validation,p as WithPlaceholder,ja as __namedExportsOrder,Ma as default};
+//# sourceMappingURL=MultiValueInput.stories-BdQ-woZ7.js.map
