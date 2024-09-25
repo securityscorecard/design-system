@@ -1,4 +1,4 @@
-import { Colors } from '../Pill';
+import { PillColors } from '../Pill';
 import { Sizes } from './types';
 
 export const getCommonChipStyles = ({
@@ -6,7 +6,7 @@ export const getCommonChipStyles = ({
   color,
 }: {
   size: Sizes;
-  color: Colors;
+  color: PillColors;
 }) => ({
   '--sscds-chip-padding-block':
     size === 'md' ? 'var(--sscds-space-1x)' : '0 var(--sscds-space-half-x)',

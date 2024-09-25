@@ -74,7 +74,6 @@ export const ScrollView = forwardRef<HTMLDivElement, ScrollViewProps>(
         radius={radius}
         style={cssVars}
         {...props}
-        background="white"
       >
         {children}
       </ScrollViewRoot>

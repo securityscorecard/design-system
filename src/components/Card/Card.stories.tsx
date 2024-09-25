@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styled from 'styled-components';
@@ -10,7 +10,6 @@ import CardActions from './CardActions';
 import CardContent from './CardContent';
 import CardMedia from './CardMedia';
 import { CardActionsProps, CardProps } from './Card.types';
-import { Icon } from '../Icon';
 import { UserAvatar } from '../UserAvatar';
 import { Grid, Stack } from '../layout';
 
@@ -52,11 +51,13 @@ function CardHeaderTemplate({
   onHelpClick,
   helpTooltip,
   leftAdornment = (
-    <div style={{ marginLeft: '-8px' }}>
-      <CardIconButton aria-label="Drag Card">
-        <Icon color="neutral.800" name="grip-dots-vertical" />
-      </CardIconButton>
-    </div>
+    <CardIconButton
+      iconName="grip-dots-vertical"
+      label="Drag Card"
+      style={{
+        marginInlineStart: 'var(--sscds-button-padding-compensation)',
+      }}
+    />
   ),
 }: Partial<ComponentProps<typeof CardHeader>>) {
   return (
@@ -105,11 +106,13 @@ function CardActionsTemplate({
     <CardActions
       actions={actionsFromProps}
       rightAdornment={
-        <div style={{ marginRight: '-8px' }}>
-          <CardIconButton aria-label="Resize Card">
-            <Icon color="neutral.700" name="resize" />
-          </CardIconButton>
-        </div>
+        <CardIconButton
+          iconName="resize"
+          label="Resize Card"
+          style={{
+            marginInlineEnd: 'var(--sscds-button-padding-compensation)',
+          }}
+        />
       }
     />
   );
@@ -312,10 +315,7 @@ WithHelpClickHandler.args = {
   children: (
     <>
       <CardMediaTemplate />
-      <CardHeaderTemplate
-        helpTooltip={<Text>Tooltip test</Text>}
-        onHelpClick={action('help-click')}
-      />
+      <CardHeaderTemplate helpTooltip={<Text>Tooltip test</Text>} />
       <CardContentTemplate />
     </>
   ),
@@ -342,7 +342,7 @@ WithIconOnlyAction.args = {
   children: (
     <>
       <CardMediaTemplate />
-      <CardHeaderTemplate />
+      <CardHeaderTemplate helpTooltip={<Text>Tooltip test</Text>} />
       <CardContentTemplate />
       <CardActionsTemplate
         actions={[
@@ -409,3 +409,11 @@ export const InteractiveCustomLinkCard = () => (
     </Card>
   </Stack>
 );
+
+export const DarkMode = CardTemplate.bind({});
+DarkMode.args = Playground.args;
+DarkMode.parameters = {
+  themes: {
+    themeOverride: 'Dark',
+  },
+};

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { SpaceSizes } from '../../theme';
 import { CardContainer } from './Card';
 
 const CardContent = React.forwardRef<
@@ -9,8 +8,8 @@ const CardContent = React.forwardRef<
 >(({ children, ...props }, ref) => (
   <CardContainer
     ref={ref}
-    horizontalPadding={SpaceSizes.mdPlus}
-    verticalPadding={SpaceSizes.md}
+    $horizontalPadding="6x"
+    $verticalPadding="4x"
     {...props}
   >
     {children}

@@ -29,7 +29,7 @@ const criticalityColorsLikelihood = [
   'var(--sscds-likelihood-high)',
 ];
 
-export function Svg({
+function Svg({
   children,
   className,
   ...props
@@ -50,7 +50,7 @@ export function Svg({
   );
 }
 
-export function VerticalBar({
+function VerticalBar({
   height,
   xPos,
   fill = 'rgb(0 0 0 / 0.1)',

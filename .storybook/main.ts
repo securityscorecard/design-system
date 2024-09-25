@@ -18,7 +18,6 @@ const config: StorybookConfig = {
         },
       },
     },
-    // '@storybook/addon-a11y',
     '@storybook/addon-designs',
     '@storybook/addon-themes',
     '@storybook/addon-coverage',

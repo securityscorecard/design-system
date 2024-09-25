@@ -169,7 +169,7 @@ export type DatatableRow<D> = Omit<Row<D>, 'getVisibleCells'> & {
   getVisibleCells: () => DatatableCell<D>[];
 };
 
-export interface DatatableRowModel<D> {
+interface DatatableRowModel<D> {
   flatRows: DatatableRow<D>[];
   rows: DatatableRow<D>[];
   rowsById: { [key: string]: DatatableRow<D> };

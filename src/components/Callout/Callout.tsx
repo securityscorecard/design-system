@@ -1,74 +1,61 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { ComponentProps, ReactNode, useMemo } from 'react';
 
-import { CalloutContainerProps, CalloutProps } from './Callout.types';
-import { ColorTypes, SpaceSizes } from '../../theme';
-import { getColor, getRadii, pxToRem } from '../../utils';
 import { Inline, Padbox } from '../layout';
 import { Text } from '../Text';
-import { Icon } from '../Icon';
-import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { CalloutColors } from './Callout.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
+import { IconWrapper } from '../IconWrapper';
+import { IconNames, RegularIconTypes } from '../Icon';
 
-const CalloutIconNeutral = css`
-  background-color: ${getColor(ColorTypes.neutral300)};
-  color: ${getColor(ColorTypes.neutral700)};
-`;
-const CalloutIconInfo = css`
-  background-color: ${getColor(ColorTypes.info100)};
-  color: ${getColor(ColorTypes.info700)};
-`;
-const calloutIconColors = {
-  [CalloutColors.neutral]: CalloutIconNeutral,
-  [CalloutColors.info]: CalloutIconInfo,
+export type CalloutProps = {
+  children: ReactNode;
+  icon?:
+    | IconNames
+    | {
+        name: IconNames;
+        type?: RegularIconTypes;
+      };
+  color?: 'neutral' | 'info';
 };
-
-const IconContainer = styled.div<CalloutContainerProps>`
-  width: ${pxToRem(36)};
-  height: ${pxToRem(36)};
-  flex-shrink: 0;
-  border-radius: ${getRadii('circle')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--sscds-font-size-body-lg);
-  ${({ $color }) => calloutIconColors[$color]};
-`;
-
-const CalloutNeutral = css`
-  background-color: ${getColor(ColorTypes.neutral100)};
-`;
-const CalloutInfo = css`
-  background-color: ${getColor(ColorTypes.info50)};
-`;
-
-const calloutColors = {
-  [CalloutColors.neutral]: CalloutNeutral,
-  [CalloutColors.info]: CalloutInfo,
-};
-
-const Container = styled(Padbox)<CalloutContainerProps>`
-  border-radius: ${getRadii('default')};
-  ${({ $color }) => calloutColors[$color]};
+const Container = styled(Padbox)`
+  border-radius: var(--sscds-radii-surface-md);
+  background-color: var(--sscds-callout-color-background);
 `;
 
 const Callout = ({
   children,
-  icon = SSCIconNames.lightbulb,
-  color = CalloutColors.info,
-}: CalloutProps) => (
-  <Container
-    $color={color}
-    className={CLX_COMPONENT}
-    paddingSize={SpaceSizes.md}
-  >
-    <Inline gap={SpaceSizes.md}>
-      <IconContainer $color={color}>
-        {typeof icon === 'string' ? <Icon name={icon} /> : icon}
-      </IconContainer>
-      <Text style={{ alignSelf: 'center' }}>{children}</Text>
-    </Inline>
-  </Container>
-);
+  icon = 'lightbulb',
+  color = 'info',
+}: CalloutProps) => {
+  const iconWrapperVariant: ComponentProps<typeof IconWrapper>['variant'] =
+    color === 'neutral' ? 'subtle' : 'strong';
+  const styles = useMemo(
+    () => ({
+      '--sscds-callout-color-background':
+        color === 'neutral'
+          ? 'var(--sscds-color-background-surface-dynamic)'
+          : 'var(--sscds-color-info-050)',
+    }),
+    [color],
+  );
+
+  return (
+    <Container className={CLX_COMPONENT} paddingSize="md" style={styles}>
+      <Inline gap="md">
+        {typeof icon === 'string' ? (
+          <IconWrapper name={icon} size="md" variant={iconWrapperVariant} />
+        ) : (
+          <IconWrapper
+            name={icon.name}
+            size="md"
+            type={icon?.type ?? 'ssc'}
+            variant={iconWrapperVariant}
+          />
+        )}
+        <Text style={{ alignSelf: 'center' }}>{children}</Text>
+      </Inline>
+    </Container>
+  );
+};
 
 export default Callout;

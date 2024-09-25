@@ -116,7 +116,6 @@ const DrawerBox = forwardRef<HTMLDivElement, DrawerProps>(
         }}
       >
         <Surface
-          background="white"
           elevation={5}
           radius="lg"
           style={{ display: 'flex', width: '100%' }}

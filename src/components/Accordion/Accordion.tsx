@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { equals, filter, includes, pipe, pluck, propEq, reject } from 'ramda';
 import cls from 'classnames';
 
@@ -31,7 +31,7 @@ export function filterState(
   return [...state, item];
 }
 
-const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
+const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       isCollapsedOnOpen = true,
@@ -40,7 +40,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
       className,
       onChange,
       ...props
-    },
+    }: AccordionProps,
     ref,
   ) => {
     const [openIds, setOpenIds] = useState(pickOpen(items));

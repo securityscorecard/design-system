@@ -1,38 +1,48 @@
-import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import Callout from './Callout';
-import { Icon } from '../Icon';
 import { Link } from '../Link';
 import { Strong } from '../Text';
+import { Stack } from '../layout';
 
-export default {
+const meta = {
   title: 'components/Callout',
   component: Callout,
-} as Meta<typeof Callout>;
+  args: {
+    children: (
+      <>
+        <Strong>Did you know?</Strong> This is a callout message that may
+        include <Link href="#">links</Link> even!
+      </>
+    ),
+  },
+} satisfies Meta<typeof Callout>;
+export default meta;
 
-type Story = StoryFn<typeof Callout>;
+type Story = StoryObj<typeof meta>;
 
-const content = (
-  <>
-    <Strong>Did you know?</Strong> This is a callout message that may include{' '}
-    <Link href="#">links</Link> even!
-  </>
-);
-
-const CalloutTemplate = (args) => <Callout {...args} />;
-
-export const Playground: Story = CalloutTemplate.bind({});
-Playground.args = {
-  children: content,
+export const Playground: Story = {
+  parameters: { screenshot: { skip: true } },
 };
-Playground.parameters = { screenshot: { skip: true } };
 
-export const InfoCallout: Story = CalloutTemplate.bind({});
-InfoCallout.args = Playground.args;
+export const InfoCallout: Story = {
+  args: { color: 'info' },
+};
 
-export const NeutralCallout: Story = CalloutTemplate.bind({});
-NeutralCallout.args = { ...Playground.args, color: 'neutral' };
+export const NeutralCallout: Story = {
+  args: { color: 'neutral' },
+};
 
-export const WithIcon: Story = CalloutTemplate.bind({});
-WithIcon.args = { ...Playground.args, icon: <Icon name="wrench" /> };
+export const ColorsDark: Story = {
+  render: (args) => (
+    <Stack gap="md">
+      <Callout {...args} color="info" />
+      <Callout {...args} color="neutral" />
+    </Stack>
+  ),
+  parameters: {
+    themes: {
+      themeOverride: 'Dark',
+    },
+  },
+};

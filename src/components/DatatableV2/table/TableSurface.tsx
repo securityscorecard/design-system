@@ -34,7 +34,6 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
   return (
     <DatatableRoot $isFullscreen={isFullscreenMode}>
       <Surface
-        background="white"
         radius={isFullscreenMode ? 'none' : 'md'}
         style={{
           '--sscds-table-color-background': 'var(--sscds-background)',

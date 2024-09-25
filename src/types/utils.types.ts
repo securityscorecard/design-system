@@ -1,7 +1,5 @@
 import { ElementType } from 'react';
 
-export type Extends<T, U extends T> = U;
-
 export type Subset<K> = {
   [attr in keyof K]?: K[attr] extends object
     ? Subset<K[attr]>
