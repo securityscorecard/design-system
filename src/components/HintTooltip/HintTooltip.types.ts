@@ -4,4 +4,5 @@ export interface HintTooltipProps {
   children: React.ReactNode;
   className?: string;
   width?: number;
+  flow?: 'inline' | 'block';
 }

@@ -1,11 +1,9 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import HintTooltip from './HintTooltip';
 import { HintTooltipProps } from './HintTooltip.types';
 import { Inline, Padbox, Stack } from '../layout';
-import { getColor } from '../../utils';
 import { Paragraph } from '../Paragraph';
 import { Link } from '../Link';
 import { Text } from '../Text';
@@ -35,7 +33,7 @@ const Popup = (
 );
 
 const ColorBackgroundWrapper = styled(Padbox)`
-  background-color: ${getColor('primary.50')};
+  background-color: var(--sscds-color-primary-3);
 `;
 
 export const Default: StoryFn<HintTooltipProps> = ({ ...args }) => (
