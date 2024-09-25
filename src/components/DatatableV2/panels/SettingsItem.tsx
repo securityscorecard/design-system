@@ -4,6 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Inline, Padbox } from '../../layout';
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';
 import IconButton from '../../ButtonV2/IconButton';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const SettingsItem = <D,>({
   column,
@@ -25,6 +26,8 @@ const SettingsItem = <D,>({
     transform,
     transition,
   } = useSortable({ id: column.id });
+  const { t } = useSafeTranslation();
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -46,7 +49,9 @@ const SettingsItem = <D,>({
           <IconButton
             ref={setActivatorNodeRef}
             iconName="grip-dots-vertical"
-            label={`Reorder ${column.columnDef.header} column`}
+            label={t('sscds|datatable.settings.ordering.reorder', {
+              columnName: column.columnDef.header,
+            })}
             {...attributes}
             {...listeners}
             size="sm"
@@ -58,9 +63,15 @@ const SettingsItem = <D,>({
         {enableHiding && (
           <div className="ds-table-checkbox-wrapper">
             <input
-              aria-label={`${column.getIsVisible() ? 'Hide' : 'Show'} ${
-                column.columnDef.header
-              } column`}
+              aria-label={
+                column.getIsVisible()
+                  ? t('sscds|datatable.settings.hiding.hideColumn', {
+                      columnName: column.columnDef.header,
+                    })
+                  : t('sscds|datatable.settings.hiding.showColumn', {
+                      columnName: column.columnDef.header,
+                    })
+              }
               checked={column.getIsVisible()}
               disabled={
                 (!canColumnHide && column.getIsVisible()) ||
@@ -74,9 +85,15 @@ const SettingsItem = <D,>({
         {enableColumnPinning && (
           <div className="ds-table-checkbox-wrapper">
             <input
-              aria-label={`${
-                column.getIsPinned() !== false ? 'Unpin' : 'Pin'
-              } ${column.columnDef.header} column`}
+              aria-label={
+                column.getIsPinned() !== false
+                  ? t('sscds|datatable.settings.pinnig.unpinColumn', {
+                      columnName: column.columnDef.header,
+                    })
+                  : t('sscds|datatable.settings.pinnig.pinColumn', {
+                      columnName: column.columnDef.header,
+                    })
+              }
               checked={column.getIsPinned() !== false}
               disabled={!column.getCanPin()}
               type="checkbox"

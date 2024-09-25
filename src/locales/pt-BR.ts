@@ -19,5 +19,77 @@ const locale = {
   'filters.number.placeholder': 'Número',
   'filters.number.error': 'Use apenas números',
   'filters.tagsInput.placeholder': 'Digite o valor',
+  'datatable.pagination.itemCounter.short':
+    '{{firstRowIndex}}-{{lastRowIndex}} de {{totalRowCount}}',
+  'datatable.pagination.itemCounter.full_one':
+    '{{firstRowIndex}}-{{lastRowIndex}} de {{totalRowCount}} linha no total',
+  'datatable.pagination.itemCounter.full_other':
+    '{{firstRowIndex}}-{{lastRowIndex}} de {{totalRowCount}} linhas no total',
+  'datatable.pagination.rowsPerPage': 'Linhas por página',
+  'datatable.pagination.rowsPerPage.short': 'Linhas',
+  'datatable.pagination.goToFirstPage': 'Ir para a primeira página da tabela',
+  'datatable.pagination.goToLastPage': 'Ir para a última página da tabela',
+  'datatable.pagination.goToPreviousPage':
+    'Ir para a página anterior da tabela',
+  'datatable.pagination.goToNextPage': 'Ir para a próxima página da tabela',
+  'datatable.topToolbar.itemCounter_one': '{{totalRowCount}} linha',
+  'datatable.topToolbar.itemCounter_other': '{{totalRowCount}} linhas',
+  'datatable.topToolbar.hiddenColumns_one': '{{count}} coluna oculta',
+  'datatable.topToolbar.hiddenColumns_other': '{{count}} colunas ocultas',
+  'datatable.topToolbar.columns': 'Colunas',
+  'datatable.topToolbar.fullScreen': 'Tela Cheia',
+  'datatable.selection.itemCounter_one':
+    '<bold>{{selectedRowCount}}</bold> de {{totalRowCount}} linha selecionada',
+  'datatable.selection.itemCounter_other':
+    '<bold>{{selectedRowCount}}</bold> de {{totalRowCount}} linhas selecionadas',
+  'datatable.selection.clearSelection': 'Limpar seleção',
+  'datatable.selection.toggleAll': 'Alternar selecionar todos',
+  'datatable.selection.toggleRow': 'Alternar selecionar linha',
+  'datatable.noData.title': 'Nenhum resultado encontrado',
+  'datatable.noData.list.description': 'Isso pode acontecer porque:',
+  'datatable.noData.list.emptySet': 'o conjunto de dados está vazio',
+  'datatable.noData.list.activeFilters':
+    'nenhum dos itens corresponde aos seus filtros ativos',
+  'datatable.expanding.expandAll': 'Expandir todas as linhas',
+  'datatable.expanding.collapseAll': 'Recolher todas as linhas',
+  'datatable.expanding.expandRow': 'Expandir linha',
+  'datatable.expanding.collapseRow': 'Recolher linha',
+  'datatable.rowActions.trigger': 'Ações de linha',
+  'datatable.columnActions.trigger': 'Ações de coluna',
+  'datatable.columnActions.sort.ascending': 'Ordem crescente',
+  'datatable.columnActions.sort.descending': 'Ordem decrescente',
+  'datatable.columnActions.sort.clear': 'Limpar ordenação',
+  'datatable.columnActions.hideColumn': 'Ocultar coluna',
+  'datatable.columnActions.pinning.pin': 'Fixar coluna',
+  'datatable.columnActions.pinning.unpin': 'Desfixar coluna',
+  'datatable.columnActions.resetSize': 'Redefinir tamanho da coluna',
+  'datatable.settings.title': 'Configurações de colunas',
+  'datatable.settings.close': 'Fechar configurações de colunas',
+  'datatable.settings.reset': 'Redefinir para o padrão',
+  'datatable.settings.hiding.title': 'Exibir',
+  'datatable.settings.hiding.showAll': 'Exibir todas as colunas',
+  'datatable.settings.hiding.hideAll': 'Ocultar todas as colunas',
+  'datatable.settings.hiding.showColumn': 'Exibir coluna {{columnName}}',
+  'datatable.settings.hiding.hideColumn': 'Ocultar coluna {{columnName}}',
+  'datatable.settings.pinnig.title': 'Fixar',
+  'datatable.settings.pinnig.pinAll': 'Fixar todas as colunas',
+  'datatable.settings.pinnig.unpinAll': 'Desfixar todas as colunas',
+  'datatable.settings.pinnig.pinColumn': 'Fixar coluna {{columnName}}',
+  'datatable.settings.pinnig.unpinColumn': 'Desfixar coluna {{columnName}}',
+  'datatable.settings.ordering.reorder': 'Reordenar coluna {{columnName}}',
+  'datatable.settings.ordering.screenReader.instructions':
+    'Para pegar uma coluna móvel da tabela, pressione Espaço ou Enter. Use as setas para cima e para baixo para atualizar a posição da coluna na tabela. Pressione Espaço ou Enter novamente para soltar o item em sua nova posição, ou pressione Escape para cancelar.',
+  'datatable.settings.ordering.screenReader.pickedUp':
+    'Coluna {{header}} selecionada.',
+  'datatable.settings.ordering.screenReader.movedOver':
+    'A coluna {{activeHeader}} foi movida para a coluna {{overHeader}}.',
+  'datatable.settings.ordering.screenReader.dropped':
+    'A coluna {{activeHeader}} foi soltada.',
+  'datatable.settings.ordering.screenReader.droppedOver':
+    'A coluna {{activeHeader}} foi soltada sobre a coluna {{overHeader}}',
+  'datatable.settings.ordering.screenReader.dragCancel':
+    'O arraste foi cancelado. A coluna {{header}} foi solta.',
+  'datatable.settings.ordering.screenReader.notDroppableArea':
+    'A coluna {{activeHeader}} não está mais em uma área onde pode ser solta.',
 } as const;
 export default locale;

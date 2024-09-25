@@ -9,6 +9,7 @@ import {
   MenuSeparator,
 } from '../../_internal/BaseDropdownMenu/menuElements';
 import { getHidableColumns } from '../columns.utils';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const ColumnActionsMenu = <D,>({
   header,
@@ -31,6 +32,7 @@ const ColumnActionsMenu = <D,>({
   } = table;
   const { column } = header;
   const { columnSizing, isFullscreenMode } = getState();
+  const { t } = useSafeTranslation();
 
   const hidableColumns = getHidableColumns(table);
 
@@ -64,7 +66,7 @@ const ColumnActionsMenu = <D,>({
             isDisabled={column.getIsSorted() === 'asc'}
             onClick={() => handleSort(false)}
           >
-            Ascending sort
+            {t('sscds|datatable.columnActions.sort.ascending')}
           </MenuItem>,
           <MenuItem
             key="col-action-sort-desc"
@@ -73,7 +75,7 @@ const ColumnActionsMenu = <D,>({
             isDisabled={column.getIsSorted() === 'desc'}
             onClick={() => handleSort(true)}
           >
-            Descending sort
+            {t('sscds|datatable.columnActions.sort.descending')}
           </MenuItem>,
           enableSortingRemoval !== false && (
             <MenuItem
@@ -83,7 +85,7 @@ const ColumnActionsMenu = <D,>({
               isDisabled={!column.getIsSorted()}
               onClick={handleClearSort}
             >
-              Clear sort
+              {t('sscds|datatable.columnActions.sort.clear')}
             </MenuItem>
           ),
           enableHiding && column.getCanHide() ? (
@@ -100,7 +102,7 @@ const ColumnActionsMenu = <D,>({
             isDisabled={hidableColumns.length === 1}
             onClick={handleHideColumn}
           >
-            Hide column
+            {t('sscds|datatable.columnActions.hideColumn')}
           </MenuItem>,
           !enableHiding && !enableColumnPinning && !enableColumnOrdering ? (
             <MenuSeparator key="col-action-sep-02" />
@@ -116,7 +118,7 @@ const ColumnActionsMenu = <D,>({
             isDisabled={column.getIsPinned() === 'left'}
             onClick={() => handlePinColumn('left')}
           >
-            Pin column
+            {t('sscds|datatable.columnActions.pinning.pin')}
           </MenuItem>,
           <MenuItem
             key="col-action-pin-reset"
@@ -125,7 +127,7 @@ const ColumnActionsMenu = <D,>({
             isDisabled={!column.getIsPinned()}
             onClick={() => handlePinColumn(false)}
           >
-            Unpin column
+            {t('sscds|datatable.columnActions.pinning.unpin')}
           </MenuItem>,
           enableColumnResizing && column.getCanResize() ? (
             <MenuSeparator key="col-action-sep-04" />
@@ -141,7 +143,7 @@ const ColumnActionsMenu = <D,>({
             isDisabled={!columnSizing[column.id]}
             onClick={() => handleResetColumnSize()}
           >
-            Reset column size
+            {t('sscds|datatable.columnActions.resetSize')}
           </MenuItem>,
         ]
       : []),

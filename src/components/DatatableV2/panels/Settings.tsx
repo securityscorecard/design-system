@@ -12,6 +12,7 @@ import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
 import { getButtonSize } from '../../ButtonV2/utils';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const SettingsRoot = styled.div`
   display: flex;
@@ -67,6 +68,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
   } = table;
   const { columnOrder, columnPinning } = getState();
   const { datatable } = useContext(DSContext);
+  const { t } = useSafeTranslation();
 
   const canHideMoreColumns = getHidableColumns(table).length > 1;
   const allColumns = useMemo(() => {
@@ -159,10 +161,10 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
         <Inline align="center" gap="md" justify="space-between">
           <Inline align="center" gap="md">
             <Icon name="columns-3" />
-            <Text isBold>Column settings</Text>
+            <Text isBold>{t('sscds|datatable.settings.title')}</Text>
           </Inline>
           <CloseButton
-            ariaLabel="Close column settings"
+            ariaLabel={t('sscds|datatable.settings.close')}
             marginCompensation="md"
             onClose={() => setShowColumnSettings(false)}
           />
@@ -194,23 +196,25 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
                   setColumnOrder(initialState.columnOrder ?? []);
                 }}
               >
-                Reset to default
+                {t('sscds|datatable.settings.reset')}
               </Button>
             </div>
             <Inline gap="sm">
               {enableHiding && (
                 <Stack gap="sm" justify="center">
-                  <Text variant="secondary">Show</Text>
+                  <Text variant="secondary">
+                    {t('sscds|datatable.settings.hiding.title')}
+                  </Text>
                   <div
                     className="ds-table-checkbox-wrapper"
                     style={{ height: getButtonSize('sm') }}
                   >
                     <IndeterminateCheckbox
-                      aria-label={`${
+                      aria-label={
                         getColumnsVisibilityInfo().areAllColumnsVisible
-                          ? 'Hide'
-                          : 'Show'
-                      } all columns`}
+                          ? t('sscds|datatable.settings.hiding.hideAll')
+                          : t('sscds|datatable.settings.hiding.showAll')
+                      }
                       checked={getColumnsVisibilityInfo().areAllColumnsVisible}
                       indeterminate={
                         getColumnsVisibilityInfo().areSomeColumnsVisible
@@ -224,7 +228,9 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
               )}
               {enableColumnPinning && (
                 <Stack gap="sm" justify="center">
-                  <Text variant="secondary">Pin</Text>
+                  <Text variant="secondary">
+                    {t('sscds|datatable.settings.pinnig.title')}
+                  </Text>
                   <div
                     className="ds-table-checkbox-wrapper"
                     style={{
@@ -233,11 +239,11 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
                     }}
                   >
                     <IndeterminateCheckbox
-                      aria-label={`${
+                      aria-label={
                         getColumnsPinnabilityInfo().areAllColumnsPinned
-                          ? 'Unpin'
-                          : 'Pin'
-                      } all columns`}
+                          ? t('sscds|datatable.settings.pinnig.unpinAll')
+                          : t('sscds|datatable.settings.pinnig.pinAll')
+                      }
                       checked={getColumnsPinnabilityInfo().areAllColumnsPinned}
                       indeterminate={
                         getColumnsPinnabilityInfo().areSomeColumnsPinned

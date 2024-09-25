@@ -3,6 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import RowActionsMenu from '../menus/RowActionsMenu';
 import IconButton from '../../ButtonV2/IconButton';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const RowActionsButton = <D,>({
   row,
@@ -14,6 +15,7 @@ const RowActionsButton = <D,>({
   const {
     options: { rowActions = [] },
   } = table;
+  const { t } = useSafeTranslation();
 
   if (rowActions.length > 1) {
     return (
@@ -22,7 +24,7 @@ const RowActionsButton = <D,>({
           <IconButton
             className="ds-table-header-cell-row-actions-button"
             iconName="ellipsis-h"
-            label="Row actions"
+            label={t('sscds|datatable.rowActions.trigger')}
             size="sm"
             variant="ghost"
           />

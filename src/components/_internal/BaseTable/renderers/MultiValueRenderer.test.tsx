@@ -139,7 +139,7 @@ describe('Datatable/MultiValueRenderer', () => {
         multiValueDisplayLimit={2}
         values={numericValues}
         rowData={rowData}
-        valueFormatter={abbreviateNumber}
+        valueFormatter={(val) => abbreviateNumber(val)}
       />,
     );
 

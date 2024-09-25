@@ -1,5 +1,6 @@
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import IconButton from '../../ButtonV2/IconButton';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const ExpandButton = <D,>({
   table,
@@ -15,13 +16,18 @@ const ExpandButton = <D,>({
 
   const canExpand = getCanExpand();
   const isExpanded = getIsExpanded();
+  const { t } = useSafeTranslation();
 
   return (
     <IconButton
       iconName="angle-right"
       iconRotation={isExpanded ? 90 : undefined}
       isDisabled={!canExpand && !renderDetailPanel}
-      label={isExpanded ? 'Collapse row' : 'Expand row'}
+      label={
+        isExpanded
+          ? t('sscds|datatable.expanding.collapseRow')
+          : t('sscds|datatable.expanding.expandRow')
+      }
       size="sm"
       variant="ghost"
       onClick={(e) => {

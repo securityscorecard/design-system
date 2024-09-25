@@ -3,6 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';
 import ColumnActionsMenu from '../menus/ColumnActionsMenu';
 import IconButton from '../../ButtonV2/IconButton';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const HeaderCellColumnActionsButton = <D,>({
   header,
@@ -14,6 +15,7 @@ const HeaderCellColumnActionsButton = <D,>({
   const { column } = header;
   const { getIsSorted } = column;
   const direction = getIsSorted();
+  const { t } = useSafeTranslation();
   return (
     <div className="ds-table-header-cell-column-actions-button-wrapper">
       <DropdownMenu.Root>
@@ -27,7 +29,7 @@ const HeaderCellColumnActionsButton = <D,>({
                 ? 'sort-up'
                 : 'ellipsis-v'
             }
-            label="Column actions"
+            label={t('sscds|datatable.columnActions.trigger')}
             size="sm"
             variant="ghost"
           />
