@@ -6,10 +6,14 @@ import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
-const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
-  disabled: isDisabled,
-  className: CLX_COMPONENT,
-}))<InputProps>`
+const Input = styled.input.attrs<InputProps>(
+  ({ isDisabled = false, isInvalid = false, type = 'text' }) => ({
+    disabled: isDisabled,
+    isInvalid,
+    className: CLX_COMPONENT,
+    type,
+  }),
+)<InputProps>`
   display: block;
   width: 100%;
   height: ${getFormStyle('fieldHeight')};
@@ -69,11 +73,5 @@ const Input = styled.input.attrs<InputProps>(({ isDisabled }) => ({
     }
   }
 `;
-
-Input.defaultProps = {
-  isInvalid: false,
-  isDisabled: false,
-  type: 'text',
-};
 
 export default Input;
