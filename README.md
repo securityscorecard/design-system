@@ -79,3 +79,4 @@ The re-publishing process can be simplified to `yarn build && yalc push`. The `y
 
 - read the [Contributing guide](CONTRIBUTING.md)
 - read the [Testing guide](TESTING.md)
+
