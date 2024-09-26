@@ -6,7 +6,6 @@ import cls from 'classnames';
 import { Strong } from '../../Text';
 import { TextVariants } from '../../Text/Text.enums';
 import { useSelectProps } from './useSelectProps';
-import Select from './Select';
 import { CreatableSelectProps } from './Select.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
@@ -20,9 +19,25 @@ const renderCreateLabel = (createNewLabel: string) => (inputValue: string) =>
 function CreatableSelect<IsMulti extends boolean = false>({
   createNewLabel = 'Create',
   isAsync = false,
+  placeholder = '',
+  isInvalid = false,
+  isDisabled = false,
+  isClearable = false,
+  maxPillLabelLength = 16,
+  isMenuPositionRelative = false,
+  className = '',
   ...props
 }: CreatableSelectProps<IsMulti>): React.ReactElement {
-  const selectProps = useSelectProps<IsMulti>(props);
+  const selectProps = useSelectProps<IsMulti>({
+    placeholder,
+    isInvalid,
+    isDisabled,
+    isClearable,
+    maxPillLabelLength,
+    isMenuPositionRelative,
+    className,
+    ...props,
+  });
 
   if (isAsync) {
     return (
@@ -42,8 +57,6 @@ function CreatableSelect<IsMulti extends boolean = false>({
     />
   );
 }
-
-CreatableSelect.defaultProps = Select.defaultProps;
 
 CreatableSelect.displayName = 'CreatableSelect';
 
