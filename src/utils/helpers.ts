@@ -151,7 +151,18 @@ export const getToken: HelperFn<Tokens> = curry(
   (name, { theme }: ThemeType): string => path(['tokens', name])(theme),
 );
 
-export const abbreviateNumber = (value: number): string =>
-  numeral(value).format('0.[00]a').toUpperCase();
+function getDecimalSeparator(lng: string) {
+  const numberWithDecimalSeparator = 1.1;
+  return Intl.NumberFormat(lng)
+    .formatToParts(numberWithDecimalSeparator)
+    .find((part) => part.type === 'decimal').value;
+}
 
+export const abbreviateNumber = (
+  value: number,
+  lng: string = 'en-US',
+): string => {
+  const abbreviatedNumber = numeral(value).format('0.[00]a').toUpperCase();
+  return abbreviatedNumber.replace(/\./g, getDecimalSeparator(lng));
+};
 export const getShadow = () => 'box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);';

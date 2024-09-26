@@ -146,7 +146,7 @@ TextWithCustomFormatter.args = {
   value: 123456789,
   column: {
     ...Default.args.column,
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
   },
 };
 
@@ -230,7 +230,7 @@ MultiValueWithCustomFormatter.args = {
   value: [1235678, 987654, 654213],
   column: {
     ...MultiValue.args.column,
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
   },
 };
 
@@ -294,7 +294,7 @@ LinkWithCustomFormatter.args = {
   value: 123456789,
   column: {
     ...LinkWithOnClick.args.column,
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
   },
 };
 
@@ -358,6 +358,6 @@ DiscreteLinkWithCustomFormatter.args = {
   value: 123456789,
   column: {
     ...DiscreteLinkWithOnClick.args.column,
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
   },
 };

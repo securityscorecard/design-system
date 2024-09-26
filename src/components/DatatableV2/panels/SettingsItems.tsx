@@ -19,10 +19,12 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import React from 'react';
+import { TFunction } from 'i18next';
 
 import { reorderColumn } from '../columns.utils';
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';
 import SettingsItem from './SettingsItem';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const getDraggedColumn = <D,>(
   active: Active,
@@ -31,16 +33,18 @@ const getDraggedColumn = <D,>(
 const getTargetColumn = <D,>(over: Over, allColumns: DatatableColumn<D>[]) =>
   allColumns.find((column) => column.id === over.id);
 
-const screenReaderInstructions = `To pick up a draggable table column, press space or enter.
-Use the up and down arrow keys to update the position of the column in the table.
-Press space or enter again to drop the item in its new position, or press escape to cancel.`;
-const screenReaderAnnouncements = <D,>(allColumns: DatatableColumn<D>[]) => {
+const screenReaderAnnouncements = <D,>(
+  allColumns: DatatableColumn<D>[],
+  t: TFunction<['sscds', undefined]>,
+) => {
   return {
     onDragStart({ active }) {
       const {
         columnDef: { header },
       } = getDraggedColumn(active, allColumns);
-      return `Picked up ${header} column.`;
+      return t('sscds|datatable.settings.ordering.screenReader.pickedUp', {
+        header,
+      });
     },
     onDragOver({ active, over }) {
       const {
@@ -51,10 +55,16 @@ const screenReaderAnnouncements = <D,>(allColumns: DatatableColumn<D>[]) => {
         const {
           columnDef: { header: overHeader },
         } = getTargetColumn(over, allColumns);
-        return `${activeHeader} column was moved over ${overHeader} column.`;
+        return t('sscds|datatable.settings.ordering.screenReader.movedOver', {
+          activeHeader,
+          overHeader,
+        });
       }
 
-      return `${activeHeader} column is no longer over a droppable area.`;
+      return t(
+        'sscds|datatable.settings.ordering.screenReader.notDroppableArea',
+        { activeHeader },
+      );
     },
     onDragEnd({ active, over }) {
       const {
@@ -65,16 +75,23 @@ const screenReaderAnnouncements = <D,>(allColumns: DatatableColumn<D>[]) => {
         const {
           columnDef: { header: overHeader },
         } = getTargetColumn(over, allColumns);
-        return `${activeHeader} column was dropped over ${overHeader} column`;
+        return t('sscds|datatable.settings.ordering.screenReader.droppedOver', {
+          activeHeader,
+          overHeader,
+        });
       }
 
-      return `${activeHeader} column was dropped.`;
+      return t('sscds|datatable.settings.ordering.screenReader.dropped', {
+        activeHeader,
+      });
     },
     onDragCancel({ active }) {
       const {
         columnDef: { header },
       } = getDraggedColumn(active, allColumns);
-      return `Dragging was cancelled. ${header} column was dropped.`;
+      return t('sscds|datatable.settings.ordering.screenReader.dragCancel', {
+        header,
+      });
     },
   };
 };
@@ -90,6 +107,7 @@ const SettingsItems = <D,>({
 }) => {
   const { getState, setColumnOrder } = table;
   const { columnOrder } = getState();
+  const { t } = useSafeTranslation();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -108,8 +126,12 @@ const SettingsItems = <D,>({
   return (
     <DndContext
       accessibility={{
-        screenReaderInstructions: { draggable: screenReaderInstructions },
-        announcements: screenReaderAnnouncements(allColumns),
+        screenReaderInstructions: {
+          draggable: t(
+            'sscds|datatable.settings.ordering.screenReader.instructions',
+          ),
+        },
+        announcements: screenReaderAnnouncements(allColumns, t),
       }}
       collisionDetection={closestCenter}
       modifiers={[restrictToVerticalAxis, restrictToParentElement]}

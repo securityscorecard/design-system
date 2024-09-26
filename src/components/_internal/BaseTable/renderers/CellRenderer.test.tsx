@@ -292,7 +292,7 @@ describe('Datatable/CellRenderer', () => {
           column={{
             nullCondition: stubFalse,
             cellType: CellTypes.text,
-            cellFormatter: abbreviateNumber,
+            cellFormatter: (val) => abbreviateNumber(val),
           }}
           row={row}
         />,

@@ -6,6 +6,7 @@ import Button from '../../ButtonV2/Button';
 import { Text } from '../../Text';
 import { DatatableInstance } from '../Datatable.types';
 import { abbreviateNumber } from '../../../utils';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const TopToolbarRoot = styled(Padbox)`
   border-bottom: 1px solid var(--sscds-table-color-border);
@@ -35,6 +36,7 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
   const { isFullscreenMode, columnVisibility } = getState();
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
   const hiddenColumns = getHiddenColumns(columnVisibility);
+  const { t, lng } = useSafeTranslation();
 
   const handleColumnSettings = () => {
     setShowColumnSettings((old) => !old);
@@ -47,15 +49,17 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
     <TopToolbarRoot paddingSize="md" paddingType="squish">
       <Inline align="center" gap="2x" stretch="start">
         <Text>
-          <abbr title={totalRowCount.toString()}>
-            {abbreviateNumber(totalRowCount)}
-          </abbr>{' '}
-          {totalRowCount === 1 ? 'row' : 'rows'}
+          {t('sscds|datatable.topToolbar.itemCounter', {
+            count: totalRowCount,
+            totalRowCount: abbreviateNumber(totalRowCount, lng),
+          })}
         </Text>
         {enableHiding && hiddenColumns > 0 && (
-          <Text variant="subtle">{`${hiddenColumns} ${
-            hiddenColumns === 1 ? 'column' : 'columns'
-          } hidden`}</Text>
+          <Text variant="subtle">
+            {t('sscds|datatable.topToolbar.hiddenColumns', {
+              count: hiddenColumns,
+            })}
+          </Text>
         )}
         {(enableHiding || enableColumnPinning || enableColumnOrdering) && (
           <Button
@@ -64,7 +68,7 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
             variant="ghost"
             onClick={handleColumnSettings}
           >
-            Columns
+            {t('sscds|datatable.topToolbar.columns')}
           </Button>
         )}
         {enableFullScreenMode && (
@@ -74,7 +78,7 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
             variant="ghost"
             onClick={handleFullscreenMode}
           >
-            Full Screen
+            {t('sscds|datatable.topToolbar.fullScreen')}
           </Button>
         )}
       </Inline>

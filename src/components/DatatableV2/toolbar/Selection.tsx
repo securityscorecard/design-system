@@ -1,4 +1,3 @@
-import React from 'react';
 import { pluck } from 'ramda';
 import styled from 'styled-components';
 
@@ -7,6 +6,10 @@ import { DatatableInstance } from '../Datatable.types';
 import { Inline, Padbox, Surface } from '../../layout';
 import Button from '../../ButtonV2/Button';
 import { Strong } from '../../Text';
+import {
+  SafeTrans,
+  useSafeTranslation,
+} from '../../../hooks/useSafeTranslation';
 
 const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
   const { getSelectedRowModel } = table;
@@ -21,7 +24,7 @@ const SelectionRoot = styled(Surface)`
   left: 0;
   right: 0;
   bottom: var(--sscds-space-4x);
-  margin: var(--sscds-space-4x) var(--sscds-space-8x) 0;
+  margin: var(--sscds-space-4x) var(--sscds-space-4x) 0;
 `;
 const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const {
@@ -30,6 +33,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
     getSelectedRowModel,
     toggleAllRowsSelected,
   } = table;
+  const { t, lng } = useSafeTranslation();
 
   const selectedRowsCount = getSelectedRowsCount(table);
   const selectedRows = getSelectedRowModel().rows;
@@ -58,14 +62,22 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
             gap="sm"
           >
             <div>
-              <Strong className="ds-table-selection-currently-selected">
-                {selectedRowsCount.toLocaleString('en-US')}
-              </Strong>{' '}
-              of{' '}
-              <abbr title={totalRowCount.toString()}>
-                {abbreviateNumber(totalRowCount)}
-              </abbr>{' '}
-              {totalRowCount === 1 ? 'item' : 'items'} selected
+              <SafeTrans
+                components={{
+                  bold: (
+                    <Strong className="ds-table-selection-currently-selected">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {{ selectedRowsCount } as any}
+                    </Strong>
+                  ),
+                }}
+                i18nKey="sscds|datatable.selection.itemCounter"
+                values={{
+                  count: totalRowCount,
+                  totalRowCount: abbreviateNumber(totalRowCount, lng),
+                  selectedRowCount: selectedRowsCount.toLocaleString(lng),
+                }}
+              />
             </div>
             <Button
               className="ds-table-selection-clear-button"
@@ -73,7 +85,7 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
               variant="ghost"
               onClick={() => toggleAllRowsSelected(false)}
             >
-              Clear selection
+              {t('sscds|datatable.selection.clearSelection')}
             </Button>
           </Inline>
           <Inline

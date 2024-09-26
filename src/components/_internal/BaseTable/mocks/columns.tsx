@@ -82,7 +82,7 @@ export const simpleColumns: Column<Data>[] = [
     width: 88,
     cellType: 'discreteLink',
     cellLinkComponent: 'button',
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
     cellOnClick: action('onCellValueClick (issuesCount)'),
   },
   {
@@ -93,7 +93,7 @@ export const simpleColumns: Column<Data>[] = [
     cellLinkComponent: RouterLink,
     cellToComposer: (val: string, row: Data): string =>
       `?value=${val}&${composeQuery(row)}`,
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
   },
   {
     Header: 'First observed',
