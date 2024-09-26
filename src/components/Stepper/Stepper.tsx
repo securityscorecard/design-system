@@ -1,4 +1,11 @@
-import React, { forwardRef, useMemo } from 'react';
+import {
+  Children,
+  type PropsWithChildren,
+  type ReactElement,
+  cloneElement,
+  forwardRef,
+  useMemo,
+} from 'react';
 import { pathEq } from 'ramda';
 import cls from 'classnames';
 
@@ -13,10 +20,7 @@ import { useContainerQuery } from '../../hooks/useContainerQuery';
 
 const SHOW_TEXT_BREAKPOINT = 'show-step-text';
 
-const Stepper = forwardRef<
-  HTMLDivElement,
-  React.PropsWithChildren<StepperProps>
->(
+const Stepper = forwardRef<HTMLDivElement, PropsWithChildren<StepperProps>>(
   (
     {
       children,
@@ -37,11 +41,11 @@ const Stepper = forwardRef<
     );
     const [query, containerRef] = useContainerQuery(showTextQuery);
 
-    const stepsArr: React.ReactElement[] = React.Children.toArray(
-      children,
-    ).filter(pathEq(['type', 'displayName'], 'Step'));
+    const stepsArr: ReactElement[] = Children.toArray(children).filter(
+      pathEq(['type', 'displayName'], 'Step'),
+    );
     const steps = stepsArr.map((step, index) =>
-      React.cloneElement(step, {
+      cloneElement(step, {
         ...step.props,
         index,
         shouldShowText:

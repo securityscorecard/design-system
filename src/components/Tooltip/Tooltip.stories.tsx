@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { omit } from 'ramda';
 
@@ -47,9 +46,9 @@ const popup = (
   </>
 );
 
-export const Playground: StoryFn<
-  TooltipProps & { children: React.ReactChild }
-> = (args) => <Tooltip {...args} />;
+export const Playground: StoryFn<TooltipProps> = (args) => (
+  <Tooltip {...args} />
+);
 Playground.args = {
   children: <Button>Button with tooltip</Button>,
   popup,
@@ -91,9 +90,7 @@ export const Placements: StoryFn = () => (
   </Stack>
 );
 
-export const Width: StoryFn<TooltipProps & { children: React.ReactChild }> = (
-  args,
-) => <Tooltip {...args} />;
+export const Width: StoryFn<TooltipProps> = (args) => <Tooltip {...args} />;
 
 Width.args = {
   ...Playground.args,
@@ -101,9 +98,7 @@ Width.args = {
   defaultIsPopupDisplayed: true,
 };
 
-export const WithDelay: StoryFn<
-  TooltipProps & { children: React.ReactChild }
-> = (args) => <Tooltip {...args} />;
+export const WithDelay: StoryFn<TooltipProps> = (args) => <Tooltip {...args} />;
 
 WithDelay.args = {
   ...Playground.args,

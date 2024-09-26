@@ -1,7 +1,7 @@
-import React from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 export interface InputProps
-  extends Omit<React.ComponentPropsWithRef<'input'>, 'disabled'> {
+  extends Omit<ComponentPropsWithRef<'input'>, 'disabled'> {
   isInvalid?: boolean;
   isDisabled?: boolean;
   [key: string]: unknown;

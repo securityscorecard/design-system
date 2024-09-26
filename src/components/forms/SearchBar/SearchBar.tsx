@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import {
+  type ChangeEventHandler,
+  type KeyboardEventHandler,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import {
   isNonEmptyString,
@@ -68,7 +75,7 @@ const SearchInput = styled(Input)`
     getSpace($isClearable ? SpaceSizes.lgPlus : SpaceSizes.md, { theme })};
 `;
 
-const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
+const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
   (
     {
       value: valueFromProps,
@@ -131,7 +138,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       const eventValue = e.target.value;
       if (hasDebouncedSearch) {
         if (typingTimeout) {
@@ -145,7 +152,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       }
       onChange(e);
     };
-    const handleOnKeyUp: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    const handleOnKeyUp: KeyboardEventHandler<HTMLInputElement> = (e) => {
       if (isNotUndefined(onKeyUp)) {
         onKeyUp(e);
       }

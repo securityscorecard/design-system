@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react';
+import { type MouseEvent, type MouseEventHandler, ReactNode } from 'react';
 
 import { BaseToastBannerProps } from '../_internal/BaseToastBanner/BaseToastBanner.types';
 import { ActionKinds } from '../../types/action.types';
 import { BannerVariants } from './Banner.enums';
 
 export type ActionsArray = readonly [
-  ActionKinds<[React.MouseEvent]>?,
-  ActionKinds<[React.MouseEvent]>?,
+  ActionKinds<[MouseEvent]>?,
+  ActionKinds<[MouseEvent]>?,
 ];
 
 type Variants = (typeof BannerVariants)[keyof typeof BannerVariants];
@@ -15,7 +15,7 @@ export type BannerProps = {
   /** Toggles display of the close button */
   isDismissable?: boolean;
   /** Callback triggered on close button click */
-  onClose?: React.MouseEventHandler;
+  onClose?: MouseEventHandler;
   /** Banner container width in which action buttons will switch the layout from inline to block */
   changeLayoutBreakpoint?: number;
   className?: string;

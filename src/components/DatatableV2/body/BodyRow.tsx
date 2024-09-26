@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import DetailPanel from '../panels/DetailPanel';
 import BodyCell from './BodyCell';

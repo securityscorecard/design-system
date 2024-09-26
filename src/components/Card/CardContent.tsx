@@ -1,8 +1,8 @@
-import React from 'react';
+import { forwardRef } from 'react';
 
 import { CardContainer } from './Card';
 
-const CardContent = React.forwardRef<
+const CardContent = forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<Record<string, unknown>>
 >(({ children, ...props }, ref) => (

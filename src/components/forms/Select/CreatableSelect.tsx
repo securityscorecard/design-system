@@ -1,4 +1,3 @@
-import React from 'react';
 import CreatableReactSelect from 'react-select/creatable';
 import AsyncCreatableReactSelect from 'react-select/async-creatable';
 import cls from 'classnames';
@@ -27,7 +26,7 @@ function CreatableSelect<IsMulti extends boolean = false>({
   isMenuPositionRelative = false,
   className = '',
   ...props
-}: CreatableSelectProps<IsMulti>): React.ReactElement {
+}: CreatableSelectProps<IsMulti>) {
   const selectProps = useSelectProps<IsMulti>({
     placeholder,
     isInvalid,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { endsWith } from 'ramda'
 
 import { Table, TableBody, TableHead, Token } from "./components"

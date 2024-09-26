@@ -1,3 +1,4 @@
+import type { TFunction } from 'i18next';
 import {
   Active,
   DndContext,
@@ -18,8 +19,6 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import React from 'react';
-import { TFunction } from 'i18next';
 
 import { reorderColumn } from '../columns.utils';
 import { DatatableColumn, DatatableInstance } from '../Datatable.types';

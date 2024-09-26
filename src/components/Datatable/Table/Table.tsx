@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import {
   CellProps,
@@ -85,7 +85,7 @@ const collectSelectedIds = <D,>(
 
 const renderDefaultCell = <D extends Record<string, unknown>>(
   props: CellProps<D>,
-): React.ReactElement => <CellRenderer<D> {...props} />;
+) => <CellRenderer<D> {...props} />;
 
 function Table<D extends Record<string, unknown>>({
   columns,
@@ -111,7 +111,7 @@ function Table<D extends Record<string, unknown>>({
   defaultColumnOrder,
   defaultHiddenColumns,
   pageButtonsCount,
-}: TableProps<D> & { pageButtonsCount?: number }): React.ReactElement {
+}: TableProps<D> & { pageButtonsCount?: number }) {
   const tableDataSize = useMemo(
     () => (hasServerSidePagination ? dataSize : data.length),
     [hasServerSidePagination, dataSize, data],
@@ -130,8 +130,7 @@ function Table<D extends Record<string, unknown>>({
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement =>
-        renderDefaultCell<D>(props),
+      Cell: (props: CellProps<D>) => renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],

@@ -1,4 +1,4 @@
-import React from 'react';
+import type { HTMLProps, PropsWithChildren } from 'react';
 import styled, { css } from 'styled-components';
 import { includes } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
@@ -33,9 +33,7 @@ function CardMedia<El extends HTMLElement = HTMLDivElement>({
   style,
   alt,
   ...props
-}: React.PropsWithChildren<
-  CardMediaProps & React.HTMLProps<El>
->): React.ReactElement {
+}: PropsWithChildren<CardMediaProps & HTMLProps<El>>) {
   const isMediaComponent = includes(as, MEDIA_COMPONENTS);
   const isImageComponent = includes(as, IMAGE_COMPONENTS);
   const hasMediaSrc = isNotUndefined(mediaSrc);

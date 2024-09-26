@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { theme } from '../../src/theme';
@@ -73,7 +73,7 @@ interface FontProps {
   sampleText: string;
 }
 
-export const FontItem: FunctionComponent<FontProps> = ({
+export const FontItem = ({
   title,
   subtitle,
   fontFamily = theme.typography.family.base,
@@ -81,7 +81,7 @@ export const FontItem: FunctionComponent<FontProps> = ({
   fontSize = theme.typography.size.lg,
   lineHeight = 'normal',
   sampleText,
-}) => {
+}:FontProps) => {
   return (
     <Item>
       <ItemDescription>
@@ -100,7 +100,7 @@ export const FontItem: FunctionComponent<FontProps> = ({
   );
 };
 
-export const FontPalette: FunctionComponent = ({ children, ...props }) => (
+export const FontPalette = ({ children, ...props }: {children: ReactNode}) => (
   <List {...props}>
     <ListHeading>
       <ListName>Name</ListName>

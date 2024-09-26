@@ -1,14 +1,14 @@
 import type { To } from 'history';
-import React from 'react';
+import type { ReactNode } from 'react';
 
 type ActionBase<
   OnClickArgs extends Array<unknown>,
   OnClickReturnType = void,
 > = {
-  label: React.ReactNode;
+  label: ReactNode;
   name: string;
   onClick?: (...args: OnClickArgs) => OnClickReturnType;
-  tooltip?: React.ReactNode;
+  tooltip?: ReactNode;
 };
 
 type HandlerActionKind<

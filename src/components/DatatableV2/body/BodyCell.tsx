@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import clx from 'classnames';
 
 import { getCommonCellStyles } from '../columns.utils';

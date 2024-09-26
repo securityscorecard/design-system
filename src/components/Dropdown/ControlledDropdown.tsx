@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { SpaceSizes } from '../../theme';
 import { usePopup } from '../../hooks/usePopup';

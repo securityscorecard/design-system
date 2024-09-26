@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactSelect from 'react-select';
 import AsyncReactSelect from 'react-select/async';
 import cls from 'classnames';
@@ -17,7 +16,7 @@ function Select<IsMulti extends boolean = false>({
   isMenuPositionRelative = false,
   className = '',
   ...props
-}: SelectProps<IsMulti>): React.ReactElement {
+}: SelectProps<IsMulti>) {
   const selectProps = useSelectProps<IsMulti>({
     placeholder,
     isInvalid,

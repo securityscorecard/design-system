@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { HorizontalBars, Icon, criticalityLevels } from './common';
 import { BaseSignalProps, IncidentLikelihoodSignalKinds } from './Signal.types';
 

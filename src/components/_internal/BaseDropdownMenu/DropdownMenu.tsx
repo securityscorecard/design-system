@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -191,4 +191,4 @@ const DropdownMenu = ({
   );
 };
 
-export default React.memo(DropdownMenu);
+export default memo(DropdownMenu);

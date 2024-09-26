@@ -1,4 +1,11 @@
-import React, { useState } from 'react';
+import {
+  type ChangeEventHandler,
+  type ClipboardEventHandler,
+  type FocusEventHandler,
+  type KeyboardEventHandler,
+  type MouseEventHandler,
+  useState,
+} from 'react';
 import styled, { css } from 'styled-components';
 import {
   dropLast,
@@ -212,9 +219,7 @@ const MultiValueInput = ({
     setValues(value);
   }, [value, setValues]);
 
-  const handleInputOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleInputOnKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     switch (e.key) {
       case ';':
       case 'Enter':
@@ -236,9 +241,7 @@ const MultiValueInput = ({
     }
   };
 
-  const handleInputOnPaste: React.ClipboardEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleInputOnPaste: ClipboardEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     const pastedValue = onPaste(e);
 
@@ -249,14 +252,12 @@ const MultiValueInput = ({
     }
   };
 
-  const handleInputOnChange: React.ChangeEventHandler<HTMLInputElement> = (
-    e,
-  ) => {
+  const handleInputOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onInputChange(e);
     setInputValue(e.target.value);
   };
 
-  const handleInputOnBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+  const handleInputOnBlur: FocusEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     if (isInvalid) {
       return;
@@ -266,9 +267,7 @@ const MultiValueInput = ({
     }
   };
 
-  const handleContainerOnClick: React.MouseEventHandler<HTMLDivElement> = (
-    e,
-  ) => {
+  const handleContainerOnClick: MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     if (isNotNull(inputRef)) {
       inputRef.focus();
@@ -280,9 +279,9 @@ const MultiValueInput = ({
     onValueRemove([]);
     onValuesChange([]);
   };
-  const handleClearAllOnKeyDown: React.KeyboardEventHandler<
-    HTMLButtonElement
-  > = (e) => {
+  const handleClearAllOnKeyDown: KeyboardEventHandler<HTMLButtonElement> = (
+    e,
+  ) => {
     switch (e.key) {
       case ' ':
       case 'Enter':

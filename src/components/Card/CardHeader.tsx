@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { any } from 'ramda';
 import { isNotNil, isNotUndefined } from 'ramda-adjunct';
@@ -42,7 +42,7 @@ const Subtitle = styled(Text).attrs({
   ${LineTruncation}
 `;
 
-const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   (
     {
       actions,

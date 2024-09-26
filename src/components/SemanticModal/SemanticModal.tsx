@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { type MouseEvent, forwardRef } from 'react';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -48,11 +48,11 @@ const renderButton = ({
   <Button
     key={action.name}
     color={color}
-    href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+    href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
     isLoading={isLoading}
     loadingText={loadingText}
     name={action.name}
-    to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+    to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
     variant={variant}
     onClick={action.onClick}
   >
@@ -89,7 +89,7 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
               <Padbox paddingSize={SpaceSizes.md}>
                 <Inline gap={SpaceSizes.md} justify="center">
                   {actions.map(
-                    (action: ActionKinds<[React.MouseEvent]>, index: number) =>
+                    (action: ActionKinds<[MouseEvent]>, index: number) =>
                       isNotUndefined(action) &&
                       renderButton({
                         action,

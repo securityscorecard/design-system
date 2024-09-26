@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 import { Option } from '../../forms/Select/Select.types';
 import { Condition, Field } from '../Filters.types';
@@ -9,5 +9,5 @@ export interface UseFilterRowType {
   field: PickOption<Field>;
   conditions: PickOption<Condition>[];
   condition: PickOption<Condition>;
-  component: React.ReactNode;
+  component: ReactNode;
 }

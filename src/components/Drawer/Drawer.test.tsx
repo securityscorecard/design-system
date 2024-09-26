@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { act } from 'react';
+import { act } from 'react';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';

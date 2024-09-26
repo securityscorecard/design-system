@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ComponentProps } from 'react';
 import {
   isNotNull,
   isNotUndefined,
@@ -41,7 +41,7 @@ const BaseButton = ({
   loadingText = 'Loading',
   className,
   ...props
-}: BaseButtonProps & React.ComponentProps<typeof BaseStyledButton>) => {
+}: BaseButtonProps & ComponentProps<typeof BaseStyledButton>) => {
   let RouterLink = null;
   const theme = useTheme();
   const { warn } = useLogger('Button');

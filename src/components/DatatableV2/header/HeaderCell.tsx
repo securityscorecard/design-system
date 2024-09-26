@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import clx from 'classnames';
 
 import { DatatableHeader, DatatableInstance } from '../Datatable.types';

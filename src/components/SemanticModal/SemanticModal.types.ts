@@ -1,4 +1,4 @@
-import React from 'react';
+import type { MouseEvent, MouseEventHandler, ReactNode } from 'react';
 
 import { SemanticModalVariants } from './SemanticModal.enums';
 import { ButtonColors } from '../Button/Button.enums';
@@ -11,12 +11,12 @@ export type SemanticModalButtonColors =
   (typeof ButtonColors)[keyof typeof ButtonColors];
 
 type ActionsArray = readonly [
-  ActionKinds<[React.MouseEvent]>?,
-  ActionKinds<[React.MouseEvent]>?,
+  ActionKinds<[MouseEvent]>?,
+  ActionKinds<[MouseEvent]>?,
 ];
 
 export interface RenderButtonProps {
-  action: ActionKinds<[React.MouseEvent]>;
+  action: ActionKinds<[MouseEvent]>;
   variant: (typeof ButtonEnums.ButtonVariants)[keyof typeof ButtonEnums.ButtonVariants];
   color: (typeof ButtonEnums.ButtonColors)[keyof typeof ButtonEnums.ButtonColors];
   isLoading: boolean;
@@ -25,8 +25,8 @@ export interface RenderButtonProps {
 
 export interface SemanticModalProps {
   title: string;
-  message: React.ReactNode;
-  onClose: React.MouseEventHandler;
+  message: ReactNode;
+  onClose: MouseEventHandler;
   actions: ActionsArray;
   variant?: SemanticModalVariants;
   primaryButtonColor?: SemanticModalButtonColors;

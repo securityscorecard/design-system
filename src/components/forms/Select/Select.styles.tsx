@@ -1,4 +1,10 @@
-import React, { ComponentType, ReactNode, useState } from 'react';
+import {
+  Children,
+  type ComponentType,
+  type MouseEventHandler,
+  type ReactNode,
+  useState,
+} from 'react';
 import { ThemeConfig } from 'react-select/src/theme';
 import {
   IndicatorComponentType,
@@ -278,9 +284,9 @@ export const ClearIndicator: IndicatorComponentType<OptionType, boolean> = (
 type InnerProps = {
   id: string;
   key: string;
-  onClick: React.MouseEventHandler<HTMLElement>;
-  onMouseMove: React.MouseEventHandler<HTMLElement>;
-  onMouseOver: React.MouseEventHandler<HTMLElement>;
+  onClick: MouseEventHandler<HTMLElement>;
+  onMouseMove: MouseEventHandler<HTMLElement>;
+  onMouseOver: MouseEventHandler<HTMLElement>;
   tabIndex: number;
 };
 export const MultiValueContainer: ComponentType<{
@@ -382,7 +388,7 @@ export const ValueContainer = (props) => {
   if (isMulti) {
     const qty = getValue().length;
     const [values, input] = children;
-    const selectedValues = React.Children.toArray(values);
+    const selectedValues = Children.toArray(values);
 
     const pills =
       isNotUndefined(maxVisibleItem) && !showAllItems && qty > maxVisibleItem

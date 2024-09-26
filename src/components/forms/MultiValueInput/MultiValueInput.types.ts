@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ChangeEvent, ClipboardEvent, InputHTMLAttributes } from 'react';
 
 import { PadboxProps } from '../../layout/Padbox/Padbox';
 
@@ -19,7 +19,7 @@ export interface MultiValueProps {
 }
 
 export interface MultiValueInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends InputHTMLAttributes<HTMLInputElement> {
   value?: Array<MultiValueProps['label']>;
   isInvalid?: ValueContainerProps['$isInvalid'];
   isDisabled?: ValueContainerProps['$isDisabled'];
@@ -36,6 +36,6 @@ export interface MultiValueInputProps
   ) => void;
   onValueRemove?: (nextValues: MultiValueInputProps['value']) => void;
   onValuesChange?: (nextValues: MultiValueInputProps['value']) => void;
-  onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onPaste?: (event: React.ClipboardEvent<HTMLInputElement>) => void | string;
+  onInputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onPaste?: (event: ClipboardEvent<HTMLInputElement>) => void | string;
 }

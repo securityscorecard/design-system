@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import ExpandAllButton from '../buttons/ExpandAllButton';
 import ExpandButton from '../buttons/ExpandButton';

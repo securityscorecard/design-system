@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import { type ChangeEventHandler, forwardRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { noop } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -171,7 +171,7 @@ const Range = forwardRef<HTMLInputElement, RangeProps>(
       defaultValue ?? (min + max) / 2,
     );
 
-    const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       setRangeValue(parseInt(e.target.value, 10));
       onChange(e);
     };

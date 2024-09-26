@@ -1,4 +1,12 @@
-import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
+import {
+  type KeyboardEventHandler,
+  cloneElement,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { noop } from 'ramda-adjunct';
 import { Ref } from '@fluentui/react-component-ref';
 
@@ -15,7 +23,7 @@ type DropdownHandle = {
   showPane: () => void;
 };
 
-const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
+const Dropdown = forwardRef<DropdownHandle, DropdownProps>(
   (
     {
       children,
@@ -85,7 +93,7 @@ const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
       togglePane();
     };
 
-    const handleTriggerOnKeyDown: React.KeyboardEventHandler = (e) => {
+    const handleTriggerOnKeyDown: KeyboardEventHandler = (e) => {
       if (!triggerEvents.includes('click')) {
         return;
       }
@@ -136,7 +144,7 @@ const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
     return (
       <>
         <Ref innerRef={setTriggerEl}>
-          {React.cloneElement(trigger, {
+          {cloneElement(trigger, {
             onClick: handleTriggerOnClick,
             onTouchStart: handleTriggerOnClick,
             onKeyDown: handleTriggerOnKeyDown,

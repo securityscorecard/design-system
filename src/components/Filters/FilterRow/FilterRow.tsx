@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import {
   __,
@@ -52,7 +52,7 @@ const Units = styled(Text)`
 `;
 
 export const getDefaultComponentValue = (
-  defaultConditionComponent: React.ReactNode | ComponentWithPropsTypes,
+  defaultConditionComponent: ReactNode | ComponentWithPropsTypes,
 ): string | undefined => {
   const componentDefaultValue = path(
     ['props', 'defaultValue'],

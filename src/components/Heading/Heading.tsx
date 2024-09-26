@@ -1,4 +1,8 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import {
+  type ComponentProps,
+  type ComponentPropsWithoutRef,
+  createElement,
+} from 'react';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
 
@@ -79,12 +83,12 @@ const Heading = ({
     ...props,
   };
 
-  return React.createElement(headingSizes[size], additionalProps, children);
+  return createElement(headingSizes[size], additionalProps, children);
 };
 
 export default Heading;
 
-type SizelessHeading = Omit<React.ComponentProps<typeof Heading>, 'size'>;
+type SizelessHeading = Omit<ComponentProps<typeof Heading>, 'size'>;
 
 export const H1 = ({ children, ...props }: SizelessHeading) => (
   <Heading size={HeadingSizes.h1} {...props}>

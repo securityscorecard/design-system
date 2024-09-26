@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 

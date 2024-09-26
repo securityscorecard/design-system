@@ -1,4 +1,4 @@
-import React from 'react';
+import type { MouseEvent } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
@@ -68,7 +68,7 @@ export const Default: StoryFn<DropdownMenuProps> = (args) => (
   </Inline>
 );
 Default.args = {
-  actions: subactionsMock as unknown as ActionKinds<React.MouseEvent[]>[],
+  actions: subactionsMock as unknown as ActionKinds<MouseEvent[]>[],
 };
 Default.parameters = {
   screenshot: { skip: true },

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
@@ -50,7 +50,7 @@ function Datatable<D extends Record<string, unknown>>({
   controlsConfig = {},
   tableConfig = {},
   resetSelectionFn,
-}: DatatableProps<D>): React.ReactElement {
+}: DatatableProps<D>) {
   const [persistedState, setPersistedState] = useLocalStorageState<{
     hiddenColumns: string[];
     columnOrder: string[];

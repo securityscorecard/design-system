@@ -1,4 +1,4 @@
-import React from 'react';
+import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { Property } from 'csstype';
 import { prop } from 'ramda';
@@ -20,7 +20,7 @@ interface ClusterParentProps {
   className?: string;
 }
 
-export interface ClusterProps extends React.HTMLAttributes<HTMLElement> {
+export interface ClusterProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */

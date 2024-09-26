@@ -1,5 +1,5 @@
 import { isFunction } from 'ramda-adjunct';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 
 import { Subset } from '../../types/utils.types';

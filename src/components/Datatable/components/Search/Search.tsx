@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { type KeyboardEventHandler, useState } from 'react';
 
 import { SearchProps } from './Search.types';
 import { Error } from '../../../forms/Message';
@@ -29,7 +29,7 @@ const Search = ({
     await onSearch(searchQuery);
     setIsSearching(false);
   };
-  const handleKeyUp: React.KeyboardEventHandler = (e) => {
+  const handleKeyUp: KeyboardEventHandler = (e) => {
     const target = e.target as HTMLInputElement;
     const hasError = validatePattern(target);
     const searchValidQuery = () => {

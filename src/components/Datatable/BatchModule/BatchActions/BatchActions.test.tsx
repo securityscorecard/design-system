@@ -1,5 +1,4 @@
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
-import React from 'react';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import { DatatableStore, datatableInitialState } from '../../Datatable.store';

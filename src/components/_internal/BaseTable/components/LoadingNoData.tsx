@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Inline } from '../../../layout';
 import { Spinner } from '../../../Spinner';
 import { TextSizes } from '../../../Text/Text.enums';

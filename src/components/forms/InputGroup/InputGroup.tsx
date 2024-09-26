@@ -1,4 +1,4 @@
-import React from 'react';
+import { Children } from 'react';
 import styled from 'styled-components';
 import { prop } from 'ramda';
 import cls from 'classnames';
@@ -77,7 +77,7 @@ const InputGroup = ({
     InputGroup,
     SearchBar,
   ];
-  React.Children.forEach(children, (child) => {
+  Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
       error(
         'Only Select, Input, InputGroup, Icon, Button, ButtonV2, IconButton, SearchBar and Password are valid childs of InputGroup',
@@ -91,7 +91,7 @@ const InputGroup = ({
       {...inlineProps}
       stretch={inlineProps.stretch || 'start'}
     >
-      {React.Children.map(children, (child) => {
+      {Children.map(children, (child) => {
         if (prop('type', child) === Icon) {
           return <IconContainer paddingSize="sm">{child}</IconContainer>;
         }
