@@ -71,7 +71,7 @@ const ClusterParent = styled.div<ClusterParentProps>(
 
 const Cluster = ({
   children,
-  gap,
+  gap = SpaceSizes.none,
   align,
   justify,
   parentEl,
@@ -95,9 +95,5 @@ const Cluster = ({
     </ClusterParent>
   </ClusterWrapper>
 );
-
-Cluster.defaultProps = {
-  gap: SpaceSizes.none,
-};
 
 export default Cluster;
