@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 import { Variants } from '../../components/_internal/BaseToastBanner/BaseToastBanner.types';
 
@@ -14,6 +14,6 @@ export type NotificationActions = (typeof ACTIONS)[keyof typeof ACTIONS];
 export interface Notification {
   id: string;
   variant?: Variants;
-  content: React.ReactNode;
+  content: ReactNode;
   autoDismiss?: boolean;
 }

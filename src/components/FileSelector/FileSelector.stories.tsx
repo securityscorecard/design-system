@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { isNonEmptyArray } from 'ramda-adjunct';
 import styled from 'styled-components';

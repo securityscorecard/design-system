@@ -1,5 +1,5 @@
-import React from 'react';
 import type { To } from 'history';
+import type { HTMLProps, MouseEventHandler } from 'react';
 import { DefaultTheme } from 'styled-components';
 
 import { SpacingSizeValue } from '../../../types/spacing.types';
@@ -16,10 +16,10 @@ interface BaseIcon {
 }
 
 export interface BaseButtonProps
-  extends Omit<React.HTMLProps<HTMLButtonElement>, 'as'> {
+  extends Omit<HTMLProps<HTMLButtonElement>, 'as'> {
   variant?: Variants;
   color?: Colors;
-  onClick?: React.MouseEventHandler;
+  onClick?: MouseEventHandler;
   isDisabled?: boolean;
   isLoading?: boolean;
   isExpanded?: boolean;

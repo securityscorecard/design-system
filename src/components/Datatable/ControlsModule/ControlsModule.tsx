@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { all, isEmpty, map, mergeDeepRight, omit, pipe, zipObj } from 'ramda';
 import { isNonEmptyArray, isNotNilOrEmpty } from 'ramda-adjunct';
@@ -58,7 +58,7 @@ function ControlsModule<D extends Record<string, unknown>>({
   isDataLoading,
   onCancelLoading,
   onControlToggle,
-}: ControlsModuleProps<D>): React.ReactElement {
+}: ControlsModuleProps<D>) {
   const {
     onClose: onFilteringClose,
     onApply: onFilteringApply,

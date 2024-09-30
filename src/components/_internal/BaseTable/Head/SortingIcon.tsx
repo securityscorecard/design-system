@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
@@ -21,15 +21,11 @@ const StyledIcon = styled(Icon).attrs((props) => ({
     `};
 `;
 
-const SortingIcon = React.memo(
-  ({ isSorted, isSortedDesc }: SortingIconProps) => {
-    if (isSortedDesc)
-      return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
-    if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
-    return (
-      <StyledIcon color={ColorTypes.neutral500} name={SSCIconNames.sort} />
-    );
-  },
-);
+const SortingIcon = memo(({ isSorted, isSortedDesc }: SortingIconProps) => {
+  if (isSortedDesc)
+    return <StyledIcon name={SSCIconNames.sortDown} $isActive />;
+  if (isSorted) return <StyledIcon name={SSCIconNames.sortUp} $isActive />;
+  return <StyledIcon color={ColorTypes.neutral500} name={SSCIconNames.sort} />;
+});
 
 export default SortingIcon;

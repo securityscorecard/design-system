@@ -1,4 +1,4 @@
-import React from 'react';
+import type { InputHTMLAttributes } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import Input from './Input';
@@ -30,7 +30,7 @@ export default {
 } as Meta;
 
 export const Playground: StoryFn<
-  InputProps & React.InputHTMLAttributes<HTMLInputElement>
+  InputProps & InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Input {...args} aria-label="Input" />;
 Playground.args = { type: 'text' };
 Playground.parameters = {

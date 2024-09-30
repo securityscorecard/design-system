@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useLogger } from '../../hooks/useLogger';
 import { useDatatable } from './hooks/useDatatable';
 import { usePersistentState } from './hooks/usePersistentState';

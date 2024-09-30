@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import {
+  MouseEventHandler,
+  type MutableRefObject,
+  useEffect,
+  useRef,
+} from 'react';
 
 export const useOuterClick = <E extends HTMLElement>(
-  callback: (e: React.MouseEvent) => void,
-): React.MutableRefObject<E> => {
+  callback: MouseEventHandler<E>,
+): MutableRefObject<E> => {
   const innerRef = useRef<E>(null);
   const callbackRef = useRef(null);
 

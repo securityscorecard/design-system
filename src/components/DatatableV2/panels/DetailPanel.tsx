@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 
 const DetailPanel = <D,>({

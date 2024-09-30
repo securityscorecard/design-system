@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Meta } from '@storybook/react';
 import { ExpandedState } from '@tanstack/react-table';
 import { action } from '@storybook/addon-actions';

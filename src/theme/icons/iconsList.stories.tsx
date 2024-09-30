@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
 import { head, pipe, sortBy, toPairs } from 'ramda';
 

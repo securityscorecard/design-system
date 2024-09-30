@@ -4,14 +4,13 @@ import {
   DragOverEvent,
   DragStartEvent,
 } from '@dnd-kit/core';
-import React from 'react';
 
 interface SortableItem {
   id: string;
   label: string;
 }
 export interface SortableItemProps extends SortableItem {
-  renderItem?: (props: SortableItem) => React.ReactElement;
+  renderItem?: (props: SortableItem) => JSX.Element;
 }
 
 export interface SortableListProps {

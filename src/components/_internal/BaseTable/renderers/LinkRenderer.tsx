@@ -1,4 +1,3 @@
-import React from 'react';
 import cls from 'classnames';
 import { isNotUndefined, isUndefined, noop } from 'ramda-adjunct';
 
@@ -14,7 +13,7 @@ function LinkRenderer<D extends Record<string, unknown>>({
   component,
   rowData,
   className,
-}: LinkRendererProps<D>): React.ReactElement {
+}: LinkRendererProps<D>) {
   const { error } = useLogger('LinkRenderer');
   const isRelativeLink = isNotUndefined(toComposer);
   if (isRelativeLink && isUndefined(component)) {

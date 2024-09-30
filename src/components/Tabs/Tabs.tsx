@@ -1,4 +1,4 @@
-import React from 'react';
+import { Children, cloneElement, isValidElement } from 'react';
 import { equals } from 'ramda';
 
 import { Inline } from '../layout';
@@ -35,12 +35,12 @@ const Tabs = ({
       role="tablist"
       stretch={isExpanded ? 'all' : 0}
     >
-      {React.Children.map(children, (tab) => {
-        if (!React.isValidElement(tab)) {
+      {Children.map(children, (tab) => {
+        if (!isValidElement(tab)) {
           return null;
         }
 
-        return React.cloneElement<Partial<TabProps>>(tab, {
+        return cloneElement<Partial<TabProps>>(tab, {
           key: tab.props.value,
           __variant: variant,
           __isExpanded: isExpanded,

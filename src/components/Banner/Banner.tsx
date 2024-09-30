@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { type MouseEvent, useMemo } from 'react';
 import styled from 'styled-components';
 import { isNonEmptyArray, noop } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -50,10 +50,10 @@ const BannerContent = ({ children, actions, isInline }: BannerContentProps) => (
         {actions.map((action) => (
           <Button
             key={action.name}
-            href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+            href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
             name={action.name}
             style={{ height: '2rem' }}
-            to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+            to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
             variant="outline"
             onClick={action.onClick}
           >

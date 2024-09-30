@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import Heading, { H1, H2, H3, H4, H5 } from './Heading';

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { includes } from 'ramda';
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 import { getColor, getRadii, pxToRem } from '../../utils';
 import { SkeletonProps } from './Skeleton.types';

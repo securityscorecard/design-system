@@ -1,4 +1,11 @@
-import React, { useMemo } from 'react';
+import {
+  type EventHandler,
+  type KeyboardEvent,
+  type KeyboardEventHandler,
+  type MouseEvent,
+  type MouseEventHandler,
+  useMemo,
+} from 'react';
 import { gt } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -63,14 +70,12 @@ const Pill = ({
     [size, color],
   );
 
-  const handleOnClick: React.EventHandler<
-    React.MouseEvent | React.KeyboardEvent
-  > = (e) => {
+  const handleOnClick: EventHandler<MouseEvent | KeyboardEvent> = (e) => {
     if (isNotUndefined(onClick)) {
       onClick(e);
     }
   };
-  const handleOnKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
+  const handleOnKeyDown: KeyboardEventHandler<HTMLElement> = (e) => {
     switch (e.key) {
       case ' ':
       case 'Enter':
@@ -80,11 +85,11 @@ const Pill = ({
     }
   };
 
-  const handleOnRemove: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleOnRemove: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     onRemove(e);
   };
-  const handleRemoveOnKeyDown: React.KeyboardEventHandler<HTMLButtonElement> = (
+  const handleRemoveOnKeyDown: KeyboardEventHandler<HTMLButtonElement> = (
     e,
   ) => {
     switch (e.key) {

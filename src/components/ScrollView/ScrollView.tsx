@@ -1,9 +1,4 @@
-import React, {
-  CSSProperties,
-  ComponentProps,
-  ReactNode,
-  forwardRef,
-} from 'react';
+import { CSSProperties, ComponentProps, ReactNode, forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { Surface } from '../layout';

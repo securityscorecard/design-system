@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { Property } from 'csstype';
 import { prop } from 'ramda';
@@ -20,7 +20,7 @@ interface GridParentProps {
   $cols?: number;
 }
 
-export interface GridProps extends React.HTMLAttributes<HTMLElement> {
+export interface GridProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */

@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { ScoreDeltaProps } from './ScoreDelta.types';
@@ -31,7 +31,7 @@ const getTrend = (delta: number): Trend => {
   return 'stable';
 };
 
-const ScoreDelta = React.forwardRef<HTMLDivElement, ScoreDeltaProps>(
+const ScoreDelta = forwardRef<HTMLDivElement, ScoreDeltaProps>(
   ({ delta, decimalsCount = 0 }, ref) => {
     const trend = getTrend(delta);
     const absoluteDelta = Math.abs(delta);

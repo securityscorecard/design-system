@@ -1,6 +1,7 @@
-import React, {
-  Dispatch,
-  SetStateAction,
+import {
+  type Dispatch,
+  type SetStateAction,
+  createContext,
   useEffect,
   useMemo,
   useState,
@@ -16,7 +17,7 @@ export interface WizardState {
   update: Dispatch<SetStateAction<WizardState>>;
 }
 
-export const WizardContext = React.createContext<WizardState>({
+export const WizardContext = createContext<WizardState>({
   initialStep: undefined,
   activeStepId: undefined,
   steps: [],

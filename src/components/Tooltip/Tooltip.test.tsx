@@ -1,4 +1,3 @@
-import React from 'react';
 import { act, fireEvent, screen } from '@testing-library/react';
 
 import Tooltip from './Tooltip';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { isNull } from 'ramda-adjunct';
 import { GroupedOptionsType, OptionsType } from 'react-select';

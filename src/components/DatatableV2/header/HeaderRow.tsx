@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DatatableHeaderGroup, DatatableInstance } from '../Datatable.types';
 import HeaderCell from './HeaderCell';
 

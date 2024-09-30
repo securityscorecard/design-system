@@ -1,5 +1,5 @@
-import React from 'react';
 import { isNotUndefined } from 'ramda-adjunct';
+import type { ReactElement } from 'react';
 
 import LinkRenderer from './LinkRenderer';
 import MultiValueRenderer from './MultiValueRenderer';
@@ -22,7 +22,7 @@ function CellRenderer<D extends Record<string, unknown>>({
     multiValueDisplayLimit,
   },
   row: { original: rowData },
-}: CellRendererProps<D>): React.ReactElement {
+}: CellRendererProps<D>): ReactElement {
   const cellValue = isNotUndefined(cellFormatter)
     ? cellFormatter(value, rowData)
     : value;
