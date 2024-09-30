@@ -104,12 +104,13 @@ const variants = {
   [TextVariants.context]: contextVariant,
 };
 
-const Text = styled.span.attrs<{ variant: keyof typeof TextVariants }>(
-  (props) => ({
-    ...props,
-    className: cls(CLX_TYPOGRAPHY, props?.className),
-  }),
-)<TextProps>`
+const Text = styled.span.attrs<TextProps>((props) => ({
+  ...props,
+  className: cls(CLX_TYPOGRAPHY, props?.className),
+  size: props.size ?? TextSizes.md,
+  variant: props.variant ?? TextVariants.primary,
+  isBold: props.isBold ?? false,
+}))<TextProps>`
   font-family: inherit;
   font-weight: ${({ isBold }) =>
     isBold ? 'var(--sscds-font-weight-body-strong)' : 'inherit'};
@@ -117,22 +118,13 @@ const Text = styled.span.attrs<{ variant: keyof typeof TextVariants }>(
   ${({ variant }) => variants[variant]};
 `;
 
-Text.defaultProps = {
-  size: TextSizes.md,
-  variant: TextVariants.primary,
-  isBold: false,
-};
-
 export default Text;
 
 export const Strong = styled(Text).attrs<StrongProps>(() => ({
   as: 'strong',
   isBold: true,
-}))``;
-
-Strong.defaultProps = {
   size: TextSizes.inherit,
-};
+}))``;
 
 export const Code = styled(Text).attrs<CodeProps>(() => ({
   variant: TextVariants.monospace,
