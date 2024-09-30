@@ -60,9 +60,9 @@ const getStretchStyle = (
   }
 };
 
-const Inline = styled.div.attrs((props) => ({
-  ...props,
+const Inline = styled.div.attrs<InlineProps>((props) => ({
   className: cls(CLX_LAYOUT, props?.className),
+  gap: props.gap ?? SpaceSizes.none,
 }))<InlineProps>`
   display: flex;
   flex-direction: row;
@@ -73,9 +73,9 @@ const Inline = styled.div.attrs((props) => ({
   ${({ stretch }) => isNotUndefined(stretch) && getStretchStyle(stretch)}
 
   /* FIXME: Until we remove 'margin' property from other components we need to
-    increase specificity of those nesting , since it can be overriden by inner
+    increase specificity of those nesting , since it can be overridden by inner
     elements with the same specificity. This can lead to inconsistent output
-    of visual test if styled-components puts CSS in different order into Head. */
+    of visual tests if styled-components puts CSS in a different order into the Head. */
   && > * {
     margin-left: 0;
     margin-right: 0;
@@ -85,9 +85,5 @@ const Inline = styled.div.attrs((props) => ({
     margin-left: ${({ gap, theme }) => getSpace(gap, { theme })};
   }
 `;
-
-Inline.defaultProps = {
-  gap: SpaceSizes.none,
-};
 
 export default Inline;
