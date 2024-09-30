@@ -72,9 +72,9 @@ const GridParent = styled.div<GridParentProps>(
 
 const Grid = ({
   children,
-  gap,
+  gap = SpaceSizes.none,
   align,
-  cols,
+  cols = 6,
   parentEl,
   wrapperEl,
   wrapperOverflow = 'hidden',
@@ -102,11 +102,6 @@ const Grid = ({
       </GridParent>
     </GridWrapper>
   );
-};
-
-Grid.defaultProps = {
-  gap: SpaceSizes.none,
-  cols: 6,
 };
 
 export default Grid;
