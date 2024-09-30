@@ -5,14 +5,12 @@ import { Text } from '../Text';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { ParagraphProps } from './Paragraph.types';
 
-const Paragraph = styled(Text)<ParagraphProps>`
+const Paragraph = styled(Text).attrs<ParagraphProps>((props) => ({
+  size: props.size ?? TextSizes.md,
+  variant: props.variant ?? TextVariants.default,
+  as: props.as ?? 'p',
+}))<ParagraphProps>`
   ${createSpacings};
 `;
-
-Paragraph.defaultProps = {
-  size: TextSizes.md,
-  variant: TextVariants.primary,
-  as: 'p',
-};
 
 export default Paragraph;
