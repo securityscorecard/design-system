@@ -40,7 +40,7 @@ export const SSCIconNames = {
   sort: 'sort',
   sortDown: 'sort-down',
   sortUp: 'sort-up',
-  thumbstack: 'thumbstack',
+  thumbtack: 'thumbtack',
   times: 'times',
   upload: 'upload',
   wrench: 'wrench', // custom, does not have FA variant

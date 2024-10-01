@@ -36,8 +36,7 @@ const SettingsItem = <D,>({
     <Padbox
       ref={setNodeRef}
       className="ds-table-settings-panel-item"
-      paddingSize="md"
-      paddingType="squish"
+      paddingSize="sm"
       style={style}
     >
       <Inline
@@ -60,47 +59,49 @@ const SettingsItem = <D,>({
           />
         )}
         <span>{column.columnDef.header}</span>
-        {enableHiding && (
-          <div className="ds-table-checkbox-wrapper">
-            <input
-              aria-label={
-                column.getIsVisible()
-                  ? t('sscds|datatable.settings.hiding.hideColumn', {
-                      columnName: column.columnDef.header,
-                    })
-                  : t('sscds|datatable.settings.hiding.showColumn', {
-                      columnName: column.columnDef.header,
-                    })
-              }
-              checked={column.getIsVisible()}
-              disabled={
-                (!canColumnHide && column.getIsVisible()) ||
-                !column.getCanHide()
-              }
-              type="checkbox"
-              onChange={(e) => column.toggleVisibility(e.target.checked)}
-            />
-          </div>
-        )}
-        {enableColumnPinning && (
-          <div className="ds-table-checkbox-wrapper">
-            <input
-              aria-label={
-                column.getIsPinned() !== false
-                  ? t('sscds|datatable.settings.pinnig.unpinColumn', {
-                      columnName: column.columnDef.header,
-                    })
-                  : t('sscds|datatable.settings.pinnig.pinColumn', {
-                      columnName: column.columnDef.header,
-                    })
-              }
-              checked={column.getIsPinned() !== false}
-              disabled={!column.getCanPin()}
-              type="checkbox"
-              onChange={(e) => column.pin(e.target.checked ? 'left' : false)}
-            />
-          </div>
-        )}
+        <Inline gap="sm" stretch="all">
+          {enableHiding && (
+            <div className="ds-table-checkbox-wrapper">
+              <input
+                aria-label={
+                  column.getIsVisible()
+                    ? t('sscds|datatable.settings.hiding.hideColumn', {
+                        columnName: column.columnDef.header,
+                      })
+                    : t('sscds|datatable.settings.hiding.showColumn', {
+                        columnName: column.columnDef.header,
+                      })
+                }
+                checked={column.getIsVisible()}
+                disabled={
+                  (!canColumnHide && column.getIsVisible()) ||
+                  !column.getCanHide()
+                }
+                type="checkbox"
+                onChange={(e) => column.toggleVisibility(e.target.checked)}
+              />
+            </div>
+          )}
+          {enableColumnPinning && (
+            <div className="ds-table-checkbox-wrapper">
+              <input
+                aria-label={
+                  column.getIsPinned() !== false
+                    ? t('sscds|datatable.settings.pinnig.unpinColumn', {
+                        columnName: column.columnDef.header,
+                      })
+                    : t('sscds|datatable.settings.pinnig.pinColumn', {
+                        columnName: column.columnDef.header,
+                      })
+                }
+                checked={column.getIsPinned() !== false}
+                disabled={!column.getCanPin()}
+                type="checkbox"
+                onChange={(e) => column.pin(e.target.checked ? 'left' : false)}
+              />
+            </div>
+          )}
+        </Inline>
       </Inline>
     </Padbox>
   );
