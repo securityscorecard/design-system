@@ -44,7 +44,7 @@ export { infoCircleOutline } from './infoCircleOutline';
 export { columns3 } from './columns-3';
 export { backwardStep } from './backwardStep';
 export { gripLines } from './gripLines';
-export { thumbstack } from './thumbstack';
+export { thumbtack } from './thumbtack';
 export { anglesRight } from './anglesRight';
 export { copy } from './copy';
 export { expand } from './expand';

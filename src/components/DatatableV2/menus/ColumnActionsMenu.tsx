@@ -113,7 +113,7 @@ const ColumnActionsMenu = <D,>({
           <MenuItem
             key="col-action-pin-left"
             className="ds-table-column-actions-menu-item"
-            iconName="thumbstack"
+            iconName="thumbtack"
             isDisabled={column.getIsPinned() === 'left'}
             onClick={() => handlePinColumn('left')}
           >
