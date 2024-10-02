@@ -1,8 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
 import { withScreenshot } from 'storycap';
 import i18n from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
+import ICU from 'i18next-icu';
+import icuEn from 'i18next-icu/locale-data/en';
+import icuJa from 'i18next-icu/locale-data/ja';
+import icuEs from 'i18next-icu/locale-data/es';
+import icuPt from 'i18next-icu/locale-data/pt';
+import icuCs from 'i18next-icu/locale-data/cs';
 
 import { DSProvider, createIconLibrary } from '../src/theme';
 import en from '../src/locales/en-US';
@@ -18,6 +24,7 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/space-mono/400.css';
 import '../src/tokens/tokens.css';
+import { SlowBuffer } from 'buffer';
 
 function clearDatatableLS() {
   Object.keys(localStorage)
@@ -28,8 +35,12 @@ clearDatatableLS();
 createIconLibrary();
 window.Math.random = () => 0.5;
 
-i18n.use(initReactI18next).init({
+i18n.use(ICU).use(initReactI18next).init({
   debug: true,
+  i18nFormat: {
+    localeData: [icuEn, icuJa, icuEs, icuPt, icuCs],
+    formats: {},
+  },
   resources: {
     'en-US': { sscds: en },
     'ja-JP': { sscds: ja },

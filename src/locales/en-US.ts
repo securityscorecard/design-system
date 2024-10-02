@@ -20,27 +20,23 @@ const locale = {
   'filters.number.error': 'Use only numbers',
   'filters.tagsInput.placeholder': 'Enter value',
   'datatable.pagination.itemCounter.short':
-    '{{firstRowIndex}}-{{lastRowIndex}} of {{totalRowCount}}',
-  'datatable.pagination.itemCounter.full_one':
-    '{{firstRowIndex}}-{{lastRowIndex}} of {{totalRowCount}} total row',
-  'datatable.pagination.itemCounter.full_other':
-    '{{firstRowIndex}}-{{lastRowIndex}} of {{totalRowCount}} total rows',
+    '{firstRowIndex}-{lastRowIndex} of {totalRowCount}',
+  'datatable.pagination.itemCounter.full':
+    '{firstRowIndex}-{lastRowIndex} of {totalRowCount} {count, plural, one {total row} other {total rows}}',
   'datatable.pagination.rowsPerPage': 'Rows per page',
   'datatable.pagination.rowsPerPage.short': 'Rows',
   'datatable.pagination.goToFirstPage': 'Go to the first page of table',
   'datatable.pagination.goToLastPage': 'Go to the last page of table',
   'datatable.pagination.goToPreviousPage': 'Go to the previous page of table',
   'datatable.pagination.goToNextPage': 'Go to the next page of table',
-  'datatable.topToolbar.itemCounter_one': '{{totalRowCount}} row',
-  'datatable.topToolbar.itemCounter_other': '{{totalRowCount}} rows',
-  'datatable.topToolbar.hiddenColumns_one': '{{count}} column hidden',
-  'datatable.topToolbar.hiddenColumns_other': '{{count}} columns hidden',
+  'datatable.topToolbar.itemCounter':
+    '{count, plural, one {{totalRowCount} row} other {{totalRowCount} rows}}',
+  'datatable.topToolbar.hiddenColumns':
+    '{count, plural, one {{count} column hidden} other {{count} columns hidden}}',
   'datatable.topToolbar.columns': 'Columns',
   'datatable.topToolbar.fullScreen': 'Full Screen',
-  'datatable.selection.itemCounter_one':
-    '<bold>{{selectedRowCount}}</bold> of {{totalRowCount}} row selected',
-  'datatable.selection.itemCounter_other':
-    '<bold>{{selectedRowCount}}</bold> of {{totalRowCount}} rows selected',
+  'datatable.selection.itemCounter':
+    '{count, plural, one {<bold>{selectedRowCount}</bold> of {totalRowCount} row selected} other {<bold>{selectedRowCount}</bold> of {totalRowCount} rows selected}}',
   'datatable.selection.clearSelection': 'Clear selection',
   'datatable.selection.toggleAll': 'Toggle select all',
   'datatable.selection.toggleRow': 'Toggle select row',
@@ -67,27 +63,26 @@ const locale = {
   'datatable.settings.reset': 'Reset to default',
   'datatable.settings.hiding.showAll': 'Show all columns',
   'datatable.settings.hiding.hideAll': 'Hide all columns',
-  'datatable.settings.hiding.showColumn': 'Show {{columnName}} column',
-  'datatable.settings.hiding.hideColumn': 'Hide {{columnName}} column',
+  'datatable.settings.hiding.showColumn': 'Show {columnName} column',
+  'datatable.settings.hiding.hideColumn': 'Hide {columnName} column',
   'datatable.settings.pinnig.pinAll': 'Pin all columns',
   'datatable.settings.pinnig.unpinAll': 'Unpin all columns',
-  'datatable.settings.pinnig.pinColumn': 'Unpin {{columnName}} column',
-  'datatable.settings.pinnig.unpinColumn': 'Unpin {{columnName}} column',
-  'datatable.settings.ordering.reorder': 'Reorder {{columnName}} column',
+  'datatable.settings.pinnig.pinColumn': 'Unpin {columnName} column',
+  'datatable.settings.pinnig.unpinColumn': 'Unpin {columnName} column',
+  'datatable.settings.ordering.reorder': 'Reorder {columnName} column',
   'datatable.settings.ordering.screenReader.instructions':
     'To pick up a draggable table column, press Space or Enter. Use the Up and Down arrow keys to update the position of the column in the table. Press Space or Enter again to drop the item in its new position, or press Escape to cancel.',
   'datatable.settings.ordering.screenReader.pickedUp':
-    'Picked up {{header}} column.',
+    'Picked up {header} column.',
   'datatable.settings.ordering.screenReader.movedOver':
-    '{{activeHeader}} column was moved over {{overHeader}} column.',
+    '{activeHeader} column was moved over {overHeader} column.',
   'datatable.settings.ordering.screenReader.dropped':
-    '{{activeHeader}} column was dropped.',
+    '{activeHeader} column was dropped.',
   'datatable.settings.ordering.screenReader.droppedOver':
-    '{{activeHeader}} column was dropped over {{overHeader}} column',
+    '{activeHeader} column was dropped over {overHeader} column',
   'datatable.settings.ordering.screenReader.dragCancel':
-    'Dragging was cancelled. {{header}} column was dropped.',
+    'Dragging was cancelled. {header} column was dropped.',
   'datatable.settings.ordering.screenReader.notDroppableArea':
-    '{{activeHeader}} column is no longer over a droppable area.',
-  test: '<0>{{lng}}</0> test',
+    '{activeHeader} column is no longer over a droppable area.',
 } as const;
 export default locale;

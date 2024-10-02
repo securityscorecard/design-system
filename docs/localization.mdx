@@ -22,6 +22,68 @@ We've chosen to implement localization using `i18next` and `react-i18next`. This
 
 `i18next` provides a robust framework for managing translations, while `react-i18next` offers React-specific bindings that make it simple to use localized content within our components. This approach allows for dynamic language switching and efficient management of translation resources.
 
+## String interpolation
+
+Our localization system utilizes the ICU (International Components for Unicode) Message Format instead of the default i18next syntax for string interpolation and pluralization. This format provides a more powerful and standardized way to handle complex localization scenarios.
+
+### What is ICU Message Format?
+
+ICU Message Format is a standardized localization format used widely in software internationalization. It allows for sophisticated string formatting, including pluralization, gender, and selectional mechanisms. This format is more expressive than simple key-value pairs and can handle a wide variety of linguistic rules across different languages.
+
+### How It Works
+
+ICU Message Format uses placeholders and formatting instructions within curly braces {}. These placeholders can be simple variables, or they can include formatting options for numbers, dates, and pluralization.
+
+### Syntax Examples
+
+#### Basic String Interpolation
+
+To insert a variable into a string, use the variable name within curly braces:
+
+```
+"Hello, {name}!"
+```
+
+When providing the translation, you would use:
+
+```json
+{
+  "greeting": "Hello, {name}!"
+}
+```
+
+And in your code:
+
+```js
+t('greeting', { name: 'Alice' });
+```
+
+This would result in: "Hello, Alice!"
+
+#### Pluralization
+
+For pluralization, use the plural keyword followed by the variable and the different forms:
+
+```
+"{count, plural, =0 {No items} one {{count} item} other {{count} items}}"
+```
+
+In your translation file:
+
+```json
+{
+  "itemCount": "{count, plural, =0 {No items} one {{count} item} other {{count} items}}"
+}
+```
+
+In your code:
+
+```js
+t('itemCount', { count: 0 }); // "No items"
+t('itemCount', { count: 1 }); // "1 item"
+t('itemCount', { count: 5 }); // "5 items"
+```
+
 ## Integration into Existing Apps
 
 Integrating our localized components into your existing application is straightforward. Here are the steps:

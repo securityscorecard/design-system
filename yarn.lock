@@ -1868,7 +1868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.24.8":
+"@babel/runtime@npm:^7.25.0":
   version: 7.25.6
   resolution: "@babel/runtime@npm:7.25.6"
   dependencies:
@@ -4580,6 +4580,7 @@ __metadata:
     history: "npm:^5.3.0"
     husky: "npm:^7.0.4"
     i18next: "npm:>=17.3.1"
+    i18next-icu: "npm:^1.4.2"
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -11801,6 +11802,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next-icu@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "i18next-icu@npm:1.4.2"
+  dependencies:
+    intl-messageformat: "npm:2.2.0"
+  checksum: 10/6fa53e445235c1f434a7038c1905acb585d90690180eba7a401628eb5aceca83a8ec879560727c14627335b11712c1cac4cb60d53dda375c0d433125698da53f
+  languageName: node
+  linkType: hard
+
 "i18next@npm:>=17.3.1":
   version: 23.15.1
   resolution: "i18next@npm:23.15.1"
@@ -12016,6 +12026,22 @@ __metadata:
     hasown: "npm:^2.0.0"
     side-channel: "npm:^1.0.4"
   checksum: 10/3e66720508831153ecf37d13def9f6856f9f2960989ec8a0a0476c98f887fca9eff0163127466485cb825c900c2d6fc601aa9117b7783b90ffce23a71ea5d053
+  languageName: node
+  linkType: hard
+
+"intl-messageformat-parser@npm:1.4.0":
+  version: 1.4.0
+  resolution: "intl-messageformat-parser@npm:1.4.0"
+  checksum: 10/ba6adae35df1796dfe6dbf155f63e25d91e615d6622faf0dc5071148229b8c7e878d720188e94663b44627a8d8e20e1a234d0a10eada11742b3cf890080de136
+  languageName: node
+  linkType: hard
+
+"intl-messageformat@npm:2.2.0":
+  version: 2.2.0
+  resolution: "intl-messageformat@npm:2.2.0"
+  dependencies:
+    intl-messageformat-parser: "npm:1.4.0"
+  checksum: 10/8bb076d8850d300d869d94fc46b186a272cca200c283f729171e605557bc72773a542f87a662b3c89c46aa026dcbf934e705372632f0cf7fc4372c8b1efe7cfb
   languageName: node
   linkType: hard
 
@@ -17555,10 +17581,10 @@ __metadata:
   linkType: hard
 
 "react-i18next@npm:>=11.18.6":
-  version: 15.0.1
-  resolution: "react-i18next@npm:15.0.1"
+  version: 15.0.2
+  resolution: "react-i18next@npm:15.0.2"
   dependencies:
-    "@babel/runtime": "npm:^7.24.8"
+    "@babel/runtime": "npm:^7.25.0"
     html-parse-stringify: "npm:^3.0.1"
   peerDependencies:
     i18next: ">= 23.2.3"
@@ -17568,7 +17594,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10/2998565bdcdc37ba8d2b3531e36441e00c8bb7fb7c1cac35364a81722cb4e5a363288906566c91f3ad835abc5b0b78e14d8511f57b154a8e5c057a8e6096cb07
+  checksum: 10/25e6a611e2d1f250103120023ceb5dbf285e796cc0a2ab7685844438c3f698793d68bc454025aa0ca3379708bd468c9acfe6603c7b64f850358f2deb9b37a570
   languageName: node
   linkType: hard
 
