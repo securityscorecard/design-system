@@ -6,6 +6,7 @@ import { DatatableInstance } from '../Datatable.types';
 import { useContainerQuery } from '../../../hooks/useContainerQuery';
 import IconButton from '../../ButtonV2/IconButton';
 import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
+import { Skeleton } from '../../Skeleton';
 
 const cq = {
   sm: {
@@ -37,7 +38,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
     setPageIndex,
     setPageSize,
   } = table;
-  const { pagination } = getState();
+  const { pagination, isLoading } = getState();
   const { pageIndex, pageSize } = pagination;
 
   const currentPage = pageIndex + 1;
@@ -60,19 +61,23 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
     >
       <Inline align="center" gap="md" justify="space-between">
         <div className="ds-table-pagination-item-count">
-          {isLg
-            ? t('sscds|datatable.pagination.itemCounter.full', {
-                firstRowIndex: (firstRowIndex + 1).toLocaleString(lng),
-                lastRowIndex: lastRowIndex.toLocaleString(lng),
-                totalRowCount: abbreviateNumber(totalRowCount, lng),
-                count: totalRowCount,
-              })
-            : t('sscds|datatable.pagination.itemCounter.short', {
-                firstRowIndex: (firstRowIndex + 1).toLocaleString(lng),
-                lastRowIndex: lastRowIndex.toLocaleString(lng),
-                totalRowCount: abbreviateNumber(totalRowCount, lng),
-                count: totalRowCount,
-              })}
+          {isLoading ? (
+            <Skeleton width={120} />
+          ) : isLg ? (
+            t('sscds|datatable.pagination.itemCounter.full', {
+              firstRowIndex: (firstRowIndex + 1).toLocaleString(lng),
+              lastRowIndex: lastRowIndex.toLocaleString(lng),
+              totalRowCount: abbreviateNumber(totalRowCount, lng),
+              count: totalRowCount,
+            })
+          ) : (
+            t('sscds|datatable.pagination.itemCounter.short', {
+              firstRowIndex: (firstRowIndex + 1).toLocaleString(lng),
+              lastRowIndex: lastRowIndex.toLocaleString(lng),
+              totalRowCount: abbreviateNumber(totalRowCount, lng),
+              count: totalRowCount,
+            })
+          )}
         </div>
         <Inline
           align="center"
