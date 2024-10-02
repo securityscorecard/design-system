@@ -20,11 +20,9 @@ const locale = {
   'filters.number.error': 'Use apenas números',
   'filters.tagsInput.placeholder': 'Digite o valor',
   'datatable.pagination.itemCounter.short':
-    '{{firstRowIndex}}-{{lastRowIndex}} de {{totalRowCount}}',
-  'datatable.pagination.itemCounter.full_one':
-    '{{firstRowIndex}}-{{lastRowIndex}} de {{totalRowCount}} linha no total',
-  'datatable.pagination.itemCounter.full_other':
-    '{{firstRowIndex}}-{{lastRowIndex}} de {{totalRowCount}} linhas no total',
+    '{firstRowIndex}-{lastRowIndex} de {totalRowCount}',
+  'datatable.pagination.itemCounter.full':
+    '{firstRowIndex}-{lastRowIndex} de {totalRowCount} {count, plural, one {linha} other {linhas}} no total',
   'datatable.pagination.rowsPerPage': 'Linhas por página',
   'datatable.pagination.rowsPerPage.short': 'Linhas',
   'datatable.pagination.goToFirstPage': 'Ir para a primeira página da tabela',
@@ -32,16 +30,14 @@ const locale = {
   'datatable.pagination.goToPreviousPage':
     'Ir para a página anterior da tabela',
   'datatable.pagination.goToNextPage': 'Ir para a próxima página da tabela',
-  'datatable.topToolbar.itemCounter_one': '{{totalRowCount}} linha',
-  'datatable.topToolbar.itemCounter_other': '{{totalRowCount}} linhas',
-  'datatable.topToolbar.hiddenColumns_one': '{{count}} coluna oculta',
-  'datatable.topToolbar.hiddenColumns_other': '{{count}} colunas ocultas',
+  'datatable.topToolbar.itemCounter':
+    '{totalRowCount} {count, plural, one {linha} other {linhas}}',
+  'datatable.topToolbar.hiddenColumns':
+    '{count} {count, plural, one {coluna oculta} other {colunas ocultas}}',
   'datatable.topToolbar.columns': 'Colunas',
   'datatable.topToolbar.fullScreen': 'Tela Cheia',
-  'datatable.selection.itemCounter_one':
-    '<bold>{{selectedRowCount}}</bold> de {{totalRowCount}} linha selecionada',
-  'datatable.selection.itemCounter_other':
-    '<bold>{{selectedRowCount}}</bold> de {{totalRowCount}} linhas selecionadas',
+  'datatable.selection.itemCounter':
+    '<bold>{selectedRowCount}</bold> de {totalRowCount} {count, plural, one {linha selecionada} other {linhas selecionadas}}',
   'datatable.selection.clearSelection': 'Limpar seleção',
   'datatable.selection.toggleAll': 'Alternar selecionar todos',
   'datatable.selection.toggleRow': 'Alternar selecionar linha',
@@ -68,26 +64,26 @@ const locale = {
   'datatable.settings.reset': 'Redefinir para o padrão',
   'datatable.settings.hiding.showAll': 'Exibir todas as colunas',
   'datatable.settings.hiding.hideAll': 'Ocultar todas as colunas',
-  'datatable.settings.hiding.showColumn': 'Exibir coluna {{columnName}}',
-  'datatable.settings.hiding.hideColumn': 'Ocultar coluna {{columnName}}',
+  'datatable.settings.hiding.showColumn': 'Exibir coluna {columnName}',
+  'datatable.settings.hiding.hideColumn': 'Ocultar coluna {columnName}',
   'datatable.settings.pinnig.pinAll': 'Fixar todas as colunas',
   'datatable.settings.pinnig.unpinAll': 'Desfixar todas as colunas',
-  'datatable.settings.pinnig.pinColumn': 'Fixar coluna {{columnName}}',
-  'datatable.settings.pinnig.unpinColumn': 'Desfixar coluna {{columnName}}',
-  'datatable.settings.ordering.reorder': 'Reordenar coluna {{columnName}}',
+  'datatable.settings.pinnig.pinColumn': 'Fixar coluna {columnName}',
+  'datatable.settings.pinnig.unpinColumn': 'Desfixar coluna {columnName}',
+  'datatable.settings.ordering.reorder': 'Reordenar coluna {columnName}',
   'datatable.settings.ordering.screenReader.instructions':
     'Para pegar uma coluna móvel da tabela, pressione Espaço ou Enter. Use as setas para cima e para baixo para atualizar a posição da coluna na tabela. Pressione Espaço ou Enter novamente para soltar o item em sua nova posição, ou pressione Escape para cancelar.',
   'datatable.settings.ordering.screenReader.pickedUp':
-    'Coluna {{header}} selecionada.',
+    'Coluna {header} selecionada.',
   'datatable.settings.ordering.screenReader.movedOver':
-    'A coluna {{activeHeader}} foi movida para a coluna {{overHeader}}.',
+    'A coluna {activeHeader} foi movida para a coluna {overHeader}.',
   'datatable.settings.ordering.screenReader.dropped':
-    'A coluna {{activeHeader}} foi soltada.',
+    'A coluna {activeHeader} foi soltada.',
   'datatable.settings.ordering.screenReader.droppedOver':
-    'A coluna {{activeHeader}} foi soltada sobre a coluna {{overHeader}}',
+    'A coluna {activeHeader} foi soltada sobre a coluna {overHeader}',
   'datatable.settings.ordering.screenReader.dragCancel':
-    'O arraste foi cancelado. A coluna {{header}} foi solta.',
+    'O arraste foi cancelado. A coluna {header} foi solta.',
   'datatable.settings.ordering.screenReader.notDroppableArea':
-    'A coluna {{activeHeader}} não está mais em uma área onde pode ser solta.',
+    'A coluna {activeHeader} não está mais em uma área onde pode ser solta.',
 } as const;
 export default locale;
