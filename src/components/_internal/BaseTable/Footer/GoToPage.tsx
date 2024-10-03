@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { type KeyboardEvent, useRef } from 'react';
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../../utils';
@@ -27,7 +27,7 @@ const SmallInput = styled(Input)`
 
 const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const handlePageChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handlePageChange = (e: KeyboardEvent<HTMLInputElement>) => {
     const { target, key } = e;
     const { value } = target as HTMLInputElement;
     const parsedValue = parseInt(value, 10);

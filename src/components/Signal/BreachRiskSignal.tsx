@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Vertical3Bars, criticalityLevels } from './common';
 import { BaseSignalProps, BreachRiskSignalKinds } from './Signal.types';
 

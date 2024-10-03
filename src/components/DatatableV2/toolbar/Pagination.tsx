@@ -5,6 +5,8 @@ import { Inline, Padbox } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import { useContainerQuery } from '../../../hooks/useContainerQuery';
 import IconButton from '../../ButtonV2/IconButton';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
+import { Skeleton } from '../../Skeleton';
 
 const cq = {
   sm: {
@@ -36,7 +38,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
     setPageIndex,
     setPageSize,
   } = table;
-  const { pagination } = getState();
+  const { pagination, isLoading } = getState();
   const { pageIndex, pageSize } = pagination;
 
   const currentPage = pageIndex + 1;
@@ -48,6 +50,8 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const [cqParams, containerRef] = useContainerQuery(cq);
   const isLg = !cqParams.sm && !cqParams.md;
 
+  const { t, lng } = useSafeTranslation();
+
   return (
     <Padbox
       ref={containerRef}
@@ -57,12 +61,23 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
     >
       <Inline align="center" gap="md" justify="space-between">
         <div className="ds-table-pagination-item-count">
-          {(firstRowIndex + 1).toLocaleString('en-US')}-
-          {lastRowIndex.toLocaleString('en-US')} of{' '}
-          <abbr title={totalRowCount.toString()}>
-            {abbreviateNumber(totalRowCount)}
-          </abbr>
-          {isLg && ` total ${totalRowCount === 1 ? 'row' : 'rows'}`}
+          {isLoading ? (
+            <Skeleton width={120} />
+          ) : isLg ? (
+            t('sscds|datatable.pagination.itemCounter.full', {
+              firstRowIndex: (firstRowIndex + 1).toLocaleString(lng),
+              lastRowIndex: lastRowIndex.toLocaleString(lng),
+              totalRowCount: abbreviateNumber(totalRowCount, lng),
+              count: totalRowCount,
+            })
+          ) : (
+            t('sscds|datatable.pagination.itemCounter.short', {
+              firstRowIndex: (firstRowIndex + 1).toLocaleString(lng),
+              lastRowIndex: lastRowIndex.toLocaleString(lng),
+              totalRowCount: abbreviateNumber(totalRowCount, lng),
+              count: totalRowCount,
+            })
+          )}
         </div>
         <Inline
           align="center"
@@ -73,7 +88,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             className="ds-table-pagination-buttons-first-button ds-table-pagination-buttons-button"
             iconName="backward-step"
             isDisabled={!getCanPreviousPage()}
-            label="Go to the first page of table"
+            label={t('sscds|datatable.pagination.goToFirstPage')}
             size="sm"
             variant="ghost"
             onClick={() => setPageIndex(0)}
@@ -82,7 +97,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             className="ds-table-pagination-buttons-prev-button ds-table-pagination-buttons-button"
             iconName="angle-left"
             isDisabled={!getCanPreviousPage()}
-            label="Go to the previous page of table"
+            label={t('sscds|datatable.pagination.goToPreviousPage')}
             size="sm"
             variant="ghost"
             onClick={() => previousPage()}
@@ -94,7 +109,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             className="ds-table-pagination-buttons-next-button ds-table-pagination-buttons-button"
             iconName="angle-right"
             isDisabled={!getCanNextPage()}
-            label="Go to the next page of table"
+            label={t('sscds|datatable.pagination.goToNextPage')}
             size="sm"
             variant="ghost"
             onClick={() => nextPage()}
@@ -104,7 +119,7 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
             iconName="backward-step"
             iconRotation={180}
             isDisabled={!getCanNextPage()}
-            label="Go to the last page of table"
+            label={t('sscds|datatable.pagination.goToLastPage')}
             size="sm"
             variant="ghost"
             onClick={() => setPageIndex(lastPage)}
@@ -120,7 +135,9 @@ const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
               className="ds-table-pagination-rows-per-page-label"
               htmlFor="rowsPerPageSelect"
             >
-              {cqParams.md ? 'Rows' : 'Rows per page'}
+              {cqParams.md
+                ? t('sscds|datatable.pagination.rowsPerPage.short')
+                : t('sscds|datatable.pagination.rowsPerPage')}
             </label>
             <Select
               className="ds-table-pagination-rows-per-page-select"

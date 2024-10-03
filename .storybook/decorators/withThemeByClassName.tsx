@@ -12,17 +12,11 @@ import type { StoryContext } from 'storybook/internal/types';
 const PARAM_KEY = 'themes' as const;
 const ADDON_ID = `storybook/${PARAM_KEY}` as const;
 const GLOBAL_KEY = 'theme' as const;
-const THEME_SWITCHER_ID = `${ADDON_ID}/theme-switcher` as const;
 
 interface ThemeAddonState {
   themesList: string[];
   themeDefault?: string;
 }
-
-const DEFAULT_ADDON_STATE: ThemeAddonState = {
-  themesList: [],
-  themeDefault: undefined,
-};
 
 interface ThemeParameters {
   themeOverride?: string;

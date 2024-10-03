@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export interface TooltipWrapperProps {
-  popupRenderer: () => React.ReactElement;
+  popupRenderer: () => ReactElement;
   shouldRender: boolean;
   children: ReactNode;
 }

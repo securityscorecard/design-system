@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Icon, Vertical3Bars, criticalityLevels } from './common';
 import { BaseSignalProps, SeveritySignalKinds } from './Signal.types';
 

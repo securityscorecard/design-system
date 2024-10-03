@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { Icon } from '../Icon';
@@ -35,7 +35,7 @@ const IconWrapper = styled(Padbox)<{ $trend: Trend }>`
   place-items: center;
 `;
 
-const TrendIcon = React.forwardRef<
+const TrendIcon = forwardRef<
   HTMLDivElement,
   RequireAtLeastOne<TrendIconProps, 'type' | 'trend'>
 >(({ type, trend }: TrendIconProps, ref) => {

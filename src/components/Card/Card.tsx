@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
 
@@ -46,7 +46,7 @@ export const CardContainer = styled.div<{
     `var(--sscds-space-${$verticalPadding}) var(--sscds-space-${$horizontalPadding})`};
 `;
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
+const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     { children, shouldAlignLastItemToBottom = false, as, ...props }: CardProps,
     ref,

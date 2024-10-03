@@ -1,5 +1,5 @@
-import React from 'react';
 import { isNonEmptyString } from 'ramda-adjunct';
+import { type MouseEvent, forwardRef } from 'react';
 
 import { Inline } from '../layout';
 import { SpaceSizes } from '../../theme';
@@ -11,7 +11,7 @@ import {
 import { CardActionsProps } from './Card.types';
 import { CardContainer } from './Card';
 
-const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
+const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
   ({ actions, rightAdornment = null }: CardActionsProps, ref) => (
     <CardContainer $horizontalPadding="6x" $verticalPadding="2x">
       <Inline
@@ -29,7 +29,7 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
               key={action.name}
               aria-label={action.ariaLabel}
               data-interactive="true"
-              href={(action as AbsoluteLinkActionKind<[React.MouseEvent]>).href}
+              href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
               iconStart={
                 typeof action.iconName !== 'undefined'
                   ? {
@@ -39,7 +39,7 @@ const CardActions = React.forwardRef<HTMLDivElement, CardActionsProps>(
                   : undefined
               }
               isDisabled={action.isDisabled}
-              to={(action as RelativeLinkActionKind<[React.MouseEvent]>).to}
+              to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
               variant="ghost"
               onClick={action.onClick}
             >

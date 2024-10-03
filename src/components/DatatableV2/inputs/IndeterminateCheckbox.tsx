@@ -1,4 +1,4 @@
-import React, { ComponentProps, useEffect, useRef } from 'react';
+import { ComponentProps, useEffect, useRef } from 'react';
 
 const IndeterminateCheckbox = ({
   indeterminate,

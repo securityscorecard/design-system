@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { Padbox, Stack, Surface } from '../../layout';
@@ -6,6 +5,7 @@ import { Paragraph } from '../../Paragraph';
 import { Text } from '../../Text';
 import { DatatableInstance } from '../Datatable.types';
 import BodyRow from './BodyRow';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const List = styled.ul`
   list-style-type: initial;
@@ -19,6 +19,7 @@ const Body = <D,>({ table }: { table: DatatableInstance<D> }) => {
     options: { renderNoDataFallback },
   } = table;
   const { rows } = getRowModel();
+  const { t } = useSafeTranslation();
 
   return (
     <tbody className="ds-table-body">
@@ -30,13 +31,15 @@ const Body = <D,>({ table }: { table: DatatableInstance<D> }) => {
                 {renderNoDataFallback?.({ table }) ?? (
                   <Stack gap="sm">
                     <Text as="p" size="lg" isBold>
-                      No results found
+                      {t('sscds|datatable.noData.title')}
                     </Text>
                     <Paragraph as="div" variant="secondary">
-                      This may happen because:
+                      {t('sscds|datatable.noData.list.description')}
                       <List>
-                        <li>the data set is empty</li>
-                        <li>none of the items match your active filters</li>
+                        <li>{t('sscds|datatable.noData.list.emptySet')}</li>
+                        <li>
+                          {t('sscds|datatable.noData.list.activeFilters')}
+                        </li>
                       </List>
                     </Paragraph>
                   </Stack>

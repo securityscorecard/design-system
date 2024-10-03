@@ -1,4 +1,4 @@
-import React from 'react';
+import type { CSSProperties } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -28,7 +28,7 @@ export default {
   },
 } as Meta;
 
-function Box({ style = {} }: { style?: React.CSSProperties }) {
+function Box({ style = {} }: { style?: CSSProperties }) {
   return <MockBox style={{ width: '150px', minHeight: '150px', ...style }} />;
 }
 

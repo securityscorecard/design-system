@@ -1,4 +1,4 @@
-import React, { ComponentProps, PropsWithChildren } from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 import cls from 'classnames';
 
 import { CLX_COMPONENT } from '../../theme/constants';

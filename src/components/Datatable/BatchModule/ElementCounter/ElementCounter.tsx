@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
 
@@ -29,10 +29,7 @@ const SelectionButton = styled.button`
   }
 `;
 
-export const getCounterContent = (
-  totalLength: number,
-  selectedLength = 0,
-): React.ReactElement => (
+export const getCounterContent = (totalLength: number, selectedLength = 0) => (
   <span data-testid="counter-content">
     {isPositive(selectedLength) && isPositive(totalLength)
       ? `${abbreviateNumber(selectedLength)} of ${abbreviateNumber(

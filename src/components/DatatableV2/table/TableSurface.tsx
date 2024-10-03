@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { Surface } from '../../layout';
@@ -12,7 +11,8 @@ const DatatableRoot = styled.div<{ $isFullscreen }>`
   ${({ $isFullscreen }) =>
     $isFullscreen &&
     css`
-      --sscds-table-height-pagination: 4.25rem;
+      --sscds-table-height-pagination: 3rem;
+      --sscds-table-height-selection: 5.125rem;
 
       position: fixed;
       inset: 0;
@@ -23,7 +23,19 @@ const DatatableRoot = styled.div<{ $isFullscreen }>`
       height: 100vh;
       background: white;
       display: grid;
-      grid-template-rows: 1fr var(--sscds-table-height-pagination);
+      grid-template-rows: 1fr;
+
+      &:has(.ds-table-pagination-toolbar) {
+        grid-template-rows: 1fr var(--sscds-table-height-pagination);
+      }
+      &:has(.ds-table-selection-toolbar) {
+        grid-template-rows: 1fr var(--sscds-table-height-selection);
+      }
+      &:has(.ds-table-pagination-toolbar):has(.ds-table-selection-toolbar) {
+        grid-template-rows: 1fr var(--sscds-table-height-selection) var(
+            --sscds-table-height-pagination
+          );
+      }
     `};
 `;
 

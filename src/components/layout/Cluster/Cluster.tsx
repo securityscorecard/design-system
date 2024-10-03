@@ -1,4 +1,4 @@
-import React from 'react';
+import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { Property } from 'csstype';
 import { prop } from 'ramda';
@@ -20,7 +20,7 @@ interface ClusterParentProps {
   className?: string;
 }
 
-export interface ClusterProps extends React.HTMLAttributes<HTMLElement> {
+export interface ClusterProps extends HTMLAttributes<HTMLElement> {
   /**
    * Whitespace around each child of the Inline
    */
@@ -71,7 +71,7 @@ const ClusterParent = styled.div<ClusterParentProps>(
 
 const Cluster = ({
   children,
-  gap,
+  gap = SpaceSizes.none,
   align,
   justify,
   parentEl,
@@ -95,9 +95,5 @@ const Cluster = ({
     </ClusterParent>
   </ClusterWrapper>
 );
-
-Cluster.defaultProps = {
-  gap: SpaceSizes.none,
-};
 
 export default Cluster;

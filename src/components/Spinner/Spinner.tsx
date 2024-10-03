@@ -21,9 +21,15 @@ const getHorizontalMargin = pipe(
   unless(isString, pxToRem),
 );
 
-const Spinner = styled.div.attrs({
+const Spinner = styled.div.attrs<SpinnerProps>((props) => ({
   className: cls(CLX_COMPONENT, 'spinner'),
-})<SpinnerProps>`
+  dark: props.dark ?? false,
+  width: props.width ?? 24,
+  height: props.height ?? 24,
+  verticalMargin: props.verticalMargin ?? 15,
+  horizontalMargin: props.horizontalMargin ?? 'auto',
+  borderWidth: props.borderWidth ?? 4,
+}))<SpinnerProps>`
   margin-top: ${({ verticalMargin }) => pxToRem(verticalMargin)};
   margin-bottom: ${({ verticalMargin }) => pxToRem(verticalMargin)};
   margin-left: ${getHorizontalMargin};
@@ -39,14 +45,5 @@ const Spinner = styled.div.attrs({
   border-top-color: ${({ dark, theme }) =>
     getColor(dark ? 'neutral.800' : 'neutral.0', { theme })};
 `;
-
-Spinner.defaultProps = {
-  dark: false,
-  width: 24,
-  height: 24,
-  verticalMargin: 15,
-  horizontalMargin: 'auto',
-  borderWidth: 4,
-};
 
 export default Spinner;

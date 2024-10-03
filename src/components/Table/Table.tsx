@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import {
   CellProps,
@@ -50,7 +50,7 @@ const TableWrapper = styled.div`
 
 const renderDefaultCell = <D extends Record<string, unknown>>(
   props: CellProps<D>,
-): React.ReactElement => <CellRenderer<D> {...props} />;
+) => <CellRenderer<D> {...props} />;
 
 function Table<D extends Record<string, unknown>>({
   columns,
@@ -67,15 +67,14 @@ function Table<D extends Record<string, unknown>>({
   onSortChange = noop,
   rowActions = [],
   dataPrimaryKey,
-}: TableProps<D>): React.ReactElement {
+}: TableProps<D>) {
   const defaultColumn = useMemo<Partial<Column<D>>>(
     () => ({
       minWidth: 40,
       width: 150,
       maxWidth: 400,
       nullCondition: stubFalse,
-      Cell: (props: CellProps<D>): React.ReactElement =>
-        renderDefaultCell<D>(props),
+      Cell: (props: CellProps<D>) => renderDefaultCell<D>(props),
       cellType: 'text',
     }),
     [],

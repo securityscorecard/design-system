@@ -1,4 +1,3 @@
-import React from 'react';
 import { any, identity, map, pipe, slice } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
@@ -28,7 +27,7 @@ function MultiValueRenderer<D extends Record<string, unknown>>({
   linkComponent,
   rowData,
   tooltipComposer,
-}: MultiValueRendererProps<D>): React.ReactElement {
+}: MultiValueRendererProps<D>) {
   const hasDisplayLimit = multiValueDisplayLimit > 0;
   const valuesLength = values.length;
   const containsLink = any(isNotUndefined, [hrefComposer, toComposer, onClick]);

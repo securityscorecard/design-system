@@ -1,5 +1,4 @@
 import { isNotUndefined } from 'ramda-adjunct';
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { getColor, pxToRem } from '../../../../utils';
@@ -39,7 +38,7 @@ const StyledTh = styled.th<{ sticky?: string }>`
 
 function Head<D extends Record<string, unknown>>({
   headerGroups,
-}: HeadProps<D>): React.ReactElement {
+}: HeadProps<D>) {
   return (
     <thead>
       {headerGroups.map((headerGroup) => {

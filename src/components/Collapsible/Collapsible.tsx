@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
 import * as RadixCollapsible from '@radix-ui/react-collapsible';

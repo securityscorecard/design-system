@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity, F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
@@ -292,7 +291,7 @@ describe('Datatable/CellRenderer', () => {
           column={{
             nullCondition: stubFalse,
             cellType: CellTypes.text,
-            cellFormatter: abbreviateNumber,
+            cellFormatter: (val) => abbreviateNumber(val),
           }}
           row={row}
         />,

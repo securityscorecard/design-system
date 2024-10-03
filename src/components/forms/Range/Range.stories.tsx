@@ -1,4 +1,4 @@
-import React from 'react';
+import type { InputHTMLAttributes } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import Range from './Range';
@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 const RangeTemplate: StoryFn<
-  RangeProps & React.InputHTMLAttributes<HTMLInputElement>
+  RangeProps & InputHTMLAttributes<HTMLInputElement>
 > = (args) => <Range {...args} aria-label="Input" />;
 
 export const Playground = RangeTemplate.bind({});

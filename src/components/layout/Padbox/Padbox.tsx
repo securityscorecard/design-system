@@ -24,17 +24,13 @@ export interface PadboxProps {
   [key: string]: unknown;
 }
 
-const Padbox = styled.div.attrs((props) => ({
-  ...props,
+const Padbox = styled.div.attrs<PadboxProps>((props) => ({
   className: cls(CLX_LAYOUT, props?.className),
+  paddingType: props.paddingType ?? PaddingTypes.square,
+  paddingSize: props.paddingSize ?? SpaceSizes.none,
 }))<PadboxProps>`
   box-sizing: border-box;
   ${createPadding};
 `;
-
-Padbox.defaultProps = {
-  paddingType: PaddingTypes.square,
-  paddingSize: SpaceSizes.none,
-};
 
 export default Padbox;

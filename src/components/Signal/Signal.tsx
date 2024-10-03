@@ -1,4 +1,3 @@
-import React from 'react';
 import { isNilOrEmpty } from 'ramda-adjunct';
 
 import {

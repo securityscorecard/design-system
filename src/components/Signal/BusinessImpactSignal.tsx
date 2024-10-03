@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Vertical4Bars, criticalityLevels } from './common';
 import { BaseSignalProps, BusinessImpactSignalKinds } from './Signal.types';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 import { SwitchSizes } from './Switch.enums';
 
@@ -11,7 +11,7 @@ export interface SwitchLabelProps {
 }
 
 export interface SwitchProps
-  extends Omit<React.ComponentPropsWithRef<'input'>, 'size'> {
+  extends Omit<ComponentPropsWithRef<'input'>, 'size'> {
   /**
    * ID to connect input and its label
    */

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import styled, { DefaultTheme } from 'styled-components';
 import { indigo, slate } from '@radix-ui/colors';

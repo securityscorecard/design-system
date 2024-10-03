@@ -14,7 +14,7 @@ export interface CenterProps {
    */
   maxWidth?: number;
   /**
-   * Gutters arround content. Gutters are not counted in maximal content width.
+   * Gutters around content. Gutters are not counted in maximal content width.
    */
   gutters?: SpaceSize;
   /**
@@ -38,8 +38,11 @@ const Center = styled.div
         'isTextCentered',
       ]),
   })
-  .attrs((props) => ({
+  .attrs<CenterProps>((props) => ({
     ...props,
+    gutters: props.gutters ?? SpaceSizes.none,
+    areChildrenCentered: props.areChildrenCentered ?? false,
+    isTextCentered: props.isTextCentered ?? false,
     className: cls(CLX_LAYOUT, props?.className),
   }))<CenterProps>`
   box-sizing: content-box;
@@ -66,11 +69,5 @@ const Center = styled.div
 
   ${({ isTextCentered }) => isTextCentered && `text-align: center;`};
 `;
-
-Center.defaultProps = {
-  gutters: SpaceSizes.none,
-  areChildrenCentered: false,
-  isTextCentered: false,
-};
 
 export default Center;

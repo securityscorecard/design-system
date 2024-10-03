@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { H4 } from '../../../Heading';
 import { Paragraph } from '../../../Paragraph';
 import { TextSizes } from '../../../Text/Text.enums';

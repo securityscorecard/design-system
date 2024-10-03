@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { ReactComponentLike } from '../../types/utils.types';
 import { Placements } from '../Dropdown/Dropdown.types';
@@ -10,7 +10,7 @@ export interface TooltipPopupProps {
   style: React.CSSProperties;
 }
 export interface TooltipProps {
-  popup?: React.ReactNode;
+  popup?: ReactNode;
   className?: string;
   placement?: Placements;
   width?: 'auto' | number;

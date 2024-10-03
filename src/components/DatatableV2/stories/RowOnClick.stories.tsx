@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 

@@ -1,5 +1,5 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { type ReactElement, memo } from 'react';
 import { CellProps, Column } from 'react-table';
 import { Link as RouterLink } from 'react-router-dom';
 import { pipe, reduce, toPairs } from 'ramda';
@@ -31,7 +31,7 @@ export const simpleColumns: Column<Data>[] = [
     headerTooltip: <Text>Show status of the asset.</Text>,
     accessor: 'status',
     width: 96,
-    Cell: React.memo(({ value }: { value: string }): React.ReactElement => {
+    Cell: memo(({ value }: { value: string }): ReactElement => {
       switch (value) {
         case 'Removed':
         case 'Dynamic':
@@ -52,7 +52,7 @@ export const simpleColumns: Column<Data>[] = [
     Header: 'Domains',
     accessor: 'domainsCount',
     width: 96,
-    cellTooltipPopupComposer: (val: string, row: Data): React.ReactElement => (
+    cellTooltipPopupComposer: (val: string, row: Data): ReactElement => (
       <div>
         <div>{val}</div>
         <pre>
@@ -82,7 +82,7 @@ export const simpleColumns: Column<Data>[] = [
     width: 88,
     cellType: 'discreteLink',
     cellLinkComponent: 'button',
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
     cellOnClick: action('onCellValueClick (issuesCount)'),
   },
   {
@@ -93,7 +93,7 @@ export const simpleColumns: Column<Data>[] = [
     cellLinkComponent: RouterLink,
     cellToComposer: (val: string, row: Data): string =>
       `?value=${val}&${composeQuery(row)}`,
-    cellFormatter: abbreviateNumber,
+    cellFormatter: (val) => abbreviateNumber(val),
   },
   {
     Header: 'First observed',
@@ -126,7 +126,7 @@ export const simpleColumns: Column<Data>[] = [
       row: {
         original: { observationDate, lastObservationDate },
       },
-    }: CellProps<Data>): React.ReactElement => {
+    }: CellProps<Data>): ReactElement => {
       dayjs.extend(relativeTime);
 
       return (

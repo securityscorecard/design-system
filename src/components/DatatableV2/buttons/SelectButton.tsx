@@ -1,12 +1,9 @@
-import React, {
-  ChangeEvent,
-  ComponentProps,
-  ComponentPropsWithoutRef,
-} from 'react';
+import { ChangeEvent, ComponentProps, ComponentPropsWithoutRef } from 'react';
 import clx from 'classnames';
 
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
 import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
+import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const selectRowHandler =
   <D,>({ row, table }: { row: DatatableRow<D>; table: DatatableInstance<D> }) =>
@@ -65,6 +62,7 @@ const SelectButton = <D,>({
     options: { enableMultiRowSelection, selectAllMode },
   } = table;
   const { isLoading } = getState();
+  const { t } = useSafeTranslation();
 
   const allRowsSelected =
     selectAllMode === 'all'
@@ -74,7 +72,9 @@ const SelectButton = <D,>({
   const common: ComponentProps<'input'> = {
     checked: isHeaderCheckbox ? allRowsSelected : row?.getIsSelected(),
     disabled: isLoading || (row && !row?.getCanSelect()),
-    'aria-label': isHeaderCheckbox ? 'Toggle select all' : 'Toggle select row',
+    'aria-label': isHeaderCheckbox
+      ? t('sscds|datatable.selection.toggleAll')
+      : t('sscds|datatable.selection.toggleRow'),
     onChange: (e) => {
       e.stopPropagation();
 

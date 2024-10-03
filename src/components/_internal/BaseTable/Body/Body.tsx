@@ -1,4 +1,3 @@
-import React from 'react';
 import { isNotUndefined, isOdd } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -9,7 +8,7 @@ function Body<D extends Record<string, unknown>>({
   rows,
   prepareRow,
   ...bodyProps
-}: BodyProps<D>): React.ReactElement {
+}: BodyProps<D>) {
   return (
     <tbody {...bodyProps}>
       {rows.map((row, index) => {

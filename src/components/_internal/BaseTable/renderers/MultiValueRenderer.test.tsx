@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity } from 'ramda';
 
@@ -139,7 +138,7 @@ describe('Datatable/MultiValueRenderer', () => {
         multiValueDisplayLimit={2}
         values={numericValues}
         rowData={rowData}
-        valueFormatter={abbreviateNumber}
+        valueFormatter={(val) => abbreviateNumber(val)}
       />,
     );
 

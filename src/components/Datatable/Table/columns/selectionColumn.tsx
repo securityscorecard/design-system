@@ -1,4 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import {
+  type ChangeEvent,
+  type MutableRefObject,
+  forwardRef,
+  useEffect,
+  useRef,
+} from 'react';
 import {
   CellProps,
   Column,
@@ -17,11 +23,11 @@ interface IndeterminateCheckbox extends TableToggleCommonProps {
   id: string;
   isDisabled?: boolean;
 }
-const IndeterminateCheckbox = React.forwardRef(
+const IndeterminateCheckbox = forwardRef(
   (
     { id, indeterminate, isDisabled = false, ...rest }: IndeterminateCheckbox,
-    ref: React.MutableRefObject<HTMLInputElement>,
-  ): React.ReactElement => {
+    ref: MutableRefObject<HTMLInputElement>,
+  ) => {
     const defaultRef = useRef<HTMLInputElement>();
     const resolvedRef = ref || defaultRef;
     useEffect(() => {
@@ -91,7 +97,7 @@ export function getSelectionColumn<
           {...row.getToggleRowSelectedProps({
             ...(!isMultiSelect
               ? {
-                  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                  onChange(e: ChangeEvent<HTMLInputElement>) {
                     dispatch({
                       type: actions.toggleSingleRowSelected,
                       id: row.id,

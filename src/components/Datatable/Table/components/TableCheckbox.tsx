@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { type MutableRefObject, forwardRef } from 'react';
 import cls from 'classnames';
 
 import * as checked from '../../../../theme/icons/check';
@@ -30,8 +30,8 @@ const TableCheckbox = forwardRef(
       style,
       ...props
     }: TableCheckboxProps,
-    ref: React.MutableRefObject<HTMLInputElement>,
-  ): React.ReactElement => (
+    ref: MutableRefObject<HTMLInputElement>,
+  ) => (
     <div className="ds-table-checkbox">
       <input
         ref={ref}

@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext } from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { ThemeProvider } from 'styled-components';
 import { mergeDeepRight } from 'ramda';
@@ -12,7 +12,7 @@ const defaultDSContext: DSContextValue = {
   hasIncludedGlobalStyles: true,
   debugMode: false,
 };
-export const DSContext = React.createContext<DSContextValue>(defaultDSContext);
+export const DSContext = createContext<DSContextValue>(defaultDSContext);
 
 const DSProvider = ({ children, theme = {}, config = {} }: DSProviderProps) => {
   const dsTheme = createTheme(theme);
