@@ -477,3 +477,24 @@ MultiSelectWithControlledValue.args = {
 MultiSelectWithControlledValue.parameters = {
   screenshot: { skip: true },
 };
+
+export const DarkMode: Story = (args) => <Select {...args} />;
+DarkMode.args = {
+  ...OptionsGroup.args,
+  isMenuPositionRelative: true,
+  isMulti: true,
+  defaultValue: [options[4]],
+  isClearable: true,
+  menuActions: [
+    {
+      label: 'Action A',
+      name: 'Action A',
+      onClick: action('click-action-a'),
+    },
+  ],
+};
+DarkMode.parameters = {
+  themes: {
+    themeOverride: 'Dark',
+  },
+};

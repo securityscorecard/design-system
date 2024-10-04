@@ -31,74 +31,69 @@ import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
 import { Icon } from '../../Icon';
 import { MenuActionArgs, Option as OptionType } from './Select.types';
 import { getPaddingSpace } from '../../../utils/space';
-import { getColor, getSpace, getToken, pxToRem } from '../../../utils';
+import { pxToRem } from '../../../utils';
 import { SpaceSizes } from '../../../theme';
 import { Spinner } from '../../Spinner';
 import PillWrapper from '../../Pill/PillWrapper';
 import PillLabel from '../../Pill/PillLabel';
 import PillRemoveButton from '../../Pill/PillRemoveButton';
 
-export const reactSelectTheme: (DSTheme: DefaultTheme) => ThemeConfig =
-  () => (selectTheme) => ({
-    ...selectTheme,
-    colors: {
-      primary: 'var(--sscds-primary-400)',
-      primary75: 'var(--sscds-primary-400)',
-      primary50: 'var(--sscds-primary-200)',
-      primary25: 'var(--sscds-primary-50)',
-      danger: 'var(--sscds-error-500)',
-      dangerLight: 'var(--sscds-error-50)',
-      neutral0: 'var(--sscds-neutral-0)',
-      neutral5: 'var(--sscds-neutral-100)',
-      neutral10: 'var(--sscds-neutral-200)',
-      neutral20: 'var(--sscds-neutral-300)',
-      neutral30: 'var(--sscds-neutral-400)',
-      neutral40: 'var(--sscds-neutral-500)',
-      neutral50: 'var(--sscds-neutral-600)',
-      neutral60: 'var(--sscds-neutral-700)',
-      neutral70: 'var(--sscds-neutral-800)',
-      neutral80: 'var(--sscds-neutral-900)',
-      neutral90: 'var(--sscds-neutral-1000)',
-    },
-    spacing: { ...selectTheme.spacing },
-  });
+export const reactSelectTheme: () => ThemeConfig = () => (selectTheme) => ({
+  ...selectTheme,
+  colors: {
+    primary: 'var(--sscds-color-primary-8)',
+    primary75: 'var(--sscds-color-primary-8)',
+    primary50: 'var(--sscds-color-primary-6)',
+    primary25: 'var(--sscds-color-primary-3)',
+    danger: 'var(--sscds-color-danger-800)',
+    dangerLight: 'var(--sscds-color-danger-050)',
+    neutral0: 'var(--sscds-color-neutral-0)',
+    neutral5: 'var(--sscds-color-neutral-2)',
+    neutral10: 'var(--sscds-color-neutral-3)',
+    neutral20: 'var(--sscds-color-neutral-4)',
+    neutral30: 'var(--sscds-color-neutral-7)',
+    neutral40: 'var(--sscds-color-neutral-8)',
+    neutral50: 'var(--sscds-color-neutral-9)',
+    neutral60: 'var(--sscds-color-neutral-10)',
+    neutral70: 'var(--sscds-color-neutral-11)',
+    neutral80: 'var(--sscds-color-neutral-12)',
+    neutral90: 'var(--sscds-color-neutral-13)',
+  },
+  spacing: { ...selectTheme.spacing },
+});
 
-const stateStyles = (color, width) => ({
+const stateStyles = (
+  color: `var(--sscds-${string})`,
+  width: `${string}px`,
+) => ({
   boxShadow: `inset 0 0 0 ${width} ${color}`,
 });
 
-const invalidStyles = (DSTheme) => ({
-  ...stateStyles(
-    DSTheme.forms.invalidBorderColor,
-    DSTheme.forms.statefulBorderWidth,
-  ),
-});
+const invalidStyles = {
+  ...stateStyles('var(--sscds-color-border-input-error)', '2px'),
+};
 
-const focusStyles = (DSTheme) => ({
-  ...stateStyles(
-    DSTheme.forms.focusBorderColor,
-    DSTheme.forms.statefulBorderWidth,
-  ),
-});
+const focusStyles = {
+  ...stateStyles('var(--sscds-color-border-input-focused)', '2px'),
+};
 
-const disabledStyles = (DSTheme) => ({
-  ...stateStyles(DSTheme.forms.disabledBorderColor, DSTheme.forms.borderWidth),
-  background: DSTheme.forms.disabledBgColor,
-});
+const disabledStyles = {
+  ...stateStyles('var(--sscds-color-border-input-disabled)', '1px'),
+  background: 'var(--sscds-color-background-input-disabled)',
+};
 
-const indicatorStyles = (DSTheme) => ({
+const indicatorStyles = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: DSTheme.forms.indicatorColor,
+  color: 'var(--sscds-color-icon-subtle)',
   cursor: 'pointer',
-  padding: `0rem ${pxToRem(18)}`,
-  height: pxToRem(34),
-  margin: pxToRem(1, 0),
+  width: '2rem',
+  height: '1.75rem',
   ':hover': {
-    color: DSTheme.forms.hoverIndicatorColor,
+    color: 'var(--sscds-color-icon-default)',
   },
-});
+};
 
 export const selectStyles: (
   DSTheme: DefaultTheme,
@@ -121,18 +116,17 @@ export const selectStyles: (
         alignItems: 'center',
         width: '100%',
         minHeight: DSTheme.forms.fieldHeight,
-        background: DSTheme.forms.bgColor,
-        boxShadow: `inset 0 0 0 ${DSTheme.forms.borderWidth} ${DSTheme.forms.borderColor}`,
-        borderRadius: DSTheme.radii.default,
-        color: DSTheme.forms.color,
-        fontSize: DSTheme.typography.size.md,
-        lineHeight: DSTheme.forms.fieldLineHeight,
+        background: 'var(--sscds-color-background-input-default)',
+        boxShadow: `inset 0 0 0 1px var(--sscds-color-border-input-default)`,
+        borderRadius: 'var(--sscds-radii-input)',
+        color: 'var(--sscds-color-text-default)',
+        fontSize: 'var(--sscds-font-size-body-md)',
+        lineHeight: 'var(--sscds-font-lineheight-body-md)',
         outline: 'none',
 
-        ...(isInvalid && invalidStyles(DSTheme)),
-        ...((isFocused || includes('focus', className)) &&
-          focusStyles(DSTheme)),
-        ...(isDisabled && disabledStyles(DSTheme)),
+        ...(isInvalid && invalidStyles),
+        ...((isFocused || includes('focus', className)) && focusStyles),
+        ...(isDisabled && disabledStyles),
       };
     },
     valueContainer: (styles, { selectProps: { isMulti, value } }) => {
@@ -140,13 +134,13 @@ export const selectStyles: (
         ...styles,
         display: 'flex',
         alignItems: 'center',
-        fontSize: DSTheme.typography.size.md,
-        lineHeight: DSTheme.typography.lineHeight.md,
-        padding: pxToRem(DSTheme.space.xs),
+        fontSize: 'var(--sscds-font-size-body-md)',
+        lineHeight: 'var(--sscds-font-lineheight-body-md)',
+        padding: 'var(--sscds-space-1x)',
         paddingLeft:
           isMulti && isNotNilOrEmpty(value)
             ? undefined
-            : pxToRem(DSTheme.space.md),
+            : 'var(--sscds-space-4x)',
       };
     },
     singleValue: assoc('margin', 0),
@@ -163,20 +157,22 @@ export const selectStyles: (
       display: 'flex',
       alignItems: 'center',
       '> div > input': {
-        fontFamily: DSTheme.typography.family.base,
-        lineHeight: DSTheme.forms.fieldLineHeight,
+        fontFamily: 'var(--sscds-font-family-body)',
+        lineHeight: 'var(--sscds-font-lineheight-body-md)',
       },
     }),
     placeholder: (_, { children }) => ({
-      color: DSTheme.forms.placeholderColor,
-      fontSize: DSTheme.typography.size.md,
-      lineHeight: DSTheme.typography.lineHeight.md,
+      color: 'var(--sscds-color-text-subtle)',
+      fontSize: 'var(--sscds-font-size-body-md)',
+      lineHeight: 'var(--sscds-font-lineheight-body-md)',
       display: isEmptyString(children) ? 'none' : 'block',
       position: 'absolute',
     }),
     indicatorsContainer: (styles) => ({
       ...styles,
       alignItems: 'flex-start',
+      padding: 'var(--sscds-space-1x)',
+      paddingLeft: 0,
     }),
     indicatorSeparator: (
       styles,
@@ -184,32 +180,33 @@ export const selectStyles: (
     ) => ({
       ...styles,
       display: (isClearable && hasValue) || isProcessing ? 'block' : 'none',
-      backgroundColor: DSTheme.colors.neutral[500],
-      margin: pxToRem(DSTheme.space.xs, 0),
+      backgroundColor: 'var(--sscds-color-border-default)',
+      height: 'calc(100% - var(--sscds-space-2x))',
+      margin: 'var(--sscds-space-1x) 0',
     }),
-    dropdownIndicator: () => ({
-      ...indicatorStyles(DSTheme),
-    }),
+    dropdownIndicator: () => indicatorStyles,
     clearIndicator: (_, { selectProps: { isProcessing } }) => ({
-      ...indicatorStyles(DSTheme),
+      ...indicatorStyles,
       display: isProcessing ? 'none' : 'flex',
       ':hover': {
-        color: DSTheme.colors.error[500],
+        color: 'var(--sscds-color-text-danger)',
         backgroundColor: 'transparent',
       },
       ':focus': {
-        color: DSTheme.colors.error[500],
+        color: 'var(--sscds-color-text-danger)',
       },
     }),
     menu: (styles, { selectProps: { isMenuPositionRelative } }) => ({
       ...styles,
       ...(isMenuPositionRelative ? { position: 'relative' } : {}),
-      border: `1px solid ${DSTheme.colors.neutral[300]}`,
-      boxShadow: `0px 1px 4px var(--sscds-slateA-slateA6)`,
-      marginBottom: pxToRem(DSTheme.space.xs),
-      marginTop: pxToRem(DSTheme.space.xs),
-      paddingTop: pxToRem(DSTheme.space.sm),
-      paddingBottom: pxToRem(DSTheme.space.sm),
+      backgroundColor: 'var(--sscds-color-background-surface-default)',
+      border: `1px solid var(--sscds-color-border-surface-default)`,
+      borderRadius: 'var(--sscds-radii-surface-md)',
+      boxShadow: 'var(--sscds-shadow-1x)',
+      marginBottom: 'var(--sscds-space-1x)',
+      marginTop: 'var(--sscds-space-1x)',
+      paddingTop: 'var(--sscds-space-2x)',
+      paddingBottom: 'var(--sscds-space-2x)',
     }),
     menuList: (styles) => ({
       ...styles,
@@ -218,33 +215,32 @@ export const selectStyles: (
     option: (styles, { isDisabled, isSelected, isFocused }) => ({
       ...styles,
       backgroundColor: isSelected
-        ? DSTheme.colors.neutral[300]
+        ? 'var(--sscds-color-background-selectable-active)'
         : isFocused
-        ? DSTheme.colors.primary[50]
+        ? 'var(--sscds-color-background-selectable-hover)'
         : 'transparent',
-      color: isDisabled ? DSTheme.colors.neutral[600] : DSTheme.forms.color,
-      fontSize: DSTheme.typography.size.md,
-      lineHeight: DSTheme.typography.lineHeight.md,
+      color: isDisabled
+        ? 'var(--sscds-color-text-disabled)'
+        : 'var(--sscds-color-text-default)',
+      fontSize: 'var(--sscds-font-size-body-md)',
+      lineHeight: 'var(--sscds-font-lineheight-body-md)',
       padding: menuItemPadding,
       ':active': {
         ...styles[':active'],
-        backgroundColor: DSTheme.colors.primary[200],
+        backgroundColor: 'var(--sscds-color-background-selectable-active)',
       },
     }),
-    group: (styles, { isMulti }) => ({
+    group: (styles) => ({
       ...styles,
       padding: 0,
-      marginTop: pxToRem(DSTheme.space.sm),
-      '[class$="-option"]': {
-        paddingLeft: !isMulti && pxToRem(DSTheme.space.mdPlus),
-      },
+      marginTop: 'var(--sscds-space-2x)',
     }),
     groupHeading: (styles) => ({
       ...styles,
-      fontWeight: DSTheme.typography.weight.bold,
-      color: DSTheme.colors.neutral[900],
-      fontSize: DSTheme.typography.size.md,
-      lineHeight: DSTheme.typography.lineHeight.md,
+      fontWeight: 'var(--sscds-font-weight-body-strong)',
+      color: 'var(--sscds-color-text-default)',
+      fontSize: 'var(--sscds-font-size-body-md)',
+      lineHeight: 'var(--sscds-font-lineheight-body-md)',
       textTransform: 'none',
       margin: 0,
       padding: menuItemPadding,
@@ -252,9 +248,9 @@ export const selectStyles: (
     noOptionsMessage: (styles) => ({
       ...styles,
       padding: menuItemPadding,
-      fontSize: DSTheme.typography.size.md,
-      lineHeight: DSTheme.typography.lineHeight.md,
-      color: DSTheme.forms.disabledActiveColor,
+      fontSize: 'var(--sscds-font-size-body-md)',
+      lineHeight: 'var(--sscds-font-lineheight-body-md)',
+      color: 'var(--sscds-color-text-subtle)',
       textAlign: 'left',
     }),
   };
@@ -321,9 +317,9 @@ export const MultiValueRemove: ComponentType<{
 );
 
 const ActionsMenu = styled.div`
-  margin-top: ${getSpace(SpaceSizes.sm)};
-  border-top: 1px solid ${getColor('neutral.300')};
-  padding-top: ${getSpace(SpaceSizes.sm)};
+  margin-top: var(--sscds-space-2x);
+  border-top: 1px solid var(--sscds-color-border-surface-default);
+  padding-top: var(--sscds-space-2x);
 `;
 
 const SelectActionButton = styled(Button)`
@@ -418,21 +414,9 @@ export const ValueContainer = (props) => {
   return <components.ValueContainer {...props} />;
 };
 
-const CreateNewOption = styled.div.attrs<{ variant: 'text'; color: 'primary' }>(
-  () => ({
-    variant: 'text',
-    color: 'primary',
-  }),
-)`
+const CreateNewOption = styled.div`
   cursor: pointer;
-  color: ${getToken('color-action-primary')};
-
-  &:hover {
-    color: ${getToken('color-action-primary-hover')};
-  }
-  &:active {
-    color: ${getToken('color-action-primary-active')};
-  }
+  color: var(--sscds-color-text-action);
 `;
 
 const StyledCheckbox = styled(Checkbox)`
@@ -502,7 +486,7 @@ export const IndicatorsContainer: ComponentType<
           borderWidth={2}
           height={16}
           horizontalMargin={16}
-          verticalMargin={10}
+          verticalMargin={6}
           width={16}
           dark
         />

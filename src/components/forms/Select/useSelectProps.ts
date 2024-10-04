@@ -70,7 +70,7 @@ export const useSelectProps = <IsMulti extends boolean>({
     options: sortedOptions,
     placeholder,
     styles: selectStyles(DSTheme),
-    theme: reactSelectTheme(DSTheme),
+    theme: reactSelectTheme(),
     classNamePrefix: 'ssc',
     maxVisibleItem,
     maxPillLabelLength,
