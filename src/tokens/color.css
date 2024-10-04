@@ -236,7 +236,7 @@
   --sscds-color-background-surface-default: var(--sscds-color-neutral-0);
   --sscds-color-background-surface-dynamic: var(--sscds-color-neutral-alpha-2);
   --sscds-color-background-surface-none: var(--sscds-color-clear);
-  --sscds-color-background-surface-hover: var(--sscds-color-neutral-2)
+  --sscds-color-background-surface-hover: var(--sscds-color-neutral-2);
 
   --sscds-color-background-input-default: var(--sscds-color-neutral-0);
   --sscds-color-background-input-hover: var(--sscds-color-neutral-0);
@@ -279,6 +279,9 @@
   --sscds-color-background-action-danger-ghost-active: var(--sscds-color-background-action-ghost-active);
   --sscds-color-background-action-danger-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
 
+  --sscds-color-background-selectable-hover: var(--sscds-color-neutral-3);
+  --sscds-color-background-selectable-active: var(--sscds-color-primary-3);
+
   --sscds-color-background-pill-blue-default: var(--blue-3);
   --sscds-color-background-pill-blue-hover: var(--blue-4);
   --sscds-color-background-pill-turquoise-default: var(--cyan-3);
@@ -312,9 +315,9 @@
   --sscds-color-border-surface-dynamic: var(--sscds-color-neutral-alpha-5);
   --sscds-color-border-surface-none: var(--sscds-color-clear);
   --sscds-color-border-surface-hover: var(--sscds-color-neutral-8);
-  --sscds-color-border-surface-active: var(--sscds-color-border-action-focused)
+  --sscds-color-border-surface-active: var(--sscds-color-border-action-focused);
 
-  --sscds-color-border-input-default: var(--sscds-color-neutral-8);
+  --sscds-color-border-input-default: var(--sscds-color-neutral-7); /* change to 8 when input fields get tokenized */
   --sscds-color-border-input-hover: var(--sscds-color-neutral-8);
   --sscds-color-border-input-focused: var(--indigo-9);
   --sscds-color-border-input-disabled: var(--sscds-color-neutral-8);

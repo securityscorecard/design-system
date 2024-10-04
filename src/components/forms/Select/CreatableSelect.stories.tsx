@@ -202,3 +202,13 @@ export const AsyncSelect: StoryFn<CreatableSelectProps<false>> = () => {
 AsyncSelect.parameters = {
   screenshot: { skip: true },
 };
+
+export const DarkMode = CreatableSelectTemplate.bind({});
+DarkMode.args = {
+  ...Playground.args,
+};
+DarkMode.parameters = {
+  themes: {
+    themeOverride: 'Dark',
+  },
+};
