@@ -161,7 +161,7 @@ const TableRoot = styled.div`
   }
 
   .ds-table-body-cell {
-    align-items: flex-start;
+    align-items: center;
   }
 
   .ds-table-body-cell:has([data-radix-popper-content-wrapper]) {
