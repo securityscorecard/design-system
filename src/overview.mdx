@@ -371,7 +371,9 @@ export const StickerList = () => {
         <StickerModalItem />
       </StickerItem>
       <StickerItem id="components-badge--playground" title="Badge">
-        <Badge count={25} />
+        <Badge variant="dot" isVisible>
+          <Button>Notifications</Button>
+        </Badge>
       </StickerItem>
       <StickerItem id="components-banner--playground" title="Banner">
         <Banner variant="info">Info Banner</Banner>

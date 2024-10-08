@@ -7,7 +7,7 @@ export type Sizes = 'sm' | 'md';
 
 export type ChipLabelProps = {
   /** String label of the chip */
-  children: string;
+  children: string | number;
   /** Font weight. When true ChipLabel will be rendered as bold */
   isStrong?: boolean;
 };

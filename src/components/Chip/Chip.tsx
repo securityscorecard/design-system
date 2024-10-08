@@ -1,18 +1,23 @@
-import { type CSSProperties, useMemo } from 'react';
+import { type CSSProperties, ComponentPropsWithoutRef, useMemo } from 'react';
 
 import { Inline } from '../layout';
 import { ChipProps } from './types';
 import { ChipRoot } from './components';
 import { getCommonChipStyles } from './utils';
 
-function Chip({ children, size = 'sm', color = 'gray' }: ChipProps) {
+function Chip({
+  children,
+  size = 'sm',
+  color = 'gray',
+  ...props
+}: ChipProps & ComponentPropsWithoutRef<'div'>) {
   const chipStyles = useMemo<CSSProperties>(
     () => getCommonChipStyles({ size, color }),
     [size, color],
   );
 
   return (
-    <ChipRoot style={chipStyles}>
+    <ChipRoot {...props} style={{ ...props.style, ...chipStyles }}>
       <Inline align="center" gap="1x">
         {children}
       </Inline>

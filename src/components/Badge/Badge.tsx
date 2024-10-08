@@ -1,64 +1,98 @@
-import { defaultWhen } from 'ramda-adjunct';
-import { lte, pipe } from 'ramda';
-import styled, { css } from 'styled-components';
+import type { ReactNode } from 'react';
+import styled from 'styled-components';
 
-import type { BadgeElementProps, BadgeProps } from './Badge.types';
-import { BadgeVariants } from './Badge.enums';
-import { CLX_COMPONENT } from '../../theme/constants';
-
-const BadgeNeutral = css`
-  background-color: var(--sscds-color-neutral-4);
-  color: var(--sscds-color-text-default);
-`;
-const BadgeSuccess = css`
-  background-color: var(--sscds-color-success-500);
-  color: var(--sscds-color-text-white);
-`;
-const BadgeInfo = css`
-  background-color: var(--sscds-color-info-500);
-  color: var(--sscds-color-text-white);
-`;
-const BadgeWarn = css`
-  background-color: var(--sscds-color-warning-500);
-  color: var(--sscds-color-text-black);
-`;
-const BadgeError = css`
-  background-color: var(--sscds-color-danger-500);
-  color: var(--sscds-color-text-white);
-`;
-
-const badgeVariants = {
-  [BadgeVariants.neutral]: BadgeNeutral,
-  [BadgeVariants.success]: BadgeSuccess,
-  [BadgeVariants.info]: BadgeInfo,
-  [BadgeVariants.warn]: BadgeWarn,
-  [BadgeVariants.error]: BadgeError,
+type DotBadgeProps = {
+  variant: 'dot';
+  /** Controls visibility of Badge in `dot` variant. */
+  isVisible: boolean;
 };
 
-const BadgeElement = styled.div<BadgeElementProps>`
-  display: inline-block;
-  min-width: 1.5rem;
-  padding: 0 var(--sscds-space-2x);
-  border-radius: var(--sscds-radii-rounded);
-  font-size: var(--sscds-font-size-elementlabel-sm);
-  font-weight: var(--sscds-font-weight-elementlabel-default);
-  text-align: center;
-  ${({ $variant }) => badgeVariants[$variant]};
-  line-height: var(--sscds-font-lineheight-elementlabel);
+type StandardBadgeProps = {
+  /**
+   * Badge visual variant. If set to `standard` the `count` property is required.
+   * If set to `dot` the `isVisible` property is required.
+   */
+  variant?: 'standard';
+  /** Set the badge count in the `standard` variant */
+  count: number;
+};
+
+export type BadgeProps = (DotBadgeProps | StandardBadgeProps) & {
+  children: ReactNode;
+};
+
+const BadgeRoot = styled.span`
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
 `;
 
-const normalizeCount = pipe(defaultWhen(lte(100), '99+'));
+const BadgeDot = styled.span`
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--sscds-color-danger-500);
+  border-radius: var(--sscds-radii-circle);
 
-const Badge = ({ count, variant = 'error' }: BadgeProps) => {
-  if (typeof count === 'undefined') {
-    return null;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(30%, -30%);
+`;
+const BadgeCount = styled.span`
+  display: grid;
+  place-content: center;
+  min-width: 1rem;
+  height: 1rem;
+  background-color: var(--sscds-color-danger-600);
+  border-radius: var(--sscds-radii-rounded);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+
+  padding-inline: var(--sscds-space-1x);
+
+  color: var(--sscds-color-text-inverse);
+  font-size: var(--sscds-font-size-body-sm);
+  font-weight: var(--sscds-font-weight-body-strong);
+  line-height: 1;
+`;
+
+const normalizeCount = (count: number) => {
+  if (count >= 100) {
+    return '99+';
+  }
+  return count;
+};
+
+/* eslint-disable react/destructuring-assignment */
+/**
+ * Discriminated unions doesn't work on destructured props. We need to disable the rule to make
+ * TypeScript correctly narrow type based on the `variant` property.
+ */
+function Badge(props: BadgeProps) {
+  if (props.variant === 'dot') {
+    return (
+      <BadgeRoot>
+        {props.children}
+        {props.isVisible && <BadgeDot />}
+      </BadgeRoot>
+    );
   }
 
   return (
-    <BadgeElement $variant={variant} className={CLX_COMPONENT}>
-      <span>{normalizeCount(count)}</span>
-    </BadgeElement>
+    <BadgeRoot>
+      {props.children}
+      {props.count > 0 && (
+        <BadgeCount>{normalizeCount(props.count)}</BadgeCount>
+      )}
+    </BadgeRoot>
   );
-};
+}
+/* eslint-enable react/destructuring-assignment */
+
+Badge.displayName = 'Badge';
 
 export default Badge;
