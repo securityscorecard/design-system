@@ -21,10 +21,8 @@ export const useDisplayColumns = <D,>(
           tableOptions.enableExpanding && {
             id: displayColumnIds.expand,
             header: '',
-            headerComponent: tableOptions.enableExpandAll
-              ? ExpandAllButton
-              : null,
-            cell: ExpandButton,
+            headerComponent: (props) => <ExpandAllButton {...props} />,
+            cell: (props) => <ExpandButton {...props} />,
             size: 56,
             ...tableOptions.defaultDisplayColumn,
           },
@@ -59,7 +57,6 @@ export const useDisplayColumns = <D,>(
       ).filter(Boolean),
     [
       tableOptions.enableExpanding,
-      tableOptions.enableExpandAll,
       tableOptions.enableRowSelection,
       tableOptions.enableSelectAll,
       tableOptions.enableMultiRowSelection,
