@@ -1,8 +1,8 @@
 import Button from '../../../ButtonV2/Button';
-import { Badge } from '../../../Badge';
-import { Pill } from '../../../Pill';
 import { Inline } from '../../../layout';
 import { ControlButtonProps } from './ControlButton.types';
+import Chip from '../../../Chip/Chip';
+import ChipLabel from '../../../Chip/ChipLabel';
 
 const ControlButton = ({
   label,
@@ -22,9 +22,16 @@ const ControlButton = ({
     >
       {label}
     </Button>
-    {appliedFilters > 0 && <Badge count={appliedFilters} variant="neutral" />}
+    {appliedFilters > 0 && (
+      <Chip color="gray">
+        <ChipLabel isStrong>{appliedFilters}</ChipLabel>
+      </Chip>
+    )}
     {hiddenColumns > 0 && (
-      <Pill color="gray" label={`${hiddenColumns} hidden`} />
+      <Chip color="gray">
+        <ChipLabel isStrong>{hiddenColumns}</ChipLabel>
+        <ChipLabel>hidden</ChipLabel>
+      </Chip>
     )}
   </Inline>
 );
