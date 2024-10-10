@@ -3,16 +3,18 @@ import IconButton from '../../ButtonV2/IconButton';
 import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 
 const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
+  const { t } = useSafeTranslation();
   const {
     getIsSomeRowsExpanded,
     getState,
-    options: { renderDetailPanel },
+    options: { renderDetailPanel, enableExpandAll },
     toggleAllRowsExpanded,
   } = table;
 
   const { isLoading } = getState();
   const areSomeRowsExpanded = getIsSomeRowsExpanded();
-  const { t } = useSafeTranslation();
+
+  if (!enableExpandAll) return null;
 
   return (
     <IconButton

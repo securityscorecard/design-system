@@ -9,6 +9,7 @@ const ExpandButton = <D,>({
   table: DatatableInstance<D>;
   row: DatatableRow<D>;
 }) => {
+  const { t } = useSafeTranslation();
   const {
     options: { renderDetailPanel },
   } = table;
@@ -16,7 +17,6 @@ const ExpandButton = <D,>({
 
   const canExpand = getCanExpand();
   const isExpanded = getIsExpanded();
-  const { t } = useSafeTranslation();
 
   return (
     <IconButton

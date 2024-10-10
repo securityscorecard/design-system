@@ -103,7 +103,7 @@ const HeaderCell = <D,>({
             <HeaderCellResizeHandler header={header} table={table} />
           )}
         </Inline>
-      ) : Object.values(displayColumnIds).indexOf(columnDef.id) > 0 ? (
+      ) : Object.values(displayColumnIds).includes(columnDef.id) ? (
         <Inline align="center" justify="center">
           {headerElement}
         </Inline>
