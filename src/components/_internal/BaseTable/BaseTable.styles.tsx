@@ -170,8 +170,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
       flex: 0 0 ${getRemToggleSize};
       height: ${getRemToggleSize};
       width: ${getRemToggleSize};
-      border: ${getFormStyle('borderWidth')} solid
-        ${getFormStyle('borderColor')};
+      border: 1px solid ${getFormStyle('borderColor')};
       border-radius: ${getRadii('default')};
       background: ${getColor('neutral.0')};
       padding: ${pxToRem(3)};

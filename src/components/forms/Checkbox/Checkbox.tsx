@@ -6,7 +6,7 @@ import cls from 'classnames';
 
 import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
-import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
+import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
@@ -30,9 +30,9 @@ const Box = styled.div`
   flex: 0 0 ${getRemToggleSize};
   height: ${getRemToggleSize};
   width: ${getRemToggleSize};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+  border: 1px solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
-  background: ${getColor('neutral.0')};
+  background: ${getFormStyle('bgColor')};
   padding: ${pxToRem(3)};
 `;
 
@@ -94,8 +94,7 @@ const CheckboxInput = styled.input<TogglingInputProps>`
     isInvalid &&
     css`
       & + ${Box}, &:checked + ${Box} {
-        border: ${getFormStyle('statefulBorderWidth')} solid
-          ${getFormStyle('invalidBorderColor')};
+        border: 2px solid ${getFormStyle('invalidBorderColor')};
       }
     `}
 `;

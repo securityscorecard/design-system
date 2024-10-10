@@ -19,7 +19,7 @@ import ButtonV2 from '../../ButtonV2/Button';
 import IconButton from '../../ButtonV2/IconButton';
 
 const InputGroupContainer = styled(Inline)<InputGroupProps>`
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+  border: 1px solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
 
   .ssc__control {
@@ -39,9 +39,7 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
   & > * {
     ${(props) =>
       props.hasDivider &&
-      `border-right: ${getFormStyle('borderWidth')(props)} solid ${getFormStyle(
-        'borderColor',
-      )(props)};`}
+      `border-right: 1px solid ${getFormStyle('borderColor')(props)};`}
   }
   & > *:first-child {
     border-radius: ${getRadii('default')} 0 0 ${getRadii('default')} !important;

@@ -89,7 +89,7 @@ const indicatorStyles = {
   color: 'var(--sscds-color-icon-subtle)',
   cursor: 'pointer',
   width: '2rem',
-  height: '1.75rem',
+  height: '2rem',
   ':hover': {
     color: 'var(--sscds-color-icon-default)',
   },

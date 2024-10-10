@@ -8,7 +8,8 @@ export const datePickerStyles = css`
     height: ${getFormStyle('fieldHeight')};
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
-    border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+    border: 0 none transparent;
+    box-shadow: 0 0 0 1px ${getFormStyle('borderColor')};
     border-radius: ${getRadii('default')};
     color: ${getFormStyle('color')};
     font-size: var(--sscds-font-size-body-md);
@@ -16,10 +17,8 @@ export const datePickerStyles = css`
     font-weight: var(--sscds-font-weight-body-default);
   }
   .DateRangePicker-input:focus {
-    border: ${getFormStyle('statefulBorderWidth')} solid
-      ${getFormStyle('focusBorderColor')};
+    box-shadow: 0 0 0 2px ${getFormStyle('focusBorderColor')};
     outline: none;
-    padding: ${pxToRem(3, 15)};
   }
   .DateRangePicker-input::placeholder,
   .DateRangePicker-input::-webkit-input-placeholder {

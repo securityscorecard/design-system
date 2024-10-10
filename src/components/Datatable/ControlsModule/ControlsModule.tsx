@@ -261,6 +261,7 @@ function ControlsModule<D extends Record<string, unknown>>({
               onClear={handleOnSearchClear}
               onSearch={handleOnSearch}
               {...restSearchConfig}
+              style={{ height: '2.25rem' }}
             />
           )}
         </Inline>

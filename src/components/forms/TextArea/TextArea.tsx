@@ -71,9 +71,8 @@ const TextareaStyled = styled.textarea<TextareaStyledProps>`
 
 const TextareaRoot = styled(Padbox)<TextareaRootProps>`
   position: relative;
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
-  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('bgColor')};
+  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('borderColor')};
   color: ${getFormStyle('color')};
   cursor: text;
   background-color: ${getColor('neutral.0')};
@@ -87,20 +86,17 @@ const TextareaRoot = styled(Padbox)<TextareaRootProps>`
     $isDisabled &&
     css`
       background: ${getFormStyle('disabledBgColor')};
-      border-color: ${getFormStyle('disabledBorderColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBgColor')};
+      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBorderColor')};
     `};
   ${({ $isInvalid }) =>
     $isInvalid &&
     css`
-      border-color: ${getFormStyle('invalidBorderColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
+      box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')};
     `};
 
   &:focus-within {
     outline: none;
-    border-color: ${getFormStyle('focusBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0px 0px 0px 2px ${getFormStyle('focusBorderColor')};
   }
 `;
 

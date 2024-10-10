@@ -24,7 +24,8 @@ const Input = styled.input.attrs<InputProps>(
       theme,
     })};
   background: ${getFormStyle('bgColor')};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('borderColor')};
+  border: 0 transparent none;
   border-radius: ${getRadii('default')};
   color: ${getFormStyle('color')};
   font-family: var(--sscds-font-family-body);
@@ -35,14 +36,12 @@ const Input = styled.input.attrs<InputProps>(
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      border-color: ${getFormStyle('invalidBorderColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
+      box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')};
     `}
 
   &:focus,
   &.focus {
-    border-color: ${getFormStyle('focusBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0px 0px 0px 2px ${getFormStyle('focusBorderColor')};
   }
 
   &:disabled {

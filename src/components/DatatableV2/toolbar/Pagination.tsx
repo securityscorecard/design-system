@@ -22,7 +22,7 @@ const Select = styled.select`
   border: 1px solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
   color: ${getFormStyle('color')};
-  height: ${getFormStyle('fieldHeight')};
+  height: 2rem;
 `;
 
 const Pagination = <D,>({ table }: { table: DatatableInstance<D> }) => {
