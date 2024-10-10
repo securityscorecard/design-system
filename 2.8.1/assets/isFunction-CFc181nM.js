@@ -1,0 +1,2 @@
+import{_ as e,x as o,r as p,m as a,Y as m,b as t,L as i,M as u}from"./index-DxUWnzkt.js";import{p as l}from"./prop-DvyrXmKl.js";var y=e(function(n,r){return r>n?r:n}),f=e(function(n,r){return o(l(n),r)}),v=p(function(n){return a(m(y,0,f("length",n)),function(){for(var r=0,c=n.length;r<c;){if(n[r].apply(this,arguments))return!0;r+=1}return!1})}),F=a(1,t(u,i("GeneratorFunction"))),x=a(1,t(u,i("AsyncFunction"))),_=v([t(u,i("Function")),F,x]);export{_ as i,y as m,f as p};
+//# sourceMappingURL=isFunction-CFc181nM.js.map
