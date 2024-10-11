@@ -48,7 +48,7 @@ const Control = styled.div<ValueContainerProps>`
   justify-content: center;
   min-height: ${getFormStyle('fieldHeight')};
   background: ${getFormStyle('bgColor')};
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-radii-input);
   box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
 
   &:focus-within,

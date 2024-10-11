@@ -128,7 +128,6 @@ export const CheckboxWithLabelAsComponent: StoryFn = () => (
     checkboxId="disabledCheckbox"
     label={<Text>{textExample}</Text>}
     name="disabledCheckbox"
-    isDisabled
   />
 );
 
@@ -142,6 +141,5 @@ export const CheckboxWithLabelAsComponentWithIcon: StoryFn = () => (
       </Inline>
     }
     name="disabledCheckbox"
-    isDisabled
   />
 );

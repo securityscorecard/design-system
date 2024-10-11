@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { abbreviateNumber, getFormStyle, getRadii } from '../../../utils';
+import { abbreviateNumber, getFormStyle } from '../../../utils';
 import { Inline, Padbox } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import { useContainerQuery } from '../../../hooks/useContainerQuery';
@@ -20,7 +20,7 @@ const cq = {
 
 const Select = styled.select`
   border: 1px solid ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-radii-input);
   color: ${getFormStyle('color')};
   height: 2rem;
 `;

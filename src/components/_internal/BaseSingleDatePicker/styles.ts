@@ -9,15 +9,15 @@ export const datePickerStyles = css`
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
     border: 0 none transparent;
-    box-shadow: 0 0 0 1px ${getFormStyle('borderColor')};
-    border-radius: ${getRadii('default')};
+    box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
+    border-radius: var(--sscds-radii-input);
     color: ${getFormStyle('color')};
     font-size: var(--sscds-font-size-body-md);
     line-height: var(--sscds-font-lineheight-body-md);
     font-weight: var(--sscds-font-weight-body-default);
   }
   .DateRangePicker-input:focus {
-    box-shadow: 0 0 0 2px ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0 0 0 2px ${getFormStyle('focusBorderColor')};
     outline: none;
   }
   .DateRangePicker-input::placeholder,

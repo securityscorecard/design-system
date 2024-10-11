@@ -3,13 +3,7 @@ import styled, { css } from 'styled-components';
 import cls from 'classnames';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import {
-  getColor,
-  getFormStyle,
-  getRadii,
-  getSpace,
-  pxToRem,
-} from '../../../utils';
+import { getFormStyle, getSpace, pxToRem } from '../../../utils';
 import { Padbox } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useAutosize } from './hooks/useAutosize';
@@ -71,11 +65,11 @@ const TextareaStyled = styled.textarea<TextareaStyledProps>`
 
 const TextareaRoot = styled(Padbox)<TextareaRootProps>`
   position: relative;
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-radii-input);
   box-shadow: inset 0px 0px 0px 1px ${getFormStyle('borderColor')};
   color: ${getFormStyle('color')};
   cursor: text;
-  background-color: ${getColor('neutral.0')};
+  background-color: ${getFormStyle('bgColor')};
 
   ${({ $hasMaxLength }) =>
     $hasMaxLength &&

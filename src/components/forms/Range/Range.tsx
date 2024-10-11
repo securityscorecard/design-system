@@ -66,7 +66,7 @@ const RangeInput = styled.input<RangeInputProps>`
     height: ${pxToRem(20)};
     border-radius: 50%;
     border: 2px solid ${getFormStyle('focusBorderColor')};
-    background: ${getFormStyle('bgColor')};
+    background: var(--sscds-color-neutral-0);
     cursor: pointer;
     :hover {
       box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;

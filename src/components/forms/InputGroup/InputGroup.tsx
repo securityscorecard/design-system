@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { prop } from 'ramda';
 import cls from 'classnames';
 
-import { getFormStyle, getRadii } from '../../../utils';
+import { getFormStyle } from '../../../utils';
 import { Input } from '../Input';
 import { Password } from '../Password';
 import { Select } from '../Select';
@@ -19,8 +19,9 @@ import ButtonV2 from '../../ButtonV2/Button';
 import IconButton from '../../ButtonV2/IconButton';
 
 const InputGroupContainer = styled(Inline)<InputGroupProps>`
-  border: 1px solid ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
+  background-color: ${getFormStyle('bgColor')};
+  box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
+  border-radius: var(--sscds-radii-input);
 
   .ssc__control {
     border: 0px;
@@ -35,6 +36,7 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
     border: none;
     box-shadow: none;
     border-radius: 0px;
+    background-color: transparent;
   }
   & > * {
     ${(props) =>
@@ -42,13 +44,13 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
       `border-right: 1px solid ${getFormStyle('borderColor')(props)};`}
   }
   & > *:first-child {
-    border-radius: ${getRadii('default')} 0 0 ${getRadii('default')} !important;
+    border-radius: var(--sscds-radii-input) 0 0 var(--sscds-radii-input) !important;
   }
   & > *:last-child,
   & > *:last-child input[type='password'],
   & > *:last-child input[type='search'] {
     border-right: 0px !important;
-    border-radius: 0 ${getRadii('default')} ${getRadii('default')} 0 !important;
+    border-radius: 0 var(--sscds-radii-input) var(--sscds-radii-input) 0 !important;
   }
 `;
 
