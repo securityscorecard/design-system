@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { prop } from 'ramda';
 import cls from 'classnames';
 
-import { getFormStyle, getRadii } from '../../../utils';
+import { getFormStyle } from '../../../utils';
 import { Input } from '../Input';
 import { Password } from '../Password';
 import { Select } from '../Select';
@@ -11,7 +11,6 @@ import { Icon } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
 import { InputGroupProps } from './InputGroup.types';
 import { InlineProps } from '../../layout/Inline/Inline';
-import { Button } from '../../Button';
 import { SearchBar } from '../SearchBar';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
@@ -19,8 +18,14 @@ import ButtonV2 from '../../ButtonV2/Button';
 import IconButton from '../../ButtonV2/IconButton';
 
 const InputGroupContainer = styled(Inline)<InputGroupProps>`
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
+  background-color: ${getFormStyle('bgColor')};
+  box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
+  border-radius: var(--sscds-radii-input);
+
+  &:hover {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
 
   .ssc__control {
     border: 0px;
@@ -30,27 +35,31 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
     border: none;
     border-radius: 0px;
   }
-  & > *,
+  & > *:not(.sscds-buttonv2),
   input:not([id^='react-select']) {
     border: none;
     box-shadow: none;
     border-radius: 0px;
+    background-color: transparent;
+
+    &:hover {
+      box-shadow: none;
+      background: transparent;
+    }
   }
-  & > * {
+  & > *:not(.sscds-buttonv2) {
     ${(props) =>
       props.hasDivider &&
-      `border-right: ${getFormStyle('borderWidth')(props)} solid ${getFormStyle(
-        'borderColor',
-      )(props)};`}
+      `border-right: 1px solid ${getFormStyle('borderColor')(props)};`}
   }
   & > *:first-child {
-    border-radius: ${getRadii('default')} 0 0 ${getRadii('default')} !important;
+    border-radius: var(--sscds-radii-input) 0 0 var(--sscds-radii-input) !important;
   }
   & > *:last-child,
   & > *:last-child input[type='password'],
   & > *:last-child input[type='search'] {
     border-right: 0px !important;
-    border-radius: 0 ${getRadii('default')} ${getRadii('default')} 0 !important;
+    border-radius: 0 var(--sscds-radii-input) var(--sscds-radii-input) 0 !important;
   }
 `;
 
@@ -70,7 +79,6 @@ const InputGroup = ({
     Select,
     Input,
     Icon,
-    Button,
     ButtonV2,
     IconButton,
     Password,
@@ -80,7 +88,7 @@ const InputGroup = ({
   Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
       error(
-        'Only Select, Input, InputGroup, Icon, Button, ButtonV2, IconButton, SearchBar and Password are valid childs of InputGroup',
+        'Only Select, Input, InputGroup, Icon, ButtonV2, IconButton, SearchBar and Password are valid childs of InputGroup',
       );
     }
   });

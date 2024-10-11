@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import InputGroup from './InputGroup';
 import { Input, Password, Select } from '..';
 import { Icon } from '../../Icon';
-import { Button } from '../../Button';
+import Button from '../../ButtonV2/Button';
 import { SearchBar } from '../SearchBar';
 
 export default {

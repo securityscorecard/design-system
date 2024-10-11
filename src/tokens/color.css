@@ -238,11 +238,11 @@
   --sscds-color-background-surface-none: var(--sscds-color-clear);
   --sscds-color-background-surface-hover: var(--sscds-color-neutral-2);
 
-  --sscds-color-background-input-default: var(--sscds-color-neutral-0);
-  --sscds-color-background-input-hover: var(--sscds-color-neutral-0);
-  --sscds-color-background-input-focused: var(--sscds-color-neutral-0);
+  --sscds-color-background-input-default: var(--sscds-color-neutral-alpha-1);
+  --sscds-color-background-input-hover: var(--sscds-color-neutral-alpha-2);
+  --sscds-color-background-input-focused: var(--sscds-color-neutral-alpha-1);
   --sscds-color-background-input-disabled: var(--sscds-color-neutral-4);
-  --sscds-color-background-input-error: var(--sscds-color-neutral-0);
+  --sscds-color-background-input-error: var(--sscds-color-neutral-alpha-1);
 
   --sscds-color-background-action-base-default: var(--indigo-12);
   --sscds-color-background-action-base-hover: var(--indigo-11);
@@ -302,8 +302,8 @@
   --sscds-color-background-pill-purple-hover: var(--purple-4);
   --sscds-color-background-pill-brown-default: var(--brown-3);
   --sscds-color-background-pill-brown-hover: var(--brown-4);
-  --sscds-color-background-pill-gray-default: var(--sscds-color-neutral-3);
-  --sscds-color-background-pill-gray-hover: var(--sscds-color-neutral-4);
+  --sscds-color-background-pill-gray-default: var(--sscds-color-neutral-alpha-3);
+  --sscds-color-background-pill-gray-hover: var(--sscds-color-neutral-alpha-4);
 
   --sscds-color-border-default: var(--sscds-color-neutral-4);
   --sscds-color-border-info: var(--indigo-8);
@@ -317,10 +317,10 @@
   --sscds-color-border-surface-hover: var(--sscds-color-neutral-8);
   --sscds-color-border-surface-active: var(--sscds-color-border-action-focused);
 
-  --sscds-color-border-input-default: var(--sscds-color-neutral-7); /* change to 8 when input fields get tokenized */
-  --sscds-color-border-input-hover: var(--sscds-color-neutral-8);
+  --sscds-color-border-input-default: var(--sscds-color-neutral-alpha-6); /* change to 8 when input fields get tokenized */
+  --sscds-color-border-input-hover: var(--sscds-color-neutral-alpha-8);
   --sscds-color-border-input-focused: var(--indigo-9);
-  --sscds-color-border-input-disabled: var(--sscds-color-neutral-8);
+  --sscds-color-border-input-disabled: var(--sscds-color-neutral-alpha-6);
   --sscds-color-border-input-error: var(--sscds-color-danger-500);
 
   --sscds-color-border-action-focused: var(--indigo-9);
@@ -347,8 +347,8 @@
   --sscds-color-border-pill-purple-hover: var(--purple-7);
   --sscds-color-border-pill-brown-default: var(--brown-6);
   --sscds-color-border-pill-brown-hover: var(--brown-7);
-  --sscds-color-border-pill-gray-default: var(--sscds-color-neutral-6);
-  --sscds-color-border-pill-gray-hover: var(--sscds-color-neutral-7);
+  --sscds-color-border-pill-gray-default: var(--sscds-color-neutral-alpha-6);
+  --sscds-color-border-pill-gray-hover: var(--sscds-color-neutral-alpha-7);
 
   --sscds-color-link-default: var(--sscds-color-text-action);
   --sscds-color-link-hover: var(--sscds-color-primary-12);

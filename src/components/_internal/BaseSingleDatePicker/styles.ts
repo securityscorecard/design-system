@@ -8,18 +8,25 @@ export const datePickerStyles = css`
     height: ${getFormStyle('fieldHeight')};
     padding: ${pxToRem(4, 16)};
     background: ${getFormStyle('bgColor')};
-    border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-    border-radius: ${getRadii('default')};
+    border: 0 none transparent;
+    box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
+    border-radius: var(--sscds-radii-input);
     color: ${getFormStyle('color')};
     font-size: var(--sscds-font-size-body-md);
     line-height: var(--sscds-font-lineheight-body-md);
     font-weight: var(--sscds-font-weight-body-default);
   }
+  .DateRangePicker-input:disabled {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-disabled);
+    background: var(--sscds-color-background-input-disabled);
+  }
+  .DateRangePicker-input:hover:not(:disabled, :focus) {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
   .DateRangePicker-input:focus {
-    border: ${getFormStyle('statefulBorderWidth')} solid
-      ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0 0 0 2px ${getFormStyle('focusBorderColor')};
     outline: none;
-    padding: ${pxToRem(3, 15)};
   }
   .DateRangePicker-input::placeholder,
   .DateRangePicker-input::-webkit-input-placeholder {

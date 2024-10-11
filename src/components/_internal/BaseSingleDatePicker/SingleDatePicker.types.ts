@@ -8,4 +8,5 @@ export interface SingleDatePickerProps {
   defaultIsYearPickerOpen?: boolean;
   startDate?: Date;
   endDate?: Date;
+  isDisabled?: boolean;
 }

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { createPadding, getFormStyle, getRadii } from '../../../utils';
+import { createPadding, getFormStyle } from '../../../utils';
 import { InputProps } from './Input.types';
 import { SpaceSizes } from '../../../theme';
 import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
@@ -24,30 +24,38 @@ const Input = styled.input.attrs<InputProps>(
       theme,
     })};
   background: ${getFormStyle('bgColor')};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('default')};
+  box-shadow: inset 0px 0px 0px 1px ${getFormStyle('borderColor')};
+  border: 0 transparent none;
+  border-radius: var(--sscds-radii-input);
   color: ${getFormStyle('color')};
   font-family: var(--sscds-font-family-body);
   font-size: var(--sscds-font-size-body-md);
   line-height: ${getFormStyle('fieldLineHeight')};
   outline: none;
 
+  &:hover:not(:disabled, :focus, .focus) {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
+
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      border-color: ${getFormStyle('invalidBorderColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('invalidBorderColor')};
-    `}
+      &,
+      &:hover {
+        box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')} !important;
+      }
+    `};
 
   &:focus,
   &.focus {
-    border-color: ${getFormStyle('focusBorderColor')};
-    box-shadow: inset 0px 0px 0px 1px ${getFormStyle('focusBorderColor')};
+    box-shadow: inset 0px 0px 0px 2px ${getFormStyle('focusBorderColor')};
   }
 
   &:disabled {
     background: ${getFormStyle('disabledBgColor')};
     border-color: ${getFormStyle('disabledBorderColor')};
+    cursor: not-allowed;
   }
 
   ::placeholder,
