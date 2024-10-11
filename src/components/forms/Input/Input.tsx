@@ -33,11 +33,19 @@ const Input = styled.input.attrs<InputProps>(
   line-height: ${getFormStyle('fieldLineHeight')};
   outline: none;
 
+  &:hover:not(:disabled, :focus, .focus) {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
+
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')};
-    `}
+      &,
+      &:hover {
+        box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')} !important;
+      }
+    `};
 
   &:focus,
   &.focus {
@@ -47,6 +55,7 @@ const Input = styled.input.attrs<InputProps>(
   &:disabled {
     background: ${getFormStyle('disabledBgColor')};
     border-color: ${getFormStyle('disabledBorderColor')};
+    cursor: not-allowed;
   }
 
   ::placeholder,

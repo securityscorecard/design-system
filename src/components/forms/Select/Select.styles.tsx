@@ -66,7 +66,7 @@ const stateStyles = (
   color: `var(--sscds-${string})`,
   width: `${string}px`,
 ) => ({
-  boxShadow: `inset 0 0 0 ${width} ${color}`,
+  boxShadow: `inset 0 0 0 ${width} ${color} !important`,
 });
 
 const invalidStyles = {
@@ -123,7 +123,11 @@ export const selectStyles: (
         fontSize: 'var(--sscds-font-size-body-md)',
         lineHeight: 'var(--sscds-font-lineheight-body-md)',
         outline: 'none',
-
+        ':hover': {
+          boxShadow:
+            'inset 0px 0px 0px 1px var(--sscds-color-border-input-hover)',
+          background: 'var(--sscds-color-background-input-hover)',
+        },
         ...(isInvalid && invalidStyles),
         ...((isFocused || includes('focus', className)) && focusStyles),
         ...(isDisabled && disabledStyles),

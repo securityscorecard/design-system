@@ -16,6 +16,14 @@ export const datePickerStyles = css`
     line-height: var(--sscds-font-lineheight-body-md);
     font-weight: var(--sscds-font-weight-body-default);
   }
+  .DateRangePicker-input:disabled {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-disabled);
+    background: var(--sscds-color-background-input-disabled);
+  }
+  .DateRangePicker-input:hover:not(:disabled, :focus) {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
   .DateRangePicker-input:focus {
     box-shadow: inset 0 0 0 2px ${getFormStyle('focusBorderColor')};
     outline: none;

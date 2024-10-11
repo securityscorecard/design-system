@@ -50,6 +50,12 @@ const Control = styled.div<ValueContainerProps>`
   background: ${getFormStyle('bgColor')};
   border-radius: var(--sscds-radii-input);
   box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
+  cursor: text;
+
+  &:hover {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
 
   &:focus-within,
   &.focus-within {
@@ -60,8 +66,12 @@ const Control = styled.div<ValueContainerProps>`
   ${({ $isDisabled }) =>
     $isDisabled &&
     css`
-      background: ${getFormStyle('disabledBgColor')};
-      box-shadow: inset 0 0 0 1px ${getFormStyle('disabledBorderColor')};
+      &,
+      &:hover {
+        background: ${getFormStyle('disabledBgColor')};
+        box-shadow: inset 0 0 0 1px ${getFormStyle('disabledBorderColor')};
+        cursor: not-allowed;
+      }
     `};
 
   ${({ $isInvalid }) =>

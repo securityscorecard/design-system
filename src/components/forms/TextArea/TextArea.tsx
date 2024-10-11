@@ -61,6 +61,9 @@ const TextareaStyled = styled.textarea<TextareaStyledProps>`
   :-ms-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
   }
+  :disabled {
+    cursor: not-allowed;
+  }
 `;
 
 const TextareaRoot = styled(Padbox)<TextareaRootProps>`
@@ -79,14 +82,20 @@ const TextareaRoot = styled(Padbox)<TextareaRootProps>`
   ${({ $isDisabled }) =>
     $isDisabled &&
     css`
-      background: ${getFormStyle('disabledBgColor')};
-      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBorderColor')};
+      background: ${getFormStyle('disabledBgColor')} !important;
+      box-shadow: inset 0px 0px 0px 1px ${getFormStyle('disabledBorderColor')} !important;
+      cursor: not-allowed;
     `};
   ${({ $isInvalid }) =>
     $isInvalid &&
     css`
-      box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')};
+      box-shadow: inset 0px 0px 0px 2px ${getFormStyle('invalidBorderColor')} !important;
     `};
+
+  &:hover:not(:focus-within) {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
 
   &:focus-within {
     outline: none;

@@ -61,12 +61,18 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   &:disabled + ${Box} {
     border-color: ${getFormStyle('disabledBorderColor')};
     background: ${getFormStyle('disabledBgColor')};
+    cursor: not-allowed;
   }
 
   &:disabled:checked + ${Box} {
     ${Mark} {
       color: ${getFormStyle('disabledActiveColor')};
     }
+  }
+
+  &:hover:not(:disabled, :checked) + ${Box} {
+    border-color: var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
   }
 
   &:focus + ${Box} {
@@ -76,8 +82,8 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   ${({ isIndeterminate }) =>
     isIndeterminate &&
     css`
-      & + ${Box} {
-        background: ${getFormStyle('activeBorderColor')};
+      & + ${Box}, &:hover + ${Box} {
+        background: ${getFormStyle('activeBorderColor')} !important;
         border-color: ${getFormStyle('activeBorderColor')};
         ${Mark} {
           display: block;
@@ -93,8 +99,8 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      & + ${Box}, &:checked + ${Box} {
-        border: 2px solid ${getFormStyle('invalidBorderColor')};
+      & + ${Box}, &:checked + ${Box}, &:hover + ${Box} {
+        border: 2px solid ${getFormStyle('invalidBorderColor')} !important;
       }
     `}
 `;

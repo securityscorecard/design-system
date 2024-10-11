@@ -31,6 +31,7 @@ const SingleDatePicker = ({
   defaultIsYearPickerOpen,
   startDate,
   endDate,
+  isDisabled = false,
 }: SingleDatePickerProps) => {
   const [showYearPicker, setShowYearPicker] = useState(defaultIsYearPickerOpen);
   const pickerRef = useRef({ calendar: { instanceRef: { changeYear: noop } } });
@@ -42,6 +43,7 @@ const SingleDatePicker = ({
         calendarClassName="DateRangePicker-calendar"
         className="DateRangePicker-input"
         dateFormat="d MMM, yyyy"
+        disabled={isDisabled}
         endDate={endDate}
         maxDate={maxDate}
         minDate={minDate}

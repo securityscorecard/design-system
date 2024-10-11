@@ -11,7 +11,6 @@ import { Icon } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
 import { InputGroupProps } from './InputGroup.types';
 import { InlineProps } from '../../layout/Inline/Inline';
-import { Button } from '../../Button';
 import { SearchBar } from '../SearchBar';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { useLogger } from '../../../hooks/useLogger';
@@ -23,6 +22,11 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
   box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
   border-radius: var(--sscds-radii-input);
 
+  &:hover {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
+
   .ssc__control {
     border: 0px;
     box-shadow: none;
@@ -31,14 +35,19 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
     border: none;
     border-radius: 0px;
   }
-  & > *,
+  & > *:not(.sscds-buttonv2),
   input:not([id^='react-select']) {
     border: none;
     box-shadow: none;
     border-radius: 0px;
     background-color: transparent;
+
+    &:hover {
+      box-shadow: none;
+      background: transparent;
+    }
   }
-  & > * {
+  & > *:not(.sscds-buttonv2) {
     ${(props) =>
       props.hasDivider &&
       `border-right: 1px solid ${getFormStyle('borderColor')(props)};`}
@@ -70,7 +79,6 @@ const InputGroup = ({
     Select,
     Input,
     Icon,
-    Button,
     ButtonV2,
     IconButton,
     Password,
@@ -80,7 +88,7 @@ const InputGroup = ({
   Children.forEach(children, (child) => {
     if (!ALLOWED_CHILDREN.includes(prop('type', child))) {
       error(
-        'Only Select, Input, InputGroup, Icon, Button, ButtonV2, IconButton, SearchBar and Password are valid childs of InputGroup',
+        'Only Select, Input, InputGroup, Icon, ButtonV2, IconButton, SearchBar and Password are valid childs of InputGroup',
       );
     }
   });

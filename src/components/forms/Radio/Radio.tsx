@@ -53,6 +53,11 @@ const RadioLabel = styled(Label)<
     border: 1px solid ${getFormStyle('borderColor')};
     background-color: ${getFormStyle('bgColor')};
   }
+
+  &:hover::before {
+    border-color: var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
 `;
 
 const RadioInput = styled.input<TogglingInputProps>`
