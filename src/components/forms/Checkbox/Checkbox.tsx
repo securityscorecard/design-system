@@ -110,6 +110,7 @@ const getLabelStyles = css`
   min-height: ${getRemToggleSize};
   line-height: ${getRemToggleSize};
   margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
+  font-weight: var(--sscds-font-weight-body-default);
 `;
 
 const CheckboxLabel = styled(Label)<{ isDisabled: boolean }>`

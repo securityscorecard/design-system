@@ -2,16 +2,14 @@ import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import cls from 'classnames';
 
-import { SpaceSizes } from '../../../theme';
-import { getSpace } from '../../../utils';
 import { CLX_COMPONENT } from '../../../theme/constants';
-import { Text } from '../../Text';
+import ElementLabel from '../../ElementLabel/ElementLabel';
 
-const LabelRoot = styled(Text)`
+const LabelRoot = styled(ElementLabel)`
   display: block;
-  padding-top: ${getSpace(SpaceSizes.xs)};
-  padding-bottom: ${getSpace(SpaceSizes.xs)};
-  cursor: 'inherit';
+  padding-inline: var(--sscds-space-1x);
+  padding-block-end: var(--sscds-space-2x);
+  cursor: inherit;
 
   > * {
     margin: 0;
@@ -23,10 +21,12 @@ const Label = ({
   htmlFor,
   className,
   ...props
-}: ComponentPropsWithoutRef<'label'> & { children: ReactNode }) => (
+}: Omit<ComponentPropsWithoutRef<'label'>, 'color'> & {
+  children: ReactNode;
+}) => (
   <LabelRoot
-    as="label"
     className={cls(CLX_COMPONENT, className)}
+    forwardedAs="label"
     htmlFor={htmlFor}
     {...props}
   >

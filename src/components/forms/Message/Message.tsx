@@ -1,16 +1,13 @@
 import styled from 'styled-components';
 
-import { SpaceSizes } from '../../../theme';
-import { getSpace } from '../../../utils';
 import { Paragraph } from '../../Paragraph';
-import { TextSizes } from '../../Text/Text.enums';
 import { MessageVariants } from './Message.enums';
 import { MessageProps } from './Message.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 const MessageContainer = styled.div`
-  padding-top: ${getSpace(SpaceSizes.sm)};
-  padding-bottom: ${getSpace(SpaceSizes.sm)};
+  padding-inline: var(--sscds-space-1x);
+  padding-block-start: var(--sscds-space-1x);
 
   > * {
     margin: 0;
@@ -22,9 +19,7 @@ const Message = ({
   variant = MessageVariants.note,
 }: MessageProps) => (
   <MessageContainer className={CLX_COMPONENT}>
-    <Paragraph size={TextSizes.md} variant={variant}>
-      {children}
-    </Paragraph>
+    <Paragraph variant={variant}>{children}</Paragraph>
   </MessageContainer>
 );
 
