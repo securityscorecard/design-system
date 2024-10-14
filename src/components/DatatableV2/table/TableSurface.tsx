@@ -85,7 +85,8 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         {table.options.enableTopToolbar && <TopToolbar table={table} />}
         <Table table={table} />
       </Surface>
-      {table.options.enableRowSelection && <Selection table={table} />}
+      {table.options.enableRowSelection &&
+        table.options.enableSelectionToolbar && <Selection table={table} />}
       {table.options.enablePagination &&
         table.getRowModel().rows.length > 0 && <Pagination table={table} />}
     </DatatableRoot>

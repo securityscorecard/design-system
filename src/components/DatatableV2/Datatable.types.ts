@@ -234,6 +234,7 @@ export interface ParsedDatatableOptions<D>
   enableRowActions?: DatatableOptions<D>['enableRowActions'];
   enableRowsPerPage?: DatatableOptions<D>['enableRowsPerPage'];
   enableSelectAll?: DatatableOptions<D>['enableSelectAll'];
+  enableSelectionToolbar?: DatatableOptions<D>['enableSelectionToolbar'];
   enableTopToolbar?: DatatableOptions<D>['enableTopToolbar'];
   initialState?: DatatableOptions<D>['initialState'];
   onShowColumnSettings?: DatatableOptions<D>['onShowColumnSettings'];
@@ -452,6 +453,14 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableSelectAll?: boolean;
+  /**
+   * Enables/disables the selection toolbar with the batch action buttons. If this is set to `false`
+   * consumers has to control the selection state on their own as the Datatable doesn't provide other
+   * way how to access the interal state.
+   *
+   * @default true
+   */
+  enableSelectionToolbar?: boolean;
   /**
    * Enables/disables table sorting
    *

@@ -113,6 +113,13 @@ RowSelectionActions.parameters = {
   screenshot: { skip: false },
 };
 
+export const DisabledSelectionToolbar: Story = Template.bind({});
+DisabledSelectionToolbar.args = {
+  ...SelectionEnabled.args,
+  initialState: RowSelectionActions.args.initialState,
+  enableSelectionToolbar: false,
+};
+
 export const SelectionManagedState: Story = (args) => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({
     'e23968c3-3f19-44b2-aee9-c4a1d7c326ee': true,
