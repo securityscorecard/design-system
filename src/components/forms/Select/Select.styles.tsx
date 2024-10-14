@@ -209,8 +209,7 @@ export const selectStyles: (
       boxShadow: 'var(--sscds-shadow-1x)',
       marginBottom: 'var(--sscds-space-1x)',
       marginTop: 'var(--sscds-space-1x)',
-      paddingTop: 'var(--sscds-space-2x)',
-      paddingBottom: 'var(--sscds-space-2x)',
+      padding: 'var(--sscds-space-2x)',
     }),
     menuList: (styles) => ({
       ...styles,
@@ -229,15 +228,19 @@ export const selectStyles: (
       fontSize: 'var(--sscds-font-size-body-md)',
       lineHeight: 'var(--sscds-font-lineheight-body-md)',
       padding: menuItemPadding,
+      transition: 'var(--sscds-action-transition)',
       ':active': {
         ...styles[':active'],
         backgroundColor: 'var(--sscds-color-background-selectable-active)',
       },
+      borderRadius: 'var(--sscds-radii-default)',
     }),
     group: (styles) => ({
       ...styles,
       padding: 0,
-      marginTop: 'var(--sscds-space-2x)',
+      ':not(:first-child)': {
+        marginTop: 'var(--sscds-space-2x)',
+      },
     }),
     groupHeading: (styles) => ({
       ...styles,
@@ -328,7 +331,7 @@ const ActionsMenu = styled.div`
 
 const SelectActionButton = styled(Button)`
   justify-content: flex-start;
-  border-radius: 0;
+  border-radius: var(--sscds-radii-default);
 `;
 
 const getActionProps: (
@@ -458,20 +461,18 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
   }
 
   return (
-    <div>
-      <components.Option {...props}>
-        <Inline gap={SpaceSizes.sm}>
-          <StyledCheckbox
-            checkboxId={`select-${label}`}
-            checked={isSelected}
-            isDisabled={isDisabled}
-            label={children}
-            name={label}
-            readOnly
-          />
-        </Inline>
-      </components.Option>
-    </div>
+    <components.Option {...props}>
+      <Inline gap={SpaceSizes.sm}>
+        <StyledCheckbox
+          checkboxId={`select-${label}`}
+          checked={isSelected}
+          isDisabled={isDisabled}
+          label={children}
+          name={label}
+          readOnly
+        />
+      </Inline>
+    </components.Option>
   );
 };
 
