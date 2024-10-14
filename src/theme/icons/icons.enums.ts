@@ -7,6 +7,7 @@ export const SSCIconNames = {
   arrowUp: 'arrow-up',
   backwardStep: 'backward-step',
   ban: 'ban',
+  calendar: 'calendar',
   check: 'check',
   checkCircle: 'check-circle',
   checkCircleSolid: 'check-circle-solid',

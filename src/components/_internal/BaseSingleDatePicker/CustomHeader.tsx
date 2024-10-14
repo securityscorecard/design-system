@@ -1,13 +1,8 @@
 import styled from 'styled-components';
 import { useMemo } from 'react';
 
-import { PaddingTypes } from '../../layout/Padbox/Padbox.enums';
-import { SSCIconNames } from '../../../theme/icons/icons.enums';
-import { getColor, getRadii } from '../../../utils';
-import { ColorTypes } from '../../../theme/colors.enums';
-import { Icon } from '../../Icon';
 import { Inline, Padbox } from '../../layout';
-import { SpaceSizes } from '../../../theme';
+import IconButton from '../../ButtonV2/IconButton';
 
 const months = [
   'January',
@@ -27,47 +22,21 @@ const months = [
 const getYear = (date: Date) => date.getFullYear();
 const getMonth = (date: Date) => months[date.getMonth()];
 
-const ChangeMonthIconContainer = styled.div<{ direction: string }>`
-  transform: ${(props) =>
-      props.direction === 'right' ? 'rotate(270deg)' : 'rotate(90deg)'}
-    translate(0, -4px);
-  font-size: var(--sscds-font-size-elementlabel-md);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const MonthSelector = styled.button`
-  border-radius: ${getRadii('default')};
-  border: 0;
-  background: transparent;
-  &:hover {
-    background-color: ${getColor(ColorTypes.primary50)};
-  }
-  &:hover svg {
-    color: ${getColor(ColorTypes.primary600)};
-  }
-`;
-
-function ChangeMonthIcon(props) {
-  return (
-    <ChangeMonthIconContainer {...props}>
-      <Icon color={ColorTypes.neutral600} name={SSCIconNames.angleDown} />
-    </ChangeMonthIconContainer>
-  );
-}
-
 const MonthIndicator = styled.button`
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-radii-default);
   border: 0;
   background: transparent;
   font-size: var(--sscds-font-size-elementlabel-md);
   font-weight: var(--sscds-font-weight-elementlabel-strong);
+  line-height: var(--sscds-font-size-50);
+  transition: var(--sscds-action-transition),
+    transform 50ms var(--sscds-transition-fn);
+
   &:hover {
-    color: ${getColor(ColorTypes.primary600)};
-    background-color: ${getColor(ColorTypes.primary50)};
+    background-color: var(--sscds-color-background-action-ghost-hover);
+  }
+  &:active {
+    transform: scale(0.98);
   }
 `;
 
@@ -103,26 +72,31 @@ export const DatePickerCustomHeader = ({
   ]);
 
   return (
-    <Inline stretch={2}>
-      <MonthSelector
-        aria-label="Previous month button"
-        type="button"
+    <Inline
+      align="center"
+      gap="xs"
+      stretch={2}
+      style={{ marginBlockEnd: 'var(--sscds-space-4x)' }}
+    >
+      <IconButton
+        iconName="angle-left"
+        label="Go to previous month"
+        size="sm"
+        variant="ghost"
         onClick={onClickLeft}
-      >
-        <ChangeMonthIcon direction="left" />
-      </MonthSelector>
+      />
       <MonthIndicator onClick={() => toggleYearPicker()}>
-        <Padbox paddingSize={SpaceSizes.md} paddingType={PaddingTypes.squish}>
-          {`${getMonth(date)} ${getYear(date)}`}
-        </Padbox>
+        <Padbox paddingSize="sm" paddingType="squish">{`${getMonth(
+          date,
+        )} ${getYear(date)}`}</Padbox>
       </MonthIndicator>
-      <MonthSelector
-        aria-label="Next month button"
-        type="button"
+      <IconButton
+        iconName="angle-right"
+        label="Go to next month"
+        size="sm"
+        variant="ghost"
         onClick={onClickRight}
-      >
-        <ChangeMonthIcon direction="right" />
-      </MonthSelector>
+      />
     </Inline>
   );
 };
