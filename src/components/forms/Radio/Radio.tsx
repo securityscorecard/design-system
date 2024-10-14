@@ -21,6 +21,7 @@ const RadioLabel = styled(Label)<
   margin-bottom: 0;
   padding-top: 0;
   padding-bottom: 0;
+  font-weight: var(--sscds-font-weight-body-default);
 
   ${({ theme, hasLabel }) => {
     const toggleSize = getFormStyle('toggleSize')({ theme });
