@@ -1,93 +1,134 @@
 import { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { SegmentedToggleProps } from './SegmentedToggle.types';
-import { SegmentedToggle, SegmentedToggleItem } from './index';
+import { SegmentedToggle, SegmentedToggleItem } from './SegmentedToggle';
 import { SpaceSizes } from '../../../theme/space.enums';
 import { Stack } from '../../layout/Stack';
 import { Text } from '../../Text';
 
-export default {
+/**
+ * ```jsx
+ * import { SegmentedToggle, SegmentedToggleItem } from '@securityscorecard/design-system';
+ * ```
+ */
+
+const meta = {
   title: 'components/forms/SegmentedToggle',
   component: SegmentedToggle,
   argTypes: {
-    name: {
-      control: { disable: true },
-      description: 'Name parameter for the form',
+    children: {
+      description:
+        'List of SegmentedToggleItem components that will be rendered as options',
+      table: {
+        type: {
+          summary: 'ReactNode',
+        },
+      },
+      // @ts-expect-error Storybook is strangly typed here
+      type: {
+        required: true,
+      },
+    },
+    group: {
+      description:
+        'The group is used to identify the SegmentedToggle within the form',
+    },
+    isDisabled: {
+      description: 'Indicates if the SegmentedToggle is disabled or not.',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    isExpanded: {
+      description:
+        'Should the SegmentedToggle be expanded to full available width.',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
+    onChange: {
+      description: 'Callback when the SegmentedToggle has changed.',
+      table: {
+        type: {
+          summary: '(event: ChangeEvent<HTMLInputElement>) => void',
+        },
+      },
     },
   },
-} as Meta;
+} satisfies Meta<typeof SegmentedToggle>;
+export default meta;
 
-export const Playground: StoryFn<SegmentedToggleProps> = (args) => (
-  <SegmentedToggle {...args}>
-    <SegmentedToggleItem itemId="input1" label="One" value="1" defaultChecked />
-    <SegmentedToggleItem itemId="input2" label="Two" value="2" />
-    <SegmentedToggleItem itemId="input3" label="Three" value="3" />
-  </SegmentedToggle>
-);
-Playground.args = {
-  group: 'playground',
-};
-Playground.parameters = {
-  screenshot: { skip: true },
-};
+type Story = StoryObj<typeof meta>;
 
-export const Default: StoryFn = () => (
-  <SegmentedToggle group="default">
+const children = ({ group }) => (
+  <>
     <SegmentedToggleItem
-      itemId="default_input1"
+      itemId={`${group}-input1`}
       label="One"
       value="1"
       defaultChecked
     />
-    <SegmentedToggleItem itemId="default_input2" label="Two" value="2" />
-    <SegmentedToggleItem itemId="default_input3" label="Three" value="3" />
-  </SegmentedToggle>
+    <SegmentedToggleItem itemId={`${group}-input2`} label="Two" value="2" />
+    <SegmentedToggleItem itemId={`${group}-input3`} label="Three" value="3" />
+  </>
 );
 
-export const Disabled: StoryFn = () => (
-  <Stack gap={SpaceSizes.lg} justify="flex-start">
-    <SegmentedToggle group="sizes_md_disabled" isDisabled>
-      <SegmentedToggleItem
-        itemId="disabled_md_input1"
-        label="One"
-        value="1"
-        defaultChecked
-      />
-      <SegmentedToggleItem itemId="disabled_md_input2" label="Two" value="2" />
-      <SegmentedToggleItem
-        itemId="disabled_md_input3"
-        label="Three"
-        value="3"
-      />
-    </SegmentedToggle>
-  </Stack>
-);
-
-export const StateManagement: StoryFn = () => {
-  const [selected, setSelected] = useState('1');
-
-  const handleChange = (e) => {
-    setSelected(e.target.value);
-  };
-
-  return (
-    <Stack gap={SpaceSizes.lg} justify="flex-start">
-      <SegmentedToggle group="state" onChange={handleChange}>
-        <SegmentedToggleItem
-          itemId="state_input1"
-          label="One"
-          value="1"
-          defaultChecked
-        />
-        <SegmentedToggleItem itemId="state_input2" label="Two" value="2" />
-        <SegmentedToggleItem itemId="state_input3" label="Three" value="3" />
-      </SegmentedToggle>
-      <Text>Selected value: {selected}</Text>
-    </Stack>
-  );
+export const Playground: Story = {
+  args: {
+    group: 'playground',
+    children: children({ group: 'playground' }),
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
 
-StateManagement.parameters = {
-  screenshot: { skip: true },
+export const Default: Story = {
+  args: { children: children({ group: 'default' }), group: 'default' },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: children({ group: 'disabled' }),
+    group: 'disabled',
+    isDisabled: true,
+  },
+};
+
+export const DarkMode: Story = {
+  args: { children: children({ group: 'darkMode' }), group: 'darkMode' },
+  parameters: {
+    themes: {
+      themeOverride: 'Dark',
+    },
+  },
+};
+
+export const StateManagement: Story = {
+  args: {
+    children: children({ group: 'stateManagement' }),
+    group: 'stateManagement',
+  },
+  render: function Render(args) {
+    const [selected, setSelected] = useState('1');
+
+    return (
+      <Stack gap={SpaceSizes.lg} justify="flex-start">
+        <SegmentedToggle
+          {...args}
+          onChange={(e) => {
+            setSelected(e.target.value);
+          }}
+        />
+        <Text>Selected value: {selected}</Text>
+      </Stack>
+    );
+  },
+  parameters: {
+    screenshot: { skip: true },
+  },
 };

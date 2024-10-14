@@ -2,7 +2,7 @@ import { createRef } from 'react';
 import { screen } from '@testing-library/react';
 import { map } from 'ramda';
 
-import { SegmentedToggle, SegmentedToggleItem } from '.';
+import { SegmentedToggle, SegmentedToggleItem } from './SegmentedToggle';
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 
 describe('SegmentedToggle', () => {

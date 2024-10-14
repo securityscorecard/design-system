@@ -10,6 +10,11 @@ export * from './Range';
 export * from './Switch';
 export * from './TextArea';
 export * from './SearchBar';
-export * from './SegmentedToggle';
+export {
+  SegmentedToggle,
+  SegmentedToggleItem,
+  type SegmentedToggleProps,
+  type SegmentedToggleItemProps,
+} from './SegmentedToggle/SegmentedToggle';
 export * from './InputGroup';
 export * from './types/forms.types';
