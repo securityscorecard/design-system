@@ -45,6 +45,19 @@ const meta = {
       description:
         'Set the badge count in the `standard` variant. Required for `standard` variant.',
     },
+    positionOffset: {
+      description:
+        "Available only on `standard` variant. Set the position offset to fix potentional issues where the badge doesn't fit to base position. The value will be set to transform-translate CSS property.",
+      control: 'text',
+      table: {
+        type: {
+          summary: 'string',
+        },
+        defaultValue: {
+          summary: '50%, -50%',
+        },
+      },
+    },
   },
 } satisfies Meta<typeof Badge>;
 
