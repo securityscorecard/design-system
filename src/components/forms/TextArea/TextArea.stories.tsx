@@ -39,7 +39,7 @@ Invalid.args = {
 };
 
 export const Disabled: Story = Template.bind({});
-Disabled.args = { isDisabled: true };
+Disabled.args = { isDisabled: true, defaultValue: 'DefaultValue text' };
 
 const lipsum = `Donec sed nunc sed leo vestibulum pretium. Aenean sollicitudin velit neque. Curabitur placerat, velit sit amet lobortis condimentum, libero tortor ullamcorper quam, nec porttitor massa sem quis tellus. Sed feugiat nec libero a fermentum. Vivamus laoreet sapien convallis, interdum sapien vitae, lobortis eros. Ut interdum dui ut mauris malesuada, vitae pellentesque est fermentum. Cras quis erat est. Proin tempus a leo ut pulvinar. Nulla scelerisque tempor mollis. Etiam quis dolor non diam sollicitudin mollis eu vitae nisl. Vestibulum bibendum augue vel justo fringilla, sed ultrices libero congue. Maecenas nec erat ac ante mollis eleifend. Sed ut mattis metus. Nullam molestie, diam blandit aliquam tincidunt, magna leo auctor diam, vel eleifend risus ex vel tortor. Donec ornare pellentesque urna quis volutpat. Donec dictum, arcu id luctus tincidunt, arcu purus venenatis lorem, at imperdiet orci lacus a metus.`;
 export const Autosize: Story = Template.bind({});

@@ -20,6 +20,7 @@ export const datePickerStyles = css`
   .DateRangePicker-input:disabled {
     box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-disabled);
     background: var(--sscds-color-background-input-disabled);
+    color: var(--sscds-color-text-disabled);
   }
   .DateRangePicker-input:hover:not(:disabled, :focus) {
     box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
@@ -35,6 +36,13 @@ export const datePickerStyles = css`
   }
   .DateRangePicker-input:-ms-input-placeholder {
     color: ${getFormStyle('placeholderColor')};
+  }
+  .DateRangePicker-input:disabled::placeholder,
+  .DateRangePicker-input:disabled::-webkit-input-placeholder {
+    color: var(--sscds-color-text-disabled);
+  }
+  .DateRangePicker-input:disabled:-ms-input-placeholder {
+    color: var(--sscds-color-text-disabled);
   }
   .DateRangePicker-calendar {
     font-size: var(--sscds-font-size-body-md);

@@ -68,6 +68,7 @@ export const Disabled = MultiValueInputTemplate.bind({});
 Disabled.args = {
   ...Playground.args,
   isDisabled: true,
+  value: ['john@example.com', 'jane@example.com'],
 };
 
 export const NonClearable = MultiValueInputTemplate.bind({});
