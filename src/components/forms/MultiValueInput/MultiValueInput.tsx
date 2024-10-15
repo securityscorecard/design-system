@@ -42,6 +42,20 @@ import {
 } from './MultiValueInput.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
+const ValueContainer = styled(Padbox)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${getSpace('xs')};
+  padding-left: ${getSpace(SpaceSizes.md)};
+  overflow: hidden;
+  flex: 1 1 0%;
+  ${({ $hasValue, theme }) =>
+    $hasValue &&
+    css`
+      padding-left: ${getSpace(SpaceSizes.xs, { theme })};
+    `};
+`;
+
 const Control = styled.div<ValueContainerProps>`
   display: flex;
   flex-direction: column;
@@ -72,6 +86,9 @@ const Control = styled.div<ValueContainerProps>`
         box-shadow: inset 0 0 0 1px ${getFormStyle('disabledBorderColor')};
         cursor: not-allowed;
       }
+      & ${ValueContainer} {
+        opacity: 0.5;
+      }
     `};
 
   ${({ $isInvalid }) =>
@@ -80,20 +97,6 @@ const Control = styled.div<ValueContainerProps>`
       && {
         box-shadow: inset 0 0 0 2px ${getFormStyle('invalidBorderColor')};
       }
-    `};
-`;
-
-const ValueContainer = styled(Padbox)`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${getSpace('xs')};
-  padding-left: ${getSpace(SpaceSizes.md)};
-  overflow: hidden;
-  flex: 1 1 0%;
-  ${({ $hasValue, theme }) =>
-    $hasValue &&
-    css`
-      padding-left: ${getSpace(SpaceSizes.xs, { theme })};
     `};
 `;
 

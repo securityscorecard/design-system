@@ -5,10 +5,11 @@ import cls from 'classnames';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import ElementLabel from '../../ElementLabel/ElementLabel';
 
-const LabelRoot = styled(ElementLabel)`
+const LabelRoot = styled(ElementLabel)<{ $isInline: boolean }>`
   display: block;
   padding-inline: var(--sscds-space-1x);
-  padding-block-end: var(--sscds-space-2x);
+  padding-block-end: ${({ $isInline }) =>
+    $isInline ? undefined : 'var(--sscds-space-2x)'};
   cursor: inherit;
 
   > * {
@@ -20,11 +21,14 @@ const Label = ({
   children,
   htmlFor,
   className,
+  isInline = false,
   ...props
 }: Omit<ComponentPropsWithoutRef<'label'>, 'color'> & {
   children: ReactNode;
+  isInline?: boolean;
 }) => (
   <LabelRoot
+    $isInline={isInline}
     className={cls(CLX_COMPONENT, className)}
     forwardedAs="label"
     htmlFor={htmlFor}

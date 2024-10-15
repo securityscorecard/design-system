@@ -53,9 +53,18 @@ const Input = styled.input.attrs<InputProps>(
   }
 
   &:disabled {
+    color: var(--sscds-color-text-disabled);
     background: ${getFormStyle('disabledBgColor')};
     border-color: ${getFormStyle('disabledBorderColor')};
     cursor: not-allowed;
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: var(--sscds-color-text-disabled);
+    }
+    :-ms-input-placeholder {
+      color: var(--sscds-color-text-disabled);
+    }
   }
 
   ::placeholder,

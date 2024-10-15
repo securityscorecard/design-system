@@ -14,7 +14,7 @@ import {
   StylesConfig,
   components,
 } from 'react-select';
-import { append, apply, assoc, both, includes, pick, pipe, take } from 'ramda';
+import { append, apply, both, includes, pick, pipe, take } from 'ramda';
 import {
   isEmptyString,
   isNonEmptyArray,
@@ -80,6 +80,7 @@ const focusStyles = {
 const disabledStyles = {
   ...stateStyles('var(--sscds-color-border-input-disabled)', '1px'),
   background: 'var(--sscds-color-background-input-disabled)',
+  color: 'var(--sscds-color-text-disabled)',
 };
 
 const indicatorStyles = {
@@ -133,7 +134,10 @@ export const selectStyles: (
         ...(isDisabled && disabledStyles),
       };
     },
-    valueContainer: (styles, { selectProps: { isMulti, value } }) => {
+    valueContainer: (
+      styles,
+      { selectProps: { isMulti, value, isDisabled } },
+    ) => {
       return {
         ...styles,
         display: 'flex',
@@ -145,11 +149,21 @@ export const selectStyles: (
           isMulti && isNotNilOrEmpty(value)
             ? undefined
             : 'var(--sscds-space-4x)',
+        opacity: isDisabled && isMulti ? 0.5 : 1,
       };
     },
-    singleValue: assoc('margin', 0),
+    singleValue: (styles) => ({
+      ...styles,
+      margin: 0,
+      color: 'inherit',
+    }),
     multiValue: () => ({}),
-    multiValueContainer: () => ({}),
+    multiValueContainer: (_, { isDisabled }) =>
+      isDisabled
+        ? {
+            opacity: 0.7,
+          }
+        : {},
     multiValueLabel: () => ({}),
     multiValueRemove: () => ({}),
     // Disable TS because types are wrong for Input component

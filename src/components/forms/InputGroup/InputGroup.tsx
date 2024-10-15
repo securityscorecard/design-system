@@ -35,6 +35,7 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
     border: none;
     border-radius: 0px;
   }
+  & .ssc__control,
   & > *:not(.sscds-buttonv2),
   input:not([id^='react-select']) {
     border: none;
@@ -50,7 +51,7 @@ const InputGroupContainer = styled(Inline)<InputGroupProps>`
   & > *:not(.sscds-buttonv2) {
     ${(props) =>
       props.hasDivider &&
-      `border-right: 1px solid ${getFormStyle('borderColor')(props)};`}
+      `border-right: 1px solid var(--sscds-color-border-input-default);`}
   }
   & > *:first-child {
     border-radius: var(--sscds-radii-input) 0 0 var(--sscds-radii-input) !important;

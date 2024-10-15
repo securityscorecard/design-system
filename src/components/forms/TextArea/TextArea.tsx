@@ -63,6 +63,14 @@ const TextareaStyled = styled.textarea<TextareaStyledProps>`
   }
   :disabled {
     cursor: not-allowed;
+    color: var(--sscds-color-text-disabled);
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: var(--sscds-color-text-disabled);
+    }
+    :-ms-input-placeholder {
+      color: var(--sscds-color-text-disabled);
+    }
   }
 `;
 
