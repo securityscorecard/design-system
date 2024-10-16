@@ -1,4 +1,4 @@
-import{L as x}from"./Logo-3Pd-DVKk.js";import"./jsx-runtime-Cw0GR0a5.js";import"./index-CTjT7uj6.js";import"./index-ndiHb6d5.js";import"./constants-CgU6e_L6.js";import"./space.enums-aJQ33HT_.js";import"./_isObject-BZZHHNGj.js";import"./slice-CaMqkvGm.js";import"./styled-components.browser.esm-CkXiwQaI.js";const B={component:x,args:{height:64},parameters:{docs:{description:{component:`The focal point of our visual identity is our logo – a universal signature for our brand. An element
+import{L as x}from"./Logo-3Pd-DVKk.js";import"./jsx-runtime-Cw0GR0a5.js";import"./index-CTjT7uj6.js";import"./index-ndiHb6d5.js";import"./constants-CgU6e_L6.js";import"./space.enums-aJQ33HT_.js";import"./isObject-BZZHHNGj.js";import"./slice-CaMqkvGm.js";import"./styled-components.browser.esm-CkXiwQaI.js";const B={component:x,args:{height:64},parameters:{docs:{description:{component:`The focal point of our visual identity is our logo – a universal signature for our brand. An element
 that is used across all of our identity system providing a dynamic and distinctive mark on all
 SecurityScorecard communications.
 
