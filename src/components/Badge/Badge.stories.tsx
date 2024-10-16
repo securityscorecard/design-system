@@ -86,6 +86,14 @@ export const DotBadge: Story = {
   },
 };
 
+export const WithCustomOffset: Story = {
+  args: {
+    variant: 'standard',
+    count: 56,
+    positionOffset: '20%, -20%',
+  },
+};
+
 export const DarkMode: Story = {
   args: Playground.args,
   render: (args) => (
