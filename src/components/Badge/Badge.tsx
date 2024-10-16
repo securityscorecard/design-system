@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import styled from 'styled-components';
 
 type DotBadgeProps = {
@@ -15,6 +15,11 @@ type StandardBadgeProps = {
   variant?: 'standard';
   /** Set the badge count in the `standard` variant */
   count: number;
+  /**
+   * Set the position offset to fix potentional issues where the badge doesn't fit to base position.
+   * The value will be set to transform-translate CSS property.
+   */
+  positionOffset?: string;
 };
 
 export type BadgeProps = (DotBadgeProps | StandardBadgeProps) & {
@@ -86,7 +91,15 @@ function Badge(props: BadgeProps) {
     <BadgeRoot>
       {props.children}
       {props.count > 0 && (
-        <BadgeCount>{normalizeCount(props.count)}</BadgeCount>
+        <BadgeCount
+          style={{
+            '--sscds-badge-translate': `translate(${
+              props.positionOffset ?? '50%, -50%'
+            })`,
+          }}
+        >
+          {normalizeCount(props.count)}
+        </BadgeCount>
       )}
     </BadgeRoot>
   );
