@@ -1,0 +1,5 @@
+import{j as t}from"./jsx-runtime-Cw0GR0a5.js";import{useMDXComponents as m}from"./index-DSkyVWTJ.js";import{ae as r,ai as i}from"./index-QPajMEvj.js";import{t as s}from"./theme-VOBSdC0d.js";import"./index-CTjT7uj6.js";import"./iframe-awgemxr7.js";import"../sb-preview/runtime.js";import"./index-DIVhMF2i.js";import"./extends-CF3RwP-h.js";import"./isNativeReflectConstruct-lfp1ZYuW.js";import"./inheritsLoose-B6jfs0L0.js";import"./setPrototypeOf-DgZC2w_0.js";import"./index-CgFWNHQ8.js";import"./index-DrFu-skq.js";import"./colors-2yNNI7_i.js";import"./_isObject-BZZHHNGj.js";function n(e){const o={h1:"h1",p:"p",...m(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(r,{title:"Theme/Theme Object"}),`
+`,t.jsx(o.h1,{id:"theme-object",children:"Theme object"}),`
+`,t.jsx(o.p,{children:"This is basic theme object used by Design System."}),`
+`,t.jsx(i,{code:JSON.stringify(s,null,2),language:"json"})]})}function C(e={}){const{wrapper:o}={...m(),...e.components};return o?t.jsx(o,{...e,children:t.jsx(n,{...e})}):n(e)}export{C as default};
+//# sourceMappingURL=theme-DIuCKVAm.js.map
