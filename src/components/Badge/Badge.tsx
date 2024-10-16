@@ -55,7 +55,7 @@ const BadgeCount = styled.span`
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(50%, -50%);
+  transform: var(--sscds-badge-translate);
 
   padding-inline: var(--sscds-space-1x);
 
