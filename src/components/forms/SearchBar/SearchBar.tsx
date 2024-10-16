@@ -39,8 +39,8 @@ const IconWrapper = styled.div`
 
 const SearchIconWrapper = styled(IconWrapper)`
   left: 0;
-  padding: ${getSpace(SpaceSizes.md)};
-  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
+  padding-inline: ${getSpace(SpaceSizes.md)};
+  height: 100%;
 `;
 
 const ClearButton = styled(IconWrapper)`
@@ -185,7 +185,15 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
               dark
             />
           ) : (
-            <Icon name={SSCIconNames.search} type={IconTypes.ssc} />
+            <Icon
+              color={
+                isDisabled
+                  ? 'var(--sscds-color-icon-disabled)'
+                  : 'var(--sscds-color-icon-subtle)'
+              }
+              name={SSCIconNames.search}
+              type={IconTypes.ssc}
+            />
           )}
         </SearchIconWrapper>
         {isClearButtonVisible && (

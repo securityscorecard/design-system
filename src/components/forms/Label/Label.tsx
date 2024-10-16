@@ -2,16 +2,15 @@ import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import cls from 'classnames';
 
-import { SpaceSizes } from '../../../theme';
-import { getSpace } from '../../../utils';
 import { CLX_COMPONENT } from '../../../theme/constants';
-import { Text } from '../../Text';
+import ElementLabel from '../../ElementLabel/ElementLabel';
 
-const LabelRoot = styled(Text)`
+const LabelRoot = styled(ElementLabel)<{ $isInline: boolean }>`
   display: block;
-  padding-top: ${getSpace(SpaceSizes.xs)};
-  padding-bottom: ${getSpace(SpaceSizes.xs)};
-  cursor: 'inherit';
+  padding-inline: var(--sscds-space-1x);
+  padding-block-end: ${({ $isInline }) =>
+    $isInline ? undefined : 'var(--sscds-space-2x)'};
+  cursor: inherit;
 
   > * {
     margin: 0;
@@ -22,11 +21,16 @@ const Label = ({
   children,
   htmlFor,
   className,
+  isInline = false,
   ...props
-}: ComponentPropsWithoutRef<'label'> & { children: ReactNode }) => (
+}: Omit<ComponentPropsWithoutRef<'label'>, 'color'> & {
+  children: ReactNode;
+  isInline?: boolean;
+}) => (
   <LabelRoot
-    as="label"
+    $isInline={isInline}
     className={cls(CLX_COMPONENT, className)}
+    forwardedAs="label"
     htmlFor={htmlFor}
     {...props}
   >

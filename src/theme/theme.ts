@@ -29,7 +29,7 @@ export const createTheme = (
 
   const colors = mergeDeepRight(themeColors, colorsOverride);
   const typography = mergeDeepRight(createTypography(), typographyOverride);
-  const forms = mergeDeepRight(createForms(colors), formsOverride);
+  const forms = mergeDeepRight(createForms(), formsOverride);
   const layout = mergeDeepRight(createLayout(), layoutOverride);
   const depths = mergeDeepRight(createDepths(), depthsOverride);
   const space = mergeDeepRight(createSpace(), spaceOverride);

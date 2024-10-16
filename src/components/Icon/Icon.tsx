@@ -92,7 +92,11 @@ const Icon = ({
   );
 
   if (hasFixedSize) {
-    return <IconBox $size={size}>{icon}</IconBox>;
+    return (
+      <IconBox $size={size} className="sscds-iconbox">
+        {icon}
+      </IconBox>
+    );
   }
 
   return icon;

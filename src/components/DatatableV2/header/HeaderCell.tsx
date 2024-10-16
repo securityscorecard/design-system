@@ -9,6 +9,7 @@ import { Inline } from '../../layout';
 import { Tooltip } from '../../Tooltip';
 import { displayColumnIds } from '../hooks/useDisplayColumns';
 import { parseFromValuesOrFunc } from '../utils';
+import { Icon } from '../../Icon';
 
 const getTextHeaderStyle = (
   labelLength: number | undefined,
@@ -43,6 +44,7 @@ const HeaderCell = <D,>({
     headerComponent,
     renderHeaderTooltip,
   } = columnDef;
+  const direction = getIsSorted();
 
   const showColumnActions =
     (enableColumnActions || cdEnableColumnActions) &&
@@ -96,9 +98,17 @@ const HeaderCell = <D,>({
               </button>
             </Tooltip>
           </Inline>
-          {showColumnActions && (
+          {showColumnActions ? (
             <HeaderCellColumnActionsButton header={header} table={table} />
-          )}
+          ) : direction !== false ? (
+            <div className="ds-table-header-cell-column-actions-button-wrapper">
+              <Icon
+                name={direction === 'asc' ? 'sort-up' : 'sort-down'}
+                size="sm"
+                hasFixedSize
+              />
+            </div>
+          ) : null}
           {getCanResize() && (
             <HeaderCellResizeHandler header={header} table={table} />
           )}

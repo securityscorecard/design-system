@@ -4,20 +4,20 @@ import { __, pipe, subtract } from 'ramda';
 import cls from 'classnames';
 
 import { getFormStyle, getRadii, getToken, pxToRem } from '../../../utils';
-import { Sizes, SwitchLabelProps, SwitchProps } from './Switch.types';
+import { Sizes, SwitchProps, SwitchThumbProps } from './Switch.types';
 import { SwitchSizes } from './Switch.enums';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
 // Minimum width for
-const SwitchMdWithLabel = 96;
-const SwitchMdWithoutLabel = 56;
-const SwitchSmWithLabel = 64;
-const SwitchSmWithoutLabel = 40;
+const SwitchMdWithThumb = 96;
+const SwitchMdWithoutThumb = 56;
+const SwitchSmWithThumb = 64;
+const SwitchSmWithoutThumb = 40;
 
-const SwitchLabelWrapperMedium = css<{ label: string; maxWidth: number }>`
+const SwitchThumbWrapperMedium = css<{ label: string; maxWidth: number }>`
   ${({ label }) =>
     css`
-      min-width: ${pxToRem(label ? SwitchMdWithLabel : SwitchMdWithoutLabel)};
+      min-width: ${pxToRem(label ? SwitchMdWithThumb : SwitchMdWithoutThumb)};
     `}
   ${({ maxWidth }) =>
     maxWidth &&
@@ -26,10 +26,10 @@ const SwitchLabelWrapperMedium = css<{ label: string; maxWidth: number }>`
     `};
 `;
 
-const SwitchLabelWrapperSmall = css<{ label: string; maxWidth: number }>`
+const SwitchThumbWrapperSmall = css<{ label: string; maxWidth: number }>`
   ${({ label }) =>
     css`
-      min-width: ${pxToRem(label ? SwitchSmWithLabel : SwitchSmWithoutLabel)};
+      min-width: ${pxToRem(label ? SwitchSmWithThumb : SwitchSmWithoutThumb)};
     `}
   ${({ maxWidth }) =>
     maxWidth &&
@@ -64,17 +64,17 @@ const SwitchPaddingCheckedSmall = css`
   padding-left: ${pxToRem(5)};
 `;
 
-const switchLabelWrapperSizes = {
-  [SwitchSizes.md]: SwitchLabelWrapperMedium,
-  [SwitchSizes.sm]: SwitchLabelWrapperSmall,
+const switchThumbWrapperSizes = {
+  [SwitchSizes.md]: SwitchThumbWrapperMedium,
+  [SwitchSizes.sm]: SwitchThumbWrapperSmall,
 };
 
-const switchNotCheckedLabelPaddings = {
+const switchNotCheckedThumbPaddings = {
   [SwitchSizes.md]: SwitchPaddingNotCheckedMedium,
   [SwitchSizes.sm]: SwitchPaddingNotCheckedSmall,
 };
 
-const switchCheckedLabelPaddings = {
+const switchCheckedThumbPaddings = {
   [SwitchSizes.md]: SwitchPaddingCheckedMedium,
   [SwitchSizes.sm]: SwitchPaddingCheckedSmall,
 };
@@ -84,7 +84,7 @@ const switchSizes = {
   [SwitchSizes.sm]: 'size-action-size-sm',
 };
 
-const getSwitchLabelAfterElementSize = ({ $size, theme }) =>
+const getSwitchThumbAfterElementSize = ({ $size, theme }) =>
   pipe(
     getToken(switchSizes[$size]),
     subtract(__, 1.5 * theme.space.xs),
@@ -94,7 +94,7 @@ const getSwitchLabelAfterElementSize = ({ $size, theme }) =>
 const getSwitchHeight = ({ $size, theme }) =>
   pipe(getToken(switchSizes[$size]), pxToRem)({ theme });
 
-const BaseLabel = styled.label`
+const BaseThumb = styled.label`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -103,28 +103,27 @@ const BaseLabel = styled.label`
   cursor: pointer;
 `;
 
-const Label = styled(BaseLabel)<SwitchLabelProps>`
+const Thumb = styled(BaseThumb)<SwitchThumbProps>`
   height: ${getSwitchHeight};
   background: ${getFormStyle('switchBgColor')};
-  ${({ $size }) => switchLabelWrapperSizes[$size]};
+  ${({ $size }) => switchThumbWrapperSizes[$size]};
   ${({ isDisabled }) =>
     css`
-      color: ${getFormStyle(isDisabled ? 'disabledColor' : 'switchColor')};
-      border: ${getFormStyle('borderWidth')} solid
+      border: 1px solid
         ${getFormStyle(isDisabled ? 'disabledBorderColor' : 'borderColor')};
     `};
 `;
 
-const LabelContent = styled.div<Omit<SwitchLabelProps, 'maxWidth'>>`
+const ThumbContent = styled.div<Omit<SwitchThumbProps, 'maxWidth'>>`
   cursor: pointer;
-  ${({ $size }) => switchNotCheckedLabelPaddings[$size]};
+  ${({ $size }) => switchNotCheckedThumbPaddings[$size]};
   &::after {
     content: '';
     position: absolute;
     top: ${pxToRem(2)};
     left: ${pxToRem(2)};
-    width: ${getSwitchLabelAfterElementSize};
-    height: ${getSwitchLabelAfterElementSize};
+    width: ${getSwitchThumbAfterElementSize};
+    height: ${getSwitchThumbAfterElementSize};
     ${({ isDisabled }) =>
       css`
         background: ${getFormStyle(
@@ -146,41 +145,46 @@ const Input = styled.input<{
   height: 0;
   width: 0;
   display: none;
-  &:checked:disabled + ${/* sc-selector */ Label} {
+  &:checked:disabled + ${/* sc-selector */ Thumb} {
     color: ${getFormStyle('activeColor')};
     background: ${getFormStyle('disabledColor')};
     border-color: ${getFormStyle('disabledColor')};
   }
 
-  &:hover + ${Label} {
+  &:hover + ${Thumb} {
     background-color: ${getFormStyle('activeBgColor')};
   }
-  &:active + ${Label} {
+  &:active + ${Thumb} {
     background-color: ${getFormStyle('activeBgColor')};
   }
 
-  &:checked + ${Label} {
-    ${LabelContent} {
-      ${({ $size }) => switchCheckedLabelPaddings[$size]};
+  &:checked + ${Thumb} {
+    ${ThumbContent} {
+      ${({ $size }) => switchCheckedThumbPaddings[$size]};
     }
   }
 
-  &:checked + ${Label} {
+  &:checked + ${Thumb} {
     color: ${getFormStyle('activeColor')};
     background: ${getFormStyle('activeBorderColor')};
     border-color: ${getFormStyle('activeBorderColor')};
   }
-  &:checked + ${Label} {
-    ${/* sc-selector */ LabelContent}::after {
+  &:checked + ${Thumb} {
+    ${/* sc-selector */ ThumbContent}::after {
       background: ${getFormStyle('activeColor')};
       left: calc(100% - ${pxToRem(2)});
       transform: translateX(-100%);
     }
   }
-  &:checked:hover + ${Label} {
+  &:checked:disabled + ${Thumb} {
+    ${/* sc-selector */ ThumbContent}::after {
+      background: ${getFormStyle('switchBgColor')};
+    }
+  }
+  &:checked:hover + ${Thumb} {
     background-color: ${getFormStyle('hoverBgColor')};
   }
-  &:checked:active + ${Label} {
+  &:checked:active + ${Thumb} {
     background-color: ${getFormStyle('pressedBgColor')};
   }
 `;
@@ -205,9 +209,9 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         type="checkbox"
         {...props}
       />
-      <Label $size={size} htmlFor={switchId} isDisabled={isDisabled}>
-        <LabelContent $size={size} isDisabled={isDisabled} />
-      </Label>
+      <Thumb $size={size} htmlFor={switchId} isDisabled={isDisabled}>
+        <ThumbContent $size={size} isDisabled={isDisabled} />
+      </Thumb>
     </SwitchWrapper>
   ),
 );

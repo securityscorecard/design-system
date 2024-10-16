@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import Badge from './Badge';
+import Button from '../ButtonV2/Button';
 import { Inline } from '../layout';
 
 /**
@@ -13,13 +14,47 @@ const meta = {
   title: 'components/Badge',
   component: Badge,
   args: {
-    count: 32,
+    children: <Button variant="subtle">Notifications</Button>,
   },
   argTypes: {
     variant: {
+      description:
+        'Badge visual variant. If set to `standard` the `count` property is required. If set to `dot` the `isVisible` property is required.',
+      control: 'select',
+      options: ['standard', 'dot'],
+      table: {
+        defaultValue: {
+          summary: "'standard'",
+        },
+        type: {
+          summary: "'standard' | 'dot'",
+        },
+      },
+    },
+    isVisible: {
+      description:
+        'Controls visibility of Badge in `dot` variant. Required for `dot` variant.',
+      control: 'boolean',
       table: {
         type: {
-          summary: "'neutral' | 'success' | 'info' | 'warn' | 'error'",
+          summary: 'boolean',
+        },
+      },
+    },
+    count: {
+      description:
+        'Set the badge count in the `standard` variant. Required for `standard` variant.',
+    },
+    positionOffset: {
+      description:
+        "Available only on `standard` variant. Set the position offset to fix potentional issues where the badge doesn't fit to base position. The value will be set to transform-translate CSS property.",
+      control: 'text',
+      table: {
+        type: {
+          summary: 'string',
+        },
+        defaultValue: {
+          summary: '50%, -50%',
         },
       },
     },
@@ -31,49 +66,34 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
+  args: {
+    variant: 'standard',
+    count: 56,
+  },
   parameters: {
     screenshot: { skip: true },
   },
 };
-export const SimpleBadge: Story = {};
-export const BadgeWithHighCount: Story = {
+
+export const StandardBadge: Story = {
+  args: Playground.args,
+};
+
+export const DotBadge: Story = {
   args: {
-    count: 120,
+    variant: 'dot',
+    isVisible: true,
   },
 };
-export const NeutralBadge: Story = {
-  args: {
-    variant: 'neutral',
-  },
-};
-export const SuccessBadge: Story = {
-  args: {
-    variant: 'success',
-  },
-};
-export const InfoBadge: Story = {
-  args: {
-    variant: 'info',
-  },
-};
-export const WarnBadge: Story = {
-  args: {
-    variant: 'warn',
-  },
-};
-export const ErrorBadge: Story = {
-  args: {
-    variant: 'error',
-  },
-};
-export const ColorsDark: Story = {
+
+export const DarkMode: Story = {
+  args: Playground.args,
   render: (args) => (
     <Inline gap="md">
-      <Badge {...args} variant="error" />
-      <Badge {...args} variant="neutral" />
-      <Badge {...args} variant="success" />
-      <Badge {...args} variant="info" />
-      <Badge {...args} variant="warn" />
+      <Badge count={56}>{args.children}</Badge>
+      <Badge variant="dot" isVisible>
+        {args.children}
+      </Badge>
     </Inline>
   ),
   parameters: {

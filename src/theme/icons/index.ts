@@ -49,3 +49,4 @@ export { anglesRight } from './anglesRight';
 export { copy } from './copy';
 export { expand } from './expand';
 export { compress } from './compress';
+export { calendar } from './calendar';

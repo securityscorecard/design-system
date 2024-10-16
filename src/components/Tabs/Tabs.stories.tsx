@@ -9,9 +9,10 @@ import { TabsProps } from './Tabs.types';
 import { generateControl } from '../../utils/tests/storybook';
 import { TabVariants } from './Tabs.enums';
 import { Icon } from '../Icon';
-import { Badge } from '../Badge';
 import { Heading } from '../Heading';
 import { Paragraph } from '../Paragraph';
+import Chip from '../Chip/Chip';
+import ChipLabel from '../Chip/ChipLabel';
 
 export default {
   title: 'components/Tabs',
@@ -45,7 +46,9 @@ const TabsTemplate: StoryFn<TabsProps> = (args) => (
       <Inline align="center" gap="sm">
         <Icon color="primary.500" name="sitemap" style={{ fontSize: '1rem' }} />
         <span>Inventory</span>
-        <Badge count={3} variant="neutral" />
+        <Chip color="gray">
+          <ChipLabel isStrong>3</ChipLabel>
+        </Chip>
       </Inline>
     </Tab>
     <Tab value="profile" onClick={action('tab-click')}>

@@ -4,7 +4,7 @@ import { SwitchSizes } from './Switch.enums';
 
 export type Sizes = (typeof SwitchSizes)[keyof typeof SwitchSizes];
 
-export interface SwitchLabelProps {
+export interface SwitchThumbProps {
   isDisabled?: boolean;
   $size?: Sizes;
   maxWidth?: number;

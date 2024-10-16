@@ -42,43 +42,6 @@ import {
 } from './MultiValueInput.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
-const getBorderStyle = (width, color) => css`
-  box-shadow: inset 0 0 0 ${getFormStyle(width)} ${getFormStyle(color)};
-`;
-
-const Control = styled.div<ValueContainerProps>`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: ${getFormStyle('fieldHeight')};
-  background: ${getFormStyle('bgColor')};
-  border-radius: ${getRadii('default')};
-  ${getBorderStyle('borderWidth', 'borderColor')};
-
-  &:focus-within,
-  &.focus-within {
-    outline: 0;
-    border-color: ${getFormStyle('focusBorderColor')};
-    ${getBorderStyle('statefulBorderWidth', 'focusBorderColor')};
-  }
-
-  ${({ $isDisabled }) =>
-    $isDisabled &&
-    css`
-      background: ${getFormStyle('disabledBgColor')};
-      ${getBorderStyle('borderWidth', 'disabledBorderColor')};
-    `};
-
-  ${({ $isInvalid }) =>
-    $isInvalid &&
-    css`
-      && {
-        border-color: ${getFormStyle('invalidBorderColor')};
-        ${getBorderStyle('statefulBorderWidth', 'invalidBorderColor')};
-      }
-    `};
-`;
-
 const ValueContainer = styled(Padbox)`
   display: flex;
   flex-wrap: wrap;
@@ -90,6 +53,50 @@ const ValueContainer = styled(Padbox)`
     $hasValue &&
     css`
       padding-left: ${getSpace(SpaceSizes.xs, { theme })};
+    `};
+`;
+
+const Control = styled.div<ValueContainerProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: ${getFormStyle('fieldHeight')};
+  background: ${getFormStyle('bgColor')};
+  border-radius: var(--sscds-radii-input);
+  box-shadow: inset 0 0 0 1px ${getFormStyle('borderColor')};
+  cursor: text;
+
+  &:hover {
+    box-shadow: inset 0px 0px 0px 1px var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
+  }
+
+  &:focus-within,
+  &.focus-within {
+    outline: 0;
+    box-shadow: inset 0 0 0 2px ${getFormStyle('focusBorderColor')};
+  }
+
+  ${({ $isDisabled }) =>
+    $isDisabled &&
+    css`
+      &,
+      &:hover {
+        background: ${getFormStyle('disabledBgColor')};
+        box-shadow: inset 0 0 0 1px ${getFormStyle('disabledBorderColor')};
+        cursor: not-allowed;
+      }
+      & ${ValueContainer} {
+        opacity: 0.5;
+      }
+    `};
+
+  ${({ $isInvalid }) =>
+    $isInvalid &&
+    css`
+      && {
+        box-shadow: inset 0 0 0 2px ${getFormStyle('invalidBorderColor')};
+      }
     `};
 `;
 
@@ -122,6 +129,13 @@ const InputField = styled.input`
   width: 100%;
   &::-ms-clear {
     display: none;
+  }
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: ${getFormStyle('placeholderColor')};
+  }
+  :-ms-input-placeholder {
+    color: ${getFormStyle('placeholderColor')};
   }
 `;
 

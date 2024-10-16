@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
+import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { RadioProps } from './Radio.types';
@@ -21,6 +21,7 @@ const RadioLabel = styled(Label)<
   margin-bottom: 0;
   padding-top: 0;
   padding-bottom: 0;
+  font-weight: var(--sscds-font-weight-body-default);
 
   ${({ theme, hasLabel }) => {
     const toggleSize = getFormStyle('toggleSize')({ theme });
@@ -50,8 +51,13 @@ const RadioLabel = styled(Label)<
   }
 
   &::before {
-    border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
-    background-color: ${getColor('neutral.0')};
+    border: 1px solid ${getFormStyle('borderColor')};
+    background-color: ${getFormStyle('bgColor')};
+  }
+
+  &:hover::before {
+    border-color: var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
   }
 `;
 
@@ -84,8 +90,7 @@ const RadioInput = styled.input<TogglingInputProps>`
     isInvalid &&
     css`
       & + ${RadioLabel}::before {
-        border: ${getFormStyle('statefulBorderWidth')} solid
-          ${getFormStyle('invalidBorderColor')};
+        border: 2px solid ${getFormStyle('invalidBorderColor')};
       }
       &:checked + ${RadioLabel}::after {
         border-color: ${getFormStyle('invalidBorderColor')};

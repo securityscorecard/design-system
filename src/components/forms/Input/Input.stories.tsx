@@ -56,5 +56,10 @@ export const Invalid: StoryFn = () => (
 );
 
 export const Disabled: StoryFn = () => (
-  <Input aria-label="Input" type="text" isDisabled />
+  <Input
+    aria-label="Input"
+    defaultValue="SecurityScorecard"
+    type="text"
+    isDisabled
+  />
 );

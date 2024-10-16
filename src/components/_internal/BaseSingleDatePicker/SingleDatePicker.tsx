@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { noop } from 'ramda-adjunct';
 import ReactDatePicker from 'react-datepicker';
 
-import { datePickerStyles, singleDatePickerStyles } from './styles';
+import { datePickerStyles } from './styles';
 import { SingleDatePickerProps } from './SingleDatePicker.types';
 import { DatePickerCustomHeader } from './CustomHeader';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { Icon } from '../../Icon';
 
 /**
  * The imports in "react-datepicker" are strangely done and after migration to Vite
@@ -18,7 +19,6 @@ const DatePicker =
 
 const StyledDatePicker = styled.div`
   ${datePickerStyles}
-  ${singleDatePickerStyles}
 `;
 
 const SingleDatePicker = ({
@@ -31,6 +31,7 @@ const SingleDatePicker = ({
   defaultIsYearPickerOpen,
   startDate,
   endDate,
+  isDisabled = false,
 }: SingleDatePickerProps) => {
   const [showYearPicker, setShowYearPicker] = useState(defaultIsYearPickerOpen);
   const pickerRef = useRef({ calendar: { instanceRef: { changeYear: noop } } });
@@ -42,7 +43,9 @@ const SingleDatePicker = ({
         calendarClassName="DateRangePicker-calendar"
         className="DateRangePicker-input"
         dateFormat="d MMM, yyyy"
+        disabled={isDisabled}
         endDate={endDate}
+        icon={<Icon name="calendar" size="sm" hasFixedSize />}
         maxDate={maxDate}
         minDate={minDate}
         open={defaultIsOpen}
@@ -69,6 +72,8 @@ const SingleDatePicker = ({
         showYearPicker={showYearPicker}
         startDate={startDate}
         yearItemNumber={24}
+        showIcon
+        toggleCalendarOnIconClick
         onChange={(newValue) => {
           if (showYearPicker) {
             setShowYearPicker(false);

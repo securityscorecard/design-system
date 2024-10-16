@@ -183,6 +183,8 @@ export const Disabled = SelectTemplate.bind({});
 Disabled.args = {
   ...Default.args,
   isDisabled: true,
+  defaultValue: [options[1]],
+  isMulti: true,
 };
 
 export const Loading = SelectTemplate.bind({});

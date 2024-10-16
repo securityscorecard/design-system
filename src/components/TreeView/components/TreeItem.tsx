@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { Badge } from '../../Badge';
 import { pxToRem } from '../../../utils';
 import { INDENTATION_WIDTH } from '../common/constants';
 import { Inline, Padbox } from '../../layout';
@@ -105,8 +104,19 @@ StartContainer.displayName = 'StartContainer';
 
 const CountBox = styled.span`
   position: absolute;
-  top: -0.75rem;
-  right: -0.75rem;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  height: 1.5rem;
+  min-width: 1.5rem;
+  padding: 0 var(--sscds-space-2x);
+  border-radius: var(--sscds-radii-rounded);
+  font-size: var(--sscds-font-size-elementlabel-sm);
+  font-weight: var(--sscds-font-weight-elementlabel-default);
+  text-align: center;
+  line-height: var(--sscds-font-lineheight-elementlabel);
+  background-color: var(--sscds-color-info-500);
+  color: var(--sscds-color-text-white);
 `;
 CountBox.displayName = 'CountBox';
 
@@ -206,9 +216,7 @@ function TreeItem<D>({
           )}
         </Inline>
         {isClone && childCount && childCount > 1 && (
-          <CountBox>
-            <Badge count={childCount} variant="info" />
-          </CountBox>
+          <CountBox>{childCount}</CountBox>
         )}
       </TreeItemContent>
     </TreeItemRoot>

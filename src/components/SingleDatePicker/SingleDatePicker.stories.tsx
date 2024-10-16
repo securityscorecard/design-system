@@ -76,3 +76,21 @@ export const YearPickerDatePicker: StoryFn = () => {
     />
   );
 };
+
+export const DarkMode: StoryFn = () => {
+  const [dateValue, handleChangeDate] = useState<Date | null>(null);
+
+  return (
+    <SingleDatePicker
+      placeholder="Custom placeholder"
+      value={dateValue}
+      defaultIsOpen
+      onChange={handleChangeDate}
+    />
+  );
+};
+DarkMode.parameters = {
+  themes: {
+    themeOverride: 'Dark',
+  },
+};

@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import styled from 'styled-components';
-import { map, pipe } from 'ramda';
+import { map } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 
 import { SpaceSizes } from '../../../../theme';
 import { SSCIconNames } from '../../../../theme/icons/icons.enums';
-import { getFormStyle, pxToRem } from '../../../../utils';
+import { pxToRem } from '../../../../utils';
 import { Inline } from '../../../layout';
 import { BaseButton } from '../../../_internal/BaseButton';
 import { ButtonVariants } from '../../../Button/Button.enums';
@@ -24,7 +24,7 @@ import { Tooltip } from '../../../Tooltip';
 const BatchActionButton = styled(BaseButton)`
   padding: ${pxToRem(9.5, 16)};
   line-height: ${pxToRem(13)};
-  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
+  height: 2.25rem;
 `;
 
 const BatchActions = ({ actions }: BatchActionsProps) => {

@@ -30,8 +30,7 @@ const RangeInput = styled.input<RangeInputProps>`
     width: ${pxToRem(20)};
     height: ${pxToRem(20)};
     border-radius: 50%;
-    border: ${getFormStyle('statefulBorderWidth')} solid
-      ${getFormStyle('focusBorderColor')};
+    border: 2px solid ${getFormStyle('focusBorderColor')};
     background: ${getFormStyle('bgColor')};
     cursor: pointer;
     :hover {
@@ -40,7 +39,7 @@ const RangeInput = styled.input<RangeInputProps>`
   }
 
   &::-moz-range-track {
-    height: ${getFormStyle('statefulBorderWidth')};
+    height: 2px;
     background: ${getFormStyle('borderColor')};
     ${({ isProgressRight }) =>
       css`
@@ -66,9 +65,8 @@ const RangeInput = styled.input<RangeInputProps>`
     width: ${pxToRem(20)};
     height: ${pxToRem(20)};
     border-radius: 50%;
-    border: ${getFormStyle('statefulBorderWidth')} solid
-      ${getFormStyle('focusBorderColor')};
-    background: ${getFormStyle('bgColor')};
+    border: 2px solid ${getFormStyle('focusBorderColor')};
+    background: var(--sscds-color-neutral-0);
     cursor: pointer;
     :hover {
       box-shadow: 0 0 0 8px ${getFormStyle('focusBorderColor')}22;
@@ -76,7 +74,7 @@ const RangeInput = styled.input<RangeInputProps>`
   }
 
   &::-webkit-slider-runnable-track {
-    height: ${getFormStyle('statefulBorderWidth')};
+    height: 2px;
 
     ${({ isProgressRight, $percent }) =>
       css`
@@ -101,8 +99,7 @@ const RangeInput = styled.input<RangeInputProps>`
 
   &:disabled {
     ::-moz-range-thumb {
-      border: ${getFormStyle('statefulBorderWidth')} solid
-        ${getFormStyle('borderColor')};
+      border: 2px solid ${getFormStyle('borderColor')};
       cursor: not-allowed;
     }
     ::-moz-range-track {
@@ -112,8 +109,7 @@ const RangeInput = styled.input<RangeInputProps>`
       background: ${getFormStyle('borderColor')};
     }
     ::-webkit-slider-thumb {
-      border: ${getFormStyle('statefulBorderWidth')} solid
-        ${getFormStyle('borderColor')};
+      border: 2px solid ${getFormStyle('borderColor')};
       pointer-events: none;
     }
     ::-webkit-slider-runnable-track {

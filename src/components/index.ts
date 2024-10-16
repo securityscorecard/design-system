@@ -1,5 +1,5 @@
 export * from './Accordion';
-export * from './Badge';
+export { default as Badge, type BadgeProps } from './Badge/Badge';
 export * from './Banner';
 export * from './Breadcrumbs';
 export * from './Button';

@@ -14,7 +14,7 @@ import {
   StylesConfig,
   components,
 } from 'react-select';
-import { append, apply, assoc, both, includes, pick, pipe, take } from 'ramda';
+import { append, apply, both, includes, pick, pipe, take } from 'ramda';
 import {
   isEmptyString,
   isNonEmptyArray,
@@ -66,7 +66,7 @@ const stateStyles = (
   color: `var(--sscds-${string})`,
   width: `${string}px`,
 ) => ({
-  boxShadow: `inset 0 0 0 ${width} ${color}`,
+  boxShadow: `inset 0 0 0 ${width} ${color} !important`,
 });
 
 const invalidStyles = {
@@ -80,6 +80,7 @@ const focusStyles = {
 const disabledStyles = {
   ...stateStyles('var(--sscds-color-border-input-disabled)', '1px'),
   background: 'var(--sscds-color-background-input-disabled)',
+  color: 'var(--sscds-color-text-disabled)',
 };
 
 const indicatorStyles = {
@@ -89,7 +90,7 @@ const indicatorStyles = {
   color: 'var(--sscds-color-icon-subtle)',
   cursor: 'pointer',
   width: '2rem',
-  height: '1.75rem',
+  height: '2rem',
   ':hover': {
     color: 'var(--sscds-color-icon-default)',
   },
@@ -123,13 +124,20 @@ export const selectStyles: (
         fontSize: 'var(--sscds-font-size-body-md)',
         lineHeight: 'var(--sscds-font-lineheight-body-md)',
         outline: 'none',
-
+        ':hover': {
+          boxShadow:
+            'inset 0px 0px 0px 1px var(--sscds-color-border-input-hover)',
+          background: 'var(--sscds-color-background-input-hover)',
+        },
         ...(isInvalid && invalidStyles),
         ...((isFocused || includes('focus', className)) && focusStyles),
         ...(isDisabled && disabledStyles),
       };
     },
-    valueContainer: (styles, { selectProps: { isMulti, value } }) => {
+    valueContainer: (
+      styles,
+      { selectProps: { isMulti, value, isDisabled } },
+    ) => {
       return {
         ...styles,
         display: 'flex',
@@ -141,11 +149,21 @@ export const selectStyles: (
           isMulti && isNotNilOrEmpty(value)
             ? undefined
             : 'var(--sscds-space-4x)',
+        opacity: isDisabled && isMulti ? 0.5 : 1,
       };
     },
-    singleValue: assoc('margin', 0),
+    singleValue: (styles) => ({
+      ...styles,
+      margin: 0,
+      color: 'inherit',
+    }),
     multiValue: () => ({}),
-    multiValueContainer: () => ({}),
+    multiValueContainer: (_, { isDisabled }) =>
+      isDisabled
+        ? {
+            opacity: 0.7,
+          }
+        : {},
     multiValueLabel: () => ({}),
     multiValueRemove: () => ({}),
     // Disable TS because types are wrong for Input component
@@ -205,8 +223,7 @@ export const selectStyles: (
       boxShadow: 'var(--sscds-shadow-1x)',
       marginBottom: 'var(--sscds-space-1x)',
       marginTop: 'var(--sscds-space-1x)',
-      paddingTop: 'var(--sscds-space-2x)',
-      paddingBottom: 'var(--sscds-space-2x)',
+      padding: 'var(--sscds-space-2x)',
     }),
     menuList: (styles) => ({
       ...styles,
@@ -225,15 +242,19 @@ export const selectStyles: (
       fontSize: 'var(--sscds-font-size-body-md)',
       lineHeight: 'var(--sscds-font-lineheight-body-md)',
       padding: menuItemPadding,
+      transition: 'var(--sscds-action-transition)',
       ':active': {
         ...styles[':active'],
         backgroundColor: 'var(--sscds-color-background-selectable-active)',
       },
+      borderRadius: 'var(--sscds-radii-default)',
     }),
     group: (styles) => ({
       ...styles,
       padding: 0,
-      marginTop: 'var(--sscds-space-2x)',
+      ':not(:first-child)': {
+        marginTop: 'var(--sscds-space-2x)',
+      },
     }),
     groupHeading: (styles) => ({
       ...styles,
@@ -324,7 +345,7 @@ const ActionsMenu = styled.div`
 
 const SelectActionButton = styled(Button)`
   justify-content: flex-start;
-  border-radius: 0;
+  border-radius: var(--sscds-radii-default);
 `;
 
 const getActionProps: (
@@ -454,20 +475,18 @@ export const Option: ComponentType<OptionProps<OptionType, boolean>> = (
   }
 
   return (
-    <div>
-      <components.Option {...props}>
-        <Inline gap={SpaceSizes.sm}>
-          <StyledCheckbox
-            checkboxId={`select-${label}`}
-            checked={isSelected}
-            isDisabled={isDisabled}
-            label={children}
-            name={label}
-            readOnly
-          />
-        </Inline>
-      </components.Option>
-    </div>
+    <components.Option {...props}>
+      <Inline gap={SpaceSizes.sm}>
+        <StyledCheckbox
+          checkboxId={`select-${label}`}
+          checked={isSelected}
+          isDisabled={isDisabled}
+          label={children}
+          name={label}
+          readOnly
+        />
+      </Inline>
+    </components.Option>
   );
 };
 

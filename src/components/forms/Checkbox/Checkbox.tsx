@@ -6,7 +6,7 @@ import cls from 'classnames';
 
 import * as checked from '../../../theme/icons/check';
 import * as indeterminate from '../../../theme/icons/minus';
-import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
+import { getFormStyle, getRadii, pxToRem } from '../../../utils';
 import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
@@ -30,9 +30,9 @@ const Box = styled.div`
   flex: 0 0 ${getRemToggleSize};
   height: ${getRemToggleSize};
   width: ${getRemToggleSize};
-  border: ${getFormStyle('borderWidth')} solid ${getFormStyle('borderColor')};
+  border: 1px solid ${getFormStyle('borderColor')};
   border-radius: ${getRadii('default')};
-  background: ${getColor('neutral.0')};
+  background: ${getFormStyle('bgColor')};
   padding: ${pxToRem(3)};
 `;
 
@@ -61,12 +61,18 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   &:disabled + ${Box} {
     border-color: ${getFormStyle('disabledBorderColor')};
     background: ${getFormStyle('disabledBgColor')};
+    cursor: not-allowed;
   }
 
   &:disabled:checked + ${Box} {
     ${Mark} {
       color: ${getFormStyle('disabledActiveColor')};
     }
+  }
+
+  &:hover:not(:disabled, :checked) + ${Box} {
+    border-color: var(--sscds-color-border-input-hover);
+    background: var(--sscds-color-background-input-hover);
   }
 
   &:focus + ${Box} {
@@ -76,8 +82,8 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   ${({ isIndeterminate }) =>
     isIndeterminate &&
     css`
-      & + ${Box} {
-        background: ${getFormStyle('activeBorderColor')};
+      & + ${Box}, &:hover + ${Box} {
+        background: ${getFormStyle('activeBorderColor')} !important;
         border-color: ${getFormStyle('activeBorderColor')};
         ${Mark} {
           display: block;
@@ -93,9 +99,8 @@ const CheckboxInput = styled.input<TogglingInputProps>`
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      & + ${Box}, &:checked + ${Box} {
-        border: ${getFormStyle('statefulBorderWidth')} solid
-          ${getFormStyle('invalidBorderColor')};
+      & + ${Box}, &:checked + ${Box}, &:hover + ${Box} {
+        border: 2px solid ${getFormStyle('invalidBorderColor')} !important;
       }
     `}
 `;
@@ -105,6 +110,7 @@ const getLabelStyles = css`
   min-height: ${getRemToggleSize};
   line-height: ${getRemToggleSize};
   margin-left: ${({ theme }) => `-${getRemToggleSize({ theme })}`};
+  font-weight: var(--sscds-font-weight-body-default);
 `;
 
 const CheckboxLabel = styled(Label)<{ isDisabled: boolean }>`

@@ -6,8 +6,6 @@ export interface Forms {
   bgColor: string;
   disabledColor: string;
   borderColor: string;
-  borderWidth: string;
-  statefulBorderWidth: string;
   focusBorderColor: string;
   invalidBorderColor: string;
   activeColor: string;
@@ -19,10 +17,8 @@ export interface Forms {
   placeholderColor: string;
   indicatorColor: string;
   hoverIndicatorColor: string;
-  switchColor: string;
   switchBgColor: string;
   switchKnobBgColor: string;
   hoverBgColor: string;
-  hoverBorderColor: string;
   pressedBgColor: string;
 }
