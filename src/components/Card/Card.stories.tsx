@@ -129,7 +129,7 @@ function CardMediaTemplate({
 }
 
 const CardTemplate: StoryFn<CardProps> = ({ ...args }) => (
-  <div style={{ width: '400px' }}>
+  <div style={{ maxWidth: '400px' }}>
     <Card {...args} data-custom-attr="test" />
   </div>
 );
