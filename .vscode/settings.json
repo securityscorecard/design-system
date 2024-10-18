@@ -4,12 +4,4 @@
     "**/build": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cssvar.postcssSyntax": {
-    "postcss-syntax": ["jsx", "tsx"]
-  },
-  "cssvar.themes": [
-    "dark",
-    "dark-theme",
-  ],
-  "cssvar.excludeThemedVariables": true
 }

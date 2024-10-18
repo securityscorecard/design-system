@@ -1,0 +1,202 @@
+import React from 'react';
+import styled from 'styled-components';
+import { Meta, Story, Unstyled, useOf } from '@storybook/blocks';
+
+import { DSProvider } from '../src/theme';
+import { ButtonV2, ElementLabel, Inline, Padbox, Stack, Surface } from "../src/components";
+import * as AccordionStories from '../src/components/Accordion/Accordion.stories';
+import * as BadgeStories from '../src/components/Badge/Badge.stories';
+import * as BannerStories from '../src/components/Banner/Banner.stories';
+import * as BreadcrumbsStories from '../src/components/Breadcrumbs/Breadcrumbs.stories';
+import * as ButtonStories from '../src/components/ButtonV2/Button.stories';
+import * as IconButtonStories from '../src/components/ButtonV2/IconButton.stories';
+import * as CalloutStories from '../src/components/Callout/Callout.stories';
+import * as CardStories from '../src/components/Card/Card.stories';
+import * as CheckboxStories from '../src/components/forms/Checkbox/Checkbox.stories';
+import * as ChipStories from '../src/components/Chip/Chip.stories';
+import * as CloseButtonStories from '../src/components/CloseButton/CloseButton.stories';
+import * as CollapsibleStories from '../src/components/Collapsible/Collapsible.stories';
+import * as ControlDropdownStories from '../src/components/ControlDropdown/ControlDropdown.stories';
+import * as DateRangePickerStories from '../src/components/DateRangePicker/DateRangePicker.stories';
+import * as DisplayStories from '../src/components/Display/Display.stories';
+import * as DropdownStories from '../src/components/Dropdown/Dropdown.stories';
+import * as ElementLabelStories from '../src/components/ElementLabel/ElementLabel.stories';
+import * as ErrorBoundaryStories from '../src/components/ErrorBoundary/ErrorBoundary.stories';
+import * as FileSelectorStories from '../src/components/FileSelector/FileSelector.stories';
+import * as HeadingStories from '../src/components/Heading/Heading.stories';
+import * as HexGradeStories from '../src/components/HexGrade/HexGrade.stories';
+import * as HintTooltipStories from '../src/components/HintTooltip/HintTooltip.stories';
+import * as IconStories from '../src/components/Icon/Icon.stories';
+import * as IconWrapperStories from '../src/components/IconWrapper/IconWrapper.stories';
+import * as InputStories from '../src/components/forms/Input/Input.stories';
+import * as InputGroupStories from '../src/components/forms/InputGroup/InputGroup.stories';
+import * as LabelStories from '../src/components/forms/Label/Label.stories';
+import * as LinkStories from '../src/components/Link/Link.stories';
+import * as LoadingStories from '../src/components/Loading/Loading.stories';
+import * as LogoStories from '../src/components/Logo/Logo.stories';
+import * as MessageStories from '../src/components/forms/Message/Message.stories';
+import * as MultiValueInputStories from '../src/components/forms/MultiValueInput/MultiValueInput.stories';
+import * as PaginationStories from '../src/components/Pagination/Pagination.stories';
+import * as PasswordStories from '../src/components/forms/Password/Password.stories';
+import * as ParagraphStories from '../src/components/Paragraph/Paragraph.stories';
+import * as PillStories from '../src/components/Pill/Pill.stories';
+import * as ProgressBarStories from '../src/components/ProgressBar/ProgressBar.stories';
+import * as RadioStories from '../src/components/forms/Radio/Radio.stories';
+import * as RangeStories from '../src/components/forms/Range/Range.stories';
+import * as ScoreDeltaStories from '../src/components/ScoreDelta/ScoreDelta.stories';
+import * as ScrollViewStories from '../src/components/ScrollView/ScrollView.stories';
+import * as SearchBarStories from '../src/components/forms/SearchBar/SearchBar.stories';
+import * as SegmentedToggleStories from '../src/components/forms/SegmentedToggle/SegmentedToggle.stories';
+import * as SelectStories from '../src/components/forms/Select/Select.stories';
+import * as SignalStories from '../src/components/Signal/Signal.stories';
+import * as SingleDatePickerStories from '../src/components/SingleDatePicker/SingleDatePicker.stories';
+import * as SkeletonStories from '../src/components/Skeleton/Skeleton.stories';
+import * as SnippetStories from '../src/components/Snippet/Snippet.stories';
+import * as SortableListStories from '../src/components/SortableList/SortableList.stories';
+import * as SpinnerStories from '../src/components/Spinner/Spinner.stories';
+import * as StatusDotStories from '../src/components/StatusDot/StatusDot.stories';
+import * as StatusPillStories from '../src/components/StatusPill/StatusPill.stories';
+import * as StepperStories from '../src/components/Stepper/Stepper.stories';
+import * as SwitchStories from '../src/components/forms/Switch/Switch.stories';
+import * as TabsStories from '../src/components/Tabs/Tabs.stories';
+import * as TextStories from '../src/components/Text/Text.stories';
+import * as TextAreaStories from '../src/components/forms/TextArea/TextArea.stories';
+import * as TooltipStories from '../src/components/Tooltip/Tooltip.stories';
+import * as TrendIconStories from '../src/components/TrendIcon/TrendIcon.stories';
+import * as UserAvatarStories from '../src/components/UserAvatar/UserAvatar.stories';
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+`;
+export const FullWidthStory = styled.div`
+  flex: 1; align-items: center; display: flex;
+
+& > .sb-story {
+width: 100%;
+}
+`
+
+export function OverviewCard ({ title, of, centerStory = true }) {
+  const resolvedOf = useOf(of || 'story', ['story', 'meta']);
+  const componentTitle = title ?? resolvedOf.story.title.split('/').at(-1);
+
+return (
+
+<Surface
+  background="dynamic"
+  elevation={1}
+  id={resolvedOf.story.componentId}
+  radius="md"
+  hasBorder
+>
+  <Padbox paddingSize="md" style={{ height: '100%' }}>
+    <Stack
+      align="space-between"
+      gap="md"
+      splitAt={2}
+      // style={{ minHeight: 300 }}
+    >
+      <Inline align="center" gap="sm">
+        <ElementLabel size="md" isStrong>
+          {componentTitle}
+        </ElementLabel>
+      </Inline>
+      {centerStory ? (
+        <Inline align="center" justify="center" style={{ flex: 1 }}>
+          <Story of={of} />
+        </Inline>
+      ) : (
+        <FullWidthStory>
+          <Story of={of} />
+        </FullWidthStory>
+      )}
+      <Inline justify="flex-end">
+        <ButtonV2
+          as="a"
+          href={`/?path=/docs/${resolvedOf.story.componentId}--documentation`}
+          iconEnd={{ name: 'angle-right' }}
+          size="sm"
+          variant="ghost"
+        >
+          See documentation
+        </ButtonV2>
+      </Inline>
+    </Stack>
+  </Padbox>
+</Surface>
+)}
+
+<Meta title="Overview" />
+
+# Overview
+
+Components are the building blocks of our design system, each component serves an specific need. Find below a list of examples.
+
+<Unstyled>
+  <DSProvider>
+    <Grid>
+      <OverviewCard centerStory={false} of={AccordionStories.Playground} />
+      <OverviewCard of={BadgeStories.Playground} />
+      <OverviewCard centerStory={false} of={BannerStories.Playground} />
+      <OverviewCard of={BreadcrumbsStories.Playground} />
+      <OverviewCard of={ButtonStories.Playground} />
+      <OverviewCard of={IconButtonStories.Playground} />
+      <OverviewCard of={CalloutStories.Playground} />
+      <OverviewCard of={CardStories.Playground} />
+      <OverviewCard of={CheckboxStories.Playground} />
+      <OverviewCard of={ChipStories.Playground} />
+      <OverviewCard of={CloseButtonStories.Default} />
+      <OverviewCard centerStory={false} of={CollapsibleStories.Playground} />
+      <OverviewCard of={ControlDropdownStories.Playground} />
+      <OverviewCard of={DateRangePickerStories.Playground} />
+      <OverviewCard of={DisplayStories.Playground} />
+      <OverviewCard of={DropdownStories.Playground} />
+      <OverviewCard of={ElementLabelStories.Playground} />
+      <OverviewCard of={ErrorBoundaryStories.Medium} />
+      <OverviewCard of={FileSelectorStories.Playground} />
+      <OverviewCard of={HeadingStories.Playground} />
+      <OverviewCard of={HexGradeStories.SolidHexGrades} />
+      <OverviewCard of={HintTooltipStories.Default} />
+      <OverviewCard of={IconStories.Playground} />
+      <OverviewCard of={IconWrapperStories.Playground} />
+      <OverviewCard of={InputStories.Filled} />
+      <OverviewCard of={InputGroupStories.InputGroupWithButton} />
+      <OverviewCard of={LabelStories.Default} />
+      <OverviewCard of={LinkStories.Playground} />
+      <OverviewCard centerStory={false} of={LoadingStories.Playground} />
+      <OverviewCard of={LogoStories.VariantEmblem} />
+      <OverviewCard of={MessageStories.Playground} />
+      <OverviewCard of={MultiValueInputStories.Filled} />
+      <OverviewCard of={PaginationStories.OnlyCurrentPage} />
+      <OverviewCard of={PasswordStories.DefaultPassword} />
+      <OverviewCard of={ParagraphStories.Playground} />
+      <OverviewCard of={PillStories.Playground} />
+      <OverviewCard centerStory={false} of={ProgressBarStories.Variants} />
+      <OverviewCard of={RadioStories.Playground} />
+      <OverviewCard of={RangeStories.Playground} />
+      <OverviewCard of={ScoreDeltaStories.Playground} />
+      <OverviewCard of={ScrollViewStories.Playground} />
+      <OverviewCard of={SearchBarStories.Playground} />
+      <OverviewCard of={SegmentedToggleStories.Playground} />
+      <OverviewCard centerStory={false} of={SelectStories.Playground} />
+      <OverviewCard of={SignalStories.Playground} />
+      <OverviewCard of={SingleDatePickerStories.Playground} />
+      <OverviewCard centerStory={false} of={SkeletonStories.Default} />
+      <OverviewCard centerStory={false} of={SnippetStories.Playground} />
+      <OverviewCard centerStory={false} of={SortableListStories.Playground} />
+      <OverviewCard of={SpinnerStories.DarkSpinner} />
+      <OverviewCard of={StatusDotStories.Default} />
+      <OverviewCard of={StatusPillStories.Default} />
+      <OverviewCard of={StepperStories.Vertical} />
+      <OverviewCard of={SwitchStories.Playground} />
+      <OverviewCard of={TabsStories.Playground} />
+      <OverviewCard of={TextStories.Playground} />
+      <OverviewCard centerStory={false} of={TextAreaStories.Filled} />
+      <OverviewCard of={TooltipStories.Playground} />
+      <OverviewCard of={TrendIconStories.Trends} />
+      <OverviewCard of={UserAvatarStories.Playground} />
+    </Grid>
+  </DSProvider>
+</Unstyled>
