@@ -106,7 +106,7 @@
     "react-container-query": "^0.13.0",
     "react-cool-portal": "^1.2.0",
     "react-datepicker": "^4.6.0",
-    "react-dropzone": "^12.1.0",
+    "react-dropzone": "^14.2.9",
     "react-i18next": ">=11.18.6",
     "react-popper": "^2.2.5",
     "react-table": "^7.7.0",

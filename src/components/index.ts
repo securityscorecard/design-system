@@ -33,7 +33,12 @@ export {
   type ElementLabelProps,
 } from './ElementLabel/ElementLabel';
 export * from './ErrorBoundary';
-export * from './FileSelector';
+export { default as FileSelector } from './FileSelector/FileSelector';
+export type { FileSelectorProps } from './FileSelector/FileSelector.types';
+export {
+  default as FileSelectorButton,
+  type FileSelectorButtonProps,
+} from './FileSelectorButton/FileSelectorButton';
 export * from './Filters';
 export * from './FlexContainer';
 export * from './forms';
