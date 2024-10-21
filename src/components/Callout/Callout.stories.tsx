@@ -33,6 +33,17 @@ export const NeutralCallout: Story = {
   args: { color: 'neutral' },
 };
 
+export const SizedIcon: Story = {
+  render: (args) => (
+    <Stack gap="md">
+      <Callout {...args} icon={{ name: 'lightbulb', size: 'xs' }} />
+      <Callout {...args} icon={{ name: 'lightbulb', size: 'sm' }} />
+      <Callout {...args} icon={{ name: 'lightbulb', size: 'md' }} />
+    </Stack>
+  ),
+  args: { color: 'neutral' },
+};
+
 export const ColorsDark: Story = {
   render: (args) => (
     <Stack gap="md">
