@@ -73,6 +73,12 @@ const monospaceVariant = css`
 const dangerVariant = css`
   color: var(--sscds-color-text-danger);
 `;
+const actionVariant = css`
+  color: var(--sscds-color-text-action);
+`;
+const disabledVariant = css`
+  color: var(--sscds-color-text-disabled);
+`;
 const inheritVariant = `
   color: inherit;
 `;
@@ -96,6 +102,8 @@ const variants = {
   [TextVariants.white]: whiteVariant,
   [TextVariants.monospace]: monospaceVariant,
   [TextVariants.danger]: dangerVariant,
+  [TextVariants.disabled]: disabledVariant,
+  [TextVariants.action]: actionVariant,
   [TextVariants.inherit]: inheritVariant,
 
   /** @deprecated */

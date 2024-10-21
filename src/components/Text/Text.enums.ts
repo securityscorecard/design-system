@@ -17,6 +17,8 @@ export const TextVariants = {
   white: 'white',
   monospace: 'monospace',
   danger: 'danger',
+  action: 'action',
+  disabled: 'disabled',
   inherit: 'inherit',
 
   /** @deprecated */

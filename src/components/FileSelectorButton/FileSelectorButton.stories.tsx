@@ -2,57 +2,21 @@ import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { isNonEmptyArray } from 'ramda-adjunct';
 
-import FileSelector from './FileSelector';
+import FileSelectorButton from './FileSelectorButton';
 import { Inline, Padbox, Stack, Surface } from '../layout';
+import { SpaceSizes } from '../../theme/space.enums';
 import { TextVariants } from '../Text/Text.enums';
 import { Text } from '../Text';
 
 /**
  * ```jsx
- * import { FileSelector } from '@securityscorecard/design-system';
+ * import { FileSelectorButton } from '@securityscorecard/design-system';
  * ```
  */
 
 const meta = {
-  component: FileSelector,
+  component: FileSelectorButton,
   argTypes: {
-    size: {
-      control: 'select',
-      options: ['fill', 'comapct', 'area'],
-      description: 'Size variant of the FileSelector',
-      table: {
-        type: {
-          summary: "'fill' | 'comapct' | 'area'",
-        },
-      },
-    },
-    hasError: {
-      control: 'boolean',
-      description: 'Sets file selector into errorous state',
-      table: {
-        type: {
-          summary: 'boolean',
-        },
-      },
-    },
-    isDisabled: {
-      control: 'boolean',
-      description: 'Disables the FileSelector',
-      table: {
-        type: {
-          summary: 'boolean',
-        },
-      },
-    },
-    instructionsText: {
-      description:
-        'Text with file requirements. Availabel for `fill` and `area` sizes.',
-      table: {
-        type: {
-          summary: 'string',
-        },
-      },
-    },
     multiple: {
       control: 'boolean',
       description: 'Allows to select multiple files',
@@ -137,34 +101,13 @@ const meta = {
         },
       },
     },
-    width: {
-      control: 'number',
-      description:
-        'Width of the droping zone, takes Number in pixels or any other valid value as String. Available only for `area` size.',
-      table: {
-        type: {
-          summary: 'number | string',
-        },
-      },
-    },
-    height: {
-      control: 'number',
-      description:
-        'Height of the droping zone, takes Number in pixels or any other valid value as String. Available only for `area` size.',
-      table: {
-        type: {
-          summary: 'number | string',
-        },
-      },
-    },
   },
   args: {
-    instructionsText: 'Pass instructions for uploaded files here',
     accept: {
       'image/*': [],
     },
   },
-} satisfies Meta<typeof FileSelector>;
+} satisfies Meta<typeof FileSelectorButton>;
 
 export default meta;
 
@@ -173,33 +116,6 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {
   parameters: {
     screenshot: { skip: true },
-  },
-};
-
-export const Sizes: Story = {
-  render: (args) => (
-    <Stack gap="4x">
-      <FileSelector size="compact" {...args} />
-      <FileSelector size="fill" {...args} />
-      <FileSelector height={300} size="area" width={400} {...args} />
-    </Stack>
-  ),
-};
-
-export const WithError: Story = {
-  render: Sizes.render,
-  args: { hasError: true },
-};
-export const Disabled: Story = {
-  render: Sizes.render,
-  args: { isDisabled: true },
-};
-export const DarkMode: Story = {
-  render: Sizes.render,
-  parameters: {
-    themes: {
-      themeOverride: 'Dark',
-    },
   },
 };
 
@@ -239,12 +155,8 @@ export const Example: Story = {
     };
 
     return (
-      <Stack gap="4x">
-        <FileSelector
-          hasError={isNonEmptyArray(errors)}
-          onFilesDrop={handleOnDrop}
-          {...args}
-        />
+      <Stack gap={SpaceSizes.md}>
+        <FileSelectorButton onFilesDrop={handleOnDrop} {...args} />
         {files.map((file) => (
           <File key={`${file.name}-accepted`} file={file} />
         ))}
@@ -262,8 +174,6 @@ export const Example: Story = {
     accept: {
       'image/png': ['.png'],
     },
-    instructionsText:
-      '.png only, file size between 100kB and 400kB, up to 2 files',
     maxFiles: 2,
     maxFileSize: 400 * 1024,
     minFileSize: 100 * 1024,
