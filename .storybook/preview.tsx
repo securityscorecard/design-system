@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
 import { withScreenshot } from 'storycap';
 import i18n from 'i18next';
@@ -35,33 +35,36 @@ clearDatatableLS();
 createIconLibrary();
 window.Math.random = () => 0.5;
 
-i18n.use(ICU).use(initReactI18next).init({
-  debug: true,
-  i18nFormat: {
-    localeData: [icuEn, icuJa, icuEs, icuPt, icuCs],
-    formats: {},
-  },
-  resources: {
-    'en-US': { sscds: en },
-    'ja-JP': { sscds: ja },
-    'cs-CZ': { sscds: cs },
-    'es-ES': { sscds: es },
-    'pt-BR': { sscds: pt },
-  },
-  defaultNS:'sscds',
-  keySeparator: false,
-  nsSeparator: '|',
-  lng: 'en-US',
-  fallbackLng: 'en-US',
-  interpolation: {
-    escapeValue: false,
-  },
-  saveMissing: true, // necessary for `missingKeyHandler` to work
-  missingKeyHandler: (lng, __, key) => {
-    // eslint-disable-next-line no-console
-    console.warn(`Missing intl key for lng:${lng}: '${key}' `);
-  }
-});
+i18n
+  .use(ICU)
+  .use(initReactI18next)
+  .init({
+    debug: true,
+    i18nFormat: {
+      localeData: [icuEn, icuJa, icuEs, icuPt, icuCs],
+      formats: {},
+    },
+    resources: {
+      'en-US': { sscds: en },
+      'ja-JP': { sscds: ja },
+      'cs-CZ': { sscds: cs },
+      'es-ES': { sscds: es },
+      'pt-BR': { sscds: pt },
+    },
+    defaultNS: 'sscds',
+    keySeparator: false,
+    nsSeparator: '|',
+    lng: 'en-US',
+    fallbackLng: 'en-US',
+    interpolation: {
+      escapeValue: false,
+    },
+    saveMissing: true, // necessary for `missingKeyHandler` to work
+    missingKeyHandler: (lng, __, key) => {
+      // eslint-disable-next-line no-console
+      console.warn(`Missing intl key for lng:${lng}: '${key}' `);
+    },
+  });
 
 const withI18next = (Story, context) => {
   const { locale } = context.globals;
@@ -73,9 +76,9 @@ const withI18next = (Story, context) => {
   }, [locale]);
 
   return (
-      <I18nextProvider i18n={i18n}>
-        <Story />
-      </I18nextProvider>
+    <I18nextProvider i18n={i18n}>
+      <Story />
+    </I18nextProvider>
   );
 };
 
@@ -124,11 +127,10 @@ const preview: Preview = {
     },
     docs: {
       source: { type: 'dynamic' },
-      controls:{
-        sort: 'requiredFirst'
-      }
+      controls: {
+        sort: 'requiredFirst',
+      },
     },
-    // storycap settings
     screenshot: {
       fullPage: true,
     },
@@ -151,7 +153,7 @@ const preview: Preview = {
       <DSProvider config={{ debugMode: true }}>{storyFn()}</DSProvider>
     ),
   ],
-  tags:['autodocs'],
+  tags: ['autodocs'],
   globalTypes: {
     locale: {
       name: 'Locale',
@@ -171,4 +173,4 @@ const preview: Preview = {
   },
 };
 
-export default preview
+export default preview;

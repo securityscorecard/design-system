@@ -22,6 +22,7 @@ const config: StorybookConfig = {
     '@storybook/addon-themes',
     '@storybook/addon-coverage',
     'storycap',
+    '@storybook/addon-a11y'
   ],
   docs: { defaultName: 'Documentation' },
   typescript: {
