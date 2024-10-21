@@ -14,6 +14,7 @@ export type CalloutProps = {
     | {
         name: IconNames;
         type?: RegularIconTypes;
+        size?: Exclude<ComponentProps<typeof IconWrapper>['size'], 'lg' | 'xl'>;
       };
   color?: 'neutral' | 'info';
 };
@@ -47,7 +48,7 @@ const Callout = ({
         ) : (
           <IconWrapper
             name={icon.name}
-            size="md"
+            size={icon?.size ?? 'md'}
             type={icon?.type ?? 'ssc'}
             variant={iconWrapperVariant}
           />
