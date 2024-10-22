@@ -98,12 +98,14 @@ function Content({
   isFocused,
   hasError,
   instructionsText,
+  textAlign = 'left',
 }: {
   isDisabled: boolean;
   isDragActive: boolean;
   isFocused: boolean;
   hasError: boolean;
   instructionsText: string;
+  textAlign?: 'left' | 'center';
 }) {
   return (
     <>
@@ -112,7 +114,7 @@ function Content({
         size="md"
         variant={(isDragActive || isFocused) && !hasError ? 'strong' : 'subtle'}
       />
-      <Stack>
+      <Stack justify={textAlign === 'center' ? 'center' : 'flex-start'}>
         <Text variant={isDisabled ? 'disabled' : 'default'} isBold>
           Drop your file here or{' '}
           <Link
@@ -228,6 +230,7 @@ function FileSelector({
               isDisabled={isDisabled}
               isDragActive={isDragActive}
               isFocused={isFocused}
+              textAlign="center"
             />
           </Stack>
         )}
