@@ -1,0 +1,1 @@
+{"version":3,"file":"index-B-LfxgeQ.js","sources":["../../src/components/forms/Label/index.ts"],"sourcesContent":["export { default as Label } from './Label';\n"],"names":["cov_lusgrmm6c","actualCoverage"],"mappings":"8rBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
