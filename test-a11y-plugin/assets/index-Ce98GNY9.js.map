@@ -1,1 +1,0 @@
-{"version":3,"file":"index-Ce98GNY9.js","sources":["../../src/components/IconWrapper/index.ts"],"sourcesContent":["export { default as IconWrapper } from './IconWrapper';\nexport * from './IconWrapper.types';\n"],"names":["cov_sqcgilf2e","actualCoverage"],"mappings":"utBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}

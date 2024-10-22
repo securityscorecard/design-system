@@ -1,1 +1,0 @@
-import{B as e,w as i}from"./space-B9R18Mwn.js";var o=e(function(t){return i(t.length,function(a,p){var r=Array.prototype.slice.call(arguments,0);return r[0]=p,r[1]=a,t.apply(this,r)})});export{o as f};
