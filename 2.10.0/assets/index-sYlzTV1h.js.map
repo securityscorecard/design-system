@@ -1,1 +1,0 @@
-{"version":3,"file":"index-sYlzTV1h.js","sources":["../../../src/components/Spinner/index.ts"],"sourcesContent":["export { default as Spinner } from './Spinner';\nexport * from './Spinner.types';\n"],"names":["cov_1zsiqk0svc","actualCoverage"],"mappings":"usBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
