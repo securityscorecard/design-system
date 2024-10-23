@@ -3,27 +3,29 @@ import { useDropzone } from 'react-dropzone';
 import { omit } from 'ramda';
 import cls from 'classnames';
 
-import { SpaceSizes } from '../../theme/space.enums';
-import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { getColor, getFormStyle, getRadii, pxToRem } from '../../utils';
-import { Cluster, Padbox } from '../layout';
-import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
+import { Inline, Padbox, Stack, Surface } from '../layout';
 import Button from '../ButtonV2/Button';
 import { Text } from '../Text';
-import { TextSizes, TextVariants } from '../Text/Text.enums';
 import { FileSelectorProps } from './FileSelector.types';
-import { FileSelectorSizes } from './FileSelector.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
-import { useLogger } from '../../hooks/useLogger';
+import { pxToRem } from '../../utils';
+import { IconWrapper } from '../IconWrapper';
+import { Link } from '../Link';
 
-const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
-  background-color: ${getColor('neutral.0')};
-  border: 1px dashed ${getFormStyle('borderColor')};
-  border-radius: ${getRadii('large')};
+const FileSelectorRoot = styled(Surface)<{
+  $size: FileSelectorProps['size'];
+  $width?: number | string;
+  $height?: number | string;
+  $isDragActive: boolean;
+  $isFocused: boolean;
+  $isDisabled: boolean;
+  $hasError: boolean;
+}>`
+  border-style: dashed;
 
   ${({ $size, $width, $height }) => {
-    if ($size === FileSelectorSizes.compact) return 'display: inline-flex;';
-    if ($size === FileSelectorSizes.fill) return 'display: flex;';
+    if ($size === 'compact') return 'display: inline-flex; width: max-content';
+    if ($size === 'fill') return 'display: flex;';
     return css`
       display: flex;
       width: ${pxToRem($width)};
@@ -33,47 +35,113 @@ const FileSelectorWrapper = styled(Padbox)<{ $width: number; $height: number }>`
     `;
   }};
 
-  ${({ $isDragActive, $isFocused }) =>
+  ${({ $isDragActive, $isFocused, $hasError }) =>
     ($isDragActive || $isFocused) &&
+    !$hasError &&
     css`
-      border-style: solid;
-      border-color: ${getColor('primary.600')};
+      border: 1px solid var(--sscds-color-border-input-focused);
+      box-shadow: inset 0 0 0 1px var(--sscds-color-border-input-focused);
+      background-color: var(--sscds-color-background-surface-hover);
     `};
 
   ${({ $hasError }) =>
     $hasError &&
     css`
-      border-style: solid;
-      border-color: ${getColor('error.500')};
-    `}
+      border: 1px solid var(--sscds-color-border-input-error);
+      box-shadow: inset 0 0 0 1px var(--sscds-color-border-input-error);
+      background-color: var(--sscds-color-danger-050);
+    `};
 
-  ${({ $isDisabled }) =>
-    $isDisabled &&
+  ${({ $hasError, $isDisabled, $isDragActive, $isFocused }) =>
+    !$hasError &&
+    !$isDisabled &&
+    !$isDragActive &&
+    !$isFocused &&
     css`
-      background: ${getFormStyle('disabledBgColor')};
-      border-color: ${getFormStyle('disabledBorderColor')};
+      :hover {
+        border: 1px solid var(--sscds-color-border-surface-hover);
+        background-color: var(--sscds-color-background-surface-hover);
+      }
     `};
 `;
 
-const DropTextWrapper = styled(Padbox)`
-  display: 'flex';
-  align-items: 'center';
-  ${({ $isCentered }) =>
-    $isCentered &&
-    css`
-      align-items: center;
-      justify-content: center;
-    `}
-`;
+function CompactContent({
+  isDisabled,
+  hasError,
+}: {
+  isDisabled: boolean;
+  hasError: boolean;
+}) {
+  return (
+    <Inline align="center" gap="2x">
+      <Button
+        iconStart={{ name: 'upload' }}
+        isDisabled={isDisabled}
+        size="sm"
+        tabIndex={-1}
+      >
+        Upload
+      </Button>
+      <Text
+        style={{ paddingInlineEnd: 'var(--sscds-space-2x)' }}
+        variant={isDisabled ? 'disabled' : hasError ? 'danger' : 'subtle'}
+      >
+        or drop files here
+      </Text>
+    </Inline>
+  );
+}
 
-const FileSelector = ({
-  buttonLabel = 'Upload',
-  dropLabel = 'or drop files here',
-  isClickDisabled = false,
-  isDragDisabled = false,
+function Content({
+  isDisabled,
+  isDragActive,
+  isFocused,
+  hasError,
+  instructionsText,
+  textAlign = 'left',
+}: {
+  isDisabled: boolean;
+  isDragActive: boolean;
+  isFocused: boolean;
+  hasError: boolean;
+  instructionsText: string;
+  textAlign?: 'left' | 'center';
+}) {
+  return (
+    <>
+      <IconWrapper
+        name="upload"
+        size="md"
+        variant={(isDragActive || isFocused) && !hasError ? 'strong' : 'subtle'}
+      />
+      <Stack justify={textAlign === 'center' ? 'center' : 'flex-start'}>
+        <Text variant={isDisabled ? 'disabled' : 'default'} isBold>
+          Drop your file here or{' '}
+          <Link
+            style={{
+              fontWeight: 'var(--sscds-font-weight-body-strong)',
+              color: isDisabled
+                ? 'var(--sscds-color-text-disabled)'
+                : undefined,
+            }}
+            tabIndex={-1}
+          >
+            browse files
+          </Link>
+          .
+        </Text>
+        <Text size="sm" variant="subtle">
+          {instructionsText}
+        </Text>
+      </Stack>
+    </>
+  );
+}
+
+function FileSelector({
   isDisabled = false,
   hasError = false,
-  size = FileSelectorSizes.fill,
+  size = 'fill',
   multiple,
   accept,
   minFileSize,
@@ -88,14 +156,13 @@ const FileSelector = ({
   onDragOver,
   onDragLeave,
   validator,
+  instructionsText = '',
   className,
   ...props
-}: FileSelectorProps) => {
-  const { error } = useLogger('FileSelector');
+}: FileSelectorProps) {
   const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({
     disabled: isDisabled,
-    noClick: isClickDisabled,
-    noDrag: isDragDisabled,
+    noDrag: false,
     multiple,
     accept,
     minSize: minFileSize,
@@ -112,7 +179,7 @@ const FileSelector = ({
     validator,
   });
   const sizes =
-    size === FileSelectorSizes.area && 'width' in props && 'height' in props
+    size === 'area' && 'width' in props && 'height' in props
       ? {
           width: props.width,
           height: props.height,
@@ -120,67 +187,13 @@ const FileSelector = ({
       : {};
   const passedProps = omit(['width', 'height'], props);
 
-  if (isClickDisabled && isDragDisabled) {
-    error(
-      'Either one of or both "isClickDisabled" and "isDragDisabled" properties must be set to "false".',
-    );
-    return null;
-  }
-
-  if (isClickDisabled) {
-    return (
-      <FileSelectorWrapper
-        {...getRootProps({
-          $isDragActive: isDragActive,
-          $isFocused: isFocused,
-          $hasError: hasError,
-          $isDisabled: isDisabled,
-          $size: size,
-          $width: sizes?.width,
-          $height: sizes?.height,
-          paddingSize: SpaceSizes.sm,
-          ...passedProps,
-        })}
-        className={cls(CLX_COMPONENT, className)}
-      >
-        <input aria-label="upload file" aria-hidden {...getInputProps()} />
-        <DropTextWrapper
-          $isCentered={size === FileSelectorSizes.area}
-          paddingSize={SpaceSizes.sm}
-          paddingType={PaddingTypes.squish}
-        >
-          <Text
-            size={TextSizes.md}
-            variant={isDisabled ? TextVariants.secondary : TextVariants.primary}
-          >
-            {dropLabel}
-          </Text>
-        </DropTextWrapper>
-      </FileSelectorWrapper>
-    );
-  }
-
-  if (isDragDisabled) {
-    return (
-      <div className={cls(CLX_COMPONENT, className)}>
-        <input aria-label="upload file" aria-hidden {...getInputProps()} />
-        <Button
-          {...getRootProps({
-            ...passedProps,
-            iconStart: { name: SSCIconNames.upload },
-            isDisabled,
-            variant: 'subtle',
-            isExpanded: size === FileSelectorSizes.fill,
-          })}
-        >
-          {buttonLabel}
-        </Button>
-      </div>
-    );
-  }
-
   return (
-    <FileSelectorWrapper
+    <FileSelectorRoot
+      background="dynamic"
+      className={cls(CLX_COMPONENT, className)}
+      elevation={isFocused || isDragActive ? 2 : 0}
+      radius="md"
+      hasBorder
       {...getRootProps({
         $isDragActive: isDragActive,
         $isFocused: isFocused,
@@ -189,42 +202,43 @@ const FileSelector = ({
         $size: size,
         $width: sizes?.width,
         $height: sizes?.height,
-        paddingSize: SpaceSizes.sm,
         ...passedProps,
         role: 'presentation',
       })}
-      className={cls(CLX_COMPONENT, className)}
     >
-      <input aria-label="upload file" {...getInputProps()} />
-      <Cluster
-        align="center"
-        gap={SpaceSizes.sm}
-        justify={size === FileSelectorSizes.area ? 'center' : 'flex-start'}
+      <Padbox
+        paddingSize={size === 'compact' ? '2x' : size === 'fill' ? '4x' : '6x'}
       >
-        <div>
-          <Button
-            iconStart={{ name: SSCIconNames.upload }}
-            isDisabled={isDisabled}
-            tabIndex={-1}
-            variant="subtle"
-          >
-            {buttonLabel}
-          </Button>
-        </div>
-        <DropTextWrapper
-          paddingSize={SpaceSizes.sm}
-          paddingType={PaddingTypes.squish}
-        >
-          <Text
-            size={TextSizes.md}
-            variant={isDisabled ? TextVariants.secondary : TextVariants.primary}
-          >
-            {dropLabel}
-          </Text>
-        </DropTextWrapper>
-      </Cluster>
-    </FileSelectorWrapper>
+        <input aria-label="upload file" {...getInputProps()} />
+        {size === 'compact' ? (
+          <CompactContent hasError={hasError} isDisabled={isDisabled} />
+        ) : size === 'fill' ? (
+          <Inline align="center" gap="4x">
+            <Content
+              hasError={hasError}
+              instructionsText={instructionsText}
+              isDisabled={isDisabled}
+              isDragActive={isDragActive}
+              isFocused={isFocused}
+            />
+          </Inline>
+        ) : (
+          <Stack gap="4x" justify="center">
+            <Content
+              hasError={hasError}
+              instructionsText={instructionsText}
+              isDisabled={isDisabled}
+              isDragActive={isDragActive}
+              isFocused={isFocused}
+              textAlign="center"
+            />
+          </Stack>
+        )}
+      </Padbox>
+    </FileSelectorRoot>
   );
-};
+}
+
+FileSelector.displayName = 'FileSelector';
 
 export default FileSelector;

@@ -113,6 +113,60 @@ jobs:
           name: visual-test-reports
           path: visual-test-reports.tar
 
+  a11y-tests:
+    name: '♿ Check basic a11y tests'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ['1','2','3','4']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+
+      - name: Cache yarn files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            .yarn/install-state.gz
+            node_modules
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Cache storybook build
+        id: storybook-build-cache
+        uses: actions/cache@v4
+        with:
+          path: storybook-static
+          key: storybook-tests-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**', '!.storybook/image-snapshots/**' ,'.storybook/**') }}
+
+      - name: Build Storybook
+        if: steps.storybook-build-cache.outputs.cache-hit != 'true'
+        run: yarn storybook:build
+
+      - name: Run A11y tests
+        id: 'a11yTests'
+        run: yarn test:a11y:ci
+        continue-on-error: true
+        env:
+          SHARD: ${{matrix.shard}}
+          MAX_SHARDS: '4'
+
+      - run: echo "OK"
+        if: job.steps.a11yTests.status == failure()
+
   lint:
     name: '🧹 Run lint'
     runs-on: ubuntu-latest
