@@ -1,2 +1,0 @@
-import{_ as n}from"./isNotUndefined-DxARNfZG.js";import{a as o}from"./_isObject-BZZHHNGj.js";function s(a,e){return function(){var t=arguments.length;if(t===0)return e();var r=arguments[t-1];return n(r)||typeof r[a]!="function"?e.apply(this,arguments):r[a].apply(r,Array.prototype.slice.call(arguments,0,t-1))}}var l=o(s("slice",function(e,t,r){return Array.prototype.slice.call(r,e,t)}));export{s as _,l as s};
-//# sourceMappingURL=slice-DUYrgxkR.js.map
