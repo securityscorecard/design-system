@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Meta, Story, Unstyled, useOf } from '@storybook/blocks';
+import { Meta, Unstyled } from '@storybook/blocks';
 
+import { Grid } from '../.storybook/blocks/components';
+import { OverviewCard } from '../.storybook/blocks/OverviewCard';
 import { DSProvider } from '../src/theme';
-import { ButtonV2, ElementLabel, Inline, Padbox, Stack, Surface } from "../src/components";
 import * as AccordionStories from '../src/components/Accordion/Accordion.stories';
 import * as BadgeStories from '../src/components/Badge/Badge.stories';
 import * as BannerStories from '../src/components/Banner/Banner.stories';
@@ -64,69 +64,6 @@ import * as TextAreaStories from '../src/components/forms/TextArea/TextArea.stor
 import * as TooltipStories from '../src/components/Tooltip/Tooltip.stories';
 import * as TrendIconStories from '../src/components/TrendIcon/TrendIcon.stories';
 import * as UserAvatarStories from '../src/components/UserAvatar/UserAvatar.stories';
-
-export const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-`;
-export const FullWidthStory = styled.div`
-  flex: 1; align-items: center; display: flex;
-
-& > .sb-story {
-width: 100%;
-}
-`
-
-export function OverviewCard ({ title, of, centerStory = true }) {
-  const resolvedOf = useOf(of || 'story', ['story', 'meta']);
-  const componentTitle = title ?? resolvedOf.story.title.split('/').at(-1);
-
-return (
-
-<Surface
-  background="dynamic"
-  elevation={1}
-  id={resolvedOf.story.componentId}
-  radius="md"
-  hasBorder
->
-  <Padbox paddingSize="md" style={{ height: '100%' }}>
-    <Stack
-      align="space-between"
-      gap="md"
-      splitAt={2}
-      // style={{ minHeight: 300 }}
-    >
-      <Inline align="center" gap="sm">
-        <ElementLabel size="md" isStrong>
-          {componentTitle}
-        </ElementLabel>
-      </Inline>
-      {centerStory ? (
-        <Inline align="center" justify="center" style={{ flex: 1 }}>
-          <Story of={of} />
-        </Inline>
-      ) : (
-        <FullWidthStory>
-          <Story of={of} />
-        </FullWidthStory>
-      )}
-      <Inline justify="flex-end">
-        <ButtonV2
-          as="a"
-          href={`/?path=/docs/${resolvedOf.story.componentId}--documentation`}
-          iconEnd={{ name: 'angle-right' }}
-          size="sm"
-          variant="ghost"
-        >
-          See documentation
-        </ButtonV2>
-      </Inline>
-    </Stack>
-  </Padbox>
-</Surface>
-)}
 
 <Meta title="Overview" />
 
