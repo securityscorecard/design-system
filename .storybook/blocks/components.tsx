@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Table = styled.table`
-  font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
+    'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
   width: 100%;
   font-size: 14px;
   border-collapse: collapse;
@@ -13,7 +15,7 @@ export const TableHead = styled.thead`
   tr {
     border-bottom: 2px solid #dadada;
     > th + th {
-      border-left: 1px solid #dadada
+      border-left: 1px solid #dadada;
     }
   }
 
@@ -38,4 +40,19 @@ export const Token = styled.code`
   border: 1px solid #dadada;
   border-radius: 4px;
   padding: 0.25rem 0.5rem;
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+`;
+export const FullWidthStory = styled.div`
+  flex: 1;
+  align-items: center;
+  display: flex;
+
+  & > .sb-story {
+    width: 100%;
+  }
 `;
