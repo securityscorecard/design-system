@@ -1,0 +1,1 @@
+{"version":3,"file":"index-3RIH1n12.js","sources":["../../../src/components/IconWrapper/index.ts"],"sourcesContent":["export { default as IconWrapper } from './IconWrapper';\nexport * from './IconWrapper.types';\n"],"names":["cov_vvtykf80e","actualCoverage"],"mappings":"6tBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
