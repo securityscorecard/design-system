@@ -75,6 +75,7 @@ function CompactContent({
   return (
     <Inline align="center" gap="2x">
       <Button
+        as="div"
         iconStart={{ name: 'upload' }}
         isDisabled={isDisabled}
         size="sm"
@@ -118,6 +119,7 @@ function Content({
         <Text variant={isDisabled ? 'disabled' : 'default'} isBold>
           Drop your file here or{' '}
           <Link
+            as="span"
             style={{
               fontWeight: 'var(--sscds-font-weight-body-strong)',
               color: isDisabled
@@ -203,7 +205,7 @@ function FileSelector({
         $width: sizes?.width,
         $height: sizes?.height,
         ...passedProps,
-        role: 'presentation',
+        role: 'button',
       })}
     >
       <Padbox
