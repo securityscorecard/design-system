@@ -93,8 +93,10 @@ const getConditionComponent = curry(
     )(fieldValue, fields),
 );
 
-const getOperatorOptions = (operatorValue, operatorOptions) =>
-  find(propEq('value', operatorValue), operatorOptions);
+export const getOperatorOptions = (
+  operatorValue: string,
+  operatorOptions: { value: string; label: string }[],
+) => find(propEq('value', operatorValue.toLowerCase()), operatorOptions);
 
 const getFieldOptions = map(normalizeOptions);
 
