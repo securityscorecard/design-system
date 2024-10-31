@@ -54,7 +54,10 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
             <Skeleton width={80} />
           </div>
         ) : (
-          <Text>
+          <Text
+            className="sscds-test-itemCounter"
+            data-test-itemcount={totalRowCount}
+          >
             {t('sscds|datatable.topToolbar.itemCounter', {
               count: totalRowCount,
               totalRowCount: abbreviateNumber(totalRowCount, lng),
