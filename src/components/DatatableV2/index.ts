@@ -4,6 +4,6 @@ export type {
   DatatableOptions,
   DatatableInstance,
   DatatableRow,
-  DatatableRowAction,
   DatatableState,
 } from './Datatable.types';
+export type { RowAction as DatatableRowAction } from '../_internal/buttons/RowActionsButton';

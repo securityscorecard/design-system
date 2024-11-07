@@ -1,8 +1,9 @@
+import type { Table } from '@tanstack/react-table';
+import type { ReactNode } from 'react';
 import { pluck } from 'ramda';
 import styled from 'styled-components';
 
 import { abbreviateNumber } from '../../../utils';
-import { DatatableInstance } from '../Datatable.types';
 import { Inline, Padbox, Surface } from '../../layout';
 import Button from '../../ButtonV2/Button';
 import { Strong } from '../../Text';
@@ -11,8 +12,22 @@ import {
   useSafeTranslation,
 } from '../../../hooks/useSafeTranslation';
 
-const getSelectedRowsCount = <D,>(table: DatatableInstance<D>) => {
-  const { getSelectedRowModel } = table;
+type Instance<Data> = {
+  options: {
+    renderRowSelectionActions?: (props: {
+      selectedRows: Data[];
+      totalRowCount: number;
+      table: unknown;
+    }) => ReactNode;
+    rowCount?: number;
+  };
+  getPrePaginationRowModel?: Table<Data>['getPrePaginationRowModel'];
+  getSelectedRowModel?: Table<Data>['getSelectedRowModel'];
+  toggleAllRowsSelected?: Table<Data>['toggleAllRowsSelected'];
+};
+
+const getSelectedRowsCount = <Data,>(instance: Instance<Data>) => {
+  const { getSelectedRowModel } = instance;
   const selectedRows = getSelectedRowModel().rows;
   const selectedRowsCount = selectedRows.length;
   return selectedRowsCount;
@@ -26,16 +41,16 @@ const SelectionRoot = styled(Surface)`
   bottom: var(--sscds-space-4x);
   margin: var(--sscds-space-4x) var(--sscds-space-4x) 0;
 `;
-const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
+function SelectionToolbar<Data>({ instance }: { instance: Instance<Data> }) {
   const {
     options: { renderRowSelectionActions, rowCount },
     getPrePaginationRowModel,
     getSelectedRowModel,
     toggleAllRowsSelected,
-  } = table;
+  } = instance;
   const { t, lng } = useSafeTranslation();
 
-  const selectedRowsCount = getSelectedRowsCount(table);
+  const selectedRowsCount = getSelectedRowsCount<Data>(instance);
   const selectedRows = getSelectedRowModel().rows;
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
@@ -97,13 +112,15 @@ const Selection = <D,>({ table }: { table: DatatableInstance<D> }) => {
             {renderRowSelectionActions?.({
               selectedRows: pluck('original', selectedRows),
               totalRowCount,
-              table,
+              table: instance as unknown as Table<Data>,
             })}
           </Inline>
         </Inline>
       </Padbox>
     </SelectionRoot>
   );
-};
+}
 
-export default Selection;
+SelectionToolbar.displayName = 'SelectionToolbar';
+
+export default SelectionToolbar;

@@ -126,4 +126,16 @@ export default createGlobalStyle`
     --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     --sscds-action-transition: all 300ms var(--sscds-transition-fn),outline 0ms;
   }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 `;
