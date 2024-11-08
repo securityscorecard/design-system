@@ -23,7 +23,7 @@ export const ChipRoot = styled.div`
       var(--sscds-interactivechip-color-border-hover, transparent);
   }
 
-  .sscds-chip-label {
+  .sscds-chip-content > *:not(.sscds-iconbox) {
     &:first-child {
       padding-inline-start: var(--sscds-space-1x);
     }

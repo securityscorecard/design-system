@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 
 import Signal from './Signal';
-import { Inline } from '../layout';
+import { Inline, Stack } from '../layout';
 
 export default {
   title: 'components/Signal',
@@ -125,3 +125,44 @@ export const SizedSignals: Story = () => (
     <Signal kind="info" size={128} />
   </Inline>
 );
+
+export const DarkMode: Story = (args) => (
+  <Stack gap="md">
+    <Inline gap="sm">
+      <Signal {...args} kind="high" variant="severity" />
+      <Signal {...args} kind="medium" variant="severity" />
+      <Signal {...args} kind="low" variant="severity" />
+      <Signal {...args} kind="none" variant="severity" />
+      <Signal {...args} kind="info" variant="severity" />
+      <Signal {...args} kind="positive" variant="severity" />
+    </Inline>
+    <Inline gap="sm">
+      <Signal {...args} kind="high" variant="breachRisk" />
+      <Signal {...args} kind="medium" variant="breachRisk" />
+      <Signal {...args} kind="low" variant="breachRisk" />
+      <Signal {...args} kind="none" variant="breachRisk" />
+    </Inline>
+    <Inline gap="sm">
+      <Signal {...args} kind="critical" variant="businessImpact" />
+      <Signal {...args} kind="high" variant="businessImpact" />
+      <Signal {...args} kind="medium" variant="businessImpact" />
+      <Signal {...args} kind="low" variant="businessImpact" />
+      <Signal {...args} kind="none" variant="businessImpact" />
+    </Inline>
+    <Inline gap="sm">
+      <Signal {...args} kind="critical" variant="incidentLikelihood" />
+      <Signal {...args} kind="high" variant="incidentLikelihood" />
+      <Signal {...args} kind="medium" variant="incidentLikelihood" />
+      <Signal {...args} kind="low" variant="incidentLikelihood" />
+      <Signal {...args} kind="none" variant="incidentLikelihood" />
+    </Inline>
+  </Stack>
+);
+DarkMode.args = {
+  size: 32,
+};
+DarkMode.parameters = {
+  themes: {
+    themeOverride: 'Dark',
+  },
+};

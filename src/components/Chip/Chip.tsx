@@ -18,7 +18,7 @@ function Chip({
 
   return (
     <ChipRoot {...props} style={{ ...props.style, ...chipStyles }}>
-      <Inline align="center" gap="1x">
+      <Inline align="center" className="sscds-chip-content" gap="1x">
         {children}
       </Inline>
     </ChipRoot>
