@@ -17,7 +17,7 @@ import { Default as DefaultChipIcon } from './ChipIcon.stories';
  * <Chip>
  *   <ChipIcon name="eye" />
  *   <ChipLabel isStrong>325</ChipLabel>
- *   <ChipLable>companies</ChipLable>
+ *   <ChipLabel>companies</ChipLabel>
  * </Chip>
  * ```
  */

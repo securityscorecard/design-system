@@ -14,7 +14,7 @@ import { Stack } from '../layout';
  * <InteractiveChip as={Link} to="/scorecard" onClick={() => { trackEvent('navigate'); }}>
  *   <ChipIcon name="eye" />
  *   <ChipLabel isStrong>325</ChipLabel>
- *   <ChipLable>companies</ChipLable>
+ *   <ChipLabel>companies</ChipLabel>
  * </InteractiveChip>
  * ```
  * ## Using as links and with external routers
