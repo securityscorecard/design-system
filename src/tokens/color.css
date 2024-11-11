@@ -80,36 +80,6 @@
 }
 
 .dark, .dark-theme {
-  --severity-green-10: #3A975E;
-  --severity-green-20: #4BBA76;
-  --severity-green-30: #94D6AE;
-  --severity-green-40: #BDE6CC;
-  --severity-green-50: #E9F7EE;
-
-  --severity-yellow-10: #F58D00;
-  --severity-yellow-20: #FFB147;
-  --severity-yellow-30: #FFCE85;
-  --severity-yellow-40: #FFE2B8;
-  --severity-yellow-50: #FFF4E5;
-
-  --severity-orange-10: #E03C05;
-  --severity-orange-20: #FB7A4F;
-  --severity-orange-30: #FCA88C;
-  --severity-orange-40: #FECEBE;
-  --severity-orange-50: #FFF0EB;
-
-  --severity-red-10: #CB0C20;
-  --severity-red-20: #F32E43;
-  --severity-red-30: #F66979;
-  --severity-red-40: #F99AA4;
-  --severity-red-50: #FDDDE1;
-
-  --severity-deepred-10: #9F0F3A;
-  --severity-deepred-20: #B81143;
-  --severity-deepred-30: #ED4074;
-  --severity-deepred-40: #F69DB8;
-  --severity-deepred-50: #FCDEE7;
-
   --brand-050: #1B0471;
   --brand-100: #2C1193;
   --brand-200: #3B1AB7;
@@ -212,12 +182,14 @@
   --sscds-color-grade-D: var(--severity-red-40);
   --sscds-color-grade-F: var(--severity-deepred-40);
 
-  --sscds-color-severity-critical: var(--severity-deepred-40);
-  --sscds-color-severity-high: var(--severity-red-40);
-  --sscds-color-severity-medium: var(--severity-orange-40);
-  --sscds-color-severity-low: var(--severity-yellow-40);
-  --sscds-color-severity-info: var(--sscds-color-info-600);
-  --sscds-color-severity-positive: var(--severity-green-40);
+  --sscds-color-signal-inactive: var(--sscds-color-neutral-alpha-8);
+  --sscds-color-signal-critical: var(--severity-deepred-40);
+  --sscds-color-signal-high: var(--severity-red-40);
+  --sscds-color-signal-medium: var(--severity-orange-40);
+  --sscds-color-signal-low: var(--severity-yellow-40);
+  --sscds-color-signal-info: var(--sscds-color-info-500);
+  --sscds-color-signal-positive: var(--severity-green-40);
+  --sscds-color-signal-business-impact: var(--sscds-color-icon-default);
 
   --sscds-color-brand-050: var(--brand-050);
   --sscds-color-brand-100: var(--brand-100);

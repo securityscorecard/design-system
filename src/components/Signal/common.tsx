@@ -17,16 +17,9 @@ export const criticalityLevels = {
 
 const criticalityColorsSeverity = [
   undefined,
-  'var(--sscds-severity-low)',
-  'var(--sscds-severity-medium)',
-  'var(--sscds-severity-high)',
-];
-
-const criticalityColorsLikelihood = [
-  undefined,
-  'var(--sscds-likelihood-low)',
-  'var(--sscds-likelihood-medium)',
-  'var(--sscds-likelihood-high)',
+  'var(--sscds-color-signal-low)',
+  'var(--sscds-color-signal-medium)',
+  'var(--sscds-color-signal-high)',
 ];
 
 function Svg({
@@ -53,7 +46,7 @@ function Svg({
 function VerticalBar({
   height,
   xPos,
-  fill = 'rgb(0 0 0 / 0.1)',
+  fill = 'var(--sscds-color-signal-inactive)',
 }: {
   height: number;
   xPos: number;
@@ -107,7 +100,7 @@ export function Vertical4Bars({
   return (
     <svg
       height={size}
-      style={{ color: 'var(--sscds-impact)' }}
+      style={{ color: 'var(--sscds-color-signal-business-impact)' }}
       viewBox="0 0 18 16"
       width={(size / 16) * 18}
       {...props}
@@ -134,7 +127,7 @@ export function HorizontalBars({
   return (
     <svg
       height={size}
-      style={{ color: criticalityColorsLikelihood[criticality] }}
+      style={{ color: criticalityColorsSeverity[criticality] }}
       viewBox="0 0 16 16"
       width={size}
       {...props}
@@ -143,7 +136,11 @@ export function HorizontalBars({
       {[0, 1, 2].map((v) => (
         <rect
           key={v}
-          fill={v < criticality ? 'currentColor' : 'rgb(0 0 0 / 0.1)'}
+          fill={
+            v < criticality
+              ? 'currentColor'
+              : 'var(--sscds-color-signal-inactive)'
+          }
           height="4"
           rx="2"
           width="16"
@@ -169,10 +166,10 @@ export const Icon = ({
       ...(props.style || {}),
       color:
         signal === 'info'
-          ? `var(--sscds-severity-informational)`
+          ? 'var(--sscds-color-signal-info)'
           : signal === 'positive'
-          ? `var(--sscds-severity-positive)`
-          : '#eb2f40', // we are using fixed color because it's not defined in DS
+          ? 'var(--sscds-color-signal-positive)'
+          : 'var(--sscds-color-signal-high)', // we are using fixed color because it's not defined in DS
     }}
   >
     <title>{title}</title>

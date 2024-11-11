@@ -33,7 +33,7 @@ function InteractiveChip<E extends ElementType = 'button'>({
 
   return (
     <ChipRoot as={Tag} style={chipStyles} {...dropStylingProps(props)}>
-      <Inline align="center" gap="1x">
+      <Inline align="center" className="sscds-chip-content" gap="1x">
         {children}
       </Inline>
     </ChipRoot>
