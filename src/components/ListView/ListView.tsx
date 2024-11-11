@@ -87,6 +87,7 @@ function ListView<D>({
     initialState?.activeRowId ?? undefined,
   );
   const listView = useReactTable({
+    debugAll: true,
     columns,
     data: listData,
     enableMultiRowSelection,
@@ -100,8 +101,6 @@ function ListView<D>({
     initialState,
     manualPagination,
     onRowClick,
-    onPaginationChange,
-    onRowSelectionChange,
     renderRowSelectionActions,
     rowActions,
     rowActionsCount,
@@ -111,6 +110,12 @@ function ListView<D>({
       activeRowId,
       ...state,
     },
+    ...(typeof onPaginationChange !== 'undefined'
+      ? { onPaginationChange }
+      : {}),
+    ...(typeof onRowSelectionChange !== 'undefined'
+      ? { onRowSelectionChange }
+      : {}),
   } as ParsedListViewOptions<D>) as unknown as ListViewInstance<D>;
   listView.setActiveRowId = onActiveRowIdChange ?? setActiveRowId;
 
