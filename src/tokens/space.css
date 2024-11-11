@@ -1,5 +1,5 @@
 :root {
-  --sscds-space-none: 0;
+  --sscds-space-none: 0rem;
   --sscds-space-half-x: calc(var(--sscds-space-1x) / 2); /* 2px */
   --sscds-space-1x: 0.25rem; /* 1x = 4px */
   --sscds-space-2x: calc(var(--sscds-space-1x) * 2); /* 8px */

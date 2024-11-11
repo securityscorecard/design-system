@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components';
 
 import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
-import Pagination from '../toolbar/Pagination';
-import Selection from '../toolbar/Selection';
 import Table from './Table';
 import TopToolbar from '../toolbar/TopToolbar';
+import SelectionToolbar from '../../_internal/toolbars/SelectionToolbar';
+import PaginationToolbar from '../../_internal/toolbars/PaginationToolbar';
 
 const DatatableRoot = styled.div<{ $isFullscreen }>`
   ${({ $isFullscreen }) =>
@@ -86,9 +86,13 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
         <Table table={table} />
       </Surface>
       {table.options.enableRowSelection &&
-        table.options.enableSelectionToolbar && <Selection table={table} />}
+        table.options.enableSelectionToolbar && (
+          <SelectionToolbar<D> instance={table} />
+        )}
       {table.options.enablePagination &&
-        table.getRowModel().rows.length > 0 && <Pagination table={table} />}
+        table.getRowModel().rows.length > 0 && (
+          <PaginationToolbar instance={table} />
+        )}
     </DatatableRoot>
   );
 };
