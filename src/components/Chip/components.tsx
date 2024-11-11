@@ -5,6 +5,7 @@ export const ChipRoot = styled.div`
   width: fit-content;
 
   /* Size dependent */
+  height: var(--sscds-chip-size);
   padding: var(--sscds-chip-padding-block);
   border-radius: var(--sscds-chip-radius);
 
