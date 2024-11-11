@@ -20,7 +20,6 @@ export const ButtonRoot = styled.button`
   white-space: nowrap;
   transition: var(--sscds-action-transition),
     transform 50ms var(--sscds-transition-fn);
-  backdrop-filter: blur(2px);
 
   /* Size dependent */
   font-size: var(--sscds-button-font-size);

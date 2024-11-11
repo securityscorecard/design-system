@@ -15,7 +15,7 @@ import {
 } from '@tanstack/react-table';
 import { Dispatch, MutableRefObject, ReactNode, SetStateAction } from 'react';
 
-import { IconNames, RegularIconTypes } from '../Icon';
+import { RowAction } from '../_internal/buttons/RowActionsButton';
 
 export type DatatableColumnDef<D, V = unknown> = Omit<
   ColumnDef<D, V>,
@@ -177,22 +177,6 @@ interface DatatableRowModel<D> {
 
 export type DatatableHeaderGroup<D> = Omit<HeaderGroup<D>, 'headers'> & {
   headers: DatatableHeader<D>[];
-};
-
-type RowActionCallbackUnion<D, Type> =
-  | Type
-  | ((props: { row: DatatableRow<D>; table: DatatableInstance<D> }) => Type);
-
-export type DatatableRowAction<D> = null | {
-  label: RowActionCallbackUnion<D, string>;
-  iconName: RowActionCallbackUnion<D, IconNames>;
-  iconType?: RowActionCallbackUnion<D, RegularIconTypes>;
-  onClick(props: {
-    row: DatatableRow<D>;
-    table: DatatableInstance<D>;
-  }): (event: Event) => void;
-  isDisabled?: RowActionCallbackUnion<D, boolean>;
-  isDestructive?: boolean;
 };
 
 interface CustomState {
@@ -553,7 +537,7 @@ export interface DatatableOptions<D>
    * If only one action is provided it will be rendered directly in the column. If multiple actions
    * are provided actions will be rendered in dropdown menu.
    */
-  rowActions?: DatatableRowAction<D>[];
+  rowActions?: RowAction<D>[];
   /**
    * Expected number of rows in the dataset which is used for displaying pagination correctly when
    * pagination is not managed internally. This property is REQUIRED for the manual (managed,

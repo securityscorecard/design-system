@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
+import { Row } from '@tanstack/react-table';
 
 import ExpandAllButton from '../buttons/ExpandAllButton';
 import ExpandButton from '../buttons/ExpandButton';
-import RowActionsButton from '../buttons/RowActionsButton';
 import SelectButton from '../buttons/SelectButton';
 import { DatatableColumnDef, ParsedDatatableOptions } from '../Datatable.types';
+import RowActionsButton from '../../_internal/buttons/RowActionsButton';
 
 export const displayColumnIds = {
   expand: 'ssc_dt_expand',
@@ -48,7 +49,10 @@ export const useDisplayColumns = <D,>(
             id: displayColumnIds.actions,
             header: '',
             cell: ({ table, row }) => (
-              <RowActionsButton row={row} table={table} />
+              <RowActionsButton
+                instance={table}
+                row={row as unknown as Row<D>}
+              />
             ),
             size: 56,
             ...tableOptions.defaultDisplayColumn,
