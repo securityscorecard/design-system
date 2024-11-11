@@ -87,6 +87,7 @@ function ListView<D>({
     initialState?.activeRowId ?? undefined,
   );
   const listView = useReactTable({
+    debugAll: true,
     columns,
     data: listData,
     enableMultiRowSelection,
@@ -100,8 +101,6 @@ function ListView<D>({
     initialState,
     manualPagination,
     onRowClick,
-    onPaginationChange,
-    onRowSelectionChange,
     renderRowSelectionActions,
     rowActions,
     rowActionsCount,
@@ -111,6 +110,12 @@ function ListView<D>({
       activeRowId,
       ...state,
     },
+    ...(typeof onPaginationChange !== 'undefined'
+      ? { onPaginationChange }
+      : {}),
+    ...(typeof onRowSelectionChange !== 'undefined'
+      ? { onRowSelectionChange }
+      : {}),
   } as ParsedListViewOptions<D>) as unknown as ListViewInstance<D>;
   listView.setActiveRowId = onActiveRowIdChange ?? setActiveRowId;
 
@@ -127,7 +132,12 @@ function ListView<D>({
        *
        * Ref https://bugs.webkit.org/show_bug.cgi?id=170179#c1 */}
       {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
-      <ul {...props} role="list" style={styles}>
+      <ul
+        {...props}
+        data-paginated={enablePagination}
+        role="list"
+        style={styles}
+      >
         {listView.getRowModel().rows.map((row) => {
           return <ListViewRow key={row.id} listView={listView} row={row} />;
         })}

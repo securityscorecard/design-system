@@ -9,7 +9,11 @@ import RowActionsButton from '../_internal/buttons/RowActionsButton';
 const ListViewRowRoot = styled.li`
   display: flex;
   position: relative;
-  border-bottom: 1px solid var(--sscds-color-border-default);
+
+  [data-paginated='true'] &,
+  [data-paginated='false'] &:not(:last-child) {
+    border-bottom: 1px solid var(--sscds-color-border-default);
+  }
 `;
 const ListViewRowContent = styled.div`
   display: flex;

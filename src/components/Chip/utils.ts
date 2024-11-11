@@ -8,6 +8,7 @@ export const getCommonChipStyles = ({
   size: Sizes;
   color: PillColors;
 }) => ({
+  '--sscds-chip-size': size === 'md' ? '2rem' : '1.5rem',
   '--sscds-chip-padding-block':
     size === 'md' ? 'var(--sscds-space-1x)' : '0 var(--sscds-space-half-x)',
   '--sscds-chip-radius':
