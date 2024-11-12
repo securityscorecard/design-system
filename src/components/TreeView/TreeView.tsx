@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DndContext,
   DragOverlay,
@@ -66,6 +66,10 @@ function TreeView<D>({
   rowActions,
 }: TreeViewProps<D>) {
   const [items, setItems] = useState(() => data);
+
+  useEffect(() => {
+    setItems(data);
+  }, [data]);
 
   const {
     activeId,
