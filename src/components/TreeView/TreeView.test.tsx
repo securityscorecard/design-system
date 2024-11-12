@@ -42,4 +42,19 @@ describe('TreeView', () => {
     );
     expect(screen.getByText('SubItem 1-1')).toBeInTheDocument();
   });
+  test('should rerender items when data change', () => {
+    const { rerender } = render(
+      <TreeView data={mockData} renderPrimaryContent={renderPrimaryContent} />,
+    );
+
+    expect(screen.getAllByRole('listitem')).toHaveLength(3);
+
+    rerender(
+      <TreeView
+        data={[mockData[0]]}
+        renderPrimaryContent={renderPrimaryContent}
+      />,
+    );
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
+  });
 });
