@@ -84,6 +84,7 @@ function ListViewRow<D>({
               {...(areItemsClickable
                 ? {
                     as: 'button',
+                    type: 'button',
                     onClick: () => {
                       setActiveRowId(row.id);
                       options.onRowClick({ row: row.original });
