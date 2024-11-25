@@ -1,6 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import MockDate from 'mockdate';
 import { action } from '@storybook/addon-actions';
 
 import { Data } from '../_internal/BaseTable/mocks/types';
@@ -10,8 +9,6 @@ import { comparisonTable } from '../_internal/BaseTable/docs';
 import Table from './Table';
 import { TableProps } from './Table.types';
 import { datatableRowActions } from '../Datatable/mocks/actions';
-
-MockDate.set('2021-03-31T00:00:00Z');
 
 export default {
   title: 'components/Table',
@@ -36,6 +33,7 @@ ${comparisonTable}
         height: 720,
       },
     },
+    mockDate: new Date('2021-03-31T00:00:00Z'),
   },
   decorators: [
     (storyFn) => (
@@ -44,6 +42,7 @@ ${comparisonTable}
       </MemoryRouter>
     ),
   ],
+  tags: ['deprecated'],
 } as Meta;
 
 const TableTemplate: StoryFn<TableProps<Data>> = (args) => (

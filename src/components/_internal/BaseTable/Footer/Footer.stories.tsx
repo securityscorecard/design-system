@@ -5,7 +5,7 @@ import Footer from './Footer';
 import { FooterProps } from './Footer.types';
 
 export default {
-  title: 'components/Datatable/internalComponents/Table/Footer',
+  title: 'tests/Datatable/Table/Footer',
   component: Footer,
   parameters: {
     viewMode: 'story',

@@ -6,7 +6,7 @@ import { actionsMock } from '../../mocks/actions';
 import { BatchActionsProps } from './BatchActions.types';
 
 export default {
-  title: 'components/Datatable/internalComponents/BatchModule/BatchActions',
+  title: 'tests/Datatable/BatchModule/BatchActions',
   component: BatchActions,
   parameters: {
     viewMode: 'story',

@@ -63,6 +63,7 @@ const meta = {
     },
     getRowId: (row) => row.id,
   },
+  tags: ['new'],
 } satisfies Meta<typeof ListView<FakeData>>;
 
 export default meta;

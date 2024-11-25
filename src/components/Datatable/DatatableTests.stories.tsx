@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import MockDate from 'mockdate';
 
 import Datatable from './Datatable';
 import {
@@ -17,15 +16,14 @@ import { tableActionsMock } from './mocks/actions';
 import { Text } from '../Text';
 import { Stack } from '../layout';
 
-MockDate.set('2021-03-31T00:00:00Z');
-
 export default {
-  title: 'components/Datatable/internalComponents/Datatable',
+  title: 'tests/Datatable/Datatable',
   component: Datatable,
   parameters: {
     viewMode: 'story',
     docs: { disable: true },
     previewTabs: { 'storybook/docs/panel': { hidden: true } },
+    mockDate: new Date('2021-03-31T00:00:00Z'),
   },
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
 } as Meta;

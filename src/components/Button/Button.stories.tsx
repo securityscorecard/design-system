@@ -73,6 +73,7 @@ export default {
       },
     },
   },
+  tags: ['deprecated'],
 } as Meta;
 
 export const Playground: StoryFn<ButtonProps> = (args) => <Button {...args} />;

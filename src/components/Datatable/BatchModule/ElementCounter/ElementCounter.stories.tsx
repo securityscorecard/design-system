@@ -7,7 +7,7 @@ import { ElementCounterProps } from './ElementCounter.types';
 import { defaultTableConfig } from '../../defaultConfigs';
 
 export default {
-  title: 'components/Datatable/internalComponents/BatchModule/ElementCounter',
+  title: 'tests/Datatable/BatchModule/ElementCounter',
   component: ElementCounter,
   parameters: {
     viewMode: 'story',

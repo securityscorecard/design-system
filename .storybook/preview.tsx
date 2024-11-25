@@ -25,6 +25,7 @@ import '@fontsource/inter/700.css';
 import '@fontsource/space-mono/400.css';
 import '../src/tokens/tokens.css';
 import { SlowBuffer } from 'buffer';
+import { withMockedDate } from './decorators/withMockedDate';
 
 function clearDatatableLS() {
   Object.keys(localStorage)
@@ -139,7 +140,6 @@ const preview: Preview = {
     },
   },
   decorators: [
-    // @ts-expect-error as the type of the withScreenshot is too wide
     withScreenshot,
     withI18next,
     withThemeByClassName({
@@ -149,6 +149,7 @@ const preview: Preview = {
       },
       defaultTheme: 'Light',
     }),
+    withMockedDate(),
     (storyFn) => (
       <DSProvider config={{ debugMode: true }}>{storyFn()}</DSProvider>
     ),

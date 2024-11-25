@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import { omit } from 'ramda';
-import MockDate from 'mockdate';
 
 import Table from './Table';
 import { TableProps } from './Table.types';
@@ -13,10 +12,8 @@ import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';
 import { datatableRowActions } from '../mocks/actions';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 
-MockDate.set('2021-03-31T00:00:00Z');
-
 export default {
-  title: 'components/Datatable/internalComponents/Table',
+  title: 'tests/Datatable/Table',
   component: Table,
   parameters: {
     viewMode: 'story',
@@ -26,6 +23,7 @@ export default {
         height: 720,
       },
     },
+    mockDate: new Date('2021-03-31T00:00:00Z'),
   },
   argTypes: {
     data: { controls: { type: 'disabled' } },

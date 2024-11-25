@@ -8,8 +8,7 @@ import { useColumnsControls } from '../../hooks/useColumnsControls';
 import { ColumnsControlsProps } from './ColumnsControls.types';
 
 export default {
-  title:
-    'components/Datatable/internalComponents/ControlsModule/ColumnsControls',
+  title: 'tests/Datatable/ControlsModule/ColumnsControls',
   component: ColumnsControls,
   parameters: {
     viewMode: 'story',

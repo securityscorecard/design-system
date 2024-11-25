@@ -14,6 +14,7 @@ export default {
       source: { type: 'code' },
     },
   },
+  tags: ['deprecated'],
 } as Meta;
 
 const WizardTemplate = ({

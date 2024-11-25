@@ -16,6 +16,9 @@ export default {
   decorators: [
     (storyFn) => <div style={{ paddingBottom: '300px' }}>{storyFn()}</div>,
   ],
+  parameters: {
+    mockDate: new Date('2021/03/31'),
+  },
 } as Meta;
 
 export const Playground: StoryFn<SingleDatePickerProps> = (args) => (

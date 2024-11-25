@@ -7,7 +7,7 @@ import ControlButton from './ControlButton';
 import { ControlButtonProps } from './ControlButton.types';
 
 export default {
-  title: 'components/Datatable/internalComponents/ControlsModule/ControlButton',
+  title: 'tests/Datatable/ControlsModule/ControlButton',
   component: ControlButton,
   parameters: {
     viewMode: 'story',

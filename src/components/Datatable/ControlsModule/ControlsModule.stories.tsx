@@ -11,7 +11,7 @@ import { simpleColumns } from '../../_internal/BaseTable/mocks/columns';
 import { Data } from '../../_internal/BaseTable/mocks/types';
 
 export default {
-  title: 'components/Datatable/internalComponents/ControlsModule',
+  title: 'tests/Datatable/ControlsModule',
   component: ControlsModule,
   parameters: {
     viewMode: 'story',
