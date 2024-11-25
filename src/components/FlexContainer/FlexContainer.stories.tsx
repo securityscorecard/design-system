@@ -15,6 +15,7 @@ leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravi
 export default {
   title: 'components/FlexContainer',
   component: FlexContainer,
+  tags: ['deprecated'],
 } as Meta;
 
 export const Sample: StoryFn = () => (

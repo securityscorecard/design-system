@@ -122,7 +122,7 @@ export const ContextText: StoryFn = () => (
   </>
 );
 
-ContextText.storyName = 'Context Text (DEPRECATED)';
+ContextText.tags = ['deprecated'];
 
 export const MonospaceText: StoryFn = () => (
   <>

@@ -21,8 +21,9 @@ const config: StorybookConfig = {
     '@storybook/addon-designs',
     '@storybook/addon-themes',
     '@storybook/addon-coverage',
+    '@storybook/addon-a11y',
     'storycap',
-    '@storybook/addon-a11y'
+    'storybook-addon-tag-badges'
   ],
   docs: { defaultName: 'Documentation' },
   typescript: {

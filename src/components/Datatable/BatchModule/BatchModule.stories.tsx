@@ -9,7 +9,7 @@ import { DatatableStore } from '../Datatable.store';
 import { defaultTableConfig } from '../defaultConfigs';
 
 export default {
-  title: 'components/Datatable/internalComponents/BatchModule',
+  title: 'tests/Datatable/BatchModule',
   component: BatchModule,
   decorators: [(storyFn) => <MemoryRouter>{storyFn()}</MemoryRouter>],
   parameters: {

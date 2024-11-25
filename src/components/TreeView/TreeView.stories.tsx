@@ -83,6 +83,7 @@ export const Playground: Story = {
   parameters: {
     screenshot: { skip: true },
   },
+  tags: ['new'],
 };
 
 export const ContentRenderers: Story = {

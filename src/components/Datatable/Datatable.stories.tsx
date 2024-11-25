@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryFn } from '@storybook/react';
-import MockDate from 'mockdate';
 
 import assets from '../_internal/BaseTable/mocks/ipAssets.json';
 import { Data } from '../_internal/BaseTable/mocks/types';
@@ -22,12 +21,11 @@ import {
 import Datatable from './Datatable';
 import { DatatableProps } from './Datatable.types';
 
-MockDate.set('2021-03-31T00:00:00Z');
-
 export default {
   title: 'components/Datatable',
   component: Datatable,
   parameters: {
+    mockDate: new Date('2021-03-31T00:00:00Z'),
     screenshot: { skip: true },
     docs: {
       source: { type: 'code' },
@@ -112,6 +110,7 @@ const MyFancyDatatable = () => <Datatable ...props />
       },
     },
   },
+  tags: ['deprecated'],
 } as Meta;
 
 export const ServerSidePlayground: StoryFn<DatatableProps<Data>> = (args) => {

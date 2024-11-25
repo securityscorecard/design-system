@@ -13,7 +13,7 @@ import { CellTypes } from './renderers.enums';
 import { abbreviateNumber } from '../../../../utils';
 
 export default {
-  title: 'components/Datatable/internalComponents/Table/renderers',
+  title: 'tests/Datatable/Table/renderers',
   component: CellRenderer,
   decorators: [
     (storyFn) => (
