@@ -1,4 +1,5 @@
 import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
+import { ComponentPropsWithoutRef } from 'react';
 
 import { getRadii } from '../../utils';
 import Icon from '../Icon/Icon';
@@ -18,13 +19,13 @@ const variances: Record<
   FlattenSimpleInterpolation
 > = {
   default: css`
-    box-shadow: inset 0 0 0 1px var(--slate-a6);
+    box-shadow: inset 0 0 0 1px var(--sscds-color-neutral-alpha-6);
   `,
   strong: css`
     background-color: var(--sscds-color-info-100);
   `,
   subtle: css`
-    background-color: var(--slate-a3);
+    background-color: var(--sscds-color-neutral-alpha-3);
   `,
 };
 
@@ -44,7 +45,11 @@ export default function IconWrapper({
   size = 'md',
   variant = 'default',
   ...rest
-}: IconWrapperProps) {
+}: IconWrapperProps &
+  Omit<
+    ComponentPropsWithoutRef<typeof Icon>,
+    'color' | 'size' | 'hasFixedSize' | 'hasFixedWidth' | 'name' | 'type'
+  >) {
   return (
     <IconWrapperRoot
       $size={size}
