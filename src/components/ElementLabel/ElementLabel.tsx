@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { ElementType, ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { WithAsProp } from '../../types/utils.types';
+import { PolymorphicProps } from '../../types/utils.types';
 
-export type ElementLabelProps = WithAsProp<{
+type ElementLabelOwnProps = {
   children: ReactNode;
   /* Font size */
   size?: 'sm' | 'md';
@@ -18,8 +18,11 @@ export type ElementLabelProps = WithAsProp<{
     | 'link';
   /* Font weight. When true ElementLabel will be rendered as bold */
   isStrong?: boolean;
-}> &
-  ComponentPropsWithoutRef<'span'>;
+};
+export type ElementLabelProps<Element extends ElementType> = PolymorphicProps<
+  ElementLabelOwnProps,
+  Element
+>;
 
 const ElementLabelRoot = styled.span`
   font-family: var(--sscds-font-family-body);
@@ -30,24 +33,27 @@ const ElementLabelRoot = styled.span`
 `;
 ElementLabelRoot.displayName = 'ElementLabel.Root';
 
-function ElementLabel({
+function ElementLabel<E extends ElementType = 'span'>({
   children,
   size = 'sm',
   color = 'default',
   isStrong = false,
   ...props
-}: ElementLabelProps) {
-  const vars = {
-    '--sscds-elementlabel-font-size': `var(--sscds-font-size-elementlabel-${size})`,
-    '--sscds-elementlabel-font-weight': isStrong
-      ? 'var(--sscds-font-weight-elementlabel-strong)'
-      : 'var(--sscds-font-weight-elementlabel-default)',
-    '--sscds-elementlabel-color':
-      color === 'link'
-        ? 'var(--sscds-color-link-default)'
-        : `var(--sscds-color-text-${color})`,
-    ...props.style,
-  };
+}: ElementLabelProps<E>) {
+  const vars = useMemo(
+    () => ({
+      '--sscds-elementlabel-font-size': `var(--sscds-font-size-elementlabel-${size})`,
+      '--sscds-elementlabel-font-weight': isStrong
+        ? 'var(--sscds-font-weight-elementlabel-strong)'
+        : 'var(--sscds-font-weight-elementlabel-default)',
+      '--sscds-elementlabel-color':
+        color === 'link'
+          ? 'var(--sscds-color-link-default)'
+          : `var(--sscds-color-text-${color})`,
+      ...props.style,
+    }),
+    [color, isStrong, props.style, size],
+  );
 
   return (
     <ElementLabelRoot {...props} style={vars}>
