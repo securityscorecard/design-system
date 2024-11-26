@@ -2,6 +2,7 @@ import { defaultTo, path, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import styled, { useTheme } from 'styled-components';
 import cls from 'classnames';
+import { ComponentPropsWithoutRef } from 'react';
 
 import { createMarginSpacing, getColor } from '../../utils';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
@@ -59,7 +60,7 @@ const HexGrade = ({
   margin,
   className,
   ...props
-}: HexGradeProps) => {
+}: HexGradeProps & ComponentPropsWithoutRef<'svg'>) => {
   const theme = useTheme();
   const isCSVariant = variant === HexGradeVariants.cs;
   const gradeColorType = pipe(
