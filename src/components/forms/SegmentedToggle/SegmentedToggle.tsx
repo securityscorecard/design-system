@@ -53,6 +53,7 @@ const { useContext, Provider } = createCtx<SegmentedToggleContext>(
 );
 
 const SegmentedToggleRoot = styled(Padbox)`
+  width: fit-content;
   display: inline-block;
   background-color: var(--sscds-color-neutral-alpha-3);
   box-shadow: inset 0 0 0 1px var(--sscds-color-neutral-alpha-3);

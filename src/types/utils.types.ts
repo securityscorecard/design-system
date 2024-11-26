@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import { ComponentProps, ElementType } from 'react';
 
 export type Subset<K> = {
   [attr in keyof K]?: K[attr] extends object
@@ -18,8 +18,8 @@ export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
     [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
   }[Keys];
 
-export type WithAsProp<Props> = Props & {
-  as?: ElementType;
+export type WithAsProp<Props, Element = ElementType> = Props & {
+  as?: Element;
 };
 
 export type ReactComponentLike =
@@ -28,3 +28,9 @@ export type ReactComponentLike =
   | ((props: any, context?: any) => any)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | (new (props: any, context?: any) => any);
+
+export type PolymorphicProps<
+  OwnProps,
+  Element extends ElementType,
+> = WithAsProp<OwnProps, Element> &
+  Omit<ComponentProps<Element>, keyof WithAsProp<OwnProps, Element>>;
