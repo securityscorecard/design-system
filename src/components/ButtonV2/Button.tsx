@@ -44,7 +44,7 @@ export const ButtonV2Plain = <E extends ElementType = 'button'>(
           : size === 'sm'
           ? 'var(--sscds-space-2x)'
           : 'var(--sscds-space-3x)',
-      '--sscds-button-width': isExpanded ? '100%' : 'auto',
+      '--sscds-button-width': isExpanded ? '100%' : 'fit-content',
       '--sscds-button-width-min':
         typeof minWidth !== 'undefined' ? pxToRem(minWidth) : 'auto',
       '--sscds-button-height': getButtonSize(size),
