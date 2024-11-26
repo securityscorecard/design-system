@@ -24,13 +24,14 @@ const widthVariants = {
   [ModalSizes.sm]: 430,
   [ModalSizes.md]: 600,
   [ModalSizes.lg]: 900,
+  [ModalSizes.xl]: 1440,
 };
 
 const BaseModal = styled(Surface)<{ $maxWidth: number }>`
   display: flex;
   flex-direction: column;
   max-height: 90vh;
-  width: 100%;
+  width: 90%;
   max-width: ${({ $maxWidth }) => pxToRem($maxWidth)};
 `;
 
@@ -63,7 +64,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       children,
       className,
       ...rest
-    },
+    }: ModalProps,
     ref,
   ) => {
     const { portalsContainerId } = useContext(DSContext);
