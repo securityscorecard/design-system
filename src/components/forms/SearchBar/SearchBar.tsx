@@ -12,12 +12,10 @@ import {
   isNotNilOrEmpty,
   isNotUndefined,
 } from 'ramda-adjunct';
-import { pipe } from 'ramda';
 import cls from 'classnames';
 
-import { getColor, getFormStyle, getSpace, pxToRem } from '../../../utils';
+import { getFormStyle } from '../../../utils';
 import { Input } from '../Input';
-import { SpaceSizes } from '../../../theme';
 import { Icon } from '../../Icon';
 import { IconTypes, SSCIconNames } from '../../../theme/icons/icons.enums';
 import { Spinner } from '../../Spinner';
@@ -34,18 +32,21 @@ const IconWrapper = styled.div`
   top: 0;
   display: flex;
   align-items: center;
-  color: ${getColor('neutral.800')};
+  color: var(--sscds-color-icon-subtle);
 `;
 
 const SearchIconWrapper = styled(IconWrapper)`
   left: 0;
-  padding-inline: ${getSpace(SpaceSizes.md)};
+  padding-inline: var(--sscds-space-4x);
   height: 100%;
 `;
 
 const ClearButton = styled(IconWrapper)`
-  right: ${getSpace(SpaceSizes.md)};
-  height: ${pipe(getFormStyle('fieldHeight'), pxToRem)};
+  display: grid;
+  place-items: center;
+  right: 0;
+  height: ${getFormStyle('fieldHeight')};
+  width: ${getFormStyle('fieldHeight')};
   background: none;
   border: none;
   border-radius: 0;
@@ -53,7 +54,9 @@ const ClearButton = styled(IconWrapper)`
 
   &:hover,
   &:focus {
-    ::after {
+    color: var(--sscds-color-icon-inverse);
+
+    &::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -62,17 +65,17 @@ const ClearButton = styled(IconWrapper)`
       width: 24px;
       height: 24px;
       border-radius: 100%;
-      background-color: ${getColor('error.500')};
+      background-color: var(--sscds-color-background-action-danger-hover);
       z-index: -1;
     }
   }
 `;
 
 const SearchInput = styled(Input)`
-  padding-left: ${getSpace(SpaceSizes.lgPlus)};
+  padding-left: var(--sscds-space-12x);
 
-  padding-right: ${({ $isClearable, theme }) =>
-    getSpace($isClearable ? SpaceSizes.lgPlus : SpaceSizes.md, { theme })};
+  padding-right: ${({ $isClearable }) =>
+    $isClearable ? 'var(--sscds-space-12x)' : 'var(--sscds-space-4x)'};
 `;
 
 const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
