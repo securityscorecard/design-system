@@ -1,0 +1,2 @@
+import{c as a,r as c,p as t,f as i,t as s}from"./space.enums-FzolKu9U.js";import{_ as o,b as m}from"./_isObject-BZZHHNGj.js";import{p}from"./pluck-DtgIh6Gb.js";var f=o(function(r,n){return n>r?n:r}),y=m(function(r){return a(c(f,0,p("length",r)),function(){for(var n=0,e=r.length;n<e;){if(r[n].apply(this,arguments))return!0;n+=1}return!1})}),l=a(1,t(s,i("GeneratorFunction"))),v=a(1,t(s,i("AsyncFunction"))),g=y([t(s,i("Function")),l,v]);export{g as i,f as m};
+//# sourceMappingURL=isFunction-DJDWul57.js.map
