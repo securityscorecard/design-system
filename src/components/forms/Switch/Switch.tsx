@@ -105,7 +105,10 @@ const BaseThumb = styled.label`
 
 const Thumb = styled(BaseThumb)<SwitchThumbProps>`
   height: ${getSwitchHeight};
+  color: ${getFormStyle('switchKnobBgColor')};
   background: ${getFormStyle('switchBgColor')};
+  cursor: pointer;
+
   ${({ $size }) => switchThumbWrapperSizes[$size]};
   ${({ isDisabled }) =>
     css`
@@ -115,8 +118,9 @@ const Thumb = styled(BaseThumb)<SwitchThumbProps>`
 `;
 
 const ThumbContent = styled.div<Omit<SwitchThumbProps, 'maxWidth'>>`
-  cursor: pointer;
   ${({ $size }) => switchNotCheckedThumbPaddings[$size]};
+  transition: 0.3s;
+
   &::after {
     content: '';
     position: absolute;
@@ -124,19 +128,10 @@ const ThumbContent = styled.div<Omit<SwitchThumbProps, 'maxWidth'>>`
     left: ${pxToRem(2)};
     width: ${getSwitchThumbAfterElementSize};
     height: ${getSwitchThumbAfterElementSize};
-    ${({ isDisabled }) =>
-      css`
-        background: ${getFormStyle(
-          isDisabled ? 'disabledColor' : 'switchKnobBgColor',
-        )};
-      `};
+    background: currentcolor;
     border-radius: ${getRadii('circle')};
-    transition: 0.3s;
+    transition: 0.15s;
   }
-  &:active::after {
-    background-color: ${getFormStyle('hoverIndicatorColor')};
-  }
-  transition: 0.3s;
 `;
 
 const Input = styled.input<{
@@ -145,47 +140,52 @@ const Input = styled.input<{
   height: 0;
   width: 0;
   display: none;
-  &:checked:disabled + ${/* sc-selector */ Thumb} {
-    color: ${getFormStyle('activeColor')};
-    background: ${getFormStyle('disabledColor')};
-    border-color: ${getFormStyle('disabledColor')};
-  }
 
   &:hover + ${Thumb} {
     background-color: ${getFormStyle('activeBgColor')};
   }
   &:active + ${Thumb} {
     background-color: ${getFormStyle('activeBgColor')};
+    color: ${getFormStyle('hoverIndicatorColor')};
   }
 
-  &:checked + ${Thumb} {
-    ${ThumbContent} {
-      ${({ $size }) => switchCheckedThumbPaddings[$size]};
+  &:checked {
+    & + ${Thumb} {
+      color: ${getFormStyle('activeColor')};
+      background: ${getFormStyle('activeBorderColor')};
+      border-color: ${getFormStyle('activeBorderColor')};
+
+      ${ThumbContent} {
+        ${({ $size }) => switchCheckedThumbPaddings[$size]};
+
+        &::after {
+          left: calc(100% - ${pxToRem(2)});
+          transform: translateX(-100%);
+        }
+      }
+
+      &:hover + ${Thumb} {
+        background-color: ${getFormStyle('hoverBgColor')};
+      }
+      &:active + ${Thumb} {
+        color: ${getFormStyle('activeColor')};
+        background-color: ${getFormStyle('pressedBgColor')};
+      }
     }
   }
 
-  &:checked + ${Thumb} {
-    color: ${getFormStyle('activeColor')};
-    background: ${getFormStyle('activeBorderColor')};
-    border-color: ${getFormStyle('activeBorderColor')};
-  }
-  &:checked + ${Thumb} {
-    ${/* sc-selector */ ThumbContent}::after {
-      background: ${getFormStyle('activeColor')};
-      left: calc(100% - ${pxToRem(2)});
-      transform: translateX(-100%);
-    }
-  }
-  &:checked:disabled + ${Thumb} {
-    ${/* sc-selector */ ThumbContent}::after {
+  &:disabled {
+    & + ${Thumb} {
+      color: ${getFormStyle('disabledColor')};
       background: ${getFormStyle('switchBgColor')};
+      border-color: ${getFormStyle('disabledBorderColor')};
+      cursor: not-allowed;
     }
-  }
-  &:checked:hover + ${Thumb} {
-    background-color: ${getFormStyle('hoverBgColor')};
-  }
-  &:checked:active + ${Thumb} {
-    background-color: ${getFormStyle('pressedBgColor')};
+    &:checked + ${Thumb} {
+      color: ${getFormStyle('switchBgColor')};
+      background: ${getFormStyle('disabledColor')};
+      border-color: ${getFormStyle('disabledColor')};
+    }
   }
 `;
 
