@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import * as requireRouterLink from '../../utils/require-router-link';
@@ -24,7 +25,7 @@ describe('Link', () => {
   });
 
   it('should return null if react-router link import fails', () => {
-    jest.spyOn(requireRouterLink, 'requireRouterLink').mockReturnValue(null);
+    vi.spyOn(requireRouterLink, 'requireRouterLink').mockReturnValue(null);
     renderWithProviders(<Link to="/path">Empty</Link>);
     expect(
       screen.queryByRole('link', { name: /Empty/i }),

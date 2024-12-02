@@ -1,4 +1,5 @@
 import { KeyboardCode } from '@dnd-kit/core';
+import { vi } from 'vitest';
 
 import { SensorContext } from '../TreeView.types';
 import { INDENTATION_WIDTH } from './constants';
@@ -40,7 +41,7 @@ describe('sortableTreeKeyboardCoordinates', () => {
         offset: 0,
       },
     };
-    const event = { code: KeyboardCode.Right, preventDefault: jest.fn() };
+    const event = { code: KeyboardCode.Right, preventDefault: vi.fn() };
     const active = {
       id: '1',
       data: {
@@ -164,7 +165,7 @@ describe('sortableTreeKeyboardCoordinates', () => {
         offset: 0,
       },
     };
-    const event = { code: KeyboardCode.Right, preventDefault: jest.fn() };
+    const event = { code: KeyboardCode.Right, preventDefault: vi.fn() };
     const active = { id: '1' };
     const collisionRect = { top: 0, left: 0 };
     const droppableRects = new Map();

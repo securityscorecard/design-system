@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { vi } from 'vitest';
 
 import { createCtx } from './createCtx';
 
@@ -17,9 +18,9 @@ describe('createCtx', () => {
     const errorMessage = 'Context not provided';
     const { useContext, Provider } = createCtx<string>(namespace, errorMessage);
 
-    const loggerSpy = jest
+    const loggerSpy = vi
       .spyOn(console, 'error')
-      .mockImplementation(() => jest.fn());
+      .mockImplementation(() => vi.fn());
     const wrapper = ({ children }) => (
       <Provider value={undefined}>{children}</Provider>
     );

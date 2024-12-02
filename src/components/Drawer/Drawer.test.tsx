@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';
@@ -9,7 +10,6 @@ import { Icon } from '../Icon';
 import { Paragraph } from '../Paragraph';
 import { DropdownMenu } from '../DropdownMenu';
 import { Inline, Stack } from '../layout';
-import { pxToRem } from '../../utils/helpers';
 
 function Footer() {
   return (
@@ -71,7 +71,7 @@ describe('Drawer', () => {
         </Stack>
       </Drawer>,
     );
-    const maxWidthValue = pxToRem('480');
+    const maxWidthValue = '480px';
     const drawer = screen.getByRole('dialog');
     expect(drawer).toHaveStyle(`max-width: ${maxWidthValue}`);
   });
@@ -108,7 +108,7 @@ describe('Drawer', () => {
   });
 
   it('should allow clicking on interactive elements in dropdown', async () => {
-    const dropdownClickMock = jest.fn();
+    const dropdownClickMock = vi.fn();
     renderWithProviders(
       <Drawer
         size="md"
@@ -143,7 +143,7 @@ describe('Drawer', () => {
   });
 
   it('should should trigger the onClose when clicking on overlay', () => {
-    const onCloseMock = jest.fn();
+    const onCloseMock = vi.fn();
     renderWithProviders(
       <Drawer
         size="md"

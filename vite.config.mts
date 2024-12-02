@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import path from 'node:path';
 import react from '@vitejs/plugin-react';
@@ -73,5 +74,17 @@ export default defineConfig({
       },
     },
     minify: true,
+  },
+  test: {
+    globals: true,
+    dir: './src',
+    setupFiles: './vitest-setup.ts',
+    include: ['**/*.test.(ts|tsx)'],
+    environment: 'happy-dom',
+    coverage: {
+      reporter: ['lcov'],
+      all: false,
+      reportsDirectory: './coverage/unit',
+    },
   },
 });

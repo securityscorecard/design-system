@@ -1,18 +1,19 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { noop } from 'ramda-adjunct';
+import { vi } from 'vitest';
 
 import { DSProvider } from '../theme/DSProvider';
 import { useLogger } from './useLogger';
 
-const log = jest.spyOn(console, 'log').mockImplementation(noop);
-const warn = jest.spyOn(console, 'warn').mockImplementation(noop);
-const error = jest.spyOn(console, 'error').mockImplementation(noop);
+const log = vi.spyOn(console, 'log').mockImplementation(noop);
+const warn = vi.spyOn(console, 'warn').mockImplementation(noop);
+const error = vi.spyOn(console, 'error').mockImplementation(noop);
 const namespace = 'test namespace';
 const message = 'test message';
 
 describe('useLogger', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
   describe('log', () => {
     it('should not call console.log when debug mode is disabled', () => {
@@ -60,7 +61,7 @@ describe('useLogger', () => {
   describe('warn', () => {
     it('should not call console.warn when NODE_ENV=production', () => {
       const OLD_NODE_ENV = process.env.NODE_ENV;
-      jest.resetModules();
+      vi.resetModules();
       process.env.NODE_ENV = 'production';
       const wrapper = ({ children }) => (
         <DSProvider config={{ debugMode: false }}>{children}</DSProvider>
@@ -111,7 +112,7 @@ describe('useLogger', () => {
     describe('given NODE_ENV=production', () => {
       const OLD_NODE_ENV = process.env.NODE_ENV;
       beforeAll(() => {
-        jest.resetModules();
+        vi.resetModules();
         process.env.NODE_ENV = 'production';
       });
       afterAll(() => {

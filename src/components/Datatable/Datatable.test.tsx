@@ -3,6 +3,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Column } from 'react-table';
 import { filter } from 'ramda';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import { fields } from '../Filters/mocks/options';
@@ -64,10 +65,10 @@ describe('Datatable', () => {
     DatatableStore.replace(datatableInitialState);
   });
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
   it('should not call "onDataFetch" on mount', () => {
-    const onDataFetchMock = jest.fn();
+    const onDataFetchMock = vi.fn();
 
     renderWithProviders(
       <Datatable<Data>
@@ -83,10 +84,10 @@ describe('Datatable', () => {
   });
   describe('on request cancelation', () => {
     it('should call "onCancelLoading"', () => {
-      const onCancelLoading = jest.fn();
+      const onCancelLoading = vi.fn();
       renderWithProviders(
         <Datatable<Data>
-          onDataFetch={jest.fn()}
+          onDataFetch={vi.fn()}
           onCancelLoading={onCancelLoading}
           data={data}
           columns={columns}

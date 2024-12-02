@@ -1,6 +1,7 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity, F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import CellRenderer from './CellRenderer';
@@ -16,7 +17,7 @@ const singleValue = 'value';
 describe('Datatable/CellRenderer', () => {
   describe('given cell type is multiValue', () => {
     it('should pass "cellOnClick" handler', async () => {
-      const onClickMock = jest.fn();
+      const onClickMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={multiValueValues}
@@ -36,7 +37,7 @@ describe('Datatable/CellRenderer', () => {
       expect(onClickMock).toBeCalled();
     });
     it('should pass "cellToComposer" handler', () => {
-      const toComposerMock = jest.fn();
+      const toComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={multiValueValues}
@@ -53,7 +54,7 @@ describe('Datatable/CellRenderer', () => {
       expect(toComposerMock).toBeCalled();
     });
     it('should pass "cellHrefComposer" handler', () => {
-      const hrefComposerMock = jest.fn();
+      const hrefComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={multiValueValues}
@@ -69,7 +70,7 @@ describe('Datatable/CellRenderer', () => {
       expect(hrefComposerMock).toBeCalled();
     });
     it('should pass "cellFormatter" handler', () => {
-      const formatterMock = jest.fn();
+      const formatterMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={multiValueValues}
@@ -85,7 +86,7 @@ describe('Datatable/CellRenderer', () => {
       expect(formatterMock).toBeCalled();
     });
     it('should pass "cellTooltipPopupComposer" handler', () => {
-      const tooltipComposerMock = jest.fn();
+      const tooltipComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={multiValueValues}
@@ -104,7 +105,7 @@ describe('Datatable/CellRenderer', () => {
 
   describe('given cell type is link', () => {
     it('should pass "cellOnClick" handler', () => {
-      const onClickMock = jest.fn();
+      const onClickMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -125,7 +126,7 @@ describe('Datatable/CellRenderer', () => {
       expect(onClickMock).toBeCalled();
     });
     it('should pass "cellToComposer" handler', () => {
-      const toComposerMock = jest.fn();
+      const toComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -142,7 +143,7 @@ describe('Datatable/CellRenderer', () => {
       expect(toComposerMock).toBeCalled();
     });
     it('should pass "cellHrefComposer" handler', () => {
-      const hrefComposerMock = jest.fn();
+      const hrefComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -158,7 +159,7 @@ describe('Datatable/CellRenderer', () => {
       expect(hrefComposerMock).toBeCalled();
     });
     it('should pass "cellFormatter" handler', () => {
-      const formatterMock = jest.fn();
+      const formatterMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -177,7 +178,7 @@ describe('Datatable/CellRenderer', () => {
 
   describe('given cell type is discrete link', () => {
     it('should pass "cellOnClick" handler', () => {
-      const onClickMock = jest.fn();
+      const onClickMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -198,7 +199,7 @@ describe('Datatable/CellRenderer', () => {
       expect(onClickMock).toBeCalled();
     });
     it('should pass "cellToComposer" handler', () => {
-      const toComposerMock = jest.fn();
+      const toComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -215,7 +216,7 @@ describe('Datatable/CellRenderer', () => {
       expect(toComposerMock).toBeCalled();
     });
     it('should pass "cellHrefComposer" handler', () => {
-      const hrefComposerMock = jest.fn();
+      const hrefComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -231,7 +232,7 @@ describe('Datatable/CellRenderer', () => {
       expect(hrefComposerMock).toBeCalled();
     });
     it('should pass "cellFormatter" handler', () => {
-      const formatterMock = jest.fn();
+      const formatterMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}
@@ -269,7 +270,7 @@ describe('Datatable/CellRenderer', () => {
       });
     });
     it('should call "tooltipComposer" with correct arguments for each visible value', () => {
-      const tooltipComposerMock = jest.fn();
+      const tooltipComposerMock = vi.fn();
       renderWithProviders(
         <CellRenderer
           value={singleValue}

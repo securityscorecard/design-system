@@ -1,6 +1,7 @@
 import { act, screen, waitFor } from '@testing-library/react';
 import { Column } from 'react-table';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
@@ -40,7 +41,7 @@ describe('Datatable/Table', () => {
     DatatableStore.replace(datatableInitialState);
   });
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should select all rows on Toggle All click', () => {
@@ -134,7 +135,7 @@ describe('Datatable/Table', () => {
     });
   });
   it('should call onClick handler in row action dropdown with correct parameters', async () => {
-    const rowActionMock = jest.fn();
+    const rowActionMock = vi.fn();
     const rowIndex = 0;
     renderWithProviders(
       <Table<Data>
@@ -409,7 +410,7 @@ describe('Datatable/Table', () => {
           {...defaultTableConfig}
           isDataLoading
           isCancelDisabled={false}
-          onCancelLoading={jest.fn}
+          onCancelLoading={vi.fn}
         />,
       );
 
@@ -429,7 +430,7 @@ describe('Datatable/Table', () => {
           {...defaultTableConfig}
           isDataLoading
           isCancelDisabled
-          onCancelLoading={jest.fn}
+          onCancelLoading={vi.fn}
         />,
       );
 

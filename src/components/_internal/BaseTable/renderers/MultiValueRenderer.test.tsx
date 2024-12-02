@@ -1,5 +1,6 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { identity } from 'ramda';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import MultiValueRenderer from './MultiValueRenderer';
@@ -50,7 +51,7 @@ describe('Datatable/MultiValueRenderer', () => {
     /* eslint-enable testing-library/no-node-access */
   });
   it('should call "tooltipComposer" with correct arguments for each visible value', () => {
-    const tooltipComposerMock = jest.fn();
+    const tooltipComposerMock = vi.fn();
     renderWithProviders(
       <MultiValueRenderer
         multiValueDisplayLimit={numberOfVisibleItems}
@@ -65,7 +66,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(tooltipComposerMock).toBeCalledTimes(numberOfVisibleItems);
   });
   it('should call "hrefComposer" with correct arguments for each visible value', () => {
-    const hrefComposerMock = jest.fn();
+    const hrefComposerMock = vi.fn();
 
     renderWithProviders(
       <MultiValueRenderer
@@ -81,7 +82,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(hrefComposerMock).toBeCalledTimes(numberOfVisibleItems);
   });
   it('should call "toComposer" with correct arguments for each visible value', () => {
-    const toComposerMock = jest.fn();
+    const toComposerMock = vi.fn();
     renderWithProviders(
       <MultiValueRenderer
         multiValueDisplayLimit={numberOfVisibleItems}
@@ -97,7 +98,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(toComposerMock).toBeCalledTimes(numberOfVisibleItems);
   });
   it('should call "onClick" with correct arguments on value click', async () => {
-    const onClickMock = jest.fn();
+    const onClickMock = vi.fn();
     renderWithProviders(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
@@ -115,7 +116,7 @@ describe('Datatable/MultiValueRenderer', () => {
     expect(onClickMock).toBeCalledWith(values[0], rowData);
   });
   it('should call "valueFormatter" with correct arguments for each value', () => {
-    const formatterMock = jest.fn();
+    const formatterMock = vi.fn();
     const shortValues = ['a', 'b', 'c'];
     renderWithProviders(
       <MultiValueRenderer

@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
 import Tooltip from './Tooltip';
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
@@ -19,21 +19,10 @@ describe('Tooltip', () => {
     });
   });
   describe('when popup is not defined', () => {
-    beforeEach(() => {
-      jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-      jest.useRealTimers();
-    });
-
     it('should display children', async () => {
       renderWithProviders(<Tooltip>{childrenText}</Tooltip>);
       const tooltipParent = screen.getByText(childrenText);
       fireEvent.pointerMove(tooltipParent);
-      act(() => {
-        jest.advanceTimersByTime(5000);
-      });
 
       expect(screen.getByText(childrenText)).toBeInTheDocument();
       expect(screen.queryByTestId('ssc-tooltip')).not.toBeInTheDocument();
