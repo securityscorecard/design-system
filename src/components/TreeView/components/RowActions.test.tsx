@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { noop } from 'ramda-adjunct';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import RowActions from './RowActions';
@@ -12,7 +13,7 @@ describe('RowActions Component', () => {
   const createMockAction = (overrides = {}): RowAction<typeof mockRow> => ({
     label: 'Action Label',
     iconName: 'times',
-    onClick: jest.fn(),
+    onClick: vi.fn(),
     ...overrides,
   });
 
@@ -79,7 +80,7 @@ describe('RowActions Component', () => {
   });
 
   test('should trigger `onClick`', () => {
-    const onClickMock = jest.fn();
+    const onClickMock = vi.fn();
     onClickMock.mockImplementation(() => noop);
     const rowActions = [
       createMockAction({ label: 'action 1', onClick: onClickMock }),

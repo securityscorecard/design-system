@@ -1,11 +1,12 @@
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import { DatatableStore, datatableInitialState } from '../../Datatable.store';
 import BatchActions from './BatchActions';
 
-const actionFnMock = jest.fn();
-const subactionFnMock = jest.fn();
+const actionFnMock = vi.fn();
+const subactionFnMock = vi.fn();
 const actions = [
   {
     label: 'Action',
@@ -31,7 +32,7 @@ describe('Datatable/BatchActions', () => {
     DatatableStore.replace(datatableInitialState);
   });
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe('given exclusive selection is disabled', () => {

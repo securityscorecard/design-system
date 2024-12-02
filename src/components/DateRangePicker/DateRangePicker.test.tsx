@@ -1,12 +1,13 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { type Mock, vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import DateRangePicker from './DateRangePicker';
 
 const checkInputClick = (
   inputStartDate: HTMLElement,
-  handleChangeDate: jest.Mock,
+  handleChangeDate: Mock,
 ) => {
   userEvent.click(inputStartDate);
 
@@ -18,7 +19,7 @@ const checkInputClick = (
 
 describe('DateRangePicker', () => {
   it('should date range picker popping up when user clicks on the input ', async () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <DateRangePicker
@@ -43,7 +44,7 @@ describe('DateRangePicker', () => {
   });
 
   it('should call onchange when a start date or end date is picked', () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <DateRangePicker
@@ -65,7 +66,7 @@ describe('DateRangePicker', () => {
   });
 
   it('should determine selected date by input value', () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <DateRangePicker
@@ -84,7 +85,7 @@ describe('DateRangePicker', () => {
   });
 
   it('should change the default placeholder', () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <DateRangePicker
@@ -109,7 +110,7 @@ describe('DateRangePicker', () => {
   });
 
   it('should disable the dates outside the range', async () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <DateRangePicker

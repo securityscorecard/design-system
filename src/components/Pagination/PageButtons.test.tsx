@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import PageButtons, { calculatePagePositions } from './PageButtons';
@@ -31,7 +32,7 @@ describe('calculatePageButtons', () => {
 
 describe('Pagination/PageButtons', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
   it('should show all page buttons when page count is less than number of positions', () => {
     const pageCount = 3;
@@ -39,7 +40,9 @@ describe('Pagination/PageButtons', () => {
       <PageButtons
         currentPage={1}
         pageCount={pageCount}
-        onChange={jest.fn}
+        onChange={() => {
+          vi.fn();
+        }}
         positions={8}
       />,
     );
@@ -53,7 +56,9 @@ describe('Pagination/PageButtons', () => {
       <PageButtons
         currentPage={1}
         pageCount={pageCount}
-        onChange={jest.fn}
+        onChange={() => {
+          vi.fn();
+        }}
         positions={8}
       />,
     );
@@ -62,7 +67,7 @@ describe('Pagination/PageButtons', () => {
   });
 
   it('should call onChange handler with correct parameters', () => {
-    const changeMock = jest.fn();
+    const changeMock = vi.fn();
     renderWithProviders(
       <PageButtons
         currentPage={5}

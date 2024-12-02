@@ -1,5 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
@@ -19,7 +20,7 @@ describe('DatatableV2/columnResizing', () => {
 
   describe('when is column resizing enabled', () => {
     it('should resize column by dragging handler', () => {
-      const columnSizeMock = jest.fn();
+      const columnSizeMock = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}
@@ -38,7 +39,7 @@ describe('DatatableV2/columnResizing', () => {
     });
 
     it('should resize column by using left and right arrow keys', async () => {
-      const columnSizeMock = jest.fn();
+      const columnSizeMock = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}
@@ -56,7 +57,7 @@ describe('DatatableV2/columnResizing', () => {
     });
 
     it('should not resize column by using other keys', async () => {
-      const columnSizeMock = jest.fn();
+      const columnSizeMock = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}
@@ -74,7 +75,7 @@ describe('DatatableV2/columnResizing', () => {
     });
 
     it('should reset column sizing on double click', async () => {
-      const columnSizeMock = jest.fn();
+      const columnSizeMock = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}
@@ -93,7 +94,7 @@ describe('DatatableV2/columnResizing', () => {
     });
 
     it.skip('should reset column sizing with column action', async () => {
-      const columnSizeMock = jest.fn();
+      const columnSizeMock = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}

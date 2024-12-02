@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
+import { vi } from 'vitest';
 
 import CollapsibleHandle from './CollapsibleHandle';
 
@@ -16,7 +17,7 @@ describe('CollapsibleHandle', () => {
   });
 
   test('should call `onCollapse` when is clicked', () => {
-    const onCollapseMock = jest.fn();
+    const onCollapseMock = vi.fn();
     render(<CollapsibleHandle collapsed onCollapse={onCollapseMock} />);
 
     fireEvent.click(screen.getByRole('button'));

@@ -1,14 +1,15 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+import { type MockInstance, vi } from 'vitest';
 
 import { useManagerEvents } from './useManagerEvents';
 
 describe('useManagerEvents', () => {
-  let addEventListenerSpy: jest.SpyInstance;
-  let removeEventListenerSpy: jest.SpyInstance;
+  let addEventListenerSpy: MockInstance;
+  let removeEventListenerSpy: MockInstance;
 
   beforeEach(() => {
-    addEventListenerSpy = jest.spyOn(window, 'addEventListener');
-    removeEventListenerSpy = jest.spyOn(window, 'removeEventListener');
+    addEventListenerSpy = vi.spyOn(window, 'addEventListener');
+    removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
   });
 
   afterEach(() => {
@@ -18,7 +19,7 @@ describe('useManagerEvents', () => {
 
   it('should correctly attach event listeners to the window object for each event specified in the `listeners` object', () => {
     const listeners = {
-      testEvent: jest.fn(),
+      testEvent: vi.fn(),
     };
     renderHook(() => useManagerEvents(listeners));
 
@@ -30,7 +31,7 @@ describe('useManagerEvents', () => {
 
   it('should correctly remove event listeners from the window object when the component unmounts', () => {
     const listeners = {
-      testEvent: jest.fn(),
+      testEvent: vi.fn(),
     };
     const { unmount } = renderHook(() => useManagerEvents(listeners));
 
@@ -46,7 +47,7 @@ describe('useManagerEvents', () => {
 
   it('should not invoke event listeners after the component has unmounted', () => {
     const listeners = {
-      testEvent: jest.fn(),
+      testEvent: vi.fn(),
     };
     const { unmount } = renderHook(() => useManagerEvents(listeners));
 

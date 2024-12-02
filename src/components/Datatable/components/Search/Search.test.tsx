@@ -1,24 +1,19 @@
 /* eslint-disable testing-library/await-async-query */
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
-import { createIconLibrary, resetIconLibrary } from '../../../../theme';
 import Search from './Search';
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 
-const onSearch = jest.fn();
-const onClear = jest.fn();
+const onSearch = vi.fn();
+const onClear = vi.fn();
 
 describe('Search', () => {
-  beforeAll(() => {
-    createIconLibrary();
-  });
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
-  afterAll(() => {
-    resetIconLibrary();
-  });
+
   it('should have defaultValue when provided', async () => {
     renderWithProviders(
       <Search
@@ -50,25 +45,21 @@ describe('Search', () => {
   it('should trigger search when value is changed', async () => {
     renderWithProviders(<Search onClear={onClear} onSearch={onSearch} />);
     const searchInput = screen.getByRole('searchbox');
-    jest.useFakeTimers();
 
     userEvent.type(searchInput, 'query');
     expect(searchInput).toHaveValue('query');
 
     await waitFor(() => expect(onSearch).toHaveBeenCalled());
-    jest.useRealTimers();
   });
   it('should trigger search if value is empty', async () => {
     renderWithProviders(
       <Search defaultValue="ab" onClear={onClear} onSearch={onSearch} />,
     );
     const searchInput = screen.getByRole('searchbox');
-    jest.useFakeTimers();
 
     expect(searchInput).toHaveValue('ab');
     userEvent.type(searchInput, '{Backspace}{Backspace}');
-    await waitFor(() => expect(onSearch).toBeCalledWith(''));
-    jest.useRealTimers();
+    await waitFor(() => expect(onSearch).toHaveBeenCalledWith(''));
   });
   it('should not trigger search when value is invalid', async () => {
     renderWithProviders(
@@ -77,7 +68,7 @@ describe('Search', () => {
     const searchInput = screen.getByRole('searchbox');
 
     userEvent.type(searchInput, 'query{Enter}');
-    await waitFor(() => expect(onSearch).not.toBeCalled());
+    await waitFor(() => expect(onSearch).not.toHaveBeenCalled());
   });
 
   it('should validate according to pattern', () => {

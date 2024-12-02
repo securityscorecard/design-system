@@ -1,14 +1,15 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import GoToPage from './GoToPage';
 
-const pageChangeMock = jest.fn();
+const pageChangeMock = vi.fn();
 
 describe('Datatable/GoToPage', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
   it('should call onPageChange handler with "1" when value is less than or equal to 0', () => {
     renderWithProviders(

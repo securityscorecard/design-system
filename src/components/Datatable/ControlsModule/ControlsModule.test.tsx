@@ -1,5 +1,6 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import { InputFilter } from '../../Filters/components';
@@ -162,7 +163,7 @@ describe('Datatable/ControlsModule', () => {
 
   describe('given search is enabled', () => {
     it('should perform search on mount when defaultValue is provided', async () => {
-      const onSearchMock = jest.fn();
+      const onSearchMock = vi.fn();
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -182,7 +183,7 @@ describe('Datatable/ControlsModule', () => {
       });
     });
     it('should not perform search when no defaultValue is provided', async () => {
-      const onSearchMock = jest.fn();
+      const onSearchMock = vi.fn();
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -274,7 +275,6 @@ describe('Datatable/ControlsModule', () => {
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(false);
     });
     it('should store search query when perform search', async () => {
-      jest.useFakeTimers();
       const query = 'Search query';
       renderWithProviders(
         <ControlsModule
@@ -291,10 +291,8 @@ describe('Datatable/ControlsModule', () => {
       await waitFor(() =>
         expect(DatatableStore.getRawState().query).toBe(query),
       );
-      jest.useRealTimers();
     });
     it('should clear search query on Clear button click', async () => {
-      jest.useFakeTimers();
       const query = 'Search query';
       renderWithProviders(
         <ControlsModule
@@ -313,7 +311,6 @@ describe('Datatable/ControlsModule', () => {
 
       await waitFor(() => DatatableStore.getRawState().query === query);
       expect(DatatableStore.getRawState().query).toBe('');
-      jest.useRealTimers();
     });
   });
 });

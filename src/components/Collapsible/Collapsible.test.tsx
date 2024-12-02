@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { type Mock, vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import { Collapsible } from './index';
@@ -12,8 +13,8 @@ const ControllingComponent = ({
   children,
 }: {
   isOpen?: boolean;
-  onOpenChange: jest.Mock;
-  onOpen?: jest.Mock;
+  onOpenChange: Mock;
+  onOpen?: Mock;
   children: ReactNode;
 }) => {
   const [controlledIsOpen, setControlledIsOpen] = useState(isOpen ?? false);
@@ -76,7 +77,7 @@ describe('Collapsible', () => {
       expect(screen.queryByText('Collapsible content')).not.toBeInTheDocument();
     });
     it('should call "onOpen" on trigger click', async () => {
-      const onOpenMock = jest.fn();
+      const onOpenMock = vi.fn();
       renderWithProviders(
         <Collapsible title="test" onOpen={onOpenMock}>
           Collapsible content
@@ -87,7 +88,7 @@ describe('Collapsible', () => {
       expect(onOpenMock).toBeCalledTimes(1);
     });
     it('should call "onOpen" only when is open', async () => {
-      const onOpenMock = jest.fn();
+      const onOpenMock = vi.fn();
       renderWithProviders(
         <Collapsible title="test" onOpen={onOpenMock} defaultIsOpen>
           Collapsible content
@@ -101,7 +102,7 @@ describe('Collapsible', () => {
 
   describe('controlled mode', () => {
     it('should toggle open state on trigger click', async () => {
-      const onOpenChangeMock = jest.fn();
+      const onOpenChangeMock = vi.fn();
       renderWithProviders(
         <ControllingComponent onOpenChange={onOpenChangeMock}>
           Collapsible content
@@ -115,7 +116,7 @@ describe('Collapsible', () => {
     });
 
     it('should toggle open state on external state change', async () => {
-      const onOpenChangeMock = jest.fn();
+      const onOpenChangeMock = vi.fn();
       renderWithProviders(
         <ControllingComponent onOpenChange={onOpenChangeMock}>
           Collapsible content
@@ -129,7 +130,7 @@ describe('Collapsible', () => {
     });
 
     it('should be opened when "isOpen" is true', () => {
-      const onOpenChangeMock = jest.fn();
+      const onOpenChangeMock = vi.fn();
       renderWithProviders(
         <ControllingComponent isOpen onOpenChange={onOpenChangeMock}>
           Collapsible content

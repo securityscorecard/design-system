@@ -1,10 +1,11 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { vi } from 'vitest';
 
 import { Operators } from '../../Filters/Filters.enums';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 import { useDataFetch } from './useDataFetch';
 
-const fetchCallback = jest.fn();
+const fetchCallback = vi.fn();
 const pageIndex = 10;
 const pageSize = 20;
 const sortBy = [{ id: 'colId', desc: true }];
@@ -26,7 +27,7 @@ describe('useDataFetch', () => {
     DatatableStore.replace(datatableInitialState);
   });
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should not call callback funtion on init', () => {
