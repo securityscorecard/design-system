@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import Accordion, { filterState } from './Accordion';
 
@@ -89,7 +90,7 @@ describe('Accordion', () => {
   });
 
   it('should handle click events correctly, updating the state based on whether the item is already open and the `isCollapsedOnOpen` setting', () => {
-    const onChangeMock = jest.fn();
+    const onChangeMock = vi.fn();
     render(
       <Accordion
         items={[items[0], { ...items[1], isOpen: true }, items[2]]}

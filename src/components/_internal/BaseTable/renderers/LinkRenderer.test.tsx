@@ -1,5 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
 import LinkRenderer from './LinkRenderer';
@@ -9,11 +10,11 @@ const value = 'value';
 
 describe('Datatable/LinkRenderer', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should call "hrefComposer" with correct arguments', () => {
-    const hrefComposerMock = jest.fn();
+    const hrefComposerMock = vi.fn();
     renderWithProviders(
       <LinkRenderer
         value={value}
@@ -25,7 +26,7 @@ describe('Datatable/LinkRenderer', () => {
     expect(hrefComposerMock).toBeCalledWith(value, rowData);
   });
   it('should call "onClick" with correct arguments on value click', () => {
-    const onClickMock = jest.fn();
+    const onClickMock = vi.fn();
     renderWithProviders(
       <LinkRenderer value={value} rowData={rowData} onClick={onClickMock} />,
     );
@@ -43,7 +44,7 @@ describe('Datatable/LinkRenderer', () => {
       /* eslint-disable no-console */
       // prevent thrown error to propagate to logs
       const stdErr = console.error;
-      console.error = jest.fn();
+      console.error = vi.fn();
 
       expect(() =>
         renderWithProviders(
@@ -56,7 +57,7 @@ describe('Datatable/LinkRenderer', () => {
       /* eslint-enable */
     });
     it('should call "toComposer" with correct arguments', () => {
-      const toComposerMock = jest.fn();
+      const toComposerMock = vi.fn();
       renderWithProviders(
         <LinkRenderer
           value={value}

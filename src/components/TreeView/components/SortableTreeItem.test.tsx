@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { useSortable } from '@dnd-kit/sortable';
+import { type Mock, vi } from 'vitest';
 
 import SortableTreeItem from './SortableTreeItem';
 
-jest.mock('@dnd-kit/sortable', () => ({
-  useSortable: jest.fn(),
+vi.mock('@dnd-kit/sortable', () => ({
+  useSortable: vi.fn(),
 }));
 
-const mockUseSortable = useSortable as jest.Mock;
+const mockUseSortable = useSortable as Mock;
 
 describe('SortableTreeItem', () => {
   test('should render component', () => {
@@ -18,8 +19,8 @@ describe('SortableTreeItem', () => {
       listeners: {},
       transform: null,
       transition: null,
-      setDraggableNodeRef: jest.fn(),
-      setDroppableNodeRef: jest.fn(),
+      setDraggableNodeRef: vi.fn(),
+      setDroppableNodeRef: vi.fn(),
     });
 
     render(

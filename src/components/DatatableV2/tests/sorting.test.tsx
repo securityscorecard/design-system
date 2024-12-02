@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
@@ -69,7 +70,7 @@ describe.skip('DatatableV2/sorting', () => {
     });
 
     it('should sort on header name click', async () => {
-      const sortCallback = jest.fn();
+      const sortCallback = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}
@@ -112,7 +113,7 @@ describe.skip('DatatableV2/sorting', () => {
     });
 
     it('should disable sorting for specific column if in columns definition', async () => {
-      const sortCallback = jest.fn();
+      const sortCallback = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}
@@ -143,7 +144,7 @@ describe.skip('DatatableV2/sorting', () => {
 
   describe('when is sorting disabled', () => {
     it('should not sort on header name click', async () => {
-      const sortCallback = jest.fn();
+      const sortCallback = vi.fn();
       renderWithProviders(
         <Datatable
           data={data}

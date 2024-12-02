@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import { Column } from 'react-table';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Table from './Table';
@@ -34,7 +35,7 @@ const columns: Column<Data>[] = [
 
 describe('DatatableLight/Table', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe('given isDataLoading', () => {

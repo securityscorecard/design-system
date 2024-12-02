@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom/vitest';
 import 'jest-styled-components';
+import { vi } from 'vitest';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import ICU from 'i18next-icu';
@@ -17,7 +17,7 @@ i18n
   .use(ICU)
   .use(initReactI18next)
   .init({
-    debug: true,
+    debug: false,
     i18nFormat: {
       localeData: [icuEn, icuJa, icuEs, icuPt, icuCs],
       formats: {},
@@ -37,18 +37,19 @@ i18n
 
 Object.defineProperty(document, 'fonts', {
   value: {
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
   },
 });
 
+const ResizeObserverMock = vi.fn(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+vi.stubGlobal('ResizeObserver', ResizeObserverMock);
 beforeAll(() => {
   createIconLibrary();
-  global.ResizeObserver = jest.fn().mockReturnValue({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
-  });
 });
 
 afterAll(() => {

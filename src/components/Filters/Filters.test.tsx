@@ -1,16 +1,17 @@
 import { fireEvent, screen } from '@testing-library/react';
 import selectEvent from 'react-select-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Filters from './Filters';
 import { mockTestFields, mockTestState } from './mocks/options';
 
-const onApplyFnMock = jest.fn();
-const onCloseFnMock = jest.fn();
+const onApplyFnMock = vi.fn();
+const onCloseFnMock = vi.fn();
 
 describe('Filters', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should display remove button when value exists', () => {
@@ -208,7 +209,7 @@ describe('Filters', () => {
   });
 
   it('should call "onCancel" when cancel button was clicked', () => {
-    const onCancel = jest.fn();
+    const onCancel = vi.fn();
     renderWithProviders(
       <Filters
         fields={mockTestFields}
