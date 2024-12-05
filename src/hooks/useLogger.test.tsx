@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
 import { vi } from 'vitest';
 

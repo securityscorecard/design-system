@@ -83,7 +83,7 @@ describe('Datatable', () => {
     expect(onDataFetchMock).not.toHaveBeenCalled();
   });
   describe('on request cancelation', () => {
-    it('should call "onCancelLoading"', () => {
+    it('should call "onCancelLoading"', async () => {
       const onCancelLoading = vi.fn();
       renderWithProviders(
         <Datatable<Data>
@@ -99,7 +99,7 @@ describe('Datatable', () => {
 
       expect(DatatableStore.getRawState().isCanceled).toBe(false);
 
-      userEvent.click(
+      await userEvent.click(
         screen.getAllByRole('button', {
           name: /Cancel/i,
         })[0],
@@ -113,7 +113,7 @@ describe('Datatable', () => {
   it('should reset selected rows when data changes', async () => {
     renderWithProviders(<TestDatatableComponent />);
 
-    userEvent.click(
+    await userEvent.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[2],
@@ -124,11 +124,11 @@ describe('Datatable', () => {
     await waitFor(() =>
       expect(elementCounter).toHaveTextContent(/^1 of 3 selected$/),
     );
-    userEvent.click(screen.getByRole('button', { name: /Remove/i }));
+    await userEvent.click(screen.getByRole('button', { name: /Remove/i }));
 
     await waitFor(() => expect(elementCounter).toHaveTextContent(/^2$/));
 
-    userEvent.click(
+    await userEvent.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[2],

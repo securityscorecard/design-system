@@ -6,7 +6,7 @@ import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Modal from './Modal';
 
 describe('Modal', () => {
-  it('should should trigger the onClose when clicking on overlay', () => {
+  it('should should trigger the onClose when clicking on overlay', async () => {
     const onCloseMock = vi.fn();
     renderWithProviders(
       <Modal data-testid="drawer" onClose={onCloseMock}>
@@ -14,7 +14,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
-    userEvent.click(screen.getByTestId('dialog-overlay'));
+    await userEvent.click(screen.getByTestId('dialog-overlay'));
 
     expect(onCloseMock).toHaveBeenCalled();
   });

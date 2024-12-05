@@ -25,13 +25,13 @@ describe('ErrorBoundary Component', () => {
     loggerSpy.mockRestore();
   });
 
-  it('test_error_boundary_passes_props', () => {
+  it('test_error_boundary_passes_props', async () => {
     const props: ErrorBoundaryProps = {
       size: 'lg',
       onClick: vi.fn(),
     };
     render(<ErrorBoundary {...props} />);
-    userEvent.click(screen.getByText('Try Again'));
+    await userEvent.click(screen.getByText('Try Again'));
     expect(props.onClick).toHaveBeenCalled();
   });
 });
