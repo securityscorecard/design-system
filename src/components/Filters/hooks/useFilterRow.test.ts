@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { Field } from '../Filters.types';
@@ -29,36 +29,33 @@ describe('useFilterRow', () => {
   });
 
   it('should throw error when field is not found', () => {
-    const { result } = renderHook(() =>
-      useFilterRow(mockTestFields, 'option x', 'xxx'),
-    );
-    expect(result.error).toEqual(
+    expect(() =>
+      renderHook(() => useFilterRow(mockTestFields, 'option x', 'xxx')),
+    ).toThrow(
       Error(
         '[design-system/useFilterRow] Field value "option x" was not found in the fields array',
       ),
     );
   });
   it('should throw error when condition is not found', () => {
-    const { result } = renderHook(() =>
-      useFilterRow(mockTestFields, 'option a', 'xxx'),
-    );
-
-    expect(result.error).toEqual(
+    expect(() =>
+      renderHook(() => useFilterRow(mockTestFields, 'option a', 'xxx')),
+    ).toThrow(
       Error(
         '[design-system/useFilterRow] For field value "option a" was not found condition matching condition value "xxx"',
       ),
     );
   });
   it('should throw error when conditions are not provided', () => {
-    const { result } = renderHook(() =>
-      useFilterRow(
-        [{ value: 'option z', label: 'Option Z' }] as Field[],
-        'option z',
-        'xxx',
+    expect(() =>
+      renderHook(() =>
+        useFilterRow(
+          [{ value: 'option z', label: 'Option Z' }] as Field[],
+          'option z',
+          'xxx',
+        ),
       ),
-    );
-
-    expect(result.error).toEqual(
+    ).toThrow(
       Error(
         '[design-system/useFilterRow] Field item does not contain any conditions',
       ),

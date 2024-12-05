@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 import 'jest-styled-components';
-import { vi } from 'vitest';
+import { afterAll, beforeAll, vi } from 'vitest';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import ICU from 'i18next-icu';

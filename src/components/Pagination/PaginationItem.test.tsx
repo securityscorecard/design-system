@@ -6,7 +6,7 @@ import { PaginationItem } from './PaginationItem';
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 
 describe('Pagination/PaginationItem', () => {
-  it('should not call onClick handler for current page', () => {
+  it('should not call onClick handler for current page', async () => {
     const clickMock = vi.fn();
     renderWithProviders(
       <PaginationItem onClick={clickMock} isCurrent>
@@ -14,7 +14,7 @@ describe('Pagination/PaginationItem', () => {
       </PaginationItem>,
     );
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(clickMock).not.toHaveBeenCalled();
   });
 });

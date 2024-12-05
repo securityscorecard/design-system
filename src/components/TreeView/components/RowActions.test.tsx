@@ -50,7 +50,7 @@ describe('RowActions Component', () => {
     });
     expect(dropdownTrigger).toBeInTheDocument();
 
-    userEvent.type(dropdownTrigger, '{arrowdown}');
+    await userEvent.type(dropdownTrigger, '{arrowdown}');
 
     await waitFor(() => {
       expect(screen.getAllByRole('menuitem')).toHaveLength(3);
@@ -72,14 +72,14 @@ describe('RowActions Component', () => {
     });
     expect(dropdownTrigger).toBeInTheDocument();
 
-    userEvent.type(dropdownTrigger, '{arrowdown}');
+    await userEvent.type(dropdownTrigger, '{arrowdown}');
 
     await waitFor(() => {
       expect(screen.getAllByRole('menuitem')).toHaveLength(3);
     });
   });
 
-  test('should trigger `onClick`', () => {
+  test('should trigger `onClick`', async () => {
     const onClickMock = vi.fn();
     onClickMock.mockImplementation(() => noop);
     const rowActions = [
@@ -88,7 +88,7 @@ describe('RowActions Component', () => {
 
     renderWithProviders(<RowActions rowActions={rowActions} row={mockRow} />);
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
 
     expect(onClickMock).toBeCalledWith({ row: mockRow });
   });

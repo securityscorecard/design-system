@@ -18,7 +18,7 @@ describe('SingleDatePicker', () => {
       />,
     );
 
-    userEvent.click(screen.getByPlaceholderText('Enter date…'));
+    await userEvent.click(screen.getByPlaceholderText('Enter date…'));
 
     await waitFor(() => {
       expect(screen.getByText(/March 2021/i)).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe('SingleDatePicker', () => {
     const input = screen.getByPlaceholderText('Enter date…');
 
     // Opens date picker
-    userEvent.click(input);
+    await userEvent.click(input);
 
     // Click on a date
     fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
