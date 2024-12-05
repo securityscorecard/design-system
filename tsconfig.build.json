@@ -22,7 +22,7 @@
     "strict": false, // TODO: enable when issue are resolved
     "noUnusedLocals": false, // TODO: enable when explicit React imports are removed
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
   },
   "include": ["src"],
   "exclude": [

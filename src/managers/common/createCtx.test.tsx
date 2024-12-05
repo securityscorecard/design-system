@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { createCtx } from './createCtx';
@@ -24,12 +24,9 @@ describe('createCtx', () => {
     const wrapper = ({ children }) => (
       <Provider value={undefined}>{children}</Provider>
     );
-    renderHook(() => useContext(), { wrapper });
 
-    expect(loggerSpy).toHaveBeenCalledWith(
-      `%c[design-system/${namespace}]  `,
-      'color: crimson;font-weight: bold',
-      errorMessage,
+    expect(() => renderHook(() => useContext(), { wrapper })).toThrow(
+      Error(`[design-system/${namespace}] ${errorMessage}`),
     );
     loggerSpy.mockRestore();
   });
