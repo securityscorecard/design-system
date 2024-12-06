@@ -1,15 +1,14 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/renderWithProviders';
 import SingleDatePicker from './SingleDatePicker';
 
 describe('SingleDatePicker', () => {
   it('should date picker popping up when user clicks on the input ', async () => {
     const handleChangeDate = vi.fn();
 
-    renderWithProviders(
+    const { user } = setup(
       <SingleDatePicker
         maxDate={new Date('2021/03/28')}
         minDate={new Date('2021/03/01')}
@@ -18,7 +17,7 @@ describe('SingleDatePicker', () => {
       />,
     );
 
-    await userEvent.click(screen.getByPlaceholderText('Enter date…'));
+    await user.click(screen.getByPlaceholderText('Enter date…'));
 
     await waitFor(() => {
       expect(screen.getByText(/March 2021/i)).toBeInTheDocument();
@@ -28,7 +27,7 @@ describe('SingleDatePicker', () => {
   it('should call onchange when a date is picked', async () => {
     const handleChangeDate = vi.fn();
 
-    renderWithProviders(
+    const { user } = setup(
       <SingleDatePicker
         maxDate={new Date('2021/03/28')}
         minDate={new Date('2021/03/01')}
@@ -39,10 +38,10 @@ describe('SingleDatePicker', () => {
     const input = screen.getByPlaceholderText('Enter date…');
 
     // Opens date picker
-    await userEvent.click(input);
+    await user.click(input);
 
     // Click on a date
-    fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
+    await user.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
 
     await waitFor(() => {
       expect(handleChangeDate).toHaveBeenCalled();
@@ -52,7 +51,7 @@ describe('SingleDatePicker', () => {
   it('should determine selected date by input value', async () => {
     const handleChangeDate = vi.fn();
 
-    renderWithProviders(
+    setup(
       <SingleDatePicker
         maxDate={new Date('2021/03/28')}
         minDate={new Date('2021/03/01')}
@@ -69,7 +68,7 @@ describe('SingleDatePicker', () => {
   it('should change the default placeholder', async () => {
     const handleChangeDate = vi.fn();
 
-    renderWithProviders(
+    setup(
       <SingleDatePicker
         value={null}
         placeholder="Custom placeholder"

@@ -1,88 +1,79 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
 describe('DatatableV2/columnPinning', () => {
-  it.skip('should have column pinning enabled by default', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
+  it('should have column pinning enabled by default', async () => {
+    const { user } = setup(
+      <Datatable
+        data={data}
+        columns={columns}
+        id="test"
+        enableRowSelection={false}
+      />,
+    );
 
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('button', {
         name: /Column actions/i,
       })[0],
     );
     expect(
-      screen.getByRole('button', {
-        name: /📌 Pin column/i,
+      screen.getByRole('menuitem', {
+        name: 'Pin column',
       }),
     ).toBeInTheDocument();
   });
 
   describe('when is column pinning enabled', () => {
-    it.skip('should pin column to left', async () => {
-      renderWithProviders(
+    it('should pin column to left', async () => {
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
           enableColumnPinning
+          enableRowSelection={false}
           id="test"
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('button', {
           name: /Column actions/i,
         })[2],
       );
-      await userEvent.click(
-        screen.getByRole('button', {
-          name: /📌 Pin column/i,
+      await user.click(
+        screen.getByRole('menuitem', {
+          name: 'Pin column',
         }),
       );
+
       expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
     });
 
-    // it('should pin column to right', async () => {
-    //   renderWithProviders(
-    //     <Datatable data={data} columns={columns} enableColumnPinning />,
-    //   );
-
-    //   await userEvent.click(
-    //     screen.getAllByRole('button', {
-    //       name: /Show column actions/i,
-    //     })[0],
-    //   );
-    //   await userEvent.click(
-    //     screen.getByRole('button', {
-    //       name: /📌 Pin column to right/i,
-    //     }),
-    //   );
-    //   expect(screen.getAllByRole('columnheader')[2]).toHaveTextContent('name');
-    // });
-
-    it.skip('should unpin column', async () => {
-      renderWithProviders(
+    it('should unpin column', async () => {
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
           enableColumnPinning
+          enableRowSelection={false}
           initialState={{ columnPinning: { left: ['color'] } }}
           id="test"
         />,
       );
 
       expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('color');
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('button', {
           name: /Column actions/i,
         })[0],
       );
-      await userEvent.click(
-        screen.getByRole('button', {
-          name: /❌ Unpin column/i,
+      await user.click(
+        screen.getByRole('menuitem', {
+          name: /Unpin column/i,
         }),
       );
       expect(screen.getAllByRole('columnheader')[0]).toHaveTextContent('name');
@@ -90,7 +81,7 @@ describe('DatatableV2/columnPinning', () => {
     });
 
     it('should hide column pinning for specific column if in columns definition', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={[
@@ -103,14 +94,14 @@ describe('DatatableV2/columnPinning', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('button', {
           name: /Column actions/i,
         })[2],
       );
       expect(
-        screen.queryByRole('button', {
-          name: /📌 Pin column/i,
+        screen.queryByRole('menuitem', {
+          name: 'Pin column',
         }),
       ).not.toBeInTheDocument();
     });

@@ -1,9 +1,8 @@
 import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import Search from './Search';
-import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
+import { setup } from '../../../../utils/tests/renderWithProviders';
 
 const onSearch = vi.fn();
 const onClear = vi.fn();
@@ -14,7 +13,7 @@ describe('Search', () => {
   });
 
   it('should have defaultValue when provided', async () => {
-    renderWithProviders(
+    setup(
       <Search
         defaultValue="Searching for Default"
         onClear={onClear}
@@ -28,86 +27,88 @@ describe('Search', () => {
   });
 
   it('should clear value when clear button is clicked', async () => {
-    renderWithProviders(<Search onClear={onClear} onSearch={onSearch} />);
+    const { user } = setup(<Search onClear={onClear} onSearch={onSearch} />);
     const searchInput = screen.getByRole('searchbox');
 
-    await userEvent.type(searchInput, 'query');
+    await user.type(searchInput, 'query');
     expect(searchInput).toHaveValue('query');
 
     const clearButton = await screen.findByLabelText('Clear search value');
-    await userEvent.click(clearButton);
+    await user.click(clearButton);
 
     await waitFor(() => expect(searchInput).toHaveValue(''));
     expect(onClear).toHaveBeenCalled();
   });
 
   it('should trigger search when value is changed', async () => {
-    renderWithProviders(<Search onClear={onClear} onSearch={onSearch} />);
+    const { user } = setup(<Search onClear={onClear} onSearch={onSearch} />);
     const searchInput = screen.getByRole('searchbox');
 
-    await userEvent.type(searchInput, 'query');
+    await user.type(searchInput, 'query');
     expect(searchInput).toHaveValue('query');
 
     await waitFor(() => expect(onSearch).toHaveBeenCalled());
   });
   it('should trigger search if value is empty', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Search defaultValue="ab" onClear={onClear} onSearch={onSearch} />,
     );
     const searchInput = screen.getByRole('searchbox');
 
     expect(searchInput).toHaveValue('ab');
-    await userEvent.type(searchInput, '{Backspace}{Backspace}');
+    await user.click(searchInput);
+    await user.keyboard('{Backspace}{Backspace}');
     await waitFor(() => expect(onSearch).toHaveBeenCalledWith(''));
   });
   it('should not trigger search when value is invalid', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Search onClear={onClear} onSearch={onSearch} pattern="[0-9]+" />,
     );
     const searchInput = screen.getByRole('searchbox');
 
-    await userEvent.type(searchInput, 'query{Enter}');
+    await user.click(searchInput);
+    await user.keyboard('query{Enter}');
     await waitFor(() => expect(onSearch).not.toHaveBeenCalled());
   });
 
   it('should validate according to pattern', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Search onClear={onClear} onSearch={onSearch} pattern="[0-9]+" />,
     );
     const searchInput = screen.getByRole('searchbox');
 
     expect(searchInput).toBeValid();
-    await userEvent.type(searchInput, 'query');
+    await user.type(searchInput, 'query');
     expect(searchInput).toBeInvalid();
   });
   it('should reset validation when value is empty string', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Search onClear={onClear} onSearch={onSearch} pattern="[0-9]+" />,
     );
     const searchInput = screen.getByRole('searchbox');
 
-    await userEvent.type(searchInput, 'ab');
+    await user.type(searchInput, 'ab');
     expect(searchInput).toBeInvalid();
-    await userEvent.type(searchInput, '{Backspace}{Backspace}');
+    await user.keyboard('{Backspace}{Backspace}');
     expect(searchInput).toBeValid();
   });
 
   describe('"isValidatedOnSubmit" is true', () => {
     it('should not trigger search automatically', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Search isValidatedOnSubmit onClear={onClear} onSearch={onSearch} />,
       );
       const searchInput = screen.getByRole('searchbox');
 
-      await userEvent.type(searchInput, 'query');
+      await user.type(searchInput, 'query');
       expect(onSearch).not.toBeCalled();
 
-      await userEvent.type(searchInput, '{Enter}');
+      await user.keyboard('{Enter}');
       await waitFor(() => expect(onSearch).toBeCalledWith('query'));
     });
 
     it('should trigger search if value is empty', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Search
           isValidatedOnSubmit
           defaultValue="ab"
@@ -118,12 +119,13 @@ describe('Search', () => {
       const searchInput = screen.getByRole('searchbox');
 
       expect(searchInput).toHaveValue('ab');
-      await userEvent.type(searchInput, '{Backspace}{Backspace}{Enter}');
+      await user.click(searchInput);
+      await user.keyboard('{Backspace}{Backspace}{Enter}');
       await waitFor(() => expect(onSearch).toBeCalledWith(''));
     });
 
     it('should not trigger search when value is invalid', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Search
           isValidatedOnSubmit
           onClear={onClear}
@@ -132,8 +134,8 @@ describe('Search', () => {
         />,
       );
       const searchInput = screen.getByRole('searchbox');
-
-      await userEvent.type(searchInput, 'query{Enter}');
+      await user.click(searchInput);
+      await user.keyboard('query{Enter}');
       expect(onSearch).not.toBeCalled();
     });
   });

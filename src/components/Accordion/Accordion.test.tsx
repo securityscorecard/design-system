@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Accordion, { filterState } from './Accordion';
+import { setup } from '../../utils/tests/renderWithProviders';
 
 describe('Accordion/filterState', () => {
   it('should correctly add an item to the state if it is not already included and `isCollapsedOnOpen` is false', () => {
@@ -43,36 +43,38 @@ describe('Accordion', () => {
   ];
 
   it('should open accordion item on click', async () => {
-    render(<Accordion items={items} />);
+    const { user } = setup(<Accordion items={items} />);
 
     expect(screen.queryByText('Content 1')).not.toBeInTheDocument();
-    await userEvent.click(screen.getByText('Item 1'));
+    await user.click(screen.getByText('Item 1'));
     expect(screen.getByText('Content 1')).toBeVisible();
   });
 
   it('should close accordion item if another item is opened', async () => {
-    render(<Accordion items={items} />);
+    const { user } = setup(<Accordion items={items} />);
 
-    await userEvent.click(screen.getByText('Item 1'));
+    await user.click(screen.getByText('Item 1'));
     expect(screen.getByText('Content 1')).toBeVisible();
 
-    await userEvent.click(screen.getByText('Item 2'));
+    await user.click(screen.getByText('Item 2'));
     expect(screen.getByText('Content 2')).toBeVisible();
     expect(screen.queryByText('Content 1')).not.toBeInTheDocument();
   });
 
   it('should open multiple accordion items if if `isCollapsedOnOpen` is set to `false`', async () => {
-    render(<Accordion items={items} isCollapsedOnOpen={false} />);
+    const { user } = setup(
+      <Accordion items={items} isCollapsedOnOpen={false} />,
+    );
 
-    await userEvent.click(screen.getByText('Item 1'));
-    await userEvent.click(screen.getByText('Item 2'));
+    await user.click(screen.getByText('Item 1'));
+    await user.click(screen.getByText('Item 2'));
 
     expect(await screen.findByText('Content 1')).toBeVisible();
     expect(await screen.findByText('Content 2')).toBeVisible();
   });
 
   it('should correctly initialize with the open state of items based on the `pickOpen` function', () => {
-    render(
+    setup(
       <Accordion items={[items[0], { ...items[1], isOpen: true }, items[2]]} />,
     );
     expect(screen.getByText('Content 2')).toBeInTheDocument();
@@ -81,7 +83,7 @@ describe('Accordion', () => {
   });
 
   it('should update the open state when `openItems` prop changes', () => {
-    const { rerender } = render(<Accordion items={items} openItems={[1]} />);
+    const { rerender } = setup(<Accordion items={items} openItems={[1]} />);
     expect(screen.getByText('Content 1')).toBeVisible();
 
     rerender(<Accordion items={items} openItems={[3]} />);
@@ -91,7 +93,7 @@ describe('Accordion', () => {
 
   it('should handle click events correctly, updating the state based on whether the item is already open and the `isCollapsedOnOpen` setting', async () => {
     const onChangeMock = vi.fn();
-    render(
+    const { user } = setup(
       <Accordion
         items={[items[0], { ...items[1], isOpen: true }, items[2]]}
         onChange={onChangeMock}
@@ -99,10 +101,10 @@ describe('Accordion', () => {
       />,
     );
 
-    await userEvent.click(screen.getByText('Item 1'));
+    await user.click(screen.getByText('Item 1'));
     expect(onChangeMock).toHaveBeenCalledWith([2, 1]); // Item 2 was initially open, now Item 1 is also open
 
-    await userEvent.click(screen.getByText('Item 2'));
+    await user.click(screen.getByText('Item 2'));
     expect(onChangeMock).toHaveBeenCalledWith([1]); // Item 2 is now closed, Item 1 remains open
   });
 });

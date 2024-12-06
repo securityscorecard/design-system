@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import MultiValueInput from './MultiValueInput';
+import { setup } from '../../../utils/tests/renderWithProviders';
 
 const mockValueAdd = vi.fn();
 const mockValueRemove = vi.fn();
@@ -15,120 +15,116 @@ describe('MultiValueInput', () => {
   });
 
   it('should focus input on "Tab" key', async () => {
-    render(<MultiValueInput />);
+    const { user } = setup(<MultiValueInput />);
 
-    await userEvent.tab();
+    await user.tab();
 
     expect(screen.getByRole('textbox')).toHaveFocus();
   });
   it('should focus input on container click', async () => {
-    render(<MultiValueInput />);
+    const { user } = setup(<MultiValueInput />);
 
-    await userEvent.click(screen.getByTestId('multivalueinputContainer'));
+    await user.click(screen.getByTestId('multivalueinputContainer'));
 
     expect(screen.getByRole('textbox')).toHaveFocus();
   });
   it('should toggle focus through buttons and input on "Tab" key', async () => {
-    render(<MultiValueInput value={['value']} />);
+    const { user } = setup(<MultiValueInput value={['value']} />);
 
-    await userEvent.tab();
+    await user.tab();
     expect(screen.getByRole('button', { name: /Remove value/ })).toHaveFocus();
-    await userEvent.tab();
+    await user.tab();
     expect(screen.getByRole('textbox')).toHaveFocus();
-    await userEvent.tab();
+    await user.tab();
     expect(
       screen.getByRole('button', { name: /Clear all values/ }),
     ).toHaveFocus();
   });
   it('should call onValuesChange when value is added or removed', async () => {
     const inputValue = 'value';
-    render(<MultiValueInput onValuesChange={mockValueChange} />);
+    const { user } = setup(
+      <MultiValueInput onValuesChange={mockValueChange} />,
+    );
 
-    await userEvent.type(screen.getByRole('textbox'), `${inputValue}{enter}`);
+    await user.click(screen.getByRole('textbox'));
+    await user.keyboard(`${inputValue}{Enter}`);
     expect(mockValueChange).toHaveBeenCalledTimes(1);
     expect(mockValueChange).toHaveBeenCalledWith([inputValue]);
-    await userEvent.click(screen.getByRole('button', { name: /Remove value/ }));
+    await user.click(screen.getByRole('button', { name: /Remove value/ }));
     expect(mockValueChange).toHaveBeenCalledTimes(2);
     expect(mockValueChange).toHaveBeenCalledWith([]);
   });
   it('should call onInputChange when input is changed', async () => {
     const inputValue = 'value';
-    render(<MultiValueInput onInputChange={mockInputChange} />);
+    const { user } = setup(<MultiValueInput onInputChange={mockInputChange} />);
 
-    await userEvent.type(screen.getByRole('textbox'), `${inputValue}{enter}`);
+    await user.click(screen.getByRole('textbox'));
+    await user.keyboard(`${inputValue}{Enter}`);
     expect(mockInputChange).toHaveBeenCalledTimes(5);
   });
 
   describe('adding values', () => {
     it('should add new value when "Enter" key is pressed', async () => {
       const inputValue = 'value';
-      render(<MultiValueInput onValueAdd={mockValueAdd} />);
+      const { user } = setup(<MultiValueInput onValueAdd={mockValueAdd} />);
 
-      await userEvent.type(screen.getByRole('textbox'), `${inputValue}{enter}`);
+      await user.click(screen.getByRole('textbox'));
+      await user.keyboard(`${inputValue}{Enter}`);
 
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith([inputValue], [inputValue]);
     });
     it('should add new value when ";" key is pressed', async () => {
       const inputValue = 'value';
-      render(<MultiValueInput onValueAdd={mockValueAdd} />);
+      const { user } = setup(<MultiValueInput onValueAdd={mockValueAdd} />);
 
-      await userEvent.type(screen.getByRole('textbox'), `${inputValue};`);
+      await user.type(screen.getByRole('textbox'), `${inputValue};`);
 
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith([inputValue], [inputValue]);
     });
     it('should add new values when text is pasted into input', async () => {
       const pastedValue = ['value1', 'value2', 'value3'];
-      render(<MultiValueInput onValueAdd={mockValueAdd} />);
+      const { user } = setup(<MultiValueInput onValueAdd={mockValueAdd} />);
 
-      await userEvent.paste(
-        screen.getByRole('textbox') as HTMLInputElement,
-        pastedValue.join(';'),
-        {
-          clipboardData: {
-            getData: () => pastedValue.join(';'),
-          },
-        } as unknown, // as I really don't need other properties of this object
-      );
+      await user.click(screen.getByRole('textbox'));
+      await user.paste(pastedValue.join(';'));
 
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith(pastedValue, pastedValue);
     });
     it('should add a comma separated values list', async () => {
       const pastedValue = ['value1', 'value2', 'value3'];
-      render(<MultiValueInput valuesDelimiter="," onValueAdd={mockValueAdd} />);
-
-      await userEvent.paste(
-        screen.getByRole('textbox') as HTMLInputElement,
-        pastedValue.join(','),
-        {
-          clipboardData: {
-            getData: () => pastedValue.join(','),
-          },
-        } as unknown, // as I really don't need other properties of this object
+      const { user } = setup(
+        <MultiValueInput valuesDelimiter="," onValueAdd={mockValueAdd} />,
       );
+
+      await user.click(screen.getByRole('textbox'));
+      await user.paste(pastedValue.join(','));
 
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith(pastedValue, pastedValue);
     });
     it('should add new value on blur', async () => {
       const inputValue = 'value';
-      render(<MultiValueInput onValueAdd={mockValueAdd} />);
+      const { user } = setup(<MultiValueInput onValueAdd={mockValueAdd} />);
 
-      await userEvent.type(screen.getByRole('textbox'), `${inputValue}`);
-      screen.getByRole('textbox').blur();
+      await user.type(screen.getByRole('textbox'), `${inputValue}`);
+      await act(() => {
+        screen.getByRole('textbox').blur();
+      });
 
       expect(mockValueAdd).toHaveBeenCalledTimes(1);
       expect(mockValueAdd).toHaveBeenCalledWith([inputValue], [inputValue]);
     });
     it('should not add duplicated value', async () => {
       const inputValue = 'value';
-      render(
+      const { user } = setup(
         <MultiValueInput value={[inputValue]} onValueAdd={mockValueAdd} />,
       );
 
-      await userEvent.type(screen.getByRole('textbox'), `${inputValue}{enter}`);
+      await user.click(screen.getByRole('textbox'));
+      await user.keyboard(`${inputValue}{Enter}`);
 
       expect(mockValueAdd).not.toHaveBeenCalled();
     });
@@ -136,26 +132,24 @@ describe('MultiValueInput', () => {
 
   describe('removing value', () => {
     it('should remove value when pill remove button is clicked', async () => {
-      render(
+      const { user } = setup(
         <MultiValueInput value={['value']} onValueRemove={mockValueRemove} />,
       );
 
-      await userEvent.click(
-        screen.getByRole('button', { name: /Remove value/ }),
-      );
+      await user.click(screen.getByRole('button', { name: /Remove value/ }));
 
       expect(mockValueRemove).toHaveBeenCalledTimes(1);
       expect(mockValueRemove).toHaveBeenCalledWith([]);
     });
     it('should remove all values when clear all button is clicked', async () => {
-      render(
+      const { user } = setup(
         <MultiValueInput
           value={['value1', 'value2']}
           onValueRemove={mockValueRemove}
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getByRole('button', { name: /Clear all values/ }),
       );
 
@@ -163,28 +157,34 @@ describe('MultiValueInput', () => {
       expect(mockValueRemove).toHaveBeenCalledWith([]);
     });
     it('should remove last value when "Backspace" key is pressed', async () => {
-      render(<MultiValueInput onValueRemove={mockValueRemove} />);
-
-      await userEvent.type(
-        screen.getByRole('textbox'),
-        `value{enter}{backspace}`,
+      const { user } = setup(
+        <MultiValueInput onValueRemove={mockValueRemove} />,
       );
+
+      await user.click(screen.getByRole('textbox'));
+      await user.keyboard(`value{Enter}{Backspace}`);
 
       expect(mockValueRemove).toHaveBeenCalledTimes(1);
       expect(mockValueRemove).toHaveBeenCalledWith([]);
     });
     it('should remove last value when "Delete" key is pressed', async () => {
-      render(<MultiValueInput onValueRemove={mockValueRemove} />);
+      const { user } = setup(
+        <MultiValueInput onValueRemove={mockValueRemove} />,
+      );
 
-      await userEvent.type(screen.getByRole('textbox'), `value{enter}{del}`);
+      await user.click(screen.getByRole('textbox'));
+      await user.keyboard(`value{Enter}{Delete}`);
 
       expect(mockValueRemove).toHaveBeenCalledTimes(1);
       expect(mockValueRemove).toHaveBeenCalledWith([]);
     });
     it('should not remove last value when "Backspace" key is pressed and input contains value', async () => {
-      render(<MultiValueInput onValueRemove={mockValueRemove} />);
+      const { user } = setup(
+        <MultiValueInput onValueRemove={mockValueRemove} />,
+      );
 
-      await userEvent.type(screen.getByRole('textbox'), `value{backspace}`);
+      await user.click(screen.getByRole('textbox'));
+      await user.keyboard(`value{Backspace}`);
 
       expect(mockValueRemove).not.toHaveBeenCalled();
     });
