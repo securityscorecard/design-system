@@ -1,22 +1,18 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
 describe('DatatableV2/columnSettingsPanel', () => {
-  it.skip('should open the column settings panel via column actions menu', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
-
-    await userEvent.click(
-      screen.getAllByRole('button', {
-        name: /Column actions/i,
-      })[0],
+  it('should open the column settings panel via column actions menu', async () => {
+    const { user } = setup(
+      <Datatable data={data} columns={columns} id="test" />,
     );
-    await userEvent.click(
+
+    await user.click(
       screen.getByRole('button', {
-        name: /⚙️ Column settings/i,
+        name: /Columns/i,
       }),
     );
 
@@ -24,7 +20,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should close the column settings panel on close button click', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -35,7 +31,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
 
     expect(screen.getByText('Column settings')).toBeInTheDocument();
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('button', {
         name: /Close column settings/i,
       }),
@@ -45,7 +41,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should hide column in table', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -58,7 +54,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
       screen.getByRole('columnheader', { name: 'name' }),
     ).toBeInTheDocument();
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Hide name column/i,
       }),
@@ -70,7 +66,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should show column in table', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -85,7 +81,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
       screen.queryByRole('columnheader', { name: 'name' }),
     ).not.toBeInTheDocument();
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Show name column/i,
       }),
@@ -97,7 +93,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should show all column', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -111,7 +107,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
     );
     expect(screen.queryByRole('columnheader')).not.toBeInTheDocument();
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Show all columns/i,
       }),
@@ -121,7 +117,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should hide all column except one', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -134,7 +130,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
     );
     expect(screen.getAllByRole('columnheader')).toHaveLength(3);
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Hide all columns/i,
       }),
@@ -144,7 +140,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should pin column in table', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -153,7 +149,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
       />,
     );
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Pin color column/i,
       }),
@@ -163,7 +159,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should unpin column in table', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -177,7 +173,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
 
     expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('color');
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Pin color column/i,
       }),
@@ -188,7 +184,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should reset column pinning', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -199,19 +195,19 @@ describe('DatatableV2/columnSettingsPanel', () => {
       />,
     );
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Pin color column/i,
       }),
     );
     expect(screen.getAllByRole('columnheader')[1]).toHaveTextContent('color');
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Pin all columns/i,
       }),
     );
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Unpin all columns/i,
       }),
@@ -220,7 +216,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should pin all columns', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -236,7 +232,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         .getAllByRole('columnheader')
         .filter((element) => element.getAttribute('data-pinned') === 'left'),
     ).toHaveLength(1);
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Pin all columns/i,
       }),
@@ -249,7 +245,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
   });
 
   it('should unpin all columns', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Datatable
         data={data}
         columns={columns}
@@ -265,7 +261,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         .getAllByRole('columnheader')
         .filter((element) => element.getAttribute('data-pinned') === 'left'),
     ).toHaveLength(1);
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Pin all columns/i,
       }),
@@ -275,7 +271,7 @@ describe('DatatableV2/columnSettingsPanel', () => {
         .getAllByRole('columnheader')
         .filter((element) => element.getAttribute('data-pinned') === 'left'),
     ).toHaveLength(4);
-    await userEvent.click(
+    await user.click(
       screen.getByRole('checkbox', {
         name: /Unpin all columns/i,
       }),

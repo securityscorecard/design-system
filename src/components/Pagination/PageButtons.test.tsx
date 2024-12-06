@@ -1,8 +1,7 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/renderWithProviders';
 import PageButtons, { calculatePagePositions } from './PageButtons';
 
 describe('calculatePageButtons', () => {
@@ -36,7 +35,7 @@ describe('Pagination/PageButtons', () => {
   });
   it('should show all page buttons when page count is less than number of positions', () => {
     const pageCount = 3;
-    renderWithProviders(
+    setup(
       <PageButtons
         currentPage={1}
         pageCount={pageCount}
@@ -52,7 +51,7 @@ describe('Pagination/PageButtons', () => {
 
   it('should show all page buttons when page count is equal to number of positions', () => {
     const pageCount = 8;
-    renderWithProviders(
+    setup(
       <PageButtons
         currentPage={1}
         pageCount={pageCount}
@@ -68,7 +67,7 @@ describe('Pagination/PageButtons', () => {
 
   it('should call onChange handler with correct parameters', async () => {
     const changeMock = vi.fn();
-    renderWithProviders(
+    const { user } = setup(
       <PageButtons
         currentPage={5}
         pageCount={10}
@@ -78,13 +77,13 @@ describe('Pagination/PageButtons', () => {
     );
     const pageButtons = screen.getAllByRole('button');
 
-    await userEvent.click(pageButtons[0]);
+    await user.click(pageButtons[0]);
     expect(changeMock).toHaveBeenCalledWith(1);
 
-    await userEvent.click(pageButtons[1]);
+    await user.click(pageButtons[1]);
     expect(changeMock).toHaveBeenCalledWith(4);
 
-    await userEvent.click(pageButtons[3]);
+    await user.click(pageButtons[3]);
     expect(changeMock).toHaveBeenCalledWith(10);
   });
 });

@@ -1,8 +1,7 @@
-import { fireEvent, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
@@ -13,15 +12,15 @@ import { columns, data } from './mocks';
  */
 describe('DatatableV2/columnResizing', () => {
   it('should have column resizing enabled by default', async () => {
-    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
+    setup(<Datatable data={data} columns={columns} id="test" />);
 
     expect(screen.getAllByRole('separator')).toHaveLength(columns.length);
   });
 
   describe('when is column resizing enabled', () => {
-    it('should resize column by dragging handler', () => {
+    it('should resize column by dragging handler', async () => {
       const columnSizeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -31,16 +30,30 @@ describe('DatatableV2/columnResizing', () => {
       );
 
       const handler = screen.getAllByRole('separator')[0];
-      fireEvent.mouseDown(handler, { clientX: 10, clientY: 20 });
-      fireEvent.mouseMove(handler, { clientX: 20, clientY: 30 });
-      fireEvent.mouseUp(handler);
+
+      await user.pointer([
+        {
+          keys: '[MouseLeft>]',
+          target: handler,
+          coords: { clientX: 10, clientY: 20 },
+        },
+        { keys: '[/MouseLeft]' },
+      ]);
+      await user.pointer([
+        {
+          keys: '[MouseLeft>]',
+          target: handler,
+          coords: { clientX: 20, clientY: 30 },
+        },
+        { keys: '[/MouseLeft]' },
+      ]);
       expect(columnSizeMock).toBeCalledTimes(2);
       columnSizeMock.mockReset();
     });
 
     it('should resize column by using left and right arrow keys', async () => {
       const columnSizeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -50,7 +63,8 @@ describe('DatatableV2/columnResizing', () => {
       );
 
       const handler = screen.getAllByRole('separator')[0];
-      await userEvent.type(handler, '{arrowright}{arrowleft}');
+      await user.click(handler);
+      await user.keyboard('{ArrowRight}{ArrowLeft}');
 
       expect(columnSizeMock).toBeCalledTimes(3);
       columnSizeMock.mockReset();
@@ -58,7 +72,7 @@ describe('DatatableV2/columnResizing', () => {
 
     it('should not resize column by using other keys', async () => {
       const columnSizeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -68,7 +82,8 @@ describe('DatatableV2/columnResizing', () => {
       );
 
       const handler = screen.getAllByRole('separator')[0];
-      await userEvent.type(handler, '{arrowup}{arrowdown}{space}{enter}');
+      await user.click(handler);
+      await user.keyboard('{ArrowUp}{ArrowDown}{Space}{Enter}');
 
       expect(columnSizeMock).toBeCalledTimes(1);
       columnSizeMock.mockReset();
@@ -76,7 +91,7 @@ describe('DatatableV2/columnResizing', () => {
 
     it('should reset column sizing on double click', async () => {
       const columnSizeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -87,7 +102,7 @@ describe('DatatableV2/columnResizing', () => {
       );
 
       const handler = screen.getAllByRole('separator')[0];
-      await userEvent.dblClick(handler);
+      await user.dblClick(handler);
 
       expect(columnSizeMock).toBeCalledTimes(3);
       columnSizeMock.mockReset();
@@ -95,7 +110,7 @@ describe('DatatableV2/columnResizing', () => {
 
     it.skip('should reset column sizing with column action', async () => {
       const columnSizeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -105,14 +120,14 @@ describe('DatatableV2/columnResizing', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('button', {
           name: /Column actions/i,
-        })[0],
+        })[1],
       );
-      await userEvent.click(
-        screen.getByRole('button', {
-          name: /❌ Reset column size/i,
+      await user.click(
+        screen.getByRole('menuitem', {
+          name: /Reset column size/i,
         }),
       );
 
