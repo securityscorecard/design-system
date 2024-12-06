@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import TextArea from './TextArea';
+import { setup } from '../../../utils/tests/renderWithProviders';
 
 const ControlledTextArea = ({ mockOnChange, ...props }) => {
   const [value, setValue] = useState('');
@@ -16,10 +16,10 @@ const ControlledTextArea = ({ mockOnChange, ...props }) => {
 describe('TextArea', () => {
   describe('when char limit is set up', () => {
     it('should not clip text over limit', async () => {
-      render(<TextArea maxLength={5} />);
+      const { user } = setup(<TextArea maxLength={5} />);
       const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
 
-      await userEvent.type(textarea, '0123456789');
+      await user.type(textarea, '0123456789');
 
       expect(textarea).toHaveValue('0123456789');
     });
@@ -27,19 +27,21 @@ describe('TextArea', () => {
 
   describe('should update char counter', () => {
     it('as uncontrolled input', async () => {
-      render(<TextArea maxLength={5} />);
+      const { user } = setup(<TextArea maxLength={5} />);
 
       const textarea = screen.getByRole('textbox');
-      await userEvent.type(textarea, 'aaa');
+      await user.type(textarea, 'aaa');
 
       expect(screen.getByText('2')).toBeInTheDocument();
     });
     it('as controlled input', async () => {
       const mockOnChange = vi.fn();
-      render(<ControlledTextArea maxLength={5} mockOnChange={mockOnChange} />);
+      const { user } = setup(
+        <ControlledTextArea maxLength={5} mockOnChange={mockOnChange} />,
+      );
 
       const textarea = screen.getByRole('textbox');
-      await userEvent.type(textarea, 'aaa');
+      await user.type(textarea, 'aaa');
 
       expect(screen.getByText('2')).toBeInTheDocument();
     });

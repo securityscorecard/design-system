@@ -1,13 +1,12 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
 describe('DatatableV2/sorting', () => {
   it('should have pagination enabled by default', () => {
-    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
+    setup(<Datatable data={data} columns={columns} id="test" />);
 
     expect(
       screen.getByRole('button', {
@@ -18,7 +17,7 @@ describe('DatatableV2/sorting', () => {
 
   describe('when is pagination enabled', () => {
     it('should navigate to correct page on click', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -29,21 +28,21 @@ describe('DatatableV2/sorting', () => {
       );
 
       expect(screen.getByText('Strange')).toBeInTheDocument();
-      await userEvent.click(
+      await user.click(
         screen.getByRole('button', { name: /Go to the next page of table/i }),
       );
       expect(screen.getByText('Rogers')).toBeInTheDocument();
-      await userEvent.click(
+      await user.click(
         screen.getByRole('button', {
           name: /Go to the previous page of table/i,
         }),
       );
       expect(screen.getByText('Strange')).toBeInTheDocument();
-      await userEvent.click(
+      await user.click(
         screen.getByRole('button', { name: /Go to the last page of table/i }),
       );
       expect(screen.getByText('Banner')).toBeInTheDocument();
-      await userEvent.click(
+      await user.click(
         screen.getByRole('button', { name: /Go to the first page of table/i }),
       );
       expect(screen.getByText('Strange')).toBeInTheDocument();
@@ -52,7 +51,7 @@ describe('DatatableV2/sorting', () => {
 
   describe('when rows per page are enabled', () => {
     it('should correctly change rows per page count', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -65,10 +64,7 @@ describe('DatatableV2/sorting', () => {
 
       expect(screen.getAllByRole('row')).toHaveLength(4); // 3 data rows + 1 header row
 
-      await userEvent.selectOptions(
-        screen.getByLabelText('Rows per page'),
-        '1',
-      );
+      await user.selectOptions(screen.getByLabelText('Rows per page'), '1');
       expect(screen.getAllByRole('row')).toHaveLength(2); // 1 data row + 1 header row
     });
   });

@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { Column } from 'react-table';
 import { filter } from 'ramda';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/renderWithProviders';
 import { fields } from '../Filters/mocks/options';
 import Datatable from './Datatable';
 import { DatatableStore, datatableInitialState } from './Datatable.store';
@@ -70,7 +69,7 @@ describe('Datatable', () => {
   it('should not call "onDataFetch" on mount', () => {
     const onDataFetchMock = vi.fn();
 
-    renderWithProviders(
+    setup(
       <Datatable<Data>
         onDataFetch={onDataFetchMock}
         data={data}
@@ -85,7 +84,7 @@ describe('Datatable', () => {
   describe('on request cancelation', () => {
     it('should call "onCancelLoading"', async () => {
       const onCancelLoading = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable<Data>
           onDataFetch={vi.fn()}
           onCancelLoading={onCancelLoading}
@@ -99,7 +98,7 @@ describe('Datatable', () => {
 
       expect(DatatableStore.getRawState().isCanceled).toBe(false);
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('button', {
           name: /Cancel/i,
         })[0],
@@ -111,9 +110,9 @@ describe('Datatable', () => {
   });
 
   it('should reset selected rows when data changes', async () => {
-    renderWithProviders(<TestDatatableComponent />);
+    const { user } = setup(<TestDatatableComponent />);
 
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[2],
@@ -124,11 +123,11 @@ describe('Datatable', () => {
     await waitFor(() =>
       expect(elementCounter).toHaveTextContent(/^1 of 3 selected$/),
     );
-    await userEvent.click(screen.getByRole('button', { name: /Remove/i }));
+    await user.click(screen.getByRole('button', { name: /Remove/i }));
 
     await waitFor(() => expect(elementCounter).toHaveTextContent(/^2$/));
 
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[2],

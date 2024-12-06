@@ -1,9 +1,8 @@
 import { act, screen, waitFor } from '@testing-library/react';
 import { Column } from 'react-table';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 import Table from './Table';
 import { defaultTableConfig } from '../defaultConfigs';
@@ -45,7 +44,7 @@ describe('Datatable/Table', () => {
   });
 
   it('should select all rows on Toggle All click', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Table<Data>
         data={data}
         columns={columns}
@@ -55,7 +54,7 @@ describe('Datatable/Table', () => {
       />,
     );
 
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[0],
@@ -66,7 +65,7 @@ describe('Datatable/Table', () => {
     ).not.toBeInTheDocument();
   });
   it('should deselect all rows on Toggle All click when rows are selected', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Table<Data>
         data={data}
         columns={columns}
@@ -76,7 +75,7 @@ describe('Datatable/Table', () => {
       />,
     );
 
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[0],
@@ -87,7 +86,7 @@ describe('Datatable/Table', () => {
     ).not.toBeInTheDocument();
   });
   it('should show intermediate checkbox in header when not all rows are selected', async () => {
-    renderWithProviders(
+    const { user } = setup(
       <Table<Data>
         data={data}
         columns={columns}
@@ -97,7 +96,7 @@ describe('Datatable/Table', () => {
       />,
     );
 
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('checkbox', {
         name: /Toggle select/i,
       })[2],
@@ -107,7 +106,7 @@ describe('Datatable/Table', () => {
   });
   describe('given isMultiSelect prop is disabled', () => {
     it('should select only one row at time', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -118,12 +117,12 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[0],
       );
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[1],
@@ -137,7 +136,7 @@ describe('Datatable/Table', () => {
   it('should call onClick handler in row action dropdown with correct parameters', async () => {
     const rowActionMock = vi.fn();
     const rowIndex = 0;
-    renderWithProviders(
+    const { user } = setup(
       <Table<Data>
         data={data}
         columns={columns}
@@ -149,12 +148,12 @@ describe('Datatable/Table', () => {
         ]}
       />,
     );
-    await userEvent.click(
+    await user.click(
       screen.getAllByRole('button', { name: /Row Actions/i })[rowIndex],
     );
 
     const rowActions = await screen.findAllByRole('button', { name: 'Action' });
-    await userEvent.click(rowActions[rowIndex]);
+    await user.click(rowActions[rowIndex]);
 
     expect(rowActionMock).toBeCalledWith(
       `${rowIndex}`,
@@ -164,7 +163,7 @@ describe('Datatable/Table', () => {
 
   describe('DatatableStore actions', () => {
     it('should react on "hasExclusiveSelection" change', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -186,7 +185,7 @@ describe('Datatable/Table', () => {
       expect(table).toHaveClass('has-exclusive-selection');
     });
     it('should react on "hasAppliedFilters" change', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={[]}
           columns={columns}
@@ -213,7 +212,7 @@ describe('Datatable/Table', () => {
       ).toBeInTheDocument();
     });
     it('should store selected row id when row is selected', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -223,7 +222,7 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[1],
@@ -232,7 +231,7 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(1);
     });
     it('should store selected row ids when all rows are selected', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -242,7 +241,7 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[0],
@@ -251,7 +250,7 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(3);
     });
     it('should remove selected row id when row is deselected', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -261,7 +260,7 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[1],
@@ -270,7 +269,7 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(0);
     });
     it('should clear selected row ids when all rows are deselected', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -280,7 +279,7 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getAllByRole('checkbox', {
           name: /Toggle select/i,
         })[0],
@@ -289,7 +288,7 @@ describe('Datatable/Table', () => {
     });
     describe('given isMultiSelect prop is disabled', () => {
       it('should store only one selected row ids when row is selected', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Table<Data>
             data={data}
             columns={columns}
@@ -300,12 +299,12 @@ describe('Datatable/Table', () => {
           />,
         );
 
-        await userEvent.click(
+        await user.click(
           screen.getAllByRole('checkbox', {
             name: /Toggle select/i,
           })[0],
         );
-        await userEvent.click(
+        await user.click(
           screen.getAllByRole('checkbox', {
             name: /Toggle select/i,
           })[1],
@@ -315,7 +314,7 @@ describe('Datatable/Table', () => {
       });
     });
     it('should react on "shouldResetSelectedRows" change', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -337,7 +336,7 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().selectedIds).toHaveLength(0);
     });
     it('should store pagination state when navigating to new page', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -348,7 +347,7 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getByRole('button', {
           name: /3/i,
         }),
@@ -358,7 +357,7 @@ describe('Datatable/Table', () => {
       expect(DatatableStore.getRawState().pageSize).toBe(1);
     });
     it('should store sorting when change it in the header', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -368,7 +367,7 @@ describe('Datatable/Table', () => {
         />,
       );
 
-      await userEvent.click(
+      await user.click(
         screen.getByRole('columnheader', {
           name: /Col2/i,
         }),
@@ -383,7 +382,7 @@ describe('Datatable/Table', () => {
   });
   describe('given isDataLoading', () => {
     it('should display empty loading page when no data is present', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={[]}
           columns={columns}
@@ -401,7 +400,7 @@ describe('Datatable/Table', () => {
       ).toBeInTheDocument();
     });
     it('should display loading overlay with Cancel button when data is present and canceling is enabled', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={data}
           columns={columns}
@@ -421,7 +420,7 @@ describe('Datatable/Table', () => {
       ).toBeInTheDocument();
     });
     it('should display loading overlay without Cancel button when data is present and canceling is disabled', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={data}
           columns={columns}

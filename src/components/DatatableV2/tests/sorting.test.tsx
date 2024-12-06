@@ -1,29 +1,25 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
-/**
- * I'm skipping these test because we removed the sorting button from header
- * to save some space for header label. We will need to redo those tests.
- */
-describe.skip('DatatableV2/sorting', () => {
+describe('DatatableV2/sorting', () => {
   it('should have sorting enabled by default', () => {
-    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
+    setup(<Datatable data={data} columns={columns} id="test" />);
 
     expect(
       screen.getAllByRole('button', {
-        name: /Unsorted/i,
+        name: /Sort by/i,
       }),
     ).toHaveLength(columns.length);
   });
 
   describe('when is sorting enabled', () => {
-    it('should update sorting labels on sort', async () => {
-      renderWithProviders(
+    // TODO: enable in UXD-1682
+    it.skip('should update sorting labels on sort', async () => {
+      const { user } = setup(
         <Datatable data={data} columns={columns} enableSorting id="test" />,
       );
 
@@ -31,7 +27,7 @@ describe.skip('DatatableV2/sorting', () => {
         name: /Unsorted/i,
       });
 
-      await userEvent.click(sortingButtons[1]);
+      await user.click(sortingButtons[1]);
 
       expect(sortingButtons[0]).toHaveAttribute('aria-label', 'Unsorted');
       expect(sortingButtons[1]).toHaveAttribute(
@@ -42,7 +38,7 @@ describe.skip('DatatableV2/sorting', () => {
     });
 
     it('should correctly sort table', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -53,16 +49,17 @@ describe.skip('DatatableV2/sorting', () => {
       );
 
       const sortingButtons = screen.getAllByRole('button', {
-        name: /Unsorted/i,
+        name: /Sort by/i,
       });
 
-      await userEvent.click(sortingButtons[2]);
+      await user.click(sortingButtons[2]);
       const tableCellsSorted = await screen.findAllByRole('cell');
       expect(tableCellsSorted[3]).toHaveTextContent('blue');
       expect(tableCellsSorted[7]).toHaveTextContent('blue');
       expect(tableCellsSorted[11]).toHaveTextContent('green');
 
-      await userEvent.click(sortingButtons[1], { shiftKey: true });
+      await user.keyboard('[ShiftLeft>]');
+      await user.click(sortingButtons[1]);
       const tableCellsMultiSorted = await screen.findAllByRole('cell');
       expect(tableCellsMultiSorted[2]).toHaveTextContent('Rogers');
       expect(tableCellsMultiSorted[6]).toHaveTextContent('Strange');
@@ -71,24 +68,26 @@ describe.skip('DatatableV2/sorting', () => {
 
     it('should sort on header name click', async () => {
       const sortCallback = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
           id="test"
-          onStateChange={sortCallback}
+          onSortingChange={sortCallback}
         />,
       );
 
-      const headerLabel = screen.getByText('name');
+      const headerLabel = screen.getByRole('button', {
+        name: /Sort by Name/i,
+      });
 
-      await userEvent.click(headerLabel);
+      await user.click(headerLabel);
 
       expect(sortCallback).toHaveBeenCalledTimes(1);
     });
 
     it('should not become unsorted when removal is disabled', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -97,24 +96,24 @@ describe.skip('DatatableV2/sorting', () => {
           id="test"
         />,
       );
+      const header = screen.getByRole('columnheader', { name: 'name' });
+      expect(header).toHaveAttribute('data-sorted', 'false');
 
-      const sortingButtons = screen.getAllByRole('button', {
-        name: /Unsorted/i,
+      const sortingButton = screen.getByRole('button', {
+        name: /Sort by name/i,
       });
 
-      await userEvent.click(sortingButtons[0]);
-      await userEvent.click(sortingButtons[0]);
-      await userEvent.click(sortingButtons[0]);
+      await user.click(sortingButton);
+      await user.click(sortingButton);
+      await user.click(sortingButton);
 
-      expect(sortingButtons[0]).toHaveAttribute(
-        'aria-label',
-        'Sorted by name ascending',
-      );
+      expect(header).toHaveAttribute('data-sorted', 'asc');
     });
 
-    it('should disable sorting for specific column if in columns definition', async () => {
+    // TODO: enable in UXD-1681
+    it.skip('should disable sorting for specific column if in columns definition', async () => {
       const sortCallback = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={[
@@ -129,14 +128,14 @@ describe.skip('DatatableV2/sorting', () => {
       );
 
       const sortingButtons = screen.getAllByRole('button', {
-        name: /Unsorted/i,
+        name: /Sort by/i,
       });
 
       expect(sortingButtons).toHaveLength(2);
 
       const unsortableLabel = screen.getByText('color');
 
-      await userEvent.click(unsortableLabel);
+      await user.click(unsortableLabel);
 
       expect(sortCallback).not.toHaveBeenCalled();
     });
@@ -145,7 +144,7 @@ describe.skip('DatatableV2/sorting', () => {
   describe('when is sorting disabled', () => {
     it('should not sort on header name click', async () => {
       const sortCallback = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -157,7 +156,7 @@ describe.skip('DatatableV2/sorting', () => {
 
       const tableHeader = screen.getAllByRole('columnheader');
 
-      await userEvent.click(tableHeader[0]);
+      await user.click(tableHeader[0]);
 
       expect(sortCallback).not.toHaveBeenCalled();
     });

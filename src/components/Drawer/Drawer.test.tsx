@@ -1,9 +1,8 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { act } from 'react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/renderWithProviders';
 import Drawer from './Drawer';
 import Button from '../ButtonV2/Button';
 import { Icon } from '../Icon';
@@ -28,7 +27,7 @@ function Adornment() {
 
 describe('Drawer', () => {
   it('should show footer if footer is defined', () => {
-    renderWithProviders(
+    setup(
       <Drawer
         size="md"
         onClose={() => null}
@@ -46,7 +45,7 @@ describe('Drawer', () => {
   });
 
   it('should display adornment if adornment is defined', () => {
-    renderWithProviders(
+    setup(
       <Drawer
         size="md"
         onClose={() => null}
@@ -64,7 +63,7 @@ describe('Drawer', () => {
   });
 
   it('should have the correct width', () => {
-    renderWithProviders(
+    setup(
       <Drawer size="md" onClose={() => null} title="Test drawer">
         <Stack>
           <Paragraph>Whatever happens, happens here</Paragraph>
@@ -77,7 +76,7 @@ describe('Drawer', () => {
   });
 
   it('should display the title', () => {
-    renderWithProviders(
+    setup(
       <Drawer size="md" onClose={() => null} title="Test drawer">
         <Stack>
           <Paragraph>Whatever happens, happens here</Paragraph>
@@ -90,7 +89,7 @@ describe('Drawer', () => {
   });
 
   it('should display the content', () => {
-    renderWithProviders(
+    setup(
       <Drawer
         size="md"
         onClose={() => null}
@@ -109,7 +108,7 @@ describe('Drawer', () => {
 
   it('should allow clicking on interactive elements in dropdown', async () => {
     const dropdownClickMock = vi.fn();
-    renderWithProviders(
+    const { user } = setup(
       <Drawer
         size="md"
         onClose={() => null}
@@ -131,20 +130,20 @@ describe('Drawer', () => {
     );
     // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
-      await userEvent.click(screen.getByRole('button', { name: /Trigger/i }));
+      await user.click(screen.getByRole('button', { name: /Trigger/i }));
     });
 
     const dropdownItem = screen.getByRole('button', { name: /OnClick/i });
     expect(dropdownItem).toBeInTheDocument();
 
-    await userEvent.click(dropdownItem);
+    await user.click(dropdownItem);
 
     expect(dropdownClickMock).toHaveBeenCalled();
   });
 
   it('should should trigger the onClose when clicking on overlay', async () => {
     const onCloseMock = vi.fn();
-    renderWithProviders(
+    const { user } = setup(
       <Drawer
         size="md"
         onClose={onCloseMock}
@@ -155,7 +154,7 @@ describe('Drawer', () => {
       </Drawer>,
     );
 
-    await userEvent.click(screen.getByTestId('dialog-overlay'));
+    await user.click(screen.getByTestId('dialog-overlay'));
 
     expect(onCloseMock).toHaveBeenCalled();
   });
