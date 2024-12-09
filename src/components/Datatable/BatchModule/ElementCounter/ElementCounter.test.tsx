@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 
 import ElementCounter, { getCounterContent } from './ElementCounter';
 import { setup } from '../../../../utils/tests/setup';
@@ -54,8 +54,8 @@ describe('Datatable/ElementCounter', () => {
 
   describe('DatatableStore actions', () => {
     describe('given selection dropdown is visible', () => {
-      it('should set "hasExclusiveSelection" to "true" on Select All click', () => {
-        setup(
+      it('should set "hasExclusiveSelection" to "true" on Select All click', async () => {
+        const { user } = setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -63,13 +63,13 @@ describe('Datatable/ElementCounter', () => {
           />,
         );
 
-        fireEvent.click(screen.getByTestId('selection-dropdown'));
-        fireEvent.click(screen.getByRole('button', { name: /Select All/i }));
+        await user.click(screen.getByTestId('selection-dropdown'));
+        await user.click(screen.getByRole('button', { name: /Select All/i }));
 
         expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(true);
       });
-      it('should set "hasExclusiveSelection" to "false" on Select None click', () => {
-        setup(
+      it('should set "hasExclusiveSelection" to "false" on Select None click', async () => {
+        const { user } = setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -83,13 +83,13 @@ describe('Datatable/ElementCounter', () => {
           }),
         );
 
-        fireEvent.click(screen.getByTestId('selection-dropdown'));
-        fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
+        await user.click(screen.getByTestId('selection-dropdown'));
+        await user.click(screen.getByRole('button', { name: /Select None/i }));
 
         expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(false);
       });
-      it('should set "shouldResetSelectedRows" to "true" on Select All click', () => {
-        setup(
+      it('should set "shouldResetSelectedRows" to "true" on Select All click', async () => {
+        const { user } = setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -97,13 +97,13 @@ describe('Datatable/ElementCounter', () => {
           />,
         );
 
-        fireEvent.click(screen.getByTestId('selection-dropdown'));
-        fireEvent.click(screen.getByRole('button', { name: /Select All/i }));
+        await user.click(screen.getByTestId('selection-dropdown'));
+        await user.click(screen.getByRole('button', { name: /Select All/i }));
 
         expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
       });
-      it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
-        setup(
+      it('should set "shouldResetSelectedRows" to "true" on Select None click', async () => {
+        const { user } = setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -111,12 +111,12 @@ describe('Datatable/ElementCounter', () => {
           />,
         );
 
-        fireEvent.click(screen.getByTestId('selection-dropdown'));
-        fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
+        await user.click(screen.getByTestId('selection-dropdown'));
+        await user.click(screen.getByRole('button', { name: /Select None/i }));
 
         expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
       });
-      it('should react on "selectedIds" change', () => {
+      it('should react on "selectedIds" change', async () => {
         setup(
           <ElementCounter
             dataSize={1000}
@@ -157,8 +157,8 @@ describe('Datatable/ElementCounter', () => {
       });
     });
     describe('given selection dropdown is hidden', () => {
-      it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
-        setup(
+      it('should set "shouldResetSelectedRows" to "true" on Select None click', async () => {
+        const { user } = setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -172,7 +172,7 @@ describe('Datatable/ElementCounter', () => {
           }),
         );
 
-        fireEvent.click(screen.getByRole('button', { name: /Select None/i }));
+        await user.click(screen.getByRole('button', { name: /Select None/i }));
 
         expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
       });

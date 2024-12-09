@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Toast from './Toast';
@@ -10,11 +10,13 @@ describe('Toast', () => {
   afterEach(() => vi.resetAllMocks());
 
   describe('when close button is clicked', () => {
-    it('should call onClose handler', () => {
-      setup(<Toast onClose={onCloseHandler}>Toast notification</Toast>);
+    it('should call onClose handler', async () => {
+      const { user } = setup(
+        <Toast onClose={onCloseHandler}>Toast notification</Toast>,
+      );
       const closeButton = screen.getByRole('button');
 
-      fireEvent.click(closeButton);
+      await user.click(closeButton);
 
       expect(onCloseHandler).toBeCalledTimes(1);
     });
