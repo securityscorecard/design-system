@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { act } from 'react';
 import { vi } from 'vitest';
 
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import Drawer from './Drawer';
 import Button from '../ButtonV2/Button';
 import { Icon } from '../Icon';

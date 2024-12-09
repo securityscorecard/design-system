@@ -4,7 +4,7 @@ import { Column } from 'react-table';
 import { filter } from 'ramda';
 import { vi } from 'vitest';
 
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import { fields } from '../Filters/mocks/options';
 import Datatable from './Datatable';
 import { DatatableStore, datatableInitialState } from './Datatable.store';

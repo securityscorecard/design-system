@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { PaginationItem } from './PaginationItem';
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 
 describe('Pagination/PaginationItem', () => {
   it('should not call onClick handler for current page', async () => {

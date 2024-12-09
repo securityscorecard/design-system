@@ -1,10 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import Heading from './Heading';
+import { setup } from '../../utils/tests/setup';
 
 describe('Heading', () => {
   const renderComponent = (size = undefined) =>
-    render(<Heading size={size}>Heading</Heading>);
+    setup(<Heading size={size}>Heading</Heading>);
 
   it("should render 'h1' element by default", () => {
     renderComponent();
@@ -38,7 +39,7 @@ describe('Heading', () => {
 
   describe("given 'as' prop is provided to the component", () => {
     it('should take precedence over default element', () => {
-      render(
+      setup(
         <Heading as="div" size="h1">
           Heading
         </Heading>,

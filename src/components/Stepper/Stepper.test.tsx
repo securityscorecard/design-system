@@ -1,13 +1,14 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Step from './Step';
 import Stepper from './Stepper';
 import { StepperOrientations } from './Stepper.enums';
+import { setup } from '../../utils/tests/setup';
 
 describe('Stepper', () => {
   it('should render only "Step" components as children', () => {
-    render(
+    setup(
       <Stepper data-testid="stepper">
         <Step label="Step 1" />
         <button type="button">button element</button>
@@ -22,7 +23,7 @@ describe('Stepper', () => {
   });
 
   it('should have clickable only done steps with callback', () => {
-    render(
+    setup(
       <Stepper activeStep={2} data-testid="stepper">
         {/* done, without callback */}
         <Step label="Step" />
@@ -54,7 +55,7 @@ describe('Stepper', () => {
   });
 
   it('should not render "StepContent" in "horizontal" orientation', () => {
-    render(
+    setup(
       <Stepper orientation={StepperOrientations.horizontal}>
         <Step label="Step 1">
           <div>Step content</div>
@@ -70,7 +71,7 @@ describe('Stepper', () => {
 
   // We are skipping this test because the container query is not reliable in tests
   it.skip('should not render Step text if container width is lower than the text breakpoint ', () => {
-    render(
+    setup(
       <div style={{ width: '550px' }}>
         <Stepper orientation={StepperOrientations.horizontal}>
           <Step label="Step 1" summary="This is a summary for step 1" />
