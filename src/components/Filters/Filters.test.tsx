@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { vi } from 'vitest';
 
@@ -147,7 +147,9 @@ describe('Filters', () => {
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
     );
 
-    await selectEvent.select(screen.getByText('Option A'), 'Option B');
+    await waitFor(() => {
+      selectEvent.select(screen.getByText('Option A'), 'Option B');
+    });
 
     expect(screen.getByText('is not')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Number')).toBeInTheDocument();
@@ -158,7 +160,9 @@ describe('Filters', () => {
       <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
     );
 
-    await selectEvent.select(screen.getByText('Option A'), 'Option C');
+    await waitFor(() => {
+      selectEvent.select(screen.getByText('Option A'), 'Option C');
+    });
 
     expect(screen.getByText('contains')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
@@ -173,7 +177,9 @@ describe('Filters', () => {
       target: { value: 'a' },
     });
 
-    await selectEvent.select(screen.getByText('is'), 'is not');
+    await waitFor(() => {
+      selectEvent.select(screen.getByText('is'), 'is not');
+    });
 
     expect(screen.getByDisplayValue('a')).toBeInTheDocument();
   });
@@ -185,7 +191,9 @@ describe('Filters', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    await selectEvent.select(screen.getAllByText('And')[0], 'Or');
+    await waitFor(() => {
+      selectEvent.select(screen.getAllByText('And')[0], 'Or');
+    });
 
     expect(screen.queryAllByText(/Or/i)).toHaveLength(2);
   });
