@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 import { setup } from '../../utils/tests/setup';
 import BreadcrumbItem from './BreadcrumbItem';
@@ -42,7 +42,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should show all items inside dropdown when dropdown is opened', async () => {
-    setup(
+    const { user } = setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
         <BreadcrumbItem href="#">Parent1</BreadcrumbItem>
@@ -57,7 +57,7 @@ describe('Breadcrumbs', () => {
     // Click to open dropdown
     const dropdownButton = screen.getByLabelText('Open breadcrumbs menu');
     expect(dropdownButton).toBeInTheDocument();
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
 
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should show items within dropdown using correct order ', async () => {
-    setup(
+    const { user } = setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
         <BreadcrumbItem href="#">Link2</BreadcrumbItem>
@@ -85,7 +85,7 @@ describe('Breadcrumbs', () => {
     // Click to open dropdown
     const dropdownButton = screen.getByLabelText('Open breadcrumbs menu');
     expect(dropdownButton).toBeInTheDocument();
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
     });
@@ -97,7 +97,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should be the last breadcrumb item not a link', async () => {
-    setup(
+    const { user } = setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
         <BreadcrumbItem href="#">Link2</BreadcrumbItem>
@@ -112,7 +112,7 @@ describe('Breadcrumbs', () => {
     // Click to open dropdown
     const dropdownButton = screen.getByLabelText('Open breadcrumbs menu');
     expect(dropdownButton).toBeInTheDocument();
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
 
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();

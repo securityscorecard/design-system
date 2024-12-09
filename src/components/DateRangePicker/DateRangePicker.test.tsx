@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { setup } from '../../utils/tests/setup';
@@ -47,7 +47,7 @@ describe('DateRangePicker', () => {
     await user.click(inputStartDate);
 
     // Click on a date
-    fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
+    await user.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
 
     expect(handleChangeDate).toHaveBeenCalled();
 
@@ -57,7 +57,7 @@ describe('DateRangePicker', () => {
     await user.click(inputEndDate);
 
     // Click on a date
-    fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
+    await user.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
 
     expect(handleChangeDate).toHaveBeenCalled();
   });
