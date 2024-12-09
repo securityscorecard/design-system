@@ -1,13 +1,13 @@
 import { screen } from '@testing-library/react';
 import { startsWith } from 'ramda';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import Tab from './Tab';
 import Tabs from './Tabs';
 
 describe('Tabs', () => {
   it('should determine selected tab by strict equality by default', () => {
-    renderWithProviders(
+    setup(
       <Tabs selectedValue="overview">
         <Tab value="overview/section">Overview section</Tab>
         <Tab value="overview">Overview</Tab>
@@ -26,7 +26,7 @@ describe('Tabs', () => {
   });
 
   it('should determine selected tab by custom pattern matcher if provided', () => {
-    renderWithProviders(
+    setup(
       <Tabs
         selectedValue="overview/section"
         selectedPatternMatcher={startsWith}

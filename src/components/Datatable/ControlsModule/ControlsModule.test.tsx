@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { setup } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 import { InputFilter } from '../../Filters/components';
 import { Operators } from '../../Filters/Filters.enums';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';

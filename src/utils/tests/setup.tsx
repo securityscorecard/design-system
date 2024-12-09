@@ -26,5 +26,3 @@ export const setup = (
     options?.renderOptions,
   ),
 });
-
-export const renderWithProviders = setup;

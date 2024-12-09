@@ -3,7 +3,7 @@ import { identity, F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
+import { setup } from '../../../../utils/tests/setup';
 import CellRenderer from './CellRenderer';
 import { CellTypes } from './renderers.enums';
 import { abbreviateNumber } from '../../../../utils';
@@ -18,7 +18,7 @@ describe('Datatable/CellRenderer', () => {
   describe('given cell type is multiValue', () => {
     it('should pass "cellOnClick" handler', async () => {
       const onClickMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={multiValueValues}
           column={{
@@ -38,7 +38,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellToComposer" handler', () => {
       const toComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={multiValueValues}
           column={{
@@ -55,7 +55,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellHrefComposer" handler', () => {
       const hrefComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={multiValueValues}
           column={{
@@ -71,7 +71,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellFormatter" handler', () => {
       const formatterMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={multiValueValues}
           column={{
@@ -87,7 +87,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellTooltipPopupComposer" handler', () => {
       const tooltipComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={multiValueValues}
           column={{
@@ -106,7 +106,7 @@ describe('Datatable/CellRenderer', () => {
   describe('given cell type is link', () => {
     it('should pass "cellOnClick" handler', () => {
       const onClickMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -127,7 +127,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellToComposer" handler', () => {
       const toComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -144,7 +144,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellHrefComposer" handler', () => {
       const hrefComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -160,7 +160,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellFormatter" handler', () => {
       const formatterMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -179,7 +179,7 @@ describe('Datatable/CellRenderer', () => {
   describe('given cell type is discrete link', () => {
     it('should pass "cellOnClick" handler', () => {
       const onClickMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -200,7 +200,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellToComposer" handler', () => {
       const toComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -217,7 +217,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellHrefComposer" handler', () => {
       const hrefComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -233,7 +233,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should pass "cellFormatter" handler', () => {
       const formatterMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -250,7 +250,7 @@ describe('Datatable/CellRenderer', () => {
 
   describe('given cell type is not multivalue', () => {
     it('should open tooltip when hover on value', async () => {
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -271,7 +271,7 @@ describe('Datatable/CellRenderer', () => {
     });
     it('should call "tooltipComposer" with correct arguments for each visible value', () => {
       const tooltipComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -286,7 +286,7 @@ describe('Datatable/CellRenderer', () => {
       expect(tooltipComposerMock).toBeCalledTimes(1);
     });
     it('should format value when "cellFormatter" is provided', () => {
-      renderWithProviders(
+      setup(
         <CellRenderer
           value={1000}
           column={{

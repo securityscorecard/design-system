@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
+import { setup } from '../../../../utils/tests/setup';
 import LinkRenderer from './LinkRenderer';
 
 const rowData = { col: 'val' };
@@ -15,7 +15,7 @@ describe('Datatable/LinkRenderer', () => {
 
   it('should call "hrefComposer" with correct arguments', () => {
     const hrefComposerMock = vi.fn();
-    renderWithProviders(
+    setup(
       <LinkRenderer
         value={value}
         rowData={rowData}
@@ -27,7 +27,7 @@ describe('Datatable/LinkRenderer', () => {
   });
   it('should call "onClick" with correct arguments on value click', () => {
     const onClickMock = vi.fn();
-    renderWithProviders(
+    setup(
       <LinkRenderer value={value} rowData={rowData} onClick={onClickMock} />,
     );
 
@@ -47,7 +47,7 @@ describe('Datatable/LinkRenderer', () => {
       console.error = vi.fn();
 
       expect(() =>
-        renderWithProviders(
+        setup(
           <LinkRenderer value={value} rowData={rowData} toComposer={noop} />,
         ),
       ).toThrowError();
@@ -58,7 +58,7 @@ describe('Datatable/LinkRenderer', () => {
     });
     it('should call "toComposer" with correct arguments', () => {
       const toComposerMock = vi.fn();
-      renderWithProviders(
+      setup(
         <LinkRenderer
           value={value}
           rowData={rowData}

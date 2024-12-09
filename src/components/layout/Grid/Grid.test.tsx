@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Grid from './Grid';
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 
 describe('Grid', () => {
   it('should throw error when `cols` is set to 1', () => {
@@ -10,7 +10,7 @@ describe('Grid', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => vi.fn());
     expect(() =>
-      renderWithProviders(
+      setup(
         <Grid cols={1}>
           <a href="#one">one</a>
         </Grid>,
@@ -22,7 +22,7 @@ describe('Grid', () => {
   });
 
   it('should apply the correct CSS properties based on the `wrapperOverflow` and `wrapperEl` properties', () => {
-    renderWithProviders(
+    setup(
       <Grid cols={3} wrapperOverflow="visible" wrapperEl="main">
         <div>Content</div>
       </Grid>,

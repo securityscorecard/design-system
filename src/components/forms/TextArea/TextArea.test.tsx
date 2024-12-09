@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import TextArea from './TextArea';
-import { setup } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 
 const ControlledTextArea = ({ mockOnChange, ...props }) => {
   const [value, setValue] = useState('');
