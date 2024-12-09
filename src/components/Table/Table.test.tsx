@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { Column } from 'react-table';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import Table from './Table';
 
 type Data = {
@@ -40,7 +40,7 @@ describe('DatatableLight/Table', () => {
 
   describe('given isDataLoading', () => {
     it('should display empty loading page when no data is present', () => {
-      renderWithProviders(
+      setup(
         <Table<Data> data={[]} columns={columns} dataSize={0} isDataLoading />,
       );
 
@@ -52,7 +52,7 @@ describe('DatatableLight/Table', () => {
     });
 
     it('should display loading overlay without Cancel button when data is present and canceling is disabled', () => {
-      renderWithProviders(
+      setup(
         <Table<Data>
           data={data}
           columns={columns}

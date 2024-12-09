@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
 import { vi } from 'vitest';
 
-import { setup } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 import RowActions from './RowActions';
 import { RowAction } from '../TreeView.types';
 

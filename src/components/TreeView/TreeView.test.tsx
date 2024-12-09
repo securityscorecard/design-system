@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
 import TreeView from './TreeView';
+import { setup } from '../../utils/tests/setup';
 
 const mockData = [
   { id: '1', name: 'Item 1', subRows: [{ id: '1-1', name: 'SubItem 1-1' }] },
@@ -11,7 +12,7 @@ const renderPrimaryContent = (row) => <div>{row.name}</div>;
 
 describe('TreeView', () => {
   test('should render correct number of rows', () => {
-    render(
+    setup(
       <TreeView data={mockData} renderPrimaryContent={renderPrimaryContent} />,
     );
     const rows = screen.getAllByRole('listitem');
@@ -19,7 +20,7 @@ describe('TreeView', () => {
   });
 
   test('should correctly collapse and expand rows', () => {
-    render(
+    setup(
       <TreeView data={mockData} renderPrimaryContent={renderPrimaryContent} />,
     );
 
@@ -43,7 +44,7 @@ describe('TreeView', () => {
     expect(screen.getByText('SubItem 1-1')).toBeInTheDocument();
   });
   test('should rerender items when data change', () => {
-    const { rerender } = render(
+    const { rerender } = setup(
       <TreeView data={mockData} renderPrimaryContent={renderPrimaryContent} />,
     );
 

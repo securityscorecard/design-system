@@ -1,7 +1,7 @@
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
+import { setup } from '../../../../utils/tests/setup';
 import { DatatableStore, datatableInitialState } from '../../Datatable.store';
 import BatchActions from './BatchActions';
 
@@ -45,7 +45,7 @@ describe('Datatable/BatchActions', () => {
       });
     });
     it('should call onClick handler on top-level action with correct parameters', () => {
-      renderWithProviders(<BatchActions actions={actions} />);
+      setup(<BatchActions actions={actions} />);
 
       fireEvent.click(screen.getByRole('button', { name: /Action/i }));
       expect(actionFnMock).toBeCalledWith(
@@ -56,7 +56,7 @@ describe('Datatable/BatchActions', () => {
     });
 
     it('should call onClick handler in dropdown action with correct parameters', () => {
-      renderWithProviders(<BatchActions actions={actions} />);
+      setup(<BatchActions actions={actions} />);
 
       fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
       fireEvent.click(screen.getByRole('button', { name: /Dropdown Item/i }));
@@ -78,7 +78,7 @@ describe('Datatable/BatchActions', () => {
       });
     });
     it('should call onClick handler on top-level action with correct parameters', () => {
-      renderWithProviders(<BatchActions actions={actions} />);
+      setup(<BatchActions actions={actions} />);
       act(() => {
         DatatableStore.update((s) => {
           s.selectedIds = selectedIds;
@@ -94,7 +94,7 @@ describe('Datatable/BatchActions', () => {
     });
 
     it('should call onClick handler in dropdown action with correct parameters', async () => {
-      renderWithProviders(<BatchActions actions={actions} />);
+      setup(<BatchActions actions={actions} />);
       act(() => {
         DatatableStore.update((s) => {
           s.selectedIds = selectedIds;
@@ -117,7 +117,7 @@ describe('Datatable/BatchActions', () => {
   });
   describe('given subactions are defined', () => {
     it('should create dropdown button', async () => {
-      renderWithProviders(<BatchActions actions={actions} />);
+      setup(<BatchActions actions={actions} />);
 
       fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
 

@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Search from './Search';
-import { setup } from '../../../../utils/tests/renderWithProviders';
+import { setup } from '../../../../utils/tests/setup';
 
 const onSearch = vi.fn();
 const onClear = vi.fn();

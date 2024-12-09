@@ -1,8 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { DSProvider } from '../../theme';
 import Toast from './Toast';
+import { setup } from '../../utils/tests/setup';
 
 describe('Toast', () => {
   const onCloseHandler = vi.fn();
@@ -11,11 +11,7 @@ describe('Toast', () => {
 
   describe('when close button is clicked', () => {
     it('should call onClose handler', () => {
-      render(
-        <DSProvider>
-          <Toast onClose={onCloseHandler}>Toast notification</Toast>
-        </DSProvider>,
-      );
+      setup(<Toast onClose={onCloseHandler}>Toast notification</Toast>);
       const closeButton = screen.getByRole('button');
 
       fireEvent.click(closeButton);

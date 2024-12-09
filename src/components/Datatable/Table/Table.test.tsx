@@ -2,7 +2,7 @@ import { act, screen, waitFor } from '@testing-library/react';
 import { Column } from 'react-table';
 import { vi } from 'vitest';
 
-import { setup } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 import Table from './Table';
 import { defaultTableConfig } from '../defaultConfigs';

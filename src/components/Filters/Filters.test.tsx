@@ -2,7 +2,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import Filters from './Filters';
 import { mockTestFields, mockTestState } from './mocks/options';
 
@@ -15,9 +15,7 @@ describe('Filters', () => {
   });
 
   it('should display remove button when value exists', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -26,9 +24,7 @@ describe('Filters', () => {
     expect(screen.getByRole('button', { name: /remove/i })).toBeInTheDocument();
   });
   it('should call onApply when value exists and clicked on Apply button', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -39,9 +35,7 @@ describe('Filters', () => {
   });
 
   it('should add filter when clicked on Add button', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
 
@@ -51,9 +45,7 @@ describe('Filters', () => {
   });
 
   it('should set default filter when clicked on Clear all button', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
@@ -65,7 +57,7 @@ describe('Filters', () => {
   });
 
   it('should call onClose when clicked on Close button', () => {
-    renderWithProviders(
+    setup(
       <Filters
         fields={mockTestFields}
         onApply={onApplyFnMock}
@@ -78,9 +70,7 @@ describe('Filters', () => {
   });
 
   it('should remain only filter with value when clicked on Apply button', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
@@ -96,9 +86,7 @@ describe('Filters', () => {
   });
 
   it('should display message when new filter is added to applied filters', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -110,9 +98,7 @@ describe('Filters', () => {
   });
 
   it('should display message when applied filter is changed', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.change(screen.queryAllByPlaceholderText('String')[0], {
@@ -130,9 +116,7 @@ describe('Filters', () => {
   });
 
   it('should remove filter when clicked on Remove button', () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getAllByRole('button', { name: /remove/i })[0]);
@@ -143,9 +127,7 @@ describe('Filters', () => {
   });
 
   it('should select default condition and component when field changed', async () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     await waitFor(() => {
       selectEvent.select(screen.getByText('Option A'), 'Option B');
@@ -156,9 +138,7 @@ describe('Filters', () => {
   });
 
   it("should select first condition and component when field changed and hasn't set default", async () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     await waitFor(() => {
       selectEvent.select(screen.getByText('Option A'), 'Option C');
@@ -169,9 +149,7 @@ describe('Filters', () => {
   });
 
   it('should persist value when condition changed and components are the same', async () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.change(screen.getByPlaceholderText('String'), {
       target: { value: 'a' },
@@ -185,9 +163,7 @@ describe('Filters', () => {
   });
 
   it('should keep same operators when operator select changed', async () => {
-    renderWithProviders(
-      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
-    );
+    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
@@ -199,7 +175,7 @@ describe('Filters', () => {
   });
 
   it('should preselect filters when state was applied', () => {
-    renderWithProviders(
+    setup(
       <Filters
         fields={mockTestFields}
         state={mockTestState}
@@ -218,7 +194,7 @@ describe('Filters', () => {
 
   it('should call "onCancel" when cancel button was clicked', () => {
     const onCancel = vi.fn();
-    renderWithProviders(
+    setup(
       <Filters
         fields={mockTestFields}
         onApply={onApplyFnMock}

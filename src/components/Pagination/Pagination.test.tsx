@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import Pagination from './Pagination';
 
 describe('Custom renderItem prop', () => {
@@ -14,7 +14,7 @@ describe('Custom renderItem prop', () => {
       <div key={props.key} data-testid="custom-pagination-item" />
     ));
 
-    renderWithProviders(
+    setup(
       <Pagination
         currentPage={1}
         // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -45,7 +45,7 @@ describe('Custom renderItem prop', () => {
       </button>
     ));
 
-    renderWithProviders(
+    setup(
       <Pagination
         currentPage={1}
         pageCount={4}
