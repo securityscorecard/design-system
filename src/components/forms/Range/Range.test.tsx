@@ -12,6 +12,7 @@ describe('Range', () => {
   it('should change value', async () => {
     setup(<Range min={0} max={100} />);
     const input = screen.getByRole('slider');
+    // Range element is not supported by UserEvent lib https://github.com/testing-library/user-event/issues/871
     fireEvent.change(input, { target: { value: 47 } });
     expect(input).toHaveValue('47');
   });

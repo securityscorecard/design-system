@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
 import { vi } from 'vitest';
 
@@ -25,13 +25,13 @@ describe('Datatable/LinkRenderer', () => {
 
     expect(hrefComposerMock).toBeCalledWith(value, rowData);
   });
-  it('should call "onClick" with correct arguments on value click', () => {
+  it('should call "onClick" with correct arguments on value click', async () => {
     const onClickMock = vi.fn();
-    setup(
+    const { user } = setup(
       <LinkRenderer value={value} rowData={rowData} onClick={onClickMock} />,
     );
 
-    fireEvent.click(
+    await user.click(
       screen.getByRole('button', {
         name: new RegExp(value, 'i'),
       }),

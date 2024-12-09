@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { noop } from 'ramda-adjunct';
 import { vi } from 'vitest';
 
@@ -17,11 +17,13 @@ describe('CollapsibleHandle', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('should call `onCollapse` when is clicked', () => {
+  test('should call `onCollapse` when is clicked', async () => {
     const onCollapseMock = vi.fn();
-    setup(<CollapsibleHandle collapsed onCollapse={onCollapseMock} />);
+    const { user } = setup(
+      <CollapsibleHandle collapsed onCollapse={onCollapseMock} />,
+    );
 
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
     expect(onCollapseMock).toHaveBeenCalled();
   });
 });

@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import TreeView from './TreeView';
 import { setup } from '../../utils/tests/setup';
@@ -19,8 +19,8 @@ describe('TreeView', () => {
     expect(rows).toHaveLength(3);
   });
 
-  test('should correctly collapse and expand rows', () => {
-    setup(
+  test('should correctly collapse and expand rows', async () => {
+    const { user } = setup(
       <TreeView data={mockData} renderPrimaryContent={renderPrimaryContent} />,
     );
 
@@ -28,7 +28,7 @@ describe('TreeView', () => {
     expect(screen.getByText('SubItem 1-1')).toBeInTheDocument();
 
     // Click to collapse
-    fireEvent.click(
+    await user.click(
       screen.getAllByRole('button', {
         name: /To collapse nested rows, press the space bar./i,
       })[0],
@@ -36,7 +36,7 @@ describe('TreeView', () => {
     expect(screen.queryByText('SubItem 1-1')).not.toBeInTheDocument();
 
     // Click to expand
-    fireEvent.click(
+    await user.click(
       screen.getAllByRole('button', {
         name: /To expand nested rows, press the space bar./i,
       })[0],

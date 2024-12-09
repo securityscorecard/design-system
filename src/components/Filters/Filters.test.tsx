@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { vi } from 'vitest';
 
@@ -14,112 +14,114 @@ describe('Filters', () => {
     vi.resetAllMocks();
   });
 
-  it('should display remove button when value exists', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should display remove button when value exists', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.change(screen.getByPlaceholderText('String'), {
-      target: { value: 'a' },
-    });
+    await user.type(screen.getByPlaceholderText('String'), 'a');
 
     expect(screen.getByRole('button', { name: /remove/i })).toBeInTheDocument();
   });
-  it('should call onApply when value exists and clicked on Apply button', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should call onApply when value exists and clicked on Apply button', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.change(screen.getByPlaceholderText('String'), {
-      target: { value: 'a' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
+    await user.type(screen.getByPlaceholderText('String'), 'a');
+    await user.click(screen.getByRole('button', { name: /Apply/i }));
 
     expect(onApplyFnMock).toBeCalled();
   });
 
-  it('should add filter when clicked on Add button', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should add filter when clicked on Add button', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
 
     expect(screen.queryAllByText('Option A')).toHaveLength(2);
     expect(screen.queryAllByText('is')).toHaveLength(2);
     expect(screen.queryAllByPlaceholderText('String')).toHaveLength(2);
   });
 
-  it('should set default filter when clicked on Clear all button', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should set default filter when clicked on Clear all button', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.click(screen.getByRole('button', { name: /Clear all/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Clear all/i }));
 
     expect(screen.getByText('Option A')).toBeInTheDocument();
     expect(screen.getByText('is')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
   });
 
-  it('should call onClose when clicked on Close button', () => {
-    setup(
+  it('should call onClose when clicked on Close button', async () => {
+    const { user } = setup(
       <Filters
         fields={mockTestFields}
         onApply={onApplyFnMock}
         onClose={onCloseFnMock}
       />,
     );
-    fireEvent.click(screen.getByRole('button', { name: /Close/i }));
+    await user.click(screen.getByRole('button', { name: /Close/i }));
 
     expect(onCloseFnMock).toBeCalled();
   });
 
-  it('should remain only filter with value when clicked on Apply button', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should remain only filter with value when clicked on Apply button', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
 
-    fireEvent.change(screen.queryAllByPlaceholderText('String')[0], {
-      target: { value: 'a' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
+    await user.type(screen.queryAllByPlaceholderText('String')[0], 'a');
+    await user.click(screen.getByRole('button', { name: /Apply/i }));
 
     expect(screen.getByText('Option A')).toBeInTheDocument();
     expect(screen.getByText('is')).toBeInTheDocument();
     expect(screen.getByDisplayValue('a')).toBeInTheDocument();
   });
 
-  it('should display message when new filter is added to applied filters', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should display message when new filter is added to applied filters', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.change(screen.getByPlaceholderText('String'), {
-      target: { value: 'a' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-
-    expect(screen.getByText('You have unapplied filters')).toBeInTheDocument();
-  });
-
-  it('should display message when applied filter is changed', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
-
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.change(screen.queryAllByPlaceholderText('String')[0], {
-      target: { value: 'a' },
-    });
-    fireEvent.change(screen.queryAllByPlaceholderText('String')[1], {
-      target: { value: 'b' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
-    fireEvent.change(screen.queryAllByPlaceholderText('String')[0], {
-      target: { value: 'c' },
-    });
+    await user.type(screen.getByPlaceholderText('String'), 'a');
+    await user.click(screen.getByRole('button', { name: /Apply/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
 
     expect(screen.getByText('You have unapplied filters')).toBeInTheDocument();
   });
 
-  it('should remove filter when clicked on Remove button', () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+  it('should display message when applied filter is changed', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.click(screen.getAllByRole('button', { name: /remove/i })[0]);
+    await user.click(screen.getByRole('button', { name: /Add/i }));
+    await user.type(screen.queryAllByPlaceholderText('String')[0], 'a');
+    await user.type(screen.queryAllByPlaceholderText('String')[1], 'b');
+    await user.click(screen.getByRole('button', { name: /Apply/i }));
+    await user.type(screen.queryAllByPlaceholderText('String')[0], 'c');
+
+    expect(screen.getByText('You have unapplied filters')).toBeInTheDocument();
+  });
+
+  it('should remove filter when clicked on Remove button', async () => {
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
+
+    await user.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getAllByRole('button', { name: /remove/i })[0]);
 
     expect(screen.getByText('Option A')).toBeInTheDocument();
     expect(screen.getByText('is')).toBeInTheDocument();
@@ -149,11 +151,11 @@ describe('Filters', () => {
   });
 
   it('should persist value when condition changed and components are the same', async () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.change(screen.getByPlaceholderText('String'), {
-      target: { value: 'a' },
-    });
+    await user.type(screen.getByPlaceholderText('String'), 'a');
 
     await waitFor(() => {
       selectEvent.select(screen.getByText('is'), 'is not');
@@ -163,10 +165,12 @@ describe('Filters', () => {
   });
 
   it('should keep same operators when operator select changed', async () => {
-    setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
+    const { user } = setup(
+      <Filters fields={mockTestFields} onApply={onApplyFnMock} />,
+    );
 
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
-    fireEvent.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
+    await user.click(screen.getByRole('button', { name: /Add/i }));
     await waitFor(() => {
       selectEvent.select(screen.getAllByText('And')[0], 'Or');
     });
@@ -192,9 +196,9 @@ describe('Filters', () => {
     expect(screen.getByDisplayValue('Value Option C')).toBeInTheDocument();
   });
 
-  it('should call "onCancel" when cancel button was clicked', () => {
+  it('should call "onCancel" when cancel button was clicked', async () => {
     const onCancel = vi.fn();
-    setup(
+    const { user } = setup(
       <Filters
         fields={mockTestFields}
         onApply={onApplyFnMock}
@@ -203,7 +207,7 @@ describe('Filters', () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /Cancel/i }));
+    await user.click(screen.getByRole('button', { name: /Cancel/i }));
 
     expect(onCancel).toHaveBeenCalled();
   });
