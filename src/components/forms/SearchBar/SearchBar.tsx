@@ -52,6 +52,11 @@ const ClearButton = styled(IconWrapper)`
   border-radius: 0;
   cursor: pointer;
 
+  .clear-button-icon {
+    position: relative;
+    z-index: 1;
+  }
+
   &:hover,
   &:focus {
     color: var(--sscds-color-icon-inverse);
@@ -66,7 +71,7 @@ const ClearButton = styled(IconWrapper)`
       height: 24px;
       border-radius: 100%;
       background-color: var(--sscds-color-background-action-danger-hover);
-      z-index: -1;
+      z-index: 0;
     }
   }
 `;
@@ -205,7 +210,11 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
             as="button"
             onClick={handleClearSearch}
           >
-            <Icon name={SSCIconNames.times} type={IconTypes.ssc} />
+            <Icon
+              className="clear-button-icon"
+              name={SSCIconNames.times}
+              type={IconTypes.ssc}
+            />
           </ClearButton>
         )}
       </SearchBarRoot>
