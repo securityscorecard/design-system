@@ -1,9 +1,8 @@
 import { ReactNode, useState } from 'react';
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { type Mock, vi } from 'vitest';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/renderWithProviders';
 import { Collapsible } from './index';
 
 const ControllingComponent = ({
@@ -42,13 +41,11 @@ const ControllingComponent = ({
 describe('Collapsible', () => {
   describe('uncontrolled mode', () => {
     it('should be closed by default', () => {
-      renderWithProviders(
-        <Collapsible title="test">Collapsible content</Collapsible>,
-      );
+      setup(<Collapsible title="test">Collapsible content</Collapsible>);
       expect(screen.queryByText('Collapsible content')).not.toBeInTheDocument();
     });
     it('should be opened when "defaultIsOpen" is true', () => {
-      renderWithProviders(
+      setup(
         <Collapsible title="test" defaultIsOpen>
           Collapsible content
         </Collapsible>,
@@ -57,45 +54,45 @@ describe('Collapsible', () => {
     });
 
     it('should toggle open state on trigger click', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Collapsible title="test">Collapsible content</Collapsible>,
       );
 
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(screen.getByText('Collapsible content')).toBeInTheDocument();
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(screen.queryByText('Collapsible content')).not.toBeInTheDocument();
     });
     it('should close on trigger click if opened by default', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Collapsible title="test" defaultIsOpen>
           Collapsible content
         </Collapsible>,
       );
 
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(screen.queryByText('Collapsible content')).not.toBeInTheDocument();
     });
     it('should call "onOpen" on trigger click', async () => {
       const onOpenMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Collapsible title="test" onOpen={onOpenMock}>
           Collapsible content
         </Collapsible>,
       );
 
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(onOpenMock).toBeCalledTimes(1);
     });
     it('should call "onOpen" only when is open', async () => {
       const onOpenMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <Collapsible title="test" onOpen={onOpenMock} defaultIsOpen>
           Collapsible content
         </Collapsible>,
       );
 
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(onOpenMock).not.toBeCalled();
     });
   });
@@ -103,35 +100,35 @@ describe('Collapsible', () => {
   describe('controlled mode', () => {
     it('should toggle open state on trigger click', async () => {
       const onOpenChangeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <ControllingComponent onOpenChange={onOpenChangeMock}>
           Collapsible content
         </ControllingComponent>,
       );
 
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(screen.getByText('Collapsible content')).toBeInTheDocument();
-      await userEvent.click(screen.getByRole('button', { name: /test/i }));
+      await user.click(screen.getByRole('button', { name: /test/i }));
       expect(screen.queryByText('Collapsible content')).not.toBeInTheDocument();
     });
 
     it('should toggle open state on external state change', async () => {
       const onOpenChangeMock = vi.fn();
-      renderWithProviders(
+      const { user } = setup(
         <ControllingComponent onOpenChange={onOpenChangeMock}>
           Collapsible content
         </ControllingComponent>,
       );
 
-      await userEvent.click(screen.getByRole('button', { name: /toggle/i }));
+      await user.click(screen.getByRole('button', { name: /toggle/i }));
       expect(screen.getByText('Collapsible content')).toBeInTheDocument();
-      await userEvent.click(screen.getByRole('button', { name: /toggle/i }));
+      await user.click(screen.getByRole('button', { name: /toggle/i }));
       expect(screen.queryByText('Collapsible content')).not.toBeInTheDocument();
     });
 
     it('should be opened when "isOpen" is true', () => {
       const onOpenChangeMock = vi.fn();
-      renderWithProviders(
+      setup(
         <ControllingComponent isOpen onOpenChange={onOpenChangeMock}>
           Collapsible content
         </ControllingComponent>,

@@ -1,8 +1,7 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import { InputFilter } from '../../Filters/components';
 import { Operators } from '../../Filters/Filters.enums';
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
@@ -23,7 +22,7 @@ describe('Datatable/ControlsModule', () => {
 
   describe('given filtering is enabled', () => {
     it('should not display filters if no fields definition is provided', async () => {
-      renderWithProviders(
+      setup(
         <ControlsModule
           {...defaultControlsConfig}
           defaultIsFilteringApplied={
@@ -50,7 +49,7 @@ describe('Datatable/ControlsModule', () => {
       ).not.toBeInTheDocument();
     });
     it('should open Filters component on Filters button click', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -60,7 +59,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
+      await user.click(screen.getByRole('button', { name: /Filters/i }));
 
       await waitFor(() => {
         expect(screen.getByTestId('filters')).toBeInTheDocument();
@@ -69,7 +68,7 @@ describe('Datatable/ControlsModule', () => {
       expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
     });
     it('should close Filters component on Filters button click when Filters are open', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -80,7 +79,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
+      await user.click(screen.getByRole('button', { name: /Filters/i }));
       await waitFor(() => {
         expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
       });
@@ -88,7 +87,7 @@ describe('Datatable/ControlsModule', () => {
       expect(screen.queryByPlaceholderText('String')).not.toBeInTheDocument();
     });
     it('should close Filters component on Column button click when Filters are open', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -99,7 +98,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
+      await user.click(screen.getByRole('button', { name: /Columns/i }));
       await waitFor(() => {
         expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
       });
@@ -110,9 +109,9 @@ describe('Datatable/ControlsModule', () => {
 
   describe('given column ordering is enabled', () => {
     it('should open ColumnsControls component on Columns button click', async () => {
-      renderWithProviders(<ControlsModule {...defaultControlsConfig} />);
+      const { user } = setup(<ControlsModule {...defaultControlsConfig} />);
 
-      fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
+      await user.click(screen.getByRole('button', { name: /Columns/i }));
 
       await waitFor(() => {
         expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
@@ -122,14 +121,14 @@ describe('Datatable/ControlsModule', () => {
       ).toBeInTheDocument();
     });
     it('should close ColumnsControls component on Columns button click when ColumnsControls are open', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           defaultIsColumnsControlsOpen
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: /Columns/i }));
+      await user.click(screen.getByRole('button', { name: /Columns/i }));
 
       await waitFor(() => {
         expect(screen.queryByTestId('filters')).not.toBeInTheDocument();
@@ -139,7 +138,7 @@ describe('Datatable/ControlsModule', () => {
       ).not.toBeInTheDocument();
     });
     it('should close ColumnsControls component on Filters button click when ColumnsControls are open', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -150,7 +149,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      fireEvent.click(screen.getByRole('button', { name: /Filters/i }));
+      await user.click(screen.getByRole('button', { name: /Filters/i }));
 
       await waitFor(() => {
         expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
@@ -164,7 +163,7 @@ describe('Datatable/ControlsModule', () => {
   describe('given search is enabled', () => {
     it('should perform search on mount when defaultValue is provided', async () => {
       const onSearchMock = vi.fn();
-      renderWithProviders(
+      setup(
         <ControlsModule
           {...defaultControlsConfig}
           hasFiltering={false}
@@ -184,7 +183,7 @@ describe('Datatable/ControlsModule', () => {
     });
     it('should not perform search when no defaultValue is provided', async () => {
       const onSearchMock = vi.fn();
-      renderWithProviders(
+      setup(
         <ControlsModule
           {...defaultControlsConfig}
           hasFiltering={false}
@@ -214,7 +213,7 @@ describe('Datatable/ControlsModule', () => {
           isCanceled: false,
         },
       ];
-      renderWithProviders(
+      setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -229,7 +228,7 @@ describe('Datatable/ControlsModule', () => {
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(true);
     });
     it('should store filtering state when on filter Apply button', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -240,8 +239,8 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      await userEvent.type(screen.getByPlaceholderText('String'), 'text');
-      fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
+      await user.type(screen.getByPlaceholderText('String'), 'text');
+      await user.click(screen.getByRole('button', { name: /Apply/i }));
 
       expect(DatatableStore.getRawState().filters).toMatchObject([
         {
@@ -256,7 +255,7 @@ describe('Datatable/ControlsModule', () => {
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(true);
     });
     it('should clear filtering state when on filter Clear all button', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -267,16 +266,16 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      await userEvent.type(screen.getByPlaceholderText('String'), 'text');
-      fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
-      fireEvent.click(screen.getByRole('button', { name: /Clear all/i }));
+      await user.type(screen.getByPlaceholderText('String'), 'text');
+      await user.click(screen.getByRole('button', { name: /Apply/i }));
+      await user.click(screen.getByRole('button', { name: /Clear all/i }));
 
       expect(DatatableStore.getRawState().filters).toEqual([]);
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(false);
     });
     it('should store search query when perform search', async () => {
       const query = 'Search query';
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -286,10 +285,8 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      await userEvent.type(
-        screen.getByPlaceholderText('Search'),
-        `${query}{enter}`,
-      );
+      await user.click(screen.getByPlaceholderText('Search'));
+      await user.keyboard(`${query}{enter}`);
 
       await waitFor(() =>
         expect(DatatableStore.getRawState().query).toBe(query),
@@ -297,7 +294,7 @@ describe('Datatable/ControlsModule', () => {
     });
     it('should clear search query on Clear button click', async () => {
       const query = 'Search query';
-      renderWithProviders(
+      const { user } = setup(
         <ControlsModule
           {...defaultControlsConfig}
           filteringConfig={{
@@ -307,8 +304,9 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      await userEvent.type(screen.getByRole('searchbox'), `${query}{enter}`);
-      fireEvent.click(
+      await user.click(screen.getByRole('searchbox'));
+      await user.keyboard(`${query}{enter}`);
+      await user.click(
         screen.getByRole('button', { name: /Clear search value/i }),
       );
 

@@ -1,9 +1,8 @@
 import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { noop } from 'ramda-adjunct';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import RowActions from './RowActions';
 import { RowAction } from '../TreeView.types';
 
@@ -23,7 +22,7 @@ describe('RowActions Component', () => {
       createMockAction({ label: 'action 2' }),
     ];
 
-    renderWithProviders(<RowActions rowActions={rowActions} row={mockRow} />);
+    setup(<RowActions rowActions={rowActions} row={mockRow} />);
 
     expect(screen.getAllByRole('button')).toHaveLength(2);
   });
@@ -31,7 +30,7 @@ describe('RowActions Component', () => {
   test('should skip rendering of action if is null', () => {
     const rowActions = [createMockAction({ label: 'action 1' }), null];
 
-    renderWithProviders(<RowActions rowActions={rowActions} row={mockRow} />);
+    setup(<RowActions rowActions={rowActions} row={mockRow} />);
 
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
@@ -43,14 +42,16 @@ describe('RowActions Component', () => {
       createMockAction({ label: 'action 3' }),
     ];
 
-    renderWithProviders(<RowActions rowActions={rowActions} row={mockRow} />);
+    const { user } = setup(
+      <RowActions rowActions={rowActions} row={mockRow} />,
+    );
 
     const dropdownTrigger = screen.getByRole('button', {
       name: /Row Actions/i,
     });
     expect(dropdownTrigger).toBeInTheDocument();
 
-    await userEvent.type(dropdownTrigger, '{arrowdown}');
+    await user.type(dropdownTrigger, '{arrowdown}');
 
     await waitFor(() => {
       expect(screen.getAllByRole('menuitem')).toHaveLength(3);
@@ -65,14 +66,16 @@ describe('RowActions Component', () => {
       createMockAction({ label: 'action 3' }),
     ];
 
-    renderWithProviders(<RowActions rowActions={rowActions} row={mockRow} />);
+    const { user } = setup(
+      <RowActions rowActions={rowActions} row={mockRow} />,
+    );
 
     const dropdownTrigger = screen.getByRole('button', {
       name: /Row Actions/i,
     });
     expect(dropdownTrigger).toBeInTheDocument();
 
-    await userEvent.type(dropdownTrigger, '{arrowdown}');
+    await user.type(dropdownTrigger, '{arrowdown}');
 
     await waitFor(() => {
       expect(screen.getAllByRole('menuitem')).toHaveLength(3);
@@ -86,9 +89,11 @@ describe('RowActions Component', () => {
       createMockAction({ label: 'action 1', onClick: onClickMock }),
     ];
 
-    renderWithProviders(<RowActions rowActions={rowActions} row={mockRow} />);
+    const { user } = setup(
+      <RowActions rowActions={rowActions} row={mockRow} />,
+    );
 
-    await userEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
 
     expect(onClickMock).toBeCalledWith({ row: mockRow });
   });

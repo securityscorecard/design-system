@@ -1,12 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 
 import ListView from './ListView';
+import { setup } from '../../utils/tests/renderWithProviders';
 
 const data = [{ name: 'abc' }, { name: 'xyz' }];
 describe('ListView', () => {
   it('should select row on click', async () => {
-    render(
+    const { user } = setup(
       <ListView
         data={data}
         renderListViewRow={({ row }) => <span>{row.name}</span>}
@@ -16,12 +16,12 @@ describe('ListView', () => {
 
     const checkbox = screen.getAllByRole('checkbox')[0];
 
-    await userEvent.click(checkbox);
+    await user.click(checkbox);
 
     expect(checkbox).toBeChecked();
   });
   it('should navigate to next page', async () => {
-    render(
+    const { user } = setup(
       <ListView
         data={data}
         renderListViewRow={({ row }) => <span>{row.name}</span>}
@@ -34,7 +34,7 @@ describe('ListView', () => {
       />,
     );
 
-    await userEvent.click(
+    await user.click(
       screen.getByRole('button', { name: /Go to the next page/i }),
     );
 

@@ -1,13 +1,12 @@
 import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/renderWithProviders';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 
 describe('DatatableV2/selection', () => {
   it('should have selection enabled by default', () => {
-    renderWithProviders(<Datatable data={data} columns={columns} id="test" />);
+    setup(<Datatable data={data} columns={columns} id="test" />);
 
     expect(
       screen.getByRole('checkbox', {
@@ -18,7 +17,7 @@ describe('DatatableV2/selection', () => {
 
   describe('when is selection enabled', () => {
     it('should select row on click', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -27,7 +26,7 @@ describe('DatatableV2/selection', () => {
         />,
       );
 
-      await userEvent.click(screen.getAllByLabelText('Toggle select row')[0]);
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
 
       expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
       expect(
@@ -39,7 +38,7 @@ describe('DatatableV2/selection', () => {
     });
 
     it('should deselect row on click', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -49,7 +48,7 @@ describe('DatatableV2/selection', () => {
         />,
       );
 
-      await userEvent.click(screen.getAllByLabelText('Toggle select row')[0]);
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
 
       expect(
         screen.getAllByLabelText('Toggle select row')[0],
@@ -58,7 +57,7 @@ describe('DatatableV2/selection', () => {
 
     describe('batch selection', () => {
       it('should select row in batches when Shift key is pressed', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Datatable
             data={data}
             columns={columns}
@@ -67,8 +66,9 @@ describe('DatatableV2/selection', () => {
           />,
         );
         const rows = screen.getAllByLabelText('Toggle select row');
-        await userEvent.click(rows[0]);
-        await userEvent.click(rows[2], { shiftKey: true });
+        await user.click(rows[0]);
+        await user.keyboard('[ShiftLeft>]');
+        await user.click(rows[2]);
 
         expect(rows[1]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select all')[0]).toBeChecked();
@@ -77,7 +77,7 @@ describe('DatatableV2/selection', () => {
 
     describe('select all', () => {
       it('should select all rows on click on selection header', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Datatable
             data={data}
             columns={columns}
@@ -86,7 +86,7 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getByLabelText('Toggle select all'));
+        await user.click(screen.getByLabelText('Toggle select all'));
 
         expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
@@ -94,7 +94,7 @@ describe('DatatableV2/selection', () => {
       });
 
       it('should deselect all rows on click on selection header', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Datatable
             data={data}
             columns={columns}
@@ -104,7 +104,7 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getAllByLabelText('Toggle select all')[0]);
+        await user.click(screen.getAllByLabelText('Toggle select all')[0]);
 
         expect(
           screen.getAllByLabelText('Toggle select row')[0],
@@ -118,7 +118,7 @@ describe('DatatableV2/selection', () => {
       });
 
       it('should not select disabled rows on click on selection header', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Datatable
             data={data}
             columns={columns}
@@ -126,7 +126,7 @@ describe('DatatableV2/selection', () => {
             id="test"
           />,
         );
-        await userEvent.click(screen.getByLabelText('Toggle select all'));
+        await user.click(screen.getByLabelText('Toggle select all'));
 
         expect(
           screen.getAllByLabelText('Toggle select row')[2],
@@ -136,7 +136,7 @@ describe('DatatableV2/selection', () => {
 
     describe('selection modes', () => {
       it('should select only rows on current page when "selectionMode=page"', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Datatable
             data={data}
             columns={columns}
@@ -147,11 +147,11 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getAllByLabelText('Toggle select all')[0]);
+        await user.click(screen.getAllByLabelText('Toggle select all')[0]);
         expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
 
-        await userEvent.click(
+        await user.click(
           screen.getByRole('button', { name: /Go to the next page of table/i }),
         );
 
@@ -165,7 +165,7 @@ describe('DatatableV2/selection', () => {
         ).not.toBeChecked();
       });
       it('should select all rows when "selectionMode=all"', async () => {
-        renderWithProviders(
+        const { user } = setup(
           <Datatable
             data={data}
             columns={columns}
@@ -176,11 +176,11 @@ describe('DatatableV2/selection', () => {
           />,
         );
 
-        await userEvent.click(screen.getAllByLabelText('Toggle select all')[0]);
+        await user.click(screen.getAllByLabelText('Toggle select all')[0]);
         expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
         expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
 
-        await userEvent.click(
+        await user.click(
           screen.getByRole('button', { name: /Go to the next page of table/i }),
         );
         expect(screen.getAllByLabelText('Toggle select all')[0]).toBeChecked();
@@ -189,7 +189,7 @@ describe('DatatableV2/selection', () => {
     });
 
     it('should circle through selected rows when multi select is disabled', async () => {
-      renderWithProviders(
+      const { user } = setup(
         <Datatable
           data={data}
           columns={columns}
@@ -199,9 +199,9 @@ describe('DatatableV2/selection', () => {
         />,
       );
 
-      await userEvent.click(screen.getAllByLabelText('Toggle select row')[0]);
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
       expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
-      await userEvent.click(screen.getAllByLabelText('Toggle select row')[1]);
+      await user.click(screen.getAllByLabelText('Toggle select row')[1]);
       expect(
         screen.getAllByLabelText('Toggle select row')[0],
       ).not.toBeChecked();

@@ -1,20 +1,19 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import { PaginationItem } from './PaginationItem';
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/renderWithProviders';
 
 describe('Pagination/PaginationItem', () => {
   it('should not call onClick handler for current page', async () => {
     const clickMock = vi.fn();
-    renderWithProviders(
+    const { user } = setup(
       <PaginationItem onClick={clickMock} isCurrent>
         1
       </PaginationItem>,
     );
 
-    await userEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
     expect(clickMock).not.toHaveBeenCalled();
   });
 });

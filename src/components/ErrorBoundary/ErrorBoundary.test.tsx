@@ -1,37 +1,37 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import ErrorBoundary, { DEFAULT_CONTENT, DEFAULT_TITLE } from './ErrorBoundary';
 import { ErrorBoundaryProps } from './ErrorBoundary.types';
+import { setup } from '../../utils/tests/renderWithProviders';
 
 describe('ErrorBoundary Component', () => {
-  it('test_error_boundary_renders_correct_component', () => {
+  it('should render component properly', () => {
     const props: ErrorBoundaryProps = { size: 'sm' };
-    render(<ErrorBoundary {...props} />);
+    setup(<ErrorBoundary {...props} />);
     expect(screen.getByText(DEFAULT_CONTENT)).toBeInTheDocument();
     expect(screen.getByText(DEFAULT_TITLE)).toBeInTheDocument();
   });
 
-  it('test_error_boundary_handles_invalid_size', () => {
+  it('should throw if invalid size is provided', () => {
     const loggerSpy = vi
       .spyOn(console, 'error')
       .mockImplementation(() => vi.fn());
     // @ts-expect-error testing runtime error
     const props: ErrorBoundaryProps = { size: 'invalid' };
-    expect(() => render(<ErrorBoundary {...props} />)).toThrow(
+    expect(() => setup(<ErrorBoundary {...props} />)).toThrow(
       '[design-system/ErrorBoundary] Wrong size (invalid) was provided to ErrorBoundary component. Valid values are xs,sm,md,lg',
     );
     loggerSpy.mockRestore();
   });
 
-  it('test_error_boundary_passes_props', async () => {
+  it('should correctly pass additional props', async () => {
     const props: ErrorBoundaryProps = {
       size: 'lg',
       onClick: vi.fn(),
     };
-    render(<ErrorBoundary {...props} />);
-    await userEvent.click(screen.getByText('Try Again'));
+    const { user } = setup(<ErrorBoundary {...props} />);
+    await user.click(screen.getByText('Try Again'));
     expect(props.onClick).toHaveBeenCalled();
   });
 });
