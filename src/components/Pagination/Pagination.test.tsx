@@ -1,14 +1,15 @@
 import { screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import Pagination from './Pagination';
 
 describe('Custom renderItem prop', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
   it('should render custom item function instead of default one', () => {
-    const customRenderItem = jest.fn();
+    const customRenderItem = vi.fn();
     customRenderItem.mockImplementation((props) => (
       <div key={props.key} data-testid="custom-pagination-item" />
     ));
@@ -31,8 +32,8 @@ describe('Custom renderItem prop', () => {
   });
 
   it('should pass on click events', () => {
-    const customRenderItem = jest.fn();
-    const onPageChange = jest.fn();
+    const customRenderItem = vi.fn();
+    const onPageChange = vi.fn();
     customRenderItem.mockImplementation((props) => (
       <button
         type="button"

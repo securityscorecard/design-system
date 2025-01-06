@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import Step from './Step';
 import Stepper from './Stepper';
@@ -26,11 +27,26 @@ describe('Stepper', () => {
         {/* done, without callback */}
         <Step label="Step" />
         {/* done, clickable  */}
-        <Step label="Step" onStepClick={jest.fn} />
+        <Step
+          label="Step"
+          onStepClick={() => {
+            vi.fn();
+          }}
+        />
         {/* active, non-clickable  */}
-        <Step label="Step" onStepClick={jest.fn} />
+        <Step
+          label="Step"
+          onStepClick={() => {
+            vi.fn();
+          }}
+        />
         {/* pending, non-clickable */}
-        <Step label="Step" onStepClick={jest.fn} />
+        <Step
+          label="Step"
+          onStepClick={() => {
+            vi.fn();
+          }}
+        />
       </Stepper>,
     );
 
@@ -52,7 +68,7 @@ describe('Stepper', () => {
     expect(screen.queryByTestId('step-content')).not.toBeInTheDocument();
   });
 
-  // We are skipping this test because the container query is not reliable in jest tests
+  // We are skipping this test because the container query is not reliable in tests
   it.skip('should not render Step text if container width is lower than the text breakpoint ', () => {
     render(
       <div style={{ width: '550px' }}>

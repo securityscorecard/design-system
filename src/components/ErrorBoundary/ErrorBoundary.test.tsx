@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import ErrorBoundary, { DEFAULT_CONTENT, DEFAULT_TITLE } from './ErrorBoundary';
 import { ErrorBoundaryProps } from './ErrorBoundary.types';
@@ -13,9 +14,9 @@ describe('ErrorBoundary Component', () => {
   });
 
   it('test_error_boundary_handles_invalid_size', () => {
-    const loggerSpy = jest
+    const loggerSpy = vi
       .spyOn(console, 'error')
-      .mockImplementation(() => jest.fn());
+      .mockImplementation(() => vi.fn());
     // @ts-expect-error testing runtime error
     const props: ErrorBoundaryProps = { size: 'invalid' };
     expect(() => render(<ErrorBoundary {...props} />)).toThrow(
@@ -27,7 +28,7 @@ describe('ErrorBoundary Component', () => {
   it('test_error_boundary_passes_props', () => {
     const props: ErrorBoundaryProps = {
       size: 'lg',
-      onClick: jest.fn(),
+      onClick: vi.fn(),
     };
     render(<ErrorBoundary {...props} />);
     userEvent.click(screen.getByText('Try Again'));

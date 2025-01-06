@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import TextArea from './TextArea';
 
@@ -34,7 +35,7 @@ describe('TextArea', () => {
       expect(screen.getByText('2')).toBeInTheDocument();
     });
     it('as controlled input', () => {
-      const mockOnChange = jest.fn();
+      const mockOnChange = vi.fn();
       render(<ControlledTextArea maxLength={5} mockOnChange={mockOnChange} />);
 
       const textarea = screen.getByRole('textbox');

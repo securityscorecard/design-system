@@ -1,4 +1,5 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 import DropdownMenu from './DropdownMenu';
@@ -7,7 +8,7 @@ const actions = [
   {
     label: 'Dropdown Item',
     name: 'dropdownItem',
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   },
 ];
 

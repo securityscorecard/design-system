@@ -1,14 +1,14 @@
 import { screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import Grid from './Grid';
-import '@testing-library/jest-dom';
 import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
 
 describe('Grid', () => {
   it('should throw error when `cols` is set to 1', () => {
-    const loggerSpy = jest
+    const loggerSpy = vi
       .spyOn(console, 'error')
-      .mockImplementation(() => jest.fn());
+      .mockImplementation(() => vi.fn());
     expect(() =>
       renderWithProviders(
         <Grid cols={1}>

@@ -4,7 +4,7 @@ Please beware all features or bug fixes must be tested by one or more specs (uni
 
 ## Unit tests
 
-For unit testing, we are using Jest along with [React Testing Library](https://testing-library.com/docs/intro)
+For unit testing, we are using Vitest along with [React Testing Library](https://testing-library.com/docs/intro)
 and [jest-dom](https://github.com/testing-library/jest-dom/blob/master/README.md).
 
 Unit tests should primarily be used for testing component interactions. For testing the visual aspects of components, visual regression tests should be used. However, this does not mean that visual changes in components cannot be used for testing the result of interaction with the component. For example, it is completely valid to test whether the component content is not visible after closing a modal window.

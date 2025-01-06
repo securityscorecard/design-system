@@ -1,16 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
-import { DSProvider, createIconLibrary } from '../../theme';
+import { DSProvider } from '../../theme';
 import Toast from './Toast';
 
 describe('Toast', () => {
-  const onCloseHandler = jest.fn();
+  const onCloseHandler = vi.fn();
 
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => vi.resetAllMocks());
 
   describe('when close button is clicked', () => {
     it('should call onClose handler', () => {
-      createIconLibrary();
       render(
         <DSProvider>
           <Toast onClose={onCloseHandler}>Toast notification</Toast>

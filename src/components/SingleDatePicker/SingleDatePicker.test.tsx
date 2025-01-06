@@ -1,12 +1,13 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import SingleDatePicker from './SingleDatePicker';
 
 describe('SingleDatePicker', () => {
   it('should date picker popping up when user clicks on the input ', async () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <SingleDatePicker
@@ -25,7 +26,7 @@ describe('SingleDatePicker', () => {
   });
 
   it('should call onchange when a date is picked', async () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <SingleDatePicker
@@ -49,7 +50,7 @@ describe('SingleDatePicker', () => {
   });
 
   it('should determine selected date by input value', async () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <SingleDatePicker
@@ -66,7 +67,7 @@ describe('SingleDatePicker', () => {
   });
 
   it('should change the default placeholder', async () => {
-    const handleChangeDate = jest.fn();
+    const handleChangeDate = vi.fn();
 
     renderWithProviders(
       <SingleDatePicker

@@ -1,9 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { vi } from 'vitest';
 
 import { DatatableStore, datatableInitialState } from '../Datatable.store';
 import { useTableRowSelect } from './useTableRowSelect';
 
-const selectCallback = jest.fn();
+const selectCallback = vi.fn();
 const selectedRowIds = ['a', 'b', 'c'];
 
 describe('useTableRowSelect', () => {
@@ -11,7 +12,7 @@ describe('useTableRowSelect', () => {
     DatatableStore.replace(datatableInitialState);
   });
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should store default selected row ids on init', () => {

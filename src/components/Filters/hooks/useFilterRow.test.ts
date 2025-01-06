@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { vi } from 'vitest';
 
 import { Field } from '../Filters.types';
 import { mockTestFields } from '../mocks/options';
@@ -7,9 +8,7 @@ import { useFilterRow } from './useFilterRow';
 describe('useFilterRow', () => {
   let loggerSpy;
   beforeAll(() => {
-    loggerSpy = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => jest.fn());
+    loggerSpy = vi.spyOn(console, 'error').mockImplementation(() => vi.fn());
   });
   afterAll(() => {
     loggerSpy.mockRestore();

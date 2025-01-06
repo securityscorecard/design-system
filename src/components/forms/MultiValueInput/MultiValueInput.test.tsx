@@ -1,16 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import MultiValueInput from './MultiValueInput';
 
-const mockValueAdd = jest.fn();
-const mockValueRemove = jest.fn();
-const mockValueChange = jest.fn();
-const mockInputChange = jest.fn();
+const mockValueAdd = vi.fn();
+const mockValueRemove = vi.fn();
+const mockValueChange = vi.fn();
+const mockInputChange = vi.fn();
 
 describe('MultiValueInput', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should focus input on "Tab" key', () => {
