@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { identity } from 'ramda';
 import { vi } from 'vitest';
 
@@ -13,7 +13,7 @@ const rowData = { col: 'val' };
 describe('Datatable/MultiValueRenderer', () => {
   it('should open tooltip with rest of values when hover on rest values pill', async () => {
     const restValuesCount = values.length - numberOfVisibleItems;
-    setup(
+    const { user } = setup(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
         values={values}
@@ -21,19 +21,17 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    fireEvent.pointerMove(screen.getByText(`+ ${restValuesCount}`));
+    await user.hover(screen.getByText(`+ ${restValuesCount}`));
 
-    /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
       expect(screen.getAllByText('c')[0]).toBeInTheDocument();
     });
 
     expect(screen.getAllByText('d')[0]).toBeInTheDocument();
     expect(screen.getAllByText('e')[0]).toBeInTheDocument();
-    /* eslint-enable testing-library/no-node-access */
   });
   it('should open tooltip when hover on value pill', async () => {
-    setup(
+    const { user } = setup(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
         values={values}
@@ -42,13 +40,11 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    fireEvent.pointerEnter(screen.getByText(values[0]));
+    await user.hover(screen.getByText(values[0]));
 
-    /* eslint-disable testing-library/no-node-access */
     await waitFor(() => {
       expect(screen.getByText(values[0])).toBeInTheDocument();
     });
-    /* eslint-enable testing-library/no-node-access */
   });
   it('should call "tooltipComposer" with correct arguments for each visible value', () => {
     const tooltipComposerMock = vi.fn();
@@ -99,7 +95,7 @@ describe('Datatable/MultiValueRenderer', () => {
   });
   it('should call "onClick" with correct arguments on value click', async () => {
     const onClickMock = vi.fn();
-    setup(
+    const { user } = setup(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
         values={values}
@@ -108,7 +104,7 @@ describe('Datatable/MultiValueRenderer', () => {
       />,
     );
 
-    fireEvent.click(
+    await user.click(
       screen.getByRole('button', {
         name: new RegExp(values[0], 'i'),
       }),
@@ -134,7 +130,7 @@ describe('Datatable/MultiValueRenderer', () => {
   });
   it('should format all values when "valueFormatter" is provided', async () => {
     const numericValues = [1000, 2000, 3000];
-    setup(
+    const { user } = setup(
       <MultiValueRenderer
         multiValueDisplayLimit={2}
         values={numericValues}
@@ -142,15 +138,12 @@ describe('Datatable/MultiValueRenderer', () => {
         valueFormatter={(val) => abbreviateNumber(val)}
       />,
     );
-
-    /* eslint-disable testing-library/no-node-access */
-    expect(
-      document.getElementsByClassName('ds-table-cell-multivalue')[0],
-    ).toHaveTextContent('1K2K+ 1');
-    fireEvent.pointerMove(screen.getByText('+ 1'));
+    expect(screen.getByText('1K')).toBeInTheDocument();
+    expect(screen.getByText('2K')).toBeInTheDocument();
+    expect(screen.getByText('+ 1')).toBeInTheDocument();
+    await user.hover(screen.getByText('+ 1'));
     await waitFor(() => {
       expect(screen.getByTestId('ssc-tooltip')).toBeInTheDocument();
     });
-    /* eslint-enable testing-library/no-node-access */
   });
 });

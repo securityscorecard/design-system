@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { identity, F as stubFalse } from 'ramda';
 import { Row } from 'react-table';
 import { vi } from 'vitest';
@@ -18,7 +18,7 @@ describe('Datatable/CellRenderer', () => {
   describe('given cell type is multiValue', () => {
     it('should pass "cellOnClick" handler', async () => {
       const onClickMock = vi.fn();
-      setup(
+      const { user } = setup(
         <CellRenderer
           value={multiValueValues}
           column={{
@@ -29,7 +29,7 @@ describe('Datatable/CellRenderer', () => {
           row={row}
         />,
       );
-      fireEvent.click(
+      await user.click(
         screen.getByRole('button', {
           name: new RegExp(multiValueValues[0].toString(), 'i'),
         }),
@@ -104,9 +104,9 @@ describe('Datatable/CellRenderer', () => {
   });
 
   describe('given cell type is link', () => {
-    it('should pass "cellOnClick" handler', () => {
+    it('should pass "cellOnClick" handler', async () => {
       const onClickMock = vi.fn();
-      setup(
+      const { user } = setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -118,7 +118,7 @@ describe('Datatable/CellRenderer', () => {
         />,
       );
 
-      fireEvent.click(
+      await user.click(
         screen.getByRole('button', {
           name: new RegExp(singleValue, 'i'),
         }),
@@ -177,9 +177,9 @@ describe('Datatable/CellRenderer', () => {
   });
 
   describe('given cell type is discrete link', () => {
-    it('should pass "cellOnClick" handler', () => {
+    it('should pass "cellOnClick" handler', async () => {
       const onClickMock = vi.fn();
-      setup(
+      const { user } = setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -191,7 +191,7 @@ describe('Datatable/CellRenderer', () => {
         />,
       );
 
-      fireEvent.click(
+      await user.click(
         screen.getByRole('button', {
           name: new RegExp(singleValue, 'i'),
         }),
@@ -250,7 +250,7 @@ describe('Datatable/CellRenderer', () => {
 
   describe('given cell type is not multivalue', () => {
     it('should open tooltip when hover on value', async () => {
-      setup(
+      const { user } = setup(
         <CellRenderer
           value={singleValue}
           column={{
@@ -263,7 +263,7 @@ describe('Datatable/CellRenderer', () => {
       );
 
       const value = screen.getByText(singleValue);
-      fireEvent.pointerMove(value);
+      await user.hover(value);
 
       await waitFor(() => {
         expect(screen.getAllByText(singleValue)[0]).toBeInTheDocument();

@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { setup } from '../../../utils/tests/setup';
@@ -14,7 +14,7 @@ const actions = [
 
 describe('_internal/BaseDropdownMenu', () => {
   it('should toggle pane on click', async () => {
-    setup(
+    const { user } = setup(
       <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -23,7 +23,7 @@ describe('_internal/BaseDropdownMenu', () => {
     const dropdownButton = screen.getByRole('button', {
       name: /Toggle Dropdown/i,
     });
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
 
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('_internal/BaseDropdownMenu', () => {
     const dropdownItem = screen.getByRole('button', { name: /Dropdown Item/i });
     expect(dropdownItem).toBeInTheDocument();
 
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
 
     await waitFor(() => {
       expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
@@ -41,13 +41,13 @@ describe('_internal/BaseDropdownMenu', () => {
     expect(dropdownItem).not.toBeInTheDocument();
   });
   it('should close pane on click outside of Dropdown', async () => {
-    setup(
+    const { user } = setup(
       <DropdownMenu actions={actions} defaultIsOpen>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
     );
 
-    fireEvent.click(document.body);
+    await user.click(document.body);
 
     await waitFor(() => {
       expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
@@ -58,7 +58,7 @@ describe('_internal/BaseDropdownMenu', () => {
     ).not.toBeInTheDocument();
   });
   it('should create "button" tag when "onClick" prop is provided', async () => {
-    setup(
+    const { user } = setup(
       <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -67,7 +67,7 @@ describe('_internal/BaseDropdownMenu', () => {
     const dropdownButton = screen.getByRole('button', {
       name: /Toggle Dropdown/i,
     });
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
     });
@@ -77,7 +77,7 @@ describe('_internal/BaseDropdownMenu', () => {
   });
   it('should create "a" tag when "href" prop is provided', async () => {
     const href = 'http://example.com';
-    setup(
+    const { user } = setup(
       <DropdownMenu actions={[{ ...actions[0], href }]}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -86,7 +86,7 @@ describe('_internal/BaseDropdownMenu', () => {
     const dropdownButton = screen.getByRole('button', {
       name: /Toggle Dropdown/i,
     });
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
 
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
@@ -102,7 +102,7 @@ describe('_internal/BaseDropdownMenu', () => {
       search: '?sort=name',
       hash: '#the-hash',
     };
-    setup(
+    const { user } = setup(
       <DropdownMenu actions={[{ ...actions[0], to }]}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -111,7 +111,7 @@ describe('_internal/BaseDropdownMenu', () => {
     const dropdownButton = screen.getByRole('button', {
       name: /Toggle Dropdown/i,
     });
-    fireEvent.click(dropdownButton);
+    await user.click(dropdownButton);
 
     await waitFor(() => {
       expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
@@ -127,7 +127,7 @@ describe('_internal/BaseDropdownMenu', () => {
 
   describe('given children is function', () => {
     it('should pass isPaneDisplayed as a argument', async () => {
-      setup(
+      const { user } = setup(
         <DropdownMenu actions={actions}>
           {(isPaneDisplayed) => (
             <button type="button">{isPaneDisplayed ? 'Hide' : 'Show'}</button>
@@ -138,7 +138,7 @@ describe('_internal/BaseDropdownMenu', () => {
       const dropdownButton = screen.getByRole('button');
       expect(dropdownButton).toHaveTextContent('Show');
 
-      fireEvent.click(dropdownButton);
+      await user.click(dropdownButton);
       await waitFor(() => {
         expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
       });

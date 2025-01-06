@@ -1,4 +1,4 @@
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { setup } from '../../../../utils/tests/setup';
@@ -44,10 +44,10 @@ describe('Datatable/BatchActions', () => {
         });
       });
     });
-    it('should call onClick handler on top-level action with correct parameters', () => {
-      setup(<BatchActions actions={actions} />);
+    it('should call onClick handler on top-level action with correct parameters', async () => {
+      const { user } = setup(<BatchActions actions={actions} />);
 
-      fireEvent.click(screen.getByRole('button', { name: /Action/i }));
+      await user.click(screen.getByRole('button', { name: /Action/i }));
       expect(actionFnMock).toBeCalledWith(
         selectedIds,
         false,
@@ -55,11 +55,11 @@ describe('Datatable/BatchActions', () => {
       );
     });
 
-    it('should call onClick handler in dropdown action with correct parameters', () => {
-      setup(<BatchActions actions={actions} />);
+    it('should call onClick handler in dropdown action with correct parameters', async () => {
+      const { user } = setup(<BatchActions actions={actions} />);
 
-      fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
-      fireEvent.click(screen.getByRole('button', { name: /Dropdown Item/i }));
+      await user.click(screen.getByRole('button', { name: /Dropdown/i }));
+      await user.click(screen.getByRole('button', { name: /Dropdown Item/i }));
 
       expect(subactionFnMock).toBeCalledWith(
         selectedIds,
@@ -77,15 +77,15 @@ describe('Datatable/BatchActions', () => {
         });
       });
     });
-    it('should call onClick handler on top-level action with correct parameters', () => {
-      setup(<BatchActions actions={actions} />);
+    it('should call onClick handler on top-level action with correct parameters', async () => {
+      const { user } = setup(<BatchActions actions={actions} />);
       act(() => {
         DatatableStore.update((s) => {
           s.selectedIds = selectedIds;
         });
       });
 
-      fireEvent.click(screen.getByRole('button', { name: /Action/i }));
+      await user.click(screen.getByRole('button', { name: /Action/i }));
       expect(actionFnMock).toBeCalledWith(
         selectedIds,
         true,
@@ -94,15 +94,15 @@ describe('Datatable/BatchActions', () => {
     });
 
     it('should call onClick handler in dropdown action with correct parameters', async () => {
-      setup(<BatchActions actions={actions} />);
+      const { user } = setup(<BatchActions actions={actions} />);
       act(() => {
         DatatableStore.update((s) => {
           s.selectedIds = selectedIds;
         });
       });
 
-      fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
-      fireEvent.click(screen.getByRole('button', { name: /Dropdown Item/i }));
+      await user.click(screen.getByRole('button', { name: /Dropdown/i }));
+      await user.click(screen.getByRole('button', { name: /Dropdown Item/i }));
 
       await waitFor(() => {
         expect(screen.queryByTestId('dropdown-pane')).not.toBeInTheDocument();
@@ -117,9 +117,9 @@ describe('Datatable/BatchActions', () => {
   });
   describe('given subactions are defined', () => {
     it('should create dropdown button', async () => {
-      setup(<BatchActions actions={actions} />);
+      const { user } = setup(<BatchActions actions={actions} />);
 
-      fireEvent.click(screen.getByRole('button', { name: /Dropdown/i }));
+      await user.click(screen.getByRole('button', { name: /Dropdown/i }));
 
       await waitFor(() => {
         expect(screen.getByTestId('dropdown-pane')).toBeInTheDocument();
