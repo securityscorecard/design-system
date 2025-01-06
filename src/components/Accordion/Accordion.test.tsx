@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Accordion, { filterState } from './Accordion';
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 
 describe('Accordion/filterState', () => {
   it('should correctly add an item to the state if it is not already included and `isCollapsedOnOpen` is false', () => {

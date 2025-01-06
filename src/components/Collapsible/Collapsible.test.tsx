@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import { screen } from '@testing-library/react';
 import { type Mock, vi } from 'vitest';
 
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import { Collapsible } from './index';
 
 const ControllingComponent = ({

@@ -3,11 +3,11 @@ import { screen } from '@testing-library/react';
 import { map } from 'ramda';
 
 import { SegmentedToggle, SegmentedToggleItem } from './SegmentedToggle';
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 
 describe('SegmentedToggle', () => {
   it('should determine selected tab and input element by strict equality', () => {
-    renderWithProviders(
+    setup(
       <SegmentedToggle group="default">
         <SegmentedToggleItem itemId="input1" label="One" value="1" />
         <SegmentedToggleItem itemId="input2" label="Two" value="2" />
@@ -49,7 +49,7 @@ describe('SegmentedToggle', () => {
 
     const Items = map(Item);
 
-    renderWithProviders(
+    setup(
       <SegmentedToggle group="default">{Items(itemsArray)}</SegmentedToggle>,
     );
 

@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
 import ListView from './ListView';
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 
 const data = [{ name: 'abc' }, { name: 'xyz' }];
 describe('ListView', () => {

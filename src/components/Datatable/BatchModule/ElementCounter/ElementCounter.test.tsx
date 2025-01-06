@@ -1,26 +1,26 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 
 import ElementCounter, { getCounterContent } from './ElementCounter';
-import { renderWithProviders } from '../../../../utils/tests/renderWithProviders';
+import { setup } from '../../../../utils/tests/setup';
 import { DatatableStore, datatableInitialState } from '../../Datatable.store';
 
 describe('getCounterContent', () => {
   it('should return No Data when "totalLength" is 0', () => {
-    render(getCounterContent(0));
+    setup(getCounterContent(0));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('No data');
   });
   it('should return No Data when "totalLength" is 0 and "selectedLength" is greater than 0', () => {
-    render(getCounterContent(0, 500));
+    setup(getCounterContent(0, 500));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('No data');
   });
 
   it('should return correct count when "totalLength" is greater than 0', () => {
-    render(getCounterContent(1000));
+    setup(getCounterContent(1000));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('1K');
   });
 
   it('should return correct count when "totalLength" and "selectedLength" are greater than 0', () => {
-    render(getCounterContent(1000, 500));
+    setup(getCounterContent(1000, 500));
     expect(screen.getByTestId('counter-content')).toHaveTextContent(
       '500 of 1K selected',
     );
@@ -33,7 +33,7 @@ describe('Datatable/ElementCounter', () => {
   });
 
   it('should show Select None button when there are selected rows', () => {
-    renderWithProviders(
+    setup(
       <ElementCounter dataSize={1000} hasOnlyPerPageSelection hasSelection />,
     );
 
@@ -55,7 +55,7 @@ describe('Datatable/ElementCounter', () => {
   describe('DatatableStore actions', () => {
     describe('given selection dropdown is visible', () => {
       it('should set "hasExclusiveSelection" to "true" on Select All click', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -69,7 +69,7 @@ describe('Datatable/ElementCounter', () => {
         expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(true);
       });
       it('should set "hasExclusiveSelection" to "false" on Select None click', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -89,7 +89,7 @@ describe('Datatable/ElementCounter', () => {
         expect(DatatableStore.getRawState().hasExclusiveSelection).toBe(false);
       });
       it('should set "shouldResetSelectedRows" to "true" on Select All click', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -103,7 +103,7 @@ describe('Datatable/ElementCounter', () => {
         expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
       });
       it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -117,7 +117,7 @@ describe('Datatable/ElementCounter', () => {
         expect(DatatableStore.getRawState().shouldResetSelectedRows).toBe(true);
       });
       it('should react on "selectedIds" change', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -136,7 +136,7 @@ describe('Datatable/ElementCounter', () => {
         expect(counter).toHaveTextContent('3 of 1K selected');
       });
       it('should react on "hasExclusiveSelection" change', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection
@@ -158,7 +158,7 @@ describe('Datatable/ElementCounter', () => {
     });
     describe('given selection dropdown is hidden', () => {
       it('should set "shouldResetSelectedRows" to "true" on Select None click', () => {
-        renderWithProviders(
+        setup(
           <ElementCounter
             dataSize={1000}
             hasSelection

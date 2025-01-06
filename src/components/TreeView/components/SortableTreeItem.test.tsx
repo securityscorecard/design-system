@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { useSortable } from '@dnd-kit/sortable';
 import { type Mock, vi } from 'vitest';
 
 import SortableTreeItem from './SortableTreeItem';
+import { setup } from '../../../utils/tests/setup';
 
 vi.mock('@dnd-kit/sortable', () => ({
   useSortable: vi.fn(),
@@ -23,7 +24,7 @@ describe('SortableTreeItem', () => {
       setDroppableNodeRef: vi.fn(),
     });
 
-    render(
+    setup(
       <SortableTreeItem
         id="test-id"
         depth={1}

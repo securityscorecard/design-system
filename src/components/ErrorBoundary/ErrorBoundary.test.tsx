@@ -3,7 +3,7 @@ import { vi } from 'vitest';
 
 import ErrorBoundary, { DEFAULT_CONTENT, DEFAULT_TITLE } from './ErrorBoundary';
 import { ErrorBoundaryProps } from './ErrorBoundary.types';
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 
 describe('ErrorBoundary Component', () => {
   it('should render component properly', () => {

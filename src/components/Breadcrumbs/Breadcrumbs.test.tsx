@@ -1,12 +1,12 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 
-import { renderWithProviders } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import BreadcrumbItem from './BreadcrumbItem';
 import Breadcrumbs from './Breadcrumbs';
 
 describe('Breadcrumbs', () => {
   it('should not show a dropdown button when breadcrumb have less than 5 items', () => {
-    renderWithProviders(
+    setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
         <BreadcrumbItem href="#">Parent</BreadcrumbItem>
@@ -19,7 +19,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should show a dropdown button when breadcrumb have more than 5 items', () => {
-    renderWithProviders(
+    setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
         <BreadcrumbItem href="#">Parent1</BreadcrumbItem>
@@ -42,7 +42,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should show all items inside dropdown when dropdown is opened', async () => {
-    renderWithProviders(
+    setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Root</BreadcrumbItem>
         <BreadcrumbItem href="#">Parent1</BreadcrumbItem>
@@ -70,7 +70,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should show items within dropdown using correct order ', async () => {
-    renderWithProviders(
+    setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
         <BreadcrumbItem href="#">Link2</BreadcrumbItem>
@@ -97,7 +97,7 @@ describe('Breadcrumbs', () => {
   });
 
   it('should be the last breadcrumb item not a link', async () => {
-    renderWithProviders(
+    setup(
       <Breadcrumbs>
         <BreadcrumbItem href="#">Link1</BreadcrumbItem>
         <BreadcrumbItem href="#">Link2</BreadcrumbItem>

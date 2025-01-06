@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { setup } from '../../utils/tests/renderWithProviders';
+import { setup } from '../../utils/tests/setup';
 import PageButtons, { calculatePagePositions } from './PageButtons';
 
 describe('calculatePageButtons', () => {

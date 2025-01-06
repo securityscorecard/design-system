@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { setup } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 

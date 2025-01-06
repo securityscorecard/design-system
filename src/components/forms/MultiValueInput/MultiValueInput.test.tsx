@@ -2,7 +2,7 @@ import { act, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import MultiValueInput from './MultiValueInput';
-import { setup } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 
 const mockValueAdd = vi.fn();
 const mockValueRemove = vi.fn();

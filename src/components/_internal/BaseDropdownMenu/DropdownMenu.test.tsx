@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { renderWithProviders } from '../../../utils/tests/renderWithProviders';
+import { setup } from '../../../utils/tests/setup';
 import DropdownMenu from './DropdownMenu';
 
 const actions = [
@@ -14,7 +14,7 @@ const actions = [
 
 describe('_internal/BaseDropdownMenu', () => {
   it('should toggle pane on click', async () => {
-    renderWithProviders(
+    setup(
       <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -41,7 +41,7 @@ describe('_internal/BaseDropdownMenu', () => {
     expect(dropdownItem).not.toBeInTheDocument();
   });
   it('should close pane on click outside of Dropdown', async () => {
-    renderWithProviders(
+    setup(
       <DropdownMenu actions={actions} defaultIsOpen>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -58,7 +58,7 @@ describe('_internal/BaseDropdownMenu', () => {
     ).not.toBeInTheDocument();
   });
   it('should create "button" tag when "onClick" prop is provided', async () => {
-    renderWithProviders(
+    setup(
       <DropdownMenu actions={actions}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -77,7 +77,7 @@ describe('_internal/BaseDropdownMenu', () => {
   });
   it('should create "a" tag when "href" prop is provided', async () => {
     const href = 'http://example.com';
-    renderWithProviders(
+    setup(
       <DropdownMenu actions={[{ ...actions[0], href }]}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -102,7 +102,7 @@ describe('_internal/BaseDropdownMenu', () => {
       search: '?sort=name',
       hash: '#the-hash',
     };
-    renderWithProviders(
+    setup(
       <DropdownMenu actions={[{ ...actions[0], to }]}>
         <button type="button">Toggle Dropdown</button>
       </DropdownMenu>,
@@ -127,7 +127,7 @@ describe('_internal/BaseDropdownMenu', () => {
 
   describe('given children is function', () => {
     it('should pass isPaneDisplayed as a argument', async () => {
-      renderWithProviders(
+      setup(
         <DropdownMenu actions={actions}>
           {(isPaneDisplayed) => (
             <button type="button">{isPaneDisplayed ? 'Hide' : 'Show'}</button>
