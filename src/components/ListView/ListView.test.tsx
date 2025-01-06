@@ -5,7 +5,7 @@ import ListView from './ListView';
 
 const data = [{ name: 'abc' }, { name: 'xyz' }];
 describe('ListView', () => {
-  it('should select row on click', () => {
+  it('should select row on click', async () => {
     render(
       <ListView
         data={data}
@@ -16,11 +16,11 @@ describe('ListView', () => {
 
     const checkbox = screen.getAllByRole('checkbox')[0];
 
-    userEvent.click(checkbox);
+    await userEvent.click(checkbox);
 
     expect(checkbox).toBeChecked();
   });
-  it('should navigate to next page', () => {
+  it('should navigate to next page', async () => {
     render(
       <ListView
         data={data}
@@ -34,7 +34,7 @@ describe('ListView', () => {
       />,
     );
 
-    userEvent.click(
+    await userEvent.click(
       screen.getByRole('button', { name: /Go to the next page/i }),
     );
 

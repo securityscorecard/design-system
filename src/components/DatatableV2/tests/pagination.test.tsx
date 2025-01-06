@@ -51,7 +51,7 @@ describe('DatatableV2/sorting', () => {
   });
 
   describe('when rows per page are enabled', () => {
-    it('should correctly change rows per page count', () => {
+    it('should correctly change rows per page count', async () => {
       renderWithProviders(
         <Datatable
           data={data}
@@ -65,7 +65,10 @@ describe('DatatableV2/sorting', () => {
 
       expect(screen.getAllByRole('row')).toHaveLength(4); // 3 data rows + 1 header row
 
-      userEvent.selectOptions(screen.getByLabelText('Rows per page'), '1');
+      await userEvent.selectOptions(
+        screen.getByLabelText('Rows per page'),
+        '1',
+      );
       expect(screen.getAllByRole('row')).toHaveLength(2); // 1 data row + 1 header row
     });
   });

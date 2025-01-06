@@ -1,21 +1,9 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { type Mock, vi } from 'vitest';
+import { vi } from 'vitest';
 
 import { renderWithProviders } from '../../utils/tests/renderWithProviders';
 import DateRangePicker from './DateRangePicker';
-
-const checkInputClick = (
-  inputStartDate: HTMLElement,
-  handleChangeDate: Mock,
-) => {
-  userEvent.click(inputStartDate);
-
-  // Click on a date
-  fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
-
-  expect(handleChangeDate).toHaveBeenCalled();
-};
 
 describe('DateRangePicker', () => {
   it('should date range picker popping up when user clicks on the input ', async () => {
@@ -30,20 +18,20 @@ describe('DateRangePicker', () => {
       />,
     );
 
-    userEvent.click(screen.getByPlaceholderText('Start date'));
+    await userEvent.click(screen.getByPlaceholderText('Start date'));
 
     await waitFor(() => {
       expect(screen.getAllByText(/March 2021/i)[0]).toBeInTheDocument();
     });
 
-    userEvent.click(screen.getByPlaceholderText('End date'));
+    await userEvent.click(screen.getByPlaceholderText('End date'));
 
     await waitFor(() => {
       expect(screen.getAllByText(/March 2021/i)[1]).toBeInTheDocument();
     });
   });
 
-  it('should call onchange when a start date or end date is picked', () => {
+  it('should call onchange when a start date or end date is picked', async () => {
     const handleChangeDate = vi.fn();
 
     renderWithProviders(
@@ -57,12 +45,22 @@ describe('DateRangePicker', () => {
     const inputStartDate = screen.getByPlaceholderText('Start date');
 
     // Opens date picker
-    checkInputClick(inputStartDate, handleChangeDate);
+    await userEvent.click(inputStartDate);
+
+    // Click on a date
+    fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
+
+    expect(handleChangeDate).toHaveBeenCalled();
 
     const inputEndDate = screen.getByPlaceholderText('End date');
 
     // Opens date picker
-    checkInputClick(inputEndDate, handleChangeDate);
+    await userEvent.click(inputEndDate);
+
+    // Click on a date
+    fireEvent.click(screen.getByLabelText('Choose Friday, March 12th, 2021'));
+
+    expect(handleChangeDate).toHaveBeenCalled();
   });
 
   it('should determine selected date by input value', () => {
@@ -126,7 +124,7 @@ describe('DateRangePicker', () => {
 
     // test a date outside the range
 
-    userEvent.click(screen.getByPlaceholderText('Start date'));
+    await userEvent.click(screen.getByPlaceholderText('Start date'));
 
     await waitFor(() => {
       const disabledButton = screen.getByLabelText(

@@ -22,9 +22,10 @@
     "strict": false, // TODO: enable when issue are resolved
     "noUnusedLocals": false, // TODO: enable when explicit React imports are removed
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vitest/globals", "@testing-library/jest-dom", "jest-styled-components"]
   },
-  "include": ["src", ".storybook/blocks"],
+  "include": ["src", ".storybook/blocks", "./jest-setup.ts"],
   "exclude": [
     "node_modules",
     "build",

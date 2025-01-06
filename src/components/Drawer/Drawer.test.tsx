@@ -131,18 +131,18 @@ describe('Drawer', () => {
     );
     // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
-      userEvent.click(screen.getByRole('button', { name: /Trigger/i }));
+      await userEvent.click(screen.getByRole('button', { name: /Trigger/i }));
     });
 
     const dropdownItem = screen.getByRole('button', { name: /OnClick/i });
     expect(dropdownItem).toBeInTheDocument();
 
-    userEvent.click(dropdownItem);
+    await userEvent.click(dropdownItem);
 
     expect(dropdownClickMock).toHaveBeenCalled();
   });
 
-  it('should should trigger the onClose when clicking on overlay', () => {
+  it('should should trigger the onClose when clicking on overlay', async () => {
     const onCloseMock = vi.fn();
     renderWithProviders(
       <Drawer
@@ -155,7 +155,7 @@ describe('Drawer', () => {
       </Drawer>,
     );
 
-    userEvent.click(screen.getByTestId('dialog-overlay'));
+    await userEvent.click(screen.getByTestId('dialog-overlay'));
 
     expect(onCloseMock).toHaveBeenCalled();
   });

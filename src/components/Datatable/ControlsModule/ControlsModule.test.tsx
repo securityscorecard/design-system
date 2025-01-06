@@ -228,7 +228,7 @@ describe('Datatable/ControlsModule', () => {
       expect(DatatableStore.getRawState().filters).toMatchObject(filterState);
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(true);
     });
-    it('should store filtering state when on filter Apply button', () => {
+    it('should store filtering state when on filter Apply button', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -240,7 +240,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      userEvent.type(screen.getByPlaceholderText('String'), 'text');
+      await userEvent.type(screen.getByPlaceholderText('String'), 'text');
       fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
 
       expect(DatatableStore.getRawState().filters).toMatchObject([
@@ -255,7 +255,7 @@ describe('Datatable/ControlsModule', () => {
       ]);
       expect(DatatableStore.getRawState().hasAppliedFilters).toBe(true);
     });
-    it('should clear filtering state when on filter Clear all button', () => {
+    it('should clear filtering state when on filter Clear all button', async () => {
       renderWithProviders(
         <ControlsModule
           {...defaultControlsConfig}
@@ -267,7 +267,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      userEvent.type(screen.getByPlaceholderText('String'), 'text');
+      await userEvent.type(screen.getByPlaceholderText('String'), 'text');
       fireEvent.click(screen.getByRole('button', { name: /Apply/i }));
       fireEvent.click(screen.getByRole('button', { name: /Clear all/i }));
 
@@ -286,7 +286,10 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      userEvent.type(screen.getByPlaceholderText('Search'), `${query}{enter}`);
+      await userEvent.type(
+        screen.getByPlaceholderText('Search'),
+        `${query}{enter}`,
+      );
 
       await waitFor(() =>
         expect(DatatableStore.getRawState().query).toBe(query),
@@ -304,7 +307,7 @@ describe('Datatable/ControlsModule', () => {
         />,
       );
 
-      userEvent.type(screen.getByRole('searchbox'), `${query}{enter}`);
+      await userEvent.type(screen.getByRole('searchbox'), `${query}{enter}`);
       fireEvent.click(
         screen.getByRole('button', { name: /Clear search value/i }),
       );
