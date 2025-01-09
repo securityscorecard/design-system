@@ -12,6 +12,7 @@ import IndeterminateCheckbox from '../inputs/IndeterminateCheckbox';
 import SettingsItems from './SettingsItems';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
 import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
+import { Drawer } from '../../Drawer';
 
 const SettingsRoot = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
     getLeftLeafColumns,
     getRightLeafColumns,
     getState,
-    options: { enableColumnPinning, enableHiding },
+    options: { enableColumnPinning, enableHiding, columnSelectorAsDrawer },
     setColumnOrder,
     setColumnPinning,
     setColumnVisibility,
@@ -154,6 +155,83 @@ const Settings = <D,>({ table }: { table: DatatableInstance<D> }) => {
       pinned ? { left: getAllLeafColumns().map((col) => col.id) } : {},
     );
   };
+
+  if (columnSelectorAsDrawer) {
+    return (
+      <Drawer
+        adornment={<Icon name="columns-3" />}
+        title={t('sscds|datatable.settings.title')}
+        onClose={() => setShowColumnSettings(false)}
+      >
+        <Stack gap="md">
+          <Inline gap="sm" stretch="start">
+            <div>
+              <Button
+                size="sm"
+                variant="subtle"
+                onClick={() => {
+                  setColumnPinning(initialState.columnPinning ?? {});
+                  setColumnVisibility(initialState.columnVisibility ?? {});
+                  setColumnOrder(initialState.columnOrder ?? []);
+                }}
+              >
+                {t('sscds|datatable.settings.reset')}
+              </Button>
+            </div>
+            <Inline gap="sm" stretch="all">
+              {enableHiding && (
+                <Stack gap="1x" justify="center">
+                  <Icon name="eye" size="md" hasFixedSize />
+                  <div className="ds-table-checkbox-wrapper">
+                    <IndeterminateCheckbox
+                      aria-label={
+                        getColumnsVisibilityInfo().areAllColumnsVisible
+                          ? t('sscds|datatable.settings.hiding.hideAll')
+                          : t('sscds|datatable.settings.hiding.showAll')
+                      }
+                      checked={getColumnsVisibilityInfo().areAllColumnsVisible}
+                      indeterminate={
+                        getColumnsVisibilityInfo().areSomeColumnsVisible
+                      }
+                      onChange={(e) =>
+                        handleToggleAllColumnsVisibility(e.target.checked)
+                      }
+                    />
+                  </div>
+                </Stack>
+              )}
+              {enableColumnPinning && (
+                <Stack gap="1x" justify="center">
+                  <Icon name="thumbtack" size="md" hasFixedSize />
+                  <div className="ds-table-checkbox-wrapper">
+                    <IndeterminateCheckbox
+                      aria-label={
+                        getColumnsPinnabilityInfo().areAllColumnsPinned
+                          ? t('sscds|datatable.settings.pinnig.unpinAll')
+                          : t('sscds|datatable.settings.pinnig.pinAll')
+                      }
+                      checked={getColumnsPinnabilityInfo().areAllColumnsPinned}
+                      indeterminate={
+                        getColumnsPinnabilityInfo().areSomeColumnsPinned
+                      }
+                      onChange={(e) =>
+                        handleToggleAllColumnsPinnability(e.target.checked)
+                      }
+                    />
+                  </div>
+                </Stack>
+              )}
+            </Inline>
+          </Inline>
+          <SettingsItems
+            allColumns={allColumns}
+            canHideMoreColumns={canHideMoreColumns}
+            table={table}
+          />
+        </Stack>
+      </Drawer>
+    );
+  }
 
   return (
     <SettingsRoot className="ds-table-settings-panel">

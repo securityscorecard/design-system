@@ -209,6 +209,7 @@ export interface ParsedDatatableOptions<D>
   defaultDisplayColumn?: Partial<DatatableColumnDef<D>> & {
     columnDefType: 'display';
   };
+  columnSelectorAsDrawer?: DatatableOptions<D>['columnSelectorAsDrawer'];
   enableBatchRowSelection?: DatatableOptions<D>['enableBatchRowSelection'];
   enableColumnActions?: DatatableOptions<D>['enableColumnActions'];
   enableColumnOrdering?: DatatableOptions<D>['enableColumnOrdering'];
@@ -463,6 +464,12 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableTopToolbar?: boolean;
+  /**
+   *  Enables/disables the column selector as a drawer.
+   *
+   *  @default false
+   */
+  columnSelectorAsDrawer?: boolean;
   /**
    * Unique table identifier. Used as id for storing table state to LocalStorage when enablePersistentState is enabled
    */
