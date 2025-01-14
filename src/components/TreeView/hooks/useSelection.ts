@@ -7,6 +7,7 @@ interface UseSelectionProps<D> {
   selectedIds?: string[];
   defaultSelectedIds?: string[];
   onSelectionChange?: (selectedIds: string[]) => void;
+  hasRecursiveSelection?: boolean;
 }
 
 export function useSelection<D>({
@@ -14,6 +15,7 @@ export function useSelection<D>({
   selectedIds: controlledSelectedIds,
   defaultSelectedIds = [],
   onSelectionChange,
+  hasRecursiveSelection = false,
 }: UseSelectionProps<D>) {
   // Internal state for uncontrolled mode
   const [internalSelectedIds, setInternalSelectedIds] = useState<Set<string>>(
@@ -50,8 +52,12 @@ export function useSelection<D>({
     return relationships;
   }, [items]);
 
-  // Calculate indeterminate states
+  // Calculate indeterminate states only if recursive selection is enabled
   const indeterminateItems = useMemo(() => {
+    if (!hasRecursiveSelection) {
+      return new Set<string>();
+    }
+
     const indeterminate = new Set<string>();
 
     // Helper function to check if any descendant is selected
@@ -99,7 +105,7 @@ export function useSelection<D>({
     });
 
     return indeterminate;
-  }, [items, selectedItems, itemRelationships]);
+  }, [items, selectedItems, itemRelationships, hasRecursiveSelection]);
 
   // Update controlled state when it changes
   useEffect(() => {
@@ -113,54 +119,53 @@ export function useSelection<D>({
     (itemId: string, selected: boolean) => {
       const newSelection = new Set(selectedItems);
 
-      // Helper function to get all descendant ids
-      const getDescendantIds = (id: string): string[] => {
-        const { childIds } = itemRelationships.get(id) || {
-          childIds: [] as string[],
-        };
-        return childIds.reduce(
-          (acc, childId) => [...acc, childId, ...getDescendantIds(childId)],
-          [],
-        );
-      };
-
-      // Helper function to update parent selection state
-      const updateParentState = (id: string) => {
-        const { parentId } = itemRelationships.get(id) || { parentId: null };
-        if (parentId) {
-          const { childIds } = itemRelationships.get(parentId) || {
-            childIds: [],
+      if (hasRecursiveSelection) {
+        // Existing recursive selection logic
+        const getDescendantIds = (id: string): string[] => {
+          const { childIds } = itemRelationships.get(id) || {
+            childIds: [] as string[],
           };
-          const allChildrenSelected = childIds.every((childId) =>
-            newSelection.has(childId),
+          return childIds.reduce(
+            (acc, childId) => [...acc, childId, ...getDescendantIds(childId)],
+            [],
           );
+        };
 
-          if (allChildrenSelected) {
-            newSelection.add(parentId);
-          } else {
-            newSelection.delete(parentId);
+        const updateParentState = (id: string) => {
+          const { parentId } = itemRelationships.get(id) || { parentId: null };
+          if (parentId) {
+            const { childIds } = itemRelationships.get(parentId) || {
+              childIds: [],
+            };
+            const allChildrenSelected = childIds.every((childId) =>
+              newSelection.has(childId),
+            );
+
+            if (allChildrenSelected) {
+              newSelection.add(parentId);
+            } else {
+              newSelection.delete(parentId);
+            }
+
+            updateParentState(parentId);
           }
+        };
 
-          // Continue updating up the tree
-          updateParentState(parentId);
-        }
-      };
+        const descendantIds = getDescendantIds(itemId);
+        const affectedIds = [itemId, ...descendantIds];
 
-      // Get all affected IDs (current item and its descendants)
-      const descendantIds = getDescendantIds(itemId);
-      const affectedIds = [itemId, ...descendantIds];
+        affectedIds.forEach((id) => {
+          if (selected) {
+            newSelection.add(id);
+          } else {
+            newSelection.delete(id);
+          }
+        });
 
-      // Update selection state for all affected IDs
-      affectedIds.forEach((id) => {
-        if (selected) {
-          newSelection.add(id);
-        } else {
-          newSelection.delete(id);
-        }
-      });
-
-      // Update parent states
-      updateParentState(itemId);
+        updateParentState(itemId);
+      } else {
+        selected ? newSelection.add(itemId) : newSelection.delete(itemId);
+      }
 
       // Update state and trigger callback
       if (controlledSelectedIds === undefined) {
@@ -174,6 +179,7 @@ export function useSelection<D>({
       itemRelationships,
       controlledSelectedIds,
       onSelectionChange,
+      hasRecursiveSelection,
     ],
   );
 

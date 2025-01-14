@@ -48,6 +48,12 @@ export interface TreeViewProps<D> {
   /** Whether rows can be selected with checkboxes */
   isSelectable?: boolean;
 
+  /** Whether selection of a parent row should automatically select/deselect all its descendants.
+   * When true, selecting a parent selects all children, and parent shows indeterminate state when some children are selected.
+   * When false, each row's selection state is independent.
+   */
+  hasRecursiveSelection?: boolean;
+
   /** Callback fired when drag operation is cancelled
    */
   onDragCancel?: (event: DragCancelEvent) => void;
