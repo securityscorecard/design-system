@@ -18,6 +18,7 @@ import type { TreeViewProps, TreeViewRow } from './TreeView.types';
 import SortableTreeItem from './components/SortableTreeItem';
 import { Surface } from '../layout';
 import { useDnD } from './hooks/useDnD';
+import { useSelection } from './hooks/useSelection';
 
 const measuring = {
   droppable: {
@@ -53,6 +54,10 @@ function TreeView<D>({
   rowHeight = 56,
   isCollapsible = true,
   isSortable = true,
+  isSelectable = false,
+  selectedIds,
+  defaultSelectedIds,
+  onSelectionChange,
   renderPrimaryContent,
   renderSecondaryContent,
   onDragCancel,
@@ -85,6 +90,14 @@ function TreeView<D>({
     handleDragOver,
     handleDragStart,
   } = useDnD({ items, setItems, onDragEnd });
+
+  const { selectedItems, indeterminateItems, handleSelectionChange } =
+    useSelection({
+      items: flattenedItems,
+      selectedIds,
+      defaultSelectedIds,
+      onSelectionChange,
+    });
 
   const handleCollapse = (id: string) => {
     setItems((prevItems) =>
@@ -139,6 +152,11 @@ function TreeView<D>({
                   depth={id === activeId && projected ? projected.depth : depth}
                   id={id}
                   isCollapsible={isCollapsible}
+                  isIndeterminate={
+                    isSelectable ? indeterminateItems.has(id) : undefined
+                  }
+                  isSelectable={isSelectable}
+                  isSelected={isSelectable ? selectedItems.has(id) : undefined}
                   isSortable={isSortable}
                   renderPrimaryContent={renderPrimaryContent}
                   renderSecondaryContent={renderSecondaryContent}
@@ -152,6 +170,9 @@ function TreeView<D>({
                       : undefined
                   }
                   onRowClick={onRowClick}
+                  onSelectionChange={
+                    isSelectable ? handleSelectionChange : undefined
+                  }
                 />
               );
             })}
@@ -162,12 +183,15 @@ function TreeView<D>({
                 childCount={getSubRowCount(items, activeId) + 1}
                 depth={activeItem.depth}
                 id={activeId}
+                isIndeterminate={indeterminateItems.has(activeId)}
+                isSelected={selectedItems.has(activeId)}
                 isSortable={isSortable}
                 renderPrimaryContent={renderPrimaryContent}
                 row={activeItem}
                 rowHeight={rowHeight}
                 value={activeItem.id.toString()}
                 isClone
+                onSelectionChange={handleSelectionChange}
               />
             ) : null}
           </DragOverlay>

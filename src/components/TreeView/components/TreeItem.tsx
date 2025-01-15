@@ -8,6 +8,7 @@ import CollapsibleHandle from './CollapsibleHandle';
 import { TreeItemProps } from '../TreeView.types';
 import RowActions from './RowActions';
 import IconButton from '../../ButtonV2/IconButton';
+import { Checkbox } from '../../forms/Checkbox';
 
 const TreeItemRoot = styled.li`
   list-style: none;
@@ -132,7 +133,10 @@ function TreeItem<D>({
   isGhost,
   isSortable,
   isCollapsible,
+  isSelected,
+  isIndeterminate,
   onCollapse,
+  onSelectionChange,
   renderPrimaryContent,
   renderSecondaryContent,
   row,
@@ -145,6 +149,7 @@ function TreeItem<D>({
   activeRowId,
   onActiveRowIdChange,
   onRowClick,
+  isSelectable,
   ...props
 }: TreeItemProps<D>) {
   return (
@@ -191,6 +196,19 @@ function TreeItem<D>({
                   size="sm"
                   style={{ cursor: 'grab' }}
                   variant="ghost"
+                />
+              )}
+              {isSelectable && (
+                <Checkbox
+                  checkboxId={`checkbox-${id}`}
+                  checked={isSelected}
+                  isIndeterminate={isIndeterminate}
+                  name={`checkbox-${id}`}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    onSelectionChange?.(id, !isSelected);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                 />
               )}
               {isCollapsible && (

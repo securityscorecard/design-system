@@ -83,7 +83,6 @@ export const Playground: Story = {
   parameters: {
     screenshot: { skip: true },
   },
-  tags: ['new'],
 };
 
 export const ContentRenderers: Story = {
@@ -109,6 +108,50 @@ export const DisabledSortingAndCollapsing: Story = {
   args: {
     isSortable: false,
     isCollapsible: false,
+  },
+};
+
+export const EnabledSelection: Story = {
+  args: {
+    isSelectable: true,
+    onSelectionChange: action('select'),
+  },
+  tags: ['new'],
+};
+export const WithSelectedRows: Story = {
+  args: {
+    ...EnabledSelection.args,
+    defaultSelectedIds: [
+      '07130ea7-598b-4e23-b968-c33f194b2ee9',
+      'a1edd975-1154-4a5a-8b9a-4e8761fbdcb8',
+      'ee85c1e5-5e14-43a6-90d5-d40288673b14',
+      'f5d6b48d-95f4-4984-824c-210f6c63400d',
+    ],
+  },
+  tags: ['new'],
+};
+
+export const ControlledSelection: Story = {
+  args: {
+    isSelectable: true,
+  },
+  render: function Render(args) {
+    const [selected, setSelected] = useState([]);
+
+    return (
+      <TreeView
+        {...args}
+        selectedIds={selected}
+        onSelectionChange={(ids) => {
+          setSelected(ids);
+          action('select')(ids);
+        }}
+      />
+    );
+  },
+  tags: ['new'],
+  parameters: {
+    screenshot: { skip: true },
   },
 };
 

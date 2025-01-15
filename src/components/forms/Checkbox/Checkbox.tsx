@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { add, identity, memoizeWith, pipe } from 'ramda';
+import { identity, memoizeWith, pipe } from 'ramda';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
 
@@ -11,6 +11,7 @@ import { Label } from '../Label';
 import { TogglingInputProps } from '../types/forms.types';
 import { CheckboxProps } from './Checkbox.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
+import { mergeRefs } from '../../../utils/mergeRefs';
 
 const CheckboxWrapper = styled.div`
   display: flex;
@@ -119,7 +120,9 @@ const CheckboxLabel = styled(Label)<{ isDisabled: boolean }>`
   padding-top: 0;
   padding-bottom: 0;
   padding-left: ${({ theme }) =>
-    pipe(getFormStyle('toggleSize'), add(theme.space.sm), pxToRem)({ theme })};
+    `calc(${pxToRem(
+      getFormStyle('toggleSize', { theme }),
+    )} + var(--sscds-space-2x))`};
   ${getLabelStyles};
 
   ${({ isDisabled }) =>
@@ -153,12 +156,19 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     },
     ref,
   ) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const hasLabel = isNotUndefined(label);
+
+    useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.indeterminate = isIndeterminate;
+      }
+    }, [isIndeterminate]);
 
     return (
       <CheckboxWrapper className={cls(CLX_COMPONENT, className)}>
         <CheckboxInput
-          ref={ref}
+          ref={mergeRefs(ref, inputRef)}
           disabled={isDisabled}
           id={checkboxId}
           isIndeterminate={isIndeterminate}
