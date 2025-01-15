@@ -130,6 +130,19 @@ export const WithSelectedRows: Story = {
   },
   tags: ['new'],
 };
+export const WithRecursiveSelection: Story = {
+  args: {
+    ...EnabledSelection.args,
+    hasRecursiveSelection: true,
+    defaultSelectedIds: [
+      '07130ea7-598b-4e23-b968-c33f194b2ee9',
+      'a1edd975-1154-4a5a-8b9a-4e8761fbdcb8',
+      'ee85c1e5-5e14-43a6-90d5-d40288673b14',
+      'f5d6b48d-95f4-4984-824c-210f6c63400d',
+    ],
+  },
+  tags: ['new'],
+};
 
 export const ControlledSelection: Story = {
   args: {

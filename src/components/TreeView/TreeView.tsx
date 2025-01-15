@@ -55,6 +55,7 @@ function TreeView<D>({
   isCollapsible = true,
   isSortable = true,
   isSelectable = false,
+  hasRecursiveSelection = false,
   selectedIds,
   defaultSelectedIds,
   onSelectionChange,
@@ -97,6 +98,7 @@ function TreeView<D>({
       selectedIds,
       defaultSelectedIds,
       onSelectionChange,
+      hasRecursiveSelection,
     });
 
   const handleCollapse = (id: string) => {
@@ -153,7 +155,9 @@ function TreeView<D>({
                   id={id}
                   isCollapsible={isCollapsible}
                   isIndeterminate={
-                    isSelectable ? indeterminateItems.has(id) : undefined
+                    isSelectable && hasRecursiveSelection
+                      ? indeterminateItems.has(id)
+                      : undefined
                   }
                   isSelectable={isSelectable}
                   isSelected={isSelectable ? selectedItems.has(id) : undefined}
