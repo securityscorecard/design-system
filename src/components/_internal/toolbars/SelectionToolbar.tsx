@@ -41,23 +41,8 @@ const SelectionRoot = styled(Surface)`
   bottom: var(--sscds-space-4x);
   margin: var(--sscds-space-4x) var(--sscds-space-4x) 0;
 `;
-function SelectionToolbar<Data>({ instance }: { instance: Instance<Data> }) {
-  const {
-    options: { renderRowSelectionActions, rowCount },
-    getPrePaginationRowModel,
-    getSelectedRowModel,
-    toggleAllRowsSelected,
-  } = instance;
-  const { t, lng } = useSafeTranslation();
 
-  const selectedRowsCount = getSelectedRowsCount<Data>(instance);
-  const selectedRows = getSelectedRowModel().rows;
-  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
-
-  if (selectedRowsCount === 0) {
-    return null;
-  }
-
+function SelectionToolbarRoot({ children }: { children: ReactNode }) {
   return (
     <SelectionRoot
       className="ds-table-selection-toolbar"
@@ -71,56 +56,113 @@ function SelectionToolbar<Data>({ instance }: { instance: Instance<Data> }) {
     >
       <Padbox paddingSize="md">
         <Inline align="center" gap="md" justify="space-between">
-          <Inline
-            align="center"
-            className="ds-table-selection-overview"
-            gap="sm"
-          >
-            <div>
-              <SafeTrans
-                components={{
-                  bold: (
-                    <Strong className="ds-table-selection-currently-selected">
-                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                      {{ selectedRowsCount } as any}
-                    </Strong>
-                  ),
-                }}
-                i18nKey="sscds|datatable.selection.itemCounter"
-                values={{
-                  count: totalRowCount,
-                  totalRowCount: abbreviateNumber(totalRowCount, lng),
-                  selectedRowCount: selectedRowsCount.toLocaleString(lng),
-                }}
-              />
-            </div>
-            <Button
-              className="ds-table-selection-clear-button"
-              size="sm"
-              variant="ghost"
-              onClick={() => toggleAllRowsSelected(false)}
-            >
-              {t('sscds|datatable.selection.clearSelection')}
-            </Button>
-          </Inline>
-          <Inline
-            align="center"
-            className="ds-table-selection-actions-container"
-            gap="md"
-            justify="flex-end"
-          >
-            {renderRowSelectionActions?.({
-              selectedRows: pluck('original', selectedRows),
-              totalRowCount,
-              table: instance as unknown as Table<Data>,
-            })}
-          </Inline>
+          {children}
         </Inline>
       </Padbox>
     </SelectionRoot>
   );
 }
+function SelectionToolbarItemCounter({
+  selectedRowsCount,
+  totalRowCount,
+  deselectAllRows,
+}: {
+  selectedRowsCount: number;
+  totalRowCount: number;
+  deselectAllRows: () => void;
+}) {
+  const { t, lng } = useSafeTranslation();
 
-SelectionToolbar.displayName = 'SelectionToolbar';
+  return (
+    <Inline align="center" className="ds-table-selection-overview" gap="sm">
+      <div>
+        <SafeTrans
+          components={{
+            bold: (
+              <Strong className="ds-table-selection-currently-selected">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {{ selectedRowsCount } as any}
+              </Strong>
+            ),
+          }}
+          i18nKey="sscds|datatable.selection.itemCounter"
+          values={{
+            count: totalRowCount,
+            totalRowCount: abbreviateNumber(totalRowCount, lng),
+            selectedRowCount: selectedRowsCount.toLocaleString(lng),
+          }}
+        />
+      </div>
+      <Button
+        className="ds-table-selection-clear-button"
+        size="sm"
+        variant="ghost"
+        onClick={deselectAllRows}
+      >
+        {t('sscds|datatable.selection.clearSelection')}
+      </Button>
+    </Inline>
+  );
+}
+function SelectionToolbarActions({ children }: { children: ReactNode }) {
+  return (
+    <Inline
+      align="center"
+      className="ds-table-selection-actions-container"
+      gap="md"
+      justify="flex-end"
+    >
+      {children}
+    </Inline>
+  );
+}
 
-export default SelectionToolbar;
+function SelectionToolbarReactTable<Data>({
+  instance,
+}: {
+  instance: Instance<Data>;
+}) {
+  const {
+    options: { renderRowSelectionActions, rowCount },
+    getPrePaginationRowModel,
+    getSelectedRowModel,
+    toggleAllRowsSelected,
+  } = instance;
+
+  const selectedRowsCount = getSelectedRowsCount<Data>(instance);
+  const selectedRows = getSelectedRowModel().rows;
+  const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
+
+  if (selectedRowsCount === 0) {
+    return null;
+  }
+
+  return (
+    <SelectionToolbarRoot>
+      <SelectionToolbarItemCounter
+        deselectAllRows={() => toggleAllRowsSelected(false)}
+        selectedRowsCount={selectedRowsCount}
+        totalRowCount={totalRowCount}
+      />
+      <SelectionToolbarActions>
+        {renderRowSelectionActions?.({
+          selectedRows: pluck('original', selectedRows),
+          totalRowCount,
+          table: instance as unknown as Table<Data>,
+        })}
+      </SelectionToolbarActions>
+    </SelectionToolbarRoot>
+  );
+}
+
+SelectionToolbarRoot.displayName = 'SelectionToolbarRoot';
+SelectionToolbarItemCounter.displayName = 'SelectionToolbarItemCounter';
+SelectionToolbarActions.displayName = 'SelectionToolbarActions';
+SelectionToolbarReactTable.displayName = 'SelectionToolbarReactTable';
+
+export {
+  SelectionToolbarRoot,
+  SelectionToolbarItemCounter,
+  SelectionToolbarActions,
+  SelectionToolbarReactTable,
+};

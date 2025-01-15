@@ -13,7 +13,7 @@ import {
   ListViewOptions,
   ParsedListViewOptions,
 } from './ListView.types';
-import SelectionToolbar from '../_internal/toolbars/SelectionToolbar';
+import { SelectionToolbarReactTable } from '../_internal/toolbars/SelectionToolbar';
 import PaginationToolbar from '../_internal/toolbars/PaginationToolbar';
 
 function ListView<D>({
@@ -142,7 +142,9 @@ function ListView<D>({
           return <ListViewRow key={row.id} listView={listView} row={row} />;
         })}
       </ul>
-      {enableRowSelection && <SelectionToolbar<D> instance={listView} />}
+      {enableRowSelection && (
+        <SelectionToolbarReactTable<D> instance={listView} />
+      )}
       {enablePagination && <PaginationToolbar<D> instance={listView} />}
     </div>
   );
