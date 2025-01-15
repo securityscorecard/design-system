@@ -259,4 +259,152 @@ describe('TreeView Selection', () => {
       expect(checkboxes[0]).not.toBePartiallyChecked(); // parent is not indeterminate
     });
   });
+
+  describe('selection toolbar', () => {
+    test('should clear selection when Clear selection button is clicked', async () => {
+      const onSelectionChange = vi.fn();
+      const { user } = setup(
+        <TreeView
+          data={mockData}
+          isSelectable
+          renderPrimaryContent={renderPrimaryContent}
+          onSelectionChange={onSelectionChange}
+        />,
+      );
+
+      // Select some items first
+      await user.click(screen.getAllByRole('checkbox')[0]); // Select parent
+      expect(onSelectionChange).toHaveBeenLastCalledWith(['1']);
+
+      // Verify selection toolbar is shown
+      const clearButton = screen.getByRole('button', {
+        name: /Clear selection/i,
+      });
+      expect(clearButton).toBeInTheDocument();
+
+      // Click clear selection button
+      await user.click(clearButton);
+
+      // Verify selection is cleared
+      expect(onSelectionChange).toHaveBeenLastCalledWith([]);
+      expect(screen.getAllByRole('checkbox')[0]).not.toBeChecked();
+      expect(screen.getAllByRole('checkbox')[1]).not.toBeChecked();
+      expect(screen.getAllByRole('checkbox')[2]).not.toBeChecked();
+
+      // Verify selection toolbar is hidden
+      expect(clearButton).not.toBeInTheDocument();
+    });
+
+    test('should clear selection in controlled mode', async () => {
+      const onSelectionChange = vi.fn();
+      const { user } = setup(
+        <TreeView
+          data={mockData}
+          isSelectable
+          selectedIds={['1', '1-1']}
+          renderPrimaryContent={renderPrimaryContent}
+          onSelectionChange={onSelectionChange}
+        />,
+      );
+
+      const clearButton = screen.getByRole('button', {
+        name: /Clear selection/i,
+      });
+
+      await user.click(clearButton);
+      expect(onSelectionChange).toHaveBeenCalledWith([]);
+    });
+
+    test('should pass correct props to renderRowSelectionActions', async () => {
+      const renderRowSelectionActions = vi.fn();
+      const { user } = setup(
+        <TreeView
+          data={mockData}
+          isSelectable
+          renderPrimaryContent={renderPrimaryContent}
+          renderRowSelectionActions={renderRowSelectionActions}
+        />,
+      );
+
+      // Initially no selection, shouldn't be called
+      expect(renderRowSelectionActions).not.toHaveBeenCalled();
+
+      // Select some items
+      await user.click(screen.getAllByRole('checkbox')[0]); // Select parent
+      await user.click(screen.getAllByRole('checkbox')[3]); // Select item 2
+
+      // Should be called with selected IDs and total count
+      expect(renderRowSelectionActions).toHaveBeenLastCalledWith({
+        selectedIds: ['1', '2'],
+        totalRowCount: 4, // Total number of items in mockData
+      });
+
+      // Clear selection of first item
+      await user.click(screen.getAllByRole('checkbox')[0]);
+
+      // Should be called with updated selection
+      expect(renderRowSelectionActions).toHaveBeenLastCalledWith({
+        selectedIds: ['2'],
+        totalRowCount: 4,
+      });
+    });
+
+    test('should pass correct props in controlled mode', () => {
+      const renderRowSelectionActions = vi.fn();
+      const { rerender } = setup(
+        <TreeView
+          data={mockData}
+          isSelectable
+          selectedIds={['1', '1-1']}
+          renderPrimaryContent={renderPrimaryContent}
+          renderRowSelectionActions={renderRowSelectionActions}
+        />,
+      );
+
+      expect(renderRowSelectionActions).toHaveBeenLastCalledWith({
+        selectedIds: ['1', '1-1'],
+        totalRowCount: 4,
+      });
+
+      // Update controlled selection
+      rerender(
+        <TreeView
+          data={mockData}
+          isSelectable
+          selectedIds={['2']}
+          renderPrimaryContent={renderPrimaryContent}
+          renderRowSelectionActions={renderRowSelectionActions}
+        />,
+      );
+
+      expect(renderRowSelectionActions).toHaveBeenLastCalledWith({
+        selectedIds: ['2'],
+        totalRowCount: 4,
+      });
+    });
+
+    test('should not render selection actions when no items are selected', async () => {
+      const renderRowSelectionActions = vi.fn();
+      const { user } = setup(
+        <TreeView
+          data={mockData}
+          isSelectable
+          selectedIds={['1']}
+          renderPrimaryContent={renderPrimaryContent}
+          renderRowSelectionActions={renderRowSelectionActions}
+        />,
+      );
+
+      expect(renderRowSelectionActions).toHaveBeenCalled();
+
+      // Clear selection
+      const clearButton = screen.getByRole('button', {
+        name: /Clear selection/i,
+      });
+      await user.click(clearButton);
+
+      // Should not be called after clearing selection
+      expect(renderRowSelectionActions).not.toHaveBeenCalledTimes(2);
+    });
+  });
 });

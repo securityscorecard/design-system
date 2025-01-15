@@ -393,4 +393,79 @@ describe('useSelection', () => {
       expect(result.current.indeterminateItems.size).toBe(0);
     });
   });
+
+  describe('clearSelection', () => {
+    it('should clear all selections in uncontrolled mode', () => {
+      const onSelectionChange = vi.fn();
+      const { result } = renderHook(() =>
+        useSelection({
+          items: mockItems,
+          defaultSelectedIds: ['1', '1-1', '1-2'],
+          onSelectionChange,
+        }),
+      );
+
+      expect(result.current.selectedItems.size).toBe(3);
+
+      act(() => {
+        result.current.clearSelection();
+      });
+
+      expect(result.current.selectedItems.size).toBe(0);
+      expect(onSelectionChange).toHaveBeenCalledWith([]);
+    });
+
+    it('should trigger onSelectionChange with empty array in controlled mode', () => {
+      const onSelectionChange = vi.fn();
+      const { result } = renderHook(() =>
+        useSelection({
+          items: mockItems,
+          selectedIds: ['1', '1-1', '1-2'],
+          onSelectionChange,
+        }),
+      );
+
+      act(() => {
+        result.current.clearSelection();
+      });
+
+      expect(onSelectionChange).toHaveBeenCalledWith([]);
+    });
+
+    it('should work with both recursive and non-recursive selection modes', () => {
+      const onSelectionChange = vi.fn();
+      const { result: recursiveResult } = renderHook(() =>
+        useSelection({
+          items: mockItems,
+          defaultSelectedIds: ['1', '1-1', '1-2'],
+          hasRecursiveSelection: true,
+          onSelectionChange,
+        }),
+      );
+
+      act(() => {
+        recursiveResult.current.clearSelection();
+      });
+
+      expect(recursiveResult.current.selectedItems.size).toBe(0);
+      expect(recursiveResult.current.indeterminateItems.size).toBe(0);
+      expect(onSelectionChange).toHaveBeenCalledWith([]);
+
+      const { result: nonRecursiveResult } = renderHook(() =>
+        useSelection({
+          items: mockItems,
+          defaultSelectedIds: ['1', '1-1', '1-2'],
+          hasRecursiveSelection: false,
+          onSelectionChange,
+        }),
+      );
+
+      act(() => {
+        nonRecursiveResult.current.clearSelection();
+      });
+
+      expect(nonRecursiveResult.current.selectedItems.size).toBe(0);
+      expect(onSelectionChange).toHaveBeenCalledWith([]);
+    });
+  });
 });

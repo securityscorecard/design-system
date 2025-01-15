@@ -7,6 +7,7 @@ import { Inline, Stack } from '../layout';
 import { Text } from '../Text';
 import { HexGrade } from '../HexGrade';
 import { DataSource, makeData } from './mocks/data';
+import Button from '../ButtonV2/Button';
 
 const meta = {
   title: 'components/TreeView',
@@ -143,7 +144,26 @@ export const WithRecursiveSelection: Story = {
   },
   tags: ['new'],
 };
-
+export const WithSelectionActions: Story = {
+  args: {
+    ...EnabledSelection.args,
+    renderRowSelectionActions: ({ selectedIds }) => (
+      <Button
+        variant="danger-ghost"
+        onClick={() => action('selection action')(selectedIds)}
+      >
+        Remove ({selectedIds.length.toLocaleString()})
+      </Button>
+    ),
+    defaultSelectedIds: [
+      '07130ea7-598b-4e23-b968-c33f194b2ee9',
+      'a1edd975-1154-4a5a-8b9a-4e8761fbdcb8',
+      'ee85c1e5-5e14-43a6-90d5-d40288673b14',
+      'f5d6b48d-95f4-4984-824c-210f6c63400d',
+    ],
+  },
+  tags: ['new'],
+};
 export const ControlledSelection: Story = {
   args: {
     isSelectable: true,
