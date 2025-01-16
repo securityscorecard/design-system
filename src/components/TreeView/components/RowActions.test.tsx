@@ -16,15 +16,15 @@ describe('RowActions Component', () => {
     ...overrides,
   });
 
-  test('should render up to 2 action inline', () => {
-    const rowActions = [
-      createMockAction({ label: 'action 1' }),
-      createMockAction({ label: 'action 2' }),
-    ];
+  test('should render only one action inline', () => {
+    const rowActions = [createMockAction({ label: 'action 1' })];
 
     setup(<RowActions rowActions={rowActions} row={mockRow} />);
-
-    expect(screen.getAllByRole('button')).toHaveLength(2);
+    expect(
+      screen.getByRole('button', {
+        name: /action 1/i,
+      }),
+    ).toBeInTheDocument();
   });
 
   test('should skip rendering of action if is null', () => {
@@ -35,11 +35,10 @@ describe('RowActions Component', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('should render dropdown menu for more than two actions', async () => {
+  test('should render dropdown menu for more than one action', async () => {
     const rowActions = [
       createMockAction({ label: 'action 1' }),
       createMockAction({ label: 'action 2' }),
-      createMockAction({ label: 'action 3' }),
     ];
 
     const { user } = setup(
@@ -54,7 +53,7 @@ describe('RowActions Component', () => {
     await user.type(dropdownTrigger, '{arrowdown}');
 
     await waitFor(() => {
-      expect(screen.getAllByRole('menuitem')).toHaveLength(3);
+      expect(screen.getAllByRole('menuitem')).toHaveLength(2);
     });
   });
 

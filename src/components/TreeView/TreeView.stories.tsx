@@ -194,18 +194,9 @@ export const RowActionsMenu: Story = {
   },
 };
 
-export const TwoRowActions: Story = {
+export const SingleRowAction: Story = {
   args: {
     rowActions: [
-      {
-        iconName: 'eye-slash',
-        label: 'Make private',
-        onClick:
-          ({ row }) =>
-          (event) =>
-            action('row action')({ row, event }),
-        isDisabled: ({ row }) => row.grade === 'D',
-      },
       {
         iconName: 'times',
         label: 'Remove',
