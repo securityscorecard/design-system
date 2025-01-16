@@ -4,7 +4,7 @@ import { Surface } from '../../layout';
 import { DatatableInstance } from '../Datatable.types';
 import Table from './Table';
 import TopToolbar from '../toolbar/TopToolbar';
-import SelectionToolbar from '../../_internal/toolbars/SelectionToolbar';
+import { SelectionToolbarReactTable } from '../../_internal/toolbars/SelectionToolbar';
 import PaginationToolbar from '../../_internal/toolbars/PaginationToolbar';
 
 const DatatableRoot = styled.div<{ $isFullscreen }>`
@@ -87,7 +87,7 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
       </Surface>
       {table.options.enableRowSelection &&
         table.options.enableSelectionToolbar && (
-          <SelectionToolbar<D> instance={table} />
+          <SelectionToolbarReactTable<D> instance={table} />
         )}
       {table.options.enablePagination &&
         table.getRowModel().rows.length > 0 && (

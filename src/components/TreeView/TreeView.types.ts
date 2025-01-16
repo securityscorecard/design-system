@@ -121,6 +121,16 @@ export interface TreeViewProps<D> {
    * and won't be included in the array.
    */
   onSelectionChange?: (selectedIds: string[]) => void;
+  /**
+   * You can provide your own implementation of the row actions container. This property accepts
+   * React component with properties:
+   *  - `selectedIds` - array of ids of currently selected rows
+   *  - `totalRowCount` - count of all rows in the TreeView
+   */
+  renderRowSelectionActions?: (props: {
+    selectedIds: string[];
+    totalRowCount: number;
+  }) => ReactNode;
 }
 
 export type SortableTreeItemProps<D> = Omit<

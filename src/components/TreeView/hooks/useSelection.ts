@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { FlattenedItem } from '../TreeView.types';
 
@@ -17,7 +17,7 @@ export function useSelection<D>({
   onSelectionChange,
   hasRecursiveSelection = false,
 }: UseSelectionProps<D>) {
-  // Internal state for uncontrolled mode
+  // Internal state only for uncontrolled mode
   const [internalSelectedIds, setInternalSelectedIds] = useState<Set<string>>(
     () => new Set(defaultSelectedIds),
   );
@@ -60,7 +60,6 @@ export function useSelection<D>({
 
     const indeterminate = new Set<string>();
 
-    // Helper function to check if any descendant is selected
     const hasSelectedDescendant = (itemId: string): boolean => {
       const { childIds } = itemRelationships.get(itemId) || { childIds: [] };
       return childIds.some(
@@ -69,10 +68,8 @@ export function useSelection<D>({
       );
     };
 
-    // Helper function to check if all descendants are selected
     const areAllDescendantsSelected = (itemId: string): boolean => {
       const { childIds } = itemRelationships.get(itemId) || { childIds: [] };
-
       if (childIds.length === 0) return false;
 
       return childIds.every((childId) => {
@@ -85,34 +82,22 @@ export function useSelection<D>({
       });
     };
 
-    // Calculate indeterminate state for each item
     items.forEach((item) => {
       const { childIds } = itemRelationships.get(item.id) || { childIds: [] };
-
-      // Skip items without children
       if (childIds.length === 0) return;
 
       const hasSelected = hasSelectedDescendant(item.id);
       const allSelected = areAllDescendantsSelected(item.id);
 
       if (allSelected) {
-        // If all descendants are selected, add parent to selection
-        selectedItems.add(item.id);
+        selectedItems.add(item.id); // Add parent to selection when all descendants are selected
       } else if (hasSelected) {
-        // Only set indeterminate if some but not all children are selected
         indeterminate.add(item.id);
       }
     });
 
     return indeterminate;
   }, [items, selectedItems, itemRelationships, hasRecursiveSelection]);
-
-  // Update controlled state when it changes
-  useEffect(() => {
-    if (controlledSelectedIds !== undefined) {
-      setInternalSelectedIds(new Set(controlledSelectedIds));
-    }
-  }, [controlledSelectedIds]);
 
   // Handle selection changes
   const handleSelectionChange = useCallback(
@@ -183,9 +168,20 @@ export function useSelection<D>({
     ],
   );
 
+  const clearSelection = useCallback(() => {
+    const newSelection = new Set<string>();
+
+    if (controlledSelectedIds === undefined) {
+      setInternalSelectedIds(newSelection);
+    }
+
+    onSelectionChange?.(Array.from(newSelection));
+  }, [controlledSelectedIds, onSelectionChange]);
+
   return {
     selectedItems,
     indeterminateItems,
     handleSelectionChange,
+    clearSelection,
   };
 }
