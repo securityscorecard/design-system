@@ -92,18 +92,21 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
               {...rest}
             >
               <Inline stretch={StretchEnum.start}>
-                <Header>
+                <Header className="sscds-modal-header">
                   {typeof title !== 'undefined' && <Title>{title}</Title>}
                 </Header>
                 {onClose && (
                   <CloseButton
                     marginCompensation={SpaceSizes.none}
+                    style={{ position: 'relative', zIndex: 1 }}
                     onClose={onClose}
                   />
                 )}
               </Inline>
-              <Content>{children}</Content>
-              {typeof footer !== 'undefined' && <Footer>{footer}</Footer>}
+              <Content className="sscds-modal-content">{children}</Content>
+              {typeof footer !== 'undefined' && (
+                <Footer className="sscds-modal-footer">{footer}</Footer>
+              )}
             </BaseModal>
           </Overlay>
         </Portal>

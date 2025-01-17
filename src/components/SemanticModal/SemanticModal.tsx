@@ -1,64 +1,48 @@
-import { type MouseEvent, forwardRef } from 'react';
+import { type ComponentProps, type MouseEvent, forwardRef } from 'react';
 import styled from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 
-import { SemanticModalVariants } from './SemanticModal.enums';
-import { RenderButtonProps, SemanticModalProps } from './SemanticModal.types';
-import { Modal, ModalEnums } from '../Modal';
-import { Button, ButtonEnums } from '../Button';
+import type { SemanticModalVariants } from './SemanticModal.enums';
+import { SemanticModalProps } from './SemanticModal.types';
+import { Modal } from '../Modal';
 import { Icon } from '../Icon';
 import {
   AbsoluteLinkActionKind,
-  ActionKinds,
   RelativeLinkActionKind,
 } from '../../types/action.types';
-import { getColor, pxToRem } from '../../utils';
-import { Center, Inline, Padbox, Stack } from '../layout';
-import { Color, SpaceSizes } from '../../theme';
+import { pxToRem } from '../../utils';
+import { Center, Inline, Stack } from '../layout';
+import { SpaceSizes } from '../../theme';
 import { SSCIconNames } from '../../theme/icons/icons.enums';
-import { H4 } from '../Heading';
 import { Text } from '../Text';
+import Button from '../ButtonV2/Button';
 
-const colorVariants: Record<keyof typeof SemanticModalVariants, Color> = {
-  [SemanticModalVariants.success]: 'success.500',
-  [SemanticModalVariants.warn]: 'warning.500',
-  [SemanticModalVariants.error]: 'error.500',
-  [SemanticModalVariants.ban]: 'error.500',
+const colorVariants: Record<
+  keyof typeof SemanticModalVariants,
+  ComponentProps<typeof Icon>['color']
+> = {
+  success: 'var(--sscds-color-icon-success)',
+  warn: 'var(--sscds-color-icon-warning)',
+  error: 'var(--sscds-color-icon-danger)',
+  ban: 'var(--sscds-color-icon-danger)',
 };
 
 const iconVariants = {
-  [SemanticModalVariants.success]: SSCIconNames.checkCircle,
-  [SemanticModalVariants.warn]: SSCIconNames.exclTriangle,
-  [SemanticModalVariants.error]: SSCIconNames.error,
-  [SemanticModalVariants.ban]: SSCIconNames.ban,
+  success: SSCIconNames.checkCircleLight,
+  warn: SSCIconNames.exclCircleLight,
+  error: SSCIconNames.exclTriangleLight,
+  ban: SSCIconNames.banLight,
 };
 
-const StyledIcon = styled(Icon)<{ $variant?: SemanticModalProps['variant'] }>`
-  color: ${({ $variant }) => getColor(colorVariants[$variant])};
-  font-size: ${pxToRem(48)};
+const StyledModal = styled(Modal)`
+  .sscds-modal-content {
+    margin-top: var(--sscds-space-negative-6x);
+  }
 `;
 
-const renderButton = ({
-  action,
-  color,
-  isLoading,
-  loadingText,
-  variant,
-}: RenderButtonProps) => (
-  <Button
-    key={action.name}
-    color={color}
-    href={(action as AbsoluteLinkActionKind<[MouseEvent]>).href}
-    isLoading={isLoading}
-    loadingText={loadingText}
-    name={action.name}
-    to={(action as RelativeLinkActionKind<[MouseEvent]>).to}
-    variant={variant}
-    onClick={action.onClick}
-  >
-    {action.label}
-  </Button>
-);
+const StyledIcon = styled(Icon)`
+  font-size: ${pxToRem(40)};
+`;
 
 const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
   (
@@ -67,50 +51,66 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
       message,
       actions,
       onClose,
-      variant = SemanticModalVariants.success,
-      primaryButtonColor = ButtonEnums.ButtonColors.primary,
+      variant = 'success',
+      primaryButtonColor = 'primary',
       isPrimaryButtonLoading = false,
       loadingText = '',
     },
     ref,
   ) => {
+    const [dismissAction, mainAction] = actions;
+
     return (
-      <Modal ref={ref} size={ModalEnums.ModalSizes.sm} onClose={onClose}>
+      <StyledModal ref={ref} size="sm" onClose={onClose}>
         <Center isTextCentered>
-          <Stack gap={SpaceSizes.lg}>
+          <Stack gap="6x">
             <div>
-              <StyledIcon $variant={variant} name={iconVariants[variant]} />
+              <StyledIcon
+                color={colorVariants[variant]}
+                name={iconVariants[variant]}
+              />
             </div>
-            <Stack gap={SpaceSizes.md}>
-              <H4>{title}</H4>
-              <Text as="div" size="md">
+            <Stack gap="2x">
+              <Text as="div" size="h5" isBold>
+                {title}
+              </Text>
+              <Text as="div" size="md" variant="subtle">
                 {message}
               </Text>
-              <Padbox paddingSize={SpaceSizes.md}>
-                <Inline gap={SpaceSizes.md} justify="center">
-                  {actions.map(
-                    (action: ActionKinds<[MouseEvent]>, index: number) =>
-                      isNotUndefined(action) &&
-                      renderButton({
-                        action,
-                        variant:
-                          index === 0
-                            ? ButtonEnums.ButtonVariants.outline
-                            : ButtonEnums.ButtonVariants.solid,
-                        color:
-                          index === 0
-                            ? ButtonEnums.ButtonColors.primary
-                            : primaryButtonColor,
-                        isLoading: index === 0 ? false : isPrimaryButtonLoading,
-                        loadingText,
-                      }),
-                  )}
-                </Inline>
-              </Padbox>
             </Stack>
+            <Inline gap={SpaceSizes.md} justify="center">
+              <Button
+                as={
+                  isNotUndefined(dismissAction.as)
+                    ? dismissAction.as
+                    : undefined
+                }
+                href={
+                  (dismissAction as AbsoluteLinkActionKind<[MouseEvent]>).href
+                }
+                name={dismissAction.name}
+                to={(dismissAction as RelativeLinkActionKind<[MouseEvent]>).to}
+                variant="subtle"
+                onClick={dismissAction.onClick}
+              >
+                {dismissAction.label as string}
+              </Button>
+              <Button
+                as={isNotUndefined(mainAction.as) ? mainAction.as : undefined}
+                href={(mainAction as AbsoluteLinkActionKind<[MouseEvent]>).href}
+                isLoading={isPrimaryButtonLoading}
+                loadingText={loadingText}
+                name={mainAction.name}
+                to={(mainAction as RelativeLinkActionKind<[MouseEvent]>).to}
+                variant={primaryButtonColor === 'primary' ? 'base' : 'danger'}
+                onClick={mainAction.onClick}
+              >
+                {mainAction.label as string}
+              </Button>
+            </Inline>
           </Stack>
         </Center>
-      </Modal>
+      </StyledModal>
     );
   },
 );
