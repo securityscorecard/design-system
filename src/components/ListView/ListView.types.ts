@@ -106,12 +106,12 @@ export type ListViewOptions<D> = {
   /**
    * You can provide your own implementation of the row actions container. This property accepts
    * React component with properties:
-   *  - `selectedRows` - array of currently selected rows
+   *  - `selectedRows` - array of currently selected row IDs
    *  - `totalRowCount` - count of all rows in the list
    *  - `table` - current instance of the list
    */
   renderRowSelectionActions?: (props: {
-    selectedRows: D[];
+    selectedRows: (string | number)[];
     totalRowCount: number;
     table: Table<D>;
   }) => ReactNode;
