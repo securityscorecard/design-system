@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { RowSelectionState } from '@tanstack/react-table';
+import { PaginationState, RowSelectionState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
 import { Button } from '../../Button';
+import { fetchData, useQuery } from '../mocks/externalData';
 
 export default {
   title: 'components/DatatableV2/Selection',
@@ -141,3 +142,57 @@ export const SelectionManagedState: Story = (args) => {
   );
 };
 SelectionManagedState.args = SelectionEnabled.args;
+
+export const ManualPaginationWithSinglePageSelection: Story = (args) => {
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 1,
+    pageSize: 10,
+  });
+
+  const dataQuery = useQuery({
+    queryKey: ['data', pagination],
+    queryFn: () => fetchData(pagination),
+    keepPreviousData: true,
+  });
+
+  return (
+    <Datatable
+      {...args}
+      data={dataQuery?.data?.entries ?? []}
+      pageCount={dataQuery?.data?.pageCount ?? -1}
+      rowCount={dataQuery?.data?.rowCount}
+      state={{ pagination }}
+      onPaginationChange={setPagination}
+    />
+  );
+};
+ManualPaginationWithSinglePageSelection.args = {
+  ...Template.args,
+  rowSelectionMode: 'single-page',
+  renderRowSelectionActions: ({ selectedRows }) => (
+    <Button onClick={() => action('batch action')(selectedRows)}>
+      Show selected rows
+    </Button>
+  ),
+  manualPagination: true,
+  initialState: {
+    rowSelection: {
+      '55ea9935-7f59-4e30-b132-5372d214c20e': true,
+      '72badeb8-8974-4dc3-82f5-b638b381b9c4': true,
+      'ffcc21d9-7fe7-4c26-b708-4b8ba6432ad6': true,
+    },
+  },
+};
+ManualPaginationWithSinglePageSelection.parameters = {
+  screenshot: { skip: false },
+};
+
+export const ManualPaginationWithMultiPageSelection: Story =
+  ManualPaginationWithSinglePageSelection.bind({});
+ManualPaginationWithMultiPageSelection.args = {
+  ...ManualPaginationWithSinglePageSelection.args,
+  rowSelectionMode: 'multi-page',
+};
+ManualPaginationWithMultiPageSelection.parameters = {
+  screenshot: { skip: false },
+};

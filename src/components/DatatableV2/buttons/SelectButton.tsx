@@ -59,9 +59,14 @@ const SelectButton = <D,>({
 } & ComponentPropsWithoutRef<'input'>) => {
   const {
     getState,
-    options: { enableMultiRowSelection, selectAllMode },
+    options: {
+      enableMultiRowSelection,
+      selectAllMode,
+      manualPagination,
+      rowSelectionMode,
+    },
   } = table;
-  const { isLoading } = getState();
+  const { isLoading, rowSelection } = getState();
   const { t } = useSafeTranslation();
 
   const allRowsSelected =
@@ -104,9 +109,12 @@ const SelectButton = <D,>({
       <IndeterminateCheckbox
         className="ds-table-select-multi-button ds-table-select-button"
         indeterminate={
-          isHeaderCheckbox
-            ? table.getIsSomeRowsSelected() && !allRowsSelected
-            : false
+          !isHeaderCheckbox
+            ? false
+            : manualPagination && rowSelectionMode === 'single-page'
+            ? table.getIsSomePageRowsSelected() && !allRowsSelected
+            : Object.values(rowSelection ?? {}).filter(Boolean).length > 0 &&
+              !allRowsSelected
         }
         {...common}
         style={styles}

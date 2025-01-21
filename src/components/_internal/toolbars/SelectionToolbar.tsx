@@ -1,5 +1,5 @@
-import type { Table } from '@tanstack/react-table';
-import type { ReactNode } from 'react';
+import type { RowSelectionState, Table } from '@tanstack/react-table';
+import { type ReactNode } from 'react';
 import { pluck } from 'ramda';
 import styled from 'styled-components';
 
@@ -11,27 +11,6 @@ import {
   SafeTrans,
   useSafeTranslation,
 } from '../../../hooks/useSafeTranslation';
-
-type Instance<Data> = {
-  options: {
-    renderRowSelectionActions?: (props: {
-      selectedRows: Data[];
-      totalRowCount: number;
-      table: unknown;
-    }) => ReactNode;
-    rowCount?: number;
-  };
-  getPrePaginationRowModel?: Table<Data>['getPrePaginationRowModel'];
-  getSelectedRowModel?: Table<Data>['getSelectedRowModel'];
-  toggleAllRowsSelected?: Table<Data>['toggleAllRowsSelected'];
-};
-
-const getSelectedRowsCount = <Data,>(instance: Instance<Data>) => {
-  const { getSelectedRowModel } = instance;
-  const selectedRows = getSelectedRowModel().rows;
-  const selectedRowsCount = selectedRows.length;
-  return selectedRowsCount;
-};
 
 const SelectionRoot = styled(Surface)`
   position: sticky;
@@ -117,23 +96,59 @@ function SelectionToolbarActions({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * SPECIFIC IMPLEMENTATION
+ */
+type Instance<Data> = {
+  options: {
+    renderRowSelectionActions?: (props: {
+      selectedRows: Data[] | (string | number)[];
+      totalRowCount: number;
+      table: unknown;
+    }) => ReactNode;
+    rowCount?: number;
+    manualPagination?: boolean;
+    rowSelectionMode?: 'single-page' | 'multi-page';
+  };
+  getState?: () => { rowSelection: RowSelectionState };
+  getPrePaginationRowModel?: Table<Data>['getPrePaginationRowModel'];
+  getSelectedRowModel?: Table<Data>['getSelectedRowModel'];
+  toggleAllRowsSelected?: Table<Data>['toggleAllRowsSelected'];
+};
+
+const getSelectedRowsCount = <Data,>(instance: Instance<Data>) => {
+  const {
+    getSelectedRowModel,
+    options: { manualPagination, rowSelectionMode },
+    getState,
+  } = instance;
+  const { rowSelection } = getState();
+  return (manualPagination && rowSelectionMode === 'multi-page') ||
+    typeof rowSelectionMode === 'undefined'
+    ? Object.keys(rowSelection).filter((id) => rowSelection[id])
+    : getSelectedRowModel().rows;
+};
+
 function SelectionToolbarReactTable<Data>({
   instance,
 }: {
   instance: Instance<Data>;
 }) {
   const {
-    options: { renderRowSelectionActions, rowCount },
+    options: {
+      renderRowSelectionActions,
+      rowCount,
+      manualPagination,
+      rowSelectionMode,
+    },
     getPrePaginationRowModel,
-    getSelectedRowModel,
     toggleAllRowsSelected,
   } = instance;
-
-  const selectedRowsCount = getSelectedRowsCount<Data>(instance);
-  const selectedRows = getSelectedRowModel().rows;
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
-  if (selectedRowsCount === 0) {
+  const selectedRows = getSelectedRowsCount<Data>(instance);
+
+  if (selectedRows.length === 0) {
     return null;
   }
 
@@ -141,12 +156,16 @@ function SelectionToolbarReactTable<Data>({
     <SelectionToolbarRoot>
       <SelectionToolbarItemCounter
         deselectAllRows={() => toggleAllRowsSelected(false)}
-        selectedRowsCount={selectedRowsCount}
+        selectedRowsCount={selectedRows.length}
         totalRowCount={totalRowCount}
       />
       <SelectionToolbarActions>
         {renderRowSelectionActions?.({
-          selectedRows: pluck('original', selectedRows),
+          selectedRows:
+            (manualPagination && rowSelectionMode === 'multi-page') ||
+            typeof rowSelectionMode === 'undefined'
+              ? selectedRows
+              : pluck('original', selectedRows),
           totalRowCount,
           table: instance as unknown as Table<Data>,
         })}

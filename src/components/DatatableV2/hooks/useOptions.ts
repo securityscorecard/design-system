@@ -31,6 +31,7 @@ export const useOptions = <D>({
   renderNoDataFallback,
   renderRowSelectionActions,
   rowsPerPageOptions = [10, 25, 50, 100],
+  rowSelectionMode = 'single-page',
   selectAllMode = 'page',
   ...restDatatableOptions
 }: Partial<DatatableOptions<D>>): ParsedDatatableOptions<D> => {
@@ -90,6 +91,7 @@ export const useOptions = <D>({
     renderNoDataFallback,
     renderRowSelectionActions,
     rowsPerPageOptions,
+    rowSelectionMode,
     selectAllMode,
     ...restDatatableOptions,
     columnResizeMode: 'onChange',

@@ -231,6 +231,7 @@ export interface ParsedDatatableOptions<D>
   rowActions?: DatatableOptions<D>['rowActions'];
   rowCount?: DatatableOptions<D>['rowCount'];
   rowsPerPageOptions?: DatatableOptions<D>['rowsPerPageOptions'];
+  rowSelectionMode?: DatatableOptions<D>['rowSelectionMode'];
   selectAllMode?: DatatableOptions<D>['selectAllMode'];
   state?: DatatableOptions<D>['state'];
 }
@@ -311,7 +312,7 @@ export interface DatatableOptions<D>
   > {
   /**
    * Definition of the table columns. Each column definition is REQUIRED to have `header` property
-   * set. If you define a column that is not used for displaing row data (e.g. have button...),
+   * set. If you define a column that is not used for displaing row data (e.g. have ...),
    * please provide `columnDefType: 'display'`. Setting this property will disable some unnecessary
    * functionalities and filter out the column from column orderdering.
    */
@@ -523,12 +524,12 @@ export interface DatatableOptions<D>
   /**
    * You can provide your own implementation of the row actions container. This property accepts
    * React component with properties:
-   *  - `selectedRows` - array of currently selected rows
+   *  - `selectedRows` - array of currently selected rows or list of row ids if manualPagination is enabled and rowSelectionMode is set to 'multi-page'
    *  - `totalRowCount` - count of all rows in the table
    *  - `table` - current instance of the table
    */
   renderRowSelectionActions?: (props: {
-    selectedRows: D[];
+    selectedRows: D[] | (string | number)[];
     totalRowCount: number;
     table: DatatableInstance<D>;
   }) => ReactNode;
@@ -550,6 +551,12 @@ export interface DatatableOptions<D>
    * default: `[10, 25, 50, 100]`
    */
   rowsPerPageOptions?: number[];
+  /**
+   * Available only if `manualPagination: true`.
+   *
+   * default: 'single-page`
+   */
+  rowSelectionMode?: 'single-page' | 'multi-page';
   /**
    * Switch mode for the select all checkbox in the table header. When `page` is set checkbox will
    * select all rows in the current page. When `all` is set checkbox will select all rows in the
