@@ -16,8 +16,14 @@ import { CSS } from '@dnd-kit/utilities';
 import { getSubRowCount, setProperty } from './common/utils';
 import type { TreeViewProps, TreeViewRow } from './TreeView.types';
 import SortableTreeItem from './components/SortableTreeItem';
-import { Surface } from '../layout';
+import { Stack, Surface } from '../layout';
 import { useDnD } from './hooks/useDnD';
+import { useSelection } from './hooks/useSelection';
+import {
+  SelectionToolbarActions,
+  SelectionToolbarItemCounter,
+  SelectionToolbarRoot,
+} from '../_internal/toolbars/SelectionToolbar';
 
 const measuring = {
   droppable: {
@@ -53,6 +59,11 @@ function TreeView<D>({
   rowHeight = 56,
   isCollapsible = true,
   isSortable = true,
+  isSelectable = false,
+  hasRecursiveSelection = false,
+  selectedIds,
+  defaultSelectedIds,
+  onSelectionChange,
   renderPrimaryContent,
   renderSecondaryContent,
   onDragCancel,
@@ -64,6 +75,7 @@ function TreeView<D>({
   activeRowId,
   onActiveRowIdChange,
   rowActions,
+  renderRowSelectionActions,
 }: TreeViewProps<D>) {
   const [items, setItems] = useState(() => data);
 
@@ -86,6 +98,19 @@ function TreeView<D>({
     handleDragStart,
   } = useDnD({ items, setItems, onDragEnd });
 
+  const {
+    selectedItems,
+    indeterminateItems,
+    handleSelectionChange,
+    clearSelection,
+  } = useSelection({
+    items: flattenedItems,
+    selectedIds,
+    defaultSelectedIds,
+    onSelectionChange,
+    hasRecursiveSelection,
+  });
+
   const handleCollapse = (id: string) => {
     setItems((prevItems) =>
       setProperty(
@@ -98,82 +123,116 @@ function TreeView<D>({
   };
 
   return (
-    <Surface elevation={2} radius="md" hasBorder>
-      <DndContext
-        accessibility={{ announcements }}
-        collisionDetection={closestCenter}
-        measuring={measuring}
-        sensors={sensors}
-        onDragCancel={(e) => {
-          onDragCancel?.(e);
-          handleDragCancel();
-        }}
-        onDragEnd={(e) => {
-          handleDragEnd(e);
-        }}
-        onDragMove={(e) => {
-          onDragMove?.(e);
-          handleDragMove(e);
-        }}
-        onDragOver={(e) => {
-          onDragOver?.(e);
-          handleDragOver(e);
-        }}
-        onDragStart={(e) => {
-          onDragStart?.(e);
-          handleDragStart(e);
-        }}
-      >
-        <SortableContext
-          items={sortedIds}
-          strategy={verticalListSortingStrategy}
+    <Stack gap="4x">
+      <Surface elevation={2} radius="md" hasBorder>
+        <DndContext
+          accessibility={{ announcements }}
+          collisionDetection={closestCenter}
+          measuring={measuring}
+          sensors={sensors}
+          onDragCancel={(e) => {
+            onDragCancel?.(e);
+            handleDragCancel();
+          }}
+          onDragEnd={(e) => {
+            handleDragEnd(e);
+          }}
+          onDragMove={(e) => {
+            onDragMove?.(e);
+            handleDragMove(e);
+          }}
+          onDragOver={(e) => {
+            onDragOver?.(e);
+            handleDragOver(e);
+          }}
+          onDragStart={(e) => {
+            onDragStart?.(e);
+            handleDragStart(e);
+          }}
         >
-          <ul>
-            {flattenedItems.map((row) => {
-              const { id, subRows, collapsed, depth } = row;
-              return (
+          <SortableContext
+            items={sortedIds}
+            strategy={verticalListSortingStrategy}
+          >
+            <ul>
+              {flattenedItems.map((row) => {
+                const { id, subRows, collapsed, depth } = row;
+                return (
+                  <SortableTreeItem
+                    key={id}
+                    activeRowId={activeRowId}
+                    collapsed={Boolean(collapsed && subRows?.length)}
+                    depth={
+                      id === activeId && projected ? projected.depth : depth
+                    }
+                    id={id}
+                    isCollapsible={isCollapsible}
+                    isIndeterminate={
+                      isSelectable && hasRecursiveSelection
+                        ? indeterminateItems.has(id)
+                        : undefined
+                    }
+                    isSelectable={isSelectable}
+                    isSelected={
+                      isSelectable ? selectedItems.has(id) : undefined
+                    }
+                    isSortable={isSortable}
+                    renderPrimaryContent={renderPrimaryContent}
+                    renderSecondaryContent={renderSecondaryContent}
+                    row={row}
+                    rowActions={rowActions}
+                    rowHeight={rowHeight}
+                    onActiveRowIdChange={onActiveRowIdChange}
+                    onCollapse={
+                      isCollapsible && subRows?.length
+                        ? () => handleCollapse(id)
+                        : undefined
+                    }
+                    onRowClick={onRowClick}
+                    onSelectionChange={
+                      isSelectable ? handleSelectionChange : undefined
+                    }
+                  />
+                );
+              })}
+            </ul>
+            <DragOverlay dropAnimation={dropAnimationConfig}>
+              {activeId && activeItem ? (
                 <SortableTreeItem
-                  key={id}
-                  activeRowId={activeRowId}
-                  collapsed={Boolean(collapsed && subRows?.length)}
-                  depth={id === activeId && projected ? projected.depth : depth}
-                  id={id}
-                  isCollapsible={isCollapsible}
+                  childCount={getSubRowCount(items, activeId) + 1}
+                  depth={activeItem.depth}
+                  id={activeId}
+                  isIndeterminate={indeterminateItems.has(activeId)}
+                  isSelected={selectedItems.has(activeId)}
                   isSortable={isSortable}
                   renderPrimaryContent={renderPrimaryContent}
-                  renderSecondaryContent={renderSecondaryContent}
-                  row={row}
-                  rowActions={rowActions}
+                  row={activeItem}
                   rowHeight={rowHeight}
-                  onActiveRowIdChange={onActiveRowIdChange}
-                  onCollapse={
-                    isCollapsible && subRows?.length
-                      ? () => handleCollapse(id)
-                      : undefined
-                  }
-                  onRowClick={onRowClick}
+                  value={activeItem.id.toString()}
+                  isClone
+                  onSelectionChange={handleSelectionChange}
                 />
-              );
+              ) : null}
+            </DragOverlay>
+          </SortableContext>
+        </DndContext>
+      </Surface>
+      {isSelectable && selectedItems.size > 0 && (
+        <SelectionToolbarRoot>
+          <SelectionToolbarItemCounter
+            deselectAllRows={clearSelection}
+            selectedRowsCount={selectedItems.size}
+            totalRowCount={flattenedItems.length}
+          />
+          <SelectionToolbarActions>
+            {renderRowSelectionActions?.({
+              selectedIds: Array.from(selectedItems),
+              totalRowCount: flattenedItems.length,
             })}
-          </ul>
-          <DragOverlay dropAnimation={dropAnimationConfig}>
-            {activeId && activeItem ? (
-              <SortableTreeItem
-                childCount={getSubRowCount(items, activeId) + 1}
-                depth={activeItem.depth}
-                id={activeId}
-                isSortable={isSortable}
-                renderPrimaryContent={renderPrimaryContent}
-                row={activeItem}
-                rowHeight={rowHeight}
-                value={activeItem.id.toString()}
-                isClone
-              />
-            ) : null}
-          </DragOverlay>
-        </SortableContext>
-      </DndContext>
-    </Surface>
+          </SelectionToolbarActions>
+        </SelectionToolbarRoot>
+      )}
+    </Stack>
   );
 }
 
