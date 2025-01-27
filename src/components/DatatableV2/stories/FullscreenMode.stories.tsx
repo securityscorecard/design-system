@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/FullscreenMode',
@@ -13,6 +14,7 @@ export default {
       story: { inline: false, height: 600 },
     },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const FullscreenModeEnabled: Story = Template.bind({});

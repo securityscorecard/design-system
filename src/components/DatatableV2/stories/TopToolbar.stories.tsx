@@ -2,11 +2,12 @@ import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/TopToolbar',
   component: Datatable,
-  parameters: {},
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const TopToolbarEnabled: Story = Template.bind({});

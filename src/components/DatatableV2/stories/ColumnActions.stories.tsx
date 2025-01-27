@@ -2,10 +2,12 @@ import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/ColumnActions',
   component: Datatable,
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const ColumnActionsEnabled: Story = Template.bind({});

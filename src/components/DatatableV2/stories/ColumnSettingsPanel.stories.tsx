@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/ColumnSettingsPanel',
@@ -10,6 +11,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const ColumnSettingsPanelEnabled: Story = Template.bind({});

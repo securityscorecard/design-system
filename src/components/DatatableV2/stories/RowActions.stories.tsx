@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/RowActions',
@@ -10,6 +11,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const RowActionsEnabled: Story = Template.bind({});

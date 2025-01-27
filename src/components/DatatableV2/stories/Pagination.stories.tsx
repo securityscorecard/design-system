@@ -5,6 +5,7 @@ import { PaginationState } from '@tanstack/react-table';
 import { fetchData, useQuery } from '../mocks/externalData';
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/Pagination',
@@ -12,6 +13,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const PaginationEnabled: Story = Template.bind({});
