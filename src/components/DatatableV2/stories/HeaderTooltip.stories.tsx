@@ -4,6 +4,7 @@ import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
 import { DatatableColumn, DatatableHeader } from '../Datatable.types';
 import { DataSource } from '../mocks/data';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/HeaderTooltip',
@@ -11,6 +12,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 const TooltipComponent = ({

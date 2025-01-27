@@ -265,7 +265,27 @@ export interface DatatableInstance<D>
   };
 }
 
-export interface DatatableOptions<D>
+// First define the selection action types
+interface ClientSideRowSelectionActions<D> {
+  selectedRows: D[];
+  totalRowCount: number;
+  table: DatatableInstance<D>;
+}
+
+interface ServerSideSinglePageRowSelectionActions<D> {
+  selectedRows: D[];
+  totalRowCount: number;
+  table: DatatableInstance<D>;
+}
+
+interface ServerSideMultiPageRowSelectionActions<D> {
+  selectedRows: (string | number)[];
+  totalRowCount: number;
+  table: DatatableInstance<D>;
+}
+
+// Base options that apply to all cases
+interface DatatableBaseOptions<D>
   extends Omit<
     Partial<TableOptions<D>>,
     | 'aggregationFns'
@@ -317,16 +337,19 @@ export interface DatatableOptions<D>
    * functionalities and filter out the column from column orderdering.
    */
   columns: DatatableColumnDef<D>[];
+
   /**
    * Table data that will be displayed.
    */
   data: D[];
+
   /**
    * Enables/disables actions menu in column header with column-related actions.
    *
    * @default true
    */
   enableColumnActions?: boolean;
+
   /**
    * Enables/disables column ordering for the table.
    * Controlled in table column settings panel accessible through the column actions menu.
@@ -334,6 +357,7 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableColumnOrdering?: boolean;
+
   /**
    * Enables/disables column pinning for the table. Controlled in the column actions menu or table
    * column settings panel accessible through the column actions menu.
@@ -341,6 +365,7 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableColumnPinning?: boolean;
+
   /**
    * Enables/disables column resizing for the table. Columns can be resized by dragging handler in
    * the column header.
@@ -348,24 +373,28 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableColumnResizing?: boolean;
+
   /**
    * Enables/disables expanding detail panel for all rows.
    *
    * @default false
    */
   enableExpanding?: boolean;
+
   /**
    * Enables/disables button in the table header that expands all detail panels at once.
    *
    * @default false
    */
   enableExpandAll?: boolean;
+
   /**
    * Enables/disables switching between fullscreen and normal mode.
    *
    * @default true
    */
   enableFullScreenMode?: boolean;
+
   /**
    * Enables/disables column hiding for the table. Controlled in the column actions menu or table
    * column settings panel accessible through the column actions menu.
@@ -373,6 +402,7 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableHiding?: boolean;
+
   /**
    * Enables/disables selection of multiple rows in the table. If this is `false` radio buttons will
    * be displayed instead of checkboxes and there will be no select all option in the table header.
@@ -380,6 +410,7 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableMultiRowSelection?: TableOptions<D>['enableMultiRowSelection'];
+
   /**
    * Enables/disables if multiple columns can be sorted at the same time. If enabled multiple columns
    * can be sorted while SHIFT key is hold
@@ -387,18 +418,21 @@ export interface DatatableOptions<D>
    * @default false
    */
   enableMultiSort?: boolean;
+
   /**
    * Enables/disables the ability to remove multi-sorts
    *
    * @default false
    */
   enableMultiRemove?: boolean;
+
   /**
    * Enables/disables pagination for the table.
    *
    * @default true
    */
   enablePagination?: boolean;
+
   /**
    * Enables/disables storing table state into LocalStorage. This will automatically store pinned
    * and hidden columns, columns order and size and sorting. This property REQUIRES 'id' prop to be
@@ -407,24 +441,28 @@ export interface DatatableOptions<D>
    * @default true
    */
   enablePersistentState?: boolean;
+
   /**
    * Enables/disables row actions column for the table.
    *
    * @default false
    */
   enableRowActions?: boolean;
+
   /**
    * Enables/disables row selection for the table.
    *
    * @default true
    */
   enableRowSelection?: TableOptions<D>['enableRowSelection'];
+
   /**
    * Enables/disables batch row selection when `Shift` key is pressed.
    *
    * @default true
    */
   enableBatchRowSelection?: boolean;
+
   /**
    * Enables/disables rows per page selector for the table. This property REQUIRES
    * `enablePagination` to be true.
@@ -432,12 +470,14 @@ export interface DatatableOptions<D>
    * @default false
    */
   enableRowsPerPage?: boolean;
+
   /**
    * Enables/disables checkbox in the table header that selects all rows at once.
    *
    * @default true
    */
   enableSelectAll?: boolean;
+
   /**
    * Enables/disables the selection toolbar with the batch action buttons. If this is set to `false`
    * consumers has to control the selection state on their own as the Datatable doesn't provide other
@@ -446,33 +486,39 @@ export interface DatatableOptions<D>
    * @default true
    */
   enableSelectionToolbar?: boolean;
+
   /**
    * Enables/disables table sorting
    *
    * @default true
    */
   enableSorting?: boolean;
+
   /**
    * Enables/disables if column can be toggled to unsorted state after sorting happened before
    *
    * @default true
    */
   enableSortingRemoval?: boolean;
+
   /**
    * Enables/disables the top toolbar with table settings buttons
    *
    * @default true
    */
   enableTopToolbar?: boolean;
+
   /**
    * Unique table identifier. Used as id for storing table state to LocalStorage when enablePersistentState is enabled
    */
   id: string;
+
   /**
    * Default state of the table. This is used when table is initialized and is used when state is
    * restored to default.
    */
   initialState?: Partial<DatatableInitialState>;
+
   /**
    * If provided, this function will be called with an `updaterFn` when `state.isFullscreenMode`
    * changes. This overrides the default internal state management, so you are expected to manage
@@ -480,6 +526,7 @@ export interface DatatableOptions<D>
    * `tableOptions.state.isFullscreenMode` option.
    */
   onFullscreenModeChange?: Dispatch<SetStateAction<boolean>>;
+
   /**
    * If provided, this function will be called with an `updaterFn` when `state.showColumnSetting`
    * changes. This overrides the default internal state management, so you are expected to manage
@@ -487,6 +534,7 @@ export interface DatatableOptions<D>
    * `tableOptions.state.showColumnSettings` option.
    */
   onShowColumnSettings?: Dispatch<SetStateAction<boolean>>;
+
   /**
    * If provided, this function will be called with an `updaterFn` when `state.activeRowId`
    * changes. This overrides the default internal state management, so you are expected to manage
@@ -494,6 +542,7 @@ export interface DatatableOptions<D>
    * `tableOptions.state.activeRowId` option.
    */
   onActiveRowIdChange?: Dispatch<SetStateAction<string>>;
+
   /**
    * Callback that is called when user clicks anywhere in the row area. Clicking on the selection
    * checkbox, row expand button and the row actions stops event propagation and does not trigger
@@ -505,6 +554,7 @@ export interface DatatableOptions<D>
     row: DatatableRow<D>;
     table: DatatableInstance<D>;
   }) => void;
+
   /**
    * Provide your own implementation of row details panel. This property accepts React component
    * with properties:
@@ -515,48 +565,28 @@ export interface DatatableOptions<D>
     row: DatatableRow<D>;
     table: DatatableInstance<D>;
   }) => ReactNode;
+
   /**
    * You can provide your own implementation of the state when there are no data in the table. This
    * property accepts React component with one property `table` which holds current instance of the
    * table.
    */
   renderNoDataFallback?: (props: { table: DatatableInstance<D> }) => ReactNode;
-  /**
-   * You can provide your own implementation of the row actions container. This property accepts
-   * React component with properties:
-   *  - `selectedRows` - array of currently selected rows or list of row ids if manualPagination is enabled and rowSelectionMode is set to 'multi-page'
-   *  - `totalRowCount` - count of all rows in the table
-   *  - `table` - current instance of the table
-   */
-  renderRowSelectionActions?: (props: {
-    selectedRows: D[] | (string | number)[];
-    totalRowCount: number;
-    table: DatatableInstance<D>;
-  }) => ReactNode;
+
   /**
    * List of actions available on the row data. Actions will be rendered as last column of the table.
    * If only one action is provided it will be rendered directly in the column. If multiple actions
    * are provided actions will be rendered in dropdown menu.
    */
   rowActions?: RowAction<D>[];
-  /**
-   * Expected number of rows in the dataset which is used for displaying pagination correctly when
-   * pagination is not managed internally. This property is REQUIRED for the manual (managed,
-   * server-side) pagination.
-   */
-  rowCount?: number;
+
   /**
    * List of options for the row count displayed on the current page.
    *
    * default: `[10, 25, 50, 100]`
    */
   rowsPerPageOptions?: number[];
-  /**
-   * Available only if `manualPagination: true`.
-   *
-   * default: 'single-page`
-   */
-  rowSelectionMode?: 'single-page' | 'multi-page';
+
   /**
    * Switch mode for the select all checkbox in the table header. When `page` is set checkbox will
    * select all rows in the current page. When `all` is set checkbox will select all rows in the
@@ -565,8 +595,57 @@ export interface DatatableOptions<D>
    * @default page
    */
   selectAllMode?: 'page' | 'all';
+
   /**
    * Current state of the table. Used when you need to manage table state on your own.
    */
   state?: Partial<DatatableState>;
 }
+
+// Client-side options
+interface ClientSideDatatableOptions<D> extends DatatableBaseOptions<D> {
+  manualPagination?: false;
+  rowSelectionMode?: never;
+  rowCount?: number;
+  renderRowSelectionActions?: (
+    props: ClientSideRowSelectionActions<D>,
+  ) => ReactNode;
+}
+
+// Server-side options with single-page selection
+interface ServerSideSinglePageDatatableOptions<D>
+  extends DatatableBaseOptions<D> {
+  manualPagination: true;
+  rowSelectionMode?: 'single-page' | undefined;
+  /**
+   * Expected number of rows in the dataset which is used for displaying pagination correctly when
+   * pagination is not managed internally. This property is REQUIRED for the manual (managed,
+   * server-side) pagination.
+   */
+  rowCount: number;
+  renderRowSelectionActions?: (
+    props: ServerSideSinglePageRowSelectionActions<D>,
+  ) => ReactNode;
+}
+
+// Server-side options with multi-page selection
+interface ServerSideMultiPageDatatableOptions<D>
+  extends DatatableBaseOptions<D> {
+  manualPagination: true;
+  rowSelectionMode: 'multi-page';
+  /**
+   * Expected number of rows in the dataset which is used for displaying pagination correctly when
+   * pagination is not managed internally. This property is REQUIRED for the manual (managed,
+   * server-side) pagination.
+   */
+  rowCount: number;
+  renderRowSelectionActions?: (
+    props: ServerSideMultiPageRowSelectionActions<D>,
+  ) => ReactNode;
+}
+
+// The final discriminated union
+export type DatatableOptions<D> =
+  | ClientSideDatatableOptions<D>
+  | ServerSideSinglePageDatatableOptions<D>
+  | ServerSideMultiPageDatatableOptions<D>;

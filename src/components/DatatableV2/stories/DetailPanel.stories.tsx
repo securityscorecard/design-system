@@ -7,6 +7,7 @@ import Datatable from '../Datatable';
 import Template, { Story } from './Template';
 import Snippet from '../../Snippet/Snippet';
 import { Padbox } from '../../layout';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/DetailPanel',
@@ -14,6 +15,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 const Panel = ({ row }) => (

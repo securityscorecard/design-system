@@ -4,6 +4,7 @@ import { VisibilityState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/ColumnVisibility',
@@ -11,6 +12,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const ColumnVisibilityEnabled: Story = Template.bind({});

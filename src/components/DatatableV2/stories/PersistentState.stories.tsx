@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/PersistentState',
@@ -9,6 +10,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const PersistentStateEnabled: Story = Template.bind({});

@@ -8,6 +8,7 @@ import Template, { Story } from './Template';
 import { DataSource } from '../mocks/data';
 import { Stack } from '../../layout';
 import { DatatableInstance, DatatableRow } from '../Datatable.types';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/RowOnClick',
@@ -15,6 +16,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const RowOnClickEnabled: Story = Template.bind({});

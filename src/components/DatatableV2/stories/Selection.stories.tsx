@@ -7,6 +7,7 @@ import Datatable from '../Datatable';
 import Template, { Story } from './Template';
 import { Button } from '../../Button';
 import { fetchData, useQuery } from '../mocks/externalData';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/Selection',
@@ -14,6 +15,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const SelectionEnabled: Story = Template.bind({});
@@ -162,19 +164,20 @@ export const ManualPaginationWithSinglePageSelection: Story = (args) => {
       pageCount={dataQuery?.data?.pageCount ?? -1}
       rowCount={dataQuery?.data?.rowCount}
       state={{ pagination }}
+      manualPagination
       onPaginationChange={setPagination}
     />
   );
 };
 ManualPaginationWithSinglePageSelection.args = {
   ...Template.args,
+  manualPagination: true,
   rowSelectionMode: 'single-page',
   renderRowSelectionActions: ({ selectedRows }) => (
     <Button onClick={() => action('batch action')(selectedRows)}>
       Show selected rows
     </Button>
   ),
-  manualPagination: true,
   initialState: {
     rowSelection: {
       '55ea9935-7f59-4e30-b132-5372d214c20e': true,
@@ -191,7 +194,13 @@ export const ManualPaginationWithMultiPageSelection: Story =
   ManualPaginationWithSinglePageSelection.bind({});
 ManualPaginationWithMultiPageSelection.args = {
   ...ManualPaginationWithSinglePageSelection.args,
+  manualPagination: true,
   rowSelectionMode: 'multi-page',
+  renderRowSelectionActions: ({ selectedRows }) => (
+    <Button onClick={() => action('batch action')(selectedRows)}>
+      Show selected rows
+    </Button>
+  ),
 };
 ManualPaginationWithMultiPageSelection.parameters = {
   screenshot: { skip: false },

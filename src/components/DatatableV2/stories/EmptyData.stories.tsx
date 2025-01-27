@@ -7,10 +7,12 @@ import { Stack } from '../../layout';
 import { Button } from '../../Button';
 import { Text } from '../../Text';
 import { Paragraph } from '../../Paragraph';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/EmptyData',
   component: Datatable,
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const Default: Story = Template.bind({});

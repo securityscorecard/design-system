@@ -4,6 +4,7 @@ import { SortingState } from '@tanstack/react-table';
 
 import Datatable from '../Datatable';
 import Template, { Story, columns } from './Template';
+import argTypes from './argTypes';
 
 export default {
   title: 'components/DatatableV2/Sorting',
@@ -11,6 +12,7 @@ export default {
   parameters: {
     screenshot: { skip: true },
   },
+  argTypes,
 } as Meta<typeof Datatable>;
 
 export const SortingEnabled: Story = Template.bind({});
