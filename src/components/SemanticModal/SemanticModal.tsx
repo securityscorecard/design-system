@@ -95,18 +95,22 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
               >
                 {dismissAction.label as string}
               </Button>
-              <Button
-                as={isNotUndefined(mainAction.as) ? mainAction.as : undefined}
-                href={(mainAction as AbsoluteLinkActionKind<[MouseEvent]>).href}
-                isLoading={isPrimaryButtonLoading}
-                loadingText={loadingText}
-                name={mainAction.name}
-                to={(mainAction as RelativeLinkActionKind<[MouseEvent]>).to}
-                variant={primaryButtonColor === 'primary' ? 'base' : 'danger'}
-                onClick={mainAction.onClick}
-              >
-                {mainAction.label as string}
-              </Button>
+              {isNotUndefined(mainAction) && (
+                <Button
+                  as={isNotUndefined(mainAction.as) ? mainAction.as : undefined}
+                  href={
+                    (mainAction as AbsoluteLinkActionKind<[MouseEvent]>).href
+                  }
+                  isLoading={isPrimaryButtonLoading}
+                  loadingText={loadingText}
+                  name={mainAction.name}
+                  to={(mainAction as RelativeLinkActionKind<[MouseEvent]>).to}
+                  variant={primaryButtonColor === 'primary' ? 'base' : 'danger'}
+                  onClick={mainAction.onClick}
+                >
+                  {mainAction.label as string}
+                </Button>
+              )}
             </Inline>
           </Stack>
         </Center>
