@@ -36,7 +36,10 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       define: {
         'process.env.STORYBOOK': true,
-    },
+      },
+      server: {
+        allowedHosts: ['host.docker.internal'],
+      },
     });
   }
 };
