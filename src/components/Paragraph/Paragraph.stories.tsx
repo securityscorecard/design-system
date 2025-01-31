@@ -1,12 +1,13 @@
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Text } from '../index';
 import { TextSizes, TextVariants } from '../Text/Text.enums';
-import { ParagraphProps } from './Paragraph.types';
 import Paragraph from './Paragraph';
-import { generateControl } from '../../utils/tests/storybook';
 
-export default {
+const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra
+magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
+leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravida sem semper et.`;
+
+const meta = {
   title: 'typography/Paragraph',
   component: Paragraph,
   argTypes: {
@@ -17,7 +18,8 @@ export default {
       },
     },
     size: {
-      ...generateControl('select', TextSizes),
+      control: { type: 'select' },
+      options: Object.values(TextSizes),
       table: {
         type: {
           summary: Object.keys(TextSizes)
@@ -30,7 +32,8 @@ export default {
       },
     },
     variant: {
-      ...generateControl('select', TextVariants),
+      control: { type: 'select' },
+      options: Object.values(TextVariants),
       table: {
         type: {
           summary: Object.keys(TextVariants)
@@ -38,50 +41,30 @@ export default {
             .join('|'),
         },
         defaultValue: {
-          summary: `"${TextVariants.primary}"`,
+          summary: `"${TextVariants.default}"`,
         },
       },
     },
-    margin: { control: { disable: true } },
-    padding: { control: { disable: true } },
   },
-} as Meta;
+  args: {
+    children: lipsum,
+  },
+} satisfies Meta<typeof Paragraph>;
 
-const lipsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra
-magna lectus, a congue ex blandit vel. Donec id mi commodo eros porta tempus. Vivamus et elit ut
-leo tincidunt vehicula non a dolor. Suspendisse placerat turpis nisl, quis gravida sem semper et.`;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Playground: StoryFn<ParagraphProps> = (args) => (
-  <Paragraph {...args} />
-);
-Playground.args = {
-  children: lipsum,
-};
-Playground.parameters = {
-  screenshot: { skip: true },
+export const Playground: Story = {
+  parameters: {
+    screenshot: { skip: true },
+  },
 };
 
-export const DefaultParagraph: StoryFn = () => (
-  <>
-    <Paragraph size={TextSizes.md} variant={TextVariants.monospace}>
-      {lipsum}
-    </Paragraph>
-    <Paragraph margin={{ top: 1, bottom: 3 }} size={TextSizes.sm}>
-      {lipsum}
-    </Paragraph>
-    <Paragraph>{lipsum}</Paragraph>
-  </>
-);
+export const SmallParagraph = { args: { size: 'sm' } };
+export const MediumParagraph = { args: { size: 'md' } };
+export const LargeParagraph = { args: { size: 'lg' } };
 
-export const TextInParagraph: StoryFn = () => (
-  <Paragraph>
-    <Text variant={TextVariants.primary}>Lorem ipsum</Text> dolor sit amet,
-    consectetur <Text variant={TextVariants.secondary}>adipiscing elit</Text>.
-    Phasellus pharetra magna lectus, <Text isBold>a congue ex</Text> blandit
-    vel. <Text variant={TextVariants.context}>Donec id mi commodo eros</Text>{' '}
-    porta tempus. Vivamus et elit ut leo{' '}
-    <Text variant={TextVariants.monospace}>tincidunt vehicula</Text> non a
-    dolor. Suspendisse placerat turpis nisl, quis{' '}
-    <Text variant={TextVariants.danger}>gravida sem semper et</Text>.
-  </Paragraph>
-);
+export const DefaultParagraph = { args: { variant: 'default' } };
+export const MonospaceParagraph = { args: { variant: 'monospace' } };
+export const SubtleParagraph = { args: { variant: 'subtle' } };
+export const DangerParagraph = { args: { variant: 'danger' } };

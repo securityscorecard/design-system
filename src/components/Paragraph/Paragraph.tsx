@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 
+import type { WithAsProp } from '../../types/utils.types';
+import type { SpacingProps } from '../../types/spacing.types';
 import { createSpacings } from '../../utils';
 import { Text } from '../Text';
-import { TextSizes, TextVariants } from '../Text/Text.enums';
-import { ParagraphProps } from './Paragraph.types';
 
-const Paragraph = styled(Text).attrs<ParagraphProps>((props) => ({
-  size: props.size ?? TextSizes.md,
-  variant: props.variant ?? TextVariants.default,
+const Paragraph = styled(Text).attrs<WithAsProp<SpacingProps>>((props) => ({
   as: props.as ?? 'p',
-}))<ParagraphProps>`
+}))`
   ${createSpacings};
 `;
 

@@ -6,7 +6,7 @@ import { setup } from '../../utils/tests/setup';
 import Drawer from './Drawer';
 import Button from '../ButtonV2/Button';
 import { Icon } from '../Icon';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { DropdownMenu } from '../DropdownMenu';
 import { Inline, Stack } from '../layout';
 
