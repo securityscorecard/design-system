@@ -48,7 +48,6 @@ const GridTemplate: StoryFn<GridProps> = (args) => (
     <Box>Long item</Box>
     <Box>Very long item item item</Box>
     <Box>Item</Box>
-    <Box>Item</Box>
     <Box>Long item</Box>
     <Box>Very long item item item item</Box>
     <Box>Very long item item item</Box>
