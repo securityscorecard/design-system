@@ -26,6 +26,7 @@ type TextareaRootProps = {
   $maxHeight?: TextAreaProps['maxHeight'];
   $isDisabled?: TextAreaProps['isDisabled'];
   $isInvalid?: TextAreaProps['isInvalid'];
+  $hasMaxLength: boolean;
 };
 
 const TextareaStyled = styled.textarea<TextareaStyledProps>`

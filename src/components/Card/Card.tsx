@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import cls from 'classnames';
+import { Location } from 'history';
 
 import { Padbox, Stack } from '../layout';
 import { SpaceSize } from '../../theme/space.types';
@@ -19,7 +20,9 @@ const InteractiveCard = css`
   }
 `;
 
-const CardWrapper = styled(Padbox)<CardWrapperProps>`
+const CardWrapper = styled(Padbox)<
+  CardWrapperProps & { href?: string; to?: Location }
+>`
   flex-grow: 1;
   background-color: var(--sscds-color-background-surface-default);
   border: 1px solid var(--sscds-color-border-surface-default);

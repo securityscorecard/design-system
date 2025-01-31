@@ -42,7 +42,7 @@ import {
 } from './MultiValueInput.types';
 import { CLX_COMPONENT } from '../../../theme/constants';
 
-const ValueContainer = styled(Padbox)`
+const ValueContainer = styled(Padbox)<{ $hasValue: boolean }>`
   display: flex;
   flex-wrap: wrap;
   gap: ${getSpace('xs')};
