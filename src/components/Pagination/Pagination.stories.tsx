@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 
 import Pagination from './Pagination';
 import { PaginationProps } from './Pagination.types';
-import { Button } from '..';
+import ButtonV2 from '../ButtonV2/Button';
 
 export default {
   title: 'components/Pagination',
@@ -54,7 +54,7 @@ export const WithCustomRenderItemFunction = PaginationTemplate.bind({});
 WithCustomRenderItemFunction.args = {
   ...OnFirstPage.args,
   currentPage: 10,
-  renderItem: (param) => <Button key={param.key}>{param.children}</Button>,
+  renderItem: (args) => <ButtonV2 {...args} />,
 };
 
 export const OnlyCurrentPage = PaginationTemplate.bind({});
