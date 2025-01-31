@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import HintTooltip from './HintTooltip';
 import { Inline, Stack } from '../layout';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { Link } from '../Link';
 import { Text } from '../Text';
 

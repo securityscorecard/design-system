@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { Padbox, Stack, Surface } from '../../layout';
-import { Paragraph } from '../../Paragraph';
+import Paragraph from '../../Paragraph/Paragraph';
 import { Text } from '../../Text';
 import { DatatableInstance } from '../Datatable.types';
 import BodyRow from './BodyRow';

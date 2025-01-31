@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Paragraph } from '../../Paragraph';
+import Paragraph from '../../Paragraph/Paragraph';
 import { MessageVariants } from './Message.enums';
 import { MessageProps } from './Message.types';
 import { CLX_COMPONENT } from '../../../theme/constants';

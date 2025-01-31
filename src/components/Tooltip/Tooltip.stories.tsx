@@ -4,7 +4,7 @@ import { omit } from 'ramda';
 import { PortalPlacements } from './Tooltip.enums';
 import { Inline, Padbox, Stack } from '../layout';
 import { Button } from '../Button';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import Tooltip from './Tooltip';
 import { TooltipProps } from './Tooltip.types';
 import { generateControl } from '../../utils/tests/storybook';

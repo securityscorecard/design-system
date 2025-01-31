@@ -10,7 +10,7 @@ import Stepper from './Stepper';
 import Step from './Step';
 import { StepperOrientations } from './Stepper.enums';
 import { H2 } from '../Heading';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 
 export default {
   title: 'components/Stepper',

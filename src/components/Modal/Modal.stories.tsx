@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Modal from './Modal';
 import { H5 } from '../Heading';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { Inline, Padbox } from '../layout';
 import { Button } from '../Button';
 import { Tooltip } from '../Tooltip';

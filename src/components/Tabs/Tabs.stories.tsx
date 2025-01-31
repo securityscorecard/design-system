@@ -10,7 +10,7 @@ import { generateControl } from '../../utils/tests/storybook';
 import { TabVariants } from './Tabs.enums';
 import { Icon } from '../Icon';
 import { Heading } from '../Heading';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import Chip from '../Chip/Chip';
 import ChipLabel from '../Chip/ChipLabel';
 

@@ -8,7 +8,7 @@ import { DropdownProps } from './Dropdown.types';
 import { PaddingTypes } from '../layout/Padbox/Padbox.enums';
 import { generateControl } from '../../utils/tests/storybook';
 import { CreatableSelect } from '../forms/Select';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { Link } from '../Link';
 
 export default {

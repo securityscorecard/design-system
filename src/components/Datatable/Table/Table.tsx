@@ -50,7 +50,7 @@ import { TextSizes } from '../../Text/Text.enums';
 import { SpaceSizes } from '../../../theme';
 import Button from '../../ButtonV2/Button';
 import { H4 } from '../../Heading';
-import { Paragraph } from '../../Paragraph';
+import Paragraph from '../../Paragraph/Paragraph';
 
 const NoDataOutline = styled.div`
   border-top: 1px solid ${getColor('neutral.300')};

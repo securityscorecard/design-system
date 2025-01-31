@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { Center } from '../layout';
 import { ControlDropdownProps } from './ControlDropdown.types';
 import ControlDropdown from './ControlDropdown';

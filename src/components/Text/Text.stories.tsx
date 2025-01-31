@@ -5,7 +5,7 @@ import Text, { Code, Strong } from './Text';
 import { TextProps } from './Text.types';
 import { TextSizes, TextVariants } from './Text.enums';
 import { generateControl } from '../../utils/tests/storybook';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { Heading } from '../Heading';
 import { Link } from '../Link';
 import Display from '../Display/Display';

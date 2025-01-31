@@ -1,5 +1,5 @@
 import { Inline } from '../../layout';
-import { Paragraph } from '../../Paragraph';
+import Paragraph from '../../Paragraph/Paragraph';
 import { BottomBarProps } from './BottomBar.types';
 import Button from '../../ButtonV2/Button';
 import { useSafeTranslation } from '../../../hooks/useSafeTranslation';

@@ -8,7 +8,7 @@ import Button from '../ButtonV2/Button';
 import Accordion from './Accordion';
 import { Text } from '../Text';
 import { TextSizes } from '../Text/Text.enums';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { AccordionItemId } from './Accordion.types';
 
 const meta = {
