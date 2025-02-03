@@ -68,8 +68,8 @@
     "types": "tsc -b",
     "lint": "eslint . --ext js,ts,jsx,tsx,md,mdx",
     "lint:fix": "eslint . --ext js,ts,jsx,tsx,md,mdx --fix",
-    "lint:css": "stylelint --config .stylelintrc-css.json 'src/**/*.css'",
-    "lint:css-jsx": "stylelint --config .stylelintrc-jsx.json 'src/**/*.{ts,tsx}'",
+    "lint:css": "stylelint --config .stylelintrc-css.json 'src/**/*.css' --ignore-path .gitignore",
+    "lint:css-jsx": "stylelint --config .stylelintrc-jsx.json 'src/**/*.{ts,tsx}' --ignore-path .gitignore",
     "semantic-release": "semantic-release",
     "prepare": "husky install",
     "knip": "knip"

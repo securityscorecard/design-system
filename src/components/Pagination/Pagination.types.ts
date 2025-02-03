@@ -19,6 +19,7 @@ export interface PaginationItemProps {
   page?: number;
   onClick: () => void;
   children: ReactNode;
+  key?: string;
 }
 
 export interface PaginationProps {

@@ -4,4 +4,5 @@ stats
 .git
 visual-regressions
 extension
+coverage
 *.md

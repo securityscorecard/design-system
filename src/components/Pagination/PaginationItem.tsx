@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { getColor, getRadii, pxToRem } from '../../utils';
+import { pxToRem } from '../../utils';
 import { Padbox } from '../layout';
 import { PaginationItemProps } from './Pagination.types';
 
@@ -18,10 +18,10 @@ const StyledPaginationComponent = styled.button<{
   margin: ${pxToRem(0, 4)};
   background: none;
   border: 1px solid transparent;
-  border-radius: ${getRadii('default')};
+  border-radius: var(--sscds-radii-button);
   font-size: var(--sscds-font-size-elementlabel-sm);
   line-height: var(--sscds-font-lineheight-elementlabel);
-  color: ${getColor('neutral.900')};
+  color: var(--sscds-color-text-default);
   cursor: pointer;
 
   &:first-of-type {
@@ -31,7 +31,7 @@ const StyledPaginationComponent = styled.button<{
     margin-right: 0;
   }
   &:disabled {
-    color: ${getColor('neutral.600')};
+    color: var(--sscds-color-text-disabled);
     cursor: default;
   }
 
@@ -44,16 +44,16 @@ const StyledPaginationComponent = styled.button<{
   ${({ $isCurrent }) =>
     $isCurrent
       ? css`
-          border-color: ${getColor('neutral.400')};
-          background-color: ${getColor('neutral.300')};
+          border-color: var(--sscds-color-border-surface-dynamic);
+          background-color: var(--sscds-color-background-surface-dynamic);
           font-size: var(--sscds-font-size-elementlabel-md);
           font-weight: var(--sscds-font-weight-elementlabel-strong);
           cursor: default;
         `
       : css`
           &:hover {
-            border-color: ${getColor('neutral.400')};
-            background-color: ${getColor('neutral.0')};
+            border-color: var(--sscds-color-border-surface-hover);
+            background-color: var(--sscds-color-background-surface-hover);
           }
         `};
 `;
@@ -64,6 +64,7 @@ export const PaginationItem = ({
   isCurrent,
   isShrinked,
   onClick,
+  key,
   ...props
 }: PaginationItemProps) => {
   const handleOnClick = () => {
@@ -75,6 +76,7 @@ export const PaginationItem = ({
   };
   return (
     <StyledPaginationComponent
+      key={key}
       $isCurrent={isCurrent}
       $isShrinked={isShrinked}
       data-testid="pagination-item"
@@ -98,6 +100,6 @@ export const PaginationItemElipsis = styled(Padbox).attrs(() => ({
   height: ${pxToRem(32)};
   font-size: var(--sscds-font-size-elementlabel-sm);
   line-height: var(--sscds-font-lineheight-elementlabel);
-  color: ${getColor('neutral.600')};
+  color: var(--sscds-color-text-subtle);
   margin: ${pxToRem(0, 4)};
 `;

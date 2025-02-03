@@ -92,7 +92,7 @@ const PageButtons = ({
       {showLeftEllipsis && <PaginationItemElipsis />}
       {pages.map((page) =>
         renderItem({
-          key: page,
+          key: String(page),
           page,
           isCurrent: currentPage === page,
           onClick: () => onChange(page),
@@ -110,7 +110,7 @@ const PageButtons = ({
   ) : (
     <>
       {renderItem({
-        key: currentPage,
+        key: String(currentPage),
         page: currentPage,
         isCurrent: true,
         onClick: () => onChange(currentPage),
