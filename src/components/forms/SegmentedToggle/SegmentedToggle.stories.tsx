@@ -91,6 +91,34 @@ export const Default: Story = {
   args: { children: children({ group: 'default' }), group: 'default' },
 };
 
+export const WithCount: Story = {
+  args: {
+    children: (
+      <>
+        <SegmentedToggleItem
+          itemId="counter-input1"
+          label="One"
+          value="1"
+          defaultChecked
+        />
+        <SegmentedToggleItem
+          count={10}
+          itemId="counter-input2"
+          label="Two"
+          value="2"
+        />
+        <SegmentedToggleItem
+          count={20}
+          itemId="counter-input3"
+          label="Three"
+          value="3"
+        />
+      </>
+    ),
+    group: 'counter',
+  },
+};
+
 export const Disabled: Story = {
   args: {
     children: children({ group: 'disabled' }),

@@ -15,9 +15,14 @@ import ElementLabel from '../../ElementLabel/ElementLabel';
 
 export interface SegmentedToggleItemProps
   extends Omit<ComponentPropsWithRef<'input'>, 'size'> {
+  /** Text label for the item */
   label: string;
+  /** Value for the item */
   value: string | number;
+  /** Unique identifier for the item */
   itemId: string;
+  /** Optional count number displayed next to the label */
+  count?: number;
 }
 
 export interface SegmentedToggleProps {
@@ -120,10 +125,11 @@ const SegmentedToggleLabel = styled.label`
   padding: var(--sscds-space-1x) var(--sscds-space-2x);
   text-align: center;
   transition: var(--sscds-action-transition);
+  cursor: pointer;
 `;
 
 const Radio = styled.input`
-  /* transform: translateX(-100%); */
+  transform: translateX(-100%);
   position: absolute;
   pointer-events: none;
   opacity: 0;
@@ -164,7 +170,7 @@ const Radio = styled.input`
 export const SegmentedToggleItem = forwardRef<
   HTMLInputElement,
   SegmentedToggleItemProps
->(({ label, value, itemId, ...props }, ref) => {
+>(({ label, value, itemId, count, ...props }, ref) => {
   const { name, disabled, onChange } = useContext();
 
   return (
@@ -180,9 +186,16 @@ export const SegmentedToggleItem = forwardRef<
         onChange={onChange}
       />
       <SegmentedToggleLabel htmlFor={itemId}>
-        <ElementLabel color={disabled ? 'disabled' : 'default'}>
-          {label}
-        </ElementLabel>
+        <Inline gap="1x">
+          <ElementLabel color={disabled ? 'disabled' : 'default'}>
+            {label}
+          </ElementLabel>
+          {count && (
+            <ElementLabel color={disabled ? 'disabled' : 'default'} isStrong>
+              {count}
+            </ElementLabel>
+          )}
+        </Inline>
       </SegmentedToggleLabel>
     </SegmentedToggleItemRoot>
   );
