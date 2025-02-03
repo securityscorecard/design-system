@@ -52,7 +52,7 @@ const { useContext, Provider } = createCtx<SegmentedToggleContext>(
   'The SegmentedToggleItem has to be a child of the SegmentedToggle component.',
 );
 
-const SegmentedToggleRoot = styled(Padbox)`
+const SegmentedToggleRoot = styled(Padbox)<{ $isExpanded: boolean }>`
   width: fit-content;
   display: inline-block;
   background-color: var(--sscds-color-neutral-alpha-3);

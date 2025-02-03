@@ -21,7 +21,6 @@ export interface PadboxProps {
   paddingSize?: SpaceSize;
   theme: DefaultTheme;
   className?: string;
-  [key: string]: unknown;
 }
 
 const Padbox = styled.div.attrs<PadboxProps>((props) => ({

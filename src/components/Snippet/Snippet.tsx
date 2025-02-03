@@ -19,7 +19,7 @@ const ButtonWrapper = styled.div<{ $position: 'top' | 'bottom' }>`
       ? `top: var(--sscds-space-1x);`
       : `bottom: var(--sscds-space-1x);`};
 `;
-const SnippetContent = styled(Padbox)`
+const SnippetContent = styled(Padbox)<{ $shouldWrapText: boolean }>`
   ${({ $shouldWrapText }) =>
     $shouldWrapText
       ? `

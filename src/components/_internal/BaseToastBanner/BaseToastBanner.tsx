@@ -37,6 +37,7 @@ const iconColorVariants = {
 
 const IconPadbox = styled(Padbox)<{
   $variant?: BaseToastBannerProps['variant'];
+  $hasBackground: boolean;
 }>`
   background-color: ${({ $hasBackground, $variant }) =>
     $hasBackground ? baseToastBannerColorVariants[$variant] : undefined};
