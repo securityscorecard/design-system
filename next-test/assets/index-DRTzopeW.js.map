@@ -1,0 +1,1 @@
+{"version":3,"file":"index-DRTzopeW.js","sources":["../../src/components/forms/Checkbox/index.ts"],"sourcesContent":["export { default as Checkbox } from './Checkbox';\nexport * from './Checkbox.types';\n"],"names":["cov_6pct7amjc","actualCoverage"],"mappings":"0tBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
