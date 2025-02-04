@@ -405,6 +405,7 @@ jobs:
         if: steps.storybook-build-cache.outputs.cache-hit != 'true'
         env:
           DOCS: true
+          VERSION: ${{ needs.get-next-version.outputs.new-release-version }}
         run: yarn storybook:build -o ./docs-build/${{ needs.get-next-version.outputs.new-release-version }}
 
       - name: Generate redirect index

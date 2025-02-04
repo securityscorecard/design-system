@@ -184,6 +184,8 @@
     "knip": "^5.30.5",
     "lint-staged": "^12.3.7",
     "mockdate": "^3.0.5",
+    "msw": "^2.7.0",
+    "msw-storybook-addon": "^2.0.4",
     "postcss": "^8.4.38",
     "postcss-import": "^16.1.0",
     "postcss-styled-syntax": "^0.6.4",
@@ -239,5 +241,10 @@
       "yarn run lint:css"
     ]
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.0",
+  "msw": {
+    "workerDirectory": [
+      ".storybook/assets"
+    ]
+  }
 }

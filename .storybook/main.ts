@@ -6,6 +6,9 @@ const config: StorybookConfig = {
     '../src/**/*.@(mdx|stories.@(tsx|jsx))',
     '../docs/**/*.mdx'
   ],
+  staticDirs: [
+    {from: './assets', to: '/'},
+  ],
   addons: [
     '@storybook/addon-essentials',
     {
@@ -34,6 +37,9 @@ const config: StorybookConfig = {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
+      base: process.env.DOCS === 'true'
+        ? `/design-system/${process.env.VERSION}/`
+        : './',
       define: {
         'process.env.STORYBOOK': true,
       },

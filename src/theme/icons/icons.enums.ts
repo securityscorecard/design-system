@@ -49,6 +49,7 @@ export const SSCIconNames = {
   times: 'times',
   upload: 'upload',
   wrench: 'wrench', // custom, does not have FA variant
+  company: 'company', // custom, does not have FA variant
 } as const;
 
 export const IconTypes = {

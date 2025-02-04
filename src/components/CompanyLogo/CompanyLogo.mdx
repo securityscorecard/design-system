@@ -1,0 +1,65 @@
+import { ArgTypes, Canvas, Meta, Subtitle } from '@storybook/blocks';
+
+import * as CompanyLogoStories from './CompanyLogo.stories';
+
+<Meta of={CompanyLogoStories} />
+
+# CompanyLogo
+
+<Subtitle>
+  A versatile container designed for the consistent display of company logos. It
+  ensures that logos are presented in an uniform manner across different parts
+  of an application.
+</Subtitle>
+
+## Purpose
+
+The primary purpose of the `CompanyLogo` component is to provide a standardized way to display company logos, handling various states such as loading, error, and success. It ensures that logos are displayed with the correct aspect ratio, size, and styling, maintaining a cohesive look and feel.
+
+## Usage
+
+To use the `CompanyLogo` component, simply import it:
+
+```js
+import { CompanyLogo } from '@security-scorecard/design-system';
+```
+
+Then provide the required props `src` for the logo URL, `alt` for alternative text.
+
+Example:
+
+<Canvas layout="centered" of={CompanyLogoStories.Default} sourceState="shown" />
+
+<ArgTypes />
+
+## Sizes
+
+The `CompanyLogo` component supports the following 4 sizes: `sm`, `md`, `lg`, `xl`.
+
+<Canvas layout="centered" of={CompanyLogoStories.Sizes} />
+
+## Error Handling
+
+The `CompanyLogo` component has built-in error handling. If the logo fails to load, the component will display a fallback icon. An optional prop `shouldHideOnLoadError` can be used to control the behavior when the logo fails to load. If this prop is set to `true`, the component will not display the logo and will display the fallback icon instead.
+
+### Fallback example
+
+<img
+  alt="Company Logo Error"
+  height={56}
+  src="./images/company-logo-error.png"
+  width={56}
+/>
+
+## Loading
+
+The `CompanyLogo` component has built-in loading state. If the logo is still loading, the component will display a spinner.
+
+### Loading example
+
+<img
+  alt="Company Logo Error"
+  height={56}
+  src="./images/company-logo-loading.png"
+  width={56}
+/>
