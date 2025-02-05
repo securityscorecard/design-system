@@ -1,9 +1,7 @@
 import styled, { keyframes } from 'styled-components';
-import { pipe, prop, unless } from 'ramda';
-import { isString } from 'ramda-adjunct';
 import cls from 'classnames';
 
-import { getColor, pxToRem } from '../../utils';
+import { pxToRem } from '../../utils';
 import { SpinnerProps } from './Spinner.types';
 import { CLX_COMPONENT } from '../../theme/constants';
 
@@ -16,11 +14,6 @@ const spin = keyframes`
   }
 `;
 
-const getHorizontalMargin = pipe(
-  prop('horizontalMargin'),
-  unless(isString, pxToRem),
-);
-
 const Spinner = styled.div.attrs<SpinnerProps>((props) => ({
   className: cls(CLX_COMPONENT, 'spinner'),
   dark: props.dark ?? false,
@@ -30,20 +23,18 @@ const Spinner = styled.div.attrs<SpinnerProps>((props) => ({
   horizontalMargin: props.horizontalMargin ?? 'auto',
   borderWidth: props.borderWidth ?? 4,
 }))<SpinnerProps>`
-  margin-top: ${({ verticalMargin }) => pxToRem(verticalMargin)};
-  margin-bottom: ${({ verticalMargin }) => pxToRem(verticalMargin)};
-  margin-left: ${getHorizontalMargin};
-  margin-right: ${getHorizontalMargin};
+  margin-block: ${({ verticalMargin }) => pxToRem(verticalMargin)};
+  margin-inline: ${({ horizontalMargin }) => pxToRem(horizontalMargin)};
   border-radius: 50%;
-  width: ${({ width }) => pxToRem(width)};
-  height: ${({ height }) => pxToRem(height)};
+  width: ${({ width, size }) => pxToRem(size ?? width)};
+  height: ${({ height, size }) => pxToRem(size ?? height)};
   animation: ${spin} 1s infinite linear;
   border: solid
     ${({ dark }) =>
-      dark ? 'var(--sscds-slateA-slateA6)' : 'var(--sscds-whiteA-whiteA4)'};
+      dark ? 'var(--sscds-color-neutral-alpha-6)' : 'var(--white-a4)'};
   border-width: ${({ borderWidth }) => `${borderWidth}px`};
-  border-top-color: ${({ dark, theme }) =>
-    getColor(dark ? 'neutral.800' : 'neutral.0', { theme })};
+  border-top-color: ${({ dark }) =>
+    dark ? 'var(--sscds-color-neutral-11)' : 'var(--sscds-color-neutral-0)'};
 `;
 
 export default Spinner;

@@ -1,6 +1,8 @@
+/// <reference types="vite/types/importMeta.d.ts" />
 import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
 import { withScreenshot } from 'storycap';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import i18n from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
 import ICU from 'i18next-icu';
@@ -11,12 +13,13 @@ import icuPt from 'i18next-icu/locale-data/pt';
 import icuCs from 'i18next-icu/locale-data/cs';
 
 import { DSProvider, createIconLibrary } from '../src/theme';
+import { withThemeByClassName } from './decorators/withThemeByClassName';
+import { withMockedDate } from './decorators/withMockedDate';
 import en from '../src/locales/en-US';
 import cs from '../src/locales/cs-CZ';
 import es from '../src/locales/es-ES';
 import pt from '../src/locales/pt-BR';
 import ja from '../src/locales/ja-JP';
-import { withThemeByClassName } from './decorators/withThemeByClassName';
 
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
@@ -24,8 +27,6 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/space-mono/400.css';
 import '../src/tokens/tokens.css';
-import { SlowBuffer } from 'buffer';
-import { withMockedDate } from './decorators/withMockedDate';
 
 function clearDatatableLS() {
   Object.keys(localStorage)
@@ -34,6 +35,10 @@ function clearDatatableLS() {
 }
 clearDatatableLS();
 createIconLibrary();
+initialize({
+  onUnhandledRequest: 'bypass',
+  serviceWorker: { url: import.meta.env.BASE_URL + 'mockServiceWorker.js' }
+});
 window.Math.random = () => 0.5;
 
 i18n
@@ -172,6 +177,7 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [mswLoader],
 };
 
 export default preview;
