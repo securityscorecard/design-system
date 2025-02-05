@@ -8,7 +8,7 @@ import {
   RelativeLinkActionKind,
 } from '../../../types/action.types';
 import { DropdownLinkProps, DropdownMenuProps } from './DropdownMenu.types';
-import { getColor, getSpace, pxToRem } from '../../../utils';
+import { pxToRem } from '../../../utils';
 import { requireRouterLink } from '../../../utils/require-router-link';
 import { Dropdown } from '../../Dropdown';
 import { SpaceSizes } from '../../../theme/space.enums';
@@ -21,8 +21,7 @@ const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-top: ${getSpace(SpaceSizes.sm)};
-  padding-bottom: ${getSpace(SpaceSizes.sm)};
+  padding-block: var(--sscds-space-2x);
 `;
 
 const FORWARD_PROP_EXCEPTIONS = ['paddingSize', 'paddingType'];
@@ -40,7 +39,7 @@ const DropdownLink = styled(Padbox).withConfig({
 
   &:hover,
   &:focus-visible {
-    background: ${getColor('primary.50')};
+    background: var(--sscds-color-background-selectable-hover);
   }
 `;
 

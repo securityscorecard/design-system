@@ -251,7 +251,7 @@
   --sscds-color-background-action-danger-ghost-active: var(--sscds-color-background-action-ghost-active);
   --sscds-color-background-action-danger-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
 
-  --sscds-color-background-selectable-hover: var(--sscds-color-neutral-3);
+  --sscds-color-background-selectable-hover: var(--sscds-color-neutral-alpha-3);
   --sscds-color-background-selectable-active: var(--sscds-color-primary-3);
 
   --sscds-color-background-pill-blue-default: var(--blue-3);

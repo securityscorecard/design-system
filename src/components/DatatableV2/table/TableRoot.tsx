@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { getColor, getRadii } from '../../../utils';
-
 const TableRoot = styled.div`
   position: relative;
   width: 100%;
@@ -22,14 +20,14 @@ const TableRoot = styled.div`
     height: 1.5rem;
   }
   &::-webkit-scrollbar-thumb {
-    border-radius: ${getRadii('round')};
-    background-color: ${getColor('primary.500')};
-    border: 8px solid ${getColor('neutral.0')};
+    border-radius: var(--sscds-radii-rounded);
+    background-color: var(--sscds-color-primary-9);
+    border: 8px solid var(--sscds-color-neutral-0);
   }
   &::-webkit-scrollbar-track-piece {
-    border-radius: ${getRadii('round')};
-    background-color: ${getColor('neutral.300')};
-    border: 8px solid ${getColor('neutral.0')};
+    border-radius: var(--sscds-radii-rounded);
+    background-color: var(--sscds-color-neutral-4);
+    border: 8px solid var(--sscds-color-neutral-0);
   }
 
   .ds-table {
@@ -50,10 +48,10 @@ const TableRoot = styled.div`
     justify-content: flex-start;
 
     &[data-active='true'] .ds-table-cell {
-      background-color: var(--sscds-table-color-active);
+      background-color: var(--sscds-color-background-selectable-active);
     }
     &[data-active]:hover .ds-table-cell {
-      background-color: var(--sscds-color-primary-3);
+      background-color: var(--sscds-color-background-selectable-hover);
       cursor: pointer;
     }
   }
