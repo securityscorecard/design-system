@@ -58,7 +58,7 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
     },
     ref,
   ) => {
-    const [dismissAction, mainAction] = actions;
+    const [dismissAction, mainAction] = actions ?? [];
 
     return (
       <StyledModal ref={ref} size="sm" onClose={onClose}>
@@ -78,40 +78,49 @@ const SemanticModal = forwardRef<HTMLDivElement, SemanticModalProps>(
                 {message}
               </Text>
             </Stack>
-            <Inline gap={SpaceSizes.md} justify="center">
-              <Button
-                as={
-                  isNotUndefined(dismissAction.as)
-                    ? dismissAction.as
-                    : undefined
-                }
-                href={
-                  (dismissAction as AbsoluteLinkActionKind<[MouseEvent]>).href
-                }
-                name={dismissAction.name}
-                to={(dismissAction as RelativeLinkActionKind<[MouseEvent]>).to}
-                variant="subtle"
-                onClick={dismissAction.onClick}
-              >
-                {dismissAction.label as string}
-              </Button>
-              {isNotUndefined(mainAction) && (
+            {isNotUndefined(dismissAction) && (
+              <Inline gap={SpaceSizes.md} justify="center">
                 <Button
-                  as={isNotUndefined(mainAction.as) ? mainAction.as : undefined}
-                  href={
-                    (mainAction as AbsoluteLinkActionKind<[MouseEvent]>).href
+                  as={
+                    isNotUndefined(dismissAction?.as)
+                      ? dismissAction.as
+                      : undefined
                   }
-                  isLoading={isPrimaryButtonLoading}
-                  loadingText={loadingText}
-                  name={mainAction.name}
-                  to={(mainAction as RelativeLinkActionKind<[MouseEvent]>).to}
-                  variant={primaryButtonColor === 'primary' ? 'base' : 'danger'}
-                  onClick={mainAction.onClick}
+                  href={
+                    (dismissAction as AbsoluteLinkActionKind<[MouseEvent]>).href
+                  }
+                  name={dismissAction.name}
+                  to={
+                    (dismissAction as RelativeLinkActionKind<[MouseEvent]>).to
+                  }
+                  variant="subtle"
+                  onClick={dismissAction.onClick}
                 >
-                  {mainAction.label as string}
+                  {dismissAction.label as string}
                 </Button>
-              )}
-            </Inline>
+
+                {isNotUndefined(mainAction) && (
+                  <Button
+                    as={
+                      isNotUndefined(mainAction?.as) ? mainAction.as : undefined
+                    }
+                    href={
+                      (mainAction as AbsoluteLinkActionKind<[MouseEvent]>).href
+                    }
+                    isLoading={isPrimaryButtonLoading}
+                    loadingText={loadingText}
+                    name={mainAction.name}
+                    to={(mainAction as RelativeLinkActionKind<[MouseEvent]>).to}
+                    variant={
+                      primaryButtonColor === 'primary' ? 'base' : 'danger'
+                    }
+                    onClick={mainAction.onClick}
+                  >
+                    {mainAction.label as string}
+                  </Button>
+                )}
+              </Inline>
+            )}
           </Stack>
         </Center>
       </StyledModal>
