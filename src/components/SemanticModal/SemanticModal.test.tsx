@@ -84,4 +84,18 @@ describe('SemanticModal', () => {
     const dismissButton = screen.getByRole('button', { name: 'Dismiss' });
     expect(dismissButton).toBeInTheDocument();
   });
+
+  it('should render correctly when actions prop is undefined', () => {
+    setup(<SemanticModal {...defaultProps} actions={undefined} />);
+
+    expect(screen.getByText('Modal Title')).toBeInTheDocument();
+    expect(screen.getByText('Modal Message')).toBeInTheDocument();
+  });
+
+  it('should render correctly when actions prop is an empty array', () => {
+    setup(<SemanticModal {...defaultProps} actions={[]} />);
+
+    expect(screen.getByText('Modal Title')).toBeInTheDocument();
+    expect(screen.getByText('Modal Message')).toBeInTheDocument();
+  });
 });
