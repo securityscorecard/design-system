@@ -88,7 +88,10 @@ export const Playground: Story = {
 };
 
 export const Default: Story = {
-  args: { children: children({ group: 'default' }), group: 'default' },
+  args: {
+    children: children({ group: 'default' }),
+    group: 'default',
+  },
 };
 
 export const WithCount: Story = {
@@ -116,6 +119,12 @@ export const WithCount: Story = {
       </>
     ),
     group: 'counter',
+  },
+};
+export const Expanded: Story = {
+  args: {
+    ...WithCount.args,
+    isExpanded: true,
   },
 };
 

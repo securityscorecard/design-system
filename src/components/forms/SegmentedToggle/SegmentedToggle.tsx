@@ -120,7 +120,8 @@ const SegmentedToggleItemRoot = styled.div`
 `;
 
 const SegmentedToggleLabel = styled.label`
-  display: block;
+  display: flex;
+  justify-content: center;
   width: 100%;
   padding: var(--sscds-space-1x) var(--sscds-space-2x);
   text-align: center;
