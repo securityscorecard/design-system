@@ -17,7 +17,7 @@ import { SelectionToolbarReactTable } from '../_internal/toolbars/SelectionToolb
 import PaginationToolbar from '../_internal/toolbars/PaginationToolbar';
 
 function ListView<D>({
-  data,
+  data = [],
   renderListViewRow,
   state,
   initialState,

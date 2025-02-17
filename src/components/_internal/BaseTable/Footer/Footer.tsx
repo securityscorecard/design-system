@@ -6,8 +6,6 @@ import { Spinner } from '../../../Spinner';
 import { FooterProps } from './Footer.types';
 import GoToPage from './GoToPage';
 import { Pagination } from '../../../Pagination';
-import { SpaceSizes } from '../../../../theme';
-import { PaddingTypes } from '../../../layout/Padbox/Padbox.enums';
 
 const StyledFooter = styled(Padbox)`
   display: flex;
@@ -35,9 +33,8 @@ const Footer = ({
     <StyledFooter
       as="footer"
       data-testid="footer"
-      flexDirection="row"
-      paddingSize={SpaceSizes.md}
-      paddingType={PaddingTypes.squish}
+      paddingSize="md"
+      paddingType="squish"
     >
       <LoadingContainer>
         {isDataLoading && (

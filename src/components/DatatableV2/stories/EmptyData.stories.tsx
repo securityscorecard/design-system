@@ -6,7 +6,7 @@ import Template, { Story } from './Template';
 import { Stack } from '../../layout';
 import { Button } from '../../Button';
 import { Text } from '../../Text';
-import { Paragraph } from '../../Paragraph';
+import Paragraph from '../../Paragraph/Paragraph';
 import argTypes from './argTypes';
 
 export default {

@@ -3,7 +3,7 @@ import { Spinner } from '../../../Spinner';
 import { TextSizes } from '../../../Text/Text.enums';
 import { SpaceSizes } from '../../../../theme';
 import { H4 } from '../../../Heading';
-import { Paragraph } from '../../../Paragraph';
+import Paragraph from '../../../Paragraph/Paragraph';
 
 const LoadingNoData = () => (
   <>

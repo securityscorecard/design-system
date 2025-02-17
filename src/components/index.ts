@@ -58,7 +58,7 @@ export * from './Loading';
 export { default as Logo, type LogoProps } from './Logo/Logo';
 export * from './Modal';
 export * from './Pagination';
-export * from './Paragraph';
+export { default as Paragraph } from './Paragraph/Paragraph';
 export * from './Pill';
 export * from './ProgressBar';
 export * from './ScoreDelta';

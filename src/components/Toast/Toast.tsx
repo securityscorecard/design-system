@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { pxToRem } from '../../utils';
-import { Paragraph } from '../Paragraph';
+import Paragraph from '../Paragraph/Paragraph';
 import { ToastProps } from './Toast.types';
 import { Inline, Surface } from '../layout';
 import { Padbox } from '../layout/Padbox';
@@ -79,9 +79,7 @@ const Toast = ({
         <BaseToastBanner paddingType="stretch" variant={variant}>
           <Inline justify="space-between">
             <Padbox paddingSize="md">
-              <ToastContent as="div" margin="none">
-                {children}
-              </ToastContent>
+              <ToastContent as="div">{children}</ToastContent>
             </Padbox>
             <CloseButton
               aria-label="Close"

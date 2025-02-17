@@ -14,7 +14,7 @@ import { SpaceSizes } from '../../theme/space.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { Padbox, Surface } from '../layout';
 
-const Header = styled(Padbox)`
+const Header = styled(Padbox)<{ $isOpen: boolean }>`
   width: 100%;
   cursor: pointer;
   border-radius: var(--sscds-radius);
@@ -58,7 +58,7 @@ const Collapsible = ({
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
   const internalIsOpen = controlledIsOpen ?? isOpen;
 
-  const handleHeaderClick = (open) => {
+  const handleHeaderClick = (open: boolean) => {
     if (isControlled) {
       onOpenChange(open);
     } else {

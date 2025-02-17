@@ -40,4 +40,10 @@ describe('ListView', () => {
 
     expect(screen.getByRole('listitem')).toHaveTextContent('xyz');
   });
+  it('should not throw error when data is not provided', () => {
+    expect(() => {
+      // @ts-expect-error - data is not provided
+      setup(<ListView />);
+    }).not.toThrow();
+  });
 });

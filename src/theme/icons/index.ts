@@ -54,3 +54,4 @@ export { checkCircleLight } from './checkCircleLight';
 export { exclCircleLight } from './exclCircleLight';
 export { exclTriangleLight } from './exclTriangleLight';
 export { banLight } from './banLight';
+export { company } from './company';

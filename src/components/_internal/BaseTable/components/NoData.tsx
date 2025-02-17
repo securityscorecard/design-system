@@ -1,5 +1,5 @@
 import { H4 } from '../../../Heading';
-import { Paragraph } from '../../../Paragraph';
+import Paragraph from '../../../Paragraph/Paragraph';
 import { TextSizes } from '../../../Text/Text.enums';
 
 const NoData = () => (

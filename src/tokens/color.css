@@ -101,18 +101,18 @@
   --sscds-color-white: white;
   --sscds-color-black: black;
 
-  --sscds-color-neutral-1: var(--slate-1);
-  --sscds-color-neutral-2: var(--slate-2);
-  --sscds-color-neutral-3: var(--slate-3);
-  --sscds-color-neutral-4: var(--slate-4);
+  --sscds-color-neutral-1: var(--slate-1); /* neutral.50 */
+  --sscds-color-neutral-2: var(--slate-2); /* neutral.100 */
+  --sscds-color-neutral-3: var(--slate-3); /* neutral.200 */
+  --sscds-color-neutral-4: var(--slate-4); /* neutral.300 */
   --sscds-color-neutral-5: var(--slate-5);
   --sscds-color-neutral-6: var(--slate-6);
-  --sscds-color-neutral-7: var(--slate-7);
-  --sscds-color-neutral-8: var(--slate-8);
-  --sscds-color-neutral-9: var(--slate-9);
-  --sscds-color-neutral-10: var(--slate-10);
-  --sscds-color-neutral-11: var(--slate-11);
-  --sscds-color-neutral-12: var(--slate-12);
+  --sscds-color-neutral-7: var(--slate-7); /* neutral.400 */
+  --sscds-color-neutral-8: var(--slate-8); /* neutral.500 */
+  --sscds-color-neutral-9: var(--slate-9); /* neutral.600 */
+  --sscds-color-neutral-10: var(--slate-10); /* neutral.700 */
+  --sscds-color-neutral-11: var(--slate-11); /* neutral.800 */
+  --sscds-color-neutral-12: var(--slate-12); /* neutral.900 */
 
   --sscds-color-neutral-alpha-1: var(--slate-a1);
   --sscds-color-neutral-alpha-2: var(--slate-a2);
@@ -251,7 +251,7 @@
   --sscds-color-background-action-danger-ghost-active: var(--sscds-color-background-action-ghost-active);
   --sscds-color-background-action-danger-ghost-disabled: var(--sscds-color-background-action-ghost-disabled);
 
-  --sscds-color-background-selectable-hover: var(--sscds-color-neutral-3);
+  --sscds-color-background-selectable-hover: var(--sscds-color-neutral-alpha-3);
   --sscds-color-background-selectable-active: var(--sscds-color-primary-3);
 
   --sscds-color-background-pill-blue-default: var(--blue-3);
