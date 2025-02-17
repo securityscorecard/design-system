@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ComponentPropsWithoutRef } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { Icon } from '../Icon';
@@ -20,7 +21,8 @@ const HintTooltip = ({
   width,
   flow = 'inline',
   ...props
-}: HintTooltipProps) => (
+}: HintTooltipProps &
+  Omit<ComponentPropsWithoutRef<typeof Tooltip>, 'popup' | 'width'>) => (
   <Tooltip popup={children} width={width} {...props}>
     <StyledIcon $flow={flow} name="info-circle-outline" tabIndex={0} />
   </Tooltip>

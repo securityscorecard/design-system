@@ -1,0 +1,28 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as FormStories from '../../../src/components/forms/forms.stories';
+
+<Meta title="Components/forms/Form field templates" />
+
+# Form field templates
+
+Form fields can be organized in two different ways: stacked and inlined.
+
+In a stacked layout, the label is placed above the input field, creating a vertical alignment.
+In contrast, an inlined layout places the label and input field on the same row, creating a horizontal alignment.
+
+This allows for flexibility in designing forms to suit different user interface requirements.
+
+## Stacked form fields
+
+<Canvas of={FormStories.StackedFormField} sourceState="shown" />
+<Canvas of={FormStories.StackedFormFieldWithHint} sourceState="shown" />
+<Canvas of={FormStories.StackedFormFieldWithNote} sourceState="shown" />
+<Canvas of={FormStories.StackedFormFieldWithError} sourceState="shown" />
+
+## Inlined form fields
+
+<Canvas of={FormStories.InlinedFormField} sourceState="shown" />
+<Canvas of={FormStories.InlinedFormFieldWithHint} sourceState="shown" />
+<Canvas of={FormStories.InlinedFormFieldWithNote} sourceState="shown" />
+<Canvas of={FormStories.InlinedFormFieldWithError} sourceState="shown" />

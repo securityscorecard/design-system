@@ -11,7 +11,8 @@ import {
   Switch,
   TextArea,
 } from './index';
-import { Stack } from '../layout';
+import { Inline, Stack } from '../layout';
+import { HintTooltip } from '../HintTooltip';
 
 const meta = {
   title: 'components/forms/Example',
@@ -119,4 +120,96 @@ export const Default: Story = {
       skip: true,
     },
   },
+};
+
+export const StackedFormField: Story = {
+  render: () => (
+    <div>
+      <Label htmlFor="input-id">Input field label</Label>
+      <Input id="input-id" type="text" />
+    </div>
+  ),
+};
+
+export const StackedFormFieldWithHint: Story = {
+  render: () => (
+    <div>
+      <Label htmlFor="input-id">
+        Input field label{' '}
+        <HintTooltip placement="top">Hint tooltip content</HintTooltip>
+      </Label>
+      <Input id="input-id" type="text" />
+    </div>
+  ),
+};
+
+export const StackedFormFieldWithNote: Story = {
+  render: () => (
+    <div>
+      <Label htmlFor="input-id">Input field label</Label>
+      <Input id="input-id" type="text" />
+      <Note>Short description for additional information</Note>
+    </div>
+  ),
+};
+
+export const StackedFormFieldWithError: Story = {
+  render: () => (
+    <div>
+      <Label htmlFor="input-id">Input field label</Label>
+      <Input id="input-id" type="text" isInvalid />
+      <Error>Description of error</Error>
+    </div>
+  ),
+};
+
+export const InlinedFormField: Story = {
+  render: () => (
+    <Inline gap="4x" stretch="end">
+      <Label htmlFor="input-id" isInline>
+        Input field label
+      </Label>
+      <Input id="input-id" type="text" />
+    </Inline>
+  ),
+};
+
+export const InlinedFormFieldWithHint: Story = {
+  render: () => (
+    <Inline gap="4x" stretch="end">
+      <Label htmlFor="input-id" isInline>
+        Input field label{' '}
+        <HintTooltip placement="top">Hint tooltip content</HintTooltip>
+      </Label>
+      <Input id="input-id" type="text" />
+    </Inline>
+  ),
+};
+
+export const InlinedFormFieldWithNote: Story = {
+  render: () => (
+    <Inline gap="4x" stretch="end">
+      <Label htmlFor="input-id" isInline>
+        Input field label
+      </Label>
+      <div>
+        <Input id="input-id" type="text" />
+        <Note>Short description for additional information</Note>
+      </div>
+    </Inline>
+  ),
+};
+
+export const InlinedFormFieldWithError: Story = {
+  render: () => (
+    <Inline gap="4x" stretch="end">
+      <Label htmlFor="input-id" isInline>
+        Input field label
+      </Label>
+      <div>
+        <Input id="input-id" type="text" isInvalid />
+        <Error>Description of error</Error>
+      </div>
+    </Inline>
+  ),
 };
