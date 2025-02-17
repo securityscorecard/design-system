@@ -34,7 +34,6 @@ const meta = {
     onClose: action('close-banner'),
   },
   argTypes: {
-    // @ts-expect-error Storybook is strangly typed here
     variant: {
       ...generateControl('select', BannerVariants),
       table: {
