@@ -27,7 +27,7 @@ const TreeItemRoot = styled.li`
   }
 
   &[data-active='true'] {
-    background-color: var(--sscds-color-background-surface-dynamic-default);
+    background-color: var(--sscds-color-background-selectable-active);
   }
 
   &[data-clone] {
@@ -52,11 +52,11 @@ const TreeItemRoot = styled.li`
     cursor: pointer;
 
     &[data-active='true'] {
-      background-color: var(--sscds-color-background-surface-dynamic-default);
+      background-color: var(--sscds-color-background-selectable-active);
     }
 
     &:hover {
-      background-color: var(--sscds-color-primary-3);
+      background-color: var(--sscds-color-background-selectable-hover);
     }
   }
 `;
