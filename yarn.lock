@@ -2740,13 +2740,13 @@ __metadata:
   linkType: hard
 
 "@octokit/plugin-paginate-rest@npm:^11.0.0":
-  version: 11.3.3
-  resolution: "@octokit/plugin-paginate-rest@npm:11.3.3"
+  version: 11.4.2
+  resolution: "@octokit/plugin-paginate-rest@npm:11.4.2"
   dependencies:
-    "@octokit/types": "npm:^13.5.0"
+    "@octokit/types": "npm:^13.7.0"
   peerDependencies:
     "@octokit/core": ">=6"
-  checksum: 10/87eeb4dd68a8207e669989cdbf9de3717b74038d630c2b803cbc7a9c44c3ff74771ce1cf45fa056b7172aaaa80fd9a0e4bf5eca06aabc19f30e7e29898f1f69e
+  checksum: 10/32aa941535bb4f0c0e8cc4b45fa07ab58c8b585c97007ce4b007c3d4732b250fa352f20d2c053d30c133760355027a9908a9ecf90999d329e855b697780a6dc3
   languageName: node
   linkType: hard
 
@@ -2796,7 +2796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^13.0.0, @octokit/types@npm:^13.1.0, @octokit/types@npm:^13.5.0":
+"@octokit/types@npm:^13.0.0, @octokit/types@npm:^13.1.0":
   version: 13.5.0
   resolution: "@octokit/types@npm:13.5.0"
   dependencies:
@@ -2805,7 +2805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^13.6.2":
+"@octokit/types@npm:^13.6.2, @octokit/types@npm:^13.7.0":
   version: 13.8.0
   resolution: "@octokit/types@npm:13.8.0"
   dependencies:
