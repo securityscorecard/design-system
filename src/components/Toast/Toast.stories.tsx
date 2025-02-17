@@ -29,7 +29,6 @@ const meta = {
     onClose: action('close-toast'),
   },
   argTypes: {
-    // @ts-expect-error Storybook is strangly typed here
     variant: {
       ...generateControl('select', ToastVariants),
       description: 'Color variant of the toast notification',

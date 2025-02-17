@@ -25,6 +25,4 @@ export const TextVariants = {
   primary: 'primary',
   /** @deprecated */
   secondary: 'secondary',
-  /** @deprecated */
-  context: 'context',
 } as const;

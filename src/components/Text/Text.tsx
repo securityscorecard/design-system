@@ -57,9 +57,6 @@ const primaryVariant = css`
 const secondaryVariant = css`
   color: var(--sscds-color-text-subtle);
 `;
-const contextVariant = css`
-  color: var(--sscds-color-neutral-9);
-`;
 const inverseVariant = css`
   color: var(--sscds-color-text-inverse);
 `;
@@ -109,14 +106,13 @@ const variants = {
   /** @deprecated */
   [TextVariants.primary]: primaryVariant,
   [TextVariants.secondary]: secondaryVariant,
-  [TextVariants.context]: contextVariant,
 };
 
 const Text = styled.span.attrs<TextProps>((props) => ({
   ...props,
   className: cls(CLX_TYPOGRAPHY, props?.className),
   size: props.size ?? TextSizes.md,
-  variant: props.variant ?? TextVariants.primary,
+  variant: props.variant ?? TextVariants.default,
   isBold: props.isBold ?? false,
 }))<TextProps>`
   font-family: inherit;
