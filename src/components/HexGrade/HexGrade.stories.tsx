@@ -26,6 +26,7 @@ export const Playground: StoryFn<HexGradeProps> = (args) => {
 };
 Playground.args = {
   variant: HexGradeVariants.solid,
+  grade: 'A',
 };
 Playground.parameters = {
   screenshot: { skip: true },
