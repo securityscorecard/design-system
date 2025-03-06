@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import { TextSizes, TextVariants } from './Text.enums';
 
 export type TextSizesTypes = (typeof TextSizes)[keyof typeof TextSizes];
@@ -9,6 +11,7 @@ export interface TextProps {
   variant?: TextVariantsTypes;
   isBold?: boolean;
   className?: string;
+  children: ReactNode;
 }
 
 export type CodeProps = Omit<TextProps, 'variant'>;
