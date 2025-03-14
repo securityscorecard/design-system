@@ -92,7 +92,7 @@ export const Colors: Story = {
       <ElementLabel {...args} color="subtle">
         Subtle
       </ElementLabel>
-      <ElementLabel {...args} color="disabled">
+      <ElementLabel {...args} aria-disabled="true" color="disabled">
         Disabled
       </ElementLabel>
       <ElementLabel {...args} color="danger">

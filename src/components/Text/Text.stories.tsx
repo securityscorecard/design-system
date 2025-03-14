@@ -194,7 +194,9 @@ export const DarkMode: Story = {
           <Display color="danger">100 %</Display>
           <ElementLabel>Full name</ElementLabel>
           <ElementLabel color="subtle">Full name</ElementLabel>
-          <ElementLabel color="disabled">Full name</ElementLabel>
+          <ElementLabel aria-disabled="true" color="disabled">
+            Full name
+          </ElementLabel>
           <ElementLabel color="danger">Full name</ElementLabel>
           <ElementLabel
             color="inverse"

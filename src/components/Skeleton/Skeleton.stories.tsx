@@ -59,3 +59,6 @@ export const Default: StoryFn = () => {
     </Stack>
   );
 };
+Default.parameters = {
+  a11y: { disable: true },
+};

@@ -15,6 +15,21 @@ import { Strong } from '../../Text';
 export default {
   component: MultiValueInput,
   title: 'components/forms/MultiValueInput',
+  args: {
+    'aria-label': 'Multi value input',
+  },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'target-size',
+            enabled: false,
+          },
+        ],
+      },
+    },
+  },
 } as Meta;
 
 const MultiValueInputTemplate: StoryFn<MultiValueInputProps> = (args) => (

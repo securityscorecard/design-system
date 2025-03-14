@@ -91,6 +91,9 @@ OR
       table: { defaultValue: { summary: 'false' } },
     },
   },
+  args: {
+    'aria-label': 'Select',
+  },
 } as Meta;
 
 const options = [
@@ -177,10 +180,11 @@ const promiseOptions = (inputValue: string): Promise<Option[]> =>
     }, 1000);
   });
 
-export const AsyncSelect: StoryFn<CreatableSelectProps<false>> = () => {
+export const AsyncSelect: StoryFn<CreatableSelectProps<false>> = (args) => {
   return (
     <Stack gap="md">
       <CreatableSelect
+        {...args}
         loadOptions={promiseOptions}
         placeholder="Single select (async)"
         cacheOptions
@@ -188,6 +192,7 @@ export const AsyncSelect: StoryFn<CreatableSelectProps<false>> = () => {
         isAsync
       />
       <CreatableSelect
+        {...args}
         loadOptions={promiseOptions}
         placeholder="Multi select (async)"
         cacheOptions

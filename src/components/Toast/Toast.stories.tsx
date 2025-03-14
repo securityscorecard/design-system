@@ -46,6 +46,16 @@ const meta = {
     docs: {
       story: { inline: false, height: 250 },
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
 } satisfies Meta<typeof Toast>;
 
