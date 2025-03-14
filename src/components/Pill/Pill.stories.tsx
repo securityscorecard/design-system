@@ -21,7 +21,7 @@ const ImageAdornment = () => (
 const BulletAdornment = styled.div`
   width: 0.75rem;
   height: 0.75rem;
-  background-color: var(--sscds-color-grade-A);
+  background-color: var(--severity-green-40);
   border-radius: 100%;
 `;
 
