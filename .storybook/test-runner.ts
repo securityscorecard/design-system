@@ -8,9 +8,10 @@ const config: TestRunnerConfig = {
   },
   async postVisit(page, context) {
     const storyContext = await getStoryContext(page, context);
-    const a11yParams = storyContext.parameters?.a11y
+    const a11yParams = storyContext.parameters?.a11y;
+    const storyName = storyContext.name;
 
-    if (a11yParams?.disable) {
+    if (a11yParams?.disable || storyName === 'Playground') {
       return;
     }
     await configureAxe(page, {

@@ -7,6 +7,9 @@ import { Stack } from '../layout';
 export default {
   title: 'components/ProgressBar',
   component: ProgressBar,
+  args: {
+    'aria-label': 'ProgressBar showcase',
+  },
 } as Meta;
 
 export const Playground: StoryFn<ProgressBarProps> = (args) => (

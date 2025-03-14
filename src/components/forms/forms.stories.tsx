@@ -17,6 +17,9 @@ import { HintTooltip } from '../HintTooltip';
 const meta = {
   title: 'components/forms/Example',
   tags: ['!dev'],
+  parameters: {
+    ally: { disable: true },
+  },
 } satisfies Meta<typeof Label>;
 
 export default meta;

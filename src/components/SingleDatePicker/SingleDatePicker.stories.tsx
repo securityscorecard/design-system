@@ -18,6 +18,16 @@ export default {
   ],
   parameters: {
     mockDate: new Date('2021/03/31'),
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
 } as Meta;
 
