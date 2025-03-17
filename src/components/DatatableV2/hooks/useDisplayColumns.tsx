@@ -32,15 +32,17 @@ export const useDisplayColumns = <D,>(
             header: '',
             headerComponent:
               tableOptions.enableSelectAll &&
-              tableOptions.enableMultiRowSelection
-                ? ({ table }) => (
-                    <SelectButton
-                      table={table}
-                      hasTargetWrapper
-                      isHeaderCheckbox
-                    />
-                  )
-                : null,
+              tableOptions.enableMultiRowSelection ? (
+                ({ table }) => (
+                  <SelectButton
+                    table={table}
+                    hasTargetWrapper
+                    isHeaderCheckbox
+                  />
+                )
+              ) : (
+                <span className="sr-only">Row selection</span>
+              ),
             cell: (props) => <SelectButton {...props} hasTargetWrapper />,
             size: 56,
             ...tableOptions.defaultDisplayColumn,
@@ -48,6 +50,7 @@ export const useDisplayColumns = <D,>(
           tableOptions.enableRowActions && {
             id: displayColumnIds.actions,
             header: '',
+            headerComponent: <span className="sr-only">Actions</span>,
             cell: ({ table, row }) => (
               <RowActionsButton
                 instance={table}
