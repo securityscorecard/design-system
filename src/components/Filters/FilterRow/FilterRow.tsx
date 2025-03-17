@@ -114,6 +114,7 @@ const renderComponentWithProps = (
   return units ? (
     <Inline align="center" gap={SpaceSizes.sm} stretch="start">
       <ComponentWithProps
+        aria-label="Filtering value"
         isInvalid={isInvalid}
         value={value}
         onChange={onChange}
@@ -124,6 +125,7 @@ const renderComponentWithProps = (
     </Inline>
   ) : (
     <ComponentWithProps
+      aria-label="Filtering value"
       isInvalid={isInvalid}
       value={value}
       onChange={onChange}
@@ -145,6 +147,7 @@ const renderSelectComponent = (Component, value, onChange) => {
 
   return (
     <SelectComponent
+      aria-label="Filtering value"
       isMulti={isMulti}
       options={options}
       placeholder={placeholder}
@@ -175,6 +178,7 @@ const renderComponent = (Component, value, onChange, onError, isInvalid) => {
   }
   return (
     <Component
+      aria-label="Filtering value"
       isInvalid={isInvalid}
       value={value}
       onChange={onChange}
@@ -297,6 +301,7 @@ const FilterRow = ({
           </DisabledOperator>
         ) : (
           <SelectFilter
+            aria-label="Filtering operator"
             defaultValue={operatorOption}
             options={operatorOptions}
             onChange={onOperatorChange}
@@ -305,6 +310,7 @@ const FilterRow = ({
       </SplitField>
       <SplitField $width={200}>
         <SelectFilter
+          aria-label="Filtering field"
           options={fieldOptions}
           value={field}
           onChange={handleFieldChange}
@@ -312,6 +318,7 @@ const FilterRow = ({
       </SplitField>
       <SplitField $width={144}>
         <SelectFilter
+          aria-label="Filtering contition"
           options={conditions}
           value={condition}
           onChange={handleConditionChange}
