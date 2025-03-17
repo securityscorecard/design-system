@@ -39,6 +39,9 @@ const Handle = styled(Padbox)`
   }
 `;
 
+const handlerDescription =
+  'To pick up a draggable item, press the space bar. While dragging, use the arrow keys to move the item. Press space again to drop the item in its new position, or press escape to cancel.';
+
 const SortableItem = ({ label, id, renderItem }: SortableItemProps) => {
   const {
     attributes,
@@ -63,7 +66,13 @@ const SortableItem = ({ label, id, renderItem }: SortableItemProps) => {
       style={style}
     >
       <Inline align="center" gap={SpaceSizes.sm} stretch={2}>
-        <Handle paddingSize={SpaceSizes.sm} {...attributes} {...listeners}>
+        <Handle
+          paddingSize={SpaceSizes.sm}
+          {...attributes}
+          {...listeners}
+          aria-describedby={undefined}
+          aria-label={handlerDescription}
+        >
           <InnerHandle>
             <svg
               fill="none"
