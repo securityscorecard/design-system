@@ -23,8 +23,14 @@ const HintTooltip = ({
   ...props
 }: HintTooltipProps &
   Omit<ComponentPropsWithoutRef<typeof Tooltip>, 'popup' | 'width'>) => (
-  <Tooltip popup={children} width={width} {...props}>
-    <StyledIcon $flow={flow} name="info-circle-outline" tabIndex={0} />
+  <Tooltip
+    popup={children}
+    width={width}
+    {...props}
+    aria-label="Help"
+    wrapperEl="button"
+  >
+    <StyledIcon $flow={flow} name="info-circle-outline" />
   </Tooltip>
 );
 
