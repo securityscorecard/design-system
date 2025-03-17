@@ -51,11 +51,12 @@ const TableCheckbox = forwardRef(
         />
       </div>
       <label
-        aria-label="Toggle select"
         className="ds-table-checkbox-label"
         htmlFor={checkboxId}
         style={style}
-      />
+      >
+        <span className="sr-only">Toggle select</span>
+      </label>
     </div>
   ),
 );
