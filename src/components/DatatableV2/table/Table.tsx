@@ -55,7 +55,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
         data-settings-state={showColumnSettings ? 'open' : 'closed'}
         tabIndex={0}
       >
-        {showProgress && <ProgressBar isTop />}
+        {showProgress && <ProgressBar aria-label="Refreshing data" isTop />}
         <table
           ref={(ref) => {
             tableRef.current = ref;
@@ -66,7 +66,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
           <Header table={table} />
           <Body table={table} />
         </table>
-        {showProgress && <ProgressBar isBottom />}
+        {showProgress && <ProgressBar aria-hidden isBottom />}
       </TableRoot>
       {showColumnSettings && <Settings table={table} />}
     </>
