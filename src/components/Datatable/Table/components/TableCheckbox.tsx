@@ -47,6 +47,7 @@ const TableCheckbox = forwardRef(
       <div className="ds-table-checkbox-mark">
         <Mark
           className="ds-table-checkbox-icon"
+          role="presentation"
           {...generateIconProps(isIndeterminate ? indeterminate : checked)}
         />
       </div>
