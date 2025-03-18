@@ -68,6 +68,7 @@ export const ScrollView = forwardRef<HTMLDivElement, ScrollViewProps>(
         hasBorder={hasBorder}
         radius={radius}
         style={cssVars}
+        tabIndex={0}
         {...props}
       >
         {children}
