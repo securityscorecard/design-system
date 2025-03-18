@@ -90,6 +90,7 @@ function FileSelectorButton({
           variant: 'subtle',
           isExpanded,
         })}
+        role={undefined}
       >
         {label}
       </Button>
