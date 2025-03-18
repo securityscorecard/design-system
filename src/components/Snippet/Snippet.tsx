@@ -84,11 +84,8 @@ const Snippet = forwardRef<
       >
         <SnippetContent
           $shouldWrapText={shouldWrapText}
-          aria-multiline="true"
-          aria-readonly="true"
           as="pre"
           paddingSize="md"
-          role="textbox"
           style={{
             maxHeight: isExpanded ? 'none' : pxToRem(maxHeight),
           }}
