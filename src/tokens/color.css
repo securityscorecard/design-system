@@ -30,6 +30,8 @@
 @import url('@radix-ui/colors/purple-dark.css');
 @import url('@radix-ui/colors/brown.css');
 @import url('@radix-ui/colors/brown-dark.css');
+@import url('@radix-ui/colors/ruby.css');
+@import url('@radix-ui/colors/ruby-dark.css');
 @import url('@radix-ui/colors/white-alpha.css');
 @import url('@radix-ui/colors/black-alpha.css');
 
@@ -176,11 +178,43 @@
   --sscds-color-danger-800: var(--tomato-11);
   --sscds-color-danger-900: var(--tomato-12);
 
-  --sscds-color-grade-A: var(--severity-green-40);
-  --sscds-color-grade-B: var(--severity-yellow-40);
-  --sscds-color-grade-C: var(--severity-orange-40);
-  --sscds-color-grade-D: var(--severity-red-40);
-  --sscds-color-grade-F: var(--severity-deepred-40);
+  --sscds-color-grade-unknown-fill: var(--sscds-color-neutral-5);
+  --sscds-color-grade-A-fill: var(--green-5);
+  --sscds-color-grade-B-fill: var(--amber-5);
+  --sscds-color-grade-C-fill: var(--orange-5);
+  --sscds-color-grade-D-fill: var(--tomato-5);
+  --sscds-color-grade-F-fill: var(--ruby-5);
+  --sscds-color-grade-unknown-stroke: var(--sscds-color-neutral-8);
+  --sscds-color-grade-A-stroke: var(--green-8);
+  --sscds-color-grade-B-stroke: var(--amber-8);
+  --sscds-color-grade-C-stroke: var(--orange-8);
+  --sscds-color-grade-D-stroke: var(--tomato-8);
+  --sscds-color-grade-F-stroke: var(--ruby-8);
+  --sscds-color-grade-unknown-char: var(--sscds-color-neutral-12);
+  --sscds-color-grade-A-char: var(--green-12);
+  --sscds-color-grade-B-char: var(--amber-12);
+  --sscds-color-grade-C-char: var(--orange-12);
+  --sscds-color-grade-D-char: var(--tomato-12);
+  --sscds-color-grade-F-char: var(--ruby-12);
+
+  --LEGACY_sscds-color-grade-unknown-fill: var(--sscds-color-neutral-9);
+  --LEGACY_sscds-color-grade-A-fill: var(--severity-green-40);
+  --LEGACY_sscds-color-grade-B-fill: var(--severity-yellow-40);
+  --LEGACY_sscds-color-grade-C-fill: var(--severity-orange-40);
+  --LEGACY_sscds-color-grade-D-fill: var(--severity-red-40);
+  --LEGACY_sscds-color-grade-F-fill: var(--severity-deepred-40);
+  --LEGACY_sscds-color-grade-unknown-stroke: var(--sscds-color-neutral-9);
+  --LEGACY_sscds-color-grade-A-stroke: var(--severity-green-40);
+  --LEGACY_sscds-color-grade-B-stroke: var(--severity-yellow-40);
+  --LEGACY_sscds-color-grade-C-stroke: var(--severity-orange-40);
+  --LEGACY_sscds-color-grade-D-stroke: var(--severity-red-40);
+  --LEGACY_sscds-color-grade-F-stroke: var(--severity-deepred-40);
+  --LEGACY_sscds-color-grade-unknown-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-A-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-B-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-C-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-D-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-F-char: var(--sscds-color-white);
 
   --sscds-color-signal-inactive: var(--sscds-color-neutral-alpha-8);
   --sscds-color-signal-critical: var(--severity-deepred-40);

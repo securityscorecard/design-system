@@ -75,6 +75,7 @@ function CompactContent({
   return (
     <Inline align="center" gap="2x">
       <Button
+        aria-disabled={isDisabled}
         as="div"
         iconStart={{ name: 'upload' }}
         isDisabled={isDisabled}
@@ -84,6 +85,7 @@ function CompactContent({
         Upload
       </Button>
       <Text
+        aria-disabled={isDisabled}
         style={{ paddingInlineEnd: 'var(--sscds-space-2x)' }}
         variant={isDisabled ? 'disabled' : hasError ? 'danger' : 'subtle'}
       >
@@ -116,9 +118,14 @@ function Content({
         variant={(isDragActive || isFocused) && !hasError ? 'strong' : 'subtle'}
       />
       <Stack justify={textAlign === 'center' ? 'center' : 'flex-start'}>
-        <Text variant={isDisabled ? 'disabled' : 'default'} isBold>
+        <Text
+          aria-disabled={isDisabled}
+          variant={isDisabled ? 'disabled' : 'default'}
+          isBold
+        >
           Drop your file here or{' '}
           <Link
+            aria-disabled={isDisabled}
             as="span"
             style={{
               fontWeight: 'var(--sscds-font-weight-body-strong)',

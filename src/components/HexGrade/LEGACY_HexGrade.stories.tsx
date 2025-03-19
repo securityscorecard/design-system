@@ -4,15 +4,25 @@ import { HexGradeProps } from './HexGrade.types';
 import { HexGradeGrades, HexGradeVariants } from './HexGrade.enums';
 import HexGrade from './HexGrade';
 import { generateControl } from '../../utils/tests/storybook';
+import { DSProvider } from '../../theme';
 
 export default {
-  title: 'components/HexGrade',
+  title: 'components/HexGrade/LEGACY',
   component: HexGrade,
   argTypes: {
     variant: {
       ...generateControl('select', HexGradeVariants),
     },
   },
+  decorators: [
+    (storyFn) => (
+      <DSProvider
+        config={{ debugMode: true, experimental: { legacyHexgrade: true } }}
+      >
+        {storyFn()}
+      </DSProvider>
+    ),
+  ],
 } as Meta;
 
 export const Playground: StoryFn<HexGradeProps> = (args) => {

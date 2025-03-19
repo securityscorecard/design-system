@@ -47,15 +47,17 @@ const TableCheckbox = forwardRef(
       <div className="ds-table-checkbox-mark">
         <Mark
           className="ds-table-checkbox-icon"
+          role="presentation"
           {...generateIconProps(isIndeterminate ? indeterminate : checked)}
         />
       </div>
       <label
-        aria-label="Toggle select"
         className="ds-table-checkbox-label"
         htmlFor={checkboxId}
         style={style}
-      />
+      >
+        <span className="sr-only">Toggle select</span>
+      </label>
     </div>
   ),
 );

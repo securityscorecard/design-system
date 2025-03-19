@@ -14,7 +14,7 @@ interface MockObjectFilterProps {
   value: MockObject;
 }
 
-const MockObjectFilter = ({ value }: MockObjectFilterProps) => {
+const MockObjectFilter = ({ value, ...props }: MockObjectFilterProps) => {
   const [ipValue, setIpValue] = useState(value?.inputValue);
   const options = [
     {
@@ -45,8 +45,13 @@ const MockObjectFilter = ({ value }: MockObjectFilterProps) => {
           onChange={handleOnChange}
           onError={handleOnError}
           onValidate={validate}
+          {...props}
         />
-        <SelectFilter options={options} isMulti />
+        <SelectFilter
+          aria-label="Include associated assets"
+          options={options}
+          isMulti
+        />
       </Inline>
     </Padbox>
   );

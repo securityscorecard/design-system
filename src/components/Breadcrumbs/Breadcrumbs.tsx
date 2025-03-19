@@ -33,6 +33,9 @@ const InlineOrderedList = styled(Inline)`
   margin: 0;
   list-style: none;
 `;
+const SeparatorListItem = styled.li`
+  display: flex;
+`;
 
 const itemsAfterCollapse = 3;
 const itemsBeforeCollapse = 1;
@@ -44,14 +47,16 @@ const insertSeparators = (items: ReactElement[]) => {
       return [
         ...prev,
         current,
-        <Icon
-          // eslint-disable-next-line react/no-array-index-key
-          key={`separator-${index}`}
-          color={ColorTypes.neutral600}
-          name={SSCIconNames.angleRight}
-          size="sm"
-          hasFixedSize
-        />,
+        <SeparatorListItem aria-hidden="true" style={{ display: 'flex' }}>
+          <Icon
+            // eslint-disable-next-line react/no-array-index-key
+            key={`separator-${index}`}
+            color={ColorTypes.neutral600}
+            name={SSCIconNames.angleRight}
+            size="sm"
+            hasFixedSize
+          />
+        </SeparatorListItem>,
       ];
     }
 
