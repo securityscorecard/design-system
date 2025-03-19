@@ -197,6 +197,25 @@
   --sscds-color-grade-D-char: var(--tomato-12);
   --sscds-color-grade-F-char: var(--ruby-12);
 
+  --LEGACY_sscds-color-grade-unknown-fill: var(--sscds-color-neutral-9);
+  --LEGACY_sscds-color-grade-A-fill: var(--severity-green-40);
+  --LEGACY_sscds-color-grade-B-fill: var(--severity-yellow-40);
+  --LEGACY_sscds-color-grade-C-fill: var(--severity-orange-40);
+  --LEGACY_sscds-color-grade-D-fill: var(--severity-red-40);
+  --LEGACY_sscds-color-grade-F-fill: var(--severity-deepred-40);
+  --LEGACY_sscds-color-grade-unknown-stroke: var(--sscds-color-neutral-9);
+  --LEGACY_sscds-color-grade-A-stroke: var(--severity-green-40);
+  --LEGACY_sscds-color-grade-B-stroke: var(--severity-yellow-40);
+  --LEGACY_sscds-color-grade-C-stroke: var(--severity-orange-40);
+  --LEGACY_sscds-color-grade-D-stroke: var(--severity-red-40);
+  --LEGACY_sscds-color-grade-F-stroke: var(--severity-deepred-40);
+  --LEGACY_sscds-color-grade-unknown-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-A-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-B-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-C-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-D-char: var(--sscds-color-white);
+  --LEGACY_sscds-color-grade-F-char: var(--sscds-color-white);
+
   --sscds-color-signal-inactive: var(--sscds-color-neutral-alpha-8);
   --sscds-color-signal-critical: var(--severity-deepred-40);
   --sscds-color-signal-high: var(--severity-red-40);

@@ -11,6 +11,9 @@ const defaultDSContext: DSContextValue = {
   portalsContainerId: 'portals',
   hasIncludedGlobalStyles: true,
   debugMode: false,
+  experimental: {
+    legacyHexgrade: false,
+  },
 };
 export const DSContext = createContext<DSContextValue>(defaultDSContext);
 

@@ -156,7 +156,7 @@ const preview: Preview = {
     }),
     withMockedDate(),
     (storyFn) => (
-      <DSProvider config={{ debugMode: true }}>{storyFn()}</DSProvider>
+      <DSProvider config={{ debugMode: true, experimental: {legacyHexgrade:false} }}>{storyFn()}</DSProvider>
     ),
   ],
   tags: ['autodocs'],

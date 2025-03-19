@@ -11,6 +11,9 @@ export interface DSContextValue {
     onFullscreenModeChange?: (enabled: boolean) => void;
     settingsOffset?: string;
   };
+  experimental?: {
+    legacyHexgrade?: boolean;
+  };
 }
 export interface DSProviderProps {
   /**
