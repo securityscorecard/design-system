@@ -51,6 +51,7 @@ export function getActionsColumn<
     width: 48,
     disableSortBy: true,
     cellType: CellTypes.actions,
+    Header: <span className="sr-only">Actions</span>,
     Cell: (props: CellProps<D>) => {
       const { row, rowActions } = props;
       const actions = map((action) => ({

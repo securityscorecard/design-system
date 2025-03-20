@@ -63,7 +63,7 @@ export function getSelectionColumn<
       dispatch,
       state: { selectedRowIds: tableSelectedRowIds },
     }: HeaderProps<D>) => {
-      if (dataSize === 0) return null;
+      if (dataSize === 0) return <span className="sr-only">Row selection</span>;
 
       const selectedLength = Object.keys(tableSelectedRowIds).length;
       const indeterminate = selectedLength > 0 && selectedLength < dataSize;
