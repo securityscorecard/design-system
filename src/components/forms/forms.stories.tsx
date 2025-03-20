@@ -18,7 +18,7 @@ const meta = {
   title: 'components/forms/Example',
   tags: ['!dev'],
   parameters: {
-    ally: { disable: true },
+    a11y: { disable: true },
   },
 } satisfies Meta<typeof Label>;
 

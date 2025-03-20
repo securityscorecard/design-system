@@ -24,9 +24,6 @@ const config: TestRunnerConfig = {
         html: true,
       },
       verbose: false,
-      axeOptions: {
-        runOnly: ['wcag21aa','wcag22aa','best-practice','EN-301-549']
-      },
     }, true, 'v2');
   },
 };
