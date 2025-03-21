@@ -188,11 +188,11 @@ function TreeItem<D>({
           <Padbox paddingSize="sm">
             <Inline align="center">
               {isSortable && (
-                // @ts-expect-error 'aria-describedby' is used instead of 'label' prop. This comes from dnd-kit
                 <IconButton
                   {...handleAttributes}
                   {...handleListeners}
                   iconName="grip-dots-vertical"
+                  label="Move row"
                   size="sm"
                   style={{ cursor: 'grab' }}
                   variant="ghost"
