@@ -90,6 +90,7 @@ function ListViewRow<D>({
                       options.onRowClick({ row: row.original });
                     },
                     'data-active': activeRowId === row.id,
+                    'aria-label': isLoading ? 'Loading data' : undefined,
                   }
                 : {})}
             >
