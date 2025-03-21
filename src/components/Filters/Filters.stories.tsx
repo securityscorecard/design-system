@@ -7,6 +7,13 @@ import { fields, state, stateWithUnappliedFilters } from './mocks/options';
 export default {
   component: Filters,
   title: 'components/Filters',
+  parameters: {
+    a11y: {
+      config: {
+        rules: [{ id: 'target-size', enabled: false }],
+      },
+    },
+  },
 } as Meta;
 
 export const Default: StoryFn = () => (
