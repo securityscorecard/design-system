@@ -30,12 +30,7 @@ const Footer = ({
   const handlePageChange = (page) => onGotoPage(page - 1);
 
   return (
-    <StyledFooter
-      as="footer"
-      data-testid="footer"
-      paddingSize="md"
-      paddingType="squish"
-    >
+    <StyledFooter data-testid="footer" paddingSize="md" paddingType="squish">
       <LoadingContainer>
         {isDataLoading && (
           <Spinner
