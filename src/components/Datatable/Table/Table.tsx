@@ -329,19 +329,21 @@ function Table<D extends Record<string, unknown>>({
     <>
       <BaseTableAndLoadingOverlayContainer>
         <BaseTableContainer tabIndex={0}>
-          <StyledBaseTable
-            className={cls({
-              'has-exclusive-selection': hasExclusiveSelection,
-            })}
-            {...getTableProps()}
-          >
-            <Head headerGroups={headerGroups} />
-            <Body<D>
-              prepareRow={prepareRow}
-              rows={hasServerSidePagination ? rows : page}
-              {...getTableBodyProps()}
-            />
-          </StyledBaseTable>
+          {hiddenColumnsLength < columns.length && (
+            <StyledBaseTable
+              className={cls({
+                'has-exclusive-selection': hasExclusiveSelection,
+              })}
+              {...getTableProps()}
+            >
+              <Head headerGroups={headerGroups} />
+              <Body<D>
+                prepareRow={prepareRow}
+                rows={hasServerSidePagination ? rows : page}
+                {...getTableBodyProps()}
+              />
+            </StyledBaseTable>
+          )}
         </BaseTableContainer>
         {tableDataSize > 0 && isDataLoading && (
           <LoadingOverlay
