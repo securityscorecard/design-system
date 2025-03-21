@@ -73,7 +73,6 @@ const ControlDropdown = ({
             >
               <Inline
                 align="center"
-                as="footer"
                 gap="md"
                 justify="flex-end"
                 stretch="start"
