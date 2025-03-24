@@ -23,7 +23,6 @@ import {
   StyledBaseTable,
   getActionsColumn,
 } from '../_internal/BaseTable';
-import { getColor, getRadii } from '../../utils';
 import { SpaceSizes } from '../../theme';
 import { Padbox } from '../layout';
 import { TableProps } from './Table.types';
@@ -38,14 +37,14 @@ const useIsMountRender = (): boolean => {
 };
 
 const NoDataContainer = styled(Padbox)`
-  background: ${getColor('neutral.0')};
+  background: var(--sscds-color-background-surface-default);
 `;
 
 const TableWrapper = styled.div`
-  border: 1px solid ${getColor('neutral.300')};
+  border: 1px solid var(--sscds-color-border-default);
   border-top-width: 0;
-  background: ${getColor('neutral.0')};
-  border-radius: ${getRadii('default')};
+  background: var(--sscds-color-background-surface-default);
+  border-radius: var(--sscds-radii-surface-sm);
 `;
 
 const renderDefaultCell = <D extends Record<string, unknown>>(

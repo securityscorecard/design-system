@@ -2,7 +2,7 @@
 import styled, { css } from 'styled-components';
 import { identity, memoizeWith, pipe } from 'ramda';
 
-import { getColor, getFormStyle, getRadii, pxToRem } from '../../../utils';
+import { getFormStyle, pxToRem } from '../../../utils';
 import { LinkActiveStyles, LinkBaseStyles, LinkHoverStyles } from '../BaseLink';
 
 const getRemToggleSize = memoizeWith(
@@ -17,18 +17,18 @@ export const BaseTableContainer = styled.div`
 
   &::-webkit-scrollbar {
     box-sizing: content-box;
-    outline: 1px solid ${getColor('neutral.300')};
+    outline: 1px solid var(--sscds-color-border-default);
     height: ${pxToRem(20)};
   }
   &::-webkit-scrollbar-thumb {
-    border-radius: ${getRadii('round')};
-    background-color: ${getColor('primary.500')};
-    border: 6px solid ${getColor('neutral.0')};
+    border-radius: var(--sscds-radii-rounded);
+    background-color: var(--sscds-color-primary-9);
+    border: 6px solid var(--sscds-color-neutral-0);
   }
   &::-webkit-scrollbar-track-piece {
-    border-radius: ${getRadii('round')};
-    background-color: ${getColor('neutral.300')};
-    border: 6px solid ${getColor('neutral.0')};
+    border-radius: var(--sscds-radii-rounded);
+    background-color: var(--sscds-color-neutral-4);
+    border: 6px solid var(--sscds-color-neutral-0);
   }
 `;
 
@@ -56,13 +56,13 @@ const DsLinkCell = css`
   }
 `;
 
-export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
+export const StyledBaseTable = styled.table`
   width: 100%;
   transform: scale(1, -1);
 
   .ds-table-row.is-selected {
     .ds-table-cell {
-      background: ${getColor('primary.50')};
+      background: var(--sscds-color-background-selectable-active);
     }
   }
 
@@ -73,8 +73,8 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     font-size: var(--sscds-font-size-body-md);
     font-weight: var(--sscds-font-weight-body-default);
     line-height: ${pxToRem(24)};
-    color: ${getColor('neutral.900')};
-    background: ${getColor('neutral.0')};
+    color: var(--sscds-color-text-default);
+    background: var(--sscds-color-neutral-0);
     padding: ${pxToRem(12, 8)};
 
     &.is-sticky {
@@ -92,7 +92,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
     }
 
     &.is-odd {
-      background: ${getColor('neutral.50')};
+      background: var(--sscds-color-neutral-1);
     }
     .ds-table-cell-link {
       ${DsLinkCell};
@@ -106,26 +106,26 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
       .ds-multivalue-pill {
         align-items: center;
         padding: ${pxToRem(0, 8)};
-        background: ${getColor('neutral.200')};
-        border-radius: ${getRadii('round')};
+        background: var(--sscds-color-background-pill-gray-default);
+        border-radius: var(--sscds-radii-rounded);
         white-space: nowrap;
         margin: ${pxToRem(2)};
 
         &.ds-table-cell-link {
           text-decoration: none;
-          color: ${getColor('neutral.900')};
+          color: var(--sscds-color-text-default);
 
           &:hover,
           &:active {
-            background-color: ${getColor('primary.50')};
-            color: ${getColor('neutral.900')};
+            background-color: var(--sscds-color-background-selectable-active);
+            color: var(--sscds-color-text-default);
           }
         }
       }
     }
 
     .ds-table-cell-null {
-      color: ${getColor('neutral.700')};
+      color: var(--sscds-color-text-subtle);
     }
   }
 
@@ -171,8 +171,8 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
       height: ${getRemToggleSize};
       width: ${getRemToggleSize};
       border: 1px solid ${getFormStyle('borderColor')};
-      border-radius: ${getRadii('default')};
-      background: ${getColor('neutral.0')};
+      border-radius: var(--sscds-radii-default);
+      background: var(--sscds-color-neutral-0);
       padding: ${pxToRem(3)};
 
       .ds-table-checkbox-icon {
@@ -197,7 +197,7 @@ export const StyledBaseTable = styled.table.attrs({ $color: 'primary' })`
   &.has-exclusive-selection .ds-table-checkbox {
     .ds-table-checkbox-input {
       &:checked + .ds-table-checkbox-mark {
-        background: ${getColor('neutral.0')};
+        background: var(--sscds-color-neutral-0);
         border-color: ${getFormStyle('borderColor')};
 
         .ds-table-checkbox-icon {
