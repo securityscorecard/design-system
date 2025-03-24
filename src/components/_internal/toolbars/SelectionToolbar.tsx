@@ -44,16 +44,27 @@ function SelectionToolbarRoot({ children }: { children: ReactNode }) {
 function SelectionToolbarItemCounter({
   selectedRowsCount,
   totalRowCount,
+  selectAllMode,
   deselectAllRows,
+  isVirtualSelectAll,
+  setVirtualSelectAll,
 }: {
+  selectAllMode?: 'page' | 'all' | 'virtual';
   selectedRowsCount: number;
   totalRowCount: number;
   deselectAllRows: () => void;
+  isVirtualSelectAll?: boolean;
+  setVirtualSelectAll?: (value: boolean) => void;
 }) {
   const { t, lng } = useSafeTranslation();
 
   return (
-    <Inline align="center" className="ds-table-selection-overview" gap="sm">
+    <Inline
+      align="center"
+      className="ds-table-selection-overview"
+      data-testid="table-selection-overview"
+      gap="sm"
+    >
       <div>
         <SafeTrans
           components={{
@@ -68,10 +79,31 @@ function SelectionToolbarItemCounter({
           values={{
             count: totalRowCount,
             totalRowCount: abbreviateNumber(totalRowCount, lng),
-            selectedRowCount: selectedRowsCount.toLocaleString(lng),
+            selectedRowCount: isVirtualSelectAll
+              ? abbreviateNumber(totalRowCount, lng)
+              : selectedRowsCount.toLocaleString(lng),
           }}
         />
       </div>
+      {!isVirtualSelectAll &&
+        selectAllMode === 'virtual' &&
+        selectedRowsCount < totalRowCount && (
+          <Button
+            className="ds-table-selection-clear-button"
+            size="sm"
+            variant="ghost"
+            onClick={() => {
+              // Virtual select all - clear the current selection first
+              deselectAllRows();
+              setVirtualSelectAll(true);
+            }}
+          >
+            {t('sscds|datatable.selection.selectAllCount', {
+              count: totalRowCount,
+              totalRowCount: abbreviateNumber(totalRowCount, lng),
+            })}
+          </Button>
+        )}
       <Button
         className="ds-table-selection-clear-button"
         size="sm"
@@ -105,15 +137,21 @@ type Instance<Data> = {
       selectedRows: Data[] | (string | number)[];
       totalRowCount: number;
       table: unknown;
+      isVirtualSelectAll?: boolean;
     }) => ReactNode;
     rowCount?: number;
     manualPagination?: boolean;
     rowSelectionMode?: 'single-page' | 'multi-page';
+    selectAllMode?: 'page' | 'all' | 'virtual';
   };
-  getState?: () => { rowSelection: RowSelectionState };
+  getState?: () => {
+    rowSelection: RowSelectionState;
+    isVirtualSelectAll?: boolean;
+  };
   getPrePaginationRowModel?: Table<Data>['getPrePaginationRowModel'];
   getSelectedRowModel?: Table<Data>['getSelectedRowModel'];
   toggleAllRowsSelected?: Table<Data>['toggleAllRowsSelected'];
+  setVirtualSelectAll?: (value: boolean) => void;
 };
 
 const getSelectedRowsCount = <Data,>(instance: Instance<Data>) => {
@@ -135,32 +173,45 @@ function SelectionToolbarReactTable<Data>({
   instance: Instance<Data>;
 }) {
   const {
+    getState,
     options: {
       renderRowSelectionActions,
       rowCount,
       manualPagination,
       rowSelectionMode,
+      selectAllMode,
     },
     getPrePaginationRowModel,
     toggleAllRowsSelected,
+    setVirtualSelectAll,
   } = instance;
+
+  const { isVirtualSelectAll } = getState();
+
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
   const selectedRows = getSelectedRowsCount<Data>(instance);
 
-  if (selectedRows.length === 0) {
+  if (selectedRows.length === 0 && !isVirtualSelectAll) {
     return null;
   }
 
   return (
     <SelectionToolbarRoot>
       <SelectionToolbarItemCounter
-        deselectAllRows={() => toggleAllRowsSelected(false)}
+        deselectAllRows={() => {
+          toggleAllRowsSelected(false);
+          setVirtualSelectAll(false);
+        }}
+        isVirtualSelectAll={isVirtualSelectAll}
+        selectAllMode={selectAllMode}
         selectedRowsCount={selectedRows.length}
+        setVirtualSelectAll={setVirtualSelectAll}
         totalRowCount={totalRowCount}
       />
       <SelectionToolbarActions>
         {renderRowSelectionActions?.({
+          isVirtualSelectAll,
           selectedRows:
             (manualPagination && rowSelectionMode === 'multi-page') ||
             typeof rowSelectionMode === 'undefined'

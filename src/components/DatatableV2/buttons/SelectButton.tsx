@@ -9,10 +9,26 @@ const selectRowHandler =
   <D,>({ row, table }: { row: DatatableRow<D>; table: DatatableInstance<D> }) =>
   (event: ChangeEvent<HTMLInputElement>) => {
     const {
+      getState,
       options: { enableBatchRowSelection, enableMultiRowSelection },
       refs: { lastSelectedRowIdRef: lastSelectedRowId },
+      setVirtualSelectAll,
     } = table;
-    const wasCurrentRowChecked = row.getIsSelected();
+
+    const { isVirtualSelectAll } = getState();
+    const wasCurrentRowChecked = isVirtualSelectAll || row.getIsSelected();
+
+    if (isVirtualSelectAll) {
+      setVirtualSelectAll(false);
+
+      // When all rows are selected and the user unchecks one, the current selection
+      // should change to all the rows except the one that was unchecked<
+      const { rows } = table.getPrePaginationRowModel();
+      rows.forEach((r) => r.toggleSelected(row.index !== r.index));
+
+      lastSelectedRowId.current = row.id;
+      return;
+    }
 
     row.toggleSelected(!wasCurrentRowChecked);
 
@@ -45,6 +61,23 @@ const selectRowHandler =
     lastSelectedRowId.current = row.id;
   };
 
+const getIsAllRowsSelected = <D,>(table: DatatableInstance<D>) => {
+  const {
+    options: { selectAllMode },
+    getState,
+  } = table;
+
+  const { isVirtualSelectAll } = getState();
+
+  if (selectAllMode === 'virtual' && isVirtualSelectAll) {
+    return true;
+  }
+
+  return selectAllMode === 'all'
+    ? table.getIsAllRowsSelected()
+    : table.getIsAllPageRowsSelected();
+};
+
 const SelectButton = <D,>({
   row,
   table,
@@ -65,28 +98,36 @@ const SelectButton = <D,>({
       manualPagination,
       rowSelectionMode,
     },
+    setVirtualSelectAll,
   } = table;
-  const { isLoading, rowSelection } = getState();
+  const { isLoading, rowSelection, isVirtualSelectAll } = getState();
   const { t } = useSafeTranslation();
 
-  const allRowsSelected =
-    selectAllMode === 'all'
-      ? table.getIsAllRowsSelected()
-      : table.getIsAllPageRowsSelected();
+  const allRowsSelected = getIsAllRowsSelected(table);
+
+  const checked =
+    isVirtualSelectAll ||
+    (isHeaderCheckbox ? allRowsSelected : row?.getIsSelected());
 
   const common: ComponentProps<'input'> = {
-    checked: isHeaderCheckbox ? allRowsSelected : row?.getIsSelected(),
+    checked,
     disabled: isLoading || (row && !row?.getCanSelect()),
     'aria-label': isHeaderCheckbox
       ? t('sscds|datatable.selection.toggleAll')
       : t('sscds|datatable.selection.toggleRow'),
     onChange: (e) => {
       e.stopPropagation();
-
       if (isHeaderCheckbox) {
-        selectAllMode === 'all'
-          ? table.getToggleAllRowsSelectedHandler()(e)
-          : table.getToggleAllPageRowsSelectedHandler()(e);
+        if (isVirtualSelectAll) {
+          setVirtualSelectAll(false);
+          table.toggleAllRowsSelected(false);
+        }
+
+        if (selectAllMode === 'all') {
+          table.getToggleAllRowsSelectedHandler()(e);
+        } else {
+          table.getToggleAllPageRowsSelectedHandler()(e);
+        }
       } else {
         selectRowHandler({ row, table })(e);
       }

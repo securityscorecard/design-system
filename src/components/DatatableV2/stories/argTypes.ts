@@ -646,7 +646,7 @@ export default {
   renderRowSelectionActions: {
     name: 'renderRowSelectionActions',
     description:
-      "You can provide your own implementation of the row actions container. This property accepts\nReact component with properties:\n - `selectedRows` - array of currently selected rows or list of row ids if manualPagination is enabled and rowSelectionMode is set to 'multi-page'\n - `totalRowCount` - count of all rows in the table\n - `table` - current instance of the table",
+      "You can provide your own implementation of the row actions container. This property accepts\nReact component with properties:\n - `selectedRows` - array of currently selected rows or list of row ids if manualPagination is enabled and rowSelectionMode is set to 'multi-page'\n - `totalRowCount` - count of all rows in the table\n - `table` - current instance of the table\n - `isVirtualSelectAll` - boolean flag if the select all checkbox is in virtual mode",
     type: {
       required: false,
       raw: '(props: {\n  selectedRows: D[] | (string | number)[];\n  totalRowCount: number;\n  table: DatatableInstance<D>;\n}) => ReactNode',
@@ -655,7 +655,7 @@ export default {
     table: {
       type: {
         summary:
-          '(props: {\n  selectedRows: D[] | (string | number)[];\n  totalRowCount: number;\n  table: DatatableInstance<D>;\n}) => ReactNode',
+          '(props: {\n  selectedRows: D[] | (string | number)[];\n  totalRowCount: number;\n  table: DatatableInstance<D>;\n  isVirtualSelectAll: boolean; }) => ReactNode',
       },
     },
   },
@@ -794,13 +794,13 @@ export default {
     control: {
       type: 'radio',
     },
-    options: ['page', 'all'],
+    options: ['page', 'all', 'virtual'],
     name: 'selectAllMode',
     description:
-      'Switch mode for the select all checkbox in the table header. When `page` is set checkbox will\nselect all rows in the current page. When `all` is set checkbox will select all rows in the\ntable.',
+      'Switch mode for the select all checkbox in the table header. When `page` is set checkbox will\nselect all rows in the current page. When `all` is set checkbox will select all rows in the\ntable.  When `virtual` is set checkbox will select all rows in the table but the selection state will not\ncontain all row ids. `isVirtualSelectAll` should be used instead.\nThis is useful when you have a large dataset and you want to select all rows for batch operations.',
     type: {
       required: false,
-      raw: "'page' | 'all'",
+      raw: "'page' | 'all' | 'virtual'",
       name: 'enum',
     },
     table: {

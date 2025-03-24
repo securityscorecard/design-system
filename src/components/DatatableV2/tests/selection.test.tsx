@@ -7,7 +7,16 @@ import Datatable from '../Datatable';
 import { columns, data } from './mocks';
 import { fetchData, useQuery } from '../mocks/externalData';
 
-const SSPDatatable = ({ rowAction, rowSelectionMode }) => {
+const SSPDatatable = ({
+  rowAction,
+  rowSelectionMode,
+  selectAllMode = 'page',
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rowAction: (rows: any[]) => void;
+  rowSelectionMode: 'single-page' | 'multi-page';
+  selectAllMode?: 'page' | 'virtual' | 'all';
+}) => {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
@@ -44,6 +53,7 @@ const SSPDatatable = ({ rowAction, rowSelectionMode }) => {
       state={{ pagination }}
       manualPagination
       onPaginationChange={setPagination}
+      selectAllMode={selectAllMode}
     />
   );
 };
@@ -179,7 +189,7 @@ describe('DatatableV2/selection', () => {
     });
 
     describe('selection modes', () => {
-      it('should select only rows on current page when "selectionMode=page"', async () => {
+      it('should select only rows on current page when "selectAllMode=page"', async () => {
         const { user } = setup(
           <Datatable
             data={data}
@@ -209,7 +219,7 @@ describe('DatatableV2/selection', () => {
         ).not.toBeChecked();
       });
 
-      it('should select all rows when "selectionMode=all"', async () => {
+      it('should select all rows when "selectAllMode=all"', async () => {
         const { user } = setup(
           <Datatable
             data={data}
@@ -390,6 +400,80 @@ describe('DatatableV2/selection', () => {
         screen.getAllByLabelText('Toggle select row')[0],
       ).not.toBeChecked();
       expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
+    });
+  });
+
+  describe('with "selectAllMode=virtual"', () => {
+    it('should display the "select all" prompt when all rows are selected', async () => {
+      const rowAction = vi.fn();
+      const { user } = setup(
+        <SSPDatatable
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          selectAllMode="virtual"
+        />,
+      );
+
+      await user.click(screen.getAllByLabelText('Toggle select all')[0]);
+      expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
+      expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
+
+      await waitFor(() => {
+        expect(
+          screen.getByTestId('table-selection-overview'),
+        ).toHaveTextContent('10 of 100 rows selected');
+      });
+
+      await user.click(screen.getByRole('button', { name: /Select all 100/i }));
+
+      await waitFor(() => {
+        expect(
+          screen.getByTestId('table-selection-overview'),
+        ).toHaveTextContent('100 of 100 rows selected');
+      });
+    });
+
+    it('should should fallback on single page select behavior after unselecting one row', async () => {
+      const rowAction = vi.fn();
+      const { user } = setup(
+        <SSPDatatable
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          selectAllMode="virtual"
+        />,
+      );
+
+      await user.click(screen.getAllByLabelText('Toggle select all')[0]);
+      expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
+      expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
+
+      await waitFor(() => {
+        expect(
+          screen.getByTestId('table-selection-overview'),
+        ).toHaveTextContent('10 of 100 rows selected');
+      });
+
+      await user.click(screen.getByRole('button', { name: /Select all 100/i }));
+
+      expect(screen.getByTestId('table-selection-overview')).toHaveTextContent(
+        '100 of 100 rows selected',
+      );
+
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
+
+      expect(
+        screen.getAllByLabelText('Toggle select row')[0],
+      ).not.toBeChecked();
+
+      expect(
+        screen.getByRole('checkbox', {
+          name: /Toggle select all/i,
+        }),
+      ).toBePartiallyChecked();
+
+      expect(screen.getByTestId('table-selection-overview')).toHaveTextContent(
+        '9 of 100 rows selected',
+      );
     });
   });
 });

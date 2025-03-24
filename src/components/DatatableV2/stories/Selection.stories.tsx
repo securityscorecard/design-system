@@ -8,6 +8,7 @@ import Template, { Story } from './Template';
 import { Button } from '../../Button';
 import { fetchData, useQuery } from '../mocks/externalData';
 import argTypes from './argTypes';
+import { Strong } from '../../Text';
 
 export default {
   title: 'components/DatatableV2/Selection',
@@ -65,6 +66,117 @@ SelectAllModePage.args = { ...SelectionEnabled.args, selectAllMode: 'page' };
 
 export const SelectAllModeAll: Story = Template.bind({});
 SelectAllModeAll.args = { ...SelectionEnabled.args, selectAllMode: 'all' };
+
+export const SelectAllModeVirtual: Story = (args) => {
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 1,
+    pageSize: 10,
+  });
+
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const dataQuery = useQuery({
+    queryKey: ['data', pagination],
+    queryFn: () => fetchData(pagination),
+    keepPreviousData: true,
+  });
+
+  return (
+    <Datatable
+      {...args}
+      data={dataQuery?.data?.entries ?? []}
+      initialState={{
+        isVirtualSelectAll: true,
+      }}
+      pageCount={dataQuery?.data?.pageCount ?? -1}
+      rowCount={dataQuery?.data?.rowCount}
+      selectAllMode="virtual"
+      state={{ pagination, rowSelection }}
+      manualPagination
+      onPaginationChange={setPagination}
+      onRowSelectionChange={setRowSelection}
+    />
+  );
+};
+
+SelectAllModeVirtual.args = {
+  ...Template.args,
+  manualPagination: true,
+  rowSelectionMode: 'single-page',
+  renderRowSelectionActions: ({ selectedRows, isVirtualSelectAll }) => {
+    const selectedRowCount = Object.keys(selectedRows).filter(
+      (id) => !!selectedRows[id],
+    ).length;
+
+    return (
+      <Button
+        onClick={() => action('batch action')(selectedRows, isVirtualSelectAll)}
+      >
+        Show selected rows{' '}
+        {isVirtualSelectAll ? '(all)' : `(${selectedRowCount})`}
+      </Button>
+    );
+  },
+  selectAllMode: 'virtual',
+};
+SelectAllModeVirtual.parameters = {
+  screenshot: { skip: false },
+};
+
+export const SelectAllModeVirtualManagedState: Story = (args) => {
+  const [isVirtualSelectAll, setVirtualSelectAll] = useState<boolean>(true);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 1,
+    pageSize: 10,
+  });
+
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const dataQuery = useQuery({
+    queryKey: ['data', pagination],
+    queryFn: () => fetchData(pagination),
+    keepPreviousData: true,
+  });
+
+  return (
+    <>
+      <Datatable
+        {...args}
+        data={dataQuery?.data?.entries ?? []}
+        pageCount={dataQuery?.data?.pageCount ?? -1}
+        rowCount={dataQuery?.data?.rowCount}
+        selectAllMode="virtual"
+        state={{ pagination, isVirtualSelectAll, rowSelection }}
+        manualPagination
+        onPaginationChange={setPagination}
+        onRowSelectionChange={setRowSelection}
+        onVirtualSelectAllChange={setVirtualSelectAll}
+      />
+      <div>
+        <Strong>
+          {isVirtualSelectAll && <span>All rows have been selected</span>}
+        </Strong>
+      </div>
+    </>
+  );
+};
+
+SelectAllModeVirtualManagedState.args = {
+  ...Template.args,
+  manualPagination: true,
+  rowSelectionMode: 'single-page',
+  renderRowSelectionActions: ({ selectedRows, isVirtualSelectAll }) => (
+    <Button
+      onClick={() => action('batch action')(selectedRows, isVirtualSelectAll)}
+    >
+      Show selected rows {isVirtualSelectAll ? '(all)' : ''}
+    </Button>
+  ),
+  selectAllMode: 'virtual',
+};
+SelectAllModeVirtualManagedState.parameters = {
+  screenshot: { skip: false },
+};
 
 export const ConditionallyEnabledSelection: Story = Template.bind({});
 ConditionallyEnabledSelection.args = {
