@@ -5,7 +5,6 @@ import { assoc, assocPath, fromPairs, map, pipe } from 'ramda';
 import { isNotUndefined, noop } from 'ramda-adjunct';
 import { IdType } from 'react-table';
 
-import { getColor, getRadii } from '../../utils';
 import { Padbox } from '../layout';
 import { useDataFetch } from './hooks/useDataFetch';
 import { useTableRowSelect } from './hooks/useTableRowSelect';
@@ -24,9 +23,9 @@ const StyledDatatable = styled(Padbox)`
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid ${getColor('neutral.300')};
-  border-radius: ${getRadii('double')};
-  background: ${getColor('neutral.0')};
+  border: 1px solid var(--sscds-color-border-default);
+  border-radius: var(--sscds-radii-surface-md);
+  background: var(--sscds-color-background-surface-default);
 `;
 
 const mapSelectedRows = <D,>(defaultSelectedRowIds: IdType<D>[]) =>
