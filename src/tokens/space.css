@@ -28,5 +28,9 @@
 
   --sscds-space-dialog-content-padding: var(--sscds-space-6x);
 
+  --sscds-space-widget-padding: var(--sscds-space-6x);
+  --sscds-space-widget-padding-top: var(--sscds-space-4x);
+  --sscds-space-widget-gap: var(--sscds-space-6x);
+
   --sscds-space-grid-gutter: 1.875rem; /* LEGACY VALUE - should be replaced with 8x */
 }
