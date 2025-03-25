@@ -18,4 +18,6 @@
   --sscds-radii-surface-sm:  var(--sscds-radii-20);
   --sscds-radii-surface-md:  var(--sscds-radii-30);
   --sscds-radii-surface-lg:  var(--sscds-radii-40);
+
+  --sscds-radii-widget: var(--sscds-radii-surface-lg);
 }
