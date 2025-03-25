@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { abbreviateNumber } from '../../../utils';
 import { Inline, Padbox, Surface } from '../../layout';
 import Button from '../../ButtonV2/Button';
-import { Strong } from '../../Text';
+import { Strong, Text } from '../../Text';
 import {
   SafeTrans,
   useSafeTranslation,
@@ -24,7 +24,7 @@ const SelectionRoot = styled(Surface)`
 function SelectionToolbarRoot({ children }: { children: ReactNode }) {
   return (
     <SelectionRoot
-      className="ds-table-selection-toolbar"
+      className="ds-table-selection-toolbar dark"
       elevation={2}
       radius="md"
       style={{
@@ -65,7 +65,7 @@ function SelectionToolbarItemCounter({
       data-testid="table-selection-overview"
       gap="sm"
     >
-      <div>
+      <Text as="div">
         <SafeTrans
           components={{
             bold: (
@@ -84,7 +84,7 @@ function SelectionToolbarItemCounter({
               : selectedRowsCount.toLocaleString(lng),
           }}
         />
-      </div>
+      </Text>
       {!isVirtualSelectAll &&
         selectAllMode === 'virtual' &&
         selectedRowsCount < totalRowCount && (
