@@ -1,7 +1,7 @@
 import { isNotUndefined } from 'ramda-adjunct';
 import styled, { css } from 'styled-components';
 
-import { getColor, pxToRem } from '../../../../utils';
+import { pxToRem } from '../../../../utils';
 import TooltipWrapper from '../components/TooltipWrapper';
 import { makeStickyColumn, shrinkIfSticky } from '../utils';
 import SortingIcon from './SortingIcon';
@@ -14,8 +14,8 @@ const StyledTh = styled.th<{ sticky?: string }>`
   min-height: ${pxToRem(48)};
   text-align: left;
   padding: ${pxToRem(8)};
-  background-color: ${getColor('neutral.0')};
-  border-color: ${getColor('neutral.300')};
+  background-color: var(--sscds-color-background-surface-default);
+  border-color: var(--sscds-color-border-default);
   border-style: solid;
   border-width: 1px 0 1px 1px;
 
@@ -24,7 +24,7 @@ const StyledTh = styled.th<{ sticky?: string }>`
   ${({ sticky }) =>
     sticky === 'left' &&
     css`
-      border-right: 1px solid ${getColor('neutral.300')};
+      border-right: 1px solid var(--sscds-color-border-default);
 
       &:first-of-type + & {
         border-left: 0;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getColor, pxToRem } from '../../../../utils';
+import { pxToRem } from '../../../../utils';
 import { Padbox } from '../../../layout';
 import { Spinner } from '../../../Spinner';
 import { FooterProps } from './Footer.types';
@@ -10,7 +10,7 @@ import { Pagination } from '../../../Pagination';
 const StyledFooter = styled(Padbox)`
   display: flex;
   align-items: center;
-  border-top: 1px solid ${getColor('neutral.300')};
+  border-top: 1px solid var(--sscds-color-border-default);
 `;
 const LoadingContainer = styled.div`
   padding: ${pxToRem(8, 24, 8, 8)};
