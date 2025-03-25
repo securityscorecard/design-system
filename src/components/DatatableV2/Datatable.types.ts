@@ -190,8 +190,6 @@ interface CustomState {
   isFullscreenMode: boolean;
   /** Active row ID */
   activeRowId: string;
-  /* Virtual select all */
-  isVirtualSelectAll: boolean;
 }
 export type DatatableInitialState = Omit<
   InitialTableState,
@@ -227,7 +225,6 @@ export interface ParsedDatatableOptions<D>
   onFullscreenModeChange?: DatatableOptions<D>['onFullscreenModeChange'];
   onActiveRowIdChange?: DatatableOptions<D>['onActiveRowIdChange'];
   onRowClick?: DatatableOptions<D>['onRowClick'];
-  onVirtualSelectAllChange?: DatatableOptions<D>['onVirtualSelectAllChange'];
   renderDetailPanel?: DatatableOptions<D>['renderDetailPanel'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
@@ -261,7 +258,6 @@ export interface DatatableInstance<D>
   options: ParsedDatatableOptions<D>;
   setShowColumnSettings: Dispatch<SetStateAction<boolean>>;
   setIsFullscreenMode: Dispatch<SetStateAction<boolean>>;
-  setVirtualSelectAll: Dispatch<SetStateAction<boolean>>;
   setActiveRowId: Dispatch<SetStateAction<string>>;
   refs: {
     tableRef: MutableRefObject<HTMLTableElement>;
@@ -274,21 +270,18 @@ interface ClientSideRowSelectionActions<D> {
   selectedRows: D[];
   totalRowCount: number;
   table: DatatableInstance<D>;
-  isVirtualSelectAll: boolean;
 }
 
 interface ServerSideSinglePageRowSelectionActions<D> {
   selectedRows: D[];
   totalRowCount: number;
   table: DatatableInstance<D>;
-  isVirtualSelectAll: boolean;
 }
 
 interface ServerSideMultiPageRowSelectionActions<D> {
   selectedRows: (string | number)[];
   totalRowCount: number;
   table: DatatableInstance<D>;
-  isVirtualSelectAll: boolean;
 }
 
 // Base options that apply to all cases
@@ -563,13 +556,6 @@ interface DatatableBaseOptions<D>
   }) => void;
 
   /**
-   * If provided, this function will be called with an `updaterFn` when `state.isVirtualSelectAll`
-   * changes. This overrides the default internal state management, so you are expected to manage
-   * this state on your own. You can pass the managed state back to the table via the
-   */
-  onVirtualSelectAllChange?: Dispatch<SetStateAction<boolean>>;
-
-  /**
    * Provide your own implementation of row details panel. This property accepts React component
    * with properties:
    *  - `row` - current row, row data are accessible through `row.original`
@@ -604,13 +590,11 @@ interface DatatableBaseOptions<D>
   /**
    * Switch mode for the select all checkbox in the table header. When `page` is set checkbox will
    * select all rows in the current page. When `all` is set checkbox will select all rows in the
-   * table. When 'virtual' is set checkbox will select all rows in the table but the selection state will not
-   * contain all row ids. The isVirtualSelectAll property should be used instead.
-   * This is useful when you have a large dataset and you want to select all rows for batch operations.
+   * table.
    *
    * @default page
    */
-  selectAllMode?: 'page' | 'all' | 'virtual';
+  selectAllMode?: 'page' | 'all';
 
   /**
    * Current state of the table. Used when you need to manage table state on your own.

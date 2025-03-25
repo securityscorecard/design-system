@@ -40,7 +40,6 @@ const locale = {
   'datatable.selection.clearSelection': 'Clear selection',
   'datatable.selection.toggleAll': 'Toggle select all',
   'datatable.selection.toggleRow': 'Toggle select row',
-  'datatable.selection.selectAllCount': 'Select all {totalRowCount}',
   'datatable.noData.title': 'No results found',
   'datatable.noData.list.description': 'This may happen because:',
   'datatable.noData.list.emptySet': 'the data set is empty',
