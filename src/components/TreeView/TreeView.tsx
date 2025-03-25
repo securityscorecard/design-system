@@ -124,7 +124,12 @@ function TreeView<D>({
 
   return (
     <Stack gap="4x">
-      <Surface elevation={2} radius="md" hasBorder>
+      <Surface
+        elevation={2}
+        radius="md"
+        style={{ overflow: 'hidden' }}
+        hasBorder
+      >
         <DndContext
           accessibility={{ announcements }}
           collisionDetection={closestCenter}

@@ -212,6 +212,7 @@ export const SingleRowAction: Story = {
 export const RowOnClickEnabled: Story = {
   args: {
     onRowClick: action('onRowClick'),
+    rowActions: Playground.args?.rowActions,
   },
   render: function Render(args) {
     const [activeRow, setActiveRow] = useState('');
