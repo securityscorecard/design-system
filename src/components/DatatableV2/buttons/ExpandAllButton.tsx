@@ -14,7 +14,8 @@ const ExpandAllButton = <D,>({ table }: { table: DatatableInstance<D> }) => {
   const { isLoading } = getState();
   const areSomeRowsExpanded = getIsSomeRowsExpanded();
 
-  if (!enableExpandAll) return null;
+  if (!enableExpandAll)
+    return <span className="sr-only">Expand detail panel</span>;
 
   return (
     <IconButton
