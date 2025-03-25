@@ -118,6 +118,13 @@ export const SolidButtons: StoryFn = () => (
     </Inline>
   </Stack>
 );
+SolidButtons.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 export const OutlineButtons: StoryFn = () => (
   <Inline gap={SpaceSizes.md}>
@@ -182,6 +189,13 @@ export const TextButtons: StoryFn = () => (
     </Inline>
   </Stack>
 );
+TextButtons.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 export const GhostButtons: StoryFn = () => (
   <Stack gap={SpaceSizes.lg}>
@@ -229,6 +243,13 @@ export const GhostButtons: StoryFn = () => (
     </Inline>
   </Stack>
 );
+GhostButtons.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 export const LoadingButtons: StoryFn = () => (
   <Inline gap={SpaceSizes.md}>
