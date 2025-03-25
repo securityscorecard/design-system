@@ -200,6 +200,7 @@ function TreeItem<D>({
               )}
               {isSelectable && (
                 <Checkbox
+                  aria-label="Select row"
                   checkboxId={`checkbox-${id}`}
                   checked={isSelected}
                   isIndeterminate={isIndeterminate}
