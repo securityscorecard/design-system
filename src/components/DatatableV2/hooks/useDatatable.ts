@@ -95,6 +95,9 @@ export const useDatatable = <D>(
   const [activeRowId, setActiveRowId] = useState<string>(
     initialState?.activeRowId ?? undefined,
   );
+  const [isVirtualSelectAll, setVirtualSelectAll] = useState<boolean>(
+    initialState?.isVirtualSelectAll ?? false,
+  );
   const [width, setWidth] = useState(0);
 
   const onResize = () => {
@@ -156,6 +159,7 @@ export const useDatatable = <D>(
     initialState,
     state: {
       showColumnSettings,
+      isVirtualSelectAll,
       isFullscreenMode,
       columnSizing,
       activeRowId,
@@ -189,6 +193,7 @@ export const useDatatable = <D>(
   table.setColumnSizing =
     tableOptions.onColumnSizingChange ?? debouncedSetColumnSizing;
   table.setActiveRowId = tableOptions.onActiveRowIdChange ?? setActiveRowId;
-
+  table.setVirtualSelectAll =
+    tableOptions.onVirtualSelectAllChange ?? setVirtualSelectAll;
   return table;
 };
