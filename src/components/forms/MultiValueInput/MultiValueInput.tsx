@@ -332,6 +332,7 @@ const MultiValueInput = ({
           {values.map((label, index) => (
             <Pill
               key={label}
+              aria-disabled={isDisabled}
               label={label}
               maxLabelLength={maxPillLabelLength}
               onRemove={!isDisabled ? hadleOnRemove(index) : undefined}

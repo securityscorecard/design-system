@@ -159,7 +159,6 @@ jobs:
       - name: Run A11y tests
         id: 'a11yTests'
         run: yarn test:a11y:ci
-        continue-on-error: true
         env:
           SHARD: ${{matrix.shard}}
           MAX_SHARDS: '4'
@@ -273,7 +272,7 @@ jobs:
     name: '📟 Get next released version'
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta') && !contains(github.event.head_commit.message, 'chore(release):')
     continue-on-error: true
-    needs: [unit-tests, visual-tests, types, lint, lint-css, build]
+    needs: [unit-tests, visual-tests, types, lint, lint-css, build, a11y-tests]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,0 +1,5 @@
+:root {
+  --sscds-size-widget-height-1x: 11rem;
+  --sscds-size-widget-height-2x: calc(2 * var(--sscds-size-widget-height-1x) + var(--sscds-space-widget-gap));
+  --sscds-size-widget-height-3x: calc(3 * var(--sscds-size-widget-height-1x) + 2 * var(--sscds-space-widget-gap));
+}

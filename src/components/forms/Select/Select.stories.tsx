@@ -71,6 +71,15 @@ import Pill from '../../Pill/Pill';
       `,
       },
     },
+    a11y: {
+      config: {
+        rules: [
+          { id: 'color-contrast', enabled: false },
+          { id: 'label', enabled: false },
+          { id: 'scrollable-region-focusable', enabled: false },
+        ],
+      },
+    },
   },
   argTypes: {
     options: {

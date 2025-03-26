@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { pxToRem } from '../../../utils';
-import { INDENTATION_WIDTH } from '../common/constants';
 import { Inline, Padbox } from '../../layout';
 import { Text } from '../../Text';
 import CollapsibleHandle from './CollapsibleHandle';
@@ -48,21 +47,13 @@ const TreeItemRoot = styled.li`
     -webkit-user-select: none;
   }
 
-  &[tabIndex='0'] {
-    cursor: pointer;
-
-    &[data-active='true'] {
-      background-color: var(--sscds-color-background-selectable-active);
-    }
-
-    &:hover {
-      background-color: var(--sscds-color-background-selectable-hover);
-    }
+  &[data-active='true'] {
+    background-color: var(--sscds-color-background-selectable-active);
   }
 `;
 TreeItemRoot.displayName = 'TreeItemRoot';
 
-const TreeItemContent = styled.div`
+const TreeItemInner = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -90,6 +81,35 @@ const TreeItemContent = styled.div`
     }
   }
 `;
+TreeItemInner.displayName = 'TreeItemInner';
+const TreeItemControls = styled(Padbox)`
+  position: absolute;
+  left: calc(var(--sscds-treeitem-depth) * var(--sscds-space-6x));
+`;
+
+const TreeItemContent = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: var(--sscds-space-2x);
+  padding-inline-start: calc(
+    var(--sscds-space-2x) + var(--sscds-treeitem-content-spacing-start) +
+      (var(--sscds-treeitem-depth) * var(--sscds-space-6x))
+  );
+  padding-inline-end: calc(
+    var(--sscds-space-2x) + var(--sscds-treeitem-content-spacing-end)
+  );
+  &[data-interactive='true'] {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--sscds-color-background-selectable-hover);
+    }
+  }
+`;
+
 TreeItemContent.displayName = 'TreeItemContent';
 
 const StartContainer = styled.span`
@@ -121,6 +141,13 @@ const CountBox = styled.span`
 `;
 CountBox.displayName = 'CountBox';
 
+const getStartPadding = (
+  bools: [isSortable: boolean, isSelectable: boolean, isCollapsible: boolean],
+) => {
+  const featureCount = bools.filter(Boolean).length;
+
+  return ['1rem', '3rem', '5rem', '6.25rem'][featureCount];
+};
 function TreeItem<D>({
   childCount,
   collapsed,
@@ -152,6 +179,8 @@ function TreeItem<D>({
   isSelectable,
   ...props
 }: TreeItemProps<D>) {
+  const isClickable = typeof onRowClick === 'function';
+
   return (
     <TreeItemRoot
       // @ts-expect-error Typing styled-components refs is almost impossible :facepalm:
@@ -161,82 +190,95 @@ function TreeItem<D>({
       data-ghost={isGhost}
       data-interaction={!disableInteraction}
       data-selection={!disableSelection}
-      role={typeof onRowClick === 'function' ? 'button' : 'listitem'}
       style={{
         '--sscds-treeitem-height': pxToRem(rowHeight),
-        '--sscds-treeitem-indent': pxToRem(INDENTATION_WIDTH * depth),
+        '--sscds-treeitem-depth': depth,
       }}
-      tabIndex={typeof onRowClick === 'function' ? 0 : -1}
       data-dnd-item
-      onClick={() => {
-        onRowClick?.(row);
-        onActiveRowIdChange?.(id);
-      }}
-      onKeyDown={(e) => {
-        if (
-          (e.target as HTMLElement).dataset['dnd-item'] !== undefined &&
-          (e.key === 'Enter' || e.key === ' ')
-        ) {
-          onRowClick?.(row);
-          onActiveRowIdChange?.(id);
-        }
-      }}
       {...props}
     >
-      <TreeItemContent ref={innerRef} style={style}>
-        <Inline align="center" stretch={2} style={{ width: '100%' }}>
-          <Padbox paddingSize="sm">
-            <Inline align="center">
-              {isSortable && (
-                // @ts-expect-error 'aria-describedby' is used instead of 'label' prop. This comes from dnd-kit
-                <IconButton
-                  {...handleAttributes}
-                  {...handleListeners}
-                  iconName="grip-dots-vertical"
-                  size="sm"
-                  style={{ cursor: 'grab' }}
-                  variant="ghost"
-                />
-              )}
-              {isSelectable && (
-                <Checkbox
-                  checkboxId={`checkbox-${id}`}
-                  checked={isSelected}
-                  isIndeterminate={isIndeterminate}
-                  name={`checkbox-${id}`}
-                  onChange={(e) => {
-                    e.stopPropagation();
-                    onSelectionChange?.(id, !isSelected);
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              )}
-              {isCollapsible && (
-                <CollapsibleHandle
-                  collapsed={collapsed}
-                  onCollapse={onCollapse}
-                />
-              )}
-            </Inline>
+      <TreeItemInner ref={innerRef} style={style}>
+        <TreeItemControls paddingSize="sm" style={{ position: 'absolute' }}>
+          <Inline align="center">
+            {isSortable && (
+              <IconButton
+                {...handleAttributes}
+                {...handleListeners}
+                iconName="grip-dots-vertical"
+                label="Move row"
+                size="sm"
+                style={{ cursor: 'grab' }}
+                variant="ghost"
+              />
+            )}
+            {isSelectable && (
+              <Checkbox
+                aria-label="Select row"
+                checkboxId={`checkbox-${id}`}
+                checked={isSelected}
+                isIndeterminate={isIndeterminate}
+                name={`checkbox-${id}`}
+                onChange={(e) => {
+                  e.stopPropagation();
+                  onSelectionChange?.(id, !isSelected);
+                }}
+                onClick={(e) => e.stopPropagation()}
+              />
+            )}
+            {isCollapsible && (
+              <CollapsibleHandle
+                collapsed={collapsed}
+                onCollapse={onCollapse}
+              />
+            )}
+          </Inline>
+        </TreeItemControls>
+        {/* @ts-expect-error Typescript is not able to infer correct element types based on the `as` prop */}
+        <TreeItemContent
+          data-interactive={isClickable}
+          style={{
+            '--sscds-treeitem-content-spacing-end':
+              rowActions.length !== 0 ? '3rem' : '0rem',
+            '--sscds-treeitem-content-spacing-start': getStartPadding([
+              isSortable,
+              isSelectable,
+              isCollapsible,
+            ]),
+          }}
+          data-content
+          {...(isClickable
+            ? {
+                as: 'button',
+                type: 'button',
+                onClick: () => {
+                  onRowClick?.(row);
+                  onActiveRowIdChange?.(id);
+                },
+                onKeyDown: (e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    onRowClick?.(row);
+                    onActiveRowIdChange?.(id);
+                  }
+                },
+              }
+            : {})}
+        >
+          <Inline align="center" gap="md">
+            <StartContainer>
+              {renderPrimaryContent?.(row) ?? <Text isBold>{id}</Text>}
+            </StartContainer>
+            {renderSecondaryContent?.(row) ?? null}
+          </Inline>
+        </TreeItemContent>
+        {rowActions.length !== 0 && (
+          <Padbox paddingSize="sm" style={{ position: 'absolute', right: 0 }}>
+            <RowActions row={row} rowActions={rowActions} />
           </Padbox>
-          <Padbox paddingSize="sm" data-content>
-            <Inline align="center" gap="md">
-              <StartContainer>
-                {renderPrimaryContent?.(row) ?? <Text isBold>{id}</Text>}
-              </StartContainer>
-              {renderSecondaryContent?.(row) ?? null}
-            </Inline>
-          </Padbox>
-          {rowActions.length !== 0 && (
-            <Padbox paddingSize="sm">
-              <RowActions row={row} rowActions={rowActions} />
-            </Padbox>
-          )}
-        </Inline>
+        )}
         {isClone && childCount && childCount > 1 && (
           <CountBox>{childCount}</CountBox>
         )}
-      </TreeItemContent>
+      </TreeItemInner>
     </TreeItemRoot>
   );
 }

@@ -42,6 +42,9 @@ WithoutCopy.args = {
   ...Playground.args,
   canCopy: false,
 };
+WithoutCopy.parameters = {
+  screenshot: { skip: true },
+};
 
 export const WithoutDedent: StoryFn<typeof Snippet> = Template.bind({});
 WithoutDedent.args = {

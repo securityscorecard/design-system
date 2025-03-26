@@ -149,7 +149,7 @@ export const WithSelectionActions: Story = {
     ...EnabledSelection.args,
     renderRowSelectionActions: ({ selectedIds }) => (
       <Button
-        variant="danger-ghost"
+        variant="ghost"
         onClick={() => action('selection action')(selectedIds)}
       >
         Remove ({selectedIds.length.toLocaleString()})
@@ -212,6 +212,7 @@ export const SingleRowAction: Story = {
 export const RowOnClickEnabled: Story = {
   args: {
     onRowClick: action('onRowClick'),
+    rowActions: Playground.args?.rowActions,
   },
   render: function Render(args) {
     const [activeRow, setActiveRow] = useState('');
