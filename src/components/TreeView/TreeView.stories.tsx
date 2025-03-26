@@ -149,7 +149,7 @@ export const WithSelectionActions: Story = {
     ...EnabledSelection.args,
     renderRowSelectionActions: ({ selectedIds }) => (
       <Button
-        variant="danger-ghost"
+        variant="ghost"
         onClick={() => action('selection action')(selectedIds)}
       >
         Remove ({selectedIds.length.toLocaleString()})
