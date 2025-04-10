@@ -118,9 +118,7 @@ export default createGlobalStyle`
   a:focus, button:focus, [tabindex="0"]:focus {
     outline: none;
   }
-  a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
-    outline: 2px solid var(--sscds-color-border-action-focused);
-  }
+
   :root {
     ${generateColorsCSSVars};
     --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
