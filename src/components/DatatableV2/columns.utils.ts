@@ -138,6 +138,7 @@ export const getCommonCellStyles = <D>({
   return {
     ...getSizeStyle({ header, column }),
     ...getPinnedStyle({ table, column }),
+    overflow: 'hidden',
   };
 };
 
