@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import { useState } from 'react';
-import { type PaginationState } from '@tanstack/react-table';
+import { type PaginationState, RowSelectionState } from '@tanstack/react-table';
 
 import { setup } from '../../../utils/tests/setup';
 import Datatable from '../Datatable';
@@ -53,6 +53,63 @@ const SSPDatatable = ({
       state={{ pagination }}
       manualPagination
       onPaginationChange={setPagination}
+      selectAllMode={selectAllMode}
+    />
+  );
+};
+
+const SSPDatatableWithRowSelection = ({
+  rowAction,
+  rowSelectionMode,
+  selectAllMode = 'page',
+  initialRowSelection = {},
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rowAction: (rows: any[]) => void;
+  rowSelectionMode: 'single-page' | 'multi-page';
+  selectAllMode?: 'page' | 'virtual' | 'all';
+  initialRowSelection: RowSelectionState;
+}) => {
+  const [rowSelection, setRowSelection] =
+    useState<RowSelectionState>(initialRowSelection);
+
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const dataQuery = useQuery({
+    queryKey: ['data', pagination],
+    queryFn: () => fetchData(pagination),
+    keepPreviousData: true,
+  });
+
+  return (
+    <Datatable
+      id="test"
+      getRowId={(row) => row.id}
+      columns={[
+        { accessorKey: 'organization.name', header: 'Name' },
+        { accessorKey: 'organization.domain', header: 'domain' },
+      ]}
+      data={dataQuery?.data?.entries ?? []}
+      pageCount={dataQuery?.data?.pageCount ?? -1}
+      renderRowSelectionActions={({ selectedRows }) => (
+        <button
+          type="button"
+          onClick={() => {
+            rowAction(selectedRows);
+          }}
+        >
+          Row action
+        </button>
+      )}
+      rowCount={dataQuery?.data?.rowCount}
+      rowSelectionMode={rowSelectionMode}
+      state={{ pagination, rowSelection }}
+      manualPagination
+      onPaginationChange={setPagination}
+      onRowSelectionChange={setRowSelection}
       selectAllMode={selectAllMode}
     />
   );
@@ -303,6 +360,59 @@ describe('DatatableV2/selection', () => {
                 '484e5bdb-2bb5-4844-8c6c-4d9e1808ac3a',
               ]);
             });
+          });
+
+          it('should unselect all rows on "Clear Selection" click', async () => {
+            const rowAction = vi.fn();
+            const { entries } = fetchData({ pageIndex: 0, pageSize: 100 });
+
+            // Select rows across multiple pages
+            const initialRowSelection: RowSelectionState = {
+              [entries[0].id]: true,
+              [entries[1].id]: true,
+              [entries[10].id]: true,
+              [entries[11].id]: true,
+            };
+
+            const { user } = setup(
+              <SSPDatatableWithRowSelection
+                rowSelectionMode="multi-page"
+                rowAction={rowAction}
+                initialRowSelection={initialRowSelection}
+              />,
+            );
+
+            await waitFor(() => {
+              expect(
+                screen.getAllByLabelText('Toggle select row')[0],
+              ).toBeChecked();
+            });
+
+            await user.click(
+              screen.getByRole('button', { name: /Clear selection/i }),
+            );
+
+            await waitFor(() => {
+              expect(
+                screen.queryByRole('button', { name: /Clear selection/i }),
+              ).not.toBeInTheDocument();
+            });
+
+            await waitFor(() => {
+              expect(
+                screen.getAllByLabelText('Toggle select row')[0],
+              ).not.toBeChecked();
+            });
+
+            await user.click(
+              screen.getByRole('button', {
+                name: /Go to the next page of table/i,
+              }),
+            );
+
+            expect(
+              screen.getAllByLabelText('Toggle select row')[0],
+            ).not.toBeChecked();
           });
         });
 
