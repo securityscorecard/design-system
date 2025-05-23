@@ -29,6 +29,7 @@ First, you need to install `yalc` by running the following command in your termi
 
 ```sh
 yarn global add yalc # for Yarn
+yarn dlx yalc # for Yarn from v2
 npm i yalc -g # for NPM
 ```
 
@@ -53,7 +54,8 @@ The re-publishing process can be simplified to `yarn build && yalc push`. The `y
 First, you need to install the `yalc`:
 
 ```sh
-yarn global add yalc # for Yarn
+yarn global add yalc # for Yarn v1
+yarn dlx yalc # for Yarn from v2
 npm i yalc -g # for NPM
 ```
 
