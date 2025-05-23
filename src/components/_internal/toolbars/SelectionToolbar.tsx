@@ -152,6 +152,7 @@ type Instance<Data> = {
   getSelectedRowModel?: Table<Data>['getSelectedRowModel'];
   toggleAllRowsSelected?: Table<Data>['toggleAllRowsSelected'];
   setVirtualSelectAll?: (value: boolean) => void;
+  setRowSelection?: Table<Data>['setRowSelection'];
 };
 
 const getSelectedRowsCount = <Data,>(instance: Instance<Data>) => {
@@ -182,8 +183,8 @@ function SelectionToolbarReactTable<Data>({
       selectAllMode,
     },
     getPrePaginationRowModel,
-    toggleAllRowsSelected,
     setVirtualSelectAll,
+    setRowSelection,
   } = instance;
 
   const { isVirtualSelectAll } = getState();
@@ -200,7 +201,7 @@ function SelectionToolbarReactTable<Data>({
     <SelectionToolbarRoot>
       <SelectionToolbarItemCounter
         deselectAllRows={() => {
-          toggleAllRowsSelected(false);
+          setRowSelection({} as RowSelectionState); // Deselect all rows across all pages
           setVirtualSelectAll(false);
         }}
         isVirtualSelectAll={isVirtualSelectAll}
