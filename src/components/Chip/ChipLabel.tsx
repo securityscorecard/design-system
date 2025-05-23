@@ -4,6 +4,7 @@ import { ChipLabelProps } from './types';
 function ChipLabel({ children, isStrong = false }: ChipLabelProps) {
   return (
     <ElementLabel
+      aria-hidden="true"
       className="sscds-chip-label"
       isStrong={isStrong}
       style={{ '--sscds-elementlabel-color': 'var(--sscds-chip-color-text)' }}
