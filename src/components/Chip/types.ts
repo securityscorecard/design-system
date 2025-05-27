@@ -10,6 +10,8 @@ export type ChipLabelProps = {
   children: string | number;
   /** Font weight. When true ChipLabel will be rendered as bold */
   isStrong?: boolean;
+  /** If true, the label will be hidden from assistive technologies */
+  ariaHidden?: boolean;
 };
 
 export type ChipIconProps = {
