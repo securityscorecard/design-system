@@ -67,7 +67,8 @@ const TableSurface = <D,>({ table }: { table: DatatableInstance<D> }) => {
             '8px 0px 8px 0px rgba(0, 0, 0, 0.05)',
           '--sscds-table-shadow-pin-right':
             '-8px 0px 8px 0px rgba(0, 0, 0, 0.05)',
-          '--sscds-table-size-settings-width': '22.5rem',
+          '--sscds-table-size-settings-width': '25rem',
+          '--sscds-table-size-settings-height': '22.5rem',
           '--sscds-table-radii-settings-item': 'var(--sscds-radii-default)',
           position: 'relative',
           overflow: 'clip',
