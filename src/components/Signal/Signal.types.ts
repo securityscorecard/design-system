@@ -4,6 +4,8 @@ export interface BaseSvgProps {
   className?: string;
   children?: React.ReactNode;
   style?: React.CSSProperties;
+  /** If true, the svg will be hidden from assistive technologies */
+  ariaHidden?: boolean;
 }
 
 type BaseKinds = 'high' | 'medium' | 'low' | 'none';
@@ -23,6 +25,8 @@ export interface BaseSignalProps {
    */
   title?: string;
   className?: string;
+  /** If true, the label will be hidden from assistive technologies */
+  ariaHidden?: boolean;
 }
 interface SeveritySignal {
   /**

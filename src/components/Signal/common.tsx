@@ -72,6 +72,7 @@ export function Vertical3Bars({
 }: BaseSvgProps & { criticality: 0 | 1 | 2 | 3 }) {
   return (
     <Svg
+      aria-hidden={props.ariaHidden}
       height={size}
       style={{ color: criticalityColorsSeverity[criticality] }}
       viewBox="0 0 16 16"
@@ -158,6 +159,7 @@ export const Icon = ({
   ...props
 }: BaseSvgProps & { signal: 'info' | 'positive' | 'critical' }) => (
   <Svg
+    aria-hidden={props.ariaHidden}
     height={size}
     viewBox="0 0 512 512"
     width={size}
