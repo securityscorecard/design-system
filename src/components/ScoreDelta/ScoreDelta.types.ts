@@ -9,4 +9,6 @@ export interface ScoreDeltaProps {
    * Number of decimal places that will be displayed in the component.
    */
   decimalsCount?: number;
+  /** If true, the label will be hidden from assistive technologies */
+  ariaHidden?: boolean;
 }

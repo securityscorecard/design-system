@@ -32,7 +32,7 @@ const getTrend = (delta: number): Trend => {
 };
 
 const ScoreDelta = forwardRef<HTMLDivElement, ScoreDeltaProps>(
-  ({ delta, decimalsCount = 0 }, ref) => {
+  ({ delta, decimalsCount = 0, ariaHidden }, ref) => {
     const trend = getTrend(delta);
     const absoluteDelta = Math.abs(delta);
     const nearZeroLimit = 1 / 10 ** decimalsCount;
@@ -42,7 +42,13 @@ const ScoreDelta = forwardRef<HTMLDivElement, ScoreDeltaProps>(
       : absoluteDelta.toFixed(decimalsCount);
 
     return (
-      <ScoreDeltaRoot ref={ref} $trend={trend} as="span" paddingSize="xxs">
+      <ScoreDeltaRoot
+        ref={ref}
+        $trend={trend}
+        aria-hidden={ariaHidden}
+        as="span"
+        paddingSize="xxs"
+      >
         <TrendIcon trend={trend} />
         <Label $trend={trend} size="sm">
           {text}
