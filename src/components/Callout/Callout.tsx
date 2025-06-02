@@ -17,7 +17,9 @@ export type CalloutProps = {
         size?: Exclude<ComponentProps<typeof IconWrapper>['size'], 'lg' | 'xl'>;
       };
   color?: 'neutral' | 'info';
+  ariaLabel?: string;
 };
+
 const Container = styled(Padbox)`
   border-radius: var(--sscds-radii-surface-md);
   background-color: var(--sscds-callout-color-background);
@@ -27,9 +29,11 @@ const Callout = ({
   children,
   icon = 'lightbulb',
   color = 'info',
+  ariaLabel,
 }: CalloutProps) => {
   const iconWrapperVariant: ComponentProps<typeof IconWrapper>['variant'] =
     color === 'neutral' ? 'subtle' : 'strong';
+
   const styles = useMemo(
     () => ({
       '--sscds-callout-color-background':
@@ -42,11 +46,17 @@ const Callout = ({
 
   return (
     <Container className={CLX_COMPONENT} paddingSize="md" style={styles}>
-      <Inline gap="md">
+      <Inline aria-label={ariaLabel} gap="md">
         {typeof icon === 'string' ? (
-          <IconWrapper name={icon} size="md" variant={iconWrapperVariant} />
+          <IconWrapper
+            aria-hidden="true"
+            name={icon}
+            size="md"
+            variant={iconWrapperVariant}
+          />
         ) : (
           <IconWrapper
+            aria-hidden="true"
             name={icon.name}
             size={icon?.size ?? 'md'}
             type={icon?.type ?? 'ssc'}
