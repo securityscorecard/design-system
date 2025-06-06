@@ -10,7 +10,7 @@
   --sscds-shadow-drawer: var(--sscds-shadow-5x);
   --sscds-shadow-modal: var(--sscds-shadow-3x);
 
-  --sscds-shadow-card-default: var(--sscds-shadow-2x);
+  --sscds-shadow-card-default: var(--sscds-shadow-1x);
   --sscds-shadow-card-hover: var(--sscds-shadow-3x);
   --sscds-shadow-card-active: var(--sscds-shadow-1x);
 }
