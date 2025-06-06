@@ -24,10 +24,10 @@ const BodyRow = <D,>({
         className="ds-table-body-row ds-table-row"
         data-active={hasOnRowClick ? id === activeRowId : undefined}
         data-selected={getIsSelected()}
-        onClick={() => {
+        onClick={(event) => {
           if (hasOnRowClick) {
             setActiveRowId(id);
-            onRowClick({ row, table });
+            onRowClick({ row, table, event });
           }
         }}
       >

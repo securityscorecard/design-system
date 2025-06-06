@@ -22,7 +22,8 @@ export default {
 export const RowOnClickEnabled: Story = Template.bind({});
 RowOnClickEnabled.args = {
   ...Template.args,
-  onRowClick: ({ row, table }) => action('row action')({ row, table }),
+  onRowClick: ({ row, table, event }) =>
+    action('row action')({ row, table, event }),
   enableRowActions: true,
   rowActions: [
     {

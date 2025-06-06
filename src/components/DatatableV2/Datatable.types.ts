@@ -13,7 +13,13 @@ import {
   TableOptions,
   TableState,
 } from '@tanstack/react-table';
-import { Dispatch, MutableRefObject, ReactNode, SetStateAction } from 'react';
+import {
+  Dispatch,
+  MouseEvent,
+  MutableRefObject,
+  ReactNode,
+  SetStateAction,
+} from 'react';
 
 import { RowAction } from '../_internal/buttons/RowActionsButton';
 
@@ -553,13 +559,15 @@ interface DatatableBaseOptions<D>
   /**
    * Callback that is called when user clicks anywhere in the row area. Clicking on the selection
    * checkbox, row expand button and the row actions stops event propagation and does not trigger
-   * the row click callback. We are passing argmuments into the callback:
+   * the row click callback. We are passing arguments into the callback:
    *  - `row` - current row, row data are accessible through `row.original`
    *  - `table` - current instance of the table
+   *  - `event` - underlying MouseEvent
    */
   onRowClick?: (props: {
     row: DatatableRow<D>;
     table: DatatableInstance<D>;
+    event: MouseEvent;
   }) => void;
 
   /**
