@@ -16,19 +16,35 @@ const StyledIcon = styled(Icon)<{ $flow: 'inline' | 'block' }>`
   }
 `;
 
+interface TooltipButtonProps extends ComponentPropsWithoutRef<'button'> {
+  'aria-label': string;
+}
+
+const TooltipButton = styled.button.attrs<TooltipButtonProps>(() => ({
+  type: 'button',
+  'aria-haspopup': 'true',
+}))`
+  background: none;
+  border: none;
+  cursor: help;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+`;
+
 const HintTooltip = ({
   children,
   width,
   flow = 'inline',
+  'aria-label': ariaLabel = 'Help',
   ...props
-}: HintTooltipProps &
-  Omit<ComponentPropsWithoutRef<typeof Tooltip>, 'popup' | 'width'>) => (
+}: HintTooltipProps) => (
   <Tooltip
+    aria-label={ariaLabel}
     popup={children}
     width={width}
+    wrapperEl={TooltipButton}
     {...props}
-    aria-label="Help"
-    wrapperEl="button"
   >
     <StyledIcon $flow={flow} name="info-circle-outline" />
   </Tooltip>
