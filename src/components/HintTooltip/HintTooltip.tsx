@@ -25,8 +25,6 @@ const StyledButton = styled.button`
   border: none;
   cursor: help;
   padding: 0;
-  display: inline-flex;
-  align-items: center;
 `;
 
 const TooltipButton = forwardRef<HTMLButtonElement, TooltipButtonProps>(
