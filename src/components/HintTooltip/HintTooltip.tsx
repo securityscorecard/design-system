@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { Tooltip } from '../Tooltip';
 import { Icon } from '../Icon';
@@ -16,19 +16,37 @@ const StyledIcon = styled(Icon)<{ $flow: 'inline' | 'block' }>`
   }
 `;
 
+interface TooltipButtonProps extends ComponentPropsWithoutRef<'button'> {
+  'aria-label': string;
+}
+
+const StyledButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+`;
+
+const TooltipButton = forwardRef<HTMLButtonElement, TooltipButtonProps>(
+  (props, ref) => <StyledButton ref={ref} type="button" {...props} />,
+);
+
+TooltipButton.displayName = 'TooltipButton';
+
 const HintTooltip = ({
   children,
   width,
   flow = 'inline',
+  'aria-label': ariaLabel = 'More information: ',
   ...props
-}: HintTooltipProps &
-  Omit<ComponentPropsWithoutRef<typeof Tooltip>, 'popup' | 'width'>) => (
+}: HintTooltipProps) => (
   <Tooltip
+    aria-label={ariaLabel}
+    enterDelay={0}
     popup={children}
     width={width}
+    wrapperEl={TooltipButton}
     {...props}
-    aria-label="Help"
-    wrapperEl="button"
   >
     <StyledIcon $flow={flow} name="info-circle-outline" />
   </Tooltip>

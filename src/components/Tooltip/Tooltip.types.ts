@@ -9,6 +9,7 @@ export interface TooltipPopupProps {
   $space: number;
   style: React.CSSProperties;
 }
+
 export interface TooltipProps {
   popup?: ReactNode;
   className?: string;
