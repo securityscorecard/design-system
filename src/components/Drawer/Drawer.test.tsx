@@ -158,4 +158,66 @@ describe('Drawer', () => {
 
     expect(onCloseMock).toHaveBeenCalled();
   });
+
+  it('should trigger the onClose when pressing ESC key', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <Drawer
+        size="md"
+        onClose={onCloseMock}
+        title="Test drawer"
+        data-testid="drawer"
+      >
+        Content
+      </Drawer>,
+    );
+
+    await user.keyboard('{Escape}');
+
+    expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('should trigger the onClose when pressing ESC key even without backdrop', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <Drawer
+        size="md"
+        onClose={onCloseMock}
+        title="Test drawer"
+        hasBackdrop={false}
+        data-testid="drawer"
+      >
+        Content
+      </Drawer>,
+    );
+
+    await user.keyboard('{Escape}');
+
+    expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('should trigger the onClose when pressing ESC key while focused on content inside drawer', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <Drawer
+        size="md"
+        onClose={onCloseMock}
+        title="Test drawer"
+        data-testid="drawer"
+      >
+        <button type="button" data-testid="internal-button">
+          Click me
+        </button>
+      </Drawer>,
+    );
+
+    // Focus on an element inside the drawer
+    const internalButton = screen.getByTestId('internal-button');
+    await user.click(internalButton);
+
+    // Press ESC while focus is inside the drawer
+    await user.keyboard('{Escape}');
+
+    expect(onCloseMock).toHaveBeenCalled();
+  });
 });
