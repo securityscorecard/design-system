@@ -23,14 +23,12 @@ interface TooltipButtonProps extends ComponentPropsWithoutRef<'button'> {
 const StyledButton = styled.button`
   background: none;
   border: none;
-  cursor: help;
+  cursor: pointer;
   padding: 0;
 `;
 
 const TooltipButton = forwardRef<HTMLButtonElement, TooltipButtonProps>(
-  (props, ref) => (
-    <StyledButton ref={ref} aria-haspopup="true" type="button" {...props} />
-  ),
+  (props, ref) => <StyledButton ref={ref} type="button" {...props} />,
 );
 
 TooltipButton.displayName = 'TooltipButton';
