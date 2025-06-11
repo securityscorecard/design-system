@@ -105,6 +105,7 @@
     "pullstate": "^1.23.0",
     "ramda": "^0.28.0",
     "ramda-adjunct": "^3.0.0",
+    "react-aria": "^3.41.0",
     "react-container-query": "^0.13.0",
     "react-cool-portal": "^1.2.0",
     "react-datepicker": "^4.6.0",
