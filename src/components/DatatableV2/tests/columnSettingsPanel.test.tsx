@@ -19,27 +19,6 @@ describe('DatatableV2/columnSettingsPanel', () => {
     expect(screen.getByText('Column settings')).toBeInTheDocument();
   });
 
-  it('should close the column settings panel on close button click', async () => {
-    const { user } = setup(
-      <Datatable
-        data={data}
-        columns={columns}
-        initialState={{ showColumnSettings: true }}
-        id="test"
-      />,
-    );
-
-    expect(screen.getByText('Column settings')).toBeInTheDocument();
-
-    await user.click(
-      screen.getByRole('button', {
-        name: /Close column settings/i,
-      }),
-    );
-
-    expect(screen.queryByText('Column settings')).not.toBeInTheDocument();
-  });
-
   it('should hide column in table', async () => {
     const { user } = setup(
       <Datatable

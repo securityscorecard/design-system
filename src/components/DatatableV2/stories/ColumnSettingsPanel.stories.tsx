@@ -1,5 +1,6 @@
 import React, { Meta } from '@storybook/react';
 import { useState } from 'react';
+import { times } from 'ramda';
 
 import Datatable from '../Datatable';
 import Template, { Story } from './Template';
@@ -77,3 +78,37 @@ export const ColumnSettingsPanelManagedState: Story = (args) => {
   );
 };
 ColumnSettingsPanelManagedState.args = Template.args;
+
+export const ColumnSettingsPanelWithManyColumns: Story = Template.bind({});
+
+const columns = times(
+  (columnIndex) => ({
+    accessorKey: `column${columnIndex + 1}`,
+    header: `Column ${columnIndex + 1}`,
+  }),
+  10,
+);
+
+const createRow = (rowIndex) => {
+  return columns.reduce(
+    (row, column) => ({
+      ...row,
+      [column.accessorKey]: `${column.header} value ${rowIndex + 1}`,
+    }),
+    {},
+  );
+};
+
+const dataForLargeColumns = times((rowIndex) => createRow(rowIndex), 5);
+
+ColumnSettingsPanelWithManyColumns.args = {
+  ...Template.args,
+  columns,
+  data: dataForLargeColumns,
+  initialState: {
+    showColumnSettings: true,
+  },
+};
+ColumnSettingsPanelWithManyColumns.parameters = {
+  screenshot: { skip: false },
+};

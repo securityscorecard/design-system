@@ -8,6 +8,7 @@ import { DatatableInstance } from '../Datatable.types';
 import { abbreviateNumber } from '../../../utils';
 import { useSafeTranslation } from '../../../hooks/useSafeTranslation';
 import { Skeleton } from '../../Skeleton';
+import ColumnsSettingsDropdown from './ColumnsSettingsDropdown';
 
 const TopToolbarRoot = styled(Padbox)`
   border-bottom: 1px solid var(--sscds-table-color-border);
@@ -31,7 +32,6 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
       enableColumnOrdering,
       rowCount,
     },
-    setShowColumnSettings,
     setIsFullscreenMode,
   } = table;
   const { isFullscreenMode, columnVisibility, isLoading } = getState();
@@ -39,9 +39,6 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
   const hiddenColumns = getHiddenColumns(columnVisibility);
   const { t, lng } = useSafeTranslation();
 
-  const handleColumnSettings = () => {
-    setShowColumnSettings((old) => !old);
-  };
   const handleFullscreenMode = () => {
     setIsFullscreenMode((old) => !old);
   };
@@ -72,14 +69,7 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
           </Text>
         )}
         {(enableHiding || enableColumnPinning || enableColumnOrdering) && (
-          <Button
-            iconStart={{ name: 'columns-3' }}
-            size="sm"
-            variant="ghost"
-            onClick={handleColumnSettings}
-          >
-            {t('sscds|datatable.topToolbar.columns')}
-          </Button>
+          <ColumnsSettingsDropdown table={table} />
         )}
         {enableFullScreenMode && (
           <Button

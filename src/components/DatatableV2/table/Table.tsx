@@ -4,7 +4,6 @@ import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
 import Header from '../header/Header';
 import { parseCSSVarId } from '../columns.utils';
-import Settings from '../panels/Settings';
 import TableRoot from './TableRoot';
 import ProgressBar from './ProgressBar';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
@@ -21,7 +20,6 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
     columnSizing,
     columnSizingInfo,
     columnVisibility,
-    showColumnSettings,
     showProgress,
     isFullscreenMode,
   } = getState();
@@ -48,28 +46,24 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
   }, [isFullscreenMode, datatable]);
 
   return (
-    <>
-      <TableRoot
-        data-fullscreen={isFullscreenMode}
-        data-horizontal-scroll={hasHorizontalScroll}
-        data-settings-state={showColumnSettings ? 'open' : 'closed'}
-        tabIndex={0}
+    <TableRoot
+      data-fullscreen={isFullscreenMode}
+      data-horizontal-scroll={hasHorizontalScroll}
+      tabIndex={0}
+    >
+      {showProgress && <ProgressBar aria-label="Refreshing data" isTop />}
+      <table
+        ref={(ref) => {
+          tableRef.current = ref;
+        }}
+        className="ds-table"
+        style={columnSizeVars}
       >
-        {showProgress && <ProgressBar aria-label="Refreshing data" isTop />}
-        <table
-          ref={(ref) => {
-            tableRef.current = ref;
-          }}
-          className="ds-table"
-          style={columnSizeVars}
-        >
-          <Header table={table} />
-          <Body table={table} />
-        </table>
-        {showProgress && <ProgressBar aria-hidden isBottom />}
-      </TableRoot>
-      {showColumnSettings && <Settings table={table} />}
-    </>
+        <Header table={table} />
+        <Body table={table} />
+      </table>
+      {showProgress && <ProgressBar aria-hidden isBottom />}
+    </TableRoot>
   );
 };
 
