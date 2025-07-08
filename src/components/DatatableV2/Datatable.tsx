@@ -6,11 +6,19 @@ import TableSurface from './table/TableSurface';
 
 const Datatable = <D,>(props: DatatableOptions<D>) => {
   const logger = useLogger('DatatableV2');
-  const { id, enablePersistentState, columns, initialState, state } = props;
+  const {
+    id,
+    enablePersistentState,
+    columns,
+    initialState,
+    state,
+    manualSorting,
+  } = props;
   const [persistentState, persistentStateSetters] = usePersistentState(
     `sscds_dt_${id}`,
     {
       enabled: enablePersistentState,
+      disableSorting: manualSorting,
       columns,
       initialState: initialState ?? {},
       props,

@@ -23,12 +23,19 @@ export const usePersistentState = <D>(
   key: string,
   options?: {
     enabled?: boolean;
+    disableSorting?: boolean;
     initialState?: PersistentState;
     columns: DatatableColumnDef<D>[];
     props: DatatableOptions<D>;
   },
 ) => {
-  const { columns, enabled = false, initialState, props } = options;
+  const {
+    columns,
+    enabled = false,
+    initialState,
+    disableSorting,
+    props,
+  } = options;
   const [state, setState] = useLocalStorageState<PersistentState>(key);
   const [columnPinning, setColumnPinning] = useState<ColumnPinningState>({
     left: Array.from(
@@ -75,19 +82,25 @@ export const usePersistentState = <D>(
       columnPinning,
       columnSizing,
       columnVisibility,
-      sorting,
       columnOrder,
+      ...(disableSorting ? {} : { sorting }),
     });
   }
 
   return [
-    { columnPinning, columnSizing, columnOrder, columnVisibility, sorting },
+    {
+      columnPinning,
+      columnSizing,
+      columnOrder,
+      columnVisibility,
+      ...(disableSorting ? {} : { sorting }),
+    },
     {
       onColumnPinningChange: setColumnPinning,
       onColumnSizingChange: setColumnSizing,
       onColumnOrderChange: setColumnOrder,
       onColumnVisibilityChange: setColumnVisibility,
-      onSortingChange: setSorting,
+      ...(disableSorting ? {} : { onSortingChange: setSorting }),
     },
   ] as const;
 };
