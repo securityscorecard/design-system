@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 import 'jest-styled-components';
-import { afterAll, beforeAll, vi } from 'vitest';
+import { afterAll, beforeAll, expect, vi } from 'vitest';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import ICU from 'i18next-icu';
@@ -9,9 +9,20 @@ import icuJa from 'i18next-icu/locale-data/ja';
 import icuEs from 'i18next-icu/locale-data/es';
 import icuPt from 'i18next-icu/locale-data/pt';
 import icuCs from 'i18next-icu/locale-data/cs';
+import { toHaveNoViolations } from 'jest-axe';
 
 import { createIconLibrary, resetIconLibrary } from './src';
 import en from './src/locales/en-US';
+
+// Extend expect with jest-axe matchers
+expect.extend(toHaveNoViolations);
+
+// Type declaration for jest-axe matchers
+declare module 'vitest' {
+  interface Assertion {
+    toHaveNoViolations(): void;
+  }
+}
 
 i18n
   .use(ICU)
