@@ -174,16 +174,13 @@ describe('ControlDropdown', () => {
     // Get all focusable elements in the expected tab order
     const closeButton = screen.getByRole('button', { name: /close dropdown/i });
     const contentButton = screen.getByTestId('content-button');
-    const closeButtons = screen.getAllByRole('button', {
+    const closeFooterButton = screen.getAllByRole('button', {
       name: /close/i,
-    });
-    // eslint-disable-next-line testing-library/no-node-access
-    const closeFooterButton = closeButtons[1]; // Footer close button
+    })[1]; // Footer close button
     const applyButton = screen.getByRole('button', { name: /apply/i });
 
-    // Focus the first element to start the test
-    // eslint-disable-next-line testing-library/no-node-access
-    await user.click(closeButton);
+    // Manually focus the first element to start the test
+    closeButton.focus();
 
     // Test forward tab navigation
     await user.tab();
