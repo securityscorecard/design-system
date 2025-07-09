@@ -34,6 +34,23 @@ const ControlDropdown = ({
     // Note: the popup hook used by the ControlledDropdown needs to be notified when the ref changes
     setMounted(true);
   }, []);
+
+  // ESC key support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+    return undefined;
+  }, [isOpen, onClose]);
+
   if (!isOpen || !parentRef?.current) {
     return null;
   }

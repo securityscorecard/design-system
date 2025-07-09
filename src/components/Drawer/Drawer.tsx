@@ -188,6 +188,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     };
 
     useLockBodyScroll({ enabled: hasBackdrop });
+    // if (hasBackdrop) {
+    //   useLockBodyScroll();
+    // }
 
     return (
       <FloatingProvider>
