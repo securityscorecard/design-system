@@ -9,7 +9,7 @@ export interface BaseSvgProps {
 }
 
 type BaseKinds = 'high' | 'medium' | 'low' | 'none';
-export type SeveritySignalKinds = BaseKinds | 'info' | 'positive';
+export type SeveritySignalKinds = BaseKinds | 'info' | 'positive' | 'critical';
 export type BreachRiskSignalKinds = BaseKinds;
 export type BusinessImpactSignalKinds = 'critical' | BaseKinds;
 export type IncidentLikelihoodSignalKinds = 'critical' | BaseKinds;
