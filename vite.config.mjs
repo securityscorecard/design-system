@@ -33,10 +33,7 @@ export default defineConfig({
     plugins: isStorybook
         ? commonPlugins
         : __spreadArray(__spreadArray([
-            autoExternal({
-                dependencies: true,
-                peerDependencies: true,
-            })
+            autoExternal()
         ], commonPlugins, true), [
             dts({
                 insertTypesEntry: true,
@@ -69,7 +66,6 @@ export default defineConfig({
         cssCodeSplit: true,
         rollupOptions: {
             external: [
-                // React ecosystem
                 'react/jsx-runtime',
                 'react-select/async',
                 'react-select/creatable',
@@ -80,8 +76,6 @@ export default defineConfig({
                     react: 'React',
                     'react-dom': 'ReactDOM',
                     'styled-components': 'styled',
-                    'react-router-dom': 'ReactRouterDOM',
-                    'react-select': 'ReactSelect',
                 },
                 interop: 'compat',
             },
