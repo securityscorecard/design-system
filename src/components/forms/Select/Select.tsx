@@ -15,6 +15,8 @@ function Select<IsMulti extends boolean = false>({
   maxPillLabelLength = 16,
   isMenuPositionRelative = false,
   className = '',
+  'aria-label': ariaLabel,
+  'aria-describedby': ariaDescribedby,
   ...props
 }: SelectProps<IsMulti>) {
   const selectProps = useSelectProps<IsMulti>({
@@ -25,20 +27,38 @@ function Select<IsMulti extends boolean = false>({
     maxPillLabelLength,
     isMenuPositionRelative,
     className,
+    'aria-label': ariaLabel,
+    'aria-describedby': ariaDescribedby,
     ...props,
   });
+
+  // Enhanced accessibility props
+  const accessibilityProps = {
+    'aria-label': ariaLabel || 'Select an option',
+    'aria-describedby': ariaDescribedby,
+    'aria-invalid': isInvalid,
+    'aria-disabled': isDisabled,
+    'aria-expanded': false, // Will be controlled by react-select
+    'aria-haspopup': 'listbox',
+    'aria-autocomplete': 'list',
+  };
 
   if (isAsync) {
     return (
       <AsyncReactSelect
         {...selectProps}
+        {...accessibilityProps}
         className={cls(CLX_COMPONENT, className)}
       />
     );
   }
 
   return (
-    <ReactSelect {...selectProps} className={cls(CLX_COMPONENT, className)} />
+    <ReactSelect
+      {...selectProps}
+      {...accessibilityProps}
+      className={cls(CLX_COMPONENT, className)}
+    />
   );
 }
 

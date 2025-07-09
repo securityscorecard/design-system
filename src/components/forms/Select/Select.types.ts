@@ -24,6 +24,9 @@ interface BaseSelectProps<IsMulti extends boolean = false> {
   isMenuPositionRelative?: boolean;
   isInvalid?: boolean;
   className?: string;
+  // WCAG accessibility props
+  'aria-label'?: string;
+  'aria-describedby'?: string;
 }
 
 type SyncSelectProps<IsMulti extends boolean = false> = {
