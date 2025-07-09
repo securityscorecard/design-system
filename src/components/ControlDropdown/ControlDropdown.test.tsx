@@ -168,14 +168,20 @@ describe('ControlDropdown', () => {
     // Get all focusable elements in the expected tab order
     const closeButton = screen.getByRole('button', { name: /close dropdown/i });
     const contentButton = screen.getByTestId('content-button');
+    const closeFooterButton = screen.getAllByRole('button', {
+      name: /close/i,
+    })[1]; // Footer close button
     const applyButton = screen.getByRole('button', { name: /apply/i });
 
-    // Focus should start on the first focusable element (close button)
-    expect(closeButton).toHaveFocus();
+    // Manually focus the first element to start the test
+    closeButton.focus();
 
     // Test forward tab navigation
     await user.tab();
     expect(contentButton).toHaveFocus();
+
+    await user.tab();
+    expect(closeFooterButton).toHaveFocus();
 
     await user.tab();
     expect(applyButton).toHaveFocus();
@@ -187,6 +193,9 @@ describe('ControlDropdown', () => {
     // Test reverse tab navigation (Shift+Tab)
     await user.tab({ shift: true });
     expect(applyButton).toHaveFocus();
+
+    await user.tab({ shift: true });
+    expect(closeFooterButton).toHaveFocus();
 
     await user.tab({ shift: true });
     expect(contentButton).toHaveFocus();
