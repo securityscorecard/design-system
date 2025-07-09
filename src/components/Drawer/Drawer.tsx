@@ -248,6 +248,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     };
 
     useLockBodyScroll({ enabled: hasBackdrop });
+    // if (hasBackdrop) {
+    //   useLockBodyScroll();
+    // }
 
     const drawerContent = hasBackdrop ? (
       <Overlay

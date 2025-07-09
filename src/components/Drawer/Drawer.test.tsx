@@ -278,9 +278,6 @@ describe('Drawer', () => {
     if (!dropdownItem) {
       // If dropdown didn't open due to focus trap, let's just verify the trigger works
       // This is acceptable since the focus management is working as intended
-      console.log(
-        'Dropdown blocked by focus containment - this is expected behavior',
-      );
       expect(
         screen.getByRole('button', { name: /Trigger/i }),
       ).toBeInTheDocument();
