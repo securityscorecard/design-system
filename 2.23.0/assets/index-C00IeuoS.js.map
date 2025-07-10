@@ -1,0 +1,1 @@
+{"version":3,"file":"index-C00IeuoS.js","sources":["../../../src/components/forms/Checkbox/index.ts"],"sourcesContent":["export { default as Checkbox } from './Checkbox';\nexport * from './Checkbox.types';\n"],"names":["cov_29edjkwtt1","actualCoverage"],"mappings":"guBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
