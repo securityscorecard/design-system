@@ -5,6 +5,7 @@ const TableRoot = styled.div`
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
+  transform: scale(1, -1);
 
   &[data-settings-state='open'] {
     min-height: 37.5rem;
@@ -29,38 +30,9 @@ const TableRoot = styled.div`
     border: 8px solid var(--sscds-color-neutral-0);
   }
 
-  /* Keyboard accessible horizontal scrollbar */
-  .ds-table-horizontal-scrollbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1.5rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity var(--sscds-action-transition);
-    z-index: 10;
-
-    &:focus-visible {
-      opacity: 1;
-      outline: 2px solid var(--sscds-color-primary-9);
-      outline-offset: -2px;
-    }
-
-    &:hover {
-      opacity: 0.1;
-    }
-
-    /* Hide when no horizontal scroll is needed */
-    &[data-hidden='true'] {
-      display: none;
-    }
-  }
-
   .ds-table {
     width: 100%;
+    transform: scale(1, -1);
   }
 
   .ds-table,

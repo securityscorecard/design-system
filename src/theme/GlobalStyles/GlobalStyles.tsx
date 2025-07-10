@@ -113,31 +113,18 @@ export default createGlobalStyle`
 
   /* global focus style */
   a, button, [tabindex="0"] {
-    outline-offset: var(--sscds-focus-outline-offset, 0);
+    outline-offset: 1px;
   }
   a:focus, button:focus, [tabindex="0"]:focus {
     outline: none;
   }
   a:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
-    outline: var(--sscds-focus-indicator-width) solid var(--sscds-focus-indicator-color);
-    outline-offset: var(--sscds-focus-outline-offset, -1px);
-    /* Dual-layer approach for maximum contrast on any background */
-    box-shadow: 
-      0 0 0 1px var(--sscds-color-white),
-      0 0 0 calc(var(--sscds-focus-indicator-width) + 1px) var(--sscds-focus-indicator-color);
-  }
-  
-  /* Tighter focus indicator for specific components */
-  .sscds-buttonv2:focus-visible {
-    outline-offset: 0;
+    outline: 2px solid var(--sscds-color-border-action-focused);
   }
   :root {
     ${generateColorsCSSVars};
     --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     --sscds-action-transition: all 300ms var(--sscds-transition-fn),outline 0ms;
-    --sscds-focus-outline-offset: -1px;
-    --sscds-focus-indicator-color: var(--sscds-color-border-action-focused-high-contrast);
-    --sscds-focus-indicator-width: 2px;
   }
 
   .sr-only {

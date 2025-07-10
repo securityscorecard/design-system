@@ -32,10 +32,7 @@ export const useOuterClick = <E extends HTMLElement>(
 
     const handleKeypress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        // ESC key should always trigger close, regardless of focus location
-        if (callbackRef.current) {
-          callbackRef.current(e);
-        }
+        fireCallback(e);
       }
     };
 
