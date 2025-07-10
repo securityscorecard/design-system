@@ -330,7 +330,6 @@
   --sscds-color-border-input-error: var(--sscds-color-danger-500);
 
   --sscds-color-border-action-focused: var(--indigo-9);
-  --sscds-color-border-action-focused-high-contrast: var(--indigo-12);
   --sscds-color-border-action-danger: var(--sscds-color-danger-500);
   --sscds-color-border-action-subtle: var(--sscds-color-neutral-7);
 
