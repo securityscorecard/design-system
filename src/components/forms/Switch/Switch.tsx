@@ -137,9 +137,12 @@ const ThumbContent = styled.div<Omit<SwitchThumbProps, 'maxWidth'>>`
 const Input = styled.input<{
   $size?: Sizes;
 }>`
-  height: 0;
-  width: 0;
-  display: none;
+  height: ${getSwitchHeight};
+  width: ${getSwitchHeight};
+  opacity: 0;
+  position: absolute;
+  margin: 0;
+  cursor: pointer;
 
   &:hover + ${Thumb} {
     background-color: ${getFormStyle('activeBgColor')};
@@ -147,6 +150,11 @@ const Input = styled.input<{
   &:active + ${Thumb} {
     background-color: ${getFormStyle('activeBgColor')};
     color: ${getFormStyle('hoverIndicatorColor')};
+  }
+
+  &:focus-visible + ${Thumb} {
+    outline: 2px solid ${getFormStyle('activeBorderColor')};
+    outline-offset: 2px;
   }
 
   &:checked {
@@ -175,6 +183,7 @@ const Input = styled.input<{
   }
 
   &:disabled {
+    cursor: not-allowed;
     & + ${Thumb} {
       color: ${getFormStyle('disabledColor')};
       background: ${getFormStyle('switchBgColor')};
