@@ -71,6 +71,7 @@ const PageButtons = ({
         {generatePages(1, pageCount).map((page) =>
           renderItem({
             key: `page-${page}`,
+            'aria-label': `Go to page ${page}`,
             page,
             isCurrent: page === currentPage,
             onClick: () => onChange(page),
@@ -84,23 +85,33 @@ const PageButtons = ({
   return positions !== 1 ? (
     <>
       {renderItem({
+        'aria-label':
+          currentPage === 1 ? 'Current page, page 1' : 'Go to page 1',
         page: 1,
         isCurrent: currentPage === 1,
         onClick: () => onChange(1),
         children: <>1</>,
       })}
-      {showLeftEllipsis && <PaginationItemElipsis />}
+      {showLeftEllipsis && <PaginationItemElipsis aria-label="More pages" />}
       {pages.map((page) =>
         renderItem({
           key: String(page),
+          'aria-label':
+            currentPage === page
+              ? `Current page, page ${page}`
+              : `Go to page ${page}`,
           page,
           isCurrent: currentPage === page,
           onClick: () => onChange(page),
           children: formatNumber(page),
         }),
       )}
-      {showRightEllipsis && <PaginationItemElipsis />}
+      {showRightEllipsis && <PaginationItemElipsis aria-label="More pages" />}
       {renderItem({
+        'aria-label':
+          currentPage === pageCount
+            ? `Current page, page ${pageCount}`
+            : `Go to page ${pageCount}`,
         page: pageCount,
         isCurrent: currentPage === pageCount,
         onClick: () => onChange(pageCount),
@@ -111,6 +122,7 @@ const PageButtons = ({
     <>
       {renderItem({
         key: String(currentPage),
+        'aria-label': `Current page, page ${currentPage}`,
         page: currentPage,
         isCurrent: true,
         onClick: () => onChange(currentPage),

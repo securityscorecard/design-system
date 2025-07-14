@@ -91,7 +91,7 @@ export const PaginationItem = ({
 };
 
 export const PaginationItemElipsis = styled(Padbox).attrs(() => ({
-  children: '...',
+  children: <span aria-hidden="true">...</span>,
 }))`
   display: flex;
   align-items: center;
