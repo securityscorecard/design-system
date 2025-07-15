@@ -1,0 +1,248 @@
+name: PR Build and Deploy
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  unit-tests:
+    name: '🛟 Run unit tests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+
+      - name: Cache yarn files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            .yarn/install-state.gz
+            node_modules
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Run Unit Tests
+        run: yarn test
+
+  types:
+    name: '🪪 Check typings'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+
+      - name: Cache yarn files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            .yarn/install-state.gz
+            node_modules
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Run Types Check
+        run: yarn types
+
+  lint:
+    name: '🧹 Run lint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+
+      - name: Cache yarn files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            .yarn/install-state.gz
+            node_modules
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Run Lint
+        run: yarn lint
+
+  lint-css:
+    name: '🎨 Lint CSS'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        type: ['css', 'css-jsx']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+
+      - name: Cache yarn files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            .yarn/install-state.gz
+            node_modules
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Run Lint
+        run: yarn lint:${{matrix.type}}
+
+  build-and-publish-snapshot:
+    name: '🚀 Build and publish snapshot'
+    needs: [unit-tests, types, lint, lint-css]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.1'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@securityscorecard'
+
+      - name: Cache yarn files
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            .yarn/install-state.gz
+            node_modules
+          key: node-modules-node-22.4.1-${{ hashFiles('**/yarn.lock', '**/package.json') }}
+
+      - name: Install Packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Get current version
+        id: current-version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Generate snapshot version
+        id: snapshot-version
+        run: |
+          SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-8)
+          SNAPSHOT_VERSION="${{ steps.current-version.outputs.current-version }}-snapshot-$SHORT_SHA"
+          echo "snapshot-version=$SNAPSHOT_VERSION" >> $GITHUB_OUTPUT
+          echo "Generated snapshot version: $SNAPSHOT_VERSION"
+
+      - name: Update package.json version
+        run: |
+          npm version ${{ steps.snapshot-version.outputs.snapshot-version }} --no-git-tag-version
+
+      - name: Cache build
+        id: library-build-cache
+        uses: actions/cache@v4
+        with:
+          path: build
+          key: build-pr-${{ github.event.number }}-${{ github.sha }}-${{ hashFiles('**/yarn.lock', '**/package.json', 'src/**') }}
+
+      - name: Build Step
+        if: steps.library-build-cache.outputs.cache-hit != 'true'
+        run: yarn build
+
+      - name: Publish to npm
+        run: npm publish --tag pr-${{ github.event.number }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ steps.snapshot-version.outputs.snapshot-version }}';
+            const prNumber = ${{ github.event.number }};
+            
+            const comment = `## 🚀 Snapshot Build Published
+            
+            A snapshot version has been published for testing:
+            
+            **Version:** \`${version}\`
+            **NPM Tag:** \`pr-${prNumber}\`
+            
+            You can install this version in your project using:
+            \`\`\`bash
+            yarn add @securityscorecard/design-system@pr-${prNumber}
+            \`\`\`
+            
+            This version will be automatically unpublished when the PR is closed or merged.`;
+            
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  cleanup-on-pr-close:
+    name: '🧹 Cleanup on PR close'
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unpublish snapshot version
+        run: |
+          npm unpublish @securityscorecard/design-system@pr-${{ github.event.number }} --registry=https://registry.npmjs.org
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
+        continue-on-error: true
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = ${{ github.event.number }};
+            
+            const comment = `## 🧹 Snapshot Cleanup
+            
+            The snapshot version for PR #${prNumber} has been unpublished from npm.
+            
+            If you need to test with this version again, please reopen the PR or create a new one.`;
+            
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            }); 

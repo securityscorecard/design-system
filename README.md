@@ -77,7 +77,41 @@ To update the locally published package with new changes you can follow the proc
 
 The re-publishing process can be simplified to `yarn build && yalc push`. The `yalc push` command will handle both publishing new versions to the local registry and updating version in a project using DS from the local registry.
 
+## PR-Based Testing
+
+For internal testing of the design system before merging to main, we provide automatic snapshot builds for every PR. This allows teams to test changes in their applications without waiting for a full release.
+
+### How it works
+
+1. **Automatic Build**: When a PR is created or updated, a GitHub Action automatically:
+   - Runs all tests (unit, types, lint)
+   - Builds the package
+   - Publishes a snapshot version to npm with the pattern: `<base-version>-snapshot-<commit-sha>`
+   - Tags the npm package with `pr-<PR-number>`
+
+2. **Installation**: You can install the snapshot version in your project using:
+   ```bash
+   yarn add @securityscorecard/design-system@pr-<PR-number>
+   ```
+
+3. **Automatic Cleanup**: When the PR is closed or merged, the snapshot version is automatically unpublished from npm.
+
+### Example
+
+If PR #123 is created with commit `abc12345`, the published version would be:
+- **Version**: `0.0.0-snapshot-abc12345`
+- **NPM Tag**: `pr-123`
+- **Install Command**: `yarn add @securityscorecard/design-system@pr-123`
+
+### Benefits
+
+- **No Reverts**: Test changes without merging to main
+- **Reduced Merge Frequency**: Only merge when fully verified
+- **Easy Integration**: Simple npm install command for testing
+- **Automatic Cleanup**: No manual cleanup required
+
 ## Contributing
 
 - read the [Contributing guide](CONTRIBUTING.md)
 - read the [Testing guide](TESTING.md)
+- read the [PR Deployment guide](docs/pr-deployment.md) for details on the snapshot build workflow
