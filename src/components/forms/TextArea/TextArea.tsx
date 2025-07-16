@@ -179,7 +179,7 @@ const TextArea = forwardRef<
             : { value })}
         />
         {isNotUndefined(maxLength) && (
-          <Counter>
+          <Counter aria-hidden="true">
             <Text variant={isFieldInvalid ? 'danger' : 'subtle'}>
               {maxLength - currentValueLength}
             </Text>
