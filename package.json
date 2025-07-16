@@ -66,6 +66,7 @@
     "test:unit:coverage": "yarn run test --coverage",
     "test:coverage": "yarn run test:unit:coverage & yarn run test:storybook:coverage",
     "test:workflow": "npx tsx scripts/test-workflow.ts",
+    "test:docker": "./scripts/test-docker-image.sh",
     "types": "tsc -b",
     "lint": "eslint . --ext js,ts,jsx,tsx,md,mdx",
     "lint:fix": "eslint . --ext js,ts,jsx,tsx,md,mdx --fix",
