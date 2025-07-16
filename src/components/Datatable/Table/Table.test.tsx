@@ -349,7 +349,7 @@ describe('Datatable/Table', () => {
 
       await user.click(
         screen.getByRole('button', {
-          name: /3/i,
+          name: /^Go to page 3\./,
         }),
       );
 

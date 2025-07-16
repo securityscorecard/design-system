@@ -71,6 +71,7 @@ const PageButtons = ({
         {generatePages(1, pageCount).map((page) =>
           renderItem({
             key: `page-${page}`,
+            'aria-label': `Go to page ${page}. Total pages: ${pageCount}.`,
             page,
             isCurrent: page === currentPage,
             onClick: () => onChange(page),
@@ -84,23 +85,35 @@ const PageButtons = ({
   return positions !== 1 ? (
     <>
       {renderItem({
+        'aria-label':
+          currentPage === 1
+            ? `Current page, page 1. Total pages ${pageCount}.`
+            : `Go to page 1. Total pages ${pageCount}.`,
         page: 1,
         isCurrent: currentPage === 1,
         onClick: () => onChange(1),
         children: <>1</>,
       })}
-      {showLeftEllipsis && <PaginationItemElipsis />}
+      {showLeftEllipsis && <PaginationItemElipsis aria-hidden="true" />}
       {pages.map((page) =>
         renderItem({
           key: String(page),
+          'aria-label':
+            currentPage === page
+              ? `Current page, page ${page}. Total pages ${pageCount}.`
+              : `Go to page ${page}. Total pages ${pageCount}.`,
           page,
           isCurrent: currentPage === page,
           onClick: () => onChange(page),
           children: formatNumber(page),
         }),
       )}
-      {showRightEllipsis && <PaginationItemElipsis />}
+      {showRightEllipsis && <PaginationItemElipsis aria-hidden="true" />}
       {renderItem({
+        'aria-label':
+          currentPage === pageCount
+            ? `Current page, page ${pageCount}. Total pages ${pageCount}.`
+            : `Go to page ${pageCount}. Total pages ${pageCount}.`,
         page: pageCount,
         isCurrent: currentPage === pageCount,
         onClick: () => onChange(pageCount),
@@ -111,6 +124,7 @@ const PageButtons = ({
     <>
       {renderItem({
         key: String(currentPage),
+        'aria-label': `Current page, page ${currentPage}. Total pages ${pageCount}.`,
         page: currentPage,
         isCurrent: true,
         onClick: () => onChange(currentPage),
