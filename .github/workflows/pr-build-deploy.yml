@@ -5,11 +5,6 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  validation:
-    uses: ./.github/workflows/jobs/validation.yml
-    with:
-      node-version: ${{ steps.get-node-version.outputs.version }}
-
   get-node-version:
     runs-on: ubuntu-latest
     outputs:
@@ -21,6 +16,12 @@ jobs:
       - name: Read .nvmrc
         id: read-nvmrc
         run: echo "version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+
+  validation:
+    needs: get-node-version
+    uses: ./.github/workflows/jobs/validation.yml
+    with:
+      node-version: ${{ needs.get-node-version.outputs.version }}
 
   build-and-publish-snapshot:
     name: '🚀 Build and publish snapshot'
