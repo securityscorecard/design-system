@@ -5,13 +5,11 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  # Call reusable validation jobs
   validation:
     uses: ./.github/workflows/jobs/validation.yml
     with:
       node-version: ${{ steps.get-node-version.outputs.version }}
 
-  # Get Node version from .nvmrc
   get-node-version:
     runs-on: ubuntu-latest
     outputs:
