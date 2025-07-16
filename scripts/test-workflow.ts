@@ -1,17 +1,13 @@
 #!/usr/bin/env node
-// eslint-disable-next-line @typescript-eslint/no-var-requires, no-console
 
 /**
  * Test script to validate the PR workflow logic locally
  * This simulates the key steps of the workflow without running GitHub Actions
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const fs = require('fs');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { execSync } = require('child_process');
+import fs from 'fs';
+import { execSync } from 'child_process';
 
-// eslint-disable-next-line no-console
 console.log('🧪 Testing PR Workflow Logic...\n');
 
 // Test 1: Check if package.json exists and has valid version
@@ -22,7 +18,7 @@ try {
   console.log(`   ✅ Current version: ${packageJson.version}`);
   console.log(`   ✅ Main entry: ${packageJson.main}`);
 } catch (error) {
-  console.error('   ❌ Failed to read package.json:', error.message);
+  console.error('   ❌ Failed to read package.json:', (error as Error).message);
   process.exit(1);
 }
 
@@ -41,7 +37,7 @@ try {
   const snapshotVersion = `${baseVersion}-snapshot-${shortSha}`;
   console.log(`   ✅ Generated snapshot version: ${snapshotVersion}`);
 } catch (error) {
-  console.error('   ❌ Failed to get git SHA:', error.message);
+  console.error('   ❌ Failed to get git SHA:', (error as Error).message);
   process.exit(1);
 }
 
@@ -68,7 +64,7 @@ if (fs.existsSync(buildDir)) {
     execSync('yarn build', { stdio: 'inherit' });
     console.log('   ✅ Build completed successfully');
   } catch (error) {
-    console.error('   ❌ Build failed:', error.message);
+    console.error('   ❌ Build failed:', (error as Error).message);
     process.exit(1);
   }
 }
@@ -91,7 +87,10 @@ try {
   }
   console.log('   ✅ Workflow file structure appears valid');
 } catch (error) {
-  console.error('   ❌ Workflow file validation failed:', error.message);
+  console.error(
+    '   ❌ Workflow file validation failed:',
+    (error as Error).message,
+  );
   process.exit(1);
 }
 
@@ -109,7 +108,10 @@ try {
     console.log('   ⚠️  No publishConfig found, using default npm registry');
   }
 } catch (error) {
-  console.error('   ❌ Failed to check npm configuration:', error.message);
+  console.error(
+    '   ❌ Failed to check npm configuration:',
+    (error as Error).message,
+  );
   process.exit(1);
 }
 
@@ -126,7 +128,7 @@ try {
   console.log(`   ✅ New version would be: ${newVersion}`);
   console.log('   ✅ Version update logic is valid');
 } catch (error) {
-  console.error('   ❌ Version update logic failed:', error.message);
+  console.error('   ❌ Version update logic failed:', (error as Error).message);
   process.exit(1);
 }
 
