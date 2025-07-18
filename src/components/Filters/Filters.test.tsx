@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { screen, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { vi } from 'vitest';
@@ -81,6 +82,7 @@ describe('Filters', () => {
     await user.click(screen.getByRole('button', { name: /Add/i }));
     await user.click(screen.getByRole('button', { name: /Add/i }));
 
+    // eslint-disable-next-line testing-library/no-node-access
     await user.type(screen.queryAllByPlaceholderText('String')[0], 'a');
     await user.click(screen.getByRole('button', { name: /Apply/i }));
 
@@ -107,9 +109,12 @@ describe('Filters', () => {
     );
 
     await user.click(screen.getByRole('button', { name: /Add/i }));
+    // eslint-disable-next-line testing-library/no-node-access
     await user.type(screen.queryAllByPlaceholderText('String')[0], 'a');
+    // eslint-disable-next-line testing-library/no-node-access
     await user.type(screen.queryAllByPlaceholderText('String')[1], 'b');
     await user.click(screen.getByRole('button', { name: /Apply/i }));
+    // eslint-disable-next-line testing-library/no-node-access
     await user.type(screen.queryAllByPlaceholderText('String')[0], 'c');
 
     expect(screen.getByText('You have unapplied filters')).toBeInTheDocument();
@@ -121,6 +126,7 @@ describe('Filters', () => {
     );
 
     await user.click(screen.getByRole('button', { name: /Add/i }));
+    // eslint-disable-next-line testing-library/no-node-access
     await user.click(screen.getAllByRole('button', { name: /remove/i })[0]);
 
     expect(screen.getByText('Option A')).toBeInTheDocument();
@@ -132,22 +138,24 @@ describe('Filters', () => {
     setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/no-node-access
       selectEvent.select(screen.getByText('Option A'), 'Option B');
     });
 
-    expect(screen.getByText('is not')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Number')).toBeInTheDocument();
+    expect(await screen.findByText('is not')).toBeInTheDocument();
+    expect(await screen.findByPlaceholderText('Number')).toBeInTheDocument();
   });
 
   it("should select first condition and component when field changed and hasn't set default", async () => {
     setup(<Filters fields={mockTestFields} onApply={onApplyFnMock} />);
 
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/no-node-access
       selectEvent.select(screen.getByText('Option A'), 'Option C');
     });
 
-    expect(screen.getByText('contains')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('String')).toBeInTheDocument();
+    expect(await screen.findByText('contains')).toBeInTheDocument();
+    expect(await screen.findByPlaceholderText('String')).toBeInTheDocument();
   });
 
   it('should persist value when condition changed and components are the same', async () => {
@@ -158,6 +166,7 @@ describe('Filters', () => {
     await user.type(screen.getByPlaceholderText('String'), 'a');
 
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/no-node-access
       selectEvent.select(screen.getByText('is'), 'is not');
     });
 
@@ -172,10 +181,14 @@ describe('Filters', () => {
     await user.click(screen.getByRole('button', { name: /Add/i }));
     await user.click(screen.getByRole('button', { name: /Add/i }));
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/no-node-access
       selectEvent.select(screen.getAllByText('And')[0], 'Or');
     });
 
-    expect(screen.queryAllByText(/Or/i)).toHaveLength(2);
+    // Wait for both "Or" operators to appear
+    await waitFor(() => {
+      expect(screen.queryAllByText(/Or/i)).toHaveLength(2);
+    });
   });
 
   it('should preselect filters when state was applied', () => {

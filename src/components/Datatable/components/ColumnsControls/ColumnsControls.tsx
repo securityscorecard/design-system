@@ -76,6 +76,7 @@ const ColumnsControls = ({
           labels={pluck('label')(allColumns)}
           maxHeight={300}
           renderItem={({ label, id }) => {
+            const isVisible = !hiddenColumns.includes(id);
             return (
               <Inline
                 align="center"
@@ -85,7 +86,8 @@ const ColumnsControls = ({
               >
                 <Text size={TextSizes.md}>{label}</Text>
                 <Switch
-                  checked={!hiddenColumns.includes(id)}
+                  aria-label={`${isVisible ? 'Hide' : 'Show'} ${label} column`}
+                  checked={isVisible}
                   name={`visibility-${id}`}
                   size={SwitchSizes.sm}
                   switchId={`visibility-${id}`}
