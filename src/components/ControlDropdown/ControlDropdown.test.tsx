@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
@@ -66,6 +67,7 @@ describe('ControlDropdown', () => {
     );
 
     const internalButton = screen.getByTestId('internal-button');
+    // eslint-disable-next-line testing-library/no-node-access
     await user.click(internalButton);
 
     await user.keyboard('{Escape}');
@@ -82,6 +84,7 @@ describe('ControlDropdown', () => {
     );
 
     const applyButton = screen.getByRole('button', { name: /apply/i });
+    // eslint-disable-next-line testing-library/no-node-access
     await user.click(applyButton);
 
     expect(onSubmitMock).toHaveBeenCalled();
@@ -97,7 +100,9 @@ describe('ControlDropdown', () => {
 
     // Get all close buttons and click the one in the footer (not the header)
     const closeButtons = screen.getAllByRole('button', { name: /close/i });
+    // eslint-disable-next-line testing-library/no-node-access
     const footerCloseButton = closeButtons[1]; // The second one is in the footer
+    // eslint-disable-next-line testing-library/no-node-access
     await user.click(footerCloseButton);
 
     expect(onCloseMock).toHaveBeenCalled();
@@ -114,6 +119,7 @@ describe('ControlDropdown', () => {
     const resetButton = screen.getByRole('button', {
       name: /reset to defaults/i,
     });
+    // eslint-disable-next-line testing-library/no-node-access
     await user.click(resetButton);
 
     expect(onResetMock).toHaveBeenCalled();
@@ -168,13 +174,16 @@ describe('ControlDropdown', () => {
     // Get all focusable elements in the expected tab order
     const closeButton = screen.getByRole('button', { name: /close dropdown/i });
     const contentButton = screen.getByTestId('content-button');
-    const closeFooterButton = screen.getAllByRole('button', {
+    const closeButtons = screen.getAllByRole('button', {
       name: /close/i,
-    })[1]; // Footer close button
+    });
+    // eslint-disable-next-line testing-library/no-node-access
+    const closeFooterButton = closeButtons[1]; // Footer close button
     const applyButton = screen.getByRole('button', { name: /apply/i });
 
-    // Manually focus the first element to start the test
-    closeButton.focus();
+    // Focus the first element to start the test
+    // eslint-disable-next-line testing-library/no-node-access
+    await user.click(closeButton);
 
     // Test forward tab navigation
     await user.tab();
