@@ -19,7 +19,7 @@ jobs:
 
   validation:
     needs: get-node-version
-    uses: ./.github/workflows/jobs/validation.yml
+    uses: ./.github/workflows/validation.yml
     with:
       node-version: ${{ needs.get-node-version.outputs.version }}
 
