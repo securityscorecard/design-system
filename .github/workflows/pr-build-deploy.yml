@@ -19,7 +19,7 @@ jobs:
 
   validation:
     needs: get-node-version
-    uses: ./.github/workflows/jobs/validation.yml
+    uses: ./.github/workflows/validation.yml
     with:
       node-version: ${{ needs.get-node-version.outputs.version }}
 
@@ -27,18 +27,22 @@ jobs:
     name: '🚀 Build and publish snapshot'
     needs: [validation, get-node-version]
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup npm registry
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ needs.get-node-version.outputs.version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Yarn
         run: |
-          npm config set registry https://registry.npmjs.org
-          npm config set @securityscorecard:registry https://registry.npmjs.org
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -59,13 +63,40 @@ jobs:
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Get actual current version
+        id: actual-version
+        run: |
+          echo "Getting actual current version from project versioning strategy..."
+          
+          # Try to get version from npm registry first
+          NPM_VERSION=$(npm view @securityscorecard/design-system version 2>/dev/null || echo "")
+          
+          if [ -n "$NPM_VERSION" ]; then
+            echo "Found version from npm registry: $NPM_VERSION"
+            echo "actual-version=$NPM_VERSION" >> $GITHUB_OUTPUT
+          else
+            # Fallback to latest git tag
+            LATEST_TAG=$(git tag --sort=-version:refname | head -1 | sed 's/^v//')
+            if [ -n "$LATEST_TAG" ]; then
+              echo "Found version from git tag: $LATEST_TAG"
+              echo "actual-version=$LATEST_TAG" >> $GITHUB_OUTPUT
+            else
+              # Final fallback to package.json
+              echo "Using package.json version as fallback: $CURRENT_VERSION"
+              echo "actual-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            fi
+          fi
+
       - name: Generate snapshot version
         id: snapshot-version
         run: |
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-8)
-          SNAPSHOT_VERSION="${{ steps.current-version.outputs.current-version }}-snapshot-$SHORT_SHA"
+          # Use actual version from project versioning strategy
+          BASE_VERSION="${{ steps.actual-version.outputs.actual-version }}"
+          SNAPSHOT_VERSION="${BASE_VERSION}-snapshot-${SHORT_SHA}"
           echo "snapshot-version=$SNAPSHOT_VERSION" >> $GITHUB_OUTPUT
           echo "Generated snapshot version: $SNAPSHOT_VERSION"
+          echo "Base version used: $BASE_VERSION (from project versioning strategy)"
 
       - name: Update package.json version
         run: |
@@ -87,20 +118,21 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
 
       - name: Comment on PR
         uses: actions/github-script@v7
         with:
           script: |
             const version = '${{ steps.snapshot-version.outputs.snapshot-version }}';
+            const actualVersion = '${{ steps.actual-version.outputs.actual-version }}';
             const prNumber = ${{ github.event.number }};
             
             const comment = `## 🚀 Snapshot Build Published
             
             A snapshot version has been published for testing:
             
-            **Version:** \`${version}\`
+            **Snapshot Version:** \`${version}\`
+            **Current Version:** \`${actualVersion}\` (from npm/git tags)
             **NPM Tag:** \`pr-${prNumber}\`
             
             You can install this version in your project using:
@@ -120,22 +152,26 @@ jobs:
   cleanup-on-pr-close:
     name: '🧹 Cleanup on PR close'
     if: github.event.action == 'closed'
+    needs: get-node-version
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
-      - name: Setup npm registry
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ needs.get-node-version.outputs.version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Yarn
         run: |
-          npm config set registry https://registry.npmjs.org
-          npm config set @securityscorecard:registry https://registry.npmjs.org
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Unpublish snapshot version
         run: |
-          npm unpublish @securityscorecard/design-system@pr-${{ github.event.number }} --registry=https://registry.npmjs.org
+          npm unpublish @securityscorecard/design-system@pr-${{ github.event.number }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
         continue-on-error: true
 
       - name: Comment on PR

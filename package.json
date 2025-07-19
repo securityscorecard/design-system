@@ -74,7 +74,8 @@
     "lint:css-jsx": "stylelint --config .stylelintrc-jsx.json 'src/**/*.{ts,tsx}' --ignore-path .gitignore",
     "semantic-release": "semantic-release",
     "prepare": "husky install",
-    "knip": "knip"
+    "knip": "knip",
+    "commitlint": "npx @commitlint/cli"
   },
   "peerDependencies": {
     "react": "^18.2.0",
