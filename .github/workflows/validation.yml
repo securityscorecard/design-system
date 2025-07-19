@@ -14,11 +14,19 @@ jobs:
   unit-tests:
     name: '🛟 Run unit tests'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Setup Yarn
+        uses: actions/setup-yarn@v1
+        with:
+          yarn-version: stable
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -39,11 +47,19 @@ jobs:
   types:
     name: '🪪 Check typings'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Setup Yarn
+        uses: actions/setup-yarn@v1
+        with:
+          yarn-version: stable
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -64,11 +80,19 @@ jobs:
   lint:
     name: '🧹 Run lint'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Setup Yarn
+        uses: actions/setup-yarn@v1
+        with:
+          yarn-version: stable
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -89,14 +113,22 @@ jobs:
   lint-css:
     name: '🎨 Lint CSS'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     strategy:
       matrix:
         type: ['css', 'css-jsx']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Setup Yarn
+        uses: actions/setup-yarn@v1
+        with:
+          yarn-version: stable
 
       - name: Cache yarn files
         uses: actions/cache@v4
