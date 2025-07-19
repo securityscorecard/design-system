@@ -24,9 +24,9 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Setup Yarn
-        uses: actions/setup-yarn@v1
-        with:
-          yarn-version: stable
+        run: |
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -57,9 +57,9 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Setup Yarn
-        uses: actions/setup-yarn@v1
-        with:
-          yarn-version: stable
+        run: |
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -90,9 +90,9 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Setup Yarn
-        uses: actions/setup-yarn@v1
-        with:
-          yarn-version: stable
+        run: |
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -126,9 +126,9 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Setup Yarn
-        uses: actions/setup-yarn@v1
-        with:
-          yarn-version: stable
+        run: |
+          corepack enable
+          corepack prepare yarn@stable --activate
 
       - name: Cache yarn files
         uses: actions/cache@v4
