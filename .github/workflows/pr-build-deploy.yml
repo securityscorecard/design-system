@@ -125,22 +125,15 @@ jobs:
           script: |
             const version = '${{ steps.snapshot-version.outputs.snapshot-version }}';
             const actualVersion = '${{ steps.actual-version.outputs.actual-version }}';
-            const packageVersion = '${{ steps.current-version.outputs.current-version }}';
             const prNumber = ${{ github.event.number }};
-            
-            let versionInfo = '';
-            if (actualVersion !== packageVersion) {
-              versionInfo = `**Current Version:** \`${actualVersion}\` (from npm/git tags)\n**Package Version:** \`${packageVersion}\` (placeholder)\n`;
-            } else {
-              versionInfo = `**Current Version:** \`${actualVersion}\`\n`;
-            }
             
             const comment = `## 🚀 Snapshot Build Published
             
             A snapshot version has been published for testing:
             
             **Snapshot Version:** \`${version}\`
-            ${versionInfo}**NPM Tag:** \`pr-${prNumber}\`
+            **Current Version:** \`${actualVersion}\` (from npm/git tags)
+            **NPM Tag:** \`pr-${prNumber}\`
             
             You can install this version in your project using:
             \`\`\`bash
