@@ -45,8 +45,8 @@ jobs:
 
       - name: Setup npm registry
         run: |
-          npm config set registry https://registry.npmjs.org
-          npm config set @securityscorecard:registry https://registry.npmjs.org
+          npm config set registry https://registry.npmjs.org/
+          npm config set @securityscorecard:registry https://registry.npmjs.org/
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -95,7 +95,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
 
       - name: Comment on PR
         uses: actions/github-script@v7
@@ -142,16 +141,15 @@ jobs:
 
       - name: Setup npm registry
         run: |
-          npm config set registry https://registry.npmjs.org
-          npm config set @securityscorecard:registry https://registry.npmjs.org
+          npm config set registry https://registry.npmjs.org/
+          npm config set @securityscorecard:registry https://registry.npmjs.org/
 
       - name: Unpublish snapshot version
         run: |
-          npm unpublish @securityscorecard/design-system@pr-${{ github.event.number }} --registry=https://registry.npmjs.org
+          npm unpublish @securityscorecard/design-system@pr-${{ github.event.number }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
         continue-on-error: true
 
       - name: Comment on PR
