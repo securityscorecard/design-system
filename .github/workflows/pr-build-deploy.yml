@@ -123,6 +123,7 @@ jobs:
   cleanup-on-pr-close:
     name: '🧹 Cleanup on PR close'
     if: github.event.action == 'closed'
+    needs: get-node-version
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
