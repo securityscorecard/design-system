@@ -37,16 +37,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ needs.get-node-version.outputs.version }}
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup Yarn
         run: |
           corepack enable
           corepack prepare yarn@stable --activate
-
-      - name: Setup npm registry
-        run: |
-          npm config set registry https://registry.npmjs.org/
-          npm config set @securityscorecard:registry https://registry.npmjs.org/
 
       - name: Cache yarn files
         uses: actions/cache@v4
@@ -133,16 +129,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ needs.get-node-version.outputs.version }}
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup Yarn
         run: |
           corepack enable
           corepack prepare yarn@stable --activate
-
-      - name: Setup npm registry
-        run: |
-          npm config set registry https://registry.npmjs.org/
-          npm config set @securityscorecard:registry https://registry.npmjs.org/
 
       - name: Unpublish snapshot version
         run: |
