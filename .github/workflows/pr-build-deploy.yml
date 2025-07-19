@@ -27,13 +27,21 @@ jobs:
     name: '🚀 Build and publish snapshot'
     needs: [validation, get-node-version]
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ needs.get-node-version.outputs.version }}
+
+      - name: Setup Yarn
+        uses: actions/setup-yarn@v1
+        with:
+          yarn-version: stable
 
       - name: Setup npm registry
         run: |
@@ -121,9 +129,17 @@ jobs:
     name: '🧹 Cleanup on PR close'
     if: github.event.action == 'closed'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/node-yarn:latest
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ needs.get-node-version.outputs.version }}
+
+      - name: Setup Yarn
+        uses: actions/setup-yarn@v1
+        with:
+          yarn-version: stable
+
       - name: Setup npm registry
         run: |
           npm config set registry https://registry.npmjs.org
