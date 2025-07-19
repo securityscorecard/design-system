@@ -63,13 +63,60 @@ jobs:
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Calculate semantic version
+        id: semantic-version
+        run: |
+          # Run semantic-release in dry-run mode to get the next version
+          echo "Calculating semantic version for PR..."
+          
+          # Create a temporary .releaserc for PR testing
+          cat > .releaserc.pr.json << EOF
+          {
+            "branches": ["main"],
+            "repositoryUrl": "https://github.com/securityscorecard/design-system.git",
+            "debug": "true",
+            "plugins": [
+              "@semantic-release/commit-analyzer",
+              "@semantic-release/release-notes-generator",
+              "@semantic-release/npm",
+              "@semantic-release/github",
+              "semantic-release-export-data"
+            ],
+            "preset": "angular"
+          }
+          EOF
+          
+          # Run semantic-release dry-run and capture output
+          RELEASE_OUTPUT=$(yarn semantic-release --dry-run --config .releaserc.pr.json 2>&1 || true)
+          echo "Release output: $RELEASE_OUTPUT"
+          
+          # Extract version from output (look for "The next release version is" pattern)
+          if echo "$RELEASE_OUTPUT" | grep -q "The next release version is"; then
+            SEMANTIC_VERSION=$(echo "$RELEASE_OUTPUT" | grep "The next release version is" | sed 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/')
+            echo "semantic-version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+            echo "Calculated semantic version: $SEMANTIC_VERSION"
+          else
+            # Fallback to current version if semantic-release doesn't determine a new version
+            echo "semantic-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            echo "No new semantic version determined, using current: $CURRENT_VERSION"
+          fi
+          
+          # Clean up
+          rm -f .releaserc.pr.json
+
       - name: Generate snapshot version
         id: snapshot-version
         run: |
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-8)
-          SNAPSHOT_VERSION="${{ steps.current-version.outputs.current-version }}-snapshot-$SHORT_SHA"
+          # Use semantic version if available, otherwise fall back to current version
+          BASE_VERSION="${{ steps.semantic-version.outputs.semantic-version }}"
+          if [ -z "$BASE_VERSION" ]; then
+            BASE_VERSION="${{ steps.current-version.outputs.current-version }}"
+          fi
+          SNAPSHOT_VERSION="${BASE_VERSION}-snapshot-${SHORT_SHA}"
           echo "snapshot-version=$SNAPSHOT_VERSION" >> $GITHUB_OUTPUT
           echo "Generated snapshot version: $SNAPSHOT_VERSION"
+          echo "Base version used: $BASE_VERSION"
 
       - name: Update package.json version
         run: |
@@ -97,14 +144,23 @@ jobs:
         with:
           script: |
             const version = '${{ steps.snapshot-version.outputs.snapshot-version }}';
+            const semanticVersion = '${{ steps.semantic-version.outputs.semantic-version }}';
+            const currentVersion = '${{ steps.current-version.outputs.current-version }}';
             const prNumber = ${{ github.event.number }};
+            
+            let versionInfo = '';
+            if (semanticVersion && semanticVersion !== currentVersion) {
+              versionInfo = `**Semantic Version:** \`${semanticVersion}\` (would be released if merged)\n**Base Version:** \`${currentVersion}\`\n`;
+            } else {
+              versionInfo = `**Base Version:** \`${currentVersion}\`\n`;
+            }
             
             const comment = `## 🚀 Snapshot Build Published
             
             A snapshot version has been published for testing:
             
-            **Version:** \`${version}\`
-            **NPM Tag:** \`pr-${prNumber}\`
+            **Snapshot Version:** \`${version}\`
+            ${versionInfo}**NPM Tag:** \`pr-${prNumber}\`
             
             You can install this version in your project using:
             \`\`\`bash
