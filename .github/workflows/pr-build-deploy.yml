@@ -68,6 +68,8 @@ jobs:
         run: |
           # Run semantic-release in dry-run mode to get the next version
           echo "Calculating semantic version for PR..."
+          echo "Node.js version: $(node --version)"
+          echo "Yarn version: $(yarn --version)"
           
           # Create a temporary .releaserc for PR testing
           cat > .releaserc.pr.json << EOF
@@ -86,23 +88,85 @@ jobs:
           }
           EOF
           
+          # Set up environment variables for semantic-release
+          export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          export NODE_AUTH_TOKEN="${{ secrets.NPM_TOKEN }}"
+          export NPM_TOKEN="${{ secrets.NPM_TOKEN }}"
+          
           # Run semantic-release dry-run and capture output
+          echo "Running semantic-release dry-run..."
           RELEASE_OUTPUT=$(yarn semantic-release --dry-run --config .releaserc.pr.json 2>&1 || true)
-          echo "Release output: $RELEASE_OUTPUT"
+          echo "Release output:"
+          echo "$RELEASE_OUTPUT"
           
           # Extract version from output (look for "The next release version is" pattern)
           if echo "$RELEASE_OUTPUT" | grep -q "The next release version is"; then
             SEMANTIC_VERSION=$(echo "$RELEASE_OUTPUT" | grep "The next release version is" | sed 's/.*The next release version is \([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/')
             echo "semantic-version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
             echo "Calculated semantic version: $SEMANTIC_VERSION"
-          else
-            # Fallback to current version if semantic-release doesn't determine a new version
+          elif echo "$RELEASE_OUTPUT" | grep -q "No new release"; then
             echo "semantic-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
             echo "No new semantic version determined, using current: $CURRENT_VERSION"
+          else
+            # Try alternative output patterns
+            if echo "$RELEASE_OUTPUT" | grep -q "nextRelease"; then
+              SEMANTIC_VERSION=$(echo "$RELEASE_OUTPUT" | grep "nextRelease" | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -1)
+              if [ -n "$SEMANTIC_VERSION" ]; then
+                echo "semantic-version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+                echo "Calculated semantic version from nextRelease: $SEMANTIC_VERSION"
+              else
+                echo "semantic-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+                echo "Could not extract semantic version, using current: $CURRENT_VERSION"
+              fi
+            else
+              echo "semantic-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+              echo "No semantic version pattern found, using current: $CURRENT_VERSION"
+            fi
           fi
           
           # Clean up
           rm -f .releaserc.pr.json
+          
+          # Fallback: Check for conventional commits in PR
+          if [ "${{ steps.semantic-version.outputs.semantic-version }}" = "$CURRENT_VERSION" ]; then
+            echo "Checking for conventional commits in PR as fallback..."
+            
+            # Get commits in this PR
+            PR_COMMITS=$(git log --oneline origin/main..HEAD)
+            echo "PR commits:"
+            echo "$PR_COMMITS"
+            
+            # Check for conventional commit patterns
+            if echo "$PR_COMMITS" | grep -q "^[a-f0-9]* feat:"; then
+              # Minor version bump for features
+              if [ "$CURRENT_VERSION" = "0.0.0" ]; then
+                SEMANTIC_VERSION="0.1.0"
+              else
+                # Extract major.minor and increment minor
+                MAJOR_MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f1,2)
+                PATCH=$(echo "$CURRENT_VERSION" | cut -d. -f3)
+                NEW_PATCH=$((PATCH + 1))
+                SEMANTIC_VERSION="${MAJOR_MINOR}.${NEW_PATCH}"
+              fi
+              echo "semantic-version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+              echo "Calculated semantic version from feat commits: $SEMANTIC_VERSION"
+            elif echo "$PR_COMMITS" | grep -q "^[a-f0-9]* fix:"; then
+              # Patch version bump for fixes
+              if [ "$CURRENT_VERSION" = "0.0.0" ]; then
+                SEMANTIC_VERSION="0.0.1"
+              else
+                # Extract major.minor.patch and increment patch
+                MAJOR_MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f1,2)
+                PATCH=$(echo "$CURRENT_VERSION" | cut -d. -f3)
+                NEW_PATCH=$((PATCH + 1))
+                SEMANTIC_VERSION="${MAJOR_MINOR}.${NEW_PATCH}"
+              fi
+              echo "semantic-version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+              echo "Calculated semantic version from fix commits: $SEMANTIC_VERSION"
+            else
+              echo "No conventional commits found, keeping current version: $CURRENT_VERSION"
+            fi
+          fi
 
       - name: Generate snapshot version
         id: snapshot-version
