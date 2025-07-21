@@ -30,3 +30,6 @@ visual-regressions/.yarn/*
 
 # Storybook static build
 storybook-static
+
+# Vite generated files
+vite.config.d.mts
