@@ -19,5 +19,5 @@ RUN yarn --immutable || (tail -30 yarn-error.log && exit 1)
 COPY bin bin
 
 ENV PATH="$PATH:/usr/src/app/node_modules/.bin/"
-ENV STORYBOOK_URL="http://localhost:8008"
+ENV STORYBOOK_URL="http://host.docker.internal:8008"
 ENV SNAPSHOT_DIR="/usr/src/app/snapshots"

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Datatable from '../Datatable';
 
 const meta: Meta<typeof Datatable> = {
-  title: 'DatatableV2/HorizontalScrollbar',
+  title: 'components/DatatableV2/HorizontalScrollbar',
   component: Datatable,
   parameters: {
     docs: {
