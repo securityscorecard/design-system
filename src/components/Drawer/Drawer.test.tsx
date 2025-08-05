@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { act } from 'react';
 import { vi } from 'vitest';
 
@@ -166,6 +166,29 @@ describe('Drawer', () => {
     );
 
     await user.click(screen.getByTestId('dialog-overlay'));
+
+    expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('should trigger onClose when pressing Escape key', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <Drawer
+        size="md"
+        onClose={onCloseMock}
+        title="Test drawer"
+        data-testid="drawer"
+        hasBackdrop={false}
+      >
+        Content
+      </Drawer>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('drawer')).toBeInTheDocument();
+    });
+
+    await user.keyboard('{Escape}');
 
     expect(onCloseMock).toHaveBeenCalled();
   });

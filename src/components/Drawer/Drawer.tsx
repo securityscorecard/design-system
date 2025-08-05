@@ -172,6 +172,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       internalShowHide: false,
       autoRemoveContainer: false,
       clickOutsideToHide: hasBackdrop,
+      escToHide: true,
+      onHide: onClose,
     });
     const drawerRef = useOuterClick<HTMLDivElement>(onClose);
 
