@@ -49,7 +49,10 @@ export const CardContainer = styled.div<{
     `var(--sscds-space-${$verticalPadding}) var(--sscds-space-${$horizontalPadding})`};
 `;
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
+const Card = forwardRef<
+  HTMLDivElement,
+  CardProps | React.HTMLAttributes<HTMLDivElement>
+>(
   (
     { children, shouldAlignLastItemToBottom = false, as, ...props }: CardProps,
     ref,

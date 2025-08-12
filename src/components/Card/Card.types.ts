@@ -90,7 +90,7 @@ export interface CardMediaWrapperProps {
   $isImageComponent: boolean;
 }
 
-export interface CardProps {
+export interface CardProps extends Partial<CardWrapperProps> {
   children: ReactNode;
   as?: ReactComponentLike;
   onClick?: (event: Event) => void;
