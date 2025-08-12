@@ -51,7 +51,7 @@ export const CardContainer = styled.div<{
 
 const Card = forwardRef<
   HTMLDivElement,
-  CardProps & React.HTMLAttributes<HTMLDivElement>
+  CardProps | React.HTMLAttributes<HTMLDivElement>
 >(
   (
     { children, shouldAlignLastItemToBottom = false, as, ...props }: CardProps,
