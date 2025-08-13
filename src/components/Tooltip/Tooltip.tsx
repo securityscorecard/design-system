@@ -125,6 +125,7 @@ const Tooltip = ({
           arrowPadding={4}
           className="ssc-ui-styled"
           data-testid="ssc-tooltip"
+          role="tooltip"
           side={side as 'bottom' | 'top' | 'left' | 'right'}
           sideOffset={2}
         >
