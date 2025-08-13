@@ -48,7 +48,7 @@ const HintTooltip = ({
     wrapperEl={TooltipButton}
     {...props}
   >
-    <StyledIcon $flow={flow} name="info-circle-outline" />
+    <StyledIcon $flow={flow} name="info-circle-outline" aria-hidden="true" />
   </Tooltip>
 );
 

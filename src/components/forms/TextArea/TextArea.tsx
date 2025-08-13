@@ -171,6 +171,8 @@ const TextArea = forwardRef<
           $maxHeight={getHeightBoundary(maxHeight, hasMaxLength)}
           $minHeight={getHeightBoundary(minHeight, hasMaxLength)}
           disabled={isDisabled}
+          aria-invalid={isFieldInvalid || undefined}
+          aria-disabled={isDisabled || undefined}
           {...(!isControlled
             ? {
                 value: val,
