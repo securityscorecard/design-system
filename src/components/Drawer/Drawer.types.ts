@@ -12,6 +12,7 @@ export interface DrawerProps {
   size?: DrawerSizes;
   adornment?: ReactNode;
   hasBackdrop?: boolean;
+  clickOutsideToHide?: boolean;
   className?: string;
   [key: string]: unknown;
 }

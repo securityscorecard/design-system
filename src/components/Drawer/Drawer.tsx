@@ -3,6 +3,7 @@ import usePortal from 'react-cool-portal';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
+import { FocusTrap } from 'focus-trap-react';
 
 import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
@@ -161,6 +162,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       size = DrawerSizes.md,
       adornment,
       hasBackdrop = true,
+      clickOutsideToHide = false,
       children,
       ...props
     },
@@ -171,7 +173,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       containerId: portalsContainerId,
       internalShowHide: false,
       autoRemoveContainer: false,
-      clickOutsideToHide: hasBackdrop,
+      clickOutsideToHide: hasBackdrop || clickOutsideToHide,
       escToHide: true,
       onHide: onClose,
     });
@@ -179,7 +181,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
     const drawerProps = {
       size,
-      ref: hasBackdrop ? mergeRefs<HTMLDivElement>(drawerRef, ref) : ref,
+      ref:
+        hasBackdrop || clickOutsideToHide
+          ? mergeRefs<HTMLDivElement>(drawerRef, ref)
+          : ref,
       adornment,
       footer,
       children,
@@ -194,13 +199,27 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     return (
       <FloatingProvider>
         <Portal>
-          {hasBackdrop ? (
-            <Overlay data-testid="dialog-overlay" placement="right">
+          <FocusTrap
+            focusTrapOptions={{
+              initialFocus: false,
+              fallbackFocus: () => {
+                // Return the drawer container as fallback
+                const drawer = document.querySelector('[role="dialog"]');
+                return drawer as HTMLElement;
+              },
+              clickOutsideDeactivates: hasBackdrop || clickOutsideToHide,
+              escapeDeactivates: true,
+              allowOutsideClick: true,
+            }}
+          >
+            {hasBackdrop ? (
+              <Overlay data-testid="dialog-overlay" placement="right">
+                <DrawerBox {...drawerProps} />
+              </Overlay>
+            ) : (
               <DrawerBox {...drawerProps} />
-            </Overlay>
-          ) : (
-            <DrawerBox {...drawerProps} />
-          )}
+            )}
+          </FocusTrap>
         </Portal>
       </FloatingProvider>
     );
