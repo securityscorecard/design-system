@@ -93,6 +93,7 @@ const HeaderCell = <D,>({
                 <ElementLabel isStrong>{headerElement}</ElementLabel>
               ) : (
                 <Button
+                  aria-label={`Sort by ${cdHeader}`}
                   className="ds-table-header-ghost-button"
                   size="sm"
                   variant="ghost"
