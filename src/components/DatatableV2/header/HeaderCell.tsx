@@ -10,6 +10,8 @@ import { Tooltip } from '../../Tooltip';
 import { displayColumnIds } from '../hooks/useDisplayColumns';
 import { parseFromValuesOrFunc } from '../utils';
 import { Icon } from '../../Icon';
+import Button from '../../ButtonV2/Button';
+import ElementLabel from '../../ElementLabel/ElementLabel';
 
 const getTextHeaderStyle = (
   labelLength: number | undefined,
@@ -45,6 +47,7 @@ const HeaderCell = <D,>({
     renderHeaderTooltip,
   } = columnDef;
   const direction = getIsSorted();
+  const canSort = getCanSort();
 
   const showColumnActions =
     (enableColumnActions || cdEnableColumnActions) &&
@@ -81,21 +84,23 @@ const HeaderCell = <D,>({
     >
       {isPlaceholder ? null : columnDefType === 'data' ? (
         <Inline align="center" gap="xs" justify="space-between">
-          <Inline align="center" style={{ overflow: 'hidden' }}>
+          <Inline
+            align="center"
+            style={{ overflow: !canSort ? 'hidden' : 'visible' }}
+          >
             <Tooltip placement="top" popup={tooltipPopup}>
-              <button
-                aria-label={`Sort by ${cdHeader}`}
-                className="ds-table-header-cell-title ds-table-unstyled-button"
-                style={{
-                  ...headerStyle,
-                  cursor: getCanSort() ? 'pointer' : undefined,
-                }}
-                title={cdHeader}
-                type="button"
-                onClick={getToggleSortingHandler()}
-              >
-                {headerElement}
-              </button>
+              {!canSort ? (
+                <ElementLabel isStrong>{headerElement}</ElementLabel>
+              ) : (
+                <Button
+                  className="ds-table-header-ghost-button"
+                  size="sm"
+                  variant="ghost"
+                  onClick={getToggleSortingHandler()}
+                >
+                  {headerElement}
+                </Button>
+              )}
             </Tooltip>
           </Inline>
           {showColumnActions ? (

@@ -1,4 +1,4 @@
-import type { ComponentProps, ElementType } from 'react';
+import type { ComponentProps, ElementType, ReactNode } from 'react';
 
 import type { IconNames, RegularIconTypes } from '../Icon';
 
@@ -21,7 +21,7 @@ export type Sizes = 'sm' | 'md' | 'lg';
 
 type ButtonOwnProps<Element extends ElementType> = {
   /** Button label */
-  children: string | string[];
+  children: ReactNode;
   /** Visual variant of the button */
   variant?: Variants;
   /** Sizing variant */
