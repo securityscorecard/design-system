@@ -203,7 +203,6 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             focusTrapOptions={{
               initialFocus: false,
               fallbackFocus: () => {
-                // Return the drawer container as fallback
                 const drawer = document.querySelector('[role="dialog"]');
                 return drawer as HTMLElement;
               },
