@@ -126,7 +126,12 @@ export default createGlobalStyle`
       0 0 0 1px var(--sscds-color-white),
       0 0 0 calc(var(--sscds-focus-indicator-width) + 1px) var(--sscds-focus-indicator-color);
   }
-  
+  .ssc__control--is-focused .ssc__input input:focus-visible {
+    outline: none;
+    outline-offset: 0;
+    box-shadow: none;
+  }
+
   /* Tighter focus indicator for specific components */
   .sscds-buttonv2:focus-visible {
     outline-offset: 0;
