@@ -245,6 +245,11 @@ const TableRoot = styled.div`
     line-height: inherit;
     -webkit-appearance: none;
   }
+
+  .ds-table-header-ghost-button {
+    padding: 0;
+    font-weight: var(--sscds-table-typography-weight-header);
+  }
 `;
 
 export default TableRoot;

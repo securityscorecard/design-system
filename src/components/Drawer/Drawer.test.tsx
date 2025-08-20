@@ -192,4 +192,88 @@ describe('Drawer', () => {
 
     expect(onCloseMock).toHaveBeenCalled();
   });
+
+  it('should trigger onClose when clicking outside with clickOutsideToHide enabled and backdrop disabled', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <div>
+        <div data-testid="outside-element">Outside element</div>
+        <Drawer
+          size="md"
+          onClose={onCloseMock}
+          title="Test drawer"
+          data-testid="drawer"
+          hasBackdrop={false}
+          clickOutsideToHide
+        >
+          <div data-testid="drawer-content">Content inside drawer</div>
+        </Drawer>
+      </div>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('drawer')).toBeInTheDocument();
+    });
+
+    // Click outside the drawer
+    await user.click(screen.getByTestId('outside-element'));
+
+    expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('should NOT trigger onClose when clicking outside with clickOutsideToHide disabled and backdrop disabled', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <div>
+        <div data-testid="outside-element">Outside element</div>
+        <Drawer
+          size="md"
+          onClose={onCloseMock}
+          title="Test drawer"
+          data-testid="drawer"
+          hasBackdrop={false}
+          clickOutsideToHide={false}
+        >
+          <div data-testid="drawer-content">Content inside drawer</div>
+        </Drawer>
+      </div>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('drawer')).toBeInTheDocument();
+    });
+
+    // Click outside the drawer
+    await user.click(screen.getByTestId('outside-element'));
+
+    expect(onCloseMock).not.toHaveBeenCalled();
+  });
+
+  it('should NOT trigger onClose when clicking inside drawer content with clickOutsideToHide enabled', async () => {
+    const onCloseMock = vi.fn();
+    const { user } = setup(
+      <div>
+        <div data-testid="outside-element">Outside element</div>
+        <Drawer
+          size="md"
+          onClose={onCloseMock}
+          title="Test drawer"
+          data-testid="drawer"
+          hasBackdrop={false}
+          clickOutsideToHide
+        >
+          <div data-testid="drawer-content">Content inside drawer</div>
+        </Drawer>
+      </div>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('drawer')).toBeInTheDocument();
+    });
+
+    // Click inside the drawer content
+    await user.click(screen.getByTestId('drawer-content'));
+
+    expect(onCloseMock).not.toHaveBeenCalled();
+  });
 });
