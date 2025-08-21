@@ -1,0 +1,1 @@
+{"version":3,"file":"index-DLon-G_T.js","sources":["../../../src/components/forms/Label/index.ts"],"sourcesContent":["export { default as Label } from './Label';\n"],"names":["cov_a6ndidvt6","actualCoverage"],"mappings":"osBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
