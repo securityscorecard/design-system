@@ -30,7 +30,7 @@ const SelectionButton = styled.button`
 `;
 
 export const getCounterContent = (totalLength: number, selectedLength = 0) => (
-  <span data-testid="counter-content">
+  <span aria-hidden="true" data-testid="counter-content">
     {isPositive(selectedLength) && isPositive(totalLength)
       ? `${abbreviateNumber(selectedLength)} of ${abbreviateNumber(
           totalLength,
