@@ -15,6 +15,7 @@ export interface TabProps {
   __isExpanded?: boolean;
   __onSelectTab?: (selectedValue: string | number) => void;
   __variant?: LabelProps['$variant'];
+  ariaLabel?: string;
 }
 
 export interface TabsProps extends SpacingProps {
@@ -27,4 +28,5 @@ export interface TabsProps extends SpacingProps {
   onSelectTab?: TabProps['__onSelectTab'];
   children: React.ReactNode[];
   isExpanded?: TabProps['__isExpanded'];
+  ariaLabel?: string;
 }

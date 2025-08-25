@@ -15,6 +15,7 @@ const Tabs = ({
   onSelectTab,
   variant = TabVariants.underline,
   isExpanded = false,
+  ariaLabel = 'Navigation tabs',
 }: TabsProps) => (
   <BaseTabsWrapper
     $isExpanded={isExpanded}
@@ -25,6 +26,7 @@ const Tabs = ({
     }
   >
     <Inline
+      aria-label={ariaLabel}
       gap={
         variant === TabVariants.segmented
           ? SpaceSizes.sm

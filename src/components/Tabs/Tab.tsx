@@ -15,6 +15,7 @@ const Tab = ({
   __isExpanded,
   __isSelected,
   __onSelectTab,
+  ariaLabel,
 }: TabProps) => {
   const isLink = value?.toString()?.startsWith('/');
   const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>) => {
@@ -51,6 +52,7 @@ const Tab = ({
       $isExpanded={__isExpanded}
       $isSelected={__isSelected}
       $variant={__variant}
+      aria-label={ariaLabel ?? ''}
       aria-selected={__isSelected}
       as={isLink ? RouterLink : 'a'}
       paddingSize={paddingSize}
