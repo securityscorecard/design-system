@@ -52,6 +52,7 @@ function TopToolbar<D>({ table }: { table: DatatableInstance<D> }) {
           </div>
         ) : (
           <Text
+            aria-hidden="true"
             className="sscds-test-itemCounter"
             data-test-itemcount={totalRowCount}
           >

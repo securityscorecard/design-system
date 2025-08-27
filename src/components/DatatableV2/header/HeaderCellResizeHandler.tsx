@@ -16,6 +16,7 @@ const HeaderCellResizeHandler = <D,>({
   } = table;
   const { column, getResizeHandler, getSize } = header;
   const { id, columnDef } = column;
+  const { header: cdHeader } = columnDef;
   const minSize = columnDef.minSize ?? defaultColumn.minSize;
   const maxSize = columnDef.maxSize ?? defaultColumn.maxSize;
 
@@ -56,6 +57,7 @@ const HeaderCellResizeHandler = <D,>({
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <hr
+      aria-label={`Resize ${cdHeader} column`}
       aria-orientation="vertical"
       className="ds-table-header-cell-resize-handler"
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
