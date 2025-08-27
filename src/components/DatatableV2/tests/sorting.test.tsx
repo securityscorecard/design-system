@@ -9,11 +9,10 @@ describe('DatatableV2/sorting', () => {
   it('should have sorting enabled by default', () => {
     setup(<Datatable data={data} columns={columns} id="test" />);
 
-    expect(
-      screen.getAllByRole('button', {
-        name: /Sort by/i,
-      }),
-    ).toHaveLength(columns.length);
+    // Check that sorting buttons exist for each column
+    expect(screen.getByRole('button', { name: 'name' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'surname' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'color' })).toBeInTheDocument();
   });
 
   describe('when is sorting enabled', () => {
@@ -48,18 +47,17 @@ describe('DatatableV2/sorting', () => {
         />,
       );
 
-      const sortingButtons = screen.getAllByRole('button', {
-        name: /Sort by/i,
-      });
+      const colorSortButton = screen.getByRole('button', { name: 'color' });
+      const surnameSortButton = screen.getByRole('button', { name: 'surname' });
 
-      await user.click(sortingButtons[2]);
+      await user.click(colorSortButton);
       const tableCellsSorted = await screen.findAllByRole('cell');
       expect(tableCellsSorted[3]).toHaveTextContent('blue');
       expect(tableCellsSorted[7]).toHaveTextContent('blue');
       expect(tableCellsSorted[11]).toHaveTextContent('green');
 
       await user.keyboard('[ShiftLeft>]');
-      await user.click(sortingButtons[1]);
+      await user.click(surnameSortButton);
       const tableCellsMultiSorted = await screen.findAllByRole('cell');
       expect(tableCellsMultiSorted[2]).toHaveTextContent('Rogers');
       expect(tableCellsMultiSorted[6]).toHaveTextContent('Strange');
@@ -78,7 +76,7 @@ describe('DatatableV2/sorting', () => {
       );
 
       const headerLabel = screen.getByRole('button', {
-        name: /Sort by Name/i,
+        name: 'name',
       });
 
       await user.click(headerLabel);
@@ -100,7 +98,7 @@ describe('DatatableV2/sorting', () => {
       expect(header).toHaveAttribute('data-sorted', 'false');
 
       const sortingButton = screen.getByRole('button', {
-        name: /Sort by name/i,
+        name: 'name',
       });
 
       await user.click(sortingButton);
