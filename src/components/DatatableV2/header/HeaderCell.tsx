@@ -83,7 +83,12 @@ const HeaderCell = <D,>({
       }}
     >
       {isPlaceholder ? null : columnDefType === 'data' ? (
-        <Inline align="center" gap="xs" justify="space-between">
+        <Inline
+          align="center"
+          aria-label={cdHeader}
+          gap="xs"
+          justify="space-between"
+        >
           <Inline
             align="center"
             style={{ overflow: !canSort ? 'hidden' : 'visible' }}
@@ -93,7 +98,6 @@ const HeaderCell = <D,>({
                 <ElementLabel isStrong>{headerElement}</ElementLabel>
               ) : (
                 <Button
-                  aria-label={`Sort by ${cdHeader}`}
                   className="ds-table-header-ghost-button"
                   size="sm"
                   variant="ghost"
@@ -109,6 +113,9 @@ const HeaderCell = <D,>({
           ) : direction !== false ? (
             <div className="ds-table-header-cell-column-actions-button-wrapper">
               <Icon
+                aria-label={`${cdHeader} sorted in ${
+                  direction === 'asc' ? 'ascending' : 'descending'
+                } order`}
                 name={direction === 'asc' ? 'sort-up' : 'sort-down'}
                 size="sm"
                 hasFixedSize
@@ -120,11 +127,11 @@ const HeaderCell = <D,>({
           )}
         </Inline>
       ) : Object.values(displayColumnIds).includes(columnDef.id) ? (
-        <Inline align="center" justify="center">
+        <Inline align="center" aria-label={cdHeader} justify="center">
           {headerElement}
         </Inline>
       ) : (
-        <Inline align="center" justify="flex-start">
+        <Inline align="center" aria-label={cdHeader} justify="flex-start">
           <div
             className="ds-table-header-cell-title"
             style={headerStyle}
