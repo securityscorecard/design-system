@@ -1,0 +1,4 @@
+import{j as e}from"./jsx-runtime-BbjHj44Y.js";import{useMDXComponents as r}from"./index-Cd31CJfN.js";import{ae as s}from"./index-Bh0l0xji.js";import"./index-C6mWTJJr.js";import"./_commonjsHelpers-BosuxZz1.js";import"./iframe-Bin_s0Nz.js";import"../sb-preview/runtime.js";import"./index-CWFZYRor.js";import"./index-kifaGmES.js";import"./index-DrFu-skq.js";function o(t){const n={a:"a",h1:"h1",p:"p",...r(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(s,{title:"Changelog"}),`
+`,e.jsx(n.h1,{id:"changelog",children:"Changelog"}),`
+`,e.jsxs(n.p,{children:["Changelogs are available in ",e.jsx(n.a,{href:"https://github.com/securityscorecard/design-system/releases",rel:"nofollow",children:"Github Releases page"})]})]})}function d(t={}){const{wrapper:n}={...r(),...t.components};return n?e.jsx(n,{...t,children:e.jsx(o,{...t})}):o(t)}export{d as default};
+//# sourceMappingURL=changelog-wn3KWWT3.js.map
