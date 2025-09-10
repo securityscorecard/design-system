@@ -3,7 +3,6 @@ import usePortal from 'react-cool-portal';
 import styled, { css } from 'styled-components';
 import { isNotUndefined } from 'ramda-adjunct';
 import cls from 'classnames';
-import { FocusTrap } from 'focus-trap-react';
 
 import { DrawerProps } from './Drawer.types';
 import { DrawerSizes } from './Drawer.enums';
@@ -199,27 +198,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     return (
       <FloatingProvider>
         <Portal>
-          <FocusTrap
-            focusTrapOptions={{
-              initialFocus: false,
-              fallbackFocus: () => {
-                const drawer = document.querySelector('[role="dialog"]');
-                return drawer as HTMLElement;
-              },
-              clickOutsideDeactivates: true,
-              returnFocusOnDeactivate: true,
-              escapeDeactivates: true,
-              allowOutsideClick: true,
-            }}
-          >
-            {hasBackdrop ? (
-              <Overlay data-testid="dialog-overlay" placement="right">
-                <DrawerBox {...drawerProps} />
-              </Overlay>
-            ) : (
+          {hasBackdrop ? (
+            <Overlay data-testid="dialog-overlay" placement="right">
               <DrawerBox {...drawerProps} />
-            )}
-          </FocusTrap>
+            </Overlay>
+          ) : (
+            <DrawerBox {...drawerProps} />
+          )}
         </Portal>
       </FloatingProvider>
     );
