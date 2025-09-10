@@ -206,7 +206,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
                 const drawer = document.querySelector('[role="dialog"]');
                 return drawer as HTMLElement;
               },
-              clickOutsideDeactivates: hasBackdrop || clickOutsideToHide,
+              clickOutsideDeactivates: true,
+              returnFocusOnDeactivate: true,
               escapeDeactivates: true,
               allowOutsideClick: true,
             }}
