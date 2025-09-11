@@ -99,5 +99,6 @@ const locale = {
   'basetable.loading.title': 'データを読み込み中',
   'basetable.loading.description': 'しばらくお待ちください。',
   'basetable.goToPage.label': 'ページに移動:',
+  cancel: 'キャンセル',
 } as const;
 export default locale;

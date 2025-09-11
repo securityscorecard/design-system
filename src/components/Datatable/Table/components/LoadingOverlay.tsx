@@ -5,6 +5,7 @@ import { LoadingOverlayProps } from './LoadingOverlay.types';
 import { Spinner } from '../../../Spinner';
 import Button from '../../../ButtonV2/Button';
 import { Inline, Padbox } from '../../../layout';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const overlayStyles = css`
   position: absolute;
@@ -46,31 +47,34 @@ const LoadingBackground = styled.div`
   opacity: 0.75;
 `;
 
-const LoadingOverlay = ({ isCancelable, onCancel }: LoadingOverlayProps) => (
-  <LoadingOverlayContainer>
-    <LoadingBackground />
-    <LoadingIndicatorContainer>
-      <Padbox paddingSize="sm">
-        {isCancelable ? (
-          <Inline align="center" gap="sm">
-            <Spinner
-              height={24}
-              horizontalMargin={0}
-              verticalMargin={0}
-              width={24}
-              dark
-            />
-            <LoadingText>Loading</LoadingText>
-            <Button variant="subtle" onClick={onCancel}>
-              Cancel
-            </Button>
-          </Inline>
-        ) : (
-          <Spinner height={48} verticalMargin={0} width={48} dark />
-        )}
-      </Padbox>
-    </LoadingIndicatorContainer>
-  </LoadingOverlayContainer>
-);
+const LoadingOverlay = ({ isCancelable, onCancel }: LoadingOverlayProps) => {
+  const { t } = useSafeTranslation();
+  return (
+    <LoadingOverlayContainer>
+      <LoadingBackground />
+      <LoadingIndicatorContainer>
+        <Padbox paddingSize="sm">
+          {isCancelable ? (
+            <Inline align="center" gap="sm">
+              <Spinner
+                height={24}
+                horizontalMargin={0}
+                verticalMargin={0}
+                width={24}
+                dark
+              />
+              <LoadingText>{t('sscds|loading')}</LoadingText>
+              <Button variant="subtle" onClick={onCancel}>
+                {t('sscds|cancel')}
+              </Button>
+            </Inline>
+          ) : (
+            <Spinner height={48} verticalMargin={0} width={48} dark />
+          )}
+        </Padbox>
+      </LoadingIndicatorContainer>
+    </LoadingOverlayContainer>
+  );
+};
 
 export default LoadingOverlay;

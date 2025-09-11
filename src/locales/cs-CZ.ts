@@ -102,5 +102,6 @@ const locale = {
   'basetable.loading.title': 'Načítám data',
   'basetable.loading.description': 'Může to chvíli trvat.',
   'basetable.goToPage.label': 'Jít na stránku:',
+  cancel: 'Zrušit',
 } as const;
 export default locale;

@@ -102,5 +102,6 @@ const locale = {
   'basetable.loading.title': 'Carregando dados',
   'basetable.loading.description': 'Isso pode levar alguns momentos.',
   'basetable.goToPage.label': 'Ir para a página:',
+  cancel: 'Cancelar',
 } as const;
 export default locale;
