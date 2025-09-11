@@ -52,6 +52,7 @@ const locale = {
     'použít "OR" místo "AND" pro kombinování vašich dotazů',
   'datatable.noMatchingData.list.item2':
     'zkontrolovat překlepy ve vašich dotazech',
+  'datatable.noRecords.title': 'V této databázi nejsou žádné záznamy.',
   'datatable.noData.title': 'Nenalezeny žádné výsledky',
   'datatable.noData.list.description': 'Toto může nastat z důvodu, že:',
   'datatable.noData.list.emptySet': 'datová sada je prázdná',

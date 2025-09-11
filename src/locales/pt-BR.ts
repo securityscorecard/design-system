@@ -53,6 +53,7 @@ const locale = {
     'usar "OR" em vez de "AND" para combinar suas consultas',
   'datatable.noMatchingData.list.item2':
     'verificar se há erros de digitação em suas consultas',
+  'datatable.noRecords.title': 'Não há registros neste banco de dados.',
   'datatable.noData.title': 'Nenhum resultado encontrado',
   'datatable.noData.list.description': 'Isso pode acontecer porque:',
   'datatable.noData.list.emptySet': 'o conjunto de dados está vazio',

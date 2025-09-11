@@ -50,6 +50,7 @@ const locale = {
   'datatable.noMatchingData.list.item1':
     'クエリを組み合わせる際に"AND"の代わりに"OR"を使用する',
   'datatable.noMatchingData.list.item2': 'クエリのタイプミスを確認する',
+  'datatable.noRecords.title': 'このデータベースにはレコードがありません。',
   'datatable.noData.title': '結果が見つかりませんでした',
   'datatable.noData.list.description': '以下の理由で発生することがあります:',
   'datatable.noData.list.emptySet': 'データセットが空です',
