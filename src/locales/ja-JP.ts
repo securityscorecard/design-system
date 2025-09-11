@@ -39,6 +39,14 @@ const locale = {
   'datatable.selection.clearSelection': '選択をクリア',
   'datatable.selection.toggleAll': '全選択/全解除',
   'datatable.selection.toggleRow': '行の選択/解除',
+  'datatable.selection.selectAll': 'すべて選択',
+  'datatable.selection.selectNone': '選択解除',
+  'datatable.elementCounter.selectedOf': '{selectedLength} / {totalLength} 選択済み',
+  'datatable.elementCounter.noData': 'データなし',
+  'datatable.noMatchingData.title': '現在のフィルターに一致するアイテムがありません',
+  'datatable.noMatchingData.description': '以下の方法を試してみてください',
+  'datatable.noMatchingData.list.item1': 'クエリを組み合わせる際に"AND"の代わりに"OR"を使用する',
+  'datatable.noMatchingData.list.item2': 'クエリのタイプミスを確認する',
   'datatable.noData.title': '結果が見つかりませんでした',
   'datatable.noData.list.description': '以下の理由で発生することがあります:',
   'datatable.noData.list.emptySet': 'データセットが空です',
@@ -83,5 +91,10 @@ const locale = {
     'ドラッグがキャンセルされました。{header} 列がドロップされました。',
   'datatable.settings.ordering.screenReader.notDroppableArea':
     '{activeHeader} 列はもはやドロップ可能な領域にはありません。',
+  'basetable.noData.title': 'データがありません',
+  'basetable.noData.description': '表示するレコードがありません。',
+  'basetable.loading.title': 'データを読み込み中',
+  'basetable.loading.description': 'しばらくお待ちください。',
+  'basetable.goToPage.label': 'ページに移動:',
 } as const;
 export default locale;
