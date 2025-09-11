@@ -98,19 +98,39 @@ export function Vertical4Bars({
   title,
   ...props
 }: BaseSvgProps & { criticality: 0 | 1 | 2 | 3 | 4 }) {
+  const getActiveColor = (level: number) => {
+    const colors = [
+      'var(--sscds-color-signal-inactive)',
+      'var(--severity-green-40)',
+      'var(--severity-yellow-40)',
+      'var(--severity-orange-40)',
+      'var(--severity-deepred-40)',
+    ];
+    return colors[level] || colors[0];
+  };
+
+  const getInactiveColor = (level: number) => {
+    const colors = [
+      'var(--sscds-color-signal-inactive)',
+      'var(--severity-green-20)',
+      'var(--severity-yellow-20)',
+      'var(--severity-orange-20)',
+      'var(--severity-deepred-20)',
+    ];
+    return colors[level] || colors[0];
+  };
+
   return (
-    <svg
-      height={size}
-      style={{ color: 'var(--sscds-color-signal-business-impact)' }}
-      viewBox="0 0 18 16"
-      width={(size / 16) * 18}
-      {...props}
-    >
+    <svg height={size} viewBox="0 0 18 16" width={(size / 16) * 18} {...props}>
       <title>{title}</title>
       {[0, 1, 2, 3].map((v) => (
         <VerticalBar
           key={v}
-          fill={v < criticality ? 'currentColor' : undefined}
+          fill={
+            v < criticality
+              ? getActiveColor(criticality)
+              : getInactiveColor(criticality)
+          }
           height={4 + v * 4}
           xPos={v * 5}
         />

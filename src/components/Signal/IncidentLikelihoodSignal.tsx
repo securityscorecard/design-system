@@ -1,4 +1,4 @@
-import { Icon, Vertical3Bars, criticalityLevels } from './common';
+import { Vertical4Bars, criticalityLevels } from './common';
 import { BaseSignalProps, IncidentLikelihoodSignalKinds } from './Signal.types';
 
 function hasValidKind(kind: string): kind is IncidentLikelihoodSignalKinds {
@@ -14,19 +14,9 @@ export default function IncidentLikelihoodSignal({
 } & BaseSignalProps) {
   if (!hasValidKind(kind)) return null;
 
-  if (kind !== 'critical') {
-    return (
-      <Vertical3Bars
-        criticality={criticalityLevels[kind]}
-        title={title ?? `${kind} incident likelihood`}
-        {...props}
-      />
-    );
-  }
-
   return (
-    <Icon
-      signal={kind}
+    <Vertical4Bars
+      criticality={criticalityLevels[kind]}
       title={title ?? `${kind} incident likelihood`}
       {...props}
     />
