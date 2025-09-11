@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
+import { TFunction } from 'i18next';
 
 import { Text } from '../../../Text';
 import { abbreviateNumber, getColor, getSpace } from '../../../../utils';
@@ -12,7 +13,6 @@ import { ElementCounterProps } from './ElementCounter.types';
 import { Inline } from '../../../layout';
 import { SpaceSizes } from '../../../../theme';
 import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
-import { TFunction } from 'i18next';
 
 const SelectionButton = styled.button`
   display: inline-flex;
@@ -33,8 +33,8 @@ const SelectionButton = styled.button`
 
 export const getCounterContent = (
   totalLength: number,
-  selectedLength = 0,
   t: TFunction<['sscds'], undefined>,
+  selectedLength = 0,
 ) => (
   <span aria-hidden="true" data-testid="counter-content">
     {isPositive(selectedLength) && isPositive(totalLength)
@@ -82,7 +82,7 @@ const ElementCounter = ({
     ? dataSize - localSelectedLength
     : localSelectedLength;
 
-  const content = getCounterContent(dataSize, computedSelectedLength, t);
+  const content = getCounterContent(dataSize, t, computedSelectedLength);
 
   const handleSelectAllClick = () => {
     setLocalSelectedLength(0);

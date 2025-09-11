@@ -9,7 +9,7 @@ import { DatatableStore, datatableInitialState } from '../../Datatable.store';
 const mockT = (key: string, options?: any) => {
   // Remove the 'sscds|' prefix if present
   const cleanKey = key.replace('sscds|', '');
-  
+
   const translations: Record<string, string> = {
     'datatable.elementCounter.selectedOf': `${
       options?.selectedLength || ''
@@ -24,21 +24,21 @@ const mockT = (key: string, options?: any) => {
 
 describe('getCounterContent', () => {
   it('should return No Data when "totalLength" is 0', () => {
-    setup(getCounterContent(0, 0, mockT as any));
+    setup(getCounterContent(0, mockT as any, 0));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('No data');
   });
   it('should return No Data when "totalLength" is 0 and "selectedLength" is greater than 0', () => {
-    setup(getCounterContent(0, 500, mockT as any));
+    setup(getCounterContent(0, mockT as any, 500));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('No data');
   });
 
   it('should return correct count when "totalLength" is greater than 0', () => {
-    setup(getCounterContent(1000, 0, mockT as any));
+    setup(getCounterContent(1000, mockT as any, 0));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('1K');
   });
 
   it('should return correct count when "totalLength" and "selectedLength" are greater than 0', () => {
-    setup(getCounterContent(1000, 500, mockT as any));
+    setup(getCounterContent(1000, mockT as any, 500));
     expect(screen.getByTestId('counter-content')).toHaveTextContent(
       '500 of 1K selected',
     );
