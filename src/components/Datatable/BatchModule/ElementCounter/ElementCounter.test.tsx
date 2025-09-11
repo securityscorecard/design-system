@@ -1,26 +1,44 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { act, screen } from '@testing-library/react';
 
 import ElementCounter, { getCounterContent } from './ElementCounter';
 import { setup } from '../../../../utils/tests/setup';
 import { DatatableStore, datatableInitialState } from '../../Datatable.store';
 
+// Mock translation function for tests
+const mockT = (key: string, options?: any) => {
+  // Remove the 'sscds|' prefix if present
+  const cleanKey = key.replace('sscds|', '');
+  
+  const translations: Record<string, string> = {
+    'datatable.elementCounter.selectedOf': `${
+      options?.selectedLength || ''
+    } of ${options?.totalLength || ''} selected`,
+    'datatable.elementCounter.noData': 'No data',
+    'datatable.selection.selectAll': 'Select All',
+    'datatable.selection.selectNone': 'Select None',
+  };
+
+  return translations[cleanKey] || key;
+};
+
 describe('getCounterContent', () => {
   it('should return No Data when "totalLength" is 0', () => {
-    setup(getCounterContent(0));
+    setup(getCounterContent(0, 0, mockT as any));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('No data');
   });
   it('should return No Data when "totalLength" is 0 and "selectedLength" is greater than 0', () => {
-    setup(getCounterContent(0, 500));
+    setup(getCounterContent(0, 500, mockT as any));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('No data');
   });
 
   it('should return correct count when "totalLength" is greater than 0', () => {
-    setup(getCounterContent(1000));
+    setup(getCounterContent(1000, 0, mockT as any));
     expect(screen.getByTestId('counter-content')).toHaveTextContent('1K');
   });
 
   it('should return correct count when "totalLength" and "selectedLength" are greater than 0', () => {
-    setup(getCounterContent(1000, 500));
+    setup(getCounterContent(1000, 500, mockT as any));
     expect(screen.getByTestId('counter-content')).toHaveTextContent(
       '500 of 1K selected',
     );

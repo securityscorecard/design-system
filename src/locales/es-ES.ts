@@ -43,12 +43,16 @@ const locale = {
   'datatable.selection.toggleRow': 'Alternar selección de la fila',
   'datatable.selection.selectAll': 'Seleccionar Todo',
   'datatable.selection.selectNone': 'Seleccionar Ninguno',
-  'datatable.elementCounter.selectedOf': '{selectedLength} de {totalLength} seleccionados',
+  'datatable.elementCounter.selectedOf':
+    '{selectedLength} de {totalLength} seleccionados',
   'datatable.elementCounter.noData': 'Sin datos',
-  'datatable.noMatchingData.title': 'Ningún elemento coincide con sus filtros actuales',
+  'datatable.noMatchingData.title':
+    'Ningún elemento coincide con sus filtros actuales',
   'datatable.noMatchingData.description': 'Podría intentar',
-  'datatable.noMatchingData.list.item1': 'usar "OR" en lugar de "AND" para combinar sus consultas',
-  'datatable.noMatchingData.list.item2': 'revisar sus consultas en busca de errores tipográficos',
+  'datatable.noMatchingData.list.item1':
+    'usar "OR" en lugar de "AND" para combinar sus consultas',
+  'datatable.noMatchingData.list.item2':
+    'revisar sus consultas en busca de errores tipográficos',
   'datatable.noData.title': 'No se han encontrado resultados',
   'datatable.noData.list.description': 'Esto puede ocurrir por:',
   'datatable.noData.list.emptySet': 'el conjunto de datos está vacío',

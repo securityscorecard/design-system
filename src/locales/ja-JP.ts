@@ -41,11 +41,14 @@ const locale = {
   'datatable.selection.toggleRow': '行の選択/解除',
   'datatable.selection.selectAll': 'すべて選択',
   'datatable.selection.selectNone': '選択解除',
-  'datatable.elementCounter.selectedOf': '{selectedLength} / {totalLength} 選択済み',
+  'datatable.elementCounter.selectedOf':
+    '{selectedLength} / {totalLength} 選択済み',
   'datatable.elementCounter.noData': 'データなし',
-  'datatable.noMatchingData.title': '現在のフィルターに一致するアイテムがありません',
+  'datatable.noMatchingData.title':
+    '現在のフィルターに一致するアイテムがありません',
   'datatable.noMatchingData.description': '以下の方法を試してみてください',
-  'datatable.noMatchingData.list.item1': 'クエリを組み合わせる際に"AND"の代わりに"OR"を使用する',
+  'datatable.noMatchingData.list.item1':
+    'クエリを組み合わせる際に"AND"の代わりに"OR"を使用する',
   'datatable.noMatchingData.list.item2': 'クエリのタイプミスを確認する',
   'datatable.noData.title': '結果が見つかりませんでした',
   'datatable.noData.list.description': '以下の理由で発生することがあります:',

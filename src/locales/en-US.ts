@@ -43,11 +43,13 @@ const locale = {
   'datatable.selection.selectAllCount': 'Select all {totalRowCount}',
   'datatable.selection.selectAll': 'Select All',
   'datatable.selection.selectNone': 'Select None',
-  'datatable.elementCounter.selectedOf': '{selectedLength} of {totalLength} selected',
+  'datatable.elementCounter.selectedOf':
+    '{selectedLength} of {totalLength} selected',
   'datatable.elementCounter.noData': 'No data',
   'datatable.noMatchingData.title': 'No items match your current filters',
   'datatable.noMatchingData.description': 'You could try',
-  'datatable.noMatchingData.list.item1': 'using "OR" instead of "AND" to combine your queries',
+  'datatable.noMatchingData.list.item1':
+    'using "OR" instead of "AND" to combine your queries',
   'datatable.noMatchingData.list.item2': 'checking your queries for typos',
   'datatable.noRecords.title': 'There are no records in this database.',
   'datatable.noData.title': 'No results found',
