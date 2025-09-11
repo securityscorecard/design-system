@@ -25,7 +25,7 @@ const LoadingNoData = () => {
         {t('sscds|basetable.loading.description')}
       </Paragraph>
     </>
-  )
+  );
 };
 
 export default LoadingNoData;

@@ -16,7 +16,7 @@ const ListItem = styled.li`
 
 const NoMatchingData = () => {
   const { t } = useSafeTranslation();
-  return(
+  return (
     <>
       <H4 margin={{ top: 0, bottom: 0.8 }}>
         {t('sscds|datatable.noMatchingData.title')}
@@ -26,14 +26,12 @@ const NoMatchingData = () => {
       </Paragraph>
       <Paragraph as="div" margin="none" size={TextSizes.md}>
         <ul>
-          <ListItem>
-            {t('sscds|datatable.noMatchingData.list.item1')}
-          </ListItem>
+          <ListItem>{t('sscds|datatable.noMatchingData.list.item1')}</ListItem>
           <ListItem>{t('sscds|datatable.noMatchingData.list.item2')}</ListItem>
         </ul>
       </Paragraph>
     </>
-  )
+  );
 };
 
 export default NoMatchingData;

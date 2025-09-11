@@ -7,12 +7,14 @@ const NoData = () => {
   const { t } = useSafeTranslation();
   return (
     <>
-      <H4 margin={{ top: 0, bottom: 0.8 }}>{t('sscds|basetable.noData.title')}</H4>
+      <H4 margin={{ top: 0, bottom: 0.8 }}>
+        {t('sscds|basetable.noData.title')}
+      </H4>
       <Paragraph margin={{ bottom: 0.8 }} size={TextSizes.md}>
         {t('sscds|datatable.noRecords.title')}
       </Paragraph>
     </>
-  )
+  );
 };
 
 export default NoData;
