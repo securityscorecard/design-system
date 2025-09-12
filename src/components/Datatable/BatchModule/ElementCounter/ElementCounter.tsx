@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isPositive } from 'ramda-adjunct';
 import styled from 'styled-components';
+import { TFunction } from 'i18next';
 
 import { Text } from '../../../Text';
 import { abbreviateNumber, getColor, getSpace } from '../../../../utils';
@@ -11,6 +12,7 @@ import { DatatableStore } from '../../Datatable.store';
 import { ElementCounterProps } from './ElementCounter.types';
 import { Inline } from '../../../layout';
 import { SpaceSizes } from '../../../../theme';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const SelectionButton = styled.button`
   display: inline-flex;
@@ -29,15 +31,20 @@ const SelectionButton = styled.button`
   }
 `;
 
-export const getCounterContent = (totalLength: number, selectedLength = 0) => (
+export const getCounterContent = (
+  totalLength: number,
+  t: TFunction<['sscds'], undefined>,
+  selectedLength = 0,
+) => (
   <span aria-hidden="true" data-testid="counter-content">
     {isPositive(selectedLength) && isPositive(totalLength)
-      ? `${abbreviateNumber(selectedLength)} of ${abbreviateNumber(
-          totalLength,
-        )} selected`
+      ? t('sscds|datatable.elementCounter.selectedOf', {
+          selectedLength: abbreviateNumber(selectedLength),
+          totalLength: abbreviateNumber(totalLength),
+        })
       : isPositive(totalLength)
       ? abbreviateNumber(totalLength)
-      : 'No data'}
+      : t('sscds|datatable.elementCounter.noData')}
   </span>
 );
 
@@ -55,6 +62,7 @@ const ElementCounter = ({
   hasSelection,
   hasOnlyPerPageSelection,
 }: ElementCounterProps) => {
+  const { t } = useSafeTranslation();
   const { selectedIds, hasExclusiveSelection } = DatatableStore.useState(
     (s) => ({
       selectedIds: s.selectedIds,
@@ -74,7 +82,7 @@ const ElementCounter = ({
     ? dataSize - localSelectedLength
     : localSelectedLength;
 
-  const content = getCounterContent(dataSize, computedSelectedLength);
+  const content = getCounterContent(dataSize, t, computedSelectedLength);
 
   const handleSelectAllClick = () => {
     setLocalSelectedLength(0);
@@ -111,7 +119,7 @@ const ElementCounter = ({
         {localSelectedLength > 0 && (
           <SelectionButton
             aria-label="Select None"
-            title="Select None"
+            title={t('sscds|datatable.selection.selectNone')}
             type="button"
             onClick={handleSelectNoneClick}
           >
@@ -132,12 +140,12 @@ const ElementCounter = ({
           actions={[
             {
               name: 'select-all',
-              label: 'Select All',
+              label: t('sscds|datatable.selection.selectAll'),
               onClick: handleSelectAllClick,
             },
             {
               name: 'select-none',
-              label: 'Select None',
+              label: t('sscds|datatable.selection.selectNone'),
               onClick: handleSelectNoneClick,
             },
           ]}

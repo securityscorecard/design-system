@@ -41,6 +41,19 @@ const locale = {
   'datatable.selection.clearSelection': 'Borrar selección',
   'datatable.selection.toggleAll': 'Alternar selección de todas',
   'datatable.selection.toggleRow': 'Alternar selección de la fila',
+  'datatable.selection.selectAll': 'Seleccionar Todo',
+  'datatable.selection.selectNone': 'Seleccionar Ninguno',
+  'datatable.elementCounter.selectedOf':
+    '{selectedLength} de {totalLength} seleccionados',
+  'datatable.elementCounter.noData': 'Sin datos',
+  'datatable.noMatchingData.title':
+    'Ningún elemento coincide con sus filtros actuales',
+  'datatable.noMatchingData.description': 'Podría intentar',
+  'datatable.noMatchingData.list.item1':
+    'usar "OR" en lugar de "AND" para combinar sus consultas',
+  'datatable.noMatchingData.list.item2':
+    'revisar sus consultas en busca de errores tipográficos',
+  'datatable.noRecords.title': 'No hay registros en esta base de datos.',
   'datatable.noData.title': 'No se han encontrado resultados',
   'datatable.noData.list.description': 'Esto puede ocurrir por:',
   'datatable.noData.list.emptySet': 'el conjunto de datos está vacío',
@@ -85,5 +98,11 @@ const locale = {
     'Se canceló el arrastre. La columna {header} se soltó.',
   'datatable.settings.ordering.screenReader.notDroppableArea':
     'La columna {activeHeader} ya no está sobre un área donde se puede soltar.',
+  'basetable.noData.title': 'No hay datos disponibles',
+  'basetable.noData.description': 'No hay registros para mostrar.',
+  'basetable.loading.title': 'Cargando datos',
+  'basetable.loading.description': 'Esto puede tomar unos momentos.',
+  'basetable.goToPage.label': 'Ir a la página:',
+  cancel: 'Cancelar',
 } as const;
 export default locale;

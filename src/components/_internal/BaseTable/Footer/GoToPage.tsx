@@ -7,6 +7,7 @@ import { Input } from '../../../forms';
 import { GoToPageProps } from './GoToPage.types';
 import { SpaceSizes } from '../../../../theme';
 import { Text } from '../../../Text';
+import { useSafeTranslation } from '../../../../hooks/useSafeTranslation';
 
 const SmallInput = styled(Input)`
   padding: ${pxToRem(8, 16)};
@@ -26,6 +27,7 @@ const SmallInput = styled(Input)`
 `;
 
 const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
+  const { t } = useSafeTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const handlePageChange = (e: KeyboardEvent<HTMLInputElement>) => {
     const { target, key } = e;
@@ -48,7 +50,7 @@ const GoToPage = ({ pageCount, onPageChange }: GoToPageProps) => {
   return (
     <Inline align="center" gap={SpaceSizes.md}>
       <Text as="label" htmlFor="goToPageInput" variant="subtle">
-        Go to page:
+        {t('sscds|basetable.goToPage.label')}
       </Text>
       <SmallInput
         ref={inputRef}

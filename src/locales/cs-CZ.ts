@@ -40,6 +40,19 @@ const locale = {
   'datatable.selection.clearSelection': 'Zrušit výběr',
   'datatable.selection.toggleAll': 'Přepnout výběr všech řádů',
   'datatable.selection.toggleRow': 'Přepnout výběr řádku',
+  'datatable.selection.selectAll': 'Vybrat vše',
+  'datatable.selection.selectNone': 'Nevybrat',
+  'datatable.elementCounter.selectedOf':
+    '{selectedLength} z {totalLength} vybráno',
+  'datatable.elementCounter.noData': 'Žádná data',
+  'datatable.noMatchingData.title':
+    'Žádné položky neodpovídají vašim aktuálním filtrům',
+  'datatable.noMatchingData.description': 'Můžete zkusit',
+  'datatable.noMatchingData.list.item1':
+    'použít "OR" místo "AND" pro kombinování vašich dotazů',
+  'datatable.noMatchingData.list.item2':
+    'zkontrolovat překlepy ve vašich dotazech',
+  'datatable.noRecords.title': 'V této databázi nejsou žádné záznamy.',
   'datatable.noData.title': 'Nenalezeny žádné výsledky',
   'datatable.noData.list.description': 'Toto může nastat z důvodu, že:',
   'datatable.noData.list.emptySet': 'datová sada je prázdná',
@@ -84,5 +97,12 @@ const locale = {
     'Přetahování bylo zrušeno. Sloupec {header} byl uvolněn.',
   'datatable.settings.ordering.screenReader.notDroppableArea':
     'Sloupec {activeHeader} již není nad oblastí, kam lze položku upustit.',
+  'basetable.noData.title': 'Žádná data nejsou k dispozici',
+  'basetable.noData.description':
+    'Nejsou k dispozici žádné záznamy k zobrazení.',
+  'basetable.loading.title': 'Načítám data',
+  'basetable.loading.description': 'Může to chvíli trvat.',
+  'basetable.goToPage.label': 'Jít na stránku:',
+  cancel: 'Zrušit',
 } as const;
 export default locale;
