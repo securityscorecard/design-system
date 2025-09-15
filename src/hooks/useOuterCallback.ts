@@ -31,8 +31,8 @@ export const useOuterClick = <E extends HTMLElement>(
     };
 
     const handleKeypress = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        fireCallback(e);
+      if (e.key === 'Escape' && innerRef.current && callbackRef.current) {
+        callbackRef.current?.(e);
       }
     };
 

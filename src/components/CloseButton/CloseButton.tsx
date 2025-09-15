@@ -40,6 +40,7 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
         iconName="times"
         label={ariaLabel}
         size="sm"
+        tabIndex={0}
         variant="ghost"
         onClick={onClose}
         {...props}
