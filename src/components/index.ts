@@ -41,6 +41,7 @@ export {
 } from './FileSelectorButton/FileSelectorButton';
 export * from './Filters';
 export * from './FlexContainer';
+export { default as FocusTrap, type FocusTrapProps } from './FocusTrap';
 export * from './forms';
 export * from './Heading';
 export * from './HexGrade';

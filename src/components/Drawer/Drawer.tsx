@@ -19,6 +19,7 @@ import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { FloatingProvider } from '../../contexts/FloatingContext';
 import ElementLabel from '../ElementLabel/ElementLabel';
+import FocusTrap from '../FocusTrap';
 
 const widthVariants = {
   [DrawerSizes.md]: 480,
@@ -194,17 +195,18 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     };
 
     useLockBodyScroll({ enabled: hasBackdrop });
+    const baseDrawer = hasBackdrop ? (
+      <Overlay data-testid="dialog-overlay" placement="right">
+        <DrawerBox {...drawerProps} />
+      </Overlay>
+    ) : (
+      <DrawerBox {...drawerProps} />
+    );
 
     return (
       <FloatingProvider>
         <Portal>
-          {hasBackdrop ? (
-            <Overlay data-testid="dialog-overlay" placement="right">
-              <DrawerBox {...drawerProps} />
-            </Overlay>
-          ) : (
-            <DrawerBox {...drawerProps} />
-          )}
+          <FocusTrap isActive>{baseDrawer}</FocusTrap>
         </Portal>
       </FloatingProvider>
     );

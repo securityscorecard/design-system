@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { isFunction, isNotUndefined, isNull, noop } from 'ramda-adjunct';
 import cls from 'classnames';
@@ -16,6 +16,10 @@ import { Text, TextEnums } from '../../Text';
 import { Padbox, PadboxEnums } from '../../layout';
 import { CLX_COMPONENT } from '../../../theme/constants';
 import { InteractiveElement } from '../../Dropdown/Dropdown.types';
+
+const FOCUSABLE_SELECTORS = [
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+];
 
 const List = styled.ul`
   list-style: none;
@@ -64,11 +68,47 @@ const DropdownMenu = ({
     showPane: noop,
   });
   const containerRef = useRef(null);
+  const triggerRef = useRef(null);
   const trigger: React.ReactElement = (
-    <span className={cls(CLX_COMPONENT, className)}>
+    <span ref={triggerRef} className={cls(CLX_COMPONENT, className)}>
       {isFunction(children) ? children(isActive) : children}
     </span>
   );
+
+  useEffect(() => {
+    if (isActive) {
+      // Use a timeout to ensure the dropdown is fully rendered
+      const timeoutId = setTimeout(() => {
+        if (containerRef.current) {
+          containerRef.current.focus();
+        }
+      }, 0);
+
+      return () => clearTimeout(timeoutId);
+    }
+    return undefined;
+  }, [isActive]);
+
+  const getFocusableElement = useCallback(() => {
+    if (!triggerRef.current) {
+      return null;
+    }
+
+    const focusableElement =
+      triggerRef.current.querySelector(FOCUSABLE_SELECTORS);
+
+    if (focusableElement) {
+      return focusableElement as HTMLElement;
+    }
+
+    triggerRef.current.setAttribute('tabindex', '0');
+    return triggerRef.current as HTMLElement;
+  }, []);
+
+  const focusTrigger = useCallback(() => {
+    const focusableElement = getFocusableElement();
+    focusableElement?.focus();
+  }, [getFocusableElement]);
 
   const handleKeyDown = (event) => {
     const selectOption = (direction = 'DOWN') => {
@@ -79,11 +119,26 @@ const DropdownMenu = ({
       const target = options[index + (direction === 'DOWN' ? 1 : -1)];
       target?.focus();
     };
+    const handleEscape = () => {
+      event.preventDefault();
+      event.stopPropagation();
+      dropdownRef.current?.hidePane();
+      focusTrigger();
+    };
+
+    const handleTab = () => {
+      // Close the dropdown and focus the trigger
+      dropdownRef.current?.hidePane();
+      focusTrigger();
+    };
+
     const fn = {
       // Focus the next sub-item or item.
       ArrowDown: () => selectOption('DOWN'),
       // Focus the previous sub-item or item.
       ArrowUp: () => selectOption('UP'),
+      Escape: handleEscape,
+      Tab: handleTab,
     }[event.key];
     fn?.();
   };
@@ -110,7 +165,13 @@ const DropdownMenu = ({
       onClose={() => setIsActive(false)}
       onOpen={() => setIsActive(true)}
     >
-      <List ref={containerRef} onBlur={handleBlur} onKeyDown={handleKeyDown}>
+      <List
+        ref={containerRef}
+        role="menu"
+        tabIndex={-1}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+      >
         {actions.map((action) => {
           let RouterLink = null;
           if (
@@ -176,6 +237,7 @@ const DropdownMenu = ({
                 onClick={(event) => {
                   action.onClick(event);
                   dropdownRef.current?.hidePane();
+                  focusTrigger();
                 }}
               >
                 <Text data-interactive="true" size={TextEnums.TextSizes.md}>
