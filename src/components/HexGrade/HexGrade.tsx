@@ -101,10 +101,11 @@ const HexGrade = ({
   isInverted = false,
   margin,
   className,
+  isLegacy,
   ...props
 }: HexGradeProps & ComponentPropsWithoutRef<'svg'>) => {
   const { experimental } = useContext(DSContext);
-  const hasLegacyColors = experimental.legacyHexgrade;
+  const hasLegacyColors = experimental.legacyHexgrade || isLegacy;
 
   return (
     <StyledSVG

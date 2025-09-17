@@ -12,4 +12,5 @@ export interface HexGradeProps {
   isInverted?: boolean;
   margin?: SpacingSizeValue;
   className?: string;
+  isLegacy?: boolean;
 }
