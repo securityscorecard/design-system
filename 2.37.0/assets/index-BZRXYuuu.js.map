@@ -1,0 +1,1 @@
+{"version":3,"file":"index-BZRXYuuu.js","sources":["../../../src/components/DropdownMenu/index.ts"],"sourcesContent":["export { DropdownMenu } from '../_internal/BaseDropdownMenu';\n"],"names":["cov_vnszdhgx2","actualCoverage"],"mappings":"gsBAAA,OAAAA,EAAA,UAAA,CAAA,OAAAC,CAAA,EAAAA,CAAA,CAAAD,EAAA"}
