@@ -113,6 +113,7 @@ const useFocusTrap = ({
             event.preventDefault();
             lastElement.focus();
           }
+          return;
         }
 
         // Tab: going forwards
