@@ -41,6 +41,7 @@ const TableCheckbox = forwardRef(
         disabled={isDisabled}
         id={checkboxId}
         name={name}
+        tabIndex={0}
         type="checkbox"
         {...props}
       />

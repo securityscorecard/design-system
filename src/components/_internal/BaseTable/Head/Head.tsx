@@ -21,6 +21,12 @@ const StyledTh = styled.th<{ sticky?: string }>`
 
   ${makeStickyColumn};
 
+  &[data-focus-visible='true']:focus-visible {
+    outline: 3px solid var(--sscds-focus-indicator-color);
+    outline-offset: -3px;
+    box-shadow: none;
+  }
+
   ${({ sticky }) =>
     sticky === 'left' &&
     css`
@@ -50,6 +56,16 @@ function Head<D extends Record<string, unknown>>({
                 ...column.getSortByToggleProps({
                   ...column.getSortByToggleProps(),
                   title: column.canSort ? `Sort ${column.Header}` : undefined,
+                  ...(column.canSort && {
+                    tabIndex: 0,
+                    'data-focus-visible': true,
+                    onKeyDown: (event: React.KeyboardEvent) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        column.toggleSortBy();
+                      }
+                    },
+                  }),
                 }),
                 ...shrinkIfSticky(column.sticky),
               });
