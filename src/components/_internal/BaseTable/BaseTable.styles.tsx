@@ -161,6 +161,11 @@ export const StyledBaseTable = styled.table`
           display: block;
         }
       }
+
+      &:focus-visible + .ds-table-checkbox-mark {
+        outline: 3px solid var(--sscds-focus-indicator-color);
+        outline-offset: 1px;
+      }
     }
 
     .ds-table-checkbox-mark {
