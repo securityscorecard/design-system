@@ -174,6 +174,13 @@ export const SegmentedToggleItem = forwardRef<
 >(({ label, value, itemId, count, ...props }, ref) => {
   const { name, disabled, onChange } = useContext();
 
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    setTimeout(() => {
+      e.target.focus();
+    }, 100);
+  };
+
   return (
     <SegmentedToggleItemRoot>
       <Radio
@@ -184,7 +191,7 @@ export const SegmentedToggleItem = forwardRef<
         {...props}
         disabled={disabled}
         name={name}
-        onChange={onChange}
+        onChange={handleOnChange}
       />
       <SegmentedToggleLabel htmlFor={itemId}>
         <Inline gap="1x">
