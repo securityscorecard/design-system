@@ -136,6 +136,15 @@ export default createGlobalStyle`
   .sscds-buttonv2:focus-visible {
     outline-offset: 0;
   }
+  .sscds-tighter-focus {
+    transition: none;
+    &:focus-visible {
+      outline-offset: -3px;
+      outline-width: 3px;
+      box-shadow: none;
+    }
+  }
+
   :root {
     ${generateColorsCSSVars};
     --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
