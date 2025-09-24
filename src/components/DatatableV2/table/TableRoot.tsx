@@ -1,5 +1,41 @@
 import styled from 'styled-components';
 
+export const TableContainer = styled.div`
+  position: relative;
+
+  /* Keyboard accessible horizontal scrollbar */
+  .ds-table-horizontal-scrollbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--sscds-action-transition);
+    z-index: 10;
+
+    &:focus-visible {
+      opacity: 1;
+      outline: var(--sscds-table-focus-outline-width) solid
+        var(--sscds-color-primary-9);
+      outline-offset: var(--sscds-table-focus-outline-offset);
+      box-shadow: none;
+    }
+
+    &:hover {
+      opacity: 0.1;
+    }
+
+    /* Hide when no horizontal scroll is needed */
+    &[data-hidden='true'] {
+      display: none;
+    }
+  }
+`;
+
 const TableRoot = styled.div`
   position: relative;
   width: 100%;
@@ -21,42 +57,12 @@ const TableRoot = styled.div`
   &::-webkit-scrollbar-thumb {
     border-radius: var(--sscds-radii-rounded);
     background-color: var(--sscds-color-primary-9);
-    border: 8px solid var(--sscds-color-neutral-0);
+    border: var(--sscds-space-2x) solid var(--sscds-color-neutral-0);
   }
   &::-webkit-scrollbar-track-piece {
     border-radius: var(--sscds-radii-rounded);
     background-color: var(--sscds-color-neutral-4);
-    border: 8px solid var(--sscds-color-neutral-0);
-  }
-
-  /* Keyboard accessible horizontal scrollbar */
-  .ds-table-horizontal-scrollbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1.5rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity var(--sscds-action-transition);
-    z-index: 10;
-
-    &:focus-visible {
-      opacity: 1;
-      outline: 2px solid var(--sscds-color-primary-9);
-      outline-offset: -2px;
-    }
-
-    &:hover {
-      opacity: 0.1;
-    }
-
-    /* Hide when no horizontal scroll is needed */
-    &[data-hidden='true'] {
-      display: none;
-    }
+    border: var(--sscds-space-2x) solid var(--sscds-color-neutral-0);
   }
 
   .ds-table {
@@ -211,8 +217,26 @@ const TableRoot = styled.div`
 
   &[data-fullscreen='true'] {
     .ds-table {
-      max-height: calc(100vh - var(--sscds-table-height-pagination));
+      max-height: calc(94vh - var(--sscds-table-height-pagination));
       overflow: auto;
+
+      &::-webkit-scrollbar {
+        box-sizing: content-box;
+        height: 1.5rem;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: var(--sscds-radii-rounded);
+        background-color: var(--sscds-color-primary-9);
+        border: var(--sscds-space-2x) solid var(--sscds-color-neutral-0);
+      }
+      &::-webkit-scrollbar-track-piece {
+        border-radius: var(--sscds-radii-rounded);
+        background-color: var(--sscds-color-neutral-4);
+        border: var(--sscds-space-2x) solid var(--sscds-color-neutral-0);
+      }
+      &::-webkit-scrollbar:vertical {
+        width: 0;
+      }
     }
 
     .ds-table-header {

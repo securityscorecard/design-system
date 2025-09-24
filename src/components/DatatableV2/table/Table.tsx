@@ -4,7 +4,7 @@ import { DatatableInstance } from '../Datatable.types';
 import Body from '../body/Body';
 import Header from '../header/Header';
 import { parseCSSVarId } from '../columns.utils';
-import TableRoot from './TableRoot';
+import TableRoot, { TableContainer } from './TableRoot';
 import ProgressBar from './ProgressBar';
 import HorizontalScrollbar from './HorizontalScrollbar';
 import { DSContext } from '../../../theme/DSProvider/DSProvider';
@@ -49,49 +49,67 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
 
   // Scroll handlers for keyboard navigation
   const handleScrollLeft = () => {
+    if (isFullscreenMode && tableRef.current) {
+      tableRef.current.scrollLeft -= 100;
+      return;
+    }
     if (tableRootRef.current) {
       tableRootRef.current.scrollLeft -= 100;
     }
   };
 
   const handleScrollRight = () => {
+    if (isFullscreenMode && tableRef.current) {
+      tableRef.current.scrollLeft += 100;
+      return;
+    }
     if (tableRootRef.current) {
       tableRootRef.current.scrollLeft += 100;
     }
   };
 
   const handleScrollToStart = () => {
+    if (isFullscreenMode && tableRef.current) {
+      tableRef.current.scrollLeft = 0;
+      return;
+    }
     if (tableRootRef.current) {
       tableRootRef.current.scrollLeft = 0;
     }
   };
 
   const handleScrollToEnd = () => {
+    if (isFullscreenMode && tableRef.current) {
+      tableRef.current.scrollLeft = tableRef.current.scrollWidth;
+      return;
+    }
     if (tableRootRef.current) {
       tableRootRef.current.scrollLeft = tableRootRef.current.scrollWidth;
     }
   };
 
   return (
-    <TableRoot
-      ref={tableRootRef}
-      data-fullscreen={isFullscreenMode}
-      data-horizontal-scroll={hasHorizontalScroll}
-      tabIndex={0}
-    >
-      {showProgress && <ProgressBar aria-label="Refreshing data" isTop />}
-      <table
-        ref={(ref) => {
-          tableRef.current = ref;
-        }}
-        className="ds-table"
-        id="datatable-content"
-        style={columnSizeVars}
+    <TableContainer>
+      <TableRoot
+        ref={tableRootRef}
+        data-fullscreen={isFullscreenMode}
+        data-horizontal-scroll={hasHorizontalScroll}
+        tabIndex={0}
       >
-        <Header table={table} />
-        <Body table={table} />
-      </table>
-      {showProgress && <ProgressBar aria-hidden isBottom />}
+        {showProgress && <ProgressBar aria-label="Refreshing data" isTop />}
+        <table
+          ref={(ref) => {
+            tableRef.current = ref;
+          }}
+          className="ds-table"
+          id="datatable-content"
+          style={columnSizeVars}
+        >
+          <Header table={table} />
+          <Body table={table} />
+        </table>
+        {showProgress && <ProgressBar aria-hidden isBottom />}
+      </TableRoot>
       <HorizontalScrollbar
         isVisible={hasHorizontalScroll}
         onScrollLeft={handleScrollLeft}
@@ -99,7 +117,7 @@ const Table = <D,>({ table }: { table: DatatableInstance<D> }) => {
         onScrollToEnd={handleScrollToEnd}
         onScrollToStart={handleScrollToStart}
       />
-    </TableRoot>
+    </TableContainer>
   );
 };
 

@@ -150,6 +150,8 @@ export default createGlobalStyle`
     --sscds-transition-fn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     --sscds-action-transition: all 300ms var(--sscds-transition-fn),outline 0ms;
     --sscds-focus-outline-offset: -1px;
+    --sscds-table-focus-outline-width: 3px;
+    --sscds-table-focus-outline-offset: -3px;
     --sscds-focus-indicator-color: var(--sscds-color-border-action-focused-high-contrast);
     --sscds-focus-indicator-width: 2px;
   }
