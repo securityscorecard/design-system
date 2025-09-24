@@ -86,6 +86,13 @@ const RadioInput = styled.input<TogglingInputProps>`
     border: 2px solid ${getFormStyle('activeBorderColor')};
   }
 
+  &:focus-visible + ${/* sc-selector */ RadioLabel} {
+    outline: var(--sscds-focus-indicator-width) solid
+      var(--sscds-focus-indicator-color);
+    outline-offset: var(--sscds-focus-outline-offset, -1px);
+    box-shadow: none;
+  }
+
   ${({ isInvalid }) =>
     isInvalid &&
     css`
