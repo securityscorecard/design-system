@@ -227,12 +227,12 @@ const TableRoot = styled.div`
       &::-webkit-scrollbar-thumb {
         border-radius: var(--sscds-radii-rounded);
         background-color: var(--sscds-color-primary-9);
-        border: 8px solid var(--sscds-color-neutral-0);
+        border: var(--sscds-space-2x) solid var(--sscds-color-neutral-0);
       }
       &::-webkit-scrollbar-track-piece {
         border-radius: var(--sscds-radii-rounded);
         background-color: var(--sscds-color-neutral-4);
-        border: 8px solid var(--sscds-color-neutral-0);
+        border: var(--sscds-space-2x) solid var(--sscds-color-neutral-0);
       }
       &::-webkit-scrollbar:vertical {
         width: 0;
