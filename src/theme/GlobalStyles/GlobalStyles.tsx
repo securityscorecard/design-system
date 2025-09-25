@@ -138,9 +138,10 @@ export default createGlobalStyle`
   }
   .sscds-tighter-focus {
     transition: none;
+    outline-offset: var(--sscds-tighter-focus-outline-offset);
     &:focus-visible {
-      outline-offset: -3px;
-      outline-width: 3px;
+      outline-offset: var(--sscds-tighter-focus-outline-offset);
+      outline-width: var(--sscds-tighter-focus-outline-width);
       box-shadow: none;
     }
   }
@@ -152,6 +153,8 @@ export default createGlobalStyle`
     --sscds-focus-outline-offset: -1px;
     --sscds-table-focus-outline-width: 3px;
     --sscds-table-focus-outline-offset: -3px;
+    --sscds-tighter-focus-outline-width: 3px;
+    --sscds-tighter-focus-outline-offset: -3px;
     --sscds-focus-indicator-color: var(--sscds-color-border-action-focused-high-contrast);
     --sscds-focus-indicator-width: 2px;
   }
