@@ -53,21 +53,23 @@ const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
 export const useFocusTrap = ({
   el,
   enabled,
+  onClickOut,
 }: {
   el: HTMLElement;
   enabled: boolean;
+  onClickOut?: () => void;
 }) => {
   useEffect(() => {
     if (!el || !enabled) return;
 
-    // Disable if inside React Aria modal to avoid conflicts
-    if (isInsideReactAriaModal(el)) {
-      return;
-    }
-
     const active = document.activeElement;
 
     const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isInsideReactAriaModal(el)) {
+        e.preventDefault();
+        e.stopPropagation();
+        onClickOut?.();
+      }
       if (e.key === 'Tab') {
         const focusableElements = getFocusableElements(el);
         if (focusableElements.length > 0) {
@@ -96,11 +98,17 @@ export const useFocusTrap = ({
       }
     };
 
-    document.addEventListener('keydown', handleKeydown);
+    const shouldCapture = isInsideReactAriaModal(el);
+
+    document.addEventListener('keydown', handleKeydown, {
+      capture: shouldCapture,
+    });
     // eslint-disable-next-line consistent-return, @typescript-eslint/no-unused-expressions
     return () => {
-      document.removeEventListener('keydown', handleKeydown);
+      document.removeEventListener('keydown', handleKeydown, {
+        capture: shouldCapture,
+      });
       (active as InteractiveElement)?.focus();
     };
-  }, [el, enabled]);
+  }, [el, enabled, onClickOut]);
 };

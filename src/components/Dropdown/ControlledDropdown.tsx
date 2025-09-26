@@ -41,7 +41,7 @@ const ControlledDropdown = forwardRef<
       placement,
     });
 
-    useFocusTrap({ el: paneEl, enabled: isOpen && focusTrap });
+    useFocusTrap({ el: paneEl, enabled: isOpen && focusTrap, onClickOut });
     const { Portal } = usePortal();
 
     return isOpen ? (
