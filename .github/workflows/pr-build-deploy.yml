@@ -119,23 +119,23 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish v2.35.1 hotfix (if applicable)
+      - name: Publish v2.35.1 release (if applicable)
         if: contains(github.head_ref, 'hotfix') || contains(github.head_ref, 'v2.35.1')
         run: |
           echo "Detected hotfix branch, checking if v2.35.1 tag exists..."
           if git tag -l | grep -q "v2.35.1"; then
-            echo "v2.35.1 tag found, publishing hotfix version..."
+            echo "v2.35.1 tag found, publishing release version..."
             # Checkout the v2.35.1 tag
             git checkout v2.35.1
             # Update package.json to v2.35.1
             npm version 2.35.1 --no-git-tag-version
             # Build the package
             yarn build
-            # Publish with hotfix tag
-            npm publish --tag hotfix
-            echo "Successfully published v2.35.1 with hotfix tag"
+            # Publish as latest version (this will be 2.35.1)
+            npm publish
+            echo "Successfully published v2.35.1 as latest version"
           else
-            echo "v2.35.1 tag not found, skipping hotfix publish"
+            echo "v2.35.1 tag not found, skipping release publish"
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -150,7 +150,7 @@ jobs:
             const prNumber = ${{ github.event.number }};
 
             const isHotfix = '${{ github.head_ref }}'.includes('hotfix') || '${{ github.head_ref }}'.includes('v2.35.1');
-            const hotfixNote = isHotfix ? '\n\n**🔥 Hotfix Notice:** This appears to be a hotfix branch. If the v2.35.1 tag exists, it will also be published with the `hotfix` tag for immediate use.' : '';
+            const hotfixNote = isHotfix ? '\n\n**🔥 Release Notice:** This appears to be a hotfix branch. If the v2.35.1 tag exists, it will also be published as version `2.35.1` (latest) for immediate use.' : '';
 
             const comment = `## 🚀 Snapshot Build Published
 
@@ -165,7 +165,7 @@ jobs:
             yarn add @securityscorecard/design-system@pr-${prNumber}
             \`\`\`
 
-            ${isHotfix ? 'For the hotfix version (if published):\n```bash\nyarn add @securityscorecard/design-system@hotfix\n```\n\n' : ''}This version will be automatically unpublished when the PR is closed or merged.`;
+            ${isHotfix ? 'For the release version (if published):\n```bash\nyarn add @securityscorecard/design-system@2.35.1\n```\n\n' : ''}This version will be automatically unpublished when the PR is closed or merged.`;
 
             github.rest.issues.createComment({
               issue_number: prNumber,
