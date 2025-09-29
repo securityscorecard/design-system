@@ -51,7 +51,6 @@ export const useSelectProps = <IsMulti extends boolean>({
     menuShouldBlockScroll: false,
     backspaceRemovesValue: true,
     deleteRemovesValue: true,
-    blurInputOnSelect: !isMulti,
     components: {
       ...(props.components || {}),
       DropdownIndicator,
