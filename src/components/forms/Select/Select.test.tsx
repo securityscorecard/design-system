@@ -194,7 +194,7 @@ describe('Select - WCAG Keyboard Navigation', () => {
     await user.keyboard('{Enter}');
 
     await waitFor(() => {
-      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
   });
 
