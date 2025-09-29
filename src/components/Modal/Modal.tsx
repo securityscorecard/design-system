@@ -18,7 +18,6 @@ import { CloseButton } from '../CloseButton';
 import { StretchEnum } from '../layout/Inline/Inline.enums';
 import { CLX_COMPONENT } from '../../theme/constants';
 import { FloatingProvider } from '../../contexts/FloatingContext';
-import FocusTrap from '../FocusTrap';
 
 const widthVariants = {
   [ModalSizes.xs]: 320,
@@ -82,36 +81,34 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <FloatingProvider>
         <Portal>
-          <FocusTrap isActive>
-            <Overlay data-testid="dialog-overlay" placement="center">
-              <BaseModal
-                ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
-                $maxWidth={widthVariants[size]}
-                className={cls(CLX_COMPONENT, className, 'ssc-ui-styled')}
-                elevation={3}
-                radius="lg"
-                hasBorder
-                {...rest}
-              >
-                <Inline stretch={StretchEnum.start}>
-                  <Header className="sscds-modal-header">
-                    {typeof title !== 'undefined' && <Title>{title}</Title>}
-                  </Header>
-                  {onClose && (
-                    <CloseButton
-                      marginCompensation={SpaceSizes.none}
-                      style={{ position: 'relative', zIndex: 1 }}
-                      onClose={onClose}
-                    />
-                  )}
-                </Inline>
-                <Content className="sscds-modal-content">{children}</Content>
-                {typeof footer !== 'undefined' && (
-                  <Footer className="sscds-modal-footer">{footer}</Footer>
+          <Overlay data-testid="dialog-overlay" placement="center">
+            <BaseModal
+              ref={mergeRefs<HTMLDivElement>(modalRef, ref)}
+              $maxWidth={widthVariants[size]}
+              className={cls(CLX_COMPONENT, className, 'ssc-ui-styled')}
+              elevation={3}
+              radius="lg"
+              hasBorder
+              {...rest}
+            >
+              <Inline stretch={StretchEnum.start}>
+                <Header className="sscds-modal-header">
+                  {typeof title !== 'undefined' && <Title>{title}</Title>}
+                </Header>
+                {onClose && (
+                  <CloseButton
+                    marginCompensation={SpaceSizes.none}
+                    style={{ position: 'relative', zIndex: 1 }}
+                    onClose={onClose}
+                  />
                 )}
-              </BaseModal>
-            </Overlay>
-          </FocusTrap>
+              </Inline>
+              <Content className="sscds-modal-content">{children}</Content>
+              {typeof footer !== 'undefined' && (
+                <Footer className="sscds-modal-footer">{footer}</Footer>
+              )}
+            </BaseModal>
+          </Overlay>
         </Portal>
       </FloatingProvider>
     );
