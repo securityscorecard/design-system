@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Read .nvmrc
         id: read-nvmrc
         run: echo "version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
@@ -67,10 +67,10 @@ jobs:
         id: actual-version
         run: |
           echo "Getting actual current version from project versioning strategy..."
-          
+
           # Try to get version from npm registry first
           NPM_VERSION=$(npm view @securityscorecard/design-system version 2>/dev/null || echo "")
-          
+
           if [ -n "$NPM_VERSION" ]; then
             echo "Found version from npm registry: $NPM_VERSION"
             echo "actual-version=$NPM_VERSION" >> $GITHUB_OUTPUT
@@ -119,6 +119,28 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Publish v2.35.1 hotfix (if applicable)
+        if: contains(github.head_ref, 'hotfix') || contains(github.head_ref, 'v2.35.1')
+        run: |
+          echo "Detected hotfix branch, checking if v2.35.1 tag exists..."
+          if git tag -l | grep -q "v2.35.1"; then
+            echo "v2.35.1 tag found, publishing hotfix version..."
+            # Checkout the v2.35.1 tag
+            git checkout v2.35.1
+            # Update package.json to v2.35.1
+            npm version 2.35.1 --no-git-tag-version
+            # Build the package
+            yarn build
+            # Publish with hotfix tag
+            npm publish --tag hotfix
+            echo "Successfully published v2.35.1 with hotfix tag"
+          else
+            echo "v2.35.1 tag not found, skipping hotfix publish"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Comment on PR
         uses: actions/github-script@v7
         with:
@@ -126,22 +148,25 @@ jobs:
             const version = '${{ steps.snapshot-version.outputs.snapshot-version }}';
             const actualVersion = '${{ steps.actual-version.outputs.actual-version }}';
             const prNumber = ${{ github.event.number }};
-            
+
+            const isHotfix = '${{ github.head_ref }}'.includes('hotfix') || '${{ github.head_ref }}'.includes('v2.35.1');
+            const hotfixNote = isHotfix ? '\n\n**🔥 Hotfix Notice:** This appears to be a hotfix branch. If the v2.35.1 tag exists, it will also be published with the `hotfix` tag for immediate use.' : '';
+
             const comment = `## 🚀 Snapshot Build Published
-            
+
             A snapshot version has been published for testing:
-            
+
             **Snapshot Version:** \`${version}\`
             **Current Version:** \`${actualVersion}\` (from npm/git tags)
-            **NPM Tag:** \`pr-${prNumber}\`
-            
+            **NPM Tag:** \`pr-${prNumber}\`${hotfixNote}
+
             You can install this version in your project using:
             \`\`\`bash
             yarn add @securityscorecard/design-system@pr-${prNumber}
             \`\`\`
-            
-            This version will be automatically unpublished when the PR is closed or merged.`;
-            
+
+            ${isHotfix ? 'For the hotfix version (if published):\n```bash\nyarn add @securityscorecard/design-system@hotfix\n```\n\n' : ''}This version will be automatically unpublished when the PR is closed or merged.`;
+
             github.rest.issues.createComment({
               issue_number: prNumber,
               owner: context.repo.owner,
@@ -179,16 +204,16 @@ jobs:
         with:
           script: |
             const prNumber = ${{ github.event.number }};
-            
+
             const comment = `## 🧹 Snapshot Cleanup
-            
+
             The snapshot version for PR #${prNumber} has been unpublished from npm.
-            
+
             If you need to test with this version again, please reopen the PR or create a new one.`;
-            
+
             github.rest.issues.createComment({
               issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: comment
-            }); 
+            });
