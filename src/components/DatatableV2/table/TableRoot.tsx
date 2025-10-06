@@ -15,10 +15,12 @@ export const TableContainer = styled.div`
     cursor: pointer;
     opacity: 0;
     transition: opacity var(--sscds-action-transition);
-    z-index: 10;
+    z-index: -1;
 
     &:focus-visible {
       opacity: 1;
+      display: block;
+      z-index: 10;
       outline: var(--sscds-table-focus-outline-width) solid
         var(--sscds-color-primary-9);
       outline-offset: var(--sscds-table-focus-outline-offset);
@@ -27,6 +29,7 @@ export const TableContainer = styled.div`
 
     &:hover {
       opacity: 0.1;
+      display: none;
     }
 
     /* Hide when no horizontal scroll is needed */
