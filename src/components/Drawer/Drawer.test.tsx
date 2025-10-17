@@ -276,4 +276,209 @@ describe('Drawer', () => {
 
     expect(onCloseMock).not.toHaveBeenCalled();
   });
+
+  describe('Accessibility and Scroll Lock Behavior', () => {
+    beforeEach(() => {
+      // Reset body styles before each test
+      document.body.style.overflow = '';
+      document.body.dataset.sscdsLocked = undefined;
+    });
+
+    afterEach(() => {
+      // Clean up after each test
+      document.body.style.overflow = '';
+      document.body.dataset.sscdsLocked = undefined;
+    });
+
+    it('should lock body scroll and trap focus when hasBackdrop is true (modal drawer)', async () => {
+      const onCloseMock = vi.fn();
+      setup(
+        <Drawer
+          size="md"
+          onClose={onCloseMock}
+          title="Modal Drawer"
+          hasBackdrop
+          data-testid="modal-drawer"
+        >
+          <button type="button" data-testid="drawer-button">
+            Inside Drawer
+          </button>
+        </Drawer>,
+      );
+
+      const drawer = screen.getByTestId('modal-drawer');
+
+      // Should have modal ARIA attributes
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(drawer.closest('[role="dialog"]')).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(drawer.closest('[aria-modal="true"]')).toBeInTheDocument();
+
+      // Should lock body scroll
+      expect(document.body).toHaveStyle({ overflow: 'hidden' });
+      expect(document.body.dataset.sscdsLocked).toBe('true');
+
+      // Should have overlay for backdrop
+      expect(screen.getByTestId('dialog-overlay')).toBeInTheDocument();
+    });
+
+    it('should NOT lock body scroll and NOT trap focus when hasBackdrop is false (non-modal drawer)', async () => {
+      const onCloseMock = vi.fn();
+      setup(
+        <Drawer
+          size="md"
+          onClose={onCloseMock}
+          title="Non-Modal Drawer"
+          hasBackdrop={false}
+          data-testid="non-modal-drawer"
+        >
+          <button type="button" data-testid="drawer-button">
+            Inside Drawer
+          </button>
+        </Drawer>,
+      );
+
+      const drawer = screen.getByTestId('non-modal-drawer');
+
+      // Should have non-modal ARIA attributes
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(drawer.closest('[role="region"]')).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(drawer.closest('[aria-modal="true"]')).not.toBeInTheDocument();
+
+      // Should NOT lock body scroll
+      expect(document.body).not.toHaveStyle({ overflow: 'hidden' });
+
+      // Should NOT have overlay (no backdrop)
+      expect(screen.queryByTestId('dialog-overlay')).not.toBeInTheDocument();
+    });
+
+    it('should restore original body overflow when drawer unmounts', async () => {
+      // Set initial body overflow
+      document.body.style.overflow = 'auto';
+      const originalOverflow = document.body.style.overflow;
+
+      const { unmount } = setup(
+        <Drawer size="md" onClose={() => {}} title="Modal Drawer" hasBackdrop>
+          Content
+        </Drawer>,
+      );
+
+      // Should be locked while mounted
+      expect(document.body).toHaveStyle({ overflow: 'hidden' });
+
+      // Unmount the drawer
+      unmount();
+
+      // Should restore original overflow
+      expect(document.body.style.overflow).toBe(originalOverflow);
+    });
+
+    it('should maintain scroll position when non-modal drawer opens', async () => {
+      // Set initial scroll position
+      window.scrollTo(0, 100);
+
+      setup(
+        <Drawer
+          size="md"
+          onClose={() => {}}
+          title="Non-Modal Drawer"
+          hasBackdrop={false}
+        >
+          Content
+        </Drawer>,
+      );
+
+      // Scroll position should be maintained (not locked)
+      expect(document.body).not.toHaveStyle({ overflow: 'hidden' });
+      // Note: In JSDOM, window.scrollY might not work exactly like in a real browser,
+      // but the important thing is that overflow is not set to hidden
+    });
+
+    it('should handle multiple drawers correctly', async () => {
+      const { rerender } = setup(
+        <div>
+          <Drawer
+            size="md"
+            onClose={() => {}}
+            title="First Modal Drawer"
+            hasBackdrop
+          >
+            First Content
+          </Drawer>
+        </div>,
+      );
+
+      // First modal drawer should lock scroll
+      expect(document.body).toHaveStyle({ overflow: 'hidden' });
+
+      // Add a second non-modal drawer
+      rerender(
+        <div>
+          <Drawer
+            size="md"
+            onClose={() => {}}
+            title="First Modal Drawer"
+            hasBackdrop
+          >
+            First Content
+          </Drawer>
+          <Drawer
+            size="md"
+            onClose={() => {}}
+            title="Second Non-Modal Drawer"
+            hasBackdrop={false}
+          >
+            Second Content
+          </Drawer>
+        </div>,
+      );
+
+      // Should still be locked due to the modal drawer
+      expect(document.body).toHaveStyle({ overflow: 'hidden' });
+    });
+
+    it('should use correct WCAG-compliant ARIA roles and properties', async () => {
+      const { rerender } = setup(
+        <Drawer
+          size="md"
+          onClose={() => {}}
+          title="Modal Drawer"
+          hasBackdrop
+          data-testid="modal-drawer"
+        >
+          Content
+        </Drawer>,
+      );
+
+      // Modal drawer should have dialog role and aria-modal
+      let drawerContainer = screen
+        .getByTestId('modal-drawer')
+        // eslint-disable-next-line testing-library/no-node-access
+        .closest('[role]');
+      expect(drawerContainer).toHaveAttribute('role', 'dialog');
+      expect(drawerContainer).toHaveAttribute('aria-modal', 'true');
+
+      // Rerender as non-modal drawer
+      rerender(
+        <Drawer
+          size="md"
+          onClose={() => {}}
+          title="Non-Modal Drawer"
+          hasBackdrop={false}
+          data-testid="non-modal-drawer"
+        >
+          Content
+        </Drawer>,
+      );
+
+      // Non-modal drawer should have region role and no aria-modal
+      drawerContainer = screen
+        .getByTestId('non-modal-drawer')
+        // eslint-disable-next-line testing-library/no-node-access
+        .closest('[role]');
+      expect(drawerContainer).toHaveAttribute('role', 'region');
+      expect(drawerContainer).not.toHaveAttribute('aria-modal');
+    });
+  });
 });

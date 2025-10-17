@@ -111,7 +111,8 @@ const DrawerBox = forwardRef<HTMLDivElement, DrawerProps>(
       <SurfaceContainer
         $hasBackdrop={hasBackdrop}
         $maxWidth={widthVariants[size]}
-        role="dialog"
+        aria-modal={hasBackdrop ? 'true' : undefined}
+        role={hasBackdrop ? 'dialog' : 'region'}
         style={{
           '--sscds-drawer-offset': 'var(--sscds-space-6x)',
         }}
@@ -206,7 +207,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     return (
       <FloatingProvider>
         <Portal>
-          <FocusTrap isActive>{baseDrawer}</FocusTrap>
+          <FocusTrap isActive={hasBackdrop}>{baseDrawer}</FocusTrap>
         </Portal>
       </FloatingProvider>
     );
