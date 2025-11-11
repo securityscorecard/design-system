@@ -12,7 +12,7 @@ const defaultDSContext: DSContextValue = {
   hasIncludedGlobalStyles: true,
   debugMode: false,
   experimental: {
-    legacyHexgrade: false,
+    legacyHexgrade: true, // Default changed from "accessible" to "legacy"
   },
 };
 export const DSContext = createContext<DSContextValue>(defaultDSContext);
