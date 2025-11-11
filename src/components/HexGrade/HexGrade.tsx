@@ -105,7 +105,7 @@ const HexGrade = ({
   ...props
 }: HexGradeProps & ComponentPropsWithoutRef<'svg'>) => {
   const { experimental } = useContext(DSContext);
-  const hasLegacyColors = experimental.legacyHexgrade || isLegacy;
+  const hasLegacyColors = experimental?.legacyHexgrade ?? isLegacy ?? true;
 
   return (
     <StyledSVG
