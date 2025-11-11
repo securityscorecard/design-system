@@ -115,6 +115,93 @@ const SSPDatatableWithRowSelection = ({
   );
 };
 
+const SSPDatatableWithPersistVirtualAll = ({
+  rowAction,
+  rowSelectionMode,
+  onExcludedRowsChange,
+  initialExcludedRows = [],
+  initialIsVirtualSelectAll = false,
+}: {
+  rowAction: (
+    rows: unknown[] | (string | number)[],
+    isVirtualSelectAll?: boolean,
+    excludedRows?: (string | number)[],
+  ) => void;
+  rowSelectionMode: 'single-page' | 'multi-page';
+  onExcludedRowsChange?: (excludedRows: (string | number)[]) => void;
+  initialExcludedRows?: (string | number)[];
+  initialIsVirtualSelectAll?: boolean;
+}) => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [isVirtualSelectAll, setVirtualSelectAll] = useState<boolean>(
+    initialIsVirtualSelectAll,
+  );
+  const [excludedRows, setExcludedRows] =
+    useState<(string | number)[]>(initialExcludedRows);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const dataQuery = useQuery({
+    queryKey: ['data', pagination],
+    queryFn: () => fetchData(pagination),
+    keepPreviousData: true,
+  });
+
+  const handleExcludedRowsChange = (
+    newExcludedRowsOrUpdater:
+      | (string | number)[]
+      | ((prev: (string | number)[]) => (string | number)[]),
+  ) => {
+    if (typeof newExcludedRowsOrUpdater === 'function') {
+      setExcludedRows(newExcludedRowsOrUpdater);
+      const newExcludedRows = newExcludedRowsOrUpdater(excludedRows);
+      onExcludedRowsChange?.(newExcludedRows);
+    } else {
+      setExcludedRows(newExcludedRowsOrUpdater);
+      onExcludedRowsChange?.(newExcludedRowsOrUpdater);
+    }
+  };
+
+  return (
+    <Datatable
+      id="test"
+      getRowId={(row) => row.id}
+      columns={[
+        { accessorKey: 'organization.name', header: 'Name' },
+        { accessorKey: 'organization.domain', header: 'domain' },
+      ]}
+      data={dataQuery?.data?.entries ?? []}
+      pageCount={dataQuery?.data?.pageCount ?? -1}
+      renderRowSelectionActions={({
+        selectedRows,
+        isVirtualSelectAll: virtualSelectAll,
+        excludedRows: excluded,
+      }) => (
+        <button
+          type="button"
+          onClick={() => {
+            rowAction(selectedRows, virtualSelectAll, excluded);
+          }}
+        >
+          Row action
+        </button>
+      )}
+      rowCount={dataQuery?.data?.rowCount}
+      rowSelectionMode={rowSelectionMode}
+      state={{ pagination, rowSelection, isVirtualSelectAll, excludedRows }}
+      manualPagination
+      persistVirtualAll
+      onPaginationChange={setPagination}
+      onRowSelectionChange={setRowSelection}
+      onVirtualSelectAllChange={setVirtualSelectAll}
+      onExcludedRowsChange={handleExcludedRowsChange}
+      selectAllMode="virtual"
+    />
+  );
+};
+
 describe('DatatableV2/selection', () => {
   it('should have selection enabled by default', () => {
     setup(<Datatable data={data} columns={columns} id="test" />);
@@ -584,6 +671,242 @@ describe('DatatableV2/selection', () => {
       expect(screen.getByTestId('table-selection-overview')).toHaveTextContent(
         '9 of 100 rows selected',
       );
+    });
+  });
+
+  describe('with "persistVirtualAll"', () => {
+    it('should keep isVirtualSelectAll true when deselecting a row', async () => {
+      const rowAction = vi.fn();
+      const excludedRowsChange = vi.fn();
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          onExcludedRowsChange={excludedRowsChange}
+          initialIsVirtualSelectAll
+        />,
+      );
+
+      // All rows should be checked initially
+      expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
+      expect(screen.getAllByLabelText('Toggle select row')[1]).toBeChecked();
+
+      await waitFor(() => {
+        expect(
+          screen.getByTestId('table-selection-overview'),
+        ).toHaveTextContent('100 of 100 rows selected');
+      });
+
+      // Deselect first row
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
+
+      // Row should be unchecked
+      expect(
+        screen.getAllByLabelText('Toggle select row')[0],
+      ).not.toBeChecked();
+
+      // But isVirtualSelectAll should still be true (showing "all" in toolbar)
+      await waitFor(() => {
+        expect(
+          screen.getByTestId('table-selection-overview'),
+        ).toHaveTextContent('100 of 100 rows selected');
+      });
+
+      // excludedRows should be updated
+      expect(excludedRowsChange).toHaveBeenCalled();
+    });
+
+    it('should track excludedRows when deselecting rows', async () => {
+      const rowAction = vi.fn();
+      const excludedRowsChange = vi.fn();
+      const { entries } = fetchData({ pageIndex: 0, pageSize: 10 });
+      const firstRowId = entries[0].id;
+
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          onExcludedRowsChange={excludedRowsChange}
+          initialIsVirtualSelectAll
+        />,
+      );
+
+      // Deselect first row
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
+
+      // Check that excludedRows was updated with the first row ID
+      await waitFor(() => {
+        expect(excludedRowsChange).toHaveBeenCalledWith(
+          expect.arrayContaining([firstRowId]),
+        );
+      });
+    });
+
+    it('should remove row from excludedRows when reselecting it', async () => {
+      const rowAction = vi.fn();
+      const excludedRowsChange = vi.fn();
+      const { entries } = fetchData({ pageIndex: 0, pageSize: 10 });
+      const firstRowId = entries[0].id;
+
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          onExcludedRowsChange={excludedRowsChange}
+          initialIsVirtualSelectAll
+          initialExcludedRows={[firstRowId]}
+        />,
+      );
+
+      // First row should be unchecked initially
+      expect(
+        screen.getAllByLabelText('Toggle select row')[0],
+      ).not.toBeChecked();
+
+      // Reselect first row
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
+
+      // Row should be checked
+      expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
+
+      // excludedRows should be updated to remove the row ID
+      await waitFor(() => {
+        const { calls } = excludedRowsChange.mock;
+        const lastCall = calls[calls.length - 1];
+        expect(lastCall[0]).not.toContain(firstRowId);
+      });
+    });
+
+    it('should pass excludedRows to renderRowSelectionActions', async () => {
+      const rowAction = vi.fn();
+      const { entries } = fetchData({ pageIndex: 0, pageSize: 10 });
+      const firstRowId = entries[0].id;
+
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          initialIsVirtualSelectAll
+          initialExcludedRows={[firstRowId]}
+        />,
+      );
+
+      // Click row action button
+      await user.click(screen.getByRole('button', { name: /Row action/i }));
+
+      // Check that excludedRows was passed to the action
+      await waitFor(() => {
+        expect(rowAction).toHaveBeenCalledWith(
+          expect.any(Array),
+          true, // isVirtualSelectAll
+          expect.arrayContaining([firstRowId]), // excludedRows
+        );
+      });
+    });
+
+    it('should clear excludedRows when clicking "Clear Selection"', async () => {
+      const rowAction = vi.fn();
+      const excludedRowsChange = vi.fn();
+      const { entries } = fetchData({ pageIndex: 0, pageSize: 10 });
+      const firstRowId = entries[0].id;
+
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          onExcludedRowsChange={excludedRowsChange}
+          initialIsVirtualSelectAll
+          initialExcludedRows={[firstRowId]}
+        />,
+      );
+
+      // Click clear selection
+      await user.click(
+        screen.getByRole('button', { name: /Clear selection/i }),
+      );
+
+      // excludedRows should be cleared
+      await waitFor(() => {
+        expect(excludedRowsChange).toHaveBeenCalledWith([]);
+      });
+
+      // Toolbar should be hidden
+      await waitFor(() => {
+        expect(
+          screen.queryByRole('button', { name: /Clear selection/i }),
+        ).not.toBeInTheDocument();
+      });
+    });
+
+    it('should update header checkbox when rows are excluded on current page', async () => {
+      const rowAction = vi.fn();
+
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          initialIsVirtualSelectAll
+        />,
+      );
+
+      // All rows should be checked initially
+      expect(
+        screen.getByRole('checkbox', { name: /Toggle select all/i }),
+      ).toBeChecked();
+
+      // Deselect first row
+      await user.click(screen.getAllByLabelText('Toggle select row')[0]);
+
+      // Header checkbox should be unchecked (because first row on current page is excluded)
+      await waitFor(() => {
+        expect(
+          screen.getByRole('checkbox', { name: /Toggle select all/i }),
+        ).not.toBeChecked();
+      });
+    });
+
+    it('should select all rows on current page when header checkbox is clicked with excluded rows', async () => {
+      const rowAction = vi.fn();
+      const excludedRowsChange = vi.fn();
+      const { entries } = fetchData({ pageIndex: 0, pageSize: 10 });
+      const firstRowId = entries[0].id;
+
+      const { user } = setup(
+        <SSPDatatableWithPersistVirtualAll
+          rowSelectionMode="single-page"
+          rowAction={rowAction}
+          onExcludedRowsChange={excludedRowsChange}
+          initialIsVirtualSelectAll
+          initialExcludedRows={[firstRowId]}
+        />,
+      );
+
+      // First row should be unchecked
+      expect(
+        screen.getAllByLabelText('Toggle select row')[0],
+      ).not.toBeChecked();
+
+      // Header checkbox should be unchecked
+      expect(
+        screen.getByRole('checkbox', { name: /Toggle select all/i }),
+      ).not.toBeChecked();
+
+      // Click header checkbox to select all on current page
+      await user.click(
+        screen.getByRole('checkbox', { name: /Toggle select all/i }),
+      );
+
+      // First row should now be checked
+      await waitFor(() => {
+        expect(screen.getAllByLabelText('Toggle select row')[0]).toBeChecked();
+      });
+
+      // excludedRows should be updated to remove first row ID
+      await waitFor(() => {
+        const { calls } = excludedRowsChange.mock;
+        const lastCall = calls[calls.length - 1];
+        expect(lastCall[0]).not.toContain(firstRowId);
+      });
     });
   });
 });

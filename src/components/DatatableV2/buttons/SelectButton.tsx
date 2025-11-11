@@ -10,19 +10,48 @@ const selectRowHandler =
   (event: ChangeEvent<HTMLInputElement>) => {
     const {
       getState,
-      options: { enableBatchRowSelection, enableMultiRowSelection },
+      options: {
+        enableBatchRowSelection,
+        enableMultiRowSelection,
+        persistVirtualAll,
+      },
       refs: { lastSelectedRowIdRef: lastSelectedRowId },
       setVirtualSelectAll,
+      setExcludedRows,
     } = table;
 
-    const { isVirtualSelectAll } = getState();
-    const wasCurrentRowChecked = isVirtualSelectAll || row.getIsSelected();
+    const { isVirtualSelectAll, excludedRows } = getState();
+    const wasCurrentRowChecked =
+      row.getIsSelected() ||
+      (isVirtualSelectAll &&
+        (!persistVirtualAll || !(excludedRows ?? []).includes(row.id)));
 
     if (isVirtualSelectAll) {
+      if (persistVirtualAll) {
+        // With persistVirtualAll, keep isVirtualSelectAll true and track excluded rows
+        if (wasCurrentRowChecked) {
+          // Deselecting: add to excludedRows
+          setExcludedRows((prev) => {
+            if (!prev.includes(row.id)) {
+              return [...prev, row.id];
+            }
+            return prev;
+          });
+          row.toggleSelected(false);
+        } else {
+          // Selecting: remove from excludedRows
+          setExcludedRows((prev) => prev.filter((id) => id !== row.id));
+          row.toggleSelected(true);
+        }
+        lastSelectedRowId.current = row.id;
+        return;
+      }
+
+      // Original behavior: unchecking a row disables virtual select all
       setVirtualSelectAll(false);
 
       // When all rows are selected and the user unchecks one, the current selection
-      // should change to all the rows except the one that was unchecked<
+      // should change to all the rows except the one that was unchecked
       const { rows } = table.getPrePaginationRowModel();
       rows.forEach((r) => r.toggleSelected(row.index !== r.index));
 
@@ -63,13 +92,23 @@ const selectRowHandler =
 
 const getIsAllRowsSelected = <D,>(table: DatatableInstance<D>) => {
   const {
-    options: { selectAllMode },
+    options: { selectAllMode, persistVirtualAll },
     getState,
+    getRowModel,
   } = table;
 
-  const { isVirtualSelectAll } = getState();
+  const { isVirtualSelectAll, excludedRows } = getState();
+
+  const currentPageRows = getRowModel().rows;
 
   if (selectAllMode === 'virtual' && isVirtualSelectAll) {
+    if (persistVirtualAll) {
+      // All rows in current page are checked if none are excluded
+      return !currentPageRows.some((row) =>
+        (excludedRows ?? []).includes(row.id),
+      );
+    }
+    // Without persistVirtualAll, isVirtualSelectAll means all rows are selected
     return true;
   }
 
@@ -97,17 +136,24 @@ const SelectButton = <D,>({
       selectAllMode,
       manualPagination,
       rowSelectionMode,
+      persistVirtualAll,
     },
     setVirtualSelectAll,
+    setExcludedRows,
   } = table;
-  const { isLoading, rowSelection, isVirtualSelectAll } = getState();
+  const { isLoading, rowSelection, isVirtualSelectAll, excludedRows } =
+    getState();
   const { t } = useSafeTranslation();
 
   const allRowsSelected = getIsAllRowsSelected(table);
 
-  const checked =
-    isVirtualSelectAll ||
-    (isHeaderCheckbox ? allRowsSelected : row?.getIsSelected());
+  // For individual row checkbox: checked if virtual select all is true AND row is not excluded
+  const rowChecked =
+    isVirtualSelectAll && persistVirtualAll
+      ? row && !(excludedRows ?? []).includes(row.id)
+      : isVirtualSelectAll || row?.getIsSelected();
+
+  const checked = isHeaderCheckbox ? allRowsSelected : rowChecked;
 
   const common: ComponentProps<'input'> = {
     checked,
@@ -119,8 +165,34 @@ const SelectButton = <D,>({
       e.stopPropagation();
       if (isHeaderCheckbox) {
         if (isVirtualSelectAll) {
-          setVirtualSelectAll(false);
-          table.toggleAllRowsSelected(false);
+          if (persistVirtualAll) {
+            const isChecked = (e.target as HTMLInputElement).checked;
+            const currentPageRowIds = table.getRowModel().rows.map((r) => r.id);
+
+            if (isChecked) {
+              // Header checkbox is checked - remove all current page row IDs from excludedRows
+              setExcludedRows((prev) =>
+                prev.filter(
+                  (id) => !currentPageRowIds.some((rowId) => rowId === id),
+                ),
+              );
+            } else {
+              // Header checkbox is unchecked - add all current page row IDs to excludedRows
+              setExcludedRows((prev) => {
+                const newExcluded = [...prev];
+                currentPageRowIds.forEach((id) => {
+                  if (!newExcluded.includes(id)) {
+                    newExcluded.push(id);
+                  }
+                });
+                return newExcluded;
+              });
+            }
+          } else {
+            // Original behavior when persistVirtualAll is false
+            setVirtualSelectAll(false);
+            table.toggleAllRowsSelected(false);
+          }
         }
 
         if (selectAllMode === 'all') {

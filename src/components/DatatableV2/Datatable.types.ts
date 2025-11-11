@@ -198,6 +198,8 @@ interface CustomState {
   activeRowId: string;
   /* Virtual select all */
   isVirtualSelectAll: boolean;
+  /* Excluded rows IDs when persistVirtualAll is enabled */
+  excludedRows: (string | number)[];
 }
 export type DatatableInitialState = Omit<
   InitialTableState,
@@ -234,6 +236,8 @@ export interface ParsedDatatableOptions<D>
   onActiveRowIdChange?: DatatableOptions<D>['onActiveRowIdChange'];
   onRowClick?: DatatableOptions<D>['onRowClick'];
   onVirtualSelectAllChange?: DatatableOptions<D>['onVirtualSelectAllChange'];
+  onExcludedRowsChange?: DatatableOptions<D>['onExcludedRowsChange'];
+  persistVirtualAll?: DatatableOptions<D>['persistVirtualAll'];
   renderDetailPanel?: DatatableOptions<D>['renderDetailPanel'];
   renderNoDataFallback?: DatatableOptions<D>['renderNoDataFallback'];
   renderRowSelectionActions?: DatatableOptions<D>['renderRowSelectionActions'];
@@ -269,6 +273,7 @@ export interface DatatableInstance<D>
   setIsFullscreenMode: Dispatch<SetStateAction<boolean>>;
   setVirtualSelectAll: Dispatch<SetStateAction<boolean>>;
   setActiveRowId: Dispatch<SetStateAction<string>>;
+  setExcludedRows: Dispatch<SetStateAction<(string | number)[]>>;
   refs: {
     tableRef: MutableRefObject<HTMLTableElement>;
     lastSelectedRowIdRef: MutableRefObject<null | string>;
@@ -281,6 +286,7 @@ interface ClientSideRowSelectionActions<D> {
   totalRowCount: number;
   table: DatatableInstance<D>;
   isVirtualSelectAll: boolean;
+  excludedRows: (string | number)[];
 }
 
 interface ServerSideSinglePageRowSelectionActions<D> {
@@ -288,6 +294,7 @@ interface ServerSideSinglePageRowSelectionActions<D> {
   totalRowCount: number;
   table: DatatableInstance<D>;
   isVirtualSelectAll: boolean;
+  excludedRows: (string | number)[];
 }
 
 interface ServerSideMultiPageRowSelectionActions<D> {
@@ -295,6 +302,7 @@ interface ServerSideMultiPageRowSelectionActions<D> {
   totalRowCount: number;
   table: DatatableInstance<D>;
   isVirtualSelectAll: boolean;
+  excludedRows: (string | number)[];
 }
 
 // Base options that apply to all cases
@@ -576,6 +584,24 @@ interface DatatableBaseOptions<D>
    * this state on your own. You can pass the managed state back to the table via the
    */
   onVirtualSelectAllChange?: Dispatch<SetStateAction<boolean>>;
+
+  /**
+   * If provided, this function will be called with an `updaterFn` when `state.excludedRows`
+   * changes. This overrides the default internal state management, so you are expected to manage
+   * this state on your own. You can pass the managed state back to the table via the
+   * `tableOptions.state.excludedRows` option.
+   */
+  onExcludedRowsChange?: Dispatch<SetStateAction<(string | number)[]>>;
+
+  /**
+   * When `persistVirtualAll` is true, it will have all the functionality similar to `isVirtualSelectAll: true`.
+   * In addition to that, it will also persist behavior as if `isVirtualSelectAll` is true even after
+   * deselecting a row or multiple rows. It will emit a new array called `excludedRows` which will have
+   * ids of deselected rows. It will continue to behave like `isVirtualSelectAll` is true until user clicks clear all.
+   *
+   * @default false
+   */
+  persistVirtualAll?: boolean;
 
   /**
    * Provide your own implementation of row details panel. This property accepts React component

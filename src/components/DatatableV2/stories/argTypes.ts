@@ -809,6 +809,24 @@ export default {
       },
     },
   },
+  persistVirtualAll: {
+    control: {
+      type: 'boolean',
+    },
+    name: 'persistVirtualAll',
+    description:
+      'When `persistVirtualAll` is true, it will have all the functionality similar to `isVirtualSelectAll: true`.\nIn addition to that, it will also persist behavior as if `isVirtualSelectAll` is true even after\ndeselecting a row or multiple rows. It will emit a new array called `excludedRows` which will have\nids of deselected rows. It will continue to behave like `isVirtualSelectAll` is true until user clicks clear all.',
+    type: {
+      required: false,
+      raw: 'boolean',
+      name: 'boolean',
+    },
+    table: {
+      type: {
+        summary: 'boolean',
+      },
+    },
+  },
   state: {
     control: {
       type: 'object',

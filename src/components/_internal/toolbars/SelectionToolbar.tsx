@@ -1,5 +1,5 @@
 import type { RowSelectionState, Table } from '@tanstack/react-table';
-import { type ReactNode } from 'react';
+import { type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { pluck } from 'ramda';
 import styled from 'styled-components';
 
@@ -138,20 +138,24 @@ type Instance<Data> = {
       totalRowCount: number;
       table: unknown;
       isVirtualSelectAll?: boolean;
+      excludedRows?: (string | number)[];
     }) => ReactNode;
     rowCount?: number;
     manualPagination?: boolean;
     rowSelectionMode?: 'single-page' | 'multi-page';
     selectAllMode?: 'page' | 'all' | 'virtual';
+    persistVirtualAll?: boolean;
   };
   getState?: () => {
     rowSelection: RowSelectionState;
     isVirtualSelectAll?: boolean;
+    excludedRows?: (string | number)[];
   };
   getPrePaginationRowModel?: Table<Data>['getPrePaginationRowModel'];
   getSelectedRowModel?: Table<Data>['getSelectedRowModel'];
   toggleAllRowsSelected?: Table<Data>['toggleAllRowsSelected'];
   setVirtualSelectAll?: (value: boolean) => void;
+  setExcludedRows?: Dispatch<SetStateAction<(string | number)[]>>;
   setRowSelection?: Table<Data>['setRowSelection'];
 };
 
@@ -181,19 +185,25 @@ function SelectionToolbarReactTable<Data>({
       manualPagination,
       rowSelectionMode,
       selectAllMode,
+      persistVirtualAll,
     },
     getPrePaginationRowModel,
     setVirtualSelectAll,
+    setExcludedRows,
     setRowSelection,
   } = instance;
 
-  const { isVirtualSelectAll } = getState();
+  const { isVirtualSelectAll, excludedRows } = getState();
 
   const totalRowCount = rowCount ?? getPrePaginationRowModel().rows.length;
 
   const selectedRows = getSelectedRowsCount<Data>(instance);
 
-  if (selectedRows.length === 0 && !isVirtualSelectAll) {
+  if (
+    selectedRows.length === 0 &&
+    !isVirtualSelectAll &&
+    (!persistVirtualAll || (excludedRows?.length ?? 0) === 0)
+  ) {
     return null;
   }
 
@@ -203,6 +213,9 @@ function SelectionToolbarReactTable<Data>({
         deselectAllRows={() => {
           setRowSelection({} as RowSelectionState); // Deselect all rows across all pages
           setVirtualSelectAll(false);
+          if (setExcludedRows) {
+            setExcludedRows([]);
+          }
         }}
         isVirtualSelectAll={isVirtualSelectAll}
         selectAllMode={selectAllMode}
@@ -212,6 +225,7 @@ function SelectionToolbarReactTable<Data>({
       />
       <SelectionToolbarActions>
         {renderRowSelectionActions?.({
+          excludedRows: excludedRows ?? [],
           isVirtualSelectAll,
           selectedRows:
             (manualPagination && rowSelectionMode === 'multi-page') ||

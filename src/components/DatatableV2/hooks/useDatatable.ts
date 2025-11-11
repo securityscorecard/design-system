@@ -98,6 +98,9 @@ export const useDatatable = <D>(
   const [isVirtualSelectAll, setVirtualSelectAll] = useState<boolean>(
     initialState?.isVirtualSelectAll ?? false,
   );
+  const [excludedRows, setExcludedRows] = useState<(string | number)[]>(
+    initialState?.excludedRows ?? [],
+  );
   const [width, setWidth] = useState(0);
 
   const onResize = () => {
@@ -164,6 +167,8 @@ export const useDatatable = <D>(
       columnSizing,
       activeRowId,
       ...tableOptions.state,
+      // @ts-expect-error Adding excludedRows to state if not present
+      excludedRows: tableOptions.state?.excludedRows ?? excludedRows,
       // I know what I'm doing here
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -195,5 +200,6 @@ export const useDatatable = <D>(
   table.setActiveRowId = tableOptions.onActiveRowIdChange ?? setActiveRowId;
   table.setVirtualSelectAll =
     tableOptions.onVirtualSelectAllChange ?? setVirtualSelectAll;
+  table.setExcludedRows = tableOptions.onExcludedRowsChange ?? setExcludedRows;
   return table;
 };

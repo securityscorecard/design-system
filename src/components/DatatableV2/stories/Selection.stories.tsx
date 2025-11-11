@@ -89,6 +89,7 @@ export const SelectAllModeVirtual: Story = (args) => {
         isVirtualSelectAll: true,
       }}
       pageCount={dataQuery?.data?.pageCount ?? -1}
+      persistVirtualAll={args.persistVirtualAll}
       rowCount={dataQuery?.data?.rowCount}
       selectAllMode="virtual"
       state={{ pagination, rowSelection }}
@@ -102,19 +103,35 @@ export const SelectAllModeVirtual: Story = (args) => {
 SelectAllModeVirtual.args = {
   ...Template.args,
   manualPagination: true,
+  persistVirtualAll: false,
   rowSelectionMode: 'single-page',
-  renderRowSelectionActions: ({ selectedRows, isVirtualSelectAll }) => {
+  renderRowSelectionActions: ({
+    selectedRows,
+    isVirtualSelectAll,
+    excludedRows,
+  }) => {
     const selectedRowCount = Object.keys(selectedRows).filter(
       (id) => !!selectedRows[id],
     ).length;
 
     return (
-      <Button
-        onClick={() => action('batch action')(selectedRows, isVirtualSelectAll)}
-      >
-        Show selected rows{' '}
-        {isVirtualSelectAll ? '(all)' : `(${selectedRowCount})`}
-      </Button>
+      <>
+        <Button
+          onClick={() =>
+            action('batch action')(
+              selectedRows,
+              isVirtualSelectAll,
+              excludedRows,
+            )
+          }
+        >
+          Show selected rows{' '}
+          {isVirtualSelectAll ? '(all)' : `(${selectedRowCount})`}
+        </Button>
+        {excludedRows && excludedRows.length > 0 && (
+          <Strong>Excluded: {excludedRows.length} row(s)</Strong>
+        )}
+      </>
     );
   },
   selectAllMode: 'virtual',
@@ -125,6 +142,7 @@ SelectAllModeVirtual.parameters = {
 
 export const SelectAllModeVirtualManagedState: Story = (args) => {
   const [isVirtualSelectAll, setVirtualSelectAll] = useState<boolean>(true);
+  const [excludedRows, setExcludedRows] = useState<(string | number)[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 1,
     pageSize: 10,
@@ -146,8 +164,9 @@ export const SelectAllModeVirtualManagedState: Story = (args) => {
         pageCount={dataQuery?.data?.pageCount ?? -1}
         rowCount={dataQuery?.data?.rowCount}
         selectAllMode="virtual"
-        state={{ pagination, isVirtualSelectAll, rowSelection }}
+        state={{ excludedRows, pagination, isVirtualSelectAll, rowSelection }}
         manualPagination
+        onExcludedRowsChange={setExcludedRows}
         onPaginationChange={setPagination}
         onRowSelectionChange={setRowSelection}
         onVirtualSelectAllChange={setVirtualSelectAll}
@@ -156,6 +175,13 @@ export const SelectAllModeVirtualManagedState: Story = (args) => {
         <Strong>
           {isVirtualSelectAll && <span>All rows have been selected</span>}
         </Strong>
+        {excludedRows.length > 0 && (
+          <div>
+            <Strong>
+              Excluded rows: {excludedRows.length} ({excludedRows.join(', ')})
+            </Strong>
+          </div>
+        )}
       </div>
     </>
   );
@@ -165,12 +191,24 @@ SelectAllModeVirtualManagedState.args = {
   ...Template.args,
   manualPagination: true,
   rowSelectionMode: 'single-page',
-  renderRowSelectionActions: ({ selectedRows, isVirtualSelectAll }) => (
-    <Button
-      onClick={() => action('batch action')(selectedRows, isVirtualSelectAll)}
-    >
-      Show selected rows {isVirtualSelectAll ? '(all)' : ''}
-    </Button>
+  persistVirtualAll: true,
+  renderRowSelectionActions: ({
+    selectedRows,
+    isVirtualSelectAll,
+    excludedRows,
+  }) => (
+    <>
+      <Button
+        onClick={() =>
+          action('batch action')(selectedRows, isVirtualSelectAll, excludedRows)
+        }
+      >
+        Show selected rows {isVirtualSelectAll ? '(all)' : ''}
+      </Button>
+      {excludedRows && excludedRows.length > 0 && (
+        <Strong>Excluded: {excludedRows.length}</Strong>
+      )}
+    </>
   ),
   selectAllMode: 'virtual',
 };
