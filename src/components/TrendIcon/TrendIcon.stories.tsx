@@ -23,3 +23,12 @@ export const Trends: Story = () => (
     <TrendIcon trend="negative" />
   </Inline>
 );
+
+export const InvertedPositive: Story = () => (
+  <Inline gap="lg">
+    <TrendIcon trend="positive" invertedPositive />
+    <TrendIcon trend="stable" invertedPositive />
+    <TrendIcon trend="negative" invertedPositive />
+  </Inline>
+);
+InvertedPositive.storyName = 'Inverted Positive';
