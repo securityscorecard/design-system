@@ -557,6 +557,12 @@ interface DatatableBaseOptions<D>
   onActiveRowIdChange?: Dispatch<SetStateAction<string>>;
 
   /**
+   * If provided, this function will be called when the page size changes. This is used for
+   * persistent state management to save the user's preferred page size to localStorage.
+   */
+  onPageSizeChange?: (pageSize: number) => void;
+
+  /**
    * Callback that is called when user clicks anywhere in the row area. Clicking on the selection
    * checkbox, row expand button and the row actions stops event propagation and does not trigger
    * the row click callback. We are passing arguments into the callback:

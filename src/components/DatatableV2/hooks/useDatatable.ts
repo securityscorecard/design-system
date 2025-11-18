@@ -6,7 +6,14 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   getAllLeafColumnDefs,
@@ -75,6 +82,9 @@ export const useDatatable = <D>(
     initState.pagination = {
       pageIndex: initState?.pagination?.pageIndex ?? 0,
       pageSize:
+        // Priority: persistent state > initial state > max option > default
+        (tableOptions as DatatableOptions<D> & { pageSize?: number })
+          .pageSize ??
         initState?.pagination?.pageSize ??
         getMaxRowsPerPageOption(tableOptions) ??
         50,
@@ -121,6 +131,45 @@ export const useDatatable = <D>(
   }, []);
 
   const debouncedSetColumnSizing = useDebounce(setColumnSizing);
+
+  // Custom pagination change handler that intercepts pageSize changes for persistence
+  const handlePaginationChange = useCallback(
+    (
+      updater:
+        | ((prev: { pageIndex: number; pageSize: number }) => {
+            pageIndex: number;
+            pageSize: number;
+          })
+        | { pageIndex: number; pageSize: number },
+    ) => {
+      // Get current pagination state
+      const currentPagination = tableOptions.state?.pagination || {
+        pageIndex: 0,
+        pageSize: 50,
+      };
+
+      // Calculate new pagination state
+      const newPagination =
+        typeof updater === 'function' ? updater(currentPagination) : updater;
+
+      // If pageSize changed, call persistent handler
+      if (newPagination.pageSize !== currentPagination.pageSize) {
+        (
+          tableOptions as DatatableOptions<D> & {
+            onPageSizeChange?: (pageSize: number) => void;
+          }
+        ).onPageSizeChange?.(newPagination.pageSize);
+      }
+
+      // Call original pagination handler if provided
+      (
+        tableOptions as DatatableOptions<D> & {
+          onPageSizeChange?: (pageSize: number) => void;
+        }
+      ).onPaginationChange?.(updater);
+    },
+    [tableOptions],
+  );
 
   const data: D[] = useMemo(
     () =>
@@ -169,6 +218,14 @@ export const useDatatable = <D>(
       // @ts-ignore
       width,
     },
+    // Use custom pagination handler for pageSize persistence
+    onPaginationChange: (
+      tableOptions as DatatableOptions<D> & {
+        onPageSizeChange?: (pageSize: number) => void;
+      }
+    ).onPageSizeChange
+      ? handlePaginationChange
+      : tableOptions.onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: tableOptions.enablePagination
       ? getPaginationRowModel()

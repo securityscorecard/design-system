@@ -17,6 +17,7 @@ type PersistentState = {
   columnSizing?: ColumnSizingState;
   columnVisibility?: VisibilityState;
   sorting?: SortingState;
+  pageSize?: number;
 };
 
 export const usePersistentState = <D>(
@@ -77,12 +78,17 @@ export const usePersistentState = <D>(
     state?.sorting ?? initialState?.sorting ?? [],
   );
 
+  const [pageSize, setPageSize] = useState<number>(
+    state?.pageSize ?? initialState?.pageSize ?? 10,
+  );
+
   if (enabled) {
     setState({
       columnPinning,
       columnSizing,
       columnVisibility,
       columnOrder,
+      pageSize,
       ...(disableSorting ? {} : { sorting }),
     });
   }
@@ -93,6 +99,7 @@ export const usePersistentState = <D>(
       columnSizing,
       columnOrder,
       columnVisibility,
+      pageSize,
       ...(disableSorting ? {} : { sorting }),
     },
     {
@@ -100,6 +107,7 @@ export const usePersistentState = <D>(
       onColumnSizingChange: setColumnSizing,
       onColumnOrderChange: setColumnOrder,
       onColumnVisibilityChange: setColumnVisibility,
+      onPageSizeChange: setPageSize,
       ...(disableSorting ? {} : { onSortingChange: setSorting }),
     },
   ] as const;

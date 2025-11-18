@@ -108,3 +108,16 @@ export const ManualPagination: Story = (args) => {
     </>
   );
 };
+ManualPagination.args = Template.args;
+
+export const PersistentPageSize: Story = Template.bind({});
+PersistentPageSize.args = {
+  ...Template.args,
+  id: 'persistent-pagesize-test',
+  enablePersistentState: true,
+  enableRowsPerPage: true,
+  rowsPerPageOptions: [5, 10, 25, 50, 100],
+};
+PersistentPageSize.parameters = {
+  screenshot: { skip: false },
+};

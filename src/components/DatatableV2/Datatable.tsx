@@ -31,7 +31,16 @@ const Datatable = <D,>(props: DatatableOptions<D>) => {
           state: {
             ...state,
             ...persistentState,
+            // Ensure pagination state includes persistent pageSize
+            pagination: {
+              ...state?.pagination,
+              ...(persistentState.pageSize && {
+                pageSize: persistentState.pageSize,
+              }),
+            },
           },
+          // Pass pageSize directly for initial state calculation
+          pageSize: persistentState.pageSize,
           ...persistentStateSetters,
         }
       : {}),
