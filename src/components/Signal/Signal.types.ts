@@ -13,6 +13,7 @@ export type SeveritySignalKinds = BaseKinds | 'info' | 'positive' | 'critical';
 export type BreachRiskSignalKinds = BaseKinds;
 export type BusinessImpactSignalKinds = 'critical' | BaseKinds;
 export type IncidentLikelihoodSignalKinds = 'critical' | BaseKinds;
+export type MaxSeveritySignalKinds = 'critical' | BaseKinds;
 
 export interface BaseSignalProps {
   /**
@@ -52,11 +53,16 @@ interface IncidentLikelihoodSignal {
   variant: 'incidentLikelihood';
   kind: IncidentLikelihoodSignalKinds;
 }
+interface MaxSeveritySignal {
+  variant: 'maxSeverity';
+  kind: MaxSeveritySignalKinds;
+}
 
 export type SignalProps = (
   | SeveritySignal
   | BreachRiskSignal
   | BusinessImpactSignal
   | IncidentLikelihoodSignal
+  | MaxSeveritySignal
 ) &
   BaseSignalProps;

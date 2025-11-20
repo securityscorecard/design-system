@@ -4,6 +4,7 @@ export type {
   BreachRiskSignalKinds,
   BusinessImpactSignalKinds,
   IncidentLikelihoodSignalKinds,
+  MaxSeveritySignalKinds,
   SeveritySignalKinds,
   SignalProps,
 } from './Signal.types';
