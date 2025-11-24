@@ -116,6 +116,31 @@ IncidentLikelihood.argTypes = {
   },
 };
 
+export const MaxSeverity: Story = (args) => (
+  <Inline gap="sm">
+    <Signal {...args} kind="critical" variant="maxSeverity" />
+    <Signal {...args} kind="high" variant="maxSeverity" />
+    <Signal {...args} kind="medium" variant="maxSeverity" />
+    <Signal {...args} kind="low" variant="maxSeverity" />
+    <Signal {...args} kind="none" variant="maxSeverity" />
+  </Inline>
+);
+MaxSeverity.args = {
+  variant: 'maxSeverity',
+  size: 32,
+};
+MaxSeverity.argTypes = {
+  kind: {
+    control: 'select',
+    options: ['critical', 'high', 'medium', 'low', 'none'],
+    table: {
+      type: {
+        summary: '"critical"|"high"|"medium"|"low"|"none"',
+      },
+    },
+  },
+};
+
 export const SizedSignals: Story = () => (
   <Inline gap="sm">
     <Signal kind="high" size={16} />
@@ -155,6 +180,13 @@ export const DarkMode: Story = (args) => (
       <Signal {...args} kind="medium" variant="incidentLikelihood" />
       <Signal {...args} kind="low" variant="incidentLikelihood" />
       <Signal {...args} kind="none" variant="incidentLikelihood" />
+    </Inline>
+    <Inline gap="sm">
+      <Signal {...args} kind="critical" variant="maxSeverity" />
+      <Signal {...args} kind="high" variant="maxSeverity" />
+      <Signal {...args} kind="medium" variant="maxSeverity" />
+      <Signal {...args} kind="low" variant="maxSeverity" />
+      <Signal {...args} kind="none" variant="maxSeverity" />
     </Inline>
   </Stack>
 );

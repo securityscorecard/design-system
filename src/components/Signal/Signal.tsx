@@ -4,12 +4,14 @@ import {
   BreachRiskSignalKinds,
   BusinessImpactSignalKinds,
   IncidentLikelihoodSignalKinds,
+  MaxSeveritySignalKinds,
   SeveritySignalKinds,
   SignalProps,
 } from './Signal.types';
 import BreachRiskSignal from './BreachRiskSignal';
 import BusinessImpactSignal from './BusinessImpactSignal';
 import IncidentLikelihoodSignal from './IncidentLikelihoodSignal';
+import MaxSeveritySignal from './MaxSeveritySignal';
 import SeveritySignal from './SeveritySignal';
 
 export default function Signal(props: SignalProps) {
@@ -37,6 +39,14 @@ export default function Signal(props: SignalProps) {
     return (
       <IncidentLikelihoodSignal
         kind={kind.toLowerCase() as IncidentLikelihoodSignalKinds}
+        {...rest}
+      />
+    );
+  }
+  if (variant === 'maxSeverity') {
+    return (
+      <MaxSeveritySignal
+        kind={kind.toLowerCase() as MaxSeveritySignalKinds}
         {...rest}
       />
     );
