@@ -18,6 +18,7 @@ export default function BusinessImpactSignal({
     <Vertical4Bars
       criticality={criticalityLevels[kind]}
       title={title ?? `${kind} business impact`}
+      monochromatic
       {...props}
     />
   );
