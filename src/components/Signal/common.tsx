@@ -96,9 +96,13 @@ export function Vertical4Bars({
   criticality,
   size = 16,
   title,
+  monochromatic = false,
   ...props
-}: BaseSvgProps & { criticality: 0 | 1 | 2 | 3 | 4 }) {
+}: BaseSvgProps & { criticality: 0 | 1 | 2 | 3 | 4; monochromatic?: boolean }) {
   const getActiveColor = (level: number) => {
+    if (monochromatic) {
+      return 'var(--sscds-color-neutral-13)';
+    }
     const colors = [
       'var(--sscds-color-signal-inactive)',
       'var(--severity-green-40)',
@@ -110,6 +114,9 @@ export function Vertical4Bars({
   };
 
   const getInactiveColor = (level: number) => {
+    if (monochromatic) {
+      return 'var(--sscds-color-signal-inactive)';
+    }
     const colors = [
       'var(--sscds-color-signal-inactive)',
       'var(--severity-green-20)',
