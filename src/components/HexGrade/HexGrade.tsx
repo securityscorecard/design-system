@@ -126,7 +126,7 @@ const HexGrade = ({
           fill: getShapeColor(variant, grade, hasLegacyColors, isInverted),
         }}
       />
-      {typeof grade !== 'undefined' && (
+      {typeof grade !== 'undefined' && grade !== null && (
         <path
           d={grades[grade].path}
           style={{
