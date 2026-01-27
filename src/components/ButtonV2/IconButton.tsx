@@ -17,8 +17,8 @@ export function IconButtonPlain<E extends ElementType = 'button'>(
     iconName,
     iconType = 'ssc',
     iconRotation,
-    isDisabled = false,
     isLoading = false,
+    isDisabled = false,
     ...props
   }: IconButtonProps<E>,
   ref,
