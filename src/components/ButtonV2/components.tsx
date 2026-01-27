@@ -14,7 +14,7 @@ export const ButtonRoot = styled.button`
   align-items: center;
   justify-content: center;
   gap: var(--sscds-space-1x);
-  border-radius: var(--sscds-radii-button);
+  border-radius: var(--sscds-radii-button) !important;
   line-height: var(--sscds-font-lineheight-elementlabel);
   font-weight: var(--sscds-font-weight-elementlabel-default);
   white-space: nowrap;
