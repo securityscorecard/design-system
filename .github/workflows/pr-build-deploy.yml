@@ -3,6 +3,7 @@ name: PR Build and Deploy
 permissions:
   contents: read
   packages: write
+  pull-requests: write 
 
 on:
   pull_request:
