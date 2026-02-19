@@ -1,5 +1,9 @@
 name: PR Build and Deploy
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -37,7 +41,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ needs.get-node-version.outputs.version }}
-          registry-url: 'https://registry.npmjs.org'
+          # Use repo .npmrc to route @securityscorecard to GitHub Packages
 
       - name: Setup Yarn
         run: |
@@ -68,8 +72,8 @@ jobs:
         run: |
           echo "Getting actual current version from project versioning strategy..."
           
-          # Try to get version from npm registry first
-          NPM_VERSION=$(npm view @securityscorecard/design-system version 2>/dev/null || echo "")
+          # Try to get version from GitHub Packages first
+          NPM_VERSION=$(npm view @securityscorecard/design-system version --registry=https://npm.pkg.github.com 2>/dev/null || echo "")
           
           if [ -n "$NPM_VERSION" ]; then
             echo "Found version from npm registry: $NPM_VERSION"
@@ -113,11 +117,10 @@ jobs:
         if: steps.library-build-cache.outputs.cache-hit != 'true'
         run: yarn build
 
-      - name: Publish to npm
+      - name: Publish to GitHub Packages
         run: npm publish --tag pr-${{ github.event.number }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment on PR
         uses: actions/github-script@v7
@@ -129,18 +132,18 @@ jobs:
             
             const comment = `## 🚀 Snapshot Build Published
             
-            A snapshot version has been published for testing:
+            A snapshot version has been published to GitHub Packages for testing:
             
             **Snapshot Version:** \`${version}\`
-            **Current Version:** \`${actualVersion}\` (from npm/git tags)
-            **NPM Tag:** \`pr-${prNumber}\`
+            **Current Version:** \`${actualVersion}\` (from registry/git tags)
+            **Tag:** \`pr-${prNumber}\`
             
-            You can install this version in your project using:
+            You can install this version in your project using (with \`.npmrc\` configured for \`@securityscorecard:registry=https://npm.pkg.github.com\` and auth):
             \`\`\`bash
             yarn add @securityscorecard/design-system@pr-${prNumber}
             \`\`\`
             
-            This version will be automatically unpublished when the PR is closed or merged.`;
+            Published to GitHub Packages; snapshot versions are not unpublished when the PR is closed.`;
             
             github.rest.issues.createComment({
               issue_number: prNumber,
@@ -155,36 +158,15 @@ jobs:
     needs: get-node-version
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ needs.get-node-version.outputs.version }}
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Setup Yarn
-        run: |
-          corepack enable
-          corepack prepare yarn@stable --activate
-
-      - name: Unpublish snapshot version
-        run: |
-          npm unpublish @securityscorecard/design-system@pr-${{ github.event.number }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        continue-on-error: true
-
       - name: Comment on PR
         uses: actions/github-script@v7
         with:
           script: |
             const prNumber = ${{ github.event.number }};
             
-            const comment = `## 🧹 Snapshot Cleanup
+            const comment = `## 🧹 PR closed
             
-            The snapshot version for PR #${prNumber} has been unpublished from npm.
-            
-            If you need to test with this version again, please reopen the PR or create a new one.`;
+            Snapshot versions are published to GitHub Packages and are not unpublished when the PR is closed. The snapshot \`pr-${prNumber}\` remains available for install if needed.`;
             
             github.rest.issues.createComment({
               issue_number: prNumber,
