@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions';
 
 import ButtonV2, { type ButtonV2Plain } from './Button';
 import { Stack } from '../layout';
+import Link from '../Link/Link';
 
 /**
  * A Button is a fundamental interactive element in user interfaces,
@@ -397,6 +398,51 @@ export const HasIconEnd: Story = {
     ...VariantBase.args,
     iconEnd: {
       name: 'angle-down',
+    },
+  },
+};
+
+export const AsLinkComponent: Story = {
+  args: {
+    children: 'Navigate to Link',
+    size: 'md',
+    variant: 'base',
+  },
+  render: (args) => (
+    <Stack gap="md" style={{ alignItems: 'flex-start' }}>
+      <div>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>
+          <strong>ButtonV2 as Link component</strong>
+        </p>
+        <ButtonV2 as={Link} href="/destination" {...args} />
+      </div>
+      <div>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>
+          <strong>ButtonV2 as anchor tag</strong>
+        </p>
+        <ButtonV2 as="a" href="/destination" {...args} />
+      </div>
+      <div>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>
+          <strong>Regular Link component (for comparison)</strong>
+        </p>
+        <Link href="/destination">Regular Link Text</Link>
+      </div>
+      <div>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>
+          <strong>Regular Button</strong>
+        </p>
+        <ButtonV2 {...args} />
+      </div>
+    </Stack>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'ButtonV2 can be rendered as a Link component using the `as` prop. ' +
+          'This is useful for navigation buttons that need to behave as links while maintaining button styling.',
+      },
     },
   },
 };
