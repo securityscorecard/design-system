@@ -418,6 +418,12 @@ export const AsLinkComponent: Story = {
       </div>
       <div>
         <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>
+          <strong>ButtonV2 as Link component (subtle)</strong>
+        </p>
+        <ButtonV2 as={Link} href="/destination" {...args} variant="subtle" />
+      </div>
+      <div>
+        <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>
           <strong>ButtonV2 as anchor tag</strong>
         </p>
         <ButtonV2 as="a" href="/destination" {...args} />
