@@ -14,7 +14,7 @@ export const ButtonRoot = styled.button`
   align-items: center;
   justify-content: center;
   gap: var(--sscds-space-1x);
-  border-radius: var(--sscds-radii-button) !important;
+  border-radius: var(--sscds-radii-button);
   line-height: var(--sscds-font-lineheight-elementlabel);
   font-weight: var(--sscds-font-weight-elementlabel-default);
   white-space: nowrap;
@@ -46,6 +46,9 @@ export const ButtonRoot = styled.button`
     &:active {
       transform: none;
     }
+  }
+  a& {
+    border-radius: var(--sscds-radii-button);
   }
 `;
 export const Label = styled.span`
