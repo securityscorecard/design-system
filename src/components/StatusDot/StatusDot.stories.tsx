@@ -15,5 +15,6 @@ export const Default: StoryFn = () => (
     <StatusDot color="warn" />
     <StatusDot color="info" />
     <StatusDot color="inactive" />
+    <StatusDot color="review" />
   </Inline>
 );
