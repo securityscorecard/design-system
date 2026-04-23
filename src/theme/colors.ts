@@ -220,6 +220,10 @@ const likelihood = {
   high: '#eb2f40',
 };
 
+const review = {
+  500: purple.purple8,
+};
+
 export const colors = {
   amber,
   blue,
@@ -231,6 +235,8 @@ export const colors = {
   mauve,
   orange,
   pink,
+  purple,
+  review,
   slate,
   slateA,
   tomato,
